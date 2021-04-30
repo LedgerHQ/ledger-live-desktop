@@ -2,6 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
+import type { BigNumber } from "bignumber.js";
 
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -18,7 +19,6 @@ import {
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
 import type { Account, FeeStrategy } from "@ledgerhq/live-common/lib/types";
-import BigNumber from "bignumber.js";
 
 type OnClickType = {
   amount: BigNumber,

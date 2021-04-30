@@ -142,7 +142,7 @@ const cmdAccountEstimateMaxSpendable = (o: {
   account: AccountRawLike,
   parentAccount: ?AccountRaw,
   transaction: ?TransactionRaw,
-}): Observable<OperationRaw> => {
+}): Observable<string> => {
   const account = fromAccountLikeRaw(o.account);
   const parentAccount = o.parentAccount ? fromAccountRaw(o.parentAccount) : null;
   const transaction = o.transaction ? fromTransactionRaw(o.transaction) : null;

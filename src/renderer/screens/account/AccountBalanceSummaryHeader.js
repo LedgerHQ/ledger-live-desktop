@@ -3,7 +3,11 @@
 import React from "react";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
-import type { Currency, ValueChange, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Currency, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type {
+  ValueChange,
+  BalanceHistoryWithCountervalue,
+} from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { BalanceTotal, BalanceDiff } from "~/renderer/components/BalanceInfos";
 import Box, { Tabbable } from "~/renderer/components/Box";
@@ -17,10 +21,7 @@ type Props = {
   isAvailable: boolean,
   cryptoChange: ValueChange,
   countervalueChange: ValueChange,
-  last: {
-    value: BigNumber,
-    countervalue: BigNumber,
-  },
+  last: $ElementType<BalanceHistoryWithCountervalue, 0>,
   counterValue: Currency,
   account: AccountLike,
   countervalueFirst: boolean,
@@ -76,17 +77,19 @@ export default function AccountBalanceSummaryHeader({
         >
           <Wrapper style={{ marginTop: 4 }}>
             <div style={{ width: "auto", marginRight: 20 }}>
-              <FormattedVal
-                key={secondaryKey}
-                animateTicker
-                disableRounding
-                alwaysShowSign={false}
-                color="warmGrey"
-                unit={data[1].unit}
-                fontSize={6}
-                showCode
-                val={data[1].balance}
-              />
+              {data[1].balance && (
+                <FormattedVal
+                  key={secondaryKey}
+                  animateTicker
+                  disableRounding
+                  alwaysShowSign={false}
+                  color="warmGrey"
+                  unit={data[1].unit}
+                  fontSize={6}
+                  showCode
+                  val={data[1].balance}
+                />
+              )}
             </div>
             <Price
               unit={unit}

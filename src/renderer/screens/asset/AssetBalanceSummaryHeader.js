@@ -4,11 +4,14 @@ import { useDispatch } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import type {
   Currency,
-  ValueChange,
   CryptoCurrency,
   TokenCurrency,
   Unit,
 } from "@ledgerhq/live-common/lib/types";
+import type {
+  ValueChange,
+  BalanceHistoryWithCountervalue,
+} from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { setCountervalueFirst } from "~/renderer/actions/settings";
 import { BalanceTotal, BalanceDiff } from "~/renderer/components/BalanceInfos";
 import Box, { Tabbable } from "~/renderer/components/Box";
@@ -22,10 +25,7 @@ type Props = {
   isAvailable: boolean,
   cryptoChange: ValueChange,
   countervalueChange: ValueChange,
-  last: {
-    value: BigNumber,
-    countervalue: BigNumber,
-  },
+  last: $ElementType<BalanceHistoryWithCountervalue, 0>,
   counterValue: Currency,
   countervalueFirst: boolean,
   currency: CryptoCurrency | TokenCurrency,
@@ -40,6 +40,7 @@ export default function AssetBalanceSummaryHeader({
   countervalueChange,
   countervalueFirst,
   currency,
+
   unit,
 }: Props) {
   const dispatch = useDispatch();
@@ -78,17 +79,19 @@ export default function AssetBalanceSummaryHeader({
         >
           <Wrapper style={{ marginTop: 4 }}>
             <div style={{ width: "auto", marginRight: 20 }}>
-              <FormattedVal
-                key={secondaryKey}
-                animateTicker
-                disableRounding
-                alwaysShowSign={false}
-                color="warmGrey"
-                unit={data[1].unit}
-                fontSize={6}
-                showCode
-                val={data[1].balance}
-              />
+              {data[1].balance && (
+                <FormattedVal
+                  key={secondaryKey}
+                  animateTicker
+                  disableRounding
+                  alwaysShowSign={false}
+                  color="warmGrey"
+                  unit={data[1].unit}
+                  fontSize={6}
+                  showCode
+                  val={data[1].balance}
+                />
+              )}
             </div>
             <Price
               unit={unit}

@@ -46,7 +46,7 @@ export default function CounterValue({
     date,
   });
 
-  if (typeof countervalue === "undefined") {
+  if (typeof countervalue !== "number") {
     return placeholder || null;
   }
 
