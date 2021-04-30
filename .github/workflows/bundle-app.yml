@@ -124,7 +124,7 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
       - name: start the app
-        run: sudo chmod +x dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage --trace-uncaught &
+        run: sudo chmod +x dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && sh dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage --trace-uncaught &
       - name: list all process for debug
         run: ps aux
       - name: sleep and check the app is running
