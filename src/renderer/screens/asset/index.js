@@ -68,6 +68,7 @@ export default function AssetPage({ match }: Props) {
         <AssetHeader account={accounts[0]} parentAccount={parentAccount} />
       </Box>
       <BalanceSummary
+        key={currency.id}
         countervalueFirst={countervalueFirst}
         currency={currency}
         range={range}
