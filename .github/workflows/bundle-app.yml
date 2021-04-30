@@ -124,11 +124,11 @@ jobs:
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
       - name: start the app
-        run: chmod +x /home/runner/work/ledger-live-desktop/ledger-live-desktop/dist/${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && /home/runner/work/ledger-live-desktop/ledger-live-desktop/dist/${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage &
+        run: chmod +x dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage &
       - name: list all process for debug
         run: ps aux
       - name: sleep and check the app is running
-        run: sleep 20s && pgrep -x ${{ steps.post-version.outputs.version }}-linux-x86_64 >/dev/null
+        run: sleep 20s && pgrep -x ${{ steps.post-version.outputs.name }} >/dev/null
       - name: upload linux app
         uses: actions/upload-artifact@v1
         with:
