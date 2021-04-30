@@ -123,6 +123,10 @@ jobs:
         run: yarn nightly
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: post-version
+      - name: start the app
+        run: chmod +x ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage && ./${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage &
+      - name: sleep and check the app is running
+        run: sleep 20s && pgrep -x ${{ steps.post-version.outputs.version }}-linux-x86_64 >/dev/null
       - name: upload linux app
         uses: actions/upload-artifact@v1
         with:
