@@ -116,7 +116,8 @@
       "day": "1D",
       "week": "1 Hét",
       "month": "1 Hónap",
-      "year": "1 Év"
+      "year": "1 Év",
+      "all": "ALL"
     }
   },
   "fees": {
@@ -125,7 +126,9 @@
     "high": "Magas",
     "low": "Alacsony",
     "slow": "Lassú",
-    "standard": "Általános"
+    "standard": "Általános",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menü",
@@ -704,9 +707,11 @@
       "balance|desc": "Legmagasabb Egyenleg"
     },
     "range": {
+      "day": "Day",
       "week": "Hét",
       "month": "Hónap",
-      "year": "Év"
+      "year": "Év",
+      "all": "All"
     },
     "optionsMenu": {
       "title": "Opciók",
@@ -1360,7 +1365,10 @@
       },
       "amount": {
         "title": "Mennyiség",
-        "banner": "Maximum elkölthető mennyiség"
+        "banner": "Maximum elkölthető mennyiség",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Összegzés"
