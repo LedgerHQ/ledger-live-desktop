@@ -553,7 +553,7 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
             ) : null}
             <div style={{ flex: 1 }} />
             {url ? (
-              <Button primary onClick={() => openURL(url)}>
+              <Button secondary onClick={() => openURL(url)}>
                 {t("operationDetails.viewOperation")}
               </Button>
             ) : null}
