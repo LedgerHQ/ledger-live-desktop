@@ -14,11 +14,10 @@ import Modal, { ModalBody } from "~/renderer/components/Modal";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import Markdown, { Notes } from "~/renderer/components/Markdown";
-import Tip from "~/renderer/components/Tip";
+import Alert from "~/renderer/components/Alert";
 import CheckBox from "~/renderer/components/CheckBox";
 import FakeLink from "~/renderer/components/FakeLink";
 import Box from "~/renderer/components/Box";
-import IconExternalLink from "~/renderer/icons/ExternalLink";
 import IconChevronRight from "~/renderer/icons/ChevronRight";
 import type { ModalStatus } from "~/renderer/screens/manager/FirmwareUpdate/types";
 import getCleanVersion from "~/renderer/screens/manager/FirmwareUpdate/getCleanVersion";
@@ -94,17 +93,14 @@ class DisclaimerModal extends PureComponent<Props, State> {
                 </Text>
                 <IconChevronRight size={14} style={{ marginLeft: 4 }} />
               </FakeLink>
-              <Tip>
-                <Text ff="Inter|Regular" fontSize={4}>
-                  {t("manager.firmware.prepareSeed")}
-                </Text>
-                <FakeLink style={{ marginTop: 4 }} onClick={() => openURL(dontHaveSeedURL)}>
-                  <Text ff="Inter|Regular" fontSize={4} style={{ textDecoration: "underline" }}>
-                    {t("manager.firmware.dontHaveSeed")}
-                  </Text>
-                  <IconExternalLink size={14} style={{ marginLeft: 4 }} />
-                </FakeLink>
-              </Tip>
+              <Alert
+                type="primary"
+                learnMoreUrl={dontHaveSeedURL}
+                learnMoreLabel={t("manager.firmware.dontHaveSeed")}
+                mt={4}
+              >
+                {t("manager.firmware.prepareSeed")}
+              </Alert>
               {firmware && firmware.osu ? (
                 <NotesWrapper>
                   <Notes>

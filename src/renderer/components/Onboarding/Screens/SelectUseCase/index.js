@@ -14,7 +14,7 @@ import nanoBox from "./assets/nanoBox.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 
 registerAssets([deviceConnect, importRecovery, nanoBox]);
 
@@ -145,9 +145,13 @@ export function SelectUseCase({ sendEvent, context }: Props) {
         <Row>
           <LeftColumn>
             <LeftText>{t("onboarding.screens.selectUseCase.hasRecovery")}</LeftText>
-            <InfoBox type="warning" onLearnMore={() => sendEvent("RECOVERY_WARN")}>
+            <Alert
+              type="warning"
+              onLearnMore={() => sendEvent("RECOVERY_WARN")}
+              style={{ flexGrow: 0 }}
+            >
               {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.warning.title")}
-            </InfoBox>
+            </Alert>
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
