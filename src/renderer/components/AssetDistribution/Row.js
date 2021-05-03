@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
-import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import CounterValue from "~/renderer/components/CounterValue";
 import { useHistory } from "react-router-dom";
@@ -22,8 +21,8 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
   distribution: number, // % of the total (normalized in 0-1)
-  amount: BigNumber,
-  countervalue: BigNumber, // countervalue of the amount that was calculated based of the rate provided
+  amount: number,
+  countervalue: number, // countervalue of the amount that was calculated based of the rate provided
 };
 
 type Props = {

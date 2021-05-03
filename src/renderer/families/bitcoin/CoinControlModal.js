@@ -17,7 +17,6 @@ import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import { PickingStrategy } from "./PickingStrategy";
 import { CoinControlRow } from "./CoinControlRow";
-import BigNumber from "bignumber.js";
 
 type Props = {
   isOpened?: boolean,
@@ -150,7 +149,7 @@ const CoinControlModal = ({
                     </Box>
                     <FormattedVal
                       disableRounding
-                      val={returning ? returning.value : BigNumber(0)}
+                      val={returning ? returning.value : 0}
                       unit={account.unit}
                       showCode
                       fontSize={4}

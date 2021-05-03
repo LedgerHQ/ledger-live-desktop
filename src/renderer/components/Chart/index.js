@@ -99,10 +99,14 @@ export default function Chart({
             x:
               tickXScale === "week"
                 ? new Date(d.date)
+                : tickXScale === "day"
+                ? moment(new Date(d.date))
+                    .startOf("hour")
+                    .toDate()
                 : moment(new Date(d.date))
                     .startOf("day")
                     .toDate(),
-            y: d[valueKey].toNumber(),
+            y: d[valueKey],
           })),
         },
       ],
@@ -142,7 +146,7 @@ export default function Chart({
               minRotation: 0,
             },
             time: {
-              minUnit: "day",
+              minUnit: tickXScale === "day" ? "hour" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
               },
@@ -179,7 +183,7 @@ export default function Chart({
         },
       },
     }),
-    [renderTickY, theme, magnitude],
+    [theme.text.shade10, theme.text.shade60, tickXScale, magnitude, renderTickY],
   );
 
   useLayoutEffect(() => {

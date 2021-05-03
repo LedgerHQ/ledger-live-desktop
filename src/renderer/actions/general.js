@@ -12,10 +12,10 @@ import {
 import { reorderAccounts } from "~/renderer/actions/accounts";
 import type { FlattenAccountsOptions } from "@ledgerhq/live-common/lib/account";
 import {
-  useDistribution as useDistributionCommon,
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
   useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
+import { useDistribution as useDistributionRaw } from "@ledgerhq/live-common/lib/portfolio/v2/react";
 import type { State } from "~/renderer/reducers";
 import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
 import { osDarkModeSelector } from "~/renderer/reducers/application";
@@ -30,7 +30,7 @@ import {
 export function useDistribution() {
   const accounts = useSelector(accountsSelector);
   const to = useSelector(counterValueCurrencySelector);
-  return useDistributionCommon({ accounts, to });
+  return useDistributionRaw({ accounts, to });
 }
 
 export function useCalculateCountervalueCallback() {

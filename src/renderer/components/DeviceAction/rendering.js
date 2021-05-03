@@ -579,12 +579,15 @@ export const renderSwapDeviceConfirmation = ({
             </Text>
           </LabelInfoTooltip>
           <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-            <CurrencyUnitValue
-              unit={getAccountUnit(exchange.toAccount)}
-              value={exchangeRate.payoutNetworkFees}
-              disableRounding
-              showCode
-            />
+            {exchangeRate.payoutNetworkFees && (
+              <CurrencyUnitValue
+                unit={getAccountUnit(exchange.toAccount)}
+                // $FlowFixMe
+                value={exchangeRate.payoutNetworkFees}
+                disableRounding
+                showCode
+              />
+            )}
           </Text>
         </Box>
       ) : null}

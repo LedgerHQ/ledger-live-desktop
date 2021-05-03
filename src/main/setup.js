@@ -12,7 +12,7 @@ import osName from "~/helpers/osName";
 import updater from "./updater";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import path from "path";
-import { enableFileLogger } from "~/logger/index";
+import { enableFileLogger } from "~/logger/logger-transport-file";
 
 const loggerTransport = new LoggerTransport();
 const loggerFirmwareTransport = new LoggerTransportFirmware();

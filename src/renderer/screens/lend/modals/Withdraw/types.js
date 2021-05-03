@@ -32,6 +32,7 @@ export type StepProps = {
   onOperationBroadcasted: Operation => void,
   setSigned: boolean => void,
   bridgePending: boolean,
+  onUpdateTransaction: (updater: any) => void,
 };
 
 export type St = Step<StepId, StepProps>;
