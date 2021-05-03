@@ -36,15 +36,16 @@ export function BalanceDiff({ totalBalance, valueChange, unit, isAvailable, ...b
   return (
     <Box horizontal {...boxProps}>
       <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
-        {valueChange.percentage && valueChange.percentage && (
-          <FormattedVal
-            isPercent
-            animateTicker
-            val={Math.round(valueChange.percentage * 100)}
-            inline
-            withIcon
-          />
-        )}
+        {typeof valueChange.percentage ===
+          "number" && (
+            <FormattedVal
+              isPercent
+              animateTicker
+              val={Math.round(valueChange.percentage * 100)}
+              inline
+              withIcon
+            />,
+          )}
         <FormattedVal
           unit={unit}
           val={valueChange.value}
