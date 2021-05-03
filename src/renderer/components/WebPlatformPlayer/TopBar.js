@@ -13,8 +13,7 @@ import Box, { Tabbable } from "~/renderer/components/Box";
 import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
-import { getPlatformName } from "./config";
-import LiveAppIcon from "./LiveAppIcon";
+import type { Manifest } from "./type";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -98,19 +97,20 @@ export const Separator: ThemedComponent<*> = styled.div`
 
 export type Props = {
   icon?: boolean,
-  platform: string,
+  manifest: Manifest,
   onReload: Function,
   onClose?: Function,
   onHelp?: Function,
 };
 
-const WebPlatformTopBar = ({ platform, onReload, onHelp, onClose }: Props) => {
-  const name = getPlatformName(platform);
+const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
+  const { name } = manifest;
+
+  //         <LiveAppIcon platform={platform} size={24} />
 
   return (
     <Container>
       <TitleContainer>
-        <LiveAppIcon platform={platform} size={24} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />

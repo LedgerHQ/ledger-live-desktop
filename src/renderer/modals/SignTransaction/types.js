@@ -8,11 +8,11 @@ import type {
   Transaction,
   TransactionStatus,
   Operation,
+  SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { Step } from "~/renderer/components/Stepper";
-
-export type StepId = "warning" | "recipient" | "amount" | "summary" | "device" | "confirmation";
+export type StepId = "amount" | "device";
 
 export type StepProps = {
   t: TFunction,
@@ -31,10 +31,8 @@ export type StepProps = {
   onChangeAccount: (?AccountLike, ?Account) => void,
   onChangeTransaction: Transaction => void,
   onTransactionError: Error => void,
-  onOperationBroadcasted: Operation => void,
+  onTransactionSigned: SignedOperation => void,
   onRetry: void => void,
-  setSigned: boolean => void,
-  signed: boolean,
   maybeRecipient?: string,
   onResetMaybeRecipient: () => void,
   maybeAmount?: BigNumber,

@@ -32,7 +32,12 @@ class SignTransactionModal extends PureComponent<{}, { stepId: StepId }> {
         render={({ onClose, data }) => (
           <Body
             stepId={stepId}
-            onClose={onClose}
+            onClose={() => {
+              if (data.onCancel) {
+                data.onCancel();
+              }
+              onClose();
+            }}
             onChangeStepId={this.handleStepChange}
             params={data || {}}
           />

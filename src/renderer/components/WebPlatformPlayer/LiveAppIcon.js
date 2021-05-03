@@ -3,12 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-import { PlatformsConfig } from "./config";
-
 type Props = {
   platform: string,
   size: number,
   inactive?: boolean,
+  icon: string,
+  name: string,
 };
 
 export const TokenIconWrapper: ThemedComponent<{
@@ -37,15 +37,14 @@ export const TokenIconWrapper: ThemedComponent<{
   filter: ${p => (p.inactive ? "greyscale(1.0)" : "")};
 `;
 
-const LiveAppIcon = ({ platform, size, inactive }: Props) => {
-  const platformConfig = PlatformsConfig[platform];
+const LiveAppIcon = ({ platform, size, inactive, icon, name }: Props) => {
 
   return (
     <TokenIconWrapper size={size}>
-      {platformConfig?.icon ? (
-        <img src={platformConfig?.icon} />
+      {icon ? (
+        <img src={icon} />
       ) : (
-        platformConfig?.name[0].toUpperCase() || "?"
+        name[0].toUpperCase() || "?"
       )}
     </TokenIconWrapper>
   );

@@ -8,13 +8,11 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import SpendableBanner from "~/renderer/components/SpendableBanner";
 import BuyButton from "~/renderer/components/BuyButton";
 import { NotEnoughGas } from "@ledgerhq/errors";
 
 import AccountFooter from "../AccountFooter";
 import SendAmountFields from "../SendAmountFields";
-import AmountField from "../fields/AmountField";
 import type { StepProps } from "../types";
 
 const StepAmount = ({
@@ -26,8 +24,6 @@ const StepAmount = ({
   error,
   status,
   bridgePending,
-  maybeAmount,
-  onResetMaybeAmount,
   updateTransaction,
 }: StepProps) => {
   if (!status) return null;

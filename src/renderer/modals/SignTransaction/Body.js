@@ -8,9 +8,8 @@ import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { Trans, withTranslation } from "react-i18next";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
-import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -22,10 +21,8 @@ import Track from "~/renderer/analytics/Track";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import StepConnectDevice from "./steps/StepConnectDevice";
-import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import type { St, StepId } from "./types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge/index";
-import type { Transaction } from "@ledgerhq/live-common/lib/types"
 
 type OwnProps = {|
   stepId: StepId,
@@ -34,6 +31,7 @@ type OwnProps = {|
   params: {
     account: ?AccountLike,
     transactionData: Transaction,
+    onResult: (signedOperation: SignedOperation) => void,
     parentAccount: ?Account,
     startWithWarning?: boolean,
     recipient?: string,
@@ -69,17 +67,6 @@ const createSteps = (): St[] => [
     component: StepConnectDevice,
     onBack: ({ transitionTo }) => transitionTo("summary"),
   },
-  {
-    id: "confirmation",
-    label: <Trans i18nKey="send.steps.confirmation.title" />,
-    excludeFromBreadcrumb: true,
-    component: StepConfirmation,
-    footer: StepConfirmationFooter,
-    onBack: ({ transitionTo, onRetry }) => {
-      onRetry();
-      transitionTo("recipient");
-    },
-  },
 ];
 
 const mapStateToProps = createStructuredSelector({
@@ -103,22 +90,9 @@ const Body = ({
   stepId,
   params,
   accounts,
-  updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account;
   const [steps] = useState(createSteps);
-
-  // initial values might coming from deeplink
-  const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
-  const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
-
-  const onResetMaybeAmount = useCallback(() => {
-    setMaybeAmount(null);
-  }, [setMaybeAmount]);
-
-  const onResetMaybeRecipient = useCallback(() => {
-    setMaybeRecipient(null);
-  }, [setMaybeRecipient]);
 
   const {
     transaction,
@@ -136,27 +110,16 @@ const Body = ({
 
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);
-
     const { recipient, ...txData } = params.transactionData;
-
     const t2 = bridge.updateTransaction(t, {
       recipient,
     });
-
     const transaction = bridge.updateTransaction(t2, txData);
-
     return { account, parentAccount, transaction };
   });
 
-  // make sure step id is in sync
-  useEffect(() => {
-    const stepId = params && params.startWithWarning ? "warning" : null;
-    if (stepId) onChangeStepId(stepId);
-  }, [onChangeStepId, params]);
 
-  const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
-  const [signed, setSigned] = useState(false);
 
   const handleCloseModal = useCallback(() => {
     closeModal("MODAL_SIGN_TRANSACTION");
@@ -173,8 +136,6 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    setOptimisticOperation(null);
-    setSigned(false);
   }, []);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -184,20 +145,12 @@ const Body = ({
     setTransactionError(error);
   }, []);
 
-  const handleOperationBroadcasted = useCallback(
-    (optimisticOperation: Operation) => {
-      if (!account) return;
-      const mainAccount = getMainAccount(account, parentAccount);
-      updateAccountWithUpdater(mainAccount.id, account =>
-        addPendingOperation(account, optimisticOperation),
-      );
-      setOptimisticOperation(optimisticOperation);
-      setTransactionError(null);
-    },
-    [account, parentAccount, updateAccountWithUpdater],
-  );
-
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
+
+  const handleTransactionSigned = useCallback((signedTransaction: SignedOperation) => {
+    params.onResult(signedTransaction);
+    handleCloseModal();
+  }, []);
 
   const errorSteps = [];
 
@@ -210,7 +163,7 @@ const Body = ({
   const error = transactionError || bridgeError;
 
   const stepperProps = {
-    title: stepId === "warning" ? t("common.information") : t("send.title"),
+    title: t("send.title"),
     stepId,
     steps,
     errorSteps,
@@ -219,26 +172,19 @@ const Body = ({
     account,
     parentAccount,
     transaction,
-    signed,
     hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
     error,
     status,
     bridgePending,
-    optimisticOperation,
     openModal,
     onClose,
-    setSigned,
     closeModal: handleCloseModal,
     onChangeAccount: handleChangeAccount,
     onChangeTransaction: setTransaction,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
-    onOperationBroadcasted: handleOperationBroadcasted,
+    onTransactionSigned: handleTransactionSigned,
     onTransactionError: handleTransactionError,
-    maybeAmount,
-    onResetMaybeAmount,
-    maybeRecipient,
-    onResetMaybeRecipient,
     updateTransaction,
   };
 
