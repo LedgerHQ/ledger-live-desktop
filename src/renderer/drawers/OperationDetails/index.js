@@ -221,7 +221,7 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
         onClose={onClose}
         onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
         render={() => (
-          <Box flow={3}>
+          <Box flow={3} px={20}>
             <TrackPage
               category={location.pathname !== "/" ? "Account" : "Portfolio"}
               name="Operation Details"
@@ -542,7 +542,7 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
           </Box>
         )}
         renderFooter={() => (
-          <Box horizontal grow style={{ height: 72 }}>
+          <Box horizontal grow style={{ height: 72 }} px={9}>
             {urlWhatIsThis ? (
               <Box ff="Inter|SemiBold" fontSize={4}>
                 <LinkHelp
