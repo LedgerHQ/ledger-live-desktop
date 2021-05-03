@@ -2,8 +2,8 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { setAccountsViewMode, setSelectedTimeRange } from "~/renderer/actions/settings";
-import { accountsViewModeSelector, selectedTimeRangeSelector } from "~/renderer/reducers/settings";
+import { setAccountsViewMode } from "~/renderer/actions/settings";
+import { accountsViewModeSelector } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import GridIcon from "~/renderer/icons/Grid";
@@ -15,11 +15,10 @@ import AccountsRange from "./Range";
 function DisplayOptions() {
   const dispatch = useDispatch();
   const mode = useSelector(accountsViewModeSelector);
-  const range = useSelector(selectedTimeRangeSelector);
 
   return (
     <>
-      <AccountsRange onRangeChange={val => dispatch(setSelectedTimeRange(val))} range={range} />
+      <AccountsRange />
       <Box ml={4} mr={4}>
         <AccountsOrder />
       </Box>

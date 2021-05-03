@@ -111,7 +111,7 @@ const Delegation = ({ account }: Props) => {
 
   const hasVotes = formattedVotes.length > 0;
 
-  const hasRewards = unwithdrawnReward > 0;
+  const hasRewards = unwithdrawnReward.gt(0);
 
   const nextRewardDate = getNextRewardDate(account);
   const formattedNextRewardDate = useMemo(

@@ -40,7 +40,7 @@ const ToAmount = ({
               disabled
               key={unit.code}
               defaultUnit={unit}
-              value={amount || ""}
+              value={amount}
               renderRight={<InputRight>{unit.code}</InputRight>}
               onChange={() => undefined}
             />

@@ -1,16 +1,12 @@
 // @flow
 import { useSelector } from "react-redux";
-import type {
-  CryptoCurrency,
-  PortfolioRange,
-  TokenCurrency,
-  AccountLike,
-} from "@ledgerhq/live-common/lib/types";
+import type { CryptoCurrency, TokenCurrency, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import {
-  useBalanceHistoryWithCountervalue as useBalanceHistoryWithCountervalueCommon,
-  usePortfolio as usePortfolioCommon,
-  useCurrencyPortfolio as useCurrencyPortfolioCommon,
-} from "@ledgerhq/live-common/lib/countervalues/react";
+  usePortfolio as usePortfolioRaw,
+  useBalanceHistoryWithCountervalue as useBalanceHistoryWithCountervalueRaw,
+  useCurrencyPortfolio as useCurrencyPortfolioRaw,
+} from "@ledgerhq/live-common/lib/portfolio/v2/react";
 import { selectedTimeRangeSelector } from "~/renderer/reducers/settings";
 import { counterValueCurrencySelector } from "./../reducers/settings";
 import { accountsSelector } from "./../reducers/accounts";
@@ -25,14 +21,14 @@ export function useBalanceHistoryWithCountervalue({
   range: PortfolioRange,
 }) {
   const to = useSelector(counterValueCurrencySelector);
-  return useBalanceHistoryWithCountervalueCommon({ account, range, to });
+  return useBalanceHistoryWithCountervalueRaw({ account, range, to });
 }
 
 export function usePortfolio() {
   const to = useSelector(counterValueCurrencySelector);
   const accounts = useSelector(accountsSelector);
   const range = useSelector(selectedTimeRangeSelector);
-  return usePortfolioCommon({ accounts, range, to });
+  return usePortfolioRaw({ accounts, range, to });
 }
 
 export function useCurrencyPortfolio({
@@ -44,5 +40,5 @@ export function useCurrencyPortfolio({
 }) {
   const accounts = useSelector(accountsSelector);
   const to = useSelector(counterValueCurrencySelector);
-  return useCurrencyPortfolioCommon({ accounts, range, to, currency });
+  return useCurrencyPortfolioRaw({ accounts, range, to, currency });
 }
