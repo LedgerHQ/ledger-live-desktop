@@ -311,6 +311,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickExchange}
                 isActive={location.pathname === "/exchange"}
+                disabled={noAccounts}
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -319,8 +320,8 @@ const MainSideBar = () => {
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
-                disabled={noAccounts}
                 isActive={location.pathname === "/swap"}
+                disabled={noAccounts}
                 collapsed={secondAnim}
               />
               <SideBarListItem
@@ -330,6 +331,7 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 onClick={handleClickLend}
                 isActive={location.pathname === "/lend"}
+                disabled={noAccounts}
                 collapsed={secondAnim}
                 NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
               />
