@@ -7,11 +7,12 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Tabbable } from "~/renderer/components/Box";
 
 const Base: ThemedComponent<{
+  forceBgColor?: string,
   isChecked?: boolean,
   small?: boolean,
   disabled?: boolean,
 }> = styled(Tabbable).attrs(p => ({
-  bg: p.isChecked ? "wallet" : "palette.text.shade10",
+  bg: p.forceBgColor ? p.forceBgColor : p.isChecked ? "wallet" : "palette.text.shade10",
   horizontal: true,
   alignItems: "center",
 }))`
@@ -48,9 +49,17 @@ type Props = {
   disabled?: boolean,
   onChange?: Function,
   small?: boolean,
+  forceBgColor?: string,
 };
 
-export default function Switch({ isChecked, onChange = noop, small, disabled, ...p }: Props) {
+export default function Switch({
+  isChecked,
+  onChange = noop,
+  small,
+  disabled,
+  forceBgColor,
+  ...p
+}: Props) {
   return (
     <Base
       {...p}
@@ -60,6 +69,7 @@ export default function Switch({ isChecked, onChange = noop, small, disabled, ..
       isChecked={isChecked}
       onClick={() => onChange(!isChecked)}
       className="switch"
+      forceBgColor={forceBgColor}
     >
       <input
         type="checkbox"
