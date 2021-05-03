@@ -72,7 +72,8 @@ const DrawerContent = styled.div`
   background-color: ${p =>
     p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
   transition: transform ${DURATION}ms ease-out;
-  max-width: 430px;
+  max-width: 500px;
+  flex: 1;
   will-change: transform;
 
   &.entering {
