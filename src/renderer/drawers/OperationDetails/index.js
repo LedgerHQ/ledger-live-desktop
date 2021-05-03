@@ -32,6 +32,7 @@ import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
+import useTheme from "~/renderer/hooks/useTheme";
 import CounterValue from "~/renderer/components/CounterValue";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import FakeLink from "~/renderer/components/FakeLink";
@@ -136,6 +137,7 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
     const history = useHistory();
     const location = useLocation();
     const dispatch = useDispatch();
+    const theme = useTheme();
 
     const mainAccount = getMainAccount(account, parentAccount);
     const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
@@ -222,15 +224,19 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
 
     return (
       <>
-        <Box pt={20}>
+        <Box pt={20} grow>
           <ModalBody
             title={t(`operation.type.${operation.type}`)}
             subTitle={t("operationDetails.title")}
             onClose={onClose}
+            headerStyle={{
+              height: "72px",
+              paddingBottom: "25px",
+              borderBottom: "solid 1px " + theme.colors.palette.divider,
+            }}
             onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
             render={() => (
               <>
-                <SeparatorLine />
                 <Box flow={3} px={20} mt={20}>
                   <TrackPage
                     category={location.pathname !== "/" ? "Account" : "Portfolio"}
@@ -278,7 +284,11 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
                             <ToolTip
                               content={
                                 AmountTooltip ? (
-                                  <AmountTooltip operation={operation} amount={amount} unit={unit} />
+                                  <AmountTooltip
+                                    operation={operation}
+                                    amount={amount}
+                                    unit={unit}
+                                  />
                                 ) : null
                               }
                             >
@@ -344,7 +354,9 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
                                 operation={op}
                                 account={opAccount}
                                 parentAccount={account}
-                                onOperationClick={() => openOperation("subOperation", op, operation)}
+                                onOperationClick={() =>
+                                  openOperation("subOperation", op, operation)
+                                }
                                 t={t}
                                 withAddress={false}
                               />
@@ -372,7 +384,9 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
                               text={account.currency.name}
                               operation={op}
                               account={account}
-                              onOperationClick={() => openOperation("internalOperation", op, operation)}
+                              onOperationClick={() =>
+                                openOperation("internalOperation", op, operation)
+                              }
                               t={t}
                             />
                             {i < internalOperations.length - 1 && <B />}
@@ -468,7 +482,11 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
                                   value={fee}
                                   subMagnitude={1}
                                   prefix={
-                                    <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>
+                                    <Box
+                                      mr={1}
+                                      color="palette.text.shade60"
+                                      style={{ lineHeight: 1.2 }}
+                                    >
                                       {"≈"}
                                     </Box>
                                   }
