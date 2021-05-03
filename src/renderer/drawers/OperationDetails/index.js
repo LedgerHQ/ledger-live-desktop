@@ -30,7 +30,7 @@ import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/
 import { urls } from "~/config/urls";
 import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import CounterValue from "~/renderer/components/CounterValue";
 import Ellipsis from "~/renderer/components/Ellipsis";
@@ -542,7 +542,7 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
           </Box>
         )}
         renderFooter={() => (
-          <Box horizontal grow>
+          <Box horizontal grow style={{ height: 72 }}>
             {urlWhatIsThis ? (
               <Box ff="Inter|SemiBold" fontSize={4}>
                 <LinkHelp
@@ -553,9 +553,13 @@ export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()
             ) : null}
             <div style={{ flex: 1 }} />
             {url ? (
-              <Button secondary onClick={() => openURL(url)}>
-                {t("operationDetails.viewOperation")}
-              </Button>
+              <Box ff="Inter|SemiBold" fontSize={4}>
+                <LinkWithExternalIcon
+                  fontSize={4}
+                  onClick={() => openURL(url)}
+                  label={t("operationDetails.viewOperation")}
+                />
+              </Box>
             ) : null}
           </Box>
         )}

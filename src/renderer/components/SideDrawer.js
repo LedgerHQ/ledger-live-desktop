@@ -67,13 +67,14 @@ const DrawerContent = styled.div`
   bottom: 0;
   z-index: 1;
   box-sizing: border-box;
-  padding: 0px 40px;
   width: 80%;
   background-color: ${p =>
     p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
   transition: transform ${DURATION}ms ease-out;
   max-width: 500px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
   will-change: transform;
 
   &.entering {

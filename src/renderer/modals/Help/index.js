@@ -82,7 +82,7 @@ const HelpSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: () 
       <>
         <TrackPage category="SideDrawer" name="Help" />
 
-        <Box py={60}>
+        <Box py={60} px={40}>
           <Text ff="Inter|SemiBold" fontSize={22} mb={20} color={"palette.text.shade100"}>
             <Trans i18nKey="help.title" />
           </Text>
