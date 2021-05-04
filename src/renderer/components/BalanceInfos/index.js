@@ -36,7 +36,7 @@ export function BalanceDiff({ totalBalance, valueChange, unit, isAvailable, ...b
   return (
     <Box horizontal {...boxProps}>
       <Box horizontal alignItems="center" style={{ lineHeight: 1.2, fontSize: 20 }}>
-        {valueChange.percentage && valueChange.percentage && (
+        {typeof valueChange.percentage === "number" && (
           <FormattedVal
             isPercent
             animateTicker
