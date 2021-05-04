@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -9,7 +9,12 @@ import { createStructuredSelector } from "reselect";
 import { Trans, withTranslation } from "react-i18next";
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Account, AccountLike, SignedOperation, Transaction } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  AccountLike,
+  SignedOperation,
+  Transaction,
+} from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -110,11 +115,14 @@ const Body = ({
 
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);
+    console.log(t);
     const { recipient, ...txData } = params.transactionData;
     const t2 = bridge.updateTransaction(t, {
       recipient,
+      feesStrategy: "custom",
     });
     const transaction = bridge.updateTransaction(t2, txData);
+
     return { account, parentAccount, transaction };
   });
 
@@ -188,7 +196,7 @@ const Body = ({
     updateTransaction,
   };
 
-  if (!status) return null;
+  if (!status || !transaction?.networkInfo) return null;
 
   return (
     <Stepper {...stepperProps}>
