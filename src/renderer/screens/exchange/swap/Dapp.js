@@ -17,6 +17,10 @@ type Props = {
 };
 
 const manifests = {
+  debug: {
+    url: `https://iframe-dapp-browser-test.vercel.app/app/debug?t=3333`,
+    name: "Debugger",
+  },
   paraswap: {
     name: "paraswap",
     url: new URL(

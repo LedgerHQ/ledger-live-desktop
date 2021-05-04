@@ -18,7 +18,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useLedgerLiveApi } from "./ledgerLiveAPI";
 import TopBar from "./TopBar";
-import { Manifest } from "./type";
+import type { Manifest } from "./type";
 import { BigNumber } from "bignumber.js";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
