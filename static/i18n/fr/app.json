@@ -117,7 +117,7 @@
       "week": "1S",
       "month": "1M",
       "year": "1A",
-      "all": "ALL"
+      "all": "TOUT"
     }
   },
   "fees": {
@@ -127,8 +127,8 @@
     "low": "Bas",
     "slow": "Lent",
     "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "medium": "Moyens",
+    "feesAmount": "Montant des frais"
   },
   "sidebar": {
     "menu": "Menu",
@@ -707,11 +707,11 @@
       "balance|desc": "Solde décroissant"
     },
     "range": {
-      "day": "Day",
+      "day": "Jour",
       "week": "Semaine",
       "month": "Mois",
       "year": "Année",
-      "all": "All"
+      "all": "Tous"
     },
     "optionsMenu": {
       "title": "Options",
@@ -1036,10 +1036,10 @@
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
+    "installApp": "{{appName}} Installation de l'application",
+    "installAppDescription": "Veuillez attendre la fin de l'installation",
     "listApps": "Checking App dependencies",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps",
+    "listAppsDescription": "Veuillez patienter pendant que nous nous assurons que vous avez toutes les applis requises",
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
@@ -1192,7 +1192,7 @@
       "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil",
       "sucessCTAApps": "Réinstaller les applications",
       "SuccessCTANoApps": "Installer les applications",
-      "cancelReinstallCTA": "Install update",
+      "cancelReinstallCTA": "Installer les mises à jour",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -1366,9 +1366,9 @@
       "amount": {
         "title": "Montant",
         "banner": "Le montant maximum à dépenser est",
-        "fees": "Fees",
+        "fees": "Frais",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "Avancé"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -3161,8 +3161,8 @@
       "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "title": "Les mises à jour ont été annulées sur l'appareil",
+      "description": "Toutes les applis ont été désinstallées de votre appareil. Gardez votre appareil bien à jour pour bénéficier des dernières fonctionnalités et améliorations en matière de sécurité."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejetée",
