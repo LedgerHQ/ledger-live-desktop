@@ -12,7 +12,7 @@ import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { ManagerNotEnoughSpaceError } from "@ledgerhq/errors";
+import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
 import {
   renderAllowManager,
   renderAllowOpeningApp,
@@ -193,7 +193,7 @@ const DeviceAction = <R, H, P>({
     if (
       error instanceof ManagerNotEnoughSpaceError ||
       error instanceof OutdatedApp ||
-      error.name === "UpdateYourApp"
+      error instanceof UpdateYourApp
     ) {
       return renderError({
         error,
