@@ -33,19 +33,19 @@ export const isCurrencySupported = (
 type Config = {
   host: string,
   url: string,
-  partnerId: number,
+  partnerId: string,
 };
 
 const config = {
   sandbox: {
     host: "https://trade-ui.sandbox.coinify.com",
     url: "https://trade-ui.sandbox.coinify.com/widget",
-    partnerId: 104,
+    partnerId: "191f0c7f-076d-459f-bf2d-833465bfadc2",
   },
   production: {
     host: "https://trade-ui.coinify.com",
     url: "https://trade-ui.coinify.com/widget",
-    partnerId: 119,
+    partnerId: "191f0c7f-076d-459f-bf2d-833465bfadc2",
   },
 };
 
