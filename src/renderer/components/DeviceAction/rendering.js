@@ -24,7 +24,7 @@ import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -33,17 +33,26 @@ import { DeviceBlocker } from "./DeviceBlocker";
 import ErrorIcon from "~/renderer/components/ErrorIcon";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import SupportLinkError from "~/renderer/components/SupportLinkError";
-import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { Rotating } from "~/renderer/components/Spinner";
+import ProgressCircle from "~/renderer/components/ProgressCircle";
 
-const AnimationWrapper: ThemedComponent<{ modelId: DeviceModelId }> = styled.div`
+const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
   max-width: 100%;
   height: ${p => (p.modelId === "blue" ? 300 : 200)}px;
   padding-bottom: ${p => (p.modelId === "blue" ? 20 : 0)}px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ProgressWrapper: ThemedComponent<{}> = styled.div`
+  padding: 24px;
   align-self: center;
   display: flex;
   align-items: center;
@@ -94,6 +103,15 @@ const Title = styled(Text).attrs({
   fontSize: 5,
 })`
   white-space: pre-line;
+`;
+
+const SubTitle = styled(Text).attrs({
+  ff: "Inter|Regular",
+  color: "palette.text.shade100",
+  textAlign: "center",
+  fontSize: 3,
+})`
+  margin-top: 8px;
 `;
 
 const ErrorTitle = styled(Text).attrs({
@@ -195,6 +213,56 @@ export const renderRequiresAppInstallation = ({ appName }: { appName: string }) 
   </Wrapper>
 );
 
+export const renderInstallingApp = ({
+  appName,
+  progress,
+}: {
+  appName: string,
+  progress: number,
+}) => {
+  return (
+    <Wrapper id="deviceAction-loading">
+      <Header />
+      <ProgressWrapper>
+        {progress ? (
+          <ProgressCircle size={58} progress={progress} />
+        ) : (
+          <Rotating size={58}>
+            <ProgressCircle hideProgress size={58} progress={0.06} />
+          </Rotating>
+        )}
+      </ProgressWrapper>
+      <Footer>
+        <Title>
+          <Trans i18nKey="DeviceAction.installApp" values={{ appName }} />
+        </Title>
+        <SubTitle>
+          <Trans i18nKey="DeviceAction.installAppDescription" />
+        </SubTitle>
+      </Footer>
+    </Wrapper>
+  );
+};
+
+export const renderListingApps = () => (
+  <Wrapper id="deviceAction-loading">
+    <Header />
+    <ProgressWrapper>
+      <Rotating size={58}>
+        <ProgressCircle hideProgress size={58} progress={0.06} />
+      </Rotating>
+    </ProgressWrapper>
+    <Footer>
+      <Title>
+        <Trans i18nKey="DeviceAction.listApps" />
+      </Title>
+      <SubTitle>
+        <Trans i18nKey="DeviceAction.listAppsDescription" />
+      </SubTitle>
+    </Footer>
+  </Wrapper>
+);
+
 export const renderAllowManager = ({
   modelId,
   type,
@@ -282,19 +350,23 @@ export const renderWarningOutdated = ({
 
 export const renderError = ({
   error,
+  withOpenManager,
   onRetry,
   withExportLogs,
   list,
   supportLink,
+  warning,
 }: {
   error: Error,
+  withOpenManager?: boolean,
   onRetry?: () => void,
   withExportLogs?: boolean,
   list?: boolean,
   supportLink?: string,
+  warning?: boolean,
 }) => (
   <Wrapper id={`error-${error.name}`}>
-    <Logo>
+    <Logo warning={warning}>
       <ErrorIcon size={44} error={error} />
     </Logo>
     <ErrorTitle>
@@ -323,6 +395,7 @@ export const renderError = ({
           mx={1}
         />
       ) : null}
+      {withOpenManager ? <OpenManagerButton ml={4} mt={0} /> : null}
       {onRetry ? (
         <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
           <Trans i18nKey="common.retry" />
@@ -429,11 +502,9 @@ export const renderSwapDeviceConfirmation = ({
 }) => {
   return (
     <>
-      <Box mb={3}>
-        <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
-          <Trans i18nKey="DeviceAction.swap.notice" />
-        </InfoBox>
-      </Box>
+      <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={3}>
+        <Trans i18nKey="DeviceAction.swap.notice" />
+      </Alert>
       {map(
         {
           amountSent: (
@@ -505,12 +576,15 @@ export const renderSwapDeviceConfirmation = ({
             </Text>
           </LabelInfoTooltip>
           <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-            <CurrencyUnitValue
-              unit={getAccountUnit(exchange.toAccount)}
-              value={exchangeRate.payoutNetworkFees}
-              disableRounding
-              showCode
-            />
+            {exchangeRate.payoutNetworkFees && (
+              <CurrencyUnitValue
+                unit={getAccountUnit(exchange.toAccount)}
+                // $FlowFixMe
+                value={exchangeRate.payoutNetworkFees}
+                disableRounding
+                showCode
+              />
+            )}
           </Text>
         </Box>
       ) : null}
@@ -527,9 +601,9 @@ export const renderSellDeviceConfirmation = ({
   type: "light" | "dark",
 }) => (
   <>
-    <InfoBox onLearnMore={() => openURL(urls.swap.learnMore)} horizontal={false}>
+    <Alert type="primary" learnMoreUrl={urls.swap.learnMore} horizontal={false}>
       <Trans i18nKey="DeviceAction.sell.notice" />
-    </InfoBox>
+    </Alert>
     {renderVerifyUnwrapped({ modelId, type })}
     <Box alignItems={"center"}>
       <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>

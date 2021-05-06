@@ -61,7 +61,7 @@ export default function Price({
 
   const counterValue = rate
     ? rate.times(valueNum) // NB Allow to override the rate for swap
-    : typeof rawCounterValue !== "undefined"
+    : typeof rawCounterValue === "number"
     ? BigNumber(rawCounterValue)
     : rawCounterValue;
 

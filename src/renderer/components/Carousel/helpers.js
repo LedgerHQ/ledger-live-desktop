@@ -281,41 +281,6 @@ const SLIDES = [
       },
     ],
   },
-  {
-    url: urls.banners.gateway,
-    name: "polkaStake",
-    title: <Trans i18nKey={`banners.gateway.title`} />,
-    description: <Trans i18nKey={`banners.gateway.description`} />,
-    imgs: [
-      {
-        // $FlowFixMe
-        source: require("./banners/Gateway/images/ledger.png").default,
-        transform: [0, 30, 5, 30],
-        size: {
-          width: 162,
-          height: 167,
-        },
-      },
-      {
-        // $FlowFixMe
-        source: require("./banners/Gateway/images/ball.png").default,
-        transform: [0, 60, 20, 20],
-        size: {
-          width: 150,
-          height: 150,
-        },
-      },
-      {
-        // $FlowFixMe
-        source: require("./banners/Gateway/images/satellite.png").default,
-        transform: [-10, 15, 5, 15],
-        size: {
-          width: 151,
-          height: 163,
-        },
-      },
-    ],
-  },
 ];
 
 export const getDefaultSlides = () => {

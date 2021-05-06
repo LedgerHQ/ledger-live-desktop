@@ -110,6 +110,7 @@ const Body = ({
     status,
     bridgeError,
     bridgePending,
+    updateTransaction,
   } = useBridgeTransaction(() => {
     const { account, parentAccount } = params;
     const bridge = getAccountBridge(account, parentAccount);
@@ -188,6 +189,7 @@ const Body = ({
     openModal,
     setSigned,
     onChangeTransaction: setTransaction,
+    onUpdateTransaction: updateTransaction,
     onOperationBroadcasted: handleOperationBroadcasted,
     onTransactionError: handleTransactionError,
     t,

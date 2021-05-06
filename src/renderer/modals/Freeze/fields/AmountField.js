@@ -141,24 +141,26 @@ const AmountField = ({
 
   const amountButtons = useMemo(
     () =>
-      showAmountRatio && [
-        {
-          label: "25%",
-          value: spendableBalance.multipliedBy(0.25),
-        },
-        {
-          label: "50%",
-          value: spendableBalance.multipliedBy(0.5),
-        },
-        {
-          label: "75%",
-          value: spendableBalance.multipliedBy(0.75),
-        },
-        {
-          label: "100%",
-          value: spendableBalance,
-        },
-      ],
+      showAmountRatio
+        ? [
+            {
+              label: "25%",
+              value: spendableBalance.multipliedBy(0.25),
+            },
+            {
+              label: "50%",
+              value: spendableBalance.multipliedBy(0.5),
+            },
+            {
+              label: "75%",
+              value: spendableBalance.multipliedBy(0.75),
+            },
+            {
+              label: "100%",
+              value: spendableBalance,
+            },
+          ]
+        : [],
     [showAmountRatio, spendableBalance],
   );
 
