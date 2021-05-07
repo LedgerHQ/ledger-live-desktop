@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
@@ -62,16 +62,16 @@ export function CurrencyCircleIcon({
   showCheckmark?: boolean,
 }) {
   const bgColor = useTheme("colors.palette.background.paper");
+  const cryptoColor = useMemo(
+    () => currency.type === "CryptoCurrency" && ensureContrast(currency.color, bgColor),
+    [currency, bgColor],
+  );
   if (currency.type === "TokenCurrency") {
     return <ParentCryptoCurrencyIcon currency={currency} bigger />;
   }
   const Icon = getCryptoCurrencyIcon(currency);
   return (
-    <CryptoIconWrapper
-      size={size}
-      showCheckmark={showCheckmark}
-      cryptoColor={ensureContrast(currency.color, bgColor)}
-    >
+    <CryptoIconWrapper size={size} showCheckmark={showCheckmark} cryptoColor={cryptoColor}>
       {Icon && <Icon size={size * 0.6} />}
       {showCheckmark && (
         <div>
