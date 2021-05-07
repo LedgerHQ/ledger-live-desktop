@@ -2862,7 +2862,7 @@
     },
     "AccountNotSupported": {
       "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "description": "Повторите попытку или свяжитесь с поддержкой ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
@@ -2950,7 +2950,7 @@
       "description": "Please contact Ledger Support"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
+      "title": "{{currencyName}} не поддерживается",
       "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
@@ -2963,10 +2963,10 @@
     },
     "DeviceInOSUExpected": {
       "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "description": "Пожалуйста, повторите попытку или свяжитесь с поддержкой Ledger"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "Пожалуйста, перезапустите Ledger и повторите попытку",
       "description": "An unexpected error occurred. Please try again"
     },
     "DeviceSocketFail": {
@@ -2994,7 +2994,7 @@
       "description": "Try setting a custom fee (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
+      "title": "Необходимо обновить прошивку или приложение",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
     },
     "FirmwareNotRecognized": {
@@ -3014,7 +3014,7 @@
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
+      "title": "Извините, попробуйте снова.",
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
@@ -3087,11 +3087,11 @@
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
-      "description": "Please try again"
+      "description": "Повторите попытку."
     },
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
-      "description": "Please try again"
+      "description": "Пожалуйста, попробуйте ещё раз"
     },
     "RPCHostRequired": {
       "title": "Host is required."
