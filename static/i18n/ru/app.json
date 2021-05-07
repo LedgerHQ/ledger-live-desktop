@@ -2124,7 +2124,7 @@
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
+        "title": "Экспорт счетов",
         "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
         "button": "Экспортировать"
       },
@@ -2182,33 +2182,33 @@
     },
     "help": {
       "version": "Версия приложения",
-      "releaseNotesBtn": "Details",
+      "releaseNotesBtn": "Сведения",
       "termsBtn": "Read",
-      "faq": "Ledger Support",
+      "faq": "Служба поддержки Ledger",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
+      "terms": "Условия использования",
+      "termsDesc": "Используя приложение Ledger Live, вы принимаете наши Условия использования.",
+      "privacy": "Политика конфиденциальности",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
+      "title": "Сброс Ledger Live",
       "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
     },
     "softResetModal": {
-      "title": "Clear cache",
+      "title": "Очистка кэша",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "User action required",
-      "part1": "Could not delete cache folder. Please delete the folder manually:",
-      "part2": "Click the Open folder button, the ",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "title": "Требуется ваше действие",
+      "part1": "Не удалось удалить папку кэша. Удалите её вручную:",
+      "part2": "Нажмите кнопку «Открыть папку», после чего",
+      "part3": "приложение закроется,",
+      "part4": "и вам будет необходимо вручную удалить папку \"sqlite\".",
+      "part5": "Теперь можно просто перезапустить приложение."
     },
     "removeAccountModal": {
       "title": "Удалить счёт",
@@ -3227,8 +3227,8 @@
       "title": "This may be too low. Please increase"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Неизвестная версия микроконтроллера",
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
