@@ -131,9 +131,9 @@
     "feesAmount": "Fees Amount"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "menu": "Меню",
+    "stars": "Избранные счета",
+    "accounts": "Счета",
     "manager": "Manager",
     "exchange": "Buy / Sell",
     "swap": "Swap",
