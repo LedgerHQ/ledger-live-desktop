@@ -2133,21 +2133,21 @@
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "button": "Готово",
+        "title": "Проскандируйте для экспорта в мобильное приложение",
+        "listTitle": "В мобильном приложении Ledger Live:",
+        "step1": "Нажмите кнопку <1><0>+</0></1> в меню <3><0>Счета</0></3>",
+        "step2": "Нажмите <1><0>Импортировать счета из настольного приложения</0></1>",
+        "step3": "Сканируйте <1><0>код LiveQR</0></1> до тех пор, пока прогресс не достигнет 100%"
       }
     },
     "display": {
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
-      "counterValue": "Countervalue",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "language": "Язык",
+      "languageDesc": "Выберите язык интерфейса в Ledger Live.",
+      "theme": "Тема оформления",
+      "themeDesc": "Выберите тему.",
+      "counterValue": "Эквивалент",
+      "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
       "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "Regional market indicator",
