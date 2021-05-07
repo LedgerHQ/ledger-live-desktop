@@ -347,12 +347,12 @@
             "success": {
               "header": "Accounts added to node configuration",
               "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
-              "cta": "View user data"
+              "cta": "Просмотреть пользовательские данные"
             }
           }
         },
         "accounts": {
-          "title": "Accounts",
+          "title": "Счета",
           "existing": "Existing accounts to scan",
           "toScan": "Accounts to scan",
           "toScanDescription": "Accounts to scan for each address type",
@@ -411,18 +411,18 @@
   "account": {
     "lastOperations": "Latest operations",
     "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "openInExplorer": "Посмотреть в обозревателе блоков",
     "emptyState": {
-      "title": "No crypto assets yet?",
+      "title": "Ещё нет криптоактивов?",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "Receive",
+        "receiveFunds": "Получить",
         "buy": "Buy"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "Редактировать счёт",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
@@ -616,23 +616,23 @@
       "title": "Вывести средства",
       "steps": {
         "amount": {
-          "title": "Amount",
+          "title": "Сумма",
           "advanced": "Advanced",
-          "amountToWithdraw": "Amount to withdraw",
-          "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max",
-          "maxWithdrawble": "Maximum amount to withdraw is"
+          "amountToWithdraw": "Сумма вывода",
+          "withdrawAll": "Вывести всё",
+          "placeholder": "Вы можете вывести всю сумму",
+          "maxWithdrawble": "Максимальная сумма для вывода"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Устройство"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "Подтверждение",
           "success": {
-            "title": "Withdrawal sent successfully",
-            "text": "Your assets will be available once the network has confirmed the withdrawal.",
-            "done": "Close",
-            "cta": "View details"
+            "title": "Вы успешно вывели средства",
+            "text": "Ваши средства будут доступны после того, как вывод будет подтверждён в сети.",
+            "done": "Закрыть",
+            "cta": "Просмотреть сведения"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
