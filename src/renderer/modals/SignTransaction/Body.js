@@ -7,7 +7,6 @@ import { compose } from "redux";
 import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { Trans, withTranslation } from "react-i18next";
-import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type {
   Account,
@@ -15,7 +14,6 @@ import type {
   SignedOperation,
   Transaction,
 } from "@ledgerhq/live-common/lib/types";
-import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { closeModal, openModal } from "~/renderer/actions/modals";
@@ -37,6 +35,7 @@ type OwnProps = {|
     account: ?AccountLike,
     transactionData: Transaction,
     onResult: (signedOperation: SignedOperation) => void,
+    onCancel: (reason: any) => void,
     parentAccount: ?Account,
     startWithWarning?: boolean,
     recipient?: string,
@@ -115,7 +114,6 @@ const Body = ({
 
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);
-    console.log(t);
     const { recipient, ...txData } = params.transactionData;
     const t2 = bridge.updateTransaction(t, {
       recipient,
@@ -147,10 +145,8 @@ const Body = ({
   }, []);
 
   const handleTransactionError = useCallback((error: Error) => {
-    if (!(error instanceof UserRefusedOnDevice)) {
-      logger.critical(error);
-    }
-    setTransactionError(error);
+    params.onCancel(error);
+    handleCloseModal();
   }, []);
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
