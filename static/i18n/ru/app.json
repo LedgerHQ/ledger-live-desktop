@@ -169,19 +169,19 @@
       }
     },
     "landing": {
-      "title": "Swap your assets",
-      "continue": "Continue",
-      "sorry": "Service temporarily unavailable, or not available in your country"
+      "title": "Обменивайте свою криптовалюту",
+      "continue": "Продолжить",
+      "sorry": "Услуга временно недоступна или недоступна в Вашей стране"
     },
     "missingApp": {
       "title": "Please install the Exchange app on your device",
       "subtitle": "Go to manager and install Exchange app to swap assets.",
-      "cta": "Go to manager"
+      "cta": "Перейти в Диспетчер"
     },
     "outdatedApp": {
       "title": "Please update the Exchange app on your device",
       "subtitle": "Go to manager and update Exchange app to swap assets.",
-      "cta": "Go to manager"
+      "cta": "Перейти в Диспетчер"
     },
     "kyc": {
       "title": "Welcome to Swap",
