@@ -5,6 +5,10 @@ export default class NotificationsHub extends Page {
     return this.$("#topbar-notification-button");
   }
 
+  async statusWarningButton() {
+    return this.$("#topbar-service-status-button");
+  }
+
   async notificationsBadge() {
     return this.$("#notifications-badge");
   }

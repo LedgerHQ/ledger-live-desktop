@@ -1,6 +1,7 @@
 import initialize, {
   app,
   notificationsHub,
+  portfolioPage,
   mockNewAnnouncement,
   mockNewStatusIncident,
 } from "../common.js";
@@ -41,6 +42,53 @@ describe("Notification center", () => {
       await notificationsHub.openNotificationsHub();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapShotIdentifier: `notification-center-after-addAccounts`,
+      });
+    });
+  });
+
+  describe("When new announcement is pushed", () => {
+    afterAll(async () => {
+      const closeBtn = await notificationsHub.closeButton();
+      await closeBtn.click();
+    });
+
+    it("new snackbar element should be displayed", async () => {
+      await mockNewAnnouncement();
+      const announcementContainer = await portfolioPage.announcementsToast();
+      await announcementContainer.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapShotIdentifier: `notification-center-new-portfolio-annoucement`,
+      });
+    });
+
+    it("user can access notification center from toast", async () => {
+      const newAnnoucement = await portfolioPage.newAnnouncement();
+      await newAnnoucement.click();
+      const notifsHub = await notificationsHub.notificationsDrawer();
+      await notifsHub.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapShotIdentifier: `notification-center-new-announcement`,
+      });
+    });
+  });
+
+  describe("When new service disruption", () => {
+    const warningBtn = notificationsHub.statusWarningButton();
+
+    it("Warning icon should be present in the topBar", async () => {
+      await mockNewStatusIncident();
+      await warningBtn.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapShotIdentifier: `notification-center-new-incident-1`,
+      });
+    });
+
+    it("user can access status center from topbar warning", async () => {
+      await warningBtn.click();
+      const notifsHub = await notificationsHub.notificationsDrawer();
+      await notifsHub.waitForDisplayed();
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        customSnapShotIdentifier: `notification-center-new-incident-2`,
       });
     });
   });

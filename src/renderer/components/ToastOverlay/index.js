@@ -19,7 +19,7 @@ const Wrapper: ThemedComponent<{}> = styled.div`
 export function ToastOverlay() {
   const { toasts, dismissToast } = useToasts();
   return (
-    <Wrapper>
+    <Wrapper id="announcements-wrapper">
       {toasts.map(({ id, type, title, text, icon, callback }) => (
         <Toast
           id={id}

@@ -29,4 +29,12 @@ export default class PortfolioPage extends Page {
     const elem = await this.emtpyStateAddAccountButton();
     return elem.isExisting();
   }
+
+  async announcementsToast() {
+    return this.$("#announcements-container");
+  }
+
+  async newAnnouncement() {
+    return this.$("#new-announcement");
+  }
 }
