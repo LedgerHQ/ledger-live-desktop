@@ -63,7 +63,7 @@ export function CurrencyCircleIcon({
 }) {
   const bgColor = useTheme("colors.palette.background.paper");
   const cryptoColor = useMemo(
-    () => currency.type === "CryptoCurrency" && ensureContrast(currency.color, bgColor),
+    () => currency.type === "CryptoCurrency" ? ensureContrast(currency.color, bgColor) : "",
     [currency, bgColor],
   );
   if (currency.type === "TokenCurrency") {
