@@ -492,37 +492,37 @@
       "interestEarnedTooltip": "Interest you have earned after withdrawal",
       "openLoans": "Open loans",
       "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount withdrawn",
-      "date": "Date",
+      "amountRedeemed": "Выведенная сумма",
+      "date": "Дата",
       "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Deposit {{currency}}"
+      "lend": "Депонировать {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Lending",
-        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
+        "description": "Вы можете одалживать активы напрямую из вашего счёта Ethereum и получать доход.",
         "cta": "How does lending on Compound work?"
       },
       "closed": {
         "title": "Your closed loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "description": "У вас ещё нет вкладов.",
+        "cta": "Депонировать"
       },
       "opened": {
         "title": "Your opened loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "description": "У вас ещё нет вкладов.",
+        "cta": "Депонировать"
       },
       "history": {
-        "title": "History",
-        "description": "View the history of all your loan transactions.",
-        "cta": "Deposit"
+        "title": "История",
+        "description": "Просмотрите историю всех ваших сделок по вкладам.",
+        "cta": "Депонировать"
       }
     },
     "headers": {
       "active": {
-        "accounts": "Account",
+        "accounts": "Счёт",
         "amountSupplied": "Open loan",
         "amountSuppliedTooltip": "Amount deposited in the network",
         "accruedInterests": "Interest balance",
@@ -601,19 +601,19 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "Подтверждение",
           "success": {
-            "title": "Operation sent successfully",
-            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-            "done": "Close",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "Транзакция успешно отправлена",
+            "text": "Транзакция отправлена в сеть для подтверждения. После этого вы сможете делать вклады.",
+            "done": "Закрыть",
+            "info": "Потребуется некоторые время, прежде чем транзакция отобразится в обозревателе и будет подтверждена."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
       }
     },
     "withdraw": {
-      "title": "Withdraw assets",
+      "title": "Вывести средства",
       "steps": {
         "amount": {
           "title": "Amount",
@@ -703,25 +703,25 @@
     "order": {
       "name|asc": "Название А-Я",
       "name|desc": "Название Я-А",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "balance|asc": "Наименьшее кол-во",
+      "balance|desc": "Наибольшее кол-во"
     },
     "range": {
       "day": "Day",
-      "week": "Week",
-      "month": "Month",
-      "year": "Year",
+      "week": "Неделя",
+      "month": "Месяц",
+      "year": "Год",
       "all": "All"
     },
     "optionsMenu": {
-      "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "title": "Параметры",
+      "exportOperations": "История экспортов",
+      "exportToMobile": "Экспорт в мобильное приложение"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
+      "star": "В избранное",
+      "receive": "Получить",
+      "send": "Отправить",
       "swap": "Swap",
       "buy": "Buy",
       "sell": "Sell",
@@ -822,18 +822,18 @@
     }
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "Портфель",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "Add account"
+      "createAccount": "Добавить счёт"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Total balance",
+    "totalBalance": "Общий баланс",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
-    "title": "Current address",
-    "for": "Address for <1><0>{{name}}</0></1>",
+    "title": "Текущий адрес",
+    "for": "Адрес для <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
   },
@@ -860,12 +860,12 @@
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
+    "title": "Токены",
+    "cta": "Добавить токен",
     "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
-    "link": "Learn more",
+    "link": "Подробнее",
     "seeTokens": "Show tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "hideTokens": "Скрыть токены ({{tokenCount}})",
     "countTooltip": "1 token",
     "countTooltip_plural": "{{count}} tokens",
     "algorand": {
@@ -892,7 +892,7 @@
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "Export accounts to mobile",
       "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
+      "mobileCTA": "Экспорт в мобильное приложение",
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
