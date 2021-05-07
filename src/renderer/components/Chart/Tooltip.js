@@ -40,7 +40,7 @@ const Tooltip = ({ tooltip, renderTooltip, color, data }: TooltipProps) => {
     reset: !wasVisible.current,
   });
   wasVisible.current = !!tooltip.opacity;
-  const tooltipData = data[tooltip.dataPoints?.[0]?.index];
+  const tooltipData = data?.[tooltip.dataPoints?.[0]?.index];
 
   return (
     <>
