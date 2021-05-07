@@ -122,10 +122,10 @@
   },
   "fees": {
     "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
+    "fast": "Быстро",
+    "high": "Высокая",
+    "low": "Низкая",
+    "slow": "Медленно",
     "standard": "Standard",
     "medium": "Medium",
     "feesAmount": "Fees Amount"
@@ -141,7 +141,7 @@
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
-    "tooltip": "Star account"
+    "tooltip": "Избранные счета"
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
@@ -156,16 +156,16 @@
   },
   "swap": {
     "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
+    "titleCrypto": "Обменять {{currency}}",
     "whatIsSwap": "What is Swap",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History"
+      "history": "История"
     },
     "history": {
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Здесь будут показаны ваши предыдущие обмены",
+        "description": "Вы ещё не меняли валюту, либо Ledger Live был сброшен."
       }
     },
     "landing": {
