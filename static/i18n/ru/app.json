@@ -1172,7 +1172,7 @@
         "updating": "Firmware update",
         "reset": "Prepare device",
         "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
+        "flash-mcu": "Обновление микроконтроллера...",
         "flash-bootloader": "Bootloader updating...",
         "firmware": "Firmware updating...",
         "flash": "Preparing your device..."
@@ -1181,29 +1181,29 @@
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identifier",
       "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
+      "mcuFirst": "Отсоедините USB-кабель от устройства",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "mcuBlueFirst": "Нажмите и удерживайте боковую кнопку в течение 10 секунд, чтобы отключить устройство. Затем отпустите кнопку.",
+      "mcuBlueSecond": "Нажмите и удерживайте кнопку не менее 5 секунд до тех пор, пока не увидите варианты загрузки. Выберите режим Bootloader",
+      "successTitle": "Прошивка обновлена",
       "successTextApps": "Please re-install the apps on your device",
       "successTextNoApps": "You can now install apps on your device",
       "sucessCTAApps": "Re-install apps",
       "SuccessCTANoApps": "Install apps",
       "cancelReinstallCTA": "Install update",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
+        "first": "1. Сбросьте устройство",
+        "connect": "Подключите {{deviceName}} к компьютеру с помощью USB-кабеля.",
+        "turnOn": "Нажмите кнопку на устройстве, чтобы включить его.",
         "falsePin": "Enter three wrong PINs to reset the device.",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
-        "second": "2. Boot in {{mode}} mode",
-        "boot": "Press and hold the side button until {{option}} is displayed",
-        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
-        "third": "3. Uninstall all apps",
+        "turnOff": "Нажмите и удерживайте боковую кнопку, пока не увидите {{action}}.",
+        "confirmTurnOff": "Нажмите {{action}} для подтверждения.",
+        "second": "2. Загрузитесь в режиме {{mode}}",
+        "boot": "Нажмите и удерживайте боковую кнопку, пока не увидите {{option}}",
+        "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится панель управления.",
+        "third": "3. Удалитьевсе приложения",
         "openLive": "Open the Manager in Ledger Live.",
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
@@ -1331,23 +1331,23 @@
     "titleCrypto": "Sell {{currency}}"
   },
   "receive": {
-    "title": "Receive",
+    "title": "Получение",
     "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
-        "label": "Account to credit",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
+        "title": "Счёт",
+        "label": "Счёт для зачисления средств",
+        "parentAccount": "1. Выберите счёт {{currencyName}}",
+        "token": "2. Выберите токен",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
-        "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "title": "Устройство",
+        "withoutDevice": "Ещё нет устройства?"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "Получить"
       },
       "warning": {
         "tezos": {
@@ -1357,8 +1357,8 @@
     }
   },
   "send": {
-    "title": "Send",
-    "totalSpent": "Total to debit",
+    "title": "Отправка",
+    "totalSpent": "Всего будет списано",
     "steps": {
       "recipient": {
         "title": "Recipient"
@@ -1399,7 +1399,7 @@
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Подтверждение",
         "success": {
           "title": "Transaction sent",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
