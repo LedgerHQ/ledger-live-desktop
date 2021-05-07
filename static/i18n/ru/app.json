@@ -1431,14 +1431,14 @@
     "amount": "Кол-во",
     "value": "Ценность",
     "showAll": "Показать все",
-    "showLess": "Show less",
+    "showLess": "Показать меньше",
     "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
-    "account": "Account",
+    "account": "Счёт",
     "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
+    "amount": "Кол-во",
+    "value": "Ценность",
     "header": "Account allocation ({{count}})"
   },
   "tron": {
@@ -2316,9 +2316,9 @@
   },
   "theme": {
     "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "light": "Светлая",
+    "dusk": "Тусклая",
+    "dark": "Тёмная"
   },
   "toastOverlay": {
     "toastType": {
@@ -2784,7 +2784,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "Не удаётся подключить устройство?"
   },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
@@ -2857,11 +2857,11 @@
       "description": "Wait for the operation to go through."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
+      "title": "Необходимо указать название счёта",
       "description": "Please enter an account name"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
+      "title": "Счёт не поддерживается.",
       "description": "Повторите попытку или свяжитесь с поддержкой ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
@@ -3193,11 +3193,11 @@
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "Что-то пошло не так",
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
+      "title": "Необходимо обновить приложение",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
