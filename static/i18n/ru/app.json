@@ -2111,25 +2111,25 @@
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "Настройки",
     "discreet": "Toggle discreet mode",
     "helpButton": "Help",
     "tabs": {
-      "display": "General",
-      "currencies": "Crypto assets",
-      "help": "Help",
-      "about": "About",
-      "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "display": "Общие",
+      "currencies": "Криптоактивы",
+      "help": "Помощь",
+      "about": "О программе",
+      "experimental": "Экспериментальные функции",
+      "accounts": "Счета"
     },
     "export": {
       "accounts": {
         "title": "Export accounts",
         "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "button": "Экспортировать"
       },
       "operations": {
-        "title": "Operation history",
+        "title": "История операций",
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
@@ -2211,13 +2211,13 @@
       "part5": "Then you can restart the app normally."
     },
     "removeAccountModal": {
-      "title": "Remove account",
+      "title": "Удалить счёт",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
+      "title": "Просмотр пользовательских данных",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "View"
+      "btn": "Посмотреть"
     },
     "repairDevice": {
       "title": "Repair your Ledger device",
@@ -2226,13 +2226,13 @@
       "button": "Repair"
     },
     "exportLogs": {
-      "title": "Save logs",
+      "title": "Хранить логи",
       "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "btn": "Сохранять"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
+        "title": "Скрывать счета с нулевым балансом",
         "desc": "Hide token accounts with zero balance on the Accounts page."
       },
       "tokenBlacklist": {
@@ -2250,18 +2250,18 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "Новый пароль"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "Подтвердите пароль"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "Текущий пароль"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "Блокировка паролем",
+      "subTitle": "Изменение пароля"
     },
     "setPassword": {
       "title": "Блокировка экрана паролем",
