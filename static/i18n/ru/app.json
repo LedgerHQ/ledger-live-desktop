@@ -1401,12 +1401,12 @@
       "confirmation": {
         "title": "Подтверждение",
         "success": {
-          "title": "Transaction sent",
+          "title": "Транзакция отправлена",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "View details"
+          "cta": "Просмотреть сведения"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "Трансляция транзакции..."
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       },
@@ -1421,16 +1421,16 @@
     }
   },
   "releaseNotes": {
-    "title": "Release notes",
+    "title": "Сведения о версии",
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
+    "asset": "Актив",
+    "price": "Цена",
     "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
-    "showAll": "Show all",
+    "amount": "Кол-во",
+    "value": "Ценность",
+    "showAll": "Показать все",
     "showLess": "Show less",
     "header": "Asset allocation ({{count}})"
   },
