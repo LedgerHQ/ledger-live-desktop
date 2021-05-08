@@ -494,23 +494,23 @@
       "closedLoans": "Закрытые займы",
       "amountRedeemed": "Выведенная сумма",
       "date": "Дата",
-      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
-      "howCompoundWorks": "How does lending on Compound work?",
+      "info": "Вы можете одалживать активы напрямую из вашего счёта {{currency}} и получать доход.",
+      "howCompoundWorks": "Как работает кредитование на Compound?",
       "lend": "Депонировать {{currency}}"
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
+        "title": "Кредитование",
         "description": "Вы можете одалживать активы напрямую из вашего счёта Ethereum и получать доход.",
-        "cta": "How does lending on Compound work?"
+        "cta": "Как работает кредитование на Compound?"
       },
       "closed": {
-        "title": "Your closed loans will appear here",
+        "title": "Здесь будет сводка ваших активных ссуд",
         "description": "У вас ещё нет вкладов.",
         "cta": "Депонировать"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
+        "title": "Здесь будет сводка ваших закрытых ссуд",
         "description": "У вас ещё нет вкладов.",
         "cta": "Депонировать"
       },
@@ -608,7 +608,7 @@
             "done": "Закрыть",
             "info": "Потребуется некоторые время, прежде чем транзакция отобразится в обозревателе и будет подтверждена."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций."
         }
       }
     },
@@ -617,7 +617,7 @@
       "steps": {
         "amount": {
           "title": "Сумма",
-          "advanced": "Advanced",
+          "advanced": "Дополнительно",
           "amountToWithdraw": "Сумма вывода",
           "withdrawAll": "Вывести всё",
           "placeholder": "Вы можете вывести всю сумму",
@@ -634,14 +634,14 @@
             "done": "Закрыть",
             "cta": "Просмотреть сведения"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций."
         }
       }
     },
     "info": {
       "terms": {
         "title": "Lend Crypto",
-        "subtitle": "Lend assets on the Compound protocol",
+        "subtitle": "Одалживайте активы в протоколе Compound",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
         "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
       },
