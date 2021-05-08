@@ -2986,12 +2986,12 @@
       "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "Некорректная конечная точка.",
+      "description": "Пожалуйста, укажите корректную конечную точку."
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "К сожалению, при расчёте комиссии произошла ошибка",
+      "description": "Попробуйте указать комиссию вручную (статус: {{status}})."
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Необходимо обновить прошивку или приложение",
@@ -3011,15 +3011,15 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Пожалуйста, проверьте подключение и повторите попытку или обратитесь в Поддержку Ledger."
     },
     "LedgerAPI5xx": {
       "title": "Извините, попробуйте снова.",
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "title": "К сожалению, услуги для {{currencyName}} недоступны",
+      "description": "Попробуйте ещё раз или обратитесь в Поддержку Ledger"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
@@ -3080,7 +3080,7 @@
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "Адрес получения неактивен. Чтобы активировать его, укажите сумму не менее {{minimalAmount}}"
     },
     "NotEnoughGas": {
       "title": "The ETH balance in the parent account is insufficient for network fees"
@@ -3150,7 +3150,7 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
+      "title": "Пожалуйста, откройте приложение {{appName}}",
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
@@ -3173,11 +3173,11 @@
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
+      "title": "Адрес получения отклонён.",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
-      "title": "App update required",
+      "title": "Необходимо обновить приложение",
       "description": "Удалите и повторно установите приложение {{managerAppName}} через Диспетчер"
     },
     "DeviceOnDashboardExpected": {
@@ -3185,11 +3185,11 @@
       "description": "Please navigate back to the Dashboard on your device"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "Пожалуйста, попробуйте ещё раз (ошибка соединения)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "Пожалуйста, попробуйте ещё раз (соединение разорвано).",
       "description": null
     },
     "WrongDeviceForAccount": {
@@ -3201,27 +3201,27 @@
       "description": "Удалите и повторно установите приложение {{managerAppName}} через Диспетчер"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "Некорректный адрес {{currencyName}}"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "Адрес получателя совпадает с адресом отправителя"
     },
     "CantOpenDevice": {
       "title": "Sorry, connection failed",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "Автопроверка недоступна: внимательно проверяйте адрес",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Не удалось сканировать этот QR-код: этот адрес не поддерживает автопроверку."
     },
     "FeeNotLoaded": {
       "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Необходимо указать комиссию"
     },
     "GasLessThanEstimate": {
       "title": "This may be too low. Please increase"
