@@ -137,7 +137,7 @@
     "manager": "Диспетчер",
     "exchange": "Купить/Продать",
     "swap": "Обмен",
-    "lend": "Lend"
+    "lend": "Кредитование"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -271,34 +271,34 @@
         "finished": "Your swap was completed successfully."
       },
       "date": "Дата",
-      "from": "From",
+      "from": "Откуда",
       "fromAddress": "Origin address",
       "fromAddress_plural": "Origin addresses",
-      "to": "To",
+      "to": "Куда",
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
-    "status": "Status",
-    "connect": "Connect",
-    "disconnect": "Disconnect",
-    "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "status": "Статус",
+    "connect": "Подключить",
+    "disconnect": "Отключить",
+    "checkNodeSettings": "Подтверждение настроек ноды",
+    "edit": "Редактировать",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "Подключение полной ноды Биткойна",
+      "disconnectTitle": "Отключить полную ноду",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "header": "Запустите собственную полную ноду. Не доверяйте, а проверяйте.",
+          "description": "Полная Биткойн-нода проверяет все транзакции и блоки, что позволяет вам пользоваться биткойнами без посредников и вносить вклад в сеть Биткойна.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
+            "item1": "Настройте Bitcoin Core на устройстве с достаточными аппаратным оснащением.",
+            "item2": "Дождитесь полной синхронизации вашей ноды.",
             "item3": "Make note of your node RPC credentials, IP address, and port number."
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "Для запуска полной ноды требуется компьютер с достаточным аппаратным оснащением и быстрым интернетом без ограничений на передачу данных."
         },
         "node": {
           "title": "Node",
@@ -314,11 +314,11 @@
                 "rpcCredentials": {
                   "title": "RPC Credentials",
                   "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
-                  "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "usernamePlaceholder": "Имя пользователя",
+                  "passwordPlaceholder": "Пароль"
                 },
                 "tls": {
-                  "title": "Use TLS",
+                  "title": "Использовать TLS",
                   "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
                 }
               }
@@ -653,11 +653,11 @@
           "description": "Вам необходимо предоставить разрешение смарт-контракту Compound на перевод определённого количества активов через протокол. Подтверждение счёта даёт разрешение на обработку будущих займов."
         },
         "2": {
-          "subtitle": "Supply assets to earn interest",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "subtitle": "Внесите активы, чтобы получать доход",
+          "description": "После подтверждения счёта, вы можете указать количество активов, которые хотите ссудить и отправить транзакцию в протокол. Проценты будут начисляться сразу после подтверждения транзакции."
         },
         "3": {
-          "subtitle": "Withdraw assets at any time",
+          "subtitle": "Выводите активы в любое время",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
         }
       }
