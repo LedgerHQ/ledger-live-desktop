@@ -949,30 +949,30 @@
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
-      "addMore": "Add more",
-      "add": "Add account",
-      "add_plural": "Add accounts",
+      "addMore": "Добавить ещё",
+      "add": "Добавить счёт",
+      "add_plural": "Добавить счета",
       "addAccountName": "Add {{currencyName}} account",
       "receive": "Receive"
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "Добавить существующий счёт"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "Добавить новый счёт"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "Счетов в портфеле: ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "Счета, которые будут обновлены"
       }
     }
   },
   "operationDetails": {
     "whatIsThis": "What is this operation?",
-    "title": "Operation details",
+    "title": "Сведения об операции",
     "account": "Account",
     "date": "Date",
     "status": "Status",
@@ -982,18 +982,18 @@
     "fees": "Fee",
     "noFees": "No fee",
     "from": "From",
-    "to": "To",
+    "to": "Куда",
     "identifier": "ID транзакции",
-    "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
+    "viewOperation": "Просмотреть в Обозревателе блоков",
+    "showMore": "Показать больше {{recipients}}",
+    "showLess": "Показать меньше",
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
-    "tokenTooltip": "This operation is related to the following token operations",
+    "tokenTooltip": "Эта операция связана с следующими операциями токена",
     "subAccountTooltip": "This operation is related to the following subaccount operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details",
+    "internalOperations": "Внутренние операции",
+    "internalOpTooltip": "Эта операция имеет внутренние операции",
+    "details": "{{ currency }}: сведения",
     "multipleAddresses": "Why multiple addresses?",
     "extra": {
       "frozenAmount": "Frozen amount",
