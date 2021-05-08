@@ -180,7 +180,7 @@
     },
     "outdatedApp": {
       "title": "Please update the Exchange app on your device",
-      "subtitle": "Go to manager and update Exchange app to swap assets.",
+      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
       "cta": "Перейти в Диспетчер"
     },
     "kyc": {
@@ -415,7 +415,7 @@
     "emptyState": {
       "title": "Ещё нет криптоактивов?",
       "desc": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено на устройстве, и начинайте принимать платежи",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "descToken": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено и начинайте принимать <3><0>{{ticker}}</0></3> и <5> токены <0>{{tokenList}}</0></5>",
       "buttons": {
         "receiveFunds": "Получить",
         "buy": "Buy"
@@ -1167,10 +1167,10 @@
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "Загружаем обновление",
         "updateMCU": "Обновление прошивки",
         "updating": "Firmware update",
-        "reset": "Prepare device",
+        "reset": "Подготовка устройства",
         "osu": "Устанавливаем обновление ОС...",
         "flash-mcu": "Обновление микроконтроллера...",
         "flash-bootloader": "Обновляем Bootloader...",
@@ -1180,7 +1180,7 @@
       "confirmIdentifier": "Проверка идентификатора",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Идентификатор",
-      "mcuTitle": "Finalize update",
+      "mcuTitle": "Завершение обновления",
       "mcuFirst": "Отсоедините USB-кабель от устройства",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
@@ -3178,7 +3178,7 @@
     },
     "UpdateYourApp": {
       "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Удалите и повторно установите приложение {{managerAppName}} через Диспетчер"
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
