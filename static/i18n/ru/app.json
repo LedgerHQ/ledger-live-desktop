@@ -249,10 +249,10 @@
           "title": "Device"
         },
         "finished": {
-          "title": "Pending",
+          "title": "В ожидании",
           "subtitle": "Pending operation",
           "swap": "Your Swap ID:",
-          "seeDetails": "See details",
+          "seeDetails": "Подробности",
           "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
           "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
         }
