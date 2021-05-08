@@ -642,15 +642,15 @@
       "terms": {
         "title": "Lend Crypto",
         "subtitle": "Одалживайте активы в протоколе Compound",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+        "description": "Протокол Compound позволяет выдавать ссуды и брать кредиты в криптовалютах в сети Ethereum. Вы можете депонировать активы и зарабатывать доход прямо в вашем Ledger.",
+        "switchLabel": "<1>Я прочитал(-а) и соглашаюсь с </1><0>Условиями использования</0><1>.</1>"
       },
       "steps": {
-        "title": "Step <0>{{step}} / {{total}}</0>",
+        "title": "Шаг <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Approve an account to allow the protocol to",
-          "subtitle2": "process future loans.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+          "subtitle": "Подтвердите счёт, чтобы позволить протоколу",
+          "subtitle2": "обрабатывать будущие ссуды.",
+          "description": "Вам необходимо предоставить разрешение смарт-контракту Compound на перевод определённого количества активов через протокол. Подтверждение счёта даёт разрешение на обработку будущих займов."
         },
         "2": {
           "subtitle": "Supply assets to earn interest",
