@@ -994,7 +994,7 @@
     "internalOperations": "Внутренние операции",
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }}: сведения",
-    "multipleAddresses": "Why multiple addresses?",
+    "multipleAddresses": "Почему несколько адресов?",
     "extra": {
       "frozenAmount": "Frozen amount",
       "unfreezeAmount": "Unfreeze amount",
@@ -1021,7 +1021,7 @@
     }
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "На этом всё"
   },
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
@@ -2101,7 +2101,7 @@
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "Баланс всех счетов {{currency}}"
   },
   "carousel": {
     "hidden": {
@@ -2125,12 +2125,12 @@
     "export": {
       "accounts": {
         "title": "Экспорт счетов",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "desc": "Добавьте свои счета в мобильное устройство в Ledger Live. Ваши счета будут синхронизироваться только с блокчейном, а не между мобильным и настольным приложением.",
         "button": "Экспортировать"
       },
       "operations": {
         "title": "История операций",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "desc": "Скачайте на компьютер отчёт о ваших транзакциях в формате CSV."
       },
       "modal": {
         "button": "Готово",
@@ -2220,10 +2220,10 @@
       "btn": "Посмотреть"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
+      "title": "Ремонт устройства Ledger",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
-      "button": "Repair"
+      "button": "Исправить"
     },
     "exportLogs": {
       "title": "Хранить логи",
@@ -2270,7 +2270,7 @@
     },
     "disablePassword": {
       "title": "Отключить блокировку паролем",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Данные Ledger Live будут храниться на компьютере в незашифрованном виде. К таким данным относятся названия счетов, информация о транзакциях и публичные адреса кошельков."
     }
   },
   "update": {
