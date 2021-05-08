@@ -414,7 +414,7 @@
     "openInExplorer": "Посмотреть в обозревателе блоков",
     "emptyState": {
       "title": "Ещё нет криптоактивов?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "desc": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено на устройстве, и начинайте принимать платежи",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
         "receiveFunds": "Получить",
@@ -1205,7 +1205,7 @@
         "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится панель управления.",
         "third": "3. Удалитьевсе приложения",
         "openLive": "Откройте Диспетчер в Ledger Live.",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "uninstall": "Нажмите на значок корзины рядом с приложениями, установленными на {{deviceName}}. Это позволит освободить место для установки прошивки.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
       }
     }
@@ -3038,7 +3038,7 @@
       "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
+      "title": "Удаление приложений с устройства",
       "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
@@ -3158,7 +3158,7 @@
       "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "Диспетчер был отклонён на устройстве"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "Update cancelled on device",
