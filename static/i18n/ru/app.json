@@ -441,11 +441,11 @@
     "delegatedAssets": "Делегированные активы",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
-    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "frozenAssetsTooltip": "Замороженные активы используются в процедуре голосования в сети Tron. От них зависит количество ваших голосов.",
+    "bandwidthTooltip": "Заморозить активы для увеличения пропускной способности",
+    "energyTooltip": "Заморозить активы для увеличения энергии",
+    "delegatedAssetsTooltip": "Делегированные активы используются в процедуре голосования в сети Cosmos. От них зависит количество ваших голосов.",
+    "undelegatingTooltip": "Отозванные активы блокируются на 21 день, прежде чем вы сможете их получить."
   },
   "exchange": {
     "title": "Buy and sell crypto",
@@ -987,7 +987,7 @@
     "viewOperation": "Просмотреть в Обозревателе блоков",
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
-    "tokenOperations": "Token operations",
+    "tokenOperations": "Операции с токеном",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "Эта операция связана с следующими операциями токена",
     "subAccountTooltip": "This operation is related to the following subaccount operations",
@@ -1005,9 +1005,9 @@
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
       "redelegatedAmount": "Redelegated amount",
-      "undelegated": "Undelegated",
-      "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
+      "undelegated": "Отозванные",
+      "undelegatedFrom": "Отозваны с",
+      "undelegatedAmount": "Отозванная сумма",
       "rewardFrom": "Reward from",
       "memo": "Memo",
       "assetId": "Asset ID",
@@ -1553,7 +1553,7 @@
       "header": "Delegation(s)",
       "noRewards": "No rewards available",
       "delegate": "Add",
-      "undelegate": "Undelegate",
+      "undelegate": "Отозвать",
       "redelegate": "Redelegate",
       "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
       "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
@@ -2954,7 +2954,7 @@
       "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
+      "title": "Возможно, устройство не подлинное.",
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
@@ -3231,7 +3231,7 @@
       "description": "Обратитесь в Поддержку Ledger"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "Чтобы обновиться, перейдите в Консоль",
       "description": "",
       "list": {
         "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
