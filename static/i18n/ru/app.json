@@ -134,7 +134,7 @@
     "menu": "Меню",
     "stars": "Избранные счета",
     "accounts": "Счета",
-    "manager": "Manager",
+    "manager": "Диспетчер",
     "exchange": "Купить/Продать",
     "swap": "Swap",
     "lend": "Lend"
@@ -262,7 +262,7 @@
       "title": "Swap",
       "provider": "Provider",
       "txid": "Swap ID",
-      "status": "Status",
+      "status": "Статус",
       "statusTooltips": {
         "expired": "Please contact the swap provider with your swap ID for more information.",
         "refunded": "Please contact the swap provider with your swap ID for more information.",
@@ -983,7 +983,7 @@
     "noFees": "No fee",
     "from": "From",
     "to": "To",
-    "identifier": "Transaction ID",
+    "identifier": "ID транзакции",
     "viewOperation": "View in explorer",
     "showMore": "Show {{recipients}} more",
     "showLess": "Show less",
@@ -1158,7 +1158,7 @@
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
       "updateBtn": "Update firmware",
-      "latest": "Firmware version {{version}} is available",
+      "latest": "Доступна новая версия прошивки {{version}}",
       "contactSupport": "Contact support",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
@@ -1168,7 +1168,7 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
+        "updateMCU": "Обновление прошивки",
         "updating": "Firmware update",
         "reset": "Prepare device",
         "osu": "Устанавливаем обновление ОС...",
@@ -1177,9 +1177,9 @@
         "firmware": "Обновляем прошивку...",
         "flash": "Готовим ваше устройстве..."
       },
-      "confirmIdentifier": "Verify the identifier",
+      "confirmIdentifier": "Проверка идентификатора",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
+      "identifier": "Идентификатор",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Отсоедините USB-кабель от устройства",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
@@ -1204,7 +1204,7 @@
         "boot": "Нажмите и удерживайте боковую кнопку, пока не увидите {{option}}",
         "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится панель управления.",
         "third": "3. Удалитьевсе приложения",
-        "openLive": "Open the Manager in Ledger Live.",
+        "openLive": "Откройте Диспетчер в Ledger Live.",
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
       }
@@ -3198,7 +3198,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Необходимо обновить приложение",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Удалите и повторно установите приложение {{managerAppName}} через Диспетчер"
     },
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
