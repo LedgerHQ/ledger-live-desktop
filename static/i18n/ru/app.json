@@ -121,7 +121,7 @@
     }
   },
   "fees": {
-    "custom": "Custom",
+    "custom": "Пользовательская",
     "fast": "Быстро",
     "high": "Высокая",
     "low": "Низкая",
@@ -473,7 +473,7 @@
   "lend": {
     "title": "Кредиты в криптовалюте",
     "tabs": {
-      "dashboard": "Dashboard",
+      "dashboard": "Консоль",
       "opened": "Активные займы",
       "closed": "Закрытые займы",
       "history": "История"
@@ -640,7 +640,7 @@
     },
     "info": {
       "terms": {
-        "title": "Lend Crypto",
+        "title": "Одолжить криптоактивы",
         "subtitle": "Одалживайте активы в протоколе Compound",
         "description": "Протокол Compound позволяет выдавать ссуды и брать кредиты в криптовалютах в сети Ethereum. Вы можете депонировать активы и зарабатывать доход прямо в вашем Ledger.",
         "switchLabel": "<1>Я прочитал(-а) и соглашаюсь с </1><0>Условиями использования</0><1>.</1>"
@@ -770,7 +770,7 @@
       "title": "Modification of experimental settings require a clear cache",
       "cta": "Clear cache"
     },
-    "migrate": "Ledger Live accounts update available",
+    "migrate": "Доступно обновление счетов в Ledger Live",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "valentine": {
       "title": "Valentine’s day",
@@ -886,8 +886,8 @@
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "successTitle": "Accounts updated successfully",
+      "title": "Доступно обновление счетов в Ledger Live",
+      "successTitle": "Счета успешно обновлены",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "Export accounts to mobile",
