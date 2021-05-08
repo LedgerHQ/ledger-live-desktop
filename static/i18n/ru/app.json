@@ -137,7 +137,7 @@
     "manager": "Диспетчер",
     "exchange": "Купить/Продать",
     "swap": "Обмен",
-    "lend": "Кредитование"
+    "lend": "Lend"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -474,17 +474,17 @@
     "title": "Кредиты в криптовалюте",
     "tabs": {
       "dashboard": "Dashboard",
-      "opened": "Opened loans",
-      "closed": "Closed loans",
-      "history": "History"
+      "opened": "Активные займы",
+      "closed": "Закрытые займы",
+      "history": "История"
     },
-    "assets": "Assets to lend",
-    "active": "Approved accounts",
+    "assets": "Активы для кредитования",
+    "active": "Подтверждённые счета",
     "lendAsset": "Lend",
     "account": {
-      "amountSupplied": "Amount deposited",
-      "amountSuppliedTooltip": "Amount lent to the network",
-      "currencyAPY": "Currency APY",
+      "amountSupplied": "Депонированная сумма",
+      "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
+      "currencyAPY": "ГПД валюты",
       "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
       "accruedInterests": "Accrued interest",
       "accruedInterestsTooltip": "Interest generated on your lent assets",
