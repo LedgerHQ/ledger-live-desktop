@@ -144,17 +144,23 @@ const Body = ({
     setTransactionError(null);
   }, []);
 
-  const handleTransactionError = useCallback((error: Error) => {
-    params.onCancel(error);
-    handleCloseModal();
-  }, []);
+  const handleTransactionError = useCallback(
+    (error: Error) => {
+      params.onCancel(error);
+      handleCloseModal();
+    },
+    [handleCloseModal, params],
+  );
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
 
-  const handleTransactionSigned = useCallback((signedTransaction: SignedOperation) => {
-    params.onResult(signedTransaction);
-    handleCloseModal();
-  }, []);
+  const handleTransactionSigned = useCallback(
+    (signedTransaction: SignedOperation) => {
+      params.onResult(signedTransaction);
+      handleCloseModal();
+    },
+    [handleCloseModal, params],
+  );
 
   const errorSteps = [];
 

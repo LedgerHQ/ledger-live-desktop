@@ -135,7 +135,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       });
       return signedTransaction.operation;
     },
-    [accounts],
+    [accounts, pushToast],
   );
 
   const requestAccount = useCallback(
@@ -191,7 +191,14 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
     }),
-    [listAccounts, receiveOnAccount, signTransaction, broadcastTransaction, requestAccount],
+    [
+      listAccounts,
+      receiveOnAccount,
+      signTransaction,
+      broadcastTransaction,
+      requestAccount,
+      listCurrencies,
+    ],
   );
 
   const handleSend = useCallback(

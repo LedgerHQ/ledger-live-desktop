@@ -37,15 +37,10 @@ export const TokenIconWrapper: ThemedComponent<{
   filter: ${p => (p.inactive ? "greyscale(1.0)" : "")};
 `;
 
-const LiveAppIcon = ({ platform, size, inactive, icon, name }: Props) => {
-
+const LiveAppIcon = ({ size, inactive, icon, name }: Props) => {
   return (
     <TokenIconWrapper size={size}>
-      {icon ? (
-        <img src={icon} />
-      ) : (
-        name[0].toUpperCase() || "?"
-      )}
+      {icon ? <img src={icon} /> : name[0].toUpperCase() || "?"}
     </TokenIconWrapper>
   );
 };

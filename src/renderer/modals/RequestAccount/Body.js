@@ -1,15 +1,14 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import type { Account, SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import Select from "../../components/Select";
 import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 
 type OwnProps = {|
@@ -48,10 +47,13 @@ const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
     closeModal("MODAL_REQUEST_ACCOUNT");
   }, [closeModal]);
 
-  const selectAccount = useCallback((account, parentAccount) => {
-    params.onResult(account, parentAccount);
-    closeModal("MODAL_REQUEST_ACCOUNT");
-  }, []);
+  const selectAccount = useCallback(
+    (account, parentAccount) => {
+      params.onResult(account, parentAccount);
+      closeModal("MODAL_REQUEST_ACCOUNT");
+    },
+    [params, closeModal],
+  );
 
   return (
     <>
