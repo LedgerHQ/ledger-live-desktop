@@ -658,7 +658,7 @@
         },
         "3": {
           "subtitle": "Выводите активы в любое время",
-          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
+          "description": "Вы можете вывести активы и заработанный доход в любое время, частично или полностью прямо со счёта Ledger."
         }
       }
     },
@@ -771,7 +771,7 @@
       "cta": "Clear cache"
     },
     "migrate": "Доступно обновление счетов в Ledger Live",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "genericTerminatedCrypto": "{{coinName}} больше не поддерживается",
     "valentine": {
       "title": "Valentine’s day",
       "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
@@ -896,23 +896,23 @@
       "description": "Для активации новых возможностей Ledger Live необходимо обновить счета.",
       "currency": "Необходимо обновить 1 счёт {{currency}}:",
       "currency_plural": "Необходимо обновить {{count}} счета(-ов) {{currency}}:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "footer": "Для обновления вам потребуется устройство Ledger",
+      "pendingDevices": "Невозможно обновить 1 счёт. Пожалуйста, подключите устройство, связанное с нижеприведённым счётом",
+      "pendingDevices_plural": "Невозможно обновить {{totalMigratableAccounts}} счёта(-ов). Пожалуйста, подключите устройство, связанное с нижеприведёнными счетами.",
       "doItLaterBtn": "Не сейчас"
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "Обновление {{currencyName}} завершено",
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
+        "title": "{{currencyName}} обновляется...",
         "description": "Please wait for your accounts to be updated"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "Обновление {{currencyName}} не завершено",
+        "description": "Нет счетов {{currencyName}} для обновления"
       }
     },
     "cta": {
@@ -930,11 +930,11 @@
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "fullNodeConfigure": "Configure node",
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
+    "tokensTip": "{{token}} ({{ticker}}) – это токен {{tokenType}}. Вы можете получать токены непосредственно на счёт {{currency}}.",
+    "accountToImportSubtitle_plural": "Добавить существующий счёт",
+    "selectAll": "Выбрать все ({{count}})",
+    "unselectAll": "Отменить выбор всех ({{count}})",
+    "noAccountToImport": "Нет существующих счетов {{currencyName}} для добавления",
     "success": "Account added successfully",
     "success_plural": "Accounts added successfully",
     "successDescription": "Add other accounts or return to Portfolio",
@@ -973,15 +973,15 @@
   "operationDetails": {
     "whatIsThis": "What is this operation?",
     "title": "Сведения об операции",
-    "account": "Account",
-    "date": "Date",
-    "status": "Status",
-    "confirmed": "Confirmed",
-    "failed": "Failed",
-    "notConfirmed": "Not confirmed",
+    "account": "Счёт",
+    "date": "Дата",
+    "status": "Статус",
+    "confirmed": "Подтверждена",
+    "failed": "Неудачно",
+    "notConfirmed": "Неподтверждённая",
     "fees": "Fee",
-    "noFees": "No fee",
-    "from": "From",
+    "noFees": "Без комиссии",
+    "from": "Откуда",
     "to": "Куда",
     "identifier": "ID транзакции",
     "viewOperation": "Просмотреть в Обозревателе блоков",
@@ -2962,7 +2962,7 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
+      "title": "Извините, не удалось обновить",
       "description": "Пожалуйста, повторите попытку или свяжитесь с поддержкой Ledger"
     },
     "DeviceHalted": {
