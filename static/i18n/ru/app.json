@@ -175,7 +175,7 @@
     },
     "missingApp": {
       "title": "Please install the Exchange app on your device",
-      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
       "cta": "Перейти в Диспетчер"
     },
     "outdatedApp": {
@@ -236,7 +236,7 @@
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider",
+            "provider": "Поставщик",
             "tradeMethod": {
               "title": "Type",
               "float": "Floating rate",
@@ -246,14 +246,14 @@
           }
         },
         "device": {
-          "title": "Device"
+          "title": "Устройство"
         },
         "finished": {
           "title": "В ожидании",
-          "subtitle": "Pending operation",
-          "swap": "Your Swap ID:",
+          "subtitle": "Операция в ожидании",
+          "swap": "ID обмена:",
           "seeDetails": "Подробности",
-          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
+          "disclaimer": "Пожалуйста, сохраните ID вашего обмена на случай, если потребуется помощь с <0>{{provider}}</0>.",
           "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
         }
       }
@@ -338,11 +338,11 @@
           }
         },
         "device": {
-          "title": "Device",
+          "title": "Устройство",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "header": "Получение счетов с устройства",
+              "description": "Пожалуйста, подождите, пока счета будут добавлены в конфигурационный файл ноды."
             },
             "success": {
               "header": "Accounts added to node configuration",
@@ -426,19 +426,19 @@
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
-        "title": "Account name",
+        "title": "Название счёта",
         "desc": "Description of the account"
       },
       "unit": {
-        "title": "Unit",
+        "title": "Единица учёта",
         "desc": "Choose the unit to be used"
       }
     },
     "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
+    "frozenAssets": "Замороженные активы",
+    "bandwidth": "Пропускная способность",
     "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
+    "delegatedAssets": "Делегированные активы",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
@@ -1182,7 +1182,7 @@
       "identifier": "Идентификатор",
       "mcuTitle": "Завершение обновления",
       "mcuFirst": "Отсоедините USB-кабель от устройства",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuSecond": "Нажмите и удерживайте левую кнопку во время повторного подключения USB-кабеля до тех пор пока на экране не появится <0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Нажмите и удерживайте боковую кнопку в течение 10 секунд, чтобы отключить устройство. Затем отпустите кнопку.",
@@ -3031,7 +3031,7 @@
     },
     "ManagerAppDepUninstallRequired": {
       "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "description": "Сначала придётся удалить все приложения, необходимые для работы {{appName}}"
     },
     "ManagerDeviceLocked": {
       "title": "Your device is locked",
@@ -3042,7 +3042,7 @@
       "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
+      "title": "Недостаточно свободного места",
       "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
     },
     "ManagerQuitPage": {
@@ -3064,8 +3064,8 @@
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "Это приложение является обязательным",
+      "description": "Удаляйте приложения Bitcoin или Ethereum в последнюю очередь"
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
