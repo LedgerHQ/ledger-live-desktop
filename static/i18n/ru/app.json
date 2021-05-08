@@ -126,7 +126,7 @@
     "high": "Высокая",
     "low": "Низкая",
     "slow": "Медленно",
-    "standard": "Standard",
+    "standard": "Обычная",
     "medium": "Medium",
     "feesAmount": "Fees Amount"
   },
@@ -136,8 +136,8 @@
     "accounts": "Счета",
     "manager": "Диспетчер",
     "exchange": "Купить/Продать",
-    "swap": "Swap",
-    "lend": "Lend"
+    "swap": "Обмен",
+    "lend": "Кредитование"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -155,11 +155,11 @@
     "disconnectButton": "Disconnect"
   },
   "swap": {
-    "title": "Swap",
+    "title": "Обмен",
     "titleCrypto": "Обменять {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "whatIsSwap": "Что такое Swap (обмен криптоактивов)",
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "Обменять",
       "history": "История"
     },
     "history": {
@@ -174,34 +174,34 @@
       "sorry": "Услуга временно недоступна или недоступна в Вашей стране"
     },
     "missingApp": {
-      "title": "Please install the Exchange app on your device",
+      "title": "Пожалуйста, установите приложение Exchange на устройство",
       "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
       "cta": "Перейти в Диспетчер"
     },
     "outdatedApp": {
-      "title": "Please update the Exchange app on your device",
+      "title": "Пожалуйста, обновите приложение Exchange на устройстве",
       "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
       "cta": "Перейти в Диспетчер"
     },
     "kyc": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "Добро пожаловать в Обмен криптоактивов",
+      "subtitle": "Обменивайте криптоактивы непосредственно с вашего Ledger. Эта услуга недоступна в США и некоторых других странах.",
+      "disclaimer": "Продолжая, вы соглашаетесь с тем, что данные о вашем местоположении могут передаваться третьим лицам (поставщикам услуг) в соответствии с их требованиями по AML/KYC."
     },
     "form": {
       "amount": "Amount",
       "from": {
-        "title": "From",
-        "account": "Account",
-        "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "title": "От",
+        "account": "Счёт",
+        "amount": "Сумма к отправке",
+        "currency": "Криптоактив"
       },
       "to": {
-        "title": "To",
-        "account": "Account",
-        "amount": "Amount to receive",
-        "currency": "Crypto asset",
-        "addAccountCTA": "Add new account"
+        "title": "Куда",
+        "account": "Счёт",
+        "amount": "Сумма к получению",
+        "currency": "Криптоактив",
+        "addAccountCTA": "Добавить новый счёт"
       },
       "tradeMethod": {
         "title": "Rate",
@@ -213,7 +213,7 @@
         "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
         "by": "Provided by"
       },
-      "exchange": "Exchange",
+      "exchange": "Обменять",
       "helpCTA": "What is Swap?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
@@ -345,17 +345,17 @@
               "description": "Пожалуйста, подождите, пока счета будут добавлены в конфигурационный файл ноды."
             },
             "success": {
-              "header": "Accounts added to node configuration",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
+              "header": "Счета, добавленные в конфигурацию ноды",
+              "description": "Конфигурационный файл сохранён в пользовательскую папку. Это позволит Ledger SatStack подключаться к вашей полной боде и сканировать ваши счета в блокчейне.",
               "cta": "Просмотреть пользовательские данные"
             }
           }
         },
         "accounts": {
           "title": "Счета",
-          "existing": "Existing accounts to scan",
-          "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
+          "existing": "Счета, доступные для сканирования",
+          "toScan": "Счета для сканирования",
+          "toScanDescription": "Счета для сканирования по каждому типу адреса",
           "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
         },
         "satstack": {
