@@ -296,44 +296,44 @@
           "list": {
             "item1": "Настройте Bitcoin Core на устройстве с достаточными аппаратным оснащением.",
             "item2": "Дождитесь полной синхронизации вашей ноды.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item3": "Запишите ваши учётные данные RPC, IP-адрес и номер порта."
           },
           "disclaimer": "Для запуска полной ноды требуется компьютер с достаточным аппаратным оснащением и быстрым интернетом без ограничений на передачу данных."
         },
         "node": {
-          "title": "Node",
+          "title": "Нода (узел)",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "header": "Введите параметры вашей ноды",
+              "disclaimer": "Ваша полная нода должна быть полностью синхронизирована до подключения к Ledger Live.",
               "fields": {
                 "nodeHost": {
-                  "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                  "title": "Хост",
+                  "tooltip": "Оставьте по умолчанию, если нода работает на этом компьютере, либо укажите иные IP-адрес и номер порта."
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
+                  "title": "Учётные данные RPC",
+                  "tooltip": "Введите имя пользователя и пароль от RPC вашей ноды. Они находятся в файле bitcoin.conf.",
                   "usernamePlaceholder": "Имя пользователя",
                   "passwordPlaceholder": "Пароль"
                 },
                 "tls": {
                   "title": "Использовать TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "tooltip": "Протокол защиты транспортного уровня (TLS). Его можно использовать, например, если для ноды вы используете внешний хостинг."
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
-              "description": "Please wait while we check if your full node is responding."
+              "header": "Проверка подключения ноды",
+              "description": "Пожалуйста, подождите. Мы проверим, доступна ли ваша полная нода."
             },
             "success": {
-              "header": "Full node connection successful",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "header": "Полная нода успешно подключена",
+              "description": "Теперь вы можете настроить полную ноду для сканирования ваших счетов в блокчейне."
             },
             "failure": {
-              "header": "Could not reach full node",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "header": "Не удалось подключиться к полной ноде",
+              "description": "Пожалуйста, убедитесь, что ваша нода полностью синхронизировалась, и проверьте её настройки соединения."
             }
           }
         },
@@ -410,7 +410,7 @@
   },
   "account": {
     "lastOperations": "Latest operations",
-    "contractAddress": "Contract:",
+    "contractAddress": "Контракт:",
     "openInExplorer": "Посмотреть в обозревателе блоков",
     "emptyState": {
       "title": "Ещё нет криптоактивов?",
@@ -2232,7 +2232,7 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Скрывать счета с нулевым балансом",
+        "title": "Скрывать пустые счета",
         "desc": "Hide token accounts with zero balance on the Accounts page."
       },
       "tokenBlacklist": {
