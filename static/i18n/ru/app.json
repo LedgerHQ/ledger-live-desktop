@@ -191,7 +191,7 @@
     "form": {
       "amount": "Amount",
       "from": {
-        "title": "От",
+        "title": "Откуда",
         "account": "Счёт",
         "amount": "Сумма к отправке",
         "currency": "Криптоактив"
@@ -214,26 +214,26 @@
         "by": "Provided by"
       },
       "exchange": "Обменять",
-      "helpCTA": "What is Swap?",
-      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
-      "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available.",
+      "helpCTA": "Что такое Swap (обмен криптоактивов)?",
+      "bubble": "Мы используем фиксированный курс. Это точная сумма, которую вы получите.",
+      "noAccounts": "У вас нет счетов {{currencyName}} с доступным балансом",
+      "noApp": "Приложение {{currencyName}} не установлено.",
+      "outdatedApp": "Доступно обновление приложения {{currencyName}}.",
       "loadingRates": "Loading rates..."
     },
     "modal": {
-      "title": "Swap",
+      "title": "Обмен",
       "steps": {
         "summary": {
-          "title": "Summary",
-          "from": "From",
-          "to": "To",
-          "toExchange": "Amount to send",
-          "toReceive": "Amount to receive",
-          "terms": "Terms & Conditions",
+          "title": "Сводка",
+          "from": "Откуда",
+          "to": "Куда",
+          "toExchange": "Сумма к отправке",
+          "toReceive": "Сумма к получению",
+          "terms": "Условия использования",
           "disclaimer": {
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "Нажимая кнопку «Подтвердить», я признаю и соглашаюсь с тем, что эту услугу предоставляет исключительно <0>{{provider}}</0>",
+            "acceptedDescription": "Эта услуга предоставляется исключительно <0>{{provider}}</0>"
           },
           "details": {
             "provider": "Поставщик",
@@ -254,14 +254,14 @@
           "swap": "ID обмена:",
           "seeDetails": "Подробности",
           "disclaimer": "Пожалуйста, сохраните ID вашего обмена на случай, если потребуется помощь с <0>{{provider}}</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
+          "description": "Ваша транзакция для обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите конвертированные активы."
         }
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
-      "provider": "Provider",
-      "txid": "Swap ID",
+      "title": "Обмен",
+      "provider": "Поставщик",
+      "txid": "ID обмена",
       "status": "Статус",
       "statusTooltips": {
         "expired": "Please contact the swap provider with your swap ID for more information.",
@@ -270,7 +270,7 @@
         "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
         "finished": "Your swap was completed successfully."
       },
-      "date": "Date",
+      "date": "Дата",
       "from": "From",
       "fromAddress": "Origin address",
       "fromAddress_plural": "Origin addresses",
@@ -455,23 +455,23 @@
       "title": "Buy crypto via our partner",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "selectAccount": "Выберите счёт",
+      "continue": "Продолжить",
+      "addAccount": "Добавить счёт"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
-      "tab": "Sell",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "title": "Продавайте криптовалюту через нашего партнёра",
+      "tab": "Продажа",
+      "selectCrypto": "Выберите криптоактив",
+      "selectAccount": "Выберите счёт",
+      "continue": "Продолжить"
     },
     "history": {
-      "tab": "History"
+      "tab": "История"
     }
   },
   "lend": {
-    "title": "Lend crypto",
+    "title": "Кредиты в криптовалюте",
     "tabs": {
       "dashboard": "Dashboard",
       "opened": "Opened loans",
