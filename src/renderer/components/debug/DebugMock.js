@@ -473,7 +473,7 @@ function DebugMockEntryPoint() {
 
   useEffect(() => {
     if (getEnv("MOCK")) {
-      Object.assign(window.mock, { mockNewAnnouncement, mockNewStatusIncident });
+      Object.assign(window.mock.events, { mockNewAnnouncement, mockNewStatusIncident });
     }
   }, [mockNewAnnouncement, mockNewStatusIncident]);
 
