@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Text from "~/renderer/components/Text";
@@ -57,7 +57,7 @@ export default function Row({
 
   const parentAccount =
     account.type !== "Account" ? accounts.find(a => a.id === account.parentId) : null;
-  const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
+  const color = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const displayName = getAccountName(account);
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <ParentCryptoCurrencyIcon currency={currency} size={16} />;
