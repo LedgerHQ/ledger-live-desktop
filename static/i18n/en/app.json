@@ -174,13 +174,13 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the Exchange app on your device",
-      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "outdatedApp": {
-      "title": "Please update the Exchange app on your device",
-      "subtitle": "Go to manager and update Exchange app to swap assets.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "kyc": {
@@ -247,6 +247,9 @@
         },
         "device": {
           "title": "Device"
+        },
+        "dependencies": {
+          "title": "App checks"
         },
         "finished": {
           "title": "Pending",
@@ -1032,7 +1035,10 @@
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
