@@ -1,4 +1,4 @@
-if (process.env.SPECTRON_RUN) {
+if (process.env.SPECTRON_RUN && !process.env.SPECTRON_DISABLE_MOCK_TIME) {
   const timemachine = require("timemachine");
   timemachine.config({
     dateString: require("../tests/time").default,

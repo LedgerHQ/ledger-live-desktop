@@ -8,9 +8,13 @@ import initialize, {
 import addAccount from "../flows/accounts/addAccount";
 
 describe("Notification center", () => {
-  initialize("notification-center", {
-    userData: "onboardingcompleted",
-  });
+  initialize(
+    "notification-center",
+    {
+      userData: "onboardingcompleted",
+    },
+    { SPECTRON_DISABLE_MOCK_TIME: true },
+  );
 
   describe("When LL empty state", () => {
     afterAll(async () => {
