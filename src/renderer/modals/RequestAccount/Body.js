@@ -10,6 +10,7 @@ import type { Account, SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
+import { ModalBody } from "~/renderer/components/Modal";
 
 type OwnProps = {|
   onClose: () => void,
@@ -43,10 +44,6 @@ const mapDispatchToProps = {
 };
 
 const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
-  const handleCloseModal = useCallback(() => {
-    closeModal("MODAL_REQUEST_ACCOUNT");
-  }, [closeModal]);
-
   const selectAccount = useCallback(
     (account, parentAccount) => {
       params.onResult(account, parentAccount);
@@ -56,9 +53,18 @@ const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
   );
 
   return (
-    <>
-      <SelectAccountAndCurrency selectAccount={selectAccount} />
-    </>
+    <ModalBody
+      onClose={onClose}
+      title={t("platform.flows.requestAccount.title")}
+      noScroll={true}
+      render={() => (
+        <SelectAccountAndCurrency
+          selectAccount={selectAccount}
+          allowedCurrencies={params.currencies}
+          allowAddAccount={params.allowAddAccount}
+        />
+      )}
+    />
   );
 };
 

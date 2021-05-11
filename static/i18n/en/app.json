@@ -5,6 +5,13 @@
     "yesterday": "Yesterday",
     "transactionDate": "Transaction date"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      }
+    }
+  },
   "common": {
     "never": "Never",
     "apply": "Apply",

@@ -32,7 +32,7 @@ import {
 import TopBar from "./TopBar";
 import type { Manifest } from "./type";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies/index";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -74,7 +74,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const targetRef: { current: null | HTMLIFrameElement } = useRef(null);
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
-  const currencies = useMemo(() => listCryptoCurrencies(), []);
+  const currencies = useMemo(() => listSupportedCurrencies(), []);
   const { pushToast } = useToasts();
 
   const [loadDate, setLoadDate] = useState(Date.now());
@@ -145,7 +145,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           openModal("MODAL_REQUEST_ACCOUNT", {
             currencies,
             allowAddAccount,
-            onResult: resolve,
+            onResult: account => resolve(serializePlatformAccount(accountToPlatformAccount(account))),
             onCancel: reject,
           }),
         ),
@@ -162,15 +162,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
-            transactionData: {
-              amount: platformTransaction.amount,
-              data: platformTransaction.data,
-              userGasLimit: platformTransaction.gasLimit,
-              gasLimit: platformTransaction.gasLimit,
-              gasPrice: platformTransaction.gasPrice,
-              family: platformTransaction.family,
-              recipient: platformTransaction.recipient,
-            },
+            transactionData: platformTransaction,
             account,
             parentAccount: null,
             onResult: resolve,
