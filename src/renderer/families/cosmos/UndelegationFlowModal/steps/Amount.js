@@ -11,7 +11,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { ValidatorField, AmountField } from "../fields";
 import Text from "~/renderer/components/Text";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
@@ -83,13 +83,11 @@ export default function StepAmount({
         onChange={onChangeAmount}
         label={<Trans i18nKey="cosmos.undelegation.flow.steps.amount.fields.amount" />}
       />
-      <Box mt={2}>
-        <InfoBox>
-          <Trans i18nKey="cosmos.undelegation.flow.steps.amount.warning">
-            <b></b>
-          </Trans>
-        </InfoBox>
-      </Box>
+      <Alert info="primary" mt={2}>
+        <Trans i18nKey="cosmos.undelegation.flow.steps.amount.warning">
+          <b></b>
+        </Trans>
+      </Alert>
     </Box>
   );
 }

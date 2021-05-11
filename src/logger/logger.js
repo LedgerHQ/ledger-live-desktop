@@ -1,5 +1,4 @@
 // @flow
-
 import winston from "winston";
 import Transport from "winston-transport";
 import anonymizer from "./anonymizer";
@@ -23,7 +22,7 @@ const logger = winston.createLogger({
   transports,
 });
 
-const add = (transport: *) => {
+export const add = (transport: *) => {
   logger.add(transport);
 };
 

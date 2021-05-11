@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
@@ -14,11 +14,10 @@ import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import type { StepProps } from "../types";
 
 import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -40,9 +39,6 @@ function StepConfirmation({
   signed,
 }: StepProps & { theme: * }) {
   const currency = account ? getAccountCurrency(account) : {};
-  const onLearnMore = useCallback(() => {
-    openURL(urls.approvedOperation);
-  }, []);
 
   if (optimisticOperation) {
     return (
@@ -57,11 +53,9 @@ function StepConfirmation({
           title={t("lend.supply.steps.confirmation.success.title")}
           description={multiline(t("lend.supply.steps.confirmation.success.text"))}
         />
-        <Box mt={5}>
-          <InfoBox onLearnMore={onLearnMore}>
-            <Trans i18nKey="lend.supply.steps.confirmation.success.info" />
-          </InfoBox>
-        </Box>
+        <Alert type="primary" learnMoreUrl={urls.approvedOperation} mt={5}>
+          <Trans i18nKey="lend.supply.steps.confirmation.success.info" />
+        </Alert>
       </Container>
     );
   }

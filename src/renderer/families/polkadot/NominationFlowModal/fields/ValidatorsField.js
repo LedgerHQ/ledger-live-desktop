@@ -33,23 +33,10 @@ import ValidatorSearchInput, {
 import Ellipsis from "~/renderer/components/Ellipsis";
 import TranslatedError from "~/renderer/components/TranslatedError";
 import Label from "~/renderer/components/Label";
+import Alert from "~/renderer/components/Alert";
 
 // Specific Validator Row
 import ValidatorRow from "./ValidatorRow";
-
-const NominationsWarning: ThemedComponent<{}> = styled(Box).attrs(p => ({
-  horizontal: true,
-  alignItems: "center",
-  py: "8px",
-  px: 3,
-  bg: p.theme.colors.warning,
-  color: "palette.primary.contrastText",
-  fontSize: 4,
-  ff: "Inter|SemiBold",
-}))`
-  margin: 0 12px 20px;
-  border-radius: ${radii[1]}px;
-`;
 
 const DrawerWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
   horizontal: true,
@@ -208,12 +195,12 @@ const ValidatorField = ({
   return (
     <>
       {nonValidators.length ? (
-        <NominationsWarning>
+        <Alert type="warning" mx="12px" mb="20px">
           <Trans
             i18nKey="polkadot.nominate.steps.validators.notValidatorsRemoved"
             values={{ count: nonValidators.length }}
           />
-        </NominationsWarning>
+        </Alert>
       ) : null}
       <ValidatorSearchInput id="nominate-search-bar" search={search} onSearch={onSearch} />
       <ValidatorListHeader

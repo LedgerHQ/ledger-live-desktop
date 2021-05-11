@@ -40,6 +40,7 @@ const Tooltip = ({ tooltip, renderTooltip, color, data }: TooltipProps) => {
     reset: !wasVisible.current,
   });
   wasVisible.current = !!tooltip.opacity;
+  const tooltipData = data?.[tooltip.dataPoints?.[0]?.index];
 
   return (
     <>
@@ -77,9 +78,11 @@ const Tooltip = ({ tooltip, renderTooltip, color, data }: TooltipProps) => {
           left: 0,
         }}
       >
-        <TooltipContainer opacity={tooltip.opacity} theme={theme}>
-          {tooltip.dataPoints ? renderTooltip(data[tooltip.dataPoints[0].index]) : null}
-        </TooltipContainer>
+        {tooltipData && (
+          <TooltipContainer opacity={tooltip.opacity} theme={theme}>
+            {renderTooltip(tooltipData)}
+          </TooltipContainer>
+        )}
       </animated.div>
     </>
   );

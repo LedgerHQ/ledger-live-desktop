@@ -11,10 +11,10 @@ import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import Alert from "~/renderer/components/Alert";
+
 import AmountField from "../fields/AmountField";
 import ResourceField from "../fields/ResourceField";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import Text from "~/renderer/components/Text";
 
 export default function StepAmount({
   account,
@@ -51,23 +51,9 @@ export default function StepAmount({
         status={status}
         t={t}
       />
-      <Box
-        flex="1"
-        my={4}
-        borderRadius={4}
-        horizontal
-        alignItems="center"
-        p={2}
-        bg="palette.divider"
-        color="palette.text.shade100"
-      >
-        <Box mr={2}>
-          <InfoCircle size={12} />
-        </Box>
-        <Text ff="Inter|SemiBold" textAlign="center" fontSize={3}>
-          <Trans i18nKey="freeze.steps.amount.info" />
-        </Text>
-      </Box>
+      <Alert type="primary" my={4}>
+        <Trans i18nKey="freeze.steps.amount.info" />
+      </Alert>
     </Box>
   );
 }

@@ -22,6 +22,7 @@ export default function StepAmount({
   account,
   parentAccount,
   onChangeTransaction,
+  onUpdateTransaction,
   transaction,
   status,
   bridgeError,
@@ -65,14 +66,14 @@ export default function StepAmount({
           {parentAccount && transaction ? (
             <Box my={4}>
               <GasPriceField
-                onChange={onChangeTransaction}
+                updateTransaction={onUpdateTransaction}
                 account={parentAccount}
                 transaction={transaction}
                 status={status}
               />
               <Box mt={3}>
                 <GasLimitField
-                  onChange={onChangeTransaction}
+                  updateTransaction={onUpdateTransaction}
                   account={parentAccount}
                   transaction={transaction}
                   status={status}

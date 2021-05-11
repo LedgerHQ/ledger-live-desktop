@@ -25,7 +25,7 @@ import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/render
 import type { StepProps } from "../Body";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Modal from "~/renderer/components/Modal";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -139,6 +139,9 @@ const StepReceiveFunds = ({
   const address = mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
 
+  const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
+  const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
+
   const confirmAddress = useCallback(async () => {
     try {
       if (getEnv("MOCK")) {
@@ -157,12 +160,14 @@ const StepReceiveFunds = ({
           })
           .toPromise();
         onChangeAddressVerified(true);
+        hideQRCodeModal();
         transitionTo("receive");
       }
     } catch (err) {
       onChangeAddressVerified(false, err);
+      hideQRCodeModal();
     }
-  }, [device, mainAccount, transitionTo, onChangeAddressVerified]);
+  }, [device, mainAccount, transitionTo, onChangeAddressVerified, hideQRCodeModal]);
 
   const onVerify = useCallback(() => {
     // if device has changed since the beginning, we need to re-entry device
@@ -172,9 +177,6 @@ const StepReceiveFunds = ({
     onChangeAddressVerified(null);
     onResetSkip();
   }, [device, onChangeAddressVerified, onResetSkip, transitionTo, isAddressVerified]);
-
-  const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
-  const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
 
   // when address need verification we trigger it on device
   useEffect(() => {
@@ -222,14 +224,9 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
-            <Box mt={4} />
-            <InfoBox
-              onLearnMore={() => openURL(urls.recipientAddressInfo)}
-              onLearnMoreLabel={<Trans i18nKey="common.learnMore" />}
-              type="security"
-            >
+            <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
               <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-            </InfoBox>
+            </Alert>
             <Separator2 />
             <Receive2NoDevice
               onVerify={onVerify}
