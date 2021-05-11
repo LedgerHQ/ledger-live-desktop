@@ -4,14 +4,15 @@ import React, { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
-import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
 
+import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 
@@ -22,11 +23,16 @@ import {
   currencyToPlatformCurrency,
 } from "@ledgerhq/live-common/lib/platform/converters";
 
-import type { RawPlatformTransaction } from "@ledgerhq/live-common/lib/platform/rawTypes";
+import type {
+  RawPlatformTransaction,
+  RawPlatformSignedTransaction,
+} from "@ledgerhq/live-common/lib/platform/rawTypes";
 
 import {
   serializePlatformAccount,
   deserializePlatformTransaction,
+  serializePlatformSignedTransaction,
+  deserializePlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
 import TopBar from "./TopBar";
@@ -113,29 +119,47 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       signedTransaction,
     }: {
       accountId: string,
-      signedTransaction: SignedOperation,
+      signedTransaction: RawPlatformSignedTransaction,
     }) => {
       const account = accounts.find(account => account.id === accountId);
+      if (!account) return null;
 
+      const signedOperation = deserializePlatformSignedTransaction(signedTransaction, accountId);
       const bridge = getAccountBridge(account);
 
-      if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
-        await bridge.broadcast({
-          account,
-          signedTransaction,
-        });
-      }
+      const optimisticOperation = !getEnv("DISABLE_TRANSACTION_BROADCAST")
+        ? await bridge.broadcast({
+            account,
+            signedOperation,
+          })
+        : signedOperation.operation;
+
+      dispatch(
+        updateAccountWithUpdater(account.id, account =>
+          addPendingOperation(account, optimisticOperation),
+        ),
+      );
+
       pushToast({
-        id: signedTransaction.operation.id,
+        id: optimisticOperation.id,
         type: "operation",
         title: "Transaction sent !",
         text: "Click here for more information",
         icon: "info",
-        callback: () => {},
+        callback: () => {
+          dispatch(
+            openModal("MODAL_OPERATION_DETAILS", {
+              operationId: optimisticOperation.id,
+              accountId: account.id,
+              parentId: null,
+            }),
+          );
+        },
       });
-      return signedTransaction.operation;
+
+      return optimisticOperation.hash;
     },
-    [accounts, pushToast],
+    [accounts, pushToast, dispatch],
   );
 
   const requestAccount = useCallback(
@@ -159,13 +183,20 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       const platformTransaction = deserializePlatformTransaction(transaction);
       const account = accounts.find(account => account.id === accountId);
 
+      if (!account) return null;
+
+      if (account.currency.family !== platformTransaction.family) {
+        throw new Error("Transaction family not matching account currency family");
+      }
+
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
             transactionData: platformTransaction,
             account,
             parentAccount: null,
-            onResult: resolve,
+            onResult: signedOperation =>
+              resolve(serializePlatformSignedTransaction(signedOperation)),
             onCancel: reject,
           }),
         ),
