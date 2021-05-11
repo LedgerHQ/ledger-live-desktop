@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React from "react";
 import { Trans, useTranslation } from "react-i18next";
 import {
   RPCHostRequired,
@@ -9,12 +9,11 @@ import {
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import InputPassword from "~/renderer/components/InputPassword";
 import Input from "~/renderer/components/Input";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
-import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import useEnv from "~/renderer/hooks/useEnv";
 
@@ -66,10 +65,6 @@ const Form = ({
   const hostError = maybeError(errors, "host", satStackAlreadyConfigured, RPCHostRequired);
   const usernameError = maybeError(errors, "username", satStackAlreadyConfigured, RPCUserRequired);
   const passwordError = maybeError(errors, "password", satStackAlreadyConfigured, RPCPassRequired);
-
-  const onLearnMore = useCallback(() => {
-    openURL(urls.satstacks.learnMore);
-  }, []);
 
   return (
     <Box>
@@ -153,11 +148,9 @@ const Form = ({
           </Box>
         </Box>
       </FormWrapper>
-      <InfoBox type="secondary" onLearnMore={onLearnMore}>
-        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-          <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.disclaimer" />
-        </Text>
-      </InfoBox>
+      <Alert type="secondary" learnMoreUrl={urls.satstacks.learnMore}>
+        <Trans i18nKey="fullNode.modal.steps.node.connectionSteps.notConnected.disclaimer" />
+      </Alert>
     </Box>
   );
 };

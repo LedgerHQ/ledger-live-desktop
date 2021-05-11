@@ -26,6 +26,7 @@ import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
+import Alert from "~/renderer/components/Alert";
 
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import ToolTip from "~/renderer/components/Tooltip";
@@ -57,16 +58,6 @@ const Wrapper = styled(Box).attrs(() => ({
   border-radius: 4px;
   justify-content: space-between;
   align-items: center;
-`;
-
-const WarningBox = styled(Box).attrs(() => ({
-  horizontal: true,
-  justifyContent: "space-between",
-  textAlign: "center",
-  alignItems: "center",
-  fontSize: 14,
-}))`
-  padding: 16px 20px;
 `;
 
 const Nomination = ({ account }: Props) => {
@@ -237,7 +228,6 @@ const Nomination = ({ account }: Props) => {
         <ExternalControllerUnsupportedWarning
           address={polkadotResources?.controller}
           onExternalLink={onExternalLink}
-          onLearnMore={onLearnMore}
         />
       </TableContainer>
     );
@@ -253,7 +243,6 @@ const Nomination = ({ account }: Props) => {
         <ExternalStashUnsupportedWarning
           address={polkadotResources?.stash}
           onExternalLink={onExternalLink}
-          onLearnMore={onLearnMore}
         />
       </TableContainer>
     );
@@ -302,13 +291,14 @@ const Nomination = ({ account }: Props) => {
           >
             <Header />
             {!mappedNominations.uncollapsed.length && (
-              <WarningBox>
+              <Alert
+                type="warning"
+                learnMoreUrl={urls.stakingPolkadot}
+                learnMoreLabel={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+                learnMoreOnRight
+              >
                 <Trans i18nKey="polkadot.nomination.noActiveNominations" />
-                <LinkWithExternalIcon
-                  label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-                  onClick={onLearnMore}
-                />
-              </WarningBox>
+              </Alert>
             )}
           </CollapsibleList>
         ) : (

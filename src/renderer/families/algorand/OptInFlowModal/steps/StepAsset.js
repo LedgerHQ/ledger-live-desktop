@@ -13,7 +13,7 @@ import Button from "~/renderer/components/Button";
 
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 
 import AsaSelector from "../fields/AsaSelector";
 
@@ -44,9 +44,9 @@ export default function StepAsset({
       {warning && !error ? <ErrorBanner error={warning} warning /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <AsaSelector transaction={transaction} account={account} t={t} onChange={onUpdateAsset} />
-      <InfoBox>
+      <Alert type="primary">
         <Trans i18nKey="algorand.optIn.flow.steps.assets.info" />
-      </InfoBox>
+      </Alert>
     </Box>
   );
 }

@@ -14,7 +14,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import ClaimRewardsIllu from "~/renderer/images/rewards.svg";
 import Image from "~/renderer/components/Image";
@@ -65,9 +65,9 @@ export default function StepInfo({
         </Text>
       </Box>
 
-      <InfoBox>
+      <Alert type="primary">
         <Trans i18nKey="algorand.claimRewards.flow.steps.info.info" />
-      </InfoBox>
+      </Alert>
     </Box>
   );
 }

@@ -13,7 +13,7 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import InfoCircle from "~/renderer/icons/InfoCircle";
+import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CheckBox from "~/renderer/components/CheckBox";
@@ -182,25 +182,12 @@ export default function StepAmount({
         </SelectResource>
       </Box>
       {resource && (
-        <Box
-          flex="1"
-          my={4}
-          borderRadius={4}
-          horizontal
-          alignItems="center"
-          p={2}
-          bg="palette.divider"
-        >
-          <Box mr={2}>
-            <InfoCircle size={12} />
-          </Box>
-          <Text ff="Inter|SemiBold" textAlign="center" fontSize={3}>
-            <Trans
-              i18nKey="unfreeze.steps.amount.info"
-              values={{ resource: resource.toLowerCase() }}
-            />
-          </Text>
-        </Box>
+        <Alert type="primary" my={4}>
+          <Trans
+            i18nKey="unfreeze.steps.amount.info"
+            values={{ resource: resource.toLowerCase() }}
+          />
+        </Alert>
       )}
     </Box>
   );

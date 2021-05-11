@@ -1,17 +1,16 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 
 import type { StepProps } from "../types";
 
 import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
@@ -32,8 +31,6 @@ export default function StepInfo({
     "account and transaction required",
   );
 
-  const onLearnMore = useCallback(() => openURL(urls.stakingPolkadot), []);
-
   return (
     <Box flow={1}>
       <TrackPage category="SimpleOperationFlow Flow" name="Step 1" />
@@ -50,9 +47,9 @@ export default function StepInfo({
       </Box>
 
       {mode !== "withdrawUnbonded" ? (
-        <InfoBox onLearnMore={onLearnMore}>
+        <Alert type="primary" learnMoreUrl={urls.stakingPolkadot}>
           <Trans i18nKey={`polkadot.simpleOperation.modes.${mode}.info`} />
-        </InfoBox>
+        </Alert>
       ) : null}
     </Box>
   );

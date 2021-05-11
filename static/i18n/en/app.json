@@ -116,7 +116,8 @@
       "day": "1D",
       "week": "1W",
       "month": "1M",
-      "year": "1Y"
+      "year": "1Y",
+      "all": "ALL"
     }
   },
   "fees": {
@@ -125,7 +126,9 @@
     "high": "High",
     "low": "Low",
     "slow": "Slow",
-    "standard": "Standard"
+    "standard": "Standard",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menu",
@@ -707,9 +710,11 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
+      "day": "Day",
       "week": "Week",
       "month": "Month",
-      "year": "Year"
+      "year": "Year",
+      "all": "All"
     },
     "optionsMenu": {
       "title": "Options",
@@ -1363,7 +1368,10 @@
       },
       "amount": {
         "title": "Amount",
-        "banner": "Maximum spendable amount is"
+        "banner": "Maximum spendable amount is",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Summary"

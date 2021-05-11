@@ -14,10 +14,10 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import Alert from "~/renderer/components/Alert";
 import { localeSelector } from "~/renderer/reducers/settings";
 
 import { BigNumber } from "bignumber.js";
-import InfoCircle from "~/renderer/icons/InfoCircle";
 import ClaimRewardsIllu from "~/renderer/images/claim-rewards.svg";
 import Image from "~/renderer/components/Image";
 
@@ -59,14 +59,9 @@ export default function StepRewards({ account, parentAccount, reward }: StepProp
           </Trans>
         </Text>
       </Box>
-      <Box borderRadius={4} horizontal alignItems="center" mx={4} p={2} bg="palette.divider">
-        <Box mr={2}>
-          <InfoCircle size={12} />
-        </Box>
-        <Text ff="Inter|SemiBold" fontSize={3} style={{ flex: 1 }}>
-          <Trans i18nKey="claimReward.steps.rewards.info" />
-        </Text>
-      </Box>
+      <Alert type="primary" mx={4}>
+        <Trans i18nKey="claimReward.steps.rewards.info" />
+      </Alert>
     </Box>
   );
 }

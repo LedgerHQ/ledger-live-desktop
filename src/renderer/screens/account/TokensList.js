@@ -1,20 +1,15 @@
 // @flow
-
-import React, { memo, useCallback, useState } from "react";
-import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
+import React, { useCallback, useState, memo } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import styled from "styled-components";
-import { Trans, withTranslation } from "react-i18next";
-import { withRouter } from "react-router-dom";
-import type { RouterHistory } from "react-router-dom";
-import { connect } from "react-redux";
-import { compose } from "redux";
+import { useHistory } from "react-router-dom";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import type { TFunction } from "react-i18next";
 import IconPlus from "~/renderer/icons/Plus";
 import TokenRow from "~/renderer/components/TokenRow";
 import Button from "~/renderer/components/Button";
@@ -24,106 +19,36 @@ import { openURL } from "~/renderer/linking";
 import { track } from "~/renderer/analytics/segment";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
 import perFamilyTokenList from "~/renderer/generated/TokenList";
-import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { useTimeRange } from "~/renderer/actions/settings";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 import AngleDown from "~/renderer/icons/AngleDown";
 
-type OwnProps = {
-  account: Account,
-  range: PortfolioRange,
-};
-
 type Props = {
-  ...OwnProps,
-  t: TFunction,
-  openModal: Function,
-  history: RouterHistory,
+  account: Account,
 };
 
-const EmptyState: ThemedComponent<{}> = styled.div`
-  padding: 15px 20px;
-  border-radius: 4px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  > :first-child {
-    flex: 1;
-  }
-  > :nth-child(2) {
-    align-self: center;
-  }
-`;
+export default memo<Props>(TokensList);
 
-const Placeholder: ThemedComponent<{}> = styled.div`
-  flex-direction: column;
-  display: flex;
-  padding-right: 50px;
-`;
+function TokensList({ account }: Props) {
+  const { t } = useTranslation();
+  const [range] = useTimeRange();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
-export const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
-  display: flex;
-  color: ${p => p.theme.colors.wallet};
-  align-items: center;
-  justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  background: ${p => p.theme.colors.palette.background.paper};
-  border-radius: 0px 0px 4px 4px;
-  height: 44px;
-  text-align: center;
-  padding: 0;
-
-  &:hover ${Text} {
-    text-decoration: underline;
-  }
-  &:hover {
-    background-color: initial;
-  }
-
-  > :nth-child(2) {
-    margin-left: 8px;
-    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
-  }
-`;
-
-export const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
-`;
-
-const mapDispatchToProps = {
-  openModal,
-};
-
-// Fixme Temporarily hiding the receive token button
-const ReceiveButton = (props: { onClick: () => void }) => (
-  <Button small color="palette.primary.main" onClick={props.onClick}>
-    <Box horizontal flow={1} alignItems="center">
-      <IconPlus size={12} />
-      <Box>
-        <Trans i18nKey="tokensList.cta" />
-      </Box>
-    </Box>
-  </Button>
-);
-
-function TokensList({ account, t, range, openModal, history }: Props) {
   const onAccountClick = useCallback(
     (account: AccountLike, parentAccount: Account) => {
-      setTrackingSource("tokens list");
       history.push({
         pathname: `/account/${parentAccount.id}/${account.id}`,
+        state: { source: "tokens list" },
       });
     },
     [history],
   );
 
   const onReceiveClick = useCallback(() => {
-    openModal("MODAL_RECEIVE", { account, receiveTokenMode: true });
-  }, [account, openModal]);
+    dispatch(openModal("MODAL_RECEIVE", { account, receiveTokenMode: true }));
+  }, [dispatch, account]);
 
   const [collapsed, setCollapsed] = useState(true);
 
@@ -225,10 +150,7 @@ function TokensList({ account, t, range, openModal, history }: Props) {
         <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
           <Box horizontal alignContent="center" justifyContent="center">
             <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
-              <Trans
-                i18nKey={translationMap[collapsed ? "see" : "hide"]}
-                values={{ tokenCount: subAccounts.length }}
-              />
+              {t(translationMap[collapsed ? "see" : "hide"], { tokenCount: subAccounts.length })}
             </Text>
             <IconAngleDown expanded={!collapsed}>
               <AngleDown size={16} />
@@ -240,12 +162,65 @@ function TokensList({ account, t, range, openModal, history }: Props) {
   );
 }
 
-const TokensListComponent = memo<Props>(TokensList);
+// Fixme Temporarily hiding the receive token button
+function ReceiveButton(props: { onClick: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <Button small primary onClick={props.onClick}>
+      <Box horizontal flow={1} alignItems="center">
+        <IconPlus size={12} />
+        <Box>{t("tokensList.cta")}</Box>
+      </Box>
+    </Button>
+  );
+}
 
-const ConnectedTokenList: React$ComponentType<OwnProps> = compose(
-  connect(null, mapDispatchToProps),
-  withTranslation(),
-  withRouter,
-)(TokensListComponent);
+const EmptyState: ThemedComponent<{}> = styled.div`
+  padding: 15px 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  > :first-child {
+    flex: 1;
+  }
+  > :nth-child(2) {
+    align-self: center;
+  }
+`;
 
-export default ConnectedTokenList;
+const Placeholder: ThemedComponent<{}> = styled.div`
+  flex-direction: column;
+  display: flex;
+  padding-right: 50px;
+`;
+
+const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 0px 0px 4px 4px;
+  height: 44px;
+  text-align: center;
+  padding: 0;
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+  &:hover {
+    background-color: initial;
+  }
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
+  }
+`;
+
+const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: ${p => (p.expanded ? "rotate(180deg)" : "rotate(0deg)")};
+`;

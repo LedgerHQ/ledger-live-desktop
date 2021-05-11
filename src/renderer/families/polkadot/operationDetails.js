@@ -169,7 +169,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
             </OpDetailsTitle>
             <OpDetailsData>
               <FormattedVal
-                val={BigNumber(extra.transferAmount)}
+                val={extra.transferAmount}
                 unit={account.unit}
                 disableRounding={true}
                 showCode
@@ -204,7 +204,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
               </OpDetailsTitle>
               <OpDetailsData>
                 <FormattedVal
-                  val={BigNumber(extra.bondedAmount)}
+                  val={extra.bondedAmount}
                   unit={account.unit}
                   disableRounding={true}
                   showCode
@@ -226,7 +226,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
             </OpDetailsTitle>
             <OpDetailsData>
               <FormattedVal
-                val={BigNumber(extra.unbondedAmount)}
+                val={extra.unbondedAmount}
                 unit={account.unit}
                 disableRounding={true}
                 showCode
