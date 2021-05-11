@@ -180,21 +180,30 @@ export const renderVerifyUnwrapped = ({
 const OpenManagerBtn = ({
   closeAllModal,
   appName,
+  updateApp,
   mt = 2,
 }: {
   closeAllModal: () => void,
   appName?: string,
+  updateApp?: boolean,
   mt?: number,
 }) => {
   const history = useHistory();
+
   const onClick = useCallback(() => {
+    const urlParams = new URLSearchParams({
+      updateApp: updateApp ? "true" : "false",
+      ...(appName ? { q: appName } : {}),
+    });
+    const search = urlParams.toString();
     setTrackingSource("device action open manager button");
     history.push({
       pathname: "manager",
-      search: appName ? `?q=${appName}` : "",
+      search: search ? `?${search}` : "",
     });
     closeAllModal();
-  }, [history, appName, closeAllModal]);
+  }, [updateApp, appName, history, closeAllModal]);
+
   return (
     <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />
@@ -343,7 +352,7 @@ export const renderWarningOutdated = ({
       <Button secondary onClick={passWarning}>
         <Trans i18nKey="common.continue" />
       </Button>
-      <OpenManagerButton ml={4} mt={0} appName={appName} />
+      <OpenManagerButton ml={4} mt={0} appName={appName} updateApp />
     </ButtonContainer>
   </Wrapper>
 );
