@@ -129,7 +129,13 @@ const Body = ({
   const [parentAccount, setParentAccount] = useState(() => params && params.parentAccount);
   const [disabledSteps, setDisabledSteps] = useState([]);
   const [token, setToken] = useState(null);
-  const [currencyName, setCurrencyName] = useState("");
+
+  const currency = getAccountCurrency(account);
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
 
   const handleChangeAccount = useCallback(
     (account, parentAccount) => {
@@ -177,20 +183,6 @@ const Body = ({
       }
     }
   }, [accounts, account, params, handleChangeAccount]);
-
-  useEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
 
   const errorSteps = verifyAddressError ? [2] : [];
 

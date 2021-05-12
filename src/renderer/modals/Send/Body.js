@@ -162,25 +162,17 @@ const Body = ({
     if (stepId) onChangeStepId(stepId);
   }, [onChangeStepId, params]);
 
-  const [currencyName, setCurrencyName] = useState("");
-
-  useEffect(() => {
-    if (account) {
-      const currency = getAccountCurrency(account);
-
-      const currencyName = currency
-        ? currency.type === "TokenCurrency"
-          ? currency.parentCurrency.name
-          : currency.name
-        : undefined;
-
-      setCurrencyName(currencyName);
-    }
-  }, [account]);
-
   const [optimisticOperation, setOptimisticOperation] = useState(null);
   const [transactionError, setTransactionError] = useState(null);
   const [signed, setSigned] = useState(false);
+
+  const currency = account ? getAccountCurrency(account) : undefined;
+
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
 
   const handleCloseModal = useCallback(() => {
     closeModal("MODAL_SEND");
