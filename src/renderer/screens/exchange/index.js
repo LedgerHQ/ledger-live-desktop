@@ -1,63 +1,143 @@
 // @flow
-import React, { useState } from "react";
-import styled from "styled-components";
-import Box from "~/renderer/components/Box";
-import { useLocation } from "react-router-dom";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import TabBar from "~/renderer/components/TabBar";
-import Card from "~/renderer/components/Box/Card";
-import { useTranslation } from "react-i18next";
-import Buy from "./Buy";
-import Sell from "./Sell";
-import History from "./History";
-import { useExchangeProvider } from "./hooks";
 
-const Container: ThemedComponent<{ selectable: boolean, pb: number }> = styled(Box)`
-  flex: 1;
-  display: flex;
+import React, { useCallback, useState } from "react";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+import TrackPage from "~/renderer/analytics/TrackPage";
+import Box, { Card } from "~/renderer/components/Box";
+import Button from "~/renderer/components/Button";
+import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
+
+import CardButton from "~/renderer/components/CardButton";
+import BulletList from "~/renderer/components/BulletList";
+import IconWyre from "~/renderer/icons/providers/Wyre";
+
+const getColumnsTemplate = length =>
+  length >= 3 ? "1fr 1fr  1fr" : length === 2 ? "1fr  1fr" : "1fr";
+
+const Grid = styled.div`
+  display: grid;
+  grid-gap: 24px;
+  padding: 24px;
+  grid-template-columns: ${p => getColumnsTemplate(p.length)};
+  width: 100%;
 `;
 
-const tabs = [
+const Header: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  fontSize: 4,
+  textAlign: "center",
+  alignItems: "center",
+}))`
+  padding: 48px 24px 24px;
+`;
+
+const Footer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  padding: 20px 24px;
+  &:empty {
+    display: none;
+  }
+  & > :only-child {
+    margin-left: auto;
+  }
+  > * + * {
+    margin-left: 10px;
+  }
+`;
+
+const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  ff: "Inter|SemiBold",
+  fontSize: 6,
+  color: p.theme.colors.palette.secondary.main,
+  mb: 2,
+}))``;
+
+const Description: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  ff: "Inter|Medium",
+  mb: 2,
+}))`
+  max-width: 640px;
+`;
+
+const PROVIDERS = [
   {
-    header: "exchange.buy.header",
-    title: "exchange.buy.tab",
-    component: Buy,
+    provider: "wyre",
+    name: "Wyre",
+    icon: <IconWyre size={50} />,
+    disabled: false,
   },
   {
-    header: "exchange.sell.header",
-    title: "exchange.sell.tab",
-    component: Sell,
-  },
-  {
-    header: "exchange.title",
-    title: "exchange.history.tab",
-    component: History,
+    provider: "coinify",
+    name: "Coinify",
+    icon: <LiveAppIcon name="Coinify" size={50} />, // FIXME: add Coinify icon
+    disabled: false,
   },
 ];
 
-const Exchange = () => {
-  const location = useLocation();
-  const [provider] = useExchangeProvider();
-  const { state } = location;
-  const [activeTabIndex, setActiveTabIndex] = useState(state?.tab || 0);
+const SelectProvider = () => {
+  const history = useHistory();
   const { t } = useTranslation();
-  const Component = tabs[activeTabIndex].component;
+  const [provider, setProvider] = useState<string | null>(null);
+
+  const handleSelectProvider = useCallback((providerId: string) => setProvider(providerId), []);
+
+  const handleLearnMore = useCallback(() => alert("learnMore"), []);
+
+  const handleClick = useCallback(() => {
+    const conf = PROVIDERS.find(p => p.provider === provider);
+    if (conf) {
+      history.push(`/exchange/${conf.provider}`);
+    }
+  }, [history, provider]);
 
   return (
-    <Container pb={6} selectable>
-      <Box ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="exchange-title">
-        {t(tabs[activeTabIndex].header, { provider: provider.id })}
-      </Box>
-      <TabBar
-        defaultIndex={activeTabIndex}
-        tabs={tabs.map(tab => t(tab.title))}
-        onIndexChange={setActiveTabIndex}
-      />
-      <Card grow style={{ overflow: "hidden" }}>
-        <Component {...location?.state} provider={provider} />
+    <>
+      <TrackPage category="Exchange" name="SelectProvider" />
+      <Card flow={1}>
+        <Header>
+          <Title>{t("exchange.providers.title")}</Title>
+          <Description>{t("exchange.providers.description")}</Description>
+          <LinkWithExternalIcon onClick={handleLearnMore}>
+            {t("exchange.providers.learnMore")}
+          </LinkWithExternalIcon>
+        </Header>
+        <Grid length={PROVIDERS.length}>
+          {PROVIDERS.map(p => (
+            <CardButton
+              key={p.provider}
+              title={p.name}
+              icon={p.icon}
+              onClick={() => handleSelectProvider(p.provider)}
+              isActive={p.provider === provider}
+              disabled={p.disabled || false}
+            >
+              <BulletList
+                bullets={t(`exchange.providers.${p.provider}.bullets`, {
+                  joinArrays: ";",
+                  defaultValue: "",
+                })
+                  .split(";")
+                  .filter(Boolean)}
+              />
+            </CardButton>
+          ))}
+        </Grid>
+        <Footer>
+          <Button primary onClick={handleClick} disabled={!provider}>
+            {t("common.continue")}
+          </Button>
+        </Footer>
       </Card>
-    </Container>
+    </>
   );
 };
 
-export default Exchange;
+export default SelectProvider;

@@ -505,6 +505,27 @@
     },
     "history": {
       "tab": "History"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ul",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available for all bank accounts",
+          "EUR, USD, GBP & 32 others supported",
+          "SEPA payment, credit or debit card",
+          "1.5% / 4.25% fees"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only bank account from 🇺🇸",
+          "USD, GBP, EUR & 11 others supported",
+          "ACH transfer",
+          "0.75% fees"
+        ]
+      }
     }
   },
   "lend": {

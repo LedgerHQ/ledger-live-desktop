@@ -17,28 +17,18 @@ type Props = {
 };
 
 const manifests = {
-  debug: {
-    url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/debug?t=1`),
-    name: "Debugger",
-  },
-  paraswap: {
-    name: "ParaSwap",
-    url: new URL(
-      `https://iframe-dapp-browser-test.vercel.app/app/dapp-browser?url=${encodeURIComponent(
-        "https://paraswap-ui-ledger.herokuapp.com/?embed=true",
-      )}`,
-    ),
-    // $FlowFixMe
-    icon: require("../../../images/platform/paraswap.png").default,
+  wyre: {
+    name: "Wyre",
+    url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/wyre?t=1`),
   },
 };
 
-export default function SwapDapp({ match }: Props) {
+export default function ExchangeDapp({ match }: Props) {
   const history = useHistory();
   const { platform } = match.params;
   const manifest = manifests[platform];
 
-  const handleClose = useCallback(() => history.push(`/swap`), [history]);
+  const handleClose = useCallback(() => history.push(`/exchange`), [history]);
 
   if (!manifest) {
     return null;

@@ -15,9 +15,9 @@ import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
 
 import CardButton from "~/renderer/components/CardButton";
 import BulletList from "~/renderer/components/BulletList";
-import IconChangelly from "~/renderer/icons/swap/Changelly";
-import IconParaswap from "~/renderer/icons/swap/Paraswap";
-import IconWyre from "~/renderer/icons/swap/Wyre";
+import IconChangelly from "~/renderer/icons/providers/Changelly";
+import IconParaswap from "~/renderer/icons/providers/Paraswap";
+import IconWyre from "~/renderer/icons/providers/Wyre";
 
 const getColumnsTemplate = length =>
   length >= 3 ? "1fr 1fr  1fr" : length === 2 ? "1fr  1fr" : "1fr";
@@ -62,13 +62,13 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
 }))``;
 
 const PROVIDERS = [
-  {
-    provider: "wyre",
-    name: "Wyre",
-    isDapp: false,
-    icon: <IconWyre size={50} />,
-    disabled: true,
-  },
+  // {
+  //   provider: "wyre",
+  //   name: "Wyre",
+  //   isDapp: false,
+  //   icon: <IconWyre size={50} />,
+  //   disabled: true,
+  // },
   {
     provider: "changelly",
     name: "Changelly",

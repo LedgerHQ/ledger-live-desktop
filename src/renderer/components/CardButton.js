@@ -61,6 +61,7 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
 const Content: ThemedComponent<{}> = styled(Box)`
   margin-top: 16px;
   width: 100%;
+  max-width: 260px;
 
   :empty {
     display: none;
