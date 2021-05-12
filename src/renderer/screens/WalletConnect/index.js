@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import { WaveContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import { AnimatedWave } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/AnimatedWave";
@@ -140,23 +140,23 @@ const WalletConnect = () => {
             </AccountContainer>
             {wcContext.socketReady ? (
               <InfoBoxContainer>
-                <InfoBox>
+                <Alert type="primary">
                   <Trans i18nKey="walletconnect.connectedscreen.info" />
-                </InfoBox>
+                </Alert>
               </InfoBoxContainer>
             ) : null}
             {wcContext.socketReady ? (
               <InfoBoxContainer>
-                <InfoBox type="warning">
+                <Alert type="warning">
                   <Trans i18nKey="walletconnect.connectedscreen.warning" />
-                </InfoBox>
+                </Alert>
               </InfoBoxContainer>
             ) : null}
             {!wcContext.socketReady ? (
               <InfoBoxContainer>
-                <InfoBox type="warning">
+                <Alert type="warning">
                   <Trans i18nKey="walletconnect.connectedscreen.disconnected" />
-                </InfoBox>
+                </Alert>
               </InfoBoxContainer>
             ) : null}
             <Button
