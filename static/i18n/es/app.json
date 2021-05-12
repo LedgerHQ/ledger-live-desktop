@@ -2420,24 +2420,24 @@
       },
       "selectUseCase": {
         "greetings": "¡Hola!",
-        "hasNoRecovery": "¿Es la primera vez que utilizas tu {{deviceName}}?",
+        "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "¿Ya dispones de una frase de contraseña?",
         "separator": "o",
         "options": {
           "1": {
             "heading": "Primera vez",
-            "title": "Configura un nuevo {{deviceName}}",
+            "title": "Set up a new {{deviceName}}",
             "description": "¡Comencemos y configuremos tu dispositivo!"
           },
           "2": {
             "heading": "Conectar dispositivo",
-            "title": "Conecta tu {{deviceName}}",
+            "title": "Connect your {{deviceName}}",
             "description": "¿Tu dispositivo ya está configurado? ¡Conéctalo a tu app!"
           },
           "3": {
             "heading": "Restaurar dispositivo",
             "title": "Restaura tu frase de contraseña en un nuevo dispositivo",
-            "description": "¡Utiliza una frase de contraseña existente para restaurar tus claves privadas en un nuevo {{deviceName}}!"
+            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
         }
       },
@@ -2726,7 +2726,7 @@
       "buttons": {
         "start": "¡Juguemos!",
         "next": "Siguiente pregunta",
-        "finish": "Terminar cuestionario"
+        "finish": "Finish quiz"
       },
       "questions": {
         "1": {
@@ -2824,10 +2824,10 @@
   "Terms": {
     "title": "Terms of Use",
     "read": "Read the Terms of Use",
-    "switchLabelTerms": "<0>Confirmo que he leído y acepto las</0> <1>Condiciones de Uso</1>",
-    "switchLabelPrivacyPolicy": "<0>Confirmo que he leído y acepto la</0> <1> Política de Privacidad</1>",
+    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
+    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
     "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
-    "cta": "Entra en la App Ledger"
+    "cta": "Enter Ledger app"
   },
   "families": {
     "stellar": {
