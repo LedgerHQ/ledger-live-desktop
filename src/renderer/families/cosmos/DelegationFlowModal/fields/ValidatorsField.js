@@ -165,10 +165,10 @@ const ValidatorField = ({
               </Text>
             </Box>
           }
-          value={item && item.amount}
+          value={item && item.amount.toNumber()}
           onExternalLink={onExternalLink}
           notEnoughVotes={item && item.amount && max.lt(0)}
-          maxAvailable={max}
+          maxAvailable={max.toNumber()}
           unit={unit}
           onUpdateVote={onUpdateDelegation}
           onMax={onMax}
@@ -199,7 +199,7 @@ const ValidatorField = ({
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
       <ValidatorListHeader
         votesSelected={delegationsSelected}
-        votesAvailable={max}
+        votesAvailable={max.toNumber()}
         max={formatMax}
         maxText={formatMaxText}
         maxVotes={COSMOS_MAX_DELEGATIONS}

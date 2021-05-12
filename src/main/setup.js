@@ -12,6 +12,7 @@ import osName from "~/helpers/osName";
 import updater from "./updater";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import path from "path";
+import { enableFileLogger } from "~/logger/logger-transport-file";
 
 const loggerTransport = new LoggerTransport();
 const loggerFirmwareTransport = new LoggerTransportFirmware();
@@ -20,6 +21,10 @@ logger.add(loggerFirmwareTransport);
 
 if (process.env.DEV_TOOLS) {
   enableDebugLogger();
+}
+
+if (process.env.DESKTOP_LOGS_FILE) {
+  enableFileLogger();
 }
 
 ipcMain.on("updater", (e, type) => {

@@ -1,6 +1,6 @@
 // @flow
 
-import type { BigNumber } from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React from "react";
 import styled from "styled-components";
@@ -47,7 +47,7 @@ I.defaultProps = {
 
 type OwnProps = {
   unit?: Unit,
-  val: BigNumber,
+  val: BigNumber | number,
   alwaysShowSign?: boolean,
   showCode?: boolean,
   withIcon?: boolean,
@@ -94,11 +94,13 @@ function FormattedVal(props: Props) {
     showAllDigits,
     ...p
   } = props;
-  let { val } = props;
+  const valProp = props.val;
+  let val: BigNumber = valProp instanceof BigNumber ? valProp : BigNumber(valProp);
 
   invariant(val, "FormattedVal require a `val` prop. Received `undefined`");
 
-  const isNegative = val.isNegative() && !val.isZero();
+  const isZero = val.isZero();
+  const isNegative = val.isNegative() && !isZero;
 
   let text = "";
 
@@ -146,7 +148,7 @@ function FormattedVal(props: Props) {
         <Box horizontal alignItems="center">
           <Box mr={1}>
             <I color={marketColor}>
-              {isNegative ? <IconBottom size={24} /> : <IconTop size={24} />}
+              {isNegative ? <IconBottom size={24} /> : isZero ? null : <IconTop size={24} />}
             </I>
           </Box>
           <Box horizontal alignItems="center">

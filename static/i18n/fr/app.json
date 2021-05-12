@@ -3,7 +3,7 @@
     "today": "Aujourd'hui",
     "tomorrow": "Demain",
     "yesterday": "Hier",
-    "transactionDate": "Transaction date"
+    "transactionDate": "Date de l'opération"
   },
   "common": {
     "never": "Jamais",
@@ -116,7 +116,8 @@
       "day": "1J",
       "week": "1S",
       "month": "1M",
-      "year": "1A"
+      "year": "1A",
+      "all": "TOUT"
     }
   },
   "fees": {
@@ -125,7 +126,9 @@
     "high": "Haut",
     "low": "Bas",
     "slow": "Lent",
-    "standard": "Standard"
+    "standard": "Standard",
+    "medium": "Moyens",
+    "feesAmount": "Montant des frais"
   },
   "sidebar": {
     "menu": "Menu",
@@ -704,9 +707,11 @@
       "balance|desc": "Solde décroissant"
     },
     "range": {
+      "day": "Jour",
       "week": "Semaine",
       "month": "Mois",
-      "year": "Année"
+      "year": "Année",
+      "all": "Tous"
     },
     "optionsMenu": {
       "title": "Options",
@@ -794,10 +799,6 @@
     "polkaStake": {
       "title": "POLKADOT staking",
       "description": "Vous pouvez maintenant staker, sécuriser et gérer vos DOT directement dans Ledger Live"
-    },
-    "gateway": {
-      "title": "THE GATEWAY TO CRYPTO SERVICES",
-      "description": "Sécuriser, acheter, vendre, grandir et échanger des cryptos sur Ledger Live via nos partenaires"
     },
     "sell": {
       "title": "vendre des crypto-monnaies",
@@ -1035,6 +1036,10 @@
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
+    "installApp": "{{appName}} Installation de l'application",
+    "installAppDescription": "Veuillez attendre la fin de l'installation",
+    "listApps": "Checking App dependencies",
+    "listAppsDescription": "Veuillez patienter pendant que nous nous assurons que vous avez toutes les applis requises",
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de swap",
@@ -1187,6 +1192,7 @@
       "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil",
       "sucessCTAApps": "Réinstaller les applications",
       "SuccessCTANoApps": "Installer les applications",
+      "cancelReinstallCTA": "Installer les mises à jour",
       "resetSteps": {
         "first": "1. Réinitialiser votre appareil",
         "connect": "Connectez le {{deviceName}} à votre ordinateur en utilisant le câble USB.",
@@ -1316,9 +1322,9 @@
     "title": "Acheter",
     "titleCrypto": "Acheter {{currency}}",
     "buyCTA": "Acheter {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
+    "withoutDevice": "Continuer sans mon appareil",
     "connectWithoutDevice": "Il est préférable d'utiliser votre appareil pour une sécurité optimale.",
-    "skipConnect": "Continue without my device"
+    "skipConnect": "Continuer sans mon appareil"
   },
   "sell": {
     "title": "Vendre",
@@ -1359,7 +1365,10 @@
       },
       "amount": {
         "title": "Montant",
-        "banner": "Le montant maximum à dépenser est"
+        "banner": "Le montant maximum à dépenser est",
+        "fees": "Frais",
+        "standard": "Standard",
+        "advanced": "Avancé"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -1793,9 +1802,9 @@
       "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
-      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. <1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. <1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
       "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
       "hideInactiveNominations": "Afficher uniquement les nominations actives",
       "noActiveNominations": "Il n'y a aucune nomination active.",
@@ -2292,7 +2301,8 @@
     "ctaSuccess": "Terminé",
     "noAccounts": "Aucun compte à exporter",
     "selectedAccounts": "Comptes à inclure",
-    "selectedAccounts_plural": "Comptes à inclure ({{count}})"
+    "selectedAccounts_plural": "Comptes à inclure ({{count}})",
+    "disclaimer": "Les informations de contre-valeurs mentionnées dans cet export de données sont purement indicatives. Vous ne devez notamment pas vous baser sur ces informations à des fins de comptabilité, pour le calcul d'impôts ou de taxes ni en lien des contraintes réglementaires ou juridiques. Elles ne représentent qu'une estimation de la valeur des actifs au moment des transactions et de l'export, basée sur les méthodes d'évaluation de notre fournisseur du service, Kaiko."
   },
   "language": {
     "system": "Utiliser la langue du système",
@@ -2559,6 +2569,11 @@
               "next": "Saisissez la phrase de récupération",
               "prev": "Etape précédente",
               "help": "Besoin d'aide"
+            },
+            "warning": {
+              "title": "N'utilisez jamais une phrase de récupération que vous n'avez pas générée vous-même.",
+              "desc": "Le code PIN et la phrase de récupération de votre wallet Ledger doivent être configurés par vous et vous seul. Si vous avez reçu un appareil avec une phrase de récupération déjà existante ou un code PIN déjà configuré n'utilisez pas l'appareil et contactez notre support client.",
+              "supportLink": "Contacter le support client"
             }
           },
           "useRecoverySheet": {
@@ -3146,8 +3161,8 @@
       "title": "Manager refusé sur l’appareil"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Mise à jour annulée",
-      "description": "Veuillez essayer à nouveau ou contacter l’assistance Ledger."
+      "title": "Les mises à jour ont été annulées sur l'appareil",
+      "description": "Toutes les applis ont été désinstallées de votre appareil. Gardez votre appareil bien à jour pour bénéficier des dernières fonctionnalités et améliorations en matière de sécurité."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejetée",

@@ -144,6 +144,7 @@ const PanelContainer: ThemedComponent<{}> = styled.div`
   align-items: center;
   justify-content: center;
   flex: 1;
+  height: 100%;
 `;
 
 export function ServiceStatusPanel() {

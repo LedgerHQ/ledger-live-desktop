@@ -1,6 +1,6 @@
 // @flow
 import { findCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import { explorerConfig } from "@ledgerhq/live-common/lib/api/explorerConfig";
+import { getExplorerConfig } from "@ledgerhq/live-common/lib/api/explorerConfig";
 import { isEnvDefault, changes } from "@ledgerhq/live-common/lib/env";
 import type { EnvName } from "@ledgerhq/live-common/lib/env";
 
@@ -28,6 +28,7 @@ export type FeatureToggle =
 
 export type Feature = FeatureCommon & FeatureToggle;
 
+const explorerConfig = getExplorerConfig();
 const deltaExperimentalExplorers = Object.keys(explorerConfig)
   .map(currencyId => {
     const c = findCryptoCurrencyById(currencyId);
@@ -106,6 +107,14 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
+  },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_INLINE_INSTALL",
+    title: "Allow inline app installation",
+    description:
+      "Install a nano device application directly within a device flow rather than in the manager.",
+    defaultValue: false,
   },
 ];
 

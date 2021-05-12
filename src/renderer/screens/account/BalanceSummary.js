@@ -5,31 +5,23 @@ import { useSelector } from "react-redux";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import { BigNumber } from "bignumber.js";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type {
-  Currency,
-  Account,
-  AccountLike,
-  PortfolioRange,
-  TokenCurrency,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { useTimeRange } from "~/renderer/actions/settings";
+import { counterValueCurrencySelector, discreetModeSelector } from "~/renderer/reducers/settings";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import AccountBalanceSummaryHeader from "./AccountBalanceSummaryHeader";
-import { discreetModeSelector } from "~/renderer/reducers/settings";
 
 import AccountLendingFooter from "~/renderer/screens/lend/Account/AccountBalanceSummaryFooter";
-
 import perFamilyAccountBalanceSummaryFooter from "~/renderer/generated/AccountBalanceSummaryFooter";
 import FormattedDate from "~/renderer/components/FormattedDate";
 
 type Props = {
-  counterValue: Currency,
   chartColor: string,
   account: AccountLike,
   parentAccount: ?Account,
-  range: PortfolioRange,
   countervalueFirst: boolean,
   setCountervalueFirst: boolean => void,
   mainAccount: ?Account,
@@ -39,9 +31,7 @@ type Props = {
 
 export default function AccountBalanceSummary({
   account,
-  counterValue,
   countervalueFirst,
-  range,
   chartColor,
   setCountervalueFirst,
   mainAccount,
@@ -49,6 +39,8 @@ export default function AccountBalanceSummary({
   parentAccount,
   ctoken,
 }: Props) {
+  const [range] = useTimeRange();
+  const counterValue = useSelector(counterValueCurrencySelector);
   const {
     history,
     countervalueAvailable,
@@ -113,7 +105,6 @@ export default function AccountBalanceSummary({
         <AccountBalanceSummaryHeader
           account={account}
           counterValue={counterValue}
-          selectedTimeRange={range}
           countervalueChange={countervalueChange}
           cryptoChange={cryptoChange}
           last={history[history.length - 1]}
@@ -127,6 +118,7 @@ export default function AccountBalanceSummary({
         <Chart
           magnitude={chartMagnitude}
           color={chartColor}
+          // $FlowFixMe TODO we need to make Date non optional in live-common
           data={history}
           height={200}
           tickXScale={range}

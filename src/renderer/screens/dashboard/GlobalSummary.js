@@ -3,7 +3,8 @@ import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type { Currency, PortfolioRange, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
+import type { Currency, BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -68,6 +69,7 @@ export default function PortfolioBalanceSummary({
           <Chart
             magnitude={counterValue.units[0].magnitude}
             color={chartColor}
+            // $FlowFixMe TODO make date non optional
             data={portfolio.balanceHistory}
             height={250}
             tickXScale={range}

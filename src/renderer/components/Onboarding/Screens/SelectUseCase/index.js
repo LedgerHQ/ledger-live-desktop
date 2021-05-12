@@ -14,6 +14,7 @@ import nanoBox from "./assets/nanoBox.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+import Alert from "~/renderer/components/Alert";
 
 registerAssets([deviceConnect, importRecovery, nanoBox]);
 
@@ -52,9 +53,18 @@ const Row = styled.div`
 `;
 
 const LeftColumn = styled.div`
-  max-width: 225px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
+`;
+
+const LeftText = styled(Text).attrs(() => ({
+  color: "palette.text.shade100",
+  ff: "Inter|SemiBold",
+  fontSize: "32px",
+  mb: 2,
+}))`
+  max-width: 225px;
 `;
 
 const RightColumn = styled.div`
@@ -104,14 +114,14 @@ export function SelectUseCase({ sendEvent, context }: Props) {
             <Text mb="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="18px">
               {t("onboarding.screens.selectUseCase.greetings")}
             </Text>
-            <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
+            <LeftText>
               <Trans
                 i18nKey="onboarding.screens.selectUseCase.hasNoRecovery"
                 values={{
                   deviceName: device.productName,
                 }}
               />
-            </Text>
+            </LeftText>
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
@@ -134,9 +144,14 @@ export function SelectUseCase({ sendEvent, context }: Props) {
         <Separator label={t("onboarding.screens.selectUseCase.separator")} />
         <Row>
           <LeftColumn>
-            <Text color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
-              {t("onboarding.screens.selectUseCase.hasRecovery")}
-            </Text>
+            <LeftText>{t("onboarding.screens.selectUseCase.hasRecovery")}</LeftText>
+            <Alert
+              type="warning"
+              onLearnMore={() => sendEvent("RECOVERY_WARN")}
+              style={{ flexGrow: 0 }}
+            >
+              {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.warning.title")}
+            </Alert>
           </LeftColumn>
           <RightColumn>
             <UseCaseOption

@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { BigNumber } from "bignumber.js";
@@ -61,20 +61,24 @@ export default function Price({
 
   const counterValue = rate
     ? rate.times(valueNum) // NB Allow to override the rate for swap
-    : typeof rawCounterValue !== "undefined"
+    : typeof rawCounterValue === "number"
     ? BigNumber(rawCounterValue)
     : rawCounterValue;
 
   const bgColor = useTheme("colors.palette.background.paper");
-  if (!counterValue || counterValue.isZero()) return placeholder || null;
+  const activityColor = useMemo(
+    () =>
+      withActivityColor
+        ? colors[withActivityColor]
+        : !withActivityCurrencyColor
+        ? color
+          ? colors[color]
+          : undefined
+        : getCurrencyColor(from, bgColor),
+    [bgColor, color, from, withActivityColor, withActivityCurrencyColor],
+  );
 
-  const activityColor = withActivityColor
-    ? colors[withActivityColor]
-    : !withActivityCurrencyColor
-    ? color
-      ? colors[color]
-      : undefined
-    : getCurrencyColor(from, bgColor);
+  if (!counterValue || counterValue.isZero()) return placeholder || null;
 
   const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 

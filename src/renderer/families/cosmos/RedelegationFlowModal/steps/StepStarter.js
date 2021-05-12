@@ -11,7 +11,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import Rewards from "~/renderer/images/rewards.svg";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -49,11 +49,11 @@ export default function StepStarter({
             <Trans i18nKey="cosmos.redelegation.flow.steps.starter.description" />
           </Text>
         </Box>
-        <InfoBox>
+        <Alert type="primary">
           <Trans i18nKey="cosmos.redelegation.flow.steps.starter.warning">
             <b></b>
           </Trans>
-        </InfoBox>
+        </Alert>
       </Box>
     </Box>
   );

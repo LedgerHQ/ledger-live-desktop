@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import { supportLinkByTokenType } from "~/config/urls";
@@ -10,7 +10,7 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import CurrencyBadge from "~/renderer/components/CurrencyBadge";
-import TokenTips from "~/renderer/components/TokenTips";
+import Alert from "~/renderer/components/Alert";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import type { StepProps } from "..";
 import { useDispatch } from "react-redux";
@@ -23,9 +23,10 @@ import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
 
-  const isToken = currency && currency.type === "TokenCurrency";
-  // $FlowFixMe
-  const url = isToken ? supportLinkByTokenType[currency.tokenType] : null;
+  const url =
+    currency && currency.type === "TokenCurrency"
+      ? supportLinkByTokenType[currency.tokenType]
+      : null;
 
   return (
     <>
@@ -34,16 +35,19 @@ const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
       <SelectCurrency currencies={currencies} autoFocus onChange={setCurrency} value={currency} />
       <FullNodeStatus currency={currency} />
       {currency && currency.type === "TokenCurrency" ? (
-        <TokenTips
-          textKey="addAccounts.tokensTip"
-          textData={{
-            token: currency.name,
-            ticker: currency.ticker,
-            tokenType: currency.tokenType.toUpperCase(),
-            currency: currency.parentCurrency.name,
-          }}
-          learnMoreLink={url}
-        />
+        <Alert type="primary" learnMoreUrl={url} mt={4}>
+          <Trans
+            i18nKey="addAccounts.tokensTip"
+            values={{
+              token: currency.name,
+              ticker: currency.ticker,
+              tokenType: currency.tokenType.toUpperCase(),
+              currency: currency.parentCurrency.name,
+            }}
+          >
+            <b></b>
+          </Trans>
+        </Alert>
       ) : null}
     </>
   );

@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import { Trans } from "react-i18next";
 import Button from "~/renderer/components/Button";
 import { Rotating } from "~/renderer/components/Spinner";
@@ -20,9 +20,6 @@ const SatStack = ({ satStackDownloaded }: { satStackDownloaded: boolean }) => {
   const { progress, type } = latestStatus;
   const onSatStackDownloaded = useCallback(() => {
     openURL(urls.satstacks.download);
-  }, []);
-  const onLearnMore = useCallback(() => {
-    openURL(urls.satstacks.learnMore);
   }, []);
 
   return !satStackDownloaded ? (
@@ -44,11 +41,9 @@ const SatStack = ({ satStackDownloaded }: { satStackDownloaded: boolean }) => {
           <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.notConnected.cta" />
         </Button>
       </Box>
-      <InfoBox type="secondary" onLearnMore={onLearnMore}>
-        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade50">
-          <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.notConnected.disclaimer" />
-        </Text>
-      </InfoBox>
+      <Alert type="secondary" learnMoreUrl={urls.satstacks.learnMore}>
+        <Trans i18nKey="fullNode.modal.steps.satstack.connectionSteps.notConnected.disclaimer" />
+      </Alert>
     </Box>
   ) : (
     <Box alignItems="center">

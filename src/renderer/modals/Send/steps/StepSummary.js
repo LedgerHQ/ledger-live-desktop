@@ -22,7 +22,7 @@ import IconQrCode from "~/renderer/icons/QrCode";
 import IconWallet from "~/renderer/icons/Wallet";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValue from "~/renderer/components/CounterValue";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
@@ -79,19 +79,19 @@ export default class StepSummary extends PureComponent<StepProps> {
       <Box flow={4} mx={40}>
         <TrackPage category="Send Flow" name="Step Summary" />
         {utxoLag ? (
-          <InfoBox type="warning">
+          <Alert type="warning">
             <Trans i18nKey="send.steps.details.utxoLag" />
-          </InfoBox>
+          </Alert>
         ) : null}
         {transaction.useAllAmount && hasNonEmptySubAccounts ? (
-          <InfoBox>
+          <Alert type="primary">
             <Trans
               i18nKey="send.steps.details.subaccountsWarning"
               values={{
                 currency: currency.name,
               }}
             />
-          </InfoBox>
+          </Alert>
         ) : null}
         <FromToWrapper>
           <Box>

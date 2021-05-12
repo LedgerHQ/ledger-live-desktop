@@ -219,12 +219,18 @@ const ValidatorRow = ({
 
   const onChange = useCallback(
     e => {
-      onUpdateVote && onUpdateVote(validator.address, e);
+      onUpdateVote && onUpdateVote(validator.address, e.toString());
     },
     [validator, onUpdateVote],
   );
   const onMaxHandler = useCallback(() => {
-    onUpdateVote && onUpdateVote(validator.address, BigNumber(value || 0).plus(maxAvailable));
+    onUpdateVote &&
+      onUpdateVote(
+        validator.address,
+        BigNumber(value || 0)
+          .plus(maxAvailable)
+          .toString(),
+      );
   }, [validator, onUpdateVote, maxAvailable, value]);
 
   /** focus input on row click */
@@ -247,7 +253,7 @@ const ValidatorRow = ({
         unit={unit}
         error={itemExists && notEnoughVotes}
         disabled={disabled}
-        value={BigNumber(value)}
+        value={BigNumber(value ?? 0)}
         onChange={onChange}
         renderRight={
           <InputRight>
