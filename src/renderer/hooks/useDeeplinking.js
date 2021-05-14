@@ -169,13 +169,6 @@ export function useDeepLinkHandler() {
     [accounts, dispatch, navigate],
   );
 
-  useEffect(() => {
-    // subscribe to deep-linking event
-    ipcRenderer.on("deep-linking", handler);
-
-    return () => ipcRenderer.removeListener("deep-linking", handler);
-  }, [handler]);
-
   return {
     handler,
   };
@@ -186,6 +179,13 @@ function useDeeplink() {
   const openingDeepLink = useSelector(deepLinkUrlSelector);
   const loaded = useSelector(areSettingsLoaded);
   const { handler } = useDeepLinkHandler();
+
+  useEffect(() => {
+    // subscribe to deep-linking event
+    ipcRenderer.on("deep-linking", handler);
+
+    return () => ipcRenderer.removeListener("deep-linking", handler);
+  }, [handler]);
 
   useEffect(() => {
     if (openingDeepLink && loaded) {
