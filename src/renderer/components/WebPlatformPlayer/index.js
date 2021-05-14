@@ -103,7 +103,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
             account,
             parentAccount: null,
-            onResult: resolve,
+            onResult: account => resolve(account.freshAddress),
             onCancel: reject,
             verifyAddress: true,
           }),
@@ -180,7 +180,15 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   );
 
   const signTransaction = useCallback(
-    ({ accountId, transaction }: { accountId: string, transaction: RawPlatformTransaction }) => {
+    ({
+      accountId,
+      transaction,
+      params = {},
+    }: {
+      accountId: string,
+      transaction: RawPlatformTransaction,
+      params: any,
+    }) => {
       const platformTransaction = deserializePlatformTransaction(transaction);
       const account = accounts.find(account => account.id === accountId);
 
@@ -194,6 +202,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
             transactionData: platformTransaction,
+            useApp: params.useApp,
             account,
             parentAccount: null,
             onResult: signedOperation =>

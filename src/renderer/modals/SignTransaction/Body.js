@@ -32,6 +32,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   onClose: () => void,
   params: {
+    useApp?: string,
     account: ?AccountLike,
     transactionData: Transaction,
     onResult: (signedOperation: SignedOperation) => void,
@@ -119,11 +120,13 @@ const Body = ({
       recipient,
       feesStrategy: "custom",
     });
-    const transaction = bridge.updateTransaction(t2, txData);
+    const transaction = bridge.updateTransaction(t2, {
+      ...txData,
+      userGasLimit: txData.gasLimit,
+    });
 
     return { account, parentAccount, transaction };
   });
-
 
   const [transactionError, setTransactionError] = useState(null);
 
@@ -175,6 +178,7 @@ const Body = ({
   const stepperProps = {
     title: t("send.title"),
     stepId,
+    useApp: params.useApp,
     steps,
     errorSteps,
     device,

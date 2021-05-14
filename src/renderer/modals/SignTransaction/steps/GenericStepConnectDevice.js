@@ -33,6 +33,7 @@ export default function StepConnectDevice({
   account,
   parentAccount,
   transaction,
+  useApp,
   status,
   transitionTo,
   onTransactionSigned,
@@ -42,6 +43,7 @@ export default function StepConnectDevice({
   account: ?AccountLike,
   parentAccount: ?Account,
   transaction: ?Transaction,
+  useApp?: string,
   status: TransactionStatus,
   onTransactionError: Error => void,
   onTransactionSigned: SignedOperation => void,
@@ -57,6 +59,7 @@ export default function StepConnectDevice({
         tokenCurrency,
         parentAccount,
         account,
+        appName: useApp,
         transaction,
         status,
       }}

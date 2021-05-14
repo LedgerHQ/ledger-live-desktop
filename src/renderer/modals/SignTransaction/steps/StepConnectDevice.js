@@ -10,6 +10,7 @@ export default function StepConnectDevice({
   transaction,
   status,
   transitionTo,
+  useApp,
   onTransactionError,
   onTransactionSigned,
 }: StepProps) {
@@ -18,6 +19,7 @@ export default function StepConnectDevice({
       <TrackPage category="Send Flow" name="Step ConnectDevice" />
       <GenericStepConnectDevice
         account={account}
+        useApp={useApp}
         parentAccount={parentAccount}
         transaction={transaction}
         status={status}
