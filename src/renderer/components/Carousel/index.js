@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useTransition, animated } from "react-spring";
@@ -166,7 +166,7 @@ const Carousel = ({
   type?: "slide" | "flip",
   slides?: [{ id: string, Component: React$ComponentType<{}>, start?: Date, end?: Date }],
 }) => {
-  let slides = _slides || getDefaultSlides();
+  let slides = useMemo(() => _slides || getDefaultSlides(), [_slides]);
   slides = slides.filter(slide => {
     if (slide.start && slide.start > new Date()) {
       return false;
@@ -212,6 +212,19 @@ const Carousel = ({
 
   const close = useCallback(() => dispatch(setCarouselVisibility(CAROUSEL_NONCE)), [dispatch]);
 
+  const renderSlides = useMemo(
+    () =>
+      transitions.map(({ item, props, key }) => {
+        const { Component } = slides[item];
+        return (
+          <animated.div key={key} style={{ ...props }}>
+            <Component />
+          </animated.div>
+        );
+      }),
+    [slides, transitions],
+  );
+
   if (!slides.length || hidden >= CAROUSEL_NONCE) {
     // No slides or dismissed, no problem
     return null;
@@ -244,16 +257,7 @@ const Carousel = ({
           <TimeBasedProgressBar onComplete={onNext} duration={speed} paused={paused} />
         </ProgressBarWrapper>
       ) : null}
-      <Slides>
-        {transitions.map(({ item, props, key }) => {
-          const { Component } = slides[item];
-          return (
-            <animated.div key={key} style={{ ...props }}>
-              <Component />
-            </animated.div>
-          );
-        })}
-      </Slides>
+      <Slides>{renderSlides}</Slides>
       <Close id={"carousel-dismiss"} onClick={onDismiss}>
         <IconCross size={16} />
       </Close>
