@@ -17,13 +17,13 @@ type Props = {
 };
 
 const useManifests = () => {
-  const allManifests = useMemo(() => {
+  return useMemo(() => {
     const paraswapUrl = new URL(`https://iframe-dapp-browser-test.vercel.app/app/dapp-browser`);
-    paraswapUrl.searchParams.set("url", "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true");
+    paraswapUrl.searchParams.set("url", "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true&referer=ledger");
     paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
 
-    const manifests = {
+    return {
       debug: {
         url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/debug`),
         name: "Debugger",
@@ -35,11 +35,7 @@ const useManifests = () => {
         icon: require("../../../images/platform/paraswap.png").default,
       },
     };
-
-    return manifests;
   }, []);
-
-  return allManifests;
 };
 
 export default function SwapDapp({ match }: Props) {
