@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
 import { useHistory } from "react-router-dom";
-import useTheme from "~/renderer/hooks/useTheme";
 
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
@@ -18,18 +17,15 @@ type Props = {
 };
 
 const useManifests = () => {
-  const theme = useTheme("colors.palette");
   const allManifests = useMemo(() => {
-    const paraswapUrl = new URL(`http://localhost:3000/app/dapp-browser`);
+    const paraswapUrl = new URL(`https://iframe-dapp-browser-test.vercel.app/app/dapp-browser`);
     paraswapUrl.searchParams.set("url", "https://paraswap-dapp-pr-851.herokuapp.com/?embed=true");
     paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
-    paraswapUrl.searchParams.set("backgroundColor", theme.background.paper);
-    paraswapUrl.searchParams.set("textColor", theme.text.shade100);
 
     const manifests = {
       debug: {
-        url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/debug?t=1`),
+        url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/debug`),
         name: "Debugger",
       },
       paraswap: {
@@ -41,11 +37,10 @@ const useManifests = () => {
     };
 
     return manifests;
-
-  }, [theme])
+  }, []);
 
   return allManifests;
-}
+};
 
 export default function SwapDapp({ match }: Props) {
   const history = useHistory();

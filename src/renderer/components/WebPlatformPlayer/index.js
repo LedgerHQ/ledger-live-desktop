@@ -8,6 +8,7 @@ import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import useTheme from "~/renderer/hooks/useTheme";
 
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
@@ -77,6 +78,8 @@ type Props = {
 };
 
 const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
+  const theme = useTheme("colors.palette");
+
   const targetRef: { current: null | HTMLIFrameElement } = useRef(null);
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
@@ -266,12 +269,22 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
     setWidgetLoaded(false);
   }, []);
 
+  const uri = useMemo(() => {
+    const url = new URL(manifest.url.toString());
+
+    url.searchParams.set("backgroundColor", theme.background.paper);
+    url.searchParams.set("textColor", theme.text.shade100);
+    url.searchParams.set("loadDate", loadDate.valueOf().toString());
+
+    return url;
+  }, [manifest.url, loadDate, theme]);
+
   return (
     <Container>
       <TopBar manifest={manifest} onReload={handleReload} onClose={onClose} />
       <Wrapper>
         <CustomIframe
-          src={`${manifest.url.toString()}&${loadDate}`}
+          src={uri.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
           onLoad={handleLoad}

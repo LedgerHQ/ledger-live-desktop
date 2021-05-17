@@ -19,7 +19,7 @@ type Props = {
 const manifests = {
   wyre: {
     name: "Wyre",
-    url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/wyre?t=1`),
+    url: new URL(`https://iframe-dapp-browser-test.vercel.app/app/wyre`),
   },
 };
 
