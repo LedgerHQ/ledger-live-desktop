@@ -1802,9 +1802,9 @@
       "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
-      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. <1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. <1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
       "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
       "hideInactiveNominations": "Afficher uniquement les nominations actives",
       "noActiveNominations": "Il n'y a aucune nomination active.",
@@ -2426,7 +2426,7 @@
         "options": {
           "1": {
             "heading": "Première utilisation",
-            "title": "Initialiser un nouveau {{deviceName}}",
+            "title": "Configurer un nouveau {{deviceName}}",
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {
