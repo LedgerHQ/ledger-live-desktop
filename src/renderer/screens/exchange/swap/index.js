@@ -7,7 +7,10 @@ import { useTranslation } from "react-i18next";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import Alert from "~/renderer/components/Alert";
 import Box, { Card } from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
@@ -68,27 +71,34 @@ const PROVIDERS = [
   //   isDapp: false,
   //   icon: <IconWyre size={50} />,
   //   disabled: true,
+  //   kycRequired: true,
   // },
   {
     provider: "changelly",
     name: "Changelly",
     isDapp: false,
     icon: <IconChangelly size={50} />,
+    disabled: false,
+    kycRequired: false,
   },
   {
     provider: "paraswap",
     name: "ParaSwap",
     isDapp: true,
     icon: <IconParaswap size={50} />,
+    disabled: false,
+    kycRequired: false,
   },
 ];
 
-if (process.env.NODE_ENV === "development") {
+if (__DEV__) {
   PROVIDERS.push({
     provider: "debug",
     name: "Debugger",
     isDapp: true,
     icon: <LiveAppIcon name="Debugger" size={50} />,
+    disabled: false,
+    kycRequired: false,
   });
 }
 
@@ -99,7 +109,9 @@ const SelectProvider = () => {
 
   const handleSelectProvider = useCallback((providerId: string) => setProvider(providerId), []);
 
-  const handleLearnMore = useCallback(() => alert("learnMore"), []);
+  const handleLearnMore = useCallback(() => {
+    openURL(urls.swap.learnMore);
+  }, []);
 
   const handleClick = useCallback(() => {
     const conf = PROVIDERS.find(p => p.provider === provider);
@@ -123,25 +135,36 @@ const SelectProvider = () => {
           </LinkWithExternalIcon>
         </Header>
         <Grid length={PROVIDERS.length}>
-          {PROVIDERS.map(p => (
-            <CardButton
-              key={p.provider}
-              title={p.name}
-              icon={p.icon}
-              onClick={() => handleSelectProvider(p.provider)}
-              isActive={p.provider === provider}
-              disabled={p.disabled || false}
-            >
-              <BulletList
-                bullets={t(`swap.providers.${p.provider}.bullets`, {
-                  joinArrays: ";",
-                  defaultValue: "",
-                })
-                  .split(";")
-                  .filter(Boolean)}
-              />
-            </CardButton>
-          ))}
+          {PROVIDERS.map(p => {
+            const description = t(`swap.providers.${p.provider}.description`, { defaultValue: "" });
+            const bullets = t(`swap.providers.${p.provider}.bullets`, {
+              joinArrays: ";",
+              defaultValue: "",
+            })
+              .split(";")
+              .filter(Boolean);
+
+            return (
+              <CardButton
+                key={p.provider}
+                title={p.name}
+                icon={p.icon}
+                footer={
+                  p.kycRequired && (
+                    <Alert type="secondary" small>
+                      {t("swap.providers.kycRequired")}
+                    </Alert>
+                  )
+                }
+                onClick={() => handleSelectProvider(p.provider)}
+                isActive={p.provider === provider}
+                disabled={p.disabled || false}
+              >
+                {description && <Box mb={4}>{description}</Box>}
+                {!!bullets.length && <BulletList bullets={bullets} />}
+              </CardButton>
+            );
+          })}
         </Grid>
         <Footer>
           <Button primary onClick={handleClick} disabled={!provider}>

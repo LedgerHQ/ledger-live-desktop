@@ -9,7 +9,11 @@ import Box, { Tabbable } from "~/renderer/components/Box";
 
 const IconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mb: 2 }))``;
 
-const FooterContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mt: "auto" }))``;
+const FooterContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  mt: "auto",
+  pt: 2,
+  width: "100%",
+}))``;
 
 const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = styled(
   Tabbable,
@@ -19,11 +23,12 @@ const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = s
   alignItems: "center",
   px: 4,
   py: 5,
-  fontSize: 3,
+  fontSize: 4,
 }))`
   min-width: 192px;
   border-radius: 4px;
   cursor: ${p => (p.disabled ? "default" : "pointer")};
+  color: ${p => p.theme.colors.palette.text.shade100};
 
   ${p =>
     p.disabled &&
