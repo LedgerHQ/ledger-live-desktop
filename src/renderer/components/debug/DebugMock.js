@@ -259,6 +259,14 @@ const DebugMock = () => {
   const [expandedQuick, setExpandedQuick] = useState(false);
   const [expandedHistory, setExpandedHistory] = useState(true);
 
+  const [notifPlatform, setNotifPlatform] = useState("");
+  const [notifCurrencies, setNotifCurrencies] = useState("");
+  const [notifDeviceVersion, setNotifDeviceVersion] = useState("");
+  const [notifDeviceModelId, setNotifDeviceModelId] = useState("");
+  const [notifDeviceApps, setNotifDeviceApps] = useState("");
+  const [notifLanguages, setNotifLanguages] = useState("");
+  const [notifExtra, setNotifExtra] = useState("");
+
   const { updateCache } = useAnnouncements();
   const { updateData } = useServiceStatus();
 
@@ -292,6 +300,57 @@ const DebugMock = () => {
     },
     [setQueue],
   );
+
+  const formatInputValue = useCallback((inputValue: string): ?(string[]) => {
+    const val: string[] = inputValue
+      .replace(/\s/g, "")
+      .split(",")
+      .filter(Boolean);
+    return val.length > 0 ? val : undefined;
+  }, []);
+
+  const onNotifClick = useCallback(() => {
+    const params = {
+      currencies: formatInputValue(notifCurrencies),
+      platforms: formatInputValue(notifPlatform),
+      languages: formatInputValue(notifLanguages),
+    };
+
+    const formattedParams: any = Object.keys(params)
+      .filter(k => !!params[k] && params[k].length > 0)
+      .reduce((sum, k: string) => ({ ...sum, [k]: params[k] }), {});
+
+    let extra = {};
+
+    try {
+      extra = JSON.parse(notifExtra) || {};
+    } catch (e) {
+      console.error(e);
+    }
+
+    addMockAnnouncement({
+      ...formattedParams,
+      device: {
+        modelIds: formatInputValue(notifDeviceModelId),
+        versions: formatInputValue(notifDeviceVersion),
+        apps: formatInputValue(notifDeviceApps),
+      },
+      ...extra,
+    });
+    updateCache();
+  }, [
+    formatInputValue,
+    notifCurrencies,
+    notifDeviceApps,
+    notifDeviceModelId,
+    notifDeviceVersion,
+    notifExtra,
+    notifLanguages,
+    notifPlatform,
+    updateCache,
+  ]);
+
+  const setValue = useCallback(setter => evt => setter(evt.target.value), []);
 
   return (
     <MockContainer id={nonce}>
@@ -420,22 +479,64 @@ const DebugMock = () => {
             </Text>
             {expandedNotif ? (
               <>
+                <input
+                  type="text"
+                  placeholder="currencies separated by ','"
+                  value={notifCurrencies}
+                  onChange={setValue(setNotifCurrencies)}
+                />
+                <input
+                  type="text"
+                  placeholder="platforms separated by ','"
+                  value={notifPlatform}
+                  onChange={setValue(setNotifPlatform)}
+                />
+                <input
+                  type="text"
+                  placeholder="languages separated by ','"
+                  value={notifLanguages}
+                  onChange={setValue(setNotifLanguages)}
+                />
+                <input
+                  type="text"
+                  placeholder="device modelIds separated by ','"
+                  value={notifDeviceModelId}
+                  onChange={setValue(setNotifDeviceModelId)}
+                />
+                <input
+                  type="text"
+                  placeholder="device versions separated by ','"
+                  value={notifDeviceVersion}
+                  onChange={setValue(setNotifDeviceVersion)}
+                />
+                <input
+                  type="text"
+                  placeholder="device apps separated by ','"
+                  value={notifDeviceApps}
+                  onChange={setValue(setNotifDeviceApps)}
+                />
+                <textarea
+                  type="text"
+                  placeholder="override notif data as JSON"
+                  multiline
+                  value={notifExtra}
+                  onChange={setValue(setNotifExtra)}
+                />
                 <Text
                   smx={1}
                   ff="Inter|Regular"
                   color="palette.text.shade100"
                   fontSize={3}
-                  onClick={() => {
-                    addMockAnnouncement();
-                    updateCache();
-                  }}
+                  mb={2}
+                  onClick={onNotifClick}
                 >
-                  {"Mock notif"}
+                  {"↳ Mock notif"}
                 </Text>
                 <Text
                   smx={1}
                   ff="Inter|Regular"
                   color="palette.text.shade100"
+                  mb={2}
                   fontSize={3}
                   onClick={() => {
                     toggleMockIncident();
