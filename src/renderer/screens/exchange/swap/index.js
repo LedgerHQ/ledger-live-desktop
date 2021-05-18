@@ -20,7 +20,7 @@ import CardButton from "~/renderer/components/CardButton";
 import BulletList from "~/renderer/components/BulletList";
 import IconChangelly from "~/renderer/icons/providers/Changelly";
 import IconParaswap from "~/renderer/icons/providers/Paraswap";
-import IconWyre from "~/renderer/icons/providers/Wyre";
+// import IconWyre from "~/renderer/icons/providers/Wyre";
 
 const getColumnsTemplate = length =>
   length >= 3 ? "1fr 1fr  1fr" : length === 2 ? "1fr  1fr" : "1fr";
