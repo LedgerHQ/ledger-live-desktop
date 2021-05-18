@@ -131,11 +131,7 @@ const Body = ({
   const [token, setToken] = useState(null);
 
   const currency = getAccountCurrency(account);
-  const currencyName = currency
-    ? currency.type === "TokenCurrency"
-      ? currency.parentCurrency.name
-      : currency.name
-    : undefined;
+  const currencyName = currency ? currency.name : undefined;
 
   const handleChangeAccount = useCallback(
     (account, parentAccount) => {

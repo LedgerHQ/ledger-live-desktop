@@ -168,11 +168,7 @@ const Body = ({
 
   const currency = account ? getAccountCurrency(account) : undefined;
 
-  const currencyName = currency
-    ? currency.type === "TokenCurrency"
-      ? currency.parentCurrency.name
-      : currency.name
-    : undefined;
+  const currencyName = currency ? currency.name : undefined;
 
   const handleCloseModal = useCallback(() => {
     closeModal("MODAL_SEND");
