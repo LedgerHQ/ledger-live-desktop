@@ -193,6 +193,8 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       params: any,
     }) => {
       const platformTransaction = deserializePlatformTransaction(transaction);
+
+      console.log("LL GOT TX: !!!!! ", platformTransaction);
       const account = accounts.find(account => account.id === accountId);
 
       if (!account) return null;
