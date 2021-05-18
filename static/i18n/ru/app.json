@@ -634,7 +634,10 @@
             "done": "Закрыть",
             "cta": "Просмотреть сведения"
           },
-          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций."
+          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
