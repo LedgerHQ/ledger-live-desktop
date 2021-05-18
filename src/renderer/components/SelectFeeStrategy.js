@@ -114,6 +114,7 @@ const SelectFeeStrategy = ({
                       })}`
                     : ""
                 }
+                alwaysShowValue
               />
             </Box>
             <Box>
@@ -125,6 +126,7 @@ const SelectFeeStrategy = ({
                   fontWeight="500"
                   fontSize={3}
                   showCode
+                  alwaysShowValue
                 />
               ) : null}
             </Box>
