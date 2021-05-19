@@ -125,7 +125,7 @@ const FromAccount = ({
       </Box>
       <Box>
         <Label mb={4} mt={25}>
-          <Trans i18nKey={`swap.form.to.account`} />
+          <Trans i18nKey={`swap.form.from.account`} />
         </Label>
         {hasMaybeValidAccounts || !currency ? (
           <SelectAccount
