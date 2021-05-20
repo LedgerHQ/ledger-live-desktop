@@ -31,13 +31,14 @@ const StepRecipient = ({
   bridgePending,
   maybeRecipient,
   onResetMaybeRecipient,
+  currencyName,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
 
   return (
     <Box flow={4}>
-      <TrackPage category="Send Flow" name="Step Recipient" />
+      <TrackPage category="Send Flow" name="Step Recipient" currencyName={currencyName} />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <Box flow={1}>
