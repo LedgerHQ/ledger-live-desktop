@@ -1677,10 +1677,10 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@6.0.0-alpha.6", "@ledgerhq/cryptoassets@^6.0.0-alpha.6":
-  version "6.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.0.0-alpha.6.tgz#2f51cb43283caa91f1bd2b043325befb68475626"
-  integrity sha512-H6vChFOwcehg3GaJxe/CuWNM6AuJiyuxbklTIg9oRJiHFg+kyLqM1+u5wabSVYecYwkpZ/iC+kh98bAKL189AA==
+"@ledgerhq/cryptoassets@6.0.0-alpha.7", "@ledgerhq/cryptoassets@^6.0.0-alpha.7":
+  version "6.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.0.0-alpha.7.tgz#35101f42a48e1dd5366df2d49841f7d914806f33"
+  integrity sha512-HEq/SRklfoALWUHvIXzFjcGsdrwzlCyAGkTvaSF6kaBOE07jD3xNklaQdhfqZHuedZdlAB6pOTYd5T/9PqSzCQ==
   dependencies:
     invariant "2"
 
@@ -1744,12 +1744,12 @@
     "@ledgerhq/hw-transport" "^5.51.1"
     bip32-path "^0.4.2"
 
-"@ledgerhq/hw-app-eth@6.0.0-alpha.6":
-  version "6.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-6.0.0-alpha.6.tgz#eb54bf6b04fadea9fb9ddaf0330ed917a07216fe"
-  integrity sha512-y6dxQ+SP831DGZ5OGcI0tWRnb+dNCOCe3Y6sUXgp7cxGBqeR3cuaVgVdLLU8eMQl2gEs+OhX+2RCtL9yve2WLg==
+"@ledgerhq/hw-app-eth@6.0.0-alpha.7":
+  version "6.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-app-eth/-/hw-app-eth-6.0.0-alpha.7.tgz#679a73b27aaf11a4aa69787c40c45f504e2df520"
+  integrity sha512-wNndSSJXSz32y6zAWpytYpFY9ZZ/BVsFgJMrXgtpyWNIPdTY6ACGx3nI/YvyzVOf4WDVvl/BX+BplKJa1fhiLg==
   dependencies:
-    "@ledgerhq/cryptoassets" "^6.0.0-alpha.6"
+    "@ledgerhq/cryptoassets" "^6.0.0-alpha.7"
     "@ledgerhq/errors" "^5.50.0"
     "@ledgerhq/hw-transport" "^5.51.1"
     "@ledgerhq/logs" "^5.50.0"
@@ -1875,19 +1875,19 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@20.0.0-alpha.9":
-  version "20.0.0-alpha.9"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-20.0.0-alpha.9.tgz#9e2705043aca4c44fe424800d535d46c62b0e896"
-  integrity sha512-UjCXUe4iSKuqYyZ3EzC0MNkWCPDpltmAGmP804pVGgpNE3CkNvM71n+3oTcF6/Og0ffejuJn1H5K6cA3hBHP/w==
+"@ledgerhq/live-common@20.0.0-alpha.11":
+  version "20.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-20.0.0-alpha.11.tgz#bdd1333747fde8c4465cd8ff2720da4f0aa0cd0b"
+  integrity sha512-wZRZUJGKSJ6qo1DDtyNkPpoQCQKHYDTLbrK0ol8ltWLaAfBoKpJt2vb7H0RhMJ64jjFuZ3Luav2xsA3zVZJMcA==
   dependencies:
     "@ledgerhq/compressjs" "1.3.2"
-    "@ledgerhq/cryptoassets" "6.0.0-alpha.6"
+    "@ledgerhq/cryptoassets" "6.0.0-alpha.7"
     "@ledgerhq/devices" "5.51.1"
     "@ledgerhq/errors" "5.50.0"
     "@ledgerhq/hw-app-algorand" "^5.51.1"
     "@ledgerhq/hw-app-btc" "^5.51.1"
     "@ledgerhq/hw-app-cosmos" "^5.51.1"
-    "@ledgerhq/hw-app-eth" "6.0.0-alpha.6"
+    "@ledgerhq/hw-app-eth" "6.0.0-alpha.7"
     "@ledgerhq/hw-app-polkadot" "^5.51.1"
     "@ledgerhq/hw-app-str" "^5.51.1"
     "@ledgerhq/hw-app-tezos" "^5.51.1"
@@ -15454,12 +15454,7 @@ xmlchars@^2.2.0:
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
 
-xstate@^4.18.0:
-  version "4.18.0"
-  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.18.0.tgz#64a0002cc7deca1cb1891f002bbe786193e97497"
-  integrity sha512-cjj22XXxTWIkMrghyoUWjUlDFcd7MQGeKYy8bkdtcIeogZjF98mep9CHv8xLO3j4PZQF5qgcAGGT8FUn99mF1Q==
-
-xstate@^4.19.1:
+xstate@^4.18.0, xstate@^4.19.1:
   version "4.19.1"
   resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.19.1.tgz#6d6b5388b11a0297894be0caaef2299891c6fb6a"
   integrity sha512-tnBh6ue9MiyoMkE2+w1IqfvJm4nBe3S4Ky/RLvlo9vka8FdO4WyyT3M7PA0pQoM/FZ9aJVWFOlsNw0Nc7E+4Bw==
