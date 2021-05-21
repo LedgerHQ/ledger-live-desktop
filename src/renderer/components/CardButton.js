@@ -25,7 +25,7 @@ const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = s
   py: 5,
   fontSize: 4,
 }))`
-  min-width: 192px;
+  width: 205px;
   border-radius: 4px;
   cursor: ${p => (p.disabled ? "default" : "pointer")};
   color: ${p => p.theme.colors.palette.text.shade100};

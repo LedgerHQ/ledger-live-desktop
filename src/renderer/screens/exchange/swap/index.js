@@ -22,15 +22,21 @@ import IconChangelly from "~/renderer/icons/providers/Changelly";
 import IconParaswap from "~/renderer/icons/providers/Paraswap";
 // import IconWyre from "~/renderer/icons/providers/Wyre";
 
-const getColumnsTemplate = length =>
-  length >= 3 ? "1fr 1fr  1fr" : length === 2 ? "1fr  1fr" : "1fr";
-
 const Grid = styled.div`
-  display: grid;
-  grid-gap: 24px;
-  padding: 24px;
-  grid-template-columns: ${p => getColumnsTemplate(p.length)};
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px;
   width: 100%;
+`;
+
+const GridItem = styled.div`
+  margin: 12px;
+  > * {
+    height: 100%;
+  }
 `;
 
 const Header: ThemedComponent<{}> = styled(Box).attrs(p => ({
@@ -74,18 +80,18 @@ const PROVIDERS = [
   //   kycRequired: true,
   // },
   {
-    provider: "changelly",
-    name: "Changelly",
-    isDapp: false,
-    icon: <IconChangelly size={50} />,
-    disabled: false,
-    kycRequired: false,
-  },
-  {
     provider: "paraswap",
     name: "ParaSwap",
     isDapp: true,
     icon: <IconParaswap size={50} />,
+    disabled: false,
+    kycRequired: false,
+  },
+  {
+    provider: "changelly",
+    name: "Changelly",
+    isDapp: false,
+    icon: <IconChangelly size={50} />,
     disabled: false,
     kycRequired: false,
   },
@@ -145,24 +151,25 @@ const SelectProvider = () => {
               .filter(Boolean);
 
             return (
-              <CardButton
-                key={p.provider}
-                title={p.name}
-                icon={p.icon}
-                footer={
-                  p.kycRequired && (
-                    <Alert type="secondary" small>
-                      {t("swap.providers.kycRequired")}
-                    </Alert>
-                  )
-                }
-                onClick={() => handleSelectProvider(p.provider)}
-                isActive={p.provider === provider}
-                disabled={p.disabled || false}
-              >
-                {description && <Box mb={4}>{description}</Box>}
-                {!!bullets.length && <BulletList bullets={bullets} />}
-              </CardButton>
+              <GridItem key={p.provider}>
+                <CardButton
+                  title={p.name}
+                  icon={p.icon}
+                  footer={
+                    p.kycRequired && (
+                      <Alert type="secondary" small>
+                        {t("swap.providers.kycRequired")}
+                      </Alert>
+                    )
+                  }
+                  onClick={() => handleSelectProvider(p.provider)}
+                  isActive={p.provider === provider}
+                  disabled={p.disabled || false}
+                >
+                  {description && <Box mb={4}>{description}</Box>}
+                  {!!bullets.length && <BulletList bullets={bullets} />}
+                </CardButton>
+              </GridItem>
             );
           })}
         </Grid>

@@ -17,15 +17,21 @@ import CardButton from "~/renderer/components/CardButton";
 import BulletList from "~/renderer/components/BulletList";
 import IconWyre from "~/renderer/icons/providers/Wyre";
 
-const getColumnsTemplate = length =>
-  length >= 3 ? "1fr 1fr  1fr" : length === 2 ? "1fr  1fr" : "1fr";
-
 const Grid = styled.div`
-  display: grid;
-  grid-gap: 24px;
-  padding: 24px;
-  grid-template-columns: ${p => getColumnsTemplate(p.length)};
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px;
   width: 100%;
+`;
+
+const GridItem = styled.div`
+  margin: 12px;
+  > * {
+    height: 100%;
+  }
 `;
 
 const Header: ThemedComponent<{}> = styled(Box).attrs(p => ({
@@ -111,23 +117,24 @@ const SelectProvider = () => {
         </Header>
         <Grid length={PROVIDERS.length}>
           {PROVIDERS.map(p => (
-            <CardButton
-              key={p.provider}
-              title={p.name}
-              icon={p.icon}
-              onClick={() => handleSelectProvider(p.provider)}
-              isActive={p.provider === provider}
-              disabled={p.disabled || false}
-            >
-              <BulletList
-                bullets={t(`exchange.providers.${p.provider}.bullets`, {
-                  joinArrays: ";",
-                  defaultValue: "",
-                })
-                  .split(";")
-                  .filter(Boolean)}
-              />
-            </CardButton>
+            <GridItem key={p.provider}>
+              <CardButton
+                title={p.name}
+                icon={p.icon}
+                onClick={() => handleSelectProvider(p.provider)}
+                isActive={p.provider === provider}
+                disabled={p.disabled || false}
+              >
+                <BulletList
+                  bullets={t(`exchange.providers.${p.provider}.bullets`, {
+                    joinArrays: ";",
+                    defaultValue: "",
+                  })
+                    .split(";")
+                    .filter(Boolean)}
+                />
+              </CardButton>
+            </GridItem>
           ))}
         </Grid>
         <Footer>
