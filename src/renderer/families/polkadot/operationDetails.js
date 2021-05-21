@@ -16,6 +16,7 @@ import {
   Address,
   OpDetailsData,
   OpDetailsVoteData,
+  OpDetailsSection,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
@@ -77,7 +78,7 @@ export const OperationDetailsValidators = ({
   );
 
   return (
-    <Box>
+    <OpDetailsSection>
       {!isTransactionField && (
         <OpDetailsTitle>
           <Trans
@@ -86,18 +87,19 @@ export const OperationDetailsValidators = ({
           />
         </OpDetailsTitle>
       )}
-
-      {mappedValidators.map(({ address, identity }, i) => (
-        <OpDetailsData key={address + i}>
-          <OpDetailsVoteData>
-            <Box>
-              <Text ff="Inter|SemiBold">{identity ?? address}</Text>
-            </Box>
-            <Address onClick={redirectAddress(currency, address)}>{address}</Address>
-          </OpDetailsVoteData>
-        </OpDetailsData>
-      ))}
-    </Box>
+      <Box pl={2}>
+        {mappedValidators.map(({ address, identity }, i) => (
+          <OpDetailsData key={address + i} justifyContent="flex-start">
+            <OpDetailsVoteData>
+              <Box>
+                <Text ff="Inter|SemiBold">{identity ?? address}</Text>
+              </Box>
+              <Address onClick={redirectAddress(currency, address)}>{address}</Address>
+            </OpDetailsVoteData>
+          </OpDetailsData>
+        ))}
+      </Box>
+    </OpDetailsSection>
   );
 };
 
@@ -120,7 +122,7 @@ export const OperationDetailsRewardFrom = ({
   ]);
 
   return (
-    <Box>
+    <OpDetailsSection>
       <OpDetailsTitle>
         <Trans i18nKey={"operationDetails.extra.rewardFrom"} />
       </OpDetailsTitle>
@@ -129,7 +131,7 @@ export const OperationDetailsRewardFrom = ({
           {validator ? validator.identity ?? validator.address : validatorStash}
         </Address>
       </OpDetailsData>
-    </Box>
+    </OpDetailsSection>
   );
 };
 
@@ -140,13 +142,13 @@ type OperationDetailsPalletMethodProps = {
 export const OperationDetailsPalletMethod = ({
   palletMethod,
 }: OperationDetailsPalletMethodProps) => {
-  return palletMethod ? (
-    <Box>
+  return !palletMethod ? (
+    <OpDetailsSection>
       <OpDetailsTitle>
         <Trans i18nKey={"operationDetails.extra.palletMethod"} />
       </OpDetailsTitle>
       <OpDetailsData>{formatPalletMethod(palletMethod)}</OpDetailsData>
-    </Box>
+    </OpDetailsSection>
   ) : null;
 };
 
@@ -163,21 +165,23 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       return (
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
-          <Box>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey="operationDetails.extra.transferAmount" />
             </OpDetailsTitle>
             <OpDetailsData>
-              <FormattedVal
-                val={BigNumber(extra.transferAmount)}
-                unit={account.unit}
-                disableRounding={true}
-                showCode
-                fontSize={4}
-                color="palette.text.shade60"
-              />
+              <Box>
+                <FormattedVal
+                  val={BigNumber(extra.transferAmount)}
+                  unit={account.unit}
+                  disableRounding={true}
+                  showCode
+                  fontSize={4}
+                  color="palette.text.shade60"
+                />
+              </Box>
             </OpDetailsData>
-          </Box>
+          </OpDetailsSection>
         </>
       );
     case "NOMINATE": {
@@ -187,9 +191,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       return (
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
-          <Box>
-            <OperationDetailsValidators validators={validators} account={account} />
-          </Box>
+          <OperationDetailsValidators validators={validators} account={account} />
         </>
       );
     }
@@ -198,21 +200,23 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
           {extra.bondedAmount ? (
-            <Box>
+            <OpDetailsSection>
               <OpDetailsTitle>
                 <Trans i18nKey="operationDetails.extra.bondedAmount" />
               </OpDetailsTitle>
               <OpDetailsData>
-                <FormattedVal
-                  val={BigNumber(extra.bondedAmount)}
-                  unit={account.unit}
-                  disableRounding={true}
-                  showCode
-                  fontSize={4}
-                  color="palette.text.shade60"
-                />
+                <Box>
+                  <FormattedVal
+                    val={BigNumber(extra.bondedAmount)}
+                    unit={account.unit}
+                    disableRounding={true}
+                    showCode
+                    fontSize={4}
+                    color="palette.text.shade60"
+                  />
+                </Box>
               </OpDetailsData>
-            </Box>
+            </OpDetailsSection>
           ) : null}
         </>
       );
@@ -220,21 +224,23 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       return (
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
-          <Box>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey="operationDetails.extra.unbondedAmount" />
             </OpDetailsTitle>
             <OpDetailsData>
-              <FormattedVal
-                val={BigNumber(extra.unbondedAmount)}
-                unit={account.unit}
-                disableRounding={true}
-                showCode
-                fontSize={4}
-                color="palette.text.shade60"
-              />
+              <Box>
+                <FormattedVal
+                  val={BigNumber(extra.unbondedAmount)}
+                  unit={account.unit}
+                  disableRounding={true}
+                  showCode
+                  fontSize={4}
+                  color="palette.text.shade60"
+                />
+              </Box>
             </OpDetailsData>
-          </Box>
+          </OpDetailsSection>
         </>
       );
     case "WITHDRAW_UNBONDED":
@@ -246,14 +252,16 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
               <Trans i18nKey="operationDetails.extra.withdrawUnbondedAmount" />
             </OpDetailsTitle>
             <OpDetailsData>
-              <FormattedVal
-                val={BigNumber(extra.withdrawUnbondedAmount)}
-                unit={account.unit}
-                disableRounding={true}
-                showCode
-                fontSize={4}
-                color="palette.text.shade60"
-              />
+              <Box>
+                <FormattedVal
+                  val={BigNumber(extra.withdrawUnbondedAmount)}
+                  unit={account.unit}
+                  disableRounding={true}
+                  showCode
+                  fontSize={4}
+                  color="palette.text.shade60"
+                />
+              </Box>
             </OpDetailsData>
           </Box>
         </>

@@ -1,9 +1,9 @@
 /* @flow */
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect, useCallback } from "react";
 
 type State = {
-  Component: *,
-  props: *,
+  Component: ?React$ComponentType<*>,
+  props?: *,
   open: boolean,
 };
 
@@ -18,22 +18,34 @@ const reducer = (state: State, update) => {
     ...update,
   };
 };
-const initialState = {
+const initialState: State = {
   Component: null,
   props: null,
   open: false,
 };
 
-export const context = React.createContext<State>(initialState);
+type ContextValue = {
+  state: State,
+  setDrawer: (Component?: React$ComponentType<*>, props?: *) => void,
+};
+
+export const context = React.createContext<ContextValue>({
+  state: initialState,
+  setDrawer: () => {},
+});
 
 const DrawerProvider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const _setDrawer = useCallback(
+    (Component, props) => dispatch({ Component, props, open: !!Component }),
+    [],
+  );
 
   useEffect(() => {
-    setDrawer = (Component, props) => dispatch({ Component, props, open: !!Component });
-  }, []);
+    setDrawer = _setDrawer;
+  }, [_setDrawer]);
 
-  return <context.Provider value={state}>{children}</context.Provider>;
+  return <context.Provider value={{ state, setDrawer: _setDrawer }}>{children}</context.Provider>;
 };
 
 export default DrawerProvider;

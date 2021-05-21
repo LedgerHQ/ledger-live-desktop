@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, useCallback } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -32,7 +32,6 @@ import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
-import useTheme from "~/renderer/hooks/useTheme";
 import CounterValue from "~/renderer/components/CounterValue";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import FakeLink from "~/renderer/components/FakeLink";
@@ -40,13 +39,13 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Link from "~/renderer/components/Link";
 import LinkHelp from "~/renderer/components/LinkHelp";
-import { ModalBody } from "~/renderer/components/Modal";
 import ConfirmationCheck from "~/renderer/components/OperationsList/ConfirmationCheck";
 import OperationComponent from "~/renderer/components/OperationsList/Operation";
 import Text from "~/renderer/components/Text";
 import byFamiliesOperationDetails from "~/renderer/generated/operationDetails";
 import IconChevronRight from "~/renderer/icons/ChevronRight";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
+import InfoCircle from "~/renderer/icons/InfoCircle";
 import { openURL } from "~/renderer/linking";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -65,18 +64,15 @@ import {
   TextEllipsis,
   Separator,
   HashContainer,
+  OpDetailsSideButton,
 } from "./styledComponents";
 import ToolTip from "~/renderer/components/Tooltip";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
-import DoubleCounterValue from "~/renderer/components/DoubleCounterValue";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import { setDrawer } from "../Provider";
-
-const SeparatorLine = styled.div`
-  width: 100%;
-  height: 1px;
-  background-color: ${p => p.theme.colors.palette.divider};
-`;
+import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import AmountDetails from "./AmountDetails";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -107,8 +103,8 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
 
 type OwnProps = {
   t: TFunction,
-  operation: ?Operation,
-  account: ?AccountLike,
+  operation: Operation,
+  account: AccountLike,
   onClose: () => void,
 };
 type Props = OwnProps & {
@@ -119,486 +115,470 @@ type Props = OwnProps & {
 };
 type openOperationType = "goBack" | "subOperation" | "internalOperation";
 
-export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()(
-  connect(mapStateToProps)((props: Props) => {
-    const {
-      t,
-      onClose,
+const OperationD: React$ComponentType<Props> = (props: Props) => {
+  const { t, onClose, operation, account, parentAccount, confirmationsNb, marketIndicator } = props;
+
+  const history = useHistory();
+  const location = useLocation();
+
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
+  const recipients = _recipients.filter(Boolean);
+  const { name } = mainAccount;
+
+  const currency = getAccountCurrency(account);
+  const mainCurrency = getAccountCurrency(mainAccount);
+
+  const unit = getAccountUnit(account);
+
+  const amount = getOperationAmountNumber(operation);
+  const isNegative = amount.isNegative();
+  const marketColor = getMarketColor({
+    marketIndicator,
+    isNegative,
+  });
+  const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
+  const isConfirmed = isConfirmedOperation(operation, mainAccount, confirmationsNb);
+
+  const specific = byFamiliesOperationDetails[mainAccount.currency.family];
+
+  const IconElement =
+    specific && specific.confirmationCell ? specific.confirmationCell[operation.type] : null;
+
+  const AmountTooltip =
+    specific && specific.amountTooltip ? specific.amountTooltip[operation.type] : null;
+
+  const urlWhatIsThis =
+    specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
+  const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
+  const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash);
+  const uniqueSenders = uniq(senders);
+
+  const OpDetailsExtra =
+    specific && specific.OperationDetailsExtra
+      ? specific.OperationDetailsExtra
+      : OperationDetailsExtra;
+
+  const { hasFailed } = operation;
+  const subOperations = operation.subOperations || [];
+  const internalOperations = operation.internalOperations || [];
+
+  const isToken = listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0;
+
+  const openOperation = useCallback(
+    (type: openOperationType, operation: Operation, parentOperation?: Operation) => {
+      const data = {
+        operationId: operation.id,
+        accountId: operation.accountId,
+        parentOperation: undefined,
+        parentId: undefined,
+        onRequestBack: undefined,
+      };
+      if (["subOperation", "internalOperation"].includes(type)) {
+        data.parentOperation = parentOperation;
+        if (type === "subOperation") {
+          data.parentId = account.id;
+          data.onRequestBack = parentOperation
+            ? () => openOperation("goBack", parentOperation)
+            : undefined;
+        }
+      }
+      setDrawer(OperationDetails, data);
+    },
+    [account],
+  );
+
+  const openAmountDetails = useCallback(() => {
+    const data = {
       operation,
       account,
-      parentAccount,
-      confirmationsNb,
-      marketIndicator,
-      parentOperation,
-    } = props;
+      onRequestBack: () => setDrawer(OperationDetails, props),
+    };
 
-    if (!operation || !account) return null;
+    setDrawer(AmountDetails, data);
+  }, [operation, props, account]);
 
-    const history = useHistory();
-    const location = useLocation();
-    const dispatch = useDispatch();
-    const theme = useTheme();
+  const goToMainAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}`;
+    if (location !== url) {
+      setTrackingSource("operation details");
+      history.push({ pathname: url });
+    }
+    onClose();
+  }, [mainAccount, history, onClose, location]);
 
-    const mainAccount = getMainAccount(account, parentAccount);
-    const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
-    const recipients = _recipients.filter(Boolean);
-    const { name } = mainAccount;
+  const goToSubAccount = useCallback(() => {
+    const url = `/account/${mainAccount.id}/${account.id}`;
+    if (location !== url) {
+      setTrackingSource("operation details");
+      history.push({ pathname: url });
+    }
+    onClose();
+  }, [mainAccount, account, history, onClose, location]);
 
-    const currency = getAccountCurrency(account);
-
-    const unit = getAccountUnit(account);
-
-    const amount = getOperationAmountNumber(operation);
-    const isNegative = amount.isNegative();
-    const marketColor = getMarketColor({
-      marketIndicator,
-      isNegative,
-    });
-    const confirmationsString = getOperationConfirmationDisplayableNumber(operation, mainAccount);
-    const isConfirmed = isConfirmedOperation(operation, mainAccount, confirmationsNb);
-
-    const specific = byFamiliesOperationDetails[mainAccount.currency.family];
-
-    const IconElement =
-      specific && specific.confirmationCell ? specific.confirmationCell[operation.type] : null;
-
-    const AmountTooltip =
-      specific && specific.amountTooltip ? specific.amountTooltip[operation.type] : null;
-
-    const urlWhatIsThis =
-      specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
-    const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
-    const url = getTransactionExplorer(
-      getDefaultExplorerView(mainAccount.currency),
-      operation.hash,
-    );
-    const uniqueSenders = uniq(senders);
-
-    const OpDetailsExtra =
-      specific && specific.OperationDetailsExtra
-        ? specific.OperationDetailsExtra
-        : OperationDetailsExtra;
-
-    const { hasFailed } = operation;
-    const subOperations = operation.subOperations || [];
-    const internalOperations = operation.internalOperations || [];
-
-    const isToken = listTokenTypesForCryptoCurrency(mainAccount.currency).length > 0;
-
-    const openOperation = useCallback(
-      (type: openOperationType, operation: Operation, parentOperation?: Operation) => {
-        const data = {
-          operationId: operation.id,
-          accountId: operation.accountId,
-          parentOperation: undefined,
-          parentId: undefined,
-        };
-        if (["subOperation", "internalOperation"].includes(type)) {
-          data.parentOperation = parentOperation;
-          if (type === "subOperation") {
-            data.parentId = account.id;
-          }
-        }
-        dispatch(setDrawer(OperationDetails, data));
-      },
-      [dispatch, account],
-    );
-
-    const goToMainAccount = useCallback(() => {
-      const url = `/account/${mainAccount.id}`;
-      if (location !== url) {
-        setTrackingSource("operation details");
-        history.push({ pathname: url });
-      }
-      onClose();
-    }, [mainAccount, history, onClose, location]);
-
-    const goToSubAccount = useCallback(() => {
-      const url = `/account/${mainAccount.id}/${account.id}`;
-      if (location !== url) {
-        setTrackingSource("operation details");
-        history.push({ pathname: url });
-      }
-      onClose();
-    }, [mainAccount, account, history, onClose, location]);
-
-    return (
-      <>
-        <Box pt={20} grow>
-          <ModalBody
-            title={t(`operation.type.${operation.type}`)}
-            subTitle={t("operationDetails.title")}
-            onClose={onClose}
-            headerStyle={{
-              height: "72px",
-              paddingBottom: "25px",
-              borderBottom: "solid 1px " + theme.colors.palette.divider,
+  return (
+    <Box flow={3} px={20} mt={20}>
+      <TrackPage
+        category={location.pathname !== "/" ? "Account" : "Portfolio"}
+        name="Operation Details"
+        currencyName={currency.name}
+      />
+      <Box alignItems="center" mt={1} mb={3}>
+        {IconElement ? (
+          <IconElement
+            operation={operation}
+            marketColor={marketColor}
+            isConfirmed={isConfirmed}
+            hasFailed={hasFailed}
+            style={{
+              transform: "scale(1.5)",
+              padding: 0,
             }}
-            onBack={parentOperation ? () => openOperation("goBack", parentOperation) : undefined}
-            render={() => (
-              <>
-                <Box flow={3} px={20} mt={20}>
-                  <TrackPage
-                    category={location.pathname !== "/" ? "Account" : "Portfolio"}
-                    name="Operation Details"
-                    currencyName={currency.name}
+            t={t}
+            type={type}
+            withTooltip={false}
+          />
+        ) : (
+          <ConfirmationCheck
+            marketColor={marketColor}
+            isConfirmed={isConfirmed}
+            hasFailed={hasFailed}
+            t={t}
+            style={{
+              transform: "scale(1.5)",
+              padding: 0,
+            }}
+            type={type}
+            withTooltip={false}
+          />
+        )}
+      </Box>
+      <Text
+        ff="Inter|SemiBold"
+        textAlign="center"
+        fontSize={4}
+        color="palette.text.shade60"
+        mt={0}
+        mb={1}
+      >
+        <Trans i18nKey={`operation.type.${operation.type}`} />
+      </Text>
+      <Box alignItems="center" mt={0}>
+        {!amount.isZero() && (
+          <Box selectable>
+            {hasFailed ? (
+              <Box color="alertRed">
+                <Trans i18nKey="operationDetails.failed" />
+              </Box>
+            ) : (
+              <ToolTip
+                content={
+                  AmountTooltip ? (
+                    <AmountTooltip operation={operation} amount={amount} unit={unit} />
+                  ) : null
+                }
+              >
+                <FormattedVal
+                  color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                  unit={unit}
+                  alwaysShowSign
+                  showCode
+                  val={amount}
+                  fontSize={7}
+                  disableRounding
+                />
+              </ToolTip>
+            )}
+          </Box>
+        )}
+      </Box>
+      {url ? (
+        <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} my={1}>
+          <LinkWithExternalIcon
+            fontSize={4}
+            onClick={() => openURL(url)}
+            label={t("operationDetails.viewOperation")}
+          />
+        </Box>
+      ) : null}
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.amount")}</OpDetailsTitle>
+        <OpDetailsData onClick={openAmountDetails}>
+          <OpDetailsSideButton mt={0}>
+            <Box mr={2}>
+              {hasFailed ? null : (
+                <CounterValue
+                  alwaysShowSign
+                  color="palette.text.shade60"
+                  fontSize={3}
+                  date={date}
+                  currency={currency}
+                  value={amount}
+                />
+              )}
+            </Box>
+            <IconChevronRight size={12} />
+          </OpDetailsSideButton>
+        </OpDetailsData>
+      </OpDetailsSection>
+      {(isNegative || fee) && (
+        <OpDetailsSection>
+          <OpDetailsTitle>{t("operationDetails.fees")}</OpDetailsTitle>
+          <OpDetailsData>
+            {fee ? (
+              <Box alignItems="flex-end">
+                <Box horizontal alignItems="center">
+                  {urlFeesInfo ? (
+                    <Box ff="Inter|SemiBold" fontSize={4} mr={2}>
+                      <LinkHelp
+                        Icon={InfoCircle}
+                        label={<Trans i18nKey="common.info" />}
+                        onClick={() => openURL(urlFeesInfo)}
+                      />
+                    </Box>
+                  ) : null}
+                  <FormattedVal
+                    unit={mainAccount.unit}
+                    showCode
+                    val={fee}
+                    color="palette.text.shade80"
                   />
-                  <Box alignItems="center" mt={1}>
-                    {IconElement ? (
-                      <IconElement
-                        operation={operation}
-                        marketColor={marketColor}
-                        isConfirmed={isConfirmed}
-                        hasFailed={hasFailed}
-                        style={{
-                          transform: "scale(1.5)",
-                          paddingLeft: 0,
-                        }}
-                        t={t}
-                        type={type}
-                        withTooltip={false}
-                      />
-                    ) : (
-                      <ConfirmationCheck
-                        marketColor={marketColor}
-                        isConfirmed={isConfirmed}
-                        hasFailed={hasFailed}
-                        t={t}
-                        style={{
-                          transform: "scale(1.5)",
-                        }}
-                        type={type}
-                        withTooltip={false}
-                      />
-                    )}
-                  </Box>
-                  <Box my={4} alignItems="center">
-                    {!amount.isZero() && (
-                      <>
-                        <Box selectable>
-                          {hasFailed ? (
-                            <Box color="alertRed">
-                              <Trans i18nKey="operationDetails.failed" />
-                            </Box>
-                          ) : (
-                            <ToolTip
-                              content={
-                                AmountTooltip ? (
-                                  <AmountTooltip
-                                    operation={operation}
-                                    amount={amount}
-                                    unit={unit}
-                                  />
-                                ) : null
-                              }
-                            >
-                              <FormattedVal
-                                color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                                unit={unit}
-                                alwaysShowSign
-                                showCode
-                                val={amount}
-                                fontSize={7}
-                                disableRounding
-                              />
-                            </ToolTip>
-                          )}
-                        </Box>
-                        <Box mt={1} selectable>
-                          {hasFailed ? null : (
-                            <DoubleCounterValue
-                              alwaysShowSign
-                              color="palette.text.shade60"
-                              fontSize={5}
-                              date={date}
-                              currency={currency}
-                              value={amount}
-                            />
-                          )}
-                        </Box>
-                      </>
-                    )}
-                  </Box>
-                  {subOperations.length > 0 && account.type === "Account" && (
-                    <>
-                      <OpDetailsSection>
-                        {t(
-                          isToken
-                            ? "operationDetails.tokenOperations"
-                            : "operationDetails.subAccountOperations",
-                        )}
-                        &nbsp;
-                        <LabelInfoTooltip
-                          text={t(
-                            isToken
-                              ? "operationDetails.tokenTooltip"
-                              : "operationDetails.subAccountTooltip",
-                          )}
-                          style={{ marginLeft: 4 }}
-                        />
-                      </OpDetailsSection>
-                      <Box style={{ overflowX: "hidden" }}>
-                        {subOperations.map((op, i) => {
-                          const opAccount = findSubAccountById(account, op.accountId);
-
-                          if (!opAccount) return null;
-
-                          const subAccountName =
-                            opAccount.type === "ChildAccount"
-                              ? opAccount.name
-                              : getAccountCurrency(opAccount).name;
-                          return (
-                            <div key={`${op.id}`}>
-                              <OperationComponent
-                                text={subAccountName}
-                                operation={op}
-                                account={opAccount}
-                                parentAccount={account}
-                                onOperationClick={() =>
-                                  openOperation("subOperation", op, operation)
-                                }
-                                t={t}
-                                withAddress={false}
-                              />
-                              {i < subOperations.length - 1 && <B />}
-                            </div>
-                          );
-                        })}
+                </Box>
+                <Box horizontal justifyContent="flex-end">
+                  <CounterValue
+                    color="palette.text.shade60"
+                    date={date}
+                    fontSize={3}
+                    currency={mainAccount.currency}
+                    value={fee}
+                    subMagnitude={1}
+                    style={{ width: "auto" }}
+                    prefix={
+                      <Box mr={1} color="palette.text.shade60" style={{ width: "auto" }}>
+                        {"≈"}
                       </Box>
-                    </>
-                  )}
+                    }
+                  />
+                </Box>
+              </Box>
+            ) : (
+              t("operationDetails.noFees")
+            )}
+          </OpDetailsData>
+        </OpDetailsSection>
+      )}
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.type")}</OpDetailsTitle>
+        <OpDetailsData horizontal alignItems="center">
+          {urlWhatIsThis ? (
+            <Box ff="Inter|SemiBold" fontSize={4} mr={2}>
+              <LinkHelp
+                Icon={InfoCircle}
+                label={<Trans i18nKey="common.info" />}
+                onClick={() => openURL(urlWhatIsThis)}
+              />
+            </Box>
+          ) : (
+            undefined
+          )}
+          <Text ff="Inter|SemiBold" textAlign="center" fontSize={4} color="palette.text.shade60">
+            <Trans i18nKey={`operation.type.${operation.type}`} />
+          </Text>
+        </OpDetailsData>
+      </OpDetailsSection>
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.status")}</OpDetailsTitle>
+        <OpDetailsData
+          color={hasFailed ? "alertRed" : isConfirmed ? "positiveGreen" : undefined}
+          horizontal
+          flow={1}
+        >
+          <Box>
+            {hasFailed
+              ? t("operationDetails.failed")
+              : isConfirmed
+              ? t("operationDetails.confirmed")
+              : t("operationDetails.notConfirmed")}
+            {hasFailed ? null : `${confirmationsString ? ` (${confirmationsString})` : ``}`}
+          </Box>
+        </OpDetailsData>
+      </OpDetailsSection>
+      <B />
+      {subOperations.length > 0 && account.type === "Account" && (
+        <>
+          <OpDetailsSection>
+            <OpDetailsTitle>
+              {t(
+                isToken
+                  ? "operationDetails.tokenOperations"
+                  : "operationDetails.subAccountOperations",
+              )}
+              &nbsp;
+              <LabelInfoTooltip
+                text={t(
+                  isToken ? "operationDetails.tokenTooltip" : "operationDetails.subAccountTooltip",
+                )}
+                style={{ marginLeft: 4 }}
+              />
+            </OpDetailsTitle>
+          </OpDetailsSection>
+          <Box m={0} style={{ overflowX: "hidden" }}>
+            {subOperations.map((op, i) => {
+              const opAccount = findSubAccountById(account, op.accountId);
 
-                  {internalOperations.length > 0 && account.type === "Account" && (
-                    <>
-                      <OpDetailsSection>
-                        {t("operationDetails.internalOperations")}
-                        <LabelInfoTooltip
-                          text={t("operationDetails.internalOpTooltip")}
-                          style={{ marginLeft: 4 }}
-                        />
-                      </OpDetailsSection>
-                      <Box>
-                        {internalOperations.map((op, i) => (
-                          <NoMarginWrapper key={`${op.id}`}>
-                            <OperationComponent
-                              text={account.currency.name}
-                              operation={op}
-                              account={account}
-                              onOperationClick={() =>
-                                openOperation("internalOperation", op, operation)
-                              }
-                              t={t}
-                            />
-                            {i < internalOperations.length - 1 && <B />}
-                          </NoMarginWrapper>
-                        ))}
-                      </Box>
-                    </>
-                  )}
+              if (!opAccount) return null;
 
-                  {internalOperations.length || subOperations.length ? (
-                    <OpDetailsSection mb={2}>
-                      {t("operationDetails.details", { currency: currency.name })}
-                    </OpDetailsSection>
-                  ) : null}
+              const subAccountName =
+                opAccount.type === "ChildAccount"
+                  ? opAccount.name
+                  : getAccountCurrency(opAccount).name;
+              return (
+                <div key={`${op.id}`}>
+                  <OperationComponent
+                    text={subAccountName}
+                    operation={op}
+                    account={opAccount}
+                    parentAccount={account}
+                    onOperationClick={() => openOperation("subOperation", op, operation)}
+                    t={t}
+                    withAddress={false}
+                  />
+                  {i < subOperations.length - 1 && <B />}
+                </div>
+              );
+            })}
+          </Box>
+        </>
+      )}
 
-                  <Box horizontal flow={2}>
-                    <Box flex={1}>
-                      <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
-                      <OpDetailsData horizontal>
-                        <Box
-                          horizontal
-                          alignItems="center"
-                          flex="1"
-                          style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}
-                        >
-                          <TextEllipsis>
-                            <Link onClick={goToMainAccount}>{name}</Link>
-                          </TextEllipsis>
-                          <AccountTagDerivationMode account={account} />
-                        </Box>
+      {internalOperations.length > 0 && account.type === "Account" && (
+        <>
+          <OpDetailsSection>
+            {t("operationDetails.internalOperations")}
+            <LabelInfoTooltip
+              text={t("operationDetails.internalOpTooltip")}
+              style={{ marginLeft: 4 }}
+            />
+          </OpDetailsSection>
+          <Box>
+            {internalOperations.map((op, i) => (
+              <NoMarginWrapper key={`${op.id}`}>
+                <OperationComponent
+                  text={account.currency.name}
+                  operation={op}
+                  account={account}
+                  onOperationClick={() => openOperation("internalOperation", op, operation)}
+                  t={t}
+                />
+                {i < internalOperations.length - 1 && <B />}
+              </NoMarginWrapper>
+            ))}
+          </Box>
+        </>
+      )}
 
-                        {parentAccount ? (
-                          <>
-                            <Separator>{"/"}</Separator>
-                            <Box horizontal alignItems="center" flex="1">
-                              <TextEllipsis>
-                                <Link onClick={goToSubAccount}>{currency.name}</Link>
-                              </TextEllipsis>
-                              <AccountTagDerivationMode account={parentAccount} />
-                            </Box>
-                          </>
-                        ) : null}
-                      </OpDetailsData>
-                    </Box>
-                    <Box flex={1}>
-                      <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
-                      <OpDetailsData>
-                        <FormattedDate date={date} />
-                      </OpDetailsData>
-                    </Box>
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
+        <OpDetailsData>
+          <Box horizontal>
+            <Box
+              horizontal
+              alignItems="center"
+              flex="1"
+              style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}
+            >
+              <Box mt={0} mr={1}>
+                <CryptoCurrencyIcon currency={mainCurrency} size={16} />
+              </Box>
+
+              <TextEllipsis>
+                <Link onClick={goToMainAccount}>{name}</Link>
+              </TextEllipsis>
+              <AccountTagDerivationMode account={account} />
+            </Box>
+
+            {parentAccount ? (
+              <>
+                <Separator>{"/"}</Separator>
+                <Box horizontal alignItems="center" flex="1">
+                  <Box mt={0} mr={1}>
+                    <CryptoCurrencyIcon currency={currency} size={16} />
                   </Box>
-                  <B />
-                  <Box horizontal flow={2}>
-                    {(isNegative || fee) && (
-                      <Box flex={1}>
-                        <Box horizontal>
-                          <OpDetailsTitle>{t("operationDetails.fees")}</OpDetailsTitle>
-
-                          {urlFeesInfo ? (
-                            <Link>
-                              <FakeLink
-                                underline
-                                fontSize={3}
-                                ml={2}
-                                color="palette.text.shade80"
-                                onClick={() => openURL(urlFeesInfo)}
-                                iconFirst
-                              >
-                                <Box mr={1}>
-                                  <IconExternalLink size={12} />
-                                </Box>
-                                {t("common.learnMore")}
-                              </FakeLink>
-                            </Link>
-                          ) : null}
-                        </Box>
-
-                        {fee ? (
-                          <>
-                            <OpDetailsData>
-                              <FormattedVal
-                                unit={mainAccount.unit}
-                                showCode
-                                val={fee}
-                                color="palette.text.shade80"
-                              />
-                              <Box horizontal>
-                                <CounterValue
-                                  color="palette.text.shade60"
-                                  date={date}
-                                  fontSize={3}
-                                  currency={mainAccount.currency}
-                                  value={fee}
-                                  subMagnitude={1}
-                                  prefix={
-                                    <Box
-                                      mr={1}
-                                      color="palette.text.shade60"
-                                      style={{ lineHeight: 1.2 }}
-                                    >
-                                      {"≈"}
-                                    </Box>
-                                  }
-                                />
-                              </Box>
-                            </OpDetailsData>
-                          </>
-                        ) : (
-                          <OpDetailsData>{t("operationDetails.noFees")}</OpDetailsData>
-                        )}
-                      </Box>
-                    )}
-                    <Box flex={1}>
-                      <OpDetailsTitle>{t("operationDetails.status")}</OpDetailsTitle>
-                      <OpDetailsData
-                        color={hasFailed ? "alertRed" : isConfirmed ? "positiveGreen" : undefined}
-                        horizontal
-                        flow={1}
-                      >
-                        <Box>
-                          {hasFailed
-                            ? t("operationDetails.failed")
-                            : isConfirmed
-                            ? t("operationDetails.confirmed")
-                            : t("operationDetails.notConfirmed")}
-                        </Box>
-                        {hasFailed ? null : (
-                          <Box>{`${confirmationsString ? `(${confirmationsString})` : ``}`}</Box>
-                        )}
-                      </OpDetailsData>
-                    </Box>
-                  </Box>
-                  <B />
-                  <Box>
-                    <OpDetailsTitle>{t("operationDetails.identifier")}</OpDetailsTitle>
-                    <OpDetailsData>
-                      <HashContainer>{hash}</HashContainer>
-                      <GradientHover>
-                        <CopyWithFeedback text={hash} />
-                      </GradientHover>
-                    </OpDetailsData>
-                  </Box>
-                  {uniqueSenders.length ? (
-                    <>
-                      <B />
-                      <Box>
-                        <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
-                        <DataList lines={uniqueSenders} t={t} />
-                      </Box>
-                    </>
-                  ) : null}
-                  {recipients.length ? (
-                    <>
-                      <B />
-                      <Box>
-                        <Box horizontal>
-                          <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
-                          {recipients.length > 1 ? (
-                            <Link>
-                              <FakeLink
-                                underline
-                                fontSize={3}
-                                ml={2}
-                                color="palette.text.shade80"
-                                onClick={() => openURL(urls.multipleDestinationAddresses)}
-                                iconFirst
-                              >
-                                <Box mr={1}>
-                                  <IconExternalLink size={12} />
-                                </Box>
-                                {t("operationDetails.multipleAddresses")}
-                              </FakeLink>
-                            </Link>
-                          ) : null}
-                        </Box>
-                        <DataList lines={recipients} t={t} />
-                      </Box>
-                    </>
-                  ) : null}
-                  <OpDetailsExtra extra={extra} type={type} account={account} />
+                  <TextEllipsis>
+                    <Link onClick={goToSubAccount}>{currency.name}</Link>
+                  </TextEllipsis>
+                  <AccountTagDerivationMode account={parentAccount} />
                 </Box>
               </>
-            )}
-            renderFooter={() => (
-              <Box horizontal grow style={{ height: 72 }} px={9}>
-                {urlWhatIsThis ? (
-                  <Box ff="Inter|SemiBold" fontSize={4}>
-                    <LinkHelp
-                      label={<Trans i18nKey="operationDetails.whatIsThis" />}
-                      onClick={() => openURL(urlWhatIsThis)}
-                    />
+            ) : null}
+          </Box>
+        </OpDetailsData>
+      </OpDetailsSection>
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
+        <OpDetailsData>
+          <FormattedDate date={date} />
+        </OpDetailsData>
+      </OpDetailsSection>
+      <B />
+      <OpDetailsSection>
+        <OpDetailsTitle>{t("operationDetails.identifier")}</OpDetailsTitle>
+        <OpDetailsData>
+          <HashContainer>
+            <SplitAddress value={hash} />
+          </HashContainer>
+          <GradientHover>
+            <CopyWithFeedback text={hash} />
+          </GradientHover>
+        </OpDetailsData>
+      </OpDetailsSection>
+      {uniqueSenders.length ? (
+        <OpDetailsSection>
+          <OpDetailsTitle>{t("operationDetails.from")}</OpDetailsTitle>
+          <DataList lines={uniqueSenders} t={t} />
+        </OpDetailsSection>
+      ) : null}
+      {recipients.length ? (
+        <OpDetailsSection>
+          <OpDetailsTitle>{t("operationDetails.to")}</OpDetailsTitle>
+          <Box alignItems="flex-end" flex="1">
+            {recipients.length > 1 ? (
+              <Link>
+                <FakeLink
+                  underline
+                  fontSize={3}
+                  ml={2}
+                  color="palette.text.shade80"
+                  onClick={() => openURL(urls.multipleDestinationAddresses)}
+                  iconFirst
+                >
+                  <Box mr={1}>
+                    <IconExternalLink size={12} />
                   </Box>
-                ) : null}
-                <div style={{ flex: 1 }} />
-                {url ? (
-                  <Box ff="Inter|SemiBold" fontSize={4}>
-                    <LinkWithExternalIcon
-                      fontSize={4}
-                      onClick={() => openURL(url)}
-                      label={t("operationDetails.viewOperation")}
-                    />
-                  </Box>
-                ) : null}
-              </Box>
-            )}
-          >
-            <TrackPage category="Modal" name="OperationDetails" />
-          </ModalBody>
-        </Box>
-      </>
-    );
-  }),
+                  {t("operationDetails.multipleAddresses")}
+                </FakeLink>
+              </Link>
+            ) : null}
+            <DataList lines={recipients} t={t} />
+          </Box>
+        </OpDetailsSection>
+      ) : null}
+      <B />
+      <OpDetailsExtra extra={extra} type={type} account={account} />
+    </Box>
+  );
+};
+
+const OpDetails = (props: Props) => {
+  const { operation, account } = props;
+
+  if (!operation || !account) return null;
+
+  return <OperationD {...props} />;
+};
+
+export const OperationDetails: React$ComponentType<OwnProps> = withTranslation()(
+  connect(mapStateToProps)(OpDetails),
 );
 
 type OperationDetailsExtraProps = {
@@ -609,14 +589,14 @@ type OperationDetailsExtraProps = {
 
 const OperationDetailsExtra = ({ extra }: OperationDetailsExtraProps) => {
   return Object.entries(extra).map(([key, value]) => (
-    <Box key={key}>
+    <OpDetailsSection key={key}>
       <OpDetailsTitle>
         <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
       </OpDetailsTitle>
       <OpDetailsData>
         <Ellipsis>{value}</Ellipsis>
       </OpDetailsData>
-    </Box>
+    </OpDetailsSection>
   ));
 };
 
@@ -632,22 +612,27 @@ const More = styled(Text).attrs(p => ({
 
 export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
   state = {
-    showMore: false,
+    numToShow: 2,
+    showMore: true,
   };
 
   onClick = () => {
-    this.setState(({ showMore }) => ({ showMore: !showMore }));
+    this.setState(({ showMore, numToShow }) => ({
+      showMore: !showMore,
+      numToShow: showMore ? undefined : 2,
+    }));
   };
 
   render() {
     const { lines, t } = this.props;
-    const { showMore } = this.state;
+    const { showMore, numToShow } = this.state;
     // Hardcoded for now
-    const numToShow = 2;
     const shouldShowMore = lines.length > 3;
-    const renderLine = line => (
-      <OpDetailsData key={line}>
-        <Ellipsis canSelect>{line}</Ellipsis>
+    const renderLine = (line, index) => (
+      <OpDetailsData relative horizontal key={line + index}>
+        <HashContainer>
+          <SplitAddress value={line} />
+        </HashContainer>
         <GradientHover>
           <CopyWithFeedback text={line} />
         </GradientHover>
@@ -655,25 +640,18 @@ export class DataList extends Component<{ lines: string[], t: TFunction }, *> {
     );
 
     return (
-      <Box>
-        {(shouldShowMore ? lines.slice(0, numToShow) : lines).map(renderLine)}
-        {shouldShowMore && !showMore && (
-          <Box onClick={this.onClick} py={1}>
+      <Box flex="1" alignItems="flex-end" style={{ maxWidth: "100%" }}>
+        {lines.slice(0, numToShow).map(renderLine)}
+        {shouldShowMore ? (
+          <OpDetailsSideButton mt={2} onClick={this.onClick}>
             <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
               <IconChevronRight size={12} style={{ marginRight: 5 }} />
-              {t("operationDetails.showMore", { recipients: lines.length - numToShow })}
+              {showMore
+                ? t("operationDetails.showMore", { recipients: lines.length - 2 })
+                : t("operationDetails.showLess")}
             </More>
-          </Box>
-        )}
-        {showMore ? lines.slice(numToShow).map(renderLine) : null}
-        {shouldShowMore && showMore && (
-          <Box onClick={this.onClick} py={1}>
-            <More fontSize={4} color="wallet" ff="Inter|SemiBold" mt={1}>
-              <IconChevronRight size={12} style={{ marginRight: 5 }} />
-              {t("operationDetails.showLess")}
-            </More>
-          </Box>
-        )}
+          </OpDetailsSideButton>
+        ) : null}
       </Box>
     );
   }

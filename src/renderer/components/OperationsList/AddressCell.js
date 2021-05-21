@@ -61,7 +61,7 @@ const Right: ThemedComponent<{}> = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-kerning: none;
-  min-width: 6ex;
+  min-width: 3ex;
   letter-spacing: 0px;
 `;
 

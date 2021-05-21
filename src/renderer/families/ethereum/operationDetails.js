@@ -4,11 +4,12 @@ import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 
-import Box from "~/renderer/components/Box";
 import {
   OpDetailsTitle,
   OpDetailsData,
+  OpDetailsSection,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
+import Ellipsis from "~/renderer/components/Ellipsis";
 
 type OperationDetailsExtraProps = {
   extra: { [key: string]: string },
@@ -23,12 +24,14 @@ const OperationDetailsExtra = ({ extra, type }: OperationDetailsExtraProps) => {
     ? entries.filter(([key]) => !["compoundValue", "rate"].includes(key))
     : entries
   ).map(([key, value]) => (
-    <Box key={key}>
+    <OpDetailsSection key={key}>
       <OpDetailsTitle>
         <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
       </OpDetailsTitle>
-      <OpDetailsData>{value}</OpDetailsData>
-    </Box>
+      <OpDetailsData>
+        <Ellipsis>{value}</Ellipsis>
+      </OpDetailsData>
+    </OpDetailsSection>
   ));
 };
 

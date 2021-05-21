@@ -78,7 +78,7 @@ const Item = ({
 const HelpSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: () => void }) => {
   const { t } = useTranslation();
   return (
-    <SideDrawer paper isOpen={isOpened} onRequestClose={onClose} direction="left">
+    <SideDrawer isOpen={isOpened} onRequestClose={onClose} direction="left">
       <>
         <TrackPage category="SideDrawer" name="Help" />
 
