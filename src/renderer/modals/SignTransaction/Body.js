@@ -64,13 +64,11 @@ const createSteps = (): St[] => [
     label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
-    onBack: ({ transitionTo }) => transitionTo("recipient"),
   },
   {
     id: "device",
     label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
-    onBack: ({ transitionTo }) => transitionTo("summary"),
   },
 ];
 

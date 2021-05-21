@@ -18,6 +18,7 @@ export type StepProps = {
   t: TFunction,
   transitionTo: string => void,
   openedFromAccount: boolean,
+  useApp?: string,
   device: ?Device,
   account: ?AccountLike,
   parentAccount: ?Account,
