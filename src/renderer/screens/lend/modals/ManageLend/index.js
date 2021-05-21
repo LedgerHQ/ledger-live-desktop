@@ -24,9 +24,9 @@ import Modal, { ModalBody } from "~/renderer/components/Modal";
 import ArrowRight from "~/renderer/icons/ArrowRight";
 import Minus from "~/renderer/icons/Minus";
 import Text from "~/renderer/components/Text";
-import InfoBox from "~/renderer/components/InfoBox";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
+import Alert from "~/renderer/components/Alert";
 
 const IconWrapper = styled.div`
   width: 32px;
@@ -313,9 +313,9 @@ const Banner = ({
   }, [status, onClose, onSelectAction, t, account, parentAccount]);
 
   return (
-    <InfoBox onLearnMore={action} learnMoreLabel={label}>
+    <Alert type="primary" onLearnMore={action} learnMoreLabel={label}>
       {text}
-    </InfoBox>
+    </Alert>
   );
 };
 

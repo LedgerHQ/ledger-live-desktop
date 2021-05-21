@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
-import type { AccountLike, PortfolioRange } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -20,7 +21,7 @@ export default function Delta({ account, range }: Props) {
       ) : (
         <FormattedVal
           isPercent
-          val={countervalueChange.percentage.times(100).integerValue()}
+          val={Math.round(countervalueChange.percentage * 100)}
           alwaysShowSign
           fontSize={3}
         />

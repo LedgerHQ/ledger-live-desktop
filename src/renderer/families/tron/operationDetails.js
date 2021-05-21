@@ -130,7 +130,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           <OpDetailsData>
             <Box>
               <FormattedVal
-                val={BigNumber(extra.frozenAmount)}
+                val={extra.frozenAmount}
                 unit={account.unit}
                 showCode
                 fontSize={4}
@@ -149,7 +149,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
           <OpDetailsData>
             <Box>
               <FormattedVal
-                val={BigNumber(extra.unfreezeAmount)}
+                val={extra.unfreezeAmount}
                 unit={account.unit}
                 showCode
                 fontSize={4}

@@ -116,7 +116,8 @@
       "day": "1D",
       "week": "1 Hét",
       "month": "1 Hónap",
-      "year": "1 Év"
+      "year": "1 Év",
+      "all": "ALL"
     }
   },
   "fees": {
@@ -125,7 +126,9 @@
     "high": "Magas",
     "low": "Alacsony",
     "slow": "Lassú",
-    "standard": "Általános"
+    "standard": "Általános",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menü",
@@ -704,9 +707,11 @@
       "balance|desc": "Legmagasabb Egyenleg"
     },
     "range": {
+      "day": "Day",
       "week": "Hét",
       "month": "Hónap",
-      "year": "Év"
+      "year": "Év",
+      "all": "All"
     },
     "optionsMenu": {
       "title": "Opciók",
@@ -794,10 +799,6 @@
     "polkaStake": {
       "title": "POLKADOT staking",
       "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
-    },
-    "gateway": {
-      "title": "THE GATEWAY TO CRYPTO SERVICES",
-      "description": "Secure, buy, sell, grow and exchange crypto directly on Ledger Live from our partners"
     },
     "sell": {
       "title": "sell crypto",
@@ -1035,6 +1036,10 @@
     "openManager": "Eszközkezelő megnyitása",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "installApp": "{{appName}} App installation",
+    "installAppDescription": "Please wait until the installation is finished",
+    "listApps": "Checking App dependencies",
+    "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
@@ -1187,6 +1192,7 @@
       "successTextNoApps": "You can now install apps on your device",
       "sucessCTAApps": "Re-install apps",
       "SuccessCTANoApps": "Install apps",
+      "cancelReinstallCTA": "Install update",
       "resetSteps": {
         "first": "1. Indítsd újra az eszközöd",
         "connect": "Csatlakoztasd a {{deviceName}} -t a számítógépedhez az USB kábelt használva.",
@@ -1359,7 +1365,10 @@
       },
       "amount": {
         "title": "Mennyiség",
-        "banner": "Maximum elkölthető mennyiség"
+        "banner": "Maximum elkölthető mennyiség",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Összegzés"
@@ -3152,8 +3161,8 @@
       "title": "Az eszközkezelő meg lett tagadva az eszközön"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled",
-      "description": "Kérlek, próbáld meg újra, vagy vedd fel a kapcsolatot a Ledger ügyfélszolgálatával"
+      "title": "Update cancelled on device",
+      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",

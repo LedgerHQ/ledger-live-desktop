@@ -3,11 +3,10 @@ import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
+import { urls } from "~/config/urls";
 import { darken, lighten } from "~/renderer/styles/helpers";
 
-import WarnBox from "~/renderer/components/WarnBox";
-import Box from "~/renderer/components/Box";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import Alert from "~/renderer/components/Alert";
 
 const Address = styled.span.attrs(() => ({
   color: "wallet",
@@ -26,49 +25,43 @@ const Address = styled.span.attrs(() => ({
 export const ExternalControllerUnsupportedWarning = ({
   address,
   onExternalLink,
-  onLearnMore,
 }: {
   address: ?string,
   onExternalLink: Function,
-  onLearnMore: Function,
 }) => (
-  <WarnBox style={{ border: "none", margin: 0 }}>
+  <Alert
+    type="help"
+    learnMoreUrl={urls.stakingPolkadot}
+    learnMoreLabel={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+    style={{ border: "none", margin: 0 }}
+  >
     <Trans i18nKey="polkadot.nomination.externalControllerUnsupported" values={{ address }}>
       <p>
         <Address onClick={() => onExternalLink(address)} />
       </p>
       <p />
     </Trans>
-    <Box mt={2}>
-      <LinkWithExternalIcon
-        label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-        onClick={onLearnMore}
-      />
-    </Box>
-  </WarnBox>
+  </Alert>
 );
 
 export const ExternalStashUnsupportedWarning = ({
   address,
   onExternalLink,
-  onLearnMore,
 }: {
   address: ?string,
   onExternalLink: Function,
-  onLearnMore: Function,
 }) => (
-  <WarnBox style={{ border: "none", margin: 0 }}>
+  <Alert
+    type="help"
+    learnMoreUrl={urls.stakingPolkadot}
+    learnMoreLabel={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
+    style={{ border: "none", margin: 0 }}
+  >
     <Trans i18nKey="polkadot.nomination.externalStashUnsupported" values={{ address }}>
       <p>
         <Address onClick={() => onExternalLink(address)} />
       </p>
       <p />
     </Trans>
-    <Box mt={2}>
-      <LinkWithExternalIcon
-        label={<Trans i18nKey="polkadot.nomination.emptyState.info" />}
-        onClick={onLearnMore}
-      />
-    </Box>
-  </WarnBox>
+  </Alert>
 );

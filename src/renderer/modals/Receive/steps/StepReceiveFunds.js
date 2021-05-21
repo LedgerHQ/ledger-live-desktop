@@ -25,7 +25,7 @@ import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/render
 import type { StepProps } from "../Body";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Modal from "~/renderer/components/Modal";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -131,6 +131,7 @@ const StepReceiveFunds = ({
   token,
   onClose,
   eventType,
+  currencyName,
 }: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
@@ -188,7 +189,11 @@ const StepReceiveFunds = ({
   return (
     <>
       <Box px={2}>
-        <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 3" />
+        <TrackPage
+          category={`Receive Flow${eventType ? ` (${eventType})` : ""}`}
+          name="Step 3"
+          currencyName={currencyName}
+        />
         {verifyAddressError ? (
           <ErrorDisplay error={verifyAddressError} onRetry={onVerify} />
         ) : isAddressVerified === true ? (
@@ -224,14 +229,9 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
-            <Box mt={4} />
-            <InfoBox
-              onLearnMore={() => openURL(urls.recipientAddressInfo)}
-              onLearnMoreLabel={<Trans i18nKey="common.learnMore" />}
-              type="security"
-            >
+            <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
               <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
-            </InfoBox>
+            </Alert>
             <Separator2 />
             <Receive2NoDevice
               onVerify={onVerify}

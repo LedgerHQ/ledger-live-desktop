@@ -10,7 +10,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
-import InfoBox from "~/renderer/components/InfoBox";
+import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import useEnv from "~/renderer/hooks/useEnv";
 
@@ -34,11 +34,9 @@ const FullNodeStatus = ({ currency }: { currency?: ?(CryptoCurrency | TokenCurre
 
   return currency?.id === "bitcoin" ? (
     type === "ready" ? (
-      <Box mt={3}>
-        <InfoBox>
-          <Trans i18nKey="addAccounts.fullNodeReadyInfo" />
-        </InfoBox>
-      </Box>
+      <Alert type="primary" mt={3}>
+        <Trans i18nKey="addAccounts.fullNodeReadyInfo" />
+      </Alert>
     ) : (
       <Container mt={3}>
         {progress ? (

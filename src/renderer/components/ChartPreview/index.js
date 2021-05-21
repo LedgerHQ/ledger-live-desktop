@@ -69,7 +69,7 @@ export default function Chart({ height, data, color, valueKey = "value" }: Props
           borderWidth: 2,
           data: data.map(d => ({
             x: new Date(d.date),
-            y: d[valueKey].toNumber(),
+            y: d[valueKey],
           })),
         },
       ],

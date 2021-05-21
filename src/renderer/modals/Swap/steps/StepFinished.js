@@ -9,13 +9,12 @@ import { Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
+import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import useTheme from "~/renderer/hooks/useTheme";
-import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
+import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -27,19 +26,8 @@ const IconWrapper = styled(Box)`
   justify-content: center;
 `;
 
-const Disclaimer = styled(Box)`
-  background: ${colors.pillActiveBackground};
-  border-radius: 4px;
-  align-items: center;
-  width: 100%;
-
-  > ${Text} {
-    text-align: left;
-    flex: 1;
-    > span {
-      text-transform: capitalize;
-    }
-  }
+const CapitalizedText = styled.span`
+  text-transform: capitalize;
 `;
 
 const Pill = styled(Text)`
@@ -110,20 +98,11 @@ const StepFinished = ({
       <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         <Trans i18nKey={`swap.modal.steps.finished.description`} />
       </Text>
-      <Disclaimer horizontal p={2} mt={3}>
-        <InfoCircle size={15} color={useTheme("colors.palette.primary.main")} />
-        <Text
-          textAlign={"left"}
-          ml={2}
-          color="palette.primary.main"
-          ff="Inter|Regular"
-          fontSize={4}
-        >
-          <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} values={{ provider }}>
-            <span>{provider}</span>
-          </Trans>
-        </Text>
-      </Disclaimer>
+      <Alert type="primary" mt={3}>
+        <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} values={{ provider }}>
+          <CapitalizedText>{provider}</CapitalizedText>
+        </Trans>
+      </Alert>
     </Box>
   );
 };

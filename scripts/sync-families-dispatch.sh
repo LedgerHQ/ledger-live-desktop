@@ -14,7 +14,8 @@ SendRecipientFields.js \
 SendWarning.js \
 ReceiveWarning.js \
 AccountBalanceSummaryFooter.js \
-TokenList.js
+TokenList.js \
+AccountHeaderManageActions.js
 "
 
 cd ../src/renderer

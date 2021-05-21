@@ -96,8 +96,8 @@ function DoubleCounterValue({
     return placeholder || null;
   }
 
-  const val = BigNumber(countervalue);
-  const compareVal = BigNumber(compareCountervalue);
+  const val = BigNumber(countervalue ?? 0);
+  const compareVal = BigNumber(compareCountervalue ?? 0);
 
   return (
     <>

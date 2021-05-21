@@ -91,7 +91,11 @@ const AddressField = ({ field }: FieldComponentProps) => {
 const TextField = ({ field }: FieldComponentProps) => {
   invariant(field.type === "text", "TextField invalid");
   return (
-    <TransactionConfirmField label={field.label}>
+    <TransactionConfirmField
+      label={field.label}
+      tooltipKey={field.tooltipI18nKey}
+      tooltipArgs={field.tooltipI18nArgs}
+    >
       <FieldText>{field.value}</FieldText>
     </TransactionConfirmField>
   );

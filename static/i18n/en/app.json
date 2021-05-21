@@ -117,7 +117,8 @@
       "day": "1D",
       "week": "1W",
       "month": "1M",
-      "year": "1Y"
+      "year": "1Y",
+      "all": "ALL"
     }
   },
   "fees": {
@@ -126,7 +127,9 @@
     "high": "High",
     "low": "Low",
     "slow": "Slow",
-    "standard": "Standard"
+    "standard": "Standard",
+    "medium": "Medium",
+    "feesAmount": "Fees Amount"
   },
   "sidebar": {
     "menu": "Menu",
@@ -632,7 +635,10 @@
             "done": "Close",
             "cta": "View details"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -705,9 +711,11 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
+      "day": "Day",
       "week": "Week",
       "month": "Month",
-      "year": "Year"
+      "year": "Year",
+      "all": "All"
     },
     "optionsMenu": {
       "title": "Options",
@@ -1364,7 +1372,10 @@
       },
       "amount": {
         "title": "Amount",
-        "banner": "Maximum spendable amount is"
+        "banner": "Maximum spendable amount is",
+        "fees": "Fees",
+        "standard": "Standard",
+        "advanced": "Advanced"
       },
       "summary": {
         "title": "Summary"

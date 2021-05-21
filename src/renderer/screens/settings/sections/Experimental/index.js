@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useEffect, useCallback, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 import { experimentalFeatures, isReadOnlyEnv } from "~/renderer/experimental";
 import { useDispatch } from "react-redux";
@@ -10,9 +10,8 @@ import type { Feature } from "~/renderer/experimental";
 import { openModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import useEnv from "~/renderer/hooks/useEnv";
-import Disclaimer from "~/renderer/components/Disclaimer";
+import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";
-import IconSensitiveOperationShield from "~/renderer/icons/SensitiveOperationShield";
 import { setShowClearCacheBanner } from "~/renderer/actions/settings";
 import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import ExperimentalSwitch from "./ExperimentalSwitch";
@@ -82,7 +81,6 @@ const EthereumBridgeRow = () => {
 };
 
 const SectionExperimental = () => {
-  const { t } = useTranslation();
   const [needsCleanCache, setNeedsCleanCache] = useState(false);
   const dispatch = useDispatch();
   const onDirtyChange = useCallback(() => setNeedsCleanCache(true), []);
@@ -99,11 +97,9 @@ const SectionExperimental = () => {
     <div data-e2e="experimental_section_title">
       <TrackPage category="Settings" name="Experimental" />
       <Body>
-        <Disclaimer
-          m={4}
-          icon={<IconSensitiveOperationShield />}
-          content={t("settings.experimental.disclaimer")}
-        />
+        <Alert type="security" m={4}>
+          <Trans i18nKey="settings.experimental.disclaimer"></Trans>
+        </Alert>
         {experimentalFeatures.map(feature =>
           !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
             // $FlowFixMe
