@@ -20,10 +20,8 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   grow: 0,
   alignItems: "center",
-  px: 1,
 }))`
-  height: 40px;
-  box-sizing: content-box;
+  padding: 16px 16px 16px 24px;
   background-color: ${p => p.theme.colors.palette.background.paper};
 `;
 
@@ -31,9 +29,9 @@ const TitleContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   grow: 0,
   alignItems: "center",
-  mx: 2,
   ff: "Inter|SemiBold",
 }))`
+  margin-right: 16px;
   color: ${p =>
     p.theme.colors.palette.type === "dark" ? p.theme.colors.white : p.theme.colors.black};
 
@@ -58,7 +56,6 @@ const ItemContainer: ThemedComponent<{
   justifyContent?: string,
 }> = styled(Tabbable).attrs(p => ({
   padding: 1,
-  mx: 1,
   alignItems: "center",
   cursor: p.disabled ? "not-allowed" : "default",
   horizontal: true,
@@ -69,6 +66,11 @@ const ItemContainer: ThemedComponent<{
   position: relative;
   cursor: pointer;
   pointer-events: ${p => (p.disabled ? "none" : "unset")};
+
+  margin-right: 16px;
+  &:last-child {
+    margin-right: 0;
+  }
 
   > * + * {
     margin-left: 8px;
@@ -89,8 +91,7 @@ const ItemContent: ThemedComponent<{}> = styled(Box).attrs(() => ({
 }))``;
 
 export const Separator: ThemedComponent<*> = styled.div`
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-right: 16px;
   height: 15px;
   width: 1px;
   background: ${p => p.theme.colors.palette.divider};
