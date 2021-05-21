@@ -297,24 +297,25 @@
       "wyre": {
         "description": "Swap coins and tokens with our selected partner",
         "bullets": [
-          "Centralized",
+          "US-only (soon Europe, Africa and Asia)",
           "Multi coins and tokens",
-          "US-only (soon Europe, Africa and Asia)"
+          "Centralized"
         ]
       },
       "changelly": {
         "description": "Swap coins and tokens with our selected partner",
         "bullets": [
-          "Centralized",
-          "Multi coins and tokens",
-          "Europe, Asia, Africa and Americas"
+          "Our trusted partner",
+          "BTC, LTC, ETH, DOGE, XRP...",
+          "Centralized"
         ]
       },
       "paraswap": {
         "description": "Access and compare swap protocols on Ethereum like Uniswap and Sushiswap",
         "bullets": [
-          "Decentralized",
-          "Ethereum & ERC20 tokens"
+          "Uniswap, Sushiswap, etc",
+          "Ethereum & ERC20 tokens",
+          "Decentralized"
         ]
       }
     }
