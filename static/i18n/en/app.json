@@ -2857,7 +2857,8 @@
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "secureContract": "Verify the deposit details on your device before sendsng it. The contract address is provided securely so you don’t have to verify it.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
