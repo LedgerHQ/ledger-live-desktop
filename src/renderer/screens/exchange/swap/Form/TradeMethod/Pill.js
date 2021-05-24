@@ -85,6 +85,7 @@ const Pill = ({
   return (
     <RoundedWrapper>
       <MethodWrapper
+        id="swap-form-trade-method"
         tradeMethod={tradeMethod}
         disabled={!anyMethodEnabled}
         horizontal
@@ -96,6 +97,7 @@ const Pill = ({
           content={<Trans i18nKey={"swap.form.tradeMethod.floatUnavailable"} />}
         >
           <Method
+            id="swap-form-trade-method-float"
             right
             selected={tradeMethod === "float"}
             onClick={setFloat}
@@ -110,6 +112,7 @@ const Pill = ({
           content={<Trans i18nKey={"swap.form.tradeMethod.fixedUnavailable"} />}
         >
           <Method
+            id="swap-form-trade-method-fixed"
             left
             selected={tradeMethod === "fixed" || !anyMethodEnabled}
             onClick={setFixed}

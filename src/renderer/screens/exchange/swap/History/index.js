@@ -155,7 +155,7 @@ const History = () => {
                   sameElse: "LL",
                 })}
               </Box>
-              <Card>
+              <Card id="swap-history">
                 {section.data.map(mappedSwapOperation => (
                   <OperationRow
                     key={mappedSwapOperation.swapId}
@@ -167,7 +167,13 @@ const History = () => {
             </div>
           ))
         ) : (
-          <Card flex={1} p={150} alignItems={"center"} justifyContent={"center"}>
+          <Card
+            flex={1}
+            p={150}
+            alignItems={"center"}
+            justifyContent={"center"}
+            id="swap-history-empty-state"
+          >
             <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
               <Trans i18nKey={"swap.history.empty.title"} />
             </Text>

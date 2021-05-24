@@ -75,6 +75,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
     <MissingOrOutdatedSwapApp outdated />
   ) : (
     <Form
+      id="swap-form"
       providers={providers}
       installedApps={installedApps}
       defaultCurrency={defaultCurrency}

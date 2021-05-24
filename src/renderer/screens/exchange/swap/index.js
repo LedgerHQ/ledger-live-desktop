@@ -18,13 +18,7 @@ const SwapOrSwapHistory = () => {
     <Box flex={1} pb={6}>
       <TrackPage category="Swap" />
       <Box horizontal>
-        <Box
-          grow
-          ff="Inter|SemiBold"
-          fontSize={7}
-          color="palette.text.shade100"
-          data-e2e="swapPage_title"
-        >
+        <Box grow ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
           <Trans i18nKey="swap.title" />
         </Box>
       </Box>
