@@ -26,11 +26,11 @@ const IconWrapperCircle: ThemedComponent<{ color?: string }> = styled(Box)`
 `;
 
 const options = [
-  { value: "en", support: "full", label: <Trans i18nKey="language.switcher.en" /> },
-  { value: "fr", support: "full", label: <Trans i18nKey="language.switcher.fr" /> },
-  { value: "ru", support: "partial", label: <Trans i18nKey="language.switcher.ru" /> },
+  { value: "en", support: "full", label: "English" },
+  { value: "fr", support: "full", label: "Français" },
+  { value: "ru", support: "partial", label: "Pусский" },
   // { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
-  { value: "es", support: "partial", label: <Trans i18nKey="language.switcher.es" /> },
+  { value: "es", support: "partial", label: "Español" },
 ];
 
 const styleFn = theme => ({
