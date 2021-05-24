@@ -16,11 +16,11 @@ const CurrencyOptionRow = ({
   circle,
   currency,
 }: {
-  status: CurrencyStatus,
+  status?: CurrencyStatus,
   circle?: boolean,
   currency: CryptoCurrency | TokenCurrency,
 }) => {
-  const notOK = status !== "ok";
+  const notOK = !!status && status !== "ok";
   const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
   return (
     <Box grow horizontal alignItems="center" flow={2}>
@@ -39,7 +39,7 @@ const CurrencyOptionRow = ({
       >
         {`${currency.name} (${currency.ticker})`}
       </Box>
-      {notOK ? (
+      {!!status && notOK ? (
         <Box style={{ marginRight: -23 }} alignItems={"flex-end"}>
           <Tooltip
             content={
