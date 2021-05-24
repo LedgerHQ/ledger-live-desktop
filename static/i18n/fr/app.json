@@ -174,13 +174,13 @@
       "sorry": "Service temporairement indisponible, ou non disponible dans votre pays"
     },
     "missingApp": {
-      "title": "Veuillez installer l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et installez l'application Exchange pour échanger des actifs.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Aller au Manager"
     },
     "outdatedApp": {
-      "title": "Veuillez mettre à jour l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et mettez à jour l'application Exchange pour échanger des actifs.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Aller au Manager"
     },
     "kyc": {
@@ -247,6 +247,9 @@
         },
         "device": {
           "title": "Appareil"
+        },
+        "dependencies": {
+          "title": "App checks"
         },
         "finished": {
           "title": "En attente",
@@ -1035,7 +1038,10 @@
     "unlockDevice": "Déverrouillez votre appareil",
     "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
-    "appNotInstalled": "Veuillez installer l'application {{appName}}",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
