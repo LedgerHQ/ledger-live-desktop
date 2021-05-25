@@ -9,6 +9,10 @@ import {
   getAccountName,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
+import {
+  getDefaultExplorerView,
+  getTransactionExplorer,
+} from "@ledgerhq/live-common/lib/explorers";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -152,6 +156,10 @@ const SwapOperationDetailsBody = ({
   const theme = useTheme();
   const statusColor = getStatusColor(status, theme);
   const { t } = useTranslation();
+
+  const url =
+    fromCurrency.type === "CryptoCurrency" &&
+    getTransactionExplorer(getDefaultExplorerView(fromCurrency), operation.hash);
 
   const openAccount = useCallback(
     account => {
@@ -351,7 +359,12 @@ const SwapOperationDetailsBody = ({
         </Box>
       )}
       renderFooter={() => (
-        <Box alignItems={"flex-end"}>
+        <Box horizontal alignItems={"flex-end"}>
+          {url ? (
+            <Button mr={2} primary onClick={() => openURL(url)}>
+              {t("operationDetails.viewOperation")}
+            </Button>
+          ) : null}
           <Button primary onClick={onClose}>
             <Text>{"Close"}</Text>
           </Button>
