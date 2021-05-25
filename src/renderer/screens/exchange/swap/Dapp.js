@@ -21,7 +21,7 @@ const useManifests = () => {
     const paraswapUrl = new URL(`https://iframe-dapp-browser-test.vercel.app/app/dapp-browser`);
     paraswapUrl.searchParams.set(
       "url",
-      "https://paraswap-ui-ledger.herokuapp.com/?embed=true&referer=ledger",
+      "https://paraswap-ui-ledger.herokuapp.com/?embed=true&referrer=ledger",
     );
     paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
