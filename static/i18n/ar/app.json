@@ -54,17 +54,17 @@
     "lockScreen": {
       "title": "مرحباً بك مجددًا",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "أدخل كلمة المرور الخاصة بك للمتابعة",
+      "inputPlaceholder": "اكتب كلمة المرور الخاصة بك",
+      "lostPassword": "نسيت كلمة المرور"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
-      "error": "Synchronization error",
-      "refresh": "Refresh"
+      "syncing": "جارٍ المزامنة...",
+      "upToDate": "تمت المزامنة",
+      "outdated": "ايقاف مؤقت",
+      "needsMigration": "أُنقر لتحديث الحساب",
+      "error": "خطأ في المزامنة",
+      "refresh": "تحديث"
     },
     "exchange": "Exchange"
   },
