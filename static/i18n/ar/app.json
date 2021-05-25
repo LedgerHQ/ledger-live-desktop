@@ -94,29 +94,29 @@
       "OPT_OUT": "إلغاء الانضمام",
       "CLOSE_ACCOUNT": "إغلاق الحساب",
       "BOND": "ربط",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
-      "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "UNBOND": "إلغاء الربط",
+      "REWARD_PAYOUT": "مُكافأة",
+      "SLASH": "خفض",
+      "WITHDRAW_UNBONDED": "سحب",
+      "NOMINATE": "ترشيح",
+      "CHILL": "مسح الترشيحات"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}} بايت",
+    "kbUnit": "{{size}} كيلوبايت",
+    "mbUnit": "{{size}} ميجابايت"
   },
   "time": {
-    "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute": "دقيقة",
+    "minute_plural": "دقائق",
+    "hour": "ساعة",
+    "hour_plural": "ساعات",
     "range": {
-      "day": "1D",
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
+      "day": "1يوم",
+      "week": "1 أسبوع",
+      "month": "1 شهر",
+      "year": "1 سنة",
       "all": "ALL"
     }
   },
