@@ -9,6 +9,10 @@ import {
   getAccountName,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
+import {
+  getDefaultExplorerView,
+  getTransactionExplorer,
+} from "@ledgerhq/live-common/lib/explorers";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -54,8 +58,8 @@ const Value = styled(Box).attrs(() => ({
 `;
 
 const Status: ThemedComponent<{}> = styled.div`
-  height: 66px;
-  width: 66px;
+  height: 36px;
+  width: 36px;
   display: flex;
   position: relative;
   align-items: center;
@@ -123,7 +127,6 @@ const SwapOperationDetails = ({
     toAmount,
   } = mappedSwapOperation;
 
-  console.log(mappedSwapOperation);
   const history = useHistory();
   const fromUnit = getAccountUnit(fromAccount);
   const fromCurrency = getAccountCurrency(fromAccount);
@@ -134,6 +137,10 @@ const SwapOperationDetails = ({
   const theme = useTheme();
   const statusColor = getStatusColor(status, theme);
   const { t } = useTranslation();
+
+  const url =
+    fromCurrency.type === "CryptoCurrency" &&
+    getTransactionExplorer(getDefaultExplorerView(fromCurrency), operation.hash);
 
   const openAccount = useCallback(
     account => {
@@ -156,7 +163,7 @@ const SwapOperationDetails = ({
   return (
     <Box flow={3} px={20} mt={20}>
       <Status status={status}>
-        <IconSwap size={27} />
+        <IconSwap size={18} />
         {operationStatusList.pending.includes(status) ? (
           <WrapperClock>
             <IconClock size={16} />
@@ -166,7 +173,7 @@ const SwapOperationDetails = ({
       <Text ff="Inter|SemiBold" textAlign="center" fontSize={4} color="palette.text.shade60" my={1}>
         <Trans i18nKey="swap.operationDetailsModal.title" />
       </Text>
-      <Box my={4} mb={48} alignItems="center">
+      <Box my={2} alignItems="center">
         <Box selectable>
           <FormattedVal
             color={normalisedFromAmount.isNegative() ? "palette.text.shade100" : undefined}
@@ -178,7 +185,7 @@ const SwapOperationDetails = ({
             disableRounding
           />
         </Box>
-        <Box my={12} color={"palette.text.shade50"}>
+        <Box my={1} color={"palette.text.shade50"}>
           <IconArrowDown size={16} />
         </Box>
 
@@ -194,7 +201,15 @@ const SwapOperationDetails = ({
           />
         </Box>
       </Box>
-
+      {url ? (
+        <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} mb={1}>
+          <LinkWithExternalIcon
+            fontSize={4}
+            onClick={() => openURL(url)}
+            label={t("operationDetails.viewOperation")}
+          />
+        </Box>
+      ) : null}
       <OpDetailsSection>
         <OpDetailsTitle>
           <Trans i18nKey="swap.operationDetailsModal.provider" />
