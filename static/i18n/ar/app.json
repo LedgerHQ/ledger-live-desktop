@@ -1,8 +1,8 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
+    "today": "اليوم",
+    "tomorrow": "غداً",
+    "yesterday": "أمس",
     "transactionDate": "Transaction date"
   },
   "common": {
