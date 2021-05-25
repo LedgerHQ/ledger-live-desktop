@@ -117,21 +117,21 @@
       "week": "1 أسبوع",
       "month": "1 شهر",
       "year": "1 سنة",
-      "all": "ALL"
+      "all": "الكل"
     }
   },
   "fees": {
     "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
+    "fast": "سريع",
+    "high": "عالٍ",
     "low": "Low",
     "slow": "Slow",
     "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "medium": "متوسط",
+    "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
-    "menu": "Menu",
+    "menu": "القائمة",
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
