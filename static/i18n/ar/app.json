@@ -69,14 +69,14 @@
     "exchange": "تداول"
   },
   "devices": {
-    "nanoS": "Nano S",
-    "nanoX": "Nano X",
-    "blue": "Blue"
+    "nanoS": "نانو S",
+    "nanoX": "نانو X",
+    "blue": "أزرق"
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
+      "IN": "تم الإستلام",
+      "OUT": "تم الإرسال",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
