@@ -21,7 +21,6 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
-import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
 
 import MODAL_FULL_NODE from "./FullNode";
 
@@ -113,7 +112,6 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   MODAL_SWAP,
-  MODAL_SWAP_OPERATION_DETAILS,
   MODAL_FULL_NODE,
 };
 
