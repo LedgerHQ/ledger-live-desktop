@@ -107,13 +107,17 @@ class InternalProcess {
             if (count === 0) {
               acc += str.slice(lastIndex, i + 1);
               if (process.env.INTERNAL_LOGS) console.log(acc);
-              const obj = JSON.parse(acc);
-              if (obj && obj.type === "log") {
-                logger.onLog(obj.log);
-                return;
+              try {
+                const obj = JSON.parse(acc);
+                if (obj && obj.type === "log") {
+                  logger.onLog(obj.log);
+                  return;
+                }
+                logger.debug("I: " + acc);
+                acc = "";
+              } catch (error) {
+                if (process.env.INTERNAL_LOGS) console.error(error);
               }
-              logger.debug("I: " + acc);
-              acc = "";
             }
             break;
           default:
