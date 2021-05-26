@@ -67,13 +67,6 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
   mb: 2,
 }))``;
 
-const Description: ThemedComponent<{}> = styled(Box).attrs(p => ({
-  ff: "Inter|Medium",
-  mb: 2,
-}))`
-  max-width: 640px;
-`;
-
 const PROVIDERS = [
   {
     provider: "wyre",
@@ -111,7 +104,6 @@ const SelectProvider = () => {
       <Card flow={1}>
         <Header>
           <Title>{t("exchange.providers.title")}</Title>
-          <Description>{t("exchange.providers.description")}</Description>
           <LinkWithExternalIcon onClick={handleLearnMore}>
             {t("exchange.providers.learnMore")}
           </LinkWithExternalIcon>
