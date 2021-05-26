@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Custom",
     "fast": "سريع",
     "high": "عالٍ",
