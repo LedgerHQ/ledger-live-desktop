@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box, { Card } from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -88,7 +90,9 @@ const SelectProvider = () => {
 
   const handleSelectProvider = useCallback((providerId: string) => setProvider(providerId), []);
 
-  const handleLearnMore = useCallback(() => alert("learnMore"), []);
+  const handleLearnMore = useCallback(() => {
+    openURL(urls.exchange.learnMore);
+  }, []);
 
   const handleClick = useCallback(() => {
     const conf = PROVIDERS.find(p => p.provider === provider);
