@@ -20,6 +20,8 @@ const manifests = {
   wyre: {
     name: "Wyre",
     url: new URL(`https://ledger-live-platform-apps.vercel.app/app/wyre`),
+    // $FlowFixMe
+    icon: require("../../images/platform/wyre.png").default,
   },
 };
 

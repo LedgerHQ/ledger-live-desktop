@@ -16,6 +16,7 @@ import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
 import CardButton from "~/renderer/components/CardButton";
 import BulletList from "~/renderer/components/BulletList";
 import IconWyre from "~/renderer/icons/providers/Wyre";
+import IconCoinify from "~/renderer/icons/providers/Coinify";
 
 const Grid = styled.div`
   display: flex;
@@ -83,7 +84,7 @@ const PROVIDERS = [
   {
     provider: "coinify",
     name: "Coinify",
-    icon: <LiveAppIcon name="Coinify" size={50} />, // FIXME: add Coinify icon
+    icon: <IconCoinify size={50} />, // FIXME: add Coinify icon
     disabled: false,
   },
 ];
@@ -126,6 +127,7 @@ const SelectProvider = () => {
                 disabled={p.disabled || false}
               >
                 <BulletList
+                  centered
                   bullets={t(`exchange.providers.${p.provider}.bullets`, {
                     joinArrays: ";",
                     defaultValue: "",

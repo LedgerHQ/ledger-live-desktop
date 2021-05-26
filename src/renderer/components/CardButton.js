@@ -21,10 +21,9 @@ const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = s
   flex: 1,
   flexDirection: "column",
   alignItems: "center",
-  px: 4,
-  py: 5,
   fontSize: 4,
 }))`
+  padding: 30px 16px;
   width: 205px;
   border-radius: 4px;
   cursor: ${p => (p.disabled ? "default" : "pointer")};

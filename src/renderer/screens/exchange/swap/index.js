@@ -167,7 +167,7 @@ const SelectProvider = () => {
                   disabled={p.disabled || false}
                 >
                   {description && <Box mb={4}>{description}</Box>}
-                  {!!bullets.length && <BulletList bullets={bullets} />}
+                  {!!bullets.length && <BulletList centered bullets={bullets} />}
                 </CardButton>
               </GridItem>
             );
