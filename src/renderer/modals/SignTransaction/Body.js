@@ -8,12 +8,8 @@ import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { Trans, withTranslation } from "react-i18next";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type {
-  Account,
-  AccountLike,
-  SignedOperation,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, SignedOperation } from "@ledgerhq/live-common/lib/types";
+import type { PlatformTransaction } from "@ledgerhq/live-common/lib/platform/types";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { closeModal, openModal } from "~/renderer/actions/modals";
@@ -25,6 +21,7 @@ import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import StepConnectDevice from "./steps/StepConnectDevice";
 import type { St, StepId } from "./types";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge/index";
 
 type OwnProps = {|
@@ -34,7 +31,7 @@ type OwnProps = {|
   params: {
     useApp?: string,
     account: ?AccountLike,
-    transactionData: Transaction,
+    transactionData: PlatformTransaction,
     onResult: (signedOperation: SignedOperation) => void,
     onCancel: (reason: any) => void,
     parentAccount: ?Account,
@@ -109,7 +106,7 @@ const Body = ({
     bridgePending,
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount;
-    const account = (params && params.account) || accounts[0];
+    const account = getMainAccount((params && params.account) || accounts[0], parentAccount);
 
     const bridge = getAccountBridge(account, parentAccount);
     const t = bridge.createTransaction(account);

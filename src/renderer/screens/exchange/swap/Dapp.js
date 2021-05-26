@@ -19,10 +19,7 @@ type Props = {
 const useManifests = () => {
   return useMemo(() => {
     const paraswapUrl = new URL(`https://ledger-live-platform-apps.vercel.app/app/dapp-browser`);
-    paraswapUrl.searchParams.set(
-      "url",
-      "https://paraswap.io/?embed=true&referrer=ledger",
-    );
+    paraswapUrl.searchParams.set("url", "https://paraswap.io/?embed=true&referrer=ledger");
     paraswapUrl.searchParams.set("nanoApp", "Paraswap");
     paraswapUrl.searchParams.set("dappName", "paraswap");
 

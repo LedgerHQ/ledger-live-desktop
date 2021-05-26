@@ -11,7 +11,6 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box, { Card } from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
 
 import CardButton from "~/renderer/components/CardButton";
 import BulletList from "~/renderer/components/BulletList";
@@ -77,7 +76,7 @@ const PROVIDERS = [
   {
     provider: "coinify",
     name: "Coinify",
-    icon: <IconCoinify size={50} />, // FIXME: add Coinify icon
+    icon: <IconCoinify size={50} />,
     disabled: false,
   },
 ];

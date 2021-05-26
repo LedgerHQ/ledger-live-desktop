@@ -6,7 +6,7 @@ import { compose } from "redux";
 import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
-import type { Account, SignedOperation } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
@@ -17,7 +17,7 @@ type OwnProps = {|
   params: {
     currencies?: string[],
     allowAddAccount?: boolean,
-    onResult: (signedOperation: SignedOperation) => void,
+    onResult: (account: AccountLike, parentAccount?: Account | null) => void,
     onCancel: (reason: any) => void,
   },
 |};

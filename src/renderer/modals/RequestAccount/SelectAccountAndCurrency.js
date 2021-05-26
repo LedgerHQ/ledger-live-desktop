@@ -79,6 +79,7 @@ const SelectAccountAndCurrency = ({
   }, [allowedCurrencies]);
 
   // sorting them by marketcap
+  // $FlowFixMe - don't know why it fails
   const allCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const allAccounts = useSelector(accountsSelector);
@@ -110,7 +111,11 @@ const SelectAccountAndCurrency = ({
         {allCurrencies.length !== 1 ? (
           <FormContent>
             <Label>{t("exchange.buy.selectCrypto")}</Label>
-            <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />
+            <SelectCurrency
+              onChange={setCurrency}
+              currencies={allCurrencies}
+              value={currency || undefined}
+            />
           </FormContent>
         ) : null}
         {currency ? (
