@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Пользовательская",
     "fast": "Быстро",
     "high": "Высокая",
