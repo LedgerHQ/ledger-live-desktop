@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Personnalisé",
     "fast": "Rapide",
     "high": "Haut",
@@ -455,7 +456,8 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Veuillez confirmer que l'adresse affichée correspond exactement à celle sur votre appareil",
     "buy": {
-      "title": "Acheter des cryptomonnaies via notre partenaire",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -463,7 +465,8 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "title": "Vendre des cryptomonnaies via notre partenaire",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",

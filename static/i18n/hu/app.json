@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Egyedi",
     "fast": "Gyors",
     "high": "Magas",
@@ -455,7 +456,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -463,7 +465,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",

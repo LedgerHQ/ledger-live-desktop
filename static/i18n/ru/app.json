@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Пользовательская",
     "fast": "Быстро",
     "high": "Высокая",
@@ -455,7 +456,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Выберите счёт",
@@ -463,7 +465,8 @@
       "addAccount": "Добавить счёт"
     },
     "sell": {
-      "title": "Продавайте криптовалюту через нашего партнёра",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Продажа",
       "selectCrypto": "Выберите криптоактив",
       "selectAccount": "Выберите счёт",
