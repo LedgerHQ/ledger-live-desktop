@@ -456,7 +456,8 @@
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que se muestra en tu dispositivo",
     "buy": {
-      "title": "Compra criptos a través de nuestro socio",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Comprar",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Selecciona una cuenta",
@@ -464,7 +465,8 @@
       "addAccount": "Añade un cuenta"
     },
     "sell": {
-      "title": "Vender criptos a través de nuestro socio",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Selecciona una cuenta",
