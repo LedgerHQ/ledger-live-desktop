@@ -69,6 +69,17 @@ const createSteps = (): St[] => [
   },
 ];
 
+const STATUS_KEYS_IGNORE = ["recipient", "gasLimit"];
+
+// returns the first error
+function getStatusError(status, type = "errors"): ?Error {
+  if (!status || !status[type]) return null;
+
+  const firstKey = Object.keys(status[type]).filter(k => !STATUS_KEYS_IGNORE.includes(k))[0];
+
+  return firstKey ? status[type][firstKey] : null;
+}
+
 const mapStateToProps = createStructuredSelector({
   device: getCurrentDevice,
   accounts: accountsSelector,
@@ -168,7 +179,8 @@ const Body = ({
     errorSteps.push(0);
   }
 
-  const error = transactionError || bridgeError;
+  const error = transactionError || bridgeError || getStatusError(status, "errors");
+  const warning = getStatusError(status, "warnings");
 
   const stepperProps = {
     title: t("send.title"),
@@ -183,6 +195,7 @@ const Body = ({
     transaction,
     hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
     error,
+    warning,
     status,
     bridgePending,
     openModal,

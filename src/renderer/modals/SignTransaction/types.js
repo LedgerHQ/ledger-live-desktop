@@ -26,6 +26,7 @@ export type StepProps = {
   status: TransactionStatus,
   bridgePending: boolean,
   error: ?Error,
+  warning: ?Error,
   optimisticOperation: ?Operation,
   closeModal: void => void,
   openModal: (string, any) => void,

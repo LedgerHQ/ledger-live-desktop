@@ -7,10 +7,11 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
-import ErrorBanner from "~/renderer/components/ErrorBanner";
 import BuyButton from "~/renderer/components/BuyButton";
 import { NotEnoughGas } from "@ledgerhq/errors";
 
+import Alert from "~/renderer/components/Alert";
+import TranslatedError from "~/renderer/components//TranslatedError";
 import AccountFooter from "../AccountFooter";
 import SendAmountFields from "../SendAmountFields";
 import type { StepProps } from "../types";
@@ -22,6 +23,7 @@ const StepAmount = ({
   transaction,
   onChangeTransaction,
   error,
+  warning,
   status,
   bridgePending,
   updateTransaction,
@@ -33,7 +35,11 @@ const StepAmount = ({
     <Box flow={4}>
       <TrackPage category="Sign Transaction Flow" name="Step Amount" />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
-      {error ? <ErrorBanner error={error} /> : null}
+      {error || warning ? (
+        <Alert type={error ? "error" : "warning"}>
+          <TranslatedError error={error || warning} />
+        </Alert>
+      ) : null}
       {account && transaction && mainAccount && (
         <Fragment key={account.id}>
           <SendAmountFields
