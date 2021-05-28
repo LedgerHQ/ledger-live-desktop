@@ -700,7 +700,7 @@
       "cta": "Add account"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have any {{ asset }} account.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
       "ctaBuy": "Buy {{ asset }}",
       "ctaReceive": "Receive {{ asset }}"
