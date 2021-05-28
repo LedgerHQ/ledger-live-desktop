@@ -30,8 +30,8 @@ if (!gotLock) {
       }
       w.focus();
 
-      // Deep linking for when the app is already running (Windows)
-      if (process.platform === "win32") {
+      // Deep linking for when the app is already running (Windows, Linux)
+      if (process.platform === "win32" || process.platform === "linux") {
         const uri = commandLine.filter(arg => arg.startsWith("ledgerlive://"));
 
         if (uri.length) {
@@ -156,8 +156,8 @@ ipcMain.on("ready-to-show", () => {
   if (w) {
     show(w);
 
-    // Deep linking for when the app is not running already (Windows)
-    if (process.platform === "win32") {
+    // Deep linking for when the app is not running already (Windows, Linux)
+    if (process.platform === "win32" || process.platform === "linux") {
       const { argv } = process;
       const uri = argv.filter(arg => arg.startsWith("ledgerlive://"));
 
