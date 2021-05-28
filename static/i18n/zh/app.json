@@ -49,20 +49,20 @@
     "experimentalFeature": "Experimental",
     "information": "Information",
     "search": "Search...",
-    "searchWithoutEllipsis": "Search",
-    "manage": "Manage",
+    "searchWithoutEllipsis": "搜索",
+    "manage": "管理",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "欢迎回来",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "请输入您的密码后继续操作",
+      "inputPlaceholder": "输入您的密码",
+      "lostPassword": "我忘记了密码"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
+      "syncing": "正在同步...",
+      "upToDate": "已同步",
+      "outdated": "已暂停",
+      "needsMigration": "点击更新账户",
       "error": "Synchronization error",
       "refresh": "Refresh"
     },
