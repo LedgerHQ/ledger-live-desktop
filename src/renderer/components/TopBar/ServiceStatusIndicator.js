@@ -23,7 +23,7 @@ export function ServiceStatusIndicator() {
       <>
         <Tooltip
           content={t("informationCenter.ongoingIncidentsTooltip", {
-            incidentCount: incidents.length,
+            count: incidents.length,
           })}
           placement="bottom"
         >
