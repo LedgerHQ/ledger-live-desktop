@@ -61,6 +61,7 @@ export type StepProps = {
 type St = Step<StepId, StepProps>;
 
 const createSteps = (skipChooseCurrencyStep): St[] => {
+  // the back button is not needed when we skip "chooseCurrency" step because the back button brings user to "chooseCurrency" step
   const onBack = skipChooseCurrencyStep
     ? null
     : ({ transitionTo, resetScanState }: StepProps) => {
