@@ -42,6 +42,7 @@ export type StepProps = {
   updateTransaction: (updater: any) => void,
   onConfirmationHandler: Function,
   onFailHandler: Function,
+  currencyName: ?string,
 };
 
 export type St = Step<StepId, StepProps>;

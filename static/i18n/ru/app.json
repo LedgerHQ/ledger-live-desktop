@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Пользовательская",
     "fast": "Быстро",
     "high": "Высокая",
@@ -174,13 +175,13 @@
       "sorry": "Услуга временно недоступна или недоступна в Вашей стране"
     },
     "missingApp": {
-      "title": "Пожалуйста, установите приложение Exchange на устройство",
-      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Перейти в Диспетчер"
     },
     "outdatedApp": {
-      "title": "Пожалуйста, обновите приложение Exchange на устройстве",
-      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение Exchange.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Перейти в Диспетчер"
     },
     "kyc": {
@@ -247,6 +248,9 @@
         },
         "device": {
           "title": "Устройство"
+        },
+        "dependencies": {
+          "title": "App checks"
         },
         "finished": {
           "title": "В ожидании",
@@ -452,7 +456,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Выберите счёт",
@@ -460,7 +465,8 @@
       "addAccount": "Добавить счёт"
     },
     "sell": {
-      "title": "Продавайте криптовалюту через нашего партнёра",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Продажа",
       "selectCrypto": "Выберите криптоактив",
       "selectAccount": "Выберите счёт",
@@ -634,7 +640,10 @@
             "done": "Закрыть",
             "cta": "Просмотреть сведения"
           },
-          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций."
+          "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -1032,7 +1041,10 @@
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
