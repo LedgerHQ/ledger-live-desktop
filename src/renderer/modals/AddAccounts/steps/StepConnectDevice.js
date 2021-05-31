@@ -30,7 +30,7 @@ const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
   if (!currency) {
     return null;
   }
-  
+
   return (
     <>
       <TrackPage category="AddAccounts" name="Step2" currencyName={currencyName} />

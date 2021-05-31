@@ -30,6 +30,7 @@ type Props = {
   closeModal: string => void,
   replaceAccounts: (Account[]) => void,
   blacklistedTokenIds?: string[],
+  skipChooseCurrencyStep?: ?boolean,
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
