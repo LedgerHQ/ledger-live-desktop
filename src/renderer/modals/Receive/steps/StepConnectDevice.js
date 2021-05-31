@@ -44,10 +44,15 @@ export function StepConnectDeviceFooter({
   onSkipConfirm,
   device,
   eventType,
+  currencyName,
 }: StepProps) {
   return (
     <Box horizontal flow={2}>
-      <TrackPage category={`Receive Flow${eventType ? ` (${eventType})` : ""}`} name="Step 2" />
+      <TrackPage
+        category={`Receive Flow${eventType ? ` (${eventType})` : ""}`}
+        name="Step 2"
+        currencyName={currencyName}
+      />
       <Button
         event="Receive Flow Without Device Clicked"
         id={"receive-connect-device-skip-device-button"}

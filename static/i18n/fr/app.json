@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Personnalisé",
     "fast": "Rapide",
     "high": "Haut",
@@ -174,13 +175,13 @@
       "sorry": "Service temporairement indisponible, ou non disponible dans votre pays"
     },
     "missingApp": {
-      "title": "Veuillez installer l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et installez l'application Exchange pour échanger des actifs.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Aller au Manager"
     },
     "outdatedApp": {
-      "title": "Veuillez mettre à jour l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et mettez à jour l'application Exchange pour échanger des actifs.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Aller au Manager"
     },
     "kyc": {
@@ -247,6 +248,9 @@
         },
         "device": {
           "title": "Appareil"
+        },
+        "dependencies": {
+          "title": "App checks"
         },
         "finished": {
           "title": "En attente",
@@ -452,7 +456,8 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Veuillez confirmer que l'adresse affichée correspond exactement à celle sur votre appareil",
     "buy": {
-      "title": "Acheter des cryptomonnaies via notre partenaire",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -460,7 +465,8 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "title": "Vendre des cryptomonnaies via notre partenaire",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -634,7 +640,10 @@
             "done": "Fermer",
             "cta": "Voir les détails"
           },
-          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -1032,7 +1041,10 @@
     "unlockDevice": "Déverrouillez votre appareil",
     "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
-    "appNotInstalled": "Veuillez installer l'application {{appName}}",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
@@ -1802,9 +1814,9 @@
       "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
-      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. <1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. <1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
       "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
       "hideInactiveNominations": "Afficher uniquement les nominations actives",
       "noActiveNominations": "Il n'y a aucune nomination active.",
@@ -2426,7 +2438,7 @@
         "options": {
           "1": {
             "heading": "Première utilisation",
-            "title": "Initialiser un nouveau {{deviceName}}",
+            "title": "Configurer un nouveau {{deviceName}}",
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {

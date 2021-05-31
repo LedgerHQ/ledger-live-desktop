@@ -1,47 +1,47 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "today": "今天",
+    "tomorrow": "明天",
+    "yesterday": "昨天",
+    "transactionDate": "交易日期"
   },
   "common": {
     "never": "Never",
     "apply": "Apply",
     "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "previous": "Previous",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
-    "selectAccount": "Select an account",
+    "confirm": "确认",
+    "cancel": "取消",
+    "getSupport": "获取支持",
+    "delete": "删除",
+    "launch": "启动",
+    "continue": "继续",
+    "previous": "上一步",
+    "learnMore": "查看更多",
+    "help": "帮助",
+    "needHelp": "需要帮助？",
+    "areYouSure": "是否确定?",
+    "selectAccount": "选择账户",
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
-    "selectCurrency": "Choose a crypto asset",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectCurrency": "选择加密资产",
+    "selectCurrencyNoOption": "不存在加密资产 {{currencyName}}",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "Sort by",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
-    "range": "Range",
-    "stop": "Stop",
-    "updateNow": "Update now",
-    "close": "Close",
+    "selectNoResults": "未找到与 \"{{query}} \" 匹配的结果",
+    "sortBy": "排序方式",
+    "save": "保存",
+    "lock": "锁定",
+    "showMore": "显示更多",
+    "back": "返回",
+    "reset": "重置",
+    "retry": "重试",
+    "range": "范围",
+    "stop": "停止",
+    "updateNow": "立即更新",
+    "close": "关闭",
     "eastern": "Eastern",
     "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
-    "verifyMyAddress": "Verify my address",
+    "reverify": "重新验证",
+    "verify": "验证",
+    "verifyMyAddress": "验证我的地址",
     "copy": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
@@ -121,6 +121,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Custom",
     "fast": "Fast",
     "high": "High",
@@ -174,13 +175,13 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the Exchange app on your device",
-      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "outdatedApp": {
-      "title": "Please update the Exchange app on your device",
-      "subtitle": "Go to manager and update Exchange app to swap assets.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "kyc": {
@@ -247,6 +248,9 @@
         },
         "device": {
           "title": "Device"
+        },
+        "dependencies": {
+          "title": "App checks"
         },
         "finished": {
           "title": "Pending",
@@ -452,7 +456,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -460,7 +465,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -634,7 +640,10 @@
             "done": "Close",
             "cta": "View details"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -1032,7 +1041,10 @@
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
