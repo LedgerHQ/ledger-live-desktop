@@ -212,6 +212,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           items={manageActions}
           renderItem={renderItem}
           controlled
+          buttonId="account-actions-manage"
         >
           {({ isOpen }) => (
             <Button small primary>

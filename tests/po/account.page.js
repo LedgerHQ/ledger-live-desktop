@@ -26,11 +26,11 @@ export default class AccountPage extends Page {
   }
 
   async actionsDropdown() {
-    return this.$("#account-actions-dropdown");
+    return this.$("#account-actions-manage");
   }
 
   async actionsDropdownWC() {
-    return this.$("#account-actions-dropdown-WalletConnect");
+    return this.$("#account-actions-manage-WalletConnect");
   }
 
   async bookmarkAccount() {
