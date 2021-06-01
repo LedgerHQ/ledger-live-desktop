@@ -10,15 +10,15 @@ import Box from "~/renderer/components/Box";
 import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import CurrencyRows from "./CurrencyRows";
 import Track from "~/renderer/analytics/Track";
+import { currencySettingsDefaults } from "~/renderer/reducers/settings";
 
 export default function Currencies() {
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
-  const [currency, setCurrency] = useState();
+  const [currency, setCurrency] = useState<CryptoCurrency | TokenCurrenyc | undefined>();
 
   const handleChangeCurrency = useCallback(
     (currency?: CryptoCurrency | TokenCurrency) => {
-      if (!currency) return;
       setCurrency(currency);
     },
     [setCurrency],
@@ -26,6 +26,11 @@ export default function Currencies() {
 
   const currencyId = currency?.id ?? "placeholder";
   const currencyName = currency?.name ?? "placeholder";
+
+  const isCurrencyDisabled = useCallback(
+    (currency: Currency | TokenCurrency) => !currencySettingsDefaults(currency).confirmationsNb,
+    [],
+  );
 
   return (
     <Box key={currencyId}>
@@ -44,6 +49,7 @@ export default function Currencies() {
           onChange={handleChangeCurrency}
           currencies={currencies}
           placeholder={t("settings.currencies.selectPlaceholder")}
+          isCurrencyDisabled={isCurrencyDisabled}
         />
       </Row>
       {currency && (
