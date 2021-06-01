@@ -290,6 +290,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           src={uri.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
+          sandbox="allow-scripts allow-same-origin allow-forms"
           onLoad={handleLoad}
         />
         {!widgetLoaded ? (
