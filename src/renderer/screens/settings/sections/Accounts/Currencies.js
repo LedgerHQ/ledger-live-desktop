@@ -14,22 +14,23 @@ import Track from "~/renderer/analytics/Track";
 export default function Currencies() {
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
-  const [currency, setCurrency] = useState(() => {
-    const btc = currencies.find(c => c.id === "bitcoin");
-    return btc || currencies[0];
-  });
+  const [currency, setCurrency] = useState();
 
   const handleChangeCurrency = useCallback(
-    (currency: CryptoCurrency | TokenCurrency) => {
+    (currency?: CryptoCurrency | TokenCurrency) => {
+      if (!currency) return;
       setCurrency(currency);
     },
     [setCurrency],
   );
 
-  return !currency ? null : (
-    <Box key={currency.id}>
-      <TrackPage category="Settings" name="Currencies" currencyId={currency.id} />
-      <Track onUpdate event="Crypto asset settings dropdown" currencyName={currency.name} />
+  const currencyId = currency?.id ?? "placeholder";
+  const currencyName = currency?.name ?? "placeholder";
+
+  return (
+    <Box key={currencyId}>
+      <TrackPage category="Settings" name="Currencies" currencyId={currencyId} />
+      <Track onUpdate event="Crypto asset settings dropdown" currencyName={currencyName} />
       <Row
         title={t("settings.tabs.currencies")}
         desc={t("settings.currencies.desc")}
@@ -42,11 +43,14 @@ export default function Currencies() {
           // $FlowFixMe Mayday we have a problem with <Select /> and its props
           onChange={handleChangeCurrency}
           currencies={currencies}
+          placeholder={t("settings.currencies.selectPlaceholder")}
         />
       </Row>
-      <Body>
-        <CurrencyRows currency={currency} />
-      </Body>
+      {currency && (
+        <Body>
+          <CurrencyRows currency={currency} />
+        </Body>
+      )}
     </Box>
   );
 }
