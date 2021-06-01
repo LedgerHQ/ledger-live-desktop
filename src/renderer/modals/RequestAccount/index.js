@@ -10,7 +10,7 @@ class RequestAccountModal extends PureComponent<{}> {
       <Modal
         name="MODAL_REQUEST_ACCOUNT"
         centered
-        preventBackdropClick={false}
+        preventBackdropClick
         render={({ onClose, data }) => (
           <Body
             onClose={() => {

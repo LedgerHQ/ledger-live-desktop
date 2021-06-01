@@ -20,15 +20,13 @@ class SignTransactionModal extends PureComponent<{}, { stepId: StepId }> {
   render() {
     const { stepId } = this.state;
 
-    const isModalLocked = ["recipient", "confirmation"].includes(stepId);
-
     return (
       <Modal
         name="MODAL_SIGN_TRANSACTION"
         centered
         refocusWhenChange={stepId}
         onHide={this.handleReset}
-        preventBackdropClick={isModalLocked}
+        preventBackdropClick
         render={({ onClose, data }) => (
           <Body
             stepId={stepId}
