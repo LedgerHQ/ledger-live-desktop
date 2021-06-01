@@ -24,7 +24,7 @@ const Container: ThemedComponent<{ isActive?: boolean, disabled?: boolean }> = s
   fontSize: 4,
 }))`
   padding: 30px 16px;
-  width: 205px;
+  width: 320px;
   border-radius: 4px;
   cursor: ${p => (p.disabled ? "default" : "pointer")};
   color: ${p => p.theme.colors.palette.text.shade100};
@@ -65,7 +65,6 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
 const Content: ThemedComponent<{}> = styled(Box)`
   margin-top: 16px;
   width: 100%;
-  max-width: 260px;
 
   :empty {
     display: none;

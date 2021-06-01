@@ -309,16 +309,16 @@
       },
       "changelly": {
         "bullets": [
-          "Our trusted partner",
-          "BTC, ETH, USDT and 50 others",
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
           "Centralized"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Uniswap, Sushiswap, etc",
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
           "Ethereum & ERC20 tokens",
-          "Decentralized"
+          "Decentralized & Trustless"
         ]
       }
     }
@@ -519,18 +519,20 @@
       "learnMore": "What is buy?",
       "coinify": {
         "bullets": [
-          "Available worldwide",
-          "EUR, USD, GBP & 32 others",
-          "SEPA, credit or debit card",
-          "1.5% / 4.25% fees"
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
         ]
       },
       "wyre": {
         "bullets": [
-          "Only bank account from 🇺🇸",
+          "Only 🇺🇸 bank account",
           "USD support only",
+          "20+ crypto supported",
           "ACH transfer",
-          "0.75% fees"
+          "No credit & debit cards"
         ]
       }
     }

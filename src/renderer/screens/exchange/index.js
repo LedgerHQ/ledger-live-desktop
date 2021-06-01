@@ -72,13 +72,13 @@ const PROVIDERS = [
   {
     provider: "wyre",
     name: "Wyre",
-    icon: <IconWyre size={50} />,
+    icon: <IconWyre size={32} />,
     disabled: false,
   },
   {
     provider: "coinify",
     name: "Coinify",
-    icon: <IconCoinify size={50} />,
+    icon: <IconCoinify size={32} />,
     disabled: false,
   },
 ];
