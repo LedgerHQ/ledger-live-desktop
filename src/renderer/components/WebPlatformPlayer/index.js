@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect, useRef, useMemo } from "react"
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 
@@ -85,6 +86,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listSupportedCurrencies(), []);
   const { pushToast } = useToasts();
+  const { t } = useTranslation();
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
@@ -146,8 +148,8 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       pushToast({
         id: optimisticOperation.id,
         type: "operation",
-        title: "Transaction sent !",
-        text: "Click here for more information",
+        title: t("platform.flows.broadcast.toast.title"),
+        text: t("platform.flows.broadcast.toast.text"),
         icon: "info",
         callback: () => {
           dispatch(
@@ -162,7 +164,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
       return optimisticOperation.hash;
     },
-    [accounts, pushToast, dispatch],
+    [accounts, pushToast, dispatch, t],
   );
 
   const requestAccount = useCallback(

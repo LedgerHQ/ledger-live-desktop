@@ -9,6 +9,12 @@
     "flows": {
       "requestAccount": {
         "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
       }
     }
   },
@@ -2387,7 +2393,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News"
+      "announcement": "News",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
