@@ -115,6 +115,7 @@ const SelectProvider = () => {
           {PROVIDERS.map(p => (
             <GridItem key={p.provider}>
               <CardButton
+                id={`exchange-providers-item-${p.provider}`}
                 title={p.name}
                 icon={p.icon}
                 onClick={() => handleSelectProvider(p.provider)}
@@ -135,7 +136,12 @@ const SelectProvider = () => {
           ))}
         </Grid>
         <Footer>
-          <Button primary onClick={handleClick} disabled={!provider}>
+          <Button
+            primary
+            onClick={handleClick}
+            disabled={!provider}
+            id="exchange-providers-continue"
+          >
             {t("common.continue")}
           </Button>
         </Footer>

@@ -81,7 +81,16 @@ type Props = {
   onClick?: Function,
 };
 
-const CardButton = ({ children, title, icon, footer, onClick, isActive, disabled }: Props) => {
+const CardButton = ({
+  children,
+  title,
+  icon,
+  footer,
+  onClick,
+  isActive,
+  disabled,
+  ...rest
+}: Props) => {
   const handleClick = useCallback(() => {
     if (!disabled && onClick) {
       onClick();
@@ -90,6 +99,7 @@ const CardButton = ({ children, title, icon, footer, onClick, isActive, disabled
 
   return (
     <Container
+      {...rest}
       isInteractive={!!onClick}
       isActive={isActive}
       onClick={handleClick}

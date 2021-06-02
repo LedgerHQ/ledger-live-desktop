@@ -153,6 +153,7 @@ const SelectProvider = () => {
             return (
               <GridItem key={p.provider}>
                 <CardButton
+                  id={`swap-providers-item-${p.provider}`}
                   title={p.name}
                   icon={p.icon}
                   footer={
@@ -174,7 +175,7 @@ const SelectProvider = () => {
           })}
         </Grid>
         <Footer>
-          <Button primary onClick={handleClick} disabled={!provider}>
+          <Button primary onClick={handleClick} disabled={!provider} id="swap-providers-continue">
             {t("common.continue")}
           </Button>
         </Footer>
