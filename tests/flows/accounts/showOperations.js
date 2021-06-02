@@ -9,7 +9,7 @@ const showOperations = (currency = "global") => {
 
     afterAll(async () => {
       await modalPage.close();
-      await modalPage.waitForClosed();
+      await modalPage.waitForDisplayed({ reverse: true });
     });
 
     it("show the first account", async () => {

@@ -164,8 +164,8 @@ const swap = o => {
 
       it("should refresh the rates", async () => {
         const ratesLoader = await swapPage.ratesLoader();
-        expect(await ratesLoader.waitForDisplayed()).toBe(true);
-        expect(await ratesLoader.waitForDisplayed({ reverse: true })).toBe(true);
+        expect(await ratesLoader.isDisplayed()).toBe(true);
+        expect(await ratesLoader.isDisplayed({ reverse: true })).toBe(true);
       });
 
       it("exchange button should be enabled", async () => {
@@ -190,7 +190,7 @@ const swap = o => {
 
       it("should NOT display the countdown", async () => {
         const countdown = await swapPage.countdown();
-        expect(await countdown.isDisplayed()).toBe(false);
+        expect(await countdown.waitForDisplayed({ reverse: true })).toBe(true);
       });
 
       it("and look like this", async () => {

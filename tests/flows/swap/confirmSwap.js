@@ -103,21 +103,24 @@ const confirmSwap = () => {
           });
         });
 
-        describe("when click on close button", () => {
+        describe("when I click on close button", () => {
           it("should close modal", async () => {
             const closeButton = await swapPage.successCloseButton();
             await closeButton.click();
 
             expect(await modalPage.waitForDisplayed({ reverse: true })).toBe(true);
-            expect(await app.client.screenshot()).toMatchImageSnapshot({
-              customSnapshotIdentifier: "swap-end-1",
-            });
           });
 
           it("should land on history page", async () => {
             const history = await swapPage.history();
 
             expect(await history.waitForDisplayed()).toBe(true);
+          });
+
+          it("and look like this", async () => {
+            expect(await app.client.screenshot()).toMatchImageSnapshot({
+              customSnapshotIdentifier: "swap-end-1",
+            });
           });
         });
       });
