@@ -16,7 +16,7 @@ export default function StepConnectDevice({
 }: StepProps) {
   return (
     <>
-      <TrackPage category="Send Flow" name="Step ConnectDevice" />
+      <TrackPage category="Sign Transaction Flow" name="Step ConnectDevice" />
       <GenericStepConnectDevice
         account={account}
         useApp={useApp}

@@ -79,7 +79,7 @@ export class StepAmountFooter extends PureComponent<StepProps> {
           <BuyButton currency={mainAccount.currency} account={mainAccount} />
         ) : null}
         <Button
-          id={"send-amount-continue-button"}
+          id={"sign-transaction-amount-continue-button"}
           isLoading={bridgePending}
           primary
           disabled={!canNext}

@@ -7,12 +7,11 @@ import type {
   AccountLike,
   Transaction,
   TransactionStatus,
-  Operation,
   SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { Step } from "~/renderer/components/Stepper";
-export type StepId = "amount" | "device";
+export type StepId = "amount" | "device" | "confirmation";
 
 export type StepProps = {
   t: TFunction,
@@ -27,7 +26,6 @@ export type StepProps = {
   bridgePending: boolean,
   error: ?Error,
   warning: ?Error,
-  optimisticOperation: ?Operation,
   closeModal: void => void,
   openModal: (string, any) => void,
   onChangeAccount: (?AccountLike, ?Account) => void,

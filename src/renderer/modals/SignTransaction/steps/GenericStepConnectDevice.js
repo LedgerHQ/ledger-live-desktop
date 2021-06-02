@@ -69,6 +69,7 @@ export default function StepConnectDevice({
           onTransactionSigned(signedOperation);
         } else if (transactionSignError) {
           onTransactionError(transactionSignError);
+          transitionTo("confirmation");
         }
       }}
     />

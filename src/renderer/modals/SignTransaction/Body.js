@@ -10,6 +10,7 @@ import { Trans, withTranslation } from "react-i18next";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 import type { Account, AccountLike, SignedOperation } from "@ledgerhq/live-common/lib/types";
 import type { PlatformTransaction } from "@ledgerhq/live-common/lib/platform/types";
+import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import { closeModal, openModal } from "~/renderer/actions/modals";
@@ -20,9 +21,11 @@ import Track from "~/renderer/analytics/Track";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import StepConnectDevice from "./steps/StepConnectDevice";
+import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import type { St, StepId } from "./types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge/index";
+import logger from "~/logger/logger";
 
 type OwnProps = {|
   stepId: StepId,
@@ -39,6 +42,7 @@ type OwnProps = {|
     recipient?: string,
     amount?: BigNumber,
   },
+  setError: (error?: Error) => void,
 |};
 
 type StateProps = {|
@@ -66,6 +70,17 @@ const createSteps = (): St[] => [
     id: "device",
     label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
+  },
+  {
+    id: "confirmation",
+    label: <Trans i18nKey="send.steps.confirmation.title" />,
+    excludeFromBreadcrumb: true,
+    component: StepConfirmation,
+    footer: StepConfirmationFooter,
+    onBack: ({ transitionTo, onRetry }) => {
+      onRetry();
+      transitionTo("amount");
+    },
   },
 ];
 
@@ -98,6 +113,7 @@ const Body = ({
   closeModal,
   onChangeStepId,
   onClose,
+  setError,
   stepId,
   params,
   accounts,
@@ -151,14 +167,18 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-  }, []);
+    setError(undefined);
+  }, [setError]);
 
   const handleTransactionError = useCallback(
     (error: Error) => {
-      params.onCancel(error);
-      handleCloseModal();
+      if (!(error instanceof UserRefusedOnDevice)) {
+        logger.critical(error);
+      }
+      setTransactionError(error);
+      setError(error);
     },
-    [handleCloseModal, params],
+    [setError],
   );
 
   const handleStepChange = useCallback(e => onChangeStepId(e.id), [onChangeStepId]);
@@ -183,7 +203,7 @@ const Body = ({
   const warning = getStatusError(status, "warnings");
 
   const stepperProps = {
-    title: t("send.title"),
+    title: t("sign.title"),
     stepId,
     useApp: params.useApp,
     steps,
