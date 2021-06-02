@@ -90,7 +90,7 @@ const STATUS_KEYS_IGNORE = ["recipient", "gasLimit"];
 function getStatusError(status, type = "errors"): ?Error {
   if (!status || !status[type]) return null;
 
-  const firstKey = Object.keys(status[type]).filter(k => !STATUS_KEYS_IGNORE.includes(k))[0];
+  const firstKey = Object.keys(status[type]).find(k => !STATUS_KEYS_IGNORE.includes(k));
 
   return firstKey ? status[type][firstKey] : null;
 }
@@ -194,7 +194,7 @@ const Body = ({
   const errorSteps = [];
 
   if (transactionError) {
-    errorSteps.push(3);
+    errorSteps.push(1);
   } else if (bridgeError) {
     errorSteps.push(0);
   }
