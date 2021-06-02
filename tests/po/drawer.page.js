@@ -2,7 +2,7 @@ import Page from "./page";
 
 export default class ModalPage extends Page {
   async container() {
-    return this.$(".sidedrawer.entered");
+    return this.$(".sidedrawer");
   }
 
   async closeButton() {
