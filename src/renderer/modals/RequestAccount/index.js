@@ -15,7 +15,7 @@ class RequestAccountModal extends PureComponent<{}> {
           <Body
             onClose={() => {
               if (data.onCancel) {
-                data.onCancel();
+                data.onCancel(new Error("Request account interrupted by user"));
               }
               onClose();
             }}

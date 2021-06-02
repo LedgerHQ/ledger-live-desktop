@@ -36,7 +36,7 @@ class SignTransactionModal extends PureComponent<{}, { stepId: StepId, error?: E
             stepId={stepId}
             onClose={() => {
               if (data.onCancel) {
-                data.onCancel(this.state.error);
+                data.onCancel(this.state.error || new Error("Signature interrupted by user"));
               }
               onClose();
             }}
