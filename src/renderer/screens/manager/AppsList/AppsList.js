@@ -61,6 +61,7 @@ const FilterHeader = styled.div`
 
 type Props = {
   deviceInfo: DeviceInfo,
+  optimisticState: State,
   state: State,
   dispatch: Action => void,
   isIncomplete: boolean,
@@ -72,6 +73,7 @@ type Props = {
 
 const AppsList = ({
   deviceInfo,
+  optimisticState,
   state,
   dispatch,
   isIncomplete,
@@ -130,6 +132,7 @@ const AppsList = ({
   const mapApp = useCallback(
     (app, appStoreView, onlyUpdate, showActions) => (
       <Item
+        optimisticState={optimisticState}
         state={state}
         key={`${appStoreView ? "APP_STORE" : "DEVICE_TAB"}_${app.name}`}
         app={app}
@@ -144,7 +147,15 @@ const AppsList = ({
         addAccount={addAccount}
       />
     ),
-    [state, dispatch, isIncomplete, setAppInstallDep, setAppUninstallDep, addAccount],
+    [
+      optimisticState,
+      state,
+      dispatch,
+      isIncomplete,
+      setAppInstallDep,
+      setAppUninstallDep,
+      addAccount,
+    ],
   );
 
   return (
@@ -157,6 +168,7 @@ const AppsList = ({
         disabled={update.length >= 1}
       />
       <UpdateAllApps
+        optimisticState={optimisticState}
         update={update}
         state={state}
         dispatch={dispatch}
