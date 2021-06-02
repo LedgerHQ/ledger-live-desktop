@@ -14,14 +14,13 @@ type Props = {
   parentAccount: ?Account,
 };
 
-const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
+const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
   const unit = getAccountUnit(account);
   const mainAccount = getMainAccount(account, parentAccount);
   const minAmount = 10 ** unit.magnitude;
 
   const { tronResources, spendableBalance } = mainAccount;
-  invariant(tronResources, "tron account expected");
   const tronPower = tronResources.tronPower;
   const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
 
@@ -53,6 +52,15 @@ const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
       label: <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />,
     },
   ];
+};
+
+const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { tronResources } = mainAccount;
+
+  if (!tronResources) return null;
+
+  return <AccountHeaderManageActionsComponent account={account} parentAccount={parentAccount} />;
 };
 
 export default AccountHeaderManageActions;
