@@ -5,18 +5,12 @@ import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
-
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import useTheme from "~/renderer/hooks/useTheme";
-
-import Box from "~/renderer/components/Box";
-import BigSpinner from "~/renderer/components/BigSpinner";
-
-import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-import { openModal } from "~/renderer/actions/modals";
-import { accountsSelector } from "~/renderer/reducers/accounts";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
@@ -37,10 +31,17 @@ import {
   deserializePlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
-import TopBar from "./TopBar";
+import useTheme from "~/renderer/hooks/useTheme";
+import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
+import { openModal } from "~/renderer/actions/modals";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+
+import Box from "~/renderer/components/Box";
+import BigSpinner from "~/renderer/components/BigSpinner";
+
 import type { Manifest } from "./type";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import * as tracking from "./tracking";
+import TopBar from "./TopBar";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -102,20 +103,27 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
       const account = accounts.find(account => account.id === accountId);
+      tracking.platformReceiveRequested(manifest);
 
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
             account,
             parentAccount: null,
-            onResult: account => resolve(account.freshAddress),
-            onCancel: reject,
+            onResult: account => {
+              tracking.platformReceiveSuccess(manifest);
+              resolve(account.freshAddress);
+            },
+            onCancel: error => {
+              tracking.platformReceiveFail(manifest);
+              reject(error);
+            },
             verifyAddress: true,
           }),
         ),
       );
     },
-    [accounts, dispatch],
+    [manifest, accounts, dispatch],
   );
 
   const broadcastTransaction = useCallback(
@@ -132,12 +140,20 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       const signedOperation = deserializePlatformSignedTransaction(signedTransaction, accountId);
       const bridge = getAccountBridge(account);
 
-      const optimisticOperation = !getEnv("DISABLE_TRANSACTION_BROADCAST")
-        ? await bridge.broadcast({
+      let optimisticOperation = signedOperation.operation;
+
+      if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
+        try {
+          optimisticOperation = await bridge.broadcast({
             account,
             signedOperation,
-          })
-        : signedOperation.operation;
+          });
+          tracking.platformBroadcastSuccess(manifest);
+        } catch (error) {
+          tracking.platformBroadcastFail(manifest);
+          throw error;
+        }
+      }
 
       dispatch(
         updateAccountWithUpdater(account.id, account =>
@@ -152,6 +168,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
         text: t("platform.flows.broadcast.toast.text"),
         icon: "info",
         callback: () => {
+          tracking.platformBroadcastOperationDetailsClick(manifest);
           dispatch(
             openModal("MODAL_OPERATION_DETAILS", {
               operationId: optimisticOperation.id,
@@ -164,24 +181,30 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
       return optimisticOperation.hash;
     },
-    [accounts, pushToast, dispatch, t],
+    [manifest, accounts, pushToast, dispatch, t],
   );
 
   const requestAccount = useCallback(
     ({ currencies, allowAddAccount }: { currencies?: string[], allowAddAccount?: boolean }) => {
+      tracking.platformRequestAccountRequested(manifest);
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_REQUEST_ACCOUNT", {
             currencies,
             allowAddAccount,
-            onResult: account =>
-              resolve(serializePlatformAccount(accountToPlatformAccount(account))),
-            onCancel: reject,
+            onResult: account => {
+              tracking.platformRequestAccountSuccess(manifest);
+              resolve(serializePlatformAccount(accountToPlatformAccount(account)));
+            },
+            onCancel: error => {
+              tracking.platformRequestAccountFail(manifest);
+              reject(error);
+            },
           }),
         ),
       );
     },
-    [dispatch],
+    [manifest, dispatch],
   );
 
   const signTransaction = useCallback(
@@ -204,6 +227,8 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
         throw new Error("Transaction family not matching account currency family");
       }
 
+      tracking.platformSignTransactionRequested(manifest);
+
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
@@ -211,14 +236,19 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
             useApp: params.useApp,
             account,
             parentAccount: null,
-            onResult: signedOperation =>
-              resolve(serializePlatformSignedTransaction(signedOperation)),
-            onCancel: reject,
+            onResult: signedOperation => {
+              tracking.platformSignTransactionRequested(manifest);
+              resolve(serializePlatformSignedTransaction(signedOperation));
+            },
+            onCancel: error => {
+              tracking.platformSignTransactionFail(manifest);
+              reject(error);
+            },
           }),
         ),
       );
     },
-    [dispatch, accounts],
+    [manifest, dispatch, accounts],
   );
 
   const handlers = useMemo(
@@ -259,18 +289,21 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   );
 
   useEffect(() => {
+    tracking.platformLoad(manifest);
     window.addEventListener("message", handleMessage, false);
     return () => window.removeEventListener("message", handleMessage, false);
-  }, [handleMessage]);
+  }, [manifest, handleMessage]);
 
   const handleLoad = useCallback(() => {
+    tracking.platformLoadSuccess(manifest);
     setWidgetLoaded(true);
-  }, []);
+  }, [manifest]);
 
   const handleReload = useCallback(() => {
+    tracking.platformReload(manifest);
     setLoadDate(Date.now());
     setWidgetLoaded(false);
-  }, []);
+  }, [manifest]);
 
   const uri = useMemo(() => {
     const url = new URL(manifest.url.toString());
