@@ -103,7 +103,7 @@ const SelectProvider = () => {
 
   return (
     <>
-      <TrackPage category="Exchange" name="SelectProvider" />
+      <TrackPage category="Buy" name="SelectProvider" />
       <Card flow={1}>
         <Header>
           <Title>{t("exchange.providers.title")}</Title>

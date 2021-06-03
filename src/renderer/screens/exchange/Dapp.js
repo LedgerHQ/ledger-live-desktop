@@ -2,6 +2,7 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
@@ -38,6 +39,7 @@ export default function ExchangeDapp({ match }: Props) {
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
+      <TrackPage category="Buy" name="Platform" platform={platform} />
       <WebPlatformPlayer manifest={manifest} onClose={handleClose} />
     </Card>
   );

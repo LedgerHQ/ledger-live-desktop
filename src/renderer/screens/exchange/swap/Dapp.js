@@ -2,6 +2,7 @@
 import React, { useCallback, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 
+import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
@@ -52,6 +53,7 @@ export default function SwapDapp({ match }: Props) {
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
+      <TrackPage category="Swap" name="Platform" />
       <WebPlatformPlayer manifest={manifest} onClose={handleClose} />
     </Card>
   );
