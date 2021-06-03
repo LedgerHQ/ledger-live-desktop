@@ -303,7 +303,7 @@
       "wyre": {
         "bullets": [
           "Disponible uniquement aux USA (Europe, Afrique et Asie à venir)",
-          "Multi coins and tokens",
+          "Multi coins et jetons",
           "Centralisé"
         ]
       },
@@ -317,7 +317,7 @@
       "paraswap": {
         "bullets": [
           "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap,...)",
-          "Ethereum et tokens ERC-20",
+          "Ethereum et jetons ERC-20",
           "Décentralisé et se passant des tiers de confiance"
         ]
       }
@@ -496,7 +496,7 @@
     "verifyAddress": "Veuillez confirmer que l'adresse affichée correspond exactement à celle sur votre appareil",
     "buy": {
       "header": "Acheter des cryptos avec {{provider}}",
-      "title": "Achetez des cryptos par l'intermédiaire de <0>{{provider}}</0>",
+      "title": "Achetez des cryptos en utilisant <0>{{provider}}</0>",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -505,7 +505,7 @@
     },
     "sell": {
       "header": "Vendre des cryptos avec {{provider}}",
-      "title": "Vendez des cryptos par l'intermédiaire de <0>{{provider}}</0>",
+      "title": "Vendez des cryptos en utilisant <0>{{provider}}</0>",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -521,15 +521,15 @@
         "bullets": [
           "Disponible dans plus de 130 pays",
           "EUR, USD, GBP et 32 autres",
-          "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
+          "Virements SEPA et Faster Payments",
+          "Virements bancaires locaux aux USA",
+          "Cartes de crédit et de débit"
         ]
       },
       "wyre": {
         "bullets": [
           "Compte bancaire 🇺🇸 uniquement",
-          "USD support only",
+          "Prise en charge du dollar américain uniquement",
           "Plus de 20 cryptos prises en charge",
           "Virement ACH",
           "Pas de cartes de crédit ou débit"
@@ -703,7 +703,7 @@
           },
           "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. {{ tokenName }} sont des tokens ERC-20 que vous gagnez en prêtant des actifs."
           }
         }
       }
@@ -1102,10 +1102,10 @@
     "unlockDevice": "Déverrouillez votre appareil",
     "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
-    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle": "Appli nécessaire manquante",
     "appNotInstalledTitle_plural": "Applis nécessaires manquantes",
-    "appNotInstalled": "L'appli {{appName}} est nécessaire pour terminer cette action. Utilisez le gestionnaire pour l'installer sur votre appareil",
-    "appNotInstalled_plural": "Les applis {{appName}} sont nécessaires pour terminer cette action. Utilisez le gestionnaire pour les installer sur votre appareil",
+    "appNotInstalled": "L'appli {{appName}} est nécessaire pour terminer cette action. Utilisez le Manager pour l'installer sur votre appareil",
+    "appNotInstalled_plural": "Les applis {{appName}} sont nécessaires pour terminer cette action. Utilisez le Manager pour les installer sur votre appareil",
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
