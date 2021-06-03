@@ -5,6 +5,19 @@
     "yesterday": "Hier",
     "transactionDate": "Date de l'opération"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
+      }
+    }
+  },
   "common": {
     "never": "Jamais",
     "apply": "Appliquer",
@@ -282,6 +295,32 @@
       "toProvider": "Adresse du fournisseur",
       "initialAmount": "Montant initial",
       "creditedAmount": "Montant crédité"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -474,6 +513,28 @@
     },
     "history": {
       "tab": "Historique"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only 🇺🇸 bank account",
+          "USD support only",
+          "20+ crypto supported",
+          "ACH transfer",
+          "No credit & debit cards"
+        ]
+      }
     }
   },
   "lend": {
@@ -1432,6 +1493,9 @@
       "estimatedFees": "Frais de réseau"
     }
   },
+  "sign": {
+    "title": "Sign transaction"
+  },
   "releaseNotes": {
     "title": "Notes de version",
     "version": "Ledger Live {{versionNb}}"
@@ -2334,7 +2398,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "Actualités"
+      "announcement": "Actualités",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
@@ -2802,6 +2867,7 @@
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
     "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
     "secureContract": "Vérifiez les details du prêt sur votre appreil avant de l'envoyer. L'addresse est fournie de maniére sécurisée afin que vous n'ayez pas à la vérifier.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",
