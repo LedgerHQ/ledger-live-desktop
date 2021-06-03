@@ -134,7 +134,7 @@
     }
   },
   "fees": {
-    "advanced": "Advanced",
+    "advanced": "Avancé",
     "custom": "Personnalisé",
     "fast": "Rapide",
     "high": "Haut",
@@ -194,7 +194,7 @@
     },
     "outdatedApp": {
       "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
+      "subtitle": "Ouvrez le Gestionnaire et installez l'appli {{appName}} pour échanger des actifs.",
       "cta": "Aller au Manager"
     },
     "kyc": {
@@ -263,7 +263,7 @@
           "title": "Appareil"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "Vérifications des applis"
         },
         "finished": {
           "title": "En attente",
@@ -297,8 +297,8 @@
       "creditedAmount": "Montant crédité"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
+      "title": "Choisir un prestataire pour acheter des cryptos",
+      "learnMore": "Qu'est-ce que le Swap ?",
       "kycRequired": "KYC Required",
       "wyre": {
         "bullets": [
