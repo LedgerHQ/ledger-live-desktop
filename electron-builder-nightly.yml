@@ -21,7 +21,7 @@ linux:
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
-  # icon: build/windows/app.ico
+  icon: build/windows/app.ico
   verifyUpdateCodeSignature: false
   signAndEditExecutable: false
   target:
@@ -33,11 +33,13 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
+  installerIcon: build/windows/installer.ico
+  installerSidebar: build/windows/installerSidebar.bmp
+  uninstallerIcon: build/windows/uninstaller.ico
+  uninstallerSidebar: build/windows/uninstallerSidebar.bmp
 
 files:
   # Include files
   - .webpack/**/*
-  - node_modules/**/*
-  - package.json
   # Exclude files
   # Exclude modules
