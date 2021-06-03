@@ -309,8 +309,8 @@
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
+          "BTC, ETH, USDT et plus de 50 autres",
+          "Multidevises",
           "Centralized"
         ]
       },
@@ -519,8 +519,8 @@
       "learnMore": "What is buy?",
       "coinify": {
         "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
+          "Disponible dans plus de 130 pays",
+          "EUR, USD, GBP et 32 autres",
           "SEPA & Faster Payments",
           "Local US wire transfers",
           "Credit and debit cards"
@@ -528,11 +528,11 @@
       },
       "wyre": {
         "bullets": [
-          "Only 🇺🇸 bank account",
+          "Compte bancaire 🇺🇸 uniquement",
           "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
+          "Plus de 20 cryptos prises en charge",
+          "Virement ACH",
+          "Pas de cartes de crédit ou débit"
         ]
       }
     }
