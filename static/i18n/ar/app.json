@@ -668,14 +668,14 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "تأكيد",
           "success": {
-            "title": "Operation sent successfully",
+            "title": "تم إرسال العملية بنجاح",
             "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
             "done": "إغلاق",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "info": "المعاملات قد تستغرق بعض الوقت ليتم عرضها في المستكشف وتأكيدها."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
       }
     },
@@ -694,11 +694,11 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "تأكيد",
           "success": {
             "title": "Withdrawal sent successfully",
             "text": "Your assets will be available once the network has confirmed the withdrawal.",
-            "done": "Close",
+            "done": "إغلاق",
             "cta": "View details"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
@@ -744,13 +744,13 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "تأكيد",
           "success": {
-            "title": "Deposit sent successfully",
-            "text": "You will start earning interest once the network has confirmed the deposit.",
-            "done": "Close",
-            "cta": "View details",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "تم إرسال الإيداع بنجاح",
+            "text": "سوف تبدأ في كسب فائدة بمجرد أن تقوم الشبكة بتأكيد الإيداع.",
+            "done": "إغلاق",
+            "cta": "عرض التفاصيل",
+            "info": "المعاملات قد تستغرق بعض الوقت ليتم عرضها في المستكشف وتأكيدها."
           }
         }
       }
@@ -1081,7 +1081,7 @@
       "rewardFrom": "Reward from",
       "memo": "Memo",
       "assetId": "Asset ID",
-      "rewards": "Earned rewards",
+      "rewards": "المكافآت المكتسبة",
       "bondedAmount": "Bonded Amount",
       "unbondedAmount": "Unbonded Amount",
       "withdrawUnbondedAmount": "Withdrawn Amount",
@@ -1287,22 +1287,22 @@
     "title": "Claim rewards",
     "steps": {
       "rewards": {
-        "title": "Rewards",
+        "title": "المكافآت",
         "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "info": "يمكن الحصول على المكافآت مرة كل 24 ساعة."
       },
       "connectDevice": {
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "تأكيد",
         "success": {
           "title": "Rewards claimed",
-          "text": "Your rewards were added to your available balance.",
-          "cta": "View details",
-          "done": "Done"
+          "text": "تمت إضافة مكافآتك إلى رصيدك المتاح.",
+          "cta": "عرض التفاصيل",
+          "done": "تم"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       }
     }
   },
@@ -1324,9 +1324,9 @@
       "confirmation": {
         "tooltip": {
           "title": "Transaction is awaiting validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "desc": "يتعين عليك الانتظار دقيقة قبل أن تتمكن من التصويت"
         },
-        "title": "Confirmation",
+        "title": "تأكيد",
         "success": {
           "title": "",
           "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
@@ -1472,16 +1472,16 @@
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "تأكيد",
         "success": {
-          "title": "Transaction sent",
-          "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "View details"
+          "title": "تم إرسال المعاملة",
+          "text": "سيتم تحديث رصيد حسابك عندما تقوم سلسلة الكتل بتأكيد المعاملة",
+          "cta": "عرض التفاصيل"
         },
         "pending": {
           "title": "Broadcasting transaction..."
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       },
       "warning": {
         "tezos": {
@@ -1661,13 +1661,13 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "تأكيد",
             "success": {
               "title": "You have successfully delegated your assets",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
+              "text": "سيتم تحديث رصيد حسابك عندما تقوم سلسلة الكتل بتأكيد المعاملة.",
+              "cta": "عرض التفاصيل"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -1677,12 +1677,12 @@
         "title": "Claim rewards",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
+            "title": "المكافآت",
             "compound": "Compound",
             "claim": "Cash in",
             "compoundOrClaim": "Compound or cash in",
             "compoundDescription": "Rewards will be added to delegated amount",
-            "claimDescription": "Rewards will be added to the available balance",
+            "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
             "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
             "selectLabel": "Select a delegation"
@@ -1691,14 +1691,14 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
+            "title": "تأكيد",
+            "label": "تأكيد",
             "success": {
               "title": "Rewards cashed in successfully",
               "titleCompound": "Rewards compounded successfully",
               "text": "Your rewards were added to your available balance",
               "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "pending": {
               "title": "Broadcasting transaction..."
@@ -1729,13 +1729,13 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "تأكيد",
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -1760,11 +1760,11 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "تأكيد",
             "success": {
               "title": "You have successfully undelegated your assets.",
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1773,7 +1773,7 @@
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
+    "operationHasRewards": "المكافآت المكتسبة",
     "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
@@ -1802,8 +1802,8 @@
       }
     },
     "claimRewards": {
-      "header": "Rewards",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
+      "header": "المكافآت",
+      "tooltip": "يتم توزيع مكافآت Algorand بشكل منتظم وتتم المطالبة بها تلقائيًا عندما تجري إحدى المعاملات.",
       "cta": "Claim rewards",
       "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
@@ -1816,14 +1816,14 @@
               "access": "Increase the account’s balance to increase rewards.",
               "ledger": "Perform a transaction to or from the account to claim rewards."
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "كيف تعمل مكافآت ألغوراند (Algorand)؟",
             "button": {
               "cta": "Receive Algo"
             }
           },
           "info": {
-            "title": "Rewards",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "title": "المكافآت",
+            "description": "تهانينا! لقد كسبت {{amount}}. انقر على الاستمرار للحصول على مكافآتك",
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
@@ -1907,7 +1907,7 @@
         "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
+        "title": "سحب",
         "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
@@ -1931,8 +1931,8 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "تأكيد",
+          "label": "تأكيد",
           "success": {
             "title": "You have successfully nominated validators",
             "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
@@ -2103,7 +2103,7 @@
     "amount": "Amount",
     "delegated": "Delegated",
     "completionDate": "Completion date",
-    "rewards": "Rewards",
+    "rewards": "المكافآت",
     "duration": "Duration",
     "durationJustStarted": "Just started",
     "durationDays": "{{count}} day",
