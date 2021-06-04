@@ -35,16 +35,12 @@ jobs:
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
       - name: build the app
-        run: yarn dist
+        run: yarn dist --dir
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: upload windows app
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
-      - name: upload yaml
-        uses: actions/upload-artifact@v2
-        with:
-          name: latest.yml
-          path: dist/latest.yml
+          name: win-unpacked
+          path: dist/win-unpacked
+
