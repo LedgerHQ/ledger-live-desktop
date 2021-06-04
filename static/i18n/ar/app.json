@@ -148,7 +148,7 @@
     "menu": "القائمة",
     "stars": "Starred accounts",
     "accounts": "الحسابات",
-    "manager": "Manager",
+    "manager": "المدير",
     "exchange": "شراء/ بيع",
     "swap": "Swap",
     "lend": "Lend"
@@ -1139,7 +1139,7 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
       "noFreeSpace": "No storage left",
-      "installed": "Apps",
+      "installed": "التطبيقات",
       "capacity": "Capacity",
       "used": "Used",
       "firmwareAvailable": "Firmware is outdated:",
@@ -1766,7 +1766,7 @@
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
               "cta": "عرض التفاصيل"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -1790,13 +1790,13 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "تأكيد",
             "success": {
-              "title": "{{token}} asset successfully added",
+              "title": "تمت إضافة أصل {{token}} بنجاح",
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
         }
       }
@@ -1830,7 +1830,7 @@
             "title": "Device"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "تأكيد",
             "success": {
               "title": "Rewards successfully claimed!",
               "text": "Your rewards were added to your available balance",
