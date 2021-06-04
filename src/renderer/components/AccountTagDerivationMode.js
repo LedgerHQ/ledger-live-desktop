@@ -24,6 +24,7 @@ const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
   box-sizing: content-box;
   text-transform: uppercase;
   margin: 0 8px;
+  flex: unset;
 `;
 
 type Props = {

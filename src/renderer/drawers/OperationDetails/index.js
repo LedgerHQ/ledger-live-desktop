@@ -59,7 +59,6 @@ import {
   OpDetailsTitle,
   GradientHover,
   OpDetailsData,
-  NoMarginWrapper,
   B,
   TextEllipsis,
   Separator,
@@ -178,10 +177,10 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         data.parentOperation = parentOperation;
         if (type === "subOperation") {
           data.parentId = account.id;
-          data.onRequestBack = parentOperation
-            ? () => openOperation("goBack", parentOperation)
-            : undefined;
         }
+        data.onRequestBack = parentOperation
+          ? () => openOperation("goBack", parentOperation)
+          : undefined;
       }
       setDrawer(OperationDetails, data);
     },
@@ -454,24 +453,27 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
       {internalOperations.length > 0 && account.type === "Account" && (
         <>
           <OpDetailsSection>
-            {t("operationDetails.internalOperations")}
-            <LabelInfoTooltip
-              text={t("operationDetails.internalOpTooltip")}
-              style={{ marginLeft: 4 }}
-            />
+            <OpDetailsTitle>
+              {t("operationDetails.internalOperations")}
+              <LabelInfoTooltip
+                text={t("operationDetails.internalOpTooltip")}
+                style={{ marginLeft: 4 }}
+              />
+            </OpDetailsTitle>
           </OpDetailsSection>
           <Box>
             {internalOperations.map((op, i) => (
-              <NoMarginWrapper key={`${op.id}`}>
+              <div key={`${op.id}`}>
                 <OperationComponent
                   text={account.currency.name}
                   operation={op}
                   account={account}
                   onOperationClick={() => openOperation("internalOperation", op, operation)}
                   t={t}
+                  withAddress={false}
                 />
                 {i < internalOperations.length - 1 && <B />}
-              </NoMarginWrapper>
+              </div>
             ))}
           </Box>
         </>
@@ -480,13 +482,8 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.account")}</OpDetailsTitle>
         <OpDetailsData>
-          <Box horizontal>
-            <Box
-              horizontal
-              alignItems="center"
-              flex="1"
-              style={parentAccount ? { maxWidth: "50%", flexShrink: 0 } : {}}
-            >
+          <Box flex="1" ml={2} horizontal justifyContent="flex-end">
+            <Box horizontal alignItems="center" flex="unset">
               <Box mt={0} mr={1}>
                 <CryptoCurrencyIcon currency={mainCurrency} size={16} />
               </Box>
@@ -500,7 +497,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
             {parentAccount ? (
               <>
                 <Separator>{"/"}</Separator>
-                <Box horizontal alignItems="center" flex="1">
+                <Box horizontal alignItems="center" flex="unset">
                   <Box mt={0} mr={1}>
                     <CryptoCurrencyIcon currency={currency} size={16} />
                   </Box>
