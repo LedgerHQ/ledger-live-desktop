@@ -32,7 +32,8 @@
     "spectron": "jest \"tests/specs/.*\\.spec\\.js\" --maxWorkers=4",
     "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
-    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
+    "sign-and-pack-windows": "electron-builder build --pd dist/win-unpacked -c.win.sign='scripts/sign-windows.js'"
   },
   "engines": {
     "node": ">=12"
