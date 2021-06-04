@@ -211,10 +211,10 @@
         "currency": "Crypto asset"
       },
       "to": {
-        "title": "To",
+        "title": "إلى",
         "account": "Account",
         "amount": "Amount to receive",
-        "currency": "Crypto asset",
+        "currency": "الأصول المشفرة",
         "addAccountCTA": "Add new account"
       },
       "tradeMethod": {
@@ -240,11 +240,11 @@
       "steps": {
         "summary": {
           "title": "Summary",
-          "from": "From",
-          "to": "To",
+          "from": "من",
+          "to": "إلى",
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
-          "terms": "Terms & Conditions",
+          "terms": "الشروط والأحكام",
           "disclaimer": {
             "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
@@ -287,11 +287,11 @@
         "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
         "finished": "Your swap was completed successfully."
       },
-      "date": "Date",
-      "from": "From",
+      "date": "التاريخ",
+      "from": "من",
       "fromAddress": "Origin address",
       "fromAddress_plural": "Origin addresses",
-      "to": "To",
+      "to": "إلى",
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
@@ -328,7 +328,7 @@
     "connect": "Connect",
     "disconnect": "Disconnect",
     "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "edit": "تعديل",
     "modal": {
       "title": "Connect Bitcoin full node",
       "disconnectTitle": "Disconnect full node",
@@ -358,7 +358,7 @@
                   "title": "RPC Credentials",
                   "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
                   "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "passwordPlaceholder": "كلمة المرور"
                 },
                 "tls": {
                   "title": "Use TLS",
@@ -395,7 +395,7 @@
           }
         },
         "accounts": {
-          "title": "Accounts",
+          "title": "الحسابات",
           "existing": "Existing accounts to scan",
           "toScan": "Accounts to scan",
           "toScanDescription": "Accounts to scan for each address type",
@@ -460,12 +460,12 @@
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
       "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buy": "Buy"
+        "receiveFunds": "أستلام",
+        "buy": "شراء"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "تعديل الحساب",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
@@ -473,7 +473,7 @@
         "desc": "Description of the account"
       },
       "unit": {
-        "title": "Unit",
+        "title": "وحدة",
         "desc": "Choose the unit to be used"
       }
     },
@@ -497,19 +497,19 @@
     "buy": {
       "header": "Buy crypto with {{provider}}",
       "title": "Buy crypto via <0>{{provider}}</0>",
-      "tab": "Buy",
+      "tab": "شراء",
       "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "selectAccount": "اختر حسابًا",
+      "continue": "متابعة",
+      "addAccount": "إضافة حساب"
     },
     "sell": {
       "header": "Sell crypto with {{provider}}",
       "title": "Sell crypto via <0>{{provider}}</0>",
-      "tab": "Sell",
+      "tab": "بيع",
       "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "selectAccount": "اختر حسابًا",
+      "continue": "متابعة"
     },
     "history": {
       "tab": "History"
@@ -540,14 +540,14 @@
   "lend": {
     "title": "Lend crypto",
     "tabs": {
-      "dashboard": "Dashboard",
+      "dashboard": "لوحة المعلومات",
       "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
-    "lendAsset": "Lend",
+    "lendAsset": "إقراض",
     "account": {
       "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Amount lent to the network",
@@ -560,7 +560,7 @@
       "openLoans": "Open loans",
       "closedLoans": "Closed loans",
       "amountRedeemed": "Amount withdrawn",
-      "date": "Date",
+      "date": "التاريخ",
       "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "How does lending on Compound work?",
       "lend": "Deposit {{currency}}"
@@ -589,7 +589,7 @@
     },
     "headers": {
       "active": {
-        "accounts": "Account",
+        "accounts": "الحساب",
         "amountSupplied": "Open loan",
         "amountSuppliedTooltip": "Amount deposited in the network",
         "accruedInterests": "Interest balance",
@@ -605,17 +605,17 @@
         "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
         "interestsEarned": "Interest earned",
-        "date": "Date"
+        "date": "التاريخ"
       },
       "opened": {
         "assetLended": "Asset",
         "amount": "Amount",
-        "accruedInterest": "Accrued interest",
-        "date": "Date"
+        "accruedInterest": "الفوائد المتراكمة",
+        "date": "التاريخ"
       },
       "rates": {
         "allAssets": "Asset",
-        "totalBalance": "Asset balance",
+        "totalBalance": "رصيد الأصول",
         "totalBalanceTooltip": "Amount available to lend",
         "currentAPY": "Deposit APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
@@ -626,7 +626,7 @@
       "cta": "Manage lending",
       "title": "Manage loan",
       "enable": {
-        "approve": "Approve",
+        "approve": "موافقة",
         "manageLimit": "Manage limit",
         "viewDetails": "View details",
         "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
@@ -637,7 +637,7 @@
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
-        "title": "Deposit",
+        "title": "إيداع",
         "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
@@ -672,7 +672,7 @@
           "success": {
             "title": "Operation sent successfully",
             "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-            "done": "Close",
+            "done": "إغلاق",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
