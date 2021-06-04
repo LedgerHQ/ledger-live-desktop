@@ -33,10 +33,10 @@ linux:
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   icon: build/windows/app.ico
-  certificateSubjectName: Ledger SAS
-  certificateSha1: 7DD9ACB2EF0402883C65901EBBAFD06E5293D391
-  signingHashAlgorithms:
-    - sha256
+  # certificateSubjectName: Ledger SAS
+  # certificateSha1: 7DD9ACB2EF0402883C65901EBBAFD06E5293D391
+  # signingHashAlgorithms:
+  #   - sha256
   target:
     - target: nsis
       arch:
