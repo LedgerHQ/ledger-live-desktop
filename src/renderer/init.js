@@ -65,22 +65,17 @@ async function init() {
     connect,
   });
 
-  let oldUserId;
-  if (typeof window === "object") {
-    const { localStorage } = window;
-    oldUserId = localStorage.getItem("userId");
-    if (oldUserId) {
-      setKey("app", "user", oldUserId);
-      localStorage.removeItem("userId");
-    }
+  const oldUserId = global.localStorage.getItem("userId");
+  if (oldUserId) {
+    global.localStorage.removeItem("userId");
   }
 
-  let user = await getKey("app", "user");
-  if (!user) {
-    user = { id: uuid() };
-    setKey("app", "user", user);
+  let userId = global.localStorage.getItem("userId");
+  if (!userId) {
+    userId = uuid();
+    setKey("app", "user", userId);
   }
-  setEnvOnAllThreads("USER_ID", user.id);
+  setEnvOnAllThreads("USER_ID", userId);
 
   setBridgeProxy({ getAccountBridge, getCurrencyBridge });
 
