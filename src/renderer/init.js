@@ -70,12 +70,12 @@ async function init() {
     global.localStorage.removeItem("userId");
   }
 
-  let userId = global.localStorage.getItem("userId");
-  if (!userId) {
-    userId = uuid();
-    setKey("app", "user", userId);
+  let user = await getKey("app", "user");
+  if (!user) {
+    user = { id: uuid() };
+    setKey("app", "user", user);
   }
-  setEnvOnAllThreads("USER_ID", userId);
+  setEnvOnAllThreads("USER_ID", user.id);
 
   setBridgeProxy({ getAccountBridge, getCurrencyBridge });
 
