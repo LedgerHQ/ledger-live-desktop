@@ -139,7 +139,7 @@
     "fast": "سريع",
     "high": "عالٍ",
     "low": "Low",
-    "slow": "Slow",
+    "slow": "بطىء",
     "standard": "Standard",
     "medium": "متوسط",
     "feesAmount": "قيمة الرسوم"
@@ -147,9 +147,9 @@
   "sidebar": {
     "menu": "القائمة",
     "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "accounts": "الحسابات",
     "manager": "Manager",
-    "exchange": "Buy / Sell",
+    "exchange": "شراء/ بيع",
     "swap": "Swap",
     "lend": "Lend"
   },
