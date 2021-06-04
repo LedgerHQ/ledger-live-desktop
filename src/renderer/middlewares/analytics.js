@@ -6,7 +6,7 @@ import type { State } from "~/renderer/reducers";
 
 let isAnalyticsStarted = false;
 
-export default ({ migration }: { migration: any }) => (store: *) => (next: *) => (action: *) => {
+export default ({ migration }: { migration?: any }) => (store: *) => (next: *) => (action: *) => {
   next(action);
   const state: State = store.getState();
   const hasCompletedOnboarding = hasCompletedOnboardingSelector(state);
@@ -15,7 +15,7 @@ export default ({ migration }: { migration: any }) => (store: *) => (next: *) =>
     isAnalyticsStarted = true;
     start(store);
 
-    if (migration?.oldUserId) {
+    if (Object.keys(migration || {}).length) {
       track("migration-event", migration);
     }
   }
