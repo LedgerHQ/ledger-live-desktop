@@ -106,7 +106,7 @@ async function init() {
     dbMiddleware,
     analyticsMiddleware: analytics({
       migration: {
-        oldUserId,
+        ...(oldUserId ? { oldUserId } : {}),
       },
     }),
   });
