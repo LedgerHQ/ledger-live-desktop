@@ -455,6 +455,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           <OpDetailsSection>
             <OpDetailsTitle>
               {t("operationDetails.internalOperations")}
+              &nbsp;
               <LabelInfoTooltip
                 text={t("operationDetails.internalOpTooltip")}
                 style={{ marginLeft: 4 }}
