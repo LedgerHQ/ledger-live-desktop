@@ -2304,7 +2304,7 @@
     "exportLogs": {
       "title": "Save logs",
       "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "btn": "حفظ"
     },
     "accounts": {
       "hideEmptyTokens": {
@@ -2373,7 +2373,7 @@
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
-    "cta": "Save",
+    "cta": "حفظ",
     "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
@@ -3036,7 +3036,7 @@
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "عفوًا، أعد المحاولة مرة أخرى (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
@@ -3092,7 +3092,7 @@
       "description": "يرجى التحقق من الاتصال الخاص بك والمحاولة مرة أخرى أو الاتصال بدعم ليدجر."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
+      "title": "عذرًا، حاول مرة أخرى.",
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
@@ -3263,7 +3263,7 @@
       "description": "Please navigate back to the Dashboard on your device"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "عذرًا، حاول مرة أخرى (خطأ في الاتصال)",
       "description": null
     },
     "WebsocketConnectionFailed": {
