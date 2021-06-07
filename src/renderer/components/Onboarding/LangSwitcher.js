@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import WarningIcon from "~/renderer/icons/TriangleWarning";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 
 import moment from "moment";
 import Box from "../Box/Box";
@@ -26,11 +27,11 @@ const IconWrapperCircle: ThemedComponent<{ color?: string }> = styled(Box)`
 `;
 
 const options = [
-  { value: "en", support: "full", label: <Trans i18nKey="language.switcher.en" /> },
-  { value: "fr", support: "full", label: <Trans i18nKey="language.switcher.fr" /> },
-  { value: "ru", support: "partial", label: <Trans i18nKey="language.switcher.ru" /> },
-  // { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
-  { value: "es", support: "partial", label: <Trans i18nKey="language.switcher.es" /> },
+  { value: "en", support: "full", label: languageLabels.en },
+  { value: "fr", support: "full", label: languageLabels.fr },
+  { value: "ru", support: "partial", label: languageLabels.ru },
+  { value: "zh", support: "partial", label: languageLabels.zh },
+  { value: "es", support: "partial", label: languageLabels.es },
 ];
 
 const styleFn = theme => ({
