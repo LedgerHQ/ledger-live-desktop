@@ -671,7 +671,7 @@
           "title": "تأكيد",
           "success": {
             "title": "تم إرسال العملية بنجاح",
-            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
+            "text": "تم إرسال الموافقة إلى الشبكة لتأكيدها. ستتمكن من إصدار القروض بمجرد تأكيدها.",
             "done": "إغلاق",
             "info": "المعاملات قد تستغرق بعض الوقت ليتم عرضها في المستكشف وتأكيدها."
           },
@@ -697,7 +697,7 @@
           "title": "تأكيد",
           "success": {
             "title": "Withdrawal sent successfully",
-            "text": "Your assets will be available once the network has confirmed the withdrawal.",
+            "text": "ستكون أصولك متاحة بمجرد قيام الشبكة بتأكيد السحب.",
             "done": "إغلاق",
             "cta": "View details"
           },
@@ -899,7 +899,7 @@
     },
     "recentActivity": "Latest operations",
     "totalBalance": "Total balance",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "transactionsPendingConfirmation": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
   },
   "currentAddress": {
     "title": "Current address",
@@ -1046,9 +1046,9 @@
     "account": "Account",
     "date": "Date",
     "status": "Status",
-    "confirmed": "Confirmed",
+    "confirmed": "تم التأكيد",
     "failed": "Failed",
-    "notConfirmed": "Not confirmed",
+    "notConfirmed": "لم تم التأكيد",
     "fees": "Fee",
     "noFees": "No fee",
     "from": "From",
@@ -1126,7 +1126,7 @@
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Sell transaction"
+      "confirm": "تأكيد معاملة البيع"
     }
   },
   "manager": {
@@ -1272,7 +1272,7 @@
         "turnOn": "Press the button on the device to turn it on.",
         "falsePin": "Enter three wrong PINs to reset the device.",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "confirmTurnOff": "انقر على {{action}} للتأكيد.",
         "second": "2. Boot in {{mode}} mode",
         "boot": "Press and hold the side button until {{option}} is displayed",
         "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
@@ -1350,7 +1350,7 @@
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "التأكيد",
         "success": {
           "title": "",
           "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
@@ -1381,7 +1381,7 @@
         "title": "Device"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "التأكيد",
         "success": {
           "title": "Your votes were cast successfully.",
           "text": "",
@@ -1983,7 +1983,7 @@
             "title": "Transaction awaiting confirmation",
             "desc": "You have to wait a moment before nominating"
           },
-          "title": "Confirmation",
+          "title": "التأكيد",
           "success": {
             "title": "Assets successfully bonded",
             "text": "You can nominate validators once the network has confirmed the transaction.",
@@ -2013,11 +2013,11 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "التأكيد",
+          "label": "التأكيد",
           "success": {
             "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
+            "text": "سيتم تحديث رصيد حسابك فور أن تؤكد الشبكة على المعاملة.",
             "cta": "View details"
           },
           "pending": {
@@ -2042,8 +2042,8 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "التأكيد",
+          "label": "التأكيد",
           "success": {
             "title": "Unbond transaction sent successfully",
             "text": "Unbonded assets can be withdrawn in 28 days.",
@@ -2077,8 +2077,8 @@
           "title": "Device"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "التأكيد",
+          "label": "التأكيد",
           "success": {
             "title": "Transaction sent successfully",
             "text": "You will see your operation in history soon.",
@@ -2158,8 +2158,8 @@
           "title": "Undelegate account"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "التأكيد",
+          "label": "التأكيد",
           "success": {
             "title": "Delegation sent",
             "titleUndelegated": "End delegation",
@@ -2234,8 +2234,8 @@
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "confirmationsNb": "عدد التأكيدات",
+      "confirmationsNbDesc": "قم بتعيين عدد تأكيدات الشبكة اللازمة لتمييز المعاملة على أنها مؤكدة."
     },
     "profile": {
       "password": "Password lock",
@@ -2329,7 +2329,7 @@
         "label": "New password"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "تأكيد كلمة المرور"
       },
       "currentPassword": {
         "label": "Current password"
@@ -2628,8 +2628,8 @@
               "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "تأكيد رمز ال PIN",
+              "descr": "أدخل رمز ال PIN الخاص بك مرة أخرى لتأكيده."
             },
             "buttons": {
               "next": "Next step",
@@ -2864,26 +2864,26 @@
     "desc": "Having a hard time connecting your device?"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
+    "title": "يرجى تأكيد العملية على جهازك لإنهائها",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
     "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
+      "send": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "claimReward": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "freeze": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "unfreeze": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "vote": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "delegate": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "undelegate": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "redelegate": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "claimRewardCompound": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "nominate": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "chill": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "bond": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "unbond": "يرجى التأكيد على جهازك لإنهاء العملية",
+      "rebond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "withdrawUnbonded": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
