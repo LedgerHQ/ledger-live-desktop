@@ -800,7 +800,7 @@
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "الدعم والمساعدة",
     "gettingStarted": {
       "title": "Getting started",
       "desc": "Start here"
@@ -811,7 +811,7 @@
     },
     "helpCenter": {
       "title": "Ledger Support",
-      "desc": "Get help"
+      "desc": "الحصول على المساعدة"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -913,7 +913,7 @@
       "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
         "installApp": "Go to Manager",
-        "help": "Help"
+        "help": "مساعدة"
       }
     },
     "accounts": {
@@ -922,7 +922,7 @@
       "buttons": {
         "addAccount": "Add account",
         "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "help": "مساعدة"
       }
     }
   },
@@ -1397,7 +1397,7 @@
     "buyCTA": "Buy {{currencyTicker}}",
     "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without my device"
+    "skipConnect": "المتابعة بدون جهازي"
   },
   "sell": {
     "title": "Sell",
@@ -2189,11 +2189,11 @@
   "settings": {
     "title": "Settings",
     "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "helpButton": "مساعدة",
     "tabs": {
       "display": "General",
       "currencies": "Crypto assets",
-      "help": "Help",
+      "help": "مساعدة",
       "about": "About",
       "experimental": "Experimental features",
       "accounts": "Accounts"
@@ -2534,7 +2534,7 @@
             "buttons": {
               "next": "OK, I’m ready!",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "howToGetStarted": {
@@ -2569,7 +2569,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "deviceHowTo2": {
@@ -2592,7 +2592,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "pinCode": {
@@ -2602,7 +2602,7 @@
             "buttons": {
               "next": "Set up PIN code",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "quizSuccess": {
@@ -2611,7 +2611,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "quizFailure": {
@@ -2634,7 +2634,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "existingRecoveryPhrase": {
@@ -2645,7 +2645,7 @@
             "buttons": {
               "next": "Enter recovery phrase",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             },
             "warning": {
               "title": "Do not use a recovery phrase that you have not generated yourself.",
@@ -2665,7 +2665,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "newRecoveryPhrase": {
@@ -2676,7 +2676,7 @@
             "buttons": {
               "next": "Recovery phrase",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "recoveryHowTo": {
@@ -2701,7 +2701,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "recoveryHowTo3": {
@@ -2715,7 +2715,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "genuineCheck": {
@@ -2726,7 +2726,7 @@
             "buttons": {
               "next": "Continue",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "hideRecoveryPhrase": {
@@ -2737,7 +2737,7 @@
             "buttons": {
               "next": "OK, I'm done!",
               "prev": "Previous step",
-              "help": "Need help",
+              "help": "أحتاج إلى مساعدة",
               "learn": "Learn how to hide it"
             }
           },
@@ -2747,7 +2747,7 @@
             "buttons": {
               "next": "Check my Nano",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "أحتاج إلى مساعدة"
             }
           },
           "quizzSuccess": {
@@ -3053,15 +3053,15 @@
     },
     "DeviceSocketNoBulkStatus": {
       "title": "The connection failed",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة."
     },
     "DisconnectedDevice": {
       "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "description": "يرجى إعادة الاتصال وإعادة المحاولة مرة أخرى."
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
@@ -3165,11 +3165,11 @@
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
-      "description": "Please try again"
+      "description": "يرجى إعادة المحاولة"
     },
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
-      "description": "Please try again"
+      "description": "يرجى إعادة المحاولة"
     },
     "RPCHostRequired": {
       "title": "Host is required."
@@ -3209,7 +3209,7 @@
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "description": "يرجى إعادة المحاولة مرة أخرى."
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
@@ -3267,7 +3267,7 @@
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "عذرًا، حاول مرة أخرى (الاتصال مغلق)",
       "description": null
     },
     "WrongDeviceForAccount": {
@@ -3285,7 +3285,7 @@
       "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "عذرًا، فشل الاتصال",
       "description": "تم اكتشاف الجهاز ولكن فشل الاتصال. يرجى إعادة المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "ETHAddressNonEIP": {
