@@ -2928,7 +2928,7 @@
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact Ledger Support."
+      "description": "حدثت مشكلة. يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر."
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "There is a pending operation for this account.",
@@ -2961,11 +2961,11 @@
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeTxDecode": {
       "title": "Something went wrong (Error #2)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
@@ -2981,7 +2981,7 @@
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidAddress": {
       "title": "Invalid address",
@@ -2989,7 +2989,7 @@
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeUnknownAddress": {
       "title": "Unknown address",
@@ -3001,11 +3001,11 @@
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "Something went wrong (Error #11)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeOutOfGas": {
       "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
       "title": "The Memo field is too long",
@@ -3013,19 +3013,19 @@
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeGasOverflow": {
       "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
@@ -3041,7 +3041,7 @@
     },
     "DeviceInOSUExpected": {
       "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر"
     },
     "DeviceHalted": {
       "title": "Please restart your Ledger device and retry",
@@ -3077,19 +3077,19 @@
     },
     "FirmwareNotRecognized": {
       "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "HardResetFail": {
       "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "description": "يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "LatestMCUInstalledError": {
       "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "description": "يرجى الاتصال بدعم ليدجر إذا لم يكن بإمكانك استخدام جهازك."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "يرجى التحقق من الاتصال الخاص بك والمحاولة مرة أخرى أو الاتصال بدعم ليدجر."
     },
     "LedgerAPI5xx": {
       "title": "Sorry, try again.",
@@ -3097,7 +3097,7 @@
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
@@ -3151,7 +3151,7 @@
     },
     "NoAddressesFound": {
       "title": "Sorry, no accounts were found",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "description": "حدث خطأ ما في حساب العنوان، حاول مرة أخرى أو اتصل بدعم ليدجر"
     },
     "NotEnoughBalance": {
       "title": "Sorry, insufficient funds",
@@ -3233,7 +3233,7 @@
     },
     "UnexpectedBootloader": {
       "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "description": "يرجى إعادة تشغيل جهازك دون لمس الأزرار عند ظهور الشعار. اتصل بدعم ليدجر إذا استمرت المشكلة."
     },
     "UserRefusedAllowManager": {
       "title": "Manager denied on device"
@@ -3248,11 +3248,11 @@
     },
     "TransactionRefusedOnDevice": {
       "title": "Operation denied on device",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UserRefusedAddress": {
       "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UpdateYourApp": {
       "title": "App update required",
@@ -3286,7 +3286,7 @@
     },
     "CantOpenDevice": {
       "title": "Sorry, connection failed",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "description": "تم اكتشاف الجهاز ولكن فشل الاتصال. يرجى إعادة المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "ETHAddressNonEIP": {
       "title": "Auto-verification not available: carefully verify the address",
@@ -3306,7 +3306,7 @@
     },
     "UnknownMCU": {
       "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "description": "يرجى الاتصال بدعم ليدجر"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
@@ -3343,7 +3343,7 @@
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر."
     },
     "ManagerAppRelyOnBTC": {
       "title": "Bitcoin and Ethereum apps required",
@@ -3405,11 +3405,11 @@
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك."
     },
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "description": "حدثت مشكلة. يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا كنت في شك."
     },
     "EthAppPleaseEnableContractData": {
       "title": "Please enable contract data in the Ethereum app settings"
