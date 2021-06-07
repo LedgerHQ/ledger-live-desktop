@@ -265,12 +265,8 @@ const Form = ({
 
   // Deselect the tradeMethod if not available for current pair
   useEffect(() => {
-    if (
-      enabledTradeMethods &&
-      enabledTradeMethods.length > 0 &&
-      !enabledTradeMethods.includes(tradeMethod)
-    ) {
-      setTradeMethod(enabledTradeMethods.includes("fixed") ? "fixed" : enabledTradeMethods[0]); // Fixed rate by default
+    if (enabledTradeMethods && !enabledTradeMethods.includes(tradeMethod)) {
+      setTradeMethod(enabledTradeMethods[0]);
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
 
