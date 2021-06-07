@@ -1132,7 +1132,7 @@
   "manager": {
     "tabs": {
       "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
+      "appCatalogSearch": "ابحث عن التطبيق في القائمة...",
       "appsOnDevice": "Apps installed",
       "appOnDeviceSearch": "Search installed apps..."
     },
@@ -1161,7 +1161,7 @@
         "not_installed": "Not installed"
       },
       "sort": {
-        "title": "Sort",
+        "title": "فرز",
         "name_asc": "Name A-Z",
         "name_desc": "Name Z-A",
         "marketcap_desc": "Market cap"
@@ -1367,7 +1367,7 @@
       "castVotes": {
         "max": "MAX",
         "title": "Vote",
-        "search": "Search by name or address...",
+        "search": "البحث عن طريق الاسم أو العنوان...",
         "totalVotes": "Total votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
@@ -1375,7 +1375,7 @@
         "maxUsed": "Insufficient assets",
         "validators": "Validators ({{total}})",
         "votes": "Available assets: {{total}}",
-        "noResults": "No validator found for \"<0>{{search}}</0>\"."
+        "noResults": "لم يتم العثور على مدقق لـ \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
         "title": "Device"
