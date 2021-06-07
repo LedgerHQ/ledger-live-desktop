@@ -33,6 +33,8 @@ export const Address: ThemedComponent<{}> = styled(Text)`
   flex-wrap: wrap;
   padding: 4px;
   width: fit-content;
+  max-width: 100%;
+  display: inline-block;
 `;
 
 export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -109,6 +111,7 @@ export const Separator: ThemedComponent<{}> = styled.div`
 `;
 
 export const OpDetailsVoteData: ThemedComponent<{}> = styled.blockquote`
+  max-width: 100%;
   margin-bottom: 13px;
   padding-left: 10px;
   border-left: 4px solid currentColor;

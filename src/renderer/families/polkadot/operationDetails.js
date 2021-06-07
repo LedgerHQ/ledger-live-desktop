@@ -26,6 +26,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { urls } from "~/config/urls";
+import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 
 function getURLFeesInfo(op: Operation): ?string {
   if (op.fee.gt(200000)) {
@@ -87,14 +88,16 @@ export const OperationDetailsValidators = ({
           />
         </OpDetailsTitle>
       )}
-      <Box pl={2}>
+      <Box flex="1" pl={2}>
         {mappedValidators.map(({ address, identity }, i) => (
           <OpDetailsData key={address + i} justifyContent="flex-start">
             <OpDetailsVoteData>
               <Box>
                 <Text ff="Inter|SemiBold">{identity ?? address}</Text>
               </Box>
-              <Address onClick={redirectAddress(currency, address)}>{address}</Address>
+              <Address onClick={redirectAddress(currency, address)}>
+                <SplitAddress value={address} />
+              </Address>
             </OpDetailsVoteData>
           </OpDetailsData>
         ))}
@@ -247,7 +250,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       return (
         <>
           <OperationDetailsPalletMethod palletMethod={extra.palletMethod} />
-          <Box>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey="operationDetails.extra.withdrawUnbondedAmount" />
             </OpDetailsTitle>
@@ -263,7 +266,7 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
                 />
               </Box>
             </OpDetailsData>
-          </Box>
+          </OpDetailsSection>
         </>
       );
     case "REWARD_PAYOUT":

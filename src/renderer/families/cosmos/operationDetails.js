@@ -28,6 +28,7 @@ import {
 } from "~/renderer/drawers/OperationDetails/styledComponents";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
@@ -270,15 +271,14 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     <>
       {ret}
       {extra.memo && (
-        <>
-          <B />
-          <OpDetailsSection>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.memo"} />
-            </OpDetailsTitle>
-            <OpDetailsData>{extra.memo}</OpDetailsData>
-          </OpDetailsSection>
-        </>
+        <OpDetailsSection>
+          <OpDetailsTitle>
+            <Trans i18nKey={"operationDetails.extra.memo"} />
+          </OpDetailsTitle>
+          <OpDetailsData>
+            <Ellipsis ml={2}>{extra.memo}</Ellipsis>
+          </OpDetailsData>
+        </OpDetailsSection>
       )}
     </>
   );
