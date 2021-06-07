@@ -431,7 +431,7 @@
               "description": ""
             },
             "ready": {
-              "header": "Ready",
+              "header": "مستعد",
               "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
             },
             "syncing": {
@@ -843,7 +843,7 @@
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "valentine": {
-      "title": "Valentine’s day",
+      "title": "عيد الحب",
       "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
     },
     "ledgerAcademy": {
@@ -2445,7 +2445,7 @@
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
+        "title1": "كيف تعمل عبارة الاسترداد؟",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "More about the recovery phrase",
@@ -2522,8 +2522,8 @@
         "steps": {
           "getStarted": "Get started",
           "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
-          "hideRecoveryPhrase": "Hide recovery phrase",
+          "recoveryPhrase": "عبارة الاسترداد",
+          "hideRecoveryPhrase": "إخفاء عبارة الاسترداد",
           "pairNano": "Connect nano"
         },
         "screens": {
@@ -2532,7 +2532,7 @@
             "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
-              "next": "OK, I’m ready!",
+              "next": "حسنًا، أنا مستعد!",
               "prev": "Previous step",
               "help": "أحتاج إلى مساعدة"
             }
@@ -2545,7 +2545,7 @@
               "3": "Stay alone, and choose a safe and quiet environment."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
+              "next": "حسنًا، أنا مستعد!",
               "prev": "Previous step"
             }
           },
@@ -2638,7 +2638,7 @@
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
+            "title": "أدخل عبارة الاسترداد الخاصة بك",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
@@ -2669,12 +2669,12 @@
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
+            "title": "عبارة الاسترداد",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
             "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
             "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
-              "next": "Recovery phrase",
+              "next": "عبارة الاسترداد",
               "prev": "Previous step",
               "help": "أحتاج إلى مساعدة"
             }
@@ -2730,7 +2730,7 @@
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
+            "title": "إخفاء عبارة الاسترداد الخاصة بك",
             "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
