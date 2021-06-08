@@ -211,21 +211,21 @@
         "currency": "Crypto asset"
       },
       "to": {
-        "title": "To",
-        "account": "Account",
+        "title": "到",
+        "account": "账户",
         "amount": "Amount to receive",
         "currency": "Crypto asset",
         "addAccountCTA": "Add new account"
       },
       "tradeMethod": {
-        "title": "Rate",
+        "title": "费率",
         "float": "Floating rate",
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "Fixed rate",
         "fixedUnavailable": "Fixed rate not supported for this pair",
         "floatDesc": "Your amount could change depending on the market conditions.",
         "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
-        "by": "Provided by"
+        "by": "提供方"
       },
       "exchange": "Exchange",
       "helpCTA": "What is Swap?",
@@ -233,15 +233,15 @@
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
       "outdatedApp": "{{currencyName}} app update available.",
-      "loadingRates": "Loading rates..."
+      "loadingRates": "正在加载费率..."
     },
     "modal": {
       "title": "Swap",
       "steps": {
         "summary": {
-          "title": "Summary",
-          "from": "From",
-          "to": "To",
+          "title": "概要",
+          "from": "从",
+          "to": "到",
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
           "terms": "Terms & Conditions",
