@@ -203,17 +203,17 @@
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
-      "amount": "Amount",
+      "amount": "المبلغ",
       "from": {
         "title": "من",
         "account": "الحساب",
-        "amount": "Amount to send",
+        "amount": "المبلغ المراد إرساله",
         "currency": "الأصول المشفرة"
       },
       "to": {
         "title": "إلى",
         "account": "الحساب",
-        "amount": "Amount to receive",
+        "amount": "المبلغ المراد استلامه",
         "currency": "الأصول المشفرة",
         "addAccountCTA": "إضافة حساب جديد"
       },
@@ -1440,7 +1440,7 @@
         "title": "Amount",
         "banner": "Maximum spendable amount is",
         "fees": "Fees",
-        "standard": "Standard",
+        "standard": "اعتيادي",
         "advanced": "متقدم"
       },
       "summary": {
