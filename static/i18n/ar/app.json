@@ -173,7 +173,7 @@
     "titleCrypto": "مبادلة {{currency}}",
     "whatIsSwap": "ما هي المبادلة",
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "تداول",
       "history": "History"
     },
     "history": {
@@ -183,8 +183,8 @@
       }
     },
     "landing": {
-      "title": "Swap your assets",
-      "continue": "Continue",
+      "title": "قم بمبادلة أصولك",
+      "continue": "متابعة",
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
@@ -276,7 +276,7 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
+      "title": "مبادلة",
       "provider": "Provider",
       "txid": "Swap ID",
       "status": "Status",
@@ -792,7 +792,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "swap": "Swap",
+      "swap": "مبادلة",
       "buy": "Buy",
       "sell": "Sell",
       "edit": "Edit account",
@@ -879,7 +879,7 @@
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     },
     "swap": {
-      "title": "Swap crypto",
+      "title": "مبادلة العملات المشفرة",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
