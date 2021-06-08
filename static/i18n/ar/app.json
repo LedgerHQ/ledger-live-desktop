@@ -895,7 +895,7 @@
     "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "إضافة حسابات لإدارة الأصول المشفرة الأخرى",
-      "createAccount": "Add account"
+      "createAccount": "إضافة حساب"
     },
     "recentActivity": "Latest operations",
     "totalBalance": "Total balance",
@@ -920,7 +920,7 @@
       "title": "Add an account to get started",
       "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
       "buttons": {
-        "addAccount": "Add account",
+        "addAccount": "إضافة حساب",
         "installApp": "Go to Manager to install apps",
         "help": "مساعدة"
       }
@@ -991,11 +991,11 @@
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "إضافة حسابات",
     "breadcrumb": {
       "informations": "Crypto asset",
       "connectDevice": "Device",
-      "import": "Accounts",
+      "import": "الحسابات",
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
@@ -1020,8 +1020,8 @@
     },
     "cta": {
       "addMore": "Add more",
-      "add": "Add account",
-      "add_plural": "Add accounts",
+      "add": "إضافة حساب",
+      "add_plural": "إضافة حسابات",
       "addAccountName": "Add {{currencyName}} account",
       "receive": "Receive"
     },
@@ -1030,7 +1030,7 @@
         "title": "Add existing account"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "إضافة حساب جديد"
       },
       "imported": {
         "title": "Accounts already in portfolio ({{count}})"
@@ -1043,7 +1043,7 @@
   "operationDetails": {
     "whatIsThis": "What is this operation?",
     "title": "Operation details",
-    "account": "Account",
+    "account": "حساب",
     "date": "Date",
     "status": "Status",
     "confirmed": "تم التأكيد",
@@ -1192,8 +1192,8 @@
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
-        "addAccount": "Add account",
-        "addAccountTooltip": "Add {{appName}} account",
+        "addAccount": "إضافة حساب",
+        "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "Please wait for the app updates to finish",
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
@@ -1201,7 +1201,7 @@
         "useAppForToken": "Looking to manage {{tokenType}} tokens?",
         "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "goToAccounts": "Go to accounts",
+        "goToAccounts": "الذهاب إلى الحسابات",
         "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
@@ -1408,7 +1408,7 @@
     "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
+        "title": "حساب",
         "label": "Account to credit",
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
@@ -1511,7 +1511,7 @@
     "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
-    "account": "Account",
+    "account": "حساب",
     "distribution": "Allocation",
     "amount": "Amount",
     "value": "Value",
@@ -2129,7 +2129,7 @@
         },
         "account": {
           "title": "Delegate account",
-          "label": "Account",
+          "label": "حساب",
           "toDelegate": "Account to delegate"
         },
         "summary": {
@@ -2196,7 +2196,7 @@
       "help": "مساعدة",
       "about": "About",
       "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "accounts": "الحسابات"
     },
     "export": {
       "accounts": {
@@ -2287,7 +2287,7 @@
       "part5": "Then you can restart the app normally."
     },
     "removeAccountModal": {
-      "title": "Remove account",
+      "title": "إزالة حساب",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
