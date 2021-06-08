@@ -151,7 +151,7 @@
     "manager": "المدير",
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
-    "lend": "Lend"
+    "lend": "إقراض"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -538,14 +538,14 @@
     }
   },
   "lend": {
-    "title": "Lend crypto",
+    "title": "إقراض العملات المشفرة",
     "tabs": {
       "dashboard": "لوحة المعلومات",
       "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
-    "assets": "Assets to lend",
+    "assets": "أصول للإقراض",
     "active": "Approved accounts",
     "lendAsset": "إقراض",
     "account": {
@@ -3056,11 +3056,11 @@
       "description": "يرجى إعادة المحاولة."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "عذراً، يبدو أنه قد انقطع الاتصال عن جهازك",
       "description": "يرجى إعادة الاتصال و المحاولة مرة أخرى."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "عذراً، يبدو أنه قد انقطع الاتصال عن جهازك",
       "description": "يرجى إعادة الاتصال وإعادة المحاولة مرة أخرى."
     },
     "EnpointConfig": {
