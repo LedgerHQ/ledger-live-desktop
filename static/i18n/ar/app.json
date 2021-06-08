@@ -8,7 +8,7 @@
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "اختر حسابًا"
       },
       "broadcast": {
         "toast": {
@@ -215,7 +215,7 @@
         "account": "الحساب",
         "amount": "Amount to receive",
         "currency": "الأصول المشفرة",
-        "addAccountCTA": "Add new account"
+        "addAccountCTA": "إضافة حساب جديد"
       },
       "tradeMethod": {
         "title": "Rate",
