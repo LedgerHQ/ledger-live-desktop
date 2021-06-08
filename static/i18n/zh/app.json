@@ -55,13 +55,13 @@
     "reverify": "重新验证",
     "verify": "验证",
     "verifyMyAddress": "验证我的地址",
-    "copy": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
+    "copy": "复制",
+    "copied": "已复制",
+    "addressCopied": "地址已复制",
     "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
     "experimentalFeature": "Experimental",
-    "information": "Information",
-    "search": "Search...",
+    "information": "信息",
+    "search": "搜索中...",
     "searchWithoutEllipsis": "搜索",
     "manage": "管理",
     "lockScreen": {
@@ -76,8 +76,8 @@
       "upToDate": "已同步",
       "outdated": "已暂停",
       "needsMigration": "点击更新账户",
-      "error": "Synchronization error",
-      "refresh": "Refresh"
+      "error": "同步错误",
+      "refresh": "刷新"
     },
     "exchange": "Exchange"
   },
@@ -88,8 +88,8 @@
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
+      "IN": "已接收",
+      "OUT": "已发送",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -97,11 +97,11 @@
       "UNDELEGATE": "Undelegated",
       "SUPPLY": "Deposited",
       "REDEEM": "Withdrawn",
-      "APPROVE": "Approved",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
+      "APPROVE": "已批准",
+      "VOTE": "已投票",
+      "FREEZE": "已冻结",
+      "UNFREEZE": "已解冻",
+      "REWARD": "已申领的奖励",
       "FEES": "费用",
       "OPT_IN": "选择加入",
       "OPT_OUT": "选择退出",
@@ -126,11 +126,11 @@
     "hour": "Hour",
     "hour_plural": "Hours",
     "range": {
-      "day": "1D",
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "day": "1 天",
+      "week": "1 周",
+      "month": "1 月",
+      "year": "1 年",
+      "all": "全部"
     }
   },
   "fees": {
@@ -166,7 +166,7 @@
     "completeHeader": "Bridge session completed",
     "completeDescription": "The websocket bridge is now closed.",
     "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "disconnectButton": "断开连接"
   },
   "swap": {
     "title": "Swap",
@@ -174,7 +174,7 @@
     "whatIsSwap": "What is Swap",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History"
+      "history": "历史记录"
     },
     "history": {
       "empty": {
@@ -184,7 +184,7 @@
     },
     "landing": {
       "title": "Swap your assets",
-      "continue": "Continue",
+      "continue": "继续",
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
@@ -205,8 +205,8 @@
     "form": {
       "amount": "Amount",
       "from": {
-        "title": "From",
-        "account": "Account",
+        "title": "从",
+        "account": "账户",
         "amount": "Amount to send",
         "currency": "Crypto asset"
       },
