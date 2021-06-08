@@ -150,7 +150,7 @@
     "accounts": "الحسابات",
     "manager": "المدير",
     "exchange": "شراء/ بيع",
-    "swap": "Swap",
+    "swap": "مبادلة",
     "lend": "Lend"
   },
   "stars": {
@@ -169,16 +169,16 @@
     "disconnectButton": "Disconnect"
   },
   "swap": {
-    "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "title": "مبادلة",
+    "titleCrypto": "مبادلة {{currency}}",
+    "whatIsSwap": "ما هي المبادلة",
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
     },
     "history": {
       "empty": {
-        "title": "Your previous swaps will appear here",
+        "title": "ستظهر مبادلاتك السابقة هنا",
         "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       }
     },
@@ -228,7 +228,7 @@
         "by": "Provided by"
       },
       "exchange": "Exchange",
-      "helpCTA": "What is Swap?",
+      "helpCTA": "ما هي المبادلة؟",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
@@ -236,7 +236,7 @@
       "loadingRates": "Loading rates..."
     },
     "modal": {
-      "title": "Swap",
+      "title": "مبادلة",
       "steps": {
         "summary": {
           "title": "Summary",
@@ -631,7 +631,7 @@
         "viewDetails": "View details",
         "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
         "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
+        "approvedWithLimit": "لقد وافقت على <0>{{value}}</0> علي هذا الحساب.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
