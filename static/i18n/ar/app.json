@@ -627,7 +627,7 @@
       "title": "Manage loan",
       "enable": {
         "approve": "موافقة",
-        "manageLimit": "Manage limit",
+        "manageLimit": "إدارة الحد",
         "viewDetails": "View details",
         "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
         "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
