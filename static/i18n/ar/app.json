@@ -2936,7 +2936,7 @@
     },
     "AccountNameRequired": {
       "title": "An account name is required",
-      "description": "Please enter an account name"
+      "description": "يرجى إدخال اسم حساب"
     },
     "AccountNotSupported": {
       "title": "Account not supported.",
@@ -3150,12 +3150,12 @@
       "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
+      "title": "عذرًا، لم يتم العثور على حسابات",
       "description": "حدث خطأ ما في حساب العنوان، حاول مرة أخرى أو اتصل بدعم ليدجر"
     },
     "NotEnoughBalance": {
       "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "description": "يرجى التأكد من وجود أرصدة كافية في الحساب."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
