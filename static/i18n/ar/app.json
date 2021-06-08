@@ -634,7 +634,7 @@
         "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
-        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+        "notEnoughApproved": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
       "supply": {
         "title": "إيداع",
@@ -657,12 +657,12 @@
         "amount": {
           "title": "Amount",
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
-          "limit": "limited {{amount}}",
+          "limit": "{{amount}} محدود",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "متقدم",
           "amountLabel": "Amount to approve",
-          "amountLabelTooltip": "This limits the amount available to the smart contract."
+          "amountLabelTooltip": "هذا يحد من المبلغ المتاح للعقد الذكي."
         },
         "connectDevice": {
           "title": "Device"
@@ -1461,7 +1461,7 @@
         "useMax": "Send Max",
         "rippleTag": "Tag",
         "rippleTagPlaceholder": "Optional",
-        "ethereumGasLimit": "Gas limit",
+        "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "Gas price",
         "unitPerByte": "{{unit}} per byte"
       },
