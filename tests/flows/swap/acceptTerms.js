@@ -5,6 +5,7 @@ const acceptTerms = () => {
   describe(`When I access swap page`, () => {
     it("should display KYC terms", async () => {
       await swapPage.goToSwap();
+      await swapPage.goToChangelly();
       await mockDeviceEvent(
         {
           type: "listingApps",

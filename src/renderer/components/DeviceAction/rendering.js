@@ -39,6 +39,7 @@ import ExternalLinkButton from "../ExternalLinkButton";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
+import CrossCircle from "~/renderer/icons/CrossCircle";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -190,7 +191,7 @@ const OpenManagerBtn = ({
   const onClick = useCallback(() => {
     setTrackingSource("device action open manager button");
     history.push({
-      pathname: "manager",
+      pathname: "/manager",
       search: appName ? `?q=${appName}` : "",
     });
     closeAllModal();
@@ -204,14 +205,29 @@ const OpenManagerBtn = ({
 
 const OpenManagerButton = connect(null, { closeAllModal })(OpenManagerBtn);
 
-export const renderRequiresAppInstallation = ({ appName }: { appName: string }) => (
-  <Wrapper>
-    <Title>
-      <Trans i18nKey="DeviceAction.appNotInstalled" values={{ appName }} />
-    </Title>
-    <OpenManagerButton appName={appName} />
-  </Wrapper>
-);
+export const renderRequiresAppInstallation = ({ appNames }: { appNames: string[] }) => {
+  const appNamesCSV = appNames.join(", ");
+  return (
+    <Wrapper>
+      <Logo>
+        <CrossCircle size={44} />
+      </Logo>
+      <ErrorTitle>
+        <Trans i18nKey="DeviceAction.appNotInstalledTitle" count={appNames.length} />
+      </ErrorTitle>
+      <ErrorDescription>
+        <Trans
+          i18nKey="DeviceAction.appNotInstalled"
+          values={{ appName: appNamesCSV }}
+          count={appNames.length}
+        />
+      </ErrorDescription>
+      <Box mt={24}>
+        <OpenManagerButton appName={appNamesCSV} />
+      </Box>
+    </Wrapper>
+  );
+};
 
 export const renderInstallingApp = ({
   appName,

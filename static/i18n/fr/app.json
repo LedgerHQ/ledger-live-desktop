@@ -5,6 +5,19 @@
     "yesterday": "Hier",
     "transactionDate": "Date de l'opération"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Sélectionner un compte"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction envoyée.",
+          "text": "Cliquez ici pour voir les détails de l'opération"
+        }
+      }
+    }
+  },
   "common": {
     "never": "Jamais",
     "apply": "Appliquer",
@@ -121,6 +134,7 @@
     }
   },
   "fees": {
+    "advanced": "Avancé",
     "custom": "Personnalisé",
     "fast": "Rapide",
     "high": "Haut",
@@ -174,13 +188,13 @@
       "sorry": "Service temporairement indisponible, ou non disponible dans votre pays"
     },
     "missingApp": {
-      "title": "Veuillez installer l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et installez l'application Exchange pour échanger des actifs.",
+      "title": "Installez l'appli {{appName}} sur votre appareil",
+      "subtitle": "Allez dans le Manager et installez l'appli {{appName}} pour échanger des actifs.",
       "cta": "Aller au Manager"
     },
     "outdatedApp": {
-      "title": "Veuillez mettre à jour l'application Exchange sur votre appareil",
-      "subtitle": "Allez dans le Manager et mettez à jour l'application Exchange pour échanger des actifs.",
+      "title": "Mettez à jour l'appli {{appName}} sur votre appareil",
+      "subtitle": "Ouvrez le Gestionnaire et installez l'appli {{appName}} pour échanger des actifs.",
       "cta": "Aller au Manager"
     },
     "kyc": {
@@ -248,6 +262,9 @@
         "device": {
           "title": "Appareil"
         },
+        "dependencies": {
+          "title": "Vérifications des applis"
+        },
         "finished": {
           "title": "En attente",
           "subtitle": "Opération en attente",
@@ -278,6 +295,32 @@
       "toProvider": "Adresse du fournisseur",
       "initialAmount": "Montant initial",
       "creditedAmount": "Montant crédité"
+    },
+    "providers": {
+      "title": "Choisir un prestataire pour acheter des cryptos",
+      "learnMore": "Qu'est-ce que le Swap ?",
+      "kycRequired": "Vérification d'identité nécessaire",
+      "wyre": {
+        "bullets": [
+          "Disponible uniquement aux USA (Europe, Afrique et Asie à venir)",
+          "Multi coins et jetons",
+          "Centralisé"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT et plus de 50 autres",
+          "Multidevises",
+          "Centralisé"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap,...)",
+          "Ethereum et jetons ERC-20",
+          "Décentralisé et se passant des tiers de confiance"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -452,7 +495,8 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Veuillez confirmer que l'adresse affichée correspond exactement à celle sur votre appareil",
     "buy": {
-      "title": "Acheter des cryptomonnaies via notre partenaire",
+      "header": "Acheter des cryptos avec {{provider}}",
+      "title": "Achetez des cryptos en utilisant <0>{{provider}}</0>",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -460,7 +504,8 @@
       "addAccount": "Ajouter un compte"
     },
     "sell": {
-      "title": "Vendre des cryptomonnaies via notre partenaire",
+      "header": "Vendre des cryptos avec {{provider}}",
+      "title": "Vendez des cryptos en utilisant <0>{{provider}}</0>",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner compte",
@@ -468,6 +513,28 @@
     },
     "history": {
       "tab": "Historique"
+    },
+    "providers": {
+      "title": "Choisir un prestataire pour acheter des cryptos",
+      "learnMore": "Qu'est ce que la fonctionnalité Achat ?",
+      "coinify": {
+        "bullets": [
+          "Disponible dans plus de 130 pays",
+          "EUR, USD, GBP et 32 autres",
+          "Virements SEPA et Faster Payments",
+          "Virements bancaires locaux aux USA",
+          "Cartes de crédit et de débit"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Compte bancaire 🇺🇸 uniquement",
+          "Prise en charge du dollar américain uniquement",
+          "Plus de 20 cryptos prises en charge",
+          "Virement ACH",
+          "Pas de cartes de crédit ou de débit"
+        ]
+      }
     }
   },
   "lend": {
@@ -634,7 +701,10 @@
             "done": "Fermer",
             "cta": "Voir les détails"
           },
-          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer."
+          "broadcastError": "Votre transaction a peut-être échoué. Veuillez patienter un moment, puis vérifier l'historique des transactions avant de réessayer.",
+          "tooltip": {
+            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. {{ tokenName }} sont des tokens ERC-20 que vous gagnez en prêtant des actifs."
+          }
         }
       }
     },
@@ -1032,13 +1102,16 @@
     "unlockDevice": "Déverrouillez votre appareil",
     "unlockDeviceAfterFirmwareUpdate": "Attendez que le firmware se mette à jour et déverrouillez votre appareil avec votre code PIN",
     "quitApp": "Quittez l'application sur votre appareil",
-    "appNotInstalled": "Veuillez installer l'application {{appName}}",
+    "appNotInstalledTitle": "Appli nécessaire manquante",
+    "appNotInstalledTitle_plural": "Applis nécessaires manquantes",
+    "appNotInstalled": "L'appli {{appName}} est nécessaire pour terminer cette action. Utilisez le Manager pour l'installer sur votre appareil",
+    "appNotInstalled_plural": "Les applis {{appName}} sont nécessaires pour terminer cette action. Utilisez le Manager pour les installer sur votre appareil",
     "openManager": "Ouvrir le Manager",
     "outdated": "Version de l'App obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} de votre appareil. Veuillez aller dans le Manager pour la mettre à jour.",
     "installApp": "{{appName}} Installation de l'application",
     "installAppDescription": "Veuillez attendre la fin de l'installation",
-    "listApps": "Checking App dependencies",
+    "listApps": "Vérification des dépendances des applis",
     "listAppsDescription": "Veuillez patienter pendant que nous nous assurons que vous avez toutes les applis requises",
     "swap": {
       "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
@@ -1419,6 +1492,9 @@
     "footer": {
       "estimatedFees": "Frais de réseau"
     }
+  },
+  "sign": {
+    "title": "Signer la transaction"
   },
   "releaseNotes": {
     "title": "Notes de version",
@@ -1802,9 +1878,9 @@
       "electionOpen": "L'élection de nouveaux validateurs est actuellement en cours. Ainsi, les opérations de staking ne sont pas disponibles pendant 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
-      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. <1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Ce compte caché est contrôlé par un autre compte avec l'adresse <0>{{address}}</0>. /0><1>Les opérations de capture sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif tel que Polkadot.js</1>",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. <1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de prise sur des comptes de stash séparés ne sont pas prises en charge dans Ledger Live. Veuillez utiliser un portefeuille alternatif comme Polkadot.js</1>",
       "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
       "hideInactiveNominations": "Afficher uniquement les nominations actives",
       "noActiveNominations": "Il n'y a aucune nomination active.",
@@ -2322,7 +2398,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "Actualités"
+      "announcement": "Actualités",
+      "operation": "Opération"
     }
   },
   "informationCenter": {
@@ -2426,7 +2503,7 @@
         "options": {
           "1": {
             "heading": "Première utilisation",
-            "title": "Initialiser un nouveau {{deviceName}}",
+            "title": "Configurer un nouveau {{deviceName}}",
             "description": "Commençons par configurer votre appareil !"
           },
           "2": {
@@ -2790,6 +2867,7 @@
     "title": "Veuillez confirmer l'opération sur votre appareil pour la finaliser",
     "warning": "Toujours vérifier que l'adresse affichée sur votre appareil correspond exactement à celle donnée par le {{recipientWording}}",
     "secureContract": "Vérifiez les details du prêt sur votre appreil avant de l'envoyer. L'addresse est fournie de maniére sécurisée afin que vous n'ayez pas à la vérifier.",
+    "verifyData": "Vérifiez toujours les détails de l'opération sur votre appareil.",
     "warningWording": {},
     "titleWording": {
       "send": "Veuillez confirmer sur votre appareil pour finaliser l'opération",

@@ -1,6 +1,13 @@
 import Page from "./page";
 
 export default class SwapPage extends Page {
+  async goToChangelly() {
+    const changelly = await $("#swap-providers-item-changelly");
+    await changelly.click();
+    const continueButton = await $("#swap-providers-continue");
+    await continueButton.click();
+  }
+
   async KYCCheckbox() {
     return this.$("#swap-landing-kyc-tos");
   }
