@@ -205,10 +205,10 @@
     "form": {
       "amount": "Amount",
       "from": {
-        "title": "From",
-        "account": "Account",
+        "title": "من",
+        "account": "الحساب",
         "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "currency": "الأصول المشفرة"
       },
       "to": {
         "title": "إلى",
@@ -278,7 +278,7 @@
     "operationDetailsModal": {
       "title": "مبادلة",
       "provider": "Provider",
-      "txid": "Swap ID",
+      "txid": "معرّف المبادلة",
       "status": "Status",
       "statusTooltips": {
         "expired": "Please contact the swap provider with your swap ID for more information.",
@@ -384,7 +384,7 @@
           "title": "Device",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
+              "header": "الحصول على الحسابات من الجهاز",
               "description": "Please wait while the accounts to scan are added to the node configuration file."
             },
             "success": {
@@ -1051,7 +1051,7 @@
     "notConfirmed": "لم تم التأكيد",
     "fees": "Fee",
     "noFees": "No fee",
-    "from": "From",
+    "from": "من",
     "to": "To",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
@@ -1078,7 +1078,7 @@
       "undelegated": "Undelegated",
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
-      "rewardFrom": "Reward from",
+      "rewardFrom": "مكافأة من",
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "المكافآت المكتسبة",
@@ -1452,7 +1452,7 @@
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-        "from": "From",
+        "from": "من",
         "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
@@ -3445,10 +3445,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "يجب أن يكون المبلغ أكثر من {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
       "title": "Validators election must be closed"
