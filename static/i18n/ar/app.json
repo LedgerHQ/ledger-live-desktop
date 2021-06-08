@@ -646,10 +646,10 @@
       }
     },
     "enable": {
-      "title": "Approve account",
+      "title": "الموافقة على الحساب",
       "steps": {
         "selectAccount": {
-          "title": "Select account",
+          "title": "اختيار الحساب",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
           "alreadyEnabled": "This account is approved"
@@ -917,7 +917,7 @@
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
+      "title": "أضف حساب للبدء",
       "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
       "buttons": {
         "addAccount": "إضافة حساب",
