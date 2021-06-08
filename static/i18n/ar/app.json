@@ -584,16 +584,16 @@
       "history": {
         "title": "History",
         "description": "View the history of all your loan transactions.",
-        "cta": "Deposit"
+        "cta": "إيداع"
       }
     },
     "headers": {
       "active": {
         "accounts": "الحساب",
-        "amountSupplied": "Open loan",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
+        "amountSupplied": "القروض المفتوحة",
+        "amountSuppliedTooltip": "المبلغ الذي تم إيداعه بالشبكة",
+        "accruedInterests": "رصيد الفائدة",
+        "accruedInterestsTooltip": "الفائدة المكتسبة من القروض",
         "status": "Account status",
         "actions": "Actions"
       },
@@ -602,22 +602,22 @@
         "toSupplyTooltip": "You can now supply your assets"
       },
       "closed": {
-        "assetLended": "Asset",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
+        "assetLended": "الأصل",
+        "amountRedeemed": "مبلغ السحب",
+        "interestsEarned": "الفائدة المكتسبة",
         "date": "التاريخ"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
+        "assetLended": "الأصل",
+        "amount": "المبلغ",
         "accruedInterest": "الفوائد المتراكمة",
         "date": "التاريخ"
       },
       "rates": {
-        "allAssets": "Asset",
+        "allAssets": "الأصل",
         "totalBalance": "رصيد الأصول",
         "totalBalanceTooltip": "المبلغ المتاح للإقراض",
-        "currentAPY": "Deposit APY",
+        "currentAPY": "إيداع APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
       }
@@ -641,7 +641,7 @@
         "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
-        "title": "Withdraw",
+        "title": "سحب",
         "description": "Withdraw assets from the protocol to your Ledger account."
       }
     },
@@ -652,20 +652,20 @@
           "title": "اختيار الحساب",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
-          "alreadyEnabled": "This account is approved"
+          "alreadyEnabled": "تمت الموافقة على هذا الحساب"
         },
         "amount": {
-          "title": "Amount",
+          "title": "المبلغ",
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
           "limit": "{{amount}} محدود",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "متقدم",
-          "amountLabel": "Amount to approve",
+          "amountLabel": "المبلغ المطلوب الموافقة عليه",
           "amountLabelTooltip": "هذا يحد من المبلغ المتاح للعقد الذكي."
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "جهاز"
         },
         "confirmation": {
           "title": "تأكيد",
@@ -680,23 +680,23 @@
       }
     },
     "withdraw": {
-      "title": "Withdraw assets",
+      "title": "سحب الأصول",
       "steps": {
         "amount": {
-          "title": "Amount",
+          "title": "المبلغ",
           "advanced": "متقدم",
-          "amountToWithdraw": "Amount to withdraw",
-          "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max",
-          "maxWithdrawble": "Maximum amount to withdraw is"
+          "amountToWithdraw": "المبلغ المراد سحبه",
+          "withdrawAll": "سحب الحد الأقصى",
+          "placeholder": "سحب الحد الأقصى",
+          "maxWithdrawble": "الحد الأقصى المطلوب سحبه هو"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "تأكيد",
           "success": {
-            "title": "Withdrawal sent successfully",
+            "title": "تم إرسال السحب بنجاح",
             "text": "ستكون أصولك متاحة بمجرد قيام الشبكة بتأكيد السحب.",
             "done": "إغلاق",
             "cta": "View details"
@@ -736,12 +736,12 @@
       "title": "Deposit assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountToSupply": "Amount to deposit",
+          "title": "المبلغ",
+          "amountToSupply": "المبلغ المراد إيداعه",
           "maxSupply": "Maximum amount to lend is"
         },
         "device": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "تأكيد",
