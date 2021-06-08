@@ -5,6 +5,19 @@
     "yesterday": "昨天",
     "transactionDate": "交易日期"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
+      }
+    }
+  },
   "common": {
     "never": "Never",
     "apply": "Apply",
@@ -49,20 +62,20 @@
     "experimentalFeature": "Experimental",
     "information": "Information",
     "search": "Search...",
-    "searchWithoutEllipsis": "Search",
-    "manage": "Manage",
+    "searchWithoutEllipsis": "搜索",
+    "manage": "管理",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "欢迎回来",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "请输入您的密码后继续操作",
+      "inputPlaceholder": "输入您的密码",
+      "lostPassword": "我忘记了密码"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
+      "syncing": "正在同步...",
+      "upToDate": "已同步",
+      "outdated": "已暂停",
+      "needsMigration": "点击更新账户",
       "error": "Synchronization error",
       "refresh": "Refresh"
     },
@@ -89,13 +102,13 @@
       "FREEZE": "Frozen",
       "UNFREEZE": "Unfrozen",
       "REWARD": "Claimed reward",
-      "FEES": "Fees",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "FEES": "费用",
+      "OPT_IN": "选择加入",
+      "OPT_OUT": "选择退出",
+      "CLOSE_ACCOUNT": "关闭账户",
+      "BOND": "绑定",
+      "UNBOND": "解绑",
+      "REWARD_PAYOUT": "奖励",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
@@ -121,6 +134,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Custom",
     "fast": "Fast",
     "high": "High",
@@ -281,6 +295,32 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -455,7 +495,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -463,7 +504,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -471,6 +513,28 @@
     },
     "history": {
       "tab": "History"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only 🇺🇸 bank account",
+          "USD support only",
+          "20+ crypto supported",
+          "ACH transfer",
+          "No credit & debit cards"
+        ]
+      }
     }
   },
   "lend": {
@@ -1429,6 +1493,9 @@
       "estimatedFees": "Network fees"
     }
   },
+  "sign": {
+    "title": "Sign transaction"
+  },
   "releaseNotes": {
     "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
@@ -2331,7 +2398,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News"
+      "announcement": "News",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
@@ -2799,6 +2867,7 @@
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",

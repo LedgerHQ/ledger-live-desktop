@@ -1,137 +1,151 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "today": "اليوم",
+    "tomorrow": "غداً",
+    "yesterday": "أمس",
+    "transactionDate": "تاريخ المعاملة"
+  },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
+      }
+    }
   },
   "common": {
-    "never": "Never",
-    "apply": "Apply",
-    "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "previous": "Previous",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
-    "selectAccount": "Select an account",
-    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
-    "selectCurrency": "Choose a crypto asset",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
-    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "Sort by",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
-    "range": "Range",
-    "stop": "Stop",
-    "updateNow": "Update now",
-    "close": "Close",
-    "eastern": "Eastern",
-    "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
-    "verifyMyAddress": "Verify my address",
-    "copy": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
-    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
-    "experimentalFeature": "Experimental",
-    "information": "Information",
-    "search": "Search...",
-    "searchWithoutEllipsis": "Search",
-    "manage": "Manage",
+    "never": "أبدًا",
+    "apply": "تطبيق",
+    "done": "تم",
+    "confirm": "تأكيد",
+    "cancel": "إلغاء",
+    "getSupport": "الحصول على الدعم",
+    "delete": "حذف",
+    "launch": "بدء",
+    "continue": "متابعة",
+    "previous": "السابق",
+    "learnMore": "معرفة المزيد",
+    "help": "مساعدة",
+    "needHelp": "بحاجة إلى مساعدة؟",
+    "areYouSure": "هل أنت متأكد؟",
+    "selectAccount": "اختر حسابًا",
+    "selectAccountNoOption": "لا يوجد حساب مطابق \"{{accountName}}\"",
+    "selectCurrency": "اختر أصل مشفّر",
+    "selectCurrencyNoOption": "لا يوجد أصل مشفّر \"{{currencyName}}\"",
+    "selectValidatorNoOption": "لا يوجد مدقق مطابق\"{{accountName}}\"",
+    "selectNoResults": "لم يتم العثور على نتائج مطابقة \"{{query}}\"",
+    "sortBy": "ترتيب النتائج",
+    "save": "حفظ",
+    "lock": "إقفال",
+    "showMore": "عرض المزيد",
+    "back": "عودة",
+    "reset": "إعادة تعيين",
+    "retry": "إعادة المحاولة",
+    "range": "نطاق زمني",
+    "stop": "إيقاف",
+    "updateNow": "التحديث الآن",
+    "close": "إغلاق",
+    "eastern": "شرقي",
+    "western": "غربي",
+    "reverify": "إعادة التحقق",
+    "verify": "تحقق",
+    "verifyMyAddress": "قم بتأكيد عنواني",
+    "copy": "نسخ",
+    "copied": "تم النسخ",
+    "addressCopied": "تم نسخ العنوان",
+    "addressCopiedSuspicious": "عدم تطابق العنوان المنسوخ والعنوان الموجود في الحافظة.",
+    "experimentalFeature": "تجريبي",
+    "information": "معلومات",
+    "search": "جارٍ البحث...",
+    "searchWithoutEllipsis": "بحث",
+    "manage": "إدارة",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "مرحباً بك مجددًا",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "أدخل كلمة المرور الخاصة بك للمتابعة",
+      "inputPlaceholder": "اكتب كلمة المرور الخاصة بك",
+      "lostPassword": "نسيت كلمة المرور"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
-      "error": "Synchronization error",
-      "refresh": "Refresh"
+      "syncing": "جارٍ المزامنة...",
+      "upToDate": "تمت المزامنة",
+      "outdated": "ايقاف مؤقت",
+      "needsMigration": "أُنقر لتحديث الحساب",
+      "error": "خطأ في المزامنة",
+      "refresh": "تحديث"
     },
-    "exchange": "Exchange"
+    "exchange": "تداول"
   },
   "devices": {
-    "nanoS": "Nano S",
-    "nanoX": "Nano X",
-    "blue": "Blue"
+    "nanoS": "نانو S",
+    "nanoX": "نانو X",
+    "blue": "أزرق"
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "REDELEGATE": "Redelegated",
-      "UNDELEGATE": "Undelegated",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Approved",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
-      "FEES": "Fees",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
-      "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "IN": "تم الإستلام",
+      "OUT": "تم الإرسال",
+      "CREATE": "تم إنشاؤه",
+      "REVEAL": "تم الإظهار",
+      "DELEGATE": "تفويض",
+      "REDELEGATE": "أُعيد تفويضها",
+      "UNDELEGATE": "غير مفوّض",
+      "SUPPLY": "أودعت",
+      "REDEEM": "مسحوب",
+      "APPROVE": "موافق عليه",
+      "VOTE": "تم التصويت",
+      "FREEZE": "تجميد",
+      "UNFREEZE": "إزالة التجميد",
+      "REWARD": "استلام المكافأة",
+      "FEES": "رسوم",
+      "OPT_IN": "الانضمام",
+      "OPT_OUT": "إلغاء الانضمام",
+      "CLOSE_ACCOUNT": "إغلاق الحساب",
+      "BOND": "ربط",
+      "UNBOND": "إلغاء الربط",
+      "REWARD_PAYOUT": "مُكافأة",
+      "SLASH": "خفض",
+      "WITHDRAW_UNBONDED": "سحب",
+      "NOMINATE": "ترشيح",
+      "CHILL": "مسح الترشيحات"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}} بايت",
+    "kbUnit": "{{size}} كيلوبايت",
+    "mbUnit": "{{size}} ميجابايت"
   },
   "time": {
-    "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute": "دقيقة",
+    "minute_plural": "دقائق",
+    "hour": "ساعة",
+    "hour_plural": "ساعات",
     "range": {
-      "day": "1D",
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "day": "1يوم",
+      "week": "1 أسبوع",
+      "month": "1 شهر",
+      "year": "1 سنة",
+      "all": "الكل"
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
+    "fast": "سريع",
+    "high": "عالٍ",
     "low": "Low",
     "slow": "Slow",
     "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "medium": "متوسط",
+    "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
-    "menu": "Menu",
+    "menu": "القائمة",
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
@@ -281,6 +295,32 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -455,7 +495,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -463,7 +504,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -471,6 +513,28 @@
     },
     "history": {
       "tab": "History"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only 🇺🇸 bank account",
+          "USD support only",
+          "20+ crypto supported",
+          "ACH transfer",
+          "No credit & debit cards"
+        ]
+      }
     }
   },
   "lend": {
@@ -1429,6 +1493,9 @@
       "estimatedFees": "Network fees"
     }
   },
+  "sign": {
+    "title": "Sign transaction"
+  },
   "releaseNotes": {
     "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
@@ -2331,7 +2398,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News"
+      "announcement": "News",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
@@ -2799,6 +2867,7 @@
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",

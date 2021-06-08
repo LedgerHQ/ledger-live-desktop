@@ -27,7 +27,11 @@ const Warning = ({
         </WarnBox>
       );
     default:
-      return (
+      return transaction.data ? (
+        <WarnBox>
+          <Trans i18nKey="TransactionConfirm.verifyData" />
+        </WarnBox>
+      ) : (
         <WarnBox>
           <Trans i18nKey="TransactionConfirm.warning" values={{ recipientWording }} />
         </WarnBox>

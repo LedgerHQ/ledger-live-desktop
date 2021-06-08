@@ -5,6 +5,19 @@
     "yesterday": "Ayer",
     "transactionDate": "Fecha de la transacción"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
+      }
+    }
+  },
   "common": {
     "never": "Nunca",
     "apply": "Aplicar",
@@ -121,6 +134,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Personalizado",
     "fast": "Rápida",
     "high": "Alta",
@@ -174,13 +188,13 @@
       "sorry": "Servicio no disponible temporalmente o no disponible en tu país"
     },
     "missingApp": {
-      "title": "Por favor, instala la aplicación  Exchange en tu dispositivo",
-      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Ingresa a Manager"
     },
     "outdatedApp": {
-      "title": "Actualiza la aplicación Exchange en tu dispositivo",
-      "subtitle": "Ingresa a Manager y actualiza la aplicación de Exchange para intercambiar activos.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Ingresa a Manager"
     },
     "kyc": {
@@ -248,6 +262,9 @@
         "device": {
           "title": "Dispositivo"
         },
+        "dependencies": {
+          "title": "App checks"
+        },
         "finished": {
           "title": "Pendiente",
           "subtitle": "Operación pendiente",
@@ -278,6 +295,32 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -452,7 +495,8 @@
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que se muestra en tu dispositivo",
     "buy": {
-      "title": "Compra criptos a través de nuestro socio",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Comprar",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Selecciona una cuenta",
@@ -460,7 +504,8 @@
       "addAccount": "Añade un cuenta"
     },
     "sell": {
-      "title": "Vender criptos a través de nuestro socio",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Selecciona una cuenta",
@@ -468,6 +513,28 @@
     },
     "history": {
       "tab": "Historial"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only 🇺🇸 bank account",
+          "USD support only",
+          "20+ crypto supported",
+          "ACH transfer",
+          "No credit & debit cards"
+        ]
+      }
     }
   },
   "lend": {
@@ -634,7 +701,10 @@
             "done": "Cerrar",
             "cta": "Ver detalles"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -1032,7 +1102,10 @@
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
-    "appNotInstalled": "Please install the {{appName}} app",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Abrir el Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
@@ -1419,6 +1492,9 @@
     "footer": {
       "estimatedFees": "Network fees"
     }
+  },
+  "sign": {
+    "title": "Sign transaction"
   },
   "releaseNotes": {
     "title": "Notas de versión",
@@ -2322,7 +2398,8 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News"
+      "announcement": "News",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
@@ -2790,6 +2867,7 @@
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
