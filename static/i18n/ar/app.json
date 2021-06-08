@@ -212,7 +212,7 @@
       },
       "to": {
         "title": "إلى",
-        "account": "Account",
+        "account": "الحساب",
         "amount": "Amount to receive",
         "currency": "الأصول المشفرة",
         "addAccountCTA": "Add new account"
@@ -469,7 +469,7 @@
       "advancedLogs": "متقدم",
       "advancedTips": "إن xpub الخاص بك هي بيانات حساسة للخصوصية. استخدمه بحذر، خاصة عند الكشف للأطراف الثالثة.",
       "accountName": {
-        "title": "Account name",
+        "title": "اسم الحساب",
         "desc": "Description of the account"
       },
       "unit": {
@@ -758,7 +758,7 @@
     "noEthAccount": {
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
-      "cta": "Add account"
+      "cta": "إضافة حساب"
     },
     "emptyAccountDeposit": {
       "title": "You don't have any {{ asset }} account.",
@@ -768,8 +768,8 @@
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "الحسابات",
+    "noResultFound": "لا توجد حسابات.",
     "order": {
       "name|asc": "Name A-Z",
       "name|desc": "Name Z-A",
@@ -795,7 +795,7 @@
       "swap": "مبادلة",
       "buy": "Buy",
       "sell": "Sell",
-      "edit": "Edit account",
+      "edit": "تعديل الحساب",
       "hideToken": "Hide token"
     }
   },
@@ -894,7 +894,7 @@
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage other crypto assets",
+      "desc": "إضافة حسابات لإدارة الأصول المشفرة الأخرى",
       "createAccount": "Add account"
     },
     "recentActivity": "Latest operations",
