@@ -134,7 +134,7 @@
     }
   },
   "fees": {
-    "advanced": "متقدمة",
+    "advanced": "متقدم",
     "custom": "Custom",
     "fast": "سريع",
     "high": "عالٍ",
@@ -467,7 +467,7 @@
     "settings": {
       "title": "تعديل الحساب",
       "advancedLogs": "متقدم",
-      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
+      "advancedTips": "إن xpub الخاص بك هي بيانات حساسة للخصوصية. استخدمه بحذر، خاصة عند الكشف للأطراف الثالثة.",
       "accountName": {
         "title": "Account name",
         "desc": "Description of the account"
@@ -660,7 +660,7 @@
           "limit": "limited {{amount}}",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced",
+          "advanced": "متقدم",
           "amountLabel": "Amount to approve",
           "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
@@ -684,7 +684,7 @@
       "steps": {
         "amount": {
           "title": "Amount",
-          "advanced": "Advanced",
+          "advanced": "متقدم",
           "amountToWithdraw": "Amount to withdraw",
           "withdrawAll": "Withdraw Max",
           "placeholder": "Withdraw Max",
@@ -1441,7 +1441,7 @@
         "banner": "Maximum spendable amount is",
         "fees": "Fees",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "متقدم"
       },
       "summary": {
         "title": "Summary"
@@ -1597,7 +1597,7 @@
     "toReturn": "Change to return",
     "modalTitle": "Coin control",
     "coincontrol": "Coin control",
-    "advanced": "Advanced options",
+    "advanced": "الخيارات المتقدمة",
     "ctaDisabled": "This account has no UTXO",
     "whatIs": "What is coin selection?",
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
