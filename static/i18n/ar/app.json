@@ -541,8 +541,8 @@
     "title": "إقراض العملات المشفرة",
     "tabs": {
       "dashboard": "لوحة المعلومات",
-      "opened": "Opened loans",
-      "closed": "Closed loans",
+      "opened": "القروض المفتوحة",
+      "closed": "القروض المغلقة",
       "history": "History"
     },
     "assets": "أصول للإقراض",
@@ -553,17 +553,17 @@
       "amountSuppliedTooltip": "Amount lent to the network",
       "currencyAPY": "Currency APY",
       "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
-      "accruedInterests": "Accrued interest",
+      "accruedInterests": "الفوائد المتراكمة",
       "accruedInterestsTooltip": "Interest generated on your lent assets",
-      "interestEarned": "Interest earned",
+      "interestEarned": "الفوائد المكتسبة",
       "interestEarnedTooltip": "Interest you have earned after withdrawal",
-      "openLoans": "Open loans",
-      "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount withdrawn",
+      "openLoans": "القروض المفتوحة",
+      "closedLoans": "القروض المغلقة",
+      "amountRedeemed": "المبلغ المسحوب",
       "date": "التاريخ",
-      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
+      "info": "يمكنك إقراض الأصول مباشرة من حسابك {{currency}} وكسب الفوائد.",
       "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Deposit {{currency}}"
+      "lend": "إيداع {{currency}}"
     },
     "emptyState": {
       "active": {
@@ -572,14 +572,14 @@
         "cta": "How does lending on Compound work?"
       },
       "closed": {
-        "title": "Your closed loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "ستظهر قروضك المغلقة هنا",
+        "description": "لم تقم بإجراء أية قروض بعد.",
+        "cta": "إيداع"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "ستظهر قروضك المفتوحة هنا",
+        "description": "لم تقم بإجراء أية قروض بعد.",
+        "cta": "إيداع"
       },
       "history": {
         "title": "History",
@@ -616,7 +616,7 @@
       "rates": {
         "allAssets": "Asset",
         "totalBalance": "رصيد الأصول",
-        "totalBalanceTooltip": "Amount available to lend",
+        "totalBalanceTooltip": "المبلغ المتاح للإقراض",
         "currentAPY": "Deposit APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Actions"
@@ -710,7 +710,7 @@
     },
     "info": {
       "terms": {
-        "title": "Lend Crypto",
+        "title": "إقراض عملات مشفرة",
         "subtitle": "Lend assets on the Compound protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
         "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
@@ -883,7 +883,7 @@
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
-      "title": "Lend Crypto",
+      "title": "إقراض العملات المشفرة",
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
