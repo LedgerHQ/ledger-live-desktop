@@ -12,8 +12,8 @@
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "تم إرسال المعاملة !",
+          "text": "انقر هنا لرؤية تفاصيل العملية"
         }
       }
     }
@@ -134,7 +134,7 @@
     }
   },
   "fees": {
-    "advanced": "Advanced",
+    "advanced": "متقدم",
     "custom": "Custom",
     "fast": "سريع",
     "high": "عالٍ",
@@ -466,7 +466,7 @@
     },
     "settings": {
       "title": "تعديل الحساب",
-      "advancedLogs": "Advanced",
+      "advancedLogs": "متقدم",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "Account name",
