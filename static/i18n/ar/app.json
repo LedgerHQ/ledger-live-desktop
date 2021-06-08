@@ -166,7 +166,7 @@
     "completeHeader": "Bridge session completed",
     "completeDescription": "The websocket bridge is now closed.",
     "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "disconnectButton": "قطع الاتصال"
   },
   "swap": {
     "title": "مبادلة",
@@ -326,7 +326,7 @@
   "fullNode": {
     "status": "Status",
     "connect": "Connect",
-    "disconnect": "Disconnect",
+    "disconnect": "قطع الاتصال",
     "checkNodeSettings": "Verify node settings",
     "edit": "تعديل",
     "modal": {
@@ -445,7 +445,7 @@
           }
         },
         "disconnect": {
-          "cta": "Disconnect",
+          "cta": "قطع الاتصال",
           "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
         }
       }
@@ -2146,13 +2146,13 @@
         "validator": {
           "title": "Select validator",
           "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
+          "customValidator": "المدقق المخصص",
           "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
+          "title": "المدقق المخصص",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "button": "استخدام المدقق"
         },
         "undelegate": {
           "title": "Undelegate account"
@@ -2650,7 +2650,7 @@
             "warning": {
               "title": "Do not use a recovery phrase that you have not generated yourself.",
               "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "supportLink": "الاتصال بقسم دعم ليدجر"
             }
           },
           "useRecoverySheet": {
