@@ -1270,7 +1270,7 @@
         "first": "1. Сбросьте устройство",
         "connect": "Подключите {{deviceName}} к компьютеру с помощью USB-кабеля.",
         "turnOn": "Нажмите кнопку на устройстве, чтобы включить его.",
-        "falsePin": "Enter three wrong PINs to reset the device.",
+        "falsePin": "Устройство будет сброшено, если трижды неправильно ввести ПИН-код.",
         "turnOff": "Нажмите и удерживайте боковую кнопку, пока не увидите {{action}}.",
         "confirmTurnOff": "Нажмите {{action}} для подтверждения.",
         "second": "2. Загрузитесь в режиме {{mode}}",
@@ -1279,43 +1279,43 @@
         "third": "3. Удалитьевсе приложения",
         "openLive": "Откройте Диспетчер в Ledger Live.",
         "uninstall": "Нажмите на значок корзины рядом с приложениями, установленными на {{deviceName}}. Это позволит освободить место для установки прошивки.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
+        "disclaimer": "Примечание: эта операция не затрагивает средства. Приватные ключи для доступа к криптоактивам в блокчейне будут в безопасности, а секретная фраза записана на листе восстановления."
       }
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "Получить вознаграждения",
     "steps": {
       "rewards": {
-        "title": "Rewards",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "title": "Вознаграждения",
+        "description": "Поздравляем! Вы заработали <1>{{amount}}</1>, проголосовав за валидаторов.",
+        "info": "Вознаграждения можно получать раз в 24 часа."
       },
       "connectDevice": {
         "title": "Устройство"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Подтверждение",
         "success": {
-          "title": "Rewards claimed",
-          "text": "Your rewards were added to your available balance.",
-          "cta": "View details",
-          "done": "Done"
+          "title": "Вознаграждения получены",
+          "text": "Вознаграждения добавлены к вашему балансу.",
+          "cta": "Подробнее",
+          "done": "Готово"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "Заморозка активов",
     "steps": {
       "amount": {
-        "title": "Amount",
+        "title": "Кол-во",
         "resourceInfo": "Bandwidth or Energy?",
         "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
         "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
         "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
+        "available": "Доступно: {{amountAvailable}}",
         "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
@@ -1335,7 +1335,7 @@
           "vote": "Vote",
           "later": "Vote later"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
@@ -1356,7 +1356,7 @@
           "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
           "continue": "Continue"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
@@ -1385,9 +1385,9 @@
         "success": {
           "title": "Your votes were cast successfully.",
           "text": "",
-          "cta": "View details"
+          "cta": "Подробнее"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
@@ -1481,7 +1481,7 @@
         "pending": {
           "title": "Трансляция транзакции..."
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       },
       "warning": {
         "tezos": {
@@ -1579,7 +1579,7 @@
               "message": "SR or Candidates?",
               "superRepresentative": {
                 "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "description": "Суперпредставители исполняют ключевую роль в управлении сообществом TRON, обеспечивая основные функции. Например, они отвечают за генерирование блоков и бухгалтерский учёт."
               },
               "candidates": {
                 "title": "Candidates",
@@ -1665,9 +1665,9 @@
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1698,12 +1698,12 @@
               "titleCompound": "Rewards compounded successfully",
               "text": "Your rewards were added to your available balance",
               "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
             "pending": {
               "title": "Broadcasting transaction..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1733,9 +1733,9 @@
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1764,9 +1764,9 @@
             "success": {
               "title": "You have successfully undelegated your assets.",
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1794,9 +1794,9 @@
             "success": {
               "title": "{{token}} asset successfully added",
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1834,9 +1834,9 @@
             "success": {
               "title": "Rewards successfully claimed!",
               "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "cta": "Подробнее"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
         }
       }
@@ -1936,12 +1936,12 @@
           "success": {
             "title": "You have successfully nominated validators",
             "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "cta": "Подробнее"
           },
           "pending": {
             "title": "Broadcasting transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
@@ -1994,7 +1994,7 @@
           "pending": {
             "title": "Bonding your assets..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
@@ -2018,12 +2018,12 @@
           "success": {
             "title": "Assets successfully rebonded",
             "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "cta": "Подробнее"
           },
           "pending": {
             "title": "Rebonding your assets..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
@@ -2047,12 +2047,12 @@
           "success": {
             "title": "Unbond transaction sent successfully",
             "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "cta": "Подробнее"
           },
           "pending": {
             "title": "Unbonding your assets..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
@@ -2082,12 +2082,12 @@
           "success": {
             "title": "Transaction sent successfully",
             "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "cta": "Подробнее"
           },
           "pending": {
             "title": "Broadcasting transaction..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     }
@@ -2166,7 +2166,7 @@
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
             "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
@@ -3104,8 +3104,8 @@
       "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "title": "Требуется приложение {{dependency}}",
+      "description": "Если приложение {{dependency}} уже установлено, то переустановите его последнюю версию"
     },
     "ManagerAppDepUninstallRequired": {
       "title": "Sorry, this app is required",
