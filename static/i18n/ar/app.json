@@ -1353,8 +1353,8 @@
         "title": "التأكيد",
         "success": {
           "title": "",
-          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
-          "continue": "Continue"
+          "text": "تمت إزالة تجميد أصولك بنجاح. سيتم تخفيض نقاط {{resource}} الخاص بك، وسيتم إلغاء تصويتك.",
+          "continue": "متابعة"
         },
         "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       }
@@ -3367,7 +3367,7 @@
     },
     "TronUnfreezeNotExpired": {
       "title": "إزالة التجميد غير متوفر بعد",
-      "description": "You need to wait 3 days after your last Freeze operation"
+      "description": "يجب الانتظار 3 أيام بعد آخر عملية تجميد لك"
     },
     "TronVoteRequired": {
       "title": "At least 1 vote is needed"
