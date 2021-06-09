@@ -110,8 +110,8 @@
       "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
+      "WITHDRAW_UNBONDED": "Вывод разблокированной суммы",
+      "NOMINATE": "Назначение",
       "CHILL": "Отменить назначения"
     }
   },
@@ -547,7 +547,7 @@
     },
     "assets": "Активы для кредитования",
     "active": "Подтверждённые счета",
-    "lendAsset": "Lend",
+    "lendAsset": "Кредитовать",
     "account": {
       "amountSupplied": "Депонированная сумма",
       "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
@@ -590,7 +590,7 @@
     "headers": {
       "active": {
         "accounts": "Счёт",
-        "amountSupplied": "Open loan",
+        "amountSupplied": "Открыть займ",
         "amountSuppliedTooltip": "Amount deposited in the network",
         "accruedInterests": "Interest balance",
         "accruedInterestsTooltip": "Interest being earned on loans",
@@ -624,7 +624,7 @@
     },
     "manage": {
       "cta": "Manage lending",
-      "title": "Manage loan",
+      "title": "Управление займами",
       "enable": {
         "approve": "Утвердить",
         "manageLimit": "Изменить лимит",
@@ -758,7 +758,7 @@
     "noEthAccount": {
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
-      "cta": "Add account"
+      "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
       "title": "You don't have any {{ asset }} account.",
@@ -887,17 +887,17 @@
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
-      "title": "BLACK FRIDAY ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "title": "ЧЁРНАЯ ПЯТНИЦА",
+      "description": "Получите скидку 40% на аппаратные кошельки Ledger с промокодом BLACKFRIDAY20"
     }
   },
   "dashboard": {
     "title": "Портфель",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage other crypto assets",
+      "desc": "Добавляйте счета для управления другими криптоактивами",
       "createAccount": "Добавить счёт"
     },
-    "recentActivity": "Latest operations",
+    "recentActivity": "Последние операции",
     "totalBalance": "Общий баланс",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
@@ -909,8 +909,8 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "Установите приложения на устройство",
+      "desc": "Перейдите в Диспетчер, чтобы установить приложения на устройство. Вы сможете добавить счета как только на вашем устройстве будут установлены нужные приложения.",
       "buttons": {
         "installApp": "Перейти в Диспетчер",
         "help": "Помощь"
@@ -1016,7 +1016,7 @@
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "Segwit или Native segwit?"
     },
     "cta": {
       "addMore": "Добавить ещё",
@@ -1192,9 +1192,9 @@
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
-        "addAccount": "Add account",
-        "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
+        "addAccount": "Добавить счёт",
+        "addAccountTooltip": "Добавить счёт {{appName}}",
+        "addAccountWarn": "Дождитесь полного обновления приложения",
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
@@ -3150,7 +3150,7 @@
       "description": "Please check your internet connection."
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
+      "title": "К сожалению, счета не найдены",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
