@@ -912,16 +912,16 @@
       "title": "Install apps on your device",
       "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "Перейти в Диспетчер",
+        "help": "Помощь"
       }
     },
     "accounts": {
       "title": "Add an account to get started",
       "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
       "buttons": {
-        "addAccount": "Add account",
-        "installApp": "Go to Manager to install apps",
+        "addAccount": "Добавить счёт",
+        "installApp": "Для установки приложений перейдите в Диспетчер",
         "help": "Help"
       }
     }
@@ -936,23 +936,23 @@
     "link": "Подробнее",
     "seeTokens": "Show tokens ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens",
+    "countTooltip": "1 токен",
+    "countTooltip_plural": "{{count}} токенов",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How Assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})"
+      "title": "ASA (активы)",
+      "cta": "Добавить ASA",
+      "placeholder": "Вы можете добавить активы на свой счёт {{currencyName}}.",
+      "link": "Как работают активы (ASA)?",
+      "seeTokens": "Показать ASA ({{tokenCount}})",
+      "hideTokens": "Скрыть ASA ({{tokenCount}})"
     }
   },
   "subAccounts": {
-    "title": "Subaccounts",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "title": "Субсчета",
+    "seeSubAccounts": "Показать субсчета ({{tokenCount}})",
+    "hideSubAccounts": "Скрыть субсчета ({{tokenCount}})",
+    "countTooltip": "1 субсчёт",
+    "countTooltip_plural": "Субсчетов: {{count}}"
   },
   "migrateAccounts": {
     "overview": {
@@ -978,7 +978,7 @@
       },
       "scanning": {
         "title": "{{currencyName}} обновляется...",
-        "description": "Please wait for your accounts to be updated"
+        "description": "Выполняется обновление счёта. Пожалуйста, подождите"
       },
       "finished-empty": {
         "title": "Обновление {{currencyName}} не завершено",
@@ -999,13 +999,13 @@
       "finish": "Подтверждение"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
-    "fullNodeConfigure": "Configure node",
+    "fullNodeConfigure": "Настроить ноду",
     "tokensTip": "{{token}} ({{ticker}}) – это токен {{tokenType}}. Вы можете получать токены непосредственно на счёт {{currency}}.",
     "accountToImportSubtitle_plural": "Добавить существующий счёт",
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
     "noAccountToImport": "Нет существующих счетов {{currencyName}} для добавления",
-    "success": "Account added successfully",
+    "success": "Счёт успешно добавлен",
     "success_plural": "Accounts added successfully",
     "successDescription": "Add other accounts or return to Portfolio",
     "successDescription_plural": "Add other accounts or return to Portfolio",
