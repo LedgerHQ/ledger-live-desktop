@@ -498,8 +498,8 @@
       "header": "Buy crypto with {{provider}}",
       "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "شراء",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "اختر حسابًا",
+      "selectCrypto": "اختار أصل مشفّر",
+      "selectAccount": "اختار حسابًا",
       "continue": "متابعة",
       "addAccount": "إضافة حساب"
     },
@@ -507,7 +507,7 @@
       "header": "Sell crypto with {{provider}}",
       "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "بيع",
-      "selectCrypto": "Choose a crypto asset",
+      "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
     },
@@ -650,8 +650,8 @@
       "steps": {
         "selectAccount": {
           "title": "اختار الحساب",
-          "selectLabel": "Account to lend from",
-          "cta": "Approve",
+          "selectLabel": "حساب للإقراض",
+          "cta": "موافقة",
           "alreadyEnabled": "تمت الموافقة على هذا الحساب"
         },
         "amount": {
@@ -724,7 +724,7 @@
         },
         "2": {
           "subtitle": "Supply assets to earn interest",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "description": "بمجرد الموافقة على الحساب، يمكنك تحديد كمية الأصول التي تريد إقراضها وإصدار معاملة للبروتوكول. وتستحق الفوائد فور تأكيد المعاملة."
         },
         "3": {
           "subtitle": "Withdraw assets at any time",
@@ -1410,8 +1410,8 @@
       "chooseAccount": {
         "title": "حساب",
         "label": "Account to credit",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
+        "parentAccount": "1. اختار حساب {{currencyName}}",
+        "token": "2. اختار رمزًا",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
@@ -1454,7 +1454,7 @@
         "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
         "from": "من",
         "to": "To",
-        "selectAccountDebit": "Account to debit",
+        "selectAccountDebit": "حساب للخصم منه",
         "recipientAddress": "Recipient address",
         "amount": "المبلغ",
         "fees": "Network fees",
@@ -1599,9 +1599,9 @@
     "coincontrol": "Coin control",
     "advanced": "الخيارات المتقدمة",
     "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
+    "whatIs": "ما هو اختيار النقود؟",
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
+    "strategy": "إستراتيجية اختيار النقود",
     "selected": "النقود المختارة للإستراتيجية",
     "amount": "المبلغ المراد إرساله:",
     "replaceable": "replaceable",
@@ -1783,7 +1783,7 @@
           "assets": {
             "title": "ASA (Asset)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
+            "selectLabel": "اختر ASA (أصل)",
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
@@ -2144,8 +2144,8 @@
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
         },
         "validator": {
-          "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
+          "title": "اختار المدقق",
+          "description": "يمكنك اختيار المدقق من خلال مقارنة المعدلات التقديرية للمكافأة",
           "customValidator": "المدقق المخصص",
           "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
@@ -2221,7 +2221,7 @@
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
-      "themeDesc": "Select the theme.",
+      "themeDesc": "اختار السمة.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Region",
@@ -2232,7 +2232,7 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Select a crypto asset to edit its settings.",
+      "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
       "placeholder": "No settings for this asset",
       "confirmationsNb": "عدد التأكيدات",
       "confirmationsNbDesc": "قم بتعيين عدد تأكيدات الشبكة اللازمة لتمييز المعاملة على أنها مؤكدة."
@@ -2376,8 +2376,8 @@
     "cta": "حفظ",
     "ctaSuccess": "Done",
     "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
+    "selectedAccounts": "الحسابات المراد تضمينها",
+    "selectedAccounts_plural": "الحسابات المراد تضمينها: ({{count}})",
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
@@ -2496,10 +2496,10 @@
         "title": "ما نوع جهازك؟"
       },
       "selectUseCase": {
-        "greetings": "Hello!",
+        "greetings": "مرحبًا!",
         "hasNoRecovery": "أول مرة تستخدم {{deviceName}} الخاص بك؟",
-        "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "hasRecovery": "هل لديك عبارة استرداد بالفعل؟",
+        "separator": "أو",
         "options": {
           "1": {
             "heading": "First use",
@@ -2583,7 +2583,7 @@
             },
             "select": {
               "title": "اختار \"أدخل عبارة الاسترداد\"",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "descr": "اضغط على كلا الزرين في وقت واحد للتحقق من صحة الاختيار."
             },
             "follow": {
               "title": "Follow instructions",
@@ -2684,7 +2684,7 @@
               "title": "Grab your recovery phrase"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
+              "title": "حدد طول عبارة الاسترداد",
               "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
             },
             "enterWord": {
