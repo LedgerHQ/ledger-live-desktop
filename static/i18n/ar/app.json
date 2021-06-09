@@ -256,7 +256,7 @@
               "float": "Floating rate",
               "fixed": "Fixed rate"
             },
-            "address": "Address"
+            "address": "عنوان"
           }
         },
         "device": {
@@ -2502,18 +2502,18 @@
         "separator": "أو",
         "options": {
           "1": {
-            "heading": "First use",
+            "heading": "أول استخدام",
             "title": "إعداد {{deviceName}} جديد",
-            "description": "Let’s start and set up your device!"
+            "description": "لنبدأ ونقوم بإعداد جهازك!"
           },
           "2": {
-            "heading": "Connect device",
+            "heading": "توصيل الجهاز",
             "title": "توصيل {{deviceName}} الخاص بك",
-            "description": "Is your device already set up? Connect it to the app!"
+            "description": "هل تم إعداد جهازك بالفعل؟ قم بتوصيله بالتطبيق!"
           },
           "3": {
-            "heading": "Restore device",
-            "title": "Restore your recovery phrase on a new device",
+            "heading": "استعادة الجهاز",
+            "title": "استعادة عبارة الاسترداد الخاصة بك على جهاز جديد",
             "description": "استخدم عبارة استرداد حالية لاستعادة مفاتيحك الخاصة على جهاز {{deviceName}} جديد!"
           }
         }
@@ -2685,7 +2685,7 @@
             },
             "selectLength": {
               "title": "حدد طول عبارة الاسترداد",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "descr": "يمكن أن تحتوي عبارة الاسترداد الخاصة بك على 12 أو 18 أو 24 كلمة. ويجب عليك إدخال كل الكلمات للوصول إلى الأصول المشفرة الخاصة بك."
             },
             "enterWord": {
               "title": "Enter Word #1...",
