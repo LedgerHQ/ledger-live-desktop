@@ -1323,24 +1323,24 @@
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is awaiting validation",
+          "title": "Транзакция ожидает подтверждения",
           "desc": "You have to wait a minute before being able to vote"
         },
-        "title": "Confirmation",
+        "title": "Подтверждение",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "textNRG": "Начисление баллов Энергии начнётся после подтверждения заморозки сетью. Скоро вы сможете голосовать за суперпредставителей, чтобы получать вознаграждения.",
+          "text": "Начисление баллов Пропускной способности начнётся после подтверждения заморозки сетью. Скоро вы сможете голосовать за суперпредставителей, чтобы получать вознаграждения.",
+          "votePending": "Проголосовать через {{time}}",
+          "vote": "Голосовать",
+          "later": "Проголосовать позже"
         },
         "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "Заморозка активов",
     "steps": {
       "amount": {
         "title": "Разморозить",
@@ -1350,40 +1350,40 @@
         "title": "Устройство"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Подтверждение",
         "success": {
           "title": "",
-          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
-          "continue": "Continue"
+          "text": "Ваши активы успешно разморожены. Ваши баллы {{resource}} сократятся, а голоса аннулированы.",
+          "continue": "Продолжить"
         },
         "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
       }
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "Отдать голоса",
+    "titleExisting": "Управление голосами",
     "steps": {
       "castVotes": {
-        "max": "MAX",
-        "title": "Vote",
+        "max": "МАКС.",
+        "title": "Голосовать",
         "search": "Search by name or address...",
         "totalVotes": "Total votes: {{total}}",
         "selected": "Selected: {{total}}",
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
-        "validators": "Validators ({{total}})",
-        "votes": "Available assets: {{total}}",
+        "maxUsed": "Недостаточно средств",
+        "validators": "Валидаторы ({{total}})",
+        "votes": "Доступные активы: {{total}}",
         "noResults": "No validator found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
         "title": "Устройство"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Подтверждение",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "Ваши голоса успешно отданы.",
           "text": "",
           "cta": "Подробнее"
         },
@@ -1392,7 +1392,7 @@
     }
   },
   "buy": {
-    "title": "Buy",
+    "title": "Покупка",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
     "withoutDevice": "Продолжить без устройства",
@@ -2035,8 +2035,8 @@
           "amountLabel": "Сумма для разблокировки",
           "availableLabel": "Заблокировано",
           "maxLabel": "Макс.",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "info": "Разблокированные активы можно вывести спустя 28 дней после разблокировки.",
+          "learnMore": "Подробнее"
         },
         "connectDevice": {
           "title": "Устройство"
@@ -3472,7 +3472,7 @@
       "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "Вы должны заблокировать как минимум 1 DOT"
     },
     "PolkadotMaxUnbonding": {
       "title": "You have exceeded the unbond limit"
