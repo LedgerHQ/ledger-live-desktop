@@ -294,31 +294,31 @@
       "to": "Куда",
       "toProvider": "Адрес поставщика услуг",
       "initialAmount": "Начальная сумма",
-      "creditedAmount": "Credited amount"
+      "creditedAmount": "Внесённая сумма"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Выберите поставщика услуг для обмена криптовалюты",
+      "learnMore": "Что такое Swap (обмен криптоактивов)?",
+      "kycRequired": "Требуется проверка KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Только США (скоро Европа, Африка и Азия)",
+          "Множество монет и токенов",
+          "Централизована"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT и 50+ других",
+          "Мультивалютная поддержка",
+          "Централизована"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Подключение к 30+ DEX-биржам (Uniswap, SushiSwap,...)",
+          "Ethereum и ERC20-токены",
+          "Децентрализованная система без доверия"
         ]
       }
     }
@@ -408,18 +408,18 @@
               "header": "Download and run Ledger SatStack",
               "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
               "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
-              "cta": "Download SatStack"
+              "cta": "Скачать SatStack"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "header": "Не удалось подключиться к SatStack",
+              "description": "Убедитесь, что на этом компьютере запущен SatStack."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
+              "header": "Обновите SatStack",
               "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
+              "header": "Не удалось подключиться к полной ноде",
               "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
             },
             "invalid-chain": {
@@ -427,32 +427,32 @@
               "description": "invalid-chain description for tooltip"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "Загружаем...",
               "description": ""
             },
             "ready": {
-              "header": "Ready",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "header": "Готово",
+              "description": "Полная нода успешно синхронизирована. Баланс на вашем Биткойн-счёте теперь актуальный."
             },
             "syncing": {
-              "header": "Node sync in progress…",
+              "header": "Выполняется синхронизация ноды…",
               "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
             },
             "scanning": {
-              "header": "Account scan in progress...",
+              "header": "Выполняется сканирование счёта...",
               "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
           }
         },
         "disconnect": {
-          "cta": "Disconnect",
+          "cta": "Отключить",
           "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
         }
       }
     }
   },
   "account": {
-    "lastOperations": "Latest operations",
+    "lastOperations": "Последние операции",
     "contractAddress": "Контракт:",
     "openInExplorer": "Посмотреть в обозревателе блоков",
     "emptyState": {
@@ -461,26 +461,26 @@
       "descToken": "Убедитесь, что приложение <1><0>{{managerAppName}}</0></1> установлено и начинайте принимать <3><0>{{ticker}}</0></3> и <5> токены <0>{{tokenList}}</0></5>",
       "buttons": {
         "receiveFunds": "Получить",
-        "buy": "Buy"
+        "buy": "Купить"
       }
     },
     "settings": {
       "title": "Редактировать счёт",
-      "advancedLogs": "Advanced",
+      "advancedLogs": "Дополнительно",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
         "title": "Название счёта",
-        "desc": "Description of the account"
+        "desc": "Описание счёта"
       },
       "unit": {
         "title": "Единица учёта",
-        "desc": "Choose the unit to be used"
+        "desc": "Выберите единицу"
       }
     },
-    "availableBalance": "Available balance",
+    "availableBalance": "Доступные средства",
     "frozenAssets": "Замороженные активы",
     "bandwidth": "Пропускная способность",
-    "energy": "Energy",
+    "energy": "Энергия",
     "delegatedAssets": "Делегированные активы",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
@@ -594,44 +594,44 @@
         "amountSuppliedTooltip": "Amount deposited in the network",
         "accruedInterests": "Interest balance",
         "accruedInterestsTooltip": "Interest being earned on loans",
-        "status": "Account status",
-        "actions": "Actions"
+        "status": "Состояние счёта",
+        "actions": "Действия"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
+        "enablingTooltip": "Выполняется трансляция транзакции",
         "toSupplyTooltip": "You can now supply your assets"
       },
       "closed": {
-        "assetLended": "Asset",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
-        "date": "Date"
+        "assetLended": "Актив",
+        "amountRedeemed": "Сумма вывода",
+        "interestsEarned": "Начисленная прибыль",
+        "date": "Дата"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
-        "accruedInterest": "Accrued interest",
-        "date": "Date"
+        "assetLended": "Актив",
+        "amount": "Сумма",
+        "accruedInterest": "Начисленные проценты",
+        "date": "Дата"
       },
       "rates": {
-        "allAssets": "Asset",
-        "totalBalance": "Asset balance",
-        "totalBalanceTooltip": "Amount available to lend",
+        "allAssets": "Актив",
+        "totalBalance": "Активов в распоряжении",
+        "totalBalanceTooltip": "Сумма, доступная для займа",
         "currentAPY": "Доходность",
         "currentAPYTooltip": "Годовая доходность по депозиту с постоянной капитализацией",
-        "actions": "Actions"
+        "actions": "Действия"
       }
     },
     "manage": {
       "cta": "Manage lending",
       "title": "Manage loan",
       "enable": {
-        "approve": "Approve",
-        "manageLimit": "Manage limit",
-        "viewDetails": "View details",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
+        "approve": "Утвердить",
+        "manageLimit": "Изменить лимит",
+        "viewDetails": "Подробнее",
+        "info": "Вы одобрили <0>{{value}}</0> для данного счёта. Сумму можно уменьшить с дополнительной комиссией.",
+        "infoNoLimit": "Этот счёт полностью утверждён. Сумму можно уменьшить с дополнительной комиссией.",
+        "approvedWithLimit": "Вы одобрили <0>{{value}}</0> для данного счёта.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
@@ -641,7 +641,7 @@
         "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
-        "title": "Withdraw",
+        "title": "Вывести",
         "description": "Withdraw assets from the protocol to your Ledger account."
       }
     },
