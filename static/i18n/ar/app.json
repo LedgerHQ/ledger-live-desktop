@@ -1099,16 +1099,16 @@
     "allowManagerPermission": "السماح بـ{{wording}} على جهازك",
     "loading": "Loading...",
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
-    "unlockDevice": "Unlock your device",
+    "unlockDevice": "قم بإلغاء قفل جهازك",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
-    "quitApp": "Quit the application on your device",
+    "quitApp": "الخروج من التطبيق على جهازك",
     "appNotInstalledTitle": "Missing required app",
     "appNotInstalledTitle_plural": "Missing required apps",
     "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
     "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
+    "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "{{appName}} App installation",
     "installAppDescription": "Please wait until the installation is finished",
     "listApps": "Checking App dependencies",
@@ -1319,7 +1319,7 @@
         "info": "الأصول المجمدة لا يمكن إرسالها لمدة 3 أيام."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "الجهاز"
       },
       "confirmation": {
         "tooltip": {
@@ -1378,7 +1378,7 @@
         "noResults": "لم يتم العثور على مدقق لـ \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "الجهاز"
       },
       "confirmation": {
         "title": "التأكيد",
@@ -1395,8 +1395,8 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
-    "connectWithoutDevice": "It's better to use your device for optimal security.",
+    "withoutDevice": "المتابعة بدون جهازي",
+    "connectWithoutDevice": "من الأفضل استخدام جهازك لأمان أفضل.",
     "skipConnect": "المتابعة بدون جهازي"
   },
   "sell": {
@@ -1416,8 +1416,8 @@
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
-        "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "title": "الجهاز",
+        "withoutDevice": "ليس لديك جهازك؟"
       },
       "receiveFunds": {
         "title": "Receive"
@@ -1447,7 +1447,7 @@
         "title": "Summary"
       },
       "device": {
-        "title": "Device"
+        "title": "الجهاز"
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
@@ -1658,7 +1658,7 @@
             "title": "Validators"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1726,7 +1726,7 @@
             "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
           },
           "device": {
-            "title": "Device"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1757,7 +1757,7 @@
             }
           },
           "device": {
-            "title": "Device"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1787,7 +1787,7 @@
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1928,7 +1928,7 @@
           "maybeChill": "Clear nominations instead"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "تأكيد",
@@ -1976,7 +1976,7 @@
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "tooltip": {
@@ -2010,7 +2010,7 @@
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "التأكيد",
@@ -2039,7 +2039,7 @@
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "التأكيد",
@@ -2074,7 +2074,7 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "confirmation": {
           "title": "التأكيد",
@@ -2296,7 +2296,7 @@
       "btn": "View"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
+      "title": "إصلاح جهاز ليدجر الخاص بك",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Repair"
@@ -2493,7 +2493,7 @@
         }
       },
       "selectDevice": {
-        "title": "What's your device?"
+        "title": "ما نوع جهازك؟"
       },
       "selectUseCase": {
         "greetings": "Hello!",
@@ -2552,14 +2552,14 @@
           "deviceHowTo": {
             "turnOn": {
               "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "descr": "قم بتوصيل جهازك بجهاز الكمبيوتر الخاص بك باستخدام كابل USB."
             },
             "browse": {
               "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
             },
             "select": {
-              "title": "Select “Set up as new device”",
+              "title": "اختر \"إعداد كجهاز جديد\"",
               "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
