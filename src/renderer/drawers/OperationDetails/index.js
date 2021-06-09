@@ -462,7 +462,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
               />
             </OpDetailsTitle>
           </OpDetailsSection>
-          <Box>
+          <Box m={0}>
             {internalOperations.map((op, i) => (
               <div key={`${op.id}`}>
                 <OperationComponent
