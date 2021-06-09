@@ -638,7 +638,7 @@
       },
       "supply": {
         "title": "Депонировать",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "description": "Укажите сумму активов для кредитования в протокол."
       },
       "withdraw": {
         "title": "Вывести",
@@ -1424,7 +1424,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "Сумма, зачисленная на делегированный счёт, будет добавлена к общей стейкированной сумме. Чтобы избежать этого, выберите другой счёт."
         }
       }
     }
@@ -1437,7 +1437,7 @@
         "title": "Recipient"
       },
       "amount": {
-        "title": "Amount",
+        "title": "Кол-во",
         "banner": "Maximum spendable amount is",
         "fees": "Fees",
         "standard": "Standard",
@@ -1456,7 +1456,7 @@
         "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
-        "amount": "Amount",
+        "amount": "Кол-во",
         "fees": "Network fees",
         "useMax": "Send Max",
         "rippleTag": "Tag",
@@ -1527,15 +1527,15 @@
         "voteExisting": "Manage votes"
       },
       "manageTP": "Manage assets",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "У вас должно быть не менее {{amount}}, чтобы начать получать вознаграждения",
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
+      "claimAvailableRewards": "Получить {{amount}}",
       "header": "Votes",
       "percentageTP": "% of votes cast",
       "noRewards": "No rewards available",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
+        "title": "У вас осталось {{amount}} голос(-ов)",
         "description": "You can cast your remaining votes to earn more rewards",
         "button": "Vote now"
       },
@@ -1603,7 +1603,7 @@
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
     "strategy": "Coin selection strategy",
     "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
+    "amount": "Сумма к отправке:",
     "replaceable": "replaceable",
     "cannotSelect": {
       "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
@@ -1635,10 +1635,10 @@
       "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
       "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
       "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
+      "currentDelegation": "Делегировано: <0>{{amount}}</0>",
       "estYield": "est. yield",
-      "activeTooltip": "Delegated amounts generate rewards",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards",
+      "activeTooltip": "Делегированные средства приносят вознаграждения",
+      "inactiveTooltip": "Без делегирования средства не приносят вознаграждения",
       "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate",
@@ -1681,7 +1681,7 @@
             "compound": "Compound",
             "claim": "Cash in",
             "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "Rewards will be added to delegated amount",
+            "compoundDescription": "Вознаграждения будут добавлены к делегированной сумме",
             "claimDescription": "Rewards will be added to the available balance",
             "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
             "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
@@ -1748,12 +1748,12 @@
         "title": "Undelegate assets",
         "steps": {
           "amount": {
-            "title": "Amount",
+            "title": "Кол-во",
             "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "amount": "Сумма отзыва делегирования"
             }
           },
           "device": {
@@ -1774,7 +1774,7 @@
   },
   "algorand": {
     "operationHasRewards": "Rewards earned",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationEarnedRewards": "Вы заработали вознаграждение на <0>{{amount}}</0>.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
@@ -1823,7 +1823,7 @@
           },
           "info": {
             "title": "Rewards",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "description": "Поздравляем! Вы заработали {{amount}}. Нажмите «Продолжить», чтобы получить вознаграждения",
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
@@ -1859,7 +1859,7 @@
       "nominate": "Nominate",
       "chill": "Clear nominations",
       "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
+      "amount": "Заблокированная сумма",
       "commission": "Commission",
       "active": "Active",
       "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
@@ -1890,7 +1890,7 @@
     "unlockings": {
       "header": "Unbonding",
       "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
+      "withdrawUnbonded": "Сумма вывода ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
@@ -1968,8 +1968,8 @@
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
+          "title": "Кол-во",
+          "amountLabel": "Сумма для блокировки",
           "availableLabel": "Available",
           "maxLabel": "Max",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
@@ -2002,8 +2002,8 @@
       "title": "Rebond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
+          "title": "Кол-во",
+          "amountLabel": "Сумма для повторной блокировки",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
           "info": "Rebonded assets are immediately added to the bonded amount.",
@@ -2031,8 +2031,8 @@
       "title": "Unbond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
+          "title": "Кол-во",
+          "amountLabel": "Сумма для разблокировки",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
@@ -2100,7 +2100,7 @@
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
-    "amount": "Amount",
+    "amount": "Кол-во",
     "delegated": "Delegated",
     "completionDate": "Completion date",
     "rewards": "Rewards",
@@ -2139,7 +2139,7 @@
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
           "select": "Select",
-          "yield": "Est. Yield {{amount}}",
+          "yield": "Ориент. доход: {{amount}}",
           "randomly": "Randomly chosen validator",
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
         },
@@ -2946,7 +2946,7 @@
       "title": "Recipient account has not opted in the selected ASA."
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "Укажите сумму"
     },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
@@ -3384,7 +3384,7 @@
       "title": "There is no reward to claim"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "Сумма для разморозки не может быть меньше 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Sending TRC20 to a new account won't activate it",
@@ -3427,7 +3427,7 @@
       "title": "Insufficient balance in the parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Баланс не может быть меньше {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Please open the {{expected}} app"
