@@ -293,7 +293,7 @@
       "fromAddress_plural": "Origin addresses",
       "to": "إلى",
       "toProvider": "Provider address",
-      "initialAmount": "Initial amount",
+      "initialAmount": "المبلغ الأولي",
       "creditedAmount": "Credited amount"
     },
     "providers": {
