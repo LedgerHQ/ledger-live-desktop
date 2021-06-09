@@ -617,8 +617,8 @@
         "allAssets": "Asset",
         "totalBalance": "Asset balance",
         "totalBalanceTooltip": "Amount available to lend",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "currentAPY": "Доходность",
+        "currentAPYTooltip": "Годовая доходность по депозиту с постоянной капитализацией",
         "actions": "Actions"
       }
     },
@@ -637,7 +637,7 @@
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
-        "title": "Deposit",
+        "title": "Депонировать",
         "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
