@@ -112,7 +112,7 @@
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "CHILL": "Отменить назначения"
     }
   },
   "byteSize": {
@@ -162,11 +162,11 @@
     "openHeader": "Expose your Device accounts through WebSocket",
     "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
     "openedHeader": "{{appName}} bridge opened",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "openedDescription": "Теперь вы можете использовать свой счёт {{appName}} в стороннем веб-приложении через WebSocket.",
     "completeHeader": "Bridge session completed",
     "completeDescription": "The websocket bridge is now closed.",
-    "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "openButton": "Открыть",
+    "disconnectButton": "Отключить"
   },
   "swap": {
     "title": "Обмен",
@@ -188,13 +188,13 @@
       "sorry": "Услуга временно недоступна или недоступна в Вашей стране"
     },
     "missingApp": {
-      "title": "Please install the {{appName}} app on your device",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
+      "title": "Пожалуйста, установите {{appName}} на устройство",
+      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и установите приложение {{appName}}.",
       "cta": "Перейти в Диспетчер"
     },
     "outdatedApp": {
-      "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
+      "title": "Пожалуйста, обновите приложение {{appName}} на устройстве",
+      "subtitle": "Чтобы обменивать активы, перейдите в Диспетчер и обновите приложение {{appName}}.",
       "cta": "Перейти в Диспетчер"
     },
     "kyc": {
@@ -203,7 +203,7 @@
       "disclaimer": "Продолжая, вы соглашаетесь с тем, что данные о вашем местоположении могут передаваться третьим лицам (поставщикам услуг) в соответствии с их требованиями по AML/KYC."
     },
     "form": {
-      "amount": "Amount",
+      "amount": "Кол-во",
       "from": {
         "title": "Откуда",
         "account": "Счёт",
@@ -218,13 +218,13 @@
         "addAccountCTA": "Добавить новый счёт"
       },
       "tradeMethod": {
-        "title": "Rate",
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "title": "Курс",
+        "float": "Плавающий курс",
+        "floatUnavailable": "Для этой пары плавающий курс не поддерживается",
+        "fixed": "Фиксированный курс",
+        "fixedUnavailable": "Для этой пары фиксированный курс не поддерживается",
+        "floatDesc": "Сумма может измениться в зависимости от состояния рынка.",
+        "fixedDesc": "Ваша сумма останется прежней даже при изменениях на рынке. Обновляется каждые 60 секунд.",
         "by": "Provided by"
       },
       "exchange": "Обменять",
@@ -233,7 +233,7 @@
       "noAccounts": "У вас нет счетов {{currencyName}} с доступным балансом",
       "noApp": "Приложение {{currencyName}} не установлено.",
       "outdatedApp": "Доступно обновление приложения {{currencyName}}.",
-      "loadingRates": "Loading rates..."
+      "loadingRates": "Загружаем котировки..."
     },
     "modal": {
       "title": "Обмен",
@@ -252,18 +252,18 @@
           "details": {
             "provider": "Поставщик",
             "tradeMethod": {
-              "title": "Type",
-              "float": "Floating rate",
-              "fixed": "Fixed rate"
+              "title": "Тип",
+              "float": "Плавающий курс",
+              "fixed": "Фиксированный курс"
             },
-            "address": "Address"
+            "address": "Адрес"
           }
         },
         "device": {
           "title": "Устройство"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "Проверка приложения"
         },
         "finished": {
           "title": "В ожидании",
@@ -281,8 +281,8 @@
       "txid": "ID обмена",
       "status": "Статус",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "expired": "Чтобы решить эту проблему, обратитесь к поставщику услуг обмена и сообщите ID операции.",
+        "refunded": "Для получения дополнительной информации обратитесь к поставщику услуг обмена и сообщите ID операции.",
         "pending": "Please wait while the swap provider is processing the transaction.",
         "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
         "finished": "Your swap was completed successfully."
