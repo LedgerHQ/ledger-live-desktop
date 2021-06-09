@@ -927,7 +927,7 @@
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Щелкните <1>Continue</1> (Продолжить), чтобы обновить его."
   },
   "tokensList": {
     "title": "Токены",
@@ -1011,7 +1011,7 @@
     "successDescription_plural": "Добавьте больше счетов или вернитесь в Портфель",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "noAccountToCreate": "Счета <1><0>{{currencyName}}</0></1> не найдены",
       "showAllAddressTypes": "Показать все типы адресов",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
@@ -1094,57 +1094,57 @@
     "noMoreOperations": "На этом всё"
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "Allow {{wording}} on your device",
+    "allowAppPermission": "Откройте приложение {{wording}} на устройстве",
+    "allowAppPermissionSubtitleToken": "для управления токенами {{token}}",
+    "allowManagerPermission": "Разрешите использование {{wording}} на устройстве",
     "loading": "Загружаем...",
-    "connectAndUnlockDevice": "Connect and unlock your device",
+    "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
-    "quitApp": "Quit the application on your device",
+    "unlockDeviceAfterFirmwareUpdate": "Дождитесь обновления прошивки и разблокируйте устройство с помощью PIN-кода",
+    "quitApp": "Выйдите из приложения на устройстве",
     "appNotInstalledTitle": "Отсутствует необходимое приложение",
     "appNotInstalledTitle_plural": "Отсутствуют необходимые приложения",
     "appNotInstalled": "Для этого действия необходимо приложение {{appName}}. Пожалуйста, перейдите в Диспетчер и установите его на ваше устройство",
     "appNotInstalled_plural": "Для этого действия необходимы приложения {{appName}}. Пожалуйста, перейдите в Диспетчер и установите их на устройство",
-    "openManager": "Open Manager",
-    "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
-    "listApps": "Checking App dependencies",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps",
+    "openManager": "Открыть Диспетчер",
+    "outdated": "Версия приложения устарела",
+    "outdatedDesc": "Для приложения {{appName}} на вашем устройстве появилось важное обновление. Чтобы установить обновления, перейдите в Диспетчер.",
+    "installApp": "Установка приложения {{appName}}",
+    "installAppDescription": "Дождитесь завершения установки",
+    "listApps": "Выполняется проверка зависимостей приложения",
+    "listAppsDescription": "Мы проверяем наличие всех необходимых приложений. Пожалуйста, подождите",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Подтвердить обмен",
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "amountReceivedFloat": "Amount to receive before service fees",
+      "amountSent": "Сумма к отправке",
+      "amountReceived": "Сумма к получению",
+      "amountReceivedFloat": "Сумма к получению до вычета комиссии за обслуживание",
       "fees": "Комиссия",
-      "provider": "Provider",
-      "payoutNetworkFees": "Payout fees",
-      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      "provider": "Поставщик",
+      "payoutNetworkFees": "Комиссия за выплату",
+      "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Sell transaction"
+      "confirm": "Подтвердите продажу"
     }
   },
   "manager": {
     "tabs": {
-      "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
-      "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appCatalog": "Каталог приложений",
+      "appCatalogSearch": "Поиск приложения в каталоге...",
+      "appsOnDevice": "Установленные приложения",
+      "appOnDeviceSearch": "Поиск установленных приложений..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "No storage left",
-      "installed": "Apps",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmwareAvailable": "Firmware is outdated:",
-      "firmwareUpToDate": "Firmware is up to date:",
-      "genuine": "Device is genuine",
+      "freeSpace": "<0>{{space}}</0> свободно",
+      "noFreeSpace": "Не осталось свободного места",
+      "installed": "Приложения",
+      "capacity": "Ёмкость",
+      "used": "Использовано",
+      "firmwareAvailable": "Прошивка устарела:",
+      "firmwareUpToDate": "Прошивка актуальна:",
+      "genuine": "Устройство подлинное",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
     "applist": {
@@ -1198,8 +1198,8 @@
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
-        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
-        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "useAppForToken": "Хотите управлять токенами {{tokenType}}?",
+        "tokenAppDisclaimer": "Чтобы управлять токенами {{tokenName}} {{tokenType}}, <1>установите приложение {{appName}}</1> и перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия​ <1>{{tokenType}}</1>.",
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Go to accounts",
         "intallParentApp": "Install {{appName}} app"
