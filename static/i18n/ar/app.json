@@ -398,7 +398,7 @@
           "title": "الحسابات",
           "existing": "Existing accounts to scan",
           "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
+          "toScanDescription": "الحسابات المراد فحصها لكل نوع من العناوين",
           "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
         },
         "satstack": {
