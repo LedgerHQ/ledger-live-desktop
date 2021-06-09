@@ -223,7 +223,7 @@
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "Fixed rate",
         "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
+        "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
         "by": "Provided by"
       },
@@ -1288,7 +1288,7 @@
     "steps": {
       "rewards": {
         "title": "المكافآت",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
+        "description": "تهانينا! لقد حصلت على <1>{{amount}}</1> بالتصويت للمدققين.",
         "info": "يمكن الحصول على المكافآت مرة كل 24 ساعة."
       },
       "connectDevice": {
@@ -1527,15 +1527,15 @@
         "voteExisting": "Manage votes"
       },
       "manageTP": "Manage assets",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "تحتاج على الأقل ل {{amount}} لبدء كسب المكافآت",
       "claimRewards": "Claim rewards",
       "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
+      "claimAvailableRewards": "المطالبة بمبلغ {{amount}}",
       "header": "Votes",
       "percentageTP": "% of votes cast",
       "noRewards": "No rewards available",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
+        "title": "لا يزال لديك {{amount}} أصوات متبقية",
         "description": "You can cast your remaining votes to earn more rewards",
         "button": "Vote now"
       },
@@ -1635,7 +1635,7 @@
       "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
       "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
       "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
+      "currentDelegation": "تم تفويض: <0>{{amount}}</0>",
       "estYield": "est. yield",
       "activeTooltip": "Delegated amounts generate rewards",
       "inactiveTooltip": "Undelegated amounts do not generate rewards",
@@ -1683,8 +1683,8 @@
             "compoundOrClaim": "Compound or cash in",
             "compoundDescription": "Rewards will be added to delegated amount",
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
+            "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
+            "claimInfo": "لقد كسبت <0>{{amount}}</0> من المدقق الموضح أدناه. بالنقر على زر المتابعة، سيتم المطالبة به الآن وإضافته تلقائيًا إلى الرصيد المتاح.",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
@@ -1697,7 +1697,7 @@
               "title": "Rewards cashed in successfully",
               "titleCompound": "Rewards compounded successfully",
               "text": "Your rewards were added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
+              "textCompound": "مكافآتك <0>{{amount}}</0> تم تفويضها تلقائيًا إلى <0>{{validator}}</0>",
               "cta": "عرض التفاصيل"
             },
             "pending": {
@@ -1763,7 +1763,7 @@
             "title": "تأكيد",
             "success": {
               "title": "You have successfully undelegated your assets.",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
+              "description": "<0>{{amount}}</0> تم إلغاء تفويضها من <0>{{validator}}</0>",
               "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
@@ -1774,7 +1774,7 @@
   },
   "algorand": {
     "operationHasRewards": "المكافآت المكتسبة",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationEarnedRewards": "لقد كسبت <0>{{amount}}</0> من المكافآت.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> المكافآت المكتسبة)",
     "optIn": {
       "flow": {
@@ -1890,7 +1890,7 @@
     "unlockings": {
       "header": "Unbonding",
       "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
+      "withdrawUnbonded": "سحب ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "Rebond",
@@ -3158,7 +3158,7 @@
       "description": "يرجى التأكد من وجود أرصدة كافية في الحساب."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
       "title": "The ETH balance in the parent account is insufficient for network fees"
@@ -3427,7 +3427,7 @@
       "title": "Insufficient balance in the parent account"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "لا يمكن للرصيد أن يقل عن {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "Please open the {{expected}} app"
