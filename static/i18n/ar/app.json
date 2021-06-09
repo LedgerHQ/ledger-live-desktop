@@ -294,7 +294,7 @@
       "to": "إلى",
       "toProvider": "Provider address",
       "initialAmount": "المبلغ الأولي",
-      "creditedAmount": "المبلغ المقيد"
+      "creditedAmount": "المبلغ المضاف"
     },
     "providers": {
       "title": "Choose a provider to swap crypto",
@@ -1082,11 +1082,11 @@
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "المكافآت المكتسبة",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
+      "bondedAmount": "المبلغ المقيد",
+      "unbondedAmount": "المبلغ الغير مقيد",
+      "withdrawUnbondedAmount": "المبلغ المسحوب",
       "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
+      "transferAmount": "مبلغ التحويل",
       "validatorsCount": "Validators ({{number}})"
     }
   },
@@ -1116,7 +1116,7 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount to send",
+      "amountSent": "المبلغ المراد إرساله",
       "amountReceived": "المبلغ المراد استلامه",
       "amountReceivedFloat": "المبلغ المراد استلامه قبل رسوم الخدمة",
       "fees": "Fees",
@@ -1310,12 +1310,12 @@
     "title": "Freeze assets",
     "steps": {
       "amount": {
-        "title": "Amount",
+        "title": "المبلغ",
         "resourceInfo": "Bandwidth or Energy?",
         "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
         "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
-        "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
+        "amountLabel": "المبلغ المراد تجميده",
+        "available": "متاح: {{amountAvailable}}",
         "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
@@ -1437,8 +1437,8 @@
         "title": "Recipient"
       },
       "amount": {
-        "title": "Amount",
-        "banner": "Maximum spendable amount is",
+        "title": "المبلغ",
+        "banner": "المبلغ الأقصى القابل للإنفاق هو",
         "fees": "Fees",
         "standard": "اعتيادي",
         "advanced": "متقدم"
@@ -1456,7 +1456,7 @@
         "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
-        "amount": "Amount",
+        "amount": "المبلغ",
         "fees": "Network fees",
         "useMax": "Send Max",
         "rippleTag": "Tag",
@@ -1504,7 +1504,7 @@
     "asset": "Asset",
     "price": "Price",
     "distribution": "Allocation",
-    "amount": "Amount",
+    "amount": "المبلغ",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
@@ -1513,7 +1513,7 @@
   "accountDistribution": {
     "account": "حساب",
     "distribution": "Allocation",
-    "amount": "Amount",
+    "amount": "المبلغ",
     "value": "Value",
     "header": "Account allocation ({{count}})"
   },
@@ -1603,7 +1603,7 @@
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
     "strategy": "Coin selection strategy",
     "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
+    "amount": "المبلغ المراد إرساله:",
     "replaceable": "replaceable",
     "cannotSelect": {
       "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
@@ -1748,12 +1748,12 @@
         "title": "Undelegate assets",
         "steps": {
           "amount": {
-            "title": "Amount",
+            "title": "المبلغ",
             "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "amount": "المبلغ المراد إلغاء تفويضه"
             }
           },
           "device": {
