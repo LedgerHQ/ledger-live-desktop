@@ -292,7 +292,7 @@
       "fromAddress": "Origin address",
       "fromAddress_plural": "Origin addresses",
       "to": "إلى",
-      "toProvider": "Provider address",
+      "toProvider": "عنوان المزود",
       "initialAmount": "المبلغ الأولي",
       "creditedAmount": "المبلغ المضاف"
     },
@@ -453,7 +453,7 @@
   },
   "account": {
     "lastOperations": "Latest operations",
-    "contractAddress": "Contract:",
+    "contractAddress": "عقد:",
     "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "No crypto assets yet?",
@@ -493,7 +493,7 @@
   "exchange": {
     "title": "Buy and sell crypto",
     "reset": "Reset flow",
-    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
       "header": "Buy crypto with {{provider}}",
       "title": "Buy crypto via <0>{{provider}}</0>",
@@ -902,9 +902,9 @@
     "transactionsPendingConfirmation": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
   },
   "currentAddress": {
-    "title": "Current address",
-    "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
+    "title": "العنوان الحالي",
+    "for": "عنوان <1><0>{{name}}</0></1>",
+    "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
   },
   "emptyState": {
@@ -1012,7 +1012,7 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypes": "إظهار جميع أنواع العناوين",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
@@ -1064,12 +1064,12 @@
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?",
+    "multipleAddresses": "لماذا عناوين متعددة؟",
     "extra": {
       "frozenAmount": "المبلغ المجمد",
       "unfreezeAmount": "إزالة تجميد المبلغ",
       "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "votesAddress": "<0>{{votes}}</0> إلى <2>{{name}}</2>",
       "validators": "Validators",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
@@ -1455,7 +1455,7 @@
         "from": "من",
         "to": "To",
         "selectAccountDebit": "حساب للخصم منه",
-        "recipientAddress": "Recipient address",
+        "recipientAddress": "عنوان المستلم",
         "amount": "المبلغ",
         "fees": "Network fees",
         "useMax": "Send Max",
@@ -2097,7 +2097,7 @@
     "header": "Delegation",
     "validator": "Validator",
     "yield": "Est. Yield",
-    "address": "Address",
+    "address": "عنوان",
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "المبلغ",
@@ -2984,16 +2984,16 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "عنوان غير صحيح",
+      "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Something went wrong (Error #8)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "عنوان غير معروف",
+      "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
       "title": "Insufficient coins",
@@ -3251,7 +3251,7 @@
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
+      "title": "عنوان استقبال مرفوض",
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UpdateYourApp": {
@@ -3279,17 +3279,17 @@
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "عنوان المستلم هو نفسه عنوان المرسل"
     },
     "CantOpenDevice": {
       "title": "عذرًا، فشل الاتصال",
       "description": "تم اكتشاف الجهاز ولكن فشل الاتصال. يرجى إعادة المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "التحقق التلقائي غير متاح: تحقق بعناية من العنوان",
       "description": null
     },
     "CantScanQRCode": {
