@@ -630,7 +630,7 @@
         "manageLimit": "إدارة الحد",
         "viewDetails": "View details",
         "info": "لقد وافقت على <0>{{amount}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
+        "infoNoLimit": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedWithLimit": "لقد وافقت على <0>{{value}}</0> علي هذا الحساب.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
@@ -1122,7 +1122,7 @@
       "fees": "Fees",
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
-      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -1485,7 +1485,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+          "text": "سيخصم المبلغ الذي سيتم إرساله من رصيد حسابك المفوَّض."
         }
       }
     },
@@ -1637,8 +1637,8 @@
       "reward": "Claim rewards",
       "currentDelegation": "تم تفويض: <0>{{amount}}</0>",
       "estYield": "est. yield",
-      "activeTooltip": "Delegated amounts generate rewards",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards",
+      "activeTooltip": "المبالغ المفوضة تولد المكافآت",
+      "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت",
       "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate",
@@ -1681,7 +1681,7 @@
             "compound": "Compound",
             "claim": "Cash in",
             "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "Rewards will be added to delegated amount",
+            "compoundDescription": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
             "claimInfo": "لقد كسبت <0>{{amount}}</0> من المدقق الموضح أدناه. بالنقر على زر المتابعة، سيتم المطالبة به الآن وإضافته تلقائيًا إلى الرصيد المتاح.",
@@ -1743,7 +1743,7 @@
     "undelegation": {
       "header": "Undelegation(s)",
       "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت.",
       "flow": {
         "title": "Undelegate assets",
         "steps": {
@@ -1900,11 +1900,11 @@
       "title": "Manage assets",
       "bond": {
         "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "لكسب المكافآت، قم أولاً بتقيد مبلغ. ثم يجب عليك ترشيح مدقق (مدققين) لك."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "لإتاحة مبلغ مقيد مرة أخرى، سيكون عليك إلغاء تقيده أولاً. يمكنك سحبه بعد انقضاء فترة إلغاء التقيد الممتدة لفترة 28 يومًا."
       },
       "withdrawUnbonded": {
         "title": "سحب",
