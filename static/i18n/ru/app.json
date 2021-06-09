@@ -1311,12 +1311,12 @@
     "steps": {
       "amount": {
         "title": "Кол-во",
-        "resourceInfo": "Bandwidth or Energy?",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "resourceInfo": "Пропускная способность или Энергия?",
+        "bandwidthDescription": "Для совершения транзакций в сети TRX вместо комиссии используются баллы Пропускной способности (Bandwidth). Чтобы увеличить количество ежедневных бесплатных транзакций, укажите размер Пропускной способности.",
+        "energyDescription": "Для исполнения смарт-контрактов необходимы баллы Энергии. Если вы не используете смарт-контракты, то нет нужны получать вознаграждения в баллах Энергии.",
         "amountLabel": "Amount to freeze",
         "available": "Доступно: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "info": "Замороженные активы нельзя передавать в течение 3 дней."
       },
       "connectDevice": {
         "title": "Устройство"
@@ -1343,8 +1343,8 @@
     "title": "Unfreeze assets",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "Разморозить",
+        "info": "Разморозка приведёт к уменьшению {{resource}} и аннулированию голосов."
       },
       "connectDevice": {
         "title": "Устройство"
@@ -1439,9 +1439,9 @@
       "amount": {
         "title": "Кол-во",
         "banner": "Maximum spendable amount is",
-        "fees": "Fees",
-        "standard": "Standard",
-        "advanced": "Advanced"
+        "fees": "Комиссия",
+        "standard": "Стандартная",
+        "advanced": "Дополнительно"
       },
       "summary": {
         "title": "Summary"
@@ -1743,7 +1743,7 @@
     "undelegation": {
       "header": "Undelegation(s)",
       "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "inactiveTooltip": "Без делегирования средства не приносят вознаграждения.",
       "flow": {
         "title": "Undelegate assets",
         "steps": {
@@ -1752,7 +1752,7 @@
             "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
-              "validator": "Validator",
+              "validator": "Валидатор",
               "amount": "Сумма отзыва делегирования"
             }
           },
@@ -1873,7 +1873,7 @@
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "oversubscribedTooltip": "Вознаграждения получают только лучшие номинаторы {{maxNominatorRewardedPerValidator}} с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
@@ -1884,8 +1884,8 @@
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "showAllUnlockings": "Показать все разблокируемые средства ({{count}})",
+      "hideAllUnlockings": "Скрыть разблокируемые суммы"
     },
     "unlockings": {
       "header": "Unbonding",
@@ -1900,15 +1900,15 @@
       "title": "Manage assets",
       "bond": {
         "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "description": "Чтобы получить вознаграждение, сначала заблокируйте определённую сумму. Затем вы должны назначить своего(-их) валидатора(-ов)."
       },
       "unbond": {
         "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "Чтобы снова получить доступ к заблокированной сумме, разблокируйте её. Вы сможете вывести средства по прошествии 28 дней после блокировки."
       },
       "withdrawUnbonded": {
         "title": "Withdraw",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "description": "Чтобы вернуть разблокированные средства на баланс, необходимо вывести эту сумму вручную."
       },
       "nominate": {
         "title": "Nominate",
@@ -1916,7 +1916,7 @@
       },
       "chill": {
         "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "description": "Удалить все назначения. Вы перестанете получать вознаграждения. Ваша заблокированная сумма останется заблокированной."
       }
     },
     "nominate": {
@@ -1970,10 +1970,10 @@
         "amount": {
           "title": "Кол-во",
           "amountLabel": "Сумма для блокировки",
-          "availableLabel": "Available",
-          "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "availableLabel": "Доступно",
+          "maxLabel": "Макс.",
+          "info": "Блокированные активы можно разблокировать в любой момент, но этот процесс занимает 28 дней.",
+          "learnMore": "Подробнее"
         },
         "connectDevice": {
           "title": "Устройство"
@@ -2004,10 +2004,10 @@
         "amount": {
           "title": "Кол-во",
           "amountLabel": "Сумма для повторной блокировки",
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max",
+          "availableLabel": "Разблокировка",
+          "maxLabel": "Макс.",
           "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "learnMore": "Подробнее"
         },
         "connectDevice": {
           "title": "Устройство"
@@ -2033,8 +2033,8 @@
         "amount": {
           "title": "Кол-во",
           "amountLabel": "Сумма для разблокировки",
-          "availableLabel": "Bonded",
-          "maxLabel": "Max",
+          "availableLabel": "Заблокировано",
+          "maxLabel": "Макс.",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
           "learnMore": "Learn More"
         },
@@ -2957,7 +2957,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "Вы не можете уменьшить подтверждённую сумму, пока у вас имеется активная транзакция на пополнения."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
