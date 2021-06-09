@@ -1284,20 +1284,20 @@
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "المطالبة بالمكافآت",
     "steps": {
       "rewards": {
         "title": "المكافآت",
         "description": "تهانينا! لقد حصلت على <1>{{amount}}</1> بالتصويت للمدققين.",
-        "info": "يمكن الحصول على المكافآت مرة كل 24 ساعة."
+        "info": "يمكن المطالبة بالمكافآت مرة كل 24 ساعة."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "الجهاز"
       },
       "confirmation": {
         "title": "تأكيد",
         "success": {
-          "title": "Rewards claimed",
+          "title": "المكافآت المطالب بها",
           "text": "تمت إضافة مكافآتك إلى رصيدك المتاح.",
           "cta": "عرض التفاصيل",
           "done": "تم"
@@ -1528,8 +1528,8 @@
       },
       "manageTP": "Manage assets",
       "warnEarnRewards": "تحتاج على الأقل ل {{amount}} لبدء كسب المكافآت",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
+      "claimRewards": "المطالبة بالمكافآت",
+      "nextRewardsDate": "يمكن المطالبة بالمكافآت بتاريخ {{date}}",
       "claimAvailableRewards": "المطالبة بمبلغ {{amount}}",
       "header": "Votes",
       "percentageTP": "% of votes cast",
@@ -1625,7 +1625,7 @@
         "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
-      "claimRewards": "Claim rewards",
+      "claimRewards": "المطالبة بالمكافآت",
       "header": "Delegation(s)",
       "noRewards": "No rewards available",
       "delegate": "Add",
@@ -1634,7 +1634,7 @@
       "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
       "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
       "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
+      "reward": "المطالبة بالمكافآت",
       "currentDelegation": "تم تفويض: <0>{{amount}}</0>",
       "estYield": "est. yield",
       "activeTooltip": "المبالغ المفوضة تولد المكافآت",
@@ -1674,7 +1674,7 @@
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "المطالبة بالمكافآت",
         "steps": {
           "claimRewards": {
             "title": "المكافآت",
@@ -1688,7 +1688,7 @@
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "جهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1804,17 +1804,17 @@
     "claimRewards": {
       "header": "المكافآت",
       "tooltip": "يتم توزيع مكافآت Algorand بشكل منتظم وتتم المطالبة بها تلقائيًا عندما تجري إحدى المعاملات.",
-      "cta": "Claim rewards",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "cta": "المطالبة بالمكافآت",
+      "rewardsDisabledTooltip": "ليس لديك أي مكافآت. تتم المطالبة بمكافآت Algorand تلقائيًا عندما تجري معاملة. قم بتلقي ALGO لبدء كسب المكافآت.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "المطالبة بالمكافآت",
         "steps": {
           "starter": {
             "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
             "bullet": {
               "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
               "access": "Increase the account’s balance to increase rewards.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "ledger": "قم بتنفيذ معاملة إلى الحساب أو منه للحصول على مكافآت."
             },
             "learnMore": "كيف تعمل مكافآت ألغوراند (Algorand)؟",
             "button": {
@@ -1823,7 +1823,7 @@
           },
           "info": {
             "title": "المكافآت",
-            "description": "تهانينا! لقد كسبت {{amount}}. انقر على الاستمرار للحصول على مكافآتك",
+            "description": "تهانينا! لقد كسبت {{amount}}. انقر على متابعة للمطالبة بمكافآتك",
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
@@ -1832,7 +1832,7 @@
           "confirmation": {
             "title": "تأكيد",
             "success": {
-              "title": "Rewards successfully claimed!",
+              "title": "تمت المطالبة بالمكافآت بنجاح!",
               "text": "Your rewards were added to your available balance",
               "cta": "View details"
             },
@@ -2101,7 +2101,7 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "المبلغ",
-    "delegated": "Delegated",
+    "delegated": "تفويض",
     "completionDate": "Completion date",
     "rewards": "المكافآت",
     "duration": "Duration",
@@ -2953,7 +2953,7 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "المكافآت أصغر من الرسوم المقدرة للمطالبة بهم",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
@@ -3377,11 +3377,11 @@
       "description": "You can only vote using round numbers"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "المكافأة غير قابلة للمطالبة بها بعد",
+      "description": "يجب أن تنتظر 24 ساعة بين المطالبات"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "لا توجد مكافأة للمطالبة بها"
     },
     "TronInvalidFreezeAmount": {
       "title": "لا يمكن أن يكون المبلغ المراد تجميده أقل من 1"
