@@ -482,8 +482,8 @@
     "bandwidth": "Пропускная способность",
     "energy": "Энергия",
     "delegatedAssets": "Делегированные активы",
-    "undelegating": "Undelegating",
-    "availableBalanceTooltip": "This amount is disposable.",
+    "undelegating": "Отзыв средств",
+    "availableBalanceTooltip": "Это сумма токенов в вашем распоряжении.",
     "frozenAssetsTooltip": "Замороженные активы используются в процедуре голосования в сети Tron. От них зависит количество ваших голосов.",
     "bandwidthTooltip": "Заморозить активы для увеличения пропускной способности",
     "energyTooltip": "Заморозить активы для увеличения энергии",
@@ -491,21 +491,21 @@
     "undelegatingTooltip": "Отозванные активы блокируются на 21 день, прежде чем вы сможете их получить."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
+    "title": "Покупка и продажа криптовалюты",
     "reset": "Reset flow",
-    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "verifyAddress": "Убедитесь, что показанный адрес в точности совпадает с адресом на экране устройства",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
-      "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
+      "header": "Покупка криптовалюты через {{provider}}",
+      "title": "Покупка криптовалюты через <0>{{provider}}</0>",
+      "tab": "Покупка",
+      "selectCrypto": "Выберите криптоактив",
       "selectAccount": "Выберите счёт",
       "continue": "Продолжить",
       "addAccount": "Добавить счёт"
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
-      "title": "Sell crypto via <0>{{provider}}</0>",
+      "header": "Продажа криптовалюты через {{provider}}",
+      "title": "Продажа криптовалюты через <0>{{provider}}</0>",
       "tab": "Продажа",
       "selectCrypto": "Выберите криптоактив",
       "selectAccount": "Выберите счёт",
@@ -515,13 +515,13 @@
       "tab": "История"
     },
     "providers": {
-      "title": "Choose a provider to buy crypto",
-      "learnMore": "What is buy?",
+      "title": "Выберите поставщика услуг для покупки криптовалюты",
+      "learnMore": "Что такое Покупка?",
       "coinify": {
         "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
-          "SEPA & Faster Payments",
+          "Доступно в 130+ странах",
+          "EUR, USD, GBP и 32 других",
+          "SEPA и более быстрые платежи",
           "Местные переводы по США",
           "Кредитные и дебетовые карты"
         ]
@@ -762,9 +762,9 @@
     },
     "emptyAccountDeposit": {
       "title": "You don't have any {{ asset }} account.",
-      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
-      "ctaBuy": "Buy {{ asset }}",
-      "ctaReceive": "Receive {{ asset }}"
+      "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ asset }}. Получите средства на свой Ethereum-адрес.",
+      "ctaBuy": "Купить {{ asset }}",
+      "ctaReceive": "Получить {{ asset }}"
     }
   },
   "accounts": {
@@ -837,49 +837,49 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
+      "title": "Для изменения экспериментальных настроек необходимо очистить кэш",
       "cta": "Очистить кэш"
     },
     "migrate": "Доступно обновление счетов в Ledger Live",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается",
     "valentine": {
       "title": "День святого Валентина",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "description": "В честь нашей любви Ledger снижает комиссию за покупку и продажу через Ledger Live"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "description": "Всё, что вам нужно знать о блокчейне, безопасности, криптовалюте и вашем устройстве Ledger",
+      "cta": "Начать обучение"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "Стейкинг COSMOS",
+      "description": "Делегируйте токены ATOM на странице счёта и начните получать вознаграждения",
+      "cta": "Стейкировать COSMOS"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "title": "Покупайте криптовалюту",
+      "description": "Покупайте криптоактивы через нашего партнёра и получайте их непосредственно на счёт в Ledger.",
+      "cta": "Купить"
     },
     "backupPack": {
-      "title": "Back-up pack",
+      "title": "Резервный набор",
       "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "cta": "Купить резервный набор"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
+      "title": "Стейкинг POLKADOT",
       "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "Продавайте криптовалюту",
+      "description": "Продавайте биткойны через нашего партнёра прямо в Ledger Live"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
+      "title": "Стейкинг ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     },
     "swap": {
-      "title": "Swap crypto",
+      "title": "Обмен криптовалюты",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
@@ -1084,10 +1084,10 @@
       "rewards": "Заработанные вознаграждения",
       "bondedAmount": "Заблокированная сумма",
       "unbondedAmount": "Разблокированная сумма",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "withdrawUnbondedAmount": "Выведенная сумма",
+      "palletMethod": "Способ",
+      "transferAmount": "Сумма перевода",
+      "validatorsCount": "Валидаторы ({{number}})"
     }
   },
   "operationList": {
