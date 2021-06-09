@@ -2575,11 +2575,11 @@
           "deviceHowTo2": {
             "turnOn": {
               "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "descr": "قم بتوصيل جهازك بجهاز الكمبيوتر الخاص بك باستخدام كابل USB."
             },
             "browse": {
               "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
             },
             "select": {
               "title": "Select “Enter your recovery phrase”",
@@ -3044,11 +3044,11 @@
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "An unexpected error occurred. Please try again"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
@@ -3112,7 +3112,7 @@
       "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
+      "title": "جهازك مقفل",
       "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
@@ -3244,10 +3244,10 @@
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "description": "رفض المستخدم العملية على الجهاز"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
+      "title": "تم رفض العملية على الجهاز",
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UserRefusedAddress": {
@@ -3260,7 +3260,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
-      "description": "Please navigate back to the Dashboard on your device"
+      "description": "يرجى العودة إلى لوحة المعلومات على جهازك"
     },
     "WebsocketConnectionError": {
       "title": "عذرًا، حاول مرة أخرى (خطأ في الاتصال)",
