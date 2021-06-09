@@ -629,7 +629,7 @@
         "approve": "موافقة",
         "manageLimit": "إدارة الحد",
         "viewDetails": "View details",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "info": "لقد وافقت على <0>{{amount}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
         "approvedWithLimit": "لقد وافقت على <0>{{value}}</0> علي هذا الحساب.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
@@ -1775,7 +1775,7 @@
   "algorand": {
     "operationHasRewards": "المكافآت المكتسبة",
     "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> المكافآت المكتسبة)",
     "optIn": {
       "flow": {
         "title": "Add ASA (Asset)",
@@ -1859,7 +1859,7 @@
       "nominate": "Nominate",
       "chill": "Clear nominations",
       "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
+      "amount": "المبلغ المقيد",
       "commission": "Commission",
       "active": "Active",
       "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
@@ -1968,8 +1968,8 @@
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
+          "title": "المبلغ",
+          "amountLabel": "المبلغ المراد تقيده",
           "availableLabel": "Available",
           "maxLabel": "Max",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
@@ -2002,11 +2002,11 @@
       "title": "Rebond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
+          "title": "المبلغ",
+          "amountLabel": "المبلغ المراد إعادة تقيده",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
+          "info": "تتم إضافة الأصول المعاد ربطها على الفور إلى المبلغ المربوط.",
           "learnMore": "Learn More"
         },
         "connectDevice": {
@@ -2031,8 +2031,8 @@
       "title": "Unbond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
+          "title": "المبلغ",
+          "amountLabel": "المبلغ المراد إلغاء تقيده",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
@@ -2100,7 +2100,7 @@
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
-    "amount": "Amount",
+    "amount": "المبلغ",
     "delegated": "Delegated",
     "completionDate": "Completion date",
     "rewards": "المكافآت",
@@ -2946,7 +2946,7 @@
       "title": "Recipient account has not opted in the selected ASA."
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "المبلغ المطلوب"
     },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
@@ -3384,7 +3384,7 @@
       "title": "There is no reward to claim"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "لا يمكن أن يكون المبلغ المراد تجميده أقل من 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Sending TRC20 to a new account won't activate it",
