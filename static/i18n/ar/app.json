@@ -649,7 +649,7 @@
       "title": "الموافقة على الحساب",
       "steps": {
         "selectAccount": {
-          "title": "اختيار الحساب",
+          "title": "اختار الحساب",
           "selectLabel": "Account to lend from",
           "cta": "Approve",
           "alreadyEnabled": "تمت الموافقة على هذا الحساب"
@@ -1002,8 +1002,8 @@
     "fullNodeConfigure": "Configure node",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
+    "selectAll": "اختار كل ({{count}})",
+    "unselectAll": "إلغاء اختيار كل ({{count}})",
     "noAccountToImport": "No existing {{currencyName}} accounts to add",
     "success": "Account added successfully",
     "success_plural": "Accounts added successfully",
@@ -1369,7 +1369,7 @@
         "title": "Vote",
         "search": "البحث عن طريق الاسم أو العنوان...",
         "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
+        "selected": "تم اختيار: {{total}}",
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All assets are distributed",
         "maxUsed": "Insufficient assets",
@@ -1592,7 +1592,7 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
+    "inputSelected": "تم الاختيار",
     "toSpend": "Coins to spend",
     "toReturn": "Change to return",
     "modalTitle": "Coin control",
@@ -1602,12 +1602,12 @@
     "whatIs": "What is coin selection?",
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
     "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
+    "selected": "النقود المختارة للإستراتيجية",
     "amount": "المبلغ المراد إرساله:",
     "replaceable": "replaceable",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "unconfirmed": "لا يمكنك اختيار نقود من المعاملات الغير مؤكدة و القابلة للاستبدال.",
+      "last": "تحتاج أن تختار على الاقل واحد"
     },
     "pending": "pending",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
@@ -1685,7 +1685,7 @@
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
             "claimInfo": "لقد كسبت <0>{{amount}}</0> من المدقق الموضح أدناه. بالنقر على زر المتابعة، سيتم المطالبة به الآن وإضافته تلقائيًا إلى الرصيد المتاح.",
-            "selectLabel": "حدد تفويضًا"
+            "selectLabel": "اختار تفويضًا"
           },
           "connectDevice": {
             "title": "الجهاز"
@@ -2138,7 +2138,7 @@
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
-          "select": "Select",
+          "select": "اختار",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
@@ -2560,7 +2560,7 @@
             },
             "select": {
               "title": "اختار \"إعداد كجهاز جديد\"",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "descr": "اضغط على كلا الزرين في وقت واحد للتحقق من صحة الاختيار."
             },
             "follow": {
               "title": "Follow instructions",
@@ -2582,7 +2582,7 @@
               "descr": "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
+              "title": "اختار \"أدخل عبارة الاسترداد\"",
               "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
