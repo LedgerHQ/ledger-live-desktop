@@ -8,12 +8,12 @@
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "Выберите счёт"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "Транзакция отправлена!",
+          "text": "Нажмите сюда, чтобы посмотреть детали операции"
         }
       }
     }
@@ -126,15 +126,15 @@
     "hour": "час",
     "hour_plural": "часов",
     "range": {
-      "day": "1D",
+      "day": "1Д",
       "week": "1Н",
       "month": "1М",
       "year": "1Г",
-      "all": "ALL"
+      "all": "ВСЕ"
     }
   },
   "fees": {
-    "advanced": "Advanced",
+    "advanced": "Дополнительно",
     "custom": "Пользовательская",
     "fast": "Быстро",
     "high": "Высокая",
@@ -522,17 +522,17 @@
           "Available in 130+ countries",
           "EUR, USD, GBP and 32 others",
           "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
+          "Местные переводы по США",
+          "Кредитные и дебетовые карты"
         ]
       },
       "wyre": {
         "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
+          "Только банковский счёт 🇺🇸",
+          "Поддерживается только USD",
+          "Поддерживается 20+ криптовалют",
+          "ACH-переводы",
+          "Кредитные и дебетовые карты не поддерживаются"
         ]
       }
     }
@@ -1102,10 +1102,10 @@
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
-    "appNotInstalledTitle": "Missing required app",
-    "appNotInstalledTitle_plural": "Missing required apps",
-    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
-    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
+    "appNotInstalledTitle": "Отсутствует необходимое приложение",
+    "appNotInstalledTitle_plural": "Отсутствуют необходимые приложения",
+    "appNotInstalled": "Для этого действия необходимо приложение {{appName}}. Пожалуйста, перейдите в Диспетчер и установите его на ваше устройство",
+    "appNotInstalled_plural": "Для этого действия необходимы приложения {{appName}}. Пожалуйста, перейдите в Диспетчер и установите их на устройство",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
@@ -1494,7 +1494,7 @@
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "Подписать транзакцию"
   },
   "releaseNotes": {
     "title": "Сведения о версии",
@@ -2399,7 +2399,7 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "News",
-      "operation": "Operation"
+      "operation": "Операция"
     }
   },
   "informationCenter": {
@@ -2867,7 +2867,7 @@
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "Всегда проверяйте детали операции на вашем устройстве.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
