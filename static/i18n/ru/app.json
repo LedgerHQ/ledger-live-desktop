@@ -777,11 +777,11 @@
       "balance|desc": "Наибольшее кол-во"
     },
     "range": {
-      "day": "Day",
+      "day": "День",
       "week": "Неделя",
       "month": "Месяц",
       "year": "Год",
-      "all": "All"
+      "all": "Все"
     },
     "optionsMenu": {
       "title": "Параметры",
@@ -792,58 +792,58 @@
       "star": "В избранное",
       "receive": "Получить",
       "send": "Отправить",
-      "swap": "Swap",
-      "buy": "Buy",
-      "sell": "Sell",
-      "edit": "Edit account",
-      "hideToken": "Hide token"
+      "swap": "Обмен",
+      "buy": "Покупка",
+      "sell": "Продажа",
+      "edit": "Редактировать счёт",
+      "hideToken": "Скрыть токен"
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "Поддержка",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "Начало работы",
+      "desc": "Начните отсюда"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Состояние Ledger",
+      "desc": "Проверьте состояние нашей системы"
     },
     "helpCenter": {
-      "title": "Ledger Support",
-      "desc": "Get help"
+      "title": "Поддержка Ledger",
+      "desc": "Получить помощь"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "desc": "Подробнее о криптовалюте"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "Поставьте лайк нашей странице"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "Подписаться"
     },
     "github": {
-      "title": "Github",
-      "desc": "Review our code"
+      "title": "GitHub",
+      "desc": "Изучите наш код"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "Скрыть токен",
+    "desc": "Это действие скроет все токены <1><0>{{tokenName}}</0></1>. Вы можете снова отобразить их в <3>Настройках</3>",
+    "hideCTA": "Скрыть токен"
   },
   "banners": {
     "cleanCache": {
       "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "cta": "Очистить кэш"
     },
     "migrate": "Доступно обновление счетов в Ledger Live",
     "genericTerminatedCrypto": "{{coinName}} больше не поддерживается",
     "valentine": {
-      "title": "Valentine’s day",
+      "title": "День святого Валентина",
       "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
     },
     "ledgerAcademy": {
@@ -3048,7 +3048,7 @@
       "description": "An unexpected error occurred. Please try again"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "Перезагрузите устройство Ledger и повторите попытку",
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
@@ -3056,11 +3056,11 @@
       "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "Извините, похоже, ваше устройство отключено",
       "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "Извините, похоже, ваше устройство отключено",
       "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
@@ -3112,7 +3112,7 @@
       "description": "Сначала придётся удалить все приложения, необходимые для работы {{appName}}"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
+      "title": "Ваше устройство заблокировано",
       "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
@@ -3244,10 +3244,10 @@
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "description": "Пользователь отклонил операцию на устройстве"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
+      "title": "Операция отклонена на устройстве",
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
@@ -3260,7 +3260,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
-      "description": "Please navigate back to the Dashboard on your device"
+      "description": "Пожалуйста, переключитесь на Dashboard (Панель управления) на устройстве."
     },
     "WebsocketConnectionError": {
       "title": "Пожалуйста, попробуйте ещё раз (ошибка соединения)",
@@ -3350,8 +3350,8 @@
       "description": "Install the latest Bitcoin and Ethereum apps first."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "Переименование отменено на устройстве",
+      "description": "Повторите попытку и разрешите переименование на вашем устройстве"
     },
     "SyncError": {
       "title": "Synchronization error",
