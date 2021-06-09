@@ -917,12 +917,12 @@
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
+      "title": "Чтобы начать, добавьте счёт",
       "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
       "buttons": {
         "addAccount": "Добавить счёт",
         "installApp": "Для установки приложений перейдите в Диспетчер",
-        "help": "Help"
+        "help": "Помощь"
       }
     }
   },
@@ -934,7 +934,7 @@
     "cta": "Добавить токен",
     "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "Подробнее",
-    "seeTokens": "Show tokens ({{tokenCount}})",
+    "seeTokens": "Показать токены ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
     "countTooltip": "1 токен",
     "countTooltip_plural": "{{count}} токенов",
@@ -1005,14 +1005,14 @@
     "selectAll": "Выбрать все ({{count}})",
     "unselectAll": "Отменить выбор всех ({{count}})",
     "noAccountToImport": "Нет существующих счетов {{currencyName}} для добавления",
-    "success": "Счёт успешно добавлен",
-    "success_plural": "Accounts added successfully",
-    "successDescription": "Add other accounts or return to Portfolio",
-    "successDescription_plural": "Add other accounts or return to Portfolio",
+    "success": "Счёт добавлен",
+    "success_plural": "Счета добавлены",
+    "successDescription": "Добавьте больше счетов или вернитесь в Портфель",
+    "successDescription_plural": "Добавьте больше счетов или вернитесь в Портфель",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypes": "Показать все типы адресов",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
@@ -1022,8 +1022,8 @@
       "addMore": "Добавить ещё",
       "add": "Добавить счёт",
       "add_plural": "Добавить счета",
-      "addAccountName": "Add {{currencyName}} account",
-      "receive": "Receive"
+      "addAccountName": "Добавить счёт {{currencyName}}",
+      "receive": "Получить"
     },
     "sections": {
       "importable": {
@@ -1041,7 +1041,7 @@
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
+    "whatIsThis": "Что это за операция?",
     "title": "Сведения об операции",
     "account": "Счёт",
     "date": "Дата",
@@ -1049,7 +1049,7 @@
     "confirmed": "Подтверждена",
     "failed": "Неудачно",
     "notConfirmed": "Неподтверждённая",
-    "fees": "Fee",
+    "fees": "Комиссия",
     "noFees": "Без комиссии",
     "from": "Откуда",
     "to": "Куда",
@@ -1058,7 +1058,7 @@
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
     "tokenOperations": "Операции с токеном",
-    "subAccountOperations": "Subaccount operations",
+    "subAccountOperations": "Операции с субсчетами",
     "tokenTooltip": "Эта операция связана с следующими операциями токена",
     "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Внутренние операции",
@@ -1066,24 +1066,24 @@
     "details": "{{ currency }}: сведения",
     "multipleAddresses": "Почему несколько адресов?",
     "extra": {
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
-      "validators": "Validators",
-      "redelegated": "Redelegated",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
-      "redelegatedAmount": "Redelegated amount",
+      "frozenAmount": "Замороженная сумма",
+      "unfreezeAmount": "Разморозить сумму",
+      "votes": "Голоса ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> за <2>{{name}}</2>",
+      "validators": "Валидаторы",
+      "redelegated": "Переделегировано",
+      "redelegatedFrom": "Повторно делегировано из",
+      "redelegatedTo": "Повторно делегировано",
+      "redelegatedAmount": "Переделегированная сумма",
       "undelegated": "Отозванные",
       "undelegatedFrom": "Отозваны с",
       "undelegatedAmount": "Отозванная сумма",
-      "rewardFrom": "Reward from",
+      "rewardFrom": "Вознаграждение от",
       "memo": "Memo",
-      "assetId": "Asset ID",
-      "rewards": "Earned rewards",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
+      "assetId": "ID актива",
+      "rewards": "Заработанные вознаграждения",
+      "bondedAmount": "Заблокированная сумма",
+      "unbondedAmount": "Разблокированная сумма",
       "withdrawUnbondedAmount": "Withdrawn Amount",
       "palletMethod": "Method",
       "transferAmount": "Transfer Amount",
@@ -1097,7 +1097,7 @@
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
     "allowManagerPermission": "Allow {{wording}} on your device",
-    "loading": "Loading...",
+    "loading": "Загружаем...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Разблокируйте устройство",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
@@ -1115,11 +1115,11 @@
     "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction",
+      "confirm": "Подтвердить обмен",
       "amountSent": "Amount to send",
       "amountReceived": "Amount to receive",
       "amountReceivedFloat": "Amount to receive before service fees",
-      "fees": "Fees",
+      "fees": "Комиссия",
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
       "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
@@ -1236,7 +1236,7 @@
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "downloadingUpdateDesc": "Подождите, пока загрузится программа установки обновлений"
     },
     "modal": {
       "steps": {
@@ -1467,8 +1467,8 @@
       },
       "verification": {
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "Загружаем... ({{percentage}})",
+          "inaccurate": "Загружаем..."
         }
       },
       "confirmation": {
