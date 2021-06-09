@@ -1200,49 +1200,49 @@
         "removeTooltip": "Uninstall {{appName}}",
         "useAppForToken": "Хотите управлять токенами {{tokenType}}?",
         "tokenAppDisclaimer": "Чтобы управлять токенами {{tokenName}} {{tokenType}}, <1>установите приложение {{appName}}</1> и перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия​ <1>{{tokenType}}</1>.",
-        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "goToAccounts": "Go to accounts",
-        "intallParentApp": "Install {{appName}} app"
+        "tokenAppDisclaimerInstalled": "Чтобы управлять токенами <1>{{tokenName}} {{tokenType}}</1>, перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия <1>{{tokenType}}</1>.",
+        "goToAccounts": "Перейти к Счетам",
+        "intallParentApp": "Установить приложение {{appName}}"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "title": "Удалить все",
+        "subtitle": "Удалить все приложения?",
+        "description": "Не волнуйтесь, удаление приложений не повлияет на криптоактивы. Позже вы можете повторно установить приложения из Каталога приложений."
       }
     },
     "apps": {
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
-        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "title": "Требуется приложение {{dependency}}",
+        "description": "Также будет установлено приложение {{dependency}}, потому что оно необходимо для работы {{app}}.",
+        "confirm": "Установить приложения"
       },
       "dependencyUninstall": {
-        "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "title": "Удалить {{app}} и связанные с ним приложения?",
+        "showAll": "Показать приложения для удаления",
+        "description": "Некоторые из установленных вами приложений связаны с приложением {{app}}. Они также будут удалены.",
+        "confirm": "Удалить {{app}} и другие приложения"
       }
     },
     "firmware": {
-      "updateLater": "Cancel",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase? ",
-      "followTheGuide": "Follow our step by step update guide",
-      "removeApps": "Uninstall all apps before updating",
-      "update": "Firmware update",
-      "updateBtn": "Update firmware",
+      "updateLater": "Отменить",
+      "seedReady": "У меня есть фраза восстановления",
+      "dontHaveSeed": "У вас нет фразы для восстановления?",
+      "followTheGuide": "Воспользуйтесь нашим пошаговым руководством по обновлению",
+      "removeApps": "Перед обновлением удалите все приложения",
+      "update": "Обновление прошивки",
+      "updateBtn": "Обновить прошивку",
       "latest": "Доступна новая версия прошивки {{version}}",
-      "contactSupport": "Contact support",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
+      "contactSupport": "Связаться с поддержкой",
+      "deprecated": "Версия прошивки устройства устарела и не может быть обновлена. Обратитесь в службу поддержки Ledger для решения этого вопроса.",
+      "prepareSeed": "Запишите фразу восстановления из 24 слов на лист восстановления и убедитесь, что в крайнем случае к ней будет доступ.",
+      "disclaimerTitle": "Вы собираетесь установить <1>прошивку версии {{version}}</1>.",
       "downloadingUpdateDesc": "Подождите, пока загрузится программа установки обновлений"
     },
     "modal": {
       "steps": {
         "downloadingUpdate": "Загружаем обновление",
         "updateMCU": "Обновление прошивки",
-        "updating": "Firmware update",
+        "updating": "Обновление прошивки",
         "reset": "Подготовка устройства",
         "osu": "Устанавливаем обновление ОС...",
         "flash-mcu": "Обновление микроконтроллера...",
@@ -1251,21 +1251,21 @@
         "flash": "Готовим ваше устройстве..."
       },
       "confirmIdentifier": "Проверка идентификатора",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
+      "confirmIdentifierText": "Убедитесь, что идентификатор на устройстве совпадает с идентификатором ниже. При необходимости подтвердите и введите PIN-код.",
       "identifier": "Идентификатор",
       "mcuTitle": "Завершение обновления",
       "mcuFirst": "Отсоедините USB-кабель от устройства",
       "mcuSecond": "Нажмите и удерживайте левую кнопку во время повторного подключения USB-кабеля до тех пор пока на экране не появится <0>{{repairProcessing}}</0></1>",
-      "mcuPin": "Please wait for the update to finish",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
+      "mcuPin": "Дождитесь завершения обновления",
+      "mcuSecondNanoX": "Нажмите и удерживайте левую кнопку, пока не появится <1><0>{{bootloaderOption}}</0></1>. Нажмите обе кнопки, чтобы подтвердить и повторно подключить устройство.",
       "mcuBlueFirst": "Нажмите и удерживайте боковую кнопку в течение 10 секунд, чтобы отключить устройство. Затем отпустите кнопку.",
       "mcuBlueSecond": "Нажмите и удерживайте кнопку не менее 5 секунд до тех пор, пока не увидите варианты загрузки. Выберите режим Bootloader",
       "successTitle": "Прошивка обновлена",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
-      "cancelReinstallCTA": "Install update",
+      "successTextApps": "Переустановите приложения на устройстве",
+      "successTextNoApps": "Теперь вы можете устанавливать приложения на устройство",
+      "sucessCTAApps": "Переустановить приложения",
+      "SuccessCTANoApps": "Установить приложения",
+      "cancelReinstallCTA": "Установить обновление",
       "resetSteps": {
         "first": "1. Сбросьте устройство",
         "connect": "Подключите {{deviceName}} к компьютеру с помощью USB-кабеля.",
