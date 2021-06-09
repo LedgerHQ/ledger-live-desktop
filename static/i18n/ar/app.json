@@ -199,7 +199,7 @@
     },
     "kyc": {
       "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
+      "subtitle": "بادل الأصول المشفرة مباشرة من جهاز ليدجر (Ledger) الخاص بك. هذه الخدمة غير متوفرة في الولايات المتحدة وعدد من البلدان الأخرى.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
