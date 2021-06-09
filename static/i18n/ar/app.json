@@ -159,7 +159,7 @@
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
-    "openHeader": "Expose your Device accounts through WebSocket",
+    "openHeader": "اكشف حسابات جهازك من خلال WebSocket",
     "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
     "openedHeader": "{{appName}} bridge opened",
     "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
@@ -193,7 +193,7 @@
       "cta": "Go to manager"
     },
     "outdatedApp": {
-      "title": "Please update the {{appName}} app on your device",
+      "title": "يرجى تحديث تطبيق {{appName}} على جهازك",
       "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
@@ -966,7 +966,7 @@
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
+      "footer": "تحتاج إلى جهاز ليدجر (Ledger) لإكمال التحديث",
       "pendingDevices": "تعذر تحديث حساب واحد. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
       "doItLaterBtn": "Do it later"
@@ -1268,7 +1268,7 @@
       "cancelReinstallCTA": "Install update",
       "resetSteps": {
         "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
+        "connect": "قم بتوصيل {{deviceName}} بجهاز الكمبيوتر الخاص بك باستخدام كابل USB.",
         "turnOn": "Press the button on the device to turn it on.",
         "falsePin": "Enter three wrong PINs to reset the device.",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
@@ -2497,24 +2497,24 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasNoRecovery": "أول مرة تستخدم {{deviceName}} الخاص بك؟",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new {{deviceName}}",
+            "title": "إعداد {{deviceName}} جديد",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your {{deviceName}}",
+            "title": "توصيل {{deviceName}} الخاص بك",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "description": "استخدم عبارة استرداد حالية لاستعادة مفاتيحك الخاصة على جهاز {{deviceName}} جديد!"
           }
         }
       },
@@ -2721,7 +2721,7 @@
           "genuineCheck": {
             "success": {
               "title": "All good!",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "desc": "ليدجر {{deviceName}} الخاص بك أصلي وجاهز للاستخدام مع ليدجر لايف (Ledger Live)"
             },
             "buttons": {
               "next": "Continue",
@@ -3339,7 +3339,7 @@
       "description": "Open the '{{managerAppName}}' app on your device"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "يرجى اختيار اسم جهاز بدون '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
@@ -3350,8 +3350,8 @@
       "description": "Install the latest Bitcoin and Ethereum apps first."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "تم إلغاء إعادة التسمية على الجهاز",
+      "description": "حاول مرة أخرى واسمح بإعادة التسمية على جهازك"
     },
     "SyncError": {
       "title": "Synchronization error",
