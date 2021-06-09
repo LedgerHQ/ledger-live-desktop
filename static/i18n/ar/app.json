@@ -100,7 +100,7 @@
       "APPROVE": "موافق عليه",
       "VOTE": "تم التصويت",
       "FREEZE": "تجميد",
-      "UNFREEZE": "إزالة التجميد",
+      "UNFREEZE": "تمت إزالة التجميد",
       "REWARD": "استلام المكافأة",
       "FEES": "رسوم",
       "OPT_IN": "الانضمام",
@@ -1316,7 +1316,7 @@
         "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
         "amountLabel": "المبلغ المراد تجميده",
         "available": "متاح: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "info": "الأصول المجمدة لا يمكن إرسالها لمدة 3 أيام."
       },
       "connectDevice": {
         "title": "Device"
@@ -1340,14 +1340,14 @@
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "إزالة تجميد الأصول",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "إزالة التجميد",
+        "info": "إزالة التجميد ستقلل {{resource}} الخاص بك وستلغي تصويتك."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "جهاز"
       },
       "confirmation": {
         "title": "التأكيد",
@@ -1545,7 +1545,7 @@
             "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
             "bullet": {
               "delegate": "Delegated assets stay yours.",
-              "access": "You can unfreeze your assets after 3 days.",
+              "access": "يمكنك إزالة تجميد أصولك بعد 3 أيام.",
               "ledger": "Freeze and vote securely with your Ledger device."
             },
             "help": "How voting works",
@@ -1561,8 +1561,8 @@
         "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "title": "إزالة التجميد",
+        "description": "قم بإزالة تجميد TRX لإعادتهم مرة أخرى إلى رصيدك المتاح. لن تحصل بعد الآن على مكافآت."
       },
       "vote": {
         "title": "Vote",
@@ -1908,7 +1908,7 @@
       },
       "withdrawUnbonded": {
         "title": "سحب",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "description": "لاسترجاع مبلغ تم إلغاء ربطه في الرصيد المتاح، سيكون عليك سحبه يدويًا."
       },
       "nominate": {
         "title": "Nominate",
@@ -2957,7 +2957,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "لا يمكنك تقليل المبلغ الموافق عليه في حين وجود إيداع نشط."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
@@ -3358,15 +3358,15 @@
       "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": "لا توجد أصول لإزالة تجميدها",
       "description": "You do not have assets to unfreeze associated to Bandwidth"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": "لا توجد أصول لإزالة تجميدها",
       "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": "إزالة التجميد غير متوفر بعد",
       "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
@@ -3433,7 +3433,7 @@
       "title": "Please open the {{expected}} app"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "رسوم الشبكة أعلى من 10% من المبلغ"
     },
     "StellarWrongMemoFormat": {
       "title": "Memo format is wrong"
