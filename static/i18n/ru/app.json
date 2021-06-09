@@ -106,9 +106,9 @@
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
       "CLOSE_ACCOUNT": "Закрыть счёт",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "BOND": "Заблокировать",
+      "UNBOND": "Разблокировать",
+      "REWARD_PAYOUT": "Вознаграждение",
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
@@ -142,7 +142,7 @@
     "slow": "Медленно",
     "standard": "Обычная",
     "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "feesAmount": "Размер комиссии"
   },
   "sidebar": {
     "menu": "Меню",
@@ -283,17 +283,17 @@
       "statusTooltips": {
         "expired": "Чтобы решить эту проблему, обратитесь к поставщику услуг обмена и сообщите ID операции.",
         "refunded": "Для получения дополнительной информации обратитесь к поставщику услуг обмена и сообщите ID операции.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "pending": "Подождите, поставщик услуг обмена обрабатывает транзакцию.",
+        "onhold": "Чтобы решить эту проблему, обратитесь к поставщику услуг обмена и сообщите ID операции.",
+        "finished": "Обмен успешно произведён."
       },
       "date": "Дата",
       "from": "Откуда",
-      "fromAddress": "Origin address",
-      "fromAddress_plural": "Origin addresses",
+      "fromAddress": "Адрес отправителя",
+      "fromAddress_plural": "Адреса отправителя(-ей)",
       "to": "Куда",
-      "toProvider": "Provider address",
-      "initialAmount": "Initial amount",
+      "toProvider": "Адрес поставщика услуг",
+      "initialAmount": "Начальная сумма",
       "creditedAmount": "Credited amount"
     },
     "providers": {
