@@ -8,7 +8,7 @@
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "اختر حسابًا"
+        "title": "اختار حسابًا"
       },
       "broadcast": {
         "toast": {
@@ -33,9 +33,9 @@
     "help": "مساعدة",
     "needHelp": "بحاجة إلى مساعدة؟",
     "areYouSure": "هل أنت متأكد؟",
-    "selectAccount": "اختر حسابًا",
+    "selectAccount": "اختار حسابًا",
     "selectAccountNoOption": "لا يوجد حساب مطابق \"{{accountName}}\"",
-    "selectCurrency": "اختر أصل مشفّر",
+    "selectCurrency": "اختار أصل مشفّر",
     "selectCurrencyNoOption": "لا يوجد أصل مشفّر \"{{currencyName}}\"",
     "selectValidatorNoOption": "لا يوجد مدقق مطابق\"{{accountName}}\"",
     "selectNoResults": "لم يتم العثور على نتائج مطابقة \"{{query}}\"",
@@ -508,7 +508,7 @@
       "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "بيع",
       "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "اختر حسابًا",
+      "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
     },
     "history": {
@@ -2559,7 +2559,7 @@
               "descr": "تعرف على كيفية التفاعل مع جهازك من خلال قراءة التعليمات التي تظهر على الشاشة."
             },
             "select": {
-              "title": "اختر \"إعداد كجهاز جديد\"",
+              "title": "اختار \"إعداد كجهاز جديد\"",
               "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
