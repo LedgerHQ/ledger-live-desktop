@@ -260,7 +260,7 @@
           }
         },
         "device": {
-          "title": "Device"
+          "title": "الجهاز"
         },
         "dependencies": {
           "title": "App checks"
@@ -381,7 +381,7 @@
           }
         },
         "device": {
-          "title": "Device",
+          "title": "الجهاز",
           "connectionSteps": {
             "pending": {
               "header": "الحصول على الحسابات من الجهاز",
@@ -927,7 +927,7 @@
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
   "tokensList": {
     "title": "Tokens",
@@ -967,7 +967,7 @@
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
+      "pendingDevices": "تعذر تحديث حساب واحد. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
       "doItLaterBtn": "Do it later"
     },
@@ -994,7 +994,7 @@
     "title": "إضافة حسابات",
     "breadcrumb": {
       "informations": "Crypto asset",
-      "connectDevice": "Device",
+      "connectDevice": "الجهاز",
       "import": "الحسابات",
       "finish": "Confirmation"
     },
@@ -1094,11 +1094,11 @@
     "noMoreOperations": "That's all"
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermission": "افتح تطبيق {{wording}} على جهازك",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "Allow {{wording}} on your device",
+    "allowManagerPermission": "السماح بـ{{wording}} على جهازك",
     "loading": "Loading...",
-    "connectAndUnlockDevice": "Connect and unlock your device",
+    "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
     "unlockDevice": "Unlock your device",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
@@ -2006,7 +2006,7 @@
           "amountLabel": "المبلغ المراد إعادة تقيده",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "تتم إضافة الأصول المعاد ربطها على الفور إلى المبلغ المربوط.",
+          "info": "تتم إضافة الأصول المعاد قيدها على الفور إلى المبلغ المقيد.",
           "learnMore": "Learn More"
         },
         "connectDevice": {
