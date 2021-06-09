@@ -294,7 +294,7 @@
       "to": "إلى",
       "toProvider": "Provider address",
       "initialAmount": "المبلغ الأولي",
-      "creditedAmount": "Credited amount"
+      "creditedAmount": "المبلغ المقيد"
     },
     "providers": {
       "title": "Choose a provider to swap crypto",
@@ -549,8 +549,8 @@
     "active": "Approved accounts",
     "lendAsset": "إقراض",
     "account": {
-      "amountSupplied": "Amount deposited",
-      "amountSuppliedTooltip": "Amount lent to the network",
+      "amountSupplied": "المبلغ المودع",
+      "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
       "currencyAPY": "Currency APY",
       "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
       "accruedInterests": "الفوائد المتراكمة",
@@ -703,7 +703,7 @@
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "يتم عرض المبلغ المسحوب في {{ tokenName }}. إن {{ tokenName }} هي رموز ERC20 التي تكسبها بعد إقراض الأصول."
           }
         }
       }
@@ -738,7 +738,7 @@
         "amount": {
           "title": "المبلغ",
           "amountToSupply": "المبلغ المراد إيداعه",
-          "maxSupply": "Maximum amount to lend is"
+          "maxSupply": "المبلغ الأقصى للإقراض هو"
         },
         "device": {
           "title": "الجهاز"
@@ -1066,18 +1066,18 @@
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
     "extra": {
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
+      "frozenAmount": "المبلغ المجمد",
+      "unfreezeAmount": "إزالة تجميد المبلغ",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
       "validators": "Validators",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
-      "redelegatedAmount": "Redelegated amount",
+      "redelegatedAmount": "المبلغ المعاد تفويضه",
       "undelegated": "Undelegated",
       "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
+      "undelegatedAmount": "المبلغ غير المفوض",
       "rewardFrom": "مكافأة من",
       "memo": "Memo",
       "assetId": "Asset ID",
