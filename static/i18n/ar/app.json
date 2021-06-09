@@ -2363,7 +2363,7 @@
   },
   "crash": {
     "title": "Something went wrong",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
+    "description": "يرجى مراجعة مقالات الدعم المتاحة لدينا لمحاولة إيجاد الحلول الممكنة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger).",
     "troubleshooting": "Click here for possible solutions",
     "logs": "Save logs",
     "dataFolder": "View user data"
