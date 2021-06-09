@@ -1685,10 +1685,10 @@
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
             "claimInfo": "لقد كسبت <0>{{amount}}</0> من المدقق الموضح أدناه. بالنقر على زر المتابعة، سيتم المطالبة به الآن وإضافته تلقائيًا إلى الرصيد المتاح.",
-            "selectLabel": "Select a delegation"
+            "selectLabel": "حدد تفويضًا"
           },
           "connectDevice": {
-            "title": "جهاز"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
@@ -1827,7 +1827,7 @@
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "الجهاز"
           },
           "confirmation": {
             "title": "تأكيد",
