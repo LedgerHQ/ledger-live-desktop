@@ -269,7 +269,7 @@
           "title": "Pending",
           "subtitle": "Pending operation",
           "swap": "Your Swap ID:",
-          "seeDetails": "See details",
+          "seeDetails": "رؤية التفاصيل",
           "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
           "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها."
         }
@@ -2472,12 +2472,12 @@
       "beCareful": {
         "title": "Please be careful",
         "descr": "تأكد من اتباع التعليمات على هذا التطبيق في كل خطوة من العملية.",
-        "gotIt": "Got it"
+        "gotIt": "فهمت ذلك"
       },
       "useLedgerSeeds": {
         "title": "We recommend Ledger recovery phrases only",
         "descr": "لا يضمن ليدجر أمان عبارات الاسترداد الخارجية. نحن نوصي بإعداد جهاز نانو (Nano) الخاص بك كجهاز جديد إذا لم يتم إنشاء عبارة الاسترداد الخاصة بك بواسطة ليدجر.",
-        "gotIt": "Got it"
+        "gotIt": "فهمت ذلك"
       }
     },
     "screens": {
@@ -2489,7 +2489,7 @@
         "languageWarning": {
           "title": "Get started in {{language}}",
           "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-          "cta": "Got it"
+          "cta": "فهمت ذلك"
         }
       },
       "selectDevice": {
