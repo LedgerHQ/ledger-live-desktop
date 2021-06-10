@@ -3113,7 +3113,7 @@
     },
     "ManagerDeviceLocked": {
       "title": "جهازك مقفل",
-      "description": "Please unlock it"
+      "description": "يرجى إلغاء قفله"
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Uninstall all apps from your device",
