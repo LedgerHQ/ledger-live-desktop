@@ -1548,42 +1548,42 @@
               "access": "Вы сможете разморозить активы через 3 дня.",
               "ledger": "Заморозьте средства и безопасно голосуйте прямо на устройстве Ledger."
             },
-            "help": "How voting works",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "help": "Как работает голосование",
+            "termsAndPrivacy": "Делегирование ваших прав голоса не гарантирует вознаграждений от вашего Суперпредставителя."
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Управлять активами",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "title": "Заморозить",
+        "description": "Заморозьте токены TRX и зарабатывайте Пропускную способность (Bandwidth) или Энергию (Energy). Вы также можете голосовать за Суперпредставителей."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "title": "Разморозить",
+        "description": "Чтобы снова добавить токены TRX на баланс, разморозьте их. Однако так вы больше не сможете зарабатывать вознаграждения."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "Голосовать",
+        "description": "Отдавайте голоса Суперпредставителям, чтобы получать вознаграждения.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "Передать голоса",
+            "description": "Отдайте голоса за одного или нескольких Суперпредставителей, чтобы начать получать вознаграждения.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "Больше не показывать",
+              "next": "Отдать голоса"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "Суперпредставители или кандидаты?",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
+                "title": "Суперпредставители",
                 "description": "Суперпредставители исполняют ключевую роль в управлении сообществом TRON, обеспечивая основные функции. Например, они отвечают за генерирование блоков и бухгалтерский учёт."
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "Кандидаты",
+                "description": "127 человек, избранных путём голосования всем сообществом держателей токенов. Выборка голосов производится каждые шесть часов."
               }
             }
           }
@@ -1592,63 +1592,63 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
-    "modalTitle": "Coin control",
-    "coincontrol": "Coin control",
-    "advanced": "Advanced options",
-    "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
+    "inputSelected": "ВЫБРАНО",
+    "toSpend": "Монеты для траты",
+    "toReturn": "Сдача на возврат",
+    "modalTitle": "Контроль монет",
+    "coincontrol": "Контроль монет",
+    "advanced": "Доп. параметры",
+    "ctaDisabled": "На этом счёте нет UTXO",
+    "whatIs": "Что такое выбор монет?",
+    "rbf": "Разрешить замену транзакции (Replace-By-Fee).",
+    "strategy": "Стратегия выбора монет",
+    "selected": "Монеты, выбранные для стратегии",
     "amount": "Сумма к отправке:",
-    "replaceable": "replaceable",
+    "replaceable": "заменяемая",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "unconfirmed": "Вы не можете выбрать монеты из неподтверждённых заменяемых транзакций.",
+      "last": "Нужно выбрать хоть что-то"
     },
-    "pending": "pending",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pending": "неподтверждённая",
+    "pickUnconfirmedRBF": "Включить монеты из неподтверждённых заменяемых транзакций.",
+    "pickingStrategy": "Стратегия выбора UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "DEEP_OUTPUTS_FIRST": "Старые монеты – первыми (FIFO)",
+      "OPTIMIZE_SIZE": "Минимизация комиссии (оптимальный размер)",
+      "MERGE_OUTPUTS": "Минимизация будущих комиссий (объединение монет)"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "Вы можете зарабатывать вознаграждения в токенах ATOM, делегируя активы.",
+        "info": "Как работает делегирование",
+        "delegation": "Зарабатывайте вознаграждения"
       },
-      "claimRewards": "Claim rewards",
-      "header": "Delegation(s)",
-      "noRewards": "No rewards available",
-      "delegate": "Add",
+      "claimRewards": "Получить вознаграждения",
+      "header": "Делегирования",
+      "noRewards": "Нет доступных вознаграждений",
+      "delegate": "Добавить",
       "undelegate": "Отозвать",
-      "redelegate": "Redelegate",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
+      "redelegate": "Переделегировать",
+      "redelegateDisabledTooltip": "Вы можете переделегировать через <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "Вы не можете переделегировать более <0>7</0> валидаторов за раз",
+      "undelegateDisabledTooltip": "Вы не можете отозвать делегирование более <0>7</0> валидаторов за раз",
+      "reward": "Получить вознаграждения",
       "currentDelegation": "Делегировано: <0>{{amount}}</0>",
-      "estYield": "est. yield",
+      "estYield": "ориент. доход",
       "activeTooltip": "Делегированные средства приносят вознаграждения",
       "inactiveTooltip": "Без делегирования средства не приносят вознаграждения",
-      "minSafeWarning": "Not enough funds",
+      "minSafeWarning": "Недостаточно средств",
       "flow": {
-        "title": "Delegate",
+        "title": "Делегировать",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "description": "Вы можете получать вознаграждения, делегируя активы ATOM валидатору.",
             "bullet": [
-              "You keep ownership of delegated assets",
-              "Delegate using your Ledger device",
-              "Assets will be available 21 days after undelegation"
+              "Делегированные активы остаются в вашей собственности",
+              "Делегируйте прямо на устройстве Ledger",
+              "Активы станут доступны через 21 день после отмены делегирования"
             ],
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
