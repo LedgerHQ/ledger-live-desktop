@@ -188,14 +188,14 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the {{appName}} app on your device",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "title": "يرجى تحديث تطبيق {{appName}} على جهازك",
+      "subtitle": "انتقل إلى المدير وقم بتثبيت تطبيق {{appName}} لمبادلة الأصول.",
+      "cta": "الانتقال إلى المدير"
     },
     "outdatedApp": {
       "title": "يرجى تحديث تطبيق {{appName}} على جهازك",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "subtitle": "انتقل إلى المدير وقم بتثبيت تطبيق {{appName}} لمبادلة الأصول.",
+      "cta": "الانتقال إلى المدير"
     },
     "kyc": {
       "title": "مرحبًا بك في المبادلة",
@@ -231,7 +231,7 @@
       "helpCTA": "ما هي المبادلة؟",
       "bubble": "نحن نستخدم سعراً ثابتاً، هذا هو المبلغ الذي ستحصل عليه بالضبط.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "{{currencyName}} app not installed.",
+      "noApp": "تطبيق {{currencyName}} غير مثبت.",
       "outdatedApp": "يتوفر تحديث لتطبيق {{currencyName}}.",
       "loadingRates": "جارٍ تحميل أسعار الصرف..."
     },
@@ -457,7 +457,7 @@
     "openInExplorer": "Open in explorer",
     "emptyState": {
       "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "desc": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ في الاستلام",
       "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{ticker}}</0></3> و الرموز</5> <5><0>{{tokenList}}</0>",
       "buttons": {
         "receiveFunds": "أستلام",
@@ -909,16 +909,16 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "تثبيت التطبيقات على جهازك",
+      "desc": "انتقل إلى المدير لتثبيت التطبيقات على جهازك. يمكنك إضافة الحسابات بمجرد أن يكون لديك تطبيقات على جهازك.",
       "buttons": {
-        "installApp": "Go to Manager",
+        "installApp": "الانتقال إلى المدير",
         "help": "مساعدة"
       }
     },
     "accounts": {
       "title": "أضف حساب للبدء",
-      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "desc": "أضف حساباً لبدء إدارة أصولك المشفرة. يجب أن يكون لديك التطبيق الخاص بأصولك المشفرة مثبت على جهازك.",
       "buttons": {
         "addAccount": "إضافة حساب",
         "installApp": "انتقل إلى المدير لتثبيت التطبيق",
@@ -1102,8 +1102,8 @@
     "unlockDevice": "قم بإلغاء قفل جهازك",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "الخروج من التطبيق على جهازك",
-    "appNotInstalledTitle": "Missing required app",
-    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalledTitle": "التطبيق المطلوب غير موجود",
+    "appNotInstalledTitle_plural": "التطبيقات المطلوبة غير موجودة",
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "Open Manager",
@@ -1133,7 +1133,7 @@
     "tabs": {
       "appCatalog": "App catalog",
       "appCatalogSearch": "ابحث عن التطبيق في القائمة...",
-      "appsOnDevice": "Apps installed",
+      "appsOnDevice": "التطبيقات المثبّتة",
       "appOnDeviceSearch": "البحث في التطبيقات المثبتة..."
     },
     "deviceStorage": {
@@ -1145,12 +1145,12 @@
       "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+      "incomplete": "لم يتم التعرف على بعض التطبيقات. يُرجى إلغاء التثبيت، ثم إعادة تثبيتها."
     },
     "applist": {
       "placeholder": "No match for the search with the selected filters",
       "placeholderNoAppsInstalled": "لا توجد تطبيقات مثبتة على جهازك",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "placeholderGoToCatalog": "الذهاب إلى كتالوج التطبيق لتثبيت التطبيقات",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
@@ -1169,7 +1169,7 @@
       "installSuccess": {
         "title": "تم تثبيت التطبيق بنجاح. يمكنك الآن إضافة حساباتك {{app}}",
         "title_plural": "تم تثبيت التطبيقات بنجاح. يمكنك الآن إضافة حساباتك",
-        "manageAccount": "Manage my accounts"
+        "manageAccount": "إدارة حساباتي"
       },
       "updatable": {
         "title": "التحديثات المتاحة",
@@ -1197,12 +1197,12 @@
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
         "learnMore": "معرفة المزيد",
         "learnMoreTooltip": "معرفة المزيد عن {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}",
+        "removeTooltip": "إلغاء تثبيت {{appName}}",
         "useAppForToken": "هل تتطلع إلى إدارة رموز التوكن {{tokenType}}؟",
         "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> و يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
-        "intallParentApp": "Install {{appName}} app"
+        "intallParentApp": "تثبيت تطبيق {{appName}}"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
@@ -1212,7 +1212,7 @@
     },
     "apps": {
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
+        "title": "تطبيق {{dependency}} مطلوب",
         "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
         "confirm": "تثبيت التطبيقات"
       },
@@ -1228,7 +1228,7 @@
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase? ",
       "followTheGuide": "اتبع دليل الخطوة بخطوة للتحديث الخاص بنا",
-      "removeApps": "Uninstall all apps before updating",
+      "removeApps": "إلغاء تثبيت جميع التطبيقات قبل التحديث",
       "update": "Firmware update",
       "updateBtn": "Update firmware",
       "latest": "Firmware version {{version}} is available",
@@ -1236,7 +1236,7 @@
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "downloadingUpdateDesc": "يُرجى الانتظار حتى يتم تحميل تثبيت التحديث"
     },
     "modal": {
       "steps": {
@@ -1244,7 +1244,7 @@
         "updateMCU": "Firmware update",
         "updating": "Firmware update",
         "reset": "Prepare device",
-        "osu": "Installing OSU...",
+        "osu": "جاري تثبيت OSU...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",
         "firmware": "Firmware updating...",
@@ -1261,10 +1261,10 @@
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
+      "successTextApps": "يُرجى إعادة تثبيت التطبيقات على جهازك",
+      "successTextNoApps": "يمكنك الآن تثبيت التطبيقات على جهازك",
+      "sucessCTAApps": "إعادة تثبيت التطبيقات",
+      "SuccessCTANoApps": "تثبيت التطبيقات",
       "cancelReinstallCTA": "تثبيت التحديث",
       "resetSteps": {
         "first": "1. Reset your device",
@@ -1276,7 +1276,7 @@
         "second": "2. Boot in {{mode}} mode",
         "boot": "Press and hold the side button until {{option}} is displayed",
         "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
-        "third": "3. Uninstall all apps",
+        "third": "3. إلغاء تثبيت جميع التطبيقات",
         "openLive": "Open the Manager in Ledger Live.",
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
@@ -3104,11 +3104,11 @@
       "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
+      "title": "تطبيق {{dependency}} مطلوب",
       "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
+      "title": "عذرًا، هذا التطبيق مطلوب",
       "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
@@ -3132,7 +3132,7 @@
       "uninstall": {
         "title": "إنهاء تثبيت التطبيق الجاري حاليًا؟",
         "description": "الخروج من المدير سينهي عمليات إلغاء التثبيت الجارية.",
-        "stay": "Finish uninstalling"
+        "stay": "إنهاء إزالة التثبيت"
       },
       "update": {
         "title": "Finish app updates in progress?",
@@ -3142,8 +3142,8 @@
       "quit": "Quit Manager"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "عذرًا، هذا التطبيق مطلوب",
+      "description": "قم بإلغاء تثبيت تطبيق بيتكوين أو إيثريوم في النهاية"
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
