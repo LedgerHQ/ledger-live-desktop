@@ -3343,10 +3343,10 @@
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "Повторите попытку или обратитесь в Поддержку Ledger."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
+      "title": "Необходимы приложения Bitcoin и Ethereum",
       "description": "Сначала установите последнюю версию приложений Bitcoin и Ethereum."
     },
     "UserRefusedDeviceNameChange": {
@@ -3355,7 +3355,7 @@
     },
     "SyncError": {
       "title": "Ошибка синхронизации",
-      "description": "Some accounts could not be synchronized."
+      "description": "Некоторые счета не удалось синхронизировать."
     },
     "TronNoFrozenForBandwidth": {
       "title": "Нет активов для разморозки",
