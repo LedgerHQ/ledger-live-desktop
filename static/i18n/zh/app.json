@@ -616,19 +616,19 @@
       "rates": {
         "allAssets": "资产",
         "totalBalance": "资产余额",
-        "totalBalanceTooltip": "Amount available to lend",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
-        "actions": "Actions"
+        "totalBalanceTooltip": "可用借出数额",
+        "currentAPY": "存款年收益率 APY",
+        "currentAPYTooltip": "从连续复利存款赚取的年回报率",
+        "actions": "操作"
       }
     },
     "manage": {
-      "cta": "Manage lending",
-      "title": "Manage loan",
+      "cta": "管理借出",
+      "title": "管理贷款",
       "enable": {
-        "approve": "Approve",
-        "manageLimit": "Manage limit",
-        "viewDetails": "View details",
+        "approve": "批准",
+        "manageLimit": "管理限额",
+        "viewDetails": "查看详情",
         "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
         "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
         "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
@@ -637,22 +637,22 @@
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
-        "title": "Deposit",
+        "title": "存入",
         "description": "Enter the amount of assets to lend to the protocol."
       },
       "withdraw": {
-        "title": "Withdraw",
+        "title": "提取",
         "description": "Withdraw assets from the protocol to your Ledger account."
       }
     },
     "enable": {
-      "title": "Approve account",
+      "title": "批准账户",
       "steps": {
         "selectAccount": {
-          "title": "Select account",
-          "selectLabel": "Account to lend from",
-          "cta": "Approve",
-          "alreadyEnabled": "This account is approved"
+          "title": "选择账户",
+          "selectLabel": "出借账户",
+          "cta": "批准",
+          "alreadyEnabled": "此帐户已被批准"
         },
         "amount": {
           "title": "Amount",
@@ -683,23 +683,23 @@
       "title": "Withdraw assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "advanced": "Advanced",
-          "amountToWithdraw": "Amount to withdraw",
-          "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max",
-          "maxWithdrawble": "Maximum amount to withdraw is"
+          "title": "数额",
+          "advanced": "高级",
+          "amountToWithdraw": "要提取的金额",
+          "withdrawAll": "提取最大额度",
+          "placeholder": "提取最大额度",
+          "maxWithdrawble": "最大可提取数额为"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "确认",
           "success": {
-            "title": "Withdrawal sent successfully",
+            "title": "提款已成功发送",
             "text": "Your assets will be available once the network has confirmed the withdrawal.",
-            "done": "Close",
-            "cta": "View details"
+            "done": "关闭",
+            "cta": "查看详情"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
           "tooltip": {
@@ -710,7 +710,7 @@
     },
     "info": {
       "terms": {
-        "title": "Lend Crypto",
+        "title": "借出加密货币",
         "subtitle": "Lend assets on the Compound protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
         "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
