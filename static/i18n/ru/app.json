@@ -2403,13 +2403,13 @@
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
+    "tooltip": "Центр уведомлений",
     "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
-      "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
-      "serviceStatus": "Status",
-      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+      "announcements": "Новости",
+      "announcementsUnseen": "Новости ({{unseenCount}})",
+      "serviceStatus": "Статус",
+      "serviceStatusIncidentsOngoing": "Статус ({{IncidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
