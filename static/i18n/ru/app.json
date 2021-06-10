@@ -1314,7 +1314,7 @@
         "resourceInfo": "Пропускная способность или Энергия?",
         "bandwidthDescription": "Для совершения транзакций в сети TRX вместо комиссии используются баллы Пропускной способности (Bandwidth). Чтобы увеличить количество ежедневных бесплатных транзакций, укажите размер Пропускной способности.",
         "energyDescription": "Для исполнения смарт-контрактов необходимы баллы Энергии. Если вы не используете смарт-контракты, то нет нужны получать вознаграждения в баллах Энергии.",
-        "amountLabel": "Amount to freeze",
+        "amountLabel": "Сумма для заморозки",
         "available": "Доступно: {{amountAvailable}}",
         "info": "Замороженные активы нельзя передавать в течение 3 дней."
       },
@@ -1324,7 +1324,7 @@
       "confirmation": {
         "tooltip": {
           "title": "Транзакция ожидает подтверждения",
-          "desc": "You have to wait a minute before being able to vote"
+          "desc": "Подождите минуту, прежде чем голосовать"
         },
         "title": "Подтверждение",
         "success": {
@@ -1367,15 +1367,15 @@
       "castVotes": {
         "max": "МАКС.",
         "title": "Голосовать",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
+        "search": "Поиск по имени или адресу...",
+        "totalVotes": "Всего голосов: {{total}}",
+        "selected": "Выбрано: {{total}}",
+        "maxSelected": "Выбрано макс.: {{total}}",
+        "allVotesAreUsed": "Все активы распределены",
         "maxUsed": "Недостаточно средств",
         "validators": "Валидаторы ({{total}})",
         "votes": "Доступные активы: {{total}}",
-        "noResults": "No validator found for \"<0>{{search}}</0>\"."
+        "noResults": "Валидатор для «<0>{{search}}</0>» не найден."
       },
       "connectDevice": {
         "title": "Устройство"
@@ -1393,15 +1393,15 @@
   },
   "buy": {
     "title": "Покупка",
-    "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}",
+    "titleCrypto": "Купить {{currency}}",
+    "buyCTA": "Купить {{currencyTicker}}",
     "withoutDevice": "Продолжить без устройства",
     "connectWithoutDevice": "Для оптимальной безопасности лучше использовать устройство.",
-    "skipConnect": "Continue without my device"
+    "skipConnect": "Продолжить без устройства"
   },
   "sell": {
-    "title": "Sell",
-    "titleCrypto": "Sell {{currency}}"
+    "title": "Продажа",
+    "titleCrypto": "Продать {{currency}}"
   },
   "receive": {
     "title": "Получение",
@@ -1526,25 +1526,25 @@
         "vote": "Cast votes",
         "voteExisting": "Manage votes"
       },
-      "manageTP": "Manage assets",
+      "manageTP": "Управление активами",
       "warnEarnRewards": "У вас должно быть не менее {{amount}}, чтобы начать получать вознаграждения",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
+      "claimRewards": "Получить вознаграждения",
+      "nextRewardsDate": "Вознаграждения можно получить {{date}}",
       "claimAvailableRewards": "Получить {{amount}}",
-      "header": "Votes",
-      "percentageTP": "% of votes cast",
-      "noRewards": "No rewards available",
+      "header": "Голоса",
+      "percentageTP": "% переданных голосов",
+      "noRewards": "Нет доступных вознаграждений",
       "remainingVotes": {
         "title": "У вас осталось {{amount}} голос(-ов)",
-        "description": "You can cast your remaining votes to earn more rewards",
-        "button": "Vote now"
+        "description": "Чтобы увеличить вознаграждение, отдайте оставшиеся голоса.",
+        "button": "Голосовать"
       },
       "flow": {
         "steps": {
           "starter": {
             "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
+              "delegate": "Делегированные активы остаются в вашей собственности.",
               "access": "You can unfreeze your assets after 3 days.",
               "ledger": "Freeze and vote securely with your Ledger device."
             },
