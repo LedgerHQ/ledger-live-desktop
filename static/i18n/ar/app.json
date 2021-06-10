@@ -330,8 +330,8 @@
     "checkNodeSettings": "تحقق من إعدادات العقدة",
     "edit": "تعديل",
     "modal": {
-      "title": "قم بتوصيل عقدة بيتكوين الكاملة",
-      "disconnectTitle": "قم بفصل العقدة كاملة",
+      "title": "توصيل عقدة بيتكوين الكاملة",
+      "disconnectTitle": "فصل العقدة كاملة",
       "steps": {
         "landing": {
           "header": "ابدأ عقدتك الكاملة. لا تثق، تحقق.",
@@ -389,7 +389,7 @@
             },
             "success": {
               "header": "تمت إضافة الحسابات إلى تكوين العقدة",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
+              "description": "تم حفظ ملف تكوين في مجلد بيانات المستخدم. وهو يتيح لـ Ledger SatStack إمكانية الاتصال بعقدتك الكاملة ويسمح له بالبحث عن حساباتك على سلسلة الكتل.",
               "cta": "View user data"
             }
           }
@@ -406,8 +406,8 @@
           "connectionSteps": {
             "notConnected": {
               "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "description": "Ledger SatStack هو تطبيق صغير يمكّن ليدجر لايف (Ledger Live) من التحدث إلى عقدتك الكاملة. يُرجى تنزيله وتشغيله قبل المتابعة.",
+              "disclaimer": "يجب أن يكون SatStack قيد التشغيل ليتيح لليدجر لايف (Ledger Live) للاتصال بعقدتك الكاملة. فكر بإعداده ليعمل تلقائيًا عند تشغيل جهاز الكمبيوتر.",
               "cta": "Download SatStack"
             },
             "satstack-disconnected": {
@@ -419,8 +419,8 @@
               "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "header": "تعذر الوصول إلى العقدة الكاملة",
+              "description": "يُرجى التحقق أن عقدتك يمكن الوصول إليها وأن إعدادات الاتصال التي أدخلتها صحيحة."
             },
             "invalid-chain": {
               "header": "invalid-chain title",
@@ -432,11 +432,11 @@
             },
             "ready": {
               "header": "مستعد",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "description": "تمت مزامنة العقدة بالكامل. أصبحت أرصدة حساب البيتكوين الخاص بك صحيحة الآن."
             },
             "syncing": {
-              "header": "Node sync in progress…",
-              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+              "header": "جارٍ مزامنة العقدة…",
+              "description": "المعاملات الأخيرة قد لا تكون مرئية بعد، لذا قد تكون أرصدة حساب بيتكوين غير صحيحة. إذا أمكن، شغّل عقدتك باستمرار للحفاظ علي مزامنتها."
             },
             "scanning": {
               "header": "Account scan in progress...",
@@ -446,7 +446,7 @@
         },
         "disconnect": {
           "cta": "قطع الاتصال",
-          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+          "description": "هل أنت متأكد؟ سيؤدي فصل العقدة الكاملة إلى إزالة جميع حسابات بيتكوين. يمكنك إضافة حساباتك مرة أخرى باستخدام مستكشفي ليدجر (Ledger)."
         }
       }
     }
@@ -998,8 +998,8 @@
       "import": "الحسابات",
       "finish": "Confirmation"
     },
-    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
-    "fullNodeConfigure": "Configure node",
+    "fullNodeReadyInfo": "ستتم إضافة الحسابات باستخدام عقدتك الكاملة للبيتكوين.",
+    "fullNodeConfigure": "تكوين العقدة",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "اختار كل ({{count}})",
@@ -2318,7 +2318,7 @@
         "count_plural": "{{count}} tokens"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
+        "title": "توصيل عقدة بيتكوين الكاملة",
         "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
