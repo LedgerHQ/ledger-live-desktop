@@ -246,7 +246,7 @@
           "toReceive": "المبلغ المراد استلامه",
           "terms": "الشروط والأحكام",
           "disclaimer": {
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "description": "بالضغط على \"تأكيد\"، أسلم وأقبل بأن هذه الخدمة تدار حصريًا من قبل <0>{{provider}}</0>",
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
@@ -1115,7 +1115,7 @@
     "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction",
+      "confirm": "تأكيد معاملة المبادلة",
       "amountSent": "المبلغ المراد إرساله",
       "amountReceived": "المبلغ المراد استلامه",
       "amountReceivedFloat": "المبلغ المراد استلامه قبل رسوم الخدمة",
@@ -1224,7 +1224,7 @@
       }
     },
     "firmware": {
-      "updateLater": "Cancel",
+      "updateLater": "إلغاء",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase? ",
       "followTheGuide": "Follow our step by step update guide",
@@ -1265,7 +1265,7 @@
       "successTextNoApps": "You can now install apps on your device",
       "sucessCTAApps": "Re-install apps",
       "SuccessCTANoApps": "Install apps",
-      "cancelReinstallCTA": "Install update",
+      "cancelReinstallCTA": "تثبيت التحديث",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "قم بتوصيل {{deviceName}} بجهاز الكمبيوتر الخاص بك باستخدام كابل USB.",
@@ -1980,14 +1980,14 @@
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
+            "title": "المعاملة في انتظار التأكيد",
             "desc": "You have to wait a moment before nominating"
           },
           "title": "التأكيد",
           "success": {
             "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
+            "text": "يمكنك ترشيح المدققين فور أن تؤكد الشبكة على المعاملة.",
+            "textNominate": "سوف تتمكن من ترشيح المدققين فور أن تؤكد الشبكة على معاملتك.",
             "nominate": "Nominate",
             "later": "Nominate later"
           },
@@ -2164,7 +2164,7 @@
             "title": "Delegation sent",
             "titleUndelegated": "End delegation",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "textUndelegated": "سينتهي تفويض حسابك بمجرد تأكيد العملية. يمكنك تفويض حسابك مرة أخرى في أي وقت."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
@@ -2884,7 +2884,7 @@
       "bond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "unbond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "rebond": "يرجى التأكيد على جهازك لإنهاء العملية",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "withdrawUnbonded": "يرجى التأكيد على جهازك لإنهاء العملية"
     },
     "recipientWording": {
       "send": "recipient",
@@ -3239,7 +3239,7 @@
       "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
+      "title": "تم إلغاء التحديث على الجهاز",
       "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
