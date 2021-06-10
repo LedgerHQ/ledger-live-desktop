@@ -222,7 +222,7 @@
         "float": "Floating rate",
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "معدل ثابت",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
+        "fixedUnavailable": "تبادل الاثنين لا يدعم المعدل ثابت",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيبقى المبلغ الخاص بك كما هو حتى لو تغير السوق. يتم التحديث كل 60 ثانية.",
         "by": "Provided by"
@@ -239,7 +239,7 @@
       "title": "مبادلة",
       "steps": {
         "summary": {
-          "title": "Summary",
+          "title": "الملخص",
           "from": "من",
           "to": "إلى",
           "toExchange": "المبلغ المراد إرساله",
@@ -252,9 +252,9 @@
           "details": {
             "provider": "Provider",
             "tradeMethod": {
-              "title": "Type",
+              "title": "النوع",
               "float": "Floating rate",
-              "fixed": "Fixed rate"
+              "fixed": "معدل ثابت"
             },
             "address": "عنوان"
           }
@@ -452,7 +452,7 @@
     }
   },
   "account": {
-    "lastOperations": "Latest operations",
+    "lastOperations": "أحدث العمليات",
     "contractAddress": "عقد:",
     "openInExplorer": "Open in explorer",
     "emptyState": {
@@ -619,7 +619,7 @@
         "totalBalanceTooltip": "المبلغ المتاح للإقراض",
         "currentAPY": "إيداع APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
-        "actions": "Actions"
+        "actions": "الإجراءات"
       }
     },
     "manage": {
@@ -977,17 +977,17 @@
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
-        "description": "Please wait for your accounts to be updated"
+        "title": "جار تحديث {{currencyName}}...",
+        "description": "رجاء الانتظار حتى يتم تحديث حساباتك"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "لم يكتمل تحديث {{currencyName}}",
+        "description": "لا توجد حسابات {{currencyName}} للتحديث"
       }
     },
     "cta": {
-      "startUpdate": "Start update",
-      "nextCurrency": "Continue with {{currency}} update"
+      "startUpdate": "بدء التحديث",
+      "nextCurrency": "متابعة تحديث {{currency}}"
     }
   },
   "addAccounts": {
@@ -1036,7 +1036,7 @@
         "title": "Accounts already in portfolio ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "الحسابات المراد تحديثها"
       }
     }
   },
@@ -1444,7 +1444,7 @@
         "advanced": "متقدم"
       },
       "summary": {
-        "title": "Summary"
+        "title": "الملخص"
       },
       "device": {
         "title": "الجهاز"
@@ -1467,8 +1467,8 @@
       },
       "verification": {
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "جارٍ التحميل... ({{percentage}})",
+          "inaccurate": "جارٍ التحميل..."
         }
       },
       "confirmation": {
@@ -2134,7 +2134,7 @@
         },
         "summary": {
           "title": "Delegate account",
-          "label": "Summary",
+          "label": "الملخص",
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
           "validator": "Validator",
@@ -2177,7 +2177,7 @@
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "ملخص لجميع حسابات {{currency}}"
   },
   "carousel": {
     "hidden": {
@@ -2398,7 +2398,7 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News",
+      "announcement": "أخبار",
       "operation": "Operation"
     }
   },
@@ -2406,8 +2406,8 @@
     "tooltip": "Information center",
     "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
-      "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
+      "announcements": "أخبار",
+      "announcementsUnseen": "أخبار ({{unseenCount}})",
       "serviceStatus": "Status",
       "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
     },
@@ -2423,8 +2423,8 @@
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "title": "لا توجد أخبار حاليًا",
+        "desc": "ستجد هنا جميع الأخبار المتعلقة بنظام ليدجر (Ledger) وليدجر لايف (Ledger Live)"
       }
     }
   },
@@ -3204,7 +3204,7 @@
       "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
+      "title": "انتهت صلاحية سعر الصرف",
       "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف المعروض ساري المفعول لمدة 60 ثانية."
     },
     "TimeoutError": {
@@ -3296,7 +3296,7 @@
       "title": "Couldn't scan this QR code: auto-verification not supported by this address"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "تعذر تحميل معدلات الرسوم. الرجاء تعيين رسوم يدوياً"
     },
     "FeeRequired": {
       "title": "Fees are required"
