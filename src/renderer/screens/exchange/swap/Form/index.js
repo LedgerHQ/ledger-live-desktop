@@ -254,17 +254,8 @@ const Form = ({
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
 
-  const { provider, magnitudeAwareRate } = exchangeRate || {};
+  const { provider, magnitudeAwareRate, toAmount } = exchangeRate || {};
   const { amount = BigNumber(0) } = transaction || {};
-
-  const toAmount = useMemo(() => {
-    if (!exchangeRate) return;
-    let base = exchangeRate.toAmount;
-    if (exchangeRate && exchangeRate.payoutNetworkFees && toCurrency) {
-      base = base.minus(exchangeRate.payoutNetworkFees);
-    }
-    return base;
-  }, [exchangeRate, toCurrency]);
 
   return (
     <>

@@ -70,7 +70,7 @@ const StepSummary = ({
 }) => {
   const swapAcceptedproviderIds = useSelector(swapAcceptedProviderIdsSelector);
   const { exchange, exchangeRate } = swap;
-  const { provider } = exchangeRate;
+  const { provider, toAmount } = exchangeRate;
   const alreadyAcceptedTerms = swapAcceptedproviderIds.includes(swap.exchangeRate.provider);
   const { fromAccount, toAccount } = exchange;
   const fromAmount = transaction.amount;
@@ -81,7 +81,6 @@ const StepSummary = ({
   const toCurrency = getAccountCurrency(toAccount);
   const fromUnit = getAccountUnit(fromAccount);
   const toUnit = getAccountUnit(toAccount);
-  const toAmount = exchangeRate.toAmount.minus(exchangeRate.payoutNetworkFees || 0);
   const { main, tos } = urls.swap.providers[provider];
 
   return (
