@@ -304,21 +304,21 @@
         "bullets": [
           "US-only (soon Europe, Africa and Asia)",
           "Multi coins and tokens",
-          "Centralized"
+          "مركزي"
         ]
       },
       "changelly": {
         "bullets": [
           "BTC, ETH, USDT and 50+ others",
           "Multi-currency",
-          "Centralized"
+          "مركزي"
         ]
       },
       "paraswap": {
         "bullets": [
           "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
           "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "لا مركزي و بدون ثقة"
         ]
       }
     }
@@ -327,11 +327,11 @@
     "status": "Status",
     "connect": "Connect",
     "disconnect": "قطع الاتصال",
-    "checkNodeSettings": "Verify node settings",
+    "checkNodeSettings": "تحقق من إعدادات العقدة",
     "edit": "تعديل",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "قم بتوصيل عقدة بيتكوين الكاملة",
+      "disconnectTitle": "قم بفصل العقدة كاملة",
       "steps": {
         "landing": {
           "header": "Start your full node. Don’t trust, verify.",
@@ -356,8 +356,8 @@
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
-                  "usernamePlaceholder": "Username",
+                  "tooltip": "أدخل اسم مستخدم الـ RPC وكلمة مرور عقدتك، الموجودة في ملف bitcoin.conf.",
+                  "usernamePlaceholder": "اسم المستخدم",
                   "passwordPlaceholder": "كلمة المرور"
                 },
                 "tls": {
@@ -3178,7 +3178,7 @@
       "title": "Enter valid host."
     },
     "RPCUserRequired": {
-      "title": "RPC Username is required"
+      "title": "اسم مستخدم ال RPC مطلوب"
     },
     "RPCPassRequired": {
       "title": "RPC Password is required"
