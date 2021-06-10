@@ -1070,7 +1070,7 @@
       "unfreezeAmount": "إزالة تجميد المبلغ",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> إلى <2>{{name}}</2>",
-      "validators": "Validators",
+      "validators": "المدققون",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
@@ -1087,7 +1087,7 @@
       "withdrawUnbondedAmount": "المبلغ المسحوب",
       "palletMethod": "Method",
       "transferAmount": "مبلغ التحويل",
-      "validatorsCount": "Validators ({{number}})"
+      "validatorsCount": "({{number}}) مدققين"
     }
   },
   "operationList": {
@@ -1373,7 +1373,7 @@
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All assets are distributed",
         "maxUsed": "Insufficient assets",
-        "validators": "Validators ({{total}})",
+        "validators": "المدققون ({{total}})",
         "votes": "Available assets: {{total}}",
         "noResults": "لم يتم العثور على مدقق لـ \"<0>{{search}}</0>\"."
       },
@@ -1632,8 +1632,8 @@
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
       "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
+      "redelegateMaxDisabledTooltip": "لا يمكنك إعادة تفويض أكثر من <0>7</0> مدققين في المرة الواحدة",
+      "undelegateDisabledTooltip": "لا يمكنك إلغاء تفويض أكثر من <0>7</0> مدققين في المرة الواحدة",
       "reward": "المطالبة بالمكافآت",
       "currentDelegation": "تم تفويض: <0>{{amount}}</0>",
       "estYield": "est. yield",
@@ -1778,10 +1778,10 @@
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> المكافآت المكتسبة)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "إضافة ASA (أصل)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
+            "title": "ASA (أصل)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
             "selectLabel": "اختر ASA (أصل)",
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
@@ -1818,7 +1818,7 @@
             },
             "learnMore": "كيف تعمل مكافآت ألغوراند (Algorand)؟",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "تلقي Algo"
             }
           },
           "info": {
@@ -1867,8 +1867,8 @@
       "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
       "waiting": "Unelected",
       "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorTooltip": "This address is no longer a validator",
+      "notValidator": "ليس مدققًا",
+      "notValidatorTooltip": "لم يعد هذا العنوان مدققًا",
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
@@ -1923,8 +1923,8 @@
       "title": "Nominate",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "title": "المدققون",
+          "notValidatorsRemoved": "قمت بترشيح {{count}} من العناوين التي لم تعد مدققين. وستتم إزالتها تلقائيًا من معاملة الترشيح الخاصة بك.",
           "maybeChill": "Clear nominations instead"
         },
         "connectDevice": {
@@ -2095,7 +2095,7 @@
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
-    "validator": "Validator",
+    "validator": "المدقق",
     "yield": "Est. Yield",
     "address": "عنوان",
     "transactionID": "Transaction ID",
@@ -2124,20 +2124,20 @@
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "تفويض لكسب الجوائز"
           }
         },
         "account": {
-          "title": "Delegate account",
+          "title": "تفويض حساب",
           "label": "حساب",
-          "toDelegate": "Account to delegate"
+          "toDelegate": "المبلغ المراد تفويضه"
         },
         "summary": {
-          "title": "Delegate account",
+          "title": "تفويض حساب",
           "label": "الملخص",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
-          "validator": "Validator",
+          "toDelegate": "الحساب المراد تفويضه",
+          "toUndelegate": "الحساب المراد إلغاء تفويضه",
+          "validator": "المدقق",
           "select": "اختار",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
@@ -3454,7 +3454,7 @@
       "title": "Validators election must be closed"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "بعض العناوين المختارة ليست مدققين"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
@@ -3478,7 +3478,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "يجب عليك تحديد مدقق واحد على الأقل"
     }
   }
 }
