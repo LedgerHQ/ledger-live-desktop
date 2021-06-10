@@ -711,23 +711,23 @@
     "info": {
       "terms": {
         "title": "借出加密货币",
-        "subtitle": "Lend assets on the Compound protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "subtitle": "按照 Compound 复利协议借出资产",
+        "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
         "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
       },
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "Approve an account to allow the protocol to",
-          "subtitle2": "process future loans.",
+          "subtitle2": "处理未来贷款。",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
         },
         "2": {
-          "subtitle": "Supply assets to earn interest",
+          "subtitle": "供应资产以赚取利息",
           "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
         },
         "3": {
-          "subtitle": "Withdraw assets at any time",
+          "subtitle": "随时提取资产",
           "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
         }
       }
@@ -777,30 +777,30 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "day": "Day",
-      "week": "Week",
-      "month": "Month",
-      "year": "Year",
-      "all": "All"
+      "day": "天",
+      "week": "周",
+      "month": "月",
+      "year": "年",
+      "all": "全部"
     },
     "optionsMenu": {
-      "title": "Options",
+      "title": "选项",
       "exportOperations": "Export operation history",
       "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
-      "swap": "Swap",
-      "buy": "Buy",
-      "sell": "Sell",
-      "edit": "Edit account",
-      "hideToken": "Hide token"
+      "star": "星标",
+      "receive": "接收",
+      "send": "发送",
+      "swap": "Swap (掉期)",
+      "buy": "买入",
+      "sell": "卖出",
+      "edit": "编辑账户",
+      "hideToken": "隐藏代币"
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "帮助和支持",
     "gettingStarted": {
       "title": "Getting started",
       "desc": "Start here"
