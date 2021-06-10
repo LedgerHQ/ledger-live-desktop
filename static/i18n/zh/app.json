@@ -309,32 +309,32 @@
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "比特币、以太币、泰达币以及50余个其他币种",
+          "多币种",
+          "中心化的"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "连接到 30 + DEXs (Uniswap, SushiSwap,...)",
+          "以太坊 和 ERC20 代币",
+          "去中心化与无需信任"
         ]
       }
     }
   },
   "fullNode": {
-    "status": "Status",
-    "connect": "Connect",
-    "disconnect": "Disconnect",
-    "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "status": "状态",
+    "connect": "连接",
+    "disconnect": "断开连接",
+    "checkNodeSettings": "验证节点设置",
+    "edit": "编辑",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "连接比特币完整节点",
+      "disconnectTitle": "断开连接完整节点",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
+          "header": "启动您的全部节点。不要信任，验证。",
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
@@ -445,27 +445,27 @@
           }
         },
         "disconnect": {
-          "cta": "Disconnect",
+          "cta": "断开连接",
           "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
         }
       }
     }
   },
   "account": {
-    "lastOperations": "Latest operations",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "lastOperations": "近期操作",
+    "contractAddress": "合约：",
+    "openInExplorer": "在浏览器中打开",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "title": "还没有加密资产？",
+      "desc": "确保已安装 <1><0>{{managerAppName}}</0></1> 应用程序并开始接收",
+      "descToken": "确保已安装 <1><0>{{managerAppName}}</0></1> 应用程序并开始接收 <3><0>{{ticker}}</0></3> 和 <5><0>{{tokenList}}</0> 代币 </5>",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buy": "Buy"
+        "receiveFunds": "接收",
+        "buy": "买入"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "编辑账户",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
