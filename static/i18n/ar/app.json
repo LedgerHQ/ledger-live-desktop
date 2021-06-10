@@ -3127,11 +3127,11 @@
       "install": {
         "title": "Finish app installation in progress?",
         "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
-        "stay": "Finish install"
+        "stay": "إنهاء التثبيت"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
+        "title": "إنهاء تثبيت التطبيق الجاري حاليًا؟",
+        "description": "الخروج من المدير سينهي عمليات إلغاء التثبيت الجارية.",
         "stay": "Finish uninstalling"
       },
       "update": {
