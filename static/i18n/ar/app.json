@@ -853,7 +853,7 @@
     },
     "stakeCosmos": {
       "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
+      "description": "قم بتفويض عملاتك ATOM من خلال صفحة الحساب وإكسب على مكافآت اليوم",
       "cta": "Stake Cosmos now"
     },
     "buyCrypto": {
@@ -1520,7 +1520,7 @@
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
+        "description": "يمكنك الآن كسب مكافآت من خلال التجميد والتصويت.",
         "info": "How voting works",
         "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
         "vote": "Cast votes",
@@ -1536,7 +1536,7 @@
       "noRewards": "لا توجد مكافآت متاحة",
       "remainingVotes": {
         "title": "لا يزال لديك {{amount}} أصوات متبقية",
-        "description": "You can cast your remaining votes to earn more rewards",
+        "description": "يمكنك الإدلاء بأصواتك المتبقية لكسب المزيد من المكافآت",
         "button": "Vote now"
       },
       "flow": {
@@ -1621,7 +1621,7 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
+        "description": "يمكنك كسب مكافآت ATOM عن طريق تفويض أصولك.",
         "info": "How Delegation works",
         "delegation": "اكسب المكافآت"
       },
@@ -1680,7 +1680,7 @@
             "title": "المكافآت",
             "compound": "مُجمع",
             "claim": "Cash in",
-            "compoundOrClaim": "مُجمع أو التسديد نقدًا",
+            "compoundOrClaim": "مجمع أم تحصيل",
             "compoundDescription": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
@@ -1694,7 +1694,7 @@
             "title": "تأكيد",
             "label": "تأكيد",
             "success": {
-              "title": "تم استلام المكافآت بنجاح",
+              "title": "تم تحصيل المكافآت بنجاح",
               "titleCompound": "تم تجميع الجوائز بنجاح",
               "text": "تمت إضافة مكافآتك إلى رصيدك المتاح",
               "textCompound": "مكافآتك <0>{{amount}}</0> تم تفويضها تلقائيًا إلى <0>{{validator}}</0>",
@@ -1833,7 +1833,7 @@
             "title": "تأكيد",
             "success": {
               "title": "تمت المطالبة بالمكافآت بنجاح!",
-              "text": "Your rewards were added to your available balance",
+              "text": "تمت إضافة مكافآتك إلى رصيدك المتاح",
               "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
