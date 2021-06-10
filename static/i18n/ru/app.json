@@ -2391,14 +2391,14 @@
     }
   },
   "theme": {
-    "system": "Select the system theme",
+    "system": "Выберите оформление системы",
     "light": "Светлая",
     "dusk": "Тусклая",
     "dark": "Тёмная"
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News",
+      "announcement": "Новости",
       "operation": "Операция"
     }
   },
