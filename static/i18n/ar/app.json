@@ -355,13 +355,13 @@
                   "tooltip": "اتركه بشكل افتراضي إذا كانت العقدة تعمل على هذا الكمبيوتر، أو استبدل عنوان IP ورقم المنفذ للعقدة."
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
+                  "title": "بيانات اعتماد RPC",
                   "tooltip": "أدخل اسم مستخدم الـ RPC وكلمة مرور عقدتك، الموجودة في ملف bitcoin.conf.",
                   "usernamePlaceholder": "اسم المستخدم",
                   "passwordPlaceholder": "كلمة المرور"
                 },
                 "tls": {
-                  "title": "Use TLS",
+                  "title": "استخدام TLS",
                   "tooltip": "أمان طبقة النقل (TLS)، يمكن استخدامه على سبيل المثال، إذا كنت تستخدم حل العقدة المستضافة."
                 }
               }
@@ -390,7 +390,7 @@
             "success": {
               "header": "تمت إضافة الحسابات إلى تكوين العقدة",
               "description": "تم حفظ ملف تكوين في مجلد بيانات المستخدم. وهو يتيح لـ Ledger SatStack إمكانية الاتصال بعقدتك الكاملة ويسمح له بالبحث عن حساباتك على سلسلة الكتل.",
-              "cta": "View user data"
+              "cta": "عرض بيانات المستخدم"
             }
           }
         },
@@ -405,14 +405,14 @@
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
+              "header": "تنزيل Ledger SatStack وتشغيله",
               "description": "Ledger SatStack هو تطبيق صغير يمكّن ليدجر لايف (Ledger Live) من التحدث إلى عقدتك الكاملة. يُرجى تنزيله وتشغيله قبل المتابعة.",
               "disclaimer": "يجب أن يكون SatStack قيد التشغيل ليتيح لليدجر لايف (Ledger Live) للاتصال بعقدتك الكاملة. فكر بإعداده ليعمل تلقائيًا عند تشغيل جهاز الكمبيوتر.",
-              "cta": "Download SatStack"
+              "cta": "تنزيل SatStack"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "header": "تعذّر الوصول إلى SatStack",
+              "description": "يُرجى التحقق من تشغيل SatStack على هذا الكمبيوتر."
             },
             "satstack-outdated": {
               "header": "Please upgrade SatStack",
@@ -423,11 +423,11 @@
               "description": "يُرجى التحقق أن عقدتك يمكن الوصول إليها وأن إعدادات الاتصال التي أدخلتها صحيحة."
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
+              "header": "عنوان سلسلة غير صحيح",
               "description": "invalid-chain description for tooltip"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "جاري التحميل",
               "description": ""
             },
             "ready": {
@@ -439,8 +439,8 @@
               "description": "المعاملات الأخيرة قد لا تكون مرئية بعد، لذا قد تكون أرصدة حساب بيتكوين غير صحيحة. إذا أمكن، شغّل عقدتك باستمرار للحفاظ علي مزامنتها."
             },
             "scanning": {
-              "header": "Account scan in progress...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "header": "جارٍ فحص الحساب...",
+              "description": "يمكنك إضافة حساباتك بمجرد الانتهاء من فحص الحساب. تمت إزالة أي حسابات بيتكوين قام بإضافتها متصفحو ليدجر (Ledger)."
             }
           }
         },
