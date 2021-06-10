@@ -2404,7 +2404,7 @@
   },
   "informationCenter": {
     "tooltip": "Центр уведомлений",
-    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "ongoingIncidentsTooltip": "Текущих событий: {{incidentCount}}",
     "tabs": {
       "announcements": "Новости",
       "announcementsUnseen": "Новости ({{unseenCount}})",
@@ -2413,18 +2413,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger live is up and running",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "title": "Ledger Live запущено и работает",
+        "description": "Проблема? Воспользуйтесь <0>страницей помощи</0>"
       },
       "statusNotOk": {
-        "title": "Ledger live is experiencing issues",
-        "learnMore": "Learn more"
+        "title": "В приложении Ledger Live возникли проблемы",
+        "learnMore": "Подробнее"
       }
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "title": "Сейчас новостей нет",
+        "desc": "Здесь вы найдёте все новости о Ledger и Ledger Live"
       }
     }
   },
@@ -2648,9 +2648,9 @@
               "help": "Требуется помощь?"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "title": "Не используйте фразу восстановления, которую кто-то создал за вас.",
+              "desc": "Вы должны самостоятельно создать ПИН-код и получить фразу восстановления для вашего аппаратного кошелька Ledger. Если вы получили устройство с уже установленной фразой восстановления или ПИН-кодом, не пользуйтесь им и свяжитесь с нашей службой поддержки.",
+              "supportLink": "Обратиться в службу поддержки"
             }
           },
           "useRecoverySheet": {
@@ -2864,24 +2864,24 @@
     "desc": "Не удаётся подключить устройство?"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "title": "Подтвердите операцию на устройстве для её завершения",
+    "warning": "Всегда проверяйте, чтобы адрес на экране вашего устройства точно совпадал с адресом, который вам был предоставлен {{recipientWording}}",
+    "secureContract": "Перед отправкой проверьте детали о депозите на устройстве. Обмен адресами контрактов осуществляется безопасно и не требует подтверждения.",
     "verifyData": "Всегда проверяйте детали операции на вашем устройстве.",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
+      "send": "Подтвердите завершение операции на устройстве",
+      "claimReward": "Подтвердите завершение операции на устройстве",
+      "freeze": "Подтвердите завершение операции на устройстве",
+      "unfreeze": "Подтвердите завершение операции на устройстве",
+      "vote": "Подтвердите завершение операции на устройстве",
+      "delegate": "Подтвердите завершение операции на устройстве",
+      "undelegate": "Подтвердите завершение операции на устройстве",
+      "redelegate": "Подтвердите завершение операции на устройстве",
+      "claimRewardCompound": "Подтвердите завершение операции на устройстве",
+      "nominate": "Подтвердите завершение операции на устройстве",
+      "chill": "Подтвердите завершение операции на устройстве",
+      "bond": "Подтвердите завершение операции на устройстве",
       "unbond": "Подтвердите завершение операции на устройстве",
       "rebond": "Подтвердите завершение операции на устройстве",
       "withdrawUnbonded": "Подтвердите завершение операции на устройстве"
@@ -3125,12 +3125,12 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "title": "Прервать установку приложения?",
+        "description": "При выходе из Диспетчера установка приложения будет прекращена. Дождитесь завершения, чтобы установить приложения из очереди.",
         "stay": "Finish install"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
+        "title": "Прервать удаление приложения?",
         "description": "Quitting the Manager will terminate the app uninstallations in progress.",
         "stay": "Finish uninstalling"
       },
