@@ -577,45 +577,45 @@
         "cta": "Deposit"
       },
       "opened": {
-        "title": "您已开放的贷款将出现在这里",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "您已开放的借贷将出现在这里",
+        "description": "您还没有进行过任何借贷。",
+        "cta": "存款"
       },
       "history": {
-        "title": "History",
-        "description": "View the history of all your loan transactions.",
-        "cta": "Deposit"
+        "title": "历史记录",
+        "description": "查看您所有贷款交易的历史记录。",
+        "cta": "存款"
       }
     },
     "headers": {
       "active": {
-        "accounts": "Account",
-        "amountSupplied": "Open loan",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
-        "status": "Account status",
-        "actions": "Actions"
+        "accounts": "账户",
+        "amountSupplied": "开放借贷",
+        "amountSuppliedTooltip": "网络中的已存数额",
+        "accruedInterests": "利息余额",
+        "accruedInterestsTooltip": "借贷赚取的利息",
+        "status": "账户状态",
+        "actions": "操作"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
-        "toSupplyTooltip": "You can now supply your assets"
+        "enablingTooltip": "您的交易正在播送",
+        "toSupplyTooltip": "您现在可以供应您的资产"
       },
       "closed": {
-        "assetLended": "Asset",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
-        "date": "Date"
+        "assetLended": "资产",
+        "amountRedeemed": "提领金额",
+        "interestsEarned": "已赚取利息",
+        "date": "日期"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
-        "accruedInterest": "Accrued interest",
-        "date": "Date"
+        "assetLended": "资产",
+        "amount": "数额",
+        "accruedInterest": "应计利息",
+        "date": "日期"
       },
       "rates": {
-        "allAssets": "Asset",
-        "totalBalance": "Asset balance",
+        "allAssets": "资产",
+        "totalBalance": "资产余额",
         "totalBalanceTooltip": "Amount available to lend",
         "currentAPY": "Deposit APY",
         "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
