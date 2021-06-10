@@ -2533,7 +2533,7 @@
             "paragraph2": "سيستعيد جهاز نانو مفاتيحك الخاصة وستكون قادرًا على الوصول إالي وإدارة أوصلك المشفرة.",
             "buttons": {
               "next": "حسنًا، أنا مستعد!",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2546,7 +2546,7 @@
             },
             "buttons": {
               "next": "حسنًا، أنا مستعد!",
-              "prev": "Previous step"
+              "prev": "الخطوة السابقة"
             }
           },
           "deviceHowTo": {
@@ -2567,8 +2567,8 @@
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2590,8 +2590,8 @@
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2601,7 +2601,7 @@
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
             "buttons": {
               "next": "Set up PIN code",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2609,8 +2609,8 @@
             "title": "Already a pro!",
             "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2618,8 +2618,8 @@
             "title": "You will soon become a pro...",
             "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة"
             }
           },
           "pinCodeHowTo": {
@@ -2632,8 +2632,8 @@
               "descr": "أدخل رمز ال PIN الخاص بك مرة أخرى لتأكيده."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2644,7 +2644,7 @@
             "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد الخاصة بي فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
               "next": "Enter recovery phrase",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             },
             "warning": {
@@ -2663,8 +2663,8 @@
               "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2675,7 +2675,7 @@
             "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد هذه فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
               "next": "عبارة الاسترداد",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2699,8 +2699,8 @@
               "title": "Repeat for all words!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2713,8 +2713,8 @@
               "title": "Repeat for all words!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2725,7 +2725,7 @@
             },
             "buttons": {
               "next": "Continue",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2736,17 +2736,17 @@
             "neverShowToAnyone": "لا تشارك أبدًا عبارتك المكوّنة من 24 كلمة مع أي شخص، ولا حتى مع ليدجر (Ledger).",
             "buttons": {
               "next": "OK, I'm done!",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة",
               "learn": "Learn how to hide it"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
+            "title": "التحقق من الأجهزة الأصلية",
             "paragraph": "سنتحقق مما إذا كان جهاز نانو (Nano) الخاص بك أصليًا. سيكون ذلك سريعًا وسهلاً!",
             "buttons": {
               "next": "التحقق من Nano الخاص بي",
-              "prev": "Previous step",
+              "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
@@ -2754,8 +2754,8 @@
             "title": "Already a pro!",
             "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة"
             }
           },
           "quizzFail": {
@@ -2763,8 +2763,8 @@
             "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
             "paragraph2": "Only one quick step left!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "الخطوة التالية",
+              "prev": "الخطوة السابقة"
             }
           }
         }
@@ -2849,7 +2849,7 @@
           "results": {
             "success": {
               "title": "Congrats!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم بتفويض كل معاملة على جهازك يدويًا."
             },
             "fail": {
               "title": "Incorrect!",
@@ -2904,7 +2904,7 @@
     "read": "Read the Terms of Use",
     "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
     "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelLoss": "أفهم أنني إذا فقدت عبارة الاسترداد هذه، فلن أتمكن من الوصول إلى أصولي المشفرة في حالة فقداني القدرة على الوصول إلى جهاز نانو.",
     "cta": "Enter Ledger app"
   },
   "families": {
