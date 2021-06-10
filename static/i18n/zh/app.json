@@ -1001,13 +1001,13 @@
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "fullNodeConfigure": "配置节点",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
-    "success": "Account added successfully",
-    "success_plural": "Accounts added successfully",
-    "successDescription": "Add other accounts or return to Portfolio",
+    "accountToImportSubtitle_plural": "添加现有账户",
+    "selectAll": "全选 ({{count}})",
+    "unselectAll": "取消全选 ({{count}})",
+    "noAccountToImport": "没有要添加的现有 {{currencyName}} 账户",
+    "success": "已成功添加账户",
+    "success_plural": "已成功添加账户",
+    "successDescription": "添加其他账户或返回至资产组合",
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
@@ -1053,24 +1053,24 @@
     "noFees": "无费用",
     "from": "来自",
     "to": "发往",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
-    "tokenOperations": "Token operations",
-    "subAccountOperations": "Subaccount operations",
+    "identifier": "交易 ID",
+    "viewOperation": "在浏览器中查看",
+    "showMore": "显示更多 {{recipients}}",
+    "showLess": "显示更少",
+    "tokenOperations": "代币操作",
+    "subAccountOperations": "子账户操作",
     "tokenTooltip": "This operation is related to the following token operations",
     "subAccountTooltip": "This operation is related to the following subaccount operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?",
+    "internalOperations": "内部操作",
+    "internalOpTooltip": "此操作存在内部操作",
+    "details": "{{ currency }} 详情",
+    "multipleAddresses": "为什么有多个地址？",
     "extra": {
       "frozenAmount": "已冻结数额",
       "unfreezeAmount": "解冻数额",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
-      "validators": "Validators",
+      "votes": "票数 ({{number}})",
+      "votesAddress": "<0>{{votes}}</0> 投给 <2>{{name}}</2>",
+      "validators": "验证器",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
       "redelegatedTo": "Redelegated to",
@@ -1655,7 +1655,7 @@
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "验证器"
           },
           "connectDevice": {
             "title": "设备"
@@ -1719,11 +1719,11 @@
             "howDelegationWorks": "How delegation works?"
           },
           "validators": {
-            "title": "Validators",
+            "title": "验证器",
             "currentDelegation": "Current delegation",
             "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "chooseValidator": "选择一个验证器",
+            "warning": "更换验证器后，您需要等待 <0> 21 天</0> 才能再次更换。"
           },
           "device": {
             "title": "设备"
@@ -1752,7 +1752,7 @@
             "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
-              "validator": "Validator",
+              "validator": "验证器",
               "amount": "要解除委托的数额"
             }
           },
@@ -1867,8 +1867,8 @@
       "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
       "waiting": "Unelected",
       "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorTooltip": "This address is no longer a validator",
+      "notValidator": "并非验证器",
+      "notValidatorTooltip": "该地址不再是一个验证器",
       "elected": "Elected",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
@@ -1923,7 +1923,7 @@
       "title": "Nominate",
       "steps": {
         "validators": {
-          "title": "Validators",
+          "title": "验证器",
           "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
           "maybeChill": "Clear nominations instead"
         },
