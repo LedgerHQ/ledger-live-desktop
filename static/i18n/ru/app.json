@@ -2183,7 +2183,7 @@
     "hidden": {
       "close": "Подтвердить",
       "undo": "Показывать снова",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "disclaimer": "Этот баннер не будет показан до появления нового объявления"
     }
   },
   "settings": {
@@ -2228,8 +2228,8 @@
       "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
       "stock": "Индикатор регионального рынка",
       "stockDesc": "Выберите «Западный», чтобы рост рыночной стоимости отображался синим цветом, либо «Восточный», чтобы рост рыночной стоимости отображался красным цветом.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "carouselVisibility": "Карусель",
+      "carouselVisibilityDesc": "Показывать Портфель в формате карусели"
     },
     "currencies": {
       "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
@@ -2882,74 +2882,74 @@
       "nominate": "Please confirm on your device to finalize the operation",
       "chill": "Please confirm on your device to finalize the operation",
       "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "unbond": "Подтвердите завершение операции на устройстве",
+      "rebond": "Подтвердите завершение операции на устройстве",
+      "withdrawUnbonded": "Подтвердите завершение операции на устройстве"
     },
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
-      "claimReward": "rewards recipient",
-      "optIn": "recipient",
-      "nominate": "validator"
+      "send": "получатель",
+      "delegate": "валидатор",
+      "undelegate": "валидатор",
+      "claimReward": "получатель вознаграждений",
+      "optIn": "получатель",
+      "nominate": "валидатор"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Голоса ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "Введите адрес {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
+    "title": "Условия использования",
+    "read": "Прочитать Условия использования",
     "switchLabelTerms": "<0>Подтверждаю, что прочитал(а) и принимаю</0> <1>Условия использования</1>",
     "switchLabelPrivacyPolicy": "<0>Подтверждаю, что прочитал(-а) и принимаю</0> <1>Политику конфиденциальности</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelLoss": "Я осознаю, что без фразы восстановления я утрачу доступ к своей криптовалюте в случае потери доступа к устройству Nano.",
     "cta": "Войти в приложение Ledger"
   },
   "families": {
     "stellar": {
       "memo": "Memo",
       "memoType": {
-        "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
+        "MEMO_TEXT": "Текст Memo",
+        "NO_MEMO": "Без Memo",
         "MEMO_ID": "Memo ID",
-        "MEMO_HASH": "Memo Hash",
+        "MEMO_HASH": "Хэш Memo",
         "MEMO_RETURN": "Memo Return"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем"
     },
     "cosmos": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+      "memoPlaceholder": "Опционально",
+      "memoWarningText": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем"
     }
   },
   "errors": {
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact Ledger Support."
+      "description": "Что-то пошло не так. Повторите попытку или свяжитесь с Поддержкой Ledger."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account.",
-      "description": "Wait for the operation to go through."
+      "title": "На этом счёте имеется операция в ожидании.",
+      "description": "Дождитесь завершения операции."
     },
     "AccountNameRequired": {
       "title": "Необходимо указать название счёта",
-      "description": "Please enter an account name"
+      "description": "Укажите название счёта"
     },
     "AccountNotSupported": {
       "title": "Счёт не поддерживается.",
       "description": "Повторите попытку или свяжитесь с поддержкой ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "В указанном ASA не выбран счёт получателя."
     },
     "AmountRequired": {
       "title": "Укажите сумму"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
+      "title": "Убедитесь, что в вашей системе есть камера, что она не используется другим приложением и что у Ledger Live есть разрешение на её использование.",
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
@@ -2960,11 +2960,11 @@
       "title": "Вы не можете уменьшить подтверждённую сумму, пока у вас имеется активная транзакция на пополнения."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": "Произошла ошибка (ошибка № 1)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "Что-то пошло не так (ошибка №2)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeInvalidSequence": {
@@ -2980,7 +2980,7 @@
       "description": "Make sure the account used has enough funds and try again"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": "Что-то пошло не так (ошибка №6)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -2988,7 +2988,7 @@
       "description": "Please check the address and try again"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": "Что-то пошло не так (ошибка №8)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeUnknownAddress": {
@@ -3000,11 +3000,11 @@
       "description": "Make sure the account used has enough funds and try again"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": "Что-то пошло не так (ошибка №11)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
+      "title": "Что-то пошло не так (ошибка №12)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
@@ -3012,19 +3012,19 @@
       "description": "Please reduce the size of the memo text and try again"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
+      "title": "Что-то пошло не так (ошибка №14)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "Что-то пошло не так (ошибка №15)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
+      "title": "Что-то пошло не так (ошибка №16)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
+      "title": "Что-то пошло не так (ошибка №17)",
       "description": "Please contact Ledger Support"
     },
     "CurrencyNotSupported": {
@@ -3151,7 +3151,7 @@
     },
     "NoAddressesFound": {
       "title": "К сожалению, счета не найдены",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "description": "При вычислении адреса что-то пошло не так. Повторите попытку или обратитесь в Поддержку Ledger"
     },
     "NotEnoughBalance": {
       "title": "Sorry, insufficient funds",
