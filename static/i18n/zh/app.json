@@ -1071,30 +1071,30 @@
       "votes": "票数 ({{number}})",
       "votesAddress": "<0>{{votes}}</0> 投给 <2>{{name}}</2>",
       "validators": "验证器",
-      "redelegated": "Redelegated",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
-      "redelegatedAmount": "Redelegated amount",
-      "undelegated": "Undelegated",
-      "undelegatedFrom": "Undelegated from",
-      "undelegatedAmount": "Undelegated amount",
+      "redelegated": "已重新委托",
+      "redelegatedFrom": "已重新委托自",
+      "redelegatedTo": "已重新委托至",
+      "redelegatedAmount": "已重新委托数额",
+      "undelegated": "已解除委托",
+      "undelegatedFrom": "已解除对后者的委托",
+      "undelegatedAmount": "已解除委托的数额",
       "rewardFrom": "奖励来自",
       "memo": "Memo",
-      "assetId": "Asset ID",
-      "rewards": "Earned rewards",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "assetId": "资产 ID",
+      "rewards": "已赚取的奖励",
+      "bondedAmount": "已绑定数额",
+      "unbondedAmount": "已解绑数额",
+      "withdrawUnbondedAmount": "已提取数额",
+      "palletMethod": "方法",
+      "transferAmount": "转移数额",
+      "validatorsCount": "验证器 ({{number}})"
     }
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "这是全部"
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
+    "allowAppPermission": "在您的设备上打开 {{wording}} 应用程序",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
     "allowManagerPermission": "允许 {{wording}} 在您的设备上运行",
     "loading": "正在加载……",
@@ -1375,7 +1375,7 @@
         "maxUsed": "资产不足",
         "validators": "验证器 ({{total}})",
         "votes": "可用资产：{{total}}",
-        "noResults": "No validator found for \"<0>{{search}}</0>\"."
+        "noResults": "未能找到 <0>{{search}}</0> 验证器"
       },
       "connectDevice": {
         "title": "设备"
@@ -1924,7 +1924,7 @@
       "steps": {
         "validators": {
           "title": "验证器",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "notValidatorsRemoved": "您提名的 {{count}} 个地址已经不再是验证器。它们将从您的提名交易中自动删除。",
           "maybeChill": "Clear nominations instead"
         },
         "connectDevice": {
@@ -2095,7 +2095,7 @@
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
-    "validator": "Validator",
+    "validator": "验证器",
     "yield": "Est. Yield",
     "address": "Address",
     "transactionID": "Transaction ID",
@@ -2137,20 +2137,20 @@
           "label": "Summary",
           "toDelegate": "Account to delegate",
           "toUndelegate": "Account to undelegate",
-          "validator": "Validator",
+          "validator": "验证器",
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
-          "randomly": "Randomly chosen validator",
+          "randomly": "随机选择的验证器",
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
         },
         "validator": {
-          "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
+          "title": "选择验证器",
+          "description": "您可以通过对比预估奖励率来选择验证器",
+          "customValidator": "自定义验证器",
           "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
+          "title": "自定义验证器",
           "text": "Please enter the address of the custom validator to delegate your account to.",
           "button": "Use validator"
         },
@@ -3454,7 +3454,7 @@
       "title": "Validators election must be closed"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "已选的某些地址并非验证器"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
@@ -3478,7 +3478,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "您必须至少选择一个验证器"
     }
   }
 }
