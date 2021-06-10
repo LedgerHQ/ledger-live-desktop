@@ -1218,7 +1218,7 @@
       },
       "dependencyUninstall": {
         "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "إظهار التطبيقات لإلغاء تثبيتها",
+        "showAll": "عرض التطبيقات المراد إلغاء تثبيتها",
         "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
         "confirm": "Uninstall {{app}} and other apps"
       }
