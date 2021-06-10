@@ -158,13 +158,13 @@
     "tooltip": "星标账户"
   },
   "bridge": {
-    "modalTitle": "Open Device Bridge",
+    "modalTitle": "打开设备桥接",
     "openHeader": "Expose your Device accounts through WebSocket",
     "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
-    "openedHeader": "{{appName}} bridge opened",
+    "openedHeader": "{{appName}} 已打开桥接",
     "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
+    "completeHeader": "桥接会话已完成",
+    "completeDescription": "Websocket 桥接现已关闭。",
     "openButton": "打开",
     "disconnectButton": "断开连接"
   },
@@ -221,9 +221,9 @@
         "title": "费率",
         "float": "浮动汇率",
         "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
+        "fixed": "固定汇率",
+        "fixedUnavailable": "两者的兑换不支持固定兑换率",
+        "floatDesc": "您的数额会根据市场条件而变动。",
         "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
         "by": "提供方"
       },
