@@ -3204,15 +3204,15 @@
       "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "title": "Этот курс больше не актуален",
+      "description": "Вы должны подтвердить обмен до конца отсчёта времени. Обменный курс действует лишь 60 секунд."
     },
     "TimeoutError": {
       "title": "Извините, истекло время ожидания ответа сервера",
       "description": "Пожалуйста, попробуйте ещё раз."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
+      "title": "Извините, время ответа сервера истекло ({{tag}})",
       "description": "Время ожидания истекло."
     },
     "TransportError": {
@@ -3232,7 +3232,7 @@
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
+      "title": "Устройство не должно быть в режиме Bootloader",
       "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
@@ -3347,7 +3347,7 @@
     },
     "ManagerAppRelyOnBTC": {
       "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "description": "Сначала установите последнюю версию приложений Bitcoin и Ethereum."
     },
     "UserRefusedDeviceNameChange": {
       "title": "Переименование отменено на устройстве",
@@ -3359,14 +3359,14 @@
     },
     "TronNoFrozenForBandwidth": {
       "title": "Нет активов для разморозки",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "description": "У вас нет активов для размораживания, привязанных к Пропускной способности"
     },
     "TronNoFrozenForEnergy": {
       "title": "Нет активов для разморозки",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "description": "У вас нет активов для размораживания, привязанных к Энергии"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": "Функция разморозки пока недоступна",
       "description": "С последней заморозки активов должно пройти 3 дня."
     },
     "TronVoteRequired": {
@@ -3377,17 +3377,17 @@
       "description": "Вы можете голосовать только целыми числами"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "Вознаграждение пока нельзя запросить",
+      "description": "Между запросами должно пройти 24 часа."
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "Нет вознаграждения, которое можно запросить"
     },
     "TronInvalidFreezeAmount": {
       "title": "Сумма для разморозки не может быть меньше 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
+      "title": "Отправка TRC20 на новый счёт не активирует его",
       "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
     },
     "TronUnexpectedFees": {
@@ -3398,14 +3398,14 @@
     },
     "TronTransactionExpired": {
       "title": "Транзакция просрочена",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "description": "Транзакции должны быть подписаны в течение 30 секунд. Пожалуйста, попробуйте ещё раз."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "Недостаточно Энергии (Energy) для отправки этого токена"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "title": "Не удалось подключить устройство",
+      "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений."
     },
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
@@ -3430,13 +3430,13 @@
       "title": "Баланс не может быть меньше {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "Откройте приложение {{expected}}"
     },
     "FeeTooHigh": {
       "title": "Network fees are above 10% of the amount"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Неправильный формат Memo"
     },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
@@ -3445,10 +3445,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Сумма должна быть больше {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
       "title": "Validators election must be closed"
@@ -3463,10 +3463,10 @@
       "title": "You have no unbonded assets"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "У вас нет назначений"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "Убедитесь, что вашего баланса достаточно, чтобы покрыть потенциальные комиссии"
     },
     "PolkadotDoMaxSendInstead": {
       "title": "Баланс не может быть ниже 1 DOT. Переведите макс. сумму на пустой счёт"
@@ -3478,7 +3478,7 @@
       "title": "You have exceeded the unbond limit"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "Вы должны выбрать хотя бы одного валидатора"
     }
   }
 }
