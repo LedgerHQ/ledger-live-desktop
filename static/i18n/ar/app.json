@@ -968,7 +968,7 @@
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "تحتاج إلى جهاز ليدجر (Ledger) لإكمال التحديث",
       "pendingDevices": "تعذر تحديث حساب واحد. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "pendingDevices_plural": "تعذّر تحديث حسابات {{totalMigratableAccounts}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
       "doItLaterBtn": "Do it later"
     },
     "progress": {
@@ -1254,10 +1254,10 @@
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identifier",
       "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuFirst": "قم بفضل كبل الUSB من جهازك",
+      "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
+      "mcuSecondNanoX": "اضغط مع الاستمرار على الزر الأيسر حتى تظهر <1><0>{{bootloaderOption}}</0></1>. اضغط على الزرين للتأكيد وأعد الاتصال بجهازك.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
@@ -2844,7 +2844,7 @@
           "text": "When I connect my Nano to the Ledger app, my private key is...",
           "answers": {
             "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "2": "اتصال وجيز بالإنترنت"
           },
           "results": {
             "success": {
@@ -3052,7 +3052,7 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
+      "title": "فشل الاتصال",
       "description": "يرجى إعادة المحاولة."
     },
     "DisconnectedDevice": {
@@ -3147,7 +3147,7 @@
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "description": "يرجى التحقق من اتصالك بالإنترنت."
     },
     "NoAddressesFound": {
       "title": "عذرًا، لم يتم العثور على حسابات",
@@ -3216,15 +3216,15 @@
       "description": "Timeout occurred."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "حدث خطأ ما. يُرجى إعادة توصيل جهارك",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "حدث خطأ ما. يُرجى إعادة توصيل جهارك",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "حدث خطأ ما. يُرجى إعادة توصيل جهارك",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
@@ -3312,7 +3312,7 @@
       "title": "Access dashboard to update",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
+        "1": "افصل كبل الUSB وأعد توصيله دون الضغط على أي أزرار.",
         "2": "Press both buttons together three times to display the Dashboard.",
         "3": "Open the Manager and click Update firmware."
       }
