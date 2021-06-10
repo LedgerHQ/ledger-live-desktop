@@ -1663,8 +1663,8 @@
           "confirmation": {
             "title": "Подтверждение",
             "success": {
-              "title": "You have successfully delegated your assets",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
+              "title": "Вы успешно делегировали активы",
+              "text": "Баланс обновится после подтверждения транзакции в блокчейне.",
               "cta": "Подробнее"
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
@@ -1674,34 +1674,34 @@
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "Получение вознаграждения",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
+            "title": "Вознаграждения",
             "compound": "Compound",
             "claim": "Cash in",
             "compoundOrClaim": "Compound or cash in",
             "compoundDescription": "Вознаграждения будут добавлены к делегированной сумме",
-            "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
-            "selectLabel": "Select a delegation"
+            "claimDescription": "Вознаграждения будут добавлены к вашим доступным средствам",
+            "compoundInfo": "Вы заработали <0>{{amount}}</0>. После нажатия кнопки Продолжить вознаграждения будут получены и автоматически делегированы тому же валидатору.",
+            "claimInfo": "Вы заработали <0>{{amount}}</0> от приведённого ниже валидатора. После нажатия кнопки Продолжить вознаграждения будут получены и автоматически добавлены к вашему балансу.",
+            "selectLabel": "Выберите делегирование"
           },
           "connectDevice": {
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
+            "title": "Подтверждение",
+            "label": "Подтверждение",
             "success": {
               "title": "Rewards cashed in successfully",
               "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards were added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
+              "text": "Вознаграждения добавлены к вашему балансу.",
+              "textCompound": "Ваши вознаграждения (<0>{{amount}}</0>) автоматически делегированы <0>{{validator}}</0>",
               "cta": "Подробнее"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Трансляция транзакции..."
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
           }
@@ -1710,28 +1710,28 @@
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "Переделегировать активы",
         "steps": {
           "starter": {
-            "title": "Redelegation",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "title": "Повторное делегирование",
+            "description": "Используйте повторное делегирование, чтобы легко переходить с одного валидатора на другого. Но если вы передумаете, то придётся подождать, потому что повторное делегирование инициирует блокировку средств на 21 день.",
+            "warning": "Выбирайте валидатора с умом. Часть заблокированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно. У вас может быть не более <0>7 повторных делегирований в очереди</0>.",
+            "howDelegationWorks": "Как работает делегирование?"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "title": "Валидаторы",
+            "currentDelegation": "Активное делегирование",
+            "newDelegation": "Новое делегирование",
+            "chooseValidator": "Выберите валидатора",
+            "warning": "Если вы передумаете, то прёдется подождать <0>21 день</0>, чтобы переделегировать средства новому валидатору"
           },
           "device": {
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Подтверждение",
             "success": {
-              "title": "You have successfully redelegated your assets",
+              "title": "Вы успешно переделегировали активы",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "Подробнее"
             },
@@ -1741,16 +1741,16 @@
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
+      "header": "Отзыв(ы) средств",
+      "headerTooltip": "Будут доступны после 21 дня блокировки",
       "inactiveTooltip": "Без делегирования средства не приносят вознаграждения.",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "Отзыв делегирования активов",
         "steps": {
           "amount": {
             "title": "Кол-во",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "subtitle": "Процедура отзыва делегирования занимает <0>21 день</0>.",
+            "warning": "Вознаграждения будут немедленно обналичены. Сумма после отзыва делегирования вернётся на доступный счёт по истечении <0>21-дневной блокировки</0>.",
             "fields": {
               "validator": "Валидатор",
               "amount": "Сумма отзыва делегирования"
@@ -1760,10 +1760,10 @@
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Подтверждение",
             "success": {
-              "title": "You have successfully undelegated your assets.",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
+              "title": "Вы успешно отозвали делегированные активы",
+              "description": "<0>{{amount}}</0> было отозвано у <0>{{validator}}</0>",
               "cta": "Подробнее"
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
@@ -1773,7 +1773,7 @@
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
+    "operationHasRewards": "Заработанное вознаграждение",
     "operationEarnedRewards": "Вы заработали вознаграждение на <0>{{amount}}</0>.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
@@ -1939,7 +1939,7 @@
             "cta": "Подробнее"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Трансляция транзакции..."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
@@ -1965,7 +1965,7 @@
             "Assets will be available again, 28 days after unbonding"
           ],
           "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "warning": "Выбирайте валидатора с умом. Часть заблокированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
         },
         "amount": {
           "title": "Кол-во",
@@ -2085,7 +2085,7 @@
             "cta": "Подробнее"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Трансляция транзакции..."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
