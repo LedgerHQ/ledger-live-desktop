@@ -2272,11 +2272,11 @@
     },
     "hardResetModal": {
       "title": "Сброс Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "desc": "Сбросьте Ledger Live, чтобы стереть все настройки и счета на вашем компьютере. Затем вы можете установить новый пароль и вновь добавить счета, используя устройство Ledger. Приватные ключи, которые дают доступ к вашим криптоактивам, хранятся в безопасности на вашем устройстве. Кроме того, у вас есть фраза восстановления."
     },
     "softResetModal": {
       "title": "Очистка кэша",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "Очистка кэша приводит к принудительной повторной синхронизации. Настройки и счета не будут затронуты. Приватные ключи, которые дают доступ к вашим криптоактивам, хранятся в безопасности на вашем устройстве. Кроме того, у вас есть лист с фразой восстановления."
     },
     "resetFallbackModal": {
       "title": "Требуется ваше действие",
@@ -2297,13 +2297,13 @@
     },
     "repairDevice": {
       "title": "Ремонт устройства Ledger",
-      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
+      "descSettings": "Используйте этот инструмент для восстановления устройства Ledger, если оно зависло в ходе обновления.",
       "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "Исправить"
     },
     "exportLogs": {
       "title": "Хранить логи",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "desc": "Хранение логов Ledger Live может потребоваться при устранения неполадок.",
       "btn": "Сохранять"
     },
     "accounts": {
@@ -2313,7 +2313,7 @@
       },
       "tokenBlacklist": {
         "title": "Скрытые токены",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "desc": "Чтобы скрыть токены, перейдите к списку токенов, нажмите по названию и удерживайте, а затем выберите «Скрыть токен».",
         "count": "{{count}} токен",
         "count_plural": "Токенов: {{count}}"
       },
@@ -3126,17 +3126,17 @@
     "ManagerQuitPage": {
       "install": {
         "title": "Прервать установку приложения?",
-        "description": "При выходе из Диспетчера установка приложения будет прекращена. Дождитесь завершения, чтобы установить приложения из очереди.",
-        "stay": "Finish install"
+        "description": "При выходе из Диспетчера установка приложения будет прервана. Дождитесь завершения, чтобы установить приложения из очереди.",
+        "stay": "Завершить установку"
       },
       "uninstall": {
         "title": "Прервать удаление приложения?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
+        "description": "При выходе из Диспетчера удаление приложения будет прервано.",
         "stay": "Finish uninstalling"
       },
       "update": {
-        "title": "Finish app updates in progress?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
+        "title": "Прервать обновление приложения?",
+        "description": "При выходе из Диспетчера обновление приложения будет прервано.",
         "stay": "Finish updates"
       },
       "quit": "Quit Manager"
@@ -3188,7 +3188,7 @@
       "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
+      "title": "Выполняется синхронизация ноды...",
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SatStackVersionTooOld": {
