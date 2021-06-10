@@ -232,7 +232,7 @@
       "bubble": "نحن نستخدم سعراً ثابتاً، هذا هو المبلغ الذي ستحصل عليه بالضبط.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available.",
+      "outdatedApp": "يتوفر تحديث لتطبيق {{currencyName}}.",
       "loadingRates": "جارٍ تحميل أسعار الصرف..."
     },
     "modal": {
@@ -897,7 +897,7 @@
       "desc": "إضافة حسابات لإدارة الأصول المشفرة الأخرى",
       "createAccount": "إضافة حساب"
     },
-    "recentActivity": "Latest operations",
+    "recentActivity": "أحدث العمليات",
     "totalBalance": "Total balance",
     "transactionsPendingConfirmation": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
   },
@@ -957,7 +957,7 @@
   "migrateAccounts": {
     "overview": {
       "title": "Ledger Live accounts update",
-      "successTitle": "Accounts updated successfully",
+      "successTitle": "تم تحديث الحسابات بنجاح",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "Export accounts to mobile",
@@ -1041,10 +1041,10 @@
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
-    "title": "Operation details",
+    "whatIsThis": "ما هذه العملية؟",
+    "title": "تفاصيل العملية",
     "account": "حساب",
-    "date": "Date",
+    "date": "التاريخ",
     "status": "Status",
     "confirmed": "تم التأكيد",
     "failed": "Failed",
@@ -1058,11 +1058,11 @@
     "showMore": "عرض المزيد {{recipients}}",
     "showLess": "عرض أقل",
     "tokenOperations": "عمليات رمز التوكن",
-    "subAccountOperations": "Subaccount operations",
+    "subAccountOperations": "عمليات الحساب الفرعي",
     "tokenTooltip": "هذه العملية مرتبطة بعمليات رمز التوكن التالية",
-    "subAccountTooltip": "This operation is related to the following subaccount operations",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
+    "subAccountTooltip": "هذه العملية مرتبطة بالعمليات التالية للحساب الفرعي",
+    "internalOperations": "العمليات الداخلية",
+    "internalOpTooltip": "لهذه العملية عمليات داخلية",
     "details": "{{ currency }} details",
     "multipleAddresses": "لماذا عناوين متعددة؟",
     "extra": {
@@ -1172,9 +1172,9 @@
         "manageAccount": "Manage my accounts"
       },
       "updatable": {
-        "title": "Updates available",
-        "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit Manager during update.",
+        "title": "التحديثات المتاحة",
+        "progressTitle": "{{number}} تحديثات التطبيق",
+        "progressWarning": "لا تغادر المدير أثناء التحديث.",
         "progress": "Updating all..."
       },
       "item": {
@@ -1183,18 +1183,18 @@
         "uninstalling": "Uninstalling...",
         "updating": "Updating...",
         "scheduled": "Queued",
-        "update": "Update available",
-        "updateAll": "Update all",
+        "update": "متوفر تحديث",
+        "updateAll": "تحديث الكل",
         "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
         "install": "Install",
         "installed": "Installed",
-        "updated": "Updated",
+        "updated": "تم تحديثه",
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
-        "addAccountWarn": "Please wait for the app updates to finish",
+        "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
         "learnMore": "معرفة المزيد",
         "learnMoreTooltip": "معرفة المزيد عن {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
@@ -1227,7 +1227,7 @@
       "updateLater": "إلغاء",
       "seedReady": "I have my recovery phrase",
       "dontHaveSeed": "Don't have your recovery phrase? ",
-      "followTheGuide": "Follow our step by step update guide",
+      "followTheGuide": "اتبع دليل الخطوة بخطوة للتحديث الخاص بنا",
       "removeApps": "Uninstall all apps before updating",
       "update": "Firmware update",
       "updateBtn": "Update firmware",
@@ -1253,7 +1253,7 @@
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identifier",
-      "mcuTitle": "Finalize update",
+      "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "Please wait for the update to finish",
@@ -2081,7 +2081,7 @@
           "label": "التأكيد",
           "success": {
             "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
+            "text": "سترى معاملتك في السجل قريبًا.",
             "cta": "عرض التفاصيل"
           },
           "pending": {
@@ -2205,8 +2205,8 @@
         "button": "Export"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "title": "سجل العمليات",
+        "desc": "احفظ ملف بصيغة CSV لعمليات حسابك على جهاز الكمبيوتر الخاص بك."
       },
       "modal": {
         "button": "Done",
@@ -2359,7 +2359,7 @@
     "error": "Error during update. Please download again",
     "reDownload": "Download again",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "downloadNow": "تنزيل التحديث"
   },
   "crash": {
     "title": "Something went wrong",
@@ -2369,7 +2369,7 @@
     "dataFolder": "View user data"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
+    "title": "سجل العمليات",
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
@@ -2399,7 +2399,7 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "أخبار",
-      "operation": "Operation"
+      "operation": "عملية"
     }
   },
   "informationCenter": {
@@ -2692,8 +2692,8 @@
               "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "title": "تحقق من صحة الكلمة #1...",
+              "descr": "اختر الكلمة رقم #1 من بين الاقتراحات. اضغط على كلا الزرين للتحقق من صحتها."
             },
             "andNext": {
               "title": "Repeat for all words!"
@@ -2786,7 +2786,7 @@
           "description": "يعمل جهاز نانو (Nano) الخاص بك كمحفظة \"للتخزين البارد\". ويعني ذلك أنه لا يكشف مفتاحك الخاص على الإنترنت أبدًا، حتى عند استخدام التطبيق."
         },
         "validateTransactions": {
-          "title": "Validate transactions",
+          "title": "التحقق من صحة المعاملات",
           "description": "يتيح لك ليدجر لايف شراء العملات المشفرة وبيعها وإدارتها وتبادلها وكسبها بينما تظل محميًا. ستتحقق من صحة كل معاملة تشفير باستخدام جهاز نانو (Nano) الخاص بك."
         },
         "setUpNanoWallet": {
@@ -2932,7 +2932,7 @@
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "There is a pending operation for this account.",
-      "description": "Wait for the operation to go through."
+      "description": "انتظر حتى تكتمل العملية."
     },
     "AccountNameRequired": {
       "title": "An account name is required",
@@ -2969,7 +2969,7 @@
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "description": "يرجى محاولة العملية مرة أخرى"
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
@@ -3040,7 +3040,7 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
+      "title": "عذرًا، فشل التحديث",
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر"
     },
     "DeviceHalted": {
@@ -3084,7 +3084,7 @@
       "description": "يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
+      "title": "عذراً، لا يوجد شيء للتحديث",
       "description": "يرجى الاتصال بدعم ليدجر إذا لم يكن بإمكانك استخدام جهازك."
     },
     "LedgerAPI4xx": {
@@ -3137,7 +3137,7 @@
       "update": {
         "title": "Finish app updates in progress?",
         "description": "Quitting the Manager will terminate the app updates in progress.",
-        "stay": "Finish updates"
+        "stay": "إنهاء التحديثات"
       },
       "quit": "Quit Manager"
     },
@@ -3255,7 +3255,7 @@
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك"
     },
     "UpdateYourApp": {
-      "title": "App update required",
+      "title": "مطلوب تحديث التطبيق",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "DeviceOnDashboardExpected": {
@@ -3275,7 +3275,7 @@
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
+      "title": "مطلوب تحديث التطبيق",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
@@ -3309,7 +3309,7 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "قم بالوصول إلى لوحة المعلومات للتحديث",
       "description": "",
       "list": {
         "1": "افصل كبل الUSB وأعد توصيله دون الضغط على أي أزرار.",
