@@ -458,7 +458,7 @@
     "emptyState": {
       "title": "No crypto assets yet?",
       "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{ticker}}</0></3> و الرموز</5> <5><0>{{tokenList}}</0>",
       "buttons": {
         "receiveFunds": "أستلام",
         "buy": "شراء"
@@ -934,8 +934,8 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "Learn more",
-    "seeTokens": "عرض الرموز ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "seeTokens": "عرض رموز التوكن ({{tokenCount}})",
+    "hideTokens": "إخفاء رموز التوكن ({{tokenCount}})",
     "countTooltip": "1 token",
     "countTooltip_plural": "{{count}} tokens",
     "algorand": {
@@ -944,7 +944,7 @@
       "placeholder": "You can add assets to your {{currencyName}} account.",
       "link": "How Assets (ASA) works?",
       "seeTokens": "عرض ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})"
+      "hideTokens": "إخفاء ASA ({{tokenCount}})"
     }
   },
   "subAccounts": {
@@ -1000,7 +1000,7 @@
     },
     "fullNodeReadyInfo": "ستتم إضافة الحسابات باستخدام عقدتك الكاملة للبيتكوين.",
     "fullNodeConfigure": "تكوين العقدة",
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "إن {{token}} ({{ticker}}) هو رمز توكن {{tokenType}}. يمكنك استلام رموز التوكن بشكل مباشر على حساب {{currency}}.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "اختار كل ({{count}})",
     "unselectAll": "إلغاء اختيار كل ({{count}})",
@@ -1095,7 +1095,7 @@
   },
   "DeviceAction": {
     "allowAppPermission": "افتح تطبيق {{wording}} على جهازك",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowAppPermissionSubtitleToken": "لإدارة رموز التوكن {{token}} الخاصة بك",
     "allowManagerPermission": "السماح بـ{{wording}} على جهازك",
     "loading": "Loading...",
     "connectAndUnlockDevice": "قم بتوصيل جهازك وإلغاء قفله",
@@ -1198,9 +1198,9 @@
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
-        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
-        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "useAppForToken": "هل تتطلع إلى إدارة رموز التوكن {{tokenType}}؟",
+        "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> و يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
+        "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
         "intallParentApp": "Install {{appName}} app"
       },
