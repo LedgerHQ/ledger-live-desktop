@@ -756,12 +756,12 @@
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
+      "title": "请先创建 ETH 账户",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
       "cta": "添加账户"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have any {{ asset }} account.",
+      "title": "您没有任何 {{ asset }} 帐户。",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
       "ctaBuy": "买入 {{ asset }}",
       "ctaReceive": "接收 {{ asset }}"
@@ -875,11 +875,11 @@
       "description": "Sell Bitcoin with our partner directly from Ledger Live"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
+      "title": "用 ALGORAND 进行权益质押",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     },
     "swap": {
-      "title": "Swap crypto",
+      "title": "Swap 加密货币",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
@@ -887,12 +887,12 @@
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
-      "title": "BLACK FRIDAY ",
+      "title": "黑色星期五 ",
       "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "资产组合",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
       "createAccount": "Add account"
@@ -902,7 +902,7 @@
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
-    "title": "Current address",
+    "title": "当前地址",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
@@ -942,22 +942,22 @@
       "title": "ASA (资产)",
       "cta": "添加 ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How Assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})"
+      "link": "资产 (ASA) 如何运作？",
+      "seeTokens": "显示 ASA ({{tokenCount}})",
+      "hideTokens": "隐藏 ASA ({{tokenCount}})"
     }
   },
   "subAccounts": {
-    "title": "Subaccounts",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "title": "子账户",
+    "seeSubAccounts": "显示子账户 ({{tokenCount}})",
+    "hideSubAccounts": "隐藏子账户 ({{tokenCount}})",
     "countTooltip": "1 个子账户",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "countTooltip_plural": "{{count}} 个子账户"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "successTitle": "Accounts updated successfully",
+      "title": "Ledger Live 账户更新",
+      "successTitle": "账户已成功更新",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "导出账户至移动版",
