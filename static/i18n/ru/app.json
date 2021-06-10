@@ -1154,27 +1154,27 @@
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
-        "title": "Show",
-        "all": "All",
-        "supported": "Supported in Live",
-        "installed": "Installed",
-        "not_installed": "Not installed"
+        "title": "Показать",
+        "all": "Все",
+        "supported": "Поддерживается в Ledger Live",
+        "installed": "Установлено",
+        "not_installed": "Не установлено"
       },
       "sort": {
-        "title": "Sort",
-        "name_asc": "Name A-Z",
-        "name_desc": "Name Z-A",
-        "marketcap_desc": "Market cap"
+        "title": "Сортировать",
+        "name_asc": "Название А-Я",
+        "name_desc": "Название Я-А",
+        "marketcap_desc": "Рыночная капитализация"
       },
       "installSuccess": {
-        "title": "App installed successfully. You can now add your {{app}} accounts",
-        "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Manage my accounts"
+        "title": "Приложение успешно установлено. Теперь вы можете добавить свои счета {{app}}",
+        "title_plural": "Приложения успешно установлены. Теперь вы можете добавить свои счета",
+        "manageAccount": "Управление счетами"
       },
       "updatable": {
-        "title": "Updates available",
-        "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit Manager during update.",
+        "title": "Доступны обновления",
+        "progressTitle": "Обновления приложений: {{number}}",
+        "progressWarning": "Не выходите из Диспетчера в процессе обновления.",
         "progress": "Обновляем всё..."
       },
       "item": {
