@@ -1052,7 +1052,7 @@
     "fees": "费用",
     "noFees": "无费用",
     "from": "来自",
-    "to": "至",
+    "to": "发往",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "showMore": "Show {{recipients}} more",
@@ -1119,9 +1119,9 @@
       "amountSent": "发送数额",
       "amountReceived": "待收数额",
       "amountReceivedFloat": "Amount to receive before service fees",
-      "fees": "Fees",
-      "provider": "Provider",
-      "payoutNetworkFees": "Payout fees",
+      "fees": "费用",
+      "provider": "提供方",
+      "payoutNetworkFees": "支出费用",
       "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
     },
     "sell": {
@@ -1138,7 +1138,7 @@
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "No storage left",
+      "noFreeSpace": "存储空间不足",
       "installed": "应用程序",
       "capacity": "容量",
       "used": "已用",
@@ -1155,50 +1155,50 @@
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
         "title": "Show",
-        "all": "All",
+        "all": "全部",
         "supported": "Supported in Live",
         "installed": "Installed",
         "not_installed": "Not installed"
       },
       "sort": {
         "title": "Sort",
-        "name_asc": "Name A-Z",
-        "name_desc": "Name Z-A",
-        "marketcap_desc": "Market cap"
+        "name_asc": "名称 A-Z",
+        "name_desc": "名称 Z-A",
+        "marketcap_desc": "市值"
       },
       "installSuccess": {
         "title": "App installed successfully. You can now add your {{app}} accounts",
         "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Manage my accounts"
+        "manageAccount": "管理我的账户"
       },
       "updatable": {
-        "title": "Updates available",
+        "title": "可用更新",
         "progressTitle": "{{number}} App updates",
         "progressWarning": "Do not quit Manager during update.",
-        "progress": "Updating all..."
+        "progress": "正在更新全部……"
       },
       "item": {
         "version": "Version {{version}}",
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "updating": "Updating...",
-        "scheduled": "Queued",
-        "update": "Update available",
-        "updateAll": "Update all",
-        "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
-        "install": "Install",
-        "installed": "Installed",
-        "updated": "Updated",
-        "uninstall": "Uninstall",
+        "installing": "正在安装……",
+        "uninstalling": "正在卸载……",
+        "updating": "正在更新……",
+        "scheduled": "排队",
+        "update": "可用更新",
+        "updateAll": "全部更新",
+        "updateAllOutOfMemory": "储存空间不足。请卸载一些应用程序",
+        "install": "安装",
+        "installed": "已安装",
+        "updated": "已更新",
+        "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
-        "supported": "Ledger Live supported",
-        "addAccount": "Add account",
-        "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
-        "learnMore": "Learn more",
-        "learnMoreTooltip": "Learn more about {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}",
-        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
+        "supported": "Ledger Live 支持",
+        "addAccount": "添加账户",
+        "addAccountTooltip": "添加 {{appName}} 账户",
+        "addAccountWarn": "请等待应用程序完成更新",
+        "learnMore": "了解更多信息",
+        "learnMoreTooltip": "了解关于 {{appName}} 的更多信息...",
+        "removeTooltip": "卸载 {{appName}}",
+        "useAppForToken": "需要管理 {{tokenType}} 代币？",
         "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Go to accounts",
@@ -2720,50 +2720,50 @@
           },
           "genuineCheck": {
             "success": {
-              "title": "All good!",
+              "title": "很好！",
               "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
             },
             "buttons": {
-              "next": "Continue",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "继续",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
+            "title": "保管好您的恢复短语",
             "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
               "next": "OK, I'm done!",
-              "prev": "Previous step",
-              "help": "Need help",
+              "prev": "上一步",
+              "help": "需要帮助",
               "learn": "Learn how to hide it"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
+            "title": "检验真伪",
             "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
             "buttons": {
-              "next": "Check my Nano",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "检验我的 Nano",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "quizzSuccess": {
-            "title": "Already a pro!",
+            "title": "已经是位高手！",
             "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "下一步",
+              "prev": "上一步"
             }
           },
           "quizzFail": {
-            "title": "You will soon become a pro...",
+            "title": "距成为高手仅一步之遥……",
             "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
+            "paragraph2": "只剩下最后一小步！",
             "buttons": {
-              "next": "Next step",
+              "next": "下一步",
               "prev": "Previous step"
             }
           }
