@@ -2656,11 +2656,11 @@
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
               "title": "Take your recovery sheet",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "descr": "احصل على صفحة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
             },
             "writeDownWords": {
               "title": "Write down all words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
               "next": "Next step",
@@ -2671,8 +2671,8 @@
           "newRecoveryPhrase": {
             "title": "عبارة الاسترداد",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "paragraph2": "يولد جهاز نانو (Nano) الخاص بك عبارة استرداد فريدة. لا تحتفظ ليدجر بنسخة منها.",
+            "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد هذه فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
               "next": "عبارة الاسترداد",
               "prev": "Previous step",
@@ -2731,7 +2731,7 @@
           },
           "hideRecoveryPhrase": {
             "title": "إخفاء عبارة الاسترداد الخاصة بك",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+            "paragraph": "عبارة الاسترداد الخاصة بك هي فرصتك الأخيرة للوصول إلى أصولك المشفرة، إذا لم تتمكن من استخدام جهاز نانو (Nano) الخاص بك. يجب عليك الاحتفاظ بها في مكان آمن.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "لا تشارك أبدًا عبارتك المكوّنة من 24 كلمة مع أي شخص، ولا حتى مع ليدجر (Ledger).",
             "buttons": {
@@ -2779,15 +2779,15 @@
         },
         "ownYourPrivateKey": {
           "title": "Own your private key",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "description": "يتم تخزين مفتاحك الخاص في جهاز نانو (Nano) الخاص بك ويجب أن تكون أنت الشخص الوحيد الذي يمتلكه لتتحكم في أموالك."
         },
         "stayOffline": {
           "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "description": "يعمل جهاز نانو (Nano) الخاص بك كمحفظة \"للتخزين البارد\". ويعني ذلك أنه لا يكشف مفتاحك الخاص على الإنترنت أبدًا، حتى عند استخدام التطبيق."
         },
         "validateTransactions": {
           "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "description": "يتيح لك ليدجر لايف شراء العملات المشفرة وبيعها وإدارتها وتبادلها وكسبها بينما تظل محميًا. ستتحقق من صحة كل معاملة تشفير باستخدام جهاز نانو (Nano) الخاص بك."
         },
         "setUpNanoWallet": {
           "title": "لنعد جهاز نانو (Nano) الخاص بك!",
@@ -2809,7 +2809,7 @@
         "1": {
           "text": "As a Ledger user, my crypto is stored:",
           "answers": {
-            "1": "On my Nano",
+            "1": "على جهاز نانو (Nano) الخاص بي",
             "2": "On the blockchain"
           },
           "results": {
@@ -2841,7 +2841,7 @@
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "عندما أقوم بتوصيل جهاز Nano الخاص بي بتطبيق ليدجر، فإن مفتاحي الخاص...",
           "answers": {
             "1": "Still offline",
             "2": "اتصال وجيز بالإنترنت"
