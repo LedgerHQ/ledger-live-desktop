@@ -895,11 +895,11 @@
     "title": "资产组合",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "Add account"
+      "createAccount": "添加账户"
     },
-    "recentActivity": "Latest operations",
-    "totalBalance": "Total balance",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "recentActivity": "近期操作",
+    "totalBalance": "总余额",
+    "transactionsPendingConfirmation": "有些交易尚未确认。这些交易将反映在您的余额中，并在确认后可用。"
   },
   "currentAddress": {
     "title": "当前地址",
