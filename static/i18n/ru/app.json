@@ -3233,26 +3233,26 @@
     },
     "UnexpectedBootloader": {
       "title": "Устройство не должно быть в режиме Bootloader",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "description": "Перезагрузите устройство и не трогайте кнопки когда появится логотип. Обратитесь в Поддержку Ledger, если проблема не исчезнет."
     },
     "UserRefusedAllowManager": {
       "title": "Диспетчер был отклонён на устройстве"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "title": "Переименование отменено на устройстве",
+      "description": "Все приложения на вашем устройстве удалены. Своевременно обновляйте устройство, чтобы не пропустить улучшения безопасности и функциональности."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
+      "title": "Действие отклонено",
       "description": "Пользователь отклонил операцию на устройстве"
     },
     "TransactionRefusedOnDevice": {
       "title": "Операция отклонена на устройстве",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений"
     },
     "UserRefusedAddress": {
       "title": "Адрес получения отклонён.",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений"
     },
     "UpdateYourApp": {
       "title": "Необходимо обновить приложение",
@@ -3285,7 +3285,7 @@
       "title": "Адрес получателя совпадает с адресом отправителя"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "Произошёл сбой подключения",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
@@ -3313,23 +3313,23 @@
       "description": "",
       "list": {
         "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "2": "Трижды нажмите обе кнопки одновременно, чтобы открыть Консоль.",
+        "3": "Откройте Диспетчер и нажмите Обновить прошивку."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Нельзя получать платежи на субсчета",
+      "description": "Если вы хотите получать средства, используйте основной счёт"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
+      "title": "Нельзя отправлять платежи с субсчетов",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
       "title": "Please undelegate the account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "Пожалуйста, сначала обнулите все субсчета"
     },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
