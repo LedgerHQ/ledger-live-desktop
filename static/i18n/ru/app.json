@@ -1775,25 +1775,25 @@
   "algorand": {
     "operationHasRewards": "Заработанное вознаграждение",
     "operationEarnedRewards": "Вы заработали вознаграждение на <0>{{amount}}</0>.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (+ вознаграждение <0>{{reward}}</0>)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "Добавить ASA (актив)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
+            "title": "ASA (актив)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "selectLabel": "Выберите ASA (актив)",
+            "disabledTooltip": "У вас уже есть этот ASA (актив) на счету Algorand"
           },
           "connectDevice": {
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Подтверждение",
             "success": {
-              "title": "{{token}} asset successfully added",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "title": "Актив {{token}} добавлен",
+              "text": "Теперь вы можете получать и отправлять активы <0>{{token}}</0> на счёт Algorand.",
               "cta": "Подробнее"
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
@@ -1802,37 +1802,37 @@
       }
     },
     "claimRewards": {
-      "header": "Rewards",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
+      "header": "Вознаграждения",
+      "tooltip": "Вознаграждения в токенах Algorand распределяются регулярно и запрашиваются автоматически при совершении транзакции.",
+      "cta": "Получить вознаграждения",
       "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "Получение вознаграждения",
         "steps": {
           "starter": {
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "description": "Получайте вознаграждения в токенах Algorand просто за то, что Algorand контролирует ваши активы.",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
-              "access": "Increase the account’s balance to increase rewards.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "delegate": "Чтобы получать вознаграждение требуется не менее 1 токена ALGO.",
+              "access": "Наращивайте баланс счёта, чтобы увеличить вознаграждения.",
+              "ledger": "Чтобы получить вознаграждения, осуществите входящую или исходящую транзакцию."
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "Как работают вознаграждения в Algorand?",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "Получить Algo"
             }
           },
           "info": {
-            "title": "Rewards",
+            "title": "Вознаграждения",
             "description": "Поздравляем! Вы заработали {{amount}}. Нажмите «Продолжить», чтобы получить вознаграждения",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "info": "Вам будет предложено создать пустую транзакцию на ваш счёт. Так вознаграждения будут начисляться на ваш баланс с минимальными комиссиями за транзакции."
           },
           "connectDevice": {
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Подтверждение",
             "success": {
-              "title": "Rewards successfully claimed!",
+              "title": "Вознаграждения успешно получены!",
               "text": "Your rewards were added to your available balance",
               "cta": "Подробнее"
             },
@@ -1893,49 +1893,49 @@
       "withdrawUnbonded": "Сумма вывода ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "rebond": "Повторно заблокировать",
+      "unbonded": "Не заблокированные"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Управление активами",
       "bond": {
-        "title": "Bond",
+        "title": "Заблокировать",
         "description": "Чтобы получить вознаграждение, сначала заблокируйте определённую сумму. Затем вы должны назначить своего(-их) валидатора(-ов)."
       },
       "unbond": {
-        "title": "Unbond",
+        "title": "Разблокировать",
         "description": "Чтобы снова получить доступ к заблокированной сумме, разблокируйте её. Вы сможете вывести средства по прошествии 28 дней после блокировки."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
+        "title": "Вывести",
         "description": "Чтобы вернуть разблокированные средства на баланс, необходимо вывести эту сумму вручную."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "Назначить",
+        "description": "Выберите до 16 валидаторов. Убедитесь, что назначения активны, чтобы получать вознаграждения."
       },
       "chill": {
-        "title": "Clear nominations",
+        "title": "Отменить назначения",
         "description": "Удалить все назначения. Вы перестанете получать вознаграждения. Ваша заблокированная сумма останется заблокированной."
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "Назначить",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "title": "Валидаторы",
+          "notValidatorsRemoved": "Вы назначили {{count}} адресов, которые больше не являются валидаторами. Они будут автоматически удалены из вашей назначающей транзакции.",
+          "maybeChill": "Также можно отозвать назначения"
         },
         "connectDevice": {
           "title": "Устройство"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Подтверждение",
+          "label": "Подтверждение",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
+            "title": "Вы успешно назначили валидаторов",
+            "text": "Вы начнете получать вознаграждения, когда ваши активы будут связаны с выбранным(-и) вами валидатором(-ами).",
             "cta": "Подробнее"
           },
           "pending": {
@@ -1946,15 +1946,15 @@
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "Блокировка активов",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "label": "Куда перечислять вознаграждения",
+        "stash": "Доступные средства",
+        "stashDescription": "Вознаграждения добавлены к вашему балансу.",
+        "staked": "Заблокированная сумма",
+        "stakedDescription": "Вознаграждения зачислены на счёт с заблокированными средствами для получения дальнейшего вознаграждения.",
+        "optionTitle": "Примечание",
+        "optionDescription": "После установки выбор фиксируется на весь срок действия блокировки. Если вы передумаете, прочтите статью ниже"
       },
       "steps": {
         "starter": {
