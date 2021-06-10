@@ -949,7 +949,7 @@
   },
   "subAccounts": {
     "title": "Subaccounts",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "seeSubAccounts": "عرض الحسابات الفرعية ({{tokenCount}})",
     "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
     "countTooltip": "1 subaccount",
     "countTooltip_plural": "{{count}} subaccounts"
@@ -1013,7 +1013,7 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ العناوين القديمة."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
@@ -1154,7 +1154,7 @@
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
-        "title": "Show",
+        "title": "عرض",
         "all": "All",
         "supported": "Supported in Live",
         "installed": "Installed",
@@ -1882,7 +1882,7 @@
       "externalStashTooltip": "This account controls another account.",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
+      "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "There are no active nominations.",
       "showAllUnlockings": "عرض كل مبالغ إلغاء التقيد ({{count}})",
       "hideAllUnlockings": "Hide unbonding amounts"
@@ -2182,8 +2182,8 @@
   "carousel": {
     "hidden": {
       "close": "Confirm",
-      "undo": "Show again",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "undo": "إعادة العرض",
+      "disclaimer": "لن يظهر هذا الشعار مرة أخرى حتى يكون هناك إعلان جديد"
     }
   },
   "settings": {
@@ -2223,7 +2223,7 @@
       "theme": "Theme",
       "themeDesc": "اختار السمة.",
       "counterValue": "Countervalue",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "Regional market indicator",
@@ -2733,7 +2733,7 @@
             "title": "إخفاء عبارة الاسترداد الخاصة بك",
             "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "neverShowToAnyone": "لا تشارك أبدًا عبارتك المكوّنة من 24 كلمة مع أي شخص، ولا حتى مع ليدجر (Ledger).",
             "buttons": {
               "next": "OK, I'm done!",
               "prev": "Previous step",
