@@ -832,7 +832,7 @@
   },
   "blacklistToken": {
     "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
+    "desc": "هذا الإجراء سيخفي جميع حسابات <1><0>{{tokenName}}</0></1> ، يمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات</3>",
     "hideCTA": "Hide token"
   },
   "banners": {
@@ -934,7 +934,7 @@
     "cta": "Add token",
     "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "Learn more",
-    "seeTokens": "Show tokens ({{tokenCount}})",
+    "seeTokens": "عرض الرموز ({{tokenCount}})",
     "hideTokens": "Hide tokens ({{tokenCount}})",
     "countTooltip": "1 token",
     "countTooltip_plural": "{{count}} tokens",
@@ -943,7 +943,7 @@
       "cta": "Add ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
       "link": "How Assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
+      "seeTokens": "عرض ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})"
     }
   },
@@ -1012,7 +1012,7 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "إظهار جميع أنواع العناوين",
+      "showAllAddressTypes": "عرض جميع أنواع العناوين",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
@@ -1055,8 +1055,8 @@
     "to": "To",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
+    "showMore": "عرض المزيد {{recipients}}",
+    "showLess": "عرض أقل",
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
@@ -1218,7 +1218,7 @@
       },
       "dependencyUninstall": {
         "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
+        "showAll": "إظهار التطبيقات لإلغاء تثبيتها",
         "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
         "confirm": "Uninstall {{app}} and other apps"
       }
@@ -1506,8 +1506,8 @@
     "distribution": "Allocation",
     "amount": "المبلغ",
     "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
+    "showAll": "عرض الكل",
+    "showLess": "عرض أقل",
     "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
@@ -1572,7 +1572,7 @@
             "title": "Cast votes",
             "description": "Vote for one or more Super Representatives to start earning rewards.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
+              "doNotShowAgain": "عدم الإظهار مرة أخرى",
               "next": "Cast Votes"
             },
             "info": {
@@ -1881,10 +1881,10 @@
       "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
       "externalStashTooltip": "This account controls another account.",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
+      "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
+      "showAllUnlockings": "عرض كل مبالغ إلغاء التقيد ({{count}})",
       "hideAllUnlockings": "Hide unbonding amounts"
     },
     "unlockings": {
@@ -2446,7 +2446,7 @@
       },
       "recoverySeed": {
         "title1": "كيف تعمل عبارة الاسترداد؟",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
+        "paragraph1": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد، حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "More about the recovery phrase",
         "title2": "What happens if I lose access to my Nano?",
