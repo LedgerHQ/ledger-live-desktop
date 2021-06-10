@@ -165,7 +165,7 @@
     "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
     "completeHeader": "Bridge session completed",
     "completeDescription": "The websocket bridge is now closed.",
-    "openButton": "Open",
+    "openButton": "打开",
     "disconnectButton": "断开连接"
   },
   "swap": {
@@ -190,15 +190,15 @@
     "missingApp": {
       "title": "Please install the {{appName}} app on your device",
       "subtitle": "Go to manager and install {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "cta": "前往管理器"
     },
     "outdatedApp": {
       "title": "Please update the {{appName}} app on your device",
       "subtitle": "Go to manager and update {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "cta": "前往管理器"
     },
     "kyc": {
-      "title": "Welcome to Swap",
+      "title": "欢迎使用 Swap",
       "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
@@ -207,8 +207,8 @@
       "from": {
         "title": "来自",
         "account": "账户",
-        "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "amount": "发送数额",
+        "currency": "加密资产"
       },
       "to": {
         "title": "到",
@@ -859,7 +859,7 @@
     "buyCrypto": {
       "title": "Buy Crypto",
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "cta": "立即买入"
     },
     "backupPack": {
       "title": "Back-up pack",
@@ -871,7 +871,7 @@
       "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
     },
     "sell": {
-      "title": "sell crypto",
+      "title": "卖出加密货币",
       "description": "Sell Bitcoin with our partner directly from Ledger Live"
     },
     "stakeAlgorand": {
@@ -951,7 +951,7 @@
     "title": "Subaccounts",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
     "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
+    "countTooltip": "1 个子账户",
     "countTooltip_plural": "{{count}} subaccounts"
   },
   "migrateAccounts": {
@@ -1116,8 +1116,8 @@
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
+      "amountSent": "发送数额",
+      "amountReceived": "待收数额",
       "amountReceivedFloat": "Amount to receive before service fees",
       "fees": "Fees",
       "provider": "Provider",
@@ -1139,12 +1139,12 @@
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
       "noFreeSpace": "No storage left",
-      "installed": "Apps",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmwareAvailable": "Firmware is outdated:",
+      "installed": "应用程序",
+      "capacity": "容量",
+      "used": "已用",
+      "firmwareAvailable": "固件版本过期：",
       "firmwareUpToDate": "Firmware is up to date:",
-      "genuine": "Device is genuine",
+      "genuine": "设备是正版的",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
     },
     "applist": {
@@ -1190,7 +1190,7 @@
         "installed": "Installed",
         "updated": "Updated",
         "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough storage",
+        "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live supported",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
@@ -1218,7 +1218,7 @@
       },
       "dependencyUninstall": {
         "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
+        "showAll": "显示待卸载的应用程序",
         "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
         "confirm": "Uninstall {{app}} and other apps"
       }
@@ -1393,7 +1393,7 @@
   },
   "buy": {
     "title": "Buy",
-    "titleCrypto": "Buy {{currency}}",
+    "titleCrypto": "买入 {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
     "withoutDevice": "Continue without my device",
     "connectWithoutDevice": "It's better to use your device for optimal security.",
@@ -1401,7 +1401,7 @@
   },
   "sell": {
     "title": "Sell",
-    "titleCrypto": "Sell {{currency}}"
+    "titleCrypto": "卖出 {{currency}}"
   },
   "receive": {
     "title": "Receive",
@@ -1409,7 +1409,7 @@
     "steps": {
       "chooseAccount": {
         "title": "Account",
-        "label": "Account to credit",
+        "label": "信贷账户",
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
@@ -1453,8 +1453,8 @@
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
         "from": "来自",
-        "to": "To",
-        "selectAccountDebit": "Account to debit",
+        "to": "发往",
+        "selectAccountDebit": "借记账户",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
         "fees": "Network fees",
@@ -1537,7 +1537,7 @@
       "remainingVotes": {
         "title": "You still have {{amount}} votes remaining",
         "description": "You can cast your remaining votes to earn more rewards",
-        "button": "Vote now"
+        "button": "立即投票"
       },
       "flow": {
         "steps": {
@@ -1603,7 +1603,7 @@
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
     "strategy": "Coin selection strategy",
     "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
+    "amount": "发送数额：",
     "replaceable": "replaceable",
     "cannotSelect": {
       "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
@@ -2189,7 +2189,7 @@
   "settings": {
     "title": "Settings",
     "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "helpButton": "帮助",
     "tabs": {
       "display": "General",
       "currencies": "Crypto assets",
@@ -2202,14 +2202,14 @@
       "accounts": {
         "title": "Export accounts",
         "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "button": "导出"
       },
       "operations": {
         "title": "Operation history",
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
-        "button": "Done",
+        "button": "完成",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
@@ -2293,13 +2293,13 @@
     "openUserDataDirectory": {
       "title": "View user data",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "View"
+      "btn": "查看"
     },
     "repairDevice": {
       "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
-      "button": "Repair"
+      "button": "修复"
     },
     "exportLogs": {
       "title": "Save logs",
@@ -2373,8 +2373,8 @@
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
-    "cta": "Save",
-    "ctaSuccess": "Done",
+    "cta": "保存",
+    "ctaSuccess": "完成",
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
     "selectedAccounts_plural": "Accounts to be included ({{count}})",
@@ -2398,7 +2398,7 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News",
+      "announcement": "新闻",
       "operation": "Operation"
     }
   },
@@ -2499,7 +2499,7 @@
         "greetings": "Hello!",
         "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "separator": "或者",
         "options": {
           "1": {
             "heading": "First use",
@@ -2532,9 +2532,9 @@
             "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "好的，我一切就绪！",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "howToGetStarted": {
@@ -2545,8 +2545,8 @@
               "3": "Stay alone, and choose a safe and quiet environment."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "好的，我一切就绪！",
+              "prev": "上一步"
             }
           },
           "deviceHowTo": {
@@ -2555,7 +2555,7 @@
               "descr": "Connect your device to your computer with the USB cable."
             },
             "browse": {
-              "title": "Browse",
+              "title": "浏览",
               "descr": "Learn how to interact with your device by reading the on-screen instructions."
             },
             "select": {
@@ -2567,18 +2567,18 @@
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "下一步",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
+              "title": "启动 Nano",
               "descr": "Connect your device to your computer with the USB cable."
             },
             "browse": {
-              "title": "Browse",
+              "title": "浏览",
               "descr": "Learn how to interact with your device by reading the on-screen instructions."
             },
             "select": {
@@ -2590,7 +2590,7 @@
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
-              "next": "Next step",
+              "next": "下一步",
               "prev": "Previous step",
               "help": "Need help"
             }
@@ -2643,9 +2643,9 @@
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
-              "next": "Enter recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "输入恢复短语",
+              "prev": "上一步",
+              "help": "需要帮助"
             },
             "warning": {
               "title": "Do not use a recovery phrase that you have not generated yourself.",
@@ -2663,59 +2663,59 @@
               "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
-              "next": "Next step",
+              "next": "下一步",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "需要帮助"
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
+            "title": "恢复短语",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
             "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
             "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "恢复短语",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "拿出您的恢复短语"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
+              "title": "选择恢复短语的长度",
               "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
+              "title": "输入 Word #1 第一个词……",
               "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
+              "title": "验证 Word #1 第一个词……",
               "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "为所有的词重复操作！"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "下一步",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
+              "title": "确认您的恢复短语",
               "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "为所有的词重复操作！"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "下一步",
+              "prev": "上一步",
+              "help": "需要帮助"
             }
           },
           "genuineCheck": {
@@ -2888,11 +2888,11 @@
     },
     "recipientWording": {
       "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
+      "delegate": "验证器",
+      "undelegate": "验证器",
       "claimReward": "rewards recipient",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "验证器"
     },
     "votes": "Votes ({{count}})"
   },
@@ -3259,7 +3259,7 @@
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
+      "title": "返回功能面板",
       "description": "Please navigate back to the Dashboard on your device"
     },
     "WebsocketConnectionError": {
