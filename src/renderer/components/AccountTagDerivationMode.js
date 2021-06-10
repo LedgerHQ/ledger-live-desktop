@@ -20,7 +20,7 @@ const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
   border-style: solid;
   border-radius: 4px;
   text-align: center;
-  flex: 0 0 auto;
+  flex: 0 0 auto !important;
   box-sizing: content-box;
   text-transform: uppercase;
   margin: 0 8px;
