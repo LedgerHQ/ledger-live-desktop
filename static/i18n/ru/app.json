@@ -1958,13 +1958,13 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "Вы можете получать вознаграждения, блокируя свои активы, а затем назначая валидаторов.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Заблокированные активы остаются в вашей собственности",
+            "Назначайте валидаторов на устройстве Ledger",
+            "Доступ к активам будет возобновлён по истечении 28 дней после разблокировки"
           ],
-          "help": "How nominations work",
+          "help": "Как работают назначения",
           "warning": "Выбирайте валидатора с умом. Часть заблокированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
         },
         "amount": {
@@ -1980,55 +1980,55 @@
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "Транзакция ожидает подтверждения",
+            "desc": "Назначение может занять некоторое время"
           },
-          "title": "Confirmation",
+          "title": "Подтверждение",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "Активы успешно заблокированы",
+            "text": "Вы можете назначить валидаторов после того, как транзакция будет подтверждена сетью.",
+            "textNominate": "Вы сможете назначить валидаторов после того, как транзакция будет подтверждена сетью.",
+            "nominate": "Назначить",
+            "later": "Назначить позже"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "Блокируем ваши активы..."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "Повторно блокировать активы",
       "steps": {
         "amount": {
           "title": "Кол-во",
           "amountLabel": "Сумма для повторной блокировки",
           "availableLabel": "Разблокировка",
           "maxLabel": "Макс.",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
+          "info": "Повторно заблокированные активы мгновенно добавляются к блокированной сумме.",
           "learnMore": "Подробнее"
         },
         "connectDevice": {
           "title": "Устройство"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Подтверждение",
+          "label": "Подтверждение",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
+            "title": "Активы успешно повторно блокированы",
+            "text": "Баланс обновится после подтверждения транзакции в сети.",
             "cta": "Подробнее"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "Повторно блокируем ваши активы..."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "Разблокировка активов",
       "steps": {
         "amount": {
           "title": "Кол-во",
@@ -2042,8 +2042,8 @@
           "title": "Устройство"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Подтверждение",
+          "label": "Подтверждение",
           "success": {
             "title": "Unbond transaction sent successfully",
             "text": "Unbonded assets can be withdrawn in 28 days.",
@@ -2141,39 +2141,39 @@
           "select": "Select",
           "yield": "Ориент. доход: {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+          "termsAndPrivacy": "Делегирование ваших прав голоса не гарантирует вознаграждений от вашего валидатора."
         },
         "validator": {
-          "title": "Select validator",
+          "title": "Выберите валидатора",
           "description": "You can select a validator by comparing the estimated reward rates",
           "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "providedBy": "Ставки доходности предоставлены <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "Custom validator",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "button": "Использовать валидатора"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "Отзыв делегирования счёта"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Подтверждение",
+          "label": "Подтверждение",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "title": "Средства делегированы",
+            "titleUndelegated": "Больше не делегировать",
+            "text": "Транзакция для делегирования успешно транслирована в сеть. Срок получения вознаграждений зависит от валидатора и составляет приблизительно 40 дней.",
+            "textUndelegated": "Делегирование счёта завершится после подтверждения операции. Повторное делегирование счёта можно выполнить в любой момент."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "topUp": "Получить ещё",
+      "redelegate": "Сменить валидатора",
+      "stopDelegation": "Больше не делегировать"
     }
   },
   "asset": {
@@ -2181,15 +2181,15 @@
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
-      "undo": "Show again",
+      "close": "Подтвердить",
+      "undo": "Показывать снова",
       "disclaimer": "This banner will not show up again until there is a new announcement"
     }
   },
   "settings": {
     "title": "Настройки",
-    "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "discreet": "Скрытый режим",
+    "helpButton": "Помощь",
     "tabs": {
       "display": "Общие",
       "currencies": "Криптоактивы",
@@ -2225,7 +2225,7 @@
       "counterValue": "Эквивалент",
       "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
       "region": "Регион",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
+      "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
       "stock": "Regional market indicator",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
