@@ -802,54 +802,54 @@
   "help": {
     "title": "帮助和支持",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "快速入门",
+      "desc": "从这里开始"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledger 状态",
+      "desc": "检查我们的系统状态"
     },
     "helpCenter": {
-      "title": "Ledger Support",
-      "desc": "Get help"
+      "title": "Ledger 客服",
+      "desc": "获得帮助"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "title": "Ledger 学院",
+      "desc": "学习加密货币"
     },
     "facebook": {
-      "title": "Facebook",
-      "desc": "Like our page"
+      "title": "Facebook（脸书）",
+      "desc": "为我们的页面点赞"
     },
     "twitter": {
-      "title": "Twitter",
-      "desc": "Follow us"
+      "title": "Twitter（推特）",
+      "desc": "关注我们"
     },
     "github": {
-      "title": "Github",
-      "desc": "Review our code"
+      "title": "GitHub",
+      "desc": "查看我们的代码"
     }
   },
   "blacklistToken": {
     "title": "Hide token",
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "hideCTA": "隐藏代币"
   },
   "banners": {
     "cleanCache": {
       "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "cta": "清除缓存"
     },
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "valentine": {
-      "title": "Valentine’s day",
+      "title": "情人节",
       "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
+      "title": "Ledger 学院",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "cta": "开始学习"
     },
     "stakeCosmos": {
       "title": "Staking with COSMOS",
@@ -913,25 +913,25 @@
       "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
         "installApp": "Go to Manager",
-        "help": "Help"
+        "help": "帮助"
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
-      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "title": "添加账号以开始",
+      "desc": "添加账号来开始管理您的加密资产。您必须在您的设备上安装您的加密资产的应用程序。",
       "buttons": {
-        "addAccount": "Add account",
-        "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "addAccount": "添加账户",
+        "installApp": "前往管理器安装应用程序",
+        "help": "帮助"
       }
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
+    "title": "代币",
+    "cta": "添加代币",
     "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
     "link": "Learn more",
     "seeTokens": "Show tokens ({{tokenCount}})",
