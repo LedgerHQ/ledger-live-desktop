@@ -220,7 +220,7 @@
       "tradeMethod": {
         "title": "费率",
         "float": "浮动汇率",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "floatUnavailable": "此货币对不支持浮动汇率",
         "fixed": "固定汇率",
         "fixedUnavailable": "两者的兑换不支持固定兑换率",
         "floatDesc": "您的数额会根据市场条件而变动。",
@@ -415,7 +415,7 @@
               "description": "Please verify that SatStack is running on this computer."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
+              "header": "请升级 SatStack",
               "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
             },
             "node-disconnected": {
@@ -423,8 +423,8 @@
               "description": "请验证您节点的可访问性，且您输入了正确的连接设置。"
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "header": "无效链标题",
+              "description": "tooltip 工具提示的无效链描述"
             },
             "initializing": {
               "header": "正在加载",
@@ -432,21 +432,21 @@
             },
             "ready": {
               "header": "就绪",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "description": "完整节点已完全同步。您的比特币账户余额现在是正确的。"
             },
             "syncing": {
               "header": "正在进行节点同步……",
-              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+              "description": "最近的交易可能尚不可见，因此比特币账户余额可能不正确。如果可能，请连续运行您的节点以使其保持同步。"
             },
             "scanning": {
               "header": "正在扫描帐户...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "您可以在完成帐户扫描后添加您的帐户。任何之前通过 Ledger 浏览器添加的比特币帐户都被删除。"
             }
           }
         },
         "disconnect": {
           "cta": "断开连接",
-          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+          "description": "您确定吗？断开完整节点将会移除所有比特币账户。您可以使用 Ledger 浏览器再次添加您的账户。"
         }
       }
     }
@@ -484,7 +484,7 @@
     "delegatedAssets": "已委托资产",
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
-    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
+    "frozenAssetsTooltip": "冻结资产被用于 Tron 投票过程。这表示了您的投票总数。",
     "bandwidthTooltip": "冻结资产以获得带宽",
     "energyTooltip": "冻结资产以获得能量",
     "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
@@ -733,7 +733,7 @@
       }
     },
     "supply": {
-      "title": "Deposit assets",
+      "title": "存入资产",
       "steps": {
         "amount": {
           "title": "数额",
