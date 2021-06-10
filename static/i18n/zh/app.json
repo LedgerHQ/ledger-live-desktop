@@ -439,7 +439,7 @@
               "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
             },
             "scanning": {
-              "header": "Account scan in progress...",
+              "header": "正在扫描帐户...",
               "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
             }
           }
@@ -466,24 +466,24 @@
     },
     "settings": {
       "title": "编辑账户",
-      "advancedLogs": "Advanced",
-      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
+      "advancedLogs": "高级",
+      "advancedTips": "您的 xpub 是隐私敏感的数据。请谨慎使用，特别是在向第三方披露时。",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account"
+        "title": "账户名",
+        "desc": "账户描述"
       },
       "unit": {
-        "title": "Unit",
+        "title": "单位",
         "desc": "Choose the unit to be used"
       }
     },
     "availableBalance": "Available balance",
     "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
-    "availableBalanceTooltip": "This amount is disposable.",
+    "bandwidth": "带宽",
+    "energy": "能量",
+    "delegatedAssets": "已委托资产",
+    "undelegating": "正在解除委托",
+    "availableBalanceTooltip": "该数额可自由支配。",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy",
@@ -491,28 +491,28 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
-    "reset": "Reset flow",
+    "title": "买入和卖出加密货币",
+    "reset": "重置流程",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
       "header": "Buy crypto with {{provider}}",
       "title": "Buy crypto via <0>{{provider}}</0>",
-      "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "tab": "买入",
+      "selectCrypto": "选择加密资产",
+      "selectAccount": "选择帐户",
+      "continue": "继续",
+      "addAccount": "添加账户"
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
-      "title": "Sell crypto via <0>{{provider}}</0>",
-      "tab": "Sell",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "header": "使用 {{provider}} 卖出加密",
+      "title": "通过 <0>{{provider}}</0> 卖出加密",
+      "tab": "卖出",
+      "selectCrypto": "选择加密资产",
+      "selectAccount": "选择帐户",
+      "continue": "继续"
     },
     "history": {
-      "tab": "History"
+      "tab": "历史记录"
     },
     "providers": {
       "title": "选择一个购买加密货币的供应方",
@@ -521,7 +521,7 @@
         "bullets": [
           "在 130 多个国家可用",
           "欧元、美元、英镑以及其它32种",
-          "SEPA & Faster Payments",
+          "SEPA 与 快速付款",
           "Local US wire transfers",
           "Credit and debit cards"
         ]
@@ -577,7 +577,7 @@
         "cta": "Deposit"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
+        "title": "您已开放的贷款将出现在这里",
         "description": "You have not made any loans yet.",
         "cta": "Deposit"
       },
