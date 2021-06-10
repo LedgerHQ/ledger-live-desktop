@@ -921,7 +921,7 @@
       "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
       "buttons": {
         "addAccount": "إضافة حساب",
-        "installApp": "Go to Manager to install apps",
+        "installApp": "انتقل إلى المدير لتثبيت التطبيق",
         "help": "مساعدة"
       }
     }
@@ -1104,13 +1104,13 @@
     "quitApp": "الخروج من التطبيق على جهازك",
     "appNotInstalledTitle": "Missing required app",
     "appNotInstalledTitle_plural": "Missing required apps",
-    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
-    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
+    "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
+    "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
+    "installApp": "تثبيت تطبيق {{appName}}",
+    "installAppDescription": "يُرجى الانتظار حتى الانتهاء من التثبيت",
     "listApps": "Checking App dependencies",
     "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
@@ -1149,7 +1149,7 @@
     },
     "applist": {
       "placeholder": "No match for the search with the selected filters",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholderNoAppsInstalled": "لا توجد تطبيقات مثبتة على جهازك",
       "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
@@ -1157,8 +1157,8 @@
         "title": "عرض",
         "all": "All",
         "supported": "Supported in Live",
-        "installed": "Installed",
-        "not_installed": "Not installed"
+        "installed": "تم التثبيت",
+        "not_installed": "غير مثبت"
       },
       "sort": {
         "title": "فرز",
@@ -1167,8 +1167,8 @@
         "marketcap_desc": "Market cap"
       },
       "installSuccess": {
-        "title": "App installed successfully. You can now add your {{app}} accounts",
-        "title_plural": "Apps installed successfully. You can now add your accounts",
+        "title": "تم تثبيت التطبيق بنجاح. يمكنك الآن إضافة حساباتك {{app}}",
+        "title_plural": "تم تثبيت التطبيقات بنجاح. يمكنك الآن إضافة حساباتك",
         "manageAccount": "Manage my accounts"
       },
       "updatable": {
@@ -1179,17 +1179,17 @@
       },
       "item": {
         "version": "Version {{version}}",
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
+        "installing": "تثبيت...",
+        "uninstalling": "إلغاء التثبيت...",
         "updating": "Updating...",
         "scheduled": "Queued",
         "update": "متوفر تحديث",
         "updateAll": "تحديث الكل",
-        "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
-        "install": "Install",
-        "installed": "Installed",
+        "updateAllOutOfMemory": "لا توجد مساحة كافية للحفظ. يُرجى إلغاء تثبيت بعض التطبيقات",
+        "install": "تثبيت",
+        "installed": "تم التثبيت",
         "updated": "تم تحديثه",
-        "uninstall": "Uninstall",
+        "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
         "addAccount": "إضافة حساب",
@@ -1205,9 +1205,9 @@
         "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "title": "إلغاء تثبيت الكل",
+        "subtitle": "إلغاء تثبيت كل التطبيقات؟",
+        "description": "لا تقلق، لن يؤثر إلغاء تثبيت التطبيقات على أصولك المشفرة. يمكنك إعادة تثبيت التطبيقات في كتالوج التطبيق."
       }
     },
     "apps": {
@@ -1368,7 +1368,7 @@
         "max": "MAX",
         "title": "Vote",
         "search": "البحث عن طريق الاسم أو العنوان...",
-        "totalVotes": "Total votes: {{total}}",
+        "totalVotes": "مجموع الأصوات: {{total}}",
         "selected": "تم اختيار: {{total}}",
         "maxSelected": "Max selected: {{total}}",
         "allVotesAreUsed": "All assets are distributed",
@@ -2351,13 +2351,13 @@
   },
   "update": {
     "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
+    "downloadProgress": "نسبة الاكتمال {{progress}}%",
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
+    "quitAndInstall": "تثبيت الآن",
     "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "Error during update. Please download again",
-    "reDownload": "Download again",
+    "reDownload": "التنزيل مرة أخرى",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "تنزيل التحديث"
   },
@@ -3256,7 +3256,7 @@
     },
     "UpdateYourApp": {
       "title": "مطلوب تحديث التطبيق",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "قم بإزالة تطبيق {{managerAppName}} وأعد تثبيته في برنامج المدير"
     },
     "DeviceOnDashboardExpected": {
       "title": "Return to the Dashboard",
