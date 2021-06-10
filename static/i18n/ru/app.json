@@ -3121,7 +3121,7 @@
     },
     "ManagerNotEnoughSpace": {
       "title": "Недостаточно свободного места",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "description": "Удалите некоторые приложения, чтобы освободить место. Приватные ключи для доступа к вашим криптоактивам хранятся в безопасности на вашем устройстве."
     },
     "ManagerQuitPage": {
       "install": {
@@ -3296,13 +3296,13 @@
       "title": "Не удалось сканировать этот QR-код: этот адрес не поддерживает автопроверку."
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "Не удалось загрузить ставки комиссии. Укажите комиссию вручную"
     },
     "FeeRequired": {
       "title": "Необходимо указать комиссию"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "Это слишком мало. Пожалуйста, увеличьте"
     },
     "UnknownMCU": {
       "title": "Неизвестная версия микроконтроллера",
