@@ -381,10 +381,10 @@
           }
         },
         "device": {
-          "title": "Device",
+          "title": "设备",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
+              "header": "正在从设备获取账户",
               "description": "Please wait while the accounts to scan are added to the node configuration file."
             },
             "success": {
@@ -538,15 +538,15 @@
     }
   },
   "lend": {
-    "title": "Lend crypto",
+    "title": "借出加密货币",
     "tabs": {
-      "dashboard": "Dashboard",
+      "dashboard": "功能面板",
       "opened": "Opened loans",
       "closed": "Closed loans",
       "history": "History"
     },
-    "assets": "Assets to lend",
-    "active": "Approved accounts",
+    "assets": "要借出的资产",
+    "active": "已批准的账户",
     "lendAsset": "贷出",
     "account": {
       "amountSupplied": "Amount deposited",
@@ -558,8 +558,8 @@
       "interestEarned": "Interest earned",
       "interestEarnedTooltip": "Interest you have earned after withdrawal",
       "openLoans": "开放借贷",
-      "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount withdrawn",
+      "closedLoans": "已关闭的借贷",
+      "amountRedeemed": "已提取数额",
       "date": "日期",
       "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "How does lending on Compound work?",
@@ -567,14 +567,14 @@
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
+        "title": "放款中",
         "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "cta": "How does lending on Compound work?"
       },
       "closed": {
         "title": "Your closed loans will appear here",
         "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "cta": "存款"
       },
       "opened": {
         "title": "您已开放的借贷将出现在这里",
@@ -655,24 +655,24 @@
           "alreadyEnabled": "此帐户已被批准"
         },
         "amount": {
-          "title": "Amount",
+          "title": "数额",
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
           "limit": "limited {{amount}}",
           "noLimit": "no limit {{assetName}}",
           "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced",
+          "advanced": "高级",
           "amountLabel": "Amount to approve",
           "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "确认",
           "success": {
             "title": "Operation sent successfully",
             "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-            "done": "Close",
+            "done": "关闭",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
@@ -736,12 +736,12 @@
       "title": "Deposit assets",
       "steps": {
         "amount": {
-          "title": "Amount",
+          "title": "数额",
           "amountToSupply": "Amount to deposit",
-          "maxSupply": "Maximum amount to lend is"
+          "maxSupply": "最大可借出数额为"
         },
         "device": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "title": "Confirmation",
@@ -883,7 +883,7 @@
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
-      "title": "Lend Crypto",
+      "title": "借出加密货币",
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
@@ -1066,8 +1066,8 @@
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
     "extra": {
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
+      "frozenAmount": "已冻结数额",
+      "unfreezeAmount": "解冻数额",
       "votes": "Votes ({{number}})",
       "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
       "validators": "Validators",
@@ -1096,17 +1096,17 @@
   "DeviceAction": {
     "allowAppPermission": "Open the {{wording}} app on your device",
     "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "Allow {{wording}} on your device",
-    "loading": "Loading...",
+    "allowManagerPermission": "允许 {{wording}} 在您的设备上运行",
+    "loading": "正在加载……",
     "connectAndUnlockDevice": "Connect and unlock your device",
-    "unlockDevice": "Unlock your device",
+    "unlockDevice": "解锁您的设备",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Quit the application on your device",
     "appNotInstalledTitle": "Missing required app",
     "appNotInstalledTitle_plural": "Missing required apps",
     "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
     "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
-    "openManager": "Open Manager",
+    "openManager": "打开管理器",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "installApp": "{{appName}} App installation",
@@ -1319,7 +1319,7 @@
         "info": "Frozen assets cannot be sent for 3 days."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "设备"
       },
       "confirmation": {
         "tooltip": {
@@ -1347,7 +1347,7 @@
         "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "设备"
       },
       "confirmation": {
         "title": "Confirmation",
@@ -1417,7 +1417,7 @@
       },
       "connectDevice": {
         "title": "设备",
-        "withoutDevice": "Don't have your device?"
+        "withoutDevice": "没有您的设备？"
       },
       "receiveFunds": {
         "title": "接收"
@@ -1504,7 +1504,7 @@
     "asset": "Asset",
     "price": "Price",
     "distribution": "Allocation",
-    "amount": "Amount",
+    "amount": "数额",
     "value": "Value",
     "showAll": "Show all",
     "showLess": "Show less",
@@ -1658,7 +1658,7 @@
             "title": "Validators"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1688,7 +1688,7 @@
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1726,7 +1726,7 @@
             "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
           },
           "device": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1748,16 +1748,16 @@
         "title": "Undelegate assets",
         "steps": {
           "amount": {
-            "title": "Amount",
+            "title": "数额",
             "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "amount": "要解除委托的数额"
             }
           },
           "device": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1787,7 +1787,7 @@
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1827,7 +1827,7 @@
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "设备"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -1859,7 +1859,7 @@
       "nominate": "Nominate",
       "chill": "Clear nominations",
       "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
+      "amount": "已绑定数额",
       "commission": "Commission",
       "active": "Active",
       "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
@@ -1928,7 +1928,7 @@
           "maybeChill": "Clear nominations instead"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "title": "Confirmation",
@@ -1968,15 +1968,15 @@
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
+          "title": "数额",
+          "amountLabel": "要绑定的数额",
           "availableLabel": "Available",
           "maxLabel": "Max",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "tooltip": {
@@ -2002,15 +2002,15 @@
       "title": "Rebond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
+          "title": "数额",
+          "amountLabel": "要重新绑定的数额",
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
+          "info": "重新绑定的资产会立刻添加到已绑定数额中。",
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "title": "Confirmation",
@@ -2031,15 +2031,15 @@
       "title": "Unbond assets",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
+          "title": "数额",
+          "amountLabel": "要解绑的数额",
           "availableLabel": "Bonded",
           "maxLabel": "Max",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
           "learnMore": "Learn More"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "title": "Confirmation",
@@ -2074,7 +2074,7 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "设备"
         },
         "confirmation": {
           "title": "Confirmation",
@@ -2100,7 +2100,7 @@
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
-    "amount": "Amount",
+    "amount": "数额",
     "delegated": "Delegated",
     "completionDate": "Completion date",
     "rewards": "Rewards",
@@ -2253,7 +2253,7 @@
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "Device setup",
+      "launchOnboarding": "设备设置",
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "help": {
@@ -2296,7 +2296,7 @@
       "btn": "查看"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
+      "title": "修复您的 Ledger 设备",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
       "button": "修复"
@@ -2436,7 +2436,7 @@
         "rules": {
           "1": "<0>Always</0> choose a PIN code yourself.",
           "2": "<0>Always</0> enter your PIN code out of sight.",
-          "3": "You can change your PIN code if needed.",
+          "3": "如有需要，您可以更改自己的 PIN 识别密码。",
           "4": "Three wrong PIN code entries in a row will reset the device.",
           "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
           "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
@@ -2493,7 +2493,7 @@
         }
       },
       "selectDevice": {
-        "title": "What's your device?"
+        "title": "您的设备是什么？"
       },
       "selectUseCase": {
         "greetings": "Hello!",
@@ -2507,7 +2507,7 @@
             "description": "Let’s start and set up your device!"
           },
           "2": {
-            "heading": "Connect device",
+            "heading": "连接设备",
             "title": "Connect your {{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
@@ -2551,7 +2551,7 @@
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
+              "title": "启动 Nano",
               "descr": "Connect your device to your computer with the USB cable."
             },
             "browse": {
@@ -2559,11 +2559,11 @@
               "descr": "Learn how to interact with your device by reading the on-screen instructions."
             },
             "select": {
-              "title": "Select “Set up as new device”",
+              "title": "选择 “设置为新设备”",
               "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
-              "title": "Follow instructions",
+              "title": "按指示操作",
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
@@ -2586,13 +2586,13 @@
               "descr": "Press both buttons simultaneously to validate the selection."
             },
             "follow": {
-              "title": "Follow instructions",
+              "title": "按指示操作",
               "descr": "Come back here to follow instructions on your PIN code."
             },
             "buttons": {
               "next": "下一步",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "需要帮助"
             }
           },
           "pinCode": {
@@ -2602,7 +2602,7 @@
             "buttons": {
               "next": "Set up PIN code",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "需要帮助"
             }
           },
           "quizSuccess": {
@@ -2611,7 +2611,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "需要帮助"
             }
           },
           "quizFailure": {
@@ -2634,7 +2634,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "需要帮助"
             }
           },
           "existingRecoveryPhrase": {
@@ -2870,18 +2870,18 @@
     "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
+      "send": "请在您的设备上确认并完成操作",
+      "claimReward": "请在您的设备上确认并完成操作",
+      "freeze": "请在您的设备上确认并完成操作",
+      "unfreeze": "请在您的设备上确认并完成操作",
+      "vote": "请在您的设备上确认并完成操作",
+      "delegate": "请在您的设备上确认并完成操作",
+      "undelegate": "请在您的设备上确认并完成操作",
+      "redelegate": "请在您的设备上确认并完成操作",
+      "claimRewardCompound": "请在您的设备上确认并完成操作",
+      "nominate": "请在您的设备上确认并完成操作",
+      "chill": "请在您的设备上确认并完成操作",
+      "bond": "请在您的设备上确认并完成操作",
       "unbond": "Please confirm on your device to finalize the operation",
       "rebond": "Please confirm on your device to finalize the operation",
       "withdrawUnbonded": "Please confirm on your device to finalize the operation"
@@ -2946,7 +2946,7 @@
       "title": "Recipient account has not opted in the selected ASA."
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "所需数额"
     },
     "NoAccessToCamera": {
       "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
@@ -3056,11 +3056,11 @@
       "description": "Please try again."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "抱歉，您的设备似乎已断开连接",
       "description": "Please reconnect and try again."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
+      "title": "抱歉，您的设备似乎已断开连接",
       "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
@@ -3112,7 +3112,7 @@
       "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
+      "title": "您的设备已锁定",
       "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
@@ -3239,7 +3239,7 @@
       "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
+      "title": "设备上的更新已取消",
       "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
@@ -3247,7 +3247,7 @@
       "description": "User rejected the operation on the device"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
+      "title": "操作在设备上被拒绝",
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
@@ -3285,7 +3285,7 @@
       "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "抱歉，连接失败",
       "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
     },
     "ETHAddressNonEIP": {
@@ -3384,7 +3384,7 @@
       "title": "There is no reward to claim"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "要冻结的数额不可小于 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Sending TRC20 to a new account won't activate it",
