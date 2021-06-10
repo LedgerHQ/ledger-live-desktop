@@ -334,25 +334,25 @@
       "disconnectTitle": "قم بفصل العقدة كاملة",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "header": "ابدأ عقدتك الكاملة. لا تثق، تحقق.",
+          "description": "عقدة البيتكوين الكاملة تتحقق من جميع المعاملات والكتل، مما يسمح لك باستخدام البيتكوين بطريقة عدم الثقة أثناء المساهمة في شبكة البيتكوين.",
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item2": "انتظر حتى تتم مزامنة عقدتك بشكل كامل.",
+            "item3": "سَجل بيانات اعتماد الـ RPC الخاصة بعقدتك، وعنوان الـ IP ورقم المنفذ الخاص بك."
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "يتطلب تشغيل عقدة كاملة حاسوبًا يحتوي على موارد كافية واتصال عريض النطاق بدون قيود بيانات."
         },
         "node": {
-          "title": "Node",
+          "title": "عقدة",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "header": "أدخل معلمات العقدة الخاصة بك",
+              "disclaimer": "يجب أن تكون العقدة الكاملة متزامنة بالكامل قبل الاتصال مع ليدجر لايف (Ledger Live).",
               "fields": {
                 "nodeHost": {
                   "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                  "tooltip": "اتركه بشكل افتراضي إذا كانت العقدة تعمل على هذا الكمبيوتر، أو استبدل عنوان IP ورقم المنفذ للعقدة."
                 },
                 "rpcCredentials": {
                   "title": "RPC Credentials",
@@ -362,21 +362,21 @@
                 },
                 "tls": {
                   "title": "Use TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "tooltip": "أمان طبقة النقل (TLS)، يمكن استخدامه على سبيل المثال، إذا كنت تستخدم حل العقدة المستضافة."
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
-              "description": "Please wait while we check if your full node is responding."
+              "header": "اختبار اتصال العقدة",
+              "description": "يُرجى الانتظار بينما نتحقق مما إذا كانت عقدتك الكاملة تستجيب."
             },
             "success": {
-              "header": "Full node connection successful",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "header": "نجاح الاتصال بالعقدة الكاملة",
+              "description": "يمكنك الآن تكوين عقدة كاملة لفحص حساباتك على سلسلة الكتل."
             },
             "failure": {
-              "header": "Could not reach full node",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "header": "تعذّر الوصول إلى العقدة الكاملة",
+              "description": "يُرجى التأكد من مزامنة عقدتك بالكامل والتحقق من إعدادات الاتصال الخاصة بها."
             }
           }
         },
