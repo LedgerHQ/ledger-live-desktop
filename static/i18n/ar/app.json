@@ -198,7 +198,7 @@
       "cta": "Go to manager"
     },
     "kyc": {
-      "title": "Welcome to Swap",
+      "title": "مرحبًا بك في المبادلة",
       "subtitle": "بادل الأصول المشفرة مباشرة من جهاز ليدجر (Ledger) الخاص بك. هذه الخدمة غير متوفرة في الولايات المتحدة وعدد من البلدان الأخرى.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
@@ -218,10 +218,10 @@
         "addAccountCTA": "إضافة حساب جديد"
       },
       "tradeMethod": {
-        "title": "Rate",
+        "title": "معدل",
         "float": "Floating rate",
         "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
+        "fixed": "معدل ثابت",
         "fixedUnavailable": "Fixed rate not supported for this pair",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيبقى المبلغ الخاص بك كما هو حتى لو تغير السوق. يتم التحديث كل 60 ثانية.",
@@ -233,7 +233,7 @@
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
       "outdatedApp": "{{currencyName}} app update available.",
-      "loadingRates": "Loading rates..."
+      "loadingRates": "جارٍ تحميل أسعار الصرف..."
     },
     "modal": {
       "title": "مبادلة",
