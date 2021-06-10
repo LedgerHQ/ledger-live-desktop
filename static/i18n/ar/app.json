@@ -298,12 +298,12 @@
     },
     "providers": {
       "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
+      "learnMore": "ما هي المبادلة؟",
       "kycRequired": "KYC Required",
       "wyre": {
         "bullets": [
           "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
+          "نقود ورموز توكن متعددة",
           "مركزي"
         ]
       },
@@ -316,8 +316,8 @@
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
+          "الاتصال بـ 30+ DEXs (Uniswap, SushiSwap,...)",
+          "رموز توكن إيثيريوم و ERC20",
           "لا مركزي و بدون ثقة"
         ]
       }
@@ -325,7 +325,7 @@
   },
   "fullNode": {
     "status": "Status",
-    "connect": "Connect",
+    "connect": "اتصال",
     "disconnect": "قطع الاتصال",
     "checkNodeSettings": "تحقق من إعدادات العقدة",
     "edit": "تعديل",
@@ -516,7 +516,7 @@
     },
     "providers": {
       "title": "Choose a provider to buy crypto",
-      "learnMore": "What is buy?",
+      "learnMore": "ما هو الشراء؟",
       "coinify": {
         "bullets": [
           "Available in 130+ countries",
@@ -757,7 +757,7 @@
     },
     "noEthAccount": {
       "title": "Please create an ETH account",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "description": "<0>{{ asset }}({{ ticker }})</0> هو رمز إيثيريوم ERC-20. لإقراض {{ ticker }}، قم بتثبيت تطبيق Ethereum وإنشاء حساب الإيثيريوم",
       "cta": "إضافة حساب"
     },
     "emptyAccountDeposit": {
@@ -796,7 +796,7 @@
       "buy": "Buy",
       "sell": "Sell",
       "edit": "تعديل الحساب",
-      "hideToken": "Hide token"
+      "hideToken": "إخفاء رمز التوكن"
     }
   },
   "help": {
@@ -831,9 +831,9 @@
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
+    "title": "إخفاء رمز التوكن",
     "desc": "هذا الإجراء سيخفي جميع حسابات <1><0>{{tokenName}}</0></1> ، يمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات</3>",
-    "hideCTA": "Hide token"
+    "hideCTA": "إخفاء رمز التوكن"
   },
   "banners": {
     "cleanCache": {
@@ -930,19 +930,19 @@
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
-    "link": "Learn more",
+    "title": "رموز التوكن",
+    "cta": "إضافة رمز توكن",
+    "placeholder": "لإضافة رموز التوكن، ببساطة ارسلها إلى عنوان {{currencyName}} الخاص بك.",
+    "link": "معرفة المزيد",
     "seeTokens": "عرض رموز التوكن ({{tokenCount}})",
     "hideTokens": "إخفاء رموز التوكن ({{tokenCount}})",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens",
+    "countTooltip": "1 رمز توكن",
+    "countTooltip_plural": "{{count}} من رموز التوكن",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How Assets (ASA) works?",
+      "title": "ASA (أصول)",
+      "cta": "إضافة ASA",
+      "placeholder": "يمكنك إضافة الأصول إلى حساب {{currencyName}} الخاص بك.",
+      "link": "كيف تعمل أصول ال (ASA)؟",
       "seeTokens": "عرض ASA ({{tokenCount}})",
       "hideTokens": "إخفاء ASA ({{tokenCount}})"
     }
@@ -950,7 +950,7 @@
   "subAccounts": {
     "title": "Subaccounts",
     "seeSubAccounts": "عرض الحسابات الفرعية ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
+    "hideSubAccounts": "إخفاء الحسابات الفرعية ({{tokenCount}})",
     "countTooltip": "1 subaccount",
     "countTooltip_plural": "{{count}} subaccounts"
   },
@@ -1057,9 +1057,9 @@
     "viewOperation": "View in explorer",
     "showMore": "عرض المزيد {{recipients}}",
     "showLess": "عرض أقل",
-    "tokenOperations": "Token operations",
+    "tokenOperations": "عمليات رمز التوكن",
     "subAccountOperations": "Subaccount operations",
-    "tokenTooltip": "This operation is related to the following token operations",
+    "tokenTooltip": "هذه العملية مرتبطة بعمليات رمز التوكن التالية",
     "subAccountTooltip": "This operation is related to the following subaccount operations",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
@@ -1195,8 +1195,8 @@
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "Please wait for the app updates to finish",
-        "learnMore": "Learn more",
-        "learnMoreTooltip": "Learn more about {{appName}}",
+        "learnMore": "معرفة المزيد",
+        "learnMoreTooltip": "معرفة المزيد عن {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
         "useAppForToken": "هل تتطلع إلى إدارة رموز التوكن {{tokenType}}؟",
         "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> و يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
@@ -1411,9 +1411,9 @@
         "title": "حساب",
         "label": "Account to credit",
         "parentAccount": "1. اختار حساب {{currencyName}}",
-        "token": "2. اختار رمزًا",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "token": "2. اختار رمز التوكن",
+        "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
+        "warningTokenType": "يُرجى إرسال <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حساب {{currency}}. أي أصول مشفرة أخرى يمكن أن تفقد."
       },
       "connectDevice": {
         "title": "الجهاز",
@@ -1451,7 +1451,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+        "subaccountsWarning": "يتعين عليك إعادة شحن هذا الحساب ب {{ currency }} من أجل إرسال رموز التوكن لهذا الحساب",
         "from": "من",
         "to": "To",
         "selectAccountDebit": "حساب للخصم منه",
@@ -1583,7 +1583,7 @@
               },
               "candidates": {
                 "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "description": "تم انتخاب 127 فردًا من خلال التصويت من قبل مجتمع حاملي رموز التوكن بأكمله. يتم تحديث الأصوات مرة كل 6 ساعات."
               }
             }
           }
@@ -1793,7 +1793,7 @@
             "title": "تأكيد",
             "success": {
               "title": "تمت إضافة أصل {{token}} بنجاح",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "text": "يمكنك الآن استلام وإرسال أصول <0>{{token}}</0> إلى حسابك الAlgorand.",
               "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
@@ -1973,7 +1973,7 @@
           "availableLabel": "Available",
           "maxLabel": "Max",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "learnMore": "معرفة المزيد"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -2007,7 +2007,7 @@
           "availableLabel": "Unbonding",
           "maxLabel": "Max",
           "info": "تتم إضافة الأصول المعاد قيدها على الفور إلى المبلغ المقيد.",
-          "learnMore": "Learn More"
+          "learnMore": "معرفة المزيد"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -2036,7 +2036,7 @@
           "availableLabel": "Bonded",
           "maxLabel": "Max",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "learnMore": "معرفة المزيد"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -2308,18 +2308,18 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "إخفاء حسابات رموز التوكن الفارغة",
+        "desc": "إخفاء حسابات رمز التوكن التي تحتوي على رصيد صفر من صفحة الحسابات."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{count}} token",
-        "count_plural": "{{count}} tokens"
+        "title": "إخفاء رموز التوكن",
+        "desc": "يمكنك إخفاء رموز التوكن بالانتقال إلى الحساب الرئيسي ثم النقر بالزر الأيمن على رمز التوكن واختيار \"إخفاء رمز التوكن\".",
+        "count": "{{count}} رمز توكن",
+        "count_plural": "{{count}} من رموز التوكن"
       },
       "fullNode": {
         "title": "توصيل عقدة بيتكوين الكاملة",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "desc": "قم بإعداد عقدة بيتكوين الكاملة الخاصة بك لمزامنة المعاملات وإرسالها دون استخدام برامج التصفح الخاصة بليدجر"
       }
     }
   },
@@ -2418,7 +2418,7 @@
       },
       "statusNotOk": {
         "title": "Ledger live is experiencing issues",
-        "learnMore": "Learn more"
+        "learnMore": "معرفة المزيد"
       }
     },
     "announcement": {
@@ -2861,7 +2861,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "هل تواجه صعوبة في توصيل جهازك؟"
   },
   "TransactionConfirm": {
     "title": "يرجى تأكيد العملية على جهازك لإنهائها",
@@ -3184,20 +3184,20 @@
       "title": "RPC Password is required"
     },
     "SatStackAccessDown": {
-      "title": "Could not reach full node",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "title": "تعذر الوصول إلى العقدة الكاملة",
+      "description": "الرجاء التحقق من أن SatStack و العقدة الخاصة بك قيد التشغيل. تحقق من إعداد العقدة الكاملة في الإعدادات إذا استمرت المشكلة."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "title": "جارٍ مزامنة العقدة...",
+      "description": "يرجى الانتظار حتى تتم مزامنة العقدة الخاصة بك. الإرسال غير ممكن لأن أرصدة حساب بيتكوين الخاص بك قد تكون غير صحيحة."
     },
     "SatStackVersionTooOld": {
       "title": "Please upgrade SatStack",
       "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "title": "لم يتم فحص الحساب بواسطة العقدة الكاملة",
+      "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
     "StratisDown2021Warning": {
       "title": "The Stratis blockchain evolved and may no longer work correctly.",
@@ -3401,7 +3401,7 @@
       "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "لا توجد طاقة كافية لإرسال هذا التوكن"
     },
     "PairingFailed": {
       "title": "Pairing unsuccessful",
