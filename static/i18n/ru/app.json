@@ -2241,13 +2241,13 @@
       "password": "Блокировка паролем",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
       "passwordAutoLock": "Автоматическая блокировка",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
+      "passwordAutoLockDesc": "Автоматически блокировать Ledger Live при бездействии.",
       "changePassword": "Сменить пароль",
       "softResetTitle": "Очистка кэша",
       "softResetDesc": "Очистите кэш Ledger Live для принудительной синхронизации с блокчейном.",
       "softReset": "Очистить",
       "hardResetTitle": "Сброс Ledger Live",
-      "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории о транзакциях и настройки.",
+      "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории транзакций и настроек.",
       "hardReset": "Сбросить",
       "analytics": "Аналитика",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
@@ -2292,7 +2292,7 @@
     },
     "openUserDataDirectory": {
       "title": "Просмотр пользовательских данных",
-      "desc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, кэш и настройки.",
+      "desc": "Вы можете посмотреть данные, которые хранятся на вашем ПК, в том числе информация о счетах, кэш и настройки.",
       "btn": "Посмотреть"
     },
     "repairDevice": {
@@ -2309,16 +2309,16 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "Скрывать пустые счета",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "desc": "Скрыть счета с нулевыми балансами на странице Счета."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
+        "title": "Скрытые токены",
         "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{count}} token",
-        "count_plural": "{{count}} tokens"
+        "count": "{{count}} токен",
+        "count_plural": "Токенов: {{count}}"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
+        "title": "Подключение полной ноды Биткойна",
         "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
@@ -2341,8 +2341,8 @@
     },
     "setPassword": {
       "title": "Блокировка экрана паролем",
-      "subTitle": "Set the password",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "subTitle": "Установите пароль",
+      "desc": "Храните свой пароль в безопасности. В случае его потери нужно будет сбросить Ledger Live и заново подключить счета."
     },
     "disablePassword": {
       "title": "Отключить блокировку паролем",
@@ -2355,18 +2355,18 @@
     "checking": "Проверяем обновления...",
     "checkSuccess": "Обновление готово к установке",
     "quitAndInstall": "Установить",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
+    "updateAvailable": "Доступно обновление Ledger Live {{version}}",
     "error": "Во время обновления произошла ошибка. Попробуйте ещё раз",
     "reDownload": "Скачать ещё раз",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "nightlyWarning": "Эта версия не может быть установлена автоматически. Установите её вручную",
+    "downloadNow": "Загрузить обновление"
   },
   "crash": {
-    "title": "Something went wrong",
+    "title": "Что-то пошло не так",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "logs": "Хранить логи",
+    "dataFolder": "Посмотреть пользовательские данные"
   },
   "exportOperationsModal": {
     "title": "История операций",
