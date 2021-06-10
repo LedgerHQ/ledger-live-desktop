@@ -194,7 +194,7 @@
     },
     "outdatedApp": {
       "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
+      "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往管理器"
     },
     "kyc": {
@@ -495,8 +495,8 @@
     "reset": "重置流程",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
+      "header": "使用 {{provider}} 买入加密",
+      "title": "通过 <0>{{provider}}</0> 买入加密",
       "tab": "买入",
       "selectCrypto": "选择加密资产",
       "selectAccount": "选择帐户",
@@ -718,7 +718,7 @@
       "steps": {
         "title": "步骤 <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Approve an account to allow the protocol to",
+          "subtitle": "批准账户以允许协议",
           "subtitle2": "处理未来贷款。",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
         },
@@ -909,10 +909,10 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "在您的设备上安装应用程序",
+      "desc": "前往管理器在您的设备上安装应用。一旦您设备上有应用程序，您就可以添加帐户。",
       "buttons": {
-        "installApp": "Go to Manager",
+        "installApp": "前往管理器",
         "help": "帮助"
       }
     },
@@ -1019,11 +1019,11 @@
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
     },
     "cta": {
-      "addMore": "Add more",
-      "add": "Add account",
-      "add_plural": "Add accounts",
-      "addAccountName": "Add {{currencyName}} account",
-      "receive": "Receive"
+      "addMore": "添加更多",
+      "add": "添加账户",
+      "add_plural": "添加账户",
+      "addAccountName": "添加 {{currencyName}} 账户",
+      "receive": "接收"
     },
     "sections": {
       "importable": {
@@ -1095,24 +1095,24 @@
   },
   "DeviceAction": {
     "allowAppPermission": "在您的设备上打开 {{wording}} 应用程序",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
+    "allowAppPermissionSubtitleToken": "管理您的 {{token}} 代币",
     "allowManagerPermission": "允许 {{wording}} 在您的设备上运行",
     "loading": "正在加载……",
-    "connectAndUnlockDevice": "Connect and unlock your device",
+    "connectAndUnlockDevice": "连接并解锁您的设备",
     "unlockDevice": "解锁您的设备",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
-    "quitApp": "Quit the application on your device",
-    "appNotInstalledTitle": "Missing required app",
-    "appNotInstalledTitle_plural": "Missing required apps",
-    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
-    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
+    "unlockDeviceAfterFirmwareUpdate": "等待固件更新并使用您的 PIN 识别密码解锁您的设备",
+    "quitApp": "在您的设备上退出该应用程序",
+    "appNotInstalledTitle": "缺少所需的应用程序",
+    "appNotInstalledTitle_plural": "缺少所需的应用程序",
+    "appNotInstalled": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
+    "appNotInstalled_plural": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "openManager": "打开管理器",
-    "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
-    "listApps": "Checking App dependencies",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps",
+    "outdated": "应用程序版本过期",
+    "outdatedDesc": "您设备上的 {{appName}} 应用程序有可用的重要更新。请前往管理器对其进行更新。",
+    "installApp": "{{appName}} 应用程序安装",
+    "installAppDescription": "请耐心等待，直至安装完成",
+    "listApps": "正在检查应用程序依存关系",
+    "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
@@ -1150,7 +1150,7 @@
     "applist": {
       "placeholder": "No match for the search with the selected filters",
       "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "placeholderGoToCatalog": "前往应用目录安装应用",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
@@ -1201,7 +1201,7 @@
         "useAppForToken": "需要管理 {{tokenType}} 代币？",
         "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "goToAccounts": "Go to accounts",
+        "goToAccounts": "前往账户",
         "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
@@ -1818,7 +1818,7 @@
             },
             "learnMore": "How Algorand rewards work?",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "接收 Algo"
             }
           },
           "info": {
@@ -2171,7 +2171,7 @@
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
+      "topUp": "接收更多",
       "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
@@ -3251,7 +3251,7 @@
       "description": "Please retry or contact Ledger Support if in doubt"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
+      "title": "接收地址被拒",
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
