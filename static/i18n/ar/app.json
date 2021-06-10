@@ -2551,7 +2551,7 @@
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
+              "title": "قم بتشغيل نانو (Nano)",
               "descr": "قم بتوصيل جهازك بجهاز الكمبيوتر الخاص بك باستخدام كابل USB."
             },
             "browse": {
@@ -2574,7 +2574,7 @@
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
+              "title": "قم بتشغيل نانو (Nano)",
               "descr": "قم بتوصيل جهازك بجهاز الكمبيوتر الخاص بك باستخدام كابل USB."
             },
             "browse": {
@@ -2597,7 +2597,7 @@
           },
           "pinCode": {
             "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
+            "paragraph": "رمز الPIN الخاص بك هو الطبقة الأولى من الأمان. وهو يؤمن فعليًا الوصول إلى جهاز نانو (Nano) ومفاتيحك الخاصة. يجب أن يتكون رمز الPIN الخاص بك من 4 إلى 8 أرقام.",
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
             "buttons": {
               "next": "Set up PIN code",
@@ -2641,7 +2641,7 @@
             "title": "أدخل عبارة الاسترداد الخاصة بك",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد الخاصة بي فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
               "next": "Enter recovery phrase",
               "prev": "Previous step",
