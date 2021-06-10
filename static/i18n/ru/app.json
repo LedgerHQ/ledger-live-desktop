@@ -2116,42 +2116,42 @@
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "title": "Зарабатывайте на стейкинге",
+          "description": "Делегируйте счёт Tezos стороннему валидатору, и безопасно получайте вознаграждения за стейкинг, не теряя контроль над активами",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
-            "access": "You can access your assets at any time.",
-            "ledger": "Delegate securely with your Ledger device."
+            "delegate": "Делегированные счета остаются в вашей собственности.",
+            "access": "Вы можете воспользоваться активами в любое время.",
+            "ledger": "Делегируйте безопасно на устройстве Ledger."
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "Делегировать и получить вознаграждение"
           }
         },
         "account": {
-          "title": "Delegate account",
-          "label": "Account",
-          "toDelegate": "Account to delegate"
+          "title": "Делегируйте счёт",
+          "label": "Счёт",
+          "toDelegate": "Счёт для делегирования"
         },
         "summary": {
-          "title": "Delegate account",
-          "label": "Summary",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
-          "validator": "Validator",
-          "select": "Select",
+          "title": "Делегированный счёт",
+          "label": "Сводка",
+          "toDelegate": "Счёт для делегирования",
+          "toUndelegate": "Счёт для отзыва делегирования",
+          "validator": "Валидатор",
+          "select": "Выбрать",
           "yield": "Ориент. доход: {{amount}}",
-          "randomly": "Randomly chosen validator",
+          "randomly": "Случайно выбранный валидатор",
           "termsAndPrivacy": "Делегирование ваших прав голоса не гарантирует вознаграждений от вашего валидатора."
         },
         "validator": {
           "title": "Выберите валидатора",
-          "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
+          "description": "Вы можете выбрать валидатора путём сравнения ориентировочной доходности",
+          "customValidator": "Пользовательский валидатор",
           "providedBy": "Ставки доходности предоставлены <1><0>{{name}}</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "title": "Пользовательский валидатор",
+          "text": "Пожалуйста, введите адрес валидатора, которому хотите делегировать счёт.",
           "button": "Использовать валидатора"
         },
         "undelegate": {
