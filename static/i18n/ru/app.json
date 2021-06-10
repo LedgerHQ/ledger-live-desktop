@@ -54,7 +54,7 @@
     "western": "Western",
     "reverify": "Проверить повторно",
     "verify": "Верифицировать",
-    "verifyMyAddress": "Verify my address",
+    "verifyMyAddress": "Подтвердить адрес",
     "copy": "Скопировать",
     "copied": "Скопировано",
     "addressCopied": "Адрес скопирован",
@@ -79,7 +79,7 @@
       "error": "Ошибка синхронизации",
       "refresh": "Обновить"
     },
-    "exchange": "Exchange"
+    "exchange": "Обмен"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -141,7 +141,7 @@
     "low": "Низкая",
     "slow": "Медленно",
     "standard": "Обычная",
-    "medium": "Medium",
+    "medium": "Средняя",
     "feesAmount": "Размер комиссии"
   },
   "sidebar": {
@@ -757,11 +757,11 @@
     },
     "noEthAccount": {
       "title": "Please create an ETH account",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "description": "<0>{{ asset }} ({{ ticker }})</0> — это токен Ethereum ERC-20. Чтобы одолжить {{ ticker }}, установите приложение Ethereum и создайте счёт Ethereum",
       "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have any {{ asset }} account.",
+      "title": "У вас нет счёта {{ asset }}.",
       "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ asset }}. Получите средства на свой Ethereum-адрес.",
       "ctaBuy": "Купить {{ asset }}",
       "ctaReceive": "Получить {{ asset }}"
@@ -1175,29 +1175,29 @@
         "title": "Updates available",
         "progressTitle": "{{number}} App updates",
         "progressWarning": "Do not quit Manager during update.",
-        "progress": "Updating all..."
+        "progress": "Обновляем всё..."
       },
       "item": {
-        "version": "Version {{version}}",
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "updating": "Updating...",
-        "scheduled": "Queued",
-        "update": "Update available",
-        "updateAll": "Update all",
-        "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
-        "install": "Install",
-        "installed": "Installed",
-        "updated": "Updated",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough storage",
-        "supported": "Ledger Live supported",
+        "version": "Версия {{version}}",
+        "installing": "Устанавливаем...",
+        "uninstalling": "Удаляем...",
+        "updating": "Обновляем...",
+        "scheduled": "В очереди",
+        "update": "Доступно обновление",
+        "updateAll": "Обновить все",
+        "updateAllOutOfMemory": "Недостаточно места. Удалите какие-нибудь приложения",
+        "install": "Установить",
+        "installed": "Установлено",
+        "updated": "Обновлено",
+        "uninstall": "Удалить",
+        "notEnoughSpace": "Недостаточно места",
+        "supported": "Поддерживается в Ledger Live",
         "addAccount": "Добавить счёт",
         "addAccountTooltip": "Добавить счёт {{appName}}",
         "addAccountWarn": "Дождитесь полного обновления приложения",
-        "learnMore": "Learn more",
-        "learnMoreTooltip": "Learn more about {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}",
+        "learnMore": "Подробнее",
+        "learnMoreTooltip": "Подробнее о {{appName}}",
+        "removeTooltip": "Удалить {{appName}}",
         "useAppForToken": "Хотите управлять токенами {{tokenType}}?",
         "tokenAppDisclaimer": "Чтобы управлять токенами {{tokenName}} {{tokenType}}, <1>установите приложение {{appName}}</1> и перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия​ <1>{{tokenType}}</1>.",
         "tokenAppDisclaimerInstalled": "Чтобы управлять токенами <1>{{tokenName}} {{tokenType}}</1>, перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия <1>{{tokenType}}</1>.",
