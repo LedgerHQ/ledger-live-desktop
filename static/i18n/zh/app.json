@@ -231,8 +231,8 @@
       "helpCTA": "什么是 Swap？",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available.",
+      "noApp": "未安装 {{currencyName}} 应用程序。",
+      "outdatedApp": "{{currencyName}} 应用有可用的更新",
       "loadingRates": "正在加载费率..."
     },
     "modal": {
@@ -246,8 +246,8 @@
           "toReceive": "待收数额",
           "terms": "条款和条件",
           "disclaimer": {
-            "description": "点击\"确认\"后，就意味着我认可并接受此服务完全由 <0>{{provider}}</0> 制约",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "点击\"确认\"后，就意味着我认可并接受此服务完全由 <0>{{provider}}</0> 治理",
+            "acceptedDescription": "此服务完全由 <0>{{provider}}</0> 治理"
           },
           "details": {
             "provider": "提供方",
@@ -375,7 +375,7 @@
               "description": "You can now configure your full node to scan for your accounts on the blockchain."
             },
             "failure": {
-              "header": "无法到达完整节点",
+              "header": "无法连接到完整节点",
               "description": "Please ensure your node is fully synchronized and verify its connection settings."
             }
           }
@@ -405,13 +405,13 @@
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
-              "cta": "Download SatStack"
+              "header": "下载并运行 Ledger SatStack",
+              "description": "Ledger SatStack 是一个小型应用程序，允许 Ledger Live 与您的全节点通话。请在您继续之前下载并运行它。",
+              "disclaimer": "必须运行 SatStack 后，Ledger Live 才能连接到您的完整节点。考虑将其设置为在您计算机启动时自动启动。",
+              "cta": "下载 SatStack"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
+              "header": "无法连接到 SatStack",
               "description": "Please verify that SatStack is running on this computer."
             },
             "satstack-outdated": {
@@ -419,8 +419,8 @@
               "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "header": "无法连接到完整节点",
+              "description": "请验证您节点的可访问性，且您输入了正确的连接设置。"
             },
             "invalid-chain": {
               "header": "invalid-chain title",
@@ -474,7 +474,7 @@
       },
       "unit": {
         "title": "单位",
-        "desc": "Choose the unit to be used"
+        "desc": "选择要使用的单位"
       }
     },
     "availableBalance": "可用余额",
@@ -485,8 +485,8 @@
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy",
+    "bandwidthTooltip": "冻结资产以获得带宽",
+    "energyTooltip": "冻结资产以获得能量",
     "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
@@ -1579,7 +1579,7 @@
               "message": "SR 超级代表或候选人？",
               "superRepresentative": {
                 "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "description": "超级代表在 TRON 波场区块链社区的治理中发挥着重要作用，能够确保基本功能的运作，例如确保区块生成和记账。"
               },
               "candidates": {
                 "title": "候选人",
@@ -2656,7 +2656,7 @@
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
               "title": "Take your recovery sheet",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "descr": "取出一张空白的恢复表，该表和 Nano 装在一起。如果您拿到的恢复表已经被填写过，请联系 Ledger 客服。"
             },
             "writeDownWords": {
               "title": "Write down all words",
@@ -3184,7 +3184,7 @@
       "title": "RPC Password is required"
     },
     "SatStackAccessDown": {
-      "title": "Could not reach full node",
+      "title": "无法连接到完整节点",
       "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
     },
     "SatStackStillSyncing": {
