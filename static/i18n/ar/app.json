@@ -101,7 +101,7 @@
       "VOTE": "تم التصويت",
       "FREEZE": "تجميد",
       "UNFREEZE": "تمت إزالة التجميد",
-      "REWARD": "استلام المكافأة",
+      "REWARD": "المكافأة التي تمت المطالبة بها",
       "FEES": "رسوم",
       "OPT_IN": "الانضمام",
       "OPT_OUT": "إلغاء الانضمام",
@@ -1533,7 +1533,7 @@
       "claimAvailableRewards": "المطالبة بمبلغ {{amount}}",
       "header": "Votes",
       "percentageTP": "% of votes cast",
-      "noRewards": "No rewards available",
+      "noRewards": "لا توجد مكافآت متاحة",
       "remainingVotes": {
         "title": "لا يزال لديك {{amount}} أصوات متبقية",
         "description": "You can cast your remaining votes to earn more rewards",
@@ -1627,7 +1627,7 @@
       },
       "claimRewards": "المطالبة بالمكافآت",
       "header": "Delegation(s)",
-      "noRewards": "No rewards available",
+      "noRewards": "لا توجد مكافآت متاحة",
       "delegate": "Add",
       "undelegate": "Undelegate",
       "redelegate": "Redelegate",
@@ -1813,7 +1813,7 @@
             "description": "تلقى مكافآت ألغوراند (Algorand) لمجرد الاحتفاظ بسيطرة ألغوراند (Algorand) على أصولك.",
             "bullet": {
               "delegate": "مطلوب رصيد لا يقل عن 1 Algo لتلقي المكافآت.",
-              "access": "Increase the account’s balance to increase rewards.",
+              "access": "قم بزيادة رصيد الحساب لزيادة المكافآت.",
               "ledger": "قم بتنفيذ معاملة إلى الحساب أو منه للحصول على مكافآت."
             },
             "learnMore": "كيف تعمل مكافآت ألغوراند (Algorand)؟",
@@ -2110,7 +2110,7 @@
     "durationDays_plural": "{{count}} أيام",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
+    "earnRewards": "اكسب المكافآت",
     "overdelegated": "Overdelegated",
     "status": "Status",
     "flow": {
@@ -2890,7 +2890,7 @@
       "send": "recipient",
       "delegate": "validator",
       "undelegate": "validator",
-      "claimReward": "rewards recipient",
+      "claimReward": "مستلم المكافأة",
       "optIn": "recipient",
       "nominate": "validator"
     },
@@ -3358,11 +3358,11 @@
       "description": "تعذرت مزامنة بعض الحسابات"
     },
     "TronNoFrozenForBandwidth": {
-      "title": "لا توجد أصول لإزالة تجميدها",
+      "title": "لا توجد أصول لإلغاء تجميدها",
       "description": "You do not have assets to unfreeze associated to Bandwidth"
     },
     "TronNoFrozenForEnergy": {
-      "title": "لا توجد أصول لإزالة تجميدها",
+      "title": "لا توجد أصول لإلغاء تجميدها",
       "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
