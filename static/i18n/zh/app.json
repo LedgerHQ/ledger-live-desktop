@@ -657,11 +657,11 @@
         "amount": {
           "title": "数额",
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
+          "limit": "已限额 {{amount}}",
+          "noLimit": "无限额 {{assetName}}",
+          "contractName": "Compound 复利 {{currencyName}}",
           "advanced": "高级",
-          "amountLabel": "Amount to approve",
+          "amountLabel": "要批准的额度",
           "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
         "connectDevice": {
@@ -670,7 +670,7 @@
         "confirmation": {
           "title": "确认",
           "success": {
-            "title": "Operation sent successfully",
+            "title": "操作已成功发送",
             "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
             "done": "关闭",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
@@ -680,7 +680,7 @@
       }
     },
     "withdraw": {
-      "title": "Withdraw assets",
+      "title": "提取资产",
       "steps": {
         "amount": {
           "title": "数额",
