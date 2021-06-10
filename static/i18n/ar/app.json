@@ -138,7 +138,7 @@
     "custom": "مُخصّص",
     "fast": "سريع",
     "high": "عالٍ",
-    "low": "Low",
+    "low": "منخفضة",
     "slow": "بطىء",
     "standard": "اعتيادية",
     "medium": "متوسط",
@@ -492,7 +492,7 @@
   },
   "exchange": {
     "title": "Buy and sell crypto",
-    "reset": "Reset flow",
+    "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
       "header": "Buy crypto with {{provider}}",
@@ -718,7 +718,7 @@
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Approve an account to allow the protocol to",
+          "subtitle": "الموافقة على حساب للسماح للبروتوكول بـ",
           "subtitle2": "process future loans.",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
         },
@@ -773,7 +773,7 @@
     "order": {
       "name|asc": "Name A-Z",
       "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
+      "balance|asc": "أدنى رصيد",
       "balance|desc": "Highest Balance"
     },
     "range": {
@@ -823,7 +823,7 @@
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "تابعنا"
     },
     "github": {
       "title": "Github",
@@ -961,7 +961,7 @@
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "Export accounts to mobile",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
+      "mobileDesc": "انقر الزر أدناه لتصدير حساباتك المحدّثة إلى تطبيق Ledger Live للجوال.",
       "mobileCTA": "Export to mobile",
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
@@ -1542,13 +1542,13 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "قم بتجميد TRX للحصول على مكافآت وستزال تحتفظ بأمان وسيطرة كاملين على أصولك.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
+              "delegate": "الأصول المفوضة تظل ملكك.",
               "access": "يمكنك إزالة تجميد أصولك بعد 3 أيام.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "ledger": "قم بالتجميد والتصويت بأمان باستخدام جهازك من ليدجر (Ledger)."
             },
-            "help": "How voting works",
+            "help": "كيفية عمل التصويت",
             "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
           }
         }
@@ -1641,21 +1641,21 @@
       "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت",
       "minSafeWarning": "Not enough funds",
       "flow": {
-        "title": "Delegate",
+        "title": "تفويض",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "description": "يمكنك الحصول على مكافآت عن طريق تفويض أصولك ATOM لمدقق.",
             "bullet": [
-              "You keep ownership of delegated assets",
-              "Delegate using your Ledger device",
-              "Assets will be available 21 days after undelegation"
+              "أنت تحتفظ بملكية الأصول المفوضة",
+              "تفويض باستخدام جهازك من ليدجر (Ledger)",
+              "ستكون الأصول متاحة بعد 21 يوما من إلغاء التفويض"
             ],
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "المدققون"
           },
           "connectDevice": {
             "title": "الجهاز"
@@ -1678,9 +1678,9 @@
         "steps": {
           "claimRewards": {
             "title": "المكافآت",
-            "compound": "Compound",
+            "compound": "مُجمع",
             "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
+            "compoundOrClaim": "مُجمع أو التسديد نقدًا",
             "compoundDescription": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
             "compoundInfo": "لقد كسبت <0>{{amount}}</0>. بالنقر على زر المتابعة، سيتم المطالبة به الآن وتفويضه تلقائيًا لنفس المدقق.",
@@ -1694,9 +1694,9 @@
             "title": "تأكيد",
             "label": "تأكيد",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards were added to your available balance",
+              "title": "تم استلام المكافآت بنجاح",
+              "titleCompound": "تم تجميع الجوائز بنجاح",
+              "text": "تمت إضافة مكافآتك إلى رصيدك المتاح",
               "textCompound": "مكافآتك <0>{{amount}}</0> تم تفويضها تلقائيًا إلى <0>{{validator}}</0>",
               "cta": "عرض التفاصيل"
             },
@@ -1710,20 +1710,20 @@
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "إعادة تفويض الأصول",
         "steps": {
           "starter": {
-            "title": "Redelegation",
+            "title": "إعادة التفويض",
             "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
             "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "howDelegationWorks": "كيف يعمل التفويض؟"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "title": "المدققون",
+            "currentDelegation": "التفويض الحالي",
+            "newDelegation": "تفويض جديد",
+            "chooseValidator": "إختر مدقق",
+            "warning": "سيكون عليك الانتظار لمدة <0>21 يومًا</0> لإعادة التفويض من المدقق الجديد إذا غيرت رأيك مرة أخرى"
           },
           "device": {
             "title": "الجهاز"
@@ -1731,7 +1731,7 @@
           "confirmation": {
             "title": "تأكيد",
             "success": {
-              "title": "You have successfully redelegated your assets",
+              "title": "لقد قمت بإعادة تفويض أصولك بنجاح",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "عرض التفاصيل"
             },
@@ -1745,14 +1745,14 @@
       "headerTooltip": "Available after the 21-day timelock",
       "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت.",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "إلغاء تفويض الأصول",
         "steps": {
           "amount": {
             "title": "المبلغ",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
+            "subtitle": "تستغرق عملية إلغاء التفويض مدة <0>21 يومًا</0> حتى إتمامها.",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
-              "validator": "Validator",
+              "validator": "المدقق",
               "amount": "المبلغ المراد إلغاء تفويضه"
             }
           },
@@ -2450,7 +2450,7 @@
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "More about the recovery phrase",
         "title2": "ماذا يحدث إذا فقدت الوصول إلى جهاز نانو (Nano) الخاص بي؟",
-        "paragraph3": "Don't worry and follow these steps:",
+        "paragraph3": "لا تقلق واتبع هذه الخطوات:",
         "points": {
           "1": "Get a new hardware wallet.",
           "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
@@ -2471,7 +2471,7 @@
     "alerts": {
       "beCareful": {
         "title": "Please be careful",
-        "descr": "Make sure you follow the instructions on this app at every step of the process.",
+        "descr": "تأكد من اتباع التعليمات على هذا التطبيق في كل خطوة من العملية.",
         "gotIt": "Got it"
       },
       "useLedgerSeeds": {
@@ -2563,8 +2563,8 @@
               "descr": "اضغط على كلا الزرين في وقت واحد للتحقق من صحة الاختيار."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "اتبع التعليمات",
+              "descr": "عد إلى هنا لاتباع التعليمات الموجودة على رمز الPIN الخاص بك."
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -2586,8 +2586,8 @@
               "descr": "اضغط على كلا الزرين في وقت واحد للتحقق من صحة الاختيار."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "اتبع التعليمات",
+              "descr": "عد إلى هنا لاتباع التعليمات الموجودة على رمز الPIN الخاص بك."
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -3469,7 +3469,7 @@
       "title": "Ensure you have enough balance left for future transaction fees"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
+      "title": "لا يمكن أن يقل الرصيد عن 1 DOT. أرسل الحد الأقصى إلى الحساب الفارغ"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least 1 DOT"
