@@ -1134,7 +1134,7 @@
       "appCatalog": "App catalog",
       "appCatalogSearch": "ابحث عن التطبيق في القائمة...",
       "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appOnDeviceSearch": "البحث في التطبيقات المثبتة..."
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
