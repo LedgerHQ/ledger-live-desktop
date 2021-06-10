@@ -1001,7 +1001,7 @@
     "fullNodeReadyInfo": "ستتم إضافة الحسابات باستخدام عقدتك الكاملة للبيتكوين.",
     "fullNodeConfigure": "تكوين العقدة",
     "tokensTip": "إن {{token}} ({{ticker}}) هو رمز توكن {{tokenType}}. يمكنك استلام رموز التوكن بشكل مباشر على حساب {{currency}}.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
+    "accountToImportSubtitle_plural": "إضافة حسابات موجودة",
     "selectAll": "اختار كل ({{count}})",
     "unselectAll": "إلغاء اختيار كل ({{count}})",
     "noAccountToImport": "No existing {{currencyName}} accounts to add",
@@ -1027,7 +1027,7 @@
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "إضافة حساب موجود"
       },
       "creatable": {
         "title": "إضافة حساب جديد"
@@ -1107,7 +1107,7 @@
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "Open Manager",
-    "outdated": "App version outdated",
+    "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "تثبيت تطبيق {{appName}}",
     "installAppDescription": "يُرجى الانتظار حتى الانتهاء من التثبيت",
@@ -1732,7 +1732,7 @@
             "title": "تأكيد",
             "success": {
               "title": "لقد قمت بإعادة تفويض أصولك بنجاح",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
+              "text": "ستتم إعادة التفويض فور أن تقوم سلسلة الكتل (blockchain) بالتأكيد على المعاملة",
               "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
@@ -2447,14 +2447,14 @@
       "recoverySeed": {
         "title1": "كيف تعمل عبارة الاسترداد؟",
         "paragraph1": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد، حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+        "paragraph2": "لاستعادة الوصول إلى الأصل المشفر الخاص بك، يمكن لأي محفظة أن تقوم بحساب نفس المفاتيح الخاصة من عبارة الاسترداد الخاصة بك.",
         "link": "More about the recovery phrase",
         "title2": "ماذا يحدث إذا فقدت الوصول إلى جهاز نانو (Nano) الخاص بي؟",
         "paragraph3": "لا تقلق واتبع هذه الخطوات:",
         "points": {
           "1": "Get a new hardware wallet.",
-          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
-          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+          "2": "اختار \"استعادة عبارة الاسترداد على جهاز جديد\" في تطبيق ليدجر (Ledger)",
+          "3": "أدخل عبارة الاسترداد على جهازك الجديد لاستعادة الوصول إلى أصولك المشفرة."
         }
       },
       "whereToHide": {
@@ -2528,7 +2528,7 @@
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
+            "title": "الاستعادة من عبارة الاسترداد",
             "paragraph1": "قم باستعادة جهاز نانو (Nano) الخاص بك من عبارة الاسترداد الخاصة بك لاستعادة أو استبدال أو عمل نسخة احتياطية من محفظة ليدجر للأجهزة الخاصة بك.",
             "paragraph2": "سيستعيد جهاز نانو (Nano) مفاتيحك الخاصة وستكون قادرًا على الوصول إالي وإدارة أوصلك المشفرة.",
             "buttons": {
