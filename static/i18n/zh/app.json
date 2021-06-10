@@ -840,11 +840,11 @@
       "title": "Modification of experimental settings require a clear cache",
       "cta": "清除缓存"
     },
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "migrate": "Ledger Live 账户可更新",
+    "genericTerminatedCrypto": "不再支持 {{coinName}}",
     "valentine": {
       "title": "情人节",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "description": "作为我们爱情的证明，Ledger 正在减少 Ledger Live 上买入和卖出的手续费"
     },
     "ledgerAcademy": {
       "title": "Ledger 学院",
@@ -852,7 +852,7 @@
       "cta": "开始学习"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
+      "title": "使用 COSMOS 质押",
       "description": "Delegate your ATOM coins through the account page and earn rewards today",
       "cta": "立即质押 Cosmos"
     },
