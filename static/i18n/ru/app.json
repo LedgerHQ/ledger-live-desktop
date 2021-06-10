@@ -51,7 +51,7 @@
     "updateNow": "Обновить",
     "close": "Закрыть",
     "eastern": "Восточный",
-    "western": "Western",
+    "western": "Западный",
     "reverify": "Проверить повторно",
     "verify": "Верифицировать",
     "verifyMyAddress": "Подтвердить адрес",
@@ -593,13 +593,13 @@
         "amountSupplied": "Открыть займ",
         "amountSuppliedTooltip": "Amount deposited in the network",
         "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
+        "accruedInterestsTooltip": "Проценты с кредитования",
         "status": "Состояние счёта",
         "actions": "Действия"
       },
       "status": {
         "enablingTooltip": "Выполняется трансляция транзакции",
-        "toSupplyTooltip": "You can now supply your assets"
+        "toSupplyTooltip": "Теперь вы можете предоставлять свои активы в кредит"
       },
       "closed": {
         "assetLended": "Актив",
@@ -623,7 +623,7 @@
       }
     },
     "manage": {
-      "cta": "Manage lending",
+      "cta": "Управление займами",
       "title": "Управление займами",
       "enable": {
         "approve": "Утвердить",
@@ -632,9 +632,9 @@
         "info": "Вы одобрили <0>{{value}}</0> для данного счёта. Сумму можно уменьшить с дополнительной комиссией.",
         "infoNoLimit": "Этот счёт полностью утверждён. Сумму можно уменьшить с дополнительной комиссией.",
         "approvedWithLimit": "Вы одобрили <0>{{value}}</0> для данного счёта.",
-        "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
-        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+        "enabling": "Активы можно депонировать активы после того, как счёт будет утверждён.",
+        "notEnabled": "Чтобы предоставлять этот актив в кредит, необходимо утвердить счета.",
+        "notEnoughApproved": "Для кредитования необходимо увеличить утверждённый лимит для счёта."
       },
       "supply": {
         "title": "Депонировать",
@@ -650,9 +650,9 @@
       "steps": {
         "selectAccount": {
           "title": "Выберите счёт",
-          "selectLabel": "Account to lend from",
+          "selectLabel": "Счёт для кредитования",
           "cta": "Утвердить",
-          "alreadyEnabled": "This account is approved"
+          "alreadyEnabled": "Этот счёт утверждён"
         },
         "amount": {
           "title": "Кол-во",
@@ -756,7 +756,7 @@
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
+      "title": "Пожалуйста, создайте счёт ETH",
       "description": "<0>{{ asset }} ({{ ticker }})</0> — это токен Ethereum ERC-20. Чтобы одолжить {{ ticker }}, установите приложение Ethereum и создайте счёт Ethereum",
       "cta": "Добавить счёт"
     },
@@ -880,10 +880,10 @@
     },
     "swap": {
       "title": "Обмен криптовалюты",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "description": "Обменяйте одну криптовалюту на другую в Ledger Live через нашего партнёра."
     },
     "lending": {
-      "title": "Lend Crypto",
+      "title": "Кредиты в криптовалюте",
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
@@ -899,7 +899,7 @@
     },
     "recentActivity": "Последние операции",
     "totalBalance": "Общий баланс",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "transactionsPendingConfirmation": "Некоторые транзакции ещё не подтверждены. Они будут отражены на вашем балансе и доступны для использования после подтверждения."
   },
   "currentAddress": {
     "title": "Текущий адрес",
@@ -932,7 +932,7 @@
   "tokensList": {
     "title": "Токены",
     "cta": "Добавить токен",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
+    "placeholder": "Чтобы добавить токены, отправьте их на ваш адрес {{currencyName}}.",
     "link": "Подробнее",
     "seeTokens": "Показать токены ({{tokenCount}})",
     "hideTokens": "Скрыть токены ({{tokenCount}})",
@@ -1847,18 +1847,18 @@
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
     "unlockingBalance": "Unbonding",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
-    "unlockedBalance": "Unbonded",
-    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "unlockedBalance": "Не заблокированные",
+    "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
+    "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, её невозможно будет просмотреть на устройстве",
     "nomination": {
       "emptyState": {
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work"
+        "description": "Вы можете получать вознаграждения, блокируя активы, а затем назначая валидатора(-ов).",
+        "info": "Как работают назначения"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
-      "totalStake": "Total Stake",
+      "header": "Назначения",
+      "nominate": "Назначить",
+      "chill": "Отменить назначения",
+      "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
       "commission": "Commission",
       "active": "Active",
