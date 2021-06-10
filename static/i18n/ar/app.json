@@ -271,7 +271,7 @@
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
           "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
+          "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها."
         }
       }
     },
@@ -628,11 +628,11 @@
       "enable": {
         "approve": "موافقة",
         "manageLimit": "إدارة الحد",
-        "viewDetails": "View details",
+        "viewDetails": "عرض التفاصيل",
         "info": "لقد وافقت على <0>{{amount}}</0> على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "infoNoLimit": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedWithLimit": "لقد وافقت على <0>{{value}}</0> علي هذا الحساب.",
-        "enabling": "You can deposit assets once the account approval is confirmed.",
+        "enabling": "يمكنك إيداع الأصول بمجرد تأكيد الموافقة على الحساب.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
@@ -699,7 +699,7 @@
             "title": "تم إرسال السحب بنجاح",
             "text": "ستكون أصولك متاحة بمجرد قيام الشبكة بتأكيد السحب.",
             "done": "إغلاق",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى.",
           "tooltip": {
@@ -905,7 +905,7 @@
     "title": "العنوان الحالي",
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان."
   },
   "emptyState": {
     "dashboard": {
@@ -996,7 +996,7 @@
       "informations": "Crypto asset",
       "connectDevice": "الجهاز",
       "import": "الحسابات",
-      "finish": "Confirmation"
+      "finish": "التأكيد"
     },
     "fullNodeReadyInfo": "ستتم إضافة الحسابات باستخدام عقدتك الكاملة للبيتكوين.",
     "fullNodeConfigure": "تكوين العقدة",
@@ -1054,7 +1054,7 @@
     "from": "من",
     "to": "To",
     "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
+    "viewOperation": "عرض في المتصفح",
     "showMore": "عرض المزيد {{recipients}}",
     "showLess": "عرض أقل",
     "tokenOperations": "عمليات رمز التوكن",
@@ -1214,13 +1214,13 @@
       "dependencyInstall": {
         "title": "{{dependency}} app is required",
         "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "confirm": "تثبيت التطبيقات"
       },
       "dependencyUninstall": {
         "title": " Uninstall {{app}} and its related apps?",
         "showAll": "عرض التطبيقات المراد إلغاء تثبيتها",
         "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "confirm": "إلغاء تثبيت {{app}} والتطبيقات الأخرى"
       }
     },
     "firmware": {
@@ -1323,7 +1323,7 @@
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is awaiting validation",
+          "title": "المعاملة في انتظار التحقق",
           "desc": "يتعين عليك الانتظار دقيقة قبل أن تتمكن من التصويت"
         },
         "title": "تأكيد",
@@ -1331,9 +1331,9 @@
           "title": "",
           "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
           "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "votePending": "التصويت في {{time}}",
+          "vote": "تصويت",
+          "later": "التصويت لاحقًا"
         },
         "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       }
@@ -1383,9 +1383,9 @@
       "confirmation": {
         "title": "التأكيد",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "تم الإدلاء بأصواتك بنجاح.",
           "text": "",
-          "cta": "View details"
+          "cta": "عرض التفاصيل"
         },
         "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       }
@@ -1663,7 +1663,7 @@
           "confirmation": {
             "title": "تأكيد",
             "success": {
-              "title": "You have successfully delegated your assets",
+              "title": "لقد قمت بتفويض أصولك بنجاح",
               "text": "سيتم تحديث رصيد حسابك عندما تقوم سلسلة الكتل بتأكيد المعاملة.",
               "cta": "عرض التفاصيل"
             },
@@ -1834,7 +1834,7 @@
             "success": {
               "title": "تمت المطالبة بالمكافآت بنجاح!",
               "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
@@ -1936,7 +1936,7 @@
           "success": {
             "title": "You have successfully nominated validators",
             "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -2018,7 +2018,7 @@
           "success": {
             "title": "Assets successfully rebonded",
             "text": "سيتم تحديث رصيد حسابك فور أن تؤكد الشبكة على المعاملة.",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           },
           "pending": {
             "title": "Rebonding your assets..."
@@ -2047,7 +2047,7 @@
           "success": {
             "title": "Unbond transaction sent successfully",
             "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           },
           "pending": {
             "title": "Unbonding your assets..."
@@ -2082,7 +2082,7 @@
           "success": {
             "title": "Transaction sent successfully",
             "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "cta": "عرض التفاصيل"
           },
           "pending": {
             "title": "Broadcasting transaction..."
@@ -2181,7 +2181,7 @@
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
+      "close": "تأكيد",
       "undo": "إعادة العرض",
       "disclaimer": "لن يظهر هذا الشعار مرة أخرى حتى يكون هناك إعلان جديد"
     }
@@ -2625,7 +2625,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "descr": "اضغط على الزر الأيسر أو الأيمن لتغيير الأرقام. اضغط على كلا الزرين للتحقق من صحة أحد الأرقام. إختار <0></0> لتأكيد رمز الPIN الخاص بك. إختار <1></1> لمسح أحد الأرقام."
             },
             "confirm": {
               "title": "تأكيد رمز ال PIN",
@@ -2706,7 +2706,7 @@
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
+              "title": "تأكيد عبارة الاسترداد الخاصة بك",
               "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
             },
             "repeat": {
@@ -3205,7 +3205,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف المعروض ساري المفعول لمدة 60 ثانية."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
