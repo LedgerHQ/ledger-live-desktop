@@ -1833,7 +1833,7 @@
             "title": "Подтверждение",
             "success": {
               "title": "Вознаграждения успешно получены!",
-              "text": "Your rewards were added to your available balance",
+              "text": "Вознаграждения добавлены к вашему балансу",
               "cta": "Подробнее"
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
@@ -1843,9 +1843,9 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded",
+    "lockedBalance": "Заблокировано",
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
-    "unlockingBalance": "Unbonding",
+    "unlockingBalance": "Разблокировка",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Не заблокированные",
     "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
@@ -1889,7 +1889,7 @@
     },
     "unlockings": {
       "header": "Разблокировка активов",
-      "headerTooltip": "Available after the 28-day unbonding period",
+      "headerTooltip": "Будут доступны спустя 28 дней после разблокировки",
       "withdrawUnbonded": "Сумма вывода ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
@@ -2060,7 +2060,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Вывод средств",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
+          "description": "Вывод разблокированных активов станет возможет по истечении 28 дней после разблокировки.",
           "info": "Впоследствии вы сможете вывести разблокированные средства на свой баланс."
         },
         "chill": {
@@ -2081,7 +2081,7 @@
           "label": "Подтверждение",
           "success": {
             "title": "Транзакция отправлена",
-            "text": "You will see your operation in history soon.",
+            "text": "Скоро вы увидите свою транзакцию в истории.",
             "cta": "Подробнее"
           },
           "pending": {
@@ -2093,26 +2093,26 @@
     }
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
-    "validator": "Validator",
-    "yield": "Est. Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
+    "title": "Зарабатывайте вознаграждения",
+    "header": "Делегирование",
+    "validator": "Валидатор",
+    "yield": "Ориент. доход",
+    "address": "Адрес",
+    "transactionID": "ID транзакции",
+    "value": "Ценность",
     "amount": "Кол-во",
-    "delegated": "Delegated",
-    "completionDate": "Completion date",
-    "rewards": "Rewards",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
-    "overdelegated": "Overdelegated",
-    "status": "Status",
+    "delegated": "Делегировано",
+    "completionDate": "Дата завершения",
+    "rewards": "Вознаграждения",
+    "duration": "Продолжительность",
+    "durationJustStarted": "Только началось",
+    "durationDays": "{{count}} день",
+    "durationDays_plural": "{{count}} дн.",
+    "howItWorks": "Как работает делегирование",
+    "delegationEarn": "Теперь вы можете получать вознаграждение за стейкинг {{name}}, делегировав свой счёт.",
+    "earnRewards": "Получить вознаграждения",
+    "overdelegated": "Превышение лимита делегирования",
+    "status": "Статус",
     "flow": {
       "steps": {
         "starter": {
