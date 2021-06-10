@@ -224,11 +224,11 @@
         "fixed": "固定汇率",
         "fixedUnavailable": "两者的兑换不支持固定兑换率",
         "floatDesc": "您的数额会根据市场条件而变动。",
-        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "fixedDesc": "即使市场条件发生变化，您的数额也会保持不变。每60秒更新一次。",
         "by": "提供方"
       },
-      "exchange": "Exchange",
-      "helpCTA": "What is Swap?",
+      "exchange": "兑换",
+      "helpCTA": "什么是 Swap？",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
@@ -243,10 +243,10 @@
           "from": "来自",
           "to": "到",
           "toExchange": "Amount to send",
-          "toReceive": "Amount to receive",
-          "terms": "Terms & Conditions",
+          "toReceive": "待收数额",
+          "terms": "条款和条件",
           "disclaimer": {
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "description": "点击\"确认\"后，就意味着我认可并接受此服务完全由 <0>{{provider}}</0> 制约",
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
@@ -347,27 +347,27 @@
           "title": "节点",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
+              "header": "输入您的节点参数",
               "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
               "fields": {
                 "nodeHost": {
-                  "title": "Host",
+                  "title": "主机",
                   "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
+                  "title": "RPC 凭据",
                   "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
-                  "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "usernamePlaceholder": "用户名",
+                  "passwordPlaceholder": "密码"
                 },
                 "tls": {
-                  "title": "Use TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "title": "使用 TLS",
+                  "tooltip": "启用传输层安全性，例如，在使用托管节点解决方案时。"
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
+              "header": "正在测试节点连接",
               "description": "Please wait while we check if your full node is responding."
             },
             "success": {
