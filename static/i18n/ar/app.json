@@ -3049,7 +3049,7 @@
     },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "فشل الاتصال",
@@ -3093,7 +3093,7 @@
     },
     "LedgerAPI5xx": {
       "title": "عذرًا، حاول مرة أخرى.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "description": "تعذر على خادم البيانات معالجة طلبك. يرجى إعادة المحاولة مرة أخرى لاحقاً أو الاتصال بدعم ليدجر. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
@@ -3259,7 +3259,7 @@
       "description": "قم بإزالة تطبيق {{managerAppName}} وأعد تثبيته في برنامج المدير"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
+      "title": "العودة إلى لوحة المعلومات",
       "description": "يرجى العودة إلى لوحة المعلومات على جهازك"
     },
     "WebsocketConnectionError": {
