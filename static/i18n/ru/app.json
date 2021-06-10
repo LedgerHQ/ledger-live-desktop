@@ -2953,7 +2953,7 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "Размер комиссии превышает размер вознаграждения",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
@@ -2961,82 +2961,82 @@
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Произошла ошибка (ошибка № 1)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeTxDecode": {
       "title": "Что-то пошло не так (ошибка №2)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "title": "Некорректная последовательность",
+      "description": "Повторите операцию"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "Неавторизованная подпись",
+      "description": "Этот счёт не может подписать данную транзакцию"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Недостаточно средств",
+      "description": "Убедитесь, что на используемом счёте достаточно средств, и повторите попытку"
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "Что-то пошло не так (ошибка №6)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "Неправильный адрес",
+      "description": "Проверьте адрес и попробуйте снова"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Что-то пошло не так (ошибка №8)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "Неизвестный адрес",
+      "description": "Проверьте адрес и попробуйте снова"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Недостаточно монет",
+      "description": "Убедитесь, что на используемом счёте достаточно средств, и повторите попытку"
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "Что-то пошло не так (ошибка №11)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeOutOfGas": {
       "title": "Что-то пошло не так (ошибка №12)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "Текст Memo слишком длинный",
+      "description": "Сократите Memo и повторите попытку"
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "Что-то пошло не так (ошибка №14)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Что-то пошло не так (ошибка №15)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeGasOverflow": {
       "title": "Что-то пошло не так (ошибка №16)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Что-то пошло не так (ошибка №17)",
-      "description": "Please contact Ledger Support"
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} не поддерживается",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "description": "Этот криптоактив пока не поддерживается. Обратитесь в Поддержку Ledger."
     },
     "DeviceNotGenuine": {
       "title": "Возможно, устройство не подлинное.",
-      "description": "Request assistance from Ledger Support"
+      "description": "Вы можете получить помощь от Поддержки Ledger"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "Пожалуйста, попробуйте ещё раз (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
@@ -3045,23 +3045,23 @@
     },
     "DeviceHalted": {
       "title": "Пожалуйста, перезапустите Ledger и повторите попытку",
-      "description": "An unexpected error occurred. Please try again"
+      "description": "Произошла непредвиденная ошибка. Повторите попытку"
     },
     "DeviceSocketFail": {
       "title": "Перезагрузите устройство Ledger и повторите попытку",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "description": "Произошла непредвиденная ошибка. Повторите попытку ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "Произошёл сбой подключения",
+      "description": "Повторите попытку."
     },
     "DisconnectedDevice": {
       "title": "Извините, похоже, ваше устройство отключено",
-      "description": "Please reconnect and try again."
+      "description": "Пожалуйста, переподключитесь и повторите попытку."
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "Извините, похоже, ваше устройство отключено",
-      "description": "Please reconnect and try again."
+      "description": "Пожалуйста, переподключитесь и повторите попытку."
     },
     "EnpointConfig": {
       "title": "Некорректная конечная точка.",
@@ -3073,19 +3073,19 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "Необходимо обновить прошивку или приложение",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "description": "Пожалуйста, удалите все приложения через Диспетчер и перед последующей установкой проверьте наличие обновления прошивки"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "title": "Не удаётся распознать прошивку устройства",
+      "description": "Обратитесь в Поддержку Ledger"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "title": "Извините, не удалось сбросить",
+      "description": "Повторите попытку или обратитесь в Поддержку Ledger, если проблема повторяется."
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "title": "К сожалению, обновлений нет",
+      "description": "Пожалуйста, свяжитесь с Поддержкой Ledger, если у вас не получается использовать ваше устройство."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -3093,27 +3093,27 @@
     },
     "LedgerAPI5xx": {
       "title": "Извините, попробуйте снова.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "description": "Сервер не может обработать ваш запрос. Повторите попытку позже или обратитесь в Поддержку Ledger. {{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "К сожалению, услуги для {{currencyName}} недоступны",
       "description": "Попробуйте ещё раз или обратитесь в Поддержку Ledger"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "Это приложение уже установлено",
+      "description": "Проверьте, какие приложения уже установлены на вашем устройстве."
     },
     "ManagerAppDepInstallRequired": {
       "title": "Требуется приложение {{dependency}}",
       "description": "Если приложение {{dependency}} уже установлено, то переустановите его последнюю версию"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
+      "title": "Извините, это приложение является обязательным",
       "description": "Сначала придётся удалить все приложения, необходимые для работы {{appName}}"
     },
     "ManagerDeviceLocked": {
       "title": "Ваше устройство заблокировано",
-      "description": "Please unlock it"
+      "description": "Пожалуйста, разблокируйте его"
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Удаление приложений с устройства",
@@ -3216,15 +3216,15 @@
       "description": "Timeout occurred."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Что-то пошло не так. Подключите устройство заново",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Что-то пошло не так. Подключите устройство заново",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Что-то пошло не так. Подключите устройство заново",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
@@ -3409,7 +3409,7 @@
     },
     "GenuineCheckFailed": {
       "title": "Genuine check failed",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "description": "Что-то пошло не так. Повторите попытку или свяжитесь с Поддержкой Ledger, если возникнут дополнительные вопросы."
     },
     "EthAppPleaseEnableContractData": {
       "title": "Please enable contract data in the Ethereum app settings"
