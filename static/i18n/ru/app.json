@@ -1651,17 +1651,17 @@
               "Активы станут доступны через 21 день после отмены делегирования"
             ],
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "Выбирайте валидатора с умом. Часть делегированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "Валидаторы"
           },
           "connectDevice": {
             "title": "Устройство"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Подтверждение",
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
