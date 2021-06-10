@@ -1242,35 +1242,35 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
-        "updating": "Firmware update",
-        "reset": "Prepare device",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
+        "updating": "固件更新",
+        "reset": "准备设备",
+        "osu": "正在安装 OSU ……",
+        "flash-mcu": "MCU 更新中……",
         "flash-bootloader": "Bootloader updating...",
         "firmware": "Firmware updating...",
         "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
-      "mcuTitle": "Finalize update",
+      "identifier": "标识符",
+      "mcuTitle": "完成更新",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "Please wait for the update to finish",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "successTitle": "固件已更新",
       "successTextApps": "Please re-install the apps on your device",
       "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
-      "cancelReinstallCTA": "Install update",
+      "sucessCTAApps": "重新安装应用程序",
+      "SuccessCTANoApps": "安装应用程序",
+      "cancelReinstallCTA": "安装更新",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PINs to reset the device.",
+        "first": "1. 重置您的设备",
+        "connect": "通过 USB 数据线，连接 {{deviceName}} 到您的计算机。",
+        "turnOn": "按设备上的按钮以启动设备。",
+        "falsePin": "输入三次错误的 PIN 识别密码以重置设备。",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
         "confirmTurnOff": "Tap {{action}} to confirm.",
         "second": "2. Boot in {{mode}} mode",
@@ -1284,23 +1284,23 @@
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "申领奖励",
     "steps": {
       "rewards": {
-        "title": "Rewards",
+        "title": "奖励",
         "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
         "info": "Rewards can be claimed once every 24 hours."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "设备"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "确认",
         "success": {
-          "title": "Rewards claimed",
+          "title": "已申领奖励",
           "text": "Your rewards were added to your available balance.",
-          "cta": "View details",
-          "done": "Done"
+          "cta": "查看详情",
+          "done": "完成"
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       }
@@ -1310,8 +1310,8 @@
     "title": "Freeze assets",
     "steps": {
       "amount": {
-        "title": "Amount",
-        "resourceInfo": "Bandwidth or Energy?",
+        "title": "数额",
+        "resourceInfo": "带宽或能量？",
         "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
         "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
         "amountLabel": "Amount to freeze",
@@ -1369,30 +1369,30 @@
         "title": "Vote",
         "search": "Search by name or address...",
         "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
-        "validators": "Validators ({{total}})",
-        "votes": "Available assets: {{total}}",
+        "selected": "选取数：{{total}}",
+        "maxSelected": "最大选取数：{{total}}",
+        "allVotesAreUsed": "全部资产都已分配",
+        "maxUsed": "资产不足",
+        "validators": "验证器 ({{total}})",
+        "votes": "可用资产：{{total}}",
         "noResults": "No validator found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "设备"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "确认",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "您的选票已成功投出。",
           "text": "",
-          "cta": "View details"
+          "cta": "查看详情"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
       }
     }
   },
   "buy": {
-    "title": "Buy",
+    "title": "买入",
     "titleCrypto": "买入 {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
     "withoutDevice": "Continue without my device",
@@ -1400,27 +1400,27 @@
     "skipConnect": "Continue without my device"
   },
   "sell": {
-    "title": "Sell",
+    "title": "卖出",
     "titleCrypto": "卖出 {{currency}}"
   },
   "receive": {
-    "title": "Receive",
-    "successTitle": "Address shared securely",
+    "title": "接收",
+    "successTitle": "地址已安全共享",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
+        "title": "账户",
         "label": "信贷账户",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
+        "parentAccount": "1. 选择 {{currencyName}} 账户",
+        "token": "2. 选择代币",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
         "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
       },
       "connectDevice": {
-        "title": "Device",
+        "title": "设备",
         "withoutDevice": "Don't have your device?"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "接收"
       },
       "warning": {
         "tezos": {
@@ -1430,24 +1430,24 @@
     }
   },
   "send": {
-    "title": "Send",
+    "title": "发送",
     "totalSpent": "Total to debit",
     "steps": {
       "recipient": {
         "title": "Recipient"
       },
       "amount": {
-        "title": "Amount",
+        "title": "数额",
         "banner": "Maximum spendable amount is",
-        "fees": "Fees",
+        "fees": "费用",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "高级"
       },
       "summary": {
-        "title": "Summary"
+        "title": "概要"
       },
       "device": {
-        "title": "Device"
+        "title": "设备"
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
@@ -1456,7 +1456,7 @@
         "to": "发往",
         "selectAccountDebit": "借记账户",
         "recipientAddress": "Recipient address",
-        "amount": "Amount",
+        "amount": "数额",
         "fees": "Network fees",
         "useMax": "Send Max",
         "rippleTag": "Tag",
@@ -1511,29 +1511,29 @@
     "header": "Asset allocation ({{count}})"
   },
   "accountDistribution": {
-    "account": "Account",
-    "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
-    "header": "Account allocation ({{count}})"
+    "account": "账户",
+    "distribution": "配置",
+    "amount": "数额",
+    "value": "价值",
+    "header": "账户配置 ({{count}})"
   },
   "tron": {
     "voting": {
       "emptyState": {
         "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
+        "info": "如何投票",
         "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "vote": "将票投出",
+        "voteExisting": "管理选票"
       },
-      "manageTP": "Manage assets",
+      "manageTP": "管理资产",
       "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Votes",
-      "percentageTP": "% of votes cast",
-      "noRewards": "No rewards available",
+      "claimRewards": "申领奖励",
+      "nextRewardsDate": "可申请的奖励 {{date}}",
+      "claimAvailableRewards": "申领 {{amount}}",
+      "header": "选票",
+      "percentageTP": "% 选票投出",
+      "noRewards": "没有奖励可用",
       "remainingVotes": {
         "title": "You still have {{amount}} votes remaining",
         "description": "You can cast your remaining votes to earn more rewards",
@@ -1548,20 +1548,20 @@
               "access": "You can unfreeze your assets after 3 days.",
               "ledger": "Freeze and vote securely with your Ledger device."
             },
-            "help": "How voting works",
+            "help": "如何投票",
             "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "管理资产",
       "freeze": {
-        "title": "Freeze",
+        "title": "冻结",
         "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
       },
       "unfreeze": {
-        "title": "Unfreeze",
+        "title": "解冻",
         "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
       },
       "vote": {
