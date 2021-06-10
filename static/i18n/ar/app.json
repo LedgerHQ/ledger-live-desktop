@@ -82,7 +82,7 @@
     "exchange": "تداول"
   },
   "devices": {
-    "nanoS": "نانو S",
+    "nanoS": "Nano S",
     "nanoX": "نانو X",
     "blue": "أزرق"
   },
@@ -863,7 +863,7 @@
     },
     "backupPack": {
       "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
+      "description": "قم بإدارة أصولك بأمان باستخدام Nano X وNano S بسعر مخفّض",
       "cta": "Buy back-up pack"
     },
     "polkaStake": {
@@ -3355,7 +3355,7 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "description": "تعذرت مزامنة بعض الحسابات"
     },
     "TronNoFrozenForBandwidth": {
       "title": "لا توجد أصول لإزالة تجميدها",
