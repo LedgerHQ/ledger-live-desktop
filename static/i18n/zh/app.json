@@ -205,7 +205,7 @@
     "form": {
       "amount": "Amount",
       "from": {
-        "title": "从",
+        "title": "来自",
         "account": "账户",
         "amount": "Amount to send",
         "currency": "Crypto asset"
@@ -240,7 +240,7 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "从",
+          "from": "来自",
           "to": "到",
           "toExchange": "Amount to send",
           "toReceive": "Amount to receive",
@@ -288,7 +288,7 @@
         "finished": "您的掉期已成功完成"
       },
       "date": "日期",
-      "from": "从",
+      "from": "来自",
       "fromAddress": "初始地址",
       "fromAddress_plural": "初始地址",
       "to": "到",
@@ -932,15 +932,15 @@
   "tokensList": {
     "title": "代币",
     "cta": "添加代币",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
-    "link": "Learn more",
-    "seeTokens": "Show tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens",
+    "placeholder": "要添加代币，只需将其发送到您的 {{currencyName}} 地址。",
+    "link": "了解更多",
+    "seeTokens": "显示代币 ({{tokenCount}})",
+    "hideTokens": "隐藏代币 ({{tokenCount}})",
+    "countTooltip": "1 枚代币",
+    "countTooltip_plural": "{{count}} 枚代币",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
+      "title": "ASA (资产)",
+      "cta": "添加 ASA",
       "placeholder": "You can add assets to your {{currencyName}} account.",
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
@@ -962,14 +962,14 @@
       "successDesc": "Your {{assets}} account is now updated and ready to use",
       "mobileTitle": "Export accounts to mobile",
       "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
+      "mobileCTA": "导出至移动版",
       "description": "New features in Ledger Live require an update of your accounts.",
       "currency": "1 {{currency}} account needs to be updated:",
       "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
       "footer": "You need your Ledger Device to complete the update",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
-      "doItLaterBtn": "Do it later"
+      "doItLaterBtn": "以后再做"
     },
     "progress": {
       "finished": {
@@ -986,15 +986,15 @@
       }
     },
     "cta": {
-      "startUpdate": "Start update",
+      "startUpdate": "开始更新",
       "nextCurrency": "Continue with {{currency}} update"
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "添加账户",
     "breadcrumb": {
-      "informations": "Crypto asset",
-      "connectDevice": "Device",
+      "informations": "加密资产",
+      "connectDevice": "设备",
       "import": "Accounts",
       "finish": "Confirmation"
     },
@@ -1027,32 +1027,32 @@
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "添加现有账户"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "添加新账户"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "账户已位于 ({{count}}) 资产组合中"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "待更新账户"
       }
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
-    "title": "Operation details",
-    "account": "Account",
-    "date": "Date",
-    "status": "Status",
-    "confirmed": "Confirmed",
-    "failed": "Failed",
-    "notConfirmed": "Not confirmed",
-    "fees": "Fee",
-    "noFees": "No fee",
-    "from": "From",
-    "to": "To",
+    "whatIsThis": "这是什么操作？",
+    "title": "操作详情",
+    "account": "账户",
+    "date": "日期",
+    "status": "状态",
+    "confirmed": "已确认",
+    "failed": "已失败",
+    "notConfirmed": "未确认",
+    "fees": "费用",
+    "noFees": "无费用",
+    "from": "来自",
+    "to": "至",
     "identifier": "Transaction ID",
     "viewOperation": "View in explorer",
     "showMore": "Show {{recipients}} more",
@@ -1078,7 +1078,7 @@
       "undelegated": "Undelegated",
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "Undelegated amount",
-      "rewardFrom": "Reward from",
+      "rewardFrom": "奖励来自",
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "Earned rewards",
@@ -1452,7 +1452,7 @@
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
         "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-        "from": "From",
+        "from": "来自",
         "to": "To",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
