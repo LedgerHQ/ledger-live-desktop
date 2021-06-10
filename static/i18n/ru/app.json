@@ -905,7 +905,7 @@
     "title": "Текущий адрес",
     "for": "Адрес для <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его."
   },
   "emptyState": {
     "dashboard": {
@@ -918,7 +918,7 @@
     },
     "accounts": {
       "title": "Чтобы начать, добавьте счёт",
-      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "desc": "Чтобы управлять своими криптоактивами, добавьте счёт. На устройстве должно быть установлено приложение для вашего криптоактива.",
       "buttons": {
         "addAccount": "Добавить счёт",
         "installApp": "Для установки приложений перейдите в Диспетчер",
@@ -1114,7 +1114,7 @@
     "listApps": "Выполняется проверка зависимостей приложения",
     "listAppsDescription": "Мы проверяем наличие всех необходимых приложений. Пожалуйста, подождите",
     "swap": {
-      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "Перед отправкой проверьте детали обмена на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения.",
       "confirm": "Подтвердить обмен",
       "amountSent": "Сумма к отправке",
       "amountReceived": "Сумма к получению",
@@ -1125,7 +1125,7 @@
       "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве"
     },
     "sell": {
-      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "Перед отправкой проверьте детали об обмене на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения.",
       "confirm": "Подтвердите продажу"
     }
   },
@@ -1145,12 +1145,12 @@
       "firmwareAvailable": "Прошивка устарела:",
       "firmwareUpToDate": "Прошивка актуальна:",
       "genuine": "Устройство подлинное",
-      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+      "incomplete": "Не удалось распознать некоторые приложения. Удалите их и установите ещё раз."
     },
     "applist": {
       "placeholder": "No match for the search with the selected filters",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
+      "placeholderNoAppsInstalled": "На устройстве нет установленных приложений",
+      "placeholderGoToCatalog": "Чтобы установить приложения, перейдите в Каталог приложений",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
@@ -2559,7 +2559,7 @@
               "descr": "Узнайте как взаимодействовать с устройством по инструкциям на экране."
             },
             "select": {
-              "title": "Выберите \"Set up as a new device\" (Настроить как новое устройство)",
+              "title": "Настраиваем как новое устройство",
               "descr": "Для подтверждения выбора нажмите обе кнопки одновременно."
             },
             "follow": {
