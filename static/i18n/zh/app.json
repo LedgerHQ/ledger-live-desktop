@@ -169,27 +169,27 @@
     "disconnectButton": "断开连接"
   },
   "swap": {
-    "title": "Swap",
+    "title": "Swap (掉期)",
     "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "whatIsSwap": "什么是 Swap？",
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "兑换",
       "history": "历史记录"
     },
     "history": {
       "empty": {
-        "title": "Your previous swaps will appear here",
+        "title": "您之前的掉期交易会显示在这里",
         "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       }
     },
     "landing": {
-      "title": "Swap your assets",
+      "title": "Swap 掉期交易您的资产",
       "continue": "继续",
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Please install the {{appName}} app on your device",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
+      "subtitle": "前往管理器并安装 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往管理器"
     },
     "outdatedApp": {
@@ -203,7 +203,7 @@
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "form": {
-      "amount": "Amount",
+      "amount": "数额",
       "from": {
         "title": "来自",
         "account": "账户",
@@ -213,13 +213,13 @@
       "to": {
         "title": "到",
         "account": "账户",
-        "amount": "Amount to receive",
-        "currency": "Crypto asset",
-        "addAccountCTA": "Add new account"
+        "amount": "待收数额",
+        "currency": "加密资产",
+        "addAccountCTA": "添加新账户"
       },
       "tradeMethod": {
         "title": "费率",
-        "float": "Floating rate",
+        "float": "浮动汇率",
         "floatUnavailable": "Floating rate not supported for this pair",
         "fixed": "Fixed rate",
         "fixedUnavailable": "Fixed rate not supported for this pair",
@@ -344,7 +344,7 @@
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
         "node": {
-          "title": "Node",
+          "title": "节点",
           "connectionSteps": {
             "notConnected": {
               "header": "Enter your node parameters",
@@ -427,15 +427,15 @@
               "description": "invalid-chain description for tooltip"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "正在加载",
               "description": ""
             },
             "ready": {
-              "header": "Ready",
+              "header": "就绪",
               "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
             },
             "syncing": {
-              "header": "Node sync in progress…",
+              "header": "正在进行节点同步……",
               "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
             },
             "scanning": {
@@ -477,8 +477,8 @@
         "desc": "Choose the unit to be used"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
+    "availableBalance": "可用余额",
+    "frozenAssets": "冻结资产",
     "bandwidth": "带宽",
     "energy": "能量",
     "delegatedAssets": "已委托资产",
@@ -547,7 +547,7 @@
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
-    "lendAsset": "Lend",
+    "lendAsset": "贷出",
     "account": {
       "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Amount lent to the network",
@@ -557,10 +557,10 @@
       "accruedInterestsTooltip": "Interest generated on your lent assets",
       "interestEarned": "Interest earned",
       "interestEarnedTooltip": "Interest you have earned after withdrawal",
-      "openLoans": "Open loans",
+      "openLoans": "开放借贷",
       "closedLoans": "Closed loans",
       "amountRedeemed": "Amount withdrawn",
-      "date": "Date",
+      "date": "日期",
       "info": "You can lend assets directly from your {{currency}} account and earn interest.",
       "howCompoundWorks": "How does lending on Compound work?",
       "lend": "Deposit {{currency}}"
@@ -1535,8 +1535,8 @@
       "percentageTP": "% 选票投出",
       "noRewards": "没有奖励可用",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "You can cast your remaining votes to earn more rewards",
+        "title": "您还剩余 {{amount}} 张选票",
+        "description": "投出您的剩余选票来赚取更多奖励。",
         "button": "立即投票"
       },
       "flow": {
@@ -1544,9 +1544,9 @@
           "starter": {
             "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "delegate": "委托出去的资产依旧为您所有。",
+              "access": "3 天后您可以解冻您的资产。",
+              "ledger": "使用您的 Ledger 设备安全冻结资产并投票。"
             },
             "help": "如何投票",
             "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
@@ -1569,20 +1569,20 @@
         "description": "Cast votes for Super Representatives to earn rewards.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
+            "title": "将票投出",
             "description": "Vote for one or more Super Representatives to start earning rewards.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "不再显示",
+              "next": "将票投出"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SR 超级代表或候选人？",
               "superRepresentative": {
                 "title": "Super Representatives (SR)",
                 "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
               },
               "candidates": {
-                "title": "Candidates",
+                "title": "候选人",
                 "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
               }
             }
@@ -1592,12 +1592,12 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
-    "modalTitle": "Coin control",
-    "coincontrol": "Coin control",
-    "advanced": "Advanced options",
+    "inputSelected": "已选择",
+    "toSpend": "要支出的硬币",
+    "toReturn": "要返还的零钱",
+    "modalTitle": "硬币控制",
+    "coincontrol": "硬币控制",
+    "advanced": "高级选项",
     "ctaDisabled": "This account has no UTXO",
     "whatIs": "What is coin selection?",
     "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
