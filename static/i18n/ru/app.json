@@ -1860,35 +1860,35 @@
       "chill": "Отменить назначения",
       "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
-      "commission": "Commission",
-      "active": "Active",
-      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
-      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
-      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorTooltip": "This address is no longer a validator",
-      "elected": "Elected",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "commission": "Комиссия",
+      "active": "Активен",
+      "activeTooltip": "Этот валидатор выбран вами и накапливает вознаграждения за ваши заблокированные активы.",
+      "inactive": "Неактивный",
+      "inactiveTooltip": "Этот валидатор выбран вами, но не собирает вознаграждения за ваши заблокированные активы.",
+      "waiting": "Не выбран",
+      "waitingTooltip": "Этот валидатор не был выбран, поэтому не получает вознаграждения.",
+      "notValidator": "Это не валидатор",
+      "notValidatorTooltip": "Этот адрес больше не является валидатором",
+      "elected": "Выбран",
+      "nominatorsCount": "Номинаторов: {{nominatorsCount}}",
+      "nominatorsTooltip": "Этого валидатора уже выбрали {{count}} номинатора(-ов).",
+      "oversubscribed": "Превышение лимита голосов ({{nominatorsCount}})",
       "oversubscribedTooltip": "Вознаграждения получают только лучшие номинаторы {{maxNominatorRewardedPerValidator}} с наибольшей заблокированной суммой",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
+      "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
+      "electionOpen": "Сейчас идёт подбор новых валидаторов. Следовательно, операции в стейкинга доступны не более 15 минут.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
+      "externalControllerTooltip": "Этот счёт контролируется другим счётом.",
       "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
+      "externalStashTooltip": "Этот счёт контролирует другой счёт.",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
+      "showInactiveNominations": "Показать всех номинаторов ({{count}})",
+      "hideInactiveNominations": "Показать только активных номинаторов",
+      "noActiveNominations": "Нет активных номинаторов.",
       "showAllUnlockings": "Показать все разблокируемые средства ({{count}})",
       "hideAllUnlockings": "Скрыть разблокируемые суммы"
     },
     "unlockings": {
-      "header": "Unbonding",
+      "header": "Разблокировка активов",
       "headerTooltip": "Available after the 28-day unbonding period",
       "withdrawUnbonded": "Сумма вывода ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
@@ -2045,12 +2045,12 @@
           "title": "Подтверждение",
           "label": "Подтверждение",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
+            "title": "Транзакция для разблокировки успешно отправлена",
+            "text": "Разблокированные активы можно будет вывести по истечении 28 дней.",
             "cta": "Подробнее"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "Отменяем блокировку ваших активов..."
           },
           "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
         }
@@ -2059,28 +2059,28 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
+          "title": "Вывод средств",
           "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "info": "Впоследствии вы сможете вывести разблокированные средства на свой баланс."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Отменить назначения",
+          "description": "Это действие отменяет все назначения и останавливает получение вознаграждений.",
+          "info": "Блокированные активы останутся заблокированными. Если их разблокировать, доступ к ним будет восстановлен только спустя 28 дней."
         }
       },
       "steps": {
         "info": {
-          "title": "Info"
+          "title": "Информация"
         },
         "connectDevice": {
           "title": "Устройство"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Подтверждение",
+          "label": "Подтверждение",
           "success": {
-            "title": "Transaction sent successfully",
+            "title": "Транзакция отправлена",
             "text": "You will see your operation in history soon.",
             "cta": "Подробнее"
           },
@@ -2232,8 +2232,8 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
-      "desc": "Select a crypto asset to edit its settings.",
-      "placeholder": "No settings for this asset",
+      "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
+      "placeholder": "Нет настроек для выбранного актива",
       "confirmationsNb": "Количество подтверждений",
       "confirmationsNbDesc": "Укажите количество подтверждений транзакции в сети, после достижения которого транзакция будет считаться подтверждённой."
     },
@@ -2247,28 +2247,28 @@
       "softResetDesc": "Очистите кэш Ledger Live для принудительной синхронизации с блокчейном.",
       "softReset": "Очистить",
       "hardResetTitle": "Сброс Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
+      "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории о транзакциях и настройки.",
       "hardReset": "Сбросить",
       "analytics": "Аналитика",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "Отчёты об ошибках",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
+      "reportErrorsDesc": "Автоматически отправлять отчёты и помогать Ledger совершенствовать продукты.",
       "launchOnboarding": "Настройка устройства",
-      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
+      "launchOnboardingDesc": "Настройка как нового устройства, либо восстановление существующего устройства. Счета и настройки сохраняются."
     },
     "help": {
       "version": "Версия приложения",
       "releaseNotesBtn": "Сведения",
       "termsBtn": "Прочитать",
       "faq": "Служба поддержки Ledger",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "faqDesc": "В случае возникновения проблем обратитесь за помощью в Ledger Live, используя аппаратный кошелёк.",
       "terms": "Условия использования",
       "termsDesc": "Используя приложение Ledger Live, вы принимаете наши Условия использования.",
       "privacy": "Политика конфиденциальности",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
+      "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей Политике конфиденциальности."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования."
     },
     "hardResetModal": {
       "title": "Сброс Ledger Live",
@@ -2288,11 +2288,11 @@
     },
     "removeAccountModal": {
       "title": "Удалить счёт",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
+      "desc": "Это не повлияет на ваши криптоактивы. Существующие счета всегда можно добавить позже."
     },
     "openUserDataDirectory": {
       "title": "Просмотр пользовательских данных",
-      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
+      "desc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, кэш и настройки.",
       "btn": "Посмотреть"
     },
     "repairDevice": {
