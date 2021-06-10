@@ -3146,16 +3146,16 @@
       "description": "Удаляйте приложения Bitcoin или Ethereum в последнюю очередь"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "Похоже, отключился интернет",
+      "description": "Проверьте подключение к Интернету."
     },
     "NoAddressesFound": {
       "title": "К сожалению, счета не найдены",
       "description": "При вычислении адреса что-то пошло не так. Повторите попытку или обратитесь в Поддержку Ledger"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Кажется, у вас недостаточно средств",
+      "description": "Пожалуйста, убедитесь, что на счёте достаточно средств."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Адрес получения неактивен. Чтобы активировать его, укажите сумму не менее {{minimalAmount}}"
@@ -3164,27 +3164,27 @@
       "title": "The ETH balance in the parent account is insufficient for network fees"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
+      "title": "Пароли не совпадают",
       "description": "Повторите попытку."
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
+      "title": "Введён неправильный пароль",
       "description": "Пожалуйста, попробуйте ещё раз"
     },
     "RPCHostRequired": {
-      "title": "Host is required."
+      "title": "Не указан хост."
     },
     "RPCHostInvalid": {
-      "title": "Enter valid host."
+      "title": "Укажите действующего хоста."
     },
     "RPCUserRequired": {
-      "title": "RPC Username is required"
+      "title": "Требуется имя пользователя RPC"
     },
     "RPCPassRequired": {
-      "title": "RPC Password is required"
+      "title": "Требуется пароль RPC"
     },
     "SatStackAccessDown": {
-      "title": "Could not reach full node",
+      "title": "Не удалось подключиться к полной ноде",
       "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
     },
     "SatStackStillSyncing": {
@@ -3192,7 +3192,7 @@
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
+      "title": "Пожалуйста, обновите SatStack",
       "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
     },
     "SatStackDescriptorNotImported": {
@@ -3208,12 +3208,12 @@
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "Извините, истекло время ожидания ответа сервера",
+      "description": "Пожалуйста, попробуйте ещё раз."
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "description": "Время ожидания истекло."
     },
     "TransportError": {
       "title": "Что-то пошло не так. Подключите устройство заново",
@@ -3354,27 +3354,27 @@
       "description": "Повторите попытку и разрешите переименование на вашем устройстве"
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": "Ошибка синхронизации",
       "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": "Нет активов для разморозки",
       "description": "You do not have assets to unfreeze associated to Bandwidth"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": "Нет активов для разморозки",
       "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
       "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days after your last Freeze operation"
+      "description": "С последней заморозки активов должно пройти 3 дня."
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Требуется как минимум 1 голос"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers"
+      "title": "Формат голоса неверный",
+      "description": "Вы можете голосовать только целыми числами"
     },
     "TronRewardNotAvailable": {
       "title": "Reward is not claimable yet",
@@ -3394,10 +3394,10 @@
       "title": "Additional fees may be applied"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "Недостаточно голосов"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
+      "title": "Транзакция просрочена",
       "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "TronNotEnoughEnergy": {
