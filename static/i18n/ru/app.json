@@ -2313,7 +2313,7 @@
       },
       "tokenBlacklist": {
         "title": "Скрытые токены",
-        "desc": "Чтобы скрыть токены, перейдите к списку токенов, нажмите по названию и удерживайте, а затем выберите «Скрыть токен».",
+        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
         "count": "{{count}} токен",
         "count_plural": "Токенов: {{count}}"
       },
@@ -2364,7 +2364,7 @@
   "crash": {
     "title": "Что-то пошло не так",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
+    "troubleshooting": "Нажмите здесь, чтобы узнать о возможных решениях",
     "logs": "Хранить логи",
     "dataFolder": "Посмотреть пользовательские данные"
   },
@@ -2372,12 +2372,12 @@
     "title": "История операций",
     "desc": "Выберите счета, историю которых вы хотите хранить",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
-    "titleSuccess": "Operation history saved successfully",
+    "titleSuccess": "История операций успешно сохранена",
     "cta": "Сохранить",
     "ctaSuccess": "Готово",
     "noAccounts": "Нет счетов для экспорта",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
+    "selectedAccounts": "Счета, которые будут включены",
+    "selectedAccounts_plural": "Счета, которые будут включены ({{count}})",
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
@@ -3117,7 +3117,7 @@
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Удаление приложений с устройства",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "description": "Приватные ключи, которые дают доступ к вашим криптоактивам, хранятся в безопасности на вашем устройстве. Кроме того, у вас есть специальный лист, на который следует записать фразу восстановления."
     },
     "ManagerNotEnoughSpace": {
       "title": "Недостаточно свободного места",
@@ -3132,14 +3132,14 @@
       "uninstall": {
         "title": "Прервать удаление приложения?",
         "description": "При выходе из Диспетчера удаление приложения будет прервано.",
-        "stay": "Finish uninstalling"
+        "stay": "Завершить удаление"
       },
       "update": {
         "title": "Прервать обновление приложения?",
         "description": "При выходе из Диспетчера обновление приложения будет прервано.",
-        "stay": "Finish updates"
+        "stay": "Завершить обновления"
       },
-      "quit": "Quit Manager"
+      "quit": "Закрыть Диспетчер"
     },
     "ManagerUninstallBTCDep": {
       "title": "Это приложение является обязательным",
