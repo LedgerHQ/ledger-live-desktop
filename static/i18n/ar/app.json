@@ -858,7 +858,7 @@
     },
     "buyCrypto": {
       "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "description": "قم بشراء الأصول المشفرة من خلال شريكنا وتلقيها مباشرة في حسابك في ليدجر (Ledger)",
       "cta": "Buy now"
     },
     "backupPack": {
@@ -1000,7 +1000,7 @@
     },
     "fullNodeReadyInfo": "ستتم إضافة الحسابات باستخدام عقدتك الكاملة للبيتكوين.",
     "fullNodeConfigure": "تكوين العقدة",
-    "tokensTip": "إن {{token}} ({{ticker}}) هو رمز توكن {{tokenType}}. يمكنك استلام رموز التوكن بشكل مباشر على حساب {{currency}}.",
+    "tokensTip": "إن {{token}} ({{ticker}}) هو رمز توكن {{tokenType}}. يمكنك تلقي رموز التوكن بشكل مباشر على حساب {{currency}}.",
     "accountToImportSubtitle_plural": "إضافة حسابات موجودة",
     "selectAll": "اختار كل ({{count}})",
     "unselectAll": "إلغاء اختيار كل ({{count}})",
@@ -1010,7 +1010,7 @@
     "successDescription": "Add other accounts or return to Portfolio",
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
+      "noOperationOnLastAccount": "لا يمكن إضافة حساب جديد قبل أن تتلقى الأصول على حسابك <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
       "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ العناوين القديمة."
@@ -1405,7 +1405,7 @@
   },
   "receive": {
     "title": "تلقي",
-    "successTitle": "Address shared securely",
+    "successTitle": "تمت مشاركة العنوان بشكل آمن",
     "steps": {
       "chooseAccount": {
         "title": "حساب",
@@ -1793,7 +1793,7 @@
             "title": "تأكيد",
             "success": {
               "title": "تمت إضافة أصل {{token}} بنجاح",
-              "text": "يمكنك الآن استلام وإرسال أصول <0>{{token}}</0> إلى حسابك الAlgorand.",
+              "text": "يمكنك الآن تلقي وإرسال أصول <0>{{token}}</0> إلى حسابك الAlgorand.",
               "cta": "عرض التفاصيل"
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
@@ -1810,9 +1810,9 @@
         "title": "المطالبة بالمكافآت",
         "steps": {
           "starter": {
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "description": "تلقى مكافآت ألغوراند (Algorand) لمجرد الاحتفاظ بسيطرة ألغوراند (Algorand) على أصولك.",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
+              "delegate": "مطلوب رصيد لا يقل عن 1 Algo لتلقي المكافآت.",
               "access": "Increase the account’s balance to increase rewards.",
               "ledger": "قم بتنفيذ معاملة إلى الحساب أو منه للحصول على مكافآت."
             },
@@ -2171,7 +2171,7 @@
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
+      "topUp": "تلقي المزيد",
       "redelegate": "Change validator",
       "stopDelegation": "End delegation"
     }
@@ -2362,7 +2362,7 @@
     "downloadNow": "تنزيل التحديث"
   },
   "crash": {
-    "title": "Something went wrong",
+    "title": "حدث خطأ ما",
     "description": "يرجى مراجعة مقالات الدعم المتاحة لدينا لمحاولة إيجاد الحلول الممكنة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger).",
     "troubleshooting": "Click here for possible solutions",
     "logs": "Save logs",
@@ -2960,11 +2960,11 @@
       "title": "لا يمكنك تقليل المبلغ الموافق عليه في حين وجود إيداع نشط."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": "حدث خطأ ما (الخطأ #1)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "حدث خطأ ما (الخطأ #2)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidSequence": {
@@ -2980,7 +2980,7 @@
       "description": "تأكد من أن الحساب المستخدم به أرصدة مالية كافية وحاول مرة أخرى"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": "حدث خطأ ما (الخطأ #6)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -2988,7 +2988,7 @@
       "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": "حدث خطأ ما (الخطأ #8)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeUnknownAddress": {
@@ -3000,11 +3000,11 @@
       "description": "تأكد من أن الحساب المستخدم به أرصدة مالية كافية وحاول مرة أخرى"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": "حدث خطأ ما (الخطأ #11)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
+      "title": "حدث خطأ ما (الخطأ #12)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
@@ -3012,19 +3012,19 @@
       "description": "Please reduce the size of the memo text and try again"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
+      "title": "حدث خطأ ما (الخطأ #14)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "حدث خطأ ما (الخطأ #15)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
+      "title": "حدث خطأ ما (الخطأ #16)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
+      "title": "حدث خطأ ما (الخطأ #17)",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CurrencyNotSupported": {
@@ -3271,7 +3271,7 @@
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "حدث خطأ ما",
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
