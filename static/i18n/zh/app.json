@@ -848,7 +848,7 @@
     },
     "ledgerAcademy": {
       "title": "Ledger 学院",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
+      "description": "一切您所需要知道的关于区块链、安全性、加密货币和您的 Ledger 设备的内容",
       "cta": "开始学习"
     },
     "stakeCosmos": {
@@ -868,7 +868,7 @@
     },
     "polkaStake": {
       "title": "POLKADOT 权益质押",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "description": "您现在可以在 Ledger Live 直接对您的 DOT 进行权益质押、安保和管理"
     },
     "sell": {
       "title": "卖出加密货币",
@@ -960,7 +960,7 @@
       "successTitle": "Accounts updated successfully",
       "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
       "successDesc": "Your {{assets}} account is now updated and ready to use",
-      "mobileTitle": "Export accounts to mobile",
+      "mobileTitle": "导出账户至移动版",
       "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
       "mobileCTA": "导出至移动版",
       "description": "New features in Ledger Live require an update of your accounts.",
@@ -995,11 +995,11 @@
     "breadcrumb": {
       "informations": "加密资产",
       "connectDevice": "设备",
-      "import": "Accounts",
-      "finish": "Confirmation"
+      "import": "账户",
+      "finish": "确认"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
-    "fullNodeConfigure": "Configure node",
+    "fullNodeConfigure": "配置节点",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
