@@ -385,10 +385,10 @@
           "connectionSteps": {
             "pending": {
               "header": "الحصول على الحسابات من الجهاز",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "description": "يُرجى الانتظار بينما تتم إضافة الحسابات المراد فحصها إلى ملف تكوين العقدة."
             },
             "success": {
-              "header": "Accounts added to node configuration",
+              "header": "تمت إضافة الحسابات إلى تكوين العقدة",
               "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
               "cta": "View user data"
             }
