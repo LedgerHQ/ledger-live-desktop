@@ -1623,7 +1623,7 @@
       "emptyState": {
         "description": "You can earn ATOM rewards by delegating your assets.",
         "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "delegation": "اكسب المكافآت"
       },
       "claimRewards": "المطالبة بالمكافآت",
       "header": "Delegation(s)",
@@ -2093,7 +2093,7 @@
     }
   },
   "delegation": {
-    "title": "Earn rewards",
+    "title": "اكسب المكافآت",
     "header": "Delegation",
     "validator": "المدقق",
     "yield": "Est. Yield",
