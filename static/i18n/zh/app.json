@@ -242,7 +242,7 @@
           "title": "概要",
           "from": "来自",
           "to": "到",
-          "toExchange": "Amount to send",
+          "toExchange": "发送数额",
           "toReceive": "待收数额",
           "terms": "条款和条件",
           "disclaimer": {
@@ -371,11 +371,11 @@
               "description": "Please wait while we check if your full node is responding."
             },
             "success": {
-              "header": "Full node connection successful",
+              "header": "完整节点连接成功",
               "description": "You can now configure your full node to scan for your accounts on the blockchain."
             },
             "failure": {
-              "header": "Could not reach full node",
+              "header": "无法到达完整节点",
               "description": "Please ensure your node is fully synchronized and verify its connection settings."
             }
           }
@@ -390,15 +390,15 @@
             "success": {
               "header": "Accounts added to node configuration",
               "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
-              "cta": "View user data"
+              "cta": "查看用户数据"
             }
           }
         },
         "accounts": {
-          "title": "Accounts",
-          "existing": "Existing accounts to scan",
-          "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
+          "title": "账户",
+          "existing": "待扫描的现有账户",
+          "toScan": "待扫描的账户",
+          "toScanDescription": "每个地址类别中待扫描的账户",
           "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
         },
         "satstack": {
@@ -522,17 +522,17 @@
           "在 130 多个国家可用",
           "欧元、美元、英镑以及其它32种",
           "SEPA 与 快速付款",
-          "Local US wire transfers",
-          "Credit and debit cards"
+          "美国本地电汇",
+          "信用卡和借记卡"
         ]
       },
       "wyre": {
         "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
+          "仅美国银行账户",
+          "仅支持美元",
+          "已支持20余种加密货币",
+          "ACH 转账",
+          "无信用卡和借记卡"
         ]
       }
     }
@@ -541,39 +541,39 @@
     "title": "借出加密货币",
     "tabs": {
       "dashboard": "功能面板",
-      "opened": "Opened loans",
-      "closed": "Closed loans",
-      "history": "History"
+      "opened": "已开放的贷款",
+      "closed": "已关闭的贷款",
+      "history": "历史记录"
     },
     "assets": "要借出的资产",
     "active": "已批准的账户",
     "lendAsset": "贷出",
     "account": {
-      "amountSupplied": "Amount deposited",
-      "amountSuppliedTooltip": "Amount lent to the network",
-      "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
-      "accruedInterests": "Accrued interest",
-      "accruedInterestsTooltip": "Interest generated on your lent assets",
-      "interestEarned": "Interest earned",
-      "interestEarnedTooltip": "Interest you have earned after withdrawal",
+      "amountSupplied": "已存数额",
+      "amountSuppliedTooltip": "向网络贷出的数额",
+      "currencyAPY": "货币的年收益率 APY",
+      "currencyAPYTooltip": "连续复合存款年度回报率",
+      "accruedInterests": "应计利息",
+      "accruedInterestsTooltip": "贷出资产产生的利息",
+      "interestEarned": "已赚取利息",
+      "interestEarnedTooltip": "提取后您赚取的利息",
       "openLoans": "开放借贷",
       "closedLoans": "已关闭的借贷",
       "amountRedeemed": "已提取数额",
       "date": "日期",
-      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
-      "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Deposit {{currency}}"
+      "info": "您可以直接从您的 {{currency}} 帐户借出资产并赚取利息。",
+      "howCompoundWorks": "Compound 复合贷款如何运作？",
+      "lend": "存入 {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "放款中",
-        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "cta": "How does lending on Compound work?"
+        "description": "您可以从您的以太坊账户直接贷出资产并赚取利息。",
+        "cta": "Compound 复合贷款如何运作？"
       },
       "closed": {
-        "title": "Your closed loans will appear here",
-        "description": "You have not made any loans yet.",
+        "title": "您已关闭的贷款将出现在这里",
+        "description": "您还没有进行过任何借贷。",
         "cta": "存款"
       },
       "opened": {
@@ -629,9 +629,9 @@
         "approve": "批准",
         "manageLimit": "管理限额",
         "viewDetails": "查看详情",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
+        "info": "您已在此账户上批准了 <0>{{amount}}</0> 。您可以根据一定费用来减少该数额。",
+        "infoNoLimit": "您已完全批准此帐户。您可以根据一定费用来减少该数额。",
+        "approvedWithLimit": "您已批准此账户上的 <0>{{value}}</0>。",
         "enabling": "You can deposit assets once the account approval is confirmed.",
         "notEnabled": "You need to approve this account before being able to lend assets.",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
