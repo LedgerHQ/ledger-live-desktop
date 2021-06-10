@@ -59,7 +59,7 @@
     "copied": "已复制",
     "addressCopied": "地址已复制",
     "addressCopiedSuspicious": "复制的地址和剪贴板中的地址不匹配。",
-    "experimentalFeature": "Experimental",
+    "experimentalFeature": "实验性功能",
     "information": "信息",
     "search": "搜索中...",
     "searchWithoutEllipsis": "搜索",
@@ -79,7 +79,7 @@
       "error": "同步错误",
       "refresh": "刷新"
     },
-    "exchange": "Exchange"
+    "exchange": "货币兑换"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -90,13 +90,13 @@
     "type": {
       "IN": "已接收",
       "OUT": "已发送",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "REDELEGATE": "Redelegated",
-      "UNDELEGATE": "Undelegated",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
+      "CREATE": "已创建",
+      "REVEAL": "已显示",
+      "DELEGATE": "已委托",
+      "REDELEGATE": "已重新委托",
+      "UNDELEGATE": "已解除委托",
+      "SUPPLY": "已存入",
+      "REDEEM": "已提取",
       "APPROVE": "已批准",
       "VOTE": "已投票",
       "FREEZE": "已冻结",
@@ -109,22 +109,22 @@
       "BOND": "绑定",
       "UNBOND": "解绑",
       "REWARD_PAYOUT": "奖励",
-      "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "SLASH": "Slash 削减惩罚",
+      "WITHDRAW_UNBONDED": "提取",
+      "NOMINATE": "提名",
+      "CHILL": "清除提名"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
+    "bytes": "{{size}} 字节",
     "kbUnit": "{{size}} Kb",
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute": "分钟",
+    "minute_plural": "分钟",
+    "hour": "小时",
+    "hour_plural": "小时",
     "range": {
       "day": "1 天",
       "week": "1 周",
@@ -134,28 +134,28 @@
     }
   },
   "fees": {
-    "advanced": "Advanced",
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "advanced": "高级",
+    "custom": "自定义",
+    "fast": "快",
+    "high": "高",
+    "low": "低",
+    "slow": "慢",
+    "standard": "标准",
+    "medium": "中",
+    "feesAmount": "费用额度"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
-    "manager": "Manager",
-    "exchange": "Buy / Sell",
-    "swap": "Swap",
-    "lend": "Lend"
+    "menu": "菜单",
+    "stars": "星标账户",
+    "accounts": "账户",
+    "manager": "管理器",
+    "exchange": "买入 / 卖出",
+    "swap": "Swap (掉期)",
+    "lend": "借出"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
-    "tooltip": "Star account"
+    "placeholder": "星标账户以在此显示。",
+    "tooltip": "星标账户"
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
@@ -250,61 +250,61 @@
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
-            "provider": "Provider",
+            "provider": "提供方",
             "tradeMethod": {
-              "title": "Type",
-              "float": "Floating rate",
-              "fixed": "Fixed rate"
+              "title": "类别",
+              "float": "浮动汇率",
+              "fixed": "固定汇率"
             },
-            "address": "Address"
+            "address": "地址"
           }
         },
         "device": {
-          "title": "Device"
+          "title": "设备"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "检查应用"
         },
         "finished": {
-          "title": "Pending",
-          "subtitle": "Pending operation",
-          "swap": "Your Swap ID:",
-          "seeDetails": "See details",
-          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
+          "title": "待定",
+          "subtitle": "待处理操作",
+          "swap": "您的 Swap ID：",
+          "seeDetails": "查看详情",
+          "disclaimer": "请记下您的 Swap ID 掉期号码，以便今后有需要时从 <0>{{provider}}</0> 处获得帮助。",
+          "description": "您的 Swap 掉期操作已经发送到网络上确认。最多一个小时后，您就可以收到被掉期交易的加密资产。"
         }
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
-      "provider": "Provider",
+      "title": "Swap (掉期)",
+      "provider": "提供方",
       "txid": "Swap ID",
-      "status": "Status",
+      "status": "状态",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "expired": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
+        "refunded": "请使用您的 Swap ID 掉期号码联系掉期服务提供方以了解更多详情。",
+        "pending": "请稍候片刻，掉期提供方正在处理该交易。",
+        "onhold": "请使用您的 Swap ID 联系掉期服务提供方以解决这一情况。",
+        "finished": "您的掉期已成功完成"
       },
-      "date": "Date",
-      "from": "From",
-      "fromAddress": "Origin address",
-      "fromAddress_plural": "Origin addresses",
-      "to": "To",
-      "toProvider": "Provider address",
-      "initialAmount": "Initial amount",
-      "creditedAmount": "Credited amount"
+      "date": "日期",
+      "from": "从",
+      "fromAddress": "初始地址",
+      "fromAddress_plural": "初始地址",
+      "to": "到",
+      "toProvider": "提供方地址",
+      "initialAmount": "初始额",
+      "creditedAmount": "贷记额"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "选择一个提供方来进行加密资产的掉期交易",
+      "learnMore": "什么是 Swap？",
+      "kycRequired": "需要 KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "仅：美国 (不久后：欧洲、非洲和亚洲)",
+          "多币和代币",
+          "中心化的"
         ]
       },
       "changelly": {
