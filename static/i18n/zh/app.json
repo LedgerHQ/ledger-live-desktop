@@ -716,7 +716,7 @@
         "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
       },
       "steps": {
-        "title": "Step <0>{{step}} / {{total}}</0>",
+        "title": "步骤 <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "Approve an account to allow the protocol to",
           "subtitle2": "处理未来贷款。",
@@ -737,19 +737,19 @@
       "steps": {
         "amount": {
           "title": "数额",
-          "amountToSupply": "Amount to deposit",
+          "amountToSupply": "待存数额",
           "maxSupply": "最大可借出数额为"
         },
         "device": {
           "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "确认",
           "success": {
-            "title": "Deposit sent successfully",
-            "text": "You will start earning interest once the network has confirmed the deposit.",
-            "done": "Close",
-            "cta": "View details",
+            "title": "存款已成功发送",
+            "text": "存款一经网络确认，您就可以开始赚取利息。",
+            "done": "关闭",
+            "cta": "查看详情",
             "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
           }
         }
@@ -758,23 +758,23 @@
     "noEthAccount": {
       "title": "Please create an ETH account",
       "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
-      "cta": "Add account"
+      "cta": "添加账户"
     },
     "emptyAccountDeposit": {
       "title": "You don't have any {{ asset }} account.",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
-      "ctaBuy": "Buy {{ asset }}",
-      "ctaReceive": "Receive {{ asset }}"
+      "ctaBuy": "买入 {{ asset }}",
+      "ctaReceive": "接收 {{ asset }}"
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "账户",
+    "noResultFound": "未找到账户。",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "名称 A-Z",
+      "name|desc": "名称 Z-A",
+      "balance|asc": "最低余额",
+      "balance|desc": "最高余额"
     },
     "range": {
       "day": "天",
@@ -785,8 +785,8 @@
     },
     "optionsMenu": {
       "title": "选项",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "exportOperations": "导出操作历史记录。",
+      "exportToMobile": "导出至移动版"
     },
     "contextMenu": {
       "star": "星标",
@@ -831,7 +831,7 @@
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
+    "title": "隐藏代币",
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
     "hideCTA": "隐藏代币"
   },
@@ -854,20 +854,20 @@
     "stakeCosmos": {
       "title": "Staking with COSMOS",
       "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "cta": "立即质押 Cosmos"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
+      "title": "购买加密货币",
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "立即买入"
     },
     "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "title": "备份包",
+      "description": "使用 Nano X 及 Nano S 以折扣价格安全地管理您的资产",
+      "cta": "购买备份包"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
+      "title": "POLKADOT 权益质押",
       "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
     },
     "sell": {
