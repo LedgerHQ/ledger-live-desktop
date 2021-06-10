@@ -1148,11 +1148,11 @@
       "incomplete": "Не удалось распознать некоторые приложения. Удалите их и установите ещё раз."
     },
     "applist": {
-      "placeholder": "No match for the search with the selected filters",
+      "placeholder": "Нет совпадений по заданному фильтру",
       "placeholderNoAppsInstalled": "На устройстве нет установленных приложений",
       "placeholderGoToCatalog": "Чтобы установить приложения, перейдите в Каталог приложений",
-      "noResultsFound": "No results found",
-      "noResultsDesc": "Please verify the spelling and try again",
+      "noResultsFound": "Ничего не найдено",
+      "noResultsDesc": "Проверьте орфографию и повторите попытку",
       "filter": {
         "title": "Показать",
         "all": "Все",
@@ -1412,8 +1412,8 @@
         "label": "Счёт для зачисления средств",
         "parentAccount": "1. Выберите счёт {{currencyName}}",
         "token": "2. Выберите токен",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "verifyTokenType": "Убедитесь, что <0>{{token}}</0> является токеном <0>{{tokenType}}</0>. Любой другой криптоактив, отправленный на счёт {{currency}}, может быть потерян.",
+        "warningTokenType": "Отправляйте только токены <0>{{ticker}}</0> или <0>{{tokenType}}</0> на счёт {{currency}}. Любые другие криптоактивы могут быть потеряны."
       },
       "connectDevice": {
         "title": "Устройство",
@@ -1434,36 +1434,36 @@
     "totalSpent": "Всего будет списано",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "Получатель"
       },
       "amount": {
         "title": "Кол-во",
-        "banner": "Maximum spendable amount is",
+        "banner": "Макс. можно потратить",
         "fees": "Комиссия",
         "standard": "Стандартная",
         "advanced": "Дополнительно"
       },
       "summary": {
-        "title": "Summary"
+        "title": "Сводка"
       },
       "device": {
         "title": "Устройство"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-        "from": "From",
-        "to": "To",
+        "utxoLag": "Подтверждение и подпись транзакции может занять много времени из-за большого количества монет на счету.",
+        "subaccountsWarning": "Чтобы отправлять токены с этого счёта, вам нужно пополнить его за {{ currency }}",
+        "from": "Откуда",
+        "to": "Куда",
         "selectAccountDebit": "Account to debit",
-        "recipientAddress": "Recipient address",
+        "recipientAddress": "Адрес получателя",
         "amount": "Кол-во",
-        "fees": "Network fees",
-        "useMax": "Send Max",
-        "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
-        "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "fees": "Комиссия сети",
+        "useMax": "Вся сумма",
+        "rippleTag": "Тег",
+        "rippleTagPlaceholder": "Опционально",
+        "ethereumGasLimit": "Лимит газа",
+        "ethereumGasPrice": "Цена газа",
+        "unitPerByte": "{{unit}} за байт"
       },
       "verification": {
         "streaming": {
@@ -1475,7 +1475,7 @@
         "title": "Подтверждение",
         "success": {
           "title": "Транзакция отправлена",
-          "text": "Your account balance will be updated when the blockchain confirms the transaction",
+          "text": "Баланс обновится после подтверждения транзакции в сети.",
           "cta": "Просмотреть сведения"
         },
         "pending": {
@@ -1485,12 +1485,12 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+          "text": "Отправляемая сумма будет вычтена с баланса вашего делегированного счёта."
         }
       }
     },
     "footer": {
-      "estimatedFees": "Network fees"
+      "estimatedFees": "Комиссия сети"
     }
   },
   "sign": {
@@ -1503,28 +1503,28 @@
   "distribution": {
     "asset": "Актив",
     "price": "Цена",
-    "distribution": "Allocation",
+    "distribution": "Распределение",
     "amount": "Кол-во",
     "value": "Ценность",
     "showAll": "Показать все",
     "showLess": "Показать меньше",
-    "header": "Asset allocation ({{count}})"
+    "header": "Распределение активов ({{count}})"
   },
   "accountDistribution": {
     "account": "Счёт",
-    "distribution": "Allocation",
+    "distribution": "Распределение",
     "amount": "Кол-во",
     "value": "Ценность",
-    "header": "Account allocation ({{count}})"
+    "header": "Распределение счёта ({{count}})"
   },
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "description": "Теперь вы можете получать вознаграждения за заморозку средств и голосование.",
+        "info": "Как работает голосование",
+        "votesDesc": "Чтобы начать получать вознаграждения за стейкинг, отдайте голоса за одного или нескольких представителей.",
+        "vote": "Отдать голоса",
+        "voteExisting": "Управление голосами"
       },
       "manageTP": "Управление активами",
       "warnEarnRewards": "У вас должно быть не менее {{amount}}, чтобы начать получать вознаграждения",
@@ -1542,11 +1542,11 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "Заморозьте TRX, чтобы безопасно получать вознаграждения и при этом сохранить контроль над активами.",
             "bullet": {
               "delegate": "Делегированные активы остаются в вашей собственности.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "access": "Вы сможете разморозить активы через 3 дня.",
+              "ledger": "Заморозьте средства и безопасно голосуйте прямо на устройстве Ledger."
             },
             "help": "How voting works",
             "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
@@ -3469,7 +3469,7 @@
       "title": "Ensure you have enough balance left for future transaction fees"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
+      "title": "Баланс не может быть ниже 1 DOT. Переведите макс. сумму на пустой счёт"
     },
     "PolkadotBondMinimumAmount": {
       "title": "Вы должны заблокировать как минимум 1 DOT"
