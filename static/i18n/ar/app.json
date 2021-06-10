@@ -777,7 +777,7 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "day": "Day",
+      "day": "يوم",
       "week": "Week",
       "month": "Month",
       "year": "Year",
@@ -840,7 +840,7 @@
       "title": "Modification of experimental settings require a clear cache",
       "cta": "Clear cache"
     },
-    "migrate": "Ledger Live accounts update available",
+    "migrate": "يتوفر تحديث لحسابات ليدجر لايف (Ledger Live)",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "valentine": {
       "title": "عيد الحب",
@@ -2105,9 +2105,9 @@
     "completionDate": "Completion date",
     "rewards": "المكافآت",
     "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
+    "durationJustStarted": "بدأت للتو",
+    "durationDays": "{{count}} يوم",
+    "durationDays_plural": "{{count}} أيام",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
@@ -2355,7 +2355,7 @@
     "checking": "Checking update...",
     "checkSuccess": "Update ready to install",
     "quitAndInstall": "تثبيت الآن",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
+    "updateAvailable": "قم بالتحديث إلى الإصدار {{version}} من ليدجر لايف (Ledger Live)",
     "error": "Error during update. Please download again",
     "reDownload": "التنزيل مرة أخرى",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
