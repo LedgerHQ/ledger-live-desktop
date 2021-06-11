@@ -2882,9 +2882,9 @@
       "nominate": "请在您的设备上确认并完成操作",
       "chill": "请在您的设备上确认并完成操作",
       "bond": "请在您的设备上确认并完成操作",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "unbond": "请在您的设备上确认并完成操作",
+      "rebond": "请在您的设备上确认并完成操作",
+      "withdrawUnbonded": "请在您的设备上确认并完成操作"
     },
     "recipientWording": {
       "send": "接收方",
