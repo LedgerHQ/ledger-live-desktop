@@ -227,7 +227,7 @@
         "fixedDesc": "سيبقى المبلغ الخاص بك كما هو حتى لو تغير السوق. يتم التحديث كل 60 ثانية.",
         "by": "Provided by"
       },
-      "exchange": "Exchange",
+      "exchange": "تداول",
       "helpCTA": "ما هي المبادلة؟",
       "bubble": "نحن نستخدم سعراً ثابتاً، هذا هو المبلغ الذي ستحصل عليه بالضبط.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
@@ -491,12 +491,12 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
+    "title": "شراء وبيع العملات المشفرة",
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
+      "header": "شراء العملات المشفرة باستخدام {{provider}}",
+      "title": "شراء العملات المشفرة من خلال <0>{{provider}}</0>",
       "tab": "شراء",
       "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
@@ -504,35 +504,35 @@
       "addAccount": "إضافة حساب"
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
-      "title": "Sell crypto via <0>{{provider}}</0>",
+      "header": "بيع العملات المشفرة باستخدام {{provider}}",
+      "title": "بيع العملات المشفرة من خلال <0>{{provider}}</0>",
       "tab": "بيع",
       "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
     },
     "history": {
-      "tab": "History"
+      "tab": "السجل"
     },
     "providers": {
       "title": "Choose a provider to buy crypto",
       "learnMore": "ما هو الشراء؟",
       "coinify": {
         "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
-          "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
+          "متاح في 130+ بلد",
+          "يورو، دولار أمريكي، جنيه استرليني و32 آخرون",
+          "SEPA والمدفوعات السريعة",
+          "التحويلات البرقية المحلية للولايات المتحدة",
+          "بطاقات الائتمان وبطاقات الخصم"
         ]
       },
       "wyre": {
         "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
+          "حساب بنكي 🇺🇸 فقط",
+          "دعم دولار أمريكي فقط",
+          "20+ عملات مشفرة مدعومة",
+          "تحويل ACH",
+          "لا توجد بطاقات ائتمان أو خصم"
         ]
       }
     }
@@ -880,7 +880,7 @@
     },
     "swap": {
       "title": "مبادلة العملات المشفرة",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "description": "مبادلة عملة مشفرة لأخرى من ليدجر لايف (Ledger Live) مع شريكنا."
     },
     "lending": {
       "title": "إقراض العملات المشفرة",
@@ -1114,7 +1114,7 @@
     "listApps": "Checking App dependencies",
     "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
-      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "تحقق من تفاصيل المبادلة على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
       "confirm": "تأكيد معاملة المبادلة",
       "amountSent": "المبلغ المراد إرساله",
       "amountReceived": "المبلغ المراد استلامه",
@@ -1125,7 +1125,7 @@
       "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك"
     },
     "sell": {
-      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
       "confirm": "تأكيد معاملة البيع"
     }
   },
