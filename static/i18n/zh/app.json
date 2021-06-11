@@ -663,7 +663,7 @@
           "contractName": "Compound 复利 {{currencyName}}",
           "advanced": "高级",
           "amountLabel": "要批准的额度",
-          "amountLabelTooltip": "This limits the amount available to the smart contract."
+          "amountLabelTooltip": "这限制了智能合约的可用数额。"
         },
         "connectDevice": {
           "title": "设备"
@@ -672,11 +672,11 @@
           "title": "确认",
           "success": {
             "title": "操作已成功发送",
-            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
+            "text": "批准已经发送到网络确认。一旦确认，您将能够发放贷款。",
             "done": "关闭",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "info": "交易可能需要一些时间才能在浏览器中显示和确认。"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -702,7 +702,7 @@
             "done": "关闭",
             "cta": "查看详情"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。",
           "tooltip": {
             "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
           }
@@ -1485,7 +1485,7 @@
         "pending": {
           "title": "正在播送交易……"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
       },
       "warning": {
         "tezos": {
@@ -1671,7 +1671,7 @@
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
               "cta": "查看详情"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1707,7 +1707,7 @@
             "pending": {
               "title": "正在播送交易……"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1739,7 +1739,7 @@
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "查看详情"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1770,7 +1770,7 @@
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
               "cta": "查看详情"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1800,7 +1800,7 @@
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
               "cta": "查看详情"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1840,7 +1840,7 @@
               "text": "Your rewards were added to your available balance",
               "cta": "查看详情"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
           }
         }
       }
@@ -1945,7 +1945,7 @@
           "pending": {
             "title": "正在播送交易……"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -3223,31 +3223,31 @@
       "description": "出现超时。"
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "出错了。请重新连接您的设备",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
       "title": "请打开 {{appName}} 应用",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "description": "在我们查找您的账户时，请保持 {{appName}} 应用程序处于打开状态"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "title": "对不起，您的设备不能处于 Bootloader 引导加载模式",
+      "description": "请重新启动您的设备，而不要在图标出现时触摸按钮。如果问题仍然存在，请联系 Ledger 客服。"
     },
     "UserRefusedAllowManager": {
       "title": "设备端拒绝了管理器"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "设备上的更新已取消",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "description": "您设备上的所有应用程序已经卸载。请保持设备更新，从而享受安全性和功能性提升带来的好处。"
     },
     "UserRefusedOnDevice": {
       "title": "操作被拒绝",
@@ -3255,15 +3255,15 @@
     },
     "TransactionRefusedOnDevice": {
       "title": "操作在设备上被拒绝",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "description": "请重试，如有疑问，请联系 Ledger 客服。"
     },
     "UserRefusedAddress": {
       "title": "接收地址被拒",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "description": "请重试，如有疑问，请联系 Ledger 客服。"
     },
     "UpdateYourApp": {
       "title": "需要更新应用程序",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "DeviceOnDashboardExpected": {
       "title": "返回功能面板",
@@ -3279,7 +3279,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "出错了",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "请检查您的硬件钱包是否设置了与所选账户关联的恢复短语或密码短语。"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "需要更新应用程序",
