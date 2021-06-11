@@ -109,7 +109,7 @@
       "BOND": "ربط",
       "UNBOND": "إلغاء الربط",
       "REWARD_PAYOUT": "مُكافأة",
-      "SLASH": "خفض",
+      "SLASH": "تغريم",
       "WITHDRAW_UNBONDED": "سحب",
       "NOMINATE": "ترشيح",
       "CHILL": "مسح الترشيحات"
@@ -477,7 +477,7 @@
         "desc": "اختر الوحدة المراد استخدامها"
       }
     },
-    "availableBalance": "الرصيد المتوفر",
+    "availableBalance": "الرصيد المتاح",
     "frozenAssets": "الأصول المجمدة",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
@@ -568,7 +568,7 @@
     "emptyState": {
       "active": {
         "title": "الإقراض",
-        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
+        "description": "يمكنك إقراض الأصول مباشرة من حساب إيثريوم الخاص بك وكسب الفوائد.",
         "cta": "How does lending on Compound work?"
       },
       "closed": {
@@ -582,8 +582,8 @@
         "cta": "إيداع"
       },
       "history": {
-        "title": "History",
-        "description": "View the history of all your loan transactions.",
+        "title": "السجل",
+        "description": "عرض سجل جميع معاملات قروضك.",
         "cta": "إيداع"
       }
     },
@@ -594,12 +594,12 @@
         "amountSuppliedTooltip": "المبلغ الذي تم إيداعه بالشبكة",
         "accruedInterests": "رصيد الفائدة",
         "accruedInterestsTooltip": "الفائدة المكتسبة من القروض",
-        "status": "Account status",
-        "actions": "Actions"
+        "status": "حالة الحساب",
+        "actions": "الإجراءات"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
-        "toSupplyTooltip": "You can now supply your assets"
+        "enablingTooltip": "يتم بث معاملتك",
+        "toSupplyTooltip": "يمكنك الآن توريد أصولك"
       },
       "closed": {
         "assetLended": "الأصل",
@@ -623,8 +623,8 @@
       }
     },
     "manage": {
-      "cta": "Manage lending",
-      "title": "Manage loan",
+      "cta": "إدارة الإقراض",
+      "title": "إدارة القرض",
       "enable": {
         "approve": "موافقة",
         "manageLimit": "إدارة الحد",
@@ -633,16 +633,16 @@
         "infoNoLimit": "لقد وافقت بالكامل على هذا الحساب. يمكنك تخفيض المبلغ مقابل رسوم.",
         "approvedWithLimit": "لقد وافقت على <0>{{value}}</0> علي هذا الحساب.",
         "enabling": "يمكنك إيداع الأصول بمجرد تأكيد الموافقة على الحساب.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
+        "notEnabled": "يتعين عليك الموافقة على هذا الحساب قبل أن تكون قادراً على إقراض الأصول.",
         "notEnoughApproved": "يتعيّن عليك زيادة الحد الأقصى الموافق عليه في حسابك للإقراض."
       },
       "supply": {
         "title": "إيداع",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "description": "أدخل مبلغ الأصول المراد إقراضها للبروتوكول."
       },
       "withdraw": {
         "title": "سحب",
-        "description": "Withdraw assets from the protocol to your Ledger account."
+        "description": "سحب الأصول من البروتوكول إلى حسابك في ليدجر (Ledger)."
       }
     },
     "enable": {
@@ -658,7 +658,7 @@
           "title": "المبلغ",
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
           "limit": "{{amount}} محدود",
-          "noLimit": "no limit {{assetName}}",
+          "noLimit": "{{assetName}} غير محدود",
           "contractName": "{{currencyName}} مُجمع",
           "advanced": "متقدم",
           "amountLabel": "المبلغ المطلوب الموافقة عليه",
@@ -711,15 +711,15 @@
     "info": {
       "terms": {
         "title": "إقراض عملات مشفرة",
-        "subtitle": "Lend assets on the Compound protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
+        "subtitle": "إقراض الأصول على بروتوكول Compound",
+        "description": "يسمح لك بروتوكول Compound بإقراض واقتراض الأصول على شبكة الإيثيريوم. يمكنك إقراض الأصول وكسب الفائدة مباشرة من حسابك على ليدجر (Ledger).",
         "switchLabel": "<1>لقد قرأت ووافقت على </1><0>شروط الاستخدام</0><1>.</1>"
       },
       "steps": {
-        "title": "Step <0>{{step}} / {{total}}</0>",
+        "title": "الخطوة <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "الموافقة على حساب للسماح للبروتوكول بـ",
-          "subtitle2": "process future loans.",
+          "subtitle2": "مباشرة القروض المستقبلية.",
           "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
         },
         "2": {
@@ -785,7 +785,7 @@
     },
     "optionsMenu": {
       "title": "Options",
-      "exportOperations": "Export operation history",
+      "exportOperations": "تصدير سجل الاصدارات",
       "exportToMobile": "Export to mobile"
     },
     "contextMenu": {
@@ -1494,7 +1494,7 @@
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "توقيع المعاملة"
   },
   "releaseNotes": {
     "title": "Release notes",
@@ -1949,7 +1949,7 @@
       "title": "Bond assets",
       "rewardDestination": {
         "label": "Rewards Destination",
-        "stash": "Available Balance",
+        "stash": "الرصيد المتاح",
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
@@ -2867,7 +2867,7 @@
     "title": "يرجى تأكيد العملية على جهازك لإنهائها",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "دائماً تحقق من تفاصيل العملية على جهازك.",
     "warningWording": {},
     "titleWording": {
       "send": "يرجى التأكيد على جهازك لإنهاء العملية",
