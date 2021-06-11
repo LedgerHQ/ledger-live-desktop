@@ -337,7 +337,7 @@
           "header": "ابدأ عقدتك الكاملة. لا تثق، تحقق.",
           "description": "عقدة البيتكوين الكاملة تتحقق من جميع المعاملات والكتل، مما يسمح لك باستخدام البيتكوين بطريقة عدم الثقة أثناء المساهمة في شبكة البيتكوين.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
+            "item1": "قم بإعداد Bitcoin Core على جهاز يحتوي على موارد كافية.",
             "item2": "انتظر حتى تتم مزامنة عقدتك بشكل كامل.",
             "item3": "سَجل بيانات اعتماد الـ RPC الخاصة بعقدتك، وعنوان الـ IP ورقم المنفذ الخاص بك."
           },
@@ -351,7 +351,7 @@
               "disclaimer": "يجب أن تكون العقدة الكاملة متزامنة بالكامل قبل الاتصال مع ليدجر لايف (Ledger Live).",
               "fields": {
                 "nodeHost": {
-                  "title": "Host",
+                  "title": "المضيف",
                   "tooltip": "اتركه بشكل افتراضي إذا كانت العقدة تعمل على هذا الكمبيوتر، أو استبدل عنوان IP ورقم المنفذ للعقدة."
                 },
                 "rpcCredentials": {
@@ -415,8 +415,8 @@
               "description": "يُرجى التحقق من تشغيل SatStack على هذا الكمبيوتر."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "header": "يُرجى ترقية SatStack",
+              "description": "إصدار SatStack الذي تستخدمه قديم للغاية وقد يحتوي على خلل أو عدم توافق."
             },
             "node-disconnected": {
               "header": "تعذر الوصول إلى العقدة الكاملة",
@@ -554,7 +554,7 @@
       "currencyAPY": "عملة APY",
       "currencyAPYTooltip": "معدل العائد السنوي للوديعة المركبة باستمرار",
       "accruedInterests": "الفوائد المتراكمة",
-      "accruedInterestsTooltip": "Interest generated on your lent assets",
+      "accruedInterestsTooltip": "الفائدة الناتجة عن الأصول التي تم إقراضها",
       "interestEarned": "الفوائد المكتسبة",
       "interestEarnedTooltip": "الفوائد التي حصلت عليها بعد السحب",
       "openLoans": "القروض المفتوحة",
@@ -562,14 +562,14 @@
       "amountRedeemed": "المبلغ المسحوب",
       "date": "التاريخ",
       "info": "يمكنك إقراض الأصول مباشرة من حسابك {{currency}} وكسب الفوائد.",
-      "howCompoundWorks": "How does lending on Compound work?",
+      "howCompoundWorks": "كيف يعمل الإقراض على Compound؟",
       "lend": "إيداع {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "الإقراض",
         "description": "يمكنك إقراض الأصول مباشرة من حساب إيثريوم الخاص بك وكسب الفوائد.",
-        "cta": "How does lending on Compound work?"
+        "cta": "كيف يعمل الإقراض على Compound؟"
       },
       "closed": {
         "title": "ستظهر قروضك المغلقة هنا",
@@ -656,7 +656,7 @@
         },
         "amount": {
           "title": "المبلغ",
-          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
+          "summary": "أمنح العقد الذكي <0>{{contractName}}</0> حق الوصول على حسابي <0>{{accountName}}</0> بمبلغ <0>{{amount}}</0>",
           "limit": "{{amount}} محدود",
           "noLimit": "{{assetName}} غير محدود",
           "contractName": "{{currencyName}} مُجمع",
@@ -2849,11 +2849,11 @@
           "results": {
             "success": {
               "title": "Congrats!",
-              "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم بتفويض كل معاملة على جهازك يدويًا."
+              "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تأذن كل معاملة على جهازك يدويًا."
             },
             "fail": {
               "title": "Incorrect!",
-              "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم بتفويض كل معاملة على جهازك يدويًا."
+              "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم تأذن كل معاملة على جهازك يدويًا."
             }
           }
         }
