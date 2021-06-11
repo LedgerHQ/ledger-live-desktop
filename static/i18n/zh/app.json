@@ -1438,9 +1438,9 @@
       },
       "amount": {
         "title": "数额",
-        "banner": "Maximum spendable amount is",
+        "banner": "最大可支出数额为",
         "fees": "费用",
-        "standard": "Standard",
+        "standard": "标准",
         "advanced": "高级"
       },
       "summary": {
@@ -1455,15 +1455,15 @@
         "from": "来自",
         "to": "发往",
         "selectAccountDebit": "借记账户",
-        "recipientAddress": "Recipient address",
+        "recipientAddress": "接收方地址",
         "amount": "数额",
-        "fees": "Network fees",
-        "useMax": "Send Max",
-        "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
-        "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "fees": "网络费用",
+        "useMax": "发送最大值",
+        "rippleTag": "标签",
+        "rippleTagPlaceholder": "可选",
+        "ethereumGasLimit": "Gas 限值",
+        "ethereumGasPrice": "Gas 价格",
+        "unitPerByte": "{{Unit}} 每字节"
       },
       "verification": {
         "streaming": {
@@ -1479,7 +1479,7 @@
           "cta": "查看详情"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "正在播送交易……"
         },
         "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
       },
@@ -1505,10 +1505,10 @@
     "price": "价格",
     "distribution": "配置",
     "amount": "数额",
-    "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Asset allocation ({{count}})"
+    "value": "价值",
+    "showAll": "显示全部",
+    "showLess": "显示更少",
+    "header": "资产配置 ({{count}})"
   },
   "accountDistribution": {
     "account": "账户",
