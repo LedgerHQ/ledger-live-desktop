@@ -807,28 +807,28 @@
       "desc": "ابدأ هنا"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "حالة ليدجر (Ledger)",
+      "desc": "تحقق من حالة نظامنا"
     },
     "helpCenter": {
-      "title": "Ledger Support",
+      "title": "دعم ليدجر (Ledger)",
       "desc": "الحصول على المساعدة"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "title": "أكاديمية ليدجر",
+      "desc": "تعلم العملات المشفرة"
     },
     "facebook": {
-      "title": "Facebook",
-      "desc": "Like our page"
+      "title": "فيس بوك",
+      "desc": "ضع إعجاب على صفحتنا"
     },
     "twitter": {
-      "title": "Twitter",
+      "title": "تويتر",
       "desc": "تابعنا"
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "مراجعة الكود الخاص بنا"
     }
   },
   "blacklistToken": {
@@ -838,18 +838,18 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "title": "يتطلب تعديل الإعدادات التجريبية ذاكرة تخزين مؤقت خالية",
+      "cta": "حذف الذاكرة المؤقتة"
     },
     "migrate": "يتوفر تحديث لحسابات ليدجر لايف (Ledger Live)",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "genericTerminatedCrypto": "لم تعد {{coinName}} مدعومة بعد الآن",
     "valentine": {
       "title": "عيد الحب",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "description": "كدليل على حبنا ، تقوم ليدجر بتخفيض رسوم البيع والشراء على ليدجر لايف (Ledger Live)"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
+      "title": "أكاديمية ليدجر",
+      "description": "كل ما تحتاج معرفته عن سلسلة الكتل والأمان والعملات المشفرة وجهاز ليدجر (Ledger) الخاص بك",
       "cta": "بدء التعلم"
     },
     "stakeCosmos": {
@@ -858,22 +858,22 @@
       "cta": "رهن Cosmos الآن"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
+      "title": "شراء العملات المشفرة",
       "description": "قم بشراء الأصول المشفرة من خلال شريكنا وتلقيها مباشرة في حسابك في ليدجر (Ledger)",
-      "cta": "Buy now"
+      "cta": "اشتري الان"
     },
     "backupPack": {
-      "title": "Back-up pack",
+      "title": "حزمة النسخ الاحتياطي",
       "description": "قم بإدارة أصولك بأمان باستخدام Nano X وNano S بسعر مخفّض",
-      "cta": "Buy back-up pack"
+      "cta": "شراء حزمة النسخ الاحتياطي"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
       "description": "يمكنك الآن أن تقوم برهن وبتأمين وإدارة DOT الخاصة بك مباشرة في ليدجر لايف (Ledger Live)"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "بيع العملات المشفرة",
+      "description": "قم ببيع البيتكوين مع شريكنا مباشرة من ليدجر لايف (Ledger Live)"
     },
     "stakeAlgorand": {
       "title": "الرهن مع ALGORAND",
@@ -888,7 +888,7 @@
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
-      "title": "BLACK FRIDAY ",
+      "title": "الجمعة السوداء ",
       "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
     }
   },
@@ -1526,7 +1526,7 @@
       "emptyState": {
         "description": "يمكنك الآن كسب مكافآت من خلال التجميد والتصويت.",
         "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "votesDesc": "قم بالإدلاء بأصواتك لممثل واحد أو أكثر للبدء في كسب مكافآت الرهن.",
         "vote": "Cast votes",
         "voteExisting": "Manage votes"
       },
@@ -1574,7 +1574,7 @@
         "steps": {
           "vote": {
             "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "description": "صوّت لواحد أو أكثر من الممثلين الممتازين للبدء في كسب المكافآت.",
             "footer": {
               "doNotShowAgain": "عدم الإظهار مرة أخرى",
               "next": "Cast Votes"
@@ -1939,7 +1939,7 @@
           "label": "تأكيد",
           "success": {
             "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
+            "text": "ستبدأ في كسب المكافآت عندما يتم ربط الأصول الخاصة بك بالمدقق (المدققين) الذين قمت باختيارهم.",
             "cta": "عرض التفاصيل"
           },
           "pending": {
