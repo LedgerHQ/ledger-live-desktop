@@ -3196,23 +3196,23 @@
     },
     "SatStackStillSyncing": {
       "title": "正在进行节点同步……",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "description": "节点正在同步，请耐心等待。由于您的比特币账户余额或许不正确，无法发送。"
     },
     "SatStackVersionTooOld": {
       "title": "请升级 SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "description": "您正在使用的 SatStack 版本过旧，可能存在漏洞或不兼容。"
     },
     "SatStackDescriptorNotImported": {
       "title": "账户未经完整节点扫描",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "description": "请配置您的完整节点以扫描与此设备相关联的帐户。 您的完整节点必须先扫描此帐户的区块链，然后才能将其添加到您的资产组合中。"
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "Stratis 区块链已经进化，可能无法正确工作。",
+      "description": "对原始 Stratis 区块链的支持将持续到2021年10月16日。"
     },
     "SwapGenericAPIError": {
       "title": "汇率失效",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "description": "您必须在计时结束之前确认掉期交易。所显示的汇率 60 秒内有效。"
     },
     "TimeoutError": {
       "title": "抱歉，服务器响应超时",
@@ -3326,14 +3326,14 @@
     },
     "UnavailableTezosOriginatedAccountReceive": {
       "title": "无法在子账户中接收",
-      "description": "If you want to receive funds, please use the parent account"
+      "description": "如果想要接收资金，请使用主账户"
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "尚无法从子账户发送",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "description": "由于近期 Babylon 更新而引入的变化，此功能将在稍后阶段被添加。"
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "请在清空账户之前将其解除委托"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "请先清空所有子账户"
