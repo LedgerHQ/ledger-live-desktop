@@ -487,8 +487,8 @@
     "frozenAssetsTooltip": "تُستخدم الأصول المجمدة في عملية تصويت ترون. هذا يمثل العدد الإجمالي للأصوات الخاصة بك.",
     "bandwidthTooltip": "قم بتجميد الأصول لكسب نطاق ترددي (Bandwidth)",
     "energyTooltip": "قم بتجميد الأصول للحصول على الطاقة",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "delegatedAssetsTooltip": "يتم استخدام الأصول المفوضة في عملية التصويت على كوزموس (Cosmos). وهذا يمثل مجموع عدد أصواتك.",
+    "undelegatingTooltip": "تكون الأصول غير المفوضة مقيدة في قفل زمني محدد بـ21 يومًا قبل أن تصبح متاحة."
   },
   "exchange": {
     "title": "شراء وبيع العملات المشفرة",
@@ -515,7 +515,7 @@
       "tab": "السجل"
     },
     "providers": {
-      "title": "Choose a provider to buy crypto",
+      "title": "اختار مزود لشراء العملات المشفرة",
       "learnMore": "ما هو الشراء؟",
       "coinify": {
         "bullets": [
@@ -543,20 +543,20 @@
       "dashboard": "لوحة المعلومات",
       "opened": "القروض المفتوحة",
       "closed": "القروض المغلقة",
-      "history": "History"
+      "history": "السجل"
     },
     "assets": "أصول للإقراض",
-    "active": "Approved accounts",
+    "active": "الحسابات المعتمدة",
     "lendAsset": "إقراض",
     "account": {
       "amountSupplied": "المبلغ المودع",
       "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
-      "currencyAPY": "Currency APY",
+      "currencyAPY": "عملة APY",
       "currencyAPYTooltip": "معدل العائد السنوي للوديعة المركبة باستمرار",
       "accruedInterests": "الفوائد المتراكمة",
       "accruedInterestsTooltip": "Interest generated on your lent assets",
       "interestEarned": "الفوائد المكتسبة",
-      "interestEarnedTooltip": "Interest you have earned after withdrawal",
+      "interestEarnedTooltip": "الفوائد التي حصلت عليها بعد السحب",
       "openLoans": "القروض المفتوحة",
       "closedLoans": "القروض المغلقة",
       "amountRedeemed": "المبلغ المسحوب",
@@ -652,7 +652,7 @@
           "title": "اختار الحساب",
           "selectLabel": "حساب للإقراض",
           "cta": "موافقة",
-          "alreadyEnabled": "تمت الموافقة على هذا الحساب"
+          "alreadyEnabled": "هذا الحساب معتمد"
         },
         "amount": {
           "title": "المبلغ",
@@ -724,7 +724,7 @@
         },
         "2": {
           "subtitle": "Supply assets to earn interest",
-          "description": "بمجرد الموافقة على الحساب، يمكنك تحديد كمية الأصول التي تريد إقراضها وإصدار معاملة للبروتوكول. وتستحق الفوائد فور تأكيد المعاملة."
+          "description": "بمجرد الموافقة على حساب، يمكنك تحديد كمية الأصول التي تريد إقراضها وإصدار معاملة للبروتوكول. وتستحق الفوائد فور تأكيد المعاملة."
         },
         "3": {
           "subtitle": "Withdraw assets at any time",
@@ -3332,7 +3332,7 @@
       "title": "Please empty all subaccounts first"
     },
     "NotSupportedLegacyAddress": {
-      "title": "صيغة العنوان القديم هذا لم تعد مدعومة"
+      "title": "صيغة العنوان القديمة هذه لم تعد مدعومة"
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
