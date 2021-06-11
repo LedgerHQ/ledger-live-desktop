@@ -2819,16 +2819,16 @@
           "results": {
             "success": {
               "title": "恭喜！",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "text": "您的加密资产一直都存放在区块链中。您的硬件钱包只是持有能够让您访问个人加密资产的私钥。"
             },
             "fail": {
               "title": "不正确！",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "text": "您的加密资产一直都存放在区块链中。您的硬件钱包只是持有能够让您访问个人加密资产的私钥。"
             }
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "如果我的恢复短语不再安全或不再为我私人所有……",
           "answers": {
             "1": "没有问题，Ledger可以向我发送一份副本",
             "2": "我的加密资产不再安全，我需要将其转移到安全的地方"
@@ -2845,7 +2845,7 @@
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "当我将我的 Nano 连接到 Ledger 应用程序上，我的私钥是……",
           "answers": {
             "1": "依旧处于离线状态",
             "2": "已短暂连接到网络"
@@ -2853,11 +2853,11 @@
           "results": {
             "success": {
               "title": "恭喜！",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
             },
             "fail": {
               "title": "不正确！",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
             }
           }
         }
@@ -2868,10 +2868,10 @@
     "desc": "无法连接您的设备？"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
+    "title": "请在您的设备上确认操作从而完成交易",
+    "warning": "每次都要核对您设备上显示的地址与 {{recipientWording}} 所提供的完全一致",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "总是验证您设备上的操作细节。",
     "warningWording": {},
     "titleWording": {
       "send": "请在您的设备上确认并完成操作",
@@ -2906,8 +2906,8 @@
   "Terms": {
     "title": "使用条款",
     "read": "阅读使用条款",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "switchLabelTerms": "<0>我已经阅读并同意该</0> <1>使用条款</1>",
+    "switchLabelPrivacyPolicy": "<0>我已经阅读并同意该</0> <1>隐私政策</1>",
     "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
     "cta": "进入 Ledger 应用程序"
   },
