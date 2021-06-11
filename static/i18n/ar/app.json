@@ -1503,19 +1503,19 @@
   "distribution": {
     "asset": "Asset",
     "price": "Price",
-    "distribution": "Allocation",
+    "distribution": "التخصيص",
     "amount": "المبلغ",
     "value": "Value",
     "showAll": "عرض الكل",
     "showLess": "عرض أقل",
-    "header": "Asset allocation ({{count}})"
+    "header": "تخصيص الأصول ({{count}})"
   },
   "accountDistribution": {
     "account": "حساب",
-    "distribution": "Allocation",
+    "distribution": "التخصيص",
     "amount": "المبلغ",
     "value": "Value",
-    "header": "Account allocation ({{count}})"
+    "header": "تخصيص الحساب ({{count}})"
   },
   "tron": {
     "voting": {
