@@ -1683,7 +1683,7 @@
             "compoundOrClaim": "复利或兑现",
             "compoundDescription": "Rewards will be added to delegated amount",
             "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
+            "compoundInfo": "您已赚取了<0>{{amount}}</0>。点击 Continue（继续）后，便可即刻将其申领并自动将其委托给同一个验证器。",
             "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
             "selectLabel": "选择委托"
           },
@@ -2450,7 +2450,7 @@
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "More about the recovery phrase",
         "title2": "What happens if I lose access to my Nano?",
-        "paragraph3": "Don't worry and follow these steps:",
+        "paragraph3": "不要担心并遵循以下步骤：",
         "points": {
           "1": "获得一个新的硬件钱包。",
           "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
@@ -2471,7 +2471,7 @@
     "alerts": {
       "beCareful": {
         "title": "Please be careful",
-        "descr": "Make sure you follow the instructions on this app at every step of the process.",
+        "descr": "确保按照该应用程序指示的每一步进行操作。",
         "gotIt": "Got it"
       },
       "useLedgerSeeds": {
@@ -2503,16 +2503,16 @@
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new {{deviceName}}",
-            "description": "Let’s start and set up your device!"
+            "title": "设置一个新的 {{deviceName}}",
+            "description": "让我们开始设置您的设备吧！"
           },
           "2": {
             "heading": "连接设备",
-            "title": "Connect your {{deviceName}}",
+            "title": "请连接您的{{deviceName}}",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
-            "heading": "Restore device",
+            "heading": "还原设备",
             "title": "Restore your recovery phrase on a new device",
             "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
@@ -2523,12 +2523,12 @@
           "getStarted": "快速入门",
           "pinCode": "PIN 识别密码",
           "recoveryPhrase": "恢复短语",
-          "hideRecoveryPhrase": "Hide recovery phrase",
+          "hideRecoveryPhrase": "隐藏恢复短语",
           "pairNano": "连接 Nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
+            "title": "通过恢复短语进行还原",
             "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
@@ -2538,11 +2538,11 @@
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "最佳的开始方式：",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "抽出 30 分钟做计划。",
+              "2": "拿支笔来书写记录。",
+              "3": "选择一个安全又安静的地方独处。"
             },
             "buttons": {
               "next": "好的，我一切就绪！",
@@ -2591,7 +2591,7 @@
             },
             "buttons": {
               "next": "下一步",
-              "prev": "Previous step",
+              "prev": "上一步",
               "help": "需要帮助"
             }
           },
@@ -2601,25 +2601,25 @@
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
             "buttons": {
               "next": "Set up PIN code",
-              "prev": "Previous step",
+              "prev": "上一步",
               "help": "需要帮助"
             }
           },
           "quizSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "下一步",
+              "prev": "上一步",
               "help": "需要帮助"
             }
           },
           "quizFailure": {
             "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "paragraph": "别担心，Ledger 会为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。只剩下最后一小步！",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "下一步",
+              "prev": "上一步"
             }
           },
           "pinCodeHowTo": {
@@ -2632,8 +2632,8 @@
               "descr": "再次输入您的 PIN 识别密码以确认。"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "下一步",
+              "prev": "上一步",
               "help": "需要帮助"
             }
           },
@@ -2664,7 +2664,7 @@
             },
             "buttons": {
               "next": "下一步",
-              "prev": "Previous step",
+              "prev": "上一步",
               "help": "需要帮助"
             }
           },
@@ -2752,7 +2752,7 @@
           },
           "quizzSuccess": {
             "title": "已经是位高手！",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
               "prev": "上一步"
@@ -2764,7 +2764,7 @@
             "paragraph2": "只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
-              "prev": "Previous step"
+              "prev": "上一步"
             }
           }
         }
