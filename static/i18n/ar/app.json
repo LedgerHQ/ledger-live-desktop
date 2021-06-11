@@ -309,8 +309,8 @@
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
+          "BTC, ETH, USDT و 50+ آخرىن",
+          "متعدد العملات",
           "مركزي"
         ]
       },
@@ -324,7 +324,7 @@
     }
   },
   "fullNode": {
-    "status": "Status",
+    "status": "الحالة",
     "connect": "اتصال",
     "disconnect": "قطع الاتصال",
     "checkNodeSettings": "تحقق من إعدادات العقدة",
@@ -454,9 +454,9 @@
   "account": {
     "lastOperations": "أحدث العمليات",
     "contractAddress": "عقد:",
-    "openInExplorer": "Open in explorer",
+    "openInExplorer": "إفتحه في المتصفح",
     "emptyState": {
-      "title": "No crypto assets yet?",
+      "title": "لا توجد أصول مشفرة بعد؟",
       "desc": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ في الاستلام",
       "descToken": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ تلقي <3><0>{{ticker}}</0></3> و الرموز</5> <5><0>{{tokenList}}</0>",
       "buttons": {
@@ -470,23 +470,23 @@
       "advancedTips": "إن xpub الخاص بك هي بيانات حساسة للخصوصية. استخدمه بحذر، خاصة عند الكشف للأطراف الثالثة.",
       "accountName": {
         "title": "اسم الحساب",
-        "desc": "Description of the account"
+        "desc": "وصف الحساب"
       },
       "unit": {
         "title": "وحدة",
-        "desc": "Choose the unit to be used"
+        "desc": "اختر الوحدة المراد استخدامها"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
+    "availableBalance": "الرصيد المتوفر",
+    "frozenAssets": "الأصول المجمدة",
     "bandwidth": "Bandwidth",
-    "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
+    "energy": "طاقة",
+    "delegatedAssets": "الأصول المفوضة",
+    "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
-    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
+    "frozenAssetsTooltip": "تُستخدم الأصول المجمدة في عملية تصويت ترون. هذا يمثل العدد الإجمالي للأصوات الخاصة بك.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy",
+    "energyTooltip": "قم بتجميد الأصول للحصول على الطاقة",
     "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
