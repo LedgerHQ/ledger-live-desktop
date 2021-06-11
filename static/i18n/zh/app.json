@@ -1884,7 +1884,7 @@
       "externalControllerTooltip": "This account is controlled by another account.",
       "externalControllerUnsupported": "<0>该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。</0><1>如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "externalStashUnsupported": "<0>该账户控制着一个地址为 <0>{{address}}</0> 的存储账户。</0><1> Ledger Live 不支持在一个单独的存储账户上的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
       "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "没有活跃状态的提名。",
@@ -2367,7 +2367,7 @@
   },
   "crash": {
     "title": "出错了",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
+    "description": "请查阅我们的支持文章以找到可能的解决方案。如果问题仍然存在，请使用下面的按钮保存日志并提供给 Ledger 客服。",
     "troubleshooting": "点击此处查看相关解决方案",
     "logs": "保存日志",
     "dataFolder": "查看用户数据"
@@ -2935,7 +2935,7 @@
     },
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact Ledger Support."
+      "description": "出错了。请重试或联系 Ledger 客服。"
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "此账户有一个待处理的操作",
@@ -2950,21 +2950,21 @@
       "description": "请重试或联系客服 ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "接收方账户没有选择加入所选的 ASA。"
     },
     "AmountRequired": {
       "title": "所需数额"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
+      "title": "请确保您的系统安装有摄像头，该摄像头没有被其他应用程序占用且允许 Ledger Live 使用。",
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "奖励少于领取奖金的估算费用。",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "您不能在有活跃存款时减少已批准的金额。"
     },
     "CosmosBroadcastCodeInternal": {
       "title": "出错了 (Error #1)",
@@ -2980,11 +2980,11 @@
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "未经授权的签名",
-      "description": "This account is not authorized to sign this transaction"
+      "description": "此账户无权签署此交易。"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
       "title": "资金不足",
-      "description": "Make sure the account used has enough funds and try again"
+      "description": "确保使用的账户有足够的资金并再次尝试"
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "出错了 (Error #6)",
@@ -3004,7 +3004,7 @@
     },
     "CosmosBroadcastCodeInsufficientCoins": {
       "title": "硬币不足",
-      "description": "Make sure the account used has enough funds and try again"
+      "description": "确保使用的账户有足够的资金并再次尝试"
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "出错了 (Error #11)",
@@ -3056,7 +3056,7 @@
     },
     "DeviceSocketFail": {
       "title": "请重启您的 Ledger 设备并重试",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "description": "发生意外错误。请再次尝试。({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
       "title": "连接失败",
@@ -3096,11 +3096,11 @@
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "请检查您的连接后重试，或联系 Ledger 客服。"
     },
     "LedgerAPI5xx": {
       "title": "抱歉，请重试。",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "description": "服务器无法处理您的请求。请稍后再试或联系 Ledger 客服。{{message}}"
     },
     "LedgerAPINotAvailable": {
       "title": "抱歉，{{currencyName}} 服务不可用",
@@ -3108,7 +3108,7 @@
     },
     "ManagerAppAlreadyInstalled": {
       "title": "抱歉，该应用已安装",
-      "description": "Please check which apps are already installed on your device."
+      "description": "请检查您的设备上已经安装了哪些应用程序。"
     },
     "ManagerAppDepInstallRequired": {
       "title": "需要安装 {{dependency}} 应用程序",
@@ -3158,11 +3158,11 @@
     },
     "NoAddressesFound": {
       "title": "抱歉，没有找到账户",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "description": "地址计算出错，请重试或联系 Ledger 客服"
     },
     "NotEnoughBalance": {
       "title": "抱歉，资金不足",
-      "description": "Please make sure the account has enough funds."
+      "description": "请确保账户有足够的资金。"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
