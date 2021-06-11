@@ -958,15 +958,15 @@
     "overview": {
       "title": "Ledger Live 账户更新",
       "successTitle": "账户已成功更新",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
+      "successDescPlu": "您的 {{assets}} 帐户现在已更新并已准备好可供使用",
+      "successDesc": "您的 {{assets}} 帐户现在已更新并已准备好可供使用",
       "mobileTitle": "导出账户至移动版",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
+      "mobileDesc": "点击下面的按钮将您已更新的账户导出至 Ledger Live 手机应用程序。",
       "mobileCTA": "导出至移动版",
-      "description": "New features in Ledger Live require an update of your accounts.",
+      "description": "为运行 Ledger Live 中的新功能，需要更新您的账户。",
       "currency": "1 个 {{currency}} 账户需要更新：",
       "currency_plural": "{{count}} 个 {{currency}} 账户需要更新：",
-      "footer": "You need your Ledger Device to complete the update",
+      "footer": "您需要您的 Ledger 设备来完成更新",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
       "doItLaterBtn": "以后再做"
@@ -1011,9 +1011,9 @@
     "successDescription_plural": "添加其他账户或返回至资产组合",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "noAccountToCreate": "未找到待创建的 <1><0>{{currencyName}}</0></1> 账户",
       "showAllAddressTypes": "显示所有地址类型",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "只有当您需要在旧地址格式上接收 {{family}} 时，才能更改地址类型。"
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
@@ -1059,7 +1059,7 @@
     "showLess": "显示更少",
     "tokenOperations": "代币操作",
     "subAccountOperations": "子账户操作",
-    "tokenTooltip": "This operation is related to the following token operations",
+    "tokenTooltip": "此操作与下列代币操作相关",
     "subAccountTooltip": "此操作与下列子账户操作相关",
     "internalOperations": "内部操作",
     "internalOpTooltip": "此操作存在内部操作",
@@ -1254,7 +1254,7 @@
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "标识符",
       "mcuTitle": "完成更新",
-      "mcuFirst": "Disconnect the USB cable from your device",
+      "mcuFirst": "从您的设备上断开 USB 数据线连接",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
       "mcuPin": "请等待更新完成",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
@@ -1742,7 +1742,7 @@
     },
     "undelegation": {
       "header": "解除委托",
-      "headerTooltip": "Available after the 21-day timelock",
+      "headerTooltip": "21 天时间锁后可用",
       "inactiveTooltip": "Undelegated amounts do not generate rewards.",
       "flow": {
         "title": "解除资产委托",
@@ -2356,7 +2356,7 @@
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
     "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "Error during update. Please download again",
+    "error": "更新时出错。请重新下载",
     "reDownload": "重新下载",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "下载更新"
@@ -2809,8 +2809,8 @@
         "1": {
           "text": "身为 Ledger 用户，我的加密资产存放在：",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "我的 Nano 上",
+            "2": "区块链上"
           },
           "results": {
             "success": {
@@ -2831,11 +2831,11 @@
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "恭喜！",
               "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "不正确！",
               "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
             }
           }
@@ -2844,7 +2844,7 @@
           "text": "When I connect my Nano to the Ledger app, my private key is...",
           "answers": {
             "1": "依旧处于离线状态",
-            "2": "Briefly connected to the internet"
+            "2": "已短暂连接到网络"
           },
           "results": {
             "success": {
@@ -2972,7 +2972,7 @@
       "description": "请重试操作"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
+      "title": "未经授权的签名",
       "description": "This account is not authorized to sign this transaction"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
@@ -3052,7 +3052,7 @@
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
+      "title": "连接失败",
       "description": "请重试。"
     },
     "DisconnectedDevice": {
@@ -3073,10 +3073,10 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "固件或应用程序需更新",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
+      "title": "无法识别设备固件",
       "description": "请联系 Ledger 客服"
     },
     "HardResetFail": {
@@ -3084,7 +3084,7 @@
       "description": "请重试，如果问题仍然存在则请联系 Ledger 客服。"
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
+      "title": "抱歉，没有可更新的内容",
       "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
@@ -3092,7 +3092,7 @@
       "description": "Please check your connection and try again or contact Ledger Support."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
+      "title": "抱歉，请重试。",
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
@@ -3100,20 +3100,20 @@
       "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
+      "title": "抱歉，该应用已安装",
       "description": "Please check which apps are already installed on your device."
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
+      "title": "需要安装 {{dependency}} 应用程序",
       "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
+      "title": "抱歉，此应用程序是必需的",
       "description": "You must first uninstall all apps that require the {{appName}} app"
     },
     "ManagerDeviceLocked": {
       "title": "您的设备已锁定",
-      "description": "Please unlock it"
+      "description": "请解锁"
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "请卸载您设备上的所有应用程序",
