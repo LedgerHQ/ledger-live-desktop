@@ -298,28 +298,28 @@
       "creditedAmount": "Importe acreditado"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Elige un proveedor para permutar criptomonedas",
+      "learnMore": "¿Qué es la permuta?",
+      "kycRequired": "KYC requerido",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Sólo Estados Unidos (pronto Europa, África y Asia)",
+          "Distintos tokens y monedas",
+          "Centralizado"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT y más de 50 otras",
+          "Multidivisa",
+          "Centralizado"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Conectar a más de 30 DEXs (Uniswap, SushiSwap,...)",
+          "Tokens Ethereum y ERC20",
+          "Descentralizado y sin requerir confianza"
         ]
       }
     }
@@ -516,24 +516,24 @@
       "tab": "Historial"
     },
     "providers": {
-      "title": "Choose a provider to buy crypto",
-      "learnMore": "What is buy?",
+      "title": "Elige un proveedor para comprar criptomonedas",
+      "learnMore": "¿Qué es comprar?",
       "coinify": {
         "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
-          "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
+          "Disponible en más de 130 países",
+          "EUR, USD, GBP y otras 32",
+          "Pagos más rápidos y SEPA",
+          "Transferencias bancarias locales en Estados Unidos",
+          "Tarjetas de crédito y débito"
         ]
       },
       "wyre": {
         "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
+          "Sólo cuenta bancaria de Estados Unidos",
+          "Sólo compatible con USD",
+          "Compatible con más de 20 criptomonedas",
+          "Transferencia ACH",
+          "Sin tarjetas de débito o crédito"
         ]
       }
     }
@@ -1044,11 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "¿Qué es esta operación?",
     "title": "Detalles de la operación",
-    "type": "Type",
-    "amount": "Amount",
+    "type": "Tipo",
+    "amount": "Importe",
     "account": "Cuenta",
     "date": "Fecha",
-    "currentValue": "Current value",
+    "currentValue": "Valor actual",
     "status": "Estado",
     "confirmed": "Confirmada",
     "failed": "Fallida",
@@ -1498,7 +1498,7 @@
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "Firmar transacción"
   },
   "releaseNotes": {
     "title": "Notas de versión",
@@ -2403,7 +2403,7 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Noticias",
-      "operation": "Operation"
+      "operation": "Operación"
     }
   },
   "informationCenter": {
@@ -2871,7 +2871,7 @@
     "title": "Confirma la operación en tu dispositivo para finalizarla",
     "warning": "Comprueba siempre que la dirección mostrada en tu dispositivo coincida exactamente con la indicada por el {{recipientWording}}",
     "secureContract": "Verifica los detalles del depósito en tu dispositivo antes de enviarlo. La dirección del contrato se ofrece de forma segura, por lo que no es necesario verificarla.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "Siempre verifica los detalles de la operación en tu dispositivo.",
     "warningWording": {},
     "titleWording": {
       "send": "Confirma en tu dispositivo para finalizar la operación",
@@ -2931,7 +2931,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "No es posible ofrecer una contraparte para este activo en este momento"
     },
     "generic": {
       "title": "{{message}}",
