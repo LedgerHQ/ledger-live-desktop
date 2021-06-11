@@ -2575,19 +2575,19 @@
           "deviceHowTo2": {
             "turnOn": {
               "title": "启动 Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "descr": "使用 USB 数据线，将您的设备连接到您的电脑上。"
             },
             "browse": {
               "title": "浏览",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "阅读屏幕上的说明以了解如何使用您的设备。"
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "选择 \"Enter your recovery phrase\"（输入您的恢复短语）",
+              "descr": "同时按下两个按钮以激活该选项。"
             },
             "follow": {
               "title": "按指示操作",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "descr": "返回此处以按照 PIN 识别密码的说明操作。"
             },
             "buttons": {
               "next": "下一步",
@@ -2597,8 +2597,8 @@
           },
           "pinCode": {
             "title": "PIN 识别密码",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
-            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "paragraph": "您的 PIN 个人识别密码是第一层安全保护措施。它能从物理层面保证您安全地访问自己的私钥和 Nano。您的 PIN 个人识别密码的长度必须为 4 至 8 位数。",
+            "disclaimer": "我明白我必须亲自选择自己的 PIN 个人识别密码并将其隐秘保管。",
             "buttons": {
               "next": "设置 PIN 识别密码",
               "prev": "上一步",
@@ -2640,7 +2640,7 @@
           "existingRecoveryPhrase": {
             "title": "输入您的恢复短语",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+            "paragraph2": "Ledger 不会保存您恢复短语的副本。",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
               "next": "输入恢复短语",
@@ -3347,11 +3347,11 @@
     },
     "ManagerAppRelyOnBTC": {
       "title": "需要安装比特币和以太坊应用程序",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "description": "请先安装最新版本的比特币和以太坊应用程序。"
     },
     "UserRefusedDeviceNameChange": {
       "title": "设备端取消了重命名",
-      "description": "Try again and allow renaming on your device"
+      "description": "再次尝试并在设备上允许重命名"
     },
     "SyncError": {
       "title": "同步错误",
@@ -3359,15 +3359,15 @@
     },
     "TronNoFrozenForBandwidth": {
       "title": "没有可解冻的资产",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "description": "您没有与带宽相关联的资产可解冻"
     },
     "TronNoFrozenForEnergy": {
       "title": "没有可解冻的资产",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "description": "您没有与能量相关联的资产可解冻"
     },
     "TronUnfreezeNotExpired": {
       "title": "解冻尚不可用",
-      "description": "You need to wait 3 days after your last Freeze operation"
+      "description": "上次冻结操作后，需要等待 3 天"
     },
     "TronVoteRequired": {
       "title": "最少需要 1 张选票"
@@ -3387,7 +3387,7 @@
       "title": "要冻结的数额不可小于 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
+      "title": "发送 TRC20 到新账户并不会将其激活",
       "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
     },
     "TronUnexpectedFees": {
