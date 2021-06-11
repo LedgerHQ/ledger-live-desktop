@@ -159,7 +159,7 @@
   },
   "bridge": {
     "modalTitle": "打开设备桥接",
-    "openHeader": "Expose your Device accounts through WebSocket",
+    "openHeader": "通过 WebSocket 曝露您的设备账户",
     "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
     "openedHeader": "{{appName}} 已打开桥接",
     "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
@@ -1261,7 +1261,7 @@
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "固件已更新",
-      "successTextApps": "Please re-install the apps on your device",
+      "successTextApps": "请在设备上重新安装应用程序",
       "successTextNoApps": "You can now install apps on your device",
       "sucessCTAApps": "重新安装应用程序",
       "SuccessCTANoApps": "安装应用程序",
@@ -1276,8 +1276,8 @@
         "second": "2. 在 {{mode}} 模式下启动",
         "boot": "持续按住设备侧面按钮，直至 {{option}} 显示",
         "recoveryMode": "轻击 {{mode}} 模式。等候片刻直至功能面板出现。",
-        "third": "3. Uninstall all apps",
-        "openLive": "Open the Manager in Ledger Live.",
+        "third": "3. 卸载所有应用",
+        "openLive": "在 Ledger Live 中打开管理器。",
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
         "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
       }
@@ -1307,68 +1307,68 @@
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "冻结资产",
     "steps": {
       "amount": {
         "title": "数额",
         "resourceInfo": "带宽或能量？",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
-        "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "bandwidthDescription": "交易时使用带宽点模式，则无需支付 TRX 波场区块链的网络服务费用。选择这种模式，能够提高您的日均免费交易量。",
+        "energyDescription": "如果要执行智能合约，则需要使用能量点模式。如果您没有运作任何的智能合约，则无需以能量点的模式获得奖励。",
+        "amountLabel": "要冻结的数额",
+        "available": "可用：{{amountAvailable}}",
+        "info": "3 天内不能发送已冻结的资产。"
       },
       "connectDevice": {
         "title": "设备"
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is awaiting validation",
+          "title": "交易正待验证",
           "desc": "You have to wait a minute before being able to vote"
         },
-        "title": "Confirmation",
+        "title": "确认",
         "success": {
           "title": "",
           "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
           "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "votePending": "{{time}} 内投票",
+          "vote": "投票",
+          "later": "以后再投"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "解冻资产",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "解冻",
+        "info": "解冻会减少您的 {{resource}} 并会取消您的投票。"
       },
       "connectDevice": {
         "title": "设备"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "确认",
         "success": {
           "title": "",
-          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
-          "continue": "Continue"
+          "text": "您的资产已成功解冻。您的 {{resource}} 点数将会减少，且您的投票将被取消。",
+          "continue": "继续"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
       }
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "将票投出",
+    "titleExisting": "管理选票",
     "steps": {
       "castVotes": {
-        "max": "MAX",
-        "title": "Vote",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
+        "max": "最多",
+        "title": "投票",
+        "search": "按名称或地址搜索……",
+        "totalVotes": "总票数：{{total}}",
         "selected": "选取数：{{total}}",
         "maxSelected": "最大选取数：{{total}}",
         "allVotesAreUsed": "全部资产都已分配",
