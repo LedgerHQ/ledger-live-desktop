@@ -3009,7 +3009,7 @@
     },
     "CosmosBroadcastCodeMemoTooLarge": {
       "title": "Memo 字段过长",
-      "description": "Please reduce the size of the memo text and try again"
+      "description": "请缩减 Memo 文本大小并再次尝试。"
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "出错了 (Error #14)",
@@ -3044,11 +3044,11 @@
       "description": "请重试或联系 Ledger 客服。"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again"
+      "title": "请重启您的 Ledger 设备并重试",
+      "description": "发生意外错误。请重试。"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "请重启您的 Ledger 设备并重试",
       "description": "An unexpected error occurred. Please try again. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
@@ -3096,7 +3096,7 @@
       "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
+      "title": "抱歉，{{currencyName}} 服务不可用",
       "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAppAlreadyInstalled": {
@@ -3336,10 +3336,10 @@
     },
     "BtcUnmatchedApp": {
       "title": "这是错误的应用程序",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "description": "在您的设备上打开 “{{managerAppName}}” 应用程序"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "请选择一个不带 “{{invalidCharacters}}” 的设备名"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
@@ -3405,14 +3405,14 @@
     },
     "PairingFailed": {
       "title": "配对不成功",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "description": "请重试，如有疑问，请联系 Ledger 客服。"
     },
     "GenuineCheckFailed": {
       "title": "真伪查验失败",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "description": "出错了。请重试。如有疑问，请联系 Ledger 客服。"
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "请在以太坊应用程序设置中启用合约数据"
     },
     "InvalidXRPTag": {
       "title": "无效的 XRP 目的地标签"
@@ -3439,10 +3439,10 @@
       "title": "Memo 格式错误"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "请禁用 multisign（多重签名）以发送 {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "发送到该接收方时，或许需要添加 memo（目的地标签）"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "数额必须高于 {{minAmountFromFormatted}}"
