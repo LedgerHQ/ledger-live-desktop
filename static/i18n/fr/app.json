@@ -159,7 +159,7 @@
   },
   "bridge": {
     "modalTitle": "Ouvrir pont de connexion (\"bridge\").",
-    "openHeader": "Exposer les comptes de votre appareil via WebSocket",
+    "openHeader": "Exposer les comptes de son appareil via WebSocket",
     "openDescription": "Ouvrir un pont de connexion (\"bridge\") expose tous vos comptes à des applications tierces.",
     "openedHeader": "Pont de connexion (\"bridge\") {{appName}} ouvert",
     "openedDescription": "Vous pouvez maintenant accéder à votre compte {{appName}} sur une application web tierce via WebSocket.",
@@ -3289,7 +3289,7 @@
       "description": "L'appareil a été détecté mais la connexion a échoué. Veuillez réessayer ou contacter l'Assistance Ledger si le problème persiste."
     },
     "ETHAddressNonEIP": {
-      "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement",
+      "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement.",
       "description": null
     },
     "CantScanQRCode": {
