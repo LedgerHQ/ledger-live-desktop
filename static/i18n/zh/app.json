@@ -1882,7 +1882,7 @@
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
       "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。</0><1>如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
       "showInactiveNominations": "显示所有提名 ({{count}})",
@@ -2276,7 +2276,7 @@
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "desc": "重置 Ledger Live，从而清除您电脑上所有的设置信息和账户信息。然后您可以选择密码并将账户重新添加到您的 Ledger 设备上。用以访问您加密资产的私钥会安全保存在您的 Ledger 设备上，并通过您的恢复短语加以备份。"
     },
     "softResetModal": {
       "title": "清除缓存",
@@ -2467,7 +2467,7 @@
           "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
           "2": "<0>切勿</0> 将您的 24 个助记词告诉任何人。",
           "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
-          "4": "Ledger will never ask for your recovery phrase.",
+          "4": "Ledger 从来不会要求您提供恢复短语。",
           "5": "If any person or application asks for it, assume it is a scam!"
         }
       }
@@ -2517,8 +2517,8 @@
           },
           "3": {
             "heading": "还原设备",
-            "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "title": "在新设备上还原您的恢复短语",
+            "description": "使用现有的恢复短语在新的 {{deviceName}} 上恢复您的私钥！"
           }
         }
       },
@@ -2534,7 +2534,7 @@
           "importYourRecoveryPhrase": {
             "title": "通过恢复短语进行还原",
             "paragraph1": "使用恢复短语还原您的 Nano，从而还原、更换或备份您的 Ledger 硬件钱包。",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "paragraph2": "Nano 将会还原您的私钥，从而令您能够访问并管理自己的加密资产。",
             "buttons": {
               "next": "好的，我一切就绪！",
               "prev": "上一步",
@@ -2836,11 +2836,11 @@
           "results": {
             "success": {
               "title": "恭喜！",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "任何知道您恢复短语的人都能盗取您的加密资产。\n如果您将其丢失，必须尽快将您的加密资产转移到安全的地方。"
             },
             "fail": {
               "title": "不正确！",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "text": "任何知道您恢复短语的人都能盗取您的加密资产。\n如果您将其丢失，必须尽快将您的加密资产转移到安全的地方。"
             }
           }
         },
@@ -2938,7 +2938,7 @@
       "description": "Something went wrong. Please retry or contact Ledger Support."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account.",
+      "title": "此账户有一个待处理的操作",
       "description": "请等待操作完成。"
     },
     "AccountNameRequired": {
@@ -3092,7 +3092,7 @@
     },
     "LatestMCUInstalledError": {
       "title": "抱歉，没有可更新的内容",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "description": "如果设备无法使用，请联系 Ledger 客服。"
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
