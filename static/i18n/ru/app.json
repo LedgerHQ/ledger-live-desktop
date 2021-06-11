@@ -446,7 +446,7 @@
         },
         "disconnect": {
           "cta": "Отключить",
-          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+          "description": "Вы уверены? Отключение полной ноды приведёт к удалению всех Биткойн-счетов. Вы сможете вновь добавить счета с помощью обозревателей Ledger."
         }
       }
     }
@@ -467,7 +467,7 @@
     "settings": {
       "title": "Редактировать счёт",
       "advancedLogs": "Дополнительно",
-      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
+      "advancedTips": "Ваш xpub — это конфиденциальные данные. Используйте его осторожно, особенно при раскрытии информации третьим лицам.",
       "accountName": {
         "title": "Название счёта",
         "desc": "Описание счёта"
