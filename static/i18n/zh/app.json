@@ -1735,7 +1735,7 @@
           "confirmation": {
             "title": "确认",
             "success": {
-              "title": "You have successfully redelegated your assets",
+              "title": "您的资产已成功重新委托",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
               "cta": "查看详情"
             },
@@ -1747,7 +1747,7 @@
     "undelegation": {
       "header": "解除委托",
       "headerTooltip": "21 天时间锁后可用",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "inactiveTooltip": "已解除委托的数额不会生成奖励。",
       "flow": {
         "title": "解除资产委托",
         "steps": {
@@ -1766,7 +1766,7 @@
           "confirmation": {
             "title": "确认",
             "success": {
-              "title": "You have successfully undelegated your assets.",
+              "title": "您的资产已成功解除委托",
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
               "cta": "查看详情"
             },
