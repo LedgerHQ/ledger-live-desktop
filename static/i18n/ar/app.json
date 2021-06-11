@@ -889,17 +889,17 @@
     },
     "blackfriday": {
       "title": "الجمعة السوداء ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "description": "استمتع بخصم 40% على محفظة الأجهزة من ليدجر (Ledger) باستخدام رمز الخصم BLACKFRIDAY20"
     }
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "الحافظة",
     "emptyAccountTile": {
       "desc": "إضافة حسابات لإدارة الأصول المشفرة الأخرى",
       "createAccount": "إضافة حساب"
     },
     "recentActivity": "أحدث العمليات",
-    "totalBalance": "Total balance",
+    "totalBalance": "إجمالي الرصيد",
     "transactionsPendingConfirmation": "لم يتم تأكيد بعض المعاملات بعد. ستظهر هذه في رصيدك ويمكن استخدامها بعد تأكيدها."
   },
   "currentAddress": {
@@ -949,32 +949,32 @@
     }
   },
   "subAccounts": {
-    "title": "Subaccounts",
+    "title": "الحسابات الفرعية",
     "seeSubAccounts": "عرض الحسابات الفرعية ({{tokenCount}})",
     "hideSubAccounts": "إخفاء الحسابات الفرعية ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "countTooltip": "1 حساب فرعي",
+    "countTooltip_plural": "{{count}} حساب فرعي"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
+      "title": "تحديث حسابات ليدجر لايف (Ledger Live)",
       "successTitle": "تم تحديث الحسابات بنجاح",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
-      "mobileTitle": "Export accounts to mobile",
+      "successDescPlu": "حساباتك {{assets}} الآن مُحدّثة وجاهزة للاستخدام",
+      "successDesc": "حسابك {{assets}} الآن مُحدّث وجاهز للاستخدام",
+      "mobileTitle": "تصدير الحسابات إلى الجوال",
       "mobileDesc": "انقر الزر أدناه لتصدير حساباتك المحدّثة إلى تطبيق Ledger Live للجوال.",
-      "mobileCTA": "Export to mobile",
-      "description": "New features in Ledger Live require an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "mobileCTA": "تصدير إلى الجوال",
+      "description": "تتطلب الميزات الجديدة في ليدجر لايف (Ledger Live) تحديث حساباتك.",
+      "currency": "يحتاج حساب {{currency}} واحد إلى التحديث:",
+      "currency_plural": "تحتاج {{count}} حسابات {{currency}} إلى التحديث:",
       "footer": "تحتاج إلى جهاز ليدجر (Ledger) لإكمال التحديث",
       "pendingDevices": "تعذر تحديث حساب واحد. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
       "pendingDevices_plural": "تعذّر تحديث حسابات {{totalMigratableAccounts}}. يُرجى توصيل الجهاز المرتبط بالحساب أدناه",
-      "doItLaterBtn": "Do it later"
+      "doItLaterBtn": "تنفيذ ذلك لاحقًا"
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "اكتمل تحديث {{currencyName}}",
         "description": ""
       },
       "scanning": {
@@ -994,7 +994,7 @@
   "addAccounts": {
     "title": "إضافة حسابات",
     "breadcrumb": {
-      "informations": "Crypto asset",
+      "informations": "أصل مشفر",
       "connectDevice": "الجهاز",
       "import": "الحسابات",
       "finish": "التأكيد"
@@ -1005,25 +1005,25 @@
     "accountToImportSubtitle_plural": "إضافة حسابات موجودة",
     "selectAll": "اختار كل ({{count}})",
     "unselectAll": "إلغاء اختيار كل ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
-    "success": "Account added successfully",
-    "success_plural": "Accounts added successfully",
-    "successDescription": "Add other accounts or return to Portfolio",
-    "successDescription_plural": "Add other accounts or return to Portfolio",
+    "noAccountToImport": "ليس هناك حسابات {{currencyName}} موجودة لإضافتها",
+    "success": "تمت إضافة الحساب بنجاح",
+    "success_plural": "تمت إضافة الحسابات بنجاح",
+    "successDescription": "إضافة حسابات أخرى أو العودة إلى الحافظة",
+    "successDescription_plural": "إضافة حسابات أخرى أو العودة إلى الحافظة",
     "createNewAccount": {
       "noOperationOnLastAccount": "لا يمكن إضافة حساب جديد قبل أن تتلقى الأصول على حسابك <1><0>{{accountName}}</0></1>",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "noAccountToCreate": "لم يتم العثور على حساب <1><0>{{currencyName}}</0></1> ليتم إنشاءه",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
       "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ العناوين القديمة."
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "Segwit أو Native Segwit؟"
     },
     "cta": {
-      "addMore": "Add more",
+      "addMore": "إضافة المزيد",
       "add": "إضافة حساب",
       "add_plural": "إضافة حسابات",
-      "addAccountName": "Add {{currencyName}} account",
+      "addAccountName": "إضافة حساب {{currencyName}}",
       "receive": "تلقي"
     },
     "sections": {
@@ -1034,7 +1034,7 @@
         "title": "إضافة حساب جديد"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "الحسابات موجودة بالفعل في الحافظة ({{count}})"
       },
       "migrate": {
         "title": "الحسابات المراد تحديثها"
@@ -1044,20 +1044,20 @@
   "operationDetails": {
     "whatIsThis": "ما هذه العملية؟",
     "title": "تفاصيل العملية",
-    "type": "Type",
-    "amount": "Amount",
+    "type": "نوع",
+    "amount": "المبلغ",
     "account": "حساب",
     "date": "التاريخ",
-    "currentValue": "Current value",
-    "status": "Status",
+    "currentValue": "القيمة الحالية",
+    "status": "الوضع الحالي",
     "confirmed": "تم التأكيد",
-    "failed": "Failed",
+    "failed": "فشلت",
     "notConfirmed": "لم تم التأكيد",
-    "fees": "Fee",
-    "noFees": "No fee",
+    "fees": "رسوم",
+    "noFees": "بدون رسوم",
     "from": "من",
-    "to": "To",
-    "identifier": "Transaction ID",
+    "to": "إلى",
+    "identifier": "رقم المعاملة",
     "viewOperation": "مشاهدة في المتصفح",
     "showMore": "عرض المزيد {{recipients}}",
     "showLess": "عرض أقل",
@@ -1067,12 +1067,12 @@
     "subAccountTooltip": "هذه العملية مرتبطة بالعمليات التالية للحساب الفرعي",
     "internalOperations": "العمليات الداخلية",
     "internalOpTooltip": "لهذه العملية عمليات داخلية",
-    "details": "{{ currency }} details",
+    "details": "تفاصيل {{ currency }}",
     "multipleAddresses": "لماذا عناوين متعددة؟",
     "extra": {
       "frozenAmount": "المبلغ المجمد",
       "unfreezeAmount": "إزالة تجميد المبلغ",
-      "votes": "Votes ({{number}})",
+      "votes": "الأصوات ({{number}})",
       "votesAddress": "<0>{{votes}}</0> إلى <2>{{name}}</2>",
       "validators": "المدققون",
       "redelegated": "Redelegated",
@@ -3075,7 +3075,7 @@
       "description": "Please provide a valid endpoint"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
+      "title": "عذرًا، فشل تقدير الرسوم",
       "description": "Try setting a custom fee (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
