@@ -9,7 +9,11 @@ import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
+import ExchangeCoinify from "~/renderer/screens/exchange/Coinify";
+import ExchangeDapp from "~/renderer/screens/exchange/Dapp";
 import Swap from "~/renderer/screens/exchange/swap";
+import SwapFormOrHistory from "~/renderer/screens/exchange/swap/FormOrHistory";
+import SwapDapp from "~/renderer/screens/exchange/swap/Dapp";
 import Account from "~/renderer/screens/account";
 import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
@@ -101,11 +105,30 @@ export default function Default() {
                     <Redirect from="/manager/reload" to="manager" />
                     <Route path="/manager" render={props => <Manager {...props} />} />
                     <Route path="/lend" render={props => <Lend {...props} />} />
-                    <Route path="/exchange" render={props => <Exchange {...props} />} />
+                    <Route path="/exchange" render={props => <Exchange {...props} />} exact />
+                    <Route
+                      path="/exchange/coinify"
+                      render={props => <ExchangeCoinify {...props} />}
+                      exact
+                    />
+                    <Route
+                      path="/exchange/:platform"
+                      render={(props: any) => <ExchangeDapp {...props} />}
+                      exact
+                    />
                     <Route path="/account/:parentId/:id" render={props => <Account {...props} />} />
                     <Route path="/account/:id" render={props => <Account {...props} />} />
                     <Route path="/asset/:assetId+" render={(props: any) => <Asset {...props} />} />
-                    <Route path="/swap" render={props => <Swap {...props} />} />
+                    <Route path="/swap" render={props => <Swap {...props} />} exact />
+                    <Route
+                      path="/swap/integrated"
+                      render={props => <SwapFormOrHistory {...props} />}
+                      exact
+                    />
+                    <Route
+                      path="/swap/dapp/:platform"
+                      render={(props: any) => <SwapDapp {...props} />}
+                    />
                   </Switch>
                 </Page>
                 <ToastOverlay />
