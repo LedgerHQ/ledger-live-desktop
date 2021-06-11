@@ -1060,7 +1060,7 @@
     "tokenOperations": "代币操作",
     "subAccountOperations": "子账户操作",
     "tokenTooltip": "This operation is related to the following token operations",
-    "subAccountTooltip": "This operation is related to the following subaccount operations",
+    "subAccountTooltip": "此操作与下列子账户操作相关",
     "internalOperations": "内部操作",
     "internalOpTooltip": "此操作存在内部操作",
     "details": "{{ currency }} 详情",
@@ -1451,7 +1451,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+        "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
         "from": "来自",
         "to": "发往",
         "selectAccountDebit": "借记账户",
@@ -1915,7 +1915,7 @@
         "description": "最多可选择 16 个验证器。确保您的提名对象处于活跃状态，以便赚取奖励。"
       },
       "chill": {
-        "title": "Clear nominations",
+        "title": "清除提名",
         "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
       }
     },
@@ -1964,7 +1964,7 @@
             "使用您的 Ledger 设备进行提名",
             "Assets will be available again, 28 days after unbonding"
           ],
-          "help": "How nominations work",
+          "help": "提名机制如何运作",
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
@@ -2071,7 +2071,7 @@
       },
       "steps": {
         "info": {
-          "title": "Info"
+          "title": "信息"
         },
         "connectDevice": {
           "title": "设备"
@@ -2093,7 +2093,7 @@
     }
   },
   "delegation": {
-    "title": "Earn rewards",
+    "title": "赚取奖励",
     "header": "Delegation",
     "validator": "验证器",
     "yield": "Est. Yield",
@@ -2110,13 +2110,13 @@
     "durationDays_plural": "{{count}} days",
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
+    "earnRewards": "赚取奖励",
     "overdelegated": "过度委托",
-    "status": "Status",
+    "status": "状态",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
+          "title": "赚取权益质押奖励",
           "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
           "bullet": {
             "delegate": "委托出去的账户依旧为您所有。",
@@ -2129,17 +2129,17 @@
         },
         "account": {
           "title": "委托账户",
-          "label": "Account",
+          "label": "账户",
           "toDelegate": "要委托的账户"
         },
         "summary": {
           "title": "委托账户",
-          "label": "Summary",
+          "label": "概要",
           "toDelegate": "要委托的账户",
           "toUndelegate": "要解除委托的账户",
           "validator": "验证器",
-          "select": "Select",
-          "yield": "Est. Yield {{amount}}",
+          "select": "选择",
+          "yield": "预估收益 {{amount}}",
           "randomly": "随机选择的验证器",
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
         },
@@ -3329,7 +3329,7 @@
       "title": "Please undelegate the account before emptying it"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "请先清空所有子账户"
     },
     "NotSupportedLegacyAddress": {
       "title": "This legacy address format is no longer supported"
