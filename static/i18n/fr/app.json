@@ -13,7 +13,7 @@
       "broadcast": {
         "toast": {
           "title": "Transaction envoyée",
-          "text": "Cliquez ici pour voir les détails de l'opération."
+          "text": "Appuyez ici pour voir les détails de l'opération."
         }
       }
     }
@@ -75,7 +75,7 @@
       "syncing": "Synchronisation...",
       "upToDate": "Synchronisé",
       "outdated": "En pause",
-      "needsMigration": "Cliquez pour mettre le compte à jour",
+      "needsMigration": "Appuyez pour mettre le compte à jour.",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser"
     },
@@ -246,7 +246,7 @@
           "toReceive": "Montant à recevoir",
           "terms": "Conditions d'utilisation",
           "disclaimer": {
-            "description": "En cliquant sur Confirmer, je reconnais et j'accepte que ce service soit exclusivement soumis aux Conditions d'utilisation de <0>{{provider}}</0>.",
+            "description": "En choisissant Confirmer, je reconnais et j'accepte que ce service soit exclusivement soumis aux Conditions d'utilisation de <0>{{provider}}</0>.",
             "acceptedDescription": "Ce service est exclusivement soumis aux Conditions d'utilisation de <0>{{provider}}</0>."
           },
           "details": {
@@ -538,7 +538,7 @@
     }
   },
   "lend": {
-    "title": "Prêter des cryptos",
+    "title": "Prêter",
     "tabs": {
       "dashboard": "Tableau de bord",
       "opened": "Prêts ouverts",
@@ -577,7 +577,7 @@
         "cta": "Déposer"
       },
       "opened": {
-        "title": "Vos prêts ouverts apparaîtront ici",
+        "title": "Vos prêts ouverts apparaîtront ici.",
         "description": "Vous n'avez pas encore fait de prêts.",
         "cta": "Déposer"
       },
@@ -883,7 +883,7 @@
       "description": "Échangez une crypto contre une autre sur Ledger Live grâce à notre partenaire."
     },
     "lending": {
-      "title": "Prêter des cryptos",
+      "title": "Prêter",
       "description": "Prêtez vos stablecoins sur le protocole Compound et gagnez des intérêts dès aujourd'hui."
     },
     "blackfriday": {
@@ -927,7 +927,7 @@
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Appareil en mode Bootloader. Cliquez sur <1>Continuer</1> pour le mettre à jour."
+    "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "tokensList": {
     "title": "Jetons",
@@ -961,7 +961,7 @@
       "successDescPlu": "Vos comptes {{assets}} sont maintenant à jour et prêts à être utilisés.",
       "successDesc": "Votre compte {{assets}} est maintenant à jour et prêt à être utilisé.",
       "mobileTitle": "Exporter les comptes vers l'application mobile",
-      "mobileDesc": "Cliquez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live mobile.",
+      "mobileDesc": "Appuyez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live mobile.",
       "mobileCTA": "Exporter vers Ledger Live mobile",
       "description": "Mettez vos comptes à jour pour bénéficier des nouvelles fonctionnalités de Ledger Live.",
       "currency": "Mise à jour nécessaire pour 1 compte {{currency}}",
@@ -1278,7 +1278,7 @@
         "recoveryMode": "Appuyez sur le Mode {{mode}}. Patientez jusqu'à ce que le tableau de bord apparaisse.",
         "third": "3. Désinstaller toutes les applications",
         "openLive": "Ouvrez le Gestionnaire dans Ledger Live.",
-        "uninstall": "Cliquez sur l'icône grise de la corbeille pour supprimer toutes les applications actuellement installées sur votre {{deviceName}}. Cela permet de faire de la place pour le programme d'installation du micrologiciel.",
+        "uninstall": "Appuyez sur l'icône grise de la corbeille pour supprimer toutes les applications actuellement installées sur votre {{deviceName}}. Cela permet de faire de la place pour le programme d'installation du micrologiciel.",
         "disclaimer": "Remarque : vos fonds ne sont pas affectés par cette opération. Vos clés privées vous permettant d'accéder à vos crypto-actifs sont en toute sécurité sur votre feuille de récupération."
       }
     }
@@ -1683,8 +1683,8 @@
             "compoundOrClaim": "Capitaliser ou encaisser",
             "compoundDescription": "Les récompenses seront ajoutées au montant délégué.",
             "claimDescription": "Les récompenses seront ajoutées au solde disponible.",
-            "compoundInfo": "Vous avez gagné <0>{{amount}}</0>. En cliquant sur Continuer, vous demanderez à percevoir immédiatement ce montant et il sera automatiquement délégué au même validateur.",
-            "claimInfo": "Vous avez gagné <0>{{amount}}</0> avec le validateur ci-dessous. En cliquant sur Continuer, vous demanderez à percevoir immédiatement ce montant et il sera automatiquement ajouté à votre solde disponible.",
+            "compoundInfo": "Vous avez gagné <0>{{amount}}</0>. En choisissant Continuer, vous demanderez à percevoir immédiatement ce montant et il sera automatiquement délégué au même validateur.",
+            "claimInfo": "Vous avez gagné <0>{{amount}}</0> avec le validateur ci-dessous. En choisissant Continuer, vous demanderez à percevoir immédiatement ce montant et il sera automatiquement ajouté à votre solde disponible.",
             "selectLabel": "Sélectionner une délégation"
           },
           "connectDevice": {
@@ -2281,7 +2281,7 @@
     "resetFallbackModal": {
       "title": "Action requise de l'utilisateur",
       "part1": "Impossible de supprimer le dossier cache. Merci de  supprimer le dossier manuellement :",
-      "part2": "Cliquez sur le bouton Ouvrir le dossier.",
+      "part2": "Appuyez sur le bouton Ouvrir le dossier. ",
       "part3": "l'application va se fermer",
       "part4": ", et supprimez manuellement le dossier SQlite.",
       "part5": "Vous pouvez ensuite relancer l'application normalement."
