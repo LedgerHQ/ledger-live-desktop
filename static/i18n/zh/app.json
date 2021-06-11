@@ -162,7 +162,7 @@
     "openHeader": "通过 WebSocket 曝露您的设备账户",
     "openDescription": "打开桥接使您的所有账户曝露给第三方应用程序。",
     "openedHeader": "{{appName}} 已打开桥接",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
+    "openedDescription": "您现在可以通过 WebSocket 在第三方网页应用程序上访问您的 {{appName}} 账户。",
     "completeHeader": "桥接会话已完成",
     "completeDescription": "Websocket 桥接现已关闭。",
     "openButton": "打开",
@@ -179,13 +179,13 @@
     "history": {
       "empty": {
         "title": "您之前的掉期交易会显示在这里",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "description": "要么您还未进行过任何掉期交易，亦或 Ledger Live 在此期间被重置了 。"
       }
     },
     "landing": {
       "title": "Swap 掉期交易您的资产",
       "continue": "继续",
-      "sorry": "Service temporarily unavailable, or not available in your country"
+      "sorry": "服务暂时不可用，或在您的国家不可用"
     },
     "missingApp": {
       "title": "请在您的设备上安装 {{appName}} 应用程序",
@@ -399,7 +399,7 @@
           "existing": "待扫描的现有账户",
           "toScan": "待扫描的账户",
           "toScanDescription": "每个地址类别中待扫描的账户",
-          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+          "toScanTooltip": "仅当您有10个以上 BTC 账户时才会增加。初始扫描速度会更慢。 "
         },
         "satstack": {
           "title": "SatStack",
@@ -412,11 +412,11 @@
             },
             "satstack-disconnected": {
               "header": "无法连接到 SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "description": "请验证 SatStack 正在此计算机上运行。"
             },
             "satstack-outdated": {
               "header": "请升级 SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "description": "您正在使用的 SatStack 版本过旧，可能存在漏洞或不兼容。"
             },
             "node-disconnected": {
               "header": "无法连接到完整节点",
@@ -487,13 +487,13 @@
     "frozenAssetsTooltip": "冻结资产被用于 Tron 投票过程。这表示了您的投票总数。",
     "bandwidthTooltip": "冻结资产以获得带宽",
     "energyTooltip": "冻结资产以获得能量",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "delegatedAssetsTooltip": "已委托资产被用于 Cosmos 投票过程。这表示了您的投票总数。",
+    "undelegatingTooltip": "解除委托的资产会有 21 天的时间锁，之后才可用。"
   },
   "exchange": {
     "title": "买入和卖出加密货币",
     "reset": "重置流程",
-    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
       "header": "使用 {{provider}} 买入加密",
       "title": "通过 <0>{{provider}}</0> 买入加密",
@@ -1329,8 +1329,8 @@
         "title": "确认",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "textNRG": "冻结一经网络确认，您就能够开始赚取能量点。您稍后便可为超级代表投票来同样赚取奖励。",
+          "text": "冻结一经网络确认，您就可以开始赚取带宽点。您稍后便可为超级代表投票来同样赚取奖励。",
           "votePending": "{{time}} 内投票",
           "vote": "投票",
           "later": "以后再投"
