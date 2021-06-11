@@ -2384,10 +2384,10 @@
     "system": "Use system language",
     "switcher": {
       "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese"
+      "fr": "Français",
+      "ru": "Русский",
+      "es": "Español",
+      "zh": "中文（简体）"
     }
   },
   "theme": {
