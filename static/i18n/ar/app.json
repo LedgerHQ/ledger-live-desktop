@@ -179,7 +179,7 @@
     "history": {
       "empty": {
         "title": "ستظهر مبادلاتك السابقة هنا",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "description": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين ليدجر لايف (Ledger Live) في غضون ذلك."
       }
     },
     "landing": {
@@ -1267,10 +1267,10 @@
       "SuccessCTANoApps": "تثبيت التطبيقات",
       "cancelReinstallCTA": "تثبيت التحديث",
       "resetSteps": {
-        "first": "1. Reset your device",
+        "first": "1. إعادة تعيين جهازك",
         "connect": "قم بتوصيل {{deviceName}} بجهاز الكمبيوتر الخاص بك باستخدام كابل USB.",
         "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PINs to reset the device.",
+        "falsePin": "أدخل ثلاثة أرقام تعريف شخصي (PIN) خطأ لإعادة تعيين الجهاز.",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
         "confirmTurnOff": "انقر على {{action}} للتأكيد.",
         "second": "2. Boot in {{mode}} mode",
@@ -2246,9 +2246,9 @@
       "softResetTitle": "Clear cache",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
-      "hardResetTitle": "Reset Ledger Live",
+      "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
-      "hardReset": "Reset",
+      "hardReset": "إعادة تعيين",
       "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "Bug reports",
@@ -2271,8 +2271,8 @@
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "title": "إعادة تعيين Ledger Live",
+      "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك."
     },
     "softResetModal": {
       "title": "Clear cache",
@@ -2342,7 +2342,7 @@
     "setPassword": {
       "title": "Password lock",
       "subTitle": "Set the password",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "desc": "حافظ على كلمة مرورك آمنة. فقدانها قد يعني إعادة تعيين ليدجر لايف (Ledger Live) وإضافة الحسابات من جديد."
     },
     "disablePassword": {
       "title": "Disable password lock",
@@ -3080,7 +3080,7 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
+      "title": "عفواً، تعذر إعادة التعيين",
       "description": "يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا استمرت المشكلة."
     },
     "LatestMCUInstalledError": {
