@@ -7,6 +7,7 @@ import _ from "lodash";
 import { configureToMatchImageSnapshot } from "jest-image-snapshot";
 import Page from "./po/page";
 import ModalPage from "./po/modal.page";
+import DrawerPage from "./po/drawer.page";
 import AccountsPage from "./po/accounts.page";
 import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
@@ -55,6 +56,7 @@ let portfolioPage;
 let settingsPage;
 let managerPage;
 let modalPage;
+let drawerPage;
 let accountPage;
 let accountsPage;
 let addAccountsModal;
@@ -140,6 +142,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     page = new Page(app);
     modalPage = new ModalPage(app);
+    drawerPage = new DrawerPage(app);
     accountPage = new AccountPage(app);
     accountsPage = new AccountsPage(app);
     portfolioPage = new PortfolioPage(app);
@@ -244,6 +247,7 @@ export {
   settingsPage,
   managerPage,
   modalPage,
+  drawerPage,
   hideTokenModal,
   addAccountsModal,
   accountSettingsModal,

@@ -24,6 +24,8 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import SectionTitle from "./SectionTitle";
 import OperationC from "./Operation";
 import TableContainer, { TableHeader } from "../TableContainer";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 const ShowMore = styled(Box).attrs(() => ({
   horizontal: true,
@@ -73,7 +75,7 @@ export class OperationsList extends PureComponent<Props, State> {
   state = initialState;
 
   handleClickOperation = (operation: Operation, account: AccountLike, parentAccount?: Account) =>
-    this.props.openModal("MODAL_OPERATION_DETAILS", {
+    setDrawer(OperationDetails, {
       operationId: operation.id,
       accountId: account.id,
       parentId: parentAccount && parentAccount.id,
