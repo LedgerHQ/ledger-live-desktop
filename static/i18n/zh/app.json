@@ -698,7 +698,7 @@
           "title": "确认",
           "success": {
             "title": "提款已成功发送",
-            "text": "Your assets will be available once the network has confirmed the withdrawal.",
+            "text": "提取一经网络确认，您的资产就会处于可用状态。",
             "done": "关闭",
             "cta": "查看详情"
           },
@@ -1853,7 +1853,7 @@
     "unlockingTooltip": "正在解绑的资产会有 28 天的锁定期，然后才可提取。",
     "unlockedBalance": "已解绑",
     "unlockedTooltip": "现在可使用提取操作转移已解绑的资产。",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
@@ -2870,7 +2870,7 @@
   "TransactionConfirm": {
     "title": "请在您的设备上确认操作从而完成交易",
     "warning": "每次都要核对您设备上显示的地址与 {{recipientWording}} 所提供的完全一致",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "secureContract": "发送之前请核实您设备上显示的存款详情。合约地址被安全的提供，因此无需再次验证。",
     "verifyData": "总是验证您设备上的操作细节。",
     "warningWording": {},
     "titleWording": {
@@ -2908,7 +2908,7 @@
     "read": "阅读使用条款",
     "switchLabelTerms": "<0>我已经阅读并同意该</0> <1>使用条款</1>",
     "switchLabelPrivacyPolicy": "<0>我已经阅读并同意该</0> <1>隐私政策</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "switchLabelLoss": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
     "cta": "进入 Ledger 应用程序"
   },
   "families": {
