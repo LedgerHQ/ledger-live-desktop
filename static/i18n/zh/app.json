@@ -643,7 +643,7 @@
       },
       "withdraw": {
         "title": "提取",
-        "description": "Withdraw assets from the protocol to your Ledger account."
+        "description": "将资产从协议中提取到您的Ledger账户。"
       }
     },
     "enable": {
@@ -657,7 +657,7 @@
         },
         "amount": {
           "title": "数额",
-          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
+          "summary": "我获准 <0>{{contractName}}</0> 智能合约访问我账户 <0>{{accountName}}</0> 上的 <0>{{amount}}</0> 数额",
           "limit": "已限额 {{amount}}",
           "noLimit": "无限额 {{assetName}}",
           "contractName": "Compound 复利 {{currencyName}}",
