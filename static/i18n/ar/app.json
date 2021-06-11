@@ -2282,9 +2282,9 @@
       "title": "مطلوب إجراء من المستخدم",
       "part1": "تعذر حذف مجلد ذاكرة التخزين المؤقت. يرجى حذف المجلد يدويًا:",
       "part2": "انقر فوق زر \"فتح مجلد\"،ال ",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "part3": "سيتم إغلاق التطبيق،",
+      "part4": "ثم احذف مجلد \"sqlite\" يدويًا.",
+      "part5": "ثم يمكنك إعادة تشغيل التطبيق بشكل عادي."
     },
     "removeAccountModal": {
       "title": "إزالة حساب",
