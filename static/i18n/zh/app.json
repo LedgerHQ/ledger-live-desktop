@@ -967,8 +967,8 @@
       "currency": "1 个 {{currency}} 账户需要更新：",
       "currency_plural": "{{count}} 个 {{currency}} 账户需要更新：",
       "footer": "您需要您的 Ledger 设备来完成更新",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
+      "pendingDevices": "1 个账户无法更新。请连接与以下的账户相关联的设备",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} 个账户无法更新。请连接与以下账户相关联的设备",
       "doItLaterBtn": "以后再做"
     },
     "progress": {
@@ -998,9 +998,9 @@
       "import": "账户",
       "finish": "确认"
     },
-    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeReadyInfo": "将使用您的比特币完整节点来添加账户。",
     "fullNodeConfigure": "配置节点",
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) 是一个 {{tokenType}} 代币。您可以直接在 {{currency}} 账户上接收代币。",
     "accountToImportSubtitle_plural": "添加现有账户",
     "selectAll": "全选 ({{count}})",
     "unselectAll": "取消全选 ({{count}})",
@@ -1010,7 +1010,7 @@
     "successDescription": "添加其他账户或返回至资产组合",
     "successDescription_plural": "添加其他账户或返回至资产组合",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
+      "noOperationOnLastAccount": "在您在 <1><0>{{accountName}}</0></1> 账户上收到资产前，无法创建新账户",
       "noAccountToCreate": "未找到待创建的 <1><0>{{currencyName}}</0></1> 账户",
       "showAllAddressTypes": "显示所有地址类型",
       "showAllAddressTypesTooltip": "只有当您需要在旧地址格式上接收 {{family}} 时，才能更改地址类型。"
@@ -1233,10 +1233,10 @@
       "updateBtn": "更新固件",
       "latest": "固件版本 {{version}} 可用",
       "contactSupport": "联系客服",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "deprecated": "设备固件版本太旧而无法更新。请联系 Ledger 客服以获取替代版本。",
+      "prepareSeed": "预防起见，请确保将您的 24 词恢复短语写在所提供的恢复表中。",
+      "disclaimerTitle": "您即将安装 <1>固件版本 {{version}}</1>。",
+      "downloadingUpdateDesc": "请等待更新安装程序下载"
     },
     "modal": {
       "steps": {
@@ -1251,15 +1251,15 @@
         "flash": "正在准备您的设备……"
       },
       "confirmIdentifier": "验证标识符",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
+      "confirmIdentifierText": "请确认您设备上的标识符和下方的标识符一致。如果需要，请确认并输入您的 PIN 识别密码。",
       "identifier": "标识符",
       "mcuTitle": "完成更新",
       "mcuFirst": "从您的设备上断开 USB 数据线连接",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
+      "mcuSecond": "按下左键，长按住的同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
       "mcuPin": "请等待更新完成",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
+      "mcuSecondNanoX": "长按左边按钮，直到 <1><0>{{bootloaderOption}}</0></1> 显示出来。同时按下两个按钮来确认并重新连接您的设备。",
+      "mcuBlueFirst": "持续按住设备侧面按钮10秒来关闭设备。松开按钮。",
+      "mcuBlueSecond": "持续按住设备侧面按钮至少5秒直至设备显示 Boot Options（启动选项）。轻击 Bootloader Mode（启动加载模式）。",
       "successTitle": "固件已更新",
       "successTextApps": "请在设备上重新安装应用程序",
       "successTextNoApps": "您现在可以在您的设备上安装应用程序",
@@ -1271,7 +1271,7 @@
         "connect": "通过 USB 数据线，连接 {{deviceName}} 到您的计算机。",
         "turnOn": "按设备上的按钮以启动设备。",
         "falsePin": "输入三次错误的 PIN 识别密码以重置设备。",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
+        "turnOff": "持续按住设备侧面按钮，直至 {{action}} 显示。",
         "confirmTurnOff": "点击 {{action}} 确认。",
         "second": "2. 在 {{mode}} 模式下启动",
         "boot": "持续按住设备侧面按钮，直至 {{option}} 显示",
@@ -2760,7 +2760,7 @@
           },
           "quizzFail": {
             "title": "距成为高手仅一步之遥……",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
+            "paragraph1": "别担心，Ledger 会全程为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。",
             "paragraph2": "只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
@@ -2791,7 +2791,7 @@
         },
         "setUpNanoWallet": {
           "title": "让我们设置您的 Nano 吧！",
-          "description": "We'll start by setting up your Nano security.",
+          "description": "首先要设置 Nano 的安全性。",
           "CTA": "动手吧！"
         }
       }
@@ -2826,8 +2826,8 @@
         "2": {
           "text": "If my recovery phrase is no longer secure or private...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "没有问题，Ledger可以向我发送一份副本",
+            "2": "我的加密资产不再安全，我需要将其转移到安全的地方"
           },
           "results": {
             "success": {
@@ -2861,7 +2861,7 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?"
+    "desc": "无法连接您的设备？"
   },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
@@ -2897,7 +2897,7 @@
     "votes": "票数 ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "输入 {{currencyName}} 地址"
   },
   "Terms": {
     "title": "使用条款",
@@ -3125,7 +3125,7 @@
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
+        "title": "完成应用程序的安装进程？",
         "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
         "stay": "完成安装"
       },
@@ -3212,7 +3212,7 @@
       "description": "请重试。"
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
+      "title": "抱歉，服务器响应超时 ({{tag}})",
       "description": "出现超时。"
     },
     "TransportError": {
@@ -3343,10 +3343,10 @@
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
+      "title": "需要安装比特币和以太坊应用程序",
       "description": "Install the latest Bitcoin and Ethereum apps first."
     },
     "UserRefusedDeviceNameChange": {
@@ -3354,8 +3354,8 @@
       "description": "Try again and allow renaming on your device"
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "title": "同步错误",
+      "description": "某些账户无法被同步。"
     },
     "TronNoFrozenForBandwidth": {
       "title": "没有可解冻的资产",
@@ -3370,15 +3370,15 @@
       "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "最少需要 1 张选票"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers"
+      "title": "选票格式错误",
+      "description": "仅可使用整数投票"
     },
     "TronRewardNotAvailable": {
       "title": "奖励尚不能申领。",
-      "description": "You need to wait 24 hours between claims"
+      "description": "两次申领需间隔 24 小时。"
     },
     "TronNoReward": {
       "title": "没有可申领的奖励"
@@ -3391,7 +3391,7 @@
       "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "可能会收取额外费用"
     },
     "TronNotEnoughTronPower": {
       "title": "可用票数不足"
@@ -3427,13 +3427,13 @@
       "title": "主账户余额不足"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "余额不能少于 {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
       "title": "请打开 {{expected}} 应用程序"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "网络费用超过数额的10%"
     },
     "StellarWrongMemoFormat": {
       "title": "Memo 格式错误"
@@ -3445,19 +3445,19 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "数额必须高于 {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "数额必须低于 {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "必须关闭验证器选举"
     },
     "PolkadotNotValidator": {
       "title": "已选的某些地址并非验证器"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "如果小于 1 DOT，所有绑定的资产都将被解绑"
     },
     "PolkadotNoUnlockedBalance": {
       "title": "您没有已解绑的资产"
@@ -3466,10 +3466,10 @@
       "title": "您没有提名"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "确保您有足够的余额来支付未来的交易费用"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
+      "title": "余额不能少于 1 DOT。发送最大值以清空账户"
     },
     "PolkadotBondMinimumAmount": {
       "title": "您必须绑定至少 1 DOT"
