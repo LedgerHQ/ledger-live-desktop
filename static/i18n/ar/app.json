@@ -225,12 +225,12 @@
         "fixedUnavailable": "المعدل الثابت غير مدعوم لهذا الثنائي",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيبقى المبلغ الخاص بك كما هو حتى لو تغير السوق. يتم التحديث كل 60 ثانية.",
-        "by": "Provided by"
+        "by": "مقدم من"
       },
       "exchange": "تداول",
       "helpCTA": "ما هي المبادلة؟",
       "bubble": "نحن نستخدم سعراً ثابتاً، هذا هو المبلغ الذي ستحصل عليه بالضبط.",
-      "noAccounts": "You don't have {{currencyName}} accounts with balance",
+      "noAccounts": "ليس لديك حسابات {{currencyName}} بها رصيد",
       "noApp": "تطبيق {{currencyName}} غير مثبت.",
       "outdatedApp": "يتوفر تحديث لتطبيق {{currencyName}}.",
       "loadingRates": "جارٍ تحميل أسعار الصرف..."
