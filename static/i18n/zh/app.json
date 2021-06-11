@@ -1828,7 +1828,7 @@
           "info": {
             "title": "奖励",
             "description": "恭喜！您已赚取了 {{amount}}。点击 Continue（继续）以申领您的奖励。",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "info": "您将根据提示向您的账户发出空白交易。通过这种操作，能够以最低的交易费将目前奖励添加到您的余额中。"
           },
           "connectDevice": {
             "title": "设备"
@@ -1837,7 +1837,7 @@
             "title": "确认",
             "success": {
               "title": "已成功申请奖励！",
-              "text": "Your rewards were added to your available balance",
+              "text": "您的奖励已经添加进您的可用余额中。",
               "cta": "查看详情"
             },
             "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
@@ -1850,9 +1850,9 @@
     "lockedBalance": "已绑定",
     "lockedTooltip": "必须将资产绑定到提名的验证器才能赚取奖励。",
     "unlockingBalance": "正在解绑",
-    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
+    "unlockingTooltip": "正在解绑的资产会有 28 天的锁定期，然后才可提取。",
     "unlockedBalance": "已解绑",
-    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
+    "unlockedTooltip": "现在可使用提取操作转移已解绑的资产。",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
@@ -1896,7 +1896,7 @@
       "headerTooltip": "在 28 天的解绑期后可用",
       "withdrawUnbonded": "提取 ({{amount}})",
       "withdrawTooltip": "已解绑的数额将被贷记到您的可用余额。",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
+      "noUnlockedWarning": "尚无可提取的已解绑余额。",
       "rebond": "重新绑定",
       "unbonded": "已解绑"
     },
@@ -2428,7 +2428,7 @@
     "announcement": {
       "emptyState": {
         "title": "目前没有新闻",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "desc": "您将在这里找到与 Ledger 和 Ledger Live 相关的所有新闻"
       }
     }
   },
@@ -2441,11 +2441,11 @@
           "1": "<0>总是</0> 亲自选择 PIN 识别密码。",
           "2": "<0>总是</0> 避开他人的视线输入您的 PIN 识别密码。",
           "3": "如有需要，您可以更改自己的 PIN 识别密码。",
-          "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "4": "连续三次输入错误的 PIN 识别密码会导致设备重置。",
+          "5": "<0>切勿</0> 使用过于简单的 PIN 识别密码，例如 0000、123456 或 55555555。",
+          "6": "<0>切勿</0> 将您的 PIN 识别密码告诉他人。即使是 Ledger 的相关人员也不能除外。",
+          "7": "<0>切勿</0> 使用非您本人选择的 PIN 识别密码。",
+          "8": "<0>切勿</0> 将您的 PIN 识别密码保存在电脑或手机上。"
         }
       },
       "recoverySeed": {
@@ -2457,7 +2457,7 @@
         "paragraph3": "不要担心并遵循以下步骤：",
         "points": {
           "1": "获得一个新的硬件钱包。",
-          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
+          "2": "在 Ledger 应用程序中选择“在新设备上还原恢复短语”",
           "3": "在您的新设备上输入您的恢复短语从而恢复对您加密资产的访问。"
         }
       },
