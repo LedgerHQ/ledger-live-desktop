@@ -1891,7 +1891,7 @@
       "header": "正在解绑",
       "headerTooltip": "在 28 天的解绑期后可用",
       "withdrawUnbonded": "提取 ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
+      "withdrawTooltip": "已解绑的数额将被贷记到您的可用余额。",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
       "rebond": "重新绑定",
       "unbonded": "已解绑"
@@ -1960,7 +1960,7 @@
         "starter": {
           "description": "您可通过绑定资产并提名验证器来赚取奖励。",
           "bullet": [
-            "You keep ownership of bonded assets",
+            "你保有对已绑定资产的所有权",
             "使用您的 Ledger 设备进行提名",
             "Assets will be available again, 28 days after unbonding"
           ],
@@ -2219,7 +2219,7 @@
     },
     "display": {
       "language": "显示语言",
-      "languageDesc": "Set the language displayed in Ledger Live.",
+      "languageDesc": "设置 Ledger Live 中显示的语言。",
       "theme": "主题",
       "themeDesc": "选择主题。",
       "counterValue": "对价",
@@ -2241,7 +2241,7 @@
       "password": "密码锁",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
       "passwordAutoLock": "自动锁定",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
+      "passwordAutoLockDesc": "不活跃状态下，自动锁定 Ledger Live。",
       "changePassword": "更改密码",
       "softResetTitle": "清除缓存",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
@@ -2315,7 +2315,7 @@
         "title": "隐藏代币列表",
         "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
         "count": "{{count}} 枚代币",
-        "count_plural": "{{count}} tokens"
+        "count_plural": "{{count}} 枚代币"
       },
       "fullNode": {
         "title": "连接比特币完整节点",
@@ -2485,10 +2485,10 @@
         "title": "欢迎使用 Ledger",
         "description": "Safely manage your crypto from your computer.",
         "cta": "快速入门",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+        "noDevice": "没有设备？<0>购买一个 Ledger Nano X</0>",
         "languageWarning": {
           "title": "以 {{language}} 开始",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+          "desc": "为了让大家更好地使用 Ledger，我们正在推出其他语言版本。需要注意的是，Ledger 其他功能目前只有英语版可用。",
           "cta": "知道了"
         }
       },
@@ -2497,8 +2497,8 @@
       },
       "selectUseCase": {
         "greetings": "您好！",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
-        "hasRecovery": "Already have a recovery phrase?",
+        "hasNoRecovery": "首次使用您的 {{deviceName}} ？",
+        "hasRecovery": "已经有了恢复短语？",
         "separator": "或者",
         "options": {
           "1": {
@@ -2596,17 +2596,17 @@
             }
           },
           "pinCode": {
-            "title": "PIN code",
+            "title": "PIN 识别密码",
             "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
             "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
             "buttons": {
-              "next": "Set up PIN code",
+              "next": "设置 PIN 识别密码",
               "prev": "上一步",
               "help": "需要帮助"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
+            "title": "已经是位高手！",
             "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
@@ -2615,7 +2615,7 @@
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
+            "title": "距成为高手仅一步之遥……",
             "paragraph": "别担心，Ledger 会为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
@@ -2624,7 +2624,7 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
+              "title": "选择 PIN 识别密码",
               "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
@@ -2638,7 +2638,7 @@
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
+            "title": "输入您的恢复短语",
             "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
@@ -2650,7 +2650,7 @@
             "warning": {
               "title": "Do not use a recovery phrase that you have not generated yourself.",
               "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "supportLink": "联系客服"
             }
           },
           "useRecoverySheet": {
@@ -2735,10 +2735,10 @@
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
-              "next": "OK, I'm done!",
+              "next": "好的，我完成了！",
               "prev": "上一步",
               "help": "需要帮助",
-              "learn": "Learn how to hide it"
+              "learn": "了解如何保管好您的恢复短语"
             }
           },
           "pairMyNano": {
@@ -2771,26 +2771,26 @@
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "基础知识",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
+          "title": "访问您的加密资产",
           "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
+          "title": "保管好您的私钥",
           "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
         },
         "stayOffline": {
-          "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "title": "保持离线状态",
+          "description": "您的 Nano 就像是一个“冷存储”钱包。也就是说，它永远不会把您的私钥曝露在线上，即便是在使用我们的应用程序时。"
         },
         "validateTransactions": {
-          "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "title": "验证交易",
+          "description": "Ledger Live 在确保您的安全性的同时，允许您买入、卖出、管理、交易并赚取加密货币。您将使用您的 Nano 对每一笔交易进行验证。"
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
+          "title": "让我们设置您的 Nano 吧！",
           "description": "We'll start by setting up your Nano security.",
           "CTA": "Let’s do this!"
         }
@@ -2912,17 +2912,17 @@
       "memo": "Memo",
       "memoType": {
         "MEMO_TEXT": "Memo 文本",
-        "NO_MEMO": "No Memo",
+        "NO_MEMO": "无 Memo 标签",
         "MEMO_ID": "Memo ID",
-        "MEMO_HASH": "Memo Hash",
-        "MEMO_RETURN": "Memo Return"
+        "MEMO_HASH": "Memo Hash 标签哈希",
+        "MEMO_RETURN": "Memo 返回"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的类型。"
     },
     "cosmos": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+      "memo": "Memo 标签",
+      "memoPlaceholder": "可选",
+      "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
     }
   },
   "errors": {
@@ -2932,7 +2932,7 @@
     },
     "AccountAwaitingSendPendingOperations": {
       "title": "There is a pending operation for this account.",
-      "description": "Wait for the operation to go through."
+      "description": "请等待操作完成。"
     },
     "AccountNameRequired": {
       "title": "An account name is required",
