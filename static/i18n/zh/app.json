@@ -2674,9 +2674,9 @@
           },
           "newRecoveryPhrase": {
             "title": "恢复短语",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "paragraph1": "您的恢复短语是备份您私人密钥的一个24词组成的秘密列表。",
+            "paragraph2": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
+            "disclaimer": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
             "buttons": {
               "next": "恢复短语",
               "prev": "上一步",
@@ -2689,15 +2689,15 @@
             },
             "selectLength": {
               "title": "选择恢复短语的长度",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "descr": "您的恢复短语可以有12、18或24个词。您必须输入所有的词才能访问您的加密资产。"
             },
             "enterWord": {
               "title": "输入 Word #1 第一个词……",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "descr": "使用左边或右边的按钮，输入第一个词 Word #1 的首字母。选中字母后，同时按下两个按钮确认，依次验证每个字母。"
             },
             "validateWord": {
               "title": "验证 Word #1 第一个词……",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "descr": "从提示中选中 Word #1 第一个词。同时按下两个按钮予以确认。"
             },
             "andNext": {
               "title": "为所有的词重复操作！"
@@ -2711,7 +2711,7 @@
           "recoveryHowTo3": {
             "reEnterWord": {
               "title": "确认您的恢复短语",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "descr": "按右边按钮，让光标滚动并移到 Word #1 第一个词上。核对后同时按下两个按钮进行确认。"
             },
             "repeat": {
               "title": "为所有的词重复操作！"
@@ -2725,7 +2725,7 @@
           "genuineCheck": {
             "success": {
               "title": "很好！",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "desc": "您的 Ledger {{deviceName}} 是正版的，可以和 Ledger Live 配合使用"
             },
             "buttons": {
               "next": "继续",
@@ -2735,7 +2735,7 @@
           },
           "hideRecoveryPhrase": {
             "title": "保管好您的恢复短语",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+            "paragraph": "如果您的 Nano 无法使用，恢复短语是您访问自己资产的最后机会。因此，您必须将它存放在安全的地方。",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
@@ -3339,7 +3339,7 @@
       "title": "请先清空所有子账户"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "不再支持这种传统地址格式"
     },
     "BtcUnmatchedApp": {
       "title": "这是错误的应用程序",
