@@ -479,13 +479,13 @@
     },
     "availableBalance": "الرصيد المتوفر",
     "frozenAssets": "الأصول المجمدة",
-    "bandwidth": "Bandwidth",
+    "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
     "delegatedAssets": "الأصول المفوضة",
     "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
     "frozenAssetsTooltip": "تُستخدم الأصول المجمدة في عملية تصويت ترون. هذا يمثل العدد الإجمالي للأصوات الخاصة بك.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
+    "bandwidthTooltip": "قم بتجميد الأصول لكسب نطاق ترددي (Bandwidth)",
     "energyTooltip": "قم بتجميد الأصول للحصول على الطاقة",
     "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
@@ -1311,8 +1311,8 @@
     "steps": {
       "amount": {
         "title": "المبلغ",
-        "resourceInfo": "Bandwidth or Energy?",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
+        "resourceInfo": "النطاق الترددي أم الطاقة؟",
+        "bandwidthDescription": "تُستخدم نقاط النطاق الترددي (Bandwidth) لإجراء المعاملات بدون دفع رسوم شبكة TRX. اختر النطاق الترددي لزيادة معاملاتك اليومية المجانية.",
         "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
         "amountLabel": "المبلغ المراد تجميده",
         "available": "متاح: {{amountAvailable}}",
@@ -1330,7 +1330,7 @@
         "success": {
           "title": "",
           "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "text": "ستبدأ في كسب نطاق ترددي (Bandwidth) بمجرد تأكيد الشبكة للتجميد. يمكنك قريبًا التصويت للممثلين الممتازين للحصول على مكافآت أيضًا.",
           "votePending": "التصويت في {{time}}",
           "vote": "تصويت",
           "later": "التصويت لاحقًا"
@@ -1558,7 +1558,7 @@
       "title": "Manage assets",
       "freeze": {
         "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "description": "قم بتجميد TRX لكسب نطاق ترددي (Bandwidth) أو طاقة (Energy). سيمكنك أيضًا التصويت لصالح الممثلين المتميزين."
       },
       "unfreeze": {
         "title": "إزالة التجميد",
@@ -3359,7 +3359,7 @@
     },
     "TronNoFrozenForBandwidth": {
       "title": "لا توجد أصول لإلغاء تجميدها",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "description": "ليس لديك أصول نطاق ترددي (Bandwidth) لإلغاء تجميدها"
     },
     "TronNoFrozenForEnergy": {
       "title": "لا توجد أصول لإلغاء تجميدها",
