@@ -2188,7 +2188,7 @@
   },
   "settings": {
     "title": "设置",
-    "discreet": "Toggle discreet mode",
+    "discreet": "切换隐藏模式",
     "helpButton": "帮助",
     "tabs": {
       "display": "常规",
