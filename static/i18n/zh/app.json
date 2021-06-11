@@ -1797,7 +1797,7 @@
             "title": "确认",
             "success": {
               "title": "已成功添加 {{token}} 资产",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
+              "text": "您现在可以通过您的 Algorand 账户接收和发送 <0>{{token}}</0> 资产。",
               "cta": "查看详情"
             },
             "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
@@ -1807,18 +1807,18 @@
     },
     "claimRewards": {
       "header": "奖励",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
+      "tooltip": "Algorand 奖励会定期发放，每完成一笔交易会自动为您申领奖励。",
       "cta": "申领奖励",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "您没有任何奖励。每完成一笔交易，Algorand 会自动为您申领奖励。接收 ALGO 来开始赚取奖励。",
       "flow": {
         "title": "申领奖励",
         "steps": {
           "starter": {
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "description": "通过持有 Algorand 控制您的资产来轻松接收 Algorand 奖励。",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
-              "access": "Increase the account’s balance to increase rewards.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "delegate": "想要接收奖励，至少要有 1 ALGO 的余额。",
+              "access": "通过增加账户的余额来增加奖励。",
+              "ledger": "通过该账户进行一笔交易，从而申领奖励。"
             },
             "learnMore": "Algorand 奖励机制如何运作？",
             "button": {
@@ -2436,7 +2436,7 @@
     "drawers": {
       "pinHelp": {
         "title": "妥善保管您的 PIN 识别密码",
-        "intro": "During the setup process you choose a PIN code.",
+        "intro": "在设置环节，您选择一个 PIN 识别密码",
         "rules": {
           "1": "<0>总是</0> 亲自选择 PIN 识别密码。",
           "2": "<0>总是</0> 避开他人的视线输入您的 PIN 识别密码。",
