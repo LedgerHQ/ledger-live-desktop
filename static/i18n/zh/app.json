@@ -1114,7 +1114,7 @@
     "listApps": "正在检查应用程序依存关系",
     "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序",
     "swap": {
-      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "发送之前请在您的设备上验证 Swap 掉期交易详情。地址会被安全地交换因此您不必对其进行验证。",
       "confirm": "确认 Swap 掉期交易",
       "amountSent": "发送数额",
       "amountReceived": "待收数额",
@@ -1122,10 +1122,10 @@
       "fees": "费用",
       "provider": "提供方",
       "payoutNetworkFees": "支出费用",
-      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      "payoutNetworkFeesTooltip": "该数额不会在您的设备上显示"
     },
     "sell": {
-      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "notice": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。",
       "confirm": "确认卖出交易"
     }
   },
@@ -1565,12 +1565,12 @@
         "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "投票",
+        "description": "为超级代表投票以赚取奖励。",
         "steps": {
           "vote": {
             "title": "将票投出",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "description": "为一个或多个超级代表投票，从而开始赚取奖励。",
             "footer": {
               "doNotShowAgain": "不再显示",
               "next": "将票投出"
@@ -1578,12 +1578,12 @@
             "info": {
               "message": "SR 超级代表或候选人？",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
+                "title": "超级代表 (SR)",
                 "description": "超级代表在 TRON 波场区块链社区的治理中发挥着重要作用，能够确保基本功能的运作，例如确保区块生成和记账。"
               },
               "candidates": {
                 "title": "候选人",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "description": "由整个代币持有者社区推选出的 127 名个人。每 6 个小时更新一次投票。"
               }
             }
           }
@@ -1598,22 +1598,22 @@
     "modalTitle": "硬币控制",
     "coincontrol": "硬币控制",
     "advanced": "高级选项",
-    "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
+    "ctaDisabled": "该账户没有 UTXO（未使用的交易输出）",
+    "whatIs": "什么是 coin selection （硬币选择）算法？",
+    "rbf": "允许交易可被替换 (Replace-By-Fee)。",
+    "strategy": "硬币选择策略",
+    "selected": "该策略所选币",
     "amount": "发送数额：",
-    "replaceable": "replaceable",
+    "replaceable": "可替换",
     "cannotSelect": {
       "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
       "last": "You need at least one selected"
     },
-    "pending": "pending",
+    "pending": "待定",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pickingStrategy": "UTXO 选择策略",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "DEEP_OUTPUTS_FIRST": "旧币优先（先入先出）",
       "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
       "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
     }
