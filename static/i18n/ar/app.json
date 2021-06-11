@@ -852,9 +852,9 @@
       "cta": "Start learning"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
+      "title": "الرهن مع COSMOS",
       "description": "قم بتفويض عملاتك ATOM من خلال صفحة الحساب وإكسب على مكافآت اليوم",
-      "cta": "Stake Cosmos now"
+      "cta": "رهن Cosmos الآن"
     },
     "buyCrypto": {
       "title": "Buy Crypto",
@@ -867,15 +867,15 @@
       "cta": "Buy back-up pack"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "title": "رهن POLKADOT",
+      "description": "يمكنك الآن أن تقوم برهن وبتأمين وإدارة DOT الخاصة بك مباشرة في ليدجر لايف (Ledger Live)"
     },
     "sell": {
       "title": "sell crypto",
       "description": "Sell Bitcoin with our partner directly from Ledger Live"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
+      "title": "الرهن مع ALGORAND",
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     },
     "swap": {
@@ -1424,7 +1424,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "المبلغ المتلقى في الحساب المفوض سيتم إضافته إلى إجمالي المبلغ المرهون. اختر حسابًا آخر إذا كنت تريد تجنب ذلك."
         }
       }
     }
@@ -1858,7 +1858,7 @@
       "header": "Nominations",
       "nominate": "Nominate",
       "chill": "Clear nominations",
-      "totalStake": "Total Stake",
+      "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
       "commission": "Commission",
       "active": "Active",
