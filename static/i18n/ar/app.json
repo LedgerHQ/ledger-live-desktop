@@ -1079,7 +1079,7 @@
       "undelegatedFrom": "Undelegated from",
       "undelegatedAmount": "المبلغ غير المفوض",
       "rewardFrom": "مكافأة من",
-      "memo": "Memo",
+      "memo": "ملاحظة",
       "assetId": "Asset ID",
       "rewards": "المكافآت المكتسبة",
       "bondedAmount": "المبلغ المقيد",
@@ -2403,7 +2403,7 @@
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
+    "tooltip": "مركز المعلومات",
     "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
       "announcements": "أخبار",
@@ -2909,20 +2909,20 @@
   },
   "families": {
     "stellar": {
-      "memo": "Memo",
+      "memo": "ملاحظة",
       "memoType": {
-        "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
-        "MEMO_ID": "Memo ID",
-        "MEMO_HASH": "Memo Hash",
-        "MEMO_RETURN": "Memo Return"
+        "MEMO_TEXT": "نص الملاحظة",
+        "NO_MEMO": "لا توجد ملاحظة",
+        "MEMO_ID": "مُعرّف الملاحظة",
+        "MEMO_HASH": "رمز تجزئة الملاحظة",
+        "MEMO_RETURN": "إرجاع الملاحظة"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من النوع المستخدم مع المستلم"
     },
     "cosmos": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+      "memo": "ملاحظة",
+      "memoPlaceholder": "اختياري",
+      "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
     }
   },
   "errors": {
@@ -3008,8 +3008,8 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "حقل الملاحظة أطول من المسموح",
+      "description": "يرجى تقليل حجم نص الملاحظة وإعادة المحاولة مرة أخرى"
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "حدث خطأ ما (الخطأ #14)",
@@ -3332,7 +3332,7 @@
       "title": "Please empty all subaccounts first"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "صيغة العنوان القديم هذا لم تعد مدعومة"
     },
     "BtcUnmatchedApp": {
       "title": "That's the wrong app",
@@ -3373,7 +3373,7 @@
       "title": "At least 1 vote is needed"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
+      "title": "صيغة التصويت غير صحيحة",
       "description": "You can only vote using round numbers"
     },
     "TronRewardNotAvailable": {
@@ -3436,13 +3436,13 @@
       "title": "رسوم الشبكة أعلى من 10% من المبلغ"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "صيغة الملاحظة خاطئة"
     },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "يجب أن يكون المبلغ أكثر من {{minAmountFromFormatted}}"
