@@ -2318,7 +2318,7 @@
         "count_plural": "{{count}} tokens"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
+        "title": "连接比特币完整节点",
         "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
       }
     }
@@ -2337,7 +2337,7 @@
     },
     "changePassword": {
       "title": "密码锁",
-      "subTitle": "Change your password"
+      "subTitle": "更改您的密码"
     },
     "setPassword": {
       "title": "密码锁",
@@ -2350,19 +2350,19 @@
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
+    "downloadInProgress": "正在下载更新...",
     "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
+    "checking": "正在检查更新...",
+    "checkSuccess": "更新安装已就绪",
+    "quitAndInstall": "立即安装",
     "updateAvailable": "Update to Ledger Live version {{version}} is available",
     "error": "Error during update. Please download again",
-    "reDownload": "Download again",
+    "reDownload": "重新下载",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "downloadNow": "下载更新"
   },
   "crash": {
-    "title": "Something went wrong",
+    "title": "出错了",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
     "logs": "保存日志",
@@ -2372,12 +2372,12 @@
     "title": "操作历史",
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
-    "titleSuccess": "Operation history saved successfully",
+    "titleSuccess": "已成功保存历史操作记录",
     "cta": "保存",
     "ctaSuccess": "完成",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
+    "noAccounts": "没有可导出的账户",
+    "selectedAccounts": "要包括的账户",
+    "selectedAccounts_plural": "要包括的帐户 ({{count}})",
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
@@ -2417,7 +2417,7 @@
         "description": "Having trouble ? Go on our <0>help page</0>"
       },
       "statusNotOk": {
-        "title": "Ledger live is experiencing issues",
+        "title": "Ledger Live 正遇到问题",
         "learnMore": "了解更多"
       }
     },
@@ -2448,8 +2448,8 @@
         "title1": "How does a recovery phrase work?",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the recovery phrase",
-        "title2": "What happens if I lose access to my Nano?",
+        "link": "有关恢复短语的更多详情",
+        "title2": "如果我的 Nano 无法使用了该怎么办？",
         "paragraph3": "不要担心并遵循以下步骤：",
         "points": {
           "1": "获得一个新的硬件钱包。",
@@ -2458,7 +2458,7 @@
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my recovery phrase?",
+        "title": "我应该将恢复短语保存在哪里？",
         "points": {
           "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
           "2": "<0>NEVER</0> share your 24 words with anyone.",
@@ -2797,12 +2797,12 @@
       }
     },
     "quizz": {
-      "heading": "Quiz",
+      "heading": "测验",
       "title": "Now game on!",
       "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
       "buttons": {
         "start": "Let’s take the quiz",
-        "next": "Next question",
+        "next": "下一题",
         "finish": "Finish quiz"
       },
       "questions": {
@@ -2814,11 +2814,11 @@
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "恭喜！",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "不正确！",
               "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
             }
           }
@@ -2843,16 +2843,16 @@
         "3": {
           "text": "When I connect my Nano to the Ledger app, my private key is...",
           "answers": {
-            "1": "Still offline",
+            "1": "依旧处于离线状态",
             "2": "Briefly connected to the internet"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "恭喜！",
               "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "不正确！",
               "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
             }
           }
@@ -2887,21 +2887,21 @@
       "withdrawUnbonded": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
-      "send": "recipient",
+      "send": "接收方",
       "delegate": "验证器",
       "undelegate": "验证器",
-      "claimReward": "rewards recipient",
-      "optIn": "recipient",
+      "claimReward": "奖励接收方",
+      "optIn": "接收方",
       "nominate": "验证器"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "票数 ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
+    "title": "使用条款",
+    "read": "阅读使用条款",
     "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
     "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
     "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
@@ -2969,7 +2969,7 @@
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "description": "请重试操作"
     },
     "CosmosBroadcastCodeUnauthorized": {
       "title": "Unauthorized signature",
@@ -2985,7 +2985,7 @@
     },
     "CosmosBroadcastCodeInvalidAddress": {
       "title": "无效地址",
-      "description": "Please check the address and try again"
+      "description": "请核对地址并再次尝试"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Something went wrong (Error #8)",
@@ -2993,7 +2993,7 @@
     },
     "CosmosBroadcastCodeUnknownAddress": {
       "title": "未知地址",
-      "description": "Please check the address and try again"
+      "description": "请核对地址并再次尝试"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
       "title": "硬币不足",
@@ -3053,15 +3053,15 @@
     },
     "DeviceSocketNoBulkStatus": {
       "title": "The connection failed",
-      "description": "Please try again."
+      "description": "请重试。"
     },
     "DisconnectedDevice": {
       "title": "抱歉，您的设备似乎已断开连接",
-      "description": "Please reconnect and try again."
+      "description": "请重新连接并重试。"
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "抱歉，您的设备似乎已断开连接",
-      "description": "Please reconnect and try again."
+      "description": "请重新连接并重试。"
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
@@ -3081,7 +3081,7 @@
     },
     "HardResetFail": {
       "title": "抱歉，无法重置",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "description": "请重试，如果问题仍然存在则请联系 Ledger 客服。"
     },
     "LatestMCUInstalledError": {
       "title": "Sorry, there's nothing to update",
@@ -3165,30 +3165,30 @@
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
-      "description": "Please try again"
+      "description": "请重试"
     },
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
-      "description": "Please try again"
+      "description": "请重试"
     },
     "RPCHostRequired": {
-      "title": "Host is required."
+      "title": "需要输入主机。"
     },
     "RPCHostInvalid": {
-      "title": "Enter valid host."
+      "title": "输入有效的主机。"
     },
     "RPCUserRequired": {
       "title": "需要输入 RPC 用户名"
     },
     "RPCPassRequired": {
-      "title": "RPC Password is required"
+      "title": "需要输入 RPC 密码"
     },
     "SatStackAccessDown": {
       "title": "无法连接到完整节点",
       "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
+      "title": "正在进行节点同步……",
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SatStackVersionTooOld": {
@@ -3196,7 +3196,7 @@
       "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
+      "title": "账户未经完整节点扫描",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "StratisDown2021Warning": {
@@ -3204,16 +3204,16 @@
       "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
+      "title": "汇率失效",
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "description": "请重试。"
     },
     "TimeoutTagged": {
       "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "description": "出现超时。"
     },
     "TransportError": {
       "title": "Something went wrong. Please reconnect your device",
@@ -3255,7 +3255,7 @@
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
-      "title": "App update required",
+      "title": "需要更新应用程序",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "DeviceOnDashboardExpected": {
@@ -3263,15 +3263,15 @@
       "description": "请返回设备上的功能面板"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "抱歉，请重试 (连接错误)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "抱歉，请重试 (连接已关闭)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "出错了",
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
