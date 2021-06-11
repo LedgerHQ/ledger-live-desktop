@@ -2408,7 +2408,7 @@
   },
   "informationCenter": {
     "tooltip": "资讯中心",
-    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "ongoingIncidentsTooltip": "有 {{incidentCount}} 个正在发生的事件",
     "tabs": {
       "announcements": "新闻",
       "announcementsUnseen": "新闻 ({{unseenCount}})",
@@ -2439,7 +2439,7 @@
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
           "1": "<0>总是</0> 亲自选择 PIN 识别密码。",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
+          "2": "<0>总是</0> 避开他人的视线输入您的 PIN 识别密码。",
           "3": "如有需要，您可以更改自己的 PIN 识别密码。",
           "4": "Three wrong PIN code entries in a row will reset the device.",
           "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
@@ -3112,11 +3112,11 @@
     },
     "ManagerAppDepInstallRequired": {
       "title": "需要安装 {{dependency}} 应用程序",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "description": "如果已经安装 {{dependency}} 应用程序，请重新安装最新版本"
     },
     "ManagerAppDepUninstallRequired": {
       "title": "抱歉，此应用程序是必需的",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "description": "您必须首先卸载所有需要 {{appName}} 应用程序的应用"
     },
     "ManagerDeviceLocked": {
       "title": "您的设备已锁定",
@@ -3124,16 +3124,16 @@
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "请卸载您设备上的所有应用程序",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "description": "访问您加密资产的私钥将会在您的设备上安全储存，而您则必须将其备份到您的恢复表中。"
     },
     "ManagerNotEnoughSpace": {
       "title": "抱歉，剩余存储空间不足",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "description": "请卸载一些应用程序以释放空间。访问您加密资产的私钥将会在您的设备上安全储存。"
     },
     "ManagerQuitPage": {
       "install": {
         "title": "完成应用程序的安装进程？",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "description": "退出管理器将会终止应用程序的安装。请完成列队中应用程序的安装。",
         "stay": "完成安装"
       },
       "uninstall": {
