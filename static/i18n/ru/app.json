@@ -103,13 +103,13 @@
       "UNFREEZE": "Разморожено",
       "REWARD": "Запрошенное вознаграждение",
       "FEES": "Комиссия",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
+      "OPT_IN": "Выбрать",
+      "OPT_OUT": "Отказаться",
       "CLOSE_ACCOUNT": "Закрыть счёт",
       "BOND": "Заблокировать",
       "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
-      "SLASH": "Slash",
+      "SLASH": "Сократить",
       "WITHDRAW_UNBONDED": "Вывод разблокированной суммы",
       "NOMINATE": "Назначение",
       "CHILL": "Отменить назначения"
@@ -492,7 +492,7 @@
   },
   "exchange": {
     "title": "Покупка и продажа криптовалюты",
-    "reset": "Reset flow",
+    "reset": "Сбросить",
     "verifyAddress": "Убедитесь, что показанный адрес в точности совпадает с адресом на экране устройства",
     "buy": {
       "header": "Покупка криптовалюты через {{provider}}",
@@ -591,8 +591,8 @@
       "active": {
         "accounts": "Счёт",
         "amountSupplied": "Открыть займ",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
+        "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
+        "accruedInterests": "Начисленные проценты",
         "accruedInterestsTooltip": "Проценты с кредитования",
         "status": "Состояние счёта",
         "actions": "Действия"
@@ -703,7 +703,7 @@
           },
           "broadcastError": "Вероятно, транзакция не удалась. Прежде чем повторить попытку, пожалуйста, подождите минуту, а затем проверьте историю транзакций.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "Выведенная сумма отображается в {{ tokenName }}. {{ tokenName }} — это токены ERC20, которые вы зарабатываете, сдавая свои активы в кредит."
           }
         }
       }
@@ -884,7 +884,7 @@
     },
     "lending": {
       "title": "Кредиты в криптовалюте",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "description": "Кредитуйте стейблкоины в протокол Compound и получайте вознаграждения"
     },
     "blackfriday": {
       "title": "ЧЁРНАЯ ПЯТНИЦА",
@@ -904,7 +904,7 @@
   "currentAddress": {
     "title": "Текущий адрес",
     "for": "Адрес для <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
+    "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
     "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его."
   },
   "emptyState": {
@@ -1805,7 +1805,7 @@
       "header": "Вознаграждения",
       "tooltip": "Вознаграждения в токенах Algorand распределяются регулярно и запрашиваются автоматически при совершении транзакции.",
       "cta": "Получить вознаграждения",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "У вас нет вознаграждений. Вознаграждения в Algorand начисляются автоматически при совершении транзакции. Получите токены ALGO, чтобы начать получать вознаграждения.",
       "flow": {
         "title": "Получение вознаграждения",
         "steps": {
@@ -1844,9 +1844,9 @@
   },
   "polkadot": {
     "lockedBalance": "Заблокировано",
-    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
+    "lockedTooltip": "Чтобы получать вознаграждения, вы должны заблокировать активы до назначения валидаторов.",
     "unlockingBalance": "Разблокировка",
-    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
+    "unlockingTooltip": "При разблокировке активов вы не сможете пользоваться ими ещё 28 дней. Только после этого их можно будет вывести.",
     "unlockedBalance": "Не заблокированные",
     "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
     "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, её невозможно будет просмотреть на устройстве",
@@ -1876,11 +1876,11 @@
       "oversubscribedTooltip": "Вознаграждения получают только лучшие номинаторы {{maxNominatorRewardedPerValidator}} с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
       "electionOpen": "Сейчас идёт подбор новых валидаторов. Следовательно, операции в стейкинга доступны не более 15 минут.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
+      "electionOpenTooltip": "Эта операция отключена в процессе выбора валидаторов",
       "externalControllerTooltip": "Этот счёт контролируется другим счётом.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Этот скрытый счёт контролируется другим счётом с адресом <0>{{address}}</0>.</0><1>Операции по стейкингу на отдельных скрытых счетах не поддерживаются в Ledger Live. Воспользуйтесь альтернативным кошельком, например Polkadot.js</1>",
       "externalStashTooltip": "Этот счёт контролирует другой счёт.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Этот счёт отвечает за скрытый счёт с адресом <0>{{address}}</0>.</0><1>Операции по стейкингу на отдельных скрытых счетах не поддерживаются в Ledger Live. Воспользуйтесь альтернативным кошельком, например Polkadot.js</1>",
       "showInactiveNominations": "Показать всех номинаторов ({{count}})",
       "hideInactiveNominations": "Показать только активных номинаторов",
       "noActiveNominations": "Нет активных номинаторов.",
@@ -1891,8 +1891,8 @@
       "header": "Разблокировка активов",
       "headerTooltip": "Будут доступны спустя 28 дней после разблокировки",
       "withdrawUnbonded": "Сумма вывода ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
+      "withdrawTooltip": "Разблокированная сумма будет добавлена к вашему балансу.",
+      "noUnlockedWarning": "У вас пока нет разблокированных сумм, которые можно вывести.",
       "rebond": "Повторно заблокировать",
       "unbonded": "Не заблокированные"
     },
@@ -2239,7 +2239,7 @@
     },
     "profile": {
       "password": "Блокировка паролем",
-      "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
+      "passwordDesc": "Установите пароль для защиты данных Ledger Live на вашем компьютере, включая названия счетов, информацию о балансе, транзакциях и публичных адресах.",
       "passwordAutoLock": "Автоматическая блокировка",
       "passwordAutoLockDesc": "Автоматически блокировать Ledger Live при бездействии.",
       "changePassword": "Сменить пароль",
@@ -2250,7 +2250,7 @@
       "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории транзакций и настроек.",
       "hardReset": "Сбросить",
       "analytics": "Аналитика",
-      "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
+      "analyticsDesc": "Включите аналитику, чтобы помочь компании Ledger совершенствовать пользовательский интерфейс. Сюда относятся клики, посещения страниц, перенаправления, действия (отправка, получение, блокировка и т. п.), прокрутка в конец страницы, установка (удаление) и просмотр версии приложений, количество счетов, криптоактивы и операции, продолжительность сеансов, тип устройства, а также прошивка Ledger.",
       "reportErrors": "Отчёты об ошибках",
       "reportErrorsDesc": "Автоматически отправлять отчёты и помогать Ledger совершенствовать продукты.",
       "launchOnboarding": "Настройка устройства",
@@ -2298,7 +2298,7 @@
     "repairDevice": {
       "title": "Ремонт устройства Ledger",
       "descSettings": "Используйте этот инструмент для восстановления устройства Ledger, если оно зависло в ходе обновления.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
+      "desc": "Для пользователей Ledger Nano S: укажите состояние, отображаемое на экране устройства. Пользователям Nano X и Blue: воспользуйтесь Справочным центром.",
       "button": "Исправить"
     },
     "exportLogs": {
@@ -2313,13 +2313,13 @@
       },
       "tokenBlacklist": {
         "title": "Скрытые токены",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "desc": "Чтобы скрыть токены, перейдите к списку токенов, нажмите по названию и удерживайте, а затем выберите «Скрыть токен».",
         "count": "{{count}} токен",
         "count_plural": "Токенов: {{count}}"
       },
       "fullNode": {
         "title": "Подключение полной ноды Биткойна",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "desc": "Настройте полную Биткойн-ноду для синхронизации и отправки транзакций без использования обозревателей Ledger."
       }
     }
   },
@@ -2363,7 +2363,7 @@
   },
   "crash": {
     "title": "Что-то пошло не так",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
+    "description": "Чтобы узнать о возможных решениях, используйте наши руководства. Если проблема не уходит, сохраните логи, используя кнопку ниже, и отправьте их в Поддержку Ledger.",
     "troubleshooting": "Нажмите здесь, чтобы узнать о возможных решениях",
     "logs": "Хранить логи",
     "dataFolder": "Посмотреть пользовательские данные"
@@ -2371,14 +2371,14 @@
   "exportOperationsModal": {
     "title": "История операций",
     "desc": "Выберите счета, историю которых вы хотите хранить",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
+    "descSuccess": "CSV-файл с историей операций успешно сохранён в выбранной папке",
     "titleSuccess": "История операций успешно сохранена",
     "cta": "Сохранить",
     "ctaSuccess": "Готово",
     "noAccounts": "Нет счетов для экспорта",
     "selectedAccounts": "Счета, которые будут включены",
     "selectedAccounts_plural": "Счета, которые будут включены ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "Контрольные значения в экспорте предоставлены только в информационных целях. Не полагайтесь на такие данные в бухгалтерских, налоговых, нормативных или юридических целях, поскольку они представляют собой лишь оценочную стоимость активов на момент совершения транзакций и экспорта в рамках методов оценки нашего поставщика услуг – Kaiko"
   },
   "language": {
     "system": "Использовать системный",
@@ -3161,7 +3161,7 @@
       "title": "Адрес получения неактивен. Чтобы активировать его, укажите сумму не менее {{minimalAmount}}"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "На основном счёте ETH недостаточно средств для покрытия комиссии сети"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают",
@@ -3185,19 +3185,19 @@
     },
     "SatStackAccessDown": {
       "title": "Не удалось подключиться к полной ноде",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "description": "Убедитесь, что SatStack и ваша нода запущены. Если проблема не исчезнет, проверьте настройку полной ноды в Настройках."
     },
     "SatStackStillSyncing": {
       "title": "Выполняется синхронизация ноды...",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "description": "Подождите, пока ваша нода синхронизируется. Отправка невозможна, так как баланс вашего Биткойн-счёта может быть неактуальным."
     },
     "SatStackVersionTooOld": {
       "title": "Пожалуйста, обновите SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "description": "Вы используете устаревшую версию SatStack. Она может содержать ошибки или проблемы совместимости."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "title": "Счёт не просканирован полной нодой",
+      "description": "Настройте полную боду для сканирования счетов, связанных с этим устройством. Ваша полная нода должна сначала просканировать блокчейн на предмет наличия данного счёта, прежде чем вы сможете добавить его в свой Портфель."
     },
     "StratisDown2021Warning": {
       "title": "Блокчейн Stratis был изменён и теперь может работать некорректно.",
