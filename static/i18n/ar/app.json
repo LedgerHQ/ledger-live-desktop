@@ -2254,7 +2254,7 @@
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
       "hardReset": "إعادة تعيين",
       "analytics": "Analytics",
-      "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
+      "analyticsDesc": "قم بتمكين إجراء التحليلات من أجل مساعدة ليدجر على تحسين تجربة المستخدم. يتضمن ذلك النقرات، وزيارات الصفحة، وعمليات إعادة التوجيه، والإجراءات (الإرسال، والاستلام، والقفل، وما إلى ذلك)، وتحريكات نهاية الصفحة، والتثبيت وإلغاءه، وإصدار التطبيق، وعدد الحسابات والأصول المشفرة والعمليات، ومدد الجلسات، ونوع جهاز ليدجر والبرامج الثابتة.",
       "reportErrors": "Bug reports",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
       "launchOnboarding": "Device setup",
@@ -2301,7 +2301,7 @@
     },
     "repairDevice": {
       "title": "إصلاح جهاز ليدجر الخاص بك",
-      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
+      "descSettings": "استخدم هذا لاستعادة جهاز ليدجر الخاص بك إذا توقف عن الاستجابة أثناء إحدى عمليات تحديث البرنامج الثابت.",
       "desc": "لمستخدمي ليدجر نانو إس (Nano S)، يرجى إختيار الحالة المعروضة على جهازك. أما بالنسبة لمستخدمي نانو إكس (Nano X) وBlue، يرجى الرجوع إلى مركز المساعدة.",
       "button": "Repair"
     },
@@ -3080,10 +3080,10 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "مطلوب تحديث البرنامج الثابت أو التطبيق",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "description": "يرجى استخدام المدير لإلغاء تثبيت جميع التطبيقات، ثم تحقق مما إذا كان تحديث البرنامج الثابت متاحًا قبل إعادة تثبيتهم مرة أخرى"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
+      "title": "لم يتم التعرف على البرنامج الثابت للجهاز",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "HardResetFail": {
@@ -3123,7 +3123,7 @@
       "description": "يرجى إلغاء قفله"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
+      "title": "إلغاء تثبيت جميع التطبيقات من على جهازك",
       "description": "ستبقى المفاتيح الخاصة للوصول إلى أصولك المشفرة آمنة على جهازك ويجب نسخها احتياطيًا في ورقة الاسترداد الخاصة بك."
     },
     "ManagerNotEnoughSpace": {
@@ -3321,7 +3321,7 @@
       "list": {
         "1": "افصل كبل الUSB وأعد توصيله دون الضغط على أي أزرار.",
         "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "3": "افتح المدير وانقر فوق \"تحديث البرنامج الثابت\"."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
