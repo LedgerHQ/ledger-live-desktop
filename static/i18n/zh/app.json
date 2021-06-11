@@ -2061,12 +2061,12 @@
         "withdrawUnbonded": {
           "title": "提取",
           "description": "经过 28 天的解绑期后即可提取已解绑的资产。",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "info": "您此后即可将已解绑的资产提取到您的可用余额。"
         },
         "chill": {
           "title": "清除提名",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "description": "清空所有提名并停止赚取奖励。",
+          "info": "已绑定的资产将会保持绑定状态。若您将其解绑，那么它们将在 28 天后可用。"
         }
       },
       "steps": {
@@ -2087,7 +2087,7 @@
           "pending": {
             "title": "正在播送交易……"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     }
@@ -2109,7 +2109,7 @@
     "durationDays": "{{count}} 天",
     "durationDays_plural": "{{count}} 天",
     "howItWorks": "委托机制如何运作",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "delegationEarn": "您现在可以将您的账户委托出去，以赚取 {{name}} 权益质押奖励。",
     "earnRewards": "赚取奖励",
     "overdelegated": "过度委托",
     "status": "状态",
@@ -2117,7 +2117,7 @@
       "steps": {
         "starter": {
           "title": "赚取权益质押奖励",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "description": "将您的 Tezos 账户委托给第三方验证器，以便赚取权益质押奖励，您的资产依然会绝对安全并处于您的掌控之中",
           "bullet": {
             "delegate": "委托出去的账户依旧为您所有。",
             "access": "您可以随时访问您的资产。",
@@ -2141,17 +2141,17 @@
           "select": "选择",
           "yield": "预估收益 {{amount}}",
           "randomly": "随机选择的验证器",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+          "termsAndPrivacy": "将您的投票权委托出去并不能保证从您的验证器获得任何奖励。"
         },
         "validator": {
           "title": "选择验证器",
           "description": "您可以通过对比预估奖励率来选择验证器",
           "customValidator": "自定义验证器",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "providedBy": "收益率由 <1><0>{{name}}</0></1> 提供"
         },
         "custom": {
           "title": "自定义验证器",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "text": "请输入您账户想要委托的自定义验证器的地址。",
           "button": "使用验证器"
         },
         "undelegate": {
@@ -2163,10 +2163,10 @@
           "success": {
             "title": "委托已发送",
             "titleUndelegated": "结束委托",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
+            "text": "委托交易已经成功播送。取决于该验证器的情况，您在约 40 天后应可赚取第一笔奖励。",
             "textUndelegated": "操作一经确认，您的账户就会结束委托。您随时可以再次委托您的账户。"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -2183,7 +2183,7 @@
     "hidden": {
       "close": "确认",
       "undo": "再次显示",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "disclaimer": "此横幅在有新公告之前不会再显示"
     }
   },
   "settings": {
