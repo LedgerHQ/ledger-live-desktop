@@ -2281,10 +2281,10 @@
     "resetFallbackModal": {
       "title": "需要用户操作",
       "part1": "Could not delete cache folder. Please delete the folder manually:",
-      "part2": "Click the Open folder button, the ",
+      "part2": "点击 Open（打开）文件夹按钮，",
       "part3": "应用程序将关闭",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "part4": "，并手动删除 \"sqlite\" 文件夹。",
+      "part5": "然后您可以正常重启应用程序。"
     },
     "removeAccountModal": {
       "title": "移除账号",
@@ -2792,18 +2792,18 @@
         "setUpNanoWallet": {
           "title": "让我们设置您的 Nano 吧！",
           "description": "We'll start by setting up your Nano security.",
-          "CTA": "Let’s do this!"
+          "CTA": "动手吧！"
         }
       }
     },
     "quizz": {
       "heading": "测验",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "title": "来做个小游戏！",
+      "descr": "回答 3 个简单问题，消除您对硬币钱包的常见误解。",
       "buttons": {
-        "start": "Let’s take the quiz",
+        "start": "接受测验",
         "next": "下一题",
-        "finish": "Finish quiz"
+        "finish": "完成测验"
       },
       "questions": {
         "1": {
@@ -3033,7 +3033,7 @@
     },
     "DeviceNotGenuine": {
       "title": "可能不是正版",
-      "description": "Request assistance from Ledger Support"
+      "description": "向 Ledger 客服寻求帮助"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "抱歉，请重试 (genuine-close)",
@@ -3064,15 +3064,15 @@
       "description": "请重新连接并重试。"
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "端点无效",
+      "description": "请提供有效端点"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "抱歉，费用估算失败",
+      "description": "尝试设置自定义费用（状态：{{status}}）"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
+      "title": "固件或应用程序需更新",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
     },
     "FirmwareNotRecognized": {
@@ -3127,30 +3127,30 @@
       "install": {
         "title": "Finish app installation in progress?",
         "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
-        "stay": "Finish install"
+        "stay": "完成安装"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
-        "stay": "Finish uninstalling"
+        "title": "完成应用程序的卸载进程？",
+        "description": "退出管理器会终止应用程序的卸载进程。",
+        "stay": "完成卸载"
       },
       "update": {
-        "title": "Finish app updates in progress?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
-        "stay": "Finish updates"
+        "title": "完成应用程序的更新进程？",
+        "description": "退出管理器会终止应用程序的更新进程。",
+        "stay": "完成更新"
       },
       "quit": "退出管理器"
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "最后卸载比特币或以太坊应用程序"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "抱歉，网络连接似乎已断开",
+      "description": "请检查您的网络连接。"
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
+      "title": "抱歉，没有找到账户",
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
@@ -3164,11 +3164,11 @@
       "title": "The ETH balance in the parent account is insufficient for network fees"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
+      "title": "密码不匹配",
       "description": "请重试"
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
+      "title": "输入的密码不正确",
       "description": "请重试"
     },
     "RPCHostRequired": {
@@ -3208,7 +3208,7 @@
       "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
+      "title": "抱歉，服务器响应超时",
       "description": "请重试。"
     },
     "TimeoutTagged": {
@@ -3228,7 +3228,7 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
+      "title": "请打开 {{appName}} 应用",
       "description": "Keep the {{appName}} app open while we find your accounts"
     },
     "UnexpectedBootloader": {
@@ -3279,7 +3279,7 @@
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "此 {{currencyName}} 地址无效"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Recipient address is the same as the sender address"
@@ -3302,7 +3302,7 @@
       "title": "费用为必填项"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "这可能太低。请增加"
     },
     "UnknownMCU": {
       "title": "未知 MCU 版本",
@@ -3401,7 +3401,7 @@
       "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "没有足够能量发送该代币"
     },
     "PairingFailed": {
       "title": "配对不成功",
@@ -3415,7 +3415,7 @@
       "title": "Please enable contract data in the Ethereum app settings"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "无效的 XRP 目的地标签"
     },
     "NotEnoughBalanceToDelegate": {
       "title": "余额不足，无法委托"
@@ -3430,7 +3430,7 @@
       "title": "Balance cannot be below {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "请打开 {{expected}} 应用程序"
     },
     "FeeTooHigh": {
       "title": "Network fees are above 10% of the amount"
@@ -3460,10 +3460,10 @@
       "title": "All bonded assets will be unbonded if < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "您没有已解绑的资产"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "您没有提名"
     },
     "PolkadotAllFundsWarning": {
       "title": "Ensure you have enough balance left for future transaction fees"
@@ -3472,10 +3472,10 @@
       "title": "Balance cannot be below 1 DOT. Send max to empty accountd"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "您必须绑定至少 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "您已超过了解绑限额"
     },
     "PolkadotValidatorsRequired": {
       "title": "您必须至少选择一个验证器"
