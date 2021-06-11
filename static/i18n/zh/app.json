@@ -2152,7 +2152,7 @@
         "custom": {
           "title": "自定义验证器",
           "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "button": "使用验证器"
         },
         "undelegate": {
           "title": "解除账户委托"
@@ -2161,7 +2161,7 @@
           "title": "确认",
           "label": "确认",
           "success": {
-            "title": "Delegation sent",
+            "title": "委托已发送",
             "titleUndelegated": "结束委托",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
             "textUndelegated": "操作一经确认，您的账户就会结束委托。您随时可以再次委托您的账户。"
@@ -2173,39 +2173,39 @@
     "contextMenu": {
       "topUp": "接收更多",
       "redelegate": "更换验证器",
-      "stopDelegation": "End delegation"
+      "stopDelegation": "结束委托"
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "所有 {{currency}} 账户的概览"
   },
   "carousel": {
     "hidden": {
       "close": "确认",
-      "undo": "Show again",
+      "undo": "再次显示",
       "disclaimer": "This banner will not show up again until there is a new announcement"
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "设置",
     "discreet": "Toggle discreet mode",
     "helpButton": "帮助",
     "tabs": {
-      "display": "General",
-      "currencies": "Crypto assets",
-      "help": "Help",
-      "about": "About",
-      "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "display": "常规",
+      "currencies": "加密资产",
+      "help": "帮助",
+      "about": "关于",
+      "experimental": "实验性功能",
+      "accounts": "账户"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
+        "title": "导出账户",
         "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
         "button": "导出"
       },
       "operations": {
-        "title": "Operation history",
+        "title": "操作历史记录",
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
@@ -2220,7 +2220,7 @@
     "display": {
       "language": "Display language",
       "languageDesc": "Set the language displayed in Ledger Live.",
-      "theme": "Theme",
+      "theme": "主题",
       "themeDesc": "Select the theme.",
       "counterValue": "Countervalue",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
@@ -2259,23 +2259,23 @@
     "help": {
       "version": "Version",
       "releaseNotesBtn": "Details",
-      "termsBtn": "Read",
-      "faq": "Ledger Support",
+      "termsBtn": "阅读",
+      "faq": "Ledger 客服",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
+      "terms": "使用条款",
       "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
+      "privacy": "隐私政策",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
+      "title": "重置 Ledger Live",
       "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
     },
     "softResetModal": {
-      "title": "Clear cache",
+      "title": "清除缓存",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
@@ -2326,26 +2326,26 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "新建密码"
       },
       "confirmPassword": {
         "label": "确认密码"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "当前密码"
       }
     },
     "changePassword": {
-      "title": "Password lock",
+      "title": "密码锁",
       "subTitle": "Change your password"
     },
     "setPassword": {
-      "title": "Password lock",
-      "subTitle": "Set the password",
+      "title": "密码锁",
+      "subTitle": "设置密码",
       "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
     },
     "disablePassword": {
-      "title": "Disable password lock",
+      "title": "禁用密码锁",
       "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
@@ -2365,11 +2365,11 @@
     "title": "Something went wrong",
     "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
     "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "logs": "保存日志",
+    "dataFolder": "查看用户数据"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
+    "title": "操作历史",
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
@@ -2381,39 +2381,39 @@
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
-    "system": "Use system language",
+    "system": "使用系统语言",
     "switcher": {
       "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese"
+      "fr": "Français",
+      "ru": "Русский",
+      "es": "Español",
+      "zh": "中文（简体）"
     }
   },
   "theme": {
-    "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "选择系统主题",
+    "light": "亮色",
+    "dusk": "昏黄",
+    "dark": "暗色"
   },
   "toastOverlay": {
     "toastType": {
       "announcement": "新闻",
-      "operation": "Operation"
+      "operation": "操作"
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
+    "tooltip": "资讯中心",
     "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
     "tabs": {
-      "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
-      "serviceStatus": "Status",
-      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+      "announcements": "新闻",
+      "announcementsUnseen": "新闻 ({{unseenCount}})",
+      "serviceStatus": "状态",
+      "serviceStatusIncidentsOngoing": "状态 ({{incidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger live is up and running",
+        "title": "Ledger Live 已启动并正在运行",
         "description": "Having trouble ? Go on our <0>help page</0>"
       },
       "statusNotOk": {
@@ -2423,7 +2423,7 @@
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
+        "title": "目前没有新闻",
         "desc": "You will find here all the news related to Ledger and Ledger live"
       }
     }
@@ -2431,7 +2431,7 @@
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
+        "title": "妥善保管您的 PIN 识别密码",
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
           "1": "<0>Always</0> choose a PIN code yourself.",
@@ -2452,7 +2452,7 @@
         "title2": "What happens if I lose access to my Nano?",
         "paragraph3": "Don't worry and follow these steps:",
         "points": {
-          "1": "Get a new hardware wallet.",
+          "1": "获得一个新的硬件钱包。",
           "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
           "3": "Enter your recovery phrase on your new device to restore access to your crypto."
         }
@@ -2484,10 +2484,10 @@
       "welcome": {
         "title": "Welcome to Ledger",
         "description": "Safely manage your crypto from your computer.",
-        "cta": "Get started",
+        "cta": "快速入门",
         "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
         "languageWarning": {
-          "title": "Get started in {{language}}",
+          "title": "以 {{language}} 开始",
           "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
           "cta": "Got it"
         }
@@ -2520,11 +2520,11 @@
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
-          "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
+          "getStarted": "快速入门",
+          "pinCode": "PIN 识别密码",
+          "recoveryPhrase": "恢复短语",
           "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "pairNano": "连接 Nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
