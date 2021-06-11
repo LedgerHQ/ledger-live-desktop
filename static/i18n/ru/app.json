@@ -109,7 +109,7 @@
       "BOND": "Заблокировать",
       "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
-      "SLASH": "Сократить",
+      "SLASH": "Штраф",
       "WITHDRAW_UNBONDED": "Вывод разблокированной суммы",
       "NOMINATE": "Назначение",
       "CHILL": "Отменить назначения"
@@ -154,11 +154,11 @@
     "lend": "Кредитование"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
+    "placeholder": "Выделите счёт, чтобы он отобразился здесь.",
     "tooltip": "Избранные счета"
   },
   "bridge": {
-    "modalTitle": "Open Device Bridge",
+    "modalTitle": "Откройте мост для устройств",
     "openHeader": "Открывайте доступ к счетам на устройстве через WebSocket",
     "openDescription": "Открытие моста даёт сторонним приложениям доступ ко всем вашим счетам.",
     "openedHeader": "Мост для {{appName}} открыт",
@@ -405,9 +405,9 @@
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
+              "header": "Скачайте и запустите Ledger SatStack",
+              "description": "Ledger SatStack — это небольшое приложение, которое позволяет Ledger Live взаимодействовать с вашей полной нодой. Скачайте и запустите его, прежде чем продолжить.",
+              "disclaimer": "SatStack должно быть запущено, чтобы Ledger Live могло подключиться к вашей полной боде. Подумайте о том, чтобы включить его Автозагрузку при включении компьютера.",
               "cta": "Скачать SatStack"
             },
             "satstack-disconnected": {
@@ -416,11 +416,11 @@
             },
             "satstack-outdated": {
               "header": "Обновите SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "description": "Вы используете устаревшую версию SatStack. Она может содержать ошибки или проблемы совместимости."
             },
             "node-disconnected": {
               "header": "Не удалось подключиться к полной ноде",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "description": "Убедитесь, что ваш полная нода доступна и что вы использовали правильные параметры подключения."
             },
             "invalid-chain": {
               "header": "invalid-chain title",
@@ -436,11 +436,11 @@
             },
             "syncing": {
               "header": "Выполняется синхронизация ноды…",
-              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+              "description": "Недавние транзакции могут быть пока не отображены, поэтому баланс на Биткойн-счетах может быть неактуальным. Старайтесь поддерживать бесперебойную работу ноды, чтобы она постоянно синхронизировалась."
             },
             "scanning": {
               "header": "Выполняется сканирование счёта...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "Вы можете добавить свои счета после окончания сканирования счёта. Будут удалены все Биткойн-счета, которые были добавлены ранее посредством обозревателей Ledger."
             }
           }
         },
