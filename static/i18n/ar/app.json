@@ -137,7 +137,7 @@
     "advanced": "متقدم",
     "custom": "مُخصّص",
     "fast": "سريع",
-    "high": "عالٍ",
+    "high": "مرتفعة",
     "low": "منخفضة",
     "slow": "بطىء",
     "standard": "اعتيادية",
@@ -774,7 +774,7 @@
       "name|asc": "Name A-Z",
       "name|desc": "Name Z-A",
       "balance|asc": "أدنى رصيد",
-      "balance|desc": "Highest Balance"
+      "balance|desc": "أعلى رصيد"
     },
     "range": {
       "day": "يوم",
