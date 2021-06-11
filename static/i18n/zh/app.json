@@ -1881,7 +1881,7 @@
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
+      "externalControllerTooltip": "此账户由另一个账户控制。",
       "externalControllerUnsupported": "<0>该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。</0><1>如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
       "externalStashUnsupported": "<0>该账户控制着一个地址为 <0>{{address}}</0> 的存储账户。</0><1> Ledger Live 不支持在一个单独的存储账户上的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
@@ -1954,7 +1954,7 @@
       "rewardDestination": {
         "label": "奖励目的地",
         "stash": "可用余额",
-        "stashDescription": "Rewards are credited to your available balance.",
+        "stashDescription": "奖励被记入您的可用余额。",
         "staked": "已绑定余额",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
         "optionTitle": "备注",
@@ -2464,11 +2464,11 @@
       "whereToHide": {
         "title": "我应该将恢复短语保存在哪里？",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
+          "1": "<0>切勿</0> 在电脑、智能手机或任何其他设备上保存您的恢复短语。也不要以图片形式保存。",
           "2": "<0>切勿</0> 将您的 24 个助记词告诉任何人。",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
+          "3": "<0>总是</0> 将其保管在隐秘、安全的地方。",
           "4": "Ledger 从来不会要求您提供恢复短语。",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "5": "如果任何个人或应用程序要求您提供恢复短语，请将其视为骗局！"
         }
       }
     },
@@ -2479,7 +2479,7 @@
         "gotIt": "知道了"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
+        "title": "我们只推荐您使用 Ledger 恢复短语",
         "descr": "Ledger 无法保证外部其他方的恢复短语的安全性。如果您的恢复短语不是 Ledger 生成的，我们建议您将您的 Nano 设为新设备。",
         "gotIt": "知道了"
       }
@@ -2513,7 +2513,7 @@
           "2": {
             "heading": "连接设备",
             "title": "请连接您的{{deviceName}}",
-            "description": "Is your device already set up? Connect it to the app!"
+            "description": "设备已经设置好了？将其连接到应用程序！"
           },
           "3": {
             "heading": "还原设备",
@@ -2556,15 +2556,15 @@
           "deviceHowTo": {
             "turnOn": {
               "title": "启动 Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "descr": "使用 USB 数据线，将您的设备连接到您的电脑上。"
             },
             "browse": {
               "title": "浏览",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "阅读屏幕上的说明以了解如何使用您的设备。"
             },
             "select": {
               "title": "选择 “设置为新设备”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "descr": "同时按下两个按钮以验证该选项。"
             },
             "follow": {
               "title": "按指示操作",
