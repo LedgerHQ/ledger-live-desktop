@@ -1683,8 +1683,8 @@
             "compoundOrClaim": "复利或兑现",
             "compoundDescription": "Rewards will be added to delegated amount",
             "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "您已赚取了<0>{{amount}}</0>。点击 Continue（继续）后，便可即刻将其申领并自动将其委托给同一个验证器。",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
+            "compoundInfo": "您已赚取了<0>{{amount}}</0>。点击 Continue（继续）后，它们将被即刻申领并被自动委托给同一个验证器。",
+            "claimInfo": "您已从下方的验证器赚取了 <0>{{amount}}</0>。点击 Continue（继续）后，它们将被即刻申领并被自动添加到可用余额。",
             "selectLabel": "选择委托"
           },
           "connectDevice": {
@@ -1783,7 +1783,7 @@
           "assets": {
             "title": "ASA (资产)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
+            "selectLabel": "选择一个 ASA (资产)",
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
           },
           "connectDevice": {
@@ -2080,7 +2080,7 @@
           "title": "确认",
           "label": "确认",
           "success": {
-            "title": "Transaction sent successfully",
+            "title": "已成功发送交易",
             "text": "You will see your operation in history soon.",
             "cta": "查看详情"
           },
@@ -2105,10 +2105,10 @@
     "completionDate": "Completion date",
     "rewards": "Rewards",
     "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
+    "durationJustStarted": "刚刚开始",
+    "durationDays": "{{count}} 天",
+    "durationDays_plural": "{{count}} 天",
+    "howItWorks": "委托机制如何运作",
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "赚取奖励",
     "overdelegated": "过度委托",
@@ -2120,7 +2120,7 @@
           "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
           "bullet": {
             "delegate": "委托出去的账户依旧为您所有。",
-            "access": "You can access your assets at any time.",
+            "access": "您可以随时访问您的资产。",
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
@@ -2210,7 +2210,7 @@
       },
       "modal": {
         "button": "完成",
-        "title": "Scan to export to mobile",
+        "title": "扫描以导出至移动设备",
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
         "step2": "Tap <1><0>Import desktop accounts</0></1>",
@@ -2218,37 +2218,37 @@
       }
     },
     "display": {
-      "language": "Display language",
+      "language": "显示语言",
       "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "主题",
-      "themeDesc": "Select the theme.",
-      "counterValue": "Countervalue",
+      "themeDesc": "选择主题。",
+      "counterValue": "对价",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
-      "region": "Region",
+      "region": "地区",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
       "stock": "Regional market indicator",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
-      "carouselVisibility": "Carousel visibility",
+      "carouselVisibility": "轮播可见性",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
-      "placeholder": "No settings for this asset",
+      "placeholder": "没有此资产的设置",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "profile": {
-      "password": "Password lock",
+      "password": "密码锁",
       "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
+      "passwordAutoLock": "自动锁定",
       "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
-      "changePassword": "Change password",
-      "softResetTitle": "Clear cache",
+      "changePassword": "更改密码",
+      "softResetTitle": "清除缓存",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
-      "softReset": "Clear",
-      "hardResetTitle": "Reset Ledger Live",
+      "softReset": "清除",
+      "hardResetTitle": "重置 Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
-      "hardReset": "Reset",
+      "hardReset": "重置",
       "analytics": "Analytics",
       "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
       "reportErrors": "Bug reports",
@@ -2257,8 +2257,8 @@
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "help": {
-      "version": "Version",
-      "releaseNotesBtn": "Details",
+      "version": "版本",
+      "releaseNotesBtn": "详情",
       "termsBtn": "阅读",
       "faq": "Ledger 客服",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
@@ -2279,15 +2279,15 @@
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "User action required",
+      "title": "需要用户操作",
       "part1": "Could not delete cache folder. Please delete the folder manually:",
       "part2": "Click the Open folder button, the ",
-      "part3": "app will close",
+      "part3": "应用程序将关闭",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "Then you can restart the app normally."
     },
     "removeAccountModal": {
-      "title": "Remove account",
+      "title": "移除账号",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
@@ -3080,7 +3080,7 @@
       "description": "请联系 Ledger 客服"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
+      "title": "抱歉，无法重置",
       "description": "Please try again or contact Ledger Support if the problem persists."
     },
     "LatestMCUInstalledError": {
@@ -3192,7 +3192,7 @@
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
+      "title": "请升级 SatStack",
       "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
     },
     "SatStackDescriptorNotImported": {
@@ -3305,7 +3305,7 @@
       "title": "This may be too low. Please increase"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
+      "title": "未知 MCU 版本",
       "description": "请联系 Ledger 客服"
     },
     "MCUNotGenuineToDashboard": {
