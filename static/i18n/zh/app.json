@@ -894,7 +894,7 @@
   "dashboard": {
     "title": "资产组合",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage other crypto assets",
+      "desc": "添加账户以管理其他加密货币资产",
       "createAccount": "添加账户"
     },
     "recentActivity": "近期操作",
@@ -1016,7 +1016,7 @@
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
     },
     "cta": {
       "addMore": "添加更多",
@@ -1154,31 +1154,31 @@
       "noResultsFound": "搜索无结果",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
-        "title": "Show",
+        "title": "显示",
         "all": "全部",
-        "supported": "Supported in Live",
-        "installed": "Installed",
-        "not_installed": "Not installed"
+        "supported": "Live 支持",
+        "installed": "已安装",
+        "not_installed": "未安装"
       },
       "sort": {
-        "title": "Sort",
+        "title": "排序",
         "name_asc": "名称 A-Z",
         "name_desc": "名称 Z-A",
         "marketcap_desc": "市值"
       },
       "installSuccess": {
-        "title": "App installed successfully. You can now add your {{app}} accounts",
-        "title_plural": "Apps installed successfully. You can now add your accounts",
+        "title": "应用程序已成功安装，现在您可以添加您的 {{app}} 账户",
+        "title_plural": "应用程序已成功安装，现在您可以添加您的账户",
         "manageAccount": "管理我的账户"
       },
       "updatable": {
         "title": "可用更新",
-        "progressTitle": "{{number}} App updates",
-        "progressWarning": "Do not quit Manager during update.",
+        "progressTitle": "{{number}} 个应用程序更新",
+        "progressWarning": "更新期间，请勿退出管理器。",
         "progress": "正在更新全部……"
       },
       "item": {
-        "version": "Version {{version}}",
+        "version": "版本 {{version}}",
         "installing": "正在安装……",
         "uninstalling": "正在卸载……",
         "updating": "正在更新……",
@@ -1275,7 +1275,7 @@
         "confirmTurnOff": "点击 {{action}} 确认。",
         "second": "2. 在 {{mode}} 模式下启动",
         "boot": "持续按住设备侧面按钮，直至 {{option}} 显示",
-        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
+        "recoveryMode": "轻击 {{mode}} 模式。等候片刻直至功能面板出现。",
         "third": "3. Uninstall all apps",
         "openLive": "Open the Manager in Ledger Live.",
         "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
@@ -3260,7 +3260,7 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "返回功能面板",
-      "description": "Please navigate back to the Dashboard on your device"
+      "description": "请返回设备上的功能面板"
     },
     "WebsocketConnectionError": {
       "title": "Sorry, try again (connection error)",
@@ -3309,12 +3309,12 @@
       "description": "Please contact Ledger Support"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "访问功能面板以更新",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "1": "断开连接并重新连接 USB 数据线，而不按下任何按钮。",
+        "2": "同时按下两个按钮三次来显示功能面板。",
+        "3": "打开管理器并点击更新固件。"
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
