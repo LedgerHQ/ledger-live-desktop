@@ -2291,28 +2291,28 @@
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
+      "title": "查看用户数据",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
       "btn": "查看"
     },
     "repairDevice": {
       "title": "修复您的 Ledger 设备",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
+      "desc": "对于 Ledger Nano S 用户来说，请选择设备上显示的状态。对于 Nano X 和 Blue 用户来说，请前往帮助中心寻求帮助。",
       "button": "修复"
     },
     "exportLogs": {
-      "title": "Save logs",
+      "title": "保存日志",
       "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "btn": "保存"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
+        "title": "隐藏空的代币帐户",
         "desc": "Hide token accounts with zero balance on the Accounts page."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
+        "title": "隐藏代币列表",
         "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
         "count": "{{count}} token",
         "count_plural": "{{count}} tokens"
@@ -2655,11 +2655,11 @@
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Take your recovery sheet",
+              "title": "取出您的恢复表",
               "descr": "取出一张空白的恢复表，该表和 Nano 装在一起。如果您拿到的恢复表已经被填写过，请联系 Ledger 客服。"
             },
             "writeDownWords": {
-              "title": "Write down all words",
+              "title": "写下所有的恢复词",
               "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
@@ -2807,7 +2807,7 @@
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "身为 Ledger 用户，我的加密资产存放在：",
           "answers": {
             "1": "On my Nano",
             "2": "On the blockchain"
@@ -3139,10 +3139,10 @@
         "description": "Quitting the Manager will terminate the app updates in progress.",
         "stay": "Finish updates"
       },
-      "quit": "Quit Manager"
+      "quit": "退出管理器"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
+      "title": "抱歉，需要安装此应用程序",
       "description": "Uninstall the Bitcoin or Ethereum app last"
     },
     "NetworkDown": {
@@ -3178,7 +3178,7 @@
       "title": "Enter valid host."
     },
     "RPCUserRequired": {
-      "title": "RPC Username is required"
+      "title": "需要输入 RPC 用户名"
     },
     "RPCPassRequired": {
       "title": "RPC Password is required"
@@ -3236,15 +3236,15 @@
       "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "设备端拒绝了管理器"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "设备上的更新已取消",
       "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "title": "操作被拒绝",
+      "description": "用户在设备上拒绝了该操作"
     },
     "TransactionRefusedOnDevice": {
       "title": "操作在设备上被拒绝",
@@ -3275,7 +3275,7 @@
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
+      "title": "需要更新应用程序",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
@@ -3299,7 +3299,7 @@
       "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "费用为必填项"
     },
     "GasLessThanEstimate": {
       "title": "This may be too low. Please increase"
@@ -3335,7 +3335,7 @@
       "title": "This legacy address format is no longer supported"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
+      "title": "这是错误的应用程序",
       "description": "Open the '{{managerAppName}}' app on your device"
     },
     "DeviceNameInvalid": {
@@ -3350,7 +3350,7 @@
       "description": "Install the latest Bitcoin and Ethereum apps first."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
+      "title": "设备端取消了重命名",
       "description": "Try again and allow renaming on your device"
     },
     "SyncError": {
@@ -3358,11 +3358,11 @@
       "description": "Some accounts could not be synchronized."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
+      "title": "没有可解冻的资产",
       "description": "You do not have assets to unfreeze associated to Bandwidth"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
+      "title": "没有可解冻的资产",
       "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
@@ -3397,18 +3397,18 @@
       "title": "可用票数不足"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
+      "title": "交易已过期",
       "description": "Signature must be applied within 30 seconds. Please try again."
     },
     "TronNotEnoughEnergy": {
       "title": "Not enough Energy to send this token"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
+      "title": "配对不成功",
       "description": "Please try again or contact Ledger Support if in doubt."
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
+      "title": "真伪查验失败",
       "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
     },
     "EthAppPleaseEnableContractData": {
@@ -3436,7 +3436,7 @@
       "title": "Network fees are above 10% of the amount"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Memo 格式错误"
     },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
