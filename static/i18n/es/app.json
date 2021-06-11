@@ -8,12 +8,12 @@
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "Selecciona una cuenta"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "¡Transacción enviada!",
+          "text": "Haz clic aquí para ver los detalles de la operación"
         }
       }
     }
