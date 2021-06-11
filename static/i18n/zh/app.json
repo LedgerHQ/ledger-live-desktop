@@ -1148,10 +1148,10 @@
       "incomplete": "部分应用程序没有被识别。请卸载并重新安装。"
     },
     "applist": {
-      "placeholder": "No match for the search with the selected filters",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholder": "根据筛选结果，未找到任何匹配内容",
+      "placeholderNoAppsInstalled": "设备未安装相关应用程序",
       "placeholderGoToCatalog": "前往应用目录安装应用",
-      "noResultsFound": "No results found",
+      "noResultsFound": "搜索无结果",
       "noResultsDesc": "Please verify the spelling and try again",
       "filter": {
         "title": "Show",
@@ -1205,34 +1205,34 @@
         "intallParentApp": "Install {{appName}} app"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "title": "卸载全部",
+        "subtitle": "卸载全部应用程序？",
+        "description": "请勿担心，卸载应用程序并不会影响您的加密资产。您可以通过应用程序目录，重新安装应用程序。"
       }
     },
     "apps": {
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
-        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "title": "需要安装 {{dependency}} 应用程序",
+        "description": "同样需要安装 {{dependency}} 应用程序，因为 {{app}} 应用程序需要用到该程序。",
+        "confirm": "安装应用程序"
       },
       "dependencyUninstall": {
-        "title": " Uninstall {{app}} and its related apps?",
+        "title": " 卸载 {{app}} 及其相关应用程序？",
         "showAll": "显示待卸载的应用程序",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "description": "您安装的某些应用程序与{{app}}应用程序有关。这些应用程序也将卸载。",
+        "confirm": "卸载 {{app}} 以及其他应用程序"
       }
     },
     "firmware": {
-      "updateLater": "Cancel",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase? ",
-      "followTheGuide": "Follow our step by step update guide",
-      "removeApps": "Uninstall all apps before updating",
-      "update": "Firmware update",
-      "updateBtn": "Update firmware",
-      "latest": "Firmware version {{version}} is available",
-      "contactSupport": "Contact support",
+      "updateLater": "取消",
+      "seedReady": "我有自己的恢复短语",
+      "dontHaveSeed": "没有您的恢复短语？ ",
+      "followTheGuide": "请按照我们的更新指南的步骤操作",
+      "removeApps": "更新前卸载所有应用程序",
+      "update": "固件更新",
+      "updateBtn": "更新固件",
+      "latest": "固件版本 {{version}} 可用",
+      "contactSupport": "联系客服",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
       "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
       "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
@@ -1240,17 +1240,17 @@
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
+        "downloadingUpdate": "正在下载更新",
+        "updateMCU": "固件更新",
         "updating": "固件更新",
         "reset": "准备设备",
         "osu": "正在安装 OSU ……",
         "flash-mcu": "MCU 更新中……",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Preparing your device..."
+        "flash-bootloader": "正在更新 Bootloader 启动加载器……",
+        "firmware": "正在更新固件……",
+        "flash": "正在准备您的设备……"
       },
-      "confirmIdentifier": "Verify the identifier",
+      "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "标识符",
       "mcuTitle": "完成更新",
@@ -1272,9 +1272,9 @@
         "turnOn": "按设备上的按钮以启动设备。",
         "falsePin": "输入三次错误的 PIN 识别密码以重置设备。",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
-        "second": "2. Boot in {{mode}} mode",
-        "boot": "Press and hold the side button until {{option}} is displayed",
+        "confirmTurnOff": "点击 {{action}} 确认。",
+        "second": "2. 在 {{mode}} 模式下启动",
+        "boot": "持续按住设备侧面按钮，直至 {{option}} 显示",
         "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
         "third": "3. Uninstall all apps",
         "openLive": "Open the Manager in Ledger Live.",
