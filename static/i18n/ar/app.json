@@ -79,7 +79,8 @@
       "error": "خطأ في المزامنة",
       "refresh": "تحديث"
     },
-    "exchange": "تداول"
+    "exchange": "تداول",
+    "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -720,15 +721,15 @@
         "1": {
           "subtitle": "الموافقة على حساب للسماح للبروتوكول بـ",
           "subtitle2": "مباشرة القروض المستقبلية.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+          "description": "يتعين عليك أن تأذن لعقد Compound الذكي تحويل كمية معينة من الأصول إلى البروتوكول. الموافقة على حساب تعطي تصريح للبروتوكول بمباشرة القروض المستقبلية."
         },
         "2": {
-          "subtitle": "Supply assets to earn interest",
+          "subtitle": "توريد الأصول لكسب الفائدة",
           "description": "بمجرد الموافقة على حساب، يمكنك تحديد كمية الأصول التي تريد إقراضها وإصدار معاملة للبروتوكول. وتستحق الفوائد فور تأكيد المعاملة."
         },
         "3": {
-          "subtitle": "Withdraw assets at any time",
-          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
+          "subtitle": "سحب الأصول في أي وقت",
+          "description": "يمكنك سحب أصولك والفائدة المكتسبة في أي وقت، جزئيًا أو كليًا، مباشرة من حسابك في ليدجر (Ledger)."
         }
       }
     },
@@ -756,7 +757,7 @@
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
+      "title": "يُرجى إنشاء حساب ETH",
       "description": "<0>{{ asset }}({{ ticker }})</0> هو رمز إيثيريوم ERC-20. لإقراض {{ ticker }}، قم بتثبيت تطبيق Ethereum وإنشاء حساب الإيثيريوم",
       "cta": "إضافة حساب"
     },
@@ -1043,8 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "ما هذه العملية؟",
     "title": "تفاصيل العملية",
+    "type": "Type",
+    "amount": "Amount",
     "account": "حساب",
     "date": "التاريخ",
+    "currentValue": "Current value",
     "status": "Status",
     "confirmed": "تم التأكيد",
     "failed": "Failed",
@@ -2926,6 +2930,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "حدثت مشكلة. يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر."
@@ -2949,7 +2956,7 @@
       "title": "المبلغ المطلوب"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
+      "title": "يرجى التأكد من أن نظامك يحتوي على كاميرا، وأنها ليست قيد الاستخدام من قبل تطبيق آخر وأن ليدجر لايف (Ledger Live) لديه تصريح لاستخدامها.",
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
@@ -2972,8 +2979,8 @@
       "description": "يرجى محاولة العملية مرة أخرى"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "توقيع غير مؤذَن به",
+      "description": "هذا الحساب غير مؤذَن له بالتوقيع على هذه المعاملة"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
       "title": "الأرصدة المالية غير كافية",
