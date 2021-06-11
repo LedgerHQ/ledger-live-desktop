@@ -863,12 +863,12 @@
     },
     "backupPack": {
       "title": "Резервный набор",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
+      "description": "Безопасно управляйте активами с помощью Nano X и Nano S по цене со скидкой",
       "cta": "Купить резервный набор"
     },
     "polkaStake": {
       "title": "Стейкинг POLKADOT",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "description": "Теперь вы можете участвовать в стейкинге, а также безопасно пользоваться токенами DOT прямо в Ledger Live"
     },
     "sell": {
       "title": "Продавайте криптовалюту",
@@ -876,7 +876,7 @@
     },
     "stakeAlgorand": {
       "title": "Стейкинг ALGORAND",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "description": "Используйте свои токены ALGO по-максимуму. Просто добавьте средства на счета и получайте вознаграждение за стейкинг уже сегодня."
     },
     "swap": {
       "title": "Обмен криптовалюты",
