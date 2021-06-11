@@ -1394,10 +1394,10 @@
   "buy": {
     "title": "买入",
     "titleCrypto": "买入 {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
-    "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without my device"
+    "buyCTA": "买入 {{currencyTicker}}",
+    "withoutDevice": "在不使用我的设备的情况下继续",
+    "connectWithoutDevice": "为了保证最佳安全性，最好使用您的设备操作。",
+    "skipConnect": "在不使用我的设备的情况下继续"
   },
   "sell": {
     "title": "卖出",
@@ -1431,10 +1431,10 @@
   },
   "send": {
     "title": "发送",
-    "totalSpent": "Total to debit",
+    "totalSpent": "总借额",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "接收方"
       },
       "amount": {
         "title": "数额",
@@ -1467,16 +1467,16 @@
       },
       "verification": {
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "加载中…… ({{percentage}})",
+          "inaccurate": "正在加载……"
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "确认",
         "success": {
-          "title": "Transaction sent",
+          "title": "交易已发送",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "View details"
+          "cta": "查看详情"
         },
         "pending": {
           "title": "Broadcasting transaction..."
@@ -1490,20 +1490,20 @@
       }
     },
     "footer": {
-      "estimatedFees": "Network fees"
+      "estimatedFees": "网络费用"
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "签署交易"
   },
   "releaseNotes": {
-    "title": "Release notes",
+    "title": "版本说明",
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
-    "distribution": "Allocation",
+    "asset": "资产",
+    "price": "价格",
+    "distribution": "配置",
     "amount": "数额",
     "value": "Value",
     "showAll": "Show all",
