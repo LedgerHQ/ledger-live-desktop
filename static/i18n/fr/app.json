@@ -1045,10 +1045,10 @@
     "whatIsThis": "À quoi correspond cette opération ?",
     "title": "Détails de l'opération",
     "type": "Type",
-    "amount": "Amount",
+    "amount": "Montant",
     "account": "Compte",
     "date": "Date",
-    "currentValue": "Current value",
+    "currentValue": "Valeur actuelle",
     "status": "Statut",
     "confirmed": "Confirmée",
     "failed": "Échec",
@@ -2931,7 +2931,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
     },
     "generic": {
       "title": "{{message}}",
