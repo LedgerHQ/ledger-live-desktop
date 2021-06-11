@@ -338,21 +338,21 @@
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item2": "等待您的节点完全同步。",
+            "item3": "注意您的节点的 RPC 凭据、IP 地址和端口号。"
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "运行一个完整节点需要一台拥有足够资源的计算机和一个不受数据限制的宽带连接。"
         },
         "node": {
           "title": "节点",
           "connectionSteps": {
             "notConnected": {
               "header": "输入您的节点参数",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "disclaimer": "您的全部节点必须在连接 Ledger Live 之前被完全同步。",
               "fields": {
                 "nodeHost": {
                   "title": "主机",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                  "tooltip": "如果节点在此计算机上运行，则应保持默认值，或者替换节点 IP 地址和端口号。"
                 },
                 "rpcCredentials": {
                   "title": "RPC 凭据",
@@ -388,7 +388,7 @@
               "description": "Please wait while the accounts to scan are added to the node configuration file."
             },
             "success": {
-              "header": "Accounts added to node configuration",
+              "header": "账户已添加至节点配置",
               "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
               "cta": "查看用户数据"
             }
@@ -903,7 +903,7 @@
   },
   "currentAddress": {
     "title": "当前地址",
-    "for": "Address for <1><0>{{name}}</0></1>",
+    "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
   },
@@ -1131,21 +1131,21 @@
   },
   "manager": {
     "tabs": {
-      "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
-      "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appCatalog": "应用程序目录",
+      "appCatalogSearch": "在目录中搜索应用程序……",
+      "appsOnDevice": "已安装的应用程序",
+      "appOnDeviceSearch": "搜索已安装的应用程序……"
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> free",
+      "freeSpace": "<0>{{space}}</0>可用",
       "noFreeSpace": "存储空间不足",
       "installed": "应用程序",
       "capacity": "容量",
       "used": "已用",
       "firmwareAvailable": "固件版本过期：",
-      "firmwareUpToDate": "Firmware is up to date:",
+      "firmwareUpToDate": "固件为最新版本：",
       "genuine": "设备是正版的",
-      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+      "incomplete": "部分应用程序没有被识别。请卸载并重新安装。"
     },
     "applist": {
       "placeholder": "No match for the search with the selected filters",
