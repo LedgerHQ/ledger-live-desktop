@@ -146,7 +146,7 @@
   },
   "sidebar": {
     "menu": "القائمة",
-    "stars": "Starred accounts",
+    "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
     "manager": "المدير",
     "exchange": "شراء/ بيع",
@@ -154,18 +154,18 @@
     "lend": "إقراض"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
-    "tooltip": "Star account"
+    "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
+    "tooltip": "تفضيل حساب"
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
     "openHeader": "اكشف حسابات جهازك من خلال WebSocket",
-    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
-    "openedHeader": "{{appName}} bridge opened",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
-    "openButton": "Open",
+    "openDescription": "فتح جسر (bridge) يعرض جميع حساباتك لتطبيقات الطرف الخارجي.",
+    "openedHeader": "تم فتح جسر {{appName}}",
+    "openedDescription": "يمكنك الآن الوصول إلى حسابك {{appName}} على تطبيق ويب لطرف خارجي من خلال WebSocket.",
+    "completeHeader": "تم إكمال جلسة الجسر",
+    "completeDescription": "تم إغلاق جسر websocket الآن.",
+    "openButton": "فتح",
     "disconnectButton": "قطع الاتصال"
   },
   "swap": {
@@ -174,7 +174,7 @@
     "whatIsSwap": "ما هي المبادلة",
     "tabs": {
       "exchange": "تداول",
-      "history": "History"
+      "history": "السجل"
     },
     "history": {
       "empty": {
@@ -185,7 +185,7 @@
     "landing": {
       "title": "قم بمبادلة أصولك",
       "continue": "متابعة",
-      "sorry": "Service temporarily unavailable, or not available in your country"
+      "sorry": "الخدمة غير متوفرة مؤقتًا أو غير متوفرة في بلدك"
     },
     "missingApp": {
       "title": "يرجى تحديث تطبيق {{appName}} على جهازك",
@@ -200,7 +200,7 @@
     "kyc": {
       "title": "مرحبًا بك في المبادلة",
       "subtitle": "بادل الأصول المشفرة مباشرة من جهاز ليدجر (Ledger) الخاص بك. هذه الخدمة غير متوفرة في الولايات المتحدة وعدد من البلدان الأخرى.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "disclaimer": "من خلال المتابعة، أنت تقبل مشاركة بيانات موقعك مع موفري خدمات الطرف الخارجي حتى يتمكنوا من الامتثال لإجراءات AML/KYC الخاصة بهم."
     },
     "form": {
       "amount": "المبلغ",
@@ -219,10 +219,10 @@
       },
       "tradeMethod": {
         "title": "معدل",
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "float": "معدل متغير",
+        "floatUnavailable": "المعدل المتغير غير مدعوم لهذا الثنائي",
         "fixed": "معدل ثابت",
-        "fixedUnavailable": "تبادل الاثنين لا يدعم المعدل ثابت",
+        "fixedUnavailable": "المعدل الثابت غير مدعوم لهذا الثنائي",
         "floatDesc": "قد يتغير المبلغ الخاص بك تبعًا لظروف السوق.",
         "fixedDesc": "سيبقى المبلغ الخاص بك كما هو حتى لو تغير السوق. يتم التحديث كل 60 ثانية.",
         "by": "Provided by"
