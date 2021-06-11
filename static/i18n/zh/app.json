@@ -160,7 +160,7 @@
   "bridge": {
     "modalTitle": "打开设备桥接",
     "openHeader": "通过 WebSocket 曝露您的设备账户",
-    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
+    "openDescription": "打开桥接使您的所有账户曝露给第三方应用程序。",
     "openedHeader": "{{appName}} 已打开桥接",
     "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
     "completeHeader": "桥接会话已完成",
@@ -188,12 +188,12 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the {{appName}} app on your device",
+      "title": "请在您的设备上安装 {{appName}} 应用程序",
       "subtitle": "前往管理器并安装 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往管理器"
     },
     "outdatedApp": {
-      "title": "Please update the {{appName}} app on your device",
+      "title": "请在您的设备上更新 {{appName}} 应用程序",
       "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往管理器"
     },
@@ -337,7 +337,7 @@
           "header": "启动您的全部节点。不要信任，验证。",
           "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
+            "item1": "在拥有足够资源的设备上设置 Bitcoin Core（比特币核心）。",
             "item2": "等待您的节点完全同步。",
             "item3": "注意您的节点的 RPC 凭据、IP 地址和端口号。"
           },
@@ -356,7 +356,7 @@
                 },
                 "rpcCredentials": {
                   "title": "RPC 凭据",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
+                  "tooltip": "请输入您的节点 RPC 用户名和密码，可在 bitcoin.conf 文件里找到。",
                   "usernamePlaceholder": "用户名",
                   "passwordPlaceholder": "密码"
                 },
