@@ -1844,7 +1844,7 @@
   },
   "polkadot": {
     "lockedBalance": "已绑定",
-    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
+    "lockedTooltip": "必须将资产绑定到提名的验证器才能赚取奖励。",
     "unlockingBalance": "正在解绑",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "已解绑",
@@ -1870,16 +1870,16 @@
       "notValidator": "并非验证器",
       "notValidatorTooltip": "该地址不再是一个验证器",
       "elected": "当选",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
+      "nominatorsCount": "{{nominatorsCount}} 个提名者",
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
+      "oversubscribed": "超额订购 ({{nominatorsCount}})",
       "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
       "externalControllerTooltip": "This account is controlled by another account.",
       "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
+      "externalStashTooltip": "该账户控制着另一个账户。",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
       "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
@@ -1903,16 +1903,16 @@
         "description": "要赚取奖励，首先要绑定一定数额。其次，必须提名您的 (某个或多个) 验证器。"
       },
       "unbond": {
-        "title": "Unbond",
+        "title": "解绑",
         "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
+        "title": "提取",
         "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "提名",
+        "description": "最多可选择 16 个验证器。确保您的提名对象处于活跃状态，以便赚取奖励。"
       },
       "chill": {
         "title": "Clear nominations",
@@ -1920,12 +1920,12 @@
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "提名",
       "steps": {
         "validators": {
           "title": "验证器",
           "notValidatorsRemoved": "您提名的 {{count}} 个地址已经不再是验证器。它们将从您的提名交易中自动删除。",
-          "maybeChill": "Clear nominations instead"
+          "maybeChill": "转而清除提名"
         },
         "connectDevice": {
           "title": "设备"
@@ -1934,7 +1934,7 @@
           "title": "确认",
           "label": "确认",
           "success": {
-            "title": "You have successfully nominated validators",
+            "title": "您已成功提名验证器。",
             "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
             "cta": "查看详情"
           },
@@ -1946,22 +1946,22 @@
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "绑定资产",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
+        "label": "奖励目的地",
+        "stash": "可用余额",
         "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
+        "staked": "已绑定余额",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
         "optionTitle": "备注",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "您可通过绑定资产并提名验证器来赚取奖励。",
           "bullet": [
             "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
+            "使用您的 Ledger 设备进行提名",
             "Assets will be available again, 28 days after unbonding"
           ],
           "help": "How nominations work",
@@ -1970,7 +1970,7 @@
         "amount": {
           "title": "数额",
           "amountLabel": "要绑定的数额",
-          "availableLabel": "Available",
+          "availableLabel": "可用",
           "maxLabel": "最多",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
           "learnMore": "了解更多"
@@ -1986,8 +1986,8 @@
           "title": "确认",
           "success": {
             "title": "资产已成功绑定",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
+            "text": "一旦网络确认该交易，您就可以提名验证器。",
+            "textNominate": "一旦网络确认您的交易，您就可以提名验证器。",
             "nominate": "提名",
             "later": "稍后提名"
           },
@@ -1999,12 +1999,12 @@
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "重新绑定资产",
       "steps": {
         "amount": {
           "title": "数额",
           "amountLabel": "要重新绑定的数额",
-          "availableLabel": "Unbonding",
+          "availableLabel": "正在解绑",
           "maxLabel": "最多",
           "info": "重新绑定的资产会立刻添加到已绑定数额中。",
           "learnMore": "了解更多"
@@ -2028,12 +2028,12 @@
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "解绑资产",
       "steps": {
         "amount": {
           "title": "数额",
           "amountLabel": "要解绑的数额",
-          "availableLabel": "Bonded",
+          "availableLabel": "已绑定",
           "maxLabel": "最多",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
           "learnMore": "了解更多"
@@ -2059,7 +2059,7 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
+          "title": "提取",
           "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
           "info": "You can then withdraw unbonded assets to your available balance."
         },
@@ -3097,7 +3097,7 @@
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "description": "请重试或联系 Ledger 客服"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
@@ -3318,11 +3318,11 @@
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
+      "title": "无法在子账户中接收",
       "description": "If you want to receive funds, please use the parent account"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
+      "title": "尚无法从子账户发送",
       "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
     },
     "RecommendUndelegation": {
@@ -3366,7 +3366,7 @@
       "description": "You do not have assets to unfreeze associated to Energy"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": "解冻尚不可用",
       "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
