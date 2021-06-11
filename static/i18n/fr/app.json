@@ -13,7 +13,7 @@
       "broadcast": {
         "toast": {
           "title": "Transaction envoyée",
-          "text": "Appuyez ici pour voir les détails de l'opération."
+          "text": "Cliquez ici pour voir les détails de l'opération."
         }
       }
     }
@@ -75,7 +75,7 @@
       "syncing": "Synchronisation...",
       "upToDate": "Synchronisé",
       "outdated": "En pause",
-      "needsMigration": "Appuyez pour mettre le compte à jour.",
+      "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser"
     },
@@ -562,14 +562,14 @@
       "amountRedeemed": "Montant retiré",
       "date": "Date",
       "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et réaliser des intérêts.",
-      "howCompoundWorks": "Comment fonctionne le prêt sur Compound ?",
+      "howCompoundWorks": "Fonctionnement du prêt sur Compound",
       "lend": "Dépôt {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Prêter",
         "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et réaliser des intérêts.",
-        "cta": "Comment fonctionne le prêt sur Compound ?"
+        "cta": "Fonctionnement du prêt sur Compound"
       },
       "closed": {
         "title": "Vos prêts clôturés apparaîtront ici.",
@@ -688,7 +688,7 @@
           "amountToWithdraw": "Montant à retirer",
           "withdrawAll": "Retirer le maximum",
           "placeholder": "Retirer le maximum",
-          "maxWithdrawble": "Le montant maximum à retirer est"
+          "maxWithdrawble": "Le montant maximal à retirer est"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -1156,7 +1156,7 @@
       "filter": {
         "title": "Afficher",
         "all": "Toutes",
-        "supported": "Prise en charge dans Ledger Live",
+        "supported": "Prise en charge par Ledger Live",
         "installed": "Installée",
         "not_installed": "Non installée"
       },
@@ -2364,7 +2364,7 @@
   "crash": {
     "title": "Une erreur est survenue.",
     "description": "Merci de consulter nos articles d'aide. Si le problème persiste, enregistrez vos logs en utilisant le bouton ci-dessous et transmettez-les à l'Assistance Ledger.",
-    "troubleshooting": "Cliquer pour voir les solutions proposées",
+    "troubleshooting": "Cliquez ici pour voir les solutions proposées.",
     "logs": "Enregistrer les logs",
     "dataFolder": "Voir les données utilisateur"
   },
@@ -2488,7 +2488,7 @@
         "noDevice": "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
         "languageWarning": {
           "title": "Commencez en {{language}}.",
-          "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. Le reste de l'expérience Ledger est actuellement uniquement disponible en anglais.",
+          "desc": "Nous ajoutons des langues supplémentaires afin de faciliter vos premiers pas avec Ledger. L'expérience Ledger sera bientôt entièrement disponible dans plusieurs langues.",
           "cta": "Compris"
         }
       },
@@ -2514,7 +2514,7 @@
           "3": {
             "heading": "Restauration d'un appareil",
             "title": "Restaurer une phrase de récupération sur un nouvel appareil",
-            "description": "Utilisez une phrase de récupération existante pour restaurer vos clés privées sur votre nouveau {{deviceName}} !"
+            "description": "Utilisez une phrase de récupération existante pour restaurer vos clés privées sur votre nouveau {{deviceName}}."
           }
         }
       },
@@ -2659,7 +2659,7 @@
               "descr": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez l'Assistance Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
-              "title": "Noter tous les mots",
+              "title": "Noter tous les mots en gras",
               "descr": "Écrivez en position 1 sur la feuille de récupération le mot n°1 (\"Word #1\") affiché en gras sur votre Nano. Puis appuyez sur le bouton droit de votre Nano pour voir le mot n°2 (\"Word #2\" en gras) et écrivez-le en position 2. Faites cela pour tous les mots affichés en gras en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
             },
             "buttons": {
@@ -3093,7 +3093,7 @@
     },
     "LedgerAPI5xx": {
       "title": "Veuillez réessayer.",
-      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer ultérieurement ou contacter le support Ledger ({{message}})."
+      "description": "Le serveur n'a pas pu traiter votre demande. Veuillez réessayer ultérieurement ou contacter l'Assistance Ledger ({{message}})."
     },
     "LedgerAPINotAvailable": {
       "title": "Services {{currencyName}} indisponibles",
