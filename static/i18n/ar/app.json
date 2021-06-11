@@ -250,10 +250,10 @@
             "acceptedDescription": "هذه الخدمة مدارة حصريًا من قبل <0>{{provider}}</0> و المذكور في"
           },
           "details": {
-            "provider": "Provider",
+            "provider": "المزود",
             "tradeMethod": {
               "title": "النوع",
-              "float": "Floating rate",
+              "float": "معدل متغير",
               "fixed": "معدل ثابت"
             },
             "address": "عنوان"
@@ -263,23 +263,23 @@
           "title": "الجهاز"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "التحقق من التطبيق"
         },
         "finished": {
-          "title": "Pending",
-          "subtitle": "Pending operation",
-          "swap": "Your Swap ID:",
+          "title": "مُعلقّة",
+          "subtitle": "عملية معلقة",
+          "swap": "معرّف التبادل الخاص بك:",
           "seeDetails": "رؤية التفاصيل",
-          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
+          "disclaimer": "يرجى حفظ معرّف التبادل الخاص بك في حال كنت بحاجة إلى مساعدة من <0>{{provider}}</0> لاحقًا.",
           "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها."
         }
       }
     },
     "operationDetailsModal": {
       "title": "مبادلة",
-      "provider": "Provider",
+      "provider": "المزود",
       "txid": "معرّف المبادلة",
-      "status": "Status",
+      "status": "الحالة",
       "statusTooltips": {
         "expired": "Please contact the swap provider with your swap ID for more information.",
         "refunded": "Please contact the swap provider with your swap ID for more information.",
