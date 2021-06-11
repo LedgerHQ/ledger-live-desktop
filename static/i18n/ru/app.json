@@ -540,7 +540,7 @@
   "lend": {
     "title": "Кредиты в криптовалюте",
     "tabs": {
-      "dashboard": "Консоль",
+      "dashboard": "Панель управления",
       "opened": "Активные займы",
       "closed": "Закрытые займы",
       "history": "История"
@@ -909,7 +909,7 @@
   },
   "emptyState": {
     "dashboard": {
-      "title": "Установите приложения на устройство",
+      "title": "Установка приложений на устройство",
       "desc": "Перейдите в Диспетчер, чтобы установить приложения на устройство. Вы сможете добавить счета как только на вашем устройстве будут установлены нужные приложения.",
       "buttons": {
         "installApp": "Перейти в Диспетчер",
@@ -1275,7 +1275,7 @@
         "confirmTurnOff": "Нажмите {{action}} для подтверждения.",
         "second": "2. Загрузитесь в режиме {{mode}}",
         "boot": "Нажмите и удерживайте боковую кнопку, пока не увидите {{option}}",
-        "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится панель управления.",
+        "recoveryMode": "Выберите режим {{mode}}. Подождите, пока не появится Панель управления.",
         "third": "3. Удалитьевсе приложения",
         "openLive": "Откройте Диспетчер в Ledger Live.",
         "uninstall": "Нажмите на значок корзины рядом с приложениями, установленными на {{deviceName}}. Это позволит освободить место для установки прошивки.",
@@ -3200,8 +3200,8 @@
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "Блокчейн Stratis был изменён и теперь может работать некорректно.",
+      "description": "Оригинальный блокчейн Stratis будет поддерживаться до 16 октября 2021 года."
     },
     "SwapGenericAPIError": {
       "title": "Этот курс больше не актуален",
@@ -3229,7 +3229,7 @@
     },
     "DeviceShouldStayInApp": {
       "title": "Пожалуйста, откройте приложение {{appName}}",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "description": "Не закрывайте приложение {{appName}}, пока мы ищем ваши счета"
     },
     "UnexpectedBootloader": {
       "title": "Устройство не должно быть в режиме Bootloader",
@@ -3259,8 +3259,8 @@
       "description": "Удалите и повторно установите приложение {{managerAppName}} через Диспетчер"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
-      "description": "Пожалуйста, переключитесь на Dashboard (Панель управления) на устройстве."
+      "title": "Вернитесь на Панель управления",
+      "description": "Пожалуйста, переключитесь на Панель управления на устройстве."
     },
     "WebsocketConnectionError": {
       "title": "Пожалуйста, попробуйте ещё раз (ошибка соединения)",
@@ -3272,7 +3272,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Что-то пошло не так",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "Убедитесь, что на вашем аппаратном кошельке установлены пароль или фраза восстановления, привязанные в выбранному счёту."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Необходимо обновить приложение",
@@ -3286,7 +3286,7 @@
     },
     "CantOpenDevice": {
       "title": "Произошёл сбой подключения",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "description": "Устройство обнаружено, но подключиться не удалось. Повторите попытку или обратите в поддержку Ledger, если проблема сохранится."
     },
     "ETHAddressNonEIP": {
       "title": "Автопроверка недоступна: внимательно проверяйте адрес",
@@ -3309,10 +3309,10 @@
       "description": "Обратитесь в Поддержку Ledger"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Чтобы обновиться, перейдите в Консоль",
+      "title": "Чтобы обновиться, переключитесь на Панель управления",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
+        "1": "Отсоедините и снова подсоедините USB-кабель, не нажимая кнопок.",
         "2": "Трижды нажмите обе кнопки одновременно, чтобы открыть Консоль.",
         "3": "Откройте Диспетчер и нажмите Обновить прошивку."
       }
@@ -3323,23 +3323,23 @@
     },
     "UnavailableTezosOriginatedAccountSend": {
       "title": "Нельзя отправлять платежи с субсчетов",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "description": "Эта функция будет добавлена на более позднем этапе. Это необходимо ввиду недавнего обновления Babylon."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Пожалуйста, отзовите делегирование счёте перед тем, как опустошить его"
     },
     "RecommendSubAccountsToEmpty": {
       "title": "Пожалуйста, сначала обнулите все субсчета"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "Этот устаревший формат адреса больше не поддерживается"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "title": "Это не то приложение",
+      "description": "Откройте {{managerAppName}} на устройстве"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "Пожалуйста, используйте название без '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
@@ -3388,10 +3388,10 @@
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "Отправка TRC20 на новый счёт не активирует его",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "description": "Счёт получателя нужно активировать перед отправкой на него токенов TRC20. Чтобы активировать его, отправьте на него токены TRX или TRC10."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "Могут взиматься дополнительные сборы"
     },
     "TronNotEnoughTronPower": {
       "title": "Недостаточно голосов"
@@ -3408,23 +3408,23 @@
       "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений."
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
+      "title": "Не удалось проверить подлинность устройства",
       "description": "Что-то пошло не так. Повторите попытку или свяжитесь с Поддержкой Ledger, если возникнут дополнительные вопросы."
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "Включите данные контракта в настройках приложения Ethereum"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "Неправильный тег назначения XRP"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "Для делегирования не хватает средств"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "Для делегирования недостаточно средств"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Недостаточно средств на основном счёте"
     },
     "NotEnoughSpendableBalance": {
       "title": "Баланс не может быть меньше {{minimumAmount}}"
@@ -3433,16 +3433,16 @@
       "title": "Откройте приложение {{expected}}"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "Комиссия составляет 10% от суммы"
     },
     "StellarWrongMemoFormat": {
       "title": "Неправильный формат Memo"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "Отключите мультиподписи, чтобы отправить {{currencyName}}"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "При отправке этому получателю может потребоваться Memo"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "Сумма должна быть больше {{minAmountFromFormatted}}"
@@ -3451,16 +3451,16 @@
       "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "Выбор валидаторов должен быть завершён"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "Некоторые из выбранных адресов не являются валидаторами"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "Все заблокированные активы будут разблокированы при балансе <1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "У вас нет заблокированных активов"
     },
     "PolkadotNoNominations": {
       "title": "У вас нет назначений"
@@ -3475,7 +3475,7 @@
       "title": "Вы должны заблокировать как минимум 1 DOT"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Вы превысили лимит разблокировки"
     },
     "PolkadotValidatorsRequired": {
       "title": "Вы должны выбрать хотя бы одного валидатора"
