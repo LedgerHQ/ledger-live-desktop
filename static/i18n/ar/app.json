@@ -1054,7 +1054,7 @@
     "from": "من",
     "to": "To",
     "identifier": "Transaction ID",
-    "viewOperation": "عرض في المتصفح",
+    "viewOperation": "مشاهدة في المتصفح",
     "showMore": "عرض المزيد {{recipients}}",
     "showLess": "عرض أقل",
     "tokenOperations": "عمليات رمز التوكن",
