@@ -998,7 +998,7 @@
       "import": "Счета",
       "finish": "Подтверждение"
     },
-    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeReadyInfo": "Счета будут добавлены посредством вашей полной надо Биткойна.",
     "fullNodeConfigure": "Настроить ноду",
     "tokensTip": "{{token}} ({{ticker}}) – это токен {{tokenType}}. Вы можете получать токены непосредственно на счёт {{currency}}.",
     "accountToImportSubtitle_plural": "Добавить существующий счёт",
@@ -1010,10 +1010,10 @@
     "successDescription": "Добавьте больше счетов или вернитесь в Портфель",
     "successDescription_plural": "Добавьте больше счетов или вернитесь в Портфель",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
+      "noOperationOnLastAccount": "Невозможно добавить новый счёт, пока вы не получили средства на <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Счета <1><0>{{currencyName}}</0></1> не найдены",
       "showAllAddressTypes": "Показать все типы адресов",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "Изменяйте тип адреса только в том случае, если вам нужно получать {{family}} с использованием старого формата адресов."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit или Native segwit?"
@@ -1060,7 +1060,7 @@
     "tokenOperations": "Операции с токеном",
     "subAccountOperations": "Операции с субсчетами",
     "tokenTooltip": "Эта операция связана с следующими операциями токена",
-    "subAccountTooltip": "This operation is related to the following subaccount operations",
+    "subAccountTooltip": "Эта операция относится к следующий операциям по субсчёту",
     "internalOperations": "Внутренние операции",
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }}: сведения",
@@ -1405,7 +1405,7 @@
   },
   "receive": {
     "title": "Получение",
-    "successTitle": "Address shared securely",
+    "successTitle": "Адреса передаются безопасно",
     "steps": {
       "chooseAccount": {
         "title": "Счёт",
@@ -1454,7 +1454,7 @@
         "subaccountsWarning": "Чтобы отправлять токены с этого счёта, вам нужно пополнить его за {{ currency }}",
         "from": "Откуда",
         "to": "Куда",
-        "selectAccountDebit": "Account to debit",
+        "selectAccountDebit": "Счёт для пополнения",
         "recipientAddress": "Адрес получателя",
         "amount": "Кол-во",
         "fees": "Комиссия сети",
@@ -1678,9 +1678,9 @@
         "steps": {
           "claimRewards": {
             "title": "Вознаграждения",
-            "compound": "Compound",
-            "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
+            "compound": "Капитализировать",
+            "claim": "Снять",
+            "compoundOrClaim": "Капитализируйте или снимайте вознаграждение",
             "compoundDescription": "Вознаграждения будут добавлены к делегированной сумме",
             "claimDescription": "Вознаграждения будут добавлены к вашим доступным средствам",
             "compoundInfo": "Вы заработали <0>{{amount}}</0>. После нажатия кнопки Продолжить вознаграждения будут получены и автоматически делегированы тому же валидатору.",
@@ -1694,8 +1694,8 @@
             "title": "Подтверждение",
             "label": "Подтверждение",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
+              "title": "Вы успешно сняли вознаграждения",
+              "titleCompound": "Вознаграждения успешно капитализированы",
               "text": "Вознаграждения добавлены к вашему балансу.",
               "textCompound": "Ваши вознаграждения (<0>{{amount}}</0>) автоматически делегированы <0>{{validator}}</0>",
               "cta": "Подробнее"
@@ -1732,7 +1732,7 @@
             "title": "Подтверждение",
             "success": {
               "title": "Вы успешно переделегировали активы",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
+              "text": "Повторное делегирование будет обновлено, как только транзакция будет подтверждена в блокчейне",
               "cta": "Подробнее"
             },
             "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем попробовать снова."
@@ -1750,7 +1750,7 @@
           "amount": {
             "title": "Кол-во",
             "subtitle": "Процедура отзыва делегирования занимает <0>21 день</0>.",
-            "warning": "Вознаграждения будут немедленно обналичены. Сумма после отзыва делегирования вернётся на доступный счёт по истечении <0>21-дневной блокировки</0>.",
+            "warning": "Вознаграждения будут немедленно сняты. Сумма после отзыва делегирования вернётся на доступный счёт по истечении <0>21 дня блокировки</0>.",
             "fields": {
               "validator": "Валидатор",
               "amount": "Сумма отзыва делегирования"
@@ -1782,7 +1782,7 @@
         "steps": {
           "assets": {
             "title": "ASA (актив)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
+            "info": "Для добавления актива требуется отправить транзакцию с минимальной комиссией. Она будет видна в истории транзакций",
             "selectLabel": "Выберите ASA (актив)",
             "disabledTooltip": "У вас уже есть этот ASA (актив) на счету Algorand"
           },
