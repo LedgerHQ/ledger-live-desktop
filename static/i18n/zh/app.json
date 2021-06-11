@@ -79,7 +79,8 @@
       "error": "同步错误",
       "refresh": "刷新"
     },
-    "exchange": "货币兑换"
+    "exchange": "货币兑换",
+    "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -1043,8 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "这是什么操作？",
     "title": "操作详情",
+    "type": "Type",
+    "amount": "Amount",
     "account": "账户",
     "date": "日期",
+    "currentValue": "Current value",
     "status": "状态",
     "confirmed": "已确认",
     "failed": "已失败",
@@ -2926,6 +2930,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact Ledger Support."
