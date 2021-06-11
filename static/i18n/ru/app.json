@@ -424,7 +424,7 @@
             },
             "invalid-chain": {
               "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "description": "недопустимое описание цепочки для подсказки"
             },
             "initializing": {
               "header": "Загружаем...",
@@ -2915,7 +2915,7 @@
         "NO_MEMO": "Без Memo",
         "MEMO_ID": "Memo ID",
         "MEMO_HASH": "Хэш Memo",
-        "MEMO_RETURN": "Memo Return"
+        "MEMO_RETURN": "Возврат Memo"
       },
       "memoWarningText": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем"
     },
