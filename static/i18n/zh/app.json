@@ -632,13 +632,13 @@
         "info": "您已在此账户上批准了 <0>{{amount}}</0> 。您可以根据一定费用来减少该数额。",
         "infoNoLimit": "您已完全批准此帐户。您可以根据一定费用来减少该数额。",
         "approvedWithLimit": "您已批准此账户上的 <0>{{value}}</0>。",
-        "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
-        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+        "enabling": "账户批准一经确认，您便可存入资产。",
+        "notEnabled": "账户需要获得您的批准才能贷出资产。",
+        "notEnoughApproved": "您必须提高您账户批准贷出的限额。"
       },
       "supply": {
         "title": "存入",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "description": "输入要贷出给协议的资产数额。"
       },
       "withdraw": {
         "title": "提取",
@@ -1412,7 +1412,7 @@
         "label": "信贷账户",
         "parentAccount": "1. 选择 {{currencyName}} 账户",
         "token": "2. 选择代币",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "verifyTokenType": "请验证 <0>{{token}}</0> 是 <0>{{tokenType}}</0> 代币。发送到 {{currency}} 账户的任何其他类型的加密资产都可能被丢失。",
         "warningTokenType": "请只发送 <0>{{ticker}}</0> 或 <0>{{tokenType}}</0> 代币到 {{currency}} 账户。任何其他加密资产都可能丢失。"
       },
       "connectDevice": {
@@ -1981,7 +1981,7 @@
         "confirmation": {
           "tooltip": {
             "title": "交易正待确认",
-            "desc": "You have to wait a moment before nominating"
+            "desc": "您必须稍候片刻才能提名"
           },
           "title": "确认",
           "success": {
@@ -1994,7 +1994,7 @@
           "pending": {
             "title": "正在绑定您的资产……"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -2023,7 +2023,7 @@
           "pending": {
             "title": "正在重新绑定您的资产……"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -2035,7 +2035,7 @@
           "amountLabel": "要解绑的数额",
           "availableLabel": "已绑定",
           "maxLabel": "最多",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
+          "info": "经过 28 天的解绑期后即可提取已解绑的资产。",
           "learnMore": "了解更多"
         },
         "connectDevice": {
@@ -2046,13 +2046,13 @@
           "label": "确认",
           "success": {
             "title": "已成功发送解绑交易",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
+            "text": "28 天后即可提取已解绑的资产。",
             "cta": "查看详情"
           },
           "pending": {
             "title": "正在解绑您的资产……"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
         }
       }
     },
@@ -2060,7 +2060,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "提取",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
+          "description": "经过 28 天的解绑期后即可提取已解绑的资产。",
           "info": "You can then withdraw unbonded assets to your available balance."
         },
         "chill": {
@@ -2081,7 +2081,7 @@
           "label": "确认",
           "success": {
             "title": "已成功发送交易",
-            "text": "You will see your operation in history soon.",
+            "text": "很快就能在历史记录中查看您的操作。",
             "cta": "查看详情"
           },
           "pending": {
@@ -2121,7 +2121,7 @@
           "bullet": {
             "delegate": "委托出去的账户依旧为您所有。",
             "access": "您可以随时访问您的资产。",
-            "ledger": "Delegate securely with your Ledger device."
+            "ledger": "使用您的 Ledger 设备安全地进行委托。"
           },
           "button": {
             "cta": "委托以便赚取奖励"
