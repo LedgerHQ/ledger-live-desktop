@@ -281,28 +281,28 @@
       "txid": "معرّف المبادلة",
       "status": "الحالة",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "expired": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
+        "refunded": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك للمزيد من المعلومات.",
+        "pending": "يُرجى الانتظار بينما يقوم مزود المبادلة بإتمام المعاملة.",
+        "onhold": "يرجى الاتصال بمزود المبادلة باستخدام معرف مبادلتك لحل المشكلة.",
+        "finished": "تم تنفيذ مبادلتك بنجاح."
       },
       "date": "التاريخ",
       "from": "من",
-      "fromAddress": "Origin address",
-      "fromAddress_plural": "Origin addresses",
+      "fromAddress": "عنوان المرسل",
+      "fromAddress_plural": "عناوين المرسِلين",
       "to": "إلى",
       "toProvider": "عنوان المزود",
       "initialAmount": "المبلغ الأولي",
       "creditedAmount": "المبلغ المضاف"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
+      "title": "اختر مزود لمبادلة العملات المشفرة",
       "learnMore": "ما هي المبادلة؟",
-      "kycRequired": "KYC Required",
+      "kycRequired": "مطلوب KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
+          "الولايات المتحدة فقط (قريبا أوروبا وأفريقيا وآسيا)",
           "نقود ورموز توكن متعددة",
           "مركزي"
         ]
@@ -2488,7 +2488,7 @@
         "noDevice": "ليس لديك جهاز؟ <0>شراء جهاز ليدجر نانو إكس (Nano X)</0>",
         "languageWarning": {
           "title": "Get started in {{language}}",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
+          "desc": "نحن نعمل على تقديم لغات إضافية لمساعدتك في بدء استخدام Ledger. يرجى العلم أن الجزء المتبقي من تجربة ليدجر متاح حاليًا باللغة الإنجليزية فقط.",
           "cta": "فهمت ذلك"
         }
       },
