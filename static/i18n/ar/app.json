@@ -3247,7 +3247,7 @@
     },
     "UserRefusedFirmwareUpdate": {
       "title": "تم إلغاء التحديث على الجهاز",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "description": "تم إلغاء تثبيت جميع التطبيقات الموجودة على جهازك. حافظ على جهازك محدثًا للاستفادة من التحسينات في الأمان والوظائف."
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
