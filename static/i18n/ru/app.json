@@ -159,12 +159,12 @@
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
-    "openHeader": "Expose your Device accounts through WebSocket",
-    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
-    "openedHeader": "{{appName}} bridge opened",
+    "openHeader": "Открывайте доступ к счетам на устройстве через WebSocket",
+    "openDescription": "Открытие моста даёт сторонним приложениям доступ ко всем вашим счетам.",
+    "openedHeader": "Мост для {{appName}} открыт",
     "openedDescription": "Теперь вы можете использовать свой счёт {{appName}} в стороннем веб-приложении через WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
+    "completeHeader": "Сеанс моста завершён",
+    "completeDescription": "Мост WebSocket закрыт.",
     "openButton": "Открыть",
     "disconnectButton": "Отключить"
   },
@@ -225,7 +225,7 @@
         "fixedUnavailable": "Для этой пары фиксированный курс не поддерживается",
         "floatDesc": "Сумма может измениться в зависимости от состояния рынка.",
         "fixedDesc": "Ваша сумма останется прежней даже при изменениях на рынке. Обновляется каждые 60 секунд.",
-        "by": "Provided by"
+        "by": "Поставщик"
       },
       "exchange": "Обменять",
       "helpCTA": "Что такое Swap (обмен криптоактивов)?",
