@@ -1463,11 +1463,11 @@
         "amount": "المبلغ",
         "fees": "رسوم الشبكة",
         "useMax": "إرسال الحد الأقصى",
-        "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
+        "rippleTag": "علامة",
+        "rippleTagPlaceholder": "اختياري",
         "ethereumGasLimit": "حد الغاز",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "ethereumGasPrice": "سعر الغاز",
+        "unitPerByte": "{{unit}} لكل بايت"
       },
       "verification": {
         "streaming": {
@@ -1483,7 +1483,7 @@
           "cta": "عرض التفاصيل"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "يتم بث المعاملة..."
         },
         "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
       },
@@ -1494,22 +1494,22 @@
       }
     },
     "footer": {
-      "estimatedFees": "Network fees"
+      "estimatedFees": "رسوم الشبكة"
     }
   },
   "sign": {
     "title": "توقيع المعاملة"
   },
   "releaseNotes": {
-    "title": "Release notes",
-    "version": "Ledger Live {{versionNb}}"
+    "title": "ملاحظات الإصدار",
+    "version": "ليدجر لايف (Ledger Live) {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
+    "asset": "الأصل",
+    "price": "السعر",
     "distribution": "التخصيص",
     "amount": "المبلغ",
-    "value": "Value",
+    "value": "القيمة",
     "showAll": "عرض الكل",
     "showLess": "عرض أقل",
     "header": "تخصيص الأصول ({{count}})"
@@ -1518,30 +1518,30 @@
     "account": "حساب",
     "distribution": "التخصيص",
     "amount": "المبلغ",
-    "value": "Value",
+    "value": "القيمة",
     "header": "تخصيص الحساب ({{count}})"
   },
   "tron": {
     "voting": {
       "emptyState": {
         "description": "يمكنك الآن كسب مكافآت من خلال التجميد والتصويت.",
-        "info": "How voting works",
+        "info": "كيفية عمل التصويت",
         "votesDesc": "قم بالإدلاء بأصواتك لممثل واحد أو أكثر للبدء في كسب مكافآت الرهن.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "vote": "الإدلاء بالأصوات",
+        "voteExisting": "إدارة الأصوات"
       },
-      "manageTP": "Manage assets",
+      "manageTP": "إدارة الأصول",
       "warnEarnRewards": "تحتاج على الأقل ل {{amount}} لبدء كسب المكافآت",
       "claimRewards": "المطالبة بالمكافآت",
       "nextRewardsDate": "يمكن المطالبة بالمكافآت بتاريخ {{date}}",
       "claimAvailableRewards": "المطالبة بمبلغ {{amount}}",
-      "header": "Votes",
-      "percentageTP": "% of votes cast",
+      "header": "الأصوات",
+      "percentageTP": "% من الأصوات المدلى بها",
       "noRewards": "لا توجد مكافآت متاحة",
       "remainingVotes": {
         "title": "لا يزال لديك {{amount}} أصوات متبقية",
         "description": "يمكنك الإدلاء بأصواتك المتبقية لكسب المزيد من المكافآت",
-        "button": "Vote now"
+        "button": "قم بالتصويت الآن"
       },
       "flow": {
         "steps": {
@@ -1553,15 +1553,15 @@
               "ledger": "قم بالتجميد والتصويت بأمان باستخدام جهازك من ليدجر (Ledger)."
             },
             "help": "كيفية عمل التصويت",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "termsAndPrivacy": "تفويض حقوقك بالتصويت لا يضمن أي مكافآت من ممثلك الممتاز."
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "إدارة الأصول",
       "freeze": {
-        "title": "Freeze",
+        "title": "تجميد",
         "description": "قم بتجميد TRX لكسب نطاق ترددي (Bandwidth) أو طاقة (Energy). سيمكنك أيضًا التصويت لصالح الممثلين المتميزين."
       },
       "unfreeze": {
@@ -1569,24 +1569,24 @@
         "description": "قم بإزالة تجميد TRX لإعادتهم مرة أخرى إلى رصيدك المتاح. لن تحصل بعد الآن على مكافآت."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "تصويت",
+        "description": "قم بالتصويت للممثلين الممتازين لكسب المكافآت.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
+            "title": "الإدلاء بالأصوات",
             "description": "صوّت لواحد أو أكثر من الممثلين الممتازين للبدء في كسب المكافآت.",
             "footer": {
               "doNotShowAgain": "عدم الإظهار مرة أخرى",
-              "next": "Cast Votes"
+              "next": "الإدلاء بالأصوات"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "ممثلون مميزون أم مرشحون؟",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "title": "الممثلون المميزون (SR)",
+                "description": "يلعب الممثلون المميزون دورًا رئيسيًا في إدارة مجتمع ترون عن طريق ضمان الوظائف الأساسية، مثل إنشاء الكتل وحفظ الدفاتر."
               },
               "candidates": {
-                "title": "Candidates",
+                "title": "المرشحون",
                 "description": "تم انتخاب 127 فردًا من خلال التصويت من قبل مجتمع حاملي رموز التوكن بأكمله. يتم تحديث الأصوات مرة كل 6 ساعات."
               }
             }
@@ -1597,23 +1597,23 @@
   },
   "bitcoin": {
     "inputSelected": "تم الاختيار",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
-    "modalTitle": "Coin control",
-    "coincontrol": "Coin control",
+    "toSpend": "عملات للإنفاق",
+    "toReturn": "المتبقي المراد إرجاعه",
+    "modalTitle": "التحكم في العملات",
+    "coincontrol": "التحكم في العملات",
     "advanced": "الخيارات المتقدمة",
-    "ctaDisabled": "This account has no UTXO",
+    "ctaDisabled": "ليس بهذا الحساب UTXO",
     "whatIs": "ما هو اختيار النقود؟",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
+    "rbf": "السماح باستبدال المعاملة (Replace-By-Fee).",
     "strategy": "إستراتيجية اختيار النقود",
     "selected": "النقود المختارة للإستراتيجية",
     "amount": "المبلغ المراد إرساله:",
-    "replaceable": "replaceable",
+    "replaceable": "قابل للاستبدال",
     "cannotSelect": {
       "unconfirmed": "لا يمكنك اختيار نقود من المعاملات الغير مؤكدة و القابلة للاستبدال.",
       "last": "تحتاج أن تختار على الاقل واحد"
     },
-    "pending": "pending",
+    "pending": "مُعلّق",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
     "pickingStrategy": "UTXO picking strategy",
     "pickingStrategyLabels": {
@@ -3079,7 +3079,7 @@
       "description": "Try setting a custom fee (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
+      "title": "مطلوب تحديث البرنامج الثابت أو التطبيق",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
     },
     "FirmwareNotRecognized": {
@@ -3188,7 +3188,7 @@
       "title": "اسم مستخدم ال RPC مطلوب"
     },
     "RPCPassRequired": {
-      "title": "RPC Password is required"
+      "title": "كلمة مرور RPC مطلوبة"
     },
     "SatStackAccessDown": {
       "title": "تعذر الوصول إلى العقدة الكاملة",
