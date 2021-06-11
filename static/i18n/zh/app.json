@@ -1878,7 +1878,7 @@
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "超额订购 ({{nominatorsCount}})",
       "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
+      "hasPendingBondOperation": "绑定操作仍在等待确认",
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
       "externalControllerTooltip": "此账户由另一个账户控制。",
@@ -2645,7 +2645,7 @@
             "title": "输入您的恢复短语",
             "paragraph1": "您的恢复短语是您在首次设置钱包时备份下来的那份秘密单词列表。",
             "paragraph2": "Ledger 不会保存您恢复短语的副本。",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "disclaimer": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
             "buttons": {
               "next": "输入恢复短语",
               "prev": "上一步",
@@ -2664,7 +2664,7 @@
             },
             "writeDownWords": {
               "title": "写下所有的恢复词",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "descr": "在恢复表的位置 1 写下 Nano 上显示的 Word #1 第一个词。然后在您的 Nano 设备上按右键显示 Word #2 第二个词，并将其写在位置 2。重复该操作，确保按正确的顺序和拼写将所有的助记词写下来。按 Nano 上的左键，核对以防出错。"
             },
             "buttons": {
               "next": "下一步",
@@ -2779,11 +2779,11 @@
       "screens": {
         "accessYourCoins": {
           "title": "访问您的加密资产",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "description": "您的加密资产存放在区块链中。您需要使用私钥来访问并管理它们。"
         },
         "ownYourPrivateKey": {
           "title": "保管好您的私钥",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "description": "您的私钥就存放在您的 Nano 中。它必须为您所独有，这样您才能掌控自己的金钱。"
         },
         "stayOffline": {
           "title": "保持离线状态",
