@@ -750,14 +750,14 @@
             "text": "存款一经网络确认，您就可以开始赚取利息。",
             "done": "关闭",
             "cta": "查看详情",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "info": "交易需要经过一定时间才能显示在浏览器中并确认。"
           }
         }
       }
     },
     "noEthAccount": {
       "title": "请先创建 ETH 账户",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "description": "<0>{{ asset }}({{ ticker }})</0> 是以太坊 ERC-20 代币。要借出 {{ ticker }}，安装 Ethereum 以太坊应用程序并创建一个以太坊账号",
       "cta": "添加账户"
     },
     "emptyAccountDeposit": {
@@ -973,21 +973,21 @@
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "{{currencyName}} 更新完成",
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
-        "description": "Please wait for your accounts to be updated"
+        "title": "{{currencyName}} 正在更新......",
+        "description": "请等待您的账户完成更新"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "{{currencyName}} 更新未完成",
+        "description": "没有要更新的 {{currencyName}} 账户"
       }
     },
     "cta": {
       "startUpdate": "开始更新",
-      "nextCurrency": "Continue with {{currency}} update"
+      "nextCurrency": "继续 {{currency}} 更新"
     }
   },
   "addAccounts": {
@@ -1008,11 +1008,11 @@
     "success": "已成功添加账户",
     "success_plural": "已成功添加账户",
     "successDescription": "添加其他账户或返回至资产组合",
-    "successDescription_plural": "Add other accounts or return to Portfolio",
+    "successDescription_plural": "添加其他账户或返回至资产组合",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "Show all address types",
+      "showAllAddressTypes": "显示所有地址类型",
       "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
     },
     "supportLinks": {
@@ -1115,10 +1115,10 @@
     "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction",
+      "confirm": "确认 Swap 掉期交易",
       "amountSent": "发送数额",
       "amountReceived": "待收数额",
-      "amountReceivedFloat": "Amount to receive before service fees",
+      "amountReceivedFloat": "服务费之前收到的数额",
       "fees": "费用",
       "provider": "提供方",
       "payoutNetworkFees": "支出费用",
@@ -1126,7 +1126,7 @@
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Sell transaction"
+      "confirm": "确认卖出交易"
     }
   },
   "manager": {
@@ -1152,7 +1152,7 @@
       "placeholderNoAppsInstalled": "设备未安装相关应用程序",
       "placeholderGoToCatalog": "前往应用目录安装应用",
       "noResultsFound": "搜索无结果",
-      "noResultsDesc": "Please verify the spelling and try again",
+      "noResultsDesc": "请检查拼写后重试。",
       "filter": {
         "title": "显示",
         "all": "全部",
@@ -1199,10 +1199,10 @@
         "learnMoreTooltip": "了解关于 {{appName}} 的更多信息...",
         "removeTooltip": "卸载 {{appName}}",
         "useAppForToken": "需要管理 {{tokenType}} 代币？",
-        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "tokenAppDisclaimer": "如需管理 {{tokenName}} {{tokenType}} 代币，<1>请安装 {{appName}} 应用程序</1> 并验证您确实拥有 <1>{{tokenType}} 版本，</1>然后将其发送至 <3>您的 {{appName}} 账户</3>。",
+        "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
-        "intallParentApp": "Install {{appName}} app"
+        "intallParentApp": "安装 {{appName}} 应用程序"
       },
       "uninstall": {
         "title": "卸载全部",
