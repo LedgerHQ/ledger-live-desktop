@@ -552,7 +552,7 @@
       "amountSupplied": "المبلغ المودع",
       "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
       "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "currencyAPYTooltip": "معدل العائد السنوي للوديعة المركبة باستمرار",
       "accruedInterests": "الفوائد المتراكمة",
       "accruedInterestsTooltip": "Interest generated on your lent assets",
       "interestEarned": "الفوائد المكتسبة",
@@ -618,7 +618,7 @@
         "totalBalance": "رصيد الأصول",
         "totalBalanceTooltip": "المبلغ المتاح للإقراض",
         "currentAPY": "إيداع APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "currentAPYTooltip": "معدل العائد السنوي الذي يتم الحصول عليه من وديعة مركبة بشكل مستمر",
         "actions": "الإجراءات"
       }
     },
@@ -659,7 +659,7 @@
           "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
           "limit": "{{amount}} محدود",
           "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
+          "contractName": "{{currencyName}} مُجمع",
           "advanced": "متقدم",
           "amountLabel": "المبلغ المطلوب الموافقة عليه",
           "amountLabelTooltip": "هذا يحد من المبلغ المتاح للعقد الذكي."
