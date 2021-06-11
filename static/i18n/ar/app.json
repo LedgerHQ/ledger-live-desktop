@@ -772,30 +772,30 @@
     "title": "الحسابات",
     "noResultFound": "لا توجد حسابات.",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
+      "name|asc": "الاسم A-Z",
+      "name|desc": "الاسم Z-A",
       "balance|asc": "أدنى رصيد",
       "balance|desc": "أعلى رصيد"
     },
     "range": {
       "day": "يوم",
-      "week": "Week",
-      "month": "Month",
-      "year": "Year",
-      "all": "All"
+      "week": "أسبوع",
+      "month": "شهر",
+      "year": "سنة",
+      "all": "الكل"
     },
     "optionsMenu": {
-      "title": "Options",
+      "title": "الخيارات",
       "exportOperations": "تصدير سجل الاصدارات",
-      "exportToMobile": "Export to mobile"
+      "exportToMobile": "تصدير إلى الجوال"
     },
     "contextMenu": {
-      "star": "Star",
+      "star": "تفضيل",
       "receive": "تلقي",
-      "send": "Send",
-      "swap": "مبادلة",
-      "buy": "Buy",
-      "sell": "Sell",
+      "send": "إرسال",
+      "swap": "تبادل",
+      "buy": "شراء",
+      "sell": "بيع",
       "edit": "تعديل الحساب",
       "hideToken": "إخفاء رمز التوكن"
     }
@@ -803,8 +803,8 @@
   "help": {
     "title": "الدعم والمساعدة",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "لنبدأ",
+      "desc": "ابدأ هنا"
     },
     "status": {
       "title": "Ledger Status",
@@ -850,7 +850,7 @@
     "ledgerAcademy": {
       "title": "Ledger Academy",
       "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "cta": "بدء التعلم"
     },
     "stakeCosmos": {
       "title": "الرهن مع COSMOS",
@@ -1333,7 +1333,7 @@
         "title": "تأكيد",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
+          "textNRG": "ستبدأ في كسب الطاقة بمجرد أن تؤكد الشبكة التجميد. يمكنك قريبًا التصويت للممثلين الممتازين للحصول على مكافآت أيضًا.",
           "text": "ستبدأ في كسب نطاق ترددي (Bandwidth) بمجرد تأكيد الشبكة للتجميد. يمكنك قريبًا التصويت للممثلين الممتازين للحصول على مكافآت أيضًا.",
           "votePending": "التصويت في {{time}}",
           "vote": "تصويت",
@@ -2488,10 +2488,10 @@
       "welcome": {
         "title": "Welcome to Ledger",
         "description": "Safely manage your crypto from your computer.",
-        "cta": "Get started",
+        "cta": "لنبدأ",
         "noDevice": "ليس لديك جهاز؟ <0>شراء جهاز ليدجر نانو إكس (Nano X)</0>",
         "languageWarning": {
-          "title": "Get started in {{language}}",
+          "title": "ابدأ باللغة {{language}}",
           "desc": "نحن نعمل على تقديم لغات إضافية لمساعدتك في بدء استخدام Ledger. يرجى العلم أن الجزء المتبقي من تجربة ليدجر متاح حاليًا باللغة الإنجليزية فقط.",
           "cta": "فهمت ذلك"
         }
@@ -2524,7 +2524,7 @@
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
+          "getStarted": "بدء العمل",
           "pinCode": "Pin code",
           "recoveryPhrase": "عبارة الاسترداد",
           "hideRecoveryPhrase": "إخفاء عبارة الاسترداد",
@@ -2542,7 +2542,7 @@
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "أفضل طريقة كي تبدأ:",
             "rules": {
               "1": "Plan 30 minutes and take your time.",
               "2": "Grab a pen to write with.",
