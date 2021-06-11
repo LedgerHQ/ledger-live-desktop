@@ -720,7 +720,7 @@
         "1": {
           "subtitle": "批准账户以允许协议",
           "subtitle2": "处理未来贷款。",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+          "description": "您需要授权 Compound 复利智能合约将一定数额的资产转移到该协议中。批准一个账户授予该协议处理未来贷款的权限。"
         },
         "2": {
           "subtitle": "供应资产以赚取利息",
@@ -832,7 +832,7 @@
   },
   "blacklistToken": {
     "title": "隐藏代币",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
+    "desc": "此操作将隐藏全部 <1><0>{{tokenName}}</0></1> 帐户，您可以使用 <3>设置</3> 再次显示这些帐户。",
     "hideCTA": "隐藏代币"
   },
   "banners": {
@@ -1256,13 +1256,13 @@
       "mcuTitle": "完成更新",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
-      "mcuPin": "Please wait for the update to finish",
+      "mcuPin": "请等待更新完成",
       "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "固件已更新",
       "successTextApps": "请在设备上重新安装应用程序",
-      "successTextNoApps": "You can now install apps on your device",
+      "successTextNoApps": "您现在可以在您的设备上安装应用程序",
       "sucessCTAApps": "重新安装应用程序",
       "SuccessCTANoApps": "安装应用程序",
       "cancelReinstallCTA": "安装更新",
@@ -1646,8 +1646,8 @@
           "starter": {
             "description": "You may earn rewards by delegating your ATOM assets to a validator.",
             "bullet": [
-              "You keep ownership of delegated assets",
-              "Delegate using your Ledger device",
+              "您保有对已委托资产的所有权",
+              "使用您的 Ledger 设备进行委托",
               "Assets will be available 21 days after undelegation"
             ],
             "warning": {
@@ -1774,7 +1774,7 @@
   },
   "algorand": {
     "operationHasRewards": "赚取的奖励",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
+    "operationEarnedRewards": "您已赚取 <0>{{amount}}</0> 奖励。",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
