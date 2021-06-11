@@ -3165,10 +3165,10 @@
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "主账户 ETH 余额不足以支付网络费用"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
@@ -3192,7 +3192,7 @@
     },
     "SatStackAccessDown": {
       "title": "无法连接到完整节点",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "description": "请确认 SatStack 和您的节点正在运行。如果问题仍然存在，请在设置选项中检查完整节点设置。"
     },
     "SatStackStillSyncing": {
       "title": "正在进行节点同步……",
@@ -3283,27 +3283,27 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "需要更新应用程序",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "接收地址与发送地址相同"
     },
     "CantOpenDevice": {
       "title": "抱歉，连接失败",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "description": "检测到设备但连接失败。请重试，如果问题仍然存在，请联系 Ledger 客服。"
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "无法自动验证：请仔细核对该地址。",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "无法扫描此二维码：此地址不支持自动验证"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "无法加载费率。请手动设置费用"
     },
     "FeeRequired": {
       "title": "费用为必填项"
