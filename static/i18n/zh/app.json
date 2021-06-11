@@ -199,8 +199,8 @@
     },
     "kyc": {
       "title": "欢迎使用 Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device. This service is not available in the US and a few other countries.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "subtitle": "直接通过您的 Ledger 设备兑换加密资产。此服务在美国和其他一些国家不可用。",
+      "disclaimer": "继续即表示您同意您的位置数据将共享给第三方服务提供商，以使它们遵守其 AML/KYC 程序。"
     },
     "form": {
       "amount": "数额",
@@ -229,8 +229,8 @@
       },
       "exchange": "兑换",
       "helpCTA": "什么是 Swap？",
-      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
-      "noAccounts": "You don't have {{currencyName}} accounts with balance",
+      "bubble": "我们使用固定汇率，这是您将收到的确切数额。",
+      "noAccounts": "您没有存有余额的 {{currencyName}} 账户",
       "noApp": "未安装 {{currencyName}} 应用程序。",
       "outdatedApp": "{{currencyName}} 应用有可用的更新",
       "loadingRates": "正在加载费率..."
@@ -335,7 +335,7 @@
       "steps": {
         "landing": {
           "header": "启动您的全部节点。不要信任，验证。",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "description": "一个比特币的完整节点验证所有交易和区块，使您能够在为比特币网络做出贡献的同时无需信任地使用比特币。",
           "list": {
             "item1": "在拥有足够资源的设备上设置 Bitcoin Core（比特币核心）。",
             "item2": "等待您的节点完全同步。",
@@ -368,15 +368,15 @@
             },
             "connecting": {
               "header": "正在测试节点连接",
-              "description": "Please wait while we check if your full node is responding."
+              "description": "请稍等，我们正在检查您的完整节点是否有响应。"
             },
             "success": {
               "header": "完整节点连接成功",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "description": "您现在可以配置您的完整节点来扫描您在区块链上的账户。"
             },
             "failure": {
               "header": "无法连接到完整节点",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "description": "请确保您的节点完全同步并验证其连接设置。"
             }
           }
         },
@@ -385,11 +385,11 @@
           "connectionSteps": {
             "pending": {
               "header": "正在从设备获取账户",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "description": "请稍候，正在将待扫描的账户添加到节点配置文件中。"
             },
             "success": {
               "header": "账户已添加至节点配置",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
+              "description": "配置文件已保存到用户数据文件夹。 它允许 Ledger SatStack 连接到您的完整节点，并允许其扫描您在区块链上的账户。",
               "cta": "查看用户数据"
             }
           }
@@ -1288,8 +1288,8 @@
     "steps": {
       "rewards": {
         "title": "奖励",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "description": "恭喜！您通过为验证器投票获得了 <1>{{amount}}</1> 奖励。",
+        "info": "每 24 小时可申领一次奖励。"
       },
       "connectDevice": {
         "title": "设备"
@@ -1298,11 +1298,11 @@
         "title": "确认",
         "success": {
           "title": "已申领奖励",
-          "text": "Your rewards were added to your available balance.",
+          "text": "您的奖励已经添加进您的可用余额中。",
           "cta": "查看详情",
           "done": "完成"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
       }
     }
   },
@@ -1324,7 +1324,7 @@
       "confirmation": {
         "tooltip": {
           "title": "交易正待验证",
-          "desc": "You have to wait a minute before being able to vote"
+          "desc": "您必须等待一分钟才能够投票"
         },
         "title": "确认",
         "success": {
@@ -1413,7 +1413,7 @@
         "parentAccount": "1. 选择 {{currencyName}} 账户",
         "token": "2. 选择代币",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "warningTokenType": "请只发送 <0>{{ticker}}</0> 或 <0>{{tokenType}}</0> 代币到 {{currency}} 账户。任何其他加密资产都可能丢失。"
       },
       "connectDevice": {
         "title": "设备",
