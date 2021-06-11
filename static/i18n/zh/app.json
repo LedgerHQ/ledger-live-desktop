@@ -2450,22 +2450,22 @@
       },
       "recoverySeed": {
         "title1": "恢复短语的作用是什么？",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
+        "paragraph1": "您的恢复短语就像是一把独一无二的主密钥。您的 Ledger 设备使用它来为您所拥有的每一种加密资产计算私钥。",
+        "paragraph2": "为了恢复对您加密资产的访问，任何钱包都能通过您的恢复短语算出同样的私钥。",
         "link": "有关恢复短语的更多详情",
         "title2": "如果我的 Nano 无法使用了该怎么办？",
         "paragraph3": "不要担心并遵循以下步骤：",
         "points": {
           "1": "获得一个新的硬件钱包。",
           "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
-          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+          "3": "在您的新设备上输入您的恢复短语从而恢复对您加密资产的访问。"
         }
       },
       "whereToHide": {
         "title": "我应该将恢复短语保存在哪里？",
         "points": {
           "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
+          "2": "<0>切勿</0> 将您的 24 个助记词告诉任何人。",
           "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
@@ -2533,7 +2533,7 @@
         "screens": {
           "importYourRecoveryPhrase": {
             "title": "通过恢复短语进行还原",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
+            "paragraph1": "使用恢复短语还原您的 Nano，从而还原、更换或备份您的 Ledger 硬件钱包。",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
               "next": "好的，我一切就绪！",
@@ -2643,7 +2643,7 @@
           },
           "existingRecoveryPhrase": {
             "title": "输入您的恢复短语",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+            "paragraph1": "您的恢复短语是您在首次设置钱包时备份下来的那份秘密单词列表。",
             "paragraph2": "Ledger 不会保存您恢复短语的副本。",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
@@ -2652,8 +2652,8 @@
               "help": "需要帮助"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+              "title": "请勿使用非您本人生成的恢复短语。",
+              "desc": "您的 Ledger 硬件钱包的 PIN 识别密码和恢复短语应该由您本人单独完成初始化操作。如果您收到的设备含有一个已经存在的种子词或一个已经初始化的 PIN 识别密码，那么请勿使用该产品，并请联系我们的客服。",
               "supportLink": "联系客服"
             }
           },
@@ -2689,7 +2689,7 @@
             },
             "selectLength": {
               "title": "选择恢复短语的长度",
-              "descr": "您的恢复短语可以有12、18或24个词。您必须输入所有的词才能访问您的加密资产。"
+              "descr": "您的恢复短语可以有12、18或24个助记词。您必须输入所有的词才能访问您的加密资产。"
             },
             "enterWord": {
               "title": "输入 Word #1 第一个词……",
@@ -2736,8 +2736,8 @@
           "hideRecoveryPhrase": {
             "title": "保管好您的恢复短语",
             "paragraph": "如果您的 Nano 无法使用，恢复短语是您访问自己资产的最后机会。因此，您必须将它存放在安全的地方。",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "keepItOffline": "仅可在硬件钱包上输入这些词，不要在电脑或智能手机上输入。",
+            "neverShowToAnyone": "永远不要将您的 24 个助记词告诉别人，Ledger 也不例外。",
             "buttons": {
               "next": "好的，我完成了！",
               "prev": "上一步",
