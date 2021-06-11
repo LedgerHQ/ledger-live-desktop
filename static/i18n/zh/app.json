@@ -713,7 +713,7 @@
         "title": "借出加密货币",
         "subtitle": "按照 Compound 复利协议借出资产",
         "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
-        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+        "switchLabel": "<1>我已阅读并同意 </1><0>使用条款</0><1>。</1>"
       },
       "steps": {
         "title": "步骤 <0>{{step}} / {{total}}</0>",
