@@ -567,7 +567,7 @@
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
+        "title": "الإقراض",
         "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
         "cta": "How does lending on Compound work?"
       },
