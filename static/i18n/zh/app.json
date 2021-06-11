@@ -29,7 +29,7 @@
     "launch": "启动",
     "continue": "继续",
     "previous": "上一步",
-    "learnMore": "查看更多",
+    "learnMore": "了解更多",
     "help": "帮助",
     "needHelp": "需要帮助？",
     "areYouSure": "是否确定?",
@@ -1195,7 +1195,7 @@
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
-        "learnMore": "了解更多信息",
+        "learnMore": "了解更多",
         "learnMoreTooltip": "了解关于 {{appName}} 的更多信息...",
         "removeTooltip": "卸载 {{appName}}",
         "useAppForToken": "需要管理 {{tokenType}} 代币？",
@@ -1607,41 +1607,41 @@
     "replaceable": "可替换",
     "cannotSelect": {
       "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "last": "你需要至少选中一种"
     },
     "pending": "待定",
     "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
     "pickingStrategy": "UTXO 选择策略",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "旧币优先（先入先出）",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "OPTIMIZE_SIZE": "令费用最小化（优化大小）",
+      "MERGE_OUTPUTS": "令未来费用最小化（合并硬币）"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
         "description": "You can earn ATOM rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "info": "委托机制如何运作",
+        "delegation": "赚取奖励"
       },
-      "claimRewards": "Claim rewards",
-      "header": "Delegation(s)",
-      "noRewards": "No rewards available",
-      "delegate": "Add",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "claimRewards": "申领奖励",
+      "header": "委托",
+      "noRewards": "没有奖励可用",
+      "delegate": "添加",
+      "undelegate": "解除委托",
+      "redelegate": "重新委托",
+      "redelegateDisabledTooltip": "您可以重新委托 <0>{{days}}</0>",
       "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
       "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
-      "estYield": "est. yield",
-      "activeTooltip": "Delegated amounts generate rewards",
+      "reward": "申领奖励",
+      "currentDelegation": "已委托：<0>{{amount}}</0>",
+      "estYield": "预估收益",
+      "activeTooltip": "已委托的数额会生成奖励",
       "inactiveTooltip": "Undelegated amounts do not generate rewards",
-      "minSafeWarning": "Not enough funds",
+      "minSafeWarning": "资金不足",
       "flow": {
-        "title": "Delegate",
+        "title": "委托",
         "steps": {
           "starter": {
             "description": "You may earn rewards by delegating your ATOM assets to a validator.",
@@ -1661,11 +1661,11 @@
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "确认",
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1674,34 +1674,34 @@
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "申领奖励",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
-            "compound": "Compound",
-            "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
+            "title": "奖励",
+            "compound": "Compound（按复利协议）",
+            "claim": "兑现",
+            "compoundOrClaim": "复利或兑现",
             "compoundDescription": "Rewards will be added to delegated amount",
             "claimDescription": "Rewards will be added to the available balance",
             "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
             "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
-            "selectLabel": "Select a delegation"
+            "selectLabel": "选择委托"
           },
           "connectDevice": {
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
+            "title": "确认",
+            "label": "确认",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards were added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "奖励已成功兑现",
+              "titleCompound": "奖励已成功复利",
+              "text": "奖励已经添加到您的可用余额中",
+              "textCompound": "<0>{{amount}}</0> 奖励已经自动委托给 <0>{{validator}}</0>",
+              "cta": "查看详情"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "正在播送交易……"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1710,18 +1710,18 @@
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "重新委托资产",
         "steps": {
           "starter": {
-            "title": "Redelegation",
+            "title": "重新委托",
             "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
             "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "howDelegationWorks": "委托机制如何运作？"
           },
           "validators": {
             "title": "验证器",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
+            "currentDelegation": "当前委托",
+            "newDelegation": "新的委托",
             "chooseValidator": "选择一个验证器",
             "warning": "更换验证器后，您需要等待 <0> 21 天</0> 才能再次更换。"
           },
@@ -1729,11 +1729,11 @@
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "确认",
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1741,11 +1741,11 @@
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
+      "header": "解除委托",
       "headerTooltip": "Available after the 21-day timelock",
       "inactiveTooltip": "Undelegated amounts do not generate rewards.",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "解除资产委托",
         "steps": {
           "amount": {
             "title": "数额",
@@ -1760,11 +1760,11 @@
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "确认",
             "success": {
               "title": "You have successfully undelegated your assets.",
               "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1773,15 +1773,15 @@
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
+    "operationHasRewards": "赚取的奖励",
     "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
     "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "添加 ASA (资产)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
+            "title": "ASA (资产)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
             "selectLabel": "Choose an ASA (Asset)",
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
@@ -1790,11 +1790,11 @@
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "确认",
             "success": {
-              "title": "{{token}} asset successfully added",
+              "title": "已成功添加 {{token}} 资产",
               "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1802,12 +1802,12 @@
       }
     },
     "claimRewards": {
-      "header": "Rewards",
+      "header": "奖励",
       "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
+      "cta": "申领奖励",
       "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "申领奖励",
         "steps": {
           "starter": {
             "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
@@ -1816,13 +1816,13 @@
               "access": "Increase the account’s balance to increase rewards.",
               "ledger": "Perform a transaction to or from the account to claim rewards."
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "Algorand 奖励机制如何运作？",
             "button": {
               "cta": "接收 Algo"
             }
           },
           "info": {
-            "title": "Rewards",
+            "title": "奖励",
             "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
@@ -1830,11 +1830,11 @@
             "title": "设备"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "确认",
             "success": {
-              "title": "Rewards successfully claimed!",
+              "title": "已成功申请奖励！",
               "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "cta": "查看详情"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
@@ -1843,33 +1843,33 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded",
+    "lockedBalance": "已绑定",
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
-    "unlockingBalance": "Unbonding",
+    "unlockingBalance": "正在解绑",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
-    "unlockedBalance": "Unbonded",
+    "unlockedBalance": "已解绑",
     "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work"
+        "info": "提名机制如何运作"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "chill": "Clear nominations",
-      "totalStake": "Total Stake",
+      "header": "提名名单",
+      "nominate": "提名",
+      "chill": "清除提名",
+      "totalStake": "质押总额",
       "amount": "已绑定数额",
-      "commission": "Commission",
-      "active": "Active",
+      "commission": "佣金",
+      "active": "活跃",
       "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
+      "inactive": "不活跃",
       "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
+      "waiting": "落选",
       "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
       "notValidator": "并非验证器",
       "notValidatorTooltip": "该地址不再是一个验证器",
-      "elected": "Elected",
+      "elected": "当选",
       "nominatorsCount": "{{nominatorsCount}} nominators",
       "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
@@ -1881,26 +1881,26 @@
       "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
       "externalStashTooltip": "This account controls another account.",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "showInactiveNominations": "显示所有提名 ({{count}})",
+      "hideInactiveNominations": "仅显示活跃状态的提名",
+      "noActiveNominations": "没有活跃状态的提名。",
+      "showAllUnlockings": "显示所有正在解绑的数额 ({{count}})",
+      "hideAllUnlockings": "隐藏正在解绑的数额"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
+      "header": "正在解绑",
+      "headerTooltip": "在 28 天的解绑期后可用",
+      "withdrawUnbonded": "提取 ({{amount}})",
       "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
       "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "rebond": "重新绑定",
+      "unbonded": "已解绑"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "管理资产",
       "bond": {
-        "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "title": "绑定",
+        "description": "要赚取奖励，首先要绑定一定数额。其次，必须提名您的 (某个或多个) 验证器。"
       },
       "unbond": {
         "title": "Unbond",
@@ -1931,15 +1931,15 @@
           "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "确认",
+          "label": "确认",
           "success": {
             "title": "You have successfully nominated validators",
             "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "cta": "查看详情"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "正在播送交易……"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -1953,7 +1953,7 @@
         "stashDescription": "Rewards are credited to your available balance.",
         "staked": "Bonded Balance",
         "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
+        "optionTitle": "备注",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
@@ -1971,28 +1971,28 @@
           "title": "数额",
           "amountLabel": "要绑定的数额",
           "availableLabel": "Available",
-          "maxLabel": "Max",
+          "maxLabel": "最多",
           "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "learnMore": "了解更多"
         },
         "connectDevice": {
           "title": "设备"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
+            "title": "交易正待确认",
             "desc": "You have to wait a moment before nominating"
           },
-          "title": "Confirmation",
+          "title": "确认",
           "success": {
-            "title": "Assets successfully bonded",
+            "title": "资产已成功绑定",
             "text": "You can nominate validators once the network has confirmed the transaction.",
             "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "nominate": "提名",
+            "later": "稍后提名"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "正在绑定您的资产……"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -2005,23 +2005,23 @@
           "title": "数额",
           "amountLabel": "要重新绑定的数额",
           "availableLabel": "Unbonding",
-          "maxLabel": "Max",
+          "maxLabel": "最多",
           "info": "重新绑定的资产会立刻添加到已绑定数额中。",
-          "learnMore": "Learn More"
+          "learnMore": "了解更多"
         },
         "connectDevice": {
           "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "确认",
+          "label": "确认",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "资产已重新绑定成功",
+            "text": "一旦网络确认该交易，就会更新您的账户余额。",
+            "cta": "查看详情"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "正在重新绑定您的资产……"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -2034,23 +2034,23 @@
           "title": "数额",
           "amountLabel": "要解绑的数额",
           "availableLabel": "Bonded",
-          "maxLabel": "Max",
+          "maxLabel": "最多",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "learnMore": "了解更多"
         },
         "connectDevice": {
           "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "确认",
+          "label": "确认",
           "success": {
             "title": "Unbond transaction sent successfully",
             "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "cta": "查看详情"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "正在解绑您的资产……"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -2077,15 +2077,15 @@
           "title": "设备"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "确认",
+          "label": "确认",
           "success": {
             "title": "Transaction sent successfully",
             "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "cta": "查看详情"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "正在播送交易……"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -2101,7 +2101,7 @@
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "数额",
-    "delegated": "Delegated",
+    "delegated": "已委托",
     "completionDate": "Completion date",
     "rewards": "Rewards",
     "duration": "Duration",
@@ -2111,7 +2111,7 @@
     "howItWorks": "How delegation works",
     "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
     "earnRewards": "Earn rewards",
-    "overdelegated": "Overdelegated",
+    "overdelegated": "过度委托",
     "status": "Status",
     "flow": {
       "steps": {
@@ -2119,24 +2119,24 @@
           "title": "Earn staking rewards",
           "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
+            "delegate": "委托出去的账户依旧为您所有。",
             "access": "You can access your assets at any time.",
             "ledger": "Delegate securely with your Ledger device."
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "委托以便赚取奖励"
           }
         },
         "account": {
-          "title": "Delegate account",
+          "title": "委托账户",
           "label": "Account",
-          "toDelegate": "Account to delegate"
+          "toDelegate": "要委托的账户"
         },
         "summary": {
-          "title": "Delegate account",
+          "title": "委托账户",
           "label": "Summary",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
+          "toDelegate": "要委托的账户",
+          "toUndelegate": "要解除委托的账户",
           "validator": "验证器",
           "select": "Select",
           "yield": "Est. Yield {{amount}}",
@@ -2155,16 +2155,16 @@
           "button": "Use validator"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "解除账户委托"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "确认",
+          "label": "确认",
           "success": {
             "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
+            "titleUndelegated": "结束委托",
             "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "textUndelegated": "操作一经确认，您的账户就会结束委托。您随时可以再次委托您的账户。"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
@@ -2172,7 +2172,7 @@
     },
     "contextMenu": {
       "topUp": "接收更多",
-      "redelegate": "Change validator",
+      "redelegate": "更换验证器",
       "stopDelegation": "End delegation"
     }
   },
@@ -2181,7 +2181,7 @@
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
+      "close": "确认",
       "undo": "Show again",
       "disclaimer": "This banner will not show up again until there is a new announcement"
     }
@@ -2234,8 +2234,8 @@
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
-      "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "confirmationsNb": "确认数量",
+      "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
     },
     "profile": {
       "password": "Password lock",
@@ -2329,7 +2329,7 @@
         "label": "New password"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "确认密码"
       },
       "currentPassword": {
         "label": "Current password"
@@ -2418,7 +2418,7 @@
       },
       "statusNotOk": {
         "title": "Ledger live is experiencing issues",
-        "learnMore": "Learn more"
+        "learnMore": "了解更多"
       }
     },
     "announcement": {
@@ -2628,8 +2628,8 @@
               "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "确认 PIN 识别密码",
+              "descr": "再次输入您的 PIN 识别密码以确认。"
             },
             "buttons": {
               "next": "Next step",
@@ -2961,11 +2961,11 @@
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Something went wrong (Error #1)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeTxDecode": {
       "title": "Something went wrong (Error #2)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeInvalidSequence": {
       "title": "Invalid sequence",
@@ -2981,55 +2981,55 @@
     },
     "CosmosBroadcastCodeUnknownRequest": {
       "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
+      "title": "无效地址",
       "description": "Please check the address and try again"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
       "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
+      "title": "未知地址",
       "description": "Please check the address and try again"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
+      "title": "硬币不足",
       "description": "Make sure the account used has enough funds and try again"
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "Something went wrong (Error #11)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeOutOfGas": {
       "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
+      "title": "Memo 字段过长",
       "description": "Please reduce the size of the memo text and try again"
     },
     "CosmosBroadcastCodeInsufficientFee": {
       "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeGasOverflow": {
       "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "description": "尚不支持该加密资产。请联系 Ledger 客服。"
     },
     "DeviceNotGenuine": {
       "title": "Possibly not genuine",
@@ -3041,7 +3041,7 @@
     },
     "DeviceInOSUExpected": {
       "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "description": "请重试或联系 Ledger 客服。"
     },
     "DeviceHalted": {
       "title": "Please restart your Ledger device and retry",
@@ -3077,7 +3077,7 @@
     },
     "FirmwareNotRecognized": {
       "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "HardResetFail": {
       "title": "Sorry, could not reset",
@@ -3116,11 +3116,11 @@
       "description": "Please unlock it"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
+      "title": "请卸载您设备上的所有应用程序",
       "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
+      "title": "抱歉，剩余存储空间不足",
       "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
     },
     "ManagerQuitPage": {
@@ -3154,7 +3154,7 @@
       "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
+      "title": "抱歉，资金不足",
       "description": "Please make sure the account has enough funds."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
@@ -3306,7 +3306,7 @@
     },
     "UnknownMCU": {
       "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "description": "请联系 Ledger 客服"
     },
     "MCUNotGenuineToDashboard": {
       "title": "访问功能面板以更新",
@@ -3377,11 +3377,11 @@
       "description": "You can only vote using round numbers"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
+      "title": "奖励尚不能申领。",
       "description": "You need to wait 24 hours between claims"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "没有可申领的奖励"
     },
     "TronInvalidFreezeAmount": {
       "title": "要冻结的数额不可小于 1"
@@ -3394,7 +3394,7 @@
       "title": "Additional fees may be applied"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "可用票数不足"
     },
     "TronTransactionExpired": {
       "title": "Transaction has expired",
@@ -3418,13 +3418,13 @@
       "title": "Invalid XRP Destination tag"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "余额不足，无法委托"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "余额不足，无法委托"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "主账户余额不足"
     },
     "NotEnoughSpendableBalance": {
       "title": "Balance cannot be below {{minimumAmount}}"
