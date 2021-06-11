@@ -713,7 +713,7 @@
         "title": "إقراض عملات مشفرة",
         "subtitle": "Lend assets on the Compound protocol",
         "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+        "switchLabel": "<1>لقد قرأت ووافقت على </1><0>شروط الاستخدام</0><1>.</1>"
       },
       "steps": {
         "title": "Step <0>{{step}} / {{total}}</0>",
@@ -2141,7 +2141,7 @@
           "select": "اختار",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+          "termsAndPrivacy": "تفويض حقوق التصويت الخاصة بك لا يضمن لك الحصول على أي مكافآت من المدقق الذي تختاره."
         },
         "validator": {
           "title": "اختار المدقق",
@@ -2259,11 +2259,11 @@
     "help": {
       "version": "Version",
       "releaseNotesBtn": "Details",
-      "termsBtn": "Read",
+      "termsBtn": "قراءة",
       "faq": "Ledger Support",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
+      "terms": "شروط الاستخدام",
+      "termsDesc": "باستخدام ليدجر لايف(Ledger Live)، سوف يُعتبر أنك قد قبلت شروط الاستخدام الخاصة بنا.",
       "privacy": "Privacy Policy",
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
@@ -2900,12 +2900,12 @@
     "placeholder": "Enter {{currencyName}} address"
   },
   "Terms": {
-    "title": "Terms of Use",
-    "read": "Read the Terms of Use",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
+    "title": "شروط الاستخدام",
+    "read": "قراءة شروط الاستخدام",
+    "switchLabelTerms": "<0>لقد قرأت ووافقت على </0><1>شروط الاستخدام</1>",
+    "switchLabelPrivacyPolicy": "<0>لقد قرأت ووافقت على</0> <1>سياسة الخصوصية</1>",
     "switchLabelLoss": "أفهم أنني إذا فقدت عبارة الاسترداد هذه، فلن أتمكن من الوصول إلى أصولي المشفرة في حالة فقداني القدرة على الوصول إلى جهاز نانو.",
-    "cta": "Enter Ledger app"
+    "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
     "stellar": {
