@@ -2935,12 +2935,12 @@
       "description": "请等待操作完成。"
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
-      "description": "Please enter an account name"
+      "title": "需要一个账户名",
+      "description": "请输入账户名称"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "不支持该账户。",
+      "description": "请重试或联系客服 ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
       "title": "Recipient account has not opted in the selected ASA."
@@ -2960,11 +2960,11 @@
       "title": "You cannot reduce the amount approved while having an active deposit."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
+      "title": "出错了 (Error #1)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "出错了 (Error #2)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeInvalidSequence": {
@@ -2980,7 +2980,7 @@
       "description": "Make sure the account used has enough funds and try again"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
+      "title": "出错了 (Error #6)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeInvalidAddress": {
@@ -2988,7 +2988,7 @@
       "description": "请核对地址并再次尝试"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
+      "title": "出错了 (Error #8)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeUnknownAddress": {
@@ -3000,11 +3000,11 @@
       "description": "Make sure the account used has enough funds and try again"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": "出错了 (Error #11)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
+      "title": "出错了 (Error #12)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
@@ -3012,35 +3012,35 @@
       "description": "Please reduce the size of the memo text and try again"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
+      "title": "出错了 (Error #14)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "出错了 (Error #15)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
+      "title": "出错了 (Error #16)",
       "description": "请联系 Ledger 客服"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
+      "title": "出错了 (Error #17)",
       "description": "请联系 Ledger 客服"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
+      "title": "不支持 {{currencyName}}",
       "description": "尚不支持该加密资产。请联系 Ledger 客服。"
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
+      "title": "可能不是正版",
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "抱歉，请重试 (genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
+      "title": "抱歉，更新失败",
       "description": "请重试或联系 Ledger 客服。"
     },
     "DeviceHalted": {
