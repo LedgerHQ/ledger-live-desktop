@@ -1239,32 +1239,32 @@
       "contactSupport": "اتصل بالدعم",
       "deprecated": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعيق تحديثه. اتصل بدعم ليدجر (Ledger) للحصول على بديل.",
       "prepareSeed": "تأكد من كتابة عبارة الاسترداد المكونة من 24 كلمة على ورقة الاسترداد و أنها متاحة، على سبيل الاحتياط.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
+      "disclaimerTitle": "أنت على وشك تثبيت <1>إصدار البرنامج الثابت {{version}}</1>.",
       "downloadingUpdateDesc": "يُرجى الانتظار حتى يتم تحميل تثبيت التحديث"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "updating": "Firmware update",
+        "downloadingUpdate": "جاري تنزيل التحديث",
+        "updateMCU": "تحديث البرنامج الثابت",
+        "updating": "تحديث البرنامج الثابت",
         "reset": "إعداد الجهاز",
         "osu": "جاري تثبيت OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Preparing your device..."
+        "flash-mcu": "جاري تحديث MCU...",
+        "flash-bootloader": "جاري تحديث Bootloader...",
+        "firmware": "جاري تحديث البرنامج الثابت...",
+        "flash": "جاري إعداد جهازك..."
       },
-      "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
+      "confirmIdentifier": "قم بالتحقق من المُعرّف",
+      "confirmIdentifierText": "تحقق من أن المُعرّف على جهازك هو المُعرّف ذاته أدناه. قم بتأكيد وإدخال رمز PINال الخاص بك إذا طُلب.",
+      "identifier": "المُعرّف",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
-      "mcuPin": "Please wait for the update to finish",
+      "mcuPin": "يُرجى انتظار الانتهاء من التحديث",
       "mcuSecondNanoX": "اضغط مع الاستمرار على الزر الأيسر حتى تظهر <1><0>{{bootloaderOption}}</0></1>. اضغط على الزرين للتأكيد وأعد الاتصال بجهازك.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "mcuBlueFirst": "اضغط مع الاستمرار على الزر الجانبي لمدة 10 ثوان لإيقاف تشغيل الجهاز. ثم حرر الزر.",
+      "mcuBlueSecond": "اضغط مع الاستمرار على الزر لمدة 5 ثوانٍ على الأقل حتى يتم عرض خيارات التمهيد. انقر على وضع Bootloader",
+      "successTitle": "تم تحديث البرنامج الثابت",
       "successTextApps": "يُرجى إعادة تثبيت التطبيقات على جهازك",
       "successTextNoApps": "يمكنك الآن تثبيت التطبيقات على جهازك",
       "sucessCTAApps": "إعادة تثبيت التطبيقات",
@@ -1282,7 +1282,7 @@
         "recoveryMode": "اضغط على وضع {{mode}}. انتظر حتى تظهر لوحة المعلومات.",
         "third": "3. إلغاء تثبيت جميع التطبيقات",
         "openLive": "افتح المدير في ليدجر لايف (Ledger Live).",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
+        "uninstall": "انقر على أيقونة سلة المهملات الرمادية لجميع التطبيقات المثبتة حاليًا على {{deviceName}}. هذا يفسح المجال لمثبت البرمجيات الثابتة.",
         "disclaimer": "ملاحظة: لا تتأثر أرصدتك المالية بهذه العملية، تظل المفاتيح الخاصة للوصول إلى أصولك المشفرة في سلسلة الكتل آمنة على ورقة الاسترداد الخاصة بك."
       }
     }
@@ -1311,13 +1311,13 @@
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "تجميد الأصول",
     "steps": {
       "amount": {
         "title": "المبلغ",
         "resourceInfo": "النطاق الترددي أم الطاقة؟",
         "bandwidthDescription": "تُستخدم نقاط النطاق الترددي (Bandwidth) لإجراء المعاملات بدون دفع رسوم شبكة TRX. اختر النطاق الترددي لزيادة معاملاتك اليومية المجانية.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
+        "energyDescription": "نقاط الطاقة مطلوبة لتنفيذ العقود الذكية. إذا كنت لا تقم بتشغيل أي عقود ذكية، فلا حاجة لاختيار المكافآت في صورة طاقة.",
         "amountLabel": "المبلغ المراد تجميده",
         "available": "متاح: {{amountAvailable}}",
         "info": "الأصول المجمدة لا يمكن إرسالها لمدة 3 أيام."
@@ -1365,20 +1365,20 @@
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "الإدلاء بالأصوات",
+    "titleExisting": "إدارة الأصوات",
     "steps": {
       "castVotes": {
-        "max": "MAX",
-        "title": "Vote",
+        "max": "حد أقصى",
+        "title": "تصويت",
         "search": "البحث عن طريق الاسم أو العنوان...",
         "totalVotes": "مجموع الأصوات: {{total}}",
         "selected": "تم اختيار: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
+        "maxSelected": "الحد الأقصى المحدد: {{total}}",
+        "allVotesAreUsed": "تم توزيع جميع الأصول",
+        "maxUsed": "الأصول غير كافية",
         "validators": "المدققون ({{total}})",
-        "votes": "Available assets: {{total}}",
+        "votes": "الأصول المتاحة: {{total}}",
         "noResults": "لم يتم العثور على مدقق لـ \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
@@ -1396,16 +1396,16 @@
     }
   },
   "buy": {
-    "title": "Buy",
-    "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}",
+    "title": "شراء",
+    "titleCrypto": "شراء {{currency}}",
+    "buyCTA": "شراء {{currencyTicker}}",
     "withoutDevice": "المتابعة بدون جهازي",
     "connectWithoutDevice": "من الأفضل استخدام جهازك لأمان أفضل.",
     "skipConnect": "المتابعة بدون جهازي"
   },
   "sell": {
-    "title": "Sell",
-    "titleCrypto": "Sell {{currency}}"
+    "title": "بيع",
+    "titleCrypto": "بيع {{currency}}"
   },
   "receive": {
     "title": "تلقي",
@@ -1413,7 +1413,7 @@
     "steps": {
       "chooseAccount": {
         "title": "حساب",
-        "label": "Account to credit",
+        "label": "المبلغ للإيداع بالائتمان",
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
@@ -1434,16 +1434,16 @@
     }
   },
   "send": {
-    "title": "Send",
-    "totalSpent": "Total to debit",
+    "title": "إرسال",
+    "totalSpent": "الإجمالي للخصم",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "المستلم"
       },
       "amount": {
         "title": "المبلغ",
         "banner": "المبلغ الأقصى القابل للإنفاق هو",
-        "fees": "Fees",
+        "fees": "الرسوم",
         "standard": "اعتيادي",
         "advanced": "متقدم"
       },
@@ -1454,15 +1454,15 @@
         "title": "الجهاز"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "utxoLag": "قد يستغرق التحقق من هذه المعاملة وتوقيعها وقتًا طويلًا لأن الحساب يحتوي على عدد كبير من العملات.",
         "subaccountsWarning": "يتعين عليك إعادة شحن هذا الحساب ب {{ currency }} من أجل إرسال رموز التوكن لهذا الحساب",
         "from": "من",
-        "to": "To",
+        "to": "إلى",
         "selectAccountDebit": "حساب للخصم منه",
         "recipientAddress": "عنوان المستلم",
         "amount": "المبلغ",
-        "fees": "Network fees",
-        "useMax": "Send Max",
+        "fees": "رسوم الشبكة",
+        "useMax": "إرسال الحد الأقصى",
         "rippleTag": "Tag",
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "حد الغاز",
@@ -2280,7 +2280,7 @@
     },
     "softResetModal": {
       "title": "حذف الذاكرة المؤقتة",
-      "desc": "يؤدي حذف الذاكرة المؤقتة إلى إعادة مزامنة الشبكة. يتم الاحتفاظ بإعداداتك وحساباتك. وتظل المفاتيح الخاصة للوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر وصفحة الاسترداد الخاص بك."
+      "desc": "يؤدي حذف الذاكرة المؤقتة إلى إعادة مزامنة الشبكة. يتم الاحتفاظ بإعداداتك وحساباتك. وتظل المفاتيح الخاصة للوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر وورقة الاسترداد الخاص بك."
     },
     "resetFallbackModal": {
       "title": "مطلوب إجراء من المستخدم",
@@ -2659,12 +2659,12 @@
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Take your recovery sheet",
-              "descr": "احصل على صفحة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
+              "title": "خذ ورقة الاسترداد الخاصة بك",
+              "descr": "احصل على ورقة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
             },
             "writeDownWords": {
               "title": "Write down all words",
-              "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من صفحة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
+              "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -3124,7 +3124,7 @@
     },
     "ManagerFirmwareNotEnoughSpace": {
       "title": "Uninstall all apps from your device",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "description": "ستبقى المفاتيح الخاصة للوصول إلى أصولك المشفرة آمنة على جهازك ويجب نسخها احتياطيًا في ورقة الاسترداد الخاصة بك."
     },
     "ManagerNotEnoughSpace": {
       "title": "Sorry, not enough storage left",
