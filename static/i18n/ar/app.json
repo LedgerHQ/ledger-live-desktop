@@ -246,8 +246,8 @@
           "toReceive": "المبلغ المراد استلامه",
           "terms": "الشروط والأحكام",
           "disclaimer": {
-            "description": "بالضغط على \"تأكيد\"، أسلم وأقبل بأن هذه الخدمة تدار حصريًا من قبل <0>{{provider}}</0>",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "بالضغط على \"تأكيد\"، أسلم وأقبل بأن هذه الخدمة تدار حصريًا من قبل <0>{{provider}}</0> و المذكور في",
+            "acceptedDescription": "هذه الخدمة مدارة حصريًا من قبل <0>{{provider}}</0> و المذكور في"
           },
           "details": {
             "provider": "Provider",
