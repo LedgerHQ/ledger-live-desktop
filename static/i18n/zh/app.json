@@ -964,8 +964,8 @@
       "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
       "mobileCTA": "导出至移动版",
       "description": "New features in Ledger Live require an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
+      "currency": "1 个 {{currency}} 账户需要更新：",
+      "currency_plural": "{{count}} 个 {{currency}} 账户需要更新：",
       "footer": "You need your Ledger Device to complete the update",
       "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
       "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
@@ -1663,7 +1663,7 @@
           "confirmation": {
             "title": "确认",
             "success": {
-              "title": "You have successfully delegated your assets",
+              "title": "您的资产已经成功委托。",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
               "cta": "查看详情"
             },
@@ -1681,8 +1681,8 @@
             "compound": "Compound（按复利协议）",
             "claim": "兑现",
             "compoundOrClaim": "复利或兑现",
-            "compoundDescription": "Rewards will be added to delegated amount",
-            "claimDescription": "Rewards will be added to the available balance",
+            "compoundDescription": "奖励将被添加至已委托的数额",
+            "claimDescription": "奖励将被添加至可用余额",
             "compoundInfo": "您已赚取了<0>{{amount}}</0>。点击 Continue（继续）后，它们将被即刻申领并被自动委托给同一个验证器。",
             "claimInfo": "您已从下方的验证器赚取了 <0>{{amount}}</0>。点击 Continue（继续）后，它们将被即刻申领并被自动添加到可用余额。",
             "selectLabel": "选择委托"
@@ -1823,7 +1823,7 @@
           },
           "info": {
             "title": "奖励",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "description": "恭喜！您已赚取了 {{amount}}。点击 Continue（继续）以申领您的奖励。",
             "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
           },
           "connectDevice": {
@@ -2045,7 +2045,7 @@
           "title": "确认",
           "label": "确认",
           "success": {
-            "title": "Unbond transaction sent successfully",
+            "title": "已成功发送解绑交易",
             "text": "Unbonded assets can be withdrawn in 28 days.",
             "cta": "查看详情"
           },
@@ -2064,7 +2064,7 @@
           "info": "You can then withdraw unbonded assets to your available balance."
         },
         "chill": {
-          "title": "Clear nominations",
+          "title": "清除提名",
           "description": "Clears all nominations and stops earning rewards.",
           "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
         }
@@ -2094,17 +2094,17 @@
   },
   "delegation": {
     "title": "赚取奖励",
-    "header": "Delegation",
+    "header": "委托",
     "validator": "验证器",
-    "yield": "Est. Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
+    "yield": "预估收益",
+    "address": "地址",
+    "transactionID": "交易 ID",
+    "value": "价值",
     "amount": "数额",
     "delegated": "已委托",
-    "completionDate": "Completion date",
-    "rewards": "Rewards",
-    "duration": "Duration",
+    "completionDate": "完成日期",
+    "rewards": "奖励",
+    "duration": "持续时间",
     "durationJustStarted": "刚刚开始",
     "durationDays": "{{count}} 天",
     "durationDays_plural": "{{count}} 天",
@@ -2229,10 +2229,10 @@
       "stock": "区域性市场指标",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "轮播可见性",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "carouselVisibilityDesc": "启用资产组合的轮播可见"
     },
     "currencies": {
-      "desc": "Select a crypto asset to edit its settings.",
+      "desc": "选择一种加密资产以编辑其设置。",
       "placeholder": "没有此资产的设置",
       "confirmationsNb": "确认数量",
       "confirmationsNbDesc": "设置要标记为已确认的交易的网络确认数量。"
@@ -2351,7 +2351,7 @@
   },
   "update": {
     "downloadInProgress": "正在下载更新...",
-    "downloadProgress": "{{progress}}% completed",
+    "downloadProgress": "已完成 {{progress}}%",
     "checking": "正在检查更新...",
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
@@ -2414,7 +2414,7 @@
     "serviceStatus": {
       "statusOk": {
         "title": "Ledger Live 已启动并正在运行",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "description": "遇到问题？请前往我们的 <0>帮助页面</0>"
       },
       "statusNotOk": {
         "title": "Ledger Live 正遇到问题",
@@ -2434,7 +2434,7 @@
         "title": "妥善保管您的 PIN 识别密码",
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
+          "1": "<0>总是</0> 亲自选择 PIN 识别密码。",
           "2": "<0>Always</0> enter your PIN code out of sight.",
           "3": "如有需要，您可以更改自己的 PIN 识别密码。",
           "4": "Three wrong PIN code entries in a row will reset the device.",
@@ -2445,7 +2445,7 @@
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
+        "title1": "恢复短语的作用是什么？",
         "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
         "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
         "link": "有关恢复短语的更多详情",
@@ -2470,7 +2470,7 @@
     },
     "alerts": {
       "beCareful": {
-        "title": "Please be careful",
+        "title": "请注意",
         "descr": "确保按照该应用程序指示的每一步进行操作。",
         "gotIt": "知道了"
       },
@@ -2482,7 +2482,7 @@
     },
     "screens": {
       "welcome": {
-        "title": "Welcome to Ledger",
+        "title": "欢迎使用 Ledger",
         "description": "Safely manage your crypto from your computer.",
         "cta": "快速入门",
         "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
