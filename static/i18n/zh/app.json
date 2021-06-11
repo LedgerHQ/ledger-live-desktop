@@ -2201,20 +2201,20 @@
     "export": {
       "accounts": {
         "title": "导出账户",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "desc": "在 Ledger Live 手机应用中添加您的账户。您的账户将仅与区块链同步，而不会在手机应用和桌面应用之间同步。",
         "button": "导出"
       },
       "operations": {
         "title": "操作历史记录",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "desc": "在您的计算机上保存账户操作的 CSV 文件。"
       },
       "modal": {
         "button": "完成",
         "title": "扫描以导出至移动设备",
         "listTitle": "在 Ledger Live 手机应用上：",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "step1": "点击 <3><0>账户</0></3> 中的 <1><0>+</0></1> 按钮",
+        "step2": "点击 <1><0>Import desktop accounts</0></1>",
+        "step3": "扫描 <1><0>LiveQR code</0></1> 二维码，等待加载至 100%"
       }
     },
     "display": {
