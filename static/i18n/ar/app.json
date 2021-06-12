@@ -3143,17 +3143,17 @@
       },
       "update": {
         "title": "إنهاء تثبيتات التطبيق الجارية حاليًا؟",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
+        "description": "سيؤدي إنهاء برنامج المدير إلى إنهاء تحديثات التطبيق الجارية حاليًا.",
         "stay": "إنهاء التحديثات"
       },
-      "quit": "Quit Manager"
+      "quit": "الخروج من المدير"
     },
     "ManagerUninstallBTCDep": {
       "title": "عذرًا، هذا التطبيق مطلوب",
       "description": "قم بإلغاء تثبيت تطبيق بيتكوين أو إيثريوم في النهاية"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
+      "title": "عفوًا، يبدو أن الاتصال بالإنترنت مقطوع",
       "description": "يرجى التحقق من اتصالك بالإنترنت."
     },
     "NoAddressesFound": {
@@ -3168,21 +3168,21 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "رصيد ETH في الحساب الرئيسي غير كافٍ لتغطية رسوم الشبكة"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
+      "title": "كلمتين المرور غير متطابقتين",
       "description": "يرجى إعادة المحاولة"
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
+      "title": "كلمة المرور التي تم إدخالها غير صحيحة",
       "description": "يرجى إعادة المحاولة"
     },
     "RPCHostRequired": {
-      "title": "Host is required."
+      "title": "المضيف مطلوب."
     },
     "RPCHostInvalid": {
-      "title": "Enter valid host."
+      "title": "أدخل مضيفًا صالحًا."
     },
     "RPCUserRequired": {
       "title": "اسم مستخدم ال RPC مطلوب"
@@ -3199,28 +3199,28 @@
       "description": "يرجى الانتظار حتى تتم مزامنة العقدة الخاصة بك. الإرسال غير ممكن لأن أرصدة حساب بيتكوين الخاص بك قد تكون غير صحيحة."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "title": "يُرجى ترقية SatStack",
+      "description": "إصدار SatStack الذي تستخدمه قديم للغاية وقد يحتوي على خلل أو عدم توافق."
     },
     "SatStackDescriptorNotImported": {
       "title": "لم يتم فحص الحساب بواسطة العقدة الكاملة",
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح.",
+      "description": "سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
     },
     "SwapGenericAPIError": {
       "title": "انتهت صلاحية سعر الصرف",
       "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف المعروض ساري المفعول لمدة 60 ثانية."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
+      "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب",
       "description": "يرجى إعادة المحاولة مرة أخرى."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب ({{tag}})",
+      "description": "انقضت مهلة الانتظار."
     },
     "TransportError": {
       "title": "حدث خطأ ما. يُرجى إعادة توصيل جهارك",
@@ -3235,22 +3235,22 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "title": "يرجى فتح تطبيق {{appName}}",
+      "description": "اترك تطبيق {{appName}} مفتوحًا بينما نعثر على حساباتك"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
+      "title": "عذراً، يجب ألا يكون جهازك في وضع Bootloader",
       "description": "يرجى إعادة تشغيل جهازك دون لمس الأزرار عند ظهور الشعار. اتصل بدعم ليدجر إذا استمرت المشكلة."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "تم رفض برنامج المدير على الجهاز"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "تم إلغاء التحديث على الجهاز",
       "description": "تم إلغاء تثبيت جميع التطبيقات الموجودة على جهازك. حافظ على جهازك محدثًا للاستفادة من التحسينات في الأمان والوظائف."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
+      "title": "تم رفض الإجراء",
       "description": "رفض المستخدم العملية على الجهاز"
     },
     "TransactionRefusedOnDevice": {
@@ -3470,7 +3470,7 @@
       "title": "You have no unbonded assets"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "ليس لديك ترشيحات"
     },
     "PolkadotAllFundsWarning": {
       "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
@@ -3479,7 +3479,7 @@
       "title": "لا يمكن أن يقل الرصيد عن 1 DOT. أرسل الحد الأقصى إلى الحساب الفارغ"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least 1 DOT"
+      "title": "يجب عليك تقيد 1 DOT على الأقل"
     },
     "PolkadotMaxUnbonding": {
       "title": "You have exceeded the unbond limit"
