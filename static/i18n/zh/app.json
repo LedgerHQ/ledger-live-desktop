@@ -3419,7 +3419,7 @@
       "description": "出错了。请重试。如有疑问，请联系 Ledger 客服。"
     },
     "EthAppPleaseEnableContractData": {
-      "title": "请在以太坊应用程序设置中启用合约数据"
+      "title": "请在 Ethereum 以太坊应用程序 settings 设置中启用 contract data 合约数据"
     },
     "InvalidXRPTag": {
       "title": "无效的 XRP 目的地标签"
