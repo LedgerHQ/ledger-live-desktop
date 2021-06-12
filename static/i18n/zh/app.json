@@ -1454,7 +1454,7 @@
         "title": "设备"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "utxoLag": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
         "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
         "from": "来自",
         "to": "发往",
@@ -1479,7 +1479,7 @@
         "title": "确认",
         "success": {
           "title": "交易已发送",
-          "text": "Your account balance will be updated when the blockchain confirms the transaction",
+          "text": "该交易一经区块链确认，就会更新您的账户余额。",
           "cta": "查看详情"
         },
         "pending": {
@@ -1489,7 +1489,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+          "text": "发送的数额会从您的委托账户中扣除。"
         }
       }
     },
@@ -1524,14 +1524,14 @@
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
+        "description": "您现在可以通过冻结资产和投票来赚取奖励。",
         "info": "如何投票",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
+        "votesDesc": "将您的选票投给一个或多个代表，从而开始赚取权益质押奖励。",
         "vote": "将票投出",
         "voteExisting": "管理选票"
       },
       "manageTP": "管理资产",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "您至少需要 {{amount}} 才能开始赚取奖励",
       "claimRewards": "申领奖励",
       "nextRewardsDate": "可申请的奖励 {{date}}",
       "claimAvailableRewards": "申领 {{amount}}",
@@ -1546,7 +1546,7 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "冻结 TRX 波场币以赚取奖励，您的资产依然会绝对安全并处于您的掌控之中。",
             "bullet": {
               "delegate": "委托出去的资产依旧为您所有。",
               "access": "3 天后您可以解冻您的资产。",
