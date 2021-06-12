@@ -2232,7 +2232,7 @@
       "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
-      "carouselVisibility": "Carousel visibility",
+      "carouselVisibility": "مشاهدة كشريط دوّار",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
