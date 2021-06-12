@@ -2120,12 +2120,12 @@
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "title": "اكسب مكافآت الرهن",
+          "description": "قم بتفويض حسابك على Tezos إلى مدقق خارجي لتكسب مكافآت الرهن، مع الاحتفاظ بمستوى كامل من الأمان والتحكم في أصولك",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
-            "access": "You can access your assets at any time.",
-            "ledger": "Delegate securely with your Ledger device."
+            "delegate": "الأصول المفوضة تظل ملكك.",
+            "access": "يمكنك الوصول إلى أصولك في أي وقت.",
+            "ledger": "قم بإجراء التفويض بشكل آمن من خلال جهاز ليدجر الخاص بك."
           },
           "button": {
             "cta": "تفويض لكسب الجوائز"
@@ -2143,31 +2143,31 @@
           "toUndelegate": "الحساب المراد إلغاء تفويضه",
           "validator": "المدقق",
           "select": "اختار",
-          "yield": "Est. Yield {{amount}}",
-          "randomly": "Randomly chosen validator",
+          "yield": "العائد التقديري: {{amount}}",
+          "randomly": "مدقق تم اختياره بشكل عشوائي",
           "termsAndPrivacy": "تفويض حقوق التصويت الخاصة بك لا يضمن لك الحصول على أي مكافآت من المدقق الذي تختاره."
         },
         "validator": {
           "title": "اختار المدقق",
           "description": "يمكنك اختيار المدقق من خلال مقارنة المعدلات التقديرية للمكافأة",
           "customValidator": "المدقق المخصص",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "providedBy": "معدلات العائد المقدمة من <1><0>{{name}}</0></1>"
         },
         "custom": {
           "title": "المدقق المخصص",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
+          "text": "يرجى إدخال عنوان المدقق المخصص لتفويض حسابك إليه.",
           "button": "استخدام المدقق"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "إلغاء تفويض الحساب"
         },
         "confirmation": {
           "title": "التأكيد",
           "label": "التأكيد",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
+            "title": "تم إرسال التفويض",
+            "titleUndelegated": "إنهاء التفويض",
+            "text": "تم بث معاملة التفويض بنجاح. من المفترض أن تكسب مكافآتك الأولى في غضون 40 يومًا تقريبًا، وذلك معتمداً على المدقق.",
             "textUndelegated": "سينتهي تفويض حسابك بمجرد تأكيد العملية. يمكنك تفويض حسابك مرة أخرى في أي وقت."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
@@ -2176,8 +2176,8 @@
     },
     "contextMenu": {
       "topUp": "تلقي المزيد",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "redelegate": "تغيير المدقق",
+      "stopDelegation": "إنهاء التفويض"
     }
   },
   "asset": {
@@ -2191,12 +2191,12 @@
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "إعدادات",
     "discreet": "Toggle discreet mode",
     "helpButton": "مساعدة",
     "tabs": {
-      "display": "General",
-      "currencies": "Crypto assets",
+      "display": "عامة",
+      "currencies": "الأصول المشفرة",
       "help": "مساعدة",
       "about": "About",
       "experimental": "Experimental features",
