@@ -2242,34 +2242,34 @@
       "confirmationsNbDesc": "قم بتعيين عدد تأكيدات الشبكة اللازمة لتمييز المعاملة على أنها مؤكدة."
     },
     "profile": {
-      "password": "Password lock",
-      "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
-      "changePassword": "Change password",
+      "password": "قفل كلمة المرور",
+      "passwordDesc": "قم بتعيين كلمة مرور لتأمين بيانات لديجر لايف (Ledger Live) على جهاز الكمبيوتر الخاص بك، بما في ذلك أسماء الحسابات والأرصدة والمعاملات والعناوين العامة.",
+      "passwordAutoLock": "قفل تلقائي",
+      "passwordAutoLockDesc": "قفل ليدجر لايف (Ledger Live) تلقائيًا عندما يكون غير نشط.",
+      "changePassword": "تغيير كلمة المرور",
       "softResetTitle": "حذف الذاكرة المؤقتة",
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
       "hardReset": "إعادة تعيين",
-      "analytics": "Analytics",
+      "analytics": "تحليلات",
       "analyticsDesc": "قم بتمكين إجراء التحليلات من أجل مساعدة ليدجر على تحسين تجربة المستخدم. يتضمن ذلك النقرات، وزيارات الصفحة، وعمليات إعادة التوجيه، والإجراءات (الإرسال، والاستلام، والقفل، وما إلى ذلك)، وتحريكات نهاية الصفحة، والتثبيت وإلغاءه، وإصدار التطبيق، وعدد الحسابات والأصول المشفرة والعمليات، ومدد الجلسات، ونوع جهاز ليدجر والبرامج الثابتة.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
+      "reportErrors": "تقارير الخلل",
+      "reportErrorsDesc": "إرسال التقارير تلقائيًا لمساعدة ليدجر في تحسين منتجاتها.",
+      "launchOnboarding": "إعداد الجهاز",
+      "launchOnboardingDesc": "قم بإعداد جهاز جديد أو استعادة جهاز موجود. يتم الاحتفاظ بالحسابات والإعدادات."
     },
     "help": {
-      "version": "Version",
-      "releaseNotesBtn": "Details",
+      "version": "الإصدار",
+      "releaseNotesBtn": "تفاصيل",
       "termsBtn": "قراءة",
-      "faq": "Ledger Support",
+      "faq": "دعم ليدجر",
       "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
       "terms": "شروط الاستخدام",
       "termsDesc": "باستخدام ليدجر لايف(Ledger Live)، سوف يُعتبر أنك قد قبلت شروط الاستخدام الخاصة بنا.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
+      "privacy": "سياسة الخصوصية",
+      "privacyDesc": "ارجع إلى سياسة الخصوصية الخاصة بنا لمعرفة البيانات الشخصية التي نجمعها، وسبب وكيفية استخدامها من جانبنا."
     },
     "experimental": {
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
@@ -2292,22 +2292,22 @@
     },
     "removeAccountModal": {
       "title": "إزالة حساب",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
+      "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
-      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "View"
+      "title": "عرض بيانات المستخدم",
+      "desc": "عرض بيانات المستخدم المخزنة على جهاز الكمبيوتر الخاص بك، بما في ذلك حساباتك وذاكرة التخزين المؤقت والإعدادات.",
+      "btn": "عرض"
     },
     "repairDevice": {
       "title": "إصلاح جهاز ليدجر الخاص بك",
       "descSettings": "استخدم هذا لاستعادة جهاز ليدجر الخاص بك إذا توقف عن الاستجابة أثناء إحدى عمليات تحديث البرنامج الثابت.",
       "desc": "لمستخدمي ليدجر نانو إس (Nano S)، يرجى إختيار الحالة المعروضة على جهازك. أما بالنسبة لمستخدمي نانو إكس (Nano X) وBlue، يرجى الرجوع إلى مركز المساعدة.",
-      "button": "Repair"
+      "button": "إصلاح"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "title": "حفظ السجلات",
+      "desc": "قد تكون هناك حاجة لحفظ سجلات ليدجر لايف (Ledger Live) لأغراض استكشاف الأخطاء وإصلاحها.",
       "btn": "حفظ"
     },
     "accounts": {
@@ -2330,52 +2330,52 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "كلمة المرور الجديدة"
       },
       "confirmPassword": {
         "label": "تأكيد كلمة المرور"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "كلمة المرور الحالية"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "قفل كلمة المرور",
+      "subTitle": "تغيير كلمة مرورك"
     },
     "setPassword": {
-      "title": "Password lock",
-      "subTitle": "Set the password",
+      "title": "قفل كلمة المرور",
+      "subTitle": "تعيين كلمة المرور",
       "desc": "حافظ على كلمة مرورك آمنة. فقدانها قد يعني إعادة تعيين ليدجر لايف (Ledger Live) وإضافة الحسابات من جديد."
     },
     "disablePassword": {
-      "title": "Disable password lock",
+      "title": "تعطيل قفل كلمة المرور",
       "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
+    "downloadInProgress": "جاري تنزيل التحديث...",
     "downloadProgress": "نسبة الاكتمال {{progress}}%",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
+    "checking": "جاري التحقق من التحديث...",
+    "checkSuccess": "التحديث جاهز للتثبيت",
     "quitAndInstall": "تثبيت الآن",
     "updateAvailable": "قم بالتحديث إلى الإصدار {{version}} من ليدجر لايف (Ledger Live)",
-    "error": "Error during update. Please download again",
+    "error": "حدث خطأ أثناء التحديث. يرجى التنزيل مرة أخرى",
     "reDownload": "التنزيل مرة أخرى",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
+    "nightlyWarning": "لا يمكن لهذا الإصدار إجراء التحديث التلقائي. يرجى تثبيت أحدث إصدار يدويًا",
     "downloadNow": "تنزيل التحديث"
   },
   "crash": {
     "title": "حدث خطأ ما",
     "description": "يرجى مراجعة مقالات الدعم المتاحة لدينا لمحاولة إيجاد الحلول الممكنة. إذا استمرت المشكلة، يرجى حفظ سجلاتك باستخدام الزر أدناه وتقديمها إلى فريق دعم ليدجر (Ledger).",
-    "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "troubleshooting": "انقر هنا للتعرف على الحلول الممكنة",
+    "logs": "حفظ السجلات",
+    "dataFolder": "عرض بيانات المستخدم"
   },
   "exportOperationsModal": {
     "title": "سجل العمليات",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
+    "desc": "حدد الحسابات التي تريد حفظ سجل المعاملات لها",
+    "descSuccess": "تم حفظ ملف CSV الخاص بسجل معاملاتك في المجلد المحدد بنجاح",
     "titleSuccess": "Operation history saved successfully",
     "cta": "حفظ",
     "ctaSuccess": "Done",
