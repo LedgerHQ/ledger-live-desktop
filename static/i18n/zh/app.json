@@ -885,11 +885,11 @@
     },
     "lending": {
       "title": "借出加密货币",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "description": "向 Compound 复合协议借出 stablecoins 稳定币，当天即可赚取利息"
     },
     "blackfriday": {
       "title": "黑色星期五 ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "description": "使用促销代码 BLACKFRIDAY20 可享受 40% 的 Ledger 硬件钱包优惠"
     }
   },
   "dashboard": {
@@ -905,8 +905,8 @@
   "currentAddress": {
     "title": "当前地址",
     "for": "<1><0>{{name}}</0></1>地址",
-    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
+    "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。"
   },
   "emptyState": {
     "dashboard": {
@@ -942,7 +942,7 @@
     "algorand": {
       "title": "ASA (资产)",
       "cta": "添加 ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "placeholder": "您可以向您的 {{currencyName}} 账户添加资产。",
       "link": "资产 (ASA) 如何运作？",
       "seeTokens": "显示 ASA ({{tokenCount}})",
       "hideTokens": "隐藏 ASA ({{tokenCount}})"
@@ -1282,8 +1282,8 @@
         "recoveryMode": "轻击 {{mode}} 模式。等候片刻直至功能面板出现。",
         "third": "3. 卸载所有应用",
         "openLive": "在 Ledger Live 中打开管理器。",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
+        "uninstall": "点击 {{deviceName}} 上当前安装的所有应用程序的灰色回收站图标。这将为固件安装程序释放空间。",
+        "disclaimer": "注：该操作不会对您的资金造成影响，用以访问您区块链中加密资产的私钥，依旧会安全保存在您的恢复表中。"
       }
     }
   },
@@ -1428,7 +1428,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "已委托账户收到的数额会被添加到总的质押数额中。若要避免此情况则请选择另一个账户。"
         }
       }
     }
