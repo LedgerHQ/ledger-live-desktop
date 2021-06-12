@@ -2265,7 +2265,7 @@
       "releaseNotesBtn": "تفاصيل",
       "termsBtn": "قراءة",
       "faq": "دعم ليدجر",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "faqDesc": "إذا كانت لديك مشكلة، فاحصل على المساعدة لاستخدام ليدجر لايف (Ledger Live) مع محفظتك للأجهزة.",
       "terms": "شروط الاستخدام",
       "termsDesc": "باستخدام ليدجر لايف(Ledger Live)، سوف يُعتبر أنك قد قبلت شروط الاستخدام الخاصة بنا.",
       "privacy": "سياسة الخصوصية",
@@ -2350,7 +2350,7 @@
     },
     "disablePassword": {
       "title": "تعطيل قفل كلمة المرور",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "سيتم تخزين بيانات ليدجر لايف (Ledger Live) في حالة غير مشفرة على الكمبيوتر الخاص بك. ويتضمن ذلك أسماء الحسابات ومعاملاتها والعناوين العامة."
     }
   },
   "update": {
@@ -2938,19 +2938,19 @@
       "description": "حدثت مشكلة. يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account.",
+      "title": "هناك عملية معلقة لهذا الحساب.",
       "description": "انتظر حتى تكتمل العملية."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
+      "title": "مطلوب إدخال اسم حساب",
       "description": "يرجى إدخال اسم حساب"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "الحساب غير مدعوم.",
+      "description": "يرجى إعادة المحاولة أو الاتصال بالدعم ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "حساب المستلم لم ينضم إلى ASA الذي تم إختياره."
     },
     "AmountRequired": {
       "title": "المبلغ المطلوب"
@@ -2975,7 +2975,7 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
+      "title": "تسلسل غير صالح",
       "description": "يرجى محاولة العملية مرة أخرى"
     },
     "CosmosBroadcastCodeUnauthorized": {
@@ -3003,7 +3003,7 @@
       "description": "يرجى التحقق من العنوان والمحاولة مرة أخرى"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
+      "title": "عملات غير كافية",
       "description": "تأكد من أن الحساب المستخدم به أرصدة مالية كافية وحاول مرة أخرى"
     },
     "CosmosBroadcastCodeInvalidCoins": {
@@ -3035,12 +3035,12 @@
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "title": "{{currencyName}} غير مدعومة",
+      "description": "هذا الأصل المشفر غير مدعوم بعد. يرجى الاتصال بدعم ليدجر."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
-      "description": "Request assistance from Ledger Support"
+      "title": "من الممكن ألا يكون أصليًا",
+      "description": "طلب المساعدة من دعم ليدجر"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "عفوًا، أعد المحاولة مرة أخرى (genuine-close)",
@@ -3052,7 +3052,7 @@
     },
     "DeviceHalted": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
-      "description": "An unexpected error occurred. Please try again"
+      "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
     },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
@@ -3071,8 +3071,8 @@
       "description": "يرجى إعادة الاتصال وإعادة المحاولة مرة أخرى."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "نقطة النهاية غير صالحة",
+      "description": "يرجى تقديم نقطة نهاية صالحة"
     },
     "FeeEstimationFailed": {
       "title": "عذرًا، فشل تقدير الرسوم",
@@ -3103,20 +3103,20 @@
       "description": "تعذر على خادم البيانات معالجة طلبك. يرجى إعادة المحاولة مرة أخرى لاحقاً أو الاتصال بدعم ليدجر. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
+      "title": "عذرًا، خدمات {{currencyName}} غير متوفرة",
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "عذرًا، هذا مثبت بالفعل",
+      "description": "يرجى التحقق من التطبيقات المثبتة بالفعل على جهازك."
     },
     "ManagerAppDepInstallRequired": {
       "title": "تطبيق {{dependency}} مطلوب",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "description": "إذا كان التطبيق {{dependency}} مثبتًا بالفعل، فيرجى إعادة تثبيته بأحدث إصدار"
     },
     "ManagerAppDepUninstallRequired": {
       "title": "عذرًا، هذا التطبيق مطلوب",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "description": "يجب عليك أولاً إزالة جميع التطبيقات التي تتطلب تطبيق {{appName}}"
     },
     "ManagerDeviceLocked": {
       "title": "جهازك مقفل",
@@ -3127,13 +3127,13 @@
       "description": "ستبقى المفاتيح الخاصة للوصول إلى أصولك المشفرة آمنة على جهازك ويجب نسخها احتياطيًا في ورقة الاسترداد الخاصة بك."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "title": "عذرًا، لم يتبق مساحة تخزين كافية",
+      "description": "قم بإلغاء تثبيت بعض التطبيقات لإخلاء بعض المساحة. ستبقى المفاتيح الخاصة للوصول إلى أصولك المشفرة آمنة على جهازك."
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "title": "هل تريد إنهاء تثبيت التطبيق الجاري حاليًا؟",
+        "description": "سيؤدي إنهاء برنامج المدير إلى إنهاء تثبيت التطبيق. يرجى إنهاء التثبيت لتثبيت التطبيقات الواردة في قائمة الانتظار.",
         "stay": "إنهاء التثبيت"
       },
       "uninstall": {
@@ -3142,7 +3142,7 @@
         "stay": "إنهاء إزالة التثبيت"
       },
       "update": {
-        "title": "Finish app updates in progress?",
+        "title": "إنهاء تثبيتات التطبيق الجارية حاليًا؟",
         "description": "Quitting the Manager will terminate the app updates in progress.",
         "stay": "إنهاء التحديثات"
       },
