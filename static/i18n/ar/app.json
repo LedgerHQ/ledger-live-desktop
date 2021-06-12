@@ -2828,35 +2828,35 @@
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "إذا لم تعد عبارة الاسترداد الخاصة بي سرية وآمنة...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "ليست مشكلة، يمكن لليدجر أن يرسل إلي نسخة",
+            "2": "لم تعد أصولي المشفرة آمنة وأحتاج إلى نقلها إلى مكان آمن"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "تهانينا!",
+              "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة أصولك المشفرة. \nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "غير صحيح!",
+              "text": "يمكن لأي شخص يعرف عبارة الاسترداد الخاصة بك أن يقوم بسرقة أصولك المشفرة. \nإذا فقدت هذه العبارة، يجب عليك نقل أصولك المشفرة بسرعة إلى مكان آمن."
             }
           }
         },
         "3": {
           "text": "عندما أقوم بتوصيل جهاز Nano الخاص بي بتطبيق ليدجر، فإن مفتاحي الخاص...",
           "answers": {
-            "1": "Still offline",
+            "1": "لا يزال غير متصل",
             "2": "اتصال وجيز بالإنترنت"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
+              "title": "تهانينا!",
               "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تأذن كل معاملة على جهازك يدويًا."
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "غير صحيح!",
               "text": "يظل مفتاحك الخاص دائمًا في وضع عدم الاتصال في محفظة جهازك. حتى عندما يتصل تطبيق ليدجر بجهاز نانو (Nano) الخاص بك، فلا يمكنه الوصول إلى مفتاحك الخاص. يجب عليك أن تقوم تأذن كل معاملة على جهازك يدويًا."
             }
           }
@@ -2869,8 +2869,8 @@
   },
   "TransactionConfirm": {
     "title": "يرجى تأكيد العملية على جهازك لإنهائها",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "warning": "تحقق دائمًا من أن العنوان المعروض على جهازك يطابق تمامًا العنوان الذي قدمه {{recipientWording}}",
+    "secureContract": "تحقق من تفاصيل الإيداع على جهازك قبل إرساله. يتم توفير عنوان العقد بشكل آمن حتى لا تضطر إلى التحقق منه.",
     "verifyData": "دائماً تحقق من تفاصيل العملية على جهازك.",
     "warningWording": {},
     "titleWording": {
@@ -2891,9 +2891,9 @@
       "withdrawUnbonded": "يرجى التأكيد على جهازك لإنهاء العملية"
     },
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
+      "send": "المستلم",
+      "delegate": "المدقق",
+      "undelegate": "المدقق",
       "claimReward": "مستلم المكافأة",
       "optIn": "recipient",
       "nominate": "المدقق"
