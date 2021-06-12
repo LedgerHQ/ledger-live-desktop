@@ -80,7 +80,7 @@
       "refresh": "تحديث"
     },
     "exchange": "تداول",
-    "info": "Info"
+    "info": "معلومات"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -113,7 +113,7 @@
       "SLASH": "تغريم",
       "WITHDRAW_UNBONDED": "سحب",
       "NOMINATE": "ترشيح",
-      "CHILL": "مسح الترشيحات"
+      "CHILL": "حذف الترشيحات"
     }
   },
   "byteSize": {
@@ -1861,7 +1861,7 @@
       },
       "header": "ترشيحات",
       "nominate": "ترشيح",
-      "chill": "مسح الترشيحات",
+      "chill": "حذف الترشيحات",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
       "commission": "العمولة",
@@ -1919,7 +1919,7 @@
         "description": "اختر ما يصل إلى 16 مدققًا. تأكد من أن الترشيحات في الوضع \"المفعل\" لكسب المكافآت."
       },
       "chill": {
-        "title": "مسح الترشيحات",
+        "title": "حذف الترشيحات",
         "description": "إزالة كل الترشيحات. سوف تتوقف عن كسب المكافآت. سيبقى تقيد المبلغ الذي قمت بتقيده."
       }
     },
@@ -1929,7 +1929,7 @@
         "validators": {
           "title": "المدققون",
           "notValidatorsRemoved": "قمت بترشيح {{count}} من العناوين التي لم تعد مدققين. وستتم إزالتها تلقائيًا من معاملة الترشيح الخاصة بك.",
-          "maybeChill": "مسح الترشيحات بدلاً من ذلك"
+          "maybeChill": "حذف الترشيحات بدلاً من ذلك"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -2020,26 +2020,26 @@
           "title": "التأكيد",
           "label": "التأكيد",
           "success": {
-            "title": "Assets successfully rebonded",
+            "title": "تمت إعادة تقيد الأصول بنجاح",
             "text": "سيتم تحديث رصيد حسابك فور أن تؤكد الشبكة على المعاملة.",
             "cta": "عرض التفاصيل"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "جاري إعادة تقيد أصولك..."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "إلغاء تقيد الأصول",
       "steps": {
         "amount": {
           "title": "المبلغ",
           "amountLabel": "المبلغ المراد إلغاء تقيده",
-          "availableLabel": "Bonded",
+          "availableLabel": "تم تقيده",
           "maxLabel": "الحد الأقصى",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
+          "info": "يمكن سحب الأصول بعد إلغاء تقيدها وذلك بعد انقضاء مدة إلغاء التقيد الممتدة لفترة 28 يومًا.",
           "learnMore": "معرفة المزيد"
         },
         "connectDevice": {
@@ -2049,12 +2049,12 @@
           "title": "التأكيد",
           "label": "التأكيد",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
+            "title": "تم إرسال معاملة إلغاء التقيد بنجاح",
+            "text": "يمكن سحب الأصول التي تم إلغاء تقيدها خلال 28 يومًا.",
             "cta": "عرض التفاصيل"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "جاري إلغاء تقيد أصولك..."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
@@ -2063,13 +2063,13 @@
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "title": "سحب",
+          "description": "بعد انقضاء فترة إلغاء التقيد الممتدة لفترة 28 يومًا، سيكون بإمكانك سحب الأصول التي تم إلغاء تقيدها.",
+          "info": "ويمكنك حينئذٍ سحب الأصول التي تم إلغاء تقيدها إلى رصيدك المتوفر."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
+          "title": "حذف الترشيحات",
+          "description": "يقوم بحذف جميع الترشيحات وإيقاف كسب المكافآت.",
           "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
         }
       },
