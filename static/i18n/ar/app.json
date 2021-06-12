@@ -1614,33 +1614,33 @@
       "last": "تحتاج أن تختار على الاقل واحد"
     },
     "pending": "مُعلّق",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pickUnconfirmedRBF": "تحديد العملات من المعاملات غير المؤكدة، القابلة للاستبدال.",
+    "pickingStrategy": "إستراتيجية اختيار UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "DEEP_OUTPUTS_FIRST": "أقدم العملات أولاً (FIFO)",
+      "OPTIMIZE_SIZE": "تصغير الرسوم (الحجم الأمثل)",
+      "MERGE_OUTPUTS": "تصغير الرسوم المستقبلية (دمج العملات)"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
         "description": "يمكنك كسب مكافآت ATOM عن طريق تفويض أصولك.",
-        "info": "How Delegation works",
+        "info": "كيف يعمل التفويض",
         "delegation": "اكسب المكافآت"
       },
       "claimRewards": "المطالبة بالمكافآت",
-      "header": "Delegation(s)",
+      "header": "التفويض (التفويضات)",
       "noRewards": "لا توجد مكافآت متاحة",
-      "delegate": "Add",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
+      "delegate": "أضف",
+      "undelegate": "إلغاء التفويض",
+      "redelegate": "إعادة التفويض",
+      "redelegateDisabledTooltip": "يمكنك إعادة التفويض مرة أخرى خلال <0>{{days}}</0>",
       "redelegateMaxDisabledTooltip": "لا يمكنك إعادة تفويض أكثر من <0>7</0> مدققين في المرة الواحدة",
       "undelegateDisabledTooltip": "لا يمكنك إلغاء تفويض أكثر من <0>7</0> مدققين في المرة الواحدة",
       "reward": "المطالبة بالمكافآت",
       "currentDelegation": "تم تفويض: <0>{{amount}}</0>",
-      "estYield": "est. yield",
+      "estYield": "العائد التقديري",
       "activeTooltip": "المبالغ المفوضة تولد المكافآت",
       "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت",
       "minSafeWarning": "لا توجد أرصدة المالية كافية",
