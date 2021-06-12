@@ -2199,45 +2199,45 @@
       "currencies": "الأصول المشفرة",
       "help": "مساعدة",
       "about": "About",
-      "experimental": "Experimental features",
+      "experimental": "الميزات التجريبية",
       "accounts": "الحسابات"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "title": "تصدير الحسابات",
+        "desc": "أضف حساباتك في تطبيق ليدجر لايف (Ledger Live) للجوّال. ستتم مزامنة حساباتك فقط مع البلوك تشين، وليس بين تطبيقات الجوّال وتطبيقات سطح المكتب.",
+        "button": "تصدير"
       },
       "operations": {
         "title": "سجل العمليات",
         "desc": "احفظ ملف بصيغة CSV لعمليات حسابك على جهاز الكمبيوتر الخاص بك."
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "button": "تم",
+        "title": "قم بالمسح ضوئي للتصدير إلى الجوّال",
+        "listTitle": "في تطبيق ليدجر لايف (Ledger Live) للجوّال:",
+        "step1": "اضغط على الزر <1><0>+</0></1> في <3><0>الحسابات</0></3>",
+        "step2": "اضغط على <1><0>استيراد حسابات سطح المكتب</0></1>",
+        "step3": "قم بإجراء المسح الضوئي <1><0>لرمز LiveQR</0></1> حتى يصل شريط التحميل إلى 100%"
       }
     },
     "display": {
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "theme": "Theme",
+      "language": "لغة البرنامج",
+      "languageDesc": "قم بتعيين اللغة المستخدمة في ليدجر لايف (Ledger Live).",
+      "theme": "السمة",
       "themeDesc": "اختار السمة.",
       "counterValue": "Countervalue",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
-      "region": "Region",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "region": "المنطقة",
+      "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
+      "stock": "مؤشر السوق الإقليمي",
+      "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
       "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
-      "placeholder": "No settings for this asset",
+      "placeholder": "لا توجد إعدادات لهذا الأصل",
       "confirmationsNb": "عدد التأكيدات",
       "confirmationsNbDesc": "قم بتعيين عدد تأكيدات الشبكة اللازمة لتمييز المعاملة على أنها مؤكدة."
     },
@@ -2385,7 +2385,7 @@
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
-    "system": "Use system language",
+    "system": "استخدم لغة النظام",
     "switcher": {
       "en": "English",
       "fr": "Français",
@@ -2395,10 +2395,10 @@
     }
   },
   "theme": {
-    "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "اختار سمة النظام",
+    "light": "فاتح",
+    "dusk": "غسق",
+    "dark": "داكن"
   },
   "toastOverlay": {
     "toastType": {
