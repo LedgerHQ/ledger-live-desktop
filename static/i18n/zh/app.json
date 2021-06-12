@@ -1958,7 +1958,7 @@
         "staked": "已绑定余额",
         "stakedDescription": "奖励被记入您的已绑定余额，以便赚取复利。",
         "optionTitle": "备注",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "optionDescription": "一旦设定，在此绑定周期内的期权就固定不变。如需更改，请参阅以下文章"
       },
       "steps": {
         "starter": {
@@ -1966,7 +1966,7 @@
           "bullet": [
             "你保有对已绑定资产的所有权",
             "使用您的 Ledger 设备进行提名",
-            "Assets will be available again, 28 days after unbonding"
+            "经过 28 天的解绑期后，资产将会再次可用"
           ],
           "help": "提名机制如何运作",
           "warning": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分已绑定资产。"
@@ -1976,7 +1976,7 @@
           "amountLabel": "要绑定的数额",
           "availableLabel": "可用",
           "maxLabel": "最多",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
+          "info": "已绑定的资产可随时被解绑，不过需要 28 天的解绑期。",
           "learnMore": "了解更多"
         },
         "connectDevice": {
@@ -2227,11 +2227,11 @@
       "theme": "主题",
       "themeDesc": "选择主题。",
       "counterValue": "对价",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
+      "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
       "stock": "区域性市场指标",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
+      "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
     },
