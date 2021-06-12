@@ -1553,7 +1553,7 @@
               "ledger": "使用您的 Ledger 设备安全冻结资产并投票。"
             },
             "help": "如何投票",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "termsAndPrivacy": "将您的投票权委托出去并不能保证从您的超级代表处获得任何奖励。"
           }
         }
       }
@@ -1562,11 +1562,11 @@
       "title": "管理资产",
       "freeze": {
         "title": "冻结",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "description": "冻结 TRX 以赚取带宽或能量。您也可以为超级代表投票。"
       },
       "unfreeze": {
         "title": "解冻",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "description": "解冻 TRX 波场币令其返还至您的可用余额。您将无法继续赚取奖励。"
       },
       "vote": {
         "title": "投票",
@@ -1610,11 +1610,11 @@
     "amount": "发送数额：",
     "replaceable": "可替换",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
+      "unconfirmed": "您不能从未确认的、可替换的交易中选币。",
       "last": "你需要至少选中一种"
     },
     "pending": "待定",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
+    "pickUnconfirmedRBF": "包含未确认、可替换交易中的硬币。",
     "pickingStrategy": "UTXO 选择策略",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "旧币优先（先入先出）",
@@ -1625,7 +1625,7 @@
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
+        "description": "您可以通过委托资产赚取 ATOM 奖励。",
         "info": "委托机制如何运作",
         "delegation": "赚取奖励"
       },
@@ -1636,23 +1636,23 @@
       "undelegate": "解除委托",
       "redelegate": "重新委托",
       "redelegateDisabledTooltip": "您可以重新委托 <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
+      "redelegateMaxDisabledTooltip": "每次重新委托的验证器不能多于 <0>7</0> 个",
+      "undelegateDisabledTooltip": "每次解除委托的验证器不能多于 <0>7</0> 个",
       "reward": "申领奖励",
       "currentDelegation": "已委托：<0>{{amount}}</0>",
       "estYield": "预估收益",
       "activeTooltip": "已委托的数额会生成奖励",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards",
+      "inactiveTooltip": "已解除委托的数额不会生成奖励。",
       "minSafeWarning": "资金不足",
       "flow": {
         "title": "委托",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "description": "您可以将 ATOM 资产委托给验证器，从而赚取奖励。",
             "bullet": [
               "您保有对已委托资产的所有权",
               "使用您的 Ledger 设备进行委托",
-              "Assets will be available 21 days after undelegation"
+              "资产将在解除委托 21 天后可用"
             ],
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
