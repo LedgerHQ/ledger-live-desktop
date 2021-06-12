@@ -2070,7 +2070,7 @@
         "chill": {
           "title": "حذف الترشيحات",
           "description": "يقوم بحذف جميع الترشيحات وإيقاف كسب المكافآت.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "info": "ستظل الأصول المقيدة على حالتها. إذا قمت بإلغاء تقيدها، فسوف تصبح متاحة بعد فترة 28 يومًا."
         }
       },
       "steps": {
@@ -2226,7 +2226,7 @@
       "languageDesc": "قم بتعيين اللغة المستخدمة في ليدجر لايف (Ledger Live).",
       "theme": "السمة",
       "themeDesc": "اختار السمة.",
-      "counterValue": "Countervalue",
+      "counterValue": "القيمة المقابلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
       "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
@@ -2895,13 +2895,13 @@
       "delegate": "المدقق",
       "undelegate": "المدقق",
       "claimReward": "مستلم المكافأة",
-      "optIn": "recipient",
+      "optIn": "المستلم",
       "nominate": "المدقق"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "أصوات ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
     "title": "شروط الاستخدام",
@@ -2931,7 +2931,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "نحن غير قادرين على توفير قيمة مقابلة لهذا الأصل في الوقت الحالي"
     },
     "generic": {
       "title": "{{message}}",
