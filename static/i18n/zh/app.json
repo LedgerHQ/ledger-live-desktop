@@ -1856,7 +1856,7 @@
     "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
     "nomination": {
       "emptyState": {
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
+        "description": "您可以通过绑定资产并随后提名您的（某个或多个）验证器来赚取奖励。",
         "info": "提名机制如何运作"
       },
       "header": "提名名单",
@@ -1866,21 +1866,21 @@
       "amount": "已绑定数额",
       "commission": "佣金",
       "active": "活跃",
-      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
+      "activeTooltip": "该验证器已当选，并正在为您绑定的资产收集奖励。",
       "inactive": "不活跃",
-      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
+      "inactiveTooltip": "该验证器已当选，但是并没有为您绑定的资产收集奖励。",
       "waiting": "落选",
-      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
+      "waitingTooltip": "该验证器落选，因此无法收集奖励。",
       "notValidator": "并非验证器",
       "notValidatorTooltip": "该地址不再是一个验证器",
       "elected": "当选",
       "nominatorsCount": "{{nominatorsCount}} 个提名者",
-      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
+      "nominatorsTooltip": "在 {{count}} 位提名者的提名下，该验证器目前当选。",
       "oversubscribed": "超额订购 ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
+      "oversubscribedTooltip": "只有绑定数额最高的顶层 {{maxNominatorRewardedPerValidator}} 提名者才可赚取奖励",
       "hasPendingBondOperation": "绑定操作仍在等待确认",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
+      "electionOpen": "正在推选新的验证器。因此，最多 15 分钟后方可进行权益质押操作。",
+      "electionOpenTooltip": "在推选验证器期间，该操作被禁用。",
       "externalControllerTooltip": "此账户由另一个账户控制。",
       "externalControllerUnsupported": "<0>该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。</0><1>如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
@@ -1908,11 +1908,11 @@
       },
       "unbond": {
         "title": "解绑",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "description": "要让绑定的数额重新可用，首先需要将其解绑。经过 28 天的解绑期后即可将其提取。"
       },
       "withdrawUnbonded": {
         "title": "提取",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "description": "要将已解绑的数额返还到可用余额中，需要您手动进行提取操作。"
       },
       "nominate": {
         "title": "提名",
@@ -1920,7 +1920,7 @@
       },
       "chill": {
         "title": "清除提名",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "description": "删除所有的提名对象。您将停止赚取奖励。而您绑定的数额依旧会处于绑定状态。"
       }
     },
     "nominate": {
@@ -1939,7 +1939,7 @@
           "label": "确认",
           "success": {
             "title": "您已成功提名验证器。",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
+            "text": "当您的资产被绑定至您的 (某个或多个) 当选验证器时，您便将开始赚取奖励。",
             "cta": "查看详情"
           },
           "pending": {
@@ -1956,7 +1956,7 @@
         "stash": "可用余额",
         "stashDescription": "奖励被记入您的可用余额。",
         "staked": "已绑定余额",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
+        "stakedDescription": "奖励被记入您的已绑定余额，以便赚取复利。",
         "optionTitle": "备注",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
