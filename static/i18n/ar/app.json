@@ -2525,7 +2525,7 @@
       "tutorial": {
         "steps": {
           "getStarted": "بدء العمل",
-          "pinCode": "Pin code",
+          "pinCode": "رمز PIN",
           "recoveryPhrase": "عبارة الاسترداد",
           "hideRecoveryPhrase": "إخفاء عبارة الاسترداد",
           "pairNano": "توصيل جهاز Nano"
@@ -2544,9 +2544,9 @@
           "howToGetStarted": {
             "title": "أفضل طريقة كي تبدأ:",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "قم بتخطيط 30 دقيقة وخذ وقتك.",
+              "2": "احصل على قلم للكتابة به.",
+              "3": "كن بمفردك، واختار بيئة آمنة وهادئة."
             },
             "buttons": {
               "next": "حسنًا، أنا مستعد!",
@@ -2600,18 +2600,18 @@
             }
           },
           "pinCode": {
-            "title": "PIN code",
+            "title": "رمز PIN",
             "paragraph": "رمز الPIN الخاص بك هو الطبقة الأولى من الأمان. وهو يؤمن فعليًا الوصول إلى جهاز نانو (Nano) ومفاتيحك الخاصة. يجب أن يتكون رمز الPIN الخاص بك من 4 إلى 8 أرقام.",
-            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "disclaimer": "أفهم أنه يجب علي اختيار رمز الPIN الخاص بي بنفسي وإبقاؤه سريًا.",
             "buttons": {
-              "next": "Set up PIN code",
+              "next": "إعداد رمز الPIN",
               "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "title": "أصبحت محترفًا بالفعل!",
+            "paragraph": "أنت جاهز لإدارة أصولك المشفرة بأمان. لم يتبق أمامك سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة",
@@ -2619,8 +2619,8 @@
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "title": "ستصبح محترفًا قريبًا...",
+            "paragraph": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة. لم يتبقى سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة"
@@ -2628,7 +2628,7 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
+              "title": "اختيار رمز الPIN",
               "descr": "اضغط على الزر الأيسر أو الأيمن لتغيير الأرقام. اضغط على كلا الزرين للتحقق من صحة أحد الأرقام. إختار <0></0> لتأكيد رمز الPIN الخاص بك. إختار <1></1> لمسح أحد الأرقام."
             },
             "confirm": {
@@ -2643,16 +2643,16 @@
           },
           "existingRecoveryPhrase": {
             "title": "أدخل عبارة الاسترداد الخاصة بك",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
+            "paragraph1": "عبارة الاسترداد الخاصة بك هي القائمة السرية من الكلمات التي قمت بنسخها احتياطيًا عند إعداد محفظتك لأول مرة.",
+            "paragraph2": "لا تحتفظ Ledger بنسخة من عبارة الاسترداد الخاص بك.",
             "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد الخاصة بي فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
-              "next": "Enter recovery phrase",
+              "next": "إدخال عبارة الاسترداد",
               "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
+              "title": "لا تستخدم عبارة استرداد لم تقم بإنشائها بنفسك.",
               "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
               "supportLink": "الاتصال بقسم دعم ليدجر"
             }
@@ -2663,7 +2663,7 @@
               "descr": "احصل على ورقة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
             },
             "writeDownWords": {
-              "title": "Write down all words",
+              "title": "كتابة كل الكلمات",
               "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
@@ -2674,7 +2674,7 @@
           },
           "newRecoveryPhrase": {
             "title": "عبارة الاسترداد",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+            "paragraph1": "عبارة الاسترداد الخاصة بك هي قائمة سرية من 24 كلمة تدعم مفاتيحك الخاصة.",
             "paragraph2": "يولد جهاز نانو (Nano) الخاص بك عبارة استرداد فريدة. لا تحتفظ ليدجر بنسخة منها.",
             "disclaimer": "أفهم أنني إذا فقدت عبارة الاسترداد هذه فلن أتمكن من الوصول إلى الأصول المشفرة الخاصة بي في حالة أن فقدت الوصول إلى جهاز نانو (Nano) الخاص بي.",
             "buttons": {
@@ -2685,14 +2685,14 @@
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "جهز عبارة الاسترداد الخاصة بك"
             },
             "selectLength": {
               "title": "حدد طول عبارة الاسترداد",
               "descr": "يمكن أن تحتوي عبارة الاسترداد الخاصة بك على 12 أو 18 أو 24 كلمة. ويجب عليك إدخال كل الكلمات للوصول إلى الأصول المشفرة الخاصة بك."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
+              "title": "أدخل الكلمة رقم 1 ...",
               "descr": "أدخل الأحرف الأولى من الكلمة رقم 1 عن طريق اختيارها بالزر الأيمن أو اليسار. اضغط على الزرين للتحقق من كل حرف."
             },
             "validateWord": {
@@ -2700,7 +2700,7 @@
               "descr": "اختر الكلمة رقم #1 من بين الاقتراحات. اضغط على كلا الزرين للتحقق من صحتها."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "كرر الخطوات مع جميع الكلمات!"
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -2714,7 +2714,7 @@
               "descr": "قم بالتمرير خلال الكلمات حتى تجد الكلمة رقم 1 بالضغط على الزر الأيمن. تحقق من صحتها من خلال الضغط على كلا الزرين."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "كرر الخطوات مع جميع الكلمات!"
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -2724,11 +2724,11 @@
           },
           "genuineCheck": {
             "success": {
-              "title": "All good!",
+              "title": "الامور جيدة!",
               "desc": "ليدجر {{deviceName}} الخاص بك أصلي وجاهز للاستخدام مع ليدجر لايف (Ledger Live)"
             },
             "buttons": {
-              "next": "Continue",
+              "next": "متابعة",
               "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
             }
@@ -2736,13 +2736,13 @@
           "hideRecoveryPhrase": {
             "title": "إخفاء عبارة الاسترداد الخاصة بك",
             "paragraph": "عبارة الاسترداد الخاصة بك هي فرصتك الأخيرة للوصول إلى أصولك المشفرة، إذا لم تتمكن من استخدام جهاز نانو (Nano) الخاص بك. يجب عليك الاحتفاظ بها في مكان آمن.",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
+            "keepItOffline": "أدخل هذه الكلمات في محفظتك للأجهزة فقط، وليس على أجهزة الكمبيوتر أو الهواتف الذكية.",
             "neverShowToAnyone": "لا تشارك أبدًا عبارتك المكوّنة من 24 كلمة مع أي شخص، ولا حتى مع ليدجر (Ledger).",
             "buttons": {
-              "next": "OK, I'm done!",
+              "next": "حسنا، لقد انتهيت!",
               "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة",
-              "learn": "Learn how to hide it"
+              "learn": "تعلم كيف تخفيها"
             }
           },
           "pairMyNano": {
@@ -2755,17 +2755,17 @@
             }
           },
           "quizzSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "title": "أصبحت محترفًا بالفعل!",
+            "paragraph": "أنت جاهز لإدارة أصولك المشفرة بأمان. لم يتبق أمامك سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة"
             }
           },
           "quizzFail": {
-            "title": "You will soon become a pro...",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
+            "title": "ستصبح محترفًا قريبًا...",
+            "paragraph1": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة.",
+            "paragraph2": "لم يتبقى سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة"
@@ -2775,10 +2775,10 @@
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "الأساسيات",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
+          "title": "الوصول إلى أصولك المشفرة",
           "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
         },
         "ownYourPrivateKey": {
