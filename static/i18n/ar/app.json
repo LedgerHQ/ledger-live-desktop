@@ -1847,7 +1847,7 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded",
+    "lockedBalance": "تم تقيده",
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
     "unlockingBalance": "Unbonding",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
