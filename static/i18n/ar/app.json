@@ -2084,7 +2084,7 @@
           "title": "التأكيد",
           "label": "التأكيد",
           "success": {
-            "title": "Transaction sent successfully",
+            "title": "تم إرسال المعاملة بنجاح",
             "text": "سترى معاملتك في السجل قريبًا.",
             "cta": "عرض التفاصيل"
           },
@@ -2098,25 +2098,25 @@
   },
   "delegation": {
     "title": "اكسب المكافآت",
-    "header": "Delegation",
+    "header": "التفويض",
     "validator": "المدقق",
-    "yield": "Est. Yield",
+    "yield": "العائد التقديري",
     "address": "عنوان",
-    "transactionID": "Transaction ID",
-    "value": "Value",
+    "transactionID": "معرف المعاملة",
+    "value": "القيمة",
     "amount": "المبلغ",
     "delegated": "تفويض",
-    "completionDate": "Completion date",
+    "completionDate": "تاريخ الإكمال",
     "rewards": "المكافآت",
-    "duration": "Duration",
+    "duration": "المدة",
     "durationJustStarted": "بدأت للتو",
     "durationDays": "{{count}} يوم",
     "durationDays_plural": "{{count}} أيام",
-    "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
+    "howItWorks": "كيف يعمل التفويض",
+    "delegationEarn": "يمكنك الآن أن تكسب مكافآت رهن {{name}} عن طريق تفويض حسابك.",
     "earnRewards": "اكسب المكافآت",
-    "overdelegated": "Overdelegated",
-    "status": "Status",
+    "overdelegated": "تفويض زائد عن الحد",
+    "status": "الحالة",
     "flow": {
       "steps": {
         "starter": {
@@ -2417,11 +2417,11 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger live is up and running",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "title": "ليدجر لايف (Ledger Live) في وضع التشغيل",
+        "description": "هل تواجه مشاكل؟ انتقل إلى <0>صفحة المساعدة</0>"
       },
       "statusNotOk": {
-        "title": "Ledger live is experiencing issues",
+        "title": "ليدجر لايف (Ledger Live) يواجه مشاكل",
         "learnMore": "معرفة المزيد"
       }
     },
@@ -3076,7 +3076,7 @@
     },
     "FeeEstimationFailed": {
       "title": "عذرًا، فشل تقدير الرسوم",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "description": "حاول تعيين رسوم مخصصة (الحالة: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "مطلوب تحديث البرنامج الثابت أو التطبيق",
