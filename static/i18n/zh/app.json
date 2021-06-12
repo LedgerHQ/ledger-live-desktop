@@ -1668,7 +1668,7 @@
             "title": "确认",
             "success": {
               "title": "您的资产已经成功委托。",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
+              "text": "该交易一经区块链确认，就会更新您的账户余额。",
               "cta": "查看详情"
             },
             "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
@@ -1718,8 +1718,8 @@
         "steps": {
           "starter": {
             "title": "重新委托",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
+            "description": "使用重新委托功能来轻松地更换验证器。不过，如果想再次更换验证器，则需要等待，因为重新委托会触发 21 天的时间锁。",
+            "warning": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分已委托资产。您最多可以有 <0> 7 个待定重新委托 </0>。",
             "howDelegationWorks": "委托机制如何运作？"
           },
           "validators": {
@@ -2382,7 +2382,7 @@
     "noAccounts": "没有可导出的账户",
     "selectedAccounts": "要包括的账户",
     "selectedAccounts_plural": "要包括的帐户 ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "导出的对值仅供参考之用。请勿将其用于会计、税务、监管或法律目的，因为相关数据由 Ledger 的服务提供方 Kaiko 通过估算方法得出，只是对交易和导出时的资产价格进行的估算。"
   },
   "language": {
     "system": "使用系统语言",
@@ -2568,7 +2568,7 @@
             },
             "follow": {
               "title": "按指示操作",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "descr": "返回此处以按照 PIN 识别密码的说明操作。"
             },
             "buttons": {
               "next": "下一步",
@@ -2629,7 +2629,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "选择 PIN 识别密码",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "descr": "按左边或右边的按钮来更改数字。同时按下两个按钮来确认选中的数字。选择<0></0> 以确认您的 PIN 识别密码。选择 <1></1> 来删除一个数字。"
             },
             "confirm": {
               "title": "确认 PIN 识别密码",
@@ -2747,7 +2747,7 @@
           },
           "pairMyNano": {
             "title": "检验真伪",
-            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "paragraph": "我们将会验证您的 Nano 是否是正版的。验证过程会很快、很简单！",
             "buttons": {
               "next": "检验我的 Nano",
               "prev": "上一步",
