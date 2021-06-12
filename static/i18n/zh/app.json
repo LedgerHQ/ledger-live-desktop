@@ -1736,7 +1736,7 @@
             "title": "确认",
             "success": {
               "title": "您的资产已成功重新委托",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
+              "text": "一旦区块链确认该交易，就会更新重新委托信息",
               "cta": "查看详情"
             },
             "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
@@ -1753,8 +1753,8 @@
         "steps": {
           "amount": {
             "title": "数额",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "subtitle": "需要 <0> 21 天</0> 完成解除委托流程。",
+            "warning": "奖励将被立即兑现。而解除委托的数额将在 <0> 21 天时间锁</0> 后，返还至可用余额。",
             "fields": {
               "validator": "验证器",
               "amount": "要解除委托的数额"
@@ -1767,7 +1767,7 @@
             "title": "确认",
             "success": {
               "title": "您的资产已成功解除委托",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
+              "description": "<0>{{amount}}</0> 数额已从 <0>{{validator}}</0> 解除委托",
               "cta": "查看详情"
             },
             "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。"
@@ -1779,16 +1779,16 @@
   "algorand": {
     "operationHasRewards": "赚取的奖励",
     "operationEarnedRewards": "您已赚取 <0>{{amount}}</0> 奖励。",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> 已赚取奖励)",
     "optIn": {
       "flow": {
         "title": "添加 ASA (资产)",
         "steps": {
           "assets": {
             "title": "ASA (资产)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
+            "info": "添加一个资产需要发送一个含最低费用的交易。这将出现在您的交易历史记录中",
             "selectLabel": "选择一个 ASA (资产)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "disabledTooltip": "您的 Algorand 账户已经有这种 ASA (资产)"
           },
           "connectDevice": {
             "title": "设备"
