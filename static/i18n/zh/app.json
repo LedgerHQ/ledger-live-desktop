@@ -80,7 +80,7 @@
       "refresh": "刷新"
     },
     "exchange": "货币兑换",
-    "info": "Info"
+    "info": "信息"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -1044,11 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "这是什么操作？",
     "title": "操作详情",
-    "type": "Type",
-    "amount": "Amount",
+    "type": "类型",
+    "amount": "数额",
     "account": "账户",
     "date": "日期",
-    "currentValue": "Current value",
+    "currentValue": "当前值",
     "status": "状态",
     "confirmed": "已确认",
     "failed": "已失败",
@@ -2323,7 +2323,7 @@
       },
       "fullNode": {
         "title": "连接比特币完整节点",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "desc": "设置您的比特币完整节点，无需使用 Ledger 的浏览器即可进行同步和发送交易。"
       }
     }
   },
@@ -2346,11 +2346,11 @@
     "setPassword": {
       "title": "密码锁",
       "subTitle": "设置密码",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "desc": "妥善保管您的密码。如果丢失密码，则意味着需要重置 Ledger Live 并重新加载账户。"
     },
     "disablePassword": {
       "title": "禁用密码锁",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Ledger Live 数据将以未加密的方式保存在您的电脑上。这包括账户名称、交易数据和公共地址等。"
     }
   },
   "update": {
@@ -2931,7 +2931,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "我们目前无法为此资产提供对价"
     },
     "generic": {
       "title": "{{message}}",
