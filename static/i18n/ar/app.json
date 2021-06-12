@@ -2192,13 +2192,13 @@
   },
   "settings": {
     "title": "إعدادات",
-    "discreet": "Toggle discreet mode",
+    "discreet": "التبديل إلى الوضع الصامت",
     "helpButton": "مساعدة",
     "tabs": {
       "display": "عامة",
       "currencies": "الأصول المشفرة",
       "help": "مساعدة",
-      "about": "About",
+      "about": "حول",
       "experimental": "الميزات التجريبية",
       "accounts": "الحسابات"
     },
