@@ -1919,8 +1919,8 @@
         "description": "اختر ما يصل إلى 16 مدققًا. تأكد من أن الترشيحات في الوضع \"المفعل\" لكسب المكافآت."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "مسح الترشيحات",
+        "description": "إزالة كل الترشيحات. سوف تتوقف عن كسب المكافآت. سيبقى تقيد المبلغ الذي قمت بتقيده."
       }
     },
     "nominate": {
@@ -1950,33 +1950,33 @@
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "تقيد الأصول",
       "rewardDestination": {
-        "label": "Rewards Destination",
+        "label": "وجهة المكافآت",
         "stash": "الرصيد المتاح",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "stashDescription": "يتم إيداع المكافآت في رصيدك المتاح.",
+        "staked": "الرصيد المقيد",
+        "stakedDescription": "يتم إيداع المكافآت في رصيدك المقيد لاحتساب المكاسب المجمعة.",
+        "optionTitle": "ملاحظة",
+        "optionDescription": "فور أن يتم تعيين هذا الخيار، فإنه يظل ثابتًا طوال فترة عمر هذا التقيد. إذا قمت بتغير رأيك، فيرجى قراءة المقالة المقدمة أدناه"
       },
       "steps": {
         "starter": {
           "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول الخاصة بك ثم تعيين المدققين الخاصين بك.",
           "bullet": [
-            "You keep ownership of bonded assets",
+            "أنت تحتفظ بملكية الأصول المقيدة",
             "الترشيح باستخدام جهاز ليدجر الخاص بك",
-            "Assets will be available again, 28 days after unbonding"
+            "ستكون الأصول متاحة مرة أخرى بعد 28 يومًا من إلغاء التقيد"
           ],
-          "help": "How nominations work",
+          "help": "كيف تعمل الترشيحات",
           "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
         },
         "amount": {
           "title": "المبلغ",
           "amountLabel": "المبلغ المراد تقيده",
-          "availableLabel": "Available",
-          "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
+          "availableLabel": "متاح",
+          "maxLabel": "الحد الأقصى",
+          "info": "يمكن إلغاء تقيد الأصول في أي وقت، ولكن عملية إلغاء التقيد تستغرق فترة 28 يومًا.",
           "learnMore": "معرفة المزيد"
         },
         "connectDevice": {
@@ -1985,31 +1985,31 @@
         "confirmation": {
           "tooltip": {
             "title": "المعاملة في انتظار التأكيد",
-            "desc": "You have to wait a moment before nominating"
+            "desc": "سيكون عليك الانتظار لفترة قصيرة قبل الترشيح"
           },
           "title": "التأكيد",
           "success": {
-            "title": "Assets successfully bonded",
+            "title": "تم تقيد الأصول بنجاح",
             "text": "يمكنك ترشيح المدققين فور أن تؤكد الشبكة على المعاملة.",
             "textNominate": "سوف تتمكن من ترشيح المدققين فور أن تؤكد الشبكة على معاملتك.",
             "nominate": "ترشيح",
             "later": "الترشيح في وقتٍ لاحق"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "جاري تقيد أصولك..."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "إعادة تقيد الأصول",
       "steps": {
         "amount": {
           "title": "المبلغ",
           "amountLabel": "المبلغ المراد إعادة تقيده",
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max",
+          "availableLabel": "إلغاء التقيد",
+          "maxLabel": "الحد الأقصى",
           "info": "تتم إضافة الأصول المعاد قيدها على الفور إلى المبلغ المقيد.",
           "learnMore": "معرفة المزيد"
         },
@@ -2038,7 +2038,7 @@
           "title": "المبلغ",
           "amountLabel": "المبلغ المراد إلغاء تقيده",
           "availableLabel": "Bonded",
-          "maxLabel": "Max",
+          "maxLabel": "الحد الأقصى",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
           "learnMore": "معرفة المزيد"
         },
@@ -2711,7 +2711,7 @@
           "recoveryHowTo3": {
             "reEnterWord": {
               "title": "تأكيد عبارة الاسترداد الخاصة بك",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "descr": "قم بالتمرير خلال الكلمات حتى تجد الكلمة رقم 1 بالضغط على الزر الأيمن. تحقق من صحتها من خلال الضغط على كلا الزرين."
             },
             "repeat": {
               "title": "Repeat for all words!"
