@@ -140,7 +140,7 @@
     "fast": "سريع",
     "high": "مرتفعة",
     "low": "منخفضة",
-    "slow": "بطيئ",
+    "slow": "بطيء",
     "standard": "اعتيادية",
     "medium": "متوسط",
     "feesAmount": "قيمة الرسوم"
@@ -310,7 +310,7 @@
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT و 50+ آخرىن",
+          "BTC, ETH, USDT و 50+ آخرين",
           "متعدد العملات",
           "مركزي"
         ]
@@ -1884,7 +1884,7 @@
       "externalControllerTooltip": "هذا الحساب يخضع للسيطرة حساب آخر.",
       "externalControllerUnsupported": "<0>حساب التخزين هذا يخضع لسيطرة حساب آخر عنوانه <0>{{address}}</0>. \n</0><1> عمليات الرهن على الحسابات الخاضعة لسيطرة حساب مختلف غير معتمدة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة مختلفة مثل Polkadot.js</1>",
       "externalStashTooltip": "هذا الحساب يتحكم في حساب آخر.",
-      "externalStashUnsupported": "<0>هذا الحساب يتحكم في حساب تخزين عنوانه <0>{{address}}</0>.\n</0><1>عمليات الرهن على حسابات تخزين منفصلةغير مدعومة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة بديلة مثل Polkadot.js</1>",
+      "externalStashUnsupported": "<0>هذا الحساب يتحكم في حساب تخزين عنوانه <0>{{address}}</0>.\n</0><1>عمليات الرهن على حسابات تخزين منفصلة غير مدعومة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة بديلة مثل Polkadot.js</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "لا توجد ترشيحات مفعلة.",
