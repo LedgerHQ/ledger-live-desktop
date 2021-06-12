@@ -704,7 +704,7 @@
           },
           "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "提取的金额在 {{ tokenName }} 中显示。 {{ tokenName }} 是您在借出资产后赚取的 ERC20 代币。"
           }
         }
       }
@@ -725,7 +725,7 @@
         },
         "2": {
           "subtitle": "供应资产以赚取利息",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "description": "一旦账户获得批准，您可以选择想要贷出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
         },
         "3": {
           "subtitle": "随时提取资产",
@@ -763,7 +763,7 @@
     },
     "emptyAccountDeposit": {
       "title": "您没有任何 {{ asset }} 帐户。",
-      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
+      "description": "为了存入资金和借出加密货币，您需要有一个 {{ asset }} 账户。请在您的以太坊地址上接收资金。",
       "ctaBuy": "买入 {{ asset }}",
       "ctaReceive": "接收 {{ asset }}"
     }
@@ -838,7 +838,7 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
+      "title": "修改实验性设置需要清除缓存",
       "cta": "清除缓存"
     },
     "migrate": "Ledger Live 账户可更新",
@@ -854,12 +854,12 @@
     },
     "stakeCosmos": {
       "title": "使用 COSMOS 质押",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
+      "description": "通过账户页面委托您的 ATOM 币，并在今天赚取奖励",
       "cta": "立即质押 Cosmos"
     },
     "buyCrypto": {
       "title": "购买加密货币",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "description": "通过我们的合作伙伴购买加密资产并在您的 Ledger 账户直接接收这些资产",
       "cta": "立即买入"
     },
     "backupPack": {
@@ -873,7 +873,7 @@
     },
     "sell": {
       "title": "卖出加密货币",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "description": "借助我们的合作伙伴，直接在 Ledger Live 上卖出比特币"
     },
     "stakeAlgorand": {
       "title": "用 ALGORAND 进行权益质押",
