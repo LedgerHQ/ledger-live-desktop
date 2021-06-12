@@ -3342,8 +3342,8 @@
       "title": "صيغة العنوان القديمة هذه لم تعد مدعومة"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "title": "هذا التطبيق الخطأ",
+      "description": "افتح تطبيق \"{{managerAppName}}\" على جهازك"
     },
     "DeviceNameInvalid": {
       "title": "يرجى اختيار اسم جهاز بدون '{{invalidCharacters}}'"
@@ -3353,15 +3353,15 @@
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "title": "تحتاج تطبيقات البيتكوين و الإيثيريوم",
+      "description": "قم بتثبيت أحدث نسخ من تطبيقات بيتكوين وإيثريوم أولاً."
     },
     "UserRefusedDeviceNameChange": {
       "title": "تم إلغاء إعادة التسمية على الجهاز",
       "description": "حاول مرة أخرى واسمح بإعادة التسمية على جهازك"
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": "خطأ في المزامنة",
       "description": "تعذرت مزامنة بعض الحسابات"
     },
     "TronNoFrozenForBandwidth": {
@@ -3370,18 +3370,18 @@
     },
     "TronNoFrozenForEnergy": {
       "title": "لا توجد أصول لإلغاء تجميدها",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "description": "ليس لديك أصول مرتبطة بالطاقة لإلغاء التجميد"
     },
     "TronUnfreezeNotExpired": {
       "title": "إزالة التجميد غير متوفر بعد",
       "description": "يجب الانتظار 3 أيام بعد آخر عملية تجميد لك"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "مطلوب على الأقل صوت واحد"
     },
     "TronInvalidVoteCount": {
       "title": "صيغة التصويت غير صحيحة",
-      "description": "You can only vote using round numbers"
+      "description": "يمكنك التصويت فقط باستخدام أرقام كاملة"
     },
     "TronRewardNotAvailable": {
       "title": "المكافأة غير قابلة للمطالبة بها بعد",
@@ -3394,41 +3394,41 @@
       "title": "لا يمكن أن يكون المبلغ المراد تجميده أقل من 1"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "title": "لن يؤدي إرسال TRC20 إلى الحساب الجديد إلى تفعيله",
+      "description": "يجب تفعيل حساب المستلم قبل إرسال TRC20 إليه. أرسل TRX أو TRC10 إلى حساب لتفعيله."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "قد يتم تطبيق رسوم إضافية"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "لا توجد أصوات كافية"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "title": "انتهت صلاحية المعاملة",
+      "description": "يجب تطبيق التوقيع في غضون 30 ثانية. يرجى إعادة المحاولة مرة أخرى."
     },
     "TronNotEnoughEnergy": {
       "title": "لا توجد طاقة كافية لإرسال هذا التوكن"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
+      "title": "لم يتم إجراء الإقران بنجاح",
       "description": "يرجى إعادة المحاولة أو الاتصال بدعم ليدجر إذا كان لديك شك."
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
+      "title": "فشل اختبار الأصالة",
       "description": "حدثت مشكلة. يرجى المحاولة مرة أخرى أو الاتصال بدعم ليدجر إذا كنت في شك."
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "يرجى تمكين بيانات العقد في إعدادات تطبيق إيثريوم"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "علامة وجهة XRP غير صالحة"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "رصيد غير كافٍ للتفويض"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "رصيد غير كافٍ للتفويض"
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Insufficient balance in the parent account"
@@ -3437,7 +3437,7 @@
       "title": "لا يمكن للرصيد أن يقل عن {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "يرجى فتح تطبيق {{expected}}"
     },
     "FeeTooHigh": {
       "title": "رسوم الشبكة أعلى من 10% من المبلغ"
@@ -3446,7 +3446,7 @@
       "title": "صيغة الملاحظة خاطئة"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "يرجى تعطيل خاصية التوقيع المتعدد لإرسال {{currencyName}}"
     },
     "StellarMemoRecommended": {
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
@@ -3458,7 +3458,7 @@
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "يجب إغلاق باب انتخاب المدققين"
     },
     "PolkadotNotValidator": {
       "title": "بعض العناوين المختارة ليست مدققين"
@@ -3467,7 +3467,7 @@
       "title": "All bonded assets will be unbonded if < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "ليس لديك أصول غير مقيدة"
     },
     "PolkadotNoNominations": {
       "title": "ليس لديك ترشيحات"
