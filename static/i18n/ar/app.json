@@ -552,7 +552,7 @@
     "account": {
       "amountSupplied": "المبلغ المودع",
       "amountSuppliedTooltip": "المبلغ الذي تم إقراضه للشبكة",
-      "currencyAPY": "عملة APY",
+      "currencyAPY": "مردود العملة المئوي السنوي",
       "currencyAPYTooltip": "معدل العائد السنوي للوديعة المركبة باستمرار",
       "accruedInterests": "الفوائد المتراكمة",
       "accruedInterestsTooltip": "الفائدة الناتجة عن الأصول التي تم إقراضها",
@@ -618,7 +618,7 @@
         "allAssets": "الأصل",
         "totalBalance": "رصيد الأصول",
         "totalBalanceTooltip": "المبلغ المتاح للإقراض",
-        "currentAPY": "إيداع APY",
+        "currentAPY": "مردود الإيداع المئوي السنوي",
         "currentAPYTooltip": "معدل العائد السنوي الذي يتم الحصول عليه من وديعة مركبة بشكل مستمر",
         "actions": "الإجراءات"
       }
