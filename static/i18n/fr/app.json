@@ -79,7 +79,8 @@
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser"
     },
-    "exchange": "Échanger"
+    "exchange": "Échanger",
+    "info": "Informations"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -1043,8 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "À quoi correspond cette opération ?",
     "title": "Détails de l'opération",
+    "type": "Type",
+    "amount": "Montant",
     "account": "Compte",
     "date": "Date",
+    "currentValue": "Valeur actuelle",
     "status": "Statut",
     "confirmed": "Confirmée",
     "failed": "Échec",
@@ -2926,6 +2930,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Une erreur est survenue. Veuillez réessayer ou contacter l'Assistance Ledger."

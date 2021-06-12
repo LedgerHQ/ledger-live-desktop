@@ -79,7 +79,8 @@
       "error": "Ошибка синхронизации",
       "refresh": "Обновить"
     },
-    "exchange": "Обмен"
+    "exchange": "Обмен",
+    "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -1043,8 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "Что это за операция?",
     "title": "Сведения об операции",
+    "type": "Type",
+    "amount": "Amount",
     "account": "Счёт",
     "date": "Дата",
+    "currentValue": "Current value",
     "status": "Статус",
     "confirmed": "Подтверждена",
     "failed": "Неудачно",
@@ -2926,6 +2930,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Что-то пошло не так. Повторите попытку или свяжитесь с Поддержкой Ledger."

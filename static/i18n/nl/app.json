@@ -79,7 +79,8 @@
       "error": "Synchronization error",
       "refresh": "Refresh"
     },
-    "exchange": "Exchange"
+    "exchange": "Exchange",
+    "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -1043,8 +1044,11 @@
   "operationDetails": {
     "whatIsThis": "What is this operation?",
     "title": "Operation details",
+    "type": "Type",
+    "amount": "Amount",
     "account": "Account",
     "date": "Date",
+    "currentValue": "Current value",
     "status": "Status",
     "confirmed": "Confirmed",
     "failed": "Failed",
@@ -2926,6 +2930,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact Ledger Support."
