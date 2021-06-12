@@ -149,7 +149,7 @@
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
-    "manager": "管理器",
+    "manager": "Manager（管理器）",
     "exchange": "买入 / 卖出",
     "swap": "Swap (掉期)",
     "lend": "借出"
@@ -190,13 +190,13 @@
     },
     "missingApp": {
       "title": "请在您的设备上安装 {{appName}} 应用程序",
-      "subtitle": "前往管理器并安装 {{appName}} 应用程序以进行资产的掉期交易",
+      "subtitle": "前往 Manager（管理器）并安装 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往管理器"
     },
     "outdatedApp": {
       "title": "请在您的设备上更新 {{appName}} 应用程序",
       "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
-      "cta": "前往管理器"
+      "cta": "前往 Manager（管理器）"
     },
     "kyc": {
       "title": "欢迎使用 Swap",
@@ -913,7 +913,7 @@
       "title": "在您的设备上安装应用程序",
       "desc": "前往管理器在您的设备上安装应用。一旦您设备上有应用程序，您就可以添加帐户。",
       "buttons": {
-        "installApp": "前往管理器",
+        "installApp": "前往 Manager（管理器）",
         "help": "帮助"
       }
     },
@@ -922,7 +922,7 @@
       "desc": "添加账号来开始管理您的加密资产。您必须在您的设备上安装您的加密资产的应用程序。",
       "buttons": {
         "addAccount": "添加账户",
-        "installApp": "前往管理器安装应用程序",
+        "installApp": "前往 Manager（管理器）安装应用程序",
         "help": "帮助"
       }
     }
@@ -1110,7 +1110,7 @@
     "appNotInstalledTitle_plural": "缺少所需的应用程序",
     "appNotInstalled": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "appNotInstalled_plural": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
-    "openManager": "打开管理器",
+    "openManager": "打开 Manager（管理器）",
     "outdated": "应用程序版本过期",
     "outdatedDesc": "您设备上的 {{appName}} 应用程序有可用的重要更新。请前往管理器对其进行更新。",
     "installApp": "{{appName}} 应用程序安装",
@@ -1178,7 +1178,7 @@
       "updatable": {
         "title": "可用更新",
         "progressTitle": "{{number}} 个应用程序更新",
-        "progressWarning": "更新期间，请勿退出管理器。",
+        "progressWarning": "更新期间，请勿退出 Manager（管理器）。",
         "progress": "正在更新全部……"
       },
       "item": {
@@ -1281,7 +1281,7 @@
         "boot": "持续按住设备侧面按钮，直至 {{option}} 显示",
         "recoveryMode": "轻击 {{mode}} 模式。等候片刻直至功能面板出现。",
         "third": "3. 卸载所有应用",
-        "openLive": "在 Ledger Live 中打开管理器。",
+        "openLive": "在 Ledger Live 中打开 Manager（管理器）。",
         "uninstall": "点击 {{deviceName}} 上当前安装的所有应用程序的灰色回收站图标。这将为固件安装程序释放空间。",
         "disclaimer": "注：该操作不会对您的资金造成影响，用以访问您区块链中加密资产的私钥，依旧会安全保存在您的恢复表中。"
       }
@@ -3133,20 +3133,20 @@
     "ManagerQuitPage": {
       "install": {
         "title": "完成应用程序的安装进程？",
-        "description": "退出管理器将会终止应用程序的安装。请完成列队中应用程序的安装。",
+        "description": "退出 Manager（管理器）将会终止应用程序的安装。请完成列队中应用程序的安装。",
         "stay": "完成安装"
       },
       "uninstall": {
         "title": "完成应用程序的卸载进程？",
-        "description": "退出管理器会终止应用程序的卸载进程。",
+        "description": "退出 Manager（管理器）会终止应用程序的卸载进程。",
         "stay": "完成卸载"
       },
       "update": {
         "title": "完成应用程序的更新进程？",
-        "description": "退出管理器会终止应用程序的更新进程。",
+        "description": "退出 Manager（管理器）会终止应用程序的更新进程。",
         "stay": "完成更新"
       },
-      "quit": "退出管理器"
+      "quit": "退出 Manager（管理器）"
     },
     "ManagerUninstallBTCDep": {
       "title": "抱歉，需要安装此应用程序",
@@ -3243,7 +3243,7 @@
       "description": "请重新启动您的设备，而不要在图标出现时触摸按钮。如果问题仍然存在，请联系 Ledger 客服。"
     },
     "UserRefusedAllowManager": {
-      "title": "设备端拒绝了管理器"
+      "title": "Manager（管理器）在设备上被拒绝"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "设备上的更新已取消",
@@ -3263,7 +3263,7 @@
     },
     "UpdateYourApp": {
       "title": "需要更新应用程序",
-      "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
+      "description": "在 Manager（管理器）中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "DeviceOnDashboardExpected": {
       "title": "返回功能面板",
@@ -3283,7 +3283,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "需要更新应用程序",
-      "description": "在管理器中卸载并重新安装 {{managerAppName}} 应用程序"
+      "description": "在 Manager（管理器）中卸载并重新安装 {{managerAppName}} 应用程序"
     },
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
