@@ -1655,7 +1655,7 @@
               "资产将在解除委托 21 天后可用"
             ],
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分已委托资产。"
             }
           },
           "validator": {
@@ -1969,7 +1969,7 @@
             "Assets will be available again, 28 days after unbonding"
           ],
           "help": "提名机制如何运作",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "warning": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分已绑定资产。"
         },
         "amount": {
           "title": "数额",
@@ -2359,10 +2359,10 @@
     "checking": "正在检查更新...",
     "checkSuccess": "更新安装已就绪",
     "quitAndInstall": "立即安装",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
+    "updateAvailable": "Ledger Live 有新版本 {{version}} 可更新",
     "error": "更新时出错。请重新下载",
     "reDownload": "重新下载",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
+    "nightlyWarning": "此版本不能自动更新。请手动安装最新版本",
     "downloadNow": "下载更新"
   },
   "crash": {
@@ -2374,8 +2374,8 @@
   },
   "exportOperationsModal": {
     "title": "操作历史",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
+    "desc": "选择要保存操作历史记录的账户",
+    "descSuccess": "包含用户操作历史记录的 CSV 文件已经成功保存在所选文件夹中",
     "titleSuccess": "已成功保存历史操作记录",
     "cta": "保存",
     "ctaSuccess": "完成",
