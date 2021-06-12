@@ -2779,14 +2779,14 @@
       "screens": {
         "accessYourCoins": {
           "title": "الوصول إلى أصولك المشفرة",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "description": "يتم تخزين الأصول المشفرة الخاصة بك على البلوك تشين. أنت بحاجة إلى مفتاح خاص للوصول إليها وإدارتها."
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
+          "title": "امتلك مفتاحك الخاص",
           "description": "يتم تخزين مفتاحك الخاص في جهاز نانو (Nano) الخاص بك ويجب أن تكون أنت الشخص الوحيد الذي يمتلكه لتتحكم في أموالك."
         },
         "stayOffline": {
-          "title": "Stay offline",
+          "title": "البقاء غير متصل",
           "description": "يعمل جهاز نانو (Nano) الخاص بك كمحفظة \"للتخزين البارد\". ويعني ذلك أنه لا يكشف مفتاحك الخاص على الإنترنت أبدًا، حتى عند استخدام التطبيق."
         },
         "validateTransactions": {
@@ -2801,29 +2801,29 @@
       }
     },
     "quizz": {
-      "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "heading": "اختبار قصير",
+      "title": "لنختبر معلوماتك!",
+      "descr": "أجب عن 3 أسئلة بسيطة لتجنب المفاهيم الخاطئة الشائعة حول محفظتك للأجهزة.",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "start": "لنجري الاختبار",
+        "next": "السؤال التالي",
+        "finish": "إنهاء الاختبار"
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "كمستخدم لنظام ليدجر، يتم تخزين الأصول المشفرة الخاصة بي:",
           "answers": {
             "1": "على جهاز نانو (Nano) الخاص بي",
-            "2": "On the blockchain"
+            "2": "على البلوك تشين (سلسلة الكتل)"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "تهانينا!",
+              "text": "يتم تخزين أصولك المشفرة دائمًا على البلوك تشين. وتحتوي محفظتك للأجهزة على مفتاحك الخاص فقط، و التي تتيح لك الوصول إلى أصولك المشفرة."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "غير صحيح!",
+              "text": "يتم تخزين أصولك المشفرة دائمًا على البلوك تشين. وتحتوي محفظتك للأجهزة على مفتاحك الخاص فقط، و التي تتيح لك الوصول إلى أصولك المشفرة."
             }
           }
         },
