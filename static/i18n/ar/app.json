@@ -2233,7 +2233,7 @@
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "carouselVisibilityDesc": "تمكين المشاهدة كشريط دوّار في الحافظة"
     },
     "currencies": {
       "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
@@ -2272,7 +2272,7 @@
       "privacyDesc": "ارجع إلى سياسة الخصوصية الخاصة بنا لمعرفة البيانات الشخصية التي نجمعها، وسبب وكيفية استخدامها من جانبنا."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "هذه ميزات تجريبية نقدمها \"كما هي\" لكي يختبرها مجتمعنا من المتمرسين على استخدام التكنولوجيا. من الممكن أن يتم تغيير هذه الميزات أو تعطيلها أو إزالتها في أي وقت. من خلال تمكينها، فإنك توافق على استخدامها على مسؤوليتك الخاصة."
     },
     "hardResetModal": {
       "title": "إعادة تعيين Ledger Live",
@@ -2382,7 +2382,7 @@
     "noAccounts": "لا توجد حسابات لتصديرها",
     "selectedAccounts": "الحسابات المراد تضمينها",
     "selectedAccounts_plural": "الحسابات المراد تضمينها: ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "يتم تقديم القيمة المقابلة في بيانات التصدير للأغراض التعريفية لا أكثر. ينبغي عدم الاعتماد على بيانات من هذا النوع للأغراض المحاسبية أو الضريبية أو التنظيمية أو القانونية، لأنها لا تمثل سوى تقدير لسعر الأصول في وقت إجراء المعاملات وتصدير البيانات، وباتباع أساليب التقييم المقدمة من مزودنا للخدمة Kaiko"
   },
   "language": {
     "system": "استخدم لغة النظام",
@@ -2653,7 +2653,7 @@
             },
             "warning": {
               "title": "لا تستخدم عبارة استرداد لم تقم بإنشائها بنفسك.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
+              "desc": "ينبغي أن تقوم بنفسك وبنفسك فقط ببدء إنشاء رمز الPIN وعبارة الاسترداد بمحفظة ليدجر للأجهزة الخاصة بك. إذا تلقيت جهازًا به الكلمة الأولية موجودة مسبقًا أو رمز الPIN مهيأً بالفعل، فلا تستخدم المنتج واتصل بدعم العملاء لدينا.",
               "supportLink": "الاتصال بقسم دعم ليدجر"
             }
           },
@@ -3482,7 +3482,7 @@
       "title": "يجب عليك تقيد 1 DOT على الأقل"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "لقد تجاوزت الحد المسموح به لإلغاء التقيد"
     },
     "PolkadotValidatorsRequired": {
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
