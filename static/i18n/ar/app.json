@@ -3279,11 +3279,11 @@
     },
     "WrongDeviceForAccount": {
       "title": "حدث خطأ ما",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "يرجى التحقق من أن محفظت الأجهزة الخاصة بك قد تم إعدادها بعبارة الاسترداد أو عبارة المرور المرتبطة بالحساب المحدد."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "مطلوب تحديث التطبيق",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "قم بإزالة تطبيق {{managerAppName}} وأعد تثبيته في برنامج المدير"
     },
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
@@ -3300,19 +3300,19 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "تعذر فحص رمز الاستجابة السريعة (QR) هذا: التحقق التلقائي غير مدعوم من قبل هذا العنوان"
     },
     "FeeNotLoaded": {
       "title": "تعذر تحميل معدلات الرسوم. الرجاء تعيين رسوم يدوياً"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "الرسوم مطلوبة"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "قد يكون هذا منخفضاً جداً. يرجى زيادته"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
+      "title": "إصدار MCU غير معروف",
       "description": "يرجى الاتصال بدعم ليدجر"
     },
     "MCUNotGenuineToDashboard": {
@@ -3320,7 +3320,7 @@
       "description": "",
       "list": {
         "1": "افصل كبل الUSB وأعد توصيله دون الضغط على أي أزرار.",
-        "2": "Press both buttons together three times to display the Dashboard.",
+        "2": "اضغط على كلا الزرين معًا ثلاث مرات لعرض لوحة المعلومات.",
         "3": "افتح المدير وانقر فوق \"تحديث البرنامج الثابت\"."
       }
     },
@@ -3329,14 +3329,14 @@
       "description": "إذا كنت تريد تلقي الأرصدة المالية، فيرجى استخدام الحساب الرئيسي."
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "لا يمكن الإرسال من الحسابات الفرعية بعد",
+      "description": "ستتم إضافة هذه الميزة في مرحلة لاحقة بسبب التغييرات التي يتم تقديمها من خلال تحديث Babylon."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "يرجى إلغاء تفويض الحساب قبل إفراغه"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "يرجى إفراغ جميع الحسابات الفرعية أولاً"
     },
     "NotSupportedLegacyAddress": {
       "title": "صيغة العنوان القديمة هذه لم تعد مدعومة"
@@ -3431,7 +3431,7 @@
       "title": "رصيد غير كافٍ للتفويض"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "رصيد غير كافٍ في الحساب الرئيسي"
     },
     "NotEnoughSpendableBalance": {
       "title": "لا يمكن للرصيد أن يقل عن {{minimumAmount}}"
@@ -3464,7 +3464,7 @@
       "title": "بعض العناوين المختارة ليست مدققين"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "سيتم إلغاء تقيد جميع الأصول المقيدة إذا كانت أقل من 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
       "title": "ليس لديك أصول غير مقيدة"
