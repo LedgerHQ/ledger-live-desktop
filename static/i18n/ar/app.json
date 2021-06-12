@@ -1879,35 +1879,35 @@
       "oversubscribed": "({{nominatorsCount}}) تجاوز حد الاشتراك",
       "oversubscribedTooltip": "أعلى {{maxNominatorRewardedPerValidator}} مرشحين مع أعلى مبلغ مقيد فقط هم من يحصلون على مكافآت",
       "hasPendingBondOperation": "لا تزال عملية التقيد في انتظار التأكيد",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "electionOpen": "يجري حاليًا انتخاب مدققين جدد. ولذلك، لن تكون عمليات الرهن متاحة لمدة 15 دقيقة بحد أقصى.",
+      "electionOpenTooltip": "يتم تعطيل هذه العملية أثناء انتخاب المدققين.",
+      "externalControllerTooltip": "هذا الحساب يخضع للسيطرة حساب آخر.",
+      "externalControllerUnsupported": "<0>حساب التخزين هذا يخضع لسيطرة حساب آخر عنوانه <0>{{address}}</0>. \n</0><1> عمليات الرهن على الحسابات الخاضعة لسيطرة حساب مختلف غير معتمدة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة مختلفة مثل Polkadot.js</1>",
+      "externalStashTooltip": "هذا الحساب يتحكم في حساب آخر.",
+      "externalStashUnsupported": "<0>هذا الحساب يتحكم في حساب تخزين عنوانه <0>{{address}}</0>.\n</0><1>عمليات الرهن على حسابات تخزين منفصلةغير مدعومة في ليدجر لايف (Ledger Live). يرجى استخدام محفظة بديلة مثل Polkadot.js</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
-      "noActiveNominations": "There are no active nominations.",
+      "noActiveNominations": "لا توجد ترشيحات مفعلة.",
       "showAllUnlockings": "عرض كل مبالغ إلغاء التقيد ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "hideAllUnlockings": "إخفاء المبالغ الغير مقيدة"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
+      "header": "إلغاء التقيد",
+      "headerTooltip": "متوفر بعد فترة إلغاء التقيد الممتدة لفترة 28 يومًا",
       "withdrawUnbonded": "سحب ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "withdrawTooltip": "سيتم إيداع المبلغ الذي تم إلغاء تقيده في رصيدك المتاح.",
+      "noUnlockedWarning": "لا يوجد رصيد غير مقيد لسحبه حتى الآن.",
+      "rebond": "إعادة التقيد",
+      "unbonded": "تم إالغاء التقيد"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "إدارة الأصول",
       "bond": {
-        "title": "Bond",
+        "title": "قيد",
         "description": "لكسب المكافآت، قم أولاً بتقيد مبلغ. ثم يجب عليك ترشيح مدقق (مدققين) لك."
       },
       "unbond": {
-        "title": "Unbond",
+        "title": "إلغاء القيد",
         "description": "لإتاحة مبلغ مقيد مرة أخرى، سيكون عليك إلغاء تقيده أولاً. يمكنك سحبه بعد انقضاء فترة إلغاء التقيد الممتدة لفترة 28 يومًا."
       },
       "withdrawUnbonded": {
@@ -1915,8 +1915,8 @@
         "description": "لاسترجاع مبلغ تم إلغاء ربطه في الرصيد المتاح، سيكون عليك سحبه يدويًا."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "ترشيح",
+        "description": "اختر ما يصل إلى 16 مدققًا. تأكد من أن الترشيحات في الوضع \"المفعل\" لكسب المكافآت."
       },
       "chill": {
         "title": "Clear nominations",
@@ -1924,12 +1924,12 @@
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "ترشيح",
       "steps": {
         "validators": {
           "title": "المدققون",
           "notValidatorsRemoved": "قمت بترشيح {{count}} من العناوين التي لم تعد مدققين. وستتم إزالتها تلقائيًا من معاملة الترشيح الخاصة بك.",
-          "maybeChill": "Clear nominations instead"
+          "maybeChill": "مسح الترشيحات بدلاً من ذلك"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -1938,12 +1938,12 @@
           "title": "تأكيد",
           "label": "تأكيد",
           "success": {
-            "title": "You have successfully nominated validators",
+            "title": "قمت بترشيح المدققين بنجاح",
             "text": "ستبدأ في كسب المكافآت عندما يتم ربط الأصول الخاصة بك بالمدقق (المدققين) الذين قمت باختيارهم.",
             "cta": "عرض التفاصيل"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "يتم بث المعاملة..."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
@@ -1962,10 +1962,10 @@
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول الخاصة بك ثم تعيين المدققين الخاصين بك.",
           "bullet": [
             "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
+            "الترشيح باستخدام جهاز ليدجر الخاص بك",
             "Assets will be available again, 28 days after unbonding"
           ],
           "help": "How nominations work",
@@ -1992,8 +1992,8 @@
             "title": "Assets successfully bonded",
             "text": "يمكنك ترشيح المدققين فور أن تؤكد الشبكة على المعاملة.",
             "textNominate": "سوف تتمكن من ترشيح المدققين فور أن تؤكد الشبكة على معاملتك.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "nominate": "ترشيح",
+            "later": "الترشيح في وقتٍ لاحق"
           },
           "pending": {
             "title": "Bonding your assets..."
@@ -2089,7 +2089,7 @@
             "cta": "عرض التفاصيل"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "يتم بث المعاملة..."
           },
           "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
         }
@@ -2693,7 +2693,7 @@
             },
             "enterWord": {
               "title": "Enter Word #1...",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "descr": "أدخل الأحرف الأولى من الكلمة رقم 1 عن طريق اختيارها بالزر الأيمن أو اليسار. اضغط على الزرين للتحقق من كل حرف."
             },
             "validateWord": {
               "title": "تحقق من صحة الكلمة #1...",
@@ -2896,7 +2896,7 @@
       "undelegate": "validator",
       "claimReward": "مستلم المكافأة",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "المدقق"
     },
     "votes": "Votes ({{count}})"
   },
