@@ -2375,11 +2375,11 @@
   "exportOperationsModal": {
     "title": "سجل العمليات",
     "desc": "حدد الحسابات التي تريد حفظ سجل المعاملات لها",
-    "descSuccess": "تم حفظ ملف CSV الخاص بسجل معاملاتك في المجلد المحدد بنجاح",
-    "titleSuccess": "Operation history saved successfully",
+    "descSuccess": "تم حفظ ملف CSV الخاص بسجل عملياتك في المجلد المحدد بنجاح",
+    "titleSuccess": "تم حفظ سجل العمليات بنجاح",
     "cta": "حفظ",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
+    "ctaSuccess": "تم",
+    "noAccounts": "لا توجد حسابات لتصديرها",
     "selectedAccounts": "الحسابات المراد تضمينها",
     "selectedAccounts_plural": "الحسابات المراد تضمينها: ({{count}})",
     "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
@@ -2408,7 +2408,7 @@
   },
   "informationCenter": {
     "tooltip": "مركز المعلومات",
-    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "ongoingIncidentsTooltip": "هناك {{incidentCount}} وقائع جارية",
     "tabs": {
       "announcements": "أخبار",
       "announcementsUnseen": "أخبار ({{unseenCount}})",
@@ -2435,59 +2435,59 @@
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
-        "intro": "During the setup process you choose a PIN code.",
+        "title": "قم بتأمين رمز الPIN الخاص بك",
+        "intro": "تقوم خلال عملية الإعداد باختيار رمز PIN.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
-          "3": "You can change your PIN code if needed.",
+          "1": "<0>احرص دائمًا</0> على اختيار رمز الPIN بنفسك.",
+          "2": "<0>احرص دائمًا</0> على إدخال رمز الPIN الخاص بك بعيدًا عن أعين الآخرين.",
+          "3": "يمكنك تغيير رمز الPIN الخاص بك في حالة الحاجة إلى ذلك.",
           "4": "إذا تكرر إدخال رمز الPIN بشكل غير صحيح لثلاث مرات متتالية، سوف يعيد تعيين الجهاز.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "5": "<0>امتنع نهائيًا</0> عن استخدام رمز PIN يسهل تخمينه مثل 0000، أو  123456، أو 55555555.",
+          "6": "<0>امتنع نهائيًا</0> عن مشاركة رمز الPIN مع أي شخص آخر. ولا حتى مع ليدجر.",
+          "7": "<0>امتنع نهائيًا</0> عن استخدام رمز PIN لم تقم باختياره بنفسك.",
+          "8": "<0>امتنع نهائيًا</0> عن تخزين رمز الPIN الخاص بك على جهاز كمبيوتر أو هاتف."
         }
       },
       "recoverySeed": {
         "title1": "كيف تعمل عبارة الاسترداد؟",
         "paragraph1": "عبارة الاسترداد الخاصة بك تعمل كمفتاح رئيسي فريد، حيث يستخدمها جهاز لديجر (Ledger) الخاص بك لحساب المفاتيح الخاصة لكل أصل مشفر تملكه.",
         "paragraph2": "لاستعادة الوصول إلى الأصل المشفر الخاص بك، يمكن لأي محفظة أن تقوم بحساب نفس المفاتيح الخاصة من عبارة الاسترداد الخاصة بك.",
-        "link": "More about the recovery phrase",
+        "link": "مزيد من المعلومات عن عبارة الاسترداد",
         "title2": "ماذا يحدث إذا فقدت الوصول إلى جهاز نانو (Nano) الخاص بي؟",
         "paragraph3": "لا تقلق واتبع هذه الخطوات:",
         "points": {
-          "1": "Get a new hardware wallet.",
+          "1": "احصل على محفظة أجهزة جديدة.",
           "2": "اختار \"استعادة عبارة الاسترداد على جهاز جديد\" في تطبيق ليدجر (Ledger)",
           "3": "أدخل عبارة الاسترداد على جهازك الجديد لاستعادة الوصول إلى أصولك المشفرة."
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my recovery phrase?",
+        "title": "أين ينبغي أن أحتفظ بعبارة الاسترداد الخاصة بي؟",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
-          "4": "Ledger will never ask for your recovery phrase.",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "1": "امتنع <0>نهائيًا</0> عن إدخالها على جهاز كمبيوتر أو هاتف ذكي أو أي جهاز آخر. لا تقم بتصويرها.",
+          "2": "امتنع <0>نهائيًا</0> عن مشاركة كلماتك الـ 24 مع أي شخص.",
+          "3": "قم بحفظها <0>دائمًا</0> في مكان آمن بعيدًا عن الأنظار.",
+          "4": "لن يطلب ليدجر أبدًا عبارة الاسترداد الخاصة بك.",
+          "5": "إذا طلب منك أي شخص أو تطبيق تقديمها، فعليك أن تفترض أنها عملية احتيال!"
         }
       }
     },
     "alerts": {
       "beCareful": {
-        "title": "Please be careful",
+        "title": "يرجى توخي الحذر",
         "descr": "تأكد من اتباع التعليمات على هذا التطبيق في كل خطوة من العملية.",
         "gotIt": "فهمت ذلك"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
+        "title": "نوصي باستخدام عبارات استرداد ليدجر فقط",
         "descr": "لا يضمن ليدجر أمان عبارات الاسترداد الخارجية. نحن نوصي بإعداد جهاز نانو (Nano) الخاص بك كجهاز جديد إذا لم يتم إنشاء عبارة الاسترداد الخاصة بك بواسطة ليدجر.",
         "gotIt": "فهمت ذلك"
       }
     },
     "screens": {
       "welcome": {
-        "title": "Welcome to Ledger",
-        "description": "Safely manage your crypto from your computer.",
+        "title": "مرحبا بكم في Ledger",
+        "description": "تمتع بإدارة أصولك المشفرة بأمان من جهاز الكمبيوتر الخاص بك.",
         "cta": "لنبدأ",
         "noDevice": "ليس لديك جهاز؟ <0>شراء جهاز ليدجر نانو إكس (Nano X)</0>",
         "languageWarning": {
