@@ -877,11 +877,11 @@
     },
     "stakeAlgorand": {
       "title": "用 ALGORAND 进行权益质押",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "description": "用您的 ALGO 多赚点。只需往您的账户中添加资金，当天即可赚取权益质押奖励。"
     },
     "swap": {
       "title": "Swap 加密货币",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行交易。"
     },
     "lending": {
       "title": "借出加密货币",
