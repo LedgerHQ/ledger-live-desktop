@@ -2075,7 +2075,7 @@
       },
       "steps": {
         "info": {
-          "title": "Info"
+          "title": "معلومات"
         },
         "connectDevice": {
           "title": "الجهاز"
@@ -2412,8 +2412,8 @@
     "tabs": {
       "announcements": "أخبار",
       "announcementsUnseen": "أخبار ({{unseenCount}})",
-      "serviceStatus": "Status",
-      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+      "serviceStatus": "الحالة",
+      "serviceStatusIncidentsOngoing": "الحالة ({{incidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
