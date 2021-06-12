@@ -1683,7 +1683,7 @@
           "claimRewards": {
             "title": "المكافآت",
             "compound": "مُجمع",
-            "claim": "Cash in",
+            "claim": "تحصيل",
             "compoundOrClaim": "مجمع أم تحصيل",
             "compoundDescription": "سيتم إضافة المكافآت إلى المبلغ المفوض",
             "claimDescription": "سيتم إضافة المكافآت إلى الرصيد المتاح",
@@ -1705,7 +1705,7 @@
               "cta": "عرض التفاصيل"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "يتم بث المعاملة..."
             },
             "broadcastError": "يحتمل أن تكون معاملتك قد فشلت. يُرجى الانتظار لحظة ثم تحقق من سجل المعاملات قبل المحاولة مرة أخرى."
           }
@@ -1718,7 +1718,7 @@
         "steps": {
           "starter": {
             "title": "إعادة التفويض",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
+            "description": "استخدم إعادة التفويض لسهولة التغيير من مدقق إلى مدقق آخر. ولكن إذا قمت بتغير رأيك مرة أخرى، فسيكون عليك الانتظار لأن إعادة التفويض تؤدي إلى تفعيل فترة حظر زمني لمدة 21 يومًا.",
             "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
             "howDelegationWorks": "كيف يعمل التفويض؟"
           },
@@ -1745,8 +1745,8 @@
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
+      "header": "إلغاء التفويض (إالغاء التفويضات)",
+      "headerTooltip": "متاحة بعد انتهاء فترة الحظر الزمني الممتد لفترة 21 يومًا",
       "inactiveTooltip": "المبالغ غير المفوضة لا تولد مكافآت.",
       "flow": {
         "title": "إلغاء تفويض الأصول",
@@ -1754,7 +1754,7 @@
           "amount": {
             "title": "المبلغ",
             "subtitle": "تستغرق عملية إلغاء التفويض مدة <0>21 يومًا</0> حتى إتمامها.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "warning": "سيتم تحصيل المكافآت فورًا. وستتم إعادة المبلغ غير المفوّض إلى الرصيد المتاح بعد انقضاء فترة <0>الحظر الزمني-21يوم</0>.",
             "fields": {
               "validator": "المدقق",
               "amount": "المبلغ المراد إلغاء تفويضه"
@@ -1766,7 +1766,7 @@
           "confirmation": {
             "title": "تأكيد",
             "success": {
-              "title": "You have successfully undelegated your assets.",
+              "title": "لقد قمت بإلغاء تفويض أصولك بنجاح.",
               "description": "<0>{{amount}}</0> تم إلغاء تفويضها من <0>{{validator}}</0>",
               "cta": "عرض التفاصيل"
             },
@@ -1786,9 +1786,9 @@
         "steps": {
           "assets": {
             "title": "ASA (أصل)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
+            "info": "إضافة أحد الأصول يتطلب إرسال معاملة بحد أدنى للرسوم. وستظهر هذه العملية في سجل المعاملات لديك",
             "selectLabel": "اختر ASA (أصل)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "disabledTooltip": "لديك هذا الـ ASA (الأصل) بالفعل في حسابك الAlgorand"
           },
           "connectDevice": {
             "title": "الجهاز"
