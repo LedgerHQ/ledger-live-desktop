@@ -425,7 +425,7 @@
             },
             "invalid-chain": {
               "header": "عنوان سلسلة غير صحيح",
-              "description": "invalid-chain description for tooltip"
+              "description": "وصف سلسلة غير صحيح لتلميح الأدوات"
             },
             "initializing": {
               "header": "جاري التحميل",
@@ -877,7 +877,7 @@
     },
     "stakeAlgorand": {
       "title": "الرهن مع ALGORAND",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "description": "حقق أقصى استفادة من حساب ALGO الخاص بك. ما عليك سوى إضافة أموال إلى حساباتك وكسب الرهن الإسناد اليوم."
     },
     "swap": {
       "title": "مبادلة العملات المشفرة",
@@ -885,7 +885,7 @@
     },
     "lending": {
       "title": "إقراض العملات المشفرة",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "description": "قم بإرسال العملات المستقرة إلى بروتوكول Compound واكسب فوائد اليوم"
     },
     "blackfriday": {
       "title": "الجمعة السوداء ",
@@ -1655,7 +1655,7 @@
               "ستكون الأصول متاحة بعد 21 يوما من إلغاء التفويض"
             ],
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "كن حريصًا في اختيار المدقق الذي تعتمد عليه؛ فقد يتم فقدان جزء من أصولك المفوضة بشكل لا رجعة فيه إذا لم يتصرف المدقق بشكل مناسب."
             }
           },
           "validator": {
@@ -1719,7 +1719,7 @@
           "starter": {
             "title": "إعادة التفويض",
             "description": "استخدم إعادة التفويض لسهولة التغيير من مدقق إلى مدقق آخر. ولكن إذا قمت بتغير رأيك مرة أخرى، فسيكون عليك الانتظار لأن إعادة التفويض تؤدي إلى تفعيل فترة حظر زمني لمدة 21 يومًا.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
+            "warning": "كن حريصًا في اختيار المدقق الذي تعتمد عليه؛ فقد يتم فقدان جزء من أصولك المفوضة بشكل لا رجعة فيه إذا لم يتصرف المدقق بشكل مناسب. يمكن أن يكون لديك <0>7 عمليات معلقة لإعادة التفويض</0> بحد أقصى.",
             "howDelegationWorks": "كيف يعمل التفويض؟"
           },
           "validators": {
@@ -1828,7 +1828,7 @@
           "info": {
             "title": "المكافآت",
             "description": "تهانينا! لقد كسبت {{amount}}. انقر على متابعة للمطالبة بمكافآتك",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "info": "سيتم حثك على إنشاء معاملة فارغة إلى حسابك. سيؤدي هذا إلى إضافة المكافآت الحالية إلى رصيدك بأدنى تكلفة لرسوم المعاملة."
           },
           "connectDevice": {
             "title": "الجهاز"
@@ -1969,7 +1969,7 @@
             "ستكون الأصول متاحة مرة أخرى بعد 28 يومًا من إلغاء التقيد"
           ],
           "help": "كيف تعمل الترشيحات",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "warning": "كن حريصًا في اختيار المدقق الذي تعتمد عليه؛ فقد يتم فقدان جزء من أصولك المقيدة بشكل لا رجعة فيه إذا لم يتصرف المدقق بشكل مناسب."
         },
         "amount": {
           "title": "المبلغ",
