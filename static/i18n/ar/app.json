@@ -1875,7 +1875,7 @@
       "notValidatorTooltip": "لم يعد هذا العنوان مدققًا",
       "elected": "منتخب",
       "nominatorsCount": "{{nominatorsCount}} مرشحين",
-      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
+      "nominatorsTooltip": "هذا المدقق تم ترشيحه حالياً من قبل {{count}} مرشحين.",
       "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
       "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
       "hasPendingBondOperation": "A bond operation is still pending confirmation",
