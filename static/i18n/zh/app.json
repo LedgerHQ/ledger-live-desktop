@@ -2258,21 +2258,21 @@
       "reportErrors": "漏洞报告",
       "reportErrorsDesc": "自动发送报告来帮助 Ledger 改进其产品。",
       "launchOnboarding": "设备设置",
-      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
+      "launchOnboardingDesc": "设置新设备或还原现有设备。保留账户和设置信息。"
     },
     "help": {
       "version": "版本",
       "releaseNotesBtn": "详情",
       "termsBtn": "阅读",
       "faq": "Ledger 客服",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
+      "faqDesc": "如果遇到问题，使用硬件钱包通过 Ledger Live 获取帮助。",
       "terms": "使用条款",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
+      "termsDesc": "使用 Ledger Live 即表示您已接受我们的使用条款。",
       "privacy": "隐私政策",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
+      "privacyDesc": "请参阅我们的隐私政策来了解我们收集哪些个人数据、收集原因以及使用方式。"
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。"
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
@@ -2280,11 +2280,11 @@
     },
     "softResetModal": {
       "title": "清除缓存",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "清除缓存会强制网络重新同步。您的设置和账户信息会被保留。用于访问您加密资产的密钥仍安全存储在您的 Ledger 设备和恢复短语列表上。"
     },
     "resetFallbackModal": {
       "title": "需要用户操作",
-      "part1": "Could not delete cache folder. Please delete the folder manually:",
+      "part1": "无法删除缓存文件夹。请手动删除文件夹：",
       "part2": "点击 Open（打开）文件夹按钮，",
       "part3": "应用程序将关闭",
       "part4": "，并手动删除 \"sqlite\" 文件夹。",
@@ -2292,16 +2292,16 @@
     },
     "removeAccountModal": {
       "title": "移除账号",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
+      "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。"
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",
-      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
+      "desc": "查看电脑上存储的用户数据，包括您的账户信息、缓存数据和设置参数。",
       "btn": "查看"
     },
     "repairDevice": {
       "title": "修复您的 Ledger 设备",
-      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
+      "descSettings": "如果 Ledger 设备在固件更新时发生卡顿，可用此来还原您的设备。",
       "desc": "对于 Ledger Nano S 用户来说，请选择设备上显示的状态。对于 Nano X 和 Blue 用户来说，请前往帮助中心寻求帮助。",
       "button": "修复"
     },
