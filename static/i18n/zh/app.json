@@ -2217,7 +2217,7 @@
         "title": "扫描以导出至移动设备",
         "listTitle": "在 Ledger Live 手机应用上：",
         "step1": "点击 <3><0>账户</0></3> 中的 <1><0>+</0></1> 按钮",
-        "step2": "点击 <1><0>Import desktop accounts</0></1>",
+        "step2": "点击 <1><0>Import desktop accounts</0></1>（导入桌面程序账户）",
         "step3": "扫描 <1><0>LiveQR code</0></1> 二维码，等待加载至 100%"
       }
     },
