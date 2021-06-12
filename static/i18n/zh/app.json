@@ -2307,17 +2307,17 @@
     },
     "exportLogs": {
       "title": "保存日志",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "desc": "出于排除故障目的所需，可能需要保存 Ledger Live 日志。",
       "btn": "保存"
     },
     "accounts": {
       "hideEmptyTokens": {
         "title": "隐藏空的代币帐户",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "desc": "在账户页面，隐藏代币账户并将余额显示为零。"
       },
       "tokenBlacklist": {
         "title": "隐藏代币列表",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
+        "desc": "您可以通过前往主账户，以右键点击相关代币并选择“隐藏代币”的方式来隐藏代币。",
         "count": "{{count}} 枚代币",
         "count_plural": "{{count}} 枚代币"
       },
