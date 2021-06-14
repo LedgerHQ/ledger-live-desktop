@@ -11,6 +11,7 @@ import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
+import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
 import { ManagerNotEnoughSpaceError } from "@ledgerhq/errors";
 import {
@@ -108,6 +109,7 @@ const DeviceAction = <R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
+    signMessageRequested,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -231,6 +233,17 @@ const DeviceAction = <R, H, P>({
         />
       );
     }
+  }
+
+  if (request && signMessageRequested) {
+    const { account } = request;
+    return (
+      <SignMessageConfirm
+        device={device}
+        account={account}
+        signMessageRequested={signMessageRequested}
+      />
+    );
   }
 
   if (typeof deviceStreamingProgress === "number") {
