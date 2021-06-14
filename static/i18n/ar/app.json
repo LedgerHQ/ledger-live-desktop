@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "ليدجر لايف (Ledger Live) في وضع التشغيل",
+        "title": "Ledger Live is up and running",
         "description": "هل تواجه مشاكل؟ انتقل إلى <0>صفحة المساعدة</0>"
       },
       "statusNotOk": {
-        "title": "ليدجر لايف (Ledger Live) يواجه مشاكل",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "معرفة المزيد"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "لا توجد أخبار حاليًا",
-        "desc": "ستجد هنا جميع الأخبار المتعلقة بنظام ليدجر (Ledger) وليدجر لايف (Ledger Live)"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
