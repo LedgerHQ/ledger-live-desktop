@@ -93,7 +93,7 @@ const StepFinished = ({
   }, [setLocked]);
 
   const openProviderSupport = useCallback(() => {
-    openURL(urls.swap.providers[provider]?.tos);
+    openURL(urls.swap.providers[provider]?.support);
   }, [provider]);
 
   const SwapPill = ({ swapId }: { swapId: string }) => (
