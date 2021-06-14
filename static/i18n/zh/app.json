@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "已经是位高手！",
-            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "下一步",
               "prev": "上一步",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "距成为高手仅一步之遥……",
-            "paragraph": "别担心，Ledger 会为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。只剩下最后一小步！",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "下一步",
               "prev": "上一步"
@@ -2697,8 +2697,8 @@
               "descr": "取出一张空白的恢复表，该表和 Nano 装在一起。如果您拿到的恢复表已经被填写过，请联系 Ledger 客服。"
             },
             "writeDownWords": {
-              "title": "写下所有的恢复词",
-              "descr": "在恢复表的位置 1 写下 Nano 上显示的 Word #1 第一个词。然后在您的 Nano 设备上按右键显示 Word #2 第二个词，并将其写在位置 2。重复该操作，确保按正确的顺序和拼写将所有的助记词写下来。按 Nano 上的左键，核对以防出错。"
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "下一步",
@@ -2786,23 +2786,6 @@
               "next": "检验我的 Nano",
               "prev": "上一步",
               "help": "需要帮助"
-            }
-          },
-          "quizzSuccess": {
-            "title": "已经是位高手！",
-            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
-            "buttons": {
-              "next": "下一步",
-              "prev": "上一步"
-            }
-          },
-          "quizzFail": {
-            "title": "距成为高手仅一步之遥……",
-            "paragraph1": "别担心，Ledger 会全程为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。",
-            "paragraph2": "只剩下最后一小步！",
-            "buttons": {
-              "next": "下一步",
-              "prev": "上一步"
             }
           }
         }
