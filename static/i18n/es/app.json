@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live está activo y funcionando normalmente",
+        "title": "Ledger Live is up and running",
         "description": "¿Tienes problemas? Ingresa a nuestra <0>página de ayuda</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live presenta inconvenientes",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "Conoce más"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "No hay noticias por el momento",
-        "desc": "Aquí encontrarás las noticias relacionadas con Ledger o Ledger Live"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
