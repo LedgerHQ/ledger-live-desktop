@@ -892,6 +892,40 @@
       "description": "Disfruta un descuento del 40% en billeteras de hardware Ledger con el código de promoción BLACKFRIDAY20"
     }
   },
+  "signmessage": {
+    "title": "Sign message",
+    "steps": {
+      "summary": {
+        "title": "Summary"
+      },
+      "sign": {
+        "title": "Device"
+      }
+    }
+  },
+  "walletconnect": {
+    "titleAccount": "Wallet Connect",
+    "disconnect": "Disconnect",
+    "disconnected": "Disconnected",
+    "connected": "Connected",
+    "connecting": "Connecting...",
+    "steps": {
+      "paste": {
+        "title": "Paste link",
+        "label": "Wallet Connect address",
+        "placeholder": "Paste Wallet Connect Link"
+      },
+      "confirm": {
+        "title": "Connect",
+        "details": "Wants to connect to the following Ethereum account through your wallet :"
+      }
+    },
+    "connectedscreen": {
+      "info": "You can now access the dApp on your desktop.",
+      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
+      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+    }
+  },
   "dashboard": {
     "title": "Cartera",
     "emptyAccountTile": {
@@ -2866,6 +2900,12 @@
   },
   "connectTroubleshooting": {
     "desc": "¿Tienes dificultades para conectar tu dispositivo?"
+  },
+  "SignMessageConfirm": {
+    "stringHash": "Message Hash",
+    "domainHash": "Domain Hash",
+    "messageHash": "Message Hash",
+    "message": "Message"
   },
   "TransactionConfirm": {
     "title": "Confirma la operación en tu dispositivo para finalizarla",
