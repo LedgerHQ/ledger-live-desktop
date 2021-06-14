@@ -11,9 +11,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import ExchangeCoinify from "~/renderer/screens/exchange/Coinify";
 import ExchangeDapp from "~/renderer/screens/exchange/Dapp";
-import Swap from "~/renderer/screens/exchange/swap";
-import SwapFormOrHistory from "~/renderer/screens/exchange/swap/FormOrHistory";
-import SwapDapp from "~/renderer/screens/exchange/swap/Dapp";
+import Swap from "~/renderer/screens/exchange/swap/FormOrHistory";
 import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
@@ -133,15 +131,6 @@ export default function Default() {
                           render={(props: any) => <Asset {...props} />}
                         />
                         <Route path="/swap" render={props => <Swap {...props} />} exact />
-                        <Route
-                          path="/swap/integrated"
-                          render={props => <SwapFormOrHistory {...props} />}
-                          exact
-                        />
-                        <Route
-                          path="/swap/dapp/:platform"
-                          render={(props: any) => <SwapDapp {...props} />}
-                        />
                       </Switch>
                     </Page>
                     <Drawer />
