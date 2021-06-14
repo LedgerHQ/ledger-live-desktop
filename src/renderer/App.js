@@ -18,6 +18,7 @@ import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
+import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
 import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
@@ -66,7 +67,9 @@ const App = ({ store, initialCountervalues }: Props) => {
                     <AnnouncementProviderWrapper>
                       <Router>
                         <WalletConnectProvider>
-                          <Default />
+                          <DrawerProvider>
+                            <Default />
+                          </DrawerProvider>
                         </WalletConnectProvider>
                       </Router>
                     </AnnouncementProviderWrapper>

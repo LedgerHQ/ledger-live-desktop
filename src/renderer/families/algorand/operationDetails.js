@@ -13,8 +13,8 @@ import type { TFunction } from "react-i18next";
 import {
   OpDetailsTitle,
   OpDetailsData,
-  B,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+  OpDetailsSection,
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
 import { localeSelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -68,51 +68,46 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
   return (
     <>
       {extra.rewards && extra.rewards.gt(0) && (
-        <>
-          <B />
+        <OpDetailsSection>
+          <OpDetailsTitle>
+            <Trans i18nKey={"operationDetails.extra.rewards"} />
+          </OpDetailsTitle>
           <OpDetailsData>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.rewards"} />
-            </OpDetailsTitle>
-            <FormattedVal unit={unit} showCode val={extra.rewards} color="palette.text.shade80" />
-            <Box horizontal>
-              <CounterValue
-                color="palette.text.shade60"
-                fontSize={3}
-                currency={currency}
-                value={extra.rewards}
-                subMagnitude={1}
-                prefix={
-                  <Box mr={1} color="palette.text.shade60" style={{ lineHeight: 1.2 }}>
-                    {"≈"}
-                  </Box>
-                }
-              />
+            <Box alignItems="flex-end">
+              <FormattedVal unit={unit} showCode val={extra.rewards} color="palette.text.shade80" />
+              <Box horizontal justifyContent="flex-end">
+                <CounterValue
+                  color="palette.text.shade60"
+                  fontSize={3}
+                  currency={currency}
+                  value={extra.rewards}
+                  subMagnitude={1}
+                  prefix={
+                    <Box mr={1} color="palette.text.shade60" style={{ width: "auto" }}>
+                      {"≈"}
+                    </Box>
+                  }
+                />
+              </Box>
             </Box>
           </OpDetailsData>
-        </>
+        </OpDetailsSection>
       )}
       {extra.assetId && (
-        <>
-          <B />
-          <OpDetailsData>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.assetId"} />
-            </OpDetailsTitle>
-            {extra.assetId}
-          </OpDetailsData>
-        </>
+        <OpDetailsSection>
+          <OpDetailsTitle>
+            <Trans i18nKey={"operationDetails.extra.assetId"} />
+          </OpDetailsTitle>
+          <OpDetailsData>{extra.assetId}</OpDetailsData>
+        </OpDetailsSection>
       )}
       {extra.memo && (
-        <>
-          <B />
-          <OpDetailsData>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.memo"} />
-            </OpDetailsTitle>
-            {extra.memo}
-          </OpDetailsData>
-        </>
+        <OpDetailsSection>
+          <OpDetailsTitle>
+            <Trans i18nKey={"operationDetails.extra.memo"} />
+          </OpDetailsTitle>
+          <OpDetailsData>{extra.memo}</OpDetailsData>
+        </OpDetailsSection>
       )}
     </>
   );

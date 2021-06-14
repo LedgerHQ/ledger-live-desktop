@@ -59,17 +59,19 @@ const ProgressHolder = styled.div`
 type Props = {
   update: App[],
   state: State,
+  optimisticState: State,
   dispatch: Action => void,
   isIncomplete: boolean,
 };
 
-const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
+const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete }: Props) => {
   const [open, setIsOpen] = useState();
   const { updateAllQueue } = state;
 
   const outOfMemory = useMemo(
-    () => isOutOfMemoryState(predictOptimisticState(reducer(state, { type: "updateAll" }))),
-    [state],
+    () =>
+      isOutOfMemoryState(predictOptimisticState(reducer(optimisticState, { type: "updateAll" }))),
+    [optimisticState],
   );
 
   const visible = update.length > 0;
@@ -153,6 +155,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
   const mapApp = useCallback(
     (app, i) => (
       <Item
+        optimisticState={optimisticState}
         state={state}
         installed={state.installed.find(({ name }) => name === app.name)}
         key={`UPDATE_${app.name}_${i}`}
@@ -164,7 +167,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
         showActions={false}
       />
     ),
-    [state, dispatch, isIncomplete],
+    [optimisticState, state, dispatch, isIncomplete],
   );
 
   return (
