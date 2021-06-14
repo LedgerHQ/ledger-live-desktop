@@ -35,13 +35,17 @@ type Props = {
 };
 
 const FeesWrapper = styled(Box)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
   border: ${p =>
     `1px solid ${
       p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider
     }`};
   padding: 12px;
+  width: 100%;
   font-family: "Inter";
-  width: 140px;
   border-radius: 4px;
 
   &:hover {
@@ -52,8 +56,12 @@ const FeesWrapper = styled(Box)`
 const FeesHeader = styled(Box)`
   color: ${p =>
     p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade30};
+`;
 
-  margin-bottom: 25px;
+const FeesValue = styled(Box)`
+  text-align: right;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 const SelectFeeStrategy = ({
@@ -70,7 +78,7 @@ const SelectFeeStrategy = ({
   const { t } = useTranslation();
 
   return (
-    <Box horizontal alignItems="center" flow={3}>
+    <Box alignItems="center" flow={2}>
       {strategies.map(s => {
         const selected = transaction.feesStrategy === s.label;
         const amount = s.displayedAmount || s.amount;
@@ -93,13 +101,13 @@ const SelectFeeStrategy = ({
               )}
               <Text
                 style={{ marginLeft: "5px", textTransform: "uppercase" }}
-                fontSize={3}
-                fontWeight="800"
+                fontSize={2}
+                fontWeight="600"
               >
                 <Trans i18nKey={`fees.${label}`} />
               </Text>
             </FeesHeader>
-            <Box>
+            <FeesValue>
               <FormattedVal
                 color="palette.text.shade100"
                 fontSize={3}
@@ -114,9 +122,8 @@ const SelectFeeStrategy = ({
                       })}`
                     : ""
                 }
+                alwaysShowValue
               />
-            </Box>
-            <Box>
               {s.displayedAmount ? (
                 <CounterValue
                   currency={feesCurrency}
@@ -125,9 +132,10 @@ const SelectFeeStrategy = ({
                   fontWeight="500"
                   fontSize={3}
                   showCode
+                  alwaysShowValue
                 />
               ) : null}
-            </Box>
+            </FeesValue>
           </FeesWrapper>
         );
       })}

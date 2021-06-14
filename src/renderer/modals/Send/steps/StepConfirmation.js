@@ -3,7 +3,6 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -14,6 +13,8 @@ import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { StepProps } from "../types";
 
@@ -34,11 +35,12 @@ function StepConfirmation({
   theme,
   device,
   signed,
+  currencyName,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Send Flow" name="Step Confirmed" />
+        <TrackPage category="Send Flow" name="Step Confirmed" currencyName={currencyName} />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="send.steps.confirmation.success.title" />}
@@ -51,7 +53,11 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Send Flow" name="Step Confirmation Error" />
+        <TrackPage
+          category="Send Flow"
+          name="Step Confirmation Error"
+          currencyName={currencyName}
+        />
         {signed ? (
           <BroadcastErrorDisclaimer
             title={<Trans i18nKey="send.steps.confirmation.broadcastError" />}
@@ -92,7 +98,7 @@ export function StepConfirmationFooter({
           onClick={() => {
             closeModal();
             if (account && concernedOperation) {
-              openModal("MODAL_OPERATION_DETAILS", {
+              setDrawer(OperationDetails, {
                 operationId: concernedOperation.id,
                 accountId: account.id,
                 parentId: parentAccount && parentAccount.id,
