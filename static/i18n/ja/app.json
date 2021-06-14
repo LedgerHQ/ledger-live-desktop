@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step"
@@ -2697,8 +2697,8 @@
               "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
             },
             "writeDownWords": {
-              "title": "Write down all words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Next step",
@@ -2786,23 +2786,6 @@
               "next": "Check my Nano",
               "prev": "Previous step",
               "help": "Need help"
-            }
-          },
-          "quizzSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
-            "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
-            }
-          },
-          "quizzFail": {
-            "title": "You will soon become a pro...",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
-            "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
             }
           }
         }
