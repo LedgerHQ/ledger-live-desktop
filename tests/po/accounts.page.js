@@ -74,6 +74,11 @@ export default class AccountsPage extends Page {
     return accounts[0];
   }
 
+  async getNthAccountRow(n) {
+    const accounts = await this.getAccountsRows();
+    return accounts[n];
+  }
+
   async getAccountsWithToken() {
     const list = await this.accountsList();
     return list.$$(".accounts-account-row-item.has-tokens");

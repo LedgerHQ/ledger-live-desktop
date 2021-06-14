@@ -28,15 +28,17 @@ type Props = {
   label?: React$Node,
   children?: React$Node,
   iconSize?: number,
+  Icon?: React$ComponentType<*>,
   style?: *,
 };
 
 // can add more dynamic options if needed
-export function LinkHelp({ onClick, label, children, iconSize = 12, style }: Props) {
+export function LinkHelp({ onClick, label, children, iconSize = 12, Icon, style }: Props) {
+  const I = Icon || IconHelp;
   return (
     <Wrapper onClick={onClick} style={style}>
       <Box mr={1}>
-        <IconHelp size={iconSize} />
+        <I size={iconSize} />
       </Box>
       <span>{label || children}</span>
     </Wrapper>

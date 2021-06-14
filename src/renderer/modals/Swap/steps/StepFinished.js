@@ -11,11 +11,10 @@ import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
 import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";
-import { openModal } from "~/renderer/actions/modals";
-
-import { useDispatch } from "react-redux";
-import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
+import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
 
 const IconWrapper = styled(Box)`
   background: ${colors.pillActiveBackground};
@@ -119,7 +118,6 @@ export const StepFinishedFooter = ({
 }) => {
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
-  const dispatch = useDispatch();
 
   const onViewOperationDetails = useCallback(() => {
     const concernedOperation = operation
@@ -130,15 +128,13 @@ export const StepFinishedFooter = ({
 
     onClose();
     if (fromAccount && concernedOperation) {
-      dispatch(
-        openModal("MODAL_OPERATION_DETAILS", {
-          operationId: concernedOperation.id,
-          accountId: fromAccount.id,
-          parentId: fromParentAccount && fromParentAccount.id,
-        }),
-      );
+      setDrawer(OperationDetails, {
+        operationId: concernedOperation.id,
+        accountId: fromAccount.id,
+        parentId: fromParentAccount && fromParentAccount.id,
+      });
     }
-  }, [dispatch, fromAccount, fromParentAccount, onClose, operation]);
+  }, [fromAccount, fromParentAccount, onClose, operation]);
 
   return (
     <Box horizontal>
