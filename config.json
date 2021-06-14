@@ -1,4 +1,9 @@
 {
   "progressive-update": {
+    "2.29.0": {
+      "darwin": 1,
+      "linux": 1,
+      "win32": 0
+    }
   }
 }
