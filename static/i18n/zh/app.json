@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live 已启动并正在运行",
+        "title": "Ledger Live is up and running",
         "description": "遇到问题？请前往我们的 <0>帮助页面</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live 正遇到问题",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "了解更多"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "目前没有新闻",
-        "desc": "您将在这里找到与 Ledger 和 Ledger Live 相关的所有新闻"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
