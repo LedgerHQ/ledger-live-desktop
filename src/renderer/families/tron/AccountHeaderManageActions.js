@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback } from "react";
-import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -21,7 +20,7 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
   const minAmount = 10 ** unit.magnitude;
 
   const { tronResources, spendableBalance } = mainAccount;
-  const tronPower = tronResources.tronPower;
+  const tronPower = tronResources?.tronPower ?? 0;
   const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
 
   const onClick = useCallback(() => {
@@ -60,7 +59,7 @@ const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
 
   if (!tronResources) return null;
 
-  return <AccountHeaderManageActionsComponent account={account} parentAccount={parentAccount} />;
+  return AccountHeaderManageActionsComponent({ account, parentAccount });
 };
 
 export default AccountHeaderManageActions;
