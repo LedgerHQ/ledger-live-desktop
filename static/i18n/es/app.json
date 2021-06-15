@@ -762,7 +762,7 @@
       "cta": "Agregar cuenta"
     },
     "emptyAccountDeposit": {
-      "title": "No tienes ninguna cuenta de {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "Para depositar fondos y prestar cripto debes contar con una cuenta {{ asset }}. Recibe fondos en tu dirección Ethereum.",
       "ctaBuy": "Comprar {{ asset }}",
       "ctaReceive": "Recibir {{ asset }}"
