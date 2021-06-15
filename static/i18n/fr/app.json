@@ -762,7 +762,7 @@
       "cta": "Ajouter un compte"
     },
     "emptyAccountDeposit": {
-      "title": "Vous n'avez pas de compte {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "Pour déposer des fonds et prêter des cryptos, vous avez besoin d'un compte {{ asset }}. Recevez des fonds sur votre adresse Ethereum.",
       "ctaBuy": "Acheter {{ asset }}",
       "ctaReceive": "Recevoir {{ asset }}"
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "Vous êtes déjà pro.",
-            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité. Il ne vous reste qu'à connecter votre appareil.",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "Vous êtes sur le point de passer pro...",
-            "paragraph": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos. Il ne vous reste qu'à connecter votre appareil.",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente"
@@ -2697,8 +2697,8 @@
               "descr": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez l'Assistance Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
-              "title": "Noter tous les mots en gras",
-              "descr": "Écrivez en position 1 sur la feuille de récupération le mot n°1 (\"Word #1\") affiché en gras sur votre Nano. Puis appuyez sur le bouton droit de votre Nano pour voir le mot n°2 (\"Word #2\" en gras) et écrivez-le en position 2. Faites cela pour tous les mots affichés en gras en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Étape suivante",
@@ -2786,23 +2786,6 @@
               "next": "Vérifier mon Nano",
               "prev": "Étape précédente",
               "help": "Besoin d'aide"
-            }
-          },
-          "quizzSuccess": {
-            "title": "Vous êtes déjà pro.",
-            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité. Il ne vous reste qu'à connecter votre appareil.",
-            "buttons": {
-              "next": "Étape suivante",
-              "prev": "Étape précédente"
-            }
-          },
-          "quizzFail": {
-            "title": "Vous êtes sur le point de passer pro...",
-            "paragraph1": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos.",
-            "paragraph2": "Il ne vous reste qu'à connecter votre appareil.",
-            "buttons": {
-              "next": "Étape suivante",
-              "prev": "Étape précédente"
             }
           }
         }
