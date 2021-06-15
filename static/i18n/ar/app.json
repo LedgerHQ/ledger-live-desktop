@@ -762,7 +762,7 @@
       "cta": "إضافة حساب"
     },
     "emptyAccountDeposit": {
-      "title": "ليس لديك أي حساب {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "من أجل إيداع الأموال وإقراض العملات المشفرة تحتاج إلى حساب {{ asset }} . يُرجى تلقي الأموال على عنوان إيثيريوم الخاص بك.",
       "ctaBuy": "شراء {{ asset }}",
       "ctaReceive": "تلقي {{ asset }}"
