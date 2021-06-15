@@ -906,18 +906,18 @@
   "walletconnect": {
     "titleAccount": "Wallet Connect",
     "disconnect": "Desconectar",
-    "disconnected": "Disconnected",
+    "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "label": "Dirección de Wallet Connect",
+        "placeholder": "Pegar enlace de Wallet Connect"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "Conectar",
+        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:"
       }
     },
     "connectedscreen": {
