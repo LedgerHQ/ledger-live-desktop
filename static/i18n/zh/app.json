@@ -904,7 +904,7 @@
     }
   },
   "walletconnect": {
-    "titleAccount": "Wallet Connect",
+    "titleAccount": "Wallet Connect（钱包连接）",
     "disconnect": "断开连接",
     "disconnected": "已断开连接",
     "connected": "已连接",
@@ -912,16 +912,16 @@
     "steps": {
       "paste": {
         "title": "粘贴链接",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "label": "Wallet Connect（钱包连接）地址",
+        "placeholder": "粘贴 Wallet Connect（钱包连接）链接"
       },
       "confirm": {
         "title": "连接",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "details": "想要通过您的钱包连接到以下以太坊账户："
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
+      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
       "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
