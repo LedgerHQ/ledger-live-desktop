@@ -762,7 +762,7 @@
       "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
-      "title": "У вас нет счёта {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ asset }}. Получите средства на свой Ethereum-адрес.",
       "ctaBuy": "Купить {{ asset }}",
       "ctaReceive": "Получить {{ asset }}"
