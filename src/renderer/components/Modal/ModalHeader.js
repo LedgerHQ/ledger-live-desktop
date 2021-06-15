@@ -101,7 +101,7 @@ const ModalHeader = ({
   onClose,
   style = {},
 }: {
-  children: any,
+  children?: any,
   subTitle?: React$Node,
   onBack?: void => void,
   onClose?: void => void,

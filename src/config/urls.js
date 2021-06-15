@@ -153,6 +153,10 @@ export const urls = {
       },
     },
   },
+  exchange: {
+    learnMore:
+      "https://www.ledger.com/academy/benefits-of-buying-crypto-through-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=exchange",
+  },
   // Errors
   errors: {
     CantOpenDevice:

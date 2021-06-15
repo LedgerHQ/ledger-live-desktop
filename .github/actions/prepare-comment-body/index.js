@@ -63,7 +63,7 @@ ${str}
 </details>
 `;
 
-  if (!lintFailed && !testsFailed && !imgDiffFailed && imgChanged.length) {
+  if (imgChanged.length) {
     imgChanged = imgChanged.map(
       img => `
 ${img}
