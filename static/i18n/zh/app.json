@@ -762,7 +762,7 @@
       "cta": "添加账户"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "您没有 {{ asset }} 账户。",
       "description": "为了存入资金和借出加密货币，您需要有一个 {{ asset }} 账户。请在您的以太坊地址上接收资金。",
       "ctaBuy": "买入 {{ asset }}",
       "ctaReceive": "接收 {{ asset }}"
@@ -893,30 +893,30 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "签署消息",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "概要"
       },
       "sign": {
-        "title": "Device"
+        "title": "设备"
       }
     }
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "disconnect": "断开连接",
+    "disconnected": "已断开连接",
+    "connected": "已连接",
+    "connecting": "正在连接...",
     "steps": {
       "paste": {
-        "title": "Paste link",
+        "title": "粘贴链接",
         "label": "Wallet Connect address",
         "placeholder": "Paste Wallet Connect Link"
       },
       "confirm": {
-        "title": "Connect",
+        "title": "连接",
         "details": "Wants to connect to the following Ethereum account through your wallet :"
       }
     },
@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
+        "title": "Ledger Live 已启动并正在运行",
         "description": "遇到问题？请前往我们的 <0>帮助页面</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
+        "title": "Ledger Live 正遇到问题",
         "learnMore": "了解更多"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "目前没有新闻",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "你将在这里找到所有与 Ledger 和 Ledger Live 有关的新闻"
       }
     }
   },
@@ -2697,7 +2697,7 @@
               "descr": "取出一张空白的恢复表，该表和 Nano 装在一起。如果您拿到的恢复表已经被填写过，请联系 Ledger 客服。"
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
+              "title": "写下 24 个助记词",
               "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
@@ -2885,10 +2885,10 @@
     "desc": "无法连接您的设备？"
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "Message Hash 消息哈希字符串",
+    "domainHash": "Domain Hash 域名哈希字符串",
+    "messageHash": "Message Hash 消息哈希字符串",
+    "message": "消息"
   },
   "TransactionConfirm": {
     "title": "请在您的设备上确认操作从而完成交易",
