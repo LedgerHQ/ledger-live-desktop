@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Currency, CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -15,7 +15,7 @@ import { currencySettingsDefaults } from "~/renderer/reducers/settings";
 export default function Currencies() {
   const { t } = useTranslation();
   const currencies = useSelector(cryptoCurrenciesSelector);
-  const [currency, setCurrency] = useState<CryptoCurrency | TokenCurrenyc | undefined>();
+  const [currency, setCurrency] = useState<CryptoCurrency | TokenCurrency | typeof undefined>();
 
   const handleChangeCurrency = useCallback(
     (currency?: CryptoCurrency | TokenCurrency) => {
@@ -28,7 +28,7 @@ export default function Currencies() {
   const currencyName = currency?.name ?? "placeholder";
 
   const isCurrencyDisabled = useCallback(
-    (currency: Currency | TokenCurrency) => !currencySettingsDefaults(currency).confirmationsNb,
+    (currency: Currency) => !currencySettingsDefaults(currency).confirmationsNb,
     [],
   );
 
