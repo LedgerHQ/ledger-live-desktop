@@ -762,7 +762,7 @@
       "cta": "Agregar cuenta"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "No tienes ninguna cuenta de {{ asset }}.",
       "description": "Para depositar fondos y prestar cripto debes contar con una cuenta {{ asset }}. Recibe fondos en tu dirección Ethereum.",
       "ctaBuy": "Comprar {{ asset }}",
       "ctaReceive": "Recibir {{ asset }}"
@@ -893,19 +893,19 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "Firmar mensaje",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "Resumen"
       },
       "sign": {
-        "title": "Device"
+        "title": "Dispositivo"
       }
     }
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
+    "disconnect": "Desconectar",
     "disconnected": "Disconnected",
     "connected": "Connected",
     "connecting": "Connecting...",
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "¡Ya tienes nivel de profesional!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "Ya puedes administrar de forma segura tus criptos. ¡Solo te queda un breve paso!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior",
