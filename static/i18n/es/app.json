@@ -907,11 +907,11 @@
     "titleAccount": "Wallet Connect",
     "disconnect": "Desconectar",
     "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "connected": "Conectado",
+    "connecting": "Conectando...",
     "steps": {
       "paste": {
-        "title": "Paste link",
+        "title": "Pegar enlace",
         "label": "Wallet Connect address",
         "placeholder": "Paste Wallet Connect Link"
       },
