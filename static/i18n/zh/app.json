@@ -762,7 +762,7 @@
       "cta": "添加账户"
     },
     "emptyAccountDeposit": {
-      "title": "您没有任何 {{ asset }} 帐户。",
+      "title": "You don't have a {{ asset }} account.",
       "description": "为了存入资金和借出加密货币，您需要有一个 {{ asset }} 账户。请在您的以太坊地址上接收资金。",
       "ctaBuy": "买入 {{ asset }}",
       "ctaReceive": "接收 {{ asset }}"
