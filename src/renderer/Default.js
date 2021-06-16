@@ -18,6 +18,8 @@ import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
+import PlatformCatalog from "~/renderer/screens/platform";
+import PlatformApp from "~/renderer/screens/platform/App";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -111,6 +113,15 @@ export default function Default() {
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
                         <Redirect from="/manager/reload" to="manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
+                        <Route
+                          path="/platform"
+                          render={(props: any) => <PlatformCatalog {...props} />}
+                          exact
+                        />
+                        <Route
+                          path="/platform/:platform"
+                          render={(props: any) => <PlatformApp {...props} />}
+                        />
                         <Route path="/lend" render={props => <Lend {...props} />} />
                         <Route path="/exchange" render={props => <Exchange {...props} />} exact />
                         <Route

@@ -4,6 +4,8 @@ import React from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 
@@ -13,7 +15,6 @@ import Box, { Tabbable } from "~/renderer/components/Box";
 import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
-import type { Manifest } from "./type";
 import LiveAppIcon from "./LiveAppIcon";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -99,7 +100,7 @@ export const Separator: ThemedComponent<*> = styled.div`
 
 export type Props = {
   icon?: boolean,
-  manifest: Manifest,
+  manifest: AppManifest,
   onReload: Function,
   onClose?: Function,
   onHelp?: Function,
@@ -111,7 +112,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
   return (
     <Container>
       <TitleContainer>
-        <LiveAppIcon name={name} icon={icon} size={24} />
+        <LiveAppIcon name={name} icon={icon || undefined} size={24} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />

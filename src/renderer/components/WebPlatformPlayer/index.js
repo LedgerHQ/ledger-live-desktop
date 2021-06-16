@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 
@@ -38,7 +39,7 @@ import {
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
 import TopBar from "./TopBar";
-import type { Manifest } from "./type";
+
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 
@@ -74,7 +75,7 @@ const Loader: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  manifest: Manifest,
+  manifest: AppManifest,
   onClose?: Function,
 };
 
@@ -90,6 +91,16 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+
+  const url = useMemo(() => {
+    const urlObj = new URL(manifest.url.toString());
+
+    urlObj.searchParams.set("backgroundColor", theme.background.paper);
+    urlObj.searchParams.set("textColor", theme.text.shade100);
+    urlObj.searchParams.set("loadDate", loadDate.valueOf().toString());
+
+    return urlObj;
+  }, [manifest.url, loadDate, theme]);
 
   const listAccounts = useCallback(() => {
     return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
@@ -242,20 +253,20 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      targetRef?.current?.contentWindow.postMessage(JSON.stringify(request), manifest.url.origin);
+      targetRef?.current?.contentWindow.postMessage(JSON.stringify(request), url.origin);
     },
-    [manifest],
+    [url],
   );
 
   const [receive] = useJSONRPCServer(handlers, handleSend);
 
   const handleMessage = useCallback(
     e => {
-      if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
+      if (e.isTrusted && e.origin === url.origin && e.data) {
         receive(JSON.parse(e.data));
       }
     },
-    [manifest, receive],
+    [url, receive],
   );
 
   useEffect(() => {
@@ -272,25 +283,15 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
     setWidgetLoaded(false);
   }, []);
 
-  const uri = useMemo(() => {
-    const url = new URL(manifest.url.toString());
-
-    url.searchParams.set("backgroundColor", theme.background.paper);
-    url.searchParams.set("textColor", theme.text.shade100);
-    url.searchParams.set("loadDate", loadDate.valueOf().toString());
-
-    return url;
-  }, [manifest.url, loadDate, theme]);
-
   return (
     <Container>
       <TopBar manifest={manifest} onReload={handleReload} onClose={onClose} />
       <Wrapper>
         <CustomIframe
-          src={uri.toString()}
+          src={url.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
-          sandbox="allow-scripts allow-same-origin allow-forms"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
           onLoad={handleLoad}
         />
         {!widgetLoaded ? (

@@ -23,6 +23,7 @@ import Default from "./Default";
 import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -67,9 +68,11 @@ const App = ({ store, initialCountervalues }: Props) => {
                     <AnnouncementProviderWrapper>
                       <Router>
                         <WalletConnectProvider>
-                          <DrawerProvider>
-                            <Default />
-                          </DrawerProvider>
+                          <PlatformCatalogProvider>
+                            <DrawerProvider>
+                              <Default />
+                            </DrawerProvider>
+                          </PlatformCatalogProvider>
                         </WalletConnectProvider>
                       </Router>
                     </AnnouncementProviderWrapper>
