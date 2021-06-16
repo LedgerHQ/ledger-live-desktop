@@ -18,9 +18,9 @@ export const IconWrapper: ThemedComponent<{
   font-family: "Inter";
   font-weight: bold;
   color: ${p => p.theme.colors.palette.secondary.main};
-  background-color: ${p => p.theme.colors.palette.background.default};
-  border-radius: 4px;
-  border-radius: ${p => (p.circle ? "50%" : "4px")};
+  background-color: ${p => p.theme.colors.palette.background.paper};
+  box-shadow: inset 0 0 0 1px ${p => p.theme.colors.palette.divider};
+  border-radius: 8px;
   display: flex;
   overflow: hidden;
   flex-direction: column;
