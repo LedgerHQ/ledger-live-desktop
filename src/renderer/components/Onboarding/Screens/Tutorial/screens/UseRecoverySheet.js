@@ -52,6 +52,16 @@ const StepTextContainer = styled.div`
   flex: 1;
 `;
 
+const DescText = styled(Text).attrs(() => ({
+  mt: "8px",
+  color: "palette.text.shade100",
+  ff: "Inter|Regular",
+  fontSize: "13px",
+  lineHeight: "19.5px",
+}))`
+  white-space: pre-line;
+`;
+
 type StepProps = {
   title: string,
   descr?: string,
@@ -75,17 +85,7 @@ function Step({ title, descr, index }: StepProps) {
         >
           {title}
         </Text>
-        {descr ? (
-          <Text
-            mt="8px"
-            color="palette.text.shade100"
-            ff="Inter|Regular"
-            fontSize="13px"
-            lineHeight="19.5px"
-          >
-            {descr}
-          </Text>
-        ) : null}
+        {descr ? <DescText>{descr}</DescText> : null}
       </StepTextContainer>
     </StepContainer>
   );

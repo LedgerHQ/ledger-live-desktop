@@ -59,6 +59,7 @@ const SpendableAmount = ({
       disableRounding={disableRounding}
       showAllDigits={showAllDigits}
       showCode
+      alwaysShowValue
     />
   ) : null;
 };
