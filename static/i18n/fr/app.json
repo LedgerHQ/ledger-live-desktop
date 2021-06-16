@@ -762,7 +762,7 @@
       "cta": "Ajouter un compte"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "Vous n'avez pas de compte {{ asset }}.",
       "description": "Pour déposer des fonds et prêter des cryptos, vous avez besoin d'un compte {{ asset }}. Recevez des fonds sur votre adresse Ethereum.",
       "ctaBuy": "Acheter {{ asset }}",
       "ctaReceive": "Recevoir {{ asset }}"
@@ -893,37 +893,37 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "Signer le message",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "Récapitulatif"
       },
       "sign": {
-        "title": "Device"
+        "title": "Appareil"
       }
     }
   },
   "walletconnect": {
-    "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "titleAccount": "WalletConnect",
+    "disconnect": "Déconnecter",
+    "disconnected": "Déconnecté",
+    "connected": "Connecté",
+    "connecting": "Connexion en cours...",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "Coller le lien",
+        "label": "Adresse WalletConnect",
+        "placeholder": "Coller le lien WalletConnect"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "Connecter",
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
-      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+      "info": "Vous pouvez maintenant accéder à la DApp sur votre ordinateur.",
+      "warning": "Partager des adresses de bénéficiaire par DApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
+      "disconnected": "Il y a un problème de connexion entre la DApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
   },
   "dashboard": {
@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
+        "title": "L'application Ledger Live fonctionne correctement.",
         "description": "Des difficultés ? Visitez notre <0>page d'aide</0>."
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
+        "title": "L'application Ledger Live rencontre des problèmes.",
         "learnMore": "En savoir plus"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "Aucune actualité pour l'instant",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "Vous trouverez ici toutes les actualités relatives à Ledger et Ledger Live."
       }
     }
   },
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "Vous êtes déjà pro.",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité.\n\nIl ne vous reste qu'à connecter votre appareil.",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "Vous êtes sur le point de passer pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos.\n\nIl ne vous reste qu'à connecter votre appareil.",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente"
@@ -2697,8 +2697,8 @@
               "descr": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez l'Assistance Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Noter les 24 mots",
+              "descr": "Écrivez en position 1 sur la feuille de récupération le mot n°1 (\"Word #1\") affiché en gras sur votre Nano. Puis appuyez sur le bouton droit de votre Nano pour voir le mot n°2 (\"Word #2\") et écrivez-le en position 2.\n\nFaites cela pour tous les mots affichés en gras en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
             },
             "buttons": {
               "next": "Étape suivante",
@@ -2885,9 +2885,9 @@
     "desc": "Des difficultés à connecter votre appareil ?"
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
+    "stringHash": "Hachage du message",
+    "domainHash": "Hachage du domaine",
+    "messageHash": "Hachage du message",
     "message": "Message"
   },
   "TransactionConfirm": {
