@@ -265,7 +265,11 @@ const Form = ({
 
   // Deselect the tradeMethod if not available for current pair
   useEffect(() => {
-    if (enabledTradeMethods && !enabledTradeMethods.includes(tradeMethod)) {
+    if (
+      enabledTradeMethods &&
+      enabledTradeMethods.length > 0 &&
+      !enabledTradeMethods.includes(tradeMethod)
+    ) {
       setTradeMethod(enabledTradeMethods[0]);
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);

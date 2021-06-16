@@ -64,7 +64,7 @@ export const CountdownTimerWrapper: ThemedComponent<{}> = styled(Box)`
 type Modes = "fixed" | "float"; // More?
 
 const Pill = ({
-  tradeMethod = "fixed",
+  tradeMethod = "float",
   setTradeMethod,
   enabledTradeMethods,
 }: {

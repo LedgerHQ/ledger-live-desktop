@@ -32,7 +32,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
 
   const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
   const [installedApps, setInstalledApps] = useState();
-  const [tradeMethod, setTradeMethod] = useState("fixed");
+  const [tradeMethod, setTradeMethod] = useState("float");
   const dispatch = useDispatch();
 
   useEffect(() => {
