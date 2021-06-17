@@ -268,11 +268,11 @@
         },
         "finished": {
           "title": "مُعلقّة",
-          "subtitle": "عملية معلقة",
+          "subtitle": "Swap broadcast successfully ",
           "swap": "معرّف التبادل الخاص بك:",
           "seeDetails": "رؤية التفاصيل",
-          "disclaimer": "يرجى حفظ معرّف التبادل الخاص بك في حال كنت بحاجة إلى مساعدة من <0>{{provider}}</0> لاحقًا.",
-          "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. قد يستغرق ذلك مدة تصل إلى ساعة قبل استلام الأصول المشفرة الخاصة بك التي تمت مبادلتها."
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },
