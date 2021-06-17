@@ -762,7 +762,7 @@
       "cta": "إضافة حساب"
     },
     "emptyAccountDeposit": {
-      "title": "ليس لديك أي حساب {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "من أجل إيداع الأموال وإقراض العملات المشفرة تحتاج إلى حساب {{ asset }} . يُرجى تلقي الأموال على عنوان إيثيريوم الخاص بك.",
       "ctaBuy": "شراء {{ asset }}",
       "ctaReceive": "تلقي {{ asset }}"
@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "ليدجر لايف (Ledger Live) في وضع التشغيل",
+        "title": "Ledger Live is up and running",
         "description": "هل تواجه مشاكل؟ انتقل إلى <0>صفحة المساعدة</0>"
       },
       "statusNotOk": {
-        "title": "ليدجر لايف (Ledger Live) يواجه مشاكل",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "معرفة المزيد"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "لا توجد أخبار حاليًا",
-        "desc": "ستجد هنا جميع الأخبار المتعلقة بنظام ليدجر (Ledger) وليدجر لايف (Ledger Live)"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "أصبحت محترفًا بالفعل!",
-            "paragraph": "أنت جاهز لإدارة أصولك المشفرة بأمان. لم يتبق أمامك سوى خطوة واحدة سريعة!",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "ستصبح محترفًا قريبًا...",
-            "paragraph": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة. لم يتبقى سوى خطوة واحدة سريعة!",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة"
@@ -2697,8 +2697,8 @@
               "descr": "احصل على ورقة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
             },
             "writeDownWords": {
-              "title": "كتابة كل الكلمات",
-              "descr": "اكتب الكلمة رقم #1 المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 واكتبها في الموضع 2. كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -2786,23 +2786,6 @@
               "next": "التحقق من Nano الخاص بي",
               "prev": "الخطوة السابقة",
               "help": "أحتاج إلى مساعدة"
-            }
-          },
-          "quizzSuccess": {
-            "title": "أصبحت محترفًا بالفعل!",
-            "paragraph": "أنت جاهز لإدارة أصولك المشفرة بأمان. لم يتبق أمامك سوى خطوة واحدة سريعة!",
-            "buttons": {
-              "next": "الخطوة التالية",
-              "prev": "الخطوة السابقة"
-            }
-          },
-          "quizzFail": {
-            "title": "ستصبح محترفًا قريبًا...",
-            "paragraph1": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة.",
-            "paragraph2": "لم يتبقى سوى خطوة واحدة سريعة!",
-            "buttons": {
-              "next": "الخطوة التالية",
-              "prev": "الخطوة السابقة"
             }
           }
         }

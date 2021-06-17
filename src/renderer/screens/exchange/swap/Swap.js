@@ -29,7 +29,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
 
   const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
-  const [tradeMethod, setTradeMethod] = useState("fixed");
+  const [tradeMethod, setTradeMethod] = useState("float");
   const dispatch = useDispatch();
 
   useEffect(() => {

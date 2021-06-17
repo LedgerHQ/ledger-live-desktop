@@ -762,7 +762,7 @@
       "cta": "添加账户"
     },
     "emptyAccountDeposit": {
-      "title": "您没有任何 {{ asset }} 帐户。",
+      "title": "您没有 {{ asset }} 账户。",
       "description": "为了存入资金和借出加密货币，您需要有一个 {{ asset }} 账户。请在您的以太坊地址上接收资金。",
       "ctaBuy": "买入 {{ asset }}",
       "ctaReceive": "接收 {{ asset }}"
@@ -893,35 +893,35 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "签署消息",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "概要"
       },
       "sign": {
-        "title": "Device"
+        "title": "设备"
       }
     }
   },
   "walletconnect": {
-    "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "titleAccount": "Wallet Connect（钱包连接）",
+    "disconnect": "断开连接",
+    "disconnected": "已断开连接",
+    "connected": "已连接",
+    "connecting": "正在连接...",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "粘贴链接",
+        "label": "Wallet Connect（钱包连接）地址",
+        "placeholder": "粘贴 Wallet Connect（钱包连接）链接"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "连接",
+        "details": "想要通过您的钱包连接到以下以太坊账户："
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
+      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
       "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
@@ -2462,7 +2462,7 @@
     "announcement": {
       "emptyState": {
         "title": "目前没有新闻",
-        "desc": "您将在这里找到与 Ledger 和 Ledger Live 相关的所有新闻"
+        "desc": "你将在这里找到所有与 Ledger 和 Ledger Live 有关的新闻"
       }
     }
   },
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "已经是位高手！",
-            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "下一步",
               "prev": "上一步",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "距成为高手仅一步之遥……",
-            "paragraph": "别担心，Ledger 会为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。只剩下最后一小步！",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "下一步",
               "prev": "上一步"
@@ -2697,8 +2697,8 @@
               "descr": "取出一张空白的恢复表，该表和 Nano 装在一起。如果您拿到的恢复表已经被填写过，请联系 Ledger 客服。"
             },
             "writeDownWords": {
-              "title": "写下所有的恢复词",
-              "descr": "在恢复表的位置 1 写下 Nano 上显示的 Word #1 第一个词。然后在您的 Nano 设备上按右键显示 Word #2 第二个词，并将其写在位置 2。重复该操作，确保按正确的顺序和拼写将所有的助记词写下来。按 Nano 上的左键，核对以防出错。"
+              "title": "写下 24 个助记词",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "下一步",
@@ -2786,23 +2786,6 @@
               "next": "检验我的 Nano",
               "prev": "上一步",
               "help": "需要帮助"
-            }
-          },
-          "quizzSuccess": {
-            "title": "已经是位高手！",
-            "paragraph": "您已准备好安全的管理您的加密资产了。只剩下最后一小步！",
-            "buttons": {
-              "next": "下一步",
-              "prev": "上一步"
-            }
-          },
-          "quizzFail": {
-            "title": "距成为高手仅一步之遥……",
-            "paragraph1": "别担心，Ledger 会全程为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。",
-            "paragraph2": "只剩下最后一小步！",
-            "buttons": {
-              "next": "下一步",
-              "prev": "上一步"
             }
           }
         }
@@ -2902,10 +2885,10 @@
     "desc": "无法连接您的设备？"
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "Message Hash 消息哈希字符串",
+    "domainHash": "Domain Hash 域名哈希字符串",
+    "messageHash": "Message Hash 消息哈希字符串",
+    "message": "消息"
   },
   "TransactionConfirm": {
     "title": "请在您的设备上确认操作从而完成交易",

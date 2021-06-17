@@ -762,7 +762,7 @@
       "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
-      "title": "У вас нет счёта {{ asset }}.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ asset }}. Получите средства на свой Ethereum-адрес.",
       "ctaBuy": "Купить {{ asset }}",
       "ctaReceive": "Получить {{ asset }}"
@@ -2451,18 +2451,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live запущено и работает",
+        "title": "Ledger Live is up and running",
         "description": "Проблема? Воспользуйтесь <0>страницей помощи</0>"
       },
       "statusNotOk": {
-        "title": "В приложении Ledger Live возникли проблемы",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "Подробнее"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "Сейчас новостей нет",
-        "desc": "Здесь вы найдёте все новости о Ledger и Ledger Live"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
@@ -2645,7 +2645,7 @@
           },
           "quizSuccess": {
             "title": "Вы уже профи!",
-            "paragraph": "Теперь вы готовы управлять собственной криптовалютой и хранить её безопасно. Остался всего один шаг.",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Продолжить",
               "prev": "Назад",
@@ -2654,7 +2654,7 @@
           },
           "quizFailure": {
             "title": "Вы скоро станете профи...",
-            "paragraph": "Не волнуйтесь, Ledger поможет вам научиться пользоваться устройством. Вскоре вы будете уверенно и безопасно обращаться с криптовалютой. Остался всего один шаг.",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Продолжить",
               "prev": "Назад"
@@ -2697,8 +2697,8 @@
               "descr": "Возьмите чистый лист восстановления, который прилагается к устройству Nano. Свяжитесь со службой поддержки Ledger, если его не было в комплекте."
             },
             "writeDownWords": {
-              "title": "Запишите все слова",
-              "descr": "Запишите слово №1, показанное на устройстве Nano, в строку №1 на листе восстановления. Затем нажмите правую кнопку Nano, чтобы перейти к слову №2, и запишите его в строку №2. Повторите процесс со всеми словами, проверяя правильность написания и порядковый номер. Нажмите левую кнопку Nano, если вам необходимо вернуться к предыдущему слову."
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Продолжить",
@@ -2786,23 +2786,6 @@
               "next": "Проверить Nano",
               "prev": "Назад",
               "help": "Мне нужна помощь"
-            }
-          },
-          "quizzSuccess": {
-            "title": "Вы уже профи!",
-            "paragraph": "Теперь вы готовы управлять собственной криптовалютой и хранить её безопасно. Остался всего один шаг.",
-            "buttons": {
-              "next": "Продолжить",
-              "prev": "Назад"
-            }
-          },
-          "quizzFail": {
-            "title": "Вы скоро станете профи...",
-            "paragraph1": "Не волнуйтесь, Ledger поможет вам научиться пользоваться устройством. Вскоре вы будете уверенно и безопасно обращаться с криптовалютой.",
-            "paragraph2": "Остался всего один шаг!",
-            "buttons": {
-              "next": "Продолжить",
-              "prev": "Назад"
             }
           }
         }
