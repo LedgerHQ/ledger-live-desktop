@@ -15,7 +15,10 @@ import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Alert from "~/renderer/components/Alert";
+import Text from "~/renderer/components/Text";
+
 import IconCode from "~/renderer/icons/Code";
+import IconPoll from "~/renderer/icons/Poll";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 
 import AppCard from "~/renderer/components/Platform/AppCard";
@@ -28,6 +31,7 @@ const Grid = styled.div`
   grid-gap: 20px;
   width: 100%;
   justify-content: stretch;
+  margin-bottom: auto;
 `;
 
 const GridItem = styled.div`
@@ -47,21 +51,25 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
   color: p.theme.colors.palette.secondary.main,
 }))``;
 
+const PollCTA = styled(CatalogCTA)`
+  background: transparent;
+  border: 1px dashed ${p => p.theme.colors.palette.divider};
+  color: ${p => p.theme.colors.palette.text.shade50};
+`;
+
+const PollText = styled(Text).attrs(p => ({
+  ff: "Inter|SemiBold",
+  color: p.theme.colors.palette.secondary.main,
+}))``;
+
 const DeveloperCTA = styled(CatalogCTA)`
   background: ${p => p.theme.colors.palette.text.shade5};
-
-  ${Grid} > &:nth-child(3n-2) {
-    grid-column: span 3;
-  }
-
-  ${Grid} > &:nth-child(3n-1) {
-    grid-column: span 2;
-  }
-
-  ${Grid} > &:nth-child(3n) {
-    grid-column: span 1;
-  }
+  margin-top: 24px;
+  flex-grow: 0;
+  color: ${p => p.theme.colors.palette.secondary.main};
 `;
+
+const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.text.shade50 }))``;
 
 const PlatformCatalog = () => {
   const history = useHistory();
@@ -76,6 +84,7 @@ const PlatformCatalog = () => {
 
     return branches;
   }, []);
+
   const isCatalogManifestOverriden = !!getEnv("PLATFORM_MANIFEST_PATH");
 
   const { apps } = useCatalog(appBranches);
@@ -84,6 +93,10 @@ const PlatformCatalog = () => {
 
   const handleDeveloperCTA = useCallback(() => {
     openURL(urls.platform.developerPage);
+  }, []);
+
+  const handlePollCTA = useCallback(() => {
+    openURL(urls.platform.poll);
   }, []);
 
   const handleClick = useCallback(
@@ -115,20 +128,33 @@ const PlatformCatalog = () => {
             />
           </GridItem>
         ))}
-        <DeveloperCTA
-          title={t("platform.catalog.developerCTA.title")}
-          Icon={IconCode}
-          onClick={handleDeveloperCTA}
+        <PollCTA
+          title={t("platform.catalog.pollCTA.title")}
+          Icon={IconPoll}
+          onClick={handlePollCTA}
           ctaLabel={
             <>
-              <span>{t("platform.catalog.developerCTA.button")}</span>
+              <span>{t("platform.catalog.pollCTA.button")}</span>
               <IconExternalLink size={14} />
             </>
           }
         >
-          {t("platform.catalog.developerCTA.description")}
-        </DeveloperCTA>
+          <PollText>{t("platform.catalog.pollCTA.description")}</PollText>
+        </PollCTA>
       </Grid>
+      <DeveloperCTA
+        title={t("platform.catalog.developerCTA.title")}
+        Icon={IconCode}
+        onClick={handleDeveloperCTA}
+        ctaLabel={
+          <>
+            <span>{t("platform.catalog.developerCTA.button")}</span>
+            <IconExternalLink size={14} />
+          </>
+        }
+      >
+        <DeveloperText>{t("platform.catalog.developerCTA.description")}</DeveloperText>
+      </DeveloperCTA>
     </>
   );
 };
