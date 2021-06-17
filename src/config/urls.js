@@ -158,7 +158,9 @@ export const urls = {
       "https://www.ledger.com/academy/benefits-of-buying-crypto-through-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=exchange",
   },
   platform: {
-    developerPage: "https://developers.ledger.com/",
+    developerPage:
+      "https://developers.ledger.com?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=catalog",
+    poll: "FIXME",
   },
   // Errors
   errors: {

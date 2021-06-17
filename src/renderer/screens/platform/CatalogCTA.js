@@ -20,7 +20,6 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(p => ({
 
 const TitleContent = styled(Box).attrs(p => ({
   ff: "Inter|SemiBold",
-  color: p.theme.colors.palette.secondary.main,
   fontSize: 5,
   horizontal: true,
   alignItems: "center",
