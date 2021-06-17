@@ -108,6 +108,8 @@ export function useDeepLinkHandler() {
           const { currency, recipient, amount } = query;
           if (!currency || typeof currency !== "string") return;
 
+          if (url === "delegate" && currency !== "tezos") return;
+
           const c = findCryptoCurrencyByKeyword(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") {
             dispatch(
