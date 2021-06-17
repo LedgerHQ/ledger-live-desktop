@@ -4,6 +4,7 @@ import { setSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 setSupportedCurrencies([
   "bitcoin",
   "ethereum",
+  "bnb",
   "polkadot",
   "ripple",
   "litecoin",
