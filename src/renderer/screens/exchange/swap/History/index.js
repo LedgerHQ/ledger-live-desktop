@@ -2,7 +2,7 @@
 
 import { remote, ipcRenderer } from "electron";
 import React, { useMemo, useEffect, useState, useCallback } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { accountsSelector } from "~/renderer/reducers/accounts";
@@ -53,7 +53,6 @@ const exportOperations = async (
 };
 
 const History = () => {
-  const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
