@@ -14,7 +14,6 @@ import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 
 import IconCode from "~/renderer/icons/Code";
@@ -85,8 +84,6 @@ const PlatformCatalog = () => {
     return branches;
   }, []);
 
-  const isCatalogManifestOverriden = !!getEnv("PLATFORM_MANIFEST_PATH");
-
   const { apps } = useCatalog(appBranches);
 
   const { t } = useTranslation();
@@ -112,11 +109,6 @@ const PlatformCatalog = () => {
       <Header>
         <Title>{t("platform.catalog.title")}</Title>
       </Header>
-      {isCatalogManifestOverriden && (
-        <Alert type="danger" mb={4} style={{ flex: 0 }}>
-          {t("platform.catalog.manifestOverriden")}
-        </Alert>
-      )}
       <CatalogBanner />
       <Grid length={apps.length}>
         {apps.map(manifest => (
