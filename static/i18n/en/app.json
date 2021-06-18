@@ -32,8 +32,7 @@
         "title": "For Developers",
         "description": "All the information you need to integrate your applications on Ledger Live.",
         "button": "Go to dev portal"
-      },
-      "manifestOverriden": "The catalog apps are overriden by a local version for testing purpose. Please contact Ledger Support if you did not intended to use a custom catalog as it can be a security issue."
+      }
     }
   },
   "common": {
