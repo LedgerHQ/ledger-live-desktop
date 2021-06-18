@@ -268,11 +268,11 @@
         },
         "finished": {
           "title": "En attente",
-          "subtitle": "Swap broadcast successfully ",
+          "subtitle": "Swap bien diffusé ",
           "swap": "Identifiant de votre Swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
     },
