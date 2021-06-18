@@ -296,28 +296,6 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
-    },
-    "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
-      "wyre": {
-        "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
-        ]
-      },
-      "changelly": {
-        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -510,28 +488,6 @@
     },
     "history": {
       "tab": "History"
-    },
-    "providers": {
-      "title": "Choose a provider to buy crypto",
-      "learnMore": "What is buy?",
-      "coinify": {
-        "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
-          "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
-        ]
-      }
     }
   },
   "lend": {
