@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-<svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>;
 
 const Apps = ({ size = 16, color = "currentColor" }: { size?: number, color?: string }) => (
   <svg viewBox="0 0 16 16" height={size} width={size} fill="none">
