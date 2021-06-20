@@ -18,6 +18,8 @@ import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
 import Breadcrumb from "~/renderer/components/Breadcrumb";
 import HelpSideBar from "~/renderer/modals/Help";
+import BackupSideBar from "~/renderer/modals/Backup";
+import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconLock from "~/renderer/icons/Lock";
 import IconEye from "~/renderer/icons/Eye";
 import IconHelp from "~/renderer/icons/Question";
@@ -67,6 +69,7 @@ const TopBar = () => {
   const discreetMode = useSelector(discreetModeSelector);
 
   const [helpSideBarVisible, setHelpSideBarVisible] = useState(false);
+  const [backupSideBarVisible, setBackupSideBarVisible] = useState(false);
 
   const handleLock = useCallback(() => dispatch(lock()), [dispatch]);
   const handleDiscreet = useCallback(() => dispatch(setDiscreetMode(!discreetMode)), [
@@ -128,6 +131,22 @@ const TopBar = () => {
             <HelpSideBar
               isOpened={helpSideBarVisible}
               onClose={() => setHelpSideBarVisible(false)}
+            />
+            <Box justifyContent="center">
+              <Bar />
+            </Box>
+            <Tooltip content={t("settings.helpButton")} placement="bottom">
+              <ItemContainer
+                id="topbar-cloud-button"
+                isInteractive
+                onClick={() => setBackupSideBarVisible(true)}
+              >
+                <IconDownloadCloud size={16} />
+              </ItemContainer>
+            </Tooltip>
+            <BackupSideBar
+              isOpened={backupSideBarVisible}
+              onClose={() => setBackupSideBarVisible(false)}
             />
             {hasPassword && (
               <>
