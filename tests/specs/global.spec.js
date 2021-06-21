@@ -99,4 +99,9 @@ describe("Global", () => {
       customSnapshotIdentifier: "global-help-drawer",
     });
   });
+
+  afterAll(() => {
+    // Example on how to reset announcements
+    portfolioPage.resetAnnouncements();
+  });
 });

@@ -1,3 +1,10 @@
+import {
+  addAnnouncementFromPool,
+  addMockAnnouncement,
+  resetAnnouncements,
+} from "../mocks/notificationsHelpers";
+import { toggleMockIncident } from "../mocks/serviceStatusHelpers";
+
 export default class Page {
   constructor(app) {
     this.app = app;
@@ -124,5 +131,27 @@ export default class Page {
   async goToManager() {
     const btn = await this.drawerManagerButton();
     await btn.click();
+  }
+
+  // Notifications
+
+  async addAnnouncement() {
+    addAnnouncementFromPool();
+    await this.synchronize();
+  }
+
+  async generateAnnouncement(params) {
+    addMockAnnouncement(params);
+    await this.synchronize();
+  }
+
+  resetAnnouncements() {
+    resetAnnouncements();
+  }
+
+  // ServiceStatus
+  async toggleIncident() {
+    toggleMockIncident();
+    await this.synchronize();
   }
 }
