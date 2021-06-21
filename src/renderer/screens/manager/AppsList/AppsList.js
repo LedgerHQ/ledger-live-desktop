@@ -2,7 +2,6 @@
 import React, { useState, memo, useCallback, useEffect, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { every, some } from "lodash";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -86,8 +85,8 @@ const AppsList = ({
   const { search } = useLocation();
   const reduxDispatch = useDispatch();
   const currenciesAccountsSetup = useSelector(currenciesSelector);
-  const disableInstallBanner = every(state.installed, app =>
-    some(currenciesAccountsSetup, currency => currency.id === state.appByName[app.name].currencyId),
+  const disableInstallBanner = state.installed.some(app =>
+    currenciesAccountsSetup.some(currency => currency.id === state.appByName[app.name].currencyId),
   );
 
   const inputRef = useRef<any>();
