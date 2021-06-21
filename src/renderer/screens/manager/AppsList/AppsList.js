@@ -2,6 +2,7 @@
 import React, { useState, memo, useCallback, useEffect, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { every, some } from "lodash";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -10,7 +11,7 @@ import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 import type { TFunction } from "react-i18next";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, AppsDistribution } from "@ledgerhq/live-common/lib/apps/types";
-import { hasAccountsSelector } from "~/renderer/reducers/accounts";
+import { currenciesSelector } from "~/renderer/reducers/accounts";
 import UpdateAllApps from "./UpdateAllApps";
 import Placeholder from "./Placeholder";
 import Card from "~/renderer/components/Box/Card";
@@ -84,7 +85,10 @@ const AppsList = ({
   const { push } = useHistory();
   const { search } = useLocation();
   const reduxDispatch = useDispatch();
-  const hasAccounts = useSelector(hasAccountsSelector);
+  const currenciesAccountsSetup = useSelector(currenciesSelector);
+  const disableInstallBanner = every(state.installed, app =>
+    some(currenciesAccountsSetup, currency => currency.id === state.appByName[app.name].currencyId),
+  );
 
   const inputRef = useRef<any>();
   const [query, setQuery] = useState("");
@@ -156,7 +160,7 @@ const AppsList = ({
         dispatch={dispatch}
         isIncomplete={isIncomplete}
         addAccount={addAccount}
-        disabled={update.length >= 1 || hasAccounts}
+        disabled={update.length >= 1 || disableInstallBanner}
       />
       <UpdateAllApps
         update={update}
