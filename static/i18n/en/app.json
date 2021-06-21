@@ -19,6 +19,11 @@
     },
     "catalog": {
       "title": "Browse",
+      "branches": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
       "banner": {
         "title": "Introducing Browse!",
         "description": "You can now use other providers in Ledger Live, starting with ParaSwap and Wyre. Vote for the service you want to see next!"

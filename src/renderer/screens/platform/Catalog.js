@@ -73,7 +73,7 @@ const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.t
 const PlatformCatalog = () => {
   const history = useHistory();
   const appBranches = useMemo(() => {
-    const branches = ["stable"];
+    const branches = ["stable", "soon", "experimental"];
 
     // TODO: add experimental setting
 
