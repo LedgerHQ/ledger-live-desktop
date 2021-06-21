@@ -3,7 +3,7 @@ import {
   addMockAnnouncement,
   resetAnnouncements,
 } from "../mocks/notificationsHelpers";
-import { toggleMockIncident } from "../mocks/serviceStatusHelpers";
+import { resetIncidents, toggleMockIncident } from "../mocks/serviceStatusHelpers";
 
 export default class Page {
   constructor(app) {
@@ -134,7 +134,6 @@ export default class Page {
   }
 
   // Notifications
-
   async addAnnouncement() {
     addAnnouncementFromPool();
     await this.synchronize();
@@ -150,8 +149,12 @@ export default class Page {
   }
 
   // ServiceStatus
-  async toggleIncident() {
-    toggleMockIncident();
+  async toggleIncident(bool = true) {
+    toggleMockIncident(bool);
     await this.synchronize();
+  }
+
+  resetIncidents() {
+    resetIncidents();
   }
 }

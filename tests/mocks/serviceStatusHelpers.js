@@ -587,8 +587,12 @@ const mockedIncidents: Incident[] = [
   },
 ];
 
-export function toggleMockIncident() {
-  statuses.incidents = statuses.incidents.length > 0 ? [] : mockedIncidents;
+export function toggleMockIncident(bool: boolean = true) {
+  statuses.incidents = bool ? mockedIncidents : [];
+}
+
+export function resetIncidents() {
+  toggleMockIncident(false);
 }
 
 async function fetchStatusSummary(): Promise<ServiceStatusSummary> {
