@@ -108,14 +108,6 @@ export const experimentalFeatures: Feature[] = [
       "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
     minValue: 1,
   },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_INLINE_INSTALL",
-    title: "Allow inline app installation",
-    description:
-      "Install a nano device application directly within a device flow rather than in the manager.",
-    defaultValue: false,
-  },
 ];
 
 const lsKey = "experimentalFlags";
