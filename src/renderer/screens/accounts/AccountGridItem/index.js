@@ -8,7 +8,6 @@ import AccountCardHeader from "./Header";
 import AccountCardBody from "./Body";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
 type Props = {
   hidden?: boolean,
   account: TokenAccount | Account,
@@ -32,7 +31,11 @@ export default function AccountCard({
   return (
     <AccountContextMenu account={account} parentAccount={parentAccount}>
       <Card {...props} style={hidden ? { display: "none" } : {}} p={20} onClick={onClick}>
-        <AccountCardHeader account={account} parentAccount={parentAccount} />
+        <AccountCardHeader
+          amnesia={props?.amnesia}
+          account={account}
+          parentAccount={parentAccount}
+        />
         <AccountCardBody account={account} parentAccount={parentAccount} range={range} />
       </Card>
     </AccountContextMenu>
@@ -45,8 +48,10 @@ const Card: ThemedComponent<{}> = styled(Box).attrs(() => ({
   boxShadow: 0,
   borderRadius: 1,
 }))`
+  margin: 10px;
   cursor: pointer;
-  border: 1px solid transparent;
+  border: ${p => (p.amnesia ? 2 : 1)}px solid
+    ${p => (p.amnesia ? "black" : p.cookie ? p.theme.colors.wallet : "transparent")};
   transition: background-color ease-in-out 200ms;
   :hover {
     border-color: ${p => p.theme.colors.palette.text.shade20};

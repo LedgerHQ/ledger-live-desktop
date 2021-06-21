@@ -138,16 +138,31 @@ class AddAccounts extends PureComponent<Props, State> {
   STEPS = createSteps();
 
   handleClickAdd = async () => {
-    const { replaceAccounts, existingAccounts } = this.props;
+    const { replaceAccounts, existingAccounts, device } = this.props;
     const { scannedAccounts, checkedAccountsIds, editedNames } = this.state;
-    replaceAccounts(
-      addAccounts({
-        scannedAccounts,
-        existingAccounts,
-        selectedIds: checkedAccountsIds,
-        renamings: editedNames,
-      }),
+
+    /**
+     * HACKATHON-NOTES
+     * inject the connected device cookie into the account to make them linked for eternity.
+     * It would be ideal to somehow obfuscate this but I lack the know-how
+     */
+    const accounts = addAccounts({
+      scannedAccounts,
+      existingAccounts,
+      selectedIds: checkedAccountsIds,
+      renamings: editedNames,
+    }).map(a =>
+      checkedAccountsIds.includes(a.id)
+        ? {
+            ...a,
+            cookie: device.cookie,
+            subAccounts: a?.subaccounts
+              ? a?.subAccounts.map(sa => ({ ...sa, cookie: device.cookie }))
+              : undefined,
+          }
+        : a,
     );
+    replaceAccounts(accounts);
   };
 
   handleCloseModal = () => this.props.closeModal("MODAL_ADD_ACCOUNTS");

@@ -7,6 +7,7 @@ import { fromAccountRaw, toAccountRaw } from "@ledgerhq/live-common/lib/account"
 import type { DataModel } from "@ledgerhq/live-common/lib/DataModel";
 import type { Account, AccountRaw, Operation } from "@ledgerhq/live-common/lib/types";
 
+// HACKATHON FROM ACCOUNT RAW AND TO, need to hijack to persist the cookie
 /**
  * @memberof models/account
  */
@@ -82,13 +83,27 @@ const accountModel: DataModel<AccountRaw, Account> = createDataModel({
     // ^- Each time a modification is brought to the model, add here a migration function here
   ],
 
-  decode: fromAccountRaw,
+  // FIXME bypassing live-common for easier builds on the hackathon, dont leave this here
+  decode: raw => {
+    const base = fromAccountRaw(raw);
+    return {
+      ...base,
+      cookie: raw.cookie,
+      subAccounts: base.subAccounts?.map(sa => ({ ...sa, cookie: raw.cookie })),
+    };
+  },
 
-  encode: (account: Account): AccountRaw =>
-    toAccountRaw({
+  encode: (account: Account): AccountRaw => {
+    const base = toAccountRaw({
       ...account,
       operations: account.operations.filter(opRetentionFilter),
-    }),
+    });
+    return {
+      ...base,
+      subAccounts: base.subAccounts?.map(sa => ({ ...sa, cookie: account.cookie })),
+      cookie: account.cookie,
+    };
+  },
 });
 
 export default accountModel;

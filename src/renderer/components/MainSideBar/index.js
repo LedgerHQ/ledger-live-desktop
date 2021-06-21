@@ -32,6 +32,7 @@ import IconSwap from "~/renderer/icons/Swap";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
+import Hackathon from "~/renderer/screens/dashboard/Hackathon";
 import Space from "~/renderer/components/Space";
 import UpdateDot from "~/renderer/components/Updater/UpdateDot";
 import { Dot } from "~/renderer/components/Dot";
@@ -265,6 +266,10 @@ const MainSideBar = () => {
             </Collapser>
             <TopGradient />
             <Space of={70} />
+            <SideBarList collapsed={secondAnim}>
+              <Hackathon onClick={handleClickManager} />
+            </SideBarList>
+            <Space of={20} />
             <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
               <SideBarListItem
                 id={"dashboard"}
@@ -335,7 +340,7 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
                 NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
               />
-              <SideBarListItem
+              {/* <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}
                 icon={IconManager}
@@ -344,7 +349,7 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/manager"}
                 NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
                 collapsed={secondAnim}
-              />
+              /> */}
               <Space of={30} />
             </SideBarList>
             <Space grow of={30} />

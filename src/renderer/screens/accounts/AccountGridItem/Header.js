@@ -54,9 +54,10 @@ class HeadText extends PureComponent<{
 class Header extends PureComponent<{
   account: Account | TokenAccount,
   parentAccount: ?Account,
+  amnesia?: boolean,
 }> {
   render() {
-    const { account, parentAccount } = this.props;
+    const { account, parentAccount, amnesia } = this.props;
     const currency = getAccountCurrency(account);
     const unit = getAccountUnit(account);
     const name = getAccountName(account);
@@ -88,7 +89,7 @@ class Header extends PureComponent<{
             parentId={account.type !== "Account" ? account.parentId : undefined}
           />
         </Box>
-        <Bar size={1} color="palette.divider" />
+        <Bar size={1} color={amnesia ? "black" : "palette.divider"} />
         <Box justifyContent="center">
           <FormattedVal
             alwaysShowSign={false}

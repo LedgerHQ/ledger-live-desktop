@@ -9,6 +9,7 @@ import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import type { Account, TokenAccount, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 import Box from "~/renderer/components/Box";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
@@ -32,7 +33,7 @@ import perFamilyTokenList from "~/renderer/generated/TokenList";
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 4px;
-  border: 1px solid transparent;
+  border: 1px solid ${p => (p.cookie ? p.theme.colors.wallet : "transparent")};
   box-shadow: 0 4px 8px 0 #00000007;
   color: #abadb6;
   cursor: pointer;
@@ -194,6 +195,7 @@ class AccountRowItem extends PureComponent<Props, State> {
       disableRounding,
       search,
       hideEmptyTokens,
+      device,
     } = this.props;
     const { expanded } = this.state;
 
@@ -250,7 +252,12 @@ class AccountRowItem extends PureComponent<Props, State> {
         hidden={hidden}
       >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
-        <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
+        <Row
+          cookie={device?.cookie === account.cookie}
+          expanded={expanded}
+          tokens={showTokensIndicator}
+          key={mainAccount.id}
+        >
           <AccountContextMenu account={account}>
             <RowContent
               disabled={disabled}
@@ -320,6 +327,7 @@ class AccountRowItem extends PureComponent<Props, State> {
 }
 const mapStateToProps = createStructuredSelector({
   hideEmptyTokenAccounts: hideEmptyTokenAccountsSelector,
+  device: getCurrentDevice,
 });
 
 const ConnectedAccountRowItem: React$ComponentType<{}> = connect(mapStateToProps)(AccountRowItem);

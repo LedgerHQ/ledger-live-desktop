@@ -108,6 +108,7 @@ export type SettingsState = {
   swapProviders?: AvailableProvider[],
   showClearCacheBanner: boolean,
   fullNodeEnabled: boolean,
+  amnesiaCookies: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -153,6 +154,7 @@ const INITIAL_STATE: SettingsState = {
   swapProviders: [],
   showClearCacheBanner: false,
   fullNodeEnabled: false,
+  amnesiaCookies: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -362,6 +364,7 @@ export const confirmationsNbForCurrencySelector = (
   return defs.confirmationsNb ? defs.confirmationsNb.def : 0;
 };
 
+export const amnesiaCookiesSelector = (state: State) => state.settings.amnesiaCookies;
 export const preferredDeviceModelSelector = (state: State) => state.settings.preferredDeviceModel;
 export const sidebarCollapsedSelector = (state: State) => state.settings.sidebarCollapsed;
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode;

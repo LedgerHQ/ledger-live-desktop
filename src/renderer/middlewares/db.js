@@ -5,7 +5,11 @@
 import { setKey } from "~/renderer/storage";
 
 import { accountsSelector } from "./../reducers/accounts";
-import { settingsExportSelector, areSettingsLoaded } from "./../reducers/settings";
+import {
+  settingsExportSelector,
+  areSettingsLoaded,
+  amnesiaCookiesSelector,
+} from "./../reducers/settings";
 
 let DB_MIDDLEWARE_ENABLED = true;
 
@@ -20,7 +24,17 @@ export default (store: any) => (next: any) => (action: any) => {
     const [, type] = action.type.split(":");
     store.dispatch({ type, payload: action.payload });
     const state = store.getState();
-    setKey("app", "accounts", accountsSelector(state));
+    const rawAccounts = accountsSelector(state);
+    const knownAmnesiaCookies = amnesiaCookiesSelector(state);
+    /**
+     * HACKATHON-NOTES
+     * Drop all the accounts belonging to amnesic cookies.
+     */
+    const accounts = rawAccounts.filter(a => {
+      return !knownAmnesiaCookies.includes(a.cookie);
+    });
+    setKey("app", "accounts", accounts);
+
     // ^ TODO ultimately we'll do same for accounts to drop DB: pattern
   } else {
     const oldState = store.getState();
