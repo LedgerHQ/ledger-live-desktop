@@ -144,6 +144,7 @@ const PlatformCatalog = () => {
             <IconExternalLink size={14} />
           </>
         }
+        ctaOutline
       >
         <DeveloperText>{t("platform.catalog.developerCTA.description")}</DeveloperText>
       </DeveloperCTA>

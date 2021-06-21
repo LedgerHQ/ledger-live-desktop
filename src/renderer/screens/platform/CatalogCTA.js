@@ -49,7 +49,8 @@ const FooterContent: ThemedComponent<{}> = styled(Box)`
 `;
 
 const CTA = styled(Button).attrs(p => ({
-  primary: true,
+  primary: !p.outline,
+  outlineGrey: p.outline,
 }))`
   justify-content: center;
   min-height: 40px;
@@ -71,6 +72,7 @@ type Props = {
   title: React$Node,
   horizontal?: boolean,
   ctaLabel?: React$Node,
+  ctaOutline?: boolean,
   onClick: Function,
   Icon: React$ComponentType<{ size: number }>,
 } & Box.propTypes;
@@ -80,6 +82,7 @@ export default function CatalogCTA({
   title,
   Icon,
   ctaLabel,
+  ctaOutline,
   onClick,
   ...rest
 }: Props) {
@@ -94,7 +97,9 @@ export default function CatalogCTA({
       </Content>
       {!!ctaLabel && (
         <FooterContent>
-          <CTA onClick={onClick}>{ctaLabel}</CTA>
+          <CTA outline={ctaOutline} onClick={onClick}>
+            {ctaLabel}
+          </CTA>
         </FooterContent>
       )}
     </Container>
