@@ -48,7 +48,7 @@ export type Theme = {
   },
 };
 
-const enrichPalette = (rawPalette: RawPalette): Theme => {
+export const enrichPalette = (rawPalette: RawPalette): Theme => {
   return {
     ...rawPalette,
     text: shades.reduce((acc, value) => {
