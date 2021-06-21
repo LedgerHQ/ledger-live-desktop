@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, {useCallback} from "react";
 import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 // icons
@@ -17,6 +17,9 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
 import { urls } from "~/config/urls";
+//import DropboxFrame from ".DropboxFrame";
+
+
 
 const ItemContainer = styled.a`
   flex: 1;
@@ -45,12 +48,10 @@ const IconContainer = styled.div`
   align-items: center;
 `;
 
-/* Need to change this function */
 const Item = ({
   Icon,
   title,
   desc,
-  url,
 }: {
   Icon: any,
   title: string,
@@ -58,7 +59,7 @@ const Item = ({
   url: string,
 }) => {
   return (
-    <ItemContainer onClick={() => openURL(url)}>
+    <ItemContainer>
       <IconContainer>
         <Icon size={24} />
       </IconContainer>
@@ -88,18 +89,27 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
           <Text ff="Inter|SemiBold" fontSize={22} mb={20} color={"palette.text.shade100"}>
             LIVE-IN-THE-CLOUD
           </Text>
-          <Item
-            title={t("Back up your Live")}
-            desc={t("Save your data locally")}
-            url={urls.helpModal.helpCenter}
-            Icon={IconHelp}
-          />
-          <Item
-            title={t("Restore your Live")}
-            desc={t("Import your data live locally")}
-            url={urls.helpModal.helpCenter}
-            Icon={IconHelp}
-          />
+          <ItemContainer>
+            <Item
+              title={t("Back up your Live")}
+              desc={t("Save your data locally")}
+              Icon={IconHelp}
+            />
+          </ItemContainer>
+          <ItemContainer>
+            <Item
+              title={t("Restore your Live")}
+              desc={t("Import your data live locally")}
+              Icon={IconHelp}
+            />
+          </ItemContainer>
+          <ItemContainer>
+            <Item
+              title={t("Backup with Dropbox")}
+              desc={t("Connect Live with your Dropbox account")}
+              Icon={IconHelp}
+            />
+          </ItemContainer>
         </Box>
       </>
     </SideDrawer>
