@@ -25,8 +25,8 @@
         "debug": "debug"
       },
       "banner": {
-        "title": "Introducing Browse!",
-        "description": "You can now use other providers in Ledger Live, starting with ParaSwap and Wyre. Vote for the service you want to see next!"
+        "title": "Explore our crypto services catalogue",
+        "description": "Unlock a new world of crypto possibilities. One secure access to all our smart services – DeFi apps, NFTs and more to come."
       },
       "pollCTA": {
         "title": "Poll",
@@ -36,7 +36,7 @@
       "developerCTA": {
         "title": "For Developers",
         "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to dev portal"
+        "button": "Go to portal"
       }
     }
   },
