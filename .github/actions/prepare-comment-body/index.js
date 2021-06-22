@@ -13,6 +13,7 @@ const main = async () => {
   }
   const testoutput = core.getInput("testoutput");
   const lintoutput = core.getInput("lintoutput");
+  const jestoutput = core.getInput("jestoutput");
   const fullrepo = core.getInput("fullrepo").split("/");
   const imgArr = JSON.parse(images);
 
@@ -30,6 +31,7 @@ const main = async () => {
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
   const testsFailed = (testoutput || "").indexOf("FAIL") >= 0;
+  const jestFailed = (jestoutput || "").indexOf("FAIL") >= 0;
   const imgDiffFailed = !!imgArr.length;
 
   str = `
@@ -43,6 +45,17 @@ ${lintoutput}
 
 </p>
 </details>
+
+<details>
+<summary><b>Tests outputs ${jestFailed ? "❌" : " ✅"}</b></summary>
+<p>
+
+${jestoutput}
+
+</p>
+</details>
+
+<details>
 
 <details>
 <summary><b>Tests outputs ${testsFailed ? "❌" : " ✅"}</b></summary>
@@ -88,6 +101,7 @@ ${diffStr}
 
   const strSlack = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
+Jest outputs ${jestFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
@@ -106,6 +120,7 @@ https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
 
   const strSlackAuthor = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
+Jest outputs ${jestFailed ? "❌" : " ✅"}
 Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
 

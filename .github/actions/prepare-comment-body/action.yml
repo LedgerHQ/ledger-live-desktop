@@ -1,4 +1,4 @@
-name:  prepare-comment-body
+name: prepare-comment-body
 description: gets a list of images and return a formatted markdown body for comment
 author: valpinkman
 outputs:
@@ -42,6 +42,9 @@ inputs:
     required: true
   lintoutput:
     description: lintoutput
+    required: true
+  jestoutput:
+    description: jestoutput
     required: true
 runs:
   using: node12

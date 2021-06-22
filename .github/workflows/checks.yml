@@ -59,7 +59,13 @@ jobs:
           INSTRUMENT_BUILD: true
         run: yarn build
       - name: Tests
-        run: yarn test
+        run: yarn test 2>jest.txt
+      - name: Read jest output
+        id: jest
+        if: always() && job.status != 'cancelled'
+        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
+        with:
+          path: ./jest.txt
       - name: start electron webdriver
         if: always() && job.status != 'cancelled'
         env:
@@ -121,6 +127,7 @@ jobs:
           runId: ${{ github.run_id }}
           testoutput: ${{ steps.spectron.outputs.content }}
           lintoutput: ${{ steps.lint.outputs.content }}
+          jestoutput: ${{ steps.jest.outputs.content }}
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
           imgChanged: ${{steps.imgChanged.outputs.content}}
