@@ -7,6 +7,7 @@ import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
+import Nfts from "~/renderer/screens/nfts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import ExchangeCoinify from "~/renderer/screens/exchange/Coinify";
@@ -109,6 +110,7 @@ export default function Default() {
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
+                        <Route path="/nfts" render={props => <Nfts {...props} />} />
                         <Redirect from="/manager/reload" to="manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route path="/lend" render={props => <Lend {...props} />} />

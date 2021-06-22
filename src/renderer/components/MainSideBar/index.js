@@ -218,6 +218,10 @@ const MainSideBar = () => {
     push("/accounts");
   }, [push]);
 
+  const handleClickNfts = useCallback(() => {
+    push("/nfts");
+  }, [push]);
+
   const handleClickExchange = useCallback(() => {
     push("/exchange");
   }, [push]);
@@ -283,6 +287,16 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
+                disabled={noAccounts}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"nfts"}
+                label={t("sidebar.nfts")}
+                icon={IconWallet}
+                iconActiveColor="wallet"
+                isActive={location.pathname === "/nfts"}
+                onClick={handleClickNfts}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />

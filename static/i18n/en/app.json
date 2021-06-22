@@ -150,6 +150,7 @@
     "stars": "Starred accounts",
     "accounts": "Accounts",
     "manager": "Manager",
+    "nfts": "NFTs",
     "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend"
@@ -763,6 +764,9 @@
       "ctaBuy": "Buy {{ asset }}",
       "ctaReceive": "Receive {{ asset }}"
     }
+  },
+  "nfts": {
+    "title": "NFTs"
   },
   "accounts": {
     "title": "Accounts",
