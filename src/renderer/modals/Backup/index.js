@@ -16,6 +16,8 @@ import fs from "fs";
 import moment from "moment";
 import { hardReset, reload } from "~/renderer/reset";
 import rimraf from "rimraf";
+import { TopBannerContainer } from "~/renderer/screens/dashboard";
+import Alert from "~/renderer/components/Alert";
 //import DropboxFrame from ".DropboxFrame";
 
 const userDataPath = resolveUserDataDirectory();
@@ -102,8 +104,14 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
 
         <Box py={60} px={40}>
           <Text ff="Inter|SemiBold" fontSize={22} mb={20} color={"palette.text.shade100"}>
-            LIVE-IN-THE-CLOUD
+            Live in the Cloud
           </Text>
+          <Alert type="warning" style={{ flexGrow: 0 }}>
+            <Text>
+              For security reason, make sure that you have passwordlock enabled for you app before
+              generating the backup file
+            </Text>
+          </Alert>
           <ItemContainer>
             <Item
               onClick={async () => {
@@ -141,13 +149,13 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
                 });
                 await hardReset();
                 await rimraf(userDataPath, function() {
-                  console.log("done");
+                  console.log("user data deleted");
                 });
                 await fs.mkdir(userDataPath);
                 await fs.copyFile(backupFile.filePaths[0], `${userDataPath}/app.json`, err => {
                   console.log("Error: ", err);
                 });
-                reload();
+                await reload();
               }}
               title={t("Restore your Live")}
               desc={t("Import your data live locally")}
