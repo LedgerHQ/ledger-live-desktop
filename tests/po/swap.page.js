@@ -2,9 +2,9 @@ import Page from "./page";
 
 export default class SwapPage extends Page {
   async goToChangelly() {
-    const changelly = await $("#swap-providers-item-changelly");
+    const changelly = await this.$("#swap-providers-item-changelly");
     await changelly.click();
-    const continueButton = await $("#swap-providers-continue");
+    const continueButton = await this.$("#swap-providers-continue");
     await continueButton.click();
   }
 
