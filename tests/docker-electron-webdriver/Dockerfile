@@ -1,4 +1,4 @@
-FROM node:12-buster
+FROM node:14-buster
 
 ENV CHROMEDRIVER_PORT 9515
 ENV CHROMEDRIVER_WHITELISTED_IPS ""
@@ -9,6 +9,8 @@ ENV DISPLAY :99.0
 ENV TZ America/New_York
 
 USER root
+
+RUN echo 'deb http://deb.debian.org/debian testing main' >> /etc/apt/sources.list
 
 RUN apt-get update -qqy
 
@@ -51,6 +53,7 @@ RUN apt-get -qqy install \
   libx11-dev \
   libavahi-compat-libdnssd-dev \
   g++ \
+  gcc \
   gcc-multilib \
   g++-multilib \
   libgtk-3-dev \
