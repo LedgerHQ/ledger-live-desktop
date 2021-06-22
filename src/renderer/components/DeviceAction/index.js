@@ -13,7 +13,7 @@ import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { ManagerNotEnoughSpaceError } from "@ledgerhq/errors";
+import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
 import {
   renderAllowManager,
   renderAllowOpeningApp,
@@ -194,11 +194,22 @@ const DeviceAction = <R, H, P>({
   }
 
   if (!isLoading && error) {
-    if (error instanceof ManagerNotEnoughSpaceError || error instanceof OutdatedApp) {
-      return renderError({ error, withOpenManager: true });
+    if (
+      error instanceof ManagerNotEnoughSpaceError ||
+      error instanceof OutdatedApp ||
+      error instanceof UpdateYourApp
+    ) {
+      return renderError({
+        error,
+        managerAppName: error.managerAppName,
+      });
     }
 
-    return renderError({ error, onRetry, withExportLogs: true });
+    return renderError({
+      error,
+      onRetry,
+      withExportLogs: true,
+    });
   }
 
   if ((!isLoading && !device) || unresponsive) {

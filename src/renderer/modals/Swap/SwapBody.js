@@ -11,7 +11,11 @@ import Breadcrumb from "~/renderer/components/Stepper/Breadcrumb";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useDispatch } from "react-redux";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import {
+  addPendingOperation,
+  getMainAccount,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
@@ -37,7 +41,8 @@ const SwapBody = ({
   ratesExpiration: Date,
 }) => {
   const { exchange } = swap;
-  const { fromAccount, fromParentAccount } = exchange;
+  const { fromAccount, fromParentAccount, toAccount } = exchange;
+  const targetCurrency = getAccountCurrency(toAccount);
   const [checkedDisclaimer, setCheckedDisclaimer] = useState(false);
   const [locked, setLocked] = useState(false);
   const [error, setError] = useState(null);
@@ -120,6 +125,7 @@ const SwapBody = ({
           ) : result && result.swapId ? (
             <StepFinished
               setLocked={setLocked}
+              targetCurrency={targetCurrency.name}
               swapId={result.swapId}
               provider={swap.exchangeRate.provider}
             />

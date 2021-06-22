@@ -11,7 +11,7 @@ import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 import moment from "moment";
 
-const languageLabels = {
+export const languageLabels = {
   de: "Deutsch",
   el: "Ελληνικά",
   en: "English",
