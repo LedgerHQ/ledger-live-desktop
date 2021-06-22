@@ -48,7 +48,7 @@ export function onUnusualInternalProcessError() {
   resetLibcore();
 }
 
-function reload() {
+export function reload() {
   require("electron")
     .remote.getCurrentWindow()
     .webContents.reload();

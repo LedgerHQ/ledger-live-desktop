@@ -4,9 +4,6 @@ import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 // icons
 import IconHelp from "~/renderer/icons/Help";
-import IconBook from "~/renderer/icons/Book";
-import IconNano from "~/renderer/icons/NanoAltSmall";
-import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconChevronRight from "~/renderer/icons/ChevronRight";
 import Text from "~/renderer/components/Text";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -15,13 +12,16 @@ import Box from "~/renderer/components/Box";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory.js";
 import { ipcRenderer, remote } from "electron";
 import path from "path";
+import fs from "fs";
 import moment from "moment";
-import { openURL } from "~/renderer/linking";
+import { hardReset, reload } from "~/renderer/reset";
+import rimraf from "rimraf";
+//import DropboxFrame from ".DropboxFrame";
 
 const userDataPath = resolveUserDataDirectory();
 const userDataFile = path.resolve(userDataPath, "app.json");
 
-const exportBackup = async (
+/* const exportBackup = async (
   fromPath: { canceled: Boolean, filePath: string },
   toPath: { canceled: Boolean, filePath: string },
   callback?: () => void,
@@ -33,6 +33,7 @@ const exportBackup = async (
     }
   } catch (error) {}
 };
+*/
 
 const ItemContainer = styled.a`
   flex: 1;
@@ -92,37 +93,6 @@ const Item = ({
   );
 };
 
-const Item2 = ({
-  Icon,
-  title,
-  desc,
-  url,
-}: {
-  Icon: any,
-  title: string,
-  desc: string,
-  url: string,
-}) => {
-  return (
-    <ItemContainer onClick={() => openURL(url)}>
-      <IconContainer>
-        <Icon size={24} />
-      </IconContainer>
-      <Box ml={12} flex={1}>
-        <Text ff="Inter|SemiBold" fontSize={4} color={"palette.text.shade100"}>
-          {title}
-        </Text>
-        <Text ff="Inter|Regular" fontSize={3} color={"palette.text.shade60"}>
-          {desc}
-        </Text>
-      </Box>
-      <Box>
-        <IconChevronRight size={12} />
-      </Box>
-    </ItemContainer>
-  );
-};
-
 const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: () => void }) => {
   const { t } = useTranslation();
   return (
@@ -137,39 +107,58 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
           <ItemContainer>
             <Item
               onClick={async () => {
-                console.log(userDataFile);
                 const toPath = await remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
                   title: "Exported user data",
                   defaultPath: `backup-Ledger-Live-${moment().format("YYYY.MM.DD")}.json`,
                   filters: [
                     {
-                      name: "All Files",
+                      name: "json Files",
                       extensions: ["json"],
                     },
                   ],
                 });
                 if (toPath) {
-                ipcRenderer.invoke("export-backup", userDataFile, toPath);
+                  ipcRenderer.invoke("export-backup", userDataFile, toPath);
                 }
               }}
               title={t("Back up your Live")}
               desc={t("Save your data locally")}
-              Icon={IconBook}
+              Icon={IconHelp}
             />
           </ItemContainer>
           <ItemContainer>
             <Item
+              onClick={async () => {
+                const backupFile = await remote.dialog.showOpenDialog(remote.getCurrentWindow(), {
+                  title: "Backup file to import",
+                  properties: ["openFile"],
+                  filters: [
+                    {
+                      name: "json Files",
+                      extensions: ["json"],
+                    },
+                  ],
+                });
+                await hardReset();
+                await rimraf(userDataPath, function() {
+                  console.log("done");
+                });
+                await fs.mkdir(userDataPath);
+                await fs.copyFile(backupFile.filePaths[0], `${userDataPath}/app.json`, err => {
+                  console.log("Error: ", err);
+                });
+                reload();
+              }}
               title={t("Restore your Live")}
               desc={t("Import your data live locally")}
-              Icon={IconNano}
+              Icon={IconHelp}
             />
           </ItemContainer>
           <ItemContainer>
-            <Item2
+            <Item
               title={t("Backup with Dropbox")}
               desc={t("Connect Live with your Dropbox account")}
-              Icon={IconDownloadCloud}
-              url={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+              Icon={IconHelp}
             />
           </ItemContainer>
         </Box>
