@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Trans } from "react-i18next";
+import { useDispatch } from "react-redux";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
 import StepProgress from "~/renderer/components/StepProgress";
@@ -19,6 +20,7 @@ import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
+import { closeModal } from "~/renderer/actions/modals";
 
 const connectAppExec = command("connectApp");
 
@@ -49,6 +51,8 @@ export default function StepConnectDevice({
   onOperationBroadcasted,
   onTransactionError,
   setSigned,
+  onConfirmationHandler,
+  onFailHandler,
 }: {
   transitionTo: string => void,
   account: ?AccountLike,
@@ -58,7 +62,10 @@ export default function StepConnectDevice({
   onTransactionError: Error => void,
   onOperationBroadcasted: Operation => void,
   setSigned: boolean => void,
+  onConfirmationHandler?: Function,
+  onFailHandler?: Function,
 }) {
+  const dispatch = useDispatch();
   const broadcast = useBroadcast({ account, parentAccount });
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
@@ -80,17 +87,32 @@ export default function StepConnectDevice({
           setSigned(true);
           broadcast(signedOperation).then(
             operation => {
-              onOperationBroadcasted(operation);
-              transitionTo("confirmation");
+              if (!onConfirmationHandler) {
+                onOperationBroadcasted(operation);
+                transitionTo("confirmation");
+              } else {
+                dispatch(closeModal("MODAL_SEND"));
+                onConfirmationHandler(operation);
+              }
             },
             error => {
-              onTransactionError(error);
-              transitionTo("confirmation");
+              if (!onFailHandler) {
+                onTransactionError(error);
+                transitionTo("confirmation");
+              } else {
+                dispatch(closeModal("MODAL_SEND"));
+                onFailHandler(error);
+              }
             },
           );
         } else if (transactionSignError) {
-          onTransactionError(transactionSignError);
-          transitionTo("confirmation");
+          if (!onFailHandler) {
+            onTransactionError(transactionSignError);
+            transitionTo("confirmation");
+          } else {
+            dispatch(closeModal("MODAL_SEND"));
+            onFailHandler(transactionSignError);
+          }
         }
       }}
     />

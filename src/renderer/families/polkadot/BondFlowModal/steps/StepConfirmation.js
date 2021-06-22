@@ -20,6 +20,8 @@ import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
 import ToolTip from "~/renderer/components/Tooltip";
 import Text from "~/renderer/components/Text";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { StepProps } from "../types";
 
@@ -117,12 +119,12 @@ export function StepConfirmationFooter({
   const goToOperationDetails = useCallback(() => {
     onClose();
     if (account && optimisticOperation) {
-      openModal("MODAL_OPERATION_DETAILS", {
+      setDrawer(OperationDetails, {
         operationId: optimisticOperation.id,
         accountId: account.id,
       });
     }
-  }, [account, optimisticOperation, onClose, openModal]);
+  }, [account, optimisticOperation, onClose]);
 
   if (error) {
     return <RetryButton ml={2} primary onClick={onRetry} />;

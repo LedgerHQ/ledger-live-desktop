@@ -17,7 +17,7 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: install dependencies
         run: yarn --ignore-scripts --frozen-lockfile
       - name: set beta name
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: get yarn cache
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - uses: actions/setup-python@v1
         with:
           python-version: "2.7.x"

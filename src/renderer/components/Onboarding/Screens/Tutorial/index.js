@@ -19,6 +19,7 @@ import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutoria
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
 import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
+import Box from "~/renderer/components/Box";
 import { PinHelp } from "~/renderer/components/Onboarding/Help/PinHelp";
 import { HideRecoverySeed } from "~/renderer/components/Onboarding/Help/HideRecoverySeed";
 import { RecoverySeed } from "~/renderer/components/Onboarding/Help/RecoverySeed";
@@ -235,7 +236,9 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         }
         direction="left"
       >
-        <PinHelp />
+        <Box px={40}>
+          <PinHelp />
+        </Box>
       </SideDrawer>
       <SideDrawer
         isOpen={!!state.context.help.recoveryPhrase}
@@ -244,7 +247,9 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         }
         direction="left"
       >
-        <RecoverySeed />
+        <Box px={40}>
+          <RecoverySeed />
+        </Box>
       </SideDrawer>
       <SideDrawer
         isOpen={!!state.context.help.hideRecoveryPhrase}
@@ -253,7 +258,9 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         }
         direction="left"
       >
-        <HideRecoverySeed />
+        <Box px={40}>
+          <HideRecoverySeed />
+        </Box>
       </SideDrawer>
       <SideDrawer
         isOpen={!!state.context.help.recoveryPhraseWarning}
@@ -262,7 +269,9 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         }
         direction="left"
       >
-        <RecoveryWarning />
+        <Box px={40}>
+          <RecoveryWarning />
+        </Box>
       </SideDrawer>
       <LeftContainer>
         <Stepper steps={state.context.steps} />

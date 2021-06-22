@@ -11,7 +11,7 @@ import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, Operation, Transaction } from "@ledgerhq/live-common/lib/types";
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
@@ -39,6 +39,10 @@ type OwnProps = {|
     startWithWarning?: boolean,
     recipient?: string,
     amount?: BigNumber,
+    disableBacks?: string[],
+    transaction?: Transaction,
+    onConfirmationHandler: Function,
+    onFailHandler: Function,
   },
 |};
 
@@ -56,7 +60,7 @@ type Props = {|
   ...StateProps,
 |};
 
-const createSteps = (): St[] => [
+const createSteps = (disableBacks = []): St[] => [
   {
     id: "warning",
     excludeFromBreadcrumb: true,
@@ -74,20 +78,24 @@ const createSteps = (): St[] => [
     label: <Trans i18nKey="send.steps.amount.title" />,
     component: StepAmount,
     footer: StepAmountFooter,
-    onBack: ({ transitionTo }) => transitionTo("recipient"),
+    onBack: !disableBacks.includes("amount")
+      ? ({ transitionTo }) => transitionTo("recipient")
+      : null,
   },
   {
     id: "summary",
     label: <Trans i18nKey="send.steps.summary.title" />,
     component: StepSummary,
     footer: StepSummaryFooter,
-    onBack: ({ transitionTo }) => transitionTo("amount"),
+    onBack: !disableBacks.includes("transaction")
+      ? ({ transitionTo }) => transitionTo("amount")
+      : null,
   },
   {
     id: "device",
     label: <Trans i18nKey="send.steps.device.title" />,
     component: StepConnectDevice,
-    onBack: ({ transitionTo }) => transitionTo("summary"),
+    onBack: !disableBacks.includes("device") ? ({ transitionTo }) => transitionTo("summary") : null,
   },
   {
     id: "confirmation",
@@ -95,10 +103,12 @@ const createSteps = (): St[] => [
     excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-    onBack: ({ transitionTo, onRetry }) => {
-      onRetry();
-      transitionTo("recipient");
-    },
+    onBack: !disableBacks.includes("confirmation")
+      ? ({ transitionTo, onRetry }) => {
+          onRetry();
+          transitionTo("recipient");
+        }
+      : null,
   },
 ];
 
@@ -126,7 +136,7 @@ const Body = ({
   updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account;
-  const [steps] = useState(createSteps);
+  const [steps] = useState(() => createSteps(params.disableBacks));
 
   // initial values might coming from deeplink
   const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
@@ -153,7 +163,7 @@ const Body = ({
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount;
     const account = (params && params.account) || accounts[0];
-    return { account, parentAccount };
+    return { account, parentAccount, transaction: params.transaction };
   });
 
   // make sure step id is in sync
@@ -253,6 +263,8 @@ const Body = ({
     maybeRecipient,
     onResetMaybeRecipient,
     updateTransaction,
+    onConfirmationHandler: params.onConfirmationHandler,
+    onFailHandler: params.onFailHandler,
   };
 
   if (!status) return null;
