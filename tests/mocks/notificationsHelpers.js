@@ -136,4 +136,12 @@ const api: AnnouncementsApi = {
   fetchAnnouncements,
 };
 
+window.announcementsApi = {
+  ...api,
+  resetAnnouncements,
+  fetchAnnouncements,
+  addAnnouncementFromPool,
+  addMockAnnouncement,
+};
+
 export default api;

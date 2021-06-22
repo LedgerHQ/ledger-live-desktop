@@ -1,9 +1,10 @@
-import {
-  addAnnouncementFromPool,
-  addMockAnnouncement,
-  resetAnnouncements,
-} from "../mocks/notificationsHelpers";
-import { resetIncidents, toggleMockIncident } from "../mocks/serviceStatusHelpers";
+// import {
+//   addAnnouncementFromPool,
+//   addMockAnnouncement,
+//   resetAnnouncements,
+// } from "../mocks/notificationsHelpers";
+// import { resetIncidents, toggleMockIncident } from "../mocks/serviceStatusHelpers";
+import { announcementsApiMock, serviceStatusApiMock } from "../common";
 
 export default class Page {
   constructor(app) {
@@ -135,26 +136,26 @@ export default class Page {
 
   // Notifications
   async addAnnouncement() {
-    addAnnouncementFromPool();
+    announcementsApiMock("addAnnouncementFromPool");
     await this.synchronize();
   }
 
   async generateAnnouncement(params) {
-    addMockAnnouncement(params);
+    announcementsApiMock("addMockAnnouncement", params);
     await this.synchronize();
   }
 
   resetAnnouncements() {
-    resetAnnouncements();
+    announcementsApiMock("resetAnnouncements");
   }
 
   // ServiceStatus
   async toggleIncident(bool = true) {
-    toggleMockIncident(bool);
+    serviceStatusApiMock("toggleMockIncident", bool);
     await this.synchronize();
   }
 
   resetIncidents() {
-    resetIncidents();
+    serviceStatusApiMock("resetIncidents");
   }
 }

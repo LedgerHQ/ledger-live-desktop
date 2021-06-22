@@ -603,4 +603,10 @@ const api: ServiceStatusApi = {
   fetchStatusSummary,
 };
 
+window.serviceStatusApi = {
+  ...api,
+  toggleMockIncident,
+  resetIncidents,
+};
+
 export default api;
