@@ -54,6 +54,25 @@ ipcMain.handle(
   },
 );
 
+ipcMain.handle(
+  "export-backup",
+  async (
+    event,
+    fromPath: { canceled: boolean, filePath: string },
+    toPath: { canceled: boolean, filePath: string }
+  ): Promise<boolean> => {
+    try {
+      const appJson = await fsReadFile(fromPath.filePath);
+      if (!appJson) {
+        await fsWriteFile(toPath.filePath, appJson);
+        return true;
+      }
+    } catch (error) {}
+
+    return false;
+  },
+);
+
 const lssFileName = "lss.json";
 
 ipcMain.handle("generate-lss-config", async (event, data: string): Promise<boolean> => {

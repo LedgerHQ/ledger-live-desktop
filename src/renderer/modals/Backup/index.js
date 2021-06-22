@@ -4,22 +4,32 @@ import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 // icons
 import IconHelp from "~/renderer/icons/Help";
-import IconGithub from "~/renderer/icons/Github";
-import IconTwitter from "~/renderer/icons/Twitter";
-import IconActivity from "~/renderer/icons/Activity";
-import IconFacebook from "~/renderer/icons/Facebook";
-import IconBook from "~/renderer/icons/Book";
-import IconNano from "~/renderer/icons/NanoAltSmall";
 import IconChevronRight from "~/renderer/icons/ChevronRight";
-import { openURL } from "~/renderer/linking";
 import Text from "~/renderer/components/Text";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import Box from "~/renderer/components/Box";
-import { urls } from "~/config/urls";
+import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory.js";
+import { ipcRenderer, remote } from "electron";
+import path from "path";
+import moment from "moment";
 //import DropboxFrame from ".DropboxFrame";
 
+const userDataPath = resolveUserDataDirectory();
+const userDataFile = path.resolve(userDataPath, "app.json");
 
+const exportBackup = async (
+  fromPath: { canceled: Boolean, filePath: string },
+  toPath: { canceled: Boolean, filePath: string },
+  callback?: () => void,
+) => {
+  try {
+    const res = await ipcRenderer.invoke("export-backup", fromPath, toPath);
+    if (res && callback) {
+      callback();
+    }
+  } catch (error) {}
+};
 
 const ItemContainer = styled.a`
   flex: 1;
@@ -52,14 +62,15 @@ const Item = ({
   Icon,
   title,
   desc,
+  onClick,
 }: {
   Icon: any,
   title: string,
   desc: string,
-  url: string,
+  onClick: () => void,
 }) => {
   return (
-    <ItemContainer>
+    <ItemContainer onClick={onClick}>
       <IconContainer>
         <Icon size={24} />
       </IconContainer>
@@ -91,6 +102,19 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
           </Text>
           <ItemContainer>
             <Item
+              onClick={async () => {
+                console.log(userDataFile);
+                remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
+                  title: "Exported user data",
+                  defaultPath: `backup-Ledger-Live-${moment().format("YYYY.MM.DD")}.json`,
+                  filters: [
+                    {
+                      name: "All Files",
+                      extensions: ["json"],
+                    },
+                  ],
+                });
+              }}
               title={t("Back up your Live")}
               desc={t("Save your data locally")}
               Icon={IconHelp}
