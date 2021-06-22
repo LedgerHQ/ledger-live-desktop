@@ -766,7 +766,11 @@
     }
   },
   "nfts": {
-    "title": "NFTs"
+    "title": "NFTs",
+    "order": {
+      "newest": "Newest",
+      "oldest": "Oldest"
+    }
   },
   "accounts": {
     "title": "Accounts",
