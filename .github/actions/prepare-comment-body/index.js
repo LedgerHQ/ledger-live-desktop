@@ -19,7 +19,7 @@ const main = async () => {
 
   let str = "";
   if (imgArr.length) {
-    imgArr.map(image => {
+    imgArr.forEach(image => {
       str += image.name + "\n\n";
       str += "![](" + image.link + ")\n\n";
     });
