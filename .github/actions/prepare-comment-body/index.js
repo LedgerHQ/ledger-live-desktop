@@ -56,8 +56,6 @@ ${jestoutput}
 </details>
 
 <details>
-
-<details>
 <summary><b>Tests outputs ${testsFailed ? "❌" : " ✅"}</b></summary>
 <p>
 
