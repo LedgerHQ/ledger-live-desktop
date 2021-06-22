@@ -84,7 +84,7 @@ const PlatformCatalog = () => {
     return branches;
   }, []);
 
-  const { apps } = useCatalog(appBranches);
+  const { apps } = useCatalog("desktop", appBranches);
 
   const { t } = useTranslation();
 

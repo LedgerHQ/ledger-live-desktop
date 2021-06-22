@@ -2,12 +2,15 @@
 
 import React, { useCallback } from "react";
 import styled, { css } from "styled-components";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { translateContent } from "@ledgerhq/live-common/lib/platform/logic";
 
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { languageSelector } from "~/renderer/reducers/settings";
 
 import Box, { Tabbable } from "~/renderer/components/Box";
 import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
@@ -124,6 +127,7 @@ type Props = {
 
 const AppCard = ({ manifest, onClick, ...rest }: Props) => {
   const { t } = useTranslation();
+  const language = useSelector(languageSelector);
   const isDisabled = manifest.branch === "soon";
 
   const handleClick = useCallback(() => {
@@ -147,7 +151,7 @@ const AppCard = ({ manifest, onClick, ...rest }: Props) => {
           <AppName>{manifest.name}</AppName>
         </TitleContainer>
       </HeaderContainer>
-      <Content>{manifest.content.description.en}</Content>
+      <Content>{translateContent(manifest.content.shortDescription, language)}</Content>
     </Container>
   );
 };
