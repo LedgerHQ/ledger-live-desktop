@@ -42,6 +42,15 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
 export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    valueOn: "tezos",
+    valueOff: "",
+    title: "Tezos JavaScript implementation",
+    description: "Read only implementation of Tezos with NFT support.",
+    defaultValue: false,
+  },
+  {
+    type: "toggle",
     name: "API_TRONGRID_PROXY",
     title: "use TronGrid.io",
     description: "Use trongrid directly without ledger proxy",

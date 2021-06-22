@@ -2,12 +2,14 @@
 import React, { useState, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import type { NFT, Account } from "@ledgerhq/live-common/lib/types";
+import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import { useSortFilterNFTs } from "@ledgerhq/live-common/lib/nft/react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import Box from "~/renderer/components/Box";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import GridIcon from "~/renderer/icons/Grid";
 import ListIcon from "~/renderer/icons/List";
 import IconSend from "~/renderer/icons/Send";
@@ -16,6 +18,10 @@ import CounterValue from "~/renderer/components/CounterValue";
 import SearchBox from "./SearchBox";
 import CollectionSort from "./CollectionSort";
 import Order from "./Order";
+
+function canSendNFT(nft) {
+  return nft.schema === "ERC721";
+}
 
 const Container = styled.div``;
 const List = styled.div``;
@@ -47,23 +53,31 @@ const GenericBox: ThemedComponent<{}> = styled(Box)`
 function Cell({ nft, account }: { nft: NFT, account: Account }) {
   return (
     <Box grow horizontal p={2} mb={2} bg="palette.background.paper" alignItems="center">
-      <Box width="14%">
+      <Box pl={2} width="14%">
         <a target="_blank" href={nft.permalink} rel="noreferrer">
           <img style={{ width: 72, height: 72, objectFit: "contain" }} src={nft.image} />
         </a>
       </Box>
       <Box width="40%" vertical>
         <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
-          <Ellipsis>{nft.collection?.name || nft.platform?.name || ""}</Ellipsis>
+          <Ellipsis>{nft.creator?.name || ""}</Ellipsis>
         </Text>
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           <Ellipsis>{nft.name}</Ellipsis>
         </Text>
       </Box>
       <Box width="20%" vertical>
-        <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-          <Ellipsis>{nft.creator?.name || ""}</Ellipsis>
+        <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
+          <Ellipsis>{nft.collection?.name || nft.platform?.name || ""}</Ellipsis>
         </Text>
+        <Box horizontal>
+          <CryptoCurrencyIcon currency={account.currency} size={16} />
+          <Box pl={1} flex="0 1 auto">
+            <Ellipsis color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
+              {getAccountName(account)}
+            </Ellipsis>
+          </Box>
+        </Box>
       </Box>
       {nft.lastSale ? (
         <Box>
@@ -82,8 +96,8 @@ function Cell({ nft, account }: { nft: NFT, account: Account }) {
           />
         </Box>
       ) : null}
-      <Box grow alignItems="flex-end">
-        <Button outline>
+      <Box px={2} grow alignItems="flex-end">
+        <Button disabled={!canSendNFT(nft)} outline>
           <Box horizontal flow={1} alignItems="center">
             <IconSend size={14} /> <Box>Send</Box>
           </Box>
@@ -100,6 +114,7 @@ function useCollections(nfts) {
     const seen = {};
     nfts.forEach(({ nft }) => {
       const { collection } = nft;
+      if (!collection) return;
       seen[collection.slug] = (seen[collection.slug] || 0) + 1;
       if (seen[collection.slug] !== 2) return; // when we have at least 2 items, we will add to list
       items.push({
