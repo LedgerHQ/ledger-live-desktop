@@ -268,11 +268,11 @@
         },
         "finished": {
           "title": "В ожидании",
-          "subtitle": "Операция в ожидании",
+          "subtitle": "Swap broadcast successfully ",
           "swap": "ID обмена:",
           "seeDetails": "Подробности",
-          "disclaimer": "Пожалуйста, сохраните ID вашего обмена на случай, если потребуется помощь с <0>{{provider}}</0>.",
-          "description": "Ваша транзакция для обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите конвертированные активы."
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },

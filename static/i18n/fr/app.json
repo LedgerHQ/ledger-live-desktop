@@ -268,11 +268,11 @@
         },
         "finished": {
           "title": "En attente",
-          "subtitle": "Opération en attente",
+          "subtitle": "Swap bien diffusé ",
           "swap": "Identifiant de votre Swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de l'aide de <0>{{provider}}</0> ultérieurement.",
-          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos crypto-actifs échangés."
+          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
     },

@@ -268,11 +268,11 @@
         },
         "finished": {
           "title": "Pendiente",
-          "subtitle": "Operación pendiente",
+          "subtitle": "Swap broadcast successfully ",
           "swap": "Tu ID de Permuta:",
           "seeDetails": "Ver detalles",
-          "disclaimer": "Anota el número de ID de Intercambio en caso de que necesites ayuda de <0>{{provider}}</0> más adelante.",
-          "description": "La operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que se reciban los activos cripto permutados."
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },
