@@ -7,7 +7,7 @@ import logger, { enableDebugLogger } from "../logger";
 import { log } from "@ledgerhq/logs";
 import LoggerTransport from "~/logger/logger-transport-main";
 import LoggerTransportFirmware from "~/logger/logger-transport-firmware";
-import { fsWriteFile, fsReadFile, fsUnlink } from "~/helpers/fs";
+import { fsWriteFile, fsReadFile, fsUnlink, fsCopyFile } from "~/helpers/fs"
 import osName from "~/helpers/osName";
 import updater from "./updater";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
@@ -58,15 +58,14 @@ ipcMain.handle(
   "export-backup",
   async (
     event,
-    fromPath: { canceled: boolean, filePath: string },
+    fromPath: string,
     toPath: { canceled: boolean, filePath: string }
   ): Promise<boolean> => {
     try {
-      const appJson = await fsReadFile(fromPath.filePath);
-      if (!appJson) {
-        await fsWriteFile(toPath.filePath, appJson);
-        return true;
-      }
+      console.log(fromPath);
+      fsCopyFile(fromPath, toPath.filePath, error => {
+        console.error(error);
+      });
     } catch (error) {}
 
     return false;

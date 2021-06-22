@@ -15,3 +15,4 @@ export const fsReaddir = promisify(fs.readdir);
 export const fsWriteFile = promisify(fs.writeFile);
 export const fsMkdir = promisify(fs.mkdir);
 export const fsUnlink = promisify(fs.unlink);
+export const fsCopyFile = promisify(fs.copyFile);

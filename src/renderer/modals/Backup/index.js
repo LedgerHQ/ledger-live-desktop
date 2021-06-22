@@ -138,7 +138,7 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
             <Item
               onClick={async () => {
                 console.log(userDataFile);
-                remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
+                const toPath = await remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
                   title: "Exported user data",
                   defaultPath: `backup-Ledger-Live-${moment().format("YYYY.MM.DD")}.json`,
                   filters: [
@@ -148,6 +148,9 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
                     },
                   ],
                 });
+                if (toPath) {
+                ipcRenderer.invoke("export-backup", userDataFile, toPath);
+                }
               }}
               title={t("Back up your Live")}
               desc={t("Save your data locally")}
