@@ -9,7 +9,7 @@ import * as sslHelper from "./sslHelper";
 
 const base = path.resolve(__dirname, "mocks");
 
-describe("AppUpdater", () => {
+describe.skip("AppUpdater", () => {
   describe("simple cases", () => {
     test("should not throw if correct hash & correct sig", async () => {
       const p = verifyMockFolder("sigok-shasumok", "pubkey-1.pem");

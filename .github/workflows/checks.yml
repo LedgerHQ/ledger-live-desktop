@@ -57,6 +57,8 @@ jobs:
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
+      - name: Tests
+        run: yarn test
       - name: start electron webdriver
         if: always() && job.status != 'cancelled'
         env:
@@ -76,9 +78,9 @@ jobs:
         uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
         with:
           path: ./output.txt
-      - name: run coverage generation	
+      - name: run coverage generation
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
-        run: yarn spectron-coverage	
+        run: yarn spectron-coverage
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
