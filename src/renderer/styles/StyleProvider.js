@@ -11,6 +11,7 @@ import palettes from "./palettes";
 import type { Theme } from "./theme";
 
 import { createPalette } from "./palettes/paletteMixer";
+import { userThemeCurrencySelector } from "../reducers/settings";
 
 type Props = {
   children: React$Node,
@@ -20,8 +21,11 @@ export type ThemedComponent<T> = StyledComponent<T, Theme, *>;
 
 const StyleProvider = ({ children }: Props) => {
   const selectedPalette = useSelector(themeSelector) || "light";
-  const C = "#000000";
-  const c = createPalette(C, selectedPalette);
+  const themeCurrency = useSelector(userThemeCurrencySelector);
+  const personalizedPalette = useMemo(
+    () => (themeCurrency?.color ? createPalette(themeCurrency.color, selectedPalette) : {}),
+    [selectedPalette, themeCurrency],
+  );
 
   const theme: Theme = useMemo(
     () => ({
@@ -29,10 +33,10 @@ const StyleProvider = ({ children }: Props) => {
       colors: {
         ...defaultTheme.colors,
         palette: palettes[selectedPalette],
-        ...c,
+        ...personalizedPalette,
       },
     }),
-    [selectedPalette, c],
+    [selectedPalette, personalizedPalette],
   );
 
   return (

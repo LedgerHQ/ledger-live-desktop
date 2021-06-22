@@ -21,8 +21,8 @@ const PointIconContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  color: #6490f1;
-  background-color: #6490f110;
+  color: ${p => p.theme.colors.palette.primary.main};
+  background-color: ${p => p.theme.colors.blueTransparentBackground};
 `;
 
 type PointProps = {

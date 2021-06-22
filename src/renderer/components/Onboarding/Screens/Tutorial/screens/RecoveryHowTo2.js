@@ -41,7 +41,7 @@ const StepIndexContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  color: ${p => p.theme.colors.palette.primary.main};
 `;
 
 const StepContainer = styled.div`

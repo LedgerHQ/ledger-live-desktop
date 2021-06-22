@@ -77,6 +77,7 @@ export type SettingsState = {
   lastSeenDevice: ?DeviceModelInfo,
   language: ?string,
   theme: ?string,
+  themeCurrency: *,
   region: ?string,
   orderAccounts: string,
   countervalueFirst: boolean,
@@ -122,6 +123,7 @@ const INITIAL_STATE: SettingsState = {
   counterValue: "USD",
   language: null,
   theme: null,
+  themeCurrency: null,
   region: null,
   orderAccounts: "balance|desc",
   countervalueFirst: false,
@@ -291,6 +293,7 @@ export const developerModeSelector = (state: State): boolean => state.settings.d
 export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion;
 
 export const userThemeSelector = (state: State): ?string => state.settings.theme;
+export const userThemeCurrencySelector = (state: State): * => state.settings.themeCurrency;
 
 export const userLangAndRegionSelector = (
   state: State,

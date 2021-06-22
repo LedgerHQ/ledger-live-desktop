@@ -1,76 +1,84 @@
 import Color from "color";
+import palettes, { enrichPalette } from "./";
+import ensureContrast from "~/renderer/ensureContrast";
+import { setColors } from "../theme";
 
-import { enrichPalette } from "./";
-
-function getCorrectTextColor(color) {
-  /*
-  From this W3C document: http://www.webmasterworld.com/r.cgi?f=88&d=9769&url=http://www.w3.org/TR/AERT#color-contrast
-  
-  Color brightness is determined by the following formula: 
-  ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
-  
-  I know this could be more compact, but I think this is easier to read/explain.
-  
-  */
-
-  const threshold = 130; /* about half of 256. Lower threshold equals more dark text on dark background  */
-
-  const hRed = color.getRed();
-  const hGreen = color.getGreen();
-  const hBlue = color.getBlue();
-
-  const cBrightness = (hRed * 299 + hGreen * 587 + hBlue * 114) / 1000;
-  if (cBrightness > threshold) {
-    return "#000000";
-  } else {
-    return "#ffffff";
-  }
+function rotateContrast(color1, color2, color3) {
+  return color1.contrast(color2) <= 3
+    ? color3.isLight()
+      ? color2
+          .rotate(5)
+          .darken(0.33)
+          .string()
+      : color2
+          .rotate(5)
+          .lighten(0.33)
+          .string()
+    : color2.string();
 }
 
 export function createPalette(primaryColor, type = "light") {
-  const C = new Color(primaryColor);
-  const paper = C.mix(type === "light" ? new Color("#FFFFFF") : new Color("#1C1D1F"), 0.99);
-  const defaultBg = C.mix(type === "light" ? new Color("#F9F9F9") : new Color("#131415"), 0.97);
+  const basePalette = palettes[type];
+
+  const C = new Color(ensureContrast(primaryColor, basePalette.background.paper));
+
+  const isLight = C.isLight();
+
+  const paper = C.mix(new Color(basePalette.background.paper), 0.99);
+  const defaultBg = C.mix(new Color(basePalette.background.default), 0.97);
+
+  const alertRed = new Color("#ea2e49");
+  const warning = new Color("#f57f17");
+  const orange = new Color("#ffa726");
+  const positiveGreen = new Color("rgba(102, 190, 84, 1)");
+  const greenPill = new Color("#41ccb4");
+  const starYellow = new Color("#FFD24A");
+
+  const marketUpEastern = new Color("#ea2e49");
+  const marketUpWestern = new Color("#66be54");
+  const marketDownEastern = new Color("#6490f1");
+  const marketDownWestern = new Color("#ea2e49");
+
+  const contrastText = isLight ? new Color("#000000") : new Color("#FFFFFF");
 
   const P = {
     type,
     primary: {
-      main: primaryColor,
-      contrastText: C.isLight() ? "#000000" : "#FFFFFF",
+      main: C.string(),
+      contrastText: contrastText.string(),
     },
     secondary: {
-      main:
-        type === "light"
-          ? C.isLight()
-            ? C.darken(0.95)
-            : C.lighten(0.95)
-          : C.isLight()
-          ? C.darken(0.95)
-          : C.lighten(0.95),
+      main: basePalette.secondary.main,
     },
-    divider: C.mix(
-      type === "light" ? new Color("rgba(20,37,51, 0.1)") : new Color("rgba(255, 255, 255, 0.1)"),
-      0.98,
-    ).hex(),
+    divider: basePalette.divider,
     background: {
-      paper: paper.hex(),
-      default: defaultBg.hex(),
+      paper: paper.string(),
+      default: defaultBg.string(),
     },
     action: {
       active: C.mix(paper, 0.95),
       hover: C.mix(paper, 0.95),
-      disabled: C.mix(
-        type === "light" ? new Color("rgba(20, 37, 51, 0.1)") : new Color("rgba(255,255,255, 0.1)"),
-        0.99,
-      ).hex(),
+      disabled: basePalette.action.disabled,
     },
   };
 
-  return {
+  const contrastedColors = {
+    alertRed: rotateContrast(C, alertRed, contrastText),
+    warning: rotateContrast(C, warning, contrastText),
+    orange: rotateContrast(C, orange, contrastText),
+    positiveGreen: rotateContrast(C, positiveGreen, contrastText),
+    greenPill: rotateContrast(C, greenPill, contrastText),
+    starYellow: rotateContrast(C, starYellow, contrastText),
+    marketUp_eastern: rotateContrast(C, marketUpEastern, contrastText),
+    marketUp_western: rotateContrast(C, marketUpWestern, contrastText),
+    marketDown_eastern: rotateContrast(C, marketDownEastern, contrastText),
+    marketDown_western: rotateContrast(C, marketDownWestern, contrastText),
+  };
+
+  const newColors = {
+    ...contrastedColors,
     transparent: "transparent",
     pearl: "#ff0000",
-    alertRed: "#ea2e49",
-    warning: "#f57f17",
     black: "#000000",
     dark: "#142533",
     separator: "#aaaaaa",
@@ -83,23 +91,21 @@ export function createPalette(primaryColor, type = "light") {
     sliderGrey: "#F0EFF1",
     lightGraphite: "#fafafa",
     lightGrey: "#f9f9f9",
-    starYellow: "#FFD24A",
-    orange: "#ffa726",
-    positiveGreen: "rgba(102, 190, 84, 1)",
-    greenPill: "#41ccb4",
     smoke: "#666666",
-    wallet: "#6490f1",
-    blueTransparentBackground: "rgba(100, 144, 241, 0.15)",
-    pillActiveBackground: "rgba(100, 144, 241, 0.1)",
-    lightGreen: "rgba(102, 190, 84, 0.1)",
-    lightRed: "rgba(234, 46, 73, 0.1)",
-    lightWarning: "rgba(245, 127, 23, 0.1)",
+    wallet: C.rotate(-5).string(),
+    blueTransparentBackground: C.fade(0.85).string(),
+    pillActiveBackground: C.fade(0.9).string(),
+    lightGreen: new Color(contrastedColors.positiveGreen).fade(0.9).string(),
+    lightRed: new Color(contrastedColors.alertRed).fade(0.9).string(),
+    lightWarning: new Color(contrastedColors.warning).fade(0.9).string(),
     white: "#ffffff",
-    experimentalBlue: "#165edb",
-    marketUp_eastern: "#ea2e49",
-    marketUp_western: "#66be54",
-    marketDown_eastern: "#6490f1",
-    marketDown_western: "#ea2e49",
+    experimentalBlue: C.rotate(5).string(),
+  };
+
+  setColors(newColors);
+
+  return {
+    ...newColors,
     palette: enrichPalette(P),
   };
 }

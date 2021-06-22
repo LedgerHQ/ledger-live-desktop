@@ -79,7 +79,7 @@ const colors = {
 };
 
 // prettier-ignore
-const exportedColors = WARN_LEGACY_COLORS
+let exportedColors = WARN_LEGACY_COLORS
   ? new Proxy(colors, {
     get: (target, prop) => {
       // eslint-disable-next-line no-console
@@ -88,6 +88,10 @@ const exportedColors = WARN_LEGACY_COLORS
     },
   })
   : colors
+
+export const setColors = (c: *) => {
+  exportedColors = c;
+};
 
 export { exportedColors as colors };
 

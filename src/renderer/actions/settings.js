@@ -50,6 +50,7 @@ export const setCounterValue = (counterValue: string) =>
   });
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
+export const setThemeCurrency = (themeCurrency: *) => saveSettings({ themeCurrency });
 export const setRegion = (region: ?string) => saveSettings({ region });
 
 export function useHideEmptyTokenAccounts() {
