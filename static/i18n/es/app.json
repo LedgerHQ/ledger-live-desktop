@@ -2442,7 +2442,8 @@
   },
   "informationCenter": {
     "tooltip": "Centro de información",
-    "ongoingIncidentsTooltip": "Hay {{incidentCount}} incidentes en curso",
+    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
+    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
     "tabs": {
       "announcements": "Noticias",
       "announcementsUnseen": "Noticias ({{unseenCount}})",

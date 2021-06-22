@@ -2442,7 +2442,8 @@
   },
   "informationCenter": {
     "tooltip": "Центр уведомлений",
-    "ongoingIncidentsTooltip": "Текущих событий: {{incidentCount}}",
+    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
+    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
     "tabs": {
       "announcements": "Новости",
       "announcementsUnseen": "Новости ({{unseenCount}})",
