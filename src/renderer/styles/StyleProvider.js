@@ -48,7 +48,7 @@ const StyleProvider = ({ children }: Props) => {
       {isRave ? (
         <svg
           style={{
-            zIndex: 1000,
+            zIndex: 100,
             position: "fixed",
             top: 0,
             left: 0,
