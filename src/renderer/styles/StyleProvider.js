@@ -122,6 +122,52 @@ const StyleProvider = ({ children }: Props) => {
           </defs>
           <rect width="380" height="100" fill="url(#myGradient)" />
         </svg>
+      ) : personalizedPalette ? (
+        <svg
+          style={{
+            zIndex: 100,
+            position: "fixed",
+            top: 0,
+            left: 0,
+            mixBlendMode: selectedPalette === "light" ? "overlay" : "hue",
+            pointerEvents: "none",
+            opacity: 0.2,
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 380 100"
+          height="100%"
+        >
+          <defs>
+            <linearGradient id="myGradient" gradientTransform="rotate(15)">
+              <stop offset="0%" stopColor={personalizedPalette.palette.primary.main}>
+                <animate
+                  attributeName="stop-color"
+                  values={`${personalizedPalette.palette.primary.main}; ${personalizedPalette.palette.background.paper}; ${personalizedPalette.palette.primary.main}`}
+                  dur="16s"
+                  repeatCount="indefinite"
+                ></animate>
+              </stop>
+              <stop offset="100%" stopColor={personalizedPalette.palette.background.paper}>
+                <animate
+                  attributeName="stop-color"
+                  values={`${personalizedPalette.palette.background.paper}; ${personalizedPalette.palette.primary.main}; ${personalizedPalette.palette.background.paper}`}
+                  dur="16s"
+                  repeatCount="indefinite"
+                ></animate>
+              </stop>
+              <animateTransform
+                attributeName="gradientTransform"
+                attributeType="XML"
+                type="rotate"
+                from="0 0.5 0.5"
+                to="360 0.5 0.5"
+                dur="16s"
+                repeatCount="indefinite"
+              />
+            </linearGradient>
+          </defs>
+          <rect width="380" height="100" fill="url(#myGradient)" />
+        </svg>
       ) : null}
       {children}
     </ThemeProvider>
