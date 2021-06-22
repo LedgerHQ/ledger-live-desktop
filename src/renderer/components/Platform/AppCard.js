@@ -145,7 +145,7 @@ const AppCard = ({ manifest, onClick, ...rest }: Props) => {
         <TitleContainer>
           {manifest.branch !== "stable" && (
             <BranchBadge branch={manifest.branch}>
-              {t(`platform.catalog.branches.${manifest.branch}`)}
+              {t(`platform.catalog.branch.${manifest.branch}`)}
             </BranchBadge>
           )}
           <AppName>{manifest.name}</AppName>

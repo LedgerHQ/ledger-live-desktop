@@ -19,7 +19,7 @@
     },
     "catalog": {
       "title": "Browse",
-      "branches": {
+      "branch": {
         "soon": "coming soon",
         "experimental": "experimental",
         "debug": "debug"
