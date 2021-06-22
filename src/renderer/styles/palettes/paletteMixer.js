@@ -22,8 +22,6 @@ export function createPalette(primaryColor, type = "light") {
 
   const C = new Color(ensureContrast(primaryColor, basePalette.background.paper));
 
-  const isLight = C.isLight();
-
   const paper = C.mix(new Color(basePalette.background.paper), 0.99);
   const defaultBg = C.mix(new Color(basePalette.background.default), 0.97);
 
@@ -39,12 +37,15 @@ export function createPalette(primaryColor, type = "light") {
   const marketDownEastern = new Color("#6490f1");
   const marketDownWestern = new Color("#ea2e49");
 
-  const contrastText = isLight ? new Color("#000000") : new Color("#FFFFFF");
+  const isLight = C.contrast(new Color("#FFFFFF")) < 4;
+
+  const contrastText =
+    C.contrast(new Color("#FFFFFF")) > 3 ? new Color("#FFFFFF") : new Color("#000000");
 
   const P = {
     type,
     primary: {
-      main: C.string(),
+      main: isLight ? C.darken(0.1).string() : C.lighten(0.1).string(),
       contrastText: contrastText.string(),
     },
     secondary: {
