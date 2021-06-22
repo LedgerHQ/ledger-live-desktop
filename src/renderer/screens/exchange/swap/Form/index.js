@@ -7,7 +7,6 @@ import { BigNumber } from "bignumber.js";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { modalsStateSelector } from "~/renderer/reducers/modals";
 import type {
   CryptoCurrency,
@@ -26,12 +25,10 @@ import {
   reducer,
   getValidToCurrencies,
   getEnabledTradeMethods,
-  getCurrenciesWithStatus,
 } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import Box from "~/renderer/components/Box";
 
 import FromAccount from "~/renderer/screens/exchange/swap/Form/FromAccount";
@@ -46,7 +43,6 @@ import { openModal } from "~/renderer/actions/modals";
 
 type Method = "fixed" | "float";
 type Props = {
-  installedApps: InstalledItem[],
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?AccountLike,
   defaultParentAccount?: ?Account,
@@ -56,7 +52,6 @@ type Props = {
 };
 
 const Form = ({
-  installedApps,
   defaultCurrency,
   defaultAccount,
   defaultParentAccount,
@@ -66,7 +61,6 @@ const Form = ({
 }: Props) => {
   const modalsState = useSelector(modalsStateSelector);
   const reduxDispatch = useDispatch();
-  const accounts = useSelector(shallowAccountsSelector);
   const selectableCurrencies = useSelector(swapSupportedCurrenciesSelector);
   const flattenedCurrencies = useSelector(flattenedSwapSupportedCurrenciesSelector);
   const [shouldFocusOnAmountNonce, setShouldFocusOnAmountNonce] = useState(0);
@@ -79,16 +73,6 @@ const Form = ({
   const { fromCurrency, toCurrency, toAccount, toParentAccount } = state;
   const { useAllAmount, exchangeRate, loadingRates, isTimerVisible, ratesExpiration } = state;
   const { error } = state;
-
-  const currenciesStatus = useMemo(
-    () =>
-      getCurrenciesWithStatus({
-        accounts,
-        installedApps,
-        selectableCurrencies: flattenedCurrencies,
-      }),
-    [accounts, installedApps, flattenedCurrencies],
-  );
 
   const {
     account,
@@ -265,7 +249,11 @@ const Form = ({
 
   // Deselect the tradeMethod if not available for current pair
   useEffect(() => {
-    if (enabledTradeMethods && !enabledTradeMethods.includes(tradeMethod)) {
+    if (
+      enabledTradeMethods &&
+      enabledTradeMethods.length > 0 &&
+      !enabledTradeMethods.includes(tradeMethod)
+    ) {
       setTradeMethod(enabledTradeMethods[0]);
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
@@ -304,7 +292,6 @@ const Form = ({
             <FromAccount
               status={status}
               key={fromCurrency?.id || "fromAccount"}
-              currenciesStatus={currenciesStatus}
               account={account ? getMainAccount(account, parentAccount) : null}
               amount={amount}
               currency={fromCurrency}
@@ -338,7 +325,6 @@ const Form = ({
           <Box flex={1}>
             <ToAccount
               key={toCurrency?.id || "toAccount"}
-              currenciesStatus={currenciesStatus}
               account={toAccount ? getMainAccount(toAccount, toParentAccount) : null}
               amount={toAmount}
               currency={toCurrency}

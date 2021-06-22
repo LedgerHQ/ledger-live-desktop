@@ -1,36 +1,22 @@
 // @flow
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
+import React, { useCallback, useEffect, useMemo } from "react";
 import Select from "react-select";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { setLanguage } from "~/renderer/actions/settings";
 import useTheme from "~/renderer/hooks/useTheme";
 import { rgba } from "~/renderer/styles/helpers";
 import { langAndRegionSelector } from "~/renderer/reducers/settings";
 import { useDispatch, useSelector } from "react-redux";
-import ConfirmModal from "~/renderer/modals/ConfirmModal";
-import WarningIcon from "~/renderer/icons/TriangleWarning";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 
 import moment from "moment";
-import Box from "../Box/Box";
-
-const IconWrapperCircle: ThemedComponent<{ color?: string }> = styled(Box)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  color: ${p => p.theme.colors.wallet};
-  background: ${p => p.theme.colors.blueTransparentBackground};
-  align-items: center;
-  justify-content: center;
-`;
 
 const options = [
-  { value: "en", support: "full", label: "English" },
-  { value: "fr", support: "full", label: "Français" },
-  { value: "ru", support: "partial", label: "Pусский" },
-  // { value: "zh", support: "partial", label: <Trans i18nKey="language.switcher.zh" /> },
-  { value: "es", support: "partial", label: "Español" },
+  { value: "en", support: "full", label: languageLabels.en },
+  { value: "fr", support: "full", label: languageLabels.fr },
+  { value: "ru", support: "partial", label: languageLabels.ru },
+  { value: "zh", support: "partial", label: languageLabels.zh },
+  { value: "es", support: "partial", label: languageLabels.es },
 ];
 
 const styleFn = theme => ({
@@ -122,8 +108,7 @@ const LangSwitcher = () => {
   const styles = useMemo(() => styleFn(theme), [theme]);
   const { language } = useSelector(langAndRegionSelector);
   const dispatch = useDispatch();
-  const { i18n, t } = useTranslation();
-  const [infoModalOpen, setInfoModalOpen] = useState("");
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     moment.locale(language);
@@ -131,18 +116,11 @@ const LangSwitcher = () => {
   }, [i18n, language]);
 
   const changeLanguage = useCallback(
-    ({ value, support }) => {
+    ({ value }) => {
       dispatch(setLanguage(value));
-      if (support !== "full") {
-        setInfoModalOpen(value);
-      }
     },
     [dispatch],
   );
-
-  const onCloseInfoModal = useCallback(() => {
-    setInfoModalOpen("");
-  }, []);
 
   const currentLanguage = useMemo(
     () => options.find(({ value }) => value === language) || options[0],
@@ -150,29 +128,7 @@ const LangSwitcher = () => {
   );
 
   return (
-    <>
-      <Select onChange={changeLanguage} value={currentLanguage} styles={styles} options={options} />
-      <ConfirmModal
-        analyticsName="OnboardingLanguageInfo"
-        centered
-        isOpened={!!infoModalOpen}
-        onClose={onCloseInfoModal}
-        onConfirm={onCloseInfoModal}
-        confirmText={<Trans i18nKey="onboarding.screens.welcome.languageWarning.cta" />}
-        title={
-          <Trans
-            i18nKey="onboarding.screens.welcome.languageWarning.title"
-            values={{ language: t(`language.switcher.${currentLanguage.value}`) }}
-          />
-        }
-        desc={<Trans i18nKey="onboarding.screens.welcome.languageWarning.desc" />}
-        renderIcon={() => (
-          <IconWrapperCircle>
-            <WarningIcon size={24} />
-          </IconWrapperCircle>
-        )}
-      />
-    </>
+    <Select onChange={changeLanguage} value={currentLanguage} styles={styles} options={options} />
   );
 };
 

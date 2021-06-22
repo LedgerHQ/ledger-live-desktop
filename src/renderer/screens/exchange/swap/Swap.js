@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
@@ -16,8 +16,6 @@ import Landing from "~/renderer/screens/exchange/swap/Landing";
 import Loading from "~/renderer/screens/exchange/swap/Loading";
 import NotAvailable from "~/renderer/screens/exchange/swap/NotAvailable";
 import Form from "~/renderer/screens/exchange/swap/Form";
-import Connect from "~/renderer/screens/exchange/swap/Connect";
-import MissingOrOutdatedSwapApp from "~/renderer/screens/exchange/swap/MissingOrOutdatedSwapApp";
 
 type Props = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
@@ -31,8 +29,7 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
   const hasAcceptedSwapKYC = useSelector(hasAcceptedSwapKYCSelector);
 
   const [hasUpToDateProviders, setHasUpToDateProviders] = useState(false);
-  const [installedApps, setInstalledApps] = useState();
-  const [tradeMethod, setTradeMethod] = useState("fixed");
+  const [tradeMethod, setTradeMethod] = useState("float");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,35 +45,15 @@ const Swap = ({ defaultCurrency, defaultAccount, defaultParentAccount, setTabInd
     }
   }, [dispatch, hasAcceptedSwapKYC]);
 
-  const onSetResult = useCallback(
-    data => {
-      if (!data) return;
-      const { installed } = data.result;
-      setInstalledApps(installed);
-    },
-    [setInstalledApps],
-  );
-
-  const exchangeApp = useMemo(() => installedApps?.find(a => a.name === "Exchange"), [
-    installedApps,
-  ]);
-
   return !hasAcceptedSwapKYC ? (
     <Landing />
   ) : !hasUpToDateProviders ? (
     <Loading />
   ) : !providers?.length ? (
     <NotAvailable />
-  ) : !installedApps ? (
-    <Connect setResult={onSetResult} />
-  ) : !exchangeApp ? (
-    <MissingOrOutdatedSwapApp />
-  ) : !exchangeApp.updated ? (
-    <MissingOrOutdatedSwapApp outdated />
   ) : (
     <Form
       providers={providers}
-      installedApps={installedApps}
       defaultCurrency={defaultCurrency}
       defaultAccount={defaultAccount}
       defaultParentAccount={defaultParentAccount}
