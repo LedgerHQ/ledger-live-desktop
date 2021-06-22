@@ -2442,7 +2442,8 @@
   },
   "informationCenter": {
     "tooltip": "资讯中心",
-    "ongoingIncidentsTooltip": "有 {{incidentCount}} 个正在发生的事件",
+    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
+    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
     "tabs": {
       "announcements": "新闻",
       "announcementsUnseen": "新闻 ({{unseenCount}})",
