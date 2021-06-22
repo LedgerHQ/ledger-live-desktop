@@ -76,8 +76,14 @@ const ContainerDiv = style.div`
       animation: ${fadeOut} .8s ease-in forwards;
 `;
 
-const UniIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+const UniIcon = ({ size = 24 }: { size: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M9.19588 4.3253C8.98213 4.2923 8.97313 4.2878 9.07363 4.2728C9.26638 4.2428 9.72238 4.28405 10.0366 4.3583C10.7694 4.53305 11.4361 4.9793 12.1486 5.77205L12.3376 5.98205L12.6076 5.9393C13.7476 5.75555 14.9079 5.9018 15.8776 6.34955C16.1446 6.47255 16.5654 6.7178 16.6179 6.78155C16.6351 6.80105 16.6659 6.9308 16.6861 7.0688C16.7581 7.54655 16.7221 7.91255 16.5766 8.1863C16.4971 8.3348 16.4926 8.3813 16.5459 8.5088C16.5712 8.56147 16.6107 8.60598 16.66 8.63727C16.7093 8.66856 16.7665 8.68538 16.8249 8.6858C17.0664 8.6858 17.3259 8.2958 17.4459 7.75355L17.4939 7.5383L17.5884 7.64555C18.1074 8.23355 18.5146 9.0353 18.5844 9.6053L18.6031 9.75455L18.5154 9.61955C18.3654 9.38705 18.2154 9.22805 18.0219 9.0998C17.6739 8.86955 17.3056 8.79155 16.3306 8.7398C15.4501 8.6933 14.9514 8.6183 14.4579 8.45705C13.6171 8.1833 13.1934 7.81805 12.1944 6.5078C11.7511 5.9258 11.4766 5.60405 11.2044 5.3453C10.5841 4.7558 9.97513 4.4468 9.19588 4.3253Z"
       fill="white"
@@ -118,21 +124,16 @@ const UniIcon = () => (
 );
 
 const CurrencyBgIcon = ({ themeCurrency }: *) => {
+  const size = window.document.body.clientWidth;
   return (
     <ContainerDiv key={themeCurrency.id} color={themeCurrency.color}>
       <AnimDiv>
         {themeCurrency.isLiveCurrency ? (
-          <Image
-            resource={LedgerLiveImg}
-            alt=""
-            draggable="false"
-            width={window.document.body.clientWidth}
-            height={window.document.body.clientWidth}
-          />
+          <Image resource={LedgerLiveImg} alt="" draggable="false" width={size} height={size} />
         ) : themeCurrency.isRave ? (
-          <UniIcon />
+          <UniIcon size={size} />
         ) : (
-          <CryptoCurrencyIcon currency={themeCurrency} size={window.document.body.clientWidth} />
+          <CryptoCurrencyIcon currency={themeCurrency} size={size} />
         )}
       </AnimDiv>
     </ContainerDiv>

@@ -48,12 +48,13 @@ const StyleProvider = ({ children }: Props) => {
       {isRave ? (
         <svg
           style={{
-            zIndex: 100,
+            zIndex: 1000,
             position: "fixed",
             top: 0,
             left: 0,
-            mixBlendMode: selectedPalette === "light" ? "overlay" : "hue",
+            mixBlendMode: "hue",
             pointerEvents: "none",
+            opacity: 0.8,
           }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 380 100"
@@ -65,7 +66,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(0, 165, 223); rgb(62, 20, 123); rgb(226, 0, 121); rgb(223, 19, 44); rgb(243, 239, 21); rgb(0, 152, 71); rgb(0, 165, 223)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -73,7 +74,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(62, 20, 123); rgb(226, 0, 121); rgb(223, 19, 44); rgb(243, 239, 21); rgb(0, 152, 71); rgb(0, 165, 223);rgb(62, 20, 123)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -81,7 +82,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(226, 0, 121); rgb(223, 19, 44); rgb(243, 239, 21); rgb(0, 152, 71); rgb(0, 165, 223); rgb(62, 20, 123);rgb(226, 0, 121)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -89,7 +90,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(223, 19, 44); rgb(243, 239, 21); rgb(0, 152, 71); rgb(0, 165, 223); rgb(62, 20, 123); rgb(226, 0, 121);rgb(223, 19, 44)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -97,7 +98,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(243, 239, 21); rgb(0, 152, 71); rgb(0, 165, 223); rgb(62, 20, 123); rgb(226, 0, 121); rgb(223, 19, 44);rgb(243, 239, 21)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -105,7 +106,7 @@ const StyleProvider = ({ children }: Props) => {
                 <animate
                   attributeName="stop-color"
                   values="rgb(0, 152, 71); rgb(0, 165, 223); rgb(62, 20, 123); rgb(226, 0, 121); rgb(223, 19, 44); rgb(243, 239, 21);rgb(0, 152, 71)"
-                  dur="8s"
+                  dur="12s"
                   repeatCount="indefinite"
                 ></animate>
               </stop>
@@ -115,7 +116,7 @@ const StyleProvider = ({ children }: Props) => {
                 type="rotate"
                 from="0 0.5 0.5"
                 to="360 0.5 0.5"
-                dur="8s"
+                dur="12s"
                 repeatCount="indefinite"
               />
             </linearGradient>
@@ -129,9 +130,9 @@ const StyleProvider = ({ children }: Props) => {
             position: "fixed",
             top: 0,
             left: 0,
-            mixBlendMode: selectedPalette === "light" ? "overlay" : "hue",
+            mixBlendMode: "hue",
             pointerEvents: "none",
-            opacity: 0.2,
+            opacity: 0.4,
           }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 380 100"
