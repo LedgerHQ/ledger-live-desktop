@@ -5,6 +5,7 @@ const exportOperationsHistory = (currency = "global") => {
   describe("exports the operations history", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("opens the export operations history modal", async () => {
