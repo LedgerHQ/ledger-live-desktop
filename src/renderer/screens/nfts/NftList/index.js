@@ -23,8 +23,15 @@ function canSendNFT(nft) {
   return nft.schema === "ERC721";
 }
 
-const Container = styled.div``;
-const List = styled.div``;
+const List = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+`;
 
 const ToggleButton: ThemedComponent<{ active?: boolean }> = styled(Button)`
   height: 30px;
@@ -50,7 +57,15 @@ const GenericBox: ThemedComponent<{}> = styled(Box)`
   box-shadow: 0 4px 8px 0 #00000007;
 `;
 
-function Cell({ nft, account }: { nft: NFT, account: Account }) {
+function GridCell({ nft, account }: { nft: NFT, account: Account }) {
+  return (
+    <a target="_blank" href={nft.permalink} rel="noreferrer">
+      <img style={{ width: "100%" }} src={nft.image} />
+    </a>
+  );
+}
+
+function ListCell({ nft, account }: { nft: NFT, account: Account }) {
   return (
     <Box grow horizontal p={2} mb={2} bg="palette.background.paper" alignItems="center">
       <Box pl={2} width="14%">
@@ -157,7 +172,7 @@ function NftList({ nfts }: { nfts: Array<*> }) {
   });
 
   return (
-    <Container>
+    <>
       <GenericBox horizontal p={0} alignItems="center">
         <SearchBox
           id={"accounts-search-input"}
@@ -193,15 +208,23 @@ function NftList({ nfts }: { nfts: Array<*> }) {
       </GenericBox>
 
       {list.length ? (
-        <List>
-          {list.map(({ nft, account }) => (
-            <Cell key={nft.id} nft={nft} account={account} />
-          ))}
-        </List>
+        mode === "list" ? (
+          <List>
+            {list.map(({ nft, account }) => (
+              <ListCell key={nft.id} nft={nft} account={account} />
+            ))}
+          </List>
+        ) : (
+          <Grid>
+            {list.map(({ nft, account }) => (
+              <GridCell key={nft.id} nft={nft} account={account} />
+            ))}
+          </Grid>
+        )
       ) : (
         "No results"
       )}
-    </Container>
+    </>
   );
 }
 
