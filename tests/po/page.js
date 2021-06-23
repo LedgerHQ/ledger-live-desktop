@@ -117,6 +117,8 @@ export default class Page {
   async synchronize() {
     const btn = await this.topbarSynchronizeButton();
     await btn.click();
+    const topBarSynced = await this.$("#topbar-synchronized");
+    await topBarSynced.waitForExists(60000);
   }
 
   async goToBuyCrypto() {
