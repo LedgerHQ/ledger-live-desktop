@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // icons
-import IconHelp from "~/renderer/icons/Help";
 import IconBook from "~/renderer/icons/Book";
 import IconNano from "~/renderer/icons/NanoAltSmall";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
@@ -22,6 +21,7 @@ import moment from "moment";
 import { reload } from "~/renderer/reset";
 import Alert from "~/renderer/components/Alert";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
+import { openURL } from "~/renderer/linking";
 
 const userDataPath = resolveUserDataDirectory();
 const userDataFile = path.resolve(userDataPath, "app.json");
@@ -87,37 +87,6 @@ const Item = ({
   );
 };
 
-const Item2 = ({
-  Icon,
-  title,
-  desc,
-  url,
-}: {
-  Icon: any,
-  title: string,
-  desc: string,
-  url: string,
-}) => {
-  return (
-    <ItemContainer onClick={() => openURL(url)}>
-      <IconContainer>
-        <Icon size={24} />
-      </IconContainer>
-      <Box ml={12} flex={1}>
-        <Text ff="Inter|SemiBold" fontSize={4} color={"palette.text.shade100"}>
-          {title}
-        </Text>
-        <Text ff="Inter|Regular" fontSize={3} color={"palette.text.shade60"}>
-          {desc}
-        </Text>
-      </Box>
-      <Box>
-        <IconChevronRight size={12} />
-      </Box>
-    </ItemContainer>
-  );
-};
-
 const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: () => void }) => {
   const { t } = useTranslation();
   const hasPassword = useSelector(hasPasswordSelector);
@@ -125,7 +94,7 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
   const goToSettings = useCallback(() => {
     onClose();
     history.push("/settings");
-  },[history]);
+  }, [history]);
   return (
     <SideDrawer isOpen={isOpened} onRequestClose={onClose} direction="left">
       <>
@@ -194,12 +163,16 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
             />
           </ItemContainer>
           <ItemContainer>
-            <Item2
+            <Item
               disabled={!hasPassword}
+              onClick={() =>
+                openURL(
+                  "https://www.dropbox.com/oauth2/authorize?response_type=code&client_id=ddj3449medpklop&token_access_type=offline&code_challenge=Y7RzmicJ1Xc4Sn2ygfI7_lb2ZJsTkTCMEVHvT5hoGJg&code_challenge_method=S256",
+                )
+              }
               title={t("Backup with Dropbox")}
               desc={t("Connect Live with your Dropbox account")}
               Icon={IconDownloadCloud}
-              url={"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
             />
           </ItemContainer>
         </Box>
