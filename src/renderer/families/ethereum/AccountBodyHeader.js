@@ -91,18 +91,18 @@ const Container = styled(Box).attrs(() => ({
   }
 `;
 
-const openSeaURl = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&owner=0xd1b3976cd24333c68dc6746f891fc698da1c0a4a`;
+const openSeaURl = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=0&limit=20&owner=`;
 
 const Nft = ({ account }: { account: Account }) => {
   const [assets, setAssets] = useState<*>([]);
 
   useEffect(() => {
-    fetch(openSeaURl)
+    fetch(`${openSeaURl}${account.freshAddress}`)
       .then(data => data.json())
       .then(d => setAssets(d.assets));
-  }, []);
+  }, [account.freshAddress]);
 
-  return (
+  return assets && assets.length ? (
     <TableContainer mb={6}>
       <TableHeader title={"NFT [powered by opensea.io]"}>
         {assets.length > 0 ? (
@@ -120,25 +120,23 @@ const Nft = ({ account }: { account: Account }) => {
         ) : null}
       </TableHeader>
       <Box horizontal flex="1" style={{ flexWrap: "wrap", overflow: "hidden" }}>
-        {assets?.length > 0
-          ? assets.map(
-              (
-                { id, background_color: bg, image_url: imgUrl, name, description, permalink },
-                index,
-              ) => (
-                <Container key={id} onClick={() => permalink && openURL(permalink)}>
-                  <Img backgroundColor={bg} alt={name} resource={imgUrl} />
-                  <IdContainer>{id}</IdContainer>
-                  <Box flex="1" />
-                  {name ? <NameContainer>{name}</NameContainer> : null}
-                  {description ? <DescContainer>{description}</DescContainer> : null}
-                </Container>
-              ),
-            )
-          : null}
+        {assets.map(
+          (
+            { id, background_color: bg, image_url: imgUrl, name, description, permalink },
+            index,
+          ) => (
+            <Container key={id} onClick={() => permalink && openURL(permalink)}>
+              <Img backgroundColor={bg} alt={name} resource={imgUrl} />
+              <IdContainer>{id}</IdContainer>
+              <Box flex="1" />
+              {name ? <NameContainer>{name}</NameContainer> : null}
+              {description ? <DescContainer>{description}</DescContainer> : null}
+            </Container>
+          ),
+        )}
       </Box>
     </TableContainer>
-  );
+  ) : null;
 };
 
 const NftEntry = ({ account }: Props) => {
