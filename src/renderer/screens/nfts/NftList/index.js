@@ -57,11 +57,15 @@ const GenericBox: ThemedComponent<{}> = styled(Box)`
   box-shadow: 0 4px 8px 0 #00000007;
 `;
 
+const NftLink = styled.a`
+  cursor: pointer;
+`;
+
 function GridCell({ nft, account }: { nft: NFT, account: Account }) {
   return (
-    <a target="_blank" href={nft.permalink} rel="noreferrer">
+    <NftLink target="_blank" href={nft.permalink} rel="noreferrer">
       <img style={{ width: "100%" }} src={nft.image} />
-    </a>
+    </NftLink>
   );
 }
 
@@ -69,9 +73,9 @@ function ListCell({ nft, account }: { nft: NFT, account: Account }) {
   return (
     <Box grow horizontal p={2} mb={2} bg="palette.background.paper" alignItems="center">
       <Box pl={2} width="14%">
-        <a target="_blank" href={nft.permalink} rel="noreferrer">
+        <NftLink target="_blank" href={nft.permalink} rel="noreferrer">
           <img style={{ width: 72, height: 72, objectFit: "contain" }} src={nft.image} />
-        </a>
+        </NftLink>
       </Box>
       <Box width="40%" vertical>
         <Text ff="Inter|SemiBold" color="palette.text.shade60" fontSize={3}>
