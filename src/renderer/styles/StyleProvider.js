@@ -24,7 +24,10 @@ const StyleProvider = ({ children }: Props) => {
   const isRave = themeCurrency?.isRave;
 
   const personalizedPalette = useMemo(
-    () => (themeCurrency?.color ? createPalette(themeCurrency.color, selectedPalette) : {}),
+    () =>
+      themeCurrency?.color && !themeCurrency?.isLiveCurrency
+        ? createPalette(themeCurrency.color, selectedPalette)
+        : {},
     [selectedPalette, themeCurrency],
   );
 
@@ -122,7 +125,7 @@ const StyleProvider = ({ children }: Props) => {
           </defs>
           <rect width="380" height="100" fill="url(#myGradient)" />
         </svg>
-      ) : personalizedPalette ? (
+      ) : personalizedPalette?.palette ? (
         <svg
           style={{
             zIndex: 100,
