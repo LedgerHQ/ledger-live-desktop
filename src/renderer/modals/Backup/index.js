@@ -1,7 +1,9 @@
 // @flow
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 // icons
 import IconHelp from "~/renderer/icons/Help";
 import IconBook from "~/renderer/icons/Book";
@@ -17,16 +19,12 @@ import { ipcRenderer, remote } from "electron";
 import path from "path";
 import fs from "fs";
 import moment from "moment";
-import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
-import { hardReset, reload } from "~/renderer/reset";
-import rimraf from "rimraf";
-import { TopBannerContainer } from "~/renderer/screens/dashboard";
+import { reload } from "~/renderer/reset";
 import Alert from "~/renderer/components/Alert";
+import { hasPasswordSelector } from "~/renderer/reducers/application";
 
 const userDataPath = resolveUserDataDirectory();
 const userDataFile = path.resolve(userDataPath, "app.json");
-
 
 const ItemContainer = styled.a`
   flex: 1;
@@ -50,7 +48,8 @@ const ItemContainer = styled.a`
   }
 `;
 const IconContainer = styled.div`
-  color: ${p => p.theme.colors.palette.primary.main};
+  color: ${p =>
+    p.disabled ? p.theme.colors.palette.text.shade20 : p.theme.colors.palette.primary.main};
   display: flex;
   align-items: center;
 `;
@@ -60,15 +59,17 @@ const Item = ({
   title,
   desc,
   onClick,
+  disabled,
 }: {
   Icon: any,
   title: string,
   desc: string,
   onClick: () => void,
+  disabled?: Boolean,
 }) => {
   return (
-    <ItemContainer onClick={onClick}>
-      <IconContainer>
+    <ItemContainer onClick={disabled ? undefined : onClick} disabled={disabled}>
+      <IconContainer disabled={disabled}>
         <Icon size={24} />
       </IconContainer>
       <Box ml={12} flex={1}>
@@ -119,23 +120,36 @@ const Item2 = ({
 
 const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: () => void }) => {
   const { t } = useTranslation();
+  const hasPassword = useSelector(hasPasswordSelector);
+  const history = useHistory();
+  const goToSettings = useCallback(() => {
+    onClose();
+    history.push("/settings");
+  },[history]);
   return (
     <SideDrawer isOpen={isOpened} onRequestClose={onClose} direction="left">
       <>
         <TrackPage category="SideDrawer" name="Help" />
-
         <Box py={60} px={40}>
           <Text ff="Inter|SemiBold" fontSize={22} mb={20} color={"palette.text.shade100"}>
             Live in the Cloud
           </Text>
-          <Alert type="warning" style={{ flexGrow: 0 }}>
-            <Text>
-              For security reason, make sure that you have passwordlock enabled for you app before
-              generating the backup file
-            </Text>
-          </Alert>
+          {!hasPassword ? (
+            <Alert
+              type="warning"
+              style={{ flexGrow: 0 }}
+              learnMoreLabel="Go to Settings"
+              onLearnMore={goToSettings}
+            >
+              <Text>
+                For security reason, make sure that you have password lock enabled for you app
+                before generating the backup file
+              </Text>
+            </Alert>
+          ) : null}
           <ItemContainer>
             <Item
+              disabled={!hasPassword}
               onClick={async () => {
                 const toPath = await remote.dialog.showSaveDialog(remote.getCurrentWindow(), {
                   title: "Exported user data",
@@ -169,15 +183,10 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
                     },
                   ],
                 });
-                await hardReset();
-                await rimraf(userDataPath, function() {
-                  console.log("user data deleted");
-                });
-                await fs.mkdir(userDataPath);
                 await fs.copyFile(backupFile.filePaths[0], `${userDataPath}/app.json`, err => {
                   console.log("Error: ", err);
                 });
-                await reload();
+                reload();
               }}
               title={t("Restore your Live")}
               desc={t("Import your data live locally")}
@@ -186,6 +195,7 @@ const BackupSideDrawer = ({ isOpened, onClose }: { isOpened: boolean, onClose: (
           </ItemContainer>
           <ItemContainer>
             <Item2
+              disabled={!hasPassword}
               title={t("Backup with Dropbox")}
               desc={t("Connect Live with your Dropbox account")}
               Icon={IconDownloadCloud}
