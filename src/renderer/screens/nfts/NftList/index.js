@@ -28,9 +28,15 @@ const List = styled.div`
   flex-direction: column;
 `;
 const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 48px;
+  display: flex;
+  flex-direction: row;
+`;
+const Column = styled.div`
+  flex: 1;
+  > * {
+    display: block;
+    padding: 24px;
+  }
 `;
 
 const ToggleButton: ThemedComponent<{ active?: boolean }> = styled(Button)`
@@ -61,15 +67,16 @@ const NftLink = styled.a`
   cursor: pointer;
 `;
 
-function GridCell({ nft, account }: { nft: NFT, account: Account }) {
+function GridCellC({ nft, account }: { nft: NFT, account: Account }) {
   return (
     <NftLink target="_blank" href={nft.permalink} rel="noreferrer">
       <img style={{ width: "100%" }} src={nft.image} />
     </NftLink>
   );
 }
+const GridCell = React.memo(GridCellC);
 
-function ListCell({ nft, account }: { nft: NFT, account: Account }) {
+function ListCellC({ nft, account }: { nft: NFT, account: Account }) {
   return (
     <Box grow horizontal p={2} mb={2} bg="palette.background.paper" alignItems="center">
       <Box pl={2} width="14%">
@@ -125,6 +132,7 @@ function ListCell({ nft, account }: { nft: NFT, account: Account }) {
     </Box>
   );
 }
+const ListCell = React.memo(ListCellC);
 
 function useCollections(nfts) {
   const [filterByCollectionSlug, setFilterByCollectionSlug] = useState(null);
@@ -149,6 +157,24 @@ function useCollections(nfts) {
     return items;
   }, [nfts]);
   return { collectionItems, filterByCollectionSlug, setFilterByCollectionSlug };
+}
+
+function GridMode({ list }: { list: * }) {
+  const cols = [[], [], []];
+  for (let i = 0; i < list.length; i++) {
+    cols[i % 3].push(list[i]);
+  }
+  return (
+    <Grid>
+      {cols.map((list, i) => (
+        <Column key={i}>
+          {list.map(({ nft, account }) => (
+            <GridCell key={nft.id} nft={nft} account={account} />
+          ))}
+        </Column>
+      ))}
+    </Grid>
+  );
 }
 
 function NftList({ nfts }: { nfts: Array<*> }) {
@@ -219,11 +245,7 @@ function NftList({ nfts }: { nfts: Array<*> }) {
             ))}
           </List>
         ) : (
-          <Grid>
-            {list.map(({ nft, account }) => (
-              <GridCell key={nft.id} nft={nft} account={account} />
-            ))}
-          </Grid>
+          <GridMode list={list} />
         )
       ) : (
         "No results"
