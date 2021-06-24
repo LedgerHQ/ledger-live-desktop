@@ -5,7 +5,7 @@
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)
 - Backed by: [ledger-live-common](https://github.com/ledgerhq/ledger-live-common)
 
-> Ledger Live is a new generation wallet desktop application providing a unique interface to maintain multiple cryptocurrencies for your Ledger Nano S / Blue. Manage your device, create accounts, receive and send cryptoassets, [...and many more](https://www.ledger.fr/2018/07/09/ledger-launches-ledger-live-the-all-in-one-companion-app-to-your-ledger-device/).
+> Ledger Live is a new generation wallet desktop application providing a unique interface to maintain multiple cryptocurrencies for your Ledger Nano S / Blue. Manage your device, create accounts, receive and send cryptoassets, [...and many more](https://www.ledger.com/ledger-launches-ledger-live-the-all-in-one-companion-app-to-your-ledger-device).
 
 <a href="https://github.com/LedgerHQ/ledger-live-desktop/releases">
   <p align="center">
