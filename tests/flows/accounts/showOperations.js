@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-import { app, accountsPage, accountPage, modalPage, page } from "../../common.js";
+import { app, accountsPage, accountPage, drawerPage } from "../../common.js";
 
 const showOperations = (currency = "global") => {
   describe("account operations list", () => {
@@ -8,8 +8,8 @@ const showOperations = (currency = "global") => {
     });
 
     afterAll(async () => {
-      await modalPage.close();
-      await modalPage.waitForClosed();
+      await drawerPage.close();
+      await drawerPage.waitForClosed();
     });
 
     it("show the first account", async () => {
@@ -24,7 +24,7 @@ const showOperations = (currency = "global") => {
     it("show the first operation", async () => {
       await accountPage.clickFirstOperationRow();
 
-      await modalPage.waitForDisplayed();
+      await drawerPage.waitForDisplayed();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `${currency}-account-operation-details`,
       });

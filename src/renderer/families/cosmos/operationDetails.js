@@ -24,9 +24,11 @@ import {
   OpDetailsData,
   OpDetailsVoteData,
   B,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+  OpDetailsSection,
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import { useDiscreetMode } from "~/renderer/components/Discreet";
@@ -75,7 +77,7 @@ export const OperationDetailsDelegation = ({
   );
 
   return (
-    <Box>
+    <OpDetailsSection>
       {!isTransactionField && (
         <OpDetailsTitle>
           <Trans i18nKey={"operationDetails.extra.validators"} />
@@ -104,7 +106,7 @@ export const OperationDetailsDelegation = ({
           </OpDetailsVoteData>
         </OpDetailsData>
       ))}
-    </Box>
+    </OpDetailsSection>
   );
 };
 
@@ -162,21 +164,23 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       ret = (
         <>
           <B />
-          <OpDetailsData>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.undelegatedFrom"} />
             </OpDetailsTitle>
-            <Address onClick={redirectAddress(currency, validator.address)}>
-              {formattedValidator ? formattedValidator.name : validator.address}
-            </Address>
-          </OpDetailsData>
+            <OpDetailsData>
+              <Address onClick={redirectAddress(currency, validator.address)}>
+                {formattedValidator ? formattedValidator.name : validator.address}
+              </Address>
+            </OpDetailsData>
+          </OpDetailsSection>
           <B />
-          <OpDetailsData>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.undelegatedAmount"} />
             </OpDetailsTitle>
-            {formattedAmount}
-          </OpDetailsData>
+            <OpDetailsData>{formattedAmount}</OpDetailsData>
+          </OpDetailsSection>
         </>
       );
       break;
@@ -200,30 +204,34 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       ret = (
         <>
           <B />
-          <OpDetailsData>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.redelegatedFrom"} />
             </OpDetailsTitle>
-            <Address onClick={redirectAddress(currency, cosmosSourceValidator)}>
-              {formattedSourceValidator ? formattedSourceValidator.name : cosmosSourceValidator}
-            </Address>
-          </OpDetailsData>
+            <OpDetailsData>
+              <Address onClick={redirectAddress(currency, cosmosSourceValidator)}>
+                {formattedSourceValidator ? formattedSourceValidator.name : cosmosSourceValidator}
+              </Address>
+            </OpDetailsData>
+          </OpDetailsSection>
           <B />
 
-          <OpDetailsData>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.redelegatedTo"} />
             </OpDetailsTitle>
-            <Address onClick={redirectAddress(currency, validator.address)}>
-              {formattedValidator ? formattedValidator.name : validator.address}
-            </Address>
-          </OpDetailsData>
-          <OpDetailsData>
+            <OpDetailsData>
+              <Address onClick={redirectAddress(currency, validator.address)}>
+                {formattedValidator ? formattedValidator.name : validator.address}
+              </Address>
+            </OpDetailsData>
+          </OpDetailsSection>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.redelegatedAmount"} />
             </OpDetailsTitle>
-            {formattedAmount}
-          </OpDetailsData>
+            <OpDetailsData>{formattedAmount}</OpDetailsData>
+          </OpDetailsSection>
         </>
       );
       break;
@@ -241,14 +249,16 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
       ret = (
         <>
           <B />
-          <OpDetailsData>
+          <OpDetailsSection>
             <OpDetailsTitle>
               <Trans i18nKey={"operationDetails.extra.rewardFrom"} />
             </OpDetailsTitle>
-            <Address onClick={redirectAddress(currency, validator.address)}>
-              {formattedValidator ? formattedValidator.name : validator.address}
-            </Address>
-          </OpDetailsData>
+            <OpDetailsData>
+              <Address onClick={redirectAddress(currency, validator.address)}>
+                {formattedValidator ? formattedValidator.name : validator.address}
+              </Address>
+            </OpDetailsData>
+          </OpDetailsSection>
         </>
       );
       break;
@@ -261,15 +271,14 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     <>
       {ret}
       {extra.memo && (
-        <>
-          <B />
+        <OpDetailsSection>
+          <OpDetailsTitle>
+            <Trans i18nKey={"operationDetails.extra.memo"} />
+          </OpDetailsTitle>
           <OpDetailsData>
-            <OpDetailsTitle>
-              <Trans i18nKey={"operationDetails.extra.memo"} />
-            </OpDetailsTitle>
-            {extra.memo}
+            <Ellipsis ml={2}>{extra.memo}</Ellipsis>
           </OpDetailsData>
-        </>
+        </OpDetailsSection>
       )}
     </>
   );

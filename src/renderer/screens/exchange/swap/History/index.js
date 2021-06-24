@@ -16,7 +16,6 @@ import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/exchange/swap/csvExport";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import useInterval from "~/renderer/hooks/useInterval";
-import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import { FakeLink } from "~/renderer/components/Link";
@@ -24,6 +23,8 @@ import moment from "moment";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import styled from "styled-components";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
+import { setDrawer } from "~/renderer/drawers/Provider";
+import SwapOperationDetails from "~/renderer/drawers/SwapOperationDetails";
 
 const ExportOperationsWrapper = styled(Box)`
   color: ${p => p.theme.colors.palette.primary.main};
@@ -125,9 +126,8 @@ const History = () => {
   }, 10000);
 
   const openSwapOperationDetailsModal = useCallback(
-    mappedSwapOperation =>
-      dispatch(openModal("MODAL_SWAP_OPERATION_DETAILS", { mappedSwapOperation })),
-    [dispatch],
+    mappedSwapOperation => setDrawer(SwapOperationDetails, { mappedSwapOperation }),
+    [],
   );
 
   return (

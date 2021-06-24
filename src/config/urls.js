@@ -150,8 +150,13 @@ export const urls = {
       changelly: {
         main: "https://changelly.com/",
         tos: "https://changelly.com/terms-of-use",
+        support: "https://support.changelly.com/en/support/tickets/new",
       },
     },
+  },
+  exchange: {
+    learnMore:
+      "https://www.ledger.com/academy/benefits-of-buying-crypto-through-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=exchange",
   },
   // Errors
   errors: {

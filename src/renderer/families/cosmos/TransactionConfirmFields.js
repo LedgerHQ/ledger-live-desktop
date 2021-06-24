@@ -24,7 +24,7 @@ import { openURL } from "~/renderer/linking";
 import {
   OpDetailsData,
   OpDetailsVoteData,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import FormattedVal from "~/renderer/components/FormattedVal";
 
 const Info: ThemedComponent<{}> = styled(Box).attrs(() => ({

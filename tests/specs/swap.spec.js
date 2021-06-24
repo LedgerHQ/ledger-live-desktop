@@ -19,10 +19,21 @@ describe("Swap", () => {
 
   const $ = selector => app.client.$(selector);
 
-  it("access the feature", async () => {
-    // Access manager and go through firmware update
+  it("access the select providers", async () => {
     const elem = await $("#drawer-swap-button");
     await elem.click();
+    await app.client.waitForSync();
+    expect(await app.client.screenshot()).toMatchImageSnapshot({
+      customSnapshotIdentifier: "swap-providers",
+    });
+  });
+
+  it("choose changelly and access swap", async () => {
+    // Access manager and go through firmware update
+    const item = await $("#swap-providers-item-changelly");
+    await item.click();
+    const continueButton = await $("#swap-providers-continue");
+    await continueButton.click();
     await mockDeviceEvent(
       {
         type: "listingApps",

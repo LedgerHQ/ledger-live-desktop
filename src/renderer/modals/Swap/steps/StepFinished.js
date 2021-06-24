@@ -4,27 +4,31 @@ import type { Operation } from "@ledgerhq/live-common/lib/types/operation";
 import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import Box from "~/renderer/components/Box";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
-import IconSwap from "~/renderer/icons/Swap";
 import { Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import { colors } from "~/renderer/styles/theme";
 import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";
-import { openModal } from "~/renderer/actions/modals";
-
-import { useDispatch } from "react-redux";
-import { GradientHover } from "~/renderer/modals/OperationDetails/styledComponents";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
+import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
+import FakeLink from "~/renderer/components/FakeLink";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+import IconCheck from "~/renderer/icons/Check";
+import IconClock from "~/renderer/icons/Clock";
 
 const IconWrapper = styled(Box)`
-  background: ${colors.pillActiveBackground};
-  color: ${colors.wallet};
+  background: ${colors.lightGreen};
+  color: ${colors.positiveGreen};
   width: 50px;
   height: 50px;
   border-radius: 25px;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 const CapitalizedText = styled.span`
@@ -62,46 +66,66 @@ const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
 }
 `;
 
+const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  bg: "palette.background.paper",
+  color: "palette.text.shade60",
+}))`
+  border-radius: 50%;
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  padding: 2px;
+`;
+
 const StepFinished = ({
   swapId,
   provider,
+  targetCurrency,
   setLocked,
 }: {
   swapId: string,
   provider: string,
+  targetCurrency: string,
   setLocked: boolean => void,
 }) => {
   useEffect(() => {
     setLocked(false);
   }, [setLocked]);
 
+  const openProviderSupport = useCallback(() => {
+    openURL(urls.swap.providers[provider]?.support);
+  }, [provider]);
+
+  const SwapPill = ({ swapId }: { swapId: string }) => (
+    <SwapIdWrapper>
+      <Pill color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
+        {swapId}
+      </Pill>
+      <GradientHover>
+        <CopyWithFeedback text={swapId} />
+      </GradientHover>
+    </SwapIdWrapper>
+  );
+
   return (
     <Box alignItems="center">
       <IconWrapper>
-        <IconSwap size={18} />
+        <IconCheck size={18} />
+        <WrapperClock>
+          <IconClock size={14} />
+        </WrapperClock>
       </IconWrapper>
       <Text mt={16} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={5}>
         <Trans i18nKey={`swap.modal.steps.finished.subtitle`} />
       </Text>
-      <Box mt={16} horizontal alignItems="center">
-        <Text color="palette.text.shade50" ff="Inter|Regular" fontSize={14}>
-          <Trans i18nKey={`swap.modal.steps.finished.swap`} />
-        </Text>
-        <SwapIdWrapper>
-          <Pill ml={2} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={14}>
-            {swapId}
-          </Pill>
-          <GradientHover>
-            <CopyWithFeedback text={swapId} />
-          </GradientHover>
-        </SwapIdWrapper>
-      </Box>
       <Text p={20} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
-        <Trans i18nKey={`swap.modal.steps.finished.description`} />
+        <Trans i18nKey={`swap.modal.steps.finished.description`} values={{ targetCurrency }} />
       </Text>
-      <Alert type="primary" mt={3}>
+      <Alert type="help" mt={3} right={<SwapPill swapId={swapId} />}>
         <Trans i18nKey={`swap.modal.steps.finished.disclaimer`} values={{ provider }}>
-          <CapitalizedText>{provider}</CapitalizedText>
+          <FakeLink onClick={openProviderSupport}>
+            <CapitalizedText style={{ marginRight: 4 }}>{provider}</CapitalizedText>
+          </FakeLink>
         </Trans>
       </Alert>
     </Box>
@@ -119,7 +143,6 @@ export const StepFinishedFooter = ({
 }) => {
   const { operation } = result;
   const { fromAccount, fromParentAccount } = swap.exchange;
-  const dispatch = useDispatch();
 
   const onViewOperationDetails = useCallback(() => {
     const concernedOperation = operation
@@ -130,29 +153,27 @@ export const StepFinishedFooter = ({
 
     onClose();
     if (fromAccount && concernedOperation) {
-      dispatch(
-        openModal("MODAL_OPERATION_DETAILS", {
-          operationId: concernedOperation.id,
-          accountId: fromAccount.id,
-          parentId: fromParentAccount && fromParentAccount.id,
-        }),
-      );
+      setDrawer(OperationDetails, {
+        operationId: concernedOperation.id,
+        accountId: fromAccount.id,
+        parentId: fromParentAccount && fromParentAccount.id,
+      });
     }
-  }, [dispatch, fromAccount, fromParentAccount, onClose, operation]);
+  }, [fromAccount, fromParentAccount, onClose, operation]);
 
   return (
     <Box horizontal>
+      <Button onClick={onClose} secondary id="swap-modal-finished-close-button">
+        <Trans i18nKey="common.close" />
+      </Button>
       <Button
         id="swap-modal-finished-details-button"
-        secondary
+        primary
         mr={2}
         event="Swap completed - Clicked on operation details CTA"
         onClick={onViewOperationDetails}
       >
         <Trans i18nKey="swap.modal.steps.finished.seeDetails" />
-      </Button>
-      <Button onClick={onClose} primary id="swap-modal-finished-close-button">
-        <Trans i18nKey="common.close" />
       </Button>
     </Box>
   );

@@ -12,7 +12,7 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { WrongDeviceForAccount } from "@ledgerhq/errors";
+import { WrongDeviceForAccount, UpdateYourApp } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -39,6 +39,7 @@ import ExternalLinkButton from "../ExternalLinkButton";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
+import CrossCircle from "~/renderer/icons/CrossCircle";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -213,14 +214,29 @@ const OpenManagerBtn = ({
 
 const OpenManagerButton = connect(null, { closeAllModal })(OpenManagerBtn);
 
-export const renderRequiresAppInstallation = ({ appName }: { appName: string }) => (
-  <Wrapper>
-    <Title>
-      <Trans i18nKey="DeviceAction.appNotInstalled" values={{ appName }} />
-    </Title>
-    <OpenManagerButton appName={appName} />
-  </Wrapper>
-);
+export const renderRequiresAppInstallation = ({ appNames }: { appNames: string[] }) => {
+  const appNamesCSV = appNames.join(", ");
+  return (
+    <Wrapper>
+      <Logo>
+        <CrossCircle size={44} />
+      </Logo>
+      <ErrorTitle>
+        <Trans i18nKey="DeviceAction.appNotInstalledTitle" count={appNames.length} />
+      </ErrorTitle>
+      <ErrorDescription>
+        <Trans
+          i18nKey="DeviceAction.appNotInstalled"
+          values={{ appName: appNamesCSV }}
+          count={appNames.length}
+        />
+      </ErrorDescription>
+      <Box mt={24}>
+        <OpenManagerButton appName={appNamesCSV} />
+      </Box>
+    </Wrapper>
+  );
+};
 
 export const renderInstallingApp = ({
   appName,
@@ -365,6 +381,7 @@ export const renderError = ({
   list,
   supportLink,
   warning,
+  managerAppName,
 }: {
   error: Error,
   withOpenManager?: boolean,
@@ -373,6 +390,7 @@ export const renderError = ({
   list?: boolean,
   supportLink?: string,
   warning?: boolean,
+  managerAppName?: string,
 }) => (
   <Wrapper id={`error-${error.name}`}>
     <Logo warning={warning}>
@@ -392,24 +410,29 @@ export const renderError = ({
       </ErrorDescription>
     ) : null}
     <ButtonContainer>
-      {supportLink ? (
-        <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
-      ) : null}
-      {withExportLogs ? (
-        <ExportLogsButton
-          title={<Trans i18nKey="settings.exportLogs.title" />}
-          small={false}
-          primary={false}
-          outlineGrey
-          mx={1}
-        />
-      ) : null}
-      {withOpenManager ? <OpenManagerButton ml={4} mt={0} /> : null}
-      {onRetry ? (
-        <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
-          <Trans i18nKey="common.retry" />
-        </Button>
-      ) : null}
+      {managerAppName ? (
+        <OpenManagerButton appName={managerAppName} updateApp={error instanceof UpdateYourApp} />
+      ) : (
+        <>
+          {supportLink ? (
+            <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
+          ) : null}
+          {withExportLogs ? (
+            <ExportLogsButton
+              title={<Trans i18nKey="settings.exportLogs.title" />}
+              small={false}
+              primary={false}
+              outlineGrey
+              mx={1}
+            />
+          ) : null}
+          {onRetry ? (
+            <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
+              <Trans i18nKey="common.retry" />
+            </Button>
+          ) : null}
+        </>
+      )}
     </ButtonContainer>
   </Wrapper>
 );

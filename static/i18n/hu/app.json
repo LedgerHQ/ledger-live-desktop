@@ -5,6 +5,19 @@
     "yesterday": "Yesterday",
     "transactionDate": "Transaction date"
   },
+  "platform": {
+    "flows": {
+      "requestAccount": {
+        "title": "Select an account"
+      },
+      "broadcast": {
+        "toast": {
+          "title": "Transaction sent !",
+          "text": "Click here to see operation details"
+        }
+      }
+    }
+  },
   "common": {
     "never": "Soha",
     "apply": "Alkalmaz",
@@ -66,7 +79,8 @@
       "error": "Szinkronizálási hiba",
       "refresh": "Frissítés"
     },
-    "exchange": "Exchange"
+    "exchange": "Exchange",
+    "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -121,6 +135,7 @@
     }
   },
   "fees": {
+    "advanced": "Advanced",
     "custom": "Egyedi",
     "fast": "Gyors",
     "high": "Magas",
@@ -174,13 +189,13 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the Exchange app on your device",
-      "subtitle": "Go to manager and install Exchange app to swap assets.",
+      "title": "Please install the {{appName}} app on your device",
+      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "outdatedApp": {
-      "title": "Please update the Exchange app on your device",
-      "subtitle": "Go to manager and update Exchange app to swap assets.",
+      "title": "Please update the {{appName}} app on your device",
+      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
     "kyc": {
@@ -248,13 +263,16 @@
         "device": {
           "title": "Device"
         },
+        "dependencies": {
+          "title": "App checks"
+        },
         "finished": {
           "title": "Pending",
-          "subtitle": "Pending operation",
+          "subtitle": "Swap broadcast successfully ",
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
-          "disclaimer": "Please take note of your Swap ID number in case you’d need assistance from <0>{{provider}}</0> later.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your swapped crypto assets."
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },
@@ -278,6 +296,32 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
+    },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      }
     }
   },
   "fullNode": {
@@ -452,7 +496,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "title": "Buy crypto via our partner",
+      "header": "Buy crypto with {{provider}}",
+      "title": "Buy crypto via <0>{{provider}}</0>",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -460,7 +505,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "title": "Sell crypto via our partner",
+      "header": "Sell crypto with {{provider}}",
+      "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -468,6 +514,28 @@
     },
     "history": {
       "tab": "History"
+    },
+    "providers": {
+      "title": "Choose a provider to buy crypto",
+      "learnMore": "What is buy?",
+      "coinify": {
+        "bullets": [
+          "Available in 130+ countries",
+          "EUR, USD, GBP and 32 others",
+          "SEPA & Faster Payments",
+          "Local US wire transfers",
+          "Credit and debit cards"
+        ]
+      },
+      "wyre": {
+        "bullets": [
+          "Only 🇺🇸 bank account",
+          "USD support only",
+          "20+ crypto supported",
+          "ACH transfer",
+          "No credit & debit cards"
+        ]
+      }
     }
   },
   "lend": {
@@ -634,7 +702,10 @@
             "done": "Close",
             "cta": "View details"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "tooltip": {
+            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+          }
         }
       }
     },
@@ -691,7 +762,7 @@
       "cta": "Add account"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have any {{ asset }} account.",
+      "title": "You don't have a {{ asset }} account.",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
       "ctaBuy": "Buy {{ asset }}",
       "ctaReceive": "Receive {{ asset }}"
@@ -819,6 +890,40 @@
     "blackfriday": {
       "title": "BLACK FRIDAY ",
       "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+    }
+  },
+  "signmessage": {
+    "title": "Sign message",
+    "steps": {
+      "summary": {
+        "title": "Summary"
+      },
+      "sign": {
+        "title": "Device"
+      }
+    }
+  },
+  "walletconnect": {
+    "titleAccount": "Wallet Connect",
+    "disconnect": "Disconnect",
+    "disconnected": "Disconnected",
+    "connected": "Connected",
+    "connecting": "Connecting...",
+    "steps": {
+      "paste": {
+        "title": "Paste link",
+        "label": "Wallet Connect address",
+        "placeholder": "Paste Wallet Connect Link"
+      },
+      "confirm": {
+        "title": "Connect",
+        "details": "Wants to connect to the following Ethereum account through your wallet :"
+      }
+    },
+    "connectedscreen": {
+      "info": "You can now access the dApp on your desktop.",
+      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
+      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
   },
   "dashboard": {
@@ -973,8 +1078,11 @@
   "operationDetails": {
     "whatIsThis": "Mi ez a művelet?",
     "title": "Művelet részletei",
+    "type": "Type",
+    "amount": "Amount",
     "account": "Számla",
     "date": "Dátum",
+    "currentValue": "Current value",
     "status": "Státusz",
     "confirmed": "Megerősítve",
     "failed": "Sikertelen",
@@ -1032,7 +1140,10 @@
     "unlockDevice": "Old fel az eszközöd",
     "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
     "quitApp": "Lépj ki az alkalmazásból az eszközödön",
-    "appNotInstalled": "Kérlek, telepítsd a(z) {{appName}} alkalmazást",
+    "appNotInstalledTitle": "Missing required app",
+    "appNotInstalledTitle_plural": "Missing required apps",
+    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
+    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Eszközkezelő megnyitása",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
@@ -1419,6 +1530,9 @@
     "footer": {
       "estimatedFees": "Hálózati díjak"
     }
+  },
+  "sign": {
+    "title": "Sign transaction"
   },
   "releaseNotes": {
     "title": "Kiadási megjegyzések",
@@ -2322,12 +2436,14 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News"
+      "announcement": "News",
+      "operation": "Operation"
     }
   },
   "informationCenter": {
     "tooltip": "Information center",
-    "ongoingIncidentsTooltip": "There are {{incidentCount}} ongoing incidents",
+    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
+    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
     "tabs": {
       "announcements": "News",
       "announcementsUnseen": "News ({{unseenCount}})",
@@ -2336,18 +2452,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger live is up and running",
+        "title": "Ledger Live is up and running",
         "description": "Having trouble ? Go on our <0>help page</0>"
       },
       "statusNotOk": {
-        "title": "Ledger live is experiencing issues",
+        "title": "Ledger Live is experiencing issues",
         "learnMore": "Learn more"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger live"
+        "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
   },
@@ -2530,7 +2646,7 @@
           },
           "quizSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
@@ -2539,7 +2655,7 @@
           },
           "quizFailure": {
             "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety. Only one quick step left!",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step"
@@ -2582,8 +2698,8 @@
               "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
             },
             "writeDownWords": {
-              "title": "Write down all words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2. Repeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Write down 24 words",
+              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
             },
             "buttons": {
               "next": "Next step",
@@ -2671,23 +2787,6 @@
               "next": "Check my Nano",
               "prev": "Previous step",
               "help": "Need help"
-            }
-          },
-          "quizzSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto. Only one quick step left!",
-            "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
-            }
-          },
-          "quizzFail": {
-            "title": "You will soon become a pro...",
-            "paragraph1": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.",
-            "paragraph2": "Only one quick step left!",
-            "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
             }
           }
         }
@@ -2786,10 +2885,17 @@
   "connectTroubleshooting": {
     "desc": "Nehezen tudod csatlakoztatni a készüléked?"
   },
+  "SignMessageConfirm": {
+    "stringHash": "Message Hash",
+    "domainHash": "Domain Hash",
+    "messageHash": "Message Hash",
+    "message": "Message"
+  },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
@@ -2848,6 +2954,9 @@
     }
   },
   "errors": {
+    "countervaluesUnavailable": {
+      "title": "We're not able to provide a countervalue for this asset at the moment"
+    },
     "generic": {
       "title": "{{message}}",
       "description": "Something went wrong. Please retry or contact Ledger Support."

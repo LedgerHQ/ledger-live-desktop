@@ -11,8 +11,9 @@ import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
+import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { ManagerNotEnoughSpaceError } from "@ledgerhq/errors";
+import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
 import {
   renderAllowManager,
   renderAllowOpeningApp,
@@ -108,6 +109,7 @@ const DeviceAction = <R, H, P>({
     initSellRequested,
     initSellResult,
     initSellError,
+    signMessageRequested,
   } = hookState;
 
   const type = useTheme("colors.palette.type");
@@ -137,8 +139,10 @@ const DeviceAction = <R, H, P>({
   }
 
   if (requiresAppInstallation) {
-    const { appName } = requiresAppInstallation;
-    return renderRequiresAppInstallation({ appName });
+    const { appName, appNames: maybeAppNames } = requiresAppInstallation;
+    const appNames = maybeAppNames?.length ? maybeAppNames : [appName];
+
+    return renderRequiresAppInstallation({ appNames });
   }
 
   if (allowManagerRequestedWording) {
@@ -190,11 +194,22 @@ const DeviceAction = <R, H, P>({
   }
 
   if (!isLoading && error) {
-    if (error instanceof ManagerNotEnoughSpaceError || error instanceof OutdatedApp) {
-      return renderError({ error, withOpenManager: true });
+    if (
+      error instanceof ManagerNotEnoughSpaceError ||
+      error instanceof OutdatedApp ||
+      error instanceof UpdateYourApp
+    ) {
+      return renderError({
+        error,
+        managerAppName: error.managerAppName,
+      });
     }
 
-    return renderError({ error, onRetry, withExportLogs: true });
+    return renderError({
+      error,
+      onRetry,
+      withExportLogs: true,
+    });
   }
 
   if ((!isLoading && !device) || unresponsive) {
@@ -229,6 +244,17 @@ const DeviceAction = <R, H, P>({
         />
       );
     }
+  }
+
+  if (request && signMessageRequested) {
+    const { account } = request;
+    return (
+      <SignMessageConfirm
+        device={device}
+        account={account}
+        signMessageRequested={signMessageRequested}
+      />
+    );
   }
 
   if (typeof deviceStreamingProgress === "number") {

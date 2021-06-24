@@ -16,6 +16,8 @@ import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDiscla
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import Alert from "~/renderer/components/Alert";
 import type { StepProps } from "../types";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 import { urls } from "~/config/urls";
 
@@ -110,7 +112,7 @@ export function StepConfirmationFooter({
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
-              openModal("MODAL_OPERATION_DETAILS", {
+              setDrawer(OperationDetails, {
                 operationId: concernedOperation.id,
                 accountId: account.id,
                 parentId: parentAccount && parentAccount.id,

@@ -1,18 +1,49 @@
 // @flow
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 
 import SendFeeMode from "~/renderer/components/SendFeeMode";
 import SelectFeeStrategy from "~/renderer/components/SelectFeeStrategy";
 import GasLimitField from "./GasLimitField";
 import GasPriceField from "./GasPriceField";
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
+import { getGasLimit } from "@ledgerhq/live-common/lib/families/ethereum/transaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
+const hasAdvancedStrategy = transaction => {
+  return !["slow", "medium", "fast"].includes(transaction.feesStrategy);
+};
+
+const getAdvancedStrategy = transaction => {
+  if (hasAdvancedStrategy(transaction)) {
+    return {
+      label: transaction.feesStrategy,
+      amount: transaction.gasPrice,
+      displayedAmount: transaction.gasPrice.multipliedBy(getGasLimit(transaction)),
+    };
+  }
+
+  return null;
+};
+
 const Root = (props: *) => {
-  const [isAdvanceMode, setAdvanceMode] = useState(!props.transaction.feesStrategy);
-  const strategies = useFeesStrategy(props.transaction);
+  const { transaction } = props;
   const { account, updateTransaction } = props;
   const bridge = getAccountBridge(account);
+
+  const defaultStrategies = useFeesStrategy(transaction);
+  const [advancedStrategy, setAdvancedStrategy] = useState(getAdvancedStrategy(transaction));
+  const [isAdvanceMode, setAdvanceMode] = useState(!transaction.feesStrategy);
+  const strategies = useMemo(
+    () => (advancedStrategy ? [...defaultStrategies, advancedStrategy] : defaultStrategies),
+    [defaultStrategies, advancedStrategy],
+  );
+
+  useEffect(() => {
+    const newAdvancedStrategy = getAdvancedStrategy(transaction);
+    if (newAdvancedStrategy) {
+      setAdvancedStrategy(newAdvancedStrategy);
+    }
+  }, [transaction, setAdvancedStrategy]);
 
   const onFeeStrategyClick = useCallback(
     ({ amount, feesStrategy }) => {
