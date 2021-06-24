@@ -24,6 +24,11 @@ import accountModel from "./../../helpers/accountModel";
 import type { State } from ".";
 import isEqual from "lodash/isEqual";
 
+import {
+  makeCompoundSummaryForAccount,
+  getAccountCapabilities,
+} from "@ledgerhq/live-common/lib/compound/logic";
+
 export type AccountsState = Account[];
 const state: AccountsState = [];
 
@@ -232,6 +237,24 @@ export const isUpToDateAccountSelector: OutputSelector<
   { accountId: string },
   boolean,
 > = createSelector(accountSelector, isUpToDateAccount);
+
+export const hasLendEnabledAccountsSelector: OutputSelector<State, void, boolean> = createSelector(
+  shallowAccountsSelector,
+  accounts =>
+    flattenAccounts(accounts).some(account => {
+      if (!account || account.type !== "TokenAccount") return false;
+
+      // check if account already has lending enabled
+      const summary =
+        account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, undefined);
+
+      const capabilities = summary
+        ? account.type === "TokenAccount" && getAccountCapabilities(account)
+        : null;
+
+      return !!capabilities;
+    }),
+);
 
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode);
 

@@ -7,7 +7,11 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 
-import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
+import {
+  accountsSelector,
+  starredAccountsSelector,
+  hasLendEnabledAccountsSelector,
+} from "~/renderer/reducers/accounts";
 import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
@@ -193,6 +197,8 @@ const MainSideBar = () => {
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
   const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
 
+  const lendingEnabled = useSelector(hasLendEnabledAccountsSelector);
+
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
   }, [dispatch, collapsed]);
@@ -324,17 +330,20 @@ const MainSideBar = () => {
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
-              <SideBarListItem
-                id={"lend"}
-                label={t("sidebar.lend")}
-                icon={IconLending}
-                iconActiveColor="wallet"
-                onClick={handleClickLend}
-                isActive={location.pathname === "/lend"}
-                disabled={noAccounts}
-                collapsed={secondAnim}
-                NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
-              />
+              {lendingEnabled && (
+                <SideBarListItem
+                  id={"lend"}
+                  label={t("sidebar.lend")}
+                  icon={IconLending}
+                  iconActiveColor="wallet"
+                  onClick={handleClickLend}
+                  isActive={location.pathname === "/lend"}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+                />
+              )}
+
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}
