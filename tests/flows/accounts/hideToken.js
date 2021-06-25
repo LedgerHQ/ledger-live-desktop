@@ -5,6 +5,7 @@ const hideToken = (currency = "global") => {
   describe("hide token account", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("opens an account with tokens", async () => {

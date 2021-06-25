@@ -23,7 +23,6 @@ import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
-import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Alert from "~/renderer/components/Alert";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -558,21 +557,10 @@ export const renderSwapDeviceConfirmation = ({
           ),
         },
         (value, key) => {
-          const maybeModifiedKey =
-            key === "amountReceived" && exchangeRate.tradeMethod === "float"
-              ? "amountReceivedFloat"
-              : key;
           return (
-            <Box
-              horizontal
-              justifyContent="space-between"
-              key={maybeModifiedKey}
-              mb={2}
-              ml="12px"
-              mr="12px"
-            >
+            <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
               <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-                <Trans i18nKey={`DeviceAction.swap.${maybeModifiedKey}`} />
+                <Trans i18nKey={`DeviceAction.swap.${key}`} />
               </Text>
               <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
                 {value}
@@ -581,36 +569,6 @@ export const renderSwapDeviceConfirmation = ({
           );
         },
       )}
-      {exchangeRate.payoutNetworkFees ? (
-        <Box
-          horizontal
-          justifyContent="space-between"
-          key={"payoutNetworkFees"}
-          mb={2}
-          ml="12px"
-          mr="12px"
-        >
-          <LabelInfoTooltip
-            text={<Trans i18nKey={"DeviceAction.swap.payoutNetworkFeesTooltip"} />}
-            style={{ marginLeft: 4 }}
-          >
-            <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-              <Trans i18nKey={"DeviceAction.swap.payoutNetworkFees"} />
-            </Text>
-          </LabelInfoTooltip>
-          <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-            {exchangeRate.payoutNetworkFees && (
-              <CurrencyUnitValue
-                unit={getAccountUnit(exchange.toAccount)}
-                // $FlowFixMe
-                value={exchangeRate.payoutNetworkFees}
-                disableRounding
-                showCode
-              />
-            )}
-          </Text>
-        </Box>
-      ) : null}
       {renderVerifyUnwrapped({ modelId, type })}
     </>
   );
