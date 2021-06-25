@@ -41,7 +41,7 @@ const FormOrHistory = () => {
   return (
     <Box flex={1} pb={6}>
       <TrackPage category="Swap" />
-      <Box horizontal mb={2}>
+      <Box horizontal>
         <Box
           grow
           ff="Inter|SemiBold"
@@ -52,16 +52,20 @@ const FormOrHistory = () => {
           <Trans i18nKey="swap.title" />
         </Box>
       </Box>
-      <Alert
-        type={"hint"}
-        onLearnMore={onOpenParaswap}
-        learnMoreIsInternal
-        learnMoreLabel={<Trans i18nKey="swap.paraswap.cta" />}
-      >
-        <Text ff="Inter|Regular" fontSize={4}>
-          <Trans i18nKey="swap.paraswap.description" />
-        </Text>
-      </Alert>
+      <Box>
+        <Alert
+          type={"hint"}
+          mt={2}
+          bannerId={"paraswap-flow-notices"}
+          onLearnMore={onOpenParaswap}
+          learnMoreIsInternal
+          learnMoreLabel={<Trans i18nKey="swap.paraswap.cta" />}
+        >
+          <Text ff="Inter|Regular" fontSize={4}>
+            <Trans i18nKey="swap.paraswap.description" />
+          </Text>
+        </Alert>
+      </Box>
       <TabBar tabs={tabs.map(tab => t(tab.title))} onIndexChange={setTabIndex} index={tabIndex} />
       <Component {...location?.state} setTabIndex={setTabIndex} />
     </Box>
