@@ -196,6 +196,10 @@
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "What is Swap",
+    "paraswap": {
+      "cta": " Check it out",
+      "description":"Looking for Paraswap? It has been moved to the Browse tab!."
+    },
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
