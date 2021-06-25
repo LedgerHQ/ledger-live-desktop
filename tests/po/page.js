@@ -1,3 +1,11 @@
+// import {
+//   addAnnouncementFromPool,
+//   addMockAnnouncement,
+//   resetAnnouncements,
+// } from "../mocks/notificationsHelpers";
+// import { resetIncidents, toggleMockIncident } from "../mocks/serviceStatusHelpers";
+import { announcementsApiMock, serviceStatusApiMock } from "../common";
+
 export default class Page {
   constructor(app) {
     this.app = app;
@@ -109,6 +117,7 @@ export default class Page {
   async synchronize() {
     const btn = await this.topbarSynchronizeButton();
     await btn.click();
+    await this.app.client.waitForSync();
   }
 
   async goToBuyCrypto() {
@@ -124,5 +133,30 @@ export default class Page {
   async goToManager() {
     const btn = await this.drawerManagerButton();
     await btn.click();
+  }
+
+  // Notifications
+  async addAnnouncement() {
+    announcementsApiMock("addAnnouncementFromPool");
+    await this.synchronize();
+  }
+
+  async generateAnnouncement(params) {
+    announcementsApiMock("addMockAnnouncement", params);
+    await this.synchronize();
+  }
+
+  resetAnnouncements() {
+    announcementsApiMock("resetAnnouncements");
+  }
+
+  // ServiceStatus
+  async toggleIncident(bool = true) {
+    serviceStatusApiMock("toggleMockIncident", bool);
+    await this.synchronize();
+  }
+
+  resetIncidents() {
+    serviceStatusApiMock("resetIncidents");
   }
 }

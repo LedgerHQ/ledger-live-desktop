@@ -5,6 +5,7 @@ const showOperations = (currency = "global") => {
   describe("account operations list", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     afterAll(async () => {

@@ -5,6 +5,7 @@ const removeAccount = (currency = "global") => {
   describe("remove accounts flow", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("displays a list of accounts", async () => {

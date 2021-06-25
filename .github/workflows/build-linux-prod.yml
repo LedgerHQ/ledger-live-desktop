@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Tag?'
+        description: "Tag?"
         required: true
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
           ref: ${{github.event.inputs.tag}}
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: get yarn cache
