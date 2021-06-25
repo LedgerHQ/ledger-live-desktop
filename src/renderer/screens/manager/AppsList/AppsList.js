@@ -86,7 +86,7 @@ const AppsList = ({
   const reduxDispatch = useDispatch();
   const currenciesAccountsSetup = useSelector(currenciesSelector);
   const disableInstallBanner = state.installed.some(app =>
-    currenciesAccountsSetup.some(currency => currency.id === state.appByName[app.name].currencyId),
+    currenciesAccountsSetup.some(currency => currency.id === state.appByName[app.name]?.currencyId),
   );
 
   const inputRef = useRef<any>();
