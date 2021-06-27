@@ -2699,7 +2699,7 @@
             },
             "writeDownWords": {
               "title": "写下 24 个助记词",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "descr": "在恢复表的位置 1 写下 Nano 上显示的 Word #1 第一个词。然后在您的 Nano 设备上按右键显示 Word #2 第二个词，并将其写在位置 2。\n\n重复该操作，确保按正确的顺序和拼写将所有的助记词写下来。按 Nano 上的左键，核对以防出错。"
             },
             "buttons": {
               "next": "下一步",
