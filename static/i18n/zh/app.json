@@ -271,8 +271,8 @@
           "subtitle": "Swap broadcast successfully ",
           "swap": "您的 Swap ID：",
           "seeDetails": "查看详情",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "请记下您的 Swap ID 掉期交易号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
+          "description": "您的 Swap 掉期交易操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。"
         }
       }
     },
@@ -922,7 +922,7 @@
     },
     "connectedscreen": {
       "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
+      "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
   },
@@ -2442,8 +2442,8 @@
   },
   "informationCenter": {
     "tooltip": "资讯中心",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "有 {{count}} 个正在发生的事件",
+    "ongoingIncidentsTooltip_plural": "有 {{count}} 个正在发生的事件",
     "tabs": {
       "announcements": "新闻",
       "announcementsUnseen": "新闻 ({{unseenCount}})",
@@ -2646,7 +2646,7 @@
           },
           "quizSuccess": {
             "title": "已经是位高手！",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "您已准备好安全的管理您的加密资产了。\n\n只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
               "prev": "上一步",
@@ -2655,7 +2655,7 @@
           },
           "quizFailure": {
             "title": "距成为高手仅一步之遥……",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "别担心，Ledger 会全程为您的操作提供指导。很快，您就会对自己加密资产的安全性感到格外舒心。\n\n只剩下最后一小步！",
             "buttons": {
               "next": "下一步",
               "prev": "上一步"
