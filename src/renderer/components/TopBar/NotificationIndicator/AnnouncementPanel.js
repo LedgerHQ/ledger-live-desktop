@@ -305,7 +305,7 @@ export function AnnouncementPanel() {
             {// $FlowFixMe
             group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
               <React.Fragment key={uuid}>
-                <InView as="div" className onChange={visible => handleInView(visible, uuid)}>
+                <InView as="div" onChange={visible => handleInView(visible, uuid)}>
                   <Article
                     level={level}
                     icon={icon}
