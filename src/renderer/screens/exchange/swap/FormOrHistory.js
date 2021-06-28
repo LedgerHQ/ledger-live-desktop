@@ -9,7 +9,6 @@ import Swap from "~/renderer/screens/exchange/swap/Swap";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import FakeLink from "~/renderer/components/FakeLink";
 import { Trans, useTranslation } from "react-i18next";
 import History from "~/renderer/screens/exchange/swap/History";
 

@@ -17,7 +17,6 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 
 import IconCode from "~/renderer/icons/Code";
-import IconPoll from "~/renderer/icons/Poll";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 
 import AppCard from "~/renderer/components/Platform/AppCard";
@@ -47,17 +46,6 @@ const Header: ThemedComponent<{}> = styled(Box).attrs(p => ({
 const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
   ff: "Inter|SemiBold",
   fontSize: 7,
-  color: p.theme.colors.palette.secondary.main,
-}))``;
-
-const PollCTA = styled(CatalogCTA)`
-  background: transparent;
-  border: 1px dashed ${p => p.theme.colors.palette.divider};
-  color: ${p => p.theme.colors.palette.text.shade50};
-`;
-
-const PollText = styled(Text).attrs(p => ({
-  ff: "Inter|SemiBold",
   color: p.theme.colors.palette.secondary.main,
 }))``;
 
@@ -92,10 +80,6 @@ const PlatformCatalog = () => {
     openURL(urls.platform.developerPage);
   }, []);
 
-  const handlePollCTA = useCallback(() => {
-    openURL(urls.platform.poll);
-  }, []);
-
   const handleClick = useCallback(
     manifest => {
       history.push(`/platform/${manifest.id}`);
@@ -120,19 +104,6 @@ const PlatformCatalog = () => {
             />
           </GridItem>
         ))}
-        <PollCTA
-          title={t("platform.catalog.pollCTA.title")}
-          Icon={IconPoll}
-          onClick={handlePollCTA}
-          ctaLabel={
-            <>
-              <span>{t("platform.catalog.pollCTA.button")}</span>
-              <IconExternalLink size={14} />
-            </>
-          }
-        >
-          <PollText>{t("platform.catalog.pollCTA.description")}</PollText>
-        </PollCTA>
       </Grid>
       <DeveloperCTA
         title={t("platform.catalog.developerCTA.title")}
