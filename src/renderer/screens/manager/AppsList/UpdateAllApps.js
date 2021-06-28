@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, memo, useState, useMemo } from "react";
+import React, { useCallback, memo, useState, useMemo, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -27,6 +27,7 @@ import Item from "./Item";
 import Progress from "~/renderer/components/Progress";
 
 import ToolTip from "~/renderer/components/Tooltip";
+import { useLocation } from "react-router";
 
 const UpdatableHeader = styled.div`
   display: flex;
@@ -65,8 +66,15 @@ type Props = {
 };
 
 const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete }: Props) => {
+  const { search } = useLocation();
   const [open, setIsOpen] = useState();
   const { updateAllQueue } = state;
+
+  useEffect(() => {
+    const params = new URLSearchParams(search || "");
+    const y = params.get("updateApp");
+    setIsOpen(y === "true");
+  }, [search]);
 
   const outOfMemory = useMemo(
     () =>
@@ -174,6 +182,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
     <FadeInOutBox in={visible} mt={4}>
       <CollapsibleCard
         header={<UpdatableHeader>{visible && updateHeader}</UpdatableHeader>}
+        open={open}
         onOpen={setIsOpen}
       >
         {update.map(mapApp)}
