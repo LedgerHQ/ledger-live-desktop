@@ -51,7 +51,7 @@ const renderCountry = option => {
   );
 };
 
-const KYC = ({ onContinue }: { onContinue: () => void }) => {
+const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
@@ -110,7 +110,7 @@ const KYC = ({ onContinue }: { onContinue: () => void }) => {
   return (
     <Card justifyContent={"center"} style={{ minHeight: 608 }}>
       {swapKYC.wyre ? (
-        <Pending status={swapKYC.wyre?.status} onContinue={onContinue} />
+        <Pending status={swapKYC.wyre?.status} />
       ) : (
         <>
           <Box px={40} pt={40} mb={16} alignSelf={"normal"} alignItems={"center"}>

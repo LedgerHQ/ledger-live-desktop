@@ -1,21 +1,30 @@
 // @flow
 
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getSwapSelectableCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
+import { Trans, useTranslation } from "react-i18next";
 
-import Swap from "~/renderer/screens/exchange/swap/Swap";
+import TabBar from "~/renderer/components/TabBar";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import { setSwapSelectableCurrencies } from "~/renderer/actions/settings";
 import Loading from "~/renderer/screens/exchange/swap/Loading";
+import KYC from "~/renderer/screens/exchange/swap/KYC";
+import Form from "~/renderer/screens/exchange/swap/Form";
+import History from "~/renderer/screens/exchange/swap/History";
+import NotAvailable from "~/renderer/screens/exchange/swap/NotAvailable";
 import TrackPage from "~/renderer/analytics/TrackPage";
 
 const SwapEntrypoint = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [providers, setProviders] = useState();
   const [provider, setProvider] = useState();
+  const [tabIndex, setTabIndex] = useState(0);
+  const swapKYC = useSelector(swapKYCSelector);
+  const showWyreKYC = provider === "wyre" && swapKYC?.wyre?.status !== "approved";
 
   useEffect(() => {
     getProviders().then((providers: any) => {
@@ -40,6 +49,8 @@ const SwapEntrypoint = () => {
         dispatch(setSwapSelectableCurrencies(getSwapSelectableCurrencies([resultProvider])));
         setProviders([resultProvider]);
         setProvider(resultProvider.provider);
+      } else {
+        setProviders([]);
       }
     });
   }, [dispatch]);
@@ -47,12 +58,34 @@ const SwapEntrypoint = () => {
   return (
     <Box flex={1} pb={6}>
       <TrackPage category="Swap" />
-      {!providers ? (
-        <Loading />
-      ) : provider ? (
-        <Swap providers={providers} provider={provider} />
+      <Box horizontal>
+        <Box
+          grow
+          ff="Inter|SemiBold"
+          fontSize={7}
+          color="palette.text.shade100"
+          data-e2e="swapPage_title"
+        >
+          <Trans i18nKey="swap.title" />
+        </Box>
+      </Box>
+      <TabBar
+        tabs={[t("swap.tabs.exchange"), t("swap.tabs.history")]}
+        onIndexChange={setTabIndex}
+        index={tabIndex}
+      />
+      {tabIndex === 0 ? (
+        !providers ? (
+          <Loading />
+        ) : showWyreKYC ? (
+          <KYC />
+        ) : provider ? (
+          <Form providers={providers} provider={provider} setTabIndex={setTabIndex} />
+        ) : (
+          <NotAvailable />
+        )
       ) : (
-        <Text>{JSON.stringify(provider)}</Text>
+        <History />
       )}
     </Box>
   );

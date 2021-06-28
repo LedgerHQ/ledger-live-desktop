@@ -39,20 +39,13 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
   padding: 3px;
 `;
 
-const Pending = ({
-  onContinue,
-  status = "pending",
-}: {
-  onContinue: () => void,
-  status?: string,
-}) => {
+const Pending = ({ status = "pending" }: { status?: string }) => {
   const rejected = status === "closed";
   const dispatch = useDispatch();
 
   const onResetKYC = useCallback(() => {
     dispatch(setSwapKYCStatus({ provider: "wyre" }));
-    onContinue();
-  }, [dispatch, onContinue]);
+  }, [dispatch]);
 
   return (
     <Box px={40} style={{ minHeight: 560 }} justifyContent={"center"} alignItems={"center"}>
@@ -81,9 +74,11 @@ const Pending = ({
           </Text>
         </LinkWithExternalIcon>
       </Text>
-      <Button primary mt={20} onClick={rejected ? onResetKYC : onContinue}>
-        <Trans i18nKey={`swap.kyc.wyre.${status}.cta`} />
-      </Button>
+      {rejected ? (
+        <Button primary mt={20} onClick={onResetKYC}>
+          <Trans i18nKey={`swap.kyc.wyre.${status}.cta`} />
+        </Button>
+      ) : null}
     </Box>
   );
 };
