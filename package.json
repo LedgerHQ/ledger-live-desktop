@@ -37,9 +37,6 @@
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
-  "engines": {
-    "node": ">=12"
-  },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
     "@ledgerhq/devices": "^6.0.2",
