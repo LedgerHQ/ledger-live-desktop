@@ -65,6 +65,7 @@ const KYC = () => {
   // TODO Might need a better setup if this form gets more complicated
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [street1, setStreet1] = useState("");
   const [street2, setStreet2] = useState("");
   const [city, setCity] = useState("");
@@ -83,9 +84,10 @@ const KYC = () => {
         state,
         country: country?.value,
         postalCode,
+        dateOfBirth,
       },
     }),
-    [city, country, firstName, lastName, postalCode, state, street1, street2],
+    [city, country?.value, dateOfBirth, firstName, lastName, postalCode, state, street1, street2],
   );
 
   const onSubmitKYCData = useCallback(() => {
@@ -144,6 +146,20 @@ const KYC = () => {
                   maxLength={30}
                 />
               </Box>
+            </Box>
+            <Box horizontal alignSelf={"stretch"} mt={16}>
+              <Box flex={1}>
+                <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
+                  <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} />
+                </Text>
+                <Input
+                  disabled={isLoading}
+                  onChange={setDateOfBirth}
+                  placeholder={t("swap.kyc.wyre.form.dateOfBirthPlaceholder")}
+                  maxLength={50}
+                />
+              </Box>
+              <Box ml={24} flex={1} />
             </Box>
             <Box horizontal alignSelf={"stretch"} mt={16}>
               <Box flex={1}>

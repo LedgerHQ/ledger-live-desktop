@@ -262,12 +262,14 @@
           "state": "State", 
           "country": "Country", 
           "zipcode": "Zip Code" ,
+          "dateOfBirth": "Date of birth (Month, Day, Year)" ,
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
           "address1Placeholder": "Eg. 13, Maple street", 
           "address2Placeholder": "Eg. 13, Maple street", 
           "cityPlaceholder": "Eg. San José", 
-          "zipcodePlaceholder": "Enter your 5 digit Zip code" 
+          "zipcodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY" 
         }
       }
     },
