@@ -178,6 +178,7 @@
       "history": "السجل"
     },
     "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
         "title": "ستظهر مبادلاتك السابقة هنا",
         "description": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين ليدجر لايف (Ledger Live) في غضون ذلك."
