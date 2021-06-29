@@ -107,7 +107,7 @@ const KYC = () => {
 
   const hasErrors = Object.keys(errors).length;
   const canSubmit =
-    !hasErrors && firstName && lastName && street1 && state && country && postalCode;
+    !hasErrors && firstName && dateOfBirth && lastName && street1 && state && country && postalCode;
 
   return (
     <Card justifyContent={"center"} style={{ minHeight: 608 }}>
@@ -150,14 +150,9 @@ const KYC = () => {
             <Box horizontal alignSelf={"stretch"} mt={16}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
-                  <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} />
+                  <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} /> {dateOfBirth}
                 </Text>
-                <Input
-                  disabled={isLoading}
-                  onChange={setDateOfBirth}
-                  placeholder={t("swap.kyc.wyre.form.dateOfBirthPlaceholder")}
-                  maxLength={50}
-                />
+                <Input type={"date"} disabled={isLoading} onChange={setDateOfBirth} />
               </Box>
               <Box ml={24} flex={1} />
             </Box>

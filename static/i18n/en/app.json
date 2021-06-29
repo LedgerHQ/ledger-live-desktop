@@ -262,7 +262,7 @@
           "state": "State", 
           "country": "Country", 
           "zipcode": "Zip Code" ,
-          "dateOfBirth": "Date of birth (Month, Day, Year)" ,
+          "dateOfBirth": "Date of birth" ,
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
           "address1Placeholder": "Eg. 13, Maple street", 
