@@ -178,6 +178,7 @@
       "history": "Historial"
     },
     "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
         "title": "Tus permutas anteriores aparecerán aquí",
         "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
