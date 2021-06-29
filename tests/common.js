@@ -214,7 +214,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       return sync.waitForDisplayed({ timeout });
     });
 
-    app.client.addCommand("screenshot", async function(countdown = 500) {
+    app.client.addCommand("screenshot", async function(countdown = 1000) {
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 
