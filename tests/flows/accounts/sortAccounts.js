@@ -5,6 +5,7 @@ const sortAccounts = (currency = "global") => {
   describe("sort accounts", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("sort account default", async () => {

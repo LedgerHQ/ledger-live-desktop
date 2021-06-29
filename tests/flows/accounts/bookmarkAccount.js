@@ -5,6 +5,7 @@ const bookmarkAccount = (currency = "global", startsWithStaredAccounts = false) 
   describe("bookmark account", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     if (startsWithStaredAccounts) {
