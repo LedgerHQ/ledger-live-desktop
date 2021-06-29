@@ -178,6 +178,7 @@
       "history": "历史记录"
     },
     "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
         "title": "您之前的掉期交易会显示在这里",
         "description": "要么您还未进行过任何掉期交易，亦或 Ledger Live 在此期间被重置了 。"
