@@ -42,7 +42,7 @@ Ledger Live releases are signed. The automatic update mechanism makes use of the
 
 ### Requirements
 
-- [NodeJS](https://nodejs.org) LTS/erbium (Node 12.x)
+- [NodeJS](https://nodejs.org) `lts/fermium` (Node 14.x)
 - [Yarn 1.x](https://classic.yarnpkg.com/) (Classic)
 - [Python](https://www.python.org/) 2.7 or 3.5+
 - A C/C++ toolchain (see [node-gyp documentation](https://github.com/nodejs/node-gyp#on-unix))
