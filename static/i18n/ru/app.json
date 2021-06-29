@@ -178,6 +178,7 @@
       "history": "История"
     },
     "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
         "title": "Здесь будут показаны ваши предыдущие обмены",
         "description": "Вы ещё не меняли валюту, либо Ledger Live был сброшен."
