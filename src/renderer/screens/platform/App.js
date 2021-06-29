@@ -10,7 +10,7 @@ import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 type Props = {
   match: {
     params: {
-      platform: string,
+      appId: string,
     },
     isExact: boolean,
     path: string,
@@ -20,19 +20,19 @@ type Props = {
 
 export default function PlatformApp({ match }: Props) {
   const history = useHistory();
-  const { platform } = match.params;
-  const manifest = useAppManifest(platform);
+  const { appId } = match.params;
+  const manifest = useAppManifest(appId);
 
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
 
-  if (!manifest) {
-    return "oops no manifest";
-  }
+  // TODO for next urlscheme evolutions:
+  // - check if local settings allow to launch an app from this branch, else display an error
+  // - check if the app is available in store, else display a loader if apps are getting fetched from remote, else display an error stating that the app doesn't exist
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
-      <TrackPage category="Platform" name="App" />
-      <WebPlatformPlayer manifest={manifest} onClose={handleClose} />
+      <TrackPage category="Platform" name="App" appId={appId} />
+      {manifest ? <WebPlatformPlayer manifest={manifest} onClose={handleClose} /> : null}
     </Card>
   );
 }

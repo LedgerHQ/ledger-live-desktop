@@ -115,7 +115,7 @@ export default function Default() {
                           exact
                         />
                         <Route
-                          path="/platform/:platform"
+                          path="/platform/:appId"
                           render={(props: any) => <PlatformApp {...props} />}
                         />
                         <Route path="/lend" render={props => <Lend {...props} />} />

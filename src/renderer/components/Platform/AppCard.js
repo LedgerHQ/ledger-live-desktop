@@ -74,7 +74,10 @@ const HeaderContainer: ThemedComponent<{}> = styled(Box)`
   align-items: center;
 `;
 
-const IconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mr: 2 }))``;
+const IconContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({ mr: 2 }))`
+  user-select: none;
+  pointer-events: none;
+`;
 
 const TitleContainer: ThemedComponent<{}> = styled.div`
   flex-shrink: 1;

@@ -161,7 +161,6 @@ export const urls = {
   platform: {
     developerPage:
       "https://developers.ledger.com?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=catalog",
-    poll: "FIXME",
   },
   // Errors
   errors: {
