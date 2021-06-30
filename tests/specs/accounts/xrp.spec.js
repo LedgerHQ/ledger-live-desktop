@@ -7,6 +7,6 @@ describe("xrp family", () => {
     userData: "onboardingcompleted",
   });
 
-  addAccount("ripple");
-  accountsFlows("ripple");
+  addAccount("xrp");
+  accountsFlows("xrp");
 });
