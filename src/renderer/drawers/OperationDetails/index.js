@@ -215,6 +215,12 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
     onClose();
   }, [mainAccount, account, history, onClose, location]);
 
+  const currencyName = currency
+    ? currency.type === "TokenCurrency"
+      ? currency.parentCurrency.name
+      : currency.name
+    : undefined;
+
   return (
     <Box flow={3} px={20} mt={20}>
       <TrackPage
@@ -295,7 +301,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} my={1}>
           <LinkWithExternalIcon
             fontSize={4}
-            onClick={() => openURL(url)}
+            onClick={() => openURL(url, "viewOperationInExplorer", { currencyId: currencyName })}
             label={t("operationDetails.viewOperation")}
           />
         </Box>
