@@ -150,7 +150,7 @@ const KYC = () => {
             <Box horizontal alignSelf={"stretch"} mt={16}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
-                  <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} /> {dateOfBirth}
+                  <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} />
                 </Text>
                 <Input type={"date"} disabled={isLoading} onChange={setDateOfBirth} />
               </Box>
