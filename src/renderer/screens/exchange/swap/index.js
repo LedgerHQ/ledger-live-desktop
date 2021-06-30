@@ -20,13 +20,16 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 const SwapEntrypoint = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const [tabIndex, setTabIndex] = useState(0);
+
   const [providers, setProviders] = useState();
   const [provider, setProvider] = useState();
-  const [tabIndex, setTabIndex] = useState(0);
   const swapKYC = useSelector(swapKYCSelector);
   const showWyreKYC = provider === "wyre" && swapKYC?.wyre?.status !== "approved";
 
   useEffect(() => {
+    // Nb I'm not moving this to live-common at this time because of SWP-AGG, where the logic
+    // will change once again, I'm leaving it as is for now.
     getProviders().then((providers: any) => {
       let resultProvider;
       const disabledProviders = process.env.SWAP_DISABLED_PROVIDERS || "";
@@ -42,7 +45,6 @@ const SwapEntrypoint = () => {
       } else {
         resultProvider = providers.find(p => !disabledProviders.includes(p.provider));
       }
-      console.log("wure", providersByName, providers, resultProvider);
 
       // Only set as available currencies from this provider, on swp-agg this changes
       if (resultProvider) {

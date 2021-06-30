@@ -1,11 +1,13 @@
 // @flow
 
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import Box from "~/renderer/components/Box";
@@ -14,6 +16,7 @@ import Text from "~/renderer/components/Text";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import IconCross from "~/renderer/icons/Cross";
+
 
 export const CircleWrapper: ThemedComponent<{}> = styled.div`
   border-radius: 50%;
@@ -42,6 +45,35 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 const Pending = ({ status = "pending" }: { status?: string }) => {
   const rejected = status === "closed";
   const dispatch = useDispatch();
+  const swapKYC = useSelector(swapKYCSelector);
+  const providerKYC = swapKYC.wyre;
+
+  const onUpdateKYCStatus = useCallback(() => {
+    let cancelled = false;
+    async function updateKYCStatus() {
+      if (!providerKYC?.id) return;
+      const res = await getKYCStatus("wyre", providerKYC.id);
+      if (cancelled || res?.status === providerKYC?.status) return;
+      dispatch(
+        setSwapKYCStatus({
+          provider: "wyre",
+          id: res?.id,
+          status: res?.status,
+        }),
+      );
+    }
+    updateKYCStatus();
+    return () => {
+      cancelled = true;
+    };
+  }, [dispatch, providerKYC]);
+
+  useEffect(() => {
+    // Fixme Again, relying on provider specific status wording.
+    if (providerKYC && providerKYC.status !== "approved") {
+      onUpdateKYCStatus();
+    }
+  }, [onUpdateKYCStatus, providerKYC]);
 
   const onResetKYC = useCallback(() => {
     dispatch(setSwapKYCStatus({ provider: "wyre" }));

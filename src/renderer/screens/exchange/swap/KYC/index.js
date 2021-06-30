@@ -77,6 +77,7 @@ const KYC = () => {
     () => ({
       firstName,
       lastName,
+      dateOfBirth,
       residenceAddress: {
         street1,
         street2,
@@ -84,7 +85,6 @@ const KYC = () => {
         state,
         country: country?.value,
         postalCode,
-        dateOfBirth,
       },
     }),
     [city, country?.value, dateOfBirth, firstName, lastName, postalCode, state, street1, street2],
