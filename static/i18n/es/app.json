@@ -178,7 +178,7 @@
       "history": "Historial"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Tus transacciones de permuta en Desktop no están sincronizadas con Ledger Live Mobile",
       "empty": {
         "title": "Tus permutas anteriores aparecerán aquí",
         "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
@@ -269,11 +269,11 @@
         },
         "finished": {
           "title": "Pendiente",
-          "subtitle": "Swap broadcast successfully ",
+          "subtitle": "Transmisión exitosa de permuta",
           "swap": "Tu ID de Permuta:",
           "seeDetails": "Ver detalles",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "Toma nota del número de ID de permuta, en caso de que necesites ayuda del Soporte de <0><0>{{provider}}</0> support</0>.",
+          "description": "Tu operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que recibas tus {{targetCurrency}}."
         }
       }
     },
@@ -2443,8 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "Centro de información",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "Hay {{count}} incidente en curso",
+    "ongoingIncidentsTooltip_plural": "Hay {{count}} incidentes en curso",
     "tabs": {
       "announcements": "Noticias",
       "announcementsUnseen": "Noticias ({{unseenCount}})",
