@@ -178,6 +178,7 @@
       "history": "Historique"
     },
     "history": {
+      "disclaimer": "Vos transactions Swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
       "empty": {
         "title": "Vos échanges antérieurs apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de Swaps ou Ledger Live a été réinitialisé depuis votre dernier Swap."
@@ -2442,8 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "Fil d'informations",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "{{count}} incident en cours",
+    "ongoingIncidentsTooltip_plural": "{{count}} incidents en cours",
     "tabs": {
       "announcements": "Actualités",
       "announcementsUnseen": "Actualités ({{unseenCount}})",
