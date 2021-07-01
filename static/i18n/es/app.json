@@ -178,6 +178,7 @@
       "history": "Historial"
     },
     "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
         "title": "Tus permutas anteriores aparecerán aquí",
         "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
@@ -268,11 +269,11 @@
         },
         "finished": {
           "title": "Pendiente",
-          "subtitle": "Operación pendiente",
+          "subtitle": "Swap broadcast successfully ",
           "swap": "Tu ID de Permuta:",
           "seeDetails": "Ver detalles",
-          "disclaimer": "Anota el número de ID de Intercambio en caso de que necesites ayuda de <0>{{provider}}</0> más adelante.",
-          "description": "La operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que se reciban los activos cripto permutados."
+          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },
@@ -890,6 +891,40 @@
     "blackfriday": {
       "title": "BLACK FRIDAY",
       "description": "Disfruta un descuento del 40% en billeteras de hardware Ledger con el código de promoción BLACKFRIDAY20"
+    }
+  },
+  "signmessage": {
+    "title": "Firmar mensaje",
+    "steps": {
+      "summary": {
+        "title": "Resumen"
+      },
+      "sign": {
+        "title": "Dispositivo"
+      }
+    }
+  },
+  "walletconnect": {
+    "titleAccount": "Wallet Connect",
+    "disconnect": "Desconectar",
+    "disconnected": "Desconectado",
+    "connected": "Conectado",
+    "connecting": "Conectando...",
+    "steps": {
+      "paste": {
+        "title": "Pegar enlace",
+        "label": "Dirección de Wallet Connect",
+        "placeholder": "Pegar enlace de Wallet Connect"
+      },
+      "confirm": {
+        "title": "Conectar",
+        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:"
+      }
+    },
+    "connectedscreen": {
+      "info": "Ya puedes acceder a la dApp en Desktop.",
+      "warning": "No es seguro compartir direcciones de recepción de una dApp. Utiliza siempre Ledger Live para compartir tu dirección para recibir fondos.",
+      "disconnected": "Hay un problema de conexión entre la dApp, WalletConnect y Ledger Live. Espera unos momentos o intenta de nuevo la conexión"
     }
   },
   "dashboard": {
@@ -2408,7 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "Centro de información",
-    "ongoingIncidentsTooltip": "Hay {{incidentCount}} incidentes en curso",
+    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
+    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
     "tabs": {
       "announcements": "Noticias",
       "announcementsUnseen": "Noticias ({{unseenCount}})",
@@ -2417,11 +2453,11 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live está activo y funcionando normalmente",
+        "title": "Ledger Live funciona correctamente",
         "description": "¿Tienes problemas? Ingresa a nuestra <0>página de ayuda</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live presenta inconvenientes",
+        "title": "Ledger Live está experimentando problemas",
         "learnMore": "Conoce más"
       }
     },
@@ -2611,7 +2647,7 @@
           },
           "quizSuccess": {
             "title": "¡Ya tienes nivel de profesional!",
-            "paragraph": "Está todo listo para que administres de forma segura tus criptos. ¡Solo te queda un breve paso!",
+            "paragraph": "Ya puedes administrar de forma segura tus criptos. ¡Solo te queda un breve paso!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior",
@@ -2620,7 +2656,7 @@
           },
           "quizFailure": {
             "title": "Pronto tendrás nivel de profesional...",
-            "paragraph": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto te sentirás con completa confianza con respecto a la protección de tus criptomonedas. ¡Solo te queda un breve paso!",
+            "paragraph": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto tendrás completa confianza con respecto a la protección de tus criptos. ¡Solo te queda un breve paso!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior"
@@ -2663,8 +2699,8 @@
               "descr": "Elige una Hoja de recuperación en blanco, de las incluidas con tu Nano. Si las Hojas de Recuperación incluidas no están en blanco, ponte en contacto con el Soporte de Ledger."
             },
             "writeDownWords": {
-              "title": "Escribe todas las palabras",
-              "descr": "Escribe la “Word #1” que aparece en la pantalla de tu Nano en la posición 1 de tu Hoja de recuperación. A continuación, presiona el botón derecho de tu Nano para mostrar la “Word #2” y escríbela en la posición 2. Repite este proceso para todas las palabras, respetando cuidadosamente el orden y la ortografía. Presiona el botón izquierdo de tu Nano para volver a la palabra anterior y comprobar si has cometido algún error."
+              "title": "Escribe las 24 palabras",
+              "descr": "Escribe la Word #1 que aparece en la pantalla de tu Nano en la posición 1 de tu Hoja de recuperación. A continuación, presiona el botón derecho de tu Nano para mostrar la Word #2 y escríbela en la posición 2. Repite este proceso para todas las palabras, respetando cuidadosamente el orden y la ortografía. Presiona el botón izquierdo de tu Nano para volver a la palabra anterior y comprobar si has cometido algún error."
             },
             "buttons": {
               "next": "Siguiente paso",
@@ -2752,23 +2788,6 @@
               "next": "Verificar mi Nano",
               "prev": "Paso anterior",
               "help": "Necesitas ayuda"
-            }
-          },
-          "quizzSuccess": {
-            "title": "¡Ya tienes nivel de profesional!",
-            "paragraph": "Está todo listo para que administres de forma segura tus criptos. ¡Solo te queda un breve paso!",
-            "buttons": {
-              "next": "Siguiente paso",
-              "prev": "Paso anterior"
-            }
-          },
-          "quizzFail": {
-            "title": "Pronto tendrás nivel de profesional...",
-            "paragraph1": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto te sentirás con plena seguridad acerca de la protección de tus criptos.",
-            "paragraph2": "¡Solo te queda un breve paso!",
-            "buttons": {
-              "next": "Siguiente paso",
-              "prev": "Paso anterior"
             }
           }
         }
@@ -2866,6 +2885,12 @@
   },
   "connectTroubleshooting": {
     "desc": "¿Tienes dificultades para conectar tu dispositivo?"
+  },
+  "SignMessageConfirm": {
+    "stringHash": "Hash de mensaje",
+    "domainHash": "Hash de dominio",
+    "messageHash": "Hash de mensaje",
+    "message": "Mensaje"
   },
   "TransactionConfirm": {
     "title": "Confirma la operación en tu dispositivo para finalizarla",

@@ -178,6 +178,7 @@
       "history": "Historique"
     },
     "history": {
+      "disclaimer": "Vos transactions Swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
       "empty": {
         "title": "Vos échanges antérieurs apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de Swaps ou Ledger Live a été réinitialisé depuis votre dernier Swap."
@@ -268,11 +269,11 @@
         },
         "finished": {
           "title": "En attente",
-          "subtitle": "Opération en attente",
+          "subtitle": "Swap bien diffusé ",
           "swap": "Identifiant de votre Swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de l'aide de <0>{{provider}}</0> ultérieurement.",
-          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos crypto-actifs échangés."
+          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
     },
@@ -890,6 +891,40 @@
     "blackfriday": {
       "title": "BLACK FRIDAY ",
       "description": "Profitez de 40 % de réduction sur les wallets Ledger avec le code promo BLACKFRIDAY20"
+    }
+  },
+  "signmessage": {
+    "title": "Signer le message",
+    "steps": {
+      "summary": {
+        "title": "Récapitulatif"
+      },
+      "sign": {
+        "title": "Appareil"
+      }
+    }
+  },
+  "walletconnect": {
+    "titleAccount": "WalletConnect",
+    "disconnect": "Déconnecter",
+    "disconnected": "Déconnecté",
+    "connected": "Connecté",
+    "connecting": "Connexion en cours...",
+    "steps": {
+      "paste": {
+        "title": "Coller le lien",
+        "label": "Adresse WalletConnect",
+        "placeholder": "Coller le lien WalletConnect"
+      },
+      "confirm": {
+        "title": "Connecter",
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
+      }
+    },
+    "connectedscreen": {
+      "info": "Vous pouvez maintenant accéder à la DApp sur votre ordinateur.",
+      "warning": "Partager des adresses de bénéficiaire par DApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
+      "disconnected": "Il y a un problème de connexion entre la DApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
   },
   "dashboard": {
@@ -2408,7 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "Fil d'informations",
-    "ongoingIncidentsTooltip": "Il y a {{incidentCount}} incidents en cours.",
+    "ongoingIncidentsTooltip": "{{count}} incident en cours",
+    "ongoingIncidentsTooltip_plural": "{{count}} incidents en cours",
     "tabs": {
       "announcements": "Actualités",
       "announcementsUnseen": "Actualités ({{unseenCount}})",
@@ -2611,7 +2647,7 @@
           },
           "quizSuccess": {
             "title": "Vous êtes déjà pro.",
-            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité. Il ne vous reste qu'à connecter votre appareil.",
+            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité.\n\nIl ne vous reste qu'à connecter votre appareil.",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente",
@@ -2620,7 +2656,7 @@
           },
           "quizFailure": {
             "title": "Vous êtes sur le point de passer pro...",
-            "paragraph": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos. Il ne vous reste qu'à connecter votre appareil.",
+            "paragraph": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos.\n\nIl ne vous reste qu'à connecter votre appareil.",
             "buttons": {
               "next": "Étape suivante",
               "prev": "Étape précédente"
@@ -2663,8 +2699,8 @@
               "descr": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez l'Assistance Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
-              "title": "Noter tous les mots en gras",
-              "descr": "Écrivez en position 1 sur la feuille de récupération le mot n°1 (\"Word #1\") affiché en gras sur votre Nano. Puis appuyez sur le bouton droit de votre Nano pour voir le mot n°2 (\"Word #2\" en gras) et écrivez-le en position 2. Faites cela pour tous les mots affichés en gras en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
+              "title": "Noter les 24 mots",
+              "descr": "Écrivez en position 1 sur la feuille de récupération le mot n°1 (\"Word #1\") affiché en gras sur votre Nano. Puis appuyez sur le bouton droit de votre Nano pour voir le mot n°2 (\"Word #2\") et écrivez-le en position 2.\n\nFaites cela pour tous les mots affichés en gras en respectant scrupuleusement l'ordre et l'orthographe. Appuyez sur le bouton gauche de votre Nano pour vérifier et ne pas faire d'erreur."
             },
             "buttons": {
               "next": "Étape suivante",
@@ -2752,23 +2788,6 @@
               "next": "Vérifier mon Nano",
               "prev": "Étape précédente",
               "help": "Besoin d'aide"
-            }
-          },
-          "quizzSuccess": {
-            "title": "Vous êtes déjà pro.",
-            "paragraph": "Vous connaissez les précautions à adopter pour gérer vos cryptos en toute sécurité. Il ne vous reste qu'à connecter votre appareil.",
-            "buttons": {
-              "next": "Étape suivante",
-              "prev": "Étape précédente"
-            }
-          },
-          "quizzFail": {
-            "title": "Vous êtes sur le point de passer pro...",
-            "paragraph1": "Pas d'inquiétude, Ledger sera là pour vous guider. Vous vous sentirez bientôt parfaitement à l'aise pour bien protéger vos cryptos.",
-            "paragraph2": "Il ne vous reste qu'à connecter votre appareil.",
-            "buttons": {
-              "next": "Étape suivante",
-              "prev": "Étape précédente"
             }
           }
         }
@@ -2866,6 +2885,12 @@
   },
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?"
+  },
+  "SignMessageConfirm": {
+    "stringHash": "Hachage du message",
+    "domainHash": "Hachage du domaine",
+    "messageHash": "Hachage du message",
+    "message": "Message"
   },
   "TransactionConfirm": {
     "title": "Confirmez l'opération sur votre appareil pour la finaliser.",

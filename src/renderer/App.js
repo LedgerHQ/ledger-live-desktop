@@ -20,6 +20,7 @@ import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
+import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 
@@ -65,9 +66,11 @@ const App = ({ store, initialCountervalues }: Props) => {
                   <ToastProvider>
                     <AnnouncementProviderWrapper>
                       <Router>
-                        <DrawerProvider>
-                          <Default />
-                        </DrawerProvider>
+                        <WalletConnectProvider>
+                          <DrawerProvider>
+                            <Default />
+                          </DrawerProvider>
+                        </WalletConnectProvider>
                       </Router>
                     </AnnouncementProviderWrapper>
                   </ToastProvider>

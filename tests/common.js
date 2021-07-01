@@ -13,12 +13,14 @@ import AccountPage from "./po/account.page";
 import PortfolioPage from "./po/portfolio.page";
 import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
+import WCConnectedPage from "./po/wcconnected.page";
 import AddAccountsModal from "./po/addAccountsModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
 import ExportAccountsModal from "./po/exportAccountsModal.page";
 import ReceiveModal from "./po/receiveModal.page.js";
 import HideTokenModal from "./po/hideTokenModal.page";
+import WalletConnectPasteLinkModal from "./po/WalletConnectPasteLinkModal.page";
 import fs from "fs";
 import rimraf from "rimraf";
 import path from "path";
@@ -45,9 +47,36 @@ Application.prototype.startChromeDriver = function() {
 };
 
 const getMockDeviceEvent = app => async (...events) => {
-  return await app.client.execute(e => {
+  return app.client.execute(e => {
     window.mock.events.mockDeviceEvent(...e);
   }, events);
+};
+
+const getWCClientMock = app => async (method, args) => {
+  return app.client.execute(
+    ([method, args]) => {
+      window.WCinstance[method](...args);
+    },
+    [method, args],
+  );
+};
+
+const getAnnouncementApiMock = app => async (method, args) => {
+  return app.client.execute(
+    ([method, args]) => {
+      window.announcementsApi[method](args);
+    },
+    [method, args],
+  );
+};
+
+const getServiceStatusApiMock = app => async (method, args) => {
+  return app.client.execute(
+    ([method, args]) => {
+      window.serviceStatusApi[method](args);
+    },
+    [method, args],
+  );
 };
 
 let app;
@@ -59,14 +88,19 @@ let modalPage;
 let drawerPage;
 let accountPage;
 let accountsPage;
+let wcConnectedPage;
 let addAccountsModal;
 let accountSettingsModal;
 let exportOperationsHistoryModal;
 let exportAccountsModal;
 let receiveModal;
 let hideTokenModal;
+let walletConnectPasteLinkModal;
 let mockDeviceEvent;
+let wcClientMock;
 let userDataPath;
+let announcementsApiMock;
+let serviceStatusApiMock;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
@@ -102,6 +136,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         DISABLE_DEV_TOOLS: true,
         SPECTRON_RUN: true,
         CI: process.env.CI || "",
+        SYNC_ALL_INTERVAL: 999999999999999,
+        SYNC_BOOT_DELAY: 999999999999999,
       },
       env,
     );
@@ -148,13 +184,18 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     portfolioPage = new PortfolioPage(app);
     settingsPage = new SettingsPage(app);
     managerPage = new ManagerPage(app);
+    wcConnectedPage = new WCConnectedPage(app);
     addAccountsModal = new AddAccountsModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
     exportAccountsModal = new ExportAccountsModal(app);
     receiveModal = new ReceiveModal(app);
     hideTokenModal = new HideTokenModal(app);
+    walletConnectPasteLinkModal = new WalletConnectPasteLinkModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
+    wcClientMock = getWCClientMock(app);
+    announcementsApiMock = getAnnouncementApiMock(app);
+    serviceStatusApiMock = getServiceStatusApiMock(app);
 
     try {
       await app.start();
@@ -168,9 +209,9 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       !illustrations.error && (await illustrations.waitForDisplayed());
     });
 
-    app.client.addCommand("waitForSync", async () => {
+    app.client.addCommand("waitForSync", async (timeout = 60000) => {
       const sync = await app.client.$("#topbar-synchronized");
-      return sync.waitForDisplayed();
+      await sync.waitForDisplayed({ timeout });
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
@@ -240,15 +281,20 @@ export {
   deviceInfo,
   mockListAppsResult,
   mockDeviceEvent,
+  wcClientMock,
+  announcementsApiMock,
+  serviceStatusApiMock,
   page,
   accountPage,
   accountsPage,
   portfolioPage,
   settingsPage,
   managerPage,
+  wcConnectedPage,
   modalPage,
   drawerPage,
   hideTokenModal,
+  walletConnectPasteLinkModal,
   addAccountsModal,
   accountSettingsModal,
   exportOperationsHistoryModal,
