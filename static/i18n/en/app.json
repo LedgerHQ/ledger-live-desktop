@@ -18,15 +18,15 @@
       }
     },
     "catalog": {
-      "title": "Browse",
+      "title": "Discover",
       "branch": {
         "soon": "coming soon",
         "experimental": "experimental",
         "debug": "debug"
       },
       "banner": {
-        "title": "Explore our crypto services catalogue",
-        "description": "Unlock a new world of crypto possibilities. One secure access to all our smart services – DeFi apps, NFTs and more to come."
+        "title": "Discover our Live Apps Catalog",
+        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
       },
       "pollCTA": {
         "title": "Poll",
@@ -175,7 +175,7 @@
     "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend",
-    "catalog": "Browse"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -198,7 +198,7 @@
     "whatIsSwap": "What is Swap",
     "paraswap": {
       "cta": " Check it out",
-      "description":"Looking for Paraswap? It has been moved to the Browse tab!."
+      "description":"Looking for Paraswap? It has been moved to the Discover tab."
     },
     "tabs": {
       "exchange": "Exchange",
