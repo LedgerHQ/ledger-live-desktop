@@ -59,7 +59,7 @@ export default class AccountPage extends Page {
     const tokens = await this.getTokens();
     const [token] = tokens;
     await token.click({ button: "right" });
-    await this.app.client.pause(500);
+    await this.app.client.pause(1000);
     const hideButton = await this.menuHideTokenButton();
     await hideButton.click();
   }
