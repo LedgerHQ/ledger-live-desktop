@@ -25,7 +25,7 @@ const hideToken = (currency = "global") => {
       await hideTokenModal.confirm();
       await hideTokenModal.waitForClosed();
 
-      await accountPage.synchronize();
+      await app.client.waitForSync();
 
       const newTokens = await accountPage.getTokens();
       expect(newTokens).toHaveLength(tokensLength - 1);
