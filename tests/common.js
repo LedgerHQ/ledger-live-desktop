@@ -209,9 +209,9 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       !illustrations.error && (await illustrations.waitForDisplayed());
     });
 
-    app.client.addCommand("waitForSync", async (timeout = 60000) => {
+    app.client.addCommand("waitForSync", async () => {
       const sync = await app.client.$("#topbar-synchronized");
-      return sync.waitForDisplayed({ timeout });
+      await sync.waitForDisplayed();
     });
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
