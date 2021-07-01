@@ -10,13 +10,13 @@ import { rgba } from "~/renderer/styles/helpers";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import IconCross from "~/renderer/icons/Cross";
-
 
 export const CircleWrapper: ThemedComponent<{}> = styled.div`
   border-radius: 50%;
@@ -81,6 +81,7 @@ const Pending = ({ status = "pending" }: { status?: string }) => {
 
   return (
     <Box px={40} style={{ minHeight: 560 }} justifyContent={"center"} alignItems={"center"}>
+      <TrackPage category="Swap" name="KYC Pending" />
       {rejected ? (
         <CircleWrapper failed size={50}>
           <IconCross size={25} />

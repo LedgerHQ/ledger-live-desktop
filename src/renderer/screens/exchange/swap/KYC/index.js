@@ -8,6 +8,7 @@ import { submitKYC, countries, USStates } from "@ledgerhq/live-common/lib/exchan
 import { getFlag } from "@ledgerhq/live-common/lib/react";
 import type { KYCData } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
+import TrackPage from "~/renderer/analytics/TrackPage";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -115,6 +116,7 @@ const KYC = () => {
         <Pending status={swapKYC.wyre?.status} />
       ) : (
         <>
+          <TrackPage category="Swap" name="KYC Form" />
           <Box px={40} pt={40} mb={16} alignSelf={"normal"} alignItems={"center"}>
             <IconWyre size={32} />
             <Text ff="Inter|SemiBold" fontSize={18} color="palette.text.shade100">

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useMemo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSwapSelectableCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
@@ -15,7 +15,7 @@ import KYC from "~/renderer/screens/exchange/swap/KYC";
 import Form from "~/renderer/screens/exchange/swap/Form";
 import History from "~/renderer/screens/exchange/swap/History";
 import NotAvailable from "~/renderer/screens/exchange/swap/NotAvailable";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 const SwapEntrypoint = () => {
   const dispatch = useDispatch();
@@ -25,6 +25,15 @@ const SwapEntrypoint = () => {
   const [providers, setProviders] = useState();
   const [provider, setProvider] = useState();
   const swapKYC = useSelector(swapKYCSelector);
+
+  const onWrappedTabChange = useCallback(
+    newTabIndex => {
+      setTrackingSource(tabIndex === 0 ? "Exchange tab" : "History tab");
+      setTabIndex(newTabIndex);
+    },
+    [tabIndex],
+  );
+
   const showWyreKYC = provider === "wyre" && swapKYC?.wyre?.status !== "approved";
 
   useEffect(() => {
@@ -49,8 +58,8 @@ const SwapEntrypoint = () => {
       // Only set as available currencies from this provider, on swp-agg this changes
       if (resultProvider) {
         dispatch(setSwapSelectableCurrencies(getSwapSelectableCurrencies([resultProvider])));
-        setProviders([resultProvider]);
         setProvider(resultProvider.provider);
+        setProviders([resultProvider]);
       } else {
         setProviders([]);
       }
@@ -73,7 +82,7 @@ const SwapEntrypoint = () => {
       </Box>
       <TabBar
         tabs={[t("swap.tabs.exchange"), t("swap.tabs.history")]}
-        onIndexChange={setTabIndex}
+        onIndexChange={onWrappedTabChange}
         index={tabIndex}
       />
       {tabIndex === 0 ? (
