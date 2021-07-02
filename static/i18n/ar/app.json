@@ -18,25 +18,25 @@
       }
     },
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "كتالوج التطبيقات الحية",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "سيأتي قريباً",
+        "experimental": "تجريبي",
+        "debug": "تصحيح الأخطاء"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "اكتشف كتالوج التطبيقات الحية",
+        "description": "نحن نعمل جاهدين لنتيح لك الوصول إلى عالم DeFi، NFTs وأخرين، وبأمان مباشرةً من داخل Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "استطلاع",
+        "description": "ما الخدمة التي تريد رؤيتها في Ledger Live؟",
+        "button": "لنصوت!"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to portal"
+        "title": "للمبرمجين",
+        "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live.",
+        "button": "الذهاب إلى البوابة"
       }
     }
   },
@@ -111,7 +111,7 @@
   },
   "operation": {
     "type": {
-      "IN": "تم الإستلام",
+      "IN": "تم الاستلام",
       "OUT": "تم الإرسال",
       "CREATE": "تم إنشاؤه",
       "REVEAL": "تم الإظهار",
@@ -175,7 +175,7 @@
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
     "lend": "إقراض",
-    "catalog": "Discover"
+    "catalog": "إكتشف"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
@@ -197,8 +197,8 @@
     "titleCrypto": "مبادلة {{currency}}",
     "whatIsSwap": "ما هي المبادلة",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": " تفقد هذا",
+      "description": "تبحث عن Paraswap؟ لقد تم نقله إلى علامة تبويب الاكتشاف."
     },
     "tabs": {
       "exchange": "تداول",
@@ -457,7 +457,7 @@
   "account": {
     "lastOperations": "أحدث العمليات",
     "contractAddress": "عقد:",
-    "openInExplorer": "إفتحه في المتصفح",
+    "openInExplorer": "افتحه في المتصفح",
     "emptyState": {
       "title": "لا توجد أصول مشفرة بعد؟",
       "desc": "تأكد من تثبيت تطبيق <1><0>{{managerAppName}}</0></1> وابدأ في التلقي",
@@ -834,7 +834,7 @@
     },
     "stakeCosmos": {
       "title": "الرهن مع COSMOS",
-      "description": "قم بتفويض عملاتك ATOM من خلال صفحة الحساب وإكسب على مكافآت اليوم",
+      "description": "قم بتفويض عملاتك ATOM من خلال صفحة الحساب واكسب على مكافآت اليوم",
       "cta": "رهن Cosmos الآن"
     },
     "buyCrypto": {
@@ -1629,7 +1629,7 @@
     },
     "pending": "مُعلّق",
     "pickUnconfirmedRBF": "تحديد العملات من المعاملات غير المؤكدة، القابلة للاستبدال.",
-    "pickingStrategy": "إستراتيجية اختيار UTXO",
+    "pickingStrategy": "استراتيجية اختيار UTXO",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "أقدم العملات أولاً (FIFO)",
       "OPTIMIZE_SIZE": "تصغير الرسوم (الحجم الأمثل)",
@@ -1740,7 +1740,7 @@
             "title": "المدققون",
             "currentDelegation": "التفويض الحالي",
             "newDelegation": "تفويض جديد",
-            "chooseValidator": "إختار مدقق",
+            "chooseValidator": "اختار مدقق",
             "warning": "سيكون عليك الانتظار لمدة <0>21 يومًا</0> لإعادة التفويض من المدقق الجديد إذا غيرت رأيك مرة أخرى"
           },
           "device": {
