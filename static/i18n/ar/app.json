@@ -16,6 +16,28 @@
           "text": "انقر هنا لرؤية تفاصيل العملية"
         }
       }
+    },
+    "catalog": {
+      "title": "Live Apps Catalog",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
+      "banner": {
+        "title": "Discover our Live Apps Catalog",
+        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?",
+        "button": "Let’s vote!"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "button": "Go to portal"
+      }
     }
   },
   "common": {
@@ -152,7 +174,8 @@
     "manager": "المدير",
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
-    "lend": "إقراض"
+    "lend": "إقراض",
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
@@ -173,6 +196,10 @@
     "title": "مبادلة",
     "titleCrypto": "مبادلة {{currency}}",
     "whatIsSwap": "ما هي المبادلة",
+    "paraswap": {
+      "cta": " Check it out",
+      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+    },
     "tabs": {
       "exchange": "تداول",
       "history": "السجل"
@@ -297,32 +324,6 @@
       "toProvider": "عنوان المزود",
       "initialAmount": "المبلغ الأولي",
       "creditedAmount": "المبلغ المضاف"
-    },
-    "providers": {
-      "title": "اختر مزود لمبادلة العملات المشفرة",
-      "learnMore": "ما هي المبادلة؟",
-      "kycRequired": "مطلوب KYC",
-      "wyre": {
-        "bullets": [
-          "الولايات المتحدة فقط (قريبا أوروبا وأفريقيا وآسيا)",
-          "نقود ورموز توكن متعددة",
-          "مركزي"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT و 50+ آخرين",
-          "متعدد العملات",
-          "مركزي"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "الاتصال بـ 30+ DEXs (Uniswap, SushiSwap,...)",
-          "رموز التوكن إيثيريوم و ERC20",
-          "لا مركزي و بدون ثقة"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -515,28 +516,6 @@
     },
     "history": {
       "tab": "السجل"
-    },
-    "providers": {
-      "title": "اختار مزود لشراء العملات المشفرة",
-      "learnMore": "ما هو الشراء؟",
-      "coinify": {
-        "bullets": [
-          "متاح في 130+ بلد",
-          "يورو، دولار أمريكي، جنيه استرليني و32 آخرون",
-          "SEPA والمدفوعات السريعة",
-          "التحويلات البرقية المحلية للولايات المتحدة",
-          "بطاقات الائتمان وبطاقات الخصم"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "حساب بنكي 🇺🇸 فقط",
-          "دعم دولار أمريكي فقط",
-          "20+ عملات مشفرة مدعومة",
-          "تحويل ACH",
-          "لا توجد بطاقات ائتمان أو خصم"
-        ]
-      }
     }
   },
   "lend": {
