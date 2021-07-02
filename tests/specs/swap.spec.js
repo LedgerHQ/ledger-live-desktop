@@ -28,35 +28,6 @@ describe("Swap", () => {
     });
   });
 
-  /*
-  it("choose changelly and access swap", async () => {
-    // Access manager and go through firmware update
-    const item = await $("#swap-providers-item-changelly");
-    await item.click();
-    const continueButton = await $("#swap-providers-continue");
-    await continueButton.click();
-    await mockDeviceEvent(
-      {
-        type: "listingApps",
-        deviceInfo,
-      },
-      {
-        type: "result",
-        result: mockListAppsResult(
-          "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
-          "Exchange,Tron,Bitcoin,Ethereum",
-          deviceInfo,
-        ),
-      },
-      { type: "complete" },
-    );
-    await app.client.waitForSync();
-    expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-access",
-    });
-  });
-  */
-
   it("pass KYC landing", async () => {
     const KYCCheckbox = await $("#swap-landing-kyc-tos");
     await KYCCheckbox.waitForDisplayed();
