@@ -18,15 +18,15 @@
       }
     },
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Catalogue d'applications Live",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "À découvrir prochainement",
+        "experimental": "Expérimental",
+        "debug": "Débugger"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Découvrez le catalogue d'applications Live",
+        "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "pollCTA": {
         "title": "Sondage",
@@ -36,7 +36,7 @@
       "developerCTA": {
         "title": "Pour les développeurs",
         "description": "Toutes les informations dont vous avez besoin pour intégrer vos applications dans Ledger Live.",
-        "button": "Go to portal"
+        "button": "Accéder au portail"
       }
     }
   },
@@ -175,7 +175,7 @@
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
     "lend": "Prêter",
-    "catalog": "Discover"
+    "catalog": "Découvrir"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -197,8 +197,8 @@
     "titleCrypto": "Échanger {{currency}}",
     "whatIsSwap": "Qu'est-ce que le Swap ?",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": " Jeter un œil",
+      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir."
     },
     "tabs": {
       "exchange": "Échanger",
