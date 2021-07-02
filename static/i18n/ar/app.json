@@ -178,7 +178,7 @@
       "history": "السجل"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "عمليات المبادلة لتطبيق سطح المكتب الخاص بك غير متزامنة مع تطبيق Ledger Live للجوال",
       "empty": {
         "title": "ستظهر مبادلاتك السابقة هنا",
         "description": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين ليدجر لايف (Ledger Live) في غضون ذلك."
@@ -269,11 +269,11 @@
         },
         "finished": {
           "title": "مُعلقّة",
-          "subtitle": "Swap broadcast successfully ",
-          "swap": "معرّف التبادل الخاص بك:",
+          "subtitle": "تم البث المبادلة بنجاح ",
+          "swap": "معرّف المبادلة الخاص بك:",
           "seeDetails": "رؤية التفاصيل",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من </0>دعم </0>{{provider}}<0><0>.",
+          "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الامر مدة تصل إلى ساعة قبل أن تستلم {{targetCurrency}}."
         }
       }
     },
@@ -763,7 +763,7 @@
       "cta": "إضافة حساب"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "ليس لديك حساب {{ asset }}.",
       "description": "من أجل إيداع الأموال وإقراض العملات المشفرة تحتاج إلى حساب {{ asset }} . يُرجى تلقي الأموال على عنوان إيثيريوم الخاص بك.",
       "ctaBuy": "شراء {{ asset }}",
       "ctaReceive": "تلقي {{ asset }}"
@@ -894,7 +894,7 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "وقّع على الرسالة",
     "steps": {
       "summary": {
         "title": "الملخص"
@@ -923,7 +923,7 @@
     },
     "connectedscreen": {
       "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
+      "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
   },
@@ -2443,8 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "مركز المعلومات",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "هناك {{count}} وقائع جارية",
+    "ongoingIncidentsTooltip_plural": "هناك {{count}} وقائع جارية",
     "tabs": {
       "announcements": "أخبار",
       "announcementsUnseen": "أخبار ({{unseenCount}})",
@@ -2453,11 +2453,11 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
+        "title": "ليدجر لايف (Ledger Live) في وضع التشغيل",
         "description": "هل تواجه مشاكل؟ انتقل إلى <0>صفحة المساعدة</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
+        "title": "ليدجر لايف (Ledger Live) يواجه مشاكل",
         "learnMore": "معرفة المزيد"
       }
     },
@@ -2699,7 +2699,7 @@
               "descr": "احصل على ورقة استرداد فارغة، والتي أتت مرفقة مع جهاز نانو (Nano) الخاص بك. يرجى التواصل مع دعم ليدجر إذا لم تكن صفحة الاسترداد أتتك فارغة."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
+              "title": "اكتب 24 كلمة",
               "descr": "اكتب الكلمة رقم #1 (Word #1) المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 (Word #2) واكتبها في الموضع 2.\n\n كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
