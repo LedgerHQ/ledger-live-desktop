@@ -47,7 +47,7 @@ describe("WalletConnect", () => {
 
   it("triggers a send transaction", async () => {
     wcClientMock("sendTransaction", []);
-
+    await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "wc-connect-transaction-triggered",
     });
