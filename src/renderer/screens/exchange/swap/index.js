@@ -1,11 +1,12 @@
 // @flow
 
-import React, { useCallback, useMemo, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSwapSelectableCurrencies } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { Trans, useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 import TabBar from "~/renderer/components/TabBar";
 import Box from "~/renderer/components/Box";
@@ -21,10 +22,12 @@ const SwapEntrypoint = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [tabIndex, setTabIndex] = useState(0);
-
   const [providers, setProviders] = useState();
   const [provider, setProvider] = useState();
   const swapKYC = useSelector(swapKYCSelector);
+
+  const { state } = useLocation();
+  const { defaultCurrency, defaultAccount, defaultParentAccount } = state || {};
 
   const onWrappedTabChange = useCallback(
     newTabIndex => {
@@ -91,7 +94,14 @@ const SwapEntrypoint = () => {
         ) : showWyreKYC ? (
           <KYC />
         ) : provider ? (
-          <Form providers={providers} provider={provider} setTabIndex={setTabIndex} />
+          <Form
+            providers={providers}
+            provider={provider}
+            setTabIndex={setTabIndex}
+            defaultCurrency={defaultCurrency}
+            defaultAccount={defaultAccount}
+            defaultParentAccount={defaultParentAccount}
+          />
         ) : (
           <NotAvailable />
         )
