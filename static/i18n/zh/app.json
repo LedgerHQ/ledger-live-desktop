@@ -30,12 +30,12 @@
       },
       "pollCTA": {
         "title": "调查",
-        "description": "Which service do you want to see in Ledger Live?",
+        "description": "您想要在 Ledger Live 中看到哪种服务？",
         "button": "让我们来投票吧！"
       },
       "developerCTA": {
         "title": "面向开发者",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "description": "您所需要的将您的应用程序整合到 Ledger Live 的全部信息。",
         "button": "前往门户页面"
       }
     }
