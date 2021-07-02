@@ -216,7 +216,9 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
 
     app.client.addCommand("screenshot", async function(countdown = 500) {
       const unfocus = await app.client.$("#unfocus-please");
-      await unfocus.focus();
+      await app.client.execute(el => {
+        el.focus();
+      }, unfocus);
 
       await this.pause(countdown);
 
