@@ -924,7 +924,7 @@
     "connectedscreen": {
       "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
-      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+      "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
   },
   "dashboard": {
@@ -2464,7 +2464,7 @@
     "announcement": {
       "emptyState": {
         "title": "لا توجد أخبار حاليًا",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "ستجد هنا جميع الأخبار المتعلقة بليدجر (Ledger) وليدجر لايف (Ledger Live)"
       }
     }
   },
@@ -2647,7 +2647,7 @@
           },
           "quizSuccess": {
             "title": "أصبحت محترفًا بالفعل!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "أنت جاهز لإدارة أصولك المشفرة بأمان.\n\n لم يتبق أمامك سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة",
@@ -2656,7 +2656,7 @@
           },
           "quizFailure": {
             "title": "ستصبح محترفًا قريبًا...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "لا تقلق، ليدجر هنا لإرشادك خلال رحلتك. ستشعر قريبًا براحة إضافية بشأن أمان أصولك المشفرة.\n\n لم يتبقى سوى خطوة واحدة سريعة!",
             "buttons": {
               "next": "الخطوة التالية",
               "prev": "الخطوة السابقة"
