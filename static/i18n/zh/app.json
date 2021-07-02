@@ -18,25 +18,25 @@
       }
     },
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Live 应用目录",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "敬请期待",
+        "experimental": "实验性的",
+        "debug": "除错"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
+        "title": "探索我们的 Live 应用目录",
         "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
+        "title": "调查",
         "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "button": "让我们来投票吧！"
       },
       "developerCTA": {
-        "title": "For Developers",
+        "title": "面向开发者",
         "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to portal"
+        "button": "前往门户页面"
       }
     }
   },
@@ -175,7 +175,7 @@
     "exchange": "买入 / 卖出",
     "swap": "Swap (掉期)",
     "lend": "借出",
-    "catalog": "Discover"
+    "catalog": "发现"
   },
   "stars": {
     "placeholder": "星标账户以在此显示。",
@@ -197,8 +197,8 @@
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "什么是 Swap？",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": " 一探究竟",
+      "description": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡。"
     },
     "tabs": {
       "exchange": "兑换",
