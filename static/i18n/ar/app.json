@@ -906,10 +906,10 @@
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "disconnect": "قطع الاتصال",
+    "disconnected": "تم قطع الاتصال",
+    "connected": "تم الاتصال",
+    "connecting": "جاري الإتصال...",
     "steps": {
       "paste": {
         "title": "Paste link",
@@ -917,12 +917,12 @@
         "placeholder": "Paste Wallet Connect Link"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "اتصال",
+        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:"
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
+      "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
       "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
