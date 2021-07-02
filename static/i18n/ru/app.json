@@ -18,25 +18,25 @@
       }
     },
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Каталог приложений",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "в разработке",
+        "experimental": "экспериментальная функция",
+        "debug": "отладка"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Исследуйте наш Каталог приложений",
+        "description": "Мы делаем всё возможное, чтобы предоставить доступ к миру DeFi, NFT и другому. Вы сможете безопасно пользоваться ими прямо в Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "Опрос",
+        "description": "Какой услуги вам не хватает в Ledger Live?",
+        "button": "Давайте проголосовать!"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to portal"
+        "title": "Для разработчиков",
+        "description": "Информация о том, как интегрировать собственные приложения в Ledger Live.",
+        "button": "Перейти в Портал"
       }
     }
   },
@@ -175,7 +175,7 @@
     "exchange": "Купить/Продать",
     "swap": "Обмен",
     "lend": "Кредитование",
-    "catalog": "Discover"
+    "catalog": "Исследуйте"
   },
   "stars": {
     "placeholder": "Выделите счёт, чтобы он отобразился здесь.",
@@ -197,8 +197,8 @@
     "titleCrypto": "Обменять {{currency}}",
     "whatIsSwap": "Что такое Swap (обмен криптоактивов)",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": "Взгляните!",
+      "description": "Ищете Paraswap? Мы перенесли его во вкладку Обзор!"
     },
     "tabs": {
       "exchange": "Обменять",
