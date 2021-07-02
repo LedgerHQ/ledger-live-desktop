@@ -398,7 +398,11 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
               : isConfirmed
               ? t("operationDetails.confirmed")
               : t("operationDetails.notConfirmed")}
-            {hasFailed ? null : `${confirmationsString ? ` (${confirmationsString})` : ``}`}
+            {process.env.SPECTRON_RUN
+              ? ""
+              : hasFailed
+              ? null
+              : `${confirmationsString ? ` (${confirmationsString})` : ``}`}
           </Box>
         </OpDetailsData>
       </OpDetailsSection>
