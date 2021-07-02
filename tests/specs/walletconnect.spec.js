@@ -15,7 +15,7 @@ describe("WalletConnect", () => {
 
   it("goes to walletconnect modal", async () => {
     await accountsPage.goToAccounts();
-    const firstAccountRow = await accountsPage.getNthAccountRow(2);
+    const firstAccountRow = await accountsPage.walletConnectGetEthereumAccount();
     await accountsPage.clickOnAccountRow(firstAccountRow);
     await accountPage.openWalletConnect();
 
