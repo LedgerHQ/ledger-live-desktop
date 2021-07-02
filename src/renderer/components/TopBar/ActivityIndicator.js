@@ -35,7 +35,9 @@ export default function ActivityIndicatorInner() {
     track("SyncRefreshClick");
   }, [cvPolling, bridgeSync]);
 
-  const isUserClick = Date.now() - lastClickTime < 1000;
+  const isSpectronRun = !!process.env.SPECTRON_RUN; // we will keep 'spinning' in spectron case
+  const userClickTime = isSpectronRun ? 10000 : 1000;
+  const isUserClick = Date.now() - lastClickTime < userClickTime; // time to keep display the spinning on a UI click.
   const isRotating = isPending && (!isUpToDate || isUserClick);
   const isDisabled = isError || isRotating;
 
