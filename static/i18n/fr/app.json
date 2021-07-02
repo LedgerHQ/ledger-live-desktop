@@ -29,13 +29,13 @@
         "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "Sondage",
+        "description": "Quel service aimeriez-vous voir dans Ledger Live ?",
+        "button": "Voter"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "title": "Pour les développeurs",
+        "description": "Toutes les informations dont vous avez besoin pour intégrer vos applications dans Ledger Live.",
         "button": "Go to portal"
       }
     }
