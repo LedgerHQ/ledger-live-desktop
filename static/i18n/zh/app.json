@@ -16,6 +16,28 @@
           "text": "点击这里查看操作详情"
         }
       }
+    },
+    "catalog": {
+      "title": "Live Apps Catalog",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
+      "banner": {
+        "title": "Discover our Live Apps Catalog",
+        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?",
+        "button": "Let’s vote!"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "button": "Go to portal"
+      }
     }
   },
   "common": {
@@ -152,7 +174,8 @@
     "manager": "Manager（管理器）",
     "exchange": "买入 / 卖出",
     "swap": "Swap (掉期)",
-    "lend": "借出"
+    "lend": "借出",
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "星标账户以在此显示。",
@@ -173,6 +196,10 @@
     "title": "Swap (掉期)",
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "什么是 Swap？",
+    "paraswap": {
+      "cta": " Check it out",
+      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+    },
     "tabs": {
       "exchange": "兑换",
       "history": "历史记录"
@@ -297,32 +324,6 @@
       "toProvider": "提供方地址",
       "initialAmount": "初始额",
       "creditedAmount": "贷记额"
-    },
-    "providers": {
-      "title": "选择一个提供方来进行加密资产的掉期交易",
-      "learnMore": "什么是 Swap？",
-      "kycRequired": "需要 KYC",
-      "wyre": {
-        "bullets": [
-          "仅：美国 (不久后：欧洲、非洲和亚洲)",
-          "多币和代币",
-          "中心化的"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "比特币、以太币、泰达币以及50余个其他币种",
-          "多币种",
-          "中心化的"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "连接到 30 + DEXs (Uniswap, SushiSwap,...)",
-          "以太坊 和 ERC20 代币",
-          "去中心化与无需信任"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -515,28 +516,6 @@
     },
     "history": {
       "tab": "历史记录"
-    },
-    "providers": {
-      "title": "选择一个购买加密货币的供应方",
-      "learnMore": "什么是购买？",
-      "coinify": {
-        "bullets": [
-          "在 130 多个国家可用",
-          "欧元、美元、英镑以及其它32种",
-          "SEPA 与 快速付款",
-          "美国本地电汇",
-          "信用卡和借记卡"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "仅美国银行账户",
-          "仅支持美元",
-          "已支持20余种加密货币",
-          "ACH 转账",
-          "无信用卡和借记卡"
-        ]
-      }
     }
   },
   "lend": {
