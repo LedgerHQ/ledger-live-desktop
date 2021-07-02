@@ -897,10 +897,10 @@
     "title": "Sign message",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "الملخص"
       },
       "sign": {
-        "title": "Device"
+        "title": "جهاز"
       }
     }
   },
@@ -912,9 +912,9 @@
     "connecting": "جاري الإتصال...",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "لصق الرابط",
+        "label": "عنوان Wallet Connect",
+        "placeholder": "لصق رابط Wallet Connect"
       },
       "confirm": {
         "title": "اتصال",
@@ -2700,7 +2700,7 @@
             },
             "writeDownWords": {
               "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "descr": "اكتب الكلمة رقم #1 (Word #1) المعروضة على جهاز نانو (Nano) الخاص بك في الموضع 1 من ورقة الاسترداد. ثم اضغط يمينًا على جهاز نانو لعرض الكلمة رقم#2 (Word #2) واكتبها في الموضع 2.\n\n كرر العملية لجميع الكلمات مع احترام الترتيب والتهجئة بعناية. اضغط على اليسار على جهاز نانو الخاص بك للتحقق من وجود أي أخطاء."
             },
             "buttons": {
               "next": "الخطوة التالية",
@@ -2887,10 +2887,10 @@
     "desc": "هل تواجه صعوبة في توصيل جهازك؟"
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "رمز تجزئة الرسالة",
+    "domainHash": "رمز تجزئة المجال",
+    "messageHash": "رمز تجزئة الرسالة",
+    "message": "رسالة"
   },
   "TransactionConfirm": {
     "title": "يرجى تأكيد العملية على جهازك لإنهائها",
