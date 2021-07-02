@@ -1863,12 +1863,12 @@
   "polkadot": {
     "lockedBalance": "Bonded",
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
-    "lockedNotEnoughTooltip": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed",
     "unlockingBalance": "Unbonding",
     "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
     "unlockedBalance": "Unbonded",
     "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
     "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",

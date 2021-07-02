@@ -8,6 +8,7 @@ import { Trans } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { usePolkadotPreloadData } from "@ledgerhq/live-common/lib/families/polkadot/react";
+import { hasMinimumBondBalance } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -78,6 +79,7 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     unlockedBalance: _unlockedBalance,
   } = polkadotResources;
   const { minimumBondBalance: _minimumBondBalance } = usePolkadotPreloadData();
+  const hasMinBondBalance = hasMinimumBondBalance(account);
 
   const unit = getAccountUnit(account);
 
@@ -110,9 +112,10 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
   );
 
   const unlockedBalance = formatCurrencyUnit(unit, _unlockedBalance, formatConfig);
-  const minimumBondBalance = formatCurrencyUnit(unit, _minimumBondBalance, formatConfig);
-
-  const hasMinimumBondBalance = _lockedBalance.gte(_minimumBondBalance);
+  const minimumBondBalance = formatCurrencyUnit(unit, _minimumBondBalance, {
+    ...formatConfig,
+    discreet: false,
+  });
 
   return (
     <Wrapper>
@@ -133,24 +136,24 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
         <BalanceDetail>
           <ToolTip
             content={
-              hasMinimumBondBalance ? (
+              hasMinBondBalance ? (
                 <Trans i18nKey="polkadot.lockedTooltip" />
               ) : (
                 <Trans
-                  i18nKey="polkadot.lockedNotEnoughTooltip"
+                  i18nKey="polkadot.bondedBalanceBelowMinimum"
                   values={{ minimumBondBalance: minimumBondBalance }}
                 />
               )
             }
           >
-            <TitleWrapper warning={!hasMinimumBondBalance}>
+            <TitleWrapper warning={!hasMinBondBalance}>
               <Title>
                 <Trans i18nKey="polkadot.lockedBalance" />
               </Title>
-              {hasMinimumBondBalance ? <InfoCircle size={13} /> : <TriangleWarning size={13} />}
+              {hasMinBondBalance ? <InfoCircle size={13} /> : <TriangleWarning size={13} />}
             </TitleWrapper>
           </ToolTip>
-          <AmountValue warning={!hasMinimumBondBalance}>
+          <AmountValue warning={!hasMinBondBalance}>
             <Discreet>{lockedBalance}</Discreet>
           </AmountValue>
         </BalanceDetail>
