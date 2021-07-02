@@ -80,7 +80,7 @@
       "refresh": "Обновить"
     },
     "exchange": "Обмен",
-    "info": "Info"
+    "info": "Информация"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -178,6 +178,7 @@
       "history": "История"
     },
     "history": {
+      "disclaimer": "Ваши обмены в настольном приложении не синхронизированы с мобильным приложением Ledger Live",
       "empty": {
         "title": "Здесь будут показаны ваши предыдущие обмены",
         "description": "Вы ещё не меняли валюту, либо Ledger Live был сброшен."
@@ -268,11 +269,11 @@
         },
         "finished": {
           "title": "В ожидании",
-          "subtitle": "Swap broadcast successfully ",
+          "subtitle": "Обмен успешно транслирован в сеть ",
           "swap": "ID обмена:",
           "seeDetails": "Подробности",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "Сохраните ID обмена на случай, если в дальнейшем потребуется помощь от  <0><0>{{provider}}</0></0>.",
+          "description": "Операция обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите ваши {{targetCurrency}}."
         }
       }
     },
@@ -762,7 +763,7 @@
       "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "У вас нет счёта {{ asset }}.",
       "description": "Чтобы внести деньги и предоставить займ в криптовалюте, потребуется счёт {{ asset }}. Получите средства на свой Ethereum-адрес.",
       "ctaBuy": "Купить {{ asset }}",
       "ctaReceive": "Получить {{ asset }}"
@@ -893,37 +894,37 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "Подпишите сообщение",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "Сводка"
       },
       "sign": {
-        "title": "Device"
+        "title": "Устройство"
       }
     }
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "disconnect": "Отключить",
+    "disconnected": "Отключено",
+    "connected": "Подключено",
+    "connecting": "Подключаем...",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "Вставьте ссылку",
+        "label": "Адрес Wallet Connect",
+        "placeholder": "Вставьте ссылку Wallet Connect"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "Подключить",
+        "details": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:"
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
-      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+      "info": "Теперь вы можете пользоваться dApp в настольном приложении.",
+      "warning": "Совместное использование адресов, полученных в dApp, несёт риск для безопасности. Обязательно используйте Ledger Live при отправке адреса для получения средств.",
+      "disconnected": "Проблема с подключением между dApp, WalletConnect и Ledger Live. Подождите пару секунд или попробуйте подключиться снова"
     }
   },
   "dashboard": {
@@ -1078,11 +1079,11 @@
   "operationDetails": {
     "whatIsThis": "Что это за операция?",
     "title": "Сведения об операции",
-    "type": "Type",
-    "amount": "Amount",
+    "type": "Тип",
+    "amount": "Кол-во",
     "account": "Счёт",
     "date": "Дата",
-    "currentValue": "Current value",
+    "currentValue": "Текущая стоимость",
     "status": "Статус",
     "confirmed": "Подтверждена",
     "failed": "Неудачно",
@@ -2442,8 +2443,8 @@
   },
   "informationCenter": {
     "tooltip": "Центр уведомлений",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "Текущих событий: {{count}}",
+    "ongoingIncidentsTooltip_plural": "Текущих событий: {{count}}",
     "tabs": {
       "announcements": "Новости",
       "announcementsUnseen": "Новости ({{unseenCount}})",
@@ -2452,18 +2453,18 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
+        "title": "Приложение Ledger Live запущено и работает",
         "description": "Проблема? Воспользуйтесь <0>страницей помощи</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
+        "title": "В приложении Ledger Live возникли проблемы",
         "learnMore": "Подробнее"
       }
     },
     "announcement": {
       "emptyState": {
         "title": "Сейчас новостей нет",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "desc": "Здесь вы найдёте все новости о Ledger и Ledger Live"
       }
     }
   },
@@ -2646,7 +2647,7 @@
           },
           "quizSuccess": {
             "title": "Вы уже профи!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "Теперь вы готовы управлять собственной криптовалютой и хранить её безопасно.\n\nОстался всего один шаг.",
             "buttons": {
               "next": "Продолжить",
               "prev": "Назад",
@@ -2655,7 +2656,7 @@
           },
           "quizFailure": {
             "title": "Вы скоро станете профи...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "Не волнуйтесь, Ledger поможет вам научиться пользоваться устройством. Вскоре вы будете уверенно и безопасно обращаться с криптовалютой.\n\nОстался всего один шаг.",
             "buttons": {
               "next": "Продолжить",
               "prev": "Назад"
@@ -2698,8 +2699,8 @@
               "descr": "Возьмите чистый лист восстановления, который прилагается к устройству Nano. Свяжитесь со службой поддержки Ledger, если его не было в комплекте."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Запишите 24 слова",
+              "descr": "Запишите слово №1, показанное на устройстве Nano, в строку №1 на листе восстановления. Затем нажмите правую кнопку Nano, чтобы перейти к слову №2, и запишите его в строку №2. \n\nПовторите процесс со всеми словами, проверяя правильность написания и порядковый номер. Нажмите левую кнопку Nano, если вам необходимо вернуться к предыдущему слову."
             },
             "buttons": {
               "next": "Продолжить",
@@ -2886,10 +2887,10 @@
     "desc": "Не удаётся подключить устройство?"
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "Хэш сообщения",
+    "domainHash": "Хэш домена",
+    "messageHash": "Хэш сообщения",
+    "message": "Сообщение"
   },
   "TransactionConfirm": {
     "title": "Подтвердите операцию на устройстве для её завершения",
@@ -2955,7 +2956,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "В данный момент мы не можем предоставить эквивалент для этого актива"
     },
     "generic": {
       "title": "{{message}}",
