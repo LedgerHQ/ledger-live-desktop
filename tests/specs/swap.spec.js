@@ -28,7 +28,8 @@ describe("Swap", () => {
     });
   });
 
-  it.todo("choose changelly and access swap", async () => {
+  /*
+  it("choose changelly and access swap", async () => {
     // Access manager and go through firmware update
     const item = await $("#swap-providers-item-changelly");
     await item.click();
@@ -54,6 +55,7 @@ describe("Swap", () => {
       customSnapshotIdentifier: "swap-access",
     });
   });
+  */
 
   it("pass KYC landing", async () => {
     const KYCCheckbox = await $("#swap-landing-kyc-tos");
