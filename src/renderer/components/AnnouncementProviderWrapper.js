@@ -16,7 +16,7 @@ import networkApi from "../../../tests/mocks/serviceStatusHelpers";
 let notificationsApi;
 let serviceStatusApi;
 
-if (process.env.MOCK || process.env.SPECTRON_RUN) {
+if (process.env.SPECTRON_RUN) {
   notificationsApi = fetchApi;
   serviceStatusApi = networkApi;
 }

@@ -18,9 +18,6 @@ import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import FormattedDate from "../../FormattedDate";
-import { useDeepLinkHandler } from "~/renderer/hooks/useDeeplinking";
-import { useDispatch } from "react-redux";
-import { closeInformationCenter } from "~/renderer/actions/UI";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -147,10 +144,9 @@ type ArticleLinkProps = {
 };
 
 function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
-  const { handler } = useDeepLinkHandler();
-  const dispatch = useDispatch();
   const url = useMemo(() => {
     const url = new URL(href);
+
     url.searchParams.set("utm_medium", "announcement");
 
     if (utmCampaign) {
@@ -159,19 +155,10 @@ function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
     return url;
   }, [href, utmCampaign]);
 
-  const onLinkClick = useCallback(() => {
-    const isDeepLink = url.protocol === "ledgerlive:";
-
-    if (isDeepLink) {
-      handler(null, url.href);
-      dispatch(closeInformationCenter());
-    } else openURL(url.href);
-  }, [url, handler, dispatch]);
-
   return (
     <LinkWithExternalIcon
       color={color}
-      onClick={onLinkClick}
+      onClick={() => openURL(url.toString())}
       style={{
         marginTop: 15,
       }}
