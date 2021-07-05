@@ -155,10 +155,6 @@ export const urls = {
         main: "https://support.sendwyre.com/hc/en-us/requests/new",
         tos: "https://www.sendwyre.com/user-agreement/",
       },
-      wyre: {
-        main: "https://sendwyre.com/",
-        tos: "https://support.sendwyre.com/hc/en-us",
-      },
     },
   },
   exchange: {
