@@ -11,10 +11,10 @@ import MODAL_ADD_ACCOUNTS from "./AddAccounts";
 import MODAL_RECEIVE from "./Receive";
 import MODAL_TERMS from "./Terms";
 import MODAL_SEND from "./Send";
+import MODAL_SIGN_MESSAGE from "./SignMessage";
 import MODAL_SIGN_TRANSACTION from "./SignTransaction";
 import MODAL_REQUEST_ACCOUNT from "./RequestAccount";
 import MODAL_UPDATE_FIRMWARE from "./UpdateFirmwareModal";
-import MODAL_OPERATION_DETAILS from "./OperationDetails";
 import MODAL_MIGRATE_ACCOUNTS from "./MigrateAccounts";
 import MODAL_EXPORT_ACCOUNTS from "./ExportAccounts";
 import MODAL_TECHNICAL_DATA from "./TechnicalData";
@@ -24,7 +24,7 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
-import MODAL_SWAP_OPERATION_DETAILS from "./SwapOperationDetails";
+import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
 
 import MODAL_FULL_NODE from "./FullNode";
 
@@ -73,11 +73,12 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ADD_ACCOUNTS,
   MODAL_RECEIVE,
   MODAL_TERMS,
+  MODAL_WALLETCONNECT_PASTE_LINK,
   MODAL_SEND,
+  MODAL_SIGN_MESSAGE,
   MODAL_SIGN_TRANSACTION,
   MODAL_REQUEST_ACCOUNT,
   MODAL_UPDATE_FIRMWARE,
-  MODAL_OPERATION_DETAILS,
   MODAL_DELEGATE,
   MODAL_MIGRATE_ACCOUNTS,
   MODAL_EXPORT_ACCOUNTS,
@@ -119,7 +120,6 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   MODAL_SWAP,
-  MODAL_SWAP_OPERATION_DETAILS,
   MODAL_FULL_NODE,
 };
 

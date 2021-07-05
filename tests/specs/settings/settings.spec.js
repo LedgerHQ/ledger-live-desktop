@@ -37,7 +37,7 @@ describe("Settings", () => {
   it("go to settings -> experimental", async () => {
     await settingsPage.goToExperimentalTab();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "settings-experiemntal",
+      customSnapshotIdentifier: "settings-experimental",
     });
   });
 });

@@ -3,7 +3,7 @@ const fs = require("fs");
 
 const path = "tests/docker-electron-webdriver/";
 
-const hashes = ["../../package.json", "../../yarn.lock", "yarn.js"]
+const hashes = ["../../package.json", "../../yarn.lock", "../../yalc.lock", "yarn.js"]
   .map(f => child_process.execSync(`shasum ${path}${f}`).toString())
   .join(",");
 

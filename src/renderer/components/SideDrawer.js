@@ -2,12 +2,19 @@
 
 import React, { useEffect, useCallback, useState, useRef } from "react";
 import styled from "styled-components";
-import ReactDOM from "react-dom";
+import { color } from "styled-system";
 import { Transition } from "react-transition-group";
 import IconCross from "~/renderer/icons/Cross";
 import { createFocusTrap } from "focus-trap";
+import Text from "./Text";
+import { Trans } from "react-i18next";
+import IconAngleLeft from "~/renderer/icons/AngleLeft";
+import { Base as Button } from "./Button";
+import Box from "./Box/Box";
 
-const TouchButton = styled.div`
+const TouchButton = styled.button`
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
   display: inline-flex;
   max-height: 100%;
   -webkit-tap-highlight-color: transparent;
@@ -26,40 +33,38 @@ const TouchButton = styled.div`
 
 const DURATION = 250;
 
-const DrawerBackdrop = styled.div`
+const transitionBackdropStyles = {
+  entering: {},
+  entered: { opacity: 1 },
+  exiting: {},
+  exited: {},
+};
+
+const DrawerBackdrop = styled.div.attrs(({ state }) => ({
+  style: transitionBackdropStyles[state],
+}))`
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.65);
   will-change: opacity;
-
-  &.entered {
-    opacity: 0.65;
-  }
-  &.entering {
-    opacity: 0.65;
-    transition: opacity ${DURATION}ms ease-out;
-  }
-  &.exited {
-    opacity: 0;
-  }
-  &.exiting {
-    opacity: 0;
-    transition: opacity ${DURATION}ms ease-out;
-  }
+  opacity: 0;
+  transition: opacity ${DURATION}ms ease-out;
 `;
 
-const DrawerTopContainer = styled.div`
-  position: absolute;
-  top: 43px;
-  right: 43px;
-  display: flex;
-  z-index: 1;
-`;
+const transitionStyles = {
+  entering: {},
+  entered: { transform: "translateX(0)" },
+  exiting: {},
+  exited: {},
+};
 
-const DrawerContent = styled.div`
+const DrawerContent = styled.div.attrs(({ state }) => ({
+  style: transitionStyles[state],
+  bg: "palette.background.paper",
+}))`
   position: absolute;
   top: 0;
   left: ${p => (p.direction === "right" ? 0 : "unset")};
@@ -67,33 +72,33 @@ const DrawerContent = styled.div`
   bottom: 0;
   z-index: 1;
   box-sizing: border-box;
-  padding: 0px 40px;
   width: 80%;
-  background-color: ${p =>
-    p.paper ? p.theme.colors.palette.background.paper : p.theme.colors.palette.background.default};
+  ${color};
+  transform: translateX(
+    ${p => (p.direction === "right" ? -100 : p.direction === "left" ? 100 : 0)}%
+  );
   transition: transform ${DURATION}ms ease-out;
-  max-width: 430px;
+  max-width: 500px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   will-change: transform;
-
-  &.entering {
-    transform: translateX(0);
-  }
-  &.entered {
-    transform: translateX(0);
-  }
-  &.exiting {
-    transform: translateX(
-      ${p => (p.direction === "right" ? -100 : p.direction === "left" ? 100 : 0)}%
-    );
-  }
-  &.exited {
-    transform: translateX(
-      ${p => (p.direction === "right" ? -100 : p.direction === "left" ? 100 : 0)}%
-    );
-  }
+  overflow: hidden;
 `;
 
-const DrawerContainer = styled.div`
+const transitionContainerStyles = {
+  entering: {},
+  entered: {},
+  exiting: {},
+  exited: {
+    pointerEvents: "none",
+    visibility: "hidden",
+  },
+};
+
+const DrawerContainer = styled.div.attrs(({ state }) => ({
+  style: transitionContainerStyles[state],
+}))`
   color: ${p => p.theme.colors.palette.text.shade90};
   position: fixed;
   left: 0;
@@ -102,17 +107,13 @@ const DrawerContainer = styled.div`
   right: 0;
   overflow: hidden;
   z-index: 50;
-
-  &.exited {
-    pointer-events: none;
-    visibility: hidden;
-  }
 `;
 
 type DrawerProps = {
   children?: React$Node,
   isOpen?: boolean,
   onRequestClose?: (*) => void,
+  onRequestBack?: (*) => void,
   direction?: "right" | "left",
   paper?: boolean,
 };
@@ -121,8 +122,9 @@ export function SideDrawer({
   children,
   isOpen = false,
   onRequestClose,
+  onRequestBack,
   direction = "right",
-  paper = false,
+  ...props
 }: DrawerProps) {
   const [isMounted, setMounted] = useState(false);
 
@@ -184,31 +186,52 @@ export function SideDrawer({
     return null;
   }
 
-  return ReactDOM.createPortal(
+  return (
     <Transition
       in={isOpen}
-      timeout={DURATION}
+      timeout={{
+        appear: 0,
+        enter: DURATION,
+        exit: DURATION * 3, // leaves extra time for the animation to end before unmount
+      }}
       onEntered={onEntered}
       onExited={onExited}
       unmountOnExit
     >
       {state => (
-        <DrawerContainer className={state} ref={focusTrapElem} tabIndex="-1">
-          <DrawerContent paper={paper} isOpened={isOpen} className={state} direction={direction}>
-            {onRequestClose ? (
-              <DrawerTopContainer>
-                <TouchButton onClick={onRequestClose}>
-                  <IconCross size={24} />
-                </TouchButton>
-              </DrawerTopContainer>
+        <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
+          <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
+            {onRequestClose || onRequestBack ? (
+              <Box
+                horizontal
+                justifyContent="space-between"
+                height={62}
+                alignItems="center"
+                m={0}
+                p="24px"
+                style={{ zIndex: 200 }}
+              >
+                {onRequestBack && (
+                  <Button onClick={onRequestBack} className="sidedrawer-close">
+                    <IconAngleLeft size={12} />
+                    <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
+                      <Trans i18nKey="common.back" />
+                    </Text>
+                  </Button>
+                )}
+                <Box flex="1" />
+                {onRequestClose && (
+                  <TouchButton onClick={onRequestClose} className="sidedrawer-close">
+                    <IconCross size={16} />
+                  </TouchButton>
+                )}
+              </Box>
             ) : null}
             {children}
           </DrawerContent>
-          <DrawerBackdrop onClick={onRequestClose || undefined} className={state} />
+          <DrawerBackdrop state={state} onClick={onRequestClose || undefined} />
         </DrawerContainer>
       )}
-    </Transition>,
-    // $FlowFixMe
-    document.getElementById("modals"),
+    </Transition>
   );
 }

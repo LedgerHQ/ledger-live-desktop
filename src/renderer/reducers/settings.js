@@ -120,7 +120,7 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  language: null,
+  language: "en",
   theme: null,
   region: null,
   orderAccounts: "balance|desc",

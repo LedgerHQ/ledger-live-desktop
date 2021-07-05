@@ -1,13 +1,10 @@
 /* eslint-disable jest/no-export */
-import { app, page, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
+import { app, accountSettingsModal, accountsPage, accountPage } from "../../common.js";
 
 const editAccountName = (currency = "global") => {
   describe("edit name flow", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
-      if (currency === "xrp") {
-        await page.synchronize();
-      }
       await app.client.waitForSync();
     });
 

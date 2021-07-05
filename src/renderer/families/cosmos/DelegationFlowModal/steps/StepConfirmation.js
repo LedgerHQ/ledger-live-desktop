@@ -14,6 +14,8 @@ import RetryButton from "~/renderer/components/RetryButton";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { StepProps } from "../types";
 
@@ -96,7 +98,7 @@ export function StepConfirmationFooter({
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
-              openModal("MODAL_OPERATION_DETAILS", {
+              setDrawer(OperationDetails, {
                 operationId: concernedOperation.id,
                 accountId: account.id,
                 parentId: parentAccount && parentAccount.id,

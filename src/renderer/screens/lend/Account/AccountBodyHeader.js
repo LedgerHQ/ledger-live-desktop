@@ -65,7 +65,7 @@ const Loans = ({ account, parentAccount }: Props) => {
               : null}
           </>
         ) : (
-          <>
+          <Box horizontal p={2}>
             <Box style={{ maxWidth: "65%" }}>
               <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
                 <Trans i18nKey={"lend.account.info"} values={{ currency: currency.name }} />
@@ -77,12 +77,12 @@ const Loans = ({ account, parentAccount }: Props) => {
                 />
               </Box>
             </Box>
-            <Box>
+            <Box flex="1" alignItems="flex-end" ml={2}>
               <Button primary small disabled={lendingDisabled} onClick={onLending}>
                 <Trans i18nKey={"lend.account.lend"} values={{ currency: currency.name }} />
               </Button>
             </Box>
-          </>
+          </Box>
         )}
       </TableContainer>
       {summary && summary.closed.length > 0 ? (
