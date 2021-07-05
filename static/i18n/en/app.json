@@ -284,20 +284,28 @@
         "form":{
           "firstName": "First Name",
           "lastName": "Last Name",
-          "address1": "Street Address Line 1", 
-          "address2": "Street Address Line 2", 
+          "street1": "Street Address Line 1", 
+          "street2": "Street Address Line 2", 
           "city": "City", 
           "state": "State", 
           "country": "Country", 
-          "zipcode": "Zip Code" ,
+          "postalCode": "Zip Code" ,
           "dateOfBirth": "Date of birth" ,
+
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
-          "address1Placeholder": "Eg. 13, Maple street", 
-          "address2Placeholder": "Eg. 13, Maple street", 
+          "street1Placeholder": "Eg. 13, Maple street", 
+          "street2Placeholder": "Eg. 13, Maple street", 
           "cityPlaceholder": "Eg. San José", 
-          "zipcodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY" 
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY", 
+
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address", 
+          "cityError": "Enter the city you live in the USA", 
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth" 
         }
       }
     },

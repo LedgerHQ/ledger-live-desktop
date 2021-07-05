@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
@@ -56,6 +56,7 @@ const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false);
 
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
@@ -74,6 +75,11 @@ const KYC = () => {
   const [country, setCountry] = useState(countryOptions[0]);
   const [postalCode, setPostalCode] = useState("");
 
+  const requiredFields = useMemo(
+    () => ({ firstName, lastName, dateOfBirth, street1, city, state, postalCode }),
+    [city, dateOfBirth, firstName, lastName, postalCode, state, street1],
+  );
+
   const kycData: KYCData = useMemo(
     () => ({
       firstName,
@@ -91,24 +97,41 @@ const KYC = () => {
     [city, country?.value, dateOfBirth, firstName, lastName, postalCode, state, street1, street2],
   );
 
-  const onSubmitKYCData = useCallback(() => {
-    let cancelled = false;
-    async function onSubmitKYC() {
-      setLoading(true);
-      const res = await submitKYC("wyre", kycData);
-      if (cancelled) return;
-      dispatch(setSwapKYCStatus({ provider: "wyre", id: res?.id, status: res.status }));
-      setLoading(false);
+  const onValidateFields = useCallback(() => {
+    const errors = {};
+    for (const field in requiredFields) {
+      if (!requiredFields[field]) {
+        errors[field] = t(`swap.kyc.wyre.form.${field}Error`);
+      }
     }
-    onSubmitKYC();
-    return () => {
-      cancelled = true;
-    };
-  }, [dispatch, kycData]);
+    return errors;
+  }, [requiredFields, t]);
 
-  const hasErrors = Object.keys(errors).length;
-  const canSubmit =
-    !hasErrors && firstName && dateOfBirth && lastName && street1 && state && country && postalCode;
+  useEffect(() => {
+    setErrors(onValidateFields);
+  }, [onValidateFields, requiredFields, t]);
+
+  const onUpdateField = useCallback(updater => {
+    return value => updater(value);
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    setHasSubmittedOnce(true);
+    if (!Object.entries(errors).length) {
+      let cancelled = false;
+      async function onSubmitKYC() {
+        setLoading(true);
+        const res = await submitKYC("wyre", kycData);
+        if (cancelled) return;
+        dispatch(setSwapKYCStatus({ provider: "wyre", id: res?.id, status: res.status }));
+        setLoading(false);
+      }
+      onSubmitKYC();
+      return () => {
+        cancelled = true;
+      };
+    }
+  }, [dispatch, errors, kycData]);
 
   return (
     <Card justifyContent={"center"} style={{ minHeight: 608 }}>
@@ -134,6 +157,7 @@ const KYC = () => {
                   disabled={isLoading}
                   onChange={setFirstName}
                   placeholder={t("swap.kyc.wyre.form.firstNamePlaceholder")}
+                  error={hasSubmittedOnce && errors.firstName}
                   maxLength={30}
                 />
               </Box>
@@ -145,68 +169,89 @@ const KYC = () => {
                   disabled={isLoading}
                   onChange={setLastName}
                   placeholder={t("swap.kyc.wyre.form.lastNamePlaceholder")}
+                  error={hasSubmittedOnce && errors.lastName}
                   maxLength={30}
                 />
               </Box>
             </Box>
-            <Box horizontal alignSelf={"stretch"} mt={16}>
+            <Box horizontal alignSelf={"stretch"} mt={20}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
                   <Trans i18nKey={"swap.kyc.wyre.form.dateOfBirth"} />
                 </Text>
-                <Input type={"date"} disabled={isLoading} onChange={setDateOfBirth} />
+                <Input
+                  type={"date"}
+                  disabled={isLoading}
+                  onChange={setDateOfBirth}
+                  error={hasSubmittedOnce && errors.dateOfBirth}
+                />
               </Box>
               <Box ml={24} flex={1} />
             </Box>
-            <Box horizontal alignSelf={"stretch"} mt={16}>
+            <Box horizontal alignSelf={"stretch"} mt={20}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
-                  <Trans i18nKey={"swap.kyc.wyre.form.address1"} />
+                  <Trans i18nKey={"swap.kyc.wyre.form.street1"} />
                 </Text>
                 <Input
                   disabled={isLoading}
                   onChange={setStreet1}
-                  placeholder={t("swap.kyc.wyre.form.address1Placeholder")}
+                  placeholder={t("swap.kyc.wyre.form.street1Placeholder")}
+                  error={hasSubmittedOnce && errors.street1}
                   maxLength={50}
                 />
               </Box>
               <Box ml={24} flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
-                  <Trans i18nKey={"swap.kyc.wyre.form.address2"} />
+                  <Trans i18nKey={"swap.kyc.wyre.form.street2"} />
                 </Text>
                 <Input
                   disabled={isLoading}
                   onChange={setStreet2}
-                  placeholder={t("swap.kyc.wyre.form.address2Placeholder")}
+                  placeholder={t("swap.kyc.wyre.form.street2Placeholder")}
                   maxLength={50}
                 />
               </Box>
             </Box>
-            <Box horizontal alignSelf={"stretch"} mt={16}>
+            <Box horizontal alignSelf={"stretch"} mt={20}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
                   <Trans i18nKey={"swap.kyc.wyre.form.city"} />
                 </Text>
                 <Input
                   disabled={isLoading}
-                  onChange={setCity}
+                  onChange={onUpdateField(setCity)}
                   placeholder={t("swap.kyc.wyre.form.cityPlaceholder")}
+                  error={hasSubmittedOnce && errors.city}
                   maxLength={30}
                 />
               </Box>
               <Box ml={24} flex={1}>
+                <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
+                  <Trans i18nKey={"swap.kyc.wyre.form.postalCode"} />
+                </Text>
+                <Input
+                  disabled={isLoading}
+                  onChange={setPostalCode}
+                  placeholder={t("swap.kyc.wyre.form.postalCodePlaceholder")}
+                  error={hasSubmittedOnce && errors.postalCode}
+                  maxLength={10}
+                />
+              </Box>
+            </Box>
+            <Box horizontal alignSelf={"stretch"} mt={20} mb={10}>
+              <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
                   <Trans i18nKey={"swap.kyc.wyre.form.state"} />
                 </Text>
                 <Select
                   isDisabled={isLoading}
                   onChange={option => setState(option.value)}
+                  error={hasSubmittedOnce && errors.state}
                   options={stateOptions}
                 />
               </Box>
-            </Box>
-            <Box horizontal alignSelf={"stretch"} mt={16}>
-              <Box flex={1}>
+              <Box ml={24} flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
                   <Trans i18nKey={"swap.kyc.wyre.form.country"} />
                 </Text>
@@ -216,17 +261,6 @@ const KYC = () => {
                   value={country}
                   options={countryOptions}
                   renderValue={renderCountry}
-                />
-              </Box>
-              <Box ml={24} flex={1}>
-                <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>
-                  <Trans i18nKey={"swap.kyc.wyre.form.zipcode"} />
-                </Text>
-                <Input
-                  disabled={isLoading}
-                  onChange={setPostalCode}
-                  placeholder={t("swap.kyc.wyre.form.zipcodePlaceholder")}
-                  maxLength={10}
                 />
               </Box>
             </Box>
@@ -251,7 +285,7 @@ const KYC = () => {
                 </Box>
               </FakeLink>
             </Disclaimer>
-            <Button isLoading={isLoading} primary disabled={!canSubmit} onClick={onSubmitKYCData}>
+            <Button isLoading={isLoading} primary onClick={onSubmit}>
               <Trans i18nKey={"swap.providers.cta"} />
             </Button>
           </Footer>
