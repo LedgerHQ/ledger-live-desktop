@@ -80,21 +80,22 @@ const announcementsPool: RawAnnouncement[] = [
 let announcements: RawAnnouncement[] = [];
 const rng = new Prando(getEnv("MOCK"));
 
-let currPool = announcementsPool.slice();
+let index = 0;
 /**
  * addAnnoucementFromPool
  * will take into announcementsPool to push a new announcements
  * if there are no more announcement left in the pool, it will use addMockAnnouncement to generate a new one
  */
 export const addAnnouncementFromPool = () => {
-  const [first, ...rest] = currPool;
-  if (first) {
-    announcements.push(first);
-    currPool = rest;
-  } else {
-    console.warn("no more announcements in pool, generating a new one");
-    addMockAnnouncement();
+  const el = announcementsPool[index];
+  if (!el) {
+    return addMockAnnouncement();
   }
+
+  // $FlowFixMe
+  announcements.push(el);
+  index++;
+  return el;
 };
 
 /**
@@ -117,6 +118,7 @@ export const addMockAnnouncement = (params?: *) => {
   };
 
   announcements.push(newAnnouncement);
+  return newAnnouncement;
 };
 
 /**
@@ -124,7 +126,7 @@ export const addMockAnnouncement = (params?: *) => {
  * reset announcements and pool
  */
 export const resetAnnouncements = () => {
-  currPool = announcementsPool.slice();
+  index = 0;
   announcements = [];
 };
 

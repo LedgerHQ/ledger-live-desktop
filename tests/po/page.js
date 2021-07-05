@@ -114,10 +114,10 @@ export default class Page {
     await btn.click();
   }
 
+  // HALP DO NOT USE
   async synchronize() {
     const btn = await this.topbarSynchronizeButton();
     await btn.click();
-    await this.app.client.waitForSync();
   }
 
   async goToBuyCrypto() {
@@ -137,26 +137,27 @@ export default class Page {
 
   // Notifications
   async addAnnouncement() {
-    announcementsApiMock("addAnnouncementFromPool");
-    await this.synchronize();
+    return announcementsApiMock("addAnnouncementFromPool");
   }
 
   async generateAnnouncement(params) {
-    announcementsApiMock("addMockAnnouncement", params);
-    await this.synchronize();
+    return announcementsApiMock("addMockAnnouncement", params);
   }
 
-  resetAnnouncements() {
+  async fetchAnnouncements(params) {
+    return announcementsApiMock("fetchAnnouncements");
+  }
+
+  async resetAnnouncements() {
     announcementsApiMock("resetAnnouncements");
   }
 
   // ServiceStatus
   async toggleIncident(bool = true) {
     serviceStatusApiMock("toggleMockIncident", bool);
-    await this.synchronize();
   }
 
-  resetIncidents() {
+  async resetIncidents() {
     serviceStatusApiMock("resetIncidents");
   }
 }

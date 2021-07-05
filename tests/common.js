@@ -64,7 +64,7 @@ const getWCClientMock = app => async (method, args) => {
 const getAnnouncementApiMock = app => async (method, args) => {
   return app.client.execute(
     ([method, args]) => {
-      window.announcementsApi[method](args);
+      return window.announcementsApi[method](args);
     },
     [method, args],
   );

@@ -110,7 +110,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
 
   return (
     <AnnouncementProvider
-      autoUpdateDelay={60000}
+      autoUpdateDelay={process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
