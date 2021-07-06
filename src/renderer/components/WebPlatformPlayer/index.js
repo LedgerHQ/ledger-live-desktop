@@ -1,5 +1,5 @@
 // @flow
-
+import { remote, ipcRenderer } from "electron";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -50,7 +50,7 @@ const Container: ThemedComponent<{}> = styled.div`
   height: 100%;
 `;
 
-const CustomIframe: ThemedComponent<{}> = styled.iframe`
+const CustomIframe: ThemedComponent<{}> = styled("webview")`
   border: none;
   width: 100%;
   flex: 1;
@@ -282,7 +282,10 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      targetRef?.current?.contentWindow.postMessage(JSON.stringify(request), url.origin);
+      const webview = targetRef.current;
+      if (webview) {
+        webview.contentWindow.postMessage(JSON.stringify(request), url.origin);
+      }
     },
     [url],
   );
@@ -290,9 +293,10 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const [receive] = useJSONRPCServer(handlers, handleSend);
 
   const handleMessage = useCallback(
-    e => {
-      if (e.isTrusted && e.origin === url.origin && e.data) {
-        receive(JSON.parse(e.data));
+    event => {
+      if (event.channel === "webviewToParent") {
+        console.log("DATA: ", event.args[0])
+        receive(JSON.parse(event.args[0]));
       }
     },
     [url, receive],
@@ -300,8 +304,14 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   useEffect(() => {
     tracking.platformLoad(manifest);
-    window.addEventListener("message", handleMessage, false);
-    return () => window.removeEventListener("message", handleMessage, false);
+    const webview = targetRef.current;
+    if (webview) {
+      webview.addEventListener("ipc-message", handleMessage);
+    }
+
+    return () => {
+      webview.removeEventListener("ipc-message", handleMessage);
+    }
   }, [manifest, handleMessage]);
 
   const handleLoad = useCallback(() => {
@@ -310,10 +320,28 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   }, [manifest]);
 
   const handleReload = useCallback(() => {
-    tracking.platformReload(manifest);
-    setLoadDate(Date.now());
-    setWidgetLoaded(false);
+    const webview = targetRef.current;
+    if (webview) {
+      tracking.platformReload(manifest);
+      webview.openDevTools();
+      setWidgetLoaded(false);
+      webview.reload();
+    }
   }, [manifest]);
+
+  useEffect(() => {
+    const webview = targetRef.current;
+
+    if (webview) {
+      webview.addEventListener("dom-ready", handleLoad);
+    }
+
+    return () => {
+      webview.removeEventListener("dom-ready", handleLoad);
+    };
+  }, [handleLoad]);
+
+  console.log(remote.app.getAppPath())
 
   return (
     <Container>
@@ -323,8 +351,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           src={url.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-          onLoad={handleLoad}
+          preload={`file://${remote.app.getAppPath()}/webviewPreloader.bundle.js`}
         />
         {!widgetLoaded ? (
           <Loader>
