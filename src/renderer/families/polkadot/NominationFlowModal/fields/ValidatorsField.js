@@ -1,4 +1,5 @@
 // @flow
+import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useCallback, useState, useRef, useEffect } from "react";
 import type { TFunction } from "react-i18next";
@@ -130,11 +131,13 @@ const ValidatorField = ({
     discreet: false,
   };
 
-  const { staking, validators: polkadotValidators, minimumBondBalance } = usePolkadotPreloadData();
-  const SR = useSortedValidators(search, polkadotValidators, nominations);
+  const preloaded = usePolkadotPreloadData();
+  const { staking, validators: polkadotValidators } = preloaded;
   const { maxNominatorRewardedPerValidator } = staking ?? {};
+  const SR = useSortedValidators(search, polkadotValidators, nominations);
   const hasMinBondBalance = hasMinimumBondBalance(account);
-  const minBondBalance = formatCurrencyUnit(unit, minimumBondBalance, formatConfig);
+  const minimumBondBalance = BigNumber(preloaded.minimumBondBalance);
+  const minimumBondBalanceStr = formatCurrencyUnit(unit, minimumBondBalance, formatConfig);
 
   // Addresses that are no longer validators
   const nonValidators = nominations
@@ -217,7 +220,7 @@ const ValidatorField = ({
               <li>
                 <Trans
                   i18nKey="polkadot.bondedBalanceBelowMinimum"
-                  values={{ minimumBondBalance: minBondBalance }}
+                  values={{ minimumBondBalance: minimumBondBalanceStr }}
                 />
               </li>
             ) : null}
