@@ -160,6 +160,12 @@ const SwapOperationDetails = ({
   const senders = uniq(operation.senders);
   const recipients = uniq(operation.recipients);
 
+  const currencyName = fromCurrency
+    ? fromCurrency.type === "TokenCurrency"
+      ? fromCurrency.parentCurrency.name
+      : fromCurrency.name
+    : undefined;
+
   return (
     <Box flow={3} px={20} mt={20}>
       <Status status={status}>
@@ -205,7 +211,9 @@ const SwapOperationDetails = ({
         <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} mb={1}>
           <LinkWithExternalIcon
             fontSize={4}
-            onClick={() => openURL(url)}
+            onClick={() =>
+              openURL(url, "viewSwapOperationInExplorer", { currencyId: currencyName })
+            }
             label={t("operationDetails.viewOperation")}
           />
         </Box>
