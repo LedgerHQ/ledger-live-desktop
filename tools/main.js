@@ -116,6 +116,10 @@ const buildRendererConfig = (mode, config, argv) => {
       new WebpackBar({ name, color }),
       new webpack.DefinePlugin(buildRendererEnv(mode, wpConf, argv)),
     ],
+    node: {
+      __dirname: false,
+      __filename: false,
+    },
     resolve: {
       ...wpConf.resolve,
       alias,

@@ -74,7 +74,7 @@ app.on("ready", async () => {
   }
 
   db.init(userDataDirectory);
-
+  app.dirname = __dirname;
   ipcMain.handle("getKey", (event, { ns, keyPath, defaultValue }) => {
     return db.getKey(ns, keyPath, defaultValue);
   });

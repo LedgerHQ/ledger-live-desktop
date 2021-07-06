@@ -342,7 +342,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
     };
   }, [handleLoad]);
 
-  console.log(remote.app.getAppPath());
+  console.log(`file://${remote.app.dirname}/webviewPreloader.bundle.js`);
 
   return (
     <Container>
@@ -352,7 +352,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
           src={url.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
-          preload={`file://${remote.app.getAppPath()}/webviewPreloader.bundle.js`}
+          preload={`file://${remote.app.dirname}/webviewPreloader.bundle.js`}
         />
         {!widgetLoaded ? (
           <Loader>
