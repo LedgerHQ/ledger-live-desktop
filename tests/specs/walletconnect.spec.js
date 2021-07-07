@@ -17,6 +17,7 @@ describe("WalletConnect", () => {
     await accountsPage.goToAccounts();
     const firstAccountRow = await accountsPage.walletConnectGetEthereumAccount();
     await accountsPage.clickOnAccountRow(firstAccountRow);
+    await app.client.pause(1000);
     await accountPage.openDropDown();
     await accountPage.openWalletConnect();
 
