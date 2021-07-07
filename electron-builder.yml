@@ -8,7 +8,6 @@ protocols:
 afterSign: scripts/notarize.js
 
 mac:
-  strictVerify: false
   artifactName: ${name}-${version}-${os}.${ext}
   category: public.app-category.wallet
   hardenedRuntime: true
