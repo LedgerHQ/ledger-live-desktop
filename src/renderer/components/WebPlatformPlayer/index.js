@@ -1,5 +1,5 @@
 // @flow
-import { remote, WebviewTag } from "electron";
+import { remote, WebviewTag, shell } from "electron";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -328,21 +328,28 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
     }
   }, [manifest]);
 
+  const handleNewWindow = useCallback(async e => {
+    const protocol = new URL(e.url).protocol;
+    if (protocol === "http:" || protocol === "https:") {
+      await shell.openExternal(e.url);
+    }
+  }, []);
+
   useEffect(() => {
     const webview = targetRef.current;
 
     if (webview) {
-      webview.addEventListener("dom-ready", handleLoad);
+      webview.addEventListener("new-window", handleNewWindow);
+      webview.addEventListener("did-finish-load", handleLoad);
     }
 
     return () => {
       if (webview) {
-        webview.removeEventListener("dom-ready", handleLoad);
+        webview.removeEventListener("new-window", handleNewWindow);
+        webview.removeEventListener("did-finish-load", handleLoad);
       }
     };
   }, [handleLoad]);
-
-  console.log(`file://${remote.app.dirname}/webviewPreloader.bundle.js`);
 
   return (
     <Container>
