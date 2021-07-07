@@ -38,11 +38,14 @@ export default class AccountPage extends Page {
     await elem.click();
   }
 
-  async openWalletConnect() {
+  async openDropDown() {
     const elem = await this.actionsDropdown();
     await elem.click();
-    const elem2 = await this.actionsDropdownWC();
-    await elem2.click();
+  }
+
+  async openWalletConnect() {
+    const elem = await this.actionsDropdownWC();
+    await elem.click();
   }
 
   async getTokens() {
