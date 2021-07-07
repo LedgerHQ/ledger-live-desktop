@@ -3,7 +3,10 @@ import { ipcRenderer } from "electron";
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
-import { findCurrencyByTicker, parseCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import {
+  findCryptoCurrencyByKeyword,
+  parseCurrencyUnit,
+} from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal, closeAllModal } from "~/renderer/actions/modals";
@@ -69,7 +72,7 @@ export function useDeepLinkHandler() {
           const { currency } = query;
           if (!currency || typeof currency !== "string") return;
 
-          const c = findCurrencyByTicker(currency.toUpperCase());
+          const c = findCryptoCurrencyByKeyword(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") return;
 
           const found = getAccountsOrSubAccountsByCurrency(c, accounts || []);
@@ -105,7 +108,9 @@ export function useDeepLinkHandler() {
           const { currency, recipient, amount } = query;
           if (!currency || typeof currency !== "string") return;
 
-          const c = findCurrencyByTicker(currency.toUpperCase());
+          if (url === "delegate" && currency !== "tezos") return;
+
+          const c = findCryptoCurrencyByKeyword(currency.toUpperCase());
           if (!c || c.type === "FiatCurrency") {
             dispatch(
               openModal(modal, {
@@ -169,13 +174,6 @@ export function useDeepLinkHandler() {
     [accounts, dispatch, navigate],
   );
 
-  useEffect(() => {
-    // subscribe to deep-linking event
-    ipcRenderer.on("deep-linking", handler);
-
-    return () => ipcRenderer.removeListener("deep-linking", handler);
-  }, [handler]);
-
   return {
     handler,
   };
@@ -186,6 +184,13 @@ function useDeeplink() {
   const openingDeepLink = useSelector(deepLinkUrlSelector);
   const loaded = useSelector(areSettingsLoaded);
   const { handler } = useDeepLinkHandler();
+
+  useEffect(() => {
+    // subscribe to deep-linking event
+    ipcRenderer.on("deep-linking", handler);
+
+    return () => ipcRenderer.removeListener("deep-linking", handler);
+  }, [handler]);
 
   useEffect(() => {
     if (openingDeepLink && loaded) {

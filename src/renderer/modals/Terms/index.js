@@ -20,6 +20,7 @@ import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import { closeModal } from "~/renderer/actions/modals";
 import ChevronRight from "~/renderer/icons/ChevronRight";
+import { setShareAnalytics } from "~/renderer/actions/settings";
 
 const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
   const dispatch = useDispatch();
@@ -38,8 +39,9 @@ const TermsModal = ({ showClose = false }: { showClose?: boolean }) => {
 
   const onClick = useCallback(() => {
     acceptTerms();
+    dispatch(setShareAnalytics(true));
     onClickClose();
-  }, [onClickClose]);
+  }, [dispatch, onClickClose]);
 
   const openTerms = useCallback(() => openURL(urls.terms), []);
   const openPrivacyPolicy = useCallback(() => openURL(privacyPolicyUrl), [privacyPolicyUrl]);

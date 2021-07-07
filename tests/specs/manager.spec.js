@@ -5,16 +5,15 @@ describe("Manager", () => {
     userData: "onboardingcompleted",
   });
 
-  const $ = selector => app.client.$(selector);
   const deviceInfo = {
-    version: "1.6.1",
+    version: "2.0.0",
     isBootloader: false,
     isOSU: false,
     managerAllowed: false,
-    mcuVersion: "1.7",
+    mcuVersion: "1.12",
     pinValidated: false,
     providerName: null,
-    majMin: "1.6",
+    majMin: "2.0",
     targetId: 823132164,
   };
 

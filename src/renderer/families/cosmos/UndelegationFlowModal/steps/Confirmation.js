@@ -18,6 +18,8 @@ import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { localeSelector } from "~/renderer/reducers/settings";
+import { OperationDetails } from "~/renderer/drawers/OperationDetails";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 export default function StepConfirmation({
   account,
@@ -112,13 +114,13 @@ export function StepConfirmationFooter({
   const onViewDetails = useCallback(() => {
     onClose();
     if (account && concernedOperation) {
-      openModal("MODAL_OPERATION_DETAILS", {
+      setDrawer(OperationDetails, {
         operationId: concernedOperation.id,
         accountId: account.id,
         parentId: parentAccount && parentAccount.id,
       });
     }
-  }, [onClose, openModal, account, concernedOperation, parentAccount]);
+  }, [onClose, account, concernedOperation, parentAccount]);
 
   return (
     <Box horizontal alignItems="right">

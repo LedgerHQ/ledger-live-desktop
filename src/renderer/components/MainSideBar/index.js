@@ -22,6 +22,7 @@ import { darken, rgba } from "~/renderer/styles/helpers";
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
+import IconApps from "~/renderer/icons/Apps";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
@@ -218,6 +219,10 @@ const MainSideBar = () => {
     push("/accounts");
   }, [push]);
 
+  const handleClickCatalog = useCallback(() => {
+    push("/platform");
+  }, [push]);
+
   const handleClickExchange = useCallback(() => {
     push("/exchange");
   }, [push]);
@@ -287,6 +292,15 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"catalog"}
+                label={t("sidebar.catalog")}
+                icon={IconApps}
+                iconActiveColor="wallet"
+                isActive={location.pathname.startsWith("/platform")}
+                onClick={handleClickCatalog}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
                 id={"send"}
                 label={t("send.title")}
                 icon={IconSend}
@@ -320,7 +334,7 @@ const MainSideBar = () => {
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
-                isActive={location.pathname === "/swap"}
+                isActive={location.pathname.startsWith("/swap")}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />

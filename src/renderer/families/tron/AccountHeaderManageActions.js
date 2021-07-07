@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback } from "react";
-import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -14,15 +13,14 @@ type Props = {
   parentAccount: ?Account,
 };
 
-const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
+const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) => {
   const dispatch = useDispatch();
   const unit = getAccountUnit(account);
   const mainAccount = getMainAccount(account, parentAccount);
   const minAmount = 10 ** unit.magnitude;
 
   const { tronResources, spendableBalance } = mainAccount;
-  invariant(tronResources, "tron account expected");
-  const tronPower = tronResources.tronPower;
+  const tronPower = tronResources?.tronPower ?? 0;
   const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
 
   const onClick = useCallback(() => {
@@ -53,6 +51,15 @@ const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
       label: <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />,
     },
   ];
+};
+
+const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { tronResources } = mainAccount;
+
+  if (!tronResources) return null;
+
+  return AccountHeaderManageActionsComponent({ account, parentAccount });
 };
 
 export default AccountHeaderManageActions;

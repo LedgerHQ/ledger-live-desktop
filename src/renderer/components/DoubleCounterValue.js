@@ -114,7 +114,7 @@ function DoubleCounterValue({
           />
         </Box>
         <ToolTip
-          tooltipBg="palette.background.default"
+          tooltipBg="palette.background.paper"
           placement="bottom"
           content={
             <Column p={1}>
