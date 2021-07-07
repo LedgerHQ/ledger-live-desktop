@@ -24,8 +24,8 @@ export default function Currencies() {
     [setCurrency],
   );
 
-  const currencyId = currency?.id ?? "placeholder";
-  const currencyName = currency?.name ?? "placeholder";
+  const currencyId = currency?.id;
+  const currencyName = currency?.name;
 
   const isCurrencyDisabled = useCallback(
     (currency: Currency) => !currencySettingsDefaults(currency).confirmationsNb,
@@ -33,9 +33,13 @@ export default function Currencies() {
   );
 
   return (
-    <Box key={currencyId}>
-      <TrackPage category="Settings" name="Currencies" currencyId={currencyId} />
-      <Track onUpdate event="Crypto asset settings dropdown" currencyName={currencyName} />
+    <Box>
+      {currencyId && currencyName && (
+        <>
+          <TrackPage category="Settings" name="Currencies" currencyId={currencyId} />
+          <Track onUpdate event="Crypto asset settings dropdown" currencyName={currencyName} />
+        </>
+      )}
       <Row
         title={t("settings.tabs.currencies")}
         desc={t("settings.currencies.desc")}
