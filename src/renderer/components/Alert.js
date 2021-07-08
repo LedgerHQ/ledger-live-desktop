@@ -21,6 +21,7 @@ import ExclamationCircle from "../icons/ExclamationCircle";
 import CrossCircle from "../icons/CrossCircle";
 import LightBulb from "../icons/LightBulb";
 import ExternalLinkIcon from "../icons/ExternalLink";
+import Twitter from "../icons/Twitter";
 
 const getIcon = (type: AlertType) => {
   switch (type) {
@@ -40,6 +41,8 @@ const getIcon = (type: AlertType) => {
       return <Shield color={colors.alertRed} size={32} />;
     case "help":
       return <Shield color={colors.wallet} size={32} />;
+    case "twitter":
+      return <Twitter color={colors.twitter} size={32} />;
     case "danger":
       return <Shield color={colors.alertRed} size={32} />;
     default:
@@ -93,6 +96,13 @@ const getStyle = p => {
         borderColor: p.theme.colors.palette.text.shade20,
         px: 24,
         py: 24,
+      };
+    case "twitter":
+      return {
+        backgroundColor: p.theme.colors.palette.background.paper,
+        textColor: p.theme.colors.palette.text.shade80,
+        px: 16,
+        py: 16,
       };
     case "danger":
       return {
@@ -219,7 +229,8 @@ type AlertType =
   | "security"
   | "help"
   | "danger"
-  | "update";
+  | "update"
+  | "twitter";
 
 type Props = {
   type?: AlertType,
