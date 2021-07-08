@@ -47,7 +47,7 @@ const TradeMethod = ({
   loadingRates: boolean,
 }) => (
   <Box px={20} pt={16} backgroundColor={"colors.palette.background.paper"}>
-    <Box horizontal alignItems={"center"}>
+    <Box horizontal alignItems={"center"} style={{ minHeight: 30 }}>
       <Text color="palette.text.shade100" ff="Inter|SemiBold" mr={1} fontSize={5}>
         <Trans i18nKey={`swap.form.tradeMethod.title`} />
       </Text>
