@@ -44,7 +44,7 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 
-export const TopBannerContainer: ThemedComponent<{}> = styled.div`
+export const TopBannerContainer = styled.div`
   position: sticky;
   top: 0;
   z-index: 19;
