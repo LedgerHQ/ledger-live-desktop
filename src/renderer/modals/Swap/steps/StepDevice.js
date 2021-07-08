@@ -119,6 +119,7 @@ const StepDevice = ({
       status,
       device: deviceRef,
       userId: providerKYC?.id,
+      requireLatestFirmware: true,
     }),
     [exchange, exchangeRate, transaction, status, providerKYC],
   );
@@ -150,6 +151,7 @@ const StepDevice = ({
         account,
         transaction: swapData.transaction,
         appName: "Exchange",
+        requireLatestFirmware: true,
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {
