@@ -16,6 +16,28 @@
           "text": "Cliquez ici pour voir les détails de l'opération."
         }
       }
+    },
+    "catalog": {
+      "title": "Catalogue d'applications Live",
+      "branch": {
+        "soon": "À découvrir prochainement",
+        "experimental": "Expérimental",
+        "debug": "Débugger"
+      },
+      "banner": {
+        "title": "Découvrez le catalogue d'applications Live",
+        "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
+      },
+      "pollCTA": {
+        "title": "Sondage",
+        "description": "Quel service aimeriez-vous voir dans Ledger Live ?",
+        "button": "Voter"
+      },
+      "developerCTA": {
+        "title": "Pour les développeurs",
+        "description": "Toutes les informations dont vous avez besoin pour intégrer vos applications dans Ledger Live.",
+        "button": "Accéder au portail"
+      }
     }
   },
   "common": {
@@ -152,7 +174,8 @@
     "manager": "Gestionnaire",
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
-    "lend": "Prêter"
+    "lend": "Prêter",
+    "catalog": "Découvrir"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -173,6 +196,10 @@
     "title": "Swap",
     "titleCrypto": "Échanger {{currency}}",
     "whatIsSwap": "Qu'est-ce que le Swap ?",
+    "paraswap": {
+      "cta": " Jeter un œil",
+      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir."
+    },
     "tabs": {
       "exchange": "Échanger",
       "history": "Historique"
@@ -297,32 +324,6 @@
       "toProvider": "Adresse du prestataire",
       "initialAmount": "Montant initial",
       "creditedAmount": "Montant crédité"
-    },
-    "providers": {
-      "title": "Choisir un prestataire pour acheter des cryptos",
-      "learnMore": "Qu'est-ce que le Swap ?",
-      "kycRequired": "Vérification d'identité (KYC) nécessaire",
-      "wyre": {
-        "bullets": [
-          "Disponible uniquement aux USA (Europe, Afrique et Asie à venir)",
-          "Multi coins et jetons",
-          "Centralisé"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT et plus de 50 autres",
-          "Multidevises",
-          "Centralisé"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap, etc.)",
-          "Ethereum et jetons ERC-20",
-          "Décentralisé et se passant des tiers de confiance"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -515,28 +516,6 @@
     },
     "history": {
       "tab": "Historique"
-    },
-    "providers": {
-      "title": "Choisir un prestataire pour acheter des cryptos",
-      "learnMore": "Qu'est ce que la fonctionnalité Achat ?",
-      "coinify": {
-        "bullets": [
-          "Disponible dans plus de 130 pays",
-          "EUR, USD, GBP et 32 autres",
-          "Virements SEPA et Faster Payments",
-          "Virements bancaires locaux aux USA",
-          "Cartes de crédit et de débit"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "Compte bancaire uniquement",
-          "Prise en charge du dollar américain uniquement",
-          "Plus de 20 cryptos prises en charge",
-          "Virement ACH",
-          "Pas de cartes de crédit ou de débit"
-        ]
-      }
     }
   },
   "lend": {
