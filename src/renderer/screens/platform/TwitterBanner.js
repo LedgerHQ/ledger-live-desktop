@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box/Box";
 import Alert from "~/renderer/components/Alert";
@@ -10,28 +10,27 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(p => ({
   mb: 24,
 }))``;
 
+const twitterHashtag = "LedgerLiveApp";
+
 export default function TwitterBanner() {
   const { t } = useTranslation();
 
-  const params = {
-    text: t("platform.catalog.twitterBanner.tweetText"),
-    hashtags: "LedgerLiveApp",
-  };
+  const url = useMemo(() => {
+    const urlObj = new URL("https://twitter.com/intent/tweet");
 
-  const paramsURI = Object.entries(params).reduce(
-    (acc, [key, val]) => (acc += `&${key}=${encodeURI(val)}`),
-    "",
-  );
+    urlObj.searchParams.set("text", t("platform.catalog.twitterBanner.tweetText"));
+    urlObj.searchParams.set("hashtags", twitterHashtag);
 
-  const url = `https://twitter.com/intent/tweet?${paramsURI}`;
+    return urlObj;
+  }, [t]);
 
   return (
     <Container>
       <Alert
         type={"twitter"}
         mt={2}
-        learnMoreLabel={`#${params.hashtags}`}
-        learnMoreUrl={url}
+        learnMoreLabel={`#${twitterHashtag}`}
+        learnMoreUrl={url.toString()}
         bannerId={"platform-twitter-notices"}
       >
         <Text ff="Inter|Regular" fontSize={4}>
