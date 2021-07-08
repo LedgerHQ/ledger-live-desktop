@@ -6,8 +6,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import RowItem from "../../RowItem";
 import ReleaseNotesButton from "./ReleaseNotesButton";
-import TermsButton from "./TermsButton";
-import { usePrivacyUrl } from "~/renderer/terms";
+import { usePrivacyUrl, useTermsUrl } from "~/renderer/terms";
 import { setDeveloperMode } from "../../../../actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
@@ -18,6 +17,7 @@ const SectionHelp = () => {
   const { t } = useTranslation();
   const devMode = useSelector(developerModeSelector);
   const privacyPolicyUrl = usePrivacyUrl();
+  const termsUrl = useTermsUrl();
   const version = process.env.SPECTRON_RUN ? "0.0.0" : __APP_VERSION__;
   const dispatch = useDispatch();
   const { pushToast } = useToasts();
@@ -54,9 +54,11 @@ const SectionHelp = () => {
           <ReleaseNotesButton />
         </Row>
 
-        <Row title={t("settings.help.terms")} desc={t("settings.help.termsDesc")}>
-          <TermsButton />
-        </Row>
+        <RowItem
+          title={t("settings.help.terms")}
+          desc={t("settings.help.termsDesc")}
+          url={termsUrl}
+        />
 
         <RowItem
           title={t("settings.help.privacy")}
