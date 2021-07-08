@@ -16,6 +16,28 @@
           "text": "Click here to see operation details"
         }
       }
+    },
+    "catalog": {
+      "title": "Live Apps Catalog",
+      "branch": {
+        "soon": "coming soon",
+        "experimental": "experimental",
+        "debug": "debug"
+      },
+      "banner": {
+        "title": "Discover our Live Apps Catalog",
+        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+      },
+      "pollCTA": {
+        "title": "Poll",
+        "description": "Which service do you want to see in Ledger Live?",
+        "button": "Let’s vote!"
+      },
+      "developerCTA": {
+        "title": "For Developers",
+        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "button": "Go to portal"
+      }
     }
   },
   "common": {
@@ -152,7 +174,8 @@
     "manager": "Manager",
     "exchange": "Buy / Sell",
     "swap": "Swap",
-    "lend": "Lend"
+    "lend": "Lend",
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -173,6 +196,10 @@
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "What is Swap",
+    "paraswap": {
+      "cta": " Check it out",
+      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+    },
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
@@ -297,32 +324,6 @@
       "toProvider": "Provider address",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
-    },
-    "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
-      "wyre": {
-        "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -515,28 +516,6 @@
     },
     "history": {
       "tab": "History"
-    },
-    "providers": {
-      "title": "Choose a provider to buy crypto",
-      "learnMore": "What is buy?",
-      "coinify": {
-        "bullets": [
-          "Available in 130+ countries",
-          "EUR, USD, GBP and 32 others",
-          "SEPA & Faster Payments",
-          "Local US wire transfers",
-          "Credit and debit cards"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "Only 🇺🇸 bank account",
-          "USD support only",
-          "20+ crypto supported",
-          "ACH transfer",
-          "No credit & debit cards"
-        ]
-      }
     }
   },
   "lend": {

@@ -5,8 +5,8 @@ import type { Exchange, ExchangeRate } from "@ledgerhq/live-common/lib/exchange/
 import Box from "~/renderer/components/Box";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import { Trans } from "react-i18next";
-import Text from "~/renderer/components/Text";
 import styled from "styled-components";
+import Text from "~/renderer/components/Text";
 import { colors } from "~/renderer/styles/theme";
 import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";

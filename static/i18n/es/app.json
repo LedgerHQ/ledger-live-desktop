@@ -16,6 +16,28 @@
           "text": "Haz clic aquí para ver los detalles de la operación"
         }
       }
+    },
+    "catalog": {
+      "title": "Catálogo de aplicaciones de Live",
+      "branch": {
+        "soon": "próximamente",
+        "experimental": "experimental",
+        "debug": "depuración"
+      },
+      "banner": {
+        "title": "Descubre nuestro catálogo de aplicaciones de Live",
+        "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
+      },
+      "pollCTA": {
+        "title": "Encuesta",
+        "description": "¿Qué servicio quieres ver en Ledger Live?",
+        "button": "¡Votemos!"
+      },
+      "developerCTA": {
+        "title": "Para desarrolladores",
+        "description": "Toda la información que necesitas para integrar tus aplicaciones en Ledger Live.",
+        "button": "Ir al portal"
+      }
     }
   },
   "common": {
@@ -152,7 +174,8 @@
     "manager": "Manager",
     "exchange": "Comprar / Vender",
     "swap": "Permutar",
-    "lend": "Prestar"
+    "lend": "Prestar",
+    "catalog": "Descubrir"
   },
   "stars": {
     "placeholder": "Tus cuentas favoritas aparecerán aquí.",
@@ -173,12 +196,16 @@
     "title": "Permutar",
     "titleCrypto": "Intercambiar {{currency}}",
     "whatIsSwap": "Qué es el intercambio",
+    "paraswap": {
+      "cta": "Échale un vistazo",
+      "description": "¿Buscas Paraswap? Está en a la pestaña Descubrir."
+    },
     "tabs": {
       "exchange": "Exchange",
       "history": "Historial"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Tus transacciones de permuta en Desktop no están sincronizadas con Ledger Live Mobile",
       "empty": {
         "title": "Tus permutas anteriores aparecerán aquí",
         "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
@@ -269,11 +296,11 @@
         },
         "finished": {
           "title": "Pendiente",
-          "subtitle": "Swap broadcast successfully ",
+          "subtitle": "Transmisión exitosa de permuta",
           "swap": "Tu ID de Permuta:",
           "seeDetails": "Ver detalles",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "Toma nota del número de ID de permuta, en caso de que necesites ayuda del Soporte de <0><0>{{provider}}</0> support</0>.",
+          "description": "Tu operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que recibas tus {{targetCurrency}}."
         }
       }
     },
@@ -297,32 +324,6 @@
       "toProvider": "Dirección del proveedor",
       "initialAmount": "Importe inicial",
       "creditedAmount": "Importe acreditado"
-    },
-    "providers": {
-      "title": "Elige un proveedor para permutar criptomonedas",
-      "learnMore": "¿Qué es la permuta?",
-      "kycRequired": "KYC requerido",
-      "wyre": {
-        "bullets": [
-          "Sólo Estados Unidos (pronto Europa, África y Asia)",
-          "Distintos tokens y monedas",
-          "Centralizado"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT y más de 50 otras",
-          "Multidivisa",
-          "Centralizado"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Conectar a más de 30 DEXs (Uniswap, SushiSwap,...)",
-          "Tokens Ethereum y ERC20",
-          "Descentralizado y sin requerir confianza"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -515,28 +516,6 @@
     },
     "history": {
       "tab": "Historial"
-    },
-    "providers": {
-      "title": "Elige un proveedor para comprar criptomonedas",
-      "learnMore": "¿Qué es comprar?",
-      "coinify": {
-        "bullets": [
-          "Disponible en más de 130 países",
-          "EUR, USD, GBP y otras 32",
-          "Pagos más rápidos y SEPA",
-          "Transferencias bancarias locales en Estados Unidos",
-          "Tarjetas de crédito y débito"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "Sólo cuenta bancaria de Estados Unidos",
-          "Sólo compatible con USD",
-          "Compatible con más de 20 criptomonedas",
-          "Transferencia ACH",
-          "Sin tarjetas de débito o crédito"
-        ]
-      }
     }
   },
   "lend": {
@@ -2443,8 +2422,8 @@
   },
   "informationCenter": {
     "tooltip": "Centro de información",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "ongoingIncidentsTooltip": "Hay {{count}} incidente en curso",
+    "ongoingIncidentsTooltip_plural": "Hay {{count}} incidentes en curso",
     "tabs": {
       "announcements": "Noticias",
       "announcementsUnseen": "Noticias ({{unseenCount}})",
