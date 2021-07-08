@@ -31,8 +31,8 @@ describe("password lock", () => {
   });
 
   it("User data should be encrypted", async () => {
+    await app.client.pause(15000);
     const userData = await getUserDataFile();
-    await app.client.pause(5000);
     expect(typeof userData.data.accounts).toBe("string");
   });
 
@@ -67,8 +67,8 @@ describe("password lock", () => {
   });
 
   it("User data shouldn't be encrypted", async () => {
+    await app.client.pause(15000);
     const userData = await getUserDataFile();
-    await app.client.pause(5000);
     expect(typeof userData.data.accounts).toBe("object");
   });
 });

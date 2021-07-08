@@ -137,7 +137,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         SPECTRON_RUN: true,
         CI: process.env.CI || "",
         SYNC_ALL_INTERVAL: 86400000,
-        SYNC_BOOT_DELAY: 0,
+        SYNC_BOOT_DELAY: 16,
       },
       env,
     );
