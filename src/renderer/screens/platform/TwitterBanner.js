@@ -6,6 +6,8 @@ import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
 
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
 const Container: ThemedComponent<{}> = styled(Box).attrs(p => ({
   mb: 24,
 }))``;
