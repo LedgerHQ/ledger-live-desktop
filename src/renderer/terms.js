@@ -24,26 +24,14 @@ export function acceptLendingTerms() {
   return global.localStorage.setItem("acceptedLendingTermsVersion", currentLendingTermsRequired);
 }
 
-export const usePrivacyUrl = () => {
-  const [privacyUrl, setPrivacyUrl] = useState(urls.privacyPolicy.en);
-
+/* This hook dynamically returns correct url based on user language */
+export const useDynamicUrl = (key: string): string => {
+  const [url, setUrl] = useState(urls[key].en);
   const language = useSelector(languageSelector);
+
   useEffect(() => {
-    setPrivacyUrl(urls.privacyPolicy[language] || urls.privacyPolicy.en);
+    setUrl(urls[key][language] || urls[key].en);
   }, [language]);
 
-  return privacyUrl;
-};
-
-// TODO: Merge useTermsUrl and usePrivacyUrl to create generic useDynamicUrl
-export const useTermsUrl = () => {
-  const fallbackMessage = urls.terms.en;
-  const [termsUrl, setTermsUrl] = useState(fallbackMessage);
-
-  const language = useSelector(languageSelector);
-  useEffect(() => {
-    setTermsUrl(urls.terms[language] || fallbackMessage);
-  }, [language]);
-
-  return termsUrl;
+  return url;
 };

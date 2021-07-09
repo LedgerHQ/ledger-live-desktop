@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
-import { acceptTerms, usePrivacyUrl, useTermsUrl } from "~/renderer/terms";
+import { acceptTerms, useDynamicUrl } from "~/renderer/terms";
 import { setShareAnalytics } from "~/renderer/actions/settings";
 import Button from "~/renderer/components/Button";
 import CheckBox from "~/renderer/components/CheckBox";
@@ -57,8 +57,8 @@ type TermsProps = { sendEvent: string => void };
 export const Terms = ({ sendEvent }: TermsProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const privacyPolicyUrl = usePrivacyUrl();
-  const termsUrl = useTermsUrl();
+  const privacyPolicyUrl = useDynamicUrl("privacyPolicy");
+  const termsUrl = useDynamicUrl("terms");
   const [isAccepted, setIsAccepted] = useState(false);
   const onSwitchAccept = useCallback(() => setIsAccepted(a => !a), []);
 
