@@ -198,7 +198,7 @@
     "whatIsSwap": "What is Swap",
     "paraswap": {
       "cta": " Check it out",
-      "description":"Looking for Paraswap? It has been moved to the Discover tab."
+      "description": "Looking for Paraswap? It has been moved to the Discover tab."
     },
     "tabs": {
       "exchange": "Exchange",
@@ -265,7 +265,7 @@
     },
     "kyc": {
       "wyre": {
-        "disclaimer":"Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
         "policy": "Privacy Policy",
         "title": "Verify your identity",
         "subtitle": "Please enter your information to swap with Wyre.",
@@ -281,31 +281,31 @@
           "subtitle": "Wyre rejected the data you provided for KYC purposes",
           "link": "Learn more about KYC"
         },
-        "form":{
+        "form": {
           "firstName": "First Name",
           "lastName": "Last Name",
-          "street1": "Street Address Line 1", 
-          "street2": "Street Address Line 2", 
-          "city": "City", 
-          "state": "State", 
-          "country": "Country", 
-          "postalCode": "Zip Code" ,
-          "dateOfBirth": "Date of birth" ,
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
 
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street", 
-          "street2Placeholder": "Eg. 13, Maple street", 
-          "cityPlaceholder": "Eg. San José", 
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
           "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY", 
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
 
           "firstNameError": "Enter your first name to continue",
           "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address", 
-          "cityError": "Enter the city you live in the USA", 
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
           "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth" 
+          "dateOfBirthError": "Enter your date of birth"
         }
       }
     },
@@ -3163,6 +3163,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "Firmware or app update required",
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "Update Nano Firmware",
+      "description": "Please update your devices Firmware to the latest version to access this feature"
     },
     "FirmwareNotRecognized": {
       "title": "Device firmware is not recognized",
