@@ -1,17 +1,37 @@
 // @flow
 import React, { useCallback } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { fontSize, color } from "styled-system";
+import type { ThemedComponent } from "@ui/styles/StyleProvider";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import { fontSizes } from "@ui/styles/theme";
 
-const IconContainer = styled.div`
+type Props = {
+  Icon?: React$ComponentType<*>,
+  children: React$Node,
+  onClick: () => void,
+  ff?: string,
+  color?: string,
+  fontSize?: number,
+  type?: "primary" | "secondary",
+  iconPosition?: "right" | "left",
+};
+
+const IconContainer: ThemedComponent<{ iconPosition: "right" | "left" }> = styled.div`
   display: inline-block;
   ${p => (p.iconPosition === "right" ? `margin-right: 10px;` : `margin-left: 10px;`)}
   padding-top: 0.2em;
 `;
 
-export const Base = styled.button.attrs(p => ({
+export const Base: ThemedComponent<{
+  Icon?: React$ComponentType<*>,
+  ff?: string,
+  color?: string,
+  fontSize?: number,
+  type?: "primary" | "secondary",
+  iconPosition?: "right" | "left",
+  ...
+}> = styled.button.attrs(p => ({
   ff: "Inter|SemiBold",
   color: "palette.v2.text.default",
   fontSize: p.fontSize ?? 4,
@@ -81,35 +101,24 @@ export const Base = styled.button.attrs(p => ({
   }}
   ${p =>
     p.iconButton
-      ? `
-      width: ${p.theme.space[6]}px;
-      padding: 0;
-      ${IconContainer} {
-        margin: 0;
-      }
-    `
+      ? css`
+          width: ${p.theme.space[6]}px;
+          padding: 0;
+          ${IconContainer} {
+            margin: 0;
+          }
+        `
       : ``}
   ${p => p.theme.transition()}
 `;
 
-const ContentContainer = styled.div``;
-
-type Props = {
-  Icon: React$ComponentType<*>,
-  children: React$Node,
-  onClick: () => void,
-  ff?: string,
-  color?: string,
-  fontSize?: number,
-  type?: "primary" | "secondary",
-  iconPosition?: "right" | "left",
-};
+const ContentContainer: ThemedComponent<*> = styled.div``;
 
 const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: Props) => {
-  const onClickHandler = useCallback(() => onClick(), []);
+  const onClickHandler = useCallback(() => onClick(), [onClick]);
 
   return (
-    <Base iconButton={!!Icon && !children} onClick={onClickHandler} {...props}>
+    <Base {...props} iconButton={!!Icon && !children} onClick={onClickHandler}>
       {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
       {Icon ? (
         <IconContainer iconPosition={iconPosition}>

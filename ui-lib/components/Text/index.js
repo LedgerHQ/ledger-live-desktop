@@ -11,6 +11,7 @@ import {
   letterSpacing,
   system,
 } from "styled-system";
+import type { ThemedComponent } from "@ui/styles/StyleProvider";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import "./Text.css";
 import BracketRight from "@ui/icons/BracketLeft.js";
@@ -65,7 +66,7 @@ type Props = {
   children: React$Node,
 };
 
-const Base = styled.span.attrs(p => ({
+const Base: ThemedComponent<Props> = styled.span.attrs(p => ({
   color: "palette.v2.text.default",
   className: `${p.type ? `ll-text_${p.type} ` : ""}`,
 }))`

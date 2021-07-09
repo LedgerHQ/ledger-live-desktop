@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
-import ReactDom from "react-dom";
 import styled from "styled-components";
+import type { ThemedComponent } from "@ui/styles/StyleProvider";
 import Button from "@ui/components/Button";
 import Cross from "@ui/icons/Cross";
 
@@ -13,7 +13,7 @@ type Props = {
   height?: number,
 };
 
-const Container = styled.div`
+const Container: ThemedComponent<*> = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
@@ -21,7 +21,7 @@ const Container = styled.div`
   padding: ${p => p.theme.space[3]}px;
 `;
 
-const Wrapper = styled.div`
+const Wrapper: ThemedComponent<{ width?: number, height?: number }> = styled.div`
   height: ${p => p.height || p.theme.sizes.modal.min.height}px;
   width: ${p => p.width || p.theme.sizes.modal.min.width}px;
   min-height: ${p => p.theme.sizes.modal.min.height}px;
@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   z-index: 1000;
 `;
 
-const Overlay = styled.div`
+const Overlay: ThemedComponent<*> = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -49,7 +49,7 @@ const Overlay = styled.div`
   background-color: ${p => p.theme.colors.palette.v2.background.overlay};
 `;
 
-const CloseButton = styled(Button)`
+const CloseButton: ThemedComponent<*> = styled(Button)`
   position: absolute;
   top: ${p => p.theme.space[3]}px;
   right: ${p => p.theme.space[3]}px;
