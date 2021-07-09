@@ -5,6 +5,7 @@ import Box from "~/renderer/components/Box/Box";
 import Alert from "~/renderer/components/Alert";
 import Text from "~/renderer/components/Text";
 import { useTranslation } from "react-i18next";
+import { urls } from "~/config/urls";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -18,7 +19,7 @@ export default function TwitterBanner() {
   const { t } = useTranslation();
 
   const url = useMemo(() => {
-    const urlObj = new URL("https://twitter.com/intent/tweet");
+    const urlObj = new URL(urls.banners.twitterIntent);
 
     urlObj.searchParams.set("text", t("platform.catalog.twitterBanner.tweetText"));
     urlObj.searchParams.set("hashtags", twitterHashtag);
