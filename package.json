@@ -46,7 +46,7 @@
     "@ledgerhq/hw-transport-http": "^6.1.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "^6.1.0",
     "@ledgerhq/ledger-core": "6.12.3",
-    "@ledgerhq/live-common": "20.3.1",
+    "@ledgerhq/live-common": "^20.3.2",
     "@ledgerhq/logs": "^6.0.2",
     "@polkadot/react-identicon": "0.83.1",
     "@tippyjs/react": "^4.2.5",
@@ -123,7 +123,7 @@
     "winston": "^3.2.1",
     "winston-transport": "^4.3.0",
     "write-file-atomic": "^3.0.3",
-    "ws": "^7.5.2",
+    "ws": "^7.5.3",
     "xstate": "^4.22.0",
     "zxcvbn": "^4.4.2"
   },
