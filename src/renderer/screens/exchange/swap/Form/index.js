@@ -249,22 +249,17 @@ const Form = ({
 
   // Deselect the tradeMethod if not available for current pair
   useEffect(() => {
-    if (enabledTradeMethods && !enabledTradeMethods.includes(tradeMethod)) {
+    if (
+      enabledTradeMethods &&
+      enabledTradeMethods.length > 0 &&
+      !enabledTradeMethods.includes(tradeMethod)
+    ) {
       setTradeMethod(enabledTradeMethods[0]);
     }
   }, [enabledTradeMethods, setTradeMethod, tradeMethod]);
 
-  const { provider, magnitudeAwareRate } = exchangeRate || {};
+  const { provider, magnitudeAwareRate, toAmount } = exchangeRate || {};
   const { amount = BigNumber(0) } = transaction || {};
-
-  const toAmount = useMemo(() => {
-    if (!exchangeRate) return;
-    let base = exchangeRate.toAmount;
-    if (exchangeRate && exchangeRate.payoutNetworkFees && toCurrency) {
-      base = base.minus(exchangeRate.payoutNetworkFees);
-    }
-    return base;
-  }, [exchangeRate, toCurrency]);
 
   return (
     <>

@@ -79,8 +79,8 @@ export const InformationDrawer = ({
   const CurrentPanel = tabs[tabIndex].Component;
 
   return (
-    <SideDrawer paper isOpen={isOpen} onRequestClose={onRequestClose} direction="left">
-      <Box pt="60px" height="100%">
+    <SideDrawer isOpen={isOpen} onRequestClose={onRequestClose} direction="left">
+      <Box pt="60px" height="100%" px="40px">
         <TabBar
           fullWidth
           tabs={tabs.map(({ label }) => label)}

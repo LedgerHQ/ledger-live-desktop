@@ -12,7 +12,7 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { WrongDeviceForAccount } from "@ledgerhq/errors";
+import { WrongDeviceForAccount, UpdateYourApp } from "@ledgerhq/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -23,7 +23,6 @@ import TranslatedError from "~/renderer/components/TranslatedError";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import BigSpinner from "~/renderer/components/BigSpinner";
-import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import Alert from "~/renderer/components/Alert";
 import ConnectTroubleshooting from "~/renderer/components/ConnectTroubleshooting";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -181,21 +180,30 @@ export const renderVerifyUnwrapped = ({
 const OpenManagerBtn = ({
   closeAllModal,
   appName,
+  updateApp,
   mt = 2,
 }: {
   closeAllModal: () => void,
   appName?: string,
+  updateApp?: boolean,
   mt?: number,
 }) => {
   const history = useHistory();
+
   const onClick = useCallback(() => {
+    const urlParams = new URLSearchParams({
+      updateApp: updateApp ? "true" : "false",
+      ...(appName ? { q: appName } : {}),
+    });
+    const search = urlParams.toString();
     setTrackingSource("device action open manager button");
     history.push({
-      pathname: "/manager",
-      search: appName ? `?q=${appName}` : "",
+      pathname: "manager",
+      search: search ? `?${search}` : "",
     });
     closeAllModal();
-  }, [history, appName, closeAllModal]);
+  }, [updateApp, appName, history, closeAllModal]);
+
   return (
     <Button mt={mt} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />
@@ -359,7 +367,7 @@ export const renderWarningOutdated = ({
       <Button secondary onClick={passWarning}>
         <Trans i18nKey="common.continue" />
       </Button>
-      <OpenManagerButton ml={4} mt={0} appName={appName} />
+      <OpenManagerButton ml={4} mt={0} appName={appName} updateApp />
     </ButtonContainer>
   </Wrapper>
 );
@@ -372,6 +380,7 @@ export const renderError = ({
   list,
   supportLink,
   warning,
+  managerAppName,
 }: {
   error: Error,
   withOpenManager?: boolean,
@@ -380,6 +389,7 @@ export const renderError = ({
   list?: boolean,
   supportLink?: string,
   warning?: boolean,
+  managerAppName?: string,
 }) => (
   <Wrapper id={`error-${error.name}`}>
     <Logo warning={warning}>
@@ -399,24 +409,29 @@ export const renderError = ({
       </ErrorDescription>
     ) : null}
     <ButtonContainer>
-      {supportLink ? (
-        <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
-      ) : null}
-      {withExportLogs ? (
-        <ExportLogsButton
-          title={<Trans i18nKey="settings.exportLogs.title" />}
-          small={false}
-          primary={false}
-          outlineGrey
-          mx={1}
-        />
-      ) : null}
-      {withOpenManager ? <OpenManagerButton ml={4} mt={0} /> : null}
-      {onRetry ? (
-        <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
-          <Trans i18nKey="common.retry" />
-        </Button>
-      ) : null}
+      {managerAppName ? (
+        <OpenManagerButton appName={managerAppName} updateApp={error instanceof UpdateYourApp} />
+      ) : (
+        <>
+          {supportLink ? (
+            <ExternalLinkButton label={<Trans i18nKey="common.getSupport" />} url={supportLink} />
+          ) : null}
+          {withExportLogs ? (
+            <ExportLogsButton
+              title={<Trans i18nKey="settings.exportLogs.title" />}
+              small={false}
+              primary={false}
+              outlineGrey
+              mx={1}
+            />
+          ) : null}
+          {onRetry ? (
+            <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
+              <Trans i18nKey="common.retry" />
+            </Button>
+          ) : null}
+        </>
+      )}
     </ButtonContainer>
   </Wrapper>
 );
@@ -551,21 +566,10 @@ export const renderSwapDeviceConfirmation = ({
           ),
         },
         (value, key) => {
-          const maybeModifiedKey =
-            key === "amountReceived" && exchangeRate.tradeMethod === "float"
-              ? "amountReceivedFloat"
-              : key;
           return (
-            <Box
-              horizontal
-              justifyContent="space-between"
-              key={maybeModifiedKey}
-              mb={2}
-              ml="12px"
-              mr="12px"
-            >
+            <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
               <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-                <Trans i18nKey={`DeviceAction.swap.${maybeModifiedKey}`} />
+                <Trans i18nKey={`DeviceAction.swap.${key}`} />
               </Text>
               <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
                 {value}
@@ -574,36 +578,6 @@ export const renderSwapDeviceConfirmation = ({
           );
         },
       )}
-      {exchangeRate.payoutNetworkFees ? (
-        <Box
-          horizontal
-          justifyContent="space-between"
-          key={"payoutNetworkFees"}
-          mb={2}
-          ml="12px"
-          mr="12px"
-        >
-          <LabelInfoTooltip
-            text={<Trans i18nKey={"DeviceAction.swap.payoutNetworkFeesTooltip"} />}
-            style={{ marginLeft: 4 }}
-          >
-            <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-              <Trans i18nKey={"DeviceAction.swap.payoutNetworkFees"} />
-            </Text>
-          </LabelInfoTooltip>
-          <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-            {exchangeRate.payoutNetworkFees && (
-              <CurrencyUnitValue
-                unit={getAccountUnit(exchange.toAccount)}
-                // $FlowFixMe
-                value={exchangeRate.payoutNetworkFees}
-                disableRounding
-                showCode
-              />
-            )}
-          </Text>
-        </Box>
-      ) : null}
       {renderVerifyUnwrapped({ modelId, type })}
     </div>
   );

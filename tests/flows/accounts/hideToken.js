@@ -5,6 +5,7 @@ const hideToken = (currency = "global") => {
   describe("hide token account", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("opens an account with tokens", async () => {
@@ -23,6 +24,8 @@ const hideToken = (currency = "global") => {
 
       await hideTokenModal.confirm();
       await hideTokenModal.waitForDisplayed({ reverse: true });
+
+      await app.client.waitForSync();
 
       const newTokens = await accountPage.getTokens();
       expect(newTokens).toHaveLength(tokensLength - 1);

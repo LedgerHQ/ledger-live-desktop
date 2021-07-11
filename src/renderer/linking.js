@@ -1,6 +1,6 @@
 // @flow
 
-// import { track } from '~/analytics/segment'
+import { track } from "~/renderer/analytics/segment";
 import electron from "electron";
 
 let shell;
@@ -13,6 +13,8 @@ export const openURL = (
   customEventName: string = "OpenURL",
   extraParams: Object = {},
 ) => {
-  // track(customEventName, { ...extraParams, url })
+  if (customEventName) {
+    track(customEventName, { ...extraParams, url });
+  }
   shell && shell.openExternal(url);
 };

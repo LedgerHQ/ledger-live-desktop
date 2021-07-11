@@ -1,3 +1,3 @@
-*             @ledgerhq/ledger-live-maintainer
-/tests/       @ledgerhq/live-qa
-src/**        @ledgerhq/live-squad-yellow @ledgerhq/live-squad-blue
+*            @ledgerhq/ledger-live-maintainer
+tests/       @ledgerhq/live-qa
+src/         @ledgerhq/live-squad-yellow @ledgerhq/live-squad-blue

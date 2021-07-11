@@ -25,9 +25,24 @@ export default class AccountPage extends Page {
     return this.$("#operation-list");
   }
 
+  async actionsDropdown() {
+    return this.$("#account-actions-manage");
+  }
+
+  async actionsDropdownWC() {
+    return this.$("#account-actions-manage-WalletConnect");
+  }
+
   async bookmarkAccount() {
     const elem = await this.starButton();
     await elem.click();
+  }
+
+  async openWalletConnect() {
+    const elem = await this.actionsDropdown();
+    await elem.click();
+    const elem2 = await this.actionsDropdownWC();
+    await elem2.click();
   }
 
   async getTokens() {
@@ -44,7 +59,7 @@ export default class AccountPage extends Page {
     const tokens = await this.getTokens();
     const [token] = tokens;
     await token.click({ button: "right" });
-    await this.app.client.pause(500);
+    await this.app.client.pause(1000);
     const hideButton = await this.menuHideTokenButton();
     await hideButton.click();
   }

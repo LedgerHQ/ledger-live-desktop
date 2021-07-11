@@ -5,6 +5,7 @@ const exportAccountsToMobile = (currency = "global") => {
   describe("export accounts to mobile", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("opens the export accounts modal", async () => {

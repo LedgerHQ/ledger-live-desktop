@@ -16,7 +16,8 @@ import {
   Address,
   OpDetailsData,
   OpDetailsVoteData,
-} from "~/renderer/modals/OperationDetails/styledComponents";
+  OpDetailsSection,
+} from "~/renderer/drawers/OperationDetails/styledComponents";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import {
@@ -66,7 +67,7 @@ export const OperationDetailsVotes = ({
   const discreet = useDiscreetMode();
 
   return (
-    <Box>
+    <OpDetailsSection>
       {!isTransactionField && (
         <OpDetailsTitle>
           <Trans
@@ -75,33 +76,34 @@ export const OperationDetailsVotes = ({
           />
         </OpDetailsTitle>
       )}
-
-      {sp.length > 0 &&
-        formattedVotes &&
-        formattedVotes.length > 0 &&
-        formattedVotes.map(({ voteCount, address, validator }, i) => (
-          <OpDetailsData key={address + i}>
-            <OpDetailsVoteData>
-              <Box>
-                <Text>
-                  <Trans
-                    i18nKey="operationDetails.extra.votesAddress"
-                    values={{
-                      votes: !discreet ? voteCount : "***",
-                      name: validator && validator.name,
-                    }}
-                  >
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                    {""}
-                    <Text ff="Inter|SemiBold">{""}</Text>
-                  </Trans>
-                </Text>
-              </Box>
-              <Address onClick={() => redirectAddress(address)}>{address}</Address>
-            </OpDetailsVoteData>
-          </OpDetailsData>
-        ))}
-    </Box>
+      <Box>
+        {sp.length > 0 &&
+          formattedVotes &&
+          formattedVotes.length > 0 &&
+          formattedVotes.map(({ voteCount, address, validator }, i) => (
+            <OpDetailsData key={address + i} justifyContent="flex-start">
+              <OpDetailsVoteData>
+                <Box>
+                  <Text>
+                    <Trans
+                      i18nKey="operationDetails.extra.votesAddress"
+                      values={{
+                        votes: !discreet ? voteCount : "***",
+                        name: validator && validator.name,
+                      }}
+                    >
+                      <Text ff="Inter|SemiBold">{""}</Text>
+                      {""}
+                      <Text ff="Inter|SemiBold">{""}</Text>
+                    </Trans>
+                  </Text>
+                </Box>
+                <Address onClick={() => redirectAddress(address)}>{address}</Address>
+              </OpDetailsVoteData>
+            </OpDetailsData>
+          ))}
+      </Box>
+    </OpDetailsSection>
   );
 };
 
@@ -121,37 +123,41 @@ const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraPr
     }
     case "FREEZE":
       return (
-        <Box>
+        <OpDetailsSection>
           <OpDetailsTitle>
             <Trans i18nKey="operationDetails.extra.frozenAmount" />
           </OpDetailsTitle>
           <OpDetailsData>
-            <FormattedVal
-              val={extra.frozenAmount}
-              unit={account.unit}
-              showCode
-              fontSize={4}
-              color="palette.text.shade60"
-            />
+            <Box>
+              <FormattedVal
+                val={extra.frozenAmount}
+                unit={account.unit}
+                showCode
+                fontSize={4}
+                color="palette.text.shade60"
+              />
+            </Box>
           </OpDetailsData>
-        </Box>
+        </OpDetailsSection>
       );
     case "UNFREEZE":
       return (
-        <Box>
+        <OpDetailsSection>
           <OpDetailsTitle>
             <Trans i18nKey="operationDetails.extra.unfreezeAmount" />
           </OpDetailsTitle>
           <OpDetailsData>
-            <FormattedVal
-              val={extra.unfreezeAmount}
-              unit={account.unit}
-              showCode
-              fontSize={4}
-              color="palette.text.shade60"
-            />
+            <Box>
+              <FormattedVal
+                val={extra.unfreezeAmount}
+                unit={account.unit}
+                showCode
+                fontSize={4}
+                color="palette.text.shade60"
+              />
+            </Box>
           </OpDetailsData>
-        </Box>
+        </OpDetailsSection>
       );
     default:
       return null;
