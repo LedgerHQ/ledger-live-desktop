@@ -52,6 +52,7 @@ const Header = ({ account, nested }: Props) => {
             fontSize={9}
             color="palette.text.shade60"
             alignItems="center"
+            className="accounts-account-row-crypto-name"
           >
             {title} <AccountTagDerivationMode account={account} />
           </Box>
