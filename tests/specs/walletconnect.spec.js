@@ -15,10 +15,16 @@ describe("WalletConnect", () => {
 
   it("goes to walletconnect modal", async () => {
     await accountsPage.goToAccounts();
-    const firstAccountRow = await accountsPage.getNthAccountRow(2);
+    const firstAccountRow = await accountsPage.walletConnectGetEthereumAccount();
     await accountsPage.clickOnAccountRow(firstAccountRow);
+    await app.client.pause(1000);
+    await accountPage.openDropDown();
     await accountPage.openWalletConnect();
 
+    expect(true).toBe(true);
+  });
+
+  it("walletconnect modal is opened", async () => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: "wc-connect",
     });

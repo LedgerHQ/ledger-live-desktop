@@ -89,6 +89,20 @@ export default class AccountsPage extends Page {
     return accounts[0];
   }
 
+  async walletConnectGetEthereumAccount() {
+    const accounts = await this.getAccountsRows();
+    let found;
+    for await (const account of accounts) {
+      const container = await account.$(".accounts-account-row-crypto-name");
+      const text = await container.getText();
+      if (text.toUpperCase() === "ETHEREUM") {
+        found = account;
+        break;
+      }
+    }
+    return found;
+  }
+
   async clickOnAccountRow(accountRow) {
     const content = await accountRow.$(".accounts-account-row-item-content");
     return content.click();

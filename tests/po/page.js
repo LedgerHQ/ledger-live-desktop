@@ -114,6 +114,7 @@ export default class Page {
     await btn.click();
   }
 
+  // HALP DO NOT USE: It triggers a loop of sync ¯\_(ツ)_/¯
   async synchronize() {
     const btn = await this.topbarSynchronizeButton();
     await btn.click();
@@ -138,25 +139,22 @@ export default class Page {
   // Notifications
   async addAnnouncement() {
     announcementsApiMock("addAnnouncementFromPool");
-    await this.synchronize();
   }
 
   async generateAnnouncement(params) {
     announcementsApiMock("addMockAnnouncement", params);
-    await this.synchronize();
   }
 
-  resetAnnouncements() {
+  async resetAnnouncements() {
     announcementsApiMock("resetAnnouncements");
   }
 
   // ServiceStatus
   async toggleIncident(bool = true) {
     serviceStatusApiMock("toggleMockIncident", bool);
-    await this.synchronize();
   }
 
-  resetIncidents() {
+  async resetIncidents() {
     serviceStatusApiMock("resetIncidents");
   }
 }

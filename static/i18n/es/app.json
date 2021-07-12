@@ -18,7 +18,7 @@
       }
     },
     "catalog": {
-      "title": "Catálogo de aplicaciones de Live",
+      "title": "Discover",
       "branch": {
         "soon": "próximamente",
         "experimental": "experimental",
@@ -27,6 +27,10 @@
       "banner": {
         "title": "Descubre nuestro catálogo de aplicaciones de Live",
         "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
+      },
+      "twitterBanner": {
+        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
+        "tweetText": "The next Ledger App should be..."
       },
       "pollCTA": {
         "title": "Encuesta",
