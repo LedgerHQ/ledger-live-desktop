@@ -22,6 +22,7 @@ import IconExternalLink from "~/renderer/icons/ExternalLink";
 import AppCard from "~/renderer/components/Platform/AppCard";
 import CatalogCTA from "./CatalogCTA";
 import CatalogBanner from "./CatalogBanner";
+import TwitterBanner from "./TwitterBanner";
 
 const Grid = styled.div`
   display: grid;
@@ -94,6 +95,7 @@ const PlatformCatalog = () => {
         <Title>{t("platform.catalog.title")}</Title>
       </Header>
       <CatalogBanner />
+      <TwitterBanner />
       <Grid length={apps.length}>
         {apps.map(manifest => (
           <GridItem key={manifest.id}>
