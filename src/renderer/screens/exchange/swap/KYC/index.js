@@ -15,6 +15,8 @@ import Button from "~/renderer/components/Button";
 import Card from "~/renderer/components/Box/Card";
 import Input from "~/renderer/components/Input";
 import Select from "~/renderer/components/Select";
+import Alert from "~/renderer/components/Alert";
+import useIsUpdateAvailable from "~/renderer/components/Updater/useIsUpdateAvailable";
 import Pending from "./Pending";
 import IconWyre from "~/renderer/icons/providers/Wyre";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
@@ -55,6 +57,8 @@ const renderCountry = option => {
 const KYC = () => {
   const { t } = useTranslation();
   const [errors, setErrors] = useState({});
+  const isUpdateAvailable = useIsUpdateAvailable();
+  const [APIError, setAPIError] = useState<any>(null);
   const [isLoading, setLoading] = useState(false);
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false);
 
@@ -122,8 +126,12 @@ const KYC = () => {
       async function onSubmitKYC() {
         setLoading(true);
         const res = await submitKYC("wyre", kycData);
-        if (cancelled) return;
-        dispatch(setSwapKYCStatus({ provider: "wyre", id: res?.id, status: res.status }));
+        if (res.error) {
+          setAPIError(res.error);
+        } else if (!cancelled) {
+          dispatch(setSwapKYCStatus({ provider: "wyre", id: res?.id, status: res.status }));
+          setAPIError();
+        }
         setLoading(false);
       }
       onSubmitKYC();
@@ -148,6 +156,17 @@ const KYC = () => {
             <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade70">
               <Trans i18nKey={"swap.kyc.wyre.subtitle"} />
             </Text>
+            {APIError ? (
+              <Box mt={10} flex={1}>
+                <Alert type={"error"} flex={1}>
+                  {isUpdateAvailable ? (
+                    <Trans i18nKey={"swap.kyc.updateRequired"} />
+                  ) : (
+                    APIError.message
+                  )}
+                </Alert>
+              </Box>
+            ) : null}
             <Box horizontal alignSelf={"stretch"} mt={32}>
               <Box flex={1}>
                 <Text ff="Inter|Medium" mr={1} fontSize={13} color="palette.text.shade70" mb={1}>

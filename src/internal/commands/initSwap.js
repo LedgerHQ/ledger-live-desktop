@@ -21,6 +21,7 @@ type Input = {
   transaction: TransactionRaw,
   deviceId: string,
   userId?: string,
+  requireLatestFirmware?: boolean,
 };
 
 const cmd = ({
@@ -29,6 +30,7 @@ const cmd = ({
   transaction,
   deviceId,
   userId,
+  requireLatestFirmware,
 }: Input): Observable<SwapRequestEvent> => {
   return from(
     initSwap({
@@ -37,6 +39,7 @@ const cmd = ({
       transaction: fromTransactionRaw(transaction),
       deviceId,
       userId,
+      requireLatestFirmware,
     }),
   );
 };
