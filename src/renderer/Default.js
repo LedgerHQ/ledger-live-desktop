@@ -33,6 +33,7 @@ import MainSideBar from "~/renderer/components/MainSideBar";
 import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
 import DebugUpdater from "~/renderer/components/debug/DebugUpdater";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import DebugTheme from "~/renderer/components/debug/DebugTheme";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
@@ -44,7 +45,7 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 
-export const TopBannerContainer = styled.div`
+export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
   top: 0;
   z-index: 19;
