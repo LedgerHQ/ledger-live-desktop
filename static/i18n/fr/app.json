@@ -28,6 +28,10 @@
         "title": "Découvrez le catalogue d'applications Live",
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
+      "twitterBanner": {
+        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
+        "tweetText": "The next Ledger App should be..."
+      },
       "pollCTA": {
         "title": "Sondage",
         "description": "Quel service aimeriez-vous voir dans Ledger Live ?",
