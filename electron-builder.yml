@@ -8,7 +8,6 @@ protocols:
 afterSign: scripts/notarize.js
 
 mac:
-  strictVerify: false
   artifactName: ${name}-${version}-${os}.${ext}
   category: public.app-category.wallet
   hardenedRuntime: true
@@ -55,4 +54,6 @@ files:
   # Include files
   - .webpack/**/*
   # Exclude files
+  - "!node_modules/sodium-native/prebuilds"
+  - "!node_modules/sodium-native/tmp"
   # Exclude modules

@@ -136,8 +136,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         DISABLE_DEV_TOOLS: true,
         SPECTRON_RUN: true,
         CI: process.env.CI || "",
-        SYNC_ALL_INTERVAL: 999999999999999,
-        SYNC_BOOT_DELAY: 999999999999999,
+        SYNC_ALL_INTERVAL: 86400000,
+        SYNC_BOOT_DELAY: 16,
       },
       env,
     );
@@ -214,7 +214,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       await sync.waitForDisplayed({ timeout });
     });
 
-    app.client.addCommand("screenshot", async function(countdown = 500) {
+    app.client.addCommand("screenshot", async function(countdown = 1500) {
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 

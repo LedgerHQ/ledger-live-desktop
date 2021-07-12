@@ -18,7 +18,7 @@
       }
     },
     "catalog": {
-      "title": "Live Apps Catalog",
+      "title": "Discover",
       "branch": {
         "soon": "coming soon",
         "experimental": "experimental",
@@ -27,6 +27,10 @@
       "banner": {
         "title": "Discover our Live Apps Catalog",
         "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+      },
+      "twitterBanner": {
+        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
+        "tweetText": "The next Ledger App should be..."
       },
       "pollCTA": {
         "title": "Poll",
@@ -198,7 +202,7 @@
     "whatIsSwap": "What is Swap",
     "paraswap": {
       "cta": " Check it out",
-      "description":"Looking for Paraswap? It has been moved to the Discover tab."
+      "description": "Looking for Paraswap? It has been moved to the Discover tab."
     },
     "tabs": {
       "exchange": "Exchange",

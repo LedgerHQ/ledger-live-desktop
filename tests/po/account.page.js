@@ -38,11 +38,14 @@ export default class AccountPage extends Page {
     await elem.click();
   }
 
-  async openWalletConnect() {
+  async openDropDown() {
     const elem = await this.actionsDropdown();
     await elem.click();
-    const elem2 = await this.actionsDropdownWC();
-    await elem2.click();
+  }
+
+  async openWalletConnect() {
+    const elem = await this.actionsDropdownWC();
+    await elem.click();
   }
 
   async getTokens() {
@@ -58,10 +61,14 @@ export default class AccountPage extends Page {
   async hideFirstToken() {
     const tokens = await this.getTokens();
     const [token] = tokens;
-    await token.click({ button: "right" });
-    await this.app.client.pause(1000);
-    const hideButton = await this.menuHideTokenButton();
-    await hideButton.click();
+    if (!token) {
+      console.warn("why no tokens ?", { tokens });
+    } else {
+      await token.click({ button: "right" });
+      await this.app.client.pause(1000);
+      const hideButton = await this.menuHideTokenButton();
+      await hideButton.click();
+    }
   }
 
   async clickFirstOperationRow() {
