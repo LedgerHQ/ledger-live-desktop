@@ -1,10 +1,11 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { fontSize, color } from "styled-system";
 import type { ThemedComponent } from "@ui/styles/StyleProvider";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import { fontSizes } from "@ui/styles/theme";
+import ChevronDown from "@ui/icons/ChevronDown";
 
 type Props = {
   Icon?: React$ComponentType<*>,
@@ -19,7 +20,7 @@ type Props = {
 
 const IconContainer: ThemedComponent<{ iconPosition: "right" | "left" }> = styled.div`
   display: inline-block;
-  ${p => (p.iconPosition === "right" ? `margin-right: 10px;` : `margin-left: 10px;`)}
+  ${p => (p.iconPosition === "left" ? `margin-right: 10px;` : `margin-left: 10px;`)}
   padding-top: 0.2em;
 `;
 
@@ -71,6 +72,12 @@ export const Base: ThemedComponent<{
           padding: 0 2em;
           &:hover {
             background-color: ${p.theme.colors.palette.v2.primary.borderDark};
+            ${
+              p.iconButton
+                ? `box-shadow: 0px 0px 0px 12px ${p.theme.colors.palette.v2.grey.border};`
+                : ""
+            }
+
           }
         `;
       case "secondary":
@@ -117,14 +124,46 @@ const ContentContainer: ThemedComponent<*> = styled.div``;
 const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: Props) => {
   return (
     <Base {...props} iconButton={!!Icon && !children} onClick={onClick}>
-      {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
+      {iconPosition === "right" ? <ContentContainer>{children}</ContentContainer> : null}
       {Icon ? (
         <IconContainer iconPosition={iconPosition}>
           <Icon size={fontSizes[props.fontSize ?? 4]} />
         </IconContainer>
       ) : null}
-      {iconPosition === "right" ? <ContentContainer>{children}</ContentContainer> : null}
+      {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
     </Base>
+  );
+};
+
+const StyledExpandButton: any = styled(Button).attrs(props => ({
+  Icon: props.Icon || ChevronDown,
+  iconPosition: props.iconPosition || "right",
+}))`
+  ${IconContainer} {
+    transition: transform 0.25s;
+    ${p => (p.expanded ? "transform: rotate(180deg)" : "")}
+  }
+`;
+
+export const ExpandButton = function ExpandButton({
+  onToggle,
+  onClick,
+  ...props
+}: {
+  onToggle?: boolean => void,
+  onClick?: (SyntheticEvent<HTMLButtonElement>) => void,
+}) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <StyledExpandButton
+      {...props}
+      expanded={expanded}
+      onClick={event => {
+        setExpanded(expanded => !expanded);
+        onToggle && onToggle(!expanded);
+        onClick && onClick(event);
+      }}
+    />
   );
 };
 

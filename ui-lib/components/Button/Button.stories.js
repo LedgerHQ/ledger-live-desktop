@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button from "./index";
+import Button, { ExpandButton } from "./index";
 
 import AccountAdd from "../../icons/AccountAdd";
 
@@ -30,4 +30,21 @@ IconButton.args = {
   children: "",
   Icon: AccountAdd,
   iconPosition: "right",
+};
+
+const ExpandTemplate = args => {
+  const [show, setShow] = React.useState(false);
+
+  return (
+    <>
+      <ExpandButton {...args} onToggle={setShow}>
+        {args.children}
+      </ExpandButton>
+      {show && <div style={{ padding: "1rem" }}>Hello world!</div>}
+    </>
+  );
+};
+export const Expand = ExpandTemplate.bind({});
+Expand.args = {
+  children: "Show all",
 };
