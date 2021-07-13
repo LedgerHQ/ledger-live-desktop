@@ -1,8 +1,9 @@
 // @flow
 
-import React, { useState } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
@@ -16,7 +17,8 @@ import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
 import LiveAppIcon from "./LiveAppIcon";
-import { InformationDrawer } from "./InfosDrawer";
+
+import { openPlatformAppInfo } from "~/renderer/actions/UI";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -110,15 +112,10 @@ export type Props = {
 const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
   const { name, icon } = manifest;
 
-  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Container>
-      <InformationDrawer
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
-        manifest={manifest}
-      />
       <TitleContainer>
         <LiveAppIcon name={name} icon={icon || undefined} size={24} />
         <ItemContent>{name}</ItemContent>
@@ -134,7 +131,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
         <ItemContainer
           isInteractive
           onClick={() => {
-            setIsOpen(true);
+            dispatch(openPlatformAppInfo(manifest));
           }}
         >
           <IconInfoCircle size={16} />

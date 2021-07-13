@@ -1,14 +1,16 @@
 // @flow
 
 import React from "react";
-import { SideDrawer } from "~/renderer/components/SideDrawer";
-import Box from "~/renderer/components/Box";
 import styled from "styled-components";
-import { openURL } from "~/renderer/linking";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { SideDrawer } from "~/renderer/components/SideDrawer";
+import Box from "~/renderer/components/Box";
+import { openURL } from "~/renderer/linking";
+
+import { closePlatformAppInfo } from "~/renderer/actions/UI";
+import { platformAppInfoStateSelector } from "~/renderer/reducers/UI";
 
 import Text from "../Text";
 import ExternalLink from "../ExternalLink/index";
@@ -21,24 +23,22 @@ const Divider = styled(Box)`
   margin: 32px 0px;
 `;
 
-export const InformationDrawer = ({
-  isOpen,
-  onRequestClose,
-  manifest,
-}: {
-  isOpen: boolean,
-  onRequestClose: () => void,
-  manifest: AppManifest,
-}) => {
-  const { homepageUrl } = manifest;
+export const LiveAppInformationDrawer = () => {
+  const { isOpen, manifest } = useSelector(platformAppInfoStateSelector);
+
+  const { homepageUrl } = manifest || {};
 
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
 
   return (
     <SideDrawer
       title={t(`platform.app.informations.title`)}
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={() => {
+        dispatch(closePlatformAppInfo());
+      }}
       direction="left"
     >
       <Box pt="60px" height="100%" px="40px">
