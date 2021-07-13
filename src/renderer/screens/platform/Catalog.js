@@ -74,7 +74,7 @@ const PlatformCatalog = () => {
       branches.push("debug");
     }
 
-    return filterPlatformApps(manifests, { branches });
+    return filterPlatformApps(manifests, { branches, version: "0.0.1" });
   }, [manifests]);
 
   const { t } = useTranslation();
