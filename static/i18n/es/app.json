@@ -2251,7 +2251,7 @@
       "stock": "Indicador de mercado regional",
       "stockDesc": "Elige Occidental para mostrar las subidas del mercado en azul o Eastern para mostrarlas en rojo.",
       "carouselVisibility": "Visibilidad del carrusel",
-      "carouselVisibilityDesc": "Habilita la visibilidad del carrusel en el Portfolio"
+      "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
