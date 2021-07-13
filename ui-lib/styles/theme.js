@@ -7,6 +7,7 @@ export const space = [0, 5, 10, 15, 20, 30, 44, 50, 70];
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32];
 export const radii = [0, 4];
 export const shadows = ["0 4px 8px 0 rgba(0, 0, 0, 0.03)"];
+export const zIndexes = [-1, 0, 1, 9, 10, 90, 100, 900, 1000];
 
 // Those fonts are now defined in global.css, this is just a mapping for styled-system
 export const fontFamilies = {
@@ -201,6 +202,7 @@ export type Theme = {
   colors: { [string]: string, palette?: PaletteTheme },
   animations: { [string]: (props: empty) => CSSRules },
   transition: (property: string) => CSSRules,
+  zIndexes: number[],
 };
 
 const theme: Theme = {
@@ -227,6 +229,7 @@ const theme: Theme = {
   animations,
   overflow,
   transition,
+  zIndexes,
 };
 
 export default theme;

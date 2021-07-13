@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { fontSize, color } from "styled-system";
 import type { ThemedComponent } from "@ui/styles/StyleProvider";
@@ -115,10 +115,8 @@ export const Base: ThemedComponent<{
 const ContentContainer: ThemedComponent<*> = styled.div``;
 
 const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: Props) => {
-  const onClickHandler = useCallback(() => onClick(), [onClick]);
-
   return (
-    <Base {...props} iconButton={!!Icon && !children} onClick={onClickHandler}>
+    <Base {...props} iconButton={!!Icon && !children} onClick={onClick}>
       {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
       {Icon ? (
         <IconContainer iconPosition={iconPosition}>

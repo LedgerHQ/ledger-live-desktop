@@ -36,7 +36,7 @@ const Wrapper: ThemedComponent<{ width?: number, height?: number }> = styled.div
   top: 50%;
   left: 50%;
   transform translate(-50%, -50%);
-  z-index: 1000;
+  z-index: ${p => p.theme.zIndexes[8]};
 `;
 
 const Overlay: ThemedComponent<*> = styled.div`
