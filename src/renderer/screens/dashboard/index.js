@@ -18,7 +18,7 @@ import Carousel from "~/renderer/components/Carousel";
 import AssetDistribution from "~/renderer/components/AssetDistribution";
 import MigrationBanner from "~/renderer/modals/MigrateAccounts/Banner";
 import ClearCacheBanner from "~/renderer/components/ClearCacheBanner";
-import UpdateBanner from "~/renderer/components/Updater/Banner";
+
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch, useSelector } from "react-redux";
 import uniq from "lodash/uniq";
@@ -70,7 +70,6 @@ export default function DashboardPage() {
   return (
     <>
       <TopBannerContainer>
-        <UpdateBanner />
         <MigrationBanner />
         <ClearCacheBanner />
         <CurrencyDownStatusAlert currencies={currencies} />

@@ -120,7 +120,7 @@ const DropDownSelector = ({
   return (
     <Tippy
       visible={isOpen}
-      onClickOutside={() => setOpen(false)}
+      onClickOutside={!process.env.SPECTRON_RUN ? () => setOpen(false) : null}
       onShow={() => setOpen(true)}
       onHide={() => setOpen(false)}
       animation="shift-away"

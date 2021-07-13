@@ -108,9 +108,11 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [dismissToast],
   );
 
+  const autoUpdateDelay = process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000;
+
   return (
     <AnnouncementProvider
-      autoUpdateDelay={60000}
+      autoUpdateDelay={autoUpdateDelay}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
@@ -118,7 +120,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
       handleSave={saveAnnouncements}
       fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider autoUpdateDelay={60000} networkApi={serviceStatusApi}>
+      <ServiceStatusProvider autoUpdateDelay={autoUpdateDelay} networkApi={serviceStatusApi}>
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>

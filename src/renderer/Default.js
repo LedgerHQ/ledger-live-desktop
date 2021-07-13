@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
@@ -32,6 +33,7 @@ import MainSideBar from "~/renderer/components/MainSideBar";
 import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
 import DebugUpdater from "~/renderer/components/debug/DebugUpdater";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import DebugTheme from "~/renderer/components/debug/DebugTheme";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
@@ -41,6 +43,13 @@ import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
+import UpdateBanner from "~/renderer/components/Updater/Banner";
+
+export const TopBannerContainer: ThemedComponent<{}> = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 19;
+`;
 
 export default function Default() {
   const location = useLocation();
@@ -103,6 +112,9 @@ export default function Default() {
                   >
                     <MainSideBar />
                     <Page>
+                      <TopBannerContainer>
+                        <UpdateBanner />
+                      </TopBannerContainer>
                       <Switch>
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />

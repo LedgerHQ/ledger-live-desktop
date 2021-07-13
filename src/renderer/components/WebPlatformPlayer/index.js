@@ -1,5 +1,5 @@
 // @flow
-
+import { remote, WebviewTag, shell } from "electron";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -50,7 +50,8 @@ const Container: ThemedComponent<{}> = styled.div`
   height: 100%;
 `;
 
-const CustomIframe: ThemedComponent<{}> = styled.iframe`
+// $FlowFixMe
+const CustomWebview: ThemedComponent<{}> = styled("webview")`
   border: none;
   width: 100%;
   flex: 1;
@@ -82,14 +83,13 @@ type Props = {
 const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const theme = useTheme("colors.palette");
 
-  const targetRef: { current: null | HTMLIFrameElement } = useRef(null);
+  const targetRef: { current: null | WebviewTag } = useRef(null);
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listSupportedCurrencies(), []);
   const { pushToast } = useToasts();
   const { t } = useTranslation();
 
-  const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
 
   const url = useMemo(() => {
@@ -97,10 +97,9 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
     urlObj.searchParams.set("backgroundColor", theme.background.paper);
     urlObj.searchParams.set("textColor", theme.text.shade100);
-    urlObj.searchParams.set("loadDate", loadDate.valueOf().toString());
 
     return urlObj;
-  }, [manifest.url, loadDate, theme]);
+  }, [manifest.url, theme]);
 
   const listAccounts = useCallback(() => {
     return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
@@ -282,7 +281,10 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      targetRef?.current?.contentWindow.postMessage(JSON.stringify(request), url.origin);
+      const webview = targetRef.current;
+      if (webview) {
+        webview.contentWindow.postMessage(JSON.stringify(request), url.origin);
+      }
     },
     [url],
   );
@@ -290,18 +292,26 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const [receive] = useJSONRPCServer(handlers, handleSend);
 
   const handleMessage = useCallback(
-    e => {
-      if (e.isTrusted && e.origin === url.origin && e.data) {
-        receive(JSON.parse(e.data));
+    event => {
+      if (event.channel === "webviewToParent") {
+        receive(JSON.parse(event.args[0]));
       }
     },
-    [url, receive],
+    [receive],
   );
 
   useEffect(() => {
     tracking.platformLoad(manifest);
-    window.addEventListener("message", handleMessage, false);
-    return () => window.removeEventListener("message", handleMessage, false);
+    const webview = targetRef.current;
+    if (webview) {
+      webview.addEventListener("ipc-message", handleMessage);
+    }
+
+    return () => {
+      if (webview) {
+        webview.removeEventListener("ipc-message", handleMessage);
+      }
+    };
   }, [manifest, handleMessage]);
 
   const handleLoad = useCallback(() => {
@@ -310,21 +320,46 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   }, [manifest]);
 
   const handleReload = useCallback(() => {
-    tracking.platformReload(manifest);
-    setLoadDate(Date.now());
-    setWidgetLoaded(false);
+    const webview = targetRef.current;
+    if (webview) {
+      tracking.platformReload(manifest);
+      setWidgetLoaded(false);
+      webview.reloadIgnoringCache();
+    }
   }, [manifest]);
+
+  const handleNewWindow = useCallback(async e => {
+    const protocol = new URL(e.url).protocol;
+    if (protocol === "http:" || protocol === "https:") {
+      await shell.openExternal(e.url);
+    }
+  }, []);
+
+  useEffect(() => {
+    const webview = targetRef.current;
+
+    if (webview) {
+      webview.addEventListener("new-window", handleNewWindow);
+      webview.addEventListener("did-finish-load", handleLoad);
+    }
+
+    return () => {
+      if (webview) {
+        webview.removeEventListener("new-window", handleNewWindow);
+        webview.removeEventListener("did-finish-load", handleLoad);
+      }
+    };
+  }, [handleLoad]);
 
   return (
     <Container>
       <TopBar manifest={manifest} onReload={handleReload} onClose={onClose} />
       <Wrapper>
-        <CustomIframe
+        <CustomWebview
           src={url.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-          onLoad={handleLoad}
+          preload={`file://${remote.app.dirname}/webviewPreloader.bundle.js`}
         />
         {!widgetLoaded ? (
           <Loader>
