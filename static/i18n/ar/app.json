@@ -18,7 +18,7 @@
       }
     },
     "catalog": {
-      "title": "Discover",
+      "title": "إكتشف",
       "branch": {
         "soon": "سيأتي قريباً",
         "experimental": "تجريبي",
@@ -29,8 +29,8 @@
         "description": "نحن نعمل جاهدين لنتيح لك الوصول إلى عالم DeFi، NFTs وأخرين، وبأمان مباشرةً من داخل Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "أخبرنا ما الخدمة التالية التي تريد رؤيتها على Ledger Live مع علامة المربع (الهاشتاج)",
+        "tweetText": "تطبيق ليدجر القادم يجب أن يكون..."
       },
       "pollCTA": {
         "title": "استطلاع",
