@@ -18,7 +18,7 @@
       }
     },
     "catalog": {
-      "title": "Découvrir",
+      "title": "Discover",
       "branch": {
         "soon": "À découvrir prochainement",
         "experimental": "Expérimental",
@@ -179,7 +179,7 @@
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
     "lend": "Prêter",
-    "catalog": "Découvrir"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -202,7 +202,7 @@
     "whatIsSwap": "Qu'est-ce que le Swap ?",
     "paraswap": {
       "cta": " Jeter un œil",
-      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir."
+      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Discover."
     },
     "tabs": {
       "exchange": "Échanger",
