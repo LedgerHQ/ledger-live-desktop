@@ -179,7 +179,7 @@
     "exchange": "Comprar / Vender",
     "swap": "Permutar",
     "lend": "Prestar",
-    "catalog": "Descubrir"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Tus cuentas favoritas aparecerán aquí.",
@@ -202,7 +202,7 @@
     "whatIsSwap": "Qué es el intercambio",
     "paraswap": {
       "cta": "Échale un vistazo",
-      "description": "¿Buscas Paraswap? Está en a la pestaña Descubrir."
+      "description": "¿Buscas Paraswap? Está en a la pestaña Discover."
     },
     "tabs": {
       "exchange": "Exchange",
@@ -911,7 +911,7 @@
     }
   },
   "dashboard": {
-    "title": "Cartera",
+    "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "Agrega cuentas para gestionar otros activos cripto",
       "createAccount": "Agregar cuenta"
