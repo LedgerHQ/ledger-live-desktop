@@ -40,7 +40,7 @@ const lido = {
   id: "lido",
   name: "Lido",
   url:
-    "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=Lido&nanoApp=Lido&url=https%3A%2F%2Fledger-hq-test.vercel.app%2F",
+    "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=Lido&nanoApp=Lido&url=https%3A%2F%2Fledger-hq-test.vercel.app%2F%3Fref%3D0x3d945da47eaef43c4257dded7431f637807a6a38",
   homepageUrl: "https://lido.fi/",
   icon: "https://cdn.live.ledger.com/icons/platform/lido.png",
   platform: "all",
