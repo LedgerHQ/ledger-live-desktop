@@ -2531,7 +2531,7 @@
           },
           "2": {
             "heading": "Connecter l'appareil",
-            "title": "Connexion d'un {{deviceName}}",
+            "title": "Connecter un {{deviceName}}",
             "description": "Si votre appareil est déjà configuré, connectez-le à l'application."
           },
           "3": {
