@@ -34,7 +34,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
   const [firmwareError, setFirmwareError] = useState(null);
 
   const params = new URLSearchParams(search || "");
-  const openFirmwareUpdate = params.get("firmwareUpdate");
+  const openFirmwareUpdate = params.get("firmwareUpdate") === "true";
 
   useEffect(() => {
     command("getLatestFirmwareForDevice")(deviceInfo)
