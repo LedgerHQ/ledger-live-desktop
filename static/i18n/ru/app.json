@@ -18,7 +18,7 @@
       }
     },
     "catalog": {
-      "title": "Discover",
+      "title": "Исследуйте",
       "branch": {
         "soon": "в разработке",
         "experimental": "экспериментальная функция",
@@ -29,8 +29,8 @@
         "description": "Мы делаем всё возможное, чтобы предоставить доступ к миру DeFi, NFT и другому. Вы сможете безопасно пользоваться ими прямо в Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Воспользуйтесь хэштегом и расскажите нам, какие услуги вы бы хотели видеть в Ledger Live",
+        "tweetText": "Следующим дополнением к приложению Ledger должно стать..."
       },
       "pollCTA": {
         "title": "Опрос",
