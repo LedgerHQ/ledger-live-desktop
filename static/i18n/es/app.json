@@ -2330,7 +2330,7 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Ocultar cuentas de token vacías",
+        "title": "Ocultar cuentas de tokens sin saldo",
         "desc": "Oculta las cuentas de tokens sin saldo en la página de Cuentas."
       },
       "tokenBlacklist": {
