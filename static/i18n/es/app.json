@@ -982,7 +982,7 @@
       "mobileTitle": "Exportar cuentas a Mobile",
       "mobileDesc": "Haz clic en el botón que se muestra a continuación para exportar tus cuentas actualizadas a la aplicación Ledger Live Mobile.",
       "mobileCTA": "Exportar a Mobile",
-      "description": "Las nuevas características de Ledger Live requieren una actualización de tus cuentas.",
+      "description": "Las nuevas funciones de Ledger Live requieren una actualización de tus cuentas.",
       "currency": "Es necesario actualizar 1 cuenta de {{currency}}:",
       "currency_plural": "Es necesario actualizar {{count}} cuentas de {{currency}}:",
       "footer": "Necesitas tu dispositivo Ledger para completar la actualización",
@@ -2290,7 +2290,7 @@
       "privacyDesc": "Consulta la Política de privacidad para saber qué datos personales recopilamos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "disclaimer": "Estas son características experimentales que proporcionamos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Pueden cambiar, deteriorarse o ser eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
+      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
