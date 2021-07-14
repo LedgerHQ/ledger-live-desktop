@@ -209,10 +209,10 @@
       "history": "Historique"
     },
     "history": {
-      "disclaimer": "Vos transactions Swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
       "empty": {
-        "title": "Vos échanges antérieurs apparaîtront ici.",
-        "description": "Vous n'avez pas encore effectué de Swaps ou Ledger Live a été réinitialisé depuis votre dernier Swap."
+        "title": "Vos swaps réalisés apparaîtront ici.",
+        "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
       }
     },
     "landing": {
@@ -301,24 +301,24 @@
         "finished": {
           "title": "En attente",
           "subtitle": "Swap bien diffusé ",
-          "swap": "Identifiant de votre Swap :",
+          "swap": "Identifiant de votre swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
-          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
+          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
     },
     "operationDetailsModal": {
       "title": "Swap",
       "provider": "Prestataire",
-      "txid": "Identifiant du Swap",
+      "txid": "Identifiant du swap",
       "status": "Statut",
       "statusTooltips": {
-        "expired": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
-        "refunded": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
+        "expired": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
+        "refunded": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
         "pending": "Merci de patienter pendant que le prestataire du service Swap traite votre transaction.",
-        "onhold": "Pour résoudre votre problème, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
-        "finished": "Votre Swap a bien été réalisé."
+        "onhold": "Pour résoudre votre problème, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
+        "finished": "Votre swap a bien été réalisé."
       },
       "date": "Date",
       "from": "De",
@@ -1136,8 +1136,8 @@
     "listApps": "Vérification en cours des dépendances des applications",
     "listAppsDescription": "Merci de patienter pendant que nous nous assurons que vous avez toutes les applications requises.",
     "swap": {
-      "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
-      "confirm": "Confirmer la transaction de Swap",
+      "notice": "Vérifiez les détails du swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de swap",
       "amountSent": "Montant à envoyer",
       "amountReceived": "Montant à recevoir",
       "amountReceivedFloat": "Montant à recevoir sans les frais de service",
@@ -3220,7 +3220,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",
-      "description": "Vous devez confirmer le Swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
+      "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
     },
     "TimeoutError": {
       "title": "Le serveur a mis trop longtemps à répondre.",
