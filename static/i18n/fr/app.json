@@ -792,7 +792,7 @@
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système."
+      "desc": "Vérifiez l'état de notre système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
