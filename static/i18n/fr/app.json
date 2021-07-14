@@ -2530,7 +2530,7 @@
             "description": "Commencez par configurer votre nouvel appareil."
           },
           "2": {
-            "heading": "Connecter l'appareil",
+            "heading": "Connexion d'un appareil",
             "title": "Connecter un {{deviceName}}",
             "description": "Si votre appareil est déjà configuré, connectez-le à l'application."
           },
