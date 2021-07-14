@@ -1178,9 +1178,9 @@
       "filter": {
         "title": "Afficher",
         "all": "Toutes",
-        "supported": "Prise en charge par Ledger Live",
+        "supported": "Prises en charge par Ledger Live",
         "installed": "Installée",
-        "not_installed": "Non installée"
+        "not_installed": "Non installées"
       },
       "sort": {
         "title": "Trier",
@@ -1195,7 +1195,7 @@
       },
       "updatable": {
         "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mises à jour d'applications",
+        "progressTitle": "{{number}} mise(s) à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
         "progress": "Mise à jour de toutes..."
       },
