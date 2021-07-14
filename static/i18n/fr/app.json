@@ -115,14 +115,14 @@
   },
   "operation": {
     "type": {
-      "IN": "Reçue",
-      "OUT": "Envoyée",
+      "IN": "Reçu",
+      "OUT": "Envoyé",
       "CREATE": "Créée",
       "REVEAL": "Révélée",
       "DELEGATE": "Déléguée",
       "REDELEGATE": "Redéléguée",
       "UNDELEGATE": "Délégation interrompue",
-      "SUPPLY": "Déposée",
+      "SUPPLY": "Déposé",
       "REDEEM": "Retiré",
       "APPROVE": "Approuvé",
       "VOTE": "Votée",
@@ -696,7 +696,7 @@
     "info": {
       "terms": {
         "title": "Prêter des cryptos",
-        "subtitle": "Prêter des actifs sur le protocole Compound.",
+        "subtitle": "Prêter des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger Live.",
         "switchLabel": "<1>J'ai lu et j'accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
       },
@@ -704,7 +704,7 @@
         "title": "Étape <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "Approuver un compte pour permettre au protocole de",
-          "subtitle2": "traiter vos futurs prêts.",
+          "subtitle2": "traiter vos futurs prêts",
           "description": "Vous devez autoriser le contrat intelligent de Compound à transférer un certain montant d'actifs au protocole. L'activation d'un compte permet au protocole de traiter les futurs prêts."
         },
         "2": {
@@ -713,7 +713,7 @@
         },
         "3": {
           "subtitle": "Retirer des actifs à tout moment",
-          "description": "Vous pouvez retirer vos actifs et les intérêts perçus en partie ou totalité à tout moment depuis votre compte Ledger."
+          "description": "Vous pouvez retirer vos actifs et les intérêts perçus en partie ou totalité à tout moment depuis votre compte Ledger Live."
         }
       }
     },
@@ -1197,7 +1197,7 @@
         "title": "Mises à jours disponibles",
         "progressTitle": "{{number}} mise(s) à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
-        "progress": "Mise à jour de toutes..."
+        "progress": "Mise à jour complète..."
       },
       "item": {
         "version": "Version {{version}}",
