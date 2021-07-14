@@ -43,6 +43,7 @@ const AppSize = styled.div`
 `;
 
 type Props = {
+  optimisticState: State,
   state: State,
   app: App,
   installed: ?InstalledItem,
@@ -58,6 +59,7 @@ type Props = {
 
 // eslint-disable-next-line react/display-name
 const Item: React$ComponentType<Props> = ({
+  optimisticState,
   state,
   app,
   installed,
@@ -73,7 +75,7 @@ const Item: React$ComponentType<Props> = ({
   const { name } = app;
   const { deviceModel, deviceInfo } = state;
 
-  const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(state, name);
+  const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(optimisticState, name);
 
   const currency = useMemo(() => app.currencyId && getCryptoCurrencyById(app.currencyId), [
     app.currencyId,

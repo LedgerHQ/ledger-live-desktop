@@ -76,6 +76,7 @@ const colors = {
   marketUp_western: "#66be54",
   marketDown_eastern: "#6490f1",
   marketDown_western: "#ea2e49",
+  twitter: "#1b9df0",
 };
 
 // prettier-ignore

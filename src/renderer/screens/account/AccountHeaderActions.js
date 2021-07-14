@@ -33,6 +33,7 @@ import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
+import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import IconSend from "~/renderer/icons/Send";
 import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -130,6 +131,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     });
   }, [currency, history, account, parentAccount]);
 
+  const onWalletConnect = useCallback(() => {
+    setTrackingSource("account header actions");
+    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
+  }, [openModal, account]);
+
   const onSend = useCallback(() => {
     openModal("MODAL_SEND", { parentAccount, account });
   }, [parentAccount, account, openModal]);
@@ -181,6 +187,17 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           },
         ]
       : []),
+    ...(currency.id === "ethereum"
+      ? [
+          {
+            key: "WalletConnect",
+            onClick: onWalletConnect,
+            event: "Wallet Connect Account Button",
+            icon: IconWalletConnect,
+            label: <Trans i18nKey="walletconnect.titleAccount" />,
+          },
+        ]
+      : []),
   ];
 
   const canBuySwap = availableOnBuy || availableOnSwap.includes(currency);
@@ -195,6 +212,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           items={manageActions}
           renderItem={renderItem}
           controlled
+          buttonId="account-actions-manage"
         >
           {({ isOpen }) => (
             <Button small primary>

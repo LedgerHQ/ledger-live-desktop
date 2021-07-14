@@ -10,6 +10,16 @@ import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/S
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import { openInformationCenter } from "~/renderer/actions/UI";
 import { track } from "~/renderer/analytics/segment";
+import fetchApi from "../../../tests/mocks/notificationsHelpers";
+import networkApi from "../../../tests/mocks/serviceStatusHelpers";
+
+let notificationsApi;
+let serviceStatusApi;
+
+if (process.env.MOCK || process.env.SPECTRON_RUN) {
+  notificationsApi = fetchApi;
+  serviceStatusApi = networkApi;
+}
 
 type Props = {
   children: React$Node,
@@ -98,16 +108,21 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [dismissToast],
   );
 
+  const autoUpdateDelay = process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000;
+
   return (
     <AnnouncementProvider
-      autoUpdateDelay={60000}
+      autoUpdateDelay={autoUpdateDelay}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
       handleLoad={loadAnnouncements}
       handleSave={saveAnnouncements}
+      fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider autoUpdateDelay={60000}>{children}</ServiceStatusProvider>
+      <ServiceStatusProvider autoUpdateDelay={autoUpdateDelay} networkApi={serviceStatusApi}>
+        {children}
+      </ServiceStatusProvider>
     </AnnouncementProvider>
   );
 }

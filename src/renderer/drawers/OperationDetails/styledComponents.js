@@ -9,22 +9,23 @@ import Link from "~/renderer/components/Link";
 
 export const OpDetailsSection: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
-  alignItems: "center",
+  alignItems: "flex-start",
+  justifyContent: "space-between",
   ff: "Inter|SemiBold",
   fontSize: 4,
   color: "palette.text.shade60",
 }))``;
 
-export const OpDetailsTitle: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  ff: "Inter|ExtraBold",
-  fontSize: 2,
+export const OpDetailsTitle: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  ff: "Inter|SemiBold",
+  fontSize: 3,
   color: "palette.text.shade100",
-  textTransform: "uppercase",
-  mb: 1,
+  horizontal: p.horizontal || true,
 }))`
   justify-content: center;
-  height: 18px;
+  min-height: 30px;
   letter-spacing: 2px;
+  line-height: 30px;
 `;
 export const Address: ThemedComponent<{}> = styled(Text)`
   margin-left: -4px;
@@ -32,6 +33,8 @@ export const Address: ThemedComponent<{}> = styled(Text)`
   flex-wrap: wrap;
   padding: 4px;
   width: fit-content;
+  max-width: 100%;
+  display: inline-block;
 `;
 
 export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -55,9 +58,15 @@ export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({
 export const OpDetailsData: ThemedComponent<{ color?: string }> = styled(Box).attrs(p => ({
   ff: "Inter",
   color: p.color || "palette.text.shade80",
-  fontSize: 4,
+  fontSize: 3,
   relative: true,
+  flex: 1,
+  horizontal: true,
+  justifyContent: p.justifyContent || "flex-end",
+  alignItems: p.alignItems || "center",
 }))`
+  min-height: 30px;
+  max-width: 100%;
   ${GradientHover} {
     display: none;
   }
@@ -102,6 +111,7 @@ export const Separator: ThemedComponent<{}> = styled.div`
 `;
 
 export const OpDetailsVoteData: ThemedComponent<{}> = styled.blockquote`
+  max-width: 100%;
   margin-bottom: 13px;
   padding-left: 10px;
   border-left: 4px solid currentColor;
@@ -111,6 +121,18 @@ export const OpDetailsVoteData: ThemedComponent<{}> = styled.blockquote`
 `;
 
 export const HashContainer: ThemedComponent<{}> = styled.div`
+  width: 100%;
   word-break: break-all;
   user-select: text;
+  padding-left: 50px;
+  height: 30px;
+  line-height: 30px;
+`;
+
+export const OpDetailsSideButton: ThemedComponent<{}> = styled(Box).attrs(p => ({
+  horizontal: true,
+  justifyContent: "flex-end",
+  alignItems: "center",
+}))`
+  cursor: pointer;
 `;

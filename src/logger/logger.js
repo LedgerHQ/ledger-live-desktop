@@ -86,16 +86,14 @@ const captureBreadcrumb = (breadcrumb: any) => {
 };
 
 const captureException = (error: Error) => {
-  if (!process.env.STORYBOOK_ENV) {
-    try {
-      if (typeof window !== "undefined") {
-        require("~/sentry/browser").captureException(error);
-      } else {
-        require("~/sentry/node").captureException(error);
-      }
-    } catch (e) {
-      logger.log("warn", "Can't send to sentry", error, e);
+  try {
+    if (typeof window !== "undefined") {
+      require("~/sentry/browser").captureException(error);
+    } else {
+      require("~/sentry/node").captureException(error);
     }
+  } catch (e) {
+    logger.log("warn", "Can't send to sentry", error, e);
   }
 };
 
