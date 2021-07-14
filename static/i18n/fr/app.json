@@ -641,9 +641,9 @@
         },
         "amount": {
           "title": "Montant",
-          "summary": "J'autorise le contrat intelligent <0>{{contractName}}</0> à accéder à mon compte <0>{{accountName}}</0> pour un montant de <0>{{amount}}</0>.",
-          "limit": "limité : {{amount}}",
-          "noLimit": "{{assetName}} sans limite",
+          "summary": "J'autorise le contrat intelligent <0>{{contractName}}</0> à accéder à mon compte <0>{{accountName}}</0> pour un montant <0>{{amount}}</0>.",
+          "limit": "limité à {{amount}}",
+          "noLimit": "sans limite de {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "Avancé",
           "amountLabel": "Montant à approuver",
@@ -723,7 +723,7 @@
         "amount": {
           "title": "Montant",
           "amountToSupply": "Montant à déposer",
-          "maxSupply": "Le montant maximal de prêt est"
+          "maxSupply": "Le montant maximal disponible est"
         },
         "device": {
           "title": "Appareil"
@@ -2972,7 +2972,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "Vous ne pouvez pas diminuer le montant approuvé quand un dépôt est actif."
+      "title": "Vous ne pouvez pas diminuer le montant approuvé sur un dépôt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Une erreur est survenue (Erreur #1).",
