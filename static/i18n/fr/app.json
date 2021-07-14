@@ -2520,7 +2520,7 @@
       },
       "selectUseCase": {
         "greetings": "Bonjour",
-        "hasNoRecovery": "Vous n'avez jamais utilisé votre {{deviceName}} ?",
+        "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
         "options": {
