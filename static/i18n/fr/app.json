@@ -843,7 +843,7 @@
     },
     "buyCrypto": {
       "title": "Acheter des cryptos",
-      "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger.",
+      "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger Live.",
       "cta": "Acheter maintenant"
     },
     "backupPack": {
@@ -1026,7 +1026,7 @@
     "noAccountToImport": "Aucun compte {{currencyName}} existant à ajouter",
     "success": "Compte bien ajouté",
     "success_plural": "Comptes bien ajoutés",
-    "successDescription": "Ajouter d'autres comptes ou retourner au Portefeuille.",
+    "successDescription": "Ajoutez d'autres comptes ou retournez au Portefeuille.",
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portefeuille.",
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
