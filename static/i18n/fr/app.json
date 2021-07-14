@@ -2232,7 +2232,7 @@
       },
       "modal": {
         "button": "Terminé",
-        "title": "Scannez pour exporter vers Ledger Live mobile.",
+        "title": "Scanner pour exporter vers un mobile",
         "listTitle": "Sur l'application mobile Ledger Live :",
         "step1": "Appuyez sur le bouton <1><0>+</0></1> dans <3><0>Comptes</0></3>.",
         "step2": "Appuyez sur <1><0>Importer les comptes de l'ordinateur</0></1>.",
