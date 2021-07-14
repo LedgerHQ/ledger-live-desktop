@@ -337,11 +337,11 @@
     "checkNodeSettings": "Vérifier les paramètres du nœud",
     "edit": "Modifier",
     "modal": {
-      "title": "Connecter le nœud Bitcoin complet",
+      "title": "Connecter un nœud Bitcoin complet",
       "disconnectTitle": "Déconnecter le nœud complet",
       "steps": {
         "landing": {
-          "header": "Démarrer le nœud. Don't trust, verify.",
+          "header": "Démarrez votre nœud. Don’t trust, verify.",
           "description": "Un nœud Bitcoin valide toutes les transactions et tous les blocs. Il vous permet d'utiliser Bitcoin en vous passant des tiers de confiance tout en contribuant au réseau Bitcoin.",
           "list": {
             "item1": "Configurez Bitcoin Core sur un appareil ayant des ressources suffisantes.",
@@ -374,7 +374,7 @@
               }
             },
             "connecting": {
-              "header": "Tester la connexion du nœud",
+              "header": "Test de la connexion du nœud",
               "description": "Veuillez patienter pendant que nous vérifions si votre nœud complet répond."
             },
             "success": {
@@ -2340,7 +2340,7 @@
         "count_plural": "{{count}} jetons"
       },
       "fullNode": {
-        "title": "Connecter le nœud Bitcoin complet",
+        "title": "Connecter un nœud Bitcoin complet",
         "desc": "Configurez votre nœud Bitcoin complet pour synchroniser et envoyer des transactions sans passer par les explorateurs de Ledger."
       }
     }
