@@ -788,7 +788,7 @@
     "title": "Aide",
     "gettingStarted": {
       "title": "Premiers pas",
-      "desc": "Commencer ici"
+      "desc": "Commencez ici"
     },
     "status": {
       "title": "Statut de Ledger",
@@ -796,7 +796,7 @@
     },
     "helpCenter": {
       "title": "Assistance Ledger",
-      "desc": "Obtenir de l'aide"
+      "desc": "Obtenez de l'aide"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
