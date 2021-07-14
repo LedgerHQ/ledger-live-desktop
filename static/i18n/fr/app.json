@@ -2436,7 +2436,7 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "L'application Ledger Live fonctionne correctement.",
+        "title": "Ledger Live fonctionne correctement.",
         "description": "Des difficultés ? Visitez notre <0>page d'aide</0>."
       },
       "statusNotOk": {
@@ -2744,7 +2744,7 @@
           "genuineCheck": {
             "success": {
               "title": "Rien à signaler",
-              "desc": "Votre {{deviceName}} Ledger est authentique et est prêt à être utilisé avec l'application Ledger Live."
+              "desc": "Votre Ledger {{deviceName}} est authentique et est prêt à être utilisé avec l'application Ledger Live."
             },
             "buttons": {
               "next": "Continuer",
