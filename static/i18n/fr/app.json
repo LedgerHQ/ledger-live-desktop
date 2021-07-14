@@ -2335,7 +2335,7 @@
       },
       "tokenBlacklist": {
         "title": "Jetons masqués",
-        "desc": "Vous pouvez masquer les jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
+        "desc": "Vous pouvez masquer des jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
         "count": "{{count}} jeton",
         "count_plural": "{{count}} jetons"
       },
