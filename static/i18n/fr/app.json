@@ -1159,7 +1159,7 @@
       "appOnDeviceSearch": "Rechercher les applications installées..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> libre",
+      "freeSpace": "<0>{{space}}</0> libres",
       "noFreeSpace": "Plus d'espace disponible",
       "installed": "Applications",
       "capacity": "Capacité",
