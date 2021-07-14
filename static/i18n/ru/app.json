@@ -148,7 +148,7 @@
     "mbUnit": "{{size}} Мб"
   },
   "time": {
-    "minute": "минута",
+    "minute": "минут(-а)",
     "minute_plural": "минут",
     "hour": "час",
     "hour_plural": "часов",
