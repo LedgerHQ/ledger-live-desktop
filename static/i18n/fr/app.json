@@ -2579,11 +2579,11 @@
             },
             "browse": {
               "title": "Naviguer",
-              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran. Utilisez les boutons gauche et droit pour naviguer."
+              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran."
             },
             "select": {
               "title": "Choisir \"Set up as new device\"",
-              "descr": "Sélectionnez \"Set up as new device\" (Configurer un nouvel appareil). Appuyez simultanément sur les deux boutons pour valider."
+              "descr": "Appuyez simultanément sur les deux boutons pour valider."
             },
             "follow": {
               "title": "Suivre les instructions",
@@ -2602,7 +2602,7 @@
             },
             "browse": {
               "title": "Naviguer",
-              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran. Utilisez les boutons gauche et droit pour naviguer."
+              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran."
             },
             "select": {
               "title": "Choisir \"Enter your recovery phrase\"",
@@ -2789,7 +2789,7 @@
         },
         "stayOffline": {
           "title": "Rester hors ligne",
-          "description": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez l'application."
+          "description": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez Ledger Live."
         },
         "validateTransactions": {
           "title": "Valider ses transactions",
