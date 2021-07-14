@@ -697,7 +697,7 @@
       "terms": {
         "title": "Prêter des cryptos",
         "subtitle": "Prêter des actifs sur le protocole Compound.",
-        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger.",
+        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger Live.",
         "switchLabel": "<1>J'ai lu et j'accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
       },
       "steps": {
