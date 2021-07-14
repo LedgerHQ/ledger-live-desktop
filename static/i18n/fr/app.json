@@ -2493,7 +2493,7 @@
     },
     "alerts": {
       "beCareful": {
-        "title": "S'il vous plaît, soyez prudent",
+        "title": "Prenez votre temps",
         "descr": "Assurez-vous de suivre les instructions de cette application à toutes les étapes du processus.",
         "gotIt": "Compris"
       },
