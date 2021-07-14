@@ -627,7 +627,7 @@
       },
       "withdraw": {
         "title": "Retirer",
-        "description": "Retirez vos actifs du protocole vers votre compte Ledger."
+        "description": "Retirez vos actifs du protocole vers votre compte Ledger Live."
       }
     },
     "enable": {
