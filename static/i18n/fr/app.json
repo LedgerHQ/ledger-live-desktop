@@ -2484,10 +2484,10 @@
         "title": "Cacher sa phrase de récupération",
         "points": {
           "1": "Ne la saisissez <0>jamais</0> sur un ordinateur, smartphone ou autre appareil. Ne la prenez pas en photo.",
-          "2": "Ne partagez <0>jamais</0> vos 24 mots avec qui que ce soit.",
+          "2": "Ne la partagez <0>jamais</0> avec qui que ce soit.",
           "3": "Conservez-la <0>toujours</0> en lieu sûr à l'abri des regards.",
-          "4": "Ledger ne vous demandera <1>jamais</1> votre phrase de récupération.",
-          "5": "Si quelqu'un vous la demande, ne la donnez <1>pas</1>. Partez du principe que c'est une arnaque."
+          "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
+          "5": "Si quelqu'un vous la demande, ne la donnez pas. Partez du principe que c'est une arnaque."
         }
       }
     },
