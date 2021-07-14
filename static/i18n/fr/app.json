@@ -1116,7 +1116,7 @@
     "noMoreOperations": "Rien d'autre à afficher"
   },
   "DeviceAction": {
-    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil.",
+    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos jetons {{token}}",
     "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
     "loading": "Chargement...",
@@ -1434,8 +1434,8 @@
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un jeton.",
-        "verifyTokenType": "Merci de vérifier que <0>{{token}}</0> est un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un autre compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Merci d'envoyer uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
+        "warningTokenType": "Envoyez uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -3351,7 +3351,7 @@
     },
     "BtcUnmatchedApp": {
       "title": "Mauvaise application",
-      "description": "Ouvrez l'application {{managerAppName}} sur votre appareil."
+      "description": "Ouvrez l'application {{managerAppName}} sur votre appareil"
     },
     "DeviceNameInvalid": {
       "title": "Choisissez un nom d'appareil sans \"{{invalidCharacters}}\"."
