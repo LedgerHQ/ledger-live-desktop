@@ -239,7 +239,7 @@ export const hasLendEnabledAccountsSelector: OutputSelector<
   void,
   boolean,
 > = createSelector(shallowAccountsSelector, accounts =>
-  flattenAccounts(accounts).some(useCompoundAccountEnabled),
+  flattenAccounts(accounts).some(accounts => useCompoundAccountEnabled(accounts)),
 );
 
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode);
