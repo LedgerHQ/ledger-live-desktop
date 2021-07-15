@@ -3486,6 +3486,9 @@
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least {{minimumBondAmount}}."
     },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+    },
     "PolkadotMaxUnbonding": {
       "title": "You have exceeded the unbond limit"
     },
