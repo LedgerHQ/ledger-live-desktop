@@ -3,13 +3,17 @@ import React, { useCallback } from "react";
 
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { colors } from "~/renderer/styles/theme";
 import { openURL } from "~/renderer/linking";
+import { dismissedBannersSelector } from "~/renderer/reducers/settings";
+import { dismissBanner } from "~/renderer/actions/settings";
 
 import Box from "./Box";
 import Text from "./Text";
 
+import IconCross from "~/renderer/icons/Cross";
 import InfoCircle from "../icons/InfoCircle";
 import CheckCircle from "../icons/CheckCircle";
 import Shield from "../icons/Shield";
@@ -17,6 +21,7 @@ import ExclamationCircle from "../icons/ExclamationCircle";
 import CrossCircle from "../icons/CrossCircle";
 import LightBulb from "../icons/LightBulb";
 import ExternalLinkIcon from "../icons/ExternalLink";
+import Twitter from "../icons/Twitter";
 
 const getIcon = (type: AlertType) => {
   switch (type) {
@@ -36,6 +41,8 @@ const getIcon = (type: AlertType) => {
       return <Shield color={colors.alertRed} size={32} />;
     case "help":
       return <Shield color={colors.wallet} size={32} />;
+    case "twitter":
+      return <Twitter color={colors.twitter} size={32} />;
     case "danger":
       return <Shield color={colors.alertRed} size={32} />;
     default:
@@ -89,6 +96,13 @@ const getStyle = p => {
         borderColor: p.theme.colors.palette.text.shade20,
         px: 24,
         py: 24,
+      };
+    case "twitter":
+      return {
+        backgroundColor: p.theme.colors.palette.background.paper,
+        textColor: p.theme.colors.palette.text.shade80,
+        px: 16,
+        py: 16,
       };
     case "danger":
       return {
@@ -174,6 +188,16 @@ const Content = styled(Box).attrs(() => ({
   word-break: break-word;
 `;
 
+const CloseContainer = styled(Box)`
+  z-index: 1;
+  margin-left: 10px;
+  cursor: pointer;
+  &:hover,
+  &:active {
+    opacity: 0.8;
+  }
+`;
+
 const ExternalLink = styled(Box).attrs(p => ({
   cursor: "pointer",
   horizontal: true,
@@ -205,7 +229,8 @@ type AlertType =
   | "security"
   | "help"
   | "danger"
-  | "update";
+  | "update"
+  | "twitter";
 
 type Props = {
   type?: AlertType,
@@ -214,6 +239,7 @@ type Props = {
   learnMoreLabel?: React$Node,
   learnMoreIsInternal?: boolean,
   learnMoreOnRight?: boolean,
+  bannerId?: string,
   left?: React$Node,
   right?: React$Node,
   title?: React$Node,
@@ -229,6 +255,7 @@ export default function Alert({
   learnMoreIsInternal = false,
   learnMoreOnRight = false,
   learnMoreUrl,
+  bannerId,
   noIcon = false,
   type = "primary",
   right,
@@ -238,14 +265,21 @@ export default function Alert({
   ...rest
 }: Props) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const dismissedBanners = useSelector(dismissedBannersSelector);
   const label = learnMoreLabel || t("common.learnMore");
   const icon = getIcon(type);
+  const isDismissed = bannerId && dismissedBanners.includes(bannerId);
 
   const hasLearnMore = !!onLearnMore || !!learnMoreUrl;
   const handleLearnMore = useCallback(
     () => (onLearnMore ? onLearnMore() : learnMoreUrl ? openURL(learnMoreUrl) : undefined),
     [onLearnMore, learnMoreUrl],
   );
+
+  const onDismiss = useCallback(() => {
+    dispatch(dismissBanner(bannerId));
+  }, [bannerId, dispatch]);
 
   const learnMore = hasLearnMore && (
     <Text ff="Inter|SemiBold">
@@ -260,7 +294,7 @@ export default function Alert({
     </Text>
   );
 
-  return (
+  return !isDismissed ? (
     <Container type={type} small={small} {...rest}>
       {left || (!noIcon && icon) ? <LeftContent>{left || icon}</LeftContent> : null}
       <Content>
@@ -270,8 +304,13 @@ export default function Alert({
           {!learnMoreOnRight && hasLearnMore ? <> {learnMore}</> : null}
         </div>
       </Content>
+      {bannerId ? (
+        <CloseContainer id={`dismiss-${bannerId || ""}-banner`} onClick={onDismiss}>
+          <IconCross size={14} />
+        </CloseContainer>
+      ) : null}
       {!right && learnMoreOnRight && hasLearnMore ? <RightContent>{learnMore}</RightContent> : null}
       {!!right && <RightContent>{right}</RightContent>}
     </Container>
-  );
+  ) : null;
 }

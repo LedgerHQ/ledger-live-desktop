@@ -10,13 +10,13 @@ import {
 
 let nbAccounts = 0;
 
-const addAccount = currency => {
+const addAccount = (currency, key = "") => {
   invariant(currency, "currency is needed");
 
   describe(`add accounts`, () => {
     it("before adding accounts", async () => {
       expect(await app.client.screenshot()).toMatchImageSnapshot({
-        customSnapshotIdentifier: `${currency}-add-account-before`,
+        customSnapshotIdentifier: `${key ? `${key}-` : ""}${currency}-add-account-before`,
       });
     });
 

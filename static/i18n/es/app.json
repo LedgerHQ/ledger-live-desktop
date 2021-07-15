@@ -16,6 +16,32 @@
           "text": "Haz clic aquí para ver los detalles de la operación"
         }
       }
+    },
+    "catalog": {
+      "title": "Discover",
+      "branch": {
+        "soon": "próximamente",
+        "experimental": "experimental",
+        "debug": "depuración"
+      },
+      "banner": {
+        "title": "Descubre nuestro catálogo de aplicaciones de Live",
+        "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
+      },
+      "twitterBanner": {
+        "description": "Cuéntanos cuál es el siguiente servicio que quieres ver en Ledger Live con el hashtag",
+        "tweetText": "La próxima aplicación de Ledger debería ser..."
+      },
+      "pollCTA": {
+        "title": "Encuesta",
+        "description": "¿Qué servicio quieres ver en Ledger Live?",
+        "button": "¡Votemos!"
+      },
+      "developerCTA": {
+        "title": "Para desarrolladores",
+        "description": "Toda la información que necesitas para integrar tus aplicaciones en Ledger Live.",
+        "button": "Ir al portal"
+      }
     }
   },
   "common": {
@@ -152,7 +178,8 @@
     "manager": "Manager",
     "exchange": "Comprar / Vender",
     "swap": "Permutar",
-    "lend": "Prestar"
+    "lend": "Prestar",
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Tus cuentas favoritas aparecerán aquí.",
@@ -172,12 +199,17 @@
   "swap": {
     "title": "Permutar",
     "titleCrypto": "Intercambiar {{currency}}",
-    "whatIsSwap": "Qué es el intercambio",
+    "whatIsSwap": "Qué es la permuta",
+    "paraswap": {
+      "cta": "Échale un vistazo",
+      "description": "¿Buscas Paraswap? Está en a la pestaña Discover."
+    },
     "tabs": {
       "exchange": "Exchange",
       "history": "Historial"
     },
     "history": {
+      "disclaimer": "Tus transacciones de permuta en Desktop no están sincronizadas con Ledger Live Mobile",
       "empty": {
         "title": "Tus permutas anteriores aparecerán aquí",
         "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
@@ -268,11 +300,11 @@
         },
         "finished": {
           "title": "Pendiente",
-          "subtitle": "Operación pendiente",
+          "subtitle": "Transmisión exitosa de permuta",
           "swap": "Tu ID de Permuta:",
           "seeDetails": "Ver detalles",
-          "disclaimer": "Anota el número de ID de Intercambio en caso de que necesites ayuda de <0>{{provider}}</0> más adelante.",
-          "description": "La operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que se reciban los activos cripto permutados."
+          "disclaimer": "Toma nota del número de ID de permuta, en caso de que necesites ayuda del Soporte de <0><0>{{provider}}</0> support</0>.",
+          "description": "Tu operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que recibas tus {{targetCurrency}}."
         }
       }
     },
@@ -296,32 +328,6 @@
       "toProvider": "Dirección del proveedor",
       "initialAmount": "Importe inicial",
       "creditedAmount": "Importe acreditado"
-    },
-    "providers": {
-      "title": "Elige un proveedor para permutar criptomonedas",
-      "learnMore": "¿Qué es la permuta?",
-      "kycRequired": "KYC requerido",
-      "wyre": {
-        "bullets": [
-          "Sólo Estados Unidos (pronto Europa, África y Asia)",
-          "Distintos tokens y monedas",
-          "Centralizado"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT y más de 50 otras",
-          "Multidivisa",
-          "Centralizado"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Conectar a más de 30 DEXs (Uniswap, SushiSwap,...)",
-          "Tokens Ethereum y ERC20",
-          "Descentralizado y sin requerir confianza"
-        ]
-      }
     }
   },
   "fullNode": {
@@ -497,7 +503,7 @@
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
       "header": "Comprar cripto con {{provider}}",
-      "title": "Comprar cripto mediante < 0>{provider}}</ 0>",
+      "title": "Comprar cripto mediante <0>{{provider}}</0>",
       "tab": "Comprar",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Elegir cuenta",
@@ -506,7 +512,7 @@
     },
     "sell": {
       "header": "Vender cripto con {{provider}}",
-      "title": "Vender cripto mediante < 0>{provider}}</ 0>",
+      "title": "Vender cripto mediante <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Elegir cuenta",
@@ -514,28 +520,6 @@
     },
     "history": {
       "tab": "Historial"
-    },
-    "providers": {
-      "title": "Elige un proveedor para comprar criptomonedas",
-      "learnMore": "¿Qué es comprar?",
-      "coinify": {
-        "bullets": [
-          "Disponible en más de 130 países",
-          "EUR, USD, GBP y otras 32",
-          "Pagos más rápidos y SEPA",
-          "Transferencias bancarias locales en Estados Unidos",
-          "Tarjetas de crédito y débito"
-        ]
-      },
-      "wyre": {
-        "bullets": [
-          "Sólo cuenta bancaria de Estados Unidos",
-          "Sólo compatible con USD",
-          "Compatible con más de 20 criptomonedas",
-          "Transferencia ACH",
-          "Sin tarjetas de débito o crédito"
-        ]
-      }
     }
   },
   "lend": {
@@ -927,7 +911,7 @@
     }
   },
   "dashboard": {
-    "title": "Cartera",
+    "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "Agrega cuentas para gestionar otros activos cripto",
       "createAccount": "Agregar cuenta"
@@ -998,7 +982,7 @@
       "mobileTitle": "Exportar cuentas a Mobile",
       "mobileDesc": "Haz clic en el botón que se muestra a continuación para exportar tus cuentas actualizadas a la aplicación Ledger Live Mobile.",
       "mobileCTA": "Exportar a Mobile",
-      "description": "Las nuevas características de Ledger Live requieren una actualización de tus cuentas.",
+      "description": "Las nuevas funciones de Ledger Live requieren una actualización de tus cuentas.",
       "currency": "Es necesario actualizar 1 cuenta de {{currency}}:",
       "currency_plural": "Es necesario actualizar {{count}} cuentas de {{currency}}:",
       "footer": "Necesitas tu dispositivo Ledger para completar la actualización",
@@ -2267,7 +2251,7 @@
       "stock": "Indicador de mercado regional",
       "stockDesc": "Elige Occidental para mostrar las subidas del mercado en azul o Eastern para mostrarlas en rojo.",
       "carouselVisibility": "Visibilidad del carrusel",
-      "carouselVisibilityDesc": "Habilita la visibilidad del carrusel en el Portfolio"
+      "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
@@ -2306,7 +2290,7 @@
       "privacyDesc": "Consulta la Política de privacidad para saber qué datos personales recopilamos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "disclaimer": "Estas son características experimentales que proporcionamos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Pueden cambiar, deteriorarse o ser eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
+      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
@@ -2346,7 +2330,7 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Ocultar cuentas de token vacías",
+        "title": "Ocultar cuentas de tokens sin saldo",
         "desc": "Oculta las cuentas de tokens sin saldo en la página de Cuentas."
       },
       "tokenBlacklist": {
@@ -2442,7 +2426,8 @@
   },
   "informationCenter": {
     "tooltip": "Centro de información",
-    "ongoingIncidentsTooltip": "Hay {{incidentCount}} incidentes en curso",
+    "ongoingIncidentsTooltip": "Hay {{count}} incidente en curso",
+    "ongoingIncidentsTooltip_plural": "Hay {{count}} incidentes en curso",
     "tabs": {
       "announcements": "Noticias",
       "announcementsUnseen": "Noticias ({{unseenCount}})",

@@ -61,6 +61,24 @@ const getWCClientMock = app => async (method, args) => {
   );
 };
 
+const getAnnouncementApiMock = app => async (method, args) => {
+  return app.client.execute(
+    ([method, args]) => {
+      window.announcementsApi[method](args);
+    },
+    [method, args],
+  );
+};
+
+const getServiceStatusApiMock = app => async (method, args) => {
+  return app.client.execute(
+    ([method, args]) => {
+      window.serviceStatusApi[method](args);
+    },
+    [method, args],
+  );
+};
+
 let app;
 let page;
 let portfolioPage;
@@ -81,6 +99,8 @@ let walletConnectPasteLinkModal;
 let mockDeviceEvent;
 let wcClientMock;
 let userDataPath;
+let announcementsApiMock;
+let serviceStatusApiMock;
 
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
@@ -116,6 +136,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
         DISABLE_DEV_TOOLS: true,
         SPECTRON_RUN: true,
         CI: process.env.CI || "",
+        SYNC_ALL_INTERVAL: 86400000,
+        SYNC_BOOT_DELAY: 16,
       },
       env,
     );
@@ -172,6 +194,8 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     walletConnectPasteLinkModal = new WalletConnectPasteLinkModal(app);
     mockDeviceEvent = getMockDeviceEvent(app);
     wcClientMock = getWCClientMock(app);
+    announcementsApiMock = getAnnouncementApiMock(app);
+    serviceStatusApiMock = getServiceStatusApiMock(app);
 
     try {
       await app.start();
@@ -185,12 +209,12 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
       !illustrations.error && (await illustrations.waitForDisplayed());
     });
 
-    app.client.addCommand("waitForSync", async () => {
+    app.client.addCommand("waitForSync", async (timeout = 60000) => {
       const sync = await app.client.$("#topbar-synchronized");
-      return sync.waitForDisplayed();
+      await sync.waitForDisplayed({ timeout });
     });
 
-    app.client.addCommand("screenshot", async function(countdown = 500) {
+    app.client.addCommand("screenshot", async function(countdown = 1500) {
       const unfocus = await app.client.$("#unfocus-please");
       await unfocus.click();
 
@@ -258,6 +282,8 @@ export {
   mockListAppsResult,
   mockDeviceEvent,
   wcClientMock,
+  announcementsApiMock,
+  serviceStatusApiMock,
   page,
   accountPage,
   accountsPage,
