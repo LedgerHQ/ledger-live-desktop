@@ -2516,7 +2516,7 @@
         }
       },
       "selectDevice": {
-        "title": "您的设备是什么？"
+        "title": "您使用的是哪款设备？"
       },
       "selectUseCase": {
         "greetings": "您好！",
@@ -2693,7 +2693,7 @@
           },
           "newRecoveryPhrase": {
             "title": "恢复短语",
-            "paragraph1": "您的恢复短语是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
+            "paragraph1": "您的恢复短语（recovery phrase）是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
             "paragraph2": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
             "disclaimer": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
             "buttons": {
