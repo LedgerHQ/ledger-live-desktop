@@ -36,7 +36,7 @@ type Props = {
   initialCountervalues: *,
 };
 
-const lido = {
+const extraManifests = [  {
   id: "lido",
   name: "Lido",
   url:
@@ -58,8 +58,30 @@ const lido = {
     },
   },
   permissions: [],
-  domains: [],
-}
+  domains: ["https://*"],
+}, {
+  id: "1inch",
+  name: "1Inch",
+  url: "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=1Inch&nanoApp=1Inch&url=https%3A%2F%2Fapp.1inch.io%2F%3FledgerLive%3Dtrue",
+  homepageUrl: "https://1inch.io/",
+  icon: "https://cdn.live.ledger.com/icons/platform/1inch.png",
+  platform: "all",
+  apiVersion: "0.0.1",
+  manifestVersion: "1",
+  branch: "stable",
+  categories: ["swap", "defi"],
+  currencies: ["ethereum"],
+  content: {
+    shortDescription: {
+      en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+    },
+    description: {
+      en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+    },
+  },
+  permissions: [],
+  domains: ["https://*"],
+}]
 
 
 const App = ({ store, initialCountervalues }: Props) => {
@@ -94,7 +116,7 @@ const App = ({ store, initialCountervalues }: Props) => {
                     <AnnouncementProviderWrapper>
                       <Router>
                         <WalletConnectProvider>
-                          <PlatformAppProvider extraManifests={[lido]}>
+                          <PlatformAppProvider extraManifests={extraManifests}>
                             <DrawerProvider>
                               <Default />
                             </DrawerProvider>
