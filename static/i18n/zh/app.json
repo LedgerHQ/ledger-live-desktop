@@ -852,7 +852,7 @@
       "cta": "购买备份包"
     },
     "polkaStake": {
-      "title": "POLKADOT 权益质押",
+      "title": "POLKADOT staking（权益质押）",
       "description": "您现在可以在 Ledger Live 上直接对您的 DOT 进行权益质押、安保和管理"
     },
     "sell": {
@@ -1274,7 +1274,7 @@
       },
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "请确认您设备上的标识符和下方的标识符一致。如果需要，请确认并输入您的 PIN 识别密码。",
-      "identifier": "标识符",
+      "identifier": "标识符（identifier）",
       "mcuTitle": "完成更新",
       "mcuFirst": "从您的设备上断开 USB 数据线连接",
       "mcuSecond": "按下左键，长按住的同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
