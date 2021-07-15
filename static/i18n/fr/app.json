@@ -748,8 +748,8 @@
     "emptyAccountDeposit": {
       "title": "Vous n'avez pas de compte {{ asset }}.",
       "description": "Pour déposer des fonds et prêter des cryptos, vous avez besoin d'un compte {{ asset }}. Recevez des fonds sur votre adresse Ethereum.",
-      "ctaBuy": "Acheter {{ asset }}",
-      "ctaReceive": "Recevoir {{ asset }}"
+      "ctaBuy": "Acheter des {{ asset }}",
+      "ctaReceive": "Recevoir des {{ asset }}"
     }
   },
   "accounts": {
@@ -1085,7 +1085,7 @@
     "subAccountTooltip": "Cette opération est liée aux opérations de sous-compte suivantes",
     "internalOperations": "Opérations internes",
     "internalOpTooltip": "Cette opération a des opérations internes.",
-    "details": "Détails de {{ currency }}",
+    "details": "Détails sur {{ currency }}",
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
     "extra": {
       "frozenAmount": "Montant gelé",
