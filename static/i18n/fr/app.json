@@ -546,14 +546,14 @@
       "closedLoans": "Prêts clôturés",
       "amountRedeemed": "Montant retiré",
       "date": "Date",
-      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et réaliser des intérêts.",
+      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et gagner des intérêts.",
       "howCompoundWorks": "Fonctionnement du prêt sur Compound",
-      "lend": "Dépôt {{currency}}"
+      "lend": "Déposer du {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Prêter",
-        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et réaliser des intérêts.",
+        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et gagner des intérêts.",
         "cta": "Fonctionnement du prêt sur Compound"
       },
       "closed": {
