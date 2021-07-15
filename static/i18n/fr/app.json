@@ -575,7 +575,7 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Prêt ouvert",
+        "amountSupplied": "Prêts ouverts",
         "amountSuppliedTooltip": "Montant déposé sur le réseau",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
