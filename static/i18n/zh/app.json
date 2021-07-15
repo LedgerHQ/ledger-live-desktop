@@ -177,7 +177,7 @@
     "accounts": "账户",
     "manager": "Manager（管理器）",
     "exchange": "买入 / 卖出",
-    "swap": "Swap (掉期)",
+    "swap": "Swap 掉期交易",
     "lend": "借出",
     "catalog": "发现"
   },
@@ -197,7 +197,7 @@
     "disconnectButton": "断开连接"
   },
   "swap": {
-    "title": "Swap (掉期)",
+    "title": "Swap 掉期交易",
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "什么是 Swap？",
     "paraswap": {
@@ -853,7 +853,7 @@
     },
     "polkaStake": {
       "title": "POLKADOT 权益质押",
-      "description": "您现在可以在 Ledger Live 直接对您的 DOT 进行权益质押、安保和管理"
+      "description": "您现在可以在 Ledger Live 上直接对您的 DOT 进行权益质押、安保和管理"
     },
     "sell": {
       "title": "卖出加密货币",
@@ -2415,8 +2415,8 @@
   "theme": {
     "system": "选择系统主题",
     "light": "亮色",
-    "dusk": "昏黄",
-    "dark": "暗色"
+    "dusk": "暗蓝",
+    "dark": "深黑"
   },
   "toastOverlay": {
     "toastType": {
