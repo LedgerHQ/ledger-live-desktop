@@ -1174,7 +1174,7 @@
       "placeholderNoAppsInstalled": "На устройстве нет установленных приложений",
       "placeholderGoToCatalog": "Чтобы установить приложения, перейдите в Каталог приложений",
       "noResultsFound": "Ничего не найдено",
-      "noResultsDesc": "Проверьте орфографию и повторите попытку",
+      "noResultsDesc": "Проверьте написание и повторите попытку",
       "filter": {
         "title": "Показать",
         "all": "Все",
@@ -1427,7 +1427,7 @@
   },
   "receive": {
     "title": "Получение",
-    "successTitle": "Адреса передаются безопасно",
+    "successTitle": "Адрес полностью безопасен",
     "steps": {
       "chooseAccount": {
         "title": "Счёт",
