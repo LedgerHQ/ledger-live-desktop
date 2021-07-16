@@ -1393,7 +1393,7 @@
         "totalVotes": "Всего голосов: {{total}}",
         "selected": "Выбрано: {{total}}",
         "maxSelected": "Выбрано макс.: {{total}}",
-        "allVotesAreUsed": "Все активы распределены",
+        "allVotesAreUsed": "Использованы все голоса",
         "maxUsed": "Недостаточно средств",
         "validators": "Валидаторы ({{total}})",
         "votes": "Доступные активы: {{total}}",
