@@ -203,7 +203,7 @@ export function SideDrawer({
       {state => (
         <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
           <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
-            {onRequestClose || onRequestBack ? (
+            {onRequestClose || onRequestBack || title ? (
               <Box
                 horizontal
                 justifyContent="space-between"
@@ -230,10 +230,12 @@ export function SideDrawer({
                   </Text>
                 )}
 
-                {onRequestClose && (
+                {onRequestClose ? (
                   <TouchButton onClick={onRequestClose} className="sidedrawer-close">
                     <IconCross size={16} />
                   </TouchButton>
+                ) : (
+                  <Box />
                 )}
               </Box>
             ) : null}
