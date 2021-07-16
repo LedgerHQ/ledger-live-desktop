@@ -16,11 +16,10 @@ import Text from "../Text";
 import ExternalLink from "../ExternalLink/index";
 import AppDetails from "../Platform/AppDetails";
 
-const Divider = styled(Box)`
-  width: 420px;
-  top: 168px;
+const Divider = styled(Box).attrs(() => ({
+  my: 5,
+}))`
   border: 1px solid rgba(20, 37, 51, 0.1);
-  margin: 32px 0px;
 `;
 
 export const LiveAppInformationDrawer = () => {
@@ -41,7 +40,7 @@ export const LiveAppInformationDrawer = () => {
       }}
       direction="left"
     >
-      <Box pt="60px" height="100%" px="40px">
+      <Box pt={7} px={6}>
         <AppDetails manifest={manifest} />
 
         <Divider />
