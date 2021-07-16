@@ -61,9 +61,6 @@ async function init() {
     connect,
   });
 
-  // Point to Swap API v3
-  setEnvOnAllThreads("SWAP_API_BASE", "https://swap-stg.ledger.com/v3");
-
   if (process.env.SPECTRON_RUN) {
     const spectronData = await getKey("app", "SPECTRON_RUN", {});
     _.each(spectronData.localStorage, (value, key) => {
