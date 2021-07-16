@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
@@ -114,6 +114,10 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
 
   const dispatch = useDispatch();
 
+  const onClick = useCallback(() => {
+    dispatch(openPlatformAppInfo(manifest));
+  }, [manifest, dispatch]);
+
   return (
     <Container>
       <TitleContainer>
@@ -128,12 +132,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
         </ItemContent>
       </ItemContainer>
       <RightContainer>
-        <ItemContainer
-          isInteractive
-          onClick={() => {
-            dispatch(openPlatformAppInfo(manifest));
-          }}
-        >
+        <ItemContainer isInteractive onClick={onClick}>
           <IconInfoCircle size={16} />
         </ItemContainer>
         <ItemContainer isInteractive onClick={onClose}>

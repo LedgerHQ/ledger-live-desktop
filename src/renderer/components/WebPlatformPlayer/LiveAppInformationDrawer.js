@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -31,6 +31,10 @@ export const LiveAppInformationDrawer = () => {
 
   const dispatch = useDispatch();
 
+  const onClick = useCallback(() => {
+    openURL(homepageUrl);
+  }, [homepageUrl]);
+
   return (
     <SideDrawer
       title={t(`platform.app.informations.title`)}
@@ -47,11 +51,7 @@ export const LiveAppInformationDrawer = () => {
 
         <Text ff="Inter|SemiBold">{t(`platform.app.informations.website`)}</Text>
         <Text ff="Inter" color="#6490F1">
-          <ExternalLink
-            label={homepageUrl}
-            isInternal={false}
-            onClick={() => openURL(homepageUrl)}
-          />
+          <ExternalLink label={homepageUrl} isInternal={false} onClick={onClick} />
         </Text>
       </Box>
     </SideDrawer>
