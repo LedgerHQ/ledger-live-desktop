@@ -29,8 +29,8 @@
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Indiquez-nous le service que vous souhaiteriez vraiment voir dans Ledger Live avec le hashtag",
+        "tweetText": "La prochaine application à intégrer Ledger Live devrait être..."
       },
       "pollCTA": {
         "title": "Sondage",
@@ -179,7 +179,7 @@
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
     "lend": "Prêter",
-    "catalog": "Découvrir"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -202,7 +202,7 @@
     "whatIsSwap": "Qu'est-ce que le Swap ?",
     "paraswap": {
       "cta": " Jeter un œil",
-      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir."
+      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Discover."
     },
     "tabs": {
       "exchange": "Échanger",

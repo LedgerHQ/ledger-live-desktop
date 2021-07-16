@@ -29,8 +29,8 @@
         "description": "Estamos trabajando duro para brindarte acceso seguro al mundo de las DeFi, los NFT y más, ¡directamente desde Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Cuéntanos cuál es el siguiente servicio que quieres ver en Ledger Live con el hashtag",
+        "tweetText": "La próxima aplicación de Ledger debería ser..."
       },
       "pollCTA": {
         "title": "Encuesta",
@@ -179,7 +179,7 @@
     "exchange": "Comprar / Vender",
     "swap": "Permutar",
     "lend": "Prestar",
-    "catalog": "Descubrir"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Tus cuentas favoritas aparecerán aquí.",
@@ -199,10 +199,10 @@
   "swap": {
     "title": "Permutar",
     "titleCrypto": "Intercambiar {{currency}}",
-    "whatIsSwap": "Qué es el intercambio",
+    "whatIsSwap": "Qué es la permuta",
     "paraswap": {
       "cta": "Échale un vistazo",
-      "description": "¿Buscas Paraswap? Está en a la pestaña Descubrir."
+      "description": "¿Buscas Paraswap? Está en a la pestaña Discover."
     },
     "tabs": {
       "exchange": "Exchange",
@@ -503,7 +503,7 @@
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
       "header": "Comprar cripto con {{provider}}",
-      "title": "Comprar cripto mediante < 0>{provider}}</ 0>",
+      "title": "Comprar cripto mediante <0>{{provider}}</0>",
       "tab": "Comprar",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Elegir cuenta",
@@ -512,7 +512,7 @@
     },
     "sell": {
       "header": "Vender cripto con {{provider}}",
-      "title": "Vender cripto mediante < 0>{provider}}</ 0>",
+      "title": "Vender cripto mediante <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Elegir cuenta",
@@ -911,7 +911,7 @@
     }
   },
   "dashboard": {
-    "title": "Cartera",
+    "title": "Portfolio",
     "emptyAccountTile": {
       "desc": "Agrega cuentas para gestionar otros activos cripto",
       "createAccount": "Agregar cuenta"
@@ -982,7 +982,7 @@
       "mobileTitle": "Exportar cuentas a Mobile",
       "mobileDesc": "Haz clic en el botón que se muestra a continuación para exportar tus cuentas actualizadas a la aplicación Ledger Live Mobile.",
       "mobileCTA": "Exportar a Mobile",
-      "description": "Las nuevas características de Ledger Live requieren una actualización de tus cuentas.",
+      "description": "Las nuevas funciones de Ledger Live requieren una actualización de tus cuentas.",
       "currency": "Es necesario actualizar 1 cuenta de {{currency}}:",
       "currency_plural": "Es necesario actualizar {{count}} cuentas de {{currency}}:",
       "footer": "Necesitas tu dispositivo Ledger para completar la actualización",
@@ -2251,7 +2251,7 @@
       "stock": "Indicador de mercado regional",
       "stockDesc": "Elige Occidental para mostrar las subidas del mercado en azul o Eastern para mostrarlas en rojo.",
       "carouselVisibility": "Visibilidad del carrusel",
-      "carouselVisibilityDesc": "Habilita la visibilidad del carrusel en el Portfolio"
+      "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
@@ -2290,7 +2290,7 @@
       "privacyDesc": "Consulta la Política de privacidad para saber qué datos personales recopilamos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "disclaimer": "Estas son características experimentales que proporcionamos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Pueden cambiar, deteriorarse o ser eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
+      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
@@ -2330,7 +2330,7 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Ocultar cuentas de token vacías",
+        "title": "Ocultar cuentas de tokens sin saldo",
         "desc": "Oculta las cuentas de tokens sin saldo en la página de Cuentas."
       },
       "tokenBlacklist": {
