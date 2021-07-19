@@ -29,8 +29,8 @@
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Indiquez-nous le service que vous souhaiteriez vraiment voir dans Ledger Live avec le hashtag",
+        "tweetText": "La prochaine application à intégrer Ledger Live devrait être..."
       },
       "pollCTA": {
         "title": "Sondage",
@@ -115,23 +115,23 @@
   },
   "operation": {
     "type": {
-      "IN": "Reçue",
-      "OUT": "Envoyée",
-      "CREATE": "Créée",
-      "REVEAL": "Révélée",
-      "DELEGATE": "Déléguée",
-      "REDELEGATE": "Redéléguée",
+      "IN": "Reçu",
+      "OUT": "Envoyé",
+      "CREATE": "Créé",
+      "REVEAL": "Révélé",
+      "DELEGATE": "Délégué",
+      "REDELEGATE": "Redélégué",
       "UNDELEGATE": "Délégation interrompue",
       "SUPPLY": "Déposé",
       "REDEEM": "Retiré",
       "APPROVE": "Approuvé",
-      "VOTE": "Votée",
-      "FREEZE": "Gelée",
-      "UNFREEZE": "Dégelée",
+      "VOTE": "Voté",
+      "FREEZE": "Gelé",
+      "UNFREEZE": "Dégelé",
       "REWARD": "Récompense demandée",
       "FEES": "Frais",
-      "OPT_IN": "Activée",
-      "OPT_OUT": "Désactivée",
+      "OPT_IN": "Activé",
+      "OPT_OUT": "Désactivé",
       "CLOSE_ACCOUNT": "Compte fermé",
       "BOND": "Lié",
       "UNBOND": "Délié",
@@ -179,7 +179,7 @@
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
     "lend": "Prêter",
-    "catalog": "Découvrir"
+    "catalog": "Discover"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -202,17 +202,17 @@
     "whatIsSwap": "Qu'est-ce que le Swap ?",
     "paraswap": {
       "cta": " Jeter un œil",
-      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Découvrir."
+      "description": "Vous cherchez ParaSwap ? Il se trouve maintenant dans l'onglet Discover."
     },
     "tabs": {
       "exchange": "Échanger",
       "history": "Historique"
     },
     "history": {
-      "disclaimer": "Vos transactions Swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
       "empty": {
-        "title": "Vos échanges antérieurs apparaîtront ici.",
-        "description": "Vous n'avez pas encore effectué de Swaps ou Ledger Live a été réinitialisé depuis votre dernier Swap."
+        "title": "Vos swaps réalisés apparaîtront ici.",
+        "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
       }
     },
     "landing": {
@@ -301,24 +301,24 @@
         "finished": {
           "title": "En attente",
           "subtitle": "Swap bien diffusé ",
-          "swap": "Identifiant de votre Swap :",
+          "swap": "Identifiant de votre swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre Swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
-          "description": "Votre opération de Swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
+          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
     },
     "operationDetailsModal": {
       "title": "Swap",
       "provider": "Prestataire",
-      "txid": "Identifiant du Swap",
+      "txid": "Identifiant du swap",
       "status": "Statut",
       "statusTooltips": {
-        "expired": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
-        "refunded": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
+        "expired": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
+        "refunded": "Pour plus d'informations, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
         "pending": "Merci de patienter pendant que le prestataire du service Swap traite votre transaction.",
-        "onhold": "Pour résoudre votre problème, contactez le prestataire du service Swap avec l'identifiant de votre Swap.",
-        "finished": "Votre Swap a bien été réalisé."
+        "onhold": "Pour résoudre votre problème, contactez le prestataire du service Swap avec l'identifiant de votre swap.",
+        "finished": "Votre swap a bien été réalisé."
       },
       "date": "Date",
       "from": "De",
@@ -337,11 +337,11 @@
     "checkNodeSettings": "Vérifier les paramètres du nœud",
     "edit": "Modifier",
     "modal": {
-      "title": "Connecter le nœud Bitcoin complet",
+      "title": "Connecter un nœud Bitcoin complet",
       "disconnectTitle": "Déconnecter le nœud complet",
       "steps": {
         "landing": {
-          "header": "Démarrer le nœud. Don't trust, verify.",
+          "header": "Démarrez votre nœud. Don’t trust, verify.",
           "description": "Un nœud Bitcoin valide toutes les transactions et tous les blocs. Il vous permet d'utiliser Bitcoin en vous passant des tiers de confiance tout en contribuant au réseau Bitcoin.",
           "list": {
             "item1": "Configurez Bitcoin Core sur un appareil ayant des ressources suffisantes.",
@@ -374,7 +374,7 @@
               }
             },
             "connecting": {
-              "header": "Tester la connexion du nœud",
+              "header": "Test de la connexion du nœud",
               "description": "Veuillez patienter pendant que nous vérifions si votre nœud complet répond."
             },
             "success": {
@@ -536,7 +536,7 @@
     "account": {
       "amountSupplied": "Montant déposé",
       "amountSuppliedTooltip": "Montant prêté sur le réseau",
-      "currencyAPY": "APY de la devise",
+      "currencyAPY": "APY",
       "currencyAPYTooltip": "Rendement annuel d'un dépôt sans cesse capitalisé",
       "accruedInterests": "Intérêt courus",
       "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
@@ -546,14 +546,14 @@
       "closedLoans": "Prêts clôturés",
       "amountRedeemed": "Montant retiré",
       "date": "Date",
-      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et réaliser des intérêts.",
+      "info": "Vous pouvez prêter des actifs directement depuis votre compte {{currency}} et gagner des intérêts.",
       "howCompoundWorks": "Fonctionnement du prêt sur Compound",
-      "lend": "Dépôt {{currency}}"
+      "lend": "Déposer du {{currency}}"
     },
     "emptyState": {
       "active": {
         "title": "Prêter",
-        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et réaliser des intérêts.",
+        "description": "Vous pouvez prêter des actifs directement depuis vos comptes Ethereum et gagner des intérêts.",
         "cta": "Fonctionnement du prêt sur Compound"
       },
       "closed": {
@@ -575,7 +575,7 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Ouvrir prêt",
+        "amountSupplied": "Prêts ouverts",
         "amountSuppliedTooltip": "Montant déposé sur le réseau",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
@@ -627,7 +627,7 @@
       },
       "withdraw": {
         "title": "Retirer",
-        "description": "Retirez vos actifs du protocole vers votre compte Ledger."
+        "description": "Retirez vos actifs du protocole vers votre compte Ledger Live."
       }
     },
     "enable": {
@@ -641,9 +641,9 @@
         },
         "amount": {
           "title": "Montant",
-          "summary": "J'autorise le contrat intelligent <0>{{contractName}}</0> à accéder à mon compte <0>{{accountName}}</0> pour un montant de <0>{{amount}}</0>.",
-          "limit": "limité : {{amount}}",
-          "noLimit": "{{assetName}} sans limite",
+          "summary": "J'autorise le contrat intelligent <0>{{contractName}}</0> à accéder à mon compte <0>{{accountName}}</0> pour un montant <0>{{amount}}</0>.",
+          "limit": "limité à {{amount}}",
+          "noLimit": "sans limite de {{assetName}}",
           "contractName": "Compound {{currencyName}}",
           "advanced": "Avancé",
           "amountLabel": "Montant à approuver",
@@ -696,15 +696,15 @@
     "info": {
       "terms": {
         "title": "Prêter des cryptos",
-        "subtitle": "Prêter des actifs sur le protocole Compound.",
-        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger.",
+        "subtitle": "Prêter des actifs sur le protocole Compound",
+        "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger Live.",
         "switchLabel": "<1>J'ai lu et j'accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
       },
       "steps": {
         "title": "Étape <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "Approuver un compte pour permettre au protocole de",
-          "subtitle2": "traiter vos futurs prêts.",
+          "subtitle2": "traiter vos futurs prêts",
           "description": "Vous devez autoriser le contrat intelligent de Compound à transférer un certain montant d'actifs au protocole. L'activation d'un compte permet au protocole de traiter les futurs prêts."
         },
         "2": {
@@ -713,7 +713,7 @@
         },
         "3": {
           "subtitle": "Retirer des actifs à tout moment",
-          "description": "Vous pouvez retirer vos actifs et les intérêts perçus en partie ou totalité à tout moment depuis votre compte Ledger."
+          "description": "Vous pouvez retirer vos actifs et les intérêts perçus en partie ou totalité à tout moment depuis votre compte Ledger Live."
         }
       }
     },
@@ -723,7 +723,7 @@
         "amount": {
           "title": "Montant",
           "amountToSupply": "Montant à déposer",
-          "maxSupply": "Le montant maximal de prêt est"
+          "maxSupply": "Le montant maximal disponible est"
         },
         "device": {
           "title": "Appareil"
@@ -748,8 +748,8 @@
     "emptyAccountDeposit": {
       "title": "Vous n'avez pas de compte {{ asset }}.",
       "description": "Pour déposer des fonds et prêter des cryptos, vous avez besoin d'un compte {{ asset }}. Recevez des fonds sur votre adresse Ethereum.",
-      "ctaBuy": "Acheter {{ asset }}",
-      "ctaReceive": "Recevoir {{ asset }}"
+      "ctaBuy": "Acheter des {{ asset }}",
+      "ctaReceive": "Recevoir des {{ asset }}"
     }
   },
   "accounts": {
@@ -788,15 +788,15 @@
     "title": "Aide",
     "gettingStarted": {
       "title": "Premiers pas",
-      "desc": "Commencer ici"
+      "desc": "Commencez ici"
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système."
+      "desc": "Vérifiez l'état de notre système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
-      "desc": "Obtenir de l'aide"
+      "desc": "Obtenez de l'aide"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -843,7 +843,7 @@
     },
     "buyCrypto": {
       "title": "Acheter des cryptos",
-      "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger.",
+      "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger Live.",
       "cta": "Acheter maintenant"
     },
     "backupPack": {
@@ -1026,7 +1026,7 @@
     "noAccountToImport": "Aucun compte {{currencyName}} existant à ajouter",
     "success": "Compte bien ajouté",
     "success_plural": "Comptes bien ajoutés",
-    "successDescription": "Ajouter d'autres comptes ou retourner au Portefeuille.",
+    "successDescription": "Ajoutez d'autres comptes ou retournez au Portefeuille.",
     "successDescription_plural": "Ajoutez davantage de comptes ou retournez au Portefeuille.",
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
@@ -1085,7 +1085,7 @@
     "subAccountTooltip": "Cette opération est liée aux opérations de sous-compte suivantes",
     "internalOperations": "Opérations internes",
     "internalOpTooltip": "Cette opération a des opérations internes.",
-    "details": "Détails de {{ currency }}",
+    "details": "Détails sur {{ currency }}",
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
     "extra": {
       "frozenAmount": "Montant gelé",
@@ -1116,7 +1116,7 @@
     "noMoreOperations": "Rien d'autre à afficher"
   },
   "DeviceAction": {
-    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil.",
+    "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos jetons {{token}}",
     "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
     "loading": "Chargement...",
@@ -1136,8 +1136,8 @@
     "listApps": "Vérification en cours des dépendances des applications",
     "listAppsDescription": "Merci de patienter pendant que nous nous assurons que vous avez toutes les applications requises.",
     "swap": {
-      "notice": "Vérifiez les détails du Swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
-      "confirm": "Confirmer la transaction de Swap",
+      "notice": "Vérifiez les détails du swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de swap",
       "amountSent": "Montant à envoyer",
       "amountReceived": "Montant à recevoir",
       "amountReceivedFloat": "Montant à recevoir sans les frais de service",
@@ -1159,7 +1159,7 @@
       "appOnDeviceSearch": "Rechercher les applications installées..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> libre",
+      "freeSpace": "<0>{{space}}</0> libres",
       "noFreeSpace": "Plus d'espace disponible",
       "installed": "Applications",
       "capacity": "Capacité",
@@ -1178,9 +1178,9 @@
       "filter": {
         "title": "Afficher",
         "all": "Toutes",
-        "supported": "Prise en charge par Ledger Live",
+        "supported": "Prises en charge par Ledger Live",
         "installed": "Installée",
-        "not_installed": "Non installée"
+        "not_installed": "Non installées"
       },
       "sort": {
         "title": "Trier",
@@ -1195,9 +1195,9 @@
       },
       "updatable": {
         "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mises à jour d'applications",
+        "progressTitle": "{{number}} mise(s) à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
-        "progress": "Mise à jour de toutes..."
+        "progress": "Mise à jour complète..."
       },
       "item": {
         "version": "Version {{version}}",
@@ -1434,8 +1434,8 @@
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un jeton.",
-        "verifyTokenType": "Merci de vérifier que <0>{{token}}</0> est un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un autre compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Merci d'envoyer uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
+        "warningTokenType": "Envoyez uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1524,7 +1524,7 @@
   },
   "distribution": {
     "asset": "Actif ",
-    "price": "Prix",
+    "price": "Cours",
     "distribution": "Répartition",
     "amount": "Montant",
     "value": "Valeur",
@@ -2232,7 +2232,7 @@
       },
       "modal": {
         "button": "Terminé",
-        "title": "Scannez pour exporter vers Ledger Live mobile.",
+        "title": "Scanner pour exporter vers un mobile",
         "listTitle": "Sur l'application mobile Ledger Live :",
         "step1": "Appuyez sur le bouton <1><0>+</0></1> dans <3><0>Comptes</0></3>.",
         "step2": "Appuyez sur <1><0>Importer les comptes de l'ordinateur</0></1>.",
@@ -2335,12 +2335,12 @@
       },
       "tokenBlacklist": {
         "title": "Jetons masqués",
-        "desc": "Vous pouvez masquer les jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
+        "desc": "Vous pouvez masquer des jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
         "count": "{{count}} jeton",
         "count_plural": "{{count}} jetons"
       },
       "fullNode": {
-        "title": "Connecter le nœud Bitcoin complet",
+        "title": "Connecter un nœud Bitcoin complet",
         "desc": "Configurez votre nœud Bitcoin complet pour synchroniser et envoyer des transactions sans passer par les explorateurs de Ledger."
       }
     }
@@ -2436,7 +2436,7 @@
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "L'application Ledger Live fonctionne correctement.",
+        "title": "Ledger Live fonctionne correctement.",
         "description": "Des difficultés ? Visitez notre <0>page d'aide</0>."
       },
       "statusNotOk": {
@@ -2484,16 +2484,16 @@
         "title": "Cacher sa phrase de récupération",
         "points": {
           "1": "Ne la saisissez <0>jamais</0> sur un ordinateur, smartphone ou autre appareil. Ne la prenez pas en photo.",
-          "2": "Ne partagez <0>jamais</0> vos 24 mots avec qui que ce soit.",
+          "2": "Ne la partagez <0>jamais</0> avec qui que ce soit.",
           "3": "Conservez-la <0>toujours</0> en lieu sûr à l'abri des regards.",
-          "4": "Ledger ne vous demandera <1>jamais</1> votre phrase de récupération.",
-          "5": "Si quelqu'un vous la demande, ne la donnez <1>pas</1>. Partez du principe que c'est une arnaque."
+          "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
+          "5": "Si quelqu'un vous la demande, ne la donnez pas. Partez du principe que c'est une arnaque."
         }
       }
     },
     "alerts": {
       "beCareful": {
-        "title": "S'il vous plaît, soyez prudent",
+        "title": "Prenez votre temps",
         "descr": "Assurez-vous de suivre les instructions de cette application à toutes les étapes du processus.",
         "gotIt": "Compris"
       },
@@ -2520,7 +2520,7 @@
       },
       "selectUseCase": {
         "greetings": "Bonjour",
-        "hasNoRecovery": "Vous n'avez jamais utilisé votre {{deviceName}} ?",
+        "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
         "options": {
@@ -2530,8 +2530,8 @@
             "description": "Commencez par configurer votre nouvel appareil."
           },
           "2": {
-            "heading": "Connecter l'appareil",
-            "title": "Connexion d'un {{deviceName}}",
+            "heading": "Connexion d'un appareil",
+            "title": "Connecter un {{deviceName}}",
             "description": "Si votre appareil est déjà configuré, connectez-le à l'application."
           },
           "3": {
@@ -2579,11 +2579,11 @@
             },
             "browse": {
               "title": "Naviguer",
-              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran. Utilisez les boutons gauche et droit pour naviguer."
+              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran."
             },
             "select": {
               "title": "Choisir \"Set up as new device\"",
-              "descr": "Sélectionnez \"Set up as new device\" (Configurer un nouvel appareil). Appuyez simultanément sur les deux boutons pour valider."
+              "descr": "Appuyez simultanément sur les deux boutons pour valider."
             },
             "follow": {
               "title": "Suivre les instructions",
@@ -2602,7 +2602,7 @@
             },
             "browse": {
               "title": "Naviguer",
-              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran. Utilisez les boutons gauche et droit pour naviguer."
+              "descr": "Apprenez à interagir avec votre appareil. Lisez les instructions à l'écran."
             },
             "select": {
               "title": "Choisir \"Enter your recovery phrase\"",
@@ -2744,7 +2744,7 @@
           "genuineCheck": {
             "success": {
               "title": "Rien à signaler",
-              "desc": "Votre {{deviceName}} Ledger est authentique et est prêt à être utilisé avec l'application Ledger Live."
+              "desc": "Votre Ledger {{deviceName}} est authentique et est prêt à être utilisé avec l'application Ledger Live."
             },
             "buttons": {
               "next": "Continuer",
@@ -2789,7 +2789,7 @@
         },
         "stayOffline": {
           "title": "Rester hors ligne",
-          "description": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez l'application."
+          "description": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez Ledger Live."
         },
         "validateTransactions": {
           "title": "Valider ses transactions",
@@ -2972,7 +2972,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "Vous ne pouvez pas diminuer le montant approuvé quand un dépôt est actif."
+      "title": "Vous ne pouvez pas diminuer le montant approuvé sur un dépôt actif."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Une erreur est survenue (Erreur #1).",
@@ -3220,7 +3220,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",
-      "description": "Vous devez confirmer le Swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
+      "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
     },
     "TimeoutError": {
       "title": "Le serveur a mis trop longtemps à répondre.",
@@ -3351,7 +3351,7 @@
     },
     "BtcUnmatchedApp": {
       "title": "Mauvaise application",
-      "description": "Ouvrez l'application {{managerAppName}} sur votre appareil."
+      "description": "Ouvrez l'application {{managerAppName}} sur votre appareil"
     },
     "DeviceNameInvalid": {
       "title": "Choisissez un nom d'appareil sans \"{{invalidCharacters}}\"."
