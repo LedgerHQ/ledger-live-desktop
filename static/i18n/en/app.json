@@ -2354,6 +2354,8 @@
       "softResetTitle": "Clear cache",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
+      "resetKYC": "Reset KYC data",
+      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
       "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
       "hardReset": "Reset",
