@@ -68,6 +68,9 @@ const KYC = () => {
   const stateOptions = Object.entries(USStates).map(([value, label]) => ({ value, label }));
   const countryOptions = Object.entries(countries).map(([value, label]) => ({ value, label }));
 
+  // Sanity validation
+  const [minDOB, maxDOB] = useMemo(() => [new Date("1900-01-01"), new Date()], []);
+
   // TODO Might need a better setup if this form gets more complicated
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -107,9 +110,15 @@ const KYC = () => {
       if (!requiredFields[field]) {
         errors[field] = t(`swap.kyc.wyre.form.${field}Error`);
       }
+      if (field === "dateOfBirth") {
+        const date = new Date(requiredFields[field]);
+        if (minDOB > date || maxDOB < date) {
+          errors[field] = t(`swap.kyc.wyre.form.dateOfBirthValidationError`);
+        }
+      }
     }
     return errors;
-  }, [requiredFields, t]);
+  }, [maxDOB, minDOB, requiredFields, t]);
 
   useEffect(() => {
     setErrors(onValidateFields);

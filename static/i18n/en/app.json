@@ -310,7 +310,8 @@
           "street1Error": "Enter your address",
           "cityError": "Enter the city you live in the USA",
           "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth"
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
         }
       }
     },
