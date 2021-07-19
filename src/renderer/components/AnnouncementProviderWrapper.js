@@ -67,6 +67,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     language,
     currencies,
     getDate: () => new Date(),
+    appVersion: __APP_VERSION__,
   };
 
   const onNewAnnouncement = useCallback(
