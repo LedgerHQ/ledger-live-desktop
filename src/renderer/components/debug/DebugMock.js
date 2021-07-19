@@ -261,6 +261,8 @@ const DebugMock = () => {
   const [expandedNotif, setExpandedNotif] = useState(false);
 
   const [notifPlatform, setNotifPlatform] = useState("");
+  const [notifAppVersionApps, setNotifAppVersionApps] = useState("");
+  const [notifLLComonVersionApps, setNotifLLComonVersionApps] = useState("");
   const [notifCurrencies, setNotifCurrencies] = useState("");
   const [notifDeviceVersion, setNotifDeviceVersion] = useState("");
   const [notifDeviceModelId, setNotifDeviceModelId] = useState("");
@@ -314,6 +316,8 @@ const DebugMock = () => {
     const params = {
       currencies: formatInputValue(notifCurrencies),
       platforms: formatInputValue(notifPlatform),
+      appVersions: formatInputValue(notifAppVersionApps),
+      liveCommonVersions: formatInputValue(notifLLComonVersionApps),
       languages: formatInputValue(notifLanguages),
     };
 
@@ -348,6 +352,8 @@ const DebugMock = () => {
     notifExtra,
     notifLanguages,
     notifPlatform,
+    notifAppVersionApps,
+    notifLLComonVersionApps,
     updateCache,
   ]);
 
@@ -515,6 +521,18 @@ const DebugMock = () => {
                   placeholder="device apps separated by ','"
                   value={notifDeviceApps}
                   onChange={setValue(setNotifDeviceApps)}
+                />
+                <input
+                  type="text"
+                  placeholder="app versions separated by ','"
+                  value={notifAppVersionApps}
+                  onChange={setValue(setNotifAppVersionApps)}
+                />
+                <input
+                  type="text"
+                  placeholder="ll-common versions separated by ','"
+                  value={notifLLComonVersionApps}
+                  onChange={setValue(setNotifLLComonVersionApps)}
                 />
                 <textarea
                   type="text"
