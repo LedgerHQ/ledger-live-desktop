@@ -1872,6 +1872,7 @@
     "unlockedBalance": "已解绑",
     "unlockedTooltip": "现在可使用提取操作转移已解绑的资产。",
     "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "您可以通过绑定资产并随后提名您的（某个或多个）验证器来赚取奖励。",
@@ -3610,10 +3611,13 @@
       "title": "确保您有足够的余额来支付未来的交易费用"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "余额不能少于 1 DOT。发送最大值以清空账户"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "您必须绑定至少 1 DOT"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "您已超过了解绑限额"
