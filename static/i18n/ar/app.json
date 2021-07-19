@@ -1872,6 +1872,7 @@
     "unlockedBalance": "غير مقيد",
     "unlockedTooltip": "يمكن الآن نقل الأصول غير المقيدة باستخدام عملية السحب.",
     "networkFees": "يتم تعيين رسوم الشبكة تلقائيًا عن طريق بروتوكول إجماع Polkadot، لن تتمكن من مراجعتها على جهازك",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول ثم تعيين المدقق (المدققين) الخاص بك.",
@@ -3610,10 +3611,13 @@
       "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "لا يمكن أن يقل الرصيد عن 1 DOT. ارسل الحد الأقصى لتفريغ الحساب"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "يجب عليك تقيد 1 DOT على الأقل"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "لقد تجاوزت الحد المسموح به لإلغاء التقيد"
