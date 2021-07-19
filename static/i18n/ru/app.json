@@ -1872,6 +1872,7 @@
     "unlockedBalance": "Не заблокированные",
     "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
     "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, её невозможно будет просмотреть на устройстве",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "Вы можете получать вознаграждения, блокируя активы и назначая валидаторов.",
@@ -3610,10 +3611,13 @@
       "title": "Убедитесь, что вашего баланса достаточно, чтобы покрыть потенциальные комиссии"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Баланс не может быть ниже 1 DOT. Переведите макс. сумму на пустой счёт"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "Вы должны заблокировать как минимум 1 DOT"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Вы превысили лимит разблокировки"
