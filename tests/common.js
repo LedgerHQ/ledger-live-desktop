@@ -268,6 +268,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     it("should start in this state", async () => {
       await app.client.$("__app__ready__");
       await app.client.pause(2000);
+      await app.client.waitForSync();
       expect(await app.client.screenshot()).toMatchImageSnapshot({
         customSnapshotIdentifier: `__start__${name}`,
       });
