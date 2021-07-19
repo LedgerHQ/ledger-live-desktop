@@ -1872,6 +1872,7 @@
     "unlockedBalance": "Desvinculado",
     "unlockedTooltip": "Los activos desvinculados ya se pueden mover utilizando la operación de retiro.",
     "networkFees": "El consenso Polkadot establece automáticamente las tarifas de red, no podrás modificarlas desde tu dispositivo",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "Puedes recibir recompensas vinculando activos y nominando luego a los validadores.",
@@ -3610,10 +3611,13 @@
       "title": "Asegúrate de que tienes un saldo restante suficiente para cubrir las tarifas de transacciones futuras"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "El saldo no puede ser inferior a 1 DOT. Envía el importe máximo a una cuenta vacía"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "Debes vincular al menos 1 DOT"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Has superado el límite de desvinculación"
