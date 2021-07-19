@@ -16,7 +16,7 @@ export default function ResetKYCButton() {
   }, [dispatch]);
 
   return (
-    <Button small danger onClick={onResetKYC} event="KYCReset">
+    <Button small primary onClick={onResetKYC} event="KYCReset">
       {t("common.reset")}
     </Button>
   );
