@@ -38,6 +38,7 @@
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "dependencies": {
+    "@hashgraph/sdk": "^2.0.25-beta.1",
     "@hot-loader/react-dom": "^17.0.1",
     "@ledgerhq/devices": "^6.1.0",
     "@ledgerhq/electron-updater": "^4.2.2",
@@ -46,7 +47,7 @@
     "@ledgerhq/hw-transport-http": "^6.1.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "^6.1.0",
     "@ledgerhq/ledger-core": "6.12.3",
-    "@ledgerhq/live-common": "^20.5.2",
+    "@ledgerhq/live-common": "file:.yalc/@ledgerhq/live-common",
     "@ledgerhq/logs": "^6.0.2",
     "@polkadot/react-identicon": "0.84.1",
     "@tippyjs/react": "^4.2.5",
