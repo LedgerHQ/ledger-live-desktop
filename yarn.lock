@@ -2363,14 +2363,14 @@
     "@polkadot/util" "7.0.1"
     "@polkadot/util-crypto" "7.0.1"
 
-"@polkadot/networks@7.0.1", "@polkadot/networks@^7.0.1":
+"@polkadot/networks@7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@polkadot/networks/-/networks-7.0.1.tgz#e07c4b88e25711433e76d24fce4c7273c25dd38b"
   integrity sha512-bJSvI7UgEpxmBKS8TMh+I1mfmCMwhClGdSs29kwU+K61IjBTKTt3yQJ/SflYIQV7QftGbz3oMfSkGbQbRHZqvQ==
   dependencies:
     "@babel/runtime" "^7.14.6"
 
-"@polkadot/networks@7.0.2", "@polkadot/networks@^7.0.2":
+"@polkadot/networks@7.0.2", "@polkadot/networks@^7.0.1", "@polkadot/networks@^7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@polkadot/networks/-/networks-7.0.2.tgz#e3da380f824258b939ca5379065fb973dff2bb9b"
   integrity sha512-KP8T1uaUkwzmsOZPnpJ+EZWOTR26v+BxxeV9kc7NoD3UrSVHcHI7uz1mKfhmTn9gSDf04DqQ1zmFr6PIMlhncw==
@@ -2433,7 +2433,7 @@
     "@babel/runtime" "^7.14.6"
     color "^3.1.3"
 
-"@polkadot/util-crypto@7.0.1", "@polkadot/util-crypto@^7.0.1":
+"@polkadot/util-crypto@7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@polkadot/util-crypto/-/util-crypto-7.0.1.tgz#03109dc11323dad174fb2214d395855495def16a"
   integrity sha512-dbvdsICoyOVw/K45RmHOP7wXE/7vj+NzEKGcKbiDt39nglHm6g2BTJ947PwwyNusTTAx82Q2iJ9vIZ1Kl0xG+g==
@@ -2455,7 +2455,7 @@
     tweetnacl "^1.0.3"
     xxhashjs "^0.2.2"
 
-"@polkadot/util-crypto@^7.0.2":
+"@polkadot/util-crypto@^7.0.1", "@polkadot/util-crypto@^7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@polkadot/util-crypto/-/util-crypto-7.0.2.tgz#c892942b6c7cb63a7c2c0a602115b0645b7fe8eb"
   integrity sha512-d4X+4YQOiVqIV82fU1DaOWMRKawpDVHZBsCMkE6twYadpc/BlNfrksiUhmTUklZPPMF6jIfLPjz8j7fH7GZeCQ==
@@ -2477,7 +2477,7 @@
     tweetnacl "^1.0.3"
     xxhashjs "^0.2.2"
 
-"@polkadot/util@7.0.1", "@polkadot/util@^7.0.1":
+"@polkadot/util@7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@polkadot/util/-/util-7.0.1.tgz#79afd40473016876f51d65ebb9900a20108fe0a4"
   integrity sha512-EtQlZL6ok0Ep+zRz2QHMUoJo/b3kFHVN2qqyD2+9sdqg0FGLmkzNFM+K6dasCMLXieJ1l0HoFsQppSo/leUeaA==
@@ -2490,7 +2490,7 @@
     camelcase "^5.3.1"
     ip-regex "^4.3.0"
 
-"@polkadot/util@7.0.2", "@polkadot/util@^7.0.2":
+"@polkadot/util@7.0.2", "@polkadot/util@^7.0.1", "@polkadot/util@^7.0.2":
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/@polkadot/util/-/util-7.0.2.tgz#ec2625c506b9d1b8c68cc45f97f60be7f5f1c097"
   integrity sha512-NJHRprsEZ61p9Ch0CSch0O8lHFC9rzYinOSPYmbsur7upZJKNzeqnQ7GxiMI/4u9lznfAmD/TW6BTwkWHenncg==
