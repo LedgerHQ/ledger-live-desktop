@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
@@ -14,9 +14,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
-import { openURL } from "~/renderer/linking";
 import useInterval from "~/renderer/hooks/useInterval";
-import { urls } from "~/config/urls";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import IconCross from "~/renderer/icons/Cross";
