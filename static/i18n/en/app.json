@@ -355,6 +355,11 @@
       "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
       "cta": "Reset verification"
     },
+    "resetKYCModal": {
+      "title": "Delete your KYC",
+      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
+      "cta": "Confirm"
+    },
     "modal": {
       "title": "Swap",
       "steps": {

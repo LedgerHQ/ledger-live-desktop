@@ -24,6 +24,7 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
+import MODAL_SWAP_RESET_KYC from "./Swap/ResetKYC";
 import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
 import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
 
@@ -124,6 +125,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   // Swap
   MODAL_SWAP,
   MODAL_SWAP_UNAUTHORIZED_RATES,
+  MODAL_SWAP_RESET_KYC,
 };
 
 export default modals;

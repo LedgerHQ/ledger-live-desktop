@@ -14,7 +14,9 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
+import { openURL } from "~/renderer/linking";
 import useInterval from "~/renderer/hooks/useInterval";
+import { urls } from "~/config/urls";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import IconCross from "~/renderer/icons/Cross";
@@ -70,15 +72,14 @@ const Pending = ({ status = "pending" }: { status?: string }) => {
   }, [dispatch, providerKYC]);
 
   useInterval(() => {
-    onUpdateKYCStatus();
-  }, 10000);
-
-  useEffect(() => {
-    // Fixme Again, relying on provider specific status wording.
     if (providerKYC && providerKYC.status !== "approved") {
       onUpdateKYCStatus();
     }
-  }, [onUpdateKYCStatus, providerKYC]);
+  }, 10000);
+
+  const onLearnMore = useCallback(() => {
+    // openURL(urls);
+  }, []);
 
   const onResetKYC = useCallback(() => {
     dispatch(setSwapKYCStatus({ provider: "wyre" }));
@@ -106,7 +107,7 @@ const Pending = ({ status = "pending" }: { status?: string }) => {
         <Trans i18nKey={`swap.kyc.wyre.${status}.subtitle`} />
       </Text>
       <Text mt={24} ff="Inter|SemiBold" fontSize={13} color="palette.text.shade100">
-        <LinkWithExternalIcon onClick={() => {}} color="palette.primary.main">
+        <LinkWithExternalIcon onClick={onLearnMore} color="palette.primary.main">
           <Text ff="Inter|SemiBold" fontSize={13}>
             <Trans i18nKey={`swap.kyc.wyre.${status}.link`} />
           </Text>
