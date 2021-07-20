@@ -22,7 +22,7 @@ const Divider = styled(Box).attrs(() => ({
   border: 1px solid rgba(20, 37, 51, 0.1);
 `;
 
-export const LiveAppInformationDrawer = () => {
+export const LiveAppDrawer = () => {
   const { isOpen, manifest } = useSelector(platformAppInfoStateSelector);
 
   const { homepageUrl } = manifest || {};
