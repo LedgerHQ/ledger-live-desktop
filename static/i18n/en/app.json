@@ -178,6 +178,7 @@
     "manager": "Manager",
     "exchange": "Buy / Sell",
     "swap": "Swap",
+    "swap2": "Swap 2",
     "lend": "Lend",
     "catalog": "Discover"
   },

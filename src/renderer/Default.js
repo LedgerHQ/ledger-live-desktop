@@ -11,6 +11,7 @@ import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap/FormOrHistory";
+import Swap2 from "~/renderer/screens/exchange/Swap2";
 import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
@@ -141,6 +142,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
+                        <Route path="/swap2" render={props => <Swap2 {...props} />} exact />
                         <Route path="/swap" render={props => <Swap {...props} />} exact />
                       </Switch>
                     </Page>
