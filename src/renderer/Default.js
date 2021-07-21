@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
@@ -45,6 +45,7 @@ import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
+import useEnv from "~/renderer/hooks/useEnv";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -55,6 +56,8 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
+  const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
 
   // every time location changes, scroll back up
@@ -142,8 +145,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
-                        <Route path="/swap2" render={props => <Swap2 {...props} />} exact />
-                        <Route path="/swap" render={props => <Swap {...props} />} exact />
+                        <Route path="/swap" render={props => <SwapComponent {...props} />} exact />
                       </Switch>
                     </Page>
                     <Drawer />
