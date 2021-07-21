@@ -261,8 +261,8 @@ const DebugMock = () => {
   const [expandedNotif, setExpandedNotif] = useState(false);
 
   const [notifPlatform, setNotifPlatform] = useState("");
-  const [notifAppVersionApps, setNotifAppVersionApps] = useState("");
-  const [notifLLComonVersionApps, setNotifLLComonVersionApps] = useState("");
+  const [notifAppVersions, setNotifAppVersions] = useState("");
+  const [notifLiveCommonVersions, setNotifLiveCommonVersions] = useState("");
   const [notifCurrencies, setNotifCurrencies] = useState("");
   const [notifDeviceVersion, setNotifDeviceVersion] = useState("");
   const [notifDeviceModelId, setNotifDeviceModelId] = useState("");
@@ -316,8 +316,8 @@ const DebugMock = () => {
     const params = {
       currencies: formatInputValue(notifCurrencies),
       platforms: formatInputValue(notifPlatform),
-      appVersions: formatInputValue(notifAppVersionApps),
-      liveCommonVersions: formatInputValue(notifLLComonVersionApps),
+      appVersions: formatInputValue(notifAppVersions),
+      liveCommonVersions: formatInputValue(notifLiveCommonVersions),
       languages: formatInputValue(notifLanguages),
     };
 
@@ -352,8 +352,8 @@ const DebugMock = () => {
     notifExtra,
     notifLanguages,
     notifPlatform,
-    notifAppVersionApps,
-    notifLLComonVersionApps,
+    notifAppVersions,
+    notifLiveCommonVersions,
     updateCache,
   ]);
 
@@ -525,14 +525,14 @@ const DebugMock = () => {
                 <input
                   type="text"
                   placeholder="app versions separated by ','"
-                  value={notifAppVersionApps}
-                  onChange={setValue(setNotifAppVersionApps)}
+                  value={notifAppVersions}
+                  onChange={setValue(setNotifAppVersions)}
                 />
                 <input
                   type="text"
-                  placeholder="ll-common versions separated by ','"
-                  value={notifLLComonVersionApps}
-                  onChange={setValue(setNotifLLComonVersionApps)}
+                  placeholder="live-common versions separated by ','"
+                  value={notifLiveCommonVersions}
+                  onChange={setValue(setNotifLiveCommonVersions)}
                 />
                 <textarea
                   type="text"
