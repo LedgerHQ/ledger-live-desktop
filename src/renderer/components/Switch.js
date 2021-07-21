@@ -10,6 +10,7 @@ const Base: ThemedComponent<{
   forceBgColor?: string,
   isChecked?: boolean,
   small?: boolean,
+  medium?: boolean,
   disabled?: boolean,
 }> = styled(Tabbable).attrs(p => ({
   bg: p.forceBgColor ? p.forceBgColor : p.isChecked ? "wallet" : "palette.text.shade10",
@@ -19,8 +20,8 @@ const Base: ThemedComponent<{
   & input[type="checkbox"] {
     display: none;
   }
-  width: ${p => (p.small ? 25 : 40)}px;
-  height: ${p => (p.small ? 13 : 24)}px;
+  width: ${p => (p.small ? 25 : p.medium ? 37.5 : 40)}px;
+  height: ${p => (p.small ? 13 : p.medium ? 18.5 : 24)}px;
   border-radius: 13px;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   transition: 250ms linear background-color;
@@ -31,14 +32,25 @@ const Base: ThemedComponent<{
 `;
 
 const Ball = styled.div`
-  width: ${p => (p.small ? 9 : 20)}px;
-  height: ${p => (p.small ? 9 : 20)}px;
+  width: ${p => (p.small ? 9 : p.medium ? 14 : 20)}px;
+  height: ${p => (p.small ? 9 : p.medium ? 14.5 : 20)}px;
   border-radius: 50%;
   background: ${p => p.theme.colors.palette.primary.contrastText};
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   transition: 250ms ease-in-out transform;
   transform: translate3d(
-    ${p => (p.small ? (p.isChecked ? "14px" : "2px") : p.isChecked ? "18px" : "2px")},
+    ${p =>
+      p.small
+        ? p.isChecked
+          ? "14px"
+          : "2px"
+        : p.medium
+        ? p.isChecked
+          ? "21px"
+          : "2px"
+        : p.isChecked
+        ? "18px"
+        : "2px"},
     0,
     0
   );
@@ -49,6 +61,7 @@ type Props = {
   disabled?: boolean,
   onChange?: Function,
   small?: boolean,
+  medium?: boolean,
   forceBgColor?: string,
 };
 
@@ -56,6 +69,7 @@ export default function Switch({
   isChecked,
   onChange = noop,
   small,
+  medium,
   disabled,
   forceBgColor,
   ...p
@@ -66,6 +80,7 @@ export default function Switch({
       key={isChecked ? "ON" : "OFF"}
       disabled={disabled}
       small={small}
+      medium={medium}
       isChecked={isChecked}
       onClick={() => onChange(!isChecked)}
       className="switch"
@@ -78,7 +93,7 @@ export default function Switch({
         readOnly
         value={isChecked}
       />
-      <Ball small={small} isChecked={isChecked} />
+      <Ball small={small} medium={medium} isChecked={isChecked} />
     </Base>
   );
 }
