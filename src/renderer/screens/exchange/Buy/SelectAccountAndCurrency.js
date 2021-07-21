@@ -96,6 +96,62 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   }, [dispatch, currency]);
 
+  const addOrSelectAccount = () => {
+    if (!currency) {
+      return;
+    }
+
+    if (availableAccounts.length) {
+      return (
+        <>
+          <FormContent>
+            <AccountSelectorLabel>
+              <span>{t("exchange.buy.selectAccount")}</span>
+              <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
+                <PlusIcon size={10} />
+                <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
+              </FakeLink>
+            </AccountSelectorLabel>
+            <SelectAccount
+              accounts={availableAccounts}
+              value={{ account, subAccount }}
+              onChange={setAccount}
+            />
+          </FormContent>
+          <FormContent>
+            <ConfirmButton
+              primary
+              onClick={() => {
+                if (account) {
+                  track("Buy Crypto Continue Button", {
+                    currencyName: getAccountCurrency(account).name,
+                    isEmpty: isAccountEmpty(account),
+                  });
+                  if (subAccount) {
+                    selectAccount(subAccount, account);
+                  } else {
+                    selectAccount(account);
+                  }
+                }
+              }}
+              disabled={!account}
+            >
+              {t("exchange.buy.continue")}
+            </ConfirmButton>
+          </FormContent>
+        </>
+      );
+    }
+
+    return (
+      <FormContent>
+        <ConfirmButton primary onClick={openAddAccounts}>
+          {t("exchange.buy.addAccount")}
+        </ConfirmButton>
+      </FormContent>
+    );
+  };
+
   return (
     <Container>
       <IconContainer>
@@ -112,43 +168,7 @@ const SelectAccountAndCurrency = ({ selectAccount, defaultCurrency, defaultAccou
           <Label>{t("exchange.buy.selectCrypto")}</Label>
           <SelectCurrency onChange={setCurrency} currencies={allCurrencies} value={currency} />
         </FormContent>
-        <FormContent>
-          <AccountSelectorLabel>
-            <span>{t("exchange.buy.selectAccount")}</span>
-            <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
-              <PlusIcon size={10} />
-              <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
-            </FakeLink>
-          </AccountSelectorLabel>
-          {currency ? (
-            <SelectAccount
-              accounts={availableAccounts}
-              value={{ account, subAccount }}
-              onChange={setAccount}
-            />
-          ) : null}
-        </FormContent>
-        <FormContent>
-          <ConfirmButton
-            primary
-            onClick={() => {
-              if (account) {
-                track("Buy Crypto Continue Button", {
-                  currencyName: getAccountCurrency(account).name,
-                  isEmpty: isAccountEmpty(account),
-                });
-                if (subAccount) {
-                  selectAccount(subAccount, account);
-                } else {
-                  selectAccount(account);
-                }
-              }
-            }}
-            disabled={!account}
-          >
-            {t("exchange.buy.continue")}
-          </ConfirmButton>
-        </FormContent>
+        {addOrSelectAccount()}
       </FormContainer>
     </Container>
   );
