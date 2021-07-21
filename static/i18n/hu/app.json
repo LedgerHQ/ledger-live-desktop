@@ -2255,6 +2255,7 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "Ehhez az eszközhöz nincsenek beállítások",
       "confirmationsNb": "Megerősítések száma",
