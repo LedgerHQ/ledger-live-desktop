@@ -2255,6 +2255,7 @@
       "carouselVisibilityDesc": "Показывать Портфель в формате карусели"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
       "placeholder": "Нет настроек для выбранного актива",
       "confirmationsNb": "Количество подтверждений",
