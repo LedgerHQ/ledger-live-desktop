@@ -276,8 +276,8 @@
         "subtitle": "Please enter your information to swap with Wyre.",
         "pending": {
           "cta": "Continue",
-          "title": "KYC submitted for approval",
-          "subtitle": "Your KYC has been submitted and is pending approval.",
+          "title": "Pending approval",
+          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
           "link": "Learn more about KYC"
         },
         "closed": {
