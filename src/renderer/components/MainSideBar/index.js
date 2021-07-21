@@ -238,10 +238,6 @@ const MainSideBar = () => {
     push("/swap");
   }, [push]);
 
-  const handleClickSwap2 = useCallback(() => {
-    push("/swap2");
-  }, [push]);
-
   const maybeRedirectToAccounts = useCallback(() => {
     return location.pathname === "/manager" && push("/accounts");
   }, [location.pathname, push]);
@@ -332,26 +328,13 @@ const MainSideBar = () => {
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
-              {/* TODO Make this toggleable via an experimental flag/setting */}
               <SideBarListItem
                 id={"swap"}
                 label={t("sidebar.swap")}
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
-                isActive={
-                  location.pathname.startsWith("/swap") && !location.pathname.startsWith("/swap2")
-                }
-                disabled={noAccounts}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"swap2"}
-                label={t("sidebar.swap2")}
-                icon={IconSwap}
-                iconActiveColor="wallet"
-                onClick={handleClickSwap2}
-                isActive={location.pathname.startsWith("/swap2")}
+                isActive={location.pathname.startsWith("/swap")}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
