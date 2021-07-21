@@ -2255,6 +2255,7 @@
       "carouselVisibilityDesc": "تمكين المشاهدة كشريط دوّار في الحافظة"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
       "placeholder": "لا توجد إعدادات لهذا الأصل",
       "confirmationsNb": "عدد التأكيدات",
