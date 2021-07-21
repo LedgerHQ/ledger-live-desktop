@@ -2255,6 +2255,7 @@
       "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
       "placeholder": "No hay ajustes para este activo",
       "confirmationsNb": "Cantidad de confirmaciones",
