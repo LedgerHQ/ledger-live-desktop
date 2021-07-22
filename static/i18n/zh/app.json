@@ -236,12 +236,96 @@
       "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往 Manager（管理器）"
     },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      },
+      "cta": "Continue",
+      "kyc": {
+        "notAvailable": "{{provider}} is unavailable in your location",
+        "status": {
+          "required": "KYC Required",
+          "pending": "KYC Pending",
+          "approved": "KYC Approved!",
+          "closed": "KYC Rejected"
+        }
+      }
+    },
+    "ip": {
+      "title": "Welcome to Swap",
+      "subtitle": "Exchange crypto assets directly from your Ledger device.",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+    },
     "kyc": {
-      "title": "欢迎使用 Swap",
-      "subtitle": "直接通过您的 Ledger 设备兑换加密资产。此服务在美国和其他一些国家不可用。",
-      "disclaimer": "继续即表示您同意您的位置数据将共享给第三方服务提供商，以使它们遵守其 AML/KYC 程序。"
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "pending": {
+          "cta": "Continue",
+          "title": "Pending approval",
+          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "link": "Learn more about KYC"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
     },
     "form": {
+      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
+      "resetKYCCTA": "Reset KYC",
       "amount": "数额",
       "from": {
         "title": "来自",
@@ -273,6 +357,16 @@
       "noApp": "未安装 {{currencyName}} 应用程序。",
       "outdatedApp": "{{currencyName}} 应用有可用的更新",
       "loadingRates": "正在加载费率..."
+    },
+    "unauthorizedRatesModal": {
+      "title": "Ledger Live needs an update",
+      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "cta": "Reset verification"
+    },
+    "resetKYCModal": {
+      "title": "Delete your KYC",
+      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
+      "cta": "Confirm"
     },
     "modal": {
       "title": "Swap",
@@ -2276,6 +2370,8 @@
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
       "softReset": "清除",
+      "resetKYC": "Reset KYC data",
+      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
       "hardResetTitle": "重置 Ledger Live",
       "hardResetDesc": "清除您电脑上存储的所有 Ledger Live 数据，包括您的账户信息、交易历史记录和设置选项。",
       "hardReset": "重置",
@@ -3223,6 +3319,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "固件或应用程序需更新",
       "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "Update Nano Firmware",
+      "description": "Please update your devices Firmware to the latest version to access this feature"
     },
     "FirmwareNotRecognized": {
       "title": "无法识别设备固件",
