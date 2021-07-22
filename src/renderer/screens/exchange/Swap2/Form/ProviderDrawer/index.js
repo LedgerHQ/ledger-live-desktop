@@ -2,13 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import Box from "~/renderer/components/Box/Box";
+import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { SwapNoAvailableProviders } from "@ledgerhq/live-common/lib/errors";
 import Changelly from "~/renderer/icons/Changelly";
 import Provider from "./Provider";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const Separator = styled.div`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -50,12 +51,17 @@ type Props = {
 
 export default function ProviderDrawer() {
   const [providers, setProviders] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
   const [selectedProvider, setSelectedProvider] = React.useState(null);
 
   React.useEffect(() => {
-    getProviders().then(providers => {
-      setProviders(_ => (providers instanceof SwapNoAvailableProviders ? [] : providers));
-    });
+    getProviders()
+      .then(providers => {
+        setProviders(_ => (providers instanceof SwapNoAvailableProviders ? [] : providers));
+      })
+      // TODO: handle error(s) properly
+      .catch(_error => setProviders([]))
+      .then(() => setLoading(false));
   }, []);
 
   // Fake data (arbitrary format)
@@ -63,14 +69,31 @@ export default function ProviderDrawer() {
     providers,
   ]);
 
-  return (
-    <div>
+  const titleSection = (
+    <>
       <Box horizontal justifyContent="center">
         <Text fontSize={6} fontWeight="600">
           <Trans i18nKey="swap2.form.providerDrawer.title" />
         </Text>
       </Box>
       <Separator />
+    </>
+  );
+
+  if (loading) {
+    return (
+      <Box height="100%">
+        {titleSection}
+        <Box justifyContent="center" alignItems="center" flex={1}>
+          <BigSpinner size={50} />
+        </Box>
+      </Box>
+    );
+  }
+
+  return (
+    <Box height="100%">
+      {titleSection}
       <Box marginTop={6}>
         <Box
           horizontal
@@ -99,6 +122,6 @@ export default function ProviderDrawer() {
           />
         ))}
       </Box>
-    </div>
+    </Box>
   );
 }
