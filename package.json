@@ -46,7 +46,7 @@
     "@ledgerhq/hw-transport-http": "6.2.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.2.0",
     "@ledgerhq/ledger-core": "6.12.3",
-    "@ledgerhq/live-common": "20.7.0",
+    "@ledgerhq/live-common": "20.8.0",
     "@ledgerhq/logs": "6.2.0",
     "@polkadot/react-identicon": "0.84.1",
     "@tippyjs/react": "^4.2.5",
