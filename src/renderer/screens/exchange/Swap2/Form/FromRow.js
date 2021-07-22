@@ -1,10 +1,12 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
-import Box from "~/renderer/components/Box/Box";
-import Input from "~/renderer/components/Input";
+import { BigNumber } from "bignumber.js";
+import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import Box from "~/renderer/components/Box";
+import InputCurrency from "~/renderer/components/InputCurrency";
 import { SelectAccount } from "~/renderer/components/SelectAccount";
 import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
@@ -16,14 +18,15 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 type Props = {
   fromAccount: ?Account,
   setFromAccount: (?Account) => void,
-  fromAmount: ?number,
-  setFromAmount: number => void,
+  fromAmount: ?BigNumber,
+  setFromAmount: BigNumber => void,
   t: TFunction,
 };
 
 function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: Props) {
   const accounts = useSelector(shallowAccountsSelector);
   const [maxFrom, setMaxFrom] = useState(false);
+  const unit = fromAccount && getAccountUnit(fromAccount);
 
   return (
     <>
@@ -57,14 +60,17 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
           />
         </Box>
         <Box width="50%">
-          <Input
-            type="number"
+          <InputCurrency
             value={fromAmount}
             onChange={setFromAmount}
             disabled={!fromAccount || maxFrom}
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}
+            // $FlowFixMe
+            unit={unit}
+            // Flow complains if this prop is missing…
+            renderRight={null}
           />
         </Box>
       </Box>

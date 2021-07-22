@@ -1,8 +1,9 @@
 // @flow
 import React from "react";
 import { Trans } from "react-i18next";
+import { BigNumber } from "bignumber.js";
 import Box from "~/renderer/components/Box/Box";
-import Input from "~/renderer/components/Input";
+import InputCurrency from "~/renderer/components/InputCurrency";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
@@ -12,13 +13,14 @@ import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types/currencies"
 type Props = {
   toCurrency: ?CryptoCurrency,
   setToCurrency: (?CryptoCurrency) => void,
-  toAmount: ?number,
-  setToAmount: number => void,
+  toAmount: ?BigNumber,
+  setToAmount: BigNumber => void,
 };
 
 export default function ToRow({ toCurrency, setToCurrency, toAmount, setToAmount }: Props) {
   // dummy
   const currencies = listCryptoCurrencies();
+  const unit = toCurrency && toCurrency.units[0];
 
   return (
     <>
@@ -37,14 +39,17 @@ export default function ToRow({ toCurrency, setToCurrency, toAmount, setToAmount
           />
         </Box>
         <Box width="50%">
-          <Input
-            type="number"
+          <InputCurrency
             value={toAmount}
             onChange={setToAmount}
             disabled={!toCurrency}
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}
+            // $FlowFixMe
+            unit={unit}
+            // Flow complains if this prop is missing…
+            renderRight={null}
           />
         </Box>
       </Box>
