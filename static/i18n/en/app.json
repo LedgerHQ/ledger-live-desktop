@@ -196,6 +196,25 @@
     "openButton": "Open",
     "disconnectButton": "Disconnect"
   },
+  "swap2": {
+    "form": {
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      }
+    }
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
