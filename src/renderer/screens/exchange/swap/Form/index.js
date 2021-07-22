@@ -70,8 +70,11 @@ const Form = ({
     fromCurrency: defaultCurrency,
   });
 
+  // $FlowFixMe
   const { fromCurrency, toCurrency, toAccount, toParentAccount } = state;
+  // $FlowFixMe
   const { useAllAmount, exchangeRate, loadingRates, isTimerVisible, ratesExpiration } = state;
+  // $FlowFixMe
   const { error } = state;
 
   const {
@@ -111,6 +114,7 @@ const Form = ({
   const onCompleteSwap = useCallback(() => setTabIndex(1), [setTabIndex]);
   const onStartSwap = useCallback(() => {
     dispatch({ type: "setTimerVisibility", payload: { isTimerVisible: false } });
+    // $FlowFixMe
     const { toAccount, toParentAccount, exchangeRate, ratesExpiration } = state;
     reduxDispatch(
       openModal("MODAL_SWAP", {
