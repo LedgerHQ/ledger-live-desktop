@@ -2345,7 +2345,7 @@
       "languageDesc": "Állítsd be a Ledger Live-ban megjeleníteni kívánt nyelvet.",
       "theme": "Téma",
       "themeDesc": "Téma kiválasztása.",
-      "counterValue": "Ellenérték",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "Válaszd ki az egyenleged, és a műveleteid mellett megjelenő valutát.",
       "region": "Régió",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
