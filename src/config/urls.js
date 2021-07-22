@@ -157,6 +157,7 @@ export const urls = {
         main: "https://support.sendwyre.com/hc/en-us/requests/new",
         tos: "https://www.sendwyre.com/user-agreement/",
         support: "https://support.sendwyre.com/hc/en-us/requests/new",
+        kyc: "https://support.ledger.com/hc/en-us/articles/4404422869265",
       },
     },
   },

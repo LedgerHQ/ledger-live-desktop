@@ -15,6 +15,8 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import useInterval from "~/renderer/hooks/useInterval";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import IconCross from "~/renderer/icons/Cross";
@@ -76,7 +78,7 @@ const Pending = ({ status = "pending" }: { status?: string }) => {
   }, 10000);
 
   const onLearnMore = useCallback(() => {
-    // openURL(urls);
+    openURL(urls.swap.providers.wyre.kyc);
   }, []);
 
   const onResetKYC = useCallback(() => {
