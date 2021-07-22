@@ -116,6 +116,7 @@ type DrawerProps = {
   onRequestBack?: (*) => void,
   direction?: "right" | "left",
   paper?: boolean,
+  title?: string,
 };
 
 export function SideDrawer({
@@ -124,6 +125,7 @@ export function SideDrawer({
   onRequestClose,
   onRequestBack,
   direction = "right",
+  title,
   ...props
 }: DrawerProps) {
   const [isMounted, setMounted] = useState(false);
@@ -201,7 +203,7 @@ export function SideDrawer({
       {state => (
         <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
           <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
-            {onRequestClose || onRequestBack ? (
+            {onRequestClose || onRequestBack || title ? (
               <Box
                 horizontal
                 justifyContent="space-between"
@@ -211,19 +213,29 @@ export function SideDrawer({
                 p="24px"
                 style={{ zIndex: 200 }}
               >
-                {onRequestBack && (
+                {onRequestBack ? (
                   <Button onClick={onRequestBack} className="sidedrawer-close">
                     <IconAngleLeft size={12} />
                     <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
                       <Trans i18nKey="common.back" />
                     </Text>
                   </Button>
+                ) : (
+                  <Box />
                 )}
-                <Box flex="1" />
-                {onRequestClose && (
+
+                {title && (
+                  <Text ff="Inter|SemiBold" fontWeight="600" fontSize="18px">
+                    {title}
+                  </Text>
+                )}
+
+                {onRequestClose ? (
                   <TouchButton onClick={onRequestClose} className="sidedrawer-close">
                     <IconCross size={16} />
                   </TouchButton>
+                ) : (
+                  <Box />
                 )}
               </Box>
             ) : null}
