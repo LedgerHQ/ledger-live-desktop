@@ -36,53 +36,56 @@ type Props = {
   initialCountervalues: *,
 };
 
-const extraManifests = [  {
-  id: "lido",
-  name: "Lido",
-  url:
-    "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=Lido&nanoApp=Lido&url=https%3A%2F%2Fledger-hq-test.vercel.app%2F%3Fembed%3Dtrue%26ref%3D0x3d945da47eaef43c4257dded7431f637807a6a38",
-  homepageUrl: "https://lido.fi/",
-  icon: "https://cdn.live.ledger.com/icons/platform/lido.png",
-  platform: "all",
-  apiVersion: "0.0.1",
-  manifestVersion: "1",
-  branch: "stable",
-  categories: ["staking", "defi"],
-  currencies: ["ethereum"],
-  content: {
-    shortDescription: {
-      en: "Stake any amount of Eth to Eth2 and earn daily staking rewards.",
+const extraManifests = [
+  {
+    id: "lido",
+    name: "Lido",
+    url:
+      "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=Lido&nanoApp=Lido&url=https%3A%2F%2Fledger-hq-test.vercel.app%2F%3Fembed%3Dtrue%26ref%3D0x558247e365be655f9144e1a0140D793984372Ef3",
+    homepageUrl: "https://lido.fi/",
+    icon: "https://cdn.live.ledger.com/icons/platform/lido.png",
+    platform: "all",
+    apiVersion: "0.0.1",
+    manifestVersion: "1",
+    branch: "stable",
+    categories: ["staking", "defi"],
+    currencies: ["ethereum"],
+    content: {
+      shortDescription: {
+        en: "Stake your ETH with Lido to earn daily staking rewards.",
+      },
+      description: {
+        en: "Stake your ETH with Lido to earn daily staking rewards.",
+      },
     },
-    description: {
-      en: "Stake any amount of Eth to Eth2 and earn daily staking rewards.",
-    },
+    permissions: [],
+    domains: ["https://*"],
   },
-  permissions: [],
-  domains: ["https://*"],
-}, {
-  id: "1inch",
-  name: "1Inch",
-  url: "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=1Inch&nanoApp=1Inch&url=https%3A%2F%2Fapp.1inch.io%2F%3FledgerLive%3Dtrue",
-  homepageUrl: "https://1inch.io/",
-  icon: "https://cdn.live.ledger.com/icons/platform/1inch.png",
-  platform: "all",
-  apiVersion: "0.0.1",
-  manifestVersion: "1",
-  branch: "stable",
-  categories: ["swap", "defi"],
-  currencies: ["ethereum"],
-  content: {
-    shortDescription: {
-      en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+  {
+    id: "1inch",
+    name: "1Inch",
+    url:
+      "https://ledger-live-platform-apps.vercel.app/app/dapp-browser?dappName=1Inch&nanoApp=1Inch&url=https%3A%2F%2Fapp.1inch.io%2F%3FledgerLive%3Dtrue",
+    homepageUrl: "https://1inch.io/",
+    icon: "https://cdn.live.ledger.com/icons/platform/1inch.png",
+    platform: "all",
+    apiVersion: "0.0.1",
+    manifestVersion: "1",
+    branch: "stable",
+    categories: ["swap", "defi"],
+    currencies: ["ethereum"],
+    content: {
+      shortDescription: {
+        en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+      },
+      description: {
+        en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+      },
     },
-    description: {
-      en: "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-    },
+    permissions: [],
+    domains: ["https://*"],
   },
-  permissions: [],
-  domains: ["https://*"],
-}]
-
+];
 
 const App = ({ store, initialCountervalues }: Props) => {
   const [reloadEnabled, setReloadEnabled] = useState(true);
