@@ -22,7 +22,7 @@ export default function ToRow({ toCurrency, setToCurrency, toAmount, setToAmount
 
   return (
     <>
-      <Box horizontal marginBottom="8px" color={"palette.text.shade40"} fontSize={3}>
+      <Box horizontal mb="8px" color={"palette.text.shade40"} fontSize={3}>
         <FormLabel>
           <Trans i18nKey="swap.form.to.title" />
         </FormLabel>

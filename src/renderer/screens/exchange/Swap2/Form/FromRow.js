@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
@@ -23,7 +23,7 @@ type Props = {
 
 function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: Props) {
   const accounts = useSelector(shallowAccountsSelector);
-  const [maxFrom, setMaxFrom] = React.useState(false);
+  const [maxFrom, setMaxFrom] = useState(false);
 
   return (
     <>
@@ -32,7 +32,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         justifyContent="space-between"
         alignItems="flex-end"
         fontSize={3}
-        marginBottom="9px"
+        mb={2}
         color={"palette.text.shade40"}
       >
         <FormLabel>
@@ -45,7 +45,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
           <Switch medium isChecked={maxFrom} onChange={_ => setMaxFrom(value => !value)} />
         </Box>
       </Box>
-      <Box horizontal marginBottom="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
+      <Box horizontal mb="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
         <Box width="50%">
           <SelectAccount
             accounts={accounts}

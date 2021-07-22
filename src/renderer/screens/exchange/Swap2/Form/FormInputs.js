@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState } from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
@@ -21,10 +21,10 @@ function SwapButton() {
 }
 
 export default function FormInputs() {
-  const [fromAccount, setFromAccount] = React.useState(null);
-  const [fromAmount, setFromAmount] = React.useState(null);
-  const [toCurrency, setToCurrency] = React.useState(null);
-  const [toAmount, setToAmount] = React.useState(null);
+  const [fromAccount, setFromAccount] = useState(null);
+  const [fromAmount, setFromAmount] = useState(null);
+  const [toCurrency, setToCurrency] = useState(null);
+  const [toAmount, setToAmount] = useState(null);
 
   return (
     <>
