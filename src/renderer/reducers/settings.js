@@ -108,6 +108,12 @@ export type SettingsState = {
   swapProviders?: AvailableProvider[],
   showClearCacheBanner: boolean,
   fullNodeEnabled: boolean,
+
+  // developer settings
+  allowDebugApps: boolean,
+  allowExperimentalApps: boolean,
+  enablePlatformDevTools: boolean,
+  catalogProvider: string,
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -153,6 +159,12 @@ const INITIAL_STATE: SettingsState = {
   swapProviders: [],
   showClearCacheBanner: false,
   fullNodeEnabled: false,
+
+  // developer settings
+  allowDebugApps: false,
+  allowExperimentalApps: false,
+  enablePlatformDevTools: false,
+  catalogProvider: "production",
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -372,6 +384,13 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+
+export const allowDebugAppsSelector = (state: State) => state.settings.allowDebugApps;
+export const allowExperimentalAppsSelector = (state: State) => state.settings.allowExperimentalApps;
+export const enablePlatformDevToolsSelector = (state: State) =>
+  state.settings.enablePlatformDevTools;
+export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
+
 export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const swapAcceptedProviderIdsSelector = (state: State) =>

@@ -4,9 +4,13 @@ import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import {
+  allowDebugAppsSelector,
+  allowExperimentalAppsSelector,
+} from "~/renderer/reducers/settings";
 
-import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { useCatalog } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -23,6 +27,7 @@ import AppCard from "~/renderer/components/Platform/AppCard";
 import CatalogCTA from "./CatalogCTA";
 import CatalogBanner from "./CatalogBanner";
 import TwitterBanner from "./TwitterBanner";
+import { useSelector } from "react-redux";
 
 const Grid = styled.div`
   display: grid;
@@ -61,19 +66,28 @@ const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.t
 
 const PlatformCatalog = () => {
   const history = useHistory();
-  const appBranches = useMemo(() => {
-    const branches = ["stable", "soon", "experimental"];
 
-    // TODO: add experimental setting
+  const { manifests } = usePlatformApp();
+  const allowDebugApps = useSelector(allowDebugAppsSelector);
+  const allowExperimentalApps = useSelector(allowExperimentalAppsSelector);
 
-    if (getEnv("PLATFORM_DEBUG")) {
+  const filteredManifests = useMemo(() => {
+    const branches = ["stable", "soon"];
+
+    if (allowDebugApps) {
       branches.push("debug");
     }
 
-    return branches;
-  }, []);
+    if (allowExperimentalApps) {
+      branches.push("experimental");
+    }
 
-  const { apps } = useCatalog("desktop", appBranches);
+    return filterPlatformApps(manifests, {
+      version: "0.0.1",
+      platform: "desktop",
+      branches,
+    });
+  }, [allowDebugApps]);
 
   const { t } = useTranslation();
 
@@ -96,8 +110,8 @@ const PlatformCatalog = () => {
       </Header>
       <CatalogBanner />
       <TwitterBanner />
-      <Grid length={apps.length}>
-        {apps.map(manifest => (
+      <Grid length={filteredManifests.length}>
+        {filteredManifests.map(manifest => (
           <GridItem key={manifest.id}>
             <AppCard
               id={`platform-catalog-app-${manifest.id}`}

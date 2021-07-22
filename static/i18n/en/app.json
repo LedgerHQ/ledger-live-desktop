@@ -103,7 +103,8 @@
       "outdated": "Paused",
       "needsMigration": "Click to update account",
       "error": "Synchronization error",
-      "refresh": "Refresh"
+      "refresh": "Refresh",
+      "devTools": "Dev tools"
     },
     "exchange": "Exchange",
     "info": "Info"
@@ -2218,7 +2219,8 @@
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "accounts": "Accounts",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2252,6 +2254,16 @@
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+    },
+    "developer": {
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window"
     },
     "currencies": {
       "desc": "Select a crypto asset to edit its settings.",

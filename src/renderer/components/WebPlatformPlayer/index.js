@@ -78,9 +78,10 @@ const Loader: ThemedComponent<{}> = styled.div`
 type Props = {
   manifest: AppManifest,
   onClose?: Function,
+  inputs?: Object,
 };
 
-const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
+const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
   const theme = useTheme("colors.palette");
 
   const targetRef: { current: null | WebviewTag } = useRef(null);
@@ -94,6 +95,14 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const url = useMemo(() => {
     const urlObj = new URL(manifest.url.toString());
+
+    if (inputs) {
+      for (const key in inputs) {
+        if (inputs.hasOwnProperty(key)) {
+          urlObj.searchParams.set(key, inputs[key]);
+        }
+      }
+    }
 
     urlObj.searchParams.set("backgroundColor", theme.background.paper);
     urlObj.searchParams.set("textColor", theme.text.shade100);
@@ -351,9 +360,22 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
     };
   }, [handleLoad]);
 
+  const handleOpenDevTools = useCallback(() => {
+    const webview = targetRef.current;
+
+    if (webview) {
+      webview.openDevTools();
+    }
+  });
+
   return (
     <Container>
-      <TopBar manifest={manifest} onReload={handleReload} onClose={onClose} />
+      <TopBar
+        manifest={manifest}
+        onReload={handleReload}
+        onClose={onClose}
+        onOpenDevTools={handleOpenDevTools}
+      />
       <Wrapper>
         <CustomWebview
           src={url.toString()}

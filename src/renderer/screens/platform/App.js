@@ -1,7 +1,8 @@
 // @flow
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { useAppManifest } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import useTheme from "~/renderer/hooks/useTheme";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
@@ -21,9 +22,11 @@ type Props = {
 export default function PlatformApp({ match }: Props) {
   const history = useHistory();
   const { appId } = match.params;
-  const manifest = useAppManifest(appId);
+  const { manifestById } = usePlatformApp();
+  const manifest = manifestById[appId];
 
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
+  const themeType = useTheme("colors.palette.type");
 
   // TODO for next urlscheme evolutions:
   // - check if local settings allow to launch an app from this branch, else display an error
@@ -32,7 +35,15 @@ export default function PlatformApp({ match }: Props) {
   return (
     <Card grow style={{ overflow: "hidden" }}>
       <TrackPage category="Platform" name="App" appId={appId} />
-      {manifest ? <WebPlatformPlayer manifest={manifest} onClose={handleClose} /> : null}
+      {manifest ? (
+        <WebPlatformPlayer
+          manifest={manifest}
+          onClose={handleClose}
+          inputs={{
+            theme: themeType,
+          }}
+        />
+      ) : null}
     </Card>
   );
 }

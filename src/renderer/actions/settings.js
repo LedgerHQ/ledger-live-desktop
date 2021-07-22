@@ -43,6 +43,14 @@ export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLoc
 export const setHasInstalledApps = (hasInstalledApps: boolean) =>
   saveSettings({ hasInstalledApps });
 
+// developer
+export const setAllowDebugApps = (allowDebugApps: boolean) => saveSettings({ allowDebugApps });
+export const setAllowExperimentalApps = (allowExperimentalApps: boolean) =>
+  saveSettings({ allowExperimentalApps });
+export const setEnablePlatformDevTools = (enablePlatformDevTools: boolean) =>
+  saveSettings({ enablePlatformDevTools });
+export const setCatalogProvider = (catalogProvider: string) => saveSettings({ catalogProvider });
+
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
