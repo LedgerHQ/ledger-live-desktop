@@ -196,6 +196,17 @@
     "openButton": "Open",
     "disconnectButton": "Disconnect"
   },
+  "swap2": {
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      }
+    }
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Swap {{currency}}",
