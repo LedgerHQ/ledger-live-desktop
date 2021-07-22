@@ -2345,7 +2345,7 @@
       "languageDesc": "Configura el idioma de Ledger Live.",
       "theme": "Tema",
       "themeDesc": "Selecciona el tema.",
-      "counterValue": "Contraparte",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
       "region": "Región",
       "regionDesc": "Elige tu región para establecer la zona horaria de Ledger Live.",
