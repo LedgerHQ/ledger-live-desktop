@@ -17,6 +17,12 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Website"
+      }
+    },
     "catalog": {
       "title": "Discover",
       "branch": {
@@ -2255,6 +2261,7 @@
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",

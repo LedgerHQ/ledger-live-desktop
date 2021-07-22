@@ -17,6 +17,12 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Website"
+      }
+    },
     "catalog": {
       "title": "发现",
       "branch": {
@@ -2255,6 +2261,7 @@
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "选择一种加密资产以编辑其设置。",
       "placeholder": "没有此资产的设置",
       "confirmationsNb": "确认数量",
