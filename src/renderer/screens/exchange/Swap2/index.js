@@ -2,9 +2,11 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { Card } from "~/renderer/components/Box";
+import Box, { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { SwapFormSummary } from "./Form";
+import FormInputs from "./Form/FormInputs";
+import { FORM_CONTAINER_WIDTH } from "./Form/utils";
 
 // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
 const mockData = {
@@ -29,7 +31,10 @@ const Swap2 = () => {
         </Text>
       </Card>
       {/* SWAP MOCK - PLEASE REMOVE ME ASA CONTAINER IS INTEGRATED */}
-      <Card p={20} style={{ maxWidth: "440px" }}>
+      <Card p={20} style={{ maxWidth: FORM_CONTAINER_WIDTH }}>
+        <Box mb={6}>
+          <FormInputs />
+        </Box>
         <SwapFormSummary {...mockData} />
       </Card>
     </>

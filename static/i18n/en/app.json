@@ -212,6 +212,10 @@
         },
         "noAccount": "You don't have {{target}} account",
         "noAccountCTA": "Add account"
+      },
+      "from": {
+        "max": "Max",
+        "accountPlaceholder": "Select source"
       }
     }
   },
@@ -261,7 +265,11 @@
         ]
       },
       "changelly": {
-        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
       },
       "paraswap": {
         "bullets": [
@@ -315,7 +323,6 @@
           "country": "Country",
           "postalCode": "Zip Code",
           "dateOfBirth": "Date of birth",
-
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
           "street1Placeholder": "Eg. 13, Maple street",
@@ -323,7 +330,6 @@
           "cityPlaceholder": "Eg. San José",
           "postalCodePlaceholder": "Enter your 5 digit Zip code",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
-
           "firstNameError": "Enter your first name to continue",
           "lastNameError": "Enter your last name to continue",
           "street1Error": "Enter your address",
