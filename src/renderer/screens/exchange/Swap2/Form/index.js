@@ -20,11 +20,8 @@ const summaryMockedData = {
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
-  borderRadius: 8,
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.04)",
 })`
   row-gap: 1.75rem;
-  border: 1px solid ${p => p.theme.colors.palette.action.active};
 `;
 
 const Button = styled(ButtonBase)`

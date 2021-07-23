@@ -13,8 +13,10 @@ const Main = styled.main`
 
   padding: 2rem 0;
   background-color: ${p => p.theme.colors.palette.background.paper};
-  border-bottom-right-radius: 8px;
-  border-bottom-left-radius: 8px;
+
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(20, 37, 51, 0.04);
 
   & > * {
     // Automatically move every children in the middle column
