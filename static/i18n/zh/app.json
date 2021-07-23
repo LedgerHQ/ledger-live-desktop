@@ -2345,7 +2345,7 @@
       "languageDesc": "设置 Ledger Live 中显示的语言。",
       "theme": "主题",
       "themeDesc": "选择主题。",
-      "counterValue": "对价",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
       "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",

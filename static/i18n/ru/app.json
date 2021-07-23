@@ -2345,7 +2345,7 @@
       "languageDesc": "Выберите язык интерфейса в Ledger Live.",
       "theme": "Тема оформления",
       "themeDesc": "Выберите тему.",
-      "counterValue": "Эквивалент",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
       "region": "Регион",
       "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
