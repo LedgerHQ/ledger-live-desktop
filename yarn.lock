@@ -2063,10 +2063,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^20.8.0-typescript.6":
-  version "20.8.0-typescript.6"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-20.8.0-typescript.6.tgz#2d1d018c88adb0317e45ef31993caf39d8d7dca8"
-  integrity sha512-R10wv388wqomgP2PzwxPYu9MvvqwoxaCx1eU5omUIl9dAto3CY7DzOUufayDm4V1bTWx+FKh9QQzHMbuf3/abg==
+"@ledgerhq/live-common@^20.10.0-typescript.0":
+  version "20.10.0-typescript.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-20.10.0-typescript.0.tgz#6ad0723f4613d488397ae0645f2cdfd9214bf3e8"
+  integrity sha512-Ez/Xmvu0zYFfJGkin8BnwKMvsPoxHdWZ+T9mAKUOn53yxV1YUwCekY78HivhxM4EEfqxLKER59QXoUAuDpqJEw==
   dependencies:
     "@crypto-com/chain-jslib" "^0.0.16"
     "@ledgerhq/compressjs" "1.3.2"
