@@ -1,23 +1,10 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import { SwapFormSummary } from "./Form";
-import FormInputs from "./Form/FormInputs";
+import SwapForm from "./Form";
 import styled from "styled-components";
-import ButtonBase from "~/renderer/components/Button";
-
-// SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-const mockData = {
-  fees: "0.000034 ETH",
-  rate: "1 ETH = 0,06265846 BTC",
-  provider: "Changelly",
-  onProviderChange: () => {},
-  onFeesChange: () => {},
-  onTargetChange: () => {},
-};
 
 const Main = styled.main`
   display: grid;
@@ -50,26 +37,8 @@ const Subtitle = styled(Text).attrs({
   color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
-const Body = styled(Box).attrs({
-  p: 20,
-  borderRadius: 8,
-  boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.04)",
-})`
-  row-gap: 1.75rem;
-  border: 1px solid ${p => p.theme.colors.palette.action.active};
-`;
-
-const Button = styled(ButtonBase)`
-  justify-content: center;
-`;
-
 const Swap2 = () => {
-  // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-  const [isCTADisabled] = useState(false);
   const { t } = useTranslation();
-
-  // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-  const onSubmit = () => {};
 
   return (
     <>
@@ -81,13 +50,7 @@ const Swap2 = () => {
         <Header>
           <Subtitle>{t("swap2.subtitle")}</Subtitle>
         </Header>
-        <Body>
-          <FormInputs />
-          <SwapFormSummary {...mockData} />
-          <Button primary disabled={isCTADisabled} onClick={onSubmit}>
-            {t("common.exchange")}
-          </Button>
-        </Body>
+        <SwapForm />
       </Main>
     </>
   );
