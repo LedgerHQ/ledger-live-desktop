@@ -6,7 +6,6 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { SwapFormSummary } from "./Form";
 import FormInputs from "./Form/FormInputs";
-import { FORM_CONTAINER_WIDTH } from "./Form/utils";
 import styled from "styled-components";
 import ButtonBase from "~/renderer/components/Button";
 
@@ -83,9 +82,7 @@ const Swap2 = () => {
           <Subtitle>{t("swap2.subtitle")}</Subtitle>
         </Header>
         <Body>
-          <Box mb={6}>
-            <FormInputs />
-          </Box>
+          <FormInputs />
           <SwapFormSummary {...mockData} />
           <Button primary disabled={isCTADisabled} onClick={onSubmit}>
             {t("common.exchange")}

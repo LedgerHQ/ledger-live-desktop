@@ -27,7 +27,7 @@ export default function FormInputs() {
   const [toAmount, setToAmount] = useState(null);
 
   return (
-    <>
+    <section>
       <FromRow
         fromAccount={fromAccount}
         setFromAccount={setFromAccount}
@@ -45,6 +45,6 @@ export default function FormInputs() {
         toAmount={toAmount}
         setToAmount={setToAmount}
       />
-    </>
+    </section>
   );
 }

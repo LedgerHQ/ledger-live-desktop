@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
