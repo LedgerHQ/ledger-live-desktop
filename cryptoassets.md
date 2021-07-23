@@ -4,6 +4,7 @@
 | name | ticker | supported on Ledger Live? | ledger id |
 |--|--|--|--|
 | Algorand | ALGO | YES | algorand |
+| Binance Smart Chain | BNB | YES | bsc |
 | Bitcoin | BTC | YES | bitcoin |
 | Bitcoin Cash | BCH | YES | bitcoin_cash |
 | Bitcoin Gold | BTG | YES | bitcoin_gold |
