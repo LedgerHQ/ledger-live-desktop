@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
@@ -50,11 +50,11 @@ type Props = {
 */
 
 export default function ProviderDrawer() {
-  const [providers, setProviders] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [selectedProvider, setSelectedProvider] = React.useState(null);
+  const [providers, setProviders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedProvider, setSelectedProvider] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getProviders()
       .then(providers => {
         setProviders(_ => (providers instanceof SwapNoAvailableProviders ? [] : providers));
@@ -65,7 +65,7 @@ export default function ProviderDrawer() {
   }, []);
 
   // Fake data (arbitrary format)
-  const dummyProviders: Array<FakeProvider> = React.useMemo(() => providers.map(makeFakeProvider), [
+  const dummyProviders: Array<FakeProvider> = useMemo(() => providers.map(makeFakeProvider), [
     providers,
   ]);
 
@@ -94,14 +94,14 @@ export default function ProviderDrawer() {
   return (
     <Box height="100%">
       {titleSection}
-      <Box marginTop={6}>
+      <Box mt={6}>
         <Box
           horizontal
           justifyContent="space-between"
           fontWeight="500"
           fontSize={3}
           color="palette.text.shade40"
-          paddingX={6}
+          px={6}
         >
           <Text>
             <Trans i18nKey="swap2.form.providerDrawer.quote" />
@@ -111,7 +111,7 @@ export default function ProviderDrawer() {
           </Text>
         </Box>
       </Box>
-      <Box marginTop={3}>
+      <Box mt={3}>
         {dummyProviders.map((provider, index) => (
           <Provider
             // TODO: replace index with a proper id when we have the real provider format

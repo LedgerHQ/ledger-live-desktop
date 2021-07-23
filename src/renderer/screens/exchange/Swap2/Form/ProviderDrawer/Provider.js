@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
@@ -46,17 +46,17 @@ export type Props = {
 };
 
 function Provider({ provider, selected, onSelect }: Props) {
-  const handleSelection = React.useCallback(() => onSelect(provider), [provider, onSelect]);
+  const handleSelection = useCallback(() => onSelect(provider), [provider, onSelect]);
 
   return (
-    <ProviderContainer padding={3} marginBottom={3} selected={selected} onClick={handleSelection}>
-      <Box marginRight="12px">
+    <ProviderContainer p={3} mb={3} selected={selected} onClick={handleSelection}>
+      <Box mr={2}>
         <provider.iconComponent size={28} />
       </Box>
       <Box flex={1}>
         <Box horizontal justifyContent="space-between" color="palette.text" fontWeight="600">
           <Box horizontal alignItems="center">
-            <Text capitalize fontSize="14px">
+            <Text capitalize fontSize={4}>
               {provider.provider}
             </Text>
             <ChainTag>
@@ -67,7 +67,7 @@ function Provider({ provider, selected, onSelect }: Props) {
               )}
             </ChainTag>
           </Box>
-          <Text fontSize="18px">
+          <Text fontSize={6}>
             {provider.amount} {provider.fromUnit}
           </Text>
         </Box>
@@ -75,12 +75,12 @@ function Provider({ provider, selected, onSelect }: Props) {
           horizontal
           justifyContent="space-between"
           color="palette.text.shade50"
-          fontSize="12px"
+          fontSize={3}
           fontWeight="500"
         >
           <Box horizontal>
             {provider.tradeMethod === "fixed" && (
-              <Box marginRight={1}>
+              <Box mr={1}>
                 <Lock size={16} />
               </Box>
             )}
