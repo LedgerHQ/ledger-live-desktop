@@ -2345,7 +2345,7 @@
       "languageDesc": "قم بتعيين اللغة المستخدمة في ليدجر لايف (Ledger Live).",
       "theme": "السمة",
       "themeDesc": "اختار السمة.",
-      "counterValue": "القيمة المقابلة",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
       "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
