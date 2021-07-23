@@ -54,12 +54,16 @@ const Row: ThemedComponent<{}> = styled(Box)`
   }
 `;
 
-const RowContent: ThemedComponent<{ disabled?: boolean }> = styled.div`
+const RowContent: ThemedComponent<{
+  disabled?: boolean,
+  isSubAccountsExpanded: boolean,
+}> = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -70,7 +74,6 @@ const TokenContent = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-top: 20px;
 `;
 
 const TokenContentWrapper = styled.div`
@@ -84,7 +87,8 @@ const TokenBarIndicator: ThemedComponent<{}> = styled.div`
   margin-left: 9px;
   position: absolute;
   left: 0;
-  height: 100%;
+  margin-top: -20px;
+  height: calc(100% + 20px);
   &:hover {
     border-color: ${p => p.theme.colors.palette.text.shade60};
   }
@@ -250,12 +254,13 @@ class AccountRowItem extends PureComponent<Props, State> {
         hidden={hidden}
       >
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
-        <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
-          <AccountContextMenu account={account}>
+        <AccountContextMenu account={account}>
+          <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
             <RowContent
               disabled={disabled}
-              onClick={this.onClick}
               className="accounts-account-row-item-content"
+              isSubAccountsExpanded={showTokensIndicator && expanded}
+              onClick={this.onClick}
             >
               <Header account={account} name={mainAccount.name} />
               <Box flex="12%">
@@ -271,49 +276,53 @@ class AccountRowItem extends PureComponent<Props, State> {
                 parentId={account.type !== "Account" ? account.parentId : undefined}
               />
             </RowContent>
-          </AccountContextMenu>
-          {showTokensIndicator && expanded ? (
-            <TokenContentWrapper>
-              <TokenBarIndicator onClick={this.toggleAccordion} />
-              <TokenContent>
-                {tokens &&
-                  tokens.map((token, index) => (
-                    <AccountContextMenu key={token.id} account={token} parentAccount={mainAccount}>
-                      <TokenRow
-                        nested
-                        index={index}
-                        range={range}
+            {showTokensIndicator && expanded ? (
+              <TokenContentWrapper>
+                <TokenBarIndicator onClick={this.toggleAccordion} />
+                <TokenContent>
+                  {tokens &&
+                    tokens.map((token, index) => (
+                      <AccountContextMenu
+                        key={token.id}
                         account={token}
-                        // $FlowFixMe
                         parentAccount={mainAccount}
-                        onClick={onClick}
-                      />
-                    </AccountContextMenu>
-                  ))}
-              </TokenContent>
-            </TokenContentWrapper>
-          ) : null}
-          {showTokensIndicator && !disabled && tokens && (
-            <TokenShowMoreIndicator
-              expanded={expanded}
-              event="Account view tokens expand"
-              eventProperties={{ currencyName: currency.name }}
-              onClick={this.toggleAccordion}
-            >
-              <Box horizontal alignContent="center" justifyContent="center">
-                <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
-                  <Trans
-                    i18nKey={translationMap[expanded ? "hide" : "see"]}
-                    values={{ tokenCount: tokens.length }}
-                  />
-                </Text>
-                <IconAngleDown expanded={expanded}>
-                  <AngleDown size={16} />
-                </IconAngleDown>
-              </Box>
-            </TokenShowMoreIndicator>
-          )}
-        </Row>
+                      >
+                        <TokenRow
+                          nested
+                          index={index}
+                          range={range}
+                          account={token}
+                          // $FlowFixMe
+                          parentAccount={mainAccount}
+                          onClick={onClick}
+                        />
+                      </AccountContextMenu>
+                    ))}
+                </TokenContent>
+              </TokenContentWrapper>
+            ) : null}
+            {showTokensIndicator && !disabled && tokens && (
+              <TokenShowMoreIndicator
+                expanded={expanded}
+                event="Account view tokens expand"
+                eventProperties={{ currencyName: currency.name }}
+                onClick={this.toggleAccordion}
+              >
+                <Box horizontal alignContent="center" justifyContent="center">
+                  <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+                    <Trans
+                      i18nKey={translationMap[expanded ? "hide" : "see"]}
+                      values={{ tokenCount: tokens.length }}
+                    />
+                  </Text>
+                  <IconAngleDown expanded={expanded}>
+                    <AngleDown size={16} />
+                  </IconAngleDown>
+                </Box>
+              </TokenShowMoreIndicator>
+            )}
+          </Row>
+        </AccountContextMenu>
       </div>
     );
   }

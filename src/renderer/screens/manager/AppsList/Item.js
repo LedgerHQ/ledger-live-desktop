@@ -95,7 +95,7 @@ const Item: React$ComponentType<Props> = ({
       <Box flex="0.7" horizontal>
         <AppIcon app={app} />
         <AppName>
-          <Text ff="Inter|Bold" color="palette.text.shade100" fontSize={3}>{`${app.name}${
+          <Text ff="Inter|Bold" color="palette.text.shade100" fontSize={3}>{`${app.displayName}${
             currency ? ` (${currency.ticker})` : ""
           }`}</Text>
           <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>

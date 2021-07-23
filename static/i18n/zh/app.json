@@ -17,8 +17,14 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Website"
+      }
+    },
     "catalog": {
-      "title": "Discover",
+      "title": "发现",
       "branch": {
         "soon": "敬请期待",
         "experimental": "实验性的",
@@ -29,8 +35,8 @@
         "description": "我们正努力使您能够访问 DeFi, NFT 以及更广的世界，就在 Ledger Live! 里面，安全地，进行访问。"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "告诉我们下一个您想要在 Ledger Live 上看到的带有哈希标签的服务",
+        "tweetText": "下一个 Ledger 应用应该是..."
       },
       "pollCTA": {
         "title": "调查",
@@ -177,7 +183,7 @@
     "accounts": "账户",
     "manager": "Manager（管理器）",
     "exchange": "买入 / 卖出",
-    "swap": "Swap (掉期)",
+    "swap": "Swap 掉期交易",
     "lend": "借出",
     "catalog": "发现"
   },
@@ -197,7 +203,7 @@
     "disconnectButton": "断开连接"
   },
   "swap": {
-    "title": "Swap (掉期)",
+    "title": "Swap 掉期交易",
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "什么是 Swap？",
     "paraswap": {
@@ -230,12 +236,96 @@
       "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
       "cta": "前往 Manager（管理器）"
     },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      },
+      "cta": "Continue",
+      "kyc": {
+        "notAvailable": "{{provider}} is unavailable in your location",
+        "status": {
+          "required": "KYC Required",
+          "pending": "KYC Pending",
+          "approved": "KYC Approved!",
+          "closed": "KYC Rejected"
+        }
+      }
+    },
+    "ip": {
+      "title": "Welcome to Swap",
+      "subtitle": "Exchange crypto assets directly from your Ledger device.",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+    },
     "kyc": {
-      "title": "欢迎使用 Swap",
-      "subtitle": "直接通过您的 Ledger 设备兑换加密资产。此服务在美国和其他一些国家不可用。",
-      "disclaimer": "继续即表示您同意您的位置数据将共享给第三方服务提供商，以使它们遵守其 AML/KYC 程序。"
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "pending": {
+          "cta": "Continue",
+          "title": "Pending approval",
+          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "link": "Learn more about KYC"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
     },
     "form": {
+      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
+      "resetKYCCTA": "Reset KYC",
       "amount": "数额",
       "from": {
         "title": "来自",
@@ -267,6 +357,16 @@
       "noApp": "未安装 {{currencyName}} 应用程序。",
       "outdatedApp": "{{currencyName}} 应用有可用的更新",
       "loadingRates": "正在加载费率..."
+    },
+    "unauthorizedRatesModal": {
+      "title": "Ledger Live needs an update",
+      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "cta": "Reset verification"
+    },
+    "resetKYCModal": {
+      "title": "Delete your KYC",
+      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
+      "cta": "Confirm"
     },
     "modal": {
       "title": "Swap",
@@ -852,8 +952,8 @@
       "cta": "购买备份包"
     },
     "polkaStake": {
-      "title": "POLKADOT 权益质押",
-      "description": "您现在可以在 Ledger Live 直接对您的 DOT 进行权益质押、安保和管理"
+      "title": "POLKADOT staking（权益质押）",
+      "description": "您现在可以在 Ledger Live 上直接对您的 DOT 进行权益质押、安保和管理"
     },
     "sell": {
       "title": "卖出加密货币",
@@ -1274,7 +1374,7 @@
       },
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "请确认您设备上的标识符和下方的标识符一致。如果需要，请确认并输入您的 PIN 识别密码。",
-      "identifier": "标识符",
+      "identifier": "标识符（identifier）",
       "mcuTitle": "完成更新",
       "mcuFirst": "从您的设备上断开 USB 数据线连接",
       "mcuSecond": "按下左键，长按住的同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
@@ -1872,6 +1972,7 @@
     "unlockedBalance": "已解绑",
     "unlockedTooltip": "现在可使用提取操作转移已解绑的资产。",
     "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
+    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
     "nomination": {
       "emptyState": {
         "description": "您可以通过绑定资产并随后提名您的（某个或多个）验证器来赚取奖励。",
@@ -2244,7 +2345,7 @@
       "languageDesc": "设置 Ledger Live 中显示的语言。",
       "theme": "主题",
       "themeDesc": "选择主题。",
-      "counterValue": "对价",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
       "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
@@ -2254,6 +2355,7 @@
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "选择一种加密资产以编辑其设置。",
       "placeholder": "没有此资产的设置",
       "confirmationsNb": "确认数量",
@@ -2268,6 +2370,8 @@
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
       "softReset": "清除",
+      "resetKYC": "Reset KYC data",
+      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
       "hardResetTitle": "重置 Ledger Live",
       "hardResetDesc": "清除您电脑上存储的所有 Ledger Live 数据，包括您的账户信息、交易历史记录和设置选项。",
       "hardReset": "重置",
@@ -2415,8 +2519,8 @@
   "theme": {
     "system": "选择系统主题",
     "light": "亮色",
-    "dusk": "昏黄",
-    "dark": "暗色"
+    "dusk": "暗蓝",
+    "dark": "深黑"
   },
   "toastOverlay": {
     "toastType": {
@@ -2516,7 +2620,7 @@
         }
       },
       "selectDevice": {
-        "title": "您的设备是什么？"
+        "title": "您使用的是哪款设备？"
       },
       "selectUseCase": {
         "greetings": "您好！",
@@ -2693,7 +2797,7 @@
           },
           "newRecoveryPhrase": {
             "title": "恢复短语",
-            "paragraph1": "您的恢复短语是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
+            "paragraph1": "您的恢复短语（recovery phrase）是备份您私人密钥的一个 24 words (二十四个助记词) 组成的秘密列表。",
             "paragraph2": "Nano 为您生成一个独有的恢复短语。Ledger 不会保存其副本。",
             "disclaimer": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
             "buttons": {
@@ -2867,7 +2971,133 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "无法连接您的设备？"
+    "desc": "无法连接您的设备？",
+    "solution": "Solution #{{number}}",
+    "nextSolution": "Next solution",
+    "previousSolution": "Previous solution",
+    "followSteps": "Follow these steps",
+    "supportArticle": "Support article",
+    "steps": {
+      "entry": {
+        "title": "Troubleshoot USB connection",
+        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
+        "cta": "Lets fix it!",
+        "back": "Go back"
+      },
+      "1": {
+        "windows": {
+          "title": "Run Ledger Live as Administrator",
+          "bullets": {
+            "0": "Quit Ledger Live.",
+            "1": "Right-click the Ledger Live application.",
+            "2": "Select “Run as Administrator”.",
+            "3": "Connect and unlock your device to see if it’s detected."
+          }
+        },
+        "linux": {
+          "title": "Update the udev rules on Linux",
+          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
+          "cta": "Set Rules",
+          "bullets": {
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "1": "Connect and unlock your device to see if it’s detected."
+          }
+        }
+      },
+      "2": {
+        "usbPort": {
+          "title": "Try different USB ports",
+          "bullets": {
+            "0": "Change the USB port used on your computer",
+            "1": "Remove any USB dongles",
+            "2": "Connect and unlock your device to see if it’s detected."
+          }
+        },
+        "usbCable": {
+          "title": "Change the USB cable",
+          "bullets": {
+            "0": "Use the original USB cable if possible.",
+            "1": "Try a different USB cable, making sure it supports data transfer.",
+            "2": "Connect and unlock your device to see if it’s detected."
+          }
+        },
+        "restart": {
+          "title": "Restart your computer",
+          "bullets": {
+            "0": "Restart your computer.",
+            "1": "Start Ledger Live.",
+            "2": "Connect and unlock your device to see if it’s detected."
+          }
+        },
+        "antiVirus": {
+          "title": "Turn off Anti-virus and VPN",
+          "bullets": {
+            "0": "Turn off any anti-virus, firewall, and VPN software.",
+            "1": "Connect and unlock your device to see if it’s detected.",
+            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+          }
+        },
+        "anotherComputer": {
+          "title": "Try another computer",
+          "bullets": {
+            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
+            "1": "Connect and unlock your device to see if it’s detected."
+          }
+        }
+      },
+      "3": {
+        "windows": {
+          "title": "Update the USB device drivers",
+          "bullets": {
+            "0": "Visit this <0>{{link}}</0>",
+            "1": "Follow the instructions to update USB device drivers.",
+            "2": "Connect and unlock your device to see if it's detected."
+          }
+        },
+        "mac": {
+          "0": {
+            "title": "Enable Full Disk Access",
+            "bullets": {
+              "0": "Open “System Preferences”.",
+              "1": "Go to “Security & Privacy”.",
+              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
+              "3": "Add “Ledger Live”.",
+              "4": "Connect and unlock your device to see if it’s detected."
+            }
+          },
+          "1": {
+            "title": "Reset NVRAM",
+            "link": "Apple’s instructions",
+            "bullets": {
+              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
+              "1": "Connect and unlock your device to see if it’s detected."
+            }
+          }
+        }
+      },
+      "4": {
+        "deviceSelection": {
+          "title": "What’s your device?",
+          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+        },
+        "notFixed": {
+          "title": " USB connection problem still not fixed?",
+          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
+          "back": "Back to portfolio",
+          "cta": "Contact Support"
+        },
+        "repair": {
+          "title": "Repair your Nano S",
+          "desc": "What is the message displayed on your device?",
+          "mcuOutdated": "MCU firmware is outdated",
+          "mcuNotGenuine": "MCU firmware is not genuine",
+          "repairInstructions": "Follow device repair instructions",
+          "updateInstructions": "Follow device update instructions",
+          "somethingElse": "Something else"
+        }
+      }
+    }
   },
   "SignMessageConfirm": {
     "stringHash": "Message Hash 消息哈希字符串",
@@ -3089,6 +3319,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "固件或应用程序需更新",
       "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "Update Nano Firmware",
+      "description": "Please update your devices Firmware to the latest version to access this feature"
     },
     "FirmwareNotRecognized": {
       "title": "无法识别设备固件",
@@ -3484,10 +3718,13 @@
       "title": "确保您有足够的余额来支付未来的交易费用"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "余额不能少于 1 DOT。发送最大值以清空账户"
+      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "您必须绑定至少 1 DOT"
+      "title": "You must bond at least {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "You bonded balance should be at least {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "您已超过了解绑限额"

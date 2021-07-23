@@ -1,8 +1,9 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
@@ -11,11 +12,13 @@ import { rgba } from "~/renderer/styles/helpers";
 
 import Box, { Tabbable } from "~/renderer/components/Box";
 
-// import IconInfoCircle from "~/renderer/icons/InfoCircle";
+import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import IconReload from "~/renderer/icons/UpdateCircle";
 import IconClose from "~/renderer/icons/Cross";
 
 import LiveAppIcon from "./LiveAppIcon";
+
+import { openPlatformAppInfo } from "~/renderer/actions/UI";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -109,6 +112,12 @@ export type Props = {
 const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
   const { name, icon } = manifest;
 
+  const dispatch = useDispatch();
+
+  const onClick = useCallback(() => {
+    dispatch(openPlatformAppInfo(manifest));
+  }, [manifest, dispatch]);
+
   return (
     <Container>
       <TitleContainer>
@@ -123,9 +132,9 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
         </ItemContent>
       </ItemContainer>
       <RightContainer>
-        {/* <ItemContainer isInteractive onClick={onHelp}>
+        <ItemContainer isInteractive onClick={onClick}>
           <IconInfoCircle size={16} />
-        </ItemContainer> */}
+        </ItemContainer>
         <ItemContainer isInteractive onClick={onClose}>
           <IconClose size={16} />
         </ItemContainer>
