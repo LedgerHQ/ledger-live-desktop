@@ -18,8 +18,7 @@ import IconClose from "~/renderer/icons/Cross";
 
 import LiveAppIcon from "./LiveAppIcon";
 
-import { openPlatformAppInfo } from "~/renderer/actions/UI";
-
+import { openPlatformAppInfoDrawer } from "~/renderer/actions/UI";
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   grow: 0,
@@ -115,7 +114,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
-    dispatch(openPlatformAppInfo(manifest));
+    dispatch(openPlatformAppInfoDrawer({ manifest }));
   }, [manifest, dispatch]);
 
   return (
