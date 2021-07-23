@@ -197,7 +197,6 @@
     "disconnectButton": "Disconnect"
   },
   "swap2": {
-    "subtitle": "Set your crypto assets and amounts to swap, we will suggest you the best quotes with our providers",
     "form": {
       "details": {
         "label": {

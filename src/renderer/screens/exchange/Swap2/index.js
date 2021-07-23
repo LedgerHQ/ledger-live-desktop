@@ -7,9 +7,8 @@ import SwapForm from "./Form";
 import styled from "styled-components";
 
 const Main = styled.main`
-  display: grid;
-  grid-template-columns: 1fr 27.5rem 1fr;
-  row-gap: 1.5rem;
+  display: flex;
+  justify-content: center;
 
   padding: 2rem 0;
   background-color: ${p => p.theme.colors.palette.background.paper};
@@ -19,24 +18,9 @@ const Main = styled.main`
   box-shadow: 0px 4px 6px rgba(20, 37, 51, 0.04);
 
   & > * {
-    // Automatically move every children in the middle column
-    grid-column-start: 2;
-    grid-column-end: 3;
+    width: 100%;
+    max-width: 27.5rem;
   }
-`;
-
-const Header = styled.div`
-  padding: 0 2rem;
-`;
-
-const Subtitle = styled(Text).attrs({
-  textAlign: "center",
-  ff: "Inter",
-  fontSize: "0.8125rem",
-  lineHeight: "1.4",
-})`
-  display: inline-block;
-  color: ${p => p.theme.colors.palette.text.shade50};
 `;
 
 const Swap2 = () => {
@@ -49,9 +33,6 @@ const Swap2 = () => {
         {t("swap.title")}
       </Text>
       <Main>
-        <Header>
-          <Subtitle>{t("swap2.subtitle")}</Subtitle>
-        </Header>
         <SwapForm />
       </Main>
     </>
