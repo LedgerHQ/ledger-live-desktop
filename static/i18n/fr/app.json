@@ -17,6 +17,12 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Website"
+      }
+    },
     "catalog": {
       "title": "Discover",
       "branch": {
@@ -230,12 +236,96 @@
       "subtitle": "Accédez au Gestionnaire et installez l'application {{appName}} pour échanger vos actifs.",
       "cta": "Aller dans le Gestionnaire"
     },
+    "providers": {
+      "title": "Choose a provider to swap crypto",
+      "learnMore": "What is Swap?",
+      "kycRequired": "KYC Required",
+      "wyre": {
+        "bullets": [
+          "US-only (soon Europe, Africa and Asia)",
+          "Multi coins and tokens",
+          "Centralized"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT and 50+ others",
+          "Multi-currency",
+          "Centralized"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum & ERC20 tokens",
+          "Decentralized & Trustless"
+        ]
+      },
+      "cta": "Continue",
+      "kyc": {
+        "notAvailable": "{{provider}} is unavailable in your location",
+        "status": {
+          "required": "KYC Required",
+          "pending": "KYC Pending",
+          "approved": "KYC Approved!",
+          "closed": "KYC Rejected"
+        }
+      }
+    },
+    "ip": {
+      "title": "Welcome to Swap",
+      "subtitle": "Exchange crypto assets directly from your Ledger device.",
+      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+    },
     "kyc": {
-      "title": "Bienvenue dans le Swap",
-      "subtitle": "Échangez vos crypto-actifs directement à partir de votre appareil Ledger. Ce service n'est pas disponible dans certains pays, y compris aux États-Unis.",
-      "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des prestataires tiers pour leur permettre de se conformer à leurs procédures LCB/KYC."
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "pending": {
+          "cta": "Continue",
+          "title": "Pending approval",
+          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "link": "Learn more about KYC"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
     },
     "form": {
+      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
+      "resetKYCCTA": "Reset KYC",
       "amount": "Montant",
       "from": {
         "title": "De",
@@ -267,6 +357,16 @@
       "noApp": "Application {{currencyName}} non installée",
       "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible",
       "loadingRates": "Chargement des taux..."
+    },
+    "unauthorizedRatesModal": {
+      "title": "Ledger Live needs an update",
+      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "cta": "Reset verification"
+    },
+    "resetKYCModal": {
+      "title": "Delete your KYC",
+      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
+      "cta": "Confirm"
     },
     "modal": {
       "title": "Swap",
@@ -2255,6 +2355,7 @@
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
@@ -2269,6 +2370,8 @@
       "softResetTitle": "Vider le cache",
       "softResetDesc": "Effacez le cache de Ledger Live pour forcer la resynchronisation avec la blockchain.",
       "softReset": "Effacer",
+      "resetKYC": "Reset KYC data",
+      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
       "hardResetTitle": "Réinitialiser Ledger Live",
       "hardResetDesc": "Effacez toutes les données de Ledger Live stockées sur votre ordinateur, y compris vos comptes, l'historique de vos transactions et vos paramètres.",
       "hardReset": "Réinitialiser",
@@ -3216,6 +3319,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "Mise à jour du micrologiciel ou de l'application nécessaire",
       "description": "Utilisez le Gestionnaire pour désinstaller toutes les applications. Vérifiez ensuite si une mise à jour du micrologiciel est disponible avant de les réinstaller."
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "Update Nano Firmware",
+      "description": "Please update your devices Firmware to the latest version to access this feature"
     },
     "FirmwareNotRecognized": {
       "title": "Micrologiciel de l'appareil non reconnu",
