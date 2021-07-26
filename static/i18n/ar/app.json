@@ -2972,17 +2972,17 @@
   },
   "connectTroubleshooting": {
     "desc": "هل تواجه صعوبة في توصيل جهازك؟",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
+    "solution": "الحل رقم #{{number}}",
+    "nextSolution": "الحل التالي",
+    "previousSolution": "الحل السابق",
+    "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "Support article",
     "steps": {
       "entry": {
         "title": "Troubleshoot USB connection",
         "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
         "cta": "Lets fix it!",
-        "back": "Go back"
+        "back": "رجوع"
       },
       "1": {
         "windows": {
@@ -2991,7 +2991,7 @@
             "0": "Quit Ledger Live.",
             "1": "Right-click the Ledger Live application.",
             "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "3": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "linux": {
@@ -3001,7 +3001,7 @@
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
       },
@@ -3011,7 +3011,7 @@
           "bullets": {
             "0": "Change the USB port used on your computer",
             "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "usbCable": {
@@ -3019,7 +3019,7 @@
           "bullets": {
             "0": "Use the original USB cable if possible.",
             "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "restart": {
@@ -3027,14 +3027,14 @@
           "bullets": {
             "0": "Restart your computer.",
             "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "antiVirus": {
           "title": "Turn off Anti-virus and VPN",
           "bullets": {
             "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
+            "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
             "2": "Whitelist Ledger Live in your anti-virus if that worked."
           }
         },
@@ -3042,7 +3042,7 @@
           "title": "Try another computer",
           "bullets": {
             "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
       },
@@ -3052,7 +3052,7 @@
           "bullets": {
             "0": "Visit this <0>{{link}}</0>",
             "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "mac": {
@@ -3063,7 +3063,7 @@
               "1": "Go to “Security & Privacy”.",
               "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
               "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "4": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
             }
           },
           "1": {
@@ -3071,30 +3071,30 @@
             "link": "Apple’s instructions",
             "bullets": {
               "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "ما نوع جهازك؟",
+          "desc": "إذا كان لديك Nano S، فيمكنك تجربة إصلاح البرنامج الثابت لجهازك. أما بالنسبة لمستخدمي أجهزة Nano X وBlue، يرجى الاتصال بقسم الدعم بشركة Ledger"
         },
         "notFixed": {
           "title": " USB connection problem still not fixed?",
           "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "back": "الرجوع إلى الحافظة",
+          "cta": "الاتصال بقسم الدعم"
         },
         "repair": {
           "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
+          "desc": "ما الرسالة المعروضة على جهازك؟",
           "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "repairInstructions": "اتبع إرشادات إصلاح الجهاز",
+          "updateInstructions": "اتبع إرشادات تحديث الجهاز",
+          "somethingElse": "شيء آخر"
         }
       }
     }
@@ -3321,7 +3321,7 @@
       "description": "يرجى استخدام المدير لإلغاء تثبيت جميع التطبيقات، ثم تحقق مما إذا كان تحديث البرنامج الثابت متاحًا قبل إعادة تثبيتهم مرة أخرى"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
+      "title": "تحديث البرنامج الثابت لجهاز Nano",
       "description": "Please update your devices Firmware to the latest version to access this feature"
     },
     "FirmwareNotRecognized": {
@@ -3718,13 +3718,13 @@
       "title": "تأكد من وجود رصيد كافٍ متبقٍ لتغطية رسوم المعاملات المستقبلية"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "لا يمكن أن يقل الرصيد عن {{minimumBalance}}. قم بإرسال الحد الأقصى لتفريغ الحساب."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "يجب عليك تقييد مبلغ لا يقل عن {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "ينبغي ألا يقل رصيدك المقيّد عن {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "لقد تجاوزت الحد المسموح به لإلغاء التقيد"
