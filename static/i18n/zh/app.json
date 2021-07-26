@@ -258,22 +258,22 @@
         "bullets": [
           "连接到 30 多个 DEXs (Uniswap, SushiSwap,...)",
           "以太坊 和 ERC20 代币",
-          "Decentralized & Trustless"
+          "去中心化与无需信任"
         ]
       },
-      "cta": "Continue",
+      "cta": "继续",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} 在您的位置不可用",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "需要 KYC",
+          "pending": "KYC 待定",
+          "approved": "KYC 已批准！",
+          "closed": "KYC 被拒绝"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
+      "title": "欢迎使用 Swap",
       "subtitle": "Exchange crypto assets directly from your Ledger device.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
