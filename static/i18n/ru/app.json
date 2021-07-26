@@ -238,74 +238,74 @@
     },
     "providers": {
       "title": "Выберите поставщика услуг для обмена криптовалюты",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "learnMore": "Что такое Swap (обмен криптоактивов)?",
+      "kycRequired": "Требуется проверка KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Только в США (скоро в Европе, Африке и Азии)",
+          "Множество монет и токенов",
+          "Централизованный"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT и 50+ других",
+          "Мультивалютная поддержка",
+          "Централизованный"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Подключение к 30+ DEX-биржам (Uniswap, SushiSwap...)",
+          "Ethereum и ERC20-токены",
+          "Децентрализованная система без доверия"
         ]
       },
-      "cta": "Continue",
+      "cta": "Продолжить",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} недоступен в вашем регионе",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "Требуется проверка KYC",
+          "pending": "KYC в обработке",
+          "approved": "KYC одобрены!",
+          "closed": "KYC отклонены"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "Добро пожаловать в Обмен криптоактивов",
+      "subtitle": "Обменивать криптоактивы можно непосредственно на устройстве Ledger.",
+      "disclaimer": "Продолжая, вы соглашаетесь с тем, что данные о вашем местоположении могут передаваться сторонним поставщикам услуг для соблюдения ими процедур AML/KYC."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "Мы не можем завершить процедуру KYC, пока вы не обновите приложение",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "disclaimer": "Информация о вас собирается LEDGER от имени и передаётся в WYRE для целей KYC. Для получения дополнительной информации, пожалуйста, ознакомьтесь с нашей",
+        "policy": "Политикой конфиденциальности",
+        "title": "Подтверждение вашей личности",
+        "subtitle": "Пожалуйста, введите данные, чтобы произвести обмен посредством Wyre.",
         "pending": {
-          "cta": "Continue",
-          "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
-          "link": "Learn more about KYC"
+          "cta": "Продолжить",
+          "title": "Ожидание утверждения",
+          "subtitle": "Ваша информация отправлена для утверждения в Wyre. Может пройти 1-3 дня, прежде чем вы сможете начать обменивать криптоактивы.",
+          "link": "Подробнее о KYC"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "Сбросить KYC",
+          "title": "Процедура KYC отклонена",
+          "subtitle": "Сервис Wyre отклонил данные, которые вы предоставили для KYC",
+          "link": "Подробнее о KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
+          "firstName": "Имя",
+          "lastName": "Фамилия",
+          "street1": "Улица и номер дома, строка 1",
+          "street2": "Улица и номер дома, строка 2",
+          "city": "Город",
+          "state": "Штат",
+          "country": "Страна",
+          "postalCode": "Индекс",
+          "dateOfBirth": "Дата рождения",
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
           "street1Placeholder": "Eg. 13, Maple street",
