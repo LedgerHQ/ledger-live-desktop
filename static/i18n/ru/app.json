@@ -310,22 +310,22 @@
           "lastNamePlaceholder": "Введите фамилию",
           "street1Placeholder": "Например: Ул. Маявковского 50",
           "street2Placeholder": "Например: Ул. Маявковского 50",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "cityPlaceholder": "Например: Москва",
+          "postalCodePlaceholder": "Введите индекс из 5 цифр",
+          "dateOfBirthPlaceholder": "ММ/ДД/ГГГГ",
+          "firstNameError": "Укажите имя, чтобы продолжить",
+          "lastNameError": "Укажите фамилию, чтобы продолжить",
+          "street1Error": "Укажите адрес",
+          "cityError": "Укажите город в США, в котором вы живёте",
+          "postalCodeError": "Введите действительный индекс для США",
+          "dateOfBirthError": "Укажите дату рождения",
+          "dateOfBirthValidationError": "Укажите действительную дату рождения"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "Сбросьте данные KYC и обновите Ledger Live, чтобы производить обмены посредством Wyre",
+      "resetKYCCTA": "Сбросить KYC",
       "amount": "Кол-во",
       "from": {
         "title": "Откуда",
@@ -359,14 +359,14 @@
       "loadingRates": "Загружаем котировки..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Необходимо обновить Ledger Live",
+      "subtitle": "Обновите Ledger Live до последней версии и повторно подтвердите свою личность, чтобы обменивать криптоактивы посредством Wyre.",
+      "cta": "Сбросить подтверждение личности"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Удаление данных KYC",
+      "subtitle": "Удалите KYC, чтобы стереть все токены, которые хранятся локально на вашем ПК. Вам придётся повторно предоставить данные KYC, чтобы получить доступ к сервисам наших партнёров.",
+      "cta": "Подтвердить"
     },
     "modal": {
       "title": "Обмен",
@@ -3088,13 +3088,13 @@
           "cta": "Связаться с поддержкой"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Ремонтируем Nano S",
+          "desc": "Какое сообщение отображается на вашем устройстве?",
+          "mcuOutdated": "mcuOutdated (Прошивка MCU устарела)",
+          "mcuNotGenuine": "mcuNotGenuine (Прошивка MCU не является подлинной)",
+          "repairInstructions": "Следуйте инструкциям по ремонту устройства",
+          "updateInstructions": "Следуйте инструкциям по обновлению устройства",
+          "somethingElse": "Другое"
         }
       }
     }
@@ -3321,8 +3321,8 @@
       "description": "Пожалуйста, удалите все приложения через Диспетчер и перед последующей установкой проверьте наличие обновления прошивки"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Обновите прошивку Nano",
+      "description": "Чтобы получить доступ к этой функции, пожалуйста, обновите прошивку до последней версии."
     },
     "FirmwareNotRecognized": {
       "title": "Не удаётся распознать прошивку устройства",
@@ -3721,10 +3721,10 @@
       "title": "Баланс не может быть ниже {{minimumBalance}}. Отправьте макс. количество, чтобы аннулировать счёт."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Вы должны заблокировать не менее {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Заблокированных средств должно быть не менее {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Вы превысили лимит разблокировки"
