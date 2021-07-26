@@ -2980,7 +2980,7 @@
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
+        "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
         "cta": "لنقوم بإصلاحها!",
         "back": "رجوع"
       },
@@ -2988,18 +2988,18 @@
         "windows": {
           "title": "تشغيل Ledger Live كمسؤول",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
+            "0": "الخروج من Ledger Live.",
+            "1": "انقر بالزر الأيمن على تطبيق Ledger Live.",
+            "2": "اختار \"تشغيل كمسؤول\".",
             "3": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
+          "title": "تحديث قواعد udev على نظام Linux",
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائيًا وإعادة تحميل udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
@@ -3007,18 +3007,18 @@
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
+            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك",
+            "1": "إزالة أي دونجل USB",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "تغيير كابل الUSB",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
+            "0": "استخدم كابل الUSB الأصلي إن أمكن.",
+            "1": "جرّب كابل USB مختلفًا، مع التأكد من أنه يدعم نقل البيانات.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
