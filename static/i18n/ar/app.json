@@ -1972,7 +1972,7 @@
     "unlockedBalance": "غير مقيد",
     "unlockedTooltip": "يمكن الآن نقل الأصول غير المقيدة باستخدام عملية السحب.",
     "networkFees": "يتم تعيين رسوم الشبكة تلقائيًا عن طريق بروتوكول إجماع Polkadot، لن تتمكن من مراجعتها على جهازك",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "رصيدك المقيد يقل عن الحد الأدنى الحالي البالغ {{minimumBondBalance}}. ترشيحاتك معرضة للحذف.",
     "nomination": {
       "emptyState": {
         "description": "يمكنك كسب المكافآت عن طريق تقيد الأصول ثم تعيين المدقق (المدققين) الخاص بك.",
@@ -2996,7 +2996,7 @@
         },
         "linux": {
           "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
+          "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "Set Rules",
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
@@ -3060,7 +3060,7 @@
             "title": "Enable Full Disk Access",
             "bullets": {
               "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
+              "1": "انتقل إلى \"الأمان والخصوصية\".",
               "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
               "3": "Add “Ledger Live”.",
               "4": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
