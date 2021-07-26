@@ -207,7 +207,7 @@
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "什么是 Swap？",
     "paraswap": {
-      "cta": " 一探究竟",
+      "cta": "一探究竟",
       "description": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡。"
     },
     "tabs": {
@@ -1339,7 +1339,7 @@
         "confirm": "安装应用程序"
       },
       "dependencyUninstall": {
-        "title": " 卸载 {{app}} 及其相关应用程序？",
+        "title": "卸载 {{app}} 及其相关应用程序？",
         "showAll": "显示待卸载的应用程序",
         "description": "您安装的某些应用程序与{{app}}应用程序有关。这些应用程序也将卸载。",
         "confirm": "卸载 {{app}} 以及其他应用程序"
