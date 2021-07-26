@@ -313,19 +313,19 @@
           "cityPlaceholder": "Ex : Abbeville",
           "postalCodePlaceholder": "Saisissez votre code postal",
           "dateOfBirthPlaceholder": "MM/JJ/AAAA",
-          "firstNameError": "Entrez votre prénom pour continuer",
-          "lastNameError": "Entrez votre nom pour continuer",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstNameError": "Entrez votre prénom pour continuer.",
+          "lastNameError": "Entrez votre nom pour continuer.",
+          "street1Error": "Entrez votre adresse.",
+          "cityError": "Entrez la ville où vous habitez.",
+          "postalCodeError": "Saisissez un code postal valide.",
+          "dateOfBirthError": "Entrez votre date de naissance.",
+          "dateOfBirthValidationError": "Entrez une date de naissance valide."
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "Réinitialisez le processus et mettez à jour Ledger Live.",
+      "resetKYCCTA": "Réinitialiser la vérification",
       "amount": "Montant",
       "from": {
         "title": "De",
@@ -359,9 +359,9 @@
       "loadingRates": "Chargement des taux..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Mise à jour de Ledger Live nécessaire",
+      "subtitle": "Veuillez mettre à jour Ledger Live et vérifier à nouveau votre identité pour échanger avec Wyre",
+      "cta": "Réinitialiser la vérification"
     },
     "resetKYCModal": {
       "title": "Delete your KYC",
