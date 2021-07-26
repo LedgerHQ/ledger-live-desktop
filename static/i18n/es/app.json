@@ -3057,11 +3057,11 @@
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Habilita Acceso a disco completo",
             "bullets": {
               "0": "Abre \"Preferencias del sistema\".",
               "1": "Ingresa a \"Seguridad y privacidad\".",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
+              "2": "En la pestaña \"Privacidad\", ingresa a \"Acceso a disco completo\" en la columna izquierda.",
               "3": "Agrega \"Ledger Live\".",
               "4": "Conecta y desbloquea tu dispositivo para ver si se detecta."
             }
@@ -3084,8 +3084,8 @@
         "notFixed": {
           "title": "¿Aún no está resuelto el problema de la conexión USB?",
           "desc": "Si has probado con todas las soluciones, ponte en contacto con el Soporte de Ledger. Si no, sigue las instrucciones de las que no hayas probado aún.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "back": "Volver al Portfolio",
+          "cta": "Contactar con Soporte"
         },
         "repair": {
           "title": "Reparar tu Nano S",
@@ -3718,7 +3718,7 @@
       "title": "Asegúrate de que tienes un saldo restante suficiente para cubrir las tarifas de transacciones futuras"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "El saldo no puede ser inferior a {{minimumBalance}}. Envía el importe máximo a una cuenta sin saldo."
     },
     "PolkadotBondMinimumAmount": {
       "title": "Tienes que vincular al menos {{minimumBondAmount}}."
