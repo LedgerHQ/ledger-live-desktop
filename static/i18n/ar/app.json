@@ -280,20 +280,20 @@
     "kyc": {
       "updateRequired": "لا يمكننا إكمال عملية التحقق من الهوية (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض التحقق من هوية العميل. للتعرف على مزيد من المعلومات، يرجى مراجعة",
         "policy": "سياسة الخصوصية",
         "title": "التحقق من هويتك",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "subtitle": "يرجى إدخال معلوماتك للتبادل مع Wyre.",
         "pending": {
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "subtitle": "تم إرسال معلوماتك لاعتمادها من جانب Wyre. وعادةً ما يستغرق الأمر 1-3 أيام قبل أن تستطيع أن تبدأ بالمبادلة.",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "closed": {
           "cta": "إعادة تعيين بيانات التحقق من الهوية",
           "title": "تم رفض طلب KYC (التحقق من الهوية)",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "subtitle": "رفضت Wyre البيانات التي قدمتها للتحقق من هوية العميل",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "form": {
