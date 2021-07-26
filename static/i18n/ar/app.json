@@ -263,7 +263,7 @@
       },
       "cta": "متابعة",
       "kyc": {
-        "notAvailable": "{{provider}} غير متاح في منطقتك",
+        "notAvailable": "{{provider}} غير متاح في موقعك",
         "status": {
           "required": "KYC (التحقق من الهوية) مطلوب",
           "pending": "التحقق من بيانات الهوية مُعلّق",
@@ -275,10 +275,10 @@
     "ip": {
       "title": "مرحبًا بك في التبادل",
       "subtitle": "قم بتداول أصول العملات المشفرة مباشرةً من جهاز Ledger الخاص بك.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال/بيانات التحقق من هوية العميل."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "لا يمكننا إكمال عملية التحقق من الهوية (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
         "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
         "policy": "سياسة الخصوصية",
@@ -3322,7 +3322,7 @@
     },
     "LatestFirmwareVersionRequired": {
       "title": "تحديث البرنامج الثابت لجهاز Nano",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "description": "يرجى تحديث البرنامج الثابت لجهازك إلى أحدث إصدار للوصول إلى هذه الميزة"
     },
     "FirmwareNotRecognized": {
       "title": "لم يتم التعرف على البرنامج الثابت للجهاز",
