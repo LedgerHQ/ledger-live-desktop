@@ -302,22 +302,22 @@
           "street1": "Street Address Line 1",
           "street2": "Street Address Line 2",
           "city": "المدينة",
-          "state": "State",
+          "state": "الولاية/المقاطعة/المحافظة",
           "country": "البلد",
-          "postalCode": "Zip Code",
+          "postalCode": "الرمز البريدي",
           "dateOfBirth": "تاريخ الميلاد",
-          "firstNamePlaceholder": "Enter your first name",
+          "firstNamePlaceholder": "أدخل اسمك الأول",
           "lastNamePlaceholder": "أدخل اسم العائلة",
           "street1Placeholder": "Eg. 13, Maple street",
           "street2Placeholder": "Eg. 13, Maple street",
           "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "postalCodePlaceholder": "أدخل رمزك البريدي المكوّن من 5 أرقام",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
+          "firstNameError": "أدخل اسمك الأول للمتابعة",
           "lastNameError": "أدخل اسم العائلة للمتابعة",
           "street1Error": "أدخل عنوانك",
           "cityError": "أدخل المدينة التي تعيش فيها في الولايات المتحدة الأمريكية",
-          "postalCodeError": "Enter a valid US ZIP code",
+          "postalCodeError": "أدخل رمزًا بريديًا صالحًا في الولايات المتحدة الأمريكية",
           "dateOfBirthError": "أدخل تاريخ ميلادك",
           "dateOfBirthValidationError": "أدخل تاريخ ميلاد صحيحًا"
         }
@@ -361,7 +361,7 @@
     "unauthorizedRatesModal": {
       "title": "يحتاج Ledger Live إلى تحديث",
       "subtitle": "يرجى تحديث Ledger Live إلى أحدث إصدار، وأعد التحقق من هويتك للتبادل مع Wyre",
-      "cta": "Reset verification"
+      "cta": "إعادة تعيين التحقق"
     },
     "resetKYCModal": {
       "title": "حذف بيانات التحقق من الهوية الخاصة بك",
@@ -2345,7 +2345,7 @@
       "languageDesc": "قم بتعيين اللغة المستخدمة في ليدجر لايف (Ledger Live).",
       "theme": "السمة",
       "themeDesc": "اختار السمة.",
-      "counterValue": "Preferred currency",
+      "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
       "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "تمكين المشاهدة كشريط دوّار في الحافظة"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "اختار الأصل المشفر",
       "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
       "placeholder": "لا توجد إعدادات لهذا الأصل",
       "confirmationsNb": "عدد التأكيدات",
@@ -2997,7 +2997,7 @@
         "linux": {
           "title": "Update the udev rules on Linux",
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
-          "cta": "Set Rules",
+          "cta": "تعيين القواعد",
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
