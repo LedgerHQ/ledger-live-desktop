@@ -2975,43 +2975,43 @@
     "solution": "解决方案 #{{number}}",
     "nextSolution": "下一个解决方案",
     "previousSolution": "上一个解决方案",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "followSteps": "按照这些步骤操作",
+    "supportArticle": "支持条款",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "排除 USB 连接故障",
+        "desc": "设备连接出现问题。请勿担心，您可以逐一尝试不同的解决方案，直到完成设备连接！",
+        "cta": "开始解决问题！",
+        "back": "返回"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "以管理员的身份运行 Ledger Live",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "退出 Ledger Live。",
+            "1": "右键点击 Ledger Live 应用程序。",
+            "2": "选择 “以管理员的身份运行”",
+            "3": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "在 Linux 上更新 udev 规则",
+          "desc": "点击下方按钮添加 udev 规则。然后连接并解锁您的设备，查看设备能否被检测到。",
+          "cta": "设置规则",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "在终端机输入以下指令，自动添加规则并重新加载 udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "尝试不同的 USB 端口",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "改用您电脑上另外的 USB 端口",
+            "1": "删除所有的 USB 软件保护器",
+            "2": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         },
         "usbCable": {
