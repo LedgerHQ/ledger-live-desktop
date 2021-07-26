@@ -19,8 +19,8 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
-        "website": "Website"
+        "title": "Información",
+        "website": "Sitio web"
       }
     },
     "catalog": {
@@ -237,95 +237,95 @@
       "cta": "Ingresa a Manager"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Elige un proveedor para permutar cripto",
+      "learnMore": "¿Qué es la permuta?",
+      "kycRequired": "KYC necesario",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Solo EE. UU. (pronto Europa, África y Asia)",
+          "Múltiples monedas y tokens",
+          "Centralizado"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT y más 50 otros",
+          "Multidivisa",
+          "Centralizado"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Conecta con más de 30 exchanges descentralizados (Uniswap, SushiSwap, etc.)",
+          "Tokens Ethereum y ERC20",
+          "Descentralizado y sin confianza"
         ]
       },
-      "cta": "Continue",
+      "cta": "Continuar",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} no está disponible en tu ubicación",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "KYC necesario",
+          "pending": "KYC pendiente",
+          "approved": "¡KYC aprobado!",
+          "closed": "KYC rechazado"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "Bienvenido a Permuta",
+      "subtitle": "Intercambia activos cripto directamente desde tu dispositivo Ledger.",
+      "disclaimer": "Al continuar, aceptas que los datos de tu ubicación se compartan con proveedores de servicios de terceros para que puedan cumplir con sus procedimientos de ALD/KYC."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "No podemos completar el proceso KYC hasta que actualices la aplicación",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "disclaimer": "LEDGER recopila tu información en nombre de WYRE y la transfiere a este para fines de KYC. Para más información, revisa nuestra",
+        "policy": "Política de Privacidad",
+        "title": "Verifica tu identidad",
+        "subtitle": "Ingresa la información para permutar con Wyre.",
         "pending": {
-          "cta": "Continue",
-          "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
-          "link": "Learn more about KYC"
+          "cta": "Continuar",
+          "title": "Aprobación pendiente",
+          "subtitle": "Tu información se ha enviado para su aprobación por parte de Wyre. Normalmente tarda de 1 a 3 días antes de poder comenzar a permutar.",
+          "link": "Conocer más sobre KYC"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "Restablecer KYC",
+          "title": "Aplicación KYC rechazada",
+          "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
+          "link": "Conocer más sobre KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "street1": "Dirección postal línea 1",
+          "street2": "Dirección postal línea 2",
+          "city": "Ciudad",
+          "state": "Estado",
+          "country": "País",
+          "postalCode": "Código postal",
+          "dateOfBirth": "Fecha de nacimiento",
+          "firstNamePlaceholder": "Ingresa tu nombre",
+          "lastNamePlaceholder": "Ingresa tu apellido",
+          "street1Placeholder": "Ejemplo: Calle Maple, 13",
+          "street2Placeholder": "Ejemplo: Calle Maple, 13",
+          "cityPlaceholder": "Ejemplo: San José",
+          "postalCodePlaceholder": "Ingresa tu código postal de 5 dígitos",
+          "dateOfBirthPlaceholder": "MM/DD/AAAA",
+          "firstNameError": "Ingresa tu nombre para continuar",
+          "lastNameError": "Ingresa tu apellido para continuar",
+          "street1Error": "Ingresa tu dirección",
+          "cityError": "Ingresa la ciudad en la que vives en EE. UU.",
+          "postalCodeError": "Ingresa un código postal de EE. UU. válido",
+          "dateOfBirthError": "Ingresa tu fecha de nacimiento",
+          "dateOfBirthValidationError": "Ingresa una fecha de nacimiento válida"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "Restablece tu KYC y actualiza Live para permutar con Wyre",
+      "resetKYCCTA": "Restablecer KYC",
       "amount": "Importe",
       "from": {
         "title": "De",
@@ -359,14 +359,14 @@
       "loadingRates": "Cargando tasas..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Ledger Live requiere de una actualización",
+      "subtitle": "Actualiza Ledger Live a la última versión y vuelve a verificar tu identidad para permutar con Wyre",
+      "cta": "Restablece la verificación"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Elimina tu KYC",
+      "subtitle": "Elimina tu KYC para borrar todos los tokens almacenados localmente en tu PC. Tendrás que volver a enviar tu KYC para acceder a los servicios proporcionados por nuestros socios.",
+      "cta": "Confirmar"
     },
     "modal": {
       "title": "Permutar",
@@ -1972,7 +1972,7 @@
     "unlockedBalance": "Desvinculado",
     "unlockedTooltip": "Los activos desvinculados ya se pueden mover utilizando la operación de retiro.",
     "networkFees": "El consenso Polkadot establece automáticamente las tarifas de red, no podrás modificarlas desde tu dispositivo",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "Tu saldo vinculado está por debajo del mínimo actual de {{minimumBondBalance}}. Tus nominaciones corren el riesgo de ser eliminadas.",
     "nomination": {
       "emptyState": {
         "description": "Puedes recibir recompensas vinculando activos y nominando luego a los validadores.",
@@ -2345,7 +2345,7 @@
       "languageDesc": "Configura el idioma de Ledger Live.",
       "theme": "Tema",
       "themeDesc": "Selecciona el tema.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Divisa preferida",
       "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
       "region": "Región",
       "regionDesc": "Elige tu región para establecer la zona horaria de Ledger Live.",
@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Seleccionar activo cripto",
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
       "placeholder": "No hay ajustes para este activo",
       "confirmationsNb": "Cantidad de confirmaciones",
@@ -2363,15 +2363,15 @@
     },
     "profile": {
       "password": "Bloqueo por contraseña",
-      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu equipo, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
+      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
       "passwordAutoLock": "Bloqueo automático",
       "passwordAutoLockDesc": "Bloquear Ledger Live automáticamente cuando esté inactivo.",
       "changePassword": "Cambiar contraseña",
       "softResetTitle": "Borrar caché",
       "softResetDesc": "Borra la caché de Ledger Live para forzar una nueva sincronización con la cadena de bloques.",
       "softReset": "Borrar",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "Restablecer datos de KYC",
+      "resetKYCDesc": "Borra todos tus datos de KYC almacenados localmente que se utilizan para acceder a un proveedor de transacciones de terceros.",
       "hardResetTitle": "Restablecer Ledger Live",
       "hardResetDesc": "Borrar todos los datos de Ledger Live almacenados en tu PC, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
@@ -2398,7 +2398,7 @@
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu equipo. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación."
+      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación."
     },
     "softResetModal": {
       "title": "Borrar caché",
@@ -2972,129 +2972,129 @@
   },
   "connectTroubleshooting": {
     "desc": "¿Tienes dificultades para conectar tu dispositivo?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "solution": "Solución nº {{number}}",
+    "nextSolution": "Solución siguiente",
+    "previousSolution": "Solución anterior",
+    "followSteps": "Sigue estos pasos",
+    "supportArticle": "Artículo de soporte",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Solucionar problemas de la conexión USB",
+        "desc": "Parece que hay un problema con la conexión a tu dispositivo. No te preocupes, puedes probar varias soluciones una a una hasta que se conecte el dispositivo.",
+        "cta": "¡Vamos a solucionarlo!",
+        "back": "Volver"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Ejecuta Ledger Live como administrador",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Sal de Ledger Live.",
+            "1": "Haz clic con el botón derecho en la aplicación Ledger Live.",
+            "2": "Selecciona «Ejecutar como administrador».",
+            "3": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "Actualiza las reglas udev en Linux",
+          "desc": "Haz clic en el botón siguiente para agregar las reglas udev. Luego conecta y desbloquea tu dispositivo para ver si se detecta.",
+          "cta": "Establecer reglas",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Ingresa el siguiente comando en una terminal para agregar automáticamente las reglas y volver a cargar udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Prueba con distintos puertos USB",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Cambia el puerto USB que utilizas en tu PC",
+            "1": "Quita cualquier llave (dongle) USB",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Cambia el cable USB",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Utiliza el cable USB original si es posible.",
+            "1": "Prueba un cable USB diferente y asegúrate de que sea compatible con transferencia de datos.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Reinicia tu PC",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Reinicia tu PC.",
+            "1": "Inicia Ledger Live.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Desactivar antivirus y VPN",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "Desactiva cualquier software de antivirus, firewall y VPN.",
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta.",
+            "2": "Agrega Ledger Live a la lista de permitidos en el antivirus si lo anterior ha funcionado bien."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Prueba con otra PC",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Ingresa a <0>{{link}}</0> en otra PC para descargar e instalar Ledger Live.",
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "Actualiza los controladores del dispositivo USB",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "Visita este <0>{{link}}</0>",
+            "1": "Sigue las instrucciones para actualizar los controladores del dispositivo USB.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Habilita Acceso a disco completo",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Abre \"Preferencias del sistema\".",
+              "1": "Ingresa a \"Seguridad y privacidad\".",
+              "2": "En la pestaña \"Privacidad\", ingresa a \"Acceso a disco completo\" en la columna izquierda.",
+              "3": "Agrega \"Ledger Live\".",
+              "4": "Conecta y desbloquea tu dispositivo para ver si se detecta."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "Restablecer NVRAM",
+            "link": "Instrucciones para Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Si tu Mac tiene un procesador Intel, sigue <0>{{link}}</0> para restablecer NVRAM.",
+              "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "¿Cuál es tu dispositivo?",
+          "desc": "Si tienes un Nano S, puedes intentar reparar el firmware de tu dispositivo. Los usuarios de Nano X y Blue deben ponerse en contacto con el Soporte de Ledger"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": "¿Aún no está resuelto el problema de la conexión USB?",
+          "desc": "Si has probado con todas las soluciones, ponte en contacto con el Soporte de Ledger. Si no, sigue las instrucciones de las que no hayas probado aún.",
+          "back": "Volver al Portfolio",
+          "cta": "Contactar con Soporte"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Reparar tu Nano S",
+          "desc": "¿Cuál es el mensaje que muestra tu dispositivo?",
+          "mcuOutdated": "El firmware de la MCU está desactualizado",
+          "mcuNotGenuine": "El firmware de la MCU no es original",
+          "repairInstructions": "Sigue las instrucciones de reparación del dispositivo",
+          "updateInstructions": "Sigue las instrucciones de actualización del dispositivo",
+          "somethingElse": "Otros"
         }
       }
     }
@@ -3321,8 +3321,8 @@
       "description": "Utiliza Manager para desinstalar todas las aplicaciones y comprobar si hay alguna actualización de firmware disponible antes de instalarlas de nuevo"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Actualizar el firmware de Nano",
+      "description": "Actualiza el firmware de tus dispositivos con la última versión para acceder a esta característica"
     },
     "FirmwareNotRecognized": {
       "title": "No se reconoce el firmware del dispositivo",
@@ -3718,13 +3718,13 @@
       "title": "Asegúrate de que tienes un saldo restante suficiente para cubrir las tarifas de transacciones futuras"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "El saldo no puede ser inferior a {{minimumBalance}}. Envía el importe máximo a una cuenta sin saldo."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Tienes que vincular al menos {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Tu saldo vinculado tiene que ser al menos de {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Has superado el límite de desvinculación"
