@@ -239,7 +239,7 @@
     "providers": {
       "title": "اختر أحد المزودين لمبادلة العملات المشفرة",
       "learnMore": "ما هو التبادل؟",
-      "kycRequired": "KYC Required",
+      "kycRequired": "KYC (التحقق من الهوية) مطلوب",
       "wyre": {
         "bullets": [
           "الولايات المتحدة فقط (قريبًا أوروبا وأفريقيا وآسيا)",
@@ -258,22 +258,22 @@
         "bullets": [
           "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
           "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "لامركزي وبدون ثقة"
         ]
       },
       "cta": "متابعة",
       "kyc": {
         "notAvailable": "{{provider}} is unavailable in your location",
         "status": {
-          "required": "KYC Required",
+          "required": "KYC (التحقق من الهوية) مطلوب",
           "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "approved": "تم اعتماد بيانات التحقق من الهوية!",
+          "closed": "تم رفض بيانات التحقق من الهوية"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
+      "title": "مرحبًا بك في التبادل",
       "subtitle": "Exchange crypto assets directly from your Ledger device.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
@@ -2976,10 +2976,10 @@
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
-    "supportArticle": "Support article",
+    "supportArticle": "مقالة دعم",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
+        "title": "استكشاف وحل مشكلات الUSB",
         "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
         "cta": "Lets fix it!",
         "back": "رجوع"
