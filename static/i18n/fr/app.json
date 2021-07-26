@@ -364,9 +364,9 @@
       "cta": "Réinitialiser la vérification"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Supprimer sa vérification",
+      "subtitle": "Supprimez votre vérification pour effacer tous les jetons stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
+      "cta": "Confirmer"
     },
     "modal": {
       "title": "Swap",
@@ -1972,7 +1972,7 @@
     "unlockedBalance": "Délié",
     "unlockedTooltip": "Les actifs déliés peuvent maintenant être déplacés en utilisant l'opération de retrait.",
     "networkFees": "Les frais de réseau sont automatiquement définis par le consensus de Polkadot. Vous ne pourrez pas les voir sur votre appareil.",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "Votre solde lié est inférieur au minimum requis ({{minimumBondBalance}}). Vos nominations risquent d'être supprimées.",
     "nomination": {
       "emptyState": {
         "description": "Vous pouvez obtenir des récompenses en liant des actifs, puis en nommant un ou des validateur(s).",
@@ -2345,7 +2345,7 @@
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
       "theme": "Thème",
       "themeDesc": "Sélectionnez un thème.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Fuseau horaire",
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
