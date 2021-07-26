@@ -3015,15 +3015,15 @@
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "换一条 USB 线",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "尽可能使用原装 USB 线。",
+            "1": "换一条 USB 线再次尝试，确保 USB 线支持数据传输。",
+            "2": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "重启您的电脑",
           "bullets": {
             "0": "重启您的电脑。",
             "1": "启动 Ledger Live",
