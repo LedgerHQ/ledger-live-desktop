@@ -3070,31 +3070,31 @@
             "title": "重置 NVRAM",
             "link": "苹果设备的说明",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "如果您的 Mac 使用的是英特尔处理器，请按照 <0>{{link}}</0> 中的说明重置 NVRAM。",
+              "1": "连接并解锁您的设备，查看设备能否被检测到。"
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "您使用的是哪款设备？",
+          "desc": "如果您使用的是 Nano S，可以尝试修复设备的固件。如果您使用的是 Nano X 和 Blue，请联系 Ledger 客服。"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": " 依旧没有解决 USB 连接问题？",
+          "desc": "如果您已经尝试过了所有可能的解决方案，请联系 Ledger 客服。否则，请根据指示尝试还未使用过的解决方案。",
+          "back": "返回投资组合",
+          "cta": "联系客服"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "修复您的 Nano S",
+          "desc": "您设备上显示的消息是什么？",
+          "mcuOutdated": "MCU 固件版本过期",
+          "mcuNotGenuine": "MCU 固件非正版",
+          "repairInstructions": "请遵照设备修复指示",
+          "updateInstructions": "请遵照设备更新指示",
+          "somethingElse": "其他"
         }
       }
     }
@@ -3321,8 +3321,8 @@
       "description": "请使用管理器卸载所有的应用程序，且在重新安装应用程序之前检查是否有可用的固件更新。"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "更新 Nano 的固件",
+      "description": "请更新您的设备固件到最新版本以访问此功能"
     },
     "FirmwareNotRecognized": {
       "title": "无法识别设备固件",
@@ -3718,7 +3718,7 @@
       "title": "确保您有足够的余额来支付未来的交易费用"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "余额不能少于 {{minimumBalance}}。发送最大值以清空账户"
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least {{minimumBondAmount}}."
