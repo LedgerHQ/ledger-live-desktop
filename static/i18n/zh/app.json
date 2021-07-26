@@ -19,8 +19,8 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
-        "website": "Website"
+        "title": "信息",
+        "website": "网站"
       }
     },
     "catalog": {
@@ -237,27 +237,27 @@
       "cta": "前往 Manager（管理器）"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "选择一个提供方来进行加密资产的掉期交易",
+      "learnMore": "什么是 Swap？",
+      "kycRequired": "需要 KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "仅限美国（欧洲、非洲和亚洲即将开放）",
+          "多币和代币",
+          "中心化的"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "比特币、以太币、泰达币以及50余个其他币种",
+          "多币种",
+          "中心化的"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
+          "连接到 30 多个 DEXs (Uniswap, SushiSwap,...)",
+          "以太坊 和 ERC20 代币",
           "Decentralized & Trustless"
         ]
       },
