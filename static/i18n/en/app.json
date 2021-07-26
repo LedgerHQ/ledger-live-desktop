@@ -274,23 +274,6 @@
       "title": "Choose a provider to swap crypto",
       "learnMore": "What is Swap?",
       "kycRequired": "KYC Required",
-      "wyre": {
-        "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
-        ]
-      },
-      "changelly": {
-        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
-        ]
-      },
       "cta": "Continue",
       "kyc": {
         "notAvailable": "{{provider}} is unavailable in your location",
