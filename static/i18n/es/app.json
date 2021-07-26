@@ -300,7 +300,7 @@
           "firstName": "Nombre",
           "lastName": "Apellido",
           "street1": "Dirección postal línea 1",
-          "street2": "Street Address Line 2",
+          "street2": "Dirección postal línea 2",
           "city": "Ciudad",
           "state": "Estado",
           "country": "País",
@@ -310,22 +310,22 @@
           "lastNamePlaceholder": "Ingresa tu apellido",
           "street1Placeholder": "Ejemplo: Calle Maple, 13",
           "street2Placeholder": "Ejemplo: Calle Maple, 13",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "cityPlaceholder": "Ejemplo: San José",
+          "postalCodePlaceholder": "Ingresa tu código postal de 5 dígitos",
+          "dateOfBirthPlaceholder": "MM/DD/AAAA",
+          "firstNameError": "Ingresa tu nombre para continuar",
+          "lastNameError": "Ingresa tu apellido para continuar",
+          "street1Error": "Ingresa tu dirección",
+          "cityError": "Ingresa la ciudad en la que vives en EE. UU.",
+          "postalCodeError": "Ingresa un código postal de EE. UU. válido",
+          "dateOfBirthError": "Ingresa tu fecha de nacimiento",
+          "dateOfBirthValidationError": "Ingresa una fecha de nacimiento válida"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "Restablece tu KYC y actualiza Live para permutar con Wyre",
+      "resetKYCCTA": "Restablecer KYC",
       "amount": "Importe",
       "from": {
         "title": "De",
@@ -359,14 +359,14 @@
       "loadingRates": "Cargando tasas..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Ledger Live requiere de una actualización",
+      "subtitle": "Actualiza Ledger Live a la última versión y vuelve a verificar tu identidad para permutar con Wyre",
+      "cta": "Restablece la verificación"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Elimina tu KYC",
+      "subtitle": "Elimina tu KYC para borrar todos los tokens almacenados localmente en el equipo. Tendrás que volver a enviar tu KYC para acceder a los servicios proporcionados por nuestros socios.",
+      "cta": "Confirmar"
     },
     "modal": {
       "title": "Permutar",
@@ -1972,7 +1972,7 @@
     "unlockedBalance": "Desvinculado",
     "unlockedTooltip": "Los activos desvinculados ya se pueden mover utilizando la operación de retiro.",
     "networkFees": "El consenso Polkadot establece automáticamente las tarifas de red, no podrás modificarlas desde tu dispositivo",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "Tu saldo vinculado está por debajo del mínimo actual de {{minimumBondBalance}}. Tus nominaciones corren el riesgo de ser eliminadas.",
     "nomination": {
       "emptyState": {
         "description": "Puedes recibir recompensas vinculando activos y nominando luego a los validadores.",
@@ -2345,7 +2345,7 @@
       "languageDesc": "Configura el idioma de Ledger Live.",
       "theme": "Tema",
       "themeDesc": "Selecciona el tema.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Divisa preferida",
       "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
       "region": "Región",
       "regionDesc": "Elige tu región para establecer la zona horaria de Ledger Live.",
@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Seleccionar activo cripto",
       "desc": "Selecciona un activo cripto para editar sus ajustes.",
       "placeholder": "No hay ajustes para este activo",
       "confirmationsNb": "Cantidad de confirmaciones",
@@ -2370,8 +2370,8 @@
       "softResetTitle": "Borrar caché",
       "softResetDesc": "Borra la caché de Ledger Live para forzar una nueva sincronización con la cadena de bloques.",
       "softReset": "Borrar",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "Restablecer datos de KYC",
+      "resetKYCDesc": "Borra todos tus datos de KYC almacenados localmente que se utilizan para acceder a un proveedor de transacciones de terceros.",
       "hardResetTitle": "Restablecer Ledger Live",
       "hardResetDesc": "Borrar todos los datos de Ledger Live almacenados en tu PC, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
@@ -2972,10 +2972,10 @@
   },
   "connectTroubleshooting": {
     "desc": "¿Tienes dificultades para conectar tu dispositivo?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
+    "solution": "Solución nº {{number}}",
+    "nextSolution": "Solución siguiente",
+    "previousSolution": "Solución anterior",
+    "followSteps": "Sigue estos pasos",
     "supportArticle": "Support article",
     "steps": {
       "entry": {
