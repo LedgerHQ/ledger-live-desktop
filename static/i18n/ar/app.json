@@ -24,7 +24,7 @@
       }
     },
     "catalog": {
-      "title": "إكتشف",
+      "title": "اكتشف",
       "branch": {
         "soon": "سيأتي قريباً",
         "experimental": "تجريبي",
@@ -185,7 +185,7 @@
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
     "lend": "إقراض",
-    "catalog": "إكتشف"
+    "catalog": "اكتشف"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
