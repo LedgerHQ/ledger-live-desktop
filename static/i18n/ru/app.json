@@ -306,10 +306,10 @@
           "country": "Страна",
           "postalCode": "Индекс",
           "dateOfBirth": "Дата рождения",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
+          "firstNamePlaceholder": "Введите имя",
+          "lastNamePlaceholder": "Введите фамилию",
+          "street1Placeholder": "Например: Ул. Маявковского 50",
+          "street2Placeholder": "Например: Ул. Маявковского 50",
           "cityPlaceholder": "Eg. San José",
           "postalCodePlaceholder": "Enter your 5 digit Zip code",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
@@ -3023,69 +3023,69 @@
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Перезагрузите компьютер",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Перезагрузите компьютер.",
+            "1": "Запустите Ledger Live",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Выключите антивирусную программу и VPN.",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "Выключите антивирусную программу, фаервол и VPN.",
+            "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено.",
+            "2": "Добавьте Ledger Live в белый список вашей антивирусной программы, если она включена."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Воспользуйтесь другим компьютером",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Перейдите по <0>{{link}}</0> на другом компьютере, чтобы скачать и установить Ledger Live.",
+            "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "Обновление USB-драйверов",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "Откройте <0>{{link}}</0>",
+            "1": "Следуйте инструкциям для обновления USB-драйверов.",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Предоставление полного доступа к диску",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Откройте «Системные настройки».",
+              "1": "Перейдите к пункту «Защита и безопасность».",
+              "2": "На вкладке «Конфиденциальность» перейдите к пункту «Доступ к диску» в левом столбце.",
+              "3": "Добавьте «Ledger Live».",
+              "4": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "Сбросьте NVRAM",
+            "link": "Инструкция для Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Если на вашем Mac установлен процессор intel, то для сброса NVRAM выполните инструкции <0>{{link}}</0>.",
+              "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "Какое у вас устройство?",
+          "desc": "Если у вас Nano S, попробуйте Исправить прошивку вашего устройства. Пользователям Nano X и Blue необходимо связаться с Поддержкой Ledger"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": " Проблема с USB-подключением не исправлена?",
+          "desc": "Если вы использовали всеми возможные решения, обратитесь в Поддержку Ledger. В противном случае выполните инструкции, которое вы ещё не пробовали.",
+          "back": "Вернуться к Портфелю",
+          "cta": "Связаться с поддержкой"
         },
         "repair": {
           "title": "Repair your Nano S",
