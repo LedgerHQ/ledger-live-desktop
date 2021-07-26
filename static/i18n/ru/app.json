@@ -1972,7 +1972,7 @@
     "unlockedBalance": "Не заблокированные",
     "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
     "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, её невозможно будет просмотреть на устройстве",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "У вас не хватает заблокированных средств (мин. {{minimumBondBalance}}). Ваши назначения могут быть отозваны.",
     "nomination": {
       "emptyState": {
         "description": "Вы можете получать вознаграждения, блокируя активы и назначая валидаторов.",
@@ -2345,7 +2345,7 @@
       "languageDesc": "Выберите язык интерфейса в Ledger Live.",
       "theme": "Тема оформления",
       "themeDesc": "Выберите тему.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Предпочтительная валюта",
       "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
       "region": "Регион",
       "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "Показывать Портфель в формате карусели"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Выберите криптоактив",
       "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
       "placeholder": "Нет настроек для выбранного актива",
       "confirmationsNb": "Количество подтверждений",
@@ -2370,8 +2370,8 @@
       "softResetTitle": "Очистка кэша",
       "softResetDesc": "Очистите кэш Ledger Live для принудительной синхронизации с блокчейном.",
       "softReset": "Очистить",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "Сбросить данные KYC",
+      "resetKYCDesc": "Удалите все сохранённые локально данные KYC, которые используются для доступа к стороннему поставщику транзакций.",
       "hardResetTitle": "Сброс Ledger Live",
       "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории транзакций и настроек.",
       "hardReset": "Сбросить",
@@ -2972,10 +2972,10 @@
   },
   "connectTroubleshooting": {
     "desc": "Не удаётся подключить устройство?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
+    "solution": "Решение №{{number}}",
+    "nextSolution": "Следующее решение",
+    "previousSolution": "Предыдущее решение",
+    "followSteps": "Выполните эти шаги",
     "supportArticle": "Support article",
     "steps": {
       "entry": {
