@@ -2976,27 +2976,27 @@
     "nextSolution": "Solución siguiente",
     "previousSolution": "Solución anterior",
     "followSteps": "Sigue estos pasos",
-    "supportArticle": "Support article",
+    "supportArticle": "Artículo de soporte",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Solucionar problemas de la conexión USB",
+        "desc": "Parece que hay un problema con la conexión a tu dispositivo. No te preocupes, puedes probar varias soluciones una a una hasta que se conecte el dispositivo.",
+        "cta": "¡Vamos a solucionarlo!",
+        "back": "Volver"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Ejecuta Ledger Live como administrador",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Sal de Ledger Live.",
+            "1": "Haz clic con el botón derecho en la aplicación Ledger Live.",
+            "2": "Selecciona «Ejecutar como administrador».",
+            "3": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
+          "title": "Actualiza las reglas udev en Linux",
+          "desc": "Haz clic en el botón siguiente para agregar las reglas udev. Luego conecta y desbloquea tu dispositivo para ver si se detecta.",
           "cta": "Set Rules",
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
