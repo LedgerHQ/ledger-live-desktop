@@ -311,21 +311,21 @@
           "street1Placeholder": "例如：枫树街 13 号",
           "street2Placeholder": "例如：枫树街 13 号",
           "cityPlaceholder": "例如：圣何塞（San José）",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "postalCodePlaceholder": "输入您的 5 位数邮政编码",
+          "dateOfBirthPlaceholder": "月/日/年",
+          "firstNameError": "输入您的名字以继续",
+          "lastNameError": "输入您的姓氏以继续",
+          "street1Error": "输入您的地址",
+          "cityError": "输入您在美国的居住城市",
+          "postalCodeError": "输入有效的美国邮编",
+          "dateOfBirthError": "输入您的出生日期",
+          "dateOfBirthValidationError": "输入有效的出生日期"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "请重置您的 KYC 并更新 Live 以便使用 Wyre 进行掉期交易",
+      "resetKYCCTA": "重置 KYC",
       "amount": "数额",
       "from": {
         "title": "来自",
@@ -359,14 +359,14 @@
       "loadingRates": "正在加载费率..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Ledger Live 需要更新",
+      "subtitle": "请将 Ledger Live 更新到最新版本，然后重新验证您的身份，以便使用 wyre 进行掉期交易",
+      "cta": "重置验证信息"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "删除您的 KYC",
+      "subtitle": "删除您的 KYC 以清除存储在您电脑本地中的所有代币。此后，您需要重新递交您的 KYC 才能获得我们合作伙伴提供的服务。",
+      "cta": "确认"
     },
     "modal": {
       "title": "Swap",
@@ -1972,7 +1972,7 @@
     "unlockedBalance": "已解绑",
     "unlockedTooltip": "现在可使用提取操作转移已解绑的资产。",
     "networkFees": "网络费用由 Polkadot 波卡共识协议自动设定，您无法在自己的设备上查看它们。",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "您的已绑定余额低于 {{minimumBondBalance}} 的最低额度。您的提名有被移除的风险。",
     "nomination": {
       "emptyState": {
         "description": "您可以通过绑定资产并随后提名您的（某个或多个）验证器来赚取奖励。",
@@ -2345,7 +2345,7 @@
       "languageDesc": "设置 Ledger Live 中显示的语言。",
       "theme": "主题",
       "themeDesc": "选择主题。",
-      "counterValue": "Preferred currency",
+      "counterValue": "首选币种",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
       "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "选择加密资产",
       "desc": "选择一种加密资产以编辑其设置。",
       "placeholder": "没有此资产的设置",
       "confirmationsNb": "确认数量",
@@ -2370,8 +2370,8 @@
       "softResetTitle": "清除缓存",
       "softResetDesc": "清除 Ledger Live 缓存，以强制与区块链重新同步。",
       "softReset": "清除",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "重置 KYC 数据",
+      "resetKYCDesc": "清除您本地存储的、用于访问第三方交易提供方的所有 KYC (了解您的客户) 数据。",
       "hardResetTitle": "重置 Ledger Live",
       "hardResetDesc": "清除您电脑上存储的所有 Ledger Live 数据，包括您的账户信息、交易历史记录和设置选项。",
       "hardReset": "重置",
@@ -2972,9 +2972,9 @@
   },
   "connectTroubleshooting": {
     "desc": "无法连接您的设备？",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
+    "solution": "解决方案 #{{number}}",
+    "nextSolution": "下一个解决方案",
+    "previousSolution": "上一个解决方案",
     "followSteps": "Follow these steps",
     "supportArticle": "Support article",
     "steps": {
@@ -3721,10 +3721,10 @@
       "title": "余额不能少于 {{minimumBalance}}。发送最大值以清空账户"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "您必须至少绑定 {{minimumBondAmount}}。"
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "您的已绑定余额不能少于 {{minimumBondBalance}}。"
     },
     "PolkadotMaxUnbonding": {
       "title": "您已超过了解绑限额"
