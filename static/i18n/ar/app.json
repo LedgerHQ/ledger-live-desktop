@@ -2981,12 +2981,12 @@
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
+        "cta": "لنقوم بإصلاحها!",
         "back": "رجوع"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "تشغيل Ledger Live كمسؤول",
           "bullets": {
             "0": "Quit Ledger Live.",
             "1": "Right-click the Ledger Live application.",
@@ -3062,12 +3062,12 @@
               "0": "Open “System Preferences”.",
               "1": "انتقل إلى \"الأمان والخصوصية\".",
               "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
+              "3": "إضافة \"Ledger Live\".",
               "4": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
+            "title": "إعادة تعيين NVRAM",
             "link": "Apple’s instructions",
             "bullets": {
               "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
@@ -3088,7 +3088,7 @@
           "cta": "الاتصال بقسم الدعم"
         },
         "repair": {
-          "title": "Repair your Nano S",
+          "title": "إصلاح Nano S الخاص بك",
           "desc": "ما الرسالة المعروضة على جهازك؟",
           "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU firmware is not genuine",
