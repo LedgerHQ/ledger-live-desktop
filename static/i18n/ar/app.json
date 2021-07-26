@@ -3023,54 +3023,54 @@
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "أعد تشغيل الكمبيوتر",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
+            "0": "أعد تشغيل الكمبيوتر.",
+            "1": "ابدأ تشغيل Ledger Live.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "إيقاف برنامج الحماية من الفيروسات وVPN",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
+            "0": "إيقاف أي برنامج حماية من الفيروسات، جدار حماية، وVPN.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "2": "أضف Ledger Live إلى قائمة البرامج المسموح بها في برنامج مكافحة الفيروسات لديك إذا كان ما سبق يعمل جيدًا."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "جرب كمبيوتر آخر",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
+            "0": "انتقل إلى <0>{{link}}</0> على كمبيوتر آخر لتنزيل Ledger Live وتثبيته.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "تحديث برامج تشغيل جهاز الUSB",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
+            "0": "قم بزيارة <0>{{link}}</0>",
+            "1": "اتبع الإرشادات لتحديث برامج تشغيل جهاز الUSB.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "تمكين الوصول إلى القرص بالكامل",
             "bullets": {
-              "0": "Open “System Preferences”.",
+              "0": "افتح \"تفضيلات النظام\".",
               "1": "انتقل إلى \"الأمان والخصوصية\".",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
+              "2": "في تبويب \"الخصوصية\"، انتقل إلى \"الوصول إلى القرص بالكامل\" في العمود الأيسر.",
               "3": "إضافة \"Ledger Live\".",
               "4": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
             }
           },
           "1": {
             "title": "إعادة تعيين NVRAM",
-            "link": "Apple’s instructions",
+            "link": "إرشادات Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
+              "0": "إذا كان جهاز Mac لديك مزودًا بمعالج intel، فاتبع هذا الرابط <0>{{link}}</0> لإعادة تعيين NVRAM.",
               "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
             }
           }
@@ -3082,8 +3082,8 @@
           "desc": "إذا كان لديك Nano S، فيمكنك تجربة إصلاح البرنامج الثابت لجهازك. أما بالنسبة لمستخدمي أجهزة Nano X وBlue، يرجى الاتصال بقسم الدعم بشركة Ledger"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
+          "title": " لم يتم حل مشكلة توصيل الUSB حتى الآن؟",
+          "desc": "إذا جربت كل الحلول الممكنة، فيرجى التواصل مع قسم دعم Ledger. إن لم تكن قد جربت كل الحلول، فيرجى اتباع الإرشادات الواردة في أي حل لم تجربه حتى الآن.",
           "back": "الرجوع إلى الحافظة",
           "cta": "الاتصال بقسم الدعم"
         },
