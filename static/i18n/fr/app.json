@@ -20,7 +20,7 @@
     "app": {
       "informations": {
         "title": "Informations",
-        "website": "Website"
+        "website": "Site"
       }
     },
     "catalog": {
@@ -237,12 +237,12 @@
       "cta": "Aller dans le Gestionnaire"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Choisir un prestataire pour le swap",
+      "learnMore": "Qu'est-ce que le Swap ?",
+      "kycRequired": "Vérification d'identité nécessaire",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
+          "USA uniquement (Europe, Afrique et Asie à venir)",
           "Multi coins and tokens",
           "Centralized"
         ]
