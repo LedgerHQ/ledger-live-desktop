@@ -3039,46 +3039,46 @@
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Essayer sur un autre ordinateur",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Allez sur <0>{{link}}</0> sur un autre ordinateur pour télécharger et installer Ledger Live.",
+            "1": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "Mettre à jour les pilotes USB",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "Allez sur <0>{{link}}</0>",
+            "1": "Suivez les instructions pour mettre à jour les pilotes USB.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Autoriser l'accès complet au disque",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Ouvrez les Préférences Système de votre Mac.",
+              "1": "Accédez à Sécurité et confidentialité.",
+              "2": "Dans Confidentialité, ouvrez Accès complet au disque, sur la gauche.",
+              "3": "Ajoutez Ledger Live.",
+              "4": "Connectez et déverrouillez votre appareil pour voir le détecter."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "Réinitialiser la NVRAM",
+            "link": "les instructions d'Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Si votre Mac a un processeur Intel, suivez <0>{{link}}</0> pour réinitialiser la NVRAM.",
+              "1": "Connectez et déverrouillez votre appareil pour le détecter."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
+          "title": "Quel appareil avez-vous ?",
           "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
         },
         "notFixed": {
