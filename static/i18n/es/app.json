@@ -365,7 +365,7 @@
     },
     "resetKYCModal": {
       "title": "Elimina tu KYC",
-      "subtitle": "Elimina tu KYC para borrar todos los tokens almacenados localmente en el equipo. Tendrás que volver a enviar tu KYC para acceder a los servicios proporcionados por nuestros socios.",
+      "subtitle": "Elimina tu KYC para borrar todos los tokens almacenados localmente en tu PC. Tendrás que volver a enviar tu KYC para acceder a los servicios proporcionados por nuestros socios.",
       "cta": "Confirmar"
     },
     "modal": {
@@ -2363,7 +2363,7 @@
     },
     "profile": {
       "password": "Bloqueo por contraseña",
-      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu equipo, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
+      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
       "passwordAutoLock": "Bloqueo automático",
       "passwordAutoLockDesc": "Bloquear Ledger Live automáticamente cuando esté inactivo.",
       "changePassword": "Cambiar contraseña",
@@ -2398,7 +2398,7 @@
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu equipo. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación."
+      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación."
     },
     "softResetModal": {
       "title": "Borrar caché",
@@ -3009,7 +3009,7 @@
         "usbPort": {
           "title": "Prueba con distintos puertos USB",
           "bullets": {
-            "0": "Cambia el puerto USB que utilizas en el equipo",
+            "0": "Cambia el puerto USB que utilizas en tu PC",
             "1": "Quita cualquier llave (dongle) USB",
             "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
@@ -3023,9 +3023,9 @@
           }
         },
         "restart": {
-          "title": "Reinicia tu equipo",
+          "title": "Reinicia tu PC",
           "bullets": {
-            "0": "Reinicia tu equipo.",
+            "0": "Reinicia tu PC.",
             "1": "Inicia Ledger Live.",
             "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
@@ -3035,39 +3035,39 @@
           "bullets": {
             "0": "Desactiva cualquier software de antivirus, firewall y VPN.",
             "1": "Conecta y desbloquea tu dispositivo para ver si se detecta.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "2": "Agrega Ledger Live a la lista de permitidos en el antivirus si lo anterior ha funcionado bien."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Prueba con otra PC",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Ingresa a <0>{{link}}</0> en otra PC para descargar e instalar Ledger Live.",
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "Actualiza los controladores del dispositivo USB",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "Visita este <0>{{link}}</0>",
+            "1": "Sigue las instrucciones para actualizar los controladores del dispositivo USB.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "mac": {
           "0": {
             "title": "Enable Full Disk Access",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
+              "0": "Abre \"Preferencias del sistema\".",
+              "1": "Ingresa a \"Seguridad y privacidad\".",
               "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "3": "Agrega \"Ledger Live\".",
+              "4": "Conecta y desbloquea tu dispositivo para ver si se detecta."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
+            "title": "Restablecer NVRAM",
             "link": "Apple’s instructions",
             "bullets": {
               "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
