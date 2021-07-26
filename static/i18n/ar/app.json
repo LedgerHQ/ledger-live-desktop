@@ -266,7 +266,7 @@
         "notAvailable": "{{provider}} is unavailable in your location",
         "status": {
           "required": "KYC (التحقق من الهوية) مطلوب",
-          "pending": "KYC Pending",
+          "pending": "التحقق من بيانات الهوية مُعلّق",
           "approved": "تم اعتماد بيانات التحقق من الهوية!",
           "closed": "تم رفض بيانات التحقق من الهوية"
         }
@@ -288,13 +288,13 @@
           "cta": "متابعة",
           "title": "Pending approval",
           "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
-          "link": "Learn more about KYC"
+          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
+          "cta": "إعادة تعيين بيانات التحقق من الهوية",
+          "title": "تم رفض طلب KYC (التحقق من الهوية)",
           "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "form": {
           "firstName": "First Name",
@@ -325,7 +325,7 @@
     },
     "form": {
       "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYCCTA": "إعادة تعيين بيانات التحقق من الهوية",
       "amount": "المبلغ",
       "from": {
         "title": "من",
@@ -364,7 +364,7 @@
       "cta": "Reset verification"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
+      "title": "حذف بيانات التحقق من الهوية الخاصة بك",
       "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
       "cta": "تأكيد"
     },
@@ -2370,7 +2370,7 @@
       "softResetTitle": "حذف الذاكرة المؤقتة",
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
-      "resetKYC": "Reset KYC data",
+      "resetKYC": "إعادة تعيين بيانات التحقق من الهوية",
       "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
