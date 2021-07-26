@@ -2355,7 +2355,7 @@
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Choisissez un crypto-actif",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
@@ -2370,8 +2370,8 @@
       "softResetTitle": "Vider le cache",
       "softResetDesc": "Effacez le cache de Ledger Live pour forcer la resynchronisation avec la blockchain.",
       "softReset": "Effacer",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "Réinitialiser les données de vérification",
+      "resetKYCDesc": "Effacez toutes vos données de vérification d'identité stockées localement pour utiliser les services de prestataires tiers.",
       "hardResetTitle": "Réinitialiser Ledger Live",
       "hardResetDesc": "Effacez toutes les données de Ledger Live stockées sur votre ordinateur, y compris vos comptes, l'historique de vos transactions et vos paramètres.",
       "hardReset": "Réinitialiser",
@@ -2972,52 +2972,52 @@
   },
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "solution": "Solution n°{{number}}",
+    "nextSolution": "Solution suivante",
+    "previousSolution": "Solution précédente",
+    "followSteps": "Suivez ces étapes",
+    "supportArticle": "Article de l'Assistance",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Dépanner la connexion USB",
+        "desc": "Votre appareil semble avoir du mal à se connecter. Vous pouvez essayer les solutions suivantes jusqu'à ce que votre appareil se connecte.",
+        "cta": "Réparer",
+        "back": "Retour"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Exécuter Ledger Live en tant qu'administrateur",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Fermez Ledger Live.",
+            "1": "Faites un clic droit sur Ledger Live.",
+            "2": "Choisissez \"Exécuter en tant qu'administrateur\".",
+            "3": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "Mettre à jour les règles udev sur Linux",
+          "desc": "Cliquez sur le bouton ci-dessous pour ajouter les règles udev.\nConnectez et déverrouillez votre appareil pour le détecter.",
+          "cta": "Ajouter",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Saisissez la commande suivante dans un terminal pour ajouter automatiquement les règles et recharger udev.",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Essayer différents ports USB",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Utilisez un autre port USB sur votre ordinateur.",
+            "1": "Retirez tout autre appareil connecté en USB.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Changer le câble USB",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
+            "0": "Utilisez si possible le câble USB d'origine.",
             "1": "Try a different USB cable, making sure it supports data transfer.",
             "2": "Connect and unlock your device to see if it’s detected."
           }
