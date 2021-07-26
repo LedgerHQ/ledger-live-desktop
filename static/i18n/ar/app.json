@@ -237,14 +237,14 @@
       "cta": "الانتقال إلى المدير"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
+      "title": "اختر أحد المزودين لمبادلة العملات المشفرة",
+      "learnMore": "ما هو التبادل؟",
       "kycRequired": "KYC Required",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
+          "الولايات المتحدة فقط (قريبًا أوروبا وأفريقيا وآسيا)",
           "Multi coins and tokens",
-          "Centralized"
+          "مركزي"
         ]
       },
       "changelly": {
