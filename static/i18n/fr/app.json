@@ -3018,23 +3018,23 @@
           "title": "Changer le câble USB",
           "bullets": {
             "0": "Utilisez si possible le câble USB d'origine.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "1": "Essayez un autre câble prenant en charge le transfert de données.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Redémarrer son ordinateur",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Redémarrez votre ordinateur.",
+            "1": "Lancez Ledger Live.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Désactiver son antivirus et VPN",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
+            "0": "Désactivez vos logiciels antivirus, pare-feu et VPN.",
+            "1": "Connectez et déverrouillez votre appareil pour le détecter.",
             "2": "Whitelist Ledger Live in your anti-virus if that worked."
           }
         },
