@@ -19,9 +19,11 @@ const summaryMockedData = {
 };
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
-  p: 20,
+  pt: 36,
+  pb: 20,
 })`
   row-gap: 1.75rem;
+  max-width: 27.5rem;
 `;
 
 const Button = styled(ButtonBase)`

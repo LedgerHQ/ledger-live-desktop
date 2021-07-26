@@ -11,13 +11,14 @@ import Box from "~/renderer/components/Box";
 
 const Body = styled(Box)`
   row-gap: 2px;
+  flex: 1;
 `;
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
+  flex: 1;
 
-  padding: 2rem 0;
   background-color: ${p => p.theme.colors.palette.background.paper};
 
   border-bottom-right-radius: 4px;
@@ -26,7 +27,6 @@ const Main = styled.main`
 
   & > * {
     width: 100%;
-    max-width: 27.5rem;
   }
 `;
 
