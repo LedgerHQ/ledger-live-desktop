@@ -243,38 +243,38 @@
       "wyre": {
         "bullets": [
           "USA uniquement (Europe, Afrique et Asie à venir)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Multi coins et jetons",
+          "Centralisé"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT et plus de 50 autres",
+          "Multidevises",
+          "Centralisé"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
+          "Ethereum et jetons ERC-20",
+          "Décentralisé et se passant des tiers de confiance"
         ]
       },
-      "cta": "Continue",
+      "cta": "Continuer",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} non disponible dans votre région",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "Vérification d'identité nécessaire",
+          "pending": "Vérification d'identité en attente",
+          "approved": "Vérification d'identité approuvée",
+          "closed": "Vérification d'identité refusée"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
+      "title": "Bienvenue dans le Swap",
+      "subtitle": "Échangez des crypto-actifs depuis votre appareil Ledger.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "kyc": {
