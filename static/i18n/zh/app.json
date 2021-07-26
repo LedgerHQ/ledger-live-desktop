@@ -3042,33 +3042,33 @@
           "title": "换一台电脑再次尝试",
           "bullets": {
             "0": "使用另外一台电脑，通过 <0>{{link}}</0> 下载并安装 Ledger Live。",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "更新 USB 设备驱动程序",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "访问此 <0>{{link}}</0>",
+            "1": "按照说明更新 USB 设备驱动程序。",
+            "2": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "开启硬盘的全部访问权限",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "打开“系统偏好设置”。",
+              "1": "前往 “安全和隐私” 选项。",
+              "2": "在 “隐私” 选项卡的左侧栏中，找到 “硬盘全部访问权限” 。",
+              "3": "添加 “Ledger Live”。",
+              "4": "连接并解锁您的设备，查看设备能否被检测到。"
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "重置 NVRAM",
+            "link": "苹果设备的说明",
             "bullets": {
               "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
               "1": "Connect and unlock your device to see if it’s detected."
