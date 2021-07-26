@@ -17,6 +17,12 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Website"
+      }
+    },
     "catalog": {
       "title": "Discover",
       "branch": {
@@ -2358,7 +2364,7 @@
       "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
       "themeDesc": "Select the theme.",
-      "counterValue": "Countervalue",
+      "counterValue": "Preferred currency",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
@@ -2368,6 +2374,7 @@
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
     },
     "currencies": {
+      "selectPlaceholder": "Select crypto asset",
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
       "confirmationsNb": "Number of confirmations",

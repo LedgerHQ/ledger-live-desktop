@@ -17,6 +17,12 @@
         }
       }
     },
+    "app": {
+      "informations": {
+        "title": "Informations",
+        "website": "Site"
+      }
+    },
     "catalog": {
       "title": "Discover",
       "branch": {
@@ -230,12 +236,96 @@
       "subtitle": "Accédez au Gestionnaire et installez l'application {{appName}} pour échanger vos actifs.",
       "cta": "Aller dans le Gestionnaire"
     },
-    "kyc": {
+    "providers": {
+      "title": "Choisir un prestataire pour le swap",
+      "learnMore": "Qu'est-ce que le Swap ?",
+      "kycRequired": "Vérification d'identité nécessaire",
+      "wyre": {
+        "bullets": [
+          "USA uniquement (Europe, Afrique et Asie à venir)",
+          "Multi coins et jetons",
+          "Centralisé"
+        ]
+      },
+      "changelly": {
+        "bullets": [
+          "BTC, ETH, USDT et plus de 50 autres",
+          "Multidevises",
+          "Centralisé"
+        ]
+      },
+      "paraswap": {
+        "bullets": [
+          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
+          "Ethereum et jetons ERC-20",
+          "Décentralisé et se passant des tiers de confiance"
+        ]
+      },
+      "cta": "Continuer",
+      "kyc": {
+        "notAvailable": "{{provider}} non disponible dans votre région",
+        "status": {
+          "required": "Vérification d'identité nécessaire",
+          "pending": "Vérification d'identité en attente",
+          "approved": "Vérification d'identité approuvée",
+          "closed": "Vérification d'identité refusée"
+        }
+      }
+    },
+    "ip": {
       "title": "Bienvenue dans le Swap",
-      "subtitle": "Échangez vos crypto-actifs directement à partir de votre appareil Ledger. Ce service n'est pas disponible dans certains pays, y compris aux États-Unis.",
-      "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des prestataires tiers pour leur permettre de se conformer à leurs procédures LCB/KYC."
+      "subtitle": "Échangez des crypto-actifs depuis votre appareil Ledger.",
+      "disclaimer": "En continuant, vous acceptez que vos données de localisation soient partagées avec des prestataires tiers dans le cadre de leurs procédures LCB/KYC."
+    },
+    "kyc": {
+      "updateRequired": "La vérification d'identité est impossible si l'application n'est pas à jour.",
+      "wyre": {
+        "disclaimer": "LEDGER recueille vos données pour le compte de WYRE et les lui transfère pour réaliser votre vérification d'identité. Consultez notre",
+        "policy": "Politique de confidentialité",
+        "title": "Vérifier son identité",
+        "subtitle": "Saisissez vos données pour échanger avec Wyre.",
+        "pending": {
+          "cta": "Continuer",
+          "title": "En attente de validation",
+          "subtitle": "Vos données ont été envoyées à Wyre pour validation. Vous devriez pouvoir utiliser le Swap sous 1 à 3 jours.",
+          "link": "En savoir plus"
+        },
+        "closed": {
+          "cta": "Réinitialiser la vérification",
+          "title": "Demande de vérification refusée",
+          "subtitle": "Wyre a refusé les données que vous avez fournies",
+          "link": "En savoir plus"
+        },
+        "form": {
+          "firstName": "Prénom",
+          "lastName": "Nom de famille",
+          "street1": "Adresse postale ligne 1",
+          "street2": "Adresse postale ligne 2",
+          "city": "Ville",
+          "state": "État–région",
+          "country": "Pays",
+          "postalCode": "Code postal",
+          "dateOfBirth": "Date de naissance",
+          "firstNamePlaceholder": "Saisissez votre prénom",
+          "lastNamePlaceholder": "Saisissez votre nom",
+          "street1Placeholder": "Ex : 13 rue Rosa Parks",
+          "street2Placeholder": "Ex : 13 rue Rosa Parks",
+          "cityPlaceholder": "Ex : Abbeville",
+          "postalCodePlaceholder": "Saisissez votre code postal",
+          "dateOfBirthPlaceholder": "MM/JJ/AAAA",
+          "firstNameError": "Entrez votre prénom pour continuer.",
+          "lastNameError": "Entrez votre nom pour continuer.",
+          "street1Error": "Entrez votre adresse.",
+          "cityError": "Entrez la ville où vous habitez.",
+          "postalCodeError": "Saisissez un code postal valide.",
+          "dateOfBirthError": "Entrez votre date de naissance.",
+          "dateOfBirthValidationError": "Entrez une date de naissance valide."
+        }
+      }
     },
     "form": {
+      "resetKYC": "Réinitialisez le processus et mettez à jour Ledger Live.",
+      "resetKYCCTA": "Réinitialiser la vérification",
       "amount": "Montant",
       "from": {
         "title": "De",
@@ -267,6 +357,16 @@
       "noApp": "Application {{currencyName}} non installée",
       "outdatedApp": "Mise à jour de l'application {{currencyName}} disponible",
       "loadingRates": "Chargement des taux..."
+    },
+    "unauthorizedRatesModal": {
+      "title": "Mise à jour de Ledger Live nécessaire",
+      "subtitle": "Veuillez mettre à jour Ledger Live et vérifier à nouveau votre identité pour échanger avec Wyre",
+      "cta": "Réinitialiser la vérification"
+    },
+    "resetKYCModal": {
+      "title": "Supprimer sa vérification",
+      "subtitle": "Supprimez votre vérification pour effacer tous les jetons stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
+      "cta": "Confirmer"
     },
     "modal": {
       "title": "Swap",
@@ -1872,6 +1972,7 @@
     "unlockedBalance": "Délié",
     "unlockedTooltip": "Les actifs déliés peuvent maintenant être déplacés en utilisant l'opération de retrait.",
     "networkFees": "Les frais de réseau sont automatiquement définis par le consensus de Polkadot. Vous ne pourrez pas les voir sur votre appareil.",
+    "bondedBalanceBelowMinimum": "Votre solde lié est inférieur au minimum requis ({{minimumBondBalance}}). Vos nominations risquent d'être supprimées.",
     "nomination": {
       "emptyState": {
         "description": "Vous pouvez obtenir des récompenses en liant des actifs, puis en nommant un ou des validateur(s).",
@@ -2244,7 +2345,7 @@
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
       "theme": "Thème",
       "themeDesc": "Sélectionnez un thème.",
-      "counterValue": "Devise de contrepartie",
+      "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Fuseau horaire",
       "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
@@ -2254,6 +2355,7 @@
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
     },
     "currencies": {
+      "selectPlaceholder": "Choisissez un crypto-actif",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
@@ -2268,6 +2370,8 @@
       "softResetTitle": "Vider le cache",
       "softResetDesc": "Effacez le cache de Ledger Live pour forcer la resynchronisation avec la blockchain.",
       "softReset": "Effacer",
+      "resetKYC": "Réinitialiser les données de vérification",
+      "resetKYCDesc": "Effacez toutes vos données de vérification d'identité stockées localement pour utiliser les services de prestataires tiers.",
       "hardResetTitle": "Réinitialiser Ledger Live",
       "hardResetDesc": "Effacez toutes les données de Ledger Live stockées sur votre ordinateur, y compris vos comptes, l'historique de vos transactions et vos paramètres.",
       "hardReset": "Réinitialiser",
@@ -2867,7 +2971,133 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Des difficultés à connecter votre appareil ?"
+    "desc": "Des difficultés à connecter votre appareil ?",
+    "solution": "Solution n°{{number}}",
+    "nextSolution": "Solution suivante",
+    "previousSolution": "Solution précédente",
+    "followSteps": "Suivez ces étapes",
+    "supportArticle": "Article de l'Assistance",
+    "steps": {
+      "entry": {
+        "title": "Dépanner la connexion USB",
+        "desc": "Votre appareil semble avoir du mal à se connecter. Vous pouvez essayer les solutions suivantes jusqu'à ce que votre appareil se connecte.",
+        "cta": "Réparer",
+        "back": "Retour"
+      },
+      "1": {
+        "windows": {
+          "title": "Exécuter Ledger Live en tant qu'administrateur",
+          "bullets": {
+            "0": "Fermez Ledger Live.",
+            "1": "Faites un clic droit sur Ledger Live.",
+            "2": "Choisissez \"Exécuter en tant qu'administrateur\".",
+            "3": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        },
+        "linux": {
+          "title": "Mettre à jour les règles udev sur Linux",
+          "desc": "Cliquez sur le bouton ci-dessous pour ajouter les règles udev.\nConnectez et déverrouillez votre appareil pour le détecter.",
+          "cta": "Ajouter",
+          "bullets": {
+            "0": "Saisissez la commande suivante dans un terminal pour ajouter automatiquement les règles et recharger udev.",
+            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "1": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        }
+      },
+      "2": {
+        "usbPort": {
+          "title": "Essayer différents ports USB",
+          "bullets": {
+            "0": "Utilisez un autre port USB sur votre ordinateur.",
+            "1": "Retirez tout autre appareil connecté en USB.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        },
+        "usbCable": {
+          "title": "Changer le câble USB",
+          "bullets": {
+            "0": "Utilisez si possible le câble USB d'origine.",
+            "1": "Essayez un autre câble prenant en charge le transfert de données.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        },
+        "restart": {
+          "title": "Redémarrer son ordinateur",
+          "bullets": {
+            "0": "Redémarrez votre ordinateur.",
+            "1": "Lancez Ledger Live.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        },
+        "antiVirus": {
+          "title": "Désactiver son antivirus et VPN",
+          "bullets": {
+            "0": "Désactivez vos logiciels antivirus, pare-feu et VPN.",
+            "1": "Connectez et déverrouillez votre appareil pour le détecter.",
+            "2": "Placez Ledger Live sur la liste de logiciels autorisés par votre antivirus."
+          }
+        },
+        "anotherComputer": {
+          "title": "Essayer sur un autre ordinateur",
+          "bullets": {
+            "0": "Allez sur <0>{{link}}</0> sur un autre ordinateur pour télécharger et installer Ledger Live.",
+            "1": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        }
+      },
+      "3": {
+        "windows": {
+          "title": "Mettre à jour les pilotes USB",
+          "bullets": {
+            "0": "Allez sur <0>{{link}}</0>",
+            "1": "Suivez les instructions pour mettre à jour les pilotes USB.",
+            "2": "Connectez et déverrouillez votre appareil pour le détecter."
+          }
+        },
+        "mac": {
+          "0": {
+            "title": "Autoriser l'accès complet au disque",
+            "bullets": {
+              "0": "Ouvrez les Préférences Système de votre Mac.",
+              "1": "Accédez à Sécurité et confidentialité.",
+              "2": "Dans Confidentialité, ouvrez Accès complet au disque, sur la gauche.",
+              "3": "Ajoutez Ledger Live.",
+              "4": "Connectez et déverrouillez votre appareil pour voir le détecter."
+            }
+          },
+          "1": {
+            "title": "Réinitialiser la NVRAM",
+            "link": "les instructions d'Apple",
+            "bullets": {
+              "0": "Si votre Mac a un processeur Intel, suivez <0>{{link}}</0> pour réinitialiser la NVRAM.",
+              "1": "Connectez et déverrouillez votre appareil pour le détecter."
+            }
+          }
+        }
+      },
+      "4": {
+        "deviceSelection": {
+          "title": "Quel appareil avez-vous ?",
+          "desc": "Si vous avez un Nano S, vous pouvez essayer de réparer son micrologiciel. Pour les utilisateurs de Nano X et Blue, veuillez contacter l'assistance Ledger."
+        },
+        "notFixed": {
+          "title": " Le problème de connexion USB persiste ?",
+          "desc": "Si vous avez tout essayé, merci de contacter l'assistance Ledger. Sinon, veuillez suivre les instructions des solutions que vous n'avez pas encore essayées.",
+          "back": "Retour au Portefeuille",
+          "cta": "Contacter l'Assistance"
+        },
+        "repair": {
+          "title": "Réparer son Nano S",
+          "desc": "Quel message s'affiche sur votre appareil ?",
+          "mcuOutdated": "MCU firmware is outdated",
+          "mcuNotGenuine": "MCU firmware is not genuine",
+          "repairInstructions": "Follow device repair instructions",
+          "updateInstructions": "Follow device update instructions",
+          "somethingElse": "Autre"
+        }
+      }
+    }
   },
   "SignMessageConfirm": {
     "stringHash": "Hachage du message",
@@ -3089,6 +3319,10 @@
     "FirmwareOrAppUpdateRequired": {
       "title": "Mise à jour du micrologiciel ou de l'application nécessaire",
       "description": "Utilisez le Gestionnaire pour désinstaller toutes les applications. Vérifiez ensuite si une mise à jour du micrologiciel est disponible avant de les réinstaller."
+    },
+    "LatestFirmwareVersionRequired": {
+      "title": "Mettre à jour le micrologiciel Nano",
+      "description": "Mettez à jour le micrologiciel de votre appareil pour accéder à cette fonctionnalité"
     },
     "FirmwareNotRecognized": {
       "title": "Micrologiciel de l'appareil non reconnu",
@@ -3484,10 +3718,13 @@
       "title": "Assurez-vous que votre solde disponible est suffisant pour couvrir les frais de transaction."
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Le solde ne peut pas être inférieur à 1 DOT. Choisissez Max pour vider le compte."
+      "title": "Le solde ne peut pas être inférieur à {{minimumBalance}}. Pour vider : Max."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "Vous devez lier au moins 1 DOT."
+      "title": "Vous devez lier au moins {{minimumBondAmount}}."
+    },
+    "PolkadotBondMinimumAmountWarning": {
+      "title": "Votre solde lié doit être d'au moins {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Vous avez dépassé la limite autorisée pour l'arrêt de liaison."
