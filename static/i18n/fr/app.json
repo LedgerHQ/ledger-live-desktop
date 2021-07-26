@@ -3079,17 +3079,17 @@
       "4": {
         "deviceSelection": {
           "title": "Quel appareil avez-vous ?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "desc": "Si vous avez un Nano S, vous pouvez essayer de réparer son micrologiciel. Pour les utilisateurs de Nano X et Blue, veuillez contacter l'assistance Ledger."
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": " Le problème de connexion USB persiste ?",
+          "desc": "Si vous avez tout essayé, merci de contacter l'assistance Ledger. Sinon, veuillez suivre les instructions des solutions que vous n'avez pas encore essayées.",
+          "back": "Retour au Portefeuille",
+          "cta": "Contacter l'Assistance"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
+          "title": "Réparer son Nano S",
+          "desc": "Quel message s'affiche sur votre appareil ?",
           "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU firmware is not genuine",
           "repairInstructions": "Follow device repair instructions",
