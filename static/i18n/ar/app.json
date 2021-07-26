@@ -257,13 +257,13 @@
       "paraswap": {
         "bullets": [
           "اتصل بأكثر من 30 منصات التداول اللامركزي (Uniswap،‏ SushiSwap،...)",
-          "Ethereum & ERC20 tokens",
+          "رموز إيثريوم وERC20",
           "لامركزي وبدون ثقة"
         ]
       },
       "cta": "متابعة",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} غير متاح في منطقتك",
         "status": {
           "required": "KYC (التحقق من الهوية) مطلوب",
           "pending": "التحقق من بيانات الهوية مُعلّق",
@@ -274,7 +274,7 @@
     },
     "ip": {
       "title": "مرحبًا بك في التبادل",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
+      "subtitle": "قم بتداول أصول العملات المشفرة مباشرةً من جهاز Ledger الخاص بك.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
     "kyc": {
@@ -297,8 +297,8 @@
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
+          "firstName": "الاسم الأول",
+          "lastName": "الاسم العائلة",
           "street1": "Street Address Line 1",
           "street2": "Street Address Line 2",
           "city": "المدينة",
@@ -307,14 +307,14 @@
           "postalCode": "Zip Code",
           "dateOfBirth": "تاريخ الميلاد",
           "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
+          "lastNamePlaceholder": "أدخل اسم العائلة",
           "street1Placeholder": "Eg. 13, Maple street",
           "street2Placeholder": "Eg. 13, Maple street",
           "cityPlaceholder": "Eg. San José",
           "postalCodePlaceholder": "Enter your 5 digit Zip code",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
           "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
+          "lastNameError": "أدخل اسم العائلة للمتابعة",
           "street1Error": "أدخل عنوانك",
           "cityError": "أدخل المدينة التي تعيش فيها في الولايات المتحدة الأمريكية",
           "postalCodeError": "Enter a valid US ZIP code",
