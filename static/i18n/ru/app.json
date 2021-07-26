@@ -19,8 +19,8 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
-        "website": "Website"
+        "title": "Информация",
+        "website": "Сайт"
       }
     },
     "catalog": {
@@ -237,7 +237,7 @@
       "cta": "Перейти в Диспетчер"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
+      "title": "Выберите поставщика услуг для обмена криптовалюты",
       "learnMore": "What is Swap?",
       "kycRequired": "KYC Required",
       "wyre": {
@@ -3718,7 +3718,7 @@
       "title": "Убедитесь, что вашего баланса достаточно, чтобы покрыть потенциальные комиссии"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "Баланс не может быть ниже {{minimumBalance}}. Отправьте макс. количество, чтобы аннулировать счёт."
     },
     "PolkadotBondMinimumAmount": {
       "title": "You must bond at least {{minimumBondAmount}}."
