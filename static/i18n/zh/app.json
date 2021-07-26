@@ -274,11 +274,11 @@
     },
     "ip": {
       "title": "欢迎使用 Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "subtitle": "直接通过您的 Ledger 设备兑换加密资产。",
+      "disclaimer": "继续即表示您同意您的位置数据将共享给第三方服务提供商，以使它们遵守其 AML/KYC 程序。"
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "在您更新应用程序之前，我们无法完成 KYC 进程",
       "wyre": {
         "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
         "policy": "Privacy Policy",
