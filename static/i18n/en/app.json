@@ -265,11 +265,7 @@
         ]
       },
       "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
-        ]
+        "bullets": ["BTC, ETH, USDT and 50+ others", "Multi-currency", "Centralized"]
       },
       "paraswap": {
         "bullets": [

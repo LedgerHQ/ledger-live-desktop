@@ -1,8 +1,6 @@
 // @flow
 import type { StyleObject as InputStyleObject } from "~/renderer/components/Select";
 
-export const FORM_CONTAINER_WIDTH = 540;
-
 export const selectRowStylesMap: InputStyleObject => InputStyleObject = styles => ({
   ...styles,
   control: (provided, state) => ({
@@ -12,7 +10,7 @@ export const selectRowStylesMap: InputStyleObject => InputStyleObject = styles =
   }),
   menu: provided => ({
     ...styles.menu(provided),
-    width: `${FORM_CONTAINER_WIDTH}px`,
+    width: "200%",
   }),
 });
 
