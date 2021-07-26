@@ -3090,8 +3090,8 @@
         "repair": {
           "title": "إصلاح Nano S الخاص بك",
           "desc": "ما الرسالة المعروضة على جهازك؟",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
+          "mcuOutdated": "البرنامج الثابت لجهاز MCU قديم",
+          "mcuNotGenuine": "البرنامج الثابت لجهاز MCU غير أصلي",
           "repairInstructions": "اتبع إرشادات إصلاح الجهاز",
           "updateInstructions": "اتبع إرشادات تحديث الجهاز",
           "somethingElse": "شيء آخر"
