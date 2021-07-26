@@ -2997,44 +2997,44 @@
         "linux": {
           "title": "Actualiza las reglas udev en Linux",
           "desc": "Haz clic en el botón siguiente para agregar las reglas udev. Luego conecta y desbloquea tu dispositivo para ver si se detecta.",
-          "cta": "Set Rules",
+          "cta": "Establecer reglas",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Ingresa el siguiente comando en una terminal para agregar automáticamente las reglas y volver a cargar udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Prueba con distintos puertos USB",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Cambia el puerto USB que utilizas en el equipo",
+            "1": "Quita cualquier llave (dongle) USB",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Cambia el cable USB",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Utiliza el cable USB original si es posible.",
+            "1": "Prueba un cable USB diferente y asegúrate de que sea compatible con transferencia de datos.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Reinicia tu equipo",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Reinicia tu equipo.",
+            "1": "Inicia Ledger Live.",
+            "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Desactivar antivirus y VPN",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
+            "0": "Desactiva cualquier software de antivirus, firewall y VPN.",
+            "1": "Conecta y desbloquea tu dispositivo para ver si se detecta.",
             "2": "Whitelist Ledger Live in your anti-virus if that worked."
           }
         },
