@@ -2371,7 +2371,7 @@
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
       "resetKYC": "إعادة تعيين بيانات التحقق من الهوية",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYCDesc": "احذف بيانات التحقق من هوية العميل الخاصة بك المسجلة لديك محلياً والمستخدمة للوصول إلى مزود معاملات الطرف ثالث.",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
       "hardReset": "إعادة تعيين",
