@@ -1,10 +1,17 @@
 // @flow
 import React from "react";
 import { useTranslation } from "react-i18next";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import { Route } from "react-router-dom";
+import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import SwapForm from "./Form";
-import styled from "styled-components";
+import SwapHistory from "./History";
+import SwapNavbar from "./Navbar";
+import Box from "~/renderer/components/Box";
+
+const Body = styled(Box)`
+  row-gap: 2px;
+`;
 
 const Main = styled.main`
   display: flex;
@@ -28,13 +35,16 @@ const Swap2 = () => {
 
   return (
     <>
-      <TrackPage category="Swap" />
       <Text horizontal mb={20} ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
         {t("swap.title")}
       </Text>
-      <Main>
-        <SwapForm />
-      </Main>
+      <Body>
+        <SwapNavbar />
+        <Main>
+          <Route path="/swap" render={props => <SwapForm {...props} />} exact />
+          <Route path="/swap/history" render={props => <SwapHistory {...props} />} exact />
+        </Main>
+      </Body>
     </>
   );
 };

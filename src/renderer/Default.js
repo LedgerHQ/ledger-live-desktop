@@ -145,7 +145,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
-                        <Route path="/swap" render={props => <SwapComponent {...props} />} exact />
+                        <Route path="/swap" render={props => <SwapComponent {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />
