@@ -3068,33 +3068,33 @@
           },
           "1": {
             "title": "Restablecer NVRAM",
-            "link": "Apple’s instructions",
+            "link": "Instrucciones para Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Si tu Mac tiene un procesador Intel, sigue <0>{{link}}</0> para restablecer NVRAM.",
+              "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "¿Cuál es tu dispositivo?",
+          "desc": "Si tienes un Nano S, puedes intentar reparar el firmware de tu dispositivo. Los usuarios de Nano X y Blue deben ponerse en contacto con el Soporte de Ledger"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
+          "title": "¿Aún no está resuelto el problema de la conexión USB?",
+          "desc": "Si has probado con todas las soluciones, ponte en contacto con el Soporte de Ledger. Si no, sigue las instrucciones de las que no hayas probado aún.",
           "back": "Back to portfolio",
           "cta": "Contact Support"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Reparar tu Nano S",
+          "desc": "¿Cuál es el mensaje que muestra tu dispositivo?",
+          "mcuOutdated": "El firmware de la MCU está desactualizado",
+          "mcuNotGenuine": "El firmware de la MCU no es original",
+          "repairInstructions": "Sigue las instrucciones de reparación del dispositivo",
+          "updateInstructions": "Sigue las instrucciones de actualización del dispositivo",
+          "somethingElse": "Otros"
         }
       }
     }
@@ -3321,8 +3321,8 @@
       "description": "Utiliza Manager para desinstalar todas las aplicaciones y comprobar si hay alguna actualización de firmware disponible antes de instalarlas de nuevo"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Actualizar el firmware de Nano",
+      "description": "Actualiza el firmware de tus dispositivos con la última versión para acceder a esta característica"
     },
     "FirmwareNotRecognized": {
       "title": "No se reconoce el firmware del dispositivo",
@@ -3721,10 +3721,10 @@
       "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Tienes que vincular al menos {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Tu saldo vinculado tiene que ser al menos de {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Has superado el límite de desvinculación"
