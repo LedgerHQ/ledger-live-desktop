@@ -48,6 +48,13 @@
         "description": "Toda la información que necesitas para integrar tus aplicaciones en Ledger Live.",
         "button": "Ir al portal"
       }
+    },
+    "disclaimer": {
+      "title": "Aplicación externa",
+      "description": "Estás a punto de ser redireccionado a una aplicación no operada por Ledger.",
+      "legalAdvice": "Esta aplicación no es operada por Ledger. Ledger no será responsable de ninguna pérdida de fondos o de calidad de servicio con respecto a dicha aplicación.\n\nSiempre asegúrate de verificar cuidadosamente la información que se muestra en tu dispositivo.",
+      "checkbox": "No recordarme de nuevo.",
+      "CTA": "Continuar"
     }
   },
   "common": {

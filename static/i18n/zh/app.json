@@ -48,6 +48,13 @@
         "description": "您所需要的将您的应用程序整合到 Ledger Live 的全部信息。",
         "button": "前往门户页面"
       }
+    },
+    "disclaimer": {
+      "title": "外部应用程序",
+      "description": "您即将被重定向到一个不是由 Ledger 操作的应用程序。",
+      "legalAdvice": "此应用程序并不由 Ledger 操作。Ledger 对此类应用所造成的任何资金损失或服务质量不负责任。\n\n始终确保仔细验证您设备上所显示的信息。",
+      "checkbox": "不要再次提醒我。",
+      "CTA": "继续"
     }
   },
   "common": {
