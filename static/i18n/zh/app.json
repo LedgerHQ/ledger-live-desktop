@@ -50,11 +50,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "外部应用程序",
+      "description": "您即将被重定向到一个不是由 Ledger 操作的应用程序。",
+      "legalAdvice": "此应用程序并不由 Ledger 操作。Ledger 对此类应用所造成的任何资金损失或服务质量不负责任。\n\n始终确保仔细验证您设备上所显示的信息。",
+      "checkbox": "不要再次提醒我。",
+      "CTA": "继续"
     }
   },
   "common": {
