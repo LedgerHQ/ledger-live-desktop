@@ -19,7 +19,7 @@ jobs:
           ref: ${{github.event.inputs.tag}}
       - uses: actions/setup-node@main
         with:
-          node-version: 12.x
+          node-version: 14.x
       - uses: actions/setup-python@v1
         with:
           python-version: "2.7.x"
@@ -43,4 +43,3 @@ jobs:
         with:
           name: win-unpacked
           path: dist/win-unpacked
-

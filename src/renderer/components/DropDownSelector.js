@@ -105,18 +105,22 @@ const DropDownSelector = ({
   const renderOption = useCallback(
     item => {
       return (
-        <OptionContainer key={item.key} onClick={() => !item.disabled && setSelectedOption(item)}>
+        <OptionContainer
+          id={`${buttonId || ""}-${item.key}`}
+          key={item.key}
+          onClick={() => !item.disabled && setSelectedOption(item)}
+        >
           {renderItem({ item, isActive: !!(selectedOption && item.key === selectedOption.key) })}
         </OptionContainer>
       );
     },
-    [renderItem, selectedOption, setSelectedOption],
+    [buttonId, renderItem, selectedOption, setSelectedOption],
   );
 
   return (
     <Tippy
       visible={isOpen}
-      onClickOutside={() => setOpen(false)}
+      onClickOutside={!process.env.SPECTRON_RUN ? () => setOpen(false) : null}
       onShow={() => setOpen(true)}
       onHide={() => setOpen(false)}
       animation="shift-away"

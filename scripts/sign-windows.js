@@ -1,10 +1,7 @@
-const path = require("path");
 const execa = require("execa");
 const chalk = require("chalk");
 
 require("dotenv").config();
-
-let firstCall = true;
 
 const info = str => {
   console.log(chalk.blue(str));
@@ -44,15 +41,6 @@ async function azureSign(filePath) {
 
 async function signWindows(context) {
   const filePath = context.path;
-
-  // electron-builder normally signs Ledger Live.exe during the _building_ part, but we don't on the CI
-  // this is a quick hack to have it signed during the _packing_ part
-  if (firstCall) {
-    firstCall = false;
-    const livePath = path.resolve(__dirname, "..", "dist/win-unpacked/Ledger Live.exe");
-
-    await azureSign(livePath);
-  }
 
   await azureSign(filePath);
 }

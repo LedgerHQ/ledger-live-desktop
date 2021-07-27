@@ -18,9 +18,12 @@ import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
+import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
+import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -64,7 +67,13 @@ const App = ({ store, initialCountervalues }: Props) => {
                   <ToastProvider>
                     <AnnouncementProviderWrapper>
                       <Router>
-                        <Default />
+                        <WalletConnectProvider>
+                          <PlatformCatalogProvider>
+                            <DrawerProvider>
+                              <Default />
+                            </DrawerProvider>
+                          </PlatformCatalogProvider>
+                        </WalletConnectProvider>
                       </Router>
                     </AnnouncementProviderWrapper>
                   </ToastProvider>

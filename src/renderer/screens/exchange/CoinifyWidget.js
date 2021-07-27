@@ -44,7 +44,7 @@ const WidgetFooter: ThemedComponent<{}> = styled.div`
 
 type CoinifyWidgetConfig = {
   primaryColor?: string,
-  partnerId: number,
+  partnerId: string,
   cryptoCurrencies?: string | null,
   address?: string | null,
   targetPage: string,

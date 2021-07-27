@@ -13,6 +13,8 @@ export default function StepConnectDevice({
   onOperationBroadcasted,
   onTransactionError,
   setSigned,
+  onConfirmationHandler,
+  onFailHandler,
   currencyName,
 }: StepProps) {
   return (
@@ -27,6 +29,8 @@ export default function StepConnectDevice({
         onOperationBroadcasted={onOperationBroadcasted}
         onTransactionError={onTransactionError}
         setSigned={setSigned}
+        onConfirmationHandler={onConfirmationHandler}
+        onFailHandler={onFailHandler}
       />
     </>
   );

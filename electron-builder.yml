@@ -33,6 +33,7 @@ linux:
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   icon: build/windows/app.ico
+  sign: scripts/sign-windows.js
   signingHashAlgorithms:
     - sha256
   target:
@@ -53,4 +54,6 @@ files:
   # Include files
   - .webpack/**/*
   # Exclude files
+  - "!node_modules/sodium-native/prebuilds"
+  - "!node_modules/sodium-native/tmp"
   # Exclude modules

@@ -28,6 +28,17 @@ const ContentFooter = styled.div`
   justify-content: space-between;
 `;
 
+const ParagraphText = styled(Text).attrs(() => ({
+  mt: "32px",
+  mb: "40px",
+  color: "palette.primary.contrastText",
+  ff: "Inter|SemiBold",
+  fontSize: "18px",
+  lineHeight: "21.78px",
+}))`
+  white-space: pre-line;
+`;
+
 type Props = {
   sendEvent: (string, *) => void,
   context: {},
@@ -49,16 +60,9 @@ export function QuizSuccess({ sendEvent, context }: Props) {
         >
           {t("onboarding.screens.tutorial.screens.quizSuccess.title")}
         </Text>
-        <Text
-          mt="32px"
-          mb="40px"
-          color="palette.primary.contrastText"
-          ff="Inter|SemiBold"
-          fontSize="18px"
-          lineHeight="21.78px"
-        >
+        <ParagraphText>
           {t("onboarding.screens.tutorial.screens.quizSuccess.paragraph")}
-        </Text>
+        </ParagraphText>
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
