@@ -1,12 +1,14 @@
 // @flow
 
 import React, { useCallback, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   allowDebugAppsSelector,
   allowExperimentalAppsSelector,
+  dismissedBannersSelector,
 } from "~/renderer/reducers/settings";
 
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
@@ -23,11 +25,14 @@ import Text from "~/renderer/components/Text";
 import IconCode from "~/renderer/icons/Code";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 
+import { openPlatformAppDisclaimerDrawer } from "~/renderer/actions/UI";
+
 import AppCard from "~/renderer/components/Platform/AppCard";
 import CatalogCTA from "./CatalogCTA";
 import CatalogBanner from "./CatalogBanner";
 import TwitterBanner from "./TwitterBanner";
-import { useSelector } from "react-redux";
+
+const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
 const Grid = styled.div`
   display: grid;
@@ -65,6 +70,7 @@ const DeveloperCTA = styled(CatalogCTA)`
 const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.text.shade50 }))``;
 
 const PlatformCatalog = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const { manifests } = usePlatformApp();
@@ -88,6 +94,8 @@ const PlatformCatalog = () => {
       branches,
     });
   }, [allowDebugApps]);
+  const dismissedBanners = useSelector(dismissedBannersSelector);
+  const isDismissed = dismissedBanners.includes(DAPP_DISCLAIMER_ID);
 
   const { t } = useTranslation();
 
@@ -97,9 +105,21 @@ const PlatformCatalog = () => {
 
   const handleClick = useCallback(
     manifest => {
-      history.push(`/platform/${manifest.id}`);
+      const openApp = () => history.push(`/platform/${manifest.id}`);
+
+      if (!isDismissed) {
+        dispatch(
+          openPlatformAppDisclaimerDrawer({
+            manifest,
+            disclaimerId: DAPP_DISCLAIMER_ID,
+            next: openApp,
+          }),
+        );
+      } else {
+        openApp();
+      }
     },
-    [history],
+    [history, isDismissed, dispatch],
   );
 
   return (

@@ -46,7 +46,7 @@ jobs:
         run: yarn --frozen-lockfile
       - name: run code checks
         if: always() && job.status != 'cancelled'
-        run: yarn ci 2>lint.txt
+        run: yarn ci 2> >(tee lint.txt)
       - name: Read lint output
         id: lint
         if: always() && job.status != 'cancelled'
@@ -59,7 +59,7 @@ jobs:
           INSTRUMENT_BUILD: true
         run: yarn build
       - name: Tests
-        run: yarn test 2>jest.txt
+        run: yarn test 2> >(tee jest.txt)
       - name: Read jest output
         id: jest
         if: always() && job.status != 'cancelled'
@@ -78,7 +78,7 @@ jobs:
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
         if: always() && job.status != 'cancelled'
-        run: yarn spectron --no-color 2>output.txt
+        run: yarn spectron --no-color 2> >(tee output.txt)
       - name: Read test output
         id: spectron
         if: always() && job.status != 'cancelled'

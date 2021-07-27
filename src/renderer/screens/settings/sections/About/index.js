@@ -9,13 +9,18 @@ import ReleaseNotesButton from "./ReleaseNotesButton";
 import TermsButton from "./TermsButton";
 import { usePrivacyUrl } from "~/renderer/terms";
 import { setDeveloperMode } from "../../../../actions/settings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { v4 as uuidv4 } from "uuid";
+import { developerModeSelector } from "../../../../reducers/settings";
 
 const SectionHelp = () => {
   const { t } = useTranslation();
+  const devMode = useSelector(developerModeSelector);
   const privacyPolicyUrl = usePrivacyUrl();
   const version = process.env.SPECTRON_RUN ? "0.0.0" : __APP_VERSION__;
   const dispatch = useDispatch();
+  const { pushToast } = useToasts();
 
   const [clickCounter, setClickCounter] = useState(0);
   const onVersionClick = useCallback(() => {
@@ -25,10 +30,17 @@ const SectionHelp = () => {
   }, [clickCounter]);
 
   useEffect(() => {
-    if (clickCounter === 10) {
+    if (clickCounter === 10 && !devMode) {
       dispatch(setDeveloperMode(true));
+      pushToast({
+        id: uuidv4(),
+        type: "achievement",
+        title: t("settings.developer.toast.title"),
+        text: t("settings.developer.toast.text"),
+        icon: "info",
+      });
     }
-  }, [clickCounter]);
+  }, [clickCounter, devMode]);
 
   return (
     <>
