@@ -22,8 +22,8 @@ type Props = {
 export default function PlatformApp({ match }: Props) {
   const history = useHistory();
   const { appId } = match.params;
-  const { manifestById } = usePlatformApp();
-  const manifest = manifestById[appId];
+  const { manifests } = usePlatformApp();
+  const manifest = manifests.get(appId);
 
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
   const themeType = useTheme("colors.palette.type");

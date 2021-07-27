@@ -82,7 +82,7 @@ const PlatformCatalog = () => {
       branches.push("experimental");
     }
 
-    return filterPlatformApps(manifests, {
+    return filterPlatformApps(Array.from(manifests.values()), {
       version: "0.0.1",
       platform: "desktop",
       branches,

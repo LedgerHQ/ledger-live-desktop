@@ -8,6 +8,7 @@ import AllowExperimentalAppsToggle from "./AllowExperimentalAppsToggle";
 import AllowDebugAppsToggle from "./AllowDebugAppsToggle";
 import EnablePlatformDevToolsToggle from "./EnablePlatformDevToolsToggle";
 import CatalogProviderSelect from "./CatalogProviderSelect";
+import RunLocalAppButton from "./RunLocalAppButton";
 
 const SectionDeveloper = () => {
   const { t } = useTranslation();
@@ -40,6 +41,7 @@ const SectionDeveloper = () => {
         >
           <EnablePlatformDevToolsToggle />
         </Row>
+        <RunLocalAppButton />
       </Body>
     </>
   );
