@@ -52,9 +52,9 @@
     "disclaimer": {
       "title": "Aplicación externa",
       "description": "Estás a punto de ser redireccionado a una aplicación no operada por Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "legalAdvice": "Esta aplicación no es operada por Ledger. Ledger no será responsable de ninguna pérdida de fondos o de calidad de servicio con respecto a dicha aplicación.\n\nSiempre asegúrate de verificar cuidadosamente la información que se muestra en tu dispositivo.",
+      "checkbox": "No recordarme de nuevo.",
+      "CTA": "Continuar"
     }
   },
   "common": {
