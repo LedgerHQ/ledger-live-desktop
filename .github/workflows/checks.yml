@@ -142,10 +142,10 @@ jobs:
       - name: post comment
         if: always() && job.status != 'cancelled'
         id: postcomment
-        uses: ./.github/actions/post-comment
+        uses: ./.github/actions/post-comment-v2
         with:
           comment: ${{ steps.comment.outputs.body }}
-          prNumber: ${{github.event.pull_request.number}}
+          sha: ${{ github.sha }}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
         if: always() && github.event_name == 'push' && job.status != 'cancelled'

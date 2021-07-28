@@ -1,0 +1,17 @@
+name:  post-comment-v2
+description: post comment
+author: valpinkman
+inputs:
+  comment:
+    description: comment
+    required: true
+  sha:
+    description: sha of the commit
+    required: true
+runs:
+  using: node12
+  main: index.js
+
+branding:
+  icon: align-center
+  color: white
