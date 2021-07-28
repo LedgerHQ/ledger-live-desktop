@@ -2,7 +2,7 @@
 
 import { remote, ipcRenderer } from "electron";
 import React, { useMemo, useEffect, useState, useCallback } from "react";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import OperationRow from "~/renderer/screens/exchange/swap/History/OperationRow";
@@ -55,6 +55,7 @@ const History = () => {
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -140,7 +141,7 @@ const History = () => {
           <IconDownloadCloud size={16} />
           <Text ml={1} ff="Inter|Regular" fontSize={3}>
             <FakeLink onClick={exporting ? undefined : onExportOperations}>
-              {exporting ? "Exporting..." : "Export operations"}
+              {exporting ? t("swap2.history.exporting") : t("swap2.history.export")}
             </FakeLink>
           </Text>
         </ExportOperationsWrapper>
@@ -149,9 +150,7 @@ const History = () => {
         mappedSwapOperations.length ? (
           <Box>
             <Head px={20} py={16}>
-              <Alert type="primary">
-                <Trans i18nKey="swap.history.disclaimer" />
-              </Alert>
+              <Alert type="primary">{t("swap2.history.disclaimer")}</Alert>
             </Head>
             {mappedSwapOperations.map(section => (
               <>

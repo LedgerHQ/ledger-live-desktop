@@ -36,7 +36,7 @@ const Swap2 = () => {
   return (
     <>
       <Text horizontal mb={20} ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
-        {t("swap.title")}
+        {t("swap2.title")}
       </Text>
       <Body>
         <SwapNavbar />

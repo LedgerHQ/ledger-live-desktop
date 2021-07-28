@@ -203,6 +203,7 @@
     "disconnectButton": "Disconnect"
   },
   "swap2": {
+    "title": "Swap",
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
@@ -231,9 +232,22 @@
         "noAccountCTA": "Add account"
       },
       "from": {
+        "title": "From",
         "max": "Max",
         "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
       }
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
     }
   },
   "swap": {

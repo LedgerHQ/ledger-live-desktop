@@ -39,7 +39,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         color={"palette.text.shade40"}
       >
         <FormLabel>
-          <Trans i18nKey="swap.form.from.title" />
+          <Trans i18nKey="swap2.form.from.title" />
         </FormLabel>
         <Box horizontal alignItems="center">
           <Text marginRight={1} fontWeight="500">

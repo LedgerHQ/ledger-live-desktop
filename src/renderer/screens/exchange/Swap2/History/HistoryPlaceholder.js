@@ -20,10 +20,10 @@ const HistoryPlaceholder = () => {
   return (
     <Wrapper>
       <Text ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">
-        {t("swap.history.empty.title")}
+        {t("swap2.history.empty.title")}
       </Text>
       <Text ff="Inter|Regular" fontSize={12} color="palette.text.shade50">
-        {t("swap.history.empty.description")}
+        {t("swap2.history.empty.description")}
       </Text>
     </Wrapper>
   );
