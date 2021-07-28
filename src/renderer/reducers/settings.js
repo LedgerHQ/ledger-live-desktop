@@ -425,8 +425,6 @@ export const enablePlatformDevToolsSelector = (state: State) =>
   state.settings.enablePlatformDevTools;
 export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
 
-export const hasAcceptedSwapKYCSelector = (state: State) => state.settings.hasAcceptedSwapKYC;
-
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
