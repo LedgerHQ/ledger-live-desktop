@@ -9,7 +9,7 @@ import ChevronDown from "@ui/icons/ChevronDown";
 
 type Props = {
   Icon?: React$ComponentType<*>,
-  children: React$Node,
+  children?: React$Node,
   onClick: () => void,
   ff?: string,
   color?: string,

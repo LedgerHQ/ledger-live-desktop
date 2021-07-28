@@ -207,8 +207,14 @@ export type Theme = {
 
 const theme: Theme = {
   sizes: {
-    topBarHeight: 58,
-    sideBarWidth: 230,
+    drawer: {
+      big: {
+        width: 580,
+      },
+      small: {
+        width: 420,
+      },
+    },
     modal: {
       min: {
         height: 158,
@@ -219,6 +225,8 @@ const theme: Theme = {
         width: 622,
       },
     },
+    topBarHeight: 58,
+    sideBarWidth: 230,
   },
   radii,
   fontFamilies,
