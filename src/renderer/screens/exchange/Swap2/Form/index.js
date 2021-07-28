@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
 import Box from "~/renderer/components/Box";
@@ -7,6 +7,14 @@ import styled from "styled-components";
 import ButtonBase from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
+import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateProvidersAction,
+  resetSwapAction,
+  currentProviderSelector,
+  providersSelector,
+} from "~/renderer/actions/swap";
 
 // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
 const summaryMockedData = {
@@ -34,19 +42,38 @@ const SwapForm = () => {
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const [isSwapReady] = useState(false);
   const { t } = useTranslation();
+  const { providers, error } = useSwapProviders();
+  const dispatch = useDispatch();
+
+  const currentProvider = useSelector(currentProviderSelector);
+  const storedProviders = useSelector(providersSelector);
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
 
-  return (
-    <Wrapper>
-      <SwapFormSelectors />
-      <SwapFormSummary {...summaryMockedData} />
-      <Button primary disabled={!isSwapReady} onClick={onSubmit}>
-        {t("common.exchange")}
-      </Button>
-    </Wrapper>
-  );
+  useEffect(() => {
+    if (providers) dispatch(updateProvidersAction(providers));
+  }, [providers]);
+
+  useEffect(() => {
+    if (error) dispatch(resetSwapAction());
+  }, [error]);
+
+  if (currentProvider)
+    return (
+      <Wrapper>
+        <SwapFormSelectors />
+        <SwapFormSummary {...summaryMockedData} />
+        <Button primary disabled={!isSwapReady} onClick={onSubmit}>
+          {t("common.exchange")}
+        </Button>
+      </Wrapper>
+    );
+
+  if (error) return <p>not available</p>;
+  if (storedProviders?.length === 0) return <p>not available</p>;
+
+  return <p>loading</p>;
 };
 
 export default SwapForm;
