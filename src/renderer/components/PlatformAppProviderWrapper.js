@@ -13,7 +13,7 @@ export function PlatformAppProviderWrapper({ children }: Props) {
   const provider = useSelector(catalogProviderSelector);
 
   const platformAppsServer = useMemo(() => {
-    return providers.find(p => p.value === provider);
+    return providers.find(p => p.value === provider) || providers[0];
   }, [provider]);
 
   return (
