@@ -1,10 +1,10 @@
 // @flow
 import { handleActions } from "redux-actions";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 
 export type SwapStateType = {
-  providers: ?Array<AvailableProvider>,
-  currentProvider: ?AvailableProvider,
+  providers: ?Array<AvailableProviderV3>,
+  currentProvider: ?AvailableProviderV3,
 };
 
 const initialState: SwapStateType = { providers: null, currentProvider: null };

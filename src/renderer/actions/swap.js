@@ -1,12 +1,13 @@
 // @flow
 import { createAction } from "redux-actions";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { createSelector } from "reselect";
 import type { OutputSelector } from "reselect";
 import type { State } from "~/renderer/reducers";
 import type { SwapStateType } from "~/renderer/reducers/swap";
+import memoize from "lodash/memoize";
 
-export const updateProvidersAction = createAction<Array<AvailableProvider>>(
+export const updateProvidersAction = createAction<Array<AvailableProviderV3>>(
   "SWAP/UPDATE_PROVIDERS",
 );
 export const resetSwapAction = createAction("SWAP/RESET_STATE");

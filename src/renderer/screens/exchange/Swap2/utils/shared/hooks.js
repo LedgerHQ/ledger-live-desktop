@@ -1,12 +1,12 @@
 // @flow
 import { useReducer, useEffect } from "react";
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
 
 type State = {
   isLoading: boolean,
   error: ?Error,
-  providers: ?Array<AvailableProvider>,
+  providers: ?Array<AvailableProviderV3>,
 };
 
 type ActionType =
@@ -26,7 +26,7 @@ const reducer = (state: State, action: ActionType) => {
 
 export const initialState = { isLoading: true, error: null, providers: null };
 
-const filterDisabledProviders = (provider: AvailableProvider) =>
+const filterDisabledProviders = (provider: AvailableProviderV3) =>
   !process.env.SWAP_DISABLED_PROVIDERS?.includes(provider.provider);
 
 export const useSwapProviders = () => {
@@ -37,6 +37,7 @@ export const useSwapProviders = () => {
 
     const saveProviders = async () => {
       try {
+        // TODO: Fix type issue AvailableProviderV2 -> : Array<AvailableProviderV3>
         const allProviders = await getProviders();
         const providers = allProviders.filter(filterDisabledProviders);
 
