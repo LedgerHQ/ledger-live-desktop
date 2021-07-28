@@ -238,7 +238,8 @@
       },
       "to": {
         "title": "To"
-      }
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
     },
     "history": {
       "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",

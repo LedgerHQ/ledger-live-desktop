@@ -16,6 +16,7 @@ import {
   providersSelector,
 } from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
+import FormNotAvailable from "./FormNotAvailable";
 
 // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
 const summaryMockedData = {
@@ -71,8 +72,9 @@ const SwapForm = () => {
       </Wrapper>
     );
 
-  if (error) return <p>not available</p>;
-  if (storedProviders?.length === 0) return <p>not available</p>;
+  // TODO: ensure that the error is catch by Sentry in this case
+  if (error) return <FormNotAvailable />;
+  if (storedProviders?.length === 0) return <FormNotAvailable />;
 
   return <FormLoading />;
 };
