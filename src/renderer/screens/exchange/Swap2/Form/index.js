@@ -15,6 +15,7 @@ import {
   currentProviderSelector,
   providersSelector,
 } from "~/renderer/actions/swap";
+import FormLoading from "./FormLoading";
 
 // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
 const summaryMockedData = {
@@ -73,7 +74,7 @@ const SwapForm = () => {
   if (error) return <p>not available</p>;
   if (storedProviders?.length === 0) return <p>not available</p>;
 
-  return <p>loading</p>;
+  return <FormLoading />;
 };
 
 export default SwapForm;
