@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
@@ -18,7 +17,7 @@ import LightBulb from "~/renderer/icons/LightBulb";
 import IconClose from "~/renderer/icons/Cross";
 
 import LiveAppIcon from "./LiveAppIcon";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { enablePlatformDevToolsSelector } from "~/renderer/reducers/settings";
 
 import { openPlatformAppInfoDrawer } from "~/renderer/actions/UI";

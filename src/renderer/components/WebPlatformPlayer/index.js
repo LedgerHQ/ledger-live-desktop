@@ -98,7 +98,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
 
     if (inputs) {
       for (const key in inputs) {
-        if (inputs.hasOwnProperty(key)) {
+        if (Object.prototype.hasOwnProperty.call(inputs, key)) {
           urlObj.searchParams.set(key, inputs[key]);
         }
       }
@@ -108,7 +108,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
     urlObj.searchParams.set("textColor", theme.text.shade100);
 
     return urlObj;
-  }, [manifest.url, theme]);
+  }, [manifest.url, theme, inputs]);
 
   const listAccounts = useCallback(() => {
     return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
@@ -358,7 +358,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
         webview.removeEventListener("did-finish-load", handleLoad);
       }
     };
-  }, [handleLoad]);
+  }, [handleLoad, handleNewWindow]);
 
   const handleOpenDevTools = useCallback(() => {
     const webview = targetRef.current;
@@ -366,7 +366,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
     if (webview) {
       webview.openDevTools();
     }
-  });
+  }, []);
 
   return (
     <Container>

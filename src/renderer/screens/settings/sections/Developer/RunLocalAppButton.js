@@ -38,7 +38,7 @@ const RunLocalAppButton = () => {
         console.log("no file selected");
       }
     });
-  }, []);
+  }, [addLocalManifest]);
 
   return (
     <>

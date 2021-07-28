@@ -93,7 +93,7 @@ const PlatformCatalog = () => {
       platform: "desktop",
       branches,
     });
-  }, [allowDebugApps]);
+  }, [allowDebugApps, allowExperimentalApps, manifests]);
   const dismissedBanners = useSelector(dismissedBannersSelector);
   const isDismissed = dismissedBanners.includes(DAPP_DISCLAIMER_ID);
 

@@ -40,7 +40,7 @@ const SectionHelp = () => {
         icon: "info",
       });
     }
-  }, [clickCounter, devMode]);
+  }, [clickCounter, devMode, pushToast, t, dispatch]);
 
   return (
     <>
