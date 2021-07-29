@@ -116,7 +116,8 @@
       "outdated": "已暂停",
       "needsMigration": "点击更新账户",
       "error": "同步错误",
-      "refresh": "刷新"
+      "refresh": "刷新",
+      "devTools": "Dev tools"
     },
     "exchange": "货币兑换",
     "info": "信息"
@@ -2326,7 +2327,8 @@
       "help": "帮助",
       "about": "关于",
       "experimental": "实验性功能",
-      "accounts": "账户"
+      "accounts": "账户",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "选择加密资产",
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "新闻",
-      "operation": "操作"
+      "operation": "操作",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {

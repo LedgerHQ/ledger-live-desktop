@@ -116,7 +116,8 @@
       "outdated": "ايقاف مؤقت",
       "needsMigration": "أُنقر لتحديث الحساب",
       "error": "خطأ في المزامنة",
-      "refresh": "تحديث"
+      "refresh": "تحديث",
+      "devTools": "Dev tools"
     },
     "exchange": "تداول",
     "info": "معلومات"
@@ -2326,7 +2327,8 @@
       "help": "مساعدة",
       "about": "حول",
       "experimental": "الميزات التجريبية",
-      "accounts": "الحسابات"
+      "accounts": "الحسابات",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
       "carouselVisibilityDesc": "تمكين المشاهدة كشريط دوّار في الحافظة"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "أخبار",
-      "operation": "عملية"
+      "operation": "عملية",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
