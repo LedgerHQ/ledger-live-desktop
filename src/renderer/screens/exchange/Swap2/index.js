@@ -1,22 +1,40 @@
 // @flow
 import React from "react";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
+import SwapForm from "./Form";
+import styled from "styled-components";
+
+const Main = styled.main`
+  display: flex;
+  justify-content: center;
+
+  padding: 2rem 0;
+  background-color: ${p => p.theme.colors.palette.background.paper};
+
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(20, 37, 51, 0.04);
+
+  & > * {
+    width: 100%;
+    max-width: 27.5rem;
+  }
+`;
 
 const Swap2 = () => {
+  const { t } = useTranslation();
+
   return (
     <>
       <TrackPage category="Swap" />
       <Text horizontal mb={20} ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
-        <Trans i18nKey="swap.title" />
+        {t("swap.title")}
       </Text>
-      <Card p={30}>
-        <Text ff="Inter|Regular" fontSize={4}>
-          {"This is the new and improved swap"}
-        </Text>
-      </Card>
+      <Main>
+        <SwapForm />
+      </Main>
     </>
   );
 };

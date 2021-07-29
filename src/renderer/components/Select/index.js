@@ -11,6 +11,8 @@ import debounce from "lodash/debounce";
 import createStyles from "./createStyles";
 import createRenderers from "./createRenderers";
 
+export type StyleObject = $Call<typeof createStyles>;
+
 export type Option = {
   value: "string",
   label: "string",
@@ -43,6 +45,8 @@ type Props = {
   autoFocus: boolean,
   virtual: boolean,
   rowHeight: number,
+  error: ?Error, // NB at least a different rendering for now
+  stylesMap: StyleObject => StyleObject,
 };
 
 const Row = styled.div`
@@ -192,12 +196,16 @@ class Select extends PureComponent<Props> {
       minWidth,
       small,
       theme,
+      error,
+      stylesMap,
       virtual = true,
       rowHeight = small ? 34 : 40,
       ...props
     } = this.props;
 
     const Comp = async ? AsyncReactSelect : ReactSelect;
+    let styles = createStyles(theme, { width, minWidth, small, isRight, isLeft, error });
+    styles = stylesMap ? stylesMap(styles) : styles;
 
     return (
       <Comp
@@ -217,7 +225,7 @@ class Select extends PureComponent<Props> {
                 ...createRenderers({ renderOption, renderValue }),
               }
         }
-        styles={createStyles(theme, { width, minWidth, small, isRight, isLeft })}
+        styles={styles}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}
