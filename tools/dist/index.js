@@ -99,7 +99,6 @@ const draftTasks = args => {
   return [
     {
       title: "Health checks",
-      enabled: () => {},
       task: () => setupList(healthChecksTasks, args),
     },
     {
