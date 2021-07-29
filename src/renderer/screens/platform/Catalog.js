@@ -5,9 +5,14 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import {
+  allowDebugAppsSelector,
+  allowExperimentalAppsSelector,
+  dismissedBannersSelector,
+} from "~/renderer/reducers/settings";
 
-import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { useCatalog } from "@ledgerhq/live-common/lib/platform/CatalogProvider";
+import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -20,7 +25,6 @@ import Text from "~/renderer/components/Text";
 import IconCode from "~/renderer/icons/Code";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 
-import { dismissedBannersSelector } from "~/renderer/reducers/settings";
 import { openPlatformAppDisclaimerDrawer } from "~/renderer/actions/UI";
 
 import AppCard from "~/renderer/components/Platform/AppCard";
@@ -68,22 +72,30 @@ const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.t
 const PlatformCatalog = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const appBranches = useMemo(() => {
-    const branches = ["stable", "soon", "experimental"];
 
-    // TODO: add experimental setting
+  const { manifests } = usePlatformApp();
+  const allowDebugApps = useSelector(allowDebugAppsSelector);
+  const allowExperimentalApps = useSelector(allowExperimentalAppsSelector);
 
-    if (getEnv("PLATFORM_DEBUG")) {
+  const filteredManifests = useMemo(() => {
+    const branches = ["stable", "soon"];
+
+    if (allowDebugApps) {
       branches.push("debug");
     }
 
-    return branches;
-  }, []);
+    if (allowExperimentalApps) {
+      branches.push("experimental");
+    }
 
+    return filterPlatformApps(Array.from(manifests.values()), {
+      version: "0.0.1",
+      platform: "desktop",
+      branches,
+    });
+  }, [allowDebugApps, allowExperimentalApps, manifests]);
   const dismissedBanners = useSelector(dismissedBannersSelector);
   const isDismissed = dismissedBanners.includes(DAPP_DISCLAIMER_ID);
-
-  const { apps } = useCatalog("desktop", appBranches);
 
   const { t } = useTranslation();
 
@@ -118,8 +130,8 @@ const PlatformCatalog = () => {
       </Header>
       <CatalogBanner />
       <TwitterBanner />
-      <Grid length={apps.length}>
-        {apps.map(manifest => (
+      <Grid length={filteredManifests.length}>
+        {filteredManifests.map(manifest => (
           <GridItem key={manifest.id}>
             <AppCard
               id={`platform-catalog-app-${manifest.id}`}

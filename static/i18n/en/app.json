@@ -116,7 +116,8 @@
       "outdated": "Paused",
       "needsMigration": "Click to update account",
       "error": "Synchronization error",
-      "refresh": "Refresh"
+      "refresh": "Refresh",
+      "devTools": "Dev tools"
     },
     "exchange": "Exchange",
     "info": "Info"
@@ -2324,7 +2325,8 @@
       "help": "Help",
       "about": "About",
       "experimental": "Experimental features",
-      "accounts": "Accounts"
+      "accounts": "Accounts",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2358,6 +2360,25 @@
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Select crypto asset",
@@ -2530,7 +2551,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "News",
-      "operation": "Operation"
+      "operation": "Operation",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
