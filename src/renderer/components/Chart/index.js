@@ -1,43 +1,12 @@
 // @flow
 /* eslint-disable react/no-unused-prop-types */
 
-/**
- *                                   Chart
- *                                   -----
- *
- *                                    XX
- *                                   XXXX
- *                          X       XX  X
- *                         XXXX    XX   X
- *                        XX  X  XX     X
- *                       X    XXXX       X     XX    X
- *                      XX     XX        X   XX XX  XX
- *                     XX                XX XX   XXXX
- *                                        XX
- *                                        XX
- *  Usage:
- *
- *    <Chart
- *      data={data}
- *      color="#5f8ced"   // Main color for line, gradient, etc.
- *      height={300}      // Fix height. Width is responsive to container.
- *    />
- *
- *    `data` looks like:
- *
- *     [
- *       { date: '2018-01-01', value: 10 },
- *       { date: '2018-01-02', value: 25 },
- *       { date: '2018-01-03', value: 50 },
- *     ]
- *
- */
-
 import React, { useRef, useLayoutEffect, useState, useMemo } from "react";
-import ChartJs from "chart.js";
+import { Chart, registerables } from "chart.js";
 import styled from "styled-components";
 import Color from "color";
 import moment from "moment";
+import "chartjs-adapter-moment";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import Tooltip from "./Tooltip";
@@ -45,6 +14,7 @@ import Tooltip from "./Tooltip";
 import type { Data } from "./types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
+Chart.register(...registerables);
 export type Props = {
   data: Data,
   magnitude: number,
@@ -65,7 +35,7 @@ const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
   position: relative;
 `;
 
-export default function Chart({
+export default function ChartWrapper({
   magnitude,
   height,
   data,
@@ -119,60 +89,67 @@ export default function Chart({
       animation: {
         duration: 0,
       },
+      fill: true,
       responsive: true,
       maintainAspectRatio: false,
-      tooltips: {
-        enabled: false,
-        intersect: false,
+      interaction: {
         mode: "index",
-        custom: tooltip => setTooltip(tooltip),
+        intersect: false,
       },
-      legend: {
-        display: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
+          position: "nearest",
+          external: ({ tooltip }) => setTooltip({ ...tooltip }),
+        },
+      },
+      elements: {
+        line: {
+          tension: 0.5,
+        },
       },
       scales: {
-        xAxes: [
-          {
-            type: "time",
-            gridLines: {
-              display: false,
-              color: theme.text.shade10,
-            },
-            ticks: {
-              fontColor: theme.text.shade60,
-              fontFamily: "Inter",
-              maxTicksLimit: 7,
-              maxRotation: 0.1, // trick to make the graph fit the whole canvas regardless of data
-              minRotation: 0,
-            },
-            time: {
-              minUnit: tickXScale === "day" ? "hour" : "day",
-              displayFormats: {
-                quarter: "MMM YYYY",
-              },
+        x: {
+          type: "time",
+          grid: {
+            display: false,
+            color: theme.text.shade10,
+          },
+          ticks: {
+            fontColor: theme.text.shade60,
+            fontFamily: "Inter",
+            maxTicksLimit: 7,
+            maxRotation: 0.1, // trick to make the graph fit the whole canvas regardless of data
+            minRotation: 0,
+          },
+          time: {
+            minUnit: tickXScale === "day" ? "hour" : "day",
+            displayFormats: {
+              quarter: "MMM YYYY",
             },
           },
-        ],
-        yAxes: [
-          {
-            gridLines: {
-              color: theme.text.shade10,
-              borderDash: [5, 5],
-              drawTicks: false,
-              drawBorder: false,
-              zeroLineColor: theme.text.shade10,
-            },
-            ticks: {
-              beginAtZero: true,
-              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
-              maxTicksLimit: 4,
-              fontColor: theme.text.shade60,
-              fontFamily: "Inter",
-              padding: 10,
-              callback: value => renderTickY(value),
-            },
+        },
+        y: {
+          suggestedMax: 10 ** Math.max(magnitude - 4, 1),
+          beginAtZero: true,
+          grid: {
+            color: theme.text.shade10,
+            borderDash: [5, 5],
+            drawTicks: false,
+            drawBorder: false,
+            zeroLineColor: theme.text.shade10,
           },
-        ],
+          ticks: {
+            maxTicksLimit: 4,
+            fontColor: theme.text.shade60,
+            fontFamily: "Inter",
+            padding: 10,
+            callback: value => renderTickY(value),
+          },
+        },
       },
       layout: {
         padding: {
@@ -198,7 +175,7 @@ export default function Chart({
       chartRef.current.options = generateOptions;
       chartRef.current.update(shouldAnimate ? 500 : 0);
     } else {
-      chartRef.current = new ChartJs(canvasRef.current, {
+      chartRef.current = new Chart(canvasRef.current, {
         type: "line",
         data: generatedData,
         options: generateOptions,
