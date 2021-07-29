@@ -295,7 +295,7 @@
         "pending": {
           "cta": "继续",
           "title": "待批准",
-          "subtitle": "您的信息已经递交，请等待 Wyre 的批准。通常在 1-3 天后，您可以开始掉期交易。",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "了解关于 KYC 的更多详情"
         },
         "closed": {
