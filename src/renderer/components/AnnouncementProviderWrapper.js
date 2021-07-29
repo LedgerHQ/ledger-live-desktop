@@ -16,7 +16,7 @@ import networkApi from "../../../tests/mocks/serviceStatusHelpers";
 let notificationsApi;
 let serviceStatusApi;
 
-if (process.env.SPECTRON_RUN) {
+if (process.env.MOCK || process.env.SPECTRON_RUN) {
   notificationsApi = fetchApi;
   serviceStatusApi = networkApi;
 }
@@ -67,6 +67,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     language,
     currencies,
     getDate: () => new Date(),
+    appVersion: __APP_VERSION__,
   };
 
   const onNewAnnouncement = useCallback(
@@ -108,9 +109,11 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [dismissToast],
   );
 
+  const autoUpdateDelay = process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000;
+
   return (
     <AnnouncementProvider
-      autoUpdateDelay={60000}
+      autoUpdateDelay={autoUpdateDelay}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
@@ -118,7 +121,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
       handleSave={saveAnnouncements}
       fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider autoUpdateDelay={60000} networkApi={serviceStatusApi}>
+      <ServiceStatusProvider autoUpdateDelay={autoUpdateDelay} networkApi={serviceStatusApi}>
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>

@@ -51,6 +51,7 @@ const defaultWindowOptions = {
   icon: path.join(__dirname, "/build/icons/icon.png"),
   backgroundColor: "#fff",
   webPreferences: {
+    webviewTag: true,
     blinkFeatures: "OverlayScrollbars",
     devTools: __DEV__ || DEV_TOOLS,
     experimentalFeatures: true,
