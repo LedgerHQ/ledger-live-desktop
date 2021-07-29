@@ -116,7 +116,8 @@
       "outdated": "Приостановлено",
       "needsMigration": "Нажмите, чтобы обновить аккаунт",
       "error": "Ошибка синхронизации",
-      "refresh": "Обновить"
+      "refresh": "Обновить",
+      "devTools": "Dev tools"
     },
     "exchange": "Обмен",
     "info": "Информация"
@@ -2326,7 +2327,8 @@
       "help": "Помощь",
       "about": "О программе",
       "experimental": "Экспериментальные функции",
-      "accounts": "Счета"
+      "accounts": "Счета",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "Выберите «Западный», чтобы рост рыночной стоимости отображался синим цветом, либо «Восточный», чтобы рост рыночной стоимости отображался красным цветом.",
       "carouselVisibility": "Карусель",
       "carouselVisibilityDesc": "Показывать карусель событий на странице Портфеля"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Выберите криптоактив",
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Новости",
-      "operation": "Операция"
+      "operation": "Операция",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
