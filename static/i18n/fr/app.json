@@ -116,7 +116,8 @@
       "outdated": "En pause",
       "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
-      "refresh": "Actualiser"
+      "refresh": "Actualiser",
+      "devTools": "Dev tools"
     },
     "exchange": "Échanger",
     "info": "Informations"
@@ -2326,7 +2327,8 @@
       "help": "Aide",
       "about": "À propos",
       "experimental": "Fonctionnalités expérimentales",
-      "accounts": "Comptes"
+      "accounts": "Comptes",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Choisissez un crypto-actif",
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Actualités",
-      "operation": "Opération"
+      "operation": "Opération",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
