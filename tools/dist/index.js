@@ -98,6 +98,11 @@ const draftTasks = args => {
 
   return [
     {
+      title: "Health checks",
+      enabled: () => {},
+      task: () => setupList(healthChecksTasks, args),
+    },
+    {
       title: "Authenticate on GitHub",
       task: ctx => {
         const { repo, tag, token } = ctx;
@@ -136,11 +141,6 @@ const mainTask = (args = {}) => {
       title: "Setup",
       skip: () => (dirty ? "--dirty flag passed" : false),
       task: () => setupList(setupTasks, args),
-    },
-    {
-      title: "Prepare release on GitHub",
-      enabled: () => !!publish,
-      task: () => setupList(draftTasks, args),
     },
     {
       title: publish ? "Build and publish" : "Build",
@@ -202,6 +202,12 @@ yargs
     "Run health checks",
     () => {},
     args => runTasks(healthChecksTasks, args),
+  )
+  .command(
+    "draft",
+    "Prepare release on GitHub",
+    () => {},
+    args => runTasks(draftTasks, args),
   )
   .option("verbose", {
     alias: "v",
