@@ -295,7 +295,7 @@
         "pending": {
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
-          "subtitle": "تم إرسال معلوماتك لاعتمادها من جانب Wyre. وعادةً ما يستغرق الأمر 1-3 أيام قبل أن تستطيع أن تبدأ بالمبادلة.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "closed": {
