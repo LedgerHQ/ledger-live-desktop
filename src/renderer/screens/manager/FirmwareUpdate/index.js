@@ -18,6 +18,7 @@ import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import { FakeLink } from "~/renderer/components/TopBanner";
+import { track } from "~/renderer/analytics/segment";
 
 type Props = {
   deviceInfo: DeviceInfo,
@@ -71,6 +72,12 @@ class FirmwareUpdate extends PureComponent<Props, State> {
   };
 
   handleDisclaimerModal = () => {
+    const { firmware } = this.props;
+    if (!firmware) return;
+
+    track("Manager Firmware Update Click", {
+      firmwareName: firmware.final.name,
+    });
     this.setState({ modal: "disclaimer" });
   };
 
@@ -123,7 +130,11 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                   </Text>
                 </Box>
               )}
-              <FakeLink disabled={disableFirmwareUpdate} onClick={this.handleDisclaimerModal}>
+              <FakeLink
+                id={"manager-update-firmware-button"}
+                disabled={disableFirmwareUpdate}
+                onClick={this.handleDisclaimerModal}
+              >
                 <Trans i18nKey="manager.firmware.banner.cta2" />
               </FakeLink>
             </Box>
