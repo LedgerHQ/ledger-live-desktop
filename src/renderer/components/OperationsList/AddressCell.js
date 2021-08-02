@@ -1,10 +1,11 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import getENSReverseLookup from "./getENSReverseLookup";
 
 export const SplitAddress = ({
   value,
@@ -73,30 +74,46 @@ export const Cell: ThemedComponent<{ px?: number }> = styled(Box).attrs(p => ({
   width: 150px;
   flex-grow: 1;
   flex-shrink: 1;
-  display: block;
+  display: flex;
+  column-gap: 8px;
+  justify-content: center;
 `;
 
-type Props = {
-  operation: Operation,
+const Tag = styled.div`
+  display: inline-flex;
+  background-color: ${p => p.theme.colors.blueTransparentBackground};
+  border-radius: 8px;
+  padding: 4px 10px;
+`;
+
+type Props = { operation: Operation };
+
+const AddressCell = ({ operation }: Props) => {
+  const [ens, setEns] = useState<?string>(null);
+
+  const address =
+    operation.type === "IN" || operation.type === "REVEAL" || operation.type === "REWARD_PAYOUT"
+      ? operation.senders[0]
+      : operation.recipients[0];
+
+  useEffect(() => {
+    const fetchENS = async () => {
+      const ens = await getENSReverseLookup(address);
+      console.log({ address, ens });
+      if (ens) setEns(ens);
+    };
+
+    fetchENS();
+  }, []);
+
+  return address ? (
+    <Cell>
+      <Address value={address} />
+      {ens ? <Tag>{ens}</Tag> : null}
+    </Cell>
+  ) : (
+    <Box flex={1} />
+  );
 };
 
-class AddressCell extends PureComponent<Props> {
-  render() {
-    const { operation } = this.props;
-
-    const value =
-      operation.type === "IN" || operation.type === "REVEAL" || operation.type === "REWARD_PAYOUT"
-        ? operation.senders[0]
-        : operation.recipients[0];
-
-    return value ? (
-      <Cell>
-        <Address value={value} />
-      </Cell>
-    ) : (
-      <Box flex={1} />
-    );
-  }
-}
-
-export default AddressCell;
+export default React.memo(AddressCell);
