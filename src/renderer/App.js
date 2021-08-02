@@ -26,9 +26,9 @@ import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
 import WalletConnectProvider from "./screens/WalletConnect/Provider";
 import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementProviderWrapper";
+import { PlatformAppProviderWrapper } from "~/renderer/components/PlatformAppProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { themeSelector } from "./actions/general";
-import PlatformCatalogProvider from "@ledgerhq/live-common/lib/platform/CatalogProvider";
 
 const StyleProvider = process.env.REBRANDING ? NewStyleProvider : LegacyStyleProvider;
 
@@ -75,11 +75,11 @@ const InnerApp = ({ initialCountervalues }: { initialCountervalues: * }) => {
                 <AnnouncementProviderWrapper>
                   <Router>
                     <WalletConnectProvider>
-                      <PlatformCatalogProvider>
+                      <PlatformAppProviderWrapper>
                         <DrawerProvider>
                           <Default />
                         </DrawerProvider>
-                      </PlatformCatalogProvider>
+                      </PlatformAppProviderWrapper>
                     </WalletConnectProvider>
                   </Router>
                 </AnnouncementProviderWrapper>
