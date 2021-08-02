@@ -16,6 +16,7 @@ import IconActivity from "~/renderer/icons/Activity";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Trans } from "react-i18next";
 import ToolTip from "./Tooltip";
+import { NoCountervaluePlaceholder } from "./CounterValue";
 
 type Props = {
   unit?: Unit,
@@ -81,13 +82,7 @@ export default function Price({
   );
 
   if (!counterValue || counterValue.isZero())
-    return (
-      <div style={{ maxHeight: 16 }}>
-        <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
-          {placeholder || "-"}
-        </ToolTip>
-      </div>
-    );
+    return <NoCountervaluePlaceholder placeholder={placeholder} />;
 
   const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 

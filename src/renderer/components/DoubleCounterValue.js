@@ -13,6 +13,7 @@ import ToolTip from "~/renderer/components/Tooltip";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import FormattedDate from "./FormattedDate";
+import { NoCountervaluePlaceholder } from "./CounterValue";
 
 const Row = styled(Box).attrs(() => ({
   minWidth: 250,
@@ -93,13 +94,7 @@ function DoubleCounterValue({
   });
 
   if (typeof countervalue === "undefined") {
-    return (
-      <div style={{ maxHeight: 16 }}>
-        <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
-          {placeholder || "-"}
-        </ToolTip>
-      </div>
-    );
+    return <NoCountervaluePlaceholder placeholder={placeholder} />;
   }
 
   const val = BigNumber(countervalue ?? 0);

@@ -15,6 +15,7 @@ import Price from "~/renderer/components/Price";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
 import Swap from "~/renderer/icons/Swap";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { NoCountervaluePlaceholder } from "~/renderer/components/CounterValue";
 
 type Props = {
   isAvailable: boolean,
@@ -76,7 +77,7 @@ export default function AccountBalanceSummaryHeader({
         >
           <Wrapper style={{ marginTop: 4 }}>
             <div style={{ width: "auto", marginRight: 20 }}>
-              {typeof data[1].balance === "number" && (
+              {typeof data[1].balance === "number" ? (
                 <FormattedVal
                   key={secondaryKey}
                   animateTicker
@@ -88,6 +89,8 @@ export default function AccountBalanceSummaryHeader({
                   showCode
                   val={data[1].balance}
                 />
+              ) : (
+                <NoCountervaluePlaceholder style={null} />
               )}
             </div>
             <Price

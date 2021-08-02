@@ -28,6 +28,20 @@ type Props = {
   suffix?: React$Node,
 };
 
+export const NoCountervaluePlaceholder = ({
+  placeholder,
+  style = { maxHeight: 16 },
+}: {
+  placeholder?: React$Node,
+  style?: *,
+}) => (
+  <div style={style}>
+    <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
+      {placeholder || "-"}
+    </ToolTip>
+  </div>
+);
+
 export default function CounterValue({
   value: valueProp,
   date,
@@ -49,13 +63,7 @@ export default function CounterValue({
   });
 
   if (typeof countervalue !== "number") {
-    return (
-      <div style={{ maxHeight: 16 }}>
-        <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
-          {placeholder || "-"}
-        </ToolTip>
-      </div>
-    );
+    return <NoCountervaluePlaceholder placeholder={placeholder} />;
   }
 
   return (
