@@ -40,14 +40,14 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",
-    "@ledgerhq/devices": "6.2.0",
+    "@ledgerhq/devices": "6.3.0",
     "@ledgerhq/electron-updater": "^4.2.2",
     "@ledgerhq/errors": "6.2.0",
-    "@ledgerhq/hw-transport": "6.2.0",
-    "@ledgerhq/hw-transport-http": "6.2.0",
-    "@ledgerhq/hw-transport-node-hid-singleton": "6.2.0",
+    "@ledgerhq/hw-transport": "6.3.0",
+    "@ledgerhq/hw-transport-http": "6.3.0",
+    "@ledgerhq/hw-transport-node-hid-singleton": "6.3.0",
     "@ledgerhq/ledger-core": "6.12.3",
-    "@ledgerhq/live-common": "20.10.1",
+    "@ledgerhq/live-common": "20.11.0",
     "@ledgerhq/logs": "6.2.0",
     "@polkadot/react-identicon": "0.84.1",
     "@tippyjs/react": "^4.2.5",
@@ -125,7 +125,7 @@
     "winston-transport": "^4.3.0",
     "write-file-atomic": "^3.0.3",
     "ws": "^7.5.3",
-    "xstate": "^4.23.0",
+    "xstate": "^4.23.1",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
