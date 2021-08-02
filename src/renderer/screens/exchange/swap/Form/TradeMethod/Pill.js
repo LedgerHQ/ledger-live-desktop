@@ -19,7 +19,7 @@ const MethodWrapper: ThemedComponent<{}> = styled(Box)`
     !p.disabled
       ? `linear-gradient(${p.theme.colors.wallet}, ${p.theme.colors.wallet})`
       : `linear-gradient(${p.theme.colors.palette.text.shade10}, ${p.theme.colors.palette.text.shade10})`};
-  background-size: 50% 4em;
+  background-size: ${p => (p.disabled ? "100% 4em" : "50% 4em")};
   background-repeat: no-repeat;
   background-position: ${p => (p.tradeMethod === "fixed" ? "100%" : "0%")};
   transition: background-position 0.2s ease-out;
@@ -28,16 +28,12 @@ const MethodWrapper: ThemedComponent<{}> = styled(Box)`
 const Method = styled(Text).attrs(p => ({
   color: p.selected
     ? p.disabled
-      ? p.theme.colors.palette.background.default
+      ? p.theme.colors.palette.text.shade20
       : "white"
     : p.disabled
     ? p.theme.colors.palette.text.shade20
     : p.theme.colors.wallet,
-  borderColor: p.disabled
-    ? p.selected
-      ? "transparent"
-      : p.theme.colors.palette.text.shade10
-    : p.theme.colors.wallet,
+  borderColor: p.disabled ? p.theme.colors.palette.text.shade10 : p.theme.colors.wallet,
   fontSize: 3,
   ff: "Inter|SemiBold",
 }))`
@@ -54,7 +50,7 @@ const Method = styled(Text).attrs(p => ({
   pointer-events: ${p => (p.disabled ? "none" : "auto")};
   border-top-${p => (p.right ? "right" : "left")}-radius: 0;
   border-bottom-${p => (p.right ? "right" : "left")}-radius: 0;
-  border-${p => (p.right ? "right" : "left")}: none;
+  border-${p => (p.right ? "right" : "left")}: 1px solid ${p => p.borderColor};
 `;
 
 export const CountdownTimerWrapper: ThemedComponent<{}> = styled(Box)`
@@ -68,7 +64,7 @@ export const CountdownTimerWrapper: ThemedComponent<{}> = styled(Box)`
 type Modes = "fixed" | "float"; // More?
 
 const Pill = ({
-  tradeMethod = "fixed",
+  tradeMethod = "float",
   setTradeMethod,
   enabledTradeMethods,
 }: {
