@@ -19,8 +19,8 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
-        "website": "Website"
+        "title": "Информация",
+        "website": "Сайт"
       }
     },
     "catalog": {
@@ -48,6 +48,13 @@
         "description": "Информация о том, как интегрировать собственные приложения в Ledger Live.",
         "button": "Перейти в Портал"
       }
+    },
+    "disclaimer": {
+      "title": "Стороннее приложение",
+      "description": "Вы будете перенаправлены на приложение, которое не принадлежит компании Ledger.",
+      "legalAdvice": "Данное приложение не принадлежит компании Ledger. Компания не несёт ответственности за потерю средств или качество обслуживания данного приложения.\n\nВсегда тщательно проверяйте информацию на экране устройства.",
+      "checkbox": "Больше не напоминать.",
+      "CTA": "Продолжить"
     }
   },
   "common": {
@@ -109,7 +116,8 @@
       "outdated": "Приостановлено",
       "needsMigration": "Нажмите, чтобы обновить аккаунт",
       "error": "Ошибка синхронизации",
-      "refresh": "Обновить"
+      "refresh": "Обновить",
+      "devTools": "Dev tools"
     },
     "exchange": "Обмен",
     "info": "Информация"
@@ -237,95 +245,95 @@
       "cta": "Перейти в Диспетчер"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Выберите поставщика услуг для обмена криптовалюты",
+      "learnMore": "Что такое Swap (обмен криптоактивов)?",
+      "kycRequired": "Требуется проверка KYC",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Только в США (скоро в Европе, Африке и Азии)",
+          "Множество монет и токенов",
+          "Централизованный"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT и 50+ других",
+          "Мультивалютная поддержка",
+          "Централизованный"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
-          "Decentralized & Trustless"
+          "Подключение к 30+ DEX-биржам (Uniswap, SushiSwap...)",
+          "Ethereum и ERC20-токены",
+          "Децентрализованная система без доверия"
         ]
       },
-      "cta": "Continue",
+      "cta": "Продолжить",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} недоступен в вашем регионе",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "Требуется проверка KYC",
+          "pending": "KYC в обработке",
+          "approved": "KYC одобрены!",
+          "closed": "KYC отклонены"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "Добро пожаловать в Обмен криптоактивов",
+      "subtitle": "Обменивать криптоактивы можно непосредственно на устройстве Ledger.",
+      "disclaimer": "Продолжая, вы соглашаетесь с тем, что данные о вашем местоположении могут передаваться сторонним поставщикам услуг для соблюдения ими процедур AML/KYC."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "Мы не можем завершить процедуру KYC, пока вы не обновите приложение",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "disclaimer": "Информация о вас собирается Ledger от имени – и передаётся, – в Wyre для процедуры KYC. Дополнительную информацию можно получить в нашей",
+        "policy": "Политике конфиденциальности",
+        "title": "Подтверждение вашей личности",
+        "subtitle": "Пожалуйста, введите данные, чтобы произвести обмен посредством Wyre.",
         "pending": {
-          "cta": "Continue",
-          "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
-          "link": "Learn more about KYC"
+          "cta": "Продолжить",
+          "title": "Ожидание утверждения",
+          "subtitle": "Ваша информация отправлена для утверждения в Wyre. Может пройти 1-3 дня, прежде чем вы сможете начать обменивать криптоактивы.",
+          "link": "Подробнее о KYC"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "Сбросить KYC",
+          "title": "Процедура KYC отклонена",
+          "subtitle": "Сервис Wyre отклонил данные, которые вы предоставили для KYC",
+          "link": "Подробнее о KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstName": "Имя",
+          "lastName": "Фамилия",
+          "street1": "Улица и номер дома, строка 1",
+          "street2": "Улица и номер дома, строка 2",
+          "city": "Город",
+          "state": "Штат",
+          "country": "Страна",
+          "postalCode": "Индекс",
+          "dateOfBirth": "Дата рождения",
+          "firstNamePlaceholder": "Введите имя",
+          "lastNamePlaceholder": "Введите фамилию",
+          "street1Placeholder": "Например: ул. Маяковского 50",
+          "street2Placeholder": "Например: ул. Маяковского 50",
+          "cityPlaceholder": "Например: Москва",
+          "postalCodePlaceholder": "Введите индекс из 5 цифр",
+          "dateOfBirthPlaceholder": "ММ/ДД/ГГГГ",
+          "firstNameError": "Укажите имя, чтобы продолжить",
+          "lastNameError": "Укажите фамилию, чтобы продолжить",
+          "street1Error": "Укажите адрес",
+          "cityError": "Укажите город в США, в котором вы живёте",
+          "postalCodeError": "Введите действительный индекс для США",
+          "dateOfBirthError": "Укажите дату рождения",
+          "dateOfBirthValidationError": "Укажите действительную дату рождения"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
+      "resetKYC": "Сбросьте данные KYC и обновите Ledger Live, чтобы производить обмены посредством Wyre",
+      "resetKYCCTA": "Сбросить KYC",
       "amount": "Кол-во",
       "from": {
         "title": "Откуда",
@@ -359,14 +367,14 @@
       "loadingRates": "Загружаем котировки..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Необходимо обновить Ledger Live",
+      "subtitle": "Обновите Ledger Live до последней версии и повторно подтвердите свою личность, чтобы обменивать криптоактивы посредством Wyre.",
+      "cta": "Сбросить подтверждение личности"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Удаление данных KYC",
+      "subtitle": "Удалите KYC, чтобы стереть все токены, которые хранятся локально на вашем ПК. Вам придётся повторно предоставить данные KYC, чтобы получить доступ к сервисам наших партнёров.",
+      "cta": "Подтвердить"
     },
     "modal": {
       "title": "Обмен",
@@ -1972,7 +1980,7 @@
     "unlockedBalance": "Не заблокированные",
     "unlockedTooltip": "Теперь разблокированные средства можно вывести.",
     "networkFees": "Поскольку комиссия устанавливается протоколом Polkadot автоматически, её невозможно будет просмотреть на устройстве",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "bondedBalanceBelowMinimum": "У вас не хватает заблокированных средств (мин. {{minimumBondBalance}}). Ваши назначения могут быть отозваны.",
     "nomination": {
       "emptyState": {
         "description": "Вы можете получать вознаграждения, блокируя активы и назначая валидаторов.",
@@ -2319,7 +2327,8 @@
       "help": "Помощь",
       "about": "О программе",
       "experimental": "Экспериментальные функции",
-      "accounts": "Счета"
+      "accounts": "Счета",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2345,17 +2354,36 @@
       "languageDesc": "Выберите язык интерфейса в Ledger Live.",
       "theme": "Тема оформления",
       "themeDesc": "Выберите тему.",
-      "counterValue": "Preferred currency",
+      "counterValue": "Предпочтительная валюта",
       "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
       "region": "Регион",
       "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
       "stock": "Индикатор регионального рынка",
       "stockDesc": "Выберите «Западный», чтобы рост рыночной стоимости отображался синим цветом, либо «Восточный», чтобы рост рыночной стоимости отображался красным цветом.",
       "carouselVisibility": "Карусель",
-      "carouselVisibilityDesc": "Показывать Портфель в формате карусели"
+      "carouselVisibilityDesc": "Показывать карусель событий на странице Портфеля"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Выберите криптоактив",
       "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
       "placeholder": "Нет настроек для выбранного актива",
       "confirmationsNb": "Количество подтверждений",
@@ -2370,8 +2398,8 @@
       "softResetTitle": "Очистка кэша",
       "softResetDesc": "Очистите кэш Ledger Live для принудительной синхронизации с блокчейном.",
       "softReset": "Очистить",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "Сбросить данные KYC",
+      "resetKYCDesc": "Удалите все сохранённые локально данные KYC, которые используются для доступа к стороннему поставщику транзакций.",
       "hardResetTitle": "Сброс Ledger Live",
       "hardResetDesc": "Удаление всех данных Ledger Live с компьютера, в том числе информации о счетах, истории транзакций и настроек.",
       "hardReset": "Сбросить",
@@ -2525,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Новости",
-      "operation": "Операция"
+      "operation": "Операция",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
@@ -2972,129 +3001,129 @@
   },
   "connectTroubleshooting": {
     "desc": "Не удаётся подключить устройство?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "solution": "Решение №{{number}}",
+    "nextSolution": "Следующее решение",
+    "previousSolution": "Предыдущее решение",
+    "followSteps": "Выполните эти шаги",
+    "supportArticle": "Вспомогательная статья",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Устраните проблемы с USB-подключением",
+        "desc": "Похоже, что возникла проблема с подключением к вашему устройству. Не переживайте, вы можете попробовать разные решения, пока устройство не будет подключено!",
+        "cta": "Давайте это исправим!",
+        "back": "Назад"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Запустите Ledger Live от имени администратора",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Закройте Ledger Live.",
+            "1": "Щёлкните правой кнопкой мыши по приложению Ledger Live.",
+            "2": "Выберите «Запустить от имени администратора».",
+            "3": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "Обновите правила udev на системе Linux",
+          "desc": "Нажмите кнопку ниже, чтобы добавить правила udev. Затем подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено.",
+          "cta": "Настроить правила",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Введите следующую команду в терминале, чтобы автоматически добавлять правила и перезагружать udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Попробуйте подключиться к другому USB-порту",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Поменяйте USB-порт на ПК",
+            "1": "Отключите любые переносные USB-устройства",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Замените USB-кабель",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "По возможности используйте оригинальный USB-кабель.",
+            "1": "Попробуйте воспользоваться другим USB-кабелем, убедившись, что он поддерживает передачу данных.",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Перезагрузите компьютер",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Перезагрузите компьютер.",
+            "1": "Запустите Ledger Live",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Выключите антивирусную программу и VPN.",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "Выключите антивирусную программу, фаервол и VPN.",
+            "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено.",
+            "2": "Добавьте Ledger Live в белый список вашей антивирусной программы, если она включена."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Воспользуйтесь другим компьютером",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Перейдите по <0>{{link}}</0> на другом компьютере, чтобы скачать и установить Ledger Live.",
+            "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "Обновление USB-драйверов",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "Откройте <0>{{link}}</0>",
+            "1": "Следуйте инструкциям для обновления USB-драйверов.",
+            "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Предоставление полного доступа к диску",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Откройте «Системные настройки».",
+              "1": "Перейдите к пункту «Защита и безопасность».",
+              "2": "На вкладке «Конфиденциальность» перейдите к пункту «Доступ к диску» в левом столбце.",
+              "3": "Добавьте «Ledger Live».",
+              "4": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "Сбросьте NVRAM",
+            "link": "Инструкция для Apple",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Если на вашем Mac установлен процессор intel, то для сброса NVRAM выполните инструкции <0>{{link}}</0>.",
+              "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "Какое у вас устройство?",
+          "desc": "Если у вас Nano S, попробуйте Исправить прошивку вашего устройства. Пользователям Nano X и Blue необходимо связаться с Поддержкой Ledger"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": " Проблема с USB-подключением не исправлена?",
+          "desc": "Если вы использовали всеми возможные решения, обратитесь в Поддержку Ledger. В противном случае выполните инструкции, которое вы ещё не пробовали.",
+          "back": "Вернуться к Портфелю",
+          "cta": "Связаться с поддержкой"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Ремонтируем Nano S",
+          "desc": "Какое сообщение отображается на вашем устройстве?",
+          "mcuOutdated": "mcuOutdated (Прошивка MCU устарела)",
+          "mcuNotGenuine": "mcuNotGenuine (Прошивка MCU не является подлинной)",
+          "repairInstructions": "Следуйте инструкциям по ремонту устройства",
+          "updateInstructions": "Следуйте инструкциям по обновлению устройства",
+          "somethingElse": "Другое"
         }
       }
     }
@@ -3321,8 +3350,8 @@
       "description": "Пожалуйста, удалите все приложения через Диспетчер и перед последующей установкой проверьте наличие обновления прошивки"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Обновите прошивку Nano",
+      "description": "Чтобы получить доступ к этой функции, пожалуйста, обновите прошивку до последней версии."
     },
     "FirmwareNotRecognized": {
       "title": "Не удаётся распознать прошивку устройства",
@@ -3718,13 +3747,13 @@
       "title": "Убедитесь, что вашего баланса достаточно, чтобы покрыть потенциальные комиссии"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "Баланс не может быть ниже {{minimumBalance}}. Отправьте макс. количество, чтобы аннулировать счёт."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Вы должны заблокировать не менее {{minimumBondAmount}}."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Заблокированных средств должно быть не менее {{minimumBondBalance}}."
     },
     "PolkadotMaxUnbonding": {
       "title": "Вы превысили лимит разблокировки"

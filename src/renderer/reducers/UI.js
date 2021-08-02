@@ -6,14 +6,30 @@ import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import type { State } from "~/renderer/reducers";
 
+export type PlatformAppDrawerInfo = {
+  type: "DAPP_INFO",
+  manifest: ?AppManifest,
+  title: string,
+};
+
+export type PlatformAppDrawerDisclaimer = {
+  type: "DAPP_DISCLAIMER",
+  manifest: ?AppManifest,
+  disclaimerId: string,
+  title: string,
+  next: () => void,
+};
+
+export type PlatformAppDrawers = PlatformAppDrawerInfo & PlatformAppDrawerDisclaimer;
+
 export type UIState = {
   informationCenter: {
     isOpen: boolean,
     tabId: string,
   },
-  platformAppInfo: {
+  platformAppDrawer: {
     isOpen: boolean,
-    manifest: ?AppManifest,
+    payload: ?PlatformAppDrawers,
   },
 };
 
@@ -22,18 +38,14 @@ const initialState: UIState = {
     isOpen: false,
     tabId: "announcement",
   },
-  platformAppInfo: {
+  platformAppDrawer: {
     isOpen: false,
-    manifest: undefined,
+    payload: undefined,
   },
 };
 
 type OpenPayload = {
   tabId?: string,
-};
-
-type OpenPlatformAppInfoPayload = {
-  manifest: AppManifest,
 };
 
 const handlers = {
@@ -70,23 +82,21 @@ const handlers = {
     };
   },
 
-  PLATFORM_APP_INFO_OPEN: (state, { payload }: { payload: OpenPlatformAppInfoPayload }) => {
-    const { manifest } = payload;
-
+  PLATFORM_APP_DRAWER_OPEN: (state, { payload }: { payload: PlatformAppDrawers }) => {
     return {
       ...state,
-      platformAppInfo: {
+      platformAppDrawer: {
         isOpen: true,
-        manifest,
+        payload,
       },
     };
   },
 
-  PLATFORM_APP_INFO_CLOSE: state => {
+  PLATFORM_APP_DRAWER_CLOSE: state => {
     return {
       ...state,
-      platformAppInfo: {
-        ...state.platformAppInfo,
+      platformAppDrawer: {
+        ...state.platformAppDrawer,
         isOpen: false,
       },
     };
@@ -99,7 +109,7 @@ export const UIStateSelector = (state: State): UIState => state.UI;
 
 export const informationCenterStateSelector = (state: Object) => state.UI.informationCenter;
 
-export const platformAppInfoStateSelector = (state: Object) => state.UI.platformAppInfo;
+export const platformAppDrawerStateSelector = (state: Object) => state.UI.platformAppDrawer;
 // Exporting reducer
 
 export default handleActions(handlers, initialState);

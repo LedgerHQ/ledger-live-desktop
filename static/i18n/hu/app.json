@@ -48,6 +48,13 @@
         "description": "All the information you need to integrate your applications on Ledger Live.",
         "button": "Go to portal"
       }
+    },
+    "disclaimer": {
+      "title": "External Application",
+      "description": "You are about to be redirected to an application not operated by Ledger.",
+      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
+      "checkbox": "Do not remind me again.",
+      "CTA": "Continue"
     }
   },
   "common": {
@@ -109,7 +116,8 @@
       "outdated": "Szünetel",
       "needsMigration": "Kattints a számlád frissítéséhez",
       "error": "Szinkronizálási hiba",
-      "refresh": "Frissítés"
+      "refresh": "Frissítés",
+      "devTools": "Dev tools"
     },
     "exchange": "Exchange",
     "info": "Info"
@@ -2319,7 +2327,8 @@
       "help": "Segítség",
       "about": "Rólunk",
       "experimental": "Kísérleti funkciók",
-      "accounts": "Számlák"
+      "accounts": "Számlák",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2353,6 +2362,25 @@
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
       "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Select crypto asset",
@@ -2525,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "News",
-      "operation": "Operation"
+      "operation": "Operation",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
