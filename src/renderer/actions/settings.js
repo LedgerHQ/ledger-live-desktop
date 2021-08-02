@@ -148,9 +148,15 @@ export const dismissBanner = (bannerKey: string) => ({
 export const setPreferredDeviceModel = (preferredDeviceModel: DeviceModelId) =>
   saveSettings({ preferredDeviceModel });
 
-export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
+export const setLastSeenDeviceInfo = ({
+  lastSeenDevice,
+  latestFirmware,
+}: {
+  lastSeenDevice: DeviceModelInfo,
+  latestFirmware: any,
+}) => ({
   type: "LAST_SEEN_DEVICE_INFO",
-  payload: dmi,
+  payload: { lastSeenDevice, latestFirmware },
 });
 
 export const setDeepLinkUrl = (url: ?string) => ({

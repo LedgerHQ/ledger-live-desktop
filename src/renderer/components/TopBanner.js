@@ -41,6 +41,8 @@ export const FakeLink: ThemedComponent<{}> = styled.span`
   color: ${p => p.theme.colors.palette.primary.contrastText};
   text-decoration: underline;
   cursor: pointer;
+  pointer-events: ${p => (p.disabled ? "none" : "auto")};
+  opacity: ${p => (p.disabled ? "0.6" : "1")};
 `;
 
 const CloseContainer = styled(Box).attrs(() => ({

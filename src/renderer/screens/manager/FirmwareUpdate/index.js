@@ -2,27 +2,22 @@
 
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
-
 import type { ModalStatus } from "./types";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
-
 import { getDeviceModel } from "@ledgerhq/devices";
 import manager from "@ledgerhq/live-common/lib/manager";
-
 import type { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
-
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DisclaimerModal from "~/renderer/modals/DisclaimerModal";
 import UpdateModal from "~/renderer/modals/UpdateFirmwareModal";
 import type { StepId } from "~/renderer/modals/UpdateFirmwareModal";
 import Text from "~/renderer/components/Text";
-import getCleanVersion from "~/renderer/screens/manager/FirmwareUpdate/getCleanVersion";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import Box from "~/renderer/components/Box";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
-import Button from "~/renderer/components/Button";
-import UpdateFirmwareButton from "./UpdateFirmwareButton";
+import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+import { FakeLink } from "~/renderer/components/TopBanner";
 
 type Props = {
   deviceInfo: DeviceInfo,
@@ -103,68 +98,37 @@ class FirmwareUpdate extends PureComponent<Props, State> {
 
     if (!firmware) {
       if (!isDeprecated) return null;
-
       return (
-        <Box
-          py={2}
-          px={4}
-          bg="blueTransparentBackground"
-          horizontal
-          alignItems="center"
-          justifyContent="space-between"
-          borderRadius={1}
-        >
-          <Box flex="1" mr={4}>
-            <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
-              <Trans i18nKey="manager.firmware.deprecated" />
-            </Text>
-          </Box>
-          <Button
-            primary
-            onClick={() => {
-              openURL(urls.contactSupport);
-            }}
-          >
-            <Trans i18nKey="manager.firmware.contactSupport" />
-          </Button>
-        </Box>
+        <FirmwareUpdateBanner
+          old
+          right={
+            <FakeLink onClick={() => openURL(urls.contactSupport)}>
+              <Trans i18nKey="manager.firmware.banner.old.cta" />
+            </FakeLink>
+          }
+        />
       );
     }
 
     return (
-      <Box
-        py={2}
-        px={4}
-        bg="blueTransparentBackground"
-        horizontal
-        alignItems="center"
-        justifyContent="space-between"
-        borderRadius={1}
-      >
-        <Box flex="1">
-          <Text ff="Inter|SemiBold" fontSize={5} color="palette.primary.main">
-            <Trans
-              i18nKey="manager.firmware.latest"
-              values={{ version: getCleanVersion(firmware.final.name) }}
-            />
-          </Text>
-        </Box>
-
-        {manager.firmwareUpdateRequiresUserToUninstallApps(device.modelId, deviceInfo) && (
-          <Box px={4} horizontal alignItems="center" color="palette.primary.main">
-            <IconInfoCircle size={12} />
-            <Text style={{ marginLeft: 6 }} ff="Inter" fontSize={4}>
-              <Trans i18nKey="manager.firmware.removeApps" />
-            </Text>
-          </Box>
-        )}
-        <UpdateFirmwareButton
-          deviceInfo={deviceInfo}
-          firmware={firmware}
-          onClick={this.handleDisclaimerModal}
-          disabled={disableFirmwareUpdate}
+      <>
+        <FirmwareUpdateBanner
+          right={
+            <Box alignItems={"flex-end"} horizontal>
+              {manager.firmwareUpdateRequiresUserToUninstallApps(device.modelId, deviceInfo) && (
+                <Box px={4} horizontal alignItems="center" color="palette.primary.contrastText">
+                  <IconInfoCircle size={12} />
+                  <Text style={{ marginLeft: 6 }} ff="Inter" fontSize={4}>
+                    <Trans i18nKey="manager.firmware.removeApps" />
+                  </Text>
+                </Box>
+              )}
+              <FakeLink disabled={disableFirmwareUpdate} onClick={this.handleDisclaimerModal}>
+                <Trans i18nKey="manager.firmware.banner.cta2" />
+              </FakeLink>
+            </Box>
+          }
         />
-
         <DisclaimerModal
           modelId={device.modelId}
           firmware={firmware}
@@ -193,7 +157,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
           deviceModelId={deviceSpecs.id}
           setFirmwareUpdateOpened={setFirmwareUpdateOpened}
         />
-      </Box>
+      </>
     );
   }
 }
