@@ -31,7 +31,7 @@
         "debug": "Débugger"
       },
       "banner": {
-        "title": "Découvrez le catalogue d'applications Live",
+        "title": "Découvrez le Catalogue Live",
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
@@ -1261,7 +1261,7 @@
   },
   "manager": {
     "tabs": {
-      "appCatalog": "Catalogue d'applications",
+      "appCatalog": "Catalogue d'apps",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
       "appOnDeviceSearch": "Rechercher les applications installées..."
