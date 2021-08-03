@@ -31,7 +31,7 @@
         "debug": "Débugger"
       },
       "banner": {
-        "title": "Découvrez le Catalogue Live",
+        "title": "Découvrez le Catalogue d'apps Live",
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
@@ -1261,7 +1261,7 @@
   },
   "manager": {
     "tabs": {
-      "appCatalog": "Catalogue d'apps",
+      "appCatalog": "Catalogue d'applications",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
       "appOnDeviceSearch": "Rechercher les applications installées..."
@@ -1337,7 +1337,7 @@
       "uninstall": {
         "title": "Tout désinstaller",
         "subtitle": "Désinstaller toutes les applications ?",
-        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le catalogue d'applications."
+        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le Catalogue d'applications."
       }
     },
     "apps": {
