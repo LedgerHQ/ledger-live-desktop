@@ -8,41 +8,52 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
-import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { useSelector } from "react-redux";
 import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { SwappableAccountType, toAccountType } from "./FormInputs";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 
 type Props = {
-  fromAccount: ?AccountLike,
-  toCurrency: ?CryptoCurrency,
-  setToCurrency: (?CryptoCurrency) => void,
+  fromAccount: ?SwappableAccountType,
+  toAccount: ?toAccountType,
+  setToAccount: useSelectableCurrenciesReturnType => void,
   toAmount: ?BigNumber,
   setToAmount: BigNumber => void,
+  resetToAccount: () => void,
 };
 
 export default function ToRow({
-  toCurrency,
-  setToCurrency,
+  toAccount,
+  setToAccount,
   toAmount,
   setToAmount,
   fromAccount,
+  resetToAccount,
 }: Props) {
-  const fromAccountId = fromAccount ? getAccountCurrency(fromAccount).id : null;
-  const allCurrencies = useSelector(toSelector)(fromAccountId);
-  const { currencies, availableAccounts } = useSelectableCurrencies({
-    currency: toCurrency,
-    allCurrencies,
-  });
+  const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
+  const toCurrency = toAccount?.data?.account ? getAccountCurrency(toAccount.data.account) : null;
+  const allCurrencies = useSelector(toSelector)(fromCurrencyId);
+  const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
 
   /* @dev: Check if the selected currency is still available
    ** - If not, reset the state */
   useEffect(() => {
-    if (currencies.includes(toCurrency)) return;
+    const isCurrentValueValids = selectState.currencies.find(({ id }) => id === toCurrency?.id);
 
-    setToCurrency(null);
-  }, [currencies]);
+    if (!isCurrentValueValids) {
+      resetToAccount(); // TODO: would be a dispatch call in the future
+      selectState.setCurrency(null);
+    }
+  }, [selectState.currencies]);
+
+  /* @dev: save picked account */
+  useEffect(() => {
+    if (!toAccount && !selectState.account) return;
+
+    // TODO: would be a dispatch call in the future
+    setToAccount(selectState);
+  }, [selectState.account, selectState.subAccount]);
 
   return (
     <>
@@ -54,10 +65,9 @@ export default function ToRow({
       <Box horizontal>
         <Box width="50%">
           <SelectCurrency
-            accounts={availableAccounts}
-            currencies={currencies}
-            onChange={setToCurrency}
-            value={toCurrency}
+            currencies={selectState.currencies}
+            onChange={selectState.setCurrency}
+            value={selectState.currency}
             stylesMap={selectRowStylesMap}
           />
         </Box>

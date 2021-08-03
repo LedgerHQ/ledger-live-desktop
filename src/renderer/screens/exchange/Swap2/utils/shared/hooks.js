@@ -6,6 +6,7 @@ import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/ty
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
+import type { useCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
 
 type State = {
@@ -62,28 +63,25 @@ export const useSwapProviders = () => {
   return state;
 };
 
-export type useSelectableCurrenciesProps = {
-  allCurrencies: Array<string>,
-  currency: ?CryptoCurrency,
+export type useSelectableCurrenciesProps = { allCurrencies: Array<string> };
+export type useSelectableCurrenciesReturnType = useCurrencyAccountSelectReturnType & {
+  currencies: Array<CryptoCurrency | TokenCurrency>,
 };
-export const useSelectableCurrencies = ({
-  allCurrencies,
-  currency,
-}: useSelectableCurrenciesProps) => {
+export const useSelectableCurrencies = ({ allCurrencies }: useSelectableCurrenciesProps) => {
   const allAccounts = useSelector(shallowAccountsSelector);
 
-  const currencies: Array<CryptoCurrency | TokenCurrency> = useMemo(() => {
+  const currencies: $PropertyType<useSelectableCurrenciesReturnType, "currencies"> = useMemo(() => {
     const tokens = allCurrencies.map(findTokenById).filter(Boolean);
     const cryptoCurrencies = allCurrencies.map(findCryptoCurrencyById).filter(Boolean);
     return [...tokens, ...cryptoCurrencies];
   }, [allCurrencies]);
 
-  const { availableAccounts } = useCurrencyAccountSelect({
+  const currencyAccountSelect = useCurrencyAccountSelect({
     allCurrencies: currencies,
     allAccounts: allAccounts,
-    defaultCurrency: currency,
+    defaultCurrency: null,
     defaultAccount: null,
   });
 
-  return { currencies, availableAccounts };
+  return { ...currencyAccountSelect, currencies };
 };

@@ -13,11 +13,11 @@ import Text from "~/renderer/components/Text";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
-import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { SwappableAccountType } from "./FormInputs";
 
 type Props = {
-  fromAccount: ?AccountLike,
-  setFromAccount: (?AccountLike) => void,
+  fromAccount: ?SwappableAccountType,
+  setFromAccount: (?SwappableAccountType) => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
   t: TFunction,
