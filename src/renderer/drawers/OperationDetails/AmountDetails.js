@@ -10,7 +10,6 @@ import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import ToolTip from "~/renderer/components/Tooltip";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import FormattedDate from "~/renderer/components/FormattedDate";
