@@ -65,6 +65,9 @@ module.exports = {
       "@components": process.env.REBRANDING
         ? path.resolve(__dirname, "ui-lib", "components")
         : path.resolve(__dirname, "src", "renderer", "components"),
+      "@styles": process.env.REBRANDING
+        ? path.resolve(__dirname, "ui-lib", "styles")
+        : path.resolve(__dirname, "src", "renderer", "styles"),
     },
   },
 };

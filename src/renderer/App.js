@@ -13,8 +13,7 @@ import "tippy.js/dist/svg-arrow.css";
 
 import type { State } from "~/renderer/reducers";
 
-import LegacyStyleProvider from "~/renderer/styles/StyleProvider";
-import NewStyleProvider from "@ui/styles/StyleProvider";
+import StyleProvider from "@styles/StyleProvider";
 
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
@@ -28,8 +27,6 @@ import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementP
 import { PlatformAppProviderWrapper } from "~/renderer/components/PlatformAppProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { themeSelector } from "./actions/general";
-
-const StyleProvider = process.env.REBRANDING ? NewStyleProvider : LegacyStyleProvider;
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
