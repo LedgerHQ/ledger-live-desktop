@@ -19,12 +19,12 @@ describe("Swap", () => {
 
   const $ = selector => app.client.$(selector);
 
-  it("access the select providers", async () => {
+  it("access the feature", async () => {
     const elem = await $("#drawer-swap-button");
     await elem.click();
     await app.client.waitForSync();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-providers",
+      customSnapshotIdentifier: "swap-form",
     });
   });
 
@@ -48,6 +48,8 @@ describe("Swap", () => {
     await toCurrencyInput.addValue("ethereum");
     const toCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await toCurrencyFirstOption.click();
+    const floatMethod = await $("#swap-form-tradeMethod-float");
+    await floatMethod.click();
     await app.client.pause(2000);
     const continueButton = await $("#swap-form-continue-button");
     await continueButton.waitForEnabled();
