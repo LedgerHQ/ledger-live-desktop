@@ -11,8 +11,9 @@ import { toSelector } from "~/renderer/actions/swap";
 import type { CryptoCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { useSelector } from "react-redux";
 import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import getAccountLikeId from "~/renderer/screens/exchange/Swap2/utils/shared/getAccountLikeId";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+
 type Props = {
   fromAccount: ?AccountLike,
   toCurrency: ?CryptoCurrency,
@@ -28,7 +29,7 @@ export default function ToRow({
   setToAmount,
   fromAccount,
 }: Props) {
-  const fromAccountId = getAccountLikeId(fromAccount);
+  const fromAccountId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromAccountId);
   const { currencies, availableAccounts } = useSelectableCurrencies({
     currency: toCurrency,
