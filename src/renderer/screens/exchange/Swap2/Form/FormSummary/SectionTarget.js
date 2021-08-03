@@ -42,12 +42,6 @@ const TextWrappper: ThemedComponent<{}> = styled.div`
   flex-grow: 1;
 `;
 
-const getTargetIcon = (currency?: TokenCurrency | CryptoCurrency) => {
-  if (!currency) return null;
-
-  return <CryptoCurrencyIcon circle currency={currency} size={16} />;
-};
-
 const AccountSection = ({
   targetName,
   targetCurrency,
@@ -61,7 +55,7 @@ const AccountSection = ({
     <SummarySection>
       <SummaryLabel label={t("swap2.form.details.label.target")} />
       <SummaryValue value={targetName} handleChange={() => {}}>
-        {getTargetIcon(targetCurrency)}
+        {targetCurrency ? <CryptoCurrencyIcon circle currency={targetCurrency} size={16} /> : null}
       </SummaryValue>
     </SummarySection>
   );
