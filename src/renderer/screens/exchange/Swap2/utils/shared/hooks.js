@@ -1,7 +1,12 @@
 // @flow
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useMemo } from "react";
 import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
+import { useSelector } from "react-redux";
 
 type State = {
   isLoading: boolean,
@@ -55,4 +60,30 @@ export const useSwapProviders = () => {
   }, []);
 
   return state;
+};
+
+export type useSelectableCurrenciesProps = {
+  allCurrencies: Array<string>,
+  currency: ?CryptoCurrency,
+};
+export const useSelectableCurrencies = ({
+  allCurrencies,
+  currency,
+}: useSelectableCurrenciesProps) => {
+  const allAccounts = useSelector(shallowAccountsSelector);
+
+  const currencies: Array<CryptoCurrency | TokenCurrency> = useMemo(() => {
+    const tokens = allCurrencies.map(findTokenById).filter(Boolean);
+    const cryptoCurrencies = allCurrencies.map(findCryptoCurrencyById).filter(Boolean);
+    return [...tokens, ...cryptoCurrencies];
+  }, [allCurrencies]);
+
+  const { availableAccounts } = useCurrencyAccountSelect({
+    allCurrencies: currencies,
+    allAccounts: allAccounts,
+    defaultCurrency: currency,
+    defaultAccount: null,
+  });
+
+  return { currencies, availableAccounts };
 };

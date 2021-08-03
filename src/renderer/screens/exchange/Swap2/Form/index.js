@@ -9,12 +9,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  updateProvidersAction,
-  resetSwapAction,
-  currentProviderSelector,
-  providersSelector,
-} from "~/renderer/actions/swap";
+import { updateProvidersAction, resetSwapAction, providersSelector } from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 
@@ -46,8 +41,6 @@ const SwapForm = () => {
   const { t } = useTranslation();
   const { providers, error } = useSwapProviders();
   const dispatch = useDispatch();
-
-  const currentProvider = useSelector(currentProviderSelector);
   const storedProviders = useSelector(providersSelector);
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
@@ -61,7 +54,7 @@ const SwapForm = () => {
     if (error) dispatch(resetSwapAction());
   }, [error]);
 
-  if (currentProvider)
+  if (providers?.length)
     return (
       <Wrapper>
         <SwapFormSelectors />

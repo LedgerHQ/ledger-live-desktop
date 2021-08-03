@@ -4,30 +4,27 @@ import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swa
 
 export type SwapStateType = {
   providers: ?Array<AvailableProviderV3>,
-  currentProvider: ?AvailableProviderV3,
+  pairs: ?$PropertyType<AvailableProviderV3, "pairs">,
 };
 
-const initialState: SwapStateType = { providers: null, currentProvider: null };
+const initialState: SwapStateType = { providers: null, pairs: null };
 
-type UPDATE_PROVIDERS_TYPE = {
+export const flattenPairs = (
+  acc: Array<{ from: string, to: string }>,
+  value: AvailableProviderV3,
+) => [...acc, ...value.pairs];
+
+export type UPDATE_PROVIDERS_TYPE = {
   payload: $NonMaybeType<$PropertyType<SwapStateType, "providers">>,
+};
+const updateProviders = (state: SwapStateType, { payload: providers }: UPDATE_PROVIDERS_TYPE) => {
+  const pairs = providers.reduce(flattenPairs, []);
+
+  return { ...initialState, providers: providers, pairs };
 };
 
 const handlers = {
-  UPDATE_PROVIDERS: (state: SwapStateType, { payload: providers }: UPDATE_PROVIDERS_TYPE) => {
-    /* Manage the case when no providers are available
-       Overwrite current provider to default value is required on update */
-    if (providers.length === 0)
-      return { ...state, providers: providers, currentProvider: initialState.currentProvider };
-
-    // Manage the initial storage
-    if (state.currentProvider === null)
-      return { ...state, providers: providers, currentProvider: providers[0] };
-
-    const isCurrentPickable = providers.find(({ provider }) => provider === state.currentProvider);
-    const currentProvider = isCurrentPickable ? state.currentProvider : providers[0];
-    return { ...state, providers, currentProvider };
-  },
+  UPDATE_PROVIDERS: updateProviders,
   RESET_STATE: () => ({ ...initialState }),
 };
 

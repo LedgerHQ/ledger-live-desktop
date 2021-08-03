@@ -44,6 +44,7 @@ export default function FormInputs() {
         setToCurrency={setToCurrency}
         toAmount={toAmount}
         setToAmount={setToAmount}
+        fromAccount={fromAccount}
       />
     </section>
   );
