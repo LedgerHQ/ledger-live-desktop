@@ -1,22 +1,17 @@
 // @flow
-
+import { remote, WebviewTag, shell } from "electron";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
-
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import useTheme from "~/renderer/hooks/useTheme";
-
-import Box from "~/renderer/components/Box";
-import BigSpinner from "~/renderer/components/BigSpinner";
-
-import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-import { openModal } from "~/renderer/actions/modals";
-import { accountsSelector } from "~/renderer/reducers/accounts";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
@@ -37,10 +32,16 @@ import {
   deserializePlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
 
+import useTheme from "~/renderer/hooks/useTheme";
+import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
+import { openModal } from "~/renderer/actions/modals";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+
+import Box from "~/renderer/components/Box";
+import BigSpinner from "~/renderer/components/BigSpinner";
+
+import * as tracking from "./tracking";
 import TopBar from "./TopBar";
-import type { Manifest } from "./type";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -49,7 +50,8 @@ const Container: ThemedComponent<{}> = styled.div`
   height: 100%;
 `;
 
-const CustomIframe: ThemedComponent<{}> = styled.iframe`
+// $FlowFixMe
+const CustomWebview: ThemedComponent<{}> = styled("webview")`
   border: none;
   width: 100%;
   flex: 1;
@@ -74,22 +76,39 @@ const Loader: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  manifest: Manifest,
+  manifest: AppManifest,
   onClose?: Function,
+  inputs?: Object,
 };
 
-const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
+const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
   const theme = useTheme("colors.palette");
 
-  const targetRef: { current: null | HTMLIFrameElement } = useRef(null);
+  const targetRef: { current: null | WebviewTag } = useRef(null);
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
   const currencies = useMemo(() => listSupportedCurrencies(), []);
   const { pushToast } = useToasts();
   const { t } = useTranslation();
 
-  const [loadDate, setLoadDate] = useState(Date.now());
   const [widgetLoaded, setWidgetLoaded] = useState(false);
+
+  const url = useMemo(() => {
+    const urlObj = new URL(manifest.url.toString());
+
+    if (inputs) {
+      for (const key in inputs) {
+        if (Object.prototype.hasOwnProperty.call(inputs, key)) {
+          urlObj.searchParams.set(key, inputs[key]);
+        }
+      }
+    }
+
+    urlObj.searchParams.set("backgroundColor", theme.background.paper);
+    urlObj.searchParams.set("textColor", theme.text.shade100);
+
+    return urlObj;
+  }, [manifest.url, theme, inputs]);
 
   const listAccounts = useCallback(() => {
     return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
@@ -102,20 +121,27 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
       const account = accounts.find(account => account.id === accountId);
+      tracking.platformReceiveRequested(manifest);
 
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
             account,
             parentAccount: null,
-            onResult: account => resolve(account.freshAddress),
-            onCancel: reject,
+            onResult: account => {
+              tracking.platformReceiveSuccess(manifest);
+              resolve(account.freshAddress);
+            },
+            onCancel: error => {
+              tracking.platformReceiveFail(manifest);
+              reject(error);
+            },
             verifyAddress: true,
           }),
         ),
       );
     },
-    [accounts, dispatch],
+    [manifest, accounts, dispatch],
   );
 
   const broadcastTransaction = useCallback(
@@ -132,12 +158,20 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
       const signedOperation = deserializePlatformSignedTransaction(signedTransaction, accountId);
       const bridge = getAccountBridge(account);
 
-      const optimisticOperation = !getEnv("DISABLE_TRANSACTION_BROADCAST")
-        ? await bridge.broadcast({
+      let optimisticOperation = signedOperation.operation;
+
+      if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
+        try {
+          optimisticOperation = await bridge.broadcast({
             account,
             signedOperation,
-          })
-        : signedOperation.operation;
+          });
+          tracking.platformBroadcastSuccess(manifest);
+        } catch (error) {
+          tracking.platformBroadcastFail(manifest);
+          throw error;
+        }
+      }
 
       dispatch(
         updateAccountWithUpdater(account.id, account =>
@@ -152,6 +186,7 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
         text: t("platform.flows.broadcast.toast.text"),
         icon: "info",
         callback: () => {
+          tracking.platformBroadcastOperationDetailsClick(manifest);
           dispatch(
             openModal("MODAL_OPERATION_DETAILS", {
               operationId: optimisticOperation.id,
@@ -164,24 +199,30 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
       return optimisticOperation.hash;
     },
-    [accounts, pushToast, dispatch, t],
+    [manifest, accounts, pushToast, dispatch, t],
   );
 
   const requestAccount = useCallback(
     ({ currencies, allowAddAccount }: { currencies?: string[], allowAddAccount?: boolean }) => {
+      tracking.platformRequestAccountRequested(manifest);
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_REQUEST_ACCOUNT", {
             currencies,
             allowAddAccount,
-            onResult: account =>
-              resolve(serializePlatformAccount(accountToPlatformAccount(account))),
-            onCancel: reject,
+            onResult: account => {
+              tracking.platformRequestAccountSuccess(manifest);
+              resolve(serializePlatformAccount(accountToPlatformAccount(account)));
+            },
+            onCancel: error => {
+              tracking.platformRequestAccountFail(manifest);
+              reject(error);
+            },
           }),
         ),
       );
     },
-    [dispatch],
+    [manifest, dispatch],
   );
 
   const signTransaction = useCallback(
@@ -204,6 +245,8 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
         throw new Error("Transaction family not matching account currency family");
       }
 
+      tracking.platformSignTransactionRequested(manifest);
+
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
@@ -211,14 +254,19 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
             useApp: params.useApp,
             account,
             parentAccount: null,
-            onResult: signedOperation =>
-              resolve(serializePlatformSignedTransaction(signedOperation)),
-            onCancel: reject,
+            onResult: signedOperation => {
+              tracking.platformSignTransactionRequested(manifest);
+              resolve(serializePlatformSignedTransaction(signedOperation));
+            },
+            onCancel: error => {
+              tracking.platformSignTransactionFail(manifest);
+              reject(error);
+            },
           }),
         ),
       );
     },
-    [dispatch, accounts],
+    [manifest, dispatch, accounts],
   );
 
   const handlers = useMemo(
@@ -242,56 +290,98 @@ const WebPlatformPlayer = ({ manifest, onClose }: Props) => {
 
   const handleSend = useCallback(
     (request: JSONRPCRequest) => {
-      targetRef?.current?.contentWindow.postMessage(JSON.stringify(request), manifest.url.origin);
+      const webview = targetRef.current;
+      if (webview) {
+        webview.contentWindow.postMessage(JSON.stringify(request), url.origin);
+      }
     },
-    [manifest],
+    [url],
   );
 
   const [receive] = useJSONRPCServer(handlers, handleSend);
 
   const handleMessage = useCallback(
-    e => {
-      if (e.isTrusted && e.origin === manifest.url.origin && e.data) {
-        receive(JSON.parse(e.data));
+    event => {
+      if (event.channel === "webviewToParent") {
+        receive(JSON.parse(event.args[0]));
       }
     },
-    [manifest, receive],
+    [receive],
   );
 
   useEffect(() => {
-    window.addEventListener("message", handleMessage, false);
-    return () => window.removeEventListener("message", handleMessage, false);
-  }, [handleMessage]);
+    tracking.platformLoad(manifest);
+    const webview = targetRef.current;
+    if (webview) {
+      webview.addEventListener("ipc-message", handleMessage);
+    }
+
+    return () => {
+      if (webview) {
+        webview.removeEventListener("ipc-message", handleMessage);
+      }
+    };
+  }, [manifest, handleMessage]);
 
   const handleLoad = useCallback(() => {
+    tracking.platformLoadSuccess(manifest);
     setWidgetLoaded(true);
-  }, []);
+  }, [manifest]);
 
   const handleReload = useCallback(() => {
-    setLoadDate(Date.now());
-    setWidgetLoaded(false);
+    const webview = targetRef.current;
+    if (webview) {
+      tracking.platformReload(manifest);
+      setWidgetLoaded(false);
+      webview.reloadIgnoringCache();
+    }
+  }, [manifest]);
+
+  const handleNewWindow = useCallback(async e => {
+    const protocol = new URL(e.url).protocol;
+    if (protocol === "http:" || protocol === "https:") {
+      await shell.openExternal(e.url);
+    }
   }, []);
 
-  const uri = useMemo(() => {
-    const url = new URL(manifest.url.toString());
+  useEffect(() => {
+    const webview = targetRef.current;
 
-    url.searchParams.set("backgroundColor", theme.background.paper);
-    url.searchParams.set("textColor", theme.text.shade100);
-    url.searchParams.set("loadDate", loadDate.valueOf().toString());
+    if (webview) {
+      webview.addEventListener("new-window", handleNewWindow);
+      webview.addEventListener("did-finish-load", handleLoad);
+    }
 
-    return url;
-  }, [manifest.url, loadDate, theme]);
+    return () => {
+      if (webview) {
+        webview.removeEventListener("new-window", handleNewWindow);
+        webview.removeEventListener("did-finish-load", handleLoad);
+      }
+    };
+  }, [handleLoad, handleNewWindow]);
+
+  const handleOpenDevTools = useCallback(() => {
+    const webview = targetRef.current;
+
+    if (webview) {
+      webview.openDevTools();
+    }
+  }, []);
 
   return (
     <Container>
-      <TopBar manifest={manifest} onReload={handleReload} onClose={onClose} />
+      <TopBar
+        manifest={manifest}
+        onReload={handleReload}
+        onClose={onClose}
+        onOpenDevTools={handleOpenDevTools}
+      />
       <Wrapper>
-        <CustomIframe
-          src={uri.toString()}
+        <CustomWebview
+          src={url.toString()}
           ref={targetRef}
           style={{ opacity: widgetLoaded ? 1 : 0 }}
-          sandbox="allow-scripts allow-same-origin allow-forms"
-          onLoad={handleLoad}
+          preload={`file://${remote.app.dirname}/webviewPreloader.bundle.js`}
         />
         {!widgetLoaded ? (
           <Loader>

@@ -4,12 +4,22 @@ import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/An
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
 import { languageSelector } from "~/renderer/reducers/settings";
-import { currenciesIdSelector } from "~/renderer/reducers/accounts";
+import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
 import { openInformationCenter } from "~/renderer/actions/UI";
 import { track } from "~/renderer/analytics/segment";
+import fetchApi from "../../../tests/mocks/notificationsHelpers";
+import networkApi from "../../../tests/mocks/serviceStatusHelpers";
+
+let notificationsApi;
+let serviceStatusApi;
+
+if (process.env.MOCK || process.env.SPECTRON_RUN) {
+  notificationsApi = fetchApi;
+  serviceStatusApi = networkApi;
+}
 
 type Props = {
   children: React$Node,
@@ -47,7 +57,9 @@ async function loadAnnouncements(): Promise<{
 export function AnnouncementProviderWrapper({ children }: Props) {
   const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
-  const currencies = useSelector(currenciesIdSelector);
+  const currenciesRaw = useSelector(cryptoCurrenciesSelector);
+  const currencies = currenciesRaw.map(currency => currency.id);
+  const tickers = currenciesRaw.map(currency => currency.ticker);
   const dispatch = useDispatch();
 
   // $FlowFixMe please help on fixing this. bad type on live-common?
@@ -57,6 +69,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     language,
     currencies,
     getDate: () => new Date(),
+    appVersion: __APP_VERSION__,
   };
 
   const onNewAnnouncement = useCallback(
@@ -98,16 +111,23 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [dismissToast],
   );
 
+  const autoUpdateDelay = process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000;
+
   return (
     <AnnouncementProvider
-      autoUpdateDelay={60000}
+      autoUpdateDelay={autoUpdateDelay}
       context={context}
       onNewAnnouncement={onNewAnnouncement}
       onAnnouncementRead={onAnnouncementRead}
       handleLoad={loadAnnouncements}
       handleSave={saveAnnouncements}
+      fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider context={{ currencies }} autoUpdateDelay={60000}>
+      <ServiceStatusProvider
+        context={{ tickers }}
+        autoUpdateDelay={autoUpdateDelay}
+        networkApi={serviceStatusApi}
+      >
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>

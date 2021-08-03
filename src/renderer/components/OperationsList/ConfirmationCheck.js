@@ -116,6 +116,7 @@ const iconsComponent = {
   NOMINATE: Vote,
   CHILL: VoteNay,
   REWARD_PAYOUT: ClaimRewards,
+  SET_CONTROLLER: IconSend,
 };
 
 class ConfirmationCheck extends PureComponent<{

@@ -1,21 +1,26 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+
+import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 
 import Box, { Tabbable } from "~/renderer/components/Box";
 
-// import IconInfoCircle from "~/renderer/icons/InfoCircle";
+import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import IconReload from "~/renderer/icons/UpdateCircle";
+import LightBulb from "~/renderer/icons/LightBulb";
 import IconClose from "~/renderer/icons/Cross";
 
-import type { Manifest } from "./type";
 import LiveAppIcon from "./LiveAppIcon";
+import { useSelector, useDispatch } from "react-redux";
+import { enablePlatformDevToolsSelector } from "~/renderer/reducers/settings";
 
+import { openPlatformAppInfoDrawer } from "~/renderer/actions/UI";
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
   grow: 0,
@@ -99,19 +104,27 @@ export const Separator: ThemedComponent<*> = styled.div`
 
 export type Props = {
   icon?: boolean,
-  manifest: Manifest,
+  manifest: AppManifest,
   onReload: Function,
   onClose?: Function,
   onHelp?: Function,
+  onOpenDevTools: Function,
 };
 
-const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
+const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools }: Props) => {
   const { name, icon } = manifest;
+
+  const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
+  const dispatch = useDispatch();
+
+  const onClick = useCallback(() => {
+    dispatch(openPlatformAppInfoDrawer({ manifest }));
+  }, [manifest, dispatch]);
 
   return (
     <Container>
       <TitleContainer>
-        <LiveAppIcon name={name} icon={icon} size={24} />
+        <LiveAppIcon name={name} icon={icon || undefined} size={24} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />
@@ -121,10 +134,21 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
           <Trans i18nKey="common.sync.refresh" />
         </ItemContent>
       </ItemContainer>
+      {enablePlatformDevTools ? (
+        <>
+          <Separator />
+          <ItemContainer isInteractive onClick={onOpenDevTools}>
+            <LightBulb size={16} />
+            <ItemContent>
+              <Trans i18nKey="common.sync.devTools" />
+            </ItemContent>
+          </ItemContainer>
+        </>
+      ) : null}
       <RightContainer>
-        {/* <ItemContainer isInteractive onClick={onHelp}>
+        <ItemContainer isInteractive onClick={onClick}>
           <IconInfoCircle size={16} />
-        </ItemContainer> */}
+        </ItemContainer>
         <ItemContainer isInteractive onClick={onClose}>
           <IconClose size={16} />
         </ItemContainer>
