@@ -3,11 +3,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import TrackPage from "~/renderer/analytics/TrackPage";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import WorldMap from "~/renderer/icons/WorldMap";
 import IconExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+
+import Track from "~/renderer/analytics/Track";
 
 const Body = styled(Box).attrs({
   alignItems: "center",
@@ -22,7 +23,7 @@ const FormNotAvailable = () => {
 
   return (
     <Box justifyContent="center" alignItems="center">
-      <TrackPage category="Swap" name="Form/NotAvailable" />
+      <Track onMount event="NotAvailable" />
       <WorldMap />
       <Body>
         <IconExclamationCircleThin size={40} />
