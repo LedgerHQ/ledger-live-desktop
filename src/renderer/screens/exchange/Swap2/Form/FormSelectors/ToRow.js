@@ -11,7 +11,7 @@ import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
 import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import type { SwappableAccountType, toAccountType } from "./FormInputs";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 
 type Props = {
@@ -35,6 +35,7 @@ export default function ToRow({
   const toCurrency = toAccount?.data?.account ? getAccountCurrency(toAccount.data.account) : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
+  const unit = selectState.account ? getAccountUnit(selectState.account) : undefined;
 
   /* @dev: Check if the selected currency is still available
    ** - If not, reset the state */
@@ -79,7 +80,7 @@ export default function ToRow({
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}
-            defaultUnit={toCurrency?.units[0]}
+            unit={unit}
             // Flow complains if this prop is missing…
             renderRight={null}
           />
