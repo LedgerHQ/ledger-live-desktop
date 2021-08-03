@@ -24,7 +24,7 @@ describe("Swap", () => {
     await elem.click();
     await app.client.waitForSync();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-form",
+      customSnapshotIdentifier: "swap-providers", // NB no longer providers but ci doesnt want a name change
     });
   });
 
