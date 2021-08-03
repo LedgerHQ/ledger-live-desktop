@@ -2,7 +2,6 @@ import React from "react";
 import LiveStyleSheetManager from "@ui/styles/LiveStyleSheetManager";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme, palettes, GlobalStyle } from "@ui/styles";
-import "@ui/global.css";
 
 type Props = {
   children: React$Node,

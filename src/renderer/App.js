@@ -15,7 +15,6 @@ import type { State } from "~/renderer/reducers";
 
 import LegacyStyleProvider from "~/renderer/styles/StyleProvider";
 import NewStyleProvider from "@ui/styles/StyleProvider";
-import "@ui/global.css";
 
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
