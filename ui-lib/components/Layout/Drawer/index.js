@@ -1,12 +1,12 @@
-import React, { useRef, useContext, useCallback, useEffect, useState } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { TransitionGroup } from "react-transition-group";
 import Drawer from "@ui/components/Layout/Drawer/Drawer";
 import TransitionSlide from "@ui/components/Transition/TransitionSlide";
-import { context } from "./Provider";
+import { useDrawer } from "./Provider";
 
 export const DrawerWrapper = props => {
   // Nb Note that it's not a real queue and we need to handle where we go from each _slide_
-  const { state, setDrawer } = useContext(context);
+  const { state, setDrawer } = useDrawer();
   const [queue, setQueue] = useState([]);
   const [direction, setDirection] = useState("left");
   const [transitionsEnabled, setTransitionsEnabled] = useState(false);

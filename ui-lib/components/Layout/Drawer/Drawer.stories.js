@@ -16,10 +16,51 @@ const DummyContentWrapper: ThemedComponent<*> = styled.div`
   padding: 10px;
 `;
 
+const onBackLvl1 = () => setDrawer(DummyContent, { left: true });
+const onBackLvl2 = () => setDrawer(DummySubContentLvl1, { onBack: onBackLvl1, left: true });
+
+const DummyContent = () => (
+  <DummyContentWrapper color={"#957DAD"}>
+    <Button onClick={() => setDrawer(DummySubContentLvl1, { onBack: onBackLvl1, left: true })}>
+      {"Go to level 2"}
+    </Button>
+  </DummyContentWrapper>
+);
+const DummySubContentLvl1 = () => (
+  <DummyContentWrapper color={"#E0BBE4"}>
+    <Button onClick={() => setDrawer(DummySubContentLvl2, { onBack: onBackLvl2, left: true })}>
+      {"Go to level 3"}
+    </Button>
+  </DummyContentWrapper>
+);
+const DummySubContentLvl2 = () => <DummyContentWrapper color={"#FEC8D8"} />;
+
+const components = {
+  DummyContent,
+  DummySubContentLvl1,
+  DummySubContentLvl2,
+};
+
 export default {
   title: "Layout/Drawer",
   component: Drawer,
   argTypes: {
+    isOpen: {
+      type: "boolean",
+      value: true,
+      description: "Is open",
+      required: false,
+      control: { type: "boolean" },
+    },
+    DrawerComponent: {
+      type: "enum",
+      description: "Drawer component",
+      defaultValue: "DummyContent",
+      control: {
+        options: [undefined, "DummyContent", "DummySubContentLvl1", "DummySubContentLvl2"],
+        control: { type: "select" },
+      },
+    },
     title: {
       type: "text",
       description: "Drawer default title",
@@ -37,33 +78,15 @@ export default {
   },
 };
 
-const Template = (args: any) => {
+const Template = ({ DrawerComponent, ...args }: any) => {
   const [, updateArgs] = useArgs();
 
   const onClose = () => updateArgs({ isOpen: false });
-  const onBackLvl1 = () => setDrawer(DummyContent, { left: true });
-  const onBackLvl2 = () => setDrawer(DummySubContentLvl1, { onBack: onBackLvl1, left: true });
-
-  const DummyContent = () => (
-    <DummyContentWrapper color={"#957DAD"}>
-      <Button onClick={() => setDrawer(DummySubContentLvl1, { onBack: onBackLvl1, left: true })}>
-        {"Go to level 2"}
-      </Button>
-    </DummyContentWrapper>
-  );
-  const DummySubContentLvl1 = () => (
-    <DummyContentWrapper color={"#E0BBE4"}>
-      <Button onClick={() => setDrawer(DummySubContentLvl2, { onBack: onBackLvl2, left: true })}>
-        {"Go to level 3"}
-      </Button>
-    </DummyContentWrapper>
-  );
-  const DummySubContentLvl2 = () => <DummyContentWrapper color={"#FEC8D8"} />;
 
   useEffect(() => {
-    setDrawer(DummyContent);
+    setDrawer(components[DrawerComponent]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [DrawerComponent]);
 
   return (
     <DrawerProvider>

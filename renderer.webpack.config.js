@@ -30,8 +30,6 @@ const babelConfig = {
   ],
 };
 
-console.log("REBRANDING", process.env.REBRANDING);
-
 module.exports = {
   target: "electron-renderer",
   entry: ["./src/renderer/index.js"],

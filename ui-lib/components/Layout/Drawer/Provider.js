@@ -1,5 +1,5 @@
 /* @flow */
-import React, { useReducer, useEffect, useCallback } from "react";
+import React, { useReducer, useEffect, useCallback, useContext } from "react";
 
 type State = {
   Component: ?React$ComponentType<*>,
@@ -33,6 +33,11 @@ export const context = React.createContext<ContextValue>({
   state: initialState,
   setDrawer: () => {},
 });
+
+export const useDrawer = () => {
+  const drawerContext = useContext(context);
+  return drawerContext;
+};
 
 const DrawerProvider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
