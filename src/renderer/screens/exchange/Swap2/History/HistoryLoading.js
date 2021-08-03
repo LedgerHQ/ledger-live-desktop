@@ -5,7 +5,7 @@ import BigSpinner from "~/renderer/components/BigSpinner";
 
 const HistoryLoading = () => (
   <Box flex={1} alignItems="center" justifyContent="center">
-    <BigSpinner size={50} />
+    <BigSpinner size={75} />
   </Box>
 );
 
