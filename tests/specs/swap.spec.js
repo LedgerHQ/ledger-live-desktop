@@ -28,23 +28,6 @@ describe("Swap", () => {
     });
   });
 
-  it("pass KYC landing", async () => {
-    const KYCCheckbox = await $("#swap-landing-kyc-tos");
-    await KYCCheckbox.waitForDisplayed();
-    await KYCCheckbox.click();
-
-    const KYCContinueButton = await $("#swap-landing-kyc-continue-button");
-    await KYCContinueButton.waitForEnabled();
-    await KYCContinueButton.click();
-
-    const fromCurrency = await $("#swap-form-from-currency .select__control");
-    await fromCurrency.waitForDisplayed();
-
-    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-kyc-done",
-    });
-  });
-
   it("fill the form and get rates", async () => {
     const fromCurrency = await $("#swap-form-from-currency .select__control");
     await fromCurrency.click();
