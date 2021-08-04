@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Continuer",
           "title": "En attente de validation",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "Vos données ont été envoyées à Wyre pour validation.",
           "link": "En savoir plus"
         },
         "closed": {
