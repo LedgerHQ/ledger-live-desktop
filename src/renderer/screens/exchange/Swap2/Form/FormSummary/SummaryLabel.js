@@ -1,13 +1,10 @@
 // @flow
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
-import { useTranslation } from "react-i18next";
-import { FormSummarySectionContext } from "./SummarySection";
-import type { FormSummarySections } from "./types";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -38,37 +35,14 @@ const Details = ({ details }: DetailsProps) => {
   );
 };
 
-type contentKeysType = { [key: FormSummarySections]: { labelKey: string, detailsKey?: string } };
-const contentKeys: contentKeysType = {
-  provider: {
-    labelKey: "swap2.form.details.label.provider",
-    detailsKey: "swap2.form.details.tooltip.provider",
-  },
-  rate: {
-    labelKey: "swap2.form.details.label.rate",
-    detailsKey: "swap2.form.details.tooltip.rate",
-  },
-  fees: {
-    labelKey: "swap2.form.details.label.fees",
-    detailsKey: "swap2.form.details.tooltip.fees",
-  },
-  target: {
-    labelKey: "swap2.form.details.label.target",
-  },
-};
-
 /* This component fetch the current label and the optional details from the section's
  ** context and render them if possible.
  */
-const SummaryLabel = () => {
-  const { t } = useTranslation();
-  const { section } = useContext(FormSummarySectionContext);
-  const { labelKey, detailsKey } = contentKeys[section];
-
+const SummaryLabel = ({ label, details }: { label: string, details?: string }) => {
   return (
     <Container>
-      <Label>{t(labelKey)}</Label>
-      {detailsKey ? <Details details={t(detailsKey)} /> : null}
+      <Label>{label}</Label>
+      {details ? <Details details={details} /> : null}
     </Container>
   );
 };

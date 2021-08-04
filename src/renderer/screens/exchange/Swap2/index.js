@@ -1,16 +1,24 @@
 // @flow
 import React from "react";
 import { useTranslation } from "react-i18next";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import { Route } from "react-router-dom";
+import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import SwapForm from "./Form";
-import styled from "styled-components";
+import SwapHistory from "./History";
+import SwapNavbar from "./Navbar";
+import Box from "~/renderer/components/Box";
+
+const Body = styled(Box)`
+  row-gap: 2px;
+  flex: 1;
+`;
 
 const Main = styled.main`
   display: flex;
   justify-content: center;
+  flex: 1;
 
-  padding: 2rem 0;
   background-color: ${p => p.theme.colors.palette.background.paper};
 
   border-bottom-right-radius: 4px;
@@ -19,7 +27,6 @@ const Main = styled.main`
 
   & > * {
     width: 100%;
-    max-width: 27.5rem;
   }
 `;
 
@@ -28,13 +35,16 @@ const Swap2 = () => {
 
   return (
     <>
-      <TrackPage category="Swap" />
       <Text horizontal mb={20} ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100">
-        {t("swap.title")}
+        {t("swap2.title")}
       </Text>
-      <Main>
-        <SwapForm />
-      </Main>
+      <Body>
+        <SwapNavbar />
+        <Main>
+          <Route path="/swap" render={props => <SwapForm {...props} />} exact />
+          <Route path="/swap/history" render={props => <SwapHistory {...props} />} exact />
+        </Main>
+      </Body>
     </>
   );
 };

@@ -1,10 +1,9 @@
 // @flow
-import React, { useContext } from "react";
+import React from "react";
 import TextBase from "~/renderer/components/Text";
 import ButtonBase from "~/renderer/components/Button";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { FormSummarySectionContext } from "./SummarySection";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -40,14 +39,20 @@ const ButtonEdit = ({ onClick }: { onClick: Function }) => {
 
 // This component fetch the current value, the optional icon and the handleChange function
 // from the section's context and render them if possible
-const SummaryValue = () => {
-  const { value, handleChange, Icon } = useContext(FormSummarySectionContext);
-
+const SummaryValue = ({
+  value,
+  handleChange,
+  children,
+}: {
+  value?: string,
+  handleChange: Function,
+  children?: React$Node,
+}) => {
   if (!value) return <Text>-</Text>;
 
   return (
     <Container>
-      {Icon ? <Icon /> : null}
+      {children}
       <Text>{value}</Text>
       <ButtonEdit onClick={handleChange} />
     </Container>

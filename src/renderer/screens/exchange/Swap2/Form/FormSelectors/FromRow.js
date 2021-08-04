@@ -13,11 +13,11 @@ import Text from "~/renderer/components/Text";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
-  fromAccount: ?Account,
-  setFromAccount: (?Account) => void,
+  fromAccount: ?Account | TokenAccount,
+  setFromAccount: ?(Account | TokenAccount) => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
   t: TFunction,
@@ -39,7 +39,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         color={"palette.text.shade40"}
       >
         <FormLabel>
-          <Trans i18nKey="swap.form.from.title" />
+          <Trans i18nKey="swap2.form.from.title" />
         </FormLabel>
         <Box horizontal alignItems="center">
           <Text marginRight={1} fontWeight="500">
@@ -57,6 +57,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
             onChange={setFromAccount}
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
+            withSubAccounts
           />
         </Box>
         <Box width="50%">

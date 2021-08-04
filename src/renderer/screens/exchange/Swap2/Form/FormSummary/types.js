@@ -1,7 +1,6 @@
 // @flow
 
-export type FormSummaryStandardSections = "provider" | "fees" | "rate";
-export type FormSummarySections = FormSummaryStandardSections | "target";
+export type FormSummarySections = "provider" | "fees" | "rate" | "target";
 export type FormSummaryProps = {
   provider?: string,
   rate?: string,

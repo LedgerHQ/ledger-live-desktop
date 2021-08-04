@@ -5,15 +5,13 @@ import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types/accoun
 import { makeEmptyTokenAccount } from "@ledgerhq/live-common/lib/account";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 
-type CryptoOrTokenCurrency = TokenCurrency | CryptoCurrency;
-
 export type AccountTuple = {
   account: ?Account,
   subAccount: ?SubAccount,
 };
 
 function getAccountTuplesForCurrency(
-  currency: CryptoOrTokenCurrency,
+  currency: CryptoCurrency | TokenCurrency,
   allAccounts: Account[],
   hideEmpty: ?boolean,
 ): AccountTuple[] {
@@ -46,6 +44,14 @@ const getIdsFromTuple = (accountTuple: AccountTuple) => ({
   subAccountId: accountTuple.subAccount ? accountTuple.subAccount.id : null,
 });
 
+export type useCurrencyAccountSelectReturnType = {
+  availableAccounts: Array<AccountTuple>,
+  currency: ?CryptoCurrency | TokenCurrency,
+  account: ?Account | any,
+  subAccount: ?SubAccount | any,
+  setAccount: (account: ?Account, subAccount: ?SubAccount) => void,
+  setCurrency: (currency: ?(CryptoCurrency | TokenCurrency)) => void,
+};
 export function useCurrencyAccountSelect({
   allCurrencies,
   allAccounts,
@@ -53,12 +59,12 @@ export function useCurrencyAccountSelect({
   defaultAccount,
   hideEmpty,
 }: {
-  allCurrencies: CryptoOrTokenCurrency[],
+  allCurrencies: Array<CryptoCurrency | TokenCurrency>,
   allAccounts: Account[],
-  defaultCurrency: ?CryptoOrTokenCurrency,
+  defaultCurrency: ?(CryptoCurrency | TokenCurrency),
   defaultAccount: ?Account,
   hideEmpty?: ?boolean,
-}) {
+}): useCurrencyAccountSelectReturnType {
   const [state, setState] = useState(() => {
     const currency = defaultCurrency || null;
     if (!currency) {
@@ -80,7 +86,7 @@ export function useCurrencyAccountSelect({
   const { currency, accountId } = state;
 
   const setCurrency = useCallback(
-    (currency: ?CryptoOrTokenCurrency) => {
+    (currency: ?CryptoCurrency | TokenCurrency) => {
       if (currency) {
         const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts, hideEmpty);
         const { accountId } = availableAccounts.length

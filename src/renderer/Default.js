@@ -45,7 +45,7 @@ import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
-// import useEnv from "~/renderer/hooks/useEnv";
+import useEnv from "~/renderer/hooks/useEnv";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -56,7 +56,7 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-  const isSwapV2Enabled = true; // useEnv("EXPERIMENTAL_SWAP");
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
   const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
 
@@ -145,7 +145,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
-                        <Route path="/swap" render={props => <SwapComponent {...props} />} exact />
+                        <Route path="/swap" render={props => <SwapComponent {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />
