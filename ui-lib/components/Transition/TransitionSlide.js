@@ -65,8 +65,9 @@ const TransitionSlide = ({
   fixed,
   direction = "left",
   reverseExit,
+  ...props
 }: TransitionSlideProps) => (
-  <CSSTransition timeout={3000} classNames={`transition-${direction}`}>
+  <CSSTransition {...props} timeout={300} classNames={`transition-${direction}`}>
     <ChildrenWrapper fixed={fixed} reverseExit={reverseExit}>
       {children}
     </ChildrenWrapper>
