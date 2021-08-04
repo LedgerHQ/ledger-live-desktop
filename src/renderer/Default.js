@@ -51,6 +51,9 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
   top: 0;
   z-index: 19;
+  & > *:not(:first-child) {
+    display: none;
+  }
 `;
 
 export default function Default() {
