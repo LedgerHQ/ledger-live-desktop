@@ -55,7 +55,7 @@ export default function ToRow({
 
     // TODO: would be a dispatch call in the future
     setToAccount(selectState);
-  }, [selectState.account, selectState.subAccount]);
+  }, [selectState.account, selectState.parentAccount]);
 
   return (
     <>

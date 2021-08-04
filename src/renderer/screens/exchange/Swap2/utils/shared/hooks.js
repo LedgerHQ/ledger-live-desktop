@@ -8,6 +8,7 @@ import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import type { useCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 type State = {
   isLoading: boolean,
@@ -63,12 +64,27 @@ export const useSwapProviders = () => {
   return state;
 };
 
-export type useSelectableCurrenciesProps = { allCurrencies: Array<string> };
+/*
+ ** As useCurrencyAccountSelect hook return the old account/parentAccount convention
+ ** I have to cast them to the new account/parentAccount convention. That's why
+ ** I created these complex types and why I cast some returned values to the
+ ** any types and the end of the useSelectableCurrencies function.
+ ** TODO: Once we have reworked useCurrencyAccountSelect hooks to use new
+ ** account/subAccout convention, please remove
+ ** RestCurrencyAccountSelectReturnType/AccountParentAccountType types
+ */
+type RestCurrencyAccountSelectReturnType = $Rest<
+  useCurrencyAccountSelectReturnType,
+  {|
+    account: $PropertyType<useCurrencyAccountSelectReturnType, "account">,
+    parentAccount: $PropertyType<useCurrencyAccountSelectReturnType, "parentAccount">,
+  |},
+>;
+type AccountParentAccountType = { account: Account | TokenAccount, parentAccount: ?Account };
+export type useSelectableCurrenciesReturnType = RestCurrencyAccountSelectReturnType &
+  AccountParentAccountType & { currencies: Array<CryptoCurrency | TokenCurrency> };
 
-export type useSelectableCurrenciesReturnType = useCurrencyAccountSelectReturnType & {
-  currencies: Array<CryptoCurrency | TokenCurrency>,
-};
-export const useSelectableCurrencies = ({ allCurrencies }: useSelectableCurrenciesProps) => {
+export const useSelectableCurrencies = ({ allCurrencies }: { allCurrencies: Array<string> }) => {
   const allAccounts = useSelector(shallowAccountsSelector);
 
   const currencies: $PropertyType<useSelectableCurrenciesReturnType, "currencies"> = useMemo(() => {
@@ -77,12 +93,25 @@ export const useSelectableCurrencies = ({ allCurrencies }: useSelectableCurrenci
     return [...tokens, ...cryptoCurrencies];
   }, [allCurrencies]);
 
-  const currencyAccountSelect = useCurrencyAccountSelect({
+  const {
+    subAccount,
+    account: receivedAccount,
+    ...currencyAccountSelect
+  } = useCurrencyAccountSelect({
     allCurrencies: currencies,
     allAccounts: allAccounts,
     defaultCurrency: null,
     defaultAccount: null,
   });
 
-  return { ...currencyAccountSelect, currencies };
+  /*
+   ** Related to the comments above. I have to cast account/parentAccount data
+   ** to shape them to the new account/parentAccount convention.
+   ** TODO: Remove these lines as soon as useCurrencyAccountSelect is reworked
+   */
+  const { account, parentAccount }: AccountParentAccountType = subAccount
+    ? { account: (subAccount: any), parentAccount: receivedAccount }
+    : { account: (receivedAccount: any), parentAccount: null };
+
+  return { ...currencyAccountSelect, currencies, account, parentAccount };
 };

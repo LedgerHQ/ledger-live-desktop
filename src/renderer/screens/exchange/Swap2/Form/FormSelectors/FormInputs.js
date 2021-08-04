@@ -7,7 +7,6 @@ import styled from "styled-components";
 import FromRow from "./FromRow";
 import ToRow from "./ToRow";
 import type {
-  SubAccount,
   Account,
   TokenAccount,
   TokenCurrency,
@@ -33,8 +32,8 @@ export type toAccountType =
       // User already has an account to accept target currency
       targetAccountExists: true,
       data: {
-        account: ?Account,
-        subAccount: ?SubAccount,
+        account: Account | TokenAccount,
+        parentAccount: ?Account,
         currency: ?(TokenCurrency | CryptoCurrency),
       },
     }
@@ -43,7 +42,7 @@ export type toAccountType =
       targetAccountExists: false,
       data: {
         account: null,
-        subAccount: null,
+        parentAccount: null,
         currency: ?(TokenCurrency | CryptoCurrency),
       },
     }
@@ -64,13 +63,13 @@ export default function FormInputs() {
           targetAccountExists: true,
           data: {
             account: selectSate.account,
-            subAccount: selectSate.subAccount,
+            parentAccount: selectSate.parentAccount,
             currency: selectSate.currency,
           },
         }
       : {
           targetAccountExists: false,
-          data: { account: null, subAccount: null, currency: selectSate.currency },
+          data: { account: null, parentAccount: null, currency: selectSate.currency },
         };
 
     setToAccount(data);
