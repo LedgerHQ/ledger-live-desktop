@@ -64,6 +64,7 @@ export const useSwapProviders = () => {
 };
 
 export type useSelectableCurrenciesProps = { allCurrencies: Array<string> };
+
 export type useSelectableCurrenciesReturnType = useCurrencyAccountSelectReturnType & {
   currencies: Array<CryptoCurrency | TokenCurrency>,
 };

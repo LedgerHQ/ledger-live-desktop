@@ -15,9 +15,6 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 
-export type SwappableAccountType = ?(Account | TokenAccount);
-export type SwappableParentAccountType = ?Account;
-
 const RoundButton = styled(Button)`
   padding: 8px;
   border-radius: 9999px;
@@ -55,7 +52,7 @@ export type toAccountType =
 
 export default function FormInputs() {
   // TODO: would be moved to a reducer
-  const [fromAccount, setFromAccount] = useState<SwappableAccountType>(null);
+  const [fromAccount, setFromAccount] = useState<Account | TokenAccount | null>(null);
   const [fromAmount, setFromAmount] = useState(null);
   const [toAccount, setToAccount] = useState<toAccountType>(null);
   const [toAmount, setToAmount] = useState(null);
