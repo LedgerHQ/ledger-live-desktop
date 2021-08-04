@@ -63,7 +63,7 @@ const Form = ({
   const providerKYC = swapKYC[provider];
   const selectableCurrencies = getSupportedCurrencies({ providers, provider });
   const [shouldFocusOnAmountNonce, setShouldFocusOnAmountNonce] = useState(0);
-  const [tradeMethod, setTradeMethod] = useState<Method>("fixed");
+  const [tradeMethod, setTradeMethod] = useState<Method>("float");
 
   const [state, dispatch] = useReducer(reducer, {
     useAllAmount: false,
