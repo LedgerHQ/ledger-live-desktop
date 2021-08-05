@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Información",
+        "title": "Information",
         "website": "Sitio web"
       }
     },
@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Continuar",
           "title": "Aprobación pendiente",
-          "subtitle": "Tu información se ha enviado para su aprobación por parte de Wyre. Normalmente tarda de 1 a 3 días antes de poder comenzar a permutar.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "Conocer más sobre KYC"
         },
         "closed": {
