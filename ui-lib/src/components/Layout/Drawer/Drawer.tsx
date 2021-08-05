@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import ReactDOM from "react-dom";
-import styled from "styled-components";
-import Button from "@ui/components/Button";
-import FlexBox from "@ui/components/Layout/Flex";
-import Cross from "~/assets/icons/Cross";
-import ArrowLeft from "~/assets/icons/ArrowLeft";
-import TransitionSlide from "@ui/components/Transition/TransitionSlide";
-import TransitionInOut from "@ui/components/Transition/TransitionInOut";
+import React, { useCallback } from 'react';
+import ReactDOM from 'react-dom';
+import styled from 'styled-components';
+import Button from '@ui/components/Button';
+import FlexBox from '@ui/components/Layout/Flex';
+import Cross from '~/assets/icons/Cross';
+import ArrowLeft from '~/assets/icons/ArrowLeft';
+import TransitionSlide from '@ui/components/Transition/TransitionSlide';
+import TransitionInOut from '@ui/components/Transition/TransitionInOut';
 
 const Container = styled(FlexBox)`
   width: 100%;
@@ -23,9 +23,9 @@ const Header = styled(FlexBox)`
   height: 50px;
 `;
 const Wrapper = styled.div<{
-  big?: boolean;
-  width?: number;
-  height?: number;
+  big?: boolean
+  width?: number
+  height?: number
 }>`
   height: 100%;
   width: ${p => (p.big ? p.theme.sizes.drawer.big.width : p.theme.sizes.drawer.small.width)}px;
@@ -56,14 +56,14 @@ const ButtonPlaceholder = styled.div`
 `;
 
 interface DrawerProps {
-  isOpen: boolean;
-  children: React.ReactNode;
-  title?: React.ReactNode;
-  big?: boolean;
-  small?: boolean;
-  onClose: () => void;
-  onBack?: () => void;
-  setTransitionsEnabled: (arg0: boolean) => void;
+  isOpen: boolean
+  children: React.ReactNode
+  title?: React.ReactNode
+  big?: boolean
+  small?: boolean
+  onClose: () => void
+  onBack?: () => void
+  setTransitionsEnabled: (arg0: boolean) => void
 }
 
 const Drawer = ({
@@ -110,8 +110,8 @@ const Drawer = ({
 };
 
 const DrawerWrapper = ({ children, ...drawerProps }: DrawerProps): React.ReactElement => {
-  const $root = React.useMemo(() => document.querySelector("#ll-drawer-root"), []);
-  if ($root === null) throw new Error("drawer root cannot be found");
+  const $root = React.useMemo(() => document.querySelector('#ll-drawer-root'), []);
+  if ($root === null) throw new Error('drawer root cannot be found');
   return ReactDOM.createPortal(<Drawer {...drawerProps}>{children}</Drawer>, $root);
 };
 

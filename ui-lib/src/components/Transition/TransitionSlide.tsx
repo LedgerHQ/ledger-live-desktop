@@ -1,9 +1,9 @@
-import React from "react";
-import { CSSTransition } from "react-transition-group";
-import { CSSTransitionProps } from "react-transition-group/CSSTransition";
-import styled from "styled-components";
+import React from 'react';
+import { CSSTransition } from 'react-transition-group';
+import { CSSTransitionProps } from 'react-transition-group/CSSTransition';
+import styled from 'styled-components';
 const duration = 300;
-const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
+const ChildrenWrapper = styled.div<{ fixed?: boolean, reverseExit?: boolean }>`
   transition: all ${duration}ms ease-in-out;
   will-change: transform;
   ${p =>
@@ -12,7 +12,7 @@ const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
     position: absolute;
     width: 100%;
     `
-      : ""}
+      : ''}
   height: 100%;
 
   &.transition-left-appear,
@@ -52,18 +52,18 @@ const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
   }
 `;
 type TransitionSlideProps = Partial<
-  CSSTransitionProps & {
-    children: React.ReactNode;
-    fixed: boolean;
-    reverseExit?: boolean;
-    direction?: "left" | "right" | string;
-  }
->;
+CSSTransitionProps & {
+  children: React.ReactNode
+  fixed: boolean
+  reverseExit?: boolean
+  direction?: 'left' | 'right' | string
+}
+>
 
 const TransitionSlide = ({
   children,
   fixed,
-  direction = "left",
+  direction = 'left',
   reverseExit,
   ...props
 }: TransitionSlideProps) => (

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const AccountSettings = ({ size }: { size: number }) => (
   <svg viewBox="0 0 16 16" fill="none" height={size} width={size}>

@@ -1,10 +1,10 @@
-import { keyframes, css } from 'styled-components'
-import type { Theme as PaletteTheme } from './palettes'
-export const space = [0, 5, 10, 15, 20, 30, 44, 50, 70]
-export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32]
-export const radii = [0, 4]
-export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)']
-export const zIndexes = [-1, 0, 1, 9, 10, 90, 100, 900, 1000]
+import { keyframes, css } from 'styled-components';
+import type { Theme as PaletteTheme } from './palettes';
+export const space = [0, 5, 10, 15, 20, 30, 44, 50, 70];
+export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32];
+export const radii = [0, 4];
+export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)'];
+export const zIndexes = [-1, 0, 1, 9, 10, 90, 100, 900, 1000];
 // Those fonts are now defined in global.css, this is just a mapping for styled-system
 export const fontFamilies = {
   Inter: {
@@ -43,7 +43,7 @@ export const fontFamilies = {
       style: 'normal',
     },
   },
-}
+};
 // @Rebrand remove this
 const colors = {
   transparent: 'transparent',
@@ -79,18 +79,18 @@ const colors = {
   marketUp_western: '#66be54',
   marketDown_eastern: '#6490f1',
   marketDown_western: '#ea2e49',
-}
+};
 // prettier-ignore
-const exportedColors = colors
-export { exportedColors as colors }
-const animationLength = '0.33s'
+const exportedColors = colors;
+export { exportedColors as colors };
+const animationLength = '0.33s';
 const easings = {
   outQuadratic: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-}
+};
 
-const transition = (property: string = 'all'): any => css`
+const transition = (property = 'all'): any => css`
     transition: ${property} ${animationLength} ${easings.outQuadratic};
-  `
+  `;
 
 const fadeIn = keyframes`
     0% {
@@ -99,7 +99,7 @@ const fadeIn = keyframes`
     100% {
       opacity: 1;
     }
-  `
+  `;
 const fadeOut = keyframes`
     0% {
       opacity: 1;
@@ -107,7 +107,7 @@ const fadeOut = keyframes`
     100% {
       opacity: 0;
     }
-  `
+  `;
 const fadeInGrowX = keyframes`
     0% {
       opacity: 0;
@@ -117,7 +117,7 @@ const fadeInGrowX = keyframes`
       opacity: 1;
       transform: scaleX(1);
     }
-`
+`;
 const fadeInUp = keyframes`
     0% {
       opacity: 0;
@@ -127,13 +127,13 @@ const fadeInUp = keyframes`
       opacity: 1;
       transform: translateY(0%);
     }
-  `
+  `;
 const animations = {
   fadeIn: () => css`${fadeIn} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeOut: () => css`${fadeOut} ${animationLength} ${easings.outQuadratic} forwards`,
   fadeInGrowX: () => css`${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards`,
   fadeInUp: () => css`${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards`,
-}
+};
 const overflow = {
   x: css`
     overflow-y: hidden;
@@ -167,7 +167,7 @@ const overflow = {
     }
   `,
   trackSize: 12,
-}
+};
 interface Font {
   weight: number
   style: string
@@ -242,5 +242,5 @@ const theme: Theme = {
   overflow,
   transition,
   zIndexes,
-}
-export default theme
+};
+export default theme;

@@ -1,4 +1,4 @@
-import { ff } from "../helpers";
+import { ff } from '../helpers';
 
 export default (props: { ff?: string }): any => {
   const prop = props.ff;

@@ -1,20 +1,20 @@
-import React, { useRef, useCallback, useEffect, useState } from "react";
-import { TransitionGroup } from "react-transition-group";
-import Drawer from "@ui/components/Layout/Drawer/Drawer";
-import TransitionSlide from "@ui/components/Transition/TransitionSlide";
-import { useDrawer } from "./Provider";
+import React, { useRef, useCallback, useEffect, useState } from 'react';
+import { TransitionGroup } from 'react-transition-group';
+import Drawer from '@ui/components/Layout/Drawer/Drawer';
+import TransitionSlide from '@ui/components/Transition/TransitionSlide';
+import { useDrawer } from './Provider';
 
 interface DrawerProps {
-  onBack?: () => void;
+  onBack?: () => void
 }
 
 export const DrawerWrapper = (props: DrawerProps) => {
   // Nb Note that it's not a real queue and we need to handle where we go from each _slide_
   const { state, setDrawer } = useDrawer();
   const [queue, setQueue] = useState<
-    Array<{ Component: React.ComponentType<any>; props: any; key: number }>
+  Array<{ Component: React.ComponentType<any>, props: any, key: number }>
   >([]);
-  const [direction, setDirection] = useState("left");
+  const [direction, setDirection] = useState('left');
   const [transitionsEnabled, setTransitionsEnabled] = useState(false);
   const nonce = useRef(0);
   const onClose = useCallback(() => setDrawer(), [setDrawer]);
@@ -33,7 +33,7 @@ export const DrawerWrapper = (props: DrawerProps) => {
       const [, ...rest] = queue;
       timeout = setTimeout(() => {
         setQueue(rest);
-        setDirection("left");
+        setDirection('left');
       }, 0);
     }
 
@@ -42,7 +42,7 @@ export const DrawerWrapper = (props: DrawerProps) => {
     };
   }, [queue]);
   const wrappedOnBack = useCallback(() => {
-    setDirection("right");
+    setDirection('right');
     state?.props?.onBack();
   }, [state?.props]);
 

@@ -6,7 +6,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "lib": ["es6", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "strict": true,
     "target": "esnext",
@@ -17,9 +17,10 @@
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"]
     },
+    "skipLibCheck": true,
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./lib"
   },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js", "**/**/*.stories.tsx", "lib"]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js", "**/**/*.stories.tsx", "./lib"]
 }

@@ -15,7 +15,7 @@
     "storybook": "start-storybook -p 6006 -s ./",
     "build-storybook": "build-storybook",
     "build": "tsc",
-    "lint": "eslint"
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.5",
@@ -55,16 +55,12 @@
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "7",
     "eslint-config-prettier": "^7.2.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-config-standard-with-typescript": "^20.0.0",
-    "eslint-plugin-import": "2",
-    "eslint-plugin-jest": "^24.3.6",
-    "eslint-plugin-node": "11",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-promise": "4",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-standard": "^5.0.0",
     "jest": "^26.6.3",
     "jest-image-snapshot": "https://github.com/machard/jest-image-snapshot#machard-patch-1",
     "prettier": "^1.19.1",

@@ -1,6 +1,6 @@
-import Color from "color";
+import Color from 'color';
 
-import { colors, fontFamilies } from "./theme";
+import { colors, fontFamilies } from './theme';
 
 export const rgba = (c: string, a: number): string =>
   Color(c)
@@ -24,11 +24,11 @@ export const mix = (c: string, b: string, a: number): string =>
     .toString();
 
 export const ff = (v: string): any => {
-  const [font, type = "Regular"] = v.split("|");
+  const [font, type = 'Regular'] = v.split('|');
   // @ts-expect-error
   const { style, weight } = fontFamilies[font][type];
   // @ts-expect-error
-  const fallback: string = fontFamilies[font].fallback ?? "Arial";
+  const fallback: string = fontFamilies[font].fallback ?? 'Arial';
 
   return {
     fontFamily: `${font}, ${fallback}`,
@@ -37,12 +37,12 @@ export const ff = (v: string): any => {
   };
 };
 
-export function getMarketColor({
+export function getMarketColor ({
   marketIndicator,
   isNegative,
 }: {
-  marketIndicator: string;
-  isNegative: boolean;
+  marketIndicator: string
+  isNegative: boolean
 }): string {
   if (isNegative) {
     // @ts-expect-error
