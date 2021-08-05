@@ -37,7 +37,6 @@
 | Ark | ARK | NO | ark |
 | Atheios | ATH | NO | atheios |
 | Banano | BANANO | NO | banano |
-| Binance Smart Chain | BNB | NO | bsc |
 | Bitcoin Private | BTCP | NO | bitcoin_private |
 | Callisto | CLO | NO | callisto |
 | Cardano | ADA | NO | cardano |
