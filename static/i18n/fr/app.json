@@ -31,11 +31,11 @@
         "debug": "Débugger"
       },
       "banner": {
-        "title": "Découvrez le catalogue d'applications Live",
+        "title": "Découvrez le Catalogue d'apps Live",
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
-        "description": "Indiquez-nous le service que vous souhaiteriez vraiment voir dans Ledger Live avec le hashtag",
+        "description": "Indiquez-nous le service que vous rêvez de voir dans Ledger Live avec le hashtag",
         "tweetText": "La prochaine application à intégrer Ledger Live devrait être..."
       },
       "pollCTA": {
@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Continuer",
           "title": "En attente de validation",
-          "subtitle": "Vos données ont été envoyées à Wyre pour validation. Vous devriez pouvoir utiliser le Swap sous 1 à 3 jours.",
+          "subtitle": "Vos données ont été envoyées à Wyre pour validation.",
           "link": "En savoir plus"
         },
         "closed": {
@@ -1305,7 +1305,7 @@
         "title": "Mises à jours disponibles",
         "progressTitle": "{{number}} mise(s) à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
-        "progress": "Mise à jour complète..."
+        "progress": "Mises à jour..."
       },
       "item": {
         "version": "Version {{version}}",
@@ -1337,7 +1337,7 @@
       "uninstall": {
         "title": "Tout désinstaller",
         "subtitle": "Désinstaller toutes les applications ?",
-        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le catalogue d'applications."
+        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le Catalogue d'applications."
       }
     },
     "apps": {

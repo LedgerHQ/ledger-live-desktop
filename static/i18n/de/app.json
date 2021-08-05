@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
+        "title": "Information",
         "website": "Website"
       }
     },
@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Continue",
           "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "Learn more about KYC"
         },
         "closed": {

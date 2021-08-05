@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Информация",
+        "title": "Information",
         "website": "Сайт"
       }
     },
@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Продолжить",
           "title": "Ожидание утверждения",
-          "subtitle": "Ваша информация отправлена для утверждения в Wyre. Может пройти 1-3 дня, прежде чем вы сможете начать обменивать криптоактивы.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "Подробнее о KYC"
         },
         "closed": {
