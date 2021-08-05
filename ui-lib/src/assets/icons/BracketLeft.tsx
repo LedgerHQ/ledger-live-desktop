@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const BracketLeft = (props: any) => (
   <svg viewBox="0 0 64 128" fill="currentColor" {...props}>

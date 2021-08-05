@@ -37,8 +37,8 @@
     "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
-    "storybook": "start-storybook -p 6006 -s ./ui-lib",
-    "build-storybook": "build-storybook"
+    "storybook": "cd ui-lib && yarn storybook",
+    "build-storybook": "cd ui-lib && yarn build-storybook"
   },
   "dependencies": {
     "@hot-loader/react-dom": "^17.0.1",

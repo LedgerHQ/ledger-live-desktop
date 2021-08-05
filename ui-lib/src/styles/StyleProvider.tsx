@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
-import { DefaultTheme, ThemeProvider } from 'styled-components';
-import { defaultTheme, palettes, GlobalStyle } from '.';
+import React, { useMemo } from "react";
+import { DefaultTheme, ThemeProvider } from "styled-components";
+import { defaultTheme, palettes, GlobalStyle } from ".";
 
 interface Props {
-  children: React.ReactNode
-  selectedPalette: 'light' | 'dark' | 'dusk'
+  children: React.ReactNode;
+  selectedPalette: "light" | "dark" | "dusk";
 }
 
 const StyleProvider = ({ children, selectedPalette }: Props): React.ReactElement => {

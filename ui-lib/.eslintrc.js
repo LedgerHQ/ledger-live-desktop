@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint", "react", "react-hooks", "jest"],
+  plugins: ["@typescript-eslint", "react", "react-hooks", "jest", "prettier"],
   rules: {
     "no-console": ["error", { allow: ["warn", "error"] }],
     "linebreak-style": ["error", "unix"],
@@ -36,10 +36,10 @@ module.exports = {
       version: "detect",
     },
   },
-  extends: [ 
+  extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
   ],
 };

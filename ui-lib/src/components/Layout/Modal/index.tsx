@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-import Button from '@ui/components/Button';
-import Cross from '~/assets/icons/Cross';
-import TransitionInOut from '@ui/components/Transition/TransitionInOut';
-import TransitionScale from '@ui/components/Transition/TransitionScale';
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+import Button from "@ui/components/Button";
+import Cross from "@ui/assets/icons/Cross";
+import TransitionInOut from "@ui/components/Transition/TransitionInOut";
+import TransitionScale from "@ui/components/Transition/TransitionScale";
 
 const Container = styled.div`
   position: relative;
@@ -15,15 +15,15 @@ const Container = styled.div`
 `;
 
 interface WrapperProps {
-  width?: number
-  height?: number
+  width?: number;
+  height?: number;
 }
 
 type ModalProps = WrapperProps & {
-  isOpen: boolean
-  children: React.ReactNode
-  onClose?: () => void
-}
+  isOpen: boolean;
+  children: React.ReactNode;
+  onClose?: () => void;
+};
 
 const Wrapper = styled.div<WrapperProps>`
   height: ${p => p.height || p.theme.sizes.modal.min.height}px;
@@ -72,8 +72,8 @@ const Modal = ({ isOpen, children, width, height, onClose = () => {} }: ModalPro
 );
 
 const ModalWrapper = ({ children, ...modalProps }: ModalProps): React.ReactElement => {
-  const $root = React.useMemo(() => document.querySelector('#ll-modal-root'), []);
-  if ($root === null) throw new Error('modal root cannot be found');
+  const $root = React.useMemo(() => document.querySelector("#ll-modal-root"), []);
+  if ($root === null) throw new Error("modal root cannot be found");
   return ReactDOM.createPortal(<Modal {...modalProps}>{children}</Modal>, $root);
 };
 

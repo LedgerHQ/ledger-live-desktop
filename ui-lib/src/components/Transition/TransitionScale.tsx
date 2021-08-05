@@ -1,7 +1,7 @@
-import React from 'react';
-import { CSSTransition } from 'react-transition-group';
-import { CSSTransitionProps } from 'react-transition-group/CSSTransition';
-import styled from 'styled-components';
+import React from "react";
+import { CSSTransition } from "react-transition-group";
+import { CSSTransitionProps } from "react-transition-group/CSSTransition";
+import styled from "styled-components";
 const duration = 150;
 const ChildrenWrapper = styled.div`
   transition: transform ${duration}ms;
@@ -23,15 +23,15 @@ const ChildrenWrapper = styled.div`
   }
 `;
 type TransitionScaleProps = Partial<
-CSSTransitionProps & {
-  children: React.ReactNode
-  in: boolean
-  timeout?: number
-  appear?: boolean
-  mountOnEnter?: boolean
-  unmountOnExit?: boolean
-}
->
+  CSSTransitionProps & {
+    children: React.ReactNode;
+    in: boolean;
+    timeout?: number;
+    appear?: boolean;
+    mountOnEnter?: boolean;
+    unmountOnExit?: boolean;
+  }
+>;
 
 const TransitionScale = ({
   children,

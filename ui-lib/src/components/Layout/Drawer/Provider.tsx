@@ -1,8 +1,8 @@
-import React, { useReducer, useEffect, useCallback, useContext } from 'react';
+import React, { useReducer, useEffect, useCallback, useContext } from "react";
 interface State {
-  Component: React.ComponentType<any> | null | undefined
-  props?: any
-  open: boolean
+  Component: React.ComponentType<any> | null | undefined;
+  props?: any;
+  open: boolean;
 }
 // actions
 // it makes them available and current from connector events handlers
@@ -19,8 +19,8 @@ const initialState: State = {
   open: false,
 };
 interface ContextValue {
-  state: State
-  setDrawer: (Component?: React.ComponentType<any>, props?: any) => void
+  state: State;
+  setDrawer: (Component?: React.ComponentType<any>, props?: any) => void;
 }
 export const context = React.createContext<ContextValue>({
   state: initialState,

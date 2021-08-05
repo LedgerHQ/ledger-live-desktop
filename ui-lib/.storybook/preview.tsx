@@ -1,14 +1,12 @@
 import React from "react";
-import LiveStyleSheetManager from "@ui/styles/LiveStyleSheetManager";
+import LiveStyleSheetManager from "../src/styles/LiveStyleSheetManager";
 import { ThemeProvider } from "styled-components";
-import { defaultTheme, palettes, GlobalStyle } from "@ui/styles";
+import { defaultTheme, palettes, GlobalStyle } from "../src/styles";
 
 type Props = {
-  children: React$Node,
+  children: React.ReactNode,
   selectedPalette: "light" | "dark",
 };
-
-export type ThemedComponent<T> = StyledComponent<T, Theme, *>;
 
 const StyleProvider = ({ children, selectedPalette }: Props) => {
   const theme = {

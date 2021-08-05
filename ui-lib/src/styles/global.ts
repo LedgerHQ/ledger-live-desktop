@@ -1,8 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
-import { rgba } from './helpers';
-import { radii } from './theme';
-import reset from './reset';
+import { rgba } from "./helpers";
+import { radii } from "./theme";
+import reset from "./reset";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
