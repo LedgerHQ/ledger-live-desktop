@@ -25,7 +25,7 @@ module.exports = api =>
             {
               alias: {
                 "^~/(.+)": "./src/\\1",
-                "^@ui/(.+)": "./ui-lib/\\1",
+                "^@ui/(.+)": "./ui-lib/lib/\\1",
               },
             },
           ],

@@ -99,12 +99,12 @@ module.exports = {
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
-      "@ui": path.resolve(__dirname, "ui-lib"),
+      "@ui": path.resolve(__dirname, "ui-lib", "lib"),
       "@components": process.env.REBRANDING
-        ? path.resolve(__dirname, "ui-lib", "components")
+        ? path.resolve(__dirname, "ui-lib", "lib", "components")
         : path.resolve(__dirname, "src", "renderer", "components"),
       "@styles": process.env.REBRANDING
-        ? path.resolve(__dirname, "ui-lib", "styles")
+        ? path.resolve(__dirname, "ui-lib", "lib", "styles")
         : path.resolve(__dirname, "src", "renderer", "styles"),
     },
   },
