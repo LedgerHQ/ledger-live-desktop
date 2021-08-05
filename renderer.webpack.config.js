@@ -60,7 +60,7 @@ module.exports = {
       ],
     }),
     new CopyPlugin({
-      patterns: [{ from: path.join(__dirname, "ui-lib/assets"), to: "assets" }],
+      patterns: [{ from: path.join(__dirname, "ui-lib/src/assets"), to: "assets" }],
     }),
   ],
   module: {
