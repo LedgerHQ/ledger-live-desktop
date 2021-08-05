@@ -2,7 +2,7 @@
 
 import React, { Fragment, PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -10,6 +10,7 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import SpendableBanner from "~/renderer/components/SpendableBanner";
 import BuyButton from "~/renderer/components/BuyButton";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { NotEnoughGas } from "@ledgerhq/errors";
 
 import AccountFooter from "../AccountFooter";
@@ -89,10 +90,12 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     const hasErrors = Object.keys(errors).length;
     const canNext = !bridgePending && !hasErrors && !isTerminated;
     const { gasPrice } = errors;
+    const currency = getAccountCurrency(account);
+
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-        {gasPrice && gasPrice instanceof NotEnoughGas ? (
+        {isCurrencySupported("BUY", currency) && gasPrice instanceof NotEnoughGas ? (
           <BuyButton currency={mainAccount.currency} account={mainAccount} />
         ) : null}
         <Button
