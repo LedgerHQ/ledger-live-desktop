@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "معلومات",
+        "title": "Information",
         "website": "الموقع الإلكتروني"
       }
     },
@@ -48,6 +48,13 @@
         "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live.",
         "button": "الذهاب إلى البوابة"
       }
+    },
+    "disclaimer": {
+      "title": "تطبيق خارجي",
+      "description": "أنت على وشك أن تتم إعادة توجيهك إلى تطبيق لا يتم تشغيله من قِبل Ledger.",
+      "legalAdvice": "لا يتم تشغيل هذا التطبيق من قِبل Ledger. إن Ledger غير مسؤول عن أي خسارة للأموال أو عن جودة الخدمة لمثل هذا التطبيق.\n\nدائمًا تأكد من التحقق بعناية من المعلومات المعروضة على جهازك.",
+      "checkbox": "لاتذكرني مرة أخرى.",
+      "CTA": "متابعة"
     }
   },
   "common": {
@@ -109,7 +116,8 @@
       "outdated": "ايقاف مؤقت",
       "needsMigration": "أُنقر لتحديث الحساب",
       "error": "خطأ في المزامنة",
-      "refresh": "تحديث"
+      "refresh": "تحديث",
+      "devTools": "Dev tools"
     },
     "exchange": "تداول",
     "info": "معلومات"
@@ -287,22 +295,22 @@
         "pending": {
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
-          "subtitle": "تم إرسال معلوماتك لاعتمادها من جانب Wyre. وعادةً ما يستغرق الأمر 1-3 أيام قبل أن تستطيع أن تبدأ بالمبادلة.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "closed": {
-          "cta": "إعادة تعيين بيانات التحقق من الهوية",
+          "cta": "إعادة تعيين KYC (التحقق من الهوية)",
           "title": "تم رفض طلب KYC (التحقق من الهوية)",
           "subtitle": "رفضت Wyre البيانات التي قدمتها للتحقق من هوية العميل",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "form": {
           "firstName": "الاسم الأول",
-          "lastName": "الاسم العائلة",
+          "lastName": "اسم العائلة",
           "street1": "عنوان الشارع، السطر 1",
           "street2": "عنوان الشارع، السطر 2",
           "city": "المدينة",
-          "state": "الولاية/المقاطعة/المحافظة",
+          "state": "الولاية/المحافظة",
           "country": "البلد",
           "postalCode": "الرمز البريدي",
           "dateOfBirth": "تاريخ الميلاد",
@@ -316,7 +324,7 @@
           "firstNameError": "أدخل اسمك الأول للمتابعة",
           "lastNameError": "أدخل اسم العائلة للمتابعة",
           "street1Error": "أدخل عنوانك",
-          "cityError": "أدخل المدينة التي تعيش فيها في الولايات المتحدة الأمريكية",
+          "cityError": "أدخل المدينة التي تعيش بها في الولايات المتحدة الأمريكية",
           "postalCodeError": "أدخل رمزًا بريديًا صالحًا في الولايات المتحدة الأمريكية",
           "dateOfBirthError": "أدخل تاريخ ميلادك",
           "dateOfBirthValidationError": "أدخل تاريخ ميلاد صحيحًا"
@@ -325,7 +333,7 @@
     },
     "form": {
       "resetKYC": "أعد تعيين بيانات التحقق من الهوية الخاصة بك وقم بتحديث Ledger Live للتبادل مع Wyre",
-      "resetKYCCTA": "إعادة تعيين بيانات التحقق من الهوية",
+      "resetKYCCTA": "إعادة تعيين KYC (التحقق من الهوية)",
       "amount": "المبلغ",
       "from": {
         "title": "من",
@@ -2319,7 +2327,8 @@
       "help": "مساعدة",
       "about": "حول",
       "experimental": "الميزات التجريبية",
-      "accounts": "الحسابات"
+      "accounts": "الحسابات",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2354,6 +2363,25 @@
       "carouselVisibility": "مشاهدة كشريط دوّار",
       "carouselVisibilityDesc": "تمكين المشاهدة كشريط دوّار في الحافظة"
     },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
+    },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
       "desc": "اختار أصلاً مشفرًا لتعديل إعداداته.",
@@ -2370,7 +2398,7 @@
       "softResetTitle": "حذف الذاكرة المؤقتة",
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
-      "resetKYC": "إعادة تعيين بيانات التحقق من الهوية",
+      "resetKYC": "إعادة تعيين بيانات KYC (التحقق من الهوية)",
       "resetKYCDesc": "احذف بيانات التحقق من هوية العميل الخاصة بك المسجلة لديك محلياً والمستخدمة للوصول إلى مزود معاملات الطرف ثالث.",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
@@ -2525,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "أخبار",
-      "operation": "عملية"
+      "operation": "عملية",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {

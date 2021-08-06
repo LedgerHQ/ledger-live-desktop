@@ -31,11 +31,11 @@
         "debug": "Débugger"
       },
       "banner": {
-        "title": "Découvrez le catalogue d'applications Live",
+        "title": "Découvrez le Catalogue d'apps Live",
         "description": "Nous mettons tout en œuvre pour vous permettre d'accéder au monde de la DeFi, des NFT et bien plus encore. En toute sécurité depuis Ledger Live !"
       },
       "twitterBanner": {
-        "description": "Indiquez-nous le service que vous souhaiteriez vraiment voir dans Ledger Live avec le hashtag",
+        "description": "Indiquez-nous le service que vous rêvez de voir dans Ledger Live avec le hashtag",
         "tweetText": "La prochaine application à intégrer Ledger Live devrait être..."
       },
       "pollCTA": {
@@ -48,6 +48,13 @@
         "description": "Toutes les informations dont vous avez besoin pour intégrer vos applications dans Ledger Live.",
         "button": "Accéder au portail"
       }
+    },
+    "disclaimer": {
+      "title": "Application externe",
+      "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
+      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
+      "checkbox": "Ne plus me le rappeler.",
+      "CTA": "Continuer"
     }
   },
   "common": {
@@ -109,7 +116,8 @@
       "outdated": "En pause",
       "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
-      "refresh": "Actualiser"
+      "refresh": "Actualiser",
+      "devTools": "Dev tools"
     },
     "exchange": "Échanger",
     "info": "Informations"
@@ -287,7 +295,7 @@
         "pending": {
           "cta": "Continuer",
           "title": "En attente de validation",
-          "subtitle": "Vos données ont été envoyées à Wyre pour validation. Vous devriez pouvoir utiliser le Swap sous 1 à 3 jours.",
+          "subtitle": "Vos données ont été envoyées à Wyre pour validation.",
           "link": "En savoir plus"
         },
         "closed": {
@@ -1297,7 +1305,7 @@
         "title": "Mises à jours disponibles",
         "progressTitle": "{{number}} mise(s) à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
-        "progress": "Mise à jour complète..."
+        "progress": "Mises à jour..."
       },
       "item": {
         "version": "Version {{version}}",
@@ -1329,7 +1337,7 @@
       "uninstall": {
         "title": "Tout désinstaller",
         "subtitle": "Désinstaller toutes les applications ?",
-        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le catalogue d'applications."
+        "description": "Rassurez-vous. Désinstaller des applications n'a pas d'effet sur vos crypto-actifs. Vous pouvez réinstaller vos applications depuis le Catalogue d'applications."
       }
     },
     "apps": {
@@ -2319,7 +2327,8 @@
       "help": "Aide",
       "about": "À propos",
       "experimental": "Fonctionnalités expérimentales",
-      "accounts": "Comptes"
+      "accounts": "Comptes",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2353,6 +2362,25 @@
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
       "carouselVisibilityDesc": "Afficher le carrousel sur le Portefeuille"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Choisissez un crypto-actif",
@@ -2525,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Actualités",
-      "operation": "Opération"
+      "operation": "Opération",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
