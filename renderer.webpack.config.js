@@ -59,9 +59,6 @@ module.exports = {
         "types.js",
       ],
     }),
-    new CopyPlugin({
-      patterns: [{ from: path.join(__dirname, "ui-lib/src/assets"), to: "assets" }],
-    }),
   ],
   module: {
     rules: [
