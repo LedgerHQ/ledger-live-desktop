@@ -13,7 +13,7 @@ import "tippy.js/dist/svg-arrow.css";
 
 import type { State } from "~/renderer/reducers";
 
-import StyleProvider from "@styles/StyleProvider";
+import StyleProvider from "~/renderer/styles/StyleProvider";
 
 import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";

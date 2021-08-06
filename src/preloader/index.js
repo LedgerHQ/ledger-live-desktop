@@ -10,7 +10,7 @@
 
 import { ipcRenderer, remote } from "electron";
 import logo from "./logo.svg";
-import palettes from "@styles/palettes";
+import palettes from "~/renderer/styles/palettes";
 
 const appLoaded = () => {
   setTimeout(() => {
