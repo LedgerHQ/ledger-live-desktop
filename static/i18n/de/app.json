@@ -449,12 +449,12 @@
       "disconnectTitle": "Full Node trennen",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "header": "Starten Sie Ihren Full Node. Nicht vertrauen, überprüfen.",
+          "description": "Ein Bitcoin-Knoten (Full Node) ist ein Computer der alle Transaktionen und Blöcke validiert. Er ermöglicht es Ihnen, Bitcoin ohne die Notwendigkeit vertrauenswürdiger Dritter zu nutzen und gleichzeitig zum Bitcoin-Netzwerk beizutragen.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item1": "Bitcoin Core auf einem Gerät mit ausreichenden Ressourcen einrichten.",
+            "item2": "Warten Sie, bis Ihr Knoten vollständig synchronisiert ist.",
+            "item3": "Notieren Sie sich Ihre Knoten-RPC-Anmeldeinformationen, IP-Adresse und Portnummer."
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
