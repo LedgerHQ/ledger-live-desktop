@@ -12,22 +12,22 @@
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
+          "title": "Transaktion gesendet!",
           "text": "Click here to see operation details"
         }
       }
     },
     "app": {
       "informations": {
-        "title": "Information",
+        "title": "Informationen",
         "website": "Website"
       }
     },
     "catalog": {
-      "title": "Discover",
+      "title": "Entdecken",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
+        "soon": "demnächst",
+        "experimental": "experimentell",
         "debug": "debug"
       },
       "banner": {
