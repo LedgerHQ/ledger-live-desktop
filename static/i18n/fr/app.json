@@ -1302,7 +1302,8 @@
         "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
-        "title": "Mises à jours disponibles",
+        "title": "Mise à jour disponible",
+        "title_plural": "Mises à jours disponibles",
         "progressTitle": "{{number}} mise à jour d'application",
         "progressTitle_plural": "{{number}} mises à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",

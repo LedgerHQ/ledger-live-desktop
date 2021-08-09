@@ -1300,7 +1300,8 @@
         "manageAccount": "Manage my accounts"
       },
       "updatable": {
-        "title": "Updates available",
+        "title": "Update available",
+        "title_plural": "Updates available",
         "progressTitle": "{{number}} App update",
         "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Do not quit Manager during update.",
