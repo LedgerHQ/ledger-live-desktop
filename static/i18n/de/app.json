@@ -204,19 +204,19 @@
     "openHeader": "Geben Sie Ihre Gerätekonten über WebSocket ein",
     "openDescription": "Wenn Sie eine Verbindung (bridge) öffnen, setzen Sie alle Ihre Konten Drittanwendungen aus.",
     "openedHeader": "{{appName}} Verbindung (bridge) geöffnet",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
-    "openButton": "Open",
+    "openedDescription": "Sie können nun über WebSocket auf Ihr {{appName}} -Konto in Webanwendunden von Drittanbietern zugreifen.",
+    "completeHeader": "Sitzung abgeschlossen",
+    "completeDescription": "Die WebSocket Verbindung (bridge) ist nun geschlossen.",
+    "openButton": "Öffnen",
     "disconnectButton": "Trennen"
   },
   "swap": {
-    "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "title": "Tauschen",
+    "titleCrypto": "{{currency}} tauschen",
+    "whatIsSwap": "Was bedeutet tauschen?",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": "Überprüfen Sie es",
+      "description": "Suchen Sie nach Paraswap? Es wurde auf die Registerkarte Entdecken verschoben."
     },
     "tabs": {
       "exchange": "Exchange",
