@@ -2656,6 +2656,7 @@
         "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "First use",
