@@ -120,7 +120,8 @@
       "devTools": "Dev tools"
     },
     "exchange": "Exchange",
-    "info": "Info"
+    "info": "Info",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
