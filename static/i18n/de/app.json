@@ -3714,25 +3714,25 @@
       "title": "Network fees are above 10% of the amount"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Memo-Format ist falsch"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "Bitte deaktivieren Sie Multisign, um {{Währungsbezeichnung}} zu senden"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "Beim Senden an diesen Empfänger kann ein Memo erforderlich sein"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Betrag muss größer sein als {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Betrag muss kleiner sein als {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "Auswahl der Validatoren muss geschlossen werden"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "Einige ausgewählte Adressen sind keine Validatoren"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
