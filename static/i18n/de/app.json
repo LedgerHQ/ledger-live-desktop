@@ -356,19 +356,19 @@
         "fixedUnavailable": "Fester Kurs wird für diese Paarung nicht unterstützt",
         "floatDesc": "Ihr Betrag könnte sich je nach Marktbedingungen ändern.",
         "fixedDesc": "Ihr Betrag bleibt auch dann unverändert, wenn sich der Markt ändert. Aktualisiert alle 60 Sekunden.",
-        "by": "Provided by"
+        "by": "Bereitgestellt von"
       },
-      "exchange": "Exchange",
-      "helpCTA": "What is Swap?",
-      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
-      "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available.",
-      "loadingRates": "Loading rates..."
+      "exchange": "Umtausch",
+      "helpCTA": "Was ist Swap?",
+      "bubble": "Wir verwenden einen festen Tarif, dies ist der genaue Betrag, den Sie erhalten.",
+      "noAccounts": "Sie haben keine {{currencyName}} Konten mit Guthaben",
+      "noApp": "{{currencyName}} App nicht installiert.",
+      "outdatedApp": "{{currencyName}} App-Aktualisierung verfügbar.",
+      "loadingRates": "Raten werden geladen..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "title": "Ledger Live benötigt ein Update",
+      "subtitle": "Bitte aktualisieren Sie Ledger Live auf die neueste Version, und verifizieren Sie Ihre Identität erneut, um mit wyre zu tauschen",
       "cta": "Reset verification"
     },
     "resetKYCModal": {
