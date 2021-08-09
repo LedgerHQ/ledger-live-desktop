@@ -150,7 +150,7 @@
       "BOND": "Bond",
       "UNBOND": "Entbinden",
       "REWARD_PAYOUT": "Prämie",
-      "SLASH": "Slash",
+      "SLASH": "Slash-Strafe",
       "WITHDRAW_UNBONDED": "Abhebung",
       "NOMINATE": "Nominierung",
       "CHILL": "Nominierungen löschen"
@@ -219,7 +219,7 @@
       "description": "Suchen Sie nach Paraswap? Es wurde auf die Registerkarte Entdecken verschoben."
     },
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "Umtausch",
       "history": "History"
     },
     "history": {
@@ -456,7 +456,7 @@
             "item2": "Warten Sie, bis Ihr Knoten vollständig synchronisiert ist.",
             "item3": "Notieren Sie sich Ihre Knoten-RPC-Anmeldeinformationen, IP-Adresse und Portnummer."
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "Ein Full Node (Bitcoin-Knoten) erfordert einen Computer mit ausreichenden Ressourcen und eine Breitbandverbindung ohne Datenbeschränkungen."
         },
         "node": {
           "title": "Node",
