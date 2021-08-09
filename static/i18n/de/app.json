@@ -707,7 +707,7 @@
         "date": "Date"
       },
       "rates": {
-        "allAssets": "Asset",
+        "allAssets": "Vermögenswert",
         "totalBalance": "Asset balance",
         "totalBalanceTooltip": "Amount available to lend",
         "currentAPY": "Deposit APY",
