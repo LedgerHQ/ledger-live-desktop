@@ -1,9 +1,9 @@
 {
   "calendar": {
     "today": "Heute",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "tomorrow": "Morgen",
+    "yesterday": "Gestern",
+    "transactionDate": "Transaktionsdatum"
   },
   "platform": {
     "flows": {
@@ -208,7 +208,7 @@
     "completeHeader": "Bridge session completed",
     "completeDescription": "The websocket bridge is now closed.",
     "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "disconnectButton": "Trennen"
   },
   "swap": {
     "title": "Swap",
@@ -708,10 +708,10 @@
       },
       "rates": {
         "allAssets": "Vermögenswert",
-        "totalBalance": "Asset balance",
-        "totalBalanceTooltip": "Amount available to lend",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "totalBalance": "Guthaben",
+        "totalBalanceTooltip": "Verfügbarer Betrag zum Ausleihen",
+        "currentAPY": "Einzahlung APY",
+        "currentAPYTooltip": "Jährliche Rendite, die auf eine kontinuierlich aufgezinste Einlage erzielt wird",
         "actions": "Actions"
       }
     },
