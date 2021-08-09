@@ -8,12 +8,12 @@
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "Wählen Sie ein Konto"
       },
       "broadcast": {
         "toast": {
           "title": "Transaktion gesendet!",
-          "text": "Click here to see operation details"
+          "text": "Klicken Sie hier, um Details zur Aktion zu sehen"
         }
       }
     },
@@ -28,23 +28,23 @@
       "branch": {
         "soon": "demnächst",
         "experimental": "experimentell",
-        "debug": "debug"
+        "debug": "debuggen"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Entdecken Sie unseren Live Apps Katalog",
+        "description": "Wir arbeiten hart daran, Ihnen Zugang zur Welt von DeFi, NFTs und mehr zu verschaffen, sicher, direkt in Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Sagen Sie uns, welchen Service Sie als nächstes auf Ledger Live sehen möchten, mit dem Hashtag",
+        "tweetText": "Die nächste Ledger App sollte ..."
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "Umfrage",
+        "description": "Welchen Service möchten Sie in Ledger Live sehen?",
+        "button": "Stimmen wir ab!"
       },
       "developerCTA": {
-        "title": "For Developers",
+        "title": "Für Entwickler",
         "description": "All the information you need to integrate your applications on Ledger Live.",
         "button": "Go to portal"
       }
