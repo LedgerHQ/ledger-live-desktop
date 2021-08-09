@@ -104,6 +104,58 @@ const SelectAccountAndCurrency = ({
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   }, [dispatch, currency]);
 
+  const addOrSelectAccount = () => {
+    if (!currency) {
+      return;
+    }
+
+    if (availableAccounts.length) {
+      return (
+        <>
+          <FormContent>
+            <AccountSelectorLabel>
+              <span>{t("exchange.buy.selectAccount")}</span>
+              <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
+                <PlusIcon size={10} />
+                <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
+              </FakeLink>
+            </AccountSelectorLabel>
+            <SelectAccount
+              accounts={availableAccounts}
+              value={{ account, subAccount }}
+              onChange={setAccount}
+            />
+          </FormContent>
+          <FormContent>
+            <ConfirmButton
+              primary
+              onClick={() => {
+                if (account) {
+                  if (subAccount) {
+                    selectAccount(subAccount, account);
+                  } else {
+                    selectAccount(account);
+                  }
+                }
+              }}
+              disabled={!account}
+            >
+              {t("exchange.buy.continue")}
+            </ConfirmButton>
+          </FormContent>
+        </>
+      );
+    }
+
+    return (
+      <FormContent>
+        <ConfirmButton primary onClick={openAddAccounts}>
+          {t("exchange.buy.addAccount")}
+        </ConfirmButton>
+      </FormContent>
+    );
+  };
+
   return (
     <Container>
       <FormContainer>
@@ -118,41 +170,7 @@ const SelectAccountAndCurrency = ({
             />
           </FormContent>
         ) : null}
-        {currency ? (
-          <FormContent>
-            <AccountSelectorLabel>
-              <span>{t("exchange.buy.selectAccount")}</span>
-              {allowAddAccount ? (
-                <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
-                  <PlusIcon size={10} />
-                  <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
-                </FakeLink>
-              ) : null}
-            </AccountSelectorLabel>
-            <SelectAccount
-              accounts={availableAccounts}
-              value={{ account, subAccount }}
-              onChange={setAccount}
-            />
-          </FormContent>
-        ) : null}
-        <FormContent>
-          <ConfirmButton
-            primary
-            onClick={() => {
-              if (account) {
-                if (subAccount) {
-                  selectAccount(subAccount, account);
-                } else {
-                  selectAccount(account);
-                }
-              }
-            }}
-            disabled={!account}
-          >
-            {t("exchange.buy.continue")}
-          </ConfirmButton>
-        </FormContent>
+        {addOrSelectAccount()}
       </FormContainer>
     </Container>
   );
