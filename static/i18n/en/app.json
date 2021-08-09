@@ -694,6 +694,12 @@
         "enablingTooltip": "Your transaction is broadcasting",
         "toSupplyTooltip": "You can now supply your assets"
       },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
+      },
       "closed": {
         "assetLended": "Asset",
         "amountRedeemed": "Withdrawal amount",
