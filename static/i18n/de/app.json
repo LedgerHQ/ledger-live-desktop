@@ -445,8 +445,8 @@
     "checkNodeSettings": "Verify node settings",
     "edit": "Edit",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "Bitcoin Full Node verbinden",
+      "disconnectTitle": "Full Node trennen",
       "steps": {
         "landing": {
           "header": "Start your full node. Don’t trust, verify.",
