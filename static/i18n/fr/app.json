@@ -1303,7 +1303,8 @@
       },
       "updatable": {
         "title": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mise(s) à jour d'applications",
+        "progressTitle": "{{number}} mise à jour d'application",
+        "progressTitle_plural": "{{number}} mises à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
         "progress": "Mises à jour..."
       },

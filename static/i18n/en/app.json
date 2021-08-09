@@ -1301,7 +1301,8 @@
       },
       "updatable": {
         "title": "Updates available",
-        "progressTitle": "{{number}} App updates",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Do not quit Manager during update.",
         "progress": "Updating all..."
       },
