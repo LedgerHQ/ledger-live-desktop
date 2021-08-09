@@ -1,8 +1,10 @@
 // @flow
+import React from "react";
 import { findCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { getExplorerConfig } from "@ledgerhq/live-common/lib/api/explorerConfig";
 import { isEnvDefault, changes } from "@ledgerhq/live-common/lib/env";
 import type { EnvName } from "@ledgerhq/live-common/lib/env";
+import { Trans } from "react-i18next";
 
 import { setEnvOnAllThreads } from "./../helpers/env";
 
@@ -43,59 +45,62 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "API_TRONGRID_PROXY",
-    title: "use TronGrid.io",
-    description: "Use trongrid directly without ledger proxy",
+    title: <Trans i18nKey="settings.experimental.features.apiTrongridProxy.title" />,
+    description: <Trans i18nKey="settings.experimental.features.apiTrongridProxy.description" />,
     valueOn: "https://api.trongrid.io",
     valueOff: "https://tron.coin.ledger.com",
   },
   {
     type: "toggle",
     name: "EXPERIMENTAL_LANGUAGES",
-    title: "Translation testing",
-    description: "Adds unreleased languages to the language list in the general settings tab.",
+    title: <Trans i18nKey="settings.experimental.features.experimentalLanguages.title" />,
+    description: (
+      <Trans i18nKey="settings.experimental.features.experimentalLanguages.description" />
+    ),
   },
   {
     type: "toggle",
     name: "MANAGER_DEV_MODE",
-    title: "Developer mode",
-    description: "Show developer and testnet apps in the Manager.",
+    title: <Trans i18nKey="settings.experimental.features.managerDevMode.title" />,
+    description: <Trans i18nKey="settings.experimental.features.managerDevMode.description" />,
   },
   {
     type: "toggle",
     name: "SCAN_FOR_INVALID_PATHS",
-    title: "Extended account search",
-    description:
-      "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.",
+    title: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.title" />,
+    description: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.description" />,
   },
   ...(deltaExperimentalExplorers.length
     ? [
         {
           type: "toggle",
           name: "EXPERIMENTAL_EXPLORERS",
-          title: "Experimental Explorers API",
-          description:
-            "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(" +
-            deltaExperimentalExplorers
-              .map(
-                ([currency, config]) =>
-                  (currency.isTestnetFor ? "t" : "") +
-                  currency.ticker +
-                  " " +
-                  config.stable.version +
-                  "->" +
-                  (config.experimental?.version || "?"),
-              )
-              .join(", ") +
-            ")",
+          title: <Trans i18nKey="settings.experimental.features.experimentalExplorers.title" />,
+          description: (
+            <Trans i18nKey="settings.experimental.features.experimentalExplorers.description">
+              {deltaExperimentalExplorers
+                .map(
+                  ([currency, config]) =>
+                    (currency.isTestnetFor ? "t" : "") +
+                    currency.ticker +
+                    " " +
+                    config.stable.version +
+                    "->" +
+                    (config.experimental?.version || "?"),
+                )
+                .join(", ")}
+            </Trans>
+          ),
         },
       ]
     : []),
   {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
-    title: "Custom gap limit",
-    description:
-      "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts.",
+    title: <Trans i18nKey="settings.experimental.features.keychainObservableRange.title" />,
+    description: (
+      <Trans i18nKey="settings.experimental.features.keychainObservableRange.description" />
+    ),
     minValue: 20,
     maxValue: 999,
     dirty: true,
@@ -103,9 +108,8 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "integer",
     name: "FORCE_PROVIDER",
-    title: "Manager provider",
-    description:
-      "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device.",
+    title: <Trans i18nKey="settings.experimental.features.forceProvider.title" />,
+    description: <Trans i18nKey="settings.experimental.features.forceProvider.description" />,
     minValue: 1,
   },
 ];

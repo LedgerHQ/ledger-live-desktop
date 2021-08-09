@@ -625,7 +625,9 @@
       "continue": "Continue"
     },
     "history": {
-      "tab": "History"
+      "tab": "History",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -1030,7 +1032,8 @@
     "title": "Current address",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -2344,9 +2347,9 @@
         "button": "Done",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2422,7 +2425,37 @@
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",

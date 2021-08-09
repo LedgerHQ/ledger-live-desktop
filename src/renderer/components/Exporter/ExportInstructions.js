@@ -38,22 +38,18 @@ const Plus = styled(Box).attrs(() => ({
   padding: 0;
 `;
 
+const Highlight = <Text ff="Inter|SemiBold" color="palette.text.shade100" />;
+
 const stepsImportMobile = [
   {
     key: "step1",
     icon: <BulletRowIcon>{"1"}</BulletRowIcon>,
     desc: (
       <Box style={{ display: "block" }}>
-        <Trans i18nKey="settings.export.modal.step1">
-          {"Tap the"}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            <Plus>{"+"}</Plus>
-          </Text>
-          {"button in"}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            {"Accounts"}
-          </Text>
-        </Trans>
+        <Trans
+          i18nKey="settings.export.modal.step1"
+          components={{ highlight: Highlight, icon: <Plus /> }}
+        />
       </Box>
     ),
   },
@@ -62,12 +58,7 @@ const stepsImportMobile = [
     icon: <BulletRowIcon>{"2"}</BulletRowIcon>,
     desc: (
       <Box style={{ display: "block" }}>
-        <Trans i18nKey="settings.export.modal.step2">
-          {"Tap"}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            {"Import desktop accounts"}
-          </Text>
-        </Trans>
+        <Trans i18nKey="settings.export.modal.step2" components={{ highlight: Highlight }} />
       </Box>
     ),
   },
@@ -76,13 +67,7 @@ const stepsImportMobile = [
     icon: <BulletRowIcon>{"3"}</BulletRowIcon>,
     desc: (
       <Box style={{ display: "block" }}>
-        <Trans i18nKey="settings.export.modal.step3">
-          {"Scan the"}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            {"LiveQR Code"}
-          </Text>
-          {"until the loader hits 100%"}
-        </Trans>
+        <Trans i18nKey="settings.export.modal.step3" components={{ highlight: Highlight }} />
       </Box>
     ),
   },
