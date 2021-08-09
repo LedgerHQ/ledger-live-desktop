@@ -148,46 +148,46 @@
       "OPT_OUT": "Opt out",
       "CLOSE_ACCOUNT": "Close account",
       "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "UNBOND": "Entbinden",
+      "REWARD_PAYOUT": "Prämie",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "WITHDRAW_UNBONDED": "Abhebung",
+      "NOMINATE": "Nominierung",
+      "CHILL": "Nominierungen löschen"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}} Bytes",
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute_plural": "Minuten",
+    "hour": "Stunde",
+    "hour_plural": "Stunden",
     "range": {
-      "day": "1D",
+      "day": "1T",
       "week": "1W",
       "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "year": "1J",
+      "all": "ALLE"
     }
   },
   "fees": {
-    "advanced": "Advanced",
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "advanced": "Fortgeschritten",
+    "custom": "Benutzerdefiniert",
+    "fast": "Schnell",
+    "high": "Hoch",
+    "low": "Niedrig",
+    "slow": "Langsam",
+    "standard": "Standart",
+    "medium": "Mittel",
+    "feesAmount": "Gebührenbetrag"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
+    "menu": "Menü",
+    "stars": "Favoriten",
     "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Buy / Sell",
