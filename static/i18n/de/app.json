@@ -336,26 +336,26 @@
       "resetKYCCTA": "KYC zurücksetzen",
       "amount": "Betrag",
       "from": {
-        "title": "From",
-        "account": "Account",
-        "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "title": "Von",
+        "account": "Konto",
+        "amount": "Zu sendender Betrag",
+        "currency": "Krypto Vermögenswert"
       },
       "to": {
-        "title": "To",
-        "account": "Account",
-        "amount": "Amount to receive",
-        "currency": "Crypto asset",
-        "addAccountCTA": "Add new account"
+        "title": "An",
+        "account": "Konto",
+        "amount": "Betrag, den Sie erhalten",
+        "currency": "Krypto Vermögenswert",
+        "addAccountCTA": "Neues Konto hinzufügen"
       },
       "tradeMethod": {
         "title": "Rate",
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "float": "Schwebende Rate",
+        "floatUnavailable": "Schwebende Rate wird für diese Paarung nicht unterstützt",
         "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
+        "fixedUnavailable": "Fester Kurs wird für diese Paarung nicht unterstützt",
+        "floatDesc": "Ihr Betrag könnte sich je nach Marktbedingungen ändern.",
+        "fixedDesc": "Ihr Betrag bleibt auch dann unverändert, wenn sich der Markt ändert. Aktualisiert alle 60 Sekunden.",
         "by": "Provided by"
       },
       "exchange": "Exchange",
