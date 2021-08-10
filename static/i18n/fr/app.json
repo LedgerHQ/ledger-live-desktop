@@ -611,7 +611,7 @@
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
       "header": "Acheter des cryptos avec {{provider}}",
-      "title": "Achetez des cryptos en utilisant <0>{{provider}}</0>.",
+      "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
@@ -620,7 +620,7 @@
     },
     "sell": {
       "header": "Vendre des cryptos avec {{provider}}",
-      "title": "Vendez des cryptos en utilisant <0>{{provider}}</0>.",
+      "title": "Vendez des cryptos avec <0>{{provider}}</0>.",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
