@@ -806,7 +806,7 @@
         "title": "Prêter des cryptos",
         "subtitle": "Prêter des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger Live.",
-        "switchLabel": "<1>J'ai lu et j'accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
+        "switchLabel": "<1>J'ai lu et accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
       },
       "steps": {
         "title": "Étape <0>{{step}} / {{total}}</0>",
@@ -3173,8 +3173,8 @@
   "Terms": {
     "title": "Conditions d'utilisation",
     "read": "Lire les Conditions d'utilisation",
-    "switchLabelTerms": "<0>J'ai lu et j'accepte les</0> <1>Conditions d'utilisation</1>.",
-    "switchLabelPrivacyPolicy": "<0>J'ai lu et j'accepte la</0> <1>Politique de confidentialité</1>.",
+    "switchLabelTerms": "<0>J'ai lu et accepte les</0> <1>Conditions d'utilisation</1>.",
+    "switchLabelPrivacyPolicy": "<0>J'ai lu et accepte la</0> <1>Politique de confidentialité</1>.",
     "switchLabelLoss": "Je comprends que si je perds cette phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à Nano.",
     "cta": "Entrer dans l'application Ledger Live"
   },
