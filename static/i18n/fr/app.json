@@ -874,7 +874,7 @@
       "week": "Semaine",
       "month": "Mois",
       "year": "Année",
-      "all": "Tous"
+      "all": "Tout"
     },
     "optionsMenu": {
       "title": "Options",
@@ -2659,7 +2659,7 @@
         "options": {
           "1": {
             "heading": "Initialisation",
-            "title": "Configurer un nouveau {{deviceName}}",
+            "title": "Configurer un {{deviceName}}",
             "description": "Commencez par configurer votre nouvel appareil."
           },
           "2": {
