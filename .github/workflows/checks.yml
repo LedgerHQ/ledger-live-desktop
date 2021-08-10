@@ -145,7 +145,7 @@ jobs:
         uses: ./.github/actions/post-comment-v2
         with:
           comment: ${{ steps.comment.outputs.body }}
-          sha: ${{ github.sha }}
+          sha: ${GITHUB_SHA}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
