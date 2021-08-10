@@ -1032,7 +1032,7 @@
     "title": "Adresse actuelle",
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
-    "messageIfSkipped": "Votre {{name}} adresse n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale."
+    "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale."
   },
   "emptyState": {
     "dashboard": {
@@ -2383,7 +2383,7 @@
       "runLocalAppOpenButton": "Open"
     },
     "currencies": {
-      "selectPlaceholder": "Choisissez un crypto-actif",
+      "selectPlaceholder": "Crypto-actif",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
