@@ -1,9 +1,9 @@
 {
   "progressive-update": {
     "2.32.2": {
-      "darwin": 0.10,
-      "linux": 0.10,
-      "win32": 0.10
+      "darwin": 0.20,
+      "linux": 0.20,
+      "win32": 0.20
     }
   }
 }
