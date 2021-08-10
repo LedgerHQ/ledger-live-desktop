@@ -2659,7 +2659,7 @@
         "options": {
           "1": {
             "heading": "Initialisation",
-            "title": "Configurer un nouveau {{deviceName}}",
+            "title": "Configurer un {{deviceName}}",
             "description": "Commencez par configurer votre nouvel appareil."
           },
           "2": {
