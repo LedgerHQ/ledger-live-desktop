@@ -1,52 +1,52 @@
 {
   "calendar": {
     "today": "Heute",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "tomorrow": "Morgen",
+    "yesterday": "Gestern",
+    "transactionDate": "Transaktionsdatum"
   },
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "Wählen Sie ein Konto"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "Transaktion gesendet!",
+          "text": "Klicken Sie hier, um Details zur Aktion zu sehen"
         }
       }
     },
     "app": {
       "informations": {
-        "title": "Information",
+        "title": "Informationen",
         "website": "Website"
       }
     },
     "catalog": {
-      "title": "Discover",
+      "title": "Entdecken",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "demnächst",
+        "experimental": "experimentell",
+        "debug": "debuggen"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Entdecken Sie unseren Live Apps Katalog",
+        "description": "Wir arbeiten hart daran, Ihnen Zugang zur Welt von DeFi, NFTs und mehr zu verschaffen, sicher, direkt in Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Sagen Sie uns, welchen Service Sie als nächstes auf Ledger Live sehen möchten, mit dem Hashtag",
+        "tweetText": "Die nächste Ledger App sollte ..."
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "Umfrage",
+        "description": "Welchen Service möchten Sie in Ledger Live sehen?",
+        "button": "Stimmen wir ab!"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to portal"
+        "title": "Für Entwickler",
+        "description": "Alle Informationen, die Sie benötigen, um Ihre Anwendungen in Ledger Live zu integrieren.",
+        "button": "Zum Portal gehen"
       }
     },
     "disclaimer": {
@@ -58,34 +58,34 @@
     }
   },
   "common": {
-    "never": "Never",
-    "apply": "Apply",
-    "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "previous": "Previous",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
-    "selectAccount": "Select an account",
-    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
-    "selectCurrency": "Choose a crypto asset",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
-    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "Sort by",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
-    "range": "Range",
+    "never": "Nie",
+    "apply": "Anwenden",
+    "done": "Fertig",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "getSupport": "Hilfe",
+    "delete": "Löschen",
+    "launch": "Starten",
+    "continue": "Weiter",
+    "previous": "Zurück",
+    "learnMore": "Mehr erfahren",
+    "help": "Hilfe",
+    "needHelp": "Hilfe nötig?",
+    "areYouSure": "Sind Sie sicher?",
+    "selectAccount": "Wählen Sie ein Konto",
+    "selectAccountNoOption": "Kein passendes Konto zu \"{{accountName}}\" gefunden",
+    "selectCurrency": "Wählen Sie einen Krypto-Wert",
+    "selectCurrencyNoOption": "Kein Krypto-Wert \"{{currencyName}}\"",
+    "selectValidatorNoOption": "Kein passendes Konto zu \"{{accountName}}\" gefunden",
+    "selectNoResults": "Keine Ergebnisse für „${ query}”",
+    "sortBy": "Sortieren nach",
+    "save": "Speichern",
+    "lock": "Sperren",
+    "showMore": "Mehr anzeigen",
+    "back": "Zurück",
+    "reset": "Zurücksetzen",
+    "retry": "Wiederholen",
+    "range": "Spanne",
     "stop": "Stop",
     "updateNow": "Update now",
     "close": "Close",
@@ -148,78 +148,78 @@
       "OPT_OUT": "Opt out",
       "CLOSE_ACCOUNT": "Close account",
       "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
-      "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "UNBOND": "Entbinden",
+      "REWARD_PAYOUT": "Prämie",
+      "SLASH": "Slash-Strafe",
+      "WITHDRAW_UNBONDED": "Abhebung",
+      "NOMINATE": "Nominierung",
+      "CHILL": "Nominierungen löschen"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}} Bytes",
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute_plural": "Minuten",
+    "hour": "Stunde",
+    "hour_plural": "Stunden",
     "range": {
-      "day": "1D",
+      "day": "1T",
       "week": "1W",
       "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "year": "1J",
+      "all": "ALLE"
     }
   },
   "fees": {
-    "advanced": "Advanced",
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "advanced": "Fortgeschritten",
+    "custom": "Benutzerdefiniert",
+    "fast": "Schnell",
+    "high": "Hoch",
+    "low": "Niedrig",
+    "slow": "Langsam",
+    "standard": "Standart",
+    "medium": "Mittel",
+    "feesAmount": "Gebührenbetrag"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "menu": "Menü",
+    "stars": "Favoriten",
+    "accounts": "Konten",
     "manager": "Manager",
-    "exchange": "Buy / Sell",
-    "swap": "Swap",
-    "lend": "Lend",
-    "catalog": "Discover"
+    "exchange": "Kaufen / Verkaufen",
+    "swap": "Tauschen",
+    "lend": "Leihen",
+    "catalog": "Entdecken"
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
-    "tooltip": "Star account"
+    "placeholder": "Gebe einem Konto einen Stern, um es hier anzuzeigen.",
+    "tooltip": "Konto favorisieren"
   },
   "bridge": {
-    "modalTitle": "Open Device Bridge",
-    "openHeader": "Expose your Device accounts through WebSocket",
-    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
-    "openedHeader": "{{appName}} bridge opened",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
-    "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "modalTitle": "Öffne Gerätebrücke (device bridge)",
+    "openHeader": "Geben Sie Ihre Gerätekonten über WebSocket ein",
+    "openDescription": "Wenn Sie eine Verbindung (bridge) öffnen, setzen Sie alle Ihre Konten Drittanwendungen aus.",
+    "openedHeader": "{{appName}} Verbindung (bridge) geöffnet",
+    "openedDescription": "Sie können nun über WebSocket auf Ihr {{appName}} -Konto in Webanwendunden von Drittanbietern zugreifen.",
+    "completeHeader": "Sitzung abgeschlossen",
+    "completeDescription": "Die WebSocket Verbindung (bridge) ist nun geschlossen.",
+    "openButton": "Öffnen",
+    "disconnectButton": "Trennen"
   },
   "swap": {
-    "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "title": "Tauschen",
+    "titleCrypto": "{{currency}} tauschen",
+    "whatIsSwap": "Was bedeutet tauschen?",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": "Überprüfen Sie es",
+      "description": "Suchen Sie nach Paraswap? Es wurde auf die Registerkarte Entdecken verschoben."
     },
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "Umtausch",
       "history": "History"
     },
     "history": {
@@ -307,68 +307,68 @@
         "form": {
           "firstName": "First Name",
           "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
+          "street1": "Straße Adresse Zeile 1",
+          "street2": "Straße Adresse Zeile 2",
+          "city": "Stadt",
+          "state": "Bundesland",
+          "country": "Land",
+          "postalCode": "Postleitzahl",
+          "dateOfBirth": "Geburtsdatum",
+          "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+          "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+          "street1Placeholder": "z. B. Musterstraße 21",
           "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "cityPlaceholder": "z. B. Berlin",
+          "postalCodePlaceholder": "Geben Sie Ihre 5-stellige Postleitzahl ein",
+          "dateOfBirthPlaceholder": "TT.MM.JJJJ",
+          "firstNameError": "Geben Sie Ihren Vornamen ein, um fortzufahren",
+          "lastNameError": "Geben Sie Ihren Nachnamen ein, um fortzufahren",
+          "street1Error": "Geben Sie Ihre Adresse ein",
+          "cityError": "Geben Sie die Stadt ein, in der Sie in den USA leben",
+          "postalCodeError": "Geben Sie eine gültige US-Postleitzahl ein",
+          "dateOfBirthError": "Geben Sie Ihr Geburtsdatum ein",
+          "dateOfBirthValidationError": "Geben Sie ein gültiges Geburtsdatum ein"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
-      "amount": "Amount",
+      "resetKYC": "Setzen Sie Ihr KYC zurück und aktualisieren Sie Live, um mit Wyre zu tauschen",
+      "resetKYCCTA": "KYC zurücksetzen",
+      "amount": "Betrag",
       "from": {
-        "title": "From",
-        "account": "Account",
-        "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "title": "Von",
+        "account": "Konto",
+        "amount": "Zu sendender Betrag",
+        "currency": "Krypto Vermögenswert"
       },
       "to": {
-        "title": "To",
-        "account": "Account",
-        "amount": "Amount to receive",
-        "currency": "Crypto asset",
-        "addAccountCTA": "Add new account"
+        "title": "An",
+        "account": "Konto",
+        "amount": "Betrag, den Sie erhalten",
+        "currency": "Krypto Vermögenswert",
+        "addAccountCTA": "Neues Konto hinzufügen"
       },
       "tradeMethod": {
         "title": "Rate",
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
+        "float": "Schwebende Rate",
+        "floatUnavailable": "Schwebende Rate wird für diese Paarung nicht unterstützt",
         "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
-        "by": "Provided by"
+        "fixedUnavailable": "Fester Kurs wird für diese Paarung nicht unterstützt",
+        "floatDesc": "Ihr Betrag könnte sich je nach Marktbedingungen ändern.",
+        "fixedDesc": "Ihr Betrag bleibt auch dann unverändert, wenn sich der Markt ändert. Aktualisiert alle 60 Sekunden.",
+        "by": "Bereitgestellt von"
       },
-      "exchange": "Exchange",
-      "helpCTA": "What is Swap?",
-      "bubble": "We use a fixed rate, this is the exact amount you will receive.",
-      "noAccounts": "You don't have {{currencyName}} accounts with balance",
-      "noApp": "{{currencyName}} app not installed.",
-      "outdatedApp": "{{currencyName}} app update available.",
-      "loadingRates": "Loading rates..."
+      "exchange": "Umtausch",
+      "helpCTA": "Was ist Swap?",
+      "bubble": "Wir verwenden einen festen Tarif, dies ist der genaue Betrag, den Sie erhalten.",
+      "noAccounts": "Sie haben keine {{currencyName}} Konten mit Guthaben",
+      "noApp": "{{currencyName}} App nicht installiert.",
+      "outdatedApp": "{{currencyName}} App-Aktualisierung verfügbar.",
+      "loadingRates": "Raten werden geladen..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "title": "Ledger Live benötigt ein Update",
+      "subtitle": "Bitte aktualisieren Sie Ledger Live auf die neueste Version, und verifizieren Sie Ihre Identität erneut, um mit wyre zu tauschen",
       "cta": "Reset verification"
     },
     "resetKYCModal": {
@@ -445,18 +445,18 @@
     "checkNodeSettings": "Verify node settings",
     "edit": "Edit",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "Bitcoin Full Node verbinden",
+      "disconnectTitle": "Full Node trennen",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "header": "Starten Sie Ihren Full Node. Nicht vertrauen, überprüfen.",
+          "description": "Ein Bitcoin-Knoten (Full Node) ist ein Computer der alle Transaktionen und Blöcke validiert. Er ermöglicht es Ihnen, Bitcoin ohne die Notwendigkeit vertrauenswürdiger Dritter zu nutzen und gleichzeitig zum Bitcoin-Netzwerk beizutragen.",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item1": "Bitcoin Core auf einem Gerät mit ausreichenden Ressourcen einrichten.",
+            "item2": "Warten Sie, bis Ihr Knoten vollständig synchronisiert ist.",
+            "item3": "Notieren Sie sich Ihre Knoten-RPC-Anmeldeinformationen, IP-Adresse und Portnummer."
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "Ein Full Node (Bitcoin-Knoten) erfordert einen Computer mit ausreichenden Ressourcen und eine Breitbandverbindung ohne Datenbeschränkungen."
         },
         "node": {
           "title": "Node",
@@ -707,11 +707,11 @@
         "date": "Date"
       },
       "rates": {
-        "allAssets": "Asset",
-        "totalBalance": "Asset balance",
-        "totalBalanceTooltip": "Amount available to lend",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "allAssets": "Vermögenswert",
+        "totalBalance": "Guthaben",
+        "totalBalanceTooltip": "Verfügbarer Betrag zum Ausleihen",
+        "currentAPY": "Einzahlung APY",
+        "currentAPYTooltip": "Jährliche Rendite, die auf eine kontinuierlich aufgezinste Einlage erzielt wird",
         "actions": "Actions"
       }
     },
@@ -3714,25 +3714,25 @@
       "title": "Network fees are above 10% of the amount"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Memo-Format ist falsch"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "Bitte deaktivieren Sie Multisign, um {{Währungsbezeichnung}} zu senden"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "Beim Senden an diesen Empfänger kann ein Memo erforderlich sein"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Betrag muss größer sein als {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Betrag muss kleiner sein als {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "Auswahl der Validatoren muss geschlossen werden"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "Einige ausgewählte Adressen sind keine Validatoren"
     },
     "PolkadotLowBondedBalance": {
       "title": "All bonded assets will be unbonded if < 1 DOT"
