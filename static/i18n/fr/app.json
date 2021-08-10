@@ -53,7 +53,7 @@
       "title": "Application externe",
       "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
       "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
-      "checkbox": "Ne plus me le rappeler.",
+      "checkbox": "Ne plus me le rappeler",
       "CTA": "Continuer"
     }
   },
@@ -2319,7 +2319,7 @@
   },
   "settings": {
     "title": "Paramètres",
-    "discreet": "Basculer en mode discret",
+    "discreet": "Mode discret",
     "helpButton": "Aide",
     "tabs": {
       "display": "Général",
