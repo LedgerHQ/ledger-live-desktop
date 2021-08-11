@@ -236,36 +236,36 @@
     },
     "missingApp": {
       "title": "Bitte installieren Sie die App {{appName}} auf Ihrem Gerät",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "subtitle": "Gehen Sie zum Manager und installieren Sie die App {{appName}}, um Vermögenswerte zu tauschen.",
+      "cta": "Zum Manager gehen"
     },
     "outdatedApp": {
-      "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
-      "cta": "Go to manager"
+      "title": "Bitte aktualisieren Sie die App {{appName}} auf Ihrem Gerät",
+      "subtitle": "Gehen Sie zum Manager und aktualisieren Sie die App {{appName}}, um Vermögenswerte zu tauschen.",
+      "cta": "Zum Manager gehen"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
+      "title": "Wählen Sie einen Anbieter für den Tausch von Kryptowährungen",
+      "learnMore": "Was bedeutet Swap?",
+      "kycRequired": "KYC erforderlich",
       "wyre": {
         "bullets": [
-          "US-only (soon Europe, Africa and Asia)",
-          "Multi coins and tokens",
-          "Centralized"
+          "Nur für die USA (bald auch für Europa, Afrika und Asien)",
+          "Multi-Coins und Token",
+          "Zentralisiert"
         ]
       },
       "changelly": {
         "bullets": [
-          "BTC, ETH, USDT and 50+ others",
-          "Multi-currency",
-          "Centralized"
+          "BTC, ETH, USDT und 50+ andere",
+          "Mehrere Währungen",
+          "Zentralisiert"
         ]
       },
       "paraswap": {
         "bullets": [
-          "Connect to 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum & ERC20 tokens",
+          "Verbinden mit 30+ DEXs (Uniswap, SushiSwap,...)",
+          "Ethereum und ERC20 Token",
           "Decentralized & Trustless"
         ]
       },
