@@ -723,38 +723,38 @@
         "manageLimit": "Limit verwalten",
         "viewDetails": "Details anzeigen",
         "info": "Sie haben <0>{{amount}}</0> auf diesem Konto freigegeben. Sie können den Betrag gegen eine Gebühr reduzieren.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
-        "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
-        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+        "infoNoLimit": "Sie haben dieses Konto vollständig freigegeben. Sie können den Betrag gegen eine Gebühr reduzieren.",
+        "approvedWithLimit": "Sie haben <0>{{value}}</0> auf diesem Konto freigegeben.",
+        "enabling": "Sie können Vermögenswerte einzahlen, sobald die Kontofreigabe bestätigt ist.",
+        "notEnabled": "Sie müssen dieses Konto freigeben, bevor Sie Vermögenswerte ausleihen/verleihen können.",
+        "notEnoughApproved": "Sie müssen das auf Ihrem Konto freigegebene Limit für das Ausleihen erhöhen."
       },
       "supply": {
-        "title": "Deposit",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "title": "Einzahlung",
+        "description": "Geben Sie den Betrag der Vermögenswerte ein, die an das Protokoll verliehen werden sollen."
       },
       "withdraw": {
-        "title": "Withdraw",
-        "description": "Withdraw assets from the protocol to your Ledger account."
+        "title": "Abheben",
+        "description": "Abheben von Vermögenswerten aus dem Protokoll auf Ihr Ledger-Konto."
       }
     },
     "enable": {
-      "title": "Approve account",
+      "title": "Konto freigeben",
       "steps": {
         "selectAccount": {
-          "title": "Select account",
-          "selectLabel": "Account to lend from",
-          "cta": "Approve",
-          "alreadyEnabled": "This account is approved"
+          "title": "Konto auswählen",
+          "selectLabel": "Kreditkonto",
+          "cta": "Freigeben",
+          "alreadyEnabled": "Dieses Konto ist freigegeben"
         },
         "amount": {
-          "title": "Amount",
-          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced",
-          "amountLabel": "Amount to approve",
+          "title": "Betrag",
+          "summary": "Ich gewähre Zugriff auf <0>{{contractName}}</0> Smart Contract auf meinem Konto <0>{{accountName}}</0> für einen <0>{{amount}}</0> Betrag",
+          "limit": "begrenzt {{amount}}",
+          "noLimit": "kein Limit {{assetName}}",
+          "contractName": "Zusammengefast {{currencyName}}",
+          "advanced": "Erweitert",
+          "amountLabel": "Zu genehmigender Betrag",
           "amountLabelTooltip": "This limits the amount available to the smart contract."
         },
         "connectDevice": {
