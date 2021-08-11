@@ -486,42 +486,42 @@
               "description": "Bitte warten Sie, während wir prüfen, ob Ihr Knoten (Full Node) antwortet."
             },
             "success": {
-              "header": "Full node connection successful",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "header": "Verbindung zum Knoten erfolgreich",
+              "description": "Sie können nun Ihren Datenknoten (Full Node) so konfigurieren, dass er nach Ihren Konten auf der Blockchain sucht."
             },
             "failure": {
-              "header": "Could not reach full node",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "header": "Knoten nicht erreichbar",
+              "description": "Bitte stellen Sie sicher, dass Ihr Knoten (Full Node) vollständig synchronisiert ist und überprüfen Sie seine Verbindungseinstellungen."
             }
           }
         },
         "device": {
-          "title": "Device",
+          "title": "Gerät",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "header": "Konten vom Gerät abrufen",
+              "description": "Bitte warten Sie, während die zu scannenden Konten zur Knotenkonfigurationsdatei hinzugefügt werden."
             },
             "success": {
-              "header": "Accounts added to node configuration",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
-              "cta": "View user data"
+              "header": "Konten zur Knotenkonfiguration hinzugefügt",
+              "description": "Eine Konfigurationsdatei wurde im Benutzerdatenordner gespeichert. Sie ermöglicht es Ledger SatStack, sich mit Ihrem Knoten (Full Node) zu verbinden und ihn nach Ihren Konten auf der Blockchain suchen zu lassen.",
+              "cta": "Benutzerdaten anzeigen"
             }
           }
         },
         "accounts": {
-          "title": "Accounts",
-          "existing": "Existing accounts to scan",
-          "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
-          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+          "title": "Konten",
+          "existing": "Bestehende Konten zum Scannen",
+          "toScan": "Zu scannende Konten",
+          "toScanDescription": "Nach jedem Adresstyp zu durchsuchende Konten",
+          "toScanTooltip": "Nur erhöhen, wenn Sie 10+ BTC-Konten haben.  Der anfängliche Scan wird langsamer sein. "
         },
         "satstack": {
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
+              "header": "Ledger SatStack herunterladen und ausführen",
+              "description": "Ledger SatStack ist eine kleine Anwendung, die es Ledger Live ermöglicht, mit Ihrem Knoten (Full Node) zu kommunizieren. Bitte laden Sie die Anwendung herunter und starten Sie sie, bevor Sie fortfahren.",
               "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
