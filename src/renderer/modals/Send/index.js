@@ -24,7 +24,9 @@ const SendModal = ({ stepId, onClose }: Props) => {
 
   const handleStepChange = (stepId: StepId) => setState({ ...state, stepId });
 
-  const isModalLocked = ["recipient", "confirmation"].includes(state.stepId);
+  const isModalLocked = ["recipient", "amount", "summary", "device", "confirmation"].includes(
+    state.stepId,
+  );
 
   const rest = {};
   if (onClose) {

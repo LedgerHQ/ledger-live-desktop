@@ -59,6 +59,7 @@ jobs:
           INSTRUMENT_BUILD: true
         run: yarn build
       - name: Tests
+        if: always() && job.status != 'cancelled'
         run: yarn test 2> >(tee jest.txt)
       - name: Read jest output
         id: jest

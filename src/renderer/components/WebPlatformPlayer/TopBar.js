@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
@@ -14,9 +13,12 @@ import Box, { Tabbable } from "~/renderer/components/Box";
 
 import IconInfoCircle from "~/renderer/icons/InfoCircle";
 import IconReload from "~/renderer/icons/UpdateCircle";
+import LightBulb from "~/renderer/icons/LightBulb";
 import IconClose from "~/renderer/icons/Cross";
 
 import LiveAppIcon from "./LiveAppIcon";
+import { useSelector, useDispatch } from "react-redux";
+import { enablePlatformDevToolsSelector } from "~/renderer/reducers/settings";
 
 import { openPlatformAppInfoDrawer } from "~/renderer/actions/UI";
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -106,11 +108,13 @@ export type Props = {
   onReload: Function,
   onClose?: Function,
   onHelp?: Function,
+  onOpenDevTools: Function,
 };
 
-const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
+const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools }: Props) => {
   const { name, icon } = manifest;
 
+  const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
@@ -130,6 +134,17 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose }: Props) => {
           <Trans i18nKey="common.sync.refresh" />
         </ItemContent>
       </ItemContainer>
+      {enablePlatformDevTools ? (
+        <>
+          <Separator />
+          <ItemContainer isInteractive onClick={onOpenDevTools}>
+            <LightBulb size={16} />
+            <ItemContent>
+              <Trans i18nKey="common.sync.devTools" />
+            </ItemContent>
+          </ItemContainer>
+        </>
+      ) : null}
       <RightContainer>
         <ItemContainer isInteractive onClick={onClick}>
           <IconInfoCircle size={16} />

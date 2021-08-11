@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "信息",
+        "title": "Information",
         "website": "网站"
       }
     },
@@ -116,7 +116,8 @@
       "outdated": "已暂停",
       "needsMigration": "点击更新账户",
       "error": "同步错误",
-      "refresh": "刷新"
+      "refresh": "刷新",
+      "devTools": "Dev tools"
     },
     "exchange": "货币兑换",
     "info": "信息"
@@ -294,7 +295,7 @@
         "pending": {
           "cta": "继续",
           "title": "待批准",
-          "subtitle": "您的信息已经递交，请等待 Wyre 的批准。通常在 1-3 天后，您可以开始掉期交易。",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "了解关于 KYC 的更多详情"
         },
         "closed": {
@@ -669,7 +670,7 @@
         "cta": "存款"
       },
       "opened": {
-        "title": "您已开放的借贷将出现在这里",
+        "title": "您已开放的贷款将出现在这里",
         "description": "您还没有进行过任何借贷。",
         "cta": "存款"
       },
@@ -1043,8 +1044,8 @@
       }
     },
     "accounts": {
-      "title": "添加账号以开始",
-      "desc": "添加账号来开始管理您的加密资产。您必须在您的设备上安装您的加密资产的应用程序。",
+      "title": "添加账户以开始",
+      "desc": "添加账户来开始管理您的加密资产。您必须在您的设备上安装您的加密资产的应用程序。",
       "buttons": {
         "addAccount": "添加账户",
         "installApp": "前往 Manager（管理器）安装应用程序",
@@ -2326,7 +2327,8 @@
       "help": "帮助",
       "about": "关于",
       "experimental": "实验性功能",
-      "accounts": "账户"
+      "accounts": "账户",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
       "carouselVisibilityDesc": "启用资产组合的轮播可见"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "选择加密资产",
@@ -2420,7 +2441,7 @@
       "part5": "然后您可以正常重启应用程序。"
     },
     "removeAccountModal": {
-      "title": "移除账号",
+      "title": "移除账户",
       "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。"
     },
     "openUserDataDirectory": {
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "新闻",
-      "operation": "操作"
+      "operation": "操作",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
@@ -2867,7 +2889,7 @@
             "title": "保管好您的恢复短语",
             "paragraph": "如果您的 Nano 无法使用，恢复短语是您访问自己资产的最后机会。因此，您必须将它存放在安全的地方。",
             "keepItOffline": "仅可在硬件钱包上输入这些词，不要在电脑或智能手机上输入。",
-            "neverShowToAnyone": "永远不要将您的 24 words (二十四个助记词) 告诉别人，Ledger 也不例外。",
+            "neverShowToAnyone": "永远不要将您的 24 words (二十四个助记词) 告诉别人，即使是对 Ledger 也不能例外。",
             "buttons": {
               "next": "好的，我完成了！",
               "prev": "上一步",
@@ -2966,11 +2988,11 @@
           "results": {
             "success": {
               "title": "恭喜！",
-              "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
+              "text": "您的私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
             },
             "fail": {
               "title": "不正确！",
-              "text": "您私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
+              "text": "您的私钥会一直在您的硬件钱包中保持离线状态。即便当被连接到您的 Nano，Ledger 应用程序也无法访问您的私钥。您必须在您的设备上手动授权每一笔交易。"
             }
           }
         }

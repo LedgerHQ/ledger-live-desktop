@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Información",
+        "title": "Information",
         "website": "Sitio web"
       }
     },
@@ -116,7 +116,8 @@
       "outdated": "En pausa",
       "needsMigration": "Haz clic para actualizar la cuenta",
       "error": "Error de sincronización",
-      "refresh": "Actualizar"
+      "refresh": "Actualizar",
+      "devTools": "Dev tools"
     },
     "exchange": "Exchange",
     "info": "Info"
@@ -294,7 +295,7 @@
         "pending": {
           "cta": "Continuar",
           "title": "Aprobación pendiente",
-          "subtitle": "Tu información se ha enviado para su aprobación por parte de Wyre. Normalmente tarda de 1 a 3 días antes de poder comenzar a permutar.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "Conocer más sobre KYC"
         },
         "closed": {
@@ -2326,7 +2327,8 @@
       "help": "Ayuda",
       "about": "Información",
       "experimental": "Funciones experimentales",
-      "accounts": "Cuentas"
+      "accounts": "Cuentas",
+      "developer": "Developer"
     },
     "export": {
       "accounts": {
@@ -2360,6 +2362,25 @@
       "stockDesc": "Elige Occidental para mostrar las subidas del mercado en azul o Eastern para mostrarlas en rojo.",
       "carouselVisibility": "Visibilidad del carrusel",
       "carouselVisibilityDesc": "Muestra u oculta el carrusel en el Portfolio"
+    },
+    "developer": {
+      "toast": {
+        "title": "You are now a developer !",
+        "text": "Welcome to wonderland"
+      },
+      "debugApps": "Allow debug apps",
+      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "experimentalApps": "Allow experimental apps",
+      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "catalogServer": "Set the catalog provider",
+      "catalogServerDesc": "Switch between multiple platform apps sources",
+      "enablePlatformDevTools": "Enable platform dev tools",
+      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "addLocalApp": "Add a local app",
+      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppButton": "Browse",
+      "runLocalAppDeleteButton": "Delete",
+      "runLocalAppOpenButton": "Open"
     },
     "currencies": {
       "selectPlaceholder": "Seleccionar activo cripto",
@@ -2532,7 +2553,8 @@
   "toastOverlay": {
     "toastType": {
       "announcement": "Noticias",
-      "operation": "Operación"
+      "operation": "Operación",
+      "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
