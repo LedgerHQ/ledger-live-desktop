@@ -235,7 +235,7 @@
       "sorry": "Service vorübergehend oder in Ihrem Land nicht verfügbar"
     },
     "missingApp": {
-      "title": "Please install the {{appName}} app on your device",
+      "title": "Bitte installieren Sie die App {{appName}} auf Ihrem Gerät",
       "subtitle": "Go to manager and install {{appName}} app to swap assets.",
       "cta": "Go to manager"
     },
