@@ -443,7 +443,7 @@
     "connect": "Connect",
     "disconnect": "Disconnect",
     "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "edit": "Bearbeiten",
     "modal": {
       "title": "Bitcoin Full Node verbinden",
       "disconnectTitle": "Full Node trennen",
@@ -459,31 +459,31 @@
           "disclaimer": "Ein Full Node (Bitcoin-Knoten) erfordert einen Computer mit ausreichenden Ressourcen und eine Breitbandverbindung ohne Datenbeschränkungen."
         },
         "node": {
-          "title": "Node",
+          "title": "Knoten",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "header": "Knotenparameter eingeben",
+              "disclaimer": "Ihr Knoten (Full Node) muss vollständig synchronisiert werden, bevor Sie Ledger Live verbinden.",
               "fields": {
                 "nodeHost": {
                   "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                  "tooltip": "Verwenden Sie die Standardeinstellung, wenn der Knoten auf diesem Computer läuft oder ersetzen Sie alternativ die Knoten-IP-Adresse und Portnummer."
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
-                  "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "title": "RPC Zugangsdaten",
+                  "tooltip": "Geben Sie den RPC-Benutzernamen und das Passwort Ihres Knotens ein, die Sie in der Datei bitcoin.conf finden.",
+                  "usernamePlaceholder": "Benutzername",
+                  "passwordPlaceholder": "Passwort"
                 },
                 "tls": {
-                  "title": "Use TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "title": "TLS verwenden",
+                  "tooltip": "Aktivieren Sie Transport Layer Security, z. B. bei der Verwendung eines gehosteten Knotens."
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
-              "description": "Please wait while we check if your full node is responding."
+              "header": "Teste Verbindung des Knotens",
+              "description": "Bitte warten Sie, während wir prüfen, ob Ihr Knoten (Full Node) antwortet."
             },
             "success": {
               "header": "Full node connection successful",
