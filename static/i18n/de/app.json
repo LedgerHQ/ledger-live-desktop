@@ -230,7 +230,7 @@
       }
     },
     "landing": {
-      "title": "Swap your assets",
+      "title": "Tausche deine Vermögenswerte",
       "continue": "Weiter",
       "sorry": "Service vorübergehend oder in Ihrem Land nicht verfügbar"
     },
@@ -317,7 +317,7 @@
           "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
           "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
           "street1Placeholder": "z. B. Musterstraße 21",
-          "street2Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "z. B. Musterstraße 21",
           "cityPlaceholder": "z. B. Berlin",
           "postalCodePlaceholder": "Geben Sie Ihre 5-stellige Postleitzahl ein",
           "dateOfBirthPlaceholder": "TT.MM.JJJJ",
@@ -352,7 +352,7 @@
         "title": "Rate",
         "float": "Schwebende Rate",
         "floatUnavailable": "Schwebende Rate wird für diese Paarung nicht unterstützt",
-        "fixed": "Fixed rate",
+        "fixed": "Fester Kurs",
         "fixedUnavailable": "Fester Kurs wird für diese Paarung nicht unterstützt",
         "floatDesc": "Ihr Betrag könnte sich je nach Marktbedingungen ändern.",
         "fixedDesc": "Ihr Betrag bleibt auch dann unverändert, wenn sich der Markt ändert. Aktualisiert alle 60 Sekunden.",
@@ -369,80 +369,80 @@
     "unauthorizedRatesModal": {
       "title": "Ledger Live benötigt ein Update",
       "subtitle": "Bitte aktualisieren Sie Ledger Live auf die neueste Version, und verifizieren Sie Ihre Identität erneut, um mit wyre zu tauschen",
-      "cta": "Reset verification"
+      "cta": "Verifizierung zurücksetzen"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "Löschen Sie Ihr KYC",
+      "subtitle": "Löschen Sie Ihr KYC, um alle Token zu löschen, die lokal auf Ihrem Computer gespeichert sind. Sie müssen Ihr KYC erneut einreichen, um auf Dienste unserer Partner zuzugreifen.",
+      "cta": "Bestätigen"
     },
     "modal": {
       "title": "Swap",
       "steps": {
         "summary": {
-          "title": "Summary",
-          "from": "From",
-          "to": "To",
-          "toExchange": "Amount to send",
-          "toReceive": "Amount to receive",
-          "terms": "Terms & Conditions",
+          "title": "Zusammenfassung",
+          "from": "Von",
+          "to": "Zu",
+          "toExchange": "Zu sendender Betrag",
+          "toReceive": "Betrag, den Sie erhalten",
+          "terms": "Allgemeinen Geschäftsbedingungen",
           "disclaimer": {
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "description": "Durch Klicken auf \"Bestätigen\" bestätige und akzeptiere ich, dass dieser Dienst ausschließlich von <0>{{provider}}</0> verwaltet wird",
+            "acceptedDescription": "Dieser Dienst wird ausschließlich durch <0>{{provider}}</0> verwaltet"
           },
           "details": {
-            "provider": "Provider",
+            "provider": "Anbieter",
             "tradeMethod": {
-              "title": "Type",
-              "float": "Floating rate",
-              "fixed": "Fixed rate"
+              "title": "Typ",
+              "float": "Variabler Wechselkurs",
+              "fixed": "Fester Wechselkurs"
             },
-            "address": "Address"
+            "address": "Adresse"
           }
         },
         "device": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "App-Verifikationen"
         },
         "finished": {
-          "title": "Pending",
-          "subtitle": "Swap broadcast successfully ",
-          "swap": "Your Swap ID:",
-          "seeDetails": "See details",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "title": "Unbestätigt",
+          "subtitle": "Tausch-Übertragung erfolgreich",
+          "swap": "Ihre Swap-ID:",
+          "seeDetails": "Siehe Details",
+          "disclaimer": "Notieren Sie sich Ihre Tausch-ID-Nummer für den Fall, dass Sie Hilfe vom <0><0>{{provider}}</0>-Support benötigen</0>.",
+          "description": "Ihr Tauschvorgang wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten."
         }
       }
     },
     "operationDetailsModal": {
       "title": "Swap",
-      "provider": "Provider",
+      "provider": "Anbieter",
       "txid": "Swap ID",
       "status": "Status",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "expired": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID für weitere Informationen.",
+        "refunded": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID für weitere Informationen.",
+        "pending": "Bitte warten Sie, während der Swap-Provider die Transaktion verarbeitet.",
+        "onhold": "Bitte kontaktieren Sie den Swap-Anbieter mit Ihrer Swap-ID, um die Situation zu lösen.",
+        "finished": "Ihr Swap wurde erfolgreich abgeschlossen."
       },
-      "date": "Date",
-      "from": "From",
-      "fromAddress": "Origin address",
-      "fromAddress_plural": "Origin addresses",
-      "to": "To",
-      "toProvider": "Provider address",
-      "initialAmount": "Initial amount",
-      "creditedAmount": "Credited amount"
+      "date": "Datum",
+      "from": "Von",
+      "fromAddress": "Ursprungsadresse",
+      "fromAddress_plural": "Ursprungsadressen",
+      "to": "Zu",
+      "toProvider": "Adresse des Anbieters",
+      "initialAmount": "Anfangsbetrag",
+      "creditedAmount": "Gutschrift"
     }
   },
   "fullNode": {
     "status": "Status",
-    "connect": "Connect",
-    "disconnect": "Disconnect",
-    "checkNodeSettings": "Verify node settings",
+    "connect": "Verbinden",
+    "disconnect": "Trennen",
+    "checkNodeSettings": "Knoteneinstellungen überprüfen",
     "edit": "Bearbeiten",
     "modal": {
       "title": "Bitcoin Full Node verbinden",
@@ -719,10 +719,10 @@
       "cta": "Manage lending",
       "title": "Manage loan",
       "enable": {
-        "approve": "Approve",
-        "manageLimit": "Manage limit",
-        "viewDetails": "View details",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
+        "approve": "Bestätigen",
+        "manageLimit": "Limit verwalten",
+        "viewDetails": "Details anzeigen",
+        "info": "Sie haben <0>{{amount}}</0> auf diesem Konto freigegeben. Sie können den Betrag gegen eine Gebühr reduzieren.",
         "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
         "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
         "enabling": "You can deposit assets once the account approval is confirmed.",
