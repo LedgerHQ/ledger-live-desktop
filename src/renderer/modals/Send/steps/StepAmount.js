@@ -29,13 +29,14 @@ const StepAmount = ({
   maybeAmount,
   onResetMaybeAmount,
   updateTransaction,
+  currencyName,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
 
   return (
     <Box flow={4}>
-      <TrackPage category="Send Flow" name="Step Amount" />
+      <TrackPage category="Send Flow" name="Step Amount" currencyName={currencyName} />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (
@@ -88,10 +89,11 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     const hasErrors = Object.keys(errors).length;
     const canNext = !bridgePending && !hasErrors && !isTerminated;
     const { gasPrice } = errors;
+
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-        {gasPrice && gasPrice instanceof NotEnoughGas ? (
+        {gasPrice instanceof NotEnoughGas ? (
           <BuyButton currency={mainAccount.currency} account={mainAccount} />
         ) : null}
         <Button

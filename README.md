@@ -5,7 +5,7 @@
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)
 - Backed by: [ledger-live-common](https://github.com/ledgerhq/ledger-live-common)
 
-> Ledger Live is a new generation wallet desktop application providing a unique interface to maintain multiple cryptocurrencies for your Ledger Nano S / Blue. Manage your device, create accounts, receive and send cryptoassets, [...and many more](https://www.ledger.fr/2018/07/09/ledger-launches-ledger-live-the-all-in-one-companion-app-to-your-ledger-device/).
+> Ledger Live is a new generation wallet desktop application providing a unique interface to maintain multiple cryptocurrencies for your Ledger Nano S / Blue. Manage your device, create accounts, receive and send cryptoassets, [...and many more](https://www.ledger.com/ledger-launches-ledger-live-the-all-in-one-companion-app-to-your-ledger-device).
 
 <a href="https://github.com/LedgerHQ/ledger-live-desktop/releases">
   <p align="center">
@@ -15,7 +15,7 @@
 
 ## Architecture
 
-Ledger Live is an hybrid desktop application built with Electron, React, Redux, RxJS,.. and highly optimized with [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [live-common](https://github.com/LedgerHQ/ledger-live-common).
+Ledger Live is an hybrid desktop application built with Electron, React, Redux, RxJS,.. and highly optimized with [ledger-core](https://github.com/LedgerHQ/lib-ledger-core) C++ library to deal with blockchains (sync, broadcast,..) via [ledger-core-node-bindings](https://github.com/LedgerHQ/lib-ledger-core-node-bindings). It communicates to Ledger hardware wallet devices (Nano X / Nano S / Blue) to verify address and sign transactions with [ledgerjs](https://github.com/LedgerHQ/ledgerjs). Some logic is shared with [live-common](https://github.com/LedgerHQ/ledger-live-common).
 
 <p align="center">
  <img src="/docs/architecture.png" width="550"/>
@@ -42,7 +42,7 @@ Ledger Live releases are signed. The automatic update mechanism makes use of the
 
 ### Requirements
 
-- [NodeJS](https://nodejs.org) LTS/erbium (Node 12.x)
+- [NodeJS](https://nodejs.org) `lts/fermium` (Node 14.x)
 - [Yarn 1.x](https://classic.yarnpkg.com/) (Classic)
 - [Python](https://www.python.org/) 2.7 or 3.5+
 - A C/C++ toolchain (see [node-gyp documentation](https://github.com/nodejs/node-gyp#on-unix))
@@ -100,7 +100,7 @@ yarn start
 ```
 
 In an other terminal you need to launch the webdriver/electron container. First run will be slow.
-Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed.
+Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed. Make sure you are running Docker.
 ```bash
 yarn start-electron-webdriver
 ```
@@ -163,3 +163,4 @@ src
 ├── network.js : network implementation. will eventually move back to live-common.
 └── sentry : related to bug report API
 ```
+

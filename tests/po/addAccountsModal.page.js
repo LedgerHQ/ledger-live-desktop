@@ -1,4 +1,4 @@
-import { portfolioPage, accountsPage } from "../common.js";
+import { portfolioPage, accountsPage, mockDeviceEvent } from "../common.js";
 import Modal from "./modal.page";
 
 export default class AddAccountsModal extends Modal {
@@ -45,7 +45,7 @@ export default class AddAccountsModal extends Modal {
     await this.app.client.keys(["Enter"]);
   }
 
-  async finishAddAccount(mockDeviceEvent) {
+  async finishAddAccount() {
     const currencyBadge = await this.currencyBadge();
     await currencyBadge.waitForDisplayed();
     let continueBtn = await this.addParentAccountContinueButton();

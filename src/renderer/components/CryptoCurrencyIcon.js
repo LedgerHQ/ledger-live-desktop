@@ -3,7 +3,7 @@ import React from "react";
 import styled, { withTheme } from "styled-components";
 import { getCryptoCurrencyIcon, getTokenCurrencyIcon } from "@ledgerhq/live-common/lib/react";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import { mix } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -68,7 +68,7 @@ const Container = styled.div`
 `;
 
 const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, theme }: Props) => {
-  const currencyColor = getCurrencyColor(currency, theme.colors.palette.background.paper);
+  const currencyColor = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const color = overrideColor || (inactive ? theme.colors.palette.text.shade60 : currencyColor);
 
   if (currency.type === "FiatCurrency") {

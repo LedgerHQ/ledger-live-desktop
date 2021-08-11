@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -29,6 +29,7 @@ function Body({ account, range }: Props) {
   });
   const bgColor = useTheme("colors.palette.background.paper");
   const currency = getAccountCurrency(account);
+  const color = useCurrencyColor(currency, bgColor);
 
   return (
     <Box flow={4}>
@@ -58,7 +59,7 @@ function Body({ account, range }: Props) {
       <Chart
         // $FlowFixMe TODO make date non optional
         data={history}
-        color={getCurrencyColor(currency, bgColor)}
+        color={color}
         valueKey={countervalueAvailable ? "countervalue" : "value"}
         height={52}
       />

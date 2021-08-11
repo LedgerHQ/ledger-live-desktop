@@ -75,6 +75,8 @@ const AppsList = ({
   device,
 }: Props) => {
   const [state, dispatch] = useAppsRunner(result, exec, appsToRestore);
+  const optimisticState = useMemo(() => predictOptimisticState(state), [state]);
+
   const [appInstallDep, setAppInstallDep] = useState(undefined);
   const [appUninstallDep, setAppUninstallDep] = useState(undefined);
   const isIncomplete = isIncompleteState(state);
@@ -161,6 +163,7 @@ const AppsList = ({
         />
         <AppList
           deviceInfo={deviceInfo}
+          optimisticState={optimisticState}
           state={state}
           dispatch={dispatch}
           isIncomplete={isIncomplete}

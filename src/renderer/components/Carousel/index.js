@@ -10,7 +10,7 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import TimeBasedProgressBar from "~/renderer/components/Carousel/TimeBasedProgressBar";
 import IconCross from "~/renderer/icons/Cross";
-import { getTransitions, getDefaultSlides } from "~/renderer/components/Carousel/helpers";
+import { getTransitions, useDefaultSlides } from "~/renderer/components/Carousel/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setCarouselVisibility } from "~/renderer/actions/settings";
 import { carouselVisibilitySelector } from "~/renderer/reducers/settings";
@@ -166,7 +166,8 @@ const Carousel = ({
   type?: "slide" | "flip",
   slides?: [{ id: string, Component: React$ComponentType<{}>, start?: Date, end?: Date }],
 }) => {
-  let slides = _slides || getDefaultSlides();
+  const defaultSlides = useDefaultSlides();
+  let slides = _slides || defaultSlides;
   slides = slides.filter(slide => {
     if (slide.start && slide.start > new Date()) {
       return false;

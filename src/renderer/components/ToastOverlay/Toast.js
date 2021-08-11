@@ -43,8 +43,8 @@ const DismissWrapper: ThemedComponent<{}> = styled.div`
 
 const IconContainer = styled(Box)`
   display: flex;
-  flex-direction: column;
   margin-right: 15px;
+  justify-content: center;
 `;
 
 const TextContainer = styled.div`

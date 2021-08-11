@@ -64,7 +64,7 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
           <Trans i18nKey="send.steps.amount.standard" />
         </StandardText>
         <Switch
-          forceBgColor="wallet"
+          forceBgColor={isAdvanceMode ? "wallet" : undefined}
           small
           isChecked={isAdvanceMode}
           onChange={toggleAdvanceMode}

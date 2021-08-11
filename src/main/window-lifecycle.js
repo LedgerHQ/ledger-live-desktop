@@ -51,6 +51,7 @@ const defaultWindowOptions = {
   icon: path.join(__dirname, "/build/icons/icon.png"),
   backgroundColor: "#fff",
   webPreferences: {
+    webviewTag: true,
     blinkFeatures: "OverlayScrollbars",
     devTools: __DEV__ || DEV_TOOLS,
     experimentalFeatures: true,
@@ -104,7 +105,7 @@ export async function createMainWindow({ dimensions, positions }: any, settings:
 
   loadWindow();
 
-  if ((__DEV__ || DEV_TOOLS) && !process.env.DISABLE_DEV_TOOLS) {
+  if (DEV_TOOLS && !process.env.DISABLE_DEV_TOOLS) {
     mainWindow.webContents.on("did-frame-finish-load", () => {
       if (mainWindow) {
         mainWindow.webContents.once("devtools-open", () => {

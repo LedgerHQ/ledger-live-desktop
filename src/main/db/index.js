@@ -49,7 +49,8 @@ let memoryNamespaces = {};
 let encryptionKeys = {};
 let transforms = {};
 
-const DEBOUNCE_MS = process.env.NODE_ENV === "test" ? 1 : 500;
+const DEBOUNCE_MS =
+  process.env.NODE_ENV === "test" || process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 500;
 const save = debounce(saveToDisk, DEBOUNCE_MS);
 
 /**

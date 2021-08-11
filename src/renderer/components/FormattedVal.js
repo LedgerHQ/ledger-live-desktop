@@ -60,6 +60,7 @@ type OwnProps = {
   ellipsis?: boolean,
   suffix?: string,
   showAllDigits?: boolean,
+  alwaysShowValue?: boolean, // overrides discreet mode
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -90,8 +91,9 @@ function FormattedVal(props: Props) {
     subMagnitude,
     prefix,
     suffix,
-    discreet,
     showAllDigits,
+    alwaysShowValue,
+    discreet,
     ...p
   } = props;
   const valProp = props.val;
@@ -123,7 +125,7 @@ function FormattedVal(props: Props) {
       showCode,
       locale,
       subMagnitude,
-      discreet,
+      discreet: alwaysShowValue ? false : discreet,
       showAllDigits,
     });
   }
