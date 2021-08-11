@@ -522,83 +522,83 @@
             "notConnected": {
               "header": "Ledger SatStack herunterladen und ausführen",
               "description": "Ledger SatStack ist eine kleine Anwendung, die es Ledger Live ermöglicht, mit Ihrem Knoten (Full Node) zu kommunizieren. Bitte laden Sie die Anwendung herunter und starten Sie sie, bevor Sie fortfahren.",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
-              "cta": "Download SatStack"
+              "disclaimer": "SatStack muss ausgeführt werden, damit Ledger Live eine Verbindung zu Ihrem Knoten (Full Node) herstellen kann.  Erwägen Sie, SatStack so einzustellen, dass es automatisch startet, wenn Ihr Computer hochfährt.",
+              "cta": "SatStack herunterladen"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "header": "SatStack konnte nicht erreicht werden",
+              "description": "Bitte überprüfen Sie, ob SatStack auf diesem Computer läuft."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "header": "SatStack bitte aktualisieren",
+              "description": "Die von Ihnen verwendete SatStack-Version ist zu alt und enthält möglicherweise Fehler oder Inkompatibilitäten."
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "header": "Knoten (Full Node) nicht erreichbar",
+              "description": "Bitte überprüfen Sie, ob Ihr Knoten erreichbar ist und ob die eingegebenen Verbindungseinstellungen korrekt sind."
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "header": "ungültiger Ketten-Titel",
+              "description": "ungültige Kettenbeschreibung für Tooltip"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "Wird geladen",
               "description": ""
             },
             "ready": {
-              "header": "Ready",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "header": "Fertig",
+              "description": "Der Knoten (Full Node) ist vollständig synchronisiert. Ihr Bitcoin-Guthaben ist nun korrekt."
             },
             "syncing": {
-              "header": "Node sync in progress…",
-              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+              "header": "Synchronisierung läuft…",
+              "description": "Jüngste Transaktionen sind möglicherweise noch nicht sichtbar, so dass die Bitcoin-Kontostände nicht korrekt sein könnten. Wenn möglich, lassen Sie Ihren Knoten (Node) kontinuierlich laufen, um ihn synchronisiert zu halten."
             },
             "scanning": {
-              "header": "Account scan in progress...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "header": "Konto-Scan wird durchgeführt ...",
+              "description": "Sie können Ihre Konten hinzufügen, sobald der Kontoscan abgeschlossen ist. Alle Bitcoin-Konten, die zuvor über die Explorer von Ledger hinzugefügt wurden, wurden entfernt."
             }
           }
         },
         "disconnect": {
-          "cta": "Disconnect",
-          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+          "cta": "Trennen",
+          "description": "Sind Sie sicher? Das Trennen des Knotens (Full Node) entfernt alle Bitcoin-Konten. Sie können Ihre Konten mit den Explorern von Ledger wieder hinzufügen."
         }
       }
     }
   },
   "account": {
-    "lastOperations": "Latest operations",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "lastOperations": "Letzte Aktionen",
+    "contractAddress": "Vertrag:",
+    "openInExplorer": "Öffnen im Explorer",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "title": "Noch keine Krypto-Werte?",
+      "desc": "Stellen Sie sicher, dass die <1><0>{{managerAppName}}</0></1>-App installiert ist und beginnen Sie mit dem Empfang von",
+      "descToken": "Stellen Sie sicher, dass die <1><0>{{managerAppName}}</0></1>-App installiert ist und beginnen Sie mit dem Empfang von <3><0>{{ticker}}</0></3> und <5><0>{{tokenList}}</0>-Tokens</5>",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buy": "Buy"
+        "receiveFunds": "Empfangen",
+        "buy": "Kaufen"
       }
     },
     "settings": {
-      "title": "Edit account",
-      "advancedLogs": "Advanced",
-      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
+      "title": "Konto bearbeiten",
+      "advancedLogs": "Erweitert",
+      "advancedTips": "Ihr xpub sind datenschutzsensible Daten. Verwenden Sie sie mit Vorsicht, insbesondere bei der Weitergabe an Dritte.",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account"
+        "title": "Kontoname",
+        "desc": "Beschreibung des Kontos"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to be used"
+        "title": "Einheit",
+        "desc": "Wählen Sie die zu verwendende Einheit"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
-    "availableBalanceTooltip": "This amount is disposable.",
+    "availableBalance": "Verfügbares Guthaben",
+    "frozenAssets": "Gesperrte Vermögenswerte",
+    "bandwidth": "Bandbreite",
+    "energy": "Energie",
+    "delegatedAssets": "Delegierte Vermögenswerte",
+    "undelegating": "Delegierung aufheben",
+    "availableBalanceTooltip": "Dieser Betrag ist verfügbar.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
     "energyTooltip": "Freeze assets to gain energy",
