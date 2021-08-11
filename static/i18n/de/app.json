@@ -106,36 +106,36 @@
     "lockScreen": {
       "title": "Willkommen zurück",
       "subTitle": null,
-      "description": "Gib dein Kennwort ein um fortzufahren",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "Passwort eingeben um fortzufahren",
+      "inputPlaceholder": "Passwort eingeben",
+      "lostPassword": "Passwort vergessen"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
+      "syncing": "Synchronisiere...",
+      "upToDate": "Synchronisiert",
+      "outdated": "Pausiert",
+      "needsMigration": "Klicken, um Konto zu aktualisieren",
+      "error": "Synchronisierungsfehler",
+      "refresh": "Neu laden",
       "devTools": "Dev tools"
     },
-    "exchange": "Exchange",
+    "exchange": "Umtauschen",
     "info": "Info"
   },
   "devices": {
     "nanoS": "Nano S",
     "nanoX": "Nano X",
-    "blue": "Blue"
+    "blue": "Blau"
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "REDELEGATE": "Redelegated",
-      "UNDELEGATE": "Undelegated",
+      "IN": "Empfangen",
+      "OUT": "Gesendet",
+      "CREATE": "Erstellt",
+      "REVEAL": "Enthüllt",
+      "DELEGATE": "Delegiert",
+      "REDELEGATE": "Erneut delegiert",
+      "UNDELEGATE": "Nicht delegiert",
       "SUPPLY": "Deposited",
       "REDEEM": "Withdrawn",
       "APPROVE": "Approved",
