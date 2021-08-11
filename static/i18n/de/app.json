@@ -147,7 +147,7 @@
       "OPT_IN": "Zustimmen",
       "OPT_OUT": "Ablehnen",
       "CLOSE_ACCOUNT": "Konto schließen",
-      "BOND": "Bond",
+      "BOND": "Verbunden",
       "UNBOND": "Entbinden",
       "REWARD_PAYOUT": "Prämie",
       "SLASH": "Slash-Strafe",
@@ -220,19 +220,19 @@
     },
     "tabs": {
       "exchange": "Umtausch",
-      "history": "History"
+      "history": "Verlauf"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Ihre Desktop Tausch-Transaktionen werden nicht mit der mobilen Ledger Live App synchronisiert",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Ihre vorherigen Tausche werden hier erscheinen",
+        "description": "Entweder haben Sie noch keine Tausche getätigt, oder Ledger Live wurde inzwischen zurückgesetzt."
       }
     },
     "landing": {
       "title": "Swap your assets",
-      "continue": "Continue",
-      "sorry": "Service temporarily unavailable, or not available in your country"
+      "continue": "Weiter",
+      "sorry": "Service vorübergehend oder in Ihrem Land nicht verfügbar"
     },
     "missingApp": {
       "title": "Please install the {{appName}} app on your device",
