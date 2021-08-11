@@ -1063,19 +1063,19 @@
     "link": "Mehr erfahren",
     "seeTokens": "Token anzeigen ({{tokenCount}})",
     "hideTokens": "Token ausblenden ({{tokenCount}})",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens",
+    "countTooltip": "1 Token",
+    "countTooltip_plural": "{{count}} Token",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How Assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})"
+      "title": "ASA (Vermögenswerte)",
+      "cta": "ASA hinzufügen",
+      "placeholder": "Sie können Ihrem Konto {{Währungsbezeichnung}} Vermögenswerte hinzufügen.",
+      "link": "Wie funktionieren ASA-Vermögenswerte?",
+      "seeTokens": "ASA anzeigen ({{tokenCount}})",
+      "hideTokens": "ASA ausblenden ({{tokenCount}})"
     }
   },
   "subAccounts": {
-    "title": "Subaccounts",
+    "title": "Unterkonten",
     "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
     "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
     "countTooltip": "1 subaccount",
@@ -1150,43 +1150,43 @@
       "add": "Add account",
       "add_plural": "Add accounts",
       "addAccountName": "Add {{currencyName}} account",
-      "receive": "Receive"
+      "receive": "Empfangen"
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "Vorhandenes Konto hinzufügen"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "Neues Konto hinzufügen"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "Konten bereits im Portfolio ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "Zu aktualisierende Konten"
       }
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
-    "title": "Operation details",
-    "type": "Type",
-    "amount": "Amount",
-    "account": "Account",
-    "date": "Date",
-    "currentValue": "Current value",
+    "whatIsThis": "Was ist diese Aktion?",
+    "title": "Details",
+    "type": "Typ",
+    "amount": "Betrag",
+    "account": "Konto",
+    "date": "Datum",
+    "currentValue": "Aktueller Wert",
     "status": "Status",
-    "confirmed": "Confirmed",
-    "failed": "Failed",
-    "notConfirmed": "Not confirmed",
-    "fees": "Fee",
-    "noFees": "No fee",
-    "from": "From",
-    "to": "To",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
+    "confirmed": "Bestätigt",
+    "failed": "Fehlgeschlagen",
+    "notConfirmed": "Nicht bestätigt",
+    "fees": "Gebühr",
+    "noFees": "Keine Gebühr",
+    "from": "Von",
+    "to": "Nach",
+    "identifier": "Transaktions-ID",
+    "viewOperation": "Im Explorer ansehen",
+    "showMore": "Zeige {{recipients}} mehr",
+    "showLess": "Weniger anzeigen",
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
