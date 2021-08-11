@@ -817,44 +817,44 @@
         },
         "2": {
           "subtitle": "Vermögenswerte liefern, um Zinsen zu verdienen",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "description": "Sobald ein Konto freigegeben ist, können Sie den Betrag der zu verleihenden Vermögenswerte auswählen und eine Transaktion an das Protokoll ausgeben. Die Zinsen fallen sofort an, nachdem die Transaktion bestätigt wurde."
         },
         "3": {
-          "subtitle": "Withdraw assets at any time",
-          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
+          "subtitle": "Vermögenswerte jederzeit abheben",
+          "description": "Sie können Ihr Vermögen und die erwirtschafteten Zinsen jederzeit ganz oder teilweise direkt von Ihrem Ledger-Konto abheben."
         }
       }
     },
     "supply": {
-      "title": "Deposit assets",
+      "title": "Vermögenswerte einzahlen",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountToSupply": "Amount to deposit",
-          "maxSupply": "Maximum amount to lend is"
+          "title": "Betrag",
+          "amountToSupply": "Einzuzahlender Betrag",
+          "maxSupply": "Der maximal verfügbare Betrag ist"
         },
         "device": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "Bestätigung",
           "success": {
-            "title": "Deposit sent successfully",
-            "text": "You will start earning interest once the network has confirmed the deposit.",
-            "done": "Close",
-            "cta": "View details",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "Einzahlung erfolgreich gesendet",
+            "text": "Sie verdienen direkt Zinsen, sobald das Netzwerk die Einzahlung bestätigt hat.",
+            "done": "Schließen",
+            "cta": "Details anzeigen",
+            "info": "Es kann einige Zeit dauern, bis Transaktionen in einem Explorer angezeigt und bestätigt werden."
           }
         }
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
-      "cta": "Add account"
+      "title": "Bitte erstellen Sie ein ETH-Konto",
+      "description": "<0>{{ asset }}({{ ticker }})</0> ist ein Ethereum ERC-20 Token. Um {{ ticker }} zu verleihen, installieren Sie die Ethereum-App und erstellen Sie ein Ethereum-Konto",
+      "cta": "Konto hinzufügen"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "Sie haben kein {{ asset }}-Konto.",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
       "ctaBuy": "Buy {{ asset }}",
       "ctaReceive": "Receive {{ asset }}"
