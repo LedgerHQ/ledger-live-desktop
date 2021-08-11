@@ -1,5 +1,5 @@
 // @flow
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { listCryptoCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
 
@@ -9,6 +9,8 @@ import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/ty
 import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useSelector } from "react-redux";
 import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
+
+import coinifyIcon from "~/renderer/images/coinifyLogo.png";
 
 export const useCoinifyCurrencies = (mode: "BUY" | "SELL") => {
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -43,4 +45,23 @@ export const getAccountsForCurrency = (
     account =>
       (account.type === "TokenAccount" ? account.token.id : account.currency.id) === currency.id,
   );
+};
+
+const PROVIDERS = {
+  COINIFY: {
+    id: "Coinify",
+    iconResource: coinifyIcon,
+  },
+};
+
+let exchangeProvider = PROVIDERS.COINIFY;
+
+// @TODO move this switch logic in settings maybe
+export const useExchangeProvider = () => {
+  const setProvider = useCallback(
+    (p: { id: string, iconResource: any }) => (exchangeProvider = p),
+    [],
+  );
+
+  return [exchangeProvider, setProvider];
 };

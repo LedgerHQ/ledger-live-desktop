@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Transition } from "react-transition-group";
@@ -74,6 +74,7 @@ type Props = {
   /** show header chevron */
   chevronVisible?: boolean,
   children?: React$Node,
+  open?: boolean,
   onOpen?: (isOpen: boolean) => void,
 };
 
@@ -82,14 +83,19 @@ const CollapsibleCard = ({
   children,
   timing = 400,
   chevronVisible = true,
+  open: defaultOpen,
   onOpen = () => {},
   ...props
 }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const toggle = useCallback(() => {
     setOpen(!open);
     onOpen(!open);
   }, [open, onOpen]);
+
+  useEffect(() => {
+    setOpen(defaultOpen);
+  }, [defaultOpen]);
 
   return (
     <Container {...props} timing={timing}>

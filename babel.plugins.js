@@ -4,4 +4,5 @@ module.exports = [
   "@babel/plugin-syntax-dynamic-import",
   "@babel/plugin-syntax-import-meta",
   ["@babel/plugin-proposal-class-properties", { loose: true }],
+  ["@babel/plugin-proposal-private-methods", { loose: true }],
 ];

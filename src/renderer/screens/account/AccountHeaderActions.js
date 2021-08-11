@@ -6,7 +6,7 @@ import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { flattenedSwapSupportedCurrenciesSelector } from "~/renderer/reducers/settings";
+import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -33,6 +33,7 @@ import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
+import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import IconSend from "~/renderer/icons/Send";
 import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -43,6 +44,7 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
+import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -69,13 +71,13 @@ const mapDispatchToProps = {
 
 type OwnProps = {
   account: AccountLike,
-  parentAccount: ?Account,
+  parentAccount?: Account,
 };
 
-type Props = OwnProps & {
+type Props = {
   t: TFunction,
   openModal: Function,
-};
+} & OwnProps;
 
 const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
@@ -93,12 +95,14 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
 
+  // check if account already has lending enabled
   const summary =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
-  const availableOnCompound = !!summary;
+
+  const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
-  const availableOnSwap = useSelector(flattenedSwapSupportedCurrenciesSelector);
+  const availableOnSwap = useSelector(swapSelectableCurrenciesSelector);
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -129,6 +133,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       },
     });
   }, [currency, history, account, parentAccount]);
+
+  const onWalletConnect = useCallback(() => {
+    setTrackingSource("account header actions");
+    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
+  }, [openModal, account]);
 
   const onSend = useCallback(() => {
     openModal("MODAL_SEND", { parentAccount, account });
@@ -181,13 +190,24 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           },
         ]
       : []),
+    ...(currency.id === "ethereum"
+      ? [
+          {
+            key: "WalletConnect",
+            onClick: onWalletConnect,
+            event: "Wallet Connect Account Button",
+            icon: IconWalletConnect,
+            label: <Trans i18nKey="walletconnect.titleAccount" />,
+          },
+        ]
+      : []),
   ];
 
-  const canBuySwap = availableOnBuy || availableOnSwap.includes(currency);
+  const canBuySwap = availableOnBuy || availableOnSwap.includes(currency.id);
   const BuySwapHeader = () => (
     <>
       {availableOnBuy ? <BuyActionDefault onClick={onBuy} /> : null}
-      {availableOnSwap.includes(currency) ? <SwapActionDefault onClick={onSwap} /> : null}
+      {availableOnSwap.includes(currency.id) ? <SwapActionDefault onClick={onSwap} /> : null}
       {manageActions && manageActions.length > 0 ? (
         <DropDownSelector
           border
@@ -195,6 +215,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           items={manageActions}
           renderItem={renderItem}
           controlled
+          buttonId="account-actions-manage"
         >
           {({ isOpen }) => (
             <Button small primary>

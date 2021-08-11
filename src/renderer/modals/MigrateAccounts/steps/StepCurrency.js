@@ -86,6 +86,7 @@ class StepCurrency extends PureComponent<StepProps> {
           }
           return account;
         }),
+        // $FlowFixMe
         reduce<Account>((all, acc) => all.concat(acc), []),
       )
       .subscribe({

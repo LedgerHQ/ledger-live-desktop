@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import styled from "styled-components";
 import CounterValue from "~/renderer/components/CounterValue";
 import { useHistory } from "react-router-dom";
@@ -97,7 +97,7 @@ const Value: ThemedComponent<{}> = styled.div`
 const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => {
   const theme = useTheme();
   const history = useHistory();
-  const color = getCurrencyColor(currency, theme.colors.palette.background.paper);
+  const color = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {

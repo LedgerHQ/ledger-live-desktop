@@ -27,6 +27,7 @@ import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
 import RecoveryWarning from "~/renderer/components/Onboarding/Help/RecoveryWarning";
 import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { SideDrawer } from "../SideDrawer";
+import Box from "../Box";
 
 function LedgerLogo() {
   return (
@@ -267,7 +268,9 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
         }
         direction="left"
       >
-        <RecoveryWarning />
+        <Box px={40}>
+          <RecoveryWarning />
+        </Box>
       </SideDrawer>
       <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">

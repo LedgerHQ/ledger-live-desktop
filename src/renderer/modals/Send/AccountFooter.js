@@ -41,6 +41,7 @@ const AccountFooter = ({ account, parentAccount, status }: Props) => {
               val={status.estimatedFees}
               unit={accountUnit}
               showCode
+              alwaysShowValue
             />
             <CounterValue
               color="palette.text.shade60"
@@ -50,6 +51,8 @@ const AccountFooter = ({ account, parentAccount, status }: Props) => {
               currency={feesCurrency}
               value={status.estimatedFees}
               alwaysShowSign={false}
+              subMagnitude={1}
+              alwaysShowValue
             />
           </>
         )}
