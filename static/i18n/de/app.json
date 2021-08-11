@@ -855,40 +855,40 @@
     },
     "emptyAccountDeposit": {
       "title": "Sie haben kein {{ asset }}-Konto.",
-      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
-      "ctaBuy": "Buy {{ asset }}",
-      "ctaReceive": "Receive {{ asset }}"
+      "description": "Um Geld einzuzahlen und Krypto zu verleihen, benötigen Sie ein {{ asset }} Konto. Bitte empfangen Sie Zahlungen auf Ihrer Ethereum-Adresse.",
+      "ctaBuy": "{{ asset }} kaufen",
+      "ctaReceive": "Erhalte {{ asset }}"
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "Konten",
+    "noResultFound": "Keine Konten gefunden.",
     "order": {
       "name|asc": "Name A-Z",
       "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "balance|asc": "Niedrigster Kontostand",
+      "balance|desc": "Höchster Kontostand"
     },
     "range": {
-      "day": "Day",
-      "week": "Week",
-      "month": "Month",
-      "year": "Year",
-      "all": "All"
+      "day": "Tag",
+      "week": "Woche",
+      "month": "Monat",
+      "year": "Jahr",
+      "all": "Alle"
     },
     "optionsMenu": {
-      "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "title": "Optionen",
+      "exportOperations": "Verlauf exportieren",
+      "exportToMobile": "Exportieren nach Mobile"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
+      "star": "Favorit",
+      "receive": "Empfangen",
+      "send": "Senden",
       "swap": "Swap",
-      "buy": "Buy",
-      "sell": "Sell",
-      "edit": "Edit account",
+      "buy": "Kaufen",
+      "sell": "Verkaufen",
+      "edit": "Konto bearbeiten",
       "hideToken": "Hide token"
     }
   },
@@ -988,43 +988,43 @@
     "title": "Sign message",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "Zusammenfassung"
       },
       "sign": {
-        "title": "Device"
+        "title": "Gerät"
       }
     }
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "disconnect": "Trennen",
+    "disconnected": "Getrennt",
+    "connected": "Verbunden",
+    "connecting": "Verbinde ...",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "Link einfügen",
+        "label": "Wallet Connect Adresse",
+        "placeholder": "Wallet Connect Link einfügen"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "Verbinden",
+        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:"
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
-      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+      "info": "Sie können nun auf die dApp auf Ihrem Desktop zugreifen.",
+      "warning": "Das Teilen von Empfangsadressen von dApps ist nicht sicher. Verwenden Sie immer Ledger Live, wenn Sie Ihre Adresse teilen, um Geld zu empfangen.",
+      "disconnected": "Es besteht ein Verbindungsproblem zwischen der dApp, WalletConnect und Ledger Live. Warten Sie ein paar Augenblicke oder starten Sie die Verbindung neu"
     }
   },
   "dashboard": {
     "title": "Portfolio",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "Add account"
+      "desc": "Konten hinzufügen, um andere Krypto-Vermögenswerte zu verwalten",
+      "createAccount": "Konto hinzufügen"
     },
-    "recentActivity": "Latest operations",
+    "recentActivity": "Letzte Aktionen",
     "totalBalance": "Total balance",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
