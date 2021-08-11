@@ -226,7 +226,6 @@ export default class StepSummary extends PureComponent<StepProps> {
                       currency={currency}
                       value={totalSpent}
                       alwaysShowSign={false}
-                      subMagnitude={1}
                     />
                   </Box>
                 </Box>
