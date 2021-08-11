@@ -1025,44 +1025,44 @@
       "createAccount": "Konto hinzufügen"
     },
     "recentActivity": "Letzte Aktionen",
-    "totalBalance": "Total balance",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "totalBalance": "Gesamtguthaben",
+    "transactionsPendingConfirmation": "Einige Transaktionen sind noch nicht bestätigt. Diese werden in Ihrem Guthaben angezeigt und können nach der Bestätigung verwendet werden."
   },
   "currentAddress": {
-    "title": "Current address",
-    "for": "Address for <1><0>{{name}}</0></1>",
-    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "title": "Aktuelle Adresse",
+    "for": "Adresse für <1><0>{{name}}</0></1>",
+    "messageIfUnverified": "Überprüfen Sie, ob die freigegebene Adresse genau mit der auf Ihrem Gerät übereinstimmt",
+    "messageIfSkipped": "Ihre {{name}} Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie diese zur Sicherheit."
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "Apps auf Ihrem Gerät installieren",
+      "desc": "Gehen Sie zum Manager, um Apps auf Ihrem Gerät zu installieren. Sie können Konten hinzufügen, sobald Sie Apps auf Ihrem Gerät haben.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "Zum Manager gehen",
+        "help": "Hilfe"
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
-      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "title": "Ein Konto hinzufügen, um loszulegen",
+      "desc": "Fügen Sie ein Konto hinzu, um mit der Verwaltung Ihrer Krypto-Vermögenswerte zu beginnen. Sie müssen die App für Ihr Krypto-Vermögen auf Ihrem Gerät installiert haben.",
       "buttons": {
-        "addAccount": "Add account",
-        "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "addAccount": "Konto hinzufügen",
+        "installApp": "Gehen Sie zum Manager, um Apps zu installieren",
+        "help": "Hilfe"
       }
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
-    "link": "Learn more",
-    "seeTokens": "Show tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
+    "title": "Token",
+    "cta": "Token hinzufügen",
+    "placeholder": "Um Token hinzuzufügen, senden Sie sie einfach an Ihre {{currencyName}}-Adresse.",
+    "link": "Mehr erfahren",
+    "seeTokens": "Token anzeigen ({{tokenCount}})",
+    "hideTokens": "Token ausblenden ({{tokenCount}})",
     "countTooltip": "1 token",
     "countTooltip_plural": "{{count}} tokens",
     "algorand": {
