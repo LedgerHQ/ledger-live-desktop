@@ -755,68 +755,68 @@
           "contractName": "Zusammengefast {{currencyName}}",
           "advanced": "Erweitert",
           "amountLabel": "Zu genehmigender Betrag",
-          "amountLabelTooltip": "This limits the amount available to the smart contract."
+          "amountLabelTooltip": "Dies begrenzt den Betrag, der dem Smart Contract zur Verfügung steht."
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "Bestätigung",
           "success": {
-            "title": "Operation sent successfully",
-            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-            "done": "Close",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "Aktion erfolgreich durchgeführt",
+            "text": "Die Freigabe wurde zur Bestätigung an das Netzwerk gesendet. Sobald sie bestätigt ist, können Sie Kredite vergeben.",
+            "done": "Schließen",
+            "info": "Es kann einige Zeit dauern, bis Transaktionen in einem Explorer angezeigt und bestätigt werden."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "withdraw": {
-      "title": "Withdraw assets",
+      "title": "Vermögenswerte abheben",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "advanced": "Advanced",
-          "amountToWithdraw": "Amount to withdraw",
-          "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max",
-          "maxWithdrawble": "Maximum amount to withdraw is"
+          "title": "Betrag",
+          "advanced": "Erweitert",
+          "amountToWithdraw": "Abzuhebender Betrag",
+          "withdrawAll": "Max. Abhebung",
+          "placeholder": "Max. Abhebung",
+          "maxWithdrawble": "Der maximale Auszahlungsbetrag ist"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "Bestätigung",
           "success": {
-            "title": "Withdrawal sent successfully",
-            "text": "Your assets will be available once the network has confirmed the withdrawal.",
-            "done": "Close",
-            "cta": "View details"
+            "title": "Abhebung erfolgreich gesendet",
+            "text": "Ihr Guthaben ist verfügbar, sobald das Netzwerk die Abhebung bestätigt hat.",
+            "done": "Schließen",
+            "cta": "Details anzeigen"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "Der entnommene Betrag wird in {{ tokenName }} angezeigt. {{ tokenName }} sind ERC20-Token, die Sie nach dem Verleihen von Vermögenswerten verdienen."
           }
         }
       }
     },
     "info": {
       "terms": {
-        "title": "Lend Crypto",
-        "subtitle": "Lend assets on the Compound protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+        "title": "Krypto leihen",
+        "subtitle": "Verleihen von Vermögenswerten über das Compound-Protokoll",
+        "description": "Das Compound-Protokoll ermöglicht es Ihnen, Vermögenswerte im Ethereum-Netzwerk zu leihen und zu verleihen. Sie können Vermögenswerte verleihen und Zinsen direkt von Ihrem Ledger-Konto erhalten.",
+        "switchLabel": "<1>Ich habe die </1><0>Nutzungsbedingungen gelesen und bin damit einverstanden</0><1>.</1>"
       },
       "steps": {
-        "title": "Step <0>{{step}} / {{total}}</0>",
+        "title": "Schritt <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Approve an account to allow the protocol to",
-          "subtitle2": "process future loans.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+          "subtitle": "Genehmigen Sie ein Konto, um dem Protokoll zu erlauben,",
+          "subtitle2": "zukünftige Kredite zu verarbeiten.",
+          "description": "Sie müssen den Compound-Smart-Contract autorisieren, bis zu einer bestimmten Menge an Vermögenswerten an das Protokoll zu übertragen. Das Genehmigen eines Kontos gibt dem Protokoll die Erlaubnis, zukünftige Kredite zu verarbeiten."
         },
         "2": {
-          "subtitle": "Supply assets to earn interest",
+          "subtitle": "Vermögenswerte liefern, um Zinsen zu verdienen",
           "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
         },
         "3": {
