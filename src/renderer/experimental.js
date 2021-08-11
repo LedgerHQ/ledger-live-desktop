@@ -10,8 +10,8 @@ import { setEnvOnAllThreads } from "./../helpers/env";
 
 export type FeatureCommon = {
   name: EnvName,
-  title: string,
-  description: string,
+  title: string | React$Node,
+  description: string | React$Node,
   shadow?: boolean,
   dirty?: boolean, // NB Will trigger a clear cache if changed
 };

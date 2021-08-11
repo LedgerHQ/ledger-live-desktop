@@ -86,7 +86,7 @@ const AppDetails = ({ manifest }: Props) => {
   const { t } = useTranslation();
   const description = t(
     `manager.apps.content.${manifest.id}.shortDescription`,
-    manifest.shortDescription, // default description in case of missing translations
+    manifest.content.shortDescription, // default description in case of missing translations
   );
 
   return (
