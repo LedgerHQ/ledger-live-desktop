@@ -599,44 +599,44 @@
     "delegatedAssets": "Delegierte Vermögenswerte",
     "undelegating": "Delegierung aufheben",
     "availableBalanceTooltip": "Dieser Betrag ist verfügbar.",
-    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "frozenAssetsTooltip": "Gesperrte Vermögenswerte werden bei der Tron-Abstimmung verwendet. Diese stellen Ihre Gesamtanzahl an Stimmen dar.",
+    "bandwidthTooltip": "Vermögenswerte sperren, um Bandbreite zu gewinnen",
+    "energyTooltip": "Vermögenswerte sperren, um Energie zu gewinnen",
+    "delegatedAssetsTooltip": "Delegierte Vermögenswerte werden im Cosmos-Abstimmungsprozess verwendet. Diese stellen Ihre Gesamtzahl an Stimmen dar.",
+    "undelegatingTooltip": "Nicht delegierte Vermögenswerte sind in einer Zeitsperre von 21 Tagen, bevor sie verfügbar sind."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
-    "reset": "Reset flow",
-    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "title": "Krypto kaufen und verkaufen",
+    "reset": "Zurücksetzen",
+    "verifyAddress": "Bitte bestätigen Sie, dass die angezeigte Adresse genau mit der auf Ihrem Gerät angezeigten Adresse übereinstimmt",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
-      "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "header": "Krypto kaufen mit {{provider}}",
+      "title": "Krypto kaufen über <0>{{provider}}</0>",
+      "tab": "Kaufen",
+      "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
+      "selectAccount": "Wählen Sie ein Konto",
+      "continue": "Weiter",
+      "addAccount": "Konto hinzufügen"
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
-      "title": "Sell crypto via <0>{{provider}}</0>",
-      "tab": "Sell",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "header": "Krypto verkaufen mit {{provider}}",
+      "title": "Krypto verkaufen über <0>{{provider}}</0>",
+      "tab": "Verkaufen",
+      "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
+      "selectAccount": "Wählen Sie ein Konto",
+      "continue": "Weiter"
     },
     "history": {
-      "tab": "History"
+      "tab": "Verlauf"
     }
   },
   "lend": {
-    "title": "Lend crypto",
+    "title": "Krypto ausleihen",
     "tabs": {
       "dashboard": "Dashboard",
-      "opened": "Opened loans",
-      "closed": "Closed loans",
-      "history": "History"
+      "opened": "Offene Kredite",
+      "closed": "Abgeschlossene Kredite",
+      "history": "Verlauf"
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
