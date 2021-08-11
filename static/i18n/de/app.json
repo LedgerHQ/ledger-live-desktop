@@ -266,47 +266,47 @@
         "bullets": [
           "Verbinden mit 30+ DEXs (Uniswap, SushiSwap,...)",
           "Ethereum und ERC20 Token",
-          "Decentralized & Trustless"
+          "Dezentralisiert und ohne Treuhand"
         ]
       },
-      "cta": "Continue",
+      "cta": "Weiter",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{Provider}} ist an Ihrem Standort nicht verfügbar",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "KYC erforderlich",
+          "pending": "KYC ausstehend",
+          "approved": "KYC genehmigt!",
+          "closed": "KYC abgelehnt"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "Willkommen bei Swap",
+      "subtitle": "Tauschen Sie Krypto-Vermögenswerte direkt von Ihrem Ledger-Gerät aus.",
+      "disclaimer": "Wenn Sie fortfahren, akzeptieren Sie, dass Ihre Standortdaten an Drittanbieter weitergegeben werden, damit diese ihre AML/KYC-Verfahren einhalten können."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "Wir sind nicht in der Lage, den KYC-Prozess abzuschließen, bis Sie die Anwendung aktualisieren",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "disclaimer": "Ihre Daten werden von LEDGER im Auftrag von WYRE gesammelt und an WYRE für KYC-Zwecke übertragen. Für weitere Informationen lesen Sie bitte unsere",
+        "policy": "Datenschutzrichtlinie",
+        "title": "Bestätigen Sie Ihre Identität",
+        "subtitle": "Bitte geben Sie Ihre Daten ein, um mit Wyre zu tauschen.",
         "pending": {
-          "cta": "Continue",
-          "title": "Pending approval",
+          "cta": "Weiter",
+          "title": "Freigabe ausstehend",
           "subtitle": "Your information was submitted for approval by Wyre.",
-          "link": "Learn more about KYC"
+          "link": "Erfahren Sie mehr über KYC"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "KYC zurücksetzen",
+          "title": "KYC-Antrag abgelehnt",
+          "subtitle": "Wyre hat die von Ihnen für KYC-Zwecke angegebenen Daten abgelehnt",
+          "link": "Erfahren Sie mehr über KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
           "street1": "Straße Adresse Zeile 1",
           "street2": "Straße Adresse Zeile 2",
           "city": "Stadt",
