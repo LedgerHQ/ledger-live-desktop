@@ -647,63 +647,63 @@
       "currencyAPY": "Währung APY",
       "currencyAPYTooltip": "Jährliche Rendite einer Einlage, die kontinuierlich aufgezinst wird",
       "accruedInterests": "Aufgelaufene Zinsen",
-      "accruedInterestsTooltip": "Interest generated on your lent assets",
-      "interestEarned": "Interest earned",
-      "interestEarnedTooltip": "Interest you have earned after withdrawal",
-      "openLoans": "Open loans",
-      "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount withdrawn",
-      "date": "Date",
-      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
-      "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Deposit {{currency}}"
+      "accruedInterestsTooltip": "Zinserträge auf Ihr verliehenes Vermögen",
+      "interestEarned": "Zinserträge",
+      "interestEarnedTooltip": "Zinsen, die Sie nach der Abhebung verdient haben",
+      "openLoans": "Offene Kredite",
+      "closedLoans": "Abgeschlossene Kredite",
+      "amountRedeemed": "Abgehobener Betrag",
+      "date": "Datum",
+      "info": "Sie können Vermögenswerte direkt von Ihrem {{currency}}-Konto ausleihen und Zinsen erhalten.",
+      "howCompoundWorks": "Wie funktioniert das Verleihen auf Compound?",
+      "lend": "Einzahlung {{currency}}"
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
-        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "cta": "How does lending on Compound work?"
+        "title": "Leihen",
+        "description": "Sie können Vermögenswerte direkt von Ihren Ethereum-Konten verleihen und Zinsen erhalten.",
+        "cta": "Wie funktioniert das Verleihen auf Compound?"
       },
       "closed": {
-        "title": "Your closed loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "Ihre abgeschlossenen Kredite werden hier angezeigt",
+        "description": "Sie haben noch keine Kredite vergeben.",
+        "cta": "Einzahlung"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "Ihre eröffneten Kredite werden hier angezeigt",
+        "description": "Sie haben noch keine Kredite vergeben.",
+        "cta": "Einzahlung"
       },
       "history": {
-        "title": "History",
-        "description": "View the history of all your loan transactions.",
-        "cta": "Deposit"
+        "title": "Verlauf",
+        "description": "Zeigen Sie die Historie aller Ihrer Kredittransaktionen an.",
+        "cta": "Einzahlung"
       }
     },
     "headers": {
       "active": {
-        "accounts": "Account",
-        "amountSupplied": "Open loan",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
-        "status": "Account status",
-        "actions": "Actions"
+        "accounts": "Konto",
+        "amountSupplied": "Offener Kredit",
+        "amountSuppliedTooltip": "Im Netzwerk hinterlegter Betrag",
+        "accruedInterests": "Zins-Saldo",
+        "accruedInterestsTooltip": "Zinserträge aus Krediten",
+        "status": "Konto-Status",
+        "actions": "Aktionen"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
-        "toSupplyTooltip": "You can now supply your assets"
+        "enablingTooltip": "Ihre Transaktion wird übertragen",
+        "toSupplyTooltip": "Sie können nun Ihre Vermögenswerte bereitstellen"
       },
       "closed": {
-        "assetLended": "Asset",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
-        "date": "Date"
+        "assetLended": "Vermögenswert",
+        "amountRedeemed": "Abhebungsbetrag",
+        "interestsEarned": "Zinserträge",
+        "date": "Datum"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
-        "accruedInterest": "Accrued interest",
+        "assetLended": "Vermögenswert",
+        "amount": "Betrag",
+        "accruedInterest": "Aufgelaufene Zinsen",
         "date": "Date"
       },
       "rates": {
@@ -969,23 +969,23 @@
     },
     "stakeAlgorand": {
       "title": "Staking with ALGORAND",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "description": "Machen Sie das Beste aus Ihrem ALGO. Fügen Sie einfach Guthaben zu Ihren Konten hinzu und verdienen Sie noch heute Prämien."
     },
     "swap": {
-      "title": "Swap crypto",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "title": "Krypto tauschen",
+      "description": "Tauschen Sie eine Kryptowährung gegen eine andere von Ledger Live mit unserem Partner."
     },
     "lending": {
-      "title": "Lend Crypto",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "title": "Krypto leihen",
+      "description": "Verleihen Sie Stablecoins an das Compound-Protokoll und verdienen Sie noch heute Zinsen"
     },
     "blackfriday": {
-      "title": "BLACK FRIDAY ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "title": "BLACK FRIDAY",
+      "description": "Freuen Sie sich über 40 % Rabatt auf Ledger Hardware-Wallets mit dem Promo-Code BLACKFRIDAY20"
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "Nachricht unterschreiben",
     "steps": {
       "summary": {
         "title": "Zusammenfassung"
@@ -1076,7 +1076,7 @@
   },
   "subAccounts": {
     "title": "Unterkonten",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
+    "seeSubAccounts": "Unterkonten anzeigen ({{tokenCount}})",
     "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
     "countTooltip": "1 subaccount",
     "countTooltip_plural": "{{count}} subaccounts"
