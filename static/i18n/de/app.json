@@ -1391,72 +1391,72 @@
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
-      "cancelReinstallCTA": "Install update",
+      "successTextApps": "Bitte installieren Sie die Apps erneut auf Ihrem Gerät",
+      "successTextNoApps": "Sie können jetzt Apps auf Ihrem Gerät installieren",
+      "sucessCTAApps": "Apps erneut installieren",
+      "SuccessCTANoApps": "Apps installieren",
+      "cancelReinstallCTA": "Update installieren",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PINs to reset the device.",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
-        "second": "2. Boot in {{mode}} mode",
-        "boot": "Press and hold the side button until {{option}} is displayed",
-        "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
-        "third": "3. Uninstall all apps",
-        "openLive": "Open the Manager in Ledger Live.",
-        "uninstall": "Click on the grey trash icon for all apps currently installed on the {{deviceName}}. This makes room for the firmware installer.",
-        "disclaimer": "Note: Your funds are not affected by this operation, the private keys to access your crypto assets in the blockchain remain secure on your Recovery sheet."
+        "first": "1. Ihr Gerät zurücksetzen",
+        "connect": "Schließen Sie das {{deviceName}} über das USB-Kabel an Ihren Computer an.",
+        "turnOn": "Drücken Sie die Taste am Gerät, um es einzuschalten.",
+        "falsePin": "Geben Sie drei falsche PINs ein, um das Gerät zurückzusetzen.",
+        "turnOff": "Halten Sie die Seitentaste gedrückt, bis {{action}} angezeigt wird.",
+        "confirmTurnOff": "Tippen Sie zur Bestätigung auf {{action}}.",
+        "second": "2. Booten im {{mode}} Modus",
+        "boot": "Drücken und halten Sie die Seitentaste, bis {{option}} angezeigt wird",
+        "recoveryMode": "Tippen Sie auf {{mode}} Modus. Warten Sie, bis das Dashboard erscheint.",
+        "third": "3. Alle Apps deinstallieren",
+        "openLive": "Öffnen Sie den Manager in Ledger Live.",
+        "uninstall": "Klicken Sie auf das graue Papierkorbsymbol für alle derzeit auf dem {{deviceName}} installierten Apps. Dies schafft Platz für das Firmware-Installationsprogramm.",
+        "disclaimer": "Hinweis: Ihr Guthaben ist von diesem Vorgang nicht betroffen, die privaten Schlüssel zum Zugriff auf Ihr Krypto-Vermögen in der Blockchain bleiben sicher auf Ihrem Recovery Sheet."
       }
     }
   },
   "claimReward": {
-    "title": "Claim rewards",
+    "title": "Prämien beanspruchen",
     "steps": {
       "rewards": {
-        "title": "Rewards",
-        "description": "Congratulations! You earned <1>{{amount}}</1> by voting for validators.",
-        "info": "Rewards can be claimed once every 24 hours."
+        "title": "Prämien",
+        "description": "Glückwunsch! Sie haben <1>{{amount}}</1> verdient, indem Sie für Validatoren gestimmt haben.",
+        "info": "Prämien können einmal alle 24 Stunden beansprucht werden."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Bestätigung",
         "success": {
-          "title": "Rewards claimed",
-          "text": "Your rewards were added to your available balance.",
-          "cta": "View details",
-          "done": "Done"
+          "title": "Beanspruchte Prämien",
+          "text": "Ihre Prämien wurden zu Ihrem verfügbaren Guthaben hinzugefügt.",
+          "cta": "Details anzeigen",
+          "done": "Fertig"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
       }
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "Vermögenswerte sperren",
     "steps": {
       "amount": {
-        "title": "Amount",
-        "resourceInfo": "Bandwidth or Energy?",
-        "bandwidthDescription": "Bandwidth points are used to make transactions without paying TRX for network fees. Choose Bandwidth to increase your daily free transactions.",
-        "energyDescription": "Energy points are required to execute smart contracts. If you don't run any smart contracts, there is no need to choose rewards in Energy.",
-        "amountLabel": "Amount to freeze",
-        "available": "Available: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "title": "Betrag",
+        "resourceInfo": "Bandbreite oder Energie?",
+        "bandwidthDescription": "Bandbreiten-Punkte werden verwendet, um Transaktionen durchzuführen, ohne dass TRX für Netzwerkgebühren bezahlt. Wählen Sie Bandbreite, um Ihre täglichen kostenlosen Transaktionen zu erhöhen.",
+        "energyDescription": "Energiepunkte werden benötigt, um Smart Contracts auszuführen. Wenn Sie keine Smart Contracts ausführen, ist es nicht nötig, Prämien in Energie auszuwählen.",
+        "amountLabel": "Betrag zum Sperren",
+        "available": "Verfügbar: {{amountAvailable}}",
+        "info": "Gesperrte Vermögenswerte können erst nach 3 Tagen versendet werden."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is awaiting validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "title": "Transaktion wartet auf Validierung",
+          "desc": "Sie müssen eine Minute warten, bevor Sie abstimmen können"
         },
-        "title": "Confirmation",
+        "title": "Bestätigung",
         "success": {
           "title": "",
           "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
