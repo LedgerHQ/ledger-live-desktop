@@ -15,8 +15,6 @@ import {
 } from "~/renderer/reducers/settings";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 
-import type { AvailableProvider } from "@ledgerhq/live-common/lib/exchange/swap/types";
-
 export type SaveSettings = ($Shape<Settings>) => { type: string, payload: $Shape<Settings> };
 
 export const saveSettings: SaveSettings = payload => ({
@@ -30,8 +28,6 @@ export const setAccountsViewMode = (accountsViewMode: *) => saveSettings({ accou
 export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
-export const setHasAcceptedSwapKYC = (hasAcceptedSwapKYC: boolean) =>
-  saveSettings({ hasAcceptedSwapKYC });
 export const setDiscreetMode = (discreetMode: boolean) => saveSettings({ discreetMode });
 export const setCarouselVisibility = (carouselVisibility: number) =>
   saveSettings({ carouselVisibility });
@@ -42,6 +38,14 @@ export const setMarketIndicator = (marketIndicator: *) => saveSettings({ marketI
 export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLockTimeout });
 export const setHasInstalledApps = (hasInstalledApps: boolean) =>
   saveSettings({ hasInstalledApps });
+
+// developer
+export const setAllowDebugApps = (allowDebugApps: boolean) => saveSettings({ allowDebugApps });
+export const setAllowExperimentalApps = (allowExperimentalApps: boolean) =>
+  saveSettings({ allowExperimentalApps });
+export const setEnablePlatformDevTools = (enablePlatformDevTools: boolean) =>
+  saveSettings({ enablePlatformDevTools });
+export const setCatalogProvider = (catalogProvider: string) => saveSettings({ catalogProvider });
 
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
@@ -105,8 +109,8 @@ export const blacklistToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
-export const swapAcceptProviderTOS = (providerId: string) => ({
-  type: "SWAP_ACCEPT_PROVIDER_TOS",
+export const swapAcceptProvider = (providerId: string) => ({
+  type: "ACCEPT_SWAP_PROVIDER",
   payload: providerId,
 });
 
@@ -158,7 +162,17 @@ export const setFirstTimeLend = () => ({
   type: "SET_FIRST_TIME_LEND",
 });
 
-export const setSwapProviders = (swapProviders?: AvailableProvider[]) => ({
-  type: "SETTINGS_SET_SWAP_PROVIDERS",
-  swapProviders,
+export const setSwapSelectableCurrencies = (selectableCurrencies: string[]) => ({
+  type: "SET_SWAP_SELECTABLE_CURRENCIES",
+  payload: selectableCurrencies,
+});
+
+export const setSwapHasAcceptedIPSharing = (hasAcceptedIPSharing: boolean) => ({
+  type: "SET_SWAP_ACCEPTED_IP_SHARING",
+  payload: hasAcceptedIPSharing,
+});
+
+export const setSwapKYCStatus = (payload: { provider: string, id?: string, status?: string }) => ({
+  type: "SET_SWAP_KYC",
+  payload,
 });

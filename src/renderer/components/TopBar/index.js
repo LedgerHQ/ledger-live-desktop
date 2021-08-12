@@ -31,6 +31,7 @@ import { setDiscreetMode } from "~/renderer/actions/settings";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { NotificationIndicator } from "~/renderer/components/TopBar/NotificationIndicator";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { LiveAppDrawer } from "~/renderer/components/WebPlatformPlayer/LiveAppDrawer";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({}))`
   height: ${p => p.theme.sizes.topBarHeight}px;
@@ -103,6 +104,7 @@ const TopBar = () => {
                 </Box>
               </>
             )}
+            <LiveAppDrawer />
             <ServiceStatusIndicator />
             <NotificationIndicator />
             <Box justifyContent="center">

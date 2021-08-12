@@ -11,38 +11,52 @@ import TabBar from "~/renderer/components/TabBar";
 import { SettingsSection as Section } from "./SettingsSection";
 import SectionDisplay from "./sections/General";
 import SectionExperimental from "./sections/Experimental";
+import SectionDeveloper from "./sections/Developer";
 import SectionAccounts from "./sections/Accounts";
 import SectionAbout from "./sections/About";
 import SectionHelp from "./sections/Help";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { developerModeSelector } from "../../reducers/settings";
 
-const getItems = (t: string => string): Item[] => [
-  {
-    key: "display",
-    label: t("settings.tabs.display"),
-    value: SectionDisplay,
-  },
-  {
-    key: "accounts",
-    label: t("settings.tabs.accounts"),
-    value: SectionAccounts,
-  },
-  {
-    key: "about",
-    label: t("settings.tabs.about"),
-    value: SectionAbout,
-  },
-  {
-    key: "help",
-    label: t("settings.tabs.help"),
-    value: SectionHelp,
-  },
-  {
-    key: "experimental",
-    label: t("settings.tabs.experimental"),
-    value: SectionExperimental,
-  },
-];
+const getItems = (t: string => string, devMode?: boolean): Item[] => {
+  const items = [
+    {
+      key: "display",
+      label: t("settings.tabs.display"),
+      value: SectionDisplay,
+    },
+    {
+      key: "accounts",
+      label: t("settings.tabs.accounts"),
+      value: SectionAccounts,
+    },
+    {
+      key: "about",
+      label: t("settings.tabs.about"),
+      value: SectionAbout,
+    },
+    {
+      key: "help",
+      label: t("settings.tabs.help"),
+      value: SectionHelp,
+    },
+    {
+      key: "experimental",
+      label: t("settings.tabs.experimental"),
+      value: SectionExperimental,
+    },
+  ];
+
+  if (devMode) {
+    items.push({
+      key: "developer",
+      label: t("settings.tabs.developer"),
+      value: SectionDeveloper,
+    });
+  }
+
+  return items;
+};
 
 type Props = {
   history: RouterHistory,
@@ -55,8 +69,9 @@ const Settings = ({ history, location, match }: Props) => {
   const { t } = useTranslation();
   const accounts = useSelector(shallowAccountsSelector);
   const accountsCount = accounts.length;
+  const devMode = useSelector(developerModeSelector);
 
-  const items = useMemo(() => getItems(t), [t]);
+  const items = useMemo(() => getItems(t, devMode), [t, devMode]);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const processedItems = useMemo(
     () => items.filter(item => item.key !== "currencies" || accountsCount > 0),

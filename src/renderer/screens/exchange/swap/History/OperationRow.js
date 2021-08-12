@@ -66,10 +66,6 @@ const Row: ThemedComponent<{}> = styled(Box)`
   opacity: ${p => (p.isOptimistic || !p.toExists ? 0.5 : 1)};
   cursor: pointer;
 
-  &:last-child {
-    border-bottom: 0;
-  }
-
   &:hover {
     background: ${p => rgba(p.theme.colors.wallet, 0.04)};
   }
@@ -84,9 +80,6 @@ const Row: ThemedComponent<{}> = styled(Box)`
   & > *:nth-child(3),
   & > *:nth-child(5) {
     flex: 20%;
-  }
-  &:not(:last-child) {
-    border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
   }
 `;
 

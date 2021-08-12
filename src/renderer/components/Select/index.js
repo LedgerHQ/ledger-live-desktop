@@ -43,6 +43,7 @@ type Props = {
   autoFocus: boolean,
   virtual: boolean,
   rowHeight: number,
+  error: ?Error, // NB at least a different rendering for now
 };
 
 const Row = styled.div`
@@ -137,7 +138,7 @@ class MenuList extends PureComponent<*, *> {
 }
 class Select extends PureComponent<Props> {
   componentDidMount() {
-    if (this.ref && this.props.autoFocus) {
+    if (this.ref && this.props.autoFocus && !process.env.SPECTRON_RUN) {
       // $FlowFixMe
       this.timeout = requestAnimationFrame(() => this.ref.focus());
     }
@@ -192,8 +193,10 @@ class Select extends PureComponent<Props> {
       minWidth,
       small,
       theme,
+      error,
       virtual = true,
       rowHeight = small ? 34 : 40,
+      autoFocus,
       ...props
     } = this.props;
 
@@ -203,6 +206,7 @@ class Select extends PureComponent<Props> {
       <Comp
         {...props}
         ref={c => (this.ref = c)}
+        autoFocus={autoFocus && !process.env.SPECTRON_RUN}
         value={value}
         maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"
@@ -217,7 +221,7 @@ class Select extends PureComponent<Props> {
                 ...createRenderers({ renderOption, renderValue }),
               }
         }
-        styles={createStyles(theme, { width, minWidth, small, isRight, isLeft })}
+        styles={createStyles(theme, { width, minWidth, small, isRight, isLeft, error })}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}

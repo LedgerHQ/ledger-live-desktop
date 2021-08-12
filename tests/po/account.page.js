@@ -25,8 +25,26 @@ export default class AccountPage extends Page {
     return this.$("#operation-list");
   }
 
+  async actionsDropdown() {
+    return this.$("#account-actions-manage");
+  }
+
+  async actionsDropdownWC() {
+    return this.$("#account-actions-manage-WalletConnect");
+  }
+
   async bookmarkAccount() {
     const elem = await this.starButton();
+    await elem.click();
+  }
+
+  async openDropDown() {
+    const elem = await this.actionsDropdown();
+    await elem.click();
+  }
+
+  async openWalletConnect() {
+    const elem = await this.actionsDropdownWC();
     await elem.click();
   }
 
@@ -43,10 +61,14 @@ export default class AccountPage extends Page {
   async hideFirstToken() {
     const tokens = await this.getTokens();
     const [token] = tokens;
-    await token.click({ button: "right" });
-    await this.app.client.pause(500);
-    const hideButton = await this.menuHideTokenButton();
-    await hideButton.click();
+    if (!token) {
+      console.warn("why no tokens ?", { tokens });
+    } else {
+      await token.click({ button: "right" });
+      await this.app.client.pause(1000);
+      const hideButton = await this.menuHideTokenButton();
+      await hideButton.click();
+    }
   }
 
   async clickFirstOperationRow() {
