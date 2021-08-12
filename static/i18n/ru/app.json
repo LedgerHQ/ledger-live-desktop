@@ -117,7 +117,7 @@
       "needsMigration": "Нажмите, чтобы обновить аккаунт",
       "error": "Ошибка синхронизации",
       "refresh": "Обновить",
-      "devTools": "Dev tools"
+      "devTools": "Инструменты разработчика"
     },
     "exchange": "Обмен",
     "info": "Информация"
@@ -295,7 +295,7 @@
         "pending": {
           "cta": "Продолжить",
           "title": "Ожидание утверждения",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "Ваша информация была передана на утверждение Wyre.",
           "link": "Подробнее о KYC"
         },
         "closed": {
@@ -2328,7 +2328,7 @@
       "about": "О программе",
       "experimental": "Экспериментальные функции",
       "accounts": "Счета",
-      "developer": "Developer"
+      "developer": "Разработчик"
     },
     "export": {
       "accounts": {
@@ -2365,22 +2365,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "Вы стали разработчиком!",
+        "text": "Добро пожаловать в страну чудес"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "Разрешить отладку",
+      "debugAppsDesc": "Показывать и открывать отладочные приложения на платформе.",
+      "experimentalApps": "Разрешить экспериментальные приложения",
+      "experimentalAppsDesc": "Показывать и открывать экспериментальные приложения на платформе.",
+      "catalogServer": "Выбрать поставщика каталога",
+      "catalogServerDesc": "Переключение между несколькими источниками приложений",
+      "enablePlatformDevTools": "Включить инструменты разработчика на платформе",
+      "enablePlatformDevToolsDesc": "Разрешить открывать окно инструментов разработчика на платформе",
+      "addLocalApp": "Добавить локальное приложение",
+      "addLocalAppDesc": "Просматривать локальные файлы и добавлять локальные приложения посредством локального манифеста",
+      "addLocalAppButton": "Обзор",
+      "runLocalAppDeleteButton": "Удалить",
+      "runLocalAppOpenButton": "Открыть"
     },
     "currencies": {
       "selectPlaceholder": "Выберите криптоактив",
@@ -2554,7 +2554,7 @@
     "toastType": {
       "announcement": "Новости",
       "operation": "Операция",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Открыто Достижение"
     }
   },
   "informationCenter": {
@@ -2715,7 +2715,7 @@
               "descr": "Узнайте как взаимодействовать с устройством по инструкциям на экране."
             },
             "select": {
-              "title": "Настраиваем как новое устройство",
+              "title": "Выберите \"Set up as a new device\" (Настроить как новое устройство)",
               "descr": "Для подтверждения выбора нажмите обе кнопки одновременно."
             },
             "follow": {
@@ -2780,7 +2780,7 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Выберите опцию ПИН-код",
+              "title": "Установить ПИН-код",
               "descr": "Левой или правой кнопкой вы выбираете цифру. Нажатием обеих кнопок вы подтверждаете выбор. Выберите <0></0> для подтверждения ПИН-кода. Выберите <1></1> для удаления цифры."
             },
             "confirm": {
