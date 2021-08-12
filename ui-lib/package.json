@@ -34,6 +34,7 @@
     "react-select": "^3.2.0",
     "react-spring": "^8.0.27",
     "react-transition-group": "^4.4.2",
+    "storybook-addon-pseudo-states": "^1.0.0",
     "styled-components": "^5.2.3",
     "styled-system": "^5.1.5"
   },
@@ -57,8 +58,8 @@
     "@typescript-eslint/eslint-plugin": "4",
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "7",
-    "eslint-config-prettier": "^7.2.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
