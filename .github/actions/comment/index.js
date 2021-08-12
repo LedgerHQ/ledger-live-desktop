@@ -1,19 +1,25 @@
 const core = require("@actions/core");
+const { promises: fs } = require("fs");
 
 const main = async () => {
+  /*testoutput: ./output.txt
+          lintoutput: ./lint.txt
+          jestoutput: ./jest.txt
+          imgChanged: ./imgChanged.txt*/
+
   const images = core.getInput("images");
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
   const from = core.getInput("from");
   const to = core.getInput("to");
   const author = core.getInput("author");
-  let imgChanged = core.getInput("imgChanged").split("\n");
+  let imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
   if (imgChanged.length === 1 && imgChanged[0] === "") {
     imgChanged = [];
   }
-  const testoutput = core.getInput("testoutput");
-  const lintoutput = core.getInput("lintoutput");
-  const jestoutput = core.getInput("jestoutput");
+  const testoutput = await fs.readFile(core.getInput("testoutput"), "utf8");
+  const lintoutput = await fs.readFile(core.getInput("lintoutput"), "utf8");
+  const jestoutput = await fs.readFile(core.getInput("jestoutput"), "utf8");
   const fullrepo = core.getInput("fullrepo").split("/");
   const imgArr = JSON.parse(images);
 
@@ -125,11 +131,22 @@ Diff output ${imgDiffFailed ? "❌" : " ✅"}
 https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
 
-  core.setOutput("body", JSON.stringify({ comment: str }));
-  core.setOutput("bodyclean", str);
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
   core.setOutput("slackAuthor", githubSlackMap[author] || "");
+
+  const prNumber = core.getInput("prNumber");
+
+  await fetch(
+    `http://github-actions-live-vercel.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ comment: str }),
+    },
+  );
 };
 
 main().catch(err => core.setFailed(err));
