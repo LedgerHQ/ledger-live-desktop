@@ -252,7 +252,7 @@
       "wyre": {
         "bullets": [
           "USA uniquement (Europe, Afrique et Asie à venir)",
-          "Multi coins et jetons",
+          "Multi coins et tokens",
           "Centralisé"
         ]
       },
@@ -266,7 +266,7 @@
       "paraswap": {
         "bullets": [
           "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
-          "Ethereum et jetons ERC-20",
+          "Ethereum et tokens ERC-20",
           "Décentralisé et se passant des tiers de confiance"
         ]
       },
@@ -374,7 +374,7 @@
     },
     "resetKYCModal": {
       "title": "Supprimer sa vérification",
-      "subtitle": "Supprimez votre vérification pour effacer tous les jetons stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
+      "subtitle": "Supprimez votre vérification pour effacer tous les tokens stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
       "cta": "Confirmer"
     },
     "modal": {
@@ -805,7 +805,7 @@
           },
           "broadcastError": "Échec probable de votre transaction. Patientez un instant puis vérifiez l'historique des transactions avant de réessayer.",
           "tooltip": {
-            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. Les {{ tokenName }} sont des jetons ERC-20 que vous gagnez en prêtant vos actifs."
+            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. Les {{ tokenName }} sont des tokens ERC-20 que vous gagnez en prêtant vos actifs."
           }
         }
       }
@@ -859,7 +859,7 @@
     },
     "noEthAccount": {
       "title": "Merci de créer un compte ETH",
-      "description": "<0>{{ asset }}({{ ticker }})</0> est un jeton Ethereum ERC-20. Pour prêter des {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum.",
+      "description": "<0>{{ asset }}({{ ticker }})</0> est un token Ethereum ERC-20. Pour prêter des {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum.",
       "cta": "Ajouter un compte"
     },
     "emptyAccountDeposit": {
@@ -1073,8 +1073,8 @@
     "link": "En savoir plus",
     "seeTokens": "Afficher les tokens ({{tokenCount}})",
     "hideTokens": "Masquer les tokens ({{tokenCount}})",
-    "countTooltip": "1 jeton",
-    "countTooltip_plural": "{{count}} jetons",
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens",
     "algorand": {
       "title": "ASA (Actifs)",
       "cta": "Ajouter des ASA",
@@ -1137,7 +1137,7 @@
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "fullNodeConfigure": "Configurer le nœud",
-    "tokensTip": "{{token}} ({{ticker}}) est un jeton {{tokenType}}. Vous pouvez recevoir des jetons directement sur un compte {{currency}}.",
+    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -1197,9 +1197,9 @@
     "viewOperation": "Afficher dans l'explorateur",
     "showMore": "Afficher {{recipients}} autres",
     "showLess": "Afficher moins",
-    "tokenOperations": "Opérations de jetons",
+    "tokenOperations": "Opérations de tokens",
     "subAccountOperations": "Opérations du sous-compte",
-    "tokenTooltip": "Cette opération est liée aux opérations de jetons suivantes",
+    "tokenTooltip": "Cette opération est liée aux opérations de tokens suivantes",
     "subAccountTooltip": "Cette opération est liée aux opérations de sous-compte suivantes",
     "internalOperations": "Opérations internes",
     "internalOpTooltip": "Cette opération a des opérations internes.",
@@ -1235,7 +1235,7 @@
   },
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
-    "allowAppPermissionSubtitleToken": "pour gérer vos jetons {{token}}",
+    "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
     "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
     "loading": "Chargement...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
@@ -1340,8 +1340,8 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
-        "useAppForToken": "Gestion des jetons {{tokenType}}",
-        "tokenAppDisclaimer": "Pour gérer des jetons {{tokenName}} {{tokenType}}, <1>installez l'application {{appName}}</1> et vérifiez que vous avez bien la <1>version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
+        "useAppForToken": "Gestion des tokens {{tokenType}}",
+        "tokenAppDisclaimer": "Pour gérer des tokens {{tokenName}} {{tokenType}}, <1>installez l'application {{appName}}</1> et vérifiez que vous avez bien la <1>version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}"
@@ -1591,9 +1591,9 @@
         "title": "Compte",
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
-        "token": "2. Sélectionnez un jeton.",
-        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "token": "2. Sélectionnez un token.",
+        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
+        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1631,7 +1631,7 @@
       },
       "details": {
         "utxoLag": "Cette transaction peut prendre plus de temps à être vérifiée et signée car le compte a un nombre élevé de coins.",
-        "subaccountsWarning": "Vous devrez recharger ce compte avec des {{ currency }} afin d'envoyer les jetons de ce compte.",
+        "subaccountsWarning": "Vous devrez recharger ce compte avec des {{ currency }} afin d'envoyer les tokens de ce compte.",
         "from": "De",
         "to": "À",
         "selectAccountDebit": "Compte à débiter",
@@ -1763,7 +1763,7 @@
               },
               "candidates": {
                 "title": "Candidats",
-                "description": "127 personnes élues par le vote de la communauté des détenteurs de jetons. Les votes sont mis à jour toutes les 6 heures."
+                "description": "127 personnes élues par le vote de la communauté des détenteurs de tokens. Les votes sont mis à jour toutes les 6 heures."
               }
             }
           }
@@ -2542,14 +2542,14 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Masquer les comptes de jetons vides",
-        "desc": "Masquer les jetons ayant un solde nul sur la page Comptes."
+        "title": "Masquer les comptes de tokens vides",
+        "desc": "Masquer les tokens ayant un solde nul sur la page Comptes."
       },
       "tokenBlacklist": {
-        "title": "Jetons masqués",
-        "desc": "Vous pouvez masquer des jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
-        "count": "{{count}} jeton",
-        "count_plural": "{{count}} jetons"
+        "title": "Tokens masqués",
+        "desc": "Vous pouvez masquer des tokens en vous rendant sur le compte parent, en faisant un clic droit sur le token et en sélectionnant Cacher le token.",
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
       },
       "fullNode": {
         "title": "Connecter un nœud Bitcoin complet",
@@ -3759,7 +3759,7 @@
       "description": "Les transactions doivent être signées dans les 30 secondes. Veuillez réessayer."
     },
     "TronNotEnoughEnergy": {
-      "title": "Vous n'avez pas assez d'Énergie pour envoyer ce jeton."
+      "title": "Vous n'avez pas assez d'Énergie pour envoyer ce token."
     },
     "PairingFailed": {
       "title": "Échec du couplage",
