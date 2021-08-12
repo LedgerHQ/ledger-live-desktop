@@ -3,7 +3,7 @@
 
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { log } from "@ledgerhq/logs";
 import type {
   AccountRawLike,
@@ -24,6 +24,7 @@ import {
   fromSignedOperationRaw,
   toSignOperationEventRaw,
   formatTransaction,
+  formatTransactionStatus,
 } from "@ledgerhq/live-common/lib/transaction";
 import {
   fromAccountRaw,
@@ -115,7 +116,14 @@ const cmdAccountGetTransactionStatus = (o: {
   return from(
     bridge
       .getTransactionStatus(account, transaction)
-      .then((raw: TransactionStatus) => toTransactionStatusRaw(raw)),
+      .then((raw: TransactionStatus) => toTransactionStatusRaw(raw))
+      .then(status => {
+        log(
+          "transaction-summary",
+          `STATUS ${formatTransactionStatus(transaction, status, account)}`,
+        );
+        return status;
+      }),
   );
 };
 
@@ -130,13 +138,13 @@ const cmdAccountSignOperation = (o: {
   log("transaction-summary", `→ FROM ${formatAccount(account, "basic")}`);
   log("transaction-summary", `✔️ transaction ${formatTransaction(transaction, account)}`);
 
-  // log("transaction-summary", `STATUS ${formatTransactionStatus(transaction, status, mainAccount)}`);
-  // status, how to get it ?
-
   const bridge = bridgeImpl.getAccountBridge(account, null);
-  return bridge
-    .signOperation({ account, transaction, deviceId: o.deviceId })
-    .pipe(map(toSignOperationEventRaw));
+  return bridge.signOperation({ account, transaction, deviceId: o.deviceId }).pipe(
+    map(toSignOperationEventRaw),
+    tap(signedOperation => {
+      log("transation-summary", "✔️ has been signed!", { signedOperation });
+    }),
+  );
 };
 
 const cmdAccountBroadcast = (o: {
