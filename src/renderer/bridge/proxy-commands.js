@@ -24,7 +24,6 @@ import {
   fromSignedOperationRaw,
   toSignOperationEventRaw,
   formatTransaction,
-  formatTransactionStatus,
 } from "@ledgerhq/live-common/lib/transaction";
 import {
   fromAccountRaw,
@@ -134,8 +133,10 @@ const cmdAccountSignOperation = (o: {
   const bridge = bridgeImpl.getAccountBridge(account, null);
   return bridge.signOperation({ account, transaction, deviceId: o.deviceId }).pipe(
     map(toSignOperationEventRaw),
-    tap(signedOperation => {
-      log("transation-summary", "✔️ has been signed!", { signedOperation });
+    tap(e => {
+      if (e.type === "signed") {
+        log("transation-summary", "✔️ has been signed!", { signedOperation: e.signOperation });
+      }
     }),
   );
 };
