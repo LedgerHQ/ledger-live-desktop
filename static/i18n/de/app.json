@@ -1459,52 +1459,52 @@
         "title": "Bestätigung",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "textNRG": "Sie beginnen mit dem Verdienen von Energie, sobald das Netzwerk das Sperren bestätigt hat. Sie können in Kürze für Super-Repräsentanten stimmen, um ebenfalls Prämien zu verdienen.",
+          "text": "Sie beginnen, Bandbreite zu verdienen, sobald das Netzwerk das Sperren bestätigt hat. Sie können in Kürze für Super-Repräsentanten stimmen, um ebenfalls Prämien zu verdienen.",
+          "votePending": "Abstimmen in {{time}}",
+          "vote": "Abstimmen",
+          "later": "Später abstimmen"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "Vermögenswerte entsperren",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "Entsperren",
+        "info": "Durch das Aufheben der Sperrung werden Ihre {{resource}} verringert und Ihre Stimmen gelöscht."
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Bestätigung",
         "success": {
           "title": "",
-          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
-          "continue": "Continue"
+          "text": "Ihr Vermögen wurde erfolgreich entsperrt. Ihre {{resource}}-Punkte werden verringert, und Ihre Stimmen werden gelöscht.",
+          "continue": "Weiter"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
       }
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "Stimmen abgeben",
+    "titleExisting": "Stimmen verwalten",
     "steps": {
       "castVotes": {
         "max": "MAX",
-        "title": "Vote",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
-        "validators": "Validators ({{total}})",
-        "votes": "Available assets: {{total}}",
+        "title": "Abstimmen",
+        "search": "Suche nach Name oder Adresse ...",
+        "totalVotes": "Stimmen insgesamt: {{total}}",
+        "selected": "Ausgewählt: {{total}}",
+        "maxSelected": "Maximal ausgewählt: {{total}}",
+        "allVotesAreUsed": "Alle Vermögenswerte sind verteilt",
+        "maxUsed": "Unzureichende Vermögenswerte",
+        "validators": "Validatoren ({{total}})",
+        "votes": "Verfügbare Vermögenswerte: {{total}}",
         "noResults": "No validator found for \"<0>{{search}}</0>\"."
       },
       "connectDevice": {
