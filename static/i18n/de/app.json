@@ -1688,32 +1688,32 @@
     "value": "Wert",
     "showAll": "Alle anzeigen",
     "showLess": "Weniger anzeigen",
-    "header": "Zuweisung der Vermögenswerte ({{count}})"
+    "header": "Zuteilung der Vermögenswerte ({{count}})"
   },
   "accountDistribution": {
     "account": "Konto",
-    "distribution": "Zuweisung",
-    "amount": "Amount",
-    "value": "Value",
-    "header": "Account allocation ({{count}})"
+    "distribution": "Zuteilung",
+    "amount": "Betrag",
+    "value": "Wert",
+    "header": "Kontozuteilung ({{count}})"
   },
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "description": "Sie können jetzt durch Sperren und Abstimmen Prämien verdienen.",
+        "info": "Wie die Abstimmung funktioniert",
+        "votesDesc": "Geben Sie Ihre Stimme für einen oder mehrere Repräsentanten ab und beginnen Sie mit dem Sammeln von Einsatzprämien.",
+        "vote": "Stimmen abgeben",
+        "voteExisting": "Stimmen verwalten"
       },
-      "manageTP": "Manage assets",
+      "manageTP": "Vermögenswerte verwalten",
       "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Votes",
-      "percentageTP": "% of votes cast",
-      "noRewards": "No rewards available",
+      "claimRewards": "Prämie beanspruchen",
+      "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
+      "claimAvailableRewards": "Anspruch {{Betrag}}",
+      "header": "Abstimmungen",
+      "percentageTP": "% der abgegebenen Stimmen",
+      "noRewards": "Keine Prämien verfügbar",
       "remainingVotes": {
         "title": "You still have {{amount}} votes remaining",
         "description": "You can cast your remaining votes to earn more rewards",
@@ -1805,43 +1805,43 @@
         "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
-      "claimRewards": "Claim rewards",
-      "header": "Delegation(s)",
-      "noRewards": "No rewards available",
-      "delegate": "Add",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
-      "estYield": "est. yield",
-      "activeTooltip": "Delegated amounts generate rewards",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards",
-      "minSafeWarning": "Not enough funds",
+      "claimRewards": "Prämie beanspruchen",
+      "header": "Delegation(en)",
+      "noRewards": "Keine Prämien verfügbar",
+      "delegate": "Hinzufügen",
+      "undelegate": "Delegierung aufheben",
+      "redelegate": "Erneut delegieren",
+      "redelegateDisabledTooltip": "Sie können erneut delegieren <0>{{days}}</0>",
+      "redelegateMaxDisabledTooltip": "Sie können nicht mehr als <0>7</0> Validatoren auf einmal neu delegieren",
+      "undelegateDisabledTooltip": "Sie können die Delegierung nicht bei mehr als <0>7</0> Validatoren gleichzeitig aufheben",
+      "reward": "Prämien beanspruchen",
+      "currentDelegation": "Delegiert: <0>{{amount}}</0>",
+      "estYield": "geschätzter Ertrag",
+      "activeTooltip": "Delegierte Beträge generieren Prämien",
+      "inactiveTooltip": "Nicht-delegierte Beträge generieren keine Prämien",
+      "minSafeWarning": "Zu niedriges Guthaben",
       "flow": {
-        "title": "Delegate",
+        "title": "Delegieren",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "description": "Sie können Prämien verdienen, indem Sie Ihre ATOM-Vermögenswerte an einen Validator übertragen.",
             "bullet": [
-              "You keep ownership of delegated assets",
+              "Sie behalten das Eigentum an delegierten Vermögenswerten",
               "Delegate using your Ledger device",
-              "Assets will be available 21 days after undelegation"
+              "Vermögenswerte sind 21 Tage nach Rücknahme der Delegierung verfügbar"
             ],
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer übertragenen Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält."
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "Validatoren"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
