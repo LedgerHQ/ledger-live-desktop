@@ -6,8 +6,7 @@ const configDir = (() => {
   const { LEDGER_CONFIG_DIRECTORY } = process.env;
   if (LEDGER_CONFIG_DIRECTORY) return LEDGER_CONFIG_DIRECTORY;
   const electron = require("electron");
-  const remote = require("@electron/remote");
-  return (electron.app || remote.app).getPath("userData") || "__NOTHING_TO_REPLACE__";
+  return (electron.app || electron.remote.app).getPath("userData") || "__NOTHING_TO_REPLACE__";
 })();
 
 const cwd = typeof process === "object" ? process.cwd() || "." : "__NOTHING_TO_REPLACE__";
