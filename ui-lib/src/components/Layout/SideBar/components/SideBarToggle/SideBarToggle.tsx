@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import ArrowLeftIcon from "@ui/assets/icons/ArrowLeft";
 import ArrowRightIcon from "@ui/assets/icons/ArrowRight";
 import TransitionInOut from "@ui/components/Transition/TransitionInOut";
+import { SideBarContext } from "@ui/components/Layout/SideBar/SideBar";
 
 const ToggleButtonContainer = styled(TransitionInOut)`
   --ll-side-bar-toggle-button-size: 36px;
@@ -23,11 +24,15 @@ const ToggleButtonContainer = styled(TransitionInOut)`
   height: var(--ll-side-bar-toggle-button-size);
 `;
 
-type ToggleButtonProps = { onClick: () => void; isDisplayed: boolean; isExpanded?: boolean };
-const ToggleButton = ({ onClick, isDisplayed, isExpanded }: ToggleButtonProps): JSX.Element => (
-  <ToggleButtonContainer in={isDisplayed} appear mountOnEnter unmountOnExit onClick={onClick}>
-    {isExpanded ? <ArrowLeftIcon /> : <ArrowRightIcon />}
-  </ToggleButtonContainer>
-);
+type ToggleButtonProps = { isDisplayed: boolean };
+const ToggleButton = ({ isDisplayed }: ToggleButtonProps): JSX.Element => {
+  const { isExpanded, onToggle } = useContext(SideBarContext);
+
+  return (
+    <ToggleButtonContainer timeout={200} in={isDisplayed} appear unmountOnExit onClick={onToggle}>
+      {isExpanded ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+    </ToggleButtonContainer>
+  );
+};
 
 export default ToggleButton;

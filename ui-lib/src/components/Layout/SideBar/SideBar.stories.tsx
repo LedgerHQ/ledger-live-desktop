@@ -11,6 +11,7 @@ import ManagerIcon from "@ui/assets/icons/Manager";
 import PortfolioIcon from "@ui/assets/icons/Portfolio";
 import ReceiveIcon from "@ui/assets/icons/Receive";
 import SendIcon from "@ui/assets/icons/Send";
+import { useArgs } from "@storybook/client-api";
 
 export default {
   title: "Layout/SideBar",
@@ -27,9 +28,14 @@ export default {
   },
 };
 
+
 const Template = (args: SideBarProps) => {
+  const [currentArgs, updateArgs] = useArgs();
+  
+  const handleToggle = () => updateArgs({ isExpanded: !currentArgs.isExpanded });
+  
   return (
-    <SideBar {...args}>
+    <SideBar {...args} onToggle={handleToggle}>
         <SideBar.Item  onClick={action('go to portfolio')} label="portfolio"><PortfolioIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to accounts')} label="accounts" isActive><AccountsIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to discover')} label="discover" isDisable><DiscoverIcon /></SideBar.Item>
@@ -44,5 +50,6 @@ const Template = (args: SideBarProps) => {
 
 export const Default = Template.bind({});
 Default.args = {
-  onToggle: action('toggle sidebar') 
+  onToggle: action('toggle sidebar'),
+  isExpanded: true,
 };

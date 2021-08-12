@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Text from "@ui/components/Text";
+import { SideBarContext } from "@ui/components/Layout/SideBar/SideBar";
+import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 
 const Item = styled.li`
   /** DEFAULT VARIANT **/
@@ -14,6 +16,7 @@ const Item = styled.li`
   column-gap: 0.875rem;
   padding: 0.875rem 1rem;
   border-radius: 8px;
+  min-height: 52px;
 
   color: var(--ll-sidebar-item-icon-color);
   background-color: var(--ll-sidebar-item-background-color);
@@ -44,7 +47,8 @@ const Item = styled.li`
   }
 `;
 
-const Label = styled(Text)`
+export const SideBarItemLabel = styled(Text)`
+  display: inline-block;
   color: var(--ll-sidebar-item-label-color);
 
   &:first-letter {
@@ -67,6 +71,8 @@ const SideBarItem = ({
   isActive,
   isDisable,
 }: SideBarItemType): JSX.Element => {
+  const { isExpanded } = useContext(SideBarContext);
+
   const handleClick = () => {
     if (isDisable) return;
     onClick();
@@ -75,7 +81,15 @@ const SideBarItem = ({
   return (
     <Item role="button" onClick={handleClick} data-active={isActive} data-disable={isDisable}>
       {children}
-      <Label type="cta">{label}</Label>
+      <TransitionInOut
+        timeout={300}
+        in={isExpanded}
+        unmountOnExit
+        mountOnEnter
+        style={{ transitionDelay: isExpanded ? "300ms" : 0 }}
+      >
+        <SideBarItemLabel type="cta">{label}</SideBarItemLabel>
+      </TransitionInOut>
     </Item>
   );
 };
