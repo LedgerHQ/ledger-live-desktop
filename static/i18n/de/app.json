@@ -1135,21 +1135,21 @@
     "success": "Konto erfolgreich hinzugefügt",
     "success_plural": "Konten erfolgreich hinzugefügt",
     "successDescription": "Andere Konten hinzufügen oder zum Portfolio zurückkehren",
-    "successDescription_plural": "Add other accounts or return to Portfolio",
+    "successDescription_plural": "Andere Konten hinzufügen oder zum Portfolio zurückkehren",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "Show all address types",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "noOperationOnLastAccount": "Sie können kein neues Konto hinzufügen, bevor Sie Guthaben auf Ihrem <1><0>{{accountName}}</0></1> Konto erhalten haben",
+      "noAccountToCreate": "Es wurde kein <1><0>{{currencyName}}}}</0></1> Konto gefunden, das erstellt werden kann",
+      "showAllAddressTypes": "Alle Adresstypen anzeigen",
+      "showAllAddressTypesTooltip": "Ändern Sie den Adresstyp nur, wenn Sie über ältere Adressformate {{family}} empfangen müssen."
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "Segwit oder Native Segwit?"
     },
     "cta": {
-      "addMore": "Add more",
-      "add": "Add account",
-      "add_plural": "Add accounts",
-      "addAccountName": "Add {{currencyName}} account",
+      "addMore": "Mehr hinzufügen",
+      "add": "Konto hinzufügen",
+      "add_plural": "Konten hinzufügen",
+      "addAccountName": "{{currencyName}} Konto hinzufügen",
       "receive": "Empfangen"
     },
     "sections": {
@@ -1215,62 +1215,62 @@
       "bondedAmount": "Gebundener Betrag",
       "unbondedAmount": "Ungebundener Betrag",
       "withdrawUnbondedAmount": "Abgehobener Betrag",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "palletMethod": "Methode",
+      "transferAmount": "Betrag transferieren",
+      "validatorsCount": "Validator ({{number}})"
     }
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "Das ist alles"
   },
   "DeviceAction": {
-    "allowAppPermission": "Open the {{wording}} app on your device",
-    "allowAppPermissionSubtitleToken": "to manage your {{token}} tokens",
-    "allowManagerPermission": "Allow {{wording}} on your device",
-    "loading": "Loading...",
-    "connectAndUnlockDevice": "Connect and unlock your device",
-    "unlockDevice": "Unlock your device",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
-    "quitApp": "Quit the application on your device",
-    "appNotInstalledTitle": "Missing required app",
-    "appNotInstalledTitle_plural": "Missing required apps",
-    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
-    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
-    "openManager": "Open Manager",
-    "outdated": "App version outdated",
-    "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
-    "listApps": "Checking App dependencies",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps",
+    "allowAppPermission": "Öffnen Sie die {{wording}} App auf Ihrem Gerät",
+    "allowAppPermissionSubtitleToken": "zum Verwalten Ihrer {{token}}-Tokens",
+    "allowManagerPermission": "Erlauben Sie {{wording}} auf Ihrem Gerät",
+    "loading": "Lade Daten...",
+    "connectAndUnlockDevice": "Verbinden und entsperren Sie Ihr Gerät",
+    "unlockDevice": "Entsperren Sie Ihr Gerät",
+    "unlockDeviceAfterFirmwareUpdate": "Warten Sie auf die Aktualisierung der Firmware und entsperren Sie Ihr Gerät mit Ihrer PIN",
+    "quitApp": "Beenden Sie die Anwendung auf Ihrem Gerät",
+    "appNotInstalledTitle": "Fehlende, erforderliche App",
+    "appNotInstalledTitle_plural": "Fehlende, erforderliche Apps",
+    "appNotInstalled": "Die App {{appName}} ist erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
+    "appNotInstalled_plural": "Die Apps {{appName}} sind erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
+    "openManager": "Manager öffnen",
+    "outdated": "App-Version veraltet",
+    "outdatedDesc": "Ein wichtiges Update ist für die Anwendung {{appName}} auf Ihrem Gerät verfügbar. Bitte gehen Sie zum Manager, um das Update durchzuführen.",
+    "installApp": "{{appName}} App-Installation",
+    "installAppDescription": "Bitte warten Sie, bis die Installation beendet ist",
+    "listApps": "Prüfen von App-Abhängigkeiten",
+    "listAppsDescription": "Bitte warten Sie, während wir sicherstellen, dass Sie alle erforderlichen Apps haben",
     "swap": {
-      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction",
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "amountReceivedFloat": "Amount to receive before service fees",
-      "fees": "Fees",
+      "notice": "Überprüfen Sie die Details des Tauschs auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen.",
+      "confirm": "Swap-Transaktion bestätigen",
+      "amountSent": "Zu sendender Betrag",
+      "amountReceived": "Zu erhaltender Betrag",
+      "amountReceivedFloat": "Zu erhaltender Betrag vor Servicegebühren",
+      "fees": "Gebühren",
       "provider": "Provider",
-      "payoutNetworkFees": "Payout fees",
-      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      "payoutNetworkFees": "Auszahlungsgebühren",
+      "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt"
     },
     "sell": {
-      "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Sell transaction"
+      "notice": "Überprüfen Sie die Verkaufsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen.",
+      "confirm": "Verkaufstransaktion bestätigen"
     }
   },
   "manager": {
     "tabs": {
-      "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
-      "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appCatalog": "App-Katalog",
+      "appCatalogSearch": "App im Katalog suchen ...",
+      "appsOnDevice": "Installierte Apps",
+      "appOnDeviceSearch": "Installierte Apps suchen..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "No storage left",
+      "freeSpace": "<0>{{space}}</0> frei",
+      "noFreeSpace": "Kein Speicher mehr frei",
       "installed": "Apps",
-      "capacity": "Capacity",
+      "capacity": "Kapazität",
       "used": "Used",
       "firmwareAvailable": "Firmware is outdated:",
       "firmwareUpToDate": "Firmware is up to date:",
