@@ -1313,9 +1313,9 @@
       },
       "updatable": {
         "title": "Update available",
-        "title_plural": "Updates available",
+        "title_plural": "доступных обновлений(-ия)",
         "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "progressTitle_plural": "Обновления приложений: {{number}}",
         "progressWarning": "Не выходите из Диспетчера в процессе обновления.",
         "progress": "Обновляем всё..."
       },
