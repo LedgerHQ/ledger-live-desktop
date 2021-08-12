@@ -1,7 +1,7 @@
 const core = require("@actions/core");
 
 const main = async () => {
-  const images = JSON.parse(core.getInput("images"));
+  const images = core.getInput("images");
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
   const from = core.getInput("from");

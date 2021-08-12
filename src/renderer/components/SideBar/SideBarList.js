@@ -82,7 +82,7 @@ class SideBarList extends Component<Props> {
 const SideBarListTitle = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
-  color: "palette.text.shade100",
+  color: "red",
   ff: "Inter|ExtraBold",
   fontSize: 1,
   px: 4,
