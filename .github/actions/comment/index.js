@@ -1,12 +1,8 @@
 const core = require("@actions/core");
+const fetch = require("isomorphic-unfetch");
 const { promises: fs } = require("fs");
 
 const main = async () => {
-  /*testoutput: ./output.txt
-          lintoutput: ./lint.txt
-          jestoutput: ./jest.txt
-          imgChanged: ./imgChanged.txt*/
-
   const images = core.getInput("images");
   const runId = core.getInput("runId");
   const pullId = core.getInput("pullId");
@@ -134,6 +130,8 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
   core.setOutput("slackAuthor", githubSlackMap[author] || "");
+
+  console.log(str);
 
   const prNumber = core.getInput("prNumber");
 

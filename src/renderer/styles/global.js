@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   ${reset};
   
   #react-root {
-    background-color: red;
+    background-color: ${p => p.theme.colors.palette.background.default};
   }
 
   .tippy-content {

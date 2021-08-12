@@ -94,7 +94,7 @@ jobs:
           git fetch ledger
           git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
         if: always() && github.event_name == 'pull_request'
-      - name: prepare comment body
+      - name: send comment
         if: always() && job.status != 'cancelled'
         id: comment
         uses: ./.github/actions/comment
