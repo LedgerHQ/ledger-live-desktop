@@ -14,7 +14,7 @@ outputs:
     description: slack handle of the author
 inputs:
   images:
-    description: array of images to include in body of comment
+    description: stringified array of images to include in body of comment
     required: true
   fullrepo:
     description: full repo name

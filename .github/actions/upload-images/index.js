@@ -58,7 +58,7 @@ const uploadImage = async () => {
     };
   });
 
-  core.setOutput("images", res);
+  core.setOutput("images", JSON.stringify(res));
 };
 
 uploadImage().catch(err => {
