@@ -803,7 +803,7 @@
     },
     "info": {
       "terms": {
-        "title": "Krypto leihen",
+        "title": "Krypto verleihen",
         "subtitle": "Verleihen von Vermögenswerten über das Compound-Protokoll",
         "description": "Das Compound-Protokoll ermöglicht es Ihnen, Vermögenswerte im Ethereum-Netzwerk zu leihen und zu verleihen. Sie können Vermögenswerte verleihen und Zinsen direkt von Ihrem Ledger-Konto erhalten.",
         "switchLabel": "<1>Ich habe die </1><0>Nutzungsbedingungen gelesen und bin damit einverstanden</0><1>.</1>"
