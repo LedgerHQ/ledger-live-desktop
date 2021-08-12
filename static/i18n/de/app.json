@@ -1634,65 +1634,65 @@
         "subaccountsWarning": "Sie müssen dieses Konto mit {{ Währung }} auffüllen, um die Token dieses Kontos versenden zu können",
         "from": "Von",
         "to": "Nach",
-        "selectAccountDebit": "Account to debit",
-        "recipientAddress": "Recipient address",
-        "amount": "Amount",
-        "fees": "Network fees",
-        "useMax": "Send Max",
+        "selectAccountDebit": "Zu belastendes Konto",
+        "recipientAddress": "Adresse des Empfängers",
+        "amount": "Betrag",
+        "fees": "Netzwerk-Gebühren",
+        "useMax": "Maximum senden",
         "rippleTag": "Tag",
         "rippleTagPlaceholder": "Optional",
-        "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "ethereumGasLimit": "Gas Limit",
+        "ethereumGasPrice": "Gaspreis",
+        "unitPerByte": "{{unit}} pro Byte"
       },
       "verification": {
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "Laden ... ({{percentage}})",
+          "inaccurate": "Lade Daten ..."
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "Bestätigung",
         "success": {
-          "title": "Transaction sent",
-          "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "View details"
+          "title": "Transaktion gesendet",
+          "text": "Ihr Kontostand wird aktualisiert, wenn die Blockchain die Transaktion bestätigt",
+          "cta": "Details anzeigen"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "Übermittlung der Transaktion ..."
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
       },
       "warning": {
         "tezos": {
-          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+          "text": "Der zu sendende Betrag wird vom Saldo Ihres delegierten Kontos abgezogen."
         }
       }
     },
     "footer": {
-      "estimatedFees": "Network fees"
+      "estimatedFees": "Netzwerk-Gebühren"
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "Transaktion unterschreiben"
   },
   "releaseNotes": {
-    "title": "Release notes",
+    "title": "Informationen zur Version",
     "version": "Ledger Live {{versionNb}}"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
-    "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Asset allocation ({{count}})"
+    "asset": "Vermögenswert",
+    "price": "Preis",
+    "distribution": "Zuweisung",
+    "amount": "Betrag",
+    "value": "Wert",
+    "showAll": "Alle anzeigen",
+    "showLess": "Weniger anzeigen",
+    "header": "Zuweisung der Vermögenswerte ({{count}})"
   },
   "accountDistribution": {
-    "account": "Account",
-    "distribution": "Allocation",
+    "account": "Konto",
+    "distribution": "Zuweisung",
     "amount": "Amount",
     "value": "Value",
     "header": "Account allocation ({{count}})"
