@@ -3171,10 +3171,10 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "Légal",
+    "termsLabel": "Conditions d'utilisation",
+    "privacyLabel": "Politique de confidentialité",
+    "switchLabel": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
     "cta": "Entrer dans l'application Ledger Live"
   },
   "families": {
