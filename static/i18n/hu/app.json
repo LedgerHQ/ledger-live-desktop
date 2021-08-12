@@ -3171,11 +3171,10 @@
     "placeholder": "Írd be a(z) {{currencyName}} címet"
   },
   "Terms": {
-    "title": "Felhasználási feltételek",
-    "read": "Olvasd el a Felhasználási feltételeket",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Enter Ledger app"
   },
   "families": {

@@ -53,7 +53,7 @@
       "title": "Application externe",
       "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
       "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
-      "checkbox": "Ne plus me le rappeler.",
+      "checkbox": "Ne plus me le rappeler",
       "CTA": "Continuer"
     }
   },
@@ -611,7 +611,7 @@
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
       "header": "Acheter des cryptos avec {{provider}}",
-      "title": "Achetez des cryptos en utilisant <0>{{provider}}</0>.",
+      "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
       "tab": "Acheter",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
@@ -620,7 +620,7 @@
     },
     "sell": {
       "header": "Vendre des cryptos avec {{provider}}",
-      "title": "Vendez des cryptos en utilisant <0>{{provider}}</0>.",
+      "title": "Vendez des cryptos avec <0>{{provider}}</0>.",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
@@ -806,7 +806,7 @@
         "title": "Prêter des cryptos",
         "subtitle": "Prêter des actifs sur le protocole Compound",
         "description": "Le protocole Compound vous permet de prêter et d'emprunter des actifs sur le réseau Ethereum. Vous pouvez prêter vos actifs et gagner des intérêts directement depuis votre compte Ledger Live.",
-        "switchLabel": "<1>J'ai lu et j'accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
+        "switchLabel": "<1>J'ai lu et accepte les </1><0>Conditions d'utilisation</0><1>.</1>"
       },
       "steps": {
         "title": "Étape <0>{{step}} / {{total}}</0>",
@@ -874,7 +874,7 @@
       "week": "Semaine",
       "month": "Mois",
       "year": "Année",
-      "all": "Tous"
+      "all": "Tout"
     },
     "optionsMenu": {
       "title": "Options",
@@ -1032,7 +1032,7 @@
     "title": "Adresse actuelle",
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
-    "messageIfSkipped": "Votre {{name}} adresse n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale."
+    "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale."
   },
   "emptyState": {
     "dashboard": {
@@ -2009,9 +2009,9 @@
       "electionOpen": "L'élection de nouveaux validateurs est en cours. Les opérations de staking sont donc indisponibles pendant 15 minutes.",
       "electionOpenTooltip": "Cette opération est désactivée lors de l'élection des validateurs.",
       "externalControllerTooltip": "Ce compte est contrôlé par un autre compte.",
-      "externalControllerUnsupported": "<0>Ce compte stash est contrôlé par un autre compte dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de staking sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Merci d'utiliser un autre wallet comme Polkadot.js</1>.",
+      "externalControllerUnsupported": "<0>Ce compte stash est contrôlé par un autre compte dont l'adresse est <0>{{address}}</0>.</0><1>Les opérations de staking sur des comptes contrôlés par un autre compte ne sont pas prises en charge dans Ledger Live. Merci d'utiliser un autre wallet comme Polkadot.js</1>.",
       "externalStashTooltip": "Ce compte contrôle un autre compte.",
-      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>. /0><1>Les opérations de staking sur des comptes stash distincts ne sont pas prises en charge dans Ledger Live. Merci d'utiliser un autre wallet comme Polkadot.js</1>.",
+      "externalStashUnsupported": "<0>Ce compte contrôle un compte stash dont l'adresse est <0>{{address}}</0>.</0><1>Les opérations de staking sur des comptes stash distincts ne sont pas prises en charge dans Ledger Live. Merci d'utiliser un autre wallet comme Polkadot.js</1>.",
       "showInactiveNominations": "Afficher toutes les nominations ({{count}})",
       "hideInactiveNominations": "Afficher uniquement les nominations actives",
       "noActiveNominations": "Il n'y a aucune nomination active.",
@@ -2319,7 +2319,7 @@
   },
   "settings": {
     "title": "Paramètres",
-    "discreet": "Basculer en mode discret",
+    "discreet": "Mode discret",
     "helpButton": "Aide",
     "tabs": {
       "display": "Général",
@@ -2383,7 +2383,7 @@
       "runLocalAppOpenButton": "Open"
     },
     "currencies": {
-      "selectPlaceholder": "Choisissez un crypto-actif",
+      "selectPlaceholder": "Crypto-actif",
       "desc": "Sélectionnez un crypto-actif pour modifier ses paramètres.",
       "placeholder": "Aucun paramètre pour cet actif",
       "confirmationsNb": "Nombre de confirmations",
@@ -2659,7 +2659,7 @@
         "options": {
           "1": {
             "heading": "Initialisation",
-            "title": "Configurer un nouveau {{deviceName}}",
+            "title": "Configurer un {{deviceName}}",
             "description": "Commencez par configurer votre nouvel appareil."
           },
           "2": {
@@ -3171,11 +3171,10 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Conditions d'utilisation",
-    "read": "Lire les Conditions d'utilisation",
-    "switchLabelTerms": "<0>J'ai lu et j'accepte les</0> <1>Conditions d'utilisation</1>.",
-    "switchLabelPrivacyPolicy": "<0>J'ai lu et j'accepte la</0> <1>Politique de confidentialité</1>.",
-    "switchLabelLoss": "Je comprends que si je perds cette phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à Nano.",
+    "title": "Légal",
+    "termsLabel": "Conditions d'utilisation",
+    "privacyLabel": "Politique de confidentialité",
+    "switchLabel": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
     "cta": "Entrer dans l'application Ledger Live"
   },
   "families": {
