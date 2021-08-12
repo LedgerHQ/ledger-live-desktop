@@ -3171,11 +3171,10 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Conditions d'utilisation",
-    "read": "Lire les Conditions d'utilisation",
-    "switchLabelTerms": "<0>J'ai lu et accepte les</0> <1>Conditions d'utilisation</1>.",
-    "switchLabelPrivacyPolicy": "<0>J'ai lu et accepte la</0> <1>Politique de confidentialité</1>.",
-    "switchLabelLoss": "Je comprends que si je perds cette phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Entrer dans l'application Ledger Live"
   },
   "families": {
