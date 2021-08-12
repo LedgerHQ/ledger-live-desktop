@@ -92,8 +92,8 @@ export const SettingsSectionRowContainer: ThemedComponent<{ inset?: boolean }> =
 )``;
 
 type SettingsSectionRowProps = {
-  title?: string,
-  desc: string,
+  title?: string | React$Node,
+  desc: string | React$Node,
   children?: any,
   onClick?: () => void,
   inset?: boolean,
