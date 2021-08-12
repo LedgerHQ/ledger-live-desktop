@@ -1565,75 +1565,75 @@
         "success": {
           "title": "Ihre Stimmen wurden erfolgreich abgegeben.",
           "text": "",
-          "cta": "View details"
+          "cta": "Details anzeigen"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
       }
     }
   },
   "buy": {
-    "title": "Buy",
-    "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
-    "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without my device"
+    "title": "Kaufen",
+    "titleCrypto": "{{currency}} kaufen",
+    "buyCTA": "{{currencyTicker}} kaufen",
+    "withoutDevice": "Weiter ohne mein Gerät",
+    "connectWithoutDevice": "Für eine optimale Sicherheit ist es besser, Ihr Gerät zu verwenden.",
+    "skipConnect": "Weiter ohne mein Gerät"
   },
   "sell": {
-    "title": "Sell",
-    "titleCrypto": "Sell {{currency}}"
+    "title": "Verkaufen",
+    "titleCrypto": "{{currency}} verkaufen"
   },
   "receive": {
-    "title": "Receive",
-    "successTitle": "Address shared securely",
+    "title": "Empfangen",
+    "successTitle": "Adresse sicher freigegeben",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
-        "label": "Account to credit",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "title": "Konto",
+        "label": "Zu belastendes Konto",
+        "parentAccount": "1. {{currencyName}} Konto wählen",
+        "token": "2. Token auswählen",
+        "verifyTokenType": "Bitte vergewissern Sie sich, dass <0>{{token}}</0> ein <0>{{tokenType}}</0> Token ist. Jeder andere Krypto-Vermögenswert, der an ein {{currency}}-Konto gesendet wird, kann verloren gehen.",
+        "warningTokenType": "Bitte senden Sie nur <0>{{ticker}}</0> oder <0>{{tokenType}}</0> Token auf ein {{currency}} Konto. Alle anderen Krypto-Vermögenswerte können verloren gehen."
       },
       "connectDevice": {
-        "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "title": "Gerät",
+        "withoutDevice": "Sie haben Ihr Gerät nicht dabei?"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "Empfangen"
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "Der Betrag, der auf einem delegierten Konto eingeht, wird zum eingesetzten Gesamtbetrag addiert. Wählen Sie ein anderes Konto, wenn Sie dies vermeiden möchten."
         }
       }
     }
   },
   "send": {
-    "title": "Send",
-    "totalSpent": "Total to debit",
+    "title": "Senden",
+    "totalSpent": "Zu belastende Summe",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "Empfänger"
       },
       "amount": {
-        "title": "Amount",
-        "banner": "Maximum spendable amount is",
-        "fees": "Fees",
+        "title": "Betrag",
+        "banner": "Maximaler Auszahlungsbetrag ist",
+        "fees": "Gebühren",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "Erweitert"
       },
       "summary": {
-        "title": "Summary"
+        "title": "Zusammenfassung"
       },
       "device": {
         "title": "Device"
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
-        "from": "From",
-        "to": "To",
+        "subaccountsWarning": "Sie müssen dieses Konto mit {{ Währung }} auffüllen, um die Token dieses Kontos versenden zu können",
+        "from": "Von",
+        "to": "Nach",
         "selectAccountDebit": "Account to debit",
         "recipientAddress": "Recipient address",
         "amount": "Amount",
