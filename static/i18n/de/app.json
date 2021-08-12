@@ -1843,54 +1843,54 @@
           "confirmation": {
             "title": "Bestätigung",
             "success": {
-              "title": "You have successfully delegated your assets",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
+              "title": "Sie haben Ihre Vermögenswerte erfolgreich delegiert",
+              "text": "Ihr Kontostand wird aktualisiert, wenn die Blockchain die Transaktion bestätigt.",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "Prämien beanspruchen",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
-            "compound": "Compound",
-            "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "Rewards will be added to delegated amount",
-            "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
-            "selectLabel": "Select a delegation"
+            "title": "Prämien",
+            "compound": "Zusammenrechnen",
+            "claim": "Einzahlen",
+            "compoundOrClaim": "Verbinden oder einkassieren",
+            "compoundDescription": "Prämien werden dem delegierten Betrag hinzugefügt",
+            "claimDescription": "Die Prämien werden dem verfügbaren Guthaben hinzugefügt",
+            "compoundInfo": "Sie haben <0>{{amount}}</0> verdient. Wenn Sie auf Weiter klicken, werden sie jetzt beansprucht und automatisch an denselben Validator delegiert.",
+            "claimInfo": "Sie haben <0>{{amount}}</0> vom unten stehenden Validator erhalten. Wenn Sie auf Weiter klicken, werden sie jetzt beansprucht und automatisch zum verfügbaren Guthaben hinzugefügt.",
+            "selectLabel": "Wählen Sie eine Delegation"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
+            "title": "Bestätigung",
+            "label": "Bestätigung",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards were added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "Erfolgreich eingelöste Prämien",
+              "titleCompound": "Erfolgreich zusammengerechnete Prämien",
+              "text": "Ihre Prämien wurden zu Ihrem verfügbaren Guthaben hinzugefügt",
+              "textCompound": "Ihre Prämien <0>{{amount}}</0> wurden automatisch an <0>{{validator}}</0> übertragen",
+              "cta": "Details anzeigen"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "Übermittlung der Transaktion ..."
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "Vermögenswerte zurückübertragen",
         "steps": {
           "starter": {
             "title": "Redelegation",
@@ -1990,47 +1990,47 @@
         "title": "Claim rewards",
         "steps": {
           "starter": {
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "description": "Erhalten Sie Algorand-Prämien einfach dafür, dass Sie die Kontrolle über ihr Algorand-Vermögen haben.",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
-              "access": "Increase the account’s balance to increase rewards.",
+              "delegate": "Um Prämien zu erhalten, ist ein Mindestguthaben von 1 ALGO erforderlich.",
+              "access": "Erhöhen Sie das Guthaben des Kontos, um die Prämien zu erhöhen.",
               "ledger": "Perform a transaction to or from the account to claim rewards."
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "Wie funktionieren Algorand-Prämien?",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "Algo empfangen"
             }
           },
           "info": {
-            "title": "Rewards",
+            "title": "Prämien",
             "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "info": "Sie werden aufgefordert, eine leere Transaktion auf Ihrem Konto zu erzeugen. Dadurch werden Ihre aktuellen Prämien zu den minimalen Kosten der Transaktionsgebühren zu Ihrem Guthaben hinzugefügt."
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "Rewards successfully claimed!",
-              "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "title": "Prämien erfolgreich eingefordert!",
+              "text": "Ihre Prämien wurden zu Ihrem verfügbaren Guthaben hinzugefügt",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded",
-    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
-    "unlockingBalance": "Unbonding",
-    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
-    "unlockedBalance": "Unbonded",
-    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "lockedBalance": "Gebunden",
+    "lockedTooltip": "Vermögenswerte müssen an nominierte Validatoren gebunden werden, bevor Sie Prämien erhalten.",
+    "unlockingBalance": "Entbinden",
+    "unlockingTooltip": "Nicht gebundene Guthaben bleiben für 28 Tage gesperrt, bevor sie abgehoben werden können.",
+    "unlockedBalance": "Entbunden",
+    "unlockedTooltip": "Nicht gebundene Vermögenswerte können jetzt mit der Aktion „Zurückziehen“ verschoben werden.",
+    "networkFees": "Die Netzwerkgebühren werden automatisch durch den Polkadot-Konsens festgelegt, Sie können sie nicht auf Ihrem Gerät überprüfen",
+    "bondedBalanceBelowMinimum": "Ihr Anleiheguthaben liegt unter dem aktuellen Minimum von {{minimumBondBalance}}. Es besteht die Gefahr, dass Ihre Nominierungen entfernt werden.",
     "nomination": {
       "emptyState": {
         "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
