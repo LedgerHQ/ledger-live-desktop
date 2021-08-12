@@ -3171,11 +3171,10 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Términos de uso",
-    "read": "Leer los Términos de uso",
-    "switchLabelTerms": "<0>He leído y acepto los</0> <1>Términos de Uso</1>.",
-    "switchLabelPrivacyPolicy": "<0>He leído y acepto la</0> <1> Política de Privacidad</1>",
-    "switchLabelLoss": "Comprendo que si pierdo la frase de recuperación no podré acceder a mis criptos en caso de no tener acceso a mi Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
