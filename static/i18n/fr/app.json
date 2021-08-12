@@ -574,7 +574,7 @@
     "emptyState": {
       "title": "Vous n'avez pas encore de crypto-actifs ?",
       "desc": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
-      "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée pour recevoir des <3><0>{{ticker}}</0></3> et des jetons <5><0>{{tokenList}}</0></5>.",
+      "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée pour recevoir des <3><0>{{ticker}}</0></3> et des tokens <5><0>{{tokenList}}</0></5>.",
       "buttons": {
         "receiveFunds": "Recevoir",
         "buy": "Acheter"
@@ -898,7 +898,7 @@
       "buy": "Acheter",
       "sell": "Vendre",
       "edit": "Modifier le compte",
-      "hideToken": "Masquer le jeton"
+      "hideToken": "Masquer le token"
     }
   },
   "help": {
@@ -933,9 +933,9 @@
     }
   },
   "blacklistToken": {
-    "title": "Masquer le jeton",
+    "title": "Masquer le token",
     "desc": "Cette action masquera tous vos comptes <1><0>{{tokenName}}</0></1>. Vous pouvez restaurer leur visibilité à tout moment dans les <3>Paramètres</3>",
-    "hideCTA": "Masquer le jeton"
+    "hideCTA": "Masquer le token"
   },
   "banners": {
     "cleanCache": {
@@ -1067,12 +1067,12 @@
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "tokensList": {
-    "title": "Jetons",
-    "cta": "Ajouter un jeton",
-    "placeholder": "Pour ajouter des jetons, envoyez-les simplement sur votre adresse {{currencyName}}.",
+    "title": "Tokens",
+    "cta": "Ajouter un token",
+    "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse {{currencyName}}.",
     "link": "En savoir plus",
-    "seeTokens": "Afficher les jetons ({{tokenCount}})",
-    "hideTokens": "Masquer les jetons ({{tokenCount}})",
+    "seeTokens": "Afficher les tokens ({{tokenCount}})",
+    "hideTokens": "Masquer les tokens ({{tokenCount}})",
     "countTooltip": "1 jeton",
     "countTooltip_plural": "{{count}} jetons",
     "algorand": {
