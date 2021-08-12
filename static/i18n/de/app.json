@@ -1077,64 +1077,64 @@
   "subAccounts": {
     "title": "Unterkonten",
     "seeSubAccounts": "Unterkonten anzeigen ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "hideSubAccounts": "Unterkonten ausblenden ({{tokenCount}})",
+    "countTooltip": "1 Unterkonto",
+    "countTooltip_plural": "{{count}} Unterkonten"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "successTitle": "Accounts updated successfully",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
-      "mobileTitle": "Export accounts to mobile",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
-      "description": "New features in Ledger Live require an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
-      "doItLaterBtn": "Do it later"
+      "title": "Ledger Live-Konten Update",
+      "successTitle": "Konten erfolgreich aktualisiert",
+      "successDescPlu": "Ihre {{Vermögenswert}}-Konten sind nun aktualisiert und einsatzbereit",
+      "successDesc": "Ihr {{assets}}-Konto ist nun aktualisiert und einsatzbereit",
+      "mobileTitle": "Konten zu Mobile exportieren",
+      "mobileDesc": "Klicken Sie auf die Schaltfläche unten, um Ihre aktualisierten Konten in die Ledger Live Mobile App zu exportieren.",
+      "mobileCTA": "Exportieren zu Mobile",
+      "description": "Neue Funktionen in Ledger Live erfordern eine Aktualisierung Ihrer Konten.",
+      "currency": "1 {{currency}}-Konto muss aktualisiert werden:",
+      "currency_plural": "{{count}} {{currency}} Konten müssen aktualisiert werden:",
+      "footer": "Sie benötigen Ihr Ledger Gerät, um das Update abzuschließen",
+      "pendingDevices": "1 Konto konnte nicht aktualisiert werden. Bitte schließen Sie das mit dem nachstehenden Konto verbundene Gerät an",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} Konten konnten nicht aktualisiert werden. Bitte verbinden Sie das mit dem nachstehenden Konto verbundene Gerät",
+      "doItLaterBtn": "Später erledigen"
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "{{currencyName}} Aktualisierung abgeschlossen",
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
-        "description": "Please wait for your accounts to be updated"
+        "title": "{{currencyName}} Aktualisierung wird durchgeführt ...",
+        "description": "Bitte warten Sie, bis Ihre Konten aktualisiert sind"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "{{Währungsbezeichnung}} Aktualisierung unvollständig",
+        "description": "Keine {{currencyName}}-Konten zu aktualisieren"
       }
     },
     "cta": {
-      "startUpdate": "Start update",
-      "nextCurrency": "Continue with {{currency}} update"
+      "startUpdate": "Update starten",
+      "nextCurrency": "Weiter mit {{currency}} Update"
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "Konten hinzufügen",
     "breadcrumb": {
-      "informations": "Crypto asset",
-      "connectDevice": "Device",
-      "import": "Accounts",
-      "finish": "Confirmation"
+      "informations": "Krypto-Vermögenswert",
+      "connectDevice": "Gerät",
+      "import": "Konten",
+      "finish": "Bestätigung"
     },
-    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
-    "fullNodeConfigure": "Configure node",
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
-    "success": "Account added successfully",
-    "success_plural": "Accounts added successfully",
-    "successDescription": "Add other accounts or return to Portfolio",
+    "fullNodeReadyInfo": "Die Konten werden über Ihren Bitcoin-Knoten (Full Node) hinzugefügt.",
+    "fullNodeConfigure": "Knoten konfigurieren",
+    "tokensTip": "{{token}} ({{ticker}}) ist ein {{tokenType}} Token. Sie können Token direkt auf einem {{currency}}-Konto empfangen.",
+    "accountToImportSubtitle_plural": "Bestehende Konten hinzufügen",
+    "selectAll": "Alle auswählen ({{count}})",
+    "unselectAll": "Alle abwählen ({{count}})",
+    "noAccountToImport": "Keine vorhandenen {{Währungsbezeichnung}}-Konten zum Hinzufügen",
+    "success": "Konto erfolgreich hinzugefügt",
+    "success_plural": "Konten erfolgreich hinzugefügt",
+    "successDescription": "Andere Konten hinzufügen oder zum Portfolio zurückkehren",
     "successDescription_plural": "Add other accounts or return to Portfolio",
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
