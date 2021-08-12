@@ -116,14 +116,7 @@ const cmdAccountGetTransactionStatus = (o: {
   return from(
     bridge
       .getTransactionStatus(account, transaction)
-      .then((raw: TransactionStatus) => toTransactionStatusRaw(raw))
-      .then(status => {
-        log(
-          "transaction-summary",
-          `STATUS ${formatTransactionStatus(transaction, status, account)}`,
-        );
-        return status;
-      }),
+      .then((raw: TransactionStatus) => toTransactionStatusRaw(raw)),
   );
 };
 
