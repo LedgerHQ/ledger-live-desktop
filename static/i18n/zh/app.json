@@ -3171,11 +3171,10 @@
     "placeholder": "输入 {{currencyName}} 地址"
   },
   "Terms": {
-    "title": "使用条款",
-    "read": "阅读使用条款",
-    "switchLabelTerms": "<0>我已经阅读并同意该</0> <1>使用条款</1>",
-    "switchLabelPrivacyPolicy": "<0>我已经阅读并同意该</0> <1>隐私政策</1>",
-    "switchLabelLoss": "我明白：如果我丢失了自己的恢复短语，那么一旦我的 Nano 无法使用，也就意味着我将无法访问自己的加密资产。",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "进入 Ledger 应用程序"
   },
   "families": {

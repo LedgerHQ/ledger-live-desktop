@@ -3171,11 +3171,10 @@
     "placeholder": "Введите адрес {{currencyName}}"
   },
   "Terms": {
-    "title": "Условия использования",
-    "read": "Прочитать Условия использования",
-    "switchLabelTerms": "<0>Подтверждаю, что прочитал(а) и принимаю</0> <1>Условия использования</1>",
-    "switchLabelPrivacyPolicy": "<0>Подтверждаю, что прочитал(-а) и принимаю</0> <1>Политику конфиденциальности</1>",
-    "switchLabelLoss": "Я осознаю, что без фразы восстановления я утрачу доступ к своей криптовалюте в случае потери доступа к устройству Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Войти в приложение Ledger"
   },
   "families": {
