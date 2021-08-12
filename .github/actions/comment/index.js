@@ -89,7 +89,7 @@ ${img}
     str += `
 
 <details>
-<summary><b>Updated/changed screenshots  :warning:</b></summary>
+<summary><b>Screenshots diff with develop  :warning:</b></summary>
 <p>
 
 ${diffStr}
