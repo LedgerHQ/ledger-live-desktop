@@ -120,7 +120,8 @@
       "devTools": "Dev tools"
     },
     "exchange": "Échanger",
-    "info": "Informations"
+    "info": "Informations",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -251,7 +252,7 @@
       "wyre": {
         "bullets": [
           "USA uniquement (Europe, Afrique et Asie à venir)",
-          "Multi coins et jetons",
+          "Multi coins et tokens",
           "Centralisé"
         ]
       },
@@ -265,7 +266,7 @@
       "paraswap": {
         "bullets": [
           "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
-          "Ethereum et jetons ERC-20",
+          "Ethereum et tokens ERC-20",
           "Décentralisé et se passant des tiers de confiance"
         ]
       },
@@ -373,7 +374,7 @@
     },
     "resetKYCModal": {
       "title": "Supprimer sa vérification",
-      "subtitle": "Supprimez votre vérification pour effacer tous les jetons stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
+      "subtitle": "Supprimez votre vérification pour effacer tous les tokens stockés sur votre ordinateur. Pour accéder aux services de nos partenaires, vous devrez renvoyer vos données.",
       "cta": "Confirmer"
     },
     "modal": {
@@ -573,7 +574,7 @@
     "emptyState": {
       "title": "Vous n'avez pas encore de crypto-actifs ?",
       "desc": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée et commencez à recevoir.",
-      "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée pour recevoir des <3><0>{{ticker}}</0></3> et des jetons <5><0>{{tokenList}}</0></5>.",
+      "descToken": "Assurez-vous que l'application <1><0>{{managerAppName}}</0></1> est installée pour recevoir des <3><0>{{ticker}}</0></3> et des tokens <5><0>{{tokenList}}</0></5>.",
       "buttons": {
         "receiveFunds": "Recevoir",
         "buy": "Acheter"
@@ -627,7 +628,9 @@
       "continue": "Continuer"
     },
     "history": {
-      "tab": "Historique"
+      "tab": "Historique",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -691,8 +694,14 @@
         "actions": "Actions"
       },
       "status": {
-        "enablingTooltip": "Difussion de la transaction en cours",
+        "enablingTooltip": "Diffusion de la transaction en cours",
         "toSupplyTooltip": "Vous pouvez maintenant déposer vos actifs."
+      },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
       },
       "closed": {
         "assetLended": "Actif",
@@ -796,7 +805,7 @@
           },
           "broadcastError": "Échec probable de votre transaction. Patientez un instant puis vérifiez l'historique des transactions avant de réessayer.",
           "tooltip": {
-            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. Les {{ tokenName }} sont des jetons ERC-20 que vous gagnez en prêtant vos actifs."
+            "amountWithdrawn": "Le montant retiré est affiché en {{ tokenName }}. Les {{ tokenName }} sont des tokens ERC-20 que vous gagnez en prêtant vos actifs."
           }
         }
       }
@@ -850,7 +859,7 @@
     },
     "noEthAccount": {
       "title": "Merci de créer un compte ETH",
-      "description": "<0>{{ asset }}({{ ticker }})</0> est un jeton Ethereum ERC-20. Pour prêter des {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum.",
+      "description": "<0>{{ asset }}({{ ticker }})</0> est un token Ethereum ERC-20. Pour prêter des {{ ticker }}, installez l'application Ethereum et créez un compte Ethereum.",
       "cta": "Ajouter un compte"
     },
     "emptyAccountDeposit": {
@@ -889,7 +898,7 @@
       "buy": "Acheter",
       "sell": "Vendre",
       "edit": "Modifier le compte",
-      "hideToken": "Masquer le jeton"
+      "hideToken": "Masquer le token"
     }
   },
   "help": {
@@ -924,9 +933,9 @@
     }
   },
   "blacklistToken": {
-    "title": "Masquer le jeton",
+    "title": "Masquer le token",
     "desc": "Cette action masquera tous vos comptes <1><0>{{tokenName}}</0></1>. Vous pouvez restaurer leur visibilité à tout moment dans les <3>Paramètres</3>",
-    "hideCTA": "Masquer le jeton"
+    "hideCTA": "Masquer le token"
   },
   "banners": {
     "cleanCache": {
@@ -1032,7 +1041,8 @@
     "title": "Adresse actuelle",
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
-    "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale."
+    "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -1057,14 +1067,14 @@
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "tokensList": {
-    "title": "Jetons",
-    "cta": "Ajouter un jeton",
-    "placeholder": "Pour ajouter des jetons, envoyez-les simplement sur votre adresse {{currencyName}}.",
+    "title": "Tokens",
+    "cta": "Ajouter un token",
+    "placeholder": "Pour ajouter des tokens, envoyez-les simplement sur votre adresse {{currencyName}}.",
     "link": "En savoir plus",
-    "seeTokens": "Afficher les jetons ({{tokenCount}})",
-    "hideTokens": "Masquer les jetons ({{tokenCount}})",
-    "countTooltip": "1 jeton",
-    "countTooltip_plural": "{{count}} jetons",
+    "seeTokens": "Afficher les tokens ({{tokenCount}})",
+    "hideTokens": "Masquer les tokens ({{tokenCount}})",
+    "countTooltip": "1 token",
+    "countTooltip_plural": "{{count}} tokens",
     "algorand": {
       "title": "ASA (Actifs)",
       "cta": "Ajouter des ASA",
@@ -1127,7 +1137,7 @@
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "fullNodeConfigure": "Configurer le nœud",
-    "tokensTip": "{{token}} ({{ticker}}) est un jeton {{tokenType}}. Vous pouvez recevoir des jetons directement sur un compte {{currency}}.",
+    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -1187,9 +1197,9 @@
     "viewOperation": "Afficher dans l'explorateur",
     "showMore": "Afficher {{recipients}} autres",
     "showLess": "Afficher moins",
-    "tokenOperations": "Opérations de jetons",
+    "tokenOperations": "Opérations de tokens",
     "subAccountOperations": "Opérations du sous-compte",
-    "tokenTooltip": "Cette opération est liée aux opérations de jetons suivantes",
+    "tokenTooltip": "Cette opération est liée aux opérations de tokens suivantes",
     "subAccountTooltip": "Cette opération est liée aux opérations de sous-compte suivantes",
     "internalOperations": "Opérations internes",
     "internalOpTooltip": "Cette opération a des opérations internes.",
@@ -1225,7 +1235,7 @@
   },
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
-    "allowAppPermissionSubtitleToken": "pour gérer vos jetons {{token}}",
+    "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
     "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
     "loading": "Chargement...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
@@ -1302,10 +1312,10 @@
         "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
-        "title": "Mise à jour disponible",
-        "title_plural": "Mises à jours disponibles",
-        "progressTitle": "{{number}} mise à jour d'application",
-        "progressTitle_plural": "{{number}} mises à jour d'applications",
+        "title": "Update available",
+        "title_plural": "Updates available",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
         "progress": "Mises à jour..."
       },
@@ -1330,8 +1340,8 @@
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
-        "useAppForToken": "Gestion des jetons {{tokenType}}",
-        "tokenAppDisclaimer": "Pour gérer des jetons {{tokenName}} {{tokenType}}, <1>installez l'application {{appName}}</1> et vérifiez que vous avez bien la <1>version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
+        "useAppForToken": "Gestion des tokens {{tokenType}}",
+        "tokenAppDisclaimer": "Pour gérer des tokens {{tokenName}} {{tokenType}}, <1>installez l'application {{appName}}</1> et vérifiez que vous avez bien la <1>version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}"
@@ -1343,6 +1353,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+        },
+        "wyre_buy": {
+          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
+          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+        },
+        "lido": {
+          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
+          "description": "Stake your ETH with Lido to earn daily staking rewards."
+        },
+        "zerion": {
+          "shortDescription": "The smart way to manage your DeFi portfolio.",
+          "description": "The smart way to manage your DeFi portfolio."
+        },
+        "rainbow": {
+          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+        },
+        "aave": {
+          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+        },
+        "compound": {
+          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+        },
+        "deversifi": {
+          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
+          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "Application {{dependency}} requise",
         "description": "L'application {{dependency}} sera également installée car elle est requise pour l'application {{app}}.",
@@ -1543,9 +1591,9 @@
         "title": "Compte",
         "label": "Compte à créditer",
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
-        "token": "2. Sélectionnez un jeton.",
-        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un jeton <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des jetons <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "token": "2. Sélectionnez un token.",
+        "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
+        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1583,7 +1631,7 @@
       },
       "details": {
         "utxoLag": "Cette transaction peut prendre plus de temps à être vérifiée et signée car le compte a un nombre élevé de coins.",
-        "subaccountsWarning": "Vous devrez recharger ce compte avec des {{ currency }} afin d'envoyer les jetons de ce compte.",
+        "subaccountsWarning": "Vous devrez recharger ce compte avec des {{ currency }} afin d'envoyer les tokens de ce compte.",
         "from": "De",
         "to": "À",
         "selectAccountDebit": "Compte à débiter",
@@ -1715,7 +1763,7 @@
               },
               "candidates": {
                 "title": "Candidats",
-                "description": "127 personnes élues par le vote de la communauté des détenteurs de jetons. Les votes sont mis à jour toutes les 6 heures."
+                "description": "127 personnes élues par le vote de la communauté des détenteurs de tokens. Les votes sont mis à jour toutes les 6 heures."
               }
             }
           }
@@ -2346,9 +2394,9 @@
         "button": "Terminé",
         "title": "Scanner pour exporter vers un mobile",
         "listTitle": "Sur l'application mobile Ledger Live :",
-        "step1": "Appuyez sur le bouton <1><0>+</0></1> dans <3><0>Comptes</0></3>.",
-        "step2": "Appuyez sur <1><0>Importer les comptes de l'ordinateur</0></1>.",
-        "step3": "Scannez le <1><0>le code QR de Live ordinateur</0></1> jusqu'à ce que la barre de chargement soit à 100 %."
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2424,7 +2472,37 @@
       "privacyDesc": "Consultez notre Politique de confidentialité pour savoir quelles données personnelles nous collectons, à quelles fins et comment nous les utilisons."
     },
     "experimental": {
-      "disclaimer": "Il s'agit de fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de la tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause."
+      "disclaimer": "Il s'agit de fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de la tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
@@ -2464,14 +2542,14 @@
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Masquer les comptes de jetons vides",
-        "desc": "Masquer les jetons ayant un solde nul sur la page Comptes."
+        "title": "Masquer les comptes de tokens vides",
+        "desc": "Masquer les tokens ayant un solde nul sur la page Comptes."
       },
       "tokenBlacklist": {
-        "title": "Jetons masqués",
-        "desc": "Vous pouvez masquer des jetons en vous rendant sur le compte parent, en faisant un clic droit sur le jeton et en sélectionnant Cacher le jeton.",
-        "count": "{{count}} jeton",
-        "count_plural": "{{count}} jetons"
+        "title": "Tokens masqués",
+        "desc": "Vous pouvez masquer des tokens en vous rendant sur le compte parent, en faisant un clic droit sur le token et en sélectionnant Cacher le token.",
+        "count": "{{count}} token",
+        "count_plural": "{{count}} tokens"
       },
       "fullNode": {
         "title": "Connecter un nœud Bitcoin complet",
@@ -2658,6 +2736,7 @@
         "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "Initialisation",
@@ -3680,7 +3759,7 @@
       "description": "Les transactions doivent être signées dans les 30 secondes. Veuillez réessayer."
     },
     "TronNotEnoughEnergy": {
-      "title": "Vous n'avez pas assez d'Énergie pour envoyer ce jeton."
+      "title": "Vous n'avez pas assez d'Énergie pour envoyer ce token."
     },
     "PairingFailed": {
       "title": "Échec du couplage",
