@@ -2908,12 +2908,12 @@
           "newRecoveryPhrase": {
             "title": "Recovery phrase",
             "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "paragraph2": "Ihr Nano erzeugt eine einzigartige Wiederherstellungsphrase. Ledger bewahrt keine Kopie davon auf.",
+            "disclaimer": "Ich verstehe, dass ich bei Verlust dieser Wiederherstellungsphrase nicht auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Wiederherstellungsphrase",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "recoveryHowTo": {
