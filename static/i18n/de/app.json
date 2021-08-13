@@ -2918,14 +2918,14 @@
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "Schnappen Sie sich Ihre Wiederherstellungsphrase"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "title": "Wählen Sie die Länge der Wiederherstellungsphrase",
+              "descr": "Ihre Wiederherstellungsphrasen können 12, 18 oder 24 Wörter haben. Sie müssen alle Wörter eingeben, um auf Ihre Kryptos zuzugreifen."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
+              "title": "Wort 1 eingeben ...",
               "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
             },
             "validateWord": {
