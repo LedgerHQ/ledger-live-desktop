@@ -3634,97 +3634,97 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "App-Update erforderlich",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "description": "Deinstallieren und installieren Sie die App {{managerAppName}} im Manager neu"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "Dies ist keine gültige {{currencyName}} Adresse"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "Empfängeradresse ist die gleiche wie die Absenderadresse"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "title": "Entschuldigung, Verbindung fehlgeschlagen",
+      "description": "Gerät erkannt, aber Verbindung fehlgeschlagen. Bitte versuchen Sie es erneut oder wenden Sie sich an den Ledger-Support, wenn das Problem weiterhin besteht."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "Automatische Verifizierung nicht verfügbar: Überprüfen Sie die Adresse sorgfältig",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Dieser QR-Code konnte nicht gescannt werden: Auto-Verifizierung wird von dieser Adresse nicht unterstützt"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "Es konnten keine Gebührensätze geladen werden. Bitte stellen Sie manuelle Gebühren ein"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Gebühren sind erforderlich"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "Dies könnte zu niedrig sein. Bitte erhöhen"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Unbekannte MCU-Version",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "Zum Dashboard gehen für Aktualisierung",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "1": "Trennen Sie das USB-Kabel ab und schließen Sie es wieder an, ohne eine Taste zu drücken.",
+        "2": "Drücken Sie beide Tasten zusammen dreimal, um das Dashboard anzuzeigen.",
+        "3": "Öffnen Sie den Manager und klicken Sie auf Firmware aktualisieren."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Kann nicht in Unterkonten empfangen werden",
+      "description": "Wenn Sie Geld erhalten möchten, verwenden Sie bitte das übergeordnete Konto"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "Kann noch nicht von Unterkonten senden",
+      "description": "Diese Funktion wird zu einem späteren Zeitpunkt aufgrund von Änderungen, die kürzlich durch das Babylon-Update eingeführt wurden, hinzugefügt."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Bitte heben Sie die Übertragung des Kontos auf, bevor Sie es leeren"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "Bitte leeren Sie zuerst alle Unterkonten"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "Dieses alte Adressformat wird nicht mehr unterstützt"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "title": "Das ist die falsche App",
+      "description": "Öffnen Sie die App „{{managerAppName}}“ auf Ihrem Gerät"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "Bitte wählen Sie einen Gerätenamen ohne '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Kundenservice."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "title": "Bitcoin- und Ethereum-Apps erforderlich",
+      "description": "Installieren Sie zuerst die neuesten Bitcoin- und Ethereum-Apps."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "Umbenennen auf dem Gerät abgebrochen",
+      "description": "Versuchen Sie es erneut und erlauben Sie das Umbenennen auf Ihrem Gerät"
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "title": "Synchronisierungsfehler",
+      "description": "Einige Konten konnten nicht synchronisiert werden."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Vermögenswerte zum Entsperren, die mit Bandbreite verbunden sind"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Vermögenswerte zum Entsperren im Zusammenhang mit Energie"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
+      "title": "Entsperren ist noch nicht verfügbar",
       "description": "You need to wait 3 days after your last Freeze operation"
     },
     "TronVoteRequired": {
