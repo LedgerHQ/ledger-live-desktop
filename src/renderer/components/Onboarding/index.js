@@ -9,6 +9,8 @@ import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 import { track } from "~/renderer/analytics/segment";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -134,13 +136,7 @@ const onboardingMachine = Machine({
           target: "selectDevice",
         },
         RECOVERY_WARN: {
-          actions: [
-            assign({
-              help: {
-                recoveryPhraseWarning: true,
-              },
-            }),
-          ],
+          actions: () => openURL(urls.faq),
         },
       },
     },
