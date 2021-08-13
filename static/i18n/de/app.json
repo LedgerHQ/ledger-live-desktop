@@ -2060,7 +2060,7 @@
       "electionOpenTooltip": "Dieser Vorgang ist während der Wahl der Validatoren deaktiviert",
       "externalControllerTooltip": "Dieses Konto wird von einem anderen Konto gesteuert.",
       "externalControllerUnsupported": "<0>Dieses Stash-Konto wird von einem anderen Konto mit der Adresse <0>{{address}}</0> kontrolliert.</0><1>Staking-Operationen auf Konten, die von einem anderen Konto kontrolliert werden, werden in Ledger Live nicht unterstützt. Bitte verwenden Sie eine alternative Wallet wie z.B. Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
+      "externalStashTooltip": "Dieses Konto steuert ein anderes Konto.",
       "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
@@ -2145,26 +2145,26 @@
             "Nominate using your Ledger device",
             "Assets will be available again, 28 days after unbonding"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "help": "Wie Nominierungen funktionieren",
+          "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer gebundenen Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
-          "availableLabel": "Available",
-          "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "title": "Betrag",
+          "amountLabel": "Anleihebetrag",
+          "availableLabel": "Verfügbar",
+          "maxLabel": "Max.",
+          "info": "Gebundene Vermögenswerte können jederzeit entbunden werden, aber das dauert 28 Tage.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "Transaktion wartet auf Bestätigung",
+            "desc": "Sie müssen einen Moment warten, bevor Sie nominieren"
           },
-          "title": "Confirmation",
+          "title": "Bestätigung",
           "success": {
             "title": "Assets successfully bonded",
             "text": "You can nominate validators once the network has confirmed the transaction.",
