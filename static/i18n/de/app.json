@@ -3443,49 +3443,49 @@
     },
     "LatestMCUInstalledError": {
       "title": "Entschuldigung, es gibt nichts zu aktualisieren",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "description": "Bitte kontaktieren Sie den Ledger-Support, wenn Sie Ihr Gerät nicht verwenden können."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut oder wenden Sie sich an den Ledger-Kundenservice."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "title": "Entschuldigung, versuchen Sie es erneut.",
+      "description": "Der Server konnte Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es später erneut oder wenden Sie sich an den Ledger-Kundenservice. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sorry, {{currencyName}}-Dienste nicht verfügbar",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "Sorry, das ist bereits installiert",
+      "description": "Bitte überprüfen Sie, welche Apps bereits auf Ihrem Gerät installiert sind."
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "title": "{{dependency}} App erforderlich",
+      "description": "Falls die {{dependency}}-App bereits installiert ist, installieren Sie diese bitte mit der neuesten Version neu"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "title": "Entschuldigung, diese App ist erforderlich",
+      "description": "Sie müssen zuerst alle Apps deinstallieren, welche die {{appName}} App benötigen"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
-      "description": "Please unlock it"
+      "title": "Ihr Gerät ist gesperrt",
+      "description": "Bitte entsperren Sie es"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "title": "Deinstallieren Sie alle Apps von Ihrem Gerät",
+      "description": "Die privaten Schlüssel für den Zugriff auf Ihr Krypto-Vermögen bleiben sicher auf Ihrem Gerät und müssen auf Ihrem Wiederherstellungsblatt gesichert werden."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "title": "Sorry, nicht genug Speicherplatz übrig",
+      "description": "Deinstallieren Sie einige Apps, um Speicherplatz freizugeben. Die privaten Schlüssel zum Zugriff auf Ihre Krypto-Vermögenswerte bleiben sicher auf Ihrem Gerät."
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
-        "stay": "Finish install"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Wenn Sie den Manager beenden, wird die App-Installation abgebrochen. Bitte beenden Sie die Installation, um die Apps in der Warteschlange zu installieren.",
+        "stay": "Installation beenden"
       },
       "uninstall": {
         "title": "Finish app uninstallation in progress?",
