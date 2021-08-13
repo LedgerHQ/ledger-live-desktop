@@ -15,7 +15,7 @@ const Wrapper: ThemedComponent<{}> = styled(Label).attrs(props => ({
   alignItems: "center",
 }))`
   cursor: pointer;
-  display: inline;
+  display: inline-flex;
   &:hover {
     opacity: 0.8;
   }

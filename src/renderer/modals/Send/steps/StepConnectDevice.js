@@ -13,10 +13,13 @@ export default function StepConnectDevice({
   onOperationBroadcasted,
   onTransactionError,
   setSigned,
+  onConfirmationHandler,
+  onFailHandler,
+  currencyName,
 }: StepProps) {
   return (
     <>
-      <TrackPage category="Send Flow" name="Step ConnectDevice" />
+      <TrackPage category="Send Flow" name="Step ConnectDevice" currencyName={currencyName} />
       <GenericStepConnectDevice
         account={account}
         parentAccount={parentAccount}
@@ -26,6 +29,8 @@ export default function StepConnectDevice({
         onOperationBroadcasted={onOperationBroadcasted}
         onTransactionError={onTransactionError}
         setSigned={setSigned}
+        onConfirmationHandler={onConfirmationHandler}
+        onFailHandler={onFailHandler}
       />
     </>
   );

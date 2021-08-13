@@ -97,11 +97,7 @@ function TokensList({ account }: Props) {
     <TableContainer id="tokens-list" mb={50}>
       <TableHeader title={isTokenAccount ? titleLabel : t("subAccounts.title")}>
         {!isEmpty && isTokenAccount && (
-          <ReceiveButtonComponent
-            onClick={onReceiveClick}
-            account={account}
-            openModal={openModal}
-          />
+          <ReceiveButtonComponent onClick={onReceiveClick} account={account} />
         )}
       </TableHeader>
       {isEmpty && (
@@ -125,11 +121,7 @@ function TokensList({ account }: Props) {
               </Text>
             ) : null}
           </Placeholder>
-          <ReceiveButtonComponent
-            onClick={onReceiveClick}
-            account={account}
-            openModal={openModal}
-          />
+          <ReceiveButtonComponent onClick={onReceiveClick} account={account} />
         </EmptyState>
       )}
       {subAccounts

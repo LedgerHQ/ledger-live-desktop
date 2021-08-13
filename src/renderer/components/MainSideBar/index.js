@@ -7,7 +7,11 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 
-import { accountsSelector, starredAccountsSelector } from "~/renderer/reducers/accounts";
+import {
+  accountsSelector,
+  starredAccountsSelector,
+  hasLendEnabledAccountsSelector,
+} from "~/renderer/reducers/accounts";
 import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
@@ -22,6 +26,7 @@ import { darken, rgba } from "~/renderer/styles/helpers";
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
+import IconApps from "~/renderer/icons/Apps";
 import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconExchange from "~/renderer/icons/Exchange";
@@ -193,6 +198,8 @@ const MainSideBar = () => {
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
   const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
 
+  const lendingEnabled = useSelector(hasLendEnabledAccountsSelector);
+
   const handleCollapse = useCallback(() => {
     dispatch(setSidebarCollapsed(!collapsed));
   }, [dispatch, collapsed]);
@@ -216,6 +223,10 @@ const MainSideBar = () => {
 
   const handleClickAccounts = useCallback(() => {
     push("/accounts");
+  }, [push]);
+
+  const handleClickCatalog = useCallback(() => {
+    push("/platform");
   }, [push]);
 
   const handleClickExchange = useCallback(() => {
@@ -287,6 +298,15 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"catalog"}
+                label={t("sidebar.catalog")}
+                icon={IconApps}
+                iconActiveColor="wallet"
+                isActive={location.pathname.startsWith("/platform")}
+                onClick={handleClickCatalog}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
                 id={"send"}
                 label={t("send.title")}
                 icon={IconSend}
@@ -320,21 +340,24 @@ const MainSideBar = () => {
                 icon={IconSwap}
                 iconActiveColor="wallet"
                 onClick={handleClickSwap}
-                isActive={location.pathname === "/swap"}
+                isActive={location.pathname.startsWith("/swap")}
                 disabled={noAccounts}
                 collapsed={secondAnim}
               />
-              <SideBarListItem
-                id={"lend"}
-                label={t("sidebar.lend")}
-                icon={IconLending}
-                iconActiveColor="wallet"
-                onClick={handleClickLend}
-                isActive={location.pathname === "/lend"}
-                disabled={noAccounts}
-                collapsed={secondAnim}
-                NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
-              />
+              {lendingEnabled && (
+                <SideBarListItem
+                  id={"lend"}
+                  label={t("sidebar.lend")}
+                  icon={IconLending}
+                  iconActiveColor="wallet"
+                  onClick={handleClickLend}
+                  isActive={location.pathname === "/lend"}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+                />
+              )}
+
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}

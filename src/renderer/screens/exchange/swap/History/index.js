@@ -16,14 +16,21 @@ import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 import { mappedSwapOperationsToCSV } from "@ledgerhq/live-common/lib/exchange/swap/csvExport";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import useInterval from "~/renderer/hooks/useInterval";
-import { openModal } from "~/renderer/actions/modals";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
+import Alert from "~/renderer/components/Alert";
+import SectionTitle from "~/renderer/components/OperationsList/SectionTitle";
 import { FakeLink } from "~/renderer/components/Link";
 import moment from "moment";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import styled from "styled-components";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
+import { setDrawer } from "~/renderer/drawers/Provider";
+import SwapOperationDetails from "~/renderer/drawers/SwapOperationDetails";
+
+const Head = styled(Box)`
+  border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
+`;
 
 const ExportOperationsWrapper = styled(Box)`
   color: ${p => p.theme.colors.palette.primary.main};
@@ -46,11 +53,11 @@ const exportOperations = async (
 };
 
 const History = () => {
-  const { t } = useTranslation();
   const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -125,9 +132,8 @@ const History = () => {
   }, 10000);
 
   const openSwapOperationDetailsModal = useCallback(
-    mappedSwapOperation =>
-      dispatch(openModal("MODAL_SWAP_OPERATION_DETAILS", { mappedSwapOperation })),
-    [dispatch],
+    mappedSwapOperation => setDrawer(SwapOperationDetails, { mappedSwapOperation }),
+    [],
   );
 
   return (
@@ -138,34 +144,34 @@ const History = () => {
           <IconDownloadCloud size={16} />
           <Text ml={1} ff="Inter|Regular" fontSize={3}>
             <FakeLink onClick={exporting ? undefined : onExportOperations}>
-              {exporting ? "Exporting..." : "Export operations"}
+              {exporting ? t("exchange.history.exporting") : t("exchange.history.exportOperations")}
             </FakeLink>
           </Text>
         </ExportOperationsWrapper>
       </Box>
       {mappedSwapOperations ? (
         mappedSwapOperations.length ? (
-          mappedSwapOperations.map(section => (
-            <div key={section.day.toString()}>
-              <Box mb={2} mt={4} ff="Inter|SemiBold" fontSize={4} color="palette.text.shade60">
-                {moment(section.day).calendar(null, {
-                  sameDay: `LL – [${t("calendar.today")}]`,
-                  lastDay: `LL – [${t("calendar.yesterday")}]`,
-                  lastWeek: "LL",
-                  sameElse: "LL",
-                })}
-              </Box>
-              <Card>
-                {section.data.map(mappedSwapOperation => (
-                  <OperationRow
-                    key={mappedSwapOperation.swapId}
-                    mappedSwapOperation={mappedSwapOperation}
-                    openSwapOperationDetailsModal={openSwapOperationDetailsModal}
-                  />
-                ))}
-              </Card>
-            </div>
-          ))
+          <Card>
+            <Head px={20} py={16}>
+              <Alert type="primary">
+                <Trans i18nKey="swap.history.disclaimer" />
+              </Alert>
+            </Head>
+            {mappedSwapOperations.map(section => (
+              <>
+                <SectionTitle day={section.day} />
+                <Box>
+                  {section.data.map(mappedSwapOperation => (
+                    <OperationRow
+                      key={mappedSwapOperation.swapId}
+                      mappedSwapOperation={mappedSwapOperation}
+                      openSwapOperationDetailsModal={openSwapOperationDetailsModal}
+                    />
+                  ))}
+                </Box>
+              </>
+            ))}
+          </Card>
         ) : (
           <Card flex={1} p={150} alignItems={"center"} justifyContent={"center"}>
             <Text mb={1} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade100">

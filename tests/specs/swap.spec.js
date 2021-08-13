@@ -20,43 +20,11 @@ describe("Swap", () => {
   const $ = selector => app.client.$(selector);
 
   it("access the feature", async () => {
-    // Access manager and go through firmware update
     const elem = await $("#drawer-swap-button");
     await elem.click();
-    await mockDeviceEvent(
-      {
-        type: "listingApps",
-        deviceInfo,
-      },
-      {
-        type: "result",
-        result: mockListAppsResult(
-          "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar,Exchange",
-          "Exchange,Tron,Bitcoin,Ethereum",
-          deviceInfo,
-        ),
-      },
-      { type: "complete" },
-    );
     await app.client.waitForSync();
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-access",
-    });
-  });
-  it("pass KYC landing", async () => {
-    const KYCCheckbox = await $("#swap-landing-kyc-tos");
-    await KYCCheckbox.waitForDisplayed();
-    await KYCCheckbox.click();
-
-    const KYCContinueButton = await $("#swap-landing-kyc-continue-button");
-    await KYCContinueButton.waitForEnabled();
-    await KYCContinueButton.click();
-
-    const fromCurrency = await $("#swap-form-from-currency .select__control");
-    await fromCurrency.waitForDisplayed();
-
-    expect(await app.client.screenshot(2000)).toMatchImageSnapshot({
-      customSnapshotIdentifier: "swap-kyc-done",
+      customSnapshotIdentifier: "swap-providers", // NB no longer providers but ci doesnt want a name change
     });
   });
 
@@ -80,6 +48,8 @@ describe("Swap", () => {
     await toCurrencyInput.addValue("ethereum");
     const toCurrencyFirstOption = await $(".select-options-list .option:first-child");
     await toCurrencyFirstOption.click();
+    const floatMethod = await $("#swap-form-tradeMethod-float");
+    await floatMethod.click();
     await app.client.pause(2000);
     const continueButton = await $("#swap-form-continue-button");
     await continueButton.waitForEnabled();

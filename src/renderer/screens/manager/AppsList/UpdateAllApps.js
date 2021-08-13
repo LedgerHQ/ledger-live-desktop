@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, memo, useState, useMemo } from "react";
+import React, { useCallback, memo, useState, useMemo, useEffect } from "react";
 
 import styled from "styled-components";
 
@@ -27,6 +27,7 @@ import Item from "./Item";
 import Progress from "~/renderer/components/Progress";
 
 import ToolTip from "~/renderer/components/Tooltip";
+import { useLocation } from "react-router";
 
 const UpdatableHeader = styled.div`
   display: flex;
@@ -59,17 +60,26 @@ const ProgressHolder = styled.div`
 type Props = {
   update: App[],
   state: State,
+  optimisticState: State,
   dispatch: Action => void,
   isIncomplete: boolean,
 };
 
-const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
+const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete }: Props) => {
+  const { search } = useLocation();
   const [open, setIsOpen] = useState();
   const { updateAllQueue } = state;
 
+  useEffect(() => {
+    const params = new URLSearchParams(search || "");
+    const y = params.get("updateApp");
+    setIsOpen(y === "true");
+  }, [search]);
+
   const outOfMemory = useMemo(
-    () => isOutOfMemoryState(predictOptimisticState(reducer(state, { type: "updateAll" }))),
-    [state],
+    () =>
+      isOutOfMemoryState(predictOptimisticState(reducer(optimisticState, { type: "updateAll" }))),
+    [optimisticState],
   );
 
   const visible = update.length > 0;
@@ -92,6 +102,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
             <Trans
               i18nKey="manager.applist.updatable.progressTitle"
               values={{ number: updateAllQueue.length }}
+              count={updateAllQueue.length}
             />
           </Text>
           <Text ff="Inter|SemiBold" fontSize={2} color="palette.text.shade60">
@@ -120,7 +131,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
     ) : (
       <>
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
-          <Trans i18nKey="manager.applist.updatable.title" />
+          <Trans i18nKey="manager.applist.updatable.title" count={update.length} />
         </Text>
         <Badge ff="Inter|Bold" fontSize={3} color="white">
           {update.length}
@@ -153,6 +164,7 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
   const mapApp = useCallback(
     (app, i) => (
       <Item
+        optimisticState={optimisticState}
         state={state}
         installed={state.installed.find(({ name }) => name === app.name)}
         key={`UPDATE_${app.name}_${i}`}
@@ -164,13 +176,14 @@ const UpdateAllApps = ({ update, state, dispatch, isIncomplete }: Props) => {
         showActions={false}
       />
     ),
-    [state, dispatch, isIncomplete],
+    [optimisticState, state, dispatch, isIncomplete],
   );
 
   return (
     <FadeInOutBox in={visible} mt={4}>
       <CollapsibleCard
         header={<UpdatableHeader>{visible && updateHeader}</UpdatableHeader>}
+        open={open}
         onOpen={setIsOpen}
       >
         {update.map(mapApp)}

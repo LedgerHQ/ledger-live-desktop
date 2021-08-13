@@ -5,6 +5,7 @@ const rangeAndDisplay = (currency = "global") => {
   describe("range and display accounts", () => {
     beforeAll(async () => {
       await accountsPage.goToAccounts();
+      await app.client.waitForSync();
     });
 
     it("display grid", async () => {

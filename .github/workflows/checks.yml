@@ -16,10 +16,11 @@ jobs:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'http://github-actions-live-vercel.vercel.app/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
       - name: install linux dependencies
-        run: sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev
+        run: |
+          sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev
       - name: Setup xvfb
         run: |
-          sudo apt-get -qqy install xvfb libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 libudev-dev libusb-1.0-0 libusb-1.0-0-dev lib32z1 rpm fakeroot dpkg libdbus-1-dev libx11-dev libavahi-compat-libdnssd-dev g++ gcc-multilib g++-multilib libgtk-3-dev libxtst6 libxss1 libnss3
+          sudo apt-get -qqy install xvfb libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 libudev-dev libusb-1.0-0 libusb-1.0-0-dev lib32z1 rpm fakeroot dpkg libdbus-1-dev libx11-dev libavahi-compat-libdnssd-dev g++ gcc gcc-multilib g++-multilib libgtk-3-dev libxtst6 libxss1 libnss3
       - uses: actions/checkout@v2
         if: always() && job.status != 'cancelled'
         with:
@@ -28,7 +29,7 @@ jobs:
       - uses: actions/setup-node@main
         if: always() && job.status != 'cancelled'
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: get yarn cache
         if: always() && job.status != 'cancelled'
         id: yarn-cache
@@ -45,18 +46,15 @@ jobs:
         run: yarn --frozen-lockfile
       - name: run code checks
         if: always() && job.status != 'cancelled'
-        run: yarn ci 2>lint.txt
-      - name: Read lint output
-        id: lint
-        if: always() && job.status != 'cancelled'
-        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
-        with:
-          path: ./lint.txt
+        run: yarn ci 2> >(tee lint.txt)
       - name: check build
         if: always() && job.status != 'cancelled'
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
+      - name: Tests
+        if: always() && job.status != 'cancelled'
+        run: yarn test 2> >(tee jest.txt)
       - name: start electron webdriver
         if: always() && job.status != 'cancelled'
         env:
@@ -69,16 +67,10 @@ jobs:
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
         if: always() && job.status != 'cancelled'
-        run: yarn spectron --no-color 2>output.txt
-      - name: Read test output
-        id: spectron
-        if: always() && job.status != 'cancelled'
-        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
-        with:
-          path: ./output.txt
-      - name: run coverage generation	
+        run: yarn spectron --no-color 2> >(tee output.txt)
+      - name: run coverage generation
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
-        run: yarn spectron-coverage	
+        run: yarn spectron-coverage
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
@@ -102,39 +94,22 @@ jobs:
           git fetch ledger
           git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
         if: always() && github.event_name == 'pull_request'
-      - name: Read imgChanged output
-        id: imgChanged
-        if: always() && github.event_name == 'pull_request' && job.status != 'cancelled'
-        uses: juliangruber/read-file-action@e0a316da496006ffd19142f0fd594a1783f3b512
-        with:
-          path: ./imgChanged.txt
-      - name: prepare comment body
+      - name: send comment
         if: always() && job.status != 'cancelled'
         id: comment
-        uses: ./.github/actions/prepare-comment-body
+        uses: ./.github/actions/comment
         with:
           images: ${{ steps.imgur.outputs.images }}
           fullrepo: ${{ github.repository }}
           runId: ${{ github.run_id }}
-          testoutput: ${{ steps.spectron.outputs.content }}
-          lintoutput: ${{ steps.lint.outputs.content }}
+          testoutput: ./output.txt
+          lintoutput: ./lint.txt
+          jestoutput: ./jest.txt
+          imgChanged: ./imgChanged.txt
           author: ${{github.event.sender.login}}
           pullId: ${{github.event.number}}
-          imgChanged: ${{steps.imgChanged.outputs.content}}
           from: ${{github.base_ref}}
           to: ${{github.event.pull_request.head.sha}}
-      - name: display comment
-        if: always() && job.status != 'cancelled'
-        id: displaycomment
-        env:
-          BODY: ${{ steps.comment.outputs.bodyclean }}
-        run: echo "$BODY"
-      - name: post comment
-        if: always() && job.status != 'cancelled'
-        id: postcomment
-        uses: ./.github/actions/post-comment
-        with:
-          comment: ${{ steps.comment.outputs.body }}
           prNumber: ${{github.event.pull_request.number}}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3

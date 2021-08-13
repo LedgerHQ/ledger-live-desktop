@@ -25,6 +25,9 @@ const Item = styled.div`
   flex-direction: horizontal;
   align-items: center;
   padding: 4px 0;
+  ${Text} {
+    flex: 1;
+  }
 `;
 
 const List = styled.div`
