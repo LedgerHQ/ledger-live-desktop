@@ -2592,35 +2592,35 @@
     "updateAvailable": "Update auf Ledger Live Version {{version}} ist verfügbar",
     "error": "Fehler beim Update. Bitte erneut herunterladen",
     "reDownload": "Erneut herunterladen",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "nightlyWarning": "Diese Version kann nicht automatisch aktualisiert werden. Bitte installieren Sie die neueste Version manuell",
+    "downloadNow": "Update herunterladen"
   },
   "crash": {
-    "title": "Something went wrong",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "title": "Etwas ist schief gelaufen",
+    "description": "Bitte prüfen Sie unsere Support-Artikel auf mögliche Lösungen. Wenn das Problem weiterhin besteht, speichern Sie die Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung.",
+    "troubleshooting": "Klicken Sie hier für mögliche Lösungen",
+    "logs": "Protokolle speichern",
+    "dataFolder": "Benutzerdaten anzeigen"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
-    "titleSuccess": "Operation history saved successfully",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "title": "Historie der Kontobewegungen",
+    "desc": "Wählen Sie die Konten aus, für die der Verlauf gespeichert werden soll",
+    "descSuccess": "Die CSV-Datei Ihres Verlaufs wurde erfolgreich im gewählten Ordner gespeichert",
+    "titleSuccess": "Verlauf erfolgreich gespeichert",
+    "cta": "Speichern",
+    "ctaSuccess": "Fertig",
+    "noAccounts": "Keine Konten zum Exportieren",
+    "selectedAccounts": "Einzuschließende Konten",
+    "selectedAccounts_plural": "Einzuschließende Konten ({{count}})",
+    "disclaimer": "Die Gegenwerte im Export werden nur zu Informationszwecken bereitgestellt. Verlassen Sie sich nicht auf diese Daten für buchhalterische, steuerliche, regulatorische oder rechtliche Zwecke, da sie nur eine Schätzung des Preises der Vermögenswerte zum Zeitpunkt der Transaktionen und des Exports darstellen, gemäß den von unserem Dienstleister Kaiko bereitgestellten Bewertungsmethoden"
   },
   "language": {
-    "system": "Use system language",
+    "system": "Systemsprache verwenden",
     "switcher": {
-      "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
+      "en": "Englisch",
+      "fr": "Französisch",
+      "ru": "Russisch",
+      "es": "Spanisch",
       "zh": "Chinese"
     }
   },
@@ -2719,37 +2719,37 @@
     "screens": {
       "welcome": {
         "title": "Welcome to Ledger",
-        "description": "Safely manage your crypto from your computer.",
-        "cta": "Get started",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+        "description": "Verwalten Sie Ihre Kryptowährungen sicher von Ihrem Computer aus.",
+        "cta": "Erste Schritte",
+        "noDevice": "Kein Gerät? <0>Kaufen Sie einen Ledger Nano X</0>",
         "languageWarning": {
-          "title": "Get started in {{language}}",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-          "cta": "Got it"
+          "title": "Erste Schritte in {{language}}",
+          "desc": "Wir führen zusätzliche Sprachen ein, um Ihnen das Onboarding mit Ledger zu erleichtern. Bitte beachten Sie, dass der Rest der Ledger-Erfahrung derzeit nur auf Englisch verfügbar ist.",
+          "cta": "Verstanden"
         }
       },
       "selectDevice": {
-        "title": "What's your device?"
+        "title": "Welches Gerät haben Sie?"
       },
       "selectUseCase": {
-        "greetings": "Hello!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
-        "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "greetings": "Hallo!",
+        "hasNoRecovery": "Verwenden Sie Ihr {{deviceName}} zum ersten Mal?",
+        "hasRecovery": "Haben Sie bereits eine Wiederherstellungsphrase?",
+        "separator": "oder",
         "switchDevice": "Switch device",
         "options": {
           "1": {
-            "heading": "First use",
-            "title": "Set up a new {{deviceName}}",
-            "description": "Let’s start and set up your device!"
+            "heading": "Erste Verwendung",
+            "title": "Einrichten eines neuen {{deviceName}}",
+            "description": "Lassen Sie uns beginnen und Ihr Gerät einrichten!"
           },
           "2": {
-            "heading": "Connect device",
-            "title": "Connect your {{deviceName}}",
-            "description": "Is your device already set up? Connect it to the app!"
+            "heading": "Gerät verbinden",
+            "title": "Verbinden Sie Ihr {{deviceName}}",
+            "description": "Ist Ihr Gerät bereits eingerichtet? Verbinden Sie es mit der App!"
           },
           "3": {
-            "heading": "Restore device",
+            "heading": "Gerät wiederherstellen",
             "title": "Restore your recovery phrase on a new device",
             "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
           }
