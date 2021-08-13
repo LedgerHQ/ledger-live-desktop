@@ -3282,43 +3282,43 @@
     },
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact Ledger Support."
+      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account.",
-      "description": "Wait for the operation to go through."
+      "title": "Es gibt eine ausstehende Aktion für dieses Konto.",
+      "description": "Warten Sie, bis der Vorgang abgeschlossen ist."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
-      "description": "Please enter an account name"
+      "title": "Ein Kontoname ist erforderlich",
+      "description": "Bitte geben Sie einen Kontonamen ein"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "Konto wird nicht unterstützt.",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "Das Empfängerkonto hat sich nicht für den gewählten ASA entschieden."
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "Erforderlicher Betrag"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
+      "title": "Bitte stellen Sie sicher, dass Ihr System über eine Kamera verfügt, dass diese nicht von einer anderen Anwendung verwendet wird und dass Ledger Live die Erlaubnis hat, diese zu verwenden.",
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "Die Prämien sind kleiner als die geschätzten Gebühren, die anfallen, um diese zu beanspruchen",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "Sie können den freigegebenen Betrag nicht reduzieren, während Sie eine aktive Einzahlung haben."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 1)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
+      "title": "Etwas ist schief gelaufen (Fehler 2)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeInvalidSequence": {
@@ -3419,30 +3419,30 @@
     },
     "EnpointConfig": {
       "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "description": "Bitte geben Sie einen gültigen Endpunkt an"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "Sorry, Gebührenschätzung fehlgeschlagen",
+      "description": "Versuchen Sie, eine benutzerdefinierte Gebühr zu setzen (Status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "title": "Firmware- oder App-Update erforderlich",
+      "description": "Bitte verwenden Sie den Manager, um alle Apps zu deinstallieren und dann zu prüfen, ob ein Firmware-Update verfügbar ist, bevor Sie diese neu installieren"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Nano-Firmware aktualisieren",
+      "description": "Bitte aktualisieren Sie Ihre Geräte-Firmware auf die neueste Version, um diese Funktion nutzen zu können"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "title": "Geräte-Firmware wird nicht erkannt",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "title": "Sorry, konnte nicht zurückgesetzt werden",
+      "description": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Ledger Kundenservice, falls das Problem weiterhin besteht."
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
+      "title": "Entschuldigung, es gibt nichts zu aktualisieren",
       "description": "Please contact Ledger Support if you cannot use your device."
     },
     "LedgerAPI4xx": {
