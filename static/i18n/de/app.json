@@ -2166,56 +2166,56 @@
           },
           "title": "Bestätigung",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "Vermögenswerte erfolgreich gebunden",
+            "text": "Sie können Validatoren benennen, sobald das Netzwerk die Transaktion bestätigt hat.",
+            "textNominate": "Sie können Validatoren benennen, sobald das Netzwerk Ihre Transaktion bestätigt hat.",
+            "nominate": "Nominieren",
+            "later": "Später nominieren"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "Vermögenswerte werden gebunden ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "Vermögenswerte neu binden",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "title": "Betrag",
+          "amountLabel": "Betrag erneute Bindung",
+          "availableLabel": "Entbinden",
+          "maxLabel": "Max.",
+          "info": "Neu gebundene Vermögenswerte werden sofort zum gebundenen Betrag hinzugefügt.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "Vermögenswerte erfolgreich erneut gebunden",
+            "text": "Ihr Kontostand wird aktualisiert, sobald das Netzwerk die Transaktion bestätigt hat.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "Ihre Vermögenswerte neu binden ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "Vermögenswerte entbinden",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
-          "availableLabel": "Bonded",
-          "maxLabel": "Max",
+          "title": "Betrag",
+          "amountLabel": "Betrag zum Aufheben der Bindung",
+          "availableLabel": "Gebunden",
+          "maxLabel": "Max.",
           "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
           "learnMore": "Learn More"
         },
