@@ -2750,50 +2750,50 @@
           },
           "3": {
             "heading": "Gerät wiederherstellen",
-            "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "title": "Wiederherstellen Ihrer Wiederherstellungsphrase auf einem neuen Gerät",
+            "description": "Verwenden Sie eine vorhandene Wiederherstellungsphrase, um Ihre privaten Schlüssel auf einem neuen {{deviceName}} wiederherzustellen!"
           }
         }
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
-          "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
-          "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "getStarted": "Erste Schritte",
+          "pinCode": "PIN-Code",
+          "recoveryPhrase": "Wiederherstellungsphrase",
+          "hideRecoveryPhrase": "Wiederherstellungsphrase ausblenden",
+          "pairNano": "Nano verbinden"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "title": "Wiederherstellen aus Wiederherstellungsphrase",
+            "paragraph1": "Stellen Sie Ihren Nano aus der Wiederherstellungsphrase wieder her, um Ihren Ledger-Hardware-Wallet wiederherzustellen, zu ersetzen oder zu sichern.",
+            "paragraph2": "Ihr Nano wird Ihre privaten Schlüssel wiederherstellen und Sie werden in der Lage sein, auf Ihre Krypto zuzugreifen und diese zu verwalten.",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "OK, ich bin bereit!",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "Der beste Weg für den Anfang:",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "Planen Sie 30 Minuten ein und nehmen Sie sich Zeit.",
+              "2": "Nehmen Sie einen Stift zum Schreiben.",
+              "3": "Bleiben Sie allein, und wählen Sie eine sichere und ruhige Umgebung."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "OK, ich bin bereit!",
+              "prev": "Vorheriger Schritt"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nano einschalten",
+              "descr": "Schließen Sie Ihr Gerät mit dem USB-Kabel an Ihren Computer an."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Durchsuchen",
+              "descr": "Erfahren Sie, wie Sie Ihr Gerät bedienen können, indem Sie die Anweisungen auf dem Bildschirm lesen."
             },
             "select": {
               "title": "Select “Set up as new device”",
