@@ -3158,38 +3158,38 @@
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "USB-Gerätetreiber aktualisieren",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "<0>{{link}}</0> besuchen",
+            "1": "Folgen Sie den Anweisungen, um die USB-Gerätetreiber zu aktualisieren.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Vollzugriff auf die Festplatte aktivieren",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Öffnen Sie „Systemeinstellungen“.",
+              "1": "Gehen Sie zu „Sicherheit & Datenschutz“.",
+              "2": "Gehen Sie auf der Registerkarte „Datenschutz“ in der linken Spalte auf „Voller Festplattenzugriff“.",
+              "3": "Fügen Sie „Ledger Live“ hinzu.",
+              "4": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "NVRAM zurücksetzen",
+            "link": "Apples Anweisungen",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Wenn Ihr Mac einen Intel-Prozessor hat, folgen Sie <0>{{link}}</0>, um das NVRAM zurückzusetzen.",
+              "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "Was für ein Gerät haben Sie?",
+          "desc": "Wenn Sie einen Nano S haben, können Sie versuchen, die Firmware Ihres Geräts zu reparieren. Für Nano X- und Blue-Benutzer wenden Sie sich bitte an den Ledger-Support"
         },
         "notFixed": {
           "title": " USB connection problem still not fixed?",
