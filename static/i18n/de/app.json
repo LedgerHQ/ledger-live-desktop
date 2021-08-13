@@ -2969,36 +2969,36 @@
           "hideRecoveryPhrase": {
             "title": "Verstecken Sie Ihre Wiederherstellungsphrase",
             "paragraph": "Ihre Wiederherstellungsphrase ist die letzte Chance, auf Ihre Krypto zuzugreifen, falls Sie Ihren Nano nicht benutzen können. Sie müssen sie an einem sicheren Ort aufbewahren.",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "keepItOffline": "Geben Sie diese Wörter nur auf einem Hardware-Wallet ein, nicht auf Computern oder Smartphones.",
+            "neverShowToAnyone": "Teilen Sie Ihre 24 Worte niemals mit jemandem, auch nicht mit Ledger.",
             "buttons": {
-              "next": "OK, I'm done!",
-              "prev": "Previous step",
-              "help": "Need help",
-              "learn": "Learn how to hide it"
+              "next": "OK, ich bin fertig!",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt",
+              "learn": "Erfahren Sie wie man gut versteckt"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
-            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "title": "Echtheitsprüfung",
+            "paragraph": "Wir werden überprüfen, ob Ihr Nano echt ist. Das sollte schnell und einfach gehen!",
             "buttons": {
-              "next": "Check my Nano",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Meinen Nano prüfen",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           }
         }
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "Grundlagen",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "title": "Zugriff auf Ihre Kryptos",
+          "description": "Ihre Krypto-Vermögenswerte werden auf der Blockchain gespeichert. Sie benötigen einen privaten Schlüssel, um darauf zuzugreifen und sie zu verwalten."
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
+          "title": "Achten Sie auf Ihren privaten Schlüssel",
           "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
         },
         "stayOffline": {
