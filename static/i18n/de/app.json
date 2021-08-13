@@ -2216,31 +2216,31 @@
           "amountLabel": "Betrag zum Aufheben der Bindung",
           "availableLabel": "Gebunden",
           "maxLabel": "Max.",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "info": "Nicht gebundene Vermögenswerte können nach der 28-tägigen Entbindungsfrist abgezogen werden.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "title": "Transaktion erfolgreich gesendet",
+            "text": "Nicht gebundenes Vermögen kann in 28 Tagen abgehoben werden.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "Bindung Ihres Vermögens wird aufgehoben ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
+          "title": "Abheben",
           "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
           "info": "You can then withdraw unbonded assets to your available balance."
         },
@@ -2325,36 +2325,36 @@
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
         },
         "validator": {
-          "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "title": "Validator auswählen",
+          "description": "Sie können einen Validator auswählen, indem Sie die geschätzten Prämienraten vergleichen",
+          "customValidator": "Benutzerdefinierter Validator",
+          "providedBy": "Auszahlungsraten von <1><0>{{name}}</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "title": "Benutzerdefinierter Validator",
+          "text": "Bitte geben Sie die Adresse des benutzerdefinierten Validators ein, an den Sie Ihr Konto übertragen möchten.",
+          "button": "Validator verwenden"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "Kontodelegierung aufheben"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "title": "Delegierung gesendet",
+            "titleUndelegated": "Delegierung beenden",
+            "text": "Die Delegierungstransaktion wurde erfolgreich übertragen. Sie sollten Ihre ersten Prämien innerhalb von etwa 40 Tagen verdienen, je nach Validator.",
+            "textUndelegated": "Ihre Kontodelegierung endet, sobald der Vorgang bestätigt ist. Sie können Ihr Konto jederzeit erneut delegieren."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "topUp": "Mehr erhalten",
+      "redelegate": "Validator ändern",
+      "stopDelegation": "Delegierung beenden"
     }
   },
   "asset": {
