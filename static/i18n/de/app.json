@@ -2999,18 +2999,18 @@
         },
         "ownYourPrivateKey": {
           "title": "Achten Sie auf Ihren privaten Schlüssel",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "description": "Ihr privater Schlüssel ist in Ihrem Nano gespeichert. Sie müssen der einzige sein, der ihn besitzt, um die Kontrolle über Ihr Geld zu haben."
         },
         "stayOffline": {
-          "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "title": "Offline bleiben",
+          "description": "Ihr Nano arbeitet als „Cold Storage“-Wallet. Das bedeutet, dass er Ihren privaten Schlüssel niemals online preisgibt, selbst wenn Sie die App verwenden."
         },
         "validateTransactions": {
-          "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "title": "Transaktionen validieren",
+          "description": "Mit Ledger Live können Sie Krypto kaufen, verkaufen, verwalten, tauschen und verdienen und bleiben dabei geschützt. Sie werden jede Krypto-Transaktion mit Ihrem Nano validieren."
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
+          "title": "Lassen Sie uns Ihren Nano einrichten!",
           "description": "We'll start by setting up your Nano security.",
           "CTA": "Let’s do this!"
         }
@@ -3120,39 +3120,39 @@
           "title": "Try different USB ports",
           "bullets": {
             "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "1": "Entfernen Sie alle USB-Dongles",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Wechseln Sie das USB-Kabel",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Verwenden Sie nach Möglichkeit das Original-USB-Kabel.",
+            "1": "Versuchen Sie ein anderes USB-Kabel und stellen Sie sicher, dass es Datenübertragung unterstützt.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Starten Sie Ihren Computer neu",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Starten Sie den Computer neu.",
+            "1": "Starten Sie Ledger Live.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Schalten Sie Antivirus und VPN aus",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "Deaktivieren Sie jegliche Anti-Viren, Firewall und VPN-Software.",
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird.",
+            "2": "Geben Sie Ledger Live in Ihrem Antivirusprogramm frei, falls das funktioniert."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Versuchen Sie es auf einem anderen Computer",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Gehen Sie zu <0>{{link}}</0> auf einem anderen Computer, um Ledger Live herunterzuladen und zu installieren.",
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
       },
