@@ -3488,32 +3488,32 @@
         "stay": "Installation beenden"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
-        "stay": "Finish uninstalling"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Durch das Beenden des Managers werden die laufenden App-Deinstallationen beendet.",
+        "stay": "Deinstallation beenden"
       },
       "update": {
-        "title": "Finish app updates in progress?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
-        "stay": "Finish updates"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Durch das Beenden des Managers werden die laufenden App-Updates beendet.",
+        "stay": "Updates beenden"
       },
-      "quit": "Quit Manager"
+      "quit": "Manager schließen"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "Entschuldigung, diese App ist erforderlich",
+      "description": "Deinstallieren Sie die Bitcoin- oder Ethereum-App zuletzt"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "Entschuldigung, das Internet scheint ausgefallen zu sein",
+      "description": "Bitte überprüfen Sie Ihre Internetverbindung."
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "title": "Entschuldigung, es wurden keine Konten gefunden",
+      "description": "Bei der Adressberechnung ist etwas schief gelaufen, versuchen Sie es erneut oder wenden Sie sich an den Ledger-Support"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Entschuldigung, Guthaben reicht nicht aus",
+      "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
       "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
@@ -3625,15 +3625,15 @@
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "Entschuldigung, versuchen Sie es erneut (Verbindung geschlossen)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "title": "Etwas ist schief gelaufen",
+      "description": "Bitte überprüfen Sie, ob Ihre Hardware-Wallet mit der Wiederherstellungsphrase oder Passphrase eingerichtet ist, die mit dem gewählten Konto verbunden ist."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
+      "title": "App-Update erforderlich",
       "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
     },
     "InvalidAddress": {
