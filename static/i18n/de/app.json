@@ -2358,60 +2358,60 @@
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "Übersicht über alle {{currency}}-Konten"
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
-      "undo": "Show again",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "close": "Bestätigen",
+      "undo": "Erneut anzeigen",
+      "disclaimer": "Dieses Banner wird erst wieder eingeblendet, wenn es eine neue Ankündigung gibt"
     }
   },
   "settings": {
-    "title": "Settings",
-    "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "title": "Einstellungen",
+    "discreet": "Diskreten Modus aktivieren",
+    "helpButton": "Hilfe",
     "tabs": {
-      "display": "General",
-      "currencies": "Crypto assets",
-      "help": "Help",
-      "about": "About",
-      "experimental": "Experimental features",
-      "accounts": "Accounts",
+      "display": "Allgemeines",
+      "currencies": "Krypto-Vermögenswerte",
+      "help": "Hilfe",
+      "about": "Über",
+      "experimental": "Experimentelle Funktionen",
+      "accounts": "Konten",
       "developer": "Developer"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "title": "Konten exportieren",
+        "desc": "Fügen Sie Ihre Konten in Ledger Live Mobile hinzu. Ihre Konten werden nur mit der Blockchain synchronisiert, nicht zwischen Ihren mobilen und Desktop-Apps.",
         "button": "Export"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "title": "Aktionsverlauf",
+        "desc": "Speichern Sie eine CSV-Datei mit Ihren Kontobewegungen auf Ihrem Computer."
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
+        "button": "Fertig",
+        "title": "Scannen zum Exportieren auf Mobile",
+        "listTitle": "In der Ledger Live Mobile App:",
         "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
         "step2": "Tap <highlight>Import desktop accounts</highlight>",
         "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
-      "counterValue": "Preferred currency",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "language": "Sprache anzeigen",
+      "languageDesc": "Stellen Sie die in Ledger Live angezeigte Sprache ein.",
+      "theme": "Design",
+      "themeDesc": "Design auswählen.",
+      "counterValue": "Bevorzugte Währung",
+      "counterValueDesc": "Wählen Sie die Währung, die neben Ihrem Saldo und den Aktionen angezeigt wird.",
       "region": "Region",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "regionDesc": "Wählen Sie Ihre Region, um die Zeitzone von Ledger Live einzustellen.",
+      "stock": "Regionaler Marktindikator",
+      "stockDesc": "Wählen Sie Westlich, um Marktsteigerungen in Blau anzuzeigen, oder Östlich, um sie in Rot anzuzeigen.",
+      "carouselVisibility": "Karussell-Sichtbarkeit",
+      "carouselVisibilityDesc": "Aktivieren Sie die Sichtbarkeit des Karussells auf Portfolio"
     },
     "developer": {
       "toast": {
@@ -2433,7 +2433,7 @@
       "runLocalAppOpenButton": "Open"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "Krypto-Vermögenswert auswählen",
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
       "confirmationsNb": "Number of confirmations",
@@ -2537,61 +2537,61 @@
     },
     "exportLogs": {
       "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "desc": "Das Speichern von Ledger-Live-Protokollen kann für die Fehlersuche erforderlich sein.",
+      "btn": "Speichern"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "Leere Token-Konten ausblenden",
+        "desc": "Token-Konten mit Nullsaldo auf der Seite Konten ausblenden."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{count}} token",
-        "count_plural": "{{count}} tokens"
+        "title": "Ausgeblendete Token",
+        "desc": "Sie können Token ausblenden, indem Sie zum übergeordneten Konto gehen, dann mit der rechten Maustaste auf das Token klicken und „Token ausblenden“ wählen.",
+        "count": "{{count}} Token",
+        "count_plural": "{{count}} Token"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "title": "Bitcoin-Knoten (Full Node) verbinden",
+        "desc": "Richten Sie Ihren Bitcoin-Knoten (Full Node) ein, um Transaktionen zu synchronisieren und zu senden, ohne die Explorer von Ledger zu verwenden."
       }
     }
   },
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "Neues Passwort"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "Passwort bestätigen"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "Aktuelles Passwort"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "Passwort-Sperre",
+      "subTitle": "Ändern Sie Ihr Passwort"
     },
     "setPassword": {
-      "title": "Password lock",
-      "subTitle": "Set the password",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "title": "Passwort-Sperre",
+      "subTitle": "Legen Sie das Passwort fest",
+      "desc": "Bewahren Sie Ihr Passwort sicher auf. Wenn Sie es verlieren, müssen Sie Ledger Live zurücksetzen und die Konten erneut hinzufügen."
     },
     "disablePassword": {
-      "title": "Disable password lock",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "title": "Passwortsperre deaktivieren",
+      "desc": "Die Daten von Ledger Live werden unverschlüsselt auf Ihrem Computer gespeichert. Dazu gehören Kontonamen, Transaktionen und öffentliche Adressen."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
+    "downloadInProgress": "Herunterladen des Updates ...",
     "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again",
+    "checking": "Prüfen des Updates ...",
+    "checkSuccess": "Update bereit zur Installation",
+    "quitAndInstall": "Jetzt installieren",
+    "updateAvailable": "Update auf Ledger Live Version {{version}} ist verfügbar",
+    "error": "Fehler beim Update. Bitte erneut herunterladen",
+    "reDownload": "Erneut herunterladen",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "Download update"
   },
