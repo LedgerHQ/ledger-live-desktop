@@ -2796,23 +2796,23 @@
               "descr": "Erfahren Sie, wie Sie Ihr Gerät bedienen können, indem Sie die Anweisungen auf dem Bildschirm lesen."
             },
             "select": {
-              "title": "Select “Set up as new device”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Wählen Sie „Als neues Gerät einrichten“",
+              "descr": "Drücken Sie beide Tasten gleichzeitig, um die Auswahl zu bestätigen."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Anweisungen befolgen",
+              "descr": "Kommen Sie hierher zurück, um den Anweisungen zu Ihrem PIN-Code zu folgen."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nano einschalten",
+              "descr": "Schließen Sie Ihr Gerät mit dem USB-Kabel an Ihren Computer an."
             },
             "browse": {
               "title": "Browse",
