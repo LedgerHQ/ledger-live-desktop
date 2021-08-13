@@ -3192,33 +3192,33 @@
           "desc": "Wenn Sie einen Nano S haben, können Sie versuchen, die Firmware Ihres Geräts zu reparieren. Für Nano X- und Blue-Benutzer wenden Sie sich bitte an den Ledger-Support"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": "USB-Verbindungsproblem immer noch nicht behoben?",
+          "desc": "Wenn Sie alle möglichen Lösungen ausprobiert haben, wenden Sie sich bitte an den Ledger-Support. Ansonsten folgen Sie bitte den Anweisungen jeder Lösung, die Sie noch nicht ausprobiert haben.",
+          "back": "Zurück zum Portfolio",
+          "cta": "Kundenservice kontaktieren"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Reparieren Sie Ihren Nano S",
+          "desc": "Wie lautet die Meldung, die auf Ihrem Gerät angezeigt wird?",
+          "mcuOutdated": "MCU-Firmware ist veraltet",
+          "mcuNotGenuine": "MCU-Firmware ist nicht korrekt",
+          "repairInstructions": "Befolgen Sie die Anweisungen zur Gerätereparatur",
+          "updateInstructions": "Folgen Sie den Anweisungen zum Geräte-Update",
+          "somethingElse": "Etwas anderes"
         }
       }
     }
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "Nachrichten-Hash",
+    "domainHash": "Domain-Hash",
+    "messageHash": "Nachrichten-Hash",
+    "message": "Nachricht"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "title": "Bitte bestätigen Sie den Vorgang auf Ihrem Gerät, um ihn abzuschließen",
+    "warning": "Vergewissern Sie sich immer, dass die auf Ihrem Gerät angezeigte Adresse genau mit der Adresse übereinstimmt, die von {{recipientWording}} mitgeteilt wurde",
+    "secureContract": "Überprüfen Sie die Einzahlungsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Vertragsadresse wird sicher bereitgestellt, sodass Sie sie nicht verifizieren müssen.",
     "verifyData": "Always verify the operation details on your device.",
     "warningWording": {},
     "titleWording": {
