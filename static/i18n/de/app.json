@@ -3219,34 +3219,34 @@
     "title": "Bitte bestätigen Sie den Vorgang auf Ihrem Gerät, um ihn abzuschließen",
     "warning": "Vergewissern Sie sich immer, dass die auf Ihrem Gerät angezeigte Adresse genau mit der Adresse übereinstimmt, die von {{recipientWording}} mitgeteilt wurde",
     "secureContract": "Überprüfen Sie die Einzahlungsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Vertragsadresse wird sicher bereitgestellt, sodass Sie sie nicht verifizieren müssen.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "Überprüfen Sie immer die Aktivitätsdetails auf Ihrem Gerät.",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "send": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "claimReward": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "freeze": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "unfreeze": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "vote": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "delegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "undelegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "redelegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "claimRewardCompound": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "nominate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "chill": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "bond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "unbond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "rebond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "withdrawUnbonded": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen"
     },
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
-      "claimReward": "rewards recipient",
-      "optIn": "recipient",
-      "nominate": "validator"
+      "send": "Empfänger",
+      "delegate": "Validator",
+      "undelegate": "Validator",
+      "claimReward": "Prämienempfänger",
+      "optIn": "Empfänger",
+      "nominate": "Validator"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Stimmen ({{count}})"
   },
   "RecipientField": {
     "placeholder": "Enter {{currencyName}} address"
@@ -3256,29 +3256,29 @@
     "termsLabel": "Terms of service",
     "privacyLabel": "Privacy Policy",
     "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
-    "cta": "Enter Ledger app"
+    "cta": "Zur Ledger-App"
   },
   "families": {
     "stellar": {
       "memo": "Memo",
       "memoType": {
-        "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
-        "MEMO_ID": "Memo ID",
+        "MEMO_TEXT": "Memo-Text",
+        "NO_MEMO": "Kein Memo",
+        "MEMO_ID": "Memo-ID",
         "MEMO_HASH": "Memo Hash",
-        "MEMO_RETURN": "Memo Return"
+        "MEMO_RETURN": "Memo-Rückgabe"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "Wenn Sie ein Memo verwenden, überprüfen Sie sorgfältig den verwendeten Typ mit dem Empfänger"
     },
     "cosmos": {
       "memo": "Memo",
       "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+      "memoWarningText": "Wenn Sie ein Memo verwenden, prüfen Sie die Informationen sorgfältig mit dem Empfänger"
     }
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "Wir können derzeit keinen Gegenwert für diesen Vermögenswert angeben"
     },
     "generic": {
       "title": "{{message}}",
