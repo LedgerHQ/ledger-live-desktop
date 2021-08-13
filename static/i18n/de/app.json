@@ -2926,49 +2926,49 @@
             },
             "enterWord": {
               "title": "Wort 1 eingeben ...",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "descr": "Geben Sie die ersten Buchstaben von Wort 1 ein, indem Sie sie mit der rechten oder linken Taste auswählen. Drücken Sie beide Tasten, um jeden Buchstaben zu bestätigen."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "title": "Bestätigen Sie Wort 1 ...",
+              "descr": "Wählen Sie Wort 1 aus den Vorschlägen. Drücken Sie beide Tasten zum Bestätigen."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "Wiederholen Sie dies für alle Wörter!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "title": "Bestätigen Sie Ihre Wiederherstellungsphrase",
+              "descr": "Blättern Sie durch die Wörter, bis Sie Wort 1 gefunden haben, indem Sie die rechte Taste drücken. Bestätigen Sie, indem Sie beide Tasten drücken."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "Wiederholen Sie dies für alle Wörter!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "genuineCheck": {
             "success": {
-              "title": "All good!",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "title": "Alles gut!",
+              "desc": "Ihr Ledger {{deviceName}} ist echt und bereit zur Verwendung mit Ledger Live"
             },
             "buttons": {
-              "next": "Continue",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Weiter",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
+            "title": "Verstecken Sie Ihre Wiederherstellungsphrase",
+            "paragraph": "Ihre Wiederherstellungsphrase ist die letzte Chance, auf Ihre Krypto zuzugreifen, falls Sie Ihren Nano nicht benutzen können. Sie müssen sie an einem sicheren Ort aufbewahren.",
             "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
             "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
             "buttons": {
