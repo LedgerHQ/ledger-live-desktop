@@ -2644,7 +2644,7 @@
     "tabs": {
       "announcements": "Новости",
       "announcementsUnseen": "Новости ({{unseenCount}})",
-      "serviceStatus": "Статус",
+      "serviceStatus": "События",
       "serviceStatusIncidentsOngoing": "Статус ({{IncidentCount}})"
     },
     "serviceStatus": {
