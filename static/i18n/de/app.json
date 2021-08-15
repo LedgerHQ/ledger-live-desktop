@@ -2106,35 +2106,35 @@
         "validators": {
           "title": "Validatoren",
           "notValidatorsRemoved": "Sie haben {{count}} Adressen nominiert, die keine Validatoren mehr sind. Sie werden automatisch aus Ihrer Nominierungstransaktion entfernt.",
-          "maybeChill": "Clear nominations instead"
+          "maybeChill": "Stattdessen Nominierungen löschen"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "title": "Sie haben erfolgreich Validatoren nominiert",
+            "text": "Sie beginnen, Prämien zu verdienen, wenn Ihr Vermögen an den/die gewählten Validator(en) gebunden ist.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Übermittlung der Transaktion..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "Gebundene Vermögenswerte",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
+        "label": "Prämienziel",
+        "stash": "Verfügbares Guthaben",
+        "stashDescription": "Die Prämien werden Ihrem verfügbaren Guthaben gutgeschrieben.",
+        "staked": "Gebundenes Guthaben",
+        "stakedDescription": "Prämien werden Ihrem Guthaben gutgeschrieben, so dass Sie mehr Geld verdienen können.",
+        "optionTitle": "Hinweis",
         "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
       },
       "steps": {
