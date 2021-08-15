@@ -713,7 +713,7 @@
         "assetLended": "Vermögenswert",
         "amount": "Betrag",
         "accruedInterest": "Aufgelaufene Zinsen",
-        "date": "Date"
+        "date": "Datum"
       },
       "rates": {
         "allAssets": "Vermögenswert",
@@ -721,12 +721,12 @@
         "totalBalanceTooltip": "Verfügbarer Betrag zum Ausleihen",
         "currentAPY": "Einzahlung APY",
         "currentAPYTooltip": "Jährliche Rendite, die auf eine kontinuierlich aufgezinste Einlage erzielt wird",
-        "actions": "Actions"
+        "actions": "Aktionen"
       }
     },
     "manage": {
-      "cta": "Manage lending",
-      "title": "Manage loan",
+      "cta": "Kreditvergabe verwalten",
+      "title": "Darlehen verwalten",
       "enable": {
         "approve": "Bestätigen",
         "manageLimit": "Limit verwalten",
@@ -898,34 +898,34 @@
       "buy": "Kaufen",
       "sell": "Verkaufen",
       "edit": "Konto bearbeiten",
-      "hideToken": "Hide token"
+      "hideToken": "Token ausblenden"
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "Hilfe & Support",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "Erste Schritte",
+      "desc": "Beginnen Sie hier"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledger-Status",
+      "desc": "Prüfen Sie unseren Systemstatus"
     },
     "helpCenter": {
       "title": "Ledger Support",
-      "desc": "Get help"
+      "desc": "Hilfe erhalten"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "title": "Ledger Akademie",
+      "desc": "Krypto kennenlernen"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "Liken Sie unsere Seite"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "Folgen Sie uns"
     },
     "github": {
       "title": "Github",
