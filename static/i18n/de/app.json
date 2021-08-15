@@ -929,55 +929,55 @@
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "Überprüfen Sie unseren Code"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "Token ausblenden",
+    "desc": "Diese Aktion blendet alle <1><0>{{tokenName}}</0></1> Konten aus, Sie können sie unter <3>Einstellungen</3> wieder einblenden",
+    "hideCTA": "Token ausblenden"
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "title": "Das Ändern von experimentellen Einstellungen erfordert einen leeren Cache",
+      "cta": "Cache leeren"
     },
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "migrate": "Update für Ledger Live-Konten verfügbar",
+    "genericTerminatedCrypto": "{{coinName}} wird nicht mehr unterstützt",
     "valentine": {
-      "title": "Valentine’s day",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "title": "Valentinstag",
+      "description": "Als Beweis unserer Liebe reduziert Ledger die Kauf- und Verkaufsgebühren auf Ledger Live"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "title": "Ledger Akademie",
+      "description": "Alles, was Sie über Blockchain, Sicherheit, Kryptowährungen und Ihr Ledger-Gerät wissen müssen",
+      "cta": "Lernen beginnen"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "Staking mit COSMOS",
+      "description": "Übertragen Sie Ihre ATOM-Coins über die Kontoseite und verdienen Sie noch heute Prämien",
+      "cta": "Cosmos jetzt verleihen"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "title": "Krypto kaufen",
+      "description": "Kaufen Sie Krypto-Vermögenswerte über unseren Partner und erhalten Sie diese direkt auf Ihr Ledger-Konto",
+      "cta": "Jetzt kaufen"
     },
     "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "title": "Backup-Paket",
+      "description": "Verwalten Sie Ihr Vermögen sicher mit einem Nano X und Nano S zu einem vergünstigten Preis",
+      "cta": "Backup-Paket kaufen"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "title": "POLKADOT Staking",
+      "description": "Sie können Ihren DOT jetzt direkt in Ledger Live staken/verleihen, sichern und verwalten"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "Krypto verkaufen",
+      "description": "Verkaufen Sie Bitcoin mit unserem Partner direkt von Ledger Live"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
+      "title": "Staken mit ALGORAND",
       "description": "Machen Sie das Beste aus Ihrem ALGO. Fügen Sie einfach Guthaben zu Ihren Konten hinzu und verdienen Sie noch heute Prämien."
     },
     "swap": {
@@ -1281,8 +1281,8 @@
       "noFreeSpace": "Kein Speicher mehr frei",
       "installed": "Apps",
       "capacity": "Kapazität",
-      "used": "Used",
-      "firmwareAvailable": "Firmware is outdated:",
+      "used": "Verwendet",
+      "firmwareAvailable": "Die Firmware ist veraltet:",
       "firmwareUpToDate": "Firmware is up to date:",
       "genuine": "Device is genuine",
       "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
@@ -1627,10 +1627,10 @@
         "title": "Zusammenfassung"
       },
       "device": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "utxoLag": "Die Verifizierung und Unterzeichnung dieser Transaktion kann lange dauern, da das Konto eine beträchtliche Anzahl von Coins enthält.",
         "subaccountsWarning": "Sie müssen dieses Konto mit {{ Währung }} auffüllen, um die Token dieses Kontos versenden zu können",
         "from": "Von",
         "to": "Nach",
@@ -1707,7 +1707,7 @@
         "voteExisting": "Stimmen verwalten"
       },
       "manageTP": "Vermögenswerte verwalten",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "Sie benötigen mindestens {{amount}}, um Prämien zu erhalten",
       "claimRewards": "Prämie beanspruchen",
       "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
       "claimAvailableRewards": "Anspruch {{Betrag}}",
@@ -1715,9 +1715,9 @@
       "percentageTP": "% der abgegebenen Stimmen",
       "noRewards": "Keine Prämien verfügbar",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "You can cast your remaining votes to earn more rewards",
-        "button": "Vote now"
+        "title": "Sie haben noch {{amount}} Stimmen übrig",
+        "description": "Sie können Ihre verbleibenden Stimmen abgeben, um weitere Prämien zu erhalten",
+        "button": "Jetzt abstimmen"
       },
       "flow": {
         "steps": {
