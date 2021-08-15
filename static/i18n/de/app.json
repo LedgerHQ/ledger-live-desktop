@@ -1722,48 +1722,48 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "Sperren Sie TRX, um Prämien zu verdienen und behalten Sie trotzdem die volle Sicherheit und Kontrolle über Ihr Vermögen.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "delegate": "Delegierte Vermögenswerte bleiben in Ihrem Besitz.",
+              "access": "Sie können Ihre Vermögenswerte nach 3 Tagen wieder entsperren.",
+              "ledger": "Sperren und sicher abstimmen mit Ihrem Ledger-Gerät."
             },
-            "help": "How voting works",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "help": "Wie die Abstimmung funktioniert",
+            "termsAndPrivacy": "Das übertragen Ihrer Stimmrechte garantiert keine Prämien durch Ihren Super-Repräsentanten."
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Vermögenswerte verwalten",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "title": "Sperren",
+        "description": "Sperren Sie TRX, um Bandbreite oder Energie zu verdienen. Sie können auch für Super-Repräsentanten abstimmen."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "title": "Entsperren",
+        "description": "Entsperren Sie TRX, um sie wieder in Ihrem verfügbaren Guthaben zu haben. Sie werden keine Prämien mehr verdienen."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "Abstimmen",
+        "description": "Geben Sie Stimmen für Super-Repräsentanten ab, um Prämien zu verdienen.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "Stimmen abgeben",
+            "description": "Wählen Sie einen oder mehrere Super-Repräsentanten, um Prämien zu verdienen.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "Nicht mehr anzeigen",
+              "next": "Stimmen abgeben"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SR oder Kandidaten?",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "title": "Super-Repräsentanten (SR)",
+                "description": "Super-Repräsentanten spielen eine Schlüsselrolle bei der Verwaltung der TRON-Community, indem sie grundlegende Funktionen sicherstellen, z. B. die Blockerstellung und die Buchhaltung."
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "Kandidaten",
+                "description": "127 Personen, die durch die Abstimmung der gesamten Token-Inhaber-Community gewählt werden. Die Abstimmungen werden alle 6 Stunden aktualisiert."
               }
             }
           }
@@ -1772,36 +1772,36 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
-    "modalTitle": "Coin control",
-    "coincontrol": "Coin control",
-    "advanced": "Advanced options",
-    "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
-    "replaceable": "replaceable",
+    "inputSelected": "AUSGEWÄHLT",
+    "toSpend": "Coins zum Ausgeben",
+    "toReturn": "Wechseln zu Rückgabe",
+    "modalTitle": "Coin-Kontrolle",
+    "coincontrol": "Coin-Kontrolle",
+    "advanced": "Erweiterte Optionen",
+    "ctaDisabled": "Dieses Konto hat keine UTXO",
+    "whatIs": "Was ist die Coin-Auswahl?",
+    "rbf": "Erlauben, dass die Transaktion ersetzt wird (Replace-By-Fee).",
+    "strategy": "Strategie für die Coin-Auswahl",
+    "selected": "Für die Strategie ausgewählte Coins",
+    "amount": "Zu sendender Betrag:",
+    "replaceable": "austauschbar",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "unconfirmed": "Sie können keine Coins aus unbestätigten, austauschbaren Transaktionen auswählen.",
+      "last": "Sie benötigen mindestens eine ausgewählte Transaktion"
     },
-    "pending": "pending",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pending": "ausstehend",
+    "pickUnconfirmedRBF": "Inklusive Coins von nicht bestätigten und austauschbaren Transaktionen.",
+    "pickingStrategy": "UTXO Auswahlstrategie",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "DEEP_OUTPUTS_FIRST": "Älteste Coins zuerst (FIFO)",
+      "OPTIMIZE_SIZE": "Gebühren minimieren (Größe optimieren)",
+      "MERGE_OUTPUTS": "Zukünftige Gebühren minimieren (Coins zusammenführen)"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
+        "description": "Sie können ATOM-Prämien verdienen, indem Sie Ihre Vermögenswerte übertragen.",
         "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
@@ -1985,9 +1985,9 @@
       "header": "Rewards",
       "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
       "cta": "Claim rewards",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "Sie haben keine Prämien. Algorand-Prämien werden automatisch beansprucht, wenn Sie eine Transaktion durchführen. Holen Sie sich ALGO und beginnen Sie damit, Prämien zu verdienen.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "Prämie beanspruchen",
         "steps": {
           "starter": {
             "description": "Erhalten Sie Algorand-Prämien einfach dafür, dass Sie die Kontrolle über ihr Algorand-Vermögen haben.",
