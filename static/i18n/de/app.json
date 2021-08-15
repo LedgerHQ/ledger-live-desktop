@@ -2878,30 +2878,30 @@
             "title": "Wiederherstellungsphrase eingeben",
             "paragraph1": "Ihr Wiederherstellungsphrase ist die geheime Liste von Wörtern, die Sie beim ersten Einrichten Ihrer Wallet gewählt haben.",
             "paragraph2": "Ledger bewahrt keine Kopie Ihrer Wiederherstellungsphrase auf.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "disclaimer": "Ich verstehe, dass ich bei Verlust der Wiederherstellungsphrase nicht mehr auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
             "buttons": {
-              "next": "Enter recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Wiederherstellungssatz eingeben",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "title": "Verwenden Sie keinen Wiederherstellungssatz, den Sie nicht selbst erstellt haben.",
+              "desc": "Der PIN-Code und der Wiederherstellungssatz Ihrer Ledger-Hardware-Wallet sollten von Ihnen und nur von Ihnen erstellt werden. Falls Sie ein Gerät mit einem bereits existierendem Seed-Wort oder einem bereits initialisierten PIN-Code erhalten haben, verwenden Sie das Produkt bitte nicht und kontaktieren Sie unseren Kundendienst.",
+              "supportLink": "Kundensupport kontaktieren"
             }
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Take your recovery sheet",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "title": "Nehmen Sie Ihr Wiederherstellungsblatt",
+              "descr": "Nehmen Sie ein leeres Wiederherstellungsblatt, das Ihrem Nano beiliegt. Bitte wenden Sie sich an den Ledger-Support, wenn das Wiederherstellungsblatt nicht leer geliefert wurde."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Schreiben Sie 24 Wörter auf",
+              "descr": "Schreiben Sie das 1. Wort, das auf Ihrem Nano angezeigt wird, in Position 1 Ihres Wiederherstellungsblatts. Drücken Sie dann auf Ihrem Nano nach rechts, um Wort Nummer 2 anzuzeigen, und notieren Sie es in Position 2. Wiederholen Sie den Vorgang für alle Wörter und achten Sie dabei sorgfältig auf die Reihenfolge und die Rechtschreibung. Drücken Sie auf Ihrem Nano nach links, um eventuelle Fehler zu finden."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
               "help": "Need help"
             }
           },
@@ -3111,15 +3111,15 @@
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Versuchen Sie verschiedene USB-Anschlüsse",
           "bullets": {
-            "0": "Change the USB port used on your computer",
+            "0": "Ändern Sie den verwendeten USB-Anschluss an Ihrem Computer",
             "1": "Entfernen Sie alle USB-Dongles",
             "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
@@ -3249,7 +3249,7 @@
     "votes": "Stimmen ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
     "title": "Legal",
@@ -3319,42 +3319,42 @@
     },
     "CosmosBroadcastCodeTxDecode": {
       "title": "Etwas ist schief gelaufen (Fehler 2)",
-      "description": "Please contact Ledger Support"
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "title": "Ungültige Sequenz",
+      "description": "Bitte versuchen Sie den Vorgang erneut"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "Nicht autorisierte Signatur",
+      "description": "Dieses Konto ist nicht berechtigt, diese Transaktion zu unterzeichnen"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Unzureichendes Guthaben",
+      "description": "Vergewissern Sie sich, dass das verwendete Konto über genügend Guthaben verfügt und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 6)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "Ungültige Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 8)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "Unbekannte Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Unzureichende Coins",
+      "description": "Vergewissern Sie sich, dass das verwendete Konto über genügend Guthaben verfügt und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
+      "title": "Etwas ist schief gelaufen (Fehler 11)",
       "description": "Please contact Ledger Support"
     },
     "CosmosBroadcastCodeOutOfGas": {
