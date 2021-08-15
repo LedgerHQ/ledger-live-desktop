@@ -1994,7 +1994,7 @@
             "bullet": {
               "delegate": "Um Prämien zu erhalten, ist ein Mindestguthaben von 1 ALGO erforderlich.",
               "access": "Erhöhen Sie das Guthaben des Kontos, um die Prämien zu erhöhen.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "ledger": "Führen Sie eine Transaktion auf oder von dem Konto durch, um Prämien zu beanspruchen."
             },
             "learnMore": "Wie funktionieren Algorand-Prämien?",
             "button": {
@@ -2003,7 +2003,7 @@
           },
           "info": {
             "title": "Prämien",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "description": "Glückwunsch! Sie haben {{Betrag}} verdient. Klicken Sie auf Weiter, um Ihre Prämien einzufordern",
             "info": "Sie werden aufgefordert, eine leere Transaktion auf Ihrem Konto zu erzeugen. Dadurch werden Ihre aktuellen Prämien zu den minimalen Kosten der Transaktionsgebühren zu Ihrem Guthaben hinzugefügt."
           },
           "connectDevice": {
@@ -2061,51 +2061,51 @@
       "externalControllerTooltip": "Dieses Konto wird von einem anderen Konto gesteuert.",
       "externalControllerUnsupported": "<0>Dieses Stash-Konto wird von einem anderen Konto mit der Adresse <0>{{address}}</0> kontrolliert.</0><1>Staking-Operationen auf Konten, die von einem anderen Konto kontrolliert werden, werden in Ledger Live nicht unterstützt. Bitte verwenden Sie eine alternative Wallet wie z.B. Polkadot.js</1>",
       "externalStashTooltip": "Dieses Konto steuert ein anderes Konto.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "externalStashUnsupported": "<0>Dieses Konto steuert ein Stash-Konto, dessen Adresse <0>{{address}}</0> ist.</0><1>Staking-Aktionen auf separaten Stash-Konten werden in Ledger Live nicht unterstützt. Bitte verwenden Sie eine alternative Wallet wie Polkadot.js</1>",
+      "showInactiveNominations": "Alle Nominierungen anzeigen ({{count}})",
+      "hideInactiveNominations": "Nur aktive Nominierungen anzeigen",
+      "noActiveNominations": "Es sind keine aktiven Nominierungen vorhanden.",
+      "showAllUnlockings": "Alle ungebundenen Beträge anzeigen ({{count}})",
+      "hideAllUnlockings": "Ungebundene Beträge ausblenden"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "header": "Entbinden",
+      "headerTooltip": "Verfügbar nach der 28-tägigen Frist",
+      "withdrawUnbonded": "({{amount}}) Abheben",
+      "withdrawTooltip": "Der nicht gebundene Betrag wird Ihrem verfügbaren Guthaben gutgeschrieben.",
+      "noUnlockedWarning": "Noch kein ungebundenes Guthaben zum Abheben.",
+      "rebond": "Erneut binden",
+      "unbonded": "Entbunden"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Vermögenswerte verwalten",
       "bond": {
-        "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "title": "Binden",
+        "description": "Um Prämien zu verdienen, binden Sie zunächst einen Betrag. Dann müssen Sie Ihre(n) Validator(en) nominieren."
       },
       "unbond": {
-        "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "title": "Entbinden",
+        "description": "Um einen gebundenen Betrag wieder verfügbar zu machen, müssen Sie ihn zunächst entbinden. Sie können ihn nach der 28-tägigen Entbindungsfrist abheben."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "Abheben",
+        "description": "Um einen nicht gebundenen Betrag wieder auf das verfügbare Guthaben zurück zu holen, müssen Sie ihn manuell abheben."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "Nominieren",
+        "description": "Wählen Sie bis zu 16 Validatoren. Stellen Sie sicher, dass Nominierungen aktiv sind, um Prämien zu verdienen."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "Nominierungen löschen",
+        "description": "Alle Nominierungen entfernen. Sie werden keine Prämien mehr verdienen. Ihr gebundener Betrag bleibt gebunden."
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "Nominieren",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
+          "title": "Validatoren",
+          "notValidatorsRemoved": "Sie haben {{count}} Adressen nominiert, die keine Validatoren mehr sind. Sie werden automatisch aus Ihrer Nominierungstransaktion entfernt.",
           "maybeChill": "Clear nominations instead"
         },
         "connectDevice": {
