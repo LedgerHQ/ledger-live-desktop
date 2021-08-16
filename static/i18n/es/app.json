@@ -1236,7 +1236,7 @@
   "DeviceAction": {
     "allowAppPermission": "Abre la aplicación {{wording}} en tu dispositivo",
     "allowAppPermissionSubtitleToken": "para administrar los tokens {{token}}",
-    "allowManagerPermission": "Permite {{wording}} en tu dispositivo",
+    "allowManagerPermission": "Permite (Allow) {{wording}} en tu dispositivo",
     "loading": "Cargando...",
     "connectAndUnlockDevice": "Conecta y desbloquea tu dispositivo",
     "unlockDevice": "Desbloquea tu dispositivo",
