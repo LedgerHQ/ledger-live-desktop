@@ -9,8 +9,13 @@ const main = async () => {
   const from = core.getInput("from");
   const to = core.getInput("to");
   const author = core.getInput("author");
-  let imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
-  if (imgChanged.length === 1 && imgChanged[0] === "") {
+  let imgChanged;
+  try {
+    imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
+    if (imgChanged.length === 1 && imgChanged[0] === "") {
+      imgChanged = [];
+    }
+  } catch(e) {
     imgChanged = [];
   }
   const testoutput = await fs.readFile(core.getInput("testoutput"), "utf8");
