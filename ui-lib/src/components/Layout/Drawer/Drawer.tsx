@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import styled from "styled-components";
 import Button from "@ui/components/Button";
 import FlexBox from "@ui/components/Layout/Flex";
-import Cross from "@ui/assets/icons/Cross";
-import ArrowLeft from "@ui/assets/icons/ArrowLeft";
+import Close from "@ui/assets/icons/CloseRegular";
+import ArrowLeft from "@ui/assets/icons/ArrowLeftRegular";
 import TransitionSlide from "@ui/components/Transition/TransitionSlide";
 import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 
@@ -102,7 +102,7 @@ const Drawer = ({
                   <ButtonPlaceholder />
                 )}
                 {title || <div />}
-                <Button Icon={Cross} onClick={onClose} />
+                <Button Icon={Close} onClick={onClose} />
               </Header>
               <ScrollWrapper>{children}</ScrollWrapper>
             </Container>

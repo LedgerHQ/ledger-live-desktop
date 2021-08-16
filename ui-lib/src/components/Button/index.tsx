@@ -3,7 +3,7 @@ import styled, { css, DefaultTheme } from "styled-components";
 import { fontSize, color } from "styled-system";
 import fontFamily from "@styles/styled/fontFamily";
 import { fontSizes } from "@styles/theme";
-import ChevronDown from "@ui/assets/icons/ChevronDown";
+import ChevronBottom from "@ui/assets/icons/ChevronBottomRegular";
 
 type ButtonTypes = "primary" | "secondary";
 
@@ -144,7 +144,7 @@ const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: P
 };
 
 const StyledExpandButton: any = styled(Button).attrs(props => ({
-  Icon: props.Icon != null || ChevronDown,
+  Icon: props.Icon != null || ChevronBottom,
   iconPosition: props.iconPosition || "right",
 }))<BaseProps & { expanded: boolean }>`
   ${IconContainer} {
