@@ -98,7 +98,9 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
         <Button onClick={handleNext} primary id="onboarding-get-started-button">
           {t("onboarding.screens.welcome.cta")}
         </Button>
-        {onboardingRelaunched && <Button onClick={() => sendEvent("PREV")}>Previous</Button>}
+        {onboardingRelaunched && (
+          <Button onClick={() => sendEvent("PREV")}>{t("common.previous")}</Button>
+        )}
       </ButtonContainer>
       <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
         <Trans i18nKey="onboarding.screens.welcome.noDevice">

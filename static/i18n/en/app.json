@@ -120,7 +120,8 @@
       "devTools": "Dev tools"
     },
     "exchange": "Exchange",
-    "info": "Info"
+    "info": "Info",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -625,7 +626,9 @@
       "continue": "Continue"
     },
     "history": {
-      "tab": "History"
+      "tab": "History",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -691,6 +694,12 @@
       "status": {
         "enablingTooltip": "Your transaction is broadcasting",
         "toSupplyTooltip": "You can now supply your assets"
+      },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
       },
       "closed": {
         "assetLended": "Asset",
@@ -1030,7 +1039,8 @@
     "title": "Current address",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -1300,8 +1310,10 @@
         "manageAccount": "Manage my accounts"
       },
       "updatable": {
-        "title": "Updates available",
-        "progressTitle": "{{number}} App updates",
+        "title": "Update available",
+        "title_plural": "Updates available",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Do not quit Manager during update.",
         "progress": "Updating all..."
       },
@@ -1339,6 +1351,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+        },
+        "wyre_buy": {
+          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
+          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+        },
+        "lido": {
+          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
+          "description": "Stake your ETH with Lido to earn daily staking rewards."
+        },
+        "zerion": {
+          "shortDescription": "The smart way to manage your DeFi portfolio.",
+          "description": "The smart way to manage your DeFi portfolio."
+        },
+        "rainbow": {
+          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+        },
+        "aave": {
+          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+        },
+        "compound": {
+          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+        },
+        "deversifi": {
+          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
+          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "{{dependency}} app is required",
         "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
@@ -2342,9 +2392,9 @@
         "button": "Done",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <1><0>+</0></1> button in <3><0>Accounts</0></3>",
-        "step2": "Tap <1><0>Import desktop accounts</0></1>",
-        "step3": "Scan the <1><0>LiveQR code</0></1> until the loader hits 100%"
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2420,7 +2470,37 @@
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
@@ -2654,6 +2734,7 @@
         "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "First use",
