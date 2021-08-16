@@ -2,26 +2,14 @@ import Color from "color";
 
 import { colors, fontFamilies } from "./theme";
 
-export const rgba = (c: string, a: number): string =>
-  Color(c)
-    .alpha(a)
-    .rgb()
-    .toString();
+export const rgba = (c: string, a: number): string => Color(c).alpha(a).rgb().toString();
 
-export const darken = (c: string, a: number): string =>
-  Color(c)
-    .darken(a)
-    .toString();
+export const darken = (c: string, a: number): string => Color(c).darken(a).toString();
 
-export const lighten = (c: string, a: number): string =>
-  Color(c)
-    .lighten(a)
-    .toString();
+export const lighten = (c: string, a: number): string => Color(c).lighten(a).toString();
 
 export const mix = (c: string, b: string, a: number): string =>
-  Color(c)
-    .mix(Color(b), a)
-    .toString();
+  Color(c).mix(Color(b), a).toString();
 
 export const ff = (v: string): any => {
   const [font, type = "Regular"] = v.split("|");
