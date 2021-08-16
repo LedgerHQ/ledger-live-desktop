@@ -16,6 +16,7 @@ interface Props {
   fontSize?: number;
   type?: ButtonTypes;
   iconPosition?: "right" | "left";
+  iconSize?: number;
 }
 const IconContainer = styled.div<{
   iconPosition: "right" | "left";
@@ -33,7 +34,6 @@ interface BaseProps {
   type?: ButtonTypes;
   iconPosition?: "right" | "left";
   iconButton?: boolean;
-  iconSize?: number,
   disabled?: boolean;
   theme: DefaultTheme;
 }

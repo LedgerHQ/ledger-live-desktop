@@ -1,5 +1,5 @@
-import * as Icons from "../../assets/icons";
-import invariant from "invariant";
+import * as icons from "../../assets/icons";
+import React from "react";
 
 type Props = {
   name: string;
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const iconNames = Array.from(
-  Object.keys(Icons).reduce((set, rawKey) => {
+  Object.keys(icons).reduce((set, rawKey) => {
     const key = rawKey
       .replace(/(.+)(Regular|Light|UltraLight|Thin|Medium)+$/g, "$1")
       .replace(/(.+)(Ultra)+$/g, "$1");
@@ -18,10 +18,14 @@ export const iconNames = Array.from(
   }, new Set()),
 );
 
-const Icon = ({ name, size = 16, color = "currentColor", weight = "Regular" }: Props): Svg => {
-  const Component = Icons[`${name}${weight}`];
-  invariant(Component, `No icon found for id ${name}}`);
-  return <Component size={size} color={color} />;
+const Icon = ({ name, size = 16, color = "currentColor", weight = "Regular" }: Props) => {
+  const maybeIconName = `${name}${weight}`;
+  if (maybeIconName in icons) {
+    // @ts-expect-error I don't know how to make you happy ts
+    const Component = icons[maybeIconName];
+    return <Component size={size} color={color} />;
+  }
+  return null;
 };
 
 export default Icon;

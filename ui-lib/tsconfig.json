@@ -28,6 +28,7 @@
     "metro.config.js",
     "jest.config.js",
     "**/**/*.stories.tsx",
+    "./scripts",
     "./lib"
   ]
 }
