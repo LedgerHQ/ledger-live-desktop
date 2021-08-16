@@ -1962,27 +1962,27 @@
         "steps": {
           "assets": {
             "title": "ASA (Vermögenswerte)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "info": "Das Hinzufügen eines Vermögenswerts erfordert das Senden einer Transaktion mit Mindestgebühren. Dies wird in Ihrem Transaktionsverlauf angezeigt",
+            "selectLabel": "Wählen Sie einen ASA (Vermögenswert)",
+            "disabledTooltip": "Sie haben diesen ASA (Vermögenswert) bereits in Ihrem Algorand-Konto"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "{{token}} asset successfully added",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "title": "{{token}}-Vermögenswert erfolgreich hinzugefügt",
+              "text": "Sie können jetzt <0>{{token}}</0> Vermögenswerte auf Ihrem Algorand-Konto empfangen und senden.",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "claimRewards": {
-      "header": "Rewards",
+      "header": "Prämien",
       "tooltip": "Algorand-Prämien werden regelmäßig ausgeschüttet und werden automatisch beansprucht, wenn Sie eine Transaktion durchführen.",
       "cta": "Prämie beanspruchen",
       "rewardsDisabledTooltip": "Sie haben keine Prämien. Algorand-Prämien werden automatisch beansprucht, wenn Sie eine Transaktion durchführen. Holen Sie sich ALGO und beginnen Sie damit, Prämien zu verdienen.",
@@ -2698,20 +2698,20 @@
         "points": {
           "1": "Geben Sie sie <0>NIEMALS</0> auf einem Computer, Smartphone oder einem anderen Gerät ein. Machen Sie kein Foto davon.",
           "2": "Teilen Sie Ihre 24 Worte <0>NIEMALS</0> mit jemand anderem.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
-          "4": "Ledger will never ask for your recovery phrase.",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "3": "Bewahren Sie sie <0>IMMER</0> an einem sicheren Ort auf, außer Reichweite von anderen.",
+          "4": "Ledger wird Sie niemals nach Ihrer Wiederherstellungsphrase fragen.",
+          "5": "Wenn eine Person oder Anwendung danach fragt, gehen Sie davon aus, dass es sich um einen Betrug handelt!"
         }
       }
     },
     "alerts": {
       "beCareful": {
-        "title": "Please be careful",
-        "descr": "Make sure you follow the instructions on this app at every step of the process.",
-        "gotIt": "Got it"
+        "title": "Bitte seien Sie vorsichtig",
+        "descr": "Stellen Sie sicher, dass Sie die Anweisungen dieser App bei jedem Schritt des Vorgangs befolgen.",
+        "gotIt": "Verstanden"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
+        "title": "Wir empfehlen nur Ledger-Wiederherstellungsphrasen",
         "descr": "Ledger kann die Sicherheit von externen Wiederherstellungssätzen nicht garantieren. Wir empfehlen, Ihren Nano als neues Gerät einzurichten, wenn Ihre Wiederherstellungsphrase nicht von einem Ledger generiert wurde.",
         "gotIt": "Verstanden"
       }
@@ -2902,12 +2902,12 @@
             "buttons": {
               "next": "Nächster Schritt",
               "prev": "Vorheriger Schritt",
-              "help": "Need help"
+              "help": "Hilfe benötigt"
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
+            "title": "Wiederherstellungsphrase",
+            "paragraph1": "Ihr Wiederherstellungssatz ist eine geheime Liste von 24 Wörtern, die Ihre privaten Schlüssel sichert.",
             "paragraph2": "Ihr Nano erzeugt eine einzigartige Wiederherstellungsphrase. Ledger bewahrt keine Kopie davon auf.",
             "disclaimer": "Ich verstehe, dass ich bei Verlust dieser Wiederherstellungsphrase nicht auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
             "buttons": {
@@ -3011,52 +3011,52 @@
         },
         "setUpNanoWallet": {
           "title": "Lassen Sie uns Ihren Nano einrichten!",
-          "description": "We'll start by setting up your Nano security.",
-          "CTA": "Let’s do this!"
+          "description": "Wir beginnen mit den Sicherheitseinstellungen ihres Nano.",
+          "CTA": "Packen wir's an!"
         }
       }
     },
     "quizz": {
       "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "title": "Jetzt geht's los!",
+      "descr": "Beantworten Sie 3 einfache Fragen, um häufige Missverständnisse über Ihre Hardware-Wallet zu vermeiden.",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "start": "Lassen Sie uns das Quiz machen",
+        "next": "Nächste Frage",
+        "finish": "Quiz beenden"
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "Als Ledger-Benutzer werden meine Kryptos so gespeichert:",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "Auf meinem Nano",
+            "2": "Auf der Blockchain"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Ihre Kryptos sind immer in der Blockchain gespeichert. Ihre Hardware-Wallet enthält nur Ihren privaten Schlüssel, der Ihnen Zugriff auf Ihre Kryptos gibt."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Falsch!",
+              "text": "Ihre Kryptos sind immer in der Blockchain gespeichert. Ihre Hardware-Wallet enthält nur Ihren privaten Schlüssel, der Ihnen Zugriff auf Ihre Kryptos gibt."
             }
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "Wenn mein Wiederherstellungssatz nicht mehr sicher oder privat ist ...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "Kein Problem, Ledger kann mir eine Kopie schicken",
+            "2": "Meine Kryptos sind nicht mehr sicher und ich muss sie an einen sicheren Ort übertragen"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Jeder, der Ihren Wiederherstellungssatz kennt, kann Ihr Krypto-Vermögen stehlen. Wenn Sie ihn verlieren, müssen Sie Ihre Kryptos schnell an einen sicheren Ort übertragen."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Falsch!",
+              "text": "Jeder, der Ihren Wiederherstellungssatz kennt, kann Ihr Krypto-Vermögen stehlen. Wenn Sie ihn verlieren, müssen Sie Ihre Kryptos schnell an einen sicheren Ort übertragen."
             }
           }
         },
