@@ -133,10 +133,10 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   console.log(str);
 
-  const prNumber = core.getInput("prNumber");
+  const sha = core.getInput("sha");
 
   await fetch(
-    `http://github-actions-live-vercel.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    `http://github-actions-live-vercel.vercel.app/api/comment/v2?owner=LedgerHQ&repo=ledger-live-desktop&sha=${sha}`,
     {
       method: "POST",
       headers: {
