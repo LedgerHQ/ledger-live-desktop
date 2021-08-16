@@ -3382,7 +3382,7 @@
       "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
+      "title": "{{currencyName}} wird nicht unterstützt",
       "description": "Dieser Krypto-Vermögenswert wird noch nicht unterstützt. Bitte kontaktieren Sie den Ledger-Support."
     },
     "DeviceNotGenuine": {
@@ -3390,35 +3390,35 @@
       "description": "Hilfe vom Ledger-Support anfordern"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "Entschuldigung, versuchen Sie es erneut (echt-schließen)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sorry, Update fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again"
+      "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "Verbindung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es scheint Ihr Gerät ist nicht verbunden",
+      "description": "Bitte neu verbinden und erneut versuchen."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es scheint Ihr Gerät ist nicht verbunden",
+      "description": "Bitte neu verbinden und erneut versuchen."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
+      "title": "Ungültiger Endpunkt",
       "description": "Bitte geben Sie einen gültigen Endpunkt an"
     },
     "FeeEstimationFailed": {
@@ -3516,73 +3516,73 @@
       "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "Die Adresse des Empfängers ist inaktiv. Senden Sie mindestens {{minimalAmount}}, um sie zu aktivieren"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "Das ETH-Guthaben auf dem übergeordneten Konto reicht nicht für die Netzwerkgebühren aus"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
-      "description": "Please try again"
+      "title": "Die Passwörter stimmen nicht überein",
+      "description": "Bitte versuchen Sie es erneut"
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
-      "description": "Please try again"
+      "title": "Das eingegebene Passwort ist falsch",
+      "description": "Bitte versuchen Sie es erneut"
     },
     "RPCHostRequired": {
-      "title": "Host is required."
+      "title": "Host ist erforderlich."
     },
     "RPCHostInvalid": {
-      "title": "Enter valid host."
+      "title": "Geben Sie einen gültigen Host ein."
     },
     "RPCUserRequired": {
-      "title": "RPC Username is required"
+      "title": "RPC-Benutzername ist erforderlich"
     },
     "RPCPassRequired": {
-      "title": "RPC Password is required"
+      "title": "RPC-Passwort ist erforderlich"
     },
     "SatStackAccessDown": {
-      "title": "Could not reach full node",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "title": "Knoten (Full Node) nicht erreichbar",
+      "description": "Bitte überprüfen Sie, ob SatStack und Ihr Knoten/Node ausgeführt werden. Überprüfen Sie die vollständige Node-Einrichtung in den Einstellungen, wenn das Problem weiterhin besteht."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "title": "Node-Synchronisierung läuft ...",
+      "description": "Bitte warten Sie, während Ihr Node synchronisiert wird. Senden ist nicht möglich, da Ihr Bitcoin-Kontostand möglicherweise nicht korrekt ist."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "title": "Bitte aktualisieren Sie SatStack",
+      "description": "Die SatStack-Version, die Sie verwenden, ist zu alt und enthält möglicherweise Fehler oder Inkompatibilitäten."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "title": "Konto nicht von Knoten (Full Node) gescannt",
+      "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "Die Stratis-Blockchain hat sich weiterentwickelt und funktioniert möglicherweise nicht mehr korrekt.",
+      "description": "Die Unterstützung für die ursprüngliche Stratis-Blockchain wird bis zum 16. Oktober 2021 aufrechterhalten."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "title": "Wechselkurs verfallen",
+      "description": "Sie müssen den Tausch bestätigen, bevor der Timer abläuft. Der angezeigte Umrechnungskurs bleibt 60 Sekunden lang gültig."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "Entschuldigung, der Server hat zu lange für die Antwort gebraucht",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "Entschuldigung, der Server hat zu lange gebraucht um zu antworten ({{tag}})",
+      "description": "Zeitüberschreitung aufgetreten."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
