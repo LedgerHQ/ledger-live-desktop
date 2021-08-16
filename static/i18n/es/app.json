@@ -648,7 +648,7 @@
       "amountSupplied": "Importe depositado",
       "amountSuppliedTooltip": "Importe prestado a la red",
       "currencyAPY": "APY de divisa",
-      "currencyAPYTooltip": "Tasa de rendimiento anual de un depósito bajo Compound de forma continuada",
+      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
       "accruedInterests": "Interés acumulado",
       "accruedInterestsTooltip": "Interés generado por tus activos prestados",
       "interestEarned": "Interés recibido",
@@ -719,8 +719,8 @@
         "allAssets": "Activo",
         "totalBalance": "Saldo de activos",
         "totalBalanceTooltip": "Monto disponible para prestar",
-        "currentAPY": "APY del depósito ",
-        "currentAPYTooltip": "Tasa de rendimiento anual ganada mediante un depósito continuamente en Compound",
+        "currentAPY": "Deposit APY",
+        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Acciones"
       }
     },
