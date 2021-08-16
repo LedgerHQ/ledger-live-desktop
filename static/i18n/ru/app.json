@@ -2285,7 +2285,7 @@
     "delegated": "Делегировано",
     "completionDate": "Дата завершения",
     "rewards": "Вознаграждения",
-    "duration": "Продолжительность",
+    "duration": "Период",
     "durationJustStarted": "Только началось",
     "durationDays": "{{count}} день",
     "durationDays_plural": "{{count}} дн.",
