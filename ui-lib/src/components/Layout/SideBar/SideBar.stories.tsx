@@ -14,7 +14,7 @@ import SendIcon from "@ui/assets/icons/Send";
 import { useArgs } from "@storybook/client-api";
 
 export default {
-  title: "Layout/SideBar",
+  title: "Navigation/SideBar",
   component: SideBar,
   argTypes: {
     children: {

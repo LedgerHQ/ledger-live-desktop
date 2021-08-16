@@ -6,7 +6,6 @@ import SideBarIcon from "./components/SideBarIcon/SideBarIcon";
 import SideBarToggle from "./components/SideBarToggle/SideBarToggle";
 import { CSSTransition } from "react-transition-group";
 
-/* TODO: Create a resize transition ? */
 const Nav = styled(Flex)`
   position: relative;
   padding: 68px 12px 0;
@@ -19,16 +18,16 @@ const Nav = styled(Flex)`
   transition: max-width 300ms;
   will-change: max-width;
 
-  &.my-node-enter {
+  &.nav-enter {
     max-width: 75px;
   }
-  &.my-node-enter-done {
+  &.nav-enter-done {
     max-width: 14.875rem;
   }
-  &.my-node-exit {
+  &.nav-exit {
     max-width: 14.875rem;
   }
-  &.my-node-exit-done {
+  &.nav-exit-done {
     max-width: 75px;
   }
 `;
@@ -47,7 +46,7 @@ const SideBar = ({ children, onToggle, isExpanded = true }: SideBarProps): JSX.E
 
   return (
     <SideBarContext.Provider value={{ isExpanded, onToggle }}>
-      <CSSTransition in={isExpanded} timeout={300} classNames="my-node">
+      <CSSTransition in={isExpanded} timeout={300} classNames="nav">
         <Nav
           flexDirection="column"
           justifyContent="flex-start"

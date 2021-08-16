@@ -29,7 +29,14 @@ const ToggleButton = ({ isDisplayed }: ToggleButtonProps): JSX.Element => {
   const { isExpanded, onToggle } = useContext(SideBarContext);
 
   return (
-    <ToggleButtonContainer timeout={200} in={isDisplayed} appear unmountOnExit onClick={onToggle}>
+    <ToggleButtonContainer
+      timeout={200}
+      in={isDisplayed}
+      appear
+      unmountOnExit
+      onClick={onToggle}
+      role="button"
+    >
       {isExpanded ? <ArrowLeftIcon /> : <ArrowRightIcon />}
     </ToggleButtonContainer>
   );

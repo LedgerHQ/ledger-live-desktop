@@ -29,6 +29,12 @@ const Item = styled.li`
     --ll-sidebar-item-background-color: unset;
   }
 
+  /** FOCUS VARIANT **/
+  &:focus {
+    box-shadow: 0px 0px 0px 4px rgba(187, 176, 255, 0.4);
+    border-radius: 8px;
+  }
+
   /** ACTIVE VARIANT **/
   &[data-active] {
     --ll-sidebar-item-label-color: ${props => props.theme.colors.palette.v2.text.default};
@@ -79,7 +85,13 @@ const SideBarItem = ({
   };
 
   return (
-    <Item role="button" onClick={handleClick} data-active={isActive} data-disable={isDisable}>
+    <Item
+      role="button"
+      onClick={handleClick}
+      data-active={isActive}
+      data-disable={isDisable}
+      tabIndex={0}
+    >
       {children}
       <TransitionInOut
         timeout={300}
