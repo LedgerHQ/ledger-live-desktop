@@ -3061,19 +3061,19 @@
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "Wenn ich meinen Nano mit der Ledger-App verbinde, ist mein privater Schlüssel ...",
           "answers": {
-            "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "1": "Noch offline",
+            "2": "Kurzzeitig mit dem Internet verbunden"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Ihr privater Schlüssel bleibt immer offline in Ihrer Hardware-Wallet. Selbst wenn Sie mit Ihrem Nano verbunden sind, kann die Ledger-App nicht auf Ihren privaten Schlüssel zugreifen. Sie müssen jede Transaktion physisch auf Ihrem Gerät autorisieren."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Falsch!",
+              "text": "Ihr privater Schlüssel bleibt immer offline in Ihrer Hardware-Wallet. Selbst wenn Sie mit Ihrem Nano verbunden sind, kann die Ledger-App nicht auf Ihren privaten Schlüssel zugreifen. Sie müssen jede Transaktion physisch auf Ihrem Gerät autorisieren."
             }
           }
         }
@@ -3081,24 +3081,24 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "desc": "Haben Sie Schwierigkeiten, Ihr Gerät zu verbinden?",
+    "solution": "Lösung #{{number}}",
+    "nextSolution": "Nächste Lösung",
+    "previousSolution": "Vorherige Lösung",
+    "followSteps": "Diesen Schritten folgen",
+    "supportArticle": "Hilfeseite",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Fehlerbehebung bei der USB-Verbindung",
+        "desc": "Es scheint ein Problem beim Verbinden mit Ihrem Gerät zu geben. Keine Sorge, Sie können verschiedene Lösungen nacheinander ausprobieren, bis Ihr Gerät eine Verbindung herstellt!",
+        "cta": "Bringen wir es in Ordnung!",
+        "back": "Zurückgehen"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Starten Sie Ledger Live als Administrator",
           "bullets": {
-            "0": "Quit Ledger Live.",
+            "0": "Beenden Sie Ledger Live.",
             "1": "Klicken Sie mit der rechten Maustaste auf die Anwendung Ledger Live.",
             "2": "Wählen Sie „Als Administrator ausführen“.",
             "3": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
