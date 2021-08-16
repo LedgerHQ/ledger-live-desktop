@@ -1,9 +1,9 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { SelectAccount } from "~/renderer/components/PerCurrencySelectAccount";
 import Label from "~/renderer/components/Label";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -22,21 +22,31 @@ import { openModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
+import Image from "~/renderer/components/Image";
 
 const Container: ThemedComponent<{}> = styled.div`
+  min-width: 365px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-
+const IconContainer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 const ConfirmButton: ThemedComponent<{}> = styled(Button)`
   width: 100%;
   display: flex;
   justify-content: center;
 `;
-
 const FormContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
   margin-top: 8px;
@@ -48,10 +58,16 @@ const FormContent: ThemedComponent<{}> = styled.div`
 
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
+  allCurrencies: Array<TokenCurrency | CryptoCurrency>,
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
   allowAddAccount?: boolean,
   allowedCurrencies?: string[],
+  confirmCb?: Account => void,
+  provider?: {
+    id: string,
+    iconResource: string,
+  },
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -59,31 +75,19 @@ const AccountSelectorLabel = styled(Label)`
   flex: 1;
   justify-content: space-between;
 `;
-
 const SelectAccountAndCurrency = ({
   selectAccount,
+  allCurrencies,
   defaultCurrency,
   defaultAccount,
   allowAddAccount,
   allowedCurrencies,
+  confirmCb,
+  provider,
 }: Props) => {
   const { t } = useTranslation();
-  const cryptoCurrencies = useMemo(() => {
-    const supportedCurrencies = listSupportedCurrencies();
-
-    return allowedCurrencies
-      ? supportedCurrencies.filter(currency => {
-          return allowedCurrencies.includes(currency.id);
-        })
-      : supportedCurrencies;
-  }, [allowedCurrencies]);
-
-  // sorting them by marketcap
-  // $FlowFixMe - don't know why it fails
-  const allCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   const allAccounts = useSelector(accountsSelector);
-
   const {
     availableAccounts,
     currency,
@@ -97,7 +101,6 @@ const SelectAccountAndCurrency = ({
     defaultCurrency: allCurrencies.length === 1 ? allCurrencies[0] : defaultCurrency,
     defaultAccount,
   });
-
   const dispatch = useDispatch();
 
   const openAddAccounts = useCallback(() => {
@@ -136,6 +139,8 @@ const SelectAccountAndCurrency = ({
                   } else {
                     selectAccount(account);
                   }
+
+                  confirmCb?.(account);
                 }
               }}
               disabled={!account}
@@ -158,6 +163,18 @@ const SelectAccountAndCurrency = ({
 
   return (
     <Container>
+      {provider && (
+        <>
+          <IconContainer>
+            <Image resource={provider.iconResource} alt="" />
+          </IconContainer>
+          <Text ff="Inter|SemiBold" fontSize={5} color="palette.text.shade100" textAlign="center">
+            <Trans i18nKey="exchange.buy.title" values={{ provider: provider.id }}>
+              <Text color="palette.primary.main" />
+            </Trans>
+          </Text>
+        </>
+      )}
       <FormContainer>
         {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
         {allCurrencies.length !== 1 ? (
