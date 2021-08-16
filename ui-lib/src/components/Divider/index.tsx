@@ -10,7 +10,7 @@ const Divider = styled.div<Props>`
   display: block;
   margin: ${p => (p.margin === undefined ? 20 : p.margin)}px 0;
   background: ${p =>
-    p.type === "light"
+    p.type === "dark"
       ? p.theme.colors.palette.v2.grey.borderDark
       : p.theme.colors.palette.v2.grey.border};
   height: 1px;
