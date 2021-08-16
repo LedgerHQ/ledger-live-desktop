@@ -1414,33 +1414,33 @@
       "latest": "Firmware-Version {{version}} ist verfügbar",
       "contactSupport": "Support kontaktieren",
       "deprecated": "Geräte-Firmware-Version zu alt, um aktualisiert zu werden. Kontaktieren Sie den Ledger-Support für einen Ersatz.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "prepareSeed": "Vergewissern Sie sich, dass Ihre 24-Wörter-Wiederherstellungsphrase auf dem Wiederherstellungsblatt notiert ist und zur Verfügung steht, als Vorsichtsmaßnahme.",
+      "disclaimerTitle": "Sie sind dabei, die <1>Firmware-Version {{version}}</1> zu installieren.",
+      "downloadingUpdateDesc": "Bitte warten Sie, bis der Update-Installer heruntergeladen ist"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "updating": "Firmware update",
-        "reset": "Prepare device",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Preparing your device..."
+        "downloadingUpdate": "Update wird heruntergeladen",
+        "updateMCU": "Firmware-Update",
+        "updating": "Firmware-Update",
+        "reset": "Gerät vorbereiten",
+        "osu": "Installiere OSU ...",
+        "flash-mcu": "MCU-Aktualisierung ...",
+        "flash-bootloader": "Bootloader-Aktualisierung ...",
+        "firmware": "Firmware-Aktualisierung ...",
+        "flash": "Ihr Gerät vorbereiten ..."
       },
-      "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
-      "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
-      "mcuPin": "Please wait for the update to finish",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "confirmIdentifier": "Überprüfen Sie die Kennung",
+      "confirmIdentifierText": "Vergewissern Sie sich, dass die Kennung auf Ihrem Gerät mit der unten stehenden Kennung übereinstimmt. Bestätigen Sie und geben Sie Ihren PIN-Code ein, wenn Sie dazu aufgefordert werden.",
+      "identifier": "Kennung",
+      "mcuTitle": "Update abschließen",
+      "mcuFirst": "Trennen Sie das USB-Kabel von Ihrem Gerät",
+      "mcuSecond": "Drücken Sie die linke Taste und halten Sie sie gedrückt, während Sie das USB-Kabel wieder einstecken, bis der <1><0>{{repairProcessing}}</0></1> Bildschirm erscheint",
+      "mcuPin": "Bitte warten Sie, bis das Update beendet ist",
+      "mcuSecondNanoX": "Drücken und halten Sie die linke Taste, bis <1><0>{{bootloaderOption}}</0></1> erscheint. Drücken Sie beide Tasten, um zu bestätigen und Ihr Gerät erneut zu verbinden.",
+      "mcuBlueFirst": "Halten Sie die seitliche Taste 10 Sekunden lang gedrückt, um das Gerät auszuschalten. Lassen Sie die Taste danach los.",
+      "mcuBlueSecond": "Halten Sie die Taste für mindestens 5 Sekunden gedrückt, bis die Boot-Optionen angezeigt werden. Tippen Sie auf Bootloader-Modus",
+      "successTitle": "Firmware aktualisiert",
       "successTextApps": "Bitte installieren Sie die Apps erneut auf Ihrem Gerät",
       "successTextNoApps": "Sie können jetzt Apps auf Ihrem Gerät installieren",
       "sucessCTAApps": "Apps erneut installieren",
@@ -1983,8 +1983,8 @@
     },
     "claimRewards": {
       "header": "Rewards",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
+      "tooltip": "Algorand-Prämien werden regelmäßig ausgeschüttet und werden automatisch beansprucht, wenn Sie eine Transaktion durchführen.",
+      "cta": "Prämie beanspruchen",
       "rewardsDisabledTooltip": "Sie haben keine Prämien. Algorand-Prämien werden automatisch beansprucht, wenn Sie eine Transaktion durchführen. Holen Sie sich ALGO und beginnen Sie damit, Prämien zu verdienen.",
       "flow": {
         "title": "Prämie beanspruchen",
@@ -2142,8 +2142,8 @@
           "description": "Sie können Prämien verdienen, indem Sie Ihr Vermögen binden und dann Ihre Validatoren nominieren.",
           "bullet": [
             "Sie behalten das Eigentum an gebundenen Vermögenswerten",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Nominieren Sie mit Ihrem Ledger-Gerät",
+            "Vermögenswerte sind 28 Tage nach der Übertragung verfügbar"
           ],
           "help": "Wie Nominierungen funktionieren",
           "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer gebundenen Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält."
@@ -2241,7 +2241,7 @@
       "modes": {
         "withdrawUnbonded": {
           "title": "Abheben",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
+          "description": "Nach der 28-tägigen Entbindungsfrist können Sie nicht gebundene Vermögenswerte abheben.",
           "info": "You can then withdraw unbonded assets to your available balance."
         },
         "chill": {
