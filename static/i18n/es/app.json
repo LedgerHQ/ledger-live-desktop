@@ -2612,7 +2612,7 @@
     "noAccounts": "No hay cuentas que exportar",
     "selectedAccounts": "Cuentas a incluir",
     "selectedAccounts_plural": "Cuentas a incluir ({{count}})",
-    "disclaimer": "Los contravalores de la exportación se ofrecen únicamente a título informativo. No se debe confiar en estos datos para fines contables, fiscales, regulatorios o legales, ya que solo representan una estimación del precio de los activos en el momento de las transacciones y la exportación, según los métodos de valoración proporcionados por nuestro proveedor de servicios, Kaiko"
+    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
     "system": "Utilizar idioma del sistema",
