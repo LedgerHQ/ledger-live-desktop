@@ -105,7 +105,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
     <ScrollArea withHint>
       <TopRightContainer>
         <Button small onClick={() => sendEvent("PREV")}>
-          Switch device
+          {t("onboarding.screens.selectUseCase.switchDevice")}
         </Button>
       </TopRightContainer>
       <SelectUseCaseContainer>

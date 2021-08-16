@@ -8,6 +8,7 @@ import { InView } from "react-intersection-observer";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
 
+import { useDispatch } from "react-redux";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import InfoCircle from "~/renderer/icons/InfoCircle";
@@ -17,10 +18,10 @@ import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import FormattedDate from "../../FormattedDate";
 import { useDeepLinkHandler } from "~/renderer/hooks/useDeeplinking";
-import { useDispatch } from "react-redux";
+
 import { closeInformationCenter } from "~/renderer/actions/UI";
+import useDateTimeFormat from "~/renderer/hooks/useDateTimeFormat";
 
 const DateRowContainer = styled.div`
   padding: 4px 16px;
@@ -80,12 +81,25 @@ type DateRowProps = {
   date: Date,
 };
 
+const DateLabel = styled(Text).attrs({
+  color: "palette.text.shade60",
+  ff: "Inter|SemiBold",
+  fontSize: "11px",
+  lineHeight: "18px",
+})`
+  display: inline-block;
+
+  &::first-letter {
+    text-transform: uppercase;
+  }
+`;
+
 function DateRow({ date }: DateRowProps) {
+  const dateFormatter = useDateTimeFormat({ dateStyle: "full" });
+
   return (
     <DateRowContainer>
-      <Text color="palette.text.shade60" ff="Inter|SemiBold" fontSize="11px" lineHeight="18px">
-        <FormattedDate date={date} format="MMMM, Do, YYYY" />
-      </Text>
+      <DateLabel>{dateFormatter(date)}</DateLabel>
     </DateRowContainer>
   );
 }

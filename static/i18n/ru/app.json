@@ -117,10 +117,11 @@
       "needsMigration": "Нажмите, чтобы обновить аккаунт",
       "error": "Ошибка синхронизации",
       "refresh": "Обновить",
-      "devTools": "Dev tools"
+      "devTools": "Инструменты разработчика"
     },
     "exchange": "Обмен",
-    "info": "Информация"
+    "info": "Информация",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -295,7 +296,7 @@
         "pending": {
           "cta": "Продолжить",
           "title": "Ожидание утверждения",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "Ваша информация была передана на утверждение Wyre.",
           "link": "Подробнее о KYC"
         },
         "closed": {
@@ -627,7 +628,9 @@
       "continue": "Продолжить"
     },
     "history": {
-      "tab": "История"
+      "tab": "История",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -693,6 +696,12 @@
       "status": {
         "enablingTooltip": "Выполняется трансляция транзакции",
         "toSupplyTooltip": "Теперь вы можете предоставлять свои активы в кредит"
+      },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
       },
       "closed": {
         "assetLended": "Актив",
@@ -878,7 +887,7 @@
     },
     "optionsMenu": {
       "title": "Параметры",
-      "exportOperations": "История экспортов",
+      "exportOperations": "Экспорт истории",
       "exportToMobile": "Экспорт в мобильное приложение"
     },
     "contextMenu": {
@@ -1032,7 +1041,8 @@
     "title": "Текущий адрес",
     "for": "Адрес для <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
-    "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его."
+    "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его.",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -1302,8 +1312,10 @@
         "manageAccount": "Управление счетами"
       },
       "updatable": {
-        "title": "Доступны обновления",
-        "progressTitle": "Обновления приложений: {{number}}",
+        "title": "Update available",
+        "title_plural": "Updates available",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Не выходите из Диспетчера в процессе обновления.",
         "progress": "Обновляем всё..."
       },
@@ -1341,6 +1353,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+        },
+        "wyre_buy": {
+          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
+          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+        },
+        "lido": {
+          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
+          "description": "Stake your ETH with Lido to earn daily staking rewards."
+        },
+        "zerion": {
+          "shortDescription": "The smart way to manage your DeFi portfolio.",
+          "description": "The smart way to manage your DeFi portfolio."
+        },
+        "rainbow": {
+          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+        },
+        "aave": {
+          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+        },
+        "compound": {
+          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+        },
+        "deversifi": {
+          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
+          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "Требуется приложение {{dependency}}",
         "description": "Также будет установлено приложение {{dependency}}, потому что оно необходимо для работы {{app}}.",
@@ -2328,7 +2378,7 @@
       "about": "О программе",
       "experimental": "Экспериментальные функции",
       "accounts": "Счета",
-      "developer": "Developer"
+      "developer": "Разработчик"
     },
     "export": {
       "accounts": {
@@ -2344,9 +2394,9 @@
         "button": "Готово",
         "title": "Сканируйте для экспорта в мобильное приложение",
         "listTitle": "В мобильном приложении Ledger Live:",
-        "step1": "Нажмите кнопку <1><0>+</0></1> в меню <3><0>Счета</0></3>",
-        "step2": "Нажмите <1><0>Импортировать из настольного приложения</0></1>",
-        "step3": "Сканируйте <1><0>код LiveQR</0></1> до тех пор, пока прогресс не достигнет 100%"
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2365,22 +2415,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "Вы стали разработчиком!",
+        "text": "Добро пожаловать в страну чудес"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "Разрешить отладку",
+      "debugAppsDesc": "Показывать и открывать отладочные приложения на платформе.",
+      "experimentalApps": "Разрешить экспериментальные приложения",
+      "experimentalAppsDesc": "Показывать и открывать экспериментальные приложения на платформе.",
+      "catalogServer": "Выбрать поставщика каталога",
+      "catalogServerDesc": "Переключение между несколькими источниками приложений",
+      "enablePlatformDevTools": "Включить инструменты разработчика на платформе",
+      "enablePlatformDevToolsDesc": "Разрешить открывать окно инструментов разработчика на платформе",
+      "addLocalApp": "Добавить локальное приложение",
+      "addLocalAppDesc": "Просматривать локальные файлы и добавлять локальные приложения посредством локального манифеста",
+      "addLocalAppButton": "Обзор",
+      "runLocalAppDeleteButton": "Удалить",
+      "runLocalAppOpenButton": "Открыть"
     },
     "currencies": {
       "selectPlaceholder": "Выберите криптоактив",
@@ -2422,7 +2472,37 @@
       "privacyDesc": "О том, какие персональные данные мы собираем, каким образом и для чего, можно узнать в нашей Политике конфиденциальности."
     },
     "experimental": {
-      "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования."
+      "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Сброс Ledger Live",
@@ -2524,7 +2604,7 @@
   },
   "exportOperationsModal": {
     "title": "История операций",
-    "desc": "Выберите счета, историю которых вы хотите хранить",
+    "desc": "Выберите счета, историю которых вы хотите сохранить",
     "descSuccess": "CSV-файл с историей операций успешно сохранён в выбранной папке",
     "titleSuccess": "История операций успешно сохранена",
     "cta": "Сохранить",
@@ -2554,7 +2634,7 @@
     "toastType": {
       "announcement": "Новости",
       "operation": "Операция",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Открыто Достижение"
     }
   },
   "informationCenter": {
@@ -2656,6 +2736,7 @@
         "hasNoRecovery": "Впервые подключаете {{deviceName}}?",
         "hasRecovery": "Есть фраза восстановления?",
         "separator": "или",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "Первое подключение",
@@ -2715,7 +2796,7 @@
               "descr": "Узнайте как взаимодействовать с устройством по инструкциям на экране."
             },
             "select": {
-              "title": "Настраиваем как новое устройство",
+              "title": "Выберите \"Set up as a new device\" (Настроить как новое устройство)",
               "descr": "Для подтверждения выбора нажмите обе кнопки одновременно."
             },
             "follow": {
@@ -2780,7 +2861,7 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Выберите опцию ПИН-код",
+              "title": "Установить ПИН-код",
               "descr": "Левой или правой кнопкой вы выбираете цифру. Нажатием обеих кнопок вы подтверждаете выбор. Выберите <0></0> для подтверждения ПИН-кода. Выберите <1></1> для удаления цифры."
             },
             "confirm": {
@@ -3171,11 +3252,10 @@
     "placeholder": "Введите адрес {{currencyName}}"
   },
   "Terms": {
-    "title": "Условия использования",
-    "read": "Прочитать Условия использования",
-    "switchLabelTerms": "<0>Подтверждаю, что прочитал(а) и принимаю</0> <1>Условия использования</1>",
-    "switchLabelPrivacyPolicy": "<0>Подтверждаю, что прочитал(-а) и принимаю</0> <1>Политику конфиденциальности</1>",
-    "switchLabelLoss": "Я осознаю, что без фразы восстановления я утрачу доступ к своей криптовалюте в случае потери доступа к устройству Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Войти в приложение Ledger"
   },
   "families": {
