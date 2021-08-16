@@ -2242,12 +2242,12 @@
         "withdrawUnbonded": {
           "title": "Abheben",
           "description": "Nach der 28-tägigen Entbindungsfrist können Sie nicht gebundene Vermögenswerte abheben.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "info": "Sie können dann nicht gebundene Guthaben auf Ihr verfügbares Guthaben übertragen."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Nominierungen löschen",
+          "description": "Löscht alle Nominierungen und stoppt das Sammeln von Prämien.",
+          "info": "Gebundene Werte bleiben gebunden. Wenn Sie die Bindung aufheben, sind sie nach 28 Tagen wieder verfügbar."
         }
       },
       "steps": {
@@ -2255,71 +2255,71 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "title": "Transaktion erfolgreich gesendet",
+            "text": "Sie werden Ihre Aktion bald in Ihrem Verlauf sehen.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Sende Transaktion..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     }
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
+    "title": "Prämien verdienen",
+    "header": "Übertragung",
     "validator": "Validator",
-    "yield": "Est. Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
-    "amount": "Amount",
-    "delegated": "Delegated",
-    "completionDate": "Completion date",
-    "rewards": "Rewards",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
-    "overdelegated": "Overdelegated",
+    "yield": "geschätzter Ertrag",
+    "address": "Adresse",
+    "transactionID": "Transaktions-ID",
+    "value": "Wert",
+    "amount": "Betrag",
+    "delegated": "Delegiert",
+    "completionDate": "Datum der Fertigstellung",
+    "rewards": "Prämien",
+    "duration": "Dauer",
+    "durationJustStarted": "Gerade begonnen",
+    "durationDays": "{{count}} Tag",
+    "durationDays_plural": "{{count}} Tage",
+    "howItWorks": "So funktioniert die Übertragung",
+    "delegationEarn": "Sie können jetzt {{name}} Einsatzprämien verdienen, indem Sie Ihr Konto delegieren/übertragen.",
+    "earnRewards": "Prämien verdienen",
+    "overdelegated": "Überdelegiert",
     "status": "Status",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "title": "Prämien für Einsätze verdienen",
+          "description": "Delegieren Sie Ihr Tezos-Konto an einen externen Validator, um Einsatzprämien zu verdienen und trotzdem die volle Sicherheit und Kontrolle über Ihre Vermögenswerte zu behalten",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
-            "access": "You can access your assets at any time.",
-            "ledger": "Delegate securely with your Ledger device."
+            "delegate": "Delegierte Konten bleiben Ihre.",
+            "access": "Sie können jederzeit auf Ihre Vermögenswerte zugreifen.",
+            "ledger": "Delegieren Sie sicher mit Ihrem Ledger-Gerät."
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "Delegieren, um Prämien zu verdienen"
           }
         },
         "account": {
-          "title": "Delegate account",
-          "label": "Account",
-          "toDelegate": "Account to delegate"
+          "title": "Konto delegieren/übertragen",
+          "label": "Konto",
+          "toDelegate": "Zu delegierendes Konto"
         },
         "summary": {
-          "title": "Delegate account",
-          "label": "Summary",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
+          "title": "Konto übertragen",
+          "label": "Zusammenfassung",
+          "toDelegate": "Zu delegierendes Konto",
+          "toUndelegate": "Konto, bei dem die Delegierung aufzuheben ist",
           "validator": "Validator",
-          "select": "Select",
+          "select": "Auswählen",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Zufällig gewählter Validator",
           "termsAndPrivacy": "Das Delegieren Ihrer Stimmrechte garantiert keine Prämien durch Ihren Validator."
