@@ -97,7 +97,7 @@ const Drawer = ({
             <Container>
               <Header>
                 {onBack != null ? (
-                  <Button Icon={ArrowLeft} onClick={onBack} />
+                  <Button Icon={ArrowLeft} iconSize={21} onClick={onBack} />
                 ) : (
                   <ButtonPlaceholder />
                 )}

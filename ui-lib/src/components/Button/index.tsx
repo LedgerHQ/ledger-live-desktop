@@ -33,6 +33,7 @@ interface BaseProps {
   type?: ButtonTypes;
   iconPosition?: "right" | "left";
   iconButton?: boolean;
+  iconSize?: number,
   disabled?: boolean;
   theme: DefaultTheme;
 }
@@ -128,14 +129,21 @@ export const Base = styled.button.attrs((p: BaseProps) => ({
 
 const ContentContainer = styled.div``;
 
-const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: Props) => {
+const Button = ({
+  Icon,
+  iconPosition = "right",
+  iconSize = 16,
+  children,
+  onClick,
+  ...props
+}: Props) => {
   return (
     // @ts-expect-error type button conflict
     <Base {...props} iconButton={!(Icon == null) && !children} onClick={onClick}>
       {iconPosition === "right" ? <ContentContainer>{children}</ContentContainer> : null}
       {Icon != null ? (
         <IconContainer iconPosition={iconPosition}>
-          <Icon size={fontSizes[props.fontSize ?? 4]} />
+          <Icon size={iconSize || fontSizes[props.fontSize ?? 4]} />
         </IconContainer>
       ) : null}
       {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
