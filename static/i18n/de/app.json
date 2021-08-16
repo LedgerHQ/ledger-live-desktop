@@ -3355,39 +3355,39 @@
     },
     "CosmosBroadcastCodeInvalidCoins": {
       "title": "Etwas ist schief gelaufen (Fehler 11)",
-      "description": "Please contact Ledger Support"
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 12)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "Das Memo-Feld ist zu lang",
+      "description": "Bitte verkürzen Sie den Memotext und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 14)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 15)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 16)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 17)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "description": "Dieser Krypto-Vermögenswert wird noch nicht unterstützt. Bitte kontaktieren Sie den Ledger-Support."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
-      "description": "Request assistance from Ledger Support"
+      "title": "Möglicherweise nicht echt",
+      "description": "Hilfe vom Ledger-Support anfordern"
     },
     "DeviceGenuineSocketEarlyClose": {
       "title": "Sorry, try again (genuine-close)",
