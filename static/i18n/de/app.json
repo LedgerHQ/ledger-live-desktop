@@ -3586,31 +3586,31 @@
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "title": "Bitte öffnen Sie die App {{appName}}",
+      "description": "Lassen Sie die App {{appName}} geöffnet, während wir Ihre Konten finden"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "title": "Entschuldigung, Ihr Gerät darf sich nicht im Bootloader-Modus befinden",
+      "description": "Bitte starten Sie Ihr Gerät neu, ohne die Schaltflächen zu berühren, wenn das Logo erscheint. Kontaktieren Sie den Ledger Support, falls das Problem weiterhin besteht."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "Manager auf Gerät abgelehnt"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "title": "Update auf Gerät abgebrochen",
+      "description": "Alle Apps auf Ihrem Gerät wurden deinstalliert. Halten Sie Ihr Gerät auf dem neuesten Stand, um von Verbesserungen der Sicherheit und Funktionalität zu profitieren."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "title": "Aktion abgelehnt",
+      "description": "Der Benutzer hat die Aktion am Gerät abgelehnt"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "title": "Aktion auf Gerät verweigert",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie im Zweifelsfall den Ledger-Support"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "Empfangsadresse abgelehnt",
+      "description": "Bitte versuchen Sie es erneut oder wenden Sie sich im Zweifelsfall an den Ledger-Support"
     },
     "UpdateYourApp": {
       "title": "App update required",
