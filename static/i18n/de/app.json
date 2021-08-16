@@ -1802,8 +1802,8 @@
     "delegation": {
       "emptyState": {
         "description": "Sie können ATOM-Prämien verdienen, indem Sie Ihre Vermögenswerte übertragen.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "info": "Wie die Delegierung/Übertragung funktioniert",
+        "delegation": "Prämien verdienen"
       },
       "claimRewards": "Prämie beanspruchen",
       "header": "Delegation(en)",
@@ -1827,7 +1827,7 @@
             "description": "Sie können Prämien verdienen, indem Sie Ihre ATOM-Vermögenswerte an einen Validator übertragen.",
             "bullet": [
               "Sie behalten das Eigentum an delegierten Vermögenswerten",
-              "Delegate using your Ledger device",
+              "Delegieren Sie mit Ihrem Ledger-Gerät",
               "Vermögenswerte sind 21 Tage nach Rücknahme der Delegierung verfügbar"
             ],
             "warning": {
@@ -1893,75 +1893,75 @@
         "title": "Vermögenswerte zurückübertragen",
         "steps": {
           "starter": {
-            "title": "Redelegation",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "title": "Erneute Delegation",
+            "description": "Verwenden Sie die erneute Delegierung, um einfach von einem Validator zu einem anderen zu wechseln. Wenn Sie es sich aber wieder anders überlegen, müssen Sie dann warten, weil die erneute Delegierung eine 21-tägige Zeitsperre auslöst.",
+            "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer delegierten Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält. Sie können maximal <0>7 ausstehende, erneute Delegierungen</0> durchführen.",
+            "howDelegationWorks": "Wie funktioniert die Delegierung?"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "title": "Validatoren",
+            "currentDelegation": "Aktuelle Delegierung",
+            "newDelegation": "Neue Übertragung",
+            "chooseValidator": "Wählen Sie einen Validator",
+            "warning": "Sie müssen <0>21 Tage</0> warten, um vom neuen Validator neu zu delegieren, wenn Sie Ihre Meinung wieder ändern"
           },
           "device": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "title": "Sie haben Ihr Vermögen erfolgreich erneut delegiert",
+              "text": "Die erneute Übertragung wird aktualisiert, sobald die Blockchain die Transaktion bestätigt hat",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "header": "Aufhebung(en) der Übertragung(en)",
+      "headerTooltip": "Verfügbar nach der 21-tägigen Zeitsperre",
+      "inactiveTooltip": "Beträge mit aufgehobener Delegierung generieren keine Prämien.",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "Vermögenswerte mit aufgehobener Delegierung",
         "steps": {
           "amount": {
-            "title": "Amount",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "title": "Betrag",
+            "subtitle": "Der Prozess der Aufhebung der Übertragung dauert <0>21 Tage</0> bis zum Abschluss.",
+            "warning": "Die Prämien werden sofort eingelöst. Der nicht übertragene Betrag ist nach der <0>21-tägigen Zeitsperre</0> wieder im verfügbaren Guthaben.",
             "fields": {
               "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "amount": "Nicht zu delegierender Betrag"
             }
           },
           "device": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "You have successfully undelegated your assets.",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "Sie haben die Übertragung Ihrer Vermögenswerte erfolgreich aufgehoben.",
+              "description": "Die Delegierung von <0>{{amount}}</0> wurde von <0>{{validator}}</0> aufgehoben",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationHasRewards": "Verdiente Prämien",
+    "operationEarnedRewards": "Sie haben <0>{{amount}}</0> Prämien verdient.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> verdiente Prämien)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "ASA hinzufügen (Vermögenswert)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
+            "title": "ASA (Vermögenswerte)",
             "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
             "selectLabel": "Choose an ASA (Asset)",
             "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
@@ -3827,19 +3827,19 @@
       "title": "Stellen Sie sicher, dass Sie genug Guthaben für zukünftige Transaktionsgebühren übrig haben"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "Kontostand darf nicht unter {{minimumBalance}} liegen. Maximalbetrag zu leerem Konto senden."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Sie müssen eine Kaution von mindestens {{minimumBondAmount}} hinterlegen."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Ihr Kreditsaldo sollte mindestens {{minimumBondBalance}} betragen."
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Sie haben das Entbindungslimit überschritten"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "Sie müssen mindestens einen Validator auswählen"
     }
   }
 }
