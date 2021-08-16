@@ -2454,7 +2454,7 @@
       "hardResetDesc": "Borrar todos los datos de Ledger Live almacenados en tu PC, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
       "analytics": "Análisis",
-      "analyticsDesc": "Habilita el análisis para ayudar a Ledger a mejorar la experiencia de usuario. Esto incluye clics, páginas visitadas,  redireccionamientos, acciones (enviar, recibir, bloquear, etc.), deslizamientos hasta el final de página, instalaciones o desinstalaciones y versión de aplicación,  cantidad de cuentas, activos cripto y operaciones, duración las sesiones, tipo de dispositivo Ledger y firmware.",
+      "analyticsDesc": "Habilita el análisis para ayudar a Ledger a mejorar la experiencia de usuario. Esto incluye clics, páginas visitadas,  redireccionamientos, acciones (enviar, recibir, bloquear, etc.), deslizamientos hasta el final de página, instalaciones o desinstalaciones y versión de aplicación,  cantidad de cuentas, activos cripto y operaciones, duración de las sesiones, tipo de dispositivo Ledger y firmware.",
       "reportErrors": "Informes de errores",
       "reportErrorsDesc": "Envía automáticamente informes para ayudar a Ledger a mejorar sus productos.",
       "launchOnboarding": "Configuración del dispositivo",
