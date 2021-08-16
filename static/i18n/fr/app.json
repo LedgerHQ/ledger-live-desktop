@@ -1314,8 +1314,8 @@
       "updatable": {
         "title": "Update available",
         "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "progressTitle": "{{number}} mise à jour d'app",
+        "progressTitle_plural": "{{number}} mises à jour d'apps",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
         "progress": "Mises à jour..."
       },
