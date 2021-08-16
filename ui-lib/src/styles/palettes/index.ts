@@ -52,6 +52,7 @@ interface RawPalette {
     };
     grey: {
       border: string;
+      borderDark: string;
     };
     feedback: {
       error: string;
