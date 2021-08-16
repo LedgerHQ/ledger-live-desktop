@@ -2320,7 +2320,7 @@
           "toUndelegate": "Konto, bei dem die Delegierung aufzuheben ist",
           "validator": "Validator",
           "select": "Auswählen",
-          "yield": "Est. Yield {{amount}}",
+          "yield": "Geschätzter Ertrag {{amount}}",
           "randomly": "Zufällig gewählter Validator",
           "termsAndPrivacy": "Das Delegieren Ihrer Stimmrechte garantiert keine Prämien durch Ihren Validator."
         },
@@ -2532,11 +2532,11 @@
     "repairDevice": {
       "title": "Reparieren Sie Ihr Ledger-Gerät",
       "descSettings": "Verwenden Sie dies, um Ihr Ledger-Gerät wiederherzustellen, wenn es während eines Firmware-Updates gesperrt wurde.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
-      "button": "Repair"
+      "desc": "Ledger Nano S-Benutzer wählen bitte den auf Ihrem Gerät angezeigten Status. Nano X- und Blue-Benutzer schauen bitte im Hilfe-Center nach.",
+      "button": "Reparieren"
     },
     "exportLogs": {
-      "title": "Save logs",
+      "title": "Protokolle speichern",
       "desc": "Das Speichern von Ledger-Live-Protokollen kann für die Fehlersuche erforderlich sein.",
       "btn": "Speichern"
     },
@@ -2585,7 +2585,7 @@
   },
   "update": {
     "downloadInProgress": "Herunterladen des Updates ...",
-    "downloadProgress": "{{progress}}% completed",
+    "downloadProgress": "{{progress}}% abgeschlossen",
     "checking": "Prüfen des Updates ...",
     "checkSuccess": "Update bereit zur Installation",
     "quitAndInstall": "Jetzt installieren",
@@ -2621,58 +2621,58 @@
       "fr": "Französisch",
       "ru": "Russisch",
       "es": "Spanisch",
-      "zh": "Chinese"
+      "zh": "Chinesisch"
     }
   },
   "theme": {
-    "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "System-Theme auswählen",
+    "light": "Hell",
+    "dusk": "Mittel",
+    "dark": "Dunkel"
   },
   "toastOverlay": {
     "toastType": {
       "announcement": "News",
-      "operation": "Operation",
+      "operation": "Vorgang",
       "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "tooltip": "Informationszentrum",
+    "ongoingIncidentsTooltip": "Es gibt {{count}} laufendes Ereignis",
+    "ongoingIncidentsTooltip_plural": "Es gibt {{count}} laufende Ereignisse",
     "tabs": {
       "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
+      "announcementsUnseen": "Nachrichten ({{unseenCount}})",
       "serviceStatus": "Status",
       "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "title": "Ledger Live ist eingerichtet und läuft",
+        "description": "Haben Sie Probleme? Gehen Sie auf unsere <0>Hilfe-Seite</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
-        "learnMore": "Learn more"
+        "title": "Bei Ledger Live treten Probleme auf",
+        "learnMore": "Mehr erfahren"
       }
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "title": "Im Moment keine Neuigkeiten",
+        "desc": "Hier finden Sie alle Neuigkeiten rund um Ledger und Ledger Live"
       }
     }
   },
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
-        "intro": "During the setup process you choose a PIN code.",
+        "title": "Sichern Sie Ihren PIN-Code",
+        "intro": "Während des Einrichtungsvorgangs wählen Sie einen PIN-Code.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
-          "3": "You can change your PIN code if needed.",
+          "1": "Wählen Sie <0>immer</0> selbst einen PIN-Code.",
+          "2": "Geben Sie <0>immer</0> Ihren PIN-Code außer Sichtweite ein.",
+          "3": "Sie können Ihren PIN-Code bei Bedarf ändern.",
           "4": "Three wrong PIN code entries in a row will reset the device.",
           "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
           "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
