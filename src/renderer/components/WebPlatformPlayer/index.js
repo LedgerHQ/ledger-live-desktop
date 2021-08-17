@@ -81,6 +81,43 @@ type Props = {
   inputs?: Object,
 };
 
+const getTransactionInfos = platformTx => {
+  const { family } = platformTx;
+  const tx = platformTx;
+
+  switch (family) {
+    case "ethereum": {
+      const hasFeesProvided = tx.gasLimit || tx.gasPrice;
+
+      if (hasFeesProvided) {
+        tx.feesStrategy = "custom";
+        tx.userGasLimit = tx.gasLimit;
+      }
+
+      return { canEditFees: true, tx, hasFeesProvided };
+    }
+
+    case "bitcoin": {
+      const hasFeesProvided = !!tx.feePerByte;
+
+      if (hasFeesProvided) {
+        tx.feesStrategy = null;
+      }
+
+      return { canEditFees: true, tx, hasFeesProvided };
+    }
+
+    case "ripple": {
+      const hasFeesProvided = !!tx.fee;
+
+      return { canEditFees: true, tx, hasFeesProvided };
+    }
+
+    default:
+      return { canEditFees: false, tx, hasFeesProvided: false };
+  }
+};
+
 const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
   const theme = useTheme("colors.palette");
 
@@ -247,10 +284,14 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
 
       tracking.platformSignTransactionRequested(manifest);
 
+      const { canEditFees, tx, hasFeesProvided } = getTransactionInfos(platformTransaction);
+
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
-            transactionData: platformTransaction,
+            canEditFees,
+            stepId: canEditFees && !hasFeesProvided ? "amount" : "summary",
+            transactionData: tx,
             useApp: params.useApp,
             account,
             parentAccount: null,
