@@ -121,7 +121,7 @@
     },
     "exchange": "Обмен",
     "info": "Информация",
-    "connectDevice": "Connect your device"
+    "connectDevice": "Подключите устройство"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -148,7 +148,7 @@
       "OPT_IN": "Выбрать",
       "OPT_OUT": "Отказаться",
       "CLOSE_ACCOUNT": "Закрыть счёт",
-      "BOND": "Заблокировать",
+      "BOND": "Блокировка",
       "UNBOND": "Разблокировать",
       "REWARD_PAYOUT": "Вознаграждение",
       "SLASH": "Штраф",
@@ -629,8 +629,8 @@
     },
     "history": {
       "tab": "История",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "Экспортируем…",
+      "exportOperations": "Экспорт истории"
     }
   },
   "lend": {
@@ -698,10 +698,10 @@
         "toSupplyTooltip": "Теперь вы можете предоставлять свои активы в кредит"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "Включение",
+        "inactive": "Неактивный",
+        "supplying": "Предоставляется",
+        "earning": "Зарабатывает"
       },
       "closed": {
         "assetLended": "Актив",
@@ -1042,7 +1042,7 @@
     "for": "Адрес для <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
     "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Показать QR-код"
   },
   "emptyState": {
     "dashboard": {
@@ -1312,10 +1312,10 @@
         "manageAccount": "Управление счетами"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "Доступно обновление",
+        "title_plural": "доступных обновлений(-ия)",
+        "progressTitle": "Доступных обновлений: {{number}}",
+        "progressTitle_plural": "Обновления приложений: {{number}}",
         "progressWarning": "Не выходите из Диспетчера в процессе обновления.",
         "progress": "Обновляем всё..."
       },
@@ -2285,7 +2285,7 @@
     "delegated": "Делегировано",
     "completionDate": "Дата завершения",
     "rewards": "Вознаграждения",
-    "duration": "Продолжительность",
+    "duration": "Период",
     "durationJustStarted": "Только началось",
     "durationDays": "{{count}} день",
     "durationDays_plural": "{{count}} дн.",
@@ -2363,8 +2363,8 @@
   "carousel": {
     "hidden": {
       "close": "Подтвердить",
-      "undo": "Показывать снова",
-      "disclaimer": "Этот баннер не будет показан до появления нового объявления"
+      "undo": "Показать снова",
+      "disclaimer": "Этот баннер не будет показываться, пока не появятся новости"
     }
   },
   "settings": {
@@ -2644,8 +2644,8 @@
     "tabs": {
       "announcements": "Новости",
       "announcementsUnseen": "Новости ({{unseenCount}})",
-      "serviceStatus": "Статус",
-      "serviceStatusIncidentsOngoing": "Статус ({{IncidentCount}})"
+      "serviceStatus": "События",
+      "serviceStatusIncidentsOngoing": "События ({{IncidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
