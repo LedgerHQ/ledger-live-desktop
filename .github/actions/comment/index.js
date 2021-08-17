@@ -33,7 +33,7 @@ const main = async () => {
     // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
     // so this is a workaround. the endpoint will redirect to the artifact url.
     // https://github.com/machard/github-action-artifact-redirect
-    str += `[Suggested snapshots to update](https://github-actions-live-vercel.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+    str += `[Suggested snapshots to update](https://github-actions-live.ledger.tools/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
@@ -138,10 +138,10 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   console.log(str);
 
-  const prNumber = core.getInput("prNumber");
+  const sha = core.getInput("sha");
 
   await fetch(
-    `http://github-actions-live-vercel.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    `https://github-actions-live.ledger.tools/api/comment/v2?owner=LedgerHQ&repo=ledger-live-desktop&sha=${sha}`,
     {
       method: "POST",
       headers: {
