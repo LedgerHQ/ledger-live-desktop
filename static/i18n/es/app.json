@@ -2432,12 +2432,12 @@
       "catalogServer": "Definir el proveedor del catálogo",
       "catalogServerDesc": "Cambiar entre distintas fuentes de aplicaciones de plataforma",
       "enablePlatformDevTools": "Habilitar herramientas de desarrollo de plataforma",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "enablePlatformDevToolsDesc": "Habilitar ventana de herramientas de desarrollo de aplicaciones de plataforma",
+      "addLocalApp": "Añadir una aplicación local",
+      "addLocalAppDesc": "Explorar archivos locales y añadir una aplicación local usando un manifiesto local",
+      "addLocalAppButton": "Explorar",
+      "runLocalAppDeleteButton": "Borrar",
+      "runLocalAppOpenButton": "Abrir"
     },
     "currencies": {
       "selectPlaceholder": "Seleccionar activo cripto",
@@ -2482,23 +2482,23 @@
       "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "Usar TronGrid.io",
+          "description": "Usar trongrid directamente sin el proxy de Ledger"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "Probar traducciones",
+          "description": "Añade idiomas no publicados a la lista de idiomas en la pestaña de ajustes generales."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "Modo desarrollador",
+          "description": "Mostrar aplicaciones de desarrollador y testnet en el Manager."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "Búsqueda de cuenta extendida",
+          "description": "Busca cuentas con rutas de derivación erróneas. Envía los activos que encuentres a una cuenta correcta."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
+          "title": "API de Experimental Explorers",
           "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
         },
         "keychainObservableRange": {
