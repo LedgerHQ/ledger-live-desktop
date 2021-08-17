@@ -120,7 +120,8 @@
       "devTools": "Dev tools"
     },
     "exchange": "货币兑换",
-    "info": "信息"
+    "info": "信息",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -153,7 +154,8 @@
       "SLASH": "Slash 削减惩罚",
       "WITHDRAW_UNBONDED": "提取",
       "NOMINATE": "提名",
-      "CHILL": "清除提名"
+      "CHILL": "清除提名",
+      "SET_CONTROLLER": "Set controller"
     }
   },
   "byteSize": {
@@ -627,7 +629,9 @@
       "continue": "继续"
     },
     "history": {
-      "tab": "历史记录"
+      "tab": "历史记录",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -693,6 +697,12 @@
       "status": {
         "enablingTooltip": "您的交易正在播送",
         "toSupplyTooltip": "您现在可以供应您的资产"
+      },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
       },
       "closed": {
         "assetLended": "资产",
@@ -1032,7 +1042,8 @@
     "title": "当前地址",
     "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
-    "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。"
+    "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -1302,8 +1313,10 @@
         "manageAccount": "管理我的账户"
       },
       "updatable": {
-        "title": "可用更新",
-        "progressTitle": "{{number}} 个应用程序更新",
+        "title": "Update available",
+        "title_plural": "Updates available",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "更新期间，请勿退出 Manager（管理器）。",
         "progress": "正在更新全部……"
       },
@@ -1341,6 +1354,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+        },
+        "wyre_buy": {
+          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
+          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+        },
+        "lido": {
+          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
+          "description": "Stake your ETH with Lido to earn daily staking rewards."
+        },
+        "zerion": {
+          "shortDescription": "The smart way to manage your DeFi portfolio.",
+          "description": "The smart way to manage your DeFi portfolio."
+        },
+        "rainbow": {
+          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+        },
+        "aave": {
+          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+        },
+        "compound": {
+          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+        },
+        "deversifi": {
+          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
+          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "需要安装 {{dependency}} 应用程序",
         "description": "同样需要安装 {{dependency}} 应用程序，因为 {{app}} 应用程序需要用到该程序。",
@@ -1988,6 +2039,7 @@
       },
       "header": "提名名单",
       "nominate": "提名",
+      "setController": "Change Controller",
       "chill": "清除提名",
       "totalStake": "质押总额",
       "amount": "已绑定数额",
@@ -2009,9 +2061,9 @@
       "electionOpen": "正在推选新的验证器。因此，最多 15 分钟后方可进行权益质押操作。",
       "electionOpenTooltip": "在推选验证器期间，该操作被禁用。",
       "externalControllerTooltip": "此账户由另一个账户控制。",
-      "externalControllerUnsupported": "<0>该存储账户由地址为 <0>{{address}}</0> 的另一账户所控制。</0><1>如果相关账户由另一账户控制，Ledger Live 则不支持此类账户的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
+      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
-      "externalStashUnsupported": "<0>该账户控制着一个地址为 <0>{{address}}</0> 的存储账户。</0><1> Ledger Live 不支持在一个单独的存储账户上的权益质押操作。请使用 Polkadot.js 之类的替代性钱包</1>",
+      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
       "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "没有活跃状态的提名。",
@@ -2198,6 +2250,11 @@
           "title": "清除提名",
           "description": "清空所有提名并停止赚取奖励。",
           "info": "已绑定的资产将会保持绑定状态。若您将其解绑，那么它们将在 28 天后可用。"
+        },
+        "setController": {
+          "title": "Change Controller",
+          "description": "Set this Ledger account as its own controller",
+          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
         }
       },
       "steps": {
@@ -2344,9 +2401,9 @@
         "button": "完成",
         "title": "扫描以导出至移动设备",
         "listTitle": "在 Ledger Live 手机应用上：",
-        "step1": "点击 <3><0>账户</0></3> 中的 <1><0>+</0></1> 按钮",
-        "step2": "点击 <1><0>Import desktop accounts</0></1>（导入桌面程序账户）",
-        "step3": "扫描 <1><0>LiveQR code</0></1> 二维码，等待加载至 100%"
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2422,7 +2479,37 @@
       "privacyDesc": "请参阅我们的隐私政策来了解我们收集哪些个人数据、收集原因以及使用方式。"
     },
     "experimental": {
-      "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。"
+      "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
@@ -2656,6 +2743,7 @@
         "hasNoRecovery": "首次使用您的 {{deviceName}} ？",
         "hasRecovery": "已经有了恢复短语？",
         "separator": "或者",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "首次使用",
@@ -3155,7 +3243,8 @@
       "bond": "请在您的设备上确认并完成操作",
       "unbond": "请在您的设备上确认并完成操作",
       "rebond": "请在您的设备上确认并完成操作",
-      "withdrawUnbonded": "请在您的设备上确认并完成操作"
+      "withdrawUnbonded": "请在您的设备上确认并完成操作",
+      "setController": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "接收方",
