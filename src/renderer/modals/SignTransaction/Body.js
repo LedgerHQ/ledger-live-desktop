@@ -213,7 +213,7 @@ const Body = ({
   const errorSteps = [];
 
   if (transactionError) {
-    errorSteps.push(1);
+    errorSteps.push(steps.length - 2);
   } else if (bridgeError) {
     errorSteps.push(0);
   }
@@ -232,7 +232,7 @@ const Body = ({
     account,
     parentAccount,
     transaction,
-    hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
+    hideBreadcrumb: (!!error && ["amount"].includes(stepId)) || stepId === "warning",
     error,
     warning,
     status,
