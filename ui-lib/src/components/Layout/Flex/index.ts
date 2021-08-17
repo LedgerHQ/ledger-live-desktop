@@ -1,9 +1,11 @@
-import { flexbox, FlexboxProps } from "styled-system";
+import { flexbox, FlexboxProps, compose } from "styled-system";
 import styled from "styled-components";
+import gapsSystem from "@ui/styles/system/gaps";
 
 const FlexBox = styled.div<FlexboxProps>`
   display: flex;
-  column-gap: 15px;
   ${flexbox};
+  ${compose(gapsSystem, flexbox)}
 `;
+
 export default FlexBox;
