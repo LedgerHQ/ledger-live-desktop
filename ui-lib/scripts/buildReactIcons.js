@@ -6,17 +6,11 @@ const svgr = require("@svgr/core").default;
 
 const rootDir = path.join(__dirname, "../src/assets/icons");
 const reactDir = `${rootDir}`;
-// const reactNativeDir = `${rootDir}/reactNative`;
 
 // Create react folder if needed
 if (!fs.existsSync(reactDir)) {
   fs.mkdirSync(reactDir);
 }
-
-// Create react-native folder if needed
-// if (!fs.existsSync(reactNativeDir)) {
-//   fs.mkdirSync(reactNativeDir);
-// }
 
 // Component template
 function reactTemplate(
@@ -33,22 +27,13 @@ function reactTemplate(
   const tpl = template.smart({ plugins });
   return tpl.ast`
     ${imports};
-    ${
-      opts.native
-        ? `type Props = {
-  size: number;
-  color: string;
-}`
-        : `type Props = {
+    ${`type Props = {
   size: number;
   color?: string;
-}`
-    }
+}`}
 
     ${interfaces}
-    function ${componentName}(${
-    opts.native ? `{ size, color }: Props` : `{ size = 16, color = "currentColor" }: Props`
-  }) {
+    function ${componentName}(${`{ size = 16, color = "currentColor" }: Props`}) {
       return ${jsx};
     }
     
@@ -58,23 +43,22 @@ function reactTemplate(
 
 const convert = (svg, options, componentName, outputFile) => {
   svgr(svg, options, componentName)
-    .then((result) => {
+    .then(result => {
       const component = result
         .replace("xlinkHref=", "href=")
         .replace(/fill=("(?!none)\S*")/g, "fill={color}");
 
       fs.writeFileSync(outputFile, component, "utf-8");
     })
-    .catch((e) => console.error(e));
+    .catch(e => console.error(e));
 };
 
 glob(`${rootDir}/raw/**/*.svg`, (err, icons) => {
   // Create file stubs
   fs.writeFileSync(`${reactDir}/index.js`, "", "utf-8");
-  // fs.writeFileSync(`${reactNativeDir}/index.js`, "", "utf-8");
 
   // Extract the icon weight
-  icons.forEach((icon) => {
+  icons.forEach(icon => {
     const parts = icon.split("/");
     const weight = parts[parts.length - 2];
 
@@ -85,7 +69,6 @@ glob(`${rootDir}/raw/**/*.svg`, (err, icons) => {
     const exportString = `export { default as ${name} } from "./${name}";\n`;
 
     fs.appendFileSync(`${reactDir}/index.js`, exportString, "utf-8");
-    // fs.appendFileSync(`${reactNativeDir}/index.js`, exportString, "utf-8");
 
     const svg = fs.readFileSync(icon, "utf-8");
     const options = {
@@ -104,16 +87,5 @@ glob(`${rootDir}/raw/**/*.svg`, (err, icons) => {
       { componentName: name },
       `${reactDir}/${name}.tsx`,
     );
-
-    // convert(
-    //   svg,
-    //   {
-    //     ...options,
-    //     native: true,
-    //     template: reactTemplate,
-    //   },
-    //   { componentName: name },
-    //   `${reactNativeDir}/${name}.tsx`,
-    // );
   });
 });
