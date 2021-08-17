@@ -155,7 +155,7 @@
       "WITHDRAW_UNBONDED": "Retiro",
       "NOMINATE": "Nominación",
       "CHILL": "Borrar nominaciones",
-      "SET_CONTROLLER": "Definir controlador"
+      "SET_CONTROLLER": "Definir controladora"
     }
   },
   "byteSize": {
@@ -2039,7 +2039,7 @@
       },
       "header": "Nominaciones",
       "nominate": "Nominar",
-      "setController": "Cambiar controlador",
+      "setController": "Cambiar controladora",
       "chill": "Borrar nominaciones",
       "totalStake": "Participación total",
       "amount": "Importe vinculado",
@@ -2252,9 +2252,9 @@
           "info": "Los activos vinculados seguirán estando vinculados. Si los desvinculas, estarán disponibles después de 28 días."
         },
         "setController": {
-          "title": "Cambiar controlador",
-          "description": "Definir a esta cuenta de Ledger como su propia controladora",
-          "info": "Ledger Live no es compatible con operaciones de cuentas de almacenamiento distintas a las controladoras."
+          "title": "Cambiar controladora",
+          "description": "Define a esta cuenta de Ledger como su propia controladora",
+          "info": "Ledger Live no es compatible con operaciones de cuentas de almacenamiento que son distintas a sus cuentas controladoras."
         }
       },
       "steps": {
@@ -3263,7 +3263,7 @@
     "title": "Legal",
     "termsLabel": "Términos del servicio",
     "privacyLabel": "Política de Privacidad",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
