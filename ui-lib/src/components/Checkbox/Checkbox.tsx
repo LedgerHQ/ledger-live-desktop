@@ -16,13 +16,14 @@ const Input = styled.input`
   width: 18px;
   height: 18px;
   appearance: none;
-  border: 1px solid currentColor;
+  border: 1px solid ${props => props.theme.colors.palette.v2.grey.border};
   box-shadow: none;
 
   cursor: pointer;
 
   &:checked {
     background-color: currentColor;
+    border-color: currentColor;
   }
 
   &:checked::after {
@@ -42,13 +43,17 @@ const Input = styled.input`
   }
 
   &[disabled] {
-    border-color: ${props => props.theme.colors.palette.v2.grey.border};
     cursor: unset;
   }
 `;
 
 const Label = styled(Text).attrs({ type: "body", fontWeight: "500" })`
-  color: currentColor;
+  color: ${props => props.theme.colors.palette.v2.text.secondary};
+
+  /* Version when the input is checked */
+  ${Input}:checked + & {
+    color: currentColor;
+  }
 
   &:first-letter {
     text-transform: uppercase;
