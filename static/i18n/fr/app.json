@@ -1371,8 +1371,8 @@
           "description": "Optimisez la gestion de votre portefeuille DeFi."
         },
         "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+          "description": "Admirez et mettez en valeur les NFT sécurisés par votre wallet.",
+          "shortDescription": "Admirez et mettez en valeur les NFT sécurisés par votre wallet."
         },
         "aave": {
           "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds.",
@@ -2423,14 +2423,14 @@
       "experimentalApps": "Autoriser les Apps Expérimentales",
       "experimentalAppsDesc": "Afficher et autoriser l'ouverture des Platform Apps \"Expérimentales\".",
       "catalogServer": "Définir le fournisseur du Catalogue",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "catalogServerDesc": "Choisissez entre plusieurs sources pour les Platform Apps.",
+      "enablePlatformDevTools": "Activer les Outils de développement Plateform",
+      "enablePlatformDevToolsDesc": "Autorisez la fenêtre Outils de développement Plateform.",
+      "addLocalApp": "Ajouter une app locale",
+      "addLocalAppDesc": "Parcourez vos fichiers et ajoutez une app locale avec un manifeste local.",
+      "addLocalAppButton": "Naviguer",
+      "runLocalAppDeleteButton": "Effacer",
+      "runLocalAppOpenButton": "Ouvrir"
     },
     "currencies": {
       "selectPlaceholder": "Crypto-actif",
@@ -2475,32 +2475,32 @@
       "disclaimer": "Il s'agit de fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de la tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "Utiliser TronGrid.io",
+          "description": "Utilisez TronGrid sans proxy Ledger."
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "Tester les traductions",
+          "description": "Affichez les langues non publiées dans la liste Langue d'affichage de l'onglet Général."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "Mode développeur",
+          "description": "Afficher les applications développeurs et testnet dans le Gestionnaire."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "Recherche de compte étendue",
+          "description": "Recherchez des comptes ayant des chemins de dérivation erronés. Veuillez envoyer tout actif trouvé vers un compte classique."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "API Explorateurs Expérimentales",
+          "description": "Testez une version en développement des explorateurs de blockchain de Ledger. Modifier ce paramètre peut affecter le solde des comptes, la synchronisation et la fonctionnalité Envoyer.\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "Gap limit personnalisée",
+          "description": "Personnalisez la gap limit pour tous les comptes. Une valeur supérieure à la valeur par défaut (20) permet de rechercher des coins sur les adresses publiques inutilisées. Réservé aux utilisateurs avancés : potentiels problèmes de compatibilité lors de la restauration des comptes."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "Fournisseur du Gestionnaire",
+          "description": "Changer le fournisseur d'applications dans le Gestionnaire peut rendre impossible l'installation ou désinstallation d'applications sur votre appareil Ledger."
         }
       }
     },
@@ -2634,7 +2634,7 @@
     "toastType": {
       "announcement": "Actualités",
       "operation": "Opération",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Succès"
     }
   },
   "informationCenter": {
@@ -2736,7 +2736,7 @@
         "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
-        "switchDevice": "Switch device",
+        "switchDevice": "Autre appareil",
         "options": {
           "1": {
             "heading": "Initialisation",
