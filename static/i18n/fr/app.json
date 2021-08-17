@@ -1383,12 +1383,12 @@
           "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source."
         },
         "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+          "shortDescription": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds.",
+          "description": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds."
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum.",
+          "description": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum."
         }
       },
       "dependencyInstall": {
@@ -2394,9 +2394,9 @@
         "button": "Terminé",
         "title": "Scanner pour exporter vers un mobile",
         "listTitle": "Sur l'application mobile Ledger Live :",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
+        "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
+        "step3": "Scannez le <1><0>code QR</0></1> jusqu'à ce que la barre soit à 100 %."
       }
     },
     "display": {
@@ -2415,14 +2415,14 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "Vous avez atteint le niveau Développeur !",
+        "text": "Bienvenue au pays des merveilles"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
+      "debugApps": "Autoriser les Apps Debug",
+      "debugAppsDesc": "Afficher et autoriser l'ouverture des Platform Apps \"Debug\".",
+      "experimentalApps": "Autoriser les Apps Expérimentales",
+      "experimentalAppsDesc": "Afficher et autoriser l'ouverture des Platform Apps \"Expérimentales\".",
+      "catalogServer": "Définir le fournisseur du Catalogue",
       "catalogServerDesc": "Switch between multiple platform apps sources",
       "enablePlatformDevTools": "Enable platform dev tools",
       "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
