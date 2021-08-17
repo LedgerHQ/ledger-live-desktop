@@ -110,7 +110,7 @@ jobs:
           pullId: ${{github.event.number}}
           from: ${{github.base_ref}}
           to: ${{github.event.pull_request.head.sha}}
-          sha: ${{ github.event.pull_request.head.sha }}
+          sha: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
         if: always() && github.event_name == 'push' && job.status != 'cancelled'
