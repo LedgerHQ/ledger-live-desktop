@@ -24,7 +24,7 @@
       "borderMedium": "hsla(249, 100%, 88%, 1)",
       "base": "hsla(248, 100%, 85%, 1)",
       "borderDark": "hsla(247, 56%, 68%, 1)",
-      "Dark": "hsla(247, 40%, 53%, 1)"
+      "dark": "hsla(247, 40%, 53%, 1)"
     },
     "orange": {
       "error": "hsla(16, 100%, 86%, 0.2)",
