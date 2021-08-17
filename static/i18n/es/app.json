@@ -154,7 +154,8 @@
       "SLASH": "Penalización",
       "WITHDRAW_UNBONDED": "Retiro",
       "NOMINATE": "Nominación",
-      "CHILL": "Borrar nominaciones"
+      "CHILL": "Borrar nominaciones",
+      "SET_CONTROLLER": "Set controller"
     }
   },
   "byteSize": {
@@ -2038,6 +2039,7 @@
       },
       "header": "Nominaciones",
       "nominate": "Nominar",
+      "setController": "Change Controller",
       "chill": "Borrar nominaciones",
       "totalStake": "Participación total",
       "amount": "Importe vinculado",
@@ -2059,9 +2061,9 @@
       "electionOpen": "La elección de nuevos validadores está en curso. Por lo tanto, las operaciones de participación no estarán disponibles hasta dentro de 15 minutos como máximo.",
       "electionOpenTooltip": "Esta operación está inhabilitada durante la elección de validadores",
       "externalControllerTooltip": "Esta cuenta está controlada por otra cuenta.",
-      "externalControllerUnsupported": "<0>Esta cuenta de reserva está controlada por otra cuenta con la dirección <0>{{address}}</0>.</0><1> Las operaciones de participación con cuentas que están controladas por una cuenta distinta no son compatibles con Ledger Live. Utiliza una billetera alternativa como Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
       "externalStashTooltip": "Esta cuenta controla otra cuenta.",
-      "externalStashUnsupported": "<0>Esta cuenta controla una cuenta de reserva cuya dirección es <0>{{address}}</0>. </0><1>Ledger Live no admite las operaciones de participación en cuentas de reserva separadas. Utiliza una billetera alternativa como Polkadot.js</1>",
+      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
       "showInactiveNominations": "Mostrar todas las nominaciones ({{count}})",
       "hideInactiveNominations": "Mostrar solo las nominaciones activas",
       "noActiveNominations": "No hay nominaciones activas.",
@@ -2248,6 +2250,11 @@
           "title": "Borrar nominaciones",
           "description": "Borra todas las nominaciones y no permite recibir recompensas.",
           "info": "Los activos vinculados seguirán estando vinculados. Si los desvinculas, estarán disponibles después de 28 días."
+        },
+        "setController": {
+          "title": "Change Controller",
+          "description": "Set this Ledger account as its own controller",
+          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
         }
       },
       "steps": {
@@ -3236,7 +3243,8 @@
       "bond": "Confirma en tu dispositivo para finalizar la operación",
       "unbond": "Confirma en tu dispositivo para finalizar la operación",
       "rebond": "Confirma en tu dispositivo para finalizar la operación",
-      "withdrawUnbonded": "Confirma en tu dispositivo para finalizar la operación"
+      "withdrawUnbonded": "Confirma en tu dispositivo para finalizar la operación",
+      "setController": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "receptor",
