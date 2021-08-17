@@ -1372,8 +1372,8 @@
           "description": "La forma inteligente de administrar tu portfolio DeFi."
         },
         "rainbow": {
-          "description": "Una forma fácil de visualizar los NFTs protegidos por tu billetera de hardware.",
-          "shortDescription": "Una forma fácil de visualizar los NFTs protegidos por tu billetera de hardware."
+          "description": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware.",
+          "shortDescription": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware."
         },
         "aave": {
           "description": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos.",
@@ -2499,15 +2499,15 @@
         },
         "experimentalExplorers": {
           "title": "API de Experimental Explorers",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "description": "Prueba una versión futura de blockchain explorers de Ledger. Los cambios en esta configuración pueden afectar el saldo y la sincronización de tu cuenta, como así también a la función de envíos.\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "Límite de intervalo personalizado",
+          "description": "Límite de intervalo personalizado para todas las cuentas. Al incrementarlo a valores superiores al predeterminado (20) se escanearán más direcciones públicas no utilizadas en búsqueda de activos. Solo para usuarios avanzados, ya que puede crear problemas de compatibilidad al momento de restaurar tus cuentas."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "Proveedor de Manager",
+          "description": "Cambiar el proveedor de aplicaciones en el Manager puede imposibilitar la instalación o desinstalación de aplicaciones en tu dispositivo Ledger."
         }
       }
     },
@@ -2641,7 +2641,7 @@
     "toastType": {
       "announcement": "Noticias",
       "operation": "Operación",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Logro desbloqueado"
     }
   },
   "informationCenter": {
@@ -2743,7 +2743,7 @@
         "hasNoRecovery": "¿Es la primera vez que utilizas tu {{deviceName}}?",
         "hasRecovery": "¿Ya tienes una Frase de recuperación?",
         "separator": "O",
-        "switchDevice": "Switch device",
+        "switchDevice": "Cambiar dispositivo",
         "options": {
           "1": {
             "heading": "Primera vez",
@@ -3244,7 +3244,7 @@
       "unbond": "Confirma en tu dispositivo para finalizar la operación",
       "rebond": "Confirma en tu dispositivo para finalizar la operación",
       "withdrawUnbonded": "Confirma en tu dispositivo para finalizar la operación",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "Confirma en tu dispositivo para finalizar la operación"
     },
     "recipientWording": {
       "send": "receptor",
@@ -3261,8 +3261,8 @@
   },
   "Terms": {
     "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
+    "termsLabel": "Términos del servicio",
+    "privacyLabel": "Política de Privacidad",
     "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Ingresa a la aplicación Ledger"
   },
