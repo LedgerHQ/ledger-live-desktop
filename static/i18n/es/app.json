@@ -2063,7 +2063,7 @@
       "externalControllerTooltip": "Esta cuenta está controlada por otra cuenta.",
       "externalControllerUnsupported": "<0>Esta cuenta de almacenamiento está controlada por una cuenta distinta cuya dirección es <0>{{controllerAddress}}</0>.</0><1>Para participar tokens mediante Ledger Live, debes definir a esta cuenta de almacenamiento como su propia controladora.</1>",
       "externalStashTooltip": "Esta cuenta controla otra cuenta.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0>Esta cuenta es la controladora de una cuenta de almacenamiento distinta cuya dirección es <0>{{stashAddress}}</0>.</0><1>Para participar tokens mediante Ledger Live, debes definir a tu cuenta de almacenamiento como su propia controladora.</1>",
       "showInactiveNominations": "Mostrar todas las nominaciones ({{count}})",
       "hideInactiveNominations": "Mostrar solo las nominaciones activas",
       "noActiveNominations": "No hay nominaciones activas.",
@@ -2252,9 +2252,9 @@
           "info": "Los activos vinculados seguirán estando vinculados. Si los desvinculas, estarán disponibles después de 28 días."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "Cambiar controlador",
+          "description": "Definir a esta cuenta de Ledger como su propia controladora",
+          "info": "Ledger Live no es compatible con operaciones de cuentas de almacenamiento distintas a las controladoras."
         }
       },
       "steps": {
@@ -2385,7 +2385,7 @@
       "about": "Información",
       "experimental": "Funciones experimentales",
       "accounts": "Cuentas",
-      "developer": "Developer"
+      "developer": "Desarrollador"
     },
     "export": {
       "accounts": {
@@ -2401,9 +2401,9 @@
         "button": "Listo",
         "title": "Escanear para exportar a Mobile",
         "listTitle": "En la aplicación Ledger Live Mobile:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "Toca el botón <highlight><icon>+</icon></highlight> en <highlight>cuentas</highlight>",
+        "step2": "Toca <highlight>Importar cuentas de Desktop</highlight>",
+        "step3": "Escanea el <highlight>código LiveQR</highlight> hasta que la carga llegue a 100%"
       }
     },
     "display": {
@@ -2422,16 +2422,16 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "¡Ahora eres un desarrollador!",
+        "text": "Bienvenido al País de las Maravillas"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
+      "debugApps": "Permitir aplicaciones de depuración",
+      "debugAppsDesc": "Mostrar y permitir la utilización de aplicaciones de plataforma etiquetadas como de depuración.",
+      "experimentalApps": "Permitir aplicaciones experimentales",
+      "experimentalAppsDesc": "Mostrar y permitir la utilización de aplicaciones de plataforma etiquetadas como experimentales.",
+      "catalogServer": "Definir el proveedor del catálogo",
+      "catalogServerDesc": "Cambiar entre distintas fuentes de aplicaciones de plataforma",
+      "enablePlatformDevTools": "Habilitar herramientas de desarrollo de plataforma",
       "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
       "addLocalApp": "Add a local app",
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
