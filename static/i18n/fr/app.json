@@ -117,11 +117,11 @@
       "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser",
-      "devTools": "Dev tools"
+      "devTools": "Outils développeurs"
     },
     "exchange": "Échanger",
     "info": "Informations",
-    "connectDevice": "Connect your device"
+    "connectDevice": "Connectez votre appareil"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -629,8 +629,8 @@
     },
     "history": {
       "tab": "Historique",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "Exportation...",
+      "exportOperations": "Exporter les opérations"
     }
   },
   "lend": {
@@ -698,10 +698,10 @@
         "toSupplyTooltip": "Vous pouvez maintenant déposer vos actifs."
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "Approbation",
+        "inactive": "Inactif",
+        "supplying": "Dépôt en cours",
+        "earning": "Gains en cours"
       },
       "closed": {
         "assetLended": "Actif",
@@ -1042,7 +1042,7 @@
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
     "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Afficher le code QR"
   },
   "emptyState": {
     "dashboard": {
@@ -1312,8 +1312,8 @@
         "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
+        "title": "Mise à jour disponible",
+        "title_plural": "Mises à jour disponibles",
         "progressTitle": "{{number}} mise à jour d'application",
         "progressTitle_plural": "{{number}} mises à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
@@ -1355,20 +1355,20 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés.",
+          "description": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés."
         },
         "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+          "shortDescription": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis.",
+          "description": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis."
         },
         "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
+          "shortDescription": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes.",
+          "description": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes."
         },
         "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
+          "shortDescription": "Gérez votre portefeuille DeFi astucieusement.",
+          "description": "Gérez votre portefeuille DeFi astucieusement."
         },
         "rainbow": {
           "description": "An easy way to visualize the NFT secured by your hardware wallet.",
