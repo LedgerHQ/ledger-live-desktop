@@ -121,7 +121,7 @@
     },
     "exchange": "Обмен",
     "info": "Информация",
-    "connectDevice": "Connect your device"
+    "connectDevice": "Подключите устройство"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -629,8 +629,8 @@
     },
     "history": {
       "tab": "История",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "Экспортируем…",
+      "exportOperations": "Экспорт истории"
     }
   },
   "lend": {
@@ -698,10 +698,10 @@
         "toSupplyTooltip": "Теперь вы можете предоставлять свои активы в кредит"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "Включение",
+        "inactive": "Неактивный",
+        "supplying": "Предоставляется",
+        "earning": "Зарабатывает"
       },
       "closed": {
         "assetLended": "Актив",
@@ -1042,7 +1042,7 @@
     "for": "Адрес для <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
     "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Показать QR-код"
   },
   "emptyState": {
     "dashboard": {
@@ -1312,9 +1312,9 @@
         "manageAccount": "Управление счетами"
       },
       "updatable": {
-        "title": "Update available",
+        "title": "Доступно обновление",
         "title_plural": "доступных обновлений(-ия)",
-        "progressTitle": "{{number}} App update",
+        "progressTitle": "Доступных обновлений: {{number}}",
         "progressTitle_plural": "Обновления приложений: {{number}}",
         "progressWarning": "Не выходите из Диспетчера в процессе обновления.",
         "progress": "Обновляем всё..."
