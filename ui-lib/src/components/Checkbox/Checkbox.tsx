@@ -86,7 +86,7 @@ export type CheckboxProps = {
   variant?: "default" | "success" | "error";
   label?: string;
   name: string;
-  onChange: () => void;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 };
 
 const Checkbox = ({
