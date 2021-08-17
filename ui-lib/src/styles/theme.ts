@@ -176,7 +176,7 @@ export interface Theme {
   sizes: {
     topBarHeight: number
     sideBarWidth: number
-    drawer: {
+    side: {
       big: {
         width: number
       }
@@ -211,7 +211,7 @@ export interface Theme {
 }
 const theme: Theme = {
   sizes: {
-    drawer: {
+    side: {
       big: {
         width: 580,
       },
