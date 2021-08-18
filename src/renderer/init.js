@@ -86,6 +86,8 @@ async function init() {
 
   const store = createStore({ dbMiddleware });
 
+  sentry(() => sentryLogsSelector(store.getState()));
+
   ipcRenderer.once("deep-linking", (event, url) => {
     store.dispatch(setDeepLinkUrl(url));
   });
@@ -111,9 +113,6 @@ async function init() {
 
   const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
   setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);
-
-  // TODO: DON'T FORGET SENTRY
-  sentry(() => sentryLogsSelector(store.getState()));
 
   const isMainWindow = remote.getCurrentWindow().name === "MainWindow";
 

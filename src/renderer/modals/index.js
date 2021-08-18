@@ -9,8 +9,8 @@ import MODAL_PASSWORD from "./PasswordModal";
 import MODAL_DISABLE_PASSWORD from "./DisablePasswordModal";
 import MODAL_ADD_ACCOUNTS from "./AddAccounts";
 import MODAL_RECEIVE from "./Receive";
-import MODAL_TERMS from "./Terms";
 import MODAL_SEND from "./Send";
+import MODAL_SIGN_MESSAGE from "./SignMessage";
 import MODAL_SIGN_TRANSACTION from "./SignTransaction";
 import MODAL_REQUEST_ACCOUNT from "./RequestAccount";
 import MODAL_UPDATE_FIRMWARE from "./UpdateFirmwareModal";
@@ -23,6 +23,9 @@ import MODAL_RELEASE_NOTES from "./ReleaseNotes";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
+import MODAL_SWAP_RESET_KYC from "./Swap/ResetKYC";
+import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
+import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
 
 import MODAL_FULL_NODE from "./FullNode";
 
@@ -70,8 +73,9 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_DISABLE_PASSWORD,
   MODAL_ADD_ACCOUNTS,
   MODAL_RECEIVE,
-  MODAL_TERMS,
+  MODAL_WALLETCONNECT_PASTE_LINK,
   MODAL_SEND,
+  MODAL_SIGN_MESSAGE,
   MODAL_SIGN_TRANSACTION,
   MODAL_REQUEST_ACCOUNT,
   MODAL_UPDATE_FIRMWARE,
@@ -106,6 +110,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_BOND,
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
+  MODAL_FULL_NODE,
   // Lending
   MODAL_LEND_MANAGE,
   MODAL_LEND_ENABLE_INFO,
@@ -115,8 +120,10 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_WITHDRAW_FLOW,
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
+  // Swap
   MODAL_SWAP,
-  MODAL_FULL_NODE,
+  MODAL_SWAP_UNAUTHORIZED_RATES,
+  MODAL_SWAP_RESET_KYC,
 };
 
 export default modals;

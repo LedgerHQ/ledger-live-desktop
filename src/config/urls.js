@@ -38,8 +38,16 @@ export const urls = {
     "https://support.ledger.com/hc/en-us?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=status_page",
   syncErrors:
     "https://support.ledger.com/hc/en-us/articles/360012207759?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
-  terms:
-    "https://www.ledger.com/pages/terms-of-use-and-disclaimer?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=terms",
+  terms: {
+    en:
+      "https://www.ledger.com/pages/terms-of-use-and-disclaimer?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=terms",
+    fr:
+      "https://shop.ledger.com/pages/conditions-generales-dutilisation-du-site-web?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    es:
+      "https://shop.ledger.com/pages/condiciones-de-uso-del-sitio-web?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    de:
+      "https://shop.ledger.com/pages/nutzungsbedingungen-der-website?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+  },
   noDevice: {
     buyNew:
       "https://shop.ledger.com/pages/hardware-wallets-comparison?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=onboarding",
@@ -130,6 +138,7 @@ export const urls = {
       "https://shop.ledger.com/pages/valentines-day-special-offers?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     polkaStake:
       "https://www.ledger.com/staking-polkadot?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
+    twitterIntent: "https://twitter.com/intent/tweet",
   },
   helpModal: {
     gettingStarted:
@@ -150,12 +159,23 @@ export const urls = {
       changelly: {
         main: "https://changelly.com/",
         tos: "https://changelly.com/terms-of-use",
+        support: "https://support.changelly.com/en/support/tickets/new",
+      },
+      wyre: {
+        main: "https://support.sendwyre.com/hc/en-us/requests/new",
+        tos: "https://www.sendwyre.com/user-agreement/",
+        support: "https://support.sendwyre.com/hc/en-us/requests/new",
+        kyc: "https://support.ledger.com/hc/en-us/articles/4404422869265",
       },
     },
   },
   exchange: {
     learnMore:
       "https://www.ledger.com/academy/benefits-of-buying-crypto-through-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=exchange",
+  },
+  platform: {
+    developerPage:
+      "https://developers.ledger.com?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=catalog",
   },
   // Errors
   errors: {
