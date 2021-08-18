@@ -33,7 +33,7 @@ function reactTemplate(
 }`}
 
     ${interfaces}
-    function ${componentName}(${`{ size = 16, color = "currentColor" }: Props`}) {
+    function ${componentName}(${`{ size = 16, color = "currentColor" }: Props`}): JSX.Element {
       return ${jsx};
     }
     
