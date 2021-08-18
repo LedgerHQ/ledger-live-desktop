@@ -39,8 +39,8 @@ const Template = (args: SideBarProps) => {
     <SideBar {...args} onToggle={handleToggle}>
         <SideBar.Item  onClick={action('go to portfolio')} label="portfolio"><PortfolioIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to accounts')} label="accounts" isActive><WalletIcon /></SideBar.Item>
-        <SideBar.Item  onClick={action('go to discover')} label="discover" isDisable><ManagerIcon /></SideBar.Item>
-        <SideBar.Item  onClick={action('go to send')} label="send" isDisable><ArrowTopIcon /></SideBar.Item>
+        <SideBar.Item  onClick={action('go to discover')} label="discover" isDisabled><ManagerIcon /></SideBar.Item>
+        <SideBar.Item  onClick={action('go to send')} label="send" isDisabled><ArrowTopIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to receive')} label="receive"><ArrowBottomIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to buy / Sell')} label="buy / Sell"><BuyCryptoAltIcon /></SideBar.Item>
         <SideBar.Item  onClick={action('go to exchange')} label="exchange"><BuyCryptoIcon /></SideBar.Item>

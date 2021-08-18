@@ -20,7 +20,7 @@ export default {
     onClick: { control: false },
     children: { control: false },
     isActive: { control: false },
-    isDisable: { control: false },
+    isDisabled: { control: false },
   },
 };
 
@@ -64,7 +64,7 @@ Active.args = {
 Disable.args = {
   label: "accounts",
   onClick: action("go to accounts"),  
-  isDisable: true,
+  isDisabled: true,
 };
 Hover.args = {
   label: "accounts",

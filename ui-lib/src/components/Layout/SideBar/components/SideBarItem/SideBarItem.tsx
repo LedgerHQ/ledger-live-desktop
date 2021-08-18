@@ -67,7 +67,7 @@ export type SideBarItemType = {
   children: JSX.Element;
   onClick: () => void;
   isActive?: boolean;
-  isDisable?: boolean;
+  isDisabled?: boolean;
 };
 
 const SideBarItem = ({
@@ -75,12 +75,12 @@ const SideBarItem = ({
   children,
   onClick,
   isActive,
-  isDisable,
+  isDisabled,
 }: SideBarItemType): JSX.Element => {
   const { isExpanded } = useContext(SideBarContext);
 
   const handleClick = () => {
-    if (isDisable) return;
+    if (isDisabled) return;
     onClick();
   };
 
@@ -89,7 +89,7 @@ const SideBarItem = ({
       role="button"
       onClick={handleClick}
       data-active={isActive}
-      data-disable={isDisable}
+      data-disable={isDisabled}
       tabIndex={0}
     >
       {children}
