@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Information",
+        "title": "信息",
         "website": "网站"
       }
     },
@@ -117,11 +117,11 @@
       "needsMigration": "点击更新账户",
       "error": "同步错误",
       "refresh": "刷新",
-      "devTools": "Dev tools"
+      "devTools": "开发工具"
     },
     "exchange": "货币兑换",
     "info": "信息",
-    "connectDevice": "Connect your device"
+    "connectDevice": "连接您的设备"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -155,7 +155,7 @@
       "WITHDRAW_UNBONDED": "提取",
       "NOMINATE": "提名",
       "CHILL": "清除提名",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "设置控制器"
     }
   },
   "byteSize": {
@@ -297,7 +297,7 @@
         "pending": {
           "cta": "继续",
           "title": "待批准",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "您的信息已提交Wyre批准。",
           "link": "了解关于 KYC 的更多详情"
         },
         "closed": {
@@ -630,8 +630,8 @@
     },
     "history": {
       "tab": "历史记录",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "正在导出...",
+      "exportOperations": "导出操作"
     }
   },
   "lend": {
@@ -699,10 +699,10 @@
         "toSupplyTooltip": "您现在可以供应您的资产"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "正在启用",
+        "inactive": "不活跃",
+        "supplying": "正在供应",
+        "earning": "收益"
       },
       "closed": {
         "assetLended": "资产",
@@ -1043,7 +1043,7 @@
     "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
     "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "显示二维码"
   },
   "emptyState": {
     "dashboard": {
@@ -1313,10 +1313,10 @@
         "manageAccount": "管理我的账户"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "可用更新",
+        "title_plural": "可用更新",
+        "progressTitle": "{{number}} 个应用程序更新",
+        "progressTitle_plural": "{{number}} 个应用程序更新",
         "progressWarning": "更新期间，请勿退出 Manager（管理器）。",
         "progress": "正在更新全部……"
       },
@@ -1356,20 +1356,20 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "使用 ParaSwap 交换您的加密货币，它聚合并提供去中心化交易所的最佳报价。",
+          "description": "使用 ParaSwap 交换您的加密货币，它聚合并提供去中心化交易所的最佳报价。"
         },
         "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+          "shortDescription": "使用 Wyre 购买比特币、以太币以及更多加密货币，仅适用于我们的美国客户。",
+          "description": "使用 Wyre 购买比特币、以太币以及更多加密货币，仅适用于我们的美国客户。"
         },
         "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
+          "shortDescription": "用 Lido 质押您的 ETH 以获得每日质押奖励。",
+          "description": "用 Lido 质押您的 ETH 以获得每日质押奖励。"
         },
         "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
+          "shortDescription": "管理您的 DeFi 投资组合的智能方式。",
+          "description": "管理您的 DeFi 投资组合的智能方式。"
         },
         "rainbow": {
           "description": "由您的硬件钱包确保的一种简单的 NFT 可视化途径。",
@@ -1377,19 +1377,19 @@
         },
         "aave": {
           "description": "通过流动性市场协议借出或借入您的加密货币并控制您的资金。",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+          "shortDescription": "通过流动性市场协议借出或借入您的加密货币并控制您的资金。"
         },
         "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+          "shortDescription": "通过完全去中心化的开源协议借出或借入您的加密货币。",
+          "description": "通过完全去中心化的开源协议借出或借入您的加密货币。"
         },
         "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+          "shortDescription": "通过以太坊第 2 层上的自托管去中心化交易所进行交易。",
+          "description": "通过以太坊第 2 层上的自托管去中心化交易所进行交易。"
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "通过以太坊上的 Defi/DEX 聚合器交易加密货币。",
+          "description": "通过以太坊上的 Defi/DEX 聚合器交易加密货币。"
         }
       },
       "dependencyInstall": {
@@ -2039,7 +2039,7 @@
       },
       "header": "提名名单",
       "nominate": "提名",
-      "setController": "Change Controller",
+      "setController": "更改控制器",
       "chill": "清除提名",
       "totalStake": "质押总额",
       "amount": "已绑定数额",
@@ -2061,9 +2061,9 @@
       "electionOpen": "正在推选新的验证器。因此，最多 15 分钟后方可进行权益质押操作。",
       "electionOpenTooltip": "在推选验证器期间，该操作被禁用。",
       "externalControllerTooltip": "此账户由另一个账户控制。",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
+      "externalControllerUnsupported": "<0>此存储账户由地址为 <0>{{controllerAddress}}</0> 的单独账户控制。</0><1>要使用 Ledger Live 进行质押，您必须将此存储账户设置为其自己的控制器。</1>",
       "externalStashTooltip": "该账户控制着另一个账户。",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0>此帐户是一个单独的存储账户的控制器，其地址为 <0>{{stashAddress}}</0>。</0><1>要使用 Ledger Live 进行质押，您必须将您的存储账户设置为其自己的控制器。</1>",
       "showInactiveNominations": "显示所有提名 ({{count}})",
       "hideInactiveNominations": "仅显示活跃状态的提名",
       "noActiveNominations": "没有活跃状态的提名。",
@@ -2252,9 +2252,9 @@
           "info": "已绑定的资产将会保持绑定状态。若您将其解绑，那么它们将在 28 天后可用。"
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "更改控制器",
+          "description": "设置此 Ledger 账户为其自己的控制器",
+          "info": "Ledger Live 不支持对单独的存储和控制器账户进行操作。"
         }
       },
       "steps": {
@@ -2385,7 +2385,7 @@
       "about": "关于",
       "experimental": "实验性功能",
       "accounts": "账户",
-      "developer": "Developer"
+      "developer": "开发者"
     },
     "export": {
       "accounts": {
@@ -2401,9 +2401,9 @@
         "button": "完成",
         "title": "扫描以导出至移动设备",
         "listTitle": "在 Ledger Live 手机应用上：",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "在 <highlight> 账户 </highlight>中点击 <highlight><icon>+</icon></highlight> 按钮",
+        "step2": "点击 <highlight> 导入桌面账户 </highlight>",
+        "step3": "扫描 <highlight> LiveQR code </highlight> 直到加载器达到 100%"
       }
     },
     "display": {
@@ -2422,22 +2422,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "你现已成为了一名开发者！",
+        "text": "欢迎来到仙境"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "允许调试应用",
+      "debugAppsDesc": "显示并允许打开带有调试标记的平台应用程序。",
+      "experimentalApps": "允许实验性应用",
+      "experimentalAppsDesc": "显示并允许打开带有实验标记的平台应用程序。",
+      "catalogServer": "设置目录提供商",
+      "catalogServerDesc": "在多个平台应用程序源之间切换",
+      "enablePlatformDevTools": "启用平台开发工具",
+      "enablePlatformDevToolsDesc": "启用打开平台应用程序开发工具窗口",
+      "addLocalApp": "添加本地应用",
+      "addLocalAppDesc": "浏览本地文件并使用本地清单添加本地应用程序",
+      "addLocalAppButton": "浏览",
+      "runLocalAppDeleteButton": "删除",
+      "runLocalAppOpenButton": "打开"
     },
     "currencies": {
       "selectPlaceholder": "选择加密资产",
@@ -2482,32 +2482,32 @@
       "disclaimer": "这些是我们以“按现状”为基准提供的实验性功能，以供我们的专业爱好者社区测试。这些功能随时可能会更改、中断或删除。启用这些功能，意味着您同意自行承担使用过程中的风险。",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "使用 TronGrid.io",
+          "description": "无需 Ledger 代理直接使用 TronGrid"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "翻译测试",
+          "description": "将未发布的语言添加到常规设置选项卡的语言列表中。"
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "开发者模式",
+          "description": "在管理器中显示开发者与测试网应用程序。"
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "扩展账户搜索",
+          "description": "扫描具有错误派生路径的账户。 请将可能找到的资产发送到常规账户。"
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "实验探索者 API",
+          "description": "尝试即将推出的 Ledger 区块链浏览器版本。 更改此设置可能会影响账户余额和同步以及发送功能。\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "自定义间距限制",
+          "description": "自定义所有账户的间隙限制。 将此值增加到其默认值 (20) 以上会扫描更多未使用的公共地址以获取硬币。 仅限高级用户，这可能会在恢复您的账户时破坏兼容性。"
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "管理器提供商",
+          "description": "在管理器中更改应用程序提供商可能会导致无法在您的 Ledger 设备上安装或卸载应用程序。"
         }
       }
     },
@@ -2641,7 +2641,7 @@
     "toastType": {
       "announcement": "新闻",
       "operation": "操作",
-      "achievement": "Achievement Unlocked"
+      "achievement": "已解锁的成就"
     }
   },
   "informationCenter": {
@@ -2743,7 +2743,7 @@
         "hasNoRecovery": "首次使用您的 {{deviceName}} ？",
         "hasRecovery": "已经有了恢复短语？",
         "separator": "或者",
-        "switchDevice": "Switch device",
+        "switchDevice": "切换设备",
         "options": {
           "1": {
             "heading": "首次使用",
@@ -3244,7 +3244,7 @@
       "unbond": "请在您的设备上确认并完成操作",
       "rebond": "请在您的设备上确认并完成操作",
       "withdrawUnbonded": "请在您的设备上确认并完成操作",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "请在您的设备上确认并完成操作"
     },
     "recipientWording": {
       "send": "接收方",
@@ -3260,10 +3260,10 @@
     "placeholder": "输入 {{currencyName}} 地址"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "法律条款",
+    "termsLabel": "服务条款",
+    "privacyLabel": "隐私政策",
+    "switchLabel": "我已阅读并接受服务条款和隐私政策",
     "cta": "进入 Ledger 应用程序"
   },
   "families": {
