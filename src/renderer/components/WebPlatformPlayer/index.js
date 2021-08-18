@@ -15,9 +15,11 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
+
 import {
   accountToPlatformAccount,
   currencyToPlatformCurrency,
+  getPlatformTransactionSignFlowInfos,
 } from "@ledgerhq/live-common/lib/platform/converters";
 
 import type {
@@ -79,43 +81,6 @@ type Props = {
   manifest: AppManifest,
   onClose?: Function,
   inputs?: Object,
-};
-
-const getTransactionInfos = platformTx => {
-  const { family } = platformTx;
-  const tx = platformTx;
-
-  switch (family) {
-    case "ethereum": {
-      const hasFeesProvided = tx.gasLimit || tx.gasPrice;
-
-      if (hasFeesProvided) {
-        tx.feesStrategy = "custom";
-        tx.userGasLimit = tx.gasLimit;
-      }
-
-      return { canEditFees: true, tx, hasFeesProvided };
-    }
-
-    case "bitcoin": {
-      const hasFeesProvided = !!tx.feePerByte;
-
-      if (hasFeesProvided) {
-        tx.feesStrategy = null;
-      }
-
-      return { canEditFees: true, tx, hasFeesProvided };
-    }
-
-    case "ripple": {
-      const hasFeesProvided = !!tx.fee;
-
-      return { canEditFees: true, tx, hasFeesProvided };
-    }
-
-    default:
-      return { canEditFees: false, tx, hasFeesProvided: false };
-  }
 };
 
 const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
@@ -284,14 +249,16 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
 
       tracking.platformSignTransactionRequested(manifest);
 
-      const { canEditFees, tx, hasFeesProvided } = getTransactionInfos(platformTransaction);
+      const { canEditFees, liveTx, hasFeesProvided } = getPlatformTransactionSignFlowInfos(
+        platformTransaction,
+      );
 
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
             canEditFees,
             stepId: canEditFees && !hasFeesProvided ? "amount" : "summary",
-            transactionData: tx,
+            transactionData: liveTx,
             useApp: params.useApp,
             account,
             parentAccount: null,
