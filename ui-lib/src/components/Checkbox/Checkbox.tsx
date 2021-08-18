@@ -19,8 +19,6 @@ const Input = styled.input`
   border: 1px solid ${props => props.theme.colors.palette.v2.grey.border};
   box-shadow: none;
 
-  cursor: pointer;
-
   &:checked {
     background-color: currentColor;
     border-color: currentColor;
@@ -40,10 +38,6 @@ const Input = styled.input`
     position: absolute;
     top: -1px;
     left: -1px;
-  }
-
-  &[disabled] {
-    cursor: unset;
   }
 `;
 
@@ -67,6 +61,7 @@ const Container = styled.div`
   display: inline-flex;
   column-gap: 13px;
   align-items: center;
+  cursor: pointer;
 
   &[data-variant="default"] {
     --ll-checkbox-color: ${props => props.theme.colors.palette.v2.primary.dark};
@@ -82,6 +77,7 @@ const Container = styled.div`
 
   &[data-disabled="true"] {
     --ll-checkbox-color: ${props => props.theme.colors.palette.v2.text.secondary};
+    cursor: unset;
   }
 `;
 
@@ -102,15 +98,8 @@ const Checkbox = ({
   name,
   onChange,
 }: CheckboxProps): JSX.Element => (
-  <Container data-variant={variant} data-disabled={isDisabled}>
-    <Input
-      type="checkbox"
-      name={name}
-      id={name}
-      checked={isChecked}
-      onChange={onChange}
-      disabled={isDisabled}
-    />
+  <Container data-variant={variant} data-disabled={isDisabled} onChange={onChange}>
+    <Input type="checkbox" name={name} id={name} checked={isChecked} disabled={isDisabled} />
     {label ? (
       <Label forwardedAs="label" htmlFor={name}>
         {label}
