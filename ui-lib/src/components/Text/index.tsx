@@ -50,6 +50,7 @@ export interface TextProps {
   ff?: FontFamilies;
   fontSize?: number | string;
   textAlign?: string;
+  textTransform?: string;
   color?: string;
   fontWeight?: string;
   mt?: number | string;
@@ -90,6 +91,7 @@ const Base = styled.span.attrs((p: BaseTextProps) => ({
   ${fontWeight};
   ${space};
   ${letterSpacing};
+  ${p => (p.textTransform ? `text-transform: ${p.textTransform};` : "")}
 `;
 
 const Text = ({ children, bracket, ...props }: TextProps) => {
