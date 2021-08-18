@@ -57,7 +57,7 @@ export const Item = {
     ${space}
   `,
   Current: styled.div.attrs(_ => ({
-    backgroundColor: "palette.v2.primary.Dark",
+    backgroundColor: "palette.v2.primary.dark",
   }))<ColorProps>`
     width: 6px;
     height: 6px;
