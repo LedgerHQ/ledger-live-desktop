@@ -12,8 +12,8 @@ import {
 } from "styled-system";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import "./Text.css";
-import BracketRight from "@ui/assets/icons/BracketLeft";
-import BracketLeft from "@ui/assets/icons/BracketRight";
+import BracketRight from "@ui/assets/icons/BracketleftRegular";
+import BracketLeft from "@ui/assets/icons/BracketrightRegular";
 
 const uppercase = system({
   uppercase: {
