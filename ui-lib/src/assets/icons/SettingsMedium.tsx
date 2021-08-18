@@ -1,10 +1,10 @@
 import * as React from "react";
 type Props = {
-  size: number;
+  size?: number | string;
   color?: string;
 };
 
-function SettingsMedium({ size = 16, color = "currentColor" }: Props) {
+function SettingsMedium({ size = 16, color = "currentColor" }: Props): JSX.Element {
   return (
     <svg
       width={size}
