@@ -243,7 +243,7 @@
     },
     "outdatedApp": {
       "title": "请在您的设备上更新 {{appName}} 应用程序",
-      "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的 swap 交换",
+      "subtitle": "前往 Manager（管理器）并更新 {{appName}} 应用程序以进行资产的 swap 交换",
       "cta": "前往 Manager（管理器）"
     },
     "providers": {
