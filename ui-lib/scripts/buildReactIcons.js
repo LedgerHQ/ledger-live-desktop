@@ -13,11 +13,7 @@ if (!fs.existsSync(reactDir)) {
 }
 
 // Component template
-function reactTemplate(
-  { template },
-  opts,
-  { imports, interfaces, componentName, _, jsx, exports },
-) {
+function reactTemplate({ template }, _, { imports, interfaces, componentName, __, jsx, exports }) {
   const plugins = ["typescript"];
   const tpl = template.smart({ plugins });
 
