@@ -1,14 +1,19 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import LedgerLiveIconLarge from "@ui/assets/icons/LedgerLiveIcon";
-import LedgerIconSmall from "@ui/assets/icons/LedgerIconSmall";
+import LedgerLiveIconLarge from "@ui/assets/icons/LedgerLiveRegular";
+import LedgerIconSmall from "@ui/assets/icons/LedgerLiveAltRegular";
 import { SideBarContext } from "@ui/components/Layout/SideBar/SideBar";
 import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 
 const LedgerIcon = styled(LedgerLiveIconLarge)`
   width: 155px;
   margin-left: 1rem;
+
+  & svg {
+    width: 155px;
+    height: 32px;
+  }
 `;
 
 const Container = styled.div`

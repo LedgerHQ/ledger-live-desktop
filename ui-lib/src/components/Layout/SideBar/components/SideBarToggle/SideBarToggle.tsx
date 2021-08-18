@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 
-import ArrowLeftIcon from "@ui/assets/icons/ArrowLeft";
-import ArrowRightIcon from "@ui/assets/icons/ArrowRight";
+import ArrowLeftIcon from "@ui/assets/icons/ArrowLeftMedium";
+import ArrowRightIcon from "@ui/assets/icons/ArrowRightMedium";
 import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 import { SideBarContext } from "@ui/components/Layout/SideBar/SideBar";
 

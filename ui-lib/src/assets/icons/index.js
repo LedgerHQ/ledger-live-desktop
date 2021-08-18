@@ -572,6 +572,8 @@ export { default as InstagramRegular } from "./InstagramRegular";
 export { default as KeyRegular } from "./KeyRegular";
 export { default as LayersRegular } from "./LayersRegular";
 export { default as LedgerBlueRegular } from "./LedgerBlueRegular";
+export { default as LedgerLiveRegular } from "./LedgerLiveRegular";
+export { default as LedgerLiveAltRegular } from "./LedgerLiveAltRegular";
 export { default as LendRegular } from "./LendRegular";
 export { default as LifeRingRegular } from "./LifeRingRegular";
 export { default as LightbulbRegular } from "./LightbulbRegular";

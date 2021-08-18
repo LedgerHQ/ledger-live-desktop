@@ -1,7 +1,7 @@
 import * as React from "react";
 import SideBarItem from "./SideBarItem";
 import { action } from "@storybook/addon-actions";
-import AccountsIcon from "@ui/assets/icons/Accounts";
+import WalletIcon from "@ui/assets/icons/WalletMedium";
 import type { SideBarItemType } from './SideBarItem';
 import { SideBarContext } from "@ui/components/Layout/SideBar/SideBar";
 import Text from "@ui/components/Text";
@@ -30,7 +30,7 @@ const Template = (args: SideBarItemType) => (
       <Text type="h3">Expanded</Text>
       <SideBarContext.Provider value={{ isExpanded: true, onToggle: () => {} }}>
         <SideBarItem {...args}>
-          <AccountsIcon />
+          <WalletIcon />
         </SideBarItem>
       </SideBarContext.Provider>
     </Flex>
@@ -39,7 +39,7 @@ const Template = (args: SideBarItemType) => (
       <Text type="h3">Collapsed</Text>
       <SideBarContext.Provider value={{ isExpanded: false, onToggle: () => {} }}>
         <SideBarItem {...args}>
-          <AccountsIcon />
+          <WalletIcon />
         </SideBarItem>
       </SideBarContext.Provider>
     </Flex>
