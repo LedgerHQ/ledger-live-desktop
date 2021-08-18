@@ -227,8 +227,8 @@
     "history": {
       "disclaimer": "您的 swap 交换桌面交易没有与 Ledger Live 手机应用程序同步",
       "empty": {
-        "title": "您之前的掉期交易会显示在这里",
-        "description": "要么您还未进行过任何掉期交易，亦或 Ledger Live 在此期间被重置了 。"
+        "title": "您之前的 swap 交换会显示在这里",
+        "description": "要么您还未进行过任何 swap 交换，亦或 Ledger Live 在此期间被重置了 。"
       }
     },
     "landing": {
@@ -238,16 +238,16 @@
     },
     "missingApp": {
       "title": "请在您的设备上安装 {{appName}} 应用程序",
-      "subtitle": "前往 Manager（管理器）并安装 {{appName}} 应用程序以进行资产的掉期交易",
+      "subtitle": "前往 Manager（管理器）并安装 {{appName}} 应用程序以进行资产的 swap 交换",
       "cta": "前往管理器"
     },
     "outdatedApp": {
       "title": "请在您的设备上更新 {{appName}} 应用程序",
-      "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的掉期交易",
+      "subtitle": "前往管理器并更新 {{appName}} 应用程序以进行资产的 swap 交换",
       "cta": "前往 Manager（管理器）"
     },
     "providers": {
-      "title": "选择一个提供方来进行加密资产的掉期交易",
+      "title": "选择一个提供方来进行加密资产的 swap 交换",
       "learnMore": "什么是 Swap 交换？",
       "kycRequired": "需要 KYC",
       "wyre": {
@@ -293,7 +293,7 @@
         "disclaimer": "出于 KYC 目的，LEDGER 需要收集并转移您的信息到 WYRE。如需了解更多信息，请查看我们的",
         "policy": "隐私政策",
         "title": "验证您的身份",
-        "subtitle": "请输入您的信息，以便与 Wyre 进行掉期交易。",
+        "subtitle": "请输入您的信息，以便与 Wyre 进行 swap 交换。",
         "pending": {
           "cta": "继续",
           "title": "待批准",
@@ -334,7 +334,7 @@
       }
     },
     "form": {
-      "resetKYC": "请重置您的 KYC 并更新 Live 以便使用 Wyre 进行掉期交易",
+      "resetKYC": "请重置您的 KYC 并更新 Live 以便使用 Wyre 进行 Swap 交换",
       "resetKYCCTA": "重置 KYC",
       "amount": "数额",
       "from": {
@@ -410,7 +410,7 @@
         },
         "finished": {
           "title": "待定",
-          "subtitle": "掉期交易播送成功 ",
+          "subtitle": "Swap 交换播送成功 ",
           "swap": "您的 Swap ID：",
           "seeDetails": "查看详情",
           "disclaimer": "请记下您的 Swap ID 掉期交易号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
@@ -426,9 +426,9 @@
       "statusTooltips": {
         "expired": "请使用您的 Swap ID 交换代码联系交换服务提供方以了解更多详情。",
         "refunded": "请使用您的 Swap ID 交换代码联系交换服务提供方以了解更多详情。",
-        "pending": "请稍候片刻，掉期提供方正在处理该交易。",
+        "pending": "请稍候片刻，swap 交换提供方正在处理该交易。",
         "onhold": "请使用您的 Swap ID 交换代码联系交换服务提供方以解决这一情况。",
-        "finished": "您的掉期已成功完成"
+        "finished": "您的 swap 交换已成功完成"
       },
       "date": "日期",
       "from": "来自",
@@ -3571,7 +3571,7 @@
     },
     "SwapGenericAPIError": {
       "title": "汇率失效",
-      "description": "您必须在计时结束之前确认掉期交易。所显示的汇率 60 秒内有效。"
+      "description": "您必须在计时结束之前确认 swap 交换。所显示的汇率 60 秒内有效。"
     },
     "TimeoutError": {
       "title": "抱歉，服务器响应超时",
