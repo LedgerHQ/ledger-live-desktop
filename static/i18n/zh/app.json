@@ -1372,11 +1372,11 @@
           "description": "The smart way to manage your DeFi portfolio."
         },
         "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "description": "由您的硬件钱包确保的一种简单的 NFT 可视化途径。",
           "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
         },
         "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "description": "通过流动性市场协议借出或借入您的加密货币并控制您的资金。",
           "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
         },
         "compound": {
