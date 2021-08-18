@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import styled from "styled-components";
 import { border, BorderProps, color, ColorProps, space, SpaceProps } from "styled-system";
-import Checked from "@ui/assets/icons/Checked";
+import CheckAlone from "@ui/assets/icons/CheckAloneMedium";
 import Text from "@components/Text";
 import Flex from "@components/Layout/Flex";
 
@@ -72,7 +72,7 @@ export const Item = {
     border-radius: 9999px;
     ${color}
   `,
-  Completed: () => <Checked width="14px" />,
+  Completed: (): JSX.Element => <CheckAlone size={16} />,
 };
 
 const StepText = styled(Text)<{ inactive?: boolean }>`
