@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import Text from "@ui/components/Text";
-import CheckMark from "@ui/assets/icons/CheckMark";
+import CheckAloneRegular from "@ui/assets/icons/CheckAloneRegular";
 import { renderToStaticMarkup } from "react-dom/server";
 
-/* From React component to inline svg */
-const CheckMarkIcon = encodeURIComponent(renderToStaticMarkup(<CheckMark />));
+const Icon = styled(CheckAloneRegular).attrs({ size: 13, color: "white" })``;
+const CheckMarkIcon = encodeURIComponent(renderToStaticMarkup(<Icon />));
 
 const Input = styled.input`
   background-color: transparent;
@@ -62,14 +62,14 @@ const Label = styled(Text).attrs({ type: "body", fontWeight: "500" })`
 
 const Container = styled.div`
   --ll-checkbox-color: unset;
-  color: var(--ll-checkbox-color, ${props => props.theme.colors.palette.v2.primary.Dark});
+  color: var(--ll-checkbox-color, ${props => props.theme.colors.palette.v2.primary.dark});
 
   display: inline-flex;
   column-gap: 13px;
   align-items: center;
 
   &[data-variant="default"] {
-    --ll-checkbox-color: ${props => props.theme.colors.palette.v2.primary.Dark};
+    --ll-checkbox-color: ${props => props.theme.colors.palette.v2.primary.dark};
   }
 
   &[data-variant="success"] {
