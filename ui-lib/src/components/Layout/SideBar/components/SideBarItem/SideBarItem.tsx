@@ -57,9 +57,7 @@ export const SideBarItemLabel = styled(Text)`
   display: inline-block;
   color: var(--ll-sidebar-item-label-color);
 
-  &:first-letter {
-    text-transform: uppercase;
-  }
+  text-transform: capitalize;
 `;
 
 export type SideBarItemType = {
