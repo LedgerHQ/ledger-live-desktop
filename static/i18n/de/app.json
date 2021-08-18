@@ -713,7 +713,7 @@
         "assetLended": "Vermögenswert",
         "amount": "Betrag",
         "accruedInterest": "Aufgelaufene Zinsen",
-        "date": "Date"
+        "date": "Datum"
       },
       "rates": {
         "allAssets": "Vermögenswert",
@@ -721,12 +721,12 @@
         "totalBalanceTooltip": "Verfügbarer Betrag zum Ausleihen",
         "currentAPY": "Einzahlung APY",
         "currentAPYTooltip": "Jährliche Rendite, die auf eine kontinuierlich aufgezinste Einlage erzielt wird",
-        "actions": "Actions"
+        "actions": "Aktionen"
       }
     },
     "manage": {
-      "cta": "Manage lending",
-      "title": "Manage loan",
+      "cta": "Kreditvergabe verwalten",
+      "title": "Darlehen verwalten",
       "enable": {
         "approve": "Bestätigen",
         "manageLimit": "Limit verwalten",
@@ -898,86 +898,86 @@
       "buy": "Kaufen",
       "sell": "Verkaufen",
       "edit": "Konto bearbeiten",
-      "hideToken": "Hide token"
+      "hideToken": "Token ausblenden"
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "Hilfe & Support",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "Erste Schritte",
+      "desc": "Beginnen Sie hier"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledger-Status",
+      "desc": "Prüfen Sie unseren Systemstatus"
     },
     "helpCenter": {
       "title": "Ledger Support",
-      "desc": "Get help"
+      "desc": "Hilfe erhalten"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "title": "Ledger Akademie",
+      "desc": "Krypto kennenlernen"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "Liken Sie unsere Seite"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "Folgen Sie uns"
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "Überprüfen Sie unseren Code"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "Token ausblenden",
+    "desc": "Diese Aktion blendet alle <1><0>{{tokenName}}</0></1> Konten aus, Sie können sie unter <3>Einstellungen</3> wieder einblenden",
+    "hideCTA": "Token ausblenden"
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "title": "Das Ändern von experimentellen Einstellungen erfordert einen leeren Cache",
+      "cta": "Cache leeren"
     },
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "migrate": "Update für Ledger Live-Konten verfügbar",
+    "genericTerminatedCrypto": "{{coinName}} wird nicht mehr unterstützt",
     "valentine": {
-      "title": "Valentine’s day",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "title": "Valentinstag",
+      "description": "Als Beweis unserer Liebe reduziert Ledger die Kauf- und Verkaufsgebühren auf Ledger Live"
     },
     "ledgerAcademy": {
-      "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "title": "Ledger Akademie",
+      "description": "Alles, was Sie über Blockchain, Sicherheit, Kryptowährungen und Ihr Ledger-Gerät wissen müssen",
+      "cta": "Lernen beginnen"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "Staking mit COSMOS",
+      "description": "Übertragen Sie Ihre ATOM-Coins über die Kontoseite und verdienen Sie noch heute Prämien",
+      "cta": "Cosmos jetzt verleihen"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "title": "Krypto kaufen",
+      "description": "Kaufen Sie Krypto-Vermögenswerte über unseren Partner und erhalten Sie diese direkt auf Ihr Ledger-Konto",
+      "cta": "Jetzt kaufen"
     },
     "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+      "title": "Backup-Paket",
+      "description": "Verwalten Sie Ihr Vermögen sicher mit einem Nano X und Nano S zu einem vergünstigten Preis",
+      "cta": "Backup-Paket kaufen"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "title": "POLKADOT Staking",
+      "description": "Sie können Ihren DOT jetzt direkt in Ledger Live staken/verleihen, sichern und verwalten"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "Krypto verkaufen",
+      "description": "Verkaufen Sie Bitcoin mit unserem Partner direkt von Ledger Live"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
+      "title": "Staken mit ALGORAND",
       "description": "Machen Sie das Beste aus Ihrem ALGO. Fügen Sie einfach Guthaben zu Ihren Konten hinzu und verdienen Sie noch heute Prämien."
     },
     "swap": {
@@ -1281,17 +1281,17 @@
       "noFreeSpace": "Kein Speicher mehr frei",
       "installed": "Apps",
       "capacity": "Kapazität",
-      "used": "Used",
-      "firmwareAvailable": "Firmware is outdated:",
-      "firmwareUpToDate": "Firmware is up to date:",
-      "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+      "used": "Verwendet",
+      "firmwareAvailable": "Die Firmware ist veraltet:",
+      "firmwareUpToDate": "Die Firmware ist auf dem neuesten Stand:",
+      "genuine": "Dein Gerät ist echt",
+      "incomplete": "Einige Apps wurden nicht erkannt. Bitte deinstallieren Sie diese und installieren Sie sie dann neu."
     },
     "applist": {
-      "placeholder": "No match for the search with the selected filters",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
-      "noResultsFound": "No results found",
+      "placeholder": "Keine Übereinstimmung für die Suche mit den gewählten Filtern",
+      "placeholderNoAppsInstalled": "Keine Apps auf Ihrem Gerät installiert",
+      "placeholderGoToCatalog": "Gehen Sie zum App-Katalog, um Apps zu installieren",
+      "noResultsFound": "Keine Ergebnisse gefunden",
       "noResultsDesc": "Bitte überprüfen Sie die Schreibweise und versuchen Sie es erneut",
       "filter": {
         "title": "Anzeigen",
@@ -1349,7 +1349,7 @@
       "uninstall": {
         "title": "Alle deinstallieren",
         "subtitle": "Alle Apps deinstallieren?",
-        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "description": "Keine Sorge, die Deinstallation von Apps hat keine Auswirkungen auf Ihr Krypto-Vermögen. Sie können Apps im App-Katalog neu installieren."
       }
     },
     "apps": {
@@ -1392,55 +1392,55 @@
         }
       },
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
-        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "title": "{{dependency}} App ist erforderlich",
+        "description": "Die App {{dependency}} wird ebenfalls installiert, da die App {{app}} sie benötigt.",
+        "confirm": "Apps installieren"
       },
       "dependencyUninstall": {
-        "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "title": "Deinstallieren Sie {{app}} und seine zugehörigen Apps?",
+        "showAll": "Zu deinstallierende Apps anzeigen",
+        "description": "Einige Ihrer installierten Apps sind mit der App {{app}} verknüpft. Diese werden ebenfalls deinstalliert.",
+        "confirm": "Deinstallieren von {{app}} und anderen Apps"
       }
     },
     "firmware": {
-      "updateLater": "Cancel",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase? ",
-      "followTheGuide": "Follow our step by step update guide",
-      "removeApps": "Uninstall all apps before updating",
-      "update": "Firmware update",
-      "updateBtn": "Update firmware",
-      "latest": "Firmware version {{version}} is available",
-      "contactSupport": "Contact support",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "updateLater": "Abbrechen",
+      "seedReady": "Ich habe meine Wiederherstellungsphrase",
+      "dontHaveSeed": "Haben Sie haben Ihre Wiederherstellungsphrase nicht? ",
+      "followTheGuide": "Folgen Sie unserer Schritt-für-Schritt-Update-Anleitung",
+      "removeApps": "Deinstallieren Sie alle Apps vor dem Update",
+      "update": "Firmware-Update",
+      "updateBtn": "Firmware aktualisieren",
+      "latest": "Firmware-Version {{version}} ist verfügbar",
+      "contactSupport": "Support kontaktieren",
+      "deprecated": "Geräte-Firmware-Version zu alt, um aktualisiert zu werden. Kontaktieren Sie den Ledger-Support für einen Ersatz.",
+      "prepareSeed": "Vergewissern Sie sich, dass Ihre 24-Wörter-Wiederherstellungsphrase auf dem Wiederherstellungsblatt notiert ist und zur Verfügung steht, als Vorsichtsmaßnahme.",
+      "disclaimerTitle": "Sie sind dabei, die <1>Firmware-Version {{version}}</1> zu installieren.",
+      "downloadingUpdateDesc": "Bitte warten Sie, bis der Update-Installer heruntergeladen ist"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
-        "updating": "Firmware update",
-        "reset": "Prepare device",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
-        "flash": "Preparing your device..."
+        "downloadingUpdate": "Update wird heruntergeladen",
+        "updateMCU": "Firmware-Update",
+        "updating": "Firmware-Update",
+        "reset": "Gerät vorbereiten",
+        "osu": "Installiere OSU ...",
+        "flash-mcu": "MCU-Aktualisierung ...",
+        "flash-bootloader": "Bootloader-Aktualisierung ...",
+        "firmware": "Firmware-Aktualisierung ...",
+        "flash": "Ihr Gerät vorbereiten ..."
       },
-      "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
-      "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
-      "mcuPin": "Please wait for the update to finish",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "confirmIdentifier": "Überprüfen Sie die Kennung",
+      "confirmIdentifierText": "Vergewissern Sie sich, dass die Kennung auf Ihrem Gerät mit der unten stehenden Kennung übereinstimmt. Bestätigen Sie und geben Sie Ihren PIN-Code ein, wenn Sie dazu aufgefordert werden.",
+      "identifier": "Kennung",
+      "mcuTitle": "Update abschließen",
+      "mcuFirst": "Trennen Sie das USB-Kabel von Ihrem Gerät",
+      "mcuSecond": "Drücken Sie die linke Taste und halten Sie sie gedrückt, während Sie das USB-Kabel wieder einstecken, bis der <1><0>{{repairProcessing}}</0></1> Bildschirm erscheint",
+      "mcuPin": "Bitte warten Sie, bis das Update beendet ist",
+      "mcuSecondNanoX": "Drücken und halten Sie die linke Taste, bis <1><0>{{bootloaderOption}}</0></1> erscheint. Drücken Sie beide Tasten, um zu bestätigen und Ihr Gerät erneut zu verbinden.",
+      "mcuBlueFirst": "Halten Sie die seitliche Taste 10 Sekunden lang gedrückt, um das Gerät auszuschalten. Lassen Sie die Taste danach los.",
+      "mcuBlueSecond": "Halten Sie die Taste für mindestens 5 Sekunden gedrückt, bis die Boot-Optionen angezeigt werden. Tippen Sie auf Bootloader-Modus",
+      "successTitle": "Firmware aktualisiert",
       "successTextApps": "Bitte installieren Sie die Apps erneut auf Ihrem Gerät",
       "successTextNoApps": "Sie können jetzt Apps auf Ihrem Gerät installieren",
       "sucessCTAApps": "Apps erneut installieren",
@@ -1627,10 +1627,10 @@
         "title": "Zusammenfassung"
       },
       "device": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "utxoLag": "Die Verifizierung und Unterzeichnung dieser Transaktion kann lange dauern, da das Konto eine beträchtliche Anzahl von Coins enthält.",
         "subaccountsWarning": "Sie müssen dieses Konto mit {{ Währung }} auffüllen, um die Token dieses Kontos versenden zu können",
         "from": "Von",
         "to": "Nach",
@@ -1707,7 +1707,7 @@
         "voteExisting": "Stimmen verwalten"
       },
       "manageTP": "Vermögenswerte verwalten",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
+      "warnEarnRewards": "Sie benötigen mindestens {{amount}}, um Prämien zu erhalten",
       "claimRewards": "Prämie beanspruchen",
       "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
       "claimAvailableRewards": "Anspruch {{Betrag}}",
@@ -1715,55 +1715,55 @@
       "percentageTP": "% der abgegebenen Stimmen",
       "noRewards": "Keine Prämien verfügbar",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "You can cast your remaining votes to earn more rewards",
-        "button": "Vote now"
+        "title": "Sie haben noch {{amount}} Stimmen übrig",
+        "description": "Sie können Ihre verbleibenden Stimmen abgeben, um weitere Prämien zu erhalten",
+        "button": "Jetzt abstimmen"
       },
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "Sperren Sie TRX, um Prämien zu verdienen und behalten Sie trotzdem die volle Sicherheit und Kontrolle über Ihr Vermögen.",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "delegate": "Delegierte Vermögenswerte bleiben in Ihrem Besitz.",
+              "access": "Sie können Ihre Vermögenswerte nach 3 Tagen wieder entsperren.",
+              "ledger": "Sperren und sicher abstimmen mit Ihrem Ledger-Gerät."
             },
-            "help": "How voting works",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "help": "Wie die Abstimmung funktioniert",
+            "termsAndPrivacy": "Das übertragen Ihrer Stimmrechte garantiert keine Prämien durch Ihren Super-Repräsentanten."
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Vermögenswerte verwalten",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "title": "Sperren",
+        "description": "Sperren Sie TRX, um Bandbreite oder Energie zu verdienen. Sie können auch für Super-Repräsentanten abstimmen."
       },
       "unfreeze": {
-        "title": "Unfreeze",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "title": "Entsperren",
+        "description": "Entsperren Sie TRX, um sie wieder in Ihrem verfügbaren Guthaben zu haben. Sie werden keine Prämien mehr verdienen."
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "Abstimmen",
+        "description": "Geben Sie Stimmen für Super-Repräsentanten ab, um Prämien zu verdienen.",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "Stimmen abgeben",
+            "description": "Wählen Sie einen oder mehrere Super-Repräsentanten, um Prämien zu verdienen.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "Nicht mehr anzeigen",
+              "next": "Stimmen abgeben"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SR oder Kandidaten?",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "title": "Super-Repräsentanten (SR)",
+                "description": "Super-Repräsentanten spielen eine Schlüsselrolle bei der Verwaltung der TRON-Community, indem sie grundlegende Funktionen sicherstellen, z. B. die Blockerstellung und die Buchhaltung."
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "Kandidaten",
+                "description": "127 Personen, die durch die Abstimmung der gesamten Token-Inhaber-Community gewählt werden. Die Abstimmungen werden alle 6 Stunden aktualisiert."
               }
             }
           }
@@ -1772,38 +1772,38 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
-    "modalTitle": "Coin control",
-    "coincontrol": "Coin control",
-    "advanced": "Advanced options",
-    "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
-    "replaceable": "replaceable",
+    "inputSelected": "AUSGEWÄHLT",
+    "toSpend": "Coins zum Ausgeben",
+    "toReturn": "Wechseln zu Rückgabe",
+    "modalTitle": "Coin-Kontrolle",
+    "coincontrol": "Coin-Kontrolle",
+    "advanced": "Erweiterte Optionen",
+    "ctaDisabled": "Dieses Konto hat keine UTXO",
+    "whatIs": "Was ist die Coin-Auswahl?",
+    "rbf": "Erlauben, dass die Transaktion ersetzt wird (Replace-By-Fee).",
+    "strategy": "Strategie für die Coin-Auswahl",
+    "selected": "Für die Strategie ausgewählte Coins",
+    "amount": "Zu sendender Betrag:",
+    "replaceable": "austauschbar",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "unconfirmed": "Sie können keine Coins aus unbestätigten, austauschbaren Transaktionen auswählen.",
+      "last": "Sie benötigen mindestens eine ausgewählte Transaktion"
     },
-    "pending": "pending",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pending": "ausstehend",
+    "pickUnconfirmedRBF": "Inklusive Coins von nicht bestätigten und austauschbaren Transaktionen.",
+    "pickingStrategy": "UTXO Auswahlstrategie",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "DEEP_OUTPUTS_FIRST": "Älteste Coins zuerst (FIFO)",
+      "OPTIMIZE_SIZE": "Gebühren minimieren (Größe optimieren)",
+      "MERGE_OUTPUTS": "Zukünftige Gebühren minimieren (Coins zusammenführen)"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "Sie können ATOM-Prämien verdienen, indem Sie Ihre Vermögenswerte übertragen.",
+        "info": "Wie die Delegierung/Übertragung funktioniert",
+        "delegation": "Prämien verdienen"
       },
       "claimRewards": "Prämie beanspruchen",
       "header": "Delegation(en)",
@@ -1827,7 +1827,7 @@
             "description": "Sie können Prämien verdienen, indem Sie Ihre ATOM-Vermögenswerte an einen Validator übertragen.",
             "bullet": [
               "Sie behalten das Eigentum an delegierten Vermögenswerten",
-              "Delegate using your Ledger device",
+              "Delegieren Sie mit Ihrem Ledger-Gerät",
               "Vermögenswerte sind 21 Tage nach Rücknahme der Delegierung verfügbar"
             ],
             "warning": {
@@ -1893,108 +1893,108 @@
         "title": "Vermögenswerte zurückübertragen",
         "steps": {
           "starter": {
-            "title": "Redelegation",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "title": "Erneute Delegation",
+            "description": "Verwenden Sie die erneute Delegierung, um einfach von einem Validator zu einem anderen zu wechseln. Wenn Sie es sich aber wieder anders überlegen, müssen Sie dann warten, weil die erneute Delegierung eine 21-tägige Zeitsperre auslöst.",
+            "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer delegierten Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält. Sie können maximal <0>7 ausstehende, erneute Delegierungen</0> durchführen.",
+            "howDelegationWorks": "Wie funktioniert die Delegierung?"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "title": "Validatoren",
+            "currentDelegation": "Aktuelle Delegierung",
+            "newDelegation": "Neue Übertragung",
+            "chooseValidator": "Wählen Sie einen Validator",
+            "warning": "Sie müssen <0>21 Tage</0> warten, um vom neuen Validator neu zu delegieren, wenn Sie Ihre Meinung wieder ändern"
           },
           "device": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "title": "Sie haben Ihr Vermögen erfolgreich erneut delegiert",
+              "text": "Die erneute Übertragung wird aktualisiert, sobald die Blockchain die Transaktion bestätigt hat",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "header": "Aufhebung(en) der Übertragung(en)",
+      "headerTooltip": "Verfügbar nach der 21-tägigen Zeitsperre",
+      "inactiveTooltip": "Beträge mit aufgehobener Delegierung generieren keine Prämien.",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "Vermögenswerte mit aufgehobener Delegierung",
         "steps": {
           "amount": {
-            "title": "Amount",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "title": "Betrag",
+            "subtitle": "Der Prozess der Aufhebung der Übertragung dauert <0>21 Tage</0> bis zum Abschluss.",
+            "warning": "Die Prämien werden sofort eingelöst. Der nicht übertragene Betrag ist nach der <0>21-tägigen Zeitsperre</0> wieder im verfügbaren Guthaben.",
             "fields": {
               "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "amount": "Nicht zu delegierender Betrag"
             }
           },
           "device": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "You have successfully undelegated your assets.",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "Sie haben die Übertragung Ihrer Vermögenswerte erfolgreich aufgehoben.",
+              "description": "Die Delegierung von <0>{{amount}}</0> wurde von <0>{{validator}}</0> aufgehoben",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationHasRewards": "Verdiente Prämien",
+    "operationEarnedRewards": "Sie haben <0>{{amount}}</0> Prämien verdient.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> verdiente Prämien)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "ASA hinzufügen (Vermögenswert)",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "title": "ASA (Vermögenswerte)",
+            "info": "Das Hinzufügen eines Vermögenswerts erfordert das Senden einer Transaktion mit Mindestgebühren. Dies wird in Ihrem Transaktionsverlauf angezeigt",
+            "selectLabel": "Wählen Sie einen ASA (Vermögenswert)",
+            "disabledTooltip": "Sie haben diesen ASA (Vermögenswert) bereits in Ihrem Algorand-Konto"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "Gerät"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "Bestätigung",
             "success": {
-              "title": "{{token}} asset successfully added",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "title": "{{token}}-Vermögenswert erfolgreich hinzugefügt",
+              "text": "Sie können jetzt <0>{{token}}</0> Vermögenswerte auf Ihrem Algorand-Konto empfangen und senden.",
+              "cta": "Details anzeigen"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
           }
         }
       }
     },
     "claimRewards": {
-      "header": "Rewards",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "header": "Prämien",
+      "tooltip": "Algorand-Prämien werden regelmäßig ausgeschüttet und werden automatisch beansprucht, wenn Sie eine Transaktion durchführen.",
+      "cta": "Prämie beanspruchen",
+      "rewardsDisabledTooltip": "Sie haben keine Prämien. Algorand-Prämien werden automatisch beansprucht, wenn Sie eine Transaktion durchführen. Holen Sie sich ALGO und beginnen Sie damit, Prämien zu verdienen.",
       "flow": {
-        "title": "Claim rewards",
+        "title": "Prämie beanspruchen",
         "steps": {
           "starter": {
             "description": "Erhalten Sie Algorand-Prämien einfach dafür, dass Sie die Kontrolle über ihr Algorand-Vermögen haben.",
             "bullet": {
               "delegate": "Um Prämien zu erhalten, ist ein Mindestguthaben von 1 ALGO erforderlich.",
               "access": "Erhöhen Sie das Guthaben des Kontos, um die Prämien zu erhöhen.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "ledger": "Führen Sie eine Transaktion auf oder von dem Konto durch, um Prämien zu beanspruchen."
             },
             "learnMore": "Wie funktionieren Algorand-Prämien?",
             "button": {
@@ -2003,7 +2003,7 @@
           },
           "info": {
             "title": "Prämien",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
+            "description": "Glückwunsch! Sie haben {{Betrag}} verdient. Klicken Sie auf Weiter, um Ihre Prämien einzufordern",
             "info": "Sie werden aufgefordert, eine leere Transaktion auf Ihrem Konto zu erzeugen. Dadurch werden Ihre aktuellen Prämien zu den minimalen Kosten der Transaktionsgebühren zu Ihrem Guthaben hinzugefügt."
           },
           "connectDevice": {
@@ -2060,194 +2060,194 @@
       "electionOpenTooltip": "Dieser Vorgang ist während der Wahl der Validatoren deaktiviert",
       "externalControllerTooltip": "Dieses Konto wird von einem anderen Konto gesteuert.",
       "externalControllerUnsupported": "<0>Dieses Stash-Konto wird von einem anderen Konto mit der Adresse <0>{{address}}</0> kontrolliert.</0><1>Staking-Operationen auf Konten, die von einem anderen Konto kontrolliert werden, werden in Ledger Live nicht unterstützt. Bitte verwenden Sie eine alternative Wallet wie z.B. Polkadot.js</1>",
-      "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "externalStashTooltip": "Dieses Konto steuert ein anderes Konto.",
+      "externalStashUnsupported": "<0>Dieses Konto steuert ein Stash-Konto, dessen Adresse <0>{{address}}</0> ist.</0><1>Staking-Aktionen auf separaten Stash-Konten werden in Ledger Live nicht unterstützt. Bitte verwenden Sie eine alternative Wallet wie Polkadot.js</1>",
+      "showInactiveNominations": "Alle Nominierungen anzeigen ({{count}})",
+      "hideInactiveNominations": "Nur aktive Nominierungen anzeigen",
+      "noActiveNominations": "Es sind keine aktiven Nominierungen vorhanden.",
+      "showAllUnlockings": "Alle ungebundenen Beträge anzeigen ({{count}})",
+      "hideAllUnlockings": "Ungebundene Beträge ausblenden"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "header": "Entbinden",
+      "headerTooltip": "Verfügbar nach der 28-tägigen Frist",
+      "withdrawUnbonded": "({{amount}}) Abheben",
+      "withdrawTooltip": "Der nicht gebundene Betrag wird Ihrem verfügbaren Guthaben gutgeschrieben.",
+      "noUnlockedWarning": "Noch kein ungebundenes Guthaben zum Abheben.",
+      "rebond": "Erneut binden",
+      "unbonded": "Entbunden"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "Vermögenswerte verwalten",
       "bond": {
-        "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "title": "Binden",
+        "description": "Um Prämien zu verdienen, binden Sie zunächst einen Betrag. Dann müssen Sie Ihre(n) Validator(en) nominieren."
       },
       "unbond": {
-        "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "title": "Entbinden",
+        "description": "Um einen gebundenen Betrag wieder verfügbar zu machen, müssen Sie ihn zunächst entbinden. Sie können ihn nach der 28-tägigen Entbindungsfrist abheben."
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "Abheben",
+        "description": "Um einen nicht gebundenen Betrag wieder auf das verfügbare Guthaben zurück zu holen, müssen Sie ihn manuell abheben."
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "Nominieren",
+        "description": "Wählen Sie bis zu 16 Validatoren. Stellen Sie sicher, dass Nominierungen aktiv sind, um Prämien zu verdienen."
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "Nominierungen löschen",
+        "description": "Alle Nominierungen entfernen. Sie werden keine Prämien mehr verdienen. Ihr gebundener Betrag bleibt gebunden."
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "Nominieren",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "title": "Validatoren",
+          "notValidatorsRemoved": "Sie haben {{count}} Adressen nominiert, die keine Validatoren mehr sind. Sie werden automatisch aus Ihrer Nominierungstransaktion entfernt.",
+          "maybeChill": "Stattdessen Nominierungen löschen"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "title": "Sie haben erfolgreich Validatoren nominiert",
+            "text": "Sie beginnen, Prämien zu verdienen, wenn Ihr Vermögen an den/die gewählten Validator(en) gebunden ist.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Übermittlung der Transaktion..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "Gebundene Vermögenswerte",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "label": "Prämienziel",
+        "stash": "Verfügbares Guthaben",
+        "stashDescription": "Die Prämien werden Ihrem verfügbaren Guthaben gutgeschrieben.",
+        "staked": "Gebundenes Guthaben",
+        "stakedDescription": "Prämien werden Ihrem Guthaben gutgeschrieben, so dass Sie mehr Geld verdienen können.",
+        "optionTitle": "Hinweis",
+        "optionDescription": "Einmal eingestellt, ist die Option für die Lebensdauer dieser Anleihe festgelegt. Wenn Sie Ihre Meinung ändern, lesen Sie bitte den Artikel weiter unten"
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "Sie können Prämien verdienen, indem Sie Ihr Vermögen binden und dann Ihre Validatoren nominieren.",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "Sie behalten das Eigentum an gebundenen Vermögenswerten",
+            "Nominieren Sie mit Ihrem Ledger-Gerät",
+            "Vermögenswerte sind 28 Tage nach der Übertragung verfügbar"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "help": "Wie Nominierungen funktionieren",
+          "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer gebundenen Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält."
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
-          "availableLabel": "Available",
-          "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "title": "Betrag",
+          "amountLabel": "Anleihebetrag",
+          "availableLabel": "Verfügbar",
+          "maxLabel": "Max.",
+          "info": "Gebundene Vermögenswerte können jederzeit entbunden werden, aber das dauert 28 Tage.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "Transaktion wartet auf Bestätigung",
+            "desc": "Sie müssen einen Moment warten, bevor Sie nominieren"
           },
-          "title": "Confirmation",
+          "title": "Bestätigung",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "Vermögenswerte erfolgreich gebunden",
+            "text": "Sie können Validatoren benennen, sobald das Netzwerk die Transaktion bestätigt hat.",
+            "textNominate": "Sie können Validatoren benennen, sobald das Netzwerk Ihre Transaktion bestätigt hat.",
+            "nominate": "Nominieren",
+            "later": "Später nominieren"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "Vermögenswerte werden gebunden ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "Vermögenswerte neu binden",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "title": "Betrag",
+          "amountLabel": "Betrag erneute Bindung",
+          "availableLabel": "Entbinden",
+          "maxLabel": "Max.",
+          "info": "Neu gebundene Vermögenswerte werden sofort zum gebundenen Betrag hinzugefügt.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "Vermögenswerte erfolgreich erneut gebunden",
+            "text": "Ihr Kontostand wird aktualisiert, sobald das Netzwerk die Transaktion bestätigt hat.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "Ihre Vermögenswerte neu binden ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "Vermögenswerte entbinden",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
-          "availableLabel": "Bonded",
-          "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "title": "Betrag",
+          "amountLabel": "Betrag zum Aufheben der Bindung",
+          "availableLabel": "Gebunden",
+          "maxLabel": "Max.",
+          "info": "Nicht gebundene Vermögenswerte können nach der 28-tägigen Entbindungsfrist abgezogen werden.",
+          "learnMore": "Mehr erfahren"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "title": "Transaktion erfolgreich gesendet",
+            "text": "Nicht gebundenes Vermögen kann in 28 Tagen abgehoben werden.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "Bindung Ihres Vermögens wird aufgehoben ..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "title": "Abheben",
+          "description": "Nach der 28-tägigen Entbindungsfrist können Sie nicht gebundene Vermögenswerte abheben.",
+          "info": "Sie können dann nicht gebundene Guthaben auf Ihr verfügbares Guthaben übertragen."
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "Nominierungen löschen",
+          "description": "Löscht alle Nominierungen und stoppt das Sammeln von Prämien.",
+          "info": "Gebundene Werte bleiben gebunden. Wenn Sie die Bindung aufheben, sind sie nach 28 Tagen wieder verfügbar."
         }
       },
       "steps": {
@@ -2255,163 +2255,163 @@
           "title": "Info"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "Gerät"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "title": "Transaktion erfolgreich gesendet",
+            "text": "Sie werden Ihre Aktion bald in Ihrem Verlauf sehen.",
+            "cta": "Details anzeigen"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "Sende Transaktion..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     }
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
+    "title": "Prämien verdienen",
+    "header": "Übertragung",
     "validator": "Validator",
-    "yield": "Est. Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
-    "amount": "Amount",
-    "delegated": "Delegated",
-    "completionDate": "Completion date",
-    "rewards": "Rewards",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
-    "overdelegated": "Overdelegated",
+    "yield": "geschätzter Ertrag",
+    "address": "Adresse",
+    "transactionID": "Transaktions-ID",
+    "value": "Wert",
+    "amount": "Betrag",
+    "delegated": "Delegiert",
+    "completionDate": "Datum der Fertigstellung",
+    "rewards": "Prämien",
+    "duration": "Dauer",
+    "durationJustStarted": "Gerade begonnen",
+    "durationDays": "{{count}} Tag",
+    "durationDays_plural": "{{count}} Tage",
+    "howItWorks": "So funktioniert die Übertragung",
+    "delegationEarn": "Sie können jetzt {{name}} Einsatzprämien verdienen, indem Sie Ihr Konto delegieren/übertragen.",
+    "earnRewards": "Prämien verdienen",
+    "overdelegated": "Überdelegiert",
     "status": "Status",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "title": "Prämien für Einsätze verdienen",
+          "description": "Delegieren Sie Ihr Tezos-Konto an einen externen Validator, um Einsatzprämien zu verdienen und trotzdem die volle Sicherheit und Kontrolle über Ihre Vermögenswerte zu behalten",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
-            "access": "You can access your assets at any time.",
-            "ledger": "Delegate securely with your Ledger device."
+            "delegate": "Delegierte Konten bleiben Ihre.",
+            "access": "Sie können jederzeit auf Ihre Vermögenswerte zugreifen.",
+            "ledger": "Delegieren Sie sicher mit Ihrem Ledger-Gerät."
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "Delegieren, um Prämien zu verdienen"
           }
         },
         "account": {
-          "title": "Delegate account",
-          "label": "Account",
-          "toDelegate": "Account to delegate"
+          "title": "Konto delegieren/übertragen",
+          "label": "Konto",
+          "toDelegate": "Zu delegierendes Konto"
         },
         "summary": {
-          "title": "Delegate account",
-          "label": "Summary",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
+          "title": "Konto übertragen",
+          "label": "Zusammenfassung",
+          "toDelegate": "Zu delegierendes Konto",
+          "toUndelegate": "Konto, bei dem die Delegierung aufzuheben ist",
           "validator": "Validator",
-          "select": "Select",
-          "yield": "Est. Yield {{amount}}",
-          "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+          "select": "Auswählen",
+          "yield": "Geschätzter Ertrag {{amount}}",
+          "randomly": "Zufällig gewählter Validator",
+          "termsAndPrivacy": "Das Delegieren Ihrer Stimmrechte garantiert keine Prämien durch Ihren Validator."
         },
         "validator": {
-          "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
-          "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "title": "Validator auswählen",
+          "description": "Sie können einen Validator auswählen, indem Sie die geschätzten Prämienraten vergleichen",
+          "customValidator": "Benutzerdefinierter Validator",
+          "providedBy": "Auszahlungsraten von <1><0>{{name}}</0></1>"
         },
         "custom": {
-          "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "title": "Benutzerdefinierter Validator",
+          "text": "Bitte geben Sie die Adresse des benutzerdefinierten Validators ein, an den Sie Ihr Konto übertragen möchten.",
+          "button": "Validator verwenden"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "Kontodelegierung aufheben"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "Bestätigung",
+          "label": "Bestätigung",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "title": "Delegierung gesendet",
+            "titleUndelegated": "Delegierung beenden",
+            "text": "Die Delegierungstransaktion wurde erfolgreich übertragen. Sie sollten Ihre ersten Prämien innerhalb von etwa 40 Tagen verdienen, je nach Validator.",
+            "textUndelegated": "Ihre Kontodelegierung endet, sobald der Vorgang bestätigt ist. Sie können Ihr Konto jederzeit erneut delegieren."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen."
         }
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "topUp": "Mehr erhalten",
+      "redelegate": "Validator ändern",
+      "stopDelegation": "Delegierung beenden"
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "Übersicht über alle {{currency}}-Konten"
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
-      "undo": "Show again",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "close": "Bestätigen",
+      "undo": "Erneut anzeigen",
+      "disclaimer": "Dieses Banner wird erst wieder eingeblendet, wenn es eine neue Ankündigung gibt"
     }
   },
   "settings": {
-    "title": "Settings",
-    "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "title": "Einstellungen",
+    "discreet": "Diskreten Modus aktivieren",
+    "helpButton": "Hilfe",
     "tabs": {
-      "display": "General",
-      "currencies": "Crypto assets",
-      "help": "Help",
-      "about": "About",
-      "experimental": "Experimental features",
-      "accounts": "Accounts",
+      "display": "Allgemeines",
+      "currencies": "Krypto-Vermögenswerte",
+      "help": "Hilfe",
+      "about": "Über",
+      "experimental": "Experimentelle Funktionen",
+      "accounts": "Konten",
       "developer": "Developer"
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "title": "Konten exportieren",
+        "desc": "Fügen Sie Ihre Konten in Ledger Live Mobile hinzu. Ihre Konten werden nur mit der Blockchain synchronisiert, nicht zwischen Ihren mobilen und Desktop-Apps.",
         "button": "Export"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "title": "Aktionsverlauf",
+        "desc": "Speichern Sie eine CSV-Datei mit Ihren Kontobewegungen auf Ihrem Computer."
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
+        "button": "Fertig",
+        "title": "Scannen zum Exportieren auf Mobile",
+        "listTitle": "In der Ledger Live Mobile App:",
         "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
         "step2": "Tap <highlight>Import desktop accounts</highlight>",
         "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
-      "counterValue": "Preferred currency",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "language": "Sprache anzeigen",
+      "languageDesc": "Stellen Sie die in Ledger Live angezeigte Sprache ein.",
+      "theme": "Design",
+      "themeDesc": "Design auswählen.",
+      "counterValue": "Bevorzugte Währung",
+      "counterValueDesc": "Wählen Sie die Währung, die neben Ihrem Saldo und den Aktionen angezeigt wird.",
       "region": "Region",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "regionDesc": "Wählen Sie Ihre Region, um die Zeitzone von Ledger Live einzustellen.",
+      "stock": "Regionaler Marktindikator",
+      "stockDesc": "Wählen Sie Westlich, um Marktsteigerungen in Blau anzuzeigen, oder Östlich, um sie in Rot anzuzeigen.",
+      "carouselVisibility": "Karussell-Sichtbarkeit",
+      "carouselVisibilityDesc": "Aktivieren Sie die Sichtbarkeit des Karussells auf Portfolio"
     },
     "developer": {
       "toast": {
@@ -2433,46 +2433,46 @@
       "runLocalAppOpenButton": "Open"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
-      "desc": "Select a crypto asset to edit its settings.",
-      "placeholder": "No settings for this asset",
-      "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "selectPlaceholder": "Krypto-Vermögenswert auswählen",
+      "desc": "Wählen Sie einen Krypto-Vermögenswert, um dessen Einstellungen zu bearbeiten.",
+      "placeholder": "Keine Einstellungen für diesen Vermögenswert",
+      "confirmationsNb": "Anzahl der Bestätigungen",
+      "confirmationsNbDesc": "Legen Sie die Anzahl der Netzwerkbestätigungen für eine Transaktion fest, die als bestätigt markiert werden soll."
     },
     "profile": {
-      "password": "Password lock",
-      "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
-      "passwordAutoLock": "Auto-lock",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
-      "changePassword": "Change password",
-      "softResetTitle": "Clear cache",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
-      "softReset": "Clear",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
-      "hardResetTitle": "Reset Ledger Live",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
+      "password": "Passwort-Sperre",
+      "passwordDesc": "Legen Sie ein Passwort fest, um die Ledger Live-Daten auf Ihrem Computer zu schützen, einschließlich Kontonamen, Kontoständen, Transaktionen und öffentliche Adressen.",
+      "passwordAutoLock": "Auto-Sperre",
+      "passwordAutoLockDesc": "Sperren Sie Ledger Live automatisch bei Inaktivität.",
+      "changePassword": "Passwort ändern",
+      "softResetTitle": "Cache leeren",
+      "softResetDesc": "Löschen Sie den Ledger Live-Cache, um eine erneute Synchronisierung mit der Blockchain zu erzwingen.",
+      "softReset": "Löschen",
+      "resetKYC": "KYC-Daten zurücksetzen",
+      "resetKYCDesc": "Löschen Sie alle lokal gespeicherten Know-your-Customer-Daten, die für den Zugriff auf Drittanbieter-Transaktionen verwendet werden.",
+      "hardResetTitle": "Ledger live zurücksetzen",
+      "hardResetDesc": "Löschen Sie alle auf Ihrem Computer gespeicherten Ledger Live-Daten, einschließlich Ihrer Konten, Transaktionshistorien und Einstellungen.",
       "hardReset": "Reset",
-      "analytics": "Analytics",
-      "analyticsDesc": "Enable analytics to help Ledger improve user experience. This includes clicks, page visits, redirections, actions (send, receive, lock, etc), end of page scrolls, (un)installing and app version, number of accounts, crypto assets and operations, session durations, the Ledger device type and firmware.",
-      "reportErrors": "Bug reports",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "Device setup",
-      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
+      "analytics": "Analyse",
+      "analyticsDesc": "Aktivieren Sie Analysen, um Ledger bei der Verbesserung der Benutzererfahrung zu helfen. Dazu gehören Klicks, Seitenbesuche, Weiterleitungen, Aktionen (Senden, Empfangen, Sperren usw.), Scrollen am Ende der Seite, (De-)Installieren und App-Version, Anzahl der Konten, Krypto-Vermögenswerte und Aktionen, Sitzungsdauer, der Ledger-Gerätetyp und die Firmware.",
+      "reportErrors": "Fehlerberichte",
+      "reportErrorsDesc": "Senden Sie automatisch Berichte, die Ledger helfen, seine Produkte zu verbessern.",
+      "launchOnboarding": "Gerät einrichten",
+      "launchOnboardingDesc": "Richten Sie ein neues Gerät ein oder stellen Sie ein vorhandenes Gerät wieder her. Konten und Einstellungen werden beibehalten."
     },
     "help": {
       "version": "Version",
       "releaseNotesBtn": "Details",
-      "termsBtn": "Read",
+      "termsBtn": "Lesen",
       "faq": "Ledger Support",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
+      "faqDesc": "Wenn Sie ein Problem haben, erhalten Sie Hilfe bei der Verwendung von Ledger Live mit Ihrer Hardware-Wallet.",
+      "terms": "Nutzungsbedingungen",
+      "termsDesc": "Durch die Nutzung von Ledger Live wird davon ausgegangen, dass Sie unsere Nutzungsbedingungen akzeptiert haben.",
+      "privacy": "Datenschutzrichtlinie",
+      "privacyDesc": "In unseren Datenschutzrichtlinien erfahren Sie, welche persönlichen Daten wir erfassen, warum wir das tun und wie wir sie verwenden."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
+      "disclaimer": "Dies sind experimentelle Funktionen, die wir für unsere technisch versierte Community zum Testen bereitstellen. Diese können sich jederzeit ändern, defekt sein oder entfernt werden. Wenn Sie sie aktivieren, erklären Sie sich damit einverstanden, sie auf eigenes Risiko zu verwenden.",
       "features": {
         "apiTrongridProxy": {
           "title": "use TronGrid.io",
@@ -2505,575 +2505,575 @@
       }
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "title": "Ledger live zurücksetzen",
+      "desc": "Setzen Sie Ledger Live zurück, um alle Einstellungen und Konten auf Ihrem Computer zu löschen. Sie können dann Ihr Passwort wählen und Ihre Konten wieder mit Ihrem Ledger-Gerät hinzufügen. Die privaten Schlüssel, die Zugang zu Ihren Krypto-Vermögenswerten geben, bleiben sicher auf Ihrem Ledger-Gerät und werden durch Ihren Wiederherstellungssatz gesichert."
     },
     "softResetModal": {
-      "title": "Clear cache",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "title": "Cache leeren",
+      "desc": "Das Löschen des Caches erzwingt eine erneute Netzwerksynchronisation. Ihre Einstellungen und Konten bleiben erhalten. Die privaten Schlüssel für den Zugriff auf Ihre Krypto-Vermögenswerte bleiben sicher auf Ihrem Ledger-Gerät und dem Recovery Sheet."
     },
     "resetFallbackModal": {
-      "title": "User action required",
-      "part1": "Could not delete cache folder. Please delete the folder manually:",
-      "part2": "Click the Open folder button, the ",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "title": "Benutzeraktion erforderlich",
+      "part1": "Der Cache-Ordner konnte nicht gelöscht werden. Bitte löschen Sie den Ordner manuell:",
+      "part2": "Klicken Sie auf die Schaltfläche Ordner öffnen, die",
+      "part3": "App wird geschlossen",
+      "part4": "und löschen Sie den Ordner \"sqlite\" manuell.",
+      "part5": "Danach können Sie die App normal neu starten."
     },
     "removeAccountModal": {
-      "title": "Remove account",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
+      "title": "Konto entfernen",
+      "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
-      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "View"
+      "title": "Benutzerdaten anzeigen",
+      "desc": "Zeigen Sie die auf Ihrem Computer gespeicherten Benutzerdaten an, einschließlich Ihrer Konten, Caches und Einstellungen.",
+      "btn": "Ansicht"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
-      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
-      "button": "Repair"
+      "title": "Reparieren Sie Ihr Ledger-Gerät",
+      "descSettings": "Verwenden Sie dies, um Ihr Ledger-Gerät wiederherzustellen, wenn es während eines Firmware-Updates gesperrt wurde.",
+      "desc": "Ledger Nano S-Benutzer wählen bitte den auf Ihrem Gerät angezeigten Status. Nano X- und Blue-Benutzer schauen bitte im Hilfe-Center nach.",
+      "button": "Reparieren"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "title": "Protokolle speichern",
+      "desc": "Das Speichern von Ledger-Live-Protokollen kann für die Fehlersuche erforderlich sein.",
+      "btn": "Speichern"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "Leere Token-Konten ausblenden",
+        "desc": "Token-Konten mit Nullsaldo auf der Seite Konten ausblenden."
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{count}} token",
-        "count_plural": "{{count}} tokens"
+        "title": "Ausgeblendete Token",
+        "desc": "Sie können Token ausblenden, indem Sie zum übergeordneten Konto gehen, dann mit der rechten Maustaste auf das Token klicken und „Token ausblenden“ wählen.",
+        "count": "{{count}} Token",
+        "count_plural": "{{count}} Token"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "title": "Bitcoin-Knoten (Full Node) verbinden",
+        "desc": "Richten Sie Ihren Bitcoin-Knoten (Full Node) ein, um Transaktionen zu synchronisieren und zu senden, ohne die Explorer von Ledger zu verwenden."
       }
     }
   },
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "Neues Passwort"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "Passwort bestätigen"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "Aktuelles Passwort"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "Passwort-Sperre",
+      "subTitle": "Ändern Sie Ihr Passwort"
     },
     "setPassword": {
-      "title": "Password lock",
-      "subTitle": "Set the password",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "title": "Passwort-Sperre",
+      "subTitle": "Legen Sie das Passwort fest",
+      "desc": "Bewahren Sie Ihr Passwort sicher auf. Wenn Sie es verlieren, müssen Sie Ledger Live zurücksetzen und die Konten erneut hinzufügen."
     },
     "disablePassword": {
-      "title": "Disable password lock",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "title": "Passwortsperre deaktivieren",
+      "desc": "Die Daten von Ledger Live werden unverschlüsselt auf Ihrem Computer gespeichert. Dazu gehören Kontonamen, Transaktionen und öffentliche Adressen."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "downloadInProgress": "Herunterladen des Updates ...",
+    "downloadProgress": "{{progress}}% abgeschlossen",
+    "checking": "Prüfen des Updates ...",
+    "checkSuccess": "Update bereit zur Installation",
+    "quitAndInstall": "Jetzt installieren",
+    "updateAvailable": "Update auf Ledger Live Version {{version}} ist verfügbar",
+    "error": "Fehler beim Update. Bitte erneut herunterladen",
+    "reDownload": "Erneut herunterladen",
+    "nightlyWarning": "Diese Version kann nicht automatisch aktualisiert werden. Bitte installieren Sie die neueste Version manuell",
+    "downloadNow": "Update herunterladen"
   },
   "crash": {
-    "title": "Something went wrong",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "title": "Etwas ist schief gelaufen",
+    "description": "Bitte prüfen Sie unsere Support-Artikel auf mögliche Lösungen. Wenn das Problem weiterhin besteht, speichern Sie die Protokolle über die Schaltfläche unten und stellen Sie sie dem Ledger-Support zur Verfügung.",
+    "troubleshooting": "Klicken Sie hier für mögliche Lösungen",
+    "logs": "Protokolle speichern",
+    "dataFolder": "Benutzerdaten anzeigen"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
-    "titleSuccess": "Operation history saved successfully",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "title": "Historie der Kontobewegungen",
+    "desc": "Wählen Sie die Konten aus, für die der Verlauf gespeichert werden soll",
+    "descSuccess": "Die CSV-Datei Ihres Verlaufs wurde erfolgreich im gewählten Ordner gespeichert",
+    "titleSuccess": "Verlauf erfolgreich gespeichert",
+    "cta": "Speichern",
+    "ctaSuccess": "Fertig",
+    "noAccounts": "Keine Konten zum Exportieren",
+    "selectedAccounts": "Einzuschließende Konten",
+    "selectedAccounts_plural": "Einzuschließende Konten ({{count}})",
+    "disclaimer": "Die Gegenwerte im Export werden nur zu Informationszwecken bereitgestellt. Verlassen Sie sich nicht auf diese Daten für buchhalterische, steuerliche, regulatorische oder rechtliche Zwecke, da sie nur eine Schätzung des Preises der Vermögenswerte zum Zeitpunkt der Transaktionen und des Exports darstellen, gemäß den von unserem Dienstleister Kaiko bereitgestellten Bewertungsmethoden"
   },
   "language": {
-    "system": "Use system language",
+    "system": "Systemsprache verwenden",
     "switcher": {
-      "en": "English",
-      "fr": "French",
-      "ru": "Russian",
-      "es": "Spanish",
-      "zh": "Chinese"
+      "en": "Englisch",
+      "fr": "Französisch",
+      "ru": "Russisch",
+      "es": "Spanisch",
+      "zh": "Chinesisch"
     }
   },
   "theme": {
-    "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "System-Theme auswählen",
+    "light": "Hell",
+    "dusk": "Mittel",
+    "dark": "Dunkel"
   },
   "toastOverlay": {
     "toastType": {
       "announcement": "News",
-      "operation": "Operation",
+      "operation": "Vorgang",
       "achievement": "Achievement Unlocked"
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "tooltip": "Informationszentrum",
+    "ongoingIncidentsTooltip": "Es gibt {{count}} laufendes Ereignis",
+    "ongoingIncidentsTooltip_plural": "Es gibt {{count}} laufende Ereignisse",
     "tabs": {
       "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
+      "announcementsUnseen": "Nachrichten ({{unseenCount}})",
       "serviceStatus": "Status",
       "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "title": "Ledger Live ist eingerichtet und läuft",
+        "description": "Haben Sie Probleme? Gehen Sie auf unsere <0>Hilfe-Seite</0>"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
-        "learnMore": "Learn more"
+        "title": "Bei Ledger Live treten Probleme auf",
+        "learnMore": "Mehr erfahren"
       }
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "title": "Im Moment keine Neuigkeiten",
+        "desc": "Hier finden Sie alle Neuigkeiten rund um Ledger und Ledger Live"
       }
     }
   },
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
-        "intro": "During the setup process you choose a PIN code.",
+        "title": "Sichern Sie Ihren PIN-Code",
+        "intro": "Während des Einrichtungsvorgangs wählen Sie einen PIN-Code.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
-          "3": "You can change your PIN code if needed.",
-          "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "1": "Wählen Sie <0>immer</0> selbst einen PIN-Code.",
+          "2": "Geben Sie <0>immer</0> Ihren PIN-Code außer Sichtweite ein.",
+          "3": "Sie können Ihren PIN-Code bei Bedarf ändern.",
+          "4": "Drei falsche PIN-Code-Eingaben hintereinander setzen das Gerät zurück.",
+          "5": "Verwenden Sie <0>niemals</0> einen einfachen PIN-Code wie 0000, 123456 oder 55555555.",
+          "6": "Teilen Sie <0>niemals</0> Ihren PIN-Code mit jemand anderem. Nicht einmal mit Ledger.",
+          "7": "Verwenden Sie <0>niemals</0> einen PIN-Code, den Sie nicht selbst gewählt haben.",
+          "8": "Speichern Sie <0>niemals</0> Ihren PIN-Code auf einem Computer oder Telefon."
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the recovery phrase",
-        "title2": "What happens if I lose access to my Nano?",
-        "paragraph3": "Don't worry and follow these steps:",
+        "title1": "Wie funktioniert eine Wiederherstellungsphrase?",
+        "paragraph1": "Ihre Wiederherstellungsphrase funktioniert wie ein einzigartiger Generalschlüssel. Ihr Ledger-Gerät verwendet sie, um private Schlüssel für jeden Krypto-Vermögenswert zu berechnen, den Sie besitzen.",
+        "paragraph2": "Um den Zugriff auf Ihre Kryptos wiederherzustellen, kann jede Wallet die gleichen privaten Schlüssel aus Ihrem Wiederherstellungssatz berechnen.",
+        "link": "Mehr zur Wiederherstellungsphrase",
+        "title2": "Was passiert, wenn ich den Zugriff auf meinen Nano verliere?",
+        "paragraph3": "Machen Sie sich keine Sorgen und folgen Sie diesen Schritten:",
         "points": {
-          "1": "Get a new hardware wallet.",
-          "2": "Select “Restore recovery phrase on a new device” in the Ledger app",
-          "3": "Enter your recovery phrase on your new device to restore access to your crypto."
+          "1": "Besorgen Sie sich eine neue Hardware-Wallet.",
+          "2": "Wählen Sie „Wiederherstellungsphrase auf einem neuen Gerät wiederherstellen“ in der Ledger-App",
+          "3": "Geben Sie Ihre Wiederherstellungsphrase auf Ihrem neuen Gerät ein, um den Zugriff auf Ihre Kryptos wiederherzustellen."
         }
       },
       "whereToHide": {
-        "title": "Where should I keep my recovery phrase?",
+        "title": "Wo sollte ich meine Wiederherstellungsphrase aufbewahren?",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
-          "4": "Ledger will never ask for your recovery phrase.",
-          "5": "If any person or application asks for it, assume it is a scam!"
+          "1": "Geben Sie sie <0>NIEMALS</0> auf einem Computer, Smartphone oder einem anderen Gerät ein. Machen Sie kein Foto davon.",
+          "2": "Teilen Sie Ihre 24 Worte <0>NIEMALS</0> mit jemand anderem.",
+          "3": "Bewahren Sie sie <0>IMMER</0> an einem sicheren Ort auf, außer Reichweite von anderen.",
+          "4": "Ledger wird Sie niemals nach Ihrer Wiederherstellungsphrase fragen.",
+          "5": "Wenn eine Person oder Anwendung danach fragt, gehen Sie davon aus, dass es sich um einen Betrug handelt!"
         }
       }
     },
     "alerts": {
       "beCareful": {
-        "title": "Please be careful",
-        "descr": "Make sure you follow the instructions on this app at every step of the process.",
-        "gotIt": "Got it"
+        "title": "Bitte seien Sie vorsichtig",
+        "descr": "Stellen Sie sicher, dass Sie die Anweisungen dieser App bei jedem Schritt des Vorgangs befolgen.",
+        "gotIt": "Verstanden"
       },
       "useLedgerSeeds": {
-        "title": "We recommend Ledger recovery phrases only",
-        "descr": "Ledger cannot guarantee the security of external recovery phrases. We recommend setting up your Nano as a new device if your recovery phrase was not generated by a Ledger.",
-        "gotIt": "Got it"
+        "title": "Wir empfehlen nur Ledger-Wiederherstellungsphrasen",
+        "descr": "Ledger kann die Sicherheit von externen Wiederherstellungssätzen nicht garantieren. Wir empfehlen, Ihren Nano als neues Gerät einzurichten, wenn Ihre Wiederherstellungsphrase nicht von einem Ledger generiert wurde.",
+        "gotIt": "Verstanden"
       }
     },
     "screens": {
       "welcome": {
-        "title": "Welcome to Ledger",
-        "description": "Safely manage your crypto from your computer.",
-        "cta": "Get started",
-        "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+        "title": "Willkommen bei Ledger",
+        "description": "Verwalten Sie Ihre Kryptowährungen sicher von Ihrem Computer aus.",
+        "cta": "Erste Schritte",
+        "noDevice": "Kein Gerät? <0>Kaufen Sie einen Ledger Nano X</0>",
         "languageWarning": {
-          "title": "Get started in {{language}}",
-          "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-          "cta": "Got it"
+          "title": "Erste Schritte in {{language}}",
+          "desc": "Wir führen zusätzliche Sprachen ein, um Ihnen das Onboarding mit Ledger zu erleichtern. Bitte beachten Sie, dass der Rest der Ledger-Erfahrung derzeit nur auf Englisch verfügbar ist.",
+          "cta": "Verstanden"
         }
       },
       "selectDevice": {
-        "title": "What's your device?"
+        "title": "Welches Gerät haben Sie?"
       },
       "selectUseCase": {
-        "greetings": "Hello!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
-        "hasRecovery": "Already have a recovery phrase?",
-        "separator": "or",
+        "greetings": "Hallo!",
+        "hasNoRecovery": "Verwenden Sie Ihr {{deviceName}} zum ersten Mal?",
+        "hasRecovery": "Haben Sie bereits eine Wiederherstellungsphrase?",
+        "separator": "oder",
         "switchDevice": "Switch device",
         "options": {
           "1": {
-            "heading": "First use",
-            "title": "Set up a new {{deviceName}}",
-            "description": "Let’s start and set up your device!"
+            "heading": "Erste Verwendung",
+            "title": "Einrichten eines neuen {{deviceName}}",
+            "description": "Lassen Sie uns beginnen und Ihr Gerät einrichten!"
           },
           "2": {
-            "heading": "Connect device",
-            "title": "Connect your {{deviceName}}",
-            "description": "Is your device already set up? Connect it to the app!"
+            "heading": "Gerät verbinden",
+            "title": "Verbinden Sie Ihr {{deviceName}}",
+            "description": "Ist Ihr Gerät bereits eingerichtet? Verbinden Sie es mit der App!"
           },
           "3": {
-            "heading": "Restore device",
-            "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "heading": "Gerät wiederherstellen",
+            "title": "Wiederherstellen Ihrer Wiederherstellungsphrase auf einem neuen Gerät",
+            "description": "Verwenden Sie eine vorhandene Wiederherstellungsphrase, um Ihre privaten Schlüssel auf einem neuen {{deviceName}} wiederherzustellen!"
           }
         }
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
-          "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
-          "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "getStarted": "Erste Schritte",
+          "pinCode": "PIN-Code",
+          "recoveryPhrase": "Wiederherstellungsphrase",
+          "hideRecoveryPhrase": "Wiederherstellungsphrase ausblenden",
+          "pairNano": "Nano verbinden"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "title": "Wiederherstellen aus Wiederherstellungsphrase",
+            "paragraph1": "Stellen Sie Ihren Nano aus der Wiederherstellungsphrase wieder her, um Ihren Ledger-Hardware-Wallet wiederherzustellen, zu ersetzen oder zu sichern.",
+            "paragraph2": "Ihr Nano wird Ihre privaten Schlüssel wiederherstellen und Sie werden in der Lage sein, auf Ihre Krypto zuzugreifen und diese zu verwalten.",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "OK, ich bin bereit!",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "Der beste Weg für den Anfang:",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "Planen Sie 30 Minuten ein und nehmen Sie sich Zeit.",
+              "2": "Nehmen Sie einen Stift zum Schreiben.",
+              "3": "Bleiben Sie allein, und wählen Sie eine sichere und ruhige Umgebung."
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "OK, ich bin bereit!",
+              "prev": "Vorheriger Schritt"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nano einschalten",
+              "descr": "Schließen Sie Ihr Gerät mit dem USB-Kabel an Ihren Computer an."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Durchsuchen",
+              "descr": "Erfahren Sie, wie Sie Ihr Gerät bedienen können, indem Sie die Anweisungen auf dem Bildschirm lesen."
             },
             "select": {
-              "title": "Select “Set up as new device”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Wählen Sie „Als neues Gerät einrichten“",
+              "descr": "Drücken Sie beide Tasten gleichzeitig, um die Auswahl zu bestätigen."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Anweisungen befolgen",
+              "descr": "Kommen Sie hierher zurück, um den Anweisungen zu Ihrem PIN-Code zu folgen."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nano einschalten",
+              "descr": "Schließen Sie Ihr Gerät mit dem USB-Kabel an Ihren Computer an."
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "Durchsuchen",
+              "descr": "Erfahren Sie, wie Sie Ihr Gerät bedienen können, indem Sie die Anweisungen auf dem Bildschirm lesen."
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "Wählen Sie „Wiederherstellungsphrase eingeben“",
+              "descr": "Drücken Sie beide Tasten gleichzeitig, um die Auswahl zu bestätigen."
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "Anweisungen befolgen",
+              "descr": "Kommen Sie hierher zurück, um den Anweisungen zu Ihrem PIN-Code zu folgen."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "pinCode": {
-            "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
-            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "title": "PIN-Code",
+            "paragraph": "Ihr PIN-Code ist die erste Sicherheitsebene. Er sichert physisch den Zugang zu Ihrem privaten Schlüssel und Ihrem Nano. Ihr PIN-Code muss 4 bis 8 Ziffern lang sein.",
+            "disclaimer": "Ich verstehe, dass ich meinen PIN-Code selbst wählen und ihn geheim halten muss.",
             "buttons": {
-              "next": "Set up PIN code",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "PIN-Code einrichten",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "title": "Schon ein Profi!",
+            "paragraph": "Sie sind bereit, Ihre Kryptos sicher zu verwalten. \n\nNur noch ein kleiner Schritt!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "title": "Sie werden bald zum Profi ...",
+            "paragraph": "Keine Sorge, Ledger steht bereit, um Sie auf Ihrer Reise zu begleiten. Sie werden sich bald besonders gut fühlen, was Ihre Krypto-Sicherheit angeht. \n\nNur noch ein kleiner Schritt!",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt"
             }
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "title": "PIN-Code wählen",
+              "descr": "Drücken Sie die linke oder rechte Taste, um Ziffern zu ändern. Drücken Sie beide Tasten, um eine Ziffer zu bestätigen. Wählen Sie <0></0>, um Ihren PIN-Code zu bestätigen. Wählen Sie <1></1>, um eine Ziffer zu löschen."
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "PIN-Code bestätigen",
+              "descr": "Geben Sie Ihren PIN-Code erneut ein, um ihn zu bestätigen."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
-            "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
-            "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "title": "Wiederherstellungsphrase eingeben",
+            "paragraph1": "Ihr Wiederherstellungsphrase ist die geheime Liste von Wörtern, die Sie beim ersten Einrichten Ihrer Wallet gewählt haben.",
+            "paragraph2": "Ledger bewahrt keine Kopie Ihrer Wiederherstellungsphrase auf.",
+            "disclaimer": "Ich verstehe, dass ich bei Verlust der Wiederherstellungsphrase nicht mehr auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
             "buttons": {
-              "next": "Enter recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Wiederherstellungssatz eingeben",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "title": "Verwenden Sie keinen Wiederherstellungssatz, den Sie nicht selbst erstellt haben.",
+              "desc": "Der PIN-Code und der Wiederherstellungssatz Ihrer Ledger-Hardware-Wallet sollten von Ihnen und nur von Ihnen erstellt werden. Falls Sie ein Gerät mit einem bereits existierendem Seed-Wort oder einem bereits initialisierten PIN-Code erhalten haben, verwenden Sie das Produkt bitte nicht und kontaktieren Sie unseren Kundendienst.",
+              "supportLink": "Kundensupport kontaktieren"
             }
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Take your recovery sheet",
-              "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
+              "title": "Nehmen Sie Ihr Wiederherstellungsblatt",
+              "descr": "Nehmen Sie ein leeres Wiederherstellungsblatt, das Ihrem Nano beiliegt. Bitte wenden Sie sich an den Ledger-Support, wenn das Wiederherstellungsblatt nicht leer geliefert wurde."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "Schreiben Sie 24 Wörter auf",
+              "descr": "Schreiben Sie das 1. Wort, das auf Ihrem Nano angezeigt wird, in Position 1 Ihres Wiederherstellungsblatts. Drücken Sie dann auf Ihrem Nano nach rechts, um Wort Nummer 2 anzuzeigen, und notieren Sie es in Position 2. Wiederholen Sie den Vorgang für alle Wörter und achten Sie dabei sorgfältig auf die Reihenfolge und die Rechtschreibung. Drücken Sie auf Ihrem Nano nach links, um eventuelle Fehler zu finden."
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "title": "Wiederherstellungsphrase",
+            "paragraph1": "Ihr Wiederherstellungssatz ist eine geheime Liste von 24 Wörtern, die Ihre privaten Schlüssel sichert.",
+            "paragraph2": "Ihr Nano erzeugt eine einzigartige Wiederherstellungsphrase. Ledger bewahrt keine Kopie davon auf.",
+            "disclaimer": "Ich verstehe, dass ich bei Verlust dieser Wiederherstellungsphrase nicht auf meine Kryptos zugreifen kann, falls ich den Zugang zu meinem Nano verliere.",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Wiederherstellungsphrase",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "Schnappen Sie sich Ihre Wiederherstellungsphrase"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "title": "Wählen Sie die Länge der Wiederherstellungsphrase",
+              "descr": "Ihre Wiederherstellungsphrasen können 12, 18 oder 24 Wörter haben. Sie müssen alle Wörter eingeben, um auf Ihre Kryptos zuzugreifen."
             },
             "enterWord": {
-              "title": "Enter Word #1...",
-              "descr": "Enter the first letters of Word #1 by selecting them with the right or left button. Press both buttons to validate each letter."
+              "title": "Wort 1 eingeben ...",
+              "descr": "Geben Sie die ersten Buchstaben von Wort 1 ein, indem Sie sie mit der rechten oder linken Taste auswählen. Drücken Sie beide Tasten, um jeden Buchstaben zu bestätigen."
             },
             "validateWord": {
-              "title": "Validate Word #1...",
-              "descr": "Choose Word #1 from the suggestions. Press both buttons to validate."
+              "title": "Bestätigen Sie Wort 1 ...",
+              "descr": "Wählen Sie Wort 1 aus den Vorschlägen. Drücken Sie beide Tasten zum Bestätigen."
             },
             "andNext": {
-              "title": "Repeat for all words!"
+              "title": "Wiederholen Sie dies für alle Wörter!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
-              "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
+              "title": "Bestätigen Sie Ihre Wiederherstellungsphrase",
+              "descr": "Blättern Sie durch die Wörter, bis Sie Wort 1 gefunden haben, indem Sie die rechte Taste drücken. Bestätigen Sie, indem Sie beide Tasten drücken."
             },
             "repeat": {
-              "title": "Repeat for all words!"
+              "title": "Wiederholen Sie dies für alle Wörter!"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Nächster Schritt",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "genuineCheck": {
             "success": {
-              "title": "All good!",
-              "desc": "Your Ledger {{deviceName}} is genuine and ready to use with Ledger Live"
+              "title": "Alles gut!",
+              "desc": "Ihr Ledger {{deviceName}} ist echt und bereit zur Verwendung mit Ledger Live"
             },
             "buttons": {
-              "next": "Continue",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Weiter",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Hide your recovery phrase",
-            "paragraph": "Your recovery phrase is your last chance to access your crypto if you cannot use your Nano. You must keep it in a safe place.",
-            "keepItOffline": "Enter these words on a hardware wallet only, not on computers or smartphones.",
-            "neverShowToAnyone": "Never share your 24 words with anyone, not even with Ledger.",
+            "title": "Verstecken Sie Ihre Wiederherstellungsphrase",
+            "paragraph": "Ihre Wiederherstellungsphrase ist die letzte Chance, auf Ihre Krypto zuzugreifen, falls Sie Ihren Nano nicht benutzen können. Sie müssen sie an einem sicheren Ort aufbewahren.",
+            "keepItOffline": "Geben Sie diese Wörter nur auf einem Hardware-Wallet ein, nicht auf Computern oder Smartphones.",
+            "neverShowToAnyone": "Teilen Sie Ihre 24 Worte niemals mit jemandem, auch nicht mit Ledger.",
             "buttons": {
-              "next": "OK, I'm done!",
-              "prev": "Previous step",
-              "help": "Need help",
-              "learn": "Learn how to hide it"
+              "next": "OK, ich bin fertig!",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt",
+              "learn": "Erfahren Sie wie man gut versteckt"
             }
           },
           "pairMyNano": {
-            "title": "Genuine check",
-            "paragraph": "We'll verify whether your Nano is genuine. This should be quick and easy!",
+            "title": "Echtheitsprüfung",
+            "paragraph": "Wir werden überprüfen, ob Ihr Nano echt ist. Das sollte schnell und einfach gehen!",
             "buttons": {
-              "next": "Check my Nano",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "Meinen Nano prüfen",
+              "prev": "Vorheriger Schritt",
+              "help": "Hilfe benötigt"
             }
           }
         }
       }
     },
     "pedagogy": {
-      "heading": "basics",
+      "heading": "Grundlagen",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "title": "Zugriff auf Ihre Kryptos",
+          "description": "Ihre Krypto-Vermögenswerte werden auf der Blockchain gespeichert. Sie benötigen einen privaten Schlüssel, um darauf zuzugreifen und sie zu verwalten."
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "title": "Achten Sie auf Ihren privaten Schlüssel",
+          "description": "Ihr privater Schlüssel ist in Ihrem Nano gespeichert. Sie müssen der einzige sein, der ihn besitzt, um die Kontrolle über Ihr Geld zu haben."
         },
         "stayOffline": {
-          "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "title": "Offline bleiben",
+          "description": "Ihr Nano arbeitet als „Cold Storage“-Wallet. Das bedeutet, dass er Ihren privaten Schlüssel niemals online preisgibt, selbst wenn Sie die App verwenden."
         },
         "validateTransactions": {
-          "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "title": "Transaktionen validieren",
+          "description": "Mit Ledger Live können Sie Krypto kaufen, verkaufen, verwalten, tauschen und verdienen und bleiben dabei geschützt. Sie werden jede Krypto-Transaktion mit Ihrem Nano validieren."
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
-          "description": "We'll start by setting up your Nano security.",
-          "CTA": "Let’s do this!"
+          "title": "Lassen Sie uns Ihren Nano einrichten!",
+          "description": "Wir beginnen mit den Sicherheitseinstellungen ihres Nano.",
+          "CTA": "Packen wir's an!"
         }
       }
     },
     "quizz": {
       "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "title": "Jetzt geht's los!",
+      "descr": "Beantworten Sie 3 einfache Fragen, um häufige Missverständnisse über Ihre Hardware-Wallet zu vermeiden.",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
-        "finish": "Finish quiz"
+        "start": "Lassen Sie uns das Quiz machen",
+        "next": "Nächste Frage",
+        "finish": "Quiz beenden"
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "Als Ledger-Benutzer werden meine Kryptos so gespeichert:",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "Auf meinem Nano",
+            "2": "Auf der Blockchain"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Ihre Kryptos sind immer in der Blockchain gespeichert. Ihre Hardware-Wallet enthält nur Ihren privaten Schlüssel, der Ihnen Zugriff auf Ihre Kryptos gibt."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "Falsch!",
+              "text": "Ihre Kryptos sind immer in der Blockchain gespeichert. Ihre Hardware-Wallet enthält nur Ihren privaten Schlüssel, der Ihnen Zugriff auf Ihre Kryptos gibt."
             }
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "Wenn mein Wiederherstellungssatz nicht mehr sicher oder privat ist ...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "Kein Problem, Ledger kann mir eine Kopie schicken",
+            "2": "Meine Kryptos sind nicht mehr sicher und ich muss sie an einen sicheren Ort übertragen"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Jeder, der Ihren Wiederherstellungssatz kennt, kann Ihr Krypto-Vermögen stehlen. Wenn Sie ihn verlieren, müssen Sie Ihre Kryptos schnell an einen sicheren Ort übertragen."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "Falsch!",
+              "text": "Jeder, der Ihren Wiederherstellungssatz kennt, kann Ihr Krypto-Vermögen stehlen. Wenn Sie ihn verlieren, müssen Sie Ihre Kryptos schnell an einen sicheren Ort übertragen."
             }
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "Wenn ich meinen Nano mit der Ledger-App verbinde, ist mein privater Schlüssel ...",
           "answers": {
-            "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "1": "Noch offline",
+            "2": "Kurzzeitig mit dem Internet verbunden"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Herzlichen Glückwunsch!",
+              "text": "Ihr privater Schlüssel bleibt immer offline in Ihrer Hardware-Wallet. Selbst wenn Sie mit Ihrem Nano verbunden sind, kann die Ledger-App nicht auf Ihren privaten Schlüssel zugreifen. Sie müssen jede Transaktion physisch auf Ihrem Gerät autorisieren."
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "title": "Falsch!",
+              "text": "Ihr privater Schlüssel bleibt immer offline in Ihrer Hardware-Wallet. Selbst wenn Sie mit Ihrem Nano verbunden sind, kann die Ledger-App nicht auf Ihren privaten Schlüssel zugreifen. Sie müssen jede Transaktion physisch auf Ihrem Gerät autorisieren."
             }
           }
         }
@@ -3081,717 +3081,717 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?",
-    "solution": "Solution #{{number}}",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
+    "desc": "Haben Sie Schwierigkeiten, Ihr Gerät zu verbinden?",
+    "solution": "Lösung #{{number}}",
+    "nextSolution": "Nächste Lösung",
+    "previousSolution": "Vorherige Lösung",
+    "followSteps": "Diesen Schritten folgen",
+    "supportArticle": "Hilfeseite",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
-        "back": "Go back"
+        "title": "Fehlerbehebung bei der USB-Verbindung",
+        "desc": "Es scheint ein Problem beim Verbinden mit Ihrem Gerät zu geben. Keine Sorge, Sie können verschiedene Lösungen nacheinander ausprobieren, bis Ihr Gerät eine Verbindung herstellt!",
+        "cta": "Bringen wir es in Ordnung!",
+        "back": "Zurückgehen"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Starten Sie Ledger Live als Administrator",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Beenden Sie Ledger Live.",
+            "1": "Klicken Sie mit der rechten Maustaste auf die Anwendung Ledger Live.",
+            "2": "Wählen Sie „Als Administrator ausführen“.",
+            "3": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "Aktualisieren Sie die udev-Regeln unter Linux",
+          "desc": "Klicken Sie auf die Schaltfläche unten, um die udev-Regeln hinzuzufügen. Verbinden Sie dann Ihr Gerät und entsperren Sie es, um zu sehen, ob es erkannt wird.",
+          "cta": "Regeln festlegen",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Geben Sie den folgenden Befehl in ein Terminal ein, um die Regeln automatisch hinzuzufügen und udev neu zu laden",
             "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "Versuchen Sie verschiedene USB-Anschlüsse",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Ändern Sie den verwendeten USB-Anschluss an Ihrem Computer",
+            "1": "Entfernen Sie alle USB-Dongles",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "Wechseln Sie das USB-Kabel",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Verwenden Sie nach Möglichkeit das Original-USB-Kabel.",
+            "1": "Versuchen Sie ein anderes USB-Kabel und stellen Sie sicher, dass es Datenübertragung unterstützt.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "Starten Sie Ihren Computer neu",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "Starten Sie den Computer neu.",
+            "1": "Starten Sie Ledger Live.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "Schalten Sie Antivirus und VPN aus",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "Deaktivieren Sie jegliche Anti-Viren, Firewall und VPN-Software.",
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird.",
+            "2": "Geben Sie Ledger Live in Ihrem Antivirusprogramm frei, falls das funktioniert."
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "Versuchen Sie es auf einem anderen Computer",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "Gehen Sie zu <0>{{link}}</0> auf einem anderen Computer, um Ledger Live herunterzuladen und zu installieren.",
+            "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "USB-Gerätetreiber aktualisieren",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "<0>{{link}}</0> besuchen",
+            "1": "Folgen Sie den Anweisungen, um die USB-Gerätetreiber zu aktualisieren.",
+            "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "Vollzugriff auf die Festplatte aktivieren",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "Öffnen Sie „Systemeinstellungen“.",
+              "1": "Gehen Sie zu „Sicherheit & Datenschutz“.",
+              "2": "Gehen Sie auf der Registerkarte „Datenschutz“ in der linken Spalte auf „Voller Festplattenzugriff“.",
+              "3": "Fügen Sie „Ledger Live“ hinzu.",
+              "4": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "NVRAM zurücksetzen",
+            "link": "Apples Anweisungen",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Wenn Ihr Mac einen Intel-Prozessor hat, folgen Sie <0>{{link}}</0>, um das NVRAM zurückzusetzen.",
+              "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "Was für ein Gerät haben Sie?",
+          "desc": "Wenn Sie einen Nano S haben, können Sie versuchen, die Firmware Ihres Geräts zu reparieren. Für Nano X- und Blue-Benutzer wenden Sie sich bitte an den Ledger-Support"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": "USB-Verbindungsproblem immer noch nicht behoben?",
+          "desc": "Wenn Sie alle möglichen Lösungen ausprobiert haben, wenden Sie sich bitte an den Ledger-Support. Ansonsten folgen Sie bitte den Anweisungen jeder Lösung, die Sie noch nicht ausprobiert haben.",
+          "back": "Zurück zum Portfolio",
+          "cta": "Kundenservice kontaktieren"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Reparieren Sie Ihren Nano S",
+          "desc": "Wie lautet die Meldung, die auf Ihrem Gerät angezeigt wird?",
+          "mcuOutdated": "MCU-Firmware ist veraltet",
+          "mcuNotGenuine": "MCU-Firmware ist nicht korrekt",
+          "repairInstructions": "Befolgen Sie die Anweisungen zur Gerätereparatur",
+          "updateInstructions": "Folgen Sie den Anweisungen zum Geräte-Update",
+          "somethingElse": "Etwas anderes"
         }
       }
     }
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "Nachrichten-Hash",
+    "domainHash": "Domain-Hash",
+    "messageHash": "Nachrichten-Hash",
+    "message": "Nachricht"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
-    "verifyData": "Always verify the operation details on your device.",
+    "title": "Bitte bestätigen Sie den Vorgang auf Ihrem Gerät, um ihn abzuschließen",
+    "warning": "Vergewissern Sie sich immer, dass die auf Ihrem Gerät angezeigte Adresse genau mit der Adresse übereinstimmt, die von {{recipientWording}} mitgeteilt wurde",
+    "secureContract": "Überprüfen Sie die Einzahlungsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Vertragsadresse wird sicher bereitgestellt, sodass Sie sie nicht verifizieren müssen.",
+    "verifyData": "Überprüfen Sie immer die Aktivitätsdetails auf Ihrem Gerät.",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "send": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "claimReward": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "freeze": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "unfreeze": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "vote": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "delegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "undelegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "redelegate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "claimRewardCompound": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "nominate": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "chill": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "bond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "unbond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "rebond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
+      "withdrawUnbonded": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen"
     },
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
-      "claimReward": "rewards recipient",
-      "optIn": "recipient",
-      "nominate": "validator"
+      "send": "Empfänger",
+      "delegate": "Validator",
+      "undelegate": "Validator",
+      "claimReward": "Prämienempfänger",
+      "optIn": "Empfänger",
+      "nominate": "Validator"
     },
-    "votes": "Votes ({{count}})"
+    "votes": "Stimmen ({{count}})"
   },
   "RecipientField": {
-    "placeholder": "Enter {{currencyName}} address"
+    "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
     "title": "Legal",
     "termsLabel": "Terms of service",
     "privacyLabel": "Privacy Policy",
     "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
-    "cta": "Enter Ledger app"
+    "cta": "Zur Ledger-App"
   },
   "families": {
     "stellar": {
       "memo": "Memo",
       "memoType": {
-        "MEMO_TEXT": "Memo Text",
-        "NO_MEMO": "No Memo",
-        "MEMO_ID": "Memo ID",
+        "MEMO_TEXT": "Memo-Text",
+        "NO_MEMO": "Kein Memo",
+        "MEMO_ID": "Memo-ID",
         "MEMO_HASH": "Memo Hash",
-        "MEMO_RETURN": "Memo Return"
+        "MEMO_RETURN": "Memo-Rückgabe"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "Wenn Sie ein Memo verwenden, überprüfen Sie sorgfältig den verwendeten Typ mit dem Empfänger"
     },
     "cosmos": {
       "memo": "Memo",
       "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+      "memoWarningText": "Wenn Sie ein Memo verwenden, prüfen Sie die Informationen sorgfältig mit dem Empfänger"
     }
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "Wir können derzeit keinen Gegenwert für diesen Vermögenswert angeben"
     },
     "generic": {
       "title": "{{message}}",
-      "description": "Something went wrong. Please retry or contact Ledger Support."
+      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support."
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "There is a pending operation for this account.",
-      "description": "Wait for the operation to go through."
+      "title": "Es gibt eine ausstehende Aktion für dieses Konto.",
+      "description": "Warten Sie, bis der Vorgang abgeschlossen ist."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
-      "description": "Please enter an account name"
+      "title": "Ein Kontoname ist erforderlich",
+      "description": "Bitte geben Sie einen Kontonamen ein"
     },
     "AccountNotSupported": {
-      "title": "Account not supported.",
-      "description": "Please retry or contact Support ({{reason}})"
+      "title": "Konto wird nicht unterstützt.",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support ({{reason}})"
     },
     "AlgorandASANotOptInInRecipient": {
-      "title": "Recipient account has not opted in the selected ASA."
+      "title": "Das Empfängerkonto hat sich nicht für den gewählten ASA entschieden."
     },
     "AmountRequired": {
-      "title": "Amount required"
+      "title": "Erforderlicher Betrag"
     },
     "NoAccessToCamera": {
-      "title": "Please ensure your system has a camera, that it is not in use by another application and that Ledger Live has permission to use it.",
+      "title": "Bitte stellen Sie sicher, dass Ihr System über eine Kamera verfügt, dass diese nicht von einer anderen Anwendung verwendet wird und dass Ledger Live die Erlaubnis hat, diese zu verwenden.",
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "The rewards are smaller than the estimated fees to claim them",
+      "title": "Die Prämien sind kleiner als die geschätzten Gebühren, die anfallen, um diese zu beanspruchen",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "You cannot reduce the amount approved while having an active deposit."
+      "title": "Sie können den freigegebenen Betrag nicht reduzieren, während Sie eine aktive Einzahlung haben."
     },
     "CosmosBroadcastCodeInternal": {
-      "title": "Something went wrong (Error #1)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 1)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeTxDecode": {
-      "title": "Something went wrong (Error #2)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 2)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "title": "Ungültige Sequenz",
+      "description": "Bitte versuchen Sie den Vorgang erneut"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "Nicht autorisierte Signatur",
+      "description": "Dieses Konto ist nicht berechtigt, diese Transaktion zu unterzeichnen"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Unzureichendes Guthaben",
+      "description": "Vergewissern Sie sich, dass das verwendete Konto über genügend Guthaben verfügt und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 6)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "Ungültige Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 8)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "Unbekannte Adresse",
+      "description": "Bitte überprüfen Sie die Adresse und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "Unzureichende Coins",
+      "description": "Vergewissern Sie sich, dass das verwendete Konto über genügend Guthaben verfügt und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 11)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 12)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "Das Memo-Feld ist zu lang",
+      "description": "Bitte verkürzen Sie den Memotext und versuchen Sie es erneut"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 14)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 15)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 16)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "title": "Etwas ist schief gelaufen (Fehler 17)",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "title": "{{currencyName}} wird nicht unterstützt",
+      "description": "Dieser Krypto-Vermögenswert wird noch nicht unterstützt. Bitte kontaktieren Sie den Ledger-Support."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
-      "description": "Request assistance from Ledger Support"
+      "title": "Möglicherweise nicht echt",
+      "description": "Hilfe vom Ledger-Support anfordern"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "Entschuldigung, versuchen Sie es erneut (echt-schließen)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sorry, Update fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again"
+      "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
+      "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "Verbindung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es scheint Ihr Gerät ist nicht verbunden",
+      "description": "Bitte neu verbinden und erneut versuchen."
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "Entschuldigung, es scheint Ihr Gerät ist nicht verbunden",
+      "description": "Bitte neu verbinden und erneut versuchen."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "Ungültiger Endpunkt",
+      "description": "Bitte geben Sie einen gültigen Endpunkt an"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "Sorry, Gebührenschätzung fehlgeschlagen",
+      "description": "Versuchen Sie, eine benutzerdefinierte Gebühr zu setzen (Status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "title": "Firmware- oder App-Update erforderlich",
+      "description": "Bitte verwenden Sie den Manager, um alle Apps zu deinstallieren und dann zu prüfen, ob ein Firmware-Update verfügbar ist, bevor Sie diese neu installieren"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Nano-Firmware aktualisieren",
+      "description": "Bitte aktualisieren Sie Ihre Geräte-Firmware auf die neueste Version, um diese Funktion nutzen zu können"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "title": "Geräte-Firmware wird nicht erkannt",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "title": "Sorry, konnte nicht zurückgesetzt werden",
+      "description": "Bitte versuchen Sie es erneut oder wenden Sie sich an den Ledger Kundenservice, falls das Problem weiterhin besteht."
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "title": "Entschuldigung, es gibt nichts zu aktualisieren",
+      "description": "Bitte kontaktieren Sie den Ledger-Support, wenn Sie Ihr Gerät nicht verwenden können."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut oder wenden Sie sich an den Ledger-Kundenservice."
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "title": "Entschuldigung, versuchen Sie es erneut.",
+      "description": "Der Server konnte Ihre Anfrage nicht bearbeiten. Bitte versuchen Sie es später erneut oder wenden Sie sich an den Ledger-Kundenservice. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "title": "Sorry, {{currencyName}}-Dienste nicht verfügbar",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Support"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "Sorry, das ist bereits installiert",
+      "description": "Bitte überprüfen Sie, welche Apps bereits auf Ihrem Gerät installiert sind."
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "title": "{{dependency}} App erforderlich",
+      "description": "Falls die {{dependency}}-App bereits installiert ist, installieren Sie diese bitte mit der neuesten Version neu"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "title": "Entschuldigung, diese App ist erforderlich",
+      "description": "Sie müssen zuerst alle Apps deinstallieren, welche die {{appName}} App benötigen"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
-      "description": "Please unlock it"
+      "title": "Ihr Gerät ist gesperrt",
+      "description": "Bitte entsperren Sie es"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "title": "Deinstallieren Sie alle Apps von Ihrem Gerät",
+      "description": "Die privaten Schlüssel für den Zugriff auf Ihr Krypto-Vermögen bleiben sicher auf Ihrem Gerät und müssen auf Ihrem Wiederherstellungsblatt gesichert werden."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "title": "Sorry, nicht genug Speicherplatz übrig",
+      "description": "Deinstallieren Sie einige Apps, um Speicherplatz freizugeben. Die privaten Schlüssel zum Zugriff auf Ihre Krypto-Vermögenswerte bleiben sicher auf Ihrem Gerät."
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
-        "stay": "Finish install"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Wenn Sie den Manager beenden, wird die App-Installation abgebrochen. Bitte beenden Sie die Installation, um die Apps in der Warteschlange zu installieren.",
+        "stay": "Installation beenden"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
-        "stay": "Finish uninstalling"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Durch das Beenden des Managers werden die laufenden App-Deinstallationen beendet.",
+        "stay": "Deinstallation beenden"
       },
       "update": {
-        "title": "Finish app updates in progress?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
-        "stay": "Finish updates"
+        "title": "Abschluss App-Installation in Arbeit?",
+        "description": "Durch das Beenden des Managers werden die laufenden App-Updates beendet.",
+        "stay": "Updates beenden"
       },
-      "quit": "Quit Manager"
+      "quit": "Manager schließen"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "Entschuldigung, diese App ist erforderlich",
+      "description": "Deinstallieren Sie die Bitcoin- oder Ethereum-App zuletzt"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "Entschuldigung, das Internet scheint ausgefallen zu sein",
+      "description": "Bitte überprüfen Sie Ihre Internetverbindung."
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "title": "Entschuldigung, es wurden keine Konten gefunden",
+      "description": "Bei der Adressberechnung ist etwas schief gelaufen, versuchen Sie es erneut oder wenden Sie sich an den Ledger-Support"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "Entschuldigung, Guthaben reicht nicht aus",
+      "description": "Bitte stellen Sie sicher, dass das Konto ausreichend gedeckt ist."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "Die Adresse des Empfängers ist inaktiv. Senden Sie mindestens {{minimalAmount}}, um sie zu aktivieren"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "Das ETH-Guthaben auf dem übergeordneten Konto reicht nicht für die Netzwerkgebühren aus"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
-      "description": "Please try again"
+      "title": "Die Passwörter stimmen nicht überein",
+      "description": "Bitte versuchen Sie es erneut"
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
-      "description": "Please try again"
+      "title": "Das eingegebene Passwort ist falsch",
+      "description": "Bitte versuchen Sie es erneut"
     },
     "RPCHostRequired": {
-      "title": "Host is required."
+      "title": "Host ist erforderlich."
     },
     "RPCHostInvalid": {
-      "title": "Enter valid host."
+      "title": "Geben Sie einen gültigen Host ein."
     },
     "RPCUserRequired": {
-      "title": "RPC Username is required"
+      "title": "RPC-Benutzername ist erforderlich"
     },
     "RPCPassRequired": {
-      "title": "RPC Password is required"
+      "title": "RPC-Passwort ist erforderlich"
     },
     "SatStackAccessDown": {
-      "title": "Could not reach full node",
-      "description": "Please verify that SatStack and your node are running. Check the full node setup in the Settings if the problem persists."
+      "title": "Knoten (Full Node) nicht erreichbar",
+      "description": "Bitte überprüfen Sie, ob SatStack und Ihr Knoten/Node ausgeführt werden. Überprüfen Sie die vollständige Node-Einrichtung in den Einstellungen, wenn das Problem weiterhin besteht."
     },
     "SatStackStillSyncing": {
-      "title": "Node sync in progress...",
-      "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
+      "title": "Node-Synchronisierung läuft ...",
+      "description": "Bitte warten Sie, während Ihr Node synchronisiert wird. Senden ist nicht möglich, da Ihr Bitcoin-Kontostand möglicherweise nicht korrekt ist."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "title": "Bitte aktualisieren Sie SatStack",
+      "description": "Die SatStack-Version, die Sie verwenden, ist zu alt und enthält möglicherweise Fehler oder Inkompatibilitäten."
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "title": "Konto nicht von Knoten (Full Node) gescannt",
+      "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
     },
     "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
+      "title": "Die Stratis-Blockchain hat sich weiterentwickelt und funktioniert möglicherweise nicht mehr korrekt.",
+      "description": "Die Unterstützung für die ursprüngliche Stratis-Blockchain wird bis zum 16. Oktober 2021 aufrechterhalten."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "title": "Wechselkurs verfallen",
+      "description": "Sie müssen den Tausch bestätigen, bevor der Timer abläuft. Der angezeigte Umrechnungskurs bleibt 60 Sekunden lang gültig."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "Entschuldigung, der Server hat zu lange für die Antwort gebraucht",
+      "description": "Bitte versuchen Sie es erneut."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "Entschuldigung, der Server hat zu lange gebraucht um zu antworten ({{tag}})",
+      "description": "Zeitüberschreitung aufgetreten."
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "Etwas ist schief gelaufen. Bitte schließen Sie Ihr Gerät erneut an",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "title": "Bitte öffnen Sie die App {{appName}}",
+      "description": "Lassen Sie die App {{appName}} geöffnet, während wir Ihre Konten finden"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "title": "Entschuldigung, Ihr Gerät darf sich nicht im Bootloader-Modus befinden",
+      "description": "Bitte starten Sie Ihr Gerät neu, ohne die Schaltflächen zu berühren, wenn das Logo erscheint. Kontaktieren Sie den Ledger Support, falls das Problem weiterhin besteht."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "Manager auf Gerät abgelehnt"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "title": "Update auf Gerät abgebrochen",
+      "description": "Alle Apps auf Ihrem Gerät wurden deinstalliert. Halten Sie Ihr Gerät auf dem neuesten Stand, um von Verbesserungen der Sicherheit und Funktionalität zu profitieren."
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "title": "Aktion abgelehnt",
+      "description": "Der Benutzer hat die Aktion am Gerät abgelehnt"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "title": "Aktion auf Gerät verweigert",
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie im Zweifelsfall den Ledger-Support"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "Empfangsadresse abgelehnt",
+      "description": "Bitte versuchen Sie es erneut oder wenden Sie sich im Zweifelsfall an den Ledger-Support"
     },
     "UpdateYourApp": {
-      "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "title": "App-Update erforderlich",
+      "description": "Deinstallieren und installieren Sie die App {{managerAppName}} im Manager neu"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
-      "description": "Please navigate back to the Dashboard on your device"
+      "title": "Zurück zum Dashboard",
+      "description": "Bitte navigieren Sie auf Ihrem Gerät zurück zum Dashboard"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "Entschuldigung, versuchen Sie es erneut (Verbindungsfehler)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "Entschuldigung, versuchen Sie es erneut (Verbindung geschlossen)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "title": "Etwas ist schief gelaufen",
+      "description": "Bitte überprüfen Sie, ob Ihre Hardware-Wallet mit der Wiederherstellungsphrase oder Passphrase eingerichtet ist, die mit dem gewählten Konto verbunden ist."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "title": "App-Update erforderlich",
+      "description": "Deinstallieren und installieren Sie die App {{managerAppName}} im Manager neu"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "Dies ist keine gültige {{currencyName}} Adresse"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "Empfängeradresse ist die gleiche wie die Absenderadresse"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "title": "Entschuldigung, Verbindung fehlgeschlagen",
+      "description": "Gerät erkannt, aber Verbindung fehlgeschlagen. Bitte versuchen Sie es erneut oder wenden Sie sich an den Ledger-Support, wenn das Problem weiterhin besteht."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "Automatische Verifizierung nicht verfügbar: Überprüfen Sie die Adresse sorgfältig",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "Dieser QR-Code konnte nicht gescannt werden: Auto-Verifizierung wird von dieser Adresse nicht unterstützt"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "Es konnten keine Gebührensätze geladen werden. Bitte stellen Sie manuelle Gebühren ein"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "Gebühren sind erforderlich"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "Dies könnte zu niedrig sein. Bitte erhöhen"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "Unbekannte MCU-Version",
+      "description": "Bitte kontaktieren Sie den Ledger-Support"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "Zum Dashboard gehen für Aktualisierung",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "1": "Trennen Sie das USB-Kabel ab und schließen Sie es wieder an, ohne eine Taste zu drücken.",
+        "2": "Drücken Sie beide Tasten zusammen dreimal, um das Dashboard anzuzeigen.",
+        "3": "Öffnen Sie den Manager und klicken Sie auf Firmware aktualisieren."
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "Kann nicht in Unterkonten empfangen werden",
+      "description": "Wenn Sie Geld erhalten möchten, verwenden Sie bitte das übergeordnete Konto"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "Kann noch nicht von Unterkonten senden",
+      "description": "Diese Funktion wird zu einem späteren Zeitpunkt aufgrund von Änderungen, die kürzlich durch das Babylon-Update eingeführt wurden, hinzugefügt."
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "Bitte heben Sie die Übertragung des Kontos auf, bevor Sie es leeren"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "Bitte leeren Sie zuerst alle Unterkonten"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "Dieses alte Adressformat wird nicht mehr unterstützt"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "title": "Das ist die falsche App",
+      "description": "Öffnen Sie die App „{{managerAppName}}“ auf Ihrem Gerät"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "Bitte wählen Sie einen Gerätenamen ohne '{{invalidCharacters}}'"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Ledger-Kundenservice."
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "title": "Bitcoin- und Ethereum-Apps erforderlich",
+      "description": "Installieren Sie zuerst die neuesten Bitcoin- und Ethereum-Apps."
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "Umbenennen auf dem Gerät abgebrochen",
+      "description": "Versuchen Sie es erneut und erlauben Sie das Umbenennen auf Ihrem Gerät"
     },
     "SyncError": {
-      "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "title": "Synchronisierungsfehler",
+      "description": "Einige Konten konnten nicht synchronisiert werden."
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Vermögenswerte zum Entsperren, die mit Bandbreite verbunden sind"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "title": "Keine Vermögenswerte zum Entsperren",
+      "description": "Sie haben keine Vermögenswerte zum Entsperren im Zusammenhang mit Energie"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days after your last Freeze operation"
+      "title": "Entsperren ist noch nicht verfügbar",
+      "description": "Sie müssen 3 Tage nach Ihrem letzten Sperrvorgang warten"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "Mindestens 1 Stimme wird benötigt"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers"
+      "title": "Abstimmungsformat ist falsch",
+      "description": "Sie können nur mit runden Zahlen abstimmen"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "Prämie ist noch nicht einforderbar",
+      "description": "Sie müssen 24 Stunden zwischen den Ansprüchen warten"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "Es gibt keine Prämie zu beanspruchen"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "Der zu sperrende Betrag kann nicht kleiner als 1 sein"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "title": "Das Senden von TRC20 an ein neues Konto führt nicht zur Aktivierung",
+      "description": "Das Empfängerkonto muss aktiviert werden, bevor Sie TRC20 an dieses senden. Senden Sie entweder TRX oder TRC10 an ein Konto, um es zu aktivieren."
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "Es können zusätzliche Gebühren anfallen"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "Nicht genügend Stimmen vorhanden"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "title": "Die Transaktion ist abgelaufen",
+      "description": "Die Signatur muss innerhalb von 30 Sekunden angewendet werden. Bitte versuchen Sie es erneut."
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "Nicht genug Energie zum Senden dieses Tokens"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "title": "Kopplung fehlgeschlagen",
+      "description": "Bitte versuchen Sie es erneut oder wenden Sie sich im Zweifelsfall an den Ledger-Support."
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "title": "Echtheitsprüfung fehlgeschlagen",
+      "description": "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut oder kontaktieren Sie im Zweifelsfall den Ledger-Support."
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "Bitte aktivieren Sie die Vertragsdaten in den Einstellungen der Ethereum-App"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "Ungültiges XRP-Ziel-Tag"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "Unzureichender Saldo zum übertragen"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "Unzureichender Saldo zum übertragen"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Unzureichender Saldo auf dem übergeordneten Konto"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Saldo kann nicht unter {{minimumAmount}} liegen"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "Bitte öffnen Sie die {{expected}} App"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "Die Netzwerkgebühren liegen über 10 % des Betrags"
     },
     "StellarWrongMemoFormat": {
       "title": "Memo-Format ist falsch"
@@ -3815,31 +3815,31 @@
       "title": "Einige ausgewählte Adressen sind keine Validatoren"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "Alle gebundenen Vermögenswerte werden entbunden, wenn < 1 DOT"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "Sie haben kein ungebundenes Vermögen"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "Sie haben keine Nominierungen"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "Stellen Sie sicher, dass Sie genug Guthaben für zukünftige Transaktionsgebühren übrig haben"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "Kontostand darf nicht unter {{minimumBalance}} liegen. Maximalbetrag zu leerem Konto senden."
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "Sie müssen eine Kaution von mindestens {{minimumBondAmount}} hinterlegen."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "Ihr Kreditsaldo sollte mindestens {{minimumBondBalance}} betragen."
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "Sie haben das Entbindungslimit überschritten"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "Sie müssen mindestens einen Validator auswählen"
     }
   }
 }

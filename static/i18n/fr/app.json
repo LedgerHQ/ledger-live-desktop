@@ -117,11 +117,11 @@
       "needsMigration": "Cliquez pour mettre le compte à jour",
       "error": "Erreur de synchronisation",
       "refresh": "Actualiser",
-      "devTools": "Dev tools"
+      "devTools": "Outils développeurs"
     },
     "exchange": "Échanger",
     "info": "Informations",
-    "connectDevice": "Connect your device"
+    "connectDevice": "Connectez votre appareil"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -629,8 +629,8 @@
     },
     "history": {
       "tab": "Historique",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "Exportation...",
+      "exportOperations": "Exporter les opérations"
     }
   },
   "lend": {
@@ -698,10 +698,10 @@
         "toSupplyTooltip": "Vous pouvez maintenant déposer vos actifs."
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "Approbation",
+        "inactive": "Inactif",
+        "supplying": "Dépôt en cours",
+        "earning": "Gains en cours"
       },
       "closed": {
         "assetLended": "Actif",
@@ -909,7 +909,7 @@
     },
     "status": {
       "title": "Statut de Ledger",
-      "desc": "Vérifiez l'état de notre système"
+      "desc": "Vérifier l'état de notre système"
     },
     "helpCenter": {
       "title": "Assistance Ledger",
@@ -921,15 +921,15 @@
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Likez notre page"
+      "desc": "Liker notre page"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Suivez-nous"
+      "desc": "Nous suivre"
     },
     "github": {
       "title": "GitHub",
-      "desc": "Examinez notre code"
+      "desc": "Examiner notre code"
     }
   },
   "blacklistToken": {
@@ -1042,7 +1042,7 @@
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
     "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Afficher le code QR"
   },
   "emptyState": {
     "dashboard": {
@@ -1277,7 +1277,7 @@
       "appOnDeviceSearch": "Rechercher les applications installées..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> libres",
+      "freeSpace": "<0>{{space}}</0> disponibles",
       "noFreeSpace": "Plus d'espace disponible",
       "installed": "Applications",
       "capacity": "Capacité",
@@ -1312,10 +1312,10 @@
         "manageAccount": "Gérer mes comptes"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "Mise à jour disponible",
+        "title_plural": "Mises à jour disponibles",
+        "progressTitle": "{{number}} mise à jour d'application",
+        "progressTitle_plural": "{{number}} mises à jour d'applications",
         "progressWarning": "Ne sortez pas du Gestionnaire pendant la mise à jour.",
         "progress": "Mises à jour..."
       },
@@ -1355,40 +1355,40 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés.",
+          "description": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés."
         },
         "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+          "shortDescription": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis.",
+          "description": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis."
         },
         "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
+          "shortDescription": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes.",
+          "description": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes."
         },
         "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
+          "shortDescription": "Optimisez la gestion de votre portefeuille DeFi.",
+          "description": "Optimisez la gestion de votre portefeuille DeFi."
         },
         "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+          "description": "Admirez et mettez en valeur les NFT sécurisés par votre wallet.",
+          "shortDescription": "Admirez et mettez en valeur les NFT sécurisés par votre wallet."
         },
         "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds.",
+          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds."
         },
         "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source.",
+          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source."
         },
         "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+          "shortDescription": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds.",
+          "description": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds."
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum.",
+          "description": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum."
         }
       },
       "dependencyInstall": {
@@ -2394,9 +2394,9 @@
         "button": "Terminé",
         "title": "Scanner pour exporter vers un mobile",
         "listTitle": "Sur l'application mobile Ledger Live :",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
+        "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
+        "step3": "Scannez le <1><0>code QR</0></1> jusqu'à ce que la barre soit à 100 %."
       }
     },
     "display": {
@@ -2415,22 +2415,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "Vous avez atteint le niveau Développeur !",
+        "text": "Bienvenue au pays des merveilles"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "Autoriser les Apps Debug",
+      "debugAppsDesc": "Afficher et autoriser l'ouverture des Platform Apps \"Debug\".",
+      "experimentalApps": "Autoriser les Apps Expérimentales",
+      "experimentalAppsDesc": "Afficher et autoriser l'ouverture des Platform Apps \"Expérimentales\".",
+      "catalogServer": "Définir le fournisseur du Catalogue",
+      "catalogServerDesc": "Choisissez entre plusieurs sources pour les Platform Apps.",
+      "enablePlatformDevTools": "Activer les Outils de développement Plateform",
+      "enablePlatformDevToolsDesc": "Autorisez la fenêtre Outils de développement Plateform.",
+      "addLocalApp": "Ajouter une app locale",
+      "addLocalAppDesc": "Parcourez vos fichiers et ajoutez une app locale avec un manifeste local.",
+      "addLocalAppButton": "Naviguer",
+      "runLocalAppDeleteButton": "Effacer",
+      "runLocalAppOpenButton": "Ouvrir"
     },
     "currencies": {
       "selectPlaceholder": "Crypto-actif",
@@ -2475,32 +2475,32 @@
       "disclaimer": "Il s'agit de fonctionnalités expérimentales fournies \"telles quelles\" pour notre communauté de passionné(e)s de la tech. Elles peuvent changer, casser ou être retirées à tout moment. En les activant, vous acceptez de les utiliser en toute connaissance de cause.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "Utiliser TronGrid.io",
+          "description": "Utilisez TronGrid sans proxy Ledger."
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "Tester les traductions",
+          "description": "Affichez les langues non publiées dans la liste Langue d'affichage de l'onglet Général."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "Mode développeur",
+          "description": "Afficher les applications développeurs et testnet dans le Gestionnaire."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "Recherche de compte étendue",
+          "description": "Recherchez des comptes ayant des chemins de dérivation erronés. Veuillez envoyer tout actif trouvé vers un compte classique."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "API Explorateurs Expérimentales",
+          "description": "Testez une version en développement des explorateurs de blockchain de Ledger. Modifier ce paramètre peut affecter le solde des comptes, la synchronisation et la fonctionnalité Envoyer.\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "Gap limit personnalisée",
+          "description": "Personnalisez la gap limit pour tous les comptes. Une valeur supérieure à la valeur par défaut (20) permet de rechercher des coins sur les adresses publiques inutilisées. Réservé aux utilisateurs avancés : potentiels problèmes de compatibilité lors de la restauration des comptes."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "Fournisseur du Gestionnaire",
+          "description": "Changer le fournisseur d'applications dans le Gestionnaire peut rendre impossible l'installation ou désinstallation d'applications sur votre appareil Ledger."
         }
       }
     },
@@ -2634,7 +2634,7 @@
     "toastType": {
       "announcement": "Actualités",
       "operation": "Opération",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Succès"
     }
   },
   "informationCenter": {
@@ -2736,7 +2736,7 @@
         "hasNoRecovery": "Première utilisation de votre {{deviceName}} ?",
         "hasRecovery": "Vous avez déjà une phrase de récupération ?",
         "separator": "ou",
-        "switchDevice": "Switch device",
+        "switchDevice": "Autre appareil",
         "options": {
           "1": {
             "heading": "Initialisation",
