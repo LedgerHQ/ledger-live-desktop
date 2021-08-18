@@ -28,7 +28,7 @@ function reactTemplate(
   return tpl.ast`
     ${imports};
     ${`type Props = {
-  size: number;
+  size?: number;
   color?: string;
 }`}
 
