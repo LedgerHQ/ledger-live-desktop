@@ -27,7 +27,7 @@ const Label = styled(Text).attrs({ type: "body", fontWeight: "500" })`
 
   /* CHECKED VARIANT */
   ${Input}:checked ~ & {
-    color: ${props => props.theme.colors.palette.v2.primary.Dark};
+    color: ${props => props.theme.colors.palette.v2.primary.dark};
   }
 `;
 
@@ -68,8 +68,8 @@ const Switcher = styled.div`
     width: calc(calc(var(--ll-switch-width) / 2) - var(--ll-switch-padding));
     height: calc(calc(var(--ll-switch-width) / 2) - var(--ll-switch-padding));
     top: var(--ll-switch-padding);
-    left: var(--ll-switch-padding);
-    transition: left 0.25s;
+    transform: translateX(var(--ll-switch-padding));
+    transition: transform 0.25s;
   }
 
   /* SMALL VARIANT */
@@ -80,10 +80,10 @@ const Switcher = styled.div`
 
   /* CHECKED VARIANT */
   ${Input}:checked ~ & {
-    background: ${props => props.theme.colors.palette.v2.primary.Dark};
+    background: ${props => props.theme.colors.palette.v2.primary.dark};
 
     &:before {
-      left: calc(var(--ll-switch-width) / 2);
+      transform: translateX(calc(var(--ll-switch-width) / 2));
     }
   }
 `;
@@ -109,7 +109,6 @@ const Switch = ({
 }: SwitchProps): JSX.Element => {
   const handleFocusKeyDown = (e: React.FormEvent<HTMLDivElement> & { key: string }) => {
     if (e.key.match(/enter/i)) onChange(e);
-    return;
   };
 
   return (
