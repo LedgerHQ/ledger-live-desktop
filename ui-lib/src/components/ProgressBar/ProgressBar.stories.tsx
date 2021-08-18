@@ -2,7 +2,7 @@ import React from "react";
 import ProgressBar, { Props } from "@components/ProgressBar";
 
 export default {
-  title: "Navigation/ProgressBars/Progress Bar",
+  title: "Navigation/ProgressBars/SidePanel",
   component: ProgressBar,
   argTypes: {
     activeIndex: {

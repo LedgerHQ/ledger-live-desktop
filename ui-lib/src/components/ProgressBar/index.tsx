@@ -19,7 +19,7 @@ export interface Props {
  * The state of a progress bar step.
  */
 type StepState = "pending" | "current" | "completed";
-type StepProps = {
+export type StepProps = {
   /**
    * State of the step.
    */
