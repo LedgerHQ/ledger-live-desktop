@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useMemo, createContext } from "react";
 import styled from "styled-components";
 import Flex from "@ui/components/Layout/Flex";
 import SideBarItem from "./components/SideBarItem/SideBarItem";
@@ -43,9 +43,10 @@ export const SideBarContext = createContext<Partial<SideBarContextType>>({});
 
 const SideBar = ({ children, onToggle, isExpanded = true }: SideBarProps): JSX.Element => {
   const [isToggleDisplayed, setToggleDisplayed] = useState(false);
+  const providerValue = useMemo(() => ({ isExpanded, onToggle }), [isExpanded, onToggle]);
 
   return (
-    <SideBarContext.Provider value={{ isExpanded, onToggle }}>
+    <SideBarContext.Provider value={providerValue}>
       <CSSTransition in={isExpanded} timeout={300} classNames="nav">
         <Nav
           flexDirection="column"
