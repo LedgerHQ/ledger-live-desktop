@@ -6,10 +6,15 @@ import Flex from "@ui/components/Layout/Flex";
 const Container = styled(Flex).attrs({ alignItems: "center", flexDirection: "row" })`
   width: fit-content;
   column-gap: 12px;
+  cursor: pointer;
 
   /* reversed VARIANT */
   &[data-reversed="true"] {
     flex-direction: row-reverse;
+  }
+
+  &[data-disabled="true"] {
+    cursor: unset;
   }
 `;
 
@@ -45,7 +50,6 @@ const Switcher = styled.div`
   height: var(--ll-switch-height);
 
   transition: background 200ms;
-  cursor: pointer;
 
   &:before,
   &:after {
@@ -111,29 +115,23 @@ const Switch = ({
     if (e.key.match(/enter/i)) onChange(e);
   };
 
+  const handleClick = (e: React.FormEvent<HTMLDivElement>) => {
+    if (!disabled) onChange(e);
+  };
+
   return (
-    <Container data-reversed={reversed}>
-      <Input
-        type="checkbox"
-        name={name}
-        id={name}
-        disabled={disabled}
-        checked={checked}
-        onChange={() => {}}
-      />
-      <Switcher
-        role="button"
-        onClick={onChange}
-        data-size={size}
-        tabIndex={0}
-        onKeyDown={handleFocusKeyDown}
-        aria-pressed={checked}
-      />
-      {label ? (
-        <Label forwardedAs="label" htmlFor={name}>
-          {label}
-        </Label>
-      ) : null}
+    <Container
+      role="button"
+      data-reversed={reversed}
+      data-disabled={disabled}
+      onClick={handleClick}
+      tabIndex={0}
+      aria-pressed={checked}
+      onKeyDown={handleFocusKeyDown}
+    >
+      <Input type="checkbox" name={name} id={name} disabled={disabled} checked={checked} />
+      <Switcher data-size={size} />
+      {label ? <Label>{label}</Label> : null}
     </Container>
   );
 };
