@@ -39,9 +39,9 @@ export type StepProps = {
 };
 
 export const Item = {
-  Container: styled.div.attrs(_ => ({
+  Container: styled.div.attrs({
     mx: 2,
-  }))<ColorProps & BorderProps & SpaceProps>`
+  })<ColorProps & BorderProps & SpaceProps>`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,20 +56,20 @@ export const Item = {
     align-self: stretch;
     ${space}
   `,
-  Current: styled.div.attrs(_ => ({
+  Current: styled.div.attrs({
     backgroundColor: "palette.v2.primary.dark",
-  }))<ColorProps>`
+  })<ColorProps>`
     width: 6px;
     height: 6px;
-    border-radius: 9999px;
+    border-radius: 6px;
     ${color}
   `,
-  Pending: styled.div.attrs(_ => ({
+  Pending: styled.div.attrs({
     backgroundColor: "palette.v2.text.secondary",
-  }))<ColorProps>`
+  })<ColorProps>`
     width: 4px;
     height: 4px;
-    border-radius: 9999px;
+    border-radius: 4px;
     ${color}
   `,
   Completed: (): JSX.Element => <CheckAlone size={16} />,
