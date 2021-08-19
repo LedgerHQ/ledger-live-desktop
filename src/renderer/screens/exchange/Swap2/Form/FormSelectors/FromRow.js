@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
@@ -17,13 +17,21 @@ import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 type Props = {
   fromAccount: { account: Account | TokenAccount, parentAccount: ?Account } | null,
   setFromAccount: (pickedAccount: Account | TokenAccount, accounts: Array<Account>) => void,
+  isMaxEnabled: boolean,
+  setIsMaxEnabled: ((boolean) => boolean) => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
 };
 
-function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount }: Props) {
+function FromRow({
+  fromAmount,
+  setFromAmount,
+  fromAccount,
+  setFromAccount,
+  isMaxEnabled,
+  setIsMaxEnabled,
+}: Props) {
   const accounts = useSelector(shallowAccountsSelector);
-  const [maxFrom, setMaxFrom] = useState(false);
   const unit = fromAccount && getAccountUnit(fromAccount?.account);
   const { t } = useTranslation();
 
@@ -31,6 +39,11 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount }: Pro
     if (pickedAccount === null || pickedAccount === undefined) return;
     // $FlowFixMe (because the select account returns me the ChildAccount type)
     setFromAccount(pickedAccount, accounts);
+  };
+
+  const handleMaxChange = async () => {
+    if (!fromAccount) return;
+    setIsMaxEnabled(value => !value);
   };
 
   return (
@@ -48,7 +61,12 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount }: Pro
           <Text marginRight={1} fontWeight="500">
             {t("swap2.form.from.max")}
           </Text>
-          <Switch medium isChecked={maxFrom} onChange={_ => setMaxFrom(value => !value)} />
+          <Switch
+            medium
+            isChecked={isMaxEnabled}
+            onChange={handleMaxChange}
+            disabled={!fromAccount}
+          />
         </Box>
       </Box>
       <Box horizontal mb="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
@@ -67,7 +85,7 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount }: Pro
           <InputCurrency
             value={fromAmount}
             onChange={setFromAmount}
-            disabled={!fromAccount || maxFrom}
+            disabled={!fromAccount || isMaxEnabled}
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}

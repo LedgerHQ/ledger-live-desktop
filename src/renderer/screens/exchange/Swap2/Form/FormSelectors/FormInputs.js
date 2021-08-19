@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
@@ -14,6 +14,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 
 const RoundButton = styled(Button)`
   padding: 8px;
@@ -56,6 +57,22 @@ export default function FormInputs() {
   const [fromAmount, setFromAmount] = useState(null);
   const [toAccount, setToAccount] = useState<toAccountType>(null);
   const [toAmount, setToAmount] = useState(null);
+  const [isMaxEnabled, setIsMaxEnabled] = useState(false);
+
+  // TODO: would be handled by the reducer in the future
+  useEffect(() => {
+    const updateAmountToMaximum = async (): Promise<void> => {
+      const bridge = getAccountBridge(fromAccount?.account, fromAccount?.parentAccount);
+      const amount = await bridge.estimateMaxSpendable({
+        account: fromAccount?.account,
+        parentAccount: fromAccount?.parentAccount,
+      });
+      setFromAmount(amount);
+    };
+
+    if (isMaxEnabled) updateAmountToMaximum();
+    else if (fromAccount) setFromAmount(null);
+  }, [isMaxEnabled, fromAccount]);
 
   // TODO: would be handled by the reducer in the future
   const handleSetToAccountChange = (selectSate: useSelectableCurrenciesReturnType) => {
@@ -100,6 +117,8 @@ export default function FormInputs() {
         setFromAccount={handleSetFromAccountChange}
         fromAmount={fromAmount}
         setFromAmount={setFromAmount}
+        isMaxEnabled={isMaxEnabled}
+        setIsMaxEnabled={setIsMaxEnabled}
       />
 
       <Box horizontal justifyContent="center" alignContent="center">
