@@ -81,21 +81,39 @@ const StepText = styled(Text)<{ inactive?: boolean }>`
 `;
 
 const BaseSeparator = styled.div<{ inactive?: boolean }>`
-  border: 1px solid;
-  height: 0px;
-  border-color: ${p =>
-    p.inactive ? p.theme.colors.palette.v2.grey.border : p.theme.colors.palette.v2.text.default};
+  flex: 1;
+  position: relative;
+  overflow-x: hidden;
+  background-color: ${p => p.theme.colors.palette.v2.grey.border};
+  height: 2px;
+  top: 12px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: ${p => (p.inactive ? "translateX(calc(-100% - 1px))" : "translateX(0)")};
+    transition: 0.25s transform;
+    transition-timing-function: linear;
+    border-top: 2px solid;
+    border-color: ${p => p.theme.colors.palette.v2.text.default};
+  }
 `;
+
 const Separator = {
   Step: styled(BaseSeparator)`
-    flex: 1;
-    position: relative;
-    top: 12px;
+    &::after {
+      transition-delay: 0.1s;
+    }
   `,
-  Item: styled(BaseSeparator)`
-    flex: 1;
-    top: 12px;
-    position: relative;
+  Item: styled(BaseSeparator)<{ position: string }>`
+    &::after {
+      transition-duration: 0.1s;
+      transition-delay: ${p =>
+        (p.position === "left" && !p.inactive) || (p.position === "right" && p.inactive)
+          ? "0.35s"
+          : "0s"};
+    }
   `,
 };
 
@@ -110,7 +128,9 @@ export const Step = memo(function Step({
   return (
     <Flex flexDirection="column" alignItems="center">
       <Item.Spacer mb={2}>
-        {(!hideLeftSeparator && <Separator.Item inactive={inactive} />) || <Flex flex="1" />}
+        {(!hideLeftSeparator && <Separator.Item inactive={inactive} position="left" />) || (
+          <Flex flex="1" />
+        )}
         {state === "pending" ? (
           <Item.Container>
             <Item.Pending />
@@ -124,7 +144,9 @@ export const Step = memo(function Step({
             <Item.Completed />
           </Item.Container>
         )}
-        {(nextState && <Separator.Item inactive={nextInactive} />) || <Flex flex="1" />}
+        {(nextState && <Separator.Item inactive={nextInactive} position="right" />) || (
+          <Flex flex="1" />
+        )}
       </Item.Spacer>
       <StepText inactive={inactive} type="subTitle">
         {label}
