@@ -20,7 +20,7 @@ const CarouselWrapper = styled.div`
   cursor: pointer;
   position: relative;
   flex: 1;
-  background: ${(p) => p.theme.colors.palette.v2.text.default};
+  background: ${p => p.theme.colors.palette.v2.text.default};
 `;
 
 const Controllers = styled(Flex)`
@@ -29,7 +29,7 @@ const Controllers = styled(Flex)`
   bottom: 6px;
   flex-direction: row;
   column-gap: 8px;
-  color: ${(p) => p.theme.colors.palette.v2.background.default};
+  color: ${p => p.theme.colors.palette.v2.background.default};
 
   > div {
     &:hover {
@@ -50,13 +50,13 @@ const Bullets = styled.div<{ active?: number }>`
     position: relative;
     height: 2px;
     width: 24px;
-    background: ${(p) => p.theme.colors.palette.v2.background.default};
+    background: ${p => p.theme.colors.palette.v2.background.default};
     opacity: 0.5;
     &:hover {
       opacity: 0.75;
     }
 
-    &:nth-child(${(p) => p.active}) {
+    &:nth-child(${p => p.active}) {
       opacity: 1;
       &:hover {
         opacity: 0.75;
@@ -77,7 +77,7 @@ const Close = styled.div`
   position: absolute;
   top: 18px;
   right: 14px;
-  color: ${(p) => p.theme.colors.palette.v2.background.default};
+  color: ${p => p.theme.colors.palette.v2.background.default};
   &:hover {
     opacity: 0.5;
   }
@@ -85,15 +85,18 @@ const Close = styled.div`
 
 const DismissWrapper = styled.div`
   color: white;
-  font-size: 100px;
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-direction: column;
+  padding: 44px;
+  row-gap: 20px;
 `;
 
 type Props = {
   timeout?: number;
   queue: [];
+  isDismissed: boolean;
   onDismiss: () => void;
 };
 
@@ -101,6 +104,7 @@ const DEFAULT_TIMEOUT = 7000;
 const Carousel = ({
   timeout = DEFAULT_TIMEOUT,
   queue,
+  isDismissed,
   onDismiss,
 }: Props): React.ReactElement | null => {
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
@@ -109,13 +113,10 @@ const Carousel = ({
   const [index, setIndex] = useState(0);
   const [wantToDismiss, setWantToDismiss] = useState(false);
   const [paused, setPaused] = useState(false);
-  const childFactory = useCallback(
-    (child) => React.cloneElement(child, { direction }),
-    [direction],
-  );
+  const childFactory = useCallback(child => React.cloneElement(child, { direction }), [direction]);
 
   const wrappedSetIndex = useCallback(
-    (newIndex) => {
+    newIndex => {
       setDirection(newIndex > index ? "left" : "right");
       setIndex(newIndex);
     },
@@ -147,13 +148,27 @@ const Carousel = ({
     if (!paused) intervalRef.current = setInterval(onSlide, _timeout);
   }, [onSlide, paused, timeout]);
 
-  if (!queue?.length) return null;
+  useEffect(() => {
+    if (isDismissed) setWantToDismiss(false);
+  }, [isDismissed]);
+
+  if (!queue?.length || isDismissed) return null;
 
   return (
     <CarouselWrapper id={"carousel"} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {wantToDismiss ? (
         <DismissWrapper>
-          <Text color="white">{"pending"}</Text>
+          <Text color="palette.v2.background.default" ff="Inter|Medium" fontSize={13}>
+            {"This banner will not show up again until there is a new announcement"}
+          </Text>
+          <Flex>
+            <Button color="palette.v2.background.default" type="secondary" onClick={onDismiss}>
+              {"Confirm"}
+            </Button>
+            <Button color="palette.v2.background.default" type="primary" onClick={onCancelDismiss}>
+              {"Show again"}
+            </Button>
+          </Flex>
         </DismissWrapper>
       ) : (
         <div>

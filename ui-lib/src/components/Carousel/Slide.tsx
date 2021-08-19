@@ -14,30 +14,22 @@ const Wrapper = styled(Flex)<{ image?: string }>`
   background: url(${(p) => p.image}) no-repeat ${(p) => p.theme.colors.palette.v2.text.default};
   background-size: contain;
   background-position: right 60px bottom;
-  color: ${(p) => p.theme.colors.palette.v2.background.default};
 `;
 
 type Props = {
-  url?: string;
-  path?: string;
+  onClick: () => void;
   title: string;
   description: string;
   image: any;
 };
 
-const Slide = ({ title, description, image, url, path }: Props): React.ReactElement => {
-  const onClick = useCallback(() => {
-    // Nb navigate to either an internal path or an external url
-    // TODO implement the logic fork here
-    alert("Should navigate at this point");
-  }, []);
-
+const Slide = ({ title, description, image, onClick }: Props): React.ReactElement => {
   return (
     <Wrapper key={"key"} image={image} onClick={onClick}>
-      <Text color="background.default" ff="Inter|Regular" fontSize={10}>
+      <Text color="palette.v2.background.default" ff="Inter|Regular" fontSize={10}>
         {title}
       </Text>
-      <Text color="background.default" ff="Alpha|Medium" textTransform="uppercase" fontSize={20}>
+      <Text color="palette.v2.background.default" ff="Alpha|Medium" textTransform="uppercase" fontSize={20}>
         {description}
       </Text>
     </Wrapper>
