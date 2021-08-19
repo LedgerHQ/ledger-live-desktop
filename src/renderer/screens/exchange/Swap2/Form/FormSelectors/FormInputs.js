@@ -12,6 +12,7 @@ import type {
   TokenCurrency,
   CryptoCurrency,
 } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 
 const RoundButton = styled(Button)`
@@ -31,27 +32,27 @@ export type toAccountType =
   | {
       // User already has an account to accept target currency
       targetAccountExists: true,
-      data: {
-        account: Account | TokenAccount,
-        parentAccount: ?Account,
-        currency: ?(TokenCurrency | CryptoCurrency),
-      },
+      account: Account | TokenAccount,
+      parentAccount: ?Account,
+      currency: ?(TokenCurrency | CryptoCurrency),
     }
   | {
       // User doesn't have an account to accept target currency
       targetAccountExists: false,
-      data: {
-        account: null,
-        parentAccount: null,
-        currency: ?(TokenCurrency | CryptoCurrency),
-      },
+      account: null,
+      parentAccount: null,
+      currency: ?(TokenCurrency | CryptoCurrency),
     }
   // No target currency selected
   | null;
 
 export default function FormInputs() {
   // TODO: would be moved to a reducer
-  const [fromAccount, setFromAccount] = useState<Account | TokenAccount | null>(null);
+  const [fromAccount, setFromAccount] = useState<{
+    account: Account | TokenAccount,
+    parentAccount: ?Account,
+    currency: ?(TokenCurrency | CryptoCurrency),
+  } | null>(null);
   const [fromAmount, setFromAmount] = useState(null);
   const [toAccount, setToAccount] = useState<toAccountType>(null);
   const [toAmount, setToAmount] = useState(null);
@@ -61,28 +62,42 @@ export default function FormInputs() {
     const data = selectSate.account
       ? {
           targetAccountExists: true,
-          data: {
-            account: selectSate.account,
-            parentAccount: selectSate.parentAccount,
-            currency: selectSate.currency,
-          },
+          account: selectSate.account,
+          parentAccount: selectSate.parentAccount,
+          currency: selectSate.currency,
         }
       : {
           targetAccountExists: false,
-          data: { account: null, parentAccount: null, currency: selectSate.currency },
+          account: null,
+          parentAccount: null,
+          currency: selectSate.currency,
         };
 
     setToAccount(data);
   };
 
-  // TODO: would be a dispatch call in the future
+  // TODO: would be handled by the reducer in the future
+  const handleSetFromAccountChange = (
+    pickedAccount: Account | TokenAccount,
+    accounts: Array<Account>,
+  ): void => {
+    const parentAccount =
+      pickedAccount?.type !== "Account"
+        ? accounts.find(a => a.id === pickedAccount?.parentId)
+        : null;
+
+    const currency = getAccountCurrency(pickedAccount);
+    setFromAccount({ account: pickedAccount, parentAccount, currency });
+  };
+
+  // TODO: would be handled by the reducer in the future
   const resetToAccount = () => setToAccount(null);
 
   return (
     <section>
       <FromRow
         fromAccount={fromAccount}
-        setFromAccount={setFromAccount}
+        setFromAccount={handleSetFromAccountChange}
         fromAmount={fromAmount}
         setFromAmount={setFromAmount}
       />
@@ -96,7 +111,7 @@ export default function FormInputs() {
         setToAccount={handleSetToAccountChange}
         toAmount={toAmount}
         setToAmount={setToAmount}
-        fromAccount={fromAccount}
+        fromAccount={fromAccount?.account}
         resetToAccount={resetToAccount}
       />
     </section>

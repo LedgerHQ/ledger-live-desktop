@@ -1,8 +1,7 @@
 // @flow
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Trans, withTranslation } from "react-i18next";
-import type { TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
@@ -16,17 +15,23 @@ import { FormLabel } from "./FormLabel";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
-  fromAccount: ?Account | TokenAccount,
-  setFromAccount: ?(Account | TokenAccount) => void,
+  fromAccount: { account: Account | TokenAccount, parentAccount: ?Account } | null,
+  setFromAccount: (pickedAccount: Account | TokenAccount, accounts: Array<Account>) => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
-  t: TFunction,
 };
 
-function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: Props) {
+function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount }: Props) {
   const accounts = useSelector(shallowAccountsSelector);
   const [maxFrom, setMaxFrom] = useState(false);
-  const unit = fromAccount && getAccountUnit(fromAccount);
+  const unit = fromAccount && getAccountUnit(fromAccount?.account);
+  const { t } = useTranslation();
+
+  const handleAccountChange = pickedAccount => {
+    if (pickedAccount === null || pickedAccount === undefined) return;
+    // $FlowFixMe (because the select account returns me the ChildAccount type)
+    setFromAccount(pickedAccount, accounts);
+  };
 
   return (
     <>
@@ -38,12 +43,10 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         mb={2}
         color={"palette.text.shade40"}
       >
-        <FormLabel>
-          <Trans i18nKey="swap2.form.from.title" />
-        </FormLabel>
+        <FormLabel>{t("swap2.form.from.title")}</FormLabel>
         <Box horizontal alignItems="center">
           <Text marginRight={1} fontWeight="500">
-            <Trans i18nKey="swap2.form.from.max" />
+            {t("swap2.form.from.max")}
           </Text>
           <Switch medium isChecked={maxFrom} onChange={_ => setMaxFrom(value => !value)} />
         </Box>
@@ -52,9 +55,9 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         <Box width="50%">
           <SelectAccount
             accounts={accounts}
-            value={fromAccount}
+            value={fromAccount?.account}
             // $FlowFixMe
-            onChange={setFromAccount}
+            onChange={handleAccountChange}
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
             withSubAccounts
@@ -79,4 +82,4 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
   );
 }
 
-export default withTranslation()(FromRow);
+export default FromRow;

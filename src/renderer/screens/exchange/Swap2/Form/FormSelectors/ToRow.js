@@ -33,7 +33,7 @@ export default function ToRow({
   resetToAccount,
 }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
-  const toCurrency = toAccount?.data?.account ? getAccountCurrency(toAccount.data.account) : null;
+  const toCurrency = toAccount?.account ? getAccountCurrency(toAccount.account) : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
   const unit = selectState.account ? getAccountUnit(selectState.account) : undefined;
