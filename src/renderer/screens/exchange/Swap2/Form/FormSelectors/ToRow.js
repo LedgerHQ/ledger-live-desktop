@@ -21,7 +21,6 @@ type Props = {
   setToAccount: useSelectableCurrenciesReturnType => void,
   toAmount: ?BigNumber,
   setToAmount: BigNumber => void,
-  resetToAccount: () => void,
 };
 
 export default function ToRow({
@@ -30,24 +29,12 @@ export default function ToRow({
   toAmount,
   setToAmount,
   fromAccount,
-  resetToAccount,
 }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
-  const toCurrency = toAccount?.data?.account ? getAccountCurrency(toAccount.data.account) : null;
+  const toCurrency = toAccount?.account ? getAccountCurrency(toAccount.account) : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
   const unit = selectState.account ? getAccountUnit(selectState.account) : undefined;
-
-  /* @dev: Check if the selected currency is still available
-   ** - If not, reset the state */
-  useEffect(() => {
-    const isCurrentValueValids = selectState.currencies.find(({ id }) => id === toCurrency?.id);
-
-    if (!isCurrentValueValids) {
-      resetToAccount(); // TODO: would be a dispatch call in the future
-      selectState.setCurrency(null);
-    }
-  }, [selectState.currencies]);
 
   /* @dev: save picked account */
   useEffect(() => {
