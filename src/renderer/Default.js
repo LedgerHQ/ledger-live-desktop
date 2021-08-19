@@ -56,7 +56,7 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
   const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
 

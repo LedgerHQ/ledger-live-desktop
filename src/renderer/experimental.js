@@ -67,12 +67,16 @@ export const experimentalFeatures: Feature[] = [
     description:
       "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account.",
   },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_SWAP",
-    title: "New SWAP interface ",
-    description: "Use the new experimental swap interface",
-  },
+  ...(__DEV__
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_SWAP",
+          title: "New SWAP interface ",
+          description: "Use the new experimental swap interface",
+        },
+      ]
+    : []),
   ...(deltaExperimentalExplorers.length
     ? [
         {
