@@ -1,15 +1,17 @@
 import * as React from "react";
-type Props = {
-  size: number;
-  color?: string;
-};
 
-function LedgerLiveAltRegular({ size = 16, color = "currentColor" }: Props) {
+type Props = { width?: number | string; height?: number | string; color?: string };
+
+function LedgerLiveAltRegular({
+  width = 38,
+  height = 32,
+  color = "currentColor",
+}: Props): JSX.Element {
   return (
     <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
