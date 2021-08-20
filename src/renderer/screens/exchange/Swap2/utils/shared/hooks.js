@@ -6,7 +6,7 @@ import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/ty
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
-import type { useCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
+import type { UseCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
@@ -74,10 +74,10 @@ export const useSwapProviders = () => {
  ** RestCurrencyAccountSelectReturnType/AccountParentAccountType types
  */
 type RestCurrencyAccountSelectReturnType = $Rest<
-  useCurrencyAccountSelectReturnType,
+  UseCurrencyAccountSelectReturnType,
   {|
-    account: $PropertyType<useCurrencyAccountSelectReturnType, "account">,
-    parentAccount: $PropertyType<useCurrencyAccountSelectReturnType, "parentAccount">,
+    account: $PropertyType<UseCurrencyAccountSelectReturnType, "account">,
+    parentAccount: $PropertyType<UseCurrencyAccountSelectReturnType, "parentAccount">,
   |},
 >;
 type AccountParentAccountType = { account: Account | TokenAccount, parentAccount: ?Account };
