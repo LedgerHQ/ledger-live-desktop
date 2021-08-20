@@ -13,27 +13,18 @@ if (!fs.existsSync(reactDir)) {
 }
 
 // Component template
-function reactTemplate(
-  { template },
-  opts,
-  { imports, interfaces, componentName, _, jsx, exports },
-) {
-  const plugins = ["js"];
-
-  if (opts.typescript) {
-    plugins.push("typescript");
-  }
-
+function reactTemplate({ template }, _, { imports, interfaces, componentName, __, jsx, exports }) {
+  const plugins = ["typescript"];
   const tpl = template.smart({ plugins });
+
   return tpl.ast`
-    ${imports};
-    ${`type Props = {
-  size: number;
-  color?: string;
-}`}
+    ${imports}
+
+    type Props = { size?: number | string; color?: string; };
 
     ${interfaces}
-    function ${componentName}(${`{ size = 16, color = "currentColor" }: Props`}) {
+
+    function ${componentName} ({ size = 16, color = "currentColor" }: Props): JSX.Element {
       return ${jsx};
     }
     
@@ -75,7 +66,6 @@ glob(`${rootDir}/raw/**/*.svg`, (err, icons) => {
       expandProps: false,
       componentName: name,
       svgProps: {
-        viewBox: "0 0 24 24",
         height: "{size}",
         width: "{size}",
       },

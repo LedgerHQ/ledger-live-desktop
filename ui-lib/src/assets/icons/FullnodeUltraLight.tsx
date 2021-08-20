@@ -1,10 +1,10 @@
 import * as React from "react";
 type Props = {
-  size: number;
+  size?: number | string;
   color?: string;
 };
 
-function FullnodeUltraLight({ size = 16, color = "currentColor" }: Props) {
+function FullnodeUltraLight({ size = 16, color = "currentColor" }: Props): JSX.Element {
   return (
     <svg
       width={size}

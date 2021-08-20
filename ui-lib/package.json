@@ -15,7 +15,9 @@
     "storybook": "start-storybook -p 6006 -s ./src",
     "build-storybook": "build-storybook",
     "build": "tsc",
-    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "icons:generate": "node scripts/buildReactIcons",
+    "posticons:generate": "eslint src/assets/icons --ext .js,.jsx,.ts,.tsx --fix --quiet"
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.5",
