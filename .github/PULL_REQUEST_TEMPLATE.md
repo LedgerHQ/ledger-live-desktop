@@ -9,7 +9,7 @@
 
 ## Expectations to reach
 
-🖤  PR must pass CI, merge develop if conflicts, do not force push. Thanks!
+💻 PR must pass CI, merge develop if conflicts, do not force push. Thanks!
 
 - **on QA**: at least one of these two checkboxes must be checked:
   - [ ] a specific test planned is defined on Jira
