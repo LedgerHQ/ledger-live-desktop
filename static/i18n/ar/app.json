@@ -2491,23 +2491,23 @@
         },
         "managerDevMode": {
           "title": "وضع المطوّر",
-          "description": "Show developer and testnet apps in the Manager."
+          "description": "اعرض تطبيقات المطوّر و Testnet في المدير."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "بحث موسع عن الحساب",
+          "description": "البحث عن الحسابات ذات مسارات اشتقاق غير صحيحة. الرجاء إرسال الأصول التي قد تجدها إلى الحساب العادي."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "API للمستكشفين التجريبيين",
+          "description": "جرب نسخة قادمة من مستكشفي بلوكشين بLedger. تغيير هذا الإعداد قد يؤثر على رصيد الحساب ومزامنته وكذلك ميزة الإرسال. (<0></0>)"
         },
         "keychainObservableRange": {
           "title": "تخصيص حد الفجوة",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "description": "تخصيص حد الفجوة لجميع الحسابات. زيادة هذه القيمة فوق القيمة الافتراضية (20) يؤدي إلى مسح المزيد من العناوين العامة غير المستخدمة للعملات النقدية. للمستخدمين المتقدمين فقط، قد يؤدي ذلك إلى الإضرار بالتوافق عند استعادة حسابك."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "مزود المدير",
+          "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
         }
       }
     },
