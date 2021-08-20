@@ -1,9 +1,15 @@
 diff --git i/package.json w/package.json
-index fdc034cfe..367fb2f8d 100644
+index fdc034cfe..2cb8e818e 100644
 --- i/package.json
 +++ w/package.json
-@@ -7,7 +7,7 @@
-   "description": "Ledger Live - Desktop",
+@@ -3,11 +3,11 @@
+     "node": ">=12"
+   },
+   "name": "ledger-live-desktop",
+-  "productName": "Ledger Live",
+-  "description": "Ledger Live - Desktop",
++  "productName": "Ledger Live Canary",
++  "description": "Ledger Live - Desktop Canary",
    "version": "2.32.2",
    "author": "Ledger Live Team <team-live@ledger.fr>",
 -  "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
