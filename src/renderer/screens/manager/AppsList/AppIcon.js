@@ -73,7 +73,7 @@ function AppIcon({ app, theme }: Props) {
   ) : (
     <IconContainer loading={loading} size={size}>
       <ManagerAppIconContainer>
-        <ManagerAppIcon width={size} height={size} />
+        <ManagerAppIcon size={size} />
       </ManagerAppIconContainer>
       <Image alt="" onLoad={onLoad} resource={iconUrl} width={size} height={size} />
     </IconContainer>
