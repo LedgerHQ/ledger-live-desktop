@@ -2061,9 +2061,9 @@
       "electionOpen": "يجري حاليًا انتخاب مدققين جدد. ولذلك، لن تكون عمليات الرهن متاحة لمدة 15 دقيقة بحد أقصى.",
       "electionOpenTooltip": "يتم تعطيل هذه العملية أثناء انتخاب المدققين.",
       "externalControllerTooltip": "هذا الحساب يخضع للسيطرة حساب آخر.",
-      "externalControllerUnsupported": "<0> يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. </0><1> للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة.</1>",
+      "externalControllerUnsupported": "<0> يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. </0><1> للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة به.</1>",
       "externalStashTooltip": "هذا الحساب يتحكم في حساب آخر.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0> هذا الحساب هو وحدة تحكم حساب تخزين منفصل بعنوان <0>{{stashAddress}}</0>. </0><1>للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين الخاص بك على أنه وحدة التحكم الخاصة به.</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "لا توجد ترشيحات مفعلة.",
@@ -2253,8 +2253,8 @@
         },
         "setController": {
           "title": "تغيير وحدة التحكم",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "description": "قم تعيين حسابك في Ledger كوحدة التحكم خاصة به",
+          "info": "لا يدعم Ledger Live العمليات على حسابات التخزين و حسابات وحدة التحكم المنفصلة."
         }
       },
       "steps": {
@@ -2401,8 +2401,8 @@
         "button": "تم",
         "title": "قم بالمسح ضوئي للتصدير إلى الجوّال",
         "listTitle": "في تطبيق ليدجر لايف (Ledger Live) للجوّال:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step1": "اضغط على زر <highlight><icon>+</icon></highlight> في <highlight>حسابات</highlight>",
+        "step2": "اضغط على <highlight>استيراد حسابات سطح المكتب</highlight>",
         "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
