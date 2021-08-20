@@ -1,15 +1,15 @@
 
-## Context (issues, jira)
+## 🦒 Context (issues, jira)
 
 
 
-## Description / Demo (image or video)
+## 💻  Description / Demo (image or video)
 
 <!-- please attached an image or even better a video that demo what this PR do -->
 
-## Expectations to reach
+## 🖤  Expectations to reach
 
-💻 PR must pass CI, merge develop if conflicts, do not force push. Thanks!
+PR must pass CI, merge develop if conflicts, do not force push. Thanks!
 
 - **on QA**: at least one of these two checkboxes must be checked:
   - [ ] a specific test planned is defined on Jira
