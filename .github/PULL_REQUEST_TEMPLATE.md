@@ -18,6 +18,8 @@ PR must pass CI, merge develop if conflicts, do not force push. Thanks!
   - [ ] Option 1: **no impact**: The changes of this PR have ZERO impact on the userland (invisible for users)
   - [ ] Option 2: **atomic delivery**: the changes is atomic and complete (no partial delivery)
 
+PR must pass CI, merge develop if conflicts, do not force push. Thanks!
+
 <!--
 If expectations aren't met, please document it carefully (on the reason you can't check it) and what do you need from maintainers.
 -->
