@@ -30,6 +30,8 @@
     "nightly": "node ./tools/dist -n -v",
     "release": "node ./tools/dist --publish",
     "draft-release": "node ./tools/dist draft",
+    "draft-release-canary": "node ./tools/dist draft --canary",
+    "canary": "node ./tools/dist --publish --canary",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
     "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",

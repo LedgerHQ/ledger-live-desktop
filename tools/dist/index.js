@@ -94,11 +94,13 @@ const buildTasks = args => [
 ];
 
 const draftTasks = args => {
+  const { canary } = args;
   let draft;
 
   return [
     {
       title: "Health checks",
+      skip: () => !!canary,
       task: () => setupList(healthChecksTasks, args),
     },
     {
@@ -123,12 +125,12 @@ const draftTasks = args => {
 };
 
 const mainTask = (args = {}) => {
-  const { dirty, publish } = args;
+  const { dirty, publish, canary } = args;
 
   const tasks = [
     {
       title: "Health checks",
-      enabled: () => !!publish,
+      enabled: () => !!publish && !canary,
       task: () => setupList(healthChecksTasks, args),
     },
     {
@@ -193,6 +195,10 @@ yargs
         .option("publish", {
           type: "boolean",
           describe: "Publish the created artifacts on GitHub as a draft release",
+        })
+        .option("canary", {
+          type: "boolean",
+          describe: "used to disabled some check for canary build",
         }),
     args => runTasks(mainTask, args),
   )
@@ -205,7 +211,11 @@ yargs
   .command(
     "draft",
     "Prepare release on GitHub",
-    () => {},
+    yargs =>
+      yargs.option("canary", {
+        type: "boolean",
+        describe: "used to disabled some check for canary build",
+      }),
     args => runTasks(draftTasks, args),
   )
   .option("verbose", {
