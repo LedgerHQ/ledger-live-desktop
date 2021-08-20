@@ -44,7 +44,7 @@
         "button": "لنصوت!"
       },
       "developerCTA": {
-        "title": "للمبرمجين",
+        "title": "للمطوّرين",
         "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live.",
         "button": "الذهاب إلى البوابة"
       }
@@ -117,7 +117,7 @@
       "needsMigration": "أُنقر لتحديث الحساب",
       "error": "خطأ في المزامنة",
       "refresh": "تحديث",
-      "devTools": "أدوات المطورين"
+      "devTools": "أدوات المطوّرين"
     },
     "exchange": "تداول",
     "info": "معلومات",
@@ -2403,7 +2403,7 @@
         "listTitle": "في تطبيق ليدجر لايف (Ledger Live) للجوّال:",
         "step1": "اضغط على زر <highlight><icon>+</icon></highlight> في <highlight>حسابات</highlight>",
         "step2": "اضغط على <highlight>استيراد حسابات سطح المكتب</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step3": "قم بإجراء المسح الضوئي <highlight>لرمز LiveQR</highlight> حتى يصل شريط التحميل إلى 100%"
       }
     },
     "display": {
@@ -2429,12 +2429,12 @@
       "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
       "experimentalApps": "السماح بالتطبيقات التجريبية",
       "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
+      "catalogServer": "تعيين مزود الكتالوج",
+      "catalogServerDesc": "التبديل بين مصادر تطبيقات المنصة المتعددة",
+      "enablePlatformDevTools": "تمكين أدوات تطوير المنصة",
+      "enablePlatformDevToolsDesc": "تمكين فتح نافذة أدوات تطوير تطبيق المنصة",
       "addLocalApp": "إضافة تطبيق محلي",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
+      "addLocalAppDesc": "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton": "تصفح",
       "runLocalAppDeleteButton": "حذف",
       "runLocalAppOpenButton": "فتح"
@@ -2482,12 +2482,12 @@
       "disclaimer": "هذه ميزات تجريبية نقدمها \"كما هي\" لكي يختبرها مجتمعنا من المتمرسين على استخدام التكنولوجيا. من الممكن أن يتم تغيير هذه الميزات أو تعطيلها أو إزالتها في أي وقت. من خلال تمكينها، فإنك توافق على استخدامها على مسؤوليتك الخاصة.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "استخدم TronGrid.io",
+          "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "description": "يضيف اللغات غير المنشورة إلى قائمة اللغات في تبويب الإعدادات العامة."
         },
         "managerDevMode": {
           "title": "وضع المطوّر",
