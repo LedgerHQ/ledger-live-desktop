@@ -7,11 +7,13 @@ export default {
 };
 
 export const Item = (args: StepProps): JSX.Element => (
-  <div style={{ width: "150px" }}>
+  <div style={{ width: "75px" }}>
     <Step {...args} />
   </div>
 );
 Item.args = {
   state: "current",
   label: "label",
+  hideLeftSeparator: true,
+  nextState: undefined,
 };

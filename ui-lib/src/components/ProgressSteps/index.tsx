@@ -33,11 +33,19 @@ export type StepProps = {
    * The label to display.
    */
   label: string;
+  /**
+   * If true, hides the left "separator" bar that bridges the gap between the wider separator and the item.
+   */
+  hideLeftSeparator: boolean;
+  /**
+   * The next step state, or undefined if the current step is the last one.
+   */
+  nextState?: StepState;
 };
 
 export const Item = {
   Container: styled.div.attrs({
-    mx: 2,
+    mx: "8px",
   })<ColorProps & BorderProps & SpaceProps>`
     display: flex;
     justify-content: center;
@@ -82,23 +90,58 @@ const StepText = styled(Text)<{ inactive?: boolean; errored?: boolean }>`
       : p.theme.colors.palette.v2.text.default};
 `;
 
-const Separator = styled.div`
+const BaseSeparator = styled.div<{ inactive?: boolean }>`
   flex: 1;
   position: relative;
   overflow-x: hidden;
   background-color: ${p => p.theme.colors.palette.v2.grey.border};
   height: 1px;
   top: 12px;
-  min-width: 40px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: ${p => (p.inactive ? "translateX(calc(-100% - 1px))" : "translateX(0)")};
+    transition: 0.25s transform;
+    transition-timing-function: linear;
+    border-top: 1px solid;
+    border-color: ${p => p.theme.colors.palette.v2.text.default};
+  }
 `;
 
-export const Step = memo(function Step({ state, label }: StepProps): JSX.Element {
+const Separator = {
+  Step: styled(BaseSeparator)`
+    &::after {
+      transition-delay: 0.1s;
+    }
+  `,
+  Item: styled(BaseSeparator)<{ position: string }>`
+    &::after {
+      transition-duration: 0.1s;
+      transition-delay: ${p =>
+        (p.position === "left" && !p.inactive) || (p.position === "right" && p.inactive)
+          ? "0.35s"
+          : "0s"};
+    }
+  `,
+};
+
+export const Step = memo(function Step({
+  state,
+  label,
+  hideLeftSeparator,
+  nextState,
+}: StepProps): JSX.Element {
   const inactive = state === "pending";
+  const nextInactive = nextState === "pending";
   const errored = state === "errored";
   return (
     <Flex flexDirection="column" alignItems="center">
       <Item.Spacer mb="12px">
-        <Separator />
+        {(!hideLeftSeparator && <Separator.Item inactive={inactive} position="left" />) || (
+          <Flex flex="1" />
+        )}
         {state === "pending" ? (
           <Item.Container>
             <Item.Pending />
@@ -126,9 +169,11 @@ export const Step = memo(function Step({ state, label }: StepProps): JSX.Element
         ) : (
           <></>
         )}
-        <Separator />
+        {(nextState && <Separator.Item inactive={nextInactive} position="right" />) || (
+          <Flex flex="1" />
+        )}
       </Item.Spacer>
-      <StepText inactive={inactive} errored={errored} type="subTitle">
+      <StepText inactive={inactive} errored={errored} type="navigation">
         {label}
       </StepText>
     </Flex>
@@ -150,10 +195,11 @@ function ProgressSteps({ steps, activeIndex = 0, errored }: Props) {
     <Flex flexWrap="nowrap" justifyContent="space-between">
       {steps.map((step, idx) => {
         const state = getState(activeIndex, idx, errored);
+        const nextState = idx < steps.length - 1 ? getState(activeIndex, idx + 1) : undefined;
         return (
           <>
-            {idx > 0 && <Separator />}
-            <Step label={step} state={state} />
+            {idx > 0 && <Separator.Step inactive={state === "pending"} />}
+            <Step label={step} state={state} nextState={nextState} hideLeftSeparator={idx === 0} />
           </>
         );
       })}
