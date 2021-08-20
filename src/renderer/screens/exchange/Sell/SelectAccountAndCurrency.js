@@ -108,7 +108,7 @@ const SelectAccountAndCurrency = ({
   const dispatch = useDispatch();
 
   const openAddAccounts = useCallback(() => {
-    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, skipChooseCurrencyStep: true }));
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   }, [dispatch, currency]);
 
   const renderOptionOverride = ({ data: currency }: Option) => {

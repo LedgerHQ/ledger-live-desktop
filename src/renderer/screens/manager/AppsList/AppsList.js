@@ -121,7 +121,6 @@ const AppsList = ({
       reduxDispatch(
         openModal("MODAL_ADD_ACCOUNTS", {
           currency: currency || null,
-          skipChooseCurrencyStep: true,
         }),
       );
     },

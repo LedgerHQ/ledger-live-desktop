@@ -30,7 +30,7 @@ type Props = {
   closeModal: string => void,
   replaceAccounts: (Account[]) => void,
   blacklistedTokenIds?: string[],
-  skipChooseCurrencyStep?: ?boolean,
+  currency: ?CryptoCurrency | ?TokenCurrency,
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
@@ -143,7 +143,7 @@ const INITIAL_STATE = {
 
 class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE;
-  STEPS = createSteps(false);
+  STEPS = createSteps(this.props.currency);
 
   handleClickAdd = async () => {
     const { replaceAccounts, existingAccounts } = this.props;
@@ -201,14 +201,10 @@ class AddAccounts extends PureComponent<Props, State> {
 
   handleBeforeOpen = ({ data }) => {
     const { currency } = this.state;
-    if (this.props.skipChooseCurrencyStep) {
-      this.STEPS = createSteps(true);
-    }
     if (!currency) {
       if (data && data.currency) {
         this.setState({
           currency: data.currency,
-          skipChooseCurrencyStep: this.props.skipChooseCurrencyStep,
         });
       }
     }
@@ -250,11 +246,11 @@ class AddAccounts extends PureComponent<Props, State> {
       editedNames,
     };
     const title = <Trans i18nKey="addAccounts.title" />;
-
     const errorSteps = err ? [2] : [];
-    if (stepId === "chooseCurrency" && this.props.skipChooseCurrencyStep) {
+    if (stepId === "chooseCurrency" && this.props.currency) {
       stepId = "connectDevice";
     }
+    stepperProps.currency = stepperProps.currency || this.props.currency;
     return (
       <Modal
         centered
