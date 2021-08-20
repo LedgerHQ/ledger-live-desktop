@@ -14,9 +14,6 @@ export type Props = React.PropsWithChildren<{
    */
   initialActiveIndex?: number;
 }>;
-type ItemProps = {
-  active: boolean;
-};
 
 const Pill = styled.div<BorderProps>`
   display: inline-flex;
@@ -30,22 +27,32 @@ const Pill = styled.div<BorderProps>`
     border-bottom-right-radius: 20px;
     padding-right: 12px;
   }
+  & > :not(:first-child) {
+    border-left-width: 0;
+  }
   ${border};
 `;
-const Item = styled(Flex).attrs({ flex: 1, justifyContent: "center", alignItems: "center" })<
-  ItemProps
->`
+const Item = styled(Flex).attrs({ flex: 1, justifyContent: "center", alignItems: "center" })`
   cursor: pointer;
-  padding: 8px;
-  color: ${p =>
-    p.active ? p.theme.colors.palette.v2.text.contrast : p.theme.colors.palette.v2.text.secondary};
-  background-color: ${p =>
-    p.active
-      ? p.theme.colors.palette.v2.text.default
-      : p.theme.colors.palette.v2.background.default};
-  border: 1px solid
-    ${p =>
-      p.active ? p.theme.colors.palette.v2.text.default : p.theme.colors.palette.v2.grey.border};
+  padding: 8px 10px 8px 10px;
+  border: 1px solid;
+  &[data-active="false"] {
+    color: ${p => p.theme.colors.palette.v2.text.secondary};
+    background-color: ${p => p.theme.colors.palette.v2.background.default};
+    border-color: ${p => p.theme.colors.palette.v2.grey.border};
+  }
+  &[data-active="true"] {
+    color: ${p => p.theme.colors.palette.v2.text.contrast};
+    background-color: ${p => p.theme.colors.palette.v2.text.default};
+    border-color: ${p => p.theme.colors.palette.v2.text.default};
+
+    &:not(:last-child) {
+      border-right-width: 0;
+    }
+  }
+  &[data-active="true"] + div {
+    border-left-width: 1px;
+  }
 `;
 
 export default function PillTabs({
@@ -59,7 +66,7 @@ export default function PillTabs({
       {React.Children.toArray(children).map((child, index) => (
         <Item
           key={index}
-          active={index === activeIndex}
+          data-active={index === activeIndex}
           onClick={_ => {
             setActiveIndex(index);
             onTabChange && onTabChange(index);
