@@ -4,6 +4,8 @@ const fs = require("fs");
 const FormData = require("form-data");
 const { resolve } = require("path");
 
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const uploadImage = async () => {
   const path = core.getInput("path");
   const fullPath = resolve(path);
@@ -12,7 +14,10 @@ const uploadImage = async () => {
   //   throw new Error("the path provided does not exists");
   // }
 
-  const upload = async file => {
+  const upload = async (file, i = 0) => {
+    if (i > 2) {
+      return "error";
+    }
     const body = new FormData();
     body.append("type", "file");
     body.append("image", file);
@@ -33,7 +38,8 @@ const uploadImage = async () => {
       }
       return link;
     } catch (e) {
-      return upload(file);
+      await wait(3000);
+      return upload(file, i + 1);
     }
   };
 
@@ -58,7 +64,7 @@ const uploadImage = async () => {
     };
   });
 
-  core.setOutput("images", res);
+  core.setOutput("images", JSON.stringify(res));
 };
 
 uploadImage().catch(err => {

@@ -141,7 +141,7 @@ class MenuList extends PureComponent<*, *> {
 }
 class Select extends PureComponent<Props> {
   componentDidMount() {
-    if (this.ref && this.props.autoFocus) {
+    if (this.ref && this.props.autoFocus && !process.env.SPECTRON_RUN) {
       // $FlowFixMe
       this.timeout = requestAnimationFrame(() => this.ref.focus());
     }
@@ -200,6 +200,7 @@ class Select extends PureComponent<Props> {
       stylesMap,
       virtual = true,
       rowHeight = small ? 34 : 40,
+      autoFocus,
       ...props
     } = this.props;
 
@@ -211,6 +212,7 @@ class Select extends PureComponent<Props> {
       <Comp
         {...props}
         ref={c => (this.ref = c)}
+        autoFocus={autoFocus && !process.env.SPECTRON_RUN}
         value={value}
         maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"

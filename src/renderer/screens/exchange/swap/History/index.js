@@ -2,7 +2,7 @@
 
 import { remote, ipcRenderer } from "electron";
 import React, { useMemo, useEffect, useState, useCallback } from "react";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "~/renderer/components/Box/Card";
 import { accountsSelector } from "~/renderer/reducers/accounts";
@@ -57,6 +57,7 @@ const History = () => {
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -143,7 +144,7 @@ const History = () => {
           <IconDownloadCloud size={16} />
           <Text ml={1} ff="Inter|Regular" fontSize={3}>
             <FakeLink onClick={exporting ? undefined : onExportOperations}>
-              {exporting ? "Exporting..." : "Export operations"}
+              {exporting ? t("exchange.history.exporting") : t("exchange.history.exportOperations")}
             </FakeLink>
           </Text>
         </ExportOperationsWrapper>

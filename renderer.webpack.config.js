@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const babelPlugins = require("./babel.plugins");
 const UnusedWebpackPlugin = require("unused-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 const babelConfig = {
   presets: [
@@ -86,15 +87,22 @@ module.exports = {
         },
       },
       {
-        type: 'javascript/auto',
+        type: "javascript/auto",
         test: /\.mjs$/,
-        use: []
-      }
+        use: [],
+      },
     ],
   },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "src"),
+      "@ui": path.resolve(__dirname, "ui-lib", "lib"),
+      "@components": process.env.REBRANDING
+        ? path.resolve(__dirname, "ui-lib", "lib", "components")
+        : path.resolve(__dirname, "src", "renderer", "components"),
+      "@styles": process.env.REBRANDING
+        ? path.resolve(__dirname, "ui-lib", "lib", "styles")
+        : path.resolve(__dirname, "src", "renderer", "styles"),
     },
   },
 };

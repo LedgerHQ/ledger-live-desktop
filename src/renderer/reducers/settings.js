@@ -100,6 +100,12 @@ export type SettingsState = {
   firstTimeLend: boolean,
   showClearCacheBanner: boolean,
   fullNodeEnabled: boolean,
+
+  // developer settings
+  allowDebugApps: boolean,
+  allowExperimentalApps: boolean,
+  enablePlatformDevTools: boolean,
+  catalogProvider: string,
   swap: {
     hasAcceptedIPSharing: false,
     selectableCurrencies: string[],
@@ -153,6 +159,12 @@ const INITIAL_STATE: SettingsState = {
   firstTimeLend: false,
   showClearCacheBanner: false,
   fullNodeEnabled: false,
+
+  // developer settings
+  allowDebugApps: false,
+  allowExperimentalApps: false,
+  enablePlatformDevTools: false,
+  catalogProvider: "production",
   swap: {
     hasAcceptedIPSharing: false,
     acceptedProviders: [],
@@ -406,6 +418,13 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+
+export const allowDebugAppsSelector = (state: State) => state.settings.allowDebugApps;
+export const allowExperimentalAppsSelector = (state: State) => state.settings.allowExperimentalApps;
+export const enablePlatformDevToolsSelector = (state: State) =>
+  state.settings.enablePlatformDevTools;
+export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
+
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
