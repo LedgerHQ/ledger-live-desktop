@@ -389,7 +389,7 @@
           "toReceive": "المبلغ المراد استلامه",
           "terms": "الشروط والأحكام الخاصة به",
           "disclaimer": {
-            "description": "بالضغط على \"تأكيد\"، أسلم وأقبل بأن هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في",
+            "description": "بالضغط على \"تأكيد\"، أقر وأقبل بأن هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في",
             "acceptedDescription": "هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في"
           },
           "details": {
@@ -2425,15 +2425,15 @@
         "title": "أنت الآن مطوّر!",
         "text": "مرحبا بكم في بلاد العجائب"
       },
-      "debugApps": "Allow debug apps",
+      "debugApps": "السماح لتطبيقات تصحيح الأخطاء",
       "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
+      "experimentalApps": "السماح بالتطبيقات التجريبية",
       "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
       "catalogServer": "Set the catalog provider",
       "catalogServerDesc": "Switch between multiple platform apps sources",
       "enablePlatformDevTools": "Enable platform dev tools",
       "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
+      "addLocalApp": "إضافة تطبيق محلي",
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
       "addLocalAppButton": "تصفح",
       "runLocalAppDeleteButton": "حذف",
@@ -2502,7 +2502,7 @@
           "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
+          "title": "تخصيص حد الفجوة",
           "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
         },
         "forceProvider": {
@@ -2641,7 +2641,7 @@
     "toastType": {
       "announcement": "أخبار",
       "operation": "عملية",
-      "achievement": "Achievement Unlocked"
+      "achievement": "تمت إتاحة الإنجاز"
     }
   },
   "informationCenter": {
