@@ -6,7 +6,7 @@ const duration = 300;
 const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
   transition: all ${duration}ms ease-in-out;
   will-change: transform;
-  ${p =>
+  ${(p) =>
     !p.fixed
       ? `
     position: absolute;
@@ -30,7 +30,7 @@ const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
   }
 
   &.transition-left-exit-active {
-    transform: translateX(${p => (p.reverseExit ? 100 : -100)}%);
+    transform: translateX(${(p) => (p.reverseExit ? 100 : -100)}%);
   }
 
   &.transition-right-appear,
@@ -48,7 +48,7 @@ const ChildrenWrapper = styled.div<{ fixed?: boolean; reverseExit?: boolean }>`
   }
 
   &.transition-right-exit-active {
-    transform: translateX(${p => (p.reverseExit ? -100 : 100)}%);
+    transform: translateX(${(p) => (p.reverseExit ? -100 : 100)}%);
   }
 `;
 type TransitionSlideProps = Partial<
@@ -67,7 +67,7 @@ const TransitionSlide = ({
   reverseExit,
   ...props
 }: TransitionSlideProps) => (
-  <CSSTransition {...props} timeout={300} classNames={`transition-${direction}`}>
+  <CSSTransition {...props} timeout={duration} classNames={`transition-${direction}`}>
     <ChildrenWrapper fixed={fixed} reverseExit={reverseExit}>
       {children}
     </ChildrenWrapper>
