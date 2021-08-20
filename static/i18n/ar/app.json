@@ -2426,9 +2426,9 @@
         "text": "مرحبا بكم في بلاد العجائب"
       },
       "debugApps": "السماح لتطبيقات تصحيح الأخطاء",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
+      "debugAppsDesc": "عرض تطبيقات المنصة لتصحيح الأخطاء والسماح بفتحها.",
       "experimentalApps": "السماح بالتطبيقات التجريبية",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
+      "experimentalAppsDesc": "عرض تطبيقات المنصة التجريبية والسماح بفتحها.",
       "catalogServer": "تعيين مزود الكتالوج",
       "catalogServerDesc": "التبديل بين مصادر تطبيقات المنصة المتعددة",
       "enablePlatformDevTools": "تمكين أدوات تطوير المنصة",
