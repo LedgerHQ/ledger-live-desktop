@@ -1388,8 +1388,8 @@
           "description": "تداول من خلال التبادل اللامركزي الذاتي الحراسة على الطبقة الثانية من إيثريوم."
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "تداول العملات المشفرة من خلال مجمع Defi/DEX على إيثريوم.",
+          "description": "تداول العملات المشفرة من خلال مجمع Defi/DEX على إيثريوم."
         }
       },
       "dependencyInstall": {
@@ -2039,7 +2039,7 @@
       },
       "header": "ترشيحات",
       "nominate": "ترشيح",
-      "setController": "Change Controller",
+      "setController": "تغيير وحدة التحكم",
       "chill": "حذف الترشيحات",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
@@ -2061,7 +2061,7 @@
       "electionOpen": "يجري حاليًا انتخاب مدققين جدد. ولذلك، لن تكون عمليات الرهن متاحة لمدة 15 دقيقة بحد أقصى.",
       "electionOpenTooltip": "يتم تعطيل هذه العملية أثناء انتخاب المدققين.",
       "externalControllerTooltip": "هذا الحساب يخضع للسيطرة حساب آخر.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
+      "externalControllerUnsupported": "<0> يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. </0><1> للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة.</1>",
       "externalStashTooltip": "هذا الحساب يتحكم في حساب آخر.",
       "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
