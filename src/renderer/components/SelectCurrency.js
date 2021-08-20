@@ -26,7 +26,7 @@ type Props<C: Currency> = {
   isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
-  stylesMap: StyleObject => StyleObject,
+  stylesMap?: StyleObject => StyleObject,
 };
 
 const getOptionValue = c => c.id;
