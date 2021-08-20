@@ -105,7 +105,7 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Box horizontal mb={2} flow={4} style={{ justifyContent: "space-between" }}>
+      <Box horizontal mb={3} flow={4} style={{ justifyContent: "space-between" }}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
