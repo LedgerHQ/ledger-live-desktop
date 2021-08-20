@@ -22,6 +22,7 @@ import { countervalueFirstSelector } from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
+import perFamilyAccountSubHeader from "~/renderer/generated/AccountSubHeader";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -79,6 +80,9 @@ const AccountPage = ({
   const AccountBodyHeader = mainAccount
     ? perFamilyAccountBodyHeader[mainAccount.currency.family]
     : null;
+  const AccountSubHeader = mainAccount
+    ? perFamilyAccountSubHeader[mainAccount.currency.family]
+    : null;
   const bgColor = useTheme("colors.palette.background.paper");
 
   const isCompoundEnabled = useCompoundAccountEnabled(account, parentAccount);
@@ -101,14 +105,18 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Box horizontal mb={5} flow={4} style={{ justifyContent: "space-between" }}>
+      <Box horizontal mb={3} flow={4} style={{ justifyContent: "space-between" }}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
 
+      {AccountSubHeader ? (
+        <AccountSubHeader account={account} parentAccount={parentAccount} />
+      ) : null}
+
       {!isAccountEmpty(account) ? (
         <>
-          <Box mb={7}>
+          <Box mt={3} mb={7}>
             <BalanceSummary
               mainAccount={mainAccount}
               account={account}
