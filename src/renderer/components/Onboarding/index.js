@@ -12,6 +12,7 @@ import { track } from "~/renderer/analytics/segment";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
+import { Terms } from "~/renderer/components/Onboarding/Screens/Terms";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
 import {
@@ -27,6 +28,7 @@ import { Pedagogy } from "~/renderer/components/Onboarding/Pedagogy";
 import RecoveryWarning from "~/renderer/components/Onboarding/Help/RecoveryWarning";
 import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { SideDrawer } from "../SideDrawer";
+import Box from "../Box";
 
 function LedgerLogo() {
   return (
@@ -74,9 +76,15 @@ const onboardingMachine = Machine({
       on: {
         NEXT: {
           actions: () => track("Onboarding - Start"),
-          target: "selectDevice",
+          target: "terms",
         },
         PREV: { target: "onboardingComplete" },
+      },
+    },
+    terms: {
+      on: {
+        NEXT: { target: "selectDevice" },
+        PREV: { target: "welcome" },
       },
     },
     selectDevice: {
@@ -92,7 +100,7 @@ const onboardingMachine = Machine({
           ],
         },
         PREV: {
-          target: "welcome",
+          target: "terms",
         },
       },
     },
@@ -196,6 +204,7 @@ const onboardingMachine = Machine({
 
 const screens = {
   welcome: Welcome,
+  terms: Terms,
   selectDevice: SelectDevice,
   selectUseCase: SelectUseCase,
   setupNewDevice: SetupNewDevice,
@@ -267,7 +276,9 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
         }
         direction="left"
       >
-        <RecoveryWarning />
+        <Box px={40}>
+          <RecoveryWarning />
+        </Box>
       </SideDrawer>
       <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">

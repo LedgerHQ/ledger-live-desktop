@@ -89,10 +89,11 @@ export class StepAmountFooter extends PureComponent<StepProps> {
     const hasErrors = Object.keys(errors).length;
     const canNext = !bridgePending && !hasErrors && !isTerminated;
     const { gasPrice } = errors;
+
     return (
       <>
         <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-        {gasPrice && gasPrice instanceof NotEnoughGas ? (
+        {gasPrice instanceof NotEnoughGas ? (
           <BuyButton currency={mainAccount.currency} account={mainAccount} />
         ) : null}
         <Button

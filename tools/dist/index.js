@@ -84,7 +84,8 @@ const buildTasks = args => [
       await exec("yarn", commands, {
         env: args.publish
           ? {
-              SENTRY_URL: "https://db8f5b9b021048d4a401f045371701cb@sentry.io/274561",
+              SENTRY_URL:
+                "https://db8f5b9b021048d4a401f045371701cb@o118392.ingest.sentry.io/274561",
             }
           : {},
       });
@@ -96,6 +97,10 @@ const draftTasks = args => {
   let draft;
 
   return [
+    {
+      title: "Health checks",
+      task: () => setupList(healthChecksTasks, args),
+    },
     {
       title: "Authenticate on GitHub",
       task: ctx => {
@@ -135,11 +140,6 @@ const mainTask = (args = {}) => {
       title: "Setup",
       skip: () => (dirty ? "--dirty flag passed" : false),
       task: () => setupList(setupTasks, args),
-    },
-    {
-      title: "Prepare release on GitHub",
-      enabled: () => !!publish,
-      task: () => setupList(draftTasks, args),
     },
     {
       title: publish ? "Build and publish" : "Build",
@@ -201,6 +201,12 @@ yargs
     "Run health checks",
     () => {},
     args => runTasks(healthChecksTasks, args),
+  )
+  .command(
+    "draft",
+    "Prepare release on GitHub",
+    () => {},
+    args => runTasks(draftTasks, args),
   )
   .option("verbose", {
     alias: "v",

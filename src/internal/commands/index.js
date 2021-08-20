@@ -11,6 +11,7 @@ import libcoreGetVersion from "./libcoreGetVersion";
 import libcoreReset from "./libcoreReset";
 import listenDevices from "./listenDevices";
 import listApps from "./listApps";
+import signMessage from "./signMessage";
 import ping from "./ping";
 import connectApp from "./connectApp";
 import connectManager from "./connectManager";
@@ -51,6 +52,7 @@ export const commandsById = {
   testInterval,
   websocketBridge,
   scanDescriptors,
+  signMessage,
 };
 
 export type Commands = typeof commandsById;

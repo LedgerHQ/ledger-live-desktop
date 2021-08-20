@@ -6,8 +6,8 @@ module.exports = str => {
     throw new Error(`Can't extract owner and repo from ${str}`);
   }
 
-  const owner = results[2];
-  const repo = results[3];
+  const owner = results[2].toLowerCase();
+  const repo = results[3].toLowerCase();
 
   return { owner, repo };
 };
