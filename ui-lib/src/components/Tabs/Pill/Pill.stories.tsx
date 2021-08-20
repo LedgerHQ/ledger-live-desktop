@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PillTabs, { Props } from "@components/Tabs/Pill";
 import Text from "@components/Text";
+import Icon from "@components/Icon";
 
 export default {
   title: "Tabs/View",
@@ -12,7 +13,7 @@ export default {
   },
 };
 
-const navItems = ["One", "Two", "Three", "Four", "Five"];
+const navItems = ["Manager", "MenuBurger", "Apple", "Crown", "Settings"];
 
 function Sample({ children, ...args }: Props) {
   const [activeIndex, setActiveIndex] = useState(args.initialActiveIndex);
@@ -31,11 +32,7 @@ function Sample({ children, ...args }: Props) {
 
 export const View = (args: Props): JSX.Element[] =>
   navItems.reduce<JSX.Element[]>((acc, _, index) => {
-    const labels = navItems.slice(0, index + 1).map(label => (
-      <Text color="inherit" type="navigation">
-        {label}
-      </Text>
-    ));
+    const labels = navItems.slice(0, index + 1).map(label => <Icon name={label} />);
     return [
       ...acc,
       <Sample {...args} key={index}>
