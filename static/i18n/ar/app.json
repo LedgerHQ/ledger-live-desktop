@@ -2252,7 +2252,7 @@
           "info": "ستظل الأصول المقيدة على حالتها. إذا قمت بإلغاء تقيدها، فسوف تصبح متاحة بعد فترة 28 يومًا."
         },
         "setController": {
-          "title": "Change Controller",
+          "title": "تغيير وحدة التحكم",
           "description": "Set this Ledger account as its own controller",
           "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
         }
@@ -2385,7 +2385,7 @@
       "about": "حول",
       "experimental": "الميزات التجريبية",
       "accounts": "الحسابات",
-      "developer": "Developer"
+      "developer": "مطوّر"
     },
     "export": {
       "accounts": {
@@ -2422,8 +2422,8 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "أنت الآن مطوّر!",
+        "text": "مرحبا بكم في بلاد العجائب"
       },
       "debugApps": "Allow debug apps",
       "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
@@ -2435,9 +2435,9 @@
       "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
       "addLocalApp": "Add a local app",
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "addLocalAppButton": "تصفح",
+      "runLocalAppDeleteButton": "حذف",
+      "runLocalAppOpenButton": "فتح"
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2486,11 +2486,11 @@
           "description": "Use trongrid directly without ledger proxy"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
+          "title": "اختبار الترجمة",
           "description": "Adds unreleased languages to the language list in the general settings tab."
         },
         "managerDevMode": {
-          "title": "Developer mode",
+          "title": "وضع المطوّر",
           "description": "Show developer and testnet apps in the Manager."
         },
         "scanForInvalidPaths": {
@@ -2743,7 +2743,7 @@
         "hasNoRecovery": "أول مرة تستخدم {{deviceName}} الخاص بك؟",
         "hasRecovery": "هل لديك عبارة استرداد بالفعل؟",
         "separator": "أو",
-        "switchDevice": "Switch device",
+        "switchDevice": "تبديل الجهاز",
         "options": {
           "1": {
             "heading": "أول استخدام",
@@ -3244,7 +3244,7 @@
       "unbond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "rebond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "withdrawUnbonded": "يرجى التأكيد على جهازك لإنهاء العملية",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "الرجاء التأكيد على جهازك لإنهاء العملية"
     },
     "recipientWording": {
       "send": "المستلم",
@@ -3260,10 +3260,10 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "القانونية",
+    "termsLabel": "شروط الخدمة",
+    "privacyLabel": "سياسة الخصوصية",
+    "switchLabel": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
