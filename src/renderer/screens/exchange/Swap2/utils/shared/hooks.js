@@ -44,8 +44,9 @@ export const useSwapProviders = () => {
 
     const saveProviders = async () => {
       try {
-        // TODO: Fix type issue AvailableProviderV2 -> : Array<AvailableProviderV3>
         const allProviders = await getProviders();
+        // TODO: Fix type issue AvailableProviderV2 -> : Array<AvailableProviderV3>
+        // $FlowFixMe
         const providers = allProviders.filter(filterDisabledProviders);
 
         if (isMounted) dispatch({ type: "SAVE_DATA", payload: providers });

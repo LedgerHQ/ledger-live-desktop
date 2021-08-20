@@ -7,7 +7,8 @@ import Fuse from "fuse.js";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import useEnv from "~/renderer/hooks/useEnv";
-import type { Option, StyleObject } from "~/renderer/components/Select";
+import type { Option } from "~/renderer/components/Select";
+import type { CreateStylesReturnType } from "~/renderer/components/Select/createStyles";
 import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -26,7 +27,7 @@ type Props<C: Currency> = {
   isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
-  stylesMap?: StyleObject => StyleObject,
+  stylesMap?: CreateStylesReturnType => CreateStylesReturnType,
 };
 
 const getOptionValue = c => c.id;

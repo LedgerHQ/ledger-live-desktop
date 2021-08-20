@@ -1,7 +1,7 @@
 // @flow
-import type { StyleObject as InputStyleObject } from "~/renderer/components/Select";
+import type { CreateStylesReturnType } from "~/renderer/components/Select/createStyles";
 
-export const selectRowStylesMap: InputStyleObject => InputStyleObject = styles => ({
+export const selectRowStylesMap: CreateStylesReturnType => CreateStylesReturnType = styles => ({
   ...styles,
   control: (provided, state) => ({
     ...styles.control(provided, state),

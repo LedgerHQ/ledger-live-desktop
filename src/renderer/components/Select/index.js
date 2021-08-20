@@ -6,12 +6,11 @@ import AsyncReactSelect from "react-select/async";
 import { withTranslation } from "react-i18next";
 import { FixedSizeList as List } from "react-window";
 import styled, { withTheme } from "styled-components";
+import type { CreateStylesReturnType } from "~/renderer/components/Select/createStyles";
 import debounce from "lodash/debounce";
 
 import createStyles from "./createStyles";
 import createRenderers from "./createRenderers";
-
-export type StyleObject = $Call<typeof createStyles>;
 
 export type Option = {
   value: "string",
@@ -46,7 +45,7 @@ type Props = {
   virtual: boolean,
   rowHeight: number,
   error: ?Error, // NB at least a different rendering for now
-  stylesMap: StyleObject => StyleObject,
+  stylesMap: CreateStylesReturnType => CreateStylesReturnType,
 };
 
 const Row = styled.div`
