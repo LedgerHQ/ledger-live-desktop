@@ -36,7 +36,7 @@ const isTagged = ctx => {
   ctx.tag = tag;
 };
 
-const checkRemote = ctx => {
+const checkRemote = canary => ctx => {
   const { repository } = pkg;
   const gitRemote = git.remoteUrl();
 
@@ -44,6 +44,11 @@ const checkRemote = ctx => {
 
   const pkgInfo = repoInfo(repository);
   const gitInfo = repoInfo(gitRemote);
+
+  if (canary) {
+    ctx.repo = pkgInfo;
+    return;
+  }
 
   if (pkgInfo.owner !== gitInfo.owner || pkgInfo.repo !== gitInfo.repo) {
     throw new Error("git remote URL does not match package.json `repository` entry");
@@ -83,18 +88,20 @@ module.exports = args => {
   return [
     {
       title: "Check for required environment variables",
-      task: checkEnv,
+      task: checkEnv(args.canary),
     },
     {
       title: "Check that git remote branch matches package.json `repository`",
-      task: checkRemote,
+      task: checkRemote(args.canary),
     },
     {
       title: "Check that the local git repository is clean",
+      skip: () => !!args.canary,
       task: isClean,
     },
     {
       title: "Check that HEAD is tagged",
+      skip: () => !!args.canary,
       task: isTagged,
     },
   ];
