@@ -1381,15 +1381,15 @@
         },
         "compound": {
           "shortDescription": "Verleihen oder leihen Sie Ihre Kryptos über ein komplett dezentralisiertes Open-Source-Protokoll.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+          "description": "Verleihen oder leihen Sie Ihre Kryptos über ein komplett dezentralisiertes Open-Source-Protokoll."
         },
         "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+          "shortDescription": "Handeln Sie über eine selbstverwaltete dezentralisierte Börse auf Ethereum Layer-2.",
+          "description": "Handeln Sie über eine selbstverwaltete dezentralisierte Börse auf Ethereum Layer-2."
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "Tauschen Sie Krypto über einen Defi/DEX-Aggregator auf Ethereum.",
+          "description": "Tauschen Sie Krypto über einen Defi/DEX-Aggregator auf Ethereum."
         }
       },
       "dependencyInstall": {
@@ -2039,7 +2039,7 @@
       },
       "header": "Nominierungen",
       "nominate": "Nominieren",
-      "setController": "Change Controller",
+      "setController": "Controller ändern",
       "chill": "Nominierungen löschen",
       "totalStake": "Gesamt-Einsatz",
       "amount": "Gebundener Betrag",
@@ -2061,9 +2061,9 @@
       "electionOpen": "Die Wahl der neuen Validatoren ist derzeit im Gange. Daher sind die Einsätze für maximal 15 Minuten nicht verfügbar.",
       "electionOpenTooltip": "Dieser Vorgang ist während der Wahl der Validatoren deaktiviert",
       "externalControllerTooltip": "Dieses Konto wird von einem anderen Konto gesteuert.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
+      "externalControllerUnsupported": "<0> Dieses Stash-Konto wird von einem separaten Konto gesteuert, dessen Adresse <0>{{controllerAddress}}</0> ist.</0><1> Um mit Ledger Live zu staken, müssen Sie dieses Stash-Konto als eigenen Controller einstellen.</1>",
       "externalStashTooltip": "Dieses Konto steuert ein anderes Konto.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0>Dieses Konto ist der Controller eines separaten Stash-Kontos, dessen Adresse <0>{{stashAddress}}</0> lautet.</0><1>Um mit Ledger Live zu staken, müssen Sie Ihr Stash-Konto als seinen eigenen Controller einstellen.</1>",
       "showInactiveNominations": "Alle Nominierungen anzeigen ({{count}})",
       "hideInactiveNominations": "Nur aktive Nominierungen anzeigen",
       "noActiveNominations": "Es sind keine aktiven Nominierungen vorhanden.",
@@ -2252,8 +2252,8 @@
           "info": "Gebundene Werte bleiben gebunden. Wenn Sie die Bindung aufheben, sind sie nach 28 Tagen wieder verfügbar."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
+          "title": "Controller ändern",
+          "description": "Dieses Ledger-Konto als eigenen Controller festlegen",
           "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
         }
       },
