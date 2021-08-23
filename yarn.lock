@@ -2326,10 +2326,10 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^21.2.0-lnx2fwrepair.8":
-  version "21.2.0-lnx2fwrepair.8"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.2.0-lnx2fwrepair.8.tgz#9b257e0b38b14bc1cb50290791d4ca02a1d10955"
-  integrity sha512-ETzleOiIQ/xi5hDaxtVI2tZ6g4OY5mW+OkvFWmNgkccQ14Z0Ih/HCQRHNQ22E11rs0nJ94a3Ow85OQozYS3lUA==
+"@ledgerhq/live-common@^21.2.0-lnx2fwrepair.9":
+  version "21.2.0-lnx2fwrepair.9"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.2.0-lnx2fwrepair.9.tgz#21701e7f627e52524838ff2c56d01ae72a2f1938"
+  integrity sha512-aQDjw4DXMencT36dgW9HCkN1zipcq01Q+ABA8W/6MjdvbgHVjCFS1KnWVfHVzsRNwnHfYeYfO1brCkoZJb7htg==
   dependencies:
     "@crypto-com/chain-jslib" "0.0.19"
     "@ledgerhq/compressjs" "1.3.2"
