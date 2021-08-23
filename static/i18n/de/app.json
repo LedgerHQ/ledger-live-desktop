@@ -2254,7 +2254,7 @@
         "setController": {
           "title": "Controller ändern",
           "description": "Dieses Ledger-Konto als eigenen Controller festlegen",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "info": "Ledger Live unterstützt keine Aktionen auf getrennten Stash- und Controller-Konten."
         }
       },
       "steps": {
@@ -2385,7 +2385,7 @@
       "about": "Über",
       "experimental": "Experimentelle Funktionen",
       "accounts": "Konten",
-      "developer": "Developer"
+      "developer": "Entwickler"
     },
     "export": {
       "accounts": {
@@ -2401,9 +2401,9 @@
         "button": "Fertig",
         "title": "Scannen zum Exportieren auf Mobile",
         "listTitle": "In der Ledger Live Mobile App:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "Tippen Sie auf die Taste <highlight><icon>+</icon></highlight> in <highlight>Konten</highlight>",
+        "step2": "Tippen Sie auf <highlight>Desktop-Konten importieren</highlight>",
+        "step3": "Scannen Sie den <highlight>LiveQR-Code</highlight>, bis der Ladestand 100% erreicht"
       }
     },
     "display": {
@@ -2422,22 +2422,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "Sie sind jetzt ein Entwickler!",
+        "text": "Willkommen im Wunderland"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "Erlauben von Debug-Apps",
+      "debugAppsDesc": "Anzeigen und Öffnen von Debug-getaggten Plattform-Apps erlauben.",
+      "experimentalApps": "Experimentelle Apps erlauben",
+      "experimentalAppsDesc": "Anzeigen und Öffnen von Debug-getaggten Plattform-Apps erlauben.",
+      "catalogServer": "Einstellen des Kataloganbieters",
+      "catalogServerDesc": "Wechseln Sie zwischen mehreren Plattform-App-Quellen",
+      "enablePlatformDevTools": "Plattform-Entwicklungswerkzeuge aktivieren",
+      "enablePlatformDevToolsDesc": "Aktivieren Sie das Öffnen des Entwicklerwerkzeug-Fensters für Plattform-Apps",
+      "addLocalApp": "Lokale App hinzufügen",
+      "addLocalAppDesc": "Durchsuchen Sie lokale Dateien und fügen Sie eine lokale App mit einem lokalen Manifest hinzu",
+      "addLocalAppButton": "Durchsuchen",
+      "runLocalAppDeleteButton": "Löschen",
+      "runLocalAppOpenButton": "Öffnen"
     },
     "currencies": {
       "selectPlaceholder": "Krypto-Vermögenswert auswählen",
@@ -2483,19 +2483,19 @@
       "features": {
         "apiTrongridProxy": {
           "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "Testen der Übersetzung",
+          "description": "Fügt nicht freigegebene Sprachen zur Sprachliste auf der Registerkarte \"Allgemeine Einstellungen\" hinzu."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "Entwicklermodus",
+          "description": "Zeige Entwickler- und Testnet-Apps im Manager."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "Erweiterte Kontosuche",
+          "description": "Suchen Sie nach Konten mit fehlerhaften Ableitungspfaden. Bitte senden Sie potenziell gefundene Vermögenswerte an ein reguläres Konto."
         },
         "experimentalExplorers": {
           "title": "Experimental Explorers API",
