@@ -81,6 +81,11 @@ const buildTasks = args => [
         commands.push("electron-builder-nightly.yml");
       }
 
+      if (args.canary) {
+        commands.push("--config");
+        commands.push("electron-builder-canary.yml");
+      }
+
       await exec("yarn", commands, {
         env: args.publish
           ? {
@@ -94,13 +99,11 @@ const buildTasks = args => [
 ];
 
 const draftTasks = args => {
-  const { canary } = args;
   let draft;
 
   return [
     {
       title: "Health checks",
-      skip: () => !!canary,
       task: () => setupList(healthChecksTasks, args),
     },
     {
@@ -125,12 +128,12 @@ const draftTasks = args => {
 };
 
 const mainTask = (args = {}) => {
-  const { dirty, publish, canary } = args;
+  const { dirty, publish } = args;
 
   const tasks = [
     {
       title: "Health checks",
-      enabled: () => !!publish && !canary,
+      enabled: () => !!publish,
       task: () => setupList(healthChecksTasks, args),
     },
     {

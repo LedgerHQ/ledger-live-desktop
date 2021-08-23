@@ -1,6 +1,7 @@
 const git = require("git-rev-sync");
 const pkg = require("../../package.json");
 const repoInfo = require("./repo-info");
+const semver = require("semver");
 
 let verbose = false;
 
@@ -57,7 +58,7 @@ const checkRemote = canary => ctx => {
   ctx.repo = pkgInfo;
 };
 
-const checkEnv = ctx => {
+const checkEnv = canary => ctx => {
   const platform = require("os").platform();
 
   const { GH_TOKEN, APPLEID, APPLEID_PASSWORD } = process.env;
@@ -70,16 +71,26 @@ const checkEnv = ctx => {
 
   ctx.token = GH_TOKEN;
 
-  if (platform !== "darwin") {
-    log("OS is not mac, skipping APPLEID and APPLEID_PASSWORD check");
-    return;
-  }
+  if (!canary) {
+    if (platform !== "darwin") {
+      log("OS is not mac, skipping APPLEID and APPLEID_PASSWORD check");
+      return;
+    }
 
-  if (!APPLEID || !APPLEID_PASSWORD) {
-    throw new Error("APPLEID and/or APPLEID_PASSWORD are not net");
+    if (!APPLEID || !APPLEID_PASSWORD) {
+      throw new Error("APPLEID and/or APPLEID_PASSWORD are not net");
+    } else {
+      log("APPLEID and APPLEID_PASSWORD are set");
+    }
   }
+};
 
-  log("APPLEID and APPLEID_PASSWORD are set");
+const setCanaryTagName = ctx => {
+  const { version } = pkg;
+  const v = semver.coerce(version);
+
+  const tag = `v${v.version}-${Date.now()}`;
+  ctx.tag = tag;
 };
 
 module.exports = args => {
@@ -103,6 +114,11 @@ module.exports = args => {
       title: "Check that HEAD is tagged",
       skip: () => !!args.canary,
       task: isTagged,
+    },
+    {
+      title: "Set tag name for Canary draft release",
+      enabled: () => !!args.canary,
+      task: setCanaryTagName,
     },
   ];
 };
