@@ -20,7 +20,7 @@
     "app": {
       "informations": {
         "title": "Informationen",
-        "website": "Website"
+        "website": "Webseite"
       }
     },
     "catalog": {
@@ -120,7 +120,7 @@
       "devTools": "Entwicklertools"
     },
     "exchange": "Umtauschen",
-    "info": "Info",
+    "info": "Informationen",
     "connectDevice": "Verbinden Sie Ihr Gerät"
   },
   "devices": {
@@ -1261,7 +1261,7 @@
       "amountReceived": "Zu erhaltender Betrag",
       "amountReceivedFloat": "Zu erhaltender Betrag vor Servicegebühren",
       "fees": "Gebühren",
-      "provider": "Provider",
+      "provider": "Anbieter",
       "payoutNetworkFees": "Auszahlungsgebühren",
       "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt"
     },
@@ -1621,7 +1621,7 @@
         "title": "Betrag",
         "banner": "Maximaler Auszahlungsbetrag ist",
         "fees": "Gebühren",
-        "standard": "Standard",
+        "standard": "Standart",
         "advanced": "Erweitert"
       },
       "summary": {
@@ -2259,7 +2259,7 @@
       },
       "steps": {
         "info": {
-          "title": "Info"
+          "title": "Informationen"
         },
         "connectDevice": {
           "title": "Gerät"
@@ -2391,7 +2391,7 @@
       "accounts": {
         "title": "Konten exportieren",
         "desc": "Fügen Sie Ihre Konten in Ledger Live Mobile hinzu. Ihre Konten werden nur mit der Blockchain synchronisiert, nicht zwischen Ihren mobilen und Desktop-Apps.",
-        "button": "Export"
+        "button": "Exportieren"
       },
       "operations": {
         "title": "Aktionsverlauf",
@@ -2459,7 +2459,7 @@
       "resetKYCDesc": "Löschen Sie alle lokal gespeicherten Know-your-Customer-Daten, die für den Zugriff auf Drittanbieter-Transaktionen verwendet werden.",
       "hardResetTitle": "Ledger live zurücksetzen",
       "hardResetDesc": "Löschen Sie alle auf Ihrem Computer gespeicherten Ledger Live-Daten, einschließlich Ihrer Konten, Transaktionshistorien und Einstellungen.",
-      "hardReset": "Reset",
+      "hardReset": "Zurücksetzen",
       "analytics": "Analyse",
       "analyticsDesc": "Aktivieren Sie Analysen, um Ledger bei der Verbesserung der Benutzererfahrung zu helfen. Dazu gehören Klicks, Seitenbesuche, Weiterleitungen, Aktionen (Senden, Empfangen, Sperren usw.), Scrollen am Ende der Seite, (De-)Installieren und App-Version, Anzahl der Konten, Krypto-Vermögenswerte und Aktionen, Sitzungsdauer, der Ledger-Gerätetyp und die Firmware.",
       "reportErrors": "Fehlerberichte",
@@ -2482,7 +2482,7 @@
       "disclaimer": "Dies sind experimentelle Funktionen, die wir für unsere technisch versierte Community zum Testen bereitstellen. Diese können sich jederzeit ändern, defekt sein oder entfernt werden. Wenn Sie sie aktivieren, erklären Sie sich damit einverstanden, sie auf eigenes Risiko zu verwenden.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
+          "title": "TronGrid.io verwenden",
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
         "experimentalLanguages": {
@@ -2498,16 +2498,16 @@
           "description": "Suchen Sie nach Konten mit fehlerhaften Ableitungspfaden. Bitte senden Sie potenziell gefundene Vermögenswerte an ein reguläres Konto."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "Experimentelle Explorer-API",
+          "description": "Probieren Sie eine kommende Version von Ledgers Blockchain-Explorern aus. Das Ändern dieser Einstellung kann den Kontostand und die Synchronisation sowie die Sendefunktion beeinflussen. (<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "Benutzerdefiniertes Lückenlimit",
+          "description": "Benutzerdefiniertes Lückenlimit für alle Konten. Wenn Sie diesen Wert über den Standardwert (20) erhöhen, werden mehr ungenutzte öffentliche Adressen nach Münzen durchsucht. Nur für fortgeschrittene Benutzer, dies kann die Kompatibilität beim Wiederherstellen Ihrer Konten beeinträchtigen."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "Manager-Anbieter",
+          "description": "Das Ändern des App-Anbieters im Manager kann es unmöglich machen, Apps auf Ihrem Ledger-Gerät zu installieren oder zu deinstallieren."
         }
       }
     },
@@ -2639,9 +2639,9 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News",
+      "announcement": "Neuigkeiten",
       "operation": "Vorgang",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Erfolge entsperrt"
     }
   },
   "informationCenter": {
@@ -2649,7 +2649,7 @@
     "ongoingIncidentsTooltip": "Es gibt {{count}} laufendes Ereignis",
     "ongoingIncidentsTooltip_plural": "Es gibt {{count}} laufende Ereignisse",
     "tabs": {
-      "announcements": "News",
+      "announcements": "Neuigkeiten",
       "announcementsUnseen": "Nachrichten ({{unseenCount}})",
       "serviceStatus": "Status",
       "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
@@ -2743,7 +2743,7 @@
         "hasNoRecovery": "Verwenden Sie Ihr {{deviceName}} zum ersten Mal?",
         "hasRecovery": "Haben Sie bereits eine Wiederherstellungsphrase?",
         "separator": "oder",
-        "switchDevice": "Switch device",
+        "switchDevice": "Gerät wechseln",
         "options": {
           "1": {
             "heading": "Erste Verwendung",
@@ -3244,7 +3244,7 @@
       "unbond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
       "rebond": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
       "withdrawUnbonded": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "Bitte bestätigen Sie auf Ihrem Gerät, um den Vorgang abzuschließen"
     },
     "recipientWording": {
       "send": "Empfänger",
@@ -3260,10 +3260,10 @@
     "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "Rechtliches",
+    "termsLabel": "Allgemeine Geschäftsbedingungen",
+    "privacyLabel": "Datenschutzrichtlinie",
+    "switchLabel": "Ich habe die Nutzungsbedingungen und Datenschutzrichtlinien gelesen und akzeptiere sie",
     "cta": "Zur Ledger-App"
   },
   "families": {
