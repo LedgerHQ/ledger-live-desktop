@@ -266,6 +266,22 @@ export default {
         category: "Children",
       },
     },
+    rowGap: {
+      type: "text",
+      description:
+        "The row-gap CSS property sets the size of the gap (gutter) between an element's flex rows.",
+      required: false,
+      control: { type: "text" },
+      table: { category: "Parent" },
+    },
+    columnGap: {
+      type: "text",
+      description:
+        "The column-gap CSS property sets the size of the gap (gutter) between an element's flex columns.",
+      required: false,
+      control: { type: "text" },
+      table: { category: "Parent" },
+    },
   },
 };
 /*

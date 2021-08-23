@@ -4,8 +4,8 @@ import { ThemeProvider } from "styled-components";
 import { defaultTheme, palettes, GlobalStyle } from "../src/styles";
 
 type Props = {
-  children: React.ReactNode,
-  selectedPalette: "light" | "dark",
+  children: React.ReactNode;
+  selectedPalette: "light" | "dark";
 };
 
 const StyleProvider = ({ children, selectedPalette }: Props) => {

@@ -42,7 +42,7 @@ export function SelectDevice({ sendEvent }: Props) {
     <SelectDeviceContainer>
       <TopRightContainer>
         <Button small onClick={() => sendEvent("PREV")}>
-          Previous
+          {t("common.previous")}
         </Button>
       </TopRightContainer>
       <Text mb="24px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">

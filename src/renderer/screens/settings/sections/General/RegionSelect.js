@@ -8,10 +8,12 @@ import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 import regionsByKey from "./regions.json";
 
-const regions = Object.keys(regionsByKey).map(key => {
-  const [language, region] = key.split("-");
-  return { value: key, language, region, label: regionsByKey[key] };
-});
+const regions = Object.keys(regionsByKey)
+  .map(key => {
+    const [language, region] = key.split("-");
+    return { value: key, language, region, label: regionsByKey[key] };
+  })
+  .sort((a, b) => a.label.localeCompare(b.label));
 
 const RegionSelect = () => {
   const dispatch = useDispatch();

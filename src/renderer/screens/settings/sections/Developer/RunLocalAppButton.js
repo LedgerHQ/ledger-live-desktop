@@ -28,7 +28,10 @@ const RunLocalAppButton = () => {
           if (!readError) {
             try {
               const manifest = JSON.parse(data.toString());
-              addLocalManifest(manifest);
+
+              Array.isArray(manifest)
+                ? manifest.forEach(m => addLocalManifest(m))
+                : addLocalManifest(manifest);
             } catch (parseError) {
               console.log(parseError);
             }
@@ -55,7 +58,7 @@ const RunLocalAppButton = () => {
           {t("settings.developer.addLocalAppButton")}
         </Button>
       </Row>
-      {Array.from(localManifests.values()).map(manifest => (
+      {[...localManifests.values()].map(manifest => (
         <Row key={manifest.id} title={manifest.name} desc={manifest.url}>
           <ButtonContainer>
             <Button small primary onClick={() => history.push(`/platform/${manifest.id}`)}>

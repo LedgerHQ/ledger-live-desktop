@@ -3,7 +3,7 @@ import styled, { css, DefaultTheme } from "styled-components";
 import { fontSize, color } from "styled-system";
 import fontFamily from "@styles/styled/fontFamily";
 import { fontSizes } from "@styles/theme";
-import ChevronDown from "@ui/assets/icons/ChevronDown";
+import ChevronBottom from "@ui/assets/icons/ChevronBottomRegular";
 
 type ButtonTypes = "primary" | "secondary";
 
@@ -16,6 +16,7 @@ interface Props {
   fontSize?: number;
   type?: ButtonTypes;
   iconPosition?: "right" | "left";
+  iconSize?: number;
 }
 const IconContainer = styled.div<{
   iconPosition: "right" | "left";
@@ -128,14 +129,21 @@ export const Base = styled.button.attrs((p: BaseProps) => ({
 
 const ContentContainer = styled.div``;
 
-const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: Props) => {
+const Button = ({
+  Icon,
+  iconPosition = "right",
+  iconSize = 16,
+  children,
+  onClick,
+  ...props
+}: Props) => {
   return (
     // @ts-expect-error type button conflict
     <Base {...props} iconButton={!(Icon == null) && !children} onClick={onClick}>
       {iconPosition === "right" ? <ContentContainer>{children}</ContentContainer> : null}
       {Icon != null ? (
         <IconContainer iconPosition={iconPosition}>
-          <Icon size={fontSizes[props.fontSize ?? 4]} />
+          <Icon size={iconSize || fontSizes[props.fontSize ?? 4]} />
         </IconContainer>
       ) : null}
       {iconPosition === "left" ? <ContentContainer>{children}</ContentContainer> : null}
@@ -144,7 +152,7 @@ const Button = ({ Icon, iconPosition = "right", children, onClick, ...props }: P
 };
 
 const StyledExpandButton: any = styled(Button).attrs(props => ({
-  Icon: props.Icon != null || ChevronDown,
+  Icon: props.Icon != null || ChevronBottom,
   iconPosition: props.iconPosition || "right",
 }))<BaseProps & { expanded: boolean }>`
   ${IconContainer} {

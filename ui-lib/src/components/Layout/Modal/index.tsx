@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import Button from "@ui/components/Button";
-import Cross from "@ui/assets/icons/Cross";
+import Close from "@ui/assets/icons/CloseRegular";
 import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 import TransitionScale from "@ui/components/Transition/TransitionScale";
 
@@ -62,7 +62,7 @@ const Modal = ({ isOpen, children, width, height, onClose = () => {} }: ModalPro
       <TransitionScale in={isOpen} appear>
         <Wrapper width={width} height={height}>
           <Container>
-            <CloseButton Icon={Cross} onClick={onClose} />
+            <CloseButton Icon={Close} onClick={onClose} />
             {children}
           </Container>
         </Wrapper>
