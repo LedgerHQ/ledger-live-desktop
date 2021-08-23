@@ -18,8 +18,8 @@ const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
   fontWeight: 600,
   lineHeight: "1.4",
 }))`
-  display: inline-flex;
-  column-gap: 0.7rem;
+  display: inline-block;
+
   &:first-letter {
     text-transform: uppercase;
   }
