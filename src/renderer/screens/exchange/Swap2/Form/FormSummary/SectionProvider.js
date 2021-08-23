@@ -25,8 +25,7 @@ const SectionProvider = () => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      {/* TODO: Remove me as soon as the data is connected */}
-      <SummaryValue handleChange={() => {}}>{getProviderIcon("changelly")}</SummaryValue>
+      <SummaryValue value="changelly">{getProviderIcon("changelly")}</SummaryValue>
     </SummarySection>
   );
 };
