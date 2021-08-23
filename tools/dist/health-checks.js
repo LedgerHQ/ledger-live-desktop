@@ -89,7 +89,7 @@ const setCanaryTagName = ctx => {
   const { version } = pkg;
   const v = semver.coerce(version);
 
-  const tag = `v${v.version}-${Date.now()}`;
+  const tag = `v${v.version}-${git.short()}`;
   ctx.tag = tag;
 };
 
