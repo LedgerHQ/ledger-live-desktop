@@ -50,11 +50,11 @@
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "Externe Anwendung",
+      "description": "Sie werden gleich zu einer Anwendung weitergeleitet, die nicht von Ledger betrieben wird.",
+      "legalAdvice": "Diese Anwendung wird nicht von Ledger betrieben. Ledger ist nicht verantwortlich für den Verlust von Geldern oder die Qualität des Dienstes einer solchen Anwendung. Achten Sie immer darauf, die auf Ihrem Gerät angezeigten Informationen sorgfältig zu überprüfen.",
+      "checkbox": "Nicht nochmal erinnern.",
+      "CTA": "Weiter"
     }
   },
   "common": {
@@ -117,11 +117,11 @@
       "needsMigration": "Klicken, um Konto zu aktualisieren",
       "error": "Synchronisierungsfehler",
       "refresh": "Neu laden",
-      "devTools": "Dev tools"
+      "devTools": "Entwicklertools"
     },
     "exchange": "Umtauschen",
     "info": "Info",
-    "connectDevice": "Connect your device"
+    "connectDevice": "Verbinden Sie Ihr Gerät"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -155,7 +155,7 @@
       "WITHDRAW_UNBONDED": "Abhebung",
       "NOMINATE": "Nominierung",
       "CHILL": "Nominierungen löschen",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "Controller einstellen"
     }
   },
   "byteSize": {
@@ -297,7 +297,7 @@
         "pending": {
           "cta": "Weiter",
           "title": "Freigabe ausstehend",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "Ihre Informationen wurden von Wyre zur Genehmigung vorgelegt.",
           "link": "Erfahren Sie mehr über KYC"
         },
         "closed": {
@@ -630,8 +630,8 @@
     },
     "history": {
       "tab": "Verlauf",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "Wird exportiert...",
+      "exportOperations": "Exportvorgänge"
     }
   },
   "lend": {
@@ -699,10 +699,10 @@
         "toSupplyTooltip": "Sie können nun Ihre Vermögenswerte bereitstellen"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "Aktivieren",
+        "inactive": "Inaktiv",
+        "supplying": "Bereitstellen",
+        "earning": "Verdienen"
       },
       "closed": {
         "assetLended": "Vermögenswert",
@@ -1043,7 +1043,7 @@
     "for": "Adresse für <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Überprüfen Sie, ob die freigegebene Adresse genau mit der auf Ihrem Gerät übereinstimmt",
     "messageIfSkipped": "Ihre {{name}} Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie diese zur Sicherheit.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "QR-Code anzeigen"
   },
   "emptyState": {
     "dashboard": {
@@ -1313,10 +1313,10 @@
         "manageAccount": "Meine Konten verwalten"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "Update verfügbar",
+        "title_plural": "Updates verfügbar",
+        "progressTitle": "{{number}} App-Update",
+        "progressTitle_plural": "{{number}} App-Updates",
         "progressWarning": "Beenden Sie den Manager nicht während der Aktualisierung.",
         "progress": "Alle aktualisieren ..."
       },
@@ -1356,31 +1356,31 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "Tauschen Sie Ihre Kryptowährungen mit ParaSwap, das die besten Kurse an dezentralen Börsen aggregiert und bereitstellt.",
+          "description": "Tauschen Sie Ihre Kryptowährungen mit ParaSwap, das die besten Kurse an dezentralen Börsen aggregiert und bereitstellt."
         },
         "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+          "shortDescription": "Kaufen Sie Bitcoin, Ethereum und weitere Kryptowährungen mit Wyre, nur verfügbar für unsere US-Kunden.",
+          "description": "Kaufen Sie Bitcoin, Ethereum und weitere Kryptowährungen mit Wyre, nur verfügbar für unsere US-Kunden."
         },
         "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
+          "shortDescription": "Setzen Sie Ihre ETH bei Lido ein, um tägliche Staking-Rewards zu erhalten.",
+          "description": "Setzen Sie Ihre ETH bei Lido ein, um tägliche Staking-Rewards zu erhalten."
         },
         "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
+          "shortDescription": "Die intelligente Art, Ihr DeFi-Portfolio zu verwalten.",
+          "description": "Die intelligente Art, Ihr DeFi-Portfolio zu verwalten."
         },
         "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+          "description": "Eine einfache Möglichkeit, die durch Ihre Hardware-Wallet gesicherte NFT zu visualisieren.",
+          "shortDescription": "Eine einfache Möglichkeit, die durch Ihre Hardware-Wallet gesicherte NFT zu visualisieren."
         },
         "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+          "description": "Verleihen oder leihen Sie Ihre Kryptowährung über ein Liquiditätsmarktprotokoll und behalten Sie die Kontrolle über Ihr Geld.",
+          "shortDescription": "Verleihen oder leihen Sie Ihre Kryptowährung über ein Liquiditätsmarktprotokoll und behalten Sie die Kontrolle über Ihr Geld."
         },
         "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "shortDescription": "Verleihen oder leihen Sie Ihre Kryptos über ein komplett dezentralisiertes Open-Source-Protokoll.",
           "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
         },
         "deversifi": {
