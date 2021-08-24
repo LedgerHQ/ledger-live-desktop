@@ -212,6 +212,55 @@
     "openButton": "Öffnen",
     "disconnectButton": "Trennen"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      },
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      },
+      "from": {
+        "title": "From",
+        "max": "Max",
+        "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
+    }
+  },
   "swap": {
     "title": "Tauschen",
     "titleCrypto": "{{currency}} tauschen",
@@ -250,27 +299,6 @@
       "title": "Wählen Sie einen Anbieter für den Tausch von Kryptowährungen",
       "learnMore": "Was bedeutet Swap?",
       "kycRequired": "KYC erforderlich",
-      "wyre": {
-        "bullets": [
-          "Nur für die USA (bald auch für Europa, Afrika und Asien)",
-          "Multi-Coins und Token",
-          "Zentralisiert"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT und 50+ andere",
-          "Mehrere Währungen",
-          "Zentralisiert"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Verbinden mit 30+ DEXs (Uniswap, SushiSwap,...)",
-          "Ethereum und ERC20 Token",
-          "Dezentralisiert und ohne Treuhand"
-        ]
-      },
       "cta": "Weiter",
       "kyc": {
         "notAvailable": "{{Provider}} ist an Ihrem Standort nicht verfügbar",
