@@ -28,6 +28,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 
+import { toBech32Address, isAddress } from "@ledgerhq/live-common/lib/families/platon/utils.min.js";
+
 const FromToWrapper: ThemedComponent<{}> = styled.div``;
 const Circle: ThemedComponent<{}> = styled.div`
   height: 32px;
@@ -128,6 +130,9 @@ export default class StepSummary extends PureComponent<StepProps> {
                     {transaction.recipient}
                   </Text>
                 </Ellipsis>
+                { transaction.family === 'platon' && isAddress(transaction.recipient) && (
+                  <Text ff="Inter"  color="palette.text.shade40" fontSize={3}>{toBech32Address('lat', transaction.recipient)}</Text>
+                )}
               </Box>
             </Box>
           </Box>

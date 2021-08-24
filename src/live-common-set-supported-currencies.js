@@ -9,6 +9,7 @@ setSupportedCurrencies([
   "ethereum",
   "bsc",
   "polkadot",
+  "platon",
   "ripple",
   "litecoin",
   "bitcoin_cash",
