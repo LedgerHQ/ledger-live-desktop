@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
@@ -11,10 +11,10 @@ import type {
   TokenAccount,
   TokenCurrency,
   CryptoCurrency,
+  Transaction,
 } from "@ledgerhq/live-common/lib/types";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { State as SwapTransactionType } from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 const RoundButton = styled(Button)`
   padding: 8px;
@@ -29,96 +29,49 @@ function SwapButton() {
   );
 }
 
-export type toAccountType =
-  | {
-      // User already has an account to accept target currency
-      targetAccountExists: true,
-      account: Account | TokenAccount,
-      parentAccount: ?Account,
-      currency: ?(TokenCurrency | CryptoCurrency),
-    }
-  | {
-      // User doesn't have an account to accept target currency
-      targetAccountExists: false,
-      account: null,
-      parentAccount: null,
-      currency: ?(TokenCurrency | CryptoCurrency),
-    }
-  // No target currency selected
-  | null;
+export type toAccountType = {
+  account: Account | TokenAccount,
+  parentAccount: Account | null,
+  currency: (TokenCurrency | CryptoCurrency) | null,
+} | null;
 
-export default function FormInputs() {
-  // TODO: would be moved to a reducer
-  const [fromAccount, setFromAccount] = useState<{
-    account: Account | TokenAccount,
-    parentAccount: ?Account,
-    currency: ?(TokenCurrency | CryptoCurrency),
-  } | null>(null);
-  const [fromAmount, setFromAmount] = useState(null);
-  const [toAccount, setToAccount] = useState<toAccountType>(null);
+type FormInputsProps = {
+  fromAccount: $PropertyType<SwapTransactionType, "account">,
+  fromAmount?: $PropertyType<Transaction, "amount">,
+  isMaxEnabled?: boolean,
+  setFromAccount: (account: $PropertyType<SwapTransactionType, "account">) => void,
+  setFromAmount: (amount: $PropertyType<Transaction, "amount">) => void,
+  toggleMax: () => void,
+};
+
+export default function FormInputs({
+  fromAccount = null,
+  fromAmount = null,
+  isMaxEnabled = false,
+  setFromAccount,
+  setFromAmount,
+  toggleMax,
+}: FormInputsProps) {
+  const [toAccount, setToAccount] = useState(null);
   const [toAmount, setToAmount] = useState(null);
-  const [isMaxEnabled, setIsMaxEnabled] = useState(false);
 
-  // TODO: would be handled by the reducer in the future
-  useEffect(() => {
-    const updateAmountToMaximum = async (): Promise<void> => {
-      const bridge = getAccountBridge(fromAccount?.account, fromAccount?.parentAccount);
-      const amount = await bridge.estimateMaxSpendable({
-        account: fromAccount?.account,
-        parentAccount: fromAccount?.parentAccount,
-      });
-      setFromAmount(amount);
-    };
-
-    if (isMaxEnabled) updateAmountToMaximum();
-    else if (fromAccount) setFromAmount(null);
-  }, [isMaxEnabled, fromAccount]);
-
-  // TODO: would be handled by the reducer in the future
   const handleSetToAccountChange = (selectSate: useSelectableCurrenciesReturnType) => {
-    const data = selectSate.account
-      ? {
-          targetAccountExists: true,
-          account: selectSate.account,
-          parentAccount: selectSate.parentAccount,
-          currency: selectSate.currency,
-        }
-      : {
-          targetAccountExists: false,
-          account: null,
-          parentAccount: null,
-          currency: selectSate.currency,
-        };
-
-    setToAccount(data);
+    setToAccount({
+      account: selectSate.account ?? null,
+      parentAccount: selectSate.parentAccount ?? null,
+      currency: selectSate.currency,
+    });
   };
-
-  // TODO: would be handled by the reducer in the future
-  const handleSetFromAccountChange = (
-    pickedAccount: Account | TokenAccount,
-    accounts: Array<Account>,
-  ): void => {
-    const parentAccount =
-      pickedAccount?.type !== "Account"
-        ? accounts.find(a => a.id === pickedAccount?.parentId)
-        : null;
-
-    const currency = getAccountCurrency(pickedAccount);
-    setFromAccount({ account: pickedAccount, parentAccount, currency });
-  };
-
-  // TODO: would be handled by the reducer in the future
-  const resetToAccount = () => setToAccount(null);
 
   return (
     <section>
       <FromRow
         fromAccount={fromAccount}
-        setFromAccount={handleSetFromAccountChange}
+        setFromAccount={setFromAccount}
         fromAmount={fromAmount}
         setFromAmount={setFromAmount}
         isMaxEnabled={isMaxEnabled}
-        setIsMaxEnabled={setIsMaxEnabled}
+        toggleMax={toggleMax}
       />
 
       <Box horizontal justifyContent="center" alignContent="center">
@@ -130,8 +83,7 @@ export default function FormInputs() {
         setToAccount={handleSetToAccountChange}
         toAmount={toAmount}
         setToAmount={setToAmount}
-        fromAccount={fromAccount?.account}
-        resetToAccount={resetToAccount}
+        fromAccount={fromAccount}
       />
     </section>
   );
