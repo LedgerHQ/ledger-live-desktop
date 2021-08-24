@@ -2572,7 +2572,7 @@
     },
     "exportLogs": {
       "title": "Enregistrer les logs",
-      "desc": "Sauvegardez les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
+      "desc": "Sauvegarder les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "btn": "Sauvegarder"
     },
     "accounts": {
