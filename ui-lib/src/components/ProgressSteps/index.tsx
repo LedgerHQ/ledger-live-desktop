@@ -82,12 +82,15 @@ export const Item = {
 };
 
 const StepText = styled(Text)<{ inactive?: boolean; errored?: boolean }>`
-  color: ${p =>
-    p.errored
-      ? p.theme.colors.palette.v2.feedback.error
-      : p.inactive
-      ? p.theme.colors.palette.v2.text.tertiary
-      : p.theme.colors.palette.v2.text.default};
+  color: ${p => {
+    if (p.errored) {
+      return p.theme.colors.palette.v2.feedback.error;
+    }
+    if (p.inactive) {
+      return p.theme.colors.palette.v2.text.tertiary;
+    }
+    return p.theme.colors.palette.v2.text.default;
+  }};
 `;
 
 const BaseSeparator = styled.div<{ inactive?: boolean }>`
@@ -127,6 +130,37 @@ const Separator = {
   `,
 };
 
+const stepContentsByState = {
+  pending: (
+    <Item.Container>
+      <Item.Pending />
+    </Item.Container>
+  ),
+  current: (
+    <Item.Container backgroundColor="palette.v2.primary.backgroundLight" borderRadius="8px">
+      <Item.Current />
+    </Item.Container>
+  ),
+  completed: (
+    <Item.Container
+      color="palette.v2.primary.dark"
+      backgroundColor="palette.v2.primary.backgroundLight"
+      borderRadius="8px"
+    >
+      <Item.Completed />
+    </Item.Container>
+  ),
+  errored: (
+    <Item.Container
+      color="palette.v2.feedback.error"
+      backgroundColor="palette.v2.orange.error"
+      borderRadius="8px"
+    >
+      <Item.Errored />
+    </Item.Container>
+  ),
+};
+
 export const Step = memo(function Step({
   state,
   label,
@@ -136,39 +170,14 @@ export const Step = memo(function Step({
   const inactive = state === "pending";
   const nextInactive = nextState === "pending";
   const errored = state === "errored";
+
   return (
     <Flex flexDirection="column" alignItems="center">
       <Item.Spacer mb="12px">
         {(!hideLeftSeparator && <Separator.Item inactive={inactive} position="left" />) || (
           <Flex flex="1" />
         )}
-        {state === "pending" ? (
-          <Item.Container>
-            <Item.Pending />
-          </Item.Container>
-        ) : state === "current" ? (
-          <Item.Container backgroundColor="palette.v2.primary.backgroundLight" borderRadius="8px">
-            <Item.Current />
-          </Item.Container>
-        ) : state === "completed" ? (
-          <Item.Container
-            color="palette.v2.primary.dark"
-            backgroundColor="palette.v2.primary.backgroundLight"
-            borderRadius="8px"
-          >
-            <Item.Completed />
-          </Item.Container>
-        ) : state === "errored" ? (
-          <Item.Container
-            color="palette.v2.feedback.error"
-            backgroundColor="palette.v2.orange.error"
-            borderRadius="8px"
-          >
-            <Item.Errored />
-          </Item.Container>
-        ) : (
-          <></>
-        )}
+        {stepContentsByState[state]}
         {(nextState && <Separator.Item inactive={nextInactive} position="right" />) || (
           <Flex flex="1" />
         )}
@@ -181,13 +190,13 @@ export const Step = memo(function Step({
 });
 
 function getState(activeIndex: number, index: number, errored?: boolean) {
-  return activeIndex < index
-    ? "pending"
-    : activeIndex === index
-    ? errored
-      ? "errored"
-      : "current"
-    : "completed";
+  if (activeIndex < index) {
+    return "pending";
+  }
+  if (activeIndex === index) {
+    return errored ? "errored" : "current";
+  }
+  return "completed";
 }
 
 function ProgressSteps({ steps, activeIndex = 0, errored }: Props) {
