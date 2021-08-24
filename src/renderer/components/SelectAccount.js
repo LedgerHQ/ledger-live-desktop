@@ -45,7 +45,7 @@ const tokenTick = (
   </div>
 );
 
-type Option = {
+export type Option = {
   matched: "boolean",
   account: Account | TokenAccount,
 };
@@ -79,15 +79,16 @@ const filterOption = o => (candidate, input) => {
   return [false, false];
 };
 
-const AccountOption = React.memo(function AccountOption({
-  account,
-  isValue,
-  disabled,
-}: {
+type AccountOptionProps = {
   account: AccountLike,
   isValue?: boolean,
   disabled?: boolean,
-}) {
+};
+export const AccountOption = React.memo<AccountOptionProps>(function AccountOption({
+  account,
+  isValue,
+  disabled,
+}: AccountOptionProps) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const name = getAccountName(account);
@@ -116,10 +117,10 @@ const AccountOption = React.memo(function AccountOption({
   );
 });
 
-const renderValue = ({ data }: { data: Option }) =>
+const defaultRenderValue = ({ data }: { data: Option }) =>
   data.account ? <AccountOption account={data.account} isValue /> : null;
 
-const renderOption = ({ data }: { data: Option }) =>
+const defaultRenderOption = ({ data }: { data: Option }) =>
   data.account ? <AccountOption account={data.account} disabled={!data.matched} /> : null;
 
 type OwnProps = {
@@ -128,6 +129,9 @@ type OwnProps = {
   filter?: Account => boolean,
   onChange: (account: ?AccountLike, tokenAccount: ?Account) => void,
   value: ?AccountLike,
+  renderValue?: typeof defaultRenderValue,
+  renderOption?: typeof defaultRenderOption,
+  placeholder?: string,
 };
 
 type Props = OwnProps & {
@@ -141,6 +145,9 @@ export const RawSelectAccount = ({
   withSubAccounts,
   enforceHideEmptySubAccounts,
   filter,
+  renderValue,
+  renderOption,
+  placeholder,
   t,
   ...props
 }: Props & { t: TFunction }) => {
@@ -196,13 +203,13 @@ export const RawSelectAccount = ({
       value={selectedOption}
       options={structuredResults}
       getOptionValue={getOptionValue}
-      renderValue={renderValue}
-      renderOption={renderOption}
+      renderValue={renderValue || defaultRenderValue}
+      renderOption={renderOption || defaultRenderOption}
       onInputChange={v => setSearchInputValue(v)}
       inputValue={searchInputValue}
       filterOption={false}
       isOptionDisabled={option => !option.matched}
-      placeholder={t("common.selectAccount")}
+      placeholder={placeholder || t("common.selectAccount")}
       noOptionsMessage={({ inputValue }) =>
         t("common.selectAccountNoOption", { accountName: inputValue })
       }
