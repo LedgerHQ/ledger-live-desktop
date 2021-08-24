@@ -215,50 +215,50 @@
   "swap2": {
     "title": "Swap",
     "tabs": {
-      "exchange": "Exchange",
-      "history": "History"
+      "exchange": "Swap",
+      "history": "Historique"
     },
     "form": {
       "providerDrawer": {
-        "title": "Change Provider",
-        "quote": "Quote",
-        "receive": "Receive",
-        "onChain": "On Chain",
-        "offChain": "Off Chain"
+        "title": "Changer de prestataire",
+        "quote": "Prix",
+        "receive": "Recevoir",
+        "onChain": "On-chain",
+        "offChain": "Off-chain"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "Prestataire",
+          "rate": "Prix",
+          "fees": "Frais",
+          "target": "Compte destinataire"
         },
         "tooltip": {
           "provider": "lorem ipsum",
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{target}} account",
-        "noAccountCTA": "Add account"
+        "noAccount": "Pas de compte {{target}}",
+        "noAccountCTA": "Ajouter un compte"
       },
       "from": {
-        "title": "From",
+        "title": "De",
         "max": "Max",
-        "accountPlaceholder": "Select source"
+        "accountPlaceholder": "Choisir la source"
       },
       "to": {
-        "title": "To"
+        "title": "À"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country"
+      "notAvailable": "Service temporairement indisponible, ou non disponible dans votre pays"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Vos swaps réalisés apparaîtront ici.",
+        "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
       },
-      "export": "Export operations",
-      "exporting": "Exporting..."
+      "export": "Exporter les opérations",
+      "exporting": "Exportation..."
     }
   },
   "swap": {
