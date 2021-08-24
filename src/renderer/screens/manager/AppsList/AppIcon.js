@@ -6,7 +6,7 @@ import { findCryptoCurrencyById, getCurrencyColor } from "@ledgerhq/live-common/
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import Image from "~/renderer/components/Image";
 import { getCryptoCurrencyIcon } from "@ledgerhq/live-common/lib/react";
-import ManagerAppIcon from "~/renderer/icons/ManagerAppIcon";
+import ManagerAppIconPlaceholder from "~/renderer/icons/ManagerAppIcon";
 
 const size = 40;
 // trick to format size for certain type of icons
@@ -73,7 +73,7 @@ function AppIcon({ app, theme }: Props) {
   ) : (
     <IconContainer loading={loading} size={size}>
       <ManagerAppIconContainer>
-        <ManagerAppIcon size={size} />
+        <ManagerAppIconPlaceholder size={size} />
       </ManagerAppIconContainer>
       <Image alt="" onLoad={onLoad} resource={iconUrl} width={size} height={size} />
     </IconContainer>
