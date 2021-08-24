@@ -143,7 +143,7 @@ function AddAccountButton() {
   );
 }
 const AddAccountFooter = (small?: boolean) =>
-  function AddAccountFooter({ children, ...props }: { children?: React.Node }) {
+  function AddAccountFooter({ children, ...props }: { children?: React$Node }) {
     const dispatch = useDispatch();
     const openAddAccounts = useCallback(() => {
       dispatch(openModal("MODAL_ADD_ACCOUNTS"));

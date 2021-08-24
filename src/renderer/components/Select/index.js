@@ -46,7 +46,7 @@ type Props = {
   rowHeight: number,
   error: ?Error, // NB at least a different rendering for now
   stylesMap: CreateStylesReturnType => CreateStylesReturnType,
-  extraRenderers?: { [string]: (props: *) => JSX.Element }, // Allows overriding react-select components. See: https://react-select.com/components
+  extraRenderers?: { [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
 };
 
 const Row = styled.div`
@@ -223,10 +223,13 @@ class Select extends PureComponent<Props> {
             ? {
                 MenuList,
                 ...createRenderers({ renderOption, renderValue }),
+                // Flow is unhappy because extraRenderers keys can "theorically" conflict.
+                // $FlowFixMe
                 ...(extraRenderers || {}),
               }
             : {
                 ...createRenderers({ renderOption, renderValue }),
+                // $FlowFixMe
                 ...(extraRenderers || {}),
               }
         }
