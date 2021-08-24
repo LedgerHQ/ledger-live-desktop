@@ -253,6 +253,7 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
 const BuyCrypto = () => {
   const [skipDevice, setSkipDevice] = useState(false);
   const device = useSelector(getCurrentDevice);
+  const { t } = useTranslation();
 
   return (
     <Modal
@@ -266,7 +267,7 @@ const BuyCrypto = () => {
             }
             onClose();
           }}
-          title="Connect your device"
+          title={t("common.connectDevice")}
           renderFooter={() =>
             data && !device ? (
               <StepConnectDeviceFooter

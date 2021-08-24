@@ -102,6 +102,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
             <Trans
               i18nKey="manager.applist.updatable.progressTitle"
               values={{ number: updateAllQueue.length }}
+              count={updateAllQueue.length}
             />
           </Text>
           <Text ff="Inter|SemiBold" fontSize={2} color="palette.text.shade60">
@@ -130,7 +131,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
     ) : (
       <>
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
-          <Trans i18nKey="manager.applist.updatable.title" />
+          <Trans i18nKey="manager.applist.updatable.title" count={update.length} />
         </Text>
         <Badge ff="Inter|Bold" fontSize={3} color="white">
           {update.length}
