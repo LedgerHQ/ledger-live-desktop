@@ -55,7 +55,7 @@ class EmptyStateAccount extends PureComponent<Props, *> {
       mainAccount.subAccounts[0].type === "TokenAccount";
 
     return (
-      <Box mt={7} alignItems="center" selectable>
+      <Box mt={10} alignItems="center" selectable>
         <Image
           alt="emptyState Account logo"
           resource={{

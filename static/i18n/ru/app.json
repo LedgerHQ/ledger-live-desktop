@@ -155,7 +155,7 @@
       "WITHDRAW_UNBONDED": "Вывод разблокированной суммы",
       "NOMINATE": "Назначение",
       "CHILL": "Отменить назначения",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "Назначить контроллера"
     }
   },
   "byteSize": {
@@ -1356,40 +1356,40 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "Обменивайте криптовалюту с помощью ParaSwap. Оператор собирает и предлагает лучшие котировки среди децентрализованных бирж.",
+          "description": "Обменивайте криптовалюту с помощью ParaSwap. Оператор собирает и предлагает лучшие котировки среди децентрализованных бирж."
         },
         "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+          "shortDescription": "Покупайте Биткойн, Эфириум и другие криптовалюты при помощи Wyre. Услуга доступна только нашим клиентам в США.",
+          "description": "Покупайте Биткойн, Эфириум и другие криптовалюты при помощи Wyre. Услуга доступна только нашим клиентам в США."
         },
         "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
+          "shortDescription": "Стейкируйте свои ETH при помощи Lido и получайте вознаграждение ежедневно.",
+          "description": "Стейкируйте свои ETH при помощи Lido и получайте вознаграждение ежедневно."
         },
         "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
+          "shortDescription": "Продуманный способ управления вашим DeFi-портфелем.",
+          "description": "Продуманный способ управления вашим DeFi-портфелем."
         },
         "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+          "description": "Простой способ визуализировать NFT, защищённый вашим аппаратным кошельком.",
+          "shortDescription": "Простой способ визуализировать NFT, защищённый вашим аппаратным кошельком."
         },
         "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+          "description": "Давайте свои криптоактивы в кредит через протокол рыночной ликвидности и продолжайте контролировать свои средства.",
+          "shortDescription": "Давайте свои криптоактивы в кредит через протокол рыночной ликвидности и продолжайте контролировать свои средства."
         },
         "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+          "shortDescription": "Давайте свои криптоактивы в кредит через полностью децентрализованный протокол с открытым исходным кодом.",
+          "description": "Давайте свои криптоактивы в кредит через полностью децентрализованный протокол с открытым исходным кодом."
         },
         "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+          "shortDescription": "Торгуйте на некастодиальной DEX-бирже – решении 2-го уровня на блокчейне Эфириума.",
+          "description": "Торгуйте на некастодиальной DEX-бирже – решении 2-го уровня на блокчейне Эфириума."
         },
         "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+          "shortDescription": "Обменивайте криптовалюту через Defi/DEX агрегатор на блокчейне Эфириума.",
+          "description": "Обменивайте криптовалюту через Defi/DEX агрегатор на блокчейне Эфириума."
         }
       },
       "dependencyInstall": {
@@ -2039,7 +2039,7 @@
       },
       "header": "Назначения",
       "nominate": "Назначить",
-      "setController": "Change Controller",
+      "setController": "Сменить контроллера",
       "chill": "Отменить назначения",
       "totalStake": "Общая доля",
       "amount": "Заблокированная сумма",
@@ -2061,9 +2061,9 @@
       "electionOpen": "Сейчас идёт подбор новых валидаторов. Следовательно, операции в стейкинга доступны не более 15 минут.",
       "electionOpenTooltip": "Эта операция отключена в процессе выбора валидаторов",
       "externalControllerTooltip": "Этот счёт контролируется другим счётом.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
+      "externalControllerUnsupported": "<0>Этот stash-счёт контролируется отдельным счётом с адресом <0>{{controllerAddress}}</0>.</0><1>Чтобы стейкировать средства в Ledger Live, вам нужно назначить stash-счёт в качестве самостоятельного контроллера.</1>",
       "externalStashTooltip": "Этот счёт контролирует другой счёт.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0>Этот счёт контролируется отдельным счётом с адресом <0>{{stashAddress}}</0>.</0><1>Чтобы стейкировать средства в Ledger Live, вам нужно назначить этот stash-счёт в качестве самостоятельного контроллера.</1>",
       "showInactiveNominations": "Показать всех номинаторов ({{count}})",
       "hideInactiveNominations": "Показать только активных номинаторов",
       "noActiveNominations": "Нет активных номинаторов.",
@@ -2252,9 +2252,9 @@
           "info": "Блокированные активы останутся заблокированными. Если их разблокировать, доступ к ним будет восстановлен только спустя 28 дней."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "Сменить контроллера",
+          "description": "Назначить этот счёт в Ledger в качестве самостоятельного контроллера",
+          "info": "Ledger Live не поддерживает операции на отдельных stash-счетах и счетах контроллеров."
         }
       },
       "steps": {
@@ -2401,9 +2401,9 @@
         "button": "Готово",
         "title": "Сканируйте для экспорта в мобильное приложение",
         "listTitle": "В мобильном приложении Ledger Live:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "Нажмите на кнопку <highlight><icon>+</icon></highlight> в разделе <highlight>Счета</highlight>",
+        "step2": "Нажмите <highlight>Импорт из настольного приложения</highlight>",
+        "step3": "Сканируйте <highlight>LiveQR-код</highlight> до тех пор, пока не наберётся 100%"
       }
     },
     "display": {
@@ -2482,32 +2482,32 @@
       "disclaimer": "Это Экспериментальные функции, предоставляемые на условиях «как есть» для нашего сообщества технических энтузиастов. Эти функции могут быть изменены, заблокированы или удалены в любое время. Активируя их, вы принимаете на себя все риски использования.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "использовать TronGrid.io",
+          "description": "Использовать trongrid напрямую без прокси Ledger"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "Тестирование перевода",
+          "description": "Добавляет непредставленные языки в список языков на вкладке Общие настройки."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "Режим разработчика",
+          "description": "Показывает приложения от разработчиков и из тестнета в Менеджере."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "Расширенный поиск по счетам",
+          "description": "Сканирование счетов с ошибочными путями вывода. Пожалуйста, отправьте потенциально найденные активы на обычный счёт."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "API экспериментальных обозревателей",
+          "description": "Попробуйте предстоящую версию обозревателей блокчейна Ledger. Изменение этой настройки может повлиять на баланс и синхронизацию счета, а также на функцию отправки.\n(<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "Пользовательский gap limit",
+          "description": "Пользовательский gap limit для всех счетов. Увеличение этого значения предела (20) позволяет сканировать более неиспользуемые публичные адреса для монет. Только для опытных пользователей, это может навредить совместимости при восстановлении ваших счетов."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "Поставщик приложений",
+          "description": "Смена поставщика приложений в Диспетчере может сделать невозможной установку или удаление приложений на вашем Ledger устройстве."
         }
       }
     },
@@ -2743,7 +2743,7 @@
         "hasNoRecovery": "Впервые подключаете {{deviceName}}?",
         "hasRecovery": "Есть фраза восстановления?",
         "separator": "или",
-        "switchDevice": "Switch device",
+        "switchDevice": "Переключить устройство",
         "options": {
           "1": {
             "heading": "Первое подключение",
@@ -3244,7 +3244,7 @@
       "unbond": "Подтвердите завершение операции на устройстве",
       "rebond": "Подтвердите завершение операции на устройстве",
       "withdrawUnbonded": "Подтвердите завершение операции на устройстве",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "Пожалуйста, подтвердите завершение операции на устройстве"
     },
     "recipientWording": {
       "send": "получатель",
@@ -3260,10 +3260,10 @@
     "placeholder": "Введите адрес {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "Правовая информация",
+    "termsLabel": "Условия обслуживания",
+    "privacyLabel": "Политика конфиденциальности",
+    "switchLabel": "Я прочитал(-а) и соглашаюсь с Условиями использования и Политикой конфиденциальности",
     "cta": "Войти в приложение Ledger"
   },
   "families": {
