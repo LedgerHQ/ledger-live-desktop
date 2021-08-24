@@ -212,6 +212,55 @@
     "openButton": "打开",
     "disconnectButton": "断开连接"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      },
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      },
+      "from": {
+        "title": "From",
+        "max": "Max",
+        "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
+    }
+  },
   "swap": {
     "title": "Swap 交换",
     "titleCrypto": "Swap 交换 {{currency}}",
@@ -250,27 +299,6 @@
       "title": "选择一个提供方来进行加密资产的 swap 交换",
       "learnMore": "什么是 Swap 交换？",
       "kycRequired": "需要 KYC",
-      "wyre": {
-        "bullets": [
-          "仅限美国（欧洲、非洲和亚洲即将开放）",
-          "多币和代币",
-          "中心化的"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "比特币、以太币、泰达币以及50余个其他币种",
-          "多币种",
-          "中心化的"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "连接到 30 多个 DEXs (Uniswap, SushiSwap,...)",
-          "以太坊 和 ERC20 代币",
-          "去中心化与无需信任"
-        ]
-      },
       "cta": "继续",
       "kyc": {
         "notAvailable": "{{provider}} 在您的位置不可用",
