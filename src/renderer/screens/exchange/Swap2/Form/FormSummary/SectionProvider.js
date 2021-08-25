@@ -4,16 +4,19 @@ import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import { useTranslation } from "react-i18next";
-import IconChangelly from "~/renderer/icons/providers/Changelly";
+import ChangellyIcon from "~/renderer/icons/providers/Changelly";
+import WyreIcon from "~/renderer/icons/providers/Wyre";
 
-// TODO: Think about a fallback provider icon
+const providerIcons = { changelly: ChangellyIcon, wyre: WyreIcon };
+
 export const getProviderIcon = (providerName?: string) => {
   if (!providerName) return null;
 
-  const providerIcons = { changelly: IconChangelly };
   const Icon = providerIcons[providerName.toLowerCase()];
+
   /* eslint-disable react/display-name */
-  return <Icon size={20} />;
+  if (Icon) return <Icon size={20} />;
+  return null;
 };
 
 const SectionProvider = () => {
@@ -25,8 +28,7 @@ const SectionProvider = () => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      {/* TODO: Remove me as soon as the data is connected */}
-      <SummaryValue handleChange={() => {}}>{getProviderIcon("changelly")}</SummaryValue>
+      <SummaryValue value="changelly">{getProviderIcon("changelly")}</SummaryValue>
     </SummarySection>
   );
 };
