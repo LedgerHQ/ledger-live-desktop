@@ -54,12 +54,26 @@ async function loadAnnouncements(): Promise<{
   return data;
 }
 
+const getOsPlatform = () => {
+  const osPlatform = process.platform;
+  if (osPlatform === "darwin") {
+    return "mac";
+  } else if (osPlatform === "win32" || osPlatform === "win64") {
+    return "windows";
+  } else if (osPlatform === "linux") {
+    return "linux";
+  }
+
+  return osPlatform;
+};
+
 export function AnnouncementProviderWrapper({ children }: Props) {
   const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
   const currencies = useSelector(currenciesIdSelector);
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
   const dispatch = useDispatch();
+  const osPlatform = getOsPlatform();
 
   // $FlowFixMe please help on fixing this. bad type on live-common?
   const { pushToast, dismissToast } = useToasts();
@@ -69,7 +83,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     currencies,
     getDate: () => new Date(),
     lastSeenDevice: lastSeenDevice || undefined,
-    platform: process.platform,
+    platform: osPlatform,
     appVersion: __APP_VERSION__,
   };
 
