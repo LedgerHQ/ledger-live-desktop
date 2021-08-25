@@ -31,6 +31,7 @@ type Props = {
   account: Account,
   parentAccount: ?Account,
   strategies: FeeStrategy[],
+  mapStrategies?: FeeStrategy => FeeStrategy & { [string]: * },
   suffixPerByte?: boolean,
 };
 
@@ -43,25 +44,30 @@ const FeesWrapper = styled(Box)`
     `1px solid ${
       p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider
     }`};
-  padding: 12px;
+  ${p => (p.selected ? "box-shadow: 0px 0px 0px 4px rgba(100, 144, 241, 0.3);" : "")}
+  padding: 20px 16px;
   width: 100%;
   font-family: "Inter";
   border-radius: 4px;
+  ${p => (p.disabled ? `background: #F5F5F5;` : "")};
 
   &:hover {
-    cursor: pointer;
+    cursor: ${p => (p.disabled ? "unset" : "pointer")};
   }
 `;
 
 const FeesHeader = styled(Box)`
   color: ${p =>
-    p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade30};
+    p.selected
+      ? p.theme.colors.palette.primary.main
+      : p.disabled
+      ? p.theme.colors.palette.text.shade20
+      : p.theme.colors.palette.text.shade50};
 `;
 
 const FeesValue = styled(Box)`
-  text-align: right;
-  flex-direction: column;
-  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const SelectFeeStrategy = ({
@@ -70,28 +76,31 @@ const SelectFeeStrategy = ({
   parentAccount,
   onClick,
   strategies,
+  mapStrategies,
   suffixPerByte,
 }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const accountUnit = getAccountUnit(mainAccount);
   const feesCurrency = getAccountCurrency(mainAccount);
   const { t } = useTranslation();
+  strategies = mapStrategies ? strategies.map(mapStrategies) : strategies;
 
   return (
     <Box alignItems="center" flow={2}>
       {strategies.map(s => {
         const selected = transaction.feesStrategy === s.label;
         const amount = s.displayedAmount || s.amount;
-        const label = s.label;
+        const { label, disabled } = s;
         return (
           <FeesWrapper
             key={s.label}
             selected={selected}
+            disabled={disabled}
             onClick={() => {
-              onClick({ amount: s.amount, feesStrategy: label });
+              !disabled && onClick({ amount: s.amount, feesStrategy: label });
             }}
           >
-            <FeesHeader horizontal alignItems="center" selected={selected}>
+            <FeesHeader horizontal alignItems="center" selected={selected} disabled={disabled}>
               {label === "medium" ? (
                 <TachometerMedium size={14} />
               ) : label === "slow" ? (
@@ -100,16 +109,35 @@ const SelectFeeStrategy = ({
                 <TachometerHigh size={14} />
               )}
               <Text
-                style={{ marginLeft: "5px", textTransform: "uppercase" }}
-                fontSize={2}
-                fontWeight="600"
+                style={{ marginLeft: "6px", textTransform: "uppercase" }}
+                fontSize={0}
+                fontWeight="800"
               >
                 <Trans i18nKey={`fees.${label}`} />
               </Text>
             </FeesHeader>
             <FeesValue>
+              {s.displayedAmount ? (
+                <CounterValue
+                  currency={feesCurrency}
+                  value={amount}
+                  color={disabled ? "palette.text.shade20" : "palette.text.shade50"}
+                  fontSize={3}
+                  mr={2}
+                  showCode
+                  alwaysShowValue
+                />
+              ) : null}
               <FormattedVal
-                color="palette.text.shade100"
+                noShrink
+                inline
+                color={
+                  selected
+                    ? "palette.primary.main"
+                    : disabled
+                    ? "palette.text.shade40"
+                    : "palette.text.shade100"
+                }
                 fontSize={3}
                 fontWeight="600"
                 val={amount}
@@ -124,17 +152,6 @@ const SelectFeeStrategy = ({
                 }
                 alwaysShowValue
               />
-              {s.displayedAmount ? (
-                <CounterValue
-                  currency={feesCurrency}
-                  value={amount}
-                  color="palette.text.shade50"
-                  fontWeight="500"
-                  fontSize={3}
-                  showCode
-                  alwaysShowValue
-                />
-              ) : null}
             </FeesValue>
           </FeesWrapper>
         );
