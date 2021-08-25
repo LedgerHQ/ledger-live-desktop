@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { fontSize } from "styled-system";
+import { fontSize, textAlign } from "styled-system";
 import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
 import Spinner from "~/renderer/components/Spinner";
@@ -32,7 +32,15 @@ const Container = styled(Box).attrs(() => ({
     p.disabled
       ? p.theme.colors.palette.background.default
       : p.theme.colors.palette.background.paper};
-  border-radius: ${p => p.theme.radii[1]}px;
+
+  ${p =>
+    p.noBorderLeftRadius
+      ? `
+      border-top-right-radius: ${p.theme.radii[1]}px;
+      border-bottom-right-radius: ${p.theme.radii[1]}px;`
+      : `
+    border-radius: ${p.theme.radii[1]}px;
+  `}
   border-width: ${p => (p.noBorder ? 0 : 1)}px;
   border-style: solid;
   border-color: ${p =>
@@ -119,6 +127,7 @@ const Base = styled.input.attrs(() => ({
   font-weight: 600;
   ${fontFamily};
   ${fontSize};
+  ${textAlign};
   border: 0;
   color: ${p => p.theme.colors.palette.text.shade100};
   height: 100%;

@@ -118,7 +118,11 @@ const AppsList = ({
   const addAccount = useCallback(
     currency => {
       push("/accounts");
-      reduxDispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: currency || null }));
+      reduxDispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency || null,
+        }),
+      );
     },
     [push, reduxDispatch],
   );
