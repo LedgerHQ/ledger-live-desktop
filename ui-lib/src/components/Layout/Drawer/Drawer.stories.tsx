@@ -8,7 +8,7 @@ import { useArgs } from "@storybook/client-api";
 const DummyContentWrapper = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${(p) => p.color};
+  background-color: ${p => p.color};
   align-items: center;
   padding: 10px;
 `;
