@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import styled from "styled-components";
-import CounterValue from "~/renderer/components/CounterValue";
+import CounterValue, { NoCountervaluePlaceholder } from "~/renderer/components/CounterValue";
 import { useHistory } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
 
@@ -119,9 +119,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
         {distribution ? (
           <Price from={currency} color="palette.text.shade80" fontSize={3} />
         ) : (
-          <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
-            {"-"}
-          </Text>
+          <NoCountervaluePlaceholder style={null} />
         )}
       </PriceSection>
       <Distribution>
@@ -159,9 +157,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               showCode
             />
           ) : (
-            <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
-              {"-"}
-            </Text>
+            <NoCountervaluePlaceholder style={null} />
           )}
         </Ellipsis>
       </Value>

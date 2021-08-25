@@ -101,6 +101,7 @@ export default function AccountBalanceSummaryHeader({
               color="warmGrey"
               fontSize={6}
               iconSize={16}
+              placeholder={typeof data[1].balance !== "number" ? " " : undefined}
             />
           </Wrapper>
         </BalanceTotal>
