@@ -10,14 +10,14 @@ import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
 import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { toAccountType } from "./FormInputs";
+import type { ToAccountType } from "./FormInputs";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
   fromAccount: ?(Account | TokenAccount),
-  toAccount: ?toAccountType,
+  toAccount: ?ToAccountType,
   setToAccount: useSelectableCurrenciesReturnType => void,
   toAmount: ?BigNumber,
   setToAmount: BigNumber => void,

@@ -29,7 +29,7 @@ function SwapButton() {
   );
 }
 
-export type toAccountType = {
+export type ToAccountType = {
   account: Account | TokenAccount,
   parentAccount: Account | null,
   currency: (TokenCurrency | CryptoCurrency) | null,
