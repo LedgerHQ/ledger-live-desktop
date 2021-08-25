@@ -117,10 +117,11 @@
       "needsMigration": "Haz clic para actualizar la cuenta",
       "error": "Error de sincronización",
       "refresh": "Actualizar",
-      "devTools": "Dev tools"
+      "devTools": "Herramientas de desarrollo"
     },
     "exchange": "Exchange",
-    "info": "Info"
+    "info": "Info",
+    "connectDevice": "Conecta tu dispositivo"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -153,7 +154,8 @@
       "SLASH": "Penalización",
       "WITHDRAW_UNBONDED": "Retiro",
       "NOMINATE": "Nominación",
-      "CHILL": "Borrar nominaciones"
+      "CHILL": "Borrar nominaciones",
+      "SET_CONTROLLER": "Definir controladora"
     }
   },
   "byteSize": {
@@ -295,7 +297,7 @@
         "pending": {
           "cta": "Continuar",
           "title": "Aprobación pendiente",
-          "subtitle": "Tu información se ha enviado para su aprobación por parte de Wyre. Normalmente tarda de 1 a 3 días antes de poder comenzar a permutar.",
+          "subtitle": "Tu información fue enviada para su aprobación por Wyre.",
           "link": "Conocer más sobre KYC"
         },
         "closed": {
@@ -627,7 +629,9 @@
       "continue": "Continuar"
     },
     "history": {
-      "tab": "Historial"
+      "tab": "Historial",
+      "exporting": "Exportando...",
+      "exportOperations": "Exportar operaciones"
     }
   },
   "lend": {
@@ -645,7 +649,7 @@
       "amountSupplied": "Importe depositado",
       "amountSuppliedTooltip": "Importe prestado a la red",
       "currencyAPY": "APY de divisa",
-      "currencyAPYTooltip": "Tasa de rendimiento anual de un depósito bajo Compound de forma continuada",
+      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
       "accruedInterests": "Interés acumulado",
       "accruedInterestsTooltip": "Interés generado por tus activos prestados",
       "interestEarned": "Interés recibido",
@@ -694,6 +698,12 @@
         "enablingTooltip": "Tu transacción se está transmitiendo",
         "toSupplyTooltip": "Puedes suministrar ahora tus activos"
       },
+      "types": {
+        "enabling": "Activando",
+        "inactive": "Inactivo",
+        "supplying": "Suministrando",
+        "earning": "Ganando"
+      },
       "closed": {
         "assetLended": "Activo",
         "amountRedeemed": "Importe a retirar",
@@ -710,8 +720,8 @@
         "allAssets": "Activo",
         "totalBalance": "Saldo de activos",
         "totalBalanceTooltip": "Monto disponible para prestar",
-        "currentAPY": "APY del depósito ",
-        "currentAPYTooltip": "Tasa de rendimiento anual ganada mediante un depósito continuamente en Compound",
+        "currentAPY": "Deposit APY",
+        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
         "actions": "Acciones"
       }
     },
@@ -1032,7 +1042,8 @@
     "title": "Dirección actual",
     "for": "Dirección para <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Comprueba que la dirección compartida coincida exactamente con la de tu dispositivo",
-    "messageIfSkipped": "Tu dirección {{name}} no ha sido confirmada en tu dispositivo Ledger. Verifícala para mayor seguridad."
+    "messageIfSkipped": "Tu dirección {{name}} no ha sido confirmada en tu dispositivo Ledger. Verifícala para mayor seguridad.",
+    "showQrCode": "Mostrar código QR"
   },
   "emptyState": {
     "dashboard": {
@@ -1226,7 +1237,7 @@
   "DeviceAction": {
     "allowAppPermission": "Abre la aplicación {{wording}} en tu dispositivo",
     "allowAppPermissionSubtitleToken": "para administrar los tokens {{token}}",
-    "allowManagerPermission": "Permite {{wording}} en tu dispositivo",
+    "allowManagerPermission": "Permite (Allow) {{wording}} en tu dispositivo",
     "loading": "Cargando...",
     "connectAndUnlockDevice": "Conecta y desbloquea tu dispositivo",
     "unlockDevice": "Desbloquea tu dispositivo",
@@ -1302,8 +1313,10 @@
         "manageAccount": "Administrar mis cuentas"
       },
       "updatable": {
-        "title": "Actualizaciones disponibles",
-        "progressTitle": "{{number}} actualizaciones de aplicación",
+        "title": "Actualización disponible",
+        "title_plural": "Actualizaciones disponibles",
+        "progressTitle": "Actualización de {{number}} aplicación",
+        "progressTitle_plural": "Actualizaciones de {{number}} aplicaciones",
         "progressWarning": "No cierres Manager durante la actualización.",
         "progress": "Actualizando todo..."
       },
@@ -1341,6 +1354,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados.",
+          "description": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados."
+        },
+        "wyre_buy": {
+          "shortDescription": "Compra Bitcoin, Ethereum y más criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos.",
+          "description": "Compra Bitcoin, Ethereum y otras criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos."
+        },
+        "lido": {
+          "shortDescription": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias.",
+          "description": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias."
+        },
+        "zerion": {
+          "shortDescription": "La forma inteligente de administrar tu portfolio DeFi.",
+          "description": "La forma inteligente de administrar tu portfolio DeFi."
+        },
+        "rainbow": {
+          "description": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware.",
+          "shortDescription": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware."
+        },
+        "aave": {
+          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos.",
+          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos."
+        },
+        "compound": {
+          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado.",
+          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado."
+        },
+        "deversifi": {
+          "shortDescription": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2.",
+          "description": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum.",
+          "description": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "Es necesaria la aplicación {{dependency}}",
         "description": "También se instalará la aplicación {{dependency}} ya que la aplicación {{app}} la necesita.",
@@ -1474,7 +1525,7 @@
     "steps": {
       "amount": {
         "title": "Descongelar",
-        "info": "La descongelación disminuirá tu {{resource}} y cancelará tus votos."
+        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
       },
       "connectDevice": {
         "title": "Dispositivo"
@@ -1988,6 +2039,7 @@
       },
       "header": "Nominaciones",
       "nominate": "Nominar",
+      "setController": "Cambiar controladora",
       "chill": "Borrar nominaciones",
       "totalStake": "Participación total",
       "amount": "Importe vinculado",
@@ -2009,9 +2061,9 @@
       "electionOpen": "La elección de nuevos validadores está en curso. Por lo tanto, las operaciones de participación no estarán disponibles hasta dentro de 15 minutos como máximo.",
       "electionOpenTooltip": "Esta operación está inhabilitada durante la elección de validadores",
       "externalControllerTooltip": "Esta cuenta está controlada por otra cuenta.",
-      "externalControllerUnsupported": "<0>Esta cuenta de reserva está controlada por otra cuenta con la dirección <0>{{address}}</0>.</0><1> Las operaciones de participación con cuentas que están controladas por una cuenta distinta no son compatibles con Ledger Live. Utiliza una billetera alternativa como Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>Esta cuenta de almacenamiento está controlada por una cuenta distinta cuya dirección es <0>{{controllerAddress}}</0>.</0><1>Para participar tokens mediante Ledger Live, debes definir a esta cuenta de almacenamiento como su propia controladora.</1>",
       "externalStashTooltip": "Esta cuenta controla otra cuenta.",
-      "externalStashUnsupported": "<0>Esta cuenta controla una cuenta de reserva cuya dirección es <0>{{address}}</0>. </0><1>Ledger Live no admite las operaciones de participación en cuentas de reserva separadas. Utiliza una billetera alternativa como Polkadot.js</1>",
+      "externalStashUnsupported": "<0>Esta cuenta es la controladora de una cuenta de almacenamiento distinta cuya dirección es <0>{{stashAddress}}</0>.</0><1>Para participar tokens mediante Ledger Live, debes definir a tu cuenta de almacenamiento como su propia controladora.</1>",
       "showInactiveNominations": "Mostrar todas las nominaciones ({{count}})",
       "hideInactiveNominations": "Mostrar solo las nominaciones activas",
       "noActiveNominations": "No hay nominaciones activas.",
@@ -2198,6 +2250,11 @@
           "title": "Borrar nominaciones",
           "description": "Borra todas las nominaciones y no permite recibir recompensas.",
           "info": "Los activos vinculados seguirán estando vinculados. Si los desvinculas, estarán disponibles después de 28 días."
+        },
+        "setController": {
+          "title": "Cambiar controladora",
+          "description": "Define a esta cuenta de Ledger como su propia controladora",
+          "info": "Ledger Live no es compatible con operaciones de cuentas de almacenamiento que son distintas a sus cuentas controladoras."
         }
       },
       "steps": {
@@ -2328,7 +2385,7 @@
       "about": "Información",
       "experimental": "Funciones experimentales",
       "accounts": "Cuentas",
-      "developer": "Developer"
+      "developer": "Desarrollador"
     },
     "export": {
       "accounts": {
@@ -2344,9 +2401,9 @@
         "button": "Listo",
         "title": "Escanear para exportar a Mobile",
         "listTitle": "En la aplicación Ledger Live Mobile:",
-        "step1": "Presiona el botón <1><0>+</0></1> en <3><0>Cuentas</0></3>",
-        "step2": "Toca <1><0>Importar cuentas de Desktop</0></1>",
-        "step3": "Escanea el <1><0>código LiveQR</0></1> hasta que el progreso alcance el 100 %"
+        "step1": "Toca el botón <highlight><icon>+</icon></highlight> en <highlight>cuentas</highlight>",
+        "step2": "Toca <highlight>Importar cuentas de Desktop</highlight>",
+        "step3": "Escanea el <highlight>código LiveQR</highlight> hasta que la carga llegue a 100%"
       }
     },
     "display": {
@@ -2365,22 +2422,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "¡Ahora eres un desarrollador!",
+        "text": "Bienvenido al País de las Maravillas"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "Permitir aplicaciones de depuración",
+      "debugAppsDesc": "Mostrar y permitir la utilización de aplicaciones de plataforma etiquetadas como de depuración.",
+      "experimentalApps": "Permitir aplicaciones experimentales",
+      "experimentalAppsDesc": "Mostrar y permitir la utilización de aplicaciones de plataforma etiquetadas como experimentales.",
+      "catalogServer": "Definir el proveedor del catálogo",
+      "catalogServerDesc": "Cambiar entre distintas fuentes de aplicaciones de plataforma",
+      "enablePlatformDevTools": "Habilitar herramientas de desarrollo de plataforma",
+      "enablePlatformDevToolsDesc": "Habilitar ventana de herramientas de desarrollo de aplicaciones de plataforma",
+      "addLocalApp": "Añadir una aplicación local",
+      "addLocalAppDesc": "Explorar archivos locales y añadir una aplicación local usando un manifiesto local",
+      "addLocalAppButton": "Explorar",
+      "runLocalAppDeleteButton": "Borrar",
+      "runLocalAppOpenButton": "Abrir"
     },
     "currencies": {
       "selectPlaceholder": "Seleccionar activo cripto",
@@ -2404,7 +2461,7 @@
       "hardResetDesc": "Borrar todos los datos de Ledger Live almacenados en tu PC, incluidas tus cuentas, historial de transacciones y ajustes.",
       "hardReset": "Restablecer",
       "analytics": "Análisis",
-      "analyticsDesc": "Habilita el análisis para ayudar a Ledger a mejorar la experiencia de usuario. Esto incluye clics, páginas visitadas,  redireccionamientos, acciones (enviar, recibir, bloquear, etc.), deslizamientos hasta el final de página, instalaciones o desinstalaciones y versión de aplicación,  cantidad de cuentas, activos cripto y operaciones, duración las sesiones, tipo de dispositivo Ledger y firmware.",
+      "analyticsDesc": "Habilita el análisis para ayudar a Ledger a mejorar la experiencia de usuario. Esto incluye clics, páginas visitadas,  redireccionamientos, acciones (enviar, recibir, bloquear, etc.), deslizamientos hasta el final de página, instalaciones o desinstalaciones y versión de aplicación,  cantidad de cuentas, activos cripto y operaciones, duración de las sesiones, tipo de dispositivo Ledger y firmware.",
       "reportErrors": "Informes de errores",
       "reportErrorsDesc": "Envía automáticamente informes para ayudar a Ledger a mejorar sus productos.",
       "launchOnboarding": "Configuración del dispositivo",
@@ -2422,7 +2479,37 @@
       "privacyDesc": "Consulta la Política de privacidad para saber qué datos personales recopilamos, por qué y cómo los utilizamos."
     },
     "experimental": {
-      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad."
+      "disclaimer": "Estas son funciones experimentales que ofrecemos “tal como están” para que nuestra comunidad de expertos tecnológicos las pruebe. Es posible que cambien, se deterioren o sean eliminadas en cualquier momento. Al habilitarlas, aceptas usarlas bajo tu responsabilidad.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "Usar TronGrid.io",
+          "description": "Usar trongrid directamente sin el proxy de Ledger"
+        },
+        "experimentalLanguages": {
+          "title": "Probar traducciones",
+          "description": "Añade idiomas no publicados a la lista de idiomas en la pestaña de ajustes generales."
+        },
+        "managerDevMode": {
+          "title": "Modo desarrollador",
+          "description": "Mostrar aplicaciones de desarrollador y testnet en el Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Búsqueda de cuenta extendida",
+          "description": "Busca cuentas con rutas de derivación erróneas. Envía los activos que encuentres a una cuenta correcta."
+        },
+        "experimentalExplorers": {
+          "title": "API de Experimental Explorers",
+          "description": "Prueba una versión futura de blockchain explorers de Ledger. Los cambios en esta configuración pueden afectar el saldo y la sincronización de tu cuenta, como así también a la función de envíos.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Límite de intervalo personalizado",
+          "description": "Límite de intervalo personalizado para todas las cuentas. Al incrementarlo a valores superiores al predeterminado (20) se escanearán más direcciones públicas no utilizadas en búsqueda de activos. Solo para usuarios avanzados, ya que puede crear problemas de compatibilidad al momento de restaurar tus cuentas."
+        },
+        "forceProvider": {
+          "title": "Proveedor de Manager",
+          "description": "Cambiar el proveedor de aplicaciones en el Manager puede imposibilitar la instalación o desinstalación de aplicaciones en tu dispositivo Ledger."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
@@ -2532,7 +2619,7 @@
     "noAccounts": "No hay cuentas que exportar",
     "selectedAccounts": "Cuentas a incluir",
     "selectedAccounts_plural": "Cuentas a incluir ({{count}})",
-    "disclaimer": "Los contravalores de la exportación se ofrecen únicamente a título informativo. No se debe confiar en estos datos para fines contables, fiscales, regulatorios o legales, ya que solo representan una estimación del precio de los activos en el momento de las transacciones y la exportación, según los métodos de valoración proporcionados por nuestro proveedor de servicios, Kaiko"
+    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
   },
   "language": {
     "system": "Utilizar idioma del sistema",
@@ -2554,7 +2641,7 @@
     "toastType": {
       "announcement": "Noticias",
       "operation": "Operación",
-      "achievement": "Achievement Unlocked"
+      "achievement": "Logro desbloqueado"
     }
   },
   "informationCenter": {
@@ -2656,6 +2743,7 @@
         "hasNoRecovery": "¿Es la primera vez que utilizas tu {{deviceName}}?",
         "hasRecovery": "¿Ya tienes una Frase de recuperación?",
         "separator": "O",
+        "switchDevice": "Cambiar dispositivo",
         "options": {
           "1": {
             "heading": "Primera vez",
@@ -3155,7 +3243,8 @@
       "bond": "Confirma en tu dispositivo para finalizar la operación",
       "unbond": "Confirma en tu dispositivo para finalizar la operación",
       "rebond": "Confirma en tu dispositivo para finalizar la operación",
-      "withdrawUnbonded": "Confirma en tu dispositivo para finalizar la operación"
+      "withdrawUnbonded": "Confirma en tu dispositivo para finalizar la operación",
+      "setController": "Confirma en tu dispositivo para finalizar la operación"
     },
     "recipientWording": {
       "send": "receptor",
@@ -3171,11 +3260,10 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Términos de uso",
-    "read": "Leer los Términos de uso",
-    "switchLabelTerms": "<0>He leído y acepto los</0> <1>Términos de Uso</1>.",
-    "switchLabelPrivacyPolicy": "<0>He leído y acepto la</0> <1> Política de Privacidad</1>",
-    "switchLabelLoss": "Comprendo que si pierdo la frase de recuperación no podré acceder a mis criptos en caso de no tener acceso a mi Nano.",
+    "title": "Legal",
+    "termsLabel": "Términos del servicio",
+    "privacyLabel": "Política de Privacidad",
+    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {

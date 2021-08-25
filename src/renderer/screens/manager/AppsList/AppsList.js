@@ -1,7 +1,7 @@
 // @flow
 import React, { useState, memo, useCallback, useEffect, useRef } from "react";
 import { useLocation, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
@@ -10,6 +10,7 @@ import { useAppsSections } from "@ledgerhq/live-common/lib/apps/react";
 import type { TFunction } from "react-i18next";
 import type { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, AppsDistribution } from "@ledgerhq/live-common/lib/apps/types";
+import { currenciesSelector } from "~/renderer/reducers/accounts";
 import UpdateAllApps from "./UpdateAllApps";
 import Placeholder from "./Placeholder";
 import Card from "~/renderer/components/Box/Card";
@@ -85,6 +86,7 @@ const AppsList = ({
   const { push } = useHistory();
   const { search } = useLocation();
   const reduxDispatch = useDispatch();
+  const currenciesAccountsSetup = useSelector(currenciesSelector);
 
   const inputRef = useRef<any>();
   const [query, setQuery] = useState("");
@@ -116,7 +118,11 @@ const AppsList = ({
   const addAccount = useCallback(
     currency => {
       push("/accounts");
-      reduxDispatch(openModal("MODAL_ADD_ACCOUNTS", { currency: currency || null }));
+      reduxDispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency || null,
+        }),
+      );
     },
     [push, reduxDispatch],
   );
@@ -165,7 +171,7 @@ const AppsList = ({
         dispatch={dispatch}
         isIncomplete={isIncomplete}
         addAccount={addAccount}
-        disabled={update.length >= 1}
+        disabled={update.length >= 1 || currenciesAccountsSetup.length}
       />
       <UpdateAllApps
         optimisticState={optimisticState}

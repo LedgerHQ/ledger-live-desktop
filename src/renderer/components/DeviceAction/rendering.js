@@ -202,7 +202,7 @@ const OpenManagerBtn = ({
     const search = urlParams.toString();
     setTrackingSource("device action open manager button");
     history.push({
-      pathname: "manager",
+      pathname: "/manager",
       search: search ? `?${search}` : "",
     });
     closeAllModal();
