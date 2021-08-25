@@ -2514,8 +2514,8 @@
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
         "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+          "title": "Utiliser l'impl Tezos JS",
+          "description": "Utiliser l'impl Tezos JS"
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
