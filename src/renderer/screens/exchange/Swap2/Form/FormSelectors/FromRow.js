@@ -13,6 +13,8 @@ import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import styled from "styled-components";
+import SwapFormError from "./FromError";
 
 type Props = {
   fromAccount: { account: Account | TokenAccount, parentAccount: ?Account } | null,
@@ -21,7 +23,17 @@ type Props = {
   toggleMax: () => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
+  fromAmountError?: Error,
 };
+
+const Body = styled(Box).attrs(p => ({
+  horizontal: true,
+  mb: p.hasError ? "14.5px" : "26px",
+  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.05);",
+}))`
+  flex-wrap: wrap;
+  row-gap: 8px;
+`;
 
 function FromRow({
   fromAmount,
@@ -30,6 +42,7 @@ function FromRow({
   setFromAccount,
   isMaxEnabled,
   toggleMax,
+  fromAmountError,
 }: Props) {
   const accounts = useSelector(shallowAccountsSelector);
   const unit = fromAccount && getAccountUnit(fromAccount);
@@ -53,7 +66,7 @@ function FromRow({
           <Switch medium isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
         </Box>
       </Box>
-      <Box horizontal mb="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
+      <Body hasError={!!fromAmountError}>
         <Box width="50%">
           <SelectAccount
             accounts={accounts}
@@ -79,7 +92,12 @@ function FromRow({
             renderRight={null}
           />
         </Box>
-      </Box>
+        {fromAccount && fromAmountError ? (
+          <SwapFormError error={fromAmountError} account={fromAccount} />
+        ) : (
+          fromAmountError
+        )}
+      </Body>
     </>
   );
 }

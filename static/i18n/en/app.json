@@ -244,7 +244,14 @@
       "from": {
         "title": "From",
         "max": "Max",
-        "accountPlaceholder": "Select source"
+        "accountPlaceholder": "Select source",
+        "errors": {
+          "default": "There is an error, please retry",
+          "notEnoughBalance": "Not enough funds. Choose another account or <cta></cta>",
+          "notEnoughGas": "Not enough gas. Choose another account or <cta></cta>",
+          "exchangeAmountTooLow": "Minimum amount for this quote is {{amount}} {{ticker}}. <cta></cta>",
+          "exchangeAmountTooHigh": "Maximum amount for this quote is {{amount}} {{ticker}}. <cta></cta>"
+        }
       },
       "to": {
         "title": "To"
