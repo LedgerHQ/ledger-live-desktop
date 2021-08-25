@@ -63,6 +63,7 @@ const SwapForm = () => {
         <SwapFormSelectors
           fromAccount={swapTransaction.account}
           fromAmount={swapTransaction.transaction?.amount}
+          fromAmountError={swapTransaction.fromAmountError}
           isMaxEnabled={swapTransaction.transaction?.useAllAmount}
           setFromAccount={swapTransaction.setAccount}
           setFromAmount={swapTransaction.setFromAmount}

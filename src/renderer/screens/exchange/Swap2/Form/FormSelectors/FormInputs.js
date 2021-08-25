@@ -42,6 +42,7 @@ type FormInputsProps = {
   setFromAccount: (account: $PropertyType<SwapTransactionType, "account">) => void,
   setFromAmount: (amount: $PropertyType<Transaction, "amount">) => void,
   toggleMax: () => void,
+  fromAmountError?: Error,
 };
 
 export default function FormInputs({
@@ -51,6 +52,7 @@ export default function FormInputs({
   setFromAccount,
   setFromAmount,
   toggleMax,
+  fromAmountError,
 }: FormInputsProps) {
   const [toAccount, setToAccount] = useState(null);
   const [toAmount, setToAmount] = useState(null);
@@ -72,6 +74,7 @@ export default function FormInputs({
         setFromAmount={setFromAmount}
         isMaxEnabled={isMaxEnabled}
         toggleMax={toggleMax}
+        fromAmountError={fromAmountError}
       />
 
       <Box horizontal justifyContent="center" alignContent="center">
