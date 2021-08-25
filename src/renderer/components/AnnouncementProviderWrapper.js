@@ -64,7 +64,7 @@ const getOsPlatform = () => {
     return "linux";
   }
 
-  return osPlatform;
+  return undefined;
 };
 
 export function AnnouncementProviderWrapper({ children }: Props) {
