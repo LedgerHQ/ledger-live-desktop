@@ -98,7 +98,7 @@ const useSwapTransaction = (): SwapTransactionType => {
   const setToAmount: $PropertyType<SwapTransactionType, "setToAmount"> = amount =>
     setToState(previousState => ({ ...previousState, amount: amount }));
 
-  /* UPDATE from amount to the estimate max spendable on account 
+  /* UPDATE from amount to the estimate max spendable on account
   change when the amount feature is enabled */
   useEffect(() => {
     const updateAmountUsingMax = async () => {

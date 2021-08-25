@@ -1,86 +1,63 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { Trans, withTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import Switch from "~/renderer/components/Switch";
-import Label from "~/renderer/components/Label";
+import Tabbable from "~/renderer/components/Box/Tabbable";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+import { track } from "~/renderer/analytics/segment";
+import LabelWithExternalIcon from "~/renderer/components/LabelWithExternalIcon";
 
 type Props = {
   isAdvanceMode: boolean,
   setAdvanceMode: *,
 };
 
-const StandardText = styled(Text)`
+const SelectorContainer = styled.div`
+  display: inline-flex;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 9999px;
+`;
+const Selector = styled(Tabbable)`
   color: ${p =>
-    p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade50};
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const AdvancedText = styled(Text)`
-  color: ${p =>
-    p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.text.shade50};
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const Divider = styled(Box)`
-  color: ${p => p.theme.colors.palette.text.shade70};
-  width: 26px;
-  font-size: 12px;
-  line-height: 17px;
-`;
-
-const ModeBox = styled(Box)`
-  width: 135px;
+    p.active ? p.theme.colors.palette.primary.contrastText : p.theme.colors.palette.text.shade20};
+  background: ${p =>
+    p.active ? p.theme.colors.palette.primary.main : p.theme.colors.palette.action.disabled};
+  padding: 4px 12px 4px 12px;
 `;
 
 const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
-  const toggleAdvanceMode = useCallback(() => {
-    setAdvanceMode(!isAdvanceMode);
-  }, [setAdvanceMode, isAdvanceMode]);
+  const { t } = useTranslation();
+  const setAdvanced = useCallback(() => setAdvanceMode(true), [setAdvanceMode]);
+  const setStandard = useCallback(() => setAdvanceMode(false), [setAdvanceMode]);
 
   return (
-    <Box horizontal alignItems="center" justifyContent="flex-start" style={{ width: 200 }}>
-      <Label>
-        <span>
-          <Trans i18nKey="send.steps.amount.fees" />
-        </span>
-      </Label>
-      <Divider alignItems="center">|</Divider>
-      <ModeBox horizontal alignItems="center" justifyContent="space-between">
-        <StandardText
-          ff="Inter"
-          fontSize={10}
-          fontWeight="600"
-          selected={!isAdvanceMode}
-          onClick={toggleAdvanceMode}
-        >
-          <Trans i18nKey="send.steps.amount.standard" />
-        </StandardText>
-        <Switch
-          forceBgColor={isAdvanceMode ? "wallet" : undefined}
-          small
-          isChecked={isAdvanceMode}
-          onChange={toggleAdvanceMode}
-        />
-        <AdvancedText
-          ff="Inter"
-          fontSize={10}
-          fontWeight="600"
-          selected={isAdvanceMode}
-          onClick={toggleAdvanceMode}
-        >
-          <Trans i18nKey="send.steps.amount.advanced" />
-        </AdvancedText>
-      </ModeBox>
+    <Box horizontal alignItems="center" justifyContent="space-between">
+      <LabelWithExternalIcon
+        onClick={() => {
+          openURL(urls.feesMoreInfo);
+          track("Send Flow Fees Help Requested");
+        }}
+        label={t("send.steps.amount.fees")}
+      />
+      <SelectorContainer>
+        <Selector active={!isAdvanceMode} onClick={setStandard}>
+          <Text ff="Inter" fontSize={10} fontWeight="600">
+            <Trans i18nKey="send.steps.amount.standard" />
+          </Text>
+        </Selector>
+        <Selector active={isAdvanceMode} onClick={setAdvanced}>
+          <Text ff="Inter" fontSize={10} fontWeight="600">
+            <Trans i18nKey="send.steps.amount.advanced" />
+          </Text>
+        </Selector>
+      </SelectorContainer>
     </Box>
   );
 };
 
-export default withTranslation()(SendFeeMode);
+export default SendFeeMode;

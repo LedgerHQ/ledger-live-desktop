@@ -4,7 +4,12 @@ import invariant from "invariant";
 import React, { useState, useCallback, useEffect } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import styled from "styled-components";
-import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  Transaction,
+  TransactionStatus,
+  FeeStrategy,
+} from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -27,6 +32,7 @@ type Props = {
   status: TransactionStatus,
   bridgePending: boolean,
   updateTransaction: (updater: any) => void,
+  mapStrategies?: FeeStrategy => FeeStrategy & { [string]: * },
 };
 
 const Separator = styled.div`
@@ -50,6 +56,7 @@ const Fields = ({
   onChange,
   status,
   updateTransaction,
+  mapStrategies,
 }: Props) => {
   invariant(transaction.family === "bitcoin", "FeeField: bitcoin family expected");
 
@@ -150,6 +157,7 @@ const Fields = ({
           account={account}
           parentAccount={parentAccount}
           suffixPerByte={true}
+          mapStrategies={mapStrategies}
         />
       )}
     </>
