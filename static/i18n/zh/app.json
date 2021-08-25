@@ -2513,6 +2513,10 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
+        "tezosJS": {
+          "title": "use Tezos JS impl",
+          "description": "Use Tezos JS impl"
+        },
         "experimentalLanguages": {
           "title": "翻译测试",
           "description": "将未发布的语言添加到常规设置选项卡的语言列表中。"
