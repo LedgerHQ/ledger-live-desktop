@@ -22,6 +22,10 @@ const uppercase = system({
   },
 });
 
+const textTransform = system({
+  textTransform: true,
+});
+
 const Text: ThemedComponent<{
   fontFamily?: string,
   fontSize?: number | string,
@@ -43,6 +47,7 @@ const Text: ThemedComponent<{
   ${fontWeight};
   ${space};
   ${letterSpacing};
+  ${textTransform};
 `;
 
 export default Text;

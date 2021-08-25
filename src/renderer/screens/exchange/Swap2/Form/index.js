@@ -61,10 +61,7 @@ const SwapForm = () => {
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
         />
-        <SwapFormSummary
-          targetAccount={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
-          targetCurrency={swapTransaction.swap.to.currency}
-        />
+        <SwapFormSummary swapTransaction={swapTransaction} />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
         </Button>

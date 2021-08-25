@@ -6,7 +6,7 @@ import SectionFees from "./SectionFees";
 import SectionTarget from "./SectionTarget";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
-import type { SwapSelectorStateType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 const Form: ThemedComponent<{}> = styled.section`
   display: grid;
@@ -15,15 +15,17 @@ const Form: ThemedComponent<{}> = styled.section`
 `;
 
 type SwapFormSummaryProps = {
-  targetAccount: $PropertyType<SwapSelectorStateType, "account">,
-  targetCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  swapTransaction: SwapTransactionType,
 };
-const SwapFormSummary = ({ targetAccount, targetCurrency }: SwapFormSummaryProps) => (
+const SwapFormSummary = ({ swapTransaction }: SwapFormSummaryProps) => (
   <Form>
     <SectionProvider />
     <SectionRate />
-    <SectionFees />
-    <SectionTarget account={targetAccount} currency={targetCurrency} />
+    <SectionFees swapTransaction={swapTransaction} />
+    <SectionTarget
+      account={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
+      currency={swapTransaction.swap.to.currency}
+    />
   </Form>
 );
 
