@@ -2513,6 +2513,10 @@
           "title": "использовать TronGrid.io",
           "description": "Использовать trongrid напрямую без прокси Ledger"
         },
+        "tezosJS": {
+          "title": "use Tezos JS impl",
+          "description": "Use Tezos JS impl"
+        },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
           "description": "Добавляет непредставленные языки в список языков на вкладке Общие настройки."
