@@ -2326,10 +2326,18 @@
     node-pre-gyp "^0.17.0"
     node-pre-gyp-github "^1.4.3"
 
-"@ledgerhq/live-common@^21.2.0-lnx2fwrepair.9":
-  version "21.2.0-lnx2fwrepair.9"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.2.0-lnx2fwrepair.9.tgz#21701e7f627e52524838ff2c56d01ae72a2f1938"
-  integrity sha512-aQDjw4DXMencT36dgW9HCkN1zipcq01Q+ABA8W/6MjdvbgHVjCFS1KnWVfHVzsRNwnHfYeYfO1brCkoZJb7htg==
+"@ledgerhq/live-app-sdk@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-app-sdk/-/live-app-sdk-0.1.1.tgz#637966823bb1976154f08104b26ec9ce2b17d6b4"
+  integrity sha512-c5WRBBSa8K2zrEiiKleBdNvR3XEmA2FgXAAuhi24DUJSdWINfO0SQVlQQTWexRZgiyYZaMsWGHJqQcXJQRxkDQ==
+  dependencies:
+    bignumber.js "^9.0.1"
+    json-rpc-2.0 "^0.2.16"
+
+"@ledgerhq/live-common@^21.3.0":
+  version "21.3.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.3.0.tgz#96f6732a4e10c112f6e327e432f639dce585615a"
+  integrity sha512-bxIw1r/O0pHKGLyrP/u3zeLm5MQUuIVi0n9Em0SvYDH3hCTW0UdhizJZD4JJPAN9A96SvIQIh1z7E00qlS5gBw==
   dependencies:
     "@crypto-com/chain-jslib" "0.0.19"
     "@ledgerhq/compressjs" "1.3.2"
@@ -2348,6 +2356,7 @@
     "@ledgerhq/hw-transport" "6.3.0"
     "@ledgerhq/hw-transport-mocker" "6.3.0"
     "@ledgerhq/hw-transport-node-speculos" "6.3.0"
+    "@ledgerhq/live-app-sdk" "^0.1.1"
     "@ledgerhq/logs" "6.2.0"
     "@polkadot/types" "5.5.1"
     "@polkadot/types-known" "5.5.1"
