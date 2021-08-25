@@ -44,6 +44,14 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
 export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    title: <Trans i18nKey="settings.experimental.features.tezosJS.title" />,
+    description: <Trans i18nKey="settings.experimental.features.tezosJS.description" />,
+    valueOn: "tezos",
+    valueOff: "",
+  },
+  {
+    type: "toggle",
     name: "API_TRONGRID_PROXY",
     title: <Trans i18nKey="settings.experimental.features.apiTrongridProxy.title" />,
     description: <Trans i18nKey="settings.experimental.features.apiTrongridProxy.description" />,
@@ -70,6 +78,16 @@ export const experimentalFeatures: Feature[] = [
     title: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.title" />,
     description: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.description" />,
   },
+  ...(__DEV__
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_SWAP",
+          title: "New SWAP interface ",
+          description: "Use the new experimental swap interface",
+        },
+      ]
+    : []),
   ...(deltaExperimentalExplorers.length
     ? [
         {

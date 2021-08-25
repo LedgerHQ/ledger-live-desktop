@@ -1,6 +1,6 @@
 import React from "react";
 import Button, { ExpandButton } from "./index";
-import AccountAdd from "../../assets/icons/AccountAdd";
+import WalletAdd from "../../assets/icons/WalletAddRegular";
 export default {
   title: "Buttons/Button",
   component: Button,
@@ -44,7 +44,7 @@ export const IconButton = Template.bind({});
 // @ts-expect-error
 IconButton.args = {
   children: "",
-  Icon: AccountAdd,
+  Icon: WalletAdd,
   iconPosition: "right",
 };
 
