@@ -38,7 +38,7 @@ export default function FeesDrawer({ swapTransaction, disableSlowStrategy = fals
   return (
     <Box height="100%">
       {titleSection}
-      <Box mt={6} flow={4}>
+      <Box mt={3} flow={4}>
         {transaction.networkInfo && (
           <SendAmountFields
             account={account}

@@ -70,7 +70,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             onChange={() => {}}
             value={toAmount}
             disabled
-            placeholder="0"
+            placeholder="-"
             textAlign="right"
             containerProps={amountInputContainerProps}
             unit={unit}
