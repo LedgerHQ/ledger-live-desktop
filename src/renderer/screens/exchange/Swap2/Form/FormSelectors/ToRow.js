@@ -1,7 +1,6 @@
 // @flow
 import React, { useEffect } from "react";
 import { Trans } from "react-i18next";
-import { BigNumber } from "bignumber.js";
 import Box from "~/renderer/components/Box/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
@@ -10,39 +9,35 @@ import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
 import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { ToAccountType } from "./FormInputs";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type {
+  SwapSelectorStateType,
+  SwapTransactionType,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 type Props = {
-  fromAccount: ?(Account | TokenAccount),
-  toAccount: ?ToAccountType,
-  setToAccount: useSelectableCurrenciesReturnType => void,
-  toAmount: ?BigNumber,
-  setToAmount: BigNumber => void,
+  fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToAccount">,
+  toAmount: $PropertyType<SwapSelectorStateType, "amount">,
 };
 
-export default function ToRow({
-  toAccount,
-  setToAccount,
-  toAmount,
-  setToAmount,
-  fromAccount,
-}: Props) {
+export default function ToRow({ toCurrency, setToCurrency, toAmount, fromAccount }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
-  const toCurrency = toAccount?.account ? getAccountCurrency(toAccount.account) : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
-  const unit = selectState.account ? getAccountUnit(selectState.account) : undefined;
+  const unit = selectState.account ? getAccountUnit(selectState.account) : null;
 
   /* @dev: save picked account */
   useEffect(() => {
-    if (!toAccount && !selectState.account) return;
+    const { currency, account, parentAccount } = selectState;
+    setToCurrency(currency, account, parentAccount);
+  }, [selectState.currency]);
 
-    // TODO: would be a dispatch call in the future
-    setToAccount(selectState);
-  }, [selectState.account, selectState.parentAccount]);
+  useEffect(() => {
+    /* RESET internal state on account change */
+    selectState.setCurrency(null);
+  }, [fromAccount]);
 
   return (
     <>
@@ -58,13 +53,15 @@ export default function ToRow({
             onChange={selectState.setCurrency}
             value={selectState.currency}
             stylesMap={selectRowStylesMap}
+            isDisabled={!fromAccount}
           />
         </Box>
         <Box width="50%">
           <InputCurrency
+            // @DEV: onChange props is required by the composant, there is no read-only logic
+            onChange={() => {}}
             value={toAmount}
-            onChange={setToAmount}
-            disabled={!toCurrency}
+            disabled
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}
