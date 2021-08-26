@@ -15,16 +15,6 @@ import { updateProvidersAction, resetSwapAction, providersSelector } from "~/ren
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 
-// SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-const summaryMockedData = {
-  fees: "0.000034 ETH",
-  rate: "1 ETH = 0,06265846 BTC",
-  provider: "Changelly",
-  onProviderChange: () => {},
-  onFeesChange: () => {},
-  onTargetChange: () => {},
-};
-
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   pt: 36,
   pb: 20,
@@ -71,7 +61,10 @@ const SwapForm = () => {
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
         />
-        <SwapFormSummary {...summaryMockedData} />
+        <SwapFormSummary
+          targetAccount={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
+          targetCurrency={swapTransaction.swap.to.currency}
+        />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
         </Button>
