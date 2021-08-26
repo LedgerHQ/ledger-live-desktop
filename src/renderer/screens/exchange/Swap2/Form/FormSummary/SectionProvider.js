@@ -19,7 +19,7 @@ export const getProviderIcon = (providerName?: string) => {
   return null;
 };
 
-const SectionProvider = () => {
+const SectionProvider = ({ value }: { value?: string }) => {
   const { t } = useTranslation();
 
   return (
@@ -28,7 +28,7 @@ const SectionProvider = () => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      <SummaryValue value="changelly">{getProviderIcon("changelly")}</SummaryValue>
+      <SummaryValue value={value}>{getProviderIcon("changelly")}</SummaryValue>
     </SummarySection>
   );
 };
