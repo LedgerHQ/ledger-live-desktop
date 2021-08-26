@@ -19,6 +19,7 @@ const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
   lineHeight: "1.4",
 }))`
   display: inline-block;
+  color: ${p => p.theme.colors.palette.secondary.main};
 
   &:first-letter {
     text-transform: uppercase;
