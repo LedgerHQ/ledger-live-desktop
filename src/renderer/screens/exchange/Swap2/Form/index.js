@@ -7,7 +7,10 @@ import styled from "styled-components";
 import ButtonBase from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
-import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import {
+  useSwapProviders,
+  usePickExchangeRate,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +19,8 @@ import {
   resetSwapAction,
   providersSelector,
   updateTransactionAction,
+  updateRateAction,
+  rateSelector,
 } from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
@@ -39,7 +44,9 @@ const SwapForm = () => {
   const { providers, error } = useSwapProviders();
   const dispatch = useDispatch();
   const storedProviders = useSelector(providersSelector);
+  const exchangeRate = useSelector(rateSelector);
   const swapTransaction = useSwapTransaction();
+  const exchangeRates = swapTransaction.swap?.rates?.value;
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
@@ -57,6 +64,34 @@ const SwapForm = () => {
     // eslint-disable-next-line
   }, [swapTransaction.transaction]);
 
+  useEffect(() => {
+    const hasRates = exchangeRates && exchangeRates.length > 0;
+    // If a the user picked an exchange rate before, try to select the new one that matches.
+    // Otherwise pick the first one.
+    const rate =
+      hasRates &&
+      ((exchangeRate &&
+        exchangeRates.find(
+          ({ tradeMethod, provider }) =>
+            tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
+        )) ||
+        exchangeRates[0]);
+    if (rate) {
+      dispatch(updateRateAction(rate));
+    } else {
+      dispatch(updateRateAction(null));
+    }
+    // eslint-disable-next-line
+  }, [exchangeRates]);
+
+  usePickExchangeRate({
+    exchangeRates,
+    exchangeRate,
+    setExchangeRate: rate => {
+      dispatch(updateRateAction(rate));
+    },
+  });
+
   if (providers?.length)
     return (
       <Wrapper>
@@ -64,13 +99,15 @@ const SwapForm = () => {
           fromAccount={swapTransaction.swap.from.account}
           fromAmount={swapTransaction.swap.from.amount}
           toCurrency={swapTransaction.swap.to.currency}
-          toAmount={swapTransaction.swap.to.amount}
+          toAmount={exchangeRate?.toAmount || null}
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
           setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
           fromAmountError={swapTransaction.fromAmountError}
+          // TODO: implement the "to" currency input loader
+          // loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
         <SwapFormSummary swapTransaction={swapTransaction} />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>

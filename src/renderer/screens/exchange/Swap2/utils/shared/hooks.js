@@ -116,3 +116,25 @@ export const useSelectableCurrencies = ({ allCurrencies }: { allCurrencies: Arra
 
   return { ...currencyAccountSelect, currencies, account, parentAccount };
 };
+
+export const usePickExchangeRate = ({ exchangeRates, exchangeRate, setExchangeRate }: *) => {
+  useEffect(() => {
+    const hasRates = exchangeRates && exchangeRates.length > 0;
+    // If a the user picked an exchange rate before, try to select the new one that matches.
+    // Otherwise pick the first one.
+    const rate =
+      hasRates &&
+      ((exchangeRate &&
+        exchangeRates.find(
+          ({ tradeMethod, provider }) =>
+            tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
+        )) ||
+        exchangeRates[0]);
+    if (rate) {
+      setExchangeRate(rate);
+    } else {
+      setExchangeRate(null);
+    }
+    // eslint-disable-next-line
+  }, [exchangeRates]);
+};
