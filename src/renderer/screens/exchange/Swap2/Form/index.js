@@ -8,6 +8,8 @@ import ButtonBase from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+
 import { useDispatch, useSelector } from "react-redux";
 import { updateProvidersAction, resetSwapAction, providersSelector } from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
@@ -42,6 +44,7 @@ const SwapForm = () => {
   const { providers, error } = useSwapProviders();
   const dispatch = useDispatch();
   const storedProviders = useSelector(providersSelector);
+  const swapTransaction = useSwapTransaction();
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
@@ -57,7 +60,14 @@ const SwapForm = () => {
   if (providers?.length)
     return (
       <Wrapper>
-        <SwapFormSelectors />
+        <SwapFormSelectors
+          fromAccount={swapTransaction.account}
+          fromAmount={swapTransaction.transaction?.amount}
+          isMaxEnabled={swapTransaction.transaction?.useAllAmount}
+          setFromAccount={swapTransaction.setAccount}
+          setFromAmount={swapTransaction.setFromAmount}
+          toggleMax={swapTransaction.toggleMax}
+        />
         <SwapFormSummary {...summaryMockedData} />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
