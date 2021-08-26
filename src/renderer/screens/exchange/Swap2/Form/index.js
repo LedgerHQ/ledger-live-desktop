@@ -11,7 +11,12 @@ import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateProvidersAction, resetSwapAction, providersSelector } from "~/renderer/actions/swap";
+import {
+  updateProvidersAction,
+  resetSwapAction,
+  providersSelector,
+  updateTransactionAction,
+} from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 
@@ -46,6 +51,11 @@ const SwapForm = () => {
   useEffect(() => {
     if (error) dispatch(resetSwapAction());
   }, [error]);
+
+  useEffect(() => {
+    dispatch(updateTransactionAction(swapTransaction.transaction));
+    // eslint-disable-next-line
+  }, [swapTransaction.transaction]);
 
   if (providers?.length)
     return (
