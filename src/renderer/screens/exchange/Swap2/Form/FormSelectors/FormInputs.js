@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
@@ -7,14 +7,9 @@ import styled from "styled-components";
 import FromRow from "./FromRow";
 import ToRow from "./ToRow";
 import type {
-  Account,
-  TokenAccount,
-  TokenCurrency,
-  CryptoCurrency,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
-import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { State as SwapTransactionType } from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+  SwapSelectorStateType,
+  SwapTransactionType,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 const RoundButton = styled(Button)`
   padding: 8px;
@@ -29,19 +24,16 @@ function SwapButton() {
   );
 }
 
-export type ToAccountType = {
-  account: Account | TokenAccount,
-  parentAccount: Account | null,
-  currency: (TokenCurrency | CryptoCurrency) | null,
-} | null;
-
 type FormInputsProps = {
-  fromAccount: $PropertyType<SwapTransactionType, "account">,
-  fromAmount?: $PropertyType<Transaction, "amount">,
+  fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  fromAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount">,
+  setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToAccount">,
+  toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
   isMaxEnabled?: boolean,
-  setFromAccount: (account: $PropertyType<SwapTransactionType, "account">) => void,
-  setFromAmount: (amount: $PropertyType<Transaction, "amount">) => void,
-  toggleMax: () => void,
 };
 
 export default function FormInputs({
@@ -50,19 +42,11 @@ export default function FormInputs({
   isMaxEnabled = false,
   setFromAccount,
   setFromAmount,
+  toCurrency,
+  toAmount,
+  setToCurrency,
   toggleMax,
 }: FormInputsProps) {
-  const [toAccount, setToAccount] = useState(null);
-  const [toAmount, setToAmount] = useState(null);
-
-  const handleSetToAccountChange = (selectSate: useSelectableCurrenciesReturnType) => {
-    setToAccount({
-      account: selectSate.account ?? null,
-      parentAccount: selectSate.parentAccount ?? null,
-      currency: selectSate.currency,
-    });
-  };
-
   return (
     <section>
       <FromRow
@@ -78,11 +62,9 @@ export default function FormInputs({
         <SwapButton />
       </Box>
       <ToRow
-        toAccount={toAccount}
-        // $FlowFixMe
-        setToAccount={handleSetToAccountChange}
+        toCurrency={toCurrency}
+        setToCurrency={setToCurrency}
         toAmount={toAmount}
-        setToAmount={setToAmount}
         fromAccount={fromAccount}
       />
     </section>

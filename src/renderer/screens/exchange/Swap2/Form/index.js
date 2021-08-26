@@ -61,11 +61,14 @@ const SwapForm = () => {
     return (
       <Wrapper>
         <SwapFormSelectors
-          fromAccount={swapTransaction.account}
-          fromAmount={swapTransaction.transaction?.amount}
-          isMaxEnabled={swapTransaction.transaction?.useAllAmount}
-          setFromAccount={swapTransaction.setAccount}
+          fromAccount={swapTransaction.swap.from.account}
+          fromAmount={swapTransaction.swap.from.amount}
+          toCurrency={swapTransaction.swap.to.currency}
+          toAmount={swapTransaction.swap.to.amount}
+          setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
+          setToCurrency={swapTransaction.setToAccount}
+          isMaxEnabled={swapTransaction.transaction?.useAllAmount}
           toggleMax={swapTransaction.toggleMax}
         />
         <SwapFormSummary {...summaryMockedData} />
