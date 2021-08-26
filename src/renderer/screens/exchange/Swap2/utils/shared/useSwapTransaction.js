@@ -34,6 +34,7 @@ export type SwapDataType = {
   from: SwapSelectorStateType,
   to: SwapSelectorStateType,
   isMaxEnabled: boolean,
+  isSwapReversable: boolean,
   rates: RatesReducerState,
   refetchRates: () => void,
 };
@@ -72,6 +73,7 @@ export type SwapTransactionType = {
   setFromAmount: (amount: BigNumber) => void,
   setToAmount: (amount: BigNumber) => void,
   toggleMax: () => void,
+  reverseSwap: () => void,
 };
 
 const useSwapTransaction = (): SwapTransactionType => {
@@ -93,20 +95,25 @@ const useSwapTransaction = (): SwapTransactionType => {
 
     return error;
   }, [bridgeTransaction.status.errors?.gasPrice, bridgeTransaction.status.errors?.amount]);
+  const isSwapReversable = useMemo(() => !!(toState.account && fromState.currency), [
+    toState.account,
+    fromState.currency,
+  ]);
 
   /* UPDATE from account */
   const setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount"> = account => {
     const parentAccount =
       account?.type !== "Account" ? allAccounts.find(a => a.id === account?.parentId) : null;
-    const mainAccount = getMainAccount(account, parentAccount);
-    const currency = getAccountCurrency(mainAccount);
+    const currency = getAccountCurrency(account);
 
     bridgeTransaction.setAccount(account, parentAccount);
     setFromState({ ...SelectorStateDefaultValues, currency, account, parentAccount });
     setToState(SelectorStateDefaultValues);
 
     /* @DEV: That populates fake seed. This is required to use Transaction object */
-    const recipient = getAbandonSeedAddress(currency.id);
+    const mainAccount = getMainAccount(account, parentAccount);
+    const mainCurrency = getAccountCurrency(mainAccount);
+    const recipient = getAbandonSeedAddress(mainCurrency.id);
     bridgeTransaction.updateTransaction(transaction => ({ ...transaction, recipient }));
   };
 
@@ -200,7 +207,23 @@ const useSwapTransaction = (): SwapTransactionType => {
 
   const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = () =>
     setMax(previous => !previous);
-  const swap = { to: toState, from: fromState, isMaxEnabled, rates, refetchRates };
+
+  const reverseSwap: $PropertyType<SwapTransactionType, "reverseSwap"> = () => {
+    if (isSwapReversable === false) return;
+
+    const [newTo, newFrom] = [fromState, toState];
+    setFromAccount(newFrom.account);
+    setToAccount(newTo.currency, newTo.account, newTo.parentAccount);
+  };
+
+  const swap = {
+    to: toState,
+    from: fromState,
+    isMaxEnabled,
+    isSwapReversable,
+    rates,
+    refetchRates,
+  };
 
   return {
     ...bridgeTransaction,
@@ -211,6 +234,7 @@ const useSwapTransaction = (): SwapTransactionType => {
     setToAccount,
     setFromAccount,
     setToAmount,
+    reverseSwap,
   };
 };
 
