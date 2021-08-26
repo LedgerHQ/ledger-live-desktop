@@ -4,13 +4,16 @@ import { createSelector } from "reselect";
 import type { OutputSelector } from "reselect";
 import type { State } from "~/renderer/reducers";
 import type { SwapStateType, UPDATE_PROVIDERS_TYPE } from "~/renderer/reducers/swap";
+import type { Transaction } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import memoize from "lodash/memoize";
 
 /* ACTIONS */
 export const updateProvidersAction = createAction<$PropertyType<UPDATE_PROVIDERS_TYPE, "payload">>(
   "SWAP/UPDATE_PROVIDERS",
 );
-
+export const updateTransactionAction = createAction<$PropertyType<?Transaction, "payload">>(
+  "SWAP/UPDATE_TRANSACTION",
+);
 export const resetSwapAction = createAction("SWAP/RESET_STATE");
 
 /* SELECTORS */
@@ -40,4 +43,13 @@ export const toSelector: OutputSelector<State, void, *> = createSelector(
       const uniqueAssetList = [...new Set(filteredAssets)];
       return uniqueAssetList;
     }),
+);
+
+export const transactionSelector: OutputSelector<
+  State,
+  void,
+  $PropertyType<SwapStateType, "transaction">,
+> = createSelector(
+  state => state.swap,
+  swap => swap.transaction,
 );
