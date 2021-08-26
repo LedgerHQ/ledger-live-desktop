@@ -31,7 +31,7 @@
     "release": "node ./tools/dist --publish -v",
     "draft-release": "node ./tools/dist draft",
     "draft-release-canary": "node ./tools/dist draft --canary",
-    "canary": "node ./tools/dist --canary -v",
+    "canary": "node ./tools/dist --canary --publish -v",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
     "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",
