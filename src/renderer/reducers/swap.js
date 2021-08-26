@@ -3,14 +3,21 @@ import { handleActions } from "redux-actions";
 import type {
   AvailableProviderV3,
   Transaction,
+  ExchangeRate,
 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 export type SwapStateType = {
   providers: ?Array<AvailableProviderV3>,
   pairs: ?$PropertyType<AvailableProviderV3, "pairs">,
   transaction: ?Transaction,
+  exchangeRate: ?ExchangeRate,
 };
 
-const initialState: SwapStateType = { providers: null, pairs: null, transaction: null };
+const initialState: SwapStateType = {
+  providers: null,
+  pairs: null,
+  transaction: null,
+  exchangeRate: null,
+};
 
 export const flattenPairs = (
   acc: Array<{ from: string, to: string }>,
@@ -31,6 +38,10 @@ const handlers = {
   UPDATE_TRANSACTION: (state: SwapStateType, { payload }: { payload: ?Transaction }) => ({
     ...state,
     transaction: payload,
+  }),
+  UPDATE_RATE: (state: SwapStateType, { payload }: { payload: ?ExchangeRate }) => ({
+    ...state,
+    exchangeRate: payload,
   }),
   RESET_STATE: () => ({ ...initialState }),
 };

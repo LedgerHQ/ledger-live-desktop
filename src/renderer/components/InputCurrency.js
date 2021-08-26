@@ -17,13 +17,17 @@ import type { Unit } from "@ledgerhq/live-common/lib/types";
 const unitGetOptionValue = unit => unit.magnitude;
 
 function format(unit: Unit, value: BigNumber, { locale, isFocused, showAllDigits, subMagnitude }) {
-  return formatCurrencyUnit(unit, value, {
-    locale,
-    useGrouping: !isFocused,
-    disableRounding: true,
-    showAllDigits: !!showAllDigits && !isFocused,
-    subMagnitude: value.isLessThan(1) ? subMagnitude : 0,
-  });
+  try {
+    return formatCurrencyUnit(unit, value, {
+      locale,
+      useGrouping: !isFocused,
+      disableRounding: true,
+      showAllDigits: !!showAllDigits && !isFocused,
+      subMagnitude: value.isLessThan(1) ? subMagnitude : 0,
+    });
+  } catch (error) {
+    return "";
+  }
 }
 
 const Currencies = styled(Box)`

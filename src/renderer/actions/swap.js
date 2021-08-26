@@ -11,9 +11,14 @@ import memoize from "lodash/memoize";
 export const updateProvidersAction = createAction<$PropertyType<UPDATE_PROVIDERS_TYPE, "payload">>(
   "SWAP/UPDATE_PROVIDERS",
 );
+
 export const updateTransactionAction = createAction<$PropertyType<?Transaction, "payload">>(
   "SWAP/UPDATE_TRANSACTION",
 );
+export const updateRateAction = createAction<$PropertyType<?Transaction, "exchangeRate">>(
+  "SWAP/UPDATE_RATE",
+);
+
 export const resetSwapAction = createAction("SWAP/RESET_STATE");
 
 /* SELECTORS */
@@ -52,4 +57,13 @@ export const transactionSelector: OutputSelector<
 > = createSelector(
   state => state.swap,
   swap => swap.transaction,
+);
+
+export const rateSelector: OutputSelector<
+  State,
+  void,
+  $PropertyType<SwapStateType, "exchangeRate">,
+> = createSelector(
+  state => state.swap,
+  swap => swap.exchangeRate,
 );
