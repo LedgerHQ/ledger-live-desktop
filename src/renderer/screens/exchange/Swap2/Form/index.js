@@ -16,8 +16,8 @@ import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
-  pt: 36,
-  pb: 20,
+  p: 20,
+  mt: 35,
 })`
   row-gap: 1.75rem;
   max-width: 27.5rem;
