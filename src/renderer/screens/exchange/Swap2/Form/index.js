@@ -64,22 +64,6 @@ const SwapForm = () => {
     // eslint-disable-next-line
   }, [swapTransaction.transaction]);
 
-  useEffect(() => {
-    const hasRates = exchangeRates && exchangeRates.length > 0;
-    // If a the user picked an exchange rate before, try to select the new one that matches.
-    // Otherwise pick the first one.
-    const rate =
-      hasRates &&
-      ((exchangeRate &&
-        exchangeRates.find(
-          ({ tradeMethod, provider }) =>
-            tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
-        )) ||
-        exchangeRates[0]);
-    dispatch(updateRateAction(rate));
-    // eslint-disable-next-line
-  }, [exchangeRates]);
-
   usePickExchangeRate({
     exchangeRates,
     exchangeRate,
