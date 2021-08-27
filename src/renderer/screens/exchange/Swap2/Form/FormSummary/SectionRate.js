@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
@@ -28,18 +28,22 @@ const SectionRate = ({ swapTransaction }: Props) => {
   const ratesExpiration = useSelector(rateExpirationSelector);
   const fromCurrency = swapTransaction.swap.from.currency;
   const toCurrency = swapTransaction.swap.to.currency;
+  const ratesState = swapTransaction.swap.rates;
+  const handleChange = useMemo(
+    () =>
+      ratesState.value?.length > 1 &&
+      (() =>
+        setDrawer(RatesDrawer, {
+          swapTransaction,
+        })),
+    [setDrawer, ratesState.value, swapTransaction],
+  );
 
   const summaryValue =
     swapTransaction.swap.rates.status === "loading" ? (
       <Spinner size={16} color="palette.text.shade40" />
     ) : exchangeRate && fromCurrency && toCurrency ? (
-      <SummaryValue
-        handleChange={() =>
-          setDrawer(RatesDrawer, {
-            swapTransaction,
-          })
-        }
-      >
+      <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
           <Box horizontal alignItems="center" mr={2}>
             <Box mr={1}>

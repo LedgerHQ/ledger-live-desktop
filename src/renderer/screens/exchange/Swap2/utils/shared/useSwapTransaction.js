@@ -29,7 +29,7 @@ export type SwapDataType = {
   from: SwapSelectorStateType,
   to: SwapSelectorStateType,
   isMaxEnabled: boolean,
-  rates: ?(ExchangeRate[]),
+  rates: RatesReducerState,
   refetchRates: () => void,
 };
 
