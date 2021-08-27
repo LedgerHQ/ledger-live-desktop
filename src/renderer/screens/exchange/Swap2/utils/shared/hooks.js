@@ -130,11 +130,7 @@ export const usePickExchangeRate = ({ exchangeRates, exchangeRate, setExchangeRa
             tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
         )) ||
         exchangeRates[0]);
-    if (rate) {
-      setExchangeRate(rate);
-    } else {
-      setExchangeRate(null);
-    }
+    setExchangeRate(rate || null);
     // eslint-disable-next-line
   }, [exchangeRates]);
 };
