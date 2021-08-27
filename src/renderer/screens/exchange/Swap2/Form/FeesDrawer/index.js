@@ -32,7 +32,7 @@ export default function FeesDrawer({ swapTransaction, disableSlowStrategy = fals
   const titleSection = (
     <>
       <Box horizontal justifyContent="center">
-        <Text fontSize={6} fontWeight="600" textTransform="capitalize">
+        <Text fontSize={6} ff="Inter|SemiBold" textTransform="capitalize">
           <Trans i18nKey="swap2.form.details.label.fees" />
         </Text>
       </Box>
