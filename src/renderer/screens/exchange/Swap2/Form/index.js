@@ -67,7 +67,7 @@ const SwapForm = () => {
           toAmount={swapTransaction.swap.to.amount}
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
-          setToCurrency={swapTransaction.setToAccount}
+          setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
         />
