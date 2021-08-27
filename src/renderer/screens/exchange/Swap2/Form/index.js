@@ -76,11 +76,7 @@ const SwapForm = () => {
             tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
         )) ||
         exchangeRates[0]);
-    if (rate) {
-      dispatch(updateRateAction(rate));
-    } else {
-      dispatch(updateRateAction(null));
-    }
+    dispatch(updateRateAction(rate));
     // eslint-disable-next-line
   }, [exchangeRates]);
 
