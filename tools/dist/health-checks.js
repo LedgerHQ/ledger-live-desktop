@@ -84,11 +84,6 @@ const checkEnv = nightly => ctx => {
   }
 };
 
-const setNightlyTagName = ctx => {
-  const { version } = pkg;
-  ctx.tag = version;
-};
-
 module.exports = args => {
   verbose = !!args.verbose;
 
@@ -103,18 +98,11 @@ module.exports = args => {
     },
     {
       title: "Check that the local git repository is clean",
-      skip: () => !!args.nightly,
       task: isClean,
     },
     {
       title: "Check that HEAD is tagged",
-      skip: () => !!args.nightly,
       task: isTagged,
-    },
-    {
-      title: "Set tag name for nightly draft release",
-      enabled: () => !!args.nightly,
-      task: setNightlyTagName,
     },
   ];
 };
