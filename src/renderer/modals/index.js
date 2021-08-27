@@ -26,6 +26,8 @@ import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_RESET_KYC from "./Swap/ResetKYC";
 import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
 import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
+import MODAL_PLATFORM_EXCHANGE_START from "./Platform/Exchange/StartExchange";
+import MODAL_PLATFORM_EXCHANGE_COMPLETE from "./Platform/Exchange/CompleteExchange";
 
 import MODAL_FULL_NODE from "./FullNode";
 
@@ -124,6 +126,9 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP,
   MODAL_SWAP_UNAUTHORIZED_RATES,
   MODAL_SWAP_RESET_KYC,
+  // Platform
+  MODAL_PLATFORM_EXCHANGE_START,
+  MODAL_PLATFORM_EXCHANGE_COMPLETE,
 };
 
 export default modals;
