@@ -223,7 +223,7 @@ class Select extends PureComponent<Props> {
             ? {
                 MenuList,
                 ...createRenderers({ renderOption, renderValue }),
-                // Flow is unhappy because extraRenderers keys can "theorically" conflict.
+                // Flow is unhappy because extraRenderers keys can "theoretically" conflict.
                 // $FlowFixMe
                 ...(extraRenderers || {}),
               }
