@@ -107,6 +107,8 @@ const Settings = ({ history, location, match }: Props) => {
 
       if (idx > -1 && idx !== activeTabIndex) {
         setActiveTabIndex(idx);
+      } else {
+        setActiveTabIndex(0);
       }
     }
   }, [match, history, location, items, activeTabIndex]);
