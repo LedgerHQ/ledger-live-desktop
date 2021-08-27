@@ -86,7 +86,7 @@ const checkEnv = nightly => ctx => {
 
 const setNightlyTagName = ctx => {
   const { version } = pkg;
-  ctx.tag = `v${version}`;
+  ctx.tag = version;
 };
 
 module.exports = args => {
