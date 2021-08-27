@@ -18,11 +18,11 @@ import type {
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
-  setToCurrency: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
 };
 
-export default function ToRow({ toCurrency, setToCurrency, toAmount, fromAccount }: Props) {
+export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
@@ -31,7 +31,7 @@ export default function ToRow({ toCurrency, setToCurrency, toAmount, fromAccount
   /* @dev: save picked account */
   useEffect(() => {
     const { currency, account, parentAccount } = selectState;
-    setToCurrency(currency, account, parentAccount);
+    setToAccount(currency, account, parentAccount);
   }, [selectState.currency]);
 
   useEffect(() => {
