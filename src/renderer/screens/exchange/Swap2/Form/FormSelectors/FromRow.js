@@ -23,6 +23,7 @@ type Props = {
   fromAmount: $PropertyType<SwapSelectorStateType, "amount">,
   setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
   isMaxEnabled: boolean,
+  fromAmountError?: Error,
 };
 
 function FromRow({
@@ -32,6 +33,7 @@ function FromRow({
   setFromAccount,
   isMaxEnabled,
   toggleMax,
+  fromAmountError,
 }: Props) {
   const accounts = useSelector(shallowAccountsSelector);
   const unit = fromAccount && getAccountUnit(fromAccount);
@@ -55,7 +57,7 @@ function FromRow({
           <Switch medium isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
         </Box>
       </Box>
-      <Box horizontal mb="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
+      <Box horizontal mb="40px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
         <Box width="50%">
           <SelectAccount
             accounts={accounts}
@@ -80,6 +82,7 @@ function FromRow({
             unit={unit}
             // Flow complains if this prop is missing…
             renderRight={null}
+            error={fromAmountError}
           />
         </Box>
       </Box>

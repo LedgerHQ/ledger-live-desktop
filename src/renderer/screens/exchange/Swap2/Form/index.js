@@ -70,6 +70,7 @@ const SwapForm = () => {
           setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
+          fromAmountError={swapTransaction.fromAmountError}
         />
         <SwapFormSummary swapTransaction={swapTransaction} />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
