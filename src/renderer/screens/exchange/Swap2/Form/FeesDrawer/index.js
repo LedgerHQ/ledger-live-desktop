@@ -7,6 +7,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import SendAmountFields from "~/renderer/modals/Send/SendAmountFields";
 import { transactionSelector } from "~/renderer/actions/swap";
+import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 const Separator = styled.div`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
@@ -14,7 +15,11 @@ const Separator = styled.div`
   margin-bottom: 24px;
 `;
 
-export default function FeesDrawer({ swapTransaction, disableSlowStrategy = false }: *) {
+type Props = {
+  swapTransaction: SwapTransactionType,
+  disableSlowStrategy?: boolean,
+};
+export default function FeesDrawer({ swapTransaction, disableSlowStrategy = false }: Props) {
   const { setTransaction, updateTransaction, account, parentAccount, status } = swapTransaction;
   const transaction = useSelector(transactionSelector);
 
