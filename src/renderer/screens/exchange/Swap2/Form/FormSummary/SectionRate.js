@@ -17,6 +17,7 @@ import Spinner from "~/renderer/components/Spinner";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import Box from "~/renderer/components/Box";
 import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
+import { ratesExpirationThreshold } from "~/renderer/reducers/swap";
 
 type Props = {
   swapTransaction: SwapTransactionType,
@@ -47,7 +48,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
           <Box horizontal alignItems="center" mr={2}>
             <Box mr={1}>
-              <AnimatedCountdown size={10} />
+              <AnimatedCountdown size={10} duration={ratesExpirationThreshold} />
             </Box>
             <Box>
               <CountdownTimer end={ratesExpiration} callback={swapTransaction.swap.refetchRates} />
