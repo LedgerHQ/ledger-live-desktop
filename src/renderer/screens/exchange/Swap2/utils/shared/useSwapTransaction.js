@@ -1,5 +1,5 @@
 // @flow
-import { useState, useReducer, useMemo, useEffect } from "react";
+import { useState, useReducer, useMemo, useEffect, useCallback } from "react";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
@@ -30,6 +30,7 @@ export type SwapDataType = {
   to: SwapSelectorStateType,
   isMaxEnabled: boolean,
   rates: ?(ExchangeRate[]),
+  refetchRates: () => void,
 };
 
 const SelectorStateDefaultValues = {
@@ -78,6 +79,8 @@ const useSwapTransaction = (): SwapTransactionType => {
   const [fromState, setFromState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
   const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
   const [rates, dispatchRates] = useReducer(ratesReducer, ratesReducerInitialState);
+  const [getRatesDependency, setGetRatesDependency] = useState(null);
+  const refetchRates = useCallback(() => setGetRatesDependency({}), []);
   const allAccounts = useSelector(shallowAccountsSelector);
   const bridgeTransaction = useBridgeTransaction();
   const fromAmountError = useMemo(() => {
@@ -186,11 +189,19 @@ const useSwapTransaction = (): SwapTransactionType => {
       abort = true;
       dispatchRates({ type: "idle" });
     };
-  }, [fromAccount, fromParentAccount, toAccount, toParentAccount, transaction, toCurrency]);
+  }, [
+    fromAccount,
+    fromParentAccount,
+    toAccount,
+    toParentAccount,
+    transaction,
+    toCurrency,
+    getRatesDependency,
+  ]);
 
   const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = () =>
     setMax(previous => !previous);
-  const swap = { to: toState, from: fromState, isMaxEnabled, rates };
+  const swap = { to: toState, from: fromState, isMaxEnabled, rates, refetchRates };
 
   return {
     ...bridgeTransaction,

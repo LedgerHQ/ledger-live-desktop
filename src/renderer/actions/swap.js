@@ -67,3 +67,12 @@ export const rateSelector: OutputSelector<
   state => state.swap,
   swap => swap.exchangeRate,
 );
+
+export const rateExpirationSelector: OutputSelector<
+  State,
+  void,
+  $PropertyType<SwapStateType, "exchangeRateExpiration">,
+> = createSelector(
+  state => state.swap,
+  swap => swap.exchangeRateExpiration,
+);
