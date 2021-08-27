@@ -1,6 +1,7 @@
 // @flow
 import React, { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 import { useTranslation } from "react-i18next";
@@ -27,7 +28,8 @@ const SectionRate = ({ swapTransaction }: Props) => {
   const { setDrawer } = useContext(context);
   const exchangeRate = useSelector(rateSelector);
   const ratesExpiration = useSelector(rateExpirationSelector);
-  const fromCurrency = swapTransaction.swap.from.currency;
+  const fromAccount = swapTransaction.swap.from.account;
+  const fromCurrency = fromAccount && getAccountCurrency(fromAccount);
   const toCurrency = swapTransaction.swap.to.currency;
   const ratesState = swapTransaction.swap.rates;
   const handleChange = useMemo(
