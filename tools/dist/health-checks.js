@@ -1,7 +1,6 @@
 const git = require("git-rev-sync");
 const pkg = require("../../package.json");
 const repoInfo = require("./repo-info");
-const semver = require("semver");
 
 let verbose = false;
 
@@ -37,7 +36,7 @@ const isTagged = ctx => {
   ctx.tag = tag;
 };
 
-const checkRemote = canary => ctx => {
+const checkRemote = nightly => ctx => {
   const { repository } = pkg;
   const gitRemote = git.remoteUrl();
 
@@ -46,7 +45,7 @@ const checkRemote = canary => ctx => {
   const pkgInfo = repoInfo(repository);
   const gitInfo = repoInfo(gitRemote);
 
-  if (canary) {
+  if (nightly) {
     ctx.repo = pkgInfo;
     return;
   }
@@ -58,7 +57,7 @@ const checkRemote = canary => ctx => {
   ctx.repo = pkgInfo;
 };
 
-const checkEnv = canary => ctx => {
+const checkEnv = nightly => ctx => {
   const platform = require("os").platform();
 
   const { GH_TOKEN, APPLEID, APPLEID_PASSWORD } = process.env;
@@ -71,7 +70,7 @@ const checkEnv = canary => ctx => {
 
   ctx.token = GH_TOKEN;
 
-  if (!canary) {
+  if (!nightly) {
     if (platform !== "darwin") {
       log("OS is not mac, skipping APPLEID and APPLEID_PASSWORD check");
       return;
@@ -85,12 +84,9 @@ const checkEnv = canary => ctx => {
   }
 };
 
-const setCanaryTagName = ctx => {
+const setNightlyTagName = ctx => {
   const { version } = pkg;
-  const v = semver.coerce(version);
-
-  const tag = `${v.version}-${git.short()}`;
-  ctx.tag = tag;
+  ctx.tag = `v${version}`;
 };
 
 module.exports = args => {
@@ -99,26 +95,26 @@ module.exports = args => {
   return [
     {
       title: "Check for required environment variables",
-      task: checkEnv(args.canary),
+      task: checkEnv(args.nightly),
     },
     {
       title: "Check that git remote branch matches package.json `repository`",
-      task: checkRemote(args.canary),
+      task: checkRemote(args.nightly),
     },
     {
       title: "Check that the local git repository is clean",
-      skip: () => !!args.canary,
+      skip: () => !!args.nightly,
       task: isClean,
     },
     {
       title: "Check that HEAD is tagged",
-      skip: () => !!args.canary,
+      skip: () => !!args.nightly,
       task: isTagged,
     },
     {
-      title: "Set tag name for Canary draft release",
-      enabled: () => !!args.canary,
-      task: setCanaryTagName,
+      title: "Set tag name for nightly draft release",
+      enabled: () => !!args.nightly,
+      task: setNightlyTagName,
     },
   ];
 };

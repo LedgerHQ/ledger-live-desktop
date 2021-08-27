@@ -76,14 +76,9 @@ const buildTasks = args => [
         commands.push("-c.afterSign='lodash/noop'");
         commands.push("--publish", "never");
       }
-      if (args.n) {
+      if (args.nightly) {
         commands.push("--config");
         commands.push("electron-builder-nightly.yml");
-      }
-
-      if (args.canary) {
-        commands.push("--config");
-        commands.push("electron-builder-canary.yml");
       }
 
       await exec("yarn", commands, {
@@ -187,8 +182,8 @@ yargs
           type: "boolean",
           describe: "Build unpacked dir. Useful for tests",
         })
-        .option("n", {
-          alias: "nightly",
+        .option("nightly", {
+          alias: "n",
           type: "boolean",
         })
         .option("dirty", {
@@ -198,10 +193,6 @@ yargs
         .option("publish", {
           type: "boolean",
           describe: "Publish the created artifacts on GitHub as a draft release",
-        })
-        .option("canary", {
-          type: "boolean",
-          describe: "used to disabled some check for canary build",
         }),
     args => runTasks(mainTask, args),
   )
@@ -215,9 +206,10 @@ yargs
     "draft",
     "Prepare release on GitHub",
     yargs =>
-      yargs.option("canary", {
+      yargs.option("nightly", {
+        alias: "n",
         type: "boolean",
-        describe: "used to disabled some check for canary build",
+        describe: "used to disabled some check for nightly build",
       }),
     args => runTasks(draftTasks, args),
   )

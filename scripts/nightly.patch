@@ -8,8 +8,8 @@ index 982f11848..893a706e1 100644
    "name": "ledger-live-desktop",
 -  "productName": "Ledger Live",
 -  "description": "Ledger Live - Desktop",
-+  "productName": "Ledger Live Canary",
-+  "description": "Ledger Live - Desktop Canary",
++  "productName": "Ledger Live Nightly",
++  "description": "Ledger Live - Desktop Nightly",
    "version": "2.32.2",
    "author": "Ledger Live Team <team-live@ledger.fr>",
 -  "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
@@ -38,18 +38,18 @@ index 11a0042a9..61bfe9940 100644
 --- i/src/renderer/components/Updater/Banner.js
 +++ w/src/renderer/components/Updater/Banner.js
 @@ -95,7 +95,7 @@ const UpdaterTopBanner = () => {
- 
+
      if (!VISIBLE_STATUS.includes(status)) return null;
- 
+
 -    let content: ?Content = CONTENT_BY_STATUS(
 +    const content: ?Content = CONTENT_BY_STATUS(
        quitAndInstall,
        reDownload,
        downloadProgress,
 @@ -105,17 +105,17 @@ const UpdaterTopBanner = () => {
- 
+
      if (!content) return null;
- 
+
 -    if (__APP_VERSION__.includes("nightly")) {
 -      content = {
 -        Icon: IconInfoCircle,
@@ -72,7 +72,7 @@ index 11a0042a9..61bfe9940 100644
 +    //     ),
 +    //   };
 +    // }
- 
+
      return <TopBanner id={"app-update-banner"} content={content} status={status} />;
    }
 diff --git i/ui-lib/package.json w/ui-lib/package.json
