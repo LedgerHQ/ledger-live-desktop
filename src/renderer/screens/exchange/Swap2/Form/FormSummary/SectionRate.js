@@ -44,7 +44,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
 
   const summaryValue =
     swapTransaction.swap.rates.status === "loading" ? (
-      <Spinner size={16} color="palette.text.shade40" />
+      <Spinner size={17} color="palette.text.shade40" my="1px" />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
@@ -69,7 +69,9 @@ const SectionRate = ({ swapTransaction }: Props) => {
         />
       </SummaryValue>
     ) : (
-      <Text color="palette.text.shade100">{"-"}</Text>
+      <Text color="palette.text.shade100" fontSize={4}>
+        {"-"}
+      </Text>
     );
 
   return (
