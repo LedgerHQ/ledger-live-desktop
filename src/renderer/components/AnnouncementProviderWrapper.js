@@ -58,8 +58,13 @@ export function AnnouncementProviderWrapper({ children }: Props) {
   const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
   const currenciesRaw = useSelector(cryptoCurrenciesSelector);
-  const currencies = currenciesRaw.map(currency => currency.id);
-  const tickers = currenciesRaw.map(currency => currency.ticker);
+  const { currencies, tickers } = currenciesRaw.reduce(
+    ({ currencies, tickers }, { id, ticker }) => ({
+      currencies: [...currencies, id],
+      tickers: [...tickers, ticker],
+    }),
+    { currencies: [], tickers: [] },
+  );
   const dispatch = useDispatch();
 
   // $FlowFixMe please help on fixing this. bad type on live-common?
