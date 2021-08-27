@@ -23,9 +23,13 @@ const SectionProvider = ({ value }: { value?: string }) => {
       />
       {(exchangeRate && (
         <SummaryValue value={exchangeRate.provider}>
-          <ProviderIcon size={20} />
+          <ProviderIcon size={19} />
         </SummaryValue>
-      )) || <Text color="palette.text.shade100">{"-"}</Text>}
+      )) || (
+        <Text color="palette.text.shade100" fontSize={4}>
+          {"-"}
+        </Text>
+      )}
     </SummarySection>
   );
 };
