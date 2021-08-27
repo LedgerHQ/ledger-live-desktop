@@ -1,5 +1,6 @@
 // @flow
 import { remote, WebviewTag, shell } from "electron";
+import { BigNumber } from "bignumber.js";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -9,7 +10,11 @@ import { useTranslation } from "react-i18next";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import {
+  addPendingOperation,
+  getMainAccount,
+  getAccountUnit,
+} from "@ledgerhq/live-common/lib/account";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -287,6 +292,112 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
     [manifest, dispatch, accounts],
   );
 
+  const startExchange = useCallback(
+    ({ exchangeType }: { exchangeType: number }) => {
+      tracking.platformStartExchangeRequested(manifest);
+      return new Promise((resolve, reject) =>
+        dispatch(
+          openModal("MODAL_PLATFORM_EXCHANGE_START", {
+            exchangeType,
+            onResult: nonce => {
+              tracking.platformStartExchangeSuccess(manifest);
+              resolve(nonce);
+            },
+            onCancel: error => {
+              tracking.platformStartExchangeFail(manifest);
+              reject(error);
+            },
+          }),
+        ),
+      );
+    },
+    [manifest, dispatch],
+  );
+
+  const completeExchange = useCallback(
+    ({
+      provider,
+      fromAccountId,
+      toAccountId,
+      transaction,
+      binaryPayload,
+      signature,
+      feesStrategy,
+    }: {
+      provider: string,
+      fromAccountId: string,
+      toAccountId: string,
+      transaction: RawPlatformTransaction,
+      binaryPayload: string,
+      signature: string,
+      feesStrategy: string,
+    }) => {
+      // Nb get a hold of the actual accounts, and parent accounts
+      const fromAccount = accounts.find(a => a.id === fromAccountId);
+      let fromParentAccount;
+
+      const toAccount = accounts.find(a => a.id === toAccountId);
+      let toParentAccount;
+
+      if (!fromAccount || !toAccount) return null;
+      if (fromAccount.type === "TokenAccount") {
+        fromParentAccount = accounts.find(a => a.id === fromAccount.parentId);
+      }
+      if (toAccount.type === "TokenAccount") {
+        toParentAccount = accounts.find(a => a.id === toAccount.parentId);
+      }
+
+      const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
+      const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
+      const unit = getAccountUnit(mainFromAccount);
+
+      transaction.family = mainFromAccount.currency.family;
+      transaction.feesStrategy = feesStrategy;
+
+      const platformTransaction = deserializePlatformTransaction(transaction);
+
+      // FIXME We should either provide a helper to handle this dec to satoshi conversion
+      // or handle it on the deserializer if we just assume all partners will provide the
+      // amounts in top level units.
+      platformTransaction.amount = BigNumber(platformTransaction.amount).times(
+        BigNumber(10).pow(unit.magnitude),
+      );
+
+      let processedTransaction = accountBridge.createTransaction(mainFromAccount);
+      processedTransaction = accountBridge.updateTransaction(transaction, platformTransaction);
+      console.log({ processedTransaction, feesStrategy });
+
+      tracking.platformCompleteExchangeRequested(manifest);
+      return new Promise((resolve, reject) =>
+        dispatch(
+          openModal("MODAL_PLATFORM_EXCHANGE_COMPLETE", {
+            provider,
+            exchange: {
+              fromAccount,
+              fromParentAccount,
+              toAccount,
+              toParentAccount,
+            },
+            transaction: processedTransaction,
+            binaryPayload,
+            signature,
+            feesStrategy,
+
+            onResult: operation => {
+              tracking.platformCompleteExchangeSuccess(manifest);
+              resolve(operation);
+            },
+            onCancel: error => {
+              tracking.platformCompleteExchangeFail(manifest);
+              reject(error);
+            },
+          }),
+        ),
+      );
+    },
+    [accounts, dispatch, manifest],
+  );
+
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
@@ -295,14 +406,18 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
+      "exchange.start": startExchange,
+      "exchange.complete": completeExchange,
     }),
     [
       listAccounts,
+      listCurrencies,
+      requestAccount,
       receiveOnAccount,
       signTransaction,
       broadcastTransaction,
-      requestAccount,
-      listCurrencies,
+      startExchange,
+      completeExchange,
     ],
   );
 

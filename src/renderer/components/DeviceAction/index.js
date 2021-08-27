@@ -107,6 +107,9 @@ const DeviceAction = <R, H, P>({
     initSwapRequested,
     initSwapError,
     initSwapResult,
+    completeExchangeRequested,
+    completeExchangeResult,
+    completeExchangeError,
     allowOpeningGranted,
     initSellRequested,
     initSellResult,
@@ -155,6 +158,10 @@ const DeviceAction = <R, H, P>({
 
   if (listingApps) {
     return renderListingApps();
+  }
+
+  if (completeExchangeRequested && !completeExchangeResult && !completeExchangeError) {
+    return <div>{"Confirm on your device"}</div>;
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
