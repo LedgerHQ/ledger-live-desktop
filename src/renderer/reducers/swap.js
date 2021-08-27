@@ -10,6 +10,7 @@ export type SwapStateType = {
   pairs: ?$PropertyType<AvailableProviderV3, "pairs">,
   transaction: ?Transaction,
   exchangeRate: ?ExchangeRate,
+  exchangeRateExpiration: ?Date,
 };
 
 const initialState: SwapStateType = {
@@ -17,7 +18,10 @@ const initialState: SwapStateType = {
   pairs: null,
   transaction: null,
   exchangeRate: null,
+  exchangeRateExpiration: null,
 };
+
+const ratesExpirationThreshold = 60000;
 
 export const flattenPairs = (
   acc: Array<{ from: string, to: string }>,
@@ -42,6 +46,10 @@ const handlers = {
   UPDATE_RATE: (state: SwapStateType, { payload }: { payload: ?ExchangeRate }) => ({
     ...state,
     exchangeRate: payload,
+    exchangeRateExpiration:
+      payload?.tradeMethod === "fixed"
+        ? new Date(new Date().getTime() + ratesExpirationThreshold)
+        : null,
   }),
   RESET_STATE: () => ({ ...initialState }),
 };

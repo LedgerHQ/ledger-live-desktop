@@ -11,9 +11,12 @@ import { context } from "~/renderer/drawers/Provider";
 import RatesDrawer from "../RatesDrawer";
 import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
 import Price from "~/renderer/components/Price";
-import { rateSelector } from "~/renderer/actions/swap";
+import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
 import Text from "~/renderer/components/Text";
 import Spinner from "~/renderer/components/Spinner";
+import CountdownTimer from "~/renderer/components/CountdownTimer";
+import Box from "~/renderer/components/Box";
+import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
 
 type Props = {
   swapTransaction: SwapTransactionType,
@@ -22,6 +25,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
   const { t } = useTranslation();
   const { setDrawer } = useContext(context);
   const exchangeRate = useSelector(rateSelector);
+  const ratesExpiration = useSelector(rateExpirationSelector);
   const fromCurrency = swapTransaction.swap.from.currency;
   const toCurrency = swapTransaction.swap.to.currency;
 
@@ -36,6 +40,16 @@ const SectionRate = ({ swapTransaction }: Props) => {
           })
         }
       >
+        {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
+          <Box horizontal alignItems="center" mr={2}>
+            <Box mr={1}>
+              <AnimatedCountdown size={10} />
+            </Box>
+            <Box>
+              <CountdownTimer end={ratesExpiration} callback={swapTransaction.swap.refetchRates} />
+            </Box>
+          </Box>
+        )}
         {exchangeRate.tradeMethod === "fixed" ? <IconLock size={16} /> : <IconLockOpen size={16} />}
         <Price
           withEquality
