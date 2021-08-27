@@ -162,8 +162,6 @@ const useSwapTransaction = (): SwapTransactionType => {
         let rates: Array<ExchangeRate> = await getExchangeRates(
           { fromAccount, fromParentAccount, toAccount, toParentAccount },
           transaction,
-          // TODO: use user id after KYC gets implemented
-          // providerKYC?.id,
         );
         if (abort) return;
         // Discard bad provider rates
