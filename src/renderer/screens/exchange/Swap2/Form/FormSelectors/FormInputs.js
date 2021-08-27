@@ -31,7 +31,7 @@ type FormInputsProps = {
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
   setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount">,
   setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
-  setToCurrency: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
   isMaxEnabled?: boolean,
 };
@@ -44,7 +44,7 @@ export default function FormInputs({
   setFromAmount,
   toCurrency,
   toAmount,
-  setToCurrency,
+  setToAccount,
   toggleMax,
 }: FormInputsProps) {
   return (
@@ -63,7 +63,7 @@ export default function FormInputs({
       </Box>
       <ToRow
         toCurrency={toCurrency}
-        setToCurrency={setToCurrency}
+        setToAccount={setToAccount}
         toAmount={toAmount}
         fromAccount={fromAccount}
       />
