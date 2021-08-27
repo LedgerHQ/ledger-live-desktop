@@ -1,5 +1,5 @@
 // @flow
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import { useSelector } from "react-redux";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
@@ -23,6 +23,12 @@ export type SwapSelectorStateType = {
   parentAccount: null | Account,
   amount: null | BigNumber,
 };
+export type SwapDataType = {
+  from: SwapSelectorStateType,
+  to: SwapSelectorStateType,
+  isMaxEnabled: boolean,
+};
+
 const SelectorStateDefaultValues = {
   currency: null,
   account: null,
@@ -32,7 +38,7 @@ const SelectorStateDefaultValues = {
 
 export type SwapTransactionType = {
   ...useBridgeTransactionReturnType,
-  swap: { to: SwapSelectorStateType, from: SwapSelectorStateType },
+  swap: SwapDataType,
   setFromAccount: (account: $PropertyType<SwapSelectorStateType, "account">) => void,
   setToAccount: (
     currency: $PropertyType<SwapSelectorStateType, "currency">,
@@ -41,12 +47,13 @@ export type SwapTransactionType = {
   ) => void,
   setFromAmount: (amount: BigNumber) => void,
   setToAmount: (amount: BigNumber) => void,
-  toggleMax: () => Promise<void>,
+  toggleMax: () => void,
 };
 
 const useSwapTransaction = (): SwapTransactionType => {
   const [toState, setToState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
   const [fromState, setFromState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
+  const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
   const allAccounts = useSelector(shallowAccountsSelector);
   const bridgeTransaction = useBridgeTransaction();
   const fromAmountError = useMemo(() => {
@@ -91,26 +98,29 @@ const useSwapTransaction = (): SwapTransactionType => {
   const setToAmount: $PropertyType<SwapTransactionType, "setToAmount"> = amount =>
     setToState(previousState => ({ ...previousState, amount: amount }));
 
-  const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = async () => {
-    /* UPDATE useAllAmount value */
-    const useAllAmount = !bridgeTransaction.transaction.useAllAmount;
-    bridgeTransaction.updateTransaction(transaction => ({ ...transaction, useAllAmount }));
-
-    /* UPDATE amount to the max value if needed */
-    if (useAllAmount) {
+  /* UPDATE from amount to the estimate max spendable on account 
+  change when the amount feature is enabled */
+  useEffect(() => {
+    const updateAmountUsingMax = async () => {
       const bridge = getAccountBridge(bridgeTransaction.account, bridgeTransaction.parentAccount);
       const amount = await bridge.estimateMaxSpendable({
         account: bridgeTransaction.account,
         parentAccount: bridgeTransaction.parentAccount,
       });
-
       setFromAmount(amount);
-    }
-  };
+    };
+
+    if (isMaxEnabled) updateAmountUsingMax();
+  }, [isMaxEnabled, fromState.account]);
+
+  const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = () =>
+    setMax(previous => !previous);
+
+  const swap = { to: toState, from: fromState, isMaxEnabled };
 
   return {
     ...bridgeTransaction,
-    swap: { to: toState, from: fromState },
+    swap,
     setFromAmount,
     toggleMax,
     fromAmountError,
