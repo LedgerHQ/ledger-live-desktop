@@ -68,7 +68,7 @@ const SwapForm = () => {
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
           setToCurrency={swapTransaction.setToAccount}
-          isMaxEnabled={swapTransaction.transaction?.useAllAmount}
+          isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
         />
         <SwapFormSummary {...summaryMockedData} />
