@@ -34,6 +34,7 @@ type FormInputsProps = {
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
   isMaxEnabled?: boolean,
+  fromAmountError?: Error,
 };
 
 export default function FormInputs({
@@ -46,6 +47,7 @@ export default function FormInputs({
   toAmount,
   setToAccount,
   toggleMax,
+  fromAmountError,
 }: FormInputsProps) {
   return (
     <section>
@@ -56,6 +58,7 @@ export default function FormInputs({
         setFromAmount={setFromAmount}
         isMaxEnabled={isMaxEnabled}
         toggleMax={toggleMax}
+        fromAmountError={fromAmountError}
       />
 
       <Box horizontal justifyContent="center" alignContent="center">
