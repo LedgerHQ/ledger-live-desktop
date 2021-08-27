@@ -63,6 +63,7 @@ function FromRow({
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
             withSubAccounts
+            showAddAccount
           />
         </Box>
         <Box width="50%">

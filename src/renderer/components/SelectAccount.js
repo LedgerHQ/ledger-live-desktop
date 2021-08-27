@@ -10,10 +10,10 @@ import {
 import type { TFunction } from "react-i18next";
 import type { AccountLike, Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import styled from "styled-components";
-import React, { useCallback, useState } from "react";
-import { withTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { createFilter } from "react-select";
+import React, { useCallback, useState, useMemo } from "react";
+import { withTranslation, Trans } from "react-i18next";
+import { connect, useDispatch } from "react-redux";
+import { createFilter, components } from "react-select";
 import { createStructuredSelector } from "reselect";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import Box from "~/renderer/components/Box";
@@ -22,6 +22,10 @@ import Select from "~/renderer/components/Select";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import AccountTagDerivationMode from "./AccountTagDerivationMode";
+import Button from "~/renderer/components//Button";
+import Plus from "~/renderer/icons/Plus";
+import Text from "./Text";
+import { openModal } from "../actions/modals";
 
 const mapStateToProps = createStructuredSelector({
   accounts: shallowAccountsSelector,
@@ -117,6 +121,52 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
   );
 });
 
+const AddAccountContainer = styled(Box)`
+  // to prevent ScrollBlock.js (used by react-select under the hood) css stacking context issues
+  position: relative;
+  cursor: pointer;
+  flex-direction: row;
+  align-items: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  padding: ${p => (p.small ? "8px 15px 8px 15px" : "10px 15px 11px 15px")};
+`;
+const RoundButton = styled(Button)`
+  padding: 6px;
+  border-radius: 9999px;
+  height: initial;
+`;
+function AddAccountButton() {
+  return (
+    <RoundButton lighterPrimary>
+      <Plus size={12} />
+    </RoundButton>
+  );
+}
+const AddAccountFooter = (small?: boolean) =>
+  function AddAccountFooter({ children, ...props }: { children?: React$Node }) {
+    const dispatch = useDispatch();
+    const openAddAccounts = useCallback(() => {
+      dispatch(openModal("MODAL_ADD_ACCOUNTS"));
+    }, [dispatch]);
+
+    return (
+      <>
+        <components.MenuList {...props}>{children}</components.MenuList>
+        <AddAccountContainer small={small} onClick={openAddAccounts}>
+          <Box mr={3}>
+            <AddAccountButton />
+          </Box>
+          <Text ff="Inter|SemiBold" color="palette.primary.main" fontSize={3}>
+            <Trans i18nKey="swap2.form.details.noAccountCTA" />
+          </Text>
+        </AddAccountContainer>
+      </>
+    );
+  };
+const extraAddAccountRenderer = (small?: boolean) => ({
+  MenuList: AddAccountFooter(small),
+});
+
 const defaultRenderValue = ({ data }: { data: Option }) =>
   data.account ? <AccountOption account={data.account} isValue /> : null;
 
@@ -132,10 +182,12 @@ type OwnProps = {
   renderValue?: typeof defaultRenderValue,
   renderOption?: typeof defaultRenderOption,
   placeholder?: string,
+  showAddAccount?: boolean,
 };
 
 type Props = OwnProps & {
   accounts: Account[],
+  small?: boolean,
 };
 
 export const RawSelectAccount = ({
@@ -148,6 +200,7 @@ export const RawSelectAccount = ({
   renderValue,
   renderOption,
   placeholder,
+  showAddAccount = false,
   t,
   ...props
 }: Props & { t: TFunction }) => {
@@ -195,6 +248,10 @@ export const RawSelectAccount = ({
       }, []),
     [searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
   );
+  const extraRenderers = useMemo(() => showAddAccount && extraAddAccountRenderer(props.small), [
+    showAddAccount,
+    props.small,
+  ]);
 
   const structuredResults = manualFilter();
   return (
@@ -214,6 +271,7 @@ export const RawSelectAccount = ({
         t("common.selectAccountNoOption", { accountName: inputValue })
       }
       onChange={onChangeCallback}
+      extraRenderers={extraRenderers}
     />
   );
 };
