@@ -2,6 +2,7 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import capitalize from "lodash/capitalize";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -46,7 +47,8 @@ function Rate({ value, selected, onSelect, swapTransaction }: Props) {
   const handleSelection = useCallback(() => onSelect(value), [value, onSelect]);
 
   const amount = value.toAmount;
-  const fromCurrency = swapTransaction.swap.from.currency;
+  const fromAccount = swapTransaction.swap.from.account;
+  const fromCurrency = fromAccount && getAccountCurrency(fromAccount);
   const toCurrency = swapTransaction.swap.to.currency;
   const ProviderIcon = providerIcons[capitalize(value.provider)];
 
