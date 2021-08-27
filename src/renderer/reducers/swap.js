@@ -21,7 +21,7 @@ const initialState: SwapStateType = {
   exchangeRateExpiration: null,
 };
 
-const ratesExpirationThreshold = 60000;
+export const ratesExpirationThreshold = 30000;
 
 export const flattenPairs = (
   acc: Array<{ from: string, to: string }>,
