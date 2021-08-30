@@ -57,7 +57,7 @@ const WARN_FROM_UTXO_COUNT = 50;
 
 export default class StepSummary extends PureComponent<StepProps> {
   render() {
-    const { account, parentAccount, transaction, status } = this.props;
+    const { account, parentAccount, transaction, status, error, warning } = this.props;
     if (!account) return null;
     const mainAccount = getMainAccount(account, parentAccount);
     if (!mainAccount || !transaction) return null;
@@ -91,6 +91,11 @@ export default class StepSummary extends PureComponent<StepProps> {
                 currency: currency.name,
               }}
             />
+          </Alert>
+        ) : null}
+        {error || warning ? (
+          <Alert type={error ? "error" : "warning"}>
+            <TranslatedError error={error || warning} />
           </Alert>
         ) : null}
         <FromToWrapper>
