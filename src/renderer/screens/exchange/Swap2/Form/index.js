@@ -9,7 +9,6 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProvidersAction,
@@ -19,6 +18,7 @@ import {
 } from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
+import FormKYCBanner from "./FormKYCBanner";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -72,6 +72,7 @@ const SwapForm = () => {
           toggleMax={swapTransaction.toggleMax}
         />
         <SwapFormSummary swapTransaction={swapTransaction} />
+        {swapTransaction.swap.kycRequired ? <FormKYCBanner /> : null}
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
         </Button>

@@ -19,7 +19,7 @@ type SwapFormSummaryProps = {
 };
 const SwapFormSummary = ({ swapTransaction }: SwapFormSummaryProps) => (
   <Form>
-    <SectionProvider />
+    <SectionProvider value="changelly" />
     <SectionRate />
     <SectionFees swapTransaction={swapTransaction} />
     <SectionTarget
