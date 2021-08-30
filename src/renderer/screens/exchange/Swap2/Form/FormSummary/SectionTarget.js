@@ -1,14 +1,10 @@
 // @flow
 import React from "react";
-import styled from "styled-components";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import SummaryLabel from "./SummaryLabel";
+import SectionInformative from "./SectionInformative";
 import SummaryValue from "./SummaryValue";
-import { useTranslation, Trans } from "react-i18next";
-import { rgba } from "~/renderer/styles/helpers";
-import Button from "~/renderer/components/Button";
+import { useTranslation } from "react-i18next";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
-import TextBase from "~/renderer/components/Text";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
 import type { TokenCurrency, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import SummarySection from "./SummarySection";
@@ -16,39 +12,6 @@ import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 
 import type { SwapSelectorStateType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
-
-const Container: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
-  color: ${p => p.theme.colors.palette.primary.main};
-  column-gap: 0.75rem;
-  padding: 0.75rem;
-  border-radius: 4px;
-  align-items: center;
-`;
-
-const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
-  ff: "Inter",
-  fontSize: "0.875rem",
-  fontWeight: 500,
-  lineHeight: "1.4",
-}))`
-  &:first-letter {
-    text-transform: uppercase;
-  }
-`;
-
-const TextWrappper = styled.div`
-  max-width: 11.875rem;
-`;
-
-const ButtonAddAccount = styled(Button).attrs(() => ({
-  primary: true,
-  small: true,
-}))`
-  height: 40px;
-`;
 
 const AccountSection = ({
   account,
@@ -70,30 +33,6 @@ const AccountSection = ({
   );
 };
 
-const AddAccountSection = ({
-  currency,
-}: {
-  currency: $NonMaybeType<$PropertyType<SwapSelectorStateType, "currency">>,
-}) => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-
-  const handleClick = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
-
-  return (
-    <Container>
-      <TextWrappper>
-        <Text>
-          <Trans values={{ name: currency.name }} i18nKey="swap2.form.details.noAccount" />
-        </Text>
-      </TextWrappper>
-      <ButtonAddAccount onClick={handleClick}>
-        {t("swap2.form.details.noAccountCTA")}
-      </ButtonAddAccount>
-    </Container>
-  );
-};
-
 const PlaceholderSection = () => {
   const { t } = useTranslation();
 
@@ -110,8 +49,20 @@ type SectionTargetProps = {
   currency: $PropertyType<SwapSelectorStateType, "currency">,
 };
 const SectionTarget = ({ account, currency }: SectionTargetProps) => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+
   if (!currency) return <PlaceholderSection />;
-  if (!account) return <AddAccountSection currency={currency} />;
+  if (!account)
+    return (
+      <SectionInformative
+        onClick={handleAddAccount}
+        ctaLabel={t("swap2.form.details.noAccountCTA")}
+        message={t("swap2.form.details.noAccount", { name: currency.name })}
+      />
+    );
 
   return <AccountSection account={account} currency={currency} />;
 };

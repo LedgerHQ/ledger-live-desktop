@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import SwapForm from "./Form";
 import SwapHistory from "./History";
+import SwapKyc from "./KYC";
 import SwapNavbar from "./Navbar";
 import Box from "~/renderer/components/Box";
 
@@ -43,6 +44,7 @@ const Swap2 = () => {
         <Main>
           <Route path="/swap" render={props => <SwapForm {...props} />} exact />
           <Route path="/swap/history" render={props => <SwapHistory {...props} />} exact />
+          <Route path="/swap/kyc" render={props => <SwapKyc {...props} />} exact />
         </Main>
       </Body>
     </>
