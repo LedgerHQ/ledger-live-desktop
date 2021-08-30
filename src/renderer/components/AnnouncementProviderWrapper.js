@@ -55,16 +55,20 @@ async function loadAnnouncements(): Promise<{
 }
 
 const getOsPlatform = () => {
-  const osPlatform = process.platform;
-  if (osPlatform === "darwin") {
-    return "mac";
-  } else if (osPlatform === "win32" || osPlatform === "win64") {
-    return "windows";
-  } else if (osPlatform === "linux") {
-    return "linux";
-  }
+  switch (process.platform) {
+    case "darwin":
+      return "mac";
 
-  return undefined;
+    case "win32":
+    case "win64":
+      return "windows";
+
+    case "linux":
+      return "linux";
+
+    default:
+      return undefined;
+  }
 };
 
 export function AnnouncementProviderWrapper({ children }: Props) {
