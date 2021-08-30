@@ -29,7 +29,10 @@ const Navbar = () => {
     return swapRoutes.findIndex(route => route.path === pathname);
   }, [pathname]);
 
-  const tabs = useMemo(() => swapRoutes.map(route => t(route.title)), []);
+  const tabs = useMemo(
+    () => swapRoutes.filter(route => !route.disabled).map(route => t(route.title)),
+    [],
+  );
 
   const onWrappedTabChange = nextIndex => {
     if (currentIndex === nextIndex) return;

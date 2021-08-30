@@ -216,7 +216,8 @@
     "title": "Swap",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History"
+      "history": "History",
+      "kyc": "KYC"
     },
     "form": {
       "ratesDrawer": {
@@ -248,7 +249,20 @@
       "to": {
         "title": "To"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country"
+      "notAvailable": "Service temporarily unavailable, or not available in your country",
+      "providers": {
+        "kyc": {
+          "required": "You need to complete your KYC",
+          "complete": "Complete KYC",
+          "update": "Refresh KYC",
+          "pending": "Your KYC approval is in progress",
+          "status": {
+            "pending": "KYC pending",
+            "approved": "KYC approved",
+            "rejected": "KYC rejected"
+          }
+        }
+      }
     },
     "history": {
       "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
@@ -258,6 +272,53 @@
       },
       "export": "Export operations",
       "exporting": "Exporting..."
+    },
+    "kyc": {
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "cta": "Continue",
+        "pending": {
+          "cta": "Continue",
+          "title": "Pending approval",
+          "subtitle": "Your information was submitted for approval by Wyre.",
+          "link": "Learn more about KYC"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
     }
   },
   "swap": {
