@@ -2464,7 +2464,7 @@
       "addLocalApp": "Añadir una aplicación local",
       "addLocalAppDesc": "Explorar archivos locales y añadir una aplicación local usando un manifiesto local",
       "addLocalAppButton": "Explorar",
-      "runLocalAppDeleteButton": "Borrar",
+      "runLocalAppDeleteButton": "Eliminar",
       "runLocalAppOpenButton": "Abrir"
     },
     "currencies": {
