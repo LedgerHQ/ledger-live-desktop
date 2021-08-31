@@ -11,8 +11,10 @@ import type {
   TokenAccount,
   TokenCurrency,
   CryptoCurrency,
+  Transaction,
 } from "@ledgerhq/live-common/lib/types";
 import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import type { State as SwapTransactionType } from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
 const RoundButton = styled(Button)`
   padding: 8px;
@@ -27,56 +29,39 @@ function SwapButton() {
   );
 }
 
-export type toAccountType =
-  | {
-      // User already has an account to accept target currency
-      targetAccountExists: true,
-      data: {
-        account: Account | TokenAccount,
-        parentAccount: ?Account,
-        currency: ?(TokenCurrency | CryptoCurrency),
-      },
-    }
-  | {
-      // User doesn't have an account to accept target currency
-      targetAccountExists: false,
-      data: {
-        account: null,
-        parentAccount: null,
-        currency: ?(TokenCurrency | CryptoCurrency),
-      },
-    }
-  // No target currency selected
-  | null;
+export type ToAccountType = {
+  account: Account | TokenAccount,
+  parentAccount: Account | null,
+  currency: (TokenCurrency | CryptoCurrency) | null,
+} | null;
 
-export default function FormInputs() {
-  // TODO: would be moved to a reducer
-  const [fromAccount, setFromAccount] = useState<Account | TokenAccount | null>(null);
-  const [fromAmount, setFromAmount] = useState(null);
-  const [toAccount, setToAccount] = useState<toAccountType>(null);
+type FormInputsProps = {
+  fromAccount: $PropertyType<SwapTransactionType, "account">,
+  fromAmount?: $PropertyType<Transaction, "amount">,
+  isMaxEnabled?: boolean,
+  setFromAccount: (account: $PropertyType<SwapTransactionType, "account">) => void,
+  setFromAmount: (amount: $PropertyType<Transaction, "amount">) => void,
+  toggleMax: () => void,
+};
+
+export default function FormInputs({
+  fromAccount = null,
+  fromAmount = null,
+  isMaxEnabled = false,
+  setFromAccount,
+  setFromAmount,
+  toggleMax,
+}: FormInputsProps) {
+  const [toAccount, setToAccount] = useState(null);
   const [toAmount, setToAmount] = useState(null);
 
-  // TODO: would be handled by the reducer in the future
   const handleSetToAccountChange = (selectSate: useSelectableCurrenciesReturnType) => {
-    const data = selectSate.account
-      ? {
-          targetAccountExists: true,
-          data: {
-            account: selectSate.account,
-            parentAccount: selectSate.parentAccount,
-            currency: selectSate.currency,
-          },
-        }
-      : {
-          targetAccountExists: false,
-          data: { account: null, parentAccount: null, currency: selectSate.currency },
-        };
-
-    setToAccount(data);
+    setToAccount({
+      account: selectSate.account ?? null,
+      parentAccount: selectSate.parentAccount ?? null,
+      currency: selectSate.currency,
+    });
   };
-
-  // TODO: would be a dispatch call in the future
-  const resetToAccount = () => setToAccount(null);
 
   return (
     <section>
@@ -85,6 +70,8 @@ export default function FormInputs() {
         setFromAccount={setFromAccount}
         fromAmount={fromAmount}
         setFromAmount={setFromAmount}
+        isMaxEnabled={isMaxEnabled}
+        toggleMax={toggleMax}
       />
 
       <Box horizontal justifyContent="center" alignContent="center">
@@ -97,7 +84,6 @@ export default function FormInputs() {
         toAmount={toAmount}
         setToAmount={setToAmount}
         fromAccount={fromAccount}
-        resetToAccount={resetToAccount}
       />
     </section>
   );
