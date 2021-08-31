@@ -1440,6 +1440,15 @@
       "removeApps": "Töröld az összes alkalmazást a frissítés előtt",
       "update": "Szoftverfrissítés",
       "updateBtn": "Szoftver frissítése",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "{{version}} Szoftververzió elérhető",
       "contactSupport": "Contact support",
       "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
