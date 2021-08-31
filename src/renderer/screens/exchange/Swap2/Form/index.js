@@ -11,7 +11,12 @@ import { useSwapProviders } from "~/renderer/screens/exchange/Swap2/utils/shared
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateProvidersAction, resetSwapAction, providersSelector } from "~/renderer/actions/swap";
+import {
+  updateProvidersAction,
+  resetSwapAction,
+  providersSelector,
+  updateTransactionAction,
+} from "~/renderer/actions/swap";
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 
@@ -47,6 +52,11 @@ const SwapForm = () => {
     if (error) dispatch(resetSwapAction());
   }, [error]);
 
+  useEffect(() => {
+    dispatch(updateTransactionAction(swapTransaction.transaction));
+    // eslint-disable-next-line
+  }, [swapTransaction.transaction]);
+
   if (providers?.length)
     return (
       <Wrapper>
@@ -61,10 +71,7 @@ const SwapForm = () => {
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
         />
-        <SwapFormSummary
-          targetAccount={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
-          targetCurrency={swapTransaction.swap.to.currency}
-        />
+        <SwapFormSummary swapTransaction={swapTransaction} />
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
         </Button>
