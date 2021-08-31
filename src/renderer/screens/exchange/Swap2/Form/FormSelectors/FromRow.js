@@ -2,7 +2,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -12,15 +11,18 @@ import Text from "~/renderer/components/Text";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { amountInputContainerProps, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type {
+  SwapSelectorStateType,
+  SwapTransactionType,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 
 type Props = {
-  fromAccount: { account: Account | TokenAccount, parentAccount: ?Account } | null,
-  setFromAccount: (pickedAccount: Account | TokenAccount) => void,
+  fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount">,
+  toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
+  fromAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
   isMaxEnabled: boolean,
-  toggleMax: () => void,
-  fromAmount: ?BigNumber,
-  setFromAmount: BigNumber => void,
 };
 
 function FromRow({
