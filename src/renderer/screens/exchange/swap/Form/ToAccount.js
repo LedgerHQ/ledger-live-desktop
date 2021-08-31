@@ -97,7 +97,6 @@ const ToAccount = ({
     currency,
     dispatch,
   ]);
-
   const hasMaybeValidAccounts = availableAccounts && availableAccounts.length > 0;
 
   useEffect(() => {

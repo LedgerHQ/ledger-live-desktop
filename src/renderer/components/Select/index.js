@@ -6,6 +6,7 @@ import AsyncReactSelect from "react-select/async";
 import { withTranslation } from "react-i18next";
 import { FixedSizeList as List } from "react-window";
 import styled, { withTheme } from "styled-components";
+import type { CreateStylesReturnType } from "~/renderer/components/Select/createStyles";
 import debounce from "lodash/debounce";
 
 import createStyles from "./createStyles";
@@ -44,6 +45,8 @@ type Props = {
   virtual: boolean,
   rowHeight: number,
   error: ?Error, // NB at least a different rendering for now
+  stylesMap: CreateStylesReturnType => CreateStylesReturnType,
+  extraRenderers?: { [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
 };
 
 const Row = styled.div`
@@ -138,7 +141,7 @@ class MenuList extends PureComponent<*, *> {
 }
 class Select extends PureComponent<Props> {
   componentDidMount() {
-    if (this.ref && this.props.autoFocus) {
+    if (this.ref && this.props.autoFocus && !process.env.SPECTRON_RUN) {
       // $FlowFixMe
       this.timeout = requestAnimationFrame(() => this.ref.focus());
     }
@@ -194,17 +197,23 @@ class Select extends PureComponent<Props> {
       small,
       theme,
       error,
+      stylesMap,
       virtual = true,
       rowHeight = small ? 34 : 40,
+      autoFocus,
+      extraRenderers,
       ...props
     } = this.props;
 
     const Comp = async ? AsyncReactSelect : ReactSelect;
+    let styles = createStyles(theme, { width, minWidth, small, isRight, isLeft, error });
+    styles = stylesMap ? stylesMap(styles) : styles;
 
     return (
       <Comp
         {...props}
         ref={c => (this.ref = c)}
+        autoFocus={autoFocus && !process.env.SPECTRON_RUN}
         value={value}
         maxMenuHeight={rowHeight * 4.5}
         classNamePrefix="select"
@@ -214,12 +223,17 @@ class Select extends PureComponent<Props> {
             ? {
                 MenuList,
                 ...createRenderers({ renderOption, renderValue }),
+                // Flow is unhappy because extraRenderers keys can "theoretically" conflict.
+                // $FlowFixMe
+                ...(extraRenderers || {}),
               }
             : {
                 ...createRenderers({ renderOption, renderValue }),
+                // $FlowFixMe
+                ...(extraRenderers || {}),
               }
         }
-        styles={createStyles(theme, { width, minWidth, small, isRight, isLeft, error })}
+        styles={styles}
         placeholder={placeholder}
         isDisabled={isDisabled}
         isLoading={isLoading}

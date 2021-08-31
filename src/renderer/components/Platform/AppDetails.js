@@ -2,15 +2,12 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 
-import { translateContent } from "@ledgerhq/live-common/lib/platform/logic";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
 import Box from "~/renderer/components/Box";
 import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
-import { languageSelector } from "~/renderer/reducers/settings";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const getBranchColor = (branch, colors) => {
@@ -87,7 +84,10 @@ type Props = {
 
 const AppDetails = ({ manifest }: Props) => {
   const { t } = useTranslation();
-  const language = useSelector(languageSelector);
+  const description = t(
+    `manager.apps.content.${manifest.id}.shortDescription`,
+    manifest.content.shortDescription, // default description in case of missing translations
+  );
 
   return (
     <>
@@ -104,7 +104,7 @@ const AppDetails = ({ manifest }: Props) => {
           <AppName>{manifest.name}</AppName>
         </TitleContainer>
       </HeaderContainer>
-      <Content>{translateContent(manifest.content.shortDescription, language)}</Content>
+      <Content>{description}</Content>
     </>
   );
 };

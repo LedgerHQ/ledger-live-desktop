@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import type { Account, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 
 const BuyButton = ({ currency, account }: { currency: CryptoCurrency, account: Account }) => {
   const history = useHistory();
@@ -26,6 +27,10 @@ const BuyButton = ({ currency, account }: { currency: CryptoCurrency, account: A
       },
     });
   }, [account, currency, dispatch, history]);
+
+  if (!isCurrencySupported("BUY", currency)) {
+    return null;
+  }
 
   return (
     <Button mr={1} primary inverted onClick={onClick}>

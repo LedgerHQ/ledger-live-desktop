@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { useSelector } from "react-redux";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { useCurrencyColor } from "~/renderer/getCurrencyColor";
 import styled from "styled-components";
@@ -17,6 +18,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import Bar from "./Bar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { languageSelector } from "~/renderer/reducers/settings";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -97,8 +99,12 @@ const Value: ThemedComponent<{}> = styled.div`
 const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => {
   const theme = useTheme();
   const history = useHistory();
+  const language = useSelector(languageSelector);
   const color = useCurrencyColor(currency, theme.colors.palette.background.paper);
-  const percentage = (Math.floor(distribution * 10000) / 100).toFixed(2);
+  const percentage = (Math.floor(distribution * 10000) / 100).toLocaleString(language, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
   const onClick = useCallback(() => {
     setTrackingSource("asset allocation");

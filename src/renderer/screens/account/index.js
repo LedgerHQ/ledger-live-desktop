@@ -8,7 +8,6 @@ import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
-import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
@@ -23,6 +22,7 @@ import { countervalueFirstSelector } from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
+import perFamilyAccountSubHeader from "~/renderer/generated/AccountSubHeader";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import useTheme from "~/renderer/hooks/useTheme";
@@ -33,6 +33,7 @@ import AccountHeaderActions from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
 import TokensList from "./TokensList";
 import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
+import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 
 const mapStateToProps = (
   state,
@@ -79,14 +80,18 @@ const AccountPage = ({
   const AccountBodyHeader = mainAccount
     ? perFamilyAccountBodyHeader[mainAccount.currency.family]
     : null;
+  const AccountSubHeader = mainAccount
+    ? perFamilyAccountSubHeader[mainAccount.currency.family]
+    : null;
   const bgColor = useTheme("colors.palette.background.paper");
+
+  const isCompoundEnabled = useCompoundAccountEnabled(account, parentAccount);
 
   if (!account || !mainAccount) {
     return <Redirect to="/accounts" />;
   }
 
   const ctoken = account.type === "TokenAccount" ? findCompoundToken(account.token) : null;
-  const isCompoundEnabled = ctoken ? isCompoundTokenSupported(ctoken) : false;
 
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);
@@ -100,14 +105,18 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Box horizontal mb={5} flow={4} style={{ justifyContent: "space-between" }}>
+      <Box horizontal mb={3} flow={4} style={{ justifyContent: "space-between" }}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
 
+      {AccountSubHeader ? (
+        <AccountSubHeader account={account} parentAccount={parentAccount} />
+      ) : null}
+
       {!isAccountEmpty(account) ? (
         <>
-          <Box mb={7}>
+          <Box mt={3} mb={7}>
             <BalanceSummary
               mainAccount={mainAccount}
               account={account}
