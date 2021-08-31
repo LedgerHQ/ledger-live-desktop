@@ -104,12 +104,7 @@ const Settings = ({ history, location, match }: Props) => {
       const idx = items.findIndex(val => {
         return `${match.url}/${val.key}` === location.pathname;
       });
-
-      if (idx > -1 && idx !== activeTabIndex) {
-        setActiveTabIndex(idx);
-      } else {
-        setActiveTabIndex(0);
-      }
+      setActiveTabIndex(idx > -1 && idx !== activeTabIndex ? idx : 0);
     }
   }, [match, history, location, items, activeTabIndex]);
 

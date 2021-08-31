@@ -166,9 +166,24 @@ export function useDeepLinkHandler() {
           break;
         }
 
-        case "settings":
-          navigate(`/settings/${splitedPath[1]}`);
+        case "settings": {
+          switch (splitedPath[1]) {
+            case "general":
+              navigate("/settings/display");
+              break;
+            case "accounts":
+            case "about":
+            case "help":
+            case "experimental":
+              navigate(`/settings/${splitedPath[1]}`);
+              break;
+            default:
+              navigate("/settings");
+              break;
+          }
+
           break;
+        }
 
         case "portfolio":
         default:
