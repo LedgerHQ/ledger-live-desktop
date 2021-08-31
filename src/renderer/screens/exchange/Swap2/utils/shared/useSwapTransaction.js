@@ -19,6 +19,11 @@ import { AmountRequired } from "@ledgerhq/errors";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
+type RatesReducerState = {
+  status?: ?string,
+  value?: ExchangeRate[],
+  error?: Error,
+};
 export type SwapSelectorStateType = {
   currency: null | TokenCurrency | CryptoCurrency,
   account: null | Account | TokenAccount,
@@ -40,11 +45,6 @@ const SelectorStateDefaultValues = {
   amount: null,
 };
 
-type RatesReducerState = {
-  status?: ?string,
-  value?: ExchangeRate[],
-  error?: Error,
-};
 const ratesReducerInitialState: RatesReducerState = {};
 const ratesReducer = (state: RatesReducerState, action): RatesReducerState => {
   switch (action.type) {
