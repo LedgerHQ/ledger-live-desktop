@@ -1440,6 +1440,15 @@
       "removeApps": "更新前卸载所有应用程序",
       "update": "固件更新",
       "updateBtn": "更新固件",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "固件版本 {{version}} 可用",
       "contactSupport": "联系客服",
       "deprecated": "设备固件版本太旧而无法更新。请联系 Ledger 客服以获取替代版本。",
