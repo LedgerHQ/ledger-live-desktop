@@ -9,7 +9,7 @@ const Container: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
   column-gap: 0.375rem;
-  align-items: end;
+  align-items: center;
   color: ${p => p.theme.colors.palette.text.shade100};
 `;
 const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
@@ -41,12 +41,10 @@ const SummaryValue = ({
   handleChange?: Function,
   children?: React$Node,
 }) => {
-  if (!value) return <Text>-</Text>;
-
   return (
     <Container>
       {children}
-      <Text>{value}</Text>
+      {value && <Text>{value}</Text>}
       {handleChange ? <Button onClick={handleChange}>Edit</Button> : null}
     </Container>
   );
