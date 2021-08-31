@@ -29,6 +29,7 @@
     "dist:dir": "node ./tools/dist --dir",
     "draft-nightly-release": "node ./tools/dist draft --nightly",
     "nightly": "node ./tools/dist --nightly --publish -v",
+    "build-ci": "node ./tools/dist --ci -v",
     "draft-release": "node ./tools/dist draft",
     "release": "node ./tools/dist --publish -v",
     "ci": "node ./tools/ci.js",

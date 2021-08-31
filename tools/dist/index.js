@@ -80,6 +80,10 @@ const buildTasks = args => [
         commands.push("--config");
         commands.push("electron-builder-nightly.yml");
       }
+      if (args.ci) {
+        commands.push("--config");
+        commands.push("electron-builder-ci.yml");
+      }
 
       await exec("yarn", commands, {
         env: args.publish
@@ -184,6 +188,9 @@ yargs
         })
         .option("nightly", {
           alias: "n",
+          type: "boolean",
+        })
+        .option("ci", {
           type: "boolean",
         })
         .option("dirty", {
