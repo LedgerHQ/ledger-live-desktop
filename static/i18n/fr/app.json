@@ -1440,6 +1440,15 @@
       "removeApps": "Désinstaller toutes les applications avant de mettre à jour",
       "update": "Mise à jour du micrologiciel",
       "updateBtn": "Mettre à jour le micrologiciel",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "Version {{version}} du micrologiciel disponible",
       "contactSupport": "Contacter l'Assistance",
       "deprecated": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
