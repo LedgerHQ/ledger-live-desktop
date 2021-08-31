@@ -14,6 +14,7 @@ import type {
   SwapSelectorStateType,
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
@@ -27,17 +28,24 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
   const unit = selectState.account ? getAccountUnit(selectState.account) : null;
+  const accounts = useSelector(shallowAccountsSelector);
 
   /* @dev: save picked account */
   useEffect(() => {
     const { currency, account, parentAccount } = selectState;
     setToAccount(currency, account, parentAccount);
-  }, [selectState.currency]);
+  }, [selectState.currency, selectState.account, selectState.parentAccount]);
 
   useEffect(() => {
     /* RESET internal state on account change */
     selectState.setCurrency(null);
   }, [fromAccount]);
+
+  /* REFRESH picked currency information (account/parentAccount)
+   when an account is added or removed by the user */
+  useEffect(() => {
+    if (selectState.currency) selectState.setCurrency(selectState.currency);
+  }, [accounts]);
 
   return (
     <>

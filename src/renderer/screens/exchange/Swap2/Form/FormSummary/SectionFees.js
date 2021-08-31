@@ -5,7 +5,7 @@ import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import { useTranslation } from "react-i18next";
 
-const SectionFees = () => {
+const SectionFees = ({ value }: { value?: string }) => {
   const { t } = useTranslation();
 
   return (
@@ -14,7 +14,7 @@ const SectionFees = () => {
         label={t("swap2.form.details.label.fees")}
         details={t("swap2.form.details.tooltip.fees")}
       />
-      <SummaryValue value="0.000034 ETH" handleChange={() => {}} />
+      <SummaryValue value={value} handleChange={() => {}} />
     </SummarySection>
   );
 };
