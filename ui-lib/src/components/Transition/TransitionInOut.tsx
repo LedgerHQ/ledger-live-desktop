@@ -3,8 +3,8 @@ import { CSSTransition } from "react-transition-group";
 import { CSSTransitionProps } from "react-transition-group/CSSTransition";
 import styled from "styled-components";
 const duration = 150;
-const ChildrenWrapper = styled.div`
-  transition: opacity ${duration}ms ease-in-out;
+const ChildrenWrapper = styled.div<{ timeout: number }>`
+  transition: ${props => `opacity ${props.timeout}ms ease-in-out`};
 
   &.transition-inout-enter {
     opacity: 0;
@@ -38,9 +38,9 @@ const TransitionInOut = ({
   in: inProp,
   timeout = duration,
   ...TransitionProps
-}: TransitionInOutProps) => (
+}: TransitionInOutProps): JSX.Element => (
   <CSSTransition {...TransitionProps} in={inProp} timeout={timeout} classNames="transition-inout">
-    <ChildrenWrapper>{children}</ChildrenWrapper>
+    <ChildrenWrapper timeout={timeout}>{children}</ChildrenWrapper>
   </CSSTransition>
 );
 

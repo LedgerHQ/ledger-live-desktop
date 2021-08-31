@@ -18,8 +18,8 @@ const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
   fontWeight: 600,
   lineHeight: "1.4",
 }))`
-  display: inline-flex;
-  column-gap: 0.7rem;
+  display: inline-block;
+
   &:first-letter {
     text-transform: uppercase;
   }
@@ -31,21 +31,13 @@ const Button: ThemedComponent<{}> = styled(ButtonBase).attrs(() => ({
   height: unset;
 `;
 
-const ButtonEdit = ({ onClick }: { onClick: Function }) => {
-  if (!onClick) return null;
-
-  return <Button onClick={onClick}>Edit</Button>;
-};
-
-// This component fetch the current value, the optional icon and the handleChange function
-// from the section's context and render them if possible
 const SummaryValue = ({
   value,
   handleChange,
   children,
 }: {
   value?: string,
-  handleChange: Function,
+  handleChange?: Function,
   children?: React$Node,
 }) => {
   if (!value) return <Text>-</Text>;
@@ -54,7 +46,7 @@ const SummaryValue = ({
     <Container>
       {children}
       <Text>{value}</Text>
-      <ButtonEdit onClick={handleChange} />
+      {handleChange ? <Button onClick={handleChange}>Edit</Button> : null}
     </Container>
   );
 };
