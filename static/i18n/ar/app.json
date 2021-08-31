@@ -1440,6 +1440,15 @@
       "removeApps": "إلغاء تثبيت جميع التطبيقات قبل التحديث",
       "update": "تحديث البرنامج الثابت",
       "updateBtn": "قم بتحديث البرنامج الثابت",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "الإصدار {{version}} من البرنامج الثابت متوفر",
       "contactSupport": "اتصل بالدعم",
       "deprecated": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعوق تحديثه. اتصل بدعم ليدجر (Ledger) للحصول على بديل.",
