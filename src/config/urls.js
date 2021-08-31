@@ -81,13 +81,7 @@ export const urls = {
   appSupport: {
     "Cardano ADA":
       "https://support.ledger.com/hc/en-us/articles/360020095874-Cardano-ADA-?docs=true",
-    Neo: "https://support.ledger.com/hc/en-us/articles/115005530425-Neo-NEO-?docs=true",
-    VeChain: "https://support.ledger.com/hc/en-us/articles/360007655934-VeChain-VET-?docs=true",
-    IOTA: "https://support.ledger.com/hc/en-us/articles/360011633353-IOTA-MIOTA-?docs=true",
-    Zilliqa: "https://support.ledger.com/hc/en-us/articles/360036164013-Zilliqa-ZIL-?docs=true",
-    Lido: "https://support.ledger.com/hc/en-us/articles/4405774639249-What-is-LIDO-?support=true",
-    default:
-      "https://support.ledger.com/hc/en-us/categories/115000811829-Apps?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=appsupport",
+    default: "https://support.ledger.com/hc/en-us/sections/4404369637521-Crypto-assets?docs=true",
   },
   migrateAccounts:
     "https://support.ledger.com/hc/en-us/articles/360025322153-Wrong-private-keys-for-account?support=true",
