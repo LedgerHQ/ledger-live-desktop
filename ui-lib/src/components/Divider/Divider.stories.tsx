@@ -1,11 +1,12 @@
 import React from "react";
 import Divider from "./index";
 import Text from "@ui/components/Text";
+import Flex from "@ui/components/Layout/Flex";
 import styled from "styled-components";
 
 // Nb Following @jgiamporcaro-ledger advice, let the wrapper container set the spacing of components.
-const StyledWrapper = styled.div`
-  column-gap: 15px;
+const StyledWrapper = styled(Flex).attrs({ flexDirection: "column" })`
+  row-gap: 15px;
 `;
 
 export default {
