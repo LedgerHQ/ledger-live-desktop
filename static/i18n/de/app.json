@@ -1440,6 +1440,15 @@
       "removeApps": "Deinstallieren Sie alle Apps vor dem Update",
       "update": "Firmware-Update",
       "updateBtn": "Firmware aktualisieren",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "Firmware-Version {{version}} ist verfügbar",
       "contactSupport": "Support kontaktieren",
       "deprecated": "Geräte-Firmware-Version zu alt, um aktualisiert zu werden. Kontaktieren Sie den Ledger-Support für einen Ersatz.",
