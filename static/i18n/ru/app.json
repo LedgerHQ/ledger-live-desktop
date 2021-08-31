@@ -1440,6 +1440,15 @@
       "removeApps": "Перед обновлением удалите все приложения",
       "update": "Обновление прошивки",
       "updateBtn": "Обновить прошивку",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "Доступна новая версия прошивки {{version}}",
       "contactSupport": "Связаться с поддержкой",
       "deprecated": "Версия прошивки устройства устарела и не может быть обновлена. Обратитесь в службу поддержки Ledger для решения этого вопроса.",
