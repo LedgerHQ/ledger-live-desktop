@@ -1,30 +1,26 @@
 // @flow
 import React from "react";
-
+import { useSelector } from "react-redux";
+import { rateSelector } from "~/renderer/actions/swap";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import ChangellyIcon from "~/renderer/icons/providers/Changelly";
-import WyreIcon from "~/renderer/icons/providers/Wyre";
+import * as providerIcons from "~/renderer/icons/providers";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
 
-const providerIcons = { changelly: ChangellyIcon, wyre: WyreIcon };
-
-export const getProviderIcon = (providerName?: string) => {
-  if (!providerName) return null;
-
-  const Icon = providerIcons[providerName.toLowerCase()];
-
-  /* eslint-disable react/display-name */
-  if (Icon) return <Icon size={20} />;
-  return null;
-};
+const iconByProviderName = Object.entries(providerIcons).reduce(
+  (obj, [key, value]) => ({
+    ...obj,
+    [key.toLowerCase()]: value,
+  }),
+  {},
+);
 
 const StatusTag = styled.div`
   display: flex;
@@ -36,7 +32,7 @@ const StatusTag = styled.div`
   column-gap: 4px;
 `;
 
-type SectionProviderProps = { value?: string, status?: "approved" | "pending" | "rejected" };
+type SectionProviderProps = { status?: "approved" | "pending" | "rejected" };
 type ProviderStatusTagProps = {
   status: $NonMaybeType<$PropertyType<SectionProviderProps, "status">>,
 };
@@ -61,8 +57,10 @@ const ProviderStatusTag = ({ status }: ProviderStatusTagProps) => {
   );
 };
 
-const SectionProvider = ({ value, status }: SectionProviderProps) => {
+const SectionProvider = ({ status }: SectionProviderProps) => {
   const { t } = useTranslation();
+  const exchangeRate = useSelector(rateSelector);
+  const ProviderIcon = exchangeRate && iconByProviderName[exchangeRate.provider.toLowerCase()];
 
   return (
     <SummarySection>
@@ -70,10 +68,18 @@ const SectionProvider = ({ value, status }: SectionProviderProps) => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-        <SummaryValue value={value}>{getProviderIcon(value)}</SummaryValue>
-        {status ? <ProviderStatusTag status={status} /> : null}
-      </div>
+      {(exchangeRate && (
+        <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
+          <SummaryValue value={exchangeRate.provider}>
+            <ProviderIcon size={19} />
+          </SummaryValue>
+          {status ? <ProviderStatusTag status={status} /> : null}
+        </div>
+      )) || (
+        <Text color="palette.text.shade100" fontSize={4}>
+          {"-"}
+        </Text>
+      )}
     </SummarySection>
   );
 };

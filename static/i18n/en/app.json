@@ -220,12 +220,10 @@
       "kyc": "KYC"
     },
     "form": {
-      "providerDrawer": {
-        "title": "Change Provider",
+      "ratesDrawer": {
+        "title": "Rate",
         "quote": "Quote",
-        "receive": "Receive",
-        "onChain": "On Chain",
-        "offChain": "Off Chain"
+        "receive": "Receive"
       },
       "details": {
         "label": {
