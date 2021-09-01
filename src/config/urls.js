@@ -186,7 +186,7 @@ export const urls = {
     WrongDeviceForAccount:
       "https://support.ledger.com/hc/en-us/articles/360025322153-Wrong-private-keys-for-account?support=true",
     SyncError:
-      "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
+      "https://support.ledger.com/hc/en-us/articles/360012207759-Solve-a-synchronization-error?support=true",
     StratisDown2021Warning: "https://support.ledger.com/hc/en-us/articles/115005175329",
   },
   compound:
