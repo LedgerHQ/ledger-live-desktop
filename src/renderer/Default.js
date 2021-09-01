@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
@@ -11,6 +11,7 @@ import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
+import Swap2 from "~/renderer/screens/exchange/Swap2";
 import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
@@ -33,8 +34,9 @@ import MainSideBar from "~/renderer/components/MainSideBar";
 import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
 import DebugUpdater from "~/renderer/components/debug/DebugUpdater";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import DebugTheme from "~/renderer/components/debug/DebugTheme";
+import DebugFirmwareUpdater from "~/renderer/components/debug/DebugFirmwareUpdater";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
@@ -44,16 +46,23 @@ import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
+import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+import useEnv from "~/renderer/hooks/useEnv";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
   top: 0;
   z-index: 19;
+  & > *:not(:first-child) {
+    display: none;
+  }
 `;
 
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
+  const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
 
   // every time location changes, scroll back up
@@ -93,6 +102,7 @@ export default function Default() {
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}
               {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+              {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
             <OnboardingOrElse>
               <Switch>
@@ -114,6 +124,7 @@ export default function Default() {
                     <Page>
                       <TopBannerContainer>
                         <UpdateBanner />
+                        <FirmwareUpdateBanner />
                       </TopBannerContainer>
                       <Switch>
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
@@ -141,7 +152,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
-                        <Route path="/swap" render={props => <Swap {...props} />} exact />
+                        <Route path="/swap" render={props => <SwapComponent {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />

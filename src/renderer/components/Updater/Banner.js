@@ -117,7 +117,13 @@ const UpdaterTopBanner = () => {
       };
     }
 
-    return <TopBanner id={"app-update-banner"} content={content} status={status} />;
+    return (
+      <TopBanner
+        id={"app-update-banner"}
+        content={content}
+        status={status === "error" ? "alertRed" : "warning"}
+      />
+    );
   }
 
   return null;

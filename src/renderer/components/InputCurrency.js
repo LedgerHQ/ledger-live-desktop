@@ -202,7 +202,6 @@ class InputCurrency extends PureComponent<Props, State> {
       ...rest
     } = this.props;
     const { displayValue } = this.state;
-
     return (
       <Input
         {...rest}

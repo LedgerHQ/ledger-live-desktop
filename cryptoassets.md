@@ -1713,6 +1713,7 @@
 | Ethereum | LGCY | 0xaE697F994Fc5eBC000F8e22EbFfeE04612f98A0d | LGCY Network |  | ethereum/erc20/lgcy_network |
 | Ethereum | LGO | 0x123aB195DD38B1b40510d467a6a359b201af056f | LGO | delisted, countervalues disabled | ethereum/erc20/lgo |
 | Ethereum | LGO | 0x0a50C93c762fDD6E56D86215C24AaAD43aB629aa | LGO Token |  | ethereum/erc20/lgo_token |
+| Ethereum | STETH | 0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84 | LIDO Staked ETH |  | ethereum/erc20/steth |
 | Ethereum | LIF | 0xEB9951021698B42e4399f9cBb6267Aa35F82D59D | LIF |  | ethereum/erc20/lif |
 | Ethereum | LIFE | 0xfF18DBc487b4c2E3222d115952bABfDa8BA52F5F | LIFE |  | ethereum/erc20/life |
 | Ethereum | LINA | 0xC05d14442A510De4D3d71a3d316585aA0CE32b50 | LINA |  | ethereum/erc20/lina |
@@ -3017,7 +3018,6 @@
 | Ethereum | SBA | 0xECB8F588EAf5A8ce9d964b0acece5D954E130e2f | simplyBrand |  | ethereum/erc20/simplybrand |
 | Ethereum | SSP | 0x624d520BAB2E4aD83935Fa503fB130614374E850 | smartshare token |  | ethereum/erc20/smartshare_token |
 | Ethereum | SMOL | 0x2216e873ea4282EbEf7A02aC5aeA220bE6391A7C | smol | countervalues disabled | ethereum/erc20/smol |
-| Ethereum | STETH | 0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84 | stETH | countervalues disabled | ethereum/erc20/steth |
 | Ethereum | STXEM | 0x0C63cAE5fcC2Ca3dDE60a35e50362220651eBEc8 | stakedXEM | countervalues disabled | ethereum/erc20/stakedxem |
 | Ethereum | TBTC | 0x8dAEBADE922dF735c38C80C7eBD708Af50815fAa | tBTC |  | ethereum/erc20/tbtc |
 | Ethereum | UDOO | 0x12f649A9E821F90BB143089a6e56846945892ffB | uDOO | delisted, countervalues disabled | ethereum/erc20/udoo |

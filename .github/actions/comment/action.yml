@@ -9,7 +9,7 @@ outputs:
   slackAuthor:
     description: slack handle of the author
 inputs:
-  prNumber:
+  sha:
     description: prNumber
     required: true
   images:

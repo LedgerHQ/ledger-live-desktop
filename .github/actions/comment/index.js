@@ -9,8 +9,13 @@ const main = async () => {
   const from = core.getInput("from");
   const to = core.getInput("to");
   const author = core.getInput("author");
-  let imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
-  if (imgChanged.length === 1 && imgChanged[0] === "") {
+  let imgChanged;
+  try {
+    imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
+    if (imgChanged.length === 1 && imgChanged[0] === "") {
+      imgChanged = [];
+    }
+  } catch(e) {
     imgChanged = [];
   }
   const testoutput = await fs.readFile(core.getInput("testoutput"), "utf8");
@@ -28,7 +33,7 @@ const main = async () => {
     // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
     // so this is a workaround. the endpoint will redirect to the artifact url.
     // https://github.com/machard/github-action-artifact-redirect
-    str += `[Suggested snapshots to update](https://github-actions-live-vercel.vercel.app/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+    str += `[Suggested snapshots to update](https://github-actions-live.ledger.tools/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
   }
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
@@ -133,10 +138,10 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   console.log(str);
 
-  const prNumber = core.getInput("prNumber");
+  const sha = core.getInput("sha");
 
   await fetch(
-    `http://github-actions-live-vercel.vercel.app/api/comment?owner=LedgerHQ&repo=ledger-live-desktop&issueId=${prNumber}`,
+    `https://github-actions-live.ledger.tools/api/comment/v2?owner=LedgerHQ&repo=ledger-live-desktop&sha=${sha}`,
     {
       method: "POST",
       headers: {

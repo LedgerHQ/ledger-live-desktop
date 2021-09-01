@@ -24,7 +24,7 @@
       "borderMedium": "hsla(249, 100%, 88%, 1)",
       "base": "hsla(248, 100%, 85%, 1)",
       "borderDark": "hsla(247, 56%, 68%, 1)",
-      "Dark": "hsla(247, 40%, 53%, 1)"
+      "dark": "hsla(247, 40%, 53%, 1)"
     },
     "orange": {
       "error": "hsla(16, 100%, 86%, 0.2)",
@@ -38,7 +38,7 @@
       "contrast": "hsla(0, 0%, 100%, 1)"
     },
     "grey": {
-      "border": "hsla(0, 0%, 90%, 1)"
+      "border": " hsla(0, 1%, 23%, 1)"
     },
     "feedback": {
       "error": "hsla(359, 84%, 63%, 1)",
