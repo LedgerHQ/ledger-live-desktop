@@ -34,6 +34,7 @@ const Text: ThemedComponent<{
   lineHeight?: string,
 }> = styled.span`
   ${uppercase};
+  ${p => (p.capitalize ? `text-transform: capitalize;` : "")};
   ${lineHeight};
   ${fontFamily};
   ${fontSize};

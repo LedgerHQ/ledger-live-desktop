@@ -39,6 +39,14 @@ export const setAutoLockTimeout = (autoLockTimeout: *) => saveSettings({ autoLoc
 export const setHasInstalledApps = (hasInstalledApps: boolean) =>
   saveSettings({ hasInstalledApps });
 
+// developer
+export const setAllowDebugApps = (allowDebugApps: boolean) => saveSettings({ allowDebugApps });
+export const setAllowExperimentalApps = (allowExperimentalApps: boolean) =>
+  saveSettings({ allowExperimentalApps });
+export const setEnablePlatformDevTools = (enablePlatformDevTools: boolean) =>
+  saveSettings({ enablePlatformDevTools });
+export const setCatalogProvider = (catalogProvider: string) => saveSettings({ catalogProvider });
+
 export const setCounterValue = (counterValue: string) =>
   saveSettings({
     counterValue,
@@ -140,9 +148,15 @@ export const dismissBanner = (bannerKey: string) => ({
 export const setPreferredDeviceModel = (preferredDeviceModel: DeviceModelId) =>
   saveSettings({ preferredDeviceModel });
 
-export const setLastSeenDeviceInfo = (dmi: DeviceModelInfo) => ({
+export const setLastSeenDeviceInfo = ({
+  lastSeenDevice,
+  latestFirmware,
+}: {
+  lastSeenDevice: DeviceModelInfo,
+  latestFirmware: any,
+}) => ({
   type: "LAST_SEEN_DEVICE_INFO",
-  payload: dmi,
+  payload: { lastSeenDevice, latestFirmware },
 });
 
 export const setDeepLinkUrl = (url: ?string) => ({

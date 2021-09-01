@@ -76,9 +76,13 @@ const buildTasks = args => [
         commands.push("-c.afterSign='lodash/noop'");
         commands.push("--publish", "never");
       }
-      if (args.n) {
+      if (args.nightly) {
         commands.push("--config");
         commands.push("electron-builder-nightly.yml");
+      }
+      if (args.ci) {
+        commands.push("--config");
+        commands.push("electron-builder-ci.yml");
       }
 
       await exec("yarn", commands, {
@@ -97,6 +101,10 @@ const draftTasks = args => {
   let draft;
 
   return [
+    {
+      title: "Health checks",
+      task: () => setupList(healthChecksTasks, args),
+    },
     {
       title: "Authenticate on GitHub",
       task: ctx => {
@@ -136,11 +144,6 @@ const mainTask = (args = {}) => {
       title: "Setup",
       skip: () => (dirty ? "--dirty flag passed" : false),
       task: () => setupList(setupTasks, args),
-    },
-    {
-      title: "Prepare release on GitHub",
-      enabled: () => !!publish,
-      task: () => setupList(draftTasks, args),
     },
     {
       title: publish ? "Build and publish" : "Build",
@@ -183,8 +186,11 @@ yargs
           type: "boolean",
           describe: "Build unpacked dir. Useful for tests",
         })
-        .option("n", {
-          alias: "nightly",
+        .option("nightly", {
+          alias: "n",
+          type: "boolean",
+        })
+        .option("ci", {
           type: "boolean",
         })
         .option("dirty", {
@@ -202,6 +208,17 @@ yargs
     "Run health checks",
     () => {},
     args => runTasks(healthChecksTasks, args),
+  )
+  .command(
+    "draft",
+    "Prepare release on GitHub",
+    yargs =>
+      yargs.option("nightly", {
+        alias: "n",
+        type: "boolean",
+        describe: "used to disabled some check for nightly build",
+      }),
+    args => runTasks(draftTasks, args),
   )
   .option("verbose", {
     alias: "v",

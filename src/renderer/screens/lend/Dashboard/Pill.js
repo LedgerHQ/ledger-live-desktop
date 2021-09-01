@@ -62,6 +62,7 @@ export const StatusPill = ({ type }: Props) => {
   const { background, text } = colorMap[type];
 
   const Wrapper = type === "ENABLING" || type === "INACTIVE" ? ToolTip : null;
+  const label = t(`lend.headers.types.${type.toLowerCase()}`).toUpperCase();
 
   return Wrapper ? (
     <Wrapper
@@ -72,12 +73,12 @@ export const StatusPill = ({ type }: Props) => {
       }
     >
       <Pill background={background} color={text}>
-        {type.toUpperCase()}
+        {label}
       </Pill>
     </Wrapper>
   ) : (
     <Pill background={background} color={text}>
-      {type.toUpperCase()}
+      {label}
     </Pill>
   );
 };

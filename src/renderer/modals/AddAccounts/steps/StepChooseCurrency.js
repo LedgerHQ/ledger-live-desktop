@@ -117,7 +117,6 @@ export const StepChooseCurrencyFooter = ({
     tokenAccount,
     transitionTo,
   ]);
-
   return (
     <>
       <TrackPage category="AddAccounts" name="Step1" />

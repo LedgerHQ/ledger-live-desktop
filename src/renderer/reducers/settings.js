@@ -69,6 +69,7 @@ export type SettingsState = {
   preferredDeviceModel: DeviceModelId,
   hasInstalledApps: boolean,
   lastSeenDevice: ?DeviceModelInfo,
+  latestFirmware: any,
   language: ?string,
   theme: ?string,
   region: ?string,
@@ -100,6 +101,12 @@ export type SettingsState = {
   firstTimeLend: boolean,
   showClearCacheBanner: boolean,
   fullNodeEnabled: boolean,
+
+  // developer settings
+  allowDebugApps: boolean,
+  allowExperimentalApps: boolean,
+  enablePlatformDevTools: boolean,
+  catalogProvider: string,
   swap: {
     hasAcceptedIPSharing: false,
     selectableCurrencies: string[],
@@ -148,11 +155,18 @@ const INITIAL_STATE: SettingsState = {
   hasInstalledApps: true,
   carouselVisibility: 0,
   lastSeenDevice: null,
+  latestFirmware: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
   firstTimeLend: false,
   showClearCacheBanner: false,
   fullNodeEnabled: false,
+
+  // developer settings
+  allowDebugApps: false,
+  allowExperimentalApps: false,
+  enablePlatformDevTools: false,
+  catalogProvider: "production",
   swap: {
     hasAcceptedIPSharing: false,
     acceptedProviders: [],
@@ -239,10 +253,11 @@ const handlers: Object = {
   },
   LAST_SEEN_DEVICE_INFO: (
     state: SettingsState,
-    { payload: dmi }: { payload: DeviceModelInfo },
+    { payload }: { payload: { lastSeenDevice: DeviceModelInfo, latestFirmware: any } },
   ) => ({
     ...state,
-    lastSeenDevice: dmi,
+    lastSeenDevice: payload.lastSeenDevice,
+    latestFirmware: payload.latestFirmware,
   }),
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
     ...state,
@@ -406,6 +421,13 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+
+export const allowDebugAppsSelector = (state: State) => state.settings.allowDebugApps;
+export const allowExperimentalAppsSelector = (state: State) => state.settings.allowExperimentalApps;
+export const enablePlatformDevToolsSelector = (state: State) =>
+  state.settings.enablePlatformDevTools;
+export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
+
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
@@ -422,6 +444,8 @@ export const hideEmptyTokenAccountsSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
 
 export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
+
+export const latestFirmwareSelector = (state: State) => state.settings.latestFirmware;
 
 export const swapHasAcceptedIPSharingSelector = (state: State) =>
   state.settings.swap.hasAcceptedIPSharing;

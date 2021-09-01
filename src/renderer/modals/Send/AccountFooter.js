@@ -51,7 +51,6 @@ const AccountFooter = ({ account, parentAccount, status }: Props) => {
               currency={feesCurrency}
               value={status.estimatedFees}
               alwaysShowSign={false}
-              subMagnitude={1}
               alwaysShowValue
             />
           </>

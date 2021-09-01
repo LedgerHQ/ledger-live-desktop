@@ -10,16 +10,6 @@ const log = str => {
   }
 };
 
-const isMaster = () => {
-  const branch = git.branch();
-
-  log(`Current branch is '${branch}'`);
-
-  if (branch !== "master") {
-    throw new Error("The current branch is not `master`");
-  }
-};
-
 const isClean = () => {
   const isDirty = git.isDirty();
 
@@ -46,7 +36,7 @@ const isTagged = ctx => {
   ctx.tag = tag;
 };
 
-const checkRemote = ctx => {
+const checkRemote = nightly => ctx => {
   const { repository } = pkg;
   const gitRemote = git.remoteUrl();
 
@@ -55,6 +45,11 @@ const checkRemote = ctx => {
   const pkgInfo = repoInfo(repository);
   const gitInfo = repoInfo(gitRemote);
 
+  if (nightly) {
+    ctx.repo = pkgInfo;
+    return;
+  }
+
   if (pkgInfo.owner !== gitInfo.owner || pkgInfo.repo !== gitInfo.repo) {
     throw new Error("git remote URL does not match package.json `repository` entry");
   }
@@ -62,7 +57,7 @@ const checkRemote = ctx => {
   ctx.repo = pkgInfo;
 };
 
-const checkEnv = ctx => {
+const checkEnv = nightly => ctx => {
   const platform = require("os").platform();
 
   const { GH_TOKEN, APPLEID, APPLEID_PASSWORD } = process.env;
@@ -75,16 +70,18 @@ const checkEnv = ctx => {
 
   ctx.token = GH_TOKEN;
 
-  if (platform !== "darwin") {
-    log("OS is not mac, skipping APPLEID and APPLEID_PASSWORD check");
-    return;
-  }
+  if (!nightly) {
+    if (platform !== "darwin") {
+      log("OS is not mac, skipping APPLEID and APPLEID_PASSWORD check");
+      return;
+    }
 
-  if (!APPLEID || !APPLEID_PASSWORD) {
-    throw new Error("APPLEID and/or APPLEID_PASSWORD are not net");
+    if (!APPLEID || !APPLEID_PASSWORD) {
+      throw new Error("APPLEID and/or APPLEID_PASSWORD are not net");
+    } else {
+      log("APPLEID and APPLEID_PASSWORD are set");
+    }
   }
-
-  log("APPLEID and APPLEID_PASSWORD are set");
 };
 
 module.exports = args => {
@@ -93,15 +90,11 @@ module.exports = args => {
   return [
     {
       title: "Check for required environment variables",
-      task: checkEnv,
+      task: checkEnv(args.nightly),
     },
     {
       title: "Check that git remote branch matches package.json `repository`",
-      task: checkRemote,
-    },
-    {
-      title: "Check that the current branch is `master`",
-      task: isMaster,
+      task: checkRemote(args.nightly),
     },
     {
       title: "Check that the local git repository is clean",

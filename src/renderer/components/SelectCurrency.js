@@ -8,6 +8,7 @@ import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
 import useEnv from "~/renderer/hooks/useEnv";
 import type { Option } from "~/renderer/components/Select";
+import type { CreateStylesReturnType } from "~/renderer/components/Select/createStyles";
 import Select from "~/renderer/components/Select";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
@@ -26,6 +27,7 @@ type Props<C: Currency> = {
   isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
+  stylesMap?: CreateStylesReturnType => CreateStylesReturnType,
 };
 
 const getOptionValue = c => c.id;
@@ -44,6 +46,7 @@ const SelectCurrency = <C: Currency>({
   isCurrencyDisabled,
   isDisabled,
   id,
+  stylesMap,
 }: Props<C>) => {
   const { t } = useTranslation();
   const devMode = useEnv("MANAGER_DEV_MODE");
@@ -91,7 +94,7 @@ const SelectCurrency = <C: Currency>({
   return (
     <Select
       id={id}
-      autoFocus={autoFocus}
+      autoFocus={!process.env.SPECTRON_RUN ? autoFocus : false}
       value={value}
       options={filteredOptions}
       filterOption={false}
@@ -107,6 +110,7 @@ const SelectCurrency = <C: Currency>({
       width={width}
       isDisabled={isDisabled}
       rowHeight={rowHeight}
+      stylesMap={stylesMap}
     />
   );
 };
