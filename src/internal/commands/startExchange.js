@@ -6,14 +6,14 @@ import startExchange from "@ledgerhq/live-common/lib/exchange/swap/startExchange
 
 type Input = {
   deviceId: string,
-  transactionType: number,
+  exchangeType: number,
 };
 
-const cmd = ({ deviceId, transactionType }: Input): Observable<any> => {
+const cmd = ({ deviceId, exchangeType }: Input): Observable<any> => {
   return from(
     startExchange({
       deviceId,
-      transactionType,
+      exchangeType,
     }),
   );
 };
