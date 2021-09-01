@@ -32,6 +32,7 @@ const Body = ({
     signature: string,
     onResult: Operation => void,
     onCancel: Error => void,
+    transactionType: number,
   },
   onClose: () => void,
 }) => {

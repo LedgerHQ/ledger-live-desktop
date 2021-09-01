@@ -15,6 +15,7 @@ type Input = {
   signature: string,
   exchange: ExchangeRaw,
   transaction: TransactionRaw,
+  transactionType: number,
 };
 
 const cmd = ({
@@ -24,6 +25,7 @@ const cmd = ({
   signature,
   exchange,
   transaction,
+  transactionType,
 }: Input): Observable<any> => {
   // TODO type the events?
   return from(
@@ -34,6 +36,7 @@ const cmd = ({
       signature,
       exchange: fromExchangeRaw(exchange),
       transaction: fromTransactionRaw(transaction),
+      transactionType,
     }),
   );
 };
