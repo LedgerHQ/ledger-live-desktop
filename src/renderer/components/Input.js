@@ -167,6 +167,7 @@ type Props = {
   editInPlace?: boolean,
   disabled?: boolean,
   hideErrorMessage?: boolean,
+  autoFocus?: boolean,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -188,6 +189,7 @@ const Input = React.forwardRef(function Input(
     onFocus = noop,
     onBlur = noop,
     hideErrorMessage,
+    autoFocus,
     ...props
   }: Props,
   inputRef,
@@ -265,6 +267,7 @@ const Input = React.forwardRef(function Input(
           onBlur={handleBlur}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
+          autoFocus={!process.env.SPECTRON_RUN ? autoFocus : false}
         />
 
         <ErrorContainer hasError={!hideErrorMessage && (error || warning)}>
