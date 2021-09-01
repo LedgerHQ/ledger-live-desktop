@@ -305,6 +305,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       binaryPayload,
       signature,
       feesStrategy,
+      exchangeType,
     }: {
       provider: string,
       fromAccountId: string,
@@ -313,6 +314,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       binaryPayload: string,
       signature: string,
       feesStrategy: string,
+      exchangeType: number,
     }) => {
       // Nb get a hold of the actual accounts, and parent accounts
       const fromAccount = accounts.find(a => a.id === fromAccountId);
@@ -364,6 +366,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
             binaryPayload,
             signature,
             feesStrategy,
+            exchangeType,
 
             onResult: operation => {
               tracking.platformCompleteExchangeSuccess(manifest);
