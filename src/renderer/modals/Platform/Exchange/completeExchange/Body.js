@@ -32,7 +32,7 @@ const Body = ({
     signature: string,
     onResult: Operation => void,
     onCancel: Error => void,
-    transactionType: number,
+    exchangeType: number,
   },
   onClose: () => void,
 }) => {
