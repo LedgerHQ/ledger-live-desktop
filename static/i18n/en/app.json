@@ -1735,6 +1735,30 @@
     "value": "Value",
     "header": "Account allocation ({{count}})"
   },
+  "elrond": {
+    "account": {
+     "subHeader": {
+       "cardTitle": "Powered by Elrond",
+       "drawerTitle": "Elrond integration",
+       "title": "Elrond, the internet-scale blockchain",
+       "description": "Elrond is a technology ecosystem for the new internet. Its core layer is a high throughput smart contracts execution platform, capable of 15,000 TPS at $0.001 tx cost. The Elrond mainnet lends itself well to fintech, DeFi, and IoT.",
+       "description2": "The user experience layer is crafted in the Maiar money & DeFi app which offers an intuitive first-time experience with blockchain technology, offering progressive security and a gamified approach to unlocking more useful features.",
+       "description3": "The Elrond economic model has a capped supply and decreasing issuance, furthering scarcity with adoption. The token is named eGold (EGLD) to convey the notion of digital store of value for the next billion users.",
+       "website": {
+         "title": "Website",
+         "linkTitle": "elrond.com"
+       },
+       "github": {
+         "title": "Github",
+         "linkTitle": "ElrondNetwork"
+       },
+       "twitter": {
+         "title": "Twitter",
+         "linkTitle": "ElrondNetwork"
+       }
+     }
+    }
+  },
   "tron": {
     "voting": {
       "emptyState": {
