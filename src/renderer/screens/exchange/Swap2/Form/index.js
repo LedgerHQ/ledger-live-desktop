@@ -46,7 +46,7 @@ const SwapForm = () => {
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
   const swapTransaction = useSwapTransaction();
-  const exchangeRates = swapTransaction.swap?.rates?.value;
+  const exchangeRatesState = swapTransaction.swap?.rates;
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
@@ -65,7 +65,7 @@ const SwapForm = () => {
   }, [swapTransaction.transaction]);
 
   usePickExchangeRate({
-    exchangeRates,
+    exchangeRates: exchangeRatesState?.value,
     exchangeRate,
     setExchangeRate: rate => {
       dispatch(updateRateAction(rate));
@@ -85,7 +85,7 @@ const SwapForm = () => {
           setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
-          fromAmountError={swapTransaction.fromAmountError}
+          fromAmountError={swapTransaction.fromAmountError || exchangeRatesState?.error}
           // TODO: implement the "to" currency input loader
           // loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
