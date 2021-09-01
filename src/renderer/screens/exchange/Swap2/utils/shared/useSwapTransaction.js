@@ -16,6 +16,7 @@ import type {
   ExchangeRate,
 } from "@ledgerhq/live-common/lib/types";
 import { AmountRequired } from "@ledgerhq/errors";
+import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
@@ -95,10 +96,14 @@ const useSwapTransaction = (): SwapTransactionType => {
 
     return error;
   }, [bridgeTransaction.status.errors?.gasPrice, bridgeTransaction.status.errors?.amount]);
-  const isSwapReversable = useMemo(() => !!(toState.account && fromState.currency), [
-    toState.account,
-    fromState.currency,
-  ]);
+  const isSwapReversable = useMemo(() => {
+    if (!toState.account || !fromState.currency) return false;
+
+    const allAccounstWithSub = flattenAccounts(allAccounts);
+    const isToSwappable = !!allAccounstWithSub.find(account => account.id === toState.account?.id);
+
+    return isToSwappable;
+  }, [toState.account, fromState.currency, allAccounts]);
 
   /* UPDATE from account */
   const setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount"> = account => {
