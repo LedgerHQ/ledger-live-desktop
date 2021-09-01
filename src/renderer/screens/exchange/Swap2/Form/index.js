@@ -85,6 +85,7 @@ const SwapForm = () => {
           setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
+          fromAmountError={swapTransaction.fromAmountError}
           // TODO: implement the "to" currency input loader
           // loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
