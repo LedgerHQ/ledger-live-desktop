@@ -28,6 +28,7 @@ type Props = {
   date?: Date,
   color?: string,
   fontSize?: number,
+  fontWeight?: number,
   iconSize?: number,
   placeholder?: React$Node,
 };
@@ -43,6 +44,7 @@ export default function Price({
   placeholder,
   color,
   fontSize,
+  fontWeight,
   iconSize,
   showAllDigits,
   withIcon = true,
@@ -83,7 +85,7 @@ export default function Price({
   const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 
   return (
-    <PriceWrapper color={color} fontSize={fontSize}>
+    <PriceWrapper color={color} fontSize={fontSize} fontWeight={fontWeight}>
       {withIcon ? (
         <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
       ) : null}

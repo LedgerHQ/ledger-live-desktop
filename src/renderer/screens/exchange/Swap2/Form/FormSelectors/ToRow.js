@@ -68,9 +68,9 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
           <InputCurrency
             // @DEV: onChange props is required by the composant, there is no read-only logic
             onChange={() => {}}
-            value={toAmount}
+            value={unit && toAmount}
             disabled
-            placeholder="0"
+            placeholder="-"
             textAlign="right"
             containerProps={amountInputContainerProps}
             unit={unit}
