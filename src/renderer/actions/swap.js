@@ -7,6 +7,10 @@ import type { SwapStateType, UPDATE_PROVIDERS_TYPE } from "~/renderer/reducers/s
 import type { Transaction } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import memoize from "lodash/memoize";
 
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
+
 /* ACTIONS */
 export const updateProvidersAction = createAction<$PropertyType<UPDATE_PROVIDERS_TYPE, "payload">>(
   "SWAP/UPDATE_PROVIDERS",
@@ -40,6 +44,16 @@ const filterAvaibleToAssets = (pairs, fromId?: string) => {
   return pairs.reduce((acc, pair) => [...acc, pair.to], []);
 };
 
+const filterAvaibleFromAssets = (pairs, allAccounts) => {
+  if (pairs === null || pairs === undefined) return [];
+
+  return flattenAccounts(allAccounts).map(account => {
+    const id = getAccountCurrency(account).id;
+    const isAccountAvailable = !!pairs.find(pair => pair.from === id);
+    return { ...account, disabled: !isAccountAvailable };
+  });
+};
+
 export const toSelector: OutputSelector<State, void, *> = createSelector(
   state => state.swap.pairs,
   pairs =>
@@ -48,6 +62,16 @@ export const toSelector: OutputSelector<State, void, *> = createSelector(
       const uniqueAssetList = [...new Set(filteredAssets)];
       return uniqueAssetList;
     }),
+);
+
+export const fromSelector: OutputSelector<State, void, *> = createSelector(
+  state => state.swap.pairs,
+  pairs =>
+    memoize((allAccounts: Array<Account>): Array<Account | TokenAccount> =>
+      filterAvaibleFromAssets(pairs, allAccounts).sort(
+        (accountA, accountB) => accountA.disabled - accountB.disabled,
+      ),
+    ),
 );
 
 export const transactionSelector: OutputSelector<

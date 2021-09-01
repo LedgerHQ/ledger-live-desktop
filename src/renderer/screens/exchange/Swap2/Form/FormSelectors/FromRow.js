@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
+import { fromSelector } from "~/renderer/actions/swap";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import { SelectAccount } from "~/renderer/components/SelectAccount";
 import Switch from "~/renderer/components/Switch";
@@ -35,7 +36,7 @@ function FromRow({
   toggleMax,
   fromAmountError,
 }: Props) {
-  const accounts = useSelector(shallowAccountsSelector);
+  const accounts = useSelector(fromSelector)(useSelector(shallowAccountsSelector));
   const unit = fromAccount && getAccountUnit(fromAccount);
   const { t } = useTranslation();
 
@@ -66,8 +67,9 @@ function FromRow({
             onChange={setFromAccount}
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
-            withSubAccounts
             showAddAccount
+            isSearchable={false}
+            disableTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
           />
         </Box>
         <Box width="50%">
