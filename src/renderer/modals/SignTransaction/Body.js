@@ -21,6 +21,7 @@ import Track from "~/renderer/analytics/Track";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import StepConnectDevice from "./steps/StepConnectDevice";
+import StepSummary, { StepSummaryFooter } from "./steps/StepSummary";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import type { St, StepId } from "./types";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
@@ -32,6 +33,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   onClose: () => void,
   params: {
+    canEditFees: boolean,
     useApp?: string,
     account: ?AccountLike,
     transactionData: PlatformTransaction,
@@ -59,30 +61,46 @@ type Props = {|
   ...StateProps,
 |};
 
-const createSteps = (): St[] => [
-  {
-    id: "amount",
-    label: <Trans i18nKey="send.steps.amount.title" />,
-    component: StepAmount,
-    footer: StepAmountFooter,
-  },
-  {
-    id: "device",
-    label: <Trans i18nKey="send.steps.device.title" />,
-    component: StepConnectDevice,
-  },
-  {
-    id: "confirmation",
-    label: <Trans i18nKey="send.steps.confirmation.title" />,
-    excludeFromBreadcrumb: true,
-    component: StepConfirmation,
-    footer: StepConfirmationFooter,
-    onBack: ({ transitionTo, onRetry }) => {
-      onRetry();
-      transitionTo("amount");
+const createSteps = (canEditFees = false): St[] => {
+  const steps = [
+    {
+      id: "summary",
+      label: <Trans i18nKey="send.steps.summary.title" />,
+      component: StepSummary,
+      footer: StepSummaryFooter,
+      onBack: canEditFees ? ({ transitionTo }) => transitionTo("amount") : null,
     },
-  },
-];
+    {
+      id: "device",
+      label: <Trans i18nKey="send.steps.device.title" />,
+      component: StepConnectDevice,
+      onBack: ({ transitionTo }) => transitionTo("summary"),
+    },
+    {
+      id: "confirmation",
+      label: <Trans i18nKey="send.steps.confirmation.title" />,
+      excludeFromBreadcrumb: true,
+      component: StepConfirmation,
+      footer: StepConfirmationFooter,
+      onBack: ({ transitionTo, onRetry }) => {
+        onRetry();
+        transitionTo("summary");
+      },
+    },
+  ];
+
+  return canEditFees
+    ? [
+        {
+          id: "amount",
+          label: <Trans i18nKey="send.steps.amount.title" />,
+          component: StepAmount,
+          footer: StepAmountFooter,
+        },
+        ...steps,
+      ]
+    : steps;
+};
 
 const STATUS_KEYS_IGNORE = ["recipient", "gasLimit"];
 
@@ -118,8 +136,10 @@ const Body = ({
   params,
   accounts,
 }: Props) => {
+  const { canEditFees, transactionData } = params;
+
   const openedFromAccount = !!params.account;
-  const [steps] = useState(createSteps);
+  const [steps] = useState(() => createSteps(canEditFees));
 
   const {
     transaction,
@@ -136,15 +156,14 @@ const Body = ({
     const account = getMainAccount((params && params.account) || accounts[0], parentAccount);
 
     const bridge = getAccountBridge(account, parentAccount);
-    const t = bridge.createTransaction(account);
-    const { recipient, ...txData } = params.transactionData;
-    const t2 = bridge.updateTransaction(t, {
+    const tx = bridge.createTransaction(account);
+
+    const { recipient, ...txData } = transactionData;
+    const tx2 = bridge.updateTransaction(tx, {
       recipient,
-      feesStrategy: "custom",
     });
-    const transaction = bridge.updateTransaction(t2, {
+    const transaction = bridge.updateTransaction(tx2, {
       ...txData,
-      userGasLimit: txData.gasLimit,
     });
 
     return { account, parentAccount, transaction };
@@ -194,7 +213,7 @@ const Body = ({
   const errorSteps = [];
 
   if (transactionError) {
-    errorSteps.push(1);
+    errorSteps.push(steps.length - 2);
   } else if (bridgeError) {
     errorSteps.push(0);
   }
@@ -213,7 +232,7 @@ const Body = ({
     account,
     parentAccount,
     transaction,
-    hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
+    hideBreadcrumb: (!!error && ["amount"].includes(stepId)) || stepId === "warning",
     error,
     warning,
     status,
@@ -230,12 +249,12 @@ const Body = ({
     updateTransaction,
   };
 
-  if (!status || !transaction?.networkInfo) return null;
+  if (!status) return null;
 
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalSend" />
+      <Track onUnmount event="CloseModalSignTransaction" />
     </Stepper>
   );
 };
