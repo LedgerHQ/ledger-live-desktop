@@ -18,7 +18,7 @@ export type Option = {
   data: any,
 };
 
-type Props = {
+export type Props = {
   // required
   value: ?Option,
   options: Option[],
@@ -46,7 +46,7 @@ type Props = {
   rowHeight: number,
   error: ?Error, // NB at least a different rendering for now
   stylesMap: CreateStylesReturnType => CreateStylesReturnType,
-  extraRenderers?: { [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
+  extraRenderers?: { disableTooltipText?: string, [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
 };
 
 const Row = styled.div`
@@ -222,13 +222,13 @@ class Select extends PureComponent<Props> {
           virtual
             ? {
                 MenuList,
-                ...createRenderers({ renderOption, renderValue }),
+                ...createRenderers({ renderOption, renderValue, selectProps: this.props }),
                 // Flow is unhappy because extraRenderers keys can "theoretically" conflict.
                 // $FlowFixMe
                 ...(extraRenderers || {}),
               }
             : {
-                ...createRenderers({ renderOption, renderValue }),
+                ...createRenderers({ renderOption, renderValue, selectProps: this.props }),
                 // $FlowFixMe
                 ...(extraRenderers || {}),
               }
