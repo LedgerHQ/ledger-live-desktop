@@ -16,7 +16,7 @@ export default class AccountSettingsModal extends Modal {
   async editAccountName(newName) {
     const input = await this.editNameInput();
     await input.waitForDisplayed();
-    await input.addValue(newName);
+    await input.setValue(newName);
     await this.apply();
   }
 
