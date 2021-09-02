@@ -242,7 +242,8 @@
       "from": {
         "title": "From",
         "max": "Max",
-        "accountPlaceholder": "Select source"
+        "accountPlaceholder": "Select source",
+        "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
       "to": {
         "title": "To"
