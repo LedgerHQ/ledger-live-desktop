@@ -43,10 +43,12 @@ const Navbar = () => {
   };
 
   return (
-    <Nav>
-      <TrackPage category="swap" name={swapRoutes[currentIndex].name} />
-      <TabBar tabs={tabs} onIndexChange={onWrappedTabChange} index={currentIndex} />
-    </Nav>
+    currentIndex >= 0 && (
+      <Nav>
+        <TrackPage category="swap" name={swapRoutes[currentIndex].name} />
+        <TabBar tabs={tabs} onIndexChange={onWrappedTabChange} index={currentIndex} />
+      </Nav>
+    )
   );
 };
 

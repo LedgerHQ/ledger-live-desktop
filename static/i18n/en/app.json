@@ -255,7 +255,7 @@
           "required": "You need to complete your KYC",
           "complete": "Complete KYC",
           "update": "Refresh KYC",
-          "pending": "Your KYC approval is in progress",
+          "rejected": "KYC rejected, start the verification again",
           "status": {
             "pending": "KYC pending",
             "approved": "KYC approved",
@@ -283,9 +283,10 @@
         "cta": "Continue",
         "pending": {
           "cta": "Continue",
-          "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre.",
-          "link": "Learn more about KYC"
+          "title": "Your information has been submitted for approval",
+          "subtitle": "This usually takes 2-3 days. You will receive an email from Wyre once your identity is verified succesfully.",
+          "link": "Learn more about KYC",
+          "info": "Identity verification: Submitted"
         },
         "closed": {
           "cta": "Reset KYC",
