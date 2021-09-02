@@ -4,7 +4,7 @@ import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
-import { amountInputContainerProps, selectRowStylesMap } from "./utils";
+import { amountInputContainerProps, renderCurrencyValue, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
@@ -62,6 +62,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             value={selectState.currency}
             stylesMap={selectRowStylesMap}
             isDisabled={!fromAccount}
+            renderValueOverride={renderCurrencyValue}
           />
         </Box>
         <Box width="50%">
