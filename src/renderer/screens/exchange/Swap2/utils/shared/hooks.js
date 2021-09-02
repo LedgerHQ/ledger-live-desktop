@@ -1,7 +1,7 @@
 // @flow
 import { useReducer, useEffect, useMemo } from "react";
 import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { getProviders } from "@ledgerhq/live-common/lib/exchange/swap";
+import { getProviders, getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
@@ -133,4 +133,36 @@ export const usePickExchangeRate = ({ exchangeRates, exchangeRate, setExchangeRa
     setExchangeRate(rate || null);
     // eslint-disable-next-line
   }, [exchangeRates]);
+};
+
+// Poll the server to update the KYC status of a given provider.
+const KYC_STATUS_POLLING_INTERVAL = 10000;
+type kycItem = {
+  id: string,
+  status: string,
+};
+export const usePollKYCStatus = (
+  { provider, kyc, onChange }: { provider: string, kyc: kycItem, onChange: kycItem => void },
+  dependencies: any[] = [],
+) => {
+  useEffect(
+    () => {
+      if (kyc?.status !== "pending") return;
+      let cancelled = false;
+      async function updateKYCStatus() {
+        if (!kyc?.id) return;
+        const res = await getKYCStatus(provider, kyc.id);
+        if (cancelled || res?.status === kyc?.status) return;
+        onChange(res);
+      }
+      const intervalId = setInterval(updateKYCStatus, KYC_STATUS_POLLING_INTERVAL);
+      updateKYCStatus();
+      return () => {
+        cancelled = true;
+        clearInterval(intervalId);
+      };
+    },
+    // eslint-disable-next-line
+    [provider, kyc, ...dependencies],
+  );
 };

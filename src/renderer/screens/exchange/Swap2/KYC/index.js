@@ -21,26 +21,29 @@ import Pending from "./Pending";
 import IconWyre from "~/renderer/icons/providers/Wyre";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
-import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
-import IconExternalLink from "~/renderer/icons/ExternalLink";
-import FakeLink from "~/renderer/components/FakeLink";
+import Tabbable from "~/renderer/components/Box/Tabbable";
+import AngleLeft from "~/renderer/icons/AngleLeft";
+import { useRedirectToSwapForm } from "../utils/index";
 
 const Footer = styled.div`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   display: flex;
   padding: 24px;
 `;
 
-const Disclaimer = styled(Text)`
-  flex: 1;
-  margin-left: 14px;
-  margin-right: 80px;
-  font-size: 12px;
-  line-height: 18px;
-  color: ${p => p.theme.colors.palette.text.shade50};
+const FooterBackLink = styled(Tabbable)`
+  cursor: pointer;
+  &:hover,
+  &:hover ${Text} {
+    color: ${p => p.theme.colors.palette.text.shade80};
+  }
+  &:active,
+  &:active ${Text} {
+    color: ${p => p.theme.colors.palette.text.shade100};
+  }
 `;
 
 const renderCountry = option => {
@@ -64,6 +67,7 @@ const KYC = () => {
 
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
+  const redirectToSwapForm = useRedirectToSwapForm();
 
   const stateOptions = Object.entries(USStates).map(([value, label]) => ({ value, label }));
   const countryOptions = Object.entries(countries).map(([value, label]) => ({ value, label }));
@@ -151,9 +155,9 @@ const KYC = () => {
   }, [dispatch, errors, kycData]);
 
   return (
-    <Card justifyContent={"center"} style={{ minHeight: 608 }}>
+    <Card justifyContent={"space-between"}>
       {swapKYC.wyre ? (
-        <Pending status={swapKYC.wyre?.status} />
+        <Pending />
       ) : (
         <>
           <TrackPage category="Swap" name="KYC Form" />
@@ -294,25 +298,12 @@ const KYC = () => {
             </Box>
           </Box>
           <Footer>
-            <Disclaimer ff="Inter|Regular">
-              <Trans i18nKey={"swap2.kyc.wyre.disclaimer"} />{" "}
-              <FakeLink
-                underline
-                fontSize={3}
-                color="palette.primary.main"
-                onClick={e => {
-                  e.preventDefault();
-                  openURL(urls.faq);
-                }}
-                iconFirst
-                style={{ textTransform: "capitalize", display: "inline-flex" }}
-              >
-                <Trans i18nKey="swap2.kyc.wyre.policy" />
-                <Box ml={1}>
-                  <IconExternalLink size={12} />
-                </Box>
-              </FakeLink>
-            </Disclaimer>
+            <FooterBackLink horizontal alignItems="center" onClick={redirectToSwapForm}>
+              <AngleLeft size={14} />
+              <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50" ml={1}>
+                {t("common.back")}
+              </Text>
+            </FooterBackLink>
             <Button isLoading={isLoading} primary onClick={onSubmit}>
               <Trans i18nKey={"swap2.kyc.wyre.cta"} />
             </Button>

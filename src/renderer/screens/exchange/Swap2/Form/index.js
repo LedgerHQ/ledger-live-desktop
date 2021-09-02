@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import {
   useSwapProviders,
   usePickExchangeRate,
+  usePollKYCStatus,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,8 @@ import {
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 import FormKYCBanner from "./FormKYCBanner";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
+import { setSwapKYCStatus } from "~/renderer/actions/settings";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -47,6 +50,11 @@ const SwapForm = () => {
   const exchangeRate = useSelector(rateSelector);
   const swapTransaction = useSwapTransaction();
   const exchangeRatesState = swapTransaction.swap?.rates;
+  const swapKYC = useSelector(swapKYCSelector);
+  const provider = exchangeRate?.provider;
+  const providerKYC = swapKYC?.[provider];
+  const kycStatus = providerKYC?.status;
+  const showWyreKYCBanner = provider === "wyre" && kycStatus !== "approved";
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
@@ -72,6 +80,23 @@ const SwapForm = () => {
     },
   });
 
+  usePollKYCStatus(
+    {
+      provider,
+      kyc: providerKYC,
+      onChange: res => {
+        dispatch(
+          setSwapKYCStatus({
+            provider: provider,
+            id: res?.id,
+            status: res?.status,
+          }),
+        );
+      },
+    },
+    [dispatch],
+  );
+
   if (providers?.length)
     return (
       <Wrapper>
@@ -89,8 +114,12 @@ const SwapForm = () => {
           // TODO: implement the "to" currency input loader
           // loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
-        <SwapFormSummary swapTransaction={swapTransaction} />
-        {swapTransaction.swap.kycRequired ? <FormKYCBanner /> : null}
+        <SwapFormSummary
+          swapTransaction={swapTransaction}
+          kycStatus={kycStatus}
+          provider={provider}
+        />
+        {showWyreKYCBanner ? <FormKYCBanner provider={provider} status={kycStatus} /> : null}
         <Button primary disabled={!isSwapReady} onClick={onSubmit}>
           {t("common.exchange")}
         </Button>

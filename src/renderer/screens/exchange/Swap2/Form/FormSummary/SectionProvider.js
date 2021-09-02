@@ -1,7 +1,5 @@
 // @flow
 import React from "react";
-import { useSelector } from "react-redux";
-import { rateSelector } from "~/renderer/actions/swap";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
@@ -32,7 +30,10 @@ const StatusTag = styled.div`
   column-gap: 4px;
 `;
 
-type SectionProviderProps = { status?: "approved" | "pending" | "rejected" };
+export type SectionProviderProps = {
+  provider?: string,
+  status?: "approved" | "pending" | "rejected",
+};
 type ProviderStatusTagProps = {
   status: $NonMaybeType<$PropertyType<SectionProviderProps, "status">>,
 };
@@ -57,10 +58,9 @@ const ProviderStatusTag = ({ status }: ProviderStatusTagProps) => {
   );
 };
 
-const SectionProvider = ({ status }: SectionProviderProps) => {
+const SectionProvider = ({ provider, status }: SectionProviderProps) => {
   const { t } = useTranslation();
-  const exchangeRate = useSelector(rateSelector);
-  const ProviderIcon = exchangeRate && iconByProviderName[exchangeRate.provider.toLowerCase()];
+  const ProviderIcon = provider && iconByProviderName[provider.toLowerCase()];
 
   return (
     <SummarySection>
@@ -68,11 +68,9 @@ const SectionProvider = ({ status }: SectionProviderProps) => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      {(exchangeRate && (
+      {(provider && (
         <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-          <SummaryValue value={exchangeRate.provider}>
-            <ProviderIcon size={19} />
-          </SummaryValue>
+          <SummaryValue value={provider}>{ProviderIcon && <ProviderIcon size={19} />}</SummaryValue>
           {status ? <ProviderStatusTag status={status} /> : null}
         </div>
       )) || (
