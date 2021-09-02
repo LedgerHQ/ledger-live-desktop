@@ -46,7 +46,8 @@ export type Props = {
   rowHeight: number,
   error: ?Error, // NB at least a different rendering for now
   stylesMap: CreateStylesReturnType => CreateStylesReturnType,
-  extraRenderers?: { disableTooltipText?: string, [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
+  extraRenderers?: { [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
+  disabledTooltipText?: string,
 };
 
 const Row = styled.div`
