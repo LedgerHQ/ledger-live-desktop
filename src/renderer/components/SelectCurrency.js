@@ -27,6 +27,7 @@ type Props<C: Currency> = {
   isDisabled?: boolean,
   id?: string,
   renderOptionOverride?: (option: Option) => any,
+  renderValueOverride?: (option: Option) => any,
   stylesMap?: CreateStylesReturnType => CreateStylesReturnType,
 };
 
@@ -43,6 +44,7 @@ const SelectCurrency = <C: Currency>({
   width,
   rowHeight = 47,
   renderOptionOverride,
+  renderValueOverride,
   isCurrencyDisabled,
   isDisabled,
   id,
@@ -100,7 +102,7 @@ const SelectCurrency = <C: Currency>({
       filterOption={false}
       getOptionValue={getOptionValue}
       renderOption={renderOptionOverride || renderOption}
-      renderValue={renderOptionOverride || renderOption}
+      renderValue={renderValueOverride || renderOptionOverride || renderOption}
       onInputChange={v => setSearchInputValue(v)}
       inputValue={searchInputValue}
       placeholder={placeholder || t("common.selectCurrency")}
@@ -132,14 +134,47 @@ const CurrencyLabel = styled(Text).attrs(() => ({
   box-sizing: content-box;
 `;
 
-const renderOption = ({ data: currency }: Option) => (
-  <Box grow horizontal alignItems="center" flow={2}>
-    <CryptoCurrencyIcon circle currency={currency} size={26} />
-    <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-      {`${currency.name} (${currency.ticker})`}
+export function CurrencyOption({
+  currency,
+  singleLineLayout = true,
+}: {
+  currency: Currency,
+  singleLineLayout?: boolean,
+}) {
+  const textContents = singleLineLayout ? (
+    <>
+      <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        {`${currency.name} (${currency.ticker})`}
+      </Box>
+      {currency.parentCurrency ? (
+        <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
+      ) : null}
+    </>
+  ) : (
+    <>
+      <Box flex="1">
+        <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
+          {currency.name}
+        </Text>
+        <Box horizontal alignItems="center">
+          <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={3}>
+            {currency.ticker}
+          </Text>
+        </Box>
+      </Box>
+      {currency.parentCurrency ? (
+        <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
+      ) : null}
+    </>
+  );
+
+  return (
+    <Box grow horizontal alignItems="center" flow={2}>
+      <CryptoCurrencyIcon circle currency={currency} size={26} />
+      {textContents}
     </Box>
-    {currency.parentCurrency ? <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel> : null}
-  </Box>
-);
+  );
+}
+const renderOption = ({ data: currency }: Option) => <CurrencyOption currency={currency} />;
 
 export default memo<Props<*>>(SelectCurrency);
