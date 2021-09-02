@@ -183,7 +183,7 @@ type OwnProps = {
   renderOption?: typeof defaultRenderOption,
   placeholder?: string,
   showAddAccount?: boolean,
-  disableTooltipText?: string,
+  disabledTooltipText?: string,
 };
 
 type Props = OwnProps & {
@@ -202,7 +202,7 @@ export const RawSelectAccount = ({
   renderOption,
   placeholder,
   showAddAccount = false,
-  disableTooltipText,
+  disabledTooltipText,
   t,
   ...props
 }: Props & { t: TFunction }) => {
@@ -278,6 +278,7 @@ export const RawSelectAccount = ({
       }
       onChange={onChangeCallback}
       extraRenderers={extraRenderers}
+      disabledTooltipText={disabledTooltipText}
     />
   );
 };
