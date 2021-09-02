@@ -13,6 +13,7 @@
 | Decred | DCR | YES | decred |
 | DigiByte | DGB | YES | digibyte |
 | Dogecoin | DOGE | YES | dogecoin |
+| Elrond | EGLD | YES | elrond |
 | Ethereum | ETH | YES | ethereum |
 | Ethereum Classic | ETC | YES | ethereum_classic |
 | Horizen | ZEN | YES | zencash |
@@ -45,7 +46,6 @@
 | EOS | EOS | NO | eos |
 | Elastos | ELA | NO | elastos |
 | Ellaism | ELLA | NO | ellaism |
-| Elrond | EGLD | NO | elrond |
 | EnergyWebChain | EWT | NO | energywebchain |
 | Ether1 | ETHO | NO | ether1 |
 | EtherGem | EGEM | NO | ethergem |
