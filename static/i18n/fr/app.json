@@ -1441,13 +1441,13 @@
       "update": "Mise à jour du micrologiciel",
       "updateBtn": "Mettre à jour le micrologiciel",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "Mise à jour {{latestFirmware}} du micrologiciel disponible",
+        "cta": "Accéder au Gestionnaire",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
+          "cta": "Contacter l'Assistance"
         },
-        "cta2": "Update firmware"
+        "cta2": "Mettre à jour le micrologiciel"
       },
       "latest": "Version {{version}} du micrologiciel disponible",
       "contactSupport": "Contacter l'Assistance",
