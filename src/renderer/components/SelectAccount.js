@@ -183,6 +183,7 @@ type OwnProps = {
   renderOption?: typeof defaultRenderOption,
   placeholder?: string,
   showAddAccount?: boolean,
+  disableTooltipText?: string,
 };
 
 type Props = OwnProps & {
@@ -201,6 +202,7 @@ export const RawSelectAccount = ({
   renderOption,
   placeholder,
   showAddAccount = false,
+  disableTooltipText,
   t,
   ...props
 }: Props & { t: TFunction }) => {
@@ -240,7 +242,7 @@ export const RawSelectAccount = ({
 
         if (display) {
           result.push({
-            matched: match,
+            matched: match && !option.disabled,
             account: option,
           });
         }
@@ -248,10 +250,14 @@ export const RawSelectAccount = ({
       }, []),
     [searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
   );
-  const extraRenderers = useMemo(() => showAddAccount && extraAddAccountRenderer(props.small), [
-    showAddAccount,
-    props.small,
-  ]);
+  const extraRenderers = useMemo(() => {
+    let extraProps = {};
+
+    if (showAddAccount) extraProps = { ...extraProps, ...extraAddAccountRenderer(props.small) };
+    if (disableTooltipText) extraProps = { ...extraProps, disableTooltipText };
+
+    return extraProps;
+  }, [showAddAccount, props.small, disableTooltipText]);
 
   const structuredResults = manualFilter();
   return (
