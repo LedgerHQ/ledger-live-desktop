@@ -34,8 +34,9 @@ import MainSideBar from "~/renderer/components/MainSideBar";
 import TriggerAppReady from "~/renderer/components/TriggerAppReady";
 import ContextMenuWrapper from "~/renderer/components/ContextMenu/ContextMenuWrapper";
 import DebugUpdater from "~/renderer/components/debug/DebugUpdater";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import DebugTheme from "~/renderer/components/debug/DebugTheme";
+import DebugFirmwareUpdater from "~/renderer/components/debug/DebugFirmwareUpdater";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
@@ -45,12 +46,16 @@ import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
+import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import useEnv from "~/renderer/hooks/useEnv";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
   top: 0;
   z-index: 19;
+  & > *:not(:first-child) {
+    display: none;
+  }
 `;
 
 export default function Default() {
@@ -97,6 +102,7 @@ export default function Default() {
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}
               {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+              {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
             <OnboardingOrElse>
               <Switch>
@@ -118,6 +124,7 @@ export default function Default() {
                     <Page>
                       <TopBannerContainer>
                         <UpdateBanner />
+                        <FirmwareUpdateBanner />
                       </TopBannerContainer>
                       <Switch>
                         <Route path="/" exact render={props => <Dashboard {...props} />} />

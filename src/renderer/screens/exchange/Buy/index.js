@@ -1,9 +1,11 @@
 // @flow
 
 import React, { useState, useCallback } from "react";
-import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 import styled from "styled-components";
+import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
+import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
 import CoinifyWidget from "../CoinifyWidget";
+import { useExchangeProvider, useCoinifyCurrencies } from "../hooks";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
@@ -63,6 +65,16 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
     [dispatch, confirmAccount],
   );
 
+  const confirmButtonTracking = useCallback(account => {
+    track("Buy Crypto Continue Button", {
+      currencyName: getAccountCurrency(account).name,
+      isEmpty: isAccountEmpty(account),
+    });
+  }, []);
+
+  const allCurrencies = useCoinifyCurrencies("BUY");
+  const [provider] = useExchangeProvider();
+
   return (
     <BuyContainer>
       <TrackPage category="Buy Crypto" />
@@ -71,8 +83,11 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
+          allCurrencies={allCurrencies}
           defaultCurrency={defaultCurrency}
           defaultAccount={defaultAccount}
+          confirmCb={confirmButtonTracking}
+          provider={provider}
         />
       )}
     </BuyContainer>

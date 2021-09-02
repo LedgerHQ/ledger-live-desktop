@@ -69,6 +69,7 @@ export type SettingsState = {
   preferredDeviceModel: DeviceModelId,
   hasInstalledApps: boolean,
   lastSeenDevice: ?DeviceModelInfo,
+  latestFirmware: any,
   language: ?string,
   theme: ?string,
   region: ?string,
@@ -154,6 +155,7 @@ const INITIAL_STATE: SettingsState = {
   hasInstalledApps: true,
   carouselVisibility: 0,
   lastSeenDevice: null,
+  latestFirmware: null,
   blacklistedTokenIds: [],
   deepLinkUrl: null,
   firstTimeLend: false,
@@ -251,10 +253,11 @@ const handlers: Object = {
   },
   LAST_SEEN_DEVICE_INFO: (
     state: SettingsState,
-    { payload: dmi }: { payload: DeviceModelInfo },
+    { payload }: { payload: { lastSeenDevice: DeviceModelInfo, latestFirmware: any } },
   ) => ({
     ...state,
-    lastSeenDevice: dmi,
+    lastSeenDevice: payload.lastSeenDevice,
+    latestFirmware: payload.latestFirmware,
   }),
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
     ...state,
@@ -441,6 +444,8 @@ export const hideEmptyTokenAccountsSelector = (state: State) =>
   state.settings.hideEmptyTokenAccounts;
 
 export const lastSeenDeviceSelector = (state: State) => state.settings.lastSeenDevice;
+
+export const latestFirmwareSelector = (state: State) => state.settings.latestFirmware;
 
 export const swapHasAcceptedIPSharingSelector = (state: State) =>
   state.settings.swap.hasAcceptedIPSharing;

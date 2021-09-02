@@ -11,7 +11,8 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import type { Step } from "~/renderer/components/Stepper";
-export type StepId = "amount" | "device" | "confirmation";
+
+export type StepId = "amount" | "summary" | "device" | "confirmation";
 
 export type StepProps = {
   t: TFunction,
