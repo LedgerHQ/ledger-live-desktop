@@ -87,11 +87,13 @@ type AccountOptionProps = {
   account: AccountLike,
   isValue?: boolean,
   disabled?: boolean,
+  singleLineLayout?: boolean,
 };
 export const AccountOption = React.memo<AccountOptionProps>(function AccountOption({
   account,
   isValue,
   disabled,
+  singleLineLayout = true,
 }: AccountOptionProps) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -102,10 +104,8 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
       ? account.spendableBalance
       : account.balance;
 
-  return (
-    <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
-      {!isValue && nested ? tokenTick : null}
-      <CryptoCurrencyIcon currency={currency} size={16} />
+  const textContents = singleLineLayout ? (
+    <>
       <Box flex="1" horizontal alignItems="center">
         <Box flex="0 1 auto">
           <Ellipsis ff="Inter|SemiBold" fontSize={4}>
@@ -117,6 +117,35 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
       <Box>
         <FormattedVal color="palette.text.shade60" val={balance} unit={unit} showCode />
       </Box>
+    </>
+  ) : (
+    <Box flex="1">
+      <Box flex="1" horizontal alignItems="center">
+        <Box flex="0 1 auto">
+          <Ellipsis ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
+            {name}
+          </Ellipsis>
+        </Box>
+        <AccountTagDerivationMode account={account} margin="0 0 0 8px" />
+      </Box>
+      <Box>
+        <FormattedVal
+          color="palette.text.shade50"
+          ff="Inter|Medium"
+          fontSize={3}
+          val={balance}
+          unit={unit}
+          showCode
+        />
+      </Box>
+    </Box>
+  );
+
+  return (
+    <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
+      {!isValue && nested ? tokenTick : null}
+      <CryptoCurrencyIcon currency={currency} size={16} />
+      {textContents}
     </Box>
   );
 });
@@ -254,10 +283,9 @@ export const RawSelectAccount = ({
     let extraProps = {};
 
     if (showAddAccount) extraProps = { ...extraProps, ...extraAddAccountRenderer(props.small) };
-    if (disableTooltipText) extraProps = { ...extraProps, disableTooltipText };
 
     return extraProps;
-  }, [showAddAccount, props.small, disableTooltipText]);
+  }, [showAddAccount, props.small]);
 
   const structuredResults = manualFilter();
   return (

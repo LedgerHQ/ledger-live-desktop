@@ -23,15 +23,16 @@ const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
   flex: 0 0 auto !important;
   box-sizing: content-box;
   text-transform: uppercase;
-  margin: 0 8px;
+  margin: ${p => p.margin || "0 8px"};
   flex: unset;
 `;
 
 type Props = {
   account: AccountLike,
+  margin?: string,
 };
 
-export default function AccountTagDerivationMode({ account }: Props) {
+export default function AccountTagDerivationMode({ account, margin }: Props) {
   if (account.type !== "Account") return null;
 
   const tag =
@@ -39,5 +40,5 @@ export default function AccountTagDerivationMode({ account }: Props) {
     account.derivationMode !== null &&
     getTagDerivationMode(account.currency, account.derivationMode);
 
-  return tag ? <CurrencyLabel>{tag}</CurrencyLabel> : null;
+  return tag ? <CurrencyLabel margin={margin}>{tag}</CurrencyLabel> : null;
 }
