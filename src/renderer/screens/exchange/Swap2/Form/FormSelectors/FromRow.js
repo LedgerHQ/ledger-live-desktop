@@ -69,7 +69,7 @@ function FromRow({
             placeholder={t("swap2.form.from.accountPlaceholder")}
             showAddAccount
             isSearchable={false}
-            disableTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
+            disabledTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
           />
         </Box>
         <Box width="50%">
