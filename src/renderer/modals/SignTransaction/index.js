@@ -1,53 +1,57 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { useState } from "react";
 import Modal from "~/renderer/components/Modal";
 import Body from "./Body";
 import type { StepId } from "./types";
 
-class SignTransactionModal extends PureComponent<{}, { stepId: StepId, error?: Error }> {
-  state = {
-    stepId: "amount",
-    error: undefined,
-  };
+type Props = {
+  stepId: StepId,
+  canEditFees: boolean,
+  error?: Error,
+};
 
-  handleReset = () =>
-    this.setState({
-      stepId: "amount",
+const SignTransactionModal = ({ stepId, canEditFees, error }: Props) => {
+  const [state, setState] = useState({
+    stepId: stepId || "summary",
+    error: undefined,
+  });
+
+  const handleReset = () => {
+    setState({
+      ...state,
+      stepId: "summary",
       error: undefined,
     });
+  };
 
-  handleStepChange = (stepId: StepId) => this.setState({ stepId });
+  const handleStepChange = (stepId: StepId) => setState({ ...state, stepId });
 
-  setError = (error?: Error) => this.setState({ error });
+  const setError = (error?: Error) => setState({ ...state, error });
 
-  render() {
-    const { stepId } = this.state;
-
-    return (
-      <Modal
-        name="MODAL_SIGN_TRANSACTION"
-        centered
-        refocusWhenChange={stepId}
-        onHide={this.handleReset}
-        preventBackdropClick
-        render={({ onClose, data }) => (
-          <Body
-            stepId={stepId}
-            onClose={() => {
-              if (data.onCancel) {
-                data.onCancel(this.state.error || new Error("Signature interrupted by user"));
-              }
-              onClose();
-            }}
-            setError={this.setError}
-            onChangeStepId={this.handleStepChange}
-            params={data || {}}
-          />
-        )}
-      />
-    );
-  }
-}
+  return (
+    <Modal
+      name="MODAL_SIGN_TRANSACTION"
+      centered
+      refocusWhenChange={state.stepId}
+      onHide={handleReset}
+      preventBackdropClick
+      render={({ onClose, data }) => (
+        <Body
+          stepId={state.stepId}
+          onClose={() => {
+            if (data.onCancel) {
+              data.onCancel(state.error || new Error("Signature interrupted by user"));
+            }
+            onClose();
+          }}
+          setError={setError}
+          onChangeStepId={handleStepChange}
+          params={data || {}}
+        />
+      )}
+    />
+  );
+};
 
 export default SignTransactionModal;
