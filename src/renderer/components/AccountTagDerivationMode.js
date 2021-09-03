@@ -23,7 +23,6 @@ const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
   flex: 0 0 auto !important;
   box-sizing: content-box;
   text-transform: uppercase;
-  margin: ${p => p.margin || "0 8px"};
   flex: unset;
 `;
 
@@ -40,5 +39,5 @@ export default function AccountTagDerivationMode({ account, margin }: Props) {
     account.derivationMode !== null &&
     getTagDerivationMode(account.currency, account.derivationMode);
 
-  return tag ? <CurrencyLabel margin={margin}>{tag}</CurrencyLabel> : null;
+  return tag ? <CurrencyLabel margin={margin ?? "0 8px"}>{tag}</CurrencyLabel> : null;
 }
