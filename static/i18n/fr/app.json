@@ -2440,7 +2440,7 @@
         "listTitle": "Sur l'application mobile Ledger Live :",
         "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
-        "step3": "Scannez le <1><0>code QR</0></1> jusqu'à ce que la barre soit à 100 %."
+        "step3": "Scannez le <highlight>code QR</highlight> jusqu'à ce que la barre soit à 100 %."
       }
     },
     "display": {
