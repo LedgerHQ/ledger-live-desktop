@@ -1,15 +1,17 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import type { TFunction } from "react-i18next";
 import { createStructuredSelector } from "reselect";
 import { withTranslation } from "react-i18next";
+import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 import { ModalBody } from "~/renderer/components/Modal";
 
 type OwnProps = {|
@@ -44,6 +46,8 @@ const mapDispatchToProps = {
 };
 
 const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
+  const { allowAddAccount, currencies: allowedCurrencies } = params;
+
   const selectAccount = useCallback(
     (account, parentAccount) => {
       params.onResult(account, parentAccount);
@@ -51,6 +55,19 @@ const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
     },
     [params, closeModal],
   );
+
+  const cryptoCurrencies = useMemo(() => {
+    const supportedCurrencies = listSupportedCurrencies();
+    return allowedCurrencies
+      ? supportedCurrencies.filter(currency => {
+          return allowedCurrencies.includes(currency.id);
+        })
+      : supportedCurrencies;
+  }, [allowedCurrencies]);
+
+  // sorting them by marketcap
+  // $FlowFixMe - don't know why it fails
+  const allCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
 
   return (
     <ModalBody
@@ -60,8 +77,9 @@ const Body = ({ t, openModal, closeModal, onClose, params }: Props) => {
       render={() => (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
-          allowedCurrencies={params.currencies}
-          allowAddAccount={params.allowAddAccount}
+          allowedCurrencies={allowedCurrencies}
+          allowAddAccount={allowAddAccount}
+          allCurrencies={allCurrencies}
         />
       )}
     />

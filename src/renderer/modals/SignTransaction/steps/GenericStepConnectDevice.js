@@ -1,8 +1,11 @@
 // @flow
 
 import React from "react";
+import { Trans } from "react-i18next";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 import DeviceAction from "~/renderer/components/DeviceAction";
+import StepProgress from "~/renderer/components/StepProgress";
+import { DeviceBlocker } from "~/renderer/components/DeviceAction/DeviceBlocker";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
 import type {
   Account,
@@ -26,7 +29,13 @@ const Result = ({
   signedOperation: ?SignedOperation,
   device: Device,
 }) => {
-  return null;
+  if (!signedOperation) return null;
+  return (
+    <StepProgress modelId={device.modelId}>
+      <DeviceBlocker />
+      <Trans i18nKey="send.steps.confirmation.pending.title" />
+    </StepProgress>
+  );
 };
 
 export default function StepConnectDevice({

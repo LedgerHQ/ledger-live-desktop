@@ -58,7 +58,7 @@ export function StepConfirmationFooter({
           primary
           onClick={() => {
             onRetry();
-            transitionTo("amount");
+            transitionTo("summary");
           }}
         />
       ) : null}
