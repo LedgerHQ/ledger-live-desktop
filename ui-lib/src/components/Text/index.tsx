@@ -9,6 +9,7 @@ import {
   lineHeight,
   letterSpacing,
   system,
+  SpaceProps,
 } from "styled-system";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import "./Text.css";
@@ -78,7 +79,7 @@ interface BaseTextProps {
   type?: TextTypes;
 }
 
-const Base = styled.span.attrs((p: BaseTextProps) => ({
+const Base = styled.span.attrs((p: BaseTextProps & SpaceProps) => ({
   color: p.color || "palette.v2.text.default",
   className: `${p.type ? `ll-text_${p.type} ` : ""}`,
 }))<BaseTextProps>`
@@ -94,7 +95,7 @@ const Base = styled.span.attrs((p: BaseTextProps) => ({
   ${p => (p.textTransform ? `text-transform: ${p.textTransform};` : "")}
 `;
 
-const Text = ({ children, bracket, ...props }: TextProps) => {
+const Text = ({ children, bracket, ...props }: TextProps & SpaceProps) => {
   return bracket ? (
     <Base {...props}>
       <BracketLeft className="ll-text_bracket" />
