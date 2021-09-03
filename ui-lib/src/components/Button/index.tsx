@@ -73,11 +73,11 @@ export const Base = styled.button.attrs((p: BaseProps) => ({
           padding: 0 2em;
         `
           : `
-          background-color: ${p.theme.colors.palette.primary.c100};
-          color: ${p.theme.colors.palette.neutral.c00};
+          background-color: ${p.theme.colors.palette.v2.text.default};
+          color: ${p.theme.colors.palette.v2.text.contrast};
           padding: 0 2em;
           &:hover {
-            background-color: ${p.theme.colors.palette.primary.c140};
+            background-color: ${p.theme.colors.palette.v2.background.darkGrey};
             ${
               p.iconButton
                 ? `box-shadow: 0px 0px 0px 12px ${p.theme.colors.palette.neutral.c90};`
