@@ -678,7 +678,7 @@
       "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
       "currencyAPY": "ГПД валюты",
       "currencyAPYTooltip": "Годовая процентная доходность займа с постоянной капитализацией",
-      "accruedInterests": "Начисленные проценты",
+      "accruedInterests": "Начисленные %",
       "accruedInterestsTooltip": "Доход с вашего займа",
       "interestEarned": "Начисленная прибыль",
       "interestEarnedTooltip": "Полученный доход после вывода средств",
@@ -698,7 +698,7 @@
       },
       "closed": {
         "title": "Здесь будет сводка ваших закрытых займов",
-        "description": "У вас ещё нет вкладов.",
+        "description": "У вас ещё не было вкладов.",
         "cta": "Депонировать"
       },
       "opened": {
@@ -717,7 +717,7 @@
         "accounts": "Счёт",
         "amountSupplied": "Открытые займы",
         "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
-        "accruedInterests": "Начисленные проценты",
+        "accruedInterests": "Начисленные %",
         "accruedInterestsTooltip": "Проценты с кредитования",
         "status": "Состояние счёта",
         "actions": "Действия"
@@ -741,12 +741,12 @@
       "opened": {
         "assetLended": "Актив",
         "amount": "Сумма",
-        "accruedInterest": "Начисленные проценты",
+        "accruedInterest": "Начисленные %",
         "date": "Дата"
       },
       "rates": {
         "allAssets": "Актив",
-        "totalBalance": "Активов в распоряжении",
+        "totalBalance": "Доступно",
         "totalBalanceTooltip": "Сумма, доступная для займа",
         "currentAPY": "Доходность",
         "currentAPYTooltip": "Годовая доходность по депозиту с постоянной капитализацией",
