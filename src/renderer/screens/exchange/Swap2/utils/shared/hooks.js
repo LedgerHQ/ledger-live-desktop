@@ -2,7 +2,11 @@
 import { useReducer, useEffect, useMemo } from "react";
 import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getProviders, getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import type {
+  Currency,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types/currencies";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
@@ -168,9 +172,10 @@ export const usePollKYCStatus = (
   );
 };
 
+// Pick a default source account if none are selected.
 export const usePickDefaultAccount = (
   accounts: AccountLike[],
-  fromAccount: AccountLike,
+  fromAccount: ?AccountLike,
   setFromAccount: AccountLike => void,
 ) => {
   useMemo(() => {
@@ -193,4 +198,20 @@ export const usePickDefaultAccount = (
       defaultAccount && setFromAccount(defaultAccount);
     }
   }, [accounts, fromAccount, setFromAccount]);
+};
+
+// Pick a default currency target if none are selected.
+export const usePickDefaultCurrency = (
+  currencies: Currency[],
+  currency: ?Currency,
+  setCurrency: Currency => void,
+) => {
+  useMemo(() => {
+    if (!currency) {
+      const defaultCurrency = currencies.find(
+        currency => currency.id === "ethereum" || currency.id === "bitcoin",
+      );
+      defaultCurrency && setCurrency(defaultCurrency);
+    }
+  }, [currency, currencies, setCurrency]);
 };

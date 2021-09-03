@@ -8,7 +8,10 @@ import { amountInputContainerProps, renderCurrencyValue, selectRowStylesMap } fr
 import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
-import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import {
+  usePickDefaultCurrency,
+  useSelectableCurrencies,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type {
   SwapSelectorStateType,
@@ -46,6 +49,8 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
   useEffect(() => {
     if (selectState.currency) selectState.setCurrency(selectState.currency);
   }, [accounts]);
+
+  usePickDefaultCurrency(selectState.currencies, selectState.currency, selectState.setCurrency);
 
   return (
     <>
