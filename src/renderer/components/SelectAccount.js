@@ -126,7 +126,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
             {name}
           </Ellipsis>
         </Box>
-        <AccountTagDerivationMode account={account} margin="0 0 0 8px" />
+        <AccountTagDerivationMode account={account} margin={0} />
       </Box>
       <Box>
         <FormattedVal
