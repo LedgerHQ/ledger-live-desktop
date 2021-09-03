@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -29,7 +29,7 @@ type Props = {
 export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
-  const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
+  const selectState = useSelectableCurrencies({ allCurrencies });
   const unit = selectState.account ? getAccountUnit(selectState.account) : null;
   const accounts = useSelector(shallowAccountsSelector);
 
@@ -37,12 +37,19 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
   useEffect(() => {
     const { currency, account, parentAccount } = selectState;
     setToAccount(currency, account, parentAccount);
-  }, [selectState.currency, selectState.account, selectState.parentAccount]);
+  }, [fromAccount, selectState.currency]);
 
+  /* Force refresh or reset internal state on account change */
+  const previousFromAccountRef = useRef(fromAccount);
   useEffect(() => {
-    /* RESET internal state on account change */
-    selectState.setCurrency(null);
-  }, [fromAccount]);
+    const previousFromAccount = previousFromAccountRef.current;
+    if (previousFromAccount === fromAccount) return;
+    const isCurrencyValid = selectState.currencies.indexOf(selectState.currency) >= 0;
+    selectState.setCurrency(isCurrencyValid ? selectState.currency : null);
+    return () => {
+      previousFromAccountRef.current = fromAccount;
+    };
+  }, [fromAccount, selectState.currencies, selectState.currency]);
 
   /* REFRESH picked currency information (account/parentAccount)
    when an account is added or removed by the user */
