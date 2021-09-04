@@ -2485,7 +2485,7 @@
     },
     "profile": {
       "password": "Bloqueo por contraseña",
-      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
+      "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
       "passwordAutoLock": "Bloqueo automático",
       "passwordAutoLockDesc": "Bloquear Ledger Live automáticamente cuando esté inactivo.",
       "changePassword": "Cambiar contraseña",
