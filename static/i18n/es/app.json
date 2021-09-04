@@ -1313,7 +1313,7 @@
       "used": "Utilizado",
       "firmwareAvailable": "El firmware está desactualizado:",
       "firmwareUpToDate": "El firmware está actualizado:",
-      "genuine": "El dispositivo es original",
+      "genuine": "El dispositivo es auténtico",
       "incomplete": "No se reconocieron algunas aplicaciones. Desinstálalas y luego vuelve a instalarlas."
     },
     "applist": {
@@ -3249,7 +3249,7 @@
           "title": "Reparar tu Nano S",
           "desc": "¿Cuál es el mensaje que muestra tu dispositivo?",
           "mcuOutdated": "El firmware de la MCU está desactualizado",
-          "mcuNotGenuine": "El firmware de la MCU no es original",
+          "mcuNotGenuine": "MCU firmware is not genuine",
           "repairInstructions": "Sigue las instrucciones de reparación del dispositivo",
           "updateInstructions": "Sigue las instrucciones de actualización del dispositivo",
           "somethingElse": "Otros"
