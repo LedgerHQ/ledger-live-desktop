@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Informations",
+        "title": "Information",
         "website": "Website"
       }
     },
@@ -120,7 +120,8 @@
       "devTools": "Dev tools"
     },
     "exchange": "Exchange",
-    "info": "Info"
+    "info": "Info",
+    "connectDevice": "Connect your device"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -153,7 +154,8 @@
       "SLASH": "Slash",
       "WITHDRAW_UNBONDED": "Withdrawal",
       "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations"
+      "CHILL": "Clear nominations",
+      "SET_CONTROLLER": "Set controller"
     }
   },
   "byteSize": {
@@ -295,7 +297,7 @@
         "pending": {
           "cta": "Continue",
           "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre. It usually takes 1-3 days before you can start swapping.",
+          "subtitle": "Your information was submitted for approval by Wyre.",
           "link": "Learn more about KYC"
         },
         "closed": {
@@ -627,7 +629,9 @@
       "continue": "Continue"
     },
     "history": {
-      "tab": "History"
+      "tab": "History",
+      "exporting": "Exporting...",
+      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -693,6 +697,12 @@
       "status": {
         "enablingTooltip": "Your transaction is broadcasting",
         "toSupplyTooltip": "You can now supply your assets"
+      },
+      "types": {
+        "enabling": "Enabling",
+        "inactive": "Inactive",
+        "supplying": "Supplying",
+        "earning": "Earning"
       },
       "closed": {
         "assetLended": "Asset",
@@ -1032,7 +1042,8 @@
     "title": "Jelenlegi cím",
     "for": "Cím <1><0>{{name}}</0></1> -hoz",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security."
+    "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
+    "showQrCode": "Show QR Code"
   },
   "emptyState": {
     "dashboard": {
@@ -1302,8 +1313,10 @@
         "manageAccount": "Számláim kezelése"
       },
       "updatable": {
-        "title": "Frissítések elérhetők",
-        "progressTitle": "{{number}} Alkalmazás frissítések",
+        "title": "Update available",
+        "title_plural": "Updates available",
+        "progressTitle": "{{number}} App update",
+        "progressTitle_plural": "{{number}} App updates",
         "progressWarning": "Ne zárd be az eszközkezelőt a frissítés alatt.",
         "progress": "Összes frissítése..."
       },
@@ -1341,6 +1354,44 @@
       }
     },
     "apps": {
+      "content": {
+        "paraswap": {
+          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+        },
+        "wyre_buy": {
+          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
+          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
+        },
+        "lido": {
+          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
+          "description": "Stake your ETH with Lido to earn daily staking rewards."
+        },
+        "zerion": {
+          "shortDescription": "The smart way to manage your DeFi portfolio.",
+          "description": "The smart way to manage your DeFi portfolio."
+        },
+        "rainbow": {
+          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
+          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
+        },
+        "aave": {
+          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
+          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
+        },
+        "compound": {
+          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
+          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
+        },
+        "deversifi": {
+          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
+          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
+        },
+        "1inch": {
+          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
+          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
+        }
+      },
       "dependencyInstall": {
         "title": "{{dependency}} alkalmazás szükséges",
         "description": "A(z) {{dependency}} alkalmazás is telepítve lesz, mert a(z) {{app}} -hoz szükséges.",
@@ -1988,6 +2039,7 @@
       },
       "header": "Nominations",
       "nominate": "Nominate",
+      "setController": "Change Controller",
       "chill": "Clear nominations",
       "totalStake": "Total Stake",
       "amount": "Bonded Amount",
@@ -2009,9 +2061,9 @@
       "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
       "electionOpenTooltip": "This operation is disabled during the election of validators",
       "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by another account with the address <0>{{address}}</0>.</0><1>Staking operations on accounts that are controlled by a different account are not supported in Ledger Live. Please use an alternative wallet such as Polkadot.js</1>",
+      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
       "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account controls a stash account whose address is <0>{{address}}</0>.</0><1>Staking operations on separate stash accounts are not supported in Ledger Live. Please use an alternative wallet like Polkadot.js</1>",
+      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
       "showInactiveNominations": "Show all nominations ({{count}})",
       "hideInactiveNominations": "Show active nominations only",
       "noActiveNominations": "There are no active nominations.",
@@ -2198,6 +2250,11 @@
           "title": "Clear nominations",
           "description": "Clears all nominations and stops earning rewards.",
           "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+        },
+        "setController": {
+          "title": "Change Controller",
+          "description": "Set this Ledger account as its own controller",
+          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
         }
       },
       "steps": {
@@ -2344,9 +2401,9 @@
         "button": "Kész",
         "title": "Olvasd be a mobilra torténő exportáláshoz",
         "listTitle": "A Ledger Live mobilalkalmazásban:",
-        "step1": "Nyomj a <1><0>+</0></1> gombra a <3><0>Számlák</0></3> menüpontban",
-        "step2": "Nyomj az <1><0>Asztali számlák importálására</0></1>",
-        "step3": "Olvasd be a <1><0>LiveQR-kódot</0></1>, míg a számláló el nem éri a 100%-ot"
+        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
+        "step2": "Tap <highlight>Import desktop accounts</highlight>",
+        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
       }
     },
     "display": {
@@ -2422,7 +2479,37 @@
       "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk."
+      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
+      "features": {
+        "apiTrongridProxy": {
+          "title": "use TronGrid.io",
+          "description": "Use trongrid directly without ledger proxy"
+        },
+        "experimentalLanguages": {
+          "title": "Translation testing",
+          "description": "Adds unreleased languages to the language list in the general settings tab."
+        },
+        "managerDevMode": {
+          "title": "Developer mode",
+          "description": "Show developer and testnet apps in the Manager."
+        },
+        "scanForInvalidPaths": {
+          "title": "Extended account search",
+          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+        },
+        "experimentalExplorers": {
+          "title": "Experimental Explorers API",
+          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+        },
+        "keychainObservableRange": {
+          "title": "Custom gap limit",
+          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+        },
+        "forceProvider": {
+          "title": "Manager provider",
+          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        }
+      }
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
@@ -2656,6 +2743,7 @@
         "hasNoRecovery": "First time using your {{deviceName}}?",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
+        "switchDevice": "Switch device",
         "options": {
           "1": {
             "heading": "First use",
@@ -3155,7 +3243,8 @@
       "bond": "Please confirm on your device to finalize the operation",
       "unbond": "Please confirm on your device to finalize the operation",
       "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation"
+      "withdrawUnbonded": "Please confirm on your device to finalize the operation",
+      "setController": "Please confirm on your device to finalize the operation"
     },
     "recipientWording": {
       "send": "fogadó",
@@ -3171,11 +3260,10 @@
     "placeholder": "Írd be a(z) {{currencyName}} címet"
   },
   "Terms": {
-    "title": "Felhasználási feltételek",
-    "read": "Olvasd el a Felhasználási feltételeket",
-    "switchLabelTerms": "<0>I have read and agree with the</0> <1>Terms of Use</1>",
-    "switchLabelPrivacyPolicy": "<0>I have read and agree with the</0> <1>Privacy Policy</1>",
-    "switchLabelLoss": "I understand that if I lose this recovery phrase,  I will not be able to access my crypto in case I lose access to Nano.",
+    "title": "Legal",
+    "termsLabel": "Terms of service",
+    "privacyLabel": "Privacy Policy",
+    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
     "cta": "Enter Ledger app"
   },
   "families": {

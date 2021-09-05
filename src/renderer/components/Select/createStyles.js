@@ -2,6 +2,23 @@
 
 import { ff } from "~/renderer/styles/helpers";
 
+export type CreateStylesReturnType = {
+  container: (styles: Object) => Object,
+  control: (styles: Object, { isFocused: boolean }) => Object,
+  indicatorSeparator: (styles: Object) => Object,
+  input: (styles: Object) => Object,
+  menu: (styles: Object) => Object,
+  menuList: (styles: Object) => Object,
+  menuPortal: (styles: Object) => Object,
+  noOptionsMessage: (styles: Object) => Object,
+  option: (
+    styles: Object,
+    { isFocused: boolean, isSelected: boolean, isDisabled: boolean },
+  ) => Object,
+  singleValue: (styles: Object) => Object,
+  valueContainer: (styles: Object) => Object,
+};
+
 export default (
   theme: any,
   {
@@ -19,7 +36,7 @@ export default (
     isLeft: boolean,
     error: ?Error,
   },
-) => ({
+): CreateStylesReturnType => ({
   control: (styles: Object, { isFocused }: Object) => ({
     ...styles,
     width,

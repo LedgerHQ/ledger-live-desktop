@@ -3,7 +3,8 @@
 
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import { map } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
+import { log } from "@ledgerhq/logs";
 import type {
   AccountRawLike,
   AccountRaw,
@@ -22,12 +23,15 @@ import {
   toTransactionStatusRaw,
   fromSignedOperationRaw,
   toSignOperationEventRaw,
+  formatTransaction,
 } from "@ledgerhq/live-common/lib/transaction";
 import {
   fromAccountRaw,
   fromAccountLikeRaw,
   toAccountRaw,
   toOperationRaw,
+  formatOperation,
+  formatAccount,
 } from "@ledgerhq/live-common/lib/account";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { toScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";
@@ -122,10 +126,19 @@ const cmdAccountSignOperation = (o: {
 }): Observable<SignOperationEventRaw> => {
   const account = fromAccountRaw(o.account);
   const transaction = fromTransactionRaw(o.transaction);
+
+  log("transaction-summary", `→ FROM ${formatAccount(account, "basic")}`);
+  log("transaction-summary", `✔️ transaction ${formatTransaction(transaction, account)}`);
+
   const bridge = bridgeImpl.getAccountBridge(account, null);
-  return bridge
-    .signOperation({ account, transaction, deviceId: o.deviceId })
-    .pipe(map(toSignOperationEventRaw));
+  return bridge.signOperation({ account, transaction, deviceId: o.deviceId }).pipe(
+    map(toSignOperationEventRaw),
+    tap(e => {
+      if (e.type === "signed") {
+        log("transation-summary", "✔️ has been signed!", { signedOperation: e.signOperation });
+      }
+    }),
+  );
 };
 
 const cmdAccountBroadcast = (o: {
@@ -135,7 +148,15 @@ const cmdAccountBroadcast = (o: {
   const account = fromAccountRaw(o.account);
   const signedOperation = fromSignedOperationRaw(o.signedOperation, account.id);
   const bridge = bridgeImpl.getAccountBridge(account, null);
-  return from(bridge.broadcast({ account, signedOperation }).then(o => toOperationRaw(o, true)));
+  return from(
+    bridge.broadcast({ account, signedOperation }).then(o => {
+      log(
+        "transaction-summary",
+        `✔️ broadcasted! optimistic operation: ${formatOperation(account)(o)}`,
+      );
+      return toOperationRaw(o, true);
+    }),
+  );
 };
 
 const cmdAccountEstimateMaxSpendable = (o: {

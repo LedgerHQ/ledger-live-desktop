@@ -59,7 +59,7 @@ const StepAmount = ({
 export class StepAmountFooter extends PureComponent<StepProps> {
   onNext = async () => {
     const { transitionTo } = this.props;
-    transitionTo("device");
+    transitionTo("summary");
   };
 
   render() {

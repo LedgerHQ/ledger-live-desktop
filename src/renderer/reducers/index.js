@@ -7,6 +7,7 @@ import modals from "./modals";
 import UI from "./UI";
 import settings from "./settings";
 import onboarding from "./onboarding";
+import swap from "./swap";
 import type { AccountsState } from "./accounts";
 import type { ApplicationState } from "./application";
 import type { DevicesState } from "./devices";
@@ -14,6 +15,7 @@ import type { ModalsState } from "./modals";
 import type { SettingsState } from "./settings";
 import type { OnboardingState } from "./onboarding";
 import type { UIState } from "./UI";
+import type { SwapStateType } from "./swap";
 
 export type State = {
   accounts: AccountsState,
@@ -23,6 +25,7 @@ export type State = {
   settings: SettingsState,
   onboarding: OnboardingState,
   UI: UIState,
+  swap: SwapStateType,
 };
 
 // $FlowFixMe
@@ -34,4 +37,5 @@ export default combineReducers({
   settings,
   onboarding,
   UI,
+  swap,
 });
