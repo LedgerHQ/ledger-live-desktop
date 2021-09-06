@@ -117,13 +117,14 @@ const AppsList = ({
 
   // Save last seen device
   useEffect(() => {
-    const dmi = {
+    const lastSeenDevice = {
       modelId: device.modelId,
       deviceInfo,
       apps: state.installed.map(({ name, version }) => ({ name, version })),
     };
-    reduxDispatch(setLastSeenDeviceInfo(dmi));
-  }, [device, state.installed, deviceInfo, reduxDispatch]);
+
+    reduxDispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware: firmware }));
+  }, [device, state.installed, deviceInfo, reduxDispatch, firmware]);
 
   const disableFirmwareUpdate = state.installQueue.length > 0 || state.uninstallQueue.length > 0;
 

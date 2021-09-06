@@ -212,6 +212,55 @@
     "openButton": "Открыть",
     "disconnectButton": "Отключить"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      },
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      },
+      "from": {
+        "title": "From",
+        "max": "Max",
+        "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
+    }
+  },
   "swap": {
     "title": "Обмен",
     "titleCrypto": "Обменять {{currency}}",
@@ -250,27 +299,6 @@
       "title": "Выберите поставщика услуг для обмена криптовалюты",
       "learnMore": "Что такое Swap (обмен криптоактивов)?",
       "kycRequired": "Требуется проверка KYC",
-      "wyre": {
-        "bullets": [
-          "Только в США (скоро в Европе, Африке и Азии)",
-          "Множество монет и токенов",
-          "Централизованный"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT и 50+ других",
-          "Мультивалютная поддержка",
-          "Централизованный"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Подключение к 30+ DEX-биржам (Uniswap, SushiSwap...)",
-          "Ethereum и ERC20-токены",
-          "Децентрализованная система без доверия"
-        ]
-      },
       "cta": "Продолжить",
       "kyc": {
         "notAvailable": "{{provider}} недоступен в вашем регионе",
@@ -292,7 +320,7 @@
       "wyre": {
         "disclaimer": "Информация о вас собирается Ledger от имени – и передаётся, – в Wyre для процедуры KYC. Дополнительную информацию можно получить в нашей",
         "policy": "Политике конфиденциальности",
-        "title": "Подтверждение вашей личности",
+        "title": "Подтвердить личность",
         "subtitle": "Пожалуйста, введите данные, чтобы произвести обмен посредством Wyre.",
         "pending": {
           "cta": "Продолжить",
@@ -650,7 +678,7 @@
       "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
       "currencyAPY": "ГПД валюты",
       "currencyAPYTooltip": "Годовая процентная доходность займа с постоянной капитализацией",
-      "accruedInterests": "Начисленные проценты",
+      "accruedInterests": "Начисленные %",
       "accruedInterestsTooltip": "Доход с вашего займа",
       "interestEarned": "Начисленная прибыль",
       "interestEarnedTooltip": "Полученный доход после вывода средств",
@@ -670,7 +698,7 @@
       },
       "closed": {
         "title": "Здесь будет сводка ваших закрытых займов",
-        "description": "У вас ещё нет вкладов.",
+        "description": "У вас ещё не было вкладов.",
         "cta": "Депонировать"
       },
       "opened": {
@@ -689,7 +717,7 @@
         "accounts": "Счёт",
         "amountSupplied": "Открытые займы",
         "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
-        "accruedInterests": "Начисленные проценты",
+        "accruedInterests": "Начисленные %",
         "accruedInterestsTooltip": "Проценты с кредитования",
         "status": "Состояние счёта",
         "actions": "Действия"
@@ -713,12 +741,12 @@
       "opened": {
         "assetLended": "Актив",
         "amount": "Сумма",
-        "accruedInterest": "Начисленные проценты",
+        "accruedInterest": "Начисленные %",
         "date": "Дата"
       },
       "rates": {
         "allAssets": "Актив",
-        "totalBalance": "Активов в распоряжении",
+        "totalBalance": "Доступно",
         "totalBalanceTooltip": "Сумма, доступная для займа",
         "currentAPY": "Доходность",
         "currentAPYTooltip": "Годовая доходность по депозиту с постоянной капитализацией",
@@ -1412,6 +1440,15 @@
       "removeApps": "Перед обновлением удалите все приложения",
       "update": "Обновление прошивки",
       "updateBtn": "Обновить прошивку",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "Доступна новая версия прошивки {{version}}",
       "contactSupport": "Связаться с поддержкой",
       "deprecated": "Версия прошивки устройства устарела и не может быть обновлена. Обратитесь в службу поддержки Ledger для решения этого вопроса.",
@@ -2485,6 +2522,10 @@
           "title": "использовать TronGrid.io",
           "description": "Использовать trongrid напрямую без прокси Ledger"
         },
+        "tezosJS": {
+          "title": "use Tezos JS impl",
+          "description": "Use Tezos JS impl"
+        },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
           "description": "Добавляет непредставленные языки в список языков на вкладке Общие настройки."
@@ -2543,9 +2584,9 @@
       "button": "Исправить"
     },
     "exportLogs": {
-      "title": "Хранить логи",
+      "title": "Сохранить логи",
       "desc": "Хранение логов Ledger Live может потребоваться при устранения неполадок.",
-      "btn": "Сохранять"
+      "btn": "Сохранить"
     },
     "accounts": {
       "hideEmptyTokens": {

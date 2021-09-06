@@ -110,8 +110,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
     }, [addAccount]);
 
     const onSupportLink = useCallback(() => {
-      openURL(urls.appSupport);
-    }, []);
+      openURL(urls.appSupport[app.name] || urls.appSupport.default);
+    }, [app.name]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
