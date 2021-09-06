@@ -1,11 +1,12 @@
 // @flow
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import ButtonBase from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { context } from "~/renderer/drawers/Provider";
 import { useTranslation } from "react-i18next";
 import {
   useSwapProviders,
@@ -28,6 +29,7 @@ import FormNotAvailable from "./FormNotAvailable";
 import FormKYCBanner from "./FormKYCBanner";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
+import ExchangeDrawer from "./ExchangeDrawer/index";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -42,10 +44,8 @@ const Button = styled(ButtonBase)`
 `;
 
 const SwapForm = () => {
-  // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-  const [isSwapReady] = useState(false);
   const { t } = useTranslation();
-  const { providers, error } = useSwapProviders();
+  const { providers, error: providersError } = useSwapProviders();
   const dispatch = useDispatch();
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
@@ -56,17 +56,15 @@ const SwapForm = () => {
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
   const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
-
-  // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
-  const onSubmit = () => {};
+  const { setDrawer } = React.useContext(context);
 
   useEffect(() => {
     if (providers) dispatch(updateProvidersAction(providers));
   }, [providers]);
 
   useEffect(() => {
-    if (error) dispatch(resetSwapAction());
-  }, [error]);
+    if (providersError) dispatch(resetSwapAction());
+  }, [providersError]);
 
   useEffect(() => {
     dispatch(updateTransactionAction(swapTransaction.transaction));
@@ -97,6 +95,23 @@ const SwapForm = () => {
     },
     [dispatch],
   );
+  const swapError = swapTransaction.fromAmountError || exchangeRatesState?.error;
+
+  const isSwapReady =
+    !swapTransaction.bridgePending &&
+    exchangeRatesState.status !== "loading" &&
+    swapTransaction.transaction &&
+    !providersError &&
+    !swapError &&
+    !showWyreKYCBanner &&
+    exchangeRate;
+
+  const onSubmit = () => {
+    setDrawer(ExchangeDrawer, {
+      swapTransaction,
+      exchangeRate,
+    });
+  };
 
   if (providers?.length)
     return (
@@ -111,7 +126,7 @@ const SwapForm = () => {
           setToAccount={swapTransaction.setToAccount}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
-          fromAmountError={swapTransaction.fromAmountError || exchangeRatesState?.error}
+          fromAmountError={swapError}
           // TODO: implement the "to" currency input loader
           // loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
@@ -128,7 +143,7 @@ const SwapForm = () => {
     );
 
   // TODO: ensure that the error is catch by Sentry in this case
-  if (error) return <FormNotAvailable />;
+  if (providersError) return <FormNotAvailable />;
   if (storedProviders?.length === 0) return <FormNotAvailable />;
 
   return <FormLoading />;

@@ -28,8 +28,10 @@ import {
   renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmation,
+  renderSwapDeviceConfirmationV2,
   renderSellDeviceConfirmation,
 } from "./rendering";
+import useEnv from "~/renderer/hooks/useEnv";
 
 type OwnProps<R, H, P> = {
   overridesPreferredDeviceModel?: DeviceModelId,
@@ -111,6 +113,7 @@ const DeviceAction = <R, H, P>({
     initSellError,
     signMessageRequested,
   } = hookState;
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
 
   const type = useTheme("colors.palette.type");
 
@@ -157,7 +160,10 @@ const DeviceAction = <R, H, P>({
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     const { transaction, exchange, exchangeRate, status } = request;
     const { amountExpectedTo, estimatedFees } = hookState;
-    return renderSwapDeviceConfirmation({
+    const renderFn = isSwapV2Enabled
+      ? renderSwapDeviceConfirmationV2
+      : renderSwapDeviceConfirmation;
+    return renderFn({
       modelId,
       type,
       transaction,
