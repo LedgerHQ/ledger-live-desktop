@@ -10,11 +10,11 @@ import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import ToolTip from "~/renderer/components/Tooltip";
 import Box from "~/renderer/components/Box/Box";
 import Text from "~/renderer/components/Text";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import { B, OpDetailsData, OpDetailsSection, OpDetailsTitle } from "./styledComponents";
+import { NoCountervaluePlaceholder } from "~/renderer/components/CounterValue";
 
 const Column = styled(Box).attrs(() => ({
   justifyContent: "flex-start",
@@ -104,9 +104,7 @@ export default function AmountDetails({ operation, account }: Props) {
                 color="palette.text.shade60"
               />
             ) : (
-              <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
-                {"-"}
-              </ToolTip>
+              <NoCountervaluePlaceholder style={null} />
             )}
           </Box>
         </OpDetailsData>
@@ -137,9 +135,7 @@ export default function AmountDetails({ operation, account }: Props) {
                 color="palette.text.shade60"
               />
             ) : (
-              <ToolTip content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}>
-                {"-"}
-              </ToolTip>
+              <NoCountervaluePlaceholder style={null} />
             )}
           </Box>
         </OpDetailsData>
