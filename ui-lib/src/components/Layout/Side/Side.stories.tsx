@@ -1,25 +1,24 @@
-import React, { useEffect } from "react";
-import Drawer from "./index";
-import DrawerProvider, { setDrawer } from "./Provider";
+import React, { useCallback, useEffect } from "react";
+import Side from "./index";
+import SideProvider, { setSide } from "./Provider";
 import Button from "@ui/components/Button";
 import styled from "styled-components";
-import { useArgs } from "@storybook/client-api";
+import { lipsum } from "../../../helpers";
 
 const DummyContentWrapper = styled.div`
-  height: 100%;
   width: 100%;
-  background-color: ${p => p.color};
+  background-color: ${(p) => p.color};
   align-items: center;
   padding: 10px;
 `;
 
 const onBackLvl1 = () =>
-  setDrawer(DummyContent, {
+  setSide(DummyContent, {
     left: true,
   });
 
 const onBackLvl2 = () =>
-  setDrawer(DummySubContentLvl1, {
+  setSide(DummySubContentLvl1, {
     onBack: onBackLvl1,
     left: true,
   });
@@ -28,7 +27,7 @@ const DummyContent = () => (
   <DummyContentWrapper color={"#957DAD"}>
     <Button
       onClick={() =>
-        setDrawer(DummySubContentLvl1, {
+        setSide(DummySubContentLvl1, {
           onBack: onBackLvl1,
           left: true,
         })
@@ -43,7 +42,7 @@ const DummySubContentLvl1 = () => (
   <DummyContentWrapper color={"#E0BBE4"}>
     <Button
       onClick={() =>
-        setDrawer(DummySubContentLvl2, {
+        setSide(DummySubContentLvl2, {
           onBack: onBackLvl2,
           left: true,
         })
@@ -51,10 +50,15 @@ const DummySubContentLvl1 = () => (
     >
       {"Go to level 3"}
     </Button>
+    <div>{lipsum}</div>
   </DummyContentWrapper>
 );
 
-const DummySubContentLvl2 = () => <DummyContentWrapper color={"#FEC8D8"} />;
+const DummySubContentLvl2 = () => (
+  <DummyContentWrapper color={"#FEC8D8"}>
+    <div>{lipsum}</div>
+  </DummyContentWrapper>
+);
 
 const components = {
   DummyContent,
@@ -62,8 +66,8 @@ const components = {
   DummySubContentLvl2,
 };
 export default {
-  title: "Layout/Drawer",
-  component: Drawer,
+  title: "Layout/Modal/Side",
+  component: Side,
   argTypes: {
     isOpen: {
       type: "boolean",
@@ -74,20 +78,9 @@ export default {
         type: "boolean",
       },
     },
-    DrawerComponent: {
-      type: "enum",
-      description: "Drawer component",
-      defaultValue: "DummyContent",
-      control: {
-        options: [undefined, "DummyContent", "DummySubContentLvl1", "DummySubContentLvl2"],
-        control: {
-          type: "select",
-        },
-      },
-    },
     title: {
       type: "text",
-      description: "Drawer default title",
+      description: "Side default title",
       defaultValue: "Default title",
       control: {
         type: "text",
@@ -106,25 +99,21 @@ export default {
   },
 };
 
-const Template = ({ DrawerComponent, ...args }: any) => {
-  const [, updateArgs] = useArgs();
-
-  const onClose = () =>
-    updateArgs({
-      isOpen: false,
-    });
+const Template = (args) => {
+  const onClose = useCallback(() => setSide(null), []);
+  const onOpen = useCallback(() => setSide(components.DummyContent), []);
 
   useEffect(() => {
-    // @ts-expect-error
-    const C: any = components[DrawerComponent];
-    setDrawer(C);
-  }, [DrawerComponent]);
+    if (args.isOpen) onOpen();
+    if (!args.isOpen) onClose();
+  }, [args.isOpen, onClose, onOpen]);
+
   return (
-    <DrawerProvider>
-      <Drawer {...args} onClose={onClose}>
+    <SideProvider>
+      <Side {...args} onClose={onClose}>
         {args.children}
-      </Drawer>
-    </DrawerProvider>
+      </Side>
+    </SideProvider>
   );
 };
 
