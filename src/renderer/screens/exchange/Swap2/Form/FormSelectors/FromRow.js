@@ -1,8 +1,7 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { Trans, withTranslation } from "react-i18next";
-import type { TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
@@ -16,17 +15,25 @@ import { FormLabel } from "./FormLabel";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
-  fromAccount: ?Account | TokenAccount,
-  setFromAccount: ?(Account | TokenAccount) => void,
+  fromAccount: { account: Account | TokenAccount, parentAccount: ?Account } | null,
+  setFromAccount: (pickedAccount: Account | TokenAccount) => void,
+  isMaxEnabled: boolean,
+  toggleMax: () => void,
   fromAmount: ?BigNumber,
   setFromAmount: BigNumber => void,
-  t: TFunction,
 };
 
-function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: Props) {
+function FromRow({
+  fromAmount,
+  setFromAmount,
+  fromAccount,
+  setFromAccount,
+  isMaxEnabled,
+  toggleMax,
+}: Props) {
   const accounts = useSelector(shallowAccountsSelector);
-  const [maxFrom, setMaxFrom] = useState(false);
   const unit = fromAccount && getAccountUnit(fromAccount);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -38,14 +45,12 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
         mb={2}
         color={"palette.text.shade40"}
       >
-        <FormLabel>
-          <Trans i18nKey="swap2.form.from.title" />
-        </FormLabel>
+        <FormLabel>{t("swap2.form.from.title")}</FormLabel>
         <Box horizontal alignItems="center">
           <Text marginRight={1} fontWeight="500">
-            <Trans i18nKey="swap2.form.from.max" />
+            {t("swap2.form.from.max")}
           </Text>
-          <Switch medium isChecked={maxFrom} onChange={_ => setMaxFrom(value => !value)} />
+          <Switch medium isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
         </Box>
       </Box>
       <Box horizontal mb="26px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
@@ -58,13 +63,14 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
             withSubAccounts
+            showAddAccount
           />
         </Box>
         <Box width="50%">
           <InputCurrency
             value={fromAmount}
             onChange={setFromAmount}
-            disabled={!fromAccount || maxFrom}
+            disabled={!fromAccount || isMaxEnabled}
             placeholder="0"
             textAlign="right"
             containerProps={amountInputContainerProps}
@@ -79,4 +85,4 @@ function FromRow({ fromAmount, setFromAmount, fromAccount, setFromAccount, t }: 
   );
 }
 
-export default withTranslation()(FromRow);
+export default FromRow;

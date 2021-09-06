@@ -94,7 +94,7 @@ const SelectCurrency = <C: Currency>({
   return (
     <Select
       id={id}
-      autoFocus={autoFocus}
+      autoFocus={!process.env.SPECTRON_RUN ? autoFocus : false}
       value={value}
       options={filteredOptions}
       filterOption={false}

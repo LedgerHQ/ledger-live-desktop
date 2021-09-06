@@ -3,8 +3,8 @@ import React, { useCallback, useMemo } from "react";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
-import { languageSelector } from "~/renderer/reducers/settings";
 import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
+import { languageSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
@@ -54,6 +54,23 @@ async function loadAnnouncements(): Promise<{
   return data;
 }
 
+const getOsPlatform = () => {
+  switch (process.platform) {
+    case "darwin":
+      return "mac";
+
+    case "win32":
+    case "win64":
+      return "windows";
+
+    case "linux":
+      return "linux";
+
+    default:
+      return undefined;
+  }
+};
+
 export function AnnouncementProviderWrapper({ children }: Props) {
   const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
@@ -65,7 +82,9 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     }),
     { currencies: [], tickers: [] },
   );
+  const lastSeenDevice = useSelector(lastSeenDeviceSelector);
   const dispatch = useDispatch();
+  const osPlatform = getOsPlatform();
 
   // $FlowFixMe please help on fixing this. bad type on live-common?
   const { pushToast, dismissToast } = useToasts();
@@ -74,6 +93,8 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     language,
     currencies,
     getDate: () => new Date(),
+    lastSeenDevice: lastSeenDevice || undefined,
+    platform: osPlatform,
     appVersion: __APP_VERSION__,
   };
 
