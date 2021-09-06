@@ -26,6 +26,14 @@
       "borderDark": "hsla(247, 56%, 68%, 1)",
       "dark": "hsla(247, 40%, 53%, 1)"
     },
+    "warning": {
+      "backgroundLight": "hsla(18, 100%, 96%, 1)",
+      "dark": "hsla(17, 100%, 60%, 1)"
+    },
+    "error": {
+      "backgroundLight": "hsla(0, 89%, 96%, 1)",
+      "dark": "hsla(359, 84%, 63%, 1)"
+    },
     "orange": {
       "error": "hsla(16, 100%, 86%, 0.2)",
       "secondaryText": "hsla(17, 100%, 60%, 1)",
