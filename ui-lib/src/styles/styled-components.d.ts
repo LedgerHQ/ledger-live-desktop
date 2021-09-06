@@ -8,7 +8,7 @@ declare module "styled-components" {
     sizes: {
       topBarHeight: number;
       sideBarWidth: number;
-      drawer: {
+      side: {
         big: {
           width: number;
         };

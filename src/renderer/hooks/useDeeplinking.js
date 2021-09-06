@@ -54,8 +54,9 @@ export function useDeepLinkHandler() {
       const { pathname, searchParams } = new URL(deeplink);
       const query = Object.fromEntries(searchParams);
       const url = pathname.replace(/(^\/+|\/+$)/g, "");
+      const splitedPath = url.split("/");
 
-      switch (url) {
+      switch (splitedPath[0]) {
         case "accounts":
           navigate("/accounts");
           break;
@@ -160,6 +161,25 @@ export function useDeepLinkHandler() {
                     : undefined,
               }),
             );
+          }
+
+          break;
+        }
+
+        case "settings": {
+          switch (splitedPath[1]) {
+            case "general":
+              navigate("/settings/display");
+              break;
+            case "accounts":
+            case "about":
+            case "help":
+            case "experimental":
+              navigate(`/settings/${splitedPath[1]}`);
+              break;
+            default:
+              navigate("/settings");
+              break;
           }
 
           break;

@@ -64,7 +64,7 @@
     "confirm": "Confirmar",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
-    "delete": "Borrar",
+    "delete": "Eliminar",
     "launch": "Ejecutar",
     "continue": "Continuar",
     "previous": "Anterior",
@@ -212,6 +212,55 @@
     "openButton": "Abrir",
     "disconnectButton": "Desconectar"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      },
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      },
+      "from": {
+        "title": "From",
+        "max": "Max",
+        "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
+    }
+  },
   "swap": {
     "title": "Permutar",
     "titleCrypto": "Intercambiar {{currency}}",
@@ -250,27 +299,6 @@
       "title": "Elige un proveedor para permutar cripto",
       "learnMore": "¿Qué es la permuta?",
       "kycRequired": "KYC necesario",
-      "wyre": {
-        "bullets": [
-          "Solo EE. UU. (pronto Europa, África y Asia)",
-          "Múltiples monedas y tokens",
-          "Centralizado"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT y más 50 otros",
-          "Multidivisa",
-          "Centralizado"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Conecta con más de 30 exchanges descentralizados (Uniswap, SushiSwap, etc.)",
-          "Tokens Ethereum y ERC20",
-          "Descentralizado y sin confianza"
-        ]
-      },
       "cta": "Continuar",
       "kyc": {
         "notAvailable": "{{provider}} no está disponible en tu ubicación",
@@ -1285,7 +1313,7 @@
       "used": "Utilizado",
       "firmwareAvailable": "El firmware está desactualizado:",
       "firmwareUpToDate": "El firmware está actualizado:",
-      "genuine": "El dispositivo es original",
+      "genuine": "El dispositivo es auténtico",
       "incomplete": "No se reconocieron algunas aplicaciones. Desinstálalas y luego vuelve a instalarlas."
     },
     "applist": {
@@ -1412,6 +1440,15 @@
       "removeApps": "Desinstalar todas las aplicaciones antes de actualizar",
       "update": "Firmware actualizado",
       "updateBtn": "Actualizar firmware",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "La versión {{version}} del firmware está disponible",
       "contactSupport": "Ponte en contacto con Soporte",
       "deprecated": "La versión de firmware del dispositivo es demasiado antigua para poder actualizarla. Contacta al Soporte de Ledger para obtener un reemplazo.",
@@ -2436,7 +2473,7 @@
       "addLocalApp": "Añadir una aplicación local",
       "addLocalAppDesc": "Explorar archivos locales y añadir una aplicación local usando un manifiesto local",
       "addLocalAppButton": "Explorar",
-      "runLocalAppDeleteButton": "Borrar",
+      "runLocalAppDeleteButton": "Eliminar",
       "runLocalAppOpenButton": "Abrir"
     },
     "currencies": {
@@ -2448,7 +2485,7 @@
     },
     "profile": {
       "password": "Bloqueo por contraseña",
-      "passwordDesc": "Define una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
+      "passwordDesc": "Elige una contraseña para proteger los datos de Ledger Live en tu PC, como nombres de cuentas, saldos, transacciones y direcciones públicas.",
       "passwordAutoLock": "Bloqueo automático",
       "passwordAutoLockDesc": "Bloquear Ledger Live automáticamente cuando esté inactivo.",
       "changePassword": "Cambiar contraseña",
@@ -2484,6 +2521,10 @@
         "apiTrongridProxy": {
           "title": "Usar TronGrid.io",
           "description": "Usar trongrid directamente sin el proxy de Ledger"
+        },
+        "tezosJS": {
+          "title": "use Tezos JS impl",
+          "description": "Use Tezos JS impl"
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -3208,7 +3249,7 @@
           "title": "Reparar tu Nano S",
           "desc": "¿Cuál es el mensaje que muestra tu dispositivo?",
           "mcuOutdated": "El firmware de la MCU está desactualizado",
-          "mcuNotGenuine": "El firmware de la MCU no es original",
+          "mcuNotGenuine": "MCU firmware is not genuine",
           "repairInstructions": "Sigue las instrucciones de reparación del dispositivo",
           "updateInstructions": "Sigue las instrucciones de actualización del dispositivo",
           "somethingElse": "Otros"
