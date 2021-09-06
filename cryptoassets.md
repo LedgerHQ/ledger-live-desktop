@@ -25,7 +25,6 @@
 | Stakenet | XSN | YES | stakenet |
 | Stealth | XST | YES | stealthcoin |
 | Stellar | XLM | YES | stellar |
-| Stratis | STRAT | YES | stratis |
 | Tezos | XTZ | YES | tezos |
 | Tron | TRX | YES | tron |
 | Vertcoin | VTC | YES | vertcoin |
