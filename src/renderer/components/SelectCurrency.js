@@ -117,6 +117,9 @@ const SelectCurrency = <C: Currency>({
   );
 };
 
+const OptionMultilineContainer = styled(Box)`
+  line-height: 1.3em;
+`;
 const CurrencyLabel = styled(Text).attrs(() => ({
   color: "palette.text.shade60",
   ff: "Inter|SemiBold",
@@ -152,7 +155,7 @@ export function CurrencyOption({
     </>
   ) : (
     <>
-      <Box flex="1">
+      <OptionMultilineContainer flex="1">
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
           {currency.name}
         </Text>
@@ -161,7 +164,7 @@ export function CurrencyOption({
             {currency.ticker}
           </Text>
         </Box>
-      </Box>
+      </OptionMultilineContainer>
       {currency.parentCurrency ? (
         <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
       ) : null}
