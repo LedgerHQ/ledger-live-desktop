@@ -83,6 +83,10 @@ const filterOption = o => (candidate, input) => {
   return [false, false];
 };
 
+const OptionMultilineContainer = styled(Box)`
+  line-height: 1.3em;
+`;
+
 type AccountOptionProps = {
   account: AccountLike,
   isValue?: boolean,
@@ -121,7 +125,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
       </Box>
     </>
   ) : (
-    <Box flex="1">
+    <OptionMultilineContainer flex="1">
       <Box flex="1" horizontal alignItems="center">
         <Box flex="0 1 auto">
           <Ellipsis ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
@@ -140,7 +144,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
           showCode
         />
       </Box>
-    </Box>
+    </OptionMultilineContainer>
   );
 
   return (
