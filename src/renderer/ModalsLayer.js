@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Transition } from "react-transition-group";
 import { connect } from "react-redux";
@@ -36,6 +36,7 @@ const ModalsLayer = ({ visibleModals }: *) => {
     ({ name, MODAL_SHOW_ONCE }) =>
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
+  useEffect(() => console.log({ visibleModals, filteredModals }), [filteredModals, visibleModals]);
   return (
     <Transition
       in={filteredModals.length > 0}
@@ -62,11 +63,17 @@ const ModalsLayer = ({ visibleModals }: *) => {
   );
 };
 
-const visibleModalsSelector = createSelector(modalsStateSelector, state =>
-  Object.keys(state)
+const visibleModalsSelector = createSelector(modalsStateSelector, state => {
+  console.log(
+    { raw: state },
+    Object.keys(state)
+      .filter((name: string) => !!modals[name] && state[name].isOpened)
+      .map((name: string) => ({ name, ...state[name].data })),
+  );
+  return Object.keys(state)
     .filter((name: string) => !!modals[name] && state[name].isOpened)
-    .map((name: string) => ({ name, ...state[name].data })),
-);
+    .map((name: string) => ({ name, ...state[name].data }));
+});
 
 const mapStateToProps = createStructuredSelector({
   visibleModals: visibleModalsSelector,

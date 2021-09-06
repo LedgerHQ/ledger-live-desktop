@@ -107,6 +107,7 @@ export type SettingsState = {
   allowExperimentalApps: boolean,
   enablePlatformDevTools: boolean,
   catalogProvider: string,
+  USBTroubleshootingIndex?: number,
   swap: {
     hasAcceptedIPSharing: false,
     selectableCurrencies: string[],
@@ -167,6 +168,7 @@ const INITIAL_STATE: SettingsState = {
   allowExperimentalApps: false,
   enablePlatformDevTools: false,
   catalogProvider: "production",
+  USBTroubleshootingIndex: undefined,
   swap: {
     hasAcceptedIPSharing: false,
     acceptedProviders: [],
@@ -421,6 +423,8 @@ export const shareAnalyticsSelector = (state: State) => state.settings.shareAnal
 export const selectedTimeRangeSelector = (state: State) => state.settings.selectedTimeRange;
 export const hasInstalledAppsSelector = (state: State) => state.settings.hasInstalledApps;
 export const carouselVisibilitySelector = (state: State) => state.settings.carouselVisibility;
+export const USBTroubleshootingIndexSelector = (state: State) =>
+  state.settings.USBTroubleshootingIndex;
 
 export const allowDebugAppsSelector = (state: State) => state.settings.allowDebugApps;
 export const allowExperimentalAppsSelector = (state: State) => state.settings.allowExperimentalApps;

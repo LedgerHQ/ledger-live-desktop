@@ -1,12 +1,10 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
-import IconHelp from "~/renderer/icons/Help";
 
 type Props = {
   buttonProps?: *,
@@ -15,17 +13,15 @@ type Props = {
 
 const ConnectTroubleshootingHelpButton = ({ buttonProps, textColor }: Props) => {
   const { t } = useTranslation();
-  const boxProps = textColor ? { color: textColor } : {};
+  const history = useHistory();
+
+  const onStartTroubleshootingFlow = useCallback(() => {
+    history.push({ pathname: "USBTroubleshooting" });
+  }, [history]);
 
   return (
-    <Button
-      onClick={() => openURL(urls.troubleshootingUSB)}
-      style={{ margin: "0 10px" }}
-      {...buttonProps}
-    >
-      <Box horizontal alignItems="center" {...boxProps}>
-        <IconHelp size={16} />
-        {" "}
+    <Button onClick={onStartTroubleshootingFlow} my={1} {...buttonProps}>
+      <Box horizontal alignItems="center" color={textColor} id="USBTroubleshooting-startFlow">
         {t("common.help")}
       </Box>
     </Button>

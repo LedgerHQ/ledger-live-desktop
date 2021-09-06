@@ -12,6 +12,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
+import USBTroubleshooting from "~/renderer/screens/USBTroubleshooting";
 import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
@@ -42,6 +43,7 @@ import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
+import useUSBTroubleshooting from "~/renderer/hooks/useUSBTroubleshooting";
 import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
@@ -64,6 +66,7 @@ export default function Default() {
   const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
   const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
+  useUSBTroubleshooting();
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -153,6 +156,10 @@ export default function Default() {
                           render={(props: any) => <Asset {...props} />}
                         />
                         <Route path="/swap" render={props => <SwapComponent {...props} />} />
+                        <Route
+                          path="/USBTroubleshooting"
+                          render={props => <USBTroubleshooting {...props} />}
+                        />
                       </Switch>
                     </Page>
                     <Drawer />
