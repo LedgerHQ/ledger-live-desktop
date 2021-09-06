@@ -88,11 +88,13 @@ type AccountOptionProps = {
   isValue?: boolean,
   disabled?: boolean,
   singleLineLayout?: boolean,
+  hideDerivationTag?: boolean,
 };
 export const AccountOption = React.memo<AccountOptionProps>(function AccountOption({
   account,
   isValue,
   disabled,
+  hideDerivationTag = false,
   singleLineLayout = true,
 }: AccountOptionProps) {
   const currency = getAccountCurrency(account);
@@ -112,7 +114,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
             {name}
           </Ellipsis>
         </Box>
-        <AccountTagDerivationMode account={account} />
+        {!hideDerivationTag && <AccountTagDerivationMode account={account} />}
       </Box>
       <Box>
         <FormattedVal color="palette.text.shade60" val={balance} unit={unit} showCode />
@@ -126,7 +128,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
             {name}
           </Ellipsis>
         </Box>
-        <AccountTagDerivationMode account={account} margin={0} />
+        {!hideDerivationTag && <AccountTagDerivationMode account={account} margin="0" />}
       </Box>
       <Box>
         <FormattedVal
