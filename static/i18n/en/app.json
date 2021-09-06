@@ -320,6 +320,15 @@
           "dateOfBirthValidationError": "Enter a valid date of birth"
         }
       }
+    },
+    "exchangeDrawer": {
+      "title": "Confirm your Exchange",
+      "completed": {
+        "title": "Pending Operation",
+        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
+        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+        "seeDetails": "See details"
+      }
     }
   },
   "swap": {
@@ -1353,6 +1362,14 @@
       "provider": "Provider",
       "payoutNetworkFees": "Payout fees",
       "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+    },
+    "swap2": {
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive",
+      "provider": "Provider",
+      "fees": "Network Fees",
+      "sourceAccount": "Source Account",
+      "targetAccount": "Target Account"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
