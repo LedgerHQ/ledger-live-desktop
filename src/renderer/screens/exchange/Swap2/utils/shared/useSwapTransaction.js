@@ -133,12 +133,13 @@ const useSwapTransaction = (): SwapTransactionType => {
       const amount = await bridge.estimateMaxSpendable({
         account: bridgeTransaction.account,
         parentAccount: bridgeTransaction.parentAccount,
+        transaction: bridgeTransaction?.transaction,
       });
       setFromAmount(amount);
     };
 
     if (isMaxEnabled) updateAmountUsingMax();
-  }, [isMaxEnabled, fromState.account]);
+  }, [isMaxEnabled, fromState.account, bridgeTransaction?.transaction?.feesStrategy]);
 
   /* Fetch and update provider rates. */
   const { account: fromAccount, parentAccount: fromParentAccount } = fromState;
