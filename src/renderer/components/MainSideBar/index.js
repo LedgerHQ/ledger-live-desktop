@@ -240,6 +240,10 @@ const MainSideBar = () => {
     push("/lend");
   }, [push, firstTimeLend, dispatch]);
 
+  const handleClickMarket = useCallback(() => {
+    push("/market");
+  }, [push]);
+
   const handleClickSwap = useCallback(() => {
     push("/swap");
   }, [push]);
@@ -304,6 +308,14 @@ const MainSideBar = () => {
                 iconActiveColor="wallet"
                 isActive={location.pathname.startsWith("/platform")}
                 onClick={handleClickCatalog}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"market"}
+                label={"Market"}
+                icon={IconApps}
+                iconActiveColor="wallet"
+                onClick={handleClickMarket}
                 collapsed={secondAnim}
               />
               <SideBarListItem

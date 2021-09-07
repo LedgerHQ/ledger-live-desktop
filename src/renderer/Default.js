@@ -13,6 +13,7 @@ import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
 import Account from "~/renderer/screens/account";
+import Market from "~/renderer/screens/market";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
@@ -153,6 +154,7 @@ export default function Default() {
                           render={(props: any) => <Asset {...props} />}
                         />
                         <Route path="/swap" render={props => <SwapComponent {...props} />} />
+                        <Route path="/market" render={props => <Market {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />
