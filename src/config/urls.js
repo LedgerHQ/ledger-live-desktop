@@ -197,7 +197,5 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360020849134-Track-your-transaction?docs=true",
   elrond: {
     website: "https://elrond.com",
-    github: "https://github.com/ElrondNetwork",
-    twitter: "https://twitter.com/ElrondNetwork",
   },
 };
