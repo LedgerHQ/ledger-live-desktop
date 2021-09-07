@@ -67,6 +67,12 @@
     "backToPortfolio": "Back to Portfolio",
 
     "solutions": {
+      "intro": {
+        "title": "Troubleshoot USB connection",
+        "description": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
+        "startCTA": "Lets fix it!",
+        "backCTA": "Go back"
+      },
       "runAsAdmin": {
         "title": "Run Ledger Live as Administrator",
         "bullets": [

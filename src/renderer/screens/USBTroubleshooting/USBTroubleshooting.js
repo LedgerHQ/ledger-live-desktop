@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo, useEffect } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { useMachine } from "@xstate/react";
 import USBTroubleshootingMachine from "./USBTroubleshootingMachine";
+import Intro from "./solutions/Intro";
 import ArrowRightIcon from "~/renderer/icons/ArrowRight";
 import RepairFunnel from "./solutions/RepairFunnel";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -38,6 +39,9 @@ const USBTroubleshooting = () => {
 
   // Maybe extract an index from the state
   const { USBTroubleshootingIndex } = locationState || {};
+  // Show the splash screen only if we are not already mid troubleshooting
+  const [showIntro, setShowIntro] = useState(true)//USBTroubleshootingIndex === undefined);
+
   const [state, sendEvent] = useMachine(USBTroubleshootingMachine, {
     context: { currentIndex: USBTroubleshootingIndex },
   });
@@ -59,7 +63,7 @@ const USBTroubleshooting = () => {
     history.push({ pathname: "/" });
   }, [dispatch, history]);
 
-  return (
+  return showIntro ? <Intro onStart={()=>setShowIntro(false)} onBack={onExit} /> : (
     <Wrapper>
       <SolutionComponent number={currentIndex + 1} sendEvent={sendEvent} done={done} />
       {!isLastStep && <ConnectionTester onExit={onExit} />}
