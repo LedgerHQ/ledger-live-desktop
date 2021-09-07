@@ -15,9 +15,11 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServer";
+
 import {
   accountToPlatformAccount,
   currencyToPlatformCurrency,
+  getPlatformTransactionSignFlowInfos,
 } from "@ledgerhq/live-common/lib/platform/converters";
 
 import type {
@@ -247,10 +249,16 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
 
       tracking.platformSignTransactionRequested(manifest);
 
+      const { canEditFees, liveTx, hasFeesProvided } = getPlatformTransactionSignFlowInfos(
+        platformTransaction,
+      );
+
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_SIGN_TRANSACTION", {
-            transactionData: platformTransaction,
+            canEditFees,
+            stepId: canEditFees && !hasFeesProvided ? "amount" : "summary",
+            transactionData: liveTx,
             useApp: params.useApp,
             account,
             parentAccount: null,

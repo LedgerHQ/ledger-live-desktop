@@ -212,6 +212,55 @@
     "openButton": "Ouvrir",
     "disconnectButton": "Déconnecter"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Swap",
+      "history": "Historique"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Changer de prestataire",
+        "quote": "Prix",
+        "receive": "Recevoir",
+        "onChain": "On-chain",
+        "offChain": "Off-chain"
+      },
+      "details": {
+        "label": {
+          "provider": "Prestataire",
+          "rate": "Prix",
+          "fees": "Frais",
+          "target": "Compte destinataire"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "Pas de compte {{target}}",
+        "noAccountCTA": "Ajouter un compte"
+      },
+      "from": {
+        "title": "De",
+        "max": "Max",
+        "accountPlaceholder": "Choisir la source"
+      },
+      "to": {
+        "title": "À"
+      },
+      "notAvailable": "Service temporairement indisponible, ou non disponible dans votre pays"
+    },
+    "history": {
+      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "empty": {
+        "title": "Vos swaps réalisés apparaîtront ici.",
+        "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
+      },
+      "export": "Exporter les opérations",
+      "exporting": "Exportation..."
+    }
+  },
   "swap": {
     "title": "Swap",
     "titleCrypto": "Échanger {{currency}}",
@@ -250,27 +299,6 @@
       "title": "Choisir un prestataire pour le swap",
       "learnMore": "Qu'est-ce que le Swap ?",
       "kycRequired": "Vérification d'identité nécessaire",
-      "wyre": {
-        "bullets": [
-          "USA uniquement (Europe, Afrique et Asie à venir)",
-          "Multi coins et tokens",
-          "Centralisé"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT et plus de 50 autres",
-          "Multidevises",
-          "Centralisé"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
-          "Ethereum et tokens ERC-20",
-          "Décentralisé et se passant des tiers de confiance"
-        ]
-      },
       "cta": "Continuer",
       "kyc": {
         "notAvailable": "{{provider}} non disponible dans votre région",
@@ -1412,6 +1440,15 @@
       "removeApps": "Désinstaller toutes les applications avant de mettre à jour",
       "update": "Mise à jour du micrologiciel",
       "updateBtn": "Mettre à jour le micrologiciel",
+      "banner": {
+        "warning": "Mise à jour {{latestFirmware}} du micrologiciel disponible",
+        "cta": "Accéder au Gestionnaire",
+        "old": {
+          "warning": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
+          "cta": "Contacter l'Assistance"
+        },
+        "cta2": "Mettre à jour le micrologiciel"
+      },
       "latest": "Version {{version}} du micrologiciel disponible",
       "contactSupport": "Contacter l'Assistance",
       "deprecated": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
@@ -2403,7 +2440,7 @@
         "listTitle": "Sur l'application mobile Ledger Live :",
         "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
-        "step3": "Scannez le <1><0>code QR</0></1> jusqu'à ce que la barre soit à 100 %."
+        "step3": "Scannez le <highlight>code QR</highlight> jusqu'à ce que la barre soit à 100 %."
       }
     },
     "display": {
@@ -2485,6 +2522,10 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
+        "tezosJS": {
+          "title": "Utiliser l'impl Tezos JS",
+          "description": "Utiliser l'impl Tezos JS"
+        },
         "experimentalLanguages": {
           "title": "Tester les traductions",
           "description": "Affichez les langues non publiées dans la liste Langue d'affichage de l'onglet Général."
@@ -2544,7 +2585,7 @@
     },
     "exportLogs": {
       "title": "Enregistrer les logs",
-      "desc": "Sauvegardez les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
+      "desc": "Sauvegarder les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "btn": "Sauvegarder"
     },
     "accounts": {

@@ -1,7 +1,6 @@
 // @flow
 
 import React from "react";
-import styled from "styled-components";
 import { useBalanceHistoryWithCountervalue } from "~/renderer/actions/portfolio";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
@@ -12,10 +11,6 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import Chart from "~/renderer/components/ChartPreview";
 import useTheme from "~/renderer/hooks/useTheme";
-
-const Placeholder = styled.div`
-  height: 14px;
-`;
 
 type Props = {
   account: Account | TokenAccount,
@@ -41,7 +36,6 @@ function Body({ account, range }: Props) {
             animateTicker={false}
             showCode
             fontSize={3}
-            placeholder={<Placeholder />}
             color="palette.text.shade80"
           />
         </Box>
