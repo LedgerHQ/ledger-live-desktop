@@ -42,6 +42,7 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
   .filter(Boolean);
 
 export const experimentalFeatures: Feature[] = [
+  /*
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
@@ -50,6 +51,7 @@ export const experimentalFeatures: Feature[] = [
     valueOn: "tezos",
     valueOff: "",
   },
+  */
   {
     type: "toggle",
     name: "API_TRONGRID_PROXY",
