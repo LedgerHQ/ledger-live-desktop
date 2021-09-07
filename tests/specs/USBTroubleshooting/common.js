@@ -41,7 +41,7 @@ export const generateTest = (platform, solutionCount) => {
     const deviceOption = platform === "linux" ? "nanoS" : platform === "mac" ? "nanoX" : "blue";
     await USBTroubleshootingPage.onChooseDevice(deviceOption);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
-      customSnapshotIdentifier: `USBTroubleshooting-${platform}-${deviceOption}-repairModal`,
+      customSnapshotIdentifier: `USBTroubleshooting-${platform}-${deviceOption}-final`,
     });
   });
 };
