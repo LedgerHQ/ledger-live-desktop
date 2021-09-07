@@ -3,6 +3,8 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { closeAllModal } from "~/renderer/actions/modals";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 
@@ -14,10 +16,12 @@ type Props = {
 const ConnectTroubleshootingHelpButton = ({ buttonProps, textColor }: Props) => {
   const { t } = useTranslation();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const onStartTroubleshootingFlow = useCallback(() => {
     history.push({ pathname: "USBTroubleshooting" });
-  }, [history]);
+    dispatch(closeAllModal());
+  }, [dispatch, history]);
 
   return (
     <Button onClick={onStartTroubleshootingFlow} my={1} {...buttonProps}>
