@@ -24,6 +24,7 @@ import { Item, MockContainer, EllipsesText, MockedGlobalStyle } from "./shared";
  */
 const helpfulEvents = [
   { name: "opened", event: { type: "opened" } },
+  { name: "deviceChange", event: { type: "deviceChange", device: null } },
   {
     name: "listApps",
     event: {
