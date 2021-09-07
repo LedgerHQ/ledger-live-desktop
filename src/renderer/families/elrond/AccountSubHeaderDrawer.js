@@ -43,7 +43,7 @@ export function AccountSubHeaderDrawer({ isOpen, closeDrawer }: Props) {
       onRequestClose={closeDrawer}
       direction="left"
     >
-      <Box px={40} py={60}>
+      <Box px={40} py={50}>
         <Title>{t("elrond.account.subHeader.title")}</Title>
         <Box py={3}>
           <Description>{t("elrond.account.subHeader.description")}</Description>
@@ -56,24 +56,9 @@ export function AccountSubHeaderDrawer({ isOpen, closeDrawer }: Props) {
         </Box>
         <Divider mt={2} />
         <Box mt={3}>
-          <LinkTitle>{t("elrond.account.subHeader.website.title")}</LinkTitle>
           <LinkWithExternalIcon
-            label={<Trans i18nKey="elrond.account.subHeader.website.linkTitle" />}
+            label={<Trans i18nKey="elrond.account.subHeader.website" />}
             onClick={() => openURL(urls.elrond.website)}
-          />
-        </Box>
-        <Box mt={2}>
-          <LinkTitle>{t("elrond.account.subHeader.github.title")}</LinkTitle>
-          <LinkWithExternalIcon
-            label={<Trans i18nKey="elrond.account.subHeader.github.linkTitle" />}
-            onClick={() => openURL(urls.elrond.github)}
-          />
-        </Box>
-        <Box mt={2}>
-          <LinkTitle>{t("elrond.account.subHeader.twitter.title")}</LinkTitle>
-          <LinkWithExternalIcon
-            label={<Trans i18nKey="elrond.account.subHeader.twitter.linkTitle" />}
-            onClick={() => openURL(urls.elrond.twitter)}
           />
         </Box>
       </Box>
