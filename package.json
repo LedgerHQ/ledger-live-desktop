@@ -5,7 +5,7 @@
   "name": "ledger-live-desktop",
   "productName": "Ledger Live",
   "description": "Ledger Live - Desktop",
-  "version": "2.32.2",
+  "version": "2.33.0",
   "author": "Ledger Live Team <team-live@ledger.fr>",
   "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
   "license": "MIT",
