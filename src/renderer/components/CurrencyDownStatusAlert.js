@@ -13,13 +13,15 @@ const ServiceStatusWarning = createCustomErrorClass("ServiceStatusWarning");
 
 const CurrencyDownStatusAlert = ({ currencies }: Props) => {
   const errors = [];
-  const { incidents } = useFilteredServiceStatus({ currencies: currencies.map(c => c.name) });
+  const { incidents } = useFilteredServiceStatus({ tickers: currencies.map(c => c.ticker) });
 
   if (currencies.some(c => c.id === "stratis")) errors.push(new StratisDown2021Warning());
 
-  incidents.forEach(inc => {
-    errors.push(new ServiceStatusWarning(inc.name));
-  });
+  incidents
+    .filter(c => c.components && c.components.length > 0)
+    .forEach(inc => {
+      errors.push(new ServiceStatusWarning(inc.name));
+    });
 
   return errors.length > 0 ? (
     <div>
