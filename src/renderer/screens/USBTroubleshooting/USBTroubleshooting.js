@@ -40,7 +40,7 @@ const USBTroubleshooting = () => {
   // Maybe extract an index from the state
   const { USBTroubleshootingIndex } = locationState || {};
   // Show the splash screen only if we are not already mid troubleshooting
-  const [showIntro, setShowIntro] = useState(true)//USBTroubleshootingIndex === undefined);
+  const [showIntro, setShowIntro] = useState(USBTroubleshootingIndex === undefined);
 
   const [state, sendEvent] = useMachine(USBTroubleshootingMachine, {
     context: { currentIndex: USBTroubleshootingIndex },
@@ -63,7 +63,9 @@ const USBTroubleshooting = () => {
     history.push({ pathname: "/" });
   }, [dispatch, history]);
 
-  return showIntro ? <Intro onStart={()=>setShowIntro(false)} onBack={onExit} /> : (
+  return showIntro ? (
+    <Intro onStart={() => setShowIntro(false)} onBack={onExit} />
+  ) : (
     <Wrapper>
       <SolutionComponent number={currentIndex + 1} sendEvent={sendEvent} done={done} />
       {!isLastStep && <ConnectionTester onExit={onExit} />}
