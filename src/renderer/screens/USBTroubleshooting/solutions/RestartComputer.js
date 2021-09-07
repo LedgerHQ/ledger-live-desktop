@@ -10,19 +10,21 @@ import illustration from "~/renderer/images/USBTroubleshooting/illus3.png";
 
 const RestartComputerSolution = ({ number = 1 }: { number?: number }) => {
   const { t } = useTranslation();
-  const bullets = Array.from(
-    t("USBTroubleshooting.solutions.restartComputer.bullets", { returnObjects: true }),
-  );
+  const bullets = [
+    t("connectTroubleshooting.steps.2.restart.bullets.0"),
+    t("connectTroubleshooting.steps.2.restart.bullets.1"),
+    t("connectTroubleshooting.steps.2.restart.bullets.2"),
+  ];
 
   return (
     <Wrapper>
-      <Number>{t("USBTroubleshooting.solution", { number })}</Number>
-      <Title>{t("USBTroubleshooting.solutions.restartComputer.title")}</Title>
+      <Number>{t("connectTroubleshooting.solution", { number })}</Number>
+      <Title>{t("connectTroubleshooting.steps.2.restart.title")}</Title>
       <Content>
         <Illustration image={illustration} />
         <Box flex={2}>
           <Text mb={3} ff="Inter|SemiBold" color="palette.text.shade90" fontSize={5}>
-            {t("USBTroubleshooting.followSteps")}
+            {t("connectTroubleshooting.followSteps")}
           </Text>
           {bullets.map((bullet, i) => (
             <BulletRow

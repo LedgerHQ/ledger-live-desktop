@@ -57,114 +57,6 @@
       "CTA": "Continue"
     }
   },
-  "USBTroubleshooting": {
-    "solution": "Solution #{{number}}",
-    "followSteps": "Folow these steps",
-    "previousSolution": "Previous solution",
-    "nextSolution": "Next solution",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
-
-    "solutions": {
-      "intro": {
-        "title": "Troubleshoot USB connection",
-        "description": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "startCTA": "Lets fix it!",
-        "backCTA": "Go back"
-      },
-      "runAsAdmin": {
-        "title": "Run Ledger Live as Administrator",
-        "bullets": [
-          "Quit Ledger Live.",
-          "Right-click the Ledger Live application.",
-          "Select “Run as Administrator”.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "differentPort": {
-        "title": "Try different USB ports",
-        "bullets": [
-          "Change the USB port used on your computer.",
-          "Remove any USB dongles",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "updateUdevRules": {
-        "title": "Update the udev rules on Linux",
-        "bullets": [
-          "Enter the following command in a terminal to automatically add the rules and reload udev.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "changeUSBCable": {
-        "title": "Change the USB cable",
-        "bullets": [
-          "Use the original USB cable if possible.",
-          "Try a different USB cable, making sure it supports data transfer.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "restartComputer": {
-        "title": "Restart your computer",
-        "bullets": [
-          "Restart your computer.",
-          "Start Ledger Live.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "turnOffAntivirus": {
-        "title": "Turn off Anti-virus and VPN",
-        "bullets": [
-          "Turn off any anti-virus, firewall, and VPN software.",
-          "Connect and unlock your device to see if it’s detected.",
-          "Whitelist Ledger Live in your anti-virus if that worked."
-        ]
-      },
-      "tryAnotherComputer": {
-        "title": "Try another computer",
-        "bullets": [
-          "Go to <0><0>ledger.com/ledger-live</0></0> on another computer to download and install Ledger Live.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "updateUSBDeviceDrivers": {
-        "title": "Update the USB device drivers",
-        "bullets": [
-          "Visit the <0><0>support article</0></0>.",
-          "Follow the instructions to update USB device drivers.",
-          "Connect and unlock your device to see if it's detected."
-        ]
-      },
-      "enableFullDiskAccess": {
-        "title": "Enable Full Disk Access",
-        "bullets": [
-          "Open “System Preferences”.",
-          "Go to “Security & Privacy”.",
-          "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-          "Add “Ledger Live”.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "resetNVRAM": {
-        "title": "Reset NVRAM",
-        "bullets": [
-          "If your Mac has an intel processor, follow <0><0>Apple’s instructions</0></0> to reset the NVRAM.",
-          "Connect and unlock your device to see if it’s detected."
-        ]
-      },
-      "repairFunnel": {
-        "title": "What’s your device?",
-        "subtitle": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support",
-        "contactSupport": {
-          "title": "USB connection problem still not fixed?",
-          "subtitle": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "ctaBack": "Back to portfolio",
-          "ctaContact": "Contact Support"
-        }
-      }
-    }
-  },
   "common": {
     "never": "Never",
     "apply": "Apply",
@@ -3243,6 +3135,9 @@
     "previousSolution": "Previous solution",
     "followSteps": "Follow these steps",
     "supportArticle": "Support article",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Troubleshoot USB connection",
@@ -3266,7 +3161,6 @@
           "cta": "Set Rules",
           "bullets": {
             "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
             "1": "Connect and unlock your device to see if it’s detected."
           }
         }

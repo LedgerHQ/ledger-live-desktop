@@ -25,7 +25,7 @@ const Intro = ({ onStart, onBack }: { onStart: () => void, onBack: () => void })
     <Box alignItems="center" justifyContent="center" flex={1}>
       <Illustration image={illustration} />
       <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22} mt={48} mb={12}>
-        {t("USBTroubleshooting.solutions.intro.title")}
+        {t("connectTroubleshooting.steps.entry.title")}
       </Text>
       <Text
         mb={48}
@@ -34,12 +34,12 @@ const Intro = ({ onStart, onBack }: { onStart: () => void, onBack: () => void })
         fontSize={4}
         style={{ maxWidth: 480, textAlign: "center" }}
       >
-        {t("USBTroubleshooting.solutions.intro.description")}
+        {t("connectTroubleshooting.steps.entry.desc")}
       </Text>
       <Box horizontal>
-        <Button onClick={onBack}>{t("USBTroubleshooting.solutions.intro.backCTA")}</Button>
+        <Button onClick={onBack}>{t("connectTroubleshooting.steps.entry.back")}</Button>
         <Button ml={3} primary onClick={onStart} id="USBTroubleshooting-intro-start">
-          {t("USBTroubleshooting.solutions.intro.startCTA")}
+          {t("connectTroubleshooting.steps.entry.cta")}
         </Button>
       </Box>
     </Box>

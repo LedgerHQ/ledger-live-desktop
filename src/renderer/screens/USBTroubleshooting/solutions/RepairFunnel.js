@@ -78,9 +78,9 @@ const RepairFunnelSolution = ({
 
   return !done ? (
     <Wrapper>
-      <Title>{t("USBTroubleshooting.solutions.repairFunnel.title")}</Title>
+      <Title>{t("connectTroubleshooting.steps.4.deviceSelection.title")}</Title>
       <Subtitle style={{ padding: "0 50px" }} mb={36} mt={12}>
-        {t("USBTroubleshooting.solutions.repairFunnel.subtitle")}
+        {t("connectTroubleshooting.steps.4.deviceSelection.desc")}
       </Subtitle>
       <DeviceSelectContainer>
         <RepairDeviceButton
@@ -115,16 +115,16 @@ const RepairFunnelSolution = ({
       <Content>
         <Illustration height={193} image={illustration} />
       </Content>
-      <Title>{t("USBTroubleshooting.solutions.repairFunnel.contactSupport.title")}</Title>
+      <Title>{t("connectTroubleshooting.steps.4.notFixed.title")}</Title>
       <Subtitle style={{ padding: "0 50px" }} mb={36} mt={12}>
-        {t("USBTroubleshooting.solutions.repairFunnel.contactSupport.subtitle")}
+        {t("connectTroubleshooting.steps.4.notFixed.desc")}
       </Subtitle>
       <Box horizontal>
         <Button secondary mr={2} onClick={onBackToPortfolio}>
-          {t("USBTroubleshooting.solutions.repairFunnel.contactSupport.ctaBack")}
+          {t("connectTroubleshooting.steps.4.notFixed.back")}
         </Button>
         <Button primary onClick={onContactSupport}>
-          {t("USBTroubleshooting.solutions.repairFunnel.contactSupport.ctaContact")}
+          {t("connectTroubleshooting.steps.4.notFixed.cta")}
         </Button>
       </Box>
     </Wrapper>

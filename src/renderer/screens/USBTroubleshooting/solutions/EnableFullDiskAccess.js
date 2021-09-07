@@ -10,19 +10,23 @@ import illustration from "~/renderer/images/USBTroubleshooting/illus1.png";
 
 const EnableFullDiskAccessSolution = ({ number = 1 }: { number?: number }) => {
   const { t } = useTranslation();
-  const bullets = Array.from(
-    t("USBTroubleshooting.solutions.enableFullDiskAccess.bullets", { returnObjects: true }),
-  );
+  const bullets = [
+    t("connectTroubleshooting.steps.3.mac.0.bullets.0"),
+    t("connectTroubleshooting.steps.3.mac.0.bullets.1"),
+    t("connectTroubleshooting.steps.3.mac.0.bullets.2"),
+    t("connectTroubleshooting.steps.3.mac.0.bullets.3"),
+    t("connectTroubleshooting.steps.3.mac.0.bullets.4"),
+  ];
 
   return (
     <Wrapper>
-      <Number>{t("USBTroubleshooting.solution", { number })}</Number>
-      <Title>{t("USBTroubleshooting.solutions.enableFullDiskAccess.title")}</Title>
+      <Number>{t("connectTroubleshooting.solution", { number })}</Number>
+      <Title>{t("connectTroubleshooting.steps.3.mac.0.title")}</Title>
       <Content>
         <Illustration image={illustration} />
         <Box flex={2}>
           <Text mb={3} ff="Inter|SemiBold" color="palette.text.shade90" fontSize={5}>
-            {t("USBTroubleshooting.followSteps")}
+            {t("connectTroubleshooting.followSteps")}
           </Text>
           {bullets.map((bullet, i) => (
             <BulletRow

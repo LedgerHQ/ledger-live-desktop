@@ -27,7 +27,7 @@ const StepWrapper = styled(Box).attrs({
   mt: 32,
 })`
   position: absolute;
-  bottom: 32px;
+  bottom: 12px;
   width: 100%;
 `;
 

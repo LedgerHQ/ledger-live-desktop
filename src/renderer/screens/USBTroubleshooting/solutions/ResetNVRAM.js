@@ -25,20 +25,20 @@ const ResetNVRAMSolution = ({ number = 1 }: { number?: number }) => {
 
   return (
     <Wrapper>
-      <Number>{t("USBTroubleshooting.solution", { number })}</Number>
-      <Title>{t("USBTroubleshooting.solutions.resetNVRAM.title")}</Title>
+      <Number>{t("connectTroubleshooting.solution", { number })}</Number>
+      <Title>{t("connectTroubleshooting.steps.3.mac.1.title")}</Title>
       <Content>
         <Illustration image={illustration} />
         <Box flex={2}>
           <Text mb={3} ff="Inter|SemiBold" color="palette.text.shade90" fontSize={5}>
-            {t("USBTroubleshooting.followSteps")}
+            {t("connectTroubleshooting.followSteps")}
           </Text>
           <BulletRow
             step={{
               icon: <BulletRowIcon>1</BulletRowIcon>,
               desc: (
                 <Text ff="Inter|Medium" fontSize={4}>
-                  <Trans i18nKey="USBTroubleshooting.solutions.resetNVRAM.bullets.0">
+                  <Trans i18nKey="connectTroubleshooting.steps.3.mac.1.bullets.0">
                     <TranslatedLink onClick={onClickLink} />
                   </Trans>
                 </Text>
@@ -50,7 +50,7 @@ const ResetNVRAMSolution = ({ number = 1 }: { number?: number }) => {
               icon: <BulletRowIcon>2</BulletRowIcon>,
               desc: (
                 <Text ff="Inter|Medium" fontSize={4}>
-                  {t("USBTroubleshooting.solutions.resetNVRAM.bullets.1")}
+                  {t("connectTroubleshooting.steps.3.mac.1.bullets.1")}
                 </Text>
               ),
             }}

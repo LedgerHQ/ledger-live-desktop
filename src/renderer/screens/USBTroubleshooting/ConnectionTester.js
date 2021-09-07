@@ -17,7 +17,7 @@ import Animation from "~/renderer/animations";
 const Wrapper: ThemedComponent<{}> = styled(Box)`
   align-items: center;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 12px;
   min-height: 80px;
   padding: 20px;
   border: 1px solid ${p => p.theme.colors.palette.text.shade20};
@@ -55,7 +55,7 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
         <Box horizontal alignItems="center" justifyContent="center">
           <IconCheckFull size={16} />
           <Text ff="Inter|Medium" mx={2} fontSize={4} color="palette.primary.main">
-            {t("USBTroubleshooting.connected")}
+            {t("connectTroubleshooting.connected")}
           </Text>
           <Button
             ml={2}
@@ -64,14 +64,14 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
             event="USBTroubleshooting user success cta"
             id="USBTroubleshooting-backToPortfolio"
           >
-            {t("USBTroubleshooting.backToPortfolio")}
+            {t("connectTroubleshooting.backToPortfolio")}
           </Button>
         </Box>
       ) : (
         <Box color="palette.text.shade50" horizontal alignItems="center" justifyContent="center">
           <Spinner size={16} />
           <Text ff="Inter|Medium" fontSize={4} ml={2}>
-            {t("USBTroubleshooting.connecting")}
+            {t("connectTroubleshooting.connecting")}
           </Text>
         </Box>
       )}
