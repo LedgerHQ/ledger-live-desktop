@@ -131,7 +131,7 @@
   "operation": {
     "type": {
       "IN": "Получение",
-      "OUT": "Отправление",
+      "OUT": "Отправка",
       "CREATE": "Создано",
       "REVEAL": "Показано",
       "DELEGATE": "Делегировано",
@@ -213,52 +213,52 @@
     "disconnectButton": "Отключить"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "Обмен",
     "tabs": {
-      "exchange": "Exchange",
-      "history": "History"
+      "exchange": "Обмен",
+      "history": "История"
     },
     "form": {
       "providerDrawer": {
-        "title": "Change Provider",
-        "quote": "Quote",
-        "receive": "Receive",
-        "onChain": "On Chain",
-        "offChain": "Off Chain"
+        "title": "Сменить поставщика",
+        "quote": "Котировка",
+        "receive": "Получить",
+        "onChain": "В цепочке",
+        "offChain": "Вне цепочки"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "Поставщик",
+          "rate": "Курс",
+          "fees": "Комиссия",
+          "target": "Целевой счет"
         },
         "tooltip": {
-          "provider": "lorem ipsum",
-          "rate": "lorem ipsum",
-          "fees": "lorem ipsum"
+          "provider": "Поставщик",
+          "rate": "Курс",
+          "fees": "Комиссия"
         },
-        "noAccount": "You don't have {{target}} account",
-        "noAccountCTA": "Add account"
+        "noAccount": "У вас нет счёта {{target}}",
+        "noAccountCTA": "Добавить счёт"
       },
       "from": {
-        "title": "From",
-        "max": "Max",
-        "accountPlaceholder": "Select source"
+        "title": "Откуда",
+        "max": "Макс.",
+        "accountPlaceholder": "Выберите источник"
       },
       "to": {
-        "title": "To"
+        "title": "Куда"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country"
+      "notAvailable": "Услуга временно недоступна или недоступна в вашей стране"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Ваши обмены в настольном приложении не синхронизированы с мобильным приложением Ledger Live",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Здесь будут показаны ваши предыдущие обмены",
+        "description": "Вы ещё не меняли валюту, либо Ledger Live было сброшено."
       },
-      "export": "Export operations",
-      "exporting": "Exporting..."
+      "export": "Экспорт истории",
+      "exporting": "Экспортируем…"
     }
   },
   "swap": {
@@ -1441,13 +1441,13 @@
       "update": "Обновление прошивки",
       "updateBtn": "Обновить прошивку",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "Доступна версия прошивки {{latestFirmware}}",
+        "cta": "Перейти в Диспетчер",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "Версия прошивки устройства устарела и не может быть обновлена. Обратитесь в Поддержку Ledger для решения этого вопроса.",
+          "cta": "Связаться с поддержкой"
         },
-        "cta2": "Update firmware"
+        "cta2": "Обновить прошивку"
       },
       "latest": "Доступна новая версия прошивки {{version}}",
       "contactSupport": "Связаться с поддержкой",
@@ -2450,12 +2450,12 @@
       "themeDesc": "Выберите тему.",
       "counterValue": "Предпочтительная валюта",
       "counterValueDesc": "Выберите валюту для отображения состояния счёта и суммы операций.",
-      "region": "Регион",
-      "regionDesc": "Выберите регион, чтобы установить часовой пояс для Ledger Live.",
+      "region": "Страна",
+      "regionDesc": "Выберите страну, чтобы установить часовой пояс Ledger Live.",
       "stock": "Индикатор регионального рынка",
       "stockDesc": "Выберите «Западный», чтобы рост рыночной стоимости отображался синим цветом, либо «Восточный», чтобы рост рыночной стоимости отображался красным цветом.",
       "carouselVisibility": "Карусель",
-      "carouselVisibilityDesc": "Показывать карусель событий на странице Портфеля"
+      "carouselVisibilityDesc": "Показывать карусель событий на странице Портфеля."
     },
     "developer": {
       "toast": {
@@ -2523,8 +2523,8 @@
           "description": "Использовать trongrid напрямую без прокси Ledger"
         },
         "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+          "title": "Использовать реализацию Tezos JS",
+          "description": "Использовать реализацию Tezos JS"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -2841,7 +2841,7 @@
             },
             "browse": {
               "title": "Осмотритесь",
-              "descr": "Узнайте как взаимодействовать с устройством по инструкциям на экране."
+              "descr": "Узнайте, как взаимодействовать с устройством по инструкциям на экране."
             },
             "select": {
               "title": "Выберите \"Set up as a new device\" (Настроить как новое устройство)",
@@ -2864,7 +2864,7 @@
             },
             "browse": {
               "title": "Осмотритесь",
-              "descr": "Узнайте как взаимодействовать с устройством по инструкциям на экране."
+              "descr": "Узнайте, как взаимодействовать с устройством по инструкциям на экране."
             },
             "select": {
               "title": "Выберите \"Использовать фразу восстановления\"",
@@ -2923,12 +2923,12 @@
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Введите фразу восстановления.",
+            "title": "Введите фразу восстановления",
             "paragraph1": "Фраза восстановления – это секретный набор слов, который вы записали при первом подключении кошелька.",
             "paragraph2": "Ledger не хранит копию вашей фразы восстановления.",
             "disclaimer": "Я осознаю, что при потере фразы восстановления утрачу доступ к своей криптовалюте, если у меня больше не будет доступа к устройству Nano.",
             "buttons": {
-              "next": "Введите фразу восстановления",
+              "next": "Ввести фразу восстановления",
               "prev": "Назад",
               "help": "Требуется помощь?"
             },
@@ -3302,7 +3302,7 @@
   },
   "Terms": {
     "title": "Правовая информация",
-    "termsLabel": "Условия обслуживания",
+    "termsLabel": "Условия использования",
     "privacyLabel": "Политика конфиденциальности",
     "switchLabel": "Я прочитал(-а) и соглашаюсь с Условиями использования и Политикой конфиденциальности",
     "cta": "Войти в приложение Ledger"
