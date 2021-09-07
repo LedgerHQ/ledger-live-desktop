@@ -35,6 +35,7 @@ export const generateTest = (platform, solutionCount) => {
     }
     // We've reached the "funnel" where we choose a device, try one device per platform to cover all
     // three cases.
+    await app.client.pause(500); // Wait for the assets to load, sometimes it takes a second.
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: `USBTroubleshooting-${platform}-solution-${solutionCount}`,
     });
