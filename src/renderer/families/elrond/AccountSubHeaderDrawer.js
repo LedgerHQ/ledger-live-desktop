@@ -25,11 +25,6 @@ const Divider = styled(Box)`
   border: 1px solid #f5f5f5;
 `;
 
-const LinkTitle = styled(Text)`
-  font-weight: 600;
-  font-size: 13px;
-`;
-
 const Description = styled(Text)`
   font-size: 13px;
 `;
