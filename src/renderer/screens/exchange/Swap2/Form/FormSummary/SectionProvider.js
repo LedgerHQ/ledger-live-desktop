@@ -5,12 +5,13 @@ import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import * as providerIcons from "~/renderer/icons/providers";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
-import * as providerIcons from "~/renderer/icons/providers";
+import type { KYCStatus } from "~/renderer/screens/exchange/Swap2/utils";
 
 const iconByProviderName = Object.entries(providerIcons).reduce(
   (obj, [key, value]) => ({
@@ -32,7 +33,7 @@ const StatusTag = styled.div`
 
 export type SectionProviderProps = {
   provider?: string,
-  status?: "approved" | "pending" | "rejected",
+  status?: KYCStatus,
 };
 type ProviderStatusTagProps = {
   status: $NonMaybeType<$PropertyType<SectionProviderProps, "status">>,
