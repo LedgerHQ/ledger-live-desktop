@@ -1,7 +1,6 @@
 // @flow
 
 export const KYC_STATUS = {
-  open: "open",
   pending: "pending",
   rejected: "closed",
   approved: "approved",
