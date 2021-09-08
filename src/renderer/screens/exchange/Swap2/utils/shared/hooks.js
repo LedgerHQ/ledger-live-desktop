@@ -9,6 +9,7 @@ import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelec
 import type { UseCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
 import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import { KYC_STATUS } from "./index";
 
 type State = {
   isLoading: boolean,
@@ -147,7 +148,7 @@ export const usePollKYCStatus = (
 ) => {
   useEffect(
     () => {
-      if (kyc?.status !== "pending") return;
+      if (kyc?.status !== KYC_STATUS.pending) return;
       let cancelled = false;
       async function updateKYCStatus() {
         if (!kyc?.id) return;

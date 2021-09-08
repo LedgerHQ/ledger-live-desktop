@@ -6,26 +6,22 @@ import { useDispatch } from "react-redux";
 
 import SectionInformative from "~/renderer/screens/exchange/Swap2/Form/FormSummary/SectionInformative";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
+import { KYC_STATUS } from "../../utils/shared/index";
+import type { KYCStatus } from "../../utils/shared/index";
 
-const FormKYCBanner = ({
-  provider,
-  status,
-}: {
-  provider?: string,
-  status?: "pending" | "rejected" | "approved",
-}) => {
+const FormKYCBanner = ({ provider, status }: { provider?: string, status?: KYCStatus }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
-    if (provider && status === "rejected") {
+    if (provider && status === KYC_STATUS.rejected) {
       dispatch(setSwapKYCStatus({ provider }));
     }
     history.push({ pathname: "/swap/kyc" });
   }, [dispatch, history, status, provider]);
 
-  if (!provider || (status && status !== "rejected")) return null;
+  if (!provider || (status && status !== KYC_STATUS.rejected)) return null;
 
   const { message, cta } = status
     ? { message: "swap2.form.providers.kyc.rejected", cta: "swap2.form.providers.kyc.update" }
