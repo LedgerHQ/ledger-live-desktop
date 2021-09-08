@@ -2752,6 +2752,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "Please be careful",

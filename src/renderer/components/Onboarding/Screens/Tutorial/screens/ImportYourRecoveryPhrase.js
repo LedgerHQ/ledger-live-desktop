@@ -58,11 +58,6 @@ export function ImportYourRecoveryPhrase({ sendEvent }: Props) {
         >
           {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.title")}
         </Text>
-        <Box mt={4} bg="palette.background.default" style={{ borderRadius: 4 }}>
-          <Alert type="warning" onLearnMore={() => sendEvent("RECOVERY_WARN")}>
-            {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.warning.title")}
-          </Alert>
-        </Box>
         <Text
           mt="32px"
           color="palette.primary.contrastText"
