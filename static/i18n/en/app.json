@@ -1701,6 +1701,7 @@
     "account": {
      "subHeader": {
        "cardTitle": "Powered by Elrond",
+       "moreInfo": "More info",
        "drawerTitle": "Elrond integration",
        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",

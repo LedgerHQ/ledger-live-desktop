@@ -38,7 +38,7 @@ export function AccountSubHeaderDrawer({ isOpen, closeDrawer }: Props) {
       onRequestClose={closeDrawer}
       direction="left"
     >
-      <Box px={40} py={50}>
+      <Box px={40} py={40}>
         <Title>{t("elrond.account.subHeader.title")}</Title>
         <Box py={3}>
           <Description>{t("elrond.account.subHeader.description")}</Description>
