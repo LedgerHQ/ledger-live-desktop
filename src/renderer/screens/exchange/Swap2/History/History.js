@@ -1,7 +1,7 @@
 // @flow
 
 import { remote, ipcRenderer } from "electron";
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
@@ -26,6 +26,7 @@ import { setDrawer } from "~/renderer/drawers/Provider";
 import SwapOperationDetails from "~/renderer/drawers/SwapOperationDetails";
 import HistoryLoading from "./HistoryLoading";
 import HistoryPlaceholder from "./HistoryPlaceholder";
+import { useHistory } from "react-router-dom";
 
 const Head = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
@@ -54,8 +55,11 @@ const History = () => {
   const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
+  const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const defaultOpenedOnce = useRef(false);
+  const defaultOpenedSwapOperationId = history?.location?.state?.swapId;
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -94,6 +98,22 @@ const History = () => {
       setMappedSwapOperations(sections);
     })();
   }, [accounts]);
+
+  useEffect(() => {
+    if (defaultOpenedOnce.current || !defaultOpenedSwapOperationId) return;
+    if (mappedSwapOperations) {
+      defaultOpenedOnce.current = true;
+      mappedSwapOperations.some(section => {
+        const openedOperation = section.data.find(
+          ({ swapId }) => swapId === defaultOpenedSwapOperationId,
+        );
+        if (openedOperation) {
+          setDrawer(SwapOperationDetails, { mappedSwapOperation: openedOperation });
+        }
+        return !!openedOperation;
+      });
+    }
+  }, [mappedSwapOperations, defaultOpenedSwapOperationId]);
 
   const updateSwapStatus = useCallback(() => {
     let cancelled = false;
