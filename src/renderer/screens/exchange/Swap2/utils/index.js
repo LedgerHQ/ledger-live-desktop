@@ -19,8 +19,8 @@ export const useRedirectToSwapHistory = () => {
   const history = useHistory();
 
   return useCallback(
-    _ => {
-      history.push("/swap/history");
+    ({ swapId }: { swapId?: string } = {}) => {
+      history.push({ pathname: "/swap/history", state: { swapId } });
     },
     [history],
   );

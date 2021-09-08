@@ -20,7 +20,6 @@ import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import SwapCompleted from "./SwapCompleted";
 import Button from "~/renderer/components/Button";
 import { setDrawer } from "~/renderer/drawers/Provider";
-import { OperationDetails } from "~/renderer/drawers/OperationDetails/index";
 import { useRedirectToSwapHistory } from "../../utils/index";
 
 const Separator = styled.div`
@@ -102,12 +101,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
         : null;
 
       if (fromAccount && concernedOperation) {
-        setDrawer(OperationDetails, {
-          operationId: concernedOperation.id,
-          accountId: fromAccount.id,
-          parentId: fromParentAccount && fromParentAccount.id,
-        });
-        redirectToHistory();
+        redirectToHistory({ swapId: result?.swapId });
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
