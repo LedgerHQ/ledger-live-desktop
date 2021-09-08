@@ -284,7 +284,7 @@
         "pending": {
           "cta": "Continue",
           "title": "Your information has been submitted for approval",
-          "subtitle": "This usually takes 2-3 days. You will receive an email from Wyre once your identity is verified succesfully.",
+          "subtitle": "It usually takes a few minutes for the review to be completed.",
           "link": "Learn more about KYC",
           "info": "Identity verification: Submitted"
         },
