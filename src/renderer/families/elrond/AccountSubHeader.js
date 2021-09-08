@@ -55,7 +55,7 @@ export default function AccountSubHeader() {
         <CustomButton outline onClick={openDrawer}>
           <Box horizontal flow={1} alignItems="center">
             <Box fontSize={3}>
-              <Trans i18nKey="delegation.title" />
+              <Trans i18nKey="elrond.account.subHeader.moreInfo" />
             </Box>
             <ChevronRight size={12} />
           </Box>
