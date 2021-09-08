@@ -117,12 +117,9 @@ const Body = ({
   return (
     <>
       <Track event={"FirmwareUpdateConfirmNewFirwmare"} onMount />
-      <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
-        New firmware {getCleanVersion(firmware.final.name)}
-      </Text>
       <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
         <Text ff="Inter|SemiBold" textAlign="center" color="palette.text.shade80">
-          Please confirm update on your device
+          {t("manager.modal.confirmUpdate")}
         </Text>
       </Box>
       <Box mt={isBlue ? 4 : null}>
@@ -187,12 +184,16 @@ const StepFullFirmwareInstall = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const hasHash = !!firmware?.osu?.hash;
+
   return (
     <Container>
       <Title id={"firmware-update-download-mcu-title"}>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
-          : t("manager.modal.confirmIdentifier")}
+          : hasHash
+          ? t("manager.modal.confirmIdentifier")
+          : t("manager.modal.newFirmware", { version: getCleanVersion(firmware.final.name) })}
       </Title>
       <TrackPage category="Manager" name="InstallFirmware" />
       <Body
