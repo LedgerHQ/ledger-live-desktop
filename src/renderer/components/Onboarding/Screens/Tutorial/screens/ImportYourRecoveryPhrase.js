@@ -11,8 +11,6 @@ import recoveryPhrase from "../assets/recoveryPhrase.svg";
 import { Illustration, ContentContainer } from "../shared";
 
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
-import Alert from "~/renderer/components/Alert";
-import Box from "~/renderer/components/Box/Box";
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
