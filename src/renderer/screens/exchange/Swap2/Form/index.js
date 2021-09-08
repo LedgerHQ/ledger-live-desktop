@@ -12,6 +12,7 @@ import {
   usePickExchangeRate,
   usePollKYCStatus,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+import { KYC_STATUS } from "~/renderer/screens/exchange/Swap2/utils/shared";
 import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -54,7 +55,7 @@ const SwapForm = () => {
   const provider = exchangeRate?.provider;
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
-  const showWyreKYCBanner = provider === "wyre" && kycStatus !== "approved";
+  const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
 
   // SWAP MOCK - PLEASE REMOVE ME ASA LOGIC IS IMPLEMENTED
   const onSubmit = () => {};
