@@ -25,6 +25,7 @@ import { darken, rgba } from "~/renderer/styles/helpers";
 
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
+import IconTachometerHigh from "~/renderer/icons/ChartLine";
 import IconPortfolio from "~/renderer/icons/Portfolio";
 import IconApps from "~/renderer/icons/Apps";
 import IconReceive from "~/renderer/icons/Receive";
@@ -225,6 +226,10 @@ const MainSideBar = () => {
     push("/accounts");
   }, [push]);
 
+  const handleClickMarket = useCallback(() => {
+    push("/market");
+  }, [push]);
+
   const handleClickCatalog = useCallback(() => {
     push("/platform");
   }, [push]);
@@ -239,10 +244,6 @@ const MainSideBar = () => {
     }
     push("/lend");
   }, [push, firstTimeLend, dispatch]);
-
-  const handleClickMarket = useCallback(() => {
-    push("/market");
-  }, [push]);
 
   const handleClickSwap = useCallback(() => {
     push("/swap");
@@ -302,20 +303,22 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
+                id={"market"}
+                label={t("sidebar.market")}
+                icon={IconTachometerHigh}
+                iconActiveColor="wallet"
+                isActive={location.pathname === "/market"}
+                onClick={handleClickMarket}
+                disabled={noAccounts}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
                 id={"catalog"}
                 label={t("sidebar.catalog")}
                 icon={IconApps}
                 iconActiveColor="wallet"
                 isActive={location.pathname.startsWith("/platform")}
                 onClick={handleClickCatalog}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"market"}
-                label={"Market"}
-                icon={IconApps}
-                iconActiveColor="wallet"
-                onClick={handleClickMarket}
                 collapsed={secondAnim}
               />
               <SideBarListItem
