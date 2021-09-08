@@ -1,5 +1,12 @@
 [
-  { "name": "swap", "path": "/swap", "title": "swap2.tabs.exchange" },
-  { "name": "history", "path": "/swap/history", "title": "swap2.tabs.history" },
-  { "name": "kyc", "path": "/swap/kyc", "title": "swap2.tabs.swap", "disabled": true }
+  {
+    "name": "swap",
+    "path": "/swap",
+    "title": "swap2.tabs.exchange"
+  },
+  {
+    "name": "history",
+    "path": "/swap/history",
+    "title": "swap2.tabs.history"
+  }
 ]

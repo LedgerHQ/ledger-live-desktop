@@ -1,7 +1,5 @@
 // @flow
 import React from "react";
-import { useSelector } from "react-redux";
-import { rateSelector } from "~/renderer/actions/swap";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
@@ -13,6 +11,7 @@ import { rgba } from "~/renderer/styles/helpers";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
+import type { KYCStatus } from "~/renderer/screens/exchange/Swap2/utils";
 
 const iconByProviderName = Object.entries(providerIcons).reduce(
   (obj, [key, value]) => ({
@@ -32,7 +31,10 @@ const StatusTag = styled.div`
   column-gap: 4px;
 `;
 
-type SectionProviderProps = { status?: "approved" | "pending" | "rejected" };
+export type SectionProviderProps = {
+  provider?: string,
+  status?: KYCStatus,
+};
 type ProviderStatusTagProps = {
   status: $NonMaybeType<$PropertyType<SectionProviderProps, "status">>,
 };
@@ -57,10 +59,9 @@ const ProviderStatusTag = ({ status }: ProviderStatusTagProps) => {
   );
 };
 
-const SectionProvider = ({ status }: SectionProviderProps) => {
+const SectionProvider = ({ provider, status }: SectionProviderProps) => {
   const { t } = useTranslation();
-  const exchangeRate = useSelector(rateSelector);
-  const ProviderIcon = exchangeRate && iconByProviderName[exchangeRate.provider.toLowerCase()];
+  const ProviderIcon = provider && iconByProviderName[provider.toLowerCase()];
 
   return (
     <SummarySection>
@@ -68,11 +69,9 @@ const SectionProvider = ({ status }: SectionProviderProps) => {
         label={t("swap2.form.details.label.provider")}
         details={t("swap2.form.details.tooltip.provider")}
       />
-      {(exchangeRate && (
+      {(provider && (
         <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-          <SummaryValue value={exchangeRate.provider}>
-            <ProviderIcon size={19} />
-          </SummaryValue>
+          <SummaryValue value={provider}>{ProviderIcon && <ProviderIcon size={19} />}</SummaryValue>
           {status ? <ProviderStatusTag status={status} /> : null}
         </div>
       )) || (

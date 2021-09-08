@@ -1,31 +1,27 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
-import { swapKYCSelector } from "~/renderer/reducers/settings";
-import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
-import useInterval from "~/renderer/hooks/useInterval";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
-import IconCross from "~/renderer/icons/Cross";
+import Button from "~/renderer/components/Button";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import { useRedirectToSwapForm } from "../utils/index";
 
 export const CircleWrapper: ThemedComponent<{}> = styled.div`
   border-radius: 50%;
   border: 1px solid transparent;
-  background: ${p => rgba(p.failed ? p.theme.colors.alertRed : p.theme.colors.positiveGreen, 0.1)};
-  color: ${p => (p.failed ? p.theme.colors.alertRed : p.theme.colors.positiveGreen)};
+  background: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
+  color: ${p => p.theme.colors.palette.primary.main};
   height: ${p => p.size}px;
   width: ${p => p.size}px;
   align-items: center;
@@ -45,80 +41,68 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
   padding: 3px;
 `;
 
-const Pending = ({ status = "pending" }: { status?: string }) => {
-  const rejected = status === "closed";
-  const dispatch = useDispatch();
-  const swapKYC = useSelector(swapKYCSelector);
-  const providerKYC = swapKYC.wyre;
+const Container: ThemedComponent<{}> = styled(Box).attrs({
+  p: 20,
+  justifyContent: "center",
+  alignItems: "center",
+})`
+  height: 100%;
+  max-width: 27.5rem;
+  align-self: center;
+  text-align: center;
+  position: relative;
+`;
 
-  const onUpdateKYCStatus = useCallback(() => {
-    let cancelled = false;
-    async function updateKYCStatus() {
-      if (!providerKYC?.id) return;
-      const res = await getKYCStatus("wyre", providerKYC.id);
-      if (cancelled || res?.status === providerKYC?.status) return;
-      dispatch(
-        setSwapKYCStatus({
-          provider: "wyre",
-          id: res?.id,
-          status: res?.status,
-        }),
-      );
-    }
-    updateKYCStatus();
-    return () => {
-      cancelled = true;
-    };
-  }, [dispatch, providerKYC]);
+const InfoTag = styled.div`
+  position: absolute;
+  top: 32px;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
+  color: ${p => p.theme.colors.palette.primary.main};
+  column-gap: 4px;
+`;
 
-  useInterval(() => {
-    if (providerKYC && providerKYC.status !== "approved") {
-      onUpdateKYCStatus();
-    }
-  }, 10000);
-
+const Pending = () => {
+  const redirectToSwapForm = useRedirectToSwapForm();
   const onLearnMore = useCallback(() => {
     openURL(urls.swap.providers.wyre.kyc);
   }, []);
 
-  const onResetKYC = useCallback(() => {
-    dispatch(setSwapKYCStatus({ provider: "wyre" }));
-  }, [dispatch]);
-
   return (
-    <Box px={40} style={{ minHeight: 560 }} justifyContent={"center"} alignItems={"center"}>
+    <Container>
+      <InfoTag>
+        <Text ff="Inter|SemiBold" fontSize={2}>
+          <Trans i18nKey="swap2.kyc.wyre.pending.info" />
+        </Text>
+        <InfoCircle size={13} />
+      </InfoTag>
       <TrackPage category="Swap" name="KYC Pending" />
-      {rejected ? (
-        <CircleWrapper failed size={50}>
-          <IconCross size={25} />
-        </CircleWrapper>
-      ) : (
-        <CircleWrapper size={50}>
-          <IconCheck size={25} />
-          <WrapperClock>
-            <IconClock size={16} />
-          </WrapperClock>
-        </CircleWrapper>
-      )}
-      <Text mt={16} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade90">
-        <Trans i18nKey={`swap2.kyc.wyre.${status}.title`} />
+      <CircleWrapper size={50}>
+        <IconCheck size={25} />
+        <WrapperClock>
+          <IconClock size={16} />
+        </WrapperClock>
+      </CircleWrapper>
+      <Text mt={24} ff="Inter|SemiBold" fontSize={16} color="palette.text.shade90">
+        <Trans i18nKey={`swap2.kyc.wyre.pending.title`} />
       </Text>
       <Text mt={16} ff="Inter|Regular" fontSize={13} color="palette.text.shade50">
-        <Trans i18nKey={`swap2.kyc.wyre.${status}.subtitle`} />
+        <Trans i18nKey={`swap2.kyc.wyre.pending.subtitle`} />
       </Text>
-      <Text mt={24} ff="Inter|SemiBold" fontSize={13} color="palette.text.shade100">
+      <Box mt={28} horizontal>
         <LinkWithExternalIcon onClick={onLearnMore} color="palette.primary.main">
           <Text ff="Inter|SemiBold" fontSize={13}>
-            <Trans i18nKey={`swap2.kyc.wyre.${status}.link`} />
+            <Trans i18nKey={`swap2.kyc.wyre.pending.link`} />
           </Text>
         </LinkWithExternalIcon>
-      </Text>
-      {rejected ? (
-        <Button primary mt={20} onClick={onResetKYC}>
-          <Trans i18nKey={`swap2.kyc.wyre.${status}.cta`} />
-        </Button>
-      ) : null}
-    </Box>
+      </Box>
+      <Button mt={28} primary onClick={redirectToSwapForm}>
+        Continue
+      </Button>
+    </Container>
   );
 };
 
