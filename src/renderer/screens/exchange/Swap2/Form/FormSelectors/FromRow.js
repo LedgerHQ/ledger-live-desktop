@@ -16,6 +16,7 @@ import type {
   SwapSelectorStateType,
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import { usePickDefaultAccount } from "../../utils/shared/hooks";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
@@ -39,6 +40,7 @@ function FromRow({
   const accounts = useSelector(fromSelector)(useSelector(shallowAccountsSelector));
   const unit = fromAccount && getAccountUnit(fromAccount);
   const { t } = useTranslation();
+  usePickDefaultAccount(accounts, fromAccount, setFromAccount);
 
   return (
     <>

@@ -2,13 +2,17 @@
 import { useReducer, useEffect, useMemo } from "react";
 import type { AvailableProviderV3 } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { getProviders, getKYCStatus } from "@ledgerhq/live-common/lib/exchange/swap";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
+import type {
+  Currency,
+  CryptoCurrency,
+  TokenCurrency,
+} from "@ledgerhq/live-common/lib/types/currencies";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import type { UseCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
 import { useSelector } from "react-redux";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import type { Account, TokenAccount, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { KYC_STATUS } from "./index";
 
 type State = {
@@ -166,4 +170,48 @@ export const usePollKYCStatus = (
     // eslint-disable-next-line
     [provider, kyc, ...dependencies],
   );
+};
+
+// Pick a default source account if none are selected.
+export const usePickDefaultAccount = (
+  accounts: AccountLike[],
+  fromAccount: ?AccountLike,
+  setFromAccount: AccountLike => void,
+) => {
+  useEffect(() => {
+    if (!fromAccount) {
+      const possibleDefaults = accounts.reduce((acc, account) => {
+        if (account.disabled) return acc;
+        if (account.currency?.id === "ethereum") {
+          acc[0] = account;
+        }
+        if (account.currency?.id === "bitcoin") {
+          acc[1] = account;
+        }
+        const maxFundsAccount = acc[2];
+        if (!maxFundsAccount || maxFundsAccount.balance < account.balance) {
+          acc[2] = account;
+        }
+        return acc;
+      }, []);
+      const defaultAccount = possibleDefaults.find(Boolean);
+      defaultAccount && setFromAccount(defaultAccount);
+    }
+  }, [accounts, fromAccount, setFromAccount]);
+};
+
+// Pick a default currency target if none are selected.
+export const usePickDefaultCurrency = (
+  currencies: Currency[],
+  currency: ?Currency,
+  setCurrency: Currency => void,
+) => {
+  useEffect(() => {
+    if (!currency) {
+      const defaultCurrency = currencies.find(
+        currency => currency.id === "ethereum" || currency.id === "bitcoin",
+      );
+      defaultCurrency && setCurrency(defaultCurrency);
+    }
+  }, [currency, currencies, setCurrency]);
 };
