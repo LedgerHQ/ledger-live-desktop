@@ -140,16 +140,18 @@ const CurrencyLabel = styled(Text).attrs(() => ({
 export function CurrencyOption({
   currency,
   singleLineLayout = true,
+  hideParentTag = false,
 }: {
   currency: Currency,
   singleLineLayout?: boolean,
+  hideParentTag?: boolean,
 }) {
   const textContents = singleLineLayout ? (
     <>
       <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
         {`${currency.name} (${currency.ticker})`}
       </Box>
-      {currency.parentCurrency ? (
+      {!hideParentTag && currency.parentCurrency ? (
         <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
       ) : null}
     </>
@@ -165,7 +167,7 @@ export function CurrencyOption({
           </Text>
         </Box>
       </OptionMultilineContainer>
-      {currency.parentCurrency ? (
+      {!hideParentTag && currency.parentCurrency ? (
         <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
       ) : null}
     </>
