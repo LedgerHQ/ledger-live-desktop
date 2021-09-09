@@ -61,7 +61,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
 
   return (
     <>
-      <Box horizontal mb="8px" color={"palette.text.shade40"} fontSize={3}>
+      <Box horizontal color={"palette.text.shade40"} fontSize={3}>
         <FormLabel>
           <Trans i18nKey="swap2.form.to.title" />
         </FormLabel>
