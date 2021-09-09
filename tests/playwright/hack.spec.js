@@ -9,25 +9,29 @@ test("get the app running", async () => {
 
   // Get the first window that the app opens, wait if necessary.
   const window = await electronApp.firstWindow();
-  console.log(window.title());
   // Print the title.
-  console.log(await window.title());
+
+  const title = await window.title();
+  console.log("Page title is: " + title);
 
   // Playwright has auto wait built in, so if we want to waitUntil something has
   // loaded without performing any action(like a snapshot), we can call 'click'
   // without performing the action, by passing the option {trial: true}
-  await window.click("#onboarding-get-started-button", { trial: true });
   await window.screenshot({ path: "beforeClicking.png" });
 
-  // Getting the text from an element is messy, there's no built-in method...
-  await console.log(
-    await window.evaluate(
-      el => el.innerTexelectronApp.trim(),
-      await window.$("#onboarding-get-started-button"),
-    ),
-  );
+  // window.pause();
+
+  // // Getting the text from an element is messy, there's no built-in method...
+  // await console.log(
+  //   await window.evaluate(
+  //     el => el.innerTexelectronApp.trim(),
+  //     await window.$("#onboarding-get-started-button"),
+  //   ),
+  // );
   await window.click("#onboarding-get-started-button");
   await window.screenshot({ path: "afterClicking.png" });
-  // Exit app.
-  await electronApp.close();
+
+  
+  // // Exit app.
+  // await electronApp.close();
 });
