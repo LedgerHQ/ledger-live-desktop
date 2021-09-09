@@ -178,14 +178,14 @@ export const usePickDefaultAccount = (
   fromAccount: ?AccountLike,
   setFromAccount: AccountLike => void,
 ) => {
-  useMemo(() => {
+  useEffect(() => {
     if (!fromAccount) {
       const possibleDefaults = accounts.reduce((acc, account) => {
         if (account.disabled) return acc;
-        if (account.currency.id === "ethereum") {
+        if (account.currency?.id === "ethereum") {
           acc[0] = account;
         }
-        if (account.currency.id === "bitcoin") {
+        if (account.currency?.id === "bitcoin") {
           acc[1] = account;
         }
         const maxFundsAccount = acc[2];
@@ -194,7 +194,7 @@ export const usePickDefaultAccount = (
         }
         return acc;
       }, []);
-      const defaultAccount = possibleDefaults.find(acc => !!acc);
+      const defaultAccount = possibleDefaults.find(Boolean);
       defaultAccount && setFromAccount(defaultAccount);
     }
   }, [accounts, fromAccount, setFromAccount]);
@@ -206,7 +206,7 @@ export const usePickDefaultCurrency = (
   currency: ?Currency,
   setCurrency: Currency => void,
 ) => {
-  useMemo(() => {
+  useEffect(() => {
     if (!currency) {
       const defaultCurrency = currencies.find(
         currency => currency.id === "ethereum" || currency.id === "bitcoin",
