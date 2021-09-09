@@ -60,7 +60,7 @@ function FromRow({
           <Switch medium isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
         </Box>
       </Box>
-      <Box horizontal mb="40px" boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
+      <Box horizontal boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
         <Box width="50%">
           <SelectAccount
             accounts={accounts}

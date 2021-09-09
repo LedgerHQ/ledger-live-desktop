@@ -51,25 +51,28 @@ export default function FormInputs({
 }: FormInputsProps) {
   return (
     <section>
-      <FromRow
-        fromAccount={fromAccount}
-        setFromAccount={setFromAccount}
-        fromAmount={fromAmount}
-        setFromAmount={setFromAmount}
-        isMaxEnabled={isMaxEnabled}
-        toggleMax={toggleMax}
-        fromAmountError={fromAmountError}
-      />
-
-      <Box horizontal justifyContent="center" alignContent="center">
+      <Box mb={5}>
+        <FromRow
+          fromAccount={fromAccount}
+          setFromAccount={setFromAccount}
+          fromAmount={fromAmount}
+          setFromAmount={setFromAmount}
+          isMaxEnabled={isMaxEnabled}
+          toggleMax={toggleMax}
+          fromAmountError={fromAmountError}
+        />
+      </Box>
+      <Box horizontal justifyContent="center" alignContent="center" mb={3}>
         <SwapButton />
       </Box>
-      <ToRow
-        toCurrency={toCurrency}
-        setToAccount={setToAccount}
-        toAmount={toAmount}
-        fromAccount={fromAccount}
-      />
+      <Box mb={2}>
+        <ToRow
+          toCurrency={toCurrency}
+          setToAccount={setToAccount}
+          toAmount={toAmount}
+          fromAccount={fromAccount}
+        />
+      </Box>
     </section>
   );
 }
