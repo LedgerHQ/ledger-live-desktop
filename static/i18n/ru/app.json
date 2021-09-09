@@ -2331,7 +2331,7 @@
     "rewards": "Вознаграждения",
     "duration": "Период",
     "durationJustStarted": "Только началось",
-    "durationDays": "{{count}} день",
+    "durationDays": "{{count}} дн.",
     "durationDays_plural": "{{count}} дн.",
     "howItWorks": "Как работает делегирование",
     "delegationEarn": "Теперь вы можете получать вознаграждение за стейкинг {{name}}, делегировав свой счёт.",
