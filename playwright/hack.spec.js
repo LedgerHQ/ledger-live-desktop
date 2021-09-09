@@ -1,5 +1,6 @@
 const { test, expect } = require("@playwright/test");
 const { _electron: electron } = require("playwright");
+const { options } = require("yargs");
 
 test("get the app running", async () => {
   // Launch Electron app.
@@ -28,10 +29,24 @@ test("get the app running", async () => {
   //     await window.$("#onboarding-get-started-button"),
   //   ),
   // );
-  await window.click("#onboarding-get-started-button");
-  await window.screenshot({ path: "afterClicking.png" });
+  await window.waitForSelector('#__app__ready__', { state: 'attached'});
 
-  
+  await window.waitForLoadState('domcontentloaded');
+
+  // await window.pause();
+
+  // await window.waitForSelector('button#onboarding-get-started-button', { state: 'visible'});
+
+  const button = await window.$('#onboarding-get-started-button');
+  console.log("buttonText:" + await button.innerHTML());
+  await button.isEnabled();
+
+  // await window.click("button#onboarding-get-started-button");
+  await button.click();
+  await window.screenshot({ path: "afterClicking.png" });
+  // await window.pause();
+
+
   // // Exit app.
-  // await electronApp.close();
+  await electronApp.close();
 });
