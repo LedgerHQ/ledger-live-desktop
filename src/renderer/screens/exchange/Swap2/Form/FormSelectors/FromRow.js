@@ -10,7 +10,7 @@ import { SelectAccount } from "~/renderer/components/SelectAccount";
 import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import { amountInputContainerProps, selectRowStylesMap } from "./utils";
+import { amountInputContainerProps, renderAccountValue, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
 import type {
   SwapSelectorStateType,
@@ -69,7 +69,8 @@ function FromRow({
             placeholder={t("swap2.form.from.accountPlaceholder")}
             showAddAccount
             isSearchable={false}
-            disableTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
+            disabledTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
+            renderValue={renderAccountValue}
           />
         </Box>
         <Box width="50%">

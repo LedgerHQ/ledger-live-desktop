@@ -34,7 +34,7 @@ export default ({
   ...STYLES_OVERRIDE,
   Option: function Option(props: OptionProps) {
     const { data, isSelected, isDisabled } = props;
-    const { extraRenderers } = selectProps;
+    const { disabledTooltipText } = selectProps;
 
     return (
       <components.Option {...props}>
@@ -47,9 +47,9 @@ export default ({
               <IconCheck size={12} color={props.theme.colors.wallet} />
             </InformativeContainer>
           )}
-          {isDisabled && extraRenderers?.disableTooltipText && (
+          {isDisabled && disabledTooltipText && (
             <InformativeContainer disabled>
-              <LabelInfoTooltip text={extraRenderers.disableTooltipText ?? ""} />
+              <LabelInfoTooltip text={disabledTooltipText ?? ""} />
             </InformativeContainer>
           )}
         </Box>
