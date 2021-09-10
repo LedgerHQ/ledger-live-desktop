@@ -5,7 +5,7 @@ const { setHeadlessWhen } = require("@codeceptjs/configure");
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: "playwright/*_test.js",
+  tests: "playwright/*.spec.js",
   output: "./output",
   helpers: {
     Playwright: {
@@ -15,6 +15,12 @@ exports.config = {
         executablePath: require("electron"),
         args: ["./.webpack/main.bundle.js"],
       },
+    },
+    ResembleHelper: {
+      require: "codeceptjs-resemblehelper",
+      screenshotFolder: "./output/",
+      baseFolder: "./output/screenshots/base/",
+      diffFolder: "./output/screenshots/diff/",
     },
   },
   include: {
