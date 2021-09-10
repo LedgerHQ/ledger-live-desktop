@@ -3,22 +3,23 @@
 import React, { useCallback, useState } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
+import { withTranslation } from "react-i18next";
 
 import Box from "~/renderer/components/Box";
 import SearchBox from "~/renderer/screens/accounts/AccountList/SearchBox";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
+import MarketList from "~/renderer/components/MarketList";
 
 type Props = {
   t: TFunction,
 };
 
-const MarketPage = ({ t }: Props) => {
+const MarketPage = ({ t, collapsable }: Props) => {
   const [query, setQuery] = useState("");
-
+  const [collapsed, setCollapsed] = useState(collapsable);
   const onTextChange = useCallback(
     (evt: SyntheticInputEvent<HTMLInputElement>, v) => setQuery(evt.target.value),
     [setQuery],
@@ -35,6 +36,7 @@ const MarketPage = ({ t }: Props) => {
           search={query}
         />
       </SearchContainer>
+      <MarketList />
     </Box>
   );
 };
