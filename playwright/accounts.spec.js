@@ -33,14 +33,8 @@ test("get the app running", async () => {
 
   await window.screenshot({ path: "start-of-test.png" });
 
-  // Click text=Accounts
-  await window.click("text=Accounts");
-  // assert.equal(page.url(), 'file:///Users/ggilchrist/dev/gg-lld/ledger-live-desktop/.webpack/index.html?theme=light#/accounts');
-  // Click text=Bitcoin legacyBitcoin 2 (legacy)1.2809 BTC$59,111.45+ 3 % >> div
-  await window.click("text=Bitcoin legacyBitcoin 2 (legacy)1.2809 BTC$59,111.45+ 3 % >> div");
-  // assert.equal(page.url(), 'file:///Users/ggilchrist/dev/gg-lld/ledger-live-desktop/.webpack/index.html?theme=light#/account/mock:1:bitcoin:true_bitcoin_1:');
-
-  await window.screenshot({ path: "start-of-test.png" });
+  await window.pause();
+  await window.screenshot({ path: "end-of-test.png" });
 
   await electronApp.close();
 });
