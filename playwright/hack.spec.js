@@ -7,7 +7,7 @@ test("get the app running", async () => {
     args: ["./.webpack/main.bundle.js"],
   });
 
-  console.log("about to check for window")
+  console.log("about to check for window");
 
   const window = await electronApp.firstWindow();
 
