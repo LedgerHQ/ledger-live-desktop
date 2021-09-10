@@ -37,5 +37,10 @@ test("get the app running", async () => {
   await window.click('button:has-text("Check my Nano")');
 
   await window.screenshot({ path: "end-of-test.png" });
+  // await window.pause();
+
+  const connectNanoCTA = await window.isVisible("text=Connect and unlock your device");
+  expect(connectNanoCTA).toBe(true);
+  // expect.t
   await electronApp.close();
 });
