@@ -83,7 +83,7 @@ export const experimentalFeatures: Feature[] = [
         {
           type: "toggle",
           name: "EXPERIMENTAL_SWAP",
-          title: "New SWAP interface ",
+          title: "New exchange interface ",
           description: "Use the new experimental swap interface",
         },
       ]

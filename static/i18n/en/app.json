@@ -193,7 +193,7 @@
     "accounts": "Accounts",
     "manager": "Manager",
     "exchange": "Buy / Sell",
-    "swap": "Swap",
+    "swap": "Exchange",
     "lend": "Lend",
     "catalog": "Discover"
   },
@@ -213,7 +213,7 @@
     "disconnectButton": "Disconnect"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "Exchange",
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
@@ -252,19 +252,19 @@
       "notAvailable": "Service temporarily unavailable, or not available in your country"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Your exchange desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Your previous exchanges will appear here",
+        "description": "Either you have not made any exchanges yet, or Ledger Live has been reset in the meantime."
       },
       "export": "Export operations",
       "exporting": "Exporting..."
     }
   },
   "swap": {
-    "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "title": "Exchange",
+    "titleCrypto": "Exchange {{currency}}",
+    "whatIsSwap": "What is Exchange",
     "paraswap": {
       "cta": " Check it out",
       "description": "Looking for Paraswap? It has been moved to the Discover tab."
@@ -274,30 +274,30 @@
       "history": "History"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Your exchange desktop transactions are not synchronized with the Ledger Live mobile application",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Your previous exchanges will appear here",
+        "description": "Either you have not made any exchanges yet, or Ledger Live has been reset in the meantime."
       }
     },
     "landing": {
-      "title": "Swap your assets",
+      "title": "Exchange your assets",
       "continue": "Continue",
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
       "title": "Please install the {{appName}} app on your device",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
+      "subtitle": "Go to manager and install {{appName}} app to exchange assets.",
       "cta": "Go to manager"
     },
     "outdatedApp": {
       "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
+      "subtitle": "Go to manager and update {{appName}} app to exchange assets.",
       "cta": "Go to manager"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
+      "title": "Choose a provider to exchange crypto",
+      "learnMore": "What is Exchange?",
       "kycRequired": "KYC Required",
       "cta": "Continue",
       "kyc": {
@@ -311,7 +311,7 @@
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
+      "title": "Welcome to Exchange",
       "subtitle": "Exchange crypto assets directly from your Ledger device.",
       "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
     },
@@ -321,7 +321,7 @@
         "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
         "policy": "Privacy Policy",
         "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "subtitle": "Please enter your information to exchange with Wyre.",
         "pending": {
           "cta": "Continue",
           "title": "Pending approval",
@@ -362,7 +362,7 @@
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
+      "resetKYC": "Reset your KYC and Update Live to Exchange with Wyre",
       "resetKYCCTA": "Reset KYC",
       "amount": "Amount",
       "from": {
@@ -389,7 +389,7 @@
         "by": "Provided by"
       },
       "exchange": "Exchange",
-      "helpCTA": "What is Swap?",
+      "helpCTA": "What is Exchange?",
       "bubble": "We use a fixed rate, this is the exact amount you will receive.",
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
@@ -398,7 +398,7 @@
     },
     "unauthorizedRatesModal": {
       "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
+      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to exchange with wyre",
       "cta": "Reset verification"
     },
     "resetKYCModal": {
@@ -407,7 +407,7 @@
       "cta": "Confirm"
     },
     "modal": {
-      "title": "Swap",
+      "title": "Exchange",
       "steps": {
         "summary": {
           "title": "Summary",
@@ -438,25 +438,25 @@
         },
         "finished": {
           "title": "Pending",
-          "subtitle": "Swap broadcast successfully ",
-          "swap": "Your Swap ID:",
+          "subtitle": "Exchange broadcast successfully ",
+          "swap": "Your Exchange ID:",
           "seeDetails": "See details",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "Take note of your Exchange ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+          "description": "Your Exchange operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
         }
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
+      "title": "Exchange",
       "provider": "Provider",
-      "txid": "Swap ID",
+      "txid": "Exchange ID",
       "status": "Status",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "expired": "Please contact the exchange provider with your exchange ID for more information.",
+        "refunded": "Please contact the exchange provider with your exchange ID for more information.",
+        "pending": "Please wait while the exchange provider is processing the transaction.",
+        "onhold": "Please contact the exchange provider with your exchange ID to solve the situation.",
+        "finished": "Your exchange was completed successfully."
       },
       "date": "Date",
       "from": "From",
@@ -923,7 +923,7 @@
       "star": "Star",
       "receive": "Receive",
       "send": "Send",
-      "swap": "Swap",
+      "swap": "Exchange",
       "buy": "Buy",
       "sell": "Sell",
       "edit": "Edit account",
@@ -1010,7 +1010,7 @@
       "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
     },
     "swap": {
-      "title": "Swap crypto",
+      "title": "Exchange crypto",
       "description": "Exchange one crypto for another from Ledger Live with our partner."
     },
     "lending": {
@@ -1283,8 +1283,8 @@
     "listApps": "Checking App dependencies",
     "listAppsDescription": "Please wait while we make sure you have all the required apps",
     "swap": {
-      "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
-      "confirm": "Confirm Swap transaction",
+      "notice": "Verify the Exchange details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
+      "confirm": "Confirm Exchange transaction",
       "amountSent": "Amount to send",
       "amountReceived": "Amount to receive",
       "amountReceivedFloat": "Amount to receive before service fees",
@@ -1384,8 +1384,8 @@
     "apps": {
       "content": {
         "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
+          "shortDescription": "Exchange your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
+          "description": "Exchange your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
         },
         "wyre_buy": {
           "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
@@ -3612,7 +3612,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "description": "You must confirm the exchange before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
