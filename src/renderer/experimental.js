@@ -45,9 +45,11 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: <Trans i18nKey="settings.experimental.features.tezosJS.title" />,
-    description: <Trans i18nKey="settings.experimental.features.tezosJS.description" />,
-    valueOn: "tezos",
+    title: <Trans i18nKey="settings.experimental.features.experimentalCurrencies.title" />,
+    description: (
+      <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
+    ),
+    valueOn: "bitcoin,tezos",
     valueOff: "",
   },
   {
