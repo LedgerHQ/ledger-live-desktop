@@ -888,7 +888,7 @@
     },
     "noEthAccount": {
       "title": "Пожалуйста, создайте счёт ETH",
-      "description": "<0>{{ asset }} ({{ ticker }})</0> — это токен Ethereum ERC-20. Чтобы одолжить {{ ticker }}, установите приложение Ethereum и создайте счёт Ethereum",
+      "description": "<0>{{ asset }} ({{ ticker }})</0> — это токен ERC-20. Чтобы одолжить {{ ticker }}, установите приложение Ethereum и создайте счёт Ethereum",
       "cta": "Добавить счёт"
     },
     "emptyAccountDeposit": {
