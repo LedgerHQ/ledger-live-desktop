@@ -28,6 +28,7 @@ const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSumma
     <SectionTarget
       account={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
       currency={swapTransaction.swap.to.currency}
+      setToAccount={swapTransaction.setToAccount}
     />
   </Form>
 );

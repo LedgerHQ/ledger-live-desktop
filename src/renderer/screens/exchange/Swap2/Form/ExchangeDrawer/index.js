@@ -7,7 +7,6 @@ import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import SwapAction from "./SwapAction";
 import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
@@ -21,11 +20,8 @@ import SwapCompleted from "./SwapCompleted";
 import Button from "~/renderer/components/Button";
 import { setDrawer } from "~/renderer/drawers/Provider";
 import { useRedirectToSwapHistory } from "../../utils/index";
-
-const Separator = styled.div`
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  ${p => (p.noMargin ? "" : "margin-top: 24px; margin-bottom: 24px;")}
-`;
+import { Separator } from "../Separator";
+import { DrawerTitle } from "../DrawerTitle";
 
 const ContentBox = styled(Box)`
   ${DeviceActionHeader} {
@@ -152,12 +148,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
 
   return (
     <Box height="100%">
-      <Box horizontal justifyContent="center">
-        <Text fontSize={6} ff="Inter|SemiBold" textTransform="capitalize">
-          <Trans i18nKey="swap2.exchangeDrawer.title" />
-        </Text>
-      </Box>
-      <Separator />
+      <DrawerTitle i18nKey="swap2.exchangeDrawer.title" />
       <ContentBox flex={1} justifyContent="center">
         <SwapAction
           swapTransaction={swapTransaction}
