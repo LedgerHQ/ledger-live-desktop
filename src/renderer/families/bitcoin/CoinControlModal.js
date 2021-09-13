@@ -57,7 +57,7 @@ const CoinControlModal = ({
 
   const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
-  const returning = (status.txOutputs || []).find(output => !!tx.path || !!output.isChange);
+  const returning = (status.txOutputs || []).find(output => !!output.path || !!output.isChange);
 
   return (
     <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
