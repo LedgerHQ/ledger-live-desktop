@@ -1,19 +1,11 @@
 // @flow
 import React, { useCallback } from "react";
-import { Trans } from "react-i18next";
-import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
 import SendAmountFields from "~/renderer/modals/Send/SendAmountFields";
 import { transactionSelector } from "~/renderer/actions/swap";
 import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
-
-const Separator = styled.div`
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  margin-top: 24px;
-  margin-bottom: 24px;
-`;
+import { DrawerTitle } from "../DrawerTitle";
 
 type Props = {
   swapTransaction: SwapTransactionType,
@@ -29,20 +21,9 @@ export default function FeesDrawer({ swapTransaction, disableSlowStrategy = fals
     [disableSlowStrategy],
   );
 
-  const titleSection = (
-    <>
-      <Box horizontal justifyContent="center">
-        <Text fontSize={6} ff="Inter|SemiBold" textTransform="capitalize">
-          <Trans i18nKey="swap2.form.details.label.fees" />
-        </Text>
-      </Box>
-      <Separator />
-    </>
-  );
-
   return (
     <Box height="100%">
-      {titleSection}
+      <DrawerTitle i18nKey="swap2.form.details.label.fees" />
       <Box mt={3} flow={4}>
         {transaction.networkInfo && (
           <SendAmountFields
