@@ -1,6 +1,7 @@
 // @flow
 import React, { memo, useState, useEffect, useCallback } from "react";
 import styled, { useTheme } from "styled-components";
+import { Trans } from "react-i18next";
 import { DrawerTitle } from "../DrawerTitle";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -15,6 +16,10 @@ import {
 import Check from "~/renderer/icons/Check";
 import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import Tabbable from "~/renderer/components/Box/Tabbable";
+import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
+import Plus from "~/renderer/icons/Plus";
+import { rgba } from "~/renderer/styles/helpers";
 
 const AccountWrapper = styled(Tabbable)`
   cursor: pointer;
@@ -25,6 +30,20 @@ const AccountWrapper = styled(Tabbable)`
   `
       : ""};
 `;
+
+const AddAccountIconContainer = styled(Tabbable)`
+  padding: 5px;
+  border-radius: 9999px;
+  color: ${p => p.theme.colors.palette.primary.main};
+  background: ${p => rgba(p.theme.colors.palette.primary.main, 0.2)};
+`;
+function AddAccountIcon() {
+  return (
+    <AddAccountIconContainer justifyContent="center" alignItems="center">
+      <Plus size={10} />
+    </AddAccountIconContainer>
+  );
+}
 
 const TargetAccount = memo(function TargetAccount({
   account,
@@ -43,7 +62,7 @@ const TargetAccount = memo(function TargetAccount({
     account.type !== "ChildAccount" && account.spendableBalance
       ? account.spendableBalance
       : account.balance;
-  const onClick = useCallback(() => setAccount(currency, account), [setAccount, account]);
+  const onClick = useCallback(() => setAccount(currency, account), [setAccount, currency, account]);
 
   return (
     <AccountWrapper
@@ -85,25 +104,33 @@ type Props = {
   selectedAccount: AccountLike,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   setSelectedAccountRef: { current: ?(AccountLike) => void },
+  setFilteredAccountsRef: { current: ?(AccountLike[]) => void },
 };
 export default function TargetAccountDrawer({
   accounts,
   selectedAccount: initialSelectedAccount,
   setToAccount,
   setSelectedAccountRef,
+  setFilteredAccountsRef,
 }: Props) {
+  const dispatch = useDispatch();
   const [selectedAccount, setSelectedAccount] = useState(initialSelectedAccount);
+  const [filteredAccounts, setFilteredAccounts] = useState(accounts);
+  const currency = getAccountCurrency(selectedAccount);
   useEffect(() => {
     setSelectedAccountRef.current = setSelectedAccount;
+    setFilteredAccountsRef.current = setFilteredAccounts;
     return () => {
       setSelectedAccountRef.current = null;
+      setFilteredAccountsRef.current = null;
     };
-  }, [setSelectedAccountRef]);
+  }, [setSelectedAccountRef, setFilteredAccountsRef]);
+  const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   return (
     <Box height="100%">
       <DrawerTitle i18nKey="swap2.form.to.title" />
       <Box>
-        {accounts.map(account => (
+        {filteredAccounts.map(account => (
           <TargetAccount
             key={account.id}
             account={account}
@@ -111,6 +138,21 @@ export default function TargetAccountDrawer({
             setAccount={setToAccount}
           />
         ))}
+        <Tabbable
+          onClick={handleAddAccount}
+          horizontal
+          py={3}
+          px={12}
+          alignItems="center"
+          style={{ cursor: "pointer" }}
+        >
+          <Box mr={12}>
+            <AddAccountIcon />
+          </Box>
+          <Text ff="Inter|SemiBold" color="palette.primary.main" fontSize={5}>
+            <Trans i18nKey="swap2.form.details.noAccountCTA" />
+          </Text>
+        </Tabbable>
       </Box>
     </Box>
   );
