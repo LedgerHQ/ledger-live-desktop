@@ -2683,6 +2683,10 @@
       "announcement": "News",
       "operation": "Operation",
       "achievement": "Achievement Unlocked"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
