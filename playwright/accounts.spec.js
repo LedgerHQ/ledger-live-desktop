@@ -6,7 +6,6 @@ test("navigate to btc", async () => {
   const window = await electronApp.firstWindow();
 
   await window.screenshot({ path: "start-of-test.png" });
-  await window.pause();
 
   const title = await window.isVisible("#page-scroller >> text=Bitcoin");
   expect(title).toBe(true);
