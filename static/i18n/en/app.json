@@ -249,7 +249,10 @@
       "to": {
         "title": "To"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country",
+      "notAvailable": {
+        "title": "Swap is not avalable yet in your area",
+        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+      },
       "providers": {
         "kyc": {
           "required": "You need to complete your KYC",
