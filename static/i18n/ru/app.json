@@ -773,11 +773,11 @@
       },
       "withdraw": {
         "title": "Вывести",
-        "description": "Выводите активы из протокола на свой счёт в Ledger."
+        "description": "Выведите активы из протокола на свой счёт в Ledger."
       }
     },
     "enable": {
-      "title": "Утвердить счёт",
+      "title": "Утверждение счёта",
       "steps": {
         "selectAccount": {
           "title": "Выберите счёт",
