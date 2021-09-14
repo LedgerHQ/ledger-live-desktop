@@ -10,7 +10,7 @@ export function DrawerTitle({ i18nKey }: { i18nKey: string }) {
   return (
     <>
       <Box horizontal justifyContent="center">
-        <Text fontSize={6} fontWeight="600" ff="Inter" textTransform="capitalize">
+        <Text fontSize={6} ff="Inter|SemiBold" textTransform="capitalize">
           <Trans i18nKey={i18nKey} />
         </Text>
       </Box>
