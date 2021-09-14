@@ -80,14 +80,13 @@ const BranchBadge: ThemedComponent<{}> = styled(Box).attrs(p => ({
 
 type Props = {
   manifest: AppManifest,
+  full: Boolean,
 };
 
 const AppDetails = ({ manifest }: Props) => {
   const { t } = useTranslation();
-  const description = t(
-    `manager.apps.content.${manifest.id}.shortDescription`,
-    manifest.content.shortDescription, // default description in case of missing translations
-  );
+  console.log(manifest);
+  const description = manifest.content.description.en;
 
   return (
     <>
