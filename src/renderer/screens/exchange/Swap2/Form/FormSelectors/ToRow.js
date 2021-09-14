@@ -18,6 +18,8 @@ import type {
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { Container as InputContainer } from "~/renderer/components/Input";
+import styled from "styled-components";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
@@ -25,6 +27,12 @@ type Props = {
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
 };
+
+const InputCurrencyContainer = styled(Box)`
+  ${InputContainer} {
+    background: none !important;
+  }
+`;
 
 export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
@@ -61,7 +69,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
 
   return (
     <>
-      <Box horizontal color={"palette.text.shade40"} fontSize={3}>
+      <Box horizontal color={"palette.text.shade40"} fontSize={3} mb={1}>
         <FormLabel>
           <Trans i18nKey="swap2.form.to.title" />
         </FormLabel>
@@ -77,7 +85,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             renderValueOverride={renderCurrencyValue}
           />
         </Box>
-        <Box width="50%">
+        <InputCurrencyContainer width="50%">
           <InputCurrency
             // @DEV: onChange props is required by the composant, there is no read-only logic
             onChange={() => {}}
@@ -85,12 +93,14 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             disabled
             placeholder="-"
             textAlign="right"
+            fontWeight={600}
+            color="palette.text.shade40"
             containerProps={amountInputContainerProps}
             unit={unit}
             // Flow complains if this prop is missing…
             renderRight={null}
           />
-        </Box>
+        </InputCurrencyContainer>
       </Box>
     </>
   );

@@ -162,7 +162,7 @@ export function CurrencyOption({
           {currency.name}
         </Text>
         <Box horizontal alignItems="center">
-          <Text color="palette.text.shade50" ff="Inter|Medium" fontSize={3}>
+          <Text color="palette.text.shade40" ff="Inter|Medium" fontSize={3}>
             {currency.ticker}
           </Text>
         </Box>

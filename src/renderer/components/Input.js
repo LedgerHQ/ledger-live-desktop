@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { fontSize, textAlign } from "styled-system";
+import { fontSize, textAlign, fontWeight, color } from "styled-system";
 import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
 import Spinner from "~/renderer/components/Spinner";
@@ -25,7 +25,7 @@ const RenderRightWrapper: ThemedComponent<{}> = styled(Box)`
   }
 `;
 
-const Container = styled(Box).attrs(() => ({
+export const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
 }))`
   background: ${p =>
@@ -125,11 +125,13 @@ const Base = styled.input.attrs(() => ({
 }))`
   font-family: "Inter";
   font-weight: 600;
+  color: ${p => p.theme.colors.palette.text.shade100};
+  border: 0;
   ${fontFamily};
   ${fontSize};
   ${textAlign};
-  border: 0;
-  color: ${p => p.theme.colors.palette.text.shade100};
+  ${fontWeight};
+  ${color};
   height: 100%;
   outline: none;
   padding: 0;
