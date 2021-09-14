@@ -7,12 +7,9 @@ import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types
 export const useRedirectToSwapForm = () => {
   const history = useHistory();
 
-  return useCallback(
-    _ => {
-      history.push("/swap");
-    },
-    [history],
-  );
+  return useCallback(() => {
+    history.push("/swap");
+  }, [history]);
 };
 
 export const useRedirectToSwapHistory = () => {
