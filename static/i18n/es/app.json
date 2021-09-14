@@ -3301,10 +3301,11 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Términos del servicio",
-    "privacyLabel": "Política de Privacidad",
-    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
