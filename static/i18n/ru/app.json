@@ -3301,10 +3301,11 @@
     "placeholder": "Введите адрес {{currencyName}}"
   },
   "Terms": {
-    "title": "Правовая информация",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Условия использования",
-    "privacyLabel": "Политика конфиденциальности",
-    "switchLabel": "Я прочитал(-а) и соглашаюсь с Условиями использования и Политикой конфиденциальности",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Войти в приложение Ledger"
   },
   "families": {
