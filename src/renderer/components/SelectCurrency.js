@@ -141,19 +141,21 @@ export function CurrencyOption({
   currency,
   singleLineLayout = true,
   hideParentTag = false,
+  tagVariant = "default",
 }: {
   currency: Currency,
   singleLineLayout?: boolean,
   hideParentTag?: boolean,
+  tagVariant?: "default" | "thin",
 }) {
+  const isParentTagDisplayed = !hideParentTag && currency.parentCurrency;
+
   const textContents = singleLineLayout ? (
     <>
       <Box grow ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
         {`${currency.name} (${currency.ticker})`}
       </Box>
-      {!hideParentTag && currency.parentCurrency ? (
-        <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
-      ) : null}
+      {isParentTagDisplayed ? <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel> : null}
     </>
   ) : (
     <>
@@ -163,11 +165,14 @@ export function CurrencyOption({
         </Text>
         <Box horizontal alignItems="center">
           <Text color="palette.text.shade40" ff="Inter|Medium" fontSize={3}>
-            {currency.ticker}
+            {currency.ticker}{" "}
+            {isParentTagDisplayed && tagVariant === "thin"
+              ? `(${currency.parentCurrency.name})`
+              : null}
           </Text>
         </Box>
       </OptionMultilineContainer>
-      {!hideParentTag && currency.parentCurrency ? (
+      {isParentTagDisplayed && tagVariant === "default" ? (
         <CurrencyLabel>{currency.parentCurrency.name}</CurrencyLabel>
       ) : null}
     </>
