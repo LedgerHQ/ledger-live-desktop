@@ -49,7 +49,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
     if (currency.id === toCurrency?.id) return;
 
     setToAccount(currency, account, parentAccount);
-  }, [fromAccount, selectState.currency]);
+  }, [selectState.currency]);
 
   /* Force refresh or reset internal state on account change */
   const previousFromAccountRef = useRef(fromAccount);
