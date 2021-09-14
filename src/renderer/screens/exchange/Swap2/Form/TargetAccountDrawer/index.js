@@ -1,0 +1,159 @@
+// @flow
+import React, { memo, useState, useEffect, useCallback } from "react";
+import styled, { useTheme } from "styled-components";
+import { Trans } from "react-i18next";
+import { DrawerTitle } from "../DrawerTitle";
+import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import type { AccountLike } from "@ledgerhq/live-common/lib/types";
+import {
+  getAccountCurrency,
+  getAccountUnit,
+  getAccountName,
+} from "@ledgerhq/live-common/lib/account";
+import Check from "~/renderer/icons/Check";
+import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import Tabbable from "~/renderer/components/Box/Tabbable";
+import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
+import Plus from "~/renderer/icons/Plus";
+import { rgba } from "~/renderer/styles/helpers";
+
+const AccountWrapper = styled(Tabbable)`
+  cursor: pointer;
+  ${p =>
+    p.selected
+      ? `
+    background-color: ${p.theme.colors.lightGrey};
+  `
+      : ""};
+`;
+
+const AddAccountIconContainer = styled(Tabbable)`
+  padding: 5px;
+  border-radius: 9999px;
+  color: ${p => p.theme.colors.palette.primary.main};
+  background: ${p => rgba(p.theme.colors.palette.primary.main, 0.2)};
+`;
+function AddAccountIcon() {
+  return (
+    <AddAccountIconContainer justifyContent="center" alignItems="center">
+      <Plus size={10} />
+    </AddAccountIconContainer>
+  );
+}
+
+const TargetAccount = memo(function TargetAccount({
+  account,
+  selected,
+  setAccount,
+}: {
+  account: AccountLike,
+  selected?: boolean,
+  setAccount: $PropertyType<Props, "setToAccount">,
+}) {
+  const theme = useTheme();
+  const currency = getAccountCurrency(account);
+  const unit = getAccountUnit(account);
+  const name = getAccountName(account);
+  const balance =
+    account.type !== "ChildAccount" && account.spendableBalance
+      ? account.spendableBalance
+      : account.balance;
+  const onClick = useCallback(() => setAccount(currency, account), [setAccount, currency, account]);
+
+  return (
+    <AccountWrapper
+      horizontal
+      p={3}
+      justifyContent="space-between"
+      selected={selected}
+      onClick={onClick}
+    >
+      <Box horizontal alignItems="center">
+        <Box mr={3}>
+          <CryptoCurrencyIcon currency={currency} size={16} />
+        </Box>
+        <Text ff="Inter|SemiBold" fontSize={5}>
+          {name}
+        </Text>
+      </Box>
+      <Box position="relative" pr={5}>
+        <FormattedVal
+          color="palette.text.shade50"
+          ff="Inter|Medium"
+          fontSize={5}
+          val={balance}
+          unit={unit}
+          showCode
+        />
+        {selected && (
+          <Box position="absolute" height="100%" justifyContent="center" style={{ right: 0 }}>
+            <Check size={16} color={theme.colors.palette.primary.main} />
+          </Box>
+        )}
+      </Box>
+    </AccountWrapper>
+  );
+});
+
+type Props = {
+  accounts: AccountLike[],
+  selectedAccount: AccountLike,
+  setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  setDrawerStateRef: {
+    current: ?({ selectedAccount: AccountLike, filteredAccounts: AccountLike[] }) => void,
+  },
+};
+export default function TargetAccountDrawer({
+  accounts,
+  selectedAccount: initialSelectedAccount,
+  setToAccount,
+  setDrawerStateRef,
+}: Props) {
+  const dispatch = useDispatch();
+  const [{ selectedAccount, filteredAccounts }, setState] = useState({
+    selectedAccount: initialSelectedAccount,
+    filteredAccounts: accounts,
+  });
+  const currency = getAccountCurrency(selectedAccount);
+  useEffect(() => {
+    setDrawerStateRef.current = setState;
+    return () => {
+      setDrawerStateRef.current = null;
+    };
+  }, [setDrawerStateRef]);
+  const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+  return (
+    <Box height="100%">
+      <DrawerTitle i18nKey="swap2.form.to.title" />
+      <Box>
+        {filteredAccounts.map(account => (
+          <TargetAccount
+            key={account.id}
+            account={account}
+            selected={selectedAccount?.id === account.id}
+            setAccount={setToAccount}
+          />
+        ))}
+        <Tabbable
+          onClick={handleAddAccount}
+          horizontal
+          py={3}
+          px={12}
+          alignItems="center"
+          style={{ cursor: "pointer" }}
+        >
+          <Box mr={12}>
+            <AddAccountIcon />
+          </Box>
+          <Text ff="Inter|SemiBold" color="palette.primary.main" fontSize={5}>
+            <Trans i18nKey="swap2.form.details.noAccountCTA" />
+          </Text>
+        </Tabbable>
+      </Box>
+    </Box>
+  );
+}
