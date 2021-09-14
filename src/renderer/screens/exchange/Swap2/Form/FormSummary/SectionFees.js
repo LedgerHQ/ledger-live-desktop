@@ -72,10 +72,7 @@ const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType
 
   return (
     <SummarySection>
-      <SummaryLabel
-        label={t("swap2.form.details.label.fees")}
-        details={t("swap2.form.details.tooltip.fees")}
-      />
+      <SummaryLabel label={t("swap2.form.details.label.fees")} />
       <SummaryValue handleChange={handleChange}>{summaryValue}</SummaryValue>
     </SummarySection>
   );
