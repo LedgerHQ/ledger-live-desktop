@@ -84,7 +84,7 @@ function Rate({ value, selected, onSelect, swapTransaction }: Props) {
           justifyContent="space-between"
           fontSize={3}
           fontWeight={500}
-          color="palette.text.shade50"
+          color="palette.text.shade40"
         >
           <Box horizontal alignItems="center">
             <Box mr={1}>
@@ -105,7 +105,7 @@ function Rate({ value, selected, onSelect, swapTransaction }: Props) {
             value={amount}
             disableRounding
             showCode
-            color="palette.text.shade50"
+            color="palette.text.shade40"
           />
         </Box>
       </Box>
