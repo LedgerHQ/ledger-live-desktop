@@ -62,7 +62,7 @@ export default function FormInputs({
           fromAmountError={fromAmountError}
         />
       </Box>
-      <Box horizontal justifyContent="center" alignContent="center" mb={3}>
+      <Box horizontal justifyContent="center" alignContent="center" mb={1}>
         <SwapButton />
       </Box>
       <Box mb={2}>

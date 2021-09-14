@@ -136,7 +136,7 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
       </Box>
       <Box>
         <FormattedVal
-          color="palette.text.shade50"
+          color="palette.text.shade40"
           ff="Inter|Medium"
           fontSize={3}
           val={balance}

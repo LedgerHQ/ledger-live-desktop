@@ -49,15 +49,15 @@ function FromRow({
         justifyContent="space-between"
         alignItems="flex-end"
         fontSize={3}
-        mb={2}
+        mb={1}
         color={"palette.text.shade40"}
       >
         <FormLabel>{t("swap2.form.from.title")}</FormLabel>
         <Box horizontal alignItems="center">
-          <Text marginRight={1} fontWeight="500">
+          <Text ff="Inter|Medium" marginRight={1} fontSize={2}>
             {t("swap2.form.from.max")}
           </Text>
-          <Switch medium isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
+          <Switch small isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
         </Box>
       </Box>
       <Box horizontal boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
@@ -82,6 +82,7 @@ function FromRow({
             disabled={!fromAccount || isMaxEnabled}
             placeholder="0"
             textAlign="right"
+            fontWeight={600}
             containerProps={amountInputContainerProps}
             // $FlowFixMe
             unit={unit}
