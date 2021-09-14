@@ -74,10 +74,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
 
   return (
     <SummarySection>
-      <SummaryLabel
-        label={t("swap2.form.details.label.rate")}
-        details={t("swap2.form.details.tooltip.rate")}
-      />
+      <SummaryLabel label={t("swap2.form.details.label.rate")} />
       {summaryValue}
     </SummarySection>
   );
