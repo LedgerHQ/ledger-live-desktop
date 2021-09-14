@@ -73,23 +73,22 @@ const SectionTarget = ({ account, currency, setToAccount }: SectionTargetProps) 
   const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   const hideEdit = !filteredAccounts || filteredAccounts.length < 2;
 
-  // Refs are used to keep the drawer state synced.
-  const setSelectedAccountRef = useRef(null);
-  const setFilteredAccountsRef = useRef(null);
+  // Using a ref to keep the drawer state synced.
+  const setDrawerStateRef = useRef(null);
   useEffect(() => {
-    setSelectedAccountRef.current && setSelectedAccountRef.current(account);
-  }, [setSelectedAccountRef, account]);
-  useEffect(() => {
-    setFilteredAccountsRef.current && setFilteredAccountsRef.current(filteredAccounts);
-  }, [filteredAccounts]);
+    setDrawerStateRef.current &&
+      setDrawerStateRef.current({
+        selectedAccount: account,
+        filteredAccounts,
+      });
+  }, [account, filteredAccounts]);
 
   const showDrawer = () =>
     setDrawer(TargetAccountDrawer, {
       accounts: filteredAccounts,
       selectedAccount: account,
       setToAccount: setToAccount,
-      setSelectedAccountRef: setSelectedAccountRef,
-      setFilteredAccountsRef: setFilteredAccountsRef,
+      setDrawerStateRef: setDrawerStateRef,
     });
   const handleEditAccount = hideEdit ? null : showDrawer;
 
