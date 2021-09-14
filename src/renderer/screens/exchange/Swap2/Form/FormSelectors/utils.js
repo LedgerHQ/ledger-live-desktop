@@ -34,6 +34,6 @@ export const renderAccountValue = ({ data }: { data: SelectAccountOption }) =>
 
 export const renderCurrencyValue = ({ data: currency }: { data: Currency }) => {
   return currency ? (
-    <CurrencyOption currency={currency} singleLineLayout={false} hideParentTag />
+    <CurrencyOption currency={currency} singleLineLayout={false} tagVariant="thin" />
   ) : null;
 };
