@@ -3301,11 +3301,11 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "title": "Conditions d'utilisation",
+    "description": "Veuillez prendre connaissance de nos Conditions d'utilisation et Politique de confidentialité.",
     "termsLabel": "Conditions d'utilisation",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "Politique de confidentialité",
+    "switchLabel": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
     "cta": "Entrer dans l'application Ledger Live"
   },
   "families": {
