@@ -103,28 +103,28 @@ type Props = {
   accounts: AccountLike[],
   selectedAccount: AccountLike,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
-  setSelectedAccountRef: { current: ?(AccountLike) => void },
-  setFilteredAccountsRef: { current: ?(AccountLike[]) => void },
+  setDrawerStateRef: {
+    current: ?({ selectedAccount: AccountLike, filteredAccounts: AccountLike[] }) => void,
+  },
 };
 export default function TargetAccountDrawer({
   accounts,
   selectedAccount: initialSelectedAccount,
   setToAccount,
-  setSelectedAccountRef,
-  setFilteredAccountsRef,
+  setDrawerStateRef,
 }: Props) {
   const dispatch = useDispatch();
-  const [selectedAccount, setSelectedAccount] = useState(initialSelectedAccount);
-  const [filteredAccounts, setFilteredAccounts] = useState(accounts);
+  const [{ selectedAccount, filteredAccounts }, setState] = useState({
+    selectedAccount: initialSelectedAccount,
+    filteredAccounts: accounts,
+  });
   const currency = getAccountCurrency(selectedAccount);
   useEffect(() => {
-    setSelectedAccountRef.current = setSelectedAccount;
-    setFilteredAccountsRef.current = setFilteredAccounts;
+    setDrawerStateRef.current = setState;
     return () => {
-      setSelectedAccountRef.current = null;
-      setFilteredAccountsRef.current = null;
+      setDrawerStateRef.current = null;
     };
-  }, [setSelectedAccountRef, setFilteredAccountsRef]);
+  }, [setDrawerStateRef]);
   const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
   return (
     <Box height="100%">
