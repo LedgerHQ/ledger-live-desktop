@@ -150,7 +150,7 @@ const useSwapTransaction = (): SwapTransactionType => {
       setFromAmount(amount);
     };
 
-    if (isMaxEnabled) updateAmountUsingMax();
+    isMaxEnabled ? updateAmountUsingMax() : setFromAmount(new BigNumber(0));
   }, [isMaxEnabled, fromState.account, bridgeTransaction?.transaction?.feesStrategy]);
 
   /* Fetch and update provider rates. */
