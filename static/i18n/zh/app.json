@@ -3301,10 +3301,11 @@
     "placeholder": "输入 {{currencyName}} 地址"
   },
   "Terms": {
-    "title": "法律条款",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "服务条款",
-    "privacyLabel": "隐私政策",
-    "switchLabel": "我已阅读并接受服务条款和隐私政策",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "进入 Ledger 应用程序"
   },
   "families": {
