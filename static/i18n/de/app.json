@@ -3301,10 +3301,11 @@
     "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
-    "title": "Rechtliches",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Allgemeine Geschäftsbedingungen",
-    "privacyLabel": "Datenschutzrichtlinie",
-    "switchLabel": "Ich habe die Nutzungsbedingungen und Datenschutzrichtlinien gelesen und akzeptiere sie",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Zur Ledger-App"
   },
   "families": {
