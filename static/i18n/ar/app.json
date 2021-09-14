@@ -3301,10 +3301,11 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "القانونية",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "شروط الخدمة",
-    "privacyLabel": "سياسة الخصوصية",
-    "switchLabel": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
