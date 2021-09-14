@@ -85,7 +85,6 @@ type Props = {
 
 const AppDetails = ({ manifest }: Props) => {
   const { t } = useTranslation();
-  console.log(manifest);
   const description = manifest.content.description.en;
 
   return (
