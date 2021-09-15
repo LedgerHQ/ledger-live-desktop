@@ -23,8 +23,8 @@ type SwapFormSummaryProps = {
 const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSummaryProps) => (
   <Form>
     <SectionProvider provider={provider} status={kycStatus} />
-    <SectionRate swapTransaction={swapTransaction} />
-    <SectionFees swapTransaction={swapTransaction} />
+    <SectionRate provider={provider} swapTransaction={swapTransaction} />
+    <SectionFees provider={provider} swapTransaction={swapTransaction} />
     <SectionTarget
       account={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
       currency={swapTransaction.swap.to.currency}

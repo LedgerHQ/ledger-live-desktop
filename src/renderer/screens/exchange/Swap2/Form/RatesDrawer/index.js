@@ -8,10 +8,13 @@ import Rate from "./Rate";
 import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
 import { rateSelector, updateRateAction } from "~/renderer/actions/swap";
 import { DrawerTitle } from "../DrawerTitle";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import { SWAP_VERSION } from "../../utils/index";
 type Props = {
   swapTransaction: SwapTransactionType,
+  provider: ?string,
 };
-export default function ProviderRateDrawer({ swapTransaction }: Props) {
+export default function ProviderRateDrawer({ swapTransaction, provider }: Props) {
   const dispatch = useDispatch();
   const rates = swapTransaction.swap.rates.value;
   const selectedRate = useSelector(rateSelector);
@@ -25,6 +28,14 @@ export default function ProviderRateDrawer({ swapTransaction }: Props) {
 
   return (
     <Box height="100%">
+      <TrackPage
+        category="Swap"
+        name="Form - Edit Fees"
+        sourcecurrency={swapTransaction.swap.from.currency?.name}
+        targetcurrency={swapTransaction.swap.to.currency?.name}
+        provider={provider}
+        swapVersion={SWAP_VERSION}
+      />
       <DrawerTitle i18nKey="swap2.form.ratesDrawer.title" />
       <Box mt={3}>
         <Box
