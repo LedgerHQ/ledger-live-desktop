@@ -17,8 +17,8 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import { AmountRequired } from "@ledgerhq/errors";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
-
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { useTranslation } from "react-i18next";
 
 type RatesReducerState = {
   status?: ?string,
@@ -78,6 +78,7 @@ export type SwapTransactionType = {
 };
 
 const useSwapTransaction = (): SwapTransactionType => {
+  const { t } = useTranslation();
   const [toState, setToState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
   const [fromState, setFromState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
   const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
@@ -180,8 +181,24 @@ const useSwapTransaction = (): SwapTransactionType => {
         // Discard bad provider rates
         let rateError = null;
         rates = rates.reduce((acc, rate) => {
-          rateError = rateError ?? rate.error;
-          return rate.error ? acc : [...acc, rate];
+          const isToAmountPositive = rate?.toAmount?.isPositive();
+
+          if (rate.error && !rateError) rateError = rate.error;
+          /* @dev: Currently backend side doesn't return us an error
+           ** when the target amount is lower than the fees itself.
+           ** Tbh I'm not sure that's their role so we've got to manage
+           ** this case by ourselves. Without this check, negative amount
+           ** is rendered to the target input.
+           ** Note that this error is displayed in a value window that does
+           ** not display the standard "tooLow" error because the value in this
+           ** case is higher that the required value returned to us
+           */
+          if (!isToAmountPositive && !rateError)
+            rateError = new RangeError(
+              t("swap2.form.error.SwapExchangeRateAmountIncludingFeesTooLow"),
+            );
+
+          return rate.error || !isToAmountPositive ? acc : [...acc, rate];
         }, []);
         if (rates.length === 0 && rateError) {
           // If there all the rates are in error

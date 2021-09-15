@@ -265,6 +265,9 @@
             "rejected": "KYC rejected"
           }
         }
+      },
+      "error": {
+        "SwapExchangeRateAmountIncludingFeesTooLow": "Including fees, the amount is too low to proceed a swap"
       }
     },
     "history": {
