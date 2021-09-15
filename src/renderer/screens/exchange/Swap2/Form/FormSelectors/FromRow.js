@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import { fromSelector } from "~/renderer/actions/swap";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -19,6 +19,8 @@ import type {
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { usePickDefaultAccount } from "../../utils/shared/hooks";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION } from "../../utils/index";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
@@ -28,6 +30,7 @@ type Props = {
   setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
   isMaxEnabled: boolean,
   fromAmountError?: Error,
+  provider: ?string,
 };
 
 /* @dev: Yeah, Im sorry if you read this, design asked us to
@@ -51,11 +54,28 @@ function FromRow({
   isMaxEnabled,
   toggleMax,
   fromAmountError,
+  provider,
 }: Props) {
   const accounts = useSelector(fromSelector)(useSelector(shallowAccountsSelector));
   const unit = fromAccount && getAccountUnit(fromAccount);
+  const currency = fromAccount && getAccountCurrency(fromAccount);
   const { t } = useTranslation();
   usePickDefaultAccount(accounts, fromAccount, setFromAccount);
+  const trackEditAccount = () =>
+    track("Page Swap Form - Edit Source Account", {
+      sourcecurrency: currency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+  const setAccountAndTrack = account => {
+    const sourcecurrency = getAccountCurrency(account);
+    track("Page Swap Form - New Source Account", {
+      sourcecurrency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+    setFromAccount(account);
+  };
 
   return (
     <>
@@ -81,13 +101,14 @@ function FromRow({
             accounts={accounts}
             value={fromAccount}
             // $FlowFixMe
-            onChange={setFromAccount}
+            onChange={setAccountAndTrack}
             stylesMap={selectRowStylesMap}
             placeholder={t("swap2.form.from.accountPlaceholder")}
             showAddAccount
             isSearchable={false}
             disabledTooltipText={t("swap2.form.from.currencyDisabledTooltip")}
             renderValue={renderAccountValue}
+            onMenuOpen={trackEditAccount}
           />
         </Box>
         <InputSection width="50%">

@@ -41,12 +41,13 @@ import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
-import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import CrossCircle from "~/renderer/icons/CrossCircle";
 import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -631,6 +632,14 @@ export const renderSwapDeviceConfirmationV2 = ({
   ];
   return (
     <>
+      <TrackPage
+        category="Swap"
+        name={`ModalStep-summary`}
+        sourcecurrency={sourceAccountCurrency?.name}
+        targetcurrency={targetAccountCurrency?.name}
+        provider={exchangeRate.provider}
+        swapVersion={SWAP_VERSION}
+      />
       <Box flex={0}>
         <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={7} mx={4}>
           <Trans i18nKey="DeviceAction.swap.notice" />

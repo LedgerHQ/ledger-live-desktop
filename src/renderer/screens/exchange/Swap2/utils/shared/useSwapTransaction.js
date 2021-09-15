@@ -19,6 +19,7 @@ import { AmountRequired } from "@ledgerhq/errors";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { track } from "~/renderer/analytics/segment";
 
 type RatesReducerState = {
   status?: ?string,
@@ -77,15 +78,31 @@ export type SwapTransactionType = {
   reverseSwap: () => void,
 };
 
-const useSwapTransaction = (): SwapTransactionType => {
+const useSwapTransaction = ({
+  defaultCurrency,
+  defaultAccount,
+  defaultParentAccount,
+}: {
+  defaultCurrency?: $PropertyType<SwapSelectorStateType, "currency">,
+  defaultAccount?: $PropertyType<SwapSelectorStateType, "account">,
+  defaultParentAccount?: $PropertyType<SwapSelectorStateType, "parentAccount">,
+} = {}): SwapTransactionType => {
   const [toState, setToState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
-  const [fromState, setFromState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
+  const [fromState, setFromState] = useState<SwapSelectorStateType>({
+    ...SelectorStateDefaultValues,
+    currency: defaultCurrency ?? SelectorStateDefaultValues.currency,
+    account: defaultAccount ?? SelectorStateDefaultValues.account,
+    parentAccount: defaultParentAccount ?? SelectorStateDefaultValues.parentAccount,
+  });
   const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
   const [rates, dispatchRates] = useReducer(ratesReducer, ratesReducerInitialState);
   const [getRatesDependency, setGetRatesDependency] = useState(null);
   const refetchRates = useCallback(() => setGetRatesDependency({}), []);
   const allAccounts = useSelector(shallowAccountsSelector);
-  const bridgeTransaction = useBridgeTransaction();
+  const bridgeTransaction = useBridgeTransaction(() => ({
+    account: fromState.account,
+    parentAccount: fromState.parentAccount,
+  }));
   const fromAmountError = useMemo(() => {
     const [error] = [
       bridgeTransaction.status.errors?.gasPrice,
@@ -177,6 +194,11 @@ const useSwapTransaction = (): SwapTransactionType => {
           transaction,
         );
         if (abort) return;
+        if (rates.length === 0) {
+          track("Page Swap Form - Error No Rate", {
+            sourcecurrency: toCurrency?.name,
+          });
+        }
         // Discard bad provider rates
         let rateError = null;
         rates = rates.reduce((acc, rate) => {
@@ -184,7 +206,7 @@ const useSwapTransaction = (): SwapTransactionType => {
           return rate.error ? acc : [...acc, rate];
         }, []);
         if (rates.length === 0 && rateError) {
-          // If there all the rates are in error
+          // If all the rates are in error
           dispatchRates({ type: "error", payload: rateError });
         } else {
           dispatchRates({ type: "set", payload: rates });
