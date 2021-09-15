@@ -2,11 +2,11 @@
   "engines": {
     "node": ">=12"
   },
-  "name": "ledger-live-desktop",
-  "productName": "Ledger Live",
-  "description": "Ledger Live - Desktop",
+  "name": "ledger-live-desktop-nightly",
+  "productName": "Ledger Live Nightly",
+  "description": "Ledger Live - Desktop Nightly",
   "author": "Ledger Live Team <team-live@ledger.fr>",
-  "repository": "https://github.com/LedgerHQ/ledger-live-desktop",
+  "repository": "https://github.com/LedgerHQ/ledger-live-desktop-nightly",
   "license": "MIT",
   "private": true,
   "main": "./.webpack/main.bundle.js",
