@@ -45,7 +45,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import CrossCircle from "~/renderer/icons/CrossCircle";
-import { getProviderIcon } from "~/renderer/screens/exchange/swap2/utils";
+import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
