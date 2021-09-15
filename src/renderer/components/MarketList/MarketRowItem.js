@@ -8,6 +8,9 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { CurrencyLabel } from "~/renderer/components/AccountTagDerivationMode";
 
+const Cell = styled(Box)`
+  padding: 15px 20px;
+`;
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -22,7 +25,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
   font-weight: 600;
   justify-content: flex-start;
   margin-bottom: 9px;
-  padding: 16px 20px;
+  //padding: 16px 20px;
   position: relative;
   transition: background-color ease-in-out 200ms;
 
@@ -105,16 +108,16 @@ export default class MarketRowItem extends PureComponent<Props> {
       order_number,
       style,
       currency,
-      counterValueCurrency
+      counterValueCurrency,
     } = this.props;
 
     return (
-      <div style={style}>
+      <div style={{ ...style }}>
         <Row expanded={true}>
           <RowContent>
-            <Box
+            <Cell
               style={{ maxWidth: "40px" }}
-              flex="5"
+              flex="5%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
@@ -122,9 +125,8 @@ export default class MarketRowItem extends PureComponent<Props> {
               fontSize={4}
             >
               {order_number}
-            </Box>
-            <CryptoCurrencyIcon currency={currency} size={20} />
-            <Box
+            </Cell>
+            <Cell
               shrink
               grow
               flex="40%"
@@ -134,45 +136,39 @@ export default class MarketRowItem extends PureComponent<Props> {
               alignItems="center"
               fontSize={4}
             >
+              <CryptoCurrencyIcon currency={currency} size={20} />
               <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
                 {currency.name}
-                {/*<Box*/}
-                {/*  alignItems="center"*/}
-                {/*  color="palette.text.shade60"*/}
-                {/*  fontSize={14}*/}
-                {/*  horizontal={true}*/}
-                {/*  style={{ textTransform: "uppercase" }}*/}
-                {/*>*/}
-                {/*  {short_name}*/}
-                {/*</Box>*/}
-                {/*{tag}*/}
                 <CurrencyLabel>{currency.ticker}</CurrencyLabel>
               </div>
-            </Box>
-            <Box
+            </Cell>
+            <Cell
               shrink
               grow
               flex="10%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
+              justifyContent="flex-end"
               alignItems="center"
               fontSize={4}
             >
               {currency.counterValue ? <FormattedVal
+                style={{ textAlign: "right" }}
                 val={currency.counterValue}
                 currency={currency}
                 unit={counterValueCurrency.units[0]}
                 showCode
               /> : null}
-            </Box>
-            <Box
+            </Cell>
+            <Cell
               shrink
               grow
               flex="10%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
+              justifyContent="flex-end"
               alignItems="center"
               fontSize={4}
             >
@@ -184,18 +180,20 @@ export default class MarketRowItem extends PureComponent<Props> {
                 inline
                 withIcon
               /> : null}
-            </Box>
-            <Box
+            </Cell>
+            <Cell
               shrink
               grow
-              flex="10%"
+              flex="15%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
               alignItems="center"
+              justifyContent="flex-start"
               fontSize={4}
             >
-            </Box>
+              1
+            </Cell>
           </RowContent>
         </Row>
       </div>

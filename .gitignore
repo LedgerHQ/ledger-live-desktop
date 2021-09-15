@@ -127,3 +127,4 @@ tests/docker-electron-webdriver/.lastyarn
 yalc.lock
 
 ui-lib/lib
+.idea

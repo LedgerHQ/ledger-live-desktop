@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useState } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
@@ -9,6 +9,15 @@ import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import { useMarketCurrenciesList } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
+import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
+
+const ColumnTitleBox = styled(Box)`
+  padding: 10px 20px;
+`;
+
+const ArrowsUpDownIconWrapper = styled.div`
+  padding: 0 5px
+`;
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -23,14 +32,8 @@ const Row: ThemedComponent<{}> = styled(Box)`
   font-weight: 600;
   justify-content: flex-start;
   //margin-bottom: 9px;
-  padding: 10px 20px;
   position: relative;
   transition: background-color ease-in-out 200ms;
-
-  :active {
-    border-color: ${p => p.theme.colors.palette.text.shade20};
-    background: ${p => p.theme.colors.palette.action.hover};
-  }
 `;
 
 const RowContent: ThemedComponent<{
@@ -59,7 +62,6 @@ function MarketList(props) {
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
 
   const currencies = useMarketCurrenciesList();
-  console.log(currencies);
   let visibleCurrencies = [];
   let hiddenCurrencies = [];
   for (let i = 0; i < currencies.length; i++) {
@@ -71,20 +73,32 @@ function MarketList(props) {
     }
   }
 
-  visibleCurrencies = sortCurrencies(visibleCurrencies, "counterValue", "desc");
+  const [order, setOrder] = useState("desc");
+  const [orderBy, setOrderBy] = useState("counterValue");
+
+  const onSort = (key) => {
+    if (key === orderBy) {
+      setOrder(order === "desc" ? "asc" : "desc")
+    } else {
+      setOrderBy(key)
+    }
+  };
+
+  visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
 
   const CurrencyRow = ({ index, style }) => (
     <MarketRowItem currency={visibleCurrencies[index]} order_number={index + 1}
                    counterValueCurrency={counterValueCurrency}
                    style={style} />
   );
+
   return (
     <Box flow={2}>
       <Row expanded={true}>
         <RowContent>
-          <Box
+          <ColumnTitleBox
             style={{ maxWidth: "40px" }}
-            flex="1"
+            flex="5%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -92,8 +106,8 @@ function MarketList(props) {
             fontSize={4}
           >
             #
-          </Box>
-          <Box
+          </ColumnTitleBox>
+          <ColumnTitleBox
             shrink
             grow
             flex="40%"
@@ -102,46 +116,60 @@ function MarketList(props) {
             horizontal
             alignItems="center"
             fontSize={4}
+            onClick={() => onSort("name")}
           >
             Name
-          </Box>
-          <Box
+            <ArrowsUpDownIconWrapper>
+              <ArrowsUpDown size={10} />
+            </ArrowsUpDownIconWrapper>
+          </ColumnTitleBox>
+          <ColumnTitleBox
             shrink
             grow
             flex="10%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
+            justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
+            onClick={() => onSort("counterValue")}
           >
             Price
-          </Box>
-          <Box
+            <ArrowsUpDownIconWrapper>
+              <ArrowsUpDown size={10} />
+            </ArrowsUpDownIconWrapper>
+          </ColumnTitleBox>
+          <ColumnTitleBox
             shrink
             grow
             flex="10%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
+            justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
+            onClick={() => onSort("change")}
           >
             % Change
-          </Box>
-          <Box
+            <ArrowsUpDownIconWrapper>
+              <ArrowsUpDown size={10} />
+            </ArrowsUpDownIconWrapper>
+          </ColumnTitleBox>
+          <ColumnTitleBox
             shrink
             grow
-            flex="10%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
             alignItems="center"
-            justifyContent="start"
+            justifyContent="flex-start"
             fontSize={4}
           >
             Variation
-          </Box>
+          </ColumnTitleBox>
         </RowContent>
       </Row>
       <List
@@ -170,8 +198,8 @@ export const matchesSearch = (
 
 const sortCurrencies = (currencies, key, order) => {
   return currencies.sort(function(a, b) {
-    const orders = {
-      asc: (a, b) => (a > b ? 1 : -1),
+      const orders = {
+        asc: (a, b) => ( a > b ? 1 : -1 ),
         desc: (a, b) => ( a < b ? 1 : -1 ),
       };
       return orders[order](a[key], b[key]);
