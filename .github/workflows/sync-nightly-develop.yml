@@ -1,0 +1,30 @@
+name: Sync Nightly Develop
+on:
+  schedule:
+    - cron: "*/15 22 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  sync-nightly-develop:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout develop-nightly
+        uses: actions/checkout@v2
+        with:
+          ref: develop-nightly
+          fetch-depth: 0
+      - name: Set git
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - name: sync branches
+        run: |
+          git pull origin develop
+      - name: Sync changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          branch: develop-nightly
+          repository: LedgerHQ/ledger-live-desktop
+          tags: false
+          force: true
