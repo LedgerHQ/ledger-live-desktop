@@ -59,7 +59,7 @@ export default function FormInputs({
 }: FormInputsProps) {
   return (
     <section>
-      <Box mb={5}>
+      <Box mb={7}>
         <FromRow
           fromAccount={fromAccount}
           setFromAccount={setFromAccount}
