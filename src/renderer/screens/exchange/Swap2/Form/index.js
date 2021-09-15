@@ -129,8 +129,7 @@ const SwapForm = () => {
           fromAmountError={swapError}
           isSwapReversable={swapTransaction.swap.isSwapReversable}
           reverseSwap={swapTransaction.reverseSwap}
-          // TODO: implement the "to" currency input loader
-          // loadingRates={swapTransaction.swap.rates.status === "loading"}
+          loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
         <SwapFormSummary
           swapTransaction={swapTransaction}

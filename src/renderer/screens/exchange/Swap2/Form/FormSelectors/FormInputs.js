@@ -24,6 +24,7 @@ type FormInputsProps = {
   isMaxEnabled?: boolean,
   fromAmountError?: Error,
   isSwapReversable: boolean,
+  loadingRates: boolean,
 };
 
 const RoundButton = styled(Button)`
@@ -56,6 +57,7 @@ export default function FormInputs({
   fromAmountError,
   reverseSwap,
   isSwapReversable,
+  loadingRates,
 }: FormInputsProps) {
   return (
     <section>
@@ -79,6 +81,7 @@ export default function FormInputs({
           setToAccount={setToAccount}
           toAmount={toAmount}
           fromAccount={fromAccount}
+          loadingRates={loadingRates}
         />
       </Box>
     </section>

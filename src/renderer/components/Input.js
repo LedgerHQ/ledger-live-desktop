@@ -171,6 +171,7 @@ type Props = {
   editInPlace?: boolean,
   disabled?: boolean,
   hideErrorMessage?: boolean,
+  value?: string,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -192,6 +193,7 @@ const Input = React.forwardRef(function Input(
     onFocus = noop,
     onBlur = noop,
     hideErrorMessage,
+    value,
     ...props
   }: Props,
   inputRef,
@@ -262,6 +264,7 @@ const Input = React.forwardRef(function Input(
       <BaseContainer px={3} grow shrink>
         <Base
           {...props}
+          value={loading ? "" : value}
           small={small}
           disabled={disabled}
           ref={inputRef}
