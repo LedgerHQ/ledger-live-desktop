@@ -2,15 +2,12 @@
 
 import React, { PureComponent } from "react";
 import styled from "styled-components";
-import { darken } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import Box, { Tabbable } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import { CurrencyLabel } from "~/renderer/components/AccountTagDerivationMode";
 
-const InputWrapper = styled.div`
-  margin-left: 4px;
-  width: 100%;
-`;
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -106,21 +103,18 @@ export default class MarketRowItem extends PureComponent<Props> {
   render() {
     const {
       order_number,
-      short_name,
-      name,
-      style
+      style,
+      currency,
+      counterValueCurrency
     } = this.props;
 
-    // const tag = <AccountTagDerivationMode account={account} />;
     return (
-      <div style={style} className="accounts-account-row-item">
+      <div style={style}>
         <Row expanded={true}>
-          <RowContent
-            className="accounts-account-row-item-content"
-          >
+          <RowContent>
             <Box
-              flex="5%"
-              shrink={1}
+              style={{ maxWidth: "40px" }}
+              flex="5"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
@@ -129,11 +123,11 @@ export default class MarketRowItem extends PureComponent<Props> {
             >
               {order_number}
             </Box>
-            <CryptoCurrencyIcon currency={this.props} size={20} />
+            <CryptoCurrencyIcon currency={currency} size={20} />
             <Box
               shrink
               grow
-              flex="30%"
+              flex="40%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
@@ -141,7 +135,7 @@ export default class MarketRowItem extends PureComponent<Props> {
               fontSize={4}
             >
               <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
-                {name}
+                {currency.name}
                 {/*<Box*/}
                 {/*  alignItems="center"*/}
                 {/*  color="palette.text.shade60"*/}
@@ -152,29 +146,55 @@ export default class MarketRowItem extends PureComponent<Props> {
                 {/*  {short_name}*/}
                 {/*</Box>*/}
                 {/*{tag}*/}
+                <CurrencyLabel>{currency.ticker}</CurrencyLabel>
               </div>
             </Box>
             <Box
               shrink
               grow
+              flex="10%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
               alignItems="center"
               fontSize={4}
             >
-              $55,540.24
+              {currency.counterValue ? <FormattedVal
+                val={currency.counterValue}
+                currency={currency}
+                unit={counterValueCurrency.units[0]}
+                showCode
+              /> : null}
             </Box>
             <Box
               shrink
               grow
+              flex="10%"
               ff="Inter|SemiBold"
               color="palette.text.shade100"
               horizontal
               alignItems="center"
               fontSize={4}
             >
-              0.79%
+              {currency.change ? <FormattedVal
+                isPercent
+                animateTicker
+                isNegative
+                val={Math.round(currency.change)}
+                inline
+                withIcon
+              /> : null}
+            </Box>
+            <Box
+              shrink
+              grow
+              flex="10%"
+              ff="Inter|SemiBold"
+              color="palette.text.shade100"
+              horizontal
+              alignItems="center"
+              fontSize={4}
+            >
             </Box>
           </RowContent>
         </Row>
@@ -182,27 +202,3 @@ export default class MarketRowItem extends PureComponent<Props> {
     );
   }
 }
-
-const AccountRowContainer: ThemedComponent<{
-  isDisabled?: boolean,
-}> = styled(Tabbable).attrs(() => ( {
-  horizontal: true,
-  alignItems: "center",
-  bg: "palette.background.default",
-  px: 3,
-  flow: 1,
-} ))`
-  height: 48px;
-  border-radius: 4px;
-
-  opacity: ${p => ( p.isDisabled ? 0.5 : 1 )};
-  pointer-events: ${p => ( p.isDisabled ? "none" : "auto" )};
-
-  &:hover {
-    background-color: ${p => darken(p.theme.colors.palette.background.default, 0.015)};
-  }
-
-  &:active {
-    background-color: ${p => darken(p.theme.colors.palette.background.default, 0.03)};
-  }
-`;

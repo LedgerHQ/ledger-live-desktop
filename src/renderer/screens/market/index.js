@@ -36,7 +36,7 @@ const MarketPage = ({ t, collapsable }: Props) => {
           search={query}
         />
       </SearchContainer>
-      <MarketList />
+      <MarketList search={query} />
     </Box>
   );
 };

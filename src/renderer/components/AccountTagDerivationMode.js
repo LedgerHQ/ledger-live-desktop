@@ -6,7 +6,7 @@ import { getTagDerivationMode } from "@ledgerhq/live-common/lib/derivation";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
-const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
+export const CurrencyLabel: ThemedComponent<*> = styled(Text).attrs(() => ({
   color: "palette.text.shade60",
   ff: "Inter|SemiBold",
   fontSize: "8px",
