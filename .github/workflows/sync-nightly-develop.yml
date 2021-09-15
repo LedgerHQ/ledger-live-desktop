@@ -18,7 +18,7 @@ jobs:
           git config user.name "Team Live"
       - name: Sync branches
         run: |
-          git merge develop
+          git merge origin/develop
       - name: Sync changes
         uses: ad-m/github-push-action@master
         with:
