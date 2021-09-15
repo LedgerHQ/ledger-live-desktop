@@ -1,7 +1,7 @@
 name: Sync Nightly Develop
 on:
-  # schedule:
-  #   - cron: "*/15 * * * *"
+  schedule:
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -18,11 +18,11 @@ jobs:
           git config user.name "Team Live"
       - name: Sync branches
         run: |
-          git merge develop
+          git merge origin/develop
       - name: Sync changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: develop-nightly
           tags: false
           force: true
