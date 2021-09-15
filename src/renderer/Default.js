@@ -107,7 +107,7 @@ const NightlyLayer = React.memo(NightlyLayerR);
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
   const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
   useUSBTroubleshooting();
