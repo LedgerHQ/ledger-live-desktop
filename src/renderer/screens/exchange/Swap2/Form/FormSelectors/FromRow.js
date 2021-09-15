@@ -2,10 +2,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import Box from "~/renderer/components/Box";
 import { fromSelector } from "~/renderer/actions/swap";
 import InputCurrency from "~/renderer/components/InputCurrency";
+import { ErrorContainer } from "~/renderer/components/Input";
 import { SelectAccount } from "~/renderer/components/SelectAccount";
 import Switch from "~/renderer/components/Switch";
 import Text from "~/renderer/components/Text";
@@ -27,6 +29,19 @@ type Props = {
   isMaxEnabled: boolean,
   fromAmountError?: Error,
 };
+
+/* @dev: Yeah, Im sorry if you read this, design asked us to
+ override the input component when it is called from the swap form. */
+const InputSection = styled(Box)`
+  & ${ErrorContainer} {
+    font-weight: 500;
+    font-size: 11px;
+    text-align: right;
+    margin-left: calc(calc(100% + 45px) * -1);
+    width: calc(calc(100% + 30px) * 2);
+    margin-top: 6px;
+  }
+`;
 
 function FromRow({
   fromAmount,
@@ -75,7 +90,7 @@ function FromRow({
             renderValue={renderAccountValue}
           />
         </Box>
-        <Box width="50%">
+        <InputSection width="50%">
           <InputCurrency
             value={fromAmount}
             onChange={setFromAmount}
@@ -90,7 +105,7 @@ function FromRow({
             renderRight={null}
             error={fromAmountError}
           />
-        </Box>
+        </InputSection>
       </Box>
     </>
   );

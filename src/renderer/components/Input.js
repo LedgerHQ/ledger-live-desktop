@@ -84,7 +84,7 @@ export const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
     }`}
 `;
 
-const ErrorContainer = styled(Box)`
+export const ErrorContainer: ThemedComponent<*> = styled(Box)`
   margin-top: 0px;
   font-size: 12px;
   width: 100%;
