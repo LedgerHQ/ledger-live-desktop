@@ -113,7 +113,7 @@ const DeviceAction = <R, H, P>({
     initSellError,
     signMessageRequested,
   } = hookState;
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
+  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
 
   const type = useTheme("colors.palette.type");
 
