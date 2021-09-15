@@ -57,7 +57,7 @@ const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType
     showSummaryValue && transaction?.networkInfo && sendAmountByFamily[account?.currency?.family];
   const StrategyIcon = useMemo(
     () => FEES_STRATEGY_ICONS[swapTransaction.transaction?.feesStrategy],
-    swapTransaction.transaction?.feesStrategy,
+    [swapTransaction.transaction?.feesStrategy],
   );
 
   // Deselect slow strategy if the exchange rate is changed to fixed.
