@@ -7,7 +7,8 @@ import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import SwapCircle from "~/renderer/icons/SwapCircle";
 
-import Track from "~/renderer/analytics/Track";
+import { SWAP_VERSION } from "../../utils/index";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const Body = styled(Box).attrs({
   alignItems: "center",
@@ -31,7 +32,7 @@ const FormNotAvailable = () => {
 
   return (
     <Box justifyContent="center" alignItems="center">
-      <Track onMount event="NotAvailable" />
+      <TrackPage category="Swap" name="NotAvailable" swapVersion={SWAP_VERSION} />
       <Body>
         <IconContainer>
           <SwapCircle size={70} />

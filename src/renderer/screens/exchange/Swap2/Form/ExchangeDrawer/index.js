@@ -19,9 +19,10 @@ import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import SwapCompleted from "./SwapCompleted";
 import Button from "~/renderer/components/Button";
 import { setDrawer } from "~/renderer/drawers/Provider";
-import { useRedirectToSwapHistory } from "../../utils/index";
+import { SWAP_VERSION, useRedirectToSwapHistory } from "../../utils/index";
 import { Separator } from "../Separator";
 import { DrawerTitle } from "../DrawerTitle";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const ContentBox = styled(Box)`
   ${DeviceActionHeader} {
@@ -45,7 +46,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
   const {
     transaction,
     swap: {
-      from: { account: fromAccount, parentAccount: fromParentAccount },
+      from: { account: fromAccount, parentAccount: fromParentAccount, currency: sourceCurrency },
       to: { account: toAccount, parentAccount: toParentAccount, currency: targetCurrency },
     },
   } = swapTransaction;
@@ -109,6 +110,14 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
   if (error) {
     return (
       <Box height="100%" justifyContent="space-between">
+        <TrackPage
+          category="Swap"
+          name={`ModalStep-confirmationfail`}
+          sourcecurrency={sourceCurrency?.name}
+          targetcurrency={targetCurrency?.name}
+          provider={exchangeRate.provider}
+          swapVersion={SWAP_VERSION}
+        />
         <Box justifyContent="center" flex={1}>
           <ErrorDisplay error={error} />
         </Box>
@@ -127,9 +136,17 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
   if (result) {
     return (
       <Box height="100%" justifyContent="space-between">
+        <TrackPage
+          category="Swap"
+          name={`ModalStep-finished`}
+          sourcecurrency={sourceCurrency?.name}
+          targetcurrency={targetCurrency?.name}
+          provider={exchangeRate.provider}
+          swapVersion={SWAP_VERSION}
+        />
         <Box justifyContent="center" flex={1}>
           <SwapCompleted
-            swapId="122144134"
+            swapId={result?.swapId}
             provider={exchangeRate.provider}
             targetCurrency={targetCurrency.name}
           />

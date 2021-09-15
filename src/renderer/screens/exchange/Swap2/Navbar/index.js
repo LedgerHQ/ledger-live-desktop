@@ -31,21 +31,18 @@ const Navbar = () => {
 
   const tabs = useMemo(
     () => swapRoutes.filter(route => !route.disabled).map(route => t(route.title)),
-    [],
+    [t],
   );
 
   const onWrappedTabChange = nextIndex => {
     if (currentIndex === nextIndex) return;
-
     const nextPathname = swapRoutes[nextIndex].path;
-    setTrackingSource("swap/navbar");
     history.push({ pathname: nextPathname });
   };
 
   return (
     currentIndex >= 0 && (
       <Nav>
-        <TrackPage category="swap" name={swapRoutes[currentIndex].name} />
         <TabBar tabs={tabs} onIndexChange={onWrappedTabChange} index={currentIndex} />
       </Nav>
     )
