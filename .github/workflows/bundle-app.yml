@@ -11,7 +11,7 @@ on:
 
 jobs:
   cancel-previous:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
@@ -72,7 +72,7 @@ jobs:
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
 
   bundle-linux:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     needs: cancel-previous
     steps:
       - uses: ledgerhq/actions/check-member@v2.0.0
