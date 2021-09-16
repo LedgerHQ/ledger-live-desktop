@@ -80,7 +80,6 @@ const BranchBadge: ThemedComponent<{}> = styled(Box).attrs(p => ({
 
 type Props = {
   manifest: AppManifest,
-  full: Boolean,
 };
 
 const AppDetails = ({ manifest }: Props) => {
