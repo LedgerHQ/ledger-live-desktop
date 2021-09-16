@@ -50,12 +50,12 @@ export default function AccountSubHeader() {
       <CardContent>
         <CardHeaderContainer>
           <InfoCircle size={12} />
-          <CardHeader>{t("elrond.account.subHeader.cardTitle")}</CardHeader>
+          <CardHeader>{t("cryptoOrg.account.subHeader.cardTitle")}</CardHeader>
         </CardHeaderContainer>
         <CustomButton outline onClick={openDrawer}>
           <Box horizontal flow={1} alignItems="center">
             <Box fontSize={3}>
-              <Trans i18nKey="elrond.account.subHeader.moreInfo" />
+              <Trans i18nKey="cryptoOrg.account.subHeader.moreInfo" />
             </Box>
             <ChevronRight size={12} />
           </Box>

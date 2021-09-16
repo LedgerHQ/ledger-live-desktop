@@ -1852,6 +1852,20 @@
         }
       }
     },
+    "cryptoOrg": {
+      "account": {
+       "subHeader": {
+         "cardTitle": "Powered by Crypto.org",
+         "moreInfo": "More info",
+         "drawerTitle": "Crypto.org integration",
+         "title": "Crypt.org (CRO) token is now available on Ledger Live",
+         "description": "You can now safely secure your CRO tokens and manage them through Ledger Live.",
+         "description2": "TBD",
+         "description3": "TBD",
+         "website": "Cryptocurrency in every wallet"
+       }
+      }
+    },
     "claimRewards": {
       "flow": {
         "title": "Claim rewards",

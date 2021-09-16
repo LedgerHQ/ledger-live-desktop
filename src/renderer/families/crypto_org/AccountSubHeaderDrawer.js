@@ -33,27 +33,27 @@ export function AccountSubHeaderDrawer({ isOpen, closeDrawer }: Props) {
   const { t } = useTranslation();
   return (
     <SideDrawer
-      title={t("elrond.account.subHeader.drawerTitle")}
+      title={t("cryptoOrg.account.subHeader.drawerTitle")}
       isOpen={isOpen}
       onRequestClose={closeDrawer}
       direction="left"
     >
       <Box px={40} py={40}>
-        <Title>{t("elrond.account.subHeader.title")}</Title>
+        <Title>{t("cryptoOrg.account.subHeader.title")}</Title>
         <Box py={3}>
-          <Description>{t("elrond.account.subHeader.description")}</Description>
+          <Description>{t("cryptoOrg.account.subHeader.description")}</Description>
         </Box>
         <Box py={2}>
-          <Description>{t("elrond.account.subHeader.description2")}</Description>
+          <Description>{t("cryptoOrg.account.subHeader.description2")}</Description>
         </Box>
         <Box py={2}>
-          <Description>{t("elrond.account.subHeader.description3")}</Description>
+          <Description>{t("cryptoOrg.account.subHeader.description3")}</Description>
         </Box>
         <Divider mt={2} />
         <Box mt={3}>
           <LinkWithExternalIcon
-            label={<Trans i18nKey="elrond.account.subHeader.website" />}
-            onClick={() => openURL(urls.elrond.website)}
+            label={<Trans i18nKey="cryptoOrg.account.subHeader.website" />}
+            onClick={() => openURL(urls.cryptoOrg.website)}
           />
         </Box>
       </Box>
