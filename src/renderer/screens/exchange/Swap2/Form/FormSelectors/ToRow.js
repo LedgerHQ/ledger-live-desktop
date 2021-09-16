@@ -30,6 +30,7 @@ type Props = {
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  loadingRates: boolean,
 };
 
 const InputCurrencyContainer = styled(Box)`
@@ -46,7 +47,13 @@ const InputCurrencyContainer = styled(Box)`
   }
 `;
 
-export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount }: Props) {
+export default function ToRow({
+  toCurrency,
+  setToAccount,
+  toAmount,
+  fromAccount,
+  loadingRates,
+}: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const selectState = useSelectableCurrencies({ allCurrencies });
@@ -120,6 +127,7 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             color="palette.text.shade40"
             containerProps={amountInputContainerProps}
             unit={unit}
+            loading={loadingRates}
             renderRight={
               toCurrency &&
               toAmount && (
