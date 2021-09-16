@@ -182,10 +182,10 @@ export const usePickDefaultAccount = (
     if (!fromAccount) {
       const possibleDefaults = accounts.reduce((acc, account) => {
         if (account.disabled) return acc;
-        if (account.currency?.id === "ethereum") {
+        if (account.currency?.id === "ethereum" && (acc[0]?.balance ?? -1) < account.balance) {
           acc[0] = account;
         }
-        if (account.currency?.id === "bitcoin") {
+        if (account.currency?.id === "bitcoin" && (acc[1]?.balance ?? -1) < account.balance) {
           acc[1] = account;
         }
         const maxFundsAccount = acc[2];
