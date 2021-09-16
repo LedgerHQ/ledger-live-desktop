@@ -39,16 +39,16 @@
 
       #loader {
         position: relative;
-        width: 80px;
-        height: 70px;
+        width: 68px;
+        height: 60px;
       }
 
       #ledger-logo, #bracket-logo-container{
         position: absolute;
         height: 100%;
-        width: 340px;
+        width: 290px;
         top: 0;
-        transition: transform 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+        transition: transform 1s cubic-bezier(0.8, 0.01, 0.2, 0.99);
         background-color: black;
         will-change: transform;
       }
@@ -59,21 +59,21 @@
       }
 
       #bracket-logo-container {
-        left: 50px;
+        left: 43px;
         z-index: 2;
       }
 
       #loader-container.loaded #ledger-logo{
-        transform: translateX(-130px)
+        transform: translateX(-130px);
       }
 
       #loader-container.loaded #bracket-logo-container{
-        transform: translateX(130px)
+        transform: translateX(91px);
       }
 
       #bracket-logo {
         height: 100%;
-        width: 29px;
+        width: 25px;
       }
     </style>
   </head>
