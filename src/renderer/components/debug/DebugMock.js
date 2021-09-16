@@ -9,7 +9,7 @@ import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
 
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
-import { useServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
+import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 
 import { addMockAnnouncement } from "../../../../tests/mocks/notificationsHelpers";
 import { toggleMockIncident } from "../../../../tests/mocks/serviceStatusHelpers";
@@ -271,7 +271,7 @@ const DebugMock = () => {
   const [notifExtra, setNotifExtra] = useState("");
 
   const { updateCache } = useAnnouncements();
-  const { updateData } = useServiceStatus();
+  const { updateData } = useFilteredServiceStatus();
 
   useInterval(() => {
     setQueue(window.mock.events.queue);
