@@ -120,6 +120,8 @@ const LoadingDisplay = styled(Box)`
   }
 `;
 
+export const BaseContainer: ThemedComponent<{}> = styled(Box)``;
+
 const Base = styled.input.attrs(() => ({
   fontSize: 4,
 }))`
@@ -257,7 +259,7 @@ const Input = React.forwardRef(function Input(
       editInPlace={editInPlace}
     >
       {!loading || isFocus ? <RenderLeftWrapper>{renderLeft}</RenderLeftWrapper> : null}
-      <Box px={3} grow shrink>
+      <BaseContainer px={3} grow shrink>
         <Base
           {...props}
           small={small}
@@ -290,7 +292,7 @@ const Input = React.forwardRef(function Input(
             </Text>
           </LoadingDisplay>
         ) : null}
-      </Box>
+      </BaseContainer>
       {renderRight ? <RenderRightWrapper>{renderRight}</RenderRightWrapper> : null}
     </Container>
   );
