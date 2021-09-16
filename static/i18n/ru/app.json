@@ -1996,7 +1996,7 @@
     "operationDetailsAmountBreakDown": "{{initialAmount}} (+ вознаграждение <0>{{reward}}</0>)",
     "optIn": {
       "flow": {
-        "title": "Добавить ASA (актив)",
+        "title": "Добавление ASA (актива)",
         "steps": {
           "assets": {
             "title": "ASA (актив)",
