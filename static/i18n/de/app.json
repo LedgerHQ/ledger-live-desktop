@@ -3890,6 +3890,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Sie müssen mindestens einen Validator auswählen"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }
