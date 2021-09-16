@@ -6,7 +6,7 @@ import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
 import { useSelector } from "react-redux";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
-import { useMarketCurrenciesList } from "~/renderer/actions/market";
+import { useMarketCurrencies } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
@@ -16,7 +16,7 @@ const ColumnTitleBox = styled(Box)`
 `;
 
 const ArrowsUpDownIconWrapper = styled.div`
-  padding: 0 5px
+  padding: 0 5px;
 `;
 
 const Row: ThemedComponent<{}> = styled(Box)`
@@ -31,7 +31,6 @@ const Row: ThemedComponent<{}> = styled(Box)`
   flex: 1;
   font-weight: 600;
   justify-content: flex-start;
-  //margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
 `;
@@ -44,26 +43,23 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
 
 function MarketList(props) {
-  const {
-    emptyText,
-    search,
-  } = props;
+  const { search } = props;
 
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
 
-  const currencies = useMarketCurrenciesList();
+  const currencies = useMarketCurrencies();
   let visibleCurrencies = [];
-  let hiddenCurrencies = [];
+  const hiddenCurrencies = [];
   for (let i = 0; i < currencies.length; i++) {
     const currency = currencies[i];
     if (matchesSearch(search, currency)) {
@@ -76,20 +72,23 @@ function MarketList(props) {
   const [order, setOrder] = useState("desc");
   const [orderBy, setOrderBy] = useState("counterValue");
 
-  const onSort = (key) => {
+  const onSort = key => {
     if (key === orderBy) {
-      setOrder(order === "desc" ? "asc" : "desc")
+      setOrder(order === "desc" ? "asc" : "desc");
     } else {
-      setOrderBy(key)
+      setOrderBy(key);
     }
   };
 
   visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
 
   const CurrencyRow = ({ index, style }) => (
-    <MarketRowItem currency={visibleCurrencies[index]} order_number={index + 1}
-                   counterValueCurrency={counterValueCurrency}
-                   style={style} />
+    <MarketRowItem
+      currency={visibleCurrencies[index]}
+      index={index + 1}
+      counterValueCurrency={counterValueCurrency}
+      style={style}
+    />
   );
 
   return (
@@ -172,12 +171,7 @@ function MarketList(props) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      <List
-        height={500}
-        width="100%"
-        itemCount={visibleCurrencies.length}
-        itemSize={65}
-      >
+      <List height={500} width="100%" itemCount={visibleCurrencies.length} itemSize={65}>
         {CurrencyRow}
       </List>
     </Box>
@@ -186,11 +180,7 @@ function MarketList(props) {
 
 export default MarketList;
 
-export const matchesSearch = (
-  search?: string,
-  currency,
-  subMatch: boolean = false,
-): boolean => {
+export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
   if (!search) return true;
   const match = `${currency.ticker}|${currency.name}}`;
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
@@ -198,11 +188,10 @@ export const matchesSearch = (
 
 const sortCurrencies = (currencies, key, order) => {
   return currencies.sort(function(a, b) {
-      const orders = {
-        asc: (a, b) => ( a > b ? 1 : -1 ),
-        desc: (a, b) => ( a < b ? 1 : -1 ),
-      };
-      return orders[order](a[key], b[key]);
-    },
-  );
+    const orders = {
+      asc: (a, b) => (a > b ? 1 : -1),
+      desc: (a, b) => (a < b ? 1 : -1),
+    };
+    return orders[order](a[key], b[key]);
+  });
 };

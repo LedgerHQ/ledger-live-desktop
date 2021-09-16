@@ -2,38 +2,78 @@
 
 import { createAction } from "redux-actions";
 import { useSelector } from "react-redux";
-import {
-  counterValueCurrencySelector,
-  countervalueFirstSelector,
-  selectedTimeRangeSelector,
-} from "~/renderer/reducers/settings";
-import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import { useCurrencyPortfolio } from "~/renderer/actions/portfolio";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
-import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
+import { useCalculateMany } from "@ledgerhq/live-common/lib/countervalues/react";
 
 export const openPlatformAppDisclaimerDrawer = createAction(
   "MARKET_BUILD_CURRENCIES_LIST",
-  useMarketCurrenciesList,
+  useMarketCurrencies,
 );
 
-export function useMarketCurrenciesList() {
-  const range = useSelector(selectedTimeRangeSelector);
-  const currencies = listCryptoCurrencies();
+export function useMarketCurrencies() { // here we will pass { range, counterValue } via props and will use this hook in useEffect when they changes
+  const currencies = listSupportedCurrencies();
+  const c1 = currencies[0];
+
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  const unit = counterValueCurrency.units[0];
+
+  // here is count (data points) and increment (date steps) for 24 hours hardcoded. Should depends on range
+  const count = 24;
+  const increment = 60 * 60 * 1000;
+
+  const inputData = [];
+  let t = Date.now() - count * increment;
+
+  for (let i = 0; i < count; i++) {
+    const date = new Date(t);
+    inputData.push({ date, value: 0 });
+    t += increment;
+  }
+
+  // TEST CODE
+  const inputData2 = [];
+  let time = Date.now() - count * increment;
+
+  const value1 = 10 ** c1.units[0].magnitude;
+  for (let i = 0; i < count; i++) {
+    const date = new Date(time);
+    inputData2.push({ date, value: value1 });
+    time += increment;
+  }
+  const test = useCalculateMany(inputData2, {
+    from: c1,
+    to: counterValueCurrency,
+    disableRounding: false,
+  });
+
+  console.log('c1', c1)
+  console.log('counterValueCurrency', counterValueCurrency)
+  console.log('inputData2', inputData2)
+  console.log('TEST', test)
+  // END OF TEST CODE
+
   currencies.map(currency => {
-    currency.change = useCurrencyPortfolio({ currency, range }).countervalueChange.percentage * 100 || 0;
-    const effectiveUnit = unit || currency.units[0];
-    const valueNum = 10 ** effectiveUnit.magnitude;
+    const valueNum = 10 ** currency.units[0].magnitude;
     const value = valueNum instanceof BigNumber ? valueNum.toNumber() : valueNum;
-    currency.counterValue = useCalculate({
-      from: currency,
-      to: counterValueCurrency,
-      value,
-      disableRounding: true,
-    }) || 0
+    const currencyInputData = inputData.map(dataPoint => {
+      dataPoint.value = value;
+
+      return dataPoint;
+    });
+    const data =
+      useCalculateMany(currencyInputData, {
+        from: currency,
+        to: counterValueCurrency,
+        disableRounding: false,
+      }) || [];
+    currency.counterValue = data;
+
+    currency.price = data[data.length - 1];
+    currency.change = (data[data.length - 1] - data[0]) / data[data.length - 1];
+
     return currency;
-  })
+  });
+
   return currencies;
 }

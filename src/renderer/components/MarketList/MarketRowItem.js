@@ -25,7 +25,6 @@ const Row: ThemedComponent<{}> = styled(Box)`
   font-weight: 600;
   justify-content: flex-start;
   margin-bottom: 9px;
-  //padding: 16px 20px;
   position: relative;
   transition: background-color ease-in-out 200ms;
 
@@ -47,19 +46,25 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
+
+interface CurrencyRow {
+  price: number;
+  change: number;
+  counterValue: number;
+}
 
 type Props = {
   name: string,
   short_name: string,
-  price: string
+  currency: CurrencyRow,
 };
 
 export default class MarketRowItem extends PureComponent<Props> {
@@ -73,16 +78,6 @@ export default class MarketRowItem extends PureComponent<Props> {
     e.stopPropagation();
   };
 
-  // onToggleAccount = () => {
-  //   const { onToggleAccount, account, isChecked } = this.props;
-  //   if (onToggleAccount) onToggleAccount(account, !isChecked);
-  // };
-
-  handleChangeName = (name: string) => {
-    const { onEditName, account } = this.props;
-    if (onEditName) onEditName(account, name);
-  };
-
   onClickInput = (e: SyntheticEvent<*>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -92,24 +87,10 @@ export default class MarketRowItem extends PureComponent<Props> {
     e.target.select();
   };
 
-  // onBlur = (e: *) => {
-  //   const { onEditName, account } = this.props;
-  //   const { value } = e.target;
-  //   if (!value && onEditName) {
-  //     // don't leave an empty input on blur
-  //     onEditName(account, account.name);
-  //   }
-  // };
-
   overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
   render() {
-    const {
-      order_number,
-      style,
-      currency,
-      counterValueCurrency,
-    } = this.props;
+    const { index, style, currency, counterValueCurrency } = this.props;
 
     return (
       <div style={{ ...style }}>
@@ -124,7 +105,7 @@ export default class MarketRowItem extends PureComponent<Props> {
               alignItems="center"
               fontSize={4}
             >
-              {order_number}
+              {index}
             </Cell>
             <Cell
               shrink
@@ -137,7 +118,9 @@ export default class MarketRowItem extends PureComponent<Props> {
               fontSize={4}
             >
               <CryptoCurrencyIcon currency={currency} size={20} />
-              <div style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
+              <div
+                style={{ ...this.overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}
+              >
                 {currency.name}
                 <CurrencyLabel>{currency.ticker}</CurrencyLabel>
               </div>
@@ -153,13 +136,15 @@ export default class MarketRowItem extends PureComponent<Props> {
               alignItems="center"
               fontSize={4}
             >
-              {currency.counterValue ? <FormattedVal
-                style={{ textAlign: "right" }}
-                val={currency.counterValue}
-                currency={currency}
-                unit={counterValueCurrency.units[0]}
-                showCode
-              /> : null}
+              {currency.price ? (
+                <FormattedVal
+                  style={{ textAlign: "right" }}
+                  val={currency.price}
+                  currency={currency}
+                  unit={counterValueCurrency.units[0]}
+                  showCode
+                />
+              ) : null}
             </Cell>
             <Cell
               shrink
@@ -172,14 +157,16 @@ export default class MarketRowItem extends PureComponent<Props> {
               alignItems="center"
               fontSize={4}
             >
-              {currency.change ? <FormattedVal
-                isPercent
-                animateTicker
-                isNegative
-                val={Math.round(currency.change)}
-                inline
-                withIcon
-              /> : null}
+              {currency.change ? (
+                <FormattedVal
+                  isPercent
+                  animateTicker
+                  isNegative
+                  val={Math.round(currency.change)}
+                  inline
+                  withIcon
+                />
+              ) : null}
             </Cell>
             <Cell
               shrink
