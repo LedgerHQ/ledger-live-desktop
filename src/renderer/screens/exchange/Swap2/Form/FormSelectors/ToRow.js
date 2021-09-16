@@ -18,8 +18,12 @@ import type {
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import { Container as InputContainer } from "~/renderer/components/Input";
+import {
+  Container as InputContainer,
+  BaseContainer as BaseInputContainer,
+} from "~/renderer/components/Input";
 import styled from "styled-components";
+import CounterValue from "~/renderer/components/CounterValue";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
@@ -30,7 +34,15 @@ type Props = {
 
 const InputCurrencyContainer = styled(Box)`
   ${InputContainer} {
-    background: none !important;
+    display: flex;
+    background: none;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  ${BaseInputContainer} {
+    flex: 0;
   }
 `;
 
@@ -108,8 +120,21 @@ export default function ToRow({ toCurrency, setToAccount, toAmount, fromAccount 
             color="palette.text.shade40"
             containerProps={amountInputContainerProps}
             unit={unit}
-            // Flow complains if this prop is missing…
-            renderRight={null}
+            renderRight={
+              toCurrency &&
+              toAmount && (
+                <CounterValue
+                  currency={toCurrency}
+                  value={toAmount}
+                  color="palette.text.shade40"
+                  ff="Inter|Medium"
+                  fontSize={3}
+                  pr={3}
+                  mt="4px"
+                  style={{ lineHeight: "1em" }}
+                />
+              )
+            }
           />
         </InputCurrencyContainer>
       </Box>
