@@ -48,22 +48,22 @@ export const Success = Template.bind({});
 export const Error = Template.bind({});
 
 Default.args = {
- isChecked: false,
- label: "checkbox with label",
- variant: "default",
- name: "default checkbox"
+  isChecked: false,
+  label: "checkbox with label",
+  variant: "default",
+  name: "default checkbox",
 };
 
 Success.args = {
- isChecked: false,
- label: "checkbox with label",
- variant: "success",
- name: "success checkbox"
+  isChecked: false,
+  label: "checkbox with label",
+  variant: "success",
+  name: "success checkbox",
 };
 
 Error.args = {
- isChecked: false,
- label: "checkbox with label",
- variant: "error",
- name: "error checkbox"
+  isChecked: false,
+  label: "checkbox with label",
+  variant: "error",
+  name: "error checkbox",
 };

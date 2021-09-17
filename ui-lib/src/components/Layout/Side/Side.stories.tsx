@@ -118,5 +118,5 @@ const Template = (args) => {
 };
 
 export const Default = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 Default.args = {};

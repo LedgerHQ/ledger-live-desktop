@@ -72,7 +72,7 @@ export const GlobalStyle = createGlobalStyle`
     max-height: 100%;
     width: 100vw;
     height: 100vh;
-    background-color: ${p => p.theme.colors.palette.background.default};
+    background-color: ${(p) => p.theme.colors.palette.neutral.c00};
   }
 
   .tippy-content {
@@ -80,8 +80,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .tippy-tooltip.ledger-theme {
-    background-color: ${p => p.theme.colors.palette.text.shade100};
-    color: ${p => p.theme.colors.palette.background.default};
+    background-color: ${(p) => p.theme.colors.palette.neutral.c100};
+    color: ${(p) => p.theme.colors.palette.neutral.c00};
     border-radius: ${radii[1]}px;
   }
 
@@ -90,23 +90,23 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .tippy-box[data-theme~='ledger'] > .tippy-svg-arrow {
-    fill: ${p => p.theme.colors.palette.text.shade100};
+    fill: ${(p) => p.theme.colors.palette.neutral.c100};
   }
 
   .tippy-box[data-theme~='ledger'].bg-alertRed > .tippy-svg-arrow {
-    fill: ${p => p.theme.colors.alertRed};
+    fill: ${(p) => p.theme.colors.palette.error.c100};
   }
 
   .tippy-box[data-theme~='ledger'].bg-palette-background-default > .tippy-svg-arrow {
-    fill: ${p => p.theme.colors.palette.background.default};
+    fill: ${(p) => p.theme.colors.palette.neutral.c00};
   }
 
   .tippy-box[data-theme~='ledger'].bg-palette-background-paper > .tippy-svg-arrow {
-    fill: ${p => p.theme.colors.palette.background.paper};
+    fill: ${(p) => p.theme.colors.palette.neutral.c00};
   }
 
   .tippy-tooltip.ledger-theme .tippy-svg-arrow {
-    fill: ${p => p.theme.colors.palette.text.shade100};
+    fill: ${(p) => p.theme.colors.palette.neutral.c100};
   }
 
   .tippy-tooltip[data-placement^=bottom]>.tippy-svg-arrow {
@@ -114,11 +114,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .tippy-popper.ledger-theme .tippy-roundarrow {
-    fill: ${p => p.theme.colors.palette.text.shade100};
+    fill: ${(p) => p.theme.colors.palette.neutral.c100};
   }
 
   .select__control:hover, .select__control-is-focused {
-    border-color: ${p => p.theme.colors.palette.divider};
+    border-color: ${(p) => p.theme.colors.palette.neutral.c60};
   }
 
   .select__single-value {
@@ -128,19 +128,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .select__placeholder {
-    color ${p => p.theme.colors.palette.text.shade40} !important;
+    color ${(p) => p.theme.colors.palette.neutral.c40} !important;
   }
 
   ::selection {
-    background: ${p => rgba(p.theme.colors.wallet, 0.1)};
+    background: ${(p) => rgba(p.theme.colors.palette.primary.c180, 0.1)};
   }
 
 
   --track-color: rgba(0,0,0,0);
 
   ::-webkit-scrollbar              { 
-    width: ${p => p.theme.overflow.trackSize}px;
-    height: ${p => p.theme.overflow.trackSize}px;
+    width: ${(p) => p.theme.overflow.trackSize}px;
+    height: ${(p) => p.theme.overflow.trackSize}px;
     background-color: rgba(0,0,0,0);
   }
   ::-webkit-scrollbar-button       { 
@@ -152,9 +152,9 @@ export const GlobalStyle = createGlobalStyle`
     background-color: rgba(0,0,0,0);
   }
   ::-webkit-scrollbar-thumb        {
-    box-shadow: inset 0 0 0 ${p => p.theme.overflow.trackSize}px var(--track-color);
+    box-shadow: inset 0 0 0 ${(p) => p.theme.overflow.trackSize}px var(--track-color);
     border: 2px solid rgba(0,0,0,0);
-    border-radius: ${p => p.theme.overflow.trackSize}px;
+    border-radius: ${(p) => p.theme.overflow.trackSize}px;
   }
   ::-webkit-scrollbar-corner { 
     opacity: 0;

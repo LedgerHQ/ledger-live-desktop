@@ -40,16 +40,16 @@ const Story = {
 };
 export default Story;
 
-const ListTemplate = args => (
+const ListTemplate = (args) => (
   <div>
-    {iconNames.map(name => (
+    {iconNames.map((name) => (
       <span title={name}>
         <Icon key={name} name={name} weight={args.weight} size={args.size} color={args.color} />
       </span>
     ))}
   </div>
 );
-const IconTemplate = args => <Icon {...args} />;
+const IconTemplate = (args) => <Icon {...args} />;
 
 export const List = ListTemplate.bind({});
 export const SingleIcon = IconTemplate.bind({});

@@ -296,7 +296,7 @@ const Square = styled.div<any>`
   padding: 1rem;
   color: white;
   font-weight: 700;
-  ${props => props};
+  ${(props) => props};
 `;
 
 const Template = (args: any) => (

@@ -127,3 +127,9 @@ tests/docker-electron-webdriver/.lastyarn
 yalc.lock
 
 ui-lib/lib
+
+# Storybook jazz
+ui-lib/storybook-static/*
+
+# IDE
+.vscode/*
