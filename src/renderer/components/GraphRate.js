@@ -28,16 +28,12 @@ const GraphRate = ({ from, to, width, height, count, increment }: Props) => {
     disableRounding: true,
   });
 
+  const isPriceGrowing = outputData[outputData.length - 1] - outputData[0] >= 0;
+
   const data = inputData.map(({ date }, i) => ( {
     date,
     value: outputData[i] || 0,
-  } ));
-
-  data[0].date = new Date("2020-01-01T00:00:00Z");
-  data[0].value = 10
-
-  data[1].date = new Date("2020-04-01T00:00:00Z")
-  data[1].value = 10
+  }));
 
   return (
     <svg height={height} width={width}>
@@ -52,7 +48,7 @@ const GraphRate = ({ from, to, width, height, count, increment }: Props) => {
         padding={5}
         style={{
           data: {
-            stroke: "#333",
+            stroke: isPriceGrowing ? "#66BE54" : "#EA2E49",
             strokeWidth: 1,
           },
         }}

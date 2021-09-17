@@ -10,6 +10,7 @@ import { useMarketCurrencies } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
+import { useRange } from "~/renderer/hooks/useRange";
 
 const ColumnTitleBox = styled(Box)`
   padding: 10px 20px;
@@ -43,20 +44,34 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
 
-function MarketList(props) {
+type CurrencyRowProps = {
+  index: number,
+  style: Map<string, string>,
+};
+
+type MarketListProps = {
+  search: string,
+};
+
+function MarketList(props: MarketListProps) {
   const { search } = props;
 
+  // TODO: should be changed to use values from dropdowns
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  const currencies = useMarketCurrencies();
+  const range = "day";
+
+  const { rangeData } = useRange(range);
+  const currencies = useMarketCurrencies({ counterValueCurrency, ...rangeData });
+
   let visibleCurrencies = [];
   const hiddenCurrencies = [];
   for (let i = 0; i < currencies.length; i++) {
@@ -80,13 +95,14 @@ function MarketList(props) {
   };
 
   visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
-  console.log(visibleCurrencies);
-  const CurrencyRow = ({ index, style }) => (
+
+  const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
       currency={visibleCurrencies[index]}
       index={index + 1}
       counterValueCurrency={counterValueCurrency}
       style={style}
+      rangeData={rangeData}
     />
   );
 
@@ -186,23 +202,20 @@ function MarketList(props) {
 export default MarketList;
 
 export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
-    if (!search) return true;
-    const match = `${currency.ticker}|${currency.name}}`;
-    return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
-  }
-;
+  if (!search) return true;
+  const match = `${currency.ticker}|${currency.name}}`;
+  return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
+};
 
 const sortCurrencies = (currencies, key, order) => {
   if (typeof currencies[key] === "string") {
     currencies[key] = currencies[key].toLowerCase();
   }
-    return currencies.sort(function(a, b) {
-        const orders = {
-          asc: (a, b) => ( a > b ? 1 : -1 ),
-          desc: (a, b) => ( a < b ? 1 : -1 ),
-        };
-        return orders[order](a[key], b[key]);
-      },
-    );
-  }
-;
+  return currencies.sort(function(a, b) {
+    const orders = {
+      asc: (a, b) => (a > b ? 1 : -1),
+      desc: (a, b) => (a < b ? 1 : -1),
+    };
+    return orders[order](a[key], b[key]);
+  });
+};

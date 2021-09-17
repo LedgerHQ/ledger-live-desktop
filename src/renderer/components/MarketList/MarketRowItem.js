@@ -1,17 +1,15 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { CurrencyLabel } from "~/renderer/components/AccountTagDerivationMode";
-import Chart from "~/renderer/components/Chart";
-import { colors } from "~/renderer/styles/theme";
-import { BalanceHistoryData } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import FormattedDate from "~/renderer/components/FormattedDate";
+import type { RangeData } from "~/renderer/hooks/useRange";
+import GraphRate from "~/renderer/components/GraphRate";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -51,13 +49,13 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   height: 54px;
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
 
@@ -68,34 +66,19 @@ interface CurrencyRow {
 }
 
 type Props = {
+  index: number,
   name: string,
   short_name: string,
   currency: CurrencyRow,
+  counterValueCurrency: Currency,
+  style: Map<string, string>,
+  rangeData: RangeData,
 };
 
-export default function MarketRowItem<Props>(props) {
-  // onBlur = (e: *) => {
-  //   const { onEditName, account } = this.props;
-  //   const { value } = e.target;
-  //   if (!value && onEditName) {
-  //     // don't leave an empty input on blur
-  //     onEditName(account, account.name);
-  //   }
-  // };
-
+export default function MarketRowItem(props: Props) {
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
-  const {
-    index,
-    style,
-    currency,
-    counterValueCurrency,
-  } = props;
-
-  const renderTooltip = useCallback(
-    (data: BalanceHistoryData) => <Tooltip data={data} counterValue={currency} range={currency.range} />,
-    [currency.counterValue, currency.range],
-  );
+  const { index, style, currency, counterValueCurrency, rangeData } = props;
 
   return (
     <div style={{ ...style }}>
@@ -133,19 +116,21 @@ export default function MarketRowItem<Props>(props) {
             grow
             flex="10%"
             ff="Inter|SemiBold"
-            color="palette.text.shade100"
             horizontal
             justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
           >
-            {currency.price ? <FormattedVal
-              style={{ textAlign: "right" }}
-              val={currency.price}
-              currency={currency}
-              unit={counterValueCurrency.units[0]}
-              showCode
-            /> : null}
+            {currency.price ? (
+              <FormattedVal
+                style={{ textAlign: "right" }}
+                val={currency.price}
+                currency={currency}
+                unit={counterValueCurrency.units[0]}
+                color="palette.text.shade100"
+                showCode
+              />
+            ) : null}
           </Cell>
           <Cell
             shrink
@@ -158,14 +143,16 @@ export default function MarketRowItem<Props>(props) {
             alignItems="center"
             fontSize={4}
           >
-            {currency.change ? <FormattedVal
-              isPercent
-              animateTicker
-              isNegative
-              val={Math.round(currency.change)}
-              inline
-              withIcon
-            /> : null}
+            {currency.change ? (
+              <FormattedVal
+                isPercent
+                animateTicker
+                isNegative
+                val={Math.round(currency.change)}
+                inline
+                withIcon
+              />
+            ) : null}
           </Cell>
           <Cell
             shrink
@@ -178,43 +165,19 @@ export default function MarketRowItem<Props>(props) {
             justifyContent="flex-start"
             fontSize={4}
           >
-            <div style={{ maxWidth: "200px" }}>
-              {/*<Chart*/}
-              {/*  magnitude={currency.units[0].magnitude}*/}
-              {/*  color={colors.wallet}*/}
-              {/*  // $FlowFixMe TODO make date non optional*/}
-              {/*  data={currency.portfolio.history}*/}
-              {/*  height={20}*/}
-              {/*  tickXScale={"day"}*/}
-              {/*  renderTickY={() => ""}*/}
-              {/*  renderTooltip={renderTooltip}*/}
-              {/*  valueKey="countervalue"*/}
-              {/*/>*/}
+            <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
+              <GraphRate
+                from={currency}
+                to={counterValueCurrency}
+                count={rangeData.count}
+                increment={rangeData.increment}
+                width={75}
+                height={35}
+              />
             </div>
           </Cell>
         </RowContent>
       </Row>
     </div>
-  );
-}
-
-function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValue: Currency }) {
-  return (
-    <>
-      <FormattedVal
-        alwaysShowSign={false}
-        fontSize={5}
-        color="palette.text.shade100"
-        showCode
-        unit={counterValue.units[0]}
-        val={data.value}
-      />
-      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-        <FormattedDate date={data.date} format="LL" />
-      </Box>
-      <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
-        <FormattedDate date={data.date} format="LT" />
-      </Box>
-    </>
   );
 }
