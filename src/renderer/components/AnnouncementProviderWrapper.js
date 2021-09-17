@@ -3,8 +3,8 @@ import React, { useCallback, useMemo } from "react";
 import { AnnouncementProvider } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import type { Announcement } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/types";
 import { getKey, setKey } from "~/renderer/storage";
+import { cryptoCurrenciesSelector } from "~/renderer/reducers/accounts";
 import { languageSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
-import { currenciesIdSelector } from "~/renderer/reducers/accounts";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceStatusProvider } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider/index";
@@ -74,7 +74,14 @@ const getOsPlatform = () => {
 export function AnnouncementProviderWrapper({ children }: Props) {
   const startDate = useMemo(() => new Date(), []);
   const language = useSelector(languageSelector);
-  const currencies = useSelector(currenciesIdSelector);
+  const currenciesRaw = useSelector(cryptoCurrenciesSelector);
+  const { currencies, tickers } = currenciesRaw.reduce(
+    ({ currencies, tickers }, { id, ticker }) => ({
+      currencies: [...currencies, id],
+      tickers: [...tickers, ticker],
+    }),
+    { currencies: [], tickers: [] },
+  );
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
   const dispatch = useDispatch();
   const osPlatform = getOsPlatform();
@@ -142,7 +149,11 @@ export function AnnouncementProviderWrapper({ children }: Props) {
       handleSave={saveAnnouncements}
       fetchApi={notificationsApi}
     >
-      <ServiceStatusProvider autoUpdateDelay={autoUpdateDelay} networkApi={serviceStatusApi}>
+      <ServiceStatusProvider
+        context={{ tickers }}
+        autoUpdateDelay={autoUpdateDelay}
+        networkApi={serviceStatusApi}
+      >
         {children}
       </ServiceStatusProvider>
     </AnnouncementProvider>

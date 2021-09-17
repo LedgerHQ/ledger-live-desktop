@@ -66,7 +66,7 @@ export const Terms = ({ sendEvent }: TermsProps) => {
     acceptTerms();
     dispatch(setShareAnalytics(true));
     sendEvent("NEXT");
-  }, [sendEvent]);
+  }, [dispatch, sendEvent]);
 
   return (
     <TermsContainer>
@@ -76,8 +76,18 @@ export const Terms = ({ sendEvent }: TermsProps) => {
         </Button>
       </TermsNavigation>
 
-      <Text mb="2.5rem" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
+      <Text mb="20px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="32px">
         {t("Terms.title")}
+      </Text>
+
+      <Text
+        mb="2.5rem"
+        color="palette.text.shade50"
+        ff="Inter|Regular"
+        fontSize="16px"
+        textAlign="center"
+      >
+        {t("Terms.description")}
       </Text>
 
       <TermsBody>

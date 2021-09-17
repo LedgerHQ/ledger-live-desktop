@@ -20,7 +20,7 @@ const isClean = () => {
   }
 };
 
-const isTagged = ctx => {
+const isTagged = nightly => ctx => {
   const isTagDirty = git.isTagDirty();
 
   log(`git.isTagDirty(): ${isTagDirty}`);
@@ -29,7 +29,7 @@ const isTagged = ctx => {
 
   log(`git.tag(): ${tag}`);
 
-  if (isTagDirty || !tag) {
+  if ((isTagDirty && !nightly) || !tag) {
     throw new Error("HEAD is not tagged or dirty");
   }
 
@@ -99,10 +99,11 @@ module.exports = args => {
     {
       title: "Check that the local git repository is clean",
       task: isClean,
+      skip: () => !!args.nightly,
     },
     {
       title: "Check that HEAD is tagged",
-      task: isTagged,
+      task: isTagged(args.nightly),
     },
   ];
 };
