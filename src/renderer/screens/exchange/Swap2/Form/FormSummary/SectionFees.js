@@ -17,14 +17,19 @@ import Text from "~/renderer/components/Text";
 const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType }) => {
   const { t } = useTranslation();
   const { setDrawer } = React.useContext(context);
-  const { account, transaction } = swapTransaction;
+  const { transaction } = swapTransaction;
   const exchangeRate = useSelector(rateSelector);
-  const fromAccount = swapTransaction.swap.from.account;
+  const { account: fromAccount, currency: fromCurrency } = swapTransaction.swap.from;
   const fromAccountUnit = fromAccount && getAccountUnit(fromAccount);
   const estimatedFees = swapTransaction.status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
+  const family = fromCurrency
+    ? fromCurrency.type === "CryptoCurrency"
+      ? fromCurrency.family
+      : fromCurrency.parentCurrency.family
+    : null;
   const canEdit =
-    showSummaryValue && transaction?.networkInfo && sendAmountByFamily[account?.currency?.family];
+    showSummaryValue && transaction?.networkInfo && family && sendAmountByFamily[family];
 
   // Deselect slow strategy if the exchange rate is changed to fixed.
   useEffect(
