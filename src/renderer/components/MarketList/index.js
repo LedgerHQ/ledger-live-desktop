@@ -43,12 +43,12 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
 
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
   }
 `;
 
@@ -56,7 +56,6 @@ function MarketList(props) {
   const { search } = props;
 
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-
   const currencies = useMarketCurrencies();
   let visibleCurrencies = [];
   const hiddenCurrencies = [];
@@ -81,7 +80,7 @@ function MarketList(props) {
   };
 
   visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
-
+  console.log(visibleCurrencies);
   const CurrencyRow = ({ index, style }) => (
     <MarketRowItem
       currency={visibleCurrencies[index]}
@@ -171,7 +170,13 @@ function MarketList(props) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      <List height={500} width="100%" itemCount={visibleCurrencies.length} itemSize={65}>
+      <List
+        height={500}
+        width="100%"
+        itemCount={visibleCurrencies.length}
+        itemSize={65}
+        style={{ overflowX: "hidden" }}
+      >
         {CurrencyRow}
       </List>
     </Box>
@@ -181,17 +186,23 @@ function MarketList(props) {
 export default MarketList;
 
 export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
-  if (!search) return true;
-  const match = `${currency.ticker}|${currency.name}}`;
-  return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
-};
+    if (!search) return true;
+    const match = `${currency.ticker}|${currency.name}}`;
+    return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
+  }
+;
 
 const sortCurrencies = (currencies, key, order) => {
-  return currencies.sort(function(a, b) {
-    const orders = {
-      asc: (a, b) => (a > b ? 1 : -1),
-      desc: (a, b) => (a < b ? 1 : -1),
-    };
-    return orders[order](a[key], b[key]);
-  });
-};
+  if (typeof currencies[key] === "string") {
+    currencies[key] = currencies[key].toLowerCase();
+  }
+    return currencies.sort(function(a, b) {
+        const orders = {
+          asc: (a, b) => ( a > b ? 1 : -1 ),
+          desc: (a, b) => ( a < b ? 1 : -1 ),
+        };
+        return orders[order](a[key], b[key]);
+      },
+    );
+  }
+;
