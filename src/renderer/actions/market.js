@@ -68,7 +68,6 @@ export function useMarketCurrencies() { // here we will pass { range, counterVal
                 disableRounding: false,
             }) || [];
         currency.counterValue = data;
-        currency.portfolio = useCurrencyPortfolio()
         currency.price = data[data.length - 1];
         currency.change = (data[data.length - 1] - data[0]) / data[data.length - 1];
 
