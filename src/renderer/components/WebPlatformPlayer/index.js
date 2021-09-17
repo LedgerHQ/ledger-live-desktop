@@ -108,9 +108,12 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
 
     urlObj.searchParams.set("backgroundColor", theme.background.paper);
     urlObj.searchParams.set("textColor", theme.text.shade100);
+    if (manifest.params) {
+      urlObj.searchParams.set("params", JSON.stringify(manifest.params));
+    }
 
     return urlObj;
-  }, [manifest.url, theme, inputs]);
+  }, [manifest.url, theme, inputs, manifest.params]);
 
   const listAccounts = useCallback(() => {
     return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
