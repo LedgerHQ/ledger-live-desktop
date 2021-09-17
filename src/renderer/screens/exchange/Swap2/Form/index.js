@@ -11,7 +11,6 @@ import { context } from "~/renderer/drawers/Provider";
 import { useTranslation } from "react-i18next";
 import {
   useSwapProviders,
-  usePickExchangeRate,
   usePollKYCStatus,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import { KYC_STATUS } from "~/renderer/screens/exchange/Swap2/utils/shared";
@@ -34,6 +33,7 @@ import ExchangeDrawer from "./ExchangeDrawer/index";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
 import { SWAP_VERSION, trackSwapError } from "../utils/index";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -51,10 +51,18 @@ const SwapForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { state: locationState } = useLocation();
+  const accounts = useSelector(shallowAccountsSelector);
   const { providers, error: providersError } = useSwapProviders();
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
-  const swapTransaction = useSwapTransaction(locationState);
+  const swapTransaction = useSwapTransaction({
+    accounts,
+    exchangeRate,
+    setExchangeRate: rate => {
+      dispatch(updateRateAction(rate));
+    },
+    ...locationState,
+  });
   const exchangeRatesState = swapTransaction.swap?.rates;
   const swapKYC = useSelector(swapKYCSelector);
   const provider = exchangeRate?.provider;
@@ -75,14 +83,6 @@ const SwapForm = () => {
     dispatch(updateTransactionAction(swapTransaction.transaction));
     // eslint-disable-next-line
   }, [swapTransaction.transaction]);
-
-  usePickExchangeRate({
-    exchangeRates: exchangeRatesState?.value,
-    exchangeRate,
-    setExchangeRate: rate => {
-      dispatch(updateRateAction(rate));
-    },
-  });
 
   usePollKYCStatus(
     {
@@ -156,12 +156,14 @@ const SwapForm = () => {
         />
         <SwapFormSelectors
           fromAccount={sourceAccount}
+          toAccount={swapTransaction.swap.to.account}
           fromAmount={swapTransaction.swap.from.amount}
           toCurrency={targetCurrency}
           toAmount={exchangeRate?.toAmount || null}
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
           setToAccount={swapTransaction.setToAccount}
+          setToCurrency={swapTransaction.setToCurrency}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
           fromAmountError={swapError}

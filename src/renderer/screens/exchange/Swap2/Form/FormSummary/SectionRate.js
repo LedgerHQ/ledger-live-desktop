@@ -9,7 +9,11 @@ import IconLockOpen from "~/renderer/icons/LockOpen";
 import SummarySection from "./SummarySection";
 import { context } from "~/renderer/drawers/Provider";
 import RatesDrawer from "../RatesDrawer";
-import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
+import type {
+  SwapSelectorStateType,
+  RatesReducerState,
+  SwapDataType,
+} from "../../utils/shared/useSwapTransaction";
 import Price from "~/renderer/components/Price";
 import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
 import Text from "~/renderer/components/Text";
@@ -20,30 +24,34 @@ import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
 import { ratesExpirationThreshold } from "~/renderer/reducers/swap";
 
 type Props = {
-  swapTransaction: SwapTransactionType,
+  ratesState: RatesReducerState,
+  fromCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  refetchRates: $PropertyType<SwapDataType, "refetchRates">,
   provider: ?string,
 };
-const SectionRate = ({ swapTransaction, provider }: Props) => {
+const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provider }: Props) => {
   const { t } = useTranslation();
   const { setDrawer } = useContext(context);
   const exchangeRate = useSelector(rateSelector);
   const ratesExpiration = useSelector(rateExpirationSelector);
-  const fromCurrency = swapTransaction.swap.from.currency;
-  const toCurrency = swapTransaction.swap.to.currency;
-  const ratesState = swapTransaction.swap.rates;
+  const rates = ratesState.value;
   const handleChange = useMemo(
     () =>
-      ratesState.value?.length > 1 &&
+      rates &&
+      rates.length > 1 &&
       (() =>
         setDrawer(RatesDrawer, {
-          swapTransaction,
+          fromCurrency,
+          toCurrency,
+          rates,
           provider,
         })),
-    [setDrawer, ratesState.value, provider, swapTransaction],
+    [setDrawer, rates, fromCurrency, toCurrency, provider],
   );
 
   const summaryValue =
-    swapTransaction.swap.rates.status === "loading" ? (
+    ratesState.status === "loading" ? (
       <Spinner size={17} color="palette.text.shade40" my="1px" />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
@@ -53,7 +61,7 @@ const SectionRate = ({ swapTransaction, provider }: Props) => {
               <AnimatedCountdown size={10} duration={ratesExpirationThreshold} />
             </Box>
             <Box>
-              <CountdownTimer end={ratesExpiration} callback={swapTransaction.swap.refetchRates} />
+              <CountdownTimer end={ratesExpiration} callback={refetchRates} />
             </Box>
           </Box>
         )}
@@ -82,4 +90,4 @@ const SectionRate = ({ swapTransaction, provider }: Props) => {
   );
 };
 
-export default SectionRate;
+export default React.memo<Props>(SectionRate);

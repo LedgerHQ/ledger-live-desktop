@@ -20,17 +20,51 @@ type SwapFormSummaryProps = {
   kycStatus?: $PropertyType<SectionProviderProps, "status">,
   provider?: string,
 };
-const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSummaryProps) => (
-  <Form>
-    <SectionProvider provider={provider} status={kycStatus} />
-    <SectionRate provider={provider} swapTransaction={swapTransaction} />
-    <SectionFees provider={provider} swapTransaction={swapTransaction} />
-    <SectionTarget
-      account={swapTransaction.swap.to.parentAccount ?? swapTransaction.swap.to.account}
-      currency={swapTransaction.swap.to.currency}
-      setToAccount={swapTransaction.setToAccount}
-    />
-  </Form>
-);
+const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSummaryProps) => {
+  const {
+    transaction,
+    status,
+    updateTransaction,
+    setTransaction,
+    setToAccount,
+    swap: { targetAccounts },
+  } = swapTransaction;
+  const {
+    currency: fromCurrency,
+    account: fromAccount,
+    parentAccount: fromParentAccount,
+  } = swapTransaction.swap.from;
+  const { currency: toCurrency, account: toAccount } = swapTransaction.swap.to;
+  const ratesState = swapTransaction.swap.rates;
+  const refetchRates = swapTransaction.swap.refetchRates;
+  return (
+    <Form>
+      <SectionProvider provider={provider} status={kycStatus} />
+      <SectionRate
+        fromCurrency={fromCurrency}
+        toCurrency={toCurrency}
+        ratesState={ratesState}
+        refetchRates={refetchRates}
+        provider={provider}
+      />
+      <SectionFees
+        transaction={transaction}
+        account={fromAccount}
+        parentAccount={fromParentAccount}
+        currency={fromCurrency}
+        status={status}
+        updateTransaction={updateTransaction}
+        setTransaction={setTransaction}
+        provider={provider}
+      />
+      <SectionTarget
+        account={toAccount}
+        currency={toCurrency}
+        setToAccount={setToAccount}
+        targetAccounts={targetAccounts}
+      />
+    </Form>
+  );
+};
 
-export default SwapFormSummary;
+export default React.memo<SwapFormSummaryProps>(SwapFormSummary);
