@@ -1,96 +1,67 @@
-import { keyframes, css } from 'styled-components';
-import type { Theme as PaletteTheme } from './palettes';
+import { keyframes, css } from "styled-components";
+import type { Palette } from "./palettes";
 export const space = [0, 5, 10, 15, 20, 30, 44, 50, 70];
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32];
 export const radii = [0, 4];
-export const shadows = ['0 4px 8px 0 rgba(0, 0, 0, 0.03)'];
+export const shadows = ["0 4px 8px 0 rgba(0, 0, 0, 0.03)"];
 export const zIndexes = [-1, 0, 1, 9, 10, 90, 100, 900, 1000];
+
+export const colors = {
+  // NB should we even keep arbitrary colors? There's market trend colors referrences in helpers.ts
+  marketUp_eastern: "#ea2e49",
+  marketUp_western: "#66be54",
+  marketDown_eastern: "#6490f1",
+  marketDown_western: "#ea2e49",
+};
+
 // Those fonts are now defined in global.css, this is just a mapping for styled-system
 export const fontFamilies = {
   Inter: {
     ExtraLight: {
       weight: 100,
-      style: 'normal',
+      style: "normal",
     },
     Light: {
       weight: 300,
-      style: 'normal',
+      style: "normal",
     },
     Regular: {
       weight: 400,
-      style: 'normal',
+      style: "normal",
     },
     Medium: {
       weight: 500,
-      style: 'normal',
+      style: "normal",
     },
     SemiBold: {
       weight: 600,
-      style: 'normal',
+      style: "normal",
     },
     Bold: {
       weight: 700,
-      style: 'normal',
+      style: "normal",
     },
     ExtraBold: {
       weight: 800,
-      style: 'normal',
+      style: "normal",
     },
   },
   Alpha: {
     Medium: {
       weight: 500,
-      style: 'normal',
+      style: "normal",
     },
   },
 };
-// @Rebrand remove this
-const colors = {
-  transparent: 'transparent',
-  pearl: '#ff0000',
-  alertRed: '#ea2e49',
-  warning: '#f57f17',
-  black: '#000000',
-  dark: '#142533',
-  separator: '#aaaaaa',
-  fog: '#d8d8d8',
-  gold: '#d6ad42',
-  graphite: '#767676',
-  grey: '#999999',
-  identity: '#41ccb4',
-  lightFog: '#eeeeee',
-  sliderGrey: '#F0EFF1',
-  lightGraphite: '#fafafa',
-  lightGrey: '#f9f9f9',
-  starYellow: '#FFD24A',
-  orange: '#ffa726',
-  positiveGreen: 'rgba(102, 190, 84, 1)',
-  greenPill: '#41ccb4',
-  smoke: '#666666',
-  wallet: '#6490f1',
-  blueTransparentBackground: 'rgba(100, 144, 241, 0.15)',
-  pillActiveBackground: 'rgba(100, 144, 241, 0.1)',
-  lightGreen: 'rgba(102, 190, 84, 0.1)',
-  lightRed: 'rgba(234, 46, 73, 0.1)',
-  lightWarning: 'rgba(245, 127, 23, 0.1)',
-  white: '#ffffff',
-  experimentalBlue: '#165edb',
-  marketUp_eastern: '#ea2e49',
-  marketUp_western: '#66be54',
-  marketDown_eastern: '#6490f1',
-  marketDown_western: '#ea2e49',
-};
-// prettier-ignore
-const exportedColors = colors;
-export { exportedColors as colors };
-const animationLength = '0.33s';
+
+const animationLength = "0.33s";
 const easings = {
-  outQuadratic: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  outQuadratic: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
 };
 
-const transition = (property = 'all'): any => css`
-    transition: ${property} ${animationLength} ${easings.outQuadratic};
-  `;
+const transition = (property = "all"): any => css`
+  transition: ${property} ${animationLength} ${easings.outQuadratic};
+`;
 
 const fadeIn = keyframes`
     0% {
@@ -129,10 +100,22 @@ const fadeInUp = keyframes`
     }
   `;
 const animations = {
-  fadeIn: () => css`${fadeIn} ${animationLength} ${easings.outQuadratic} forwards`,
-  fadeOut: () => css`${fadeOut} ${animationLength} ${easings.outQuadratic} forwards`,
-  fadeInGrowX: () => css`${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards`,
-  fadeInUp: () => css`${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards`,
+  fadeIn: () =>
+    css`
+      ${fadeIn} ${animationLength} ${easings.outQuadratic} forwards
+    `,
+  fadeOut: () =>
+    css`
+      ${fadeOut} ${animationLength} ${easings.outQuadratic} forwards
+    `,
+  fadeInGrowX: () =>
+    css`
+      ${fadeInGrowX} 0.6s ${easings.outQuadratic} forwards
+    `,
+  fadeInUp: () =>
+    css`
+      ${fadeInUp} ${animationLength} ${easings.outQuadratic} forwards
+    `,
 };
 const overflow = {
   x: css`
@@ -169,45 +152,45 @@ const overflow = {
   trackSize: 12,
 };
 interface Font {
-  weight: number
-  style: string
+  weight: number;
+  style: string;
 }
 export interface Theme {
   sizes: {
-    topBarHeight: number
-    sideBarWidth: number
+    topBarHeight: number;
+    sideBarWidth: number;
     side: {
       big: {
-        width: number
-      }
+        width: number;
+      };
       small: {
-        width: number
-      }
-    }
+        width: number;
+      };
+    };
     modal: {
       min: {
-        height: number
-        width: number
-      }
+        height: number;
+        width: number;
+      };
       max: {
-        height: number
-        width: number
-      }
-    }, 
-  }
-  radii: number[]
-  fontFamilies: Record<string, Record<string, Font>>
-  fontSizes: number[]
-  space: number[]
-  shadows: string[]
+        height: number;
+        width: number;
+      };
+    };
+  };
+  radii: number[];
+  fontFamilies: Record<string, Record<string, Font>>;
+  fontSizes: number[];
+  space: number[];
+  shadows: string[];
   colors: {
-    [key: string]: string | any
-    palette?: PaletteTheme
-  }
-  animations: Record<string, (props: never) => any>
-  transition: (property?: string) => any
-  overflow: Record<string, any>
-  zIndexes: number[]
+    [key: string]: string | any;
+    palette?: Palette;
+  };
+  animations: Record<string, (props: never) => any>;
+  transition: (property?: string) => any;
+  overflow: Record<string, any>;
+  zIndexes: number[];
 }
 const theme: Theme = {
   sizes: {

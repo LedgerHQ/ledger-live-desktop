@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { grid, color, space } from "styled-system";
 import Grid from "./index";
+import Text from "@ui/components/Text";
 // Just a stylable div used as a base grid element for the purpose of this story.
 const Cell = styled.div<any>`
   // Make the div semi-opaque to show grid composition.
@@ -179,13 +180,13 @@ const cells = Array.from(
 const DefaultTemplate = ({ gridColumn, gridRow, gridArea, ...args }: any) => {
   return (
     <>
-      <div
+      <Text
         style={{
           marginBottom: "1em",
         }}
       >
         A 12 columns grid using default props and containing cells with various span values.
-      </div>
+      </Text>
       <Grid {...args}>
         <Cell
           key="-1"
@@ -205,7 +206,7 @@ const DefaultTemplate = ({ gridColumn, gridRow, gridArea, ...args }: any) => {
 };
 
 export const Default = DefaultTemplate;
-// @ts-expect-error
+// @ts-expect-error FIXME
 Default.args = {
   gridGap: 1,
 };
@@ -213,7 +214,7 @@ Default.args = {
 // eslint-disable-next-line
 const FixedTemplate = ({ gridColumn, gridRow, gridArea, ...args }: any) => (
   <>
-    <div
+    <Text
       style={{
         marginBottom: "1em",
       }}
@@ -228,7 +229,7 @@ const FixedTemplate = ({ gridColumn, gridRow, gridArea, ...args }: any) => (
         MDN
       </a>{" "}
       documentation.
-    </div>
+    </Text>
     <Grid {...args}>
       <>
         <Cell
@@ -252,7 +253,7 @@ const FixedTemplate = ({ gridColumn, gridRow, gridArea, ...args }: any) => (
 );
 
 export const Fixed = FixedTemplate;
-// @ts-expect-error
+// @ts-expect-error FIXME
 Fixed.args = {
   columns: 3,
   rows: undefined,

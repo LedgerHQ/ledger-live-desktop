@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "./index";
+import Text from "../../Text";
 import theme from "@ui/styles/theme";
 import { useArgs } from "@storybook/client-api";
 export default {
@@ -81,13 +82,13 @@ const Template = (args: any) => {
 
   return (
     <Modal {...args} onClose={onClose}>
-      {args.children}
+      <Text>{args.children}</Text>
     </Modal>
   );
 };
 
 export const Default = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 Default.args = {
   children: "I'm the content passed as a children to the Modal component",
 };

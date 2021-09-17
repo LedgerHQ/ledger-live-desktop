@@ -15,7 +15,7 @@ export default {
   argTypes: {},
 };
 
-const Template = args => (
+const Template = (args) => (
   <StyledWrapper>
     <Text>
       {
