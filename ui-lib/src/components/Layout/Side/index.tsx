@@ -20,10 +20,10 @@ export const SideWrapper = (props: SideProps) => {
   const onClose = useCallback(() => setSide(), [setSide]);
 
   useEffect(() => {
-    // @ts-expect-error
+    // @ts-expect-error FIXME
     setQueue((q) => {
       if (!state.open) return [];
-      // @ts-expect-error
+      // @ts-expect-error FIXME
       if (state.Component != null) return q.concat([{ ...state, key: nonce.current++ }]);
     });
   }, [state]);

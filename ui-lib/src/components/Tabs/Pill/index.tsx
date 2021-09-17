@@ -37,14 +37,14 @@ const Item = styled(Flex).attrs({ flex: 1, justifyContent: "center", alignItems:
   padding: 8px 10px 8px 10px;
   border: 1px solid;
   &[data-active="false"] {
-    color: ${p => p.theme.colors.palette.v2.text.secondary};
-    background-color: ${p => p.theme.colors.palette.v2.background.default};
-    border-color: ${p => p.theme.colors.palette.v2.grey.border};
+    color: ${(p) => p.theme.colors.palette.neutral.c80};
+    background-color: ${(p) => p.theme.colors.palette.neutral.c00};
+    border-color: ${(p) => p.theme.colors.palette.neutral.c90};
   }
   &[data-active="true"] {
-    color: ${p => p.theme.colors.palette.v2.text.contrast};
-    background-color: ${p => p.theme.colors.palette.v2.text.default};
-    border-color: ${p => p.theme.colors.palette.v2.text.default};
+    color: ${(p) => p.theme.colors.palette.neutral.c00};
+    background-color: ${(p) => p.theme.colors.palette.neutral.c100};
+    border-color: ${(p) => p.theme.colors.palette.neutral.c100};
 
     &:not(:last-child) {
       border-right-width: 0;
@@ -67,7 +67,7 @@ export default function PillTabs({
         <Item
           key={index}
           data-active={index === activeIndex}
-          onClick={_ => {
+          onClick={(_) => {
             setActiveIndex(index);
             onTabChange && onTabChange(index);
           }}
