@@ -80,7 +80,6 @@ function MarketList(props: MarketListProps) {
 
   // TODO: should be changed to use values from dropdowns
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  // const range = "day";
   const { range } = useSelector(state => state.market)
   const { rangeData } = useRange(range);
   const currencies = useMarketCurrencies({ counterValueCurrency, ...rangeData });

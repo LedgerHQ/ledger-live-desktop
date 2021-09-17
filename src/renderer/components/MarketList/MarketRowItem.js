@@ -14,6 +14,11 @@ const Cell = styled(Box)`
   padding: 15px 20px;
 `;
 
+const CryptoCurrencyIconWrapper = styled.div`
+  height: 20px;
+  width: 20px;
+`
+
 const CurrencyTicker = styled.div`
   padding: 5px 10px;
   color: ${p => p.theme.colors.palette.text.shade30};
@@ -115,7 +120,9 @@ export default function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            <CryptoCurrencyIcon currency={currency} size={20} />
+            <CryptoCurrencyIconWrapper>
+              <CryptoCurrencyIcon currency={currency} size={20} />
+            </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box
                 horizontal

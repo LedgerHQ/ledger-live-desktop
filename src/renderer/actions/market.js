@@ -1,15 +1,22 @@
 // @flow
 
-import { createAction } from "redux-actions";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import { useCalculateMany } from "@ledgerhq/live-common/lib/countervalues/react";
 import { Currency } from "@ledgerhq/live-common/lib/types";
+import { MarketStateType } from "~/renderer/reducers/market"
 
-export const setMarketParams = createAction(
-  "SET_MARKET_PARAMS",
-  useMarketCurrencies,
-);
+// export const setMarketParams = createAction(
+//   "SET_MARKET_PARAMS",
+//   (payload) => payload
+// );
+
+export const setMarketParams = (payload: MarketStateType) => {
+  return ( {
+    type: "SET_MARKET_PARAMS",
+    payload,
+  } )
+};
 
 type MarketCurrenciesProps = {
   count: number,
@@ -18,10 +25,10 @@ type MarketCurrenciesProps = {
 };
 
 export function useMarketCurrencies({
-  counterValueCurrency,
-  count,
-  increment,
-}: MarketCurrenciesProps) {
+                                      counterValueCurrency,
+                                      count,
+                                      increment,
+                                    }: MarketCurrenciesProps) {
   const PERCENT_MULTIPLIER = 100;
 
   const currencies = listSupportedCurrencies();
@@ -77,7 +84,7 @@ export function useMarketCurrencies({
     currency.counterValue = data;
     currency.price = data[data.length - 1];
     const difference = data[data.length - 1] - data[0];
-    currency.change = (difference / data[0]) * PERCENT_MULTIPLIER;
+    currency.change = ( difference / data[0] ) * PERCENT_MULTIPLIER;
 
     return currency;
   });

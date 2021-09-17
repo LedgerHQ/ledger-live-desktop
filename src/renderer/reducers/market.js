@@ -36,8 +36,8 @@ const initialState: MarketStateType = {
 };
 
 const handlers = {
-  SET_MARKET_PARAMS: (state, { payload }: { payload: OpenPayload }) => {
-
+  SET_MARKET_PARAMS: (state, payload) => {
+    console.log('payload', payload)
     return {
       ...state,
       payload

@@ -10,11 +10,15 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { setMarketParams } from "~/renderer/actions/market"
+import { useSelector } from "react-redux"
 
 const MarketRangeSelect = () => {
-
+  const { range } = useSelector(state => state.market)
   const onRangeSelected = useCallback(
-    item => setMarketParams({ market: item.value }),
+    item => {
+      console.log('component item',item)
+      setMarketParams({ range: item.value })
+    },
     [],
   );
 
@@ -34,32 +38,36 @@ const MarketRangeSelect = () => {
     );
   }, []);
 
+  const items = [
+    {
+      value: "day",
+      label: "24 hours",
+      key: "day"
+    },
+    {
+      value: "week",
+      label: "7 days",
+      key: "week"
+    }
+  ]
+
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
       <DropDownSelector
         border
         horizontal
-        items={[{
-          value: "day",
-          label: "24 hours",
-          key: "day"
-        },
-          {
-            value: "week",
-            label: "7 days",
-            key: "week"
-          }]}
+        items={items}
         renderItem={renderItem}
         onChange={onRangeSelected}
         controlled
-        value={"day"}
+        value={items.find(a => a.value === range)}
       >
         {({ isOpen, value }) =>
           value ? (
             <Box flex={1} horizontal>
               <TextLink shrink>
                 <Button>
-                  <Ellipsis>{value}</Ellipsis>
+                  <Ellipsis>{value.label}</Ellipsis>
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
