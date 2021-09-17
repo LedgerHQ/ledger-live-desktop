@@ -7,25 +7,37 @@ import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
 import { useSelector } from "react-redux";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import { useMarketCurrencies } from "~/renderer/actions/market";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
-import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
 import { useRange } from "~/renderer/hooks/useRange";
+import SortIcon from './SortIcon'
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+
+const SortIconStyled = styled(SortIcon)`
+  margin: 0 5px;
+
+  & * {
+    color: ${p => ( p.theme.colors.palette.text.shade60 )};
+    fill: ${p => ( p.theme.colors.palette.text.shade60 )};
+  }
+`
+
+const ListStyled = styled(List)`
+  margin-top: 0;
+  background: ${p => p.theme.colors.palette.background.paper};
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+`
 
 const ColumnTitleBox = styled(Box)`
   padding: 10px 20px;
 `;
 
-const ArrowsUpDownIconWrapper = styled.div`
-  padding: 0 5px;
-`;
-
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
-  border-radius: 4px;
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 #00000007;
-  color: #abadb6;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -44,19 +56,20 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
 
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    color: ${p => ( p.theme.colors.palette.text.shade60 )};
+    fill: ${p => ( p.theme.colors.palette.text.shade60 )};
   }
 `;
 
 type CurrencyRowProps = {
   index: number,
-  style: Map<string, string>,
-};
+  style: Map < string, string >,
+}
+;
 
 type MarketListProps = {
   search: string,
@@ -133,9 +146,7 @@ function MarketList(props: MarketListProps) {
             onClick={() => onSort("name")}
           >
             Name
-            <ArrowsUpDownIconWrapper>
-              <ArrowsUpDown size={10} />
-            </ArrowsUpDownIconWrapper>
+            <SortIconStyled order={orderBy === "name" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -150,9 +161,7 @@ function MarketList(props: MarketListProps) {
             onClick={() => onSort("counterValue")}
           >
             Price
-            <ArrowsUpDownIconWrapper>
-              <ArrowsUpDown size={10} />
-            </ArrowsUpDownIconWrapper>
+            <SortIconStyled order={orderBy === "counterValue" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -167,9 +176,7 @@ function MarketList(props: MarketListProps) {
             onClick={() => onSort("change")}
           >
             % Change
-            <ArrowsUpDownIconWrapper>
-              <ArrowsUpDown size={10} />
-            </ArrowsUpDownIconWrapper>
+            <SortIconStyled order={orderBy === "change" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -186,22 +193,27 @@ function MarketList(props: MarketListProps) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      <List
+      <ListStyled
         height={500}
         width="100%"
         itemCount={visibleCurrencies.length}
-        itemSize={65}
+        itemSize={56}
         style={{ overflowX: "hidden" }}
       >
         {CurrencyRow}
-      </List>
+      </ListStyled>
     </Box>
   );
 }
 
 export default MarketList;
 
-export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
+export const matchesSearch = (search
+  ? : string, currency, subMatch
+:
+boolean = false
+):
+boolean => {
   if (!search) return true;
   const match = `${currency.ticker}|${currency.name}}`;
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
@@ -211,10 +223,10 @@ const sortCurrencies = (currencies, key, order) => {
   if (typeof currencies[key] === "string") {
     currencies[key] = currencies[key].toLowerCase();
   }
-  return currencies.sort(function(a, b) {
+  return currencies.sort(function (a, b) {
     const orders = {
-      asc: (a, b) => (a > b ? 1 : -1),
-      desc: (a, b) => (a < b ? 1 : -1),
+      asc: (a, b) => ( a > b ? 1 : -1 ),
+      desc: (a, b) => ( a < b ? 1 : -1 ),
     };
     return orders[order](a[key], b[key]);
   });

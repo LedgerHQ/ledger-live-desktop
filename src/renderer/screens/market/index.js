@@ -45,14 +45,14 @@ const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   flex: 1;
   padding: 10px 20px;
-  margin-bottom: 9px;
+  margin-bottom: 2px;
   color: #abadb6;
   font-weight: 600;
   align-items: center;
   justify-content: flex-start;
   display: flex;
   flex-direction: row;
-  border-radius: 4px;
+  border-radius: 4px 4px 0 0;
   box-shadow: 0 4px 8px 0 #00000007;
 `;
 
