@@ -235,8 +235,8 @@
         },
         "tooltip": {
           "provider": "Prestataire",
-          "rate": "lorem ipsum",
-          "fees": "lorem ipsum"
+          "rate": "Taux",
+          "fees": "Frais"
         },
         "noAccount": "Pas de compte {{target}}",
         "noAccountCTA": "Ajouter un compte"
