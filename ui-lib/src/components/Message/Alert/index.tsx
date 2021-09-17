@@ -19,29 +19,10 @@ const StyledIconContainer = styled.div`
   align-items: center;
 `;
 
-const getIcon = (type: AlertType) => {
-  switch (type) {
-    case "info":
-      return (
-        <StyledIconContainer>
-          <ShieldSecurityMedium size={20} />
-        </StyledIconContainer>
-      );
-    case "warning":
-      return (
-        <StyledIconContainer>
-          <CircledAlertMedium size={20} />
-        </StyledIconContainer>
-      );
-    case "error":
-      return (
-        <StyledIconContainer>
-          <CircledCrossMedium size={20} />
-        </StyledIconContainer>
-      );
-    default:
-      return null;
-  }
+const icons = {
+  info: <ShieldSecurityMedium size={20} />,
+  warning: <CircledAlertMedium size={20} />,
+  error: <CircledCrossMedium size={20} />,
 };
 
 const StyledAlertContainer = styled.div<{ type?: AlertType }>`
@@ -75,7 +56,7 @@ const StyledAlertContainer = styled.div<{ type?: AlertType }>`
 export default function Alert({ type = "info", title, showIcon = true }: AlertProps): JSX.Element {
   return (
     <StyledAlertContainer type={type}>
-      {showIcon && getIcon(type)}
+      {showIcon && !!icons[type] && <StyledIconContainer>{icons[type]}</StyledIconContainer>}
       <Text type={"body"} color={"inherit"}>
         {title}
       </Text>
