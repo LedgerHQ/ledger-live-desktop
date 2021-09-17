@@ -104,7 +104,7 @@ type Props = {
   selectedAccount: AccountLike,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   setDrawerStateRef: {
-    current: ?({ selectedAccount: AccountLike, filteredAccounts: AccountLike[] }) => void,
+    current: ?({ selectedAccount: AccountLike, targetAccounts: AccountLike[] }) => void,
   },
 };
 export default function TargetAccountDrawer({
@@ -114,9 +114,9 @@ export default function TargetAccountDrawer({
   setDrawerStateRef,
 }: Props) {
   const dispatch = useDispatch();
-  const [{ selectedAccount, filteredAccounts }, setState] = useState({
+  const [{ selectedAccount, targetAccounts }, setState] = useState({
     selectedAccount: initialSelectedAccount,
-    filteredAccounts: accounts,
+    targetAccounts: accounts,
   });
   const currency = getAccountCurrency(selectedAccount);
   useEffect(() => {
@@ -130,7 +130,7 @@ export default function TargetAccountDrawer({
     <Box height="100%">
       <DrawerTitle i18nKey="swap2.form.to.title" />
       <Box>
-        {filteredAccounts.map(account => (
+        {targetAccounts.map(account => (
           <TargetAccount
             key={account.id}
             account={account}

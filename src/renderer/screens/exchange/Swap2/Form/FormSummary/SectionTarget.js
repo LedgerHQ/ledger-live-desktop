@@ -1,6 +1,6 @@
 // @flow
-import React, { useEffect, useMemo, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import SummaryLabel from "./SummaryLabel";
 import SectionInformative from "./SectionInformative";
 import SummaryValue from "./SummaryValue";
@@ -17,8 +17,6 @@ import type {
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import TargetAccountDrawer from "../TargetAccountDrawer";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import { getAccountTuplesForCurrency } from "~/renderer/components/PerCurrencySelectAccount/state";
 
 const AccountSection = ({
   account,
@@ -57,21 +55,15 @@ type SectionTargetProps = {
   account: $PropertyType<SwapSelectorStateType, "account">,
   currency: $PropertyType<SwapSelectorStateType, "currency">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  targetAccounts: $PropertyType<SwapTransactionType, "targetAccounts">,
 };
-const SectionTarget = ({ account, currency, setToAccount }: SectionTargetProps) => {
+const SectionTarget = ({ account, currency, setToAccount, targetAccounts }: SectionTargetProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setDrawer } = React.useContext(context);
-  const accounts = useSelector(shallowAccountsSelector);
-  const filteredAccounts = useMemo(
-    () =>
-      currency &&
-      getAccountTuplesForCurrency(currency, accounts, false).map(({ account }) => account),
-    [currency, accounts],
-  );
 
   const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
-  const hideEdit = !filteredAccounts || filteredAccounts.length < 2;
+  const hideEdit = !targetAccounts || targetAccounts.length < 2;
 
   // Using a ref to keep the drawer state synced.
   const setDrawerStateRef = useRef(null);
@@ -79,13 +71,13 @@ const SectionTarget = ({ account, currency, setToAccount }: SectionTargetProps) 
     setDrawerStateRef.current &&
       setDrawerStateRef.current({
         selectedAccount: account,
-        filteredAccounts,
+        targetAccounts,
       });
-  }, [account, filteredAccounts]);
+  }, [account, targetAccounts]);
 
   const showDrawer = () =>
     setDrawer(TargetAccountDrawer, {
-      accounts: filteredAccounts,
+      accounts: targetAccounts,
       selectedAccount: account,
       setToAccount: setToAccount,
       setDrawerStateRef: setDrawerStateRef,
@@ -105,4 +97,4 @@ const SectionTarget = ({ account, currency, setToAccount }: SectionTargetProps) 
   return <AccountSection account={account} currency={currency} handleChange={handleEditAccount} />;
 };
 
-export default SectionTarget;
+export default React.memo<SectionTargetProps>(SectionTarget);

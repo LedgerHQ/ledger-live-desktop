@@ -72,4 +72,4 @@ const SectionProvider = ({ provider, status }: SectionProviderProps) => {
   );
 };
 
-export default SectionProvider;
+export default React.memo<SectionProviderProps>(SectionProvider);
