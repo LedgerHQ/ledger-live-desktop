@@ -13,11 +13,11 @@ import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction"
 import Price from "~/renderer/components/Price";
 import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
 import Text from "~/renderer/components/Text";
-import Spinner from "~/renderer/components/Spinner";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import Box from "~/renderer/components/Box";
 import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
 import { ratesExpirationThreshold } from "~/renderer/reducers/swap";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 type Props = {
   swapTransaction: SwapTransactionType,
@@ -42,7 +42,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
 
   const summaryValue =
     swapTransaction.swap.rates.status === "loading" ? (
-      <Spinner size={17} color="palette.text.shade40" my="1px" />
+      <BigSpinner size={17} color="palette.text.shade40" my="1px" />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
