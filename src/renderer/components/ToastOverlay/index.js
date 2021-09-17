@@ -1,10 +1,14 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Toast } from "./Toast";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { v4 as uuidv4 } from "uuid";
+import { openInformationCenter } from "~/renderer/actions/UI";
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   position: absolute;
@@ -18,20 +22,39 @@ const Wrapper: ThemedComponent<{}> = styled.div`
 
 export function ToastOverlay() {
   const { toasts, dismissToast } = useToasts();
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const onOpenInformationCenter = useCallback(
+    () => dispatch(openInformationCenter("announcement")),
+    [],
+  );
+
   return (
     <Wrapper>
-      {toasts.map(({ id, type, title, text, icon, callback }) => (
+      {toasts.length < 2 ? (
+        toasts.map(({ id, type, title, text, icon, callback }) => (
+          <Toast
+            id={id}
+            type={type}
+            title={title}
+            icon={icon}
+            text={text}
+            callback={callback}
+            onDismiss={dismissToast}
+            key={id}
+          />
+        ))
+      ) : (
         <Toast
-          id={id}
-          type={type}
-          title={title}
-          icon={icon}
-          text={text}
-          callback={callback}
+          id={uuidv4()}
+          icon="info"
+          title={t("toastOverlay.groupedToast.text", { count: toasts.length })}
+          cta={t("toastOverlay.groupedToast.cta")}
           onDismiss={dismissToast}
-          key={id}
+          dismissable={false}
+          callback={onOpenInformationCenter}
         />
-      ))}
+      )}
     </Wrapper>
   );
 }
