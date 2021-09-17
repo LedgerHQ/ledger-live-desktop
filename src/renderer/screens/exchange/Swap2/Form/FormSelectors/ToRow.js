@@ -126,7 +126,9 @@ export default function ToRow({
             fontWeight={600}
             color="palette.text.shade40"
             containerProps={amountInputContainerProps}
-            unit={unit}
+            /* FIXME: Currently input only accepts 16 decimals, values with more
+              decimals are cutted, that's why I apply this fix */
+            unit={unit && unit?.magnitude > 16 ? { ...unit, magnitude: 16 } : unit}
             loading={loadingRates}
             renderRight={
               toCurrency &&
