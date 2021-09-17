@@ -8,7 +8,6 @@ type Props = {
   currencies: Array<CryptoCurrency | TokenCurrency>,
 };
 
-
 const ServiceStatusWarning = createCustomErrorClass("ServiceStatusWarning");
 
 const CurrencyDownStatusAlert = ({ currencies }: Props) => {
