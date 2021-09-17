@@ -84,10 +84,7 @@ type Props = {
 
 const AppDetails = ({ manifest }: Props) => {
   const { t } = useTranslation();
-  const description = t(
-    `manager.apps.content.${manifest.id}.shortDescription`,
-    manifest.content.shortDescription, // default description in case of missing translations
-  );
+  const description = manifest.content.description.en;
 
   return (
     <>
