@@ -2645,6 +2645,10 @@
       "announcement": "Новости",
       "operation": "Операция",
       "achievement": "Открыто Достижение"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
