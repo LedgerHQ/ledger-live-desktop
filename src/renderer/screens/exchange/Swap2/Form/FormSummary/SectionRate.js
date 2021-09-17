@@ -17,7 +17,12 @@ import CountdownTimer from "~/renderer/components/CountdownTimer";
 import Box from "~/renderer/components/Box";
 import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
 import { ratesExpirationThreshold } from "~/renderer/reducers/swap";
-import BigSpinner from "~/renderer/components/BigSpinner";
+
+const SectionRateDefaultValue = () => (
+  <Text color="palette.text.shade100" fontSize={4}>
+    -
+  </Text>
+);
 
 type Props = {
   swapTransaction: SwapTransactionType,
@@ -42,7 +47,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
 
   const summaryValue =
     swapTransaction.swap.rates.status === "loading" ? (
-      <BigSpinner size={17} color="palette.text.shade40" my="1px" />
+      <SectionRateDefaultValue />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
@@ -67,9 +72,7 @@ const SectionRate = ({ swapTransaction }: Props) => {
         />
       </SummaryValue>
     ) : (
-      <Text color="palette.text.shade100" fontSize={4}>
-        {"-"}
-      </Text>
+      <SectionRateDefaultValue />
     );
 
   return (
