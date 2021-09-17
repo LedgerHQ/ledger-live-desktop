@@ -130,7 +130,8 @@ export default function ToRow({
             loading={loadingRates}
             renderRight={
               toCurrency &&
-              toAmount && (
+              toAmount &&
+              !loadingRates && (
                 <CounterValue
                   currency={toCurrency}
                   value={toAmount}
