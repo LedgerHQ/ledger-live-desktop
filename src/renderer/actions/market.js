@@ -6,8 +6,8 @@ import { BigNumber } from "bignumber.js";
 import { useCalculateMany } from "@ledgerhq/live-common/lib/countervalues/react";
 import { Currency } from "@ledgerhq/live-common/lib/types";
 
-export const openPlatformAppDisclaimerDrawer = createAction(
-  "MARKET_BUILD_CURRENCIES_LIST",
+export const setMarketParams = createAction(
+  "SET_MARKET_PARAMS",
   useMarketCurrencies,
 );
 

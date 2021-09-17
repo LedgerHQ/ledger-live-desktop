@@ -19,29 +19,28 @@ export type MarketCurrencyType = {
   units: Array<any>,
 };
 
-export type MarketState = {
+export type MarketStateType = {
   currencies: Array<MarketCurrencyType>,
   filteredCurrencies: Array<MarketCurrencyType>,
   searchValue: string,
+  range: string,
+  counterValueCurrency: string
 };
 
-const initialState: MarketState = {
+const initialState: MarketStateType = {
   currencies: [],
   filteredCurrencies: [],
   searchValue: "",
+  range: "day",
+  counterValueCurrency: ""
 };
 
 const handlers = {
-  MARKET_BUILD_CURRENCIES_LIST: (state, { payload }: { payload: OpenPayload }) => {
-    const { tabId } = payload;
+  SET_MARKET_PARAMS: (state, { payload }: { payload: OpenPayload }) => {
 
     return {
       ...state,
-      informationCenter: {
-        ...state.informationCenter,
-        isOpen: true,
-        tabId: tabId || "announcement",
-      },
+      payload
     };
   },
 };

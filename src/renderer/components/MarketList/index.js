@@ -35,7 +35,7 @@ const ColumnTitleBox = styled(Box)`
 `;
 
 const Row: ThemedComponent<{}> = styled(Box)`
-  background: ${p => p.theme.colors.palette.background.paper};
+  background: ${p => p.theme.colors.palette.background.shade10};
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 #00000007;
   cursor: pointer;
@@ -80,8 +80,8 @@ function MarketList(props: MarketListProps) {
 
   // TODO: should be changed to use values from dropdowns
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  const range = "day";
-
+  // const range = "day";
+  const { range } = useSelector(state => state.market)
   const { rangeData } = useRange(range);
   const currencies = useMarketCurrencies({ counterValueCurrency, ...rangeData });
 
@@ -108,6 +108,8 @@ function MarketList(props: MarketListProps) {
   };
 
   visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
+
+  console.log(visibleCurrencies)
 
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
@@ -137,7 +139,7 @@ function MarketList(props: MarketListProps) {
           <ColumnTitleBox
             shrink
             grow
-            flex="40%"
+            flex="60%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -151,7 +153,7 @@ function MarketList(props: MarketListProps) {
           <ColumnTitleBox
             shrink
             grow
-            flex="10%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -166,7 +168,7 @@ function MarketList(props: MarketListProps) {
           <ColumnTitleBox
             shrink
             grow
-            flex="10%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -181,7 +183,7 @@ function MarketList(props: MarketListProps) {
           <ColumnTitleBox
             shrink
             grow
-            flex="15%"
+            flex="10%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal

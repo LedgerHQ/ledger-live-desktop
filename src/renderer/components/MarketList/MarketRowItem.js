@@ -2,18 +2,22 @@
 
 import React from "react";
 import styled from "styled-components";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import { CurrencyLabel } from "~/renderer/components/AccountTagDerivationMode";
+import GraphRate from "~/renderer/components/GraphRate";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { RangeData } from "~/renderer/hooks/useRange";
-import GraphRate from "~/renderer/components/GraphRate";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
 `;
+
+const CurrencyTicker = styled.div`
+  padding: 5px 10px;
+  color: ${p => p.theme.colors.palette.text.shade30};
+`
 
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -49,31 +53,37 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
   height: 54px;
 
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
   }
 `;
 
-interface CurrencyRow {
+interface
+CurrencyRow
+{
   price: number;
   change: number;
   counterValue: number;
 }
 
-type Props = {
+type
+Props = {
   index: number,
   name: string,
   short_name: string,
   currency: CurrencyRow,
   counterValueCurrency: Currency,
-  style: Map<string, string>,
-  rangeData: RangeData,
-};
+  style: Map < string, string >,
+  rangeData
+:
+RangeData,
+}
+;
 
 export default function MarketRowItem(props: Props) {
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
@@ -98,7 +108,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="40%"
+            flex="60%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -107,14 +117,19 @@ export default function MarketRowItem(props: Props) {
           >
             <CryptoCurrencyIcon currency={currency} size={20} />
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
-              {currency.name}
-              <CurrencyLabel>{currency.ticker}</CurrencyLabel>
+              <Box
+                horizontal
+                alignItems="center"
+              >
+                {currency.name}
+                <CurrencyTicker>{currency.ticker}</CurrencyTicker>
+              </Box>
             </div>
           </Cell>
           <Cell
             shrink
             grow
-            flex="10%"
+            flex="15%"
             ff="Inter|SemiBold"
             horizontal
             justifyContent="flex-end"
@@ -135,7 +150,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="10%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -157,7 +172,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="15%"
+            flex="10%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
