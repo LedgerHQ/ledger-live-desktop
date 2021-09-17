@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados.",
-          "description": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados."
-        },
-        "wyre_buy": {
-          "shortDescription": "Compra Bitcoin, Ethereum y más criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos.",
-          "description": "Compra Bitcoin, Ethereum y otras criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos."
-        },
-        "lido": {
-          "shortDescription": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias.",
-          "description": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias."
-        },
-        "zerion": {
-          "shortDescription": "La forma inteligente de administrar tu portfolio DeFi.",
-          "description": "La forma inteligente de administrar tu portfolio DeFi."
-        },
-        "rainbow": {
-          "description": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware.",
-          "shortDescription": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware."
-        },
-        "aave": {
-          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos.",
-          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos."
-        },
-        "compound": {
-          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado.",
-          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado."
-        },
-        "deversifi": {
-          "shortDescription": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2.",
-          "description": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2."
-        },
-        "1inch": {
-          "shortDescription": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum.",
-          "description": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "Es necesaria la aplicación {{dependency}}",
         "description": "También se instalará la aplicación {{dependency}} ya que la aplicación {{app}} la necesita.",
