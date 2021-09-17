@@ -132,4 +132,4 @@ function FromRow({
   );
 }
 
-export default FromRow;
+export default React.memo<Props>(FromRow);

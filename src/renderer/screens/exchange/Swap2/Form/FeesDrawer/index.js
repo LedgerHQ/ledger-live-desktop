@@ -4,22 +4,34 @@ import { useSelector } from "react-redux";
 import Box from "~/renderer/components/Box";
 import SendAmountFields from "~/renderer/modals/Send/SendAmountFields";
 import { transactionSelector } from "~/renderer/actions/swap";
-import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type {
+  SwapTransactionType,
+  SwapSelectorStateType,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { DrawerTitle } from "../DrawerTitle";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { SWAP_VERSION } from "../../utils/index";
 
 type Props = {
-  swapTransaction: SwapTransactionType,
+  setTransaction: $PropertyType<SwapTransactionType, "setTransaction">,
+  updateTransaction: $PropertyType<SwapTransactionType, "updateTransaction">,
+  account: $PropertyType<SwapSelectorStateType, "account">,
+  parentAccount: $PropertyType<SwapSelectorStateType, "parentAccount">,
+  currency: $PropertyType<SwapSelectorStateType, "currency">,
+  status: $PropertyType<SwapTransactionType, "status">,
   disableSlowStrategy?: boolean,
   provider: ?string,
 };
 export default function FeesDrawer({
-  swapTransaction,
-  disableSlowStrategy = false,
+  setTransaction,
+  updateTransaction,
+  account,
+  parentAccount,
+  currency,
+  status,
   provider,
+  disableSlowStrategy = false,
 }: Props) {
-  const { setTransaction, updateTransaction, account, parentAccount, status } = swapTransaction;
   const transaction = useSelector(transactionSelector);
 
   const mapStrategies = useCallback(
@@ -33,7 +45,7 @@ export default function FeesDrawer({
       <TrackPage
         category="Swap"
         name="Form - Edit Fees"
-        sourcecurrency={swapTransaction.swap.from.currency?.name}
+        sourcecurrency={currency?.name}
         provider={provider}
         swapVersion={SWAP_VERSION}
       />

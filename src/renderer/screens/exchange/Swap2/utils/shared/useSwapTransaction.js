@@ -20,8 +20,12 @@ import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import { track } from "~/renderer/analytics/segment";
+import { pickExchangeRate } from "./index";
+import { getAccountTuplesForCurrency } from "~/renderer/components/PerCurrencySelectAccount/state";
 
-type RatesReducerState = {
+const ZERO = new BigNumber(0);
+
+export type RatesReducerState = {
   status?: ?string,
   value?: ExchangeRate[],
   error?: Error,
@@ -39,6 +43,7 @@ export type SwapDataType = {
   isSwapReversable: boolean,
   rates: RatesReducerState,
   refetchRates: () => void,
+  targetAccounts: ?(Account[]),
 };
 
 const selectorStateDefaultValues = {
@@ -74,15 +79,22 @@ export type SwapTransactionType = {
   ) => void,
   setFromAmount: (amount: BigNumber) => void,
   setToAmount: (amount: BigNumber) => void,
+  setToCurrency: (currency: $PropertyType<SwapSelectorStateType, "currency">) => void,
   toggleMax: () => void,
   reverseSwap: () => void,
 };
 
 const useSwapTransaction = ({
+  accounts,
+  exchangeRate,
+  setExchangeRate,
   defaultCurrency,
   defaultAccount,
   defaultParentAccount,
 }: {
+  accounts: ?(Account[]),
+  exchangeRate: ?ExchangeRate,
+  setExchangeRate: (?ExchangeRate) => void,
   defaultCurrency?: $PropertyType<SwapSelectorStateType, "currency">,
   defaultAccount?: $PropertyType<SwapSelectorStateType, "account">,
   defaultParentAccount?: $PropertyType<SwapSelectorStateType, "parentAccount">,
@@ -103,6 +115,9 @@ const useSwapTransaction = ({
     account: fromState.account,
     parentAccount: fromState.parentAccount,
   }));
+  const { account: fromAccount, parentAccount: fromParentAccount, amount: fromAmount } = fromState;
+  const { account: toAccount, parentAccount: toParentAccount, currency: toCurrency } = toState;
+  const transaction = bridgeTransaction?.transaction;
   const fromAmountError = useMemo(() => {
     const [error] = [
       bridgeTransaction.status.errors?.gasPrice,
@@ -123,36 +138,73 @@ const useSwapTransaction = ({
   }, [toState.account, fromState.currency, allAccounts]);
 
   /* UPDATE from account */
-  const setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount"> = account => {
-    const parentAccount =
-      account?.type !== "Account" ? allAccounts.find(a => a.id === account?.parentId) : null;
-    const currency = getAccountCurrency(account);
+  const setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount"> = useCallback(
+    account => {
+      const parentAccount =
+        account?.type !== "Account" ? allAccounts.find(a => a.id === account?.parentId) : null;
+      const currency = getAccountCurrency(account);
 
-    bridgeTransaction.setAccount(account, parentAccount);
-    setFromState({ ...selectorStateDefaultValues, currency, account, parentAccount });
-    setToState(selectorStateDefaultValues);
+      bridgeTransaction.setAccount(account, parentAccount);
+      setFromState({ ...selectorStateDefaultValues, currency, account, parentAccount });
 
-    /* @DEV: That populates fake seed. This is required to use Transaction object */
-    const mainAccount = getMainAccount(account, parentAccount);
-    const mainCurrency = getAccountCurrency(mainAccount);
-    const recipient = getAbandonSeedAddress(mainCurrency.id);
-    bridgeTransaction.updateTransaction(transaction => ({ ...transaction, recipient }));
-  };
+      /* @DEV: That populates fake seed. This is required to use Transaction object */
+      const mainAccount = getMainAccount(account, parentAccount);
+      const mainCurrency = getAccountCurrency(mainAccount);
+      const recipient = getAbandonSeedAddress(mainCurrency.id);
+      bridgeTransaction.updateTransaction(transaction => ({ ...transaction, recipient }));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [allAccounts, bridgeTransaction.updateTransaction],
+  );
 
   /* UPDATE to accounts */
-  const setToAccount: $PropertyType<SwapTransactionType, "setToAccount"> = (
-    currency,
-    account,
-    parentAccount,
-  ) => setToState({ ...selectorStateDefaultValues, currency, account, parentAccount });
+  const setToAccount: $PropertyType<SwapTransactionType, "setToAccount"> = useCallback(
+    (currency, account, parentAccount) =>
+      setToState({ ...selectorStateDefaultValues, currency, account, parentAccount }),
+    [],
+  );
 
-  const setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount"> = amount => {
-    bridgeTransaction.updateTransaction(transaction => ({ ...transaction, amount }));
-    setFromState(previousState => ({ ...previousState, amount: amount }));
-  };
+  /* Get the list of possible target accounts given the target currency. */
+  const getTargetAccountsPairs = useCallback(
+    currency => currency && accounts && getAccountTuplesForCurrency(currency, accounts, false),
+    [accounts],
+  );
+  const targetAccounts = useMemo(
+    () =>
+      getTargetAccountsPairs(toCurrency)?.map(({ account, subAccount }) => subAccount || account),
+    [toCurrency, getTargetAccountsPairs],
+  );
 
-  const setToAmount: $PropertyType<SwapTransactionType, "setToAmount"> = amount =>
-    setToState(previousState => ({ ...previousState, amount: amount }));
+  const setToCurrency: $PropertyType<SwapTransactionType, "setToCurrency"> = useCallback(
+    currency => {
+      const targetAccountsPairs = getTargetAccountsPairs(currency);
+      const accountPair = targetAccountsPairs && targetAccountsPairs[0];
+      const account = accountPair && (accountPair.subAccount || accountPair.account);
+      const parentAccount = accountPair && accountPair.subAccount && accountPair.account;
+
+      setToState({
+        ...selectorStateDefaultValues,
+        currency,
+        account,
+        parentAccount,
+      });
+    },
+    [getTargetAccountsPairs],
+  );
+
+  const setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount"> = useCallback(
+    amount => {
+      bridgeTransaction.updateTransaction(transaction => ({ ...transaction, amount }));
+      setFromState(previousState => ({ ...previousState, amount: amount }));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [bridgeTransaction.updateTransaction],
+  );
+
+  const setToAmount: $PropertyType<SwapTransactionType, "setToAmount"> = useCallback(
+    amount => setToState(previousState => ({ ...previousState, amount: amount })),
+    [],
+  );
 
   /* UPDATE from amount to the estimate max spendable on account
   change when the amount feature is enabled */
@@ -167,13 +219,17 @@ const useSwapTransaction = ({
       setFromAmount(amount);
     };
 
-    isMaxEnabled ? updateAmountUsingMax() : setFromAmount(new BigNumber(0));
-  }, [isMaxEnabled, fromState.account, bridgeTransaction?.transaction?.feesStrategy]);
+    if (isMaxEnabled) {
+      updateAmountUsingMax();
+    }
+  }, [
+    setFromAmount,
+    isMaxEnabled,
+    fromState.account,
+    bridgeTransaction?.transaction?.feesStrategy,
+  ]);
 
   /* Fetch and update provider rates. */
-  const { account: fromAccount, parentAccount: fromParentAccount } = fromState;
-  const { account: toAccount, parentAccount: toParentAccount, currency: toCurrency } = toState;
-  const transaction = bridgeTransaction?.transaction;
   useEffect(() => {
     let abort = false;
     async function getRates() {
@@ -185,6 +241,7 @@ const useSwapTransaction = ({
         !fromAccount ||
         getAccountCurrency(toAccount) !== toCurrency
       ) {
+        setExchangeRate && setExchangeRate(null);
         return dispatchRates({ type: "set", payload: [] });
       }
       dispatchRates({ type: "loading" });
@@ -210,6 +267,7 @@ const useSwapTransaction = ({
           dispatchRates({ type: "error", payload: rateError });
         } else {
           dispatchRates({ type: "set", payload: rates });
+          setExchangeRate && pickExchangeRate(rates, exchangeRate, setExchangeRate);
         }
       } catch (error) {
         !abort && dispatchRates({ type: "error", payload: error });
@@ -222,26 +280,26 @@ const useSwapTransaction = ({
       abort = true;
       dispatchRates({ type: "idle" });
     };
-  }, [
-    fromAccount,
-    fromParentAccount,
-    toAccount,
-    toParentAccount,
-    transaction,
-    toCurrency,
-    getRatesDependency,
-  ]);
+  }, [fromAccount, fromAmount, toAccount, transaction, getRatesDependency]);
 
-  const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = () =>
-    setMax(previous => !previous);
+  const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = useCallback(
+    () =>
+      setMax(previous => {
+        if (previous) {
+          setFromAmount(ZERO);
+        }
+        return !previous;
+      }),
+    [setFromAmount],
+  );
 
-  const reverseSwap: $PropertyType<SwapTransactionType, "reverseSwap"> = () => {
+  const reverseSwap: $PropertyType<SwapTransactionType, "reverseSwap"> = useCallback(() => {
     if (isSwapReversable === false) return;
 
     const [newTo, newFrom] = [fromState, toState];
     setFromAccount(newFrom.account);
     setToAccount(newTo.currency, newTo.account, newTo.parentAccount);
-  };
+  }, [fromState, toState, setFromAccount, setToAccount, isSwapReversable]);
 
   const swap = {
     to: toState,
@@ -250,6 +308,7 @@ const useSwapTransaction = ({
     isSwapReversable,
     rates,
     refetchRates,
+    targetAccounts,
   };
 
   return {
@@ -259,6 +318,7 @@ const useSwapTransaction = ({
     toggleMax,
     fromAmountError,
     setToAccount,
+    setToCurrency,
     setFromAccount,
     setToAmount,
     reverseSwap,
