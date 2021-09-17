@@ -32,6 +32,14 @@ const RoundButton = styled(Button)`
   border-radius: 9999px;
   height: initial;
 `;
+
+const Main = styled.section`
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  margin-bottom: 5px;
+`;
+
 type SwapButtonProps = {
   onClick: $PropertyType<SwapTransactionType, "reverseSwap">,
   disabled: boolean,
@@ -60,8 +68,8 @@ export default function FormInputs({
   loadingRates,
 }: FormInputsProps) {
   return (
-    <section>
-      <Box mb={7}>
+    <Main>
+      <Box>
         <FromRow
           fromAccount={fromAccount}
           setFromAccount={setFromAccount}
@@ -72,10 +80,10 @@ export default function FormInputs({
           fromAmountError={fromAmountError}
         />
       </Box>
-      <Box horizontal justifyContent="center" alignContent="center" mb={1}>
+      <Box horizontal justifyContent="center" alignContent="center">
         <SwapButton disabled={!isSwapReversable} onClick={reverseSwap} />
       </Box>
-      <Box mb={2}>
+      <Box style={{ marginTop: "-23px" }}>
         <ToRow
           toCurrency={toCurrency}
           setToAccount={setToAccount}
@@ -84,6 +92,6 @@ export default function FormInputs({
           loadingRates={loadingRates}
         />
       </Box>
-    </section>
+    </Main>
   );
 }
