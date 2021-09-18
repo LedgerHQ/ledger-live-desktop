@@ -82,9 +82,9 @@ export function useMarketCurrencies({
         disableRounding: false,
       }) || [];
     currency.counterValue = data;
-    currency.price = data[data.length - 1];
+    currency.price = data[data.length - 1] || 0;
     const difference = data[data.length - 1] - data[0];
-    currency.change = ( difference / data[0] ) * PERCENT_MULTIPLIER;
+    currency.change = (( difference / data[0] ) * PERCENT_MULTIPLIER) || 0;
 
     return currency;
   });
