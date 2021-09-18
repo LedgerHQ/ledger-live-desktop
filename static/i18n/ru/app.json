@@ -1265,7 +1265,7 @@
   "DeviceAction": {
     "allowAppPermission": "Откройте приложение {{wording}} на устройстве",
     "allowAppPermissionSubtitleToken": "для управления токенами {{token}}",
-    "allowManagerPermission": "Разрешите использование {{wording}} на устройстве",
+    "allowManagerPermission": "Разрешите использовать {{wording}} на устройстве",
     "loading": "Загружаем...",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
@@ -2647,8 +2647,8 @@
       "achievement": "Открыто Достижение"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": " Новых уведомлений: {{count}}",
+      "cta": "Подробнее"
     }
   },
   "informationCenter": {
