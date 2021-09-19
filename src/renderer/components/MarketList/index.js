@@ -71,12 +71,11 @@ type CurrencyRowProps = {
 };
 
 function MarketList() {
-  const { range, searchValue, counterValueCurrency, order, orderBy } = useSelector(
-    state => state.market,
-  );
+  const { range, searchValue, counterValue, order, orderBy } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
+
   const currencies = useMarketCurrencies({
-    counterValueCurrency,
+    counterValueCurrency: counterValue.currency,
     ...rangeData,
   });
 
@@ -106,7 +105,7 @@ function MarketList() {
     <MarketRowItem
       currency={visibleCurrencies[index]}
       index={index + 1}
-      counterValueCurrency={counterValueCurrency}
+      counterValueCurrency={counterValue.currency}
       style={style}
       rangeData={rangeData}
       key={index}
@@ -133,7 +132,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="60%"
+            flex="40%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -147,7 +146,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="15%"
+            flex="20%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -162,7 +161,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="15%"
+            flex="20%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal

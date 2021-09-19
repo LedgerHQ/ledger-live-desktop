@@ -46,7 +46,6 @@ const MarketPage = ({ t }: Props) => {
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   flex: 1;
-  height: 52px;
   padding: 10px 20px;
   margin-bottom: 2px;
   color: #abadb6;

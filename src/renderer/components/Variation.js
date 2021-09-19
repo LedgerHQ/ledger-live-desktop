@@ -12,6 +12,8 @@ const Variation = ({ variation, width, height }: Props) => {
   const isPriceGrowing =
     variation.length > 0 && variation[variation.length - 1] - variation[0] >= 0;
 
+  // console.log('VARIATION', variation)
+
   return (
     <svg height={height} width={width}>
       <VictoryLine

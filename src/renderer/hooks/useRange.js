@@ -1,6 +1,6 @@
 // @flow
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type RangeData = {
   count: number,
@@ -31,6 +31,10 @@ const dataTable: Map<string, RangeData> = {
 };
 
 export const useRange = (range: string = "day") => {
+  useEffect(() => {
+    setRangeData(dataTable[range]);
+  }, [range]);
+
   const [rangeData, setRangeData] = useState(dataTable[range]);
 
   return {

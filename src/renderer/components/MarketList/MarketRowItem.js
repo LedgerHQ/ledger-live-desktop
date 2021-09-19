@@ -8,7 +8,6 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import Variation from "~/renderer/components/Variation";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import type { RangeData } from "~/renderer/hooks/useRange";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -81,13 +80,12 @@ type Props = {
   currency: CurrencyRow,
   counterValueCurrency: Currency,
   style: Map<string, string>,
-  rangeData: RangeData,
 };
 
 export default function MarketRowItem(props: Props) {
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
-  const { index, style, currency, counterValueCurrency, rangeData } = props;
+  const { index, style, currency, counterValueCurrency } = props;
 
   return (
     <div style={{ ...style }}>
@@ -107,7 +105,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="60%"
+            flex="40%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -127,7 +125,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="15%"
+            flex="20%"
             ff="Inter|SemiBold"
             horizontal
             justifyContent="flex-end"
@@ -148,7 +146,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="15%"
+            flex="20%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -156,7 +154,7 @@ export default function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {currency.change ? (
+            {!isNaN(currency.change) ? (
               <FormattedVal
                 isPercent
                 animateTicker
@@ -175,7 +173,7 @@ export default function MarketRowItem(props: Props) {
             color="palette.text.shade100"
             horizontal
             alignItems="center"
-            justifyContent="flex-start"
+            justifyContent="flex-end"
             fontSize={4}
           >
             <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
