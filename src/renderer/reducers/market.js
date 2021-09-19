@@ -32,15 +32,16 @@ const initialState: MarketStateType = {
   filteredCurrencies: [],
   searchValue: "",
   range: "day",
-  counterValueCurrency: ""
+  order: "desc",
+  orderBy: "counterValue",
+  counterValueCurrency: {}
 };
 
 const handlers = {
-  SET_MARKET_PARAMS: (state, payload) => {
-    console.log('payload', payload)
+  SET_MARKET_PARAMS: (state, { payload }) => {
     return {
       ...state,
-      payload
+      ...payload
     };
   },
 };

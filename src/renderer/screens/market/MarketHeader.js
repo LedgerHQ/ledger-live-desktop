@@ -5,6 +5,17 @@ import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import MarketCounterValueSelect from "~/renderer/screens/market/MarketCounterValueSelect"
 import MarketRangeSelect from "~/renderer/screens/market/MarketRangeSelect"
+import styled from 'styled-components'
+
+const RightBox = styled(Box)`
+  & button {
+    color: #6490f1;
+  }
+  
+  & button:hover {
+    text-decoration: none !important;
+  }
+`
 
 const MarketHeader = () => {
   const { t } = useTranslation();
@@ -14,10 +25,10 @@ const MarketHeader = () => {
       <Box grow ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="accounts-title">
         {"Market"}
       </Box>
-      <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+      <RightBox horizontal flow={2} alignItems="center" justifyContent="flex-end">
         <MarketCounterValueSelect />
         <MarketRangeSelect />
-      </Box>
+      </RightBox>
     </Box>
   );
 };

@@ -68,16 +68,14 @@ const RowContent: ThemedComponent<{
   }
 `;
 
-interface
-CurrencyRow
+interface CurrencyRow
 {
   price: number;
   change: number;
   counterValue: number;
 }
 
-type
-Props = {
+type Props = {
   index: number,
   name: string,
   short_name: string,

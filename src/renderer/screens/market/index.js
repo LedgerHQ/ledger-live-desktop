@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import type { TFunction } from "react-i18next";
 import { withTranslation } from "react-i18next";
 
@@ -12,17 +12,19 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
 import MarketList from "~/renderer/components/MarketList";
+import { setMarketParams } from "~/renderer/actions/market";
 
 type Props = {
   t: TFunction,
 };
 
 const MarketPage = ({ t, collapsable }: Props) => {
-  const [query, setQuery] = useState("");
+  const { searchValue } = useSelector(state => state.market)
   const [collapsed, setCollapsed] = useState(collapsable);
+  const dispatch = useDispatch()
   const onTextChange = useCallback(
-    (evt: SyntheticInputEvent<HTMLInputElement>, v) => setQuery(evt.target.value),
-    [setQuery],
+    (evt: SyntheticInputEvent<HTMLInputElement>, v) => dispatch(setMarketParams({ searchValue: evt.target.value })),
+    [searchValue],
   );
 
   return (
@@ -33,10 +35,10 @@ const MarketPage = ({ t, collapsable }: Props) => {
           id={"market-search-input"}
           autoFocus
           onTextChange={onTextChange}
-          search={query}
+          search={searchValue}
         />
       </SearchContainer>
-      <MarketList search={query} />
+      <MarketList />
     </Box>
   );
 };

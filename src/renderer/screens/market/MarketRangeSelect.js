@@ -10,16 +10,15 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { setMarketParams } from "~/renderer/actions/market"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
-const MarketRangeSelect = () => {
+const MarketRangeSelect = (props) => {
   const { range } = useSelector(state => state.market)
+  const dispatch = useDispatch()
   const onRangeSelected = useCallback(
     item => {
-      console.log('component item',item)
-      setMarketParams({ range: item.value })
+      dispatch(setMarketParams({ range: item.value }))
     },
-    [],
   );
 
   const renderItem = useCallback(({ item, isActive }) => {

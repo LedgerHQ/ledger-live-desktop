@@ -11,12 +11,11 @@ import { MarketStateType } from "~/renderer/reducers/market"
 //   (payload) => payload
 // );
 
-export const setMarketParams = (payload: MarketStateType) => {
-  return ( {
+export const setMarketParams = (payload: MarketStateType) =>
+  ( {
     type: "SET_MARKET_PARAMS",
     payload,
   } )
-};
 
 type MarketCurrenciesProps = {
   count: number,
@@ -29,6 +28,7 @@ export function useMarketCurrencies({
                                       count,
                                       increment,
                                     }: MarketCurrenciesProps) {
+
   const PERCENT_MULTIPLIER = 100;
 
   const currencies = listSupportedCurrencies();
@@ -82,9 +82,9 @@ export function useMarketCurrencies({
         disableRounding: false,
       }) || [];
     currency.counterValue = data;
-    currency.price = data[data.length - 1] || 0;
+    currency.price = data[data.length - 1];
     const difference = data[data.length - 1] - data[0];
-    currency.change = (( difference / data[0] ) * PERCENT_MULTIPLIER) || 0;
+    currency.change = (( difference / data[0] ) * PERCENT_MULTIPLIER);
 
     return currency;
   });

@@ -10,15 +10,17 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { setMarketParams } from "~/renderer/actions/market"
+import { setMarketParams } from "~/renderer/actions/market";
+import { useSelector, useDispatch } from "react-redux";
 
 const MarketCounterValueSelect = () => {
+  const { counterValue } = useSelector(state => state.market)
 
-  console.log("supportedCountervalues", supportedCountervalues)
-
-  const onAccountSelected = useCallback(
-    item => setMarketParams({ market: item.value }),
-    [],
+  const dispatch = useDispatch()
+  const onCounterValueSelected = useCallback(
+    item => {
+      dispatch(setMarketParams({ counterValueCurrency: item.value }))
+    },
   );
 
   const renderItem = useCallback(({ item, isActive }) => {
@@ -37,28 +39,14 @@ const MarketCounterValueSelect = () => {
     );
   }, []);
 
-  // const cvOption = useMemo(
-  //   // () => supportedCountervalues.find(f => f.value === counterValueCurrency.ticker),
-  //   [],
-  // );
-
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
       <DropDownSelector
         border
         horizontal
-        items={[{
-          value: "USD",
-          label: "USD",
-          key: "USD"
-        },
-          {
-            value: "EU",
-            label: "EU",
-            key: "EU"
-          }]}
+        items={supportedCountervalues}
         renderItem={renderItem}
-        onChange={onAccountSelected}
+        onChange={onCounterValueSelected}
         controlled
         value={"USD"}
       >

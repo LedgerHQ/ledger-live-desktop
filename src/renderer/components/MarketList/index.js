@@ -1,16 +1,17 @@
 // @flow
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import { useMarketCurrencies } from "~/renderer/actions/market";
 import styled from "styled-components";
 import { useRange } from "~/renderer/hooks/useRange";
 import SortIcon from './SortIcon'
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { setMarketParams } from "~/renderer/actions/market"
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
@@ -76,39 +77,34 @@ type MarketListProps = {
 };
 
 function MarketList(props: MarketListProps) {
-  const { search } = props;
-
   // TODO: should be changed to use values from dropdowns
-  const counterValueCurrency = useSelector(counterValueCurrencySelector);
-  const { range } = useSelector(state => state.market)
+  const defaultCounterValueCurrency = useSelector(counterValueCurrencySelector);
+  const { range, searchValue, counterValueCurrency, order, orderBy } = useSelector(state => state.market)
   const { rangeData } = useRange(range);
-  const currencies = useMarketCurrencies({ counterValueCurrency, ...rangeData });
+  let currencies = useMarketCurrencies({ counterValueCurrency: defaultCounterValueCurrency, ...rangeData });
 
+
+  const dispatch = useDispatch()
   let visibleCurrencies = [];
   const hiddenCurrencies = [];
   for (let i = 0; i < currencies.length; i++) {
     const currency = currencies[i];
-    if (matchesSearch(search, currency)) {
+    if (matchesSearch(searchValue, currency)) {
       visibleCurrencies.push(currency);
     } else {
       hiddenCurrencies.push(currency);
     }
   }
 
-  const [order, setOrder] = useState("desc");
-  const [orderBy, setOrderBy] = useState("counterValue");
-
   const onSort = key => {
     if (key === orderBy) {
-      setOrder(order === "desc" ? "asc" : "desc");
+      dispatch(setMarketParams({ order: order === "desc" ? "asc" : "desc" }))
     } else {
-      setOrderBy(key);
+      dispatch(setMarketParams({ orderBy: key }))
     }
   };
 
   visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
-
-  console.log(visibleCurrencies)
 
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
@@ -119,6 +115,8 @@ function MarketList(props: MarketListProps) {
       rangeData={rangeData}
     />
   );
+
+  const visibleCurrenciesLength = visibleCurrencies.length
 
   return (
     <Box flow={2}>
@@ -194,20 +192,21 @@ function MarketList(props: MarketListProps) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      <ListStyled
+      {visibleCurrenciesLength ? <ListStyled
         height={500}
         width="100%"
-        itemCount={visibleCurrencies.length}
+        itemCount={visibleCurrenciesLength}
         itemSize={56}
+        key={range}
         style={{ overflowX: "hidden" }}
       >
         {CurrencyRow}
-      </ListStyled>
+      </ListStyled> : null}
     </Box>
   );
 }
 
-export default MarketList;
+export default connect((state) => ( { ...state.market } ))(MarketList);
 
 export const matchesSearch = (search
   ? : string, currency, subMatch
