@@ -79,6 +79,8 @@ function MarketList() {
     ...rangeData,
   });
 
+  console.log(currencies)
+
   const dispatch = useDispatch();
   let visibleCurrencies = [];
   const hiddenCurrencies = [];
@@ -153,10 +155,10 @@ function MarketList() {
             justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
-            onClick={() => onSort("counterValue")}
+            onClick={() => onSort("price")}
           >
             Price
-            <SortIconStyled order={orderBy === "counterValue" ? order : ""} />
+            <SortIconStyled order={orderBy === "price" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
