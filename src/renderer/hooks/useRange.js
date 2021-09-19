@@ -24,6 +24,10 @@ const dataTable: Map<string, RangeData> = {
     count: 24,
     increment: 60 * 60 * 1000,
   },
+  hour: {
+    count: 60,
+    increment: 60 * 1000,
+  },
 };
 
 export const useRange = (range: string = "day") => {

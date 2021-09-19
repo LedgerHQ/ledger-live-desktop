@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -13,20 +13,20 @@ import Button from "~/renderer/components/Button";
 import { setMarketParams } from "~/renderer/actions/market";
 import { useSelector, useDispatch } from "react-redux";
 
-const MarketCounterValueSelect = () => {
-  const { counterValue } = useSelector(state => state.market)
+export const MarketCounterValueSelect = () => {
+  const counterValueCurrency = useSelector(state => state.market.counterValueCurrency);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onCounterValueSelected = useCallback(
     item => {
-      dispatch(setMarketParams({ counterValueCurrency: item.value }))
+      dispatch(setMarketParams({ counterValueCurrency: item }));
     },
+    [dispatch],
   );
 
   const renderItem = useCallback(({ item, isActive }) => {
-
     return (
-      <Item key={item.key} isActive={isActive}>
+      <Item key={item.currency.id} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
           {item.label}
         </Ellipsis>
@@ -39,16 +39,18 @@ const MarketCounterValueSelect = () => {
     );
   }, []);
 
+  const items = useMemo(() => supportedCountervalues, []);
+
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
       <DropDownSelector
         border
         horizontal
-        items={supportedCountervalues}
+        items={items}
         renderItem={renderItem}
         onChange={onCounterValueSelected}
         controlled
-        value={"USD"}
+        value={items.find(a => a.value === counterValueCurrency.value).value}
       >
         {({ isOpen, value }) =>
           value ? (
@@ -67,6 +69,4 @@ const MarketCounterValueSelect = () => {
       </DropDownSelector>
     </Box>
   );
-}
-
-export default MarketCounterValueSelect;
+};

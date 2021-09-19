@@ -1,10 +1,10 @@
 // @flow
-
-import { PlatformAppDrawers } from "~/renderer/reducers/UI";
 import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
+import { supportedCountervalues } from "~/renderer/reducers/settings";
 
-export type MarketCurrencyType = {
+export type MarketCurrency = {
   coinType: number,
   color: string,
   explorerViews: Array<any>,
@@ -19,29 +19,29 @@ export type MarketCurrencyType = {
   units: Array<any>,
 };
 
-export type MarketStateType = {
-  currencies: Array<MarketCurrencyType>,
-  filteredCurrencies: Array<MarketCurrencyType>,
+export type MarketState = {
+  currencies: Array<MarketCurrency>,
+  filteredCurrencies: Array<MarketCurrency>,
   searchValue: string,
   range: string,
-  counterValueCurrency: string
+  counterValueCurrency: { value: string, label: string, currency: Currency },
 };
 
-const initialState: MarketStateType = {
+const initialState: MarketState = {
   currencies: [],
   filteredCurrencies: [],
   searchValue: "",
   range: "day",
   order: "desc",
   orderBy: "counterValue",
-  counterValueCurrency: {}
+  counterValueCurrency: supportedCountervalues.find(cv => cv.value === "USD"),
 };
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
     return {
       ...state,
-      ...payload
+      ...payload,
     };
   },
 };

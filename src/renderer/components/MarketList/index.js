@@ -1,26 +1,25 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { connect, useSelector, useDispatch } from "react-redux";
-import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
-import { useMarketCurrencies } from "~/renderer/actions/market";
+import { useSelector, useDispatch } from "react-redux";
+import { setMarketParams } from "~/renderer/actions/market";
 import styled from "styled-components";
 import { useRange } from "~/renderer/hooks/useRange";
-import SortIcon from './SortIcon'
+import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { setMarketParams } from "~/renderer/actions/market"
+import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
 
   & * {
-    color: ${p => ( p.theme.colors.palette.text.shade60 )};
-    fill: ${p => ( p.theme.colors.palette.text.shade60 )};
+    color: ${p => p.theme.colors.palette.text.shade60};
+    fill: ${p => p.theme.colors.palette.text.shade60};
   }
-`
+`;
 
 const ListStyled = styled(List)`
   margin-top: 0;
@@ -29,7 +28,7 @@ const ListStyled = styled(List)`
   &::-webkit-scrollbar {
     width: 5px;
   }
-`
+`;
 
 const ColumnTitleBox = styled(Box)`
   padding: 10px 20px;
@@ -57,34 +56,31 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
-    color: ${p => ( p.theme.colors.palette.text.shade60 )};
-    fill: ${p => ( p.theme.colors.palette.text.shade60 )};
+    color: ${p => p.theme.colors.palette.text.shade60};
+    fill: ${p => p.theme.colors.palette.text.shade60};
   }
 `;
 
 type CurrencyRowProps = {
   index: number,
-  style: Map < string, string >,
-}
-;
-
-type MarketListProps = {
-  search: string,
+  style: Map<string, string>,
 };
 
-function MarketList(props: MarketListProps) {
-  // TODO: should be changed to use values from dropdowns
-  const defaultCounterValueCurrency = useSelector(counterValueCurrencySelector);
-  const { range, searchValue, counterValueCurrency, order, orderBy } = useSelector(state => state.market)
+function MarketList() {
+  const { range, searchValue, counterValueCurrency, order, orderBy } = useSelector(
+    state => state.market,
+  );
   const { rangeData } = useRange(range);
-  let currencies = useMarketCurrencies({ counterValueCurrency: defaultCounterValueCurrency, ...rangeData });
+  const currencies = useMarketCurrencies({
+    counterValueCurrency,
+    ...rangeData,
+  });
 
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let visibleCurrencies = [];
   const hiddenCurrencies = [];
   for (let i = 0; i < currencies.length; i++) {
@@ -98,9 +94,9 @@ function MarketList(props: MarketListProps) {
 
   const onSort = key => {
     if (key === orderBy) {
-      dispatch(setMarketParams({ order: order === "desc" ? "asc" : "desc" }))
+      dispatch(setMarketParams({ order: order === "desc" ? "asc" : "desc" }));
     } else {
-      dispatch(setMarketParams({ orderBy: key }))
+      dispatch(setMarketParams({ orderBy: key }));
     }
   };
 
@@ -113,10 +109,11 @@ function MarketList(props: MarketListProps) {
       counterValueCurrency={counterValueCurrency}
       style={style}
       rangeData={rangeData}
+      key={index}
     />
   );
 
-  const visibleCurrenciesLength = visibleCurrencies.length
+  const visibleCurrenciesLength = visibleCurrencies.length;
 
   return (
     <Box flow={2}>
@@ -192,28 +189,25 @@ function MarketList(props: MarketListProps) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      {visibleCurrenciesLength ? <ListStyled
-        height={500}
-        width="100%"
-        itemCount={visibleCurrenciesLength}
-        itemSize={56}
-        key={range}
-        style={{ overflowX: "hidden" }}
-      >
-        {CurrencyRow}
-      </ListStyled> : null}
+      {visibleCurrenciesLength ? (
+        <ListStyled
+          height={500}
+          width="100%"
+          itemCount={visibleCurrenciesLength}
+          itemSize={56}
+          key={range}
+          style={{ overflowX: "hidden" }}
+        >
+          {CurrencyRow}
+        </ListStyled>
+      ) : null}
     </Box>
   );
 }
 
-export default connect((state) => ( { ...state.market } ))(MarketList);
+export default MarketList;
 
-export const matchesSearch = (search
-  ? : string, currency, subMatch
-:
-boolean = false
-):
-boolean => {
+export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
   if (!search) return true;
   const match = `${currency.ticker}|${currency.name}}`;
   return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
@@ -223,10 +217,10 @@ const sortCurrencies = (currencies, key, order) => {
   if (typeof currencies[key] === "string") {
     currencies[key] = currencies[key].toLowerCase();
   }
-  return currencies.sort(function (a, b) {
+  return currencies.sort(function(a, b) {
     const orders = {
-      asc: (a, b) => ( a > b ? 1 : -1 ),
-      desc: (a, b) => ( a < b ? 1 : -1 ),
+      asc: (a, b) => (a > b ? 1 : -1),
+      desc: (a, b) => (a < b ? 1 : -1),
     };
     return orders[order](a[key], b[key]);
   });

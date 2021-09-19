@@ -9,20 +9,20 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { setMarketParams } from "~/renderer/actions/market"
-import { useDispatch, useSelector } from "react-redux"
+import { setMarketParams } from "~/renderer/actions/market";
+import { useDispatch, useSelector } from "react-redux";
 
-const MarketRangeSelect = (props) => {
-  const { range } = useSelector(state => state.market)
-  const dispatch = useDispatch()
+export const MarketRangeSelect = props => {
+  const { range } = useSelector(state => state.market);
+  const dispatch = useDispatch();
   const onRangeSelected = useCallback(
     item => {
-      dispatch(setMarketParams({ range: item.value }))
+      dispatch(setMarketParams({ range: item.value }));
     },
+    [dispatch],
   );
 
   const renderItem = useCallback(({ item, isActive }) => {
-
     return (
       <Item key={item.key} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
@@ -39,16 +39,31 @@ const MarketRangeSelect = (props) => {
 
   const items = [
     {
+      value: "hour",
+      label: "Last Hour",
+      key: "hour",
+    },
+    {
       value: "day",
-      label: "24 hours",
-      key: "day"
+      label: "Last Day",
+      key: "day",
     },
     {
       value: "week",
-      label: "7 days",
-      key: "week"
-    }
-  ]
+      label: "Last Week",
+      key: "week",
+    },
+    {
+      value: "month",
+      label: "Last Month",
+      key: "month",
+    },
+    {
+      value: "year",
+      label: "Last Year",
+      key: "year",
+    },
+  ];
 
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
@@ -78,6 +93,4 @@ const MarketRangeSelect = (props) => {
       </DropDownSelector>
     </Box>
   );
-}
-
-export default MarketRangeSelect;
+};

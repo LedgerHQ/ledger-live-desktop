@@ -8,7 +8,7 @@ import UI from "./UI";
 import settings from "./settings";
 import onboarding from "./onboarding";
 import swap from "./swap";
-import market from "./market"
+import market from "./market";
 import type { AccountsState } from "./accounts";
 import type { ApplicationState } from "./application";
 import type { DevicesState } from "./devices";
@@ -17,7 +17,7 @@ import type { SettingsState } from "./settings";
 import type { OnboardingState } from "./onboarding";
 import type { UIState } from "./UI";
 import type { SwapStateType } from "./swap";
-import type {MarketStateType} from "./market"
+import type { MarketState } from "./market";
 
 export type State = {
   accounts: AccountsState,
@@ -28,7 +28,7 @@ export type State = {
   onboarding: OnboardingState,
   UI: UIState,
   swap: SwapStateType,
-  market: MarketStateType
+  market: MarketState,
 };
 
 // $FlowFixMe
@@ -41,5 +41,5 @@ export default combineReducers({
   onboarding,
   UI,
   swap,
-  market
+  market,
 });

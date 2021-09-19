@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { compose } from "redux";
 import { connect, useDispatch, useSelector } from "react-redux";
 import type { TFunction } from "react-i18next";
@@ -18,12 +18,12 @@ type Props = {
   t: TFunction,
 };
 
-const MarketPage = ({ t, collapsable }: Props) => {
-  const { searchValue } = useSelector(state => state.market)
-  const [collapsed, setCollapsed] = useState(collapsable);
-  const dispatch = useDispatch()
+const MarketPage = ({ t }: Props) => {
+  const { searchValue } = useSelector(state => state.market);
+  const dispatch = useDispatch();
   const onTextChange = useCallback(
-    (evt: SyntheticInputEvent<HTMLInputElement>, v) => dispatch(setMarketParams({ searchValue: evt.target.value })),
+    (evt: SyntheticInputEvent<HTMLInputElement>) =>
+      dispatch(setMarketParams({ searchValue: evt.target.value })),
     [searchValue],
   );
 
@@ -46,6 +46,7 @@ const MarketPage = ({ t, collapsable }: Props) => {
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   flex: 1;
+  height: 52px;
   padding: 10px 20px;
   margin-bottom: 2px;
   color: #abadb6;
