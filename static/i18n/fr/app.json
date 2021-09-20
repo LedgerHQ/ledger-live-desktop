@@ -179,10 +179,10 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapide",
+    "fast": "Rapides",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lent",
+    "slow": "Lents",
     "standard": "Standard",
     "medium": "Moyens",
     "feesAmount": "Montant des frais"
