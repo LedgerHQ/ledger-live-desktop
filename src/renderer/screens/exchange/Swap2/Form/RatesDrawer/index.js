@@ -5,18 +5,22 @@ import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import Rate from "./Rate";
-import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
+import type {
+  SwapSelectorStateType,
+  RatesReducerState,
+} from "../../utils/shared/useSwapTransaction";
 import { rateSelector, updateRateAction } from "~/renderer/actions/swap";
 import { DrawerTitle } from "../DrawerTitle";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { SWAP_VERSION } from "../../utils/index";
 type Props = {
-  swapTransaction: SwapTransactionType,
+  fromCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  rates: $PropertyType<RatesReducerState, "value">,
   provider: ?string,
 };
-export default function ProviderRateDrawer({ swapTransaction, provider }: Props) {
+export default function ProviderRateDrawer({ fromCurrency, toCurrency, rates, provider }: Props) {
   const dispatch = useDispatch();
-  const rates = swapTransaction.swap.rates.value;
   const selectedRate = useSelector(rateSelector);
 
   const setRate = useCallback(
@@ -31,8 +35,8 @@ export default function ProviderRateDrawer({ swapTransaction, provider }: Props)
       <TrackPage
         category="Swap"
         name="Form - Edit Fees"
-        sourcecurrency={swapTransaction.swap.from.currency?.name}
-        targetcurrency={swapTransaction.swap.to.currency?.name}
+        sourcecurrency={fromCurrency?.name}
+        targetcurrency={toCurrency?.name}
         provider={provider}
         swapVersion={SWAP_VERSION}
       />
@@ -55,13 +59,14 @@ export default function ProviderRateDrawer({ swapTransaction, provider }: Props)
         </Box>
       </Box>
       <Box mt={3}>
-        {rates.map((rate, index) => (
+        {rates?.map((rate, index) => (
           <Rate
             key={rate.rateId || index}
             value={rate}
             selected={rate === selectedRate}
             onSelect={setRate}
-            swapTransaction={swapTransaction}
+            fromCurrency={fromCurrency}
+            toCurrency={toCurrency}
           />
         ))}
       </Box>

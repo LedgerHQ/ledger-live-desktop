@@ -9,7 +9,10 @@ import SummaryValue from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import FeesDrawer from "../FeesDrawer";
 import sendAmountByFamily from "~/renderer/generated/SendAmountFields";
-import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type {
+  SwapTransactionType,
+  SwapSelectorStateType,
+} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
 import { rateSelector } from "~/renderer/actions/swap";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Box from "~/renderer/components/Box";
@@ -44,43 +47,54 @@ const Separator = styled.div`
   margin-left: 2px;
 `;
 
-const SectionFees = ({
-  swapTransaction,
-  provider,
-}: {
-  swapTransaction: SwapTransactionType,
+type Props = {
+  transaction: $PropertyType<SwapTransactionType, "transaction">,
+  account: $PropertyType<SwapSelectorStateType, "account">,
+  parentAccount: $PropertyType<SwapSelectorStateType, "parentAccount">,
+  currency: $PropertyType<SwapSelectorStateType, "currency">,
+  status: $PropertyType<SwapTransactionType, "status">,
+  updateTransaction: $PropertyType<SwapTransactionType, "updateTransaction">,
+  setTransaction: $PropertyType<SwapTransactionType, "setTransaction">,
   provider: ?string,
-}) => {
+};
+const SectionFees = ({
+  transaction,
+  account,
+  parentAccount,
+  currency,
+  status,
+  updateTransaction,
+  setTransaction,
+  provider,
+}: Props) => {
   const { t } = useTranslation();
   const { setDrawer } = React.useContext(context);
-  const { account, transaction } = swapTransaction;
   const exchangeRate = useSelector(rateSelector);
-  const fromAccount = swapTransaction.swap.from.account;
-  const fromAccountUnit = fromAccount && getAccountUnit(fromAccount);
-  const estimatedFees = swapTransaction.status?.estimatedFees;
+  const fromAccountUnit = account && getAccountUnit(account);
+  const estimatedFees = status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
   const canEdit =
-    showSummaryValue && transaction?.networkInfo && sendAmountByFamily[account?.currency?.family];
-  const StrategyIcon = useMemo(
-    () => FEES_STRATEGY_ICONS[swapTransaction.transaction?.feesStrategy],
-    [swapTransaction.transaction?.feesStrategy],
-  );
+    showSummaryValue &&
+    transaction?.networkInfo &&
+    account &&
+    sendAmountByFamily[account.currency?.family];
+
+  const StrategyIcon = useMemo(() => FEES_STRATEGY_ICONS[transaction?.feesStrategy], [
+    transaction?.feesStrategy,
+  ]);
 
   // Deselect slow strategy if the exchange rate is changed to fixed.
   useEffect(
     () => {
-      if (
-        exchangeRate?.tradeMethod === "fixed" &&
-        swapTransaction.transaction?.feesStrategy === "slow"
-      ) {
-        swapTransaction.updateTransaction(t => ({
+      if (exchangeRate?.tradeMethod === "fixed" && transaction?.feesStrategy === "slow") {
+        updateTransaction(t => ({
           ...t,
           feesStrategy: "medium",
         }));
       }
     },
     // eslint-disable-next-line
-    [swapTransaction.transaction?.feesStrategy, exchangeRate?.tradeMethod],
+    [transaction?.feesStrategy, exchangeRate?.tradeMethod, updateTransaction],
   );
 
   const handleChange = useMemo(
@@ -88,11 +102,27 @@ const SectionFees = ({
       canEdit &&
       (() =>
         setDrawer(FeesDrawer, {
-          swapTransaction,
+          setTransaction,
+          updateTransaction,
+          account,
+          parentAccount,
+          currency,
+          status,
           disableSlowStrategy: exchangeRate?.tradeMethod === "fixed",
           provider,
         })),
-    [canEdit, setDrawer, swapTransaction, provider, exchangeRate?.tradeMethod],
+    [
+      canEdit,
+      setDrawer,
+      setTransaction,
+      updateTransaction,
+      account,
+      parentAccount,
+      currency,
+      status,
+      provider,
+      exchangeRate?.tradeMethod,
+    ],
   );
 
   const summaryValue = canEdit ? (
@@ -100,7 +130,7 @@ const SectionFees = ({
       <IconSection>
         {StrategyIcon ? <StrategyIcon /> : null}
         <Text fontSize={4} fontWeight="600">
-          {t(`fees.${swapTransaction.transaction?.feesStrategy}`)}
+          {t(`fees.${transaction?.feesStrategy}`)}
         </Text>
         <Separator />
       </IconSection>
@@ -128,4 +158,4 @@ const SectionFees = ({
   );
 };
 
-export default SectionFees;
+export default React.memo<Props>(SectionFees);
