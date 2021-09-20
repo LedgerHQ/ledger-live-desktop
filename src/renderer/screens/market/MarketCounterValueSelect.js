@@ -62,7 +62,7 @@ export const MarketCounterValueSelect = () => {
             <Box flex={1} horizontal>
               <TextLink shrink>
                 <Button>
-                  <Ellipsis>{value.value}</Ellipsis>
+                  <Ellipsis>{value.label}</Ellipsis>
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}

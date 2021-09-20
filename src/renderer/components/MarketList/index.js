@@ -190,7 +190,7 @@ function MarketList() {
       </Row>
       {visibleCurrenciesLength ? (
         <ListStyled
-          height={500}
+          height={visibleCurrenciesLength < 9 ? visibleCurrenciesLength * 56 : 500}
           width="100%"
           itemCount={visibleCurrenciesLength}
           itemSize={56}
