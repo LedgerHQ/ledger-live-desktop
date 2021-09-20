@@ -40,27 +40,27 @@ export const MarketRangeSelect = props => {
   const items = [
     {
       value: "hour",
-      label: "Last Hour",
+      label: "1 hour",
       key: "hour",
     },
     {
       value: "day",
-      label: "Last Day",
+      label: "24 hours",
       key: "day",
     },
     {
       value: "week",
-      label: "Last Week",
+      label: "7 days",
       key: "week",
     },
     {
       value: "month",
-      label: "Last Month",
+      label: "30 days",
       key: "month",
     },
     {
       value: "year",
-      label: "Last Year",
+      label: "12 months",
       key: "year",
     },
   ];
