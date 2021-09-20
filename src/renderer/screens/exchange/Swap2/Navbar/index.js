@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import TabBar from "~/renderer/components/TabBar";
 import { useTranslation } from "react-i18next";
-import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import swapRoutes from "./routes.json";
