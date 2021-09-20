@@ -3573,10 +3573,6 @@
       "title": "Konto nicht von Knoten (Full Node) gescannt",
       "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
     },
-    "StratisDown2021Warning": {
-      "title": "Die Stratis-Blockchain hat sich weiterentwickelt und funktioniert möglicherweise nicht mehr korrekt.",
-      "description": "Die Unterstützung für die ursprüngliche Stratis-Blockchain wird bis zum 16. Oktober 2021 aufrechterhalten."
-    },
     "SwapGenericAPIError": {
       "title": "Wechselkurs verfallen",
       "description": "Sie müssen den Tausch bestätigen, bevor der Timer abläuft. Der angezeigte Umrechnungskurs bleibt 60 Sekunden lang gültig."
