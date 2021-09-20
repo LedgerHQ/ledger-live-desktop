@@ -11,6 +11,7 @@ import { useRange } from "~/renderer/hooks/useRange";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
+import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
@@ -199,7 +200,7 @@ function MarketList() {
         >
           {CurrencyRow}
         </ListStyled>
-      ) : null}
+      ) : <NoCryptosFound searchValue={searchValue} />}
     </Box>
   );
 }
