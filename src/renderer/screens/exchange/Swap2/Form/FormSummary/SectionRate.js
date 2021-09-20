@@ -90,4 +90,4 @@ const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provi
   );
 };
 
-export default React.memo<Props>(SectionRate);
+export default SectionRate;
