@@ -58,7 +58,7 @@ export default {
 const Template = (args: TextProps & { content: string }) => <Text {...args}>{args.content}</Text>;
 
 export const Default = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 Default.args = {
   type: "h1",
   content: "Lend stablecoins to the Compound protocol...",

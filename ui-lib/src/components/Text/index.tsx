@@ -19,7 +19,7 @@ import BracketLeft from "@ui/assets/icons/BracketrightRegular";
 const uppercase = system({
   uppercase: {
     property: "textTransform",
-    transform: value => (value ? "uppercase" : "none"),
+    transform: (value) => (value ? "uppercase" : "none"),
   },
 });
 
@@ -77,10 +77,11 @@ interface BaseTextProps {
   mr?: number | string;
   lineHeight?: string;
   type?: TextTypes;
+  textTransform?: string;
 }
 
 const Base = styled.span.attrs((p: BaseTextProps & SpaceProps) => ({
-  color: p.color || "palette.v2.text.default",
+  color: p.color || "palette.neutral.c100",
   className: `${p.type ? `ll-text_${p.type} ` : ""}`,
 }))<BaseTextProps>`
   ${uppercase};
@@ -92,14 +93,16 @@ const Base = styled.span.attrs((p: BaseTextProps & SpaceProps) => ({
   ${fontWeight};
   ${space};
   ${letterSpacing};
-  ${p => (p.textTransform ? `text-transform: ${p.textTransform};` : "")}
+  ${(p) => (p.textTransform ? `text-transform: ${p.textTransform};` : "")}
 `;
 
 const Text = ({ children, bracket, ...props }: TextProps & SpaceProps) => {
   return bracket ? (
     <Base {...props}>
+      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketLeft className="ll-text_bracket" />
       {children}
+      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketRight className="ll-text_bracket" />
     </Base>
   ) : (

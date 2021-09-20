@@ -29,17 +29,17 @@ const StyledCircle = styled.circle.attrs({
   transform-origin: 50% 50%;
 `;
 
-const StyledCircleBackground = styled(StyledCircle).attrs(props => ({
-  stroke: props.theme.colors.palette.v2.primary.backgroundLight,
+const StyledCircleBackground = styled(StyledCircle).attrs((props) => ({
+  stroke: props.theme.colors.palette.primary.c20,
 }))``;
 
-const StyledCircleFront = styled(StyledCircle).attrs(props => ({
-  stroke: props.theme.colors.palette.v2.primary.base,
+const StyledCircleFront = styled(StyledCircle).attrs((props) => ({
+  stroke: props.theme.colors.palette.primary.c100,
 }))``;
 
 const StyledCenteredText = styled(Text).attrs({
   type: "cta",
-  color: "palette.v2.primary.borderDark",
+  color: "palette.primary.c140",
 })`
   position: absolute;
   top: 50%;

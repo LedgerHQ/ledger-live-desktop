@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect, useCallback, useContext } from "react";
+
 interface State {
   Component: React.ComponentType<any> | null | undefined;
   props?: any;
@@ -6,7 +7,7 @@ interface State {
 }
 // actions
 // it makes them available and current from connector events handlers
-export let setDrawer: (Component?: any, props?: any) => void = () => {};
+export let setSide: (Component?: any, props?: any) => void = () => {};
 
 // reducer
 const reducer = (state: State, update: State) => {
@@ -18,23 +19,26 @@ const initialState: State = {
   props: null,
   open: false,
 };
+
 interface ContextValue {
   state: State;
-  setDrawer: (Component?: React.ComponentType<any>, props?: any) => void;
+  setSide: (Component?: React.ComponentType<any>, props?: any) => void;
 }
+
 export const context = React.createContext<ContextValue>({
   state: initialState,
-  setDrawer: () => {},
+  setSide: () => {},
 });
-export const useDrawer = () => {
-  const drawerContext = useContext(context);
-  return drawerContext;
+
+export const useSide = () => {
+  const sideContext = useContext(context);
+  return sideContext;
 };
 
-const DrawerProvider = ({ children }: { children: React.ReactNode }) => {
+const SideProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const _setDrawer = useCallback((Component, props) => {
+  const _setSide = useCallback((Component, props) => {
     dispatch({
       Component,
       props,
@@ -43,13 +47,14 @@ const DrawerProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setDrawer = _setDrawer;
-  }, [_setDrawer]);
+    setSide = _setSide;
+  }, [_setSide]);
+
   return (
     <context.Provider
       value={{
         state,
-        setDrawer: _setDrawer,
+        setSide: _setSide,
       }}
     >
       {children}
@@ -57,4 +62,4 @@ const DrawerProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default DrawerProvider;
+export default SideProvider;

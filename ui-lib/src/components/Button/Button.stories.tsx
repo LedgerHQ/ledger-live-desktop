@@ -32,16 +32,16 @@ export default {
   },
 };
 
-// @ts-expect-error
-const Template = args => <Button {...args}>{args.children}</Button>;
+// @ts-expect-error FIXME
+const Template = (args) => <Button {...args}>{args.children}</Button>;
 
 export const Default = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 Default.args = {
   children: "Label",
 };
 export const IconButton = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 IconButton.args = {
   children: "",
   Icon: WalletAdd,
@@ -69,7 +69,7 @@ const ExpandTemplate = (args: any) => {
 };
 
 export const Expand = ExpandTemplate.bind({});
-// @ts-expect-error
+// @ts-expect-error FIXME
 Expand.args = {
   children: "Show all",
 };
