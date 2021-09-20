@@ -38,15 +38,15 @@ Default.args = {
     },
     {
       key: "recoveryPhrase",
-      label: "recovery phrase"
+      label: "recovery phrase",
     },
-    { 
+    {
       key: "hideRecovery",
-      label: "hide recovery phrase"
+      label: "hide recovery phrase",
     },
     {
       key: "connect",
-      label: "connect nano"
+      label: "connect nano",
     },
   ],
   currentIndex: 0,

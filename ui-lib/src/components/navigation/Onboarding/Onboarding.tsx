@@ -13,6 +13,9 @@ const Bar = styled.div`
   transition: all 600ms linear;
   height: 4px;
   border-radius: 2px;
+  // Disable left/right border radius to match the handler
+  border-top-${(p) => (p.on ? "right" : "left")}-radius: 0;
+  border-bottom-${(p) => (p.on ? "right" : "left")}-radius: 0;
   flex: ${(p) => p.fill};
   background: ${(p) =>
     p.on ? p.theme.colors.palette.neutral.c100 : p.theme.colors.palette.neutral.c40};
