@@ -15,8 +15,8 @@ export const pickExchangeRate = (
   exchangeRate: ExchangeRate,
   setExchangeRate: (?ExchangeRate) => void,
 ) => {
-  const hasRates = exchangeRates && exchangeRates.length > 0;
-  // If a the user picked an exchange rate before, try to select the new one that matches.
+  const hasRates = exchangeRates?.length > 0;
+  // If the user picked an exchange rate before, try to select the new one that matches.
   // Otherwise pick the first one.
   const rate =
     hasRates &&
