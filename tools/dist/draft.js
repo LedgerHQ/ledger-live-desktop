@@ -27,7 +27,7 @@ class Draft {
     return false;
   }
 
-  async create() {
+  async create(body = "") {
     const { repo, tag, octokit } = this;
     const params = {
       ...repo,
@@ -35,6 +35,7 @@ class Draft {
       name: tag,
       draft: true,
       prerelease: true,
+      body,
     };
 
     const { status } = await octokit.repos.createRelease(params);
