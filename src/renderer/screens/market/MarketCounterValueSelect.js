@@ -26,7 +26,7 @@ export const MarketCounterValueSelect = () => {
 
   const renderItem = useCallback(({ item, isActive }) => {
     return (
-      <Item key={item.currency.id} isActive={isActive}>
+      <Item key={item.key} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
           {item.label}
         </Ellipsis>
@@ -39,7 +39,12 @@ export const MarketCounterValueSelect = () => {
     );
   }, []);
 
-  const items = useMemo(() => supportedCountervalues, []);
+  const items = useMemo(() => supportedCountervalues.map(item => {
+        item.key = item.value;
+        return item;
+      }),
+    [],
+  );
 
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
@@ -50,14 +55,14 @@ export const MarketCounterValueSelect = () => {
         renderItem={renderItem}
         onChange={onCounterValueSelected}
         controlled
-        value={items.find(a => a.value === counterValue.value).value}
+        value={items.find(a => a.value === counterValue.value)}
       >
         {({ isOpen, value }) =>
           value ? (
             <Box flex={1} horizontal>
               <TextLink shrink>
                 <Button>
-                  <Ellipsis>{value}</Ellipsis>
+                  <Ellipsis>{value.value}</Ellipsis>
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}

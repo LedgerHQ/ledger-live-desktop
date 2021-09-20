@@ -79,8 +79,6 @@ function MarketList() {
     ...rangeData,
   });
 
-  console.log(currencies)
-
   const dispatch = useDispatch();
   let visibleCurrencies = [];
   const hiddenCurrencies = [];

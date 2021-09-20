@@ -27,7 +27,7 @@ const MarketHeader = () => {
         {"Market"}
       </Box>
       <RightBox horizontal flow={2} alignItems="center" justifyContent="flex-end">
-        {/* <MarketCounterValueSelect /> */}
+        <MarketCounterValueSelect />
         <MarketRangeSelect />
       </RightBox>
     </Box>
