@@ -34,6 +34,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
+import IconCoins from "~/renderer/icons/ClaimReward";
 import IconSend from "~/renderer/icons/Send";
 import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -139,6 +140,12 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
   }, [openModal, account]);
 
+  const onPlatformStake = useCallback(() => {
+    setTrackingSource("account header actions");
+
+    history.push({ pathname: "/platform/lido", state: { accountId: account.id } });
+  }, [history, account]);
+
   const onSend = useCallback(() => {
     openModal("MODAL_SEND", { parentAccount, account });
   }, [parentAccount, account, openModal]);
@@ -151,7 +158,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     ({ item: { label, onClick, event, eventProperties, icon } }) => {
       const Icon = icon;
       return (
-        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
+        <Button onClick={onClick} event={event} eventProperties={eventProperties} fullWidth>
           <Box horizontal flow={1} alignItems="center">
             {Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
             <Box>
@@ -234,6 +241,16 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
+      {currency.id === "ethereum" ? (
+        <Button small primary onClick={onPlatformStake} event={"Eth Stake Account Button"} icon>
+          <Box horizontal flow={1} alignItems="center">
+            <IconCoins size={14} />
+            <Box>
+              <Trans i18nKey="account.stake" values={{ currency: currency.name }} />
+            </Box>
+          </Box>
+        </Button>
+      ) : null}
       {!isAccountEmpty(account) ? (
         canBuySwap ? (
           <BuySwapHeader />

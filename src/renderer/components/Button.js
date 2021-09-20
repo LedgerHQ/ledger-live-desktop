@@ -280,6 +280,7 @@ export const Base: ThemedComponent<*> = styled.button.attrs(p => ({
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? "none" : "")};
+  width: ${p => (p.fullWidth ? "100%" : "auto")};
   outline: none;
 
   ${p => getStyles(p, "default")};
@@ -305,6 +306,7 @@ export type Props = {
   lighterDanger?: boolean,
   disabled?: boolean,
   outline?: boolean,
+  fullWidth?: boolean,
   outlineGrey?: boolean,
   onClick?: Function,
   small?: boolean,
@@ -347,6 +349,8 @@ class Button extends PureComponent<
     const { isFocused } = this.state;
     const { disabled } = this.props;
     const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props;
+
+    console.log(this.props);
     const isClickDisabled = disabled || isLoading;
     const onClickHandler = e => {
       if (onClick) {
