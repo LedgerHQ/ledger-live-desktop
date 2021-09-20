@@ -32,7 +32,7 @@ function Sample({ children, ...args }: Props) {
 
 export const View = (args: Props): JSX.Element[] =>
   navItems.reduce<JSX.Element[]>((acc, _, index) => {
-    const labels = navItems.slice(0, index + 1).map(label => <Icon name={label} />);
+    const labels = navItems.slice(0, index + 1).map((label) => <Icon name={label} />);
     return [
       ...acc,
       <Sample {...args} key={index}>

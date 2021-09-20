@@ -40,10 +40,10 @@ export function useDeepLinkHandler() {
   const history = useHistory();
 
   const navigate = useCallback(
-    (url: string) => {
+    (url: string, query: any) => {
       if (url !== location.pathname) {
         setTrackingSource("deeplink");
-        history.push({ pathname: url });
+        history.push({ pathname: url, state: query });
       }
     },
     [history, location],
@@ -53,10 +53,10 @@ export function useDeepLinkHandler() {
     (event: any, deeplink: string) => {
       const { pathname, searchParams } = new URL(deeplink);
       const query = Object.fromEntries(searchParams);
-      const url = pathname.replace(/(^\/+|\/+$)/g, "");
-      const splitedPath = url.split("/");
+      const fullUrl = pathname.replace(/(^\/+|\/+$)/g, "");
+      const [url, path] = fullUrl.split("/");
 
-      switch (splitedPath[0]) {
+      switch (fullUrl) {
         case "accounts":
           navigate("/accounts");
           break;
@@ -167,7 +167,7 @@ export function useDeepLinkHandler() {
         }
 
         case "settings": {
-          switch (splitedPath[1]) {
+          switch (path) {
             case "general":
               navigate("/settings/display");
               break;
@@ -175,7 +175,7 @@ export function useDeepLinkHandler() {
             case "about":
             case "help":
             case "experimental":
-              navigate(`/settings/${splitedPath[1]}`);
+              navigate(`/settings/${path}`);
               break;
             default:
               navigate("/settings");
@@ -184,6 +184,9 @@ export function useDeepLinkHandler() {
 
           break;
         }
+        case "discover":
+          navigate(`/platform/${path ?? ""}`, query);
+          break;
 
         case "portfolio":
         default:
