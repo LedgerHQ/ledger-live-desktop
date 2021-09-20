@@ -1265,7 +1265,7 @@
   "DeviceAction": {
     "allowAppPermission": "Откройте приложение {{wording}} на устройстве",
     "allowAppPermissionSubtitleToken": "для управления токенами {{token}}",
-    "allowManagerPermission": "Разрешите использование {{wording}} на устройстве",
+    "allowManagerPermission": "Разрешите использовать {{wording}} на устройстве",
     "loading": "Загружаем...",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
@@ -2645,6 +2645,10 @@
       "announcement": "Новости",
       "operation": "Операция",
       "achievement": "Открыто Достижение"
+    },
+    "groupedToast": {
+      "text": " Новых уведомлений: {{count}}",
+      "cta": "Подробнее"
     }
   },
   "informationCenter": {
@@ -2729,7 +2733,7 @@
     "screens": {
       "welcome": {
         "title": "Добро пожаловать в Ledger!",
-        "description": "Пользуйтесь криптовалютой на компьютере в полной безопасности.",
+        "description": "Пользуйтесь криптовалютой на компьютере в полной безопасности",
         "cta": "Приступить",
         "noDevice": "У вас ещё нет Ledger? <0>Купить Ledger Nano</0>",
         "languageWarning": {
