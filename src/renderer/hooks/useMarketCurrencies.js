@@ -39,6 +39,8 @@ export function useMarketCurrencies({
     });
 
     const data =
+      // TODO: remove hook from loop
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       useCalculateMany(currencyInputData, {
         from: currency,
         to: counterValueCurrency,
