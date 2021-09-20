@@ -47,6 +47,12 @@ const Button = styled(ButtonBase)`
   justify-content: center;
 `;
 
+const trackNoRates = ({ toState }) => {
+  track("Page Swap Form - Error No Rate", {
+    sourcecurrency: toState.currency?.name,
+  });
+};
+
 const SwapForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -61,6 +67,7 @@ const SwapForm = () => {
     setExchangeRate: rate => {
       dispatch(updateRateAction(rate));
     },
+    onNoRates: trackNoRates,
     ...locationState,
   });
   const exchangeRatesState = swapTransaction.swap?.rates;
