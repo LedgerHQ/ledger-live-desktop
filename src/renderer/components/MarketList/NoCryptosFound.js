@@ -11,11 +11,14 @@ const Wrapper = styled.div`
     font-size: 18px;
     padding-top: 24px;
     font-weight: 600;
+    color: ${p => p.theme.colors.palette.text.shade90};
   }
   
   .description {
     font-size: 13px;
     padding-top: 20px;
+    color: ${p => p.theme.colors.palette.text.shade50};
+    font-weight: 400;
   }
 `;
 
