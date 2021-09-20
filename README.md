@@ -28,8 +28,8 @@ The latest stable release is available on [ledger.com/ledger-live](https://www.l
 Previous versions and pre-releases can be downloaded on here from the [Releases](https://github.com/LedgerHQ/ledger-live-desktop/releases) section.
 
 ### Compatibility
-- macOS 10.10+
-- Windows 8+ (x64)
+- macOS 10.14+
+- Windows 8.1+ (x64)
 - Linux (x64)
 
 ## Signed hashes
