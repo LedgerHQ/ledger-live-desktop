@@ -19,7 +19,6 @@ import { AmountRequired } from "@ledgerhq/errors";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import { track } from "~/renderer/analytics/segment";
 import { pickExchangeRate } from "./index";
 import { getAccountTuplesForCurrency } from "~/renderer/components/PerCurrencySelectAccount/state";
 
@@ -91,6 +90,7 @@ const useSwapTransaction = ({
   defaultCurrency,
   defaultAccount,
   defaultParentAccount,
+  onNoRates,
 }: {
   accounts: ?(Account[]),
   exchangeRate: ?ExchangeRate,
@@ -98,6 +98,7 @@ const useSwapTransaction = ({
   defaultCurrency?: $PropertyType<SwapSelectorStateType, "currency">,
   defaultAccount?: $PropertyType<SwapSelectorStateType, "account">,
   defaultParentAccount?: $PropertyType<SwapSelectorStateType, "parentAccount">,
+  onNoRates?: ({ fromState: SwapSelectorStateType, toState: SwapSelectorStateType }) => void,
 } = {}): SwapTransactionType => {
   const [toState, setToState] = useState<SwapSelectorStateType>(selectorStateDefaultValues);
   const [fromState, setFromState] = useState<SwapSelectorStateType>({
@@ -252,9 +253,7 @@ const useSwapTransaction = ({
         );
         if (abort) return;
         if (rates.length === 0) {
-          track("Page Swap Form - Error No Rate", {
-            sourcecurrency: toCurrency?.name,
-          });
+          onNoRates && onNoRates({ fromState, toState });
         }
         // Discard bad provider rates
         let rateError = null;
@@ -280,7 +279,7 @@ const useSwapTransaction = ({
       abort = true;
       dispatchRates({ type: "idle" });
     };
-  }, [fromAccount, fromAmount, toAccount, transaction, getRatesDependency]);
+  }, [fromAccount, fromAmount, toAccount, transaction, getRatesDependency, onNoRates]);
 
   const toggleMax: $PropertyType<SwapTransactionType, "toggleMax"> = useCallback(
     () =>
