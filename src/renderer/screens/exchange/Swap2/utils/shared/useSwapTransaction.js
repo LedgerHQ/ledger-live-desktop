@@ -41,7 +41,7 @@ export type SwapDataType = {
   refetchRates: () => void,
 };
 
-const SelectorStateDefaultValues = {
+const selectorStateDefaultValues = {
   currency: null,
   account: null,
   parentAccount: null,
@@ -87,12 +87,12 @@ const useSwapTransaction = ({
   defaultAccount?: $PropertyType<SwapSelectorStateType, "account">,
   defaultParentAccount?: $PropertyType<SwapSelectorStateType, "parentAccount">,
 } = {}): SwapTransactionType => {
-  const [toState, setToState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
+  const [toState, setToState] = useState<SwapSelectorStateType>(selectorStateDefaultValues);
   const [fromState, setFromState] = useState<SwapSelectorStateType>({
-    ...SelectorStateDefaultValues,
-    currency: defaultCurrency ?? SelectorStateDefaultValues.currency,
-    account: defaultAccount ?? SelectorStateDefaultValues.account,
-    parentAccount: defaultParentAccount ?? SelectorStateDefaultValues.parentAccount,
+    ...selectorStateDefaultValues,
+    currency: defaultCurrency ?? selectorStateDefaultValues.currency,
+    account: defaultAccount ?? selectorStateDefaultValues.account,
+    parentAccount: defaultParentAccount ?? selectorStateDefaultValues.parentAccount,
   });
   const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
   const [rates, dispatchRates] = useReducer(ratesReducer, ratesReducerInitialState);
@@ -129,8 +129,8 @@ const useSwapTransaction = ({
     const currency = getAccountCurrency(account);
 
     bridgeTransaction.setAccount(account, parentAccount);
-    setFromState({ ...SelectorStateDefaultValues, currency, account, parentAccount });
-    setToState(SelectorStateDefaultValues);
+    setFromState({ ...selectorStateDefaultValues, currency, account, parentAccount });
+    setToState(selectorStateDefaultValues);
 
     /* @DEV: That populates fake seed. This is required to use Transaction object */
     const mainAccount = getMainAccount(account, parentAccount);
@@ -144,7 +144,7 @@ const useSwapTransaction = ({
     currency,
     account,
     parentAccount,
-  ) => setToState({ ...SelectorStateDefaultValues, currency, account, parentAccount });
+  ) => setToState({ ...selectorStateDefaultValues, currency, account, parentAccount });
 
   const setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount"> = amount => {
     bridgeTransaction.updateTransaction(transaction => ({ ...transaction, amount }));
