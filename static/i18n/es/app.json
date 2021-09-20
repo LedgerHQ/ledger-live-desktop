@@ -3573,10 +3573,6 @@
       "title": "Cuenta no escaneada por el nodo completo",
       "description": "Configura el nodo completo para buscar las cuentas asociadas a este dispositivo. El nodo completo debe buscar esta cuenta primero en la cadena de bloques, antes de agregarla a tu Portfolio."
     },
-    "StratisDown2021Warning": {
-      "title": "La cadena de bloques Stratis ha evolucionado y es posible que ya no funcione correctamente.",
-      "description": "La compatibilidad con la cadena de bloques original de Stratis se mantendrá hasta el 16 de octubre de 2021."
-    },
     "SwapGenericAPIError": {
       "title": "La tasa de cambio ha caducado",
       "description": "Debes confirmar la permuta antes de que venza el temporizador. La tasa de cambio es válida durante 60 segundos."
