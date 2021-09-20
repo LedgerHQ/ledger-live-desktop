@@ -24,12 +24,15 @@ import {
 } from "~/renderer/components/Input";
 import styled from "styled-components";
 import CounterValue from "~/renderer/components/CounterValue";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION } from "../../utils/index";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  provider: ?string,
   loadingRates: boolean,
 };
 
@@ -52,6 +55,7 @@ export default function ToRow({
   setToAccount,
   toAmount,
   fromAccount,
+  provider,
   loadingRates,
 }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
@@ -97,6 +101,21 @@ export default function ToRow({
 
   usePickDefaultCurrency(selectState.currencies, selectState.currency, selectState.setCurrency);
 
+  const trackEditCurrency = () =>
+    track("Page Swap Form - Edit Target Currency", {
+      targetcurrency: toCurrency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+  const setCurrencyAndTrack = currency => {
+    track("Page Swap Form - New Target Currency", {
+      targetcurrency: currency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+    selectState.setCurrency(currency);
+  };
+
   return (
     <>
       <Box horizontal color={"palette.text.shade40"} fontSize={3} mb={1}>
@@ -108,11 +127,12 @@ export default function ToRow({
         <Box width="50%">
           <SelectCurrency
             currencies={selectState.currencies}
-            onChange={selectState.setCurrency}
+            onChange={setCurrencyAndTrack}
             value={selectState.currency}
             stylesMap={selectRowStylesMap}
             isDisabled={!fromAccount}
             renderValueOverride={renderCurrencyValue}
+            onMenuOpen={trackEditCurrency}
           />
         </Box>
         <InputCurrencyContainer width="50%">

@@ -44,7 +44,13 @@ const Separator = styled.div`
   margin-left: 2px;
 `;
 
-const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType }) => {
+const SectionFees = ({
+  swapTransaction,
+  provider,
+}: {
+  swapTransaction: SwapTransactionType,
+  provider: ?string,
+}) => {
   const { t } = useTranslation();
   const { setDrawer } = React.useContext(context);
   const { account, transaction } = swapTransaction;
@@ -84,8 +90,9 @@ const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType
         setDrawer(FeesDrawer, {
           swapTransaction,
           disableSlowStrategy: exchangeRate?.tradeMethod === "fixed",
+          provider,
         })),
-    [canEdit, setDrawer, swapTransaction, exchangeRate?.tradeMethod],
+    [canEdit, setDrawer, swapTransaction, provider, exchangeRate?.tradeMethod],
   );
 
   const summaryValue = canEdit ? (

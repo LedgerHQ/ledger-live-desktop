@@ -19,6 +19,7 @@ import { AmountRequired } from "@ledgerhq/errors";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { track } from "~/renderer/analytics/segment";
 
 type RatesReducerState = {
   status?: ?string,
@@ -40,7 +41,7 @@ export type SwapDataType = {
   refetchRates: () => void,
 };
 
-const SelectorStateDefaultValues = {
+const selectorStateDefaultValues = {
   currency: null,
   account: null,
   parentAccount: null,
@@ -77,15 +78,31 @@ export type SwapTransactionType = {
   reverseSwap: () => void,
 };
 
-const useSwapTransaction = (): SwapTransactionType => {
-  const [toState, setToState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
-  const [fromState, setFromState] = useState<SwapSelectorStateType>(SelectorStateDefaultValues);
+const useSwapTransaction = ({
+  defaultCurrency,
+  defaultAccount,
+  defaultParentAccount,
+}: {
+  defaultCurrency?: $PropertyType<SwapSelectorStateType, "currency">,
+  defaultAccount?: $PropertyType<SwapSelectorStateType, "account">,
+  defaultParentAccount?: $PropertyType<SwapSelectorStateType, "parentAccount">,
+} = {}): SwapTransactionType => {
+  const [toState, setToState] = useState<SwapSelectorStateType>(selectorStateDefaultValues);
+  const [fromState, setFromState] = useState<SwapSelectorStateType>({
+    ...selectorStateDefaultValues,
+    currency: defaultCurrency ?? selectorStateDefaultValues.currency,
+    account: defaultAccount ?? selectorStateDefaultValues.account,
+    parentAccount: defaultParentAccount ?? selectorStateDefaultValues.parentAccount,
+  });
   const [isMaxEnabled, setMax] = useState<$PropertyType<SwapDataType, "isMaxEnabled">>(false);
   const [rates, dispatchRates] = useReducer(ratesReducer, ratesReducerInitialState);
   const [getRatesDependency, setGetRatesDependency] = useState(null);
   const refetchRates = useCallback(() => setGetRatesDependency({}), []);
   const allAccounts = useSelector(shallowAccountsSelector);
-  const bridgeTransaction = useBridgeTransaction();
+  const bridgeTransaction = useBridgeTransaction(() => ({
+    account: fromState.account,
+    parentAccount: fromState.parentAccount,
+  }));
   const fromAmountError = useMemo(() => {
     const [error] = [
       bridgeTransaction.status.errors?.gasPrice,
@@ -112,8 +129,8 @@ const useSwapTransaction = (): SwapTransactionType => {
     const currency = getAccountCurrency(account);
 
     bridgeTransaction.setAccount(account, parentAccount);
-    setFromState({ ...SelectorStateDefaultValues, currency, account, parentAccount });
-    setToState(SelectorStateDefaultValues);
+    setFromState({ ...selectorStateDefaultValues, currency, account, parentAccount });
+    setToState(selectorStateDefaultValues);
 
     /* @DEV: That populates fake seed. This is required to use Transaction object */
     const mainAccount = getMainAccount(account, parentAccount);
@@ -127,7 +144,7 @@ const useSwapTransaction = (): SwapTransactionType => {
     currency,
     account,
     parentAccount,
-  ) => setToState({ ...SelectorStateDefaultValues, currency, account, parentAccount });
+  ) => setToState({ ...selectorStateDefaultValues, currency, account, parentAccount });
 
   const setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount"> = amount => {
     bridgeTransaction.updateTransaction(transaction => ({ ...transaction, amount }));
@@ -177,6 +194,11 @@ const useSwapTransaction = (): SwapTransactionType => {
           transaction,
         );
         if (abort) return;
+        if (rates.length === 0) {
+          track("Page Swap Form - Error No Rate", {
+            sourcecurrency: toCurrency?.name,
+          });
+        }
         // Discard bad provider rates
         let rateError = null;
         rates = rates.reduce((acc, rate) => {
@@ -184,7 +206,7 @@ const useSwapTransaction = (): SwapTransactionType => {
           return rate.error ? acc : [...acc, rate];
         }, []);
         if (rates.length === 0 && rateError) {
-          // If there all the rates are in error
+          // If all the rates are in error
           dispatchRates({ type: "error", payload: rateError });
         } else {
           dispatchRates({ type: "set", payload: rates });

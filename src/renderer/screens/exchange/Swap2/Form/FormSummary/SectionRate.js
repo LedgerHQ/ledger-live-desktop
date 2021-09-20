@@ -21,8 +21,9 @@ import { ratesExpirationThreshold } from "~/renderer/reducers/swap";
 
 type Props = {
   swapTransaction: SwapTransactionType,
+  provider: ?string,
 };
-const SectionRate = ({ swapTransaction }: Props) => {
+const SectionRate = ({ swapTransaction, provider }: Props) => {
   const { t } = useTranslation();
   const { setDrawer } = useContext(context);
   const exchangeRate = useSelector(rateSelector);
@@ -36,8 +37,9 @@ const SectionRate = ({ swapTransaction }: Props) => {
       (() =>
         setDrawer(RatesDrawer, {
           swapTransaction,
+          provider,
         })),
-    [setDrawer, ratesState.value, swapTransaction],
+    [setDrawer, ratesState.value, provider, swapTransaction],
   );
 
   const summaryValue =

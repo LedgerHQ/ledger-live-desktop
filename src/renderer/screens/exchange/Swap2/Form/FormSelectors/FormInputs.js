@@ -24,6 +24,7 @@ type FormInputsProps = {
   isMaxEnabled?: boolean,
   fromAmountError?: Error,
   isSwapReversable: boolean,
+  provider: ?string,
   loadingRates: boolean,
 };
 
@@ -57,6 +58,7 @@ export default function FormInputs({
   fromAmountError,
   reverseSwap,
   isSwapReversable,
+  provider,
   loadingRates,
 }: FormInputsProps) {
   return (
@@ -70,6 +72,7 @@ export default function FormInputs({
           isMaxEnabled={isMaxEnabled}
           toggleMax={toggleMax}
           fromAmountError={fromAmountError}
+          provider={provider}
         />
       </Box>
       <Box horizontal justifyContent="center" alignContent="center" mb={1}>
@@ -81,6 +84,7 @@ export default function FormInputs({
           setToAccount={setToAccount}
           toAmount={toAmount}
           fromAccount={fromAccount}
+          provider={provider}
           loadingRates={loadingRates}
         />
       </Box>

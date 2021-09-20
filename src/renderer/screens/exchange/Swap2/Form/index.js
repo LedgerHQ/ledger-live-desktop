@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
 import Box from "~/renderer/components/Box";
@@ -30,6 +31,9 @@ import FormKYCBanner from "./FormKYCBanner";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION, trackSwapError } from "../utils/index";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -45,11 +49,12 @@ const Button = styled(ButtonBase)`
 
 const SwapForm = () => {
   const { t } = useTranslation();
-  const { providers, error: providersError } = useSwapProviders();
   const dispatch = useDispatch();
+  const { state: locationState } = useLocation();
+  const { providers, error: providersError } = useSwapProviders();
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
-  const swapTransaction = useSwapTransaction();
+  const swapTransaction = useSwapTransaction(locationState);
   const exchangeRatesState = swapTransaction.swap?.rates;
   const swapKYC = useSelector(swapKYCSelector);
   const provider = exchangeRate?.provider;
@@ -97,6 +102,20 @@ const SwapForm = () => {
   );
   const swapError = swapTransaction.fromAmountError || exchangeRatesState?.error;
 
+  // Track errors
+  useEffect(
+    () => {
+      swapError &&
+        trackSwapError(swapError, {
+          sourcecurrency: swapTransaction.swap.from.currency?.name,
+          provider,
+          swapVersion: SWAP_VERSION,
+        });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [swapError],
+  );
+
   const isSwapReady =
     !swapTransaction.bridgePending &&
     exchangeRatesState.status !== "loading" &&
@@ -107,19 +126,38 @@ const SwapForm = () => {
     exchangeRate;
 
   const onSubmit = () => {
+    track("Page Swap Form - Request", {
+      sourcecurrency: sourceCurrency?.name,
+      targetcurrency: targetCurrency?.name,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
     setDrawer(ExchangeDrawer, {
       swapTransaction,
       exchangeRate,
     });
   };
 
+  const sourceAccount = swapTransaction.swap.from.account;
+  const sourceCurrency = swapTransaction.swap.from.currency;
+  const targetCurrency = swapTransaction.swap.to.currency;
+
   if (providers?.length)
     return (
       <Wrapper>
+        <TrackPage
+          category="Swap"
+          name="Form"
+          sourcecurrency={sourceCurrency?.name}
+          sourceaccount={sourceAccount ? "yes" : "no"}
+          targetcurrency={targetCurrency?.name}
+          provider={provider}
+          swapVersion={SWAP_VERSION}
+        />
         <SwapFormSelectors
-          fromAccount={swapTransaction.swap.from.account}
+          fromAccount={sourceAccount}
           fromAmount={swapTransaction.swap.from.amount}
-          toCurrency={swapTransaction.swap.to.currency}
+          toCurrency={targetCurrency}
           toAmount={exchangeRate?.toAmount || null}
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
@@ -129,6 +167,7 @@ const SwapForm = () => {
           fromAmountError={swapError}
           isSwapReversable={swapTransaction.swap.isSwapReversable}
           reverseSwap={swapTransaction.reverseSwap}
+          provider={provider}
           loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
         <SwapFormSummary
