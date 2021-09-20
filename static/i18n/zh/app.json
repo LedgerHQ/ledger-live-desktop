@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "使用 ParaSwap 交换您的加密货币，它聚合并提供去中心化交易所的最佳报价。",
-          "description": "使用 ParaSwap 交换您的加密货币，它聚合并提供去中心化交易所的最佳报价。"
-        },
-        "wyre_buy": {
-          "shortDescription": "使用 Wyre 购买比特币、以太币以及更多加密货币，仅适用于我们的美国客户。",
-          "description": "使用 Wyre 购买比特币、以太币以及更多加密货币，仅适用于我们的美国客户。"
-        },
-        "lido": {
-          "shortDescription": "用 Lido 质押您的 ETH 以获得每日质押奖励。",
-          "description": "用 Lido 质押您的 ETH 以获得每日质押奖励。"
-        },
-        "zerion": {
-          "shortDescription": "管理您的 DeFi 投资组合的智能方式。",
-          "description": "管理您的 DeFi 投资组合的智能方式。"
-        },
-        "rainbow": {
-          "description": "由您的硬件钱包确保的一种简单的 NFT 可视化途径。",
-          "shortDescription": "由您的硬件钱包确保的一种简单的 NFT 可视化途径。"
-        },
-        "aave": {
-          "description": "通过流动性市场协议借出或借入您的加密货币并控制您的资金。",
-          "shortDescription": "通过流动性市场协议借出或借入您的加密货币并控制您的资金。"
-        },
-        "compound": {
-          "shortDescription": "通过完全去中心化的开源协议借出或借入您的加密货币。",
-          "description": "通过完全去中心化的开源协议借出或借入您的加密货币。"
-        },
-        "deversifi": {
-          "shortDescription": "通过以太坊第 2 层上的自托管去中心化交易所进行交易。",
-          "description": "通过以太坊第 2 层上的自托管去中心化交易所进行交易。"
-        },
-        "1inch": {
-          "shortDescription": "通过以太坊上的 Defi/DEX 聚合器交易加密货币。",
-          "description": "通过以太坊上的 Defi/DEX 聚合器交易加密货币。"
-        }
-      },
       "dependencyInstall": {
         "title": "需要安装 {{dependency}} 应用程序",
         "description": "同样需要安装 {{dependency}} 应用程序，因为 {{app}} 应用程序需要用到该程序。",
@@ -2683,6 +2645,10 @@
       "announcement": "新闻",
       "operation": "操作",
       "achievement": "已解锁的成就"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -3301,10 +3267,11 @@
     "placeholder": "输入 {{currencyName}} 地址"
   },
   "Terms": {
-    "title": "法律条款",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "服务条款",
-    "privacyLabel": "隐私政策",
-    "switchLabel": "我已阅读并接受服务条款和隐私政策",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "进入 Ledger 应用程序"
   },
   "families": {
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "您必须至少选择一个验证器"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

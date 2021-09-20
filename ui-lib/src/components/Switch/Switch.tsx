@@ -32,7 +32,7 @@ const Label = styled(Text).attrs({ type: "body", fontWeight: "500" })`
 
   /* CHECKED VARIANT */
   ${Input}:checked ~ & {
-    color: ${props => props.theme.colors.palette.v2.primary.dark};
+    color: ${(props) => props.theme.colors.palette.primary.c160};
   }
 `;
 
@@ -44,7 +44,7 @@ const Switcher = styled.div`
   position: relative;
   display: inline-block;
 
-  background: ${props => props.theme.colors.palette.v2.grey.border};
+  background: ${(props) => props.theme.colors.palette.neutral.c90};
   border-radius: 16px;
   width: var(--ll-switch-width);
   height: var(--ll-switch-height);
@@ -58,7 +58,7 @@ const Switcher = styled.div`
 
   &:focus {
     outline-style: auto;
-    outline: 1px solid ${props => props.theme.colors.palette.v2.grey.border};
+    outline: 1px solid ${(props) => props.theme.colors.palette.neutral.c90};
     outline-offset: 2px;
   }
 
@@ -66,7 +66,7 @@ const Switcher = styled.div`
   &:before {
     position: absolute;
     display: block;
-    background: ${props => props.theme.colors.palette.v2.background.default};
+    background: ${(props) => props.theme.colors.palette.neutral.c00};
     border-radius: 40px;
 
     width: calc(calc(var(--ll-switch-width) / 2) - var(--ll-switch-padding));
@@ -84,7 +84,7 @@ const Switcher = styled.div`
 
   /* CHECKED VARIANT */
   ${Input}:checked ~ & {
-    background: ${props => props.theme.colors.palette.v2.primary.dark};
+    background: ${(props) => props.theme.colors.palette.primary.c160};
 
     &:before {
       transform: translateX(calc(var(--ll-switch-width) / 2));

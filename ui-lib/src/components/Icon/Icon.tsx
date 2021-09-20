@@ -26,7 +26,7 @@ const Icon = ({
 }: Props): React.ReactNode => {
   const maybeIconName = `${name}${weight}`;
   if (maybeIconName in icons) {
-    // @ts-expect-error I don't know how to make you happy ts
+    // @ts-expect-error FIXME I don't know how to make you happy ts
     const Component = icons[maybeIconName];
     return <Component size={size} color={color} />;
   }

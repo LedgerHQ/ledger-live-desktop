@@ -8,14 +8,11 @@ type Props = {
   currencies: Array<CryptoCurrency | TokenCurrency>,
 };
 
-const StratisDown2021Warning = createCustomErrorClass("StratisDown2021Warning");
 const ServiceStatusWarning = createCustomErrorClass("ServiceStatusWarning");
 
 const CurrencyDownStatusAlert = ({ currencies }: Props) => {
   const errors = [];
   const { incidents } = useFilteredServiceStatus({ tickers: currencies.map(c => c.ticker) });
-
-  if (currencies.some(c => c.id === "stratis")) errors.push(new StratisDown2021Warning());
 
   incidents
     .filter(c => c.components && c.components.length > 0)

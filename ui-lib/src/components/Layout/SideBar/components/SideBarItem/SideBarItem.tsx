@@ -6,8 +6,8 @@ import TransitionInOut from "@ui/components/Transition/TransitionInOut";
 
 const Item = styled.li`
   /** DEFAULT VARIANT **/
-  --ll-sidebar-item-label-color: ${props => props.theme.colors.palette.v2.text.secondary};
-  --ll-sidebar-item-icon-color: ${props => props.theme.colors.palette.v2.text.secondary};
+  --ll-sidebar-item-label-color: ${(props) => props.theme.colors.palette.neutral.c80};
+  --ll-sidebar-item-icon-color: ${(props) => props.theme.colors.palette.neutral.c80};
   --ll-sidebar-item-background-color: unset;
 
   display: flex;
@@ -24,8 +24,8 @@ const Item = styled.li`
 
   /** HOVER VARIANT **/
   &:hover {
-    --ll-sidebar-item-label-color: ${props => props.theme.colors.palette.v2.text.default};
-    --ll-sidebar-item-icon-color: ${props => props.theme.colors.palette.v2.primary.dark};
+    --ll-sidebar-item-label-color: ${(props) => props.theme.colors.palette.neutral.c100};
+    --ll-sidebar-item-icon-color: ${(props) => props.theme.colors.palette.primary.c160};
     --ll-sidebar-item-background-color: unset;
   }
 
@@ -37,16 +37,15 @@ const Item = styled.li`
 
   /** ACTIVE VARIANT **/
   &[data-active] {
-    --ll-sidebar-item-label-color: ${props => props.theme.colors.palette.v2.text.default};
-    --ll-sidebar-item-icon-color: ${props => props.theme.colors.palette.v2.primary.dark};
-    --ll-sidebar-item-background-color: ${props =>
-      props.theme.colors.palette.v2.primary.backgroundLight};
+    --ll-sidebar-item-label-color: ${(props) => props.theme.colors.palette.neutral.c100};
+    --ll-sidebar-item-icon-color: ${(props) => props.theme.colors.palette.primary.c160};
+    --ll-sidebar-item-background-color: ${(props) => props.theme.colors.palette.primary.c20};
   }
 
   /** DISABLE VARIANT **/
   &[data-disable] {
-    --ll-sidebar-item-label-color: ${props => props.theme.colors.palette.v2.text.secondary};
-    --ll-sidebar-item-icon-color: ${props => props.theme.colors.palette.v2.text.secondary};
+    --ll-sidebar-item-label-color: ${(props) => props.theme.colors.palette.neutral.c80};
+    --ll-sidebar-item-icon-color: ${(props) => props.theme.colors.palette.neutral.c80};
     --ll-sidebar-item-background-color: unset;
     opacity: 0.3;
     cursor: unset;

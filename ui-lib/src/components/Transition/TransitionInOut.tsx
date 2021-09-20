@@ -4,7 +4,7 @@ import { CSSTransitionProps } from "react-transition-group/CSSTransition";
 import styled from "styled-components";
 const duration = 150;
 const ChildrenWrapper = styled.div<{ timeout: number }>`
-  transition: ${props => `opacity ${props.timeout}ms ease-in-out`};
+  transition: ${(props) => `opacity ${props.timeout}ms ease-in-out`};
 
   &.transition-inout-enter {
     opacity: 0;

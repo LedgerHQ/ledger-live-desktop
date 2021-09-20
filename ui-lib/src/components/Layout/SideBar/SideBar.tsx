@@ -12,9 +12,9 @@ const Nav = styled(Flex)`
   row-gap: 1.5rem;
   height: 100vh;
   max-width: 14.875rem;
-  color: ${props => props.theme.colors.palette.v2.text.default};
-  border-right: 1px solid ${props => props.theme.colors.palette.v2.grey.border};
-  background-color: ${props => props.theme.colors.palette.v2.background.paper};
+  color: ${(props) => props.theme.colors.palette.neutral.c100};
+  border-right: 1px solid ${(props) => props.theme.colors.palette.neutral.c90};
+  background-color: ${(props) => props.theme.colors.palette.neutral.c00};
   transition: max-width 300ms;
   will-change: max-width;
 

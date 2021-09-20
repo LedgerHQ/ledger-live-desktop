@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
-        },
-        "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
-        },
-        "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
-        },
-        "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
-        },
-        "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
-        },
-        "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
-        },
-        "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
-        },
-        "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
-        },
-        "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "{{dependency}} app is required",
         "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
@@ -2683,6 +2645,10 @@
       "announcement": "News",
       "operation": "Operation",
       "achievement": "Achievement Unlocked"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -3301,10 +3267,11 @@
     "placeholder": "Enter {{currencyName}} address"
   },
   "Terms": {
-    "title": "Legal",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "You must select at least one validator"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

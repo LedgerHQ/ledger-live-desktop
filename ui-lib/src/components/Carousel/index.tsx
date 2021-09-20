@@ -20,7 +20,7 @@ const CarouselWrapper = styled.div`
   cursor: pointer;
   position: relative;
   flex: 1;
-  background: ${p => p.theme.colors.palette.v2.text.default};
+  background: ${(p) => p.theme.colors.palette.neutral.c100};
 `;
 
 const Controllers = styled(Flex)`
@@ -29,7 +29,7 @@ const Controllers = styled(Flex)`
   bottom: 6px;
   flex-direction: row;
   column-gap: 8px;
-  color: ${p => p.theme.colors.palette.v2.background.default};
+  color: ${(p) => p.theme.colors.palette.neutral.c00};
 
   > div {
     &:hover {
@@ -50,13 +50,13 @@ const Bullets = styled.div<{ active?: number }>`
     position: relative;
     height: 2px;
     width: 24px;
-    background: ${p => p.theme.colors.palette.v2.background.default};
+    background: ${(p) => p.theme.colors.palette.neutral.c00};
     opacity: 0.5;
     &:hover {
       opacity: 0.75;
     }
 
-    &:nth-child(${p => p.active}) {
+    &:nth-child(${(p) => p.active}) {
       opacity: 1;
       &:hover {
         opacity: 0.75;
@@ -77,7 +77,7 @@ const Close = styled.div`
   position: absolute;
   top: 18px;
   right: 14px;
-  color: ${p => p.theme.colors.palette.v2.background.default};
+  color: ${(p) => p.theme.colors.palette.neutral.c00};
   &:hover {
     opacity: 0.5;
   }
@@ -113,10 +113,13 @@ const Carousel = ({
   const [index, setIndex] = useState(0);
   const [wantToDismiss, setWantToDismiss] = useState(false);
   const [paused, setPaused] = useState(false);
-  const childFactory = useCallback(child => React.cloneElement(child, { direction }), [direction]);
+  const childFactory = useCallback(
+    (child) => React.cloneElement(child, { direction }),
+    [direction],
+  );
 
   const wrappedSetIndex = useCallback(
-    newIndex => {
+    (newIndex) => {
       setDirection(newIndex > index ? "left" : "right");
       setIndex(newIndex);
     },
@@ -158,14 +161,14 @@ const Carousel = ({
     <CarouselWrapper id={"carousel"} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       {wantToDismiss ? (
         <DismissWrapper>
-          <Text color="palette.v2.background.default" ff="Inter|Medium" fontSize={13}>
+          <Text color="palette.neutral.c00" ff="Inter|Medium" fontSize={13}>
             {"This banner will not show up again until there is a new announcement"}
           </Text>
           <Flex>
-            <Button color="palette.v2.background.default" type="secondary" onClick={onDismiss}>
+            <Button color="palette.neutral.c00" type="secondary" onClick={onDismiss}>
               {"Confirm"}
             </Button>
-            <Button color="palette.v2.background.default" type="primary" onClick={onCancelDismiss}>
+            <Button color="palette.neutral.c00" type="primary" onClick={onCancelDismiss}>
               {"Show again"}
             </Button>
           </Flex>

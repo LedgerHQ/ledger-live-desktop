@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "قم بمبادلة أصولك المشفرة مع ParaSwap الذي يجمع ويوفر أفضل عروض الأسعار على التبادلات اللامركزية.",
-          "description": "قم بمبادلة أصولك المشفرة مع ParaSwap الذي يجمع ويوفر أفضل عروض الأسعار على التبادلات اللامركزية."
-        },
-        "wyre_buy": {
-          "shortDescription": "قم بشراء بيتكوين وإيثيريوم و المزيد من العملات المشفرة باستخدام Wyre، فقط متاح لعملائنا في الولايات المتحدة.",
-          "description": "قم بشراء بيتكوين وإيثيريوم و المزيد من العملات المشفرة باستخدام Wyre، فقط متاح لعملائنا في الولايات المتحدة."
-        },
-        "lido": {
-          "shortDescription": "قم برهن ETH الخاص بك مع Lido لكسب مكافآت الرهن يومياً.",
-          "description": "قم برهن ETH الخاص بك مع Lido لكسب مكافآت الرهن يومياً."
-        },
-        "zerion": {
-          "shortDescription": "الطريقة الذكية لإدارة حافظة DeFi الخاصة بك.",
-          "description": "الطريقة الذكية لإدارة حافظة DeFi الخاصة بك."
-        },
-        "rainbow": {
-          "description": "طريقة سهلة لتصور الرموز غير قابلة الاستبدال (NFT) مؤمنة بواسطة محفظة الأجهزة الخاصة بك.",
-          "shortDescription": "طريقة سهلة لتصور الرموز غير قابلة الاستبدال (NFT) مؤمنة بواسطة محفظة الأجهزة الخاصة بك."
-        },
-        "aave": {
-          "description": "قم بإقراض أو استعارة أصولك المشفرة من خلال بروتوكول سوق السيولة وابقَ متحكمًا في أموالك.",
-          "shortDescription": "قم بإقراض أو استعارة أصولك المشفرة من خلال بروتوكول سوق السيولة وابقَ متحكمًا في أموالك."
-        },
-        "compound": {
-          "shortDescription": "قم بإقراض أو استعارة أصولك المشفرة من خلال بروتوكول لامركزي ومفتوح المصدر تماماً.",
-          "description": "قم بإقراض أو استعارة أصولك المشفرة من خلال بروتوكول لامركزي ومفتوح المصدر تماماً."
-        },
-        "deversifi": {
-          "shortDescription": "تداول من خلال التبادل اللامركزي الذاتي الحراسة على الطبقة الثانية من إيثريوم.",
-          "description": "تداول من خلال التبادل اللامركزي الذاتي الحراسة على الطبقة الثانية من إيثريوم."
-        },
-        "1inch": {
-          "shortDescription": "تداول العملات المشفرة من خلال مجمع Defi/DEX على إيثريوم.",
-          "description": "تداول العملات المشفرة من خلال مجمع Defi/DEX على إيثريوم."
-        }
-      },
       "dependencyInstall": {
         "title": "تطبيق {{dependency}} مطلوب",
         "description": "سيتم أيضا تثبيت تطبيق {{dependency}} لأن تطبيق {{app}} يحتاج إليه.",
@@ -2683,6 +2645,10 @@
       "announcement": "أخبار",
       "operation": "عملية",
       "achievement": "تمت إتاحة الإنجاز"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -3301,10 +3267,11 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "القانونية",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "شروط الخدمة",
-    "privacyLabel": "سياسة الخصوصية",
-    "switchLabel": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

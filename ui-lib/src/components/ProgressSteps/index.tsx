@@ -62,7 +62,7 @@ export const Item = {
     ${space}
   `,
   Current: styled.div.attrs({
-    backgroundColor: "palette.v2.primary.dark",
+    backgroundColor: "palette.primary.c160",
   })<ColorProps>`
     width: 6px;
     height: 6px;
@@ -70,7 +70,7 @@ export const Item = {
     ${color}
   `,
   Pending: styled.div.attrs({
-    backgroundColor: "palette.v2.text.tertiary",
+    backgroundColor: "palette.neutral.c70",
   })<ColorProps>`
     width: 4px;
     height: 4px;
@@ -82,14 +82,14 @@ export const Item = {
 };
 
 const StepText = styled(Text)<{ inactive?: boolean; errored?: boolean }>`
-  color: ${p => {
+  color: ${(p) => {
     if (p.errored) {
-      return p.theme.colors.palette.v2.feedback.error;
+      return p.theme.colors.palette.error.c100;
     }
     if (p.inactive) {
-      return p.theme.colors.palette.v2.text.tertiary;
+      return p.theme.colors.palette.neutral.c70;
     }
-    return p.theme.colors.palette.v2.text.default;
+    return p.theme.colors.palette.neutral.c100;
   }};
 `;
 
@@ -97,7 +97,7 @@ const BaseSeparator = styled.div<{ inactive?: boolean }>`
   flex: 1;
   position: relative;
   overflow-x: hidden;
-  background-color: ${p => p.theme.colors.palette.v2.grey.border};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c90};
   height: 1px;
   top: 12px;
 
@@ -105,11 +105,11 @@ const BaseSeparator = styled.div<{ inactive?: boolean }>`
     content: "";
     position: absolute;
     width: 100%;
-    transform: ${p => (p.inactive ? "translateX(calc(-100% - 1px))" : "translateX(0)")};
+    transform: ${(p) => (p.inactive ? "translateX(calc(-100% - 1px))" : "translateX(0)")};
     transition: 0.25s transform;
     transition-timing-function: linear;
     border-top: 1px solid;
-    border-color: ${p => p.theme.colors.palette.v2.text.default};
+    border-color: ${(p) => p.theme.colors.palette.neutral.c100};
   }
 `;
 
@@ -122,7 +122,7 @@ const Separator = {
   Item: styled(BaseSeparator)<{ position: string }>`
     &::after {
       transition-duration: 0.1s;
-      transition-delay: ${p =>
+      transition-delay: ${(p) =>
         (p.position === "left" && !p.inactive) || (p.position === "right" && p.inactive)
           ? "0.35s"
           : "0s"};
@@ -137,14 +137,14 @@ const stepContentsByState = {
     </Item.Container>
   ),
   current: (
-    <Item.Container backgroundColor="palette.v2.primary.backgroundLight" borderRadius="8px">
+    <Item.Container backgroundColor="palette.primary.c20" borderRadius="8px">
       <Item.Current />
     </Item.Container>
   ),
   completed: (
     <Item.Container
-      color="palette.v2.primary.dark"
-      backgroundColor="palette.v2.primary.backgroundLight"
+      color="palette.primary.c160"
+      backgroundColor="palette.primary.c20"
       borderRadius="8px"
     >
       <Item.Completed />
@@ -152,8 +152,8 @@ const stepContentsByState = {
   ),
   errored: (
     <Item.Container
-      color="palette.v2.feedback.error"
-      backgroundColor="palette.v2.orange.error"
+      color="palette.error.c100"
+      backgroundColor="palette.warning.c10"
       borderRadius="8px"
     >
       <Item.Errored />
