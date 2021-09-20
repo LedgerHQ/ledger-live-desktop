@@ -2645,6 +2645,10 @@
       "announcement": "Noticias",
       "operation": "Operación",
       "achievement": "Logro desbloqueado"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {

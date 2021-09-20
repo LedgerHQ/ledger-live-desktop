@@ -2645,6 +2645,10 @@
       "announcement": "Actualités",
       "operation": "Opération",
       "achievement": "Succès"
+    },
+    "groupedToast": {
+      "text": "Vous avez {{count}} notifications non lues.",
+      "cta": "Voir les détails"
     }
   },
   "informationCenter": {

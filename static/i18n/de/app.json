@@ -2645,6 +2645,10 @@
       "announcement": "Neuigkeiten",
       "operation": "Vorgang",
       "achievement": "Erfolge entsperrt"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {

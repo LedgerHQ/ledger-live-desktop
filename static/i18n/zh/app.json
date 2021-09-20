@@ -2645,6 +2645,10 @@
       "announcement": "新闻",
       "operation": "操作",
       "achievement": "已解锁的成就"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
