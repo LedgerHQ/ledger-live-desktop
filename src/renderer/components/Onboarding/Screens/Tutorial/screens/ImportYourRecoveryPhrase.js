@@ -11,8 +11,6 @@ import recoveryPhrase from "../assets/recoveryPhrase.svg";
 import { Illustration, ContentContainer } from "../shared";
 
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
-import Alert from "~/renderer/components/Alert";
-import Box from "~/renderer/components/Box/Box";
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -58,11 +56,6 @@ export function ImportYourRecoveryPhrase({ sendEvent }: Props) {
         >
           {t("onboarding.screens.tutorial.screens.importYourRecoveryPhrase.title")}
         </Text>
-        <Box mt={4} bg="palette.background.default" style={{ borderRadius: 4 }}>
-          <Alert type="warning" onLearnMore={() => sendEvent("RECOVERY_WARN")}>
-            {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.warning.title")}
-          </Alert>
-        </Box>
         <Text
           mt="32px"
           color="palette.primary.contrastText"
