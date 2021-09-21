@@ -127,10 +127,17 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   };
 };
 
+const defaultLanguage: () => string = () => {
+  // Nb If the os language is in the list [fr, ru] (LL-7027) default to it
+  const pushedLanguages = ["fr", "ru"];
+  const detectedLanguage = window.navigator?.language || "en";
+  return pushedLanguages.find(lang => detectedLanguage.startsWith(lang)) || "en";
+};
+
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  language: "en",
+  language: defaultLanguage(),
   theme: null,
   region: null,
   orderAccounts: "balance|desc",
