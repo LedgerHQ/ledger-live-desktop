@@ -37,9 +37,30 @@ export const selection = device => {
 };
 
 export const goToConnectAndFinish = (cta, device) => {
-  it("goes to connect", async () => {
+  it("goes to connect 1/1", async () => {
     const next = await $(cta);
     await next.click();
+    expect(true).toBe(true);
+  });
+
+  if (cta === "#initialized-device") {
+    it("displays warning if initialized already", async () => {
+      await app.client.pause(500);
+      // eslint-disable-next-line jest/no-conditional-expect
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-initialized-seedwarning-" + device,
+      });
+
+      const next = await $("#onboarding-recoverySeedWarning-continue");
+      await next.click();
+      await app.client.pause(500);
+    });
+  }
+
+  it("goes to connect 1/2", async () => {
     await app.client.pause(500);
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       // wave thing
@@ -263,6 +284,19 @@ export const onboard = device => {
 
     it("goes to restore 1", async () => {
       const next = await $("#restore-device");
+      await next.click();
+      await app.client.pause(500);
+      expect(await app.client.screenshot()).toMatchImageSnapshot({
+        // wave thing
+        failureThreshold: 15,
+        failureThresholdType: "pixel",
+        customSnapshotIdentifier: "onboarding-restore-seedwarning-" + device,
+      });
+    });
+
+    it("shows the recovery seed modal", async () => {
+      await app.client.pause(500);
+      const next = await $("#onboarding-recoverySeedWarning-continue");
       await next.click();
       await app.client.pause(500);
       expect(await app.client.screenshot()).toMatchImageSnapshot({
