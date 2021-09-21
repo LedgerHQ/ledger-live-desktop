@@ -5,10 +5,10 @@ import Text from "@ui/components/Text";
 import styled from "styled-components";
 
 const MaxButton = styled.button<{ active?: boolean }>`
-  color: ${p =>
-    p.active ? p.theme.colors.palette.v2.text.contrast : p.theme.colors.palette.v2.text.secondary};
-  background-color: ${p =>
-    p.active ? p.theme.colors.palette.v2.text.default : p.theme.colors.palette.v2.text.contrast};
+  color: ${(p) =>
+    p.active ? p.theme.colors.palette.neutral.c00 : p.theme.colors.palette.neutral.c70};
+  background-color: ${(p) =>
+    p.active ? p.theme.colors.palette.neutral.c100 : p.theme.colors.palette.neutral.c00};
   border-radius: 100px;
   border-width: 0;
   height: 31px;
@@ -34,7 +34,7 @@ export default function NumberInput({
       type={"number"}
       renderRight={
         <FlexBox alignItems={"center"} justifyContent={"center"} py={"3px"} mr={"8px"}>
-          {[0.25, 0.5, 0.75, 1].map(percent => (
+          {[0.25, 0.5, 0.75, 1].map((percent) => (
             <MaxButton
               key={percent}
               onClick={() => onPercentClick(percent)}

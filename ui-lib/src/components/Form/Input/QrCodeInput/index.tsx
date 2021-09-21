@@ -4,10 +4,8 @@ import FlexBox from "@ui/components/Layout/Flex";
 import QrCodeMedium from "@ui/assets/icons/QrCodeMedium";
 import styled from "styled-components";
 
-const QrCodeButton = styled.button.attrs(p => ({
-  color: p.theme.colors.palette.v2.text.secondary,
-}))`
-  background-color: ${p => p.theme.colors.palette.v2.text.default};
+const QrCodeButton = styled.button`
+  background-color: ${(p) => p.theme.colors.palette.neutral.c100};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,8 +15,8 @@ const QrCodeButton = styled.button.attrs(p => ({
   border-width: 0;
 `;
 
-const Icon = styled(QrCodeMedium).attrs(p => ({
-  color: p.theme.colors.palette.v2.text.contrast,
+const Icon = styled(QrCodeMedium).attrs((p) => ({
+  color: p.theme.colors.palette.neutral.c00,
 }))``;
 
 export default function QrCodeInput({

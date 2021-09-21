@@ -31,7 +31,7 @@ export const NumberInputDefault = ({
 }: InputProps & { max: number; min: number }): JSX.Element => {
   const [value, setValue] = React.useState(24.42);
 
-  const onChange = e => {
+  const onChange = (e) => {
     let value = e.target.value;
     if (value) {
       value = parseFloat(e.target.value);
@@ -41,7 +41,7 @@ export const NumberInputDefault = ({
     setValue(value);
   };
 
-  const onPercentClick = percent => {
+  const onPercentClick = (percent) => {
     setValue(max * percent);
   };
 
