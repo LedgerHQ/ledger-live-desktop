@@ -1,7 +1,7 @@
 // @flow
 import React from "react";
 import SummaryLabel from "./SummaryLabel";
-import SummaryValue from "./SummaryValue";
+import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -64,9 +64,9 @@ const SectionProvider = ({ provider, status }: SectionProviderProps) => {
           {status ? <ProviderStatusTag status={status} /> : null}
         </div>
       )) || (
-        <Text color="palette.text.shade100" fontSize={4}>
-          {"-"}
-        </Text>
+        <SummaryValue>
+          <NoValuePlaceholder />
+        </SummaryValue>
       )}
     </SummarySection>
   );
