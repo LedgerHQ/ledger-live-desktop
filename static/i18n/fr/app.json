@@ -2720,11 +2720,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "Contacter l'Assistance",
+        "continueCTA": "Continuer",
+        "title": "Vérifier le contenu de la boîte",
+        "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
       }
     },
     "alerts": {
