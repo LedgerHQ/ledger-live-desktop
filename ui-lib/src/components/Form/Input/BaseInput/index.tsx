@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import FlexBox from "../../../Layout/Flex";
 import React, { InputHTMLAttributes } from "react";
 import Text from "../../../Text";
+import { rgba } from "../../../../styles/helpers";
 
 type CommonProps = InputHTMLAttributes<HTMLInputElement> & {
   disabled?: boolean;
@@ -16,42 +17,42 @@ export type InputProps = CommonProps & {
 
 const InputContainer = styled.div<Partial<CommonProps> & { focus?: boolean }>`
   display: flex;
-  background: #ffffff;
+  background: ${(p) => p.theme.colors.palette.neutral.c00};
   height: 48px;
-  border: ${p => `1px solid ${p.theme.colors.palette.v2.grey.borderLight}`};
+  border: ${(p) => `1px solid ${p.theme.colors.palette.neutral.c40}`};
   border-radius: 24px;
   transition: all 0.2s ease;
-  color: ${p => p.theme.colors.palette.v2.text.default};
+  color: ${(p) => p.theme.colors.palette.neutral.c100};
 
-  ${p =>
+  ${(p) =>
     p.focus &&
     !p.error &&
     css`
-      border: 1px solid ${p.theme.colors.palette.v2.primary.borderDark};
-      box-shadow: 0 0 0 4px ${p.theme.colors.palette.v2.primary.fadedBase};
+      border: 1px solid ${p.theme.colors.palette.primary.c140};
+      box-shadow: 0 0 0 4px ${rgba(p.theme.colors.palette.primary.c100, 0.48)};
     `};
 
-  ${p =>
+  ${(p) =>
     p.error &&
     !p.disabled &&
     css`
-      border: 1px solid ${p.theme.colors.palette.v2.feedback.error};
+      border: 1px solid ${p.theme.colors.palette.error.c100};
     `};
 
-  ${p =>
+  ${(p) =>
     !p.error &&
     !p.disabled &&
     css`
       &:hover {
-        border: ${!p.disabled && `1px solid ${p.theme.colors.palette.v2.primary.dark}`};
+        border: ${!p.disabled && `1px solid ${p.theme.colors.palette.primary.c140}`};
       }
     `};
 
-  ${p =>
+  ${(p) =>
     p.disabled &&
     css`
-      color: ${p.theme.colors.palette.v2.text.disabled};
-      background: ${p => p.theme.colors.palette.v2.background.grey};
+      color: ${p.theme.colors.palette.neutral.c60};
+      background: ${(p) => p.theme.colors.palette.neutral.c30};
     `};
 `;
 
@@ -59,20 +60,18 @@ const BaseInput = styled.input<Partial<CommonProps> & { focus?: boolean }>`
   height: 100%;
   width: 100%;
   border: 0;
-  caret-color: ${p =>
-    p.error
-      ? p.theme.colors.palette.v2.feedback.error
-      : p.theme.colors.palette.v2.primary.borderDark};
+  caret-color: ${(p) =>
+    p.error ? p.theme.colors.palette.error.c100 : p.theme.colors.palette.primary.c140};
   background: none;
   outline: none;
-  cursor: ${p => (p.disabled ? "not-allowed" : "text")};
+  cursor: ${(p) => (p.disabled ? "not-allowed" : "text")};
   flex-shrink: 1;
   padding-top: 14px;
   padding-bottom: 14px;
   padding-left: 20px;
   padding-right: 20px;
   &::placeholder {
-    color: ${p => p.theme.colors.palette.v2.text.tertiary};
+    color: ${(p) => p.theme.colors.palette.neutral.c70};
   }
 
   /* Hide type=number arrow for Chrome, Safari, Edge, Opera */
@@ -89,7 +88,7 @@ const BaseInput = styled.input<Partial<CommonProps> & { focus?: boolean }>`
 `;
 
 const InputErrorContainer = styled(Text).attrs(() => ({ type: "small3" }))`
-  color: ${p => p.theme.colors.palette.v2.feedback.error};
+  color: ${(p) => p.theme.colors.palette.error.c100};
   margin-left: 12px;
 `;
 

@@ -38,7 +38,7 @@ export const RenderSideExemple = (): JSX.Element => {
       </Button>
     </InputRenderLeftContainer>
   );
-  const renderRight = props => {
+  const renderRight = (props) => {
     return (
       <InputRenderRightContainer>
         <Button

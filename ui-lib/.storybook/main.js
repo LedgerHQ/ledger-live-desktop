@@ -12,6 +12,7 @@ module.exports = {
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "storybook-addon-pseudo-states",
+    // Fixme: This addon break the usage of useState in the stories https://github.com/chromaui/storybook-addon-pseudo-states/issues/3
+    // "storybook-addon-pseudo-states",
   ],
 };

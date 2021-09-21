@@ -31,7 +31,7 @@ export const QuantityInputDefault = ({
 }: InputProps & { max: number; min: number }): JSX.Element => {
   const [value, setValue] = React.useState("");
 
-  const onChange = e => {
+  const onChange = (e) => {
     let value = e.target.value;
     if (value) {
       value = parseInt(e.target.value);

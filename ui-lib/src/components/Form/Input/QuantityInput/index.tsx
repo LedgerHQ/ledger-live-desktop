@@ -5,8 +5,8 @@ import Text from "@ui/components/Text";
 import styled from "styled-components";
 
 const MaxButton = styled.button`
-  color: ${p => p.theme.colors.palette.v2.text.contrast};
-  background-color: ${p => p.theme.colors.palette.v2.text.default};
+  color: ${(p) => p.theme.colors.palette.neutral.c00};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c100};
   border-radius: 100px;
   border-width: 0;
   padding-left: 14px;
