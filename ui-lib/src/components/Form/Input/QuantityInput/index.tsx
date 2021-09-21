@@ -29,12 +29,12 @@ export default function QuantityInput({
       renderRight={
         <FlexBox alignItems={"center"} justifyContent={"center"} pr={"3px"} py={"3px"}>
           {price && (
-            <Text type={"body"} color={"palette.v2.text.secondary"} pr={"12px"}>
+            <Text type={"body"} color={"palette.neutral.c70"} pr={"12px"}>
               {price}
             </Text>
           )}
           <MaxButton onClick={onMaxClick}>
-            <Text type={"tiny"} color={"palette.v2.text.contrast"}>
+            <Text type={"tiny"} color={"palette.neutral.c00"}>
               Max
             </Text>
           </MaxButton>
