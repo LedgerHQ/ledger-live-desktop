@@ -32,6 +32,12 @@ const Button: ThemedComponent<{}> = styled(ButtonBase).attrs(() => ({
   height: unset;
 `;
 
+export const NoValuePlaceholder = () => (
+  <TextBase color="palette.text.shade40" mr={3} fontSize={4} fontWeight={600}>
+    {"-"}
+  </TextBase>
+);
+
 const SummaryValue = ({
   value,
   handleChange,
