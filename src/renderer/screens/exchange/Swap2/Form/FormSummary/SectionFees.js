@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { context } from "~/renderer/drawers/Provider";
 import SummaryLabel from "./SummaryLabel";
-import SummaryValue from "./SummaryValue";
+import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
 import SummarySection from "./SummarySection";
 import FeesDrawer from "../FeesDrawer";
 import sendAmountByFamily from "~/renderer/generated/SendAmountFields";
@@ -56,6 +56,7 @@ type Props = {
   updateTransaction: $PropertyType<SwapTransactionType, "updateTransaction">,
   setTransaction: $PropertyType<SwapTransactionType, "setTransaction">,
   provider: ?string,
+  hasRates: boolean,
 };
 const SectionFees = ({
   transaction,
@@ -66,6 +67,7 @@ const SectionFees = ({
   updateTransaction,
   setTransaction,
   provider,
+  hasRates,
 }: Props) => {
   const { t } = useTranslation();
   const { setDrawer } = React.useContext(context);
@@ -74,6 +76,7 @@ const SectionFees = ({
   const estimatedFees = status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
   const canEdit =
+    hasRates &&
     showSummaryValue &&
     transaction?.networkInfo &&
     account &&
@@ -145,9 +148,7 @@ const SectionFees = ({
       />
     </>
   ) : (
-    <Text color="palette.text.shade100" fontSize={4}>
-      {"-"}
-    </Text>
+    <NoValuePlaceholder />
   );
 
   return (

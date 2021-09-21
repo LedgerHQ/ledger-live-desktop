@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import SummaryLabel from "./SummaryLabel";
 import SectionInformative from "./SectionInformative";
-import SummaryValue from "./SummaryValue";
+import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
 import { useTranslation } from "react-i18next";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { getAccountName } from "@ledgerhq/live-common/lib/account";
@@ -46,7 +46,9 @@ const PlaceholderSection = () => {
   return (
     <SummarySection>
       <SummaryLabel label={t("swap2.form.details.label.target")} />
-      <SummaryValue />
+      <SummaryValue>
+        <NoValuePlaceholder />
+      </SummaryValue>
     </SummarySection>
   );
 };
@@ -56,8 +58,15 @@ type SectionTargetProps = {
   currency: $PropertyType<SwapSelectorStateType, "currency">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
   targetAccounts: $PropertyType<SwapTransactionType, "targetAccounts">,
+  hasRates: boolean,
 };
-const SectionTarget = ({ account, currency, setToAccount, targetAccounts }: SectionTargetProps) => {
+const SectionTarget = ({
+  account,
+  currency,
+  setToAccount,
+  targetAccounts,
+  hasRates,
+}: SectionTargetProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { setDrawer } = React.useContext(context);
@@ -84,7 +93,7 @@ const SectionTarget = ({ account, currency, setToAccount, targetAccounts }: Sect
     });
   const handleEditAccount = hideEdit ? null : showDrawer;
 
-  if (!currency) return <PlaceholderSection />;
+  if (!currency || !hasRates) return <PlaceholderSection />;
   if (!account)
     return (
       <SectionInformative
