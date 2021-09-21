@@ -2,7 +2,7 @@
 import React, { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import SummaryLabel from "./SummaryLabel";
-import SummaryValue from "./SummaryValue";
+import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
 import { useTranslation } from "react-i18next";
 import IconLock from "~/renderer/icons/Lock";
 import IconLockOpen from "~/renderer/icons/LockOpen";
@@ -16,7 +16,6 @@ import type {
 } from "../../utils/shared/useSwapTransaction";
 import Price from "~/renderer/components/Price";
 import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
-import Text from "~/renderer/components/Text";
 import Spinner from "~/renderer/components/Spinner";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import Box from "~/renderer/components/Box";
@@ -52,7 +51,7 @@ const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provi
 
   const summaryValue =
     ratesState.status === "loading" ? (
-      <Spinner size={17} color="palette.text.shade40" my="1px" />
+      <Spinner size={17} color="palette.text.shade40" my="1px" mr="10px" />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
@@ -77,9 +76,7 @@ const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provi
         />
       </SummaryValue>
     ) : (
-      <Text color="palette.text.shade100" fontSize={4}>
-        {"-"}
-      </Text>
+      <NoValuePlaceholder />
     );
 
   return (
