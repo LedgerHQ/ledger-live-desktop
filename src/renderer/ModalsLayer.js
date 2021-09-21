@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Transition } from "react-transition-group";
 import { connect } from "react-redux";
@@ -36,7 +36,7 @@ const ModalsLayer = ({ visibleModals }: *) => {
     ({ name, MODAL_SHOW_ONCE }) =>
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
-  useEffect(() => console.log({ visibleModals, filteredModals }), [filteredModals, visibleModals]);
+
   return (
     <Transition
       in={filteredModals.length > 0}
