@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
@@ -10,7 +10,6 @@ import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
-import Swap from "~/renderer/screens/exchange/swap";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
 import USBTroubleshooting from "~/renderer/screens/USBTroubleshooting";
 import Account from "~/renderer/screens/account";
@@ -49,7 +48,6 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
-import useEnv from "~/renderer/hooks/useEnv";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -107,8 +105,6 @@ const NightlyLayer = React.memo(NightlyLayerR);
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
-  const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP");
-  const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
   useUSBTroubleshooting();
 
@@ -199,7 +195,7 @@ export default function Default() {
                           path="/asset/:assetId+"
                           render={(props: any) => <Asset {...props} />}
                         />
-                        <Route path="/swap" render={props => <SwapComponent {...props} />} />
+                        <Route path="/swap" render={props => <Swap2 {...props} />} />
                         <Route
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
