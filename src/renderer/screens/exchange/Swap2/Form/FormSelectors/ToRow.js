@@ -91,7 +91,7 @@ function ToRow({
         </FormLabel>
       </Box>
       <Box horizontal>
-        <Box width="50%">
+        <Box flex="1">
           <SelectCurrency
             currencies={currencies}
             onChange={setCurrencyAndTrack}
@@ -102,7 +102,7 @@ function ToRow({
             onMenuOpen={trackEditCurrency}
           />
         </Box>
-        <InputCurrencyContainer width="50%">
+        <InputCurrencyContainer flex="1">
           <InputCurrency
             // @DEV: onChange props is required by the composant, there is no read-only logic
             onChange={() => {}}
@@ -117,7 +117,8 @@ function ToRow({
             loading={loadingRates}
             renderRight={
               toCurrency &&
-              toAmount && (
+              toAmount &&
+              !loadingRates && (
                 <CounterValue
                   currency={toCurrency}
                   value={toAmount}

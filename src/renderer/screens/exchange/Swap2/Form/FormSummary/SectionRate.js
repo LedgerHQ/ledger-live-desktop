@@ -16,7 +16,6 @@ import type {
 } from "../../utils/shared/useSwapTransaction";
 import Price from "~/renderer/components/Price";
 import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
-import Spinner from "~/renderer/components/Spinner";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
 import Box from "~/renderer/components/Box";
 import AnimatedCountdown from "~/renderer/components/AnimatedCountdown";
@@ -51,7 +50,7 @@ const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provi
 
   const summaryValue =
     ratesState.status === "loading" ? (
-      <Spinner size={17} color="palette.text.shade40" my="1px" mr="10px" />
+      <NoValuePlaceholder />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
         {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (

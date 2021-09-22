@@ -73,15 +73,16 @@ const SectionFees = ({
   const { setDrawer } = React.useContext(context);
   const exchangeRate = useSelector(rateSelector);
   const fromAccountUnit = account && getAccountUnit(account);
-  const mainFromAccount = getMainAccount(account, parentAccount);
+  const mainFromAccount = account && getMainAccount(account, parentAccount);
   const estimatedFees = status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
-  const family = mainFromAccount.currency.family;
+  const family = mainFromAccount?.currency.family;
   const canEdit =
     hasRates &&
     showSummaryValue &&
     transaction?.networkInfo &&
     account &&
+    family &&
     sendAmountByFamily[family];
 
   const StrategyIcon = useMemo(() => FEES_STRATEGY_ICONS[transaction?.feesStrategy], [
