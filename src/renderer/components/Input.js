@@ -5,11 +5,10 @@ import styled from "styled-components";
 import { fontSize, textAlign, fontWeight, color } from "styled-system";
 import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
-import Spinner from "~/renderer/components/Spinner";
 import Box from "~/renderer/components/Box";
 import TranslatedError from "~/renderer/components/TranslatedError";
-import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const RenderLeftWrapper: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -105,19 +104,17 @@ const WarningDisplay = styled(Box)`
 
 const LoadingDisplay = styled(Box)`
   position: absolute;
-  background: ${p => p.theme.colors.palette.text.shade10};
-  left: 0px;
+  right: 0px;
   top: 0px;
   bottom: 0px;
   width: 100%;
   pointer-events: none;
   flex-direction: row;
   align-items: center;
-  padding: 0 15px;
+  display: flex;
+  justify-content: flex-end;
   border-radius: 4px;
-  > :first-child {
-    margin-right: 10px;
-  }
+  padding-right: 10px;
 `;
 
 export const BaseContainer: ThemedComponent<{}> = styled(Box)``;
@@ -172,6 +169,7 @@ type Props = {
   disabled?: boolean,
   hideErrorMessage?: boolean,
   value?: string,
+  placeholder?: string,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -264,6 +262,7 @@ const Input = React.forwardRef(function Input(
       <BaseContainer px={3} grow shrink>
         <Base
           {...props}
+          placeholder={loading ? "" : props.placeholder}
           value={loading ? "" : value}
           small={small}
           disabled={disabled}
@@ -289,10 +288,7 @@ const Input = React.forwardRef(function Input(
         </ErrorContainer>
         {loading && !isFocus ? (
           <LoadingDisplay>
-            <Spinner size={16} color="palette.text.shade50" />
-            <Text ff="Inter" color="palette.text.shade50" fontSize={4}>
-              {"Loading"}
-            </Text>
+            <BigSpinner size={16} />
           </LoadingDisplay>
         ) : null}
       </BaseContainer>
