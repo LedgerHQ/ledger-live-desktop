@@ -68,7 +68,7 @@
     "launch": "Ejecutar",
     "continue": "Continuar",
     "previous": "Anterior",
-    "learnMore": "Conoce más",
+    "learnMore": "Más información",
     "help": "Ayuda",
     "needHelp": "¿Necesitas ayuda?",
     "areYouSure": "¿Deseas continuar?",
@@ -326,13 +326,13 @@
           "cta": "Continuar",
           "title": "Aprobación pendiente",
           "subtitle": "Tu información fue enviada para su aprobación por Wyre.",
-          "link": "Conocer más sobre KYC"
+          "link": "Más información sobre KYC"
         },
         "closed": {
           "cta": "Restablecer KYC",
           "title": "Aplicación KYC rechazada",
           "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
-          "link": "Conocer más sobre KYC"
+          "link": "Más información sobre KYC"
         },
         "form": {
           "firstName": "Nombre",
@@ -993,9 +993,9 @@
       "cta": "Comprar ahora"
     },
     "backupPack": {
-      "title": "Paquete de copia de respaldo",
+      "title": "Back-up pack",
       "description": "Administra tus activos de forma segura con un Nano X y Nano S a un precio con descuentos",
-      "cta": "Compra un paquete de copia de respaldo"
+      "cta": "Compra un Back-up pack"
     },
     "polkaStake": {
       "title": "Participación con POLKADOT",
@@ -1099,7 +1099,7 @@
     "title": "Tokens",
     "cta": "Agregar token",
     "placeholder": "Para añadir tokens, simplemente envíalos a tu dirección de {{currencyName}}.",
-    "link": "Conoce más",
+    "link": "Más información",
     "seeTokens": "Mostrar tokens ({{tokenCount}})",
     "hideTokens": "Ocultar tokens ({{tokenCount}})",
     "countTooltip": "1 token",
@@ -1366,7 +1366,7 @@
         "addAccount": "Agregar cuenta",
         "addAccountTooltip": "Agregar cuenta {{appName}}",
         "addAccountWarn": "Espera a que finalicen las actualizaciones de aplicaciones",
-        "learnMore": "Conoce más",
+        "learnMore": "Más información",
         "learnMoreTooltip": "Aprende más sobre {{appName}}",
         "removeTooltip": "Desinstalar {{appName}}",
         "useAppForToken": "¿Buscas administrar tokens {{tokenType}}?",
@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados.",
-          "description": "Permuta tus criptomonedas con ParaSwap, que incorpora y ofrece las mejores cotizaciones de exchanges descentralizados."
-        },
-        "wyre_buy": {
-          "shortDescription": "Compra Bitcoin, Ethereum y más criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos.",
-          "description": "Compra Bitcoin, Ethereum y otras criptomonedas con Wyre, sólo disponible para nuestros clientes de los Estados Unidos."
-        },
-        "lido": {
-          "shortDescription": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias.",
-          "description": "Participa con tus ETH mediante Lido para ganar recompensas de participación diarias."
-        },
-        "zerion": {
-          "shortDescription": "La forma inteligente de administrar tu portfolio DeFi.",
-          "description": "La forma inteligente de administrar tu portfolio DeFi."
-        },
-        "rainbow": {
-          "description": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware.",
-          "shortDescription": "Una forma fácil de visualizar los NFT protegidos por tu billetera de hardware."
-        },
-        "aave": {
-          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos.",
-          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de mercado de liquidez y conserva el control de tus fondos."
-        },
-        "compound": {
-          "shortDescription": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado.",
-          "description": "Presta o toma prestadas criptomonedas a través de un protocolo de código abierto y completamente descentralizado."
-        },
-        "deversifi": {
-          "shortDescription": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2.",
-          "description": "Opera mediante un exchange descentralizado con custodia propia sobre Ethereum layer-2."
-        },
-        "1inch": {
-          "shortDescription": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum.",
-          "description": "Intercambia criptomonedas a través de un agregador Defi/DEX sobre Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "Es necesaria la aplicación {{dependency}}",
         "description": "También se instalará la aplicación {{dependency}} ya que la aplicación {{app}} la necesita.",
@@ -2193,7 +2155,7 @@
           "availableLabel": "Disponible",
           "maxLabel": "Máx.",
           "info": "Es posible desvincular los activos vinculados en cualquier momento, pero la desvinculación tarda 28 días.",
-          "learnMore": "Saber más"
+          "learnMore": "Más información"
         },
         "connectDevice": {
           "title": "Dispositivo"
@@ -2227,7 +2189,7 @@
           "availableLabel": "En desvinculación",
           "maxLabel": "Máx.",
           "info": "Los activos vinculados de nuevo se agregan de inmediato al importe vinculado.",
-          "learnMore": "Saber más"
+          "learnMore": "Más información"
         },
         "connectDevice": {
           "title": "Dispositivo"
@@ -2256,7 +2218,7 @@
           "availableLabel": "Vinculado",
           "maxLabel": "Máx.",
           "info": "Los activos desvinculados se pueden retirar después de un período de desvinculación de 28 días.",
-          "learnMore": "Saber más"
+          "learnMore": "Más información"
         },
         "connectDevice": {
           "title": "Dispositivo"
@@ -2683,6 +2645,10 @@
       "announcement": "Noticias",
       "operation": "Operación",
       "achievement": "Logro desbloqueado"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -2702,7 +2668,7 @@
       },
       "statusNotOk": {
         "title": "Ledger Live está experimentando problemas",
-        "learnMore": "Conoce más"
+        "learnMore": "Más información"
       }
     },
     "announcement": {
@@ -3301,10 +3267,11 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Términos del servicio",
-    "privacyLabel": "Política de Privacidad",
-    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Debes seleccionar al menos un validador"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

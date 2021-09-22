@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import Text from "@ui/components/Text";
 import Flex from "@ui/components/Layout/Flex";
@@ -11,7 +11,7 @@ const Wrapper = styled(Flex)<{ image?: string }>`
   padding: 32px 24px;
   padding-right: 280px;
   z-index: ${(p) => p.theme.zIndexes[8]};
-  background: url(${(p) => p.image}) no-repeat ${(p) => p.theme.colors.palette.v2.text.default};
+  background: url(${(p) => p.image}) no-repeat ${(p) => p.theme.colors.palette.neutral.c100};
   background-size: contain;
   background-position: right 60px bottom;
 `;
@@ -26,10 +26,10 @@ type Props = {
 const Slide = ({ title, description, image, onClick }: Props): React.ReactElement => {
   return (
     <Wrapper key={"key"} image={image} onClick={onClick}>
-      <Text color="palette.v2.background.default" ff="Inter|Regular" fontSize={10}>
+      <Text color="palette.neutral.c00" ff="Inter|Regular" fontSize={10}>
         {title}
       </Text>
-      <Text color="palette.v2.background.default" ff="Alpha|Medium" textTransform="uppercase" fontSize={20}>
+      <Text color="palette.neutral.c00" ff="Alpha|Medium" textTransform="uppercase" fontSize={20}>
         {description}
       </Text>
     </Wrapper>

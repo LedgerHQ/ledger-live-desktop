@@ -10,8 +10,8 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: ${p => p.theme.colors.palette.v2.background.default};
-  padding: ${p => p.theme.space[3]}px;
+  background-color: ${(p) => p.theme.colors.palette.neutral.c00};
+  padding: ${(p) => p.theme.space[3]}px;
 `;
 
 interface WrapperProps {
@@ -26,17 +26,17 @@ type ModalProps = WrapperProps & {
 };
 
 const Wrapper = styled.div<WrapperProps>`
-  height: ${p => p.height || p.theme.sizes.modal.min.height}px;
-  width: ${p => p.width || p.theme.sizes.modal.min.width}px;
-  min-height: ${p => p.theme.sizes.modal.min.height}px;
-  min-width: ${p => p.theme.sizes.modal.min.width}px;
-  max-height: ${p => p.theme.sizes.modal.max.height}px;
-  max-width: ${p => p.theme.sizes.modal.max.width}px;
+  height: ${(p) => p.height || p.theme.sizes.modal.min.height}px;
+  width: ${(p) => p.width || p.theme.sizes.modal.min.width}px;
+  min-height: ${(p) => p.theme.sizes.modal.min.height}px;
+  min-width: ${(p) => p.theme.sizes.modal.min.width}px;
+  max-height: ${(p) => p.theme.sizes.modal.max.height}px;
+  max-width: ${(p) => p.theme.sizes.modal.max.width}px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  z-index: ${p => p.theme.zIndexes[8]};
+  z-index: ${(p) => p.theme.zIndexes[8]};
 `;
 const Overlay = styled.div`
   position: fixed;
@@ -48,12 +48,12 @@ const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 999;
-  background-color: ${p => p.theme.colors.palette.v2.background.overlay};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c100a07};
 `;
 const CloseButton = styled(Button)`
   position: absolute;
-  top: ${p => p.theme.space[3]}px;
-  right: ${p => p.theme.space[3]}px;
+  top: ${(p) => p.theme.space[3]}px;
+  right: ${(p) => p.theme.space[3]}px;
 `;
 
 const Modal = ({ isOpen, children, width, height, onClose = () => {} }: ModalProps) => (

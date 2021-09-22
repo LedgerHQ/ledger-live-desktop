@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+// @ts-expect-error FIXME
 import InfiniteLoaderImage from "@ui/assets/images/infiniteLoader.png";
 
 const rotate = keyframes`

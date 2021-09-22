@@ -584,15 +584,63 @@ const mockedIncidents: Incident[] = [
     shortlink: "https://status.ledger.com/",
     status: "ongoing",
     updated_at: "2021-02-22T17:58:18.792+02:00",
+    components: [{ name: "Bitcoin - Btc" }],
+  },
+  {
+    created_at: "2021-02-22T17:58:18.792+02:00",
+    id: "incident-b",
+    impact: "critical",
+    incident_updates: [
+      {
+        body: "An incident occured",
+        created_at: "2021-02-22T17:58:18.792+02:00",
+        display_at: "2021-02-22T17:58:18.792+02:00",
+        id: "incident-a-body",
+        incident_id: "incident-a",
+        status: "ongoing",
+        updated_at: "2021-02-22T17:58:18.792+02:00",
+      },
+    ],
+    monitoring_at: "2021-02-22T17:58:18.792+02:00",
+    name: "Generic status error",
+    page_id: null,
+    resolved_at: null,
+    shortlink: "https://status.ledger.com/",
+    status: "ongoing",
+    updated_at: "2021-02-22T17:58:18.792+02:00",
+  },
+  {
+    created_at: "2021-02-22T17:58:18.792+02:00",
+    id: "incident-c",
+    impact: "critical",
+    incident_updates: [
+      {
+        body: "An incident occured",
+        created_at: "2021-02-22T17:58:18.792+02:00",
+        display_at: "2021-02-22T17:58:18.792+02:00",
+        id: "incident-a-body",
+        incident_id: "incident-a",
+        status: "ongoing",
+        updated_at: "2021-02-22T17:58:18.792+02:00",
+      },
+    ],
+    monitoring_at: "2021-02-22T17:58:18.792+02:00",
+    name: "Ehereum network down",
+    page_id: null,
+    resolved_at: null,
+    shortlink: "https://status.ledger.com/",
+    status: "ongoing",
+    updated_at: "2021-02-22T17:58:18.792+02:00",
+    components: [{ name: "Ethereum - Eth" }],
   },
 ];
 
 export function toggleMockIncident(bool: boolean = true) {
-  statuses.incidents = bool ? mockedIncidents : [];
+  statuses.incidents = statuses.incidents.length > 0 ? [] : mockedIncidents;
 }
 
 export function resetIncidents() {
-  toggleMockIncident(false);
+  statuses.incidents = [];
 }
 
 async function fetchStatusSummary(): Promise<ServiceStatusSummary> {

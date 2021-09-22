@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Tauschen Sie Ihre Kryptowährungen mit ParaSwap, das die besten Kurse an dezentralen Börsen aggregiert und bereitstellt.",
-          "description": "Tauschen Sie Ihre Kryptowährungen mit ParaSwap, das die besten Kurse an dezentralen Börsen aggregiert und bereitstellt."
-        },
-        "wyre_buy": {
-          "shortDescription": "Kaufen Sie Bitcoin, Ethereum und weitere Kryptowährungen mit Wyre, nur verfügbar für unsere US-Kunden.",
-          "description": "Kaufen Sie Bitcoin, Ethereum und weitere Kryptowährungen mit Wyre, nur verfügbar für unsere US-Kunden."
-        },
-        "lido": {
-          "shortDescription": "Setzen Sie Ihre ETH bei Lido ein, um tägliche Staking-Rewards zu erhalten.",
-          "description": "Setzen Sie Ihre ETH bei Lido ein, um tägliche Staking-Rewards zu erhalten."
-        },
-        "zerion": {
-          "shortDescription": "Die intelligente Art, Ihr DeFi-Portfolio zu verwalten.",
-          "description": "Die intelligente Art, Ihr DeFi-Portfolio zu verwalten."
-        },
-        "rainbow": {
-          "description": "Eine einfache Möglichkeit, die durch Ihre Hardware-Wallet gesicherte NFT zu visualisieren.",
-          "shortDescription": "Eine einfache Möglichkeit, die durch Ihre Hardware-Wallet gesicherte NFT zu visualisieren."
-        },
-        "aave": {
-          "description": "Verleihen oder leihen Sie Ihre Kryptowährung über ein Liquiditätsmarktprotokoll und behalten Sie die Kontrolle über Ihr Geld.",
-          "shortDescription": "Verleihen oder leihen Sie Ihre Kryptowährung über ein Liquiditätsmarktprotokoll und behalten Sie die Kontrolle über Ihr Geld."
-        },
-        "compound": {
-          "shortDescription": "Verleihen oder leihen Sie Ihre Kryptos über ein komplett dezentralisiertes Open-Source-Protokoll.",
-          "description": "Verleihen oder leihen Sie Ihre Kryptos über ein komplett dezentralisiertes Open-Source-Protokoll."
-        },
-        "deversifi": {
-          "shortDescription": "Handeln Sie über eine selbstverwaltete dezentralisierte Börse auf Ethereum Layer-2.",
-          "description": "Handeln Sie über eine selbstverwaltete dezentralisierte Börse auf Ethereum Layer-2."
-        },
-        "1inch": {
-          "shortDescription": "Tauschen Sie Krypto über einen Defi/DEX-Aggregator auf Ethereum.",
-          "description": "Tauschen Sie Krypto über einen Defi/DEX-Aggregator auf Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "{{dependency}} App ist erforderlich",
         "description": "Die App {{dependency}} wird ebenfalls installiert, da die App {{app}} sie benötigt.",
@@ -2683,6 +2645,10 @@
       "announcement": "Neuigkeiten",
       "operation": "Vorgang",
       "achievement": "Erfolge entsperrt"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -3301,10 +3267,11 @@
     "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
-    "title": "Rechtliches",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
     "termsLabel": "Allgemeine Geschäftsbedingungen",
-    "privacyLabel": "Datenschutzrichtlinie",
-    "switchLabel": "Ich habe die Nutzungsbedingungen und Datenschutzrichtlinien gelesen und akzeptiere sie",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "Zur Ledger-App"
   },
   "families": {
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Sie müssen mindestens einen Validator auswählen"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

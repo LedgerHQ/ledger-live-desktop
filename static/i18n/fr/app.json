@@ -234,9 +234,9 @@
           "target": "Compte destinataire"
         },
         "tooltip": {
-          "provider": "lorem ipsum",
-          "rate": "lorem ipsum",
-          "fees": "lorem ipsum"
+          "provider": "Prestataire",
+          "rate": "Taux",
+          "fees": "Frais"
         },
         "noAccount": "Pas de compte {{target}}",
         "noAccountCTA": "Ajouter un compte"
@@ -1382,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés.",
-          "description": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés."
-        },
-        "wyre_buy": {
-          "shortDescription": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis.",
-          "description": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis."
-        },
-        "lido": {
-          "shortDescription": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes.",
-          "description": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes."
-        },
-        "zerion": {
-          "shortDescription": "Optimisez la gestion de votre portefeuille DeFi.",
-          "description": "Optimisez la gestion de votre portefeuille DeFi."
-        },
-        "rainbow": {
-          "description": "Admirez et mettez en valeur les NFT sécurisés par votre wallet.",
-          "shortDescription": "Admirez et mettez en valeur les NFT sécurisés par votre wallet."
-        },
-        "aave": {
-          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds.",
-          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds."
-        },
-        "compound": {
-          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source.",
-          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source."
-        },
-        "deversifi": {
-          "shortDescription": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds.",
-          "description": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds."
-        },
-        "1inch": {
-          "shortDescription": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum.",
-          "description": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "Application {{dependency}} requise",
         "description": "L'application {{dependency}} sera également installée car elle est requise pour l'application {{app}}.",
@@ -2683,6 +2645,10 @@
       "announcement": "Actualités",
       "operation": "Opération",
       "achievement": "Succès"
+    },
+    "groupedToast": {
+      "text": "Vous avez {{count}} notifications non lues.",
+      "cta": "Voir les détails"
     }
   },
   "informationCenter": {
@@ -3301,7 +3267,8 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Légal",
+    "title": "Conditions d'utilisation",
+    "description": "Veuillez prendre connaissance de nos Conditions d'utilisation et Politique de confidentialité.",
     "termsLabel": "Conditions d'utilisation",
     "privacyLabel": "Politique de confidentialité",
     "switchLabel": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
@@ -3889,6 +3856,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Sélectionnez au moins un validateur."
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

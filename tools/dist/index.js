@@ -85,13 +85,22 @@ const buildTasks = args => [
         commands.push("electron-builder-ci.yml");
       }
 
+      const nightlyEnv = args.nightly
+        ? {
+            NIGHTLY: 1,
+          }
+        : {};
+
       await exec("yarn", commands, {
         env: args.publish
           ? {
               SENTRY_URL:
                 "https://db8f5b9b021048d4a401f045371701cb@o118392.ingest.sentry.io/274561",
+              ...nightlyEnv,
             }
-          : {},
+          : {
+              ...nightlyEnv,
+            },
       });
     },
   },
@@ -121,7 +130,13 @@ const draftTasks = args => {
     {
       title: "Create draft on GitHub",
       skip: ctx => (ctx.draftExists ? "Draft already exists." : false),
-      task: () => draft.create(),
+      task: () => {
+        let body = "";
+        if (args.nightly) {
+          body = process.env.RELEASE_BODY;
+        }
+        draft.create(body);
+      },
     },
   ];
 };

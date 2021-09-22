@@ -26,8 +26,9 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   grow: 0,
   alignItems: "center",
 }))`
-  padding: 16px 16px 16px 24px;
+  padding: 10px 16px;
   background-color: ${p => p.theme.colors.palette.background.paper};
+  border-bottom: 1px solid ${p => p.theme.colors.palette.text.shade10};
 `;
 
 const TitleContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -93,7 +94,10 @@ const ItemContainer: ThemedComponent<{
 
 const ItemContent: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",
-}))``;
+}))`
+  font-size: 14px;
+  line-height: 20px;
+`;
 
 export const Separator: ThemedComponent<*> = styled.div`
   margin-right: 16px;
@@ -124,7 +128,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
   return (
     <Container>
       <TitleContainer>
-        <LiveAppIcon name={name} icon={icon || undefined} size={24} />
+        <LiveAppIcon name={name} icon={icon || undefined} size={20} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />
