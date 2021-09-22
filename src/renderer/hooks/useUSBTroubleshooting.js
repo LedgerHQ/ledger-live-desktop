@@ -15,7 +15,6 @@ function useUSBTroubleshooting() {
 
   useEffect(() => {
     if (!lastLocation) lastLocation.current = location.pathname;
-    console.log("wadus", USBTroubleshootingIndex, location.pathname, lastLocation);
     if (
       USBTroubleshootingIndex !== undefined &&
       USBTroubleshootingIndex !== null &&
