@@ -2,7 +2,7 @@
 import React, { useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { context } from "~/renderer/drawers/Provider";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
@@ -73,14 +73,16 @@ const SectionFees = ({
   const { setDrawer } = React.useContext(context);
   const exchangeRate = useSelector(rateSelector);
   const fromAccountUnit = account && getAccountUnit(account);
+  const mainFromAccount = getMainAccount(account, parentAccount);
   const estimatedFees = status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
+  const family = mainFromAccount.currency.family;
   const canEdit =
     hasRates &&
     showSummaryValue &&
     transaction?.networkInfo &&
     account &&
-    sendAmountByFamily[account.currency?.family];
+    sendAmountByFamily[family];
 
   const StrategyIcon = useMemo(() => FEES_STRATEGY_ICONS[transaction?.feesStrategy], [
     transaction?.feesStrategy,
