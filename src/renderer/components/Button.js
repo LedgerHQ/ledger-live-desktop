@@ -349,8 +349,6 @@ class Button extends PureComponent<
     const { isFocused } = this.state;
     const { disabled } = this.props;
     const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props;
-
-    console.log(this.props);
     const isClickDisabled = disabled || isLoading;
     const onClickHandler = e => {
       if (onClick) {
