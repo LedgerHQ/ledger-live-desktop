@@ -8,10 +8,7 @@ import type {
   TokenCurrency,
 } from "@ledgerhq/live-common/lib/types/currencies";
 import { findCryptoCurrencyById, findTokenById } from "@ledgerhq/cryptoassets";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import type { UseCurrencyAccountSelectReturnType } from "~/renderer/components/PerCurrencySelectAccount/state";
-import { useSelector } from "react-redux";
 import type { Account, TokenAccount, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { KYC_STATUS } from "./index";
 
@@ -91,53 +88,13 @@ export type useSelectableCurrenciesReturnType = RestCurrencyAccountSelectReturnT
   AccountParentAccountType & { currencies: Array<CryptoCurrency | TokenCurrency> };
 
 export const useSelectableCurrencies = ({ allCurrencies }: { allCurrencies: Array<string> }) => {
-  const allAccounts = useSelector(shallowAccountsSelector);
-
   const currencies: $PropertyType<useSelectableCurrenciesReturnType, "currencies"> = useMemo(() => {
     const tokens = allCurrencies.map(findTokenById).filter(Boolean);
     const cryptoCurrencies = allCurrencies.map(findCryptoCurrencyById).filter(Boolean);
     return [...tokens, ...cryptoCurrencies];
   }, [allCurrencies]);
 
-  const {
-    subAccount,
-    account: receivedAccount,
-    ...currencyAccountSelect
-  } = useCurrencyAccountSelect({
-    allCurrencies: currencies,
-    allAccounts: allAccounts,
-    defaultCurrency: null,
-    defaultAccount: null,
-  });
-
-  /*
-   ** Related to the comments above. I have to cast account/parentAccount data
-   ** to shape them to the new account/parentAccount convention.
-   ** TODO: Remove these lines as soon as useCurrencyAccountSelect is reworked
-   */
-  const { account, parentAccount }: AccountParentAccountType = subAccount
-    ? { account: (subAccount: any), parentAccount: receivedAccount }
-    : { account: (receivedAccount: any), parentAccount: null };
-
-  return { ...currencyAccountSelect, currencies, account, parentAccount };
-};
-
-export const usePickExchangeRate = ({ exchangeRates, exchangeRate, setExchangeRate }: *) => {
-  useEffect(() => {
-    const hasRates = exchangeRates && exchangeRates.length > 0;
-    // If a the user picked an exchange rate before, try to select the new one that matches.
-    // Otherwise pick the first one.
-    const rate =
-      hasRates &&
-      ((exchangeRate &&
-        exchangeRates.find(
-          ({ tradeMethod, provider }) =>
-            tradeMethod === exchangeRate.tradeMethod && provider === exchangeRate.provider,
-        )) ||
-        exchangeRates[0]);
-    setExchangeRate(rate || null);
-    // eslint-disable-next-line
-  }, [exchangeRates]);
+  return currencies;
 };
 
 // Poll the server to update the KYC status of a given provider.
@@ -207,7 +164,9 @@ export const usePickDefaultCurrency = (
   setCurrency: Currency => void,
 ) => {
   useEffect(() => {
-    if (!currency) {
+    // Keep the same currency target if it is still valid.
+    const isCurrencyValid = currencies.indexOf(currency) >= 0;
+    if (!currency || !isCurrencyValid) {
       const defaultCurrency = currencies.find(
         currency => currency.id === "ethereum" || currency.id === "bitcoin",
       );

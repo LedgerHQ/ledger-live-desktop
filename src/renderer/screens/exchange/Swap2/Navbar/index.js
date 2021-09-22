@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import TabBar from "~/renderer/components/TabBar";
 import { useTranslation } from "react-i18next";
-import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import swapRoutes from "./routes.json";
@@ -31,21 +30,18 @@ const Navbar = () => {
 
   const tabs = useMemo(
     () => swapRoutes.filter(route => !route.disabled).map(route => t(route.title)),
-    [],
+    [t],
   );
 
   const onWrappedTabChange = nextIndex => {
     if (currentIndex === nextIndex) return;
-
     const nextPathname = swapRoutes[nextIndex].path;
-    setTrackingSource("swap/navbar");
     history.push({ pathname: nextPathname });
   };
 
   return (
     currentIndex >= 0 && (
       <Nav>
-        <TrackPage category="swap" name={swapRoutes[currentIndex].name} />
         <TabBar tabs={tabs} onIndexChange={onWrappedTabChange} index={currentIndex} />
       </Nav>
     )

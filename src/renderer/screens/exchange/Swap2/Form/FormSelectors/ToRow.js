@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
@@ -17,19 +17,23 @@ import type {
   SwapSelectorStateType,
   SwapTransactionType,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import {
   Container as InputContainer,
   BaseContainer as BaseInputContainer,
 } from "~/renderer/components/Input";
 import styled from "styled-components";
 import CounterValue from "~/renderer/components/CounterValue";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION } from "../../utils/index";
 
 type Props = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toAccount: $PropertyType<SwapSelectorStateType, "account">,
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToCurrency">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  provider: ?string,
   loadingRates: boolean,
 };
 
@@ -47,55 +51,37 @@ const InputCurrencyContainer = styled(Box)`
   }
 `;
 
-export default function ToRow({
+function ToRow({
   toCurrency,
   setToAccount,
+  setToCurrency,
   toAmount,
   fromAccount,
+  provider,
+  toAccount,
   loadingRates,
 }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
-  const selectState = useSelectableCurrencies({ allCurrencies });
-  const unit = selectState.account ? getAccountUnit(selectState.account) : null;
-  const accounts = useSelector(shallowAccountsSelector);
+  const currencies = useSelectableCurrencies({ allCurrencies });
+  const unit = toAccount ? getAccountUnit(toAccount) : null;
 
-  /* @dev: save picked account */
-  useEffect(() => {
-    const { currency, account, parentAccount } = selectState;
+  usePickDefaultCurrency(currencies, toCurrency, setToCurrency);
 
-    if (currency === null || currency === undefined) return;
-    if (currency.id === toCurrency?.id) return;
-
-    setToAccount(currency, account, parentAccount);
-  }, [selectState.currency]);
-
-  /* Force refresh or reset internal state on account change */
-  const previousFromAccountRef = useRef(fromAccount);
-  useEffect(() => {
-    const previousFromAccount = previousFromAccountRef.current;
-    if (previousFromAccount === fromAccount) return;
-    const isCurrencyValid = selectState.currencies.indexOf(selectState.currency) >= 0;
-    selectState.setCurrency(isCurrencyValid ? selectState.currency : null);
-    return () => {
-      previousFromAccountRef.current = fromAccount;
-    };
-  }, [fromAccount, selectState.currencies, selectState.currency]);
-
-  /* @dev: update internal state with new currency prop received */
-  useEffect(() => {
-    if (toCurrency && toCurrency?.id === selectState.currency?.id) return;
-
-    selectState.setCurrency(toCurrency);
-  }, [toCurrency]);
-
-  /* REFRESH picked currency information (account/parentAccount)
-   when an account is added or removed by the user */
-  useEffect(() => {
-    if (selectState.currency) selectState.setCurrency(selectState.currency);
-  }, [accounts]);
-
-  usePickDefaultCurrency(selectState.currencies, selectState.currency, selectState.setCurrency);
+  const trackEditCurrency = () =>
+    track("Page Swap Form - Edit Target Currency", {
+      targetcurrency: toCurrency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+  const setCurrencyAndTrack = currency => {
+    track("Page Swap Form - New Target Currency", {
+      targetcurrency: currency,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+    setToCurrency(currency);
+  };
 
   return (
     <>
@@ -107,12 +93,13 @@ export default function ToRow({
       <Box horizontal>
         <Box width="50%">
           <SelectCurrency
-            currencies={selectState.currencies}
-            onChange={selectState.setCurrency}
-            value={selectState.currency}
+            currencies={currencies}
+            onChange={setCurrencyAndTrack}
+            value={toCurrency}
             stylesMap={selectRowStylesMap}
             isDisabled={!fromAccount}
             renderValueOverride={renderCurrencyValue}
+            onMenuOpen={trackEditCurrency}
           />
         </Box>
         <InputCurrencyContainer width="50%">
@@ -149,3 +136,4 @@ export default function ToRow({
     </>
   );
 }
+export default React.memo<Props>(ToRow);
