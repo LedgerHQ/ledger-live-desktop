@@ -33,7 +33,7 @@ const Button: ThemedComponent<{}> = styled(ButtonBase).attrs(() => ({
 `;
 
 export const NoValuePlaceholder = () => (
-  <TextBase color="palette.text.shade40" mr={3} fontSize={4} fontWeight={600}>
+  <TextBase color="palette.text.shade40" mr={3} fontSize={4} fontWeight="600">
     {"-"}
   </TextBase>
 );
