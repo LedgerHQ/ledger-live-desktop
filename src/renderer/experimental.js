@@ -78,12 +78,6 @@ export const experimentalFeatures: Feature[] = [
     title: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.title" />,
     description: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.description" />,
   },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_SWAP",
-    title: "New SWAP interface ",
-    description: "Use the new experimental swap interface",
-  },
   ...(deltaExperimentalExplorers.length
     ? [
         {
