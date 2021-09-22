@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
+import FakeLink from "~/renderer/components/FakeLink";
 import IconCross from "~/renderer/icons/Cross";
 import { TimeBasedProgressBar } from "./TimeBasedProgressBar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -67,19 +68,23 @@ const icons = {
 export function Toast({
   duration,
   onDismiss,
+  dismissable = true,
   callback,
   type,
   title,
+  cta,
   text,
   icon,
   id,
 }: {
   duration?: number,
   onDismiss: (id: string) => void,
+  dismissable?: boolean,
   callback: any,
-  type: string,
+  type?: string,
   title: string,
-  text: string,
+  cta?: string,
+  text?: string,
   icon: string,
   id: string,
 }) {
@@ -127,38 +132,49 @@ export function Toast({
           <Icon size={19} />
         </IconContainer>
         <TextContainer>
-          <Text
-            ff="Inter|Bold"
-            fontSize="8px"
-            lineHeight="9.68px"
-            uppercase
-            letterSpacing="0.2em"
-            style={{ opacity: 0.4 }}
-          >
-            {t(`toastOverlay.toastType.${type}`)}
-          </Text>
-          <Text mt="2px" ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
-            {title}
-          </Text>
-          <Text
-            mt="10px"
-            ff="Inter|Regular"
-            fontSize="13px"
-            lineHeight="18px"
-            style={{
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-              opacity: 0.5,
-            }}
-          >
-            {text}
-          </Text>
+          {type ? (
+            <Text
+              ff="Inter|Bold"
+              fontSize="8px"
+              lineHeight="9.68px"
+              uppercase
+              letterSpacing="0.2em"
+              style={{ opacity: 0.4 }}
+            >
+              {t(`toastOverlay.toastType.${type}`)}
+            </Text>
+          ) : null}
+          <Box horizontal mt="2px" justifyContent="space-between" alignItems="center">
+            <Text ff="Inter|SemiBold" fontSize="14px" lineHeight="19px">
+              {title}
+            </Text>
+            {cta ? (
+              <FakeLink onClick={callback} ff="Inter|Regular" fontSize="13px" lineHeight="18px">
+                {cta}
+              </FakeLink>
+            ) : null}
+          </Box>
+          {text ? (
+            <Text
+              mt="10px"
+              ff="Inter|Regular"
+              fontSize="13px"
+              lineHeight="18px"
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                opacity: 0.5,
+              }}
+            >
+              {text}
+            </Text>
+          ) : null}
         </TextContainer>
       </Content>
       {duration ? (
         <TimeBasedProgressBar duration={duration} />
-      ) : (
+      ) : dismissable ? (
         <DismissWrapper
           onClick={event => {
             onDismiss(id);
@@ -167,7 +183,7 @@ export function Toast({
         >
           <IconCross size={12} />
         </DismissWrapper>
-      )}
+      ) : null}
     </Wrapper>
   ));
 }

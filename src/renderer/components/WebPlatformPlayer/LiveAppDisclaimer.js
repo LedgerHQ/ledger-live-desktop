@@ -56,7 +56,7 @@ const Title: ThemedComponent<{}> = styled(Text).attrs(p => ({
 }))``;
 
 const Description: ThemedComponent<{}> = styled(Text).attrs(p => ({
-  color: rgba(p.theme.colors.dark, 0.6),
+  color: p.theme.colors.palette.text.shade60,
   ff: "Inter|Regular",
   mb: 12,
   textAlign: "center",

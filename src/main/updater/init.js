@@ -22,8 +22,10 @@ const sendStatus = (status: UpdateStatus, payload?: *) => {
 const handleDownload = async info => {
   try {
     sendStatus("checking");
-    const appUpdater = await createElectronAppUpdater({ feedURL: UPDATE_CHECK_FEED, info });
-    await appUpdater.verify();
+    if (!process.env.NIGHTLY) {
+      const appUpdater = await createElectronAppUpdater({ feedURL: UPDATE_CHECK_FEED, info });
+      await appUpdater.verify();
+    }
     sendStatus("check-success");
   } catch (err) {
     logger.critical(err);

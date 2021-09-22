@@ -1,31 +1,33 @@
 import React, { useRef, useCallback, useEffect, useState } from "react";
 import { TransitionGroup } from "react-transition-group";
-import Drawer from "@ui/components/Layout/Drawer/Drawer";
+import Side from "@ui/components/Layout/Side/Side";
 import TransitionSlide from "@ui/components/Transition/TransitionSlide";
-import { useDrawer } from "./Provider";
+import { useSide } from "./Provider";
 
-interface DrawerProps {
+interface SideProps {
   onBack?: () => void;
 }
 
-export const DrawerWrapper = (props: DrawerProps) => {
+export const SideWrapper = (props: SideProps) => {
   // Nb Note that it's not a real queue and we need to handle where we go from each _slide_
-  const { state, setDrawer } = useDrawer();
+  const { state, setSide } = useSide();
   const [queue, setQueue] = useState<
     Array<{ Component: React.ComponentType<any>; props: any; key: number }>
   >([]);
   const [direction, setDirection] = useState("left");
   const [transitionsEnabled, setTransitionsEnabled] = useState(false);
   const nonce = useRef(0);
-  const onClose = useCallback(() => setDrawer(), [setDrawer]);
+  const onClose = useCallback(() => setSide(), [setSide]);
+
   useEffect(() => {
-    // @ts-expect-error
-    setQueue(q => {
+    // @ts-expect-error FIXME
+    setQueue((q) => {
       if (!state.open) return [];
-      // @ts-expect-error
+      // @ts-expect-error FIXME
       if (state.Component != null) return q.concat([{ ...state, key: nonce.current++ }]);
     });
   }, [state]);
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
@@ -41,18 +43,19 @@ export const DrawerWrapper = (props: DrawerProps) => {
       if (timeout) clearTimeout(timeout);
     };
   }, [queue]);
+
   const wrappedOnBack = useCallback(() => {
     setDirection("right");
     state?.props?.onBack();
   }, [state?.props]);
 
   return (
-    <Drawer
+    <Side
+      {...props}
       isOpen={!!state.open}
       onClose={onClose}
       onBack={state?.props?.onBack ? wrappedOnBack : undefined}
       setTransitionsEnabled={setTransitionsEnabled}
-      {...props}
     >
       <TransitionGroup enter={transitionsEnabled} exit={transitionsEnabled} component={null}>
         {queue.map(({ Component, props, key }) => (
@@ -61,7 +64,8 @@ export const DrawerWrapper = (props: DrawerProps) => {
           </TransitionSlide>
         ))}
       </TransitionGroup>
-    </Drawer>
+    </Side>
   );
 };
-export default DrawerWrapper;
+
+export default SideWrapper;

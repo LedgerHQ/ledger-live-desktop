@@ -12,8 +12,8 @@ const Container = styled(FlexBox)`
   width: 100%;
   height: 100%;
   flex-direction: column;
-  background-color: ${p => p.theme.colors.palette.v2.background.default};
-  padding: ${p => p.theme.space[3]}px;
+  background-color: ${(p) => p.theme.colors.palette.neutral.c00};
+  padding: ${(p) => p.theme.space[3]}px;
 `;
 const Header = styled(FlexBox)`
   display: flex;
@@ -28,12 +28,12 @@ const Wrapper = styled.div<{
   height?: number;
 }>`
   height: 100%;
-  width: ${p => (p.big ? p.theme.sizes.drawer.big.width : p.theme.sizes.drawer.small.width)}px;
+  width: ${(p) => (p.big ? p.theme.sizes.side.big.width : p.theme.sizes.side.small.width)}px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: space-between;
-  z-index: ${p => p.theme.zIndexes[8]};
+  z-index: ${(p) => p.theme.zIndexes[8]};
 `;
 const Overlay = styled.div`
   display: flex;
@@ -44,7 +44,7 @@ const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 999;
-  background-color: ${p => p.theme.colors.palette.v2.background.overlay};
+  background-color: ${(p) => p.theme.colors.palette.neutral.c100a07};
 `;
 const ScrollWrapper = styled.div`
   overflow: scroll;
@@ -75,12 +75,14 @@ const Drawer = ({
   setTransitionsEnabled,
   onBack,
 }: DrawerProps) => {
-  const disableChildAnimations = useCallback(() => setTransitionsEnabled(false), [
-    setTransitionsEnabled,
-  ]);
-  const enableChildAnimations = useCallback(() => setTransitionsEnabled(true), [
-    setTransitionsEnabled,
-  ]);
+  const disableChildAnimations = useCallback(
+    () => setTransitionsEnabled(false),
+    [setTransitionsEnabled],
+  );
+  const enableChildAnimations = useCallback(
+    () => setTransitionsEnabled(true),
+    [setTransitionsEnabled],
+  );
   return (
     <TransitionInOut
       in={isOpen}
@@ -113,10 +115,10 @@ const Drawer = ({
   );
 };
 
-const DrawerWrapper = ({ children, ...drawerProps }: DrawerProps): React.ReactElement => {
-  const $root = React.useMemo(() => document.querySelector("#ll-drawer-root"), []);
-  if ($root === null) throw new Error("drawer root cannot be found");
-  return ReactDOM.createPortal(<Drawer {...drawerProps}>{children}</Drawer>, $root);
+const DrawerWrapper = ({ children, ...sideProps }: DrawerProps): React.ReactElement => {
+  const $root = React.useMemo(() => document.querySelector("#ll-side-root"), []);
+  if ($root === null) throw new Error("side root cannot be found");
+  return ReactDOM.createPortal(<Drawer {...sideProps}>{children}</Drawer>, $root);
 };
 
 export default DrawerWrapper;

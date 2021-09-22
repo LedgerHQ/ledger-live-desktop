@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconActivity from "~/renderer/icons/Activity";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { NoCountervaluePlaceholder } from "./CounterValue";
 
 type Props = {
   unit?: Unit,
@@ -80,7 +81,8 @@ export default function Price({
     [bgColor, color, from, withActivityColor, withActivityCurrencyColor],
   );
 
-  if (!counterValue || counterValue.isZero()) return placeholder || null;
+  if (!counterValue || counterValue.isZero())
+    return <NoCountervaluePlaceholder placeholder={placeholder} />;
 
   const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 

@@ -19,23 +19,23 @@ type ItemProps = {
 
 const Bar = styled.div`
   display: inline-flex;
-  border: 1px solid ${p => p.theme.colors.palette.v2.grey.border};
+  border: 1px solid ${(p) => p.theme.colors.palette.neutral.c90};
   border-radius: 33px;
   padding: 2px;
 `;
 
-const Item = styled(Flex).attrs({ flex: 1, justifyContent: "center", alignItems: "center" })<
-  ItemProps
->`
+const Item = styled(Flex).attrs({
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+})<ItemProps>`
   cursor: pointer;
   padding: 8px 12px 8px 12px;
   border-radius: 33px;
-  color: ${p =>
-    p.active ? p.theme.colors.palette.v2.text.contrast : p.theme.colors.palette.v2.text.secondary};
-  background-color: ${p =>
-    p.active
-      ? p.theme.colors.palette.v2.text.default
-      : p.theme.colors.palette.v2.background.default};
+  color: ${(p) =>
+    p.active ? p.theme.colors.palette.neutral.c00 : p.theme.colors.palette.neutral.c80};
+  background-color: ${(p) =>
+    p.active ? p.theme.colors.palette.neutral.c100 : p.theme.colors.palette.neutral.c00};
 `;
 
 export default function BarTabs({ children, onTabChange, initialActiveIndex }: Props): JSX.Element {
@@ -46,7 +46,7 @@ export default function BarTabs({ children, onTabChange, initialActiveIndex }: P
         <Item
           key={index}
           active={index === activeIndex}
-          onClick={_ => {
+          onClick={(_) => {
             setActiveIndex(index);
             onTabChange && onTabChange(index);
           }}
