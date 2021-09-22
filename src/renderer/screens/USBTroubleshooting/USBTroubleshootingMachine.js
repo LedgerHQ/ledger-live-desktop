@@ -37,7 +37,7 @@ export default createMachine(
       platform: process.env.USBTROUBLESHOOTING_PLATFORM || detectedPlatform,
       currentIndex: undefined,
       solutions: {
-        mac: [RunAsAdmin, ...commonSolutions, EnableFullDiskAccess, ResetNVRAM, RepairFunnel],
+        mac: [...commonSolutions, EnableFullDiskAccess, ResetNVRAM, RepairFunnel],
         windows: [RunAsAdmin, ...commonSolutions, UpdateUSBDeviceDrivers, RepairFunnel],
         linux: [UpdateUdevRules, ...commonSolutions, RepairFunnel],
       },

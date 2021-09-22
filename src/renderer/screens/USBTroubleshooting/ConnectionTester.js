@@ -13,6 +13,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animations";
 import Animation from "~/renderer/animations";
+import { lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 
 const Wrapper: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -30,6 +31,7 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
   const { t } = useTranslation();
   const [connectionStatus, setConnectionStatus] = useState(0);
   const currentDevice = useSelector(getCurrentDevice);
+  const lastSeenDevice = useSelector(lastSeenDeviceSelector);
 
   useEffect(() => {
     let sub;
@@ -48,7 +50,11 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
     <Wrapper>
       <Animation
         height={"140px"}
-        animation={getDeviceAnimation("nanoS", "light", "plugAndPinCode")}
+        animation={getDeviceAnimation(
+          lastSeenDevice?.modelId ?? "nanoS",
+          "light",
+          "plugAndPinCode",
+        )}
         loop={connectionStatus !== 1}
       />
       {connectionStatus === 1 ? (
