@@ -8,7 +8,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { rgba } from "~/renderer/styles/helpers";
-import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
+import type { SwapSelectorStateType } from "../../utils/shared/useSwapTransaction";
 import IconLock from "~/renderer/icons/Lock";
 import IconLockOpen from "~/renderer/icons/LockOpen";
 import Price from "~/renderer/components/Price";
@@ -39,15 +39,14 @@ export type Props = {
   value: ExchangeRate,
   onSelect: ExchangeRate => void,
   selected?: boolean,
-  swapTransaction: SwapTransactionType,
+  fromCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
 };
 
-function Rate({ value, selected, onSelect, swapTransaction }: Props) {
+function Rate({ value, selected, onSelect, fromCurrency, toCurrency }: Props) {
   const handleSelection = useCallback(() => onSelect(value), [value, onSelect]);
 
   const amount = value.toAmount;
-  const fromCurrency = swapTransaction.swap.from.currency;
-  const toCurrency = swapTransaction.swap.to.currency;
   const ProviderIcon = providerIcons[capitalize(value.provider)];
 
   return (
@@ -74,7 +73,7 @@ function Rate({ value, selected, onSelect, swapTransaction }: Props) {
             fontSize={6}
             val={amount}
             currency={toCurrency}
-            unit={toCurrency.units[0]}
+            unit={toCurrency?.units[0]}
             showCode={true}
             color="palette.text.shade100"
           />

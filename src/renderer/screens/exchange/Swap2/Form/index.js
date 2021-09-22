@@ -1,5 +1,6 @@
 // @flow
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
 import Box from "~/renderer/components/Box";
@@ -10,7 +11,6 @@ import { context } from "~/renderer/drawers/Provider";
 import { useTranslation } from "react-i18next";
 import {
   useSwapProviders,
-  usePickExchangeRate,
   usePollKYCStatus,
 } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
 import { KYC_STATUS } from "~/renderer/screens/exchange/Swap2/utils/shared";
@@ -30,6 +30,10 @@ import FormKYCBanner from "./FormKYCBanner";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION, trackSwapError } from "../utils/index";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -43,13 +47,29 @@ const Button = styled(ButtonBase)`
   justify-content: center;
 `;
 
+const trackNoRates = ({ toState }) => {
+  track("Page Swap Form - Error No Rate", {
+    sourcecurrency: toState.currency?.name,
+  });
+};
+
 const SwapForm = () => {
   const { t } = useTranslation();
-  const { providers, error: providersError } = useSwapProviders();
   const dispatch = useDispatch();
+  const { state: locationState } = useLocation();
+  const accounts = useSelector(shallowAccountsSelector);
+  const { providers, error: providersError } = useSwapProviders();
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
-  const swapTransaction = useSwapTransaction();
+  const swapTransaction = useSwapTransaction({
+    accounts,
+    exchangeRate,
+    setExchangeRate: rate => {
+      dispatch(updateRateAction(rate));
+    },
+    onNoRates: trackNoRates,
+    ...locationState,
+  });
   const exchangeRatesState = swapTransaction.swap?.rates;
   const swapKYC = useSelector(swapKYCSelector);
   const provider = exchangeRate?.provider;
@@ -71,14 +91,6 @@ const SwapForm = () => {
     // eslint-disable-next-line
   }, [swapTransaction.transaction]);
 
-  usePickExchangeRate({
-    exchangeRates: exchangeRatesState?.value,
-    exchangeRate,
-    setExchangeRate: rate => {
-      dispatch(updateRateAction(rate));
-    },
-  });
-
   usePollKYCStatus(
     {
       provider,
@@ -97,6 +109,20 @@ const SwapForm = () => {
   );
   const swapError = swapTransaction.fromAmountError || exchangeRatesState?.error;
 
+  // Track errors
+  useEffect(
+    () => {
+      swapError &&
+        trackSwapError(swapError, {
+          sourcecurrency: swapTransaction.swap.from.currency?.name,
+          provider,
+          swapVersion: SWAP_VERSION,
+        });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [swapError],
+  );
+
   const isSwapReady =
     !swapTransaction.bridgePending &&
     exchangeRatesState.status !== "loading" &&
@@ -107,28 +133,50 @@ const SwapForm = () => {
     exchangeRate;
 
   const onSubmit = () => {
+    track("Page Swap Form - Request", {
+      sourcecurrency: sourceCurrency?.name,
+      targetcurrency: targetCurrency?.name,
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
     setDrawer(ExchangeDrawer, {
       swapTransaction,
       exchangeRate,
     });
   };
 
+  const sourceAccount = swapTransaction.swap.from.account;
+  const sourceCurrency = swapTransaction.swap.from.currency;
+  const targetCurrency = swapTransaction.swap.to.currency;
+
   if (providers?.length)
     return (
       <Wrapper>
+        <TrackPage
+          category="Swap"
+          name="Form"
+          sourcecurrency={sourceCurrency?.name}
+          sourceaccount={sourceAccount ? "yes" : "no"}
+          targetcurrency={targetCurrency?.name}
+          provider={provider}
+          swapVersion={SWAP_VERSION}
+        />
         <SwapFormSelectors
-          fromAccount={swapTransaction.swap.from.account}
+          fromAccount={sourceAccount}
+          toAccount={swapTransaction.swap.to.account}
           fromAmount={swapTransaction.swap.from.amount}
-          toCurrency={swapTransaction.swap.to.currency}
+          toCurrency={targetCurrency}
           toAmount={exchangeRate?.toAmount || null}
           setFromAccount={swapTransaction.setFromAccount}
           setFromAmount={swapTransaction.setFromAmount}
           setToAccount={swapTransaction.setToAccount}
+          setToCurrency={swapTransaction.setToCurrency}
           isMaxEnabled={swapTransaction.swap.isMaxEnabled}
           toggleMax={swapTransaction.toggleMax}
           fromAmountError={swapError}
           isSwapReversable={swapTransaction.swap.isSwapReversable}
           reverseSwap={swapTransaction.reverseSwap}
+          provider={provider}
           loadingRates={swapTransaction.swap.rates.status === "loading"}
         />
         <SwapFormSummary

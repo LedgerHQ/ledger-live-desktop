@@ -23,7 +23,7 @@ import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import Tabbable from "~/renderer/components/Box/Tabbable";
 import AngleLeft from "~/renderer/icons/AngleLeft";
-import { useRedirectToSwapForm } from "../utils/index";
+import { SWAP_VERSION, useRedirectToSwapForm } from "../utils/index";
 
 const Footer = styled.div`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
@@ -160,7 +160,7 @@ const KYC = () => {
         <Pending />
       ) : (
         <>
-          <TrackPage category="Swap" name="KYC Form" />
+          <TrackPage category="Swap" name="KYC Form" swapVersion={SWAP_VERSION} />
           <Box px={40} pt={40} mb={16} alignSelf={"normal"} alignItems={"center"}>
             <IconWyre size={32} />
             <Text ff="Inter|SemiBold" fontSize={18} color="palette.text.shade100">

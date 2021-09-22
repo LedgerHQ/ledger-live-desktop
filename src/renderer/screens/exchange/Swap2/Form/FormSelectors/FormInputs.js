@@ -13,17 +13,20 @@ import type {
 
 type FormInputsProps = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toAccount: $PropertyType<SwapSelectorStateType, "account">,
   fromAmount: $PropertyType<SwapSelectorStateType, "amount">,
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
   toAmount: $PropertyType<SwapSelectorStateType, "amount">,
   setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount">,
   setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
   setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToCurrency">,
   toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
   reverseSwap: $PropertyType<SwapTransactionType, "reverseSwap">,
   isMaxEnabled?: boolean,
   fromAmountError?: Error,
   isSwapReversable: boolean,
+  provider: ?string,
   loadingRates: boolean,
 };
 
@@ -54,6 +57,7 @@ function SwapButton({ onClick, disabled }: SwapButtonProps): React$Node {
 
 export default function FormInputs({
   fromAccount = null,
+  toAccount,
   fromAmount = null,
   isMaxEnabled = false,
   setFromAccount,
@@ -61,10 +65,12 @@ export default function FormInputs({
   toCurrency,
   toAmount,
   setToAccount,
+  setToCurrency,
   toggleMax,
   fromAmountError,
   reverseSwap,
   isSwapReversable,
+  provider,
   loadingRates,
 }: FormInputsProps) {
   return (
@@ -78,6 +84,7 @@ export default function FormInputs({
           isMaxEnabled={isMaxEnabled}
           toggleMax={toggleMax}
           fromAmountError={fromAmountError}
+          provider={provider}
         />
       </Box>
       <Box horizontal justifyContent="center" alignContent="center">
@@ -87,8 +94,11 @@ export default function FormInputs({
         <ToRow
           toCurrency={toCurrency}
           setToAccount={setToAccount}
+          setToCurrency={setToCurrency}
           toAmount={toAmount}
           fromAccount={fromAccount}
+          provider={provider}
+          toAccount={toAccount}
           loadingRates={loadingRates}
         />
       </Box>
