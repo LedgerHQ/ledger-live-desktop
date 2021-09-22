@@ -68,9 +68,9 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
             primary
             onClick={onExit}
             event="USBTroubleshooting user success cta"
-            id="USBTroubleshooting-backToPortfolio"
+            id="USBTroubleshooting-backToManager"
           >
-            {t("connectTroubleshooting.backToPortfolio")}
+            {t("common.continue")}
           </Button>
         </Box>
       ) : (

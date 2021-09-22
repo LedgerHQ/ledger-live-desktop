@@ -60,7 +60,7 @@ const USBTroubleshooting = () => {
 
   const onExit = useCallback(() => {
     dispatch(setUSBTroubleshootingIndex());
-    history.push({ pathname: "/" });
+    history.push({ pathname: "/manager" });
   }, [dispatch, history]);
 
   return showIntro ? (

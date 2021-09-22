@@ -18,7 +18,7 @@ export default class USBTroubleshootingPage extends Page {
   }
 
   async successButton() {
-    return this.$("#USBTroubleshooting-backToPortfolio");
+    return this.$("#USBTroubleshooting-backToManager");
   }
 
   async deviceNanoSChoiceButton() {
