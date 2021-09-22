@@ -63,17 +63,11 @@ const ModalsLayer = ({ visibleModals }: *) => {
   );
 };
 
-const visibleModalsSelector = createSelector(modalsStateSelector, state => {
-  console.log(
-    { raw: state },
-    Object.keys(state)
-      .filter((name: string) => !!modals[name] && state[name].isOpened)
-      .map((name: string) => ({ name, ...state[name].data })),
-  );
-  return Object.keys(state)
+const visibleModalsSelector = createSelector(modalsStateSelector, state =>
+  Object.keys(state)
     .filter((name: string) => !!modals[name] && state[name].isOpened)
-    .map((name: string) => ({ name, ...state[name].data }));
-});
+    .map((name: string) => ({ name, ...state[name].data })),
+);
 
 const mapStateToProps = createStructuredSelector({
   visibleModals: visibleModalsSelector,
