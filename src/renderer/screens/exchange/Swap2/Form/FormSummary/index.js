@@ -45,7 +45,7 @@ const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSumma
   } = swapTransaction.swap.from;
   const { currency: toCurrency, account: toAccount } = swapTransaction.swap.to;
   const ratesState = swapTransaction.swap.rates;
-  const hasRates = ratesState?.value.length > 0;
+  const hasRates = ratesState?.value?.length > 0;
   const refetchRates = swapTransaction.swap.refetchRates;
 
   const [hasFetchedRates, setHasFetchedRates] = useState(hasRates);
