@@ -2,7 +2,7 @@
 import React, { useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { context } from "~/renderer/drawers/Provider";
 import SummaryLabel from "./SummaryLabel";
 import SummaryValue from "./SummaryValue";
@@ -19,15 +19,12 @@ const SectionFees = ({ swapTransaction }: { swapTransaction: SwapTransactionType
   const { setDrawer } = React.useContext(context);
   const { transaction } = swapTransaction;
   const exchangeRate = useSelector(rateSelector);
-  const { account: fromAccount, currency: fromCurrency } = swapTransaction.swap.from;
+  const { account: fromAccount, fromParentAccount } = swapTransaction.swap.from;
   const fromAccountUnit = fromAccount && getAccountUnit(fromAccount);
+  const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
   const estimatedFees = swapTransaction.status?.estimatedFees;
   const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
-  const family = fromCurrency
-    ? fromCurrency.type === "CryptoCurrency"
-      ? fromCurrency.family
-      : fromCurrency.parentCurrency.family
-    : null;
+  const family = mainFromAccount.currency.family;
   const canEdit =
     showSummaryValue && transaction?.networkInfo && family && sendAmountByFamily[family];
 
