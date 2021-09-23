@@ -70,7 +70,6 @@ const SystemLanguageAvailableBody = (props: Props) => {
   const { osLanguage } = data;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  // const targetLanguageTranslated = t("language.switcher." + osLanguageTest);
   const targetLanguageTranslated = languageLabels[osLanguage];
 
   const dontSwitchLanguage = () => {
