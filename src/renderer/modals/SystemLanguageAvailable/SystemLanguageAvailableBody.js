@@ -13,7 +13,6 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import LanguageIcon from "~/renderer/icons/Language";
 
-import { rgba } from "~/renderer/styles/helpers";
 import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 import { setLanguage } from "~/renderer/actions/settings";
 import { answerLanguageAvailable } from "~/renderer/components/IsSystemLanguageAvailable";
@@ -48,7 +47,7 @@ const Circle = styled.div`
   height: 72px;
   width: 72px;
   border-radius: 72px;
-  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
+  background-color: ${p => p.theme.colors.pillActiveBackground};
 `;
 
 const IconBox = styled(Box).attrs(() => ({
