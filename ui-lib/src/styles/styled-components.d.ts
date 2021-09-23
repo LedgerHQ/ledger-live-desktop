@@ -16,7 +16,7 @@ declare module "styled-components" {
           width: number;
         };
       };
-      modal: {
+      popin: {
         min: {
           height: number;
           width: number;
