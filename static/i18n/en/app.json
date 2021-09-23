@@ -2498,6 +2498,10 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
         "tezosJS": {
           "title": "use Tezos JS impl",
           "description": "Use Tezos JS impl"

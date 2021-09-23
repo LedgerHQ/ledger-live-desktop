@@ -60,6 +60,14 @@ export const experimentalFeatures: Feature[] = [
   },
   {
     type: "toggle",
+    name: "ELROND_API_ENDPOINT",
+    title: <Trans i18nKey="settings.experimental.features.apiElrondEndpPoint.title" />,
+    description: <Trans i18nKey="settings.experimental.features.apiElrondEndpPoint.description" />,
+    valueOn: "https://elrond.coin.ledger.com/ ",
+    valueOff: "https://api.elrond.com",
+  },
+  {
+    type: "toggle",
     name: "EXPERIMENTAL_LANGUAGES",
     title: <Trans i18nKey="settings.experimental.features.experimentalLanguages.title" />,
     description: (
