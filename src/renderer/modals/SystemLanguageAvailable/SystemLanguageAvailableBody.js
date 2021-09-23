@@ -5,15 +5,13 @@ import { useDispatch } from "react-redux";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
 import moment from "moment";
-import { track } from "~/renderer/analytics/segment";
 
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Text from "~/renderer/components/Text";
-import Link from "~/renderer/components/Link";
 import Button from "~/renderer/components/Button";
-import Language from "~/renderer/icons/Language";
+import LanguageIcon from "~/renderer/icons/Language";
 
 import { rgba } from "~/renderer/styles/helpers";
 import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
@@ -46,14 +44,6 @@ const Content = styled(Text).attrs(() => ({
   marginBottom: 13 * 1.4,
 }))``;
 
-const NoLink = styled(Link).attrs(p => ({
-  fontSize: 13,
-  fontWeight: 600,
-  color: "palette.text.shade50",
-  mr: p.theme.space[5],
-  lineHeight: "39px",
-}))``;
-
 const Circle = styled.div`
   height: 72px;
   width: 72px;
@@ -84,13 +74,11 @@ const SystemLanguageAvailableBody = (props: Props) => {
   const targetLanguageTranslated = languageLabels[osLanguage];
 
   const dontSwitchLanguage = () => {
-    track(`Discoverability - Denied  - ${osLanguage}`, { language: osLanguage });
     answerLanguageAvailable();
     onClose();
   };
 
   const switchLanguage = () => {
-    track(`Discoverability - Switch - ${osLanguage}`, { language: osLanguage });
     dispatch(setLanguage(osLanguage));
     moment.locale(osLanguage);
     i18n.changeLanguage(osLanguage);
@@ -111,7 +99,7 @@ const SystemLanguageAvailableBody = (props: Props) => {
           <IconBox>
             <Circle />
             <LanguageBox>
-              <Language />
+              <LanguageIcon />
             </LanguageBox>
           </IconBox>
           <Title>{t("systemLanguageAvailable.title")}</Title>
@@ -125,8 +113,21 @@ const SystemLanguageAvailableBody = (props: Props) => {
       )}
       renderFooter={() => (
         <Box horizontal justifyContent="flex-end">
-          <NoLink onClick={dontSwitchLanguage}>{t("systemLanguageAvailable.no")}</NoLink>
-          <Button onClick={switchLanguage} primary>
+          <Button
+            mx={15}
+            secondary
+            event={`Discoverability - Denied - ${osLanguage}`}
+            eventProperties={{ language: osLanguage }}
+            onClick={dontSwitchLanguage}
+          >
+            {t("systemLanguageAvailable.no")}
+          </Button>
+          <Button
+            primary
+            event={`Discoverability - Switch - ${osLanguage}`}
+            eventProperties={{ language: osLanguage }}
+            onClick={switchLanguage}
+          >
             {`${t("systemLanguageAvailable.switchButton")} ${targetLanguageTranslated}`}
           </Button>
         </Box>
