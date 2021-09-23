@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import FlexBox from "../../../Layout/Flex";
 import React, { InputHTMLAttributes } from "react";
-import Text from "../../../Text";
-import { rgba } from "../../../../styles/helpers";
+import FlexBox from "@ui/components/layout/Flex";
+import Text from "@ui/components/asorted/Text";
+import { rgba } from "@ui/styles/helpers";
 
 type CommonProps = InputHTMLAttributes<HTMLInputElement> & {
   disabled?: boolean;
