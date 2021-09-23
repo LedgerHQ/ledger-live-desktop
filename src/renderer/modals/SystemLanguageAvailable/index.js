@@ -8,7 +8,7 @@ const SystemLanguageAvailableModal = () => (
   <Modal
     name="MODAL_SYSTEM_LANGUAGE_AVAILABLE"
     centered
-    render={({ data, onClose }) => <SystemLanguageAvailableBody version={data} onClose={onClose} />}
+    render={({ data, onClose }) => <SystemLanguageAvailableBody data={data} onClose={onClose} />}
   />
 );
 
