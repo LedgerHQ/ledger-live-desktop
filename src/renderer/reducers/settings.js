@@ -127,9 +127,9 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   };
 };
 
-const defaultLanguage: () => string = () => {
+export const pushedLanguages = ["fr", "ru"];
+export const defaultLanguage: () => string = () => {
   // Nb If the os language is in the list [fr, ru] (LL-7027) default to it
-  const pushedLanguages = ["fr", "ru"];
   const detectedLanguage = window.navigator?.language || "en";
   return pushedLanguages.find(lang => detectedLanguage.startsWith(lang)) || "en";
 };
