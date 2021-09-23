@@ -74,8 +74,10 @@ const SystemLanguageAvailableBody = (props: Props) => {
   const { onClose, data } = props;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  const dontSwitchLanguage = () => {
   };
 
+  const switchLanguage = () => {
     onClose();
   };
 
@@ -106,8 +108,8 @@ const SystemLanguageAvailableBody = (props: Props) => {
         )}
         renderFooter={() => (
           <Box horizontal justifyContent="flex-end">
-            <NoLink>{t("systemLanguageAvailable.no")}</NoLink>
-            <Button onClick={onClose} primary>
+          <NoLink onClick={dontSwitchLanguage}>{t("systemLanguageAvailable.no")}</NoLink>
+          <Button onClick={switchLanguage} primary>
               {`${t("systemLanguageAvailable.switchButton")} ${targetLanguageTranslated}`}
             </Button>
           </Box>
