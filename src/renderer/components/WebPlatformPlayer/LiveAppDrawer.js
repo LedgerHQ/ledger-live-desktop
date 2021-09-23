@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -21,6 +21,7 @@ import Text from "../Text";
 import AppDetails from "../Platform/AppDetails";
 import ExternalLink from "../ExternalLink/index";
 import LiveAppDisclaimer from "./LiveAppDisclaimer";
+import MarketFilters from "~/renderer/screens/market/MarketFilters";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -29,7 +30,7 @@ const Divider = styled(Box)`
 export const LiveAppDrawer = () => {
   const [dismissDisclaimerChecked, setDismissDisclaimerChecked] = useState<boolean>(false);
   const { isOpen, payload }: { isOpen: boolean, payload: AppDrawerPayload } = useSelector(
-    platformAppDrawerStateSelector,
+    platformAppDrawerStateSelector
   );
   const { manifest, type, title, disclaimerId, next } = payload ?? {};
   const { t } = useTranslation();
@@ -100,6 +101,9 @@ export const LiveAppDrawer = () => {
             </Box>
           </>
         );
+
+      case "MARKET_FILTER":
+        return <MarketFilters />;
 
       default:
         return null;

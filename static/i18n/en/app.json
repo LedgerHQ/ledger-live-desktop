@@ -198,6 +198,12 @@
     "lend": "Lend",
     "catalog": "Discover"
   },
+  "market": {
+    "title": "Market",
+    "filters": {
+      "title": "Filters"
+    }
+  },
   "stars": {
     "placeholder": "Star an account to display it here.",
     "tooltip": "Star account"
