@@ -126,7 +126,7 @@ const SystemLanguageAvailableBody = (props: Props) => {
             eventProperties={{ language: osLanguage }}
             onClick={switchLanguage}
           >
-            {`${t("systemLanguageAvailable.switchButton")} ${targetLanguageTranslated}`}
+            {t("systemLanguageAvailable.switchButton")} {targetLanguageTranslated}
           </Button>
         </Box>
       )}
