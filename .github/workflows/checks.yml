@@ -11,7 +11,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
@@ -30,6 +30,8 @@ jobs:
         if: always() && job.status != 'cancelled'
         with:
           node-version: 14.x
+      - name: install and switch to GCC 5.4
+        run: ./tools/g++-5.4/install.sh
       - name: get yarn cache
         if: always() && job.status != 'cancelled'
         id: yarn-cache
