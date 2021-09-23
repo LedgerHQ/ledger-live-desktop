@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { grid, color, space } from "styled-system";
 import Grid from "./index";
-import Text from "@ui/components/Text";
+import Text from "@ui/components/asorted/Text";
 // Just a stylable div used as a base grid element for the purpose of this story.
 const Cell = styled.div<any>`
   // Make the div semi-opaque to show grid composition.
