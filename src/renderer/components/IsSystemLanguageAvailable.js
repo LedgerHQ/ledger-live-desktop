@@ -6,6 +6,7 @@ import { openModal } from "~/renderer/actions/modals";
 import { getSystemLocale } from "~/helpers/systemLocale";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
 
+// To reset os language proposition, change this date !
 const lastAskedLanguageAvailable = "2021-09-23";
 
 export function hasAnsweredLanguageAvailable() {
