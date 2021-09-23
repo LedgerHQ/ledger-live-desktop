@@ -1,6 +1,7 @@
 // @flow
-import React, { PureComponent } from "react";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
 
@@ -15,15 +16,13 @@ import Language from "~/renderer/icons/Language";
 import { rgba } from "~/renderer/styles/helpers";
 
 type Props = {
+  data: {
   currentLanguage: string,
   osLanguage: string,
+  },
   onClose: () => void,
   t: TFunction,
 };
-
-type State = {
-
-}
 
 const Title = styled(Text).attrs(() => ({
   ff: "Inter",
@@ -69,26 +68,14 @@ const LanguageBox = styled(Box).attrs((p) => ({
   color: "palette.primary.main",
 }))``;
 
-class SystemLanguageAvailableBody extends PureComponent<Props, State> {
-  state = {
+const SystemLanguageAvailableBody = (props: Props) => {
+  const { onClose, data } = props;
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
   };
 
-  renderContent = () => {
-    const { t } = this.props;
-
-    return (
-      <Box horizontal alignItems="center">
-
-      </Box>
-    );
+    onClose();
   };
-
-  render() {
-    const { onClose, t, osLanguage } = this.props;
-    const osLanguageTest = "en";
-    const targetLanguageTranslated = t("language.switcher." + osLanguageTest);
-    // const targetLanguageTranslated = languageLabels
-  
 
     return (
       <ModalBody
@@ -121,7 +108,6 @@ class SystemLanguageAvailableBody extends PureComponent<Props, State> {
         )}
       />
     );
-  }
-}
+};
 
-export default withTranslation()(SystemLanguageAvailableBody);
+export default SystemLanguageAvailableBody;
