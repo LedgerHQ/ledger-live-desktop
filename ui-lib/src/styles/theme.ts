@@ -1,6 +1,8 @@
 import { keyframes, css } from "styled-components";
 import type { Palette } from "./palettes";
-export const space = [0, 5, 10, 15, 20, 30, 44, 50, 70];
+export const space = [
+  0, 2, 4, 8, 10, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76,
+];
 export const fontSizes = [8, 9, 10, 12, 13, 16, 18, 22, 32];
 export const radii = [0, 4];
 export const shadows = ["0 4px 8px 0 rgba(0, 0, 0, 0.03)"];
@@ -159,22 +161,24 @@ export interface Theme {
   sizes: {
     topBarHeight: number;
     sideBarWidth: number;
-    side: {
-      big: {
-        width: number;
+    drawer: {
+      side: {
+        big: {
+          width: number;
+        };
+        small: {
+          width: number;
+        };
       };
-      small: {
-        width: number;
-      };
-    };
-    modal: {
-      min: {
-        height: number;
-        width: number;
-      };
-      max: {
-        height: number;
-        width: number;
+      popin: {
+        min: {
+          height: number;
+          width: number;
+        };
+        max: {
+          height: number;
+          width: number;
+        };
       };
     };
   };
@@ -194,22 +198,24 @@ export interface Theme {
 }
 const theme: Theme = {
   sizes: {
-    side: {
-      big: {
-        width: 580,
+    drawer: {
+      side: {
+        big: {
+          width: 580,
+        },
+        small: {
+          width: 420,
+        },
       },
-      small: {
-        width: 420,
-      },
-    },
-    modal: {
-      min: {
-        height: 158,
-        width: 462,
-      },
-      max: {
-        height: 522,
-        width: 622,
+      popin: {
+        min: {
+          height: 158,
+          width: 462,
+        },
+        max: {
+          height: 522,
+          width: 622,
+        },
       },
     },
     topBarHeight: 58,
