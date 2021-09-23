@@ -41,10 +41,12 @@ const Content = styled(Text).attrs(() => ({
   marginBottom: 13 * 1.4,
 }))``;
 
-const NoLink = styled(Link).attrs(() => ({
+const NoLink = styled(Link).attrs(p => ({
   fontSize: 13,
+  fontWeight: 600,
   color: "palette.text.shade50",
-  padding: "0 30px",
+  mr: p.theme.space[5],
+  lineHeight: "39px",
 }))``;
 
 const Circle = styled.div`
@@ -61,7 +63,7 @@ const IconBox = styled(Box).attrs(() => ({
   marginBottom: 24,
 }))``;
 
-const LanguageBox = styled(Box).attrs((p) => ({
+const LanguageBox = styled(Box).attrs(() => ({
   position: "absolute",
   top: 16,
   left: 16,
