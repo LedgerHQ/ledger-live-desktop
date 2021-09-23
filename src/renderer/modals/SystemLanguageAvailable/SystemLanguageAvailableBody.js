@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
+import moment from "moment";
 import { track } from "~/renderer/analytics/segment";
 
 import { ModalBody } from "~/renderer/components/Modal";
@@ -15,11 +16,14 @@ import Button from "~/renderer/components/Button";
 import Language from "~/renderer/icons/Language";
 
 import { rgba } from "~/renderer/styles/helpers";
+import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
+import { setLanguage } from "~/renderer/actions/settings";
+import { answerLanguageAvailable } from "~/renderer/components/IsSystemLanguageAvailable";
 
 type Props = {
   data: {
-  currentLanguage: string,
-  osLanguage: string,
+    currentLanguage: string,
+    osLanguage: string,
   },
   onClose: () => void,
   t: TFunction,
@@ -73,52 +77,62 @@ const LanguageBox = styled(Box).attrs(() => ({
 
 const SystemLanguageAvailableBody = (props: Props) => {
   const { onClose, data } = props;
+  const { osLanguage } = data;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
+  // const targetLanguageTranslated = t("language.switcher." + osLanguageTest);
+  const targetLanguageTranslated = languageLabels[osLanguage];
+
   const dontSwitchLanguage = () => {
     track(`Discoverability - Denied  - ${osLanguage}`, { language: osLanguage });
+    answerLanguageAvailable();
+    onClose();
   };
 
   const switchLanguage = () => {
     track(`Discoverability - Switch - ${osLanguage}`, { language: osLanguage });
+    dispatch(setLanguage(osLanguage));
+    moment.locale(osLanguage);
+    i18n.changeLanguage(osLanguage);
+    answerLanguageAvailable();
     onClose();
   };
 
-    return (
-      <ModalBody
-        onClose={onClose}
-        render={() => (
-          <Box>
+  return (
+    <ModalBody
+      onClose={onClose}
+      render={() => (
+        <Box>
           <TrackPage
             category="Discoverability"
             name={`Prompt - ${osLanguage}`}
             language={osLanguage}
           />
-            <IconBox>
-              <Circle />
-              <LanguageBox>
-                <Language />
-              </LanguageBox>
-            </IconBox>
-            <Title>{t("systemLanguageAvailable.title")}</Title>
-            <Content>
+          <IconBox>
+            <Circle />
+            <LanguageBox>
+              <Language />
+            </LanguageBox>
+          </IconBox>
+          <Title>{t("systemLanguageAvailable.title")}</Title>
+          <Content>
             {t("systemLanguageAvailable.description.newSupport", {
               language: targetLanguageTranslated,
             })}
-            </Content>
+          </Content>
           <Content>{t("systemLanguageAvailable.description.advice")}</Content>
-          </Box>
-        )}
-        renderFooter={() => (
-          <Box horizontal justifyContent="flex-end">
+        </Box>
+      )}
+      renderFooter={() => (
+        <Box horizontal justifyContent="flex-end">
           <NoLink onClick={dontSwitchLanguage}>{t("systemLanguageAvailable.no")}</NoLink>
           <Button onClick={switchLanguage} primary>
-              {`${t("systemLanguageAvailable.switchButton")} ${targetLanguageTranslated}`}
-            </Button>
-          </Box>
-        )}
-      />
-    );
+            {`${t("systemLanguageAvailable.switchButton")} ${targetLanguageTranslated}`}
+          </Button>
+        </Box>
+      )}
+    />
+  );
 };
 
 export default SystemLanguageAvailableBody;
