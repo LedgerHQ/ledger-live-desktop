@@ -84,7 +84,11 @@ const SystemLanguageAvailableBody = (props: Props) => {
         onClose={onClose}
         render={() => (
           <Box>
-            <TrackPage category="Modal" name="SystemLanguageAvailable" />
+          <TrackPage
+            category="Discoverability"
+            name={`Prompt - ${osLanguage}`}
+            language={osLanguage}
+          />
             <IconBox>
               <Circle />
               <LanguageBox>
