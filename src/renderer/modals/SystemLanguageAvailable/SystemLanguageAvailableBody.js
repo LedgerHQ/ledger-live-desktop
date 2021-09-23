@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import type { TFunction } from "react-i18next";
 import styled from "styled-components";
+import { track } from "~/renderer/analytics/segment";
 
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
@@ -75,9 +76,11 @@ const SystemLanguageAvailableBody = (props: Props) => {
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const dontSwitchLanguage = () => {
+    track(`Discoverability - Denied  - ${osLanguage}`, { language: osLanguage });
   };
 
   const switchLanguage = () => {
+    track(`Discoverability - Switch - ${osLanguage}`, { language: osLanguage });
     onClose();
   };
 
