@@ -6,5 +6,5 @@ describe(`USBTroubleshooting-mac`, () => {
     userData: "1AccountBTC1AccountETH",
     env: { USBTROUBLESHOOTING_PLATFORM: "mac" },
   });
-  generateTest("mac", 8);
+  generateTest("mac", 7);
 });
