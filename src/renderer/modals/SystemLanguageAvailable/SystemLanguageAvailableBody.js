@@ -41,7 +41,7 @@ const Content = styled(Text).attrs(() => ({
   fontSize: 13,
   color: "palette.text.shade50",
   textAlign: "center",
-  marginBottom: 13 * 1.4,
+  marginBottom: 18,
 }))``;
 
 const Circle = styled.div`
