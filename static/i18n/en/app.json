@@ -1858,10 +1858,9 @@
          "cardTitle": "Powered by Crypto.org",
          "moreInfo": "More info",
          "drawerTitle": "Crypto.org integration",
-         "title": "Crypt.org (CRO) token is now available on Ledger Live",
-         "description": "You can now safely secure your CRO tokens and manage them through Ledger Live.",
-         "description2": "TBD",
-         "description3": "TBD",
+         "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+         "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+         "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain, a public, open-source and permissionless blockchain - a fully decentralized network with high speed and low fees, designed to be a public good that helps drive mass adoption of blockchain technology through use cases like Payments, DeFi and NFTs",
          "website": "Cryptocurrency in every wallet"
        }
       }

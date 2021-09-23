@@ -46,9 +46,6 @@ export function AccountSubHeaderDrawer({ isOpen, closeDrawer }: Props) {
         <Box py={2}>
           <Description>{t("cryptoOrg.account.subHeader.description2")}</Description>
         </Box>
-        <Box py={2}>
-          <Description>{t("cryptoOrg.account.subHeader.description3")}</Description>
-        </Box>
         <Divider mt={2} />
         <Box mt={3}>
           <LinkWithExternalIcon
