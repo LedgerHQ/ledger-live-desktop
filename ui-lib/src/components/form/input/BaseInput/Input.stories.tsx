@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "../../../Button";
+import Button from "@ui/components/cta/Button";
 import Input, { InputProps, InputRenderLeftContainer, InputRenderRightContainer } from "./index";
 
 export default {

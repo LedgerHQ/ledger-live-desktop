@@ -1,6 +1,6 @@
 import React from "react";
-import Input, { InputProps, InputRenderRightContainer } from "@components/Form/Input/BaseInput";
-import Text from "@ui/components/Text";
+import Input, { InputProps, InputRenderRightContainer } from "@components/form/input/BaseInput";
+import Text from "@ui/components/asorted/Text";
 
 export default function LegendInput({
   legend,

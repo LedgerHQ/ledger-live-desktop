@@ -1,5 +1,5 @@
 import React from "react";
-import Input, { InputProps, InputRenderLeftContainer } from "@components/Form/Input/BaseInput";
+import Input, { InputProps, InputRenderLeftContainer } from "@components/form/input/BaseInput";
 import SearchMedium from "@ui/assets/icons/SearchMedium";
 import styled from "styled-components";
 

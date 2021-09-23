@@ -13,8 +13,7 @@ import {
 } from "styled-system";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import "./Text.css";
-import BracketRight from "@ui/assets/icons/BracketleftRegular";
-import BracketLeft from "@ui/assets/icons/BracketrightRegular";
+import { BracketRight, BracketLeft } from "./Brackets";
 
 const uppercase = system({
   uppercase: {
@@ -99,10 +98,8 @@ const Base = styled.span.attrs((p: BaseTextProps & SpaceProps) => ({
 const Text = ({ children, bracket, ...props }: TextProps & SpaceProps) => {
   return bracket ? (
     <Base {...props}>
-      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketLeft className="ll-text_bracket" />
       {children}
-      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketRight className="ll-text_bracket" />
     </Base>
   ) : (
