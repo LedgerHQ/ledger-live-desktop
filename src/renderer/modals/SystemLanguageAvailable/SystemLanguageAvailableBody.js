@@ -104,9 +104,11 @@ class SystemLanguageAvailableBody extends PureComponent<Props, State> {
             </IconBox>
             <Title>{t("systemLanguageAvailable.title")}</Title>
             <Content>
-              {t("systemLanguageAvailable.bullet.0", { language: targetLanguageTranslated })}
+            {t("systemLanguageAvailable.description.newSupport", {
+              language: targetLanguageTranslated,
+            })}
             </Content>
-            <Content>{t("systemLanguageAvailable.bullet.1")}</Content>
+          <Content>{t("systemLanguageAvailable.description.advice")}</Content>
           </Box>
         )}
         renderFooter={() => (
