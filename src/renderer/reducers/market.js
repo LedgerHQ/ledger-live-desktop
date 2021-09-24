@@ -1,7 +1,7 @@
 // @flow
 import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
-import type { Account, Currency } from "@ledgerhq/live-common/lib/types";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 
 export type MarketCurrency = {

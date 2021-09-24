@@ -16,14 +16,11 @@ export const openPlatformAppInfoDrawer = createAction(
   }),
 );
 
-export const openMarketFilterDrawer = createAction(
-  "PLATFORM_APP_DRAWER_OPEN",
-  () => ({
-    type: "MARKET_FILTER",
-    title: "market.filters.title",
-    manifest: {}
-  }),
-);
+export const openMarketFilterDrawer = createAction("PLATFORM_APP_DRAWER_OPEN", () => ({
+  type: "MARKET_FILTER",
+  title: "market.filters.title",
+  manifest: {},
+}));
 
 export const openPlatformAppDisclaimerDrawer = createAction(
   "PLATFORM_APP_DRAWER_OPEN",

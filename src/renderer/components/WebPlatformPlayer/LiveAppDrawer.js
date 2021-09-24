@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,7 +29,7 @@ const Divider = styled(Box)`
 export const LiveAppDrawer = () => {
   const [dismissDisclaimerChecked, setDismissDisclaimerChecked] = useState<boolean>(false);
   const { isOpen, payload }: { isOpen: boolean, payload: AppDrawerPayload } = useSelector(
-    platformAppDrawerStateSelector
+    platformAppDrawerStateSelector,
   );
   const { manifest, type, title, disclaimerId, next } = payload ?? {};
   const { t } = useTranslation();

@@ -1,5 +1,4 @@
 // @flow
-
 import React from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
@@ -200,7 +199,9 @@ function MarketList() {
         >
           {CurrencyRow}
         </ListStyled>
-      ) : <NoCryptosFound searchValue={searchValue} />}
+      ) : (
+        <NoCryptosFound searchValue={searchValue} />
+      )}
     </Box>
   );
 }

@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";

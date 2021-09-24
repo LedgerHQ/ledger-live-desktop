@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback } from "react";
 import { compose } from "redux";
 import { connect, useDispatch, useSelector } from "react-redux";
@@ -24,7 +23,7 @@ const MarketPage = ({ t }: Props) => {
   const onTextChange = useCallback(
     (evt: SyntheticInputEvent<HTMLInputElement>) =>
       dispatch(setMarketParams({ searchValue: evt.target.value })),
-    [searchValue],
+    [dispatch],
   );
 
   return (

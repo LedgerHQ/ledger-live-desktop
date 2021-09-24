@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// @flow
+import React, { useCallback, useEffect, useState } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Label from "~/renderer/components/Label";
@@ -7,7 +8,46 @@ import Checkbox from "~/renderer/components/CheckBox";
 import { TextLink } from "~/renderer/components/Breadcrumb/common";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { useDispatch } from "react-redux";
+import { closePlatformAppDrawer } from "~/renderer/actions/UI";
+
+type CurrencyType = "all" | "coins" | "tokens";
+type TypeFilterRow = { key: CurrencyType, label: string };
+type PlatformFilterProps = {
+  displayedFamilies: string[],
+  selectedPlatforms: string[],
+  isShowMoreActive: boolean,
+  onShowMore: () => void,
+  setSelectedPlatforms: (platforms: string[]) => void,
+};
+type TypeFilterProps = {
+  selectedCurrencyType: TypeFilterRow,
+  onSelectType: (typeFilter: TypeFilterRow) => void,
+};
+type LedgerLiveCompatibleProps = {
+  value: boolean,
+  onValueChange: (value: boolean) => void,
+};
+type MarketFiltersFooterProps = {
+  onClearAll: () => void,
+  onApply: () => void,
+};
+
+const currenciesTypes: TypeFilterRow[] = [
+  {
+    key: "all",
+    label: "All cryptocurrencies",
+  },
+  {
+    key: "coins",
+    label: "Coins",
+  },
+  {
+    key: "tokens",
+    label: "Tokens",
+  },
+];
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -21,19 +61,17 @@ const BasicButton = styled(Button)`
 
 const PrimaryButton = styled(Button)`
   padding: 15px 24px;
-  border-radius: 48px;
-  background: ${p => p.theme.colors.palette.type === "dark" ? p.theme.colors.palette.text.shade100 : p.theme.colors.palette.primary.main};
+  background: ${p => p.theme.colors.palette.text.shade100};
   color: ${p => p.theme.colors.palette.background.paper};
 
   &:hover {
-    background: ${p => p.theme.colors.palette.type === "dark" ? p.theme.colors.palette.text.shade100 : "#6490f1"};
+    background: ${p =>
+      p.theme.colors.palette.type === "dark" ? p.theme.colors.palette.text.shade100 : "#6490f1"};
     color: ${p => p.theme.colors.palette.background.paper};
   }
 `;
 
-const MainWrapper = styled(Box)`
-
-`;
+const MainWrapper = styled(Box)``;
 
 const SectionWrapper = styled.div`
   margin-bottom: 40px;
@@ -47,22 +85,9 @@ const SectionWrapper = styled.div`
         width: 3px;
       }
 
-      // ::-webkit-scrollbar-track {
-        //   background: ${p => p.theme.colors.palette.text.shade5};
-      // }
-      //
-      ///* Handle */
-      //
       ::-webkit-scrollbar-thumb {
         background: ${p => p.theme.colors.palette.text.shade20};
       }
-
-      //
-      ///* Handle on hover */
-      //
-      //::-webkit-scrollbar-thumb:hover {
-      //  background: #555;
-      //}
     }
   }
 `;
@@ -83,156 +108,169 @@ const FooterWrapper = styled(Box)`
   width: 100%;
 `;
 
-function TypeFilter(props) {
-  const indicators = [
-    {
-      label: "All cryptocurrencies",
-      key: "all"
-    },
-    {
-      label: "Coins",
-      key: "coins"
-    },
-    {
-      label: "Tokens",
-      key: "tokens"
-    }
-  ];
+const TypeFilter = ({ selectedCurrencyType, onSelectType }: TypeFilterProps) => {
   return (
     <SectionWrapper>
       <SectionTitle>Type</SectionTitle>
       <Box pt={5}>
-        <Box px={3} pb={2} horizontal alignItems="center">
-          <Checkbox isRadio={true} />
-          <Box px={3} horizontal alignItems="center">
-            <Label px={3} color="palette.text.shade50" fontSize={12}>
-              {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
-              All cryptocurrencies
-            </Label>
+        {currenciesTypes.map(currency => (
+          <Box key={currency.key} px={3} pb={2} horizontal alignItems="center">
+            <Checkbox
+              isRadio={true}
+              isChecked={selectedCurrencyType.key === currency.key}
+              onChange={() => onSelectType(currency)}
+            />
+            <Box px={3} horizontal alignItems="center">
+              <Label px={3} color="palette.text.shade50" fontSize={12}>
+                {currency.label}
+              </Label>
+            </Box>
           </Box>
-        </Box>
-        <Box px={3} pb={2} horizontal alignItems="center">
-          <Checkbox isChecked isRadio />
-          <Box px={3} horizontal alignItems="center">
-            <Label px={3} color="palette.text.shade50" fontSize={12}>
-              {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
-              Coins
-            </Label>
-          </Box>
-        </Box>
-        <Box px={3} pb={2} horizontal alignItems="center">
-          <Checkbox isChecked isRadio />
-          <Box px={3} horizontal alignItems="center">
-            <Label px={3} color="palette.text.shade50" fontSize={12}>
-              {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
-              Tokens
-            </Label>
-          </Box>
-        </Box>
+        ))}
       </Box>
     </SectionWrapper>
   );
-}
+};
 
-function PlatformFilter(props) {
-  const [showMore, setShowMore] = useState(false);
-  const supportedCurrencies = listSupportedCurrencies();
-  let familiies = [];
-  supportedCurrencies.forEach(currency => {
-    currency.family = currency.family.charAt(0).toUpperCase() + currency.family.slice(1);
-    if (familiies.indexOf(currency.family) < 0) {
-      familiies.push(currency.family);
-    }
-  });
+const PlatformFilter = ({
+  displayedFamilies,
+  selectedPlatforms,
+  onShowMore,
+  isShowMoreActive,
+  setSelectedPlatforms,
+}: PlatformFilterProps) => {
+  const onPlatformCheck = (family: string) => {
+    const isIncluded = selectedPlatforms.includes(family);
+    const updatedPlatforms = isIncluded
+      ? selectedPlatforms.filter(selectedFamily => selectedFamily !== family)
+      : [...selectedPlatforms, family];
+    setSelectedPlatforms(updatedPlatforms);
+  };
 
   return (
     <SectionWrapper className="platform">
       <SectionTitle>Platform</SectionTitle>
       <Box className="scrollable-block" mt={5}>
-        {familiies.slice(0, 3).map(family => (
+        {displayedFamilies.map(family => (
           <Box key={family} px={3} pb={2} horizontal alignItems="center">
-            <Checkbox isChecked />
+            <Checkbox
+              isChecked={selectedPlatforms.includes(family)}
+              onChange={() => onPlatformCheck(family)}
+            />
             <Box px={3} horizontal alignItems="center">
               <Label px={3} color="palette.text.shade50" fontSize={12}>
-                {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
-                {family}
-              </Label>
-            </Box>
-          </Box>
-        ))}
-        {showMore && familiies.slice(3).map(family => (
-          <Box key={family} px={3} pb={2} horizontal alignItems="center">
-            <Checkbox isChecked />
-            <Box px={3} horizontal alignItems="center">
-              <Label px={3} color="palette.text.shade50" fontSize={12}>
-                {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
                 {family}
               </Label>
             </Box>
           </Box>
         ))}
       </Box>
-      <Box px={3} horizontal>
-        <TextLink shrink>
-          <BasicButton onClick={() => setShowMore(!showMore)}>
-            <Ellipsis>{showMore ? "Show less" : "Show more"}</Ellipsis>
-          </BasicButton>
-          {/*<AngleDown>*/}
-          {/*  {showMore ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}*/}
-          {/*</AngleDown>*/}
-        </TextLink>
-      </Box>
+      {isShowMoreActive && (
+        <Box px={3} horizontal>
+          <TextLink shrink>
+            <BasicButton onClick={() => onShowMore()}>
+              <Ellipsis>Show more</Ellipsis>
+            </BasicButton>
+          </TextLink>
+        </Box>
+      )}
     </SectionWrapper>
   );
-}
+};
 
-function LedgerLiveCompatible(props) {
-  const [checked, setChecked] = useState(false);
+const LedgerLiveCompatible = ({ value, onValueChange }: LedgerLiveCompatibleProps) => {
   return (
     <SectionWrapper>
       <SectionTitle>Ledger Live Compatible</SectionTitle>
       <Box px={3} pt={5} horizontal alignItems="center" justifyContent="space-between">
         <Label color="palette.text.shade50" fontSize={12}>
-          {/*<Trans i18nKey="bitcoin.pickUnconfirmedRBF" />*/}
           Display only the assets you can have an account in Ledger Live
         </Label>
-        <Switch
-          isChecked={checked}
-          onChange={setChecked}
-        />
+        <Switch isChecked={value} onChange={() => onValueChange(!value)} />
       </Box>
     </SectionWrapper>
   );
-}
+};
 
-function MarketFiltersFooter(props) {
+const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) => {
   return (
     <FooterWrapper>
       <Divider />
       <Box px={5} py={4} horizontal justifyContent="space-between">
-        <BasicButton>
+        <BasicButton onClick={() => onClearAll()}>
           <Ellipsis>Clear all</Ellipsis>
         </BasicButton>
-        <PrimaryButton>
+        <PrimaryButton onClick={() => onApply()}>
           <Ellipsis>Apply filters</Ellipsis>
         </PrimaryButton>
       </Box>
     </FooterWrapper>
   );
-}
+};
 
-function MarketFilters(props) {
+function MarketFilters() {
+  const FAMILIES_COUNT_STEP = 3; // default and how much families added by clicking "show more"
+
+  const dispatch = useDispatch();
+  const [displayedFamiliesCount, setDisplayedFamiliesCount] = useState<number>(FAMILIES_COUNT_STEP);
+  const [currencyType, setCurrencyType] = useState<TypeFilterRow>(
+    currenciesTypes.find(c => c.key === "all"),
+  );
+  const [isLedgerCompatible, setIsLedgerCompatible] = useState(false);
+
+  const supportedCurrencies = listCryptoCurrencies();
+  const families = [];
+  supportedCurrencies.forEach(currency => {
+    currency.family = currency.family.charAt(0).toUpperCase() + currency.family.slice(1);
+    if (families.indexOf(currency.family) < 0) {
+      families.push(currency.family);
+    }
+  });
+  const displayedFamilies = families.slice(0, displayedFamiliesCount);
+
+  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+
+  const isShowMoreActive: boolean =
+    families.length > 3 && displayedFamilies.length < families.length;
+
+  const onShowMore = () => {
+    setDisplayedFamiliesCount(displayedFamiliesCount + FAMILIES_COUNT_STEP);
+  };
+
+  useEffect(() => {
+    // count filtered currencies here
+  }, [currencyType, selectedPlatforms, isLedgerCompatible]);
+
+  const onClearAll = () => {
+    setCurrencyType(currenciesTypes.find(c => c.key === "all"));
+    setSelectedPlatforms([]);
+    setIsLedgerCompatible(false);
+  };
+
+  const onApplyFilters = useCallback(() => {
+    dispatch(closePlatformAppDrawer());
+  }, [dispatch]);
+
   return (
     <Box>
       <MainWrapper pt={6} px={5}>
-        <TypeFilter />
-        <PlatformFilter />
-        <LedgerLiveCompatible />
-        {/*<Text ff="Inter" color="#6490F1">*/}
-        {/*  Hello*/}
-        {/*</Text>*/}
+        <TypeFilter
+          selectedCurrencyType={currencyType}
+          onSelectType={type => setCurrencyType(type)}
+        />
+        <PlatformFilter
+          displayedFamilies={displayedFamilies}
+          selectedPlatforms={selectedPlatforms}
+          setSelectedPlatforms={platforms => setSelectedPlatforms(platforms)}
+          onShowMore={() => onShowMore()}
+          isShowMoreActive={isShowMoreActive}
+        />
+        <LedgerLiveCompatible
+          value={isLedgerCompatible}
+          onValueChange={value => setIsLedgerCompatible(value)}
+        />
       </MainWrapper>
-      <MarketFiltersFooter />
+      <MarketFiltersFooter onClearAll={() => onClearAll()} onApply={() => onApplyFilters()} />
     </Box>
   );
 }

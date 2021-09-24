@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback, useMemo } from "react";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
@@ -39,7 +38,9 @@ export const MarketCounterValueSelect = () => {
     );
   }, []);
 
-  const items = useMemo(() => supportedCountervalues.map(item => {
+  const items = useMemo(
+    () =>
+      supportedCountervalues.map(item => {
         item.key = item.value;
         return item;
       }),

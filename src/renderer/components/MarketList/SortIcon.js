@@ -1,6 +1,7 @@
+// @flow
 import React from "react";
 
-const SortIcon = props => {
+const SortIcon = (props: { order: "asc" | "desc" }) => {
   switch (props.order) {
     case "asc":
       return (
