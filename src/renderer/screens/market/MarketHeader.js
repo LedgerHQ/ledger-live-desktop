@@ -7,7 +7,7 @@ import { MarketRangeSelect } from "~/renderer/screens/market/MarketRangeSelect";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { ItemContainer } from "~/renderer/components/TopBar/shared";
-import IconSettings from "~/renderer/icons/Settings";
+import IconFilters from "~/renderer/icons/Filters";
 import { useDispatch } from "react-redux";
 import { openMarketFilterDrawer } from "~/renderer/actions/UI";
 
@@ -38,8 +38,13 @@ const MarketHeader = () => {
       <RightBox horizontal flow={2} alignItems="center" justifyContent="flex-end">
         <MarketCounterValueSelect />
         <MarketRangeSelect />
-        <ItemContainer id="market-filter-button" isInteractive onClick={onFilterClick}>
-          <IconSettings size={16} />
+        <ItemContainer
+          id="market-filter-button"
+          isInteractive
+          onClick={onFilterClick}
+          style={{ cursor: "pointer" }}
+        >
+          <IconFilters size={16} />
         </ItemContainer>
       </RightBox>
     </Box>

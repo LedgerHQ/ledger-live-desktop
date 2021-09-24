@@ -4,17 +4,20 @@ import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { BigNumber } from "bignumber.js";
 import { useCalculateMany } from "@ledgerhq/live-common/lib/countervalues/react";
 import { Currency } from "@ledgerhq/live-common/lib/types";
+import type { MarketFilters } from "~/renderer/reducers/market";
 
 type MarketCurrenciesProps = {
   count: number,
   increment: number,
   counterValueCurrency: Currency,
+  filters: MarketFilters,
 };
 
 export function useMarketCurrencies({
   counterValueCurrency,
   count,
   increment,
+  filters,
 }: MarketCurrenciesProps) {
   const PERCENT_MULTIPLIER = 100;
 

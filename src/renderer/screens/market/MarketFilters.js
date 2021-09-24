@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Label from "~/renderer/components/Label";
@@ -11,8 +11,9 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { useDispatch } from "react-redux";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
+import type { CurrencyType } from "~/renderer/reducers/market";
+import { setMarketFilters } from "~/renderer/actions/market";
 
-type CurrencyType = "all" | "coins" | "tokens";
 type TypeFilterRow = { key: CurrencyType, label: string };
 type PlatformFilterProps = {
   displayedFamilies: string[],
@@ -231,15 +232,11 @@ function MarketFilters() {
   const [selectedPlatforms, setSelectedPlatforms] = useState([]);
 
   const isShowMoreActive: boolean =
-    families.length > 3 && displayedFamilies.length < families.length;
+    families.length > FAMILIES_COUNT_STEP && displayedFamilies.length < families.length;
 
   const onShowMore = () => {
     setDisplayedFamiliesCount(displayedFamiliesCount + FAMILIES_COUNT_STEP);
   };
-
-  useEffect(() => {
-    // count filtered currencies here
-  }, [currencyType, selectedPlatforms, isLedgerCompatible]);
 
   const onClearAll = () => {
     setCurrencyType(currenciesTypes.find(c => c.key === "all"));
@@ -248,8 +245,9 @@ function MarketFilters() {
   };
 
   const onApplyFilters = useCallback(() => {
+    dispatch(setMarketFilters({ currencyType, selectedPlatforms, isLedgerCompatible }));
     dispatch(closePlatformAppDrawer());
-  }, [dispatch]);
+  }, [currencyType, dispatch, isLedgerCompatible, selectedPlatforms]);
 
   return (
     <Box>

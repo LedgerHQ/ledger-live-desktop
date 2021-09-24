@@ -19,12 +19,24 @@ export type MarketCurrency = {
   units: Array<any>,
 };
 
+export type CurrencyType = "all" | "coins" | "tokens";
+export type MarketFilters = {
+  isLedgerCompatible: boolean,
+  currencyType: CurrencyType,
+  selectedPlatforms: string[],
+};
+
 export type MarketState = {
   currencies: Array<MarketCurrency>,
   filteredCurrencies: Array<MarketCurrency>,
   searchValue: string,
   range: string,
   counterValue: { value: string, label: string, currency: Currency },
+  filters: {
+    isLedgerCompatible: boolean,
+    currencyType: CurrencyType,
+    selectedPlatforms: string[],
+  },
 };
 
 const initialState: MarketState = {
@@ -35,6 +47,11 @@ const initialState: MarketState = {
   order: "desc",
   orderBy: "counterValue",
   counterValue: supportedCountervalues.find(cv => cv.value === "USD"),
+  filters: {
+    isLedgerCompatible: false,
+    currencyType: "all",
+    selectedPlatforms: [],
+  },
 };
 
 const handlers = {
@@ -55,6 +72,12 @@ const handlers = {
     return {
       ...state,
       counterValue,
+    };
+  },
+  SET_MARKET_FILTERS: (state, { payload }: { payload: MarketFilters }) => {
+    return {
+      ...state,
+      filters: payload,
     };
   },
 };

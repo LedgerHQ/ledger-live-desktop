@@ -1,5 +1,5 @@
 // @flow
-import { MarketState } from "~/renderer/reducers/market";
+import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 
 export const setMarketParams = (payload: MarketState) => ({
   type: "SET_MARKET_PARAMS",
@@ -14,4 +14,9 @@ export const setMarketRange = (range: string) => ({
 export const setMarketCounterValue = (counterValue: string) => ({
   type: "SET_MARKET_COUNTERVALUE",
   payload: counterValue,
+});
+
+export const setMarketFilters = (filters: MarketFilters) => ({
+  type: "SET_MARKET_FILTERS",
+  payload: filters,
 });
