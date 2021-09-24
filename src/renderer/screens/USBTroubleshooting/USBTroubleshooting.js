@@ -12,14 +12,8 @@ import USBTroubleshootingMachine from "./USBTroubleshootingMachine";
 import Intro from "./solutions/Intro";
 import ArrowRightIcon from "~/renderer/icons/ArrowRight";
 import RepairFunnel from "./solutions/RepairFunnel";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useHistory, useLocation } from "react-router-dom";
 import { setUSBTroubleshootingIndex } from "~/renderer/actions/settings";
-
-const Wrapper: ThemedComponent<{}> = styled.div`
-  position: relative;
-  height: 100%;
-`;
 
 const StepWrapper = styled(Box).attrs({
   horizontal: true,
@@ -66,7 +60,7 @@ const USBTroubleshooting = () => {
   return showIntro ? (
     <Intro onStart={() => setShowIntro(false)} onBack={onExit} />
   ) : (
-    <Wrapper>
+    <Box>
       <SolutionComponent number={currentIndex + 1} sendEvent={sendEvent} done={done} />
       {!isLastStep && <ConnectionTester onExit={onExit} />}
       {!done && (
@@ -91,7 +85,7 @@ const USBTroubleshooting = () => {
           )}
         </StepWrapper>
       )}
-    </Wrapper>
+    </Box>
   );
 };
 
