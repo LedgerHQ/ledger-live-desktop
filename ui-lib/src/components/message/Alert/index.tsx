@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Text from "@components/Text";
+import Text from "@ui/components/asorted/Text";
 import ShieldSecurityMedium from "@ui/assets/icons/ShieldSecurityMedium";
 import CircledCrossMedium from "@ui/assets/icons/CircledCrossMedium";
 import CircledAlertMedium from "@ui/assets/icons/CircledAlertMedium";
@@ -26,7 +26,7 @@ const icons = {
 };
 
 const StyledAlertContainer = styled.div<{ type?: AlertType }>`
-  ${p => {
+  ${(p) => {
     switch (p.type) {
       case "warning":
         return css`
