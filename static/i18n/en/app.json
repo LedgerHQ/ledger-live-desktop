@@ -3104,7 +3104,8 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Solution #{{number}}",
     "nextSolution": "Next solution",
     "previousSolution": "Previous solution",
@@ -3135,7 +3136,7 @@
           "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
           "cta": "Set Rules",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Connect and unlock your device to see if it’s detected."
           }
         }
@@ -3144,8 +3145,8 @@
         "usbPort": {
           "title": "Try different USB ports",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Connect and unlock your device to see if it’s detected."
           }
         },

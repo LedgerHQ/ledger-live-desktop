@@ -12,8 +12,9 @@ import illustration from "~/renderer/images/USBTroubleshooting/illus4.png";
 
 const TryAnotherComputerSolution = ({ number = 1 }: { number?: number }) => {
   const { t } = useTranslation();
+  const link = "https://ledger.com/ledger-live";
   const onClickLink = useCallback(() => {
-    openURL("https://www.ledger.com/ledger-live/");
+    openURL(link);
   }, []);
 
   return (
@@ -31,7 +32,10 @@ const TryAnotherComputerSolution = ({ number = 1 }: { number?: number }) => {
               icon: <BulletRowIcon>1</BulletRowIcon>,
               desc: (
                 <Text ff="Inter|Medium" fontSize={4}>
-                  <Trans i18nKey="connectTroubleshooting.steps.2.anotherComputer.bullets.0">
+                  <Trans
+                    i18nKey="connectTroubleshooting.steps.2.anotherComputer.bullets.0"
+                    values={{ link }}
+                  >
                     <FakeLink onClick={onClickLink} />
                   </Trans>
                 </Text>

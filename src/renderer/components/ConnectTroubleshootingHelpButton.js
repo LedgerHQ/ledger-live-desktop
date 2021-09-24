@@ -26,7 +26,7 @@ const ConnectTroubleshootingHelpButton = ({ buttonProps, textColor }: Props) => 
   return (
     <Button onClick={onStartTroubleshootingFlow} my={1} {...buttonProps}>
       <Box horizontal alignItems="center" color={textColor} id="USBTroubleshooting-startFlow">
-        {t("common.help")}
+        {t("connectTroubleshooting.cta")}
       </Box>
     </Button>
   );
