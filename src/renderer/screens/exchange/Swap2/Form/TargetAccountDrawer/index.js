@@ -23,10 +23,13 @@ import { rgba } from "~/renderer/styles/helpers";
 
 const AccountWrapper = styled(Tabbable)`
   cursor: pointer;
+  &:hover {
+    background-color: ${p => p.theme.colors.palette.text.shade10};
+  }
   ${p =>
     p.selected
       ? `
-    background-color: ${p.theme.colors.lightGrey};
+    background-color: ${p.theme.colors.palette.background.main};
   `
       : ""};
 `;

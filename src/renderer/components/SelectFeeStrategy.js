@@ -49,7 +49,7 @@ const FeesWrapper = styled(Box)`
   width: 100%;
   font-family: "Inter";
   border-radius: 4px;
-  ${p => (p.disabled ? `background: #F5F5F5;` : "")};
+  ${p => (p.disabled ? `background: ${p.theme.colors.palette.background.default};` : "")};
 
   &:hover {
     cursor: ${p => (p.disabled ? "unset" : "pointer")};
