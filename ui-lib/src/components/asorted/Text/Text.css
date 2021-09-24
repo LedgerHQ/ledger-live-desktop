@@ -13,6 +13,11 @@
   font-size: 20px;
   line-height: 24px;
 }
+.ll-text_h3 {
+  font-family: Alpha, Arial;
+  font-size: 20px;
+  line-height: 24px;
+}
 .ll-text_highlight {
   font-family: Inter, Arial;
   font-size: 16px;
@@ -27,6 +32,7 @@
   font-family: Inter, Arial;
   font-size: 13px;
   line-height: 20px;
+  font-weight: 500;
 }
 .ll-text_cta {
   font-family: Inter, Arial;
@@ -45,6 +51,7 @@
   font-family: Inter, Arial;
   font-size: 12px;
   line-height: 16px;
+  font-weight: 500;
 }
 .ll-text_navigation {
   font-family: Inter, Arial;
@@ -70,5 +77,12 @@
   height: 1.1em;
   width: 0.55em;
   transform: translateY(0.2em);
-  margin: 0 0.3em;
+  margin: 0;
+}
+
+.ll-text_small3 {
+  font-family: Inter, Arial;
+  font-size: 10px;
+  line-height: 12.1px;
+  font-weight: 500;
 }
