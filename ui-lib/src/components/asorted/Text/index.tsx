@@ -9,11 +9,11 @@ import {
   lineHeight,
   letterSpacing,
   system,
+  SpaceProps,
 } from "styled-system";
 import fontFamily from "@ui/styles/styled/fontFamily";
 import "./Text.css";
-import BracketRight from "@ui/assets/icons/BracketleftRegular";
-import BracketLeft from "@ui/assets/icons/BracketrightRegular";
+import { BracketRight, BracketLeft } from "./Brackets";
 
 const uppercase = system({
   uppercase: {
@@ -79,7 +79,7 @@ interface BaseTextProps {
   textTransform?: string;
 }
 
-const Base = styled.span.attrs((p: BaseTextProps) => ({
+const Base = styled.span.attrs((p: BaseTextProps & SpaceProps) => ({
   color: p.color || "palette.neutral.c100",
   className: `${p.type ? `ll-text_${p.type} ` : ""}`,
 }))<BaseTextProps>`
@@ -95,13 +95,11 @@ const Base = styled.span.attrs((p: BaseTextProps) => ({
   ${(p) => (p.textTransform ? `text-transform: ${p.textTransform};` : "")}
 `;
 
-const Text = ({ children, bracket, ...props }: TextProps) => {
+const Text = ({ children, bracket, ...props }: TextProps & SpaceProps) => {
   return bracket ? (
     <Base {...props}>
-      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketLeft className="ll-text_bracket" />
       {children}
-      {/* @ts-expect-error FIXME wrap this into a reusablec component to avoid this */}
       <BracketRight className="ll-text_bracket" />
     </Base>
   ) : (
