@@ -38,7 +38,10 @@ const ResetNVRAMSolution = ({ number = 1 }: { number?: number }) => {
               icon: <BulletRowIcon>1</BulletRowIcon>,
               desc: (
                 <Text ff="Inter|Medium" fontSize={4}>
-                  <Trans i18nKey="connectTroubleshooting.steps.3.mac.1.bullets.0">
+                  <Trans
+                    i18nKey="connectTroubleshooting.steps.3.mac.1.bullets.0"
+                    values={{ link: t("connectTroubleshooting.applesInstructions") }}
+                  >
                     <TranslatedLink onClick={onClickLink} />
                   </Trans>
                 </Text>

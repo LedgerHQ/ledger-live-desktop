@@ -3107,6 +3107,7 @@
     "desc": "Having trouble connecting your device?",
     "cta": "Fix it",
     "solution": "Solution #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Next solution",
     "previousSolution": "Previous solution",
     "followSteps": "Follow these steps",

@@ -72,9 +72,12 @@ export default createMachine(
     actions: {
       load: assign(({ platform, currentIndex, solutions }) => {
         if (!solutions[platform]) throw new Error(`Unknown platform ${platform}`);
-        const SolutionComponent = solutions[platform][currentIndex || 0];
+        const index =
+          !currentIndex || currentIndex >= solutions[platform].length ? 0 : currentIndex;
+        const SolutionComponent = solutions[platform][index];
+
         return {
-          currentIndex: currentIndex || 0,
+          currentIndex: index,
           SolutionComponent,
         };
       }),
