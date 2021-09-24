@@ -8,6 +8,7 @@ import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
+import { isCompoundTokenSupported } from "@ledgerhq/live-common/lib/families/ethereum/modules/compound";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
@@ -33,7 +34,6 @@ import AccountHeaderActions from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
 import TokensList from "./TokensList";
 import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
-import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 
 const mapStateToProps = (
   state,
@@ -85,13 +85,12 @@ const AccountPage = ({
     : null;
   const bgColor = useTheme("colors.palette.background.paper");
 
-  const isCompoundEnabled = useCompoundAccountEnabled(account, parentAccount);
-
   if (!account || !mainAccount) {
     return <Redirect to="/accounts" />;
   }
 
   const ctoken = account.type === "TokenAccount" ? findCompoundToken(account.token) : null;
+  const isCompoundEnabled = ctoken ? isCompoundTokenSupported(ctoken) : false;
 
   const currency = getAccountCurrency(account);
   const color = getCurrencyColor(currency, bgColor);

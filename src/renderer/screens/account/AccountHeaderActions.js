@@ -44,7 +44,6 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
-import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -71,13 +70,13 @@ const mapDispatchToProps = {
 
 type OwnProps = {
   account: AccountLike,
-  parentAccount?: Account,
+  parentAccount: ?Account,
 };
 
-type Props = {
+type Props = OwnProps & {
   t: TFunction,
   openModal: Function,
-} & OwnProps;
+};
 
 const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
@@ -95,11 +94,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ReceiveAction = (decorators && decorators.ReceiveAction) || ReceiveActionDefault;
   const currency = getAccountCurrency(account);
 
-  // check if account already has lending enabled
   const summary =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
-
-  const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
+  const availableOnCompound = !!summary;
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
   const availableOnSwap = useSelector(swapSelectableCurrenciesSelector);

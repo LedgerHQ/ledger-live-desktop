@@ -1,4 +1,5 @@
 // @flow
+
 import { createSelector, createSelectorCreator, defaultMemoize } from "reselect";
 import type { OutputSelector } from "reselect";
 import { handleActions } from "redux-actions";
@@ -22,8 +23,6 @@ import logger from "./../../logger/logger";
 import accountModel from "./../../helpers/accountModel";
 import type { State } from ".";
 import isEqual from "lodash/isEqual";
-
-import useCompoundAccountEnabled from "../screens/lend/useCompoundAccountEnabled";
 
 export type AccountsState = Account[];
 const state: AccountsState = [];
@@ -233,14 +232,6 @@ export const isUpToDateAccountSelector: OutputSelector<
   { accountId: string },
   boolean,
 > = createSelector(accountSelector, isUpToDateAccount);
-
-export const hasLendEnabledAccountsSelector: OutputSelector<
-  State,
-  void,
-  boolean,
-> = createSelector(shallowAccountsSelector, accounts =>
-  flattenAccounts(accounts).some(accounts => useCompoundAccountEnabled(accounts)),
-);
 
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode);
 
