@@ -27,7 +27,7 @@ const Wrapper: ThemedComponent<{}> = styled(Box)`
 
 // NB There is no real need to run anything that's more complex than this.
 // If we can do a getAppAndVersion, it means we can communicate with the device.
-const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
+const ConnectionTester = ({ onExit, onDone }: { onExit: () => void, onDone: () => void }) => {
   const { t } = useTranslation();
   const [connectionStatus, setConnectionStatus] = useState(0);
   const currentDevice = useSelector(getCurrentDevice);
@@ -38,13 +38,16 @@ const ConnectionTester = ({ onExit }: { onExit: () => void }) => {
     if (currentDevice) {
       // Nb if we haven't detected a device at all, there's no point in running the command
       sub = command("getAppAndVersion")({ deviceId: "" }).subscribe({
-        next: e => setConnectionStatus(1),
+        next: e => {
+          onDone();
+          setConnectionStatus(1);
+        },
       });
     }
     return () => {
       if (sub) sub.unsubscribe();
     };
-  }, [currentDevice]);
+  }, [currentDevice, onDone]);
 
   return (
     <Wrapper>

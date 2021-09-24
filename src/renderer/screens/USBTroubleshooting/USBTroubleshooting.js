@@ -57,12 +57,16 @@ const USBTroubleshooting = () => {
     history.push({ pathname: "/manager" });
   }, [dispatch, history]);
 
+  const onDone = useCallback(() => {
+    sendEvent("DONE");
+  }, [sendEvent]);
+
   return showIntro ? (
     <Intro onStart={() => setShowIntro(false)} onBack={onExit} />
   ) : (
     <Box>
       <SolutionComponent number={currentIndex + 1} sendEvent={sendEvent} done={done} />
-      {!isLastStep && <ConnectionTester onExit={onExit} />}
+      {!isLastStep && <ConnectionTester onExit={onExit} onDone={onDone} />}
       {!done && (
         <StepWrapper>
           <Button

@@ -120,9 +120,6 @@ const RepairFunnelSolution = ({
         {t("connectTroubleshooting.steps.4.notFixed.desc")}
       </Subtitle>
       <Box horizontal>
-        <Button secondary mr={2} onClick={onBackToPortfolio}>
-          {t("connectTroubleshooting.steps.4.notFixed.back")}
-        </Button>
         <Button primary onClick={onContactSupport}>
           {t("connectTroubleshooting.steps.4.notFixed.cta")}
         </Button>
