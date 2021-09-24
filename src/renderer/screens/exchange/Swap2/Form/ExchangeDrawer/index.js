@@ -8,7 +8,7 @@ import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
 import Box from "~/renderer/components/Box";
 import SwapAction from "./SwapAction";
-import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import {

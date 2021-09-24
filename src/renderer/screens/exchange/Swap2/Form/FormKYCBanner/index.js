@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 
 import SectionInformative from "~/renderer/screens/exchange/Swap2/Form/FormSummary/SectionInformative";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
-import { KYC_STATUS } from "../../utils/shared";
-import type { KYCStatus } from "../../utils/shared";
+import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
 const FormKYCBanner = ({ provider, status }: { provider?: string, status?: KYCStatus }) => {
   const { t } = useTranslation();

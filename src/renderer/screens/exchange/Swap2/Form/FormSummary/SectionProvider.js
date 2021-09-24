@@ -10,7 +10,7 @@ import { rgba } from "~/renderer/styles/helpers";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
-import type { KYCStatus } from "~/renderer/screens/exchange/Swap2/utils/shared";
+import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { iconByProviderName } from "../../utils";
 
 const StatusTag = styled.div`

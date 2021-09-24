@@ -1,5 +1,5 @@
 // @flow
-import type { SwapTransactionType } from "../../utils/shared/useSwapTransaction";
+import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
 export type FormSummarySections = "provider" | "fees" | "rate" | "target";
 export type FormSummaryProps = {

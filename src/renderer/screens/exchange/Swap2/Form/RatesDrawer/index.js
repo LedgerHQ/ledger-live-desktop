@@ -8,7 +8,7 @@ import Rate from "./Rate";
 import type {
   SwapSelectorStateType,
   RatesReducerState,
-} from "../../utils/shared/useSwapTransaction";
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import { rateSelector, updateRateAction } from "~/renderer/actions/swap";
 import { DrawerTitle } from "../DrawerTitle";
 import TrackPage from "~/renderer/analytics/TrackPage";

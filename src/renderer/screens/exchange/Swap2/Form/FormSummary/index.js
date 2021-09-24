@@ -6,7 +6,7 @@ import SectionFees from "./SectionFees";
 import SectionTarget from "./SectionTarget";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
-import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import type { SectionProviderProps } from "./SectionProvider";
 
 const Form: ThemedComponent<{}> = styled.section.attrs(({ ready }) => ({
