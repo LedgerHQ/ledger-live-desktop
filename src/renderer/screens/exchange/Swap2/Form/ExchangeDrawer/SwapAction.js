@@ -16,7 +16,7 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
-import type { SwapTransactionType } from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import Text from "~/renderer/components/Text";

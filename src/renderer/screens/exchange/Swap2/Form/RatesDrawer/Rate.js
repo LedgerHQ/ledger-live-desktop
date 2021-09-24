@@ -8,7 +8,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { rgba } from "~/renderer/styles/helpers";
-import type { SwapSelectorStateType } from "../../utils/shared/useSwapTransaction";
+import type { SwapSelectorStateType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import IconLock from "~/renderer/icons/Lock";
 import IconLockOpen from "~/renderer/icons/LockOpen";
 import Price from "~/renderer/components/Price";

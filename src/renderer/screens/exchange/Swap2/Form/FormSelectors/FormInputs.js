@@ -9,7 +9,7 @@ import ToRow from "./ToRow";
 import type {
   SwapSelectorStateType,
   SwapTransactionType,
-} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
 type FormInputsProps = {
   fromAccount: $PropertyType<SwapSelectorStateType, "account">,

@@ -11,12 +11,12 @@ import { useSelector } from "react-redux";
 import {
   usePickDefaultCurrency,
   useSelectableCurrencies,
-} from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type {
   SwapSelectorStateType,
   SwapTransactionType,
-} from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import {
   Container as InputContainer,
   BaseContainer as BaseInputContainer,

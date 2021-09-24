@@ -13,7 +13,7 @@ import type {
   SwapSelectorStateType,
   RatesReducerState,
   SwapDataType,
-} from "../../utils/shared/useSwapTransaction";
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import Price from "~/renderer/components/Price";
 import { rateSelector, rateExpirationSelector } from "~/renderer/actions/swap";
 import CountdownTimer from "~/renderer/components/CountdownTimer";
