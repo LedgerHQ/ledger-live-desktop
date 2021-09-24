@@ -27,11 +27,13 @@ const initialState: State = {
 type ContextValue = {
   state: State,
   setDrawer: (Component?: React$ComponentType<*>, props?: *) => void,
+  closeDrawer: () => void,
 };
 
 export const context = React.createContext<ContextValue>({
   state: initialState,
   setDrawer: () => {},
+  closeDrawer: () => {},
 });
 
 const DrawerProvider = ({ children }: { children: React$Node }) => {
@@ -40,12 +42,20 @@ const DrawerProvider = ({ children }: { children: React$Node }) => {
     (Component, props) => dispatch({ Component, props, open: !!Component }),
     [],
   );
+  const _closeDrawer = useCallback(
+    () => dispatch({ Component: undefined, props: {}, open: false }),
+    [],
+  );
 
   useEffect(() => {
     setDrawer = _setDrawer;
   }, [_setDrawer]);
 
-  return <context.Provider value={{ state, setDrawer: _setDrawer }}>{children}</context.Provider>;
+  return (
+    <context.Provider value={{ state, setDrawer: _setDrawer, closeDrawer: _closeDrawer }}>
+      {children}
+    </context.Provider>
+  );
 };
 
 export default DrawerProvider;
