@@ -37,8 +37,16 @@ const Intro = ({ onStart, onBack }: { onStart: () => void, onBack: () => void })
         {t("connectTroubleshooting.steps.entry.desc")}
       </Text>
       <Box horizontal>
-        <Button onClick={onBack}>{t("connectTroubleshooting.steps.entry.back")}</Button>
-        <Button ml={3} primary onClick={onStart} id="USBTroubleshooting-intro-start">
+        <Button onClick={onBack} event="USBTroubleshooting Intro - Back">
+          {t("connectTroubleshooting.steps.entry.back")}
+        </Button>
+        <Button
+          ml={3}
+          primary
+          event="USBTroubleshooting Intro - Start"
+          onClick={onStart}
+          id="USBTroubleshooting-intro-start"
+        >
           {t("connectTroubleshooting.steps.entry.cta")}
         </Button>
       </Box>

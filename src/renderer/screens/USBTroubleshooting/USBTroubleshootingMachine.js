@@ -52,17 +52,17 @@ export default createMachine(
             },
           ]),
           "load",
-          "logPlatform",
+          "log",
         ],
         on: {
           NEXT: {
-            actions: ["next", "load"],
+            actions: ["next", "load", "log"],
           },
           PREVIOUS: {
-            actions: ["previous", "load"],
+            actions: ["previous", "load", "log"],
           },
           DONE: {
-            actions: "done",
+            actions: ["done", "log"],
           },
         },
       },
@@ -98,8 +98,12 @@ export default createMachine(
         };
       }),
       // Tracking actions
-      logPlatform: () => track(`USBTroubleshooting detectPlatform`, { detectedPlatform }),
-      log: (context, event) => track(`USBTroubleshooting ${event.type}`, event),
+      log: (context, event) =>
+        track(`USBTroubleshooting ${event.type}`, {
+          event,
+          detectedPlatform,
+          currentIndex: context.currentIndex,
+        }),
     },
   },
 );
