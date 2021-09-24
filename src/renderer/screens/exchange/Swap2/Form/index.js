@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
@@ -12,9 +12,9 @@ import { useTranslation } from "react-i18next";
 import {
   useSwapProviders,
   usePollKYCStatus,
-} from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import { KYC_STATUS } from "~/renderer/screens/exchange/Swap2/utils/shared";
-import useSwapTransaction from "~/renderer/screens/exchange/Swap2/utils/shared/useSwapTransaction";
+  useSwapTransaction,
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProvidersAction,
@@ -61,12 +61,16 @@ const SwapForm = () => {
   const { providers, error: providersError } = useSwapProviders();
   const storedProviders = useSelector(providersSelector);
   const exchangeRate = useSelector(rateSelector);
+  const setExchangeRate = useCallback(
+    rate => {
+      dispatch(updateRateAction(rate));
+    },
+    [dispatch],
+  );
   const swapTransaction = useSwapTransaction({
     accounts,
     exchangeRate,
-    setExchangeRate: rate => {
-      dispatch(updateRateAction(rate));
-    },
+    setExchangeRate,
     onNoRates: trackNoRates,
     ...locationState,
   });
