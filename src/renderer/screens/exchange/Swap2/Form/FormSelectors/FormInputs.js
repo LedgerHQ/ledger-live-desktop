@@ -4,6 +4,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import FromRow from "./FromRow";
 import ToRow from "./ToRow";
 import type {
@@ -36,7 +37,7 @@ const RoundButton = styled(Button)`
   height: initial;
 `;
 
-const Main = styled.section`
+const Main: ThemedComponent<{}> = styled.section`
   display: flex;
   flex-direction: column;
   row-gap: 50px;
