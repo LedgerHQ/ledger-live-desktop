@@ -21,6 +21,7 @@ type Props = {
   status: $PropertyType<SwapTransactionType, "status">,
   disableSlowStrategy?: boolean,
   provider: ?string,
+  closeDrawer: () => void,
 };
 export default function FeesDrawer({
   setTransaction,
@@ -31,6 +32,7 @@ export default function FeesDrawer({
   status,
   provider,
   disableSlowStrategy = false,
+  closeDrawer,
 }: Props) {
   const transaction = useSelector(transactionSelector);
 
@@ -39,6 +41,11 @@ export default function FeesDrawer({
       strategy.label === "slow" && disableSlowStrategy ? { ...strategy, disabled: true } : strategy,
     [disableSlowStrategy],
   );
+
+  const handleTransactionUpdate = (newTransaction: typeof transaction): void => {
+    updateTransaction(newTransaction);
+    closeDrawer();
+  };
 
   return (
     <Box height="100%">
@@ -58,7 +65,7 @@ export default function FeesDrawer({
             status={status}
             transaction={transaction}
             onChange={setTransaction}
-            updateTransaction={updateTransaction}
+            updateTransaction={handleTransactionUpdate}
             mapStrategies={mapStrategies}
           />
         )}
