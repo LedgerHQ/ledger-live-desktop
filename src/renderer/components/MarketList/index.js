@@ -11,6 +11,9 @@ import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
+import type { MarketCurrency } from "~/renderer/reducers/market";
+
+const ListItemHeight: number = 56;
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
@@ -71,20 +74,27 @@ type CurrencyRowProps = {
 };
 
 function MarketList() {
-  const { range, searchValue, counterValue, order, orderBy } = useSelector(state => state.market);
+  const { range, searchValue, counterValue, order, orderBy, filters } = useSelector(
+    state => state.market,
+  );
   const { rangeData } = useRange(range);
 
-  const currencies = useMarketCurrencies({
+  const currencies: Array<MarketCurrency> = useMarketCurrencies({
     counterValueCurrency: counterValue.currency,
     ...rangeData,
   });
 
   const dispatch = useDispatch();
-  let visibleCurrencies = [];
-  const hiddenCurrencies = [];
+  let visibleCurrencies: Array<MarketCurrency> = [];
+  const hiddenCurrencies: Array<MarketCurrency> = [];
   for (let i = 0; i < currencies.length; i++) {
     const currency = currencies[i];
-    if (matchesSearch(searchValue, currency)) {
+    let doSearch: boolean = true;
+
+    if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
+      doSearch = false;
+    }
+    if (doSearch && matchesSearch(searchValue, currency)) {
       visibleCurrencies.push(currency);
     } else {
       hiddenCurrencies.push(currency);
@@ -190,10 +200,10 @@ function MarketList() {
       </Row>
       {visibleCurrenciesLength ? (
         <ListStyled
-          height={visibleCurrenciesLength < 9 ? visibleCurrenciesLength * 56 : 500}
+          height={visibleCurrenciesLength < 9 ? visibleCurrenciesLength * ListItemHeight : 500}
           width="100%"
           itemCount={visibleCurrenciesLength}
-          itemSize={56}
+          itemSize={ListItemHeight}
           key={range}
           style={{ overflowX: "hidden" }}
         >

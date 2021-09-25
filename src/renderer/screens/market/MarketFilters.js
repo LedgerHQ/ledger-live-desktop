@@ -9,7 +9,7 @@ import { TextLink } from "~/renderer/components/Breadcrumb/common";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import { setMarketFilters } from "~/renderer/actions/market";
@@ -152,19 +152,21 @@ const PlatformFilter = ({
     <SectionWrapper className="platform">
       <SectionTitle>Platform</SectionTitle>
       <Box className="scrollable-block" mt={5}>
-        {displayedFamilies.map(family => (
-          <Box key={family} px={3} pb={2} horizontal alignItems="center">
-            <Checkbox
-              isChecked={selectedPlatforms.includes(family)}
-              onChange={() => onPlatformCheck(family)}
-            />
-            <Box px={3} horizontal alignItems="center">
-              <Label px={3} color="palette.text.shade50" fontSize={12}>
-                {family}
-              </Label>
+        {displayedFamilies.map(family => {
+          return (
+            <Box key={family} px={3} pb={2} horizontal alignItems="center">
+              <Checkbox
+                isChecked={selectedPlatforms.includes(family)}
+                onChange={() => onPlatformCheck(family.toLowerCase())}
+              />
+              <Box px={3} horizontal alignItems="center">
+                <Label px={3} color="palette.text.shade50" fontSize={12}>
+                  {family.charAt(0).toUpperCase() + family.slice(1)}
+                </Label>
+              </Box>
             </Box>
-          </Box>
-        ))}
+          );
+        })}
       </Box>
       {isShowMoreActive && (
         <Box px={3} horizontal>
@@ -212,24 +214,25 @@ const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) 
 function MarketFilters() {
   const FAMILIES_COUNT_STEP = 3; // default and how much families added by clicking "show more"
 
+  const savedFilters = useSelector(state => state.market.filters)
   const dispatch = useDispatch();
   const [displayedFamiliesCount, setDisplayedFamiliesCount] = useState<number>(FAMILIES_COUNT_STEP);
   const [currencyType, setCurrencyType] = useState<TypeFilterRow>(
-    currenciesTypes.find(c => c.key === "all"),
+    currenciesTypes.find(c => c.key === savedFilters.currencyType),
   );
-  const [isLedgerCompatible, setIsLedgerCompatible] = useState(false);
+  const [isLedgerCompatible, setIsLedgerCompatible] = useState(savedFilters.isLedgerCompatible);
 
   const supportedCurrencies = listCryptoCurrencies();
   const families = [];
   supportedCurrencies.forEach(currency => {
-    currency.family = currency.family.charAt(0).toUpperCase() + currency.family.slice(1);
     if (families.indexOf(currency.family) < 0) {
       families.push(currency.family);
     }
   });
+
   const displayedFamilies = families.slice(0, displayedFamiliesCount);
 
-  const [selectedPlatforms, setSelectedPlatforms] = useState([]);
+  const [selectedPlatforms, setSelectedPlatforms] = useState(savedFilters.selectedPlatforms);
 
   const isShowMoreActive: boolean =
     families.length > FAMILIES_COUNT_STEP && displayedFamilies.length < families.length;
@@ -245,7 +248,9 @@ function MarketFilters() {
   };
 
   const onApplyFilters = useCallback(() => {
-    dispatch(setMarketFilters({ currencyType, selectedPlatforms, isLedgerCompatible }));
+    dispatch(
+      setMarketFilters({ currencyType: currencyType.key, selectedPlatforms, isLedgerCompatible }),
+    );
     dispatch(closePlatformAppDrawer());
   }, [currencyType, dispatch, isLedgerCompatible, selectedPlatforms]);
 
