@@ -2718,6 +2718,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "请注意",
@@ -3572,10 +3581,6 @@
     "SatStackDescriptorNotImported": {
       "title": "账户未经完整节点扫描",
       "description": "请配置您的完整节点以扫描与此设备相关联的帐户。 您的完整节点必须先扫描此帐户的区块链，然后才能将其添加到您的资产组合中。"
-    },
-    "StratisDown2021Warning": {
-      "title": "Stratis 区块链已经进化，可能无法正确工作。",
-      "description": "对原始 Stratis 区块链的支持将持续到2021年10月16日。"
     },
     "SwapGenericAPIError": {
       "title": "汇率失效",

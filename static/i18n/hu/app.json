@@ -2718,6 +2718,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "Please be careful",
@@ -3572,10 +3581,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Account not scanned by full node",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
-    },
-    "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",
