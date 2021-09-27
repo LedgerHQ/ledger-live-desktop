@@ -48,7 +48,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
   :hover {
     border-color: ${p => p.theme.colors.palette.text.shade20};
   }
-  :active {
+  :active:not(:focus-within) {
     border-color: ${p => p.theme.colors.palette.text.shade20};
     background: ${p => p.theme.colors.palette.action.hover};
   }
