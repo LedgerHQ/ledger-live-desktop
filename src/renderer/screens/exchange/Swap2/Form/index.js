@@ -84,10 +84,12 @@ const SwapForm = () => {
 
   useEffect(() => {
     if (providers) dispatch(updateProvidersAction(providers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [providers]);
 
   useEffect(() => {
     if (providersError) dispatch(resetSwapAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [providersError]);
 
   useEffect(() => {
