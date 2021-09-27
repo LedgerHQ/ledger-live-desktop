@@ -38,9 +38,7 @@
     "spectron": "jest \"tests/specs/.*\\.spec\\.js\" --maxWorkers=4",
     "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
-    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
-    "storybook": "cd ui-lib && yarn storybook",
-    "build-storybook": "cd ui-lib && yarn build-storybook"
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
