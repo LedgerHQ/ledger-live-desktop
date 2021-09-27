@@ -5,7 +5,7 @@ import React, { useMemo, useEffect, useState, useCallback, useRef } from "react"
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import OperationRow from "~/renderer/screens/exchange/swap/History/OperationRow";
+import OperationRow from "./OperationRow";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/exchange/swap/updateAccountSwapStatus";
