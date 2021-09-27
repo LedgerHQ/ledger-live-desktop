@@ -2718,6 +2718,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "يرجى توخي الحذر",
@@ -3572,10 +3581,6 @@
     "SatStackDescriptorNotImported": {
       "title": "لم يتم فحص الحساب بواسطة العقدة الكاملة",
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
-    },
-    "StratisDown2021Warning": {
-      "title": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح.",
-      "description": "سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
     },
     "SwapGenericAPIError": {
       "title": "انتهت صلاحية سعر الصرف",

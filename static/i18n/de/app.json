@@ -2718,6 +2718,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "Bitte seien Sie vorsichtig",
@@ -3572,10 +3581,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Konto nicht von Knoten (Full Node) gescannt",
       "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
-    },
-    "StratisDown2021Warning": {
-      "title": "Die Stratis-Blockchain hat sich weiterentwickelt und funktioniert möglicherweise nicht mehr korrekt.",
-      "description": "Die Unterstützung für die ursprüngliche Stratis-Blockchain wird bis zum 16. Oktober 2021 aufrechterhalten."
     },
     "SwapGenericAPIError": {
       "title": "Wechselkurs verfallen",

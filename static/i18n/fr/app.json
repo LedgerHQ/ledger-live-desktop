@@ -179,10 +179,10 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapide",
+    "fast": "Rapides",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lent",
+    "slow": "Lents",
     "standard": "Standard",
     "medium": "Moyens",
     "feesAmount": "Montant des frais"
@@ -2718,6 +2718,15 @@
         }
       }
     },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contacter l'Assistance",
+        "continueCTA": "Continuer",
+        "title": "Vérifier le contenu de la boîte",
+        "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
+      }
+    },
     "alerts": {
       "beCareful": {
         "title": "Prenez votre temps",
@@ -3572,10 +3581,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Compte non balayé par le nœud",
       "description": "Veuillez configurer votre nœud pour rechercher les comptes associés à cet appareil. Votre nœud doit d'abord balayer la blockchain avant de pouvoir ajouter le compte à votre Portefeuille."
-    },
-    "StratisDown2021Warning": {
-      "title": "La blockchain Stratis a évolué et pourrait ne plus fonctionner correctement.",
-      "description": "La blockchain Stratis d'origine continuera d'être prise en charge jusqu'au 16 octobre 2021."
     },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",
