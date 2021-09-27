@@ -1,5 +1,5 @@
 // @flow
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -47,6 +47,10 @@ export default function AssetDistribution() {
 
   const almostAll = initialRowCount + 3 > totalRowCount;
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
+
+  useEffect(() => {
+    console.log("wadus", { list });
+  }, [list]);
 
   return distribution.list.length ? (
     <TableContainer>
