@@ -29,7 +29,7 @@ const AccountWrapper = styled(Tabbable)`
   ${p =>
     p.selected
       ? `
-    background-color: ${p.theme.colors.palette.background.main};
+    background-color: ${p.theme.colors.palette.background.default};
   `
       : ""};
 `;
