@@ -1,13 +1,14 @@
 // @flow
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import ConnectionTester from "./ConnectionTester";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { useMachine } from "@xstate/react";
+import { USBTroubleshootingIndexSelector } from "~/renderer/reducers/settings";
 import USBTroubleshootingMachine from "./USBTroubleshootingMachine";
 import Intro from "./solutions/Intro";
 import ArrowRightIcon from "~/renderer/icons/ArrowRight";
@@ -21,18 +22,31 @@ const StepWrapper = styled(Box).attrs({
   mt: 32,
 })`
   position: absolute;
+  ${p =>
+    p.onboarding
+      ? `
+  left: 0;
+  margin: 0 20px;
+  bottom: 20px;
+  width: calc(100% - 40px);
+  `
+      : `
   bottom: 12px;
   width: 100%;
+  `}
 `;
 
-const USBTroubleshooting = () => {
+const USBTroubleshooting = ({ onboarding = false }: { onboarding?: boolean }) => {
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
   const { state: locationState } = useLocation();
+  const fallBackUSBTroubleshootingIndex = useSelector(USBTroubleshootingIndexSelector);
 
-  // Maybe extract an index from the state
-  const { USBTroubleshootingIndex } = locationState || {};
+  // Maybe extract an index from the state, fallback to selector
+  let { USBTroubleshootingIndex } = locationState || {};
+  USBTroubleshootingIndex = USBTroubleshootingIndex ?? fallBackUSBTroubleshootingIndex;
+
   // Show the splash screen only if we are not already mid troubleshooting
   const [showIntro, setShowIntro] = useState(USBTroubleshootingIndex === undefined);
 
@@ -54,29 +68,38 @@ const USBTroubleshooting = () => {
 
   const onExit = useCallback(() => {
     dispatch(setUSBTroubleshootingIndex());
-    history.push({ pathname: "/manager" });
-  }, [dispatch, history]);
+    history.push({ pathname: onboarding ? "/" : "/manager" });
+  }, [dispatch, history, onboarding]);
 
   const onDone = useCallback(() => {
     sendEvent("DONE");
   }, [sendEvent]);
 
+  const showExitOnboardingButton = onboarding && !currentIndex;
+
   return showIntro ? (
     <Intro onStart={() => setShowIntro(false)} onBack={onExit} />
   ) : (
-    <Box>
+    <Box p={onboarding ? 48 : 0}>
       <SolutionComponent number={currentIndex + 1} sendEvent={sendEvent} done={done} />
       {!isLastStep && <ConnectionTester onExit={onExit} onDone={onDone} />}
       {!done && (
-        <StepWrapper>
-          <Button
-            disabled={!currentIndex}
-            onClick={() => sendEvent("PREVIOUS")}
-            id="USBTroubleshooting-previous"
-          >
-            <ArrowRightIcon flipped size={16} />
-            <Text ml={1}>{t("connectTroubleshooting.previousSolution")}</Text>
-          </Button>
+        <StepWrapper onboarding={onboarding}>
+          {showExitOnboardingButton ? (
+            <Button onClick={onExit} id="USBTroubleshooting-backToOnboarding">
+              <ArrowRightIcon flipped size={16} />
+              <Text ml={1}>{t("connectTroubleshooting.steps.entry.back")}</Text>
+            </Button>
+          ) : (
+            <Button
+              disabled={!currentIndex}
+              onClick={() => sendEvent("PREVIOUS")}
+              id="USBTroubleshooting-previous"
+            >
+              <ArrowRightIcon flipped size={16} />
+              <Text ml={1}>{t("connectTroubleshooting.previousSolution")}</Text>
+            </Button>
+          )}
           {!isLastStep && (
             <Button
               disabled={currentIndex === platformSolutions.length - 1}
