@@ -179,10 +179,10 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapide",
+    "fast": "Rapides",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lent",
+    "slow": "Lents",
     "standard": "Standard",
     "medium": "Moyens",
     "feesAmount": "Montant des frais"
@@ -211,6 +211,55 @@
     "completeDescription": "Le pont de connexion WebSocket est maintenant fermé.",
     "openButton": "Ouvrir",
     "disconnectButton": "Déconnecter"
+  },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Swap",
+      "history": "Historique"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Changer de prestataire",
+        "quote": "Prix",
+        "receive": "Recevoir",
+        "onChain": "On-chain",
+        "offChain": "Off-chain"
+      },
+      "details": {
+        "label": {
+          "provider": "Prestataire",
+          "rate": "Prix",
+          "fees": "Frais",
+          "target": "Compte destinataire"
+        },
+        "tooltip": {
+          "provider": "Prestataire",
+          "rate": "Taux",
+          "fees": "Frais"
+        },
+        "noAccount": "Pas de compte {{target}}",
+        "noAccountCTA": "Ajouter un compte"
+      },
+      "from": {
+        "title": "De",
+        "max": "Max",
+        "accountPlaceholder": "Choisir la source"
+      },
+      "to": {
+        "title": "À"
+      },
+      "notAvailable": "Service temporairement indisponible, ou non disponible dans votre pays"
+    },
+    "history": {
+      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "empty": {
+        "title": "Vos swaps réalisés apparaîtront ici.",
+        "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
+      },
+      "export": "Exporter les opérations",
+      "exporting": "Exportation..."
+    }
   },
   "swap": {
     "title": "Swap",
@@ -250,27 +299,6 @@
       "title": "Choisir un prestataire pour le swap",
       "learnMore": "Qu'est-ce que le Swap ?",
       "kycRequired": "Vérification d'identité nécessaire",
-      "wyre": {
-        "bullets": [
-          "USA uniquement (Europe, Afrique et Asie à venir)",
-          "Multi coins et tokens",
-          "Centralisé"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC, ETH, USDT et plus de 50 autres",
-          "Multidevises",
-          "Centralisé"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "Connectez-vous à plus de 30 DEX (Uniswap, SushiSwap...)",
-          "Ethereum et tokens ERC-20",
-          "Décentralisé et se passant des tiers de confiance"
-        ]
-      },
       "cta": "Continuer",
       "kyc": {
         "notAvailable": "{{provider}} non disponible dans votre région",
@@ -1354,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés.",
-          "description": "Échangez vos cryptos avec ParaSwap, l'agrégateur qui recherche pour vous les meilleurs prix sur les échanges décentralisés."
-        },
-        "wyre_buy": {
-          "shortDescription": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis.",
-          "description": "Achetez des Bitcoins, Ethereum et d'autres cryptos avec Wyre. Offert uniquement aux utilisateurs aux États-Unis."
-        },
-        "lido": {
-          "shortDescription": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes.",
-          "description": "Stakez vos ETH avec Lido et gagnez des récompenses quotidiennes."
-        },
-        "zerion": {
-          "shortDescription": "Optimisez la gestion de votre portefeuille DeFi.",
-          "description": "Optimisez la gestion de votre portefeuille DeFi."
-        },
-        "rainbow": {
-          "description": "Admirez et mettez en valeur les NFT sécurisés par votre wallet.",
-          "shortDescription": "Admirez et mettez en valeur les NFT sécurisés par votre wallet."
-        },
-        "aave": {
-          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds.",
-          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole de liquidités et gardez le contrôle de vos fonds."
-        },
-        "compound": {
-          "shortDescription": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source.",
-          "description": "Prêtez ou empruntez des cryptos par le biais d'un protocole entièrement décentralisé et open source."
-        },
-        "deversifi": {
-          "shortDescription": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds.",
-          "description": "Tradez sur un échange décentralisé sur la couche 2 d'Ethereum et gardez le contrôle de vos fonds."
-        },
-        "1inch": {
-          "shortDescription": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum.",
-          "description": "Échangez vos cryptos par le biais d'un agrégateur DeFi/DEX sur Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "Application {{dependency}} requise",
         "description": "L'application {{dependency}} sera également installée car elle est requise pour l'application {{app}}.",
@@ -1412,6 +1402,15 @@
       "removeApps": "Désinstaller toutes les applications avant de mettre à jour",
       "update": "Mise à jour du micrologiciel",
       "updateBtn": "Mettre à jour le micrologiciel",
+      "banner": {
+        "warning": "Mise à jour {{latestFirmware}} du micrologiciel disponible",
+        "cta": "Accéder au Gestionnaire",
+        "old": {
+          "warning": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
+          "cta": "Contacter l'Assistance"
+        },
+        "cta2": "Mettre à jour le micrologiciel"
+      },
       "latest": "Version {{version}} du micrologiciel disponible",
       "contactSupport": "Contacter l'Assistance",
       "deprecated": "La version du micrologiciel de l'appareil est trop ancienne pour être mise à jour. Contactez l'Assistance Ledger pour le remplacer.",
@@ -2403,7 +2402,7 @@
         "listTitle": "Sur l'application mobile Ledger Live :",
         "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
-        "step3": "Scannez le <1><0>code QR</0></1> jusqu'à ce que la barre soit à 100 %."
+        "step3": "Scannez le <highlight>code QR</highlight> jusqu'à ce que la barre soit à 100 %."
       }
     },
     "display": {
@@ -2485,6 +2484,10 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
+        "tezosJS": {
+          "title": "Utiliser l'impl Tezos JS",
+          "description": "Utiliser l'impl Tezos JS"
+        },
         "experimentalLanguages": {
           "title": "Tester les traductions",
           "description": "Affichez les langues non publiées dans la liste Langue d'affichage de l'onglet Général."
@@ -2544,7 +2547,7 @@
     },
     "exportLogs": {
       "title": "Enregistrer les logs",
-      "desc": "Sauvegardez les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
+      "desc": "Sauvegarder les logs de Ledger Live peut être nécessaire à des fins de dépannage.",
       "btn": "Sauvegarder"
     },
     "accounts": {
@@ -2642,6 +2645,10 @@
       "announcement": "Actualités",
       "operation": "Opération",
       "achievement": "Succès"
+    },
+    "groupedToast": {
+      "text": "Vous avez {{count}} notifications non lues.",
+      "cta": "Voir les détails"
     }
   },
   "informationCenter": {
@@ -2709,6 +2716,15 @@
           "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
           "5": "Si quelqu'un vous la demande, ne la donnez pas. Partez du principe que c'est une arnaque."
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contacter l'Assistance",
+        "continueCTA": "Continuer",
+        "title": "Vérifier le contenu de la boîte",
+        "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
       }
     },
     "alerts": {
@@ -3260,7 +3276,8 @@
     "placeholder": "Entrer l'adresse {{currencyName}}"
   },
   "Terms": {
-    "title": "Légal",
+    "title": "Conditions d'utilisation",
+    "description": "Veuillez prendre connaissance de nos Conditions d'utilisation et Politique de confidentialité.",
     "termsLabel": "Conditions d'utilisation",
     "privacyLabel": "Politique de confidentialité",
     "switchLabel": "J'ai lu et accepte les Conditions d'utilisation et la Politique de confidentialité",
@@ -3565,10 +3582,6 @@
       "title": "Compte non balayé par le nœud",
       "description": "Veuillez configurer votre nœud pour rechercher les comptes associés à cet appareil. Votre nœud doit d'abord balayer la blockchain avant de pouvoir ajouter le compte à votre Portefeuille."
     },
-    "StratisDown2021Warning": {
-      "title": "La blockchain Stratis a évolué et pourrait ne plus fonctionner correctement.",
-      "description": "La blockchain Stratis d'origine continuera d'être prise en charge jusqu'au 16 octobre 2021."
-    },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",
       "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
@@ -3848,6 +3861,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "Sélectionnez au moins un validateur."
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

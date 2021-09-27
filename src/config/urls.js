@@ -4,7 +4,7 @@
 
 export const supportLinkByTokenType = {
   erc20:
-    "https://support.ledger.com/hc/en-us/articles/115005197845-Manage-ERC20-tokens?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=receive_account_flow",
+    "https://support.ledger.com/hc/en-us/articles/4404389645329-Manage-ERC20-tokens?docs=true&utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=receive_account_flow",
   trc10:
     "https://support.ledger.com/hc/en-us/articles/360013062159?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=receive_account_flow",
   trc20:
@@ -34,8 +34,7 @@ export const urls = {
   // Ledger support
   faq:
     "https://support.ledger.com/hc/en-us?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=faq",
-  ledgerStatus:
-    "https://support.ledger.com/hc/en-us?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=status_page",
+  ledgerStatus: "https://status.ledger.com/",
   syncErrors:
     "https://support.ledger.com/hc/en-us/articles/360012207759?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
   terms: {
@@ -57,14 +56,14 @@ export const urls = {
       "https://www.ledger.com/academy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=onboarding",
   },
   managerHelpRequest:
-    "https://support.ledger.com/hc/en-us/articles/360006523674?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=manager_hanging",
+    "https://support.ledger.com/hc/en-us/articles/4404382258961-Install-uninstall-and-update-apps?docs=true&utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=manager_hanging",
   contactSupport:
     "https://support.ledger.com/hc/en-us/requests/new?ticket_form_id=248165?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=support_contact",
   whatIsARecoveryPhrase: "https://www.ledger.com/academy/crypto/what-is-a-recovery-phrase",
   feesMoreInfo:
-    "https://support.ledger.com/hc/en-us/articles/360006535873?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=fees",
+    "https://support.ledger.com/hc/en-us/articles/360021039173-Choose-network-fees?docs=true",
   recipientAddressInfo:
-    "https://support.ledger.com/hc/en-us/articles/360006444193?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=sendflow",
+    "https://support.ledger.com/hc/en-us/articles/4404389453841-Receive-crypto-assets?docs=true",
   privacyPolicy: {
     en:
       "https://shop.ledger.com/pages/privacy-policy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
@@ -79,16 +78,19 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error",
   troubleshootingCrash:
     "https://support.ledger.com/hc/en-us/articles/360012598060?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error",
-  appSupport:
-    "https://support.ledger.com/hc/en-us/categories/115000811829-Apps?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=appsupport",
+  appSupport: {
+    "Cardano ADA":
+      "https://support.ledger.com/hc/en-us/articles/360020095874-Cardano-ADA-?docs=true",
+    default: "https://support.ledger.com/hc/en-us/sections/4404369637521-Crypto-assets?docs=true",
+  },
   migrateAccounts:
-    "https://support.ledger.com/hc/en-us/articles/360025321733?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=migrateacc",
+    "https://support.ledger.com/hc/en-us/articles/360025322153-Wrong-private-keys-for-account?support=true",
   coinControl:
     "https://support.ledger.com/hc/en-us/articles/360015996580?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=send_coincontrol",
   githubIssues:
     "https://github.com/LedgerHQ/ledger-live-desktop/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Acomments-desc",
   multipleDestinationAddresses:
-    "https://support.ledger.com/hc/en-us/articles/360033801034?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=ops_details_change",
+    "https://support.ledger.com/hc/en-us/articles/360033802154-Change-addresses?support=true",
   updateDeviceFirmware: {
     nanoS:
       "https://support.ledger.com/hc/en-us/articles/360002731113?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=firmwareupdate",
@@ -99,11 +101,11 @@ export const urls = {
   },
   lostPinOrSeed: {
     nanoS:
-      "https://support.ledger.com/hc/en-us/articles/360000609933?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=wrongpin_seed",
+      "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
     nanoX:
-      "https://support.ledger.com/hc/en-us/articles/360019097794?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=wrongpin_seed",
+      "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
     blue:
-      "https://support.ledger.com/hc/en-us/articles/360000609933?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=wrongpin_seed",
+      "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
   },
   maxSpendable:
     "https://support.ledger.com/hc/en-us/articles/360012960679?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=max_spendable_alert",
@@ -182,15 +184,15 @@ export const urls = {
     CantOpenDevice:
       "https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_cantopendevice",
     WrongDeviceForAccount:
-      "https://support.ledger.com/hc/en-us/articles/360025321733?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_wrongdevice",
+      "https://support.ledger.com/hc/en-us/articles/360025322153-Wrong-private-keys-for-account?support=true",
     SyncError:
-      "https://support.ledger.com/hc/en-us/articles/360012109220?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
-    StratisDown2021Warning: "https://support.ledger.com/hc/en-us/articles/115005175329",
+      "https://support.ledger.com/hc/en-us/articles/360012207759-Solve-a-synchronization-error?support=true",
+    ServiceStatusWarning: "https://status.ledger.com",
   },
   compound:
     "https://support.ledger.com/hc/en-us/articles/360017215099?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=compound",
   compoundTnC:
     "https://shop.ledger.com/pages/ledger-live-terms-of-use?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=compoundTnC",
   approvedOperation:
-    "https://support.ledger.com/hc/en-us/articles/115005307809-Track-your-transaction?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=compoundTX",
+    "https://support.ledger.com/hc/en-us/articles/360020849134-Track-your-transaction?docs=true",
 };

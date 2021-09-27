@@ -4,6 +4,7 @@ import { withTranslation } from "react-i18next";
 import styled from "styled-components";
 import semver from "semver";
 import type { TFunction } from "react-i18next";
+import pkg from "../../../../package.json";
 
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
@@ -47,7 +48,7 @@ class ReleaseNotesBody extends PureComponent<Props, State> {
     try {
       const { data } = await network({
         method: "GET",
-        url: "https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases",
+        url: `https://api.github.com/repos/LedgerHQ/${pkg.name}/releases`,
         // `https://api.github.com/repos/LedgerHQ/ledger-live-desktop/releases/tags/v${version}`,
       });
       const v = semver.parse(version);

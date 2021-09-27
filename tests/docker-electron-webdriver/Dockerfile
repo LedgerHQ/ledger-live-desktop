@@ -17,7 +17,11 @@ RUN apt-get update -qqy
 #=====
 # VNC
 #=====
-RUN apt-get -qqy install \
+# Installing libcrypt1 and x11vnc on the same command line fails.
+RUN apt-get -qqy install --no-install-recommends \
+  libcrypt1
+
+RUN apt-get -qqy install --no-install-recommends \
   x11vnc
 
 #=======
