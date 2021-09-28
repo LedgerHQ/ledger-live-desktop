@@ -6,6 +6,7 @@ import Track from "~/renderer/analytics/Track";
 
 export default function PillsDaysCount() {
   const [selected, onChange, options] = useTimeRange();
+  console.log(options)
   return (
     <>
       <Track onUpdate event="PillsDaysChange" selected={selected} />

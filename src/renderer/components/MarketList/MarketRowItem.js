@@ -1,12 +1,16 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Variation from "~/renderer/components/Variation";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { Account, Currency, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import { withRouter } from "react-router";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { useHistory } from "react-router-dom";
+import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -56,13 +60,13 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
   height: 54px;
 
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
   }
 `;
 
@@ -81,13 +85,26 @@ type Props = {
   style: Map<string, string>,
 };
 
-export default function MarketRowItem(props: Props) {
-  const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
+function MarketRowItem(props: Props) {
 
+  const history = useHistory();
   const { index, style, currency, counterValueCurrency } = props;
 
+  const onCurrencyClick = useCallback(
+    (account: Account | TokenAccount, parentAccount: ?Account) => {
+      setTrackingSource("accounts page");
+      history.push({
+        pathname: `/market/${currency.id}`,
+        state: currency
+      });
+    },
+    [history],
+  );
+
+  const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
+
   return (
-    <div style={{ ...style }}>
+    <div style={{ ...style }} onClick={onCurrencyClick}>
       <Row expanded={true}>
         <RowContent>
           <Cell
@@ -145,7 +162,7 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="20%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -167,7 +184,21 @@ export default function MarketRowItem(props: Props) {
           <Cell
             shrink
             grow
-            flex="10%"
+            flex="14%"
+            ff="Inter|SemiBold"
+            color="palette.text.shade100"
+            horizontal
+            alignItems="center"
+            justifyContent="flex-start"
+            fontSize={4}
+          >
+            <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
+              <Variation variation={currency.variation} width={75} height={35} />
+            </div>
+          </Cell>
+          <Cell
+            shrink
+            flex="1%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -175,12 +206,12 @@ export default function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
-              <Variation variation={currency.variation} width={75} height={35} />
-            </div>
+            <CryptocurrencyStar />
           </Cell>
         </RowContent>
       </Row>
     </div>
   );
 }
+
+export default withRouter(MarketRowItem);

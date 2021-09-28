@@ -49,6 +49,7 @@ import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import useEnv from "~/renderer/hooks/useEnv";
+import CryptoCurrencyPage from "~/renderer/screens/cryptocurrency";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -154,7 +155,11 @@ export default function Default() {
                           render={(props: any) => <Asset {...props} />}
                         />
                         <Route path="/swap" render={props => <SwapComponent {...props} />} />
-                        <Route path="/market" render={props => <Market {...props} />} />
+                        <Route exact path="/market" render={props => <Market {...props} />} />
+                        <Route
+                          path="/market/:id"
+                          render={props => <CryptoCurrencyPage {...props} />}
+                        />
                       </Switch>
                     </Page>
                     <Drawer />

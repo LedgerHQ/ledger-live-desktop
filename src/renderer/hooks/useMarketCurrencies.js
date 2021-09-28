@@ -55,8 +55,8 @@ export function useMarketCurrencies({
       value: data[i] || 0,
     }));
     currency.price = data[data.length - 1] || 0;
-    const difference = data[data.length - 1] - data[0] || 0;
-    currency.change = (difference / data[0]) * PERCENT_MULTIPLIER || 0;
+    currency.difference = data[data.length - 1] - data[0] || 0;
+    currency.change = (currency.difference / data[0]) * PERCENT_MULTIPLIER || 0;
 
     return currency;
   });

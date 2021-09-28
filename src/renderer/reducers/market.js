@@ -45,7 +45,7 @@ const initialState: MarketState = {
   searchValue: "",
   range: "day",
   order: "desc",
-  orderBy: "counterValue",
+  orderBy: "price",
   counterValue: supportedCountervalues.find(cv => cv.value === "USD"),
   filters: {
     isLedgerCompatible: false,

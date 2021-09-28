@@ -8,6 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import AccountCrumb from "./AccountCrumb";
 import AssetCrumb from "./AssetCrumb";
+import CryptocurrencyCrumb from "~/renderer/components/Breadcrumb/CryptocurrencyCrumb";
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -40,6 +41,8 @@ const Breadcrumb = () => (
     <Route path="/account/" component={AccountCrumb} />
     <Route path="/account/:id/" component={AccountCrumb} />
     <Route path="/account/:parentId/:id/" component={AccountCrumb} />
+
+    <Route path="/market/:id/" component={CryptocurrencyCrumb} />
 
     <Route path="/asset/:assetId+" component={AssetCrumb} />
   </Wrapper>

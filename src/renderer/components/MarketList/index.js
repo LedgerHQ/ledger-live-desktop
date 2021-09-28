@@ -3,7 +3,7 @@ import React from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMarketParams } from "~/renderer/actions/market";
 import styled from "styled-components";
 import { useRange } from "~/renderer/hooks/useRange";
@@ -59,8 +59,8 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
 
   & * {
     color: ${p => p.theme.colors.palette.text.shade60};
@@ -73,15 +73,15 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList() {
+function MarketList(props) {
   const { range, searchValue, counterValue, order, orderBy, filters } = useSelector(
-    state => state.market,
+    state => state.market
   );
   const { rangeData } = useRange(range);
 
   const currencies: Array<MarketCurrency> = useMarketCurrencies({
     counterValueCurrency: counterValue.currency,
-    ...rangeData,
+    ...rangeData
   });
 
   const dispatch = useDispatch();
@@ -116,7 +116,7 @@ function MarketList() {
       currency={visibleCurrencies[index]}
       index={index + 1}
       counterValueCurrency={counterValue.currency}
-      style={style}
+      style={{ ...style, pointerEvents: "auto" }}
       rangeData={rangeData}
       key={index}
     />
@@ -171,7 +171,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="20%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -186,7 +186,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="10%"
+            flex="14%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -195,6 +195,17 @@ function MarketList() {
             fontSize={4}
           >
             Variation
+          </ColumnTitleBox>
+          <ColumnTitleBox
+            shrink
+            flex="1%"
+            ff="Inter|SemiBold"
+            color="palette.text.shade100"
+            horizontal
+            alignItems="center"
+            justifyContent="flex-end"
+            fontSize={4}
+          >
           </ColumnTitleBox>
         </RowContent>
       </Row>
@@ -230,8 +241,8 @@ const sortCurrencies = (currencies, key, order) => {
   }
   return currencies.sort(function(a, b) {
     const orders = {
-      asc: (a, b) => (a > b ? 1 : -1),
-      desc: (a, b) => (a < b ? 1 : -1),
+      asc: (a, b) => ( a > b ? 1 : -1 ),
+      desc: (a, b) => ( a < b ? 1 : -1 )
     };
     return orders[order](a[key], b[key]);
   });
