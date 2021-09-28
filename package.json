@@ -50,11 +50,7 @@
     "@ledgerhq/hw-transport-http": "6.7.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.7.0",
     "@ledgerhq/ledger-core": "6.13.0",
-<<<<<<< HEAD
     "@ledgerhq/live-common": "^21.7.0",
-=======
-    "@ledgerhq/live-common": "21.5.1-btcjs.1",
->>>>>>> use 21.5.1-btcjs.1 for LLD
     "@ledgerhq/logs": "6.2.0",
     "@polkadot/react-identicon": "0.85.3",
     "@tippyjs/react": "^4.2.5",
