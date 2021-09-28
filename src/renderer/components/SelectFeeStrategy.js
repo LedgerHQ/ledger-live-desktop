@@ -108,11 +108,7 @@ const SelectFeeStrategy = ({
               ) : (
                 <TachometerHigh size={14} />
               )}
-              <Text
-                style={{ marginLeft: "6px", textTransform: "uppercase" }}
-                fontSize={0}
-                fontWeight="800"
-              >
+              <Text fontSize={0} ff="Inter|ExtraBold" uppercase ml={1}>
                 <Trans i18nKey={`fees.${label}`} />
               </Text>
             </FeesHeader>

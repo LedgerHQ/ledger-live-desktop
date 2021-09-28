@@ -46,12 +46,12 @@ const SendFeeMode = ({ isAdvanceMode, setAdvanceMode }: Props) => {
       />
       <SelectorContainer>
         <Selector active={!isAdvanceMode} onClick={setStandard}>
-          <Text ff="Inter" fontSize={10} fontWeight="600">
+          <Text ff="Inter|SemiBold" fontSize={10}>
             <Trans i18nKey="send.steps.amount.standard" />
           </Text>
         </Selector>
         <Selector active={isAdvanceMode} onClick={setAdvanced}>
-          <Text ff="Inter" fontSize={10} fontWeight="600">
+          <Text ff="Inter|SemiBold" fontSize={10}>
             <Trans i18nKey="send.steps.amount.advanced" />
           </Text>
         </Selector>
