@@ -3125,17 +3125,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "هل تواجه صعوبة في توصيل جهازك؟",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "الحل رقم #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "مقالة دعم",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
-        "cta": "لنقوم بإصلاحها!",
+        "cta": "Let’s fix it!",
         "back": "رجوع"
       },
       "1": {
@@ -3153,8 +3158,7 @@
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائيًا وإعادة تحميل udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
@@ -3163,8 +3167,8 @@
         "usbPort": {
           "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك",
-            "1": "إزالة أي دونجل USB",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
