@@ -15,8 +15,7 @@ import { SWAP_VERSION } from "../../utils/index";
 type Props = {
   setTransaction: $PropertyType<SwapTransactionType, "setTransaction">,
   updateTransaction: $PropertyType<SwapTransactionType, "updateTransaction">,
-  account: $PropertyType<SwapSelectorStateType, "account">,
-  parentAccount: $PropertyType<SwapSelectorStateType, "parentAccount">,
+  mainAccount: $PropertyType<SwapSelectorStateType, "account">,
   currency: $PropertyType<SwapSelectorStateType, "currency">,
   status: $PropertyType<SwapTransactionType, "status">,
   disableSlowStrategy?: boolean,
@@ -26,8 +25,7 @@ type Props = {
 export default function FeesDrawer({
   setTransaction,
   updateTransaction,
-  account,
-  parentAccount,
+  mainAccount,
   currency,
   status,
   provider,
@@ -66,8 +64,7 @@ export default function FeesDrawer({
       <Box mt={3} flow={4}>
         {transaction.networkInfo && (
           <SendAmountFields
-            account={account}
-            parentAccount={parentAccount}
+            account={mainAccount}
             status={status}
             transaction={transaction}
             onChange={setTransaction}
