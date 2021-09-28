@@ -3126,11 +3126,16 @@
   },
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?",
+    "cta": "Réparer",
     "solution": "Solution n°{{number}}",
+    "applesInstructions": "Instructions d'Apple",
     "nextSolution": "Solution suivante",
     "previousSolution": "Solution précédente",
     "followSteps": "Suivez ces étapes",
     "supportArticle": "Article de l'Assistance",
+    "connecting": "Connexion en cours...",
+    "connected": "Connecté",
+    "backToPortfolio": "Retour au Portefeuille",
     "steps": {
       "entry": {
         "title": "Dépanner la connexion USB",
@@ -3154,7 +3159,6 @@
           "cta": "Ajouter",
           "bullets": {
             "0": "Saisissez la commande suivante dans un terminal pour ajouter automatiquement les règles et recharger udev.",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
             "1": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         }
