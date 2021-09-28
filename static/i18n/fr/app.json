@@ -1697,6 +1697,20 @@
     "value": "Valeur",
     "header": "Répartition des comptes ({{count}})"
   },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Propulsé par Elrond",
+        "moreInfo": "Plus d'informations",
+        "drawerTitle": "Intégration d'Elrond",
+        "title": "Le token Elrond eGold (EGLD) désormais disponible sur Ledger Live",
+        "description": "Vous pouvez maintenant sécuriser et gérer vos tokens eGold (EGLD) via Ledger Live.",
+        "description2": "Le token Elrond eGold (EGLD) est natif au réseau Elrond. Il est utilisé pour les transactions, le staking, les contrats intelligents, la gouvernance et les récompenses de validateur.",
+        "description3": "Nous travaillons avec l'équipe d'Elrond pour ajouter plus de fonctionnalités, comme le staking, la prise en charge native d'ESDT (Elrond Standard Digital Token), et bien plus.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
+  },
   "tron": {
     "voting": {
       "emptyState": {
@@ -2483,6 +2497,10 @@
         "apiTrongridProxy": {
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
+        },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Utilisez Elrond avec un proxy Ledger."
         },
         "tezosJS": {
           "title": "Utiliser l'impl Tezos JS",
