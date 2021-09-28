@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ConnectTroubleshootingHelpButton from "~/renderer/components/ConnectTroubleshootingHelpButton";
-import RepairDeviceButton from "~/renderer/components/RepairDeviceButton";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 type Props = {
@@ -23,7 +22,7 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   max-width: 550px;
 `;
 
-const ConnectTroubleshooting = ({ appearsAfterDelay = 15000, onRepair }: Props) => {
+const ConnectTroubleshooting = ({ appearsAfterDelay = 15000 }: Props) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => setVisible(true), appearsAfterDelay);
@@ -37,7 +36,6 @@ const ConnectTroubleshooting = ({ appearsAfterDelay = 15000, onRepair }: Props) 
           <Trans i18nKey="connectTroubleshooting.desc" />
         </Text>
       </Box>
-      {onRepair ? <RepairDeviceButton onRepair={onRepair} /> : null}
       <Box flex="1" />
       <ConnectTroubleshootingHelpButton buttonProps={{ primary: true }} />
     </Wrapper>
