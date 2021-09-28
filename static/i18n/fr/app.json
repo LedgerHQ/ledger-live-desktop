@@ -3125,22 +3125,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "Des difficultés à connecter votre appareil ?",
+    "cta": "Réparer",
     "solution": "Solution n°{{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "Instructions d'Apple",
     "nextSolution": "Solution suivante",
     "previousSolution": "Solution précédente",
     "followSteps": "Suivez ces étapes",
     "supportArticle": "Article de l'Assistance",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "Connexion en cours...",
+    "connected": "Connecté",
+    "backToPortfolio": "Retour au Portefeuille",
     "steps": {
       "entry": {
         "title": "Dépanner la connexion USB",
         "desc": "Votre appareil semble avoir du mal à se connecter. Vous pouvez essayer les solutions suivantes jusqu'à ce que votre appareil se connecte.",
-        "cta": "Let’s fix it!",
+        "cta": "Réparer",
         "back": "Retour"
       },
       "1": {
@@ -3158,7 +3158,7 @@
           "desc": "Cliquez sur le bouton ci-dessous pour ajouter les règles udev.\nConnectez et déverrouillez votre appareil pour le détecter.",
           "cta": "Ajouter",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "Saisissez la commande suivante dans un terminal pour ajouter automatiquement les règles et recharger udev.",
             "1": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         }
@@ -3167,8 +3167,8 @@
         "usbPort": {
           "title": "Essayer différents ports USB",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "Utilisez un autre port USB sur votre ordinateur.",
+            "1": "Retirez tout autre appareil connecté en USB.",
             "2": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         },
