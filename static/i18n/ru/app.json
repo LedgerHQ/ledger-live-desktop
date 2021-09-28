@@ -1433,9 +1433,9 @@
       "confirmIdentifier": "Проверка идентификатора",
       "confirmIdentifierText": "Убедитесь, что идентификатор на устройстве совпадает с идентификатором ниже. При необходимости подтвердите и введите PIN-код.",
       "identifier": "Идентификатор",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "Подготовка",
+      "newFirmware": "Новая версия прошивки {{version}}",
+      "confirmUpdate": "Пожалуйста, подтвердите обновление на устройстве",
       "mcuTitle": "Завершение обновления",
       "mcuFirst": "Отсоедините USB-кабель от устройства",
       "mcuSecond": "Нажмите и удерживайте левую кнопку во время повторного подключения USB-кабеля до тех пор пока на экране не появится <0>{{repairProcessing}}</0></1>",
@@ -1703,14 +1703,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "Основано на Elrond",
+        "moreInfo": "Подробнее",
+        "drawerTitle": "Интеграция с Elrond",
+        "title": "Токен Elrond eGold (EGLD) теперь доступен на Ledger Live",
+        "description": "Теперь вы можете безопасно хранить ваши токены eGold (EGLD) и управлять ими посредством Ledger Live.",
+        "description2": "Токен Elrond eGold (EGLD) – это нативный токен Elrond Network. Его можно использовать для чего угодно, включая транзакции, стейкинг, смарт-контракты, управление или получение вознаграждения от валидаторов.",
+        "description3": "Мы активно сотрудничаем с командой Elrond над расширением функциональности, чтобы сделать доступными стейкинг, поддержку нативного токена ESDT (Elrond Standard Digital Token), а также многое другое.",
+        "website": "Блокчейн масштаба интернета"
       }
     }
   },
@@ -2503,7 +2503,7 @@
         },
         "apiElrondEndpPoint": {
           "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
+          "description": "Использовать Elrond с прокси Ledger"
         },
         "tezosJS": {
           "title": "Использовать реализацию Tezos JS",
@@ -3125,22 +3125,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "Не удаётся подключить устройство?",
+    "cta": "Исправить",
     "solution": "Решение №{{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "Инструкция для Apple",
     "nextSolution": "Следующее решение",
     "previousSolution": "Предыдущее решение",
     "followSteps": "Выполните эти шаги",
     "supportArticle": "Вспомогательная статья",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "Подключаем...",
+    "connected": "Подключено",
+    "backToPortfolio": "Вернуться к Портфелю",
     "steps": {
       "entry": {
         "title": "Устраните проблемы с USB-подключением",
         "desc": "Похоже, что возникла проблема с подключением к вашему устройству. Не переживайте, вы можете попробовать разные решения, пока устройство не будет подключено!",
-        "cta": "Let’s fix it!",
+        "cta": "Давайте это исправим!",
         "back": "Назад"
       },
       "1": {
@@ -3158,7 +3158,7 @@
           "desc": "Нажмите кнопку ниже, чтобы добавить правила udev. Затем подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено.",
           "cta": "Настроить правила",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "Введите следующую команду в терминале, чтобы автоматически добавить правила и перезагрузить udev",
             "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         }
@@ -3167,8 +3167,8 @@
         "usbPort": {
           "title": "Попробуйте подключиться к другому USB-порту",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "Попробуйте другой USB-порт.",
+            "1": "Отключите любые другие USB-устройства.",
             "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
