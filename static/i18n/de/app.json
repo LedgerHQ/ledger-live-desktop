@@ -3125,17 +3125,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Haben Sie Schwierigkeiten, Ihr Gerät zu verbinden?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Lösung #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Nächste Lösung",
     "previousSolution": "Vorherige Lösung",
     "followSteps": "Diesen Schritten folgen",
     "supportArticle": "Hilfeseite",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Fehlerbehebung bei der USB-Verbindung",
         "desc": "Es scheint ein Problem beim Verbinden mit Ihrem Gerät zu geben. Keine Sorge, Sie können verschiedene Lösungen nacheinander ausprobieren, bis Ihr Gerät eine Verbindung herstellt!",
-        "cta": "Bringen wir es in Ordnung!",
+        "cta": "Let’s fix it!",
         "back": "Zurückgehen"
       },
       "1": {
@@ -3153,8 +3158,7 @@
           "desc": "Klicken Sie auf die Schaltfläche unten, um die udev-Regeln hinzuzufügen. Verbinden Sie dann Ihr Gerät und entsperren Sie es, um zu sehen, ob es erkannt wird.",
           "cta": "Regeln festlegen",
           "bullets": {
-            "0": "Geben Sie den folgenden Befehl in ein Terminal ein, um die Regeln automatisch hinzuzufügen und udev neu zu laden",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
@@ -3163,8 +3167,8 @@
         "usbPort": {
           "title": "Versuchen Sie verschiedene USB-Anschlüsse",
           "bullets": {
-            "0": "Ändern Sie den verwendeten USB-Anschluss an Ihrem Computer",
-            "1": "Entfernen Sie alle USB-Dongles",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
