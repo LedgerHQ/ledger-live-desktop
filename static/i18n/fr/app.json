@@ -1700,13 +1700,13 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "cardTitle": "Propulsé par Elrond",
+        "moreInfo": "Plus d'informations",
+        "drawerTitle": "Intégration d'Elrond",
+        "title": "Le token Elrond eGold (EGLD) désormais disponible sur Ledger Live",
+        "description": "Vous pouvez maintenant sécuriser et gérer vos tokens eGold (EGLD) via Ledger Live.",
+        "description2": "Le token Elrond eGold (EGLD) est natif au réseau Elrond. Il est utilisé pour les transactions, le staking, les contrats intelligents, la gouvernance et les récompenses de validateur.",
+        "description3": "Nous travaillons avec l'équipe d'Elrond pour ajouter plus de fonctionnalités, comme le staking, la prise en charge native d'ESDT (Elrond Standard Digital Token), et bien plus.",
         "website": "The Internet Scale Blockchain"
       }
     }
@@ -2500,7 +2500,7 @@
         },
         "apiElrondEndpPoint": {
           "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
+          "description": "Utilisez Elrond avec un proxy Ledger."
         },
         "tezosJS": {
           "title": "Utiliser l'impl Tezos JS",
