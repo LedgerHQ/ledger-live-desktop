@@ -78,7 +78,6 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
               isNegative
               color="palette.text.shade100"
               val={`${currency.price}`}
-              alwaysShowSign
               showCode
               inline
               unit={counterValue.currency.units[0]}
