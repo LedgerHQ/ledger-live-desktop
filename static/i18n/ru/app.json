@@ -3125,17 +3125,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Не удаётся подключить устройство?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Решение №{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Следующее решение",
     "previousSolution": "Предыдущее решение",
     "followSteps": "Выполните эти шаги",
     "supportArticle": "Вспомогательная статья",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Устраните проблемы с USB-подключением",
         "desc": "Похоже, что возникла проблема с подключением к вашему устройству. Не переживайте, вы можете попробовать разные решения, пока устройство не будет подключено!",
-        "cta": "Давайте это исправим!",
+        "cta": "Let’s fix it!",
         "back": "Назад"
       },
       "1": {
@@ -3153,8 +3158,7 @@
           "desc": "Нажмите кнопку ниже, чтобы добавить правила udev. Затем подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено.",
           "cta": "Настроить правила",
           "bullets": {
-            "0": "Введите следующую команду в терминале, чтобы автоматически добавлять правила и перезагружать udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         }
@@ -3163,8 +3167,8 @@
         "usbPort": {
           "title": "Попробуйте подключиться к другому USB-порту",
           "bullets": {
-            "0": "Поменяйте USB-порт на ПК",
-            "1": "Отключите любые переносные USB-устройства",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Подключите и разблокируйте устройство, чтобы убедиться, что оно обнаружено."
           }
         },
