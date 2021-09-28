@@ -571,8 +571,8 @@
 | Ethereum | NIO | 0x5554e04e76533E1d14c52f05beEF6c9d329E1E30 | Autonio (old) | countervalues disabled | ethereum/erc20/autonio_old |
 | Ethereum | AVAL | 0xBCf9dBf8B14eD096B2BA08b7269356197fDd1b5D | Avaluse | countervalues disabled | ethereum/erc20/avaluse |
 | Ethereum | WORK | 0xA686514FAF7d54289266F483D1e4852C99E13EC7 | Aworker |  | ethereum/erc20/aworker |
-| Ethereum | AXS | 0xBB0E17EF65F82Ab018d8EDd776e8DD940327B28b | Axie Infinity Shard | countervalues disabled | ethereum/erc20/axie_infinity_shard |
-| Ethereum | AXS | 0xF5D669627376EBd411E34b98F19C868c8ABA5ADA | Axie Infinity Shard (old) |  | ethereum/erc20/axie_infinity_shard_(old) |
+| Ethereum | AXS | 0xBB0E17EF65F82Ab018d8EDd776e8DD940327B28b | Axie Infinity Shard |  | ethereum/erc20/axie_infinity_shard |
+| Ethereum | AXS | 0xF5D669627376EBd411E34b98F19C868c8ABA5ADA | Axie Infinity Shard (old) | countervalues disabled | ethereum/erc20/axie_infinity_shard_(old) |
 | Ethereum | AXN | 0x71F85B2E46976bD21302B64329868fd15eb0D127 | Axion |  | ethereum/erc20/axion |
 | Ethereum | B20 | 0xc4De189Abf94c57f396bD4c52ab13b954FebEfD8 | B.20 | countervalues disabled | ethereum/erc20/b.20 |
 | Ethereum | B26 | 0x481dE76d5ab31e28A33B0EA1c1063aDCb5B1769A | B26 | countervalues disabled | ethereum/erc20/b26 |
