@@ -3134,17 +3134,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having a hard time connecting your device?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Solution #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Next solution",
     "previousSolution": "Previous solution",
     "followSteps": "Follow these steps",
     "supportArticle": "Support article",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Troubleshoot USB connection",
         "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
+        "cta": "Let’s fix it!",
         "back": "Go back"
       },
       "1": {
@@ -3162,8 +3167,7 @@
           "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
           "cta": "Set Rules",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Connect and unlock your device to see if it’s detected."
           }
         }
@@ -3172,8 +3176,8 @@
         "usbPort": {
           "title": "Try different USB ports",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Connect and unlock your device to see if it’s detected."
           }
         },

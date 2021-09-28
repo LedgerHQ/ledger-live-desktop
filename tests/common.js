@@ -14,6 +14,7 @@ import PortfolioPage from "./po/portfolio.page";
 import SettingsPage from "./po/settings.page";
 import ManagerPage from "./po/manager.page";
 import WCConnectedPage from "./po/wcconnected.page";
+import USBTroubleshooting from "./po/USBTroubleshooting.page";
 import AddAccountsModal from "./po/addAccountsModal.page";
 import AccountSettingsModal from "./po/accountSettingsModal.page";
 import ExportOperationsModal from "./po/exportOperationsHistoryModal.page";
@@ -89,6 +90,7 @@ let drawerPage;
 let accountPage;
 let accountsPage;
 let wcConnectedPage;
+let USBTroubleshootingPage;
 let addAccountsModal;
 let accountSettingsModal;
 let exportOperationsHistoryModal;
@@ -185,6 +187,7 @@ export default function initialize(name, { userData, env = {}, disableStartSnap 
     settingsPage = new SettingsPage(app);
     managerPage = new ManagerPage(app);
     wcConnectedPage = new WCConnectedPage(app);
+    USBTroubleshootingPage = new USBTroubleshooting(app);
     addAccountsModal = new AddAccountsModal(app);
     accountSettingsModal = new AccountSettingsModal(app);
     exportOperationsHistoryModal = new ExportOperationsModal(app);
@@ -293,6 +296,7 @@ export {
   wcConnectedPage,
   modalPage,
   drawerPage,
+  USBTroubleshootingPage,
   hideTokenModal,
   walletConnectPasteLinkModal,
   addAccountsModal,
