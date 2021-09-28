@@ -35,7 +35,7 @@ export const providersSelector: OutputSelector<
   swap => swap.providers,
 );
 
-const filterAvaibleToAssets = (pairs, fromId?: string) => {
+const filterAvailableToAssets = (pairs, fromId?: string) => {
   if (pairs === null || pairs === undefined) return null;
 
   if (fromId)
@@ -44,7 +44,7 @@ const filterAvaibleToAssets = (pairs, fromId?: string) => {
   return pairs.reduce((acc, pair) => [...acc, pair.to], []);
 };
 
-const filterAvaibleFromAssets = (pairs, allAccounts) => {
+const filterAvailableFromAssets = (pairs, allAccounts) => {
   if (pairs === null || pairs === undefined) return [];
 
   return flattenAccounts(allAccounts).map(account => {
@@ -58,7 +58,7 @@ export const toSelector: OutputSelector<State, void, *> = createSelector(
   state => state.swap.pairs,
   pairs =>
     memoize((fromId?: "string") => {
-      const filteredAssets = filterAvaibleToAssets(pairs, fromId);
+      const filteredAssets = filterAvailableToAssets(pairs, fromId);
       const uniqueAssetList = [...new Set(filteredAssets)];
       return uniqueAssetList;
     }),
@@ -68,7 +68,7 @@ export const fromSelector: OutputSelector<State, void, *> = createSelector(
   state => state.swap.pairs,
   pairs =>
     memoize((allAccounts: Array<Account>): Array<Account | TokenAccount> =>
-      filterAvaibleFromAssets(pairs, allAccounts).sort(
+      filterAvailableFromAssets(pairs, allAccounts).sort(
         (accountA, accountB) => accountA.disabled - accountB.disabled,
       ),
     ),
