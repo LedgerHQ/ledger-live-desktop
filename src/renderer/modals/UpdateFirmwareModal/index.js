@@ -82,7 +82,7 @@ const UpdateModal = ({
     ({ withResetStep }: { withResetStep: boolean }) => {
       const updateStep = {
         id: "idCheck",
-        label: t("manager.modal.identifier"),
+        label: firmware?.osu?.hash ? t("manager.modal.identifier") : t("manager.modal.preparation"),
         component: StepFullFirmwareInstall,
         onBack: null,
         hideFooter: true,
