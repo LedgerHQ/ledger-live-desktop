@@ -3691,8 +3691,8 @@
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
     },
     "SwapGenericAPIError": {
-      "title": "Exchange rate expired",
-      "description": "You must confirm the swap before the timer runs out. The exchange rate displayed remains valid for 60 seconds."
+      "title": "Something went wrong",
+      "description": "The exchange transaction did not go through. Please try again or contact support."
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
