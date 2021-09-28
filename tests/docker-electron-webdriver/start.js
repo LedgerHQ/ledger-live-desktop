@@ -23,7 +23,9 @@ if (needBuild) {
     fs.unlinkSync(`${path}.lastyarn`);
   } catch {}
   child_process.spawn(
-    `cd ${path} && docker-compose up --build ${process.argv.slice(2).join(" ")}`,
+    `cd ${path} && docker-compose up --build ${process.argv
+      .slice(2)
+      .join(" ")} --force-recreate --renew-anon-volumes`,
     {
       stdio: "inherit",
       shell: true,

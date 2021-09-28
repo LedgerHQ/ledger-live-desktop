@@ -12,7 +12,8 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
-import ConnectTroubleshootingHelpButton from "~/renderer/components/ConnectTroubleshootingHelpButton";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
 import FlashMCU from "~/renderer/components/FlashMCU";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
@@ -204,7 +205,9 @@ class RepairModal extends PureComponent<Props, *> {
           renderFooter={() =>
             !isLoading ? (
               <Box horizontal alignItems="center" flow={2} flex={1}>
-                <ConnectTroubleshootingHelpButton textColor={colors.wallet} />
+                <Button onClick={() => openURL(urls.troubleshootingUSB)} textColor={colors.wallet}>
+                  {t("common.help")}
+                </Button>
                 <div style={{ flex: 1 }} />
                 <Button onClick={onReject}>{t(`common.${error ? "close" : "cancel"}`)}</Button>
                 <Button
