@@ -48,10 +48,6 @@ export default function AssetDistribution() {
   const almostAll = initialRowCount + 3 > totalRowCount;
   const subList = showAll || almostAll ? list : list.slice(0, initialRowCount);
 
-  useEffect(() => {
-    console.log("wadus", { list });
-  }, [list]);
-
   return distribution.list.length ? (
     <TableContainer>
       <TableHeader
