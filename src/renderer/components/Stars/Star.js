@@ -38,7 +38,7 @@ export default function Star({ accountId, parentId, yellow }: Props) {
 
   return (
     <MaybeButtonWrapper filled={isAccountStarred}>
-      <StarWrapper id="account-star-button" onClick={toggleStar}>
+      <StarWrapper id="account-star-button" onClick={toggleStar} tabIndex="-1">
         {disableAnimation ? (
           <StarIcon
             yellow={yellow}
