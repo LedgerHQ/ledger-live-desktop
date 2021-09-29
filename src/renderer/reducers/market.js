@@ -1,8 +1,11 @@
 // @flow
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
+import { setKey } from "~/renderer/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoriteCryptocurrencies } from "~/renderer/actions/market";
 
 export type MarketCurrency = {
   coinType: number,
@@ -50,36 +53,71 @@ const initialState: MarketState = {
   filters: {
     isLedgerCompatible: false,
     currencyType: "all",
-    selectedPlatforms: [],
+    selectedPlatforms: []
   },
+  favorites: []
 };
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
     return {
       ...state,
-      ...payload,
+      ...payload
     };
   },
   SET_MARKET_RANGE: (state, { payload }: { payload: string }) => {
     return {
       ...state,
-      range: payload,
+      range: payload
     };
   },
   SET_MARKET_COUNTERVALUE: (state, { payload }: { payload: string }) => {
     const counterValue = supportedCountervalues.find(cv => cv.value === payload);
     return {
       ...state,
-      counterValue,
+      counterValue
     };
   },
   SET_MARKET_FILTERS: (state, { payload }: { payload: MarketFilters }) => {
     return {
       ...state,
-      filters: payload,
+      filters: payload
     };
   },
+  SET_FAVORITE_CRYPTOCURRENCIES: (state, { payload }) => {
+    return {
+      ...state,
+      favorites: payload.favorites,
+    };
+  },
+  UPDATE_FAVORITE_CRYPTOCURRENCIES: (
+    state,
+    {
+      payload: { cryptocurrencyId, isStarred, favorites }
+    }: { payload: { cryptocurrencyId: number, status: boolean } }
+  ) => {
+    const favoritesLength = favorites.length;
+    if (isStarred) {
+      for (let i = 0; i < favoritesLength; i++) {
+        if (favorites[i].id === cryptocurrencyId) {
+          favorites.splice(i, 1);
+          break;
+        }
+      }
+    } else {
+      favorites.push({ id: cryptocurrencyId });
+    }
+
+    async function updateFavorites() {
+      await setKey("app", "favorite_cryptocurrencies", favorites);
+    }
+
+    updateFavorites()
+    return {
+      ...state,
+      favorites
+    };
+  }
 };
 
 export default handleActions(handlers, initialState);

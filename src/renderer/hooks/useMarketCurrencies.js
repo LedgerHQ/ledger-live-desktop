@@ -5,6 +5,10 @@ import { BigNumber } from "bignumber.js";
 import { useCalculateMany } from "@ledgerhq/live-common/lib/countervalues/react";
 import { Currency } from "@ledgerhq/live-common/lib/types";
 import type { MarketFilters } from "~/renderer/reducers/market";
+import { useEffect } from "react";
+import { getKey } from "~/renderer/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavoriteCryptocurrencies } from "~/renderer/actions/market";
 
 type MarketCurrenciesProps = {
   count: number,
@@ -14,11 +18,24 @@ type MarketCurrenciesProps = {
 };
 
 export function useMarketCurrencies({
-  counterValueCurrency,
-  count,
-  increment,
-  filters,
-}: MarketCurrenciesProps) {
+                                      counterValueCurrency,
+                                      count,
+                                      increment,
+                                      favorites,
+                                    }: MarketCurrenciesProps) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function getFavorites() {
+      const res = await getKey("app", "favorite_cryptocurrencies", []);
+      console.log(res);
+      dispatch(setFavoriteCryptocurrencies(res));
+    }
+    if (!favorites.length) {
+      return getFavorites();
+    }
+  }, []);
+
   const PERCENT_MULTIPLIER = 100;
 
   const currencies = listSupportedCurrencies();
@@ -47,16 +64,22 @@ export function useMarketCurrencies({
       useCalculateMany(currencyInputData, {
         from: currency,
         to: counterValueCurrency,
-        disableRounding: false,
+        disableRounding: false
       }) || [];
 
-    currency.variation = inputData.map(({ date }, i) => ({
+    currency.variation = inputData.map(({ date }, i) => ( {
       date,
-      value: data[i] || 0,
-    }));
+      value: data[i] || 0
+    } ));
     currency.price = data[data.length - 1] || 0;
     currency.difference = data[data.length - 1] - data[0] || 0;
-    currency.change = (currency.difference / data[0]) * PERCENT_MULTIPLIER || 0;
+    currency.change = ( currency.difference / data[0] ) * PERCENT_MULTIPLIER || 0;
+    currency.isStarred = false;
+    favorites.forEach(item => {
+      if (item.id === currency.id) {
+        currency.isStarred = true;
+      }
+    });
 
     return currency;
   });

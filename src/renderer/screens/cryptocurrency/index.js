@@ -41,10 +41,11 @@ const CryptoCurrencyPage = (props: Props) => {
   );
 
   const { rangeData } = useRange(range);
-
+  const favorites = useSelector(state => state.market.favorites);
   const currencies: Array<MarketCurrency> = useMarketCurrencies({
     counterValueCurrency: counterValue.currency,
     ...rangeData,
+    favorites
   });
 
   const currency = currencies.find(item => item.id === currencyId);

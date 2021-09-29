@@ -33,7 +33,7 @@ function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
           <Box horizontal alignItems="center">
             <Title>{currency.name}</Title>
             <Box px={2}>
-              <CryptocurrencyStar />
+              <CryptocurrencyStar currency={currency} />
             </Box>
           </Box>
           <Platform>{currency.family}</Platform>

@@ -206,7 +206,7 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            <CryptocurrencyStar />
+            <CryptocurrencyStar currency={currency} />
           </Cell>
         </RowContent>
       </Row>

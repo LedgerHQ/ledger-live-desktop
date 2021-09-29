@@ -65,9 +65,6 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
   return (
     <Box>
       <Box pb={5} horizontal alignItems="center">
-        <SwapButton onClick={() => swap()}>
-          <Swap />
-        </SwapButton>
         <Box mt={4}>
           <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70">
             1 {currency.name.toUpperCase()}

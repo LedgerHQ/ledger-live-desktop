@@ -12,6 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import type { MarketCurrency } from "~/renderer/reducers/market";
+import { useFavoriteCryptocurrencies } from "~/renderer/hooks/useFavoriteCryptocurrencies";
 
 const ListItemHeight: number = 56;
 
@@ -74,14 +75,14 @@ type CurrencyRowProps = {
 };
 
 function MarketList(props) {
-  const { range, searchValue, counterValue, order, orderBy, filters } = useSelector(
-    state => state.market
+  const { range, searchValue, counterValue, order, orderBy, filters, favorites } = useSelector(
+    state => state.market,
   );
   const { rangeData } = useRange(range);
-
   const currencies: Array<MarketCurrency> = useMarketCurrencies({
     counterValueCurrency: counterValue.currency,
-    ...rangeData
+    ...rangeData,
+    favorites,
   });
 
   const dispatch = useDispatch();

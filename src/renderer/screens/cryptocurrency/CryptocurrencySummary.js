@@ -12,7 +12,6 @@ import { usePortfolio } from "~/renderer/actions/portfolio";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import CryptocurrencySummaryHeader from "~/renderer/screens/cryptocurrency/CryptocurrencySummaryHeader";
-import { useLocation } from "react-router";
 
 type Props = {
   chartColor: string,
@@ -64,7 +63,6 @@ export default function CryptocurrencySummary({
         <Chart
           magnitude={currency.units[0].magnitude}
           color={chartColor}
-          // $FlowFixMe TODO make date non optional
           data={currency.variation}
           height={250}
           tickXScale={range}

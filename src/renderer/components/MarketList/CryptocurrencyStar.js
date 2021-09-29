@@ -11,42 +11,51 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
+import { getKey, setKey } from "~/renderer/storage";
+import type { CurrencyType } from "~/renderer/reducers/market";
+import { updateFavoriteCryptocurrencies } from "~/renderer/actions/market";
 
 const disableAnimation = process.env.SPECTRON_RUN;
 
 type Props = {
   yellow?: boolean,
+  currency: CurrencyType
 };
 
-export default function CryptocurrencyStar({ yellow }: Props) {
-  // const isAccountStarred = useSelector(state => isStarredAccountSelector(state, { accountId }));
-  const isAccountStarred = false;
+export default function CryptocurrencyStar({ yellow, currency }: Props) {
   const dispatch = useDispatch();
-  const refreshAccountsOrdering = useRefreshAccountsOrdering();
+  const { id, isStarred } = currency;
+  const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
+  const favorites = useSelector(state => state.market.favorites)
 
   const toggleStar = useCallback(
     e => {
-      track(isAccountStarred ? "Account Unstar" : "Account Star");
+      track(isStarred ? "Cryptocurrency Unstar" : "Cryptocurrency Star");
       e.stopPropagation();
-      // dispatch(toggleStarAction(accountId, parentId));
+      dispatch(
+        updateFavoriteCryptocurrencies({
+          cryptocurrencyId: id,
+          isStarred,
+          favorites
+        }),
+      );
     },
-    [isAccountStarred, dispatch, refreshAccountsOrdering],
+    [id, isStarred, dispatch],
   );
-  const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
 
   return (
-    <MaybeButtonWrapper filled={isAccountStarred}>
+    <MaybeButtonWrapper filled={isStarred}>
       <StarWrapper id="account-star-button" onClick={toggleStar}>
         {disableAnimation ? (
           <StarIcon
             yellow={yellow}
-            filled={isAccountStarred}
-            className={isAccountStarred ? "entered" : ""}
+            filled={isStarred}
+            className={isStarred ? "entered" : ""}
           />
         ) : (
-          <Transition in={isAccountStarred} timeout={isAccountStarred ? startBurstTiming : 0}>
+          <Transition in={isStarred} timeout={isStarred ? startBurstTiming : 0}>
             {className => (
-              <StarIcon yellow={yellow} filled={isAccountStarred} className={className} />
+              <StarIcon yellow={yellow} filled={isStarred} className={className} />
             )}
           </Transition>
         )}
