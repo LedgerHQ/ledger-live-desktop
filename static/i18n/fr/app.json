@@ -2538,7 +2538,7 @@
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
       "desc": "Réinitialisez Ledger Live pour effacer tous vos paramètres et comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre appareil Ledger. Les clés privées donnant accès à vos crypto-actifs restent protégées sur votre appareil Ledger. Elles sont également sauvegardées grâce à votre phrase de récupération.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Réinitialiser Ledger Live effacera l'historique de vos transactions de swap de tous vos comptes."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -2555,7 +2555,7 @@
     "removeAccountModal": {
       "title": "Supprimer le compte",
       "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "Supprimer ce compte effacera l'historique de vos transactions de swap avec ce dernier."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
