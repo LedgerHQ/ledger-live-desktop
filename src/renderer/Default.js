@@ -50,6 +50,7 @@ import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import useEnv from "~/renderer/hooks/useEnv";
+import pkg from "../../package.json";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -210,7 +211,7 @@ export default function Default() {
                     <ToastOverlay />
                   </Box>
 
-                  {process.env.NIGHTLY ? <NightlyLayer /> : null}
+                  {pkg.name === "ledger-live-desktop-nightly" ? <NightlyLayer /> : null}
 
                   <LibcoreBusyIndicator />
                   <DeviceBusyIndicator />
