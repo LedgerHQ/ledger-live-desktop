@@ -133,6 +133,8 @@
     "type": {
       "IN": "Received",
       "OUT": "Sent",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1170,6 +1172,34 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+  },
+  "NFT": {
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "Tokens",

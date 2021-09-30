@@ -18,6 +18,7 @@ import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
 import PlatformCatalog from "~/renderer/screens/platform";
 import PlatformApp from "~/renderer/screens/platform/App";
+import NFTGallery from "~/renderer/screens/nft/Gallery";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -188,6 +189,10 @@ export default function Default() {
                         />
                         <Route path="/lend" render={props => <Lend {...props} />} />
                         <Route path="/exchange" render={props => <Exchange {...props} />} />
+                        <Route
+                          path="/account/:id/nft-collection/:collectionId?"
+                          render={props => <NFTGallery {...props} />}
+                        />
                         <Route
                           path="/account/:parentId/:id"
                           render={props => <Account {...props} />}

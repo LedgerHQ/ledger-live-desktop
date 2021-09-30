@@ -187,7 +187,7 @@ const Placeholder: ThemedComponent<{}> = styled.div`
   padding-right: 50px;
 `;
 
-const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
+export const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
   display: flex;
   color: ${p => p.theme.colors.wallet};
   align-items: center;
@@ -210,7 +210,7 @@ const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(B
   }
 `;
 
-const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
+export const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
