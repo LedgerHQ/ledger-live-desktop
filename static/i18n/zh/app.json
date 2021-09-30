@@ -2537,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
-      "desc": "重置 Ledger Live，从而清除您电脑上所有的设置信息和账户信息。然后您可以选择密码并将账户重新添加到您的 Ledger 设备上。用以访问您加密资产的私钥会安全保存在您的 Ledger 设备上，并通过您的恢复短语加以备份。"
+      "desc": "重置 Ledger Live，从而清除您电脑上所有的设置信息和账户信息。然后您可以选择密码并将账户重新添加到您的 Ledger 设备上。用以访问您加密资产的私钥会安全保存在您的 Ledger 设备上，并通过您的恢复短语加以备份。",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "清除缓存",
@@ -2553,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "移除账户",
-      "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。"
+      "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",

@@ -2537,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación."
+      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación.",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "Borrar caché",
@@ -2553,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "Quitar cuenta",
-      "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo."
+      "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo.",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
