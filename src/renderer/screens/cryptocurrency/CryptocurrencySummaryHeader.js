@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Track from "~/renderer/analytics/Track";
 import Pills from "~/renderer/components/Pills";
 import { setMarketRange } from "~/renderer/actions/market";
-import Swap from "~/renderer/icons/Swap";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -57,10 +56,6 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
     },
     [dispatch]
   );
-
-  const swap = () => {
-
-  };
 
   return (
     <Box>

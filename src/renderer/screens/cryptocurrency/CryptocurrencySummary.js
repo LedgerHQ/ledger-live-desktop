@@ -8,7 +8,6 @@ import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
-import { usePortfolio } from "~/renderer/actions/portfolio";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import CryptocurrencySummaryHeader from "~/renderer/screens/cryptocurrency/CryptocurrencySummaryHeader";
@@ -17,39 +16,39 @@ type Props = {
   chartColor: string,
   currency: CurrencyType,
   range: string,
-  counterValue: any
+  counterValue: any,
 };
 
 export default function CryptocurrencySummary({
-                                                chartColor,
-                                                currency,
-                                                range,
-                                                counterValue,
-                                              }: Props) {
+  chartColor,
+  currency,
+  range,
+  counterValue,
+}: Props) {
   const discreetMode = useSelector(discreetModeSelector);
 
   const renderTickY = useCallback(
     (val: number) => formatShort(counterValue.currency.units[0], BigNumber(val)),
-    [counterValue, range]
+    [counterValue, range],
   );
 
   const renderTooltip = useCallback(
     (data: BalanceHistoryData) => <Tooltip data={data} counterValue={counterValue} range={range} />,
-    [counterValue, range]
+    [counterValue, range],
   );
 
   return (
     <Card p={0} py={5}>
       <Box px={6} data-e2e="dashboard_graph">
         <CryptocurrencySummaryHeader currency={currency} counterValue={counterValue} />
-        {/*<BalanceInfos*/}
-        {/*  unit={counterValue.units[0]}*/}
-        {/*  isAvailable={portfolio.balanceAvailable}*/}
-        {/*  since={selectedTimeRange}*/}
-        {/*  valueChange={portfolio.countervalueChange}*/}
-        {/*  totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value}*/}
-        {/*  handleChangeSelectedTime={handleChangeSelectedTime}*/}
-        {/*/>*/}
+        {/* <BalanceInfos */}
+        {/*  unit={counterValue.units[0]} */}
+        {/*  isAvailable={portfolio.balanceAvailable} */}
+        {/*  since={selectedTimeRange} */}
+        {/*  valueChange={portfolio.countervalueChange} */}
+        {/*  totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value} */}
+        {/*  handleChangeSelectedTime={handleChangeSelectedTime} */}
+        {/* /> */}
       </Box>
 
       <Box
@@ -69,14 +68,14 @@ export default function CryptocurrencySummary({
           renderTickY={discreetMode ? () => "" : renderTickY}
           renderTooltip={renderTooltip}
         />
-        {/*) : (*/}
-        {/*  <PlaceholderChart*/}
-        {/*    magnitude={counterValue.units[0].magnitude}*/}
-        {/*    chartId={chartId}*/}
-        {/*    data={portfolio.balanceHistory}*/}
-        {/*    tickXScale={range}*/}
-        {/*  />*/}
-        {/*)}*/}
+        {/* ) : ( */}
+        {/*  <PlaceholderChart */}
+        {/*    magnitude={counterValue.units[0].magnitude} */}
+        {/*    chartId={chartId} */}
+        {/*    data={portfolio.balanceHistory} */}
+        {/*    tickXScale={range} */}
+        {/*  /> */}
+        {/* )} */}
       </Box>
     </Card>
   );

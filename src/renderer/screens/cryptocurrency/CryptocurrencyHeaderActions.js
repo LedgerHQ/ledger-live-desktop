@@ -1,17 +1,18 @@
+// @flow
+
 import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { MarketCounterValueSelect } from "~/renderer/screens/market/MarketCounterValueSelect";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { accountSelector } from "~/renderer/reducers/accounts";
-import { findSubAccountById } from "@ledgerhq/live-common/lib/account";
-import { countervalueFirstSelector } from "~/renderer/reducers/settings";
-import connect, { useSelector } from "react-redux";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router";
+import type { MarketCurrency } from "~/renderer/reducers/market";
 
-function CryptocurrencyHeaderActions({ currency }) {
-  const state = useSelector(state => state);
+type Props = {
+  currency: MarketCurrency,
+};
+
+function CryptocurrencyHeaderActions({ currency }: Props) {
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -19,8 +20,8 @@ function CryptocurrencyHeaderActions({ currency }) {
     history.push({
       pathname: "/exchange",
       state: {
-        defaultCurrency: currency,
-      },
+        defaultCurrency: currency
+      }
     });
   }, [currency, history]);
 
@@ -29,8 +30,8 @@ function CryptocurrencyHeaderActions({ currency }) {
     history.push({
       pathname: "/swap",
       state: {
-        defaultCurrency: currency,
-      },
+        defaultCurrency: currency
+      }
     });
   }, [currency, history]);
 
