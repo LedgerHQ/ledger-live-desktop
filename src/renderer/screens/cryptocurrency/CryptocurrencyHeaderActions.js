@@ -20,7 +20,7 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     history.push({
       pathname: "/exchange",
       state: {
-        defaultCurrency: currency
+        defaultCurrency: currency,
       },
     });
   }, [currency, history]);
@@ -30,7 +30,7 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     history.push({
       pathname: "/swap",
       state: {
-        defaultCurrency: currency
+        defaultCurrency: currency,
       },
     });
   }, [currency, history]);

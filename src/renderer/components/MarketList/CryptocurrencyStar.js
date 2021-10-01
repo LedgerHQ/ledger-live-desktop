@@ -22,7 +22,7 @@ type Props = {
   currency?: CurrencyType,
   isStarred?: boolean,
   onClick?: any,
-  disableAnimation?: boolean
+  disableAnimation?: boolean,
 };
 
 export default function CryptocurrencyStar({
@@ -35,7 +35,7 @@ export default function CryptocurrencyStar({
   const dispatch = useDispatch();
   const isStarred = propsIsStarred || !!currency.isStarred;
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
-  const favorites = useSelector(state => state.market.favorites)
+  const favorites = useSelector(state => state.market.favorites);
 
   const toggleStar = useCallback(
     e => {
@@ -46,7 +46,7 @@ export default function CryptocurrencyStar({
           updateFavoriteCryptocurrencies({
             cryptocurrencyId: currency.id,
             isStarred,
-            favorites
+            favorites,
           }),
         );
       } else {
@@ -63,9 +63,7 @@ export default function CryptocurrencyStar({
           <StarIcon yellow={yellow} filled={isStarred} className={isStarred ? "entered" : ""} />
         ) : (
           <Transition in={isStarred} timeout={isStarred ? startBurstTiming : 0}>
-            {className => (
-              <StarIcon yellow={yellow} filled={isStarred} className={className} />
-            )}
+            {className => <StarIcon yellow={yellow} filled={isStarred} className={className} />}
           </Transition>
         )}
       </StarWrapper>
@@ -93,9 +91,9 @@ const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
   background: ${p => (p.filled ? p.theme.colors.starYellow : "transparent")};
   &:hover {
     background: ${p =>
-  p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.palette.divider, 0.2)};
+      p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.palette.divider, 0.2)};
     border-color: ${p =>
-  p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade100};
+      p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade100};
   }
 `;
 const FloatingWrapper: ThemedComponent<{}> = styled.div``;
@@ -128,6 +126,6 @@ const StarIcon: ThemedComponent<{
   transition: filter .1s ease-out;
   &:hover {
     filter: ${p =>
-  p.theme.colors.palette.type === "dark" ? "brightness(1.3)" : "brightness(0.8)"};
+      p.theme.colors.palette.type === "dark" ? "brightness(1.3)" : "brightness(0.8)"};
   }
 `;

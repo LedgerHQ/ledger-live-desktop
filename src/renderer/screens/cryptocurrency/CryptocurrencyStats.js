@@ -7,8 +7,7 @@ import styled from "styled-components";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { useSelector } from "react-redux";
-import type { Children } from 'react';
-
+import type { Children } from "react";
 
 const CardStyled = styled(Card)`
   width: 100%;
@@ -19,7 +18,15 @@ const Divider = styled(Box)`
   height: 1px;
 `;
 
-const InfoSection = ({ title, children, style }: { title: string, children: Children, style: any }) => {
+const InfoSection = ({
+  title,
+  children,
+  style,
+}: {
+  title: string,
+  children: Children,
+  style: any,
+}) => {
   return (
     <Box style={style} mt={15} mb={15} horizontal alignItems="top" justifyContent="space-between">
       <Text fontSize={14} color="palette.text.shade60">
@@ -62,8 +69,7 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="Trading volume (24h)">
-        </InfoSection>
+        <InfoSection title="Trading volume (24h)"></InfoSection>
         <Divider />
         <InfoSection title="24h Low / 24h High"></InfoSection>
         <Divider />

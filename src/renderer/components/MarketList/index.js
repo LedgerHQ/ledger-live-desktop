@@ -6,13 +6,13 @@ import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
 import { useDispatch, useSelector } from "react-redux";
 import { setMarketParams } from "~/renderer/actions/market";
 import styled from "styled-components";
-import { useRange } from "~/renderer/hooks/useRange";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
+import { useRange } from "~/renderer/hooks/market/useRange";
+import { useMarketCurrencies } from "~/renderer/hooks/market/useMarketCurrencies";
 
 const ListItemHeight: number = 56;
 
@@ -81,13 +81,12 @@ function MarketList() {
   const { rangeData } = useRange(range);
   const currencies: Array<MarketCurrency> = useMarketCurrencies({
     counterValueCurrency: counterValue.currency,
-    ...rangeData,
+    rangeData,
     favorites,
   });
 
   const dispatch = useDispatch();
   let visibleCurrencies: Array<MarketCurrency> = [];
-  const hiddenCurrencies: Array<MarketCurrency> = [];
   for (let i = 0; i < currencies.length; i++) {
     const currency = currencies[i];
     let doSearch: boolean = true;
@@ -97,8 +96,6 @@ function MarketList() {
     }
     if (doSearch && matchesSearch(searchValue, currency)) {
       visibleCurrencies.push(currency);
-    } else {
-      hiddenCurrencies.push(currency);
     }
   }
 
@@ -209,7 +206,10 @@ function MarketList() {
             onClick={() => onSort("isStarred")}
             mr={1}
           >
-            <CryptocurrencyStar isStarred={orderBy === "isStarred" && order === "desc"} disableAnimation />
+            <CryptocurrencyStar
+              isStarred={orderBy === "isStarred" && order === "desc"}
+              disableAnimation
+            />
           </ColumnTitleBox>
         </RowContent>
       </Row>

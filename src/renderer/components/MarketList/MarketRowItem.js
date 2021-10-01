@@ -98,7 +98,7 @@ function MarketRowItem(props: Props) {
         state: currency,
       });
     },
-    [history]
+    [history],
   );
 
   const onBuy = useCallback(
@@ -109,10 +109,12 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency
+          defaultCurrency: currency,
         },
       });
-    }, [currency, history]);
+    },
+    [currency, history],
+  );
 
   const onSwap = useCallback(
     e => {
@@ -122,10 +124,12 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/swap",
         state: {
-          defaultCurrency: currency
+          defaultCurrency: currency,
         },
       });
-    }, [currency, history]);
+    },
+    [currency, history],
+  );
 
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
@@ -161,7 +165,9 @@ function MarketRowItem(props: Props) {
               <Box horizontal alignItems="center">
                 <Box alignItems="left" pr={16}>
                   {currency.name}
-                  <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>{currency.ticker}</CurrencyTicker>
+                  <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
+                    {currency.ticker}
+                  </CurrencyTicker>
                 </Box>
                 <Button outlineGrey small mr={20} onClick={onBuy}>
                   Buy
