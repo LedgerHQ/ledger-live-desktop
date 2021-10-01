@@ -2538,7 +2538,7 @@
     "hardResetModal": {
       "title": "Сброс Ledger Live",
       "desc": "Сбросьте Ledger Live, чтобы стереть все настройки и счета на вашем компьютере. Затем вы можете установить новый пароль и вновь добавить счета, используя устройство Ledger. Приватные ключи, которые дают доступ к вашим криптоактивам, хранятся в безопасности на вашем устройстве. Кроме того, у вас есть фраза восстановления.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Сброс Ledger Live удалит всю историю обменов на всех ваших счетах."
     },
     "softResetModal": {
       "title": "Очистка кэша",
@@ -2555,7 +2555,7 @@
     "removeAccountModal": {
       "title": "Удаление счёта",
       "desc": "Это не повлияет на ваши криптоактивы. Существующие счета всегда можно добавить позже.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "Удаление этого счёта удалит связанную с ним историю обменов."
     },
     "openUserDataDirectory": {
       "title": "Просмотр пользовательских данных",
