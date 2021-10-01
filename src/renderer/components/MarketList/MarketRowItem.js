@@ -11,6 +11,7 @@ import { withRouter } from "react-router";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router-dom";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
+import Button from "~/renderer/components/Button";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -98,8 +99,34 @@ function MarketRowItem(props: Props) {
         state: currency
       });
     },
-    [history],
+    [history]
   );
+
+  const onBuy = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      setTrackingSource("cryptocurrency actions");
+      history.push({
+        pathname: "/exchange",
+        state: {
+          defaultCurrency: currency
+        },
+      });
+    }, [currency, history]);
+
+  const onSwap = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      setTrackingSource("cryptocurrency actions");
+      history.push({
+        pathname: "/swap",
+        state: {
+          defaultCurrency: currency
+        },
+      });
+    }, [currency, history]);
 
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
@@ -133,8 +160,16 @@ function MarketRowItem(props: Props) {
             </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box horizontal alignItems="center">
-                {currency.name}
-                <CurrencyTicker>{currency.ticker}</CurrencyTicker>
+                <Box alignItems="left" pr={16}>
+                  {currency.name}
+                  <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>{currency.ticker}</CurrencyTicker>
+                </Box>
+                <Button outlineGrey small mr={20} onClick={onBuy}>
+                  Buy
+                </Button>
+                <Button outlineGrey small onClick={onSwap}>
+                  Swap
+                </Button>
               </Box>
             </div>
           </Cell>

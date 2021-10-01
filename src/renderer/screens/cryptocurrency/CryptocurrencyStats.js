@@ -7,6 +7,8 @@ import styled from "styled-components";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { useSelector } from "react-redux";
+import type { Children } from 'react';
+
 
 const CardStyled = styled(Card)`
   width: 100%;
@@ -17,9 +19,9 @@ const Divider = styled(Box)`
   height: 1px;
 `;
 
-const InfoSection = ({ title, children }) => {
+const InfoSection = ({ title, children, style }: { title: string, children: Children, style: any }) => {
   return (
-    <Box mt={15} mb={15} horizontal alignItems="top" justifyContent="space-between">
+    <Box style={style} mt={15} mb={15} horizontal alignItems="top" justifyContent="space-between">
       <Text fontSize={14} color="palette.text.shade60">
         {title}
       </Text>
@@ -32,9 +34,11 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
   const { counterValue } = useSelector(state => state.market);
   return (
     <CardStyled style={{ height: "100%" }} px={16} py={20}>
-      <Text mb={20} fontSize={16} color="palette.text.shade100">Price statistics</Text>
+      <Text mb={20} fontSize={16} color="palette.text.shade100">
+        Price statistics
+      </Text>
       <Box grow vertical justifyContent="space-between">
-        <InfoSection title="Price">
+        <InfoSection style={{ height: "56px" }} title="Price">
           <Text textAlign="right" ff="Inter|Medium" fontSize={14}>
             <FormattedVal
               animateTicker
@@ -73,7 +77,7 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
   );
 }
 
-function MarketCap(props) {
+function MarketCap({ currency }: { currency: MarketCurrency }) {
   return (
     <CardStyled mb={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">

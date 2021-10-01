@@ -21,7 +21,7 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
       pathname: "/exchange",
       state: {
         defaultCurrency: currency
-      }
+      },
     });
   }, [currency, history]);
 
@@ -31,7 +31,7 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
       pathname: "/swap",
       state: {
         defaultCurrency: currency
-      }
+      },
     });
   }, [currency, history]);
 
@@ -53,27 +53,5 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     </Box>
   );
 }
-
-// const mapStateToProps = (
-//   state,
-//   {
-//     match: {
-//       params: { id, parentId },
-//     },
-//   },
-// ) => {
-//   const parentAccount: ?Account = parentId && accountSelector(state, { accountId: parentId });
-//   let account: ?AccountLike;
-//   if (parentAccount) {
-//     account = findSubAccountById(parentAccount, id);
-//   } else {
-//     account = accountSelector(state, { accountId: id });
-//   }
-//   return {
-//     parentAccount,
-//     account,
-//     countervalueFirst: countervalueFirstSelector(state),
-//   };
-// };
 
 export default CryptocurrencyHeaderActions;
