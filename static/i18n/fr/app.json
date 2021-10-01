@@ -1801,12 +1801,12 @@
     "strategy": "Stratégie de sélection des coins",
     "selected": "Coins sélectionnés par stratégie",
     "amount": "Montant à envoyer :",
-    "replaceable": "remplaçable",
+    "replaceable": "Remplaçable",
     "cannotSelect": {
       "unconfirmed": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
       "last": "Il en faut au moins en sélectionner un."
     },
-    "pending": "en attente",
+    "pending": "En attente",
     "pickUnconfirmedRBF": "Inclure les coins des transactions non confirmées et remplaçables.",
     "pickingStrategy": "Stratégie de sélection des UTXO",
     "pickingStrategyLabels": {
