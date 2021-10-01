@@ -34,12 +34,12 @@ type ProviderStatusTagProps = {
 const StatusThemeMap = {
   pending: { color: "warning", Icon: ClockIcon },
   approved: { color: "marketUp_western", Icon: CheckCircleIcon },
-  rejected: { color: "alertRed", Icon: ExclamationCircleIcon },
+  closed: { color: "alertRed", Icon: ExclamationCircleIcon },
 };
 
 const ProviderStatusTag = ({ status }: ProviderStatusTagProps) => {
   const { t } = useTranslation();
-  const { color, Icon } = StatusThemeMap[status];
+  const { color, Icon } = StatusThemeMap[status] || { color: null, icon: null };
 
   return (
     <StatusTag color={color}>

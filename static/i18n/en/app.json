@@ -262,7 +262,7 @@
           "status": {
             "pending": "KYC pending",
             "approved": "KYC approved",
-            "rejected": "KYC rejected"
+            "closed": "KYC rejected"
           }
         }
       }
