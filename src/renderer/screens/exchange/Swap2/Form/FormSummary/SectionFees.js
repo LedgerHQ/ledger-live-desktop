@@ -72,10 +72,10 @@ const SectionFees = ({
   const { t } = useTranslation();
   const { setDrawer, closeDrawer } = React.useContext(context);
   const exchangeRate = useSelector(rateSelector);
-  const fromAccountUnit = account && getAccountUnit(account);
   const mainFromAccount = account && getMainAccount(account, parentAccount);
+  const mainAccountUnit = mainFromAccount && getAccountUnit(mainFromAccount);
   const estimatedFees = status?.estimatedFees;
-  const showSummaryValue = fromAccountUnit && estimatedFees && estimatedFees.gt(0);
+  const showSummaryValue = mainFromAccount && estimatedFees && estimatedFees.gt(0);
   const family = mainFromAccount?.currency.family;
   const canEdit =
     hasRates &&
@@ -143,7 +143,7 @@ const SectionFees = ({
       <FormattedVal
         color="palette.text.shade100"
         val={estimatedFees}
-        unit={fromAccountUnit}
+        unit={mainAccountUnit}
         fontSize={3}
         ff="Inter|SemiBold"
         showCode
