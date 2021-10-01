@@ -70,7 +70,7 @@ const SectionFees = ({
   hasRates,
 }: Props) => {
   const { t } = useTranslation();
-  const { setDrawer, closeDrawer } = React.useContext(context);
+  const { setDrawer } = React.useContext(context);
   const exchangeRate = useSelector(rateSelector);
   const mainFromAccount = account && getMainAccount(account, parentAccount);
   const mainAccountUnit = mainFromAccount && getAccountUnit(mainFromAccount);
@@ -115,12 +115,10 @@ const SectionFees = ({
           status,
           disableSlowStrategy: exchangeRate?.tradeMethod === "fixed",
           provider,
-          closeDrawer,
         })),
     [
       canEdit,
       setDrawer,
-      closeDrawer,
       setTransaction,
       updateTransaction,
       mainFromAccount,

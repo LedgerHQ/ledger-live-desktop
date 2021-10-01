@@ -10,6 +10,7 @@ import type {
   TransactionStatus,
   FeeStrategy,
 } from "@ledgerhq/live-common/lib/types";
+import { context } from "~/renderer/drawers/Provider";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -61,6 +62,7 @@ const Fields = ({
   invariant(transaction.family === "bitcoin", "FeeField: bitcoin family expected");
 
   const bridge = getAccountBridge(account);
+  const { state: drawerState, setDrawer } = React.useContext(context);
 
   const [coinControlOpened, setCoinControlOpened] = useState(false);
   const [isAdvanceMode, setAdvanceMode] = useState(!transaction.feesStrategy);
@@ -82,7 +84,9 @@ const Fields = ({
       updateTransaction(transaction =>
         bridge.updateTransaction(transaction, { feePerByte: amount, feesStrategy }),
       );
+      if (drawerState.open) setDrawer(undefined);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [updateTransaction, bridge],
   );
 

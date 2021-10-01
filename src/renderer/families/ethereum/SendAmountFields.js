@@ -8,6 +8,7 @@ import GasPriceField from "./GasPriceField";
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/ethereum/react";
 import { getGasLimit } from "@ledgerhq/live-common/lib/families/ethereum/transaction";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { context } from "~/renderer/drawers/Provider";
 
 const hasAdvancedStrategy = transaction => {
   return !["slow", "medium", "fast"].includes(transaction.feesStrategy);
@@ -29,6 +30,7 @@ const Root = (props: *) => {
   const { transaction } = props;
   const { account, updateTransaction } = props;
   const bridge = getAccountBridge(account);
+  const { state: drawerState, setDrawer } = React.useContext(context);
 
   const defaultStrategies = useFeesStrategy(transaction);
   const [advancedStrategy, setAdvancedStrategy] = useState(getAdvancedStrategy(transaction));
@@ -50,7 +52,9 @@ const Root = (props: *) => {
       updateTransaction(transaction =>
         bridge.updateTransaction(transaction, { gasPrice: amount, feesStrategy }),
       );
+      if (drawerState.open) setDrawer(undefined);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [updateTransaction, bridge],
   );
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
 import Box from "~/renderer/components/Box";
 import SendAmountFields from "~/renderer/modals/Send/SendAmountFields";
@@ -20,7 +20,6 @@ type Props = {
   status: $PropertyType<SwapTransactionType, "status">,
   disableSlowStrategy?: boolean,
   provider: ?string,
-  closeDrawer: () => void,
 };
 export default function FeesDrawer({
   setTransaction,
@@ -30,26 +29,13 @@ export default function FeesDrawer({
   status,
   provider,
   disableSlowStrategy = false,
-  closeDrawer,
 }: Props) {
-  const isFirstRender = useRef(true);
   const transaction = useSelector(transactionSelector);
   const mapStrategies = useCallback(
     strategy =>
       strategy.label === "slow" && disableSlowStrategy ? { ...strategy, disabled: true } : strategy,
     [disableSlowStrategy],
   );
-
-  useEffect(() => {
-    // do nothing on first render
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    // close the drawer when the new selected strategy isn't "advanced"
-    if (transaction.feesStrategy && transaction.feesStrategy !== "advanced") closeDrawer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [transaction]);
 
   return (
     <Box height="100%">
