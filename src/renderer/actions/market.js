@@ -28,7 +28,14 @@ export const setFavoriteCryptocurrencies = (favorites: Array<{ id: number }>) =>
   payload: { favorites },
 });
 
-export const updateFavoriteCryptocurrencies = ({ cryptocurrencyId, isStarred, favorites }: { cryptocurrencyId: number, isStarred: boolean }) => ({
+export const updateFavoriteCryptocurrencies = ({
+  cryptocurrencyId,
+  isStarred,
+  favorites,
+}: {
+  cryptocurrencyId: number,
+  isStarred: boolean,
+}) => ({
   type: "UPDATE_FAVORITE_CRYPTOCURRENCIES",
   payload: { cryptocurrencyId, isStarred, favorites },
 });

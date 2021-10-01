@@ -11,8 +11,8 @@ import CryptoCurrencyHeader from "~/renderer/screens/cryptocurrency/Cryptocurren
 import CryptocurrencyHeaderActions from "~/renderer/screens/cryptocurrency/CryptocurrencyHeaderActions";
 import styled from "styled-components";
 import CryptocurrencySummary from "~/renderer/screens/cryptocurrency/CryptocurrencySummary";
-import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
-import { useRange } from "~/renderer/hooks/useRange";
+import { useMarketCurrencies } from "~/renderer/hooks/market/useMarketCurrencies";
+import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useRouteMatch } from "react-router";
 import CryptocurrencyStats from "~/renderer/screens/cryptocurrency/CryptocurrencyStats";
@@ -24,12 +24,10 @@ const Divider = styled(Box)`
 const CryptoCurrencyPage = () => {
   const bgColor = useTheme("colors.palette.background.paper");
   const {
-    params: { id: currencyId }
+    params: { id: currencyId },
   } = useRouteMatch();
 
-  const { range, counterValue } = useSelector(
-    state => state.market
-  );
+  const { range, counterValue } = useSelector(state => state.market);
 
   const { rangeData } = useRange(range);
   const favorites = useSelector(state => state.market.favorites);
@@ -64,7 +62,7 @@ const CryptoCurrencyPage = () => {
 
 const ConnectedCryptoCurrencyPage: React$ComponentType<{}> = compose(
   connect(),
-  withTranslation()
+  withTranslation(),
 )(CryptoCurrencyPage);
 
 export default ConnectedCryptoCurrencyPage;

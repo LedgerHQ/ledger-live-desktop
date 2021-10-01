@@ -3,30 +3,36 @@
 import { useEffect, useState } from "react";
 
 export type RangeData = {
-  count: number,
-  increment: number,
+  days: number,
+  interval: string,
+  simple: string,
 };
 
 const dataTable: Map<string, RangeData> = {
   year: {
-    count: 50,
-    increment: 7 * 24 * 60 * 60 * 1000,
+    days: 365,
+    interval: "daily",
+    simple: "1y",
   },
   month: {
-    count: 30,
-    increment: 24 * 60 * 60 * 1000,
+    days: 30,
+    interval: "daily",
+    simple: "30d",
   },
   week: {
-    count: 7 * 24,
-    increment: 60 * 60 * 1000,
+    days: 7,
+    interval: "hourly",
+    simple: "7d",
   },
   day: {
-    count: 24,
-    increment: 60 * 60 * 1000,
+    days: 1,
+    interval: "hourly",
+    simple: "24h",
   },
   hour: {
-    count: 60,
-    increment: 60 * 1000,
+    days: 0.04,
+    interval: "minutely",
+    simple: "1h",
   },
 };
 

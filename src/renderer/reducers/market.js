@@ -4,8 +4,6 @@ import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 import { setKey } from "~/renderer/storage";
-import { useDispatch, useSelector } from "react-redux";
-import { setFavoriteCryptocurrencies } from "~/renderer/actions/market";
 
 export type MarketCurrency = {
   coinType: number,
@@ -20,6 +18,35 @@ export type MarketCurrency = {
   ticker: string,
   type: string,
   units: Array<any>,
+};
+
+export type MarketCurrencyInfo = {
+  id: string,
+  symbol: string,
+  name: string,
+  image: string,
+  current_price: number,
+  market_cap: number,
+  market_cap_rank: number,
+  total_volume: number,
+  high_24h: number,
+  low_24h: number,
+  price_change_percentage_24h: number,
+  market_cap_change_percentage_24h: number,
+  circulating_supply: number,
+  total_supply: number,
+  max_supply: number,
+  ath: number,
+  ath_date: Date,
+  atl: number,
+  atl_date: Date,
+  sparkline_in_7d: number[],
+};
+
+export type MarketCurrencyCommonInfo = {
+  id: string,
+  symbol: string,
+  name: string,
 };
 
 export type CurrencyType = "all" | "coins" | "tokens";
@@ -53,35 +80,35 @@ const initialState: MarketState = {
   filters: {
     isLedgerCompatible: false,
     currencyType: "all",
-    selectedPlatforms: []
+    selectedPlatforms: [],
   },
-  favorites: []
+  favorites: [],
 };
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
     return {
       ...state,
-      ...payload
+      ...payload,
     };
   },
   SET_MARKET_RANGE: (state, { payload }: { payload: string }) => {
     return {
       ...state,
-      range: payload
+      range: payload,
     };
   },
   SET_MARKET_COUNTERVALUE: (state, { payload }: { payload: string }) => {
     const counterValue = supportedCountervalues.find(cv => cv.value === payload);
     return {
       ...state,
-      counterValue
+      counterValue,
     };
   },
   SET_MARKET_FILTERS: (state, { payload }: { payload: MarketFilters }) => {
     return {
       ...state,
-      filters: payload
+      filters: payload,
     };
   },
   SET_FAVORITE_CRYPTOCURRENCIES: (state, { payload }) => {
@@ -93,8 +120,8 @@ const handlers = {
   UPDATE_FAVORITE_CRYPTOCURRENCIES: (
     state,
     {
-      payload: { cryptocurrencyId, isStarred, favorites }
-    }: { payload: { cryptocurrencyId: number, status: boolean } }
+      payload: { cryptocurrencyId, isStarred, favorites },
+    }: { payload: { cryptocurrencyId: number, status: boolean } },
   ) => {
     const favoritesLength = favorites.length;
     if (isStarred) {
@@ -112,12 +139,12 @@ const handlers = {
       await setKey("app", "favorite_cryptocurrencies", favorites);
     }
 
-    updateFavorites()
+    updateFavorites();
     return {
       ...state,
-      favorites
+      favorites,
     };
-  }
+  },
 };
 
 export default handleActions(handlers, initialState);

@@ -214,7 +214,7 @@ const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) 
 function MarketFilters() {
   const FAMILIES_COUNT_STEP = 3; // default and how much families added by clicking "show more"
 
-  const savedFilters = useSelector(state => state.market.filters)
+  const savedFilters = useSelector(state => state.market.filters);
   const dispatch = useDispatch();
   const [displayedFamiliesCount, setDisplayedFamiliesCount] = useState<number>(FAMILIES_COUNT_STEP);
   const [currencyType, setCurrencyType] = useState<TypeFilterRow>(

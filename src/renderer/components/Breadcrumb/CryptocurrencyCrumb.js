@@ -15,7 +15,7 @@ const CryptocurrencyCrumb = () => {
   const history = useHistory();
   const { state: currency } = useLocation();
   const {
-    params: { id }
+    params: { id },
   } = useRouteMatch();
 
   const palette = useTheme("colors.palette");
@@ -27,7 +27,7 @@ const CryptocurrencyCrumb = () => {
           onClick={() => {
             setTrackingSource("market breadcrumb");
             history.push({
-              pathname: "/market/"
+              pathname: "/market/",
             });
           }}
         >

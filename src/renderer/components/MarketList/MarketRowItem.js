@@ -61,13 +61,13 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   height: 54px;
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
 
@@ -87,7 +87,6 @@ type Props = {
 };
 
 function MarketRowItem(props: Props) {
-
   const history = useHistory();
   const { index, style, currency, counterValueCurrency } = props;
 
@@ -96,7 +95,7 @@ function MarketRowItem(props: Props) {
       setTrackingSource("accounts page");
       history.push({
         pathname: `/market/${currency.id}`,
-        state: currency
+        state: currency,
       });
     },
     [history]

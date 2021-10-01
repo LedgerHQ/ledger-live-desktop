@@ -20,41 +20,39 @@ const ranges = [
   {
     value: "hour",
     label: "1H",
-    key: "hour"
+    key: "hour",
   },
   {
     value: "day",
     label: "1D",
-    key: "day"
+    key: "day",
   },
   {
     value: "week",
     label: "1W",
-    key: "week"
+    key: "week",
   },
   {
     value: "month",
     label: "1M",
-    key: "month"
+    key: "month",
   },
   {
     value: "year",
     label: "1Y",
-    key: "year"
-  }
+    key: "year",
+  },
 ];
 
 function CryptocurrencySummaryHeader({ currency }: Props) {
-  const { counterValue, range } = useSelector(
-    state => state.market
-  );
+  const { counterValue, range } = useSelector(state => state.market);
 
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(
     item => {
       dispatch(setMarketRange(item.value));
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (
@@ -114,11 +112,11 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
 
 export default CryptocurrencySummaryHeader;
 
-const SwapButton: ThemedComponent<{}> = styled(Tabbable).attrs(() => ( {
+const SwapButton: ThemedComponent<{}> = styled(Tabbable).attrs(() => ({
   color: "palette.text.shade100",
   ff: "Inter",
-  fontSize: 7
-} ))`
+  fontSize: 7,
+}))`
   align-items: center;
   align-self: center;
   border-radius: 4px;
