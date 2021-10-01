@@ -53,7 +53,7 @@ const SectionRate = ({ fromCurrency, toCurrency, ratesState, refetchRates, provi
       <NoValuePlaceholder />
     ) : exchangeRate && fromCurrency && toCurrency ? (
       <SummaryValue handleChange={handleChange}>
-        {ratesExpiration && exchangeRate.tradeMethod === "fixed" && (
+        {ratesExpiration && exchangeRate.tradeMethod === "fixed" && ratesExpiration > Date.now() && (
           <Box horizontal alignItems="center" mr={2}>
             <Box mr={1}>
               <AnimatedCountdown size={10} duration={ratesExpirationThreshold} />
