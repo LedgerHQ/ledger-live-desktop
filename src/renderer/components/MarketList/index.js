@@ -12,6 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import type { MarketCurrency } from "~/renderer/reducers/market";
+import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 
 const ListItemHeight: number = 56;
 
@@ -59,8 +60,8 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
     color: ${p => p.theme.colors.palette.text.shade60};
@@ -205,7 +206,10 @@ function MarketList() {
             alignItems="center"
             justifyContent="flex-end"
             fontSize={4}
+            onClick={() => onSort("isStarred")}
+            mr={1}
           >
+            <CryptocurrencyStar isStarred={orderBy === "isStarred" && order === "desc"} disableAnimation />
           </ColumnTitleBox>
         </RowContent>
       </Row>
@@ -239,10 +243,13 @@ const sortCurrencies = (currencies, key, order) => {
   if (typeof currencies[key] === "string") {
     currencies[key] = currencies[key].toLowerCase();
   }
+  if (typeof currencies[key] === "boolean") {
+    currencies[key] += false;
+  }
   return currencies.sort(function(a, b) {
     const orders = {
-      asc: (a, b) => ( a > b ? 1 : -1 ),
-      desc: (a, b) => ( a < b ? 1 : -1 )
+      asc: (a, b) => (a > b ? 1 : -1),
+      desc: (a, b) => (a < b ? 1 : -1),
     };
     return orders[order](a[key], b[key]);
   });

@@ -19,39 +19,48 @@ const disableAnimation = process.env.SPECTRON_RUN;
 
 type Props = {
   yellow?: boolean,
-  currency: CurrencyType
+  currency?: CurrencyType,
+  isStarred?: boolean,
+  onClick?: any,
+  disableAnimation?: boolean
 };
 
-export default function CryptocurrencyStar({ yellow, currency }: Props) {
+export default function CryptocurrencyStar({
+  yellow,
+  currency = {},
+  isStarred: propsIsStarred,
+  onClick,
+  disableAnimation,
+}: Props) {
   const dispatch = useDispatch();
-  const { id, isStarred } = currency;
+  const isStarred = propsIsStarred || !!currency.isStarred;
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
   const favorites = useSelector(state => state.market.favorites)
 
   const toggleStar = useCallback(
     e => {
-      track(isStarred ? "Cryptocurrency Unstar" : "Cryptocurrency Star");
-      e.stopPropagation();
-      dispatch(
-        updateFavoriteCryptocurrencies({
-          cryptocurrencyId: id,
-          isStarred,
-          favorites
-        }),
-      );
+      if (Object.keys(currency).length) {
+        track(isStarred ? "Cryptocurrency Unstar" : "Cryptocurrency Star");
+        e.stopPropagation();
+        dispatch(
+          updateFavoriteCryptocurrencies({
+            cryptocurrencyId: currency.id,
+            isStarred,
+            favorites
+          }),
+        );
+      } else {
+        onClick(!isStarred);
+      }
     },
-    [id, isStarred, dispatch],
+    [currency, isStarred, dispatch, favorites, onClick],
   );
 
   return (
     <MaybeButtonWrapper filled={isStarred}>
-      <StarWrapper id="account-star-button" onClick={toggleStar}>
+      <StarWrapper id="cryptocurrency-star-button" onClick={toggleStar}>
         {disableAnimation ? (
-          <StarIcon
-            yellow={yellow}
-            filled={isStarred}
-            className={isStarred ? "entered" : ""}
-          />
+          <StarIcon yellow={yellow} filled={isStarred} className={isStarred ? "entered" : ""} />
         ) : (
           <Transition in={isStarred} timeout={isStarred ? startBurstTiming : 0}>
             {className => (
