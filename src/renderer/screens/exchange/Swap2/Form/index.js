@@ -97,6 +97,15 @@ const SwapForm = () => {
     // eslint-disable-next-line
   }, [swapTransaction.transaction]);
 
+  useEffect(() => {
+    // Whenever an account is added, reselect the currency to pick a default target account.
+    // (possibly the one that got created)
+    if (swapTransaction.swap.to.currency && !swapTransaction.swap.to.account) {
+      swapTransaction.setToCurrency(swapTransaction.swap.to.currency);
+    }
+    // eslint-disable-next-line
+  }, [accounts]);
+
   usePollKYCStatus(
     {
       provider,
