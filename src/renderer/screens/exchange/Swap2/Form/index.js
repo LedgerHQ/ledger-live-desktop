@@ -136,7 +136,8 @@ const SwapForm = () => {
     !providersError &&
     !swapError &&
     !showWyreKYCBanner &&
-    exchangeRate;
+    exchangeRate &&
+    swapTransaction.swap.to.account;
 
   const onSubmit = () => {
     track("Page Swap Form - Request", {
