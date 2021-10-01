@@ -12,7 +12,6 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import type { MarketCurrency } from "~/renderer/reducers/market";
-import { useFavoriteCryptocurrencies } from "~/renderer/hooks/useFavoriteCryptocurrencies";
 
 const ListItemHeight: number = 56;
 
@@ -74,7 +73,7 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList(props) {
+function MarketList() {
   const { range, searchValue, counterValue, order, orderBy, filters, favorites } = useSelector(
     state => state.market,
   );

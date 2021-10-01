@@ -64,7 +64,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
           <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70">
             1 {currency.name.toUpperCase()}
           </Text>
-          <Text ff="Inter|Medium" fontSize={28} color="palette.text.shade100">
+          <Text ff="Inter|Medium" fontSize={28}>
             <FormattedVal
               animateTicker
               isNegative

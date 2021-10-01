@@ -15,6 +15,7 @@ import { useMarketCurrencies } from "~/renderer/hooks/useMarketCurrencies";
 import { useRange } from "~/renderer/hooks/useRange";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useRouteMatch } from "react-router";
+import CryptocurrencyStats from "~/renderer/screens/cryptocurrency/CryptocurrencyStats";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -56,6 +57,7 @@ const CryptoCurrencyPage = () => {
           counterValue={counterValue}
         />
       </Box>
+      <CryptocurrencyStats currency={currency} />
     </Box>
   );
 };
