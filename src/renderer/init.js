@@ -88,13 +88,17 @@ async function init() {
 
   sentry(() => sentryLogsSelector(store.getState()));
 
+  let deepLinkUrl; // Nb In some cases `fetchSettings` runs after this, voiding the deep link.
   ipcRenderer.once("deep-linking", (event, url) => {
     store.dispatch(setDeepLinkUrl(url));
+    deepLinkUrl = url;
   });
 
   const initialSettings = await getKey("app", "settings", {});
 
-  store.dispatch(fetchSettings(initialSettings));
+  store.dispatch(
+    fetchSettings(deepLinkUrl ? { ...initialSettings, deepLinkUrl } : initialSettings),
+  );
 
   const state = store.getState();
   const language = languageSelector(state);
