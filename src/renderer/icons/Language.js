@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const Language = ({ size = 40, color = "currentColor" }: { size: number, color?: string }) => (
+const Language = ({ size = 40, color = "currentColor" }: { size?: number, color?: string }) => (
   <svg viewBox="0 0 40 40" height={size} width={size}>
     <path
       fill={color}

@@ -23,7 +23,7 @@ type Props = {
     osLanguage: string,
   },
   onClose: () => void,
-  t: TFunction,
+  t?: TFunction,
 };
 
 const Title = styled(Text).attrs(() => ({
