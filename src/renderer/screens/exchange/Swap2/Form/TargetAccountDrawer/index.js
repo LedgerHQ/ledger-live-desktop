@@ -21,6 +21,7 @@ import { openModal } from "~/renderer/actions/modals";
 import Plus from "~/renderer/icons/Plus";
 import { rgba } from "~/renderer/styles/helpers";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { context } from "~/renderer/drawers/Provider";
 
 const AccountWrapper = styled(Tabbable)`
   cursor: pointer;
@@ -126,6 +127,7 @@ export default function TargetAccountDrawer({
   setDrawerStateRef,
 }: Props) {
   const dispatch = useDispatch();
+  const { setDrawer } = React.useContext(context);
   const [{ selectedAccount, targetAccounts }, setState] = useState({
     selectedAccount: initialSelectedAccount,
     targetAccounts: accounts,
@@ -138,6 +140,14 @@ export default function TargetAccountDrawer({
     };
   }, [setDrawerStateRef]);
   const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+  const handleAccountPick: $PropertyType<Props, "setToAccount"> = (
+    currency,
+    account,
+    parentAccount,
+  ) => {
+    setToAccount(currency, account, parentAccount);
+    setDrawer(undefined);
+  };
   return (
     <Box height="100%">
       <DrawerTitle i18nKey="swap2.form.to.title" />
@@ -147,7 +157,7 @@ export default function TargetAccountDrawer({
             key={account.id}
             account={account}
             selected={selectedAccount?.id === account.id}
-            setAccount={setToAccount}
+            setAccount={handleAccountPick}
           />
         ))}
         <Tabbable
