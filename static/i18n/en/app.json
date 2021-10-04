@@ -1596,7 +1596,7 @@
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result to a permanent loss of funds."
       },
       "connectDevice": {
         "title": "Device",
@@ -1702,16 +1702,16 @@
   },
   "elrond": {
     "account": {
-     "subHeader": {
-       "cardTitle": "Powered by Elrond",
-       "moreInfo": "More info",
-       "drawerTitle": "Elrond integration",
-       "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-       "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-       "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-       "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-       "website": "The Internet Scale Blockchain"
-     }
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
     }
   },
   "tron": {
