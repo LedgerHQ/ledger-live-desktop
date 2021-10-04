@@ -19,14 +19,14 @@ export function answerLanguageAvailable() {
 
 const IsSystemLanguageAvailable = () => {
   const dispatch = useDispatch();
-  const { language: currAppLanguage } = useSelector(languageSelector);
+  const currAppLanguage = useSelector(languageSelector);
   const { language: osLanguage } = getSystemLocale();
 
   useEffect(() => {
     if (
       !hasAnsweredLanguageAvailable() &&
       currAppLanguage !== osLanguage &&
-      (pushedLanguages.includes(osLanguage) || osLanguage === "en")
+      pushedLanguages.includes(osLanguage)
     ) {
       dispatch(openModal("MODAL_SYSTEM_LANGUAGE_AVAILABLE", { osLanguage, currAppLanguage }));
     }
