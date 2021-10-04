@@ -13,6 +13,8 @@ import { rateSelector, updateRateAction } from "~/renderer/actions/swap";
 import { DrawerTitle } from "../DrawerTitle";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { SWAP_VERSION } from "../../utils/index";
+import { context } from "~/renderer/drawers/Provider";
+
 type Props = {
   fromCurrency: $PropertyType<SwapSelectorStateType, "currency">,
   toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
@@ -22,11 +24,14 @@ type Props = {
 export default function ProviderRateDrawer({ fromCurrency, toCurrency, rates, provider }: Props) {
   const dispatch = useDispatch();
   const selectedRate = useSelector(rateSelector);
+  const { setDrawer } = React.useContext(context);
 
   const setRate = useCallback(
     rate => {
       dispatch(updateRateAction(rate));
+      setDrawer(undefined);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [dispatch],
   );
 
