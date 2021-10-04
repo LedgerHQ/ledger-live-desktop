@@ -125,6 +125,7 @@ function ToRow({
                   color="palette.text.shade40"
                   ff="Inter|Medium"
                   fontSize={3}
+                  placeholderStyle={{ padding: "0 15px" }}
                   pr={3}
                   mt="4px"
                   style={{ lineHeight: "1em" }}
