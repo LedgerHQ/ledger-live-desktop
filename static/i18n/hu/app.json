@@ -1433,6 +1433,9 @@
       "confirmIdentifier": "Azonosító ellenőrzése",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Azonosító",
+      "preparation": "Preparation",
+      "newFirmware": "New firmware {{version}}",
+      "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "Frissítés befejezése",
       "mcuFirst": "Válaszd le az USB kábelt az eszközödről",
       "mcuSecond": "Nyomd meg a bal gombot, és tartsd nyomva miközben újracsatlakoztatod az USB kábelt, míg a <1><0>{{repairProcessing}}</0></1> meg nem jelenik",
@@ -1696,6 +1699,20 @@
     "amount": "Mennyiség",
     "value": "Érték",
     "header": "Számlaátruházás ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2484,6 +2501,10 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
         "tezosJS": {
           "title": "use Tezos JS impl",
           "description": "Use Tezos JS impl"
@@ -2516,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "Ledger Live alaphelyzetbe állítása",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase."
+      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase.",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "Sütik törlése",
@@ -2532,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "Számla eltávolítása",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again."
+      "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Felhasználói adatok megtekintése",
@@ -2716,6 +2739,15 @@
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
     "alerts": {
@@ -3095,17 +3127,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Nehezen tudod csatlakoztatni a készüléked?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Solution #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Next solution",
     "previousSolution": "Previous solution",
     "followSteps": "Follow these steps",
     "supportArticle": "Support article",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Troubleshoot USB connection",
         "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Lets fix it!",
+        "cta": "Let’s fix it!",
         "back": "Go back"
       },
       "1": {
@@ -3123,8 +3160,7 @@
           "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
           "cta": "Set Rules",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Connect and unlock your device to see if it’s detected."
           }
         }
@@ -3133,8 +3169,8 @@
         "usbPort": {
           "title": "Try different USB ports",
           "bullets": {
-            "0": "Change the USB port used on your computer",
-            "1": "Remove any USB dongles",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Connect and unlock your device to see if it’s detected."
           }
         },
@@ -3572,10 +3608,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Account not scanned by full node",
       "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
-    },
-    "StratisDown2021Warning": {
-      "title": "The Stratis blockchain evolved and may no longer work correctly.",
-      "description": "Support for the original Stratis blockchain will be maintained until 16 October 2021."
     },
     "SwapGenericAPIError": {
       "title": "Exchange rate expired",

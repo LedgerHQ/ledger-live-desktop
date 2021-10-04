@@ -12,6 +12,7 @@ import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap from "~/renderer/screens/exchange/swap";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
+import USBTroubleshooting from "~/renderer/screens/USBTroubleshooting";
 import Account from "~/renderer/screens/account";
 import WalletConnect from "~/renderer/screens/WalletConnect";
 import Asset from "~/renderer/screens/asset";
@@ -42,12 +43,14 @@ import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
+import useUSBTroubleshooting from "~/renderer/hooks/useUSBTroubleshooting";
 import ModalsLayer from "./ModalsLayer";
 import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import useEnv from "~/renderer/hooks/useEnv";
+import pkg from "../../package.json";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -58,12 +61,57 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   }
 `;
 
+const NightlyLayerR = () => {
+  const children = [];
+  const w = 200;
+  const h = 100;
+  for (let y = 0.5; y < 20; y++) {
+    for (let x = 0.5; x < 20; x++) {
+      children.push(
+        <div
+          style={{
+            position: "absolute",
+            textAlign: "center",
+            top: y * h,
+            left: x * w,
+            transform: "rotate(-45deg)",
+          }}
+        >
+          NIGHTLY
+          <br />
+          {__APP_VERSION__}
+        </div>,
+      );
+    }
+  }
+  return (
+    <div
+      style={{
+        position: "fixed",
+        pointerEvents: "none",
+        opacity: 0.1,
+        color: "#777",
+        width: "100%",
+        height: "100%",
+        top: 0,
+        right: 0,
+        zIndex: 999999999999,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
+const NightlyLayer = React.memo(NightlyLayerR);
+
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
   const isSwapV2Enabled = useEnv("EXPERIMENTAL_SWAP") && __DEV__;
   const SwapComponent = useMemo(() => (isSwapV2Enabled ? Swap2 : Swap), [isSwapV2Enabled]);
   useDeeplink();
+  useUSBTroubleshooting();
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -153,11 +201,17 @@ export default function Default() {
                           render={(props: any) => <Asset {...props} />}
                         />
                         <Route path="/swap" render={props => <SwapComponent {...props} />} />
+                        <Route
+                          path="/USBTroubleshooting"
+                          render={props => <USBTroubleshooting {...props} />}
+                        />
                       </Switch>
                     </Page>
                     <Drawer />
                     <ToastOverlay />
                   </Box>
+
+                  {pkg.name === "ledger-live-desktop-nightly" ? <NightlyLayer /> : null}
 
                   <LibcoreBusyIndicator />
                   <DeviceBusyIndicator />

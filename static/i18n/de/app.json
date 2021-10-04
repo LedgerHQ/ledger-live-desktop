@@ -1433,6 +1433,9 @@
       "confirmIdentifier": "Überprüfen Sie die Kennung",
       "confirmIdentifierText": "Vergewissern Sie sich, dass die Kennung auf Ihrem Gerät mit der unten stehenden Kennung übereinstimmt. Bestätigen Sie und geben Sie Ihren PIN-Code ein, wenn Sie dazu aufgefordert werden.",
       "identifier": "Kennung",
+      "preparation": "Preparation",
+      "newFirmware": "New firmware {{version}}",
+      "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "Update abschließen",
       "mcuFirst": "Trennen Sie das USB-Kabel von Ihrem Gerät",
       "mcuSecond": "Drücken Sie die linke Taste und halten Sie sie gedrückt, während Sie das USB-Kabel wieder einstecken, bis der <1><0>{{repairProcessing}}</0></1> Bildschirm erscheint",
@@ -1696,6 +1699,20 @@
     "amount": "Betrag",
     "value": "Wert",
     "header": "Kontozuteilung ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2484,6 +2501,10 @@
           "title": "TronGrid.io verwenden",
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
         "tezosJS": {
           "title": "use Tezos JS impl",
           "description": "Use Tezos JS impl"
@@ -2516,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "Ledger live zurücksetzen",
-      "desc": "Setzen Sie Ledger Live zurück, um alle Einstellungen und Konten auf Ihrem Computer zu löschen. Sie können dann Ihr Passwort wählen und Ihre Konten wieder mit Ihrem Ledger-Gerät hinzufügen. Die privaten Schlüssel, die Zugang zu Ihren Krypto-Vermögenswerten geben, bleiben sicher auf Ihrem Ledger-Gerät und werden durch Ihren Wiederherstellungssatz gesichert."
+      "desc": "Setzen Sie Ledger Live zurück, um alle Einstellungen und Konten auf Ihrem Computer zu löschen. Sie können dann Ihr Passwort wählen und Ihre Konten wieder mit Ihrem Ledger-Gerät hinzufügen. Die privaten Schlüssel, die Zugang zu Ihren Krypto-Vermögenswerten geben, bleiben sicher auf Ihrem Ledger-Gerät und werden durch Ihren Wiederherstellungssatz gesichert.",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "Cache leeren",
@@ -2532,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "Konto entfernen",
-      "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden."
+      "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden.",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Benutzerdaten anzeigen",
@@ -2716,6 +2739,15 @@
           "4": "Ledger wird Sie niemals nach Ihrer Wiederherstellungsphrase fragen.",
           "5": "Wenn eine Person oder Anwendung danach fragt, gehen Sie davon aus, dass es sich um einen Betrug handelt!"
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
     "alerts": {
@@ -3095,17 +3127,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Haben Sie Schwierigkeiten, Ihr Gerät zu verbinden?",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "Lösung #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "Nächste Lösung",
     "previousSolution": "Vorherige Lösung",
     "followSteps": "Diesen Schritten folgen",
     "supportArticle": "Hilfeseite",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "Fehlerbehebung bei der USB-Verbindung",
         "desc": "Es scheint ein Problem beim Verbinden mit Ihrem Gerät zu geben. Keine Sorge, Sie können verschiedene Lösungen nacheinander ausprobieren, bis Ihr Gerät eine Verbindung herstellt!",
-        "cta": "Bringen wir es in Ordnung!",
+        "cta": "Let’s fix it!",
         "back": "Zurückgehen"
       },
       "1": {
@@ -3123,8 +3160,7 @@
           "desc": "Klicken Sie auf die Schaltfläche unten, um die udev-Regeln hinzuzufügen. Verbinden Sie dann Ihr Gerät und entsperren Sie es, um zu sehen, ob es erkannt wird.",
           "cta": "Regeln festlegen",
           "bullets": {
-            "0": "Geben Sie den folgenden Befehl in ein Terminal ein, um die Regeln automatisch hinzuzufügen und udev neu zu laden",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
@@ -3133,8 +3169,8 @@
         "usbPort": {
           "title": "Versuchen Sie verschiedene USB-Anschlüsse",
           "bullets": {
-            "0": "Ändern Sie den verwendeten USB-Anschluss an Ihrem Computer",
-            "1": "Entfernen Sie alle USB-Dongles",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
@@ -3572,10 +3608,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Konto nicht von Knoten (Full Node) gescannt",
       "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
-    },
-    "StratisDown2021Warning": {
-      "title": "Die Stratis-Blockchain hat sich weiterentwickelt und funktioniert möglicherweise nicht mehr korrekt.",
-      "description": "Die Unterstützung für die ursprüngliche Stratis-Blockchain wird bis zum 16. Oktober 2021 aufrechterhalten."
     },
     "SwapGenericAPIError": {
       "title": "Wechselkurs verfallen",

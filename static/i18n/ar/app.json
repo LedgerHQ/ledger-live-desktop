@@ -1433,6 +1433,9 @@
       "confirmIdentifier": "قم بالتحقق من المُعرّف",
       "confirmIdentifierText": "تحقق من أن المُعرّف على جهازك هو المُعرّف ذاته أدناه. قم بتأكيد وإدخال رمز PINال الخاص بك إذا طُلب.",
       "identifier": "المُعرّف",
+      "preparation": "Preparation",
+      "newFirmware": "New firmware {{version}}",
+      "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
@@ -1696,6 +1699,20 @@
     "amount": "المبلغ",
     "value": "القيمة",
     "header": "تخصيص الحساب ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2484,6 +2501,10 @@
           "title": "استخدم TronGrid.io",
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
         "tezosJS": {
           "title": "use Tezos JS impl",
           "description": "Use Tezos JS impl"
@@ -2516,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "إعادة تعيين Ledger Live",
-      "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك."
+      "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك.",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "حذف الذاكرة المؤقتة",
@@ -2532,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "إزالة حساب",
-      "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد."
+      "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -2716,6 +2739,15 @@
           "4": "لن يطلب ليدجر أبدًا عبارة الاسترداد الخاصة بك.",
           "5": "إذا طلب منك أي شخص أو تطبيق تقديمها، فعليك أن تفترض أنها عملية احتيال!"
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
     "alerts": {
@@ -3095,17 +3127,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "هل تواجه صعوبة في توصيل جهازك؟",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "الحل رقم #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "مقالة دعم",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
-        "cta": "لنقوم بإصلاحها!",
+        "cta": "Let’s fix it!",
         "back": "رجوع"
       },
       "1": {
@@ -3123,8 +3160,7 @@
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائيًا وإعادة تحميل udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
@@ -3133,8 +3169,8 @@
         "usbPort": {
           "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك",
-            "1": "إزالة أي دونجل USB",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
@@ -3572,10 +3608,6 @@
     "SatStackDescriptorNotImported": {
       "title": "لم يتم فحص الحساب بواسطة العقدة الكاملة",
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
-    },
-    "StratisDown2021Warning": {
-      "title": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح.",
-      "description": "سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
     },
     "SwapGenericAPIError": {
       "title": "انتهت صلاحية سعر الصرف",

@@ -198,4 +198,7 @@ export const urls = {
   cryptoOrg: {
     website: "https://crypto.org",
   },
+  elrond: {
+    website: "https://elrond.com",
+  },
 };

@@ -57,3 +57,9 @@ files:
   - "!node_modules/sodium-native/prebuilds"
   - "!node_modules/sodium-native/tmp"
   # Exclude modules
+
+publish:
+  - provider: s3
+    bucket: ledger-live-download-sandbox
+    region: eu-west-1
+    acl: private

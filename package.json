@@ -10,7 +10,7 @@
   "license": "MIT",
   "private": true,
   "main": "./.webpack/main.bundle.js",
-  "version": "2.33.1",
+  "version": "2.34.0",
   "scripts": {
     "start:prod": "electron ./.webpack/main.bundle.js",
     "start": "cross-env NODE_ENV=development node ./tools/main.js",
@@ -38,9 +38,7 @@
     "spectron": "jest \"tests/specs/.*\\.spec\\.js\" --maxWorkers=4",
     "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
-    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
-    "storybook": "cd ui-lib && yarn storybook",
-    "build-storybook": "cd ui-lib && yarn build-storybook"
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
@@ -52,7 +50,7 @@
     "@ledgerhq/hw-transport-http": "6.7.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.7.0",
     "@ledgerhq/ledger-core": "6.13.0",
-    "@ledgerhq/live-common": "^21.5.1",
+    "@ledgerhq/live-common": "^21.7.0",
     "@ledgerhq/logs": "6.2.0",
     "@polkadot/react-identicon": "0.85.3",
     "@tippyjs/react": "^4.2.5",
@@ -77,7 +75,7 @@
     "invariant": "^2.2.4",
     "ip": "^1.1.5",
     "isomorphic-unfetch": "^3.1.0",
-    "json-rpc-2.0": "^0.2.16",
+    "json-rpc-2.0": "^0.2.19",
     "jsqr": "^1.4.0",
     "lodash": "^4.17.21",
     "lru-cache": "^5.1.1",

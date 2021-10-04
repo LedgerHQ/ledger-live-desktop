@@ -1,5 +1,6 @@
 **[We are hiring, join us! 👨‍💻👩‍💻](https://jobs.lever.co/ledger/?department=Engineering)**
 
+
 # Ledger Live (desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)

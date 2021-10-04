@@ -179,10 +179,10 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapide",
+    "fast": "Rapides",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lent",
+    "slow": "Lents",
     "standard": "Standard",
     "medium": "Moyens",
     "feesAmount": "Montant des frais"
@@ -1433,6 +1433,9 @@
       "confirmIdentifier": "Vérifier l'identifiant",
       "confirmIdentifierText": "Vérifiez que l'identifiant sur votre appareil est le même que l'identifiant affiché ci-dessous. Confirmez et saisissez votre code PIN si demandé.",
       "identifier": "Identifiant",
+      "preparation": "Préparation",
+      "newFirmware": "Nouveau micrologiciel {{version}}",
+      "confirmUpdate": "Confirmez la mise à jour sur votre appareil.",
       "mcuTitle": "Terminer la mise à jour",
       "mcuFirst": "Déconnectez le câble USB de votre appareil.",
       "mcuSecond": "Maintenez le bouton gauche enfoncé tout en reconnectant le câble USB jusqu'à ce que l'écran <1><0>{{repairProcessing}}</0></1> apparaisse.",
@@ -1696,6 +1699,20 @@
     "amount": "Montant",
     "value": "Valeur",
     "header": "Répartition des comptes ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Propulsé par Elrond",
+        "moreInfo": "Plus d'informations",
+        "drawerTitle": "Intégration d'Elrond",
+        "title": "Le token Elrond eGold (EGLD) désormais disponible sur Ledger Live",
+        "description": "Vous pouvez maintenant sécuriser et gérer vos tokens eGold (EGLD) via Ledger Live.",
+        "description2": "Le token Elrond eGold (EGLD) est natif au réseau Elrond. Il est utilisé pour les transactions, le staking, les contrats intelligents, la gouvernance et les récompenses de validateur.",
+        "description3": "Nous travaillons avec l'équipe d'Elrond pour ajouter plus de fonctionnalités, comme le staking, la prise en charge native d'ESDT (Elrond Standard Digital Token), et bien plus.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2484,6 +2501,10 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Utilisez Elrond avec un proxy Ledger."
+        },
         "tezosJS": {
           "title": "Utiliser l'impl Tezos JS",
           "description": "Utiliser l'impl Tezos JS"
@@ -2516,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
-      "desc": "Réinitialisez Ledger Live pour effacer tous vos paramètres et comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre appareil Ledger. Les clés privées donnant accès à vos crypto-actifs restent protégées sur votre appareil Ledger. Elles sont également sauvegardées grâce à votre phrase de récupération."
+      "desc": "Réinitialisez Ledger Live pour effacer tous vos paramètres et comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre appareil Ledger. Les clés privées donnant accès à vos crypto-actifs restent protégées sur votre appareil Ledger. Elles sont également sauvegardées grâce à votre phrase de récupération.",
+      "warning": "Réinitialiser Ledger Live effacera l'historique de vos transactions de swap de tous vos comptes."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -2532,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "Supprimer le compte",
-      "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants."
+      "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
+      "warning": "Supprimer ce compte effacera l'historique de vos transactions de swap avec ce dernier."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
@@ -2716,6 +2739,15 @@
           "4": "Ledger ne vous demandera jamais votre phrase de récupération.",
           "5": "Si quelqu'un vous la demande, ne la donnez pas. Partez du principe que c'est une arnaque."
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contacter l'Assistance",
+        "continueCTA": "Continuer",
+        "title": "Vérifier le contenu de la boîte",
+        "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
       }
     },
     "alerts": {
@@ -3096,11 +3128,16 @@
   },
   "connectTroubleshooting": {
     "desc": "Des difficultés à connecter votre appareil ?",
+    "cta": "Réparer",
     "solution": "Solution n°{{number}}",
+    "applesInstructions": "Instructions d'Apple",
     "nextSolution": "Solution suivante",
     "previousSolution": "Solution précédente",
     "followSteps": "Suivez ces étapes",
     "supportArticle": "Article de l'Assistance",
+    "connecting": "Connexion en cours...",
+    "connected": "Connecté",
+    "backToPortfolio": "Retour au Portefeuille",
     "steps": {
       "entry": {
         "title": "Dépanner la connexion USB",
@@ -3124,7 +3161,6 @@
           "cta": "Ajouter",
           "bullets": {
             "0": "Saisissez la commande suivante dans un terminal pour ajouter automatiquement les règles et recharger udev.",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
             "1": "Connectez et déverrouillez votre appareil pour le détecter."
           }
         }
@@ -3572,10 +3608,6 @@
     "SatStackDescriptorNotImported": {
       "title": "Compte non balayé par le nœud",
       "description": "Veuillez configurer votre nœud pour rechercher les comptes associés à cet appareil. Votre nœud doit d'abord balayer la blockchain avant de pouvoir ajouter le compte à votre Portefeuille."
-    },
-    "StratisDown2021Warning": {
-      "title": "La blockchain Stratis a évolué et pourrait ne plus fonctionner correctement.",
-      "description": "La blockchain Stratis d'origine continuera d'être prise en charge jusqu'au 16 octobre 2021."
     },
     "SwapGenericAPIError": {
       "title": "Taux de change expiré",

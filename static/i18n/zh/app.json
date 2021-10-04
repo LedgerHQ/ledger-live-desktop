@@ -1433,6 +1433,9 @@
       "confirmIdentifier": "验证标识符",
       "confirmIdentifierText": "请确认您设备上的标识符和下方的标识符一致。如果需要，请确认并输入您的 PIN 识别密码。",
       "identifier": "标识符（identifier）",
+      "preparation": "Preparation",
+      "newFirmware": "New firmware {{version}}",
+      "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "完成更新",
       "mcuFirst": "从您的设备上断开 USB 数据线连接",
       "mcuSecond": "按下左键，长按住的同时重新连接 USB 数据线直到屏幕出现 <1><0>{{repairProcessing}}</0></1>",
@@ -1696,6 +1699,20 @@
     "amount": "数额",
     "value": "价值",
     "header": "账户配置 ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2484,6 +2501,10 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
         "tezosJS": {
           "title": "use Tezos JS impl",
           "description": "Use Tezos JS impl"
@@ -2516,7 +2537,8 @@
     },
     "hardResetModal": {
       "title": "重置 Ledger Live",
-      "desc": "重置 Ledger Live，从而清除您电脑上所有的设置信息和账户信息。然后您可以选择密码并将账户重新添加到您的 Ledger 设备上。用以访问您加密资产的私钥会安全保存在您的 Ledger 设备上，并通过您的恢复短语加以备份。"
+      "desc": "重置 Ledger Live，从而清除您电脑上所有的设置信息和账户信息。然后您可以选择密码并将账户重新添加到您的 Ledger 设备上。用以访问您加密资产的私钥会安全保存在您的 Ledger 设备上，并通过您的恢复短语加以备份。",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "清除缓存",
@@ -2532,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "移除账户",
-      "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。"
+      "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",
@@ -2716,6 +2739,15 @@
           "4": "Ledger 从来不会要求您提供恢复短语。",
           "5": "如果任何个人或应用程序要求您提供恢复短语，请将其视为骗局！"
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
     "alerts": {
@@ -3095,17 +3127,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "无法连接您的设备？",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "解决方案 #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "下一个解决方案",
     "previousSolution": "上一个解决方案",
     "followSteps": "按照这些步骤操作",
     "supportArticle": "支持条款",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "排除 USB 连接故障",
         "desc": "设备连接出现问题。请勿担心，您可以逐一尝试不同的解决方案，直到完成设备连接！",
-        "cta": "开始解决问题！",
+        "cta": "Let’s fix it!",
         "back": "返回"
       },
       "1": {
@@ -3123,8 +3160,7 @@
           "desc": "点击下方按钮添加 udev 规则。然后连接并解锁您的设备，查看设备能否被检测到。",
           "cta": "设置规则",
           "bullets": {
-            "0": "在终端机输入以下指令，自动添加规则并重新加载 udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         }
@@ -3133,8 +3169,8 @@
         "usbPort": {
           "title": "尝试不同的 USB 端口",
           "bullets": {
-            "0": "改用您电脑上另外的 USB 端口",
-            "1": "删除所有的 USB 软件保护器",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "连接并解锁您的设备，查看设备能否被检测到。"
           }
         },
@@ -3572,10 +3608,6 @@
     "SatStackDescriptorNotImported": {
       "title": "账户未经完整节点扫描",
       "description": "请配置您的完整节点以扫描与此设备相关联的帐户。 您的完整节点必须先扫描此帐户的区块链，然后才能将其添加到您的资产组合中。"
-    },
-    "StratisDown2021Warning": {
-      "title": "Stratis 区块链已经进化，可能无法正确工作。",
-      "description": "对原始 Stratis 区块链的支持将持续到2021年10月16日。"
     },
     "SwapGenericAPIError": {
       "title": "汇率失效",

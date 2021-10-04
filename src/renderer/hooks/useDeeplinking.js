@@ -56,7 +56,7 @@ export function useDeepLinkHandler() {
       const fullUrl = pathname.replace(/(^\/+|\/+$)/g, "");
       const [url, path] = fullUrl.split("/");
 
-      switch (fullUrl) {
+      switch (url) {
         case "accounts":
           navigate("/accounts");
           break;
