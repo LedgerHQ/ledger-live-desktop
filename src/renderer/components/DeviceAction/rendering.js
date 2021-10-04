@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
@@ -48,6 +48,7 @@ import CrossCircle from "~/renderer/icons/CrossCircle";
 import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
+import { context } from "~/renderer/drawers/Provider";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -201,6 +202,7 @@ const OpenManagerBtn = ({
   mt?: number,
 }) => {
   const history = useHistory();
+  const { setDrawer } = useContext(context);
 
   const onClick = useCallback(() => {
     const urlParams = new URLSearchParams({
@@ -215,7 +217,8 @@ const OpenManagerBtn = ({
       search: search ? `?${search}` : "",
     });
     closeAllModal();
-  }, [updateApp, firmwareUpdate, appName, history, closeAllModal]);
+    setDrawer(undefined);
+  }, [updateApp, firmwareUpdate, appName, history, closeAllModal, setDrawer]);
 
   return (
     <Button mt={mt} primary onClick={onClick}>
