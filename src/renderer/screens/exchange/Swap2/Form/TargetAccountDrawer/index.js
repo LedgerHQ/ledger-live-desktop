@@ -16,10 +16,11 @@ import {
 import Check from "~/renderer/icons/Check";
 import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import Tabbable from "~/renderer/components/Box/Tabbable";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import Plus from "~/renderer/icons/Plus";
 import { rgba } from "~/renderer/styles/helpers";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 
 const AccountWrapper = styled(Tabbable)`
   cursor: pointer;
@@ -57,15 +58,23 @@ const TargetAccount = memo(function TargetAccount({
   selected?: boolean,
   setAccount: $PropertyType<Props, "setToAccount">,
 }) {
+  const allAccounts = useSelector(shallowAccountsSelector);
   const theme = useTheme();
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
   const name = getAccountName(account);
+  const parentAccount =
+    account?.type !== "Account" ? allAccounts?.find(a => a.id === account?.parentId) : null;
   const balance =
     account.type !== "ChildAccount" && account.spendableBalance
       ? account.spendableBalance
       : account.balance;
-  const onClick = useCallback(() => setAccount(currency, account), [setAccount, currency, account]);
+  const onClick = useCallback(() => setAccount(currency, account, parentAccount), [
+    setAccount,
+    currency,
+    account,
+    parentAccount,
+  ]);
 
   return (
     <AccountWrapper
