@@ -11,7 +11,6 @@ import SwapNavbar from "./Navbar";
 import Box from "~/renderer/components/Box";
 
 const Body = styled(Box)`
-  row-gap: 2px;
   flex: 1;
 `;
 
@@ -25,6 +24,7 @@ const Main = styled.main`
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
   box-shadow: 0px 4px 6px rgba(20, 37, 51, 0.04);
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
 
   & > * {
     width: 100%;
