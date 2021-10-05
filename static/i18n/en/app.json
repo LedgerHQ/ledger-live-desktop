@@ -2583,8 +2583,8 @@
           "description": "Use trongrid directly without ledger proxy"
         },
         "experimentalCurrencies": {
-          "title": "Use experimental JS implementations",
-          "description": "Use all experimental JS currencies implementations"
+          "title": "Experimental JS implementations",
+          "description": "Use some experimental JS currencies implementations"
         },
         "experimentalLanguages": {
           "title": "Translation testing",
