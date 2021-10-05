@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+      "target": "es6",
+      "strict": true,
+      "module": "commonjs",
+      "moduleResolution": "Node",
+      "sourceMap": true,
+      "outDir": "../tests-out",
+  },
+  "include": ["playwright"],
+  "exclude": ["node_modules"]
+}

@@ -38,7 +38,9 @@
     "spectron": "jest \"tests/specs/.*\\.spec\\.js\" --maxWorkers=4",
     "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
-    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)"
+    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
+    "pretest": "tsc --incremental -p playwright/tsconfig.json",
+    "playwright": "playwright test -c tests-out"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
@@ -145,6 +147,7 @@
     "@babel/preset-flow": "^7.13.13",
     "@babel/preset-react": "^7.13.13",
     "@octokit/rest": "^18.0.15",
+    "@playwright/test": "^1.15.1",
     "@storybook/addon-actions": "^6.3.7",
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
@@ -191,9 +194,11 @@
     "listr": "^0.14.3",
     "listr-verbose-renderer": "^0.6.0",
     "nyc": "^15.1.0",
+    "playwright": "^1.15.1",
     "prettier": "^1.19.1",
     "spectron": "^15.0.0",
     "style-loader": "^1.2.1",
+    "typescript": "^4.4.3",
     "unused-webpack-plugin": "^2.4.0",
     "url-loader": "^4.1.1",
     "webpack": "^4.44.1",
