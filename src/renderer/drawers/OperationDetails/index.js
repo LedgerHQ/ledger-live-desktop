@@ -24,6 +24,7 @@ import {
   getOperationAmountNumber,
   getOperationConfirmationDisplayableNumber,
   isConfirmedOperation,
+  flattenOperationWithInternalsAndNfts,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 
@@ -90,7 +91,15 @@ const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const confirmationsNb = mainCurrency
     ? confirmationsNbForCurrencySelector(state, { currency: mainCurrency })
     : 0;
-  const operation = account ? findOperationInAccount(account, operationId) : null;
+
+  let operation = account ? findOperationInAccount(account, operationId) : null;
+  if (!operation) {
+    // Fixme, temporary fallback to try to find the operation inside NTF operations
+    operation = account.operations
+      .flatMap(flattenOperationWithInternalsAndNfts)
+      .find(o => o.id === operationId);
+  }
+
   return {
     marketIndicator,
     account,
