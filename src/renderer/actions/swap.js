@@ -68,8 +68,10 @@ export const fromSelector: OutputSelector<State, void, *> = createSelector(
   state => state.swap.pairs,
   pairs =>
     memoize((allAccounts: Array<Account>): Array<Account | TokenAccount> =>
-      filterAvailableFromAssets(pairs, allAccounts).sort(
-        (accountA, accountB) => accountA.disabled - accountB.disabled,
+      filterAvailableFromAssets(pairs, allAccounts).sort((accountA, accountB) =>
+        accountA.type === "Account" && accountB.type === "Account"
+          ? accountA.disabled - accountB.disabled
+          : 0,
       ),
     ),
 );
