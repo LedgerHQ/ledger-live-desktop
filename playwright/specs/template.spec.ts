@@ -2,7 +2,7 @@ import test from "../fixtures/start";
 import { expect } from "@playwright/test";
 
 // Comment out to disable recorder
-process.env.PWDEBUG = "1";
+// process.env.PWDEBUG = "1";
 
 // Use specific userdata
 test.use({ userdata: "skip-onboarding" });
@@ -17,6 +17,8 @@ test.describe("My feature", async () => {
   });
 
   test("My test", async ({ page }) => {
-    await page.pause();
+    // await page.pause();
+    expect(await page.title()).toBe("Ledger Live");
+    // await page.screenshot({ path: "screenshots/screenshot.png" });
   });
 });
