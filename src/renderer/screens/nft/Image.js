@@ -9,7 +9,7 @@ import Fallback from "~/renderer/images/nftFallback.jpg";
 
 type Props = {
   nft: NFTWithMetadata,
-  fill?: boolean,
+  full?: boolean,
   size?: number,
 };
 
@@ -18,11 +18,11 @@ type Props = {
  * and even tokens without an image where it will fallback to a generative image
  * based on the token metadata and some hue changes.
  *
- * The text in the fallback image is only visible if we are in `fill` mode, since list
+ * The text in the fallback image is only visible if we are in `full` mode, since list
  * mode is not large enough for the text to be readable.
  */
-const Wrapper: ThemedComponent<{ fill?: boolean, size?: number, isLoading: boolean }> = styled.div`
-  width: ${({ fill, size = 32 }) => (fill ? "100%" : `${size}px`)};
+const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boolean }> = styled.div`
+  width: ${({ full, size = 32 }) => (full ? "100%" : `${size}px`)};
   aspect-ratio: 1 / 1;
   border-radius: 4px;
   background: ${p => p.theme.colors.palette.text.shade5};
@@ -57,7 +57,7 @@ const Gen = styled.div`
   background-blend-mode: hard-light;
 
   &:after {
-    display: ${p => (p.fill ? "flex" : "none")}
+    display: ${p => (p.full ? "flex" : "none")}
     content: "${p => p.nft.nftName || centerEllipsis(p.nft.tokenId)}";
     font-size: 16px;
     font-size: 1vw;
@@ -73,12 +73,12 @@ const Gen = styled.div`
   }
 `;
 
-const Image = ({ fill, nft, size }: Props) => {
+const Image = ({ full, nft, size }: Props) => {
   const [isLoading, setLoading] = useState(!!nft.picture); // Only attempt to load if we have a url
 
   return (
-    <Wrapper fill={fill} size={size} isLoading={isLoading}>
-      <BigSpinner size={fill ? 50 : 16} color="palette.text.shade50" />
+    <Wrapper full={full} size={size} isLoading={isLoading}>
+      <BigSpinner size={full ? 50 : 16} color="palette.text.shade50" />
       {nft.picture ? <img onLoad={() => setLoading(false)} src={nft.picture} /> : <Gen nft={nft} />}
     </Wrapper>
   );

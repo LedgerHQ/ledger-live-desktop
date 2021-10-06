@@ -58,7 +58,7 @@ const Row = ({ nft, mode }: Props) => {
       alignItems={!isGrid ? "center" : undefined}
       onClick={onItemClick}
     >
-      <Image nft={nft} size={40} fill={isGrid} />
+      <Image nft={nft} size={40} full={isGrid} />
       <Box ml={2} flex={1} mt={isGrid ? 2 : 0}>
         <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
           {nftName}
