@@ -141,54 +141,67 @@ const StepReceiveFunds = ({
   invariant(account && mainAccount, "No account given");
   const name = token ? token.name : getAccountName(account);
   const initialDevice = useRef(device);
-  const address = mainAccount.freshAddress;
+  const address = mainAccount.virtualAddress ?? mainAccount.freshAddress;
+  const isAddressVirtual = mainAccount.virtualAddress != null;
   const [modalVisible, setModalVisible] = useState(false);
+  let onVerify;
 
   const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
   const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
 
-  const confirmAddress = useCallback(async () => {
-    try {
-      if (getEnv("MOCK")) {
-        setTimeout(() => {
-          onChangeAddressVerified(true);
-          transitionTo("receive");
-        }, 3000);
-      } else {
-        if (!device) {
-          throw new DisconnectedDevice();
-        }
-        await getAccountBridge(mainAccount)
-          .receive(mainAccount, {
-            deviceId: device.deviceId,
-            verify: true,
-          })
-          .toPromise();
-        onChangeAddressVerified(true);
-        hideQRCodeModal();
-        transitionTo("receive");
+  if (isAddressVirtual) {
+    onVerify = useCallback(() => {
+      // if device has changed since the beginning, we need to re-entry device
+      if (device !== initialDevice.current || !isAddressVerified) {
+        transitionTo("device");
       }
-    } catch (err) {
-      onChangeAddressVerified(false, err);
-      hideQRCodeModal();
-    }
-  }, [device, mainAccount, transitionTo, onChangeAddressVerified, hideQRCodeModal]);
+      onChangeAddressVerified(null);
+      onResetSkip();
+    });
+  } else {
+    const confirmAddress = useCallback(async () => {
+      try {
+        if (getEnv("MOCK")) {
+          setTimeout(() => {
+            onChangeAddressVerified(true);
+            transitionTo("receive");
+          }, 3000);
+        } else {
+          if (!device) {
+            throw new DisconnectedDevice();
+          }
+          await getAccountBridge(mainAccount)
+            .receive(mainAccount, {
+              deviceId: device.deviceId,
+              verify: true,
+            })
+            .toPromise();
+          onChangeAddressVerified(true);
+          hideQRCodeModal();
+          transitionTo("receive");
+        }
+      } catch (err) {
+        onChangeAddressVerified(false, err);
+        hideQRCodeModal();
+      }
+    }, [device, mainAccount, transitionTo, onChangeAddressVerified, hideQRCodeModal]);
 
-  const onVerify = useCallback(() => {
-    // if device has changed since the beginning, we need to re-entry device
-    if (device !== initialDevice.current || !isAddressVerified) {
-      transitionTo("device");
-    }
-    onChangeAddressVerified(null);
-    onResetSkip();
-  }, [device, onChangeAddressVerified, onResetSkip, transitionTo, isAddressVerified]);
+    onVerify = useCallback(() => {
+      // if device has changed since the beginning, we need to re-entry device
+      if (device !== initialDevice.current || !isAddressVerified) {
+        transitionTo("device");
+      }
+      onChangeAddressVerified(null);
+      onResetSkip();
+    }, [device, onChangeAddressVerified, onResetSkip, transitionTo, isAddressVerified]);
 
-  // when address need verification we trigger it on device
-  useEffect(() => {
-    if (isAddressVerified === null) {
-      confirmAddress();
-    }
-  }, [isAddressVerified, confirmAddress]);
+    // when address need verification we trigger it on device
+    useEffect(() => {
+      if (isAddressVerified === null) {
+        confirmAddress();
+      }
+    }, [isAddressVerified, confirmAddress]);
+  }
 
   return (
     <>
@@ -253,21 +266,37 @@ const StepReceiveFunds = ({
         ) : device ? (
           // verification with device
           <>
-            <Receive1ShareAddress
-              account={mainAccount}
-              name={name}
-              address={address}
-              showQRCodeModal={showQRCodeModal}
-            />
-            {mainAccount.derivationMode === "taproot" ? (
-              <AlertBoxContainer>
-                <Alert type="warning">
-                  <Trans i18nKey="currentAddress.taprootWarning" />
+            <>
+              <Receive1ShareAddress
+                account={mainAccount}
+                name={name}
+                address={address}
+                showQRCodeModal={showQRCodeModal}
+              />
+              
+              {mainAccount.derivationMode === "taproot" ? (
+                <AlertBoxContainer>
+                  <Alert type="warning">
+                    <Trans i18nKey="currentAddress.taprootWarning" />
+                  </Alert>
+                </AlertBoxContainer>
+              ) : null}
+              
+              {isAddressVirtual ? (
+                <Alert type="security" mt={4}>
+                  <Trans i18nKey="currentAddress.messageIfVirtual" values={{ name }} />
                 </Alert>
-              </AlertBoxContainer>
-            ) : null}
-            <Separator />
-            <Receive2Device device={device} onVerify={onVerify} name={name} />
+              ) : null}
+            </>
+
+            <>
+            {!isAddressVirtual ? (
+                <>
+                  <Separator />
+                  <Receive2Device device={device} onVerify={onVerify} name={name} /> 
+                </>
+              ) : null}
+            </>
           </>
         ) : null // should not happen
         }
