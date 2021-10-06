@@ -1,8 +1,8 @@
 // @flow
-import React, { useEffect, useCallback, useMemo } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNfts, nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
@@ -12,34 +12,17 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { useNfts } from "@ledgerhq/live-common/lib/nft";
 
 export default function NFTCrumb() {
-  const { t } = useTranslation();
   const history = useHistory();
   const { id, collectionId } = useParams();
   const account = useSelector(s => accountSelector(s, { accountId: id }));
   const nfts = useNfts(account.nfts, account.currency);
-
-  // TODO Cleanup once live-common has a helper for this
-  const collections = useMemo(() => {
-    return nfts.reduce((acc, nft) => {
-      const key = nft.collection.contract;
-      if (!(key in acc)) {
-        acc[key] = {
-          ...nft.collection,
-          tokens: [],
-        };
-      }
-      // We shouldn't need a dedup on lld side
-      if (!acc[key].tokens.find(token => token.id === nft.id)) acc[key].tokens.push(nft);
-      return acc;
-    }, {});
-  }, [nfts]);
+  const collections = nftsByCollections(nfts, collectionId);
 
   const items = useMemo(
     () =>
-      Object.values(collections).map((collection: any) => ({
+      collections.map(collection => ({
         key: collection.tokenName,
         label: collection.tokenName,
         collection,
