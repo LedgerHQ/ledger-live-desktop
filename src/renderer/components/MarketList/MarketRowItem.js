@@ -10,7 +10,6 @@ import { withRouter } from "react-router";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -221,14 +220,14 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            <FormattedVal
+            {price_change_percentage_in_currency && <FormattedVal
               isPercent
               animateTicker
               isNegative
               val={price_change_percentage_in_currency.toFixed(2)}
               inline
               withIcon
-            />
+            />}
           </Cell>
           <Cell
             shrink
