@@ -35,7 +35,7 @@ const Gallery = () => {
   return (
     <>
       <Box horizontal alignItems="center" mb={6}>
-        {collection ? (
+        {collectionId && collection ? (
           <>
             <Image size={40} nft={collection.nfts[0]} />
             <Box flex={1} ml={3}>
