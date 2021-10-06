@@ -40,10 +40,10 @@ export function useDeepLinkHandler() {
   const history = useHistory();
 
   const navigate = useCallback(
-    (url: string, query: any) => {
+    (url: string, state?: any, search?: string) => {
       if (url !== location.pathname) {
         setTrackingSource("deeplink");
-        history.push({ pathname: url, state: query });
+        history.push({ pathname: url, state, search });
       }
     },
     [history, location],
@@ -65,9 +65,16 @@ export function useDeepLinkHandler() {
           navigate("/exchange");
           break;
 
-        case "manager":
-          navigate("/manager");
+        case "manager": {
+          const { installapp } = query;
+          if (!installapp || typeof installapp !== "string") {
+            navigate("/manager");
+          } else {
+            navigate("/manager", undefined, `?q=${installapp}`);
+          }
+
           break;
+        }
 
         case "swap":
           navigate("/swap");
