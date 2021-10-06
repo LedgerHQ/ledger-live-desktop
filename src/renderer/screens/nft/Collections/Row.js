@@ -7,7 +7,7 @@ import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
-import Image from "../Image";
+import Image from "~/renderer/screens/nft/Image";
 
 const Container: ThemedComponent<{}> = styled(Box)`
   &:not(:nth-child(2)) {
