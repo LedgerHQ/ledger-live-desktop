@@ -65,6 +65,10 @@ export function useDeepLinkHandler() {
           navigate("/exchange");
           break;
 
+        case "manager":
+          navigate("/manager");
+          break;
+
         case "swap":
           navigate("/swap");
           break;
