@@ -1,10 +1,10 @@
 // @flow
-import React from "react";
+import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { useDispatch, useSelector } from "react-redux";
-import { setMarketParams } from "~/renderer/actions/market";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { getMarketCryptoCurrencies, setMarketParams } from "~/renderer/actions/market";
 import styled from "styled-components";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -12,7 +12,7 @@ import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import { useRange } from "~/renderer/hooks/market/useRange";
-import { useMarketCurrencies } from "~/renderer/hooks/market/useMarketCurrencies";
+import Paginator from "~/renderer/components/Paginator";
 
 const ListItemHeight: number = 56;
 
@@ -60,8 +60,8 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
 
   & * {
     color: ${p => p.theme.colors.palette.text.shade60};
@@ -74,28 +74,64 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList() {
-  const { range, searchValue, counterValue, order, orderBy, filters, favorites } = useSelector(
-    state => state.market,
+function MarketList(props) {
+  const {
+    range,
+    searchValue,
+    counterValue,
+    order,
+    orderBy,
+    filters,
+    favorites,
+    counterCurrency,
+    limit,
+    coinsCount,
+    page,
+    currencies,
+    loading
+  } = useSelector(
+    state => state.market
   );
   const { rangeData } = useRange(range);
-  const currencies: Array<MarketCurrency> = useMarketCurrencies({
-    counterValueCurrency: counterValue.currency,
-    rangeData,
-    favorites,
-  });
+  // const currencies: Array<MarketCurrency> = useMarketCurrencies({
+  //   counterValueCurrency: counterValue.currency,
+  //   rangeData,
+  //   favorites
+  // });
 
+
+  // Calling this hook causes infinite rerender
+  // useCounterCurrencies({
+  //   counterCurrency: "usd",
+  //   range,
+  //   limit,
+  //   page
+  // });
   const dispatch = useDispatch();
   let visibleCurrencies: Array<MarketCurrency> = [];
-  for (let i = 0; i < currencies.length; i++) {
-    const currency = currencies[i];
-    let doSearch: boolean = true;
+  useEffect(() => {
+    dispatch(
+      getMarketCryptoCurrencies({
+        counterCurrency: counterCurrency,
+        range: range,
+        limit: limit,
+        page: page,
+      })
+    );
+  }, [counterCurrency, range, limit, page]);
 
-    if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
-      doSearch = false;
-    }
-    if (doSearch && matchesSearch(searchValue, currency)) {
-      visibleCurrencies.push(currency);
+  // TODO: REMOVE IF AFTER TESTING
+  if (currencies) {
+    for (let i = 0; i < currencies.length; i++) {
+      const currency = currencies[i];
+      let doSearch: boolean = true;
+
+      if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
+        doSearch = false;
+      }
+      if (doSearch && matchesSearch(searchValue, currency)) {
+        visibleCurrencies.push(currency);
+      }
     }
   }
 
@@ -227,11 +263,20 @@ function MarketList() {
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}
+      <Box justifyContent="center" horizontal>
+        <Paginator
+          currentPage={page}
+          totalSize={coinsCount}
+          limit={limit}
+          small
+          onChange={page => dispatch(setMarketParams({ page }))}
+        />
+      </Box>
     </Box>
   );
 }
 
-export default MarketList;
+export default connect(null, { getMarketCryptoCurrencies })(MarketList);
 
 export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
   if (!search) return true;
@@ -248,8 +293,8 @@ const sortCurrencies = (currencies, key, order) => {
   }
   return currencies.sort(function(a, b) {
     const orders = {
-      asc: (a, b) => (a > b ? 1 : -1),
-      desc: (a, b) => (a < b ? 1 : -1),
+      asc: (a, b) => ( a > b ? 1 : -1 ),
+      desc: (a, b) => ( a < b ? 1 : -1 )
     };
     return orders[order](a[key], b[key]);
   });

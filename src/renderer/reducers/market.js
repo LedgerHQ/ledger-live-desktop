@@ -56,11 +56,20 @@ export type MarketFilters = {
   selectedPlatforms: string[],
 };
 
+export type CoinsListItemType = {
+  id: "string",
+  symbol: "string",
+  name: "string"
+}
 export type MarketState = {
   currencies: Array<MarketCurrency>,
+  coinsList: Array<CoinsListItemType>,
   filteredCurrencies: Array<MarketCurrency>,
   searchValue: string,
   range: string,
+  limit: number,
+  coinsListCount: undefined,
+  page: number,
   counterValue: { value: string, label: string, currency: Currency },
   filters: {
     isLedgerCompatible: boolean,
@@ -73,9 +82,13 @@ const initialState: MarketState = {
   currencies: [],
   filteredCurrencies: [],
   searchValue: "",
-  range: "day",
-  order: "desc",
-  orderBy: "price",
+  range: "24h",
+  order: "asc",
+  orderBy: "market_cap_rank",
+  counterCurrency: "usd",
+  page: 1,
+  limit: 10,
+  coinsList: [],
   counterValue: supportedCountervalues.find(cv => cv.value === "USD"),
   filters: {
     isLedgerCompatible: false,
@@ -87,6 +100,7 @@ const initialState: MarketState = {
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
+    console.log(payload)
     return {
       ...state,
       ...payload,
@@ -115,6 +129,12 @@ const handlers = {
     return {
       ...state,
       favorites: payload.favorites,
+    };
+  },
+  GET_MARKET_CRYPTOCURRENCIES: (state, { payload }) => {
+    console.log(payload);
+    return {
+      ...state,
     };
   },
   UPDATE_FAVORITE_CRYPTOCURRENCIES: (

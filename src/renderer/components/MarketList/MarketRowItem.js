@@ -2,7 +2,6 @@
 import React, { useCallback } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Variation from "~/renderer/components/Variation";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -10,8 +9,8 @@ import type { Account, Currency, TokenAccount } from "@ledgerhq/live-common/lib/
 import { withRouter } from "react-router";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router-dom";
-import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import Button from "~/renderer/components/Button";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -20,6 +19,11 @@ const Cell = styled(Box)`
 const CryptoCurrencyIconWrapper = styled.div`
   height: 20px;
   width: 20px;
+  position: relative;
+
+  img {
+    height: 100%;
+  }
 `;
 
 const CurrencyTicker = styled.div`
@@ -61,13 +65,13 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
+  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
   height: 54px;
 
   & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
   }
 `;
 
@@ -89,16 +93,26 @@ type Props = {
 function MarketRowItem(props: Props) {
   const history = useHistory();
   const { index, style, currency, counterValueCurrency } = props;
+  const {
+    currency: {
+      name,
+      symbol,
+      market_cap_rank,
+      current_price,
+      price_change_percentage_in_currency,
+      image,
+    },
+  } = props;
 
   const onCurrencyClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
       setTrackingSource("accounts page");
       history.push({
         pathname: `/market/${currency.id}`,
-        state: currency,
+        state: currency
       });
     },
-    [history],
+    [history]
   );
 
   const onBuy = useCallback(
@@ -109,11 +123,11 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency,
-        },
+          defaultCurrency: currency
+        }
       });
     },
-    [currency, history],
+    [currency, history]
   );
 
   const onSwap = useCallback(
@@ -124,11 +138,11 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/swap",
         state: {
-          defaultCurrency: currency,
-        },
+          defaultCurrency: currency
+        }
       });
     },
-    [currency, history],
+    [currency, history]
   );
 
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
@@ -146,7 +160,7 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {index}
+            {market_cap_rank}
           </Cell>
           <Cell
             shrink
@@ -159,14 +173,14 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <CryptoCurrencyIconWrapper>
-              <CryptoCurrencyIcon currency={currency} size={20} />
+              <img src={image} />
             </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box horizontal alignItems="center">
                 <Box alignItems="left" pr={16}>
-                  {currency.name}
+                  {name}
                   <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                    {currency.ticker}
+                    {symbol.toUpperCase()}
                   </CurrencyTicker>
                 </Box>
                 <Button outlineGrey small mr={20} onClick={onBuy}>
@@ -188,16 +202,13 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {currency.price ? (
-              <FormattedVal
-                style={{ textAlign: "right" }}
-                val={currency.price}
-                currency={currency}
-                unit={counterValueCurrency.units[0]}
-                color="palette.text.shade100"
-                showCode
-              />
-            ) : null}
+            <FormattedVal
+              style={{ textAlign: "right" }}
+              val={current_price * 100}
+              unit={counterValueCurrency.units[0]}
+              color="palette.text.shade100"
+              showCode
+            />
           </Cell>
           <Cell
             shrink
@@ -210,16 +221,14 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {!isNaN(currency.change) ? (
-              <FormattedVal
-                isPercent
-                animateTicker
-                isNegative
-                val={Math.round(currency.change)}
-                inline
-                withIcon
-              />
-            ) : null}
+            <FormattedVal
+              isPercent
+              animateTicker
+              isNegative
+              val={price_change_percentage_in_currency.toFixed(2)}
+              inline
+              withIcon
+            />
           </Cell>
           <Cell
             shrink
@@ -233,7 +242,7 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
-              <Variation variation={currency.variation} width={75} height={35} />
+              <Variation variation={currency.sparkline_in_7d} width={75} height={35} />
             </div>
           </Cell>
           <Cell
@@ -246,7 +255,7 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            <CryptocurrencyStar currency={currency} />
+            {/*<CryptocurrencyStar currency={currency} />*/}
           </Cell>
         </RowContent>
       </Row>
