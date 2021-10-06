@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component, useCallback } from "react";
+import React, { useMemo, Component, useCallback } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
@@ -27,6 +27,7 @@ import {
   flattenOperationWithInternalsAndNfts,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
+import { useNfts } from "@ledgerhq/live-common/lib/nft";
 
 import { urls } from "~/config/urls";
 import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
@@ -73,6 +74,7 @@ import { setDrawer } from "../Provider";
 import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import AmountDetails from "./AmountDetails";
+import NFTOperationDetails from "./NFTOperationDetails";
 
 const mapStateToProps = (state, { operationId, accountId, parentId }) => {
   const marketIndicator = marketIndicatorSelector(state);
@@ -133,7 +135,8 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
   const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
-
+  const operations = useMemo(() => [operation], [operation]);
+  const nfts = useNfts(operations);
   const currency = getAccountCurrency(account);
   const mainCurrency = getAccountCurrency(mainAccount);
 
@@ -277,35 +280,42 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
       >
         <Trans i18nKey={`operation.type.${operation.type}`} />
       </Text>
-      <Box alignItems="center" mt={0}>
-        {!amount.isZero() && (
-          <Box selectable>
-            {hasFailed ? (
-              <Box color="alertRed">
-                <Trans i18nKey="operationDetails.failed" />
-              </Box>
-            ) : (
-              <ToolTip
-                content={
-                  AmountTooltip ? (
-                    <AmountTooltip operation={operation} amount={amount} unit={unit} />
-                  ) : null
-                }
-              >
-                <FormattedVal
-                  color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                  unit={unit}
-                  alwaysShowSign
-                  showCode
-                  val={amount}
-                  fontSize={7}
-                  disableRounding
-                />
-              </ToolTip>
-            )}
-          </Box>
-        )}
-      </Box>
+      {/* TODO clean up these conditional components into currency specific blocks */}
+      {!nfts[0] ? (
+        <Box alignItems="center" mt={0}>
+          {!amount.isZero() && (
+            <Box selectable>
+              {hasFailed ? (
+                <Box color="alertRed">
+                  <Trans i18nKey="operationDetails.failed" />
+                </Box>
+              ) : (
+                <ToolTip
+                  content={
+                    AmountTooltip ? (
+                      <AmountTooltip operation={operation} amount={amount} unit={unit} />
+                    ) : null
+                  }
+                >
+                  <FormattedVal
+                    color={amount.isNegative() ? "palette.text.shade80" : undefined}
+                    unit={unit}
+                    alwaysShowSign
+                    showCode
+                    val={amount}
+                    fontSize={7}
+                    disableRounding
+                  />
+                </ToolTip>
+              )}
+            </Box>
+          )}
+        </Box>
+      ) : (
+        <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
+          {nfts[0].nftName}
+        </Text>
+      )}
       {url ? (
         <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} my={1}>
           <LinkWithExternalIcon
@@ -315,26 +325,28 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           />
         </Box>
       ) : null}
-      <OpDetailsSection>
-        <OpDetailsTitle>{t("operationDetails.amount")}</OpDetailsTitle>
-        <OpDetailsData onClick={openAmountDetails}>
-          <OpDetailsSideButton mt={0}>
-            <Box mr={2}>
-              {hasFailed ? null : (
-                <CounterValue
-                  alwaysShowSign
-                  color="palette.text.shade60"
-                  fontSize={3}
-                  date={date}
-                  currency={currency}
-                  value={amount}
-                />
-              )}
-            </Box>
-            <IconChevronRight size={12} />
-          </OpDetailsSideButton>
-        </OpDetailsData>
-      </OpDetailsSection>
+      {!nfts[0] ? (
+        <OpDetailsSection>
+          <OpDetailsTitle>{t("operationDetails.amount")}</OpDetailsTitle>
+          <OpDetailsData onClick={openAmountDetails}>
+            <OpDetailsSideButton mt={0}>
+              <Box mr={2}>
+                {hasFailed ? null : (
+                  <CounterValue
+                    alwaysShowSign
+                    color="palette.text.shade60"
+                    fontSize={3}
+                    date={date}
+                    currency={currency}
+                    value={amount}
+                  />
+                )}
+              </Box>
+              <IconChevronRight size={12} />
+            </OpDetailsSideButton>
+          </OpDetailsData>
+        </OpDetailsSection>
+      ) : null}
       {(isNegative || fee) && (
         <OpDetailsSection>
           <OpDetailsTitle>{t("operationDetails.fees")}</OpDetailsTitle>
@@ -531,6 +543,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           </Box>
         </OpDetailsData>
       </OpDetailsSection>
+      {nfts[0] && <NFTOperationDetails operation={operation} />}
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
         <OpDetailsData>
@@ -581,7 +594,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         </OpDetailsSection>
       ) : null}
       <B />
-      <OpDetailsExtra extra={extra} type={type} account={account} />
+      <OpDetailsExtra operation={operation} extra={extra} type={type} account={account} />
     </Box>
   );
 };

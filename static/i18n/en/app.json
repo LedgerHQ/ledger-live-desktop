@@ -1340,6 +1340,12 @@
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Frozen amount",
       "unfreezeAmount": "Unfreeze amount",
