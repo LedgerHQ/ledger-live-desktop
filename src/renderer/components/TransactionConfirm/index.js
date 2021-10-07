@@ -54,6 +54,7 @@ const AmountField = ({ account, status: { amount }, field }: FieldComponentProps
       fontSize={3}
       inline
       showCode
+      alwaysShowValue
       disableRounding
     />
   </TransactionConfirmField>
