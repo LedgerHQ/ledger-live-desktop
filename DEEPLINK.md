@@ -56,3 +56,13 @@ _Every route is preceded by the protocol \*\*\_ledgerlive://_\*\*\_
 * **_swap_** 🠒 Swap Crypto Flow
 
   `ledgerlive://swap` will redirect to swap page
+
+* **_manager_** 🠒 Device Management Flow
+
+  `ledgerlive://manager` will redirect to manager page
+
+* **_manager?installapp_** 🠒 Device Management Flow
+
+  `ledgerlive://manager?installapp=bitcoin` will redirect to manager page with a pre-filled search for bitcoin
+
+        - *installapp* => the search query to be pre-filled when the manager opens
