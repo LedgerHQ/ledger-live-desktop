@@ -10,6 +10,7 @@ import { withRouter } from "react-router";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
+import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -100,6 +101,7 @@ function MarketRowItem(props: Props) {
       current_price,
       price_change_percentage_in_currency,
       image,
+      sparkline_in_7d,
     },
   } = props;
 
@@ -241,7 +243,7 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
-              <Variation variation={currency.sparkline_in_7d} width={75} height={35} />
+              {sparkline_in_7d && <Variation variation={sparkline_in_7d} width={75} height={35} />}
             </div>
           </Cell>
           <Cell
@@ -254,7 +256,7 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            {/*<CryptocurrencyStar currency={currency} />*/}
+            <CryptocurrencyStar currency={currency} />
           </Cell>
         </RowContent>
       </Row>

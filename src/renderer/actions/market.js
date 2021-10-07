@@ -1,6 +1,7 @@
 // @flow
 import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
+import { getKey, setKey } from "~/renderer/storage";
 
 export const setMarketParams = (payload: MarketState) => ({
   type: "SET_MARKET_PARAMS",
@@ -30,14 +31,25 @@ export const setFavoriteCryptocurrencies = (favorites: Array<{ id: number }>) =>
 export const updateFavoriteCryptocurrencies = ({
   cryptocurrencyId,
   isStarred,
-  favorites,
 }: {
   cryptocurrencyId: number,
   isStarred: boolean,
-}) => ({
-  type: "UPDATE_FAVORITE_CRYPTOCURRENCIES",
-  payload: { cryptocurrencyId, isStarred, favorites },
-});
+}) =>
+  async function(dispatch, getState) {
+    let {
+      market: { favorites, currencies },
+    } = getState();
+
+    if (isStarred) {
+      favorites = favorites.filter(favorite => favorite.id !== cryptocurrencyId);
+    } else {
+      favorites.push({ id: cryptocurrencyId });
+    }
+
+    await setKey("app", "favorite_cryptocurrencies", favorites);
+    const currenciesWithFavorites = mergeFavoritesWithCurrencies(favorites, currencies);
+    dispatch(setMarketParams({ favorites, currencies: currenciesWithFavorites }));
+  };
 
 export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
   type: "TOGGLE_MARKET_LOADING",
@@ -62,6 +74,7 @@ export const getMarketCryptoCurrencies = (filters: {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
     }
+    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
     const res = await marketClient.listPaginated({
       counterCurrency,
       range,
@@ -69,5 +82,25 @@ export const getMarketCryptoCurrencies = (filters: {
       page,
       ...filters,
     });
-    dispatch(setMarketParams({ currencies: res, page, loading: false }));
+    const currenciesWithFavorites = mergeFavoritesWithCurrencies(favoriteCryptocurrencies, res);
+    dispatch(
+      setMarketParams({
+        currencies: currenciesWithFavorites,
+        page,
+        loading: false,
+        favorites: favoriteCryptocurrencies,
+      }),
+    );
   };
+
+export function mergeFavoritesWithCurrencies(favorites, cryptocurrencies) {
+  cryptocurrencies.forEach(currency => {
+    currency.isStarred = false;
+    favorites.forEach(item => {
+      if (item.id === currency.id) {
+        currency.isStarred = true;
+      }
+    });
+  });
+  return cryptocurrencies;
+}

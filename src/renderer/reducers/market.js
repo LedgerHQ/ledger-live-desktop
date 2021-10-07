@@ -87,7 +87,7 @@ const initialState: MarketState = {
   orderBy: "market_cap_rank",
   counterCurrency: "usd",
   page: 1,
-  limit: 10,
+  limit: 9,
   coinsList: [],
   counterValue: supportedCountervalues.find(cv => cv.value === "USD"),
   filters: {

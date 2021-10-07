@@ -93,20 +93,6 @@ function MarketList(props) {
     state => state.market
   );
   const { rangeData } = useRange(range);
-  // const currencies: Array<MarketCurrency> = useMarketCurrencies({
-  //   counterValueCurrency: counterValue.currency,
-  //   rangeData,
-  //   favorites
-  // });
-
-
-  // Calling this hook causes infinite rerender
-  // useCounterCurrencies({
-  //   counterCurrency: "usd",
-  //   range,
-  //   limit,
-  //   page
-  // });
   const dispatch = useDispatch();
   let visibleCurrencies: Array<MarketCurrency> = [];
   useEffect(() => {

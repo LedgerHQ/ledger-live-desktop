@@ -11,6 +11,7 @@ type Props = {
   limit: number,
   small?: boolean,
   onChange: any,
+  loading?: boolean,
 };
 
 export default function Paginator(props: Props) {
@@ -43,7 +44,12 @@ export default function Paginator(props: Props) {
   }
   return (
     <Box horizontal>
-      <Button onClick={() => onChange(currentPage - 1)} disabled={isPrevDisabled} small={small}>
+      <Button
+        loading
+        onClick={() => onChange(currentPage - 1)}
+        disabled={isPrevDisabled}
+        small={small}
+      >
         <ChevronLeft size={12} />
       </Button>
       {currentPage > 3 && (
