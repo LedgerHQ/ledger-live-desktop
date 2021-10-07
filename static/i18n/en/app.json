@@ -3421,6 +3421,10 @@
       "title": "An account name is required",
       "description": "Please enter an account name"
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AccountNotSupported": {
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
