@@ -66,6 +66,7 @@ export const Drawer = () => {
       onRequestClose={onRequestClose}
       onRequestBack={state?.props?.onRequestBack}
       direction="left"
+      {...state.options}
     >
       <>
         <TransitionGroup>

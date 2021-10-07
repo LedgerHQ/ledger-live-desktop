@@ -109,7 +109,7 @@ const DrawerContainer = styled.div.attrs(({ state }) => ({
   z-index: 50;
 `;
 
-type DrawerProps = {
+export type DrawerProps = {
   children?: React$Node,
   isOpen?: boolean,
   onRequestClose?: (*) => void,
@@ -117,6 +117,7 @@ type DrawerProps = {
   direction?: "right" | "left",
   paper?: boolean,
   title?: string,
+  preventBackdropClick?: boolean,
 };
 
 export function SideDrawer({
@@ -126,18 +127,19 @@ export function SideDrawer({
   onRequestBack,
   direction = "right",
   title,
+  preventBackdropClick = false,
   ...props
 }: DrawerProps) {
   const [isMounted, setMounted] = useState(false);
 
   const onKeyPress = useCallback(
     e => {
-      if (isOpen && e.key === "Escape" && onRequestClose) {
+      if (isOpen && !preventBackdropClick && e.key === "Escape" && onRequestClose) {
         e.preventDefault();
         onRequestClose(e);
       }
     },
-    [onRequestClose, isOpen],
+    [onRequestClose, isOpen, preventBackdropClick],
   );
 
   useEffect(() => {
@@ -241,7 +243,10 @@ export function SideDrawer({
             ) : null}
             {children}
           </DrawerContent>
-          <DrawerBackdrop state={state} onClick={onRequestClose || undefined} />
+          <DrawerBackdrop
+            state={state}
+            onClick={preventBackdropClick ? undefined : onRequestClose}
+          />
         </DrawerContainer>
       )}
     </Transition>

@@ -155,10 +155,7 @@ const SwapForm = () => {
       provider,
       swapVersion: SWAP_VERSION,
     });
-    setDrawer(ExchangeDrawer, {
-      swapTransaction,
-      exchangeRate,
-    });
+    setDrawer(ExchangeDrawer, { swapTransaction, exchangeRate }, { preventBackdropClick: true });
   };
 
   const sourceAccount = swapTransaction.swap.from.account;
