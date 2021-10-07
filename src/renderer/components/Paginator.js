@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function Paginator(props: Props) {
-  const { totalSize, currentPage, small, limit, onChange } = props;
+  const { totalSize, currentPage, small, limit, onChange, loading = false } = props;
 
   const numberOfPages = Math.ceil(totalSize / limit);
   const pages = [];
@@ -42,51 +42,53 @@ export default function Paginator(props: Props) {
   } else {
     slicedAmount = currentPage + 2;
   }
+
+  const InnerButton = props => (
+    <Button disabled={loading} {...props}>
+      {props.children}
+    </Button>
+  );
+
   return (
     <Box horizontal>
-      <Button
-        loading
-        onClick={() => onChange(currentPage - 1)}
-        disabled={isPrevDisabled}
-        small={small}
-      >
+      <InnerButton onClick={() => onChange(currentPage - 1)} disabled={isPrevDisabled} small={small}>
         <ChevronLeft size={12} />
-      </Button>
+      </InnerButton>
       {currentPage > 3 && (
-        <Button onClick={() => onChange(1)} small={small}>
+        <InnerButton onClick={() => onChange(1)} small={small}>
           {1}
-        </Button>
+        </InnerButton>
       )}
       {currentPage > 4 && (
-        <Button onClick={() => onChange(currentPage - 3)} small={small}>
+        <InnerButton onClick={() => onChange(currentPage - 3)} small={small}>
           ...
-        </Button>
+        </InnerButton>
       )}
       {pages.slice(slicedFrom, slicedAmount).map(page => {
         return (
-          <Button
+          <InnerButton
             onClick={() => page !== currentPage && onChange(page)}
             key={page}
             primary={page === currentPage}
             small={small}
           >
             {page}
-          </Button>
+          </InnerButton>
         );
       })}
       {numberOfPages > currentPage + 3 && (
-        <Button onClick={() => onChange(currentPage + 3)} small={small}>
+        <InnerButton onClick={() => onChange(currentPage + 3)} small={small}>
           ...
-        </Button>
+        </InnerButton>
       )}
       {currentPage < numberOfPages - 2 ? (
-        <Button onClick={() => onChange(numberOfPages)} key={numberOfPages} small={small}>
+        <InnerButton onClick={() => onChange(numberOfPages)} key={numberOfPages} small={small}>
           {numberOfPages}
-        </Button>
+        </InnerButton>
       ) : null}
-      <Button onClick={() => onChange(currentPage + 1)} disabled={isNextDisabled} small={small}>
+      <InnerButton onClick={() => onChange(currentPage + 1)} disabled={isNextDisabled} small={small}>
         <ChevronRight size={12} />
-      </Button>
+      </InnerButton>
     </Box>
   );
 }

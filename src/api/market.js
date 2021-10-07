@@ -9,6 +9,8 @@ type MarketListRequestParams = {
   page: number,
   limit: number,
   range: string,
+  orderBy: string,
+  order: string,
 };
 
 type MarketCurrencyBuIdRequestParams = {
@@ -35,10 +37,12 @@ export class MarketClient extends APIClient {
     limit = 10,
     page = 1,
     ids = [],
+    orderBy = "market_cap",
+    order = "desc",
   }: MarketListRequestParams): Promise<MarketCurrencyInfo[]> {
-    let path = `${this.ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=market_cap_desc&per_page=${limit}&page=${page}&sparkline=true&price_change_percentage=${range}`;
+    let path = `${this.ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=true&price_change_percentage=${range}`;
 
-    if (!ids.length) {
+    if (ids.length) {
       path += `&ids=${ids}`;
     }
     const response = await this.http.get(path);
@@ -83,7 +87,7 @@ export class MarketClient extends APIClient {
       await this.handleError(response);
     }
 
-    return await response.json();
+    return response.json();
   }
 
   // Fetches list of supported currencies

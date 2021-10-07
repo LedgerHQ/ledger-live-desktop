@@ -88,52 +88,45 @@ function MarketList(props) {
     coinsCount,
     page,
     currencies,
-    loading
-  } = useSelector(
-    state => state.market
-  );
+    loading,
+  } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
-  let visibleCurrencies: Array<MarketCurrency> = [];
+
   useEffect(() => {
-    dispatch(
-      getMarketCryptoCurrencies({
-        counterCurrency: counterCurrency,
-        range: range,
-        limit: limit,
-        page: page,
-      })
-    );
-  }, [counterCurrency, range, limit, page]);
-
-  // TODO: REMOVE IF AFTER TESTING
-  if (currencies) {
-    for (let i = 0; i < currencies.length; i++) {
-      const currency = currencies[i];
-      let doSearch: boolean = true;
-
-      if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
-        doSearch = false;
-      }
-      if (doSearch && matchesSearch(searchValue, currency)) {
-        visibleCurrencies.push(currency);
-      }
+    if (!currencies[0]) {
+      dispatch(getMarketCryptoCurrencies());
     }
-  }
+  }, []);
+
+  // for (let i = 0; i < currencies.length; i++) {
+  //   const currency = currencies[i];
+  //   let doSearch: boolean = true;
+  //
+  //   if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
+  //     doSearch = false;
+  //   }
+  //   if (doSearch && matchesSearch(searchValue, currency)) {
+  //     visibleCurrencies.push(currency);
+  //   }
+  // }
 
   const onSort = key => {
-    if (key === orderBy) {
-      dispatch(setMarketParams({ order: order === "desc" ? "asc" : "desc" }));
-    } else {
-      dispatch(setMarketParams({ orderBy: key }));
+    if (!loading) {
+      if (key === orderBy) {
+        dispatch(getMarketCryptoCurrencies({ order: order === "desc" ? "asc" : "desc" }));
+      } else {
+        dispatch(getMarketCryptoCurrencies({ orderBy: key }));
+      }
     }
   };
 
-  visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
+  // visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
 
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
-      currency={visibleCurrencies[index]}
+      loading={loading}
+      currency={currencies[index]}
       index={index + 1}
       counterValueCurrency={counterValue.currency}
       style={{ ...style, pointerEvents: "auto" }}
@@ -142,7 +135,7 @@ function MarketList(props) {
     />
   );
 
-  const visibleCurrenciesLength = visibleCurrencies.length;
+  const currenciesLength = loading ? limit : currencies.length;
 
   return (
     <Box flow={2}>
@@ -155,9 +148,11 @@ function MarketList(props) {
             color="palette.text.shade100"
             horizontal
             alignItems="center"
+            onClick={() => onSort("market_cap")}
             fontSize={4}
           >
             #
+            <SortIconStyled order={orderBy === "market_cap" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -168,10 +163,10 @@ function MarketList(props) {
             horizontal
             alignItems="center"
             fontSize={4}
-            onClick={() => onSort("name")}
+            onClick={() => onSort("id")}
           >
             Name
-            <SortIconStyled order={orderBy === "name" ? order : ""} />
+            <SortIconStyled order={orderBy === "id" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -183,10 +178,9 @@ function MarketList(props) {
             justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
-            onClick={() => onSort("price")}
+            onClick={() => onSort("current_price")}
           >
             Price
-            <SortIconStyled order={orderBy === "price" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -198,10 +192,9 @@ function MarketList(props) {
             justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
-            onClick={() => onSort("change")}
+            onClick={() => onSort(`price_change_percentage_${range}`)}
           >
             % Change
-            <SortIconStyled order={orderBy === "change" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -235,11 +228,11 @@ function MarketList(props) {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      {visibleCurrenciesLength ? (
+      {currenciesLength ? (
         <ListStyled
-          height={visibleCurrenciesLength < 9 ? visibleCurrenciesLength * ListItemHeight : 500}
+          height={currenciesLength < 9 ? currenciesLength * ListItemHeight : ListItemHeight * 9}
           width="100%"
-          itemCount={visibleCurrenciesLength}
+          itemCount={currenciesLength}
           itemSize={ListItemHeight}
           key={range}
           style={{ overflowX: "hidden" }}
@@ -249,26 +242,23 @@ function MarketList(props) {
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}
-      <Box justifyContent="center" horizontal>
-        <Paginator
-          currentPage={page}
-          totalSize={coinsCount}
-          limit={limit}
-          small
-          onChange={page => dispatch(setMarketParams({ page }))}
-        />
-      </Box>
+      {!searchValue && (
+        <Box justifyContent="center" horizontal>
+          <Paginator
+            currentPage={page}
+            loading={loading}
+            totalSize={coinsCount}
+            limit={limit}
+            small
+            onChange={page => dispatch(getMarketCryptoCurrencies({ page }))}
+          />
+        </Box>
+      )}
     </Box>
   );
 }
 
 export default connect(null, { getMarketCryptoCurrencies })(MarketList);
-
-export const matchesSearch = (search?: string, currency, subMatch: boolean = false): boolean => {
-  if (!search) return true;
-  const match = `${currency.ticker}|${currency.name}}`;
-  return match.toLowerCase().includes(search.toLowerCase()) || subMatch;
-};
 
 const sortCurrencies = (currencies, key, order) => {
   if (typeof currencies[key] === "string") {

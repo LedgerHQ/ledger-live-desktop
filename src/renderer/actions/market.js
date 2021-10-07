@@ -61,18 +61,37 @@ export const getMarketCryptoCurrencies = (filters: {
   range: string,
   limit: number,
   page: number,
+  order: string,
+  orderBy: string,
 }) =>
   async function(dispatch, getState) {
-    const {
-      market: { counterCurrency, range, limit, page, coinsCount },
+    let {
+      market: {
+        counterCurrency,
+        range,
+        limit,
+        page,
+        coinsCount,
+        order,
+        orderBy,
+        searchValue,
+        ids,
+        coins,
+      },
     } = getState();
 
-    dispatch(setMarketParams({ loading: true, ...filters }));
+    dispatch(setMarketParams({ loading: true }));
 
     const marketClient = new MarketClient();
     if (coinsCount === undefined) {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
+    }
+    if (searchValue) {
+      ids = [];
+      coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
+    } else {
+      ids = [];
     }
     const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
     const res = await marketClient.listPaginated({
@@ -80,15 +99,19 @@ export const getMarketCryptoCurrencies = (filters: {
       range,
       limit,
       page,
+      order,
+      orderBy,
+      ids,
       ...filters,
     });
     const currenciesWithFavorites = mergeFavoritesWithCurrencies(favoriteCryptocurrencies, res);
     dispatch(
       setMarketParams({
         currencies: currenciesWithFavorites,
-        page,
         loading: false,
         favorites: favoriteCryptocurrencies,
+        ids,
+        ...filters,
       }),
     );
   };
@@ -104,3 +127,9 @@ export function mergeFavoritesWithCurrencies(favorites, cryptocurrencies) {
   });
   return cryptocurrencies;
 }
+
+export const matchesSearch = (search?: string, currency): boolean => {
+  if (!search) return true;
+  const match = `${currency.symbol}|${currency.name}`;
+  return match.toLowerCase().includes(search.toLowerCase());
+};

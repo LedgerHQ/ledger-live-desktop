@@ -11,6 +11,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -92,18 +93,7 @@ type Props = {
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
-  const { index, style, currency, counterValueCurrency } = props;
-  const {
-    currency: {
-      name,
-      symbol,
-      market_cap_rank,
-      current_price,
-      price_change_percentage_in_currency,
-      image,
-      sparkline_in_7d,
-    },
-  } = props;
+  const { index, style, currency, loading, counterValueCurrency } = props;
 
   const onCurrencyClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
@@ -161,7 +151,7 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {market_cap_rank}
+            {loading ? <LoadingPlaceholder style={{ width: "20px" }} /> : currency.market_cap_rank}
           </Cell>
           <Cell
             shrink
@@ -174,22 +164,26 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <CryptoCurrencyIconWrapper>
-              <img src={image} />
+              {loading ? <LoadingPlaceholder/> : <img src={currency.image} />}
             </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box horizontal alignItems="center">
-                <Box alignItems="left" pr={16}>
-                  {name}
+                {loading ? <LoadingPlaceholder /> : <><Box alignItems="left" pr={16}>
+                  {currency.name}
                   <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                    {symbol.toUpperCase()}
+                    {currency.symbol.toUpperCase()}
                   </CurrencyTicker>
-                </Box>
-                <Button outlineGrey small mr={20} onClick={onBuy}>
-                  Buy
-                </Button>
-                <Button outlineGrey small onClick={onSwap}>
-                  Swap
-                </Button>
+                </Box></>}
+                {!loading && (
+                  <>
+                    <Button outlineGrey small mr={20} onClick={onBuy}>
+                      Buy
+                    </Button>
+                    <Button outlineGrey small onClick={onSwap}>
+                      Swap
+                    </Button>
+                  </>
+                )}
               </Box>
             </div>
           </Cell>
@@ -203,13 +197,17 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            <FormattedVal
-              style={{ textAlign: "right" }}
-              val={current_price * 100}
-              unit={counterValueCurrency.units[0]}
-              color="palette.text.shade100"
-              showCode
-            />
+            {loading ? (
+              <LoadingPlaceholder />
+            ) : (
+              <FormattedVal
+                style={{ textAlign: "right" }}
+                val={currency.current_price * 100}
+                unit={counterValueCurrency.units[0]}
+                color="palette.text.shade100"
+                showCode
+              />
+            )}
           </Cell>
           <Cell
             shrink
@@ -222,11 +220,11 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {price_change_percentage_in_currency && <FormattedVal
+            {loading ? <LoadingPlaceholder/> : currency.price_change_percentage_in_currency && <FormattedVal
               isPercent
               animateTicker
               isNegative
-              val={price_change_percentage_in_currency.toFixed(2)}
+              val={currency.price_change_percentage_in_currency.toFixed(2)}
               inline
               withIcon
             />}
@@ -242,9 +240,11 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-start"
             fontSize={4}
           >
-            <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
-              {sparkline_in_7d && <Variation variation={sparkline_in_7d} width={75} height={35} />}
-            </div>
+            {loading ? <LoadingPlaceholder/> : <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
+              {Array.isArray(currency.sparkline_in_7d) && currency.sparkline_in_7d[0] && (
+                <Variation variation={currency.sparkline_in_7d} width={75} height={35} />
+              )}
+            </div>}
           </Cell>
           <Cell
             shrink
@@ -256,7 +256,7 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            <CryptocurrencyStar currency={currency} />
+            {loading ? <LoadingPlaceholder style={{ width: "20px" }} /> : <CryptocurrencyStar currency={currency} />}
           </Cell>
         </RowContent>
       </Row>

@@ -80,6 +80,7 @@
     "json-rpc-2.0": "^0.2.16",
     "jsqr": "^1.4.0",
     "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "lru-cache": "^5.1.1",
     "measure-scrollbar": "^1.1.0",
     "moment": "^2.29.1",

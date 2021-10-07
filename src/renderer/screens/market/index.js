@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { Component, useCallback, useState } from "react";
 import { compose } from "redux";
 import { connect, useDispatch, useSelector } from "react-redux";
 import type { TFunction } from "react-i18next";
@@ -11,36 +11,76 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
 import MarketList from "~/renderer/components/MarketList";
-import { setMarketParams } from "~/renderer/actions/market";
+import { setMarketParams, getMarketCryptoCurrencies } from "~/renderer/actions/market";
+import debounce from "lodash.debounce";
 
 type Props = {
-  t: TFunction,
+  getMarketCryptoCurrencies: any,
+  setMarketParams: any,
 };
 
-const MarketPage = ({ t }: Props) => {
-  const { searchValue } = useSelector(state => state.market);
-  const dispatch = useDispatch();
-  const onTextChange = useCallback(
-    (evt: SyntheticInputEvent<HTMLInputElement>) =>
-      dispatch(setMarketParams({ searchValue: evt.target.value })),
-    [dispatch],
-  );
+class MarketPage extends Component {
+  constructor() {
+    super();
+    this.debouncedSearch = debounce(this.debouncedSearch, 1000);
+  }
 
-  return (
-    <Box>
-      <MarketHeader />
-      <SearchContainer horizontal p={0} alignItems="center">
-        <SearchBox
-          id={"market-search-input"}
-          autoFocus
-          onTextChange={onTextChange}
-          search={searchValue}
-        />
-      </SearchContainer>
-      <MarketList />
-    </Box>
-  );
-};
+  debouncedSearch = () => {
+    this.props.getMarketCryptoCurrencies();
+  };
+
+  onTextChange = e => {
+    this.props.setMarketParams({ searchValue: e.target.value, loading: true });
+    this.debouncedSearch();
+  };
+
+  render() {
+    const { searchValue } = this.props
+    return (
+      <Box>
+        <MarketHeader />
+        <SearchContainer horizontal p={0} alignItems="center">
+          <SearchBox
+            id={"market-search-input"}
+            autoFocus
+            onTextChange={this.onTextChange}
+            search={searchValue}
+          />
+        </SearchContainer>
+        <MarketList />
+      </Box>
+    );
+  }
+}
+
+// const MarketPage = ({ getMarketCryptoCurrencies, setMarketParams }: Props) => {
+//   const { searchValue } = useSelector(state => state.market);
+//
+//   const debouncedSearch = debounce(() => {
+//     getMarketCryptoCurrencies();
+//   }, 1500);
+//
+//   const onTextChange = e => {
+//     // setMarketParams({ searchValue: e.target.value, loading: true });e
+//     setSearch(e.target.value);
+//     debouncedSearch();
+//   };
+//
+//   return (
+//     <Box>
+//       <MarketHeader />
+//       <SearchContainer horizontal p={0} alignItems="center">
+//         <SearchBox
+//           id={"market-search-input"}
+//           autoFocus
+//           onTextChange={onTextChange}
+//           search={search}
+//         />
+//       </SearchContainer>
+//       <MarketList />
+//     </Box>
+//   );
+// };
 
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
@@ -56,9 +96,7 @@ const SearchContainer: ThemedComponent<{}> = styled(Box)`
   border-radius: 4px 4px 0 0;
 `;
 
-const ConnectedMarketPage: React$ComponentType<{}> = compose(
-  connect(),
-  withTranslation(),
-)(MarketPage);
-
-export default ConnectedMarketPage;
+export default connect(state => ({ ...state.market }), {
+  getMarketCryptoCurrencies,
+  setMarketParams,
+})(MarketPage);
