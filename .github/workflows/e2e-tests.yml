@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: install and switch to GCC 5.4
+        run: ./tools/g++-5.4/install.sh
+
       - name: install dependencies
         if: always() && job.status != 'cancelled'
         run: yarn --frozen-lockfile
