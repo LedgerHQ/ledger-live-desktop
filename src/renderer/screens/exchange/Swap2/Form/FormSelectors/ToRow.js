@@ -12,7 +12,7 @@ import {
   usePickDefaultCurrency,
   useSelectableCurrencies,
 } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import type {
   SwapSelectorStateType,
   SwapTransactionType,
@@ -64,7 +64,7 @@ function ToRow({
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
   const currencies = useSelectableCurrencies({ allCurrencies });
-  const unit = toAccount ? getAccountUnit(toAccount) : null;
+  const unit = toCurrency?.units[0];
 
   usePickDefaultCurrency(currencies, toCurrency, setToCurrency);
 
@@ -104,7 +104,7 @@ function ToRow({
           <InputCurrency
             // @DEV: onChange props is required by the composant, there is no read-only logic
             onChange={() => {}}
-            value={unit && toAmount}
+            value={unit ? toAmount : null}
             disabled
             placeholder="-"
             textAlign="right"
