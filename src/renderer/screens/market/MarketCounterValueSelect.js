@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Box from "~/renderer/components/Box";
@@ -10,13 +10,19 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { supportedCountervalues } from "~/renderer/reducers/settings";
-import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies, getCounterCurrencies } from "~/renderer/actions/market";
 
 export const MarketCounterValueSelect = () => {
-  const counterCurrency = useSelector(state => state.market.counterCurrency);
+  const { counterCurrency, counterCurrencies } = useSelector(state => state.market);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!counterCurrencies[0]) {
+      dispatch(getCounterCurrencies());
+    }
+  }, []);
+
   const onCounterValueSelected = useCallback(
     item => {
       dispatch(getMarketCryptoCurrencies({ range: item.value }));
@@ -41,7 +47,7 @@ export const MarketCounterValueSelect = () => {
 
   const items = useMemo(
     () =>
-      supportedCountervalues.map(item => {
+      counterCurrencies.map(item => {
         item.key = item.value;
         return item;
       }),

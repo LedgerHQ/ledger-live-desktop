@@ -115,7 +115,7 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency,
+          defaultCurrency: currency.supportedCurrency,
         },
       });
     },
@@ -130,7 +130,7 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/swap",
         state: {
-          defaultCurrency: currency,
+          defaultCurrency: currency.supportedCurrency,
         },
       });
     },
@@ -181,7 +181,7 @@ function MarketRowItem(props: Props) {
                     </Box>
                   </>
                 )}
-                {!loading && (
+                {!loading && currency.supportedCurrency && (
                   <>
                     <Button outlineGrey small mr={20} onClick={onBuy}>
                       Buy

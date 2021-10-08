@@ -3,6 +3,7 @@ import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+const marketClient = new MarketClient();
 
 export const setMarketParams = (payload: MarketState) => ({
   type: "SET_MARKET_PARAMS",
@@ -57,6 +58,18 @@ export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
   payload: { loading },
 });
 
+export const getCounterCurrencies = () =>
+  async function(dispatch, getState) {
+    const {
+      market: { counterCurrencies },
+    } = getState();
+
+    if (!counterCurrencies[0]) {
+      const res = await marketClient.supportedCounterCurrencies();
+      dispatch(setMarketParams({ counterCurrencies: res }));
+    }
+  };
+
 export const getMarketCryptoCurrencies = (filters: {
   counterCurrencyValue: string,
   range: string,
@@ -83,7 +96,6 @@ export const getMarketCryptoCurrencies = (filters: {
 
     dispatch(setMarketParams({ loading: true }));
 
-    const marketClient = new MarketClient();
     if (coinsCount === undefined) {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));

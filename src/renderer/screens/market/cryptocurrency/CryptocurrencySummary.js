@@ -59,15 +59,16 @@ export default function CryptocurrencySummary({
         pt={5}
         style={{ overflow: "visible" }}
       >
-        <Chart
-          magnitude={currency.units[0].magnitude}
-          color={chartColor}
-          data={currency.variation}
-          height={250}
-          tickXScale={range}
-          renderTickY={discreetMode ? () => "" : renderTickY}
-          renderTooltip={renderTooltip}
-        />
+        {/*<Chart*/}
+        {/*  magnitude={currency.units[0].magnitude}*/}
+        {/*  color={chartColor}*/}
+        {/*  data={currency.variation}*/}
+        {/*  height={250}*/}
+        {/*  tickXScale={range}*/}
+        {/*  renderTickY={discreetMode ? () => "" : renderTickY}*/}
+        {/*  renderTooltip={renderTooltip}*/}
+        {/*/>*/}
+
         {/* ) : ( */}
         {/*  <PlaceholderChart */}
         {/*    magnitude={counterValue.units[0].magnitude} */}

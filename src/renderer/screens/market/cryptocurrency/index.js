@@ -27,15 +27,7 @@ const CryptoCurrencyPage = () => {
     params: { id: currencyId },
   } = useRouteMatch();
 
-  const { range, counterValue } = useSelector(state => state.market);
-
-  const { rangeData } = useRange(range);
-  const favorites = useSelector(state => state.market.favorites);
-  const currencies: Array<MarketCurrency> = useMarketCurrencies({
-    counterValueCurrency: counterValue.currency,
-    ...rangeData,
-    favorites,
-  });
+  const { range, counterValue, currencies } = useSelector(state => state.market);
 
   const currency = currencies.find(item => item.id === currencyId);
   const color = getCurrencyColor(currency, bgColor);

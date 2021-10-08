@@ -64,7 +64,7 @@ export type CoinsListItemType = {
 export type MarketState = {
   currencies: Array<MarketCurrency>,
   coinsList: Array<CoinsListItemType>,
-  filteredCurrencies: Array<MarketCurrency>,
+  counterCurrencies: Array<any>,
   searchValue: string,
   range: string,
   limit: number,
@@ -81,7 +81,7 @@ export type MarketState = {
 
 const initialState: MarketState = {
   currencies: [],
-  filteredCurrencies: [],
+  counterCurrencies: [],
   searchValue: "",
   range: "24h",
   order: "desc",
