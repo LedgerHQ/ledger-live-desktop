@@ -1,15 +1,21 @@
 /* @flow */
 import React, { useReducer, useEffect, useCallback } from "react";
 
+import type { DrawerProps as SideDrawerProps } from "~/renderer/components/SideDrawer";
 type State = {
   Component: ?React$ComponentType<*>,
-  props?: *,
+  props?: null | *,
   open: boolean,
+  options: $Diff<SideDrawerProps, { children: *, isOpen: *, onRequestBack: *, onRequestClose: * }>,
 };
 
 // actions
 // it makes them available and current from connector events handlers
-export let setDrawer: (Component?: *, props?: *) => void = () => {};
+export let setDrawer: (
+  Component?: $PropertyType<State, "Component">,
+  props?: $PropertyType<State, "props">,
+  options?: $PropertyType<State, "options">,
+) => void = () => {};
 
 // reducer
 const reducer = (state: State, update) => {
@@ -18,16 +24,9 @@ const reducer = (state: State, update) => {
     ...update,
   };
 };
-const initialState: State = {
-  Component: null,
-  props: null,
-  open: false,
-};
+const initialState: State = { Component: null, props: null, open: false, options: {} };
 
-type ContextValue = {
-  state: State,
-  setDrawer: (Component?: React$ComponentType<*>, props?: *) => void,
-};
+type ContextValue = { state: State, setDrawer: typeof setDrawer };
 
 export const context = React.createContext<ContextValue>({
   state: initialState,
@@ -36,8 +35,8 @@ export const context = React.createContext<ContextValue>({
 
 const DrawerProvider = ({ children }: { children: React$Node }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const _setDrawer = useCallback(
-    (Component, props) => dispatch({ Component, props, open: !!Component }),
+  const _setDrawer: typeof setDrawer = useCallback(
+    (Component, props, options = {}) => dispatch({ Component, props, open: !!Component, options }),
     [],
   );
 

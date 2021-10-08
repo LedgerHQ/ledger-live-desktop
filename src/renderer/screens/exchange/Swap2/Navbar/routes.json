@@ -1,4 +1,10 @@
 [
-  { "name": "swap", "path": "/swap", "title": "swap2.tabs.exchange" },
-  { "name": "history", "path": "/swap/history", "title": "swap2.tabs.history" }
+  {
+    "path": "/swap",
+    "title": "swap2.tabs.exchange"
+  },
+  {
+    "path": "/swap/history",
+    "title": "swap2.tabs.history"
+  }
 ]

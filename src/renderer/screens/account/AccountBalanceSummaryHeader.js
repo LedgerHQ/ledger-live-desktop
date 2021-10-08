@@ -90,7 +90,7 @@ export default function AccountBalanceSummaryHeader({
                   val={data[1].balance}
                 />
               ) : (
-                <NoCountervaluePlaceholder style={null} />
+                <NoCountervaluePlaceholder style={{}} />
               )}
             </div>
             <Price

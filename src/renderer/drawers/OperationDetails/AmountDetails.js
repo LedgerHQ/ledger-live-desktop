@@ -104,7 +104,7 @@ export default function AmountDetails({ operation, account }: Props) {
                 color="palette.text.shade60"
               />
             ) : (
-              <NoCountervaluePlaceholder style={null} />
+              <NoCountervaluePlaceholder />
             )}
           </Box>
         </OpDetailsData>
@@ -135,7 +135,7 @@ export default function AmountDetails({ operation, account }: Props) {
                 color="palette.text.shade60"
               />
             ) : (
-              <NoCountervaluePlaceholder style={null} />
+              <NoCountervaluePlaceholder />
             )}
           </Box>
         </OpDetailsData>

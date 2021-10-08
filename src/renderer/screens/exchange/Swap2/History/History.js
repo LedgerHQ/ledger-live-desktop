@@ -1,11 +1,11 @@
 // @flow
 
 import { remote, ipcRenderer } from "electron";
-import React, { useMemo, useEffect, useState, useCallback } from "react";
+import React, { useMemo, useEffect, useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import OperationRow from "~/renderer/screens/exchange/swap/History/OperationRow";
+import OperationRow from "./OperationRow";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
 import getCompleteSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/getCompleteSwapHistory";
 import updateAccountSwapStatus from "@ledgerhq/live-common/lib/exchange/swap/updateAccountSwapStatus";
@@ -26,6 +26,8 @@ import { setDrawer } from "~/renderer/drawers/Provider";
 import SwapOperationDetails from "~/renderer/drawers/SwapOperationDetails";
 import HistoryLoading from "./HistoryLoading";
 import HistoryPlaceholder from "./HistoryPlaceholder";
+import { useHistory } from "react-router-dom";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 const Head = styled(Box)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.divider};
@@ -54,8 +56,11 @@ const History = () => {
   const accounts = useSelector(accountsSelector);
   const [exporting, setExporting] = useState(false);
   const [mappedSwapOperations, setMappedSwapOperations] = useState<?(SwapHistorySection[])>(null);
+  const history = useHistory();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const defaultOpenedOnce = useRef(false);
+  const defaultOpenedSwapOperationId = history?.location?.state?.swapId;
 
   const onExportOperations = useCallback(() => {
     async function asyncExport() {
@@ -94,6 +99,22 @@ const History = () => {
       setMappedSwapOperations(sections);
     })();
   }, [accounts]);
+
+  useEffect(() => {
+    if (defaultOpenedOnce.current || !defaultOpenedSwapOperationId) return;
+    if (mappedSwapOperations) {
+      defaultOpenedOnce.current = true;
+      mappedSwapOperations.some(section => {
+        const openedOperation = section.data.find(
+          ({ swapId }) => swapId === defaultOpenedSwapOperationId,
+        );
+        if (openedOperation) {
+          setDrawer(SwapOperationDetails, { mappedSwapOperation: openedOperation });
+        }
+        return !!openedOperation;
+      });
+    }
+  }, [mappedSwapOperations, defaultOpenedSwapOperationId]);
 
   const updateSwapStatus = useCallback(() => {
     let cancelled = false;
@@ -135,45 +156,48 @@ const History = () => {
   );
 
   return (
-    <Box p={20}>
-      <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
-        <ExportOperationsWrapper horizontal>
-          <IconDownloadCloud size={16} />
-          <Text ml={1} ff="Inter|Regular" fontSize={3}>
-            <FakeLink onClick={exporting ? undefined : onExportOperations}>
-              {exporting ? t("swap2.history.exporting") : t("swap2.history.export")}
-            </FakeLink>
-          </Text>
-        </ExportOperationsWrapper>
-      </Box>
-      {mappedSwapOperations ? (
-        mappedSwapOperations.length ? (
-          <Box>
-            <Head px={20} py={16}>
-              <Alert type="primary">{t("swap2.history.disclaimer")}</Alert>
-            </Head>
-            {mappedSwapOperations.map(section => (
-              <>
-                <SectionTitle day={section.day} />
-                <Box>
-                  {section.data.map(mappedSwapOperation => (
-                    <OperationRow
-                      key={mappedSwapOperation.swapId}
-                      mappedSwapOperation={mappedSwapOperation}
-                      openSwapOperationDetailsModal={openSwapOperationDetailsModal}
-                    />
-                  ))}
-                </Box>
-              </>
-            ))}
-          </Box>
+    <>
+      <TrackPage category="Swap" name="Device History" />
+      <Box p={20}>
+        <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
+          <ExportOperationsWrapper horizontal>
+            <IconDownloadCloud size={16} />
+            <Text ml={1} ff="Inter|Regular" fontSize={3}>
+              <FakeLink onClick={exporting ? undefined : onExportOperations}>
+                {exporting ? t("swap2.history.exporting") : t("swap2.history.export")}
+              </FakeLink>
+            </Text>
+          </ExportOperationsWrapper>
+        </Box>
+        {mappedSwapOperations ? (
+          mappedSwapOperations.length ? (
+            <Box>
+              <Head px={20} py={16}>
+                <Alert type="primary">{t("swap2.history.disclaimer")}</Alert>
+              </Head>
+              {mappedSwapOperations.map(section => (
+                <>
+                  <SectionTitle day={section.day} />
+                  <Box>
+                    {section.data.map(mappedSwapOperation => (
+                      <OperationRow
+                        key={mappedSwapOperation.swapId}
+                        mappedSwapOperation={mappedSwapOperation}
+                        openSwapOperationDetailsModal={openSwapOperationDetailsModal}
+                      />
+                    ))}
+                  </Box>
+                </>
+              ))}
+            </Box>
+          ) : (
+            <HistoryPlaceholder />
+          )
         ) : (
-          <HistoryPlaceholder />
-        )
-      ) : (
-        <HistoryLoading />
-      )}
-    </Box>
+          <HistoryLoading />
+        )}
+      </Box>
+    </>
   );
 };
 

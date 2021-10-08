@@ -83,15 +83,23 @@ const filterOption = o => (candidate, input) => {
   return [false, false];
 };
 
+const OptionMultilineContainer = styled(Box)`
+  line-height: 1.3em;
+`;
+
 type AccountOptionProps = {
   account: AccountLike,
   isValue?: boolean,
   disabled?: boolean,
+  singleLineLayout?: boolean,
+  hideDerivationTag?: boolean,
 };
 export const AccountOption = React.memo<AccountOptionProps>(function AccountOption({
   account,
   isValue,
   disabled,
+  hideDerivationTag = false,
+  singleLineLayout = true,
 }: AccountOptionProps) {
   const currency = getAccountCurrency(account);
   const unit = getAccountUnit(account);
@@ -102,21 +110,48 @@ export const AccountOption = React.memo<AccountOptionProps>(function AccountOpti
       ? account.spendableBalance
       : account.balance;
 
-  return (
-    <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
-      {!isValue && nested ? tokenTick : null}
-      <CryptoCurrencyIcon currency={currency} size={16} />
+  const textContents = singleLineLayout ? (
+    <>
       <Box flex="1" horizontal alignItems="center">
         <Box flex="0 1 auto">
           <Ellipsis ff="Inter|SemiBold" fontSize={4}>
             {name}
           </Ellipsis>
         </Box>
-        <AccountTagDerivationMode account={account} />
+        {!hideDerivationTag && <AccountTagDerivationMode account={account} />}
       </Box>
       <Box>
         <FormattedVal color="palette.text.shade60" val={balance} unit={unit} showCode />
       </Box>
+    </>
+  ) : (
+    <OptionMultilineContainer flex="1">
+      <Box flex="1" horizontal alignItems="center">
+        <Box flex="0 1 auto">
+          <Ellipsis ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
+            {name}
+          </Ellipsis>
+        </Box>
+        {!hideDerivationTag && <AccountTagDerivationMode account={account} margin="0" />}
+      </Box>
+      <Box>
+        <FormattedVal
+          color="palette.text.shade40"
+          ff="Inter|Medium"
+          fontSize={3}
+          val={balance}
+          unit={unit}
+          showCode
+        />
+      </Box>
+    </OptionMultilineContainer>
+  );
+
+  return (
+    <Box grow horizontal alignItems="center" flow={2} style={{ opacity: disabled ? 0.2 : 1 }}>
+      {!isValue && nested ? tokenTick : null}
+      <CryptoCurrencyIcon currency={currency} size={16} />
+      {textContents}
     </Box>
   );
 });
@@ -183,6 +218,7 @@ type OwnProps = {
   renderOption?: typeof defaultRenderOption,
   placeholder?: string,
   showAddAccount?: boolean,
+  disabledTooltipText?: string,
 };
 
 type Props = OwnProps & {
@@ -201,6 +237,7 @@ export const RawSelectAccount = ({
   renderOption,
   placeholder,
   showAddAccount = false,
+  disabledTooltipText,
   t,
   ...props
 }: Props & { t: TFunction }) => {
@@ -240,7 +277,7 @@ export const RawSelectAccount = ({
 
         if (display) {
           result.push({
-            matched: match,
+            matched: match && !option.disabled,
             account: option,
           });
         }
@@ -248,10 +285,13 @@ export const RawSelectAccount = ({
       }, []),
     [searchInputValue, all, withSubAccounts, enforceHideEmptySubAccounts],
   );
-  const extraRenderers = useMemo(() => showAddAccount && extraAddAccountRenderer(props.small), [
-    showAddAccount,
-    props.small,
-  ]);
+  const extraRenderers = useMemo(() => {
+    let extraProps = {};
+
+    if (showAddAccount) extraProps = { ...extraProps, ...extraAddAccountRenderer(props.small) };
+
+    return extraProps;
+  }, [showAddAccount, props.small]);
 
   const structuredResults = manualFilter();
   return (
@@ -272,6 +312,7 @@ export const RawSelectAccount = ({
       }
       onChange={onChangeCallback}
       extraRenderers={extraRenderers}
+      disabledTooltipText={disabledTooltipText}
     />
   );
 };

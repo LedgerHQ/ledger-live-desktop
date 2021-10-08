@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { components } from "react-select";
 import Box from "~/renderer/components/Box";
+import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconCross from "~/renderer/icons/Cross";
@@ -11,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import type { Option } from ".";
 import SearchIcon from "~/renderer/icons/Search";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { Props as SelectProps } from "~/renderer/components/Select";
+import { rgba } from "~/renderer/styles/helpers";
 
 type OptionProps = *;
 
@@ -22,13 +25,17 @@ const InputWrapper: ThemedComponent<{}> = styled(Box)`
 export default ({
   renderOption,
   renderValue,
+  selectProps,
 }: {
   renderOption: Option => Node,
   renderValue: Option => Node,
+  selectProps: SelectProps,
 }) => ({
   ...STYLES_OVERRIDE,
   Option: function Option(props: OptionProps) {
-    const { data, isSelected } = props;
+    const { data, isSelected, isDisabled } = props;
+    const { disabledTooltipText } = selectProps;
+
     return (
       <components.Option {...props}>
         <Box horizontal pr={4} relative>
@@ -36,9 +43,14 @@ export default ({
             {renderOption ? renderOption(props) : data.label}
           </Box>
           {isSelected && (
-            <CheckContainer color="wallet">
+            <InformativeContainer color="wallet">
               <IconCheck size={12} color={props.theme.colors.wallet} />
-            </CheckContainer>
+            </InformativeContainer>
+          )}
+          {isDisabled && disabledTooltipText && (
+            <InformativeContainer disabled>
+              <LabelInfoTooltip text={disabledTooltipText ?? ""} />
+            </InformativeContainer>
           )}
         </Box>
       </components.Option>
@@ -96,7 +108,7 @@ const STYLES_OVERRIDE = {
   },
 };
 
-const CheckContainer = styled(Box).attrs(() => ({
+const InformativeContainer = styled(Box).attrs(() => ({
   alignItems: "center",
   justifyContent: "center",
 }))`
@@ -105,4 +117,5 @@ const CheckContainer = styled(Box).attrs(() => ({
   right: 0;
   bottom: 0;
   width: 10px;
+  color: ${p => (p.disabled ? rgba(p.theme.colors.palette.secondary.main, 0.5) : null)};
 `;
