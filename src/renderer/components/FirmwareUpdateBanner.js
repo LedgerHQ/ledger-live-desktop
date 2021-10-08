@@ -34,8 +34,7 @@ const FirmwareUpdateBanner = ({ old, right }: { old?: boolean, right?: any }) =>
 
   const inManager = location.pathname === "/manager";
 
-  if (!visibleFirmwareVersion) return null;
-  if (!right && inManager) return null;
+  if (!visibleFirmwareVersion || (!right && inManager)) return null;
   // prevents the standard banner in Default.js from being displayed in the manager
 
   return (
