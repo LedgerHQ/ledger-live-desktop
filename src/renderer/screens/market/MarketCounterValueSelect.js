@@ -9,19 +9,16 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { setMarketCounterValue } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies, setMarketCounterValue } from "~/renderer/actions/market";
 import { useSelector, useDispatch } from "react-redux";
 
 export const MarketCounterValueSelect = () => {
-  const counterValue = useSelector(state => state.market.counterValue);
+  const counterCurrency = useSelector(state => state.market.counterCurrency);
 
   const dispatch = useDispatch();
-  const onCounterValueSelected = useCallback(
-    item => {
-      dispatch(setMarketCounterValue(item.value));
-    },
-    [dispatch],
-  );
+  const onCounterValueSelected = item => {
+    dispatch(getMarketCryptoCurrencies({ counterCurrency: item.value.toLowerCase(), counterValue: item }));
+  };
 
   const renderItem = useCallback(({ item, isActive }) => {
     return (
@@ -56,7 +53,7 @@ export const MarketCounterValueSelect = () => {
         renderItem={renderItem}
         onChange={onCounterValueSelected}
         controlled
-        value={items.find(a => a.value === counterValue.value)}
+        value={items.find(a => a.value === counterCurrency.toUpperCase())}
       >
         {({ isOpen, value }) =>
           value ? (

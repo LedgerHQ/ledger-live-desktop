@@ -57,7 +57,7 @@ export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
 });
 
 export const getMarketCryptoCurrencies = (filters: {
-  counterCurrency: string,
+  counterCurrencyValue: string,
   range: string,
   limit: number,
   page: number,

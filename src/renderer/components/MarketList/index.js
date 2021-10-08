@@ -148,8 +148,8 @@ function MarketList(props) {
             color="palette.text.shade100"
             horizontal
             alignItems="center"
-            onClick={() => onSort("market_cap")}
             fontSize={4}
+            onClick={() => onSort("market_cap")}
           >
             #
             <SortIconStyled order={orderBy === "market_cap" ? order : ""} />
