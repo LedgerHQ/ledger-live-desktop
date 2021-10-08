@@ -1,5 +1,5 @@
 // @flow
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
@@ -15,11 +15,14 @@ import {
   approveSession,
 } from "~/renderer/screens/WalletConnect/Provider";
 import BigSpinner from "~/renderer/components/BigSpinner";
+import SelectAccount from "~/renderer/components/SelectAccount";
 import Text from "~/renderer/components/Text";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import WCLogo from "~/renderer/images/walletconnect.png";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
+import type { Account } from "@ledgerhq/live-common/lib/types";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 
 const LogoContainer = styled.div`
   width: 64px;
@@ -49,15 +52,19 @@ const AccountContainer: ThemedComponent<*> = styled(Box)`
 `;
 
 // TODO: account should not be received as props but rather selectable on a dropdown
-const Body = ({ onClose, account, link }: BodyProps) => {
+const Body = ({ onClose, link }: BodyProps) => {
   const wcContext = useContext(context);
 
   const history = useHistory();
   const { t } = useTranslation();
 
+  const [account, setAccount] = useState<?Account>();
+
   useEffect(() => {
     connect(link);
   }, [link]);
+
+  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum");
 
   return (
     <ModalBody
@@ -85,25 +92,15 @@ const Body = ({ onClose, account, link }: BodyProps) => {
                 <Trans i18nKey="walletconnect.steps.confirm.details" />
               </Text>
               <Box style={{ height: 20 }} />
-              <AccountContainer alignItems={"center"} p={20}>
-                <Box justifyContent="center" horizontal mb="10px">
-                  {account?.currency ? (
-                    <ParentCryptoCurrencyIcon currency={account.currency} />
-                  ) : null}
-                  <Text
-                    ml={"5px"}
-                    textAlign="center"
-                    ff="Inter|Bold"
-                    fontSize={4}
-                    color="palette.text.shade100"
-                  >
-                    {account?.name}
-                  </Text>
-                </Box>
-                <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">
-                  {account?.freshAddress}
-                </Text>
-              </AccountContainer>
+              <Box width="100%">
+                <SelectAccount
+                  autoFocus
+                  filter={filterAccountSelect}
+                  onChange={setAccount}
+                  value={account}
+                />
+              </Box>
+              }
             </Box>
           ) : (
             <Box alignItems={"center"} justifyContent={"center"} p={20}>

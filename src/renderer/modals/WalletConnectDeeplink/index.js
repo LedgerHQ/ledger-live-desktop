@@ -8,13 +8,7 @@ const WalletConnectDeeplink = () => {
     <Modal
       name="MODAL_WALLETCONNECT_DEEPLINK"
       centered
-      render={({ data, onClose }) => (
-        <Body
-          account={data.account}
-          onClose={onClose}
-          link="TODO: this link should be retrieved in the data passed to the modal"
-        />
-      )}
+      render={({ data, onClose }) => <Body link={data.link} onClose={onClose} />}
     />
   );
 };

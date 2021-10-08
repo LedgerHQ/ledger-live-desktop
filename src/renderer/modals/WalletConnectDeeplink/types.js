@@ -3,7 +3,6 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { STATUS } from "~/renderer/screens/WalletConnect/Provider";
 
 export type BodyProps = {
-  account: ?Account,
   onClose: Function,
   link: string,
 };
