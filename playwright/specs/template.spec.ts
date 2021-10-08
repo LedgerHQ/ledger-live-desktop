@@ -19,7 +19,7 @@ test.describe("My feature", async () => {
   test("My test", async ({ page }) => {
     // await page.pause();
     expect(await page.title()).toBe("Ledger Live");
-    console.log("------------> test complete")
-    // await page.screenshot({ path: "screenshots/screenshot.png" });
+    await page.screenshot({ path: "screenshots/screenshot.png" });
+    console.log("------------> test complete");
   });
 });
