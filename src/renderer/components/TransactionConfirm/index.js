@@ -73,6 +73,7 @@ const FeesField = ({ account, parentAccount, status, field }: FieldComponentProp
         fontSize={3}
         inline
         showCode
+        alwaysShowValue
       />
     </TransactionConfirmField>
   );
