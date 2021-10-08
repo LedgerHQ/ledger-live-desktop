@@ -66,11 +66,11 @@ export function useDeepLinkHandler() {
           break;
 
         case "manager": {
-          const { installapp } = query;
-          if (!installapp || typeof installapp !== "string") {
+          const { installApp } = query;
+          if (!installApp || typeof installApp !== "string") {
             navigate("/manager");
           } else {
-            navigate("/manager", undefined, `?q=${installapp}`);
+            navigate("/manager", undefined, `?q=${installApp}`);
           }
 
           break;

@@ -61,8 +61,8 @@ _Every route is preceded by the protocol \*\*\_ledgerlive://_\*\*\_
 
   `ledgerlive://manager` will redirect to manager page
 
-* **_manager?installapp_** 🠒 Device Management Flow
+* **_manager?installApp_** 🠒 Device Management Flow
 
-  `ledgerlive://manager?installapp=bitcoin` will redirect to manager page with a pre-filled search for bitcoin
+  `ledgerlive://manager?installApp=bitcoin` will redirect to manager page with a pre-filled search for bitcoin
 
-        - *installapp* => the search query to be pre-filled when the manager opens
+        - *installApp* => the search query to be pre-filled when the manager opens
