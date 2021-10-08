@@ -21,16 +21,16 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: install and switch to GCC 5.4
-        run: ./tools/g++-5.4/install.sh
-
-      - name: install dependencies
+      - name: Install dependencies
         if: always() && job.status != 'cancelled'
         run: yarn --frozen-lockfile
 
-      - name: build
+      - name: Build
         if: always() && job.status != 'cancelled'
         run: yarn build
 
-      - name: run tests
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
         run: DEBUG=pw:api npx playwright test playwright/specs/ -c playwright/playwright.config.ts
