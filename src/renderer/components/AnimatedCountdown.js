@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -10,17 +10,19 @@ const WrappedSvg: ThemedComponent<{}> = styled.svg`
   background-clip: padding-box;
 `;
 
+type Props = {
+  size: number,
+  bgColor?: string,
+  fillColor?: string,
+  duration?: number,
+};
+
 const AnimatedCountdown = ({
   size = 10,
   bgColor = "#8A9199",
   fillColor = "white",
   duration = 60000,
-}: {
-  size: number,
-  bgColor?: string,
-  fillColor?: string,
-  duration?: number,
-}) => {
+}: Props) => {
   return (
     <WrappedSvg bgColor={bgColor} width={size} height={size} viewBox={"0 0 32 32"}>
       <circle r={16} cx={16} cy={16} strokeWidth={32} fill={fillColor} stroke={bgColor}>
@@ -30,7 +32,7 @@ const AnimatedCountdown = ({
             from="0 100"
             to="100 100"
             repeatCount="1"
-            dur="60s"
+            dur={`${duration}ms`}
           />
         )}
       </circle>
@@ -39,4 +41,4 @@ const AnimatedCountdown = ({
   );
 };
 
-export default AnimatedCountdown;
+export default memo<Props>(AnimatedCountdown);

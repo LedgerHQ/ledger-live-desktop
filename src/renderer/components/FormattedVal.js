@@ -32,7 +32,7 @@ const T: ThemedComponent<{ color?: string, inline?: boolean, ff?: string }> = st
   white-space: pre;
   text-overflow: ellipsis;
   display: ${p => (p.inline ? "inline-block" : "block")};
-  flex-shrink: 1;
+  flex-shrink: ${p => (p.noShrink ? "0" : "1")};
   width: ${p => (p.inline ? "" : "100%")};
   overflow: hidden;
 `;

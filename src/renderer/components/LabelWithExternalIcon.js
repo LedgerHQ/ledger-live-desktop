@@ -14,7 +14,7 @@ const LabelWrapper: ThemedComponent<{ ff?: string, hoverColor: string }> = style
   }),
 )`
   display: inline-flex;
-  color: ${p => p.theme.colors[p.color] || "palette.text.shade60"};
+  color: ${p => p.theme.colors[p.color] || p.theme.colors.palette.text.shade60};
   &:hover {
     color: ${p => p.theme.colors[p.hoverColor]};
     cursor: pointer;

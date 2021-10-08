@@ -27,7 +27,7 @@ import {
   renderInstallingApp,
   renderListingApps,
   renderWarningOutdated,
-  renderSwapDeviceConfirmation,
+  renderSwapDeviceConfirmationV2,
   renderSellDeviceConfirmation,
 } from "./rendering";
 
@@ -157,7 +157,8 @@ const DeviceAction = <R, H, P>({
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     const { transaction, exchange, exchangeRate, status } = request;
     const { amountExpectedTo, estimatedFees } = hookState;
-    return renderSwapDeviceConfirmation({
+    const renderFn = renderSwapDeviceConfirmationV2;
+    return renderFn({
       modelId,
       type,
       transaction,
