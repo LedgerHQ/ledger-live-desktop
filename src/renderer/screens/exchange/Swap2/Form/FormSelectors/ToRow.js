@@ -70,13 +70,11 @@ function ToRow({
 
   const trackEditCurrency = () =>
     track("Page Swap Form - Edit Target Currency", {
-      targetcurrency: toCurrency,
       provider,
       swapVersion: SWAP_VERSION,
     });
   const setCurrencyAndTrack = currency => {
     track("Page Swap Form - New Target Currency", {
-      targetcurrency: currency,
       provider,
       swapVersion: SWAP_VERSION,
     });

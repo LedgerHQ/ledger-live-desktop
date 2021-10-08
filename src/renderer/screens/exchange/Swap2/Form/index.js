@@ -49,7 +49,7 @@ const Button = styled(ButtonBase)`
 
 const trackNoRates = ({ toState }) => {
   track("Page Swap Form - Error No Rate", {
-    sourcecurrency: toState.currency?.name,
+    sourceCurrency: toState.currency?.name,
   });
 };
 
@@ -150,8 +150,8 @@ const SwapForm = () => {
 
   const onSubmit = () => {
     track("Page Swap Form - Request", {
-      sourcecurrency: sourceCurrency?.name,
-      targetcurrency: targetCurrency?.name,
+      sourceCurrency: sourceCurrency?.name,
+      targetCurrency: targetCurrency?.name,
       provider,
       swapVersion: SWAP_VERSION,
     });
@@ -165,15 +165,7 @@ const SwapForm = () => {
   if (providers?.length)
     return (
       <Wrapper>
-        <TrackPage
-          category="Swap"
-          name="Form"
-          sourcecurrency={sourceCurrency?.name}
-          sourceaccount={sourceAccount ? "yes" : "no"}
-          targetcurrency={targetCurrency?.name}
-          provider={provider}
-          swapVersion={SWAP_VERSION}
-        />
+        <TrackPage category="Swap" name="Form" provider={provider} swapVersion={SWAP_VERSION} />
         <SwapFormSelectors
           fromAccount={sourceAccount}
           toAccount={swapTransaction.swap.to.account}

@@ -39,9 +39,7 @@ export default function ProviderRateDrawer({ fromCurrency, toCurrency, rates, pr
     <Box height="100%">
       <TrackPage
         category="Swap"
-        name="Form - Edit Fees"
-        sourcecurrency={fromCurrency?.name}
-        targetcurrency={toCurrency?.name}
+        name="Form - Edit Rates"
         provider={provider}
         swapVersion={SWAP_VERSION}
       />

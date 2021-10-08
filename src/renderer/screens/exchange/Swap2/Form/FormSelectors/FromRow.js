@@ -87,19 +87,15 @@ function FromRow({
 }: Props) {
   const accounts = useSelector(fromSelector)(useSelector(shallowAccountsSelector));
   const unit = fromAccount && getAccountUnit(fromAccount);
-  const currency = fromAccount && getAccountCurrency(fromAccount);
   const { t } = useTranslation();
   usePickDefaultAccount(accounts, fromAccount, setFromAccount);
   const trackEditAccount = () =>
     track("Page Swap Form - Edit Source Account", {
-      sourcecurrency: currency,
       provider,
       swapVersion: SWAP_VERSION,
     });
   const setAccountAndTrack = account => {
-    const sourcecurrency = getAccountCurrency(account);
     track("Page Swap Form - New Source Account", {
-      sourcecurrency,
       provider,
       swapVersion: SWAP_VERSION,
     });

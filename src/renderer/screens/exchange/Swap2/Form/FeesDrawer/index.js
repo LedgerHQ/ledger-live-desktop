@@ -42,7 +42,6 @@ export default function FeesDrawer({
       <TrackPage
         category="Swap"
         name="Form - Edit Fees"
-        sourcecurrency={currency?.name}
         provider={provider}
         swapVersion={SWAP_VERSION}
       />

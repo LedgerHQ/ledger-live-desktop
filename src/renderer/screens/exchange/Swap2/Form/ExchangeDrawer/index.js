@@ -113,8 +113,8 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
         <TrackPage
           category="Swap"
           name={`ModalStep-confirmationfail`}
-          sourcecurrency={sourceCurrency?.name}
-          targetcurrency={targetCurrency?.name}
+          sourceCurrency={sourceCurrency?.name}
+          targetCurrency={targetCurrency?.name}
           provider={exchangeRate.provider}
           swapVersion={SWAP_VERSION}
         />
@@ -139,8 +139,8 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
         <TrackPage
           category="Swap"
           name={`ModalStep-finished`}
-          sourcecurrency={sourceCurrency?.name}
-          targetcurrency={targetCurrency?.name}
+          sourceCurrency={sourceCurrency?.name}
+          targetCurrency={targetCurrency?.name}
           provider={exchangeRate.provider}
           swapVersion={SWAP_VERSION}
         />
