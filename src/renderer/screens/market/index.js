@@ -12,7 +12,7 @@ import styled from "styled-components";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
 import MarketList from "~/renderer/components/MarketList";
 import { setMarketParams, getMarketCryptoCurrencies } from "~/renderer/actions/market";
-import debounce from "lodash.debounce";
+import debounce from "lodash/debounce";
 
 type Props = {
   getMarketCryptoCurrencies: any,

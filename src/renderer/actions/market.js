@@ -2,6 +2,7 @@
 import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 
 export const setMarketParams = (payload: MarketState) => ({
   type: "SET_MARKET_PARAMS",
@@ -104,7 +105,12 @@ export const getMarketCryptoCurrencies = (filters: {
       ids,
       ...filters,
     });
-    const currenciesWithFavorites = mergeFavoritesWithCurrencies(favoriteCryptocurrencies, res);
+    const supportedCurrenciesByLedger = listSupportedCurrencies();
+    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(
+      favoriteCryptocurrencies,
+      res,
+      supportedCurrenciesByLedger,
+    );
     dispatch(
       setMarketParams({
         currencies: currenciesWithFavorites,
@@ -116,12 +122,21 @@ export const getMarketCryptoCurrencies = (filters: {
     );
   };
 
-export function mergeFavoritesWithCurrencies(favorites, cryptocurrencies) {
+export function mergeFavoriteAndSupportedCurrencies(
+  favorites,
+  cryptocurrencies,
+  supportedCurrencies,
+) {
   cryptocurrencies.forEach(currency => {
     currency.isStarred = false;
     favorites.forEach(item => {
       if (item.id === currency.id) {
         currency.isStarred = true;
+      }
+    });
+    supportedCurrencies.forEach(supportedCurrency => {
+      if (currency.id === supportedCurrency.id) {
+        currency.supportedCurrency = supportedCurrency;
       }
     });
   });

@@ -8,7 +8,7 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { setMarketRange } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import { useDispatch, useSelector } from "react-redux";
 
 export const MarketRangeSelect = props => {
@@ -16,7 +16,7 @@ export const MarketRangeSelect = props => {
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(
     item => {
-      dispatch(setMarketRange(item.value));
+      dispatch(getMarketCryptoCurrencies({ range: item.value }));
     },
     [dispatch],
   );
@@ -38,29 +38,29 @@ export const MarketRangeSelect = props => {
 
   const items = [
     {
-      value: "hour",
+      value: "1h",
       label: "1 hour",
-      key: "hour",
+      key: "1h",
     },
     {
-      value: "day",
+      value: "24h",
       label: "24 hours",
-      key: "day",
+      key: "24h",
     },
     {
-      value: "week",
+      value: "7d",
       label: "7 days",
-      key: "week",
+      key: "7d",
     },
     {
-      value: "month",
+      value: "30d",
       label: "30 days",
-      key: "month",
+      key: "30d",
     },
     {
-      value: "year",
+      value: "1y",
       label: "12 months",
-      key: "year",
+      key: "1y",
     },
   ];
 

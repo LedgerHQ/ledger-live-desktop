@@ -16,9 +16,12 @@ export const MarketCounterValueSelect = () => {
   const counterCurrency = useSelector(state => state.market.counterCurrency);
 
   const dispatch = useDispatch();
-  const onCounterValueSelected = item => {
-    dispatch(getMarketCryptoCurrencies({ counterCurrency: item.value.toLowerCase(), counterValue: item }));
-  };
+  const onCounterValueSelected = useCallback(
+    item => {
+      dispatch(getMarketCryptoCurrencies({ range: item.value }));
+    },
+    [dispatch],
+  );
 
   const renderItem = useCallback(({ item, isActive }) => {
     return (
