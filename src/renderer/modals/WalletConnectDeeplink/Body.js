@@ -100,7 +100,6 @@ const Body = ({ onClose, link }: BodyProps) => {
                   value={account}
                 />
               </Box>
-              }
             </Box>
           ) : (
             <Box alignItems={"center"} justifyContent={"center"} p={20}>
