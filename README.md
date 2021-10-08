@@ -1,5 +1,6 @@
 **[We are hiring, join us! 👨‍💻👩‍💻](https://jobs.lever.co/ledger/?department=Engineering)**
 
+
 # Ledger Live (desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)
@@ -28,8 +29,8 @@ The latest stable release is available on [ledger.com/ledger-live](https://www.l
 Previous versions and pre-releases can be downloaded on here from the [Releases](https://github.com/LedgerHQ/ledger-live-desktop/releases) section.
 
 ### Compatibility
-- macOS 10.10+
-- Windows 8+ (x64)
+- macOS 10.14+
+- Windows 8.1+ (x64)
 - Linux (x64)
 
 ## Signed hashes

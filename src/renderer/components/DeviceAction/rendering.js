@@ -139,8 +139,9 @@ const ButtonContainer = styled(Box).attrs(p => ({
   horizontal: true,
 }))``;
 
-const TroobleshootingWrapper = styled.div`
+const TroubleshootingWrapper = styled.div`
   margin-top: auto;
+  margin-bottom: 16px;
 `;
 
 // these are not components because we want reconciliation to not remount the sub elements
@@ -494,9 +495,9 @@ export const renderConnectYourDevice = ({
         />
       </Title>
       {!device ? (
-        <TroobleshootingWrapper>
+        <TroubleshootingWrapper>
           <ConnectTroubleshooting onRepair={onRepairModal} />
-        </TroobleshootingWrapper>
+        </TroubleshootingWrapper>
       ) : null}
     </Footer>
   </Wrapper>

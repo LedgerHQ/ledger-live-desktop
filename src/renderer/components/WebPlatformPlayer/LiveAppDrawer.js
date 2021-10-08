@@ -23,7 +23,7 @@ import ExternalLink from "../ExternalLink/index";
 import LiveAppDisclaimer from "./LiveAppDisclaimer";
 
 const Divider = styled(Box)`
-  border: 1px solid #f5f5f5;
+  border: 1px solid ${p => p.theme.colors.palette.divider};
 `;
 
 export const LiveAppDrawer = () => {

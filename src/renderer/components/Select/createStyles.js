@@ -117,4 +117,9 @@ export default (
     ...styles,
     fontSize: small ? 12 : 13,
   }),
+  placeholder: (styles: Object) => ({
+    ...styles,
+    whiteSpace: "nowrap",
+    hyphens: "none",
+  }),
 });

@@ -42,13 +42,12 @@ const Row: ThemedComponent<{}> = styled(Box)`
   font-weight: 600;
   justify-content: flex-start;
   margin-bottom: 9px;
-  padding: 16px 20px;
   position: relative;
   transition: background-color ease-in-out 200ms;
   :hover {
     border-color: ${p => p.theme.colors.palette.text.shade20};
   }
-  :active {
+  :active:not(:focus-within) {
     border-color: ${p => p.theme.colors.palette.text.shade20};
     background: ${p => p.theme.colors.palette.action.hover};
   }
@@ -63,7 +62,7 @@ const RowContent: ThemedComponent<{
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
+  padding: 16px 20px;
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -72,6 +71,7 @@ const RowContent: ThemedComponent<{
 
 const TokenContent = styled.div`
   display: flex;
+  padding: 4px 20px 15px;
   flex-direction: column;
   flex-grow: 1;
 `;
@@ -84,18 +84,18 @@ const TokenBarIndicator: ThemedComponent<{}> = styled.div`
   width: 15px;
   border-left: 1px solid ${p => p.theme.colors.palette.divider};
   z-index: 2;
-  margin-left: 9px;
+  margin-left: 29px;
   position: absolute;
   left: 0;
-  margin-top: -20px;
-  height: calc(100% + 20px);
+  margin-top: -16px;
+  height: 100%;
   &:hover {
     border-color: ${p => p.theme.colors.palette.text.shade60};
   }
 `;
 
 const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
-  margin: 15px -20px -16px;
+  margin: ${p => (p.expanded ? 0 : -1)}px 0 0;
   display: flex;
   color: ${p => p.theme.colors.wallet};
   align-items: center;

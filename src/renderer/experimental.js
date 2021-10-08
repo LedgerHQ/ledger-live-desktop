@@ -42,7 +42,6 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
   .filter(Boolean);
 
 export const experimentalFeatures: Feature[] = [
-  /*
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
@@ -51,7 +50,6 @@ export const experimentalFeatures: Feature[] = [
     valueOn: "tezos",
     valueOff: "",
   },
-  */
   {
     type: "toggle",
     name: "API_TRONGRID_PROXY",
@@ -79,6 +77,15 @@ export const experimentalFeatures: Feature[] = [
     name: "SCAN_FOR_INVALID_PATHS",
     title: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.title" />,
     description: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.description" />,
+  },
+  {
+    type: "toggle",
+    name: "LEDGER_COUNTERVALUES_API",
+    title: "Experimental countervalues API",
+    description:
+      "This may cause the countervalues displayed for your accounts to become incorrect.",
+    valueOn: "https://countervalues.live.ledger.com",
+    valueOff: "https://countervalues-experimental.live.ledger.com",
   },
   ...(__DEV__
     ? [

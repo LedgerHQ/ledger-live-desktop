@@ -33,13 +33,13 @@ const exportOperationsHistory = (currency = "global") => {
       const secondAccount = accounts[1];
 
       await firstAccount.click();
-      await secondAccount.click();
+      if (secondAccount) await secondAccount.click();
 
       const firstInput = await firstAccount.$("input");
-      const secondInput = await secondAccount.$("input");
+      const secondInput = secondAccount ? await secondAccount.$("input") : null;
 
       expect(await firstInput.isSelected()).toBe(true);
-      expect(await secondInput.isSelected()).toBe(true);
+      if (secondAccount) expect(await secondInput.isSelected()).toBe(true);
     });
 
     it("save button should be enabled", async () => {
