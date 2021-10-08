@@ -51,7 +51,7 @@ export const MarketCounterValueSelect = () => {
         item.key = item.value;
         return item;
       }),
-    [],
+    [counterCurrencies],
   );
 
   return (
@@ -63,7 +63,7 @@ export const MarketCounterValueSelect = () => {
         renderItem={renderItem}
         onChange={onCounterValueSelected}
         controlled
-        value={items.find(a => a.value === counterCurrency.toUpperCase())}
+        value={items.find(a => a.value === counterCurrency)}
       >
         {({ isOpen, value }) =>
           value ? (

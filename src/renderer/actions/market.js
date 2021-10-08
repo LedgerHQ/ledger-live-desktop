@@ -3,6 +3,7 @@ import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+
 const marketClient = new MarketClient();
 
 export const setMarketParams = (payload: MarketState) => ({
@@ -66,6 +67,13 @@ export const getCounterCurrencies = () =>
 
     if (!counterCurrencies[0]) {
       const res = await marketClient.supportedCounterCurrencies();
+      res.forEach((currency, i) => {
+        res[i] = {
+          key: currency,
+          label: currency,
+          value: currency,
+        };
+      });
       dispatch(setMarketParams({ counterCurrencies: res }));
     }
   };
