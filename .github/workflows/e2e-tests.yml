@@ -32,9 +32,6 @@ jobs:
         if: always() && job.status != 'cancelled'
         run: yarn build
 
-      - name: Install Playwright
-        run: npx playwright install --with-deps
-
       - name: Run Playwright tests
         run: DEBUG=pw:api xvfb-run npx playwright test playwright/specs/ -c playwright/playwright.config.ts
 
