@@ -36,7 +36,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: DEBUG=pw:browser xvfb-run npx playwright test playwright/specs/ -c playwright/playwright.config.ts
+        run: DEBUG=pw:api xvfb-run npx playwright test playwright/specs/ -c playwright/playwright.config.ts
 
       - name: Cleanup xvfb pidx
         uses: bcomnes/cleanup-xvfb@v1
