@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: Install Xvfb (required for Electron to work)
+        run: sudo apt-get install xvfb
+
       - name: Install dependencies
         if: always() && job.status != 'cancelled'
         run: yarn --frozen-lockfile
@@ -33,4 +36,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright tests
-        run: DEBUG=pw:browser npx playwright test playwright/specs/ -c playwright/playwright.config.ts
+        run: DEBUG=pw:browser xvfb-run npx playwright test playwright/specs/ -c playwright/playwright.config.ts
+
+      - name: Cleanup xvfb pidx
+        uses: bcomnes/cleanup-xvfb@v1
