@@ -59,8 +59,8 @@ export type MarketFilters = {
 export type CoinsListItemType = {
   id: "string",
   symbol: "string",
-  name: "string"
-}
+  name: "string",
+};
 export type MarketState = {
   currencies: Array<MarketCurrency>,
   coinsList: Array<CoinsListItemType>,
@@ -102,7 +102,7 @@ const initialState: MarketState = {
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
-    console.log(payload)
+    console.log(payload);
     return {
       ...state,
       ...payload,

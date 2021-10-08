@@ -64,7 +64,7 @@ export class MarketClient extends APIClient {
       total_volume: currency.total_volume,
       high_24h: currency.high_24h,
       low_24h: currency.low_24h,
-      price_change_percentage_in_currency: currency[`price_change_percentage_${range}`],
+      price_change_percentage_in_currency: currency[`price_change_percentage_${range}_in_currency`],
       market_cap_change_percentage_24h: currency.market_cap_change_percentage_24h,
       circulating_supply: currency.circulating_supply,
       total_supply: currency.total_supply,

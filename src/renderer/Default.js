@@ -49,7 +49,7 @@ import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import useEnv from "~/renderer/hooks/useEnv";
-import CryptoCurrencyPage from "~/renderer/screens/cryptocurrency";
+import CryptoCurrencyPage from "~/renderer/screens/market/cryptocurrency";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;

@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+
 import Button from "~/renderer/components/Button";
 import ChevronLeft from "~/renderer/icons/ChevronLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
@@ -25,7 +26,7 @@ export default function Paginator(props: Props) {
     pages.push(i);
   }
 
-  let slicedFrom = 0;
+  let slicedFrom;
   if (currentPage < 4) {
     slicedFrom = 0;
   } else if (currentPage > totalSize - 2) {
@@ -34,7 +35,7 @@ export default function Paginator(props: Props) {
     slicedFrom = currentPage - 3;
   }
 
-  let slicedAmount = 0;
+  let slicedAmount;
   if (currentPage > totalSize - 5) {
     slicedAmount = undefined;
   } else if (currentPage > totalSize - 2) {
@@ -51,7 +52,11 @@ export default function Paginator(props: Props) {
 
   return (
     <Box horizontal>
-      <InnerButton onClick={() => onChange(currentPage - 1)} disabled={isPrevDisabled} small={small}>
+      <InnerButton
+        onClick={() => onChange(currentPage - 1)}
+        disabled={isPrevDisabled}
+        small={small}
+      >
         <ChevronLeft size={12} />
       </InnerButton>
       {currentPage > 3 && (
@@ -86,7 +91,11 @@ export default function Paginator(props: Props) {
           {numberOfPages}
         </InnerButton>
       ) : null}
-      <InnerButton onClick={() => onChange(currentPage + 1)} disabled={isNextDisabled} small={small}>
+      <InnerButton
+        onClick={() => onChange(currentPage + 1)}
+        disabled={isNextDisabled}
+        small={small}
+      >
         <ChevronRight size={12} />
       </InnerButton>
     </Box>

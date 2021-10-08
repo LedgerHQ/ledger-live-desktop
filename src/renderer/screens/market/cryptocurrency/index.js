@@ -7,15 +7,15 @@ import { withTranslation } from "react-i18next";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import Box from "~/renderer/components/Box";
 import useTheme from "~/renderer/hooks/useTheme";
-import CryptoCurrencyHeader from "~/renderer/screens/cryptocurrency/CryptocurrencyHeader";
-import CryptocurrencyHeaderActions from "~/renderer/screens/cryptocurrency/CryptocurrencyHeaderActions";
+import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeader";
+import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeaderActions";
 import styled from "styled-components";
-import CryptocurrencySummary from "~/renderer/screens/cryptocurrency/CryptocurrencySummary";
+import CryptocurrencySummary from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummary";
 import { useMarketCurrencies } from "~/renderer/hooks/market/useMarketCurrencies";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useRouteMatch } from "react-router";
-import CryptocurrencyStats from "~/renderer/screens/cryptocurrency/CryptocurrencyStats";
+import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};

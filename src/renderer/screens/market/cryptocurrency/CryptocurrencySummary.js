@@ -10,7 +10,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
-import CryptocurrencySummaryHeader from "~/renderer/screens/cryptocurrency/CryptocurrencySummaryHeader";
+import CryptocurrencySummaryHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummaryHeader";
 
 type Props = {
   chartColor: string,

@@ -1,27 +1,28 @@
 // @flow
-import React, { Component, useCallback, useState } from "react";
-import { compose } from "redux";
-import { connect, useDispatch, useSelector } from "react-redux";
-import type { TFunction } from "react-i18next";
-import { withTranslation } from "react-i18next";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import debounce from "lodash/debounce";
 
 import Box from "~/renderer/components/Box";
 import SearchBox from "~/renderer/screens/accounts/AccountList/SearchBox";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import styled from "styled-components";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
 import MarketList from "~/renderer/components/MarketList";
 import { setMarketParams, getMarketCryptoCurrencies } from "~/renderer/actions/market";
-import debounce from "lodash/debounce";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { MarketState } from "~/renderer/reducers/market";
 
 type Props = {
   getMarketCryptoCurrencies: any,
-  setMarketParams: any,
+  setMarketParams: (state: MarketState) => { payload: MarketState, type: string },
+  searchValue: string,
 };
 
 class MarketPage extends Component {
-  constructor() {
-    super();
+  props: Props;
+
+  constructor(props: Props) {
+    super(props);
     this.debouncedSearch = debounce(this.debouncedSearch, 1000);
   }
 
@@ -35,7 +36,7 @@ class MarketPage extends Component {
   };
 
   render() {
-    const { searchValue } = this.props
+    const { searchValue } = this.props;
     return (
       <Box>
         <MarketHeader />
@@ -52,35 +53,6 @@ class MarketPage extends Component {
     );
   }
 }
-
-// const MarketPage = ({ getMarketCryptoCurrencies, setMarketParams }: Props) => {
-//   const { searchValue } = useSelector(state => state.market);
-//
-//   const debouncedSearch = debounce(() => {
-//     getMarketCryptoCurrencies();
-//   }, 1500);
-//
-//   const onTextChange = e => {
-//     // setMarketParams({ searchValue: e.target.value, loading: true });e
-//     setSearch(e.target.value);
-//     debouncedSearch();
-//   };
-//
-//   return (
-//     <Box>
-//       <MarketHeader />
-//       <SearchContainer horizontal p={0} alignItems="center">
-//         <SearchBox
-//           id={"market-search-input"}
-//           autoFocus
-//           onTextChange={onTextChange}
-//           search={search}
-//         />
-//       </SearchContainer>
-//       <MarketList />
-//     </Box>
-//   );
-// };
 
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};

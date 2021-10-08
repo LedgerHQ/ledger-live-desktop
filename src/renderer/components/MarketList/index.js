@@ -60,8 +60,8 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
     color: ${p => p.theme.colors.palette.text.shade60};
@@ -97,19 +97,7 @@ function MarketList(props) {
     if (!currencies[0]) {
       dispatch(getMarketCryptoCurrencies());
     }
-  }, []);
-
-  // for (let i = 0; i < currencies.length; i++) {
-  //   const currency = currencies[i];
-  //   let doSearch: boolean = true;
-  //
-  //   if (filters.selectedPlatforms[0] && filters.selectedPlatforms.indexOf(currency.family) < 0) {
-  //     doSearch = false;
-  //   }
-  //   if (doSearch && matchesSearch(searchValue, currency)) {
-  //     visibleCurrencies.push(currency);
-  //   }
-  // }
+  }, [currencies, dispatch]);
 
   const onSort = key => {
     if (!loading) {
@@ -120,8 +108,6 @@ function MarketList(props) {
       }
     }
   };
-
-  // visibleCurrencies = sortCurrencies(visibleCurrencies, orderBy, order);
 
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
@@ -194,7 +180,7 @@ function MarketList(props) {
             fontSize={4}
             onClick={() => onSort(`price_change_percentage_${range}`)}
           >
-            % Change
+            % Change({rangeData.simple})
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -207,7 +193,7 @@ function MarketList(props) {
             justifyContent="flex-start"
             fontSize={4}
           >
-            Variation
+            Variation(7d)
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -259,19 +245,3 @@ function MarketList(props) {
 }
 
 export default connect(null, { getMarketCryptoCurrencies })(MarketList);
-
-const sortCurrencies = (currencies, key, order) => {
-  if (typeof currencies[key] === "string") {
-    currencies[key] = currencies[key].toLowerCase();
-  }
-  if (typeof currencies[key] === "boolean") {
-    currencies[key] += false;
-  }
-  return currencies.sort(function(a, b) {
-    const orders = {
-      asc: (a, b) => ( a > b ? 1 : -1 ),
-      desc: (a, b) => ( a < b ? 1 : -1 )
-    };
-    return orders[order](a[key], b[key]);
-  });
-};

@@ -1,5 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Ellipsis from "~/renderer/components/Ellipsis";
@@ -9,7 +11,6 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
-import { useDispatch, useSelector } from "react-redux";
 
 export const MarketRangeSelect = props => {
   const { range } = useSelector(state => state.market);

@@ -1,6 +1,7 @@
 // @flow
 import React, { useCallback, useMemo } from "react";
-import { supportedCountervalues } from "~/renderer/reducers/settings";
+import { useSelector, useDispatch } from "react-redux";
+
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Ellipsis from "~/renderer/components/Ellipsis";
@@ -9,8 +10,8 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { getMarketCryptoCurrencies, setMarketCounterValue } from "~/renderer/actions/market";
-import { useSelector, useDispatch } from "react-redux";
+import { supportedCountervalues } from "~/renderer/reducers/settings";
+import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 
 export const MarketCounterValueSelect = () => {
   const counterCurrency = useSelector(state => state.market.counterCurrency);

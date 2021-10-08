@@ -1,7 +1,9 @@
 // @flow
 import React, { useCallback, useState } from "react";
-import Box from "~/renderer/components/Box";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
+import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Switch from "~/renderer/components/Switch";
 import Checkbox from "~/renderer/components/CheckBox";
@@ -9,10 +11,9 @@ import { TextLink } from "~/renderer/components/Breadcrumb/common";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { listCryptoCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import { useDispatch, useSelector } from "react-redux";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
-import type { CurrencyType } from "~/renderer/reducers/market";
 import { setMarketFilters } from "~/renderer/actions/market";
+import type { CurrencyType } from "~/renderer/reducers/market";
 
 type TypeFilterRow = { key: CurrencyType, label: string };
 type PlatformFilterProps = {

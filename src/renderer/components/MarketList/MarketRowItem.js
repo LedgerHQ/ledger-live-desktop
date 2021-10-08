@@ -66,13 +66,13 @@ const RowContent: ThemedComponent<{
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  opacity: ${p => ( p.disabled ? 0.3 : 1 )};
-  padding-bottom: ${p => ( p.isSubAccountsExpanded ? "20px" : "0" )};
+  opacity: ${p => (p.disabled ? 0.3 : 1)};
+  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   height: 54px;
 
   & * {
-    color: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
-    fill: ${p => ( p.disabled ? p.theme.colors.palette.text.shade100 : "auto" )};
+    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
+    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
   }
 `;
 
@@ -89,21 +89,22 @@ type Props = {
   currency: CurrencyRow,
   counterValueCurrency: Currency,
   style: Map<string, string>,
+  loading: boolean,
 };
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
-  const { index, style, currency, loading, counterValueCurrency } = props;
+  const { style, currency, loading, counterValueCurrency } = props;
 
   const onCurrencyClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
       setTrackingSource("accounts page");
       history.push({
         pathname: `/market/${currency.id}`,
-        state: currency
+        state: currency,
       });
     },
-    [history]
+    [currency, history],
   );
 
   const onBuy = useCallback(
@@ -114,11 +115,11 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency
-        }
+          defaultCurrency: currency,
+        },
       });
     },
-    [currency, history]
+    [currency, history],
   );
 
   const onSwap = useCallback(
@@ -129,11 +130,11 @@ function MarketRowItem(props: Props) {
       history.push({
         pathname: "/swap",
         state: {
-          defaultCurrency: currency
-        }
+          defaultCurrency: currency,
+        },
       });
     },
-    [currency, history]
+    [currency, history],
   );
 
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
@@ -164,16 +165,22 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <CryptoCurrencyIconWrapper>
-              {loading ? <LoadingPlaceholder/> : <img src={currency.image} />}
+              {loading ? <LoadingPlaceholder /> : <img src={currency.image} />}
             </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box horizontal alignItems="center">
-                {loading ? <LoadingPlaceholder /> : <><Box alignItems="left" pr={16}>
-                  {currency.name}
-                  <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                    {currency.symbol.toUpperCase()}
-                  </CurrencyTicker>
-                </Box></>}
+                {loading ? (
+                  <LoadingPlaceholder />
+                ) : (
+                  <>
+                    <Box alignItems="left" pr={16}>
+                      {currency.name}
+                      <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
+                        {currency.symbol.toUpperCase()}
+                      </CurrencyTicker>
+                    </Box>
+                  </>
+                )}
                 {!loading && (
                   <>
                     <Button outlineGrey small mr={20} onClick={onBuy}>
@@ -220,14 +227,20 @@ function MarketRowItem(props: Props) {
             alignItems="center"
             fontSize={4}
           >
-            {loading ? <LoadingPlaceholder/> : currency.price_change_percentage_in_currency && <FormattedVal
-              isPercent
-              animateTicker
-              isNegative
-              val={currency.price_change_percentage_in_currency.toFixed(2)}
-              inline
-              withIcon
-            />}
+            {loading ? (
+              <LoadingPlaceholder />
+            ) : (
+              currency.price_change_percentage_in_currency && (
+                <FormattedVal
+                  isPercent
+                  animateTicker
+                  isNegative
+                  val={currency.price_change_percentage_in_currency.toFixed(2)}
+                  inline
+                  withIcon
+                />
+              )
+            )}
           </Cell>
           <Cell
             shrink
@@ -240,11 +253,15 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-start"
             fontSize={4}
           >
-            {loading ? <LoadingPlaceholder/> : <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
-              {Array.isArray(currency.sparkline_in_7d) && currency.sparkline_in_7d[0] && (
-                <Variation variation={currency.sparkline_in_7d} width={75} height={35} />
-              )}
-            </div>}
+            {loading ? (
+              <LoadingPlaceholder />
+            ) : (
+              <div style={{ maxWidth: "75px", maxHeight: "35px" }}>
+                {Array.isArray(currency.sparkline_in_7d) && currency.sparkline_in_7d[0] && (
+                  <Variation variation={currency.sparkline_in_7d} width={75} height={35} />
+                )}
+              </div>
+            )}
           </Cell>
           <Cell
             shrink
@@ -256,7 +273,11 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             fontSize={4}
           >
-            {loading ? <LoadingPlaceholder style={{ width: "20px" }} /> : <CryptocurrencyStar currency={currency} />}
+            {loading ? (
+              <LoadingPlaceholder style={{ width: "20px" }} />
+            ) : (
+              <CryptocurrencyStar currency={currency} />
+            )}
           </Cell>
         </RowContent>
       </Row>

@@ -9,34 +9,34 @@ export type RangeData = {
 };
 
 const dataTable: Map<string, RangeData> = {
-  year: {
+  "1y": {
     days: 365,
     interval: "daily",
     simple: "1y",
   },
-  month: {
+  "30d": {
     days: 30,
     interval: "daily",
     simple: "30d",
   },
-  week: {
+  "7d": {
     days: 7,
     interval: "hourly",
     simple: "7d",
   },
-  day: {
+  "24h": {
     days: 1,
     interval: "hourly",
     simple: "24h",
   },
-  hour: {
+  "1h": {
     days: 0.04,
     interval: "minutely",
     simple: "1h",
   },
 };
 
-export const useRange = (range: string = "day") => {
+export const useRange = (range: string = "24h") => {
   useEffect(() => {
     setRangeData(dataTable[range]);
   }, [range]);
