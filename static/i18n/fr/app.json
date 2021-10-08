@@ -216,15 +216,14 @@
     "title": "Swap",
     "tabs": {
       "exchange": "Swap",
-      "history": "Historique"
+      "history": "Historique",
+      "kyc": "KYC"
     },
     "form": {
-      "providerDrawer": {
-        "title": "Changer de prestataire",
-        "quote": "Prix",
-        "receive": "Recevoir",
-        "onChain": "On-chain",
-        "offChain": "Off-chain"
+      "ratesDrawer": {
+        "title": "Rate",
+        "quote": "Quote",
+        "receive": "Receive"
       },
       "details": {
         "label": {
@@ -238,18 +237,35 @@
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{target}}",
+        "noAccount": "You don't have {{name}} account",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
         "title": "De",
         "max": "Max",
-        "accountPlaceholder": "Choisir la source"
+        "accountPlaceholder": "Choisir la source",
+        "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
       "to": {
         "title": "À"
       },
-      "notAvailable": "Service temporairement indisponible, ou non disponible dans votre pays"
+      "notAvailable": {
+        "title": "Swap is not available yet in your area",
+        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+      },
+      "providers": {
+        "kyc": {
+          "required": "You need to complete your KYC",
+          "complete": "Complete KYC",
+          "update": "Refresh KYC",
+          "rejected": "KYC rejected, start the verification again",
+          "status": {
+            "pending": "KYC pending",
+            "approved": "KYC approved",
+            "closed": "KYC rejected"
+          }
+        }
+      }
     },
     "history": {
       "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
@@ -259,6 +275,63 @@
       },
       "export": "Exporter les opérations",
       "exporting": "Exportation..."
+    },
+    "kyc": {
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "cta": "Continue",
+        "pending": {
+          "cta": "Continue",
+          "title": "Your information has been submitted for approval",
+          "subtitle": "It usually takes a few minutes for the review to be completed.",
+          "link": "Learn more about KYC",
+          "info": "Identity verification: Submitted"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
+    },
+    "exchangeDrawer": {
+      "title": "Confirm your Exchange",
+      "completed": {
+        "title": "Pending Operation",
+        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
+        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+        "seeDetails": "See details"
+      }
     }
   },
   "swap": {
@@ -1292,6 +1365,14 @@
       "provider": "Prestataire",
       "payoutNetworkFees": "Frais de réception",
       "payoutNetworkFeesTooltip": "Ce montant n'apparaîtra pas sur votre appareil."
+    },
+    "swap2": {
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive",
+      "provider": "Provider",
+      "fees": "Network Fees",
+      "sourceAccount": "Source Account",
+      "targetAccount": "Target Account"
     },
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
@@ -3610,8 +3691,8 @@
       "description": "Veuillez configurer votre nœud pour rechercher les comptes associés à cet appareil. Votre nœud doit d'abord balayer la blockchain avant de pouvoir ajouter le compte à votre Portefeuille."
     },
     "SwapGenericAPIError": {
-      "title": "Taux de change expiré",
-      "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
+      "title": "Something went wrong",
+      "description": "The exchange transaction did not go through. Please try again or contact support."
     },
     "TimeoutError": {
       "title": "Le serveur a mis trop longtemps à répondre.",
