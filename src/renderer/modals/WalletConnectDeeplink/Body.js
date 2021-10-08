@@ -1,0 +1,136 @@
+// @flow
+import React, { useContext, useEffect } from "react";
+import styled from "styled-components";
+import { Trans, useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
+import type { BodyProps } from "./types";
+import Box from "~/renderer/components/Box";
+import Footer from "./Footer";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import {
+  context,
+  STATUS,
+  connect,
+  disconnect,
+  approveSession,
+} from "~/renderer/screens/WalletConnect/Provider";
+import BigSpinner from "~/renderer/components/BigSpinner";
+import Text from "~/renderer/components/Text";
+import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
+import WCLogo from "~/renderer/images/walletconnect.png";
+import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
+import ModalBody from "~/renderer/components/Modal/ModalBody";
+
+const LogoContainer = styled.div`
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  border: solid 1px ${p => p.theme.colors.palette.divider};
+`;
+
+const Logo = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const DottedLine = styled.hr`
+  border: none;
+  border-top: 3px dotted ${p => p.theme.colors.palette.divider};
+  height: 3px;
+  width: 54px;
+  margin-left: 16px;
+  margin-right: 16px;
+`;
+
+const AccountContainer: ThemedComponent<*> = styled(Box)`
+  width: 100%;
+  border: solid 1px ${p => p.theme.colors.palette.divider};
+  border-radius: 4px;
+`;
+
+// TODO: account should not be received as props but rather selectable on a dropdown
+const Body = ({ onClose, account, link }: BodyProps) => {
+  const wcContext = useContext(context);
+
+  const history = useHistory();
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    connect(link);
+  }, [link]);
+
+  return (
+    <ModalBody
+      title={t("walletconnect.titleAccount")}
+      render={() => (
+        <Box flow={1}>
+          {wcContext.status === STATUS.ERROR ? (
+            <Box>Error</Box>
+          ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
+            <Box alignItems={"center"} p={20}>
+              <Box horizontal alignItems={"center"} mb={32}>
+                <LogoContainer>
+                  <Logo src={WCLogo} />
+                </LogoContainer>
+                <DottedLine />
+                <LogoContainer>
+                  <Logo src={LedgerLiveImg} />
+                </LogoContainer>
+              </Box>
+              <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
+                {wcContext.dappInfo.name}
+              </Text>
+              <Box style={{ height: 20 }} />
+              <Text textAlign="center" ff="Inter|Regular" fontSize={4} color="palette.text.shade50">
+                <Trans i18nKey="walletconnect.steps.confirm.details" />
+              </Text>
+              <Box style={{ height: 20 }} />
+              <AccountContainer alignItems={"center"} p={20}>
+                <Box justifyContent="center" horizontal mb="10px">
+                  {account?.currency ? (
+                    <ParentCryptoCurrencyIcon currency={account.currency} />
+                  ) : null}
+                  <Text
+                    ml={"5px"}
+                    textAlign="center"
+                    ff="Inter|Bold"
+                    fontSize={4}
+                    color="palette.text.shade100"
+                  >
+                    {account?.name}
+                  </Text>
+                </Box>
+                <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade50">
+                  {account?.freshAddress}
+                </Text>
+              </AccountContainer>
+            </Box>
+          ) : (
+            <Box alignItems={"center"} justifyContent={"center"} p={20}>
+              <BigSpinner size={40} />
+            </Box>
+          )}
+        </Box>
+      )}
+      renderFooter={() => (
+        <Footer
+          wcDappName={wcContext.dappInfo?.name}
+          wcStatus={wcContext.status}
+          onReject={() => {
+            disconnect();
+            onClose();
+          }}
+          onContinue={() => {
+            approveSession(account);
+            onClose();
+            history.push({
+              pathname: "/walletconnect",
+            });
+          }}
+        ></Footer>
+      )}
+    />
+  );
+};
+
+export default Body;
