@@ -36,6 +36,7 @@ const ModalsLayer = ({ visibleModals }: *) => {
     ({ name, MODAL_SHOW_ONCE }) =>
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
+
   return (
     <Transition
       in={filteredModals.length > 0}

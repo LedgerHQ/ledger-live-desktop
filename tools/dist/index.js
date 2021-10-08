@@ -130,7 +130,13 @@ const draftTasks = args => {
     {
       title: "Create draft on GitHub",
       skip: ctx => (ctx.draftExists ? "Draft already exists." : false),
-      task: () => draft.create(),
+      task: () => {
+        let body = "";
+        if (args.nightly) {
+          body = process.env.RELEASE_BODY;
+        }
+        draft.create(body);
+      },
     },
   ];
 };

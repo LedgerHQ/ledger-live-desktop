@@ -10,6 +10,7 @@ import ResetFallbackModal from "~/renderer/modals/ResetFallbackModal";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import Alert from "~/renderer/components/Alert";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useActionModal } from "./logic";
@@ -51,7 +52,14 @@ export default function ResetButton() {
         onConfirm={onConfirm}
         confirmText={t("common.reset")}
         title={t("settings.hardResetModal.title")}
-        desc={t("settings.hardResetModal.desc")}
+        desc={
+          <Box>
+            {t("settings.hardResetModal.desc")}
+            <Alert type="warning" mt={4}>
+              {t("settings.hardResetModal.warning")}
+            </Alert>
+          </Box>
+        }
         renderIcon={() => (
           // FIXME why not pass in directly the DOM 🤷🏻
           <IconWrapperCircle color="alertRed">

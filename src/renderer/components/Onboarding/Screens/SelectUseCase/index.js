@@ -1,6 +1,8 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "~/renderer/actions/modals";
 import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
@@ -14,7 +16,6 @@ import nanoBox from "./assets/nanoBox.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
-import Alert from "~/renderer/components/Alert";
 
 registerAssets([deviceConnect, importRecovery, nanoBox]);
 
@@ -98,8 +99,16 @@ type Props = {
 
 export function SelectUseCase({ sendEvent, context }: Props) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const device = deviceById(context.deviceId);
+  const onWrappedUseCase = useCallback(
+    useCase => {
+      dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId: context.deviceId }));
+      sendEvent(useCase);
+    },
+    [context.deviceId, dispatch, sendEvent],
+  );
 
   return (
     <ScrollArea withHint>
@@ -145,13 +154,6 @@ export function SelectUseCase({ sendEvent, context }: Props) {
         <Row>
           <LeftColumn>
             <LeftText>{t("onboarding.screens.selectUseCase.hasRecovery")}</LeftText>
-            <Alert
-              type="warning"
-              onLearnMore={() => sendEvent("RECOVERY_WARN")}
-              style={{ flexGrow: 0 }}
-            >
-              {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.warning.title")}
-            </Alert>
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
@@ -167,7 +169,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               }
               description={t("onboarding.screens.selectUseCase.options.2.description")}
               Illu={<DeviceConnect />}
-              onClick={() => sendEvent("CONNECT_SETUP_DEVICE")}
+              onClick={() => onWrappedUseCase("CONNECT_SETUP_DEVICE")}
             />
             <UseCaseOption
               id="restore-device"
@@ -182,7 +184,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
                 />
               }
               Illu={<ImportRecovery />}
-              onClick={() => sendEvent("USE_RECOVERY_PHRASE")}
+              onClick={() => onWrappedUseCase("USE_RECOVERY_PHRASE")}
             />
           </RightColumn>
         </Row>

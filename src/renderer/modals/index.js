@@ -28,6 +28,7 @@ import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
 import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
 
 import MODAL_FULL_NODE from "./FullNode";
+import MODAL_RECOVERY_SEED_WARNING from "./RecoverySeedWarning";
 
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
 import MODAL_FREEZE from "./Freeze";
@@ -111,6 +112,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
   MODAL_FULL_NODE,
+  MODAL_RECOVERY_SEED_WARNING,
   // Lending
   MODAL_LEND_MANAGE,
   MODAL_LEND_ENABLE_INFO,
@@ -124,6 +126,10 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP,
   MODAL_SWAP_UNAUTHORIZED_RATES,
   MODAL_SWAP_RESET_KYC,
+
+  // NB We have dettached modals such as the repair modal,
+  // in the meantime, we can rely on this to add the backdrop
+  MODAL_STUB: () => null,
 };
 
 export default modals;

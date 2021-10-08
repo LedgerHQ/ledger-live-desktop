@@ -33,8 +33,13 @@ const NestedRow: ThemedComponent<{}> = styled(Box)`
   flex-direction: row;
   cursor: pointer;
   position: relative;
+  margin: 0 -20px;
+  padding: 0 20px;
   &:last-of-type {
     margin-bottom: 0px;
+  }
+  :active {
+    background: ${p => p.theme.colors.palette.action.hover};
   }
 `;
 
@@ -50,7 +55,7 @@ class TokenRow extends PureComponent<Props> {
     const unit = currency.units[0];
     const Row = nested ? NestedRow : TableRow;
     return (
-      <Row className="token-row" index={index} onClick={this.onClick}>
+      <Row className="token-row" index={index} onClick={this.onClick} tabIndex="-1">
         <Header nested={nested} account={account} />
         <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
         <Countervalue account={account} currency={currency} range={range} />
