@@ -379,7 +379,7 @@
           "required": "Vérification d'identité nécessaire",
           "pending": "Vérification d'identité en attente",
           "approved": "Vérification d'identité approuvée",
-          "closed": "Vérification d'identité refusée"
+          "closed": "Vérification d'identité rejetée"
         }
       }
     },
@@ -403,7 +403,7 @@
         },
         "closed": {
           "cta": "Réinitialiser la vérification",
-          "title": "Demande de vérification refusée",
+          "title": "Demande de vérification rejetée",
           "subtitle": "Wyre a refusé les données que vous avez fournies",
           "link": "En savoir plus"
         },
