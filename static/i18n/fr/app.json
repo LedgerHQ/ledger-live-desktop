@@ -427,7 +427,7 @@
           "firstNameError": "Entrez votre prénom pour continuer.",
           "lastNameError": "Entrez votre nom pour continuer.",
           "street1Error": "Entrez votre adresse.",
-          "cityError": "Entrez la ville où vous habitez.",
+          "cityError": "Entrez la ville où vous habitez aux États-Unis.",
           "postalCodeError": "Saisissez un code postal valide.",
           "dateOfBirthError": "Entrez votre date de naissance.",
           "dateOfBirthValidationError": "Entrez une date de naissance valide."
@@ -514,7 +514,7 @@
           "subtitle": "Swap bien diffusé ",
           "swap": "Identifiant de votre swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
           "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
