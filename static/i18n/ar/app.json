@@ -19,7 +19,7 @@
     },
     "app": {
       "informations": {
-        "title": "Information",
+        "title": "معلومات",
         "website": "الموقع الإلكتروني"
       }
     },
@@ -44,7 +44,7 @@
         "button": "لنصوت!"
       },
       "developerCTA": {
-        "title": "للمبرمجين",
+        "title": "للمطوّرين",
         "description": "جميع المعلومات التي تحتاج إليها لدمج تطبيقاتك على Ledger Live.",
         "button": "الذهاب إلى البوابة"
       }
@@ -117,11 +117,11 @@
       "needsMigration": "أُنقر لتحديث الحساب",
       "error": "خطأ في المزامنة",
       "refresh": "تحديث",
-      "devTools": "Dev tools"
+      "devTools": "أدوات المطوّرين"
     },
     "exchange": "تداول",
     "info": "معلومات",
-    "connectDevice": "Connect your device"
+    "connectDevice": "توصيل جهازك"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -155,7 +155,7 @@
       "WITHDRAW_UNBONDED": "سحب",
       "NOMINATE": "ترشيح",
       "CHILL": "حذف الترشيحات",
-      "SET_CONTROLLER": "Set controller"
+      "SET_CONTROLLER": "إعداد وحدة التحكم"
     }
   },
   "byteSize": {
@@ -212,6 +212,55 @@
     "openButton": "فتح",
     "disconnectButton": "قطع الاتصال"
   },
+  "swap2": {
+    "title": "Swap",
+    "tabs": {
+      "exchange": "Exchange",
+      "history": "History"
+    },
+    "form": {
+      "providerDrawer": {
+        "title": "Change Provider",
+        "quote": "Quote",
+        "receive": "Receive",
+        "onChain": "On Chain",
+        "offChain": "Off Chain"
+      },
+      "details": {
+        "label": {
+          "provider": "provider",
+          "rate": "rate",
+          "fees": "fees",
+          "target": "target account"
+        },
+        "tooltip": {
+          "provider": "lorem ipsum",
+          "rate": "lorem ipsum",
+          "fees": "lorem ipsum"
+        },
+        "noAccount": "You don't have {{target}} account",
+        "noAccountCTA": "Add account"
+      },
+      "from": {
+        "title": "From",
+        "max": "Max",
+        "accountPlaceholder": "Select source"
+      },
+      "to": {
+        "title": "To"
+      },
+      "notAvailable": "Service temporarily unavailable, or not available in your country"
+    },
+    "history": {
+      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "empty": {
+        "title": "Your previous swaps will appear here",
+        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+      },
+      "export": "Export operations",
+      "exporting": "Exporting..."
+    }
+  },
   "swap": {
     "title": "مبادلة",
     "titleCrypto": "مبادلة {{currency}}",
@@ -250,27 +299,6 @@
       "title": "اختر أحد المزودين لمبادلة العملات المشفرة",
       "learnMore": "ما هو التبادل؟",
       "kycRequired": "KYC (التحقق من الهوية) مطلوب",
-      "wyre": {
-        "bullets": [
-          "الولايات المتحدة فقط (قريبًا أوروبا وأفريقيا وآسيا)",
-          "عملات ورموز متعددة",
-          "مركزي"
-        ]
-      },
-      "changelly": {
-        "bullets": [
-          "BTC،‏ ETH،‏ USDT وأكثر من 50 آخرين",
-          "عدة عملات",
-          "مركزي"
-        ]
-      },
-      "paraswap": {
-        "bullets": [
-          "اتصل بأكثر من 30 منصات التداول اللامركزي (Uniswap،‏ SushiSwap،...)",
-          "رموز إيثريوم وERC20",
-          "لامركزي وبدون ثقة"
-        ]
-      },
       "cta": "متابعة",
       "kyc": {
         "notAvailable": "{{provider}} غير متاح في موقعك",
@@ -297,7 +325,7 @@
         "pending": {
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
-          "subtitle": "Your information was submitted for approval by Wyre.",
+          "subtitle": "تم ارسال بياناتك لاعتمادها من Wyre.",
           "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
         },
         "closed": {
@@ -389,7 +417,7 @@
           "toReceive": "المبلغ المراد استلامه",
           "terms": "الشروط والأحكام الخاصة به",
           "disclaimer": {
-            "description": "بالضغط على \"تأكيد\"، أسلم وأقبل بأن هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في",
+            "description": "بالضغط على \"تأكيد\"، أقر وأقبل بأن هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في",
             "acceptedDescription": "هذه الخدمة تحكم حصريًا من قبل <0>{{provider}}</0> والمذكور في"
           },
           "details": {
@@ -630,8 +658,8 @@
     },
     "history": {
       "tab": "السجل",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "جاري التصدير...",
+      "exportOperations": "تصدير العمليات"
     }
   },
   "lend": {
@@ -699,10 +727,10 @@
         "toSupplyTooltip": "يمكنك الآن توريد أصولك"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "تمكين",
+        "inactive": "غير مفعل",
+        "supplying": "يورد",
+        "earning": "الإيرادات"
       },
       "closed": {
         "assetLended": "الأصل",
@@ -1043,7 +1071,7 @@
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "إظهار رمز QR"
   },
   "emptyState": {
     "dashboard": {
@@ -1313,10 +1341,10 @@
         "manageAccount": "إدارة حساباتي"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "متوفر تحديث",
+        "title_plural": "التحديثات المتاحة",
+        "progressTitle": "{{number}} تحديث للتطبيق",
+        "progressTitle_plural": "{{number}} تحديثات للتطبيق",
         "progressWarning": "لا تغادر المدير أثناء التحديث.",
         "progress": "جارى تحديث الكل..."
       },
@@ -1354,44 +1382,6 @@
       }
     },
     "apps": {
-      "content": {
-        "paraswap": {
-          "shortDescription": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges.",
-          "description": "Swap your crypto with ParaSwap that aggregates and provides the best quotes on decentralised exchanges."
-        },
-        "wyre_buy": {
-          "shortDescription": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers.",
-          "description": "Purchase Bitcoin, Ethereum and more crypto with Wyre, only available to our US customers."
-        },
-        "lido": {
-          "shortDescription": "Stake your ETH with Lido to earn daily staking rewards.",
-          "description": "Stake your ETH with Lido to earn daily staking rewards."
-        },
-        "zerion": {
-          "shortDescription": "The smart way to manage your DeFi portfolio.",
-          "description": "The smart way to manage your DeFi portfolio."
-        },
-        "rainbow": {
-          "description": "An easy way to visualize the NFT secured by your hardware wallet.",
-          "shortDescription": "An easy way to visualize the NFT secured by your hardware wallet."
-        },
-        "aave": {
-          "description": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds.",
-          "shortDescription": "Lend or Borrow your crypto through a liquidity market protocol and stay in control of your funds."
-        },
-        "compound": {
-          "shortDescription": "Lend or Borrow your crypto via a completely decentralized and open-source protocol.",
-          "description": "Lend or Borrow your crypto via a completely decentralized and open-source protocol."
-        },
-        "deversifi": {
-          "shortDescription": "Trade through a self-custody decentralized exchange on Ethereum layer-2.",
-          "description": "Trade through a self-custody decentralized exchange on Ethereum layer-2."
-        },
-        "1inch": {
-          "shortDescription": "Exchange crypto via a Defi/DEX aggregator on Ethereum.",
-          "description": "Exchange crypto via a Defi/DEX aggregator on Ethereum."
-        }
-      },
       "dependencyInstall": {
         "title": "تطبيق {{dependency}} مطلوب",
         "description": "سيتم أيضا تثبيت تطبيق {{dependency}} لأن تطبيق {{app}} يحتاج إليه.",
@@ -1412,6 +1402,15 @@
       "removeApps": "إلغاء تثبيت جميع التطبيقات قبل التحديث",
       "update": "تحديث البرنامج الثابت",
       "updateBtn": "قم بتحديث البرنامج الثابت",
+      "banner": {
+        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "cta": "Go to manager",
+        "old": {
+          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
+          "cta": "Contact support"
+        },
+        "cta2": "Update firmware"
+      },
       "latest": "الإصدار {{version}} من البرنامج الثابت متوفر",
       "contactSupport": "اتصل بالدعم",
       "deprecated": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعوق تحديثه. اتصل بدعم ليدجر (Ledger) للحصول على بديل.",
@@ -1434,6 +1433,9 @@
       "confirmIdentifier": "قم بالتحقق من المُعرّف",
       "confirmIdentifierText": "تحقق من أن المُعرّف على جهازك هو المُعرّف ذاته أدناه. قم بتأكيد وإدخال رمز PINال الخاص بك إذا طُلب.",
       "identifier": "المُعرّف",
+      "preparation": "Preparation",
+      "newFirmware": "New firmware {{version}}",
+      "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
@@ -1697,6 +1699,20 @@
     "amount": "المبلغ",
     "value": "القيمة",
     "header": "تخصيص الحساب ({{count}})"
+  },
+  "elrond": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
+    }
   },
   "tron": {
     "voting": {
@@ -2039,7 +2055,7 @@
       },
       "header": "ترشيحات",
       "nominate": "ترشيح",
-      "setController": "Change Controller",
+      "setController": "تغيير وحدة التحكم",
       "chill": "حذف الترشيحات",
       "totalStake": "إجمالي الرهن",
       "amount": "المبلغ المقيد",
@@ -2061,9 +2077,9 @@
       "electionOpen": "يجري حاليًا انتخاب مدققين جدد. ولذلك، لن تكون عمليات الرهن متاحة لمدة 15 دقيقة بحد أقصى.",
       "electionOpenTooltip": "يتم تعطيل هذه العملية أثناء انتخاب المدققين.",
       "externalControllerTooltip": "هذا الحساب يخضع للسيطرة حساب آخر.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
+      "externalControllerUnsupported": "<0> يتم التحكم في حساب التخزين هذا بواسطة حساب منفصل بعنوان <0>{{controllerAddress}}</0>. </0><1> للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين هذا على أنه وحدة التحكم الخاصة به.</1>",
       "externalStashTooltip": "هذا الحساب يتحكم في حساب آخر.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
+      "externalStashUnsupported": "<0> هذا الحساب هو وحدة تحكم حساب تخزين منفصل بعنوان <0>{{stashAddress}}</0>. </0><1>للتخزين مع Ledger Live، يجب عليك تعيين حساب التخزين الخاص بك على أنه وحدة التحكم الخاصة به.</1>",
       "showInactiveNominations": "عرض كل الترشيحات ({{count}})",
       "hideInactiveNominations": "عرض الترشيحات النشطة فقط",
       "noActiveNominations": "لا توجد ترشيحات مفعلة.",
@@ -2252,9 +2268,9 @@
           "info": "ستظل الأصول المقيدة على حالتها. إذا قمت بإلغاء تقيدها، فسوف تصبح متاحة بعد فترة 28 يومًا."
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "تغيير وحدة التحكم",
+          "description": "قم تعيين حسابك في Ledger كوحدة التحكم خاصة به",
+          "info": "لا يدعم Ledger Live العمليات على حسابات التخزين و حسابات وحدة التحكم المنفصلة."
         }
       },
       "steps": {
@@ -2385,7 +2401,7 @@
       "about": "حول",
       "experimental": "الميزات التجريبية",
       "accounts": "الحسابات",
-      "developer": "Developer"
+      "developer": "مطوّر"
     },
     "export": {
       "accounts": {
@@ -2401,9 +2417,9 @@
         "button": "تم",
         "title": "قم بالمسح ضوئي للتصدير إلى الجوّال",
         "listTitle": "في تطبيق ليدجر لايف (Ledger Live) للجوّال:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "اضغط على زر <highlight><icon>+</icon></highlight> في <highlight>حسابات</highlight>",
+        "step2": "اضغط على <highlight>استيراد حسابات سطح المكتب</highlight>",
+        "step3": "قم بإجراء المسح الضوئي <highlight>لرمز LiveQR</highlight> حتى يصل شريط التحميل إلى 100%"
       }
     },
     "display": {
@@ -2422,22 +2438,22 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "أنت الآن مطوّر!",
+        "text": "مرحبا بكم في بلاد العجائب"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "السماح لتطبيقات تصحيح الأخطاء",
+      "debugAppsDesc": "عرض تطبيقات المنصة لتصحيح الأخطاء والسماح بفتحها.",
+      "experimentalApps": "السماح بالتطبيقات التجريبية",
+      "experimentalAppsDesc": "عرض تطبيقات المنصة التجريبية والسماح بفتحها.",
+      "catalogServer": "تعيين مزود الكتالوج",
+      "catalogServerDesc": "التبديل بين مصادر تطبيقات المنصة المتعددة",
+      "enablePlatformDevTools": "تمكين أدوات تطوير المنصة",
+      "enablePlatformDevToolsDesc": "تمكين فتح نافذة أدوات تطوير تطبيق المنصة",
+      "addLocalApp": "إضافة تطبيق محلي",
+      "addLocalAppDesc": "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
+      "addLocalAppButton": "تصفح",
+      "runLocalAppDeleteButton": "حذف",
+      "runLocalAppOpenButton": "فتح"
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2482,38 +2498,47 @@
       "disclaimer": "هذه ميزات تجريبية نقدمها \"كما هي\" لكي يختبرها مجتمعنا من المتمرسين على استخدام التكنولوجيا. من الممكن أن يتم تغيير هذه الميزات أو تعطيلها أو إزالتها في أي وقت. من خلال تمكينها، فإنك توافق على استخدامها على مسؤوليتك الخاصة.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "استخدم TronGrid.io",
+          "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
+        },
+        "apiElrondEndpPoint": {
+          "title": "Elrond",
+          "description": "Use elrond with ledger proxy"
+        },
+        "tezosJS": {
+          "title": "use Tezos JS impl",
+          "description": "Use Tezos JS impl"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "اختبار الترجمة",
+          "description": "يضيف اللغات غير المنشورة إلى قائمة اللغات في تبويب الإعدادات العامة."
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "وضع المطوّر",
+          "description": "اعرض تطبيقات المطوّر و Testnet في المدير."
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "بحث موسع عن الحساب",
+          "description": "البحث عن الحسابات ذات مسارات اشتقاق غير صحيحة. الرجاء إرسال الأصول التي قد تجدها إلى الحساب العادي."
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "API للمستكشفين التجريبيين",
+          "description": "جرب نسخة قادمة من مستكشفي بلوكشين بLedger. تغيير هذا الإعداد قد يؤثر على رصيد الحساب ومزامنته وكذلك ميزة الإرسال. (<0></0>)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "تخصيص حد الفجوة",
+          "description": "تخصيص حد الفجوة لجميع الحسابات. زيادة هذه القيمة فوق القيمة الافتراضية (20) يؤدي إلى مسح المزيد من العناوين العامة غير المستخدمة للعملات النقدية. للمستخدمين المتقدمين فقط، قد يؤدي ذلك إلى الإضرار بالتوافق عند استعادة حسابك."
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "مزود المدير",
+          "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
         }
       }
     },
     "hardResetModal": {
       "title": "إعادة تعيين Ledger Live",
-      "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك."
+      "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك.",
+      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
     },
     "softResetModal": {
       "title": "حذف الذاكرة المؤقتة",
@@ -2529,7 +2554,8 @@
     },
     "removeAccountModal": {
       "title": "إزالة حساب",
-      "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد."
+      "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
+      "warning": "Deleting this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -2641,7 +2667,11 @@
     "toastType": {
       "announcement": "أخبار",
       "operation": "عملية",
-      "achievement": "Achievement Unlocked"
+      "achievement": "تمت إتاحة الإنجاز"
+    },
+    "groupedToast": {
+      "text": "You have {{count}} unread notifications",
+      "cta": "See details"
     }
   },
   "informationCenter": {
@@ -2678,7 +2708,7 @@
         "intro": "تقوم خلال عملية الإعداد باختيار رمز PIN.",
         "rules": {
           "1": "<0>احرص دائمًا</0> على اختيار رمز الPIN بنفسك.",
-          "2": "<0>احرص دائمًا</0> على إدخال رمز الPIN الخاص بك بعيدًا عن أعين الآخرين.",
+          "2": "<0>احرص دائمًا</0> على إدخال رمز الPIN الخاص بك بعيدًا عن الأنظار.",
           "3": "يمكنك تغيير رمز الPIN الخاص بك في حالة الحاجة إلى ذلك.",
           "4": "إذا تكرر إدخال رمز الPIN بشكل غير صحيح لثلاث مرات متتالية، سوف يعيد تعيين الجهاز.",
           "5": "<0>امتنع نهائيًا</0> عن استخدام رمز PIN يسهل تخمينه مثل 0000، أو  123456، أو 55555555.",
@@ -2709,6 +2739,15 @@
           "4": "لن يطلب ليدجر أبدًا عبارة الاسترداد الخاصة بك.",
           "5": "إذا طلب منك أي شخص أو تطبيق تقديمها، فعليك أن تفترض أنها عملية احتيال!"
         }
+      }
+    },
+    "modals": {
+      "recoverySeedWarning": {
+        "contactSupportCTA": "Contact Support",
+        "continueCTA": "Continue",
+        "title": "Please check the box contents",
+        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
     "alerts": {
@@ -2743,7 +2782,7 @@
         "hasNoRecovery": "أول مرة تستخدم {{deviceName}} الخاص بك؟",
         "hasRecovery": "هل لديك عبارة استرداد بالفعل؟",
         "separator": "أو",
-        "switchDevice": "Switch device",
+        "switchDevice": "تبديل الجهاز",
         "options": {
           "1": {
             "heading": "أول استخدام",
@@ -3088,17 +3127,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "هل تواجه صعوبة في توصيل جهازك؟",
+    "desc": "Having trouble connecting your device?",
+    "cta": "Fix it",
     "solution": "الحل رقم #{{number}}",
+    "applesInstructions": "Apple’s instructions",
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "مقالة دعم",
+    "connecting": "Connecting...",
+    "connected": "Connected!",
+    "backToPortfolio": "Back to Portfolio",
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
-        "cta": "لنقوم بإصلاحها!",
+        "cta": "Let’s fix it!",
         "back": "رجوع"
       },
       "1": {
@@ -3116,8 +3160,7 @@
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائيًا وإعادة تحميل udev",
-            "code": "wget -q -O - https://raw.githubusercontent.com/LedgerHQ/udev-rules/master/add_udev_rules.sh | sudo bash",
+            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
@@ -3126,8 +3169,8 @@
         "usbPort": {
           "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك",
-            "1": "إزالة أي دونجل USB",
+            "0": "Change the USB port used on your computer.",
+            "1": "Remove any USB dongles.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
@@ -3244,7 +3287,7 @@
       "unbond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "rebond": "يرجى التأكيد على جهازك لإنهاء العملية",
       "withdrawUnbonded": "يرجى التأكيد على جهازك لإنهاء العملية",
-      "setController": "Please confirm on your device to finalize the operation"
+      "setController": "الرجاء التأكيد على جهازك لإنهاء العملية"
     },
     "recipientWording": {
       "send": "المستلم",
@@ -3260,10 +3303,11 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "Legal",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy Policy",
-    "switchLabel": "I have read and accept the Terms of Service and Privacy Policy",
+    "title": "Terms of use",
+    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "termsLabel": "شروط الخدمة",
+    "privacyLabel": "Privacy policy",
+    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
@@ -3565,10 +3609,6 @@
       "title": "لم يتم فحص الحساب بواسطة العقدة الكاملة",
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
-    "StratisDown2021Warning": {
-      "title": "لقد تطورت بلوك تشين Stratis ومن الوارد ألا تعمل بشكل صحيح.",
-      "description": "سيتم الحفاظ على دعم بلوك تشين Stratis الأصلية حتى 16 أكتوبر 2021."
-    },
     "SwapGenericAPIError": {
       "title": "انتهت صلاحية سعر الصرف",
       "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف المعروض ساري المفعول لمدة 60 ثانية."
@@ -3848,6 +3888,9 @@
     },
     "PolkadotValidatorsRequired": {
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
+    },
+    "ServiceStatusWarning": {
+      "title": "{{message}}"
     }
   }
 }

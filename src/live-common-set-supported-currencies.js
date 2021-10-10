@@ -25,7 +25,6 @@ setSupportedCurrencies([
   "algorand",
   "qtum",
   "bitcoin_gold",
-  "stratis",
   "komodo",
   "pivx",
   "zencash",

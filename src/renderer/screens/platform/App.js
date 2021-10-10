@@ -1,6 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import useTheme from "~/renderer/hooks/useTheme";
 
@@ -21,6 +21,7 @@ type Props = {
 
 export default function PlatformApp({ match }: Props) {
   const history = useHistory();
+  const { state: urlParams } = useLocation();
   const { appId } = match.params;
   const { manifests } = usePlatformApp();
   const manifest = manifests.get(appId);
@@ -41,6 +42,7 @@ export default function PlatformApp({ match }: Props) {
           onClose={handleClose}
           inputs={{
             theme: themeType,
+            ...urlParams,
           }}
         />
       ) : null}

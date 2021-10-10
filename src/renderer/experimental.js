@@ -78,16 +78,15 @@ export const experimentalFeatures: Feature[] = [
     title: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.title" />,
     description: <Trans i18nKey="settings.experimental.features.scanForInvalidPaths.description" />,
   },
-  ...(__DEV__
-    ? [
-        {
-          type: "toggle",
-          name: "EXPERIMENTAL_SWAP",
-          title: "New SWAP interface ",
-          description: "Use the new experimental swap interface",
-        },
-      ]
-    : []),
+  {
+    type: "toggle",
+    name: "LEDGER_COUNTERVALUES_API",
+    title: "Experimental countervalues API",
+    description:
+      "This may cause the countervalues displayed for your accounts to become incorrect.",
+    valueOn: "https://countervalues.live.ledger.com",
+    valueOff: "https://countervalues-experimental.live.ledger.com",
+  },
   ...(deltaExperimentalExplorers.length
     ? [
         {

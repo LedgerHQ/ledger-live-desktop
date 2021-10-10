@@ -93,7 +93,7 @@ export function BalanceTotal({
             <TransactionsPendingConfirmationWarning maybeAccount={account} />
           ) : null}
         </Box>
-        {isAvailable && children}
+        {(isAvailable || showCryptoEvenIfNotAvailable) && children}
       </Box>
     </Box>
   );

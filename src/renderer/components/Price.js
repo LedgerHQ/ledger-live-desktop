@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconActivity from "~/renderer/icons/Activity";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { NoCountervaluePlaceholder } from "./CounterValue";
 
 type Props = {
   unit?: Unit,
@@ -28,6 +29,7 @@ type Props = {
   date?: Date,
   color?: string,
   fontSize?: number,
+  fontWeight?: number,
   iconSize?: number,
   placeholder?: React$Node,
 };
@@ -43,6 +45,7 @@ export default function Price({
   placeholder,
   color,
   fontSize,
+  fontWeight,
   iconSize,
   showAllDigits,
   withIcon = true,
@@ -78,12 +81,13 @@ export default function Price({
     [bgColor, color, from, withActivityColor, withActivityCurrencyColor],
   );
 
-  if (!counterValue || counterValue.isZero()) return placeholder || null;
+  if (!counterValue || counterValue.isZero())
+    return <NoCountervaluePlaceholder placeholder={placeholder} />;
 
   const subMagnitude = counterValue.lt(1) || showAllDigits ? 1 : 0;
 
   return (
-    <PriceWrapper color={color} fontSize={fontSize}>
+    <PriceWrapper color={color} fontSize={fontSize} fontWeight={fontWeight}>
       {withIcon ? (
         <IconActivity size={iconSize || 12} style={{ color: activityColor, marginRight: 4 }} />
       ) : null}

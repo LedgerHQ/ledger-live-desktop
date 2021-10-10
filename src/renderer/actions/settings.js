@@ -55,6 +55,8 @@ export const setCounterValue = (counterValue: string) =>
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
 export const setRegion = (region: ?string) => saveSettings({ region });
+export const setUSBTroubleshootingIndex = (USBTroubleshootingIndex?: number) =>
+  saveSettings({ USBTroubleshootingIndex });
 
 export function useHideEmptyTokenAccounts() {
   const dispatch = useDispatch();

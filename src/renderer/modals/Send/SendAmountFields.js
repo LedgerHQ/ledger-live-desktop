@@ -1,6 +1,11 @@
 // @flow
 import React from "react";
-import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import type {
+  Account,
+  Transaction,
+  TransactionStatus,
+  FeeStrategy,
+} from "@ledgerhq/live-common/lib/types";
 
 import byFamily from "~/renderer/generated/SendAmountFields";
 
@@ -10,6 +15,7 @@ type Props = {
   status: TransactionStatus,
   onChange: Transaction => void,
   updateTransaction: (updater: any) => void,
+  mapStrategies?: FeeStrategy => FeeStrategy & { [string]: * },
 };
 
 const AmountRelatedField = (props: Props) => {

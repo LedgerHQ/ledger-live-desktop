@@ -9,7 +9,6 @@ import { openURL } from "~/renderer/linking";
 import IconUpdate from "~/renderer/icons/Update";
 import IconDonjon from "~/renderer/icons/Donjon";
 import IconWarning from "~/renderer/icons/TriangleWarning";
-import IconInfoCircle from "~/renderer/icons/InfoCircle";
 
 import Spinner from "~/renderer/components/Spinner";
 import TopBanner, { FakeLink } from "~/renderer/components/TopBanner";
@@ -95,7 +94,7 @@ const UpdaterTopBanner = () => {
 
     if (!VISIBLE_STATUS.includes(status)) return null;
 
-    let content: ?Content = CONTENT_BY_STATUS(
+    const content: ?Content = CONTENT_BY_STATUS(
       quitAndInstall,
       reDownload,
       downloadProgress,
@@ -104,18 +103,6 @@ const UpdaterTopBanner = () => {
     )[status];
 
     if (!content) return null;
-
-    if (__APP_VERSION__.includes("nightly")) {
-      content = {
-        Icon: IconInfoCircle,
-        message: <Trans i18nKey="update.nightlyWarning" />,
-        right: (
-          <FakeLink onClick={() => openURL(urls.liveHome)}>
-            <Trans i18nKey="update.downloadNow" />
-          </FakeLink>
-        ),
-      };
-    }
 
     return (
       <TopBanner

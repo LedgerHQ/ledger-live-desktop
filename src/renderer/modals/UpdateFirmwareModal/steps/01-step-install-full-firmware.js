@@ -12,6 +12,7 @@ import { command } from "~/renderer/commands";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Track from "~/renderer/analytics/Track";
+import getCleanVersion from "~/renderer/screens/manager/FirmwareUpdate/getCleanVersion";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
@@ -82,22 +83,44 @@ const Body = ({
     );
   }
 
+  if (displayedOnDevice && firmware.osu.hash) {
+    return (
+      <>
+        <Track event={"FirmwareUpdateConfirmIdentifierDisplayed"} onMount />
+        <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
+          {t("manager.modal.confirmIdentifierText")}
+        </Text>
+        <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
+          <Text ff="Inter|SemiBold" textAlign="center" color="palette.text.shade80">
+            {t("manager.modal.identifier")}
+          </Text>
+          <Identifier>
+            {firmware.osu &&
+              manager
+                .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
+                .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
+          </Identifier>
+        </Box>
+        <Box mt={isBlue ? 4 : null}>
+          <Interactions
+            wire="wired"
+            type={deviceModelId}
+            width={isBlue ? 150 : 375}
+            screen="validation"
+            action="accept"
+          />
+        </Box>
+      </>
+    );
+  }
+
   return (
     <>
-      <Track event={"FirmwareUpdateConfirmIdentifierDisplayed"} onMount />
-      <Text ff="Inter|Regular" textAlign="center" color="palette.text.shade80">
-        {t("manager.modal.confirmIdentifierText")}
-      </Text>
+      <Track event={"FirmwareUpdateConfirmNewFirwmare"} onMount />
       <Box mx={7} mt={5} mb={isBlue ? 0 : 5}>
         <Text ff="Inter|SemiBold" textAlign="center" color="palette.text.shade80">
-          {t("manager.modal.identifier")}
+          {t("manager.modal.confirmUpdate")}
         </Text>
-        <Identifier>
-          {firmware.osu &&
-            manager
-              .formatHashName(firmware.osu.hash, deviceModelId, deviceInfo)
-              .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
-        </Identifier>
       </Box>
       <Box mt={isBlue ? 4 : null}>
         <Interactions
@@ -161,12 +184,16 @@ const StepFullFirmwareInstall = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const hasHash = !!firmware?.osu?.hash;
+
   return (
     <Container>
       <Title id={"firmware-update-download-mcu-title"}>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
-          : t("manager.modal.confirmIdentifier")}
+          : hasHash
+          ? t("manager.modal.confirmIdentifier")
+          : t("manager.modal.newFirmware", { version: getCleanVersion(firmware.final.name) })}
       </Title>
       <TrackPage category="Manager" name="InstallFirmware" />
       <Body

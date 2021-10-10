@@ -6,6 +6,9 @@ import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
+import ToolTip from "./Tooltip";
+import { Trans } from "react-i18next";
+import useTheme from "~/renderer/hooks/useTheme";
 
 type Props = {
   // wich market to query
@@ -24,6 +27,28 @@ type Props = {
 
   prefix?: React$Node,
   suffix?: React$Node,
+  placeholderStyle?: { [key: string]: string | number },
+};
+
+export const NoCountervaluePlaceholder = ({
+  placeholder,
+  style = {},
+}: {
+  placeholder?: React$Node,
+  style?: *,
+}) => {
+  const colors = useTheme("colors");
+
+  return (
+    <div style={{ ...style, maxHeight: "16px" }}>
+      <ToolTip
+        content={<Trans i18nKey="errors.countervaluesUnavailable.title" />}
+        containerStyle={{ color: colors.palette.text.shade40 }}
+      >
+        {placeholder || "-"}
+      </ToolTip>
+    </div>
+  );
 };
 
 export default function CounterValue({
@@ -34,6 +59,7 @@ export default function CounterValue({
   placeholder,
   prefix,
   suffix,
+  placeholderStyle,
   ...props
 }: Props) {
   const value = valueProp instanceof BigNumber ? valueProp.toNumber() : valueProp;
@@ -47,7 +73,7 @@ export default function CounterValue({
   });
 
   if (typeof countervalue !== "number") {
-    return placeholder || null;
+    return <NoCountervaluePlaceholder placeholder={placeholder} style={placeholderStyle} />;
   }
 
   return (

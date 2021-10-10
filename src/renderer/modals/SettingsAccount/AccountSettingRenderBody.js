@@ -216,7 +216,14 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               onConfirm={() => this.handleRemoveAccount(account)}
               title={t("settings.removeAccountModal.title")}
               subTitle={t("common.areYouSure")}
-              desc={t("settings.removeAccountModal.desc")}
+              desc={
+                <Box>
+                  {t("settings.removeAccountModal.desc")}
+                  <Alert type="warning" mt={4}>
+                    {t("settings.removeAccountModal.warning")}
+                  </Alert>
+                </Box>
+              }
             />
             <Space of={20} />
           </>

@@ -7,6 +7,7 @@ const Container: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  min-height: 20px;
 `;
 
 type SummarySectionProps = { children: React$Node };
