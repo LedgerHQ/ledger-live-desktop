@@ -404,7 +404,7 @@
         "closed": {
           "cta": "Réinitialiser la vérification",
           "title": "Demande de vérification rejetée",
-          "subtitle": "Wyre a refusé les données que vous avez fournies",
+          "subtitle": "Wyre a refusé les données que vous avez fournies.",
           "link": "En savoir plus"
         },
         "form": {
