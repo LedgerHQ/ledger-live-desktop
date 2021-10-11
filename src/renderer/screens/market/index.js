@@ -31,7 +31,13 @@ class MarketPage extends Component {
   };
 
   onTextChange = e => {
-    this.props.setMarketParams({ searchValue: e.target.value, loading: true });
+    const searchValue = e.target.value.trim();
+    this.props.setMarketParams({ searchValue: searchValue, loading: true });
+
+    // check for not allowing search with 1 letter because of fetch error in coingecko side
+    if (searchValue.length !== 0 && searchValue.length < 2) {
+      return;
+    }
     this.debouncedSearch();
   };
 
