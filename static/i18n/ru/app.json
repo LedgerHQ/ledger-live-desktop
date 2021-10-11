@@ -221,9 +221,9 @@
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
-        "quote": "Quote",
-        "receive": "Receive"
+        "title": "Курс",
+        "quote": "Котировка",
+        "receive": "Получить"
       },
       "details": {
         "label": {
@@ -237,32 +237,32 @@
           "rate": "Курс",
           "fees": "Комиссия"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "У вас нет счёта {{name}}",
         "noAccountCTA": "Добавить счёт"
       },
       "from": {
         "title": "Откуда",
         "max": "Макс.",
         "accountPlaceholder": "Выберите источник",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "currencyDisabledTooltip": "Эта валюта пока недоступна для обмена"
       },
       "to": {
         "title": "Куда"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "Обмен пока недоступен в вашем регионе",
+        "content": "Потерпите немного,<br>уже скоро всё заработает"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "required": "Вам нужно пройти процедуру KYC",
+          "complete": "Пройдите процедуру KYC",
+          "update": "Обновите данные KYC",
+          "rejected": "Данные KYC отклонены, пройдите проверку ещё раз",
           "status": {
-            "pending": "KYC pending",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "pending": "Данные KYC в обработке",
+            "approved": "Данные KYC одобрены",
+            "closed": "Данные KYC отклонены"
           }
         }
       }
@@ -277,60 +277,60 @@
       "exporting": "Экспортируем…"
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "Мы не можем завершить процедуру KYC, пока вы не обновите приложение",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "disclaimer": "Информация о вас собирается Ledger от имени – и передаётся, – в Wyre для процедуры KYC. Дополнительную информацию можно получить в нашей",
+        "policy": "Политике конфиденциальности",
+        "title": "Подтвердите личность",
+        "subtitle": "Пожалуйста, введите данные, чтобы произвести обмен посредством Wyre.",
+        "cta": "Продолжить",
         "pending": {
-          "cta": "Continue",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
-          "info": "Identity verification: Submitted"
+          "cta": "Продолжить",
+          "title": "Ваши данные были поданы на проверку",
+          "subtitle": "Обычно рассмотрение занимает несколько минут.",
+          "link": "Подробнее о KYC",
+          "info": "Подтверждение личности: Данные поданы"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "Сбросить KYC",
+          "title": "Данные KYC отклонены",
+          "subtitle": "Сервис Wyre отклонил данные, которые вы предоставили для проверки KYC",
+          "link": "Подробнее о KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstName": "Имя",
+          "lastName": "Фамилия",
+          "street1": "Улица и номер дома, строка 1",
+          "street2": "Улица и номер дома, строка 2",
+          "city": "Город",
+          "state": "Штат/Область",
+          "country": "Страна",
+          "postalCode": "Индекс",
+          "dateOfBirth": "Дата рождения",
+          "firstNamePlaceholder": "Введите имя",
+          "lastNamePlaceholder": "Введите фамилию",
+          "street1Placeholder": "Например: ул. Маяковского 50",
+          "street2Placeholder": "Например: ул. Маяковского 50",
+          "cityPlaceholder": "Например: Москва",
+          "postalCodePlaceholder": "Введите индекс",
+          "dateOfBirthPlaceholder": "ММ/ДД/ГГГГ",
+          "firstNameError": "Укажите имя, чтобы продолжить",
+          "lastNameError": "Укажите фамилию, чтобы продолжить",
+          "street1Error": "Укажите адрес",
+          "cityError": "Укажите город в США, в котором вы живёте",
+          "postalCodeError": "Введите действительный индекс для США",
+          "dateOfBirthError": "Укажите дату рождения",
+          "dateOfBirthValidationError": "Укажите действительную дату рождения"
         }
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "Подтвердите обмен",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "Операция в ожидании",
+        "description": "Операция обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите ваши токены {{targetCurrency}}.",
+        "disclaimer": "Сохраните ID обмена на случай, если в дальнейшем потребуется помощь от <0><0>{{provider}}</0></0>.",
+        "seeDetails": "Подробности"
       }
     }
   },
@@ -1367,12 +1367,12 @@
       "payoutNetworkFeesTooltip": "Эта сумма не будет отображаться на устройстве"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "Сумма к отправке",
+      "amountReceived": "Сумма к получению",
+      "provider": "Поставщик",
+      "fees": "Комиссия сети",
+      "sourceAccount": "Исходный счёт",
+      "targetAccount": "Целевой счёт"
     },
     "sell": {
       "notice": "Перед отправкой проверьте детали об обмене на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения.",
@@ -3691,8 +3691,8 @@
       "description": "Настройте полную боду для сканирования счетов, связанных с этим устройством. Ваша полная нода должна сначала просканировать блокчейн на предмет наличия данного счёта, прежде чем вы сможете добавить его в свой Портфель."
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "title": "Что-то пошло не так",
+      "description": "Операция обмена не завершена. Пожалуйста, повторите попытку или обратитесь в службу поддержки."
     },
     "TimeoutError": {
       "title": "Извините, истекло время ожидания ответа сервера",
