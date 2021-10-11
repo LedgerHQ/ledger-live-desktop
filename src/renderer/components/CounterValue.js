@@ -3,7 +3,7 @@ import { BigNumber } from "bignumber.js";
 import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
+import { useCalculate, useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import ToolTip from "./Tooltip";
@@ -66,6 +66,7 @@ export default function CounterValue({
   const value = valueProp instanceof BigNumber ? valueProp.toNumber() : valueProp;
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
   const trackingPairs = useTrackingPairs();
+  const cvPolling = useCountervaluesPolling();
   const hasTrackingPair = useMemo(
     () => trackingPairs.some(tp => tp.from === currency && tp.to === counterValueCurrency),
     [counterValueCurrency, currency, trackingPairs],
@@ -74,8 +75,9 @@ export default function CounterValue({
   useEffect(() => {
     if (!hasTrackingPair) {
       addExtraSessionTrackingPair({ from: currency, to: counterValueCurrency });
+      setTimeout(cvPolling.poll, 1500); // poll after 1.5s to ensure debounced CV userSettings are effective after this update
     }
-  }, [counterValueCurrency, currency, hasTrackingPair]);
+  }, [counterValueCurrency, currency, cvPolling.poll, hasTrackingPair]);
 
   const countervalue = useCalculate({
     from: currency,
