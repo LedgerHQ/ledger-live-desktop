@@ -7,6 +7,17 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+
+const CryptoCurrencyIconWrapper = styled.div`
+  height: 56px;
+  width: 56px;
+  position: relative;
+
+  img {
+    height: 100%;
+  }
+`;
 
 type CryptocurrencyHeaderType = { currency: CurrencyType };
 
@@ -27,7 +38,9 @@ function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
     <Box py={2}>
       <Box horizontal>
         <Box horizontal pr={3}>
-          <CryptoCurrencyIcon currency={currency} size={56} />
+          <CryptoCurrencyIconWrapper>
+            <img src={currency.image} />
+          </CryptoCurrencyIconWrapper>
         </Box>
         <Box px={16}>
           <Box horizontal alignItems="center">

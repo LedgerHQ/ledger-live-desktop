@@ -12,6 +12,39 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 
+export const rangesArr = [
+  {
+    value: "1h",
+    label: "1 hour",
+    key: "1h",
+    pill: "1h",
+  },
+  {
+    value: "24h",
+    label: "24 hours",
+    key: "24h",
+    pill: "1D",
+  },
+  {
+    value: "7d",
+    label: "7 days",
+    key: "7d",
+    pill: "1W",
+  },
+  {
+    value: "30d",
+    label: "30 days",
+    key: "30d",
+    pill: "1M",
+  },
+  {
+    value: "1y",
+    label: "12 months",
+    key: "1y",
+    pill: "1Y",
+  },
+];
+
 export const MarketRangeSelect = props => {
   const { range } = useSelector(state => state.market);
   const dispatch = useDispatch();
@@ -37,44 +70,16 @@ export const MarketRangeSelect = props => {
     );
   }, []);
 
-  const items = [
-    {
-      value: "1h",
-      label: "1 hour",
-      key: "1h",
-    },
-    {
-      value: "24h",
-      label: "24 hours",
-      key: "24h",
-    },
-    {
-      value: "7d",
-      label: "7 days",
-      key: "7d",
-    },
-    {
-      value: "30d",
-      label: "30 days",
-      key: "30d",
-    },
-    {
-      value: "1y",
-      label: "12 months",
-      key: "1y",
-    },
-  ];
-
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
       <DropDownSelector
         border
         horizontal
-        items={items}
+        items={rangesArr}
         renderItem={renderItem}
         onChange={onRangeSelected}
         controlled
-        value={items.find(a => a.value === range)}
+        value={rangesArr.find(a => a.value === range)}
       >
         {({ isOpen, value }) =>
           value ? (

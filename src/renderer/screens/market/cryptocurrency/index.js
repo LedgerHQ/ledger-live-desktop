@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { compose } from "redux";
 import { connect, useSelector } from "react-redux";
 import { withTranslation } from "react-i18next";
@@ -16,21 +16,29 @@ import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useRouteMatch } from "react-router";
 import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
+import { MarketClient } from "~/api/market";
+import { useMarketCurrency, useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrency";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
 `;
 
 const CryptoCurrencyPage = () => {
-  const bgColor = useTheme("colors.palette.background.paper");
   const {
-    params: { id: currencyId },
+    params: { id },
   } = useRouteMatch();
 
-  const { range, counterValue, currencies } = useSelector(state => state.market);
+  const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 
-  const currency = currencies.find(item => item.id === currencyId);
-  const color = getCurrencyColor(currency, bgColor);
+  const { loading, currency } = useMarketCurrency({ id, counterCurrency, range });
+
+  // const currency = useMemo(() => {
+  //
+  // }, [id, counterCurrency, range]);
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <Box>
@@ -40,12 +48,11 @@ const CryptoCurrencyPage = () => {
       </Box>
       <Divider />
       <Box mt={3} mb={7}>
-        <CryptocurrencySummary
+        {!loading && <CryptocurrencySummary
           currency={currency}
-          chartColor={color}
           range={range}
           counterValue={counterValue}
-        />
+        />}
       </Box>
       <CryptocurrencyStats currency={currency} />
     </Box>

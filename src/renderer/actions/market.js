@@ -50,7 +50,7 @@ export const updateFavoriteCryptocurrencies = ({
     }
 
     await setKey("app", "favorite_cryptocurrencies", favorites);
-    const currenciesWithFavorites = mergeFavoritesWithCurrencies(favorites, currencies);
+    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(favorites, currencies);
     dispatch(setMarketParams({ favorites, currencies: currenciesWithFavorites }));
   };
 
@@ -126,14 +126,14 @@ export const getMarketCryptoCurrencies = (filters: {
       ...filters,
     });
     const supportedCurrenciesByLedger = listSupportedCurrencies();
-    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(
+    const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
       supportedCurrenciesByLedger,
     );
     dispatch(
       setMarketParams({
-        currencies: currenciesWithFavorites,
+        currencies: currenciesWithFavoritesAndSupported,
         loading: false,
         favorites: favoriteCryptocurrencies,
         ids,

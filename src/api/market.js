@@ -13,7 +13,7 @@ type MarketListRequestParams = {
   order: string,
 };
 
-type MarketCurrencyBuIdRequestParams = {
+export type MarketCurrencyByIdRequestParams = {
   id: string,
   counterCurrency: string,
   range: string,
@@ -120,9 +120,9 @@ export class MarketClient extends APIClient {
       await this.handleError(response);
     }
 
-    const marketChartJson = await response.json().prices;
+    const marketChartJson = await response.json();
 
-    return marketChartJson.map(chartData => chartData[1]);
+    return marketChartJson.prices.map(chartData => chartData[1]);
   }
 
   // Fetches info for single currency
@@ -130,7 +130,7 @@ export class MarketClient extends APIClient {
     id,
     counterCurrency,
     range,
-  }: MarketCurrencyBuIdRequestParams): Promise<MarketCurrencyCommonInfo[]> {
+  }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyCommonInfo[]> {
     const currenciesInfos = await this.listPaginated({
       ids: [id],
       limit: 1,
@@ -138,7 +138,7 @@ export class MarketClient extends APIClient {
       counterCurrency,
       range,
     });
-
+    // currenciesInfos
     return currenciesInfos[0];
   }
 }

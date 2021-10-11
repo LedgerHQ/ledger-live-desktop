@@ -20,7 +20,7 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     history.push({
       pathname: "/exchange",
       state: {
-        defaultCurrency: currency,
+        defaultCurrency: currency.supportedCurrency,
       },
     });
   }, [currency, history]);
@@ -30,11 +30,14 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     history.push({
       pathname: "/swap",
       state: {
-        defaultCurrency: currency,
+        defaultCurrency: currency.supportedCurrency,
       },
     });
   }, [currency, history]);
 
+  if (!currency.supportedCurrency) {
+    return null;
+  }
   return (
     <Box horizontal alignItems="center">
       <Box mr={12}>

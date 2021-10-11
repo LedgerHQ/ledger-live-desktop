@@ -11,36 +11,60 @@ import { discreetModeSelector } from "~/renderer/reducers/settings";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import CryptocurrencySummaryHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummaryHeader";
+import { useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrency";
+import { useRouteMatch } from "react-router";
+import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+import useTheme from "~/renderer/hooks/useTheme";
+import { useRange } from "~/renderer/hooks/market/useRange";
 
 type Props = {
-  chartColor: string,
   currency: CurrencyType,
   range: string,
   counterValue: any,
 };
 
 export default function CryptocurrencySummary({
-  chartColor,
   currency,
-  range,
   counterValue,
 }: Props) {
   const discreetMode = useSelector(discreetModeSelector);
+
+  const {
+    params: { id },
+  } = useRouteMatch();
+
+  const { counterCurrency, range } = useSelector(state => state.market);
+
+  const { rangeData } = useRange(range);
 
   const renderTickY = useCallback(
     (val: number) => formatShort(counterValue.currency.units[0], BigNumber(val)),
     [counterValue, range],
   );
 
+  const bgColor = useTheme("colors.palette.background.paper");
+  const chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
+
+  const { loading, chartData } = useMarketCurrencyChart({ id, counterCurrency, range });
+
   const renderTooltip = useCallback(
-    (data: BalanceHistoryData) => <Tooltip data={data} counterValue={counterValue} range={range} />,
+    (data: BalanceHistoryData) => (
+      <Tooltip data={data} counterValue={counterValue} range={rangeData.scale} />
+    ),
     [counterValue, range],
   );
+
+  if (loading) {
+    return null;
+  }
+
+  currency.difference = chartData[chartData.length - 1].value - chartData[0].value || 0;
 
   return (
     <Card p={0} py={5}>
       <Box px={6} data-e2e="dashboard_graph">
         <CryptocurrencySummaryHeader currency={currency} counterValue={counterValue} />
+
         {/* <BalanceInfos */}
         {/*  unit={counterValue.units[0]} */}
         {/*  isAvailable={portfolio.balanceAvailable} */}
@@ -59,24 +83,15 @@ export default function CryptocurrencySummary({
         pt={5}
         style={{ overflow: "visible" }}
       >
-        {/*<Chart*/}
-        {/*  magnitude={currency.units[0].magnitude}*/}
-        {/*  color={chartColor}*/}
-        {/*  data={currency.variation}*/}
-        {/*  height={250}*/}
-        {/*  tickXScale={range}*/}
-        {/*  renderTickY={discreetMode ? () => "" : renderTickY}*/}
-        {/*  renderTooltip={renderTooltip}*/}
-        {/*/>*/}
-
-        {/* ) : ( */}
-        {/*  <PlaceholderChart */}
-        {/*    magnitude={counterValue.units[0].magnitude} */}
-        {/*    chartId={chartId} */}
-        {/*    data={portfolio.balanceHistory} */}
-        {/*    tickXScale={range} */}
-        {/*  /> */}
-        {/* )} */}
+        <Chart
+          magnitude={currency.supportedCurrency.units[0].magnitude}
+          color={chartColor}
+          data={chartData}
+          height={250}
+          tickXScale={rangeData.scale}
+          renderTickY={discreetMode ? () => "" : renderTickY}
+          renderTooltip={renderTooltip}
+        />
       </Box>
     </Card>
   );

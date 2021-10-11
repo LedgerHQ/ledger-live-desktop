@@ -11,38 +11,11 @@ import { setMarketRange } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
+import { rangesArr } from "~/renderer/screens/market/MarketRangeSelect";
 
 type Props = {
   currency: CurrencyType,
 };
-
-const ranges = [
-  {
-    value: "hour",
-    label: "1H",
-    key: "hour",
-  },
-  {
-    value: "day",
-    label: "1D",
-    key: "day",
-  },
-  {
-    value: "week",
-    label: "1W",
-    key: "week",
-  },
-  {
-    value: "month",
-    label: "1M",
-    key: "month",
-  },
-  {
-    value: "year",
-    label: "1Y",
-    key: "year",
-  },
-];
 
 function CryptocurrencySummaryHeader({ currency }: Props) {
   const { counterValue, range } = useSelector(state => state.market);
@@ -54,6 +27,10 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
     },
     [dispatch],
   );
+
+  rangesArr.forEach(range => {
+    range.label = range.pill;
+  });
 
   return (
     <Box>
@@ -67,7 +44,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
               animateTicker
               isNegative
               color="palette.text.shade100"
-              val={`${currency.price}`}
+              val={`${currency.current_price * 100}`}
               showCode
               inline
               unit={counterValue.currency.units[0]}
@@ -81,7 +58,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             isPercent
             animateTicker
             isNegative
-            val={Math.round(currency.change)}
+            val={Math.round(currency.price_change_percentage_in_currency)}
             inline
             withIcon
           />
@@ -101,9 +78,9 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
           <Track
             onUpdate
             event="PillsDaysChange"
-            selected={ranges.find(item => item.key === range)}
+            selected={rangesArr.find(item => item.key === range)}
           />
-          <Pills items={ranges} activeKey={range} onChange={onRangeSelected} bordered />
+          <Pills items={rangesArr} activeKey={range} onChange={onRangeSelected} bordered />
         </Box>
       </Box>
     </Box>

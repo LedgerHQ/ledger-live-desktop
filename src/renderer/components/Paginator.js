@@ -45,7 +45,7 @@ export default function Paginator(props: Props) {
   }
 
   const InnerButton = props => (
-    <Button disabled={loading} {...props}>
+    <Button {...props} disabled={loading}>
       {props.children}
     </Button>
   );

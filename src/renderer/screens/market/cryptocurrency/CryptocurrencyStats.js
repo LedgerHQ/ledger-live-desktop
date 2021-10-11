@@ -39,6 +39,7 @@ const InfoSection = ({
 
 function PriceStats({ currency }: { currency: MarketCurrency }) {
   const { counterValue } = useSelector(state => state.market);
+
   return (
     <CardStyled style={{ height: "100%" }} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
@@ -51,7 +52,7 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
               animateTicker
               isNegative
               color="palette.text.shade60"
-              val={`${currency.price}`}
+              val={`${currency.current_price * 100}`}
               showCode
               inline
               unit={counterValue.currency.units[0]}
@@ -62,7 +63,7 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
               isPercent
               animateTicker
               isNegative
-              val={Math.round(currency.change)}
+              val={Math.round(currency.price_change_percentage_in_currency)}
               inline
               withIcon
             />
@@ -71,9 +72,31 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
         <Divider />
         <InfoSection title="Trading volume (24h)"></InfoSection>
         <Divider />
-        <InfoSection title="24h Low / 24h High"></InfoSection>
+        <InfoSection title="24h Low / 24h High">{`${currency.low_24h}/${currency.high_24h}`}</InfoSection>
         <Divider />
-        <InfoSection title="7d Low / 7d High"></InfoSection>
+        <InfoSection title="7d Low / 7d High">
+          <Box horizontal>
+            <FormattedVal
+              animateTicker
+              isNegative
+              color="palette.text.shade60"
+              val={`${currency.sparkline_in_7d[0] * 100}`}
+              showCode
+              inline
+              unit={counterValue.currency.units[0]}
+            />
+            <div>/</div>
+            <FormattedVal
+              animateTicker
+              isNegative
+              color="palette.text.shade60"
+              val={`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1] * 100}`}
+              showCode
+              inline
+              unit={counterValue.currency.units[0]}
+            />
+          </Box>
+        </InfoSection>
         <Divider />
         <InfoSection title="All time high"></InfoSection>
         <Divider />
@@ -90,9 +113,9 @@ function MarketCap({ currency }: { currency: MarketCurrency }) {
         Market cap
       </Text>
       <Box>
-        <InfoSection title="Market cap"></InfoSection>
+        <InfoSection title="Market cap">{currency.market_cap}</InfoSection>
         <Divider />
-        <InfoSection title="Market cap rank"></InfoSection>
+        <InfoSection title="Market cap rank">{currency.market_cap_rank}</InfoSection>
         <Divider />
         <InfoSection title="Market cap dominance"></InfoSection>
       </Box>
@@ -100,18 +123,18 @@ function MarketCap({ currency }: { currency: MarketCurrency }) {
   );
 }
 
-function Supply(props) {
+function Supply({ currency }: { currency: MarketCurrency }) {
   return (
     <CardStyled mt={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
         Supply
       </Text>
       <Box>
-        <InfoSection title="Circulating supply"></InfoSection>
+        <InfoSection title="Circulating supply">{currency.circulating_supply}</InfoSection>
         <Divider />
-        <InfoSection title="Total supply"></InfoSection>
+        <InfoSection title="Total supply">{currency.total_supply}</InfoSection>
         <Divider />
-        <InfoSection title="Max supply"></InfoSection>
+        <InfoSection title="Max supply">{currency.max_supply}</InfoSection>
       </Box>
     </CardStyled>
   );
@@ -124,8 +147,8 @@ function CryptocurrencyStats({ currency }: { currency: MarketCurrency }) {
         <PriceStats currency={currency} />
       </Box>
       <Box flex="50%" ml={2}>
-        <MarketCap />
-        <Supply />
+        <MarketCap currency={currency} />
+        <Supply currency={currency} />
       </Box>
     </Box>
   );
