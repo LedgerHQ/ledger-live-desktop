@@ -83,7 +83,6 @@ export default function CryptocurrencySummary({
         pt={5}
         style={{ overflow: "visible" }}
       >
-<<<<<<< HEAD
         <Chart
           magnitude={currency.supportedCurrency.units[0].magnitude}
           color={chartColor}
@@ -93,26 +92,6 @@ export default function CryptocurrencySummary({
           renderTickY={discreetMode ? () => "" : renderTickY}
           renderTooltip={renderTooltip}
         />
-=======
-        {/* <Chart */}
-        {/*  magnitude={currency.units[0].magnitude} */}
-        {/*  color={chartColor} */}
-        {/*  data={currency.variation} */}
-        {/*  height={250} */}
-        {/*  tickXScale={range} */}
-        {/*  renderTickY={discreetMode ? () => "" : renderTickY} */}
-        {/*  renderTooltip={renderTooltip} */}
-        {/* /> */}
-
-        {/* ) : ( */}
-        {/*  <PlaceholderChart */}
-        {/*    magnitude={counterValue.units[0].magnitude} */}
-        {/*    chartId={chartId} */}
-        {/*    data={portfolio.balanceHistory} */}
-        {/*    tickXScale={range} */}
-        {/*  /> */}
-        {/* )} */}
->>>>>>> 4ba01e46e08eb2544111cbad6146bcc799fdf586
       </Box>
     </Card>
   );
