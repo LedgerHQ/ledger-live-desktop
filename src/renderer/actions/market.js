@@ -3,7 +3,7 @@ import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import { counterCurrencyNameTable } from "~/internal/constants/market";
+import { counterCurrencyNameTable } from "~/renderer/constants/market";
 
 const marketClient = new MarketClient();
 
