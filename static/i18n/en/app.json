@@ -1040,6 +1040,7 @@
     "disconnected": "Disconnected",
     "connected": "Connected",
     "connecting": "Connecting...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Paste link",

@@ -63,7 +63,7 @@ const Body = ({ onClose, link }: BodyProps) => {
       render={() => (
         <Box flow={1}>
           {wcContext.status === STATUS.ERROR ? (
-            <Box>Error</Box>
+            <Box>{wcContext.error?.message || t("walletconnect.invalidAccount")}</Box>
           ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
             <Box alignItems={"center"} p={20}>
               <Box horizontal alignItems={"center"} mb={32}>
@@ -78,12 +78,16 @@ const Body = ({ onClose, link }: BodyProps) => {
               <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
                 {wcContext.dappInfo.name}
               </Text>
-              <Box style={{ height: 20 }} />
-              <Text textAlign="center" ff="Inter|Regular" fontSize={4} color="palette.text.shade50">
+              <Text
+                mt={20}
+                textAlign="center"
+                ff="Inter|Regular"
+                fontSize={4}
+                color="palette.text.shade50"
+              >
                 <Trans i18nKey="walletconnect.steps.confirm.deeplinkDetails" />
               </Text>
-              <Box style={{ height: 20 }} />
-              <Box width="100%">
+              <Box mt={20} width="100%">
                 <SelectAccount
                   autoFocus
                   filter={filterAccountSelect}
