@@ -37,12 +37,12 @@ const CryptocurrencyCrumb = () => {
       <Separator />
       <Box horizontal>
         <Box px={1}>
-          {/*<CryptoCurrencyIcon*/}
-          {/*  overrideColor={palette.text.shade60}*/}
-          {/*  inactive*/}
-          {/*  size={16}*/}
-          {/*  currency={currency}*/}
-          {/*/>*/}
+          {/* <CryptoCurrencyIcon */}
+          {/*  overrideColor={palette.text.shade60} */}
+          {/*  inactive */}
+          {/*  size={16} */}
+          {/*  currency={currency} */}
+          {/* /> */}
         </Box>
         {currency.name}
       </Box>

@@ -1,12 +1,9 @@
 // @flow
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
-import { BigNumber } from "bignumber.js";
-import { formatShort } from "@ledgerhq/live-common/lib/currencies";
-import type { BalanceHistoryData, Currency } from "@ledgerhq/live-common/lib/types";
+import type { BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
-import FormattedVal from "~/renderer/components/FormattedVal";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
@@ -23,10 +20,7 @@ type Props = {
   counterValue: any,
 };
 
-export default function CryptocurrencySummary({
-  currency,
-  counterValue,
-}: Props) {
+export default function CryptocurrencySummary({ currency, counterValue }: Props) {
   const discreetMode = useSelector(discreetModeSelector);
 
   const {
@@ -37,10 +31,7 @@ export default function CryptocurrencySummary({
 
   const { rangeData } = useRange(range);
 
-  const renderTickY = useCallback(
-    (val: number) => val,
-    [counterValue, range],
-  );
+  const renderTickY = useCallback((val: number) => val, []);
 
   const bgColor = useTheme("colors.palette.background.paper");
   const chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
@@ -49,9 +40,9 @@ export default function CryptocurrencySummary({
 
   const renderTooltip = useCallback(
     (data: BalanceHistoryData) => (
-      <Tooltip data={data} counterValue={counterCurrency} range={rangeData.scale} />
+      <Tooltip data={data} counterCurrency={counterCurrency} range={rangeData.scale} />
     ),
-    [counterCurrency, range],
+    [counterCurrency, rangeData.scale],
   );
 
   if (loading) {
@@ -64,15 +55,6 @@ export default function CryptocurrencySummary({
     <Card p={0} py={5}>
       <Box px={6} data-e2e="dashboard_graph">
         <CryptocurrencySummaryHeader currency={currency} counterValue={counterValue} />
-
-        {/* <BalanceInfos */}
-        {/*  unit={counterValue.units[0]} */}
-        {/*  isAvailable={portfolio.balanceAvailable} */}
-        {/*  since={selectedTimeRange} */}
-        {/*  valueChange={portfolio.countervalueChange} */}
-        {/*  totalBalance={portfolio.balanceHistory[portfolio.balanceHistory.length - 1].value} */}
-        {/*  handleChangeSelectedTime={handleChangeSelectedTime} */}
-        {/* /> */}
       </Box>
 
       <Box

@@ -70,7 +70,9 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
           <Box horizontal>
             {`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}
             <div>/</div>
-            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(2)} ${counterCurrency}`}
+            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(
+              2,
+            )} ${counterCurrency}`}
           </Box>
         </InfoSection>
         <Divider />
