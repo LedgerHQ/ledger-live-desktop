@@ -22,9 +22,6 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Install Xvfb (required for Electron to work)
-        run: sudo apt-get install xvfb
-
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
@@ -34,11 +31,8 @@ jobs:
       - name: Run Playwright tests
         run: DEBUG=pw:api xvfb-run npx playwright test playwright/specs/ -c playwright/playwright.config.ts
 
-      - name: upload ci suggested screenshots
+      - name: Upload ci suggested screenshots
         uses: actions/upload-artifact@v2
         with:
           name: ci-screenshots
           path: screenshots/
-
-      - name: Cleanup Xvfb processes
-        uses: bcomnes/cleanup-xvfb@v1
