@@ -193,7 +193,7 @@
     "accounts": "账户",
     "manager": "Manager（管理器）",
     "exchange": "买入 / 卖出",
-    "swap": "Swap 交换",
+    "swap": "Swap 互换",
     "lend": "借出",
     "catalog": "发现"
   },
@@ -335,9 +335,9 @@
     }
   },
   "swap": {
-    "title": "Swap 交换",
-    "titleCrypto": "Swap 交换 {{currency}}",
-    "whatIsSwap": "什么是 Swap 交换？",
+    "title": "Swap 互换",
+    "titleCrypto": "Swap 互换 {{currency}}",
+    "whatIsSwap": "什么是 Swap 互换？",
     "paraswap": {
       "cta": "一探究竟",
       "description": "寻找 Paraswap？它已被移动到 Discover（发现）选项卡。"
@@ -347,30 +347,30 @@
       "history": "历史记录"
     },
     "history": {
-      "disclaimer": "您的 swap 交换桌面交易没有与 Ledger Live 手机应用程序同步",
+      "disclaimer": "您的 swap 互换桌面交易没有与 Ledger Live 手机应用程序同步",
       "empty": {
-        "title": "您之前的 swap 交换会显示在这里",
-        "description": "要么您还未进行过任何 swap 交换，亦或 Ledger Live 在此期间被重置了 。"
+        "title": "您之前的 swap 互换会显示在这里",
+        "description": "要么您还未进行过任何 swap 互换，亦或 Ledger Live 在此期间被重置了 。"
       }
     },
     "landing": {
-      "title": "Swap 交换您的资产",
+      "title": "Swap 互换您的资产",
       "continue": "继续",
       "sorry": "服务暂时不可用，或在您的国家不可用"
     },
     "missingApp": {
       "title": "请在您的设备上安装 {{appName}} 应用程序",
-      "subtitle": "前往 Manager（管理器）并安装 {{appName}} 应用程序以进行资产的 swap 交换",
+      "subtitle": "前往 Manager（管理器）并安装 {{appName}} 应用程序以进行资产的 swap 互换",
       "cta": "前往管理器"
     },
     "outdatedApp": {
       "title": "请在您的设备上更新 {{appName}} 应用程序",
-      "subtitle": "前往 Manager（管理器）并更新 {{appName}} 应用程序以进行资产的 swap 交换",
+      "subtitle": "前往 Manager（管理器）并更新 {{appName}} 应用程序以进行资产的 swap 互换",
       "cta": "前往 Manager（管理器）"
     },
     "providers": {
-      "title": "选择一个提供方来进行加密资产的 swap 交换",
-      "learnMore": "什么是 Swap 交换？",
+      "title": "选择一个提供方来进行加密资产的 swap 互换",
+      "learnMore": "什么是 Swap 互换？",
       "kycRequired": "需要 KYC",
       "cta": "继续",
       "kyc": {
@@ -384,7 +384,7 @@
       }
     },
     "ip": {
-      "title": "欢迎使用 Swap 交换",
+      "title": "欢迎使用 Swap 互换",
       "subtitle": "直接通过您的 Ledger 设备兑换加密资产。",
       "disclaimer": "继续即表示您同意您的位置数据将共享给第三方服务提供商，以使它们遵守其 AML/KYC 程序。"
     },
@@ -394,7 +394,7 @@
         "disclaimer": "出于 KYC 目的，LEDGER 需要收集并转移您的信息到 WYRE。如需了解更多信息，请查看我们的",
         "policy": "隐私政策",
         "title": "验证您的身份",
-        "subtitle": "请输入您的信息，以便与 Wyre 进行 swap 交换。",
+        "subtitle": "请输入您的信息，以便与 Wyre 进行 swap 互换。",
         "pending": {
           "cta": "继续",
           "title": "待批准",
@@ -462,7 +462,7 @@
         "by": "提供方"
       },
       "exchange": "兑换",
-      "helpCTA": "什么是 Swap 交换？",
+      "helpCTA": "什么是 Swap 互换？",
       "bubble": "我们使用固定汇率，这是您将收到的确切数额。",
       "noAccounts": "您没有存有余额的 {{currencyName}} 账户",
       "noApp": "未安装 {{currencyName}} 应用程序。",
@@ -480,7 +480,7 @@
       "cta": "确认"
     },
     "modal": {
-      "title": "Swap 交换",
+      "title": "Swap 互换",
       "steps": {
         "summary": {
           "title": "概要",
@@ -511,25 +511,25 @@
         },
         "finished": {
           "title": "待定",
-          "subtitle": "Swap 交换播送成功 ",
+          "subtitle": "Swap 互换播送成功 ",
           "swap": "您的 Swap ID：",
           "seeDetails": "查看详情",
-          "disclaimer": "请记下您的 Swap ID 掉期交易号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
-          "description": "您的 Swap 交换操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。"
+          "disclaimer": "请记下您的 Swap ID 互换号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
+          "description": "您的 Swap 互换操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。"
         }
       }
     },
     "operationDetailsModal": {
-      "title": "Swap（交换）",
+      "title": "Swap 互换",
       "provider": "提供方",
       "txid": "Swap ID",
       "status": "状态",
       "statusTooltips": {
-        "expired": "请使用您的 Swap ID 交换代码联系交换服务提供方以了解更多详情。",
-        "refunded": "请使用您的 Swap ID 交换代码联系交换服务提供方以了解更多详情。",
-        "pending": "请稍候片刻，swap 交换提供方正在处理该交易。",
+        "expired": "请使用您的 Swap ID 互换代码联系交换服务提供方以了解更多详情。",
+        "refunded": "请使用您的 Swap ID 互换代码联系交换服务提供方以了解更多详情。",
+        "pending": "请稍候片刻，swap 互换提供方正在处理该交易。",
         "onhold": "请使用您的 Swap ID 交换代码联系交换服务提供方以解决这一情况。",
-        "finished": "您的 swap 交换已成功完成"
+        "finished": "您的 swap 互换已成功完成"
       },
       "date": "日期",
       "from": "来自",
@@ -996,7 +996,7 @@
       "star": "星标",
       "receive": "接收",
       "send": "发送",
-      "swap": "Swap (交换)",
+      "swap": "Swap 互换",
       "buy": "买入",
       "sell": "卖出",
       "edit": "编辑账户",
@@ -1083,7 +1083,7 @@
       "description": "用您的 ALGO 多赚点。只需往您的账户中添加资金，当天即可赚取权益质押奖励。"
     },
     "swap": {
-      "title": "Swap 交换加密货币",
+      "title": "Swap 互换加密货币",
       "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行交易。"
     },
     "lending": {
@@ -1356,8 +1356,8 @@
     "listApps": "正在检查应用程序依存关系",
     "listAppsDescription": "请等待，正在确认您是否安装了所有必需的应用程序",
     "swap": {
-      "notice": "发送之前请在您的设备上验证 Swap 交换详情。地址会被安全地交换因此您不必对其进行验证。",
-      "confirm": "确认 Swap 交换交易",
+      "notice": "发送之前请在您的设备上验证 Swap 互换详情。地址会被安全地交换因此您不必对其进行验证。",
+      "confirm": "确认 Swap 互换交易",
       "amountSent": "发送数额",
       "amountReceived": "待收数额",
       "amountReceivedFloat": "服务费之前收到的数额",
