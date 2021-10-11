@@ -12,6 +12,7 @@ import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+import { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -76,17 +77,11 @@ const RowContent: ThemedComponent<{
   }
 `;
 
-interface CurrencyRow {
-  price: number;
-  change: number;
-  variation: number;
-}
-
 type Props = {
   index: number,
   name: string,
   short_name: string,
-  currency: CurrencyRow,
+  currency: MarketCurrencyInfo,
   counterValueCurrency: Currency,
   style: Map<string, string>,
   loading: boolean,
@@ -165,7 +160,11 @@ function MarketRowItem(props: Props) {
             fontSize={4}
           >
             <CryptoCurrencyIconWrapper>
-              {loading ? <LoadingPlaceholder /> : <img src={currency.image} />}
+              {loading ? (
+                <LoadingPlaceholder />
+              ) : (
+                <img src={currency.image} alt={"currency logo"} />
+              )}
             </CryptoCurrencyIconWrapper>
             <div style={{ ...overflowStyles, paddingLeft: 15, marginLeft: 4, width: "100%" }}>
               <Box horizontal alignItems="center">

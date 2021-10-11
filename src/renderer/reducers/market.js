@@ -32,6 +32,7 @@ export type MarketCurrencyInfo = {
   high_24h: number,
   low_24h: number,
   price_change_percentage_24h: number,
+  price_change_percentage_in_currency: number,
   market_cap_change_percentage_24h: number,
   circulating_supply: number,
   total_supply: number,
@@ -41,6 +42,7 @@ export type MarketCurrencyInfo = {
   atl: number,
   atl_date: Date,
   sparkline_in_7d: number[],
+  supportedCurrency: Currency,
 };
 
 export type MarketCurrencyCommonInfo = {
@@ -62,7 +64,7 @@ export type CoinsListItemType = {
   name: "string",
 };
 export type MarketState = {
-  currencies: Array<MarketCurrency>,
+  currencies: Array<MarketCurrencyInfo>,
   coinsList: Array<CoinsListItemType>,
   counterCurrencies: Array<any>,
   searchValue: string,

@@ -3,6 +3,7 @@ import { MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { counterCurrencyNameTable } from "~/renderer/constants/market";
 
 const marketClient = new MarketClient();
 
@@ -70,7 +71,7 @@ export const getCounterCurrencies = () =>
       res.forEach((currency, i) => {
         res[i] = {
           key: currency,
-          label: currency,
+          label: `${currency.toUpperCase()} - ${counterCurrencyNameTable[currency] || currency}`,
           value: currency,
         };
       });
