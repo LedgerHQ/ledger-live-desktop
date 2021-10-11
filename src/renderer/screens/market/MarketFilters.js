@@ -9,7 +9,7 @@ import Switch from "~/renderer/components/Switch";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
-import { setMarketFilters } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
 
 type LedgerLiveCompatibleProps = {
   value: boolean,
@@ -120,6 +120,7 @@ function MarketFilters() {
 
   const onApplyFilters = useCallback(() => {
     dispatch(setMarketFilters({ isLedgerCompatible }));
+    dispatch(getMarketCryptoCurrencies());
     dispatch(closePlatformAppDrawer());
   }, [dispatch, isLedgerCompatible]);
 

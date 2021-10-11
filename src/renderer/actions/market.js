@@ -74,7 +74,7 @@ export const getCounterCurrencies = () =>
     }
   };
 
-export const getMarketCryptoCurrencies = (filters: {
+export const getMarketCryptoCurrencies = (filterParams: {
   counterCurrency: string,
   range: string,
   limit: number,
@@ -85,7 +85,7 @@ export const getMarketCryptoCurrencies = (filters: {
   async function(dispatch, getState) {
     dispatch(
       setMarketParams({
-        ...filters,
+        ...filterParams,
       }),
     );
 
@@ -101,6 +101,7 @@ export const getMarketCryptoCurrencies = (filters: {
         searchValue,
         ids,
         coins,
+        filters,
       },
     } = getState();
 
@@ -110,12 +111,28 @@ export const getMarketCryptoCurrencies = (filters: {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
     }
-    if (searchValue) {
-      ids = [];
-      coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
-    } else {
-      ids = [];
+
+    const supportedCurrenciesByLedger = listSupportedCurrencies();
+    ids = [];
+    if (searchValue || filters.isLedgerCompatible) {
+      let filteredCoins = coins;
+
+      if (filters.isLedgerCompatible) {
+        const supportedCurrencyIdsByLedger = supportedCurrenciesByLedger.map(
+          currency => currency.id,
+        );
+        filteredCoins = filteredCoins.filter(coin =>
+          supportedCurrencyIdsByLedger.includes(coin.id),
+        );
+      }
+
+      if (searchValue) {
+        filteredCoins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
+      } else {
+        ids = filteredCoins.map(coin => coin.id);
+      }
     }
+
     const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
     const res = await marketClient.listPaginated({
       counterCurrency,
@@ -125,9 +142,7 @@ export const getMarketCryptoCurrencies = (filters: {
       order,
       orderBy,
       ids,
-      ...filters,
     });
-    const supportedCurrenciesByLedger = listSupportedCurrencies();
     const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
