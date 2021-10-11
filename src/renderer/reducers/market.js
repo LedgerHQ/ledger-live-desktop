@@ -92,7 +92,6 @@ const initialState: MarketState = {
   page: 1,
   limit: 9,
   coinsList: [],
-  counterValue: supportedCountervalues.find(cv => cv.value === "USD"),
   ids: [],
   filters: {
     isLedgerCompatible: false,
@@ -104,7 +103,6 @@ const initialState: MarketState = {
 
 const handlers = {
   SET_MARKET_PARAMS: (state, { payload }) => {
-    console.log(payload);
     return {
       ...state,
       ...payload,
@@ -117,10 +115,9 @@ const handlers = {
     };
   },
   SET_MARKET_COUNTERVALUE: (state, { payload }: { payload: string }) => {
-    const counterValue = supportedCountervalues.find(cv => cv.value === payload);
     return {
       ...state,
-      counterValue,
+      counterCurrency: payload,
     };
   },
   SET_MARKET_FILTERS: (state, { payload }: { payload: MarketFilters }) => {
@@ -135,8 +132,7 @@ const handlers = {
       favorites: payload.favorites,
     };
   },
-  GET_MARKET_CRYPTOCURRENCIES: (state, { payload }) => {
-    console.log(payload);
+  GET_MARKET_CRYPTOCURRENCIES: state => {
     return {
       ...state,
     };

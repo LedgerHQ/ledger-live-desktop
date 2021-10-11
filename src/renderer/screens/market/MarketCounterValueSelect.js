@@ -10,7 +10,10 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { getMarketCryptoCurrencies, getCounterCurrencies } from "~/renderer/actions/market";
+import {
+  getMarketCryptoCurrencies,
+  getCounterCurrencies,
+} from "~/renderer/actions/market";
 
 export const MarketCounterValueSelect = () => {
   const { counterCurrency, counterCurrencies } = useSelector(state => state.market);
@@ -25,7 +28,7 @@ export const MarketCounterValueSelect = () => {
 
   const onCounterValueSelected = useCallback(
     item => {
-      dispatch(getMarketCryptoCurrencies({ counterCurrencyValue: item.value }));
+      dispatch(getMarketCryptoCurrencies({ counterCurrency: item.value }));
     },
     [dispatch],
   );

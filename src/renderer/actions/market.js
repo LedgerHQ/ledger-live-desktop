@@ -17,11 +17,6 @@ export const setMarketRange = (range: string) => ({
   payload: range,
 });
 
-export const setMarketCounterValue = (counterValue: string) => ({
-  type: "SET_MARKET_COUNTERVALUE",
-  payload: counterValue,
-});
-
 export const setMarketFilters = (filters: MarketFilters) => ({
   type: "SET_MARKET_FILTERS",
   payload: filters,
@@ -80,7 +75,7 @@ export const getCounterCurrencies = () =>
   };
 
 export const getMarketCryptoCurrencies = (filters: {
-  counterCurrencyValue: string,
+  counterCurrency: string,
   range: string,
   limit: number,
   page: number,
@@ -88,6 +83,12 @@ export const getMarketCryptoCurrencies = (filters: {
   orderBy: string,
 }) =>
   async function(dispatch, getState) {
+    dispatch(
+      setMarketParams({
+        ...filters,
+      }),
+    );
+
     let {
       market: {
         counterCurrency,
@@ -138,7 +139,6 @@ export const getMarketCryptoCurrencies = (filters: {
         loading: false,
         favorites: favoriteCryptocurrencies,
         ids,
-        ...filters,
       }),
     );
   };

@@ -11,9 +11,6 @@ import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/Crypt
 import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeaderActions";
 import styled from "styled-components";
 import CryptocurrencySummary from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummary";
-import { useMarketCurrencies } from "~/renderer/hooks/market/useMarketCurrencies";
-import { useRange } from "~/renderer/hooks/market/useRange";
-import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useRouteMatch } from "react-router";
 import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
 import { MarketClient } from "~/api/market";
