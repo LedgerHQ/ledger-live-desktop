@@ -73,7 +73,7 @@ export type MarketState = {
   coinsListCount: undefined,
   page: number,
   ids: Array<any>,
-  counterValue: { value: string, label: string, currency: Currency },
+  counterCurrency: string,
   filters: {
     isLedgerCompatible: boolean,
     currencyType: CurrencyType,

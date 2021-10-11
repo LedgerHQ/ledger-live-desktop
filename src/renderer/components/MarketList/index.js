@@ -4,12 +4,11 @@ import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { getMarketCryptoCurrencies, setMarketParams } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import styled from "styled-components";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
-import type { MarketCurrency } from "~/renderer/reducers/market";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import Paginator from "~/renderer/components/Paginator";
@@ -74,16 +73,13 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList(props) {
+function MarketList() {
   const {
     range,
     searchValue,
-    counterValue,
+    counterCurrency,
     order,
     orderBy,
-    filters,
-    favorites,
-    counterCurrency,
     limit,
     coinsCount,
     page,
@@ -114,7 +110,7 @@ function MarketList(props) {
       loading={loading}
       currency={currencies[index]}
       index={index + 1}
-      counterValueCurrency={counterValue.currency}
+      counterCurrency={counterCurrency}
       style={{ ...style, pointerEvents: "auto" }}
       rangeData={rangeData}
       key={index}

@@ -82,14 +82,14 @@ type Props = {
   name: string,
   short_name: string,
   currency: MarketCurrencyInfo,
-  counterValueCurrency: Currency,
+  counterCurrency: string,
   style: Map<string, string>,
   loading: boolean,
 };
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
-  const { style, currency, loading, counterValueCurrency } = props;
+  const { style, currency, loading, counterCurrency } = props;
 
   const onCurrencyClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
@@ -206,13 +206,7 @@ function MarketRowItem(props: Props) {
             {loading ? (
               <LoadingPlaceholder />
             ) : (
-              <FormattedVal
-                style={{ textAlign: "right" }}
-                val={currency.current_price * 100}
-                unit={counterValueCurrency.units[0]}
-                color="palette.text.shade100"
-                showCode
-              />
+              <p>{`${currency.current_price} ${counterCurrency}`}</p>
             )}
           </Cell>
           <Cell
