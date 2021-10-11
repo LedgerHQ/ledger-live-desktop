@@ -25,8 +25,9 @@ import {
   counterValueCurrencySelector,
   userThemeSelector,
 } from "~/renderer/reducers/settings";
+import { BehaviorSubject } from "rxjs";
 
-const extraSessionTrackingPairs: TrackingPair[] = [];
+const extraSessionTrackingPairsChanges: BehaviorSubject<TrackingPair[]> = new BehaviorSubject([]);
 
 // provide redux states via custom hook wrapper
 
@@ -136,16 +137,28 @@ export function useUserSettings() {
 }
 
 export function addExtraSessionTrackingPair(trackingPair: TrackingPair) {
-  if (
-    !extraSessionTrackingPairs.some(
-      tp => tp.from === trackingPair.from && tp.to === trackingPair.to,
-    )
-  )
-    extraSessionTrackingPairs.push(trackingPair);
+  const value = extraSessionTrackingPairsChanges.value;
+  if (!value.some(tp => tp.from === trackingPair.from && tp.to === trackingPair.to))
+    extraSessionTrackingPairsChanges.next(value.concat(trackingPair));
 }
 
+export function useExtraSessionTrackingPair() {
+  const [extraSessionTrackingPair, setExtraSessionTrackingPair] = useState([]);
+
+  useEffect(() => {
+    const sub = extraSessionTrackingPairsChanges.subscribe(setExtraSessionTrackingPair);
+    return () => sub && sub.unsubscribe();
+  }, []);
+
+  return extraSessionTrackingPair;
+}
 export function useTrackingPairs(): TrackingPair[] {
   const accounts = useSelector(accountsSelector);
   const countervalue = useSelector(counterValueCurrencySelector);
-  return extraSessionTrackingPairs.concat(useTrackingPairForAccounts(accounts, countervalue));
+  const trPairs = useTrackingPairForAccounts(accounts, countervalue);
+  const extraSessionTrackingPairs = useExtraSessionTrackingPair();
+  return useMemo(() => extraSessionTrackingPairs.concat(trPairs), [
+    extraSessionTrackingPairs,
+    trPairs,
+  ]);
 }

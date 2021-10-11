@@ -79,13 +79,13 @@ export default function CounterValue({
     let t;
     if (!hasTrackingPair) {
       addExtraSessionTrackingPair({ from: currency, to: counterValueCurrency });
-      t = setTimeout(cvPolling.poll, 1500); // poll after 1.5s to ensure debounced CV userSettings are effective after this update
+      t = setTimeout(cvPolling.poll, 2000); // poll after 2s to ensure debounced CV userSettings are effective after this update
     }
 
     return () => {
       if (t) clearTimeout(t);
     };
-  }, [counterValueCurrency, currency, cvPolling.poll, hasTrackingPair]);
+  }, [counterValueCurrency, currency, cvPolling, cvPolling.poll, hasTrackingPair, trackingPairs]);
 
   const countervalue = useCalculate({
     from: currency,
