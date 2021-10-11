@@ -119,7 +119,7 @@
       "refresh": "刷新",
       "devTools": "开发工具"
     },
-    "exchange": "货币兑换",
+    "exchange": "兑换",
     "info": "信息",
     "connectDevice": "连接您的设备"
   },
@@ -215,7 +215,7 @@
   "swap2": {
     "title": "Swap",
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "兑换",
       "history": "History",
       "kyc": "KYC"
     },
@@ -325,7 +325,7 @@
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "确认兑换",
       "completed": {
         "title": "Pending Operation",
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
@@ -1367,8 +1367,8 @@
       "payoutNetworkFeesTooltip": "该数额不会在您的设备上显示"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
+      "amountSent": "待发送数额",
+      "amountReceived": "待收数额",
       "provider": "Provider",
       "fees": "Network Fees",
       "sourceAccount": "Source Account",
@@ -1484,7 +1484,7 @@
       "update": "固件更新",
       "updateBtn": "更新固件",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
+        "warning": "可将固件更新到 {{latestFirmware}}",
         "cta": "Go to manager",
         "old": {
           "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
