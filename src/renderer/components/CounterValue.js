@@ -3,7 +3,10 @@ import { BigNumber } from "bignumber.js";
 import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { useCalculate, useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
+import {
+  useCalculate,
+  useCountervaluesPolling,
+} from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import ToolTip from "./Tooltip";
