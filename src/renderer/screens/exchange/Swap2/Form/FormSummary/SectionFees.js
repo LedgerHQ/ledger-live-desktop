@@ -134,7 +134,7 @@ const SectionFees = ({
       <IconSection>
         {StrategyIcon ? <StrategyIcon /> : null}
         <Text fontSize={4} fontWeight="600">
-          {t(`fees.${transaction?.feesStrategy}`)}
+          {t(`fees.${transaction?.feesStrategy ?? "custom"}`)}
         </Text>
         <Separator />
       </IconSection>
