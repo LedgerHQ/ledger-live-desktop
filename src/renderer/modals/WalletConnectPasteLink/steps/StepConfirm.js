@@ -107,7 +107,7 @@ export function StepConfirmFooter({ link, onClose, account, onCloseWithoutDiscon
           }}
           outline
         >
-          Reject
+          <Trans i18nKey="common.reject" />
         </Button>
       ) : null}
       <Box style={{ width: 10 }} />
@@ -123,7 +123,7 @@ export function StepConfirmFooter({ link, onClose, account, onCloseWithoutDiscon
         disabled={!(wcContext.status === STATUS.CONNECTING && wcContext.dappInfo)}
         id="wc-paste-link-confirm-continue"
       >
-        Continue
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   );

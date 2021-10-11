@@ -45,13 +45,6 @@ const DottedLine = styled.hr`
   margin-right: 16px;
 `;
 
-const AccountContainer: ThemedComponent<*> = styled(Box)`
-  width: 100%;
-  border: solid 1px ${p => p.theme.colors.palette.divider};
-  border-radius: 4px;
-`;
-
-// TODO: account should not be received as props but rather selectable on a dropdown
 const Body = ({ onClose, link }: BodyProps) => {
   const wcContext = useContext(context);
 
@@ -89,7 +82,7 @@ const Body = ({ onClose, link }: BodyProps) => {
               </Text>
               <Box style={{ height: 20 }} />
               <Text textAlign="center" ff="Inter|Regular" fontSize={4} color="palette.text.shade50">
-                <Trans i18nKey="walletconnect.steps.confirm.details" />
+                <Trans i18nKey="walletconnect.steps.confirm.deeplinkDetails" />
               </Text>
               <Box style={{ height: 20 }} />
               <Box width="100%">

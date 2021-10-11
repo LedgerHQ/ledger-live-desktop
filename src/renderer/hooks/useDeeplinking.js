@@ -190,7 +190,6 @@ export function useDeepLinkHandler() {
 
         case "wc":
           const { uri } = query;
-          debugger;
           setTrackingSource("deeplink");
           dispatch(openModal("MODAL_WALLETCONNECT_DEEPLINK", { link: uri }));
           break;

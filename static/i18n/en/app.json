@@ -62,6 +62,7 @@
     "apply": "Apply",
     "done": "Done",
     "confirm": "Confirm",
+    "reject": "Reject",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
@@ -1047,7 +1048,8 @@
       },
       "confirm": {
         "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "details": "Wants to connect to the following Ethereum account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
