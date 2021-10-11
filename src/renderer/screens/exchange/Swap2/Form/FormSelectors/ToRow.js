@@ -115,6 +115,7 @@ function ToRow({
             loading={loadingRates}
             renderRight={
               toCurrency &&
+              unit &&
               toAmount &&
               !loadingRates && (
                 <CounterValue

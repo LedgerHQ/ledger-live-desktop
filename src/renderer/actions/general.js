@@ -15,6 +15,7 @@ import {
   useCalculateCountervalueCallback as useCalculateCountervalueCallbackCommon,
   useTrackingPairForAccounts,
 } from "@ledgerhq/live-common/lib/countervalues/react";
+import type { TrackingPair } from "@ledgerhq/live-common/lib/countervalues/types";
 import { useDistribution as useDistributionRaw } from "@ledgerhq/live-common/lib/portfolio/v2/react";
 import type { State } from "~/renderer/reducers";
 import { accountsSelector, activeAccountsSelector } from "~/renderer/reducers/accounts";
@@ -24,6 +25,8 @@ import {
   counterValueCurrencySelector,
   userThemeSelector,
 } from "~/renderer/reducers/settings";
+
+const extraSessionTrackingPairs: TrackingPair[] = [];
 
 // provide redux states via custom hook wrapper
 
@@ -132,8 +135,17 @@ export function useUserSettings() {
   );
 }
 
-export function useTrackingPairs() {
+export function addExtraSessionTrackingPair(trackingPair: TrackingPair) {
+  if (
+    !extraSessionTrackingPairs.some(
+      tp => tp.from === trackingPair.from && tp.to === trackingPair.to,
+    )
+  )
+    extraSessionTrackingPairs.push(trackingPair);
+}
+
+export function useTrackingPairs(): TrackingPair[] {
   const accounts = useSelector(accountsSelector);
   const countervalue = useSelector(counterValueCurrencySelector);
-  return useTrackingPairForAccounts(accounts, countervalue);
+  return extraSessionTrackingPairs.concat(useTrackingPairForAccounts(accounts, countervalue));
 }
