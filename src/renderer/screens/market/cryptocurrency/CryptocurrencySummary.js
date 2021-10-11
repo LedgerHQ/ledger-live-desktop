@@ -38,7 +38,7 @@ export default function CryptocurrencySummary({
   const { rangeData } = useRange(range);
 
   const renderTickY = useCallback(
-    (val: number) => formatShort(counterValue.currency.units[0], BigNumber(val)),
+    (val: number) => val,
     [counterValue, range],
   );
 
@@ -49,9 +49,9 @@ export default function CryptocurrencySummary({
 
   const renderTooltip = useCallback(
     (data: BalanceHistoryData) => (
-      <Tooltip data={data} counterValue={counterValue} range={rangeData.scale} />
+      <Tooltip data={data} counterValue={counterCurrency} range={rangeData.scale} />
     ),
-    [counterValue, range],
+    [counterCurrency, range],
   );
 
   if (loading) {
@@ -97,17 +97,10 @@ export default function CryptocurrencySummary({
   );
 }
 
-function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValue: Currency }) {
+function Tooltip({ data, counterCurrency }: { data: BalanceHistoryData, counterCurrency: string }) {
   return (
     <>
-      <FormattedVal
-        alwaysShowSign={false}
-        fontSize={5}
-        color="palette.text.shade100"
-        showCode
-        unit={counterValue.currency.units[0]}
-        val={data.value}
-      />
+      {`${data.value} ${counterCurrency}`}
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
         <FormattedDate date={data.date} format="LL" />
       </Box>

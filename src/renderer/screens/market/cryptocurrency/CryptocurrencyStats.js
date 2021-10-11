@@ -38,7 +38,7 @@ const InfoSection = ({
 };
 
 function PriceStats({ currency }: { currency: MarketCurrency }) {
-  const { counterValue } = useSelector(state => state.market);
+  const { counterCurrency } = useSelector(state => state.market);
 
   return (
     <CardStyled style={{ height: "100%" }} px={16} py={20}>
@@ -48,15 +48,7 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
       <Box grow vertical justifyContent="space-between">
         <InfoSection style={{ height: "56px" }} title="Price">
           <Text textAlign="right" ff="Inter|Medium" fontSize={14}>
-            <FormattedVal
-              animateTicker
-              isNegative
-              color="palette.text.shade60"
-              val={`${currency.current_price * 100}`}
-              showCode
-              inline
-              unit={counterValue.currency.units[0]}
-            />
+            {`${currency.current_price} ${counterCurrency}`}
           </Text>
           <Text textAlign="right" ff="Inter|Medium" fontSize={14}>
             <FormattedVal
@@ -76,31 +68,15 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
         <Divider />
         <InfoSection title="7d Low / 7d High">
           <Box horizontal>
-            <FormattedVal
-              animateTicker
-              isNegative
-              color="palette.text.shade60"
-              val={`${currency.sparkline_in_7d[0] * 100}`}
-              showCode
-              inline
-              unit={counterValue.currency.units[0]}
-            />
+            {`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}
             <div>/</div>
-            <FormattedVal
-              animateTicker
-              isNegative
-              color="palette.text.shade60"
-              val={`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1] * 100}`}
-              showCode
-              inline
-              unit={counterValue.currency.units[0]}
-            />
+            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(2)} ${counterCurrency}`}
           </Box>
         </InfoSection>
         <Divider />
-        <InfoSection title="All time high"></InfoSection>
+        <InfoSection title="All time high">{currency.ath}</InfoSection>
         <Divider />
-        <InfoSection title="All time low"></InfoSection>
+        <InfoSection title="All time low">{currency.atl}</InfoSection>
       </Box>
     </CardStyled>
   );

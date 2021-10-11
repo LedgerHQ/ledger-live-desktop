@@ -18,7 +18,7 @@ type Props = {
 };
 
 function CryptocurrencySummaryHeader({ currency }: Props) {
-  const { counterValue, range } = useSelector(state => state.market);
+  const { counterCurrency, range } = useSelector(state => state.market);
 
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(
@@ -36,19 +36,11 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
     <Box>
       <Box pb={5} horizontal alignItems="center">
         <Box mt={4}>
-          <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70">
+          <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70"  >
             1 {currency.name.toUpperCase()}
           </Text>
           <Text ff="Inter|Medium" fontSize={28}>
-            <FormattedVal
-              animateTicker
-              isNegative
-              color="palette.text.shade100"
-              val={`${currency.current_price * 100}`}
-              showCode
-              inline
-              unit={counterValue.currency.units[0]}
-            />
+            {`${currency.current_price} ${counterCurrency}`}
           </Text>
         </Box>
       </Box>
@@ -62,17 +54,9 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             inline
             withIcon
           />
-          <FormattedVal
-            prefix=" ("
-            suffix=")"
-            animateTicker
-            isNegative
-            val={`${currency.difference}`}
-            alwaysShowSign
-            showCode
-            inline
-            unit={counterValue.currency.units[0]}
-          />
+          <Text ff="Inter|Medium" fontSize={16} pl={2}>
+            {`(${currency.difference})`}
+          </Text>
         </Box>
         <Box>
           <Track
