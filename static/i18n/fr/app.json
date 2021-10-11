@@ -2457,8 +2457,8 @@
     },
     "contextMenu": {
       "topUp": "Recevoir plus",
-      "redelegate": "Changer le validateur",
-      "stopDelegation": "Interrompre la délégation"
+      "redelegate": "Changer validateur",
+      "stopDelegation": "Interr. délégation"
     }
   },
   "asset": {
