@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import type { BodyProps } from "./types";
 import Box from "~/renderer/components/Box";
 import Footer from "./Footer";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import {
   context,
   STATUS,
@@ -19,7 +18,6 @@ import SelectAccount from "~/renderer/components/SelectAccount";
 import Text from "~/renderer/components/Text";
 import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import WCLogo from "~/renderer/images/walletconnect.png";
-import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
@@ -57,7 +55,7 @@ const Body = ({ onClose, link }: BodyProps) => {
     connect(link);
   }, [link]);
 
-  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum");
+  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum", []);
 
   return (
     <ModalBody
