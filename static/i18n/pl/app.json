@@ -3,7 +3,7 @@
     "today": "Dzisiaj",
     "tomorrow": "Jutro",
     "yesterday": "Wczoraj",
-    "transactionDate": "Data tranzakcji"
+    "transactionDate": "Data transakcji"
   },
   "platform": {
     "flows": {
@@ -12,7 +12,7 @@
       },
       "broadcast": {
         "toast": {
-          "title": "Tranzakcja wysłana!",
+          "title": "Transakcja wysłana!",
           "text": "Kliknij tutaj po szczegóły operacji."
         }
       }
