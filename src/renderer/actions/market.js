@@ -73,7 +73,7 @@ export const getCounterCurrencies = () =>
     }
   };
 
-export const getMarketCryptoCurrencies = (filterParams: {
+export const getMarketCryptoCurrencies = (filters: {
   counterCurrency: string,
   range: string,
   limit: number,
@@ -84,7 +84,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
   async function(dispatch, getState) {
     dispatch(
       setMarketParams({
-        ...filterParams,
+        ...filters,
       }),
     );
 
@@ -100,40 +100,22 @@ export const getMarketCryptoCurrencies = (filterParams: {
         searchValue,
         ids,
         coins,
-        filters,
       },
     } = getState();
 
     dispatch(setMarketParams({ loading: true }));
 
-    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
-
     if (coinsCount === undefined) {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
     }
-
-    const supportedCurrenciesByLedger = listSupportedCurrencies();
-    ids = [];
-    if (searchValue || filters.isLedgerCompatible) {
-      let filteredCoins = coins;
-
-      if (filters.isLedgerCompatible) {
-        const supportedCurrencyIdsByLedger = supportedCurrenciesByLedger.map(
-          currency => currency.id,
-        );
-        filteredCoins = filteredCoins.filter(coin =>
-          supportedCurrencyIdsByLedger.includes(coin.id),
-        );
-      }
-
-      if (searchValue) {
-        filteredCoins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
-      } else {
-        ids = filteredCoins.map(coin => coin.id);
-      }
+    if (searchValue) {
+      ids = [];
+      coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
+    } else {
+      ids = [];
     }
-<<<<<<< HEAD
+    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
     if (orderBy === "isStarred") {
       if (order === "desc") {
         ids.push(favoriteCryptocurrencies.map(item => item.id));
@@ -147,10 +129,6 @@ export const getMarketCryptoCurrencies = (filterParams: {
 
     limit = 9;
 
-=======
-
-    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
->>>>>>> 4dc09e13b5112f8825f531674385cc1f822a1f76
     const res = await marketClient.listPaginated({
       counterCurrency,
       range,
@@ -159,12 +137,9 @@ export const getMarketCryptoCurrencies = (filterParams: {
       order,
       orderBy,
       ids,
+      ...filters,
     });
-<<<<<<< HEAD
-
     const supportedCurrenciesByLedger = listSupportedCurrencies();
-=======
->>>>>>> 4dc09e13b5112f8825f531674385cc1f822a1f76
     const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
@@ -185,8 +160,8 @@ export const getMarketCryptoCurrencies = (filterParams: {
         loading: false,
         favorites: favoriteCryptocurrencies,
         limit: limit,
+        coinsCount,
         ids,
-        coinsCount
       }),
     );
   };
