@@ -213,21 +213,21 @@
     "disconnectButton": "Desconectar"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "Permuta",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History",
+      "history": "Historial",
       "kyc": "KYC"
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
-        "quote": "Quote",
-        "receive": "Receive"
+        "title": "Tarifa",
+        "quote": "Cotización",
+        "receive": "Recibir"
       },
       "details": {
         "label": {
-          "provider": "provider",
+          "provider": "proveedor",
           "rate": "rate",
           "fees": "fees",
           "target": "target account"
