@@ -35,7 +35,11 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   const renderTickY = useCallback((val: number) => val, []);
 
   const bgColor = useTheme("colors.palette.background.paper");
-  const chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
+  let chartColor;
+
+  if (currency.supportedCurrency) {
+    chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
+  }
 
   const { loading, chartData } = useMarketCurrencyChart({ id, counterCurrency, range });
 

@@ -28,9 +28,9 @@ export const setFavoriteCryptocurrencies = (favorites: Array<{ id: number }>) =>
 });
 
 export const updateFavoriteCryptocurrencies = ({
-  cryptocurrencyId,
-  isStarred,
-}: {
+                                                 cryptocurrencyId,
+                                                 isStarred,
+                                               }: {
   cryptocurrencyId: number,
   isStarred: boolean,
 }) =>
@@ -44,9 +44,10 @@ export const updateFavoriteCryptocurrencies = ({
     } else {
       favorites.push({ id: cryptocurrencyId });
     }
+
+    await setKey("app", "favorite_cryptocurrencies", favorites);
     const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(favorites, currencies);
     dispatch(setMarketParams({ favorites, currencies: currenciesWithFavorites }));
-    await setKey("app", "favorite_cryptocurrencies", favorites);
   };
 
 export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
@@ -73,7 +74,7 @@ export const getCounterCurrencies = () =>
     }
   };
 
-export const getMarketCryptoCurrencies = (filters: {
+export const getMarketCryptoCurrencies = (filterParams: {
   counterCurrency: string,
   range: string,
   limit: number,
@@ -84,7 +85,7 @@ export const getMarketCryptoCurrencies = (filters: {
   async function(dispatch, getState) {
     dispatch(
       setMarketParams({
-        ...filters,
+        ...filterParams,
       }),
     );
 
@@ -100,33 +101,57 @@ export const getMarketCryptoCurrencies = (filters: {
         searchValue,
         ids,
         coins,
+        filters,
       },
     } = getState();
+
+    if (filters.orderBy) {
+      orderBy = filters.orderBy;
+    }
+
+    if (filters.order) {
+      order = filters.order;
+    }
 
     dispatch(setMarketParams({ loading: true }));
 
     if (coinsCount === undefined) {
-      const coins = await marketClient.supportedCurrencies();
+      coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
     }
-    if (searchValue) {
-      ids = [];
-      coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
-    } else {
-      ids = [];
-    }
+
     const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
-    if (orderBy === "isStarred") {
-      if (order === "desc") {
-        ids.push(favoriteCryptocurrencies.map(item => item.id));
+
+    const supportedCurrenciesByLedger = listSupportedCurrencies();
+    ids = [];
+    if (searchValue || filters.isLedgerCompatible) {
+      let filteredCoins = coins;
+
+      if (filters.isLedgerCompatible) {
+        const supportedCurrencyIdsByLedger = supportedCurrenciesByLedger.map(
+          currency => currency.id,
+        );
+        filteredCoins = filteredCoins.filter(coin =>
+          supportedCurrencyIdsByLedger.includes(coin.id),
+        );
+      }
+
+      if (searchValue) {
+        filteredCoins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
       } else {
-        if (searchValue) {
-          ids = [];
-          coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
-        }
+        ids = filteredCoins.map(coin => coin.id);
       }
     }
 
+    if (orderBy === "isStarred") {
+      if (order === "desc") {
+        favoriteCryptocurrencies.forEach(fav => {
+          ids.unshift(fav.id);
+        });
+      } else {
+        ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
+      }
+    }
     limit = 9;
 
     const res = await marketClient.listPaginated({
@@ -137,9 +162,7 @@ export const getMarketCryptoCurrencies = (filters: {
       order,
       orderBy,
       ids,
-      ...filters,
     });
-    const supportedCurrenciesByLedger = listSupportedCurrencies();
     const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
@@ -159,9 +182,9 @@ export const getMarketCryptoCurrencies = (filters: {
         currencies: currenciesWithFavoritesAndSupported,
         loading: false,
         favorites: favoriteCryptocurrencies,
-        limit: limit,
-        coinsCount,
+        limit,
         ids,
+        coinsCount,
       }),
     );
   };

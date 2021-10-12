@@ -1,4 +1,5 @@
 // @flow
+
 import React from "react";
 import { useSelector } from "react-redux";
 import type { Children } from "react";
@@ -26,7 +27,7 @@ const InfoSection = ({
 }: {
   title: string,
   children: Children,
-  style: any,
+  style?: any,
 }) => {
   return (
     <Box style={style} mt={15} mb={15} horizontal alignItems="top" justifyContent="space-between">
@@ -48,10 +49,10 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
       </Text>
       <Box grow vertical justifyContent="space-between">
         <InfoSection style={{ height: "56px" }} title="Price">
-          <Text textAlign="right" ff="Inter|Medium" fontSize={14}>
+          <Text color="palette.text.shade100" textAlign="right" ff="Inter|Medium" fontSize={14}>
             {`${currency.current_price} ${counterCurrency}`}
           </Text>
-          <Text textAlign="right" ff="Inter|Medium" fontSize={14}>
+          <Text color="palette.text.shade100" textAlign="right" ff="Inter|Medium" fontSize={14}>
             <FormattedVal
               isPercent
               animateTicker
@@ -63,27 +64,29 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="Trading volume">{`${currency.total_volume} ${counterCurrency}`}</InfoSection>
+        <InfoSection title="Trading volume">
+          <Text textAlign="right" color="palette.text.shade100">{`${currency.total_volume} ${counterCurrency}`}</Text>
+        </InfoSection>
         <Divider />
-        <InfoSection title="24h Low / 24h High">{`${currency.low_24h} ${counterCurrency}/${currency.high_24h} ${counterCurrency}`}</InfoSection>
+        <InfoSection title="24h Low / 24h High">
+          <Text textAlign="right" color="palette.text.shade100">{`${currency.low_24h} ${counterCurrency}/${currency.high_24h} ${counterCurrency}`}</Text>
+        </InfoSection>
         <Divider />
         <InfoSection title="7d Low / 7d High">
           <Box horizontal>
-            {`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}
+            <Text textAlign="right" color="palette.text.shade100">{`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}</Text>
             <div>/</div>
-            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(
-              2,
-            )} ${counterCurrency}`}
+            <Text textAlign="right" color="palette.text.shade100">{`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(2)} ${counterCurrency}`}</Text>
           </Box>
         </InfoSection>
         <Divider />
         <InfoSection title="All time high">
-          {`${currency.ath} ${counterCurrency}`}
+          <Text textAlign="right" color="palette.text.shade100">{`${currency.ath} ${counterCurrency}`}</Text>
           <FormattedDate date={currency.ath_date} format="LL" />
         </InfoSection>
         <Divider />
         <InfoSection title="All time low">
-          {`${currency.atl} ${counterCurrency}`}
+          <Text textAlign="right" color="palette.text.shade100">{`${currency.atl} ${counterCurrency}`}</Text>
           <FormattedDate date={currency.atl_date} format="LL" />
         </InfoSection>
       </Box>
@@ -98,9 +101,13 @@ function MarketCap({ currency }: { currency: MarketCurrency }) {
         Market cap
       </Text>
       <Box>
-        <InfoSection title="Market cap">{currency.market_cap}</InfoSection>
+        <InfoSection title="Market cap">
+          <Text textAlign="right" color="palette.text.shade100">{currency.market_cap}</Text>
+        </InfoSection>
         <Divider />
-        <InfoSection title="Market cap rank">{currency.market_cap_rank}</InfoSection>
+        <InfoSection title="Market cap rank">
+          <Text textAlign="right" color="palette.text.shade100">{currency.market_cap_rank}</Text>
+        </InfoSection>
       </Box>
     </CardStyled>
   );
@@ -113,11 +120,17 @@ function Supply({ currency }: { currency: MarketCurrency }) {
         Supply
       </Text>
       <Box>
-        <InfoSection title="Circulating supply">{currency.circulating_supply}</InfoSection>
+        <InfoSection title="Circulating supply">
+          <Text textAlign="right" color="palette.text.shade100">{currency.circulating_supply}</Text>
+        </InfoSection>
         <Divider />
-        <InfoSection title="Total supply">{currency.total_supply}</InfoSection>
+        <InfoSection title="Total supply">
+          <Text textAlign="right" color="palette.text.shade100">{currency.total_supply}</Text>
+        </InfoSection>
         <Divider />
-        <InfoSection title="Max supply">{currency.max_supply}</InfoSection>
+        <InfoSection title="Max supply">
+          <Text textAlign="right" color="palette.text.shade100">{currency.max_supply}</Text>
+        </InfoSection>
       </Box>
     </CardStyled>
   );

@@ -85,7 +85,7 @@ function MarketList(props) {
     page,
     currencies,
     loading,
-  } = props;
+  } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
 
@@ -238,4 +238,4 @@ function MarketList(props) {
   );
 }
 
-export default connect(state => ({ ...state.market }), { getMarketCryptoCurrencies })(MarketList);
+export default connect(null, { getMarketCryptoCurrencies })(MarketList);

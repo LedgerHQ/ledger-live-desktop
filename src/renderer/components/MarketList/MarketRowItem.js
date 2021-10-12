@@ -23,7 +23,6 @@ const CryptoCurrencyIconWrapper = styled.div`
   height: 20px;
   width: 20px;
   position: relative;
-
   img {
     height: 100%;
   }
@@ -49,11 +48,9 @@ const Row: ThemedComponent<{}> = styled(Box)`
   margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
-
   :hover {
     border-color: ${p => p.theme.colors.palette.text.shade20};
   }
-
   :active {
     border-color: ${p => p.theme.colors.palette.text.shade20};
     background: ${p => p.theme.colors.palette.action.hover};
@@ -71,7 +68,6 @@ const RowContent: ThemedComponent<{
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   height: 54px;
-
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
