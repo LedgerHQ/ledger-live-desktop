@@ -228,7 +228,7 @@
       "details": {
         "label": {
           "provider": "proveedor",
-          "rate": "rate",
+          "rate": "tarifa",
           "fees": "fees",
           "target": "target account"
         },
