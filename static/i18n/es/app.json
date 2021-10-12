@@ -2587,8 +2587,8 @@
           "description": "Usa elrond con proxy de ledger"
         },
         "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+          "title": "usa Tezos JS impl",
+          "description": "Usa Tezos JS impl"
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2619,7 +2619,7 @@
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
       "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Restablecer Ledger Live borrará tu historial de transacciones de permuta de todas tus cuentas."
     },
     "softResetModal": {
       "title": "Borrar caché",
@@ -2636,7 +2636,7 @@
     "removeAccountModal": {
       "title": "Quitar cuenta",
       "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "Eliminar esta cuenta borrará el historial de transacciones de permuta asociado a dicha cuenta."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
@@ -2751,8 +2751,8 @@
       "achievement": "Logro desbloqueado"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "Tienes {{count}} notificaciones sin leer",
+      "cta": "Ver detalles"
     }
   },
   "informationCenter": {
@@ -2824,11 +2824,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "Ponte en contacto con Soporte",
+        "continueCTA": "Continuar",
+        "title": "Por favor, verifica los contenidos de la caja",
+        "description": "Si tu {{device}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "alert": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez"
       }
     },
     "alerts": {
@@ -3208,22 +3208,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "¿Tienes dificultades para conectar tu dispositivo?",
+    "cta": "Corregir",
     "solution": "Solución nº {{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "Instrucciones para Apple",
     "nextSolution": "Solución siguiente",
     "previousSolution": "Solución anterior",
     "followSteps": "Sigue estos pasos",
     "supportArticle": "Artículo de soporte",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "Conectando...",
+    "connected": "Conectado",
+    "backToPortfolio": "Volver al Portfolio",
     "steps": {
       "entry": {
         "title": "Solucionar problemas de la conexión USB",
         "desc": "Parece que hay un problema con la conexión a tu dispositivo. No te preocupes, puedes probar varias soluciones una a una hasta que se conecte el dispositivo.",
-        "cta": "Let’s fix it!",
+        "cta": "Vamos a corregirlo.",
         "back": "Volver"
       },
       "1": {
@@ -3241,7 +3241,7 @@
           "desc": "Haz clic en el botón siguiente para agregar las reglas udev. Luego conecta y desbloquea tu dispositivo para ver si se detecta.",
           "cta": "Establecer reglas",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "Ingresa el siguiente comando en una terminal para agregar automáticamente las reglas y volver a cargar udev.",
             "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
@@ -3250,8 +3250,8 @@
         "usbPort": {
           "title": "Prueba con distintos puertos USB",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "Cambia el puerto USB que utilizas en tu equipo.",
+            "1": "Quita cualquier llave (dongle) USB.",
             "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
@@ -3384,11 +3384,11 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "title": "Términos de uso",
+    "description": "Por favor, dedica algo de tiempo a revisar nuestros términos de servicio y política de privacidad",
     "termsLabel": "Términos del servicio",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "Política de privacidad",
+    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
@@ -3691,8 +3691,8 @@
       "description": "Configura el nodo completo para buscar las cuentas asociadas a este dispositivo. El nodo completo debe buscar esta cuenta primero en la cadena de bloques, antes de agregarla a tu Portfolio."
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "title": "Algo no funcionó",
+      "description": "La transacción de intercambio no se ha realizado. Por favor, inténtalo de nuevo o ponte en contacto con el Soporte."
     },
     "TimeoutError": {
       "title": "El servidor ha tardado demasiado en responder",
