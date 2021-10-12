@@ -73,7 +73,7 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList() {
+function MarketList(props) {
   const {
     range,
     searchValue,
@@ -85,7 +85,7 @@ function MarketList() {
     page,
     currencies,
     loading,
-  } = useSelector(state => state.market);
+  } = props;
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
 
@@ -224,7 +224,6 @@ function MarketList() {
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}
-      {!searchValue && (
         <Box justifyContent="center" horizontal>
           <Paginator
             currentPage={page}
@@ -235,9 +234,8 @@ function MarketList() {
             onChange={page => dispatch(getMarketCryptoCurrencies({ page }))}
           />
         </Box>
-      )}
     </Box>
   );
 }
 
-export default connect(null, { getMarketCryptoCurrencies })(MarketList);
+export default connect(state => ({ ...state.market }), { getMarketCryptoCurrencies })(MarketList);

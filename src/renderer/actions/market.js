@@ -44,10 +44,9 @@ export const updateFavoriteCryptocurrencies = ({
     } else {
       favorites.push({ id: cryptocurrencyId });
     }
-
-    await setKey("app", "favorite_cryptocurrencies", favorites);
     const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(favorites, currencies);
     dispatch(setMarketParams({ favorites, currencies: currenciesWithFavorites }));
+    await setKey("app", "favorite_cryptocurrencies", favorites);
   };
 
 export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
@@ -106,6 +105,8 @@ export const getMarketCryptoCurrencies = (filters: {
 
     dispatch(setMarketParams({ loading: true }));
 
+    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
+
     if (coinsCount === undefined) {
       const coins = await marketClient.supportedCurrencies();
       dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
@@ -116,7 +117,19 @@ export const getMarketCryptoCurrencies = (filters: {
     } else {
       ids = [];
     }
-    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
+    if (orderBy === "isStarred") {
+      if (order === "desc") {
+        ids.push(favoriteCryptocurrencies.map(item => item.id));
+      } else {
+        if (searchValue) {
+          ids = [];
+          coins.forEach(coin => matchesSearch(searchValue, coin) && ids.push(coin.id));
+        }
+      }
+    }
+
+    limit = 9;
+
     const res = await marketClient.listPaginated({
       counterCurrency,
       range,
@@ -127,18 +140,30 @@ export const getMarketCryptoCurrencies = (filters: {
       ids,
       ...filters,
     });
+
     const supportedCurrenciesByLedger = listSupportedCurrencies();
     const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
       supportedCurrenciesByLedger,
     );
+
+    if (searchValue) {
+      limit = res.length;
+      coinsCount = ids.length;
+    } else {
+      limit = 9;
+      coinsCount = coins.length;
+    }
+
     dispatch(
       setMarketParams({
         currencies: currenciesWithFavoritesAndSupported,
         loading: false,
         favorites: favoriteCryptocurrencies,
+        limit: limit,
         ids,
+        coinsCount
       }),
     );
   };
