@@ -1,14 +1,18 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { useCalculate } from "@ledgerhq/live-common/lib/countervalues/react";
+import {
+  useCalculate,
+  useCountervaluesPolling,
+} from "@ledgerhq/live-common/lib/countervalues/react";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import ToolTip from "./Tooltip";
 import { Trans } from "react-i18next";
 import useTheme from "~/renderer/hooks/useTheme";
+import { addExtraSessionTrackingPair, useTrackingPairs } from "../actions/general";
 
 type Props = {
   // wich market to query
@@ -64,6 +68,25 @@ export default function CounterValue({
 }: Props) {
   const value = valueProp instanceof BigNumber ? valueProp.toNumber() : valueProp;
   const counterValueCurrency = useSelector(counterValueCurrencySelector);
+  const trackingPairs = useTrackingPairs();
+  const cvPolling = useCountervaluesPolling();
+  const hasTrackingPair = useMemo(
+    () => trackingPairs.some(tp => tp.from === currency && tp.to === counterValueCurrency),
+    [counterValueCurrency, currency, trackingPairs],
+  );
+
+  useEffect(() => {
+    let t;
+    if (!hasTrackingPair) {
+      addExtraSessionTrackingPair({ from: currency, to: counterValueCurrency });
+      t = setTimeout(cvPolling.poll, 2000); // poll after 2s to ensure debounced CV userSettings are effective after this update
+    }
+
+    return () => {
+      if (t) clearTimeout(t);
+    };
+  }, [counterValueCurrency, currency, cvPolling, cvPolling.poll, hasTrackingPair, trackingPairs]);
+
   const countervalue = useCalculate({
     from: currency,
     to: counterValueCurrency,
