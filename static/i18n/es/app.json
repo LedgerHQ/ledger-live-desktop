@@ -229,8 +229,8 @@
         "label": {
           "provider": "proveedor",
           "rate": "tarifa",
-          "fees": "fees",
-          "target": "target account"
+          "fees": "tarifas",
+          "target": "cuenta de destino"
         },
         "tooltip": {
           "provider": "lorem ipsum",
@@ -238,11 +238,11 @@
           "fees": "lorem ipsum"
         },
         "noAccount": "You don't have {{name}} account",
-        "noAccountCTA": "Add account"
+        "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
         "title": "From",
-        "max": "Max",
+        "max": "Máx.",
         "accountPlaceholder": "Select source",
         "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
