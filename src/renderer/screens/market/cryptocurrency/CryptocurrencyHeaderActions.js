@@ -1,11 +1,12 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { useHistory } from "react-router";
+
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { MarketCounterValueSelect } from "~/renderer/screens/market/MarketCounterValueSelect";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { useHistory } from "react-router";
 import type { MarketCurrency } from "~/renderer/reducers/market";
 
 type Props = {

@@ -1,7 +1,9 @@
 // @flow
 import React, { useCallback } from "react";
 import { useSelector } from "react-redux";
+import { useRouteMatch } from "react-router";
 import type { BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
+
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
@@ -9,7 +11,6 @@ import FormattedDate from "~/renderer/components/FormattedDate";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import CryptocurrencySummaryHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummaryHeader";
 import { useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrency";
-import { useRouteMatch } from "react-router";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
@@ -82,7 +83,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
 function Tooltip({ data, counterCurrency }: { data: BalanceHistoryData, counterCurrency: string }) {
   return (
     <>
-      {`${data.value} ${counterCurrency}`}
+      {`${data.value / 100} ${counterCurrency}`}
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
         <FormattedDate date={data.date} format="LL" />
       </Box>

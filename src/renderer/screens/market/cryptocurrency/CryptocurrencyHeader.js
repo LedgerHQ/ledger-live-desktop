@@ -1,10 +1,11 @@
 // @flow
 
 import React from "react";
+import styled from "styled-components";
+
 import type { CurrencyType } from "~/renderer/reducers/market";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import styled from "styled-components";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 
 const CryptoCurrencyIconWrapper = styled.div`

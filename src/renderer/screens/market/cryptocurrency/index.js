@@ -2,14 +2,15 @@
 
 import React from "react";
 import { compose } from "redux";
+import { useRouteMatch } from "react-router";
 import { connect, useSelector } from "react-redux";
+import styled from "styled-components";
 import { withTranslation } from "react-i18next";
+
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeader";
 import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeaderActions";
-import styled from "styled-components";
 import CryptocurrencySummary from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummary";
-import { useRouteMatch } from "react-router";
 import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
 import { useMarketCurrency } from "~/renderer/hooks/market/useMarketCurrency";
 

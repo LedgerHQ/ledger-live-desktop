@@ -1,11 +1,12 @@
 // @flow
 
-import { MarketClient } from "~/api/market";
 import { useEffect, useState } from "react";
+import moment from "moment";
+
+import { MarketClient } from "~/api/market";
 import type { MarketCurrencyByIdRequestParams } from "~/api/market";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import moment from "moment";
 
 type Prop = {
   id: string,
@@ -98,7 +99,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         setChartData(prices);
         setLoading(false);
       });
-  }, [id, counterCurrency, days, interval]);
+  }, [id, counterCurrency, days, interval, buildChartData]);
 
   return { loading, chartData };
 };

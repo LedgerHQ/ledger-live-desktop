@@ -21,7 +21,7 @@ export const MarketCounterValueSelect = () => {
     if (!counterCurrencies[0]) {
       dispatch(getCounterCurrencies());
     }
-  }, []);
+  });
 
   const onCounterValueSelected = useCallback(
     item => {
