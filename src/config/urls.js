@@ -130,8 +130,8 @@ export const urls = {
   banners: {
     blackfriday:
       "https://shop.ledger.com/pages/black-friday?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
-    backupPack:
-      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
+    familyPack:
+      "https://shop.ledger.com/products/ledger-nano-s-3pack?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ledgerAcademy:
       "https://www.ledger.com/academy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ongoingScams:
