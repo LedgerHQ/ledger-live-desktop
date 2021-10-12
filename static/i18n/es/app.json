@@ -327,10 +327,10 @@
     "exchangeDrawer": {
       "title": "Confirma tu Exchange",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "Operación pendiente",
+        "description": "Tu operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que recibas tus {{targetCurrency}}.",
+        "disclaimer": "Toma nota del número de ID de permuta, en caso de que necesites ayuda del Soporte de <0><0>{{provider}}</0> support</0>.",
+        "seeDetails": "Ver detalles"
       }
     }
   },
@@ -1367,12 +1367,12 @@
       "payoutNetworkFeesTooltip": "Este importe no se mostrará en el dispositivo"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "Importe a enviar",
+      "amountReceived": "Importe a recibir",
+      "provider": "Proveedor",
+      "fees": "Tarifas de red",
+      "sourceAccount": "Cuenta de origen",
+      "targetAccount": "Cuenta de destino"
     },
     "sell": {
       "notice": "Verifica los detalles de venta en tu dispositivo antes de enviarlos. Las direcciones se intercambian de forma segura, por lo que no es necesario verificarlas.",
@@ -1484,13 +1484,13 @@
       "update": "Firmware actualizado",
       "updateBtn": "Actualizar firmware",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "Actualización disponible del Firmware a la versión {{latestFirmware}}",
+        "cta": "Ingresa a Manager",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "La versión de firmware del dispositivo es demasiado antigua para poder actualizarla. Contacta al Soporte de Ledger para obtener un reemplazo.",
+          "cta": "Ponte en contacto con Soporte"
         },
-        "cta2": "Update firmware"
+        "cta2": "Actualizar firmware"
       },
       "latest": "La versión {{version}} del firmware está disponible",
       "contactSupport": "Ponte en contacto con Soporte",
@@ -1514,9 +1514,9 @@
       "confirmIdentifier": "Verifica el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo coincide con el identificador a continuación. Confirma e introduce tu código PIN, si así lo indica la aplicación.",
       "identifier": "Identificador",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "Preparación",
+      "newFirmware": "Nuevo firmware {{version}}",
+      "confirmUpdate": "Por favor, confirma la actualización en tu dispositivo",
       "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
       "mcuSecond": "Presiona el botón izquierdo y mantenlo presionado mientras conectas de nuevo el cable USB, hasta que aparezca la pantalla <1><0>{{repairProcessing}}</0></1>",
@@ -1784,14 +1784,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "Desarrollado por Elrond",
+        "moreInfo": "Más información",
+        "drawerTitle": "Integración con Elrond",
+        "title": "El token Elrond eGold (EGLD) ya está disponible en Ledger Live",
+        "description": "Ahora puedes proteger de forma segura tus tokens eGold (EGLD) y administrarlos a través de Ledger Live.",
+        "description2": "El token de Elrond eGold (EGLD) es nativo de la red Elrond y se utilizará para todo, desde transacciones, participaciones, contratos inteligentes, hasta gobernanza y recompensas de validadores.",
+        "description3": "Estamos trabajando activamente con el equipo de Elrond para agregar más funcionalidades, como la participación, soporte a ESDT (Elrond Standard Digital Token) nativo y más.",
+        "website": "La cadena de bloques de escala de Internet"
       }
     }
   },
@@ -2584,7 +2584,7 @@
         },
         "apiElrondEndpPoint": {
           "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
+          "description": "Usa elrond con proxy de ledger"
         },
         "tezosJS": {
           "title": "use Tezos JS impl",
