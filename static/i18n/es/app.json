@@ -243,7 +243,7 @@
       "from": {
         "title": "From",
         "max": "Máx.",
-        "accountPlaceholder": "Select source",
+        "accountPlaceholder": "Máx.",
         "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
       "to": {
@@ -256,7 +256,7 @@
       "providers": {
         "kyc": {
           "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
+          "complete": "Completa tu KYC",
           "update": "Refresh KYC",
           "rejected": "KYC rejected, start the verification again",
           "status": {
@@ -273,7 +273,7 @@
         "title": "Your previous swaps will appear here",
         "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       },
-      "export": "Export operations",
+      "export": "No tienes ninguna cuenta de {{name}}.",
       "exporting": "Exporting..."
     },
     "kyc": {
@@ -285,47 +285,47 @@
         "subtitle": "Please enter your information to swap with Wyre.",
         "cta": "Continue",
         "pending": {
-          "cta": "Continue",
+          "cta": "Continuar",
           "title": "Your information has been submitted for approval",
           "subtitle": "It usually takes a few minutes for the review to be completed.",
           "link": "Learn more about KYC",
-          "info": "Identity verification: Submitted"
+          "info": "Verificación de identidad: Enviada"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "Restablecer KYC",
+          "title": "Solicitud de KYC rechazada",
+          "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
+          "link": "Más información sobre KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "street1": "Dirección postal línea 1",
+          "street2": "Dirección postal línea 2",
+          "city": "Ciudad",
+          "state": "Estado",
+          "country": "País",
+          "postalCode": "Código postal",
+          "dateOfBirth": "Fecha de nacimiento",
+          "firstNamePlaceholder": "Ingresa tu nombre",
+          "lastNamePlaceholder": "Ingresa tu apellido",
+          "street1Placeholder": "Ejemplo: Calle Maple, 13",
+          "street2Placeholder": "Ejemplo: Calle Maple, 13",
+          "cityPlaceholder": "Ejemplo: San José",
+          "postalCodePlaceholder": "Ingresa tu código postal de 5 dígitos",
+          "dateOfBirthPlaceholder": "MM/DD/AAAA",
+          "firstNameError": "Ingresa tu nombre para continuar",
+          "lastNameError": "Ingresa tu apellido para continuar",
+          "street1Error": "Ingresa tu dirección",
+          "cityError": "Ingresa la ciudad en la que vives en EE. UU.",
+          "postalCodeError": "Ingresa un código postal de EE. UU. válido",
+          "dateOfBirthError": "Ingresa tu fecha de nacimiento",
+          "dateOfBirthValidationError": "Ingresa una fecha de nacimiento válida"
         }
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "Confirma tu Exchange",
       "completed": {
         "title": "Pending Operation",
         "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
