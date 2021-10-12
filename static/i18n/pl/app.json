@@ -1,127 +1,127 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "today": "Dzisiaj",
+    "tomorrow": "Jutro",
+    "yesterday": "Wczoraj",
+    "transactionDate": "Data tranzakcji"
   },
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "Wybierz konto"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "Tranzakcja wysłana!",
+          "text": "Kliknij tutaj po szczegóły operacji."
         }
       }
     },
     "app": {
       "informations": {
-        "title": "Information",
-        "website": "Website"
+        "title": "Informacja",
+        "website": "Strona internetowa"
       }
     },
     "catalog": {
-      "title": "Discover",
+      "title": "Odkrywaj",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
+        "soon": "nadchodzące",
+        "experimental": "eksperymentalne",
         "debug": "debug"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Odkrywaj nasz katalog Live Apps",
+        "description": "Pracujemy ciężko aby dodać dostęp do świata DeFi, NFTs i więcej, bezpiecznie, prosto z Ledger Live!"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Powiedz jaki następny serwis chciałbyś zobaczyć na Ledger Live poprzez hashtag",
+        "tweetText": "Następną Ledger App powinna być..."
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "Sonda",
+        "description": "Jaki serwis chcesz zobaczyć w Ledger Live?",
+        "button": "Zagłosujmy!"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
+        "title": "Dla Developerów",
+        "description": "Wszystkie informacje jakie musisz zintegrować w twojej applikacji na Ledger Live.",
         "button": "Go to portal"
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "Zewnętrzne Applikacje",
+      "description": "Zaraz zostaniesz przekierowany do zewnętrznej applikacji poza juryzdykcję Ledger.",
+      "legalAdvice": "Ta applikacja nie jest utrzymywana przez Ledger. Ledger nie jest odpowiedzialny za żadne straty środków ani za jakość serwisu takich applikacji.\n\nZawsze uważnie weryfikuj informacje wyświetlane na twoim urządzeniu.",
+      "checkbox": "Nie przypominaj mi ponownie.",
+      "CTA": "Dalej"
     }
   },
   "common": {
-    "never": "Never",
-    "apply": "Apply",
-    "done": "Done",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
-    "previous": "Previous",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
-    "selectAccount": "Select an account",
-    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
-    "selectCurrency": "Choose a crypto asset",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
-    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
-    "sortBy": "Sort by",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "back": "Back",
+    "never": "Nigdy",
+    "apply": "Zastosuj",
+    "done": "Gotowe",
+    "confirm": "Potwierdź",
+    "cancel": "Anuluj",
+    "getSupport": "Wezwij wsparcia",
+    "delete": "Usuń",
+    "launch": "Uruchom",
+    "continue": "Dalej",
+    "previous": "Wstecz",
+    "learnMore": "Dowiedz się więcej",
+    "help": "Pomocy",
+    "needHelp": "Potrzebna pomoc?",
+    "areYouSure": "Czy jesteś pewien?",
+    "selectAccount": "Wybierz konto",
+    "selectAccountNoOption": "Brak pasującego konta \"{{accountName}}\"",
+    "selectCurrency": "Wybierz zasób krypto",
+    "selectCurrencyNoOption": "Brak pasującego zasobu krypto \"{{currencyName}}\"",
+    "selectValidatorNoOption": "Brak poprawnego dopasowania \"{{accountName}}\"",
+    "selectNoResults": "Brak wyników wyszukiwania \"{{query}}\"",
+    "sortBy": "Sortuj według",
+    "save": "Zapisz",
+    "lock": "Zablokuj",
+    "showMore": "Pokaż więcej",
+    "back": "Wstecz",
     "reset": "Reset",
-    "retry": "Retry",
-    "range": "Range",
+    "retry": "Ponów",
+    "range": "Zakres",
     "stop": "Stop",
-    "updateNow": "Update now",
-    "close": "Close",
+    "updateNow": "Zaktualizuj teraz",
+    "close": "Zamknij",
     "eastern": "Eastern",
     "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
-    "verifyMyAddress": "Verify my address",
-    "copy": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
-    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
-    "experimentalFeature": "Experimental",
-    "information": "Information",
-    "search": "Search...",
-    "searchWithoutEllipsis": "Search",
-    "manage": "Manage",
+    "reverify": "Ponów weryfikację",
+    "verify": "Weryfikuj",
+    "verifyMyAddress": "Zweryfikuj mój adres",
+    "copy": "Skopiuj",
+    "copied": "Skopiowano",
+    "addressCopied": "Adres skopiowany",
+    "addressCopiedSuspicious": "Niedopasowanie pomiędzy adresem skopiowanym a wartością schowka.",
+    "experimentalFeature": "Eksperymentalny",
+    "information": "Informacja",
+    "search": "Wyszukiwanie...",
+    "searchWithoutEllipsis": "Szukaj",
+    "manage": "Zarządzaj",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "Witaj ponownie",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "Wpisz hasło aby kontynuować",
+      "inputPlaceholder": "Wpisz hasło",
+      "lostPassword": "Nie pamiętam hasła"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
-      "needsMigration": "Click to update account",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
-      "devTools": "Dev tools"
+      "syncing": "Synchronizacja...",
+      "upToDate": "Zsynchronizowano",
+      "outdated": "Wstrzymano",
+      "needsMigration": "Kliknij aby zaktualizować konto",
+      "error": "Błąd synchronizacji",
+      "refresh": "Odśwież",
+      "devTools": "Narzędzia deweloperskie"
     },
-    "exchange": "Exchange",
-    "info": "Info",
-    "connectDevice": "Connect your device"
+    "exchange": "Kantor",
+    "info": "Informacja",
+    "connectDevice": "Podłącz swoje urządzenie"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -130,32 +130,32 @@
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
-      "DELEGATE": "Delegated",
-      "REDELEGATE": "Redelegated",
-      "UNDELEGATE": "Undelegated",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Approved",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
-      "FEES": "Fees",
+      "IN": "Otrzymano",
+      "OUT": "Wysłano",
+      "CREATE": "Utwórz",
+      "REVEAL": "Odtajnij",
+      "DELEGATE": "Oddeleguj",
+      "REDELEGATE": "Ponownie oddeleguj",
+      "UNDELEGATE": "Anuluj oddelegowanie",
+      "SUPPLY": "Wpłać",
+      "REDEEM": "Wypłać",
+      "APPROVE": "Zatwierdź",
+      "VOTE": "Zagłosowano",
+      "FREEZE": "Wstrzymaj",
+      "UNFREEZE": "Wznów",
+      "REWARD": "Zarządaj wynagrodzenia",
+      "FEES": "Opłaty",
       "OPT_IN": "Opt in",
       "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
+      "CLOSE_ACCOUNT": "Zamknij konto",
+      "BOND": "Powiąż",
+      "UNBOND": "Usuń powiązanie",
+      "REWARD_PAYOUT": "Wynagrodzenie",
       "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations",
-      "SET_CONTROLLER": "Set controller"
+      "WITHDRAW_UNBONDED": "Wypłata",
+      "NOMINATE": "Nominacja",
+      "CHILL": "Usuń nominację",
+      "SET_CONTROLLER": "Ustaw kontroler"
     }
   },
   "byteSize": {
@@ -164,42 +164,42 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "minute": "Minute",
-    "minute_plural": "Minutes",
-    "hour": "Hour",
-    "hour_plural": "Hours",
+    "minute": "Minuta",
+    "minute_plural": "Minuty",
+    "hour": "Godzina",
+    "hour_plural": "Godziny",
     "range": {
       "day": "1D",
-      "week": "1W",
+      "week": "1T",
       "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "year": "1R",
+      "all": "Wszystko"
     }
   },
   "fees": {
-    "advanced": "Advanced",
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "advanced": "Zaawansowane",
+    "custom": "Spersonalizowane",
+    "fast": "Szybko",
+    "high": "Wysoko",
+    "low": "Nisko",
+    "slow": "Wolno",
+    "standard": "Standardowo",
+    "medium": "Średnio",
+    "feesAmount": "Wysokość opłat"
   },
   "sidebar": {
     "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
-    "manager": "Manager",
-    "exchange": "Buy / Sell",
-    "swap": "Swap",
-    "lend": "Lend",
-    "catalog": "Discover"
+    "stars": "Wyróżnione konta",
+    "accounts": "Konta",
+    "manager": "Zarządzaj",
+    "exchange": "Kup / Sprzedaj",
+    "swap": "Wymień",
+    "lend": "Udziel pożyczki",
+    "catalog": "Odkrywaj"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
-    "tooltip": "Star account"
+    "tooltip": "Konta wyróżnione"
   },
   "bridge": {
     "modalTitle": "Open Device Bridge",
@@ -3902,22 +3902,22 @@
       "title": "Please enable contract data in the Ethereum app settings"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "Niepoprawny tag odbiorcy XRP"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "Niewystarczające środki na oddelegowanie"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "Niewystarczające środki na oddelegowanie"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "Niewystarczające środki na końcie waluty bazowej"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "Minimalny wymagany stan konta powyżej {{minimumAmount}}"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "Proszę otworzyć applikację {{expected}}"
     },
     "FeeTooHigh": {
       "title": "Network fees are above 10% of the amount"
@@ -3932,10 +3932,10 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Kwota musi przekraczać {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "Kwota musi być poniżej {{maxAmountFromFormatted}}"
     },
     "PolkadotElectionClosed": {
       "title": "Validators election must be closed"
