@@ -15,6 +15,10 @@ type Props = {
   loading?: boolean,
 };
 
+type InnerButtonProps = {
+  children: React,
+};
+
 export default function Paginator(props: Props) {
   const { totalSize, currentPage, small, limit, onChange, loading = false } = props;
 
@@ -44,7 +48,7 @@ export default function Paginator(props: Props) {
     slicedAmount = currentPage + 2;
   }
 
-  const InnerButton = props => (
+  const InnerButton = (props: InnerButtonProps) => (
     <Button {...props} disabled={loading}>
       {props.children}
     </Button>

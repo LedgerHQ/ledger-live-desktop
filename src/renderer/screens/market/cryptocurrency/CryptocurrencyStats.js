@@ -1,13 +1,15 @@
 // @flow
 
 import React from "react";
-import Box, { Card } from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
-import styled from "styled-components";
-import type { MarketCurrency } from "~/renderer/reducers/market";
-import FormattedVal from "~/renderer/components/FormattedVal";
 import { useSelector } from "react-redux";
 import type { Children } from "react";
+import styled from "styled-components";
+
+import Box, { Card } from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import FormattedDate from "~/renderer/components/FormattedDate";
+import type { MarketCurrency } from "~/renderer/reducers/market";
 
 const CardStyled = styled(Card)`
   width: 100%;
@@ -62,21 +64,29 @@ function PriceStats({ currency }: { currency: MarketCurrency }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="Trading volume (24h)"></InfoSection>
+        <InfoSection title="Trading volume">{`${currency.total_volume} ${counterCurrency}`}</InfoSection>
         <Divider />
-        <InfoSection title="24h Low / 24h High">{`${currency.low_24h}/${currency.high_24h}`}</InfoSection>
+        <InfoSection title="24h Low / 24h High">{`${currency.low_24h} ${counterCurrency}/${currency.high_24h} ${counterCurrency}`}</InfoSection>
         <Divider />
         <InfoSection title="7d Low / 7d High">
           <Box horizontal>
             {`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}
             <div>/</div>
-            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(2)} ${counterCurrency}`}
+            {`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(
+              2,
+            )} ${counterCurrency}`}
           </Box>
         </InfoSection>
         <Divider />
-        <InfoSection title="All time high">{currency.ath}</InfoSection>
+        <InfoSection title="All time high">
+          {`${currency.ath} ${counterCurrency}`}
+          <FormattedDate date={currency.ath_date} format="LL" />
+        </InfoSection>
         <Divider />
-        <InfoSection title="All time low">{currency.atl}</InfoSection>
+        <InfoSection title="All time low">
+          {`${currency.atl} ${counterCurrency}`}
+          <FormattedDate date={currency.atl_date} format="LL" />
+        </InfoSection>
       </Box>
     </CardStyled>
   );
@@ -92,8 +102,6 @@ function MarketCap({ currency }: { currency: MarketCurrency }) {
         <InfoSection title="Market cap">{currency.market_cap}</InfoSection>
         <Divider />
         <InfoSection title="Market cap rank">{currency.market_cap_rank}</InfoSection>
-        <Divider />
-        <InfoSection title="Market cap dominance"></InfoSection>
       </Box>
     </CardStyled>
   );

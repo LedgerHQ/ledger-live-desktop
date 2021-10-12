@@ -1,17 +1,18 @@
 // @flow
 import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router";
 import styled from "styled-components";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Variation from "~/renderer/components/Variation";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Account, Currency, TokenAccount } from "@ledgerhq/live-common/lib/types";
-import { withRouter } from "react-router";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const Cell = styled(Box)`

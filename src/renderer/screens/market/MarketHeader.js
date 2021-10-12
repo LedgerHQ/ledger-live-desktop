@@ -39,6 +39,14 @@ const MarketHeader = () => {
       <RightBox horizontal flow={2} alignItems="center" justifyContent="flex-end">
         <MarketCounterValueSelect />
         <MarketRangeSelect />
+        <ItemContainer
+          id="market-filter-button"
+          isInteractive
+          onClick={onFilterClick}
+          style={{ cursor: "pointer" }}
+        >
+          <IconFilters size={16} />
+        </ItemContainer>
       </RightBox>
     </Box>
   );

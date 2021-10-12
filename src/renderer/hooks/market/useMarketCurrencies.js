@@ -1,10 +1,11 @@
 // @flow
-import { Currency } from "@ledgerhq/live-common/lib/types";
-import type { MarketFilters } from "~/renderer/reducers/market";
 import { useEffect } from "react";
-import { getKey } from "~/renderer/storage";
 import { useDispatch } from "react-redux";
+import { Currency } from "@ledgerhq/live-common/lib/types";
+
+import { getKey } from "~/renderer/storage";
 import { setFavoriteCryptocurrencies } from "~/renderer/actions/market";
+import type { MarketFilters } from "~/renderer/reducers/market";
 import type { RangeData } from "~/renderer/hooks/market/useRange";
 
 type MarketCurrenciesProps = {
@@ -14,8 +15,6 @@ type MarketCurrenciesProps = {
 };
 
 export function useMarketCurrencies({
-  counterValueCurrency,
-  rangeData,
   favorites,
 }: MarketCurrenciesProps) {
   const dispatch = useDispatch();

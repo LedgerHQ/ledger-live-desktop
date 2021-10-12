@@ -1,13 +1,12 @@
 // @flow
 
 import React from "react";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import styled from "styled-components";
+
 import type { CurrencyType } from "~/renderer/reducers/market";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import styled from "styled-components";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
-import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -39,7 +38,7 @@ function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
       <Box horizontal>
         <Box horizontal pr={3}>
           <CryptoCurrencyIconWrapper>
-            <img src={currency.image} />
+            <img src={currency.image} alt={"Currency logo"} />
           </CryptoCurrencyIconWrapper>
         </Box>
         <Box px={16}>

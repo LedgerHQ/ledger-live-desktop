@@ -1,20 +1,18 @@
 // @flow
 
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { compose } from "redux";
+import { useRouteMatch } from "react-router";
 import { connect, useSelector } from "react-redux";
+import styled from "styled-components";
 import { withTranslation } from "react-i18next";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
+
 import Box from "~/renderer/components/Box";
-import useTheme from "~/renderer/hooks/useTheme";
 import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeader";
 import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeaderActions";
-import styled from "styled-components";
 import CryptocurrencySummary from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummary";
-import { useRouteMatch } from "react-router";
 import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
-import { MarketClient } from "~/api/market";
-import { useMarketCurrency, useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrency";
+import { useMarketCurrency } from "~/renderer/hooks/market/useMarketCurrency";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -29,10 +27,6 @@ const CryptoCurrencyPage = () => {
 
   const { loading, currency } = useMarketCurrency({ id, counterCurrency, range });
 
-  // const currency = useMemo(() => {
-  //
-  // }, [id, counterCurrency, range]);
-
   if (loading) {
     return null;
   }
@@ -45,11 +39,9 @@ const CryptoCurrencyPage = () => {
       </Box>
       <Divider />
       <Box mt={3} mb={7}>
-        {!loading && <CryptocurrencySummary
-          currency={currency}
-          range={range}
-          counterValue={counterValue}
-        />}
+        {!loading && (
+          <CryptocurrencySummary currency={currency} range={range} counterValue={counterValue} />
+        )}
       </Box>
       <CryptocurrencyStats currency={currency} />
     </Box>

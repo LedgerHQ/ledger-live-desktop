@@ -2,7 +2,7 @@
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
-import { supportedCountervalues } from "~/renderer/reducers/settings";
+
 import { setKey } from "~/renderer/storage";
 
 export type MarketCurrency = {
