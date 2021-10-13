@@ -53,7 +53,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         .startOf("hour")
         .subtract(i, "hours")
         .toDate();
-      time.unshift({ date: formattedTime, value: prices[i] * 100 });
+      time.unshift({ date: formattedTime, value: (prices[i] * 100).toFixed(2) });
     }
     return time;
   };
@@ -65,7 +65,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
       const formattedTime = moment()
         .subtract(i, "days")
         .toDate();
-      time.push({ date: formattedTime, value: prices[i] * 100 });
+      time.push({ date: formattedTime, value: (prices[i] * 100).toFixed(2) });
     }
     return time;
   };

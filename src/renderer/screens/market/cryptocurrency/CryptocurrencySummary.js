@@ -61,7 +61,6 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
       <Box px={6} data-e2e="dashboard_graph">
         <CryptocurrencySummaryHeader currency={currency} counterValue={counterValue} />
       </Box>
-
       <Box
         px={5}
         ff="Inter"

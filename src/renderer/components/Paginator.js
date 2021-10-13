@@ -23,11 +23,18 @@ export default function Paginator(props: Props) {
   const { totalSize, currentPage, small, limit, onChange, loading = false } = props;
 
   const numberOfPages = Math.ceil(totalSize / limit);
-  const pages = [];
+  let pages = [];
   const isPrevDisabled: boolean = currentPage === 1;
   const isNextDisabled: boolean = currentPage === numberOfPages;
-  for (let i = 1; i < numberOfPages + 1; i++) {
-    pages.push(i);
+
+  if (totalSize === 0) {
+    pages = [];
+  } else if (totalSize <= limit) {
+    pages = [1];
+  } else {
+    for (let i = 1; i < numberOfPages + 1; i++) {
+      pages.push(i);
+    }
   }
 
   let slicedFrom;

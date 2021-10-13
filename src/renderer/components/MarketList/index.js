@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
@@ -73,7 +73,7 @@ type CurrencyRowProps = {
   style: Map<string, string>,
 };
 
-function MarketList(props) {
+function MarketList() {
   const {
     range,
     searchValue,
@@ -108,7 +108,7 @@ function MarketList(props) {
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
       loading={loading}
-      currency={currencies[index]}
+      currency={{ ...currencies[index] }}
       index={index + 1}
       counterCurrency={counterCurrency}
       style={{ ...style, pointerEvents: "auto" }}
@@ -216,8 +216,8 @@ function MarketList(props) {
           width="100%"
           itemCount={currenciesLength}
           itemSize={ListItemHeight}
-          key={range}
           style={{ overflowX: "hidden" }}
+          itemData={currencies}
         >
           {CurrencyRow}
         </ListStyled>
@@ -238,4 +238,4 @@ function MarketList(props) {
   );
 }
 
-export default connect(null, { getMarketCryptoCurrencies })(MarketList);
+export default connect(state => state.market, { getMarketCryptoCurrencies })(MarketList);

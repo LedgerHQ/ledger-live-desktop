@@ -14,6 +14,7 @@ import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyS
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import { useSelector } from "react-redux";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -87,6 +88,8 @@ type Props = {
 function MarketRowItem(props: Props) {
   const history = useHistory();
   const { style, currency, loading, counterCurrency } = props;
+
+  const { currencies } = useSelector(state => state.market)
 
   const onCurrencyClick = useCallback(
     (account: Account | TokenAccount, parentAccount: ?Account) => {
@@ -172,7 +175,7 @@ function MarketRowItem(props: Props) {
                     <Box alignItems="left" pr={16}>
                       {currency.name}
                       <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                        {currency.symbol.toUpperCase()}
+                        {/*{currency.symbol.toUpperCase()}*/}
                       </CurrencyTicker>
                     </Box>
                   </>

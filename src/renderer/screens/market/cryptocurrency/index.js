@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useState } from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
 import { connect, useSelector } from "react-redux";
@@ -23,9 +23,13 @@ const CryptoCurrencyPage = () => {
     params: { id },
   } = useRouteMatch();
 
+  const { favorites } = useSelector(state => state.market)
+
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 
   const { loading, currency } = useMarketCurrency({ id, counterCurrency, range });
+
+  currency.isStarred = !!favorites.find(item => item.id === id);
 
   if (loading) {
     return null;

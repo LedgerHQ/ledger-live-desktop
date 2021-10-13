@@ -49,7 +49,8 @@ export default function CryptocurrencyStar({
             favorites,
           }),
         );
-      } else {
+      }
+      if (onClick) {
         onClick(!isStarred);
       }
     },
@@ -81,6 +82,7 @@ const starBust = keyframes`
 `;
 
 const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
+  cursor: pointer;
   height: 34px;
   width: 34px;
   border: 1px solid
@@ -96,7 +98,9 @@ const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
       p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade100};
   }
 `;
-const FloatingWrapper: ThemedComponent<{}> = styled.div``;
+const FloatingWrapper: ThemedComponent<{}> = styled.div`
+  cursor: pointer;
+`;
 
 // NB negative margin to allow the burst to overflow
 const StarWrapper: ThemedComponent<{}> = styled.div`

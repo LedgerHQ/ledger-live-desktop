@@ -152,6 +152,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
         ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
       }
     }
+
     limit = 9;
 
     const res = await marketClient.listPaginated({
@@ -169,7 +170,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
       supportedCurrenciesByLedger,
     );
 
-    if (searchValue) {
+    if (ids.length) {
       limit = res.length;
       coinsCount = ids.length;
     } else {
@@ -196,16 +197,18 @@ export function mergeFavoriteAndSupportedCurrencies(
 ) {
   cryptocurrencies.forEach(currency => {
     currency.isStarred = false;
-    favorites.forEach(item => {
-      if (item.id === currency.id) {
-        currency.isStarred = true;
-      }
-    });
-    supportedCurrencies.forEach(supportedCurrency => {
-      if (currency.id === supportedCurrency.id) {
-        currency.supportedCurrency = supportedCurrency;
-      }
-    });
+    favorites &&
+      favorites.forEach(item => {
+        if (item.id === currency.id) {
+          currency.isStarred = true;
+        }
+      });
+    supportedCurrencies &&
+      supportedCurrencies.forEach(supportedCurrency => {
+        if (currency.id === supportedCurrency.id) {
+          currency.supportedCurrency = supportedCurrency;
+        }
+      });
   });
   return cryptocurrencies;
 }
