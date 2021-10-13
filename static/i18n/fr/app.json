@@ -2583,8 +2583,8 @@
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "title": "Utiliser des implémentations JS expérimentales",
+          "description": "Utilisez des implémentations JS expérimentales pour certaines cryptos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -3422,8 +3422,8 @@
       "description": "Merci d'entrer un nom de compte."
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "Veuillez réessayer",
+      "description": "Le compte n'est plus à jour, synchronisez-le."
     },
     "AccountNotSupported": {
       "title": "Compte non pris en charge",
