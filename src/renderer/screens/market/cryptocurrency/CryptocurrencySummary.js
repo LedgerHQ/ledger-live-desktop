@@ -73,7 +73,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
       >
         <Chart
           magnitude={currency.magnitude}
-          color={chartColor || "#fff"}
+          color={chartColor}
           data={chartData}
           height={250}
           tickXScale={rangeData.scale}
