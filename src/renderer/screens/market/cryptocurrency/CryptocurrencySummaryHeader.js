@@ -54,7 +54,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             withIcon
           />
           <Text ff="Inter|Medium" fontSize={16} pl={2}>
-            {`(${currency.difference})`}
+            {`(${currency.difference.toFixed(2)})`}
           </Text>
         </Box>
         <Box>

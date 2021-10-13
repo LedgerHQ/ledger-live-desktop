@@ -70,8 +70,8 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
         style={{ overflow: "visible" }}
       >
         <Chart
-          magnitude={currency.supportedCurrency.units[0].magnitude}
-          color={chartColor}
+          magnitude={currency.magnitude}
+          color={chartColor || "#fff"}
           data={chartData}
           height={250}
           tickXScale={rangeData.scale}

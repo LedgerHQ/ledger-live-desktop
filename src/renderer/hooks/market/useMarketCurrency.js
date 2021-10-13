@@ -18,6 +18,18 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
   const [currency, setCurrency] = useState<MarketCurrencyByIdRequestParams>({});
   const [loading, setLoading] = useState<boolean>(true);
 
+  function magnitude(number) {
+    // Convert to String
+    const numberAsString = number.toString();
+    // String Contains Decimal
+    if (numberAsString.includes('.')) {
+      return numberAsString.split('.')[1].length;
+    }
+    // String Does Not Contain Decimal
+    return 0;
+  };
+
+
   useEffect(() => {
     const marketClient = new MarketClient();
     marketClient
@@ -33,11 +45,11 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
             currency.supportedCurrency = supportedCurrency;
           }
         });
+        currency.magnitude = magnitude(currency.current_price);
         setCurrency(currency);
         setLoading(false);
       });
   }, [id, counterCurrency, range]);
-  // currency.difference = data[data.length - 1] - data[0] || 0;
   return { loading, currency };
 };
 
@@ -53,7 +65,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         .startOf("hour")
         .subtract(i, "hours")
         .toDate();
-      time.unshift({ date: formattedTime, value: (prices[i] * 100).toFixed(2) });
+      time.unshift({ date: formattedTime, value: prices[i].toFixed(2) * 100 });
     }
     return time;
   };
@@ -65,7 +77,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
       const formattedTime = moment()
         .subtract(i, "days")
         .toDate();
-      time.push({ date: formattedTime, value: (prices[i] * 100).toFixed(2) });
+      time.push({ date: formattedTime, value: prices[i].toFixed(2) * 100 });
     }
     return time;
   };
