@@ -23,21 +23,14 @@ export default function Paginator(props: Props) {
   const { totalSize, currentPage, small, limit, onChange, loading = false } = props;
 
   const numberOfPages = Math.ceil(totalSize / limit);
-  let pages = [];
+  const pages = [];
   const isPrevDisabled: boolean = currentPage === 1;
   const isNextDisabled: boolean = currentPage === numberOfPages;
 
-  switch (true) {
-    case totalSize === 0:
-      pages = [];
-      break;
-    case totalSize <= limit:
-      pages = [1];
-      break;
-    default:
-      for (let i = 1; i < numberOfPages + 1; i++) {
-        pages.push(i);
-      }
+  if (totalSize !== 0 && totalSize > limit) {
+    for (let i = 1; i < numberOfPages + 1; i++) {
+      pages.push(i);
+    }
   }
 
   let slicedFrom;
@@ -63,6 +56,10 @@ export default function Paginator(props: Props) {
       {props.children}
     </Button>
   );
+
+  if (!pages.length) {
+    return null;
+  }
 
   return (
     <Box horizontal>
