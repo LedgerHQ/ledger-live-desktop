@@ -14,7 +14,6 @@ import { useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrenc
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
-import palettes from "~/renderer/styles/palettes";
 
 type Props = {
   currency: CurrencyType,

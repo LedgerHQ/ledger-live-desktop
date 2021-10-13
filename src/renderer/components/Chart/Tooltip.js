@@ -18,7 +18,7 @@ const TooltipContainer: ThemedComponent<{ opacity: number }> = styled.div.attrs(
   background: ${p => p.theme.background.paper};
   border: 1px solid ${p => p.theme.text.shade10};
   border-radius: 4px;
-  width: 150px;
+  width: 180px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
   text-align: center;
   padding: 12px 10px;
