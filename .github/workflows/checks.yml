@@ -20,6 +20,9 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
+      - name: Set the correct Node version using nvm
+        shell: bash -l {0} 
+        run: nvm install
       - name: get yarn cache
         if: always() && job.status != 'cancelled'
         id: yarn-cache
