@@ -45,11 +45,37 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: <Trans i18nKey="settings.experimental.features.tezosJS.title" />,
-    description: <Trans i18nKey="settings.experimental.features.tezosJS.description" />,
-    valueOn: "tezos",
+    title: <Trans i18nKey="settings.experimental.features.experimentalCurrencies.title" />,
+    description: (
+      <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
+    ),
+    valueOn: "bitcoin,bitcoin_testnet,tezos",
     valueOff: "",
   },
+  ...(deltaExperimentalExplorers.length
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_EXPLORERS",
+          title: <Trans i18nKey="settings.experimental.features.experimentalExplorers.title" />,
+          description: (
+            <Trans i18nKey="settings.experimental.features.experimentalExplorers.description">
+              {deltaExperimentalExplorers
+                .map(
+                  ([currency, config]) =>
+                    (currency.isTestnetFor ? "t" : "") +
+                    currency.ticker +
+                    " " +
+                    config.stable.version +
+                    "->" +
+                    (config.experimental?.version || "?"),
+                )
+                .join(", ")}
+            </Trans>
+          ),
+        },
+      ]
+    : []),
   {
     type: "toggle",
     name: "API_TRONGRID_PROXY",
@@ -87,30 +113,6 @@ export const experimentalFeatures: Feature[] = [
     valueOn: "https://countervalues.live.ledger.com",
     valueOff: "https://countervalues-experimental.live.ledger.com",
   },
-  ...(deltaExperimentalExplorers.length
-    ? [
-        {
-          type: "toggle",
-          name: "EXPERIMENTAL_EXPLORERS",
-          title: <Trans i18nKey="settings.experimental.features.experimentalExplorers.title" />,
-          description: (
-            <Trans i18nKey="settings.experimental.features.experimentalExplorers.description">
-              {deltaExperimentalExplorers
-                .map(
-                  ([currency, config]) =>
-                    (currency.isTestnetFor ? "t" : "") +
-                    currency.ticker +
-                    " " +
-                    config.stable.version +
-                    "->" +
-                    (config.experimental?.version || "?"),
-                )
-                .join(", ")}
-            </Trans>
-          ),
-        },
-      ]
-    : []),
   {
     type: "integer",
     name: "KEYCHAIN_OBSERVABLE_RANGE",
