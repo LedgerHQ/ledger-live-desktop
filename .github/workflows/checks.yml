@@ -20,9 +20,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
-      - name: Set the correct Node version using nvm
-        shell: bash -l -eo pipefail {0}
-        run: nvm install
+      - uses: actions/setup-node@main
+        if: always() && job.status != 'cancelled'
+        with:
+          node-version: 14.x
+      - name: install yarn globally
+        run: npm install yarn --global
       - name: get yarn cache
         if: always() && job.status != 'cancelled'
         id: yarn-cache
