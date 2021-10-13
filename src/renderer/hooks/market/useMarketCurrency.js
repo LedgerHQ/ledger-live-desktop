@@ -55,34 +55,15 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
   const [chartData, setChartData] = useState<Array>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const buildHourlyData = prices => {
-    const chartData = [];
-    const hoursPerDay = 24;
-    for (let i = 0; i < hoursPerDay + 1; i++) {
-      const price = prices[i];
-      const priceMagnitude = magnitude(price);
-      const formattedTime = moment()
-        .startOf("hour")
-        .subtract(i, "hours")
-        .toDate();
-      chartData.unshift({ date: formattedTime, value: price.toFixed(priceMagnitude) });
-    }
-    return chartData;
-  };
+  const formattedHourTime = index =>
+    moment()
+      .startOf("hour")
+      .subtract(index, "hours");
 
-  const buildDailyData = prices => {
-    const chartData = [];
-    const days = prices.length;
-    for (let i = 0; i < days + 1; i++) {
-      const price = prices[i];
-      const priceMagnitude = magnitude(price);
-      const formattedTime = moment()
-        .subtract(i, "days")
-        .toDate();
-      chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
-    }
-    return chartData;
-  };
+  const formattedDayTime = index =>
+    moment()
+      .subtract(index, "days")
+      .toDate();
 
   const {
     rangeData: { days, interval },
@@ -90,14 +71,17 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
   useEffect(() => {
     const buildChartData = ({ interval, prices }) => {
       prices = prices.reverse();
-      switch (interval) {
-        case "hourly":
-          return buildHourlyData(prices);
-        case "daily":
-          return buildDailyData(prices);
-        default:
-          return [];
+
+      if (!prices.length || !interval) return [];
+
+      const chartData = [];
+      for (let i = 0; i <= prices.length - 1; i++) {
+        const price = prices[i];
+        const priceMagnitude = magnitude(price);
+        const formattedTime = interval === "hourly" ? formattedHourTime(i) : formattedDayTime(i);
+        chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
       }
+      return chartData;
     };
     const marketClient = new MarketClient();
     marketClient
