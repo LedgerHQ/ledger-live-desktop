@@ -2583,8 +2583,8 @@
           "description": "Использовать trongrid напрямую без прокси Ledger"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "title": "Экспериментальные реализации JS",
+          "description": "Используйте несколько экспериментальных JS-реализаций для валют"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3422,8 +3422,8 @@
       "description": "Укажите название счёта"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "Попробуйте ещё раз",
+      "description": "Счёт устарел, его необходимо синхронизировать"
     },
     "AccountNotSupported": {
       "title": "Счёт не поддерживается.",
