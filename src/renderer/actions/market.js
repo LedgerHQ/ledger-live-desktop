@@ -5,6 +5,7 @@ import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { counterCurrencyNameTable } from "~/renderer/constants/market";
 
+const DEFAULT_PAGE_LIMIT = 9;
 const marketClient = new MarketClient();
 
 export const setMarketParams = (payload: MarketState) => ({
@@ -153,7 +154,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
       }
     }
 
-    limit = 9;
+    limit = DEFAULT_PAGE_LIMIT;
 
     const res = await marketClient.listPaginated({
       counterCurrency,
@@ -174,7 +175,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
       limit = res.length;
       coinsCount = ids.length;
     } else {
-      limit = 9;
+      limit = DEFAULT_PAGE_LIMIT;
       coinsCount = coins.length;
     }
 

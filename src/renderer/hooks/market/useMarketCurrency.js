@@ -1,5 +1,4 @@
 // @flow
-
 import { useEffect, useState } from "react";
 import moment from "moment";
 
@@ -14,21 +13,20 @@ type Prop = {
   range: string,
 };
 
+function magnitude(number) {
+  // Convert to String
+  const numberAsString = number.toString();
+  // String Contains Decimal
+  if (numberAsString.includes(".")) {
+    return numberAsString.split(".")[1].length;
+  }
+  // String Does Not Contain Decimal
+  return 0;
+}
+
 export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
   const [currency, setCurrency] = useState<MarketCurrencyByIdRequestParams>({});
   const [loading, setLoading] = useState<boolean>(true);
-
-  function magnitude(number) {
-    // Convert to String
-    const numberAsString = number.toString();
-    // String Contains Decimal
-    if (numberAsString.includes('.')) {
-      return numberAsString.split('.')[1].length;
-    }
-    // String Does Not Contain Decimal
-    return 0;
-  };
-
 
   useEffect(() => {
     const marketClient = new MarketClient();
@@ -58,28 +56,32 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
   const [loading, setLoading] = useState<boolean>(true);
 
   const buildHourlyData = prices => {
-    const time = [];
+    const chartData = [];
     const hoursPerDay = 24;
     for (let i = 0; i < hoursPerDay + 1; i++) {
+      const price = prices[i];
+      const priceMagnitude = magnitude(price);
       const formattedTime = moment()
         .startOf("hour")
         .subtract(i, "hours")
         .toDate();
-      time.unshift({ date: formattedTime, value: prices[i].toFixed(2) * 100 });
+      chartData.unshift({ date: formattedTime, value: price.toFixed(priceMagnitude) });
     }
-    return time;
+    return chartData;
   };
 
   const buildDailyData = prices => {
-    const time = [];
+    const chartData = [];
     const days = prices.length;
     for (let i = 0; i < days + 1; i++) {
+      const price = prices[i];
+      const priceMagnitude = magnitude(price);
       const formattedTime = moment()
         .subtract(i, "days")
         .toDate();
-      time.push({ date: formattedTime, value: prices[i].toFixed(2) * 100 });
+      chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
     }
-    return time;
+    return chartData;
   };
 
   const {
@@ -106,8 +108,8 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         interval,
       })
       .then(prices => {
-        prices = buildChartData({ interval, prices });
-        setChartData(prices);
+        const chartData = buildChartData({ interval, prices });
+        setChartData(chartData);
         setLoading(false);
       });
   }, [id, counterCurrency, days, interval]);

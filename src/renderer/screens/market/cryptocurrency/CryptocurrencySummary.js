@@ -54,7 +54,8 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
     return null;
   }
 
-  currency.difference = chartData[chartData.length - 1].value - chartData[0].value || 0;
+  currency.difference =
+    chartData.length > 1 ? chartData[chartData.length - 1].value - chartData[0].value : 0;
 
   return (
     <Card p={0} py={5}>
@@ -86,7 +87,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
 function Tooltip({ data, counterCurrency }: { data: BalanceHistoryData, counterCurrency: string }) {
   return (
     <>
-      {`${data.value / 100} ${counterCurrency}`}
+      {`${data.value} ${counterCurrency}`}
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
         <FormattedDate date={data.date} format="LL" />
       </Box>

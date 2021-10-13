@@ -1,5 +1,4 @@
 // @flow
-
 import React from "react";
 import { useSelector } from "react-redux";
 import type { Children } from "react";

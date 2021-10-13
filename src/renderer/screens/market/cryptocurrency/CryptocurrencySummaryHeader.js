@@ -49,12 +49,12 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             isPercent
             animateTicker
             isNegative
-            val={Math.round(currency.price_change_percentage_in_currency)}
+            val={currency.price_change_percentage_in_currency}
             inline
             withIcon
           />
           <Text ff="Inter|Medium" fontSize={16} pl={2}>
-            {`(${currency.difference.toFixed(2)})`}
+            {`(${currency.difference.toFixed(currency.magnitude)} ${counterCurrency})`}
           </Text>
         </Box>
         <Box>

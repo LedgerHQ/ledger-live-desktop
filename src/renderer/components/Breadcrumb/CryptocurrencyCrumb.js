@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { Separator, TextLink } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useLocation, useRouteMatch } from "react-router";

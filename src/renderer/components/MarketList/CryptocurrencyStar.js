@@ -2,20 +2,14 @@
 import React, { useCallback } from "react";
 import styled, { keyframes } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleStarAction } from "~/renderer/actions/accounts";
-import { isStarredAccountSelector } from "~/renderer/reducers/accounts";
 import { rgba } from "~/renderer/styles/helpers";
 import starAnim from "~/renderer/images/starAnim.png";
 import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
-import { getKey, setKey } from "~/renderer/storage";
 import type { CurrencyType } from "~/renderer/reducers/market";
 import { updateFavoriteCryptocurrencies } from "~/renderer/actions/market";
-
-const disableAnimation = process.env.SPECTRON_RUN;
 
 type Props = {
   yellow?: boolean,

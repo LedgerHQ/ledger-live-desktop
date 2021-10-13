@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback } from "react";
 import { useHistory } from "react-router";
 
@@ -36,24 +35,25 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     });
   }, [currency, history]);
 
-  if (!currency.supportedCurrency) {
-    return null;
-  }
   return (
     <Box horizontal alignItems="center">
       <Box mr={12}>
         <MarketCounterValueSelect />
       </Box>
-      <Box mr={12}>
-        <Button primary onClick={onBuy}>
-          Buy
-        </Button>
-      </Box>
-      <Box mr={12}>
-        <Button primary onClick={onSwap}>
-          Swap
-        </Button>
-      </Box>
+      {currency.supportedCurrency && (
+        <>
+          <Box mr={12}>
+            <Button primary onClick={onBuy}>
+              Buy
+            </Button>
+          </Box>
+          <Box mr={12}>
+            <Button primary onClick={onSwap}>
+              Swap
+            </Button>
+          </Box>
+        </>
+      )}
     </Box>
   );
 }

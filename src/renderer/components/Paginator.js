@@ -27,14 +27,17 @@ export default function Paginator(props: Props) {
   const isPrevDisabled: boolean = currentPage === 1;
   const isNextDisabled: boolean = currentPage === numberOfPages;
 
-  if (totalSize === 0) {
-    pages = [];
-  } else if (totalSize <= limit) {
-    pages = [1];
-  } else {
-    for (let i = 1; i < numberOfPages + 1; i++) {
-      pages.push(i);
-    }
+  switch (true) {
+    case totalSize === 0:
+      pages = [];
+      break;
+    case totalSize <= limit:
+      pages = [1];
+      break;
+    default:
+      for (let i = 1; i < numberOfPages + 1; i++) {
+        pages.push(i);
+      }
   }
 
   let slicedFrom;
