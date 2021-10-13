@@ -103,6 +103,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
         ids,
         coins,
         filters,
+        currencies,
       },
     } = getState();
 
@@ -143,9 +144,10 @@ export const getMarketCryptoCurrencies = (filterParams: {
         ids = filteredCoins.map(coin => coin.id);
       }
     }
-
+    let showFavorites = false;
     if (orderBy === "isStarred") {
       if (order === "desc") {
+        showFavorites = true;
         favoriteCryptocurrencies.forEach(fav => {
           ids.unshift(fav.id);
         });
@@ -156,22 +158,29 @@ export const getMarketCryptoCurrencies = (filterParams: {
 
     limit = DEFAULT_PAGE_LIMIT;
 
-    const res = await marketClient.listPaginated({
-      counterCurrency,
-      range,
-      limit,
-      page,
-      order,
-      orderBy,
-      ids,
-    });
-    const currenciesWithFavoritesAndSupported = mergeFavoriteAndSupportedCurrencies(
+    let res;
+    if ((showFavorites || searchValue) && !ids.length) {
+      res = [];
+    } else {
+      res = await marketClient.listPaginated({
+        counterCurrency,
+        range,
+        limit,
+        page,
+        order,
+        orderBy,
+        ids,
+      });
+    }
+    currencies = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
       supportedCurrenciesByLedger,
     );
 
-    if (ids.length) {
+    if (!currencies.length) {
+      coinsCount = 0;
+    } else if (ids.length) {
       limit = res.length;
       coinsCount = ids.length;
     } else {
@@ -181,7 +190,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
 
     dispatch(
       setMarketParams({
-        currencies: currenciesWithFavoritesAndSupported,
+        currencies: currencies,
         loading: false,
         favorites: favoriteCryptocurrencies,
         limit,

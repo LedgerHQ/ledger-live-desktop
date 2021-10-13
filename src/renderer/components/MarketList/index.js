@@ -85,15 +85,16 @@ function MarketList() {
     page,
     currencies,
     loading,
+    coinsList,
   } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!currencies[0]) {
+    if (!coinsList[0]) {
       dispatch(getMarketCryptoCurrencies());
     }
-  }, [currencies, dispatch]);
+  }, [coinsList, dispatch]);
 
   const onSort = key => {
     if (!loading) {
@@ -108,7 +109,7 @@ function MarketList() {
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
     <MarketRowItem
       loading={loading}
-      currency={{ ...currencies[index] }}
+      currency={currencies[index]}
       index={index + 1}
       counterCurrency={counterCurrency}
       style={{ ...style, pointerEvents: "auto" }}
@@ -117,8 +118,8 @@ function MarketList() {
     />
   );
 
-  const currenciesLength = loading ? limit : currencies.length;
-
+  const currenciesLength = currencies.length;
+  console.log(currenciesLength);
   return (
     <Box flow={2}>
       <Row expanded={true}>
@@ -210,14 +211,23 @@ function MarketList() {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      {currenciesLength ? (
+      {loading ? (
+        <ListStyled
+          height={ListItemHeight * 9}
+          width="100%"
+          itemCount={9}
+          itemSize={ListItemHeight}
+          style={{ overflowX: "hidden" }}
+        >
+          {CurrencyRow}
+        </ListStyled>
+      ) : currenciesLength ? (
         <ListStyled
           height={currenciesLength < 9 ? currenciesLength * ListItemHeight : ListItemHeight * 9}
           width="100%"
           itemCount={currenciesLength}
           itemSize={ListItemHeight}
           style={{ overflowX: "hidden" }}
-          itemData={currencies}
         >
           {CurrencyRow}
         </ListStyled>
@@ -238,4 +248,4 @@ function MarketList() {
   );
 }
 
-export default connect(state => state.market, { getMarketCryptoCurrencies })(MarketList);
+export default MarketList;
