@@ -82,22 +82,21 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
     return time;
   };
 
-  const buildChartData = ({ interval, prices }) => {
-    prices = prices.reverse();
-    switch (interval) {
-      case "hourly":
-        return buildHourlyData(prices);
-      case "daily":
-        return buildDailyData(prices);
-      default:
-        return [];
-    }
-  };
-
   const {
     rangeData: { days, interval },
   } = useRange(range);
   useEffect(() => {
+    const buildChartData = ({ interval, prices }) => {
+      prices = prices.reverse();
+      switch (interval) {
+        case "hourly":
+          return buildHourlyData(prices);
+        case "daily":
+          return buildDailyData(prices);
+        default:
+          return [];
+      }
+    };
     const marketClient = new MarketClient();
     marketClient
       .currencyChartData({
@@ -111,7 +110,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         setChartData(prices);
         setLoading(false);
       });
-  }, [id, counterCurrency, days, interval, buildChartData]);
+  }, [id, counterCurrency, days, interval]);
 
   return { loading, chartData };
 };

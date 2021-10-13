@@ -28,9 +28,9 @@ export const setFavoriteCryptocurrencies = (favorites: Array<{ id: number }>) =>
 });
 
 export const updateFavoriteCryptocurrencies = ({
-                                                 cryptocurrencyId,
-                                                 isStarred,
-                                               }: {
+  cryptocurrencyId,
+  isStarred,
+}: {
   cryptocurrencyId: number,
   isStarred: boolean,
 }) =>

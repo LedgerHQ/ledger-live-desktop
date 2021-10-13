@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from "react";
+import React from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
 import { connect, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ const CryptoCurrencyPage = () => {
     params: { id },
   } = useRouteMatch();
 
-  const { favorites } = useSelector(state => state.market)
+  const { favorites } = useSelector(state => state.market);
 
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 

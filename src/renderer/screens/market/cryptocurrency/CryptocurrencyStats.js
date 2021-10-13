@@ -155,15 +155,21 @@ function Supply({ currency }: { currency: MarketCurrency }) {
       </Text>
       <Box>
         <InfoSection title="Circulating supply">
-          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>{currency.circulating_supply}</Text>
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+            {currency.circulating_supply}
+          </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="Total supply">
-          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>{currency.total_supply}</Text>
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+            {currency.total_supply}
+          </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="Max supply">
-          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>{currency.max_supply}</Text>
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+            {currency.max_supply}
+          </Text>
         </InfoSection>
       </Box>
     </CardStyled>

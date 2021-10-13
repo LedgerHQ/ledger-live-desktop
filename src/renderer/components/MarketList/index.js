@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
@@ -224,16 +224,16 @@ function MarketList() {
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}
-        <Box justifyContent="center" horizontal>
-          <Paginator
-            currentPage={page}
-            loading={loading}
-            totalSize={coinsCount}
-            limit={limit}
-            small
-            onChange={page => dispatch(getMarketCryptoCurrencies({ page }))}
-          />
-        </Box>
+      <Box justifyContent="center" horizontal>
+        <Paginator
+          currentPage={page}
+          loading={loading}
+          totalSize={coinsCount}
+          limit={limit}
+          small
+          onChange={page => dispatch(getMarketCryptoCurrencies({ page }))}
+        />
+      </Box>
     </Box>
   );
 }
