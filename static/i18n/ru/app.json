@@ -2582,13 +2582,9 @@
           "title": "использовать TronGrid.io",
           "description": "Использовать trongrid напрямую без прокси Ledger"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Использовать Elrond с прокси Ledger"
-        },
-        "tezosJS": {
-          "title": "Использовать реализацию Tezos JS",
-          "description": "Использовать реализацию Tezos JS"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use some experimental JS currencies implementations"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3424,6 +3420,10 @@
     "AccountNameRequired": {
       "title": "Необходимо указать название счёта",
       "description": "Укажите название счёта"
+    },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
     },
     "AccountNotSupported": {
       "title": "Счёт не поддерживается.",
