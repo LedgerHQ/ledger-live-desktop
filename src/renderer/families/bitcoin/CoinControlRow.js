@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/transaction";
+import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/logic";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import Checkbox from "~/renderer/components/CheckBox";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
