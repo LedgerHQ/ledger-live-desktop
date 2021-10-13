@@ -14,6 +14,7 @@ import { useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrenc
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
+import palettes from "~/renderer/styles/palettes";
 
 type Props = {
   currency: CurrencyType,
@@ -35,7 +36,8 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   const renderTickY = useCallback((val: number) => val, []);
 
   const bgColor = useTheme("colors.palette.background.paper");
-  let chartColor;
+
+  let chartColor = useTheme("colors.palette.text.shade100");
 
   if (currency.supportedCurrency) {
     chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
