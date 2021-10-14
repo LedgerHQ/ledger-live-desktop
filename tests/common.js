@@ -107,7 +107,9 @@ let serviceStatusApiMock;
 const toMatchImageSnapshot = configureToMatchImageSnapshot({
   customSnapshotsDir: path.join(__dirname, "specs", "__image_snapshots__"),
   customDiffDir: path.join(__dirname, "specs", "__image_snapshots__", "__diff_output__"),
+  failureThreshold: 0.01,
 });
+
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(600000);
 
