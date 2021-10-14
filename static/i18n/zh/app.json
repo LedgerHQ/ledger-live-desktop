@@ -2582,13 +2582,9 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "通过 ledger proxy 来使用 elrond"
-        },
-        "tezosJS": {
-          "title": "使用 Tezos JS impl",
-          "description": "使用 Tezos JS impl"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use some experimental JS currencies implementations"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -3424,6 +3420,10 @@
     "AccountNameRequired": {
       "title": "需要一个账户名",
       "description": "请输入账户名称"
+    },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
     },
     "AccountNotSupported": {
       "title": "不支持该账户。",

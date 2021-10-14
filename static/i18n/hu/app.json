@@ -2582,13 +2582,9 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
-        },
-        "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use some experimental JS currencies implementations"
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -3424,6 +3420,10 @@
     "AccountNameRequired": {
       "title": "Egy számlanév szükséges",
       "description": "Please enter an account name"
+    },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
     },
     "AccountNotSupported": {
       "title": "Számla nem támogatott.",
