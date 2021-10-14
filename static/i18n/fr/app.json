@@ -2582,13 +2582,9 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Utilisez Elrond avec un proxy Ledger."
-        },
-        "tezosJS": {
-          "title": "Utiliser l'impl Tezos JS",
-          "description": "Utiliser l'impl Tezos JS"
+        "experimentalCurrencies": {
+          "title": "Utiliser des implémentations JS expérimentales",
+          "description": "Utilisez des implémentations JS expérimentales pour certaines cryptos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -3424,6 +3420,10 @@
     "AccountNameRequired": {
       "title": "Nom de compte requis",
       "description": "Merci d'entrer un nom de compte."
+    },
+    "AccountNeedResync": {
+      "title": "Veuillez réessayer",
+      "description": "Le compte n'est plus à jour, synchronisez-le."
     },
     "AccountNotSupported": {
       "title": "Compte non pris en charge",
