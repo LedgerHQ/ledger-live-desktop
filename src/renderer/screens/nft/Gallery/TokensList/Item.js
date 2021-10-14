@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -8,8 +8,9 @@ import Box, { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Image from "~/renderer/screens/nft/Image";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
-import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const Wrapper: ThemedComponent<{}> = styled(Card)`
   cursor: pointer;
@@ -35,12 +36,14 @@ const Dots: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  nft: NFTWithMetadata,
+  contract: string,
+  tokenId: string,
   mode: "grid" | "list",
 };
 
-const Row = ({ nft, mode }: Props) => {
-  const { id, nftName, tokenId } = nft;
+const Row = ({ contract, tokenId, mode }: Props) => {
+  const { status, metadata } = useNFTMetadata(contract, tokenId);
+  const { nftName } = metadata || {};
 
   const isGrid = mode === "grid";
   const onItemClick = useCallback(() => alert("item click"), []);
@@ -49,32 +52,48 @@ const Row = ({ nft, mode }: Props) => {
     alert("dots click");
   }, []);
 
+  useEffect(() => {
+    console.log("wadus", { metadata });
+  }, [metadata]);
+
   return (
     <Wrapper
       px={3}
       py={isGrid ? 3 : 2}
-      key={id}
       horizontal={!isGrid}
       alignItems={!isGrid ? "center" : undefined}
       onClick={onItemClick}
     >
-      <Image nft={nft} size={40} full={isGrid} />
-      <Box ml={2} flex={1} mt={isGrid ? 2 : 0}>
-        <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
-          {nftName}
-        </Text>
-        <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
-          <Trans
-            i18nKey="NFT.gallery.tokensList.item.tokenId"
-            values={{ tokenId: centerEllipsis(tokenId) }}
-          />
-        </Text>
-      </Box>
-      {!isGrid ? (
-        <Dots onClick={onDotsClick}>
-          <IconDots size={16} />
-        </Dots>
-      ) : null}
+      {status === "loaded" ? (
+        <>
+          <Image nft={metadata} size={40} full={isGrid} />
+          <Box ml={isGrid ? 0 : 2} flex={1} mt={isGrid ? 2 : 0}>
+            <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
+              {nftName}
+            </Text>
+            <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
+              <Trans
+                i18nKey="NFT.gallery.tokensList.item.tokenId"
+                values={{ tokenId: centerEllipsis(tokenId) }}
+              />
+            </Text>
+          </Box>
+          {!isGrid ? (
+            <Dots onClick={onDotsClick}>
+              <IconDots size={16} />
+            </Dots>
+          ) : null}
+        </>
+      ) : (
+        <>
+          <Skeleton width={!isGrid ? 40 : undefined} />
+          <Box ml={isGrid ? 0 : 2} flex={1} mt={isGrid ? 2 : 0}>
+            <Skeleton width={120} height={10} />
+            <Skeleton width={120} height={10} mt={1} />
+          </Box>
+          {!isGrid ? <Skeleton width={120} height={10} /> : null}
+        </>
+      )}
     </Wrapper>
   );
 };

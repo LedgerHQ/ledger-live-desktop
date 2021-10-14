@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { useNfts, nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import Box, { Card } from "~/renderer/components/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { nftsViewModeSelector } from "~/renderer/reducers/settings";
@@ -14,6 +14,7 @@ import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import GridIcon from "~/renderer/icons/Grid";
 import ListIcon from "~/renderer/icons/List";
+import CollectionName from "~/renderer/screens/nft/CollectionName";
 
 import Item from "./Item";
 
@@ -42,8 +43,7 @@ const TokensList = ({ account, collectionId }: Props) => {
   const dispatch = useDispatch();
   const nftsViewMode = useSelector(nftsViewModeSelector);
 
-  const nfts = useNfts(account.nfts, account.currency);
-  const collections = nftsByCollections(nfts, collectionId);
+  const collections = nftsByCollections(account.nfts, collectionId);
   const setListMode = useCallback(() => dispatch(setNftsViewMode("list")), [dispatch]);
   const setGridMode = useCallback(() => dispatch(setNftsViewMode("grid")), [dispatch]);
 
@@ -65,18 +65,23 @@ const TokensList = ({ account, collectionId }: Props) => {
         </ToggleButton>
       </Card>
 
-      {collections.map(({ contract, tokenName, nfts }) => (
-        <div key={contract}>
+      {collections.map(collection => (
+        <div key={collection.contract}>
           {!collectionId ? (
-            <Box mb={2} onClick={() => onSelectCollection(contract)}>
+            <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
               <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-                {tokenName}
+                <CollectionName collection={collection} />
               </Text>
             </Box>
           ) : null}
           <Container mb={20} mode={nftsViewMode}>
-            {nfts.map(nft => (
-              <Item key={nft.tokenId} mode={nftsViewMode} nft={nft} />
+            {collection.nfts.map(nft => (
+              <Item
+                key={nft.tokenId}
+                mode={nftsViewMode}
+                contract={collection.contract}
+                tokenId={nft.tokenId}
+              />
             ))}
           </Container>
         </div>

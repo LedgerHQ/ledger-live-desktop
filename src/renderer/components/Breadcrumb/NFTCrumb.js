@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useNfts, nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
@@ -12,41 +12,47 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import CollectionName from "~/renderer/screens/nft/CollectionName";
+
+const LabelWithMeta = ({
+  item,
+  isActive,
+}: {
+  isActive: boolean,
+  item: {
+    label: string,
+    collection: { nfts: any[], contract: string, standard: string },
+  },
+}) => (
+  <Item isActive={isActive}>
+    <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
+      <CollectionName collection={item.collection} />
+    </Text>
+    {isActive && (
+      <Check>
+        <IconCheck size={14} />
+      </Check>
+    )}
+  </Item>
+);
 
 export default function NFTCrumb() {
   const history = useHistory();
   const { id, collectionId } = useParams();
-  const account = useSelector(s => accountSelector(s, { accountId: id }));
-  const nfts = useNfts(account.nfts, account.currency);
-  const collections = nftsByCollections(nfts, collectionId);
+  const account = useSelector(state => accountSelector(state, { accountId: id }));
+  const collections = nftsByCollections(account.nfts);
 
   const items = useMemo(
     () =>
       collections.map(collection => ({
         key: collection.tokenName,
-        label: collection.tokenName,
+        label: collection.contract,
         collection,
       })),
     [collections],
   );
   const activeItem =
     items.find((item: any) => item.collection.contract === collectionId) || items[0];
-
-  const renderItem = useCallback(
-    ({ item, isActive }) => (
-      <Item key={item.label} isActive={isActive}>
-        <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-          {item.label}
-        </Text>
-        {isActive && (
-          <Check>
-            <IconCheck size={14} />
-          </Check>
-        )}
-      </Item>
-    ),
-    [],
-  );
 
   const onCollectionSelected = useCallback(
     item => {
@@ -82,12 +88,14 @@ export default function NFTCrumb() {
             horizontal
             items={items}
             controlled
-            renderItem={renderItem}
+            renderItem={LabelWithMeta}
             onChange={onCollectionSelected}
           >
             {({ isOpen, value }) => (
               <TextLink>
-                <Button>{activeItem?.label}</Button>
+                <Button>
+                  <CollectionName collection={activeItem.collection} />
+                </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
                 </AngleDown>

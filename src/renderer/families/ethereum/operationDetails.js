@@ -45,19 +45,19 @@ type Props = {
 
 const NFTAmountField = ({ operation }: Props) => {
   const operations = useMemo(() => [operation], [operation]);
-  const nfts = useNfts(operations);
-  const nft = nfts[0];
-
-  return nft ? (
-    <Box flex={1}>
-      <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
-        {nft.nftName}
-      </Text>
-      <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
-        {centerEllipsis(nft.tokenId)}
-      </Text>
-    </Box>
-  ) : null;
+  // const nfts = useNfts(operations);
+  // const nft = nfts[0];
+  return null;
+  // return nft ? (
+  //   <Box flex={1}>
+  //     <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
+  //       {nft.nftName}
+  //     </Text>
+  //     <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
+  //       {centerEllipsis(nft.tokenId)}
+  //     </Text>
+  //   </Box>
+  // ) : null;
 };
 
 const amountCellExtra = {

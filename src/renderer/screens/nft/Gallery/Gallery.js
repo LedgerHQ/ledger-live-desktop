@@ -4,7 +4,8 @@ import React, { useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useNfts, nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import Image from "~/renderer/screens/nft/Image";
@@ -14,15 +15,17 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import OperationsList from "~/renderer/components/OperationsList";
+import CollectionName from "../CollectionName";
+import Skeleton from "../Skeleton";
 
 const Gallery = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { id, collectionId } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
-  const nfts = useNfts(account.nfts, account.currency);
-  const collection = nftsByCollections(nfts, collectionId)[0];
+  const collection = nftsByCollections(account.nfts, collectionId)[0];
 
+  const { status, metadata } = useNFTMetadata(collection.contract, collection.nfts[0].tokenId);
   const onSend = useCallback(() => {
     // TODO use nft send
     dispatch(openModal("MODAL_SEND", { account }));
@@ -37,13 +40,13 @@ const Gallery = () => {
       <Box horizontal alignItems="center" mb={6}>
         {collectionId && collection ? (
           <>
-            <Image size={40} nft={collection.nfts[0]} />
+            {status === "loaded" ? <Image size={40} nft={metadata} /> : <Skeleton width={40} />}
             <Box flex={1} ml={3}>
               <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={2}>
                 {t("NFT.gallery.collection.header.contract", { contract: collection.contract })}
               </Text>
               <Text uppercase ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
-                {collection.tokenName}
+                <CollectionName collection={collection} />
               </Text>
             </Box>
           </>

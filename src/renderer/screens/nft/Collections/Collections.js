@@ -7,7 +7,7 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { useNfts, nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 import { TokenShowMoreIndicator, IconAngleDown } from "~/renderer/screens/Account/TokensList";
 import IconReceive from "~/renderer/icons/Receive";
@@ -27,7 +27,6 @@ const Collections = ({ account }: Props) => {
   const { t } = useTranslation();
   const history = useHistory();
   const [collapsed, setCollapsed] = useState(true);
-  const nfts = useNfts(account.nfts, account.currency);
 
   const toggleCollapse = useCallback(() => {
     setCollapsed(collapsed => !collapsed);
@@ -44,7 +43,7 @@ const Collections = ({ account }: Props) => {
     [account.id, history],
   );
 
-  const collections = nftsByCollections(nfts);
+  const collections = nftsByCollections(account.nfts);
   const visibleCollection = collections.slice(
     0,
     !collapsed ? collections.length : VISIBLE_COLLECTIONS,
@@ -63,13 +62,12 @@ const Collections = ({ account }: Props) => {
           {t("NFT.collections.galleryCTA")}
         </Button>
       </TableHeader>
-      {nfts.length ? (
-        visibleCollection.map(({ contract, tokenName, nfts }) => (
+      {account.nfts.length ? (
+        visibleCollection.map(({ contract, nfts }) => (
           <Row
             onClick={() => onOpenCollection(contract)}
             key={contract}
             contract={contract}
-            tokenName={tokenName}
             nfts={nfts}
           />
         ))

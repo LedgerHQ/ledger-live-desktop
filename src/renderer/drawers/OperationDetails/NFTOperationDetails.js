@@ -20,9 +20,10 @@ import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
   const operations = useMemo(() => [operation], [operation]);
-  const nfts = useNfts(operations);
-  const nft = nfts[0];
-
+  // const nfts = useNfts(operations);
+  // const nft = nfts[0];
+  const nft = null;
+  
   return !nft ? null : (
     <>
       <OpDetailsSection>
