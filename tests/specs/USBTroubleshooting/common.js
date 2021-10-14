@@ -12,7 +12,7 @@ export const generateTest = (platform, solutionCount) => {
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: `USBTroubleshooting-${platform}-noHelpPopup`,
     });
-    await app.client.pause(25000); // Wait for the timeout to complete
+    await app.client.pause(5000); // Wait for the timeout to complete
     // There should be a visible CTA to trigger the troubleshooting now
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: `USBTroubleshooting-${platform}-helpPopup`,
