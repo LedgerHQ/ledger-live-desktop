@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: install dependencies
         if: always() && job.status != 'cancelled'
-        run: yarn --frozen-lockfile --ignore-optional
+        run: JOBS=max yarn --frozen-lockfile --ignore-optional
       - name: run code checks
         if: always() && job.status != 'cancelled'
         run: yarn ci 2> >(tee lint.txt)
