@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+      - name: Clear workspace
+        uses: AutoModality/action-clean@v1
       - uses: actions/checkout@v2
         if: always() && job.status != 'cancelled'
         with:
@@ -115,3 +117,4 @@ jobs:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-ui-tests
           slack-text: ${{ steps.comment.outputs.bodySlack }}
+
