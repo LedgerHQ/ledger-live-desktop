@@ -15,8 +15,7 @@ jobs:
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
-      - name: Runner workspace path
-        run: rm -rf *
+      - uses: chick-fil-a/gha-clear-workspace@v1
       - uses: actions/checkout@v2
         if: always() && job.status != 'cancelled'
         with:
