@@ -6,6 +6,8 @@ export const generateTest = (platform, solutionCount) => {
     await managerPage.goToManager();
     // Simulate a device disconnect to get out of the Loading state from the manager
     await mockDeviceEvent({ type: "deviceChange", device: null });
+    // Give it a second, literally (well, 5)
+    await app.client.pause(5000);
     // There should be no help component on load
     expect(await app.client.screenshot()).toMatchImageSnapshot({
       customSnapshotIdentifier: `USBTroubleshooting-${platform}-noHelpPopup`,
