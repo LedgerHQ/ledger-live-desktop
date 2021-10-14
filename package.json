@@ -40,7 +40,8 @@
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
     "pretest": "tsc --incremental -p playwright/tsconfig.json",
-    "playwright": "playwright test -c tests-out"
+    "playwright": "npx playwright test playwright/specs/onboarding.spec.ts --config=playwright/playwright.config.ts",
+    "playwright-recorder": "npx playwright test playwright/specs/recorder.spec.ts --config=playwright/playwright.config.ts"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",

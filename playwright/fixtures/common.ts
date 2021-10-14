@@ -5,14 +5,15 @@ import * as path from "path";
 import rimraf from "rimraf";
 
 type TestFixtures = {
-  userdata: any;
-  userdatafile: any;
+  userdata: String;
+  env: Object;
   page: any;
 };
 
 const test = base.extend<TestFixtures>({
   userdata: null,
-  page: async ({ userdata }, use) => {
+  env: null,
+  page: async ({ userdata, env }, use) => {
     // create userdata path
     const userDataPathKey = Math.random()
       .toString(36)
@@ -25,15 +26,24 @@ const test = base.extend<TestFixtures>({
       fs.copyFileSync(userDataFile, `${userDataPath}/app.json`);
     }
 
+    env = Object.assign(
+      {
+        MOCK: true,
+        // DISABLE_MOCK_POINTER_EVENTS: true,
+        // HIDE_DEBUG_MOCK: true,
+        DISABLE_DEV_TOOLS: true,
+        SPECTRON_RUN: true,
+        CI: process.env.CI || "",
+        SYNC_ALL_INTERVAL: 86400000,
+        SYNC_BOOT_DELAY: 16,
+      },
+      env,
+    );
+
     // launch app
     const electronApp = await electron.launch({
-      args: [
-        "./.webpack/main.bundle.js",
-        `--user-data-dir=${userDataPath}`,
-        "--window-size=800,600",
-        "--force-device-scale-factor=1",
-        "--high-dpi-support=1",
-      ],
+      args: ["./.webpack/main.bundle.js", `--user-data-dir=${userDataPath}`, "--lang=en"],
+      env: env,
     });
 
     // app is ready
@@ -41,6 +51,7 @@ const test = base.extend<TestFixtures>({
     expect(await page.title()).toBe("Ledger Live");
     await page.waitForSelector("#__app__ready__", { state: "attached" });
     await page.waitForLoadState("domcontentloaded");
+    await page.waitForSelector("#loading-logo", { state: "hidden" });
 
     // use page in the test
     await use(page);
