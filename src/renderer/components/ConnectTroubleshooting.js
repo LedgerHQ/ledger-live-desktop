@@ -22,7 +22,9 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   max-width: 550px;
 `;
 
-const ConnectTroubleshooting = ({ appearsAfterDelay = 15000 }: Props) => {
+const ConnectTroubleshooting = ({
+  appearsAfterDelay = process.env.SPECTRON_RUN ? 3000 : 15000,
+}: Props) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const timeout = setTimeout(() => setVisible(true), appearsAfterDelay);
