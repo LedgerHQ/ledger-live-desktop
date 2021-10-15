@@ -153,10 +153,9 @@ export const getMarketCryptoCurrencies = (filterParams: {
         });
       } else {
         ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
+        limit = DEFAULT_PAGE_LIMIT;
       }
     }
-
-    limit = DEFAULT_PAGE_LIMIT;
 
     let res;
     if ((showFavorites || searchValue) && !ids.length) {
@@ -181,7 +180,7 @@ export const getMarketCryptoCurrencies = (filterParams: {
     if (!currencies.length) {
       coinsCount = 0;
     } else if (ids.length) {
-      limit = res.length;
+      limit = page === 1 ? res.length : limit;
       coinsCount = ids.length;
     } else {
       limit = DEFAULT_PAGE_LIMIT;
