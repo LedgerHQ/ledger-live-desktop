@@ -1877,7 +1877,7 @@
     "coincontrol": "Contrôle des coins",
     "advanced": "Options avancées",
     "ctaDisabled": "Compte ne contenant pas d'UTXO",
-    "whatIs": "En savoir plus sur la sélection des coins",
+    "whatIs": "En savoir plus sur ce paramètre",
     "rbf": "Permettre à la transaction d'être remplaçable (Replace-By-Fee).",
     "strategy": "Stratégie de sélection des coins",
     "selected": "Coins sélectionnés par stratégie",
@@ -1891,7 +1891,7 @@
     "pickUnconfirmedRBF": "Inclure les coins des transactions non confirmées et remplaçables.",
     "pickingStrategy": "Stratégie de sélection des UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Coins plus vieux en premier (Premier entré, premier sorti)",
+      "DEEP_OUTPUTS_FIRST": "Coins plus vieux en premier (FIFO)",
       "OPTIMIZE_SIZE": "Réduire les frais (optimiser la taille)",
       "MERGE_OUTPUTS": "Réduire les frais à venir (fusionner des coins)"
     }
@@ -2101,7 +2101,7 @@
           },
           "info": {
             "title": "Récompenses",
-            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuez pour demander vos récompenses.",
+            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuer pour demander vos récompenses.",
             "info": "Il vous sera demandé de générer une transaction vide sur votre compte. Celle-ci ajoutera vos récompenses actuelles à votre solde moyennant des frais de transaction minimaux."
           },
           "connectDevice": {
@@ -3211,7 +3211,7 @@
     "nextSolution": "Solution suivante",
     "previousSolution": "Solution précédente",
     "followSteps": "Suivez ces étapes",
-    "supportArticle": "Article de l'Assistance",
+    "supportArticle": "cet article de l'Assistance",
     "connecting": "Connexion en cours...",
     "connected": "Connecté",
     "backToPortfolio": "Retour au Portefeuille",
