@@ -2101,7 +2101,7 @@
           },
           "info": {
             "title": "Récompenses",
-            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuez pour demander vos récompenses.",
+            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuer pour demander vos récompenses.",
             "info": "Il vous sera demandé de générer une transaction vide sur votre compte. Celle-ci ajoutera vos récompenses actuelles à votre solde moyennant des frais de transaction minimaux."
           },
           "connectDevice": {
