@@ -307,7 +307,7 @@ const MainSideBar = () => {
                 label={t("sidebar.market")}
                 icon={IconTachometerHigh}
                 iconActiveColor="wallet"
-                isActive={location.pathname === "/market"}
+                isActive={location.pathname.startsWith("/market")}
                 onClick={handleClickMarket}
                 disabled={noAccounts}
                 collapsed={secondAnim}
