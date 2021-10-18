@@ -1677,7 +1677,7 @@
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un token.",
         "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Appareil",
