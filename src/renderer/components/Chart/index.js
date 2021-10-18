@@ -44,7 +44,6 @@ import Tooltip from "./Tooltip";
 
 import type { Data } from "./types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { value } from "lodash/seq";
 
 export type Props = {
   data: Data,
