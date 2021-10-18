@@ -99,9 +99,9 @@ function MarketList() {
   const onSort = key => {
     if (!loading) {
       if (key === orderBy) {
-        dispatch(getMarketCryptoCurrencies({ order: order === "desc" ? "asc" : "desc" }));
+        dispatch(getMarketCryptoCurrencies({ order: order === "desc" ? "asc" : "desc", page: 1 }));
       } else {
-        dispatch(getMarketCryptoCurrencies({ orderBy: key }));
+        dispatch(getMarketCryptoCurrencies({ orderBy: key, page: 1 }));
       }
     }
   };

@@ -27,7 +27,7 @@ class MarketPage extends Component {
   }
 
   debouncedSearch = () => {
-    this.props.getMarketCryptoCurrencies();
+    this.props.getMarketCryptoCurrencies({ page: 1 });
   };
 
   onTextChange = e => {
