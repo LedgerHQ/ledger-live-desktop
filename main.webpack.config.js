@@ -62,7 +62,7 @@ module.exports = {
     alias: {
       "~": path.resolve(__dirname, "src"),
     },
-    ...(process.env.REBRANDING
+    ...(process.env.V3
       ? {
           extensions: [
             ".v3.tsx",
