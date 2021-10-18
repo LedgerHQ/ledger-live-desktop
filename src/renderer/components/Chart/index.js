@@ -44,6 +44,7 @@ import Tooltip from "./Tooltip";
 
 import type { Data } from "./types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { value } from "lodash/seq";
 
 export type Props = {
   data: Data,
@@ -170,7 +171,7 @@ export default function Chart({
             },
             ticks: {
               beginAtZero: true,
-              suggestedMax: 1 ** Math.max(magnitude - 4, 1),
+              suggestedMax: Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
