@@ -180,10 +180,8 @@ jobs:
         run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.sha }}"
       - name: build the app
         run: yarn build-ci
-      - name: list build folder
-        run: ls dist/
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win-x64.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win-x64.exe
