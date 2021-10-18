@@ -5,10 +5,11 @@ import styled from "styled-components";
 import { alwaysShowSkeletonsSelector } from "~/renderer/reducers/application";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { space } from "styled-system";
+import { layout, space } from "styled-system";
 type Props = {
   width?: number,
   height?: number,
+  barHeight?: number,
   full?: boolean,
   mt?: any,
   status?: "loading" | "loaded",
@@ -18,49 +19,61 @@ type Props = {
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   ${space};
-  aspect-ratio: ${p => (p.full ? 1 : "auto")};
-  width: ${p => (p.full ? "100%" : p.width ? `${p.width}px` : "auto")};
-  height: ${p => (p.full || !p.height ? "auto" : `${p.height}px`)};
-  position: relative;
+  ${layout};
+  ${p => (p.full ? "aspect-ratio: 1; height: auto;" : "")}
+  ${p => (p.full ? "width: 100%;" : "")}
+  align-items: center;
+  display: grid;
 `;
 
 const Item: ThemedComponent<{}> = styled.div.attrs(({ state }) => ({
   style: transitionStyles[state],
 }))`
-  position: absolute;
-  display: inline-block;
+  display: block;
+  grid-column: 1/2;
+  grid-row: 1/2;
+
+  &.skeleton-enter {
+    opacity: 0;
+  }
+
+  &.skeleton-enter-active {
+    opacity: 1;
+    transition: opacity 1s ease-in;
+  }
+
+  &.skeleton-exit {
+    opacity: 1;
+  }
+  &.skeleton-exit-active {
+    opacity: 0;
+    transition: opacity 1s;
+  }
 
   &:empty {
+    position: relative;
     overflow: hidden;
     border-radius: 3px;
     background: hsla(207, 44%, 14%, 0.1);
-    width: 100%;
-    height: 100%;
+    height: ${p => (p.full ? "100%" : `${p.height}px`)};
+    width: ${p => (p.full ? "100%" : `${p.width}px`)};
+    aspect-ratio: ${p => (p.full ? 1 : "auto")};
   }
+
   &:empty::after {
-    position: absolute;
+    ${"" /* This is the shine that goes through the skeleton */}
     top: 0;
+    left: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    position: absolute;
     transform: translateX(-100%);
     background: linear-gradient(to left, #fff0, #fff4 50%, #fff0 100%);
     animation: shimmer 2s infinite;
     content: "";
   }
+  transition: opacity 1000ms linear;
 
-  top: 50%;
-  transform: translateY(-50%);
-  ${p => (p.state === "entering" ? "animation: fadeIn 5s;" : "")}
-  transition: all 1000ms linear;
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
   @keyframes shimmer {
     30% {
       transform: translateX(100%);
@@ -78,21 +91,19 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
-const Skeleton = ({ width, height, full, children, status, mt, show }: Props) => {
+const Skeleton = ({ width, barHeight, height, full, children, status, mt, show }: Props) => {
   const alwaysShowSkeletons = useSelector(alwaysShowSkeletonsSelector);
   const isSkeletonVisible = show || alwaysShowSkeletons;
   const content = isSkeletonVisible ?? (isSkeletonVisible || !children) ? "" : children;
   const key = content ? "content" : "holder";
 
   return (
-    <Wrapper width={width} height={height} full={full} mt={mt}>
-      <TransitionGroup>
-        <CSSTransition in key={key} timeout={{ appear: 5000, enter: 5000, exit: 5000 }}>
-          {state => (
-            <Item state={state} fill={!width}>
-              {content}
-            </Item>
-          )}
+    <Wrapper height={height} full={full} mt={mt}>
+      <TransitionGroup component={null}>
+        <CSSTransition in appear key={key} timeout={1000} classNames="skeleton">
+          <Item full={full} width={width} height={barHeight || height}>
+            {content}
+          </Item>
         </CSSTransition>
       </TransitionGroup>
     </Wrapper>

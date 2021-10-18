@@ -1,5 +1,5 @@
 // @flow
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
@@ -25,7 +25,7 @@ const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boole
   width: ${({ full, size = 32 }) => (full ? "100%" : `${size}px`)};
   aspect-ratio: 1 / 1;
   border-radius: 4px;
-  background: ${p => p.theme.colors.palette.text.shade5};
+  background: ${p => p.theme.colors.palette.background.paper};
   background-size: contain;
 
   display: flex;
@@ -45,8 +45,9 @@ const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boole
   }
 `;
 
+// TODO Figure out if we really need this once we know who creates/processes the media.
 const Gen = styled.div`
-  --hue: ${p => (p?.nft?.tokenId || "wadus").substr(-8) % 360};
+  --hue: ${p => (p?.nft?.tokenId || "abcdefg").substr(-8) % 360};
   background-image: url(${Fallback});
   background-size: contain;
   border-radius: 4px;
@@ -79,7 +80,7 @@ const Image = (props: Props) => {
 
   return (
     <Wrapper full={full} size={size} isLoading={isLoading}>
-      <Skeleton />
+      <Skeleton full />
       {nft?.picture ? (
         <img onLoad={() => setLoading(false)} src={nft.picture} />
       ) : (

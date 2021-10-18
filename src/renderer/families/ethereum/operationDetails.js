@@ -1,5 +1,6 @@
 // @flow
 import React, { useMemo } from "react";
+import styled from "styled-components";
 import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
@@ -9,6 +10,7 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Text from "~/renderer/components/Text";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import {
   OpDetailsTitle,
@@ -45,6 +47,16 @@ type Props = {
   operation: Operation,
 };
 
+const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  horizontal: false,
+  alignItems: "flex-end",
+}))`
+  flex: 0 0 auto;
+  text-align: right;
+  justify-content: center;
+  min-width: 150px;
+`;
+
 const NFTAmountField = ({ operation }: Props) => {
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
@@ -52,27 +64,27 @@ const NFTAmountField = ({ operation }: Props) => {
   const show = useMemo(() => status !== "loaded", [status]);
 
   return (
-    <Box flex={1}>
-      <Skeleton show={show} width={120} height={10}>
+    <Cell>
+      <Skeleton show={show} width={170} height={24} barHeight={10}>
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
           {metadata?.nftName}
         </Text>
       </Skeleton>
-      <Skeleton show={show} width={120} height={6}>
+      <Skeleton show={show} width={200} height={24} barHeight={6}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
           {centerEllipsis(metadata?.tokenId)}
         </Text>
       </Skeleton>
-    </Box>
+    </Cell>
   );
 };
 
-const amountCellExtra = {
+const amountCell = {
   NFT_OUT: NFTAmountField,
   NFT_IN: NFTAmountField,
 };
 
 export default {
   OperationDetailsExtra,
-  amountCellExtra,
+  amountCell,
 };

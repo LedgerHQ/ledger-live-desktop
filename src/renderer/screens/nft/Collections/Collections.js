@@ -36,7 +36,10 @@ const Collections = ({ account }: Props) => {
     history.push(`/account/${account.id}/nft-collection`);
   }, [account.id, history]);
 
-  const onReceive = useCallback(() => dispatch(openModal("MODAL_RECEIVE", { account })), [account]);
+  const onReceive = useCallback(() => dispatch(openModal("MODAL_RECEIVE", { account })), [
+    account,
+    dispatch,
+  ]);
 
   const onOpenCollection = useCallback(
     collectionId => history.push(`/account/${account.id}/nft-collection/${collectionId}`),

@@ -39,7 +39,7 @@ const Row = ({ nfts, contract, onClick }: Props) => {
   return (
     <Container
       className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
-      alignItems="center"
+      justifyContent="center"
       horizontal
       px={4}
       py={3}
@@ -49,13 +49,13 @@ const Row = ({ nfts, contract, onClick }: Props) => {
         <Image nft={metadata} />
       </Skeleton>
       <Box ml={3} flex={1}>
-        <Skeleton width={136} height={6} show={show}>
+        <Skeleton width={136} height={24} barHeight={10} show={show}>
           <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
             {tokenName}
           </Text>
         </Skeleton>
       </Box>
-      <Skeleton width={42} height={6} show={show}>
+      <Skeleton width={42} height={24} barHeight={10} show={show}>
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {nfts.length}
         </Text>

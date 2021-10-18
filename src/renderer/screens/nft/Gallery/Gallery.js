@@ -46,12 +46,12 @@ const Gallery = () => {
               <Image size={40} nft={metadata} />
             </Skeleton>
             <Box flex={1} ml={3}>
-              <Skeleton width={93} height={6} show={show}>
+              <Skeleton width={93} barHeight={6} height={24} show={show}>
                 <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={2}>
                   {t("NFT.gallery.collection.header.contract", { contract: collection.contract })}
                 </Text>
               </Skeleton>
-              <Skeleton mt={2} width={143} height={10} show={show}>
+              <Skeleton width={143} height={33} barHeight={12} show={show}>
                 <Text uppercase ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
                   <CollectionName collection={collection} />
                 </Text>

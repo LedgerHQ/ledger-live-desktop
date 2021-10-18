@@ -50,6 +50,7 @@ const Row = ({ contract, tokenId, mode }: Props) => {
 
   const show = useMemo(() => status !== "loaded", [status]);
   const isGrid = mode === "grid";
+
   const onItemClick = useCallback(() => alert("item click"), []);
   const onDotsClick = useCallback(
     event => {
@@ -73,12 +74,12 @@ const Row = ({ contract, tokenId, mode }: Props) => {
         <Image nft={metadata} size={40} full={isGrid} />
       </Skeleton>
       <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
-        <Skeleton width={isGrid ? 175 : 142} height={10} show={show}>
+        <Skeleton width={142} height={24} barHeight={10} show={show}>
           <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
             {nftName}
           </Text>
         </Skeleton>
-        <Skeleton width={150} height={6} mt={2} show={show}>
+        <Skeleton width={180} height={24} barHeight={6} show={show}>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
             <Trans
               i18nKey="NFT.gallery.tokensList.item.tokenId"
