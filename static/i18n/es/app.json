@@ -2279,7 +2279,7 @@
       }
     },
     "rebond": {
-      "title": "Revincular activos",
+      "title": "Volver a vincular activos",
       "steps": {
         "amount": {
           "title": "Importe",
@@ -2301,7 +2301,7 @@
             "cta": "Ver detalles"
           },
           "pending": {
-            "title": "Revincular tus activos..."
+            "title": "Volver a vincular tus activos..."
           },
           "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
         }
