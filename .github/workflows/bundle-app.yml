@@ -165,7 +165,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --ignore-optional
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --ignore-optional
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
