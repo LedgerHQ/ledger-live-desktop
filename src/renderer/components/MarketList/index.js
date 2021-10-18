@@ -119,7 +119,7 @@ function MarketList() {
   );
 
   const currenciesLength = currencies.length;
-  console.log(currenciesLength);
+
   return (
     <Box flow={2}>
       <Row expanded={true}>

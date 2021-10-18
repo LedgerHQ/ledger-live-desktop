@@ -13,6 +13,11 @@ import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrenc
 import CryptocurrencySummary from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummary";
 import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/CryptocurrencyStats";
 import { useMarketCurrency } from "~/renderer/hooks/market/useMarketCurrency";
+import { rgba } from "~/renderer/styles/helpers";
+import Text from "~/renderer/components/Text";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
+import Shield from "~/renderer/icons/Shield";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -30,6 +35,7 @@ const CryptoCurrencyPage = () => {
   const { loading, currency } = useMarketCurrency({ id, counterCurrency, range });
 
   currency.isStarred = !!favorites.find(item => item.id === id);
+  const device = useSelector(getCurrentDevice);
 
   if (loading) {
     return null;
@@ -42,6 +48,7 @@ const CryptoCurrencyPage = () => {
         <CryptocurrencyHeaderActions currency={currency} />
       </Box>
       <Divider />
+      {!device && <NotLiveCompatible mt={3} />}
       <Box mt={3} mb={7}>
         {!loading && (
           <CryptocurrencySummary currency={currency} range={range} counterValue={counterValue} />
@@ -56,5 +63,24 @@ const ConnectedCryptoCurrencyPage: React$ComponentType<{}> = compose(
   connect(),
   withTranslation(),
 )(CryptoCurrencyPage);
+
+const NotLiveCompatibleWrapper = styled(Box)`
+  background: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
+  color: ${p => p.theme.colors.palette.primary.main};
+  font-size: 13px;
+  font-weight: 500;
+  padding: 18px;
+  border-radius: 4px;
+`;
+
+const NotLiveCompatible = props => {
+  const color = useTheme("colors.palette.primary.main");
+  return (
+    <NotLiveCompatibleWrapper horizontal alignItems="center" {...props}>
+      <Shield color={color} size={16} />
+      <Text ml={2}>This asset is not supported on Ledger Live.</Text>
+    </NotLiveCompatibleWrapper>
+  );
+};
 
 export default ConnectedCryptoCurrencyPage;

@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router";
 
 import Box from "~/renderer/components/Box";
@@ -7,6 +7,8 @@ import Button from "~/renderer/components/Button";
 import { MarketCounterValueSelect } from "~/renderer/screens/market/MarketCounterValueSelect";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import type { MarketCurrency } from "~/renderer/reducers/market";
+import { useSelector } from "react-redux";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 type Props = {
   currency: MarketCurrency,
@@ -35,12 +37,14 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
     });
   }, [currency, history]);
 
+  const device = useSelector(getCurrentDevice);
+
   return (
     <Box horizontal alignItems="center">
       <Box mr={12}>
         <MarketCounterValueSelect />
       </Box>
-      {currency.supportedCurrency && (
+      {currency.supportedCurrency && device && (
         <>
           <Box mr={12}>
             <Button primary onClick={onBuy}>

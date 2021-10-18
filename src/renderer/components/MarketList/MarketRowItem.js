@@ -14,6 +14,8 @@ import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyS
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import { useSelector } from "react-redux";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -131,6 +133,8 @@ function MarketRowItem(props: Props) {
 
   const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
+  const device = useSelector(getCurrentDevice);
+
   return (
     <div style={{ ...style }} onClick={onCurrencyClick}>
       <Row expanded={true}>
@@ -177,7 +181,7 @@ function MarketRowItem(props: Props) {
                     </Box>
                   </>
                 )}
-                {!loading && currency.supportedCurrency && (
+                {!loading && currency.supportedCurrency && device && (
                   <>
                     <Button outlineGrey small mr={20} onClick={onBuy}>
                       Buy
