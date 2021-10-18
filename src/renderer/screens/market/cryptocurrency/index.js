@@ -35,7 +35,6 @@ const CryptoCurrencyPage = () => {
   const { loading, currency } = useMarketCurrency({ id, counterCurrency, range });
 
   currency.isStarred = !!favorites.find(item => item.id === id);
-  const device = useSelector(getCurrentDevice);
 
   if (loading) {
     return null;
@@ -48,7 +47,7 @@ const CryptoCurrencyPage = () => {
         <CryptocurrencyHeaderActions currency={currency} />
       </Box>
       <Divider />
-      {!device && <NotLiveCompatible mt={3} />}
+      {!currency.supportedCurrency && <NotLiveCompatible mt={3} />}
       <Box mt={3} mb={7}>
         {!loading && (
           <CryptocurrencySummary currency={currency} range={range} counterValue={counterValue} />

@@ -95,10 +95,14 @@ export default function Chart({
           },
           pointRadius: 0,
           borderWidth: 2,
-          data: data.map(d => ({
+          data: data.map((d, i) => ({
             x:
               tickXScale === "week"
                 ? new Date(d.date)
+                : tickXScale === "minute"
+                ? moment()
+                    .subtract(i * 5, "minutes")
+                    .toDate()
                 : tickXScale === "day"
                 ? moment(new Date(d.date))
                     .startOf("hour")
@@ -147,9 +151,10 @@ export default function Chart({
               padding: 12,
             },
             time: {
-              minUnit: tickXScale === "day" ? "hour" : "day",
+              unit: tickXScale === "day" ? "hour" : tickXScale === "minute" ? "minute" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
+                minute: "HH:mm",
               },
             },
           },
@@ -165,7 +170,7 @@ export default function Chart({
             },
             ticks: {
               beginAtZero: true,
-              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
+              suggestedMax: 1 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",

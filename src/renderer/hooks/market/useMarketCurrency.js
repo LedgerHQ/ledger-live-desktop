@@ -58,11 +58,17 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
   const formattedHourTime = index =>
     moment()
       .startOf("hour")
-      .subtract(index, "hours");
+      .subtract(index, "hours")
+      .toDate();
 
   const formattedDayTime = index =>
     moment()
       .subtract(index, "days")
+      .toDate();
+
+  const formattedMinuteTime = index =>
+    moment()
+      .subtract(index * 5, "minutes")
       .toDate();
 
   const {
@@ -78,9 +84,10 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
       for (let i = 0; i <= prices.length - 1; i++) {
         const price = prices[i];
         const priceMagnitude = magnitude(price);
-        const formattedTime = interval === "hourly" ? formattedHourTime(i) : formattedDayTime(i);
+        const formattedTime = interval === "hourly" ? formattedHourTime(i) : interval === "minutely" ? formattedMinuteTime(i) : formattedDayTime(i);
         chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
       }
+      console.log(chartData);
       return chartData;
     };
     const marketClient = new MarketClient();

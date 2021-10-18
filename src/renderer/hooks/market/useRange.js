@@ -37,7 +37,7 @@ const dataTable: Map<string, RangeData> = {
     days: 0.04,
     interval: "minutely",
     simple: "1h",
-    scale: "day",
+    scale: "minute",
   },
 };
 

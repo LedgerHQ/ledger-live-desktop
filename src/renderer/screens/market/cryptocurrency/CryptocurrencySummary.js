@@ -56,7 +56,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   }
 
   currency.difference =
-    chartData.length > 1 ? chartData[chartData.length - 1].value - chartData[0].value : 0;
+    chartData.length > 1 ? chartData[0].value - chartData[chartData.length - 1].value : 0;
 
   return (
     <Card p={0} py={5}>
