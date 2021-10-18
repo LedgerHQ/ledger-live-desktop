@@ -1,23 +1,18 @@
 // @flow
 import React from "react";
+import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router";
+
 import { useTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
-import { useHistory } from "react-router-dom";
 import Button from "~/renderer/components/Button";
 import { Separator, TextLink } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { useLocation, useRouteMatch } from "react-router";
-import useTheme from "~/renderer/hooks/useTheme";
 
 const CryptocurrencyCrumb = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const { state: currency } = useLocation();
-  const {
-    params: { id },
-  } = useRouteMatch();
-
-  const palette = useTheme("colors.palette");
 
   return (
     <>
@@ -35,14 +30,7 @@ const CryptocurrencyCrumb = () => {
       </TextLink>
       <Separator />
       <Box horizontal>
-        <Box px={1}>
-          {/* <CryptoCurrencyIcon */}
-          {/*  overrideColor={palette.text.shade60} */}
-          {/*  inactive */}
-          {/*  size={16} */}
-          {/*  currency={currency} */}
-          {/* /> */}
-        </Box>
+        <Box px={1}></Box>
         {currency.name}
       </Box>
     </>

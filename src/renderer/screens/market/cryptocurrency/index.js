@@ -15,7 +15,6 @@ import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/Crypto
 import { useMarketCurrency } from "~/renderer/hooks/market/useMarketCurrency";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import Shield from "~/renderer/icons/Shield";
 import useTheme from "~/renderer/hooks/useTheme";
 
