@@ -34,8 +34,6 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
-import IconSend from "~/renderer/icons/Send";
-import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -102,7 +100,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
-  const availableOnSwap = useSelector(swapSelectableCurrenciesSelector);
+  const availableOnSwap = useSelector(swapSelectableCurrenciesSelector).includes(currency.id);
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -165,18 +163,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   );
 
   const manageActions = [
-    {
-      key: "Send",
-      onClick: onSend,
-      icon: IconSend,
-      label: <Trans i18nKey="send.title" />,
-    },
-    {
-      key: "Receive",
-      onClick: onReceive,
-      icon: IconReceive,
-      label: <Trans i18nKey="receive.title" />,
-    },
     ...manageList,
     ...(availableOnCompound
       ? [
@@ -203,52 +189,48 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       : []),
   ];
 
-  const canBuySwap = availableOnBuy || availableOnSwap.includes(currency.id);
-  const BuySwapHeader = () => (
+  const BuyHeader = () => <BuyActionDefault onClick={onBuy} />;
+
+  const SwapHeader = () => <SwapActionDefault onClick={onSwap} />;
+
+  const ManageActionsHeader = () => (
+    <DropDownSelector
+      border
+      horizontal
+      items={manageActions}
+      renderItem={renderItem}
+      controlled
+      buttonId="account-actions-manage"
+    >
+      {({ isOpen }) => (
+        <Button small primary>
+          <Box horizontal flow={1} alignItems="center">
+            <Box>
+              <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
+            </Box>
+            {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+          </Box>
+        </Button>
+      )}
+    </DropDownSelector>
+  );
+
+  const NonEmptyAccountHeader = () => (
     <>
-      {availableOnBuy ? <BuyActionDefault onClick={onBuy} /> : null}
-      {availableOnSwap.includes(currency.id) ? <SwapActionDefault onClick={onSwap} /> : null}
-      {manageActions && manageActions.length > 0 ? (
-        <DropDownSelector
-          border
-          horizontal
-          items={manageActions}
-          renderItem={renderItem}
-          controlled
-          buttonId="account-actions-manage"
-        >
-          {({ isOpen }) => (
-            <Button small primary>
-              <Box horizontal flow={1} alignItems="center">
-                <Box>
-                  <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
-                </Box>
-                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
-              </Box>
-            </Button>
-          )}
-        </DropDownSelector>
-      ) : null}
+      {canSend(account, parentAccount) && (
+        <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+      )}
+      <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+      {availableOnBuy && <BuyHeader />}
+      {availableOnSwap && <SwapHeader />}
+      {manageActions.length > 0 && <ManageActionsHeader />}
+      {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
     </>
   );
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
-      {!isAccountEmpty(account) ? (
-        canBuySwap ? (
-          <BuySwapHeader />
-        ) : (
-          <>
-            {canSend(account, parentAccount) ? (
-              <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-            ) : null}
-
-            <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-
-            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
-          </>
-        )
-      ) : null}
+      {!isAccountEmpty(account) ? <NonEmptyAccountHeader /> : null}
       <Tooltip content={t("stars.tooltip")}>
         <Star
           accountId={account.id}
