@@ -22,7 +22,6 @@ import IconWyre from "~/renderer/icons/providers/Wyre";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
 import { useDynamicUrl } from "~/renderer/terms";
