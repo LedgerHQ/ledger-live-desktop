@@ -84,7 +84,12 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
       for (let i = 0; i <= prices.length - 1; i++) {
         const price = prices[i];
         const priceMagnitude = magnitude(price);
-        const formattedTime = interval === "hourly" ? formattedHourTime(i) : interval === "minutely" ? formattedMinuteTime(i) : formattedDayTime(i);
+        const formattedTime =
+          interval === "hourly"
+            ? formattedHourTime(i)
+            : interval === "minutely"
+            ? formattedMinuteTime(i)
+            : formattedDayTime(i);
         chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
       }
       console.log(chartData);

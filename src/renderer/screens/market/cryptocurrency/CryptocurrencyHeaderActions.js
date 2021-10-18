@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router";
 
 import Box from "~/renderer/components/Box";

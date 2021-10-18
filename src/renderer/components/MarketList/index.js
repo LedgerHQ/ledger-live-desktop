@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import styled from "styled-components";
 import SortIcon from "./SortIcon";
