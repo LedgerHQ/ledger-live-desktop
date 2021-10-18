@@ -1677,7 +1677,7 @@
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
-        "warningTokenType": "يُرجى إرسال <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حساب {{currency}}. أي أصول مشفرة أخرى يمكن أن تفقد."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "الجهاز",
