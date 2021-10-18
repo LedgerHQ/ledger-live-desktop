@@ -170,7 +170,7 @@ export default function Chart({
             },
             ticks: {
               beginAtZero: true,
-              suggestedMax: Math.max(magnitude - 4, 1),
+              suggestedMax: 1 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
