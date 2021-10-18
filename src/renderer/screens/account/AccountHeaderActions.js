@@ -43,6 +43,8 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
+import { useSwapProviders } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import { providersSelector } from "~/renderer/actions/swap";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -100,7 +102,16 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
-  const availableOnSwap = useSelector(swapSelectableCurrenciesSelector).includes(currency.id);
+
+  const { providers } = useSwapProviders();
+  const storedProviders = useSelector(providersSelector);
+  const availableOnSwap =
+    (providers || storedProviders) &&
+    !!(providers || storedProviders).find(({ pairs }) => {
+      console.log({ pairs });
+      return pairs && pairs.find(({ from, to }) => [from, to].includes(currency.id));
+    });
+
   const history = useHistory();
 
   const onBuy = useCallback(() => {
