@@ -191,6 +191,7 @@
     "feesAmount": "Fees Amount"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menu",
     "stars": "Starred accounts",
     "accounts": "Accounts",

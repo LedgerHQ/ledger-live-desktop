@@ -213,6 +213,10 @@ const MainSideBar = () => {
     [history, location.pathname],
   );
 
+  const handleClickCard = useCallback(() => {
+    push("/card");
+  }, [push]);
+
   const handleClickDashboard = useCallback(() => {
     push("/");
   }, [push]);
@@ -299,6 +303,15 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/accounts"}
                 onClick={handleClickAccounts}
                 disabled={noAccounts}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"card"}
+                label={t("sidebar.card")}
+                icon={IconWallet}
+                iconActiveColor="wallet"
+                isActive={location.pathname === "/card"}
+                onClick={handleClickCard}
                 collapsed={secondAnim}
               />
               <SideBarListItem
