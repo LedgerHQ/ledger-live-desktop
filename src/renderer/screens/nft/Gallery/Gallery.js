@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -26,6 +26,8 @@ const Gallery = () => {
   const collection = nftsByCollections(account.nfts, collectionId)[0];
 
   const { status, metadata } = useNFTMetadata(collection.contract, collection.nfts[0].tokenId);
+  const show = useMemo(() => status !== "loaded", [status]);
+
   const onSend = useCallback(() => {
     // TODO use nft send
     dispatch(openModal("MODAL_SEND", { account }));
@@ -40,14 +42,20 @@ const Gallery = () => {
       <Box horizontal alignItems="center" mb={6}>
         {collectionId && collection ? (
           <>
-            {status === "loaded" ? <Image size={40} nft={metadata} /> : <Skeleton width={40} />}
+            <Skeleton width={40} height={40} show={show}>
+              <Image size={40} nft={metadata} />
+            </Skeleton>
             <Box flex={1} ml={3}>
-              <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={2}>
-                {t("NFT.gallery.collection.header.contract", { contract: collection.contract })}
-              </Text>
-              <Text uppercase ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
-                <CollectionName collection={collection} />
-              </Text>
+              <Skeleton width={93} height={6} show={show}>
+                <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={2}>
+                  {t("NFT.gallery.collection.header.contract", { contract: collection.contract })}
+                </Text>
+              </Skeleton>
+              <Skeleton mt={2} width={143} height={10} show={show}>
+                <Text uppercase ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
+                  <CollectionName collection={collection} />
+                </Text>
+              </Skeleton>
             </Box>
           </>
         ) : (

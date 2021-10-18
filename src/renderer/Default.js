@@ -42,6 +42,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
+import DebugSkeletons from "~/renderer/components/debug/DebugSkeletons";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import useUSBTroubleshooting from "~/renderer/hooks/useUSBTroubleshooting";
@@ -147,6 +148,7 @@ export default function Default() {
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}
               {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+              {process.env.DEBUG_SKELETONS ? <DebugSkeletons /> : null}
               {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
             <OnboardingOrElse>

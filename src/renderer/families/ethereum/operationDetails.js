@@ -3,9 +3,11 @@ import React, { useMemo } from "react";
 import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import { useNfts } from "@ledgerhq/live-common/lib/nft";
+import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
+import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Text from "~/renderer/components/Text";
 
 import {
@@ -45,19 +47,24 @@ type Props = {
 
 const NFTAmountField = ({ operation }: Props) => {
   const operations = useMemo(() => [operation], [operation]);
-  // const nfts = useNfts(operations);
-  // const nft = nfts[0];
-  return null;
-  // return nft ? (
-  //   <Box flex={1}>
-  //     <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
-  //       {nft.nftName}
-  //     </Text>
-  //     <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
-  //       {centerEllipsis(nft.tokenId)}
-  //     </Text>
-  //   </Box>
-  // ) : null;
+  const nfts = nftsFromOperations(operations);
+  const { status, metadata } = useNFTMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
+  const show = useMemo(() => status !== "loaded", [status]);
+
+  return (
+    <Box flex={1}>
+      <Skeleton show={show} width={120} height={10}>
+        <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
+          {metadata?.nftName}
+        </Text>
+      </Skeleton>
+      <Skeleton show={show} width={120} height={6}>
+        <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
+          {centerEllipsis(metadata?.tokenId)}
+        </Text>
+      </Skeleton>
+    </Box>
+  );
 };
 
 const amountCellExtra = {

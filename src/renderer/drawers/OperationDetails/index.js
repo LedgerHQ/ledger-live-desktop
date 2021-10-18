@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, Component, useCallback } from "react";
+import React, { useEffect, useMemo, Component, useCallback } from "react";
 import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
@@ -27,7 +27,9 @@ import {
   flattenOperationWithInternalsAndNfts,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import { useNfts } from "@ledgerhq/live-common/lib/nft";
+import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
+import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 
 import { urls } from "~/config/urls";
 import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
@@ -136,7 +138,10 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
   const operations = useMemo(() => [operation], [operation]);
-  const nfts = useNfts(operations);
+  const nfts = nftsFromOperations(operations);
+  const { status, metadata } = useNFTMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
+  const show = useMemo(() => status !== "loaded", [status]);
+
   const currency = getAccountCurrency(account);
   const mainCurrency = getAccountCurrency(mainAccount);
 
@@ -312,9 +317,13 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           )}
         </Box>
       ) : (
-        <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
-          {nfts[0].nftName}
-        </Text>
+        <Box flex={1} mb={2} alignItems="center">
+          <Skeleton show={show} width={120} height={16}>
+            <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
+              {metadata?.nftName}
+            </Text>
+          </Skeleton>
+        </Box>
       )}
       {url ? (
         <Box m={0} ff="Inter|SemiBold" horizontal justifyContent="center" fontSize={4} my={1}>

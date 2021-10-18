@@ -1,11 +1,11 @@
 // @flow
 import React, { useState } from "react";
 import styled from "styled-components";
-import BigSpinner from "~/renderer/components/BigSpinner";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Fallback from "~/renderer/images/nftFallback.jpg";
+import Skeleton from "./Skeleton";
 
 type Props = {
   nft: NFTWithMetadata,
@@ -46,7 +46,7 @@ const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boole
 `;
 
 const Gen = styled.div`
-  --hue: ${p => p.nft.tokenId.substr(-8) % 360};
+  --hue: ${p => (p?.nft?.tokenId || "wadus").substr(-8) % 360};
   background-image: url(${Fallback});
   background-size: contain;
   border-radius: 4px;
@@ -58,7 +58,7 @@ const Gen = styled.div`
 
   &:after {
     display: ${p => (p.full ? "flex" : "none")}
-    content: "${p => p.nft.nftName || centerEllipsis(p.nft.tokenId)}";
+    content: "${p => p?.nft?.nftName || centerEllipsis(p?.nft?.tokenId || "-")}";
     font-size: 16px;
     font-size: 1vw;
     color: #fff;
@@ -73,13 +73,18 @@ const Gen = styled.div`
   }
 `;
 
-const Image = ({ full, nft, size }: Props) => {
-  const [isLoading, setLoading] = useState(!!nft.picture); // Only attempt to load if we have a url
+const Image = (props: Props) => {
+  const { full, nft, size } = props || {};
+  const [isLoading, setLoading] = useState(!!nft?.picture); // Only attempt to load if we have a url
 
   return (
     <Wrapper full={full} size={size} isLoading={isLoading}>
-      <BigSpinner size={full ? 50 : 16} color="palette.text.shade50" />
-      {nft.picture ? <img onLoad={() => setLoading(false)} src={nft.picture} /> : <Gen nft={nft} />}
+      <Skeleton />
+      {nft?.picture ? (
+        <img onLoad={() => setLoading(false)} src={nft.picture} />
+      ) : (
+        <Gen nft={nft} />
+      )}
     </Wrapper>
   );
 };

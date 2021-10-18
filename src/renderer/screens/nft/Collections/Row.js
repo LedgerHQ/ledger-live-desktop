@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -12,6 +12,10 @@ import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const Container: ThemedComponent<{}> = styled(Box)`
+  &.disabled {
+    pointer-events: none;
+  }
+
   &:not(:nth-child(2)) {
     border-top: 1px solid ${p => p.theme.colors.palette.text.shade10};
   }
@@ -30,36 +34,32 @@ type Props = {
 const Row = ({ nfts, contract, onClick }: Props) => {
   const { status, metadata } = useNFTMetadata(contract, nfts[0].tokenId);
   const { tokenName } = metadata || {};
+  const show = useMemo(() => status !== "loaded", [status]);
 
   return (
-    <Container alignItems="center" horizontal px={4} py={3} onClick={onClick}>
-      {status === "loaded" ? (
-        <>
-          <Image nft={metadata} />
-          <Text
-            ml={2}
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            fontSize={4}
-            style={{ flexGrow: 1 }}
-          >
+    <Container
+      className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
+      alignItems="center"
+      horizontal
+      px={4}
+      py={3}
+      onClick={onClick}
+    >
+      <Skeleton width={32} height={32} show={show}>
+        <Image nft={metadata} />
+      </Skeleton>
+      <Box ml={3} flex={1}>
+        <Skeleton width={136} height={6} show={show}>
+          <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
             {tokenName}
           </Text>
-          <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-            {nfts.length}
-          </Text>
-        </>
-      ) : (
-        <>
-          <Skeleton width={32} height={32} />
-          <Box ml={2} style={{ flexGrow: 1 }}>
-            <Skeleton width={120} height={10} />
-          </Box>
-          <Box ml={10}>
-            <Skeleton width={120} height={10} />
-          </Box>
-        </>
-      )}
+        </Skeleton>
+      </Box>
+      <Skeleton width={42} height={6} show={show}>
+        <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+          {nfts.length}
+        </Text>
+      </Skeleton>
     </Container>
   );
 };

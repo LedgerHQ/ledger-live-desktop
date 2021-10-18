@@ -14,52 +14,68 @@ import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Box from "~/renderer/components/Box";
-import { useNfts } from "@ledgerhq/live-common/lib/nft";
+import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
+import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
   const operations = useMemo(() => [operation], [operation]);
-  // const nfts = useNfts(operations);
-  // const nft = nfts[0];
-  const nft = null;
-  
-  return !nft ? null : (
+  const nfts = nftsFromOperations(operations);
+  const { status, metadata } = useNFTMetadata(nfts[0]?.collection?.contract, nfts[0]?.tokenId);
+  const show = useMemo(() => status !== "loaded", [status]);
+
+  return !nfts[0] ? null : (
     <>
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.name")}</OpDetailsTitle>
         <OpDetailsData>
           <Box horizontal alignItems="center">
-            <Image nft={nft} />
+            <Skeleton width={24} height={24} show={show}>
+              <Image nft={metadata} size={24} />
+            </Skeleton>
             <Box ml={2}>
-              <TextEllipsis>{nft.nftName}</TextEllipsis>
+              <Skeleton width={120} height={10} show={show}>
+                <TextEllipsis>{metadata?.nftName}</TextEllipsis>
+              </Skeleton>
             </Box>
           </Box>
-          <GradientHover>
-            <CopyWithFeedback text={nft.nftName} />
-          </GradientHover>
+          {!show ? (
+            <GradientHover>
+              <CopyWithFeedback text={metadata?.nftName} />
+            </GradientHover>
+          ) : null}
         </OpDetailsData>
       </OpDetailsSection>
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.contract")}</OpDetailsTitle>
         <OpDetailsData>
-          <HashContainer>
-            <SplitAddress value={nft.collection.contract} />
-          </HashContainer>
-          <GradientHover>
-            <CopyWithFeedback text={nft.collection.contract} />
-          </GradientHover>
+          <Skeleton width={80} height={10} show={show}>
+            <HashContainer>
+              <SplitAddress value={metadata?.collection?.contract} />
+            </HashContainer>
+          </Skeleton>
+          {!show ? (
+            <GradientHover>
+              <CopyWithFeedback text={metadata?.collection?.contract} />
+            </GradientHover>
+          ) : null}
         </OpDetailsData>
       </OpDetailsSection>
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.id")}</OpDetailsTitle>
         <OpDetailsData>
-          <HashContainer>
-            <SplitAddress value={nft.tokenId} />
-          </HashContainer>
-          <GradientHover>
-            <CopyWithFeedback text={nft.tokenId} />
-          </GradientHover>
+          <Skeleton width={80} height={10} show={show}>
+            <HashContainer>
+              <SplitAddress value={metadata?.tokenId} />
+            </HashContainer>
+          </Skeleton>
+          {!show ? (
+            <GradientHover>
+              <CopyWithFeedback text={metadata?.tokenId} />
+            </GradientHover>
+          ) : null}
         </OpDetailsData>
       </OpDetailsSection>
       {operation.value && (
