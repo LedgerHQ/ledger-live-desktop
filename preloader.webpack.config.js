@@ -26,6 +26,32 @@ const babelConfig = {
   ],
 };
 
+const babelTsConfig = {
+  presets: [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          electron: "7.1.9",
+        },
+      },
+    ],
+    "@babel/preset-react",
+    "@babel/preset-flow",
+  ],
+  plugins: [
+    ...babelPlugins,
+    "react-hot-loader/babel",
+    [
+      "babel-plugin-styled-components",
+      {
+        ssr: false,
+      },
+    ],
+  ],
+};
+
 module.exports = {
   target: "electron-renderer",
   entry: ["./src/preloader/index.js"],
@@ -43,6 +69,12 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(ts)x?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: babelTsConfig,
+      },
       {
         test: /\.js$/i,
         loader: "babel-loader",

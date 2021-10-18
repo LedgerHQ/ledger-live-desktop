@@ -19,6 +19,22 @@ const babelConfig = {
   plugins: babelPlugins,
 };
 
+const babelTsConfig = {
+  presets: [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          node: "current",
+        },
+      },
+    ],
+    "@babel/preset-flow",
+  ],
+  plugins: babelPlugins,
+};
+
 module.exports = {
   target: "electron-main",
   optimization: {
@@ -43,6 +59,12 @@ module.exports = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(ts)x?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: babelTsConfig,
+      },
       {
         test: /\.js$/i,
         loader: "babel-loader",
