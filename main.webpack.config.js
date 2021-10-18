@@ -62,5 +62,20 @@ module.exports = {
     alias: {
       "~": path.resolve(__dirname, "src"),
     },
+    ...(process.env.REBRANDING
+      ? {
+          extensions: [
+            ".v3.tsx",
+            ".v3.ts",
+            ".v3.jsx",
+            ".v3.js",
+            ".tsx",
+            ".ts",
+            ".jsx",
+            ".js",
+            "...",
+          ],
+        }
+      : {}),
   },
 };
