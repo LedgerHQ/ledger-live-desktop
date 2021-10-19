@@ -34,18 +34,25 @@ const Root = ({ onChange, account, transaction, status }: Props) => {
   const isRecipientNotCreatedError =
     status.errors.recipient instanceof NotEnoughBalanceBecauseDestinationNotCreated;
 
+  const isRecipientNotCreatedWarning =
+    status.warnings.recipient instanceof NotEnoughBalanceBecauseDestinationNotCreated;
+
+  const shownRecipientNotCreatedCheckbox =
+    isRecipientNotCreatedError || isRecipientNotCreatedWarning;
+
   return (
     <Box flow={2}>
-      <Box horizontal>
-        <CheckBox
-          disabled={!isRecipientNotCreatedError}
-          isChecked={transaction.allowNotCreatedRecipient}
-          onChange={allowNotCreatedRecipient => onChangeTx({ allowNotCreatedRecipient })}
-        />
-        <Label ml={5}>
-          <span>Allow not created recipient</span>
-        </Label>
-      </Box>
+      {shownRecipientNotCreatedCheckbox && (
+        <Box horizontal>
+          <CheckBox
+            isChecked={transaction.allowNotCreatedRecipient}
+            onChange={allowNotCreatedRecipient => onChangeTx({ allowNotCreatedRecipient })}
+          />
+          <Label ml={5}>
+            <span>Allow not created recipient</span>
+          </Label>
+        </Box>
+      )}
       <Box>
         <Label mb={5}>
           <span>Memo</span>
