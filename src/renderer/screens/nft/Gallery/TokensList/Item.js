@@ -11,6 +11,8 @@ import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
 import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { NFTViewerDrawer } from "~/renderer/drawers/NFTViewerDrawer";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 const Wrapper: ThemedComponent<{}> = styled(Card)`
   &.disabled {
@@ -41,17 +43,24 @@ const Dots: ThemedComponent<{}> = styled.div`
 type Props = {
   contract: string,
   tokenId: string,
+  id: string,
   mode: "grid" | "list",
 };
 
-const Row = ({ contract, tokenId, mode }: Props) => {
+const Row = ({ contract, tokenId, id, mode }: Props) => {
   const { status, metadata } = useNFTMetadata(contract, tokenId);
   const { nftName } = metadata || {};
 
   const show = useMemo(() => status !== "loaded", [status]);
   const isGrid = mode === "grid";
 
-  const onItemClick = useCallback(() => alert("item click"), []);
+  const onItemClick = useCallback(() => {
+    setDrawer(NFTViewerDrawer, {
+      nftId: id,
+      isOpen: true,
+    });
+  }, [id]);
+
   const onDotsClick = useCallback(
     event => {
       event.stopPropagation();

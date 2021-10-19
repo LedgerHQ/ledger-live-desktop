@@ -1,7 +1,7 @@
 // @flow
 
-import React, { useCallback } from "react";
-import { SideDrawer } from "~/renderer/components/SideDrawer";
+import React, { useEffect, useCallback } from "react";
+import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
@@ -94,12 +94,16 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
   const { t } = useTranslation();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const nftMetadata = useNFTMetadata(nft.contract, nft.tokenId);
+  const { status, metadata } = useNFTMetadata(nft.contract, nft.tokenId);
 
   const onNFTSend = useCallback(() => {}, [nftId]);
 
+  useEffect(() => {
+    console.log({ nft, metadata });
+  }, [metadata, nft]);
+
   return (
-    <SideDrawer isOpen={isOpen} onRequestClose={onRequestClose} direction="left">
+    <Box>
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
           <Text
@@ -124,65 +128,48 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
               textTransform: "uppercase",
             }}
           >
-            {nftMetadata.status === "loaded" ? nftMetadata.metadata.nftName : nft.tokenId}
+            {status === "loaded" ? metadata.nftName : nft.tokenId}
           </Text>
-          {nftMetadata.status === "loaded" && nftMetadata.metadata.picture ? (
-            <NFTImage src={nftMetadata.metadata.picture} />
-          ) : null}
+          {status === "loaded" && metadata.picture ? <NFTImage src={metadata.picture} /> : null}
           <NFTActions>
-            <Button style={{ flex: 1 }} mr={24} primary onClick={onNFTSend} center>
+            <Button style={{ flex: 1 }} mr={5} primary onClick={onNFTSend} center>
               <IconSend size={12} />
-              <Text ml="6px" fontSize={12} lineHeight="18px">
+              <Text ml={1} fontSize={3} lineHeight="18px">
                 {t("nft.viewer.actions.send")}
               </Text>
             </Button>
             <ExternalViewerButton nft={nft} />
           </NFTActions>
           <NFTAttributes>
-            {nftMetadata.status === "loaded" ? (
-              <NFTProperties nft={nft} metadata={nftMetadata.metadata} />
-            ) : null}
+            {status === "loaded" ? <NFTProperties nft={nft} metadata={metadata} /> : null}
             <Separator />
-            {nftMetadata.status === "loaded" ? (
-              <NFTAttribute
-                title={t("nft.viewer.attributes.about")}
-                value={nftMetadata.metadata.description}
-              />
+            {status === "loaded" ? (
+              <NFTAttribute title={t("nft.viewer.attributes.about")} value={metadata.description} />
             ) : null}
             <Separator />
             <Text
               mb="6px"
               lineHeight="15.73px"
-              fontSize="13px"
+              fontSize={4}
               color="palette.text.shade60"
               fontWeight="400"
             >
               {t("nft.viewer.attributes.contract")}
             </Text>
-            <Text
-              lineHeight="15.73px"
-              fontSize="13px"
-              color="palette.text.shade100"
-              fontWeight="600"
-            >
+            <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
               <CopiableField value={nft.collection.contract} />
             </Text>
             <Separator />
             <Text
-              mb="6px"
+              mb={1}
               lineHeight="15.73px"
-              fontSize="13px"
+              fontSize={4}
               color="palette.text.shade60"
               fontWeight="400"
             >
               {t("nft.viewer.attributes.tokenId")}
             </Text>
-            <Text
-              lineHeight="15.73px"
-              fontSize="13px"
-              color="palette.text.shade100"
-              fontWeight="600"
-            >
+            <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
               <CopiableField value={nft.tokenId} />
             </Text>
             {nft.collection.standard === "ERC1155" ? (
@@ -197,6 +184,6 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
           </NFTAttributes>
         </NFTViewerDrawerContent>
       </NFTViewerDrawerContainer>
-    </SideDrawer>
+    </Box>
   );
 }

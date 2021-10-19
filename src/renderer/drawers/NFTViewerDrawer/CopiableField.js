@@ -5,8 +5,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import React from "react";
 import styled from "styled-components";
 import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
-import CopyWithFeedback from "../CopyWithFeedback";
-import { SplitAddress } from "../OperationsList/AddressCell";
+import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
+import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 
 const CopiableFieldContainer: ThemedComponent<{}> = styled.div`
   display: inline-flex;

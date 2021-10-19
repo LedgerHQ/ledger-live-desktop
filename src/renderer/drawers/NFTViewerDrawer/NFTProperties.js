@@ -37,25 +37,25 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
         lineHeight="17px"
         fontSize="14px"
         color="palette.text.shade50"
-        fontWeight={400}
+        ff="Inter|Regular"
       >
         {t("nft.viewer.attributes.properties")}
       </Text>
       <NFTPropertiesContainer>
-        {metadata.properties.map(property => (
-          <NFTProperty key={property.key}>
+        {Object.entries(metadata).map(([key, value]) => (
+          <NFTProperty key={key}>
             <Text
               mb="2px"
               lineHeight="12.1px"
-              fontSize="10px"
+              fontSize={2}
               color="rgba(100, 144, 241, 0.5);"
-              fontWeight={600}
+              ff="Inter|SemiBold"
               uppercase
             >
-              {property.key}
+              {key}
             </Text>
-            <Text mb="2px" lineHeight="16.94px" fontSize="14px" color="#6490F1" fontWeight={600}>
-              {property.value}
+            <Text mb="2px" lineHeight="16.94px" fontSize="14px" color="#6490F1" ff="Inter|Regular">
+              {JSON.stringify(value)}
             </Text>
           </NFTProperty>
         ))}

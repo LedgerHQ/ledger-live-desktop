@@ -77,10 +77,11 @@ const TokensList = ({ account, collectionId }: Props) => {
           <Container mb={20} mode={nftsViewMode}>
             {collection.nfts.map(nft => (
               <Item
-                key={nft.tokenId}
                 mode={nftsViewMode}
-                contract={collection.contract}
+                key={nft.tokenId}
+                id={nft.id}
                 tokenId={nft.tokenId}
+                contract={collection.contract}
               />
             ))}
           </Container>
