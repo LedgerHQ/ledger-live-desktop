@@ -79,7 +79,7 @@ const Collections = ({ account }: Props) => {
           <Spinner size={16} />
         </Box>
       )}
-      {visibleCollection.length > VISIBLE_COLLECTIONS ? (
+      {collections.length > VISIBLE_COLLECTIONS ? (
         <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
           <Box horizontal alignContent="center" justifyContent="center" py={3}>
             <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
