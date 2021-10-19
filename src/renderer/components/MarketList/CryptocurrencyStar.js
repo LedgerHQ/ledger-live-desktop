@@ -8,12 +8,12 @@ import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
-import type { CurrencyType } from "~/renderer/reducers/market";
 import { updateFavoriteCryptocurrencies } from "~/renderer/actions/market";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type Props = {
   yellow?: boolean,
-  currency?: CurrencyType,
+  currency?: MarketCurrencyInfo,
   isStarred?: boolean,
   onClick?: any,
   disableAnimation?: boolean,

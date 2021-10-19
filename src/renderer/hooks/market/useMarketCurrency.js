@@ -5,10 +5,10 @@ import moment from "moment";
 import { MarketClient } from "~/api/market";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
-import type { MarketCurrencyCommonInfo } from "~/renderer/reducers/market";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type Prop = {
-  id: string,
+  id: ?string,
   counterCurrency: string,
   range: string,
 };
@@ -25,7 +25,7 @@ function magnitude(number) {
 }
 
 export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
-  const [currency, setCurrency] = useState<MarketCurrencyCommonInfo>({});
+  const [currency, setCurrency] = useState<MarketCurrencyInfo>({});
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

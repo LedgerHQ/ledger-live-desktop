@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import type { CurrencyType } from "~/renderer/reducers/market";
 import Track from "~/renderer/analytics/Track";
 import Pills from "~/renderer/components/Pills";
 import { setMarketRange } from "~/renderer/actions/market";
 import Text from "~/renderer/components/Text";
 import { rangesArr } from "~/renderer/screens/market/MarketRangeSelect";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type Props = {
-  currency: CurrencyType,
+  currency: MarketCurrencyInfo,
 };
 
 function CryptocurrencySummaryHeader({ currency }: Props) {

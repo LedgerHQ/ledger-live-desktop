@@ -14,11 +14,11 @@ import type { MarketState } from "~/renderer/reducers/market";
 
 type Props = {
   getMarketCryptoCurrencies: any,
-  setMarketParams: (state: MarketState) => { payload: MarketState, type: string },
+  setMarketParams: (state: $Shape<MarketState>) => { payload: $Shape<MarketState>, type: string },
   searchValue: string,
 };
 
-class MarketPage extends Component {
+class MarketPage extends Component<Props> {
   props: Props;
 
   constructor(props: Props) {
@@ -30,8 +30,8 @@ class MarketPage extends Component {
     this.props.getMarketCryptoCurrencies({ page: 1 });
   };
 
-  onTextChange = e => {
-    const searchValue = e.target.value.trim();
+  onTextChange = (value: string) => {
+    const searchValue = value.trim();
     this.props.setMarketParams({ searchValue: searchValue, loading: true });
 
     // check for not allowing search with 1 letter because of fetch error in coingecko side
@@ -50,7 +50,7 @@ class MarketPage extends Component {
           <SearchBox
             id={"market-search-input"}
             autoFocus
-            onTextChange={this.onTextChange}
+            onTextChange={e => this.onTextChange(e.target.value)}
             search={searchValue}
           />
         </SearchContainer>

@@ -1,14 +1,13 @@
 // @flow
 import React from "react";
 import { useSelector } from "react-redux";
-import type { Children } from "react";
 import styled from "styled-components";
 
 import Box, { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import FormattedDate from "~/renderer/components/FormattedDate";
-import type { MarketCurrency } from "~/renderer/reducers/market";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const CardStyled = styled(Card)`
   width: 100%;
@@ -25,7 +24,7 @@ const InfoSection = ({
   style,
 }: {
   title: string,
-  children: Children,
+  children: React$Node,
   style?: any,
 }) => {
   return (
@@ -38,7 +37,7 @@ const InfoSection = ({
   );
 };
 
-function PriceStats({ currency }: { currency: MarketCurrency }) {
+function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
   const { counterCurrency } = useSelector(state => state.market);
 
   return (

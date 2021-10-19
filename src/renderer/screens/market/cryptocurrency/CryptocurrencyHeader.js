@@ -2,10 +2,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import type { CurrencyType } from "~/renderer/reducers/market";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -17,17 +17,11 @@ const CryptoCurrencyIconWrapper = styled.div`
   }
 `;
 
-type CryptocurrencyHeaderType = { currency: CurrencyType };
+type CryptocurrencyHeaderType = { currency: MarketCurrencyInfo };
 
 const Title = styled(Text)`
   color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 28px;
-  text-transform: uppercase;
-`;
-
-const Platform = styled(Text)`
-  color: ${p => p.theme.colors.palette.text.shade60};
-  font-size: 14px;
   text-transform: uppercase;
 `;
 
@@ -47,7 +41,6 @@ function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
               <CryptocurrencyStar currency={currency} />
             </Box>
           </Box>
-          <Platform>{currency.family}</Platform>
         </Box>
       </Box>
     </Box>

@@ -6,6 +6,7 @@ export type RangeData = {
   days: number,
   interval: string,
   simple: string,
+  scale: string,
 };
 
 const dataTable: { [key: string]: RangeData } = {

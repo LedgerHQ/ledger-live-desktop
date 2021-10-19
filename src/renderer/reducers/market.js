@@ -1,27 +1,11 @@
 // @flow
 import type { Currency } from "@ledgerhq/live-common/lib/types";
-import { Portfolio } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
 
 import { setKey } from "~/renderer/storage";
 
-export type MarketCurrency = {
-  coinType: number,
-  color: string,
-  explorerViews: Array<any>,
-  family: string,
-  id: string,
-  managerAppName: string,
-  name: string,
-  portfolio: Portfolio,
-  scheme: string,
-  ticker: string,
-  type: string,
-  units: Array<any>,
-};
-
 export type MarketCurrencyInfo = {
-  id: string,
+  id: ?string,
   symbol: string,
   name: string,
   image: string,
@@ -44,6 +28,8 @@ export type MarketCurrencyInfo = {
   sparkline_in_7d: number[],
   supportedCurrency: Currency,
   magnitude: number,
+  isStarred: boolean,
+  difference: number,
 };
 
 export type MarketCurrencyCommonInfo = {
@@ -53,7 +39,6 @@ export type MarketCurrencyCommonInfo = {
   magnitude: number,
 };
 
-export type CurrencyType = "all" | "coins" | "tokens";
 export type MarketFilters = {
   isLedgerCompatible: boolean,
 };
@@ -77,6 +62,7 @@ export type MarketState = {
   filters: {
     isLedgerCompatible: boolean,
   },
+  loading: boolean,
 };
 
 const initialState: MarketState = {
@@ -96,6 +82,7 @@ const initialState: MarketState = {
   },
   favorites: [],
   coinsListCount: 0,
+  loading: false,
 };
 
 const handlers = {

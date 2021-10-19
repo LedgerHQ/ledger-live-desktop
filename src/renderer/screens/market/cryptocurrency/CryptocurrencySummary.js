@@ -8,15 +8,15 @@ import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import FormattedDate from "~/renderer/components/FormattedDate";
-import type { CurrencyType } from "~/renderer/reducers/market";
 import CryptocurrencySummaryHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencySummaryHeader";
 import { useMarketCurrencyChart } from "~/renderer/hooks/market/useMarketCurrency";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type Props = {
-  currency: CurrencyType,
+  currency: MarketCurrencyInfo,
   range: string,
   counterValue: any,
 };
@@ -56,7 +56,9 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   }
 
   currency.difference =
-    chartData.length > 1 ? chartData[0].value - chartData[chartData.length - 1].value : 0;
+    chartData.length > 1
+      ? parseFloat(chartData[0].value) - parseFloat(chartData[chartData.length - 1].value)
+      : 0;
 
   return (
     <Card p={0} py={5}>

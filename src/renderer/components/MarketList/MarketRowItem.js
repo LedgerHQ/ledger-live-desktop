@@ -176,7 +176,7 @@ function MarketRowItem(props: Props) {
                     <Box alignItems="left" pr={16}>
                       {currency.name}
                       <CurrencyTicker style={{ paddingLeft: 0, paddingBottom: 0, paddingTop: 0 }}>
-                        {/* {currency.symbol.toUpperCase()} */}
+                        {currency.symbol.toUpperCase()}
                       </CurrencyTicker>
                     </Box>
                   </>
