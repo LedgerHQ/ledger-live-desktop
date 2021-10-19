@@ -18,6 +18,7 @@ import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
 import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
+import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
@@ -52,9 +53,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsTitle>{t("operationDetails.nft.contract")}</OpDetailsTitle>
         <OpDetailsData>
           <Skeleton width={80} barHeight={10} minHeight={24} show={show}>
-            <HashContainer>
-              <SplitAddress value={metadata?.contract} />
-            </HashContainer>
+            <HashContainer>{centerEllipsis(metadata?.contract, 33)}</HashContainer>
           </Skeleton>
           {!show ? (
             <GradientHover>
@@ -67,9 +66,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsTitle>{t("operationDetails.nft.id")}</OpDetailsTitle>
         <OpDetailsData>
           <Skeleton width={80} minHeight={10} show={show}>
-            <HashContainer>
-              <SplitAddress value={metadata?.tokenId} />
-            </HashContainer>
+            <HashContainer>{centerEllipsis(metadata?.tokenId, 33)}</HashContainer>
           </Skeleton>
           {!show ? (
             <GradientHover>
