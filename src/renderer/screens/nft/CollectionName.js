@@ -1,5 +1,7 @@
 // @flow
+import React from "react";
 import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 
 // TODO Make me pretty
 const CollectionName = ({
@@ -11,7 +13,11 @@ const CollectionName = ({
   const { metadata } = useNFTMetadata(collection.contract, nfts[0]?.tokenId);
   const { tokenName } = metadata || {};
 
-  return tokenName;
+  return (
+    <Skeleton width={80} height={24} barHeight={10} show={!tokenName}>
+      {tokenName}
+    </Skeleton>
+  );
 };
 
 export default CollectionName;
