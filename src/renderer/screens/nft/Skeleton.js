@@ -55,7 +55,7 @@ const Item: ThemedComponent<{}> = styled.div.attrs(({ state }) => ({
     overflow: hidden;
     border-radius: 3px;
     background: hsla(207, 44%, 14%, 0.1);
-    height: ${p => (p.full ? "100%" : `${p.minHeight  }px`)};
+    height: ${p => (p.full ? "100%" : `${p.minHeight}px`)};
     width: ${p => (p.full ? "100%" : `${p.width}px`)};
     aspect-ratio: ${p => (p.full ? 1 : "auto")};
   }

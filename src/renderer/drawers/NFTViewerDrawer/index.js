@@ -42,21 +42,6 @@ const NFTViewerDrawerContent = styled.div`
   height: 100%;
 `;
 
-const NFTImage = styled.div.attrs(({ src }) => ({
-  style: {
-    backgroundImage: `url("${src}")`,
-  },
-}))`
-  width: 100%;
-  height: 420px;
-  pointer-events: none;
-  outline: none;
-  user-select: none;
-  filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.1));
-  border-radius: 8px;
-  background-size: cover;
-`;
-
 const NFTActions = styled.div`
   display: flex;
   flex-direction: row;
