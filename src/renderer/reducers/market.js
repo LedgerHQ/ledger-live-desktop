@@ -5,7 +5,7 @@ import { handleActions } from "redux-actions";
 import { setKey } from "~/renderer/storage";
 
 export type MarketCurrencyInfo = {
-  id: ?string,
+  id: string,
   symbol: string,
   name: string,
   image: string,
@@ -36,7 +36,6 @@ export type MarketCurrencyCommonInfo = {
   id: string,
   symbol: string,
   name: string,
-  magnitude: number,
 };
 
 export type MarketFilters = {

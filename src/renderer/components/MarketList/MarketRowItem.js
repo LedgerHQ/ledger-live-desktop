@@ -1,9 +1,9 @@
 // @flow
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { withRouter } from "react-router";
 import styled from "styled-components";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -14,7 +14,6 @@ import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyS
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { MarketCurrencyInfo } from "~/renderer/reducers/market";
-import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 const Cell = styled(Box)`
@@ -61,14 +60,12 @@ const Row: ThemedComponent<{}> = styled(Box)`
 
 const RowContent: ThemedComponent<{
   disabled?: boolean,
-  isSubAccountsExpanded: boolean,
 }> = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
   height: 54px;
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -90,16 +87,13 @@ function MarketRowItem(props: Props) {
   const history = useHistory();
   const { style, currency, loading, counterCurrency } = props;
 
-  const onCurrencyClick = useCallback(
-    (account: Account | TokenAccount, parentAccount: ?Account) => {
-      setTrackingSource("accounts page");
-      history.push({
-        pathname: `/market/${currency.id}`,
-        state: currency,
-      });
-    },
-    [currency, history],
-  );
+  const onCurrencyClick = useCallback(() => {
+    setTrackingSource("accounts page");
+    history.push({
+      pathname: `/market/${currency.id}`,
+      state: currency,
+    });
+  }, [currency, history]);
 
   const onBuy = useCallback(
     e => {

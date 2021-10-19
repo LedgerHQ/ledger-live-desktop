@@ -17,7 +17,6 @@ import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Shield from "~/renderer/icons/Shield";
 import useTheme from "~/renderer/hooks/useTheme";
-import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -32,7 +31,7 @@ const CryptoCurrencyPage = () => {
 
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 
-  const { loading, currency } = useMarketCurrency<MarketCurrencyInfo>({
+  const { loading, currency } = useMarketCurrency({
     id,
     counterCurrency,
     range,

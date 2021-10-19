@@ -14,13 +14,13 @@ type MarketListRequestParams = {
 };
 
 export type MarketCurrencyByIdRequestParams = {
-  id: string,
+  id: ?string,
   counterCurrency: string,
   range: string,
 };
 
 type MarketCurrencyChartDataRequestParams = {
-  id: string,
+  id: ?string,
   counterCurrency: string,
   days: number,
   interval: string,
