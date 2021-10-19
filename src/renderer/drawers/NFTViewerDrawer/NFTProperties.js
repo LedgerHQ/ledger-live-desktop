@@ -3,6 +3,7 @@
 import React from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { useTranslation } from "react-i18next";
 
 import type { NFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
@@ -23,6 +24,13 @@ const NFTPropertiesContainer = styled.div`
   column-gap: 16px;
 `;
 
+const Separator = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: ${({ theme }) => theme.colors.palette.text.shade10};
+  margin: 24px 0px;
+`;
+
 type NFTPropertiesProps = {
   nft: NFT,
   metadata: NFTMetadata,
@@ -30,6 +38,8 @@ type NFTPropertiesProps = {
 
 export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
   const { t } = useTranslation();
+  if (!metadata?.properties?.length) return null;
+
   return (
     <React.Fragment>
       <Text
@@ -42,24 +52,37 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
         {t("nft.viewer.attributes.properties")}
       </Text>
       <NFTPropertiesContainer>
-        {metadata?.properties.map(({ key, value }) => (
-          <NFTProperty key={key}>
-            <Text
-              mb="2px"
-              lineHeight="12.1px"
-              fontSize={2}
-              color="rgba(100, 144, 241, 0.5);"
-              ff="Inter|SemiBold"
-              uppercase
-            >
-              {key}
-            </Text>
-            <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|SemiBold">
-              {value}
-            </Text>
-          </NFTProperty>
-        ))}
+        {metadata ? (
+          metadata.properties.map(({ key, value }) => (
+            <NFTProperty key={key}>
+              <Text
+                mb="2px"
+                lineHeight="12.1px"
+                fontSize={2}
+                color="rgba(100, 144, 241, 0.5);"
+                ff="Inter|SemiBold"
+                uppercase
+              >
+                {key}
+              </Text>
+              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|SemiBold">
+                {value}
+              </Text>
+            </NFTProperty>
+          ))
+        ) : (
+          <>
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show />
+          </>
+        )}
       </NFTPropertiesContainer>
+      <Separator />
     </React.Fragment>
   );
 }

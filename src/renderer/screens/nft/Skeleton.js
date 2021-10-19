@@ -19,7 +19,6 @@ type Props = {
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   ${space};
-  ${layout};
   ${p => (p.full ? "aspect-ratio: 1; height: auto;" : "")}
   ${p => (p.full ? "width: 100%;" : "")}
   align-items: center;

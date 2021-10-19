@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useMemo, useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -13,11 +13,19 @@ import { getNFTById } from "~/renderer/reducers/accounts";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
 import { ExternalViewerButton } from "./ExternalViewerButton";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
+import { useNftAPI, useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
   overflow-y: hidden;
+`;
+
+const Pre = styled.span`
+  white-space: pre-line;
+  display: block;
+  unicode-bidi: embed;
+  line-break: anywhere;
 `;
 
 const NFTViewerDrawerContent = styled.div`
@@ -65,21 +73,39 @@ const NFTAttributes = styled.div`
   flex-direction: column;
 `;
 
-function NFTAttribute({ title, value }: { title: string, value: string }) {
+function NFTAttribute({
+  title,
+  value,
+  skeleton,
+  separatorBottom,
+  separatorTop,
+}: {
+  title: string,
+  value: string,
+  skeleton?: boolean,
+  separatorBottom?: boolean,
+  separatorTop?: boolean,
+}) {
+  if (!skeleton && !value) return null;
+
   return (
     <React.Fragment>
+      {separatorTop ? <Separator /> : null}
       <Text
-        mb="6px"
+        mb={1}
         lineHeight="15.73px"
-        fontSize="13px"
+        fontSize={4}
         color="palette.text.shade60"
-        fontWeight="400"
+        ff="Inter|Regular"
       >
         {title}
       </Text>
-      <Text lineHeight="15.73px" fontSize="13px" color="palette.text.shade100" fontWeight="600">
-        {value}
-      </Text>
+      <Skeleton show={skeleton} width={120} height={24} barHeight={10}>
+        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|SemiBold">
+          <Pre>{value}</Pre>
+        </Text>
+      </Skeleton>
+      {separatorTop ? <Separator /> : null}
     </React.Fragment>
   );
 }
@@ -95,12 +121,21 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNFTMetadata(nft.collection.contract, nft.tokenId);
+  const show = useMemo(() => status !== "loaded", [status]);
 
-  const onNFTSend = useCallback(() => {}, [nftId]);
+  const onNFTSend = useCallback(() => {
+    alert("SEND");
+  }, []);
+  const { loadNFTMetadata } = useNftAPI();
+
+  const flushAndReload = useCallback(() => {
+    loadNFTMetadata(nft.collection.contract, nft.tokenId);
+  }, [loadNFTMetadata, nft.collection.contract, nft.tokenId]);
 
   return (
     <Box>
       <NFTViewerDrawerContainer>
+        <Button onClick={flushAndReload}>{"Flush all"}</Button>
         <NFTViewerDrawerContent>
           <Text
             fontSize="15px"
@@ -124,9 +159,9 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
               textTransform: "uppercase",
             }}
           >
-            {status === "loaded" ? metadata.nftName : nft.tokenId}
+            {!show ? metadata.nftName : nft.tokenId}
           </Text>
-          {status === "loaded" && metadata.picture ? <NFTImage src={metadata.picture} /> : null}
+          {!show && metadata.picture ? <NFTImage src={metadata.picture} /> : null}
           <NFTActions>
             <Button style={{ flex: 1 }} mr={5} primary onClick={onNFTSend} center>
               <IconSend size={12} />
@@ -137,12 +172,13 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
             <ExternalViewerButton nft={nft} />
           </NFTActions>
           <NFTAttributes>
-            {status === "loaded" ? <NFTProperties nft={nft} metadata={metadata} /> : null}
-            <Separator />
-            {status === "loaded" ? (
-              <NFTAttribute title={t("nft.viewer.attributes.about")} value={metadata.description} />
-            ) : null}
-            <Separator />
+            <NFTProperties nft={nft} metadata={metadata} />
+            <NFTAttribute
+              skeleton={show}
+              title={t("nft.viewer.attributes.about")}
+              value={metadata?.description}
+              separatorBottom
+            />
             <Text
               mb="6px"
               lineHeight="15.73px"
@@ -170,8 +206,9 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
             </Text>
             {nft.collection.standard === "ERC1155" ? (
               <React.Fragment>
-                <Separator />
                 <NFTAttribute
+                  separatorTop
+                  skeleton={show}
                   title={t("nft.viewer.attributes.quantity")}
                   value={nft.amount.toString()}
                 />
