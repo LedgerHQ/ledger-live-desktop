@@ -45,17 +45,17 @@ const Row = ({ nfts, contract, onClick }: Props) => {
       py={3}
       onClick={onClick}
     >
-      <Skeleton width={32} height={32} show={show}>
+      <Skeleton width={32} minHeight={32} show={show}>
         <Image nft={metadata} />
       </Skeleton>
       <Box ml={3} flex={1}>
-        <Skeleton width={136} height={24} barHeight={10} show={show}>
+        <Skeleton width={136} minHeight={24} barHeight={10} show={show}>
           <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
             {tokenName}
           </Text>
         </Skeleton>
       </Box>
-      <Skeleton width={42} height={24} barHeight={10} show={show}>
+      <Skeleton width={42} minHeight={24} barHeight={10} show={show}>
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
           {nfts.length}
         </Text>

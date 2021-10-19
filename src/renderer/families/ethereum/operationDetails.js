@@ -65,12 +65,12 @@ const NFTAmountField = ({ operation }: Props) => {
 
   return (
     <Cell>
-      <Skeleton show={show} width={170} height={24} barHeight={10}>
+      <Skeleton show={show} width={170} minHeight={24} barHeight={10}>
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
           {metadata?.nftName}
         </Text>
       </Skeleton>
-      <Skeleton show={show} width={200} height={24} barHeight={6}>
+      <Skeleton show={show} width={200} minHeight={24} barHeight={6}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
           {centerEllipsis(metadata?.tokenId)}
         </Text>

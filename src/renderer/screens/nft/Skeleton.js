@@ -8,7 +8,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { layout, space } from "styled-system";
 type Props = {
   width?: number,
-  height?: number,
+  minHeight?: number,
   barHeight?: number,
   full?: boolean,
   mt?: any,
@@ -18,6 +18,7 @@ type Props = {
 };
 
 const Wrapper: ThemedComponent<{}> = styled.div`
+  ${layout};
   ${space};
   ${p => (p.full ? "aspect-ratio: 1; height: auto;" : "")}
   ${p => (p.full ? "width: 100%;" : "")}
@@ -54,7 +55,7 @@ const Item: ThemedComponent<{}> = styled.div.attrs(({ state }) => ({
     overflow: hidden;
     border-radius: 3px;
     background: hsla(207, 44%, 14%, 0.1);
-    height: ${p => (p.full ? "100%" : `${p.height}px`)};
+    height: ${p => (p.full ? "100%" : `${p.minHeight  }px`)};
     width: ${p => (p.full ? "100%" : `${p.width}px`)};
     aspect-ratio: ${p => (p.full ? 1 : "auto")};
   }
@@ -90,17 +91,17 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
-const Skeleton = ({ width, barHeight, height, full, children, status, mt, show }: Props) => {
+const Skeleton = ({ width, barHeight, minHeight, full, children, status, mt, show }: Props) => {
   const alwaysShowSkeletons = useSelector(alwaysShowSkeletonsSelector);
   const isSkeletonVisible = show || alwaysShowSkeletons;
   const content = isSkeletonVisible ?? (isSkeletonVisible || !children) ? "" : children;
   const key = content ? "content" : "holder";
 
   return (
-    <Wrapper height={height} full={full} mt={mt}>
+    <Wrapper minHeight={minHeight} full={full} mt={mt}>
       <TransitionGroup component={null}>
         <CSSTransition in appear key={key} timeout={1000} classNames="skeleton">
-          <Item full={full} width={width} height={barHeight || height}>
+          <Item full={full} width={width} minHeight={barHeight || minHeight}>
             {content}
           </Item>
         </CSSTransition>

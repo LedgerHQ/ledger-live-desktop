@@ -32,11 +32,11 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsTitle>{t("operationDetails.nft.name")}</OpDetailsTitle>
         <OpDetailsData>
           <Box horizontal alignItems="center">
-            <Skeleton width={24} height={24} show={show}>
+            <Skeleton width={24} minHeight={24} show={show}>
               <Image nft={metadata} size={24} />
             </Skeleton>
             <Box ml={2}>
-              <Skeleton width={200} barHeight={10} height={32} show={show}>
+              <Skeleton width={200} barHeight={10} minHeight={32} show={show}>
                 <TextEllipsis>{metadata?.nftName}</TextEllipsis>
               </Skeleton>
             </Box>
@@ -51,7 +51,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.contract")}</OpDetailsTitle>
         <OpDetailsData>
-          <Skeleton width={80} barHeight={10} height={24} show={show}>
+          <Skeleton width={80} barHeight={10} minHeight={24} show={show}>
             <HashContainer>
               <SplitAddress value={metadata?.contract} />
             </HashContainer>
@@ -66,7 +66,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.id")}</OpDetailsTitle>
         <OpDetailsData>
-          <Skeleton width={80} height={10} show={show}>
+          <Skeleton width={80} minHeight={10} show={show}>
             <HashContainer>
               <SplitAddress value={metadata?.tokenId} />
             </HashContainer>

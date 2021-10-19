@@ -78,16 +78,16 @@ const Row = ({ contract, tokenId, id, mode }: Props) => {
       alignItems={!isGrid ? "center" : undefined}
       onClick={onItemClick}
     >
-      <Skeleton width={40} height={40} full={isGrid} show={show}>
+      <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
         <Image nft={metadata} size={40} full={isGrid} />
       </Skeleton>
       <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
-        <Skeleton width={142} height={24} barHeight={10} show={show}>
+        <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
           <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
             {nftName}
           </Text>
         </Skeleton>
-        <Skeleton width={180} height={24} barHeight={6} show={show}>
+        <Skeleton width={180} minHeight={24} barHeight={6} show={show}>
           <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
             <Trans
               i18nKey="NFT.gallery.tokensList.item.tokenId"

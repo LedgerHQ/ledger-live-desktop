@@ -14,7 +14,7 @@ const CollectionName = ({
   const { tokenName } = metadata || {};
 
   return (
-    <Skeleton width={80} height={24} barHeight={10} show={!tokenName}>
+    <Skeleton width={80} minHeight={24} barHeight={10} show={!tokenName}>
       {tokenName}
     </Skeleton>
   );

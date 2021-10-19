@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
@@ -25,7 +25,7 @@ const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boole
   width: ${({ full, size = 32 }) => (full ? "100%" : `${size}px`)};
   aspect-ratio: 1 / 1;
   border-radius: 4px;
-  background: ${p => p.theme.colors.palette.background.paper};
+  background: ${p => p.theme.colors.palette.background.default};
   background-size: contain;
 
   display: flex;

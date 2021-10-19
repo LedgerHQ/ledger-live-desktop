@@ -43,7 +43,9 @@ export const multiline = (str: string): React$Node[] =>
   str.split("\n").map(line => <p key={uniqueId()}>{line}</p>);
 
 export const centerEllipsis = (str: string, maxLength: number = 25) =>
-  str && str.length > maxLength ? `${str.substr(0, 10)}...${str.substr(-10)}` : str;
+  str?.length > maxLength
+    ? `${str.substr(0, Math.floor(maxLength / 2))}...${str.substr(Math.floor(-maxLength / 2))}`
+    : str;
 
 export function getMarketColor({
   marketIndicator,

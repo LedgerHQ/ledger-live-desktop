@@ -14,6 +14,8 @@ import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
 import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Image from "~/renderer/screens/nft/Image";
+import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftAPI, useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const NFTViewerDrawerContainer = styled.div`
@@ -26,6 +28,7 @@ const Pre = styled.span`
   display: block;
   unicode-bidi: embed;
   line-break: anywhere;
+  line-height: 15px;
 `;
 
 const NFTViewerDrawerContent = styled.div`
@@ -100,12 +103,12 @@ function NFTAttribute({
       >
         {title}
       </Text>
-      <Skeleton show={skeleton} width={120} height={24} barHeight={10}>
+      <Skeleton show={skeleton} width={120} minHeight={24} barHeight={10}>
         <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|SemiBold">
           <Pre>{value}</Pre>
         </Text>
       </Skeleton>
-      {separatorTop ? <Separator /> : null}
+      {separatorBottom ? <Separator /> : null}
     </React.Fragment>
   );
 }
@@ -122,6 +125,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNFTMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status !== "loaded", [status]);
+  const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 
   const onNFTSend = useCallback(() => {
     alert("SEND");
@@ -129,13 +133,13 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
   const { loadNFTMetadata } = useNftAPI();
 
   const flushAndReload = useCallback(() => {
+    // clearCache();
     loadNFTMetadata(nft.collection.contract, nft.tokenId);
   }, [loadNFTMetadata, nft.collection.contract, nft.tokenId]);
 
   return (
     <Box>
       <NFTViewerDrawerContainer>
-        <Button onClick={flushAndReload}>{"Flush all"}</Button>
         <NFTViewerDrawerContent>
           <Text
             fontSize="15px"
@@ -159,16 +163,22 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
               textTransform: "uppercase",
             }}
           >
-            {!show ? metadata.nftName : nft.tokenId}
+            {name}
           </Text>
-          {!show && metadata.picture ? <NFTImage src={metadata.picture} /> : null}
+          <Skeleton show={show} width={393} minHeight={393}>
+            <Image nft={metadata} size={393} />
+          </Skeleton>
           <NFTActions>
+            <Button onClick={flushAndReload} danger mr={2}>
+              {"↻"}
+            </Button>
             <Button style={{ flex: 1 }} mr={5} primary onClick={onNFTSend} center>
               <IconSend size={12} />
               <Text ml={1} fontSize={3} lineHeight="18px">
                 {t("nft.viewer.actions.send")}
               </Text>
             </Button>
+
             <ExternalViewerButton nft={nft} />
           </NFTActions>
           <NFTAttributes>

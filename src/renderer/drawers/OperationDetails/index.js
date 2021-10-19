@@ -318,12 +318,12 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         </Box>
       ) : (
         <Box flex={1} mb={2} alignItems="center">
-          <Skeleton show={show} width={160} barHeight={16} height={32} textAlign="center">
+          <Skeleton show={show} width={160} barHeight={16} minHeight={32} textAlign="center">
             <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
               {metadata?.nftName}
             </Text>
           </Skeleton>
-          <Skeleton show={show} width={200} barHeight={10} height={24} mt={1} textAlign="center">
+          <Skeleton show={show} width={200} barHeight={10} minHeight={24} mt={1} textAlign="center">
             <Text ff="Inter|Regular" textAlign="center" fontSize={5} color="palette.text.shade50">
               {centerEllipsis(metadata?.contract)}
             </Text>
