@@ -9,38 +9,58 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import Box from "~/renderer/components/Box";
 import Input from "~/renderer/components/Input";
 import Label from "~/renderer/components/Label";
+import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import { NotEnoughBalanceBecauseDestinationNotCreated } from "@ledgerhq/errors";
+import CheckBox from "~/renderer/components/CheckBox";
 
 type Props = {
+  account: Account,
+  status: TransactionStatus,
   onChange: Transaction => void,
   transaction: Transaction,
-  account: Account,
-  t: TFunction,
 };
 
-const MemoField = ({ onChange, account, transaction, t }: Props) => {
-  invariant(transaction.family === "solana", "MemoField: solana family expected");
+const Root = ({ onChange, account, transaction, status }: Props) => {
+  invariant(transaction.family === "solana", "solana family expected");
 
-  const onChangeMemo = useCallback(
-    memo => {
+  const onChangeTx = useCallback(
+    patch => {
       const bridge = getAccountBridge(account);
-      onChange(bridge.updateTransaction(transaction, { memo }));
+      onChange(bridge.updateTransaction(transaction, patch));
     },
     [onChange, account, transaction],
   );
 
+  const isRecipientNotCreatedError =
+    status.errors.recipient instanceof NotEnoughBalanceBecauseDestinationNotCreated;
+
   return (
-    <Box vertical flow={5}>
-      <Box grow>
+    <Box flow={2}>
+      <Box horizontal>
+        <CheckBox
+          disabled={!isRecipientNotCreatedError}
+          isChecked={transaction.allowNotCreatedRecipient}
+          onChange={allowNotCreatedRecipient => onChangeTx({ allowNotCreatedRecipient })}
+        />
+        <Label ml={5}>
+          <span>Allow not created recipient</span>
+        </Label>
+      </Box>
+      <Box>
         <Label mb={5}>
           <span>Memo</span>
         </Label>
-        <Input placeholder="Memo" value={String(transaction.memo || "")} onChange={onChangeMemo} />
+        <Input
+          placeholder="Memo"
+          value={transaction.memo || ""}
+          onChange={memo => onChangeTx({ memo })}
+        />
       </Box>
     </Box>
   );
 };
 
 export default {
-  component: withTranslation()(MemoField),
-  fields: ["memo"],
+  component: withTranslation()(Root),
+  fields: ["memo", "allowNotCreatedRecipient"],
 };
