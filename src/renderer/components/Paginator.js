@@ -16,7 +16,7 @@ type Props = {
 };
 
 type InnerButtonProps = {
-  children: React,
+  children: React$Node,
 };
 
 export default function Paginator(props: Props) {

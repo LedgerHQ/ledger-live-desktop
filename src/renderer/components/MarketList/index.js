@@ -53,14 +53,12 @@ const Row: ThemedComponent<{}> = styled(Box)`
 
 const RowContent: ThemedComponent<{
   disabled?: boolean,
-  isSubAccountsExpanded: boolean,
 }> = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding-bottom: ${p => (p.isSubAccountsExpanded ? "20px" : "0")};
 
   & * {
     color: ${p => p.theme.colors.palette.text.shade60};

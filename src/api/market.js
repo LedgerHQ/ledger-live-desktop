@@ -130,7 +130,7 @@ export class MarketClient extends APIClient {
     id,
     counterCurrency,
     range,
-  }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyCommonInfo[]> {
+  }: MarketCurrencyByIdRequestParams): Promise<MarketCurrencyInfo> {
     const currenciesInfos = await this.listPaginated({
       ids: [id],
       limit: 1,

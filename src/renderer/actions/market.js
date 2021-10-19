@@ -8,7 +8,7 @@ import { counterCurrencyNameTable } from "~/renderer/constants/market";
 const DEFAULT_PAGE_LIMIT = 9;
 const marketClient = new MarketClient();
 
-export const setMarketParams = (payload: MarketState) => ({
+export const setMarketParams = (payload: Partial<MarketState>) => ({
   type: "SET_MARKET_PARAMS",
   payload,
 });
@@ -18,7 +18,7 @@ export const setMarketRange = (range: string) => ({
   payload: range,
 });
 
-export const setMarketFilters = (filters: MarketFilters) => ({
+export const setMarketFilters = (filters: Partial<MarketFilters>) => ({
   type: "SET_MARKET_FILTERS",
   payload: filters,
 });
@@ -75,14 +75,16 @@ export const getCounterCurrencies = () =>
     }
   };
 
-export const getMarketCryptoCurrencies = (filterParams: {
-  counterCurrency: string,
-  range: string,
-  limit: number,
-  page: number,
-  order: string,
-  orderBy: string,
-}) =>
+export const getMarketCryptoCurrencies = (
+  filterParams: Partial<{
+    counterCurrency: string,
+    range: string,
+    limit: number,
+    page: number,
+    order: string,
+    orderBy: string,
+  }>,
+) =>
   async function(dispatch, getState) {
     dispatch(
       setMarketParams({

@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 
 import { MarketClient } from "~/api/market";
-import type { MarketCurrencyByIdRequestParams } from "~/api/market";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import type { MarketCurrencyCommonInfo } from "~/renderer/reducers/market";
 
 type Prop = {
   id: string,
@@ -25,7 +25,7 @@ function magnitude(number) {
 }
 
 export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
-  const [currency, setCurrency] = useState<MarketCurrencyByIdRequestParams>({});
+  const [currency, setCurrency] = useState<MarketCurrencyCommonInfo>({});
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
 };
 
 export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => {
-  const [chartData, setChartData] = useState<Array>([]);
+  const [chartData, setChartData] = useState<{ date: Date, value: string }[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const formattedHourTime = index =>
@@ -92,7 +92,6 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
             : formattedDayTime(i);
         chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
       }
-      console.log(chartData);
       return chartData;
     };
     const marketClient = new MarketClient();

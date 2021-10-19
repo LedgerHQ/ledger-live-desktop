@@ -8,7 +8,7 @@ export type RangeData = {
   simple: string,
 };
 
-const dataTable: Map<string, RangeData> = {
+const dataTable: { [key: string]: RangeData } = {
   "1y": {
     days: 365,
     interval: "daily",
@@ -46,7 +46,7 @@ export const useRange = (range: string = "24h") => {
     setRangeData(dataTable[range]);
   }, [range]);
 
-  const [rangeData, setRangeData] = useState(dataTable[range]);
+  const [rangeData, setRangeData] = useState<RangeData>(dataTable[range]);
 
   return {
     rangeData,

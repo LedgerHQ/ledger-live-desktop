@@ -3,7 +3,7 @@ import React from "react";
 import { VictoryLine } from "victory";
 
 type Props = {
-  variation: { date: Date, value: number }[],
+  variation: number[],
   width: number,
   height: number,
 };

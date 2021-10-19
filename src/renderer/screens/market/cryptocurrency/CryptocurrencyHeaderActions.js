@@ -6,12 +6,12 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { MarketCounterValueSelect } from "~/renderer/screens/market/MarketCounterValueSelect";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import type { MarketCurrency } from "~/renderer/reducers/market";
 import { useSelector } from "react-redux";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type Props = {
-  currency: MarketCurrency,
+  currency: MarketCurrencyInfo,
 };
 
 function CryptocurrencyHeaderActions({ currency }: Props) {

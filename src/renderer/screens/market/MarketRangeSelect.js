@@ -45,7 +45,7 @@ export const rangesArr = [
   },
 ];
 
-export const MarketRangeSelect = props => {
+export const MarketRangeSelect = () => {
   const { range } = useSelector(state => state.market);
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(

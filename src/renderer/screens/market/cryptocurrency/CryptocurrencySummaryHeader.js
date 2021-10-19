@@ -49,7 +49,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             isPercent
             animateTicker
             isNegative
-            val={currency.price_change_percentage_in_currency.toFixed(2)}
+            val={parseFloat(currency.price_change_percentage_in_currency.toFixed(2))}
             inline
             withIcon
           />

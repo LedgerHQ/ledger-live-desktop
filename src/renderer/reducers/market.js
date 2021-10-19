@@ -43,19 +43,19 @@ export type MarketCurrencyInfo = {
   atl_date: Date,
   sparkline_in_7d: number[],
   supportedCurrency: Currency,
+  magnitude: number,
 };
 
 export type MarketCurrencyCommonInfo = {
   id: string,
   symbol: string,
   name: string,
+  magnitude: number,
 };
 
 export type CurrencyType = "all" | "coins" | "tokens";
 export type MarketFilters = {
   isLedgerCompatible: boolean,
-  currencyType: CurrencyType,
-  selectedPlatforms: string[],
 };
 
 export type CoinsListItemType = {
@@ -70,14 +70,12 @@ export type MarketState = {
   searchValue: string,
   range: string,
   limit: number,
-  coinsListCount: undefined,
+  coinsListCount: number,
   page: number,
   ids: Array<any>,
   counterCurrency: string,
   filters: {
     isLedgerCompatible: boolean,
-    currencyType: CurrencyType,
-    selectedPlatforms: string[],
   },
 };
 
@@ -95,10 +93,9 @@ const initialState: MarketState = {
   ids: [],
   filters: {
     isLedgerCompatible: false,
-    currencyType: "all",
-    selectedPlatforms: [],
   },
   favorites: [],
+  coinsListCount: 0,
 };
 
 const handlers = {
@@ -141,7 +138,7 @@ const handlers = {
     state,
     {
       payload: { cryptocurrencyId, isStarred, favorites },
-    }: { payload: { cryptocurrencyId: number, status: boolean } },
+    }: { payload: { cryptocurrencyId: number, isStarred: boolean, favorites: { id: string }[] } },
   ) => {
     const favoritesLength = favorites.length;
     if (isStarred) {
