@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -94,13 +94,9 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
   const { t } = useTranslation();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const { status, metadata } = useNFTMetadata(nft.contract, nft.tokenId);
+  const { status, metadata } = useNFTMetadata(nft.collection.contract, nft.tokenId);
 
   const onNFTSend = useCallback(() => {}, [nftId]);
-
-  useEffect(() => {
-    console.log({ nft, metadata });
-  }, [metadata, nft]);
 
   return (
     <Box>

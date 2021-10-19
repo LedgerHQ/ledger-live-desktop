@@ -50,7 +50,6 @@ type Props = {
 const Row = ({ contract, tokenId, id, mode }: Props) => {
   const { status, metadata } = useNFTMetadata(contract, tokenId);
   const { nftName } = metadata || {};
-
   const show = useMemo(() => status !== "loaded", [status]);
   const isGrid = mode === "grid";
 
