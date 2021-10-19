@@ -141,15 +141,16 @@ const StepReceiveFunds = ({
   invariant(account && mainAccount, "No account given");
   const name = token ? token.name : getAccountName(account);
   const initialDevice = useRef(device);
-  const address = mainAccount.virtualAddress ?? mainAccount.freshAddress;
-  const isAddressVirtual = mainAccount.virtualAddress != null;
+  const address = mainAccount.hederaResources?.accountId?.toString() 
+    ?? mainAccount.freshAddress;
+  const isHederaAddress = mainAccount.hederaResources != null;
   const [modalVisible, setModalVisible] = useState(false);
   let onVerify;
 
   const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
   const showQRCodeModal = useCallback(() => setModalVisible(true), [setModalVisible]);
 
-  if (isAddressVirtual) {
+  if (isHederaAddress) {
     onVerify = useCallback(() => {
       // if device has changed since the beginning, we need to re-entry device
       if (device !== initialDevice.current || !isAddressVerified) {
@@ -282,7 +283,7 @@ const StepReceiveFunds = ({
                 </AlertBoxContainer>
               ) : null}
               
-              {isAddressVirtual ? (
+              {isHederaAddress ? (
                 <Alert type="security" mt={4}>
                   <Trans i18nKey="currentAddress.messageIfVirtual" values={{ name }} />
                 </Alert>
@@ -290,7 +291,7 @@ const StepReceiveFunds = ({
             </>
 
             <>
-            {!isAddressVirtual ? (
+            {!isHederaAddress ? (
                 <>
                   <Separator />
                   <Receive2Device device={device} onVerify={onVerify} name={name} /> 
