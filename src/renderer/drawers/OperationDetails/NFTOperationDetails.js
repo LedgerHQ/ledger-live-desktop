@@ -10,7 +10,6 @@ import {
   TextEllipsis,
   HashContainer,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
-import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Box from "~/renderer/components/Box";

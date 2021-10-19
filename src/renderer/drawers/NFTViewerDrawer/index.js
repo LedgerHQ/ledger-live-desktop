@@ -136,7 +136,9 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose }: NFTViewerDraw
               textTransform: "uppercase",
             }}
           >
-            {nft.collection.tokenName}
+            <Skeleton width={100} barHeight={10} minHeight={24}>
+              {metadata.tokenName}
+            </Skeleton>
           </Text>
           <Text
             fontSize="24px"
