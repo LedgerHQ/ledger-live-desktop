@@ -43,6 +43,9 @@ const test = base.extend<TestFixtures>({
     // launch app
     const electronApp = await electron.launch({
       args: ["./.webpack/main.bundle.js", `--user-data-dir=${userDataPath}`, "--lang=en"],
+      recordVideo: {
+        dir: "videos/",
+      },
       env: env,
     });
 
