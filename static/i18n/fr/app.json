@@ -216,15 +216,14 @@
     "title": "Swap",
     "tabs": {
       "exchange": "Swap",
-      "history": "Historique"
+      "history": "Historique",
+      "kyc": "Vérification"
     },
     "form": {
-      "providerDrawer": {
-        "title": "Changer de prestataire",
+      "ratesDrawer": {
+        "title": "Taux",
         "quote": "Prix",
-        "receive": "Recevoir",
-        "onChain": "On-chain",
-        "offChain": "Off-chain"
+        "receive": "Reçu"
       },
       "details": {
         "label": {
@@ -238,18 +237,35 @@
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{target}}",
+        "noAccount": "Pas de compte {{name}}",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
         "title": "De",
         "max": "Max",
-        "accountPlaceholder": "Choisir la source"
+        "accountPlaceholder": "Choisir la source",
+        "currencyDisabledTooltip": "Pas encore disponible au swap"
       },
       "to": {
         "title": "À"
       },
-      "notAvailable": "Service temporairement indisponible, ou non disponible dans votre pays"
+      "notAvailable": {
+        "title": "Le swap n'est pas encore disponible pour votre territoire.",
+        "content": "Merci pour votre patience.<br/>Nous lancerons cette fonctionnalité très rapidement."
+      },
+      "providers": {
+        "kyc": {
+          "required": "Vous devez passer la vérification d'identité.",
+          "complete": "Vérification",
+          "update": "Rafraîchir",
+          "rejected": "Vérification d'identité rejetée, merci de recommencer.",
+          "status": {
+            "pending": "En attente",
+            "approved": "Approuvé",
+            "closed": "Rejeté"
+          }
+        }
+      }
     },
     "history": {
       "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
@@ -259,6 +275,63 @@
       },
       "export": "Exporter les opérations",
       "exporting": "Exportation..."
+    },
+    "kyc": {
+      "updateRequired": "La vérification d'identité est impossible si l'application n'est pas à jour.",
+      "wyre": {
+        "disclaimer": "LEDGER recueille vos données pour le compte de WYRE et les lui transfère pour réaliser votre vérification d'identité. Consultez notre",
+        "policy": "Politique de confidentialité",
+        "title": "Vérifier son identité",
+        "subtitle": "Saisissez vos données pour échanger avec Wyre.",
+        "cta": "Continuer",
+        "pending": {
+          "cta": "Continuer",
+          "title": "Vos données ont été envoyées pour validation.",
+          "subtitle": "L'examen de ces informations ne prend souvent que quelques minutes.",
+          "link": "En savoir plus sur la vérification d'identité",
+          "info": "Vérification d'identité : envoyée"
+        },
+        "closed": {
+          "cta": "Réinitialiser",
+          "title": "Demande de vérification rejetée",
+          "subtitle": "Wyre a refusé les données que vous avez fournies.",
+          "link": "En savoir plus sur la vérification d'identité"
+        },
+        "form": {
+          "firstName": "Prénom",
+          "lastName": "Nom de famille",
+          "street1": "Adresse postale ligne 1",
+          "street2": "Adresse postale ligne 2",
+          "city": "Ville",
+          "state": "État–région",
+          "country": "Pays",
+          "postalCode": "Code postal",
+          "dateOfBirth": "Date de naissance",
+          "firstNamePlaceholder": "Saisissez votre prénom",
+          "lastNamePlaceholder": "Saisissez votre nom",
+          "street1Placeholder": "Ex : 13 rue Rosa Parks",
+          "street2Placeholder": "Ex : 13 rue Rosa Parks",
+          "cityPlaceholder": "Ex : Abbeville",
+          "postalCodePlaceholder": "Saisissez votre code postal",
+          "dateOfBirthPlaceholder": "MM/JJ/AAAA",
+          "firstNameError": "Entrez votre prénom pour continuer.",
+          "lastNameError": "Entrez votre nom pour continuer.",
+          "street1Error": "Entrez votre adresse.",
+          "cityError": "Entrez la ville où vous habitez aux États-Unis.",
+          "postalCodeError": "Saisissez un code postal valide.",
+          "dateOfBirthError": "Entrez votre date de naissance.",
+          "dateOfBirthValidationError": "Entrez une date de naissance valide."
+        }
+      }
+    },
+    "exchangeDrawer": {
+      "title": "Confirmer l'échange",
+      "completed": {
+        "title": "Opération en attente",
+        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}.",
+        "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
+        "seeDetails": "Voir les détails"
+      }
     }
   },
   "swap": {
@@ -306,7 +379,7 @@
           "required": "Vérification d'identité nécessaire",
           "pending": "Vérification d'identité en attente",
           "approved": "Vérification d'identité approuvée",
-          "closed": "Vérification d'identité refusée"
+          "closed": "Vérification d'identité rejetée"
         }
       }
     },
@@ -330,8 +403,8 @@
         },
         "closed": {
           "cta": "Réinitialiser la vérification",
-          "title": "Demande de vérification refusée",
-          "subtitle": "Wyre a refusé les données que vous avez fournies",
+          "title": "Demande de vérification rejetée",
+          "subtitle": "Wyre a refusé les données que vous avez fournies.",
           "link": "En savoir plus"
         },
         "form": {
@@ -354,7 +427,7 @@
           "firstNameError": "Entrez votre prénom pour continuer.",
           "lastNameError": "Entrez votre nom pour continuer.",
           "street1Error": "Entrez votre adresse.",
-          "cityError": "Entrez la ville où vous habitez.",
+          "cityError": "Entrez la ville où vous habitez aux États-Unis.",
           "postalCodeError": "Saisissez un code postal valide.",
           "dateOfBirthError": "Entrez votre date de naissance.",
           "dateOfBirthValidationError": "Entrez une date de naissance valide."
@@ -441,7 +514,7 @@
           "subtitle": "Swap bien diffusé ",
           "swap": "Identifiant de votre swap :",
           "seeDetails": "Voir les détails",
-          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de<0>{{provider}}</0></0>.",
+          "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
           "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}."
         }
       }
@@ -1293,6 +1366,14 @@
       "payoutNetworkFees": "Frais de réception",
       "payoutNetworkFeesTooltip": "Ce montant n'apparaîtra pas sur votre appareil."
     },
+    "swap2": {
+      "amountSent": "Montant à envoyer",
+      "amountReceived": "Montant à recevoir",
+      "provider": "Prestataire",
+      "fees": "Frais de réseau",
+      "sourceAccount": "Compte émetteur",
+      "targetAccount": "Compte bénéficiaire"
+    },
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de vente"
@@ -1796,21 +1877,21 @@
     "coincontrol": "Contrôle des coins",
     "advanced": "Options avancées",
     "ctaDisabled": "Compte ne contenant pas d'UTXO",
-    "whatIs": "En savoir plus sur la sélection des coins",
+    "whatIs": "En savoir plus sur ce paramètre",
     "rbf": "Permettre à la transaction d'être remplaçable (Replace-By-Fee).",
     "strategy": "Stratégie de sélection des coins",
     "selected": "Coins sélectionnés par stratégie",
     "amount": "Montant à envoyer :",
-    "replaceable": "remplaçable",
+    "replaceable": "Remplaçable",
     "cannotSelect": {
       "unconfirmed": "Vous ne pouvez pas sélectionner des coins parmi des transactions non confirmées et remplaçables.",
       "last": "Il en faut au moins en sélectionner un."
     },
-    "pending": "en attente",
+    "pending": "En attente",
     "pickUnconfirmedRBF": "Inclure les coins des transactions non confirmées et remplaçables.",
     "pickingStrategy": "Stratégie de sélection des UTXO",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Coins plus vieux en premier (Premier entré, premier sorti)",
+      "DEEP_OUTPUTS_FIRST": "Coins plus vieux en premier (FIFO)",
       "OPTIMIZE_SIZE": "Réduire les frais (optimiser la taille)",
       "MERGE_OUTPUTS": "Réduire les frais à venir (fusionner des coins)"
     }
@@ -2020,7 +2101,7 @@
           },
           "info": {
             "title": "Récompenses",
-            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuez pour demander vos récompenses.",
+            "description": "Félicitations. Vous avez gagné {{amount}}. Choisissez Continuer pour demander vos récompenses.",
             "info": "Il vous sera demandé de générer une transaction vide sur votre compte. Celle-ci ajoutera vos récompenses actuelles à votre solde moyennant des frais de transaction minimaux."
           },
           "connectDevice": {
@@ -2376,8 +2457,8 @@
     },
     "contextMenu": {
       "topUp": "Recevoir plus",
-      "redelegate": "Changer le validateur",
-      "stopDelegation": "Interrompre la délégation"
+      "redelegate": "Changer validateur",
+      "stopDelegation": "Interr. délégation"
     }
   },
   "asset": {
@@ -2501,13 +2582,9 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Utilisez Elrond avec un proxy Ledger."
-        },
-        "tezosJS": {
-          "title": "Utiliser l'impl Tezos JS",
-          "description": "Utiliser l'impl Tezos JS"
+        "experimentalCurrencies": {
+          "title": "Utiliser des implémentations JS expérimentales",
+          "description": "Utilisez des implémentations JS expérimentales pour certaines cryptos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2745,7 +2822,7 @@
       "recoverySeedWarning": {
         "contactSupportCTA": "Contacter l'Assistance",
         "continueCTA": "Continuer",
-        "title": "Vérifier le contenu de la boîte",
+        "title": "Vérifier le contenu de votre coffret",
         "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
         "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
       }
@@ -3134,7 +3211,7 @@
     "nextSolution": "Solution suivante",
     "previousSolution": "Solution précédente",
     "followSteps": "Suivez ces étapes",
-    "supportArticle": "Article de l'Assistance",
+    "supportArticle": "cet article de l'Assistance",
     "connecting": "Connexion en cours...",
     "connected": "Connecté",
     "backToPortfolio": "Retour au Portefeuille",
@@ -3343,6 +3420,10 @@
     "AccountNameRequired": {
       "title": "Nom de compte requis",
       "description": "Merci d'entrer un nom de compte."
+    },
+    "AccountNeedResync": {
+      "title": "Veuillez réessayer",
+      "description": "Le compte n'est plus à jour, synchronisez-le."
     },
     "AccountNotSupported": {
       "title": "Compte non pris en charge",
@@ -3610,8 +3691,8 @@
       "description": "Veuillez configurer votre nœud pour rechercher les comptes associés à cet appareil. Votre nœud doit d'abord balayer la blockchain avant de pouvoir ajouter le compte à votre Portefeuille."
     },
     "SwapGenericAPIError": {
-      "title": "Taux de change expiré",
-      "description": "Vous devez confirmer le swap avant que le temps limite ne soit écoulé. Le taux de change affiché reste valide pendant 60 secondes."
+      "title": "Une erreur est survenue.",
+      "description": "Le swap n'a pas été effectué. Veuillez réessayer ou contacter l'Assistance."
     },
     "TimeoutError": {
       "title": "Le serveur a mis trop longtemps à répondre.",

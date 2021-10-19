@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
@@ -16,7 +16,12 @@ import { WrongDeviceForAccount, UpdateYourApp } from "@ledgerhq/errors";
 import { LatestFirmwareVersionRequired } from "@ledgerhq/live-common/lib/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
+import {
+  getAccountUnit,
+  getMainAccount,
+  getAccountName,
+  getAccountCurrency,
+} from "@ledgerhq/live-common/lib/account";
 import { closeAllModal } from "~/renderer/actions/modals";
 import Animation from "~/renderer/animations";
 import Button from "~/renderer/components/Button";
@@ -36,10 +41,14 @@ import SupportLinkError from "~/renderer/components/SupportLinkError";
 import { urls } from "~/config/urls";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import ExternalLinkButton from "../ExternalLinkButton";
-import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { Rotating } from "~/renderer/components/Spinner";
 import ProgressCircle from "~/renderer/components/ProgressCircle";
 import CrossCircle from "~/renderer/icons/CrossCircle";
+import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
+import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
+import { context } from "~/renderer/drawers/Provider";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -79,7 +88,7 @@ const Logo: ThemedComponent<{ warning?: boolean }> = styled.div`
   margin-bottom: 20px;
 `;
 
-const Header = styled.div`
+export const Header: ThemedComponent<{}> = styled.div`
   display: flex;
   flex: 1 0 0%;
   flex-direction: column;
@@ -88,7 +97,7 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Footer = styled.div`
+export const Footer: ThemedComponent<{}> = styled.div`
   display: flex;
   flex: 1 0 0%;
   flex-direction: column;
@@ -193,6 +202,7 @@ const OpenManagerBtn = ({
   mt?: number,
 }) => {
   const history = useHistory();
+  const { setDrawer } = useContext(context);
 
   const onClick = useCallback(() => {
     const urlParams = new URLSearchParams({
@@ -207,7 +217,8 @@ const OpenManagerBtn = ({
       search: search ? `?${search}` : "",
     });
     closeAllModal();
-  }, [updateApp, firmwareUpdate, appName, history, closeAllModal]);
+    setDrawer(undefined);
+  }, [updateApp, firmwareUpdate, appName, history, closeAllModal, setDrawer]);
 
   return (
     <Button mt={mt} primary onClick={onClick}>
@@ -589,6 +600,120 @@ export const renderSwapDeviceConfirmation = ({
           );
         },
       )}
+      {renderVerifyUnwrapped({ modelId, type })}
+    </>
+  );
+};
+
+export const renderSwapDeviceConfirmationV2 = ({
+  modelId,
+  type,
+  transaction,
+  status,
+  exchangeRate,
+  exchange,
+  amountExpectedTo,
+  estimatedFees,
+}: {
+  modelId: DeviceModelId,
+  type: "light" | "dark",
+  transaction: Transaction,
+  status: TransactionStatus,
+  exchangeRate: ExchangeRate,
+  exchange: Exchange,
+  amountExpectedTo?: string,
+  estimatedFees?: string,
+}) => {
+  const ProviderIcon = getProviderIcon(exchangeRate);
+  const [sourceAccountName, sourceAccountCurrency] = [
+    getAccountName(exchange.fromAccount),
+    getAccountCurrency(exchange.fromAccount),
+  ];
+  const [targetAccountName, targetAccountCurrency] = [
+    getAccountName(exchange.toAccount),
+    getAccountCurrency(exchange.toAccount),
+  ];
+  return (
+    <>
+      <TrackPage
+        category="Swap"
+        name={`ModalStep-summary`}
+        sourcecurrency={sourceAccountCurrency?.name}
+        targetcurrency={targetAccountCurrency?.name}
+        provider={exchangeRate.provider}
+        swapVersion={SWAP_VERSION}
+      />
+      <Box flex={0}>
+        <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={7} mx={4}>
+          <Trans i18nKey="DeviceAction.swap.notice" />
+        </Alert>
+      </Box>
+      <Box mx={6}>
+        {map(
+          {
+            amountSent: (
+              <CurrencyUnitValue
+                unit={getAccountUnit(exchange.fromAccount)}
+                value={transaction.amount}
+                disableRounding
+                showCode
+              />
+            ),
+            amountReceived: (
+              <CurrencyUnitValue
+                unit={getAccountUnit(exchange.toAccount)}
+                value={amountExpectedTo ? BigNumber(amountExpectedTo) : exchangeRate.toAmount}
+                disableRounding
+                showCode
+              />
+            ),
+            provider: (
+              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                <ProviderIcon size={18} />
+                <Text style={{ textTransform: "capitalize" }}>{exchangeRate.provider}</Text>
+              </Box>
+            ),
+            fees: (
+              <CurrencyUnitValue
+                unit={getAccountUnit(
+                  getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
+                )}
+                value={BigNumber(estimatedFees || 0)}
+                disableRounding
+                showCode
+              />
+            ),
+            sourceAccount: (
+              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                {sourceAccountCurrency && (
+                  <CryptoCurrencyIcon circle currency={sourceAccountCurrency} size={18} />
+                )}
+                <Text style={{ textTransform: "capitalize" }}>{sourceAccountName}</Text>
+              </Box>
+            ),
+            targetAccount: (
+              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                {targetAccountCurrency && (
+                  <CryptoCurrencyIcon circle currency={targetAccountCurrency} size={18} />
+                )}
+                <Text style={{ textTransform: "capitalize" }}>{targetAccountName}</Text>
+              </Box>
+            ),
+          },
+          (value, key) => {
+            return (
+              <Box horizontal justifyContent="space-between" key={key} mb={4}>
+                <Text ff="Inter|Medium" color="palette.text.shade40" fontSize="14px">
+                  <Trans i18nKey={`DeviceAction.swap2.${key}`} />
+                </Text>
+                <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize="14px">
+                  {value}
+                </Text>
+              </Box>
+            );
+          },
+        )}
+      </Box>
       {renderVerifyUnwrapped({ modelId, type })}
     </>
   );

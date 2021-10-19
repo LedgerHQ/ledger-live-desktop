@@ -10,7 +10,7 @@ export type AccountTuple = {
   subAccount: ?SubAccount,
 };
 
-function getAccountTuplesForCurrency(
+export function getAccountTuplesForCurrency(
   currency: CryptoCurrency | TokenCurrency,
   allAccounts: Account[],
   hideEmpty: ?boolean,
