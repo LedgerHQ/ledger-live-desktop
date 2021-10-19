@@ -5,6 +5,21 @@
     "yesterday": "Yesterday",
     "transactionDate": "Transaction date"
   },
+  "nft": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    }
+  },
   "platform": {
     "flows": {
       "requestAccount": {
