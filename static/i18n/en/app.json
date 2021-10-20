@@ -3971,7 +3971,8 @@
       "title": "You must select at least one validator"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }
