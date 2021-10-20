@@ -1,5 +1,6 @@
 // @flow
 
+import "@ledgerhq/react-ui/assets/fonts";
 import React, { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
 import type { StyledComponent } from "styled-components";
