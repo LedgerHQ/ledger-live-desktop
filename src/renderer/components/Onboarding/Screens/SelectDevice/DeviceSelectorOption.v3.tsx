@@ -35,6 +35,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   height: 100%;
+  padding-top: 38.43px;
   justify-content: center;
   transition: background border 200ms;
   background-color: ${bkgColor};
