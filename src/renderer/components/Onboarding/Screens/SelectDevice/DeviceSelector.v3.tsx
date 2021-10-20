@@ -74,7 +74,6 @@ interface DeviceSelectorProps {
 
 export function DeviceSelector({ onClick }: DeviceSelectorProps) {
   const theme = useTheme();
-  console.log({ theme });
   return (
     <DeviceSelectContainer>
       {devices.map(({ id, label, Illu, enabled }, index, arr) => (

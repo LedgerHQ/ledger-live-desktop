@@ -49,6 +49,10 @@ const ContentContainer = styled.div`
   align-self: center;
 `;
 
+const DeviceName = styled(Text)`
+  color: ${p => p.theme.colors.palette.neutral.c100};
+`;
+
 interface DeviceSelectOptionProps {
   label: string;
   Illu: React.ReactNode;
@@ -71,9 +75,14 @@ export function DeviceSelectorOption({
     <Container {...{ id, isFirst, isLast }}>
       <ContentContainer>
         <DeviceIllustrationContainer>{Illu}</DeviceIllustrationContainer>
-        <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
+        <DeviceName
+          fontSize="28px"
+          marginTop="32px"
+          color="palette.text.shade100"
+          ff="Alpha|Medium"
+        >
           {label}
-        </Text>
+        </DeviceName>
         <Button onClick={onClick}>{t("v3.onboarding.screens.selectDevice.selectLabel")}</Button>
       </ContentContainer>
     </Container>
