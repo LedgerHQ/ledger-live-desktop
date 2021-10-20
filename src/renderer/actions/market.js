@@ -1,5 +1,5 @@
 // @flow
-import { MarketFilters, MarketState } from "~/renderer/reducers/market";
+import { FavoriteCryptoCurrency, MarketFilters, MarketState } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
@@ -86,44 +86,40 @@ export const getMarketCryptoCurrencies = (
   }> = {},
 ) =>
   async function(dispatch, getState) {
+    filterParams = { ...getState().market, ...filterParams };
     dispatch(
       setMarketParams({
         ...filterParams,
+        loading: true,
       }),
     );
 
     let {
-      market: {
-        counterCurrency,
-        range,
-        limit,
-        page,
-        coinsCount,
-        order,
-        orderBy,
-        searchValue,
-        ids,
-        coins,
-        filters,
-      },
-    } = getState();
+      counterCurrency,
+      range,
+      limit,
+      page,
+      coinsCount,
+      order,
+      orderBy,
+      searchValue,
+      ids,
+      coins,
+      filters,
+    } = filterParams;
 
-    if (filters.orderBy) {
-      orderBy = filters.orderBy;
-    }
-
-    if (filters.order) {
-      order = filters.order;
-    }
-
-    dispatch(setMarketParams({ loading: true }));
+    const showFavorites: boolean = orderBy === "isStarred" && order === "desc";
+    const unShowFavorites: boolean = orderBy === "isStarred" && order === "asc";
 
     if (coinsCount === undefined) {
       coins = await marketClient.supportedCurrencies();
-      dispatch(setMarketParams({ coins: coins, coinsCount: coins.length }));
     }
 
-    const favoriteCryptocurrencies = await getKey("app", "favorite_cryptocurrencies", []);
+    const favoriteCryptocurrencies: Array<FavoriteCryptoCurrency> = await getKey(
+      "app",
+      "favorite_cryptocurrencies",
+      [],
+    );
 
     const supportedCurrenciesByLedger = listSupportedCurrencies();
     ids = [];
@@ -145,20 +141,18 @@ export const getMarketCryptoCurrencies = (
         ids = filteredCoins.map(coin => coin.id);
       }
     }
-    let showFavorites = false;
-    if (orderBy === "isStarred") {
-      if (order === "desc") {
-        showFavorites = true;
-        favoriteCryptocurrencies.forEach(fav => {
-          ids.unshift(fav.id);
-        });
-      } else {
-        ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
-        limit = DEFAULT_PAGE_LIMIT;
-      }
+
+    showFavorites &&
+      favoriteCryptocurrencies.forEach(fav => {
+      ids.unshift(fav.id);
+      });
+
+    if (unShowFavorites) {
+      ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
+      limit = DEFAULT_PAGE_LIMIT;
     }
 
-    let res;
+    let res = [];
     if ((showFavorites || searchValue) && !ids.length) {
       res = [];
     } else {
@@ -172,29 +166,31 @@ export const getMarketCryptoCurrencies = (
         ids,
       });
     }
+
     const currencies = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       res,
       supportedCurrenciesByLedger,
     );
 
+    limit = DEFAULT_PAGE_LIMIT;
+    coinsCount = coins.length;
+
     if (!currencies.length) {
       coinsCount = 0;
     } else if (ids.length) {
       limit = page === 1 ? res.length : limit;
       coinsCount = ids.length;
-    } else {
-      limit = DEFAULT_PAGE_LIMIT;
-      coinsCount = coins.length;
     }
 
     dispatch(
       setMarketParams({
-        currencies: currencies,
+        currencies,
         loading: false,
         favorites: favoriteCryptocurrencies,
         limit,
         ids,
+        coins,
         coinsCount,
       }),
     );

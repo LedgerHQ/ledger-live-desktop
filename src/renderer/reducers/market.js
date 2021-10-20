@@ -47,6 +47,11 @@ export type CoinsListItemType = {
   symbol: "string",
   name: "string",
 };
+
+export type FavoriteCryptoCurrency = {
+  id: string,
+};
+
 export type MarketState = {
   currencies: Array<MarketCurrencyInfo>,
   coinsList: Array<CoinsListItemType>,
@@ -62,6 +67,7 @@ export type MarketState = {
     isLedgerCompatible: boolean,
   },
   loading: boolean,
+  favorites: Array<FavoriteCryptoCurrency>,
 };
 
 const initialState: MarketState = {
