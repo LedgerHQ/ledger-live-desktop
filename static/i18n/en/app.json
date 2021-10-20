@@ -5,21 +5,6 @@
     "yesterday": "Yesterday",
     "transactionDate": "Transaction date"
   },
-  "nft": {
-    "viewer": {
-      "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
-      },
-      "attributes": {
-        "properties": "Properties",
-        "about": "About Known Origin",
-        "contract": "Contract address",
-        "tokenId": "Token ID",
-        "quantity": "Quantity"
-      }
-    }
-  },
   "platform": {
     "flows": {
       "requestAccount": {
@@ -1189,6 +1174,19 @@
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
     "collections": {
       "title": "NFT (Non Fungible Tokens) Collections",
       "receiveCTA": "Receive NFT",

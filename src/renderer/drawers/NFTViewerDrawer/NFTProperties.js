@@ -49,7 +49,7 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
         color="palette.text.shade50"
         ff="Inter|Regular"
       >
-        {t("nft.viewer.attributes.properties")}
+        {t("NFT.viewer.attributes.properties")}
       </Text>
       <NFTPropertiesContainer>
         {metadata ? (

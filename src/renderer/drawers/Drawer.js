@@ -1,4 +1,11 @@
-import React, { useContext, useCallback, useEffect, useState } from "react";
+import React, {
+  useRef,
+  useLayoutEffect,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { context } from "./Provider";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import styled from "styled-components";
@@ -28,7 +35,6 @@ const Bar = styled.div.attrs(props => ({
   transform: translateX(${p => (p.index === 0 ? 0 : 100)}%);
   transition: all ${DURATION}ms ease-in-out;
   will-change: transform;
-  background-color: ${p => p.theme.colors.palette.background.paper};
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
   padding: 62px 0 15px 15px;
   ${p => p.theme.overflow.y};
@@ -37,6 +43,7 @@ const Bar = styled.div.attrs(props => ({
 export const Drawer = () => {
   const { state, setDrawer } = useContext(context);
   const [queue, setQueue] = useState([]);
+  const [height, setHeight] = useState(-1);
 
   useEffect(() => {
     setQueue(q => {
@@ -60,31 +67,52 @@ export const Drawer = () => {
 
   const onRequestClose = useCallback(() => setDrawer(), [setDrawer]);
 
+  const sideDrawerRef = useRef();
+  const onResize = useCallback(e => {
+    // NB Passing this down to the Component as a prop allows us to have sticky elements
+    // by setting a fixed height instead of a percentage of the container, if you are reading
+    // this and have a better solution, treat yourself. -77 due to drawer wrapper padding.s
+    if (!sideDrawerRef.current) return;
+    setHeight(sideDrawerRef.current.clientHeight - 77);
+  }, []);
+
+  useLayoutEffect(() => {
+    const target = sideDrawerRef.current;
+    if (!target) return;
+    const ro = new ResizeObserver(onResize);
+    ro.observe(target);
+    return () => {
+      ro.disconnect();
+    };
+  }, [onResize]);
+
   return (
-    <SideDrawer
-      isOpen={!!state.open}
-      onRequestClose={onRequestClose}
-      onRequestBack={state?.props?.onRequestBack}
-      direction="left"
-      {...state.options}
-    >
-      <>
-        <TransitionGroup>
-          {queue.map(({ Component, props }, index) => (
-            <Transition
-              timeout={{ appear: DURATION, enter: DURATION, exit: DURATION * 2 }}
-              key={index}
-            >
-              {s => (
-                <Bar state={s} index={index}>
-                  <Component onClose={onRequestClose} {...props} />
-                </Bar>
-              )}
-            </Transition>
-          ))}
-        </TransitionGroup>
-      </>
-    </SideDrawer>
+    <div ref={sideDrawerRef}>
+      <SideDrawer
+        isOpen={!!state.open}
+        onRequestClose={onRequestClose}
+        onRequestBack={state?.props?.onRequestBack}
+        direction="left"
+        {...state.options}
+      >
+        <>
+          <TransitionGroup>
+            {queue.map(({ Component, props }, index) => (
+              <Transition
+                timeout={{ appear: DURATION, enter: DURATION, exit: DURATION * 2 }}
+                key={index}
+              >
+                {s => (
+                  <Bar state={s} index={index}>
+                    <Component onClose={onRequestClose} {...props} height={height} />
+                  </Bar>
+                )}
+              </Transition>
+            ))}
+          </TransitionGroup>
+        </>
+      </SideDrawer>
+    </div>
   );
 };
 

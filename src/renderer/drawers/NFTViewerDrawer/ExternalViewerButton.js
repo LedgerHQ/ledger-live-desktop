@@ -53,13 +53,13 @@ export const ExternalViewerButton = ({ nft }: ExternalViewerButtonProps) => {
   const items: DropDownItemType[] = [
     {
       key: "opensea",
-      label: t("nft.viewer.actions.open", { viewer: "Opensea.io" }),
+      label: t("NFT.viewer.actions.open", { viewer: "Opensea.io" }),
       icon: <IconOpensea size={16} />,
       onClick: () => openURL(`https://opensea.io/assets/${nft.collection.contract}/${nft.tokenId}`),
     },
     {
       key: "rarible",
-      label: t("nft.viewer.actions.open", { viewer: "Rarible" }),
+      label: t("NFT.viewer.actions.open", { viewer: "Rarible" }),
       icon: <IconRarible size={16} />,
       onClick: () => openURL(`https://rarible.com/token/${nft.collection.contract}:${nft.tokenId}`),
     },
@@ -70,7 +70,7 @@ export const ExternalViewerButton = ({ nft }: ExternalViewerButtonProps) => {
     },
     {
       key: "etherscan",
-      label: t("nft.viewer.actions.open", { viewer: "Explorer" }),
+      label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
       icon: <IconGlobe size={16} />,
       onClick: () =>
         openURL(`https://etherscan.io/token/${nft.collection.contract}?a=${nft.tokenId}`),
