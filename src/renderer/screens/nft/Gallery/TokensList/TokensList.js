@@ -15,6 +15,7 @@ import Text from "~/renderer/components/Text";
 import GridIcon from "~/renderer/icons/Grid";
 import ListIcon from "~/renderer/icons/List";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
+import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
 
 import Item from "./Item";
 
@@ -76,13 +77,18 @@ const TokensList = ({ account, collectionId }: Props) => {
           ) : null}
           <Container mb={20} mode={nftsViewMode}>
             {collection.nfts.map(nft => (
-              <Item
-                mode={nftsViewMode}
+              <NFTContextMenu
                 key={nft.tokenId}
-                id={nft.id}
-                tokenId={nft.tokenId}
                 contract={collection.contract}
-              />
+                tokenId={nft.tokenId}
+              >
+                <Item
+                  mode={nftsViewMode}
+                  id={nft.id}
+                  tokenId={nft.tokenId}
+                  contract={collection.contract}
+                />
+              </NFTContextMenu>
             ))}
           </Container>
         </div>
