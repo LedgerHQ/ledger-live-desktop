@@ -17,7 +17,7 @@ import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
-import { layout, position } from "styled-system";
+import { space, layout, position } from "styled-system";
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
   overflow-y: hidden;
@@ -37,6 +37,7 @@ const StickyWrapper = styled.div`
   position: sticky;
   ${position};
   ${layout};
+  ${space}
   z-index: 1;
 `;
 
@@ -130,7 +131,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
     <Box height={height}>
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
-          <StickyWrapper top={0} pb={5}>
+          <StickyWrapper top={0} pb={3}>
             <Text
               ff="Inter|SemiBold"
               fontSize={5}
