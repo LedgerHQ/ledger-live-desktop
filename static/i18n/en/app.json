@@ -6828,7 +6828,8 @@
           }
         },
         "selectDevice": {
-          "title": "What's your device?"
+          "title": "SELECT YOUR DEVICE",
+          "selectLabel": "Select"
         },
         "selectUseCase": {
           "greetings": "Hello!",
