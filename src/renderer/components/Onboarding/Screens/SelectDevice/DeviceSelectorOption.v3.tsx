@@ -25,6 +25,12 @@ const borderCSS = css`
   }
 `;
 
+const SelectButton = styled(Button)`
+  opacity: 0;
+  margin-top: 32px;
+  background-color: ${p => p.theme.colors.palette.neutral.c100};
+`;
+
 const Container = styled.div`
   display: flex;
   flex: 1;
@@ -36,7 +42,10 @@ const Container = styled.div`
     background-color: ${bkgColorHover};
   }
   &:hover ${DeviceIllustrationContainer} {
-    transform: translateY(20px);
+    transform: translateY(-20px);
+  }
+  &:hover ${SelectButton} {
+    opacity: 1;
   }
   ${borderCSS}
 `;
@@ -83,7 +92,9 @@ export function DeviceSelectorOption({
         >
           {label}
         </DeviceName>
-        <Button onClick={onClick}>{t("v3.onboarding.screens.selectDevice.selectLabel")}</Button>
+        <SelectButton type="primary" onClick={onClick}>
+          {t("v3.onboarding.screens.selectDevice.selectLabel")}
+        </SelectButton>
       </ContentContainer>
     </Container>
   );
