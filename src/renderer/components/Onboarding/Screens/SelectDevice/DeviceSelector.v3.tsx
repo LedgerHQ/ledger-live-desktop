@@ -4,14 +4,15 @@ import React from "react";
 import styled from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import nanoX from "./assets/nanoX.svg";
-import nanoS from "./assets/nanoS.svg";
-import nanoBlue from "./assets/nanoBlue.svg";
+import nanoX from "./assets/nanoX.v3.svg";
+import nanoS from "./assets/nanoS.v3.svg";
+import nanoS2 from "./assets/nanoS2.v3.svg";
+// import nanoBlue from "./assets/nanoBlue.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
 
-registerAssets([nanoX, nanoS, nanoBlue]);
+registerAssets([nanoX, nanoS, nanoS2]);
 
 const DeviceSelectContainer: ThemedComponent<any> = styled.div`
   display: flex;
@@ -21,40 +22,51 @@ const DeviceSelectContainer: ThemedComponent<any> = styled.div`
   align-items: stretch;
 `;
 
-const NanoX = styled.div`
-  background: url(${nanoX}) no-repeat top right;
-  width: 153px;
-  height: 218px;
-`;
-
 const NanoS = styled.div`
-  background: url(${nanoS}) no-repeat top right;
-  width: 149px;
-  height: 221px;
+  background: url(${nanoS}) no-repeat center; // TODO: rendering issue in the SVG in the "hole"
+  width: 49.2px;
+  height: 250.1px;
 `;
 
-const NanoBlue = styled.div`
-  width: 191px;
-  height: 221px;
-  background: url(${nanoBlue}) no-repeat top right;
+const NanoS2 = styled.div`
+  background: url(${nanoS2}) no-repeat center; // TODO: rendering issue in the SVG in the "hole"
+  width: 49.93px;
+  height: 250.33px;
 `;
+
+const NanoX = styled.div`
+  background: url(${nanoX}) no-repeat center;
+  width: 53.83px;
+  height: 250.87px;
+`;
+
+// const NanoBlue = styled.div`
+//   width: 191px;
+//   height: 221px;
+//   background: url(${nanoBlue}) no-repeat top right;
+// `;
 
 const devices = [
   {
     id: "nanoS",
-    label: "Nano S",
+    label: "LEDGER NANO S",
     Illu: NanoS,
   },
   {
-    id: "nanoX",
-    label: "Nano X",
-    Illu: NanoX,
+    id: "nanoS2",
+    label: "LEDGER NANO S 2",
+    Illu: NanoS2,
   },
   {
-    id: "blue",
-    label: "Blue",
-    Illu: NanoBlue,
+    id: "nanoX",
+    label: "LEDGER NANO X",
+    Illu: NanoX,
   },
+  // {
+  //   id: "blue",
+  //   label: "Blue",
+  //   Illu: NanoBlue,
+  // },
 ];
 
 interface DeviceSelectorProps {
