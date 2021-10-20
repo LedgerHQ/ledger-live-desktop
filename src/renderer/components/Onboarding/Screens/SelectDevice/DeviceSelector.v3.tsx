@@ -52,16 +52,19 @@ const devices = [
     id: "nanoS",
     label: "LEDGER NANO S",
     Illu: NanoS,
+    enabled: true,
   },
   {
-    id: "nanoS2",
+    id: "nanoSP",
     label: "LEDGER NANO S 2",
     Illu: NanoS2,
+    enabled: false,
   },
   {
     id: "nanoX",
     label: "LEDGER NANO X",
     Illu: NanoX,
+    enabled: true,
   },
 ];
 
@@ -74,13 +77,13 @@ export function DeviceSelector({ onClick }: DeviceSelectorProps) {
   console.log({ theme });
   return (
     <DeviceSelectContainer>
-      {devices.map(({ id, label, Illu }, index, arr) => (
+      {devices.map(({ id, label, Illu, enabled }, index, arr) => (
         <DeviceSelectorOption
           id={`device-${id}`}
           key={id}
           label={label}
           Illu={<Illu />}
-          onClick={() => onClick(id)}
+          onClick={() => enabled && onClick(id)}
           isFirst={index === 0}
           isLast={index === arr.length - 1}
         />
