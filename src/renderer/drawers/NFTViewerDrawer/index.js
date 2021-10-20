@@ -21,6 +21,22 @@ import { space, layout, position } from "styled-system";
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
   overflow-y: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const NFTViewerDrawerContent = styled.div`
+  padding: 0px 40px;
+  padding-top: 53px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Pre = styled.span`
@@ -32,24 +48,15 @@ const Pre = styled.span`
 `;
 
 const StickyWrapper = styled.div`
-  background-color: ${({ theme, transparent }) =>
-    transparent ? "transparent" : theme.colors.palette.background.paper};
+  background: ${({ theme, transparent }) =>
+    transparent
+      ? "transparent"
+      : `linear-gradient(${theme.colors.palette.background.paper} 0%, ${theme.colors.palette.background.paper}90 75%, transparent 100%);`};
   position: sticky;
   ${position};
   ${layout};
   ${space}
   z-index: 1;
-`;
-
-const NFTViewerDrawerContent = styled.div`
-  padding: 0px 40px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  height: 100%;
 `;
 
 const NFTActions = styled.div`
@@ -131,7 +138,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
     <Box height={height}>
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
-          <StickyWrapper top={0} pb={3}>
+          <StickyWrapper top={0} pb={3} pt="24px">
             <Text
               ff="Inter|SemiBold"
               fontSize={5}
@@ -158,24 +165,22 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
           <Skeleton show={show} width={393} minHeight={393}>
             <Image nft={metadata} size={393} />
           </Skeleton>
-          <StickyWrapper top={50}>
-            <NFTActions>
-              <Button
-                style={{ flex: 1, justifyContent: "center" }}
-                mr={4}
-                primary
-                onClick={onNFTSend}
-                center
-              >
-                <IconSend size={12} />
-                <Text ml={1} fontSize={3} lineHeight="18px">
-                  {t("NFT.viewer.actions.send")}
-                </Text>
-              </Button>
+          <NFTActions>
+            <Button
+              style={{ flex: 1, justifyContent: "center" }}
+              mr={4}
+              primary
+              onClick={onNFTSend}
+              center
+            >
+              <IconSend size={12} />
+              <Text ml={1} fontSize={3} lineHeight="18px">
+                {t("NFT.viewer.actions.send")}
+              </Text>
+            </Button>
 
-              <ExternalViewerButton nft={nft} />
-            </NFTActions>
-          </StickyWrapper>
+            <ExternalViewerButton nft={nft} />
+          </NFTActions>
           <NFTAttributes>
             <NFTProperties nft={nft} metadata={metadata} />
             <NFTAttribute

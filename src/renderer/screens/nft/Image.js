@@ -42,6 +42,8 @@ const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boole
     height: 100%;
     object-fit: cover;
     border-radius: 4px;
+    user-select: none;
+    pointer-events: none;
   }
 `;
 
