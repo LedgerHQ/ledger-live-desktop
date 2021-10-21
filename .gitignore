@@ -122,7 +122,7 @@ tests/coverage/
 tests/docker-electron-webdriver/.lastbuild
 tests/docker-electron-webdriver/.lastyarn
 playwright/tmp/
-playwright/videos/*
+playwright/videos
 playwright/.nyc_output
 playwright/coverage
 playwright/allure-report
