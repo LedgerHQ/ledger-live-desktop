@@ -41,8 +41,11 @@
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
     "pretest": "tsc --incremental -p playwright/tsconfig.json",
-    "playwright": "npx playwright test playwright/specs/onboarding.spec.ts --config=playwright/playwright.config.ts",
-    "playwright-recorder": "npx playwright test playwright/specs/recorder.spec.ts --config=playwright/playwright.config.ts"
+    "playwright": "ALLURE_RESULTS_DIR=playwright/allure-results npx playwright test --config=playwright/playwright.config.ts",
+    "playwright-recorder": "npx playwright test playwright/specs/recorder.spec.ts",
+    "playwright-ci": "",
+    "playwright-generate-report": "allure generate ./playwright/allure-results --clean && allure open ./allure-report",
+    "playwright-coverage": "nyc --reporter=text yarn playwright"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
@@ -154,6 +157,8 @@
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
     "@storybook/react": "^6.3.7",
+    "allure-commandline": "^2.13.8",
+    "allure-playwright": "^2.0.0-beta.13",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
@@ -203,6 +208,7 @@
     "typescript": "^4.4.3",
     "unused-webpack-plugin": "^2.4.0",
     "url-loader": "^4.1.1",
+    "v8-to-istanbul": "^8.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",

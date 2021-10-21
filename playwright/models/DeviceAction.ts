@@ -4,7 +4,7 @@ import {
   mockListAppsResult,
 } from "@ledgerhq/live-common/lib/apps/mock";
 
-export class Device {
+export class DeviceAction {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -12,23 +12,50 @@ export class Device {
   }
 
   async openApp() {
-    this.page.evaluate(() => {
+    await this.page.evaluate(() => {
       window.mock.events.mockDeviceEvent({ type: "opened" });
     });
+
+    await this.page.waitForSelector("#deviceAction-loading", { state: "visible" });
   }
 
   async genuineCheck() {
-    console.log(mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo));
-    this.page.evaluate(() => {
+    const result = mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo);
+
+    await this.page.evaluate((args) => {
+      const [ deviceInfo, result ] = args;
+
       window.mock.events.mockDeviceEvent({
         type: "listingApps",
         deviceInfo,
       },
       {
         type: "result",
-        result: mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo),
+        result,
       },
       { type: "complete" });
-    });
+    }, [ deviceInfo, result ]);
+
+    await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
+  }
+
+  async manager() {
+    const result = mockListAppsResult("Bitcoin,Ethereum,Litecoin,Stellar,Tron,Ripple,Polkadot","Bitcoin,Ethereum (outdated)", deviceInfo);
+
+    await this.page.evaluate((args) => {
+      const [ deviceInfo, result ] = args;
+
+      window.mock.events.mockDeviceEvent({
+        type: "listingApps",
+        deviceInfo,
+      },
+      {
+        type: "result",
+        result,
+      },
+      { type: "complete" });
+    }, [ deviceInfo, result ]);
+
+    await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
   }
 };

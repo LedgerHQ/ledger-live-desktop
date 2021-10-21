@@ -1,35 +1,47 @@
 import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { AccountModal } from "../models/AccountModal";
-import { Device } from "../models/DeviceAction";
+import { DeviceAction } from "../models/DeviceAction";
 
 // Comment out to disable recorder
 // process.env.PWDEBUG = "1";
 
-// Use specific userdata
+// specific environments
 test.use({ userdata: "skip-onboarding" });
 
-test("Add account", async ({ page }) => {
-  const AccountPage = new AccountModal(page);
-  const DeviceAction = new Device(page);
+const currencies = ["BTC"];
 
-  await test.step("Open modal", async () => {
-    await AccountPage.add();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`open-modal.png`);
-  });
+test.describe.parallel("Currencies", () => {
+  for (const currency of currencies) {
+    test(`[${currency}] Add account`, async ({ page }) => {
+      const accountModal = new AccountModal(page);
+      const deviceAction = new DeviceAction(page);
 
-  await test.step("Select currency", async () => {
-    await AccountPage.select("Bitcoin (BTC)");
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`select-currency.png`);
-  });
+      await test.step(`[${currency}] Open modal`, async () => {
+        await accountModal.add();
+        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`open-modal.png`);
+      });
 
-  await test.step("Open device app", async () => {
-    await DeviceAction.openApp();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`device-open-app.png`);
-  });
+      await test.step(`[${currency}] Select currency`, async () => {
+        await accountModal.select(currency);
+        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
+          `${currency}-select-currency.png`,
+        );
+      });
 
-  await test.step("Complete", async () => {
-    await AccountPage.complete();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`complete.png`);
-  });
+      await test.step(`[${currency}] Open device app`, async () => {
+        await deviceAction.openApp();
+        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
+          `${currency}-device-open-app.png`,
+        );
+      });
+
+      await test.step(`[${currency}] Complete`, async () => {
+        await accountModal.complete();
+        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
+          `${currency}-complete.png`,
+        );
+      });
+    });
+  }
 });

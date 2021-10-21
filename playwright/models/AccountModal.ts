@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 
 export class AccountModal {
   readonly page: Page;
@@ -13,11 +13,14 @@ export class AccountModal {
 
   async add() {
     await this.page.click('button:has-text("Add account")');
+    await this.page.waitForSelector('#modal-title', { state: 'visible' } );
+    expect(await this.page.textContent('#modal-title')).toBe("Add accounts");
   }
 
   async select(currency) {
-    await this.page.click('#modal-content >> :nth-match(div:has-text("Choose a crypto asset"), 3)');
-    await this.page.click(`text=${currency}`);
+    await this.page.click('.select__indicator');
+    await this.page.fill('[placeholder="Search"]', currency);
+    await this.page.press('[placeholder="Search"]', 'Enter');
     await this.page.click('button:has-text("Continue")');
   }
 
