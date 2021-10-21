@@ -122,7 +122,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
   );
 }
 
-function MarketCap({ currency }: { currency: MarketCurrency }) {
+function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
   return (
     <CardStyled mb={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
@@ -145,7 +145,7 @@ function MarketCap({ currency }: { currency: MarketCurrency }) {
   );
 }
 
-function Supply({ currency }: { currency: MarketCurrency }) {
+function Supply({ currency }: { currency: MarketCurrencyInfo }) {
   return (
     <CardStyled mt={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
@@ -174,7 +174,7 @@ function Supply({ currency }: { currency: MarketCurrency }) {
   );
 }
 
-function CryptocurrencyStats({ currency }: { currency: MarketCurrency }) {
+function CryptocurrencyStats({ currency }: { currency: MarketCurrencyInfo }) {
   return (
     <Box grow horizontal>
       <Box style={{ height: "100%" }} flex="50%" mr={2}>

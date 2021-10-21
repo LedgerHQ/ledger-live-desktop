@@ -16,6 +16,8 @@ type Props = {
   getMarketCryptoCurrencies: any,
   setMarketParams: (state: $Shape<MarketState>) => { payload: $Shape<MarketState>, type: string },
   searchValue: string,
+  fromMapStateToProps: string,
+  dispatch1: () => void,
 };
 
 class MarketPage extends Component<Props> {
@@ -74,7 +76,7 @@ const SearchContainer: ThemedComponent<{}> = styled(Box)`
   border-radius: 4px 4px 0 0;
 `;
 
-export default connect(state => ({ ...state.market }), {
+export default connect<*, *, *, *, *, *>(state => ({ ...state.market }), {
   getMarketCryptoCurrencies,
   setMarketParams,
 })(MarketPage);

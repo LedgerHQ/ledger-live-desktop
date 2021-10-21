@@ -1,16 +1,15 @@
 // @flow
 import { APIClient } from "~/api/index";
-import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
-import { MarketCurrencyCommonInfo } from "~/renderer/reducers/market";
+import type { MarketCurrencyCommonInfo, MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 type MarketListRequestParams = {
   counterCurrency: string,
-  ids: string[],
+  ids?: string[],
   page: number,
   limit: number,
   range: string,
-  orderBy: string,
-  order: string,
+  orderBy?: string,
+  order?: string,
 };
 
 export type MarketCurrencyByIdRequestParams = {
@@ -20,7 +19,7 @@ export type MarketCurrencyByIdRequestParams = {
 };
 
 type MarketCurrencyChartDataRequestParams = {
-  id: ?string,
+  id: string,
   counterCurrency: string,
   days: number,
   interval: string,
@@ -43,7 +42,7 @@ export class MarketClient extends APIClient {
     let path = `${this.ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=true&price_change_percentage=${range}`;
 
     if (ids.length) {
-      path += `&ids=${ids}`;
+      path += `&ids=${ids.toString()}`;
     }
     const response = await this.http.get(path);
 

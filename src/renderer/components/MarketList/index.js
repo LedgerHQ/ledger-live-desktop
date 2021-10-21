@@ -53,7 +53,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
 
 const RowContent: ThemedComponent<{
   disabled?: boolean,
-}> = styled.div`
+}> = styled("div")`
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -68,7 +68,7 @@ const RowContent: ThemedComponent<{
 
 type CurrencyRowProps = {
   index: number,
-  style: Map<string, string>,
+  style: any,
 };
 
 function MarketList() {
@@ -83,16 +83,16 @@ function MarketList() {
     page,
     currencies,
     loading,
-    coinsList,
+    coins,
   } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!coinsList[0]) {
+    if (!coins[0]) {
       dispatch(getMarketCryptoCurrencies());
     }
-  }, [coinsList, dispatch]);
+  }, [coins, dispatch]);
 
   const onSort = key => {
     if (!loading) {

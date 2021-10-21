@@ -5,7 +5,7 @@ import { HttpClient } from "~/internal/http/client";
  * ErrorUnauthorized is a custom error type for performing unauthorized operations.
  */
 export class UnauthorizedError extends Error {
-  constructor(message = "authorization required") {
+  constructor(message: string = "authorization required") {
     super(message);
   }
 }
@@ -14,7 +14,7 @@ export class UnauthorizedError extends Error {
  * BadRequestError is a custom error type for performing bad request.
  */
 export class BadRequestError extends Error {
-  constructor(message = "bad request") {
+  constructor(message: string = "bad request") {
     super(message);
   }
 }
@@ -23,7 +23,7 @@ export class BadRequestError extends Error {
  * InternalError is a custom error type for internal server error.
  */
 export class InternalError extends Error {
-  constructor(message = "internal server error") {
+  constructor(message: string = "internal server error") {
     super(message);
   }
 }

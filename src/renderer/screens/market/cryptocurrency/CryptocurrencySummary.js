@@ -57,7 +57,11 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
 
   currency.difference =
     chartData.length > 1
-      ? parseFloat(chartData[0].value) - parseFloat(chartData[chartData.length - 1].value)
+      ? parseFloat(
+          (
+            parseFloat(chartData[0].value) - parseFloat(chartData[chartData.length - 1].value)
+          ).toFixed(currency.magnitude),
+        )
       : 0;
 
   return (

@@ -2,7 +2,6 @@
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { withRouter } from "react-router";
 import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
@@ -13,14 +12,14 @@ import Button from "~/renderer/components/Button";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
 `;
 
-const CryptoCurrencyIconWrapper = styled.div`
+const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   height: 20px;
   width: 20px;
   position: relative;
@@ -29,7 +28,7 @@ const CryptoCurrencyIconWrapper = styled.div`
   }
 `;
 
-const CurrencyTicker = styled.div`
+const CurrencyTicker: ThemedComponent<{}> = styled("div")`
   padding: 5px 10px;
   color: ${p => p.theme.colors.palette.text.shade30};
 `;
@@ -60,7 +59,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
 
 const RowContent: ThemedComponent<{
   disabled?: boolean,
-}> = styled.div`
+}> = styled("div")`
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -75,11 +74,9 @@ const RowContent: ThemedComponent<{
 
 type Props = {
   index: number,
-  name: string,
-  short_name: string,
   currency: MarketCurrencyInfo,
   counterCurrency: string,
-  style: Map<string, string>,
+  style: any,
   loading: boolean,
 };
 
@@ -273,4 +270,4 @@ function MarketRowItem(props: Props) {
   );
 }
 
-export default withRouter(MarketRowItem);
+export default MarketRowItem;

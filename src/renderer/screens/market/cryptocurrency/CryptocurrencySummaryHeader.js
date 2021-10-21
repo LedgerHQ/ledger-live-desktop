@@ -22,7 +22,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(
     item => {
-      const range = item.value || '1d';
+      const range = item.value || "1d";
       dispatch(setMarketRange(range));
     },
     [dispatch],
@@ -31,6 +31,8 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
   rangesArr.forEach(range => {
     range.label = range.pill;
   });
+
+  const difference = currency.difference || 0;
 
   return (
     <Box>
@@ -55,7 +57,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             withIcon
           />
           <Text ff="Inter|Medium" fontSize={16} pl={2}>
-            {`(${currency.difference.toFixed(currency.magnitude)} ${counterCurrency})`}
+            {`(${difference} ${counterCurrency})`}
           </Text>
         </Box>
         <Box>

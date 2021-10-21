@@ -12,7 +12,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 const CryptocurrencyCrumb = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { state: currency } = useLocation();
+  const currency = useLocation().state;
 
   return (
     <>
@@ -30,7 +30,7 @@ const CryptocurrencyCrumb = () => {
       </TextLink>
       <Separator />
       <Box horizontal>
-        <Box px={1}></Box>
+        <Box px={1} />
         {currency.name}
       </Box>
     </>

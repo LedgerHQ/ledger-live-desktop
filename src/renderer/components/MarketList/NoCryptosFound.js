@@ -2,8 +2,9 @@
 import React from "react";
 import styled from "styled-components";
 import NoCryptosFoundImg from "~/renderer/images/NoCryptosFound.png";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Wrapper = styled.div`
+const Wrapper: ThemedComponent<{}> = styled("div")`
   width: 100%;
   padding-top: 60px;
   text-align: center;
@@ -23,7 +24,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const NoCryptosFoundImgStyled = styled.img`
+const NoCryptosFoundImgStyled: ThemedComponent<{}> = styled("img")`
   width: 112px;
 `;
 

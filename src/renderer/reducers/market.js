@@ -26,9 +26,9 @@ export type MarketCurrencyInfo = {
   atl: number,
   atl_date: Date,
   sparkline_in_7d: number[],
-  supportedCurrency: Currency,
+  supportedCurrency?: Currency,
   magnitude: number,
-  isStarred: boolean,
+  isStarred?: boolean,
   difference: number,
 };
 
@@ -43,9 +43,9 @@ export type MarketFilters = {
 };
 
 export type CoinsListItemType = {
-  id: "string",
-  symbol: "string",
-  name: "string",
+  id: string,
+  symbol: string,
+  name: string,
 };
 
 export type FavoriteCryptoCurrency = {
@@ -54,14 +54,14 @@ export type FavoriteCryptoCurrency = {
 
 export type MarketState = {
   currencies: Array<MarketCurrencyInfo>,
-  coinsList: Array<CoinsListItemType>,
+  coins: Array<CoinsListItemType>,
   counterCurrencies: Array<any>,
+  coinsCount: number,
   searchValue: string,
   range: string,
   limit: number,
-  coinsListCount: number,
   page: number,
-  ids: Array<any>,
+  ids: Array<string>,
   counterCurrency: string,
   filters: {
     isLedgerCompatible: boolean,
@@ -80,59 +80,55 @@ const initialState: MarketState = {
   counterCurrency: "usd",
   page: 1,
   limit: 9,
-  coinsList: [],
+  coins: [],
   ids: [],
   filters: {
     isLedgerCompatible: false,
   },
   favorites: [],
-  coinsListCount: 0,
+  coinsCount: 0,
   loading: false,
 };
 
 const handlers = {
-  SET_MARKET_PARAMS: (state, { payload }) => {
+  SET_MARKET_PARAMS: (state: any, { payload }: { payload: any }) => {
     return {
       ...state,
       ...payload,
     };
   },
-  SET_MARKET_RANGE: (state, { payload }: { payload: string }) => {
+  SET_MARKET_RANGE: (state: any, { payload }: { payload: string }) => {
     return {
       ...state,
       range: payload,
     };
   },
-  SET_MARKET_COUNTERVALUE: (state, { payload }: { payload: string }) => {
-    return {
-      ...state,
-      counterCurrency: payload,
-    };
-  },
-  SET_MARKET_FILTERS: (state, { payload }: { payload: MarketFilters }) => {
+  SET_MARKET_FILTERS: (state: any, { payload }: { payload: MarketFilters }) => {
     return {
       ...state,
       filters: payload,
     };
   },
-  SET_FAVORITE_CRYPTOCURRENCIES: (state, { payload }) => {
-    return {
-      ...state,
-      favorites: payload.favorites,
-    };
-  },
-  GET_MARKET_CRYPTOCURRENCIES: state => {
+  GET_MARKET_CRYPTOCURRENCIES: (state: any) => {
     return {
       ...state,
     };
   },
   UPDATE_FAVORITE_CRYPTOCURRENCIES: (
-    state,
+    state: any,
     {
       payload: { cryptocurrencyId, isStarred, favorites },
-    }: { payload: { cryptocurrencyId: number, isStarred: boolean, favorites: { id: string }[] } },
+    }: {
+      payload: {
+        cryptocurrencyId: string,
+        isStarred: boolean,
+        favorites: Array<FavoriteCryptoCurrency>,
+      },
+    },
   ) => {
-    const favoritesLength = favorites.length;
+    // TODO: Move this to action
+
+    const favoritesLength: number = favorites.length;
     if (isStarred) {
       for (let i = 0; i < favoritesLength; i++) {
         if (favorites[i].id === cryptocurrencyId) {

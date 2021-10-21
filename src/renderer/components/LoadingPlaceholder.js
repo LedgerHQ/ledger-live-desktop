@@ -1,8 +1,9 @@
 // @flow
 import React from "react";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Wrapper = styled.div`
+const Wrapper: ThemedComponent<{}> = styled("div")`
   position: relative;
   height: 100%;
   width: 100%;
@@ -13,7 +14,7 @@ const Wrapper = styled.div`
   border-radius: 4px;
 `;
 
-const Activity = styled.div`
+const Activity: ThemedComponent<{}> = styled("div")`
   position: absolute;
   left: -45%;
   height: 100%;

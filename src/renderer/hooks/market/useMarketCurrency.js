@@ -6,6 +6,8 @@ import { MarketClient } from "~/api/market";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import type { Data } from "~/renderer/components/Chart/types";
+import { BigNumber } from "bignumber.js";
 
 type Prop = {
   id: ?string,
@@ -52,7 +54,7 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
 };
 
 export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => {
-  const [chartData, setChartData] = useState<{ date: Date, value: string }[]>([]);
+  const [chartData, setChartData] = useState<Data>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const formattedHourTime = index =>
@@ -80,7 +82,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
 
       if (!prices.length || !interval) return [];
 
-      const chartData = [];
+      const data = [];
       for (let i = 0; i <= prices.length - 1; i++) {
         const price = prices[i];
         const priceMagnitude = magnitude(price);
@@ -90,9 +92,9 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
             : interval === "minutely"
             ? formattedMinuteTime(i)
             : formattedDayTime(i);
-        chartData.push({ date: formattedTime, value: price.toFixed(priceMagnitude) });
+        data.push({ date: formattedTime, value: BigNumber(priceMagnitude) });
       }
-      return chartData;
+      return data;
     };
     const marketClient = new MarketClient();
     marketClient
@@ -103,8 +105,8 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
         interval,
       })
       .then(prices => {
-        const chartData = buildChartData({ interval, prices });
-        setChartData(chartData);
+        const data = buildChartData({ interval, prices });
+        setChartData(data);
         setLoading(false);
       });
   }, [id, counterCurrency, days, interval]);

@@ -1,7 +1,7 @@
 // @flow
 import React, { useCallback } from "react";
 import styled, { keyframes } from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { rgba } from "~/renderer/styles/helpers";
 import starAnim from "~/renderer/images/starAnim.png";
 import starAnim2 from "~/renderer/images/starAnim2.png";
@@ -29,7 +29,6 @@ export default function CryptocurrencyStar({
   const dispatch = useDispatch();
   const isStarred = propsIsStarred || !!currency.isStarred;
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
-  const favorites = useSelector(state => state.market.favorites);
 
   const toggleStar = useCallback(
     e => {
@@ -40,7 +39,6 @@ export default function CryptocurrencyStar({
           updateFavoriteCryptocurrencies({
             cryptocurrencyId: currency.id,
             isStarred,
-            favorites,
           }),
         );
       }
@@ -48,7 +46,7 @@ export default function CryptocurrencyStar({
         onClick(!isStarred);
       }
     },
-    [currency, isStarred, dispatch, favorites, onClick],
+    [currency, isStarred, dispatch, onClick],
   );
 
   return (
@@ -92,12 +90,12 @@ const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
       p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade100};
   }
 `;
-const FloatingWrapper: ThemedComponent<{}> = styled.div`
+const FloatingWrapper: ThemedComponent<{}> = styled("div")`
   cursor: pointer;
 `;
 
 // NB negative margin to allow the burst to overflow
-const StarWrapper: ThemedComponent<{}> = styled.div`
+const StarWrapper: ThemedComponent<{}> = styled("div")`
   margin: -17px;
 `;
 
