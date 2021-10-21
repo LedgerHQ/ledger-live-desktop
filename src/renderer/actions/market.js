@@ -3,14 +3,12 @@ import type {
   FavoriteCryptoCurrency,
   MarketFilters,
   MarketState,
-  // eslint-disable-next-line import/no-duplicates
+  MarketCurrencyInfo,
 } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { counterCurrencyNameTable } from "~/renderer/constants/market";
-// eslint-disable-next-line import/no-duplicates
-import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { ThunkAction } from "redux-thunk";
 
