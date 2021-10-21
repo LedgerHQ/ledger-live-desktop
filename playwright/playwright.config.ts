@@ -8,8 +8,8 @@ const config: PlaywrightTestConfig = {
   use: {
     headless: true,
     ignoreHTTPSErrors: true,
-    // screenshot: "on",
-    // video: "retain-on-failure",
+    screenshot: "on",
+    video: "retain-on-failure",
     // trace: "retain-on-failure",
   },
   // workers: 2,

@@ -47,10 +47,17 @@ const test = base.extend<TestFixtures>({
     );
 
     // launch app
+    const viewport = { width: 1024, height: 768 };
+
     const electronApp = await electron.launch({
-      args: ["./.webpack/main.bundle.js", `--user-data-dir=${userDataPath}`],
+      args: [
+        "./.webpack/main.bundle.js",
+        `--user-data-dir=${userDataPath}`,
+        `--window-size=${viewport.width},${viewport.height}`,
+      ],
       recordVideo: {
         dir: "playwright/videos/",
+        size: viewport,
       },
       env: env,
       colorScheme: theme,

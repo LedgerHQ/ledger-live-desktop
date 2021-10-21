@@ -125,7 +125,8 @@ playwright/tmp/
 playwright/videos/
 playwright/.nyc_output
 playwright/coverage
-playwright/allure-report
+playwright/allure-report/*
+!playwright/allure-report/.gitkeep
 playwright/allure-results
 
 # Yalc
