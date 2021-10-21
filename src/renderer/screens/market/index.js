@@ -16,8 +16,6 @@ type Props = {
   getMarketCryptoCurrencies: any,
   setMarketParams: (state: $Shape<MarketState>) => { payload: $Shape<MarketState>, type: string },
   searchValue: string,
-  fromMapStateToProps: string,
-  dispatch1: () => void,
 };
 
 class MarketPage extends Component<Props> {

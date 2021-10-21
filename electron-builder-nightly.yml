@@ -7,12 +7,16 @@ protocols:
 
 afterSign: scripts/notarize.js
 
+directories:
+  buildResources: "build-nightly"
+
 mac:
   artifactName: ${name}-${version}-${os}.${ext}
   category: public.app-category.wallet
   hardenedRuntime: true
-  entitlements: build/mac/entitlements.plist
-  entitlementsInherit: build/mac/entitlements.plist
+  entitlements: build-nightly/mac/entitlements.plist
+  entitlementsInherit: build-nightly/mac/entitlements.plist
+  icon: build-nightly/icon.icns
   target:
     - dmg
     - zip
@@ -25,6 +29,7 @@ linux:
   #   - node_modules/@ledgerhq/ledger-core
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   category: Finance
+  icon: icons
   target:
     - target: AppImage
       arch:
@@ -32,7 +37,7 @@ linux:
 
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
-  icon: build/windows/app.ico
+  icon: build-nightly/windows/app.ico
   sign: scripts/sign-windows.js
   signingHashAlgorithms:
     - sha256
@@ -45,10 +50,10 @@ nsis:
   oneClick: false
   perMachine: true
   allowToChangeInstallationDirectory: true
-  installerIcon: build/windows/installer.ico
-  installerSidebar: build/windows/installerSidebar.bmp
-  uninstallerIcon: build/windows/uninstaller.ico
-  uninstallerSidebar: build/windows/uninstallerSidebar.bmp
+  installerIcon: build-nightly/windows/installer.ico
+  installerSidebar: build-nightly/windows/installerSidebar.bmp
+  uninstallerIcon: build-nightly/windows/uninstaller.ico
+  uninstallerSidebar: build-nightly/windows/uninstallerSidebar.bmp
 
 files:
   # Include files

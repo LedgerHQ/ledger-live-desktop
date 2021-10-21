@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/bitcoin/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/transaction";
+import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/logic";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
@@ -57,7 +57,7 @@ const CoinControlModal = ({
 
   const error = errorKeys.length ? status.errors[errorKeys[0]] : null;
 
-  const returning = (status.txOutputs || []).find(tx => !!tx.path);
+  const returning = (status.txOutputs || []).find(output => !!output.path || !!output.isChange);
 
   return (
     <Modal width={700} isOpened={isOpened} centered onClose={onClose}>
