@@ -41,10 +41,10 @@
     "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
     "pretest": "tsc --incremental -p playwright/tsconfig.json",
-    "playwright": "ALLURE_RESULTS_DIR=playwright/allure-results npx playwright test --config=playwright/playwright.config.ts",
+    "playwright": "cross-env ALLURE_RESULTS_DIR=playwright/allure-results npx playwright test --config=playwright/playwright.config.ts",
     "playwright-coverage": "npx nyc@latest --reporter=html yarn playwright",
     "playwright-ci": "",
-    "playwright-generate-report": "npx allure generate playwright/allure-results --report-dir=playwright/allure-report --clean && allure open ./playwright/allure-report",
+    "playwright-generate-report": "npx allure generate playwright/allure-results -o playwright/allure-report --clean && allure open ./playwright/allure-report",
     "playwright-recorder": "npx playwright test playwright/specs/recorder.spec.ts"
   },
   "dependencies": {
@@ -157,6 +157,7 @@
     "@storybook/addon-essentials": "^6.3.7",
     "@storybook/addon-links": "^6.3.7",
     "@storybook/react": "^6.3.7",
+    "allure-commandline": "^2.13.8",
     "allure-playwright": "^2.0.0-beta.13",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
