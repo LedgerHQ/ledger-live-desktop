@@ -163,7 +163,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
             </Text>
           </StickyWrapper>
           <Skeleton show={show} width={393} minHeight={393}>
-            <Image nft={metadata} size={393} />
+            <Image nft={metadata} full />
           </Skeleton>
           <NFTActions>
             <Button

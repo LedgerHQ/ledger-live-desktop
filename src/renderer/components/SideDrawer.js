@@ -37,7 +37,7 @@ const DURATION = 250;
 const transitionBackdropStyles = {
   entering: {},
   entered: { opacity: 1 },
-  exiting: {},
+  exiting: { pointerEvents: "none" },
   exited: {},
 };
 
@@ -90,7 +90,9 @@ const DrawerContent = styled.div.attrs(({ state }) => ({
 const transitionContainerStyles = {
   entering: {},
   entered: {},
-  exiting: {},
+  exiting: {
+    pointerEvents: "none",
+  },
   exited: {
     pointerEvents: "none",
     visibility: "hidden",
