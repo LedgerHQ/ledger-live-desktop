@@ -42,7 +42,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
     chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
   }
 
-  const { loading, chartData } = useMarketCurrencyChart({ id, counterCurrency, range });
+  const { loading, chartData } = useMarketCurrencyChart({ id: id || "", counterCurrency, range });
 
   const renderTooltip = useCallback(
     (data: BalanceHistoryData) => (

@@ -9,8 +9,8 @@ export class HttpClient {
    * @param path
    * @param _auth indicates if authentication is needed
    */
-  async get(path: string, _auth = true): Promise<Response> {
-    return this.#do("GET", path, null);
+  async get(path: string, _auth: boolean = true): Promise<Response> {
+    return this.do("GET", path, null);
   }
 
   /**
@@ -19,8 +19,8 @@ export class HttpClient {
    * @param path
    * @param body serialized JSON
    */
-  async #do(method: string, path: string, body: string | null): Promise<Response> {
-    const request = {
+  async do(method: string, path: string, body: string | null): Promise<Response> {
+    const request: RequestOptions = {
       method: method,
       body: body,
     };

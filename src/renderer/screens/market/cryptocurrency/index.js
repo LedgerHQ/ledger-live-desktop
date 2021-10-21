@@ -32,7 +32,7 @@ const CryptoCurrencyPage = () => {
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 
   const { loading, currency } = useMarketCurrency({
-    id,
+    id: id || "",
     counterCurrency,
     range,
   });

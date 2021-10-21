@@ -4,7 +4,7 @@ import type { MarketCurrencyCommonInfo, MarketCurrencyInfo } from "~/renderer/re
 
 type MarketListRequestParams = {
   counterCurrency: string,
-  ids?: string[],
+  ids: string[],
   page: number,
   limit: number,
   range: string,
@@ -13,7 +13,7 @@ type MarketListRequestParams = {
 };
 
 export type MarketCurrencyByIdRequestParams = {
-  id: ?string,
+  id: string,
   counterCurrency: string,
   range: string,
 };

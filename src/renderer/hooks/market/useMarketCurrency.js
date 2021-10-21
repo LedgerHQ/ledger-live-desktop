@@ -10,7 +10,7 @@ import type { Data } from "~/renderer/components/Chart/types";
 import { BigNumber } from "bignumber.js";
 
 type Prop = {
-  id: ?string,
+  id: string,
   counterCurrency: string,
   range: string,
 };
@@ -34,7 +34,7 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
     const marketClient = new MarketClient();
     marketClient
       .currencyById({
-        id,
+        id: id || "",
         counterCurrency,
         range,
       })
@@ -53,7 +53,7 @@ export const useMarketCurrency = ({ id, counterCurrency, range }: Prop) => {
   return { loading, currency };
 };
 
-export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => {
+export const useMarketCurrencyChart = ({ id = "", counterCurrency, range }: Prop) => {
   const [chartData, setChartData] = useState<Data>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -99,7 +99,7 @@ export const useMarketCurrencyChart = ({ id, counterCurrency, range }: Prop) => 
     const marketClient = new MarketClient();
     marketClient
       .currencyChartData({
-        id,
+        id: id || "",
         counterCurrency,
         days,
         interval,

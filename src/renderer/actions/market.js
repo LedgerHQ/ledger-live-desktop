@@ -70,13 +70,18 @@ export const getCounterCurrencies: ThunkAction = () =>
     } = getState();
 
     if (!counterCurrencies[0]) {
-      const res: string[] = await marketClient.supportedCounterCurrencies();
-      res.forEach((currency, i) => {
-        res[i] = {
+      const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
+      let res: {
+        key: string,
+        label: string,
+        value: string,
+      }[];
+      supportedCounterCurrencies.forEach((currency, i) => {
+        res.push({
           key: currency,
           label: `${currency.toUpperCase()} - ${counterCurrencyNameTable[currency] || currency}`,
           value: currency,
-        };
+        });
       });
       dispatch(setMarketParams({ counterCurrencies: res }));
     }
