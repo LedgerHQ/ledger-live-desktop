@@ -6,18 +6,6 @@ import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
-import Settings from "~/renderer/screens/settings";
-import Accounts from "~/renderer/screens/accounts";
-import Manager from "~/renderer/screens/manager";
-import Exchange from "~/renderer/screens/exchange";
-import Swap2 from "~/renderer/screens/exchange/Swap2";
-import USBTroubleshooting from "~/renderer/screens/USBTroubleshooting";
-import Account from "~/renderer/screens/account";
-import WalletConnect from "~/renderer/screens/WalletConnect";
-import Asset from "~/renderer/screens/asset";
-import Lend from "~/renderer/screens/lend";
-import PlatformCatalog from "~/renderer/screens/platform";
-import PlatformApp from "~/renderer/screens/platform/App";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -48,6 +36,20 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+import Spinner from "~/renderer/components/Spinner";
+
+const Settings = React.lazy(() => import("./screens/settings"));
+const Accounts = React.lazy(() => import("./screens/accounts"));
+const Manager = React.lazy(() => import("./screens/manager"));
+const Exchange = React.lazy(() => import("./screens/exchange"));
+const Swap2 = React.lazy(() => import("./screens/exchange/Swap2"));
+const USBTroubleshooting = React.lazy(() => import("./screens/USBTroubleshooting"));
+const Account = React.lazy(() => import("./screens/account"));
+const WalletConnect = React.lazy(() => import("./screens/WalletConnect"));
+const Asset = React.lazy(() => import("./screens/asset"));
+const Lend = React.lazy(() => import("./screens/lend"));
+const PlatformCatalog = React.lazy(() => import("./screens/platform"));
+const PlatformApp = React.lazy(() => import("./screens/platform/App"));
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -56,6 +58,14 @@ export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   & > *:not(:first-child) {
     display: none;
   }
+`;
+
+const SpinnerContainer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const NightlyLayerR = () => {
@@ -169,38 +179,47 @@ export default function Default() {
                         <UpdateBanner />
                         <FirmwareUpdateBanner />
                       </TopBannerContainer>
-                      <Switch>
-                        <Route path="/" exact render={props => <Dashboard {...props} />} />
-                        <Route path="/settings" render={props => <Settings {...props} />} />
-                        <Route path="/accounts" render={props => <Accounts {...props} />} />
-                        <Redirect from="/manager/reload" to="manager" />
-                        <Route path="/manager" render={props => <Manager {...props} />} />
-                        <Route
-                          path="/platform"
-                          render={(props: any) => <PlatformCatalog {...props} />}
-                          exact
-                        />
-                        <Route
-                          path="/platform/:appId"
-                          render={(props: any) => <PlatformApp {...props} />}
-                        />
-                        <Route path="/lend" render={props => <Lend {...props} />} />
-                        <Route path="/exchange" render={props => <Exchange {...props} />} />
-                        <Route
-                          path="/account/:parentId/:id"
-                          render={props => <Account {...props} />}
-                        />
-                        <Route path="/account/:id" render={props => <Account {...props} />} />
-                        <Route
-                          path="/asset/:assetId+"
-                          render={(props: any) => <Asset {...props} />}
-                        />
-                        <Route path="/swap" render={props => <Swap2 {...props} />} />
-                        <Route
-                          path="/USBTroubleshooting"
-                          render={props => <USBTroubleshooting {...props} />}
-                        />
-                      </Switch>
+                      <React.Suspense
+                        fallback={
+                          <SpinnerContainer>
+                            <Spinner size={30} />
+                          </SpinnerContainer>
+                        }
+                      >
+                        <Switch>
+                          <Route path="/" exact render={props => <Dashboard {...props} />} />
+                          <Route path="/settings" render={props => <Settings {...props} />} />
+
+                          <Route path="/accounts" render={props => <Accounts {...props} />} />
+                          <Redirect from="/manager/reload" to="manager" />
+                          <Route path="/manager" render={props => <Manager {...props} />} />
+                          <Route
+                            path="/platform"
+                            render={(props: any) => <PlatformCatalog {...props} />}
+                            exact
+                          />
+                          <Route
+                            path="/platform/:appId"
+                            render={(props: any) => <PlatformApp {...props} />}
+                          />
+                          <Route path="/lend" render={props => <Lend {...props} />} />
+                          <Route path="/exchange" render={props => <Exchange {...props} />} />
+                          <Route
+                            path="/account/:parentId/:id"
+                            render={props => <Account {...props} />}
+                          />
+                          <Route path="/account/:id" render={props => <Account {...props} />} />
+                          <Route
+                            path="/asset/:assetId+"
+                            render={(props: any) => <Asset {...props} />}
+                          />
+                          <Route path="/swap" render={props => <Swap2 {...props} />} />
+                          <Route
+                            path="/USBTroubleshooting"
+                            render={props => <USBTroubleshooting {...props} />}
+                          />
+                        </Switch>
+                      </React.Suspense>
                     </Page>
                     <Drawer />
                     <ToastOverlay />

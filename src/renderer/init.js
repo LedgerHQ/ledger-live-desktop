@@ -8,7 +8,7 @@ import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts
 import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
 import i18n from "i18next";
-import { remote, webFrame, ipcRenderer } from "electron";
+import { webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
 import _ from "lodash";
@@ -118,7 +118,7 @@ async function init() {
   const hideEmptyTokenAccounts = hideEmptyTokenAccountsSelector(state);
   setEnvOnAllThreads("HIDE_EMPTY_TOKEN_ACCOUNTS", hideEmptyTokenAccounts);
 
-  const isMainWindow = remote.getCurrentWindow().name === "MainWindow";
+  const isMainWindow = require("@electron/remote").getCurrentWindow().name === "MainWindow";
 
   let accounts = await getKey("app", "accounts", []);
   if (accounts) {
