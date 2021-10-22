@@ -38,7 +38,7 @@ const ColumnTitleBox = styled(Box)`
 `;
 
 const Row: ThemedComponent<{}> = styled(Box)`
-  background: ${p => p.theme.colors.palette.background.shade10};
+  background: ${p => p.theme.colors.palette.background.default};
   border: 1px solid transparent;
   box-shadow: 0 4px 8px 0 #00000007;
   cursor: pointer;

@@ -15,31 +15,31 @@ import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 export const rangesArr = [
   {
     value: "1h",
-    label: "1 hour",
+    label: "Last 1 hour",
     key: "1h",
     pill: "1h",
   },
   {
     value: "24h",
-    label: "24 hours",
+    label: "Last 24 hours",
     key: "24h",
     pill: "1D",
   },
   {
     value: "7d",
-    label: "7 days",
+    label: "Last week",
     key: "7d",
     pill: "1W",
   },
   {
     value: "30d",
-    label: "30 days",
+    label: "Last month",
     key: "30d",
     pill: "1M",
   },
   {
     value: "1y",
-    label: "12 months",
+    label: "Last year",
     key: "1y",
     pill: "1Y",
   },

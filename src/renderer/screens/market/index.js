@@ -63,7 +63,7 @@ class MarketPage extends Component<Props> {
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   flex: 1;
-  padding: 10px 20px;
+  padding: 15px 20px;
   margin-bottom: 2px;
   color: #abadb6;
   font-weight: 600;
@@ -72,6 +72,7 @@ const SearchContainer: ThemedComponent<{}> = styled(Box)`
   display: flex;
   flex-direction: row;
   border-radius: 4px 4px 0 0;
+  min-height: 52px;
 `;
 
 export default connect<*, *, *, *, *, *>(state => ({ ...state.market }), {
