@@ -118,10 +118,10 @@ export const getMarketCryptoCurrencies: ThunkAction = (
       filters,
     } = filterParams;
 
-    const showFavorites: boolean = orderBy === "isStarred" && order === "desc";
-    const unShowFavorites: boolean = orderBy === "isStarred" && order === "asc";
+    const showFavorites: boolean = filters.isFavorite;
+    const unShowFavorites: boolean = !filters.isFavorite;
 
-    if (coinsCount === undefined) {
+    if (!coinsCount) {
       coins = await marketClient.supportedCurrencies();
     }
 

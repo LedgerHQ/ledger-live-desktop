@@ -10,6 +10,7 @@ import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
+import CheckBox from "~/renderer/components/CheckBox";
 
 type LedgerLiveCompatibleProps = {
   value: boolean,
@@ -93,6 +94,48 @@ const LedgerLiveCompatible = ({ value, onValueChange }: LedgerLiveCompatibleProp
   );
 };
 
+const Show = ({ value, onValueChange }: LedgerLiveCompatibleProps) => {
+
+  const options = [
+    {
+      label: "All",
+      value: "all",
+    },
+    {
+      label: "Ledger Live Compatible",
+      value: "isLedgerCompatible",
+    },
+    {
+      label: "Starred Assets",
+      value: "isFavorite",
+    },
+  ];
+
+  return (
+    <SectionWrapper>
+      <SectionTitle>Show</SectionTitle>
+      {options.map(option => (
+        <Box
+          key={option.value}
+          px={3}
+          pt={5}
+          horizontal
+          alignItems="center"
+        >
+          <CheckBox
+            isChecked={value === option.value}
+            isRadio
+            onChange={value => onValueChange(option.value, value)}
+          />
+          <Label ml={14} color="palette.text.shade50" fontSize={12}>
+            {option.label}
+          </Label>
+        </Box>
+      ))}
+    </SectionWrapper>
+  );
+};
+
 const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) => {
   return (
     <FooterWrapper>
@@ -101,9 +144,9 @@ const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) 
         <BasicButton onClick={() => onClearAll()}>
           <Ellipsis>Clear all</Ellipsis>
         </BasicButton>
-        <PrimaryButton onClick={() => onApply()}>
+        <Button primary onClick={() => onApply()}>
           <Ellipsis>Apply filters</Ellipsis>
-        </PrimaryButton>
+        </Button>
       </Box>
     </FooterWrapper>
   );
@@ -113,24 +156,45 @@ function MarketFilters() {
   const savedFilters = useSelector(state => state.market.filters);
   const dispatch = useDispatch();
   const [isLedgerCompatible, setIsLedgerCompatible] = useState(savedFilters.isLedgerCompatible);
+  const [isFavorite, setIsFavorites] = useState(savedFilters.isFavorite);
 
   const onClearAll = () => {
     setIsLedgerCompatible(false);
   };
 
+  const currentValue = isFavorite
+    ? "isFavorite"
+    : isLedgerCompatible
+    ? "isLedgerCompatible"
+    : "all";
+
+  const onChange = value => {
+    switch (value) {
+      case "isFavorite":
+        setIsFavorites(true);
+        setIsLedgerCompatible(false);
+        break;
+      case "isLedgerCompatible":
+        setIsLedgerCompatible(true);
+        setIsFavorites(false);
+        break;
+      default:
+        setIsFavorites(false);
+        setIsLedgerCompatible(false);
+        break;
+    }
+  };
+
   const onApplyFilters = useCallback(() => {
-    dispatch(setMarketFilters({ isLedgerCompatible }));
+    dispatch(setMarketFilters({ isLedgerCompatible, isFavorite }));
     dispatch(getMarketCryptoCurrencies());
     dispatch(closePlatformAppDrawer());
-  }, [dispatch, isLedgerCompatible]);
+  }, [dispatch, isFavorite, isLedgerCompatible]);
 
-  return (
+   return (
     <Box>
       <MainWrapper pt={6} px={5}>
-        <LedgerLiveCompatible
-          value={isLedgerCompatible}
-          onValueChange={value => setIsLedgerCompatible(value)}
-        />
+        <Show value={currentValue} onValueChange={value => onChange(value)} />
       </MainWrapper>
       <MarketFiltersFooter onClearAll={() => onClearAll()} onApply={() => onApplyFilters()} />
     </Box>

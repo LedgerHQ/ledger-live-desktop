@@ -40,6 +40,7 @@ export type MarketCurrencyCommonInfo = {
 
 export type MarketFilters = {
   isLedgerCompatible: boolean,
+  isFavorite: boolean,
 };
 
 export type CoinsListItemType = {
@@ -63,9 +64,7 @@ export type MarketState = {
   page: number,
   ids: Array<string>,
   counterCurrency: string,
-  filters: {
-    isLedgerCompatible: boolean,
-  },
+  filters: MarketFilters,
   loading: boolean,
   favorites: Array<FavoriteCryptoCurrency>,
 };
@@ -84,6 +83,7 @@ const initialState: MarketState = {
   ids: [],
   filters: {
     isLedgerCompatible: false,
+    isFavorite: false,
   },
   favorites: [],
   coinsCount: 0,

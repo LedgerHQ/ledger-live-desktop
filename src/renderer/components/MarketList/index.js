@@ -180,7 +180,7 @@ function MarketList() {
           <ColumnTitleBox
             shrink
             grow
-            flex="14%"
+            flex="15%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
             horizontal
@@ -188,25 +188,25 @@ function MarketList() {
             justifyContent="flex-start"
             fontSize={4}
           >
-            Variation(7d)
+            Market cap
           </ColumnTitleBox>
-          <ColumnTitleBox
-            shrink
-            flex="1%"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            horizontal
-            alignItems="center"
-            justifyContent="flex-end"
-            fontSize={4}
-            onClick={() => onSort("isStarred")}
-            mr={1}
-          >
-            <CryptocurrencyStar
-              isStarred={orderBy === "isStarred" && order === "desc"}
-              disableAnimation
-            />
-          </ColumnTitleBox>
+          {/*<ColumnTitleBox*/}
+          {/*  shrink*/}
+          {/*  flex="1%"*/}
+          {/*  ff="Inter|SemiBold"*/}
+          {/*  color="palette.text.shade100"*/}
+          {/*  horizontal*/}
+          {/*  alignItems="center"*/}
+          {/*  justifyContent="flex-end"*/}
+          {/*  fontSize={4}*/}
+          {/*  onClick={() => onSort("isStarred")}*/}
+          {/*  mr={1}*/}
+          {/*>*/}
+          {/*  <CryptocurrencyStar*/}
+          {/*    isStarred={orderBy === "isStarred" && order === "desc"}*/}
+          {/*    disableAnimation*/}
+          {/*  />*/}
+          {/*</ColumnTitleBox>*/}
         </RowContent>
       </Row>
       {loading ? (
