@@ -3,8 +3,7 @@
   "include": [
     "src/"
   ],
-  "reporter": [ "html", "text" ],
+  "reporter": [ "html" ],
   "report-dir": "playwright/coverage",
-  "temp-dir": "playwright/.nyc_output",
-  "useInlineSourceMaps": false
+  "temp-dir": "playwright/.nyc_output"
 }
