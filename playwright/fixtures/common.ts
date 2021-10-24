@@ -25,7 +25,7 @@ const test = base.extend<TestFixtures>({
   page: async ({ lang, theme, userdata, env }, use) => {
     // create userdata path
     const userDataPathKey = generateUUID();
-    const userDataPath = path.join(__dirname, "../tmp", userDataPathKey);
+    const userDataPath = path.join(__dirname, "../artifacts/userdata", userDataPathKey);
     fs.mkdirSync(userDataPath, { recursive: true });
 
     if (userdata) {
@@ -56,7 +56,7 @@ const test = base.extend<TestFixtures>({
         `--window-size=${viewport.width},${viewport.height}`,
       ],
       recordVideo: {
-        dir: "playwright/videos/",
+        dir: "playwright/artifacts/videos/",
         size: viewport,
       },
       env,
@@ -68,7 +68,7 @@ const test = base.extend<TestFixtures>({
     const page = await electronApp.firstWindow();
 
     // start coverage
-    const istanbulCLIOutput = path.join('playwright/.nyc_output');
+    const istanbulCLIOutput = path.join('playwright/artifacts/.nyc_output');
 
     await page.addInitScript(() =>
     window.addEventListener('beforeunload', () =>
@@ -95,11 +95,6 @@ const test = base.extend<TestFixtures>({
 
     // close app
     await electronApp.close();
-
-    // cleanup userdata
-    if (fs.existsSync(`${userDataPath}`)) {
-      rimraf.sync(userDataPath);
-    }
   },
 });
 

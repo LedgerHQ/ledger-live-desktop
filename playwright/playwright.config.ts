@@ -3,7 +3,7 @@ import { PlaywrightTestConfig } from "@playwright/test";
 const config: PlaywrightTestConfig = {
   testDir: "specs/",
   testIgnore: "specs/recorder.spec.ts",
-  outputDir: "./test-results",
+  outputDir: "./artifacts/test-results",
   timeout: 60000,
   globalTimeout: 0,
   globalSetup: require.resolve("./utils/global-setup"),
