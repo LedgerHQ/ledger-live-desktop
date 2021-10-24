@@ -2,7 +2,12 @@ import { _electron as electron } from "playwright";
 import { test as base, expect } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
+import * as crypto from 'crypto';
 import rimraf from "rimraf";
+
+export function generateUUID(): string {
+  return crypto.randomBytes(16).toString('hex');
+}
 
 type TestFixtures = {
   lang: String;
@@ -19,9 +24,7 @@ const test = base.extend<TestFixtures>({
   theme: "light",
   page: async ({ lang, theme, userdata, env }, use) => {
     // create userdata path
-    const userDataPathKey = Math.random()
-      .toString(36)
-      .substring(2, 5);
+    const userDataPathKey = generateUUID();
     const userDataPath = path.join(__dirname, "../tmp", userDataPathKey);
     fs.mkdirSync(userDataPath, { recursive: true });
 
@@ -35,8 +38,8 @@ const test = base.extend<TestFixtures>({
       {
         MOCK: true,
         HIDE_DEBUG_MOCK: true,
-        // SPECTRON_RUN: true,
         CI: process.env.CI || undefined,
+        SPECTRON_RUN: true,
         // SYNC_ALL_INTERVAL: 86400000,
         // SYNC_BOOT_DELAY: 16,
       },
@@ -65,8 +68,18 @@ const test = base.extend<TestFixtures>({
     const page = await electronApp.firstWindow();
 
     // start coverage
-    await page.coverage.startJSCoverage();
-    await page.coverage.startCSSCoverage();
+    const istanbulCLIOutput = path.join('playwright/.nyc_output');
+
+    await page.addInitScript(() =>
+    window.addEventListener('beforeunload', () =>
+      (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__))
+      ),
+    );
+    await fs.promises.mkdir(istanbulCLIOutput, { recursive: true });
+    await page.exposeFunction('collectIstanbulCoverage', (coverageJSON: string) => {
+      if (coverageJSON)
+        fs.writeFileSync(path.join(istanbulCLIOutput, `playwright_coverage_${generateUUID()}.json`), coverageJSON);
+    });
 
     // app is loaded
     expect(await page.title()).toBe("Ledger Live");
@@ -78,8 +91,7 @@ const test = base.extend<TestFixtures>({
     await use(page);
 
     // stop coverage
-    await page.coverage.stopJSCoverage();
-    await page.coverage.stopCSSCoverage();
+    await page.evaluate(() => (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__)));
 
     // close app
     await electronApp.close();

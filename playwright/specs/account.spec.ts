@@ -9,7 +9,7 @@ import { DeviceAction } from "../models/DeviceAction";
 // specific environments
 test.use({ userdata: "skip-onboarding" });
 
-const currencies = ["BTC", "LTC", "ALGO", "TRX"];
+const currencies = ["BTC"];
 
 test.describe.parallel("Currencies", () => {
   for (const currency of currencies) {

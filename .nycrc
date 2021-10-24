@@ -1,12 +1,10 @@
 {
   "all": true,
   "include": [
-    "src/**/*.js"
-  ],
-  "exclude": [
-    "**/*.spec.js"
+    "src/"
   ],
   "reporter": [ "html", "text" ],
   "report-dir": "playwright/coverage",
-  "temp-dir": "playwright/.nyc_output"
+  "temp-dir": "playwright/.nyc_output",
+  "useInlineSourceMaps": false
 }

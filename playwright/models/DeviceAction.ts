@@ -40,7 +40,7 @@ export class DeviceAction {
   }
 
   async manager() {
-    const result = mockListAppsResult("Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar","Bitcoin,Tron,Litecoin,Ethereum", deviceInfo);
+    const result = mockListAppsResult("Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar","Bitcoin,Litecoin,Ethereum", deviceInfo);
 
     await this.page.evaluate((args) => {
       const [ deviceInfo, result ] = args;
