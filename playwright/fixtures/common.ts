@@ -13,8 +13,8 @@ type TestFixtures = {
 };
 
 const test = base.extend<TestFixtures>({
-  userdata: null,
-  env: null,
+  userdata: undefined,
+  env: undefined,
   lang: "en-US",
   theme: "light",
   page: async ({ lang, theme, userdata, env }, use) => {
@@ -34,12 +34,9 @@ const test = base.extend<TestFixtures>({
     env = Object.assign(
       {
         MOCK: true,
-        DISABLE_MOCK_POINTER_EVENTS: true,
         HIDE_DEBUG_MOCK: true,
-        DISABLE_DEV_TOOLS: false,
-        DEV_TOOLS: true,
-        SPECTRON_RUN: true,
-        CI: process.env.CI || "",
+        // SPECTRON_RUN: true,
+        CI: process.env.CI || undefined,
         // SYNC_ALL_INTERVAL: 86400000,
         // SYNC_BOOT_DELAY: 16,
       },
@@ -59,7 +56,7 @@ const test = base.extend<TestFixtures>({
         dir: "playwright/videos/",
         size: viewport,
       },
-      env: env,
+      env,
       colorScheme: theme,
       locale: lang,
     });

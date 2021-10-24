@@ -9,7 +9,7 @@ import { DeviceAction } from "../models/DeviceAction";
 // specific environments
 test.use({ userdata: "skip-onboarding" });
 
-const currencies = ["BTC"];
+const currencies = ["BTC", "LTC", "ALGO", "TRX"];
 
 test.describe.parallel("Currencies", () => {
   for (const currency of currencies) {
@@ -19,28 +19,22 @@ test.describe.parallel("Currencies", () => {
 
       await test.step(`[${currency}] Open modal`, async () => {
         await accountModal.add();
-        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(`open-modal.png`);
+        expect(await page.screenshot()).toMatchSnapshot(`open-modal.png`);
       });
 
       await test.step(`[${currency}] Select currency`, async () => {
         await accountModal.select(currency);
-        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
-          `${currency}-select-currency.png`,
-        );
+        expect(await page.screenshot()).toMatchSnapshot(`${currency}-select-currency.png`);
       });
 
       await test.step(`[${currency}] Open device app`, async () => {
         await deviceAction.openApp();
-        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
-          `${currency}-device-open-app.png`,
-        );
+        expect(await page.screenshot()).toMatchSnapshot(`${currency}-device-open-app.png`);
       });
 
       await test.step(`[${currency}] Complete`, async () => {
         await accountModal.complete();
-        expect(await page.screenshot({ fullPage: true })).toMatchSnapshot(
-          `${currency}-complete.png`,
-        );
+        expect(await page.screenshot()).toMatchSnapshot(`${currency}-complete.png`);
       });
     });
   }

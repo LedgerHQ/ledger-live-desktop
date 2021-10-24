@@ -4,17 +4,19 @@
 /* eslint-disable jest/expect-expect */
 import test from "../fixtures/common";
 import { expect } from "@playwright/test";
+import { DeviceAction } from "../models/DeviceAction";
 
 // Comment out to disable recorder
 process.env.PWDEBUG = "1";
 
 // Use specific userdata
 test.use({ userdata: "skip-onboarding" });
-// electron env
-test.use({ env: { MOCK: true } });
 
-test.describe("My feature", async () => {
-  test("My test", async ({ page }) => {
-    await page.pause();
-  });
+// app env
+test.use({ env: { DEV_TOOLS: undefined, HIDE_DEBUG_MOCK: true } });
+
+test("My test", async ({ page }) => {
+  const deviceAction = new DeviceAction(page);
+
+  await page.pause();
 });

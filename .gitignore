@@ -127,6 +127,7 @@ playwright/.nyc_output
 playwright/coverage
 playwright/allure-report
 playwright/allure-results
+playwright/test-results
 
 # Yalc
 .yalc

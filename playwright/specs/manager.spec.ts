@@ -12,28 +12,28 @@ test("Manager", async ({ page }) => {
   await test.step("can access manager", async () => {
     await managerPage.navigate();
     await deviceAction.manager();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+    expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-catalog.png",
     });
   });
 
   await test.step("can install an app", async () => {
     await managerPage.installApp("Tron");
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+    expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-install-tron.png",
     });
   });
 
   await test.step("can access installed apps tab", async () => {
     await managerPage.goToInstalledAppTab();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+    expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-appsOnDevice.png",
     });
   });
 
   await test.step("can uninstall an app", async () => {
     await managerPage.uninstallApp("Tron");
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+    expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-uninstall-tron.png",
     });
   });
@@ -41,7 +41,7 @@ test("Manager", async ({ page }) => {
   await test.step("can update all apps", async () => {
     await managerPage.goToCatalogTab();
     await managerPage.updateAllApps();
-    expect(await page.screenshot({ fullPage: true })).toMatchSnapshot({
+    expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-updateAll.png",
     });
   });
