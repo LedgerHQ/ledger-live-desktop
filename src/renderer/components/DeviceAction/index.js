@@ -127,7 +127,6 @@ const DeviceAction = <R, H, P>({
         "In-line app install",
         { appName: nonNullRequestOpenApp, flow: analyticsPropertyFlow },
       ];
-      console.log("deviceAction", ...trackingArgs);
       track(...trackingArgs);
     }
   }, [installingApp, nonNullRequestOpenApp, previousInstallingApp, analyticsPropertyFlow]);
