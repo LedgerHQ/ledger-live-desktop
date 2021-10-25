@@ -26,6 +26,7 @@ import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_RESET_KYC from "./Swap/ResetKYC";
 import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
 import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
+import MODAL_WALLETCONNECT_DEEPLINK from "./WalletConnectDeeplink";
 
 import MODAL_FULL_NODE from "./FullNode";
 import MODAL_RECOVERY_SEED_WARNING from "./RecoverySeedWarning";
@@ -75,6 +76,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ADD_ACCOUNTS,
   MODAL_RECEIVE,
   MODAL_WALLETCONNECT_PASTE_LINK,
+  MODAL_WALLETCONNECT_DEEPLINK,
   MODAL_SEND,
   MODAL_SIGN_MESSAGE,
   MODAL_SIGN_TRANSACTION,
