@@ -2,9 +2,9 @@
 
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import type { ExchangeRaw } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import completeExchange from "@ledgerhq/live-common/lib/exchange/swap/completeExchange";
-import { fromExchangeRaw } from "@ledgerhq/live-common/lib/exchange/swap/serialization";
+import type { ExchangeRaw } from "@ledgerhq/live-common/lib/exchange/platform/types";
+import completeExchange from "@ledgerhq/live-common/lib/exchange/platform/completeExchange";
+import { fromExchangeRaw } from "@ledgerhq/live-common/lib/exchange/platform/serialization";
 import type { TransactionRaw } from "@ledgerhq/live-common/lib/types";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 

@@ -52,10 +52,12 @@ const Body = ({
 
   useEffect(() => {
     if (signedOperation) {
-      broadcast(signedOperation).then(operation => {
-        onResult(operation);
-        onClose();
-      }, setError);
+      console.log("TEST --- ", { signedOperation });
+      onResult(signedOperation);
+      // broadcast(signedOperation).then(operation => {
+      //   onResult(operation);
+      //   onClose();
+      // }, setError);
     }
   }, [broadcast, onClose, onResult, signedOperation]);
 

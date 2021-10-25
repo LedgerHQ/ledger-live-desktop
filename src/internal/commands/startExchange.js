@@ -2,7 +2,7 @@
 
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import startExchange from "@ledgerhq/live-common/lib/exchange/swap/startExchange";
+import startExchange from "@ledgerhq/live-common/lib/exchange/platform/startExchange";
 
 type Input = {
   deviceId: string,

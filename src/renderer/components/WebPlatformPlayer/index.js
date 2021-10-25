@@ -1,6 +1,6 @@
 // @flow
 import { remote, WebviewTag, shell } from "electron";
-import { BigNumber } from "bignumber.js";
+// import { BigNumber } from "bignumber.js";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -13,7 +13,7 @@ import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider
 import {
   addPendingOperation,
   getMainAccount,
-  getAccountUnit,
+  // getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -334,6 +334,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       feesStrategy: string,
       exchangeType: number,
     }) => {
+      console.log("TEST --- completeExchange");
       // Nb get a hold of the actual accounts, and parent accounts
       const fromAccount = accounts.find(a => a.id === fromAccountId);
       let fromParentAccount;
@@ -341,17 +342,25 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       const toAccount = accounts.find(a => a.id === toAccountId);
       let toParentAccount;
 
-      if (!fromAccount || !toAccount) return null;
+      if (!fromAccount) {
+        return null;
+      }
+
+      if (exchangeType === 0x00 && !toAccount) {
+        // if we do a swap, a destination account must be provided
+        return null;
+      }
+
       if (fromAccount.type === "TokenAccount") {
         fromParentAccount = accounts.find(a => a.id === fromAccount.parentId);
       }
-      if (toAccount.type === "TokenAccount") {
+      if (toAccount && toAccount.type === "TokenAccount") {
         toParentAccount = accounts.find(a => a.id === toAccount.parentId);
       }
 
       const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
       const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
-      const unit = getAccountUnit(mainFromAccount);
+      // const unit = getAccountUnit(mainFromAccount);
 
       transaction.family = mainFromAccount.currency.family;
       transaction.feesStrategy = feesStrategy;
@@ -361,13 +370,31 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       // FIXME We should either provide a helper to handle this dec to satoshi conversion
       // or handle it on the deserializer if we just assume all partners will provide the
       // amounts in top level units.
-      platformTransaction.amount = BigNumber(platformTransaction.amount).times(
-        BigNumber(10).pow(unit.magnitude),
-      );
+      // platformTransaction.amount = BigNumber(platformTransaction.amount).times(
+      //   BigNumber(10).pow(unit.magnitude),
+      // );
 
       let processedTransaction = accountBridge.createTransaction(mainFromAccount);
-      processedTransaction = accountBridge.updateTransaction(transaction, platformTransaction);
-      console.log({ processedTransaction, feesStrategy });
+      processedTransaction = accountBridge.updateTransaction(
+        processedTransaction,
+        platformTransaction,
+      );
+      console.log("TEST --- ", { processedTransaction, feesStrategy });
+
+      console.log("TEST --- ", {
+        provider,
+        exchange: {
+          fromAccount,
+          fromParentAccount,
+          toAccount,
+          toParentAccount,
+        },
+        transaction: processedTransaction,
+        binaryPayload,
+        signature,
+        feesStrategy,
+        exchangeType,
+      });
 
       tracking.platformCompleteExchangeRequested(manifest);
       return new Promise((resolve, reject) =>
