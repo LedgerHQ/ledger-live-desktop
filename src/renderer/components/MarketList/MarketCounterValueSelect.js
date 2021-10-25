@@ -11,10 +11,12 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies, getCounterCurrencies } from "~/renderer/actions/market";
+import useTheme from "~/renderer/hooks/useTheme";
 
 export const MarketCounterValueSelect = () => {
   const { counterCurrency, counterCurrencies } = useSelector(state => state.market);
 
+  const theme = useTheme();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export const MarketCounterValueSelect = () => {
           value ? (
             <Box flex={1} horizontal>
               <TextLink shrink>
-                <Button>
+                <Button style={{ color: theme.colors.palette.primary.main }}>
                   <Ellipsis>{value.label}</Ellipsis>
                 </Button>
                 <AngleDown>

@@ -125,7 +125,6 @@
     "tree-kill": "^1.2.2",
     "uncontrollable": "^7.2.1",
     "uuid": "^8.3.2",
-    "victory": "^36.0.0",
     "winston": "^3.2.1",
     "winston-transport": "^4.3.0",
     "write-file-atomic": "^3.0.3",

@@ -6,14 +6,14 @@ import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import Variation from "~/renderer/components/Variation";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Button from "~/renderer/components/Button";
-import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
+import { rgba } from "~/renderer/styles/helpers";
+import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -49,7 +49,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
   position: relative;
   transition: background-color ease-in-out 200ms;
   :hover {
-    border-color: ${p => p.theme.colors.palette.text.shade20};
+    background: ${p => rgba(p.theme.colors.palette.background.default, 0.6)};
   }
   :active {
     border-color: ${p => p.theme.colors.palette.text.shade20};
@@ -194,11 +194,15 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-end"
             alignItems="center"
             fontSize={4}
+            color="palette.text.shade100"
           >
             {loading ? (
               <LoadingPlaceholder />
             ) : (
-              <p>{`${currency.current_price} ${counterCurrency}`}</p>
+              <CounterValueFormatter
+                value={currency.current_price}
+                currency={counterCurrency}
+              />
             )}
           </Cell>
           <Cell
@@ -238,7 +242,15 @@ function MarketRowItem(props: Props) {
             justifyContent="flex-start"
             fontSize={4}
           >
-            {loading ? <LoadingPlaceholder /> : currency.market_cap}
+            {loading ? (
+              <LoadingPlaceholder />
+            ) : (
+              <CounterValueFormatter
+                shorten
+                currency={counterCurrency}
+                value={currency.market_cap}
+              />
+            )}
           </Cell>
           {/*<Cell*/}
           {/*  shrink*/}

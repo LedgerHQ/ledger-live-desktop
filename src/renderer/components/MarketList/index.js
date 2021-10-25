@@ -9,7 +9,6 @@ import styled from "styled-components";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
-import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import Paginator from "~/renderer/components/Paginator";
 

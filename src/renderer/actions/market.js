@@ -1,9 +1,9 @@
 // @flow
 import type {
   FavoriteCryptoCurrency,
-  MarketFilters,
-  MarketState,
   MarketCurrencyInfo,
+  MarketFilters,
+  MarketState
 } from "~/renderer/reducers/market";
 import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
@@ -15,31 +15,31 @@ import type { ThunkAction } from "redux-thunk";
 const DEFAULT_PAGE_LIMIT = 9;
 const marketClient = new MarketClient();
 
-export const setMarketParams = (payload: $Shape<MarketState>) => ({
+export const setMarketParams = (payload: $Shape<MarketState>) => ( {
   type: "SET_MARKET_PARAMS",
-  payload,
-});
+  payload
+} );
 
-export const setMarketRange = (range: string) => ({
+export const setMarketRange = (range: string) => ( {
   type: "SET_MARKET_RANGE",
-  payload: range,
-});
+  payload: range
+} );
 
-export const setMarketFilters = (filters: $Shape<MarketFilters>) => ({
+export const setMarketFilters = (filters: $Shape<MarketFilters>) => ( {
   type: "SET_MARKET_FILTERS",
-  payload: filters,
-});
+  payload: filters
+} );
 
 export const updateFavoriteCryptocurrencies: ThunkAction = ({
-  cryptocurrencyId,
-  isStarred,
-}: {
+                                                              cryptocurrencyId,
+                                                              isStarred
+                                                            }: {
   cryptocurrencyId: string,
   isStarred: boolean,
 }) =>
   async function(dispatch, getState) {
     let {
-      market: { favorites, currencies: cryptocurrencies },
+      market: { favorites, currencies: cryptocurrencies }
     } = getState();
 
     if (isStarred) {
@@ -51,38 +51,32 @@ export const updateFavoriteCryptocurrencies: ThunkAction = ({
     await setKey("app", "favorite_cryptocurrencies", favorites);
     const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(
       favorites,
-      cryptocurrencies,
+      cryptocurrencies
     );
     dispatch(setMarketParams({ favorites, currencies: currenciesWithFavorites }));
   };
 
-export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
+export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ( {
   type: "TOGGLE_MARKET_LOADING",
-  payload: { loading },
-});
+  payload: { loading }
+} );
 
 export const getCounterCurrencies: ThunkAction = () =>
   async function(dispatch, getState) {
-    const {
-      market: { counterCurrencies },
-    } = getState();
-
-    if (!counterCurrencies[0]) {
-      const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
-      let res: {
-        key: string,
-        label: string,
-        value: string,
-      }[];
-      supportedCounterCurrencies.forEach((currency, i) => {
-        res.push({
-          key: currency,
-          label: `${currency.toUpperCase()} - ${counterCurrencyNameTable[currency] || currency}`,
-          value: currency,
-        });
+    const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
+    let res: {
+      key: string,
+      label: string,
+      value: string,
+    }[] = [];
+    supportedCounterCurrencies.forEach((currency, i) => {
+      res.push({
+        key: currency,
+        label: `${currency.toUpperCase()} - ${counterCurrencyNameTable[currency] || currency}`,
+        value: currency
       });
-      dispatch(setMarketParams({ counterCurrencies: res }));
-    }
+    });
+    dispatch(setMarketParams({ counterCurrencies: res }));
   };
 
 export const getMarketCryptoCurrencies: ThunkAction = (
@@ -93,15 +87,15 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     page: number,
     order: string,
     orderBy: string,
-  }> = {},
+  }> = {}
 ) =>
   async function(dispatch, getState) {
     filterParams = { ...getState().market, ...filterParams };
     dispatch(
       setMarketParams({
         ...filterParams,
-        loading: true,
-      }),
+        loading: true
+      })
     );
 
     let {
@@ -115,7 +109,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
       searchValue,
       ids,
       coins,
-      filters,
+      filters
     } = filterParams;
 
     const showFavorites: boolean = filters.isFavorite;
@@ -128,7 +122,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     const favoriteCryptocurrencies: Array<FavoriteCryptoCurrency> = await getKey(
       "app",
       "favorite_cryptocurrencies",
-      [],
+      []
     );
 
     const supportedCurrenciesByLedger = listSupportedCurrencies();
@@ -138,10 +132,10 @@ export const getMarketCryptoCurrencies: ThunkAction = (
 
       if (filters.isLedgerCompatible) {
         const supportedCurrencyIdsByLedger = supportedCurrenciesByLedger.map(
-          currency => currency.id,
+          currency => currency.id
         );
         filteredCoins = filteredCoins.filter(coin =>
-          supportedCurrencyIdsByLedger.includes(coin.id),
+          supportedCurrencyIdsByLedger.includes(coin.id)
         );
       }
 
@@ -149,7 +143,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
         filteredCoins.forEach(
           coin =>
             matchesSearch(searchValue, { name: coin.name, symbol: coin.symbol }) &&
-            ids.push(coin.id),
+            ids.push(coin.id)
         );
       } else {
         ids = filteredCoins.map(coin => coin.id);
@@ -157,9 +151,9 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     }
 
     showFavorites &&
-      favoriteCryptocurrencies.forEach(fav => {
-        ids.unshift(fav.id);
-      });
+    favoriteCryptocurrencies.forEach(fav => {
+      ids.unshift(fav.id);
+    });
 
     if (unShowFavorites) {
       ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
@@ -167,7 +161,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     }
 
     let cryptocurrencies = [];
-    if ((showFavorites || searchValue) && !ids.length) {
+    if (( showFavorites || searchValue ) && !ids.length) {
       cryptocurrencies = [];
     } else {
       cryptocurrencies = await marketClient.listPaginated({
@@ -177,14 +171,14 @@ export const getMarketCryptoCurrencies: ThunkAction = (
         page,
         order,
         orderBy,
-        ids,
+        ids
       });
     }
 
     const currencies = mergeFavoriteAndSupportedCurrencies(
       favoriteCryptocurrencies,
       cryptocurrencies,
-      supportedCurrenciesByLedger,
+      supportedCurrenciesByLedger
     );
 
     limit = DEFAULT_PAGE_LIMIT;
@@ -205,37 +199,37 @@ export const getMarketCryptoCurrencies: ThunkAction = (
         limit,
         ids,
         coins,
-        coinsCount,
-      }),
+        coinsCount
+      })
     );
   };
 
 export function mergeFavoriteAndSupportedCurrencies(
   favorites: Array<FavoriteCryptoCurrency>,
   cryptocurrencies: Array<MarketCurrencyInfo>,
-  supportedCurrenciesByLedger?: Array<Currency>,
+  supportedCurrenciesByLedger?: Array<Currency>
 ) {
   cryptocurrencies.forEach(currency => {
     currency.isStarred = false;
     favorites &&
-      favorites.forEach(item => {
-        if (item.id === currency.id) {
-          currency.isStarred = true;
-        }
-      });
+    favorites.forEach(item => {
+      if (item.id === currency.id) {
+        currency.isStarred = true;
+      }
+    });
     supportedCurrenciesByLedger &&
-      supportedCurrenciesByLedger.forEach(supportedCurrency => {
-        if (currency.id === supportedCurrency.id) {
-          currency.supportedCurrency = supportedCurrency;
-        }
-      });
+    supportedCurrenciesByLedger.forEach(supportedCurrency => {
+      if (currency.id === supportedCurrency.id) {
+        currency.supportedCurrency = supportedCurrency;
+      }
+    });
   });
   return cryptocurrencies;
 }
 
 export const matchesSearch = (
   search?: string,
-  currency: { name: string, symbol: string },
+  currency: { name: string, symbol: string }
 ): boolean => {
   if (!search) return true;
   const match = `${currency.symbol}|${currency.name}`;

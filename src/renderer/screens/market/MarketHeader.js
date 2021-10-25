@@ -6,8 +6,8 @@ import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import IconFilters from "~/renderer/icons/Filters";
-import { MarketCounterValueSelect } from "~/renderer/screens/market/MarketCounterValueSelect";
-import { MarketRangeSelect } from "~/renderer/screens/market/MarketRangeSelect";
+import { MarketCounterValueSelect } from "~/renderer/components/MarketList/MarketCounterValueSelect";
+import { MarketRangeSelect } from "~/renderer/components/MarketList/MarketRangeSelect";
 import { ItemContainer } from "~/renderer/components/TopBar/shared";
 import { openMarketFilterDrawer } from "~/renderer/actions/UI";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";

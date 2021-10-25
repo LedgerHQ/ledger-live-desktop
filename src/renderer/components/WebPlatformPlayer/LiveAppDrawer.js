@@ -20,7 +20,7 @@ import Text from "../Text";
 import AppDetails from "../Platform/AppDetails";
 import ExternalLink from "../ExternalLink/index";
 import LiveAppDisclaimer from "./LiveAppDisclaimer";
-import MarketFilters from "~/renderer/screens/market/MarketFilters";
+import MarketFilters from "~/renderer/components/MarketList/MarketFilters";
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};

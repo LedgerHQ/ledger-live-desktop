@@ -9,8 +9,9 @@ import Track from "~/renderer/analytics/Track";
 import Pills from "~/renderer/components/Pills";
 import { setMarketRange } from "~/renderer/actions/market";
 import Text from "~/renderer/components/Text";
-import { rangesArr } from "~/renderer/screens/market/MarketRangeSelect";
+import { rangesArr } from "~/renderer/components/MarketList/MarketRangeSelect";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 
 type Props = {
   currency: MarketCurrencyInfo,
@@ -41,8 +42,8 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
           <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70">
             1 {currency.name.toUpperCase()}
           </Text>
-          <Text ff="Inter|Medium" fontSize={28}>
-            {`${currency.current_price} ${counterCurrency}`}
+          <Text ff="Inter|Medium" fontSize={28} color="palette.text.shade100">
+            <CounterValueFormatter currency={counterCurrency} value={currency.current_price} />
           </Text>
         </Box>
       </Box>

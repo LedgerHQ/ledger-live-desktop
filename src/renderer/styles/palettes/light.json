@@ -10,7 +10,7 @@
   "divider": "rgba(20,37,51, 0.1)",
   "background": {
     "paper": "#FFFFFF",
-    "default": "#FBFBFB"
+    "default": "#F9F9F9"
   },
   "action": {
     "active": "rgba(20, 37, 51, 0.1)",

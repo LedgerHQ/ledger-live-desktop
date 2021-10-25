@@ -8,9 +8,20 @@ import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import { rgba } from "~/renderer/styles/helpers";
+import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
+
+const Wrapper = styled(Box)`
+  background-color: ${p => p.theme.colors.palette.background.paper};
+  padding: 16px;
+  border-radius: 4px;
+  font-weight: 500;
+`;
 
 const CardStyled = styled(Card)`
   width: 100%;
+  flex: 1;
+  background: ${p => rgba(p.theme.colors.palette.background.default, 0.5)};
 `;
 
 const Divider = styled(Box)`
@@ -19,10 +30,10 @@ const Divider = styled(Box)`
 `;
 
 const InfoSection = ({
-  title,
-  children,
-  style,
-}: {
+                       title,
+                       children,
+                       style
+                     }: {
   title: string,
   children: React$Node,
   style?: any,
@@ -48,7 +59,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
       <Box grow vertical justifyContent="space-between">
         <InfoSection style={{ height: "56px" }} title="Price">
           <Text color="palette.text.shade100" textAlign="right" ff="Inter|Medium" fontSize={14}>
-            {`${currency.current_price} ${counterCurrency}`}
+            <CounterValueFormatter currency={counterCurrency} value={currency.current_price} />
           </Text>
           <Text color="palette.text.shade100" textAlign="right" ff="Inter|Medium" fontSize={14}>
             <FormattedVal
@@ -67,15 +78,21 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
             textAlign="right"
             color="palette.text.shade100"
             fontSize={14}
-          >{`${currency.total_volume} ${counterCurrency}`}</Text>
+          >
+            <CounterValueFormatter currency={counterCurrency} value={currency.total_volume} />
+          </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="24h Low / 24h High">
-          <Text
-            textAlign="right"
-            color="palette.text.shade100"
-            fontSize={14}
-          >{`${currency.low_24h} ${counterCurrency}/${currency.high_24h} ${counterCurrency}`}</Text>
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+            <Box horizontal>
+              <CounterValueFormatter currency={counterCurrency} value={currency.low_24h} />
+              <Text ml={1} mr={1}>
+                /
+              </Text>
+              <CounterValueFormatter currency={counterCurrency} value={currency.high_24h} />
+            </Box>
+          </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="7d Low / 7d High">
@@ -84,24 +101,28 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
               textAlign="right"
               color="palette.text.shade100"
               fontSize={14}
-            >{`${currency.sparkline_in_7d[0].toFixed(2)} ${counterCurrency}`}</Text>
-            <div>/</div>
-            <Text
-              textAlign="right"
-              color="palette.text.shade100"
-              fontSize={14}
-            >{`${currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1].toFixed(
-              2,
-            )} ${counterCurrency}`}</Text>
+            >
+              <Box horizontal>
+                <CounterValueFormatter
+                  currency={counterCurrency}
+                  value={currency.sparkline_in_7d[0]}
+                />
+                <Text ml={1} mr={1}>
+                  /
+                </Text>
+                <CounterValueFormatter
+                  currency={counterCurrency}
+                  value={currency.sparkline_in_7d[currency.sparkline_in_7d.length - 1]}
+                />
+              </Box>
+            </Text>
           </Box>
         </InfoSection>
         <Divider />
         <InfoSection title="All time high">
-          <Text
-            textAlign="right"
-            color="palette.text.shade100"
-            fontSize={14}
-          >{`${currency.ath} ${counterCurrency}`}</Text>
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+            <CounterValueFormatter currency={counterCurrency} value={currency.ath} />
+          </Text>
           <Text textAlign="right" color="palette.text.shade60" fontSize={14}>
             <FormattedDate date={currency.ath_date} format="LL" />
           </Text>
@@ -112,7 +133,9 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
             textAlign="right"
             color="palette.text.shade100"
             fontSize={14}
-          >{`${currency.atl} ${counterCurrency}`}</Text>
+          >
+            <CounterValueFormatter currency={counterCurrency} value={currency.atl} />
+          </Text>
           <Text textAlign="right" color="palette.text.shade60" fontSize={14}>
             <FormattedDate date={currency.atl_date} format="LL" />
           </Text>
@@ -123,6 +146,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
 }
 
 function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
+  const { counterCurrency } = useSelector(state => state.market);
   return (
     <CardStyled mb={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
@@ -131,7 +155,7 @@ function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
       <Box>
         <InfoSection title="Market cap">
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
-            {currency.market_cap}
+            <CounterValueFormatter currency={counterCurrency} value={currency.market_cap} />
           </Text>
         </InfoSection>
         <Divider />
@@ -146,6 +170,7 @@ function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
 }
 
 function Supply({ currency }: { currency: MarketCurrencyInfo }) {
+  const { counterCurrency } = useSelector(state => state.market);
   return (
     <CardStyled mt={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
@@ -154,19 +179,19 @@ function Supply({ currency }: { currency: MarketCurrencyInfo }) {
       <Box>
         <InfoSection title="Circulating supply">
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
-            {currency.circulating_supply}
+            <CounterValueFormatter currency={counterCurrency} value={currency.circulating_supply} />
           </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="Total supply">
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
-            {currency.total_supply}
+            <CounterValueFormatter currency={counterCurrency} value={currency.total_supply} />
           </Text>
         </InfoSection>
         <Divider />
         <InfoSection title="Max supply">
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
-            {currency.max_supply}
+            <CounterValueFormatter currency={counterCurrency} value={currency.max_supply} />
           </Text>
         </InfoSection>
       </Box>
@@ -175,8 +200,9 @@ function Supply({ currency }: { currency: MarketCurrencyInfo }) {
 }
 
 function CryptocurrencyStats({ currency }: { currency: MarketCurrencyInfo }) {
+  console.log(currency);
   return (
-    <Box grow horizontal>
+    <Wrapper horizontal>
       <Box style={{ height: "100%" }} flex="50%" mr={2}>
         <PriceStats currency={currency} />
       </Box>
@@ -184,7 +210,7 @@ function CryptocurrencyStats({ currency }: { currency: MarketCurrencyInfo }) {
         <MarketCap currency={currency} />
         <Supply currency={currency} />
       </Box>
-    </Box>
+    </Wrapper>
   );
 }
 
