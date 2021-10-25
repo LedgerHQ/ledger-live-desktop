@@ -42,6 +42,7 @@ const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
         onResult={() => {
           transitionTo("import");
         }}
+        analyticsPropertyFlow="add account"
       />
     </>
   );
