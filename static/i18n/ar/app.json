@@ -62,6 +62,7 @@
     "apply": "تطبيق",
     "done": "تم",
     "confirm": "تأكيد",
+    "reject": "Reject",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
     "delete": "حذف",
@@ -1112,6 +1113,7 @@
     "disconnected": "تم قطع الاتصال",
     "connected": "تم الاتصال",
     "connecting": "جاري الاتصال...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "لصق الرابط",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:"
+        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
