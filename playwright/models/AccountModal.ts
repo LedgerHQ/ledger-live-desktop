@@ -11,7 +11,7 @@ export class AccountModal {
     await this.page.click('#drawer-menu-accounts');
   }
 
-  async add() {
+  async open() {
     await this.page.click('button:has-text("Add account")');
     await this.page.waitForSelector('#modal-title', { state: 'visible' } );
     expect(await this.page.textContent('#modal-title')).toBe("Add accounts");

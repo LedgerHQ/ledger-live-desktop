@@ -13,7 +13,7 @@ process.env.PWDEBUG = "1";
 test.use({ userdata: "skip-onboarding" });
 
 // app env
-test.use({ env: { DEV_TOOLS: undefined, HIDE_DEBUG_MOCK: true } });
+test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined } });
 
 test("My test", async ({ page }) => {
   const deviceAction = new DeviceAction(page);

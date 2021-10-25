@@ -21,6 +21,7 @@ export class ManagerPage {
 
   async updateAllApps() {
     await this.page.click('#managerAppsList-updateAll');
+    await this.page.waitForSelector('text=Uninstalling...', { state: "hidden" });
   }
 
   async installApp(currency) {
@@ -29,5 +30,13 @@ export class ManagerPage {
 
   async uninstallApp(currency) {
     await this.page.click(`#appActionsUninstall-${currency}`);
+  }
+
+  async uninstallAllApps() {
+  // Click button:has-text("Uninstall all")
+  await this.page.click('button:has-text("Uninstall all")');
+  // Click #modal-confirm-button
+  await this.page.click('#modal-confirm-button');
+  await this.page.waitForSelector('text=No apps installed on your deviceGo to the App catalog to install apps');
   }
 }

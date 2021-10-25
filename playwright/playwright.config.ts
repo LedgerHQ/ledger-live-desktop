@@ -12,13 +12,13 @@ const config: PlaywrightTestConfig = {
     headless: true,
     ignoreHTTPSErrors: true,
     screenshot: process.env.CI ? "on" : "off",
-    video: process.env.CI ? "on-first-retry" : "off",
-    trace: process.env.CI ? "retain-on-failure" : "off",
+    video: process.env.CI ? "on-first-retry" : "off", // FIXME: "off" doesn't seem to work
+    trace: process.env.CI ? "retain-on-failure" : "off", // FIXME: traceview doesn't seem to work
   },
   forbidOnly: !!process.env.CI,
   preserveOutput: process.env.CI ? "failures-only" : "always",
   maxFailures: process.env.CI ? 5 : undefined,
-  reportSlowTests: process.env.CI ? { max: 3, threshold: 60000 } : null,
+  reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
   workers: process.env.CI ? 3 : 1,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? [["allure-playwright"], ["github"]] : "list",

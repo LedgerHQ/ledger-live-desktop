@@ -3,22 +3,19 @@ import { expect } from "@playwright/test";
 import { AccountModal } from "../models/AccountModal";
 import { DeviceAction } from "../models/DeviceAction";
 
-// Comment out to disable recorder
-// process.env.PWDEBUG = "1";
-
-// specific environments
+// specific environment
 test.use({ userdata: "skip-onboarding" });
 
 const currencies = ["BTC"];
 
-test.describe.parallel("Currencies", () => {
+test.describe.parallel("Accounts", () => {
   for (const currency of currencies) {
     test(`[${currency}] Add account`, async ({ page }) => {
       const accountModal = new AccountModal(page);
       const deviceAction = new DeviceAction(page);
 
       await test.step(`[${currency}] Open modal`, async () => {
-        await accountModal.add();
+        await accountModal.open();
         expect(await page.screenshot()).toMatchSnapshot(`open-modal.png`);
       });
 

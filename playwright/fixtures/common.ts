@@ -3,7 +3,6 @@ import { test as base, expect } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from 'crypto';
-import rimraf from "rimraf";
 
 export function generateUUID(): string {
   return crypto.randomBytes(16).toString('hex');
