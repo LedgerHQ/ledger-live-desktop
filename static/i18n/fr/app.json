@@ -62,6 +62,7 @@
     "apply": "Appliquer",
     "done": "Terminé",
     "confirm": "Confirmer",
+    "reject": "Reject",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
     "delete": "Supprimer",
@@ -1112,6 +1113,7 @@
     "disconnected": "Déconnecté",
     "connected": "Connecté",
     "connecting": "Connexion en cours...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Coller le lien",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
