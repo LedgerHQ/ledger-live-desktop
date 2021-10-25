@@ -6838,18 +6838,15 @@
           "switchDevice": "Switch device",
           "options": {
             "1": {
-              "heading": "First use",
-              "title": "Set up a new {{deviceName}}",
+              "title": "Setup a new {{deviceName}}",
               "description": "Let’s start and set up your device!"
             },
             "2": {
-              "heading": "Connect device",
               "title": "Connect your {{deviceName}}",
               "description": "Is your device already set up? Connect it to the app!"
             },
             "3": {
-              "heading": "Restore device",
-              "title": "Restore your recovery phrase on a new device",
+              "title": "Restore device",
               "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
             }
           }
