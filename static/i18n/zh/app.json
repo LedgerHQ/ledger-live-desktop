@@ -62,6 +62,7 @@
     "apply": "应用",
     "done": "已完成",
     "confirm": "确认",
+    "reject": "Reject",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -1112,6 +1113,7 @@
     "disconnected": "已断开连接",
     "connected": "已连接",
     "connecting": "正在连接...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "粘贴链接",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "连接",
-        "details": "想要通过您的钱包连接到以下以太坊账户："
+        "details": "想要通过您的钱包连接到以下以太坊账户：",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
