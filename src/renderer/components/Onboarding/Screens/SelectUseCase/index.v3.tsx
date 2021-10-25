@@ -9,7 +9,6 @@ import styled from "styled-components";
 import { UseCaseOption } from "./UseCaseOption";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import { Separator } from "./Separator";
-import Button from "~/renderer/components/Button";
 import placeholderOption from "./assets/placeholderOption.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
@@ -73,12 +72,6 @@ const RightColumn = styled.div`
   }
 `;
 
-const TopRightContainer = styled.div`
-  position: absolute;
-  right: 40px;
-  top: 40px;
-`;
-
 interface Props {
   sendEvent: (arg1: string) => any;
   context: {
@@ -98,12 +91,6 @@ export function SelectUseCase({ sendEvent, context }: Props) {
     },
     [context.deviceId, dispatch, sendEvent],
   );
-      // <TopRightContainer>
-      //   <Button small onClick={() => sendEvent("PREV")}>
-      //     {t("v3.onboarding.screens.selectUseCase.switchDevice")}
-      //   </Button>
-      // </TopRightContainer>
-
 
   return (
     <ScrollArea withHint>
