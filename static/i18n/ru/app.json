@@ -62,6 +62,7 @@
     "apply": "Применить",
     "done": "Готово",
     "confirm": "Подтвердить",
+    "reject": "Reject",
     "cancel": "Отменить",
     "getSupport": "Поддержка",
     "delete": "Удалить",
@@ -1112,6 +1113,7 @@
     "disconnected": "Отключено",
     "connected": "Подключено",
     "connecting": "Подключаем...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Вставьте ссылку",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Подключить",
-        "details": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:"
+        "details": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
