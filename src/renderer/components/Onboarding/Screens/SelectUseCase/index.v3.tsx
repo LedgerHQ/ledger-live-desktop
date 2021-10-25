@@ -14,6 +14,7 @@ import placeholderOption from "./assets/placeholderOption.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
 
 registerAssets([placeholderOption]);
 
@@ -97,14 +98,16 @@ export function SelectUseCase({ sendEvent, context }: Props) {
     },
     [context.deviceId, dispatch, sendEvent],
   );
+      // <TopRightContainer>
+      //   <Button small onClick={() => sendEvent("PREV")}>
+      //     {t("v3.onboarding.screens.selectUseCase.switchDevice")}
+      //   </Button>
+      // </TopRightContainer>
+
 
   return (
     <ScrollArea withHint>
-      <TopRightContainer>
-        <Button small onClick={() => sendEvent("PREV")}>
-          {t("v3.onboarding.screens.selectUseCase.switchDevice")}
-        </Button>
-      </TopRightContainer>
+      <OnboardingNavHeader onClickPrevious={() => sendEvent("PREV")} />
       <SelectUseCaseContainer>
         <Row>
           <LeftColumn>
