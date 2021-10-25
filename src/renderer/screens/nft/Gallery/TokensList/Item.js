@@ -10,7 +10,7 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { NFTViewerDrawer } from "~/renderer/drawers/NFTViewerDrawer";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
@@ -48,7 +48,7 @@ type Props = {
 };
 
 const Row = ({ contract, tokenId, id, mode }: Props) => {
-  const { status, metadata } = useNFTMetadata(contract, tokenId);
+  const { status, metadata } = useNftMetadata(contract, tokenId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status !== "loaded", [status]);
   const isGrid = mode === "grid";

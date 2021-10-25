@@ -28,7 +28,7 @@ import {
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 
 import { urls } from "~/config/urls";
@@ -139,7 +139,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const { name } = mainAccount;
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
-  const { status, metadata } = useNFTMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
+  const { status, metadata } = useNftMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
   const show = useMemo(() => status !== "loaded", [status]);
 
   const currency = getAccountCurrency(account);

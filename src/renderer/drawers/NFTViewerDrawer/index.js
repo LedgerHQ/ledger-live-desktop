@@ -16,7 +16,7 @@ import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
 import { centerEllipsis } from "~/renderer/styles/helpers";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
@@ -126,7 +126,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
   const { t } = useTranslation();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const { status, metadata } = useNFTMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status !== "loaded", [status]);
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 

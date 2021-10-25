@@ -14,7 +14,7 @@ import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Box from "~/renderer/components/Box";
 import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { centerEllipsis } from "~/renderer/styles/helpers";
@@ -23,7 +23,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
-  const { status, metadata } = useNFTMetadata(nfts[0]?.collection?.contract, nfts[0]?.tokenId);
+  const { status, metadata } = useNftMetadata(nfts[0]?.collection?.contract, nfts[0]?.tokenId);
   const show = useMemo(() => status !== "loaded", [status]);
 
   return !nfts[0] ? null : (

@@ -78,16 +78,12 @@ const Gen = styled.div`
 
 const Image = (props: Props) => {
   const { full, nft, size } = props || {};
-  const [isLoading, setLoading] = useState(!!nft?.picture); // Only attempt to load if we have a url
+  const [isLoading, setLoading] = useState(!!nft?.media); // Only attempt to load if we have a url
 
   return (
     <Wrapper full={full} size={size} isLoading={isLoading}>
       <Skeleton full />
-      {nft?.picture ? (
-        <img onLoad={() => setLoading(false)} src={nft.picture} />
-      ) : (
-        <Gen nft={nft} />
-      )}
+      {nft?.media ? <img onLoad={() => setLoading(false)} src={nft.media} /> : <Gen nft={nft} />}
     </Wrapper>
   );
 };

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
-import { useNFTMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import Image from "~/renderer/screens/nft/Image";
@@ -25,7 +25,7 @@ const Gallery = () => {
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const collection = nftsByCollections(account.nfts, collectionId)[0];
 
-  const { status, metadata } = useNFTMetadata(collection.contract, collection.nfts[0].tokenId);
+  const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
   const show = useMemo(() => status !== "loaded", [status]);
 
   const onSend = useCallback(() => {
