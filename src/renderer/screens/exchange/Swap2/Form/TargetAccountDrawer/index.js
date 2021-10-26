@@ -82,22 +82,17 @@ const TargetAccount = memo(function TargetAccount({
   const Wrapper = setAccount ? AccountWrapper : Box;
 
   return (
-    <Wrapper
-      horizontal
-      p={3}
-      justifyContent="space-between"
-      selected={selected}
-      onClick={onClick}
-      pl={isChild ? 6 : 3}
-      color={theme.colors.palette.text[setAccount ? "shade100" : "shade50"]}
-    >
-      <Box horizontal alignItems="center">
-        <Box mr={3}>
-          <CryptoCurrencyIcon
-            currency={currency}
-            size={16}
-            overrideColor={setAccount ? undefined : theme.colors.palette.text.shade50}
+    <Wrapper horizontal p={3} justifyContent="space-between" selected={selected} onClick={onClick}>
+      <Box horizontal alignItems="center" pl={isChild ? "8px" : 0}>
+        {isChild && (
+          <Box
+            pr={3}
+            style={{ borderLeft: `1px solid ${theme.colors.palette.divider}` }}
+            height="200%"
           />
+        )}
+        <Box mr={3}>
+          <CryptoCurrencyIcon currency={currency} size={16} />
         </Box>
         <Text ff="Inter|SemiBold" fontSize={5}>
           {name}
