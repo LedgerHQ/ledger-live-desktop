@@ -188,6 +188,12 @@ export function useDeepLinkHandler() {
           navigate(`/platform/${path ?? ""}`, query);
           break;
 
+        case "wc": {
+          const { uri } = query;
+          setTrackingSource("deeplink");
+          dispatch(openModal("MODAL_WALLETCONNECT_DEEPLINK", { link: uri }));
+          break;
+        }
         case "portfolio":
         default:
           navigate("/");
