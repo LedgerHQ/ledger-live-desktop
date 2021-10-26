@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
-import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 
 const CryptoCurrencyIconWrapper = styled.div`
@@ -37,9 +36,6 @@ function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
         <Box px={16}>
           <Box horizontal alignItems="center">
             <Title>{currency.name}</Title>
-            {/*<Box px={2}>*/}
-            {/*  <CryptocurrencyStar currency={currency} />*/}
-            {/*</Box>*/}
           </Box>
         </Box>
       </Box>

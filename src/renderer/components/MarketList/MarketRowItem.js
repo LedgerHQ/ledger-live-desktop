@@ -199,10 +199,7 @@ function MarketRowItem(props: Props) {
             {loading ? (
               <LoadingPlaceholder />
             ) : (
-              <CounterValueFormatter
-                value={currency.current_price}
-                currency={counterCurrency}
-              />
+              <CounterValueFormatter value={currency.current_price} currency={counterCurrency} />
             )}
           </Cell>
           <Cell
@@ -252,43 +249,6 @@ function MarketRowItem(props: Props) {
               />
             )}
           </Cell>
-          {/*<Cell*/}
-          {/*  shrink*/}
-          {/*  grow*/}
-          {/*  flex="14%"*/}
-          {/*  ff="Inter|SemiBold"*/}
-          {/*  color="palette.text.shade100"*/}
-          {/*  horizontal*/}
-          {/*  alignItems="center"*/}
-          {/*  justifyContent="flex-start"*/}
-          {/*  fontSize={4}*/}
-          {/*>*/}
-          {/*  {loading ? (*/}
-          {/*    <LoadingPlaceholder />*/}
-          {/*  ) : (*/}
-          {/*    <div style={{ maxWidth: "75px", maxHeight: "35px" }}>*/}
-          {/*      {Array.isArray(currency.sparkline_in_7d) && currency.sparkline_in_7d[0] && (*/}
-          {/*        <Variation variation={currency.sparkline_in_7d} width={75} height={35} />*/}
-          {/*      )}*/}
-          {/*    </div>*/}
-          {/*  )}*/}
-          {/*</Cell>*/}
-          {/*<Cell*/}
-          {/*  shrink*/}
-          {/*  flex="1%"*/}
-          {/*  ff="Inter|SemiBold"*/}
-          {/*  color="palette.text.shade100"*/}
-          {/*  horizontal*/}
-          {/*  alignItems="center"*/}
-          {/*  justifyContent="flex-end"*/}
-          {/*  fontSize={4}*/}
-          {/*>*/}
-          {/*  {loading ? (*/}
-          {/*    <LoadingPlaceholder style={{ width: "20px" }} />*/}
-          {/*  ) : (*/}
-          {/*    <CryptocurrencyStar currency={currency} />*/}
-          {/*  )}*/}
-          {/*</Cell>*/}
         </RowContent>
       </Row>
     </div>

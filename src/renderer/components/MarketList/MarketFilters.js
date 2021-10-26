@@ -5,16 +5,15 @@ import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
-import Switch from "~/renderer/components/Switch";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
 import CheckBox from "~/renderer/components/CheckBox";
 
-type LedgerLiveCompatibleProps = {
-  value: boolean,
-  onValueChange: (value: boolean) => void,
+type ShowProps = {
+  value: string,
+  onValueChange: (value: string) => void,
 };
 type MarketFiltersFooterProps = {
   onClearAll: () => void,
@@ -30,20 +29,6 @@ const BasicButton = styled(Button)`
   border-radius: 48px;
   color: #6490f1;
 `;
-
-const PrimaryButton = styled(Button)`
-  padding: 15px 24px;
-  background: ${p => p.theme.colors.palette.text.shade100};
-  color: ${p => p.theme.colors.palette.background.paper};
-
-  &:hover {
-    background: ${p =>
-      p.theme.colors.palette.type === "dark" ? p.theme.colors.palette.text.shade100 : "#6490f1"};
-    color: ${p => p.theme.colors.palette.background.paper};
-  }
-`;
-
-const MainWrapper = styled(Box)``;
 
 const SectionWrapper = styled.div`
   margin-bottom: 40px;
@@ -80,22 +65,7 @@ const FooterWrapper = styled(Box)`
   width: 100%;
 `;
 
-const LedgerLiveCompatible = ({ value, onValueChange }: LedgerLiveCompatibleProps) => {
-  return (
-    <SectionWrapper>
-      <SectionTitle>Ledger Live Compatible</SectionTitle>
-      <Box px={3} pt={5} horizontal alignItems="center" justifyContent="space-between">
-        <Label color="palette.text.shade50" fontSize={12}>
-          Display only the assets you can have an account in Ledger Live
-        </Label>
-        <Switch isChecked={value} onChange={() => onValueChange(!value)} />
-      </Box>
-    </SectionWrapper>
-  );
-};
-
-const Show = ({ value, onValueChange }: LedgerLiveCompatibleProps) => {
-
+const Show = ({ value, onValueChange }: ShowProps) => {
   const options = [
     {
       label: "All",
@@ -115,17 +85,11 @@ const Show = ({ value, onValueChange }: LedgerLiveCompatibleProps) => {
     <SectionWrapper>
       <SectionTitle>Show</SectionTitle>
       {options.map(option => (
-        <Box
-          key={option.value}
-          px={3}
-          pt={5}
-          horizontal
-          alignItems="center"
-        >
+        <Box key={option.value} px={3} pt={5} horizontal alignItems="center">
           <CheckBox
             isChecked={value === option.value}
             isRadio
-            onChange={value => onValueChange(option.value, value)}
+            onChange={value => onValueChange(option.value)}
           />
           <Label ml={14} color="palette.text.shade50" fontSize={12}>
             {option.label}
@@ -191,11 +155,11 @@ function MarketFilters() {
     dispatch(closePlatformAppDrawer());
   }, [dispatch, isFavorite, isLedgerCompatible]);
 
-   return (
+  return (
     <Box>
-      <MainWrapper pt={6} px={5}>
+      <Box pt={6} px={5}>
         <Show value={currentValue} onValueChange={value => onChange(value)} />
-      </MainWrapper>
+      </Box>
       <MarketFiltersFooter onClearAll={() => onClearAll()} onApply={() => onApplyFilters()} />
     </Box>
   );

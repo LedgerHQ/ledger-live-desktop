@@ -15,11 +15,10 @@ export const CounterValueFormatter = ({
     return null;
   }
 
-  let shortenerSymbol: string = "";
+  const shortened = numShortener(value);
+
   if (shorten) {
-    const { value: shortenedValue, symbol } = numShortener(value);
-    value = shortenedValue;
-    shortenerSymbol = symbol;
+    value = shortened.value;
   }
   return (
     <Text>
@@ -28,31 +27,32 @@ export const CounterValueFormatter = ({
             style: "currency",
             currency: currency,
           }).format(value)
-        : `${currency.toUpperCase()} ${value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,")}`}
-      {shorten && <Text ml={1}>{shortenerSymbol}</Text>}
+        : `${currency.toUpperCase()} ${parseFloat(value)
+            .toFixed(2)
+            .replace(/\d(?=(\d{3})+\.)/g, "$&,")}`}
+      {shorten && <Text ml={1}>{shortened.symbol}</Text>}
     </Text>
   );
 };
 
-function numShortener(num) {
+function numShortener(num: number): { value: number, symbol: string } {
   if (num > 999 && num < 1000000) {
     return {
-      value: (num / 1000).toFixed(2),
+      value: parseInt((num / 1000).toFixed(2)),
       symbol: "K",
-    }; // convert to K for number from > 1000 < 1 million
+    };
   } else if (num >= 1000000000) {
     return {
-      value: (num / 1000000000).toFixed(2),
+      value: parseInt((num / 1000000000).toFixed(2)),
       symbol: "Bn",
-    }; // convert to M for number from > 1 million
+    };
   } else if (num >= 1000000) {
     return {
-      value: (num / 1000000).toFixed(2),
+      value: parseInt((num / 1000000).toFixed(2)),
       symbol: "M",
-    }; // convert to M for number from > 1 million
-  } else if (num < 900) {
-    return num; // if value < 1000, nothing to do
+    };
   }
+  return { value: num, symbol: "" };
 }
 
 export default CounterValueFormatter;

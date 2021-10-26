@@ -10,30 +10,31 @@ import FormattedDate from "~/renderer/components/FormattedDate";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Wrapper = styled(Box)`
+const Wrapper: ThemedComponent<{}> = styled(Box)`
   background-color: ${p => p.theme.colors.palette.background.paper};
   padding: 16px;
   border-radius: 4px;
   font-weight: 500;
 `;
 
-const CardStyled = styled(Card)`
+const CardStyled: ThemedComponent<{}> = styled(Card)`
   width: 100%;
   flex: 1;
   background: ${p => rgba(p.theme.colors.palette.background.default, 0.5)};
 `;
 
-const Divider = styled(Box)`
+const Divider: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.divider};
   height: 1px;
 `;
 
 const InfoSection = ({
-                       title,
-                       children,
-                       style
-                     }: {
+  title,
+  children,
+  style,
+}: {
   title: string,
   children: React$Node,
   style?: any,
@@ -74,11 +75,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
         </InfoSection>
         <Divider />
         <InfoSection title="Trading volume">
-          <Text
-            textAlign="right"
-            color="palette.text.shade100"
-            fontSize={14}
-          >
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.total_volume} />
           </Text>
         </InfoSection>
@@ -97,11 +94,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
         <Divider />
         <InfoSection title="7d Low / 7d High">
           <Box horizontal>
-            <Text
-              textAlign="right"
-              color="palette.text.shade100"
-              fontSize={14}
-            >
+            <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
               <Box horizontal>
                 <CounterValueFormatter
                   currency={counterCurrency}
@@ -129,11 +122,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
         </InfoSection>
         <Divider />
         <InfoSection title="All time low">
-          <Text
-            textAlign="right"
-            color="palette.text.shade100"
-            fontSize={14}
-          >
+          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.atl} />
           </Text>
           <Text textAlign="right" color="palette.text.shade60" fontSize={14}>

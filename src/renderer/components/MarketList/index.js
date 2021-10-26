@@ -189,23 +189,6 @@ function MarketList() {
           >
             Market cap
           </ColumnTitleBox>
-          {/*<ColumnTitleBox*/}
-          {/*  shrink*/}
-          {/*  flex="1%"*/}
-          {/*  ff="Inter|SemiBold"*/}
-          {/*  color="palette.text.shade100"*/}
-          {/*  horizontal*/}
-          {/*  alignItems="center"*/}
-          {/*  justifyContent="flex-end"*/}
-          {/*  fontSize={4}*/}
-          {/*  onClick={() => onSort("isStarred")}*/}
-          {/*  mr={1}*/}
-          {/*>*/}
-          {/*  <CryptocurrencyStar*/}
-          {/*    isStarred={orderBy === "isStarred" && order === "desc"}*/}
-          {/*    disableAnimation*/}
-          {/*  />*/}
-          {/*</ColumnTitleBox>*/}
         </RowContent>
       </Row>
       {loading ? (
