@@ -1767,6 +1767,15 @@
     "title": "版本说明",
     "version": "Ledger Live {{versionNb}}"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
+  },
   "distribution": {
     "asset": "资产",
     "price": "价格",
