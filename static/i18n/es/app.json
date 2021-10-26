@@ -62,6 +62,7 @@
     "apply": "Aplicar",
     "done": "Listo",
     "confirm": "Confirmar",
+    "reject": "Reject",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
     "delete": "Eliminar",
@@ -1112,6 +1113,7 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Conectar",
-        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:"
+        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. Selecciona la cuenta de {{currencyName}}",
         "token": "2. Selecciona un token",
         "verifyTokenType": "Comprueba que <0>{{token}}</0> sea un token <0>{{tokenType}}</0>. Existe la posibilidad de perder cualquier otro activo cripto enviado a una cuenta de {{currency}}.",
-        "warningTokenType": "Envía solo tokens <0>{{ticker}}</0> o <0>{{tokenType}}</0> a una cuenta de {{currency}}. Existe la posibilidad de perder cualquier otro activo cripto."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Dispositivo",
@@ -2279,7 +2282,7 @@
       }
     },
     "rebond": {
-      "title": "Revincular activos",
+      "title": "Volver a vincular activos",
       "steps": {
         "amount": {
           "title": "Importe",
@@ -2301,7 +2304,7 @@
             "cta": "Ver detalles"
           },
           "pending": {
-            "title": "Revincular tus activos..."
+            "title": "Volver a vincular tus activos..."
           },
           "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
         }
