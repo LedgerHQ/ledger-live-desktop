@@ -62,6 +62,7 @@
     "apply": "Appliquer",
     "done": "Terminé",
     "confirm": "Confirmer",
+    "reject": "Refuser",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
     "delete": "Supprimer",
@@ -1112,6 +1113,7 @@
     "disconnected": "Déconnecté",
     "connected": "Connecté",
     "connecting": "Connexion en cours...",
+    "invalidAccount": "Identifiant de compte invalide",
     "steps": {
       "paste": {
         "title": "Coller le lien",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
+        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un token.",
         "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "warningTokenType": "Envoyez uniquement des <0>{{ticker}}</0> ou tokens <0>{{tokenType}}</0> sur des comptes {{currency}}. Tout autre crypto-actif risque d'être définitivement perdu."
       },
       "connectDevice": {
         "title": "Appareil",
