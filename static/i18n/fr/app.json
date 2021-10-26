@@ -1387,7 +1387,7 @@
       "appCatalog": "Catalogue d'applications",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
-      "appOnDeviceSearch": "Rechercher les applications installées..."
+      "appOnDeviceSearch": "Rechercher des applications installées..."
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
