@@ -185,5 +185,5 @@ jobs:
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win-x64.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win-x64.exe
