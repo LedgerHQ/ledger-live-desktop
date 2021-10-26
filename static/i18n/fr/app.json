@@ -1768,13 +1768,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "Changer la langue de l'application ?",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "Bonne nouvelle ! Grâce aux efforts de nos équipes, Ledger Live est maintenant disponible en {{language}}.",
+      "advice": "Vous pouvez toujours changer la langue plus tard dans les Paramètres."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "Basculer en {{language}}",
+    "no": "Non, merci"
   },
   "distribution": {
     "asset": "Actif ",
