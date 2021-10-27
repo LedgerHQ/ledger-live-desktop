@@ -3385,6 +3385,8 @@
     "termsLabel": "Terms of service",
     "privacyLabel": "Privacy policy",
     "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "termsCheckboxLabel": "<0>I have read and agree with the </0><1>Terms of Use</1>",
+    "privacyCheckboxLabel": "<0>I have read and accepted the </0><1>Privacy Policy</1>",
     "cta": "Enter Ledger app"
   },
   "families": {

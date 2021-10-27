@@ -17,13 +17,15 @@ type Props = {
 export type ThemedComponent<T> = StyledComponent<T, Theme, any>;
 
 const StyleProvider = ({ children, selectedPalette }: Props) => {
+  // V2 palettes are not typed in TS so we need to explicity type them as any
+  const palettesAny: any = palettes;
   const theme: Theme = useMemo(
     () => ({
       ...defaultTheme,
       ...V3dDfaultTheme,
       colors: {
         ...defaultTheme.colors,
-        palette: { ...palettes[selectedPalette], ...V3Palettes[selectedPalette] },
+        palette: { ...palettesAny[selectedPalette], ...V3Palettes[selectedPalette] },
       },
     }),
     [selectedPalette],
