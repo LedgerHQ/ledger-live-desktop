@@ -12,7 +12,7 @@ import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import Paginator from "~/renderer/components/Paginator";
 
-const ListItemHeight: number = 56;
+const ListItemHeight: number = 53;
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
@@ -184,7 +184,7 @@ function MarketList() {
             color="palette.text.shade100"
             horizontal
             alignItems="center"
-            justifyContent="flex-start"
+            justifyContent="flex-end"
             fontSize={4}
           >
             Market cap

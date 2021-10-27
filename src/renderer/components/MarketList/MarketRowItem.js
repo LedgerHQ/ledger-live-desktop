@@ -45,7 +45,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
   flex: 1;
   font-weight: 600;
   justify-content: flex-start;
-  margin-bottom: 9px;
+  //margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
   :hover {
@@ -65,7 +65,7 @@ const RowContent: ThemedComponent<{
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
-  height: 54px;
+  height: 53px;
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -236,7 +236,7 @@ function MarketRowItem(props: Props) {
             color="palette.text.shade100"
             horizontal
             alignItems="center"
-            justifyContent="flex-start"
+            justifyContent="flex-end"
             fontSize={4}
           >
             {loading ? (

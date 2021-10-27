@@ -54,7 +54,7 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   if (loading) {
     return null;
   }
-
+  console.log("chartData: ", chartData);
   currency.difference =
     chartData.length > 1
       ? parseFloat(

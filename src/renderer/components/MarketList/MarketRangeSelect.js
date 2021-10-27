@@ -15,33 +15,33 @@ import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 export const rangesArr = [
   {
     value: "1h",
-    label: "Last 1 hour",
+    selectorLabel: "Last 1 hour",
     key: "1h",
-    pill: "1h",
+    label: "1h",
   },
   {
     value: "24h",
-    label: "Last 24 hours",
+    selectorLabel: "Last 24 hours",
     key: "24h",
-    pill: "1D",
+    label: "1D",
   },
   {
     value: "7d",
-    label: "Last week",
+    selectorLabel: "Last week",
     key: "7d",
-    pill: "1W",
+    label: "1W",
   },
   {
     value: "30d",
-    label: "Last month",
+    selectorLabel: "Last month",
     key: "30d",
-    pill: "1M",
+    label: "1M",
   },
   {
     value: "1y",
-    label: "Last year",
+    selectorLabel: "Last year",
     key: "1y",
-    pill: "1Y",
+    label: "1Y",
   },
 ];
 
@@ -56,10 +56,11 @@ export const MarketRangeSelect = () => {
   );
 
   const renderItem = useCallback(({ item, isActive }) => {
+    console.log(item);
     return (
       <Item key={item.key} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-          {item.label}
+          {item.selectorLabel}
         </Ellipsis>
         {isActive && (
           <Check>
@@ -86,7 +87,7 @@ export const MarketRangeSelect = () => {
             <Box flex={1} horizontal>
               <TextLink shrink>
                 <Button>
-                  <Ellipsis>{value.label}</Ellipsis>
+                  <Ellipsis>{value.selectorLabel}</Ellipsis>
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}

@@ -29,10 +29,6 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
     [dispatch],
   );
 
-  rangesArr.forEach(range => {
-    range.label = range.pill;
-  });
-
   const difference = currency.difference || 0;
 
   return (

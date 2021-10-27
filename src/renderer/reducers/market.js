@@ -2,8 +2,6 @@
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
 
-import { setKey } from "~/renderer/storage";
-
 export type MarketCurrencyInfo = {
   id: string,
   symbol: string,
@@ -112,42 +110,6 @@ const handlers = {
   GET_MARKET_CRYPTOCURRENCIES: (state: any) => {
     return {
       ...state,
-    };
-  },
-  UPDATE_FAVORITE_CRYPTOCURRENCIES: (
-    state: any,
-    {
-      payload: { cryptocurrencyId, isStarred, favorites },
-    }: {
-      payload: {
-        cryptocurrencyId: string,
-        isStarred: boolean,
-        favorites: Array<FavoriteCryptoCurrency>,
-      },
-    },
-  ) => {
-    // TODO: Move this to action
-
-    const favoritesLength: number = favorites.length;
-    if (isStarred) {
-      for (let i = 0; i < favoritesLength; i++) {
-        if (favorites[i].id === cryptocurrencyId) {
-          favorites.splice(i, 1);
-          break;
-        }
-      }
-    } else {
-      favorites.push({ id: cryptocurrencyId });
-    }
-
-    async function updateFavorites() {
-      await setKey("app", "favorite_cryptocurrencies", favorites);
-    }
-
-    updateFavorites();
-    return {
-      ...state,
-      favorites,
     };
   },
 };

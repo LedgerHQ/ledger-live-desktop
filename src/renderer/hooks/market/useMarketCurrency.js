@@ -85,14 +85,13 @@ export const useMarketCurrencyChart = ({ id = "", counterCurrency, range }: Prop
       const data = [];
       for (let i = 0; i <= prices.length - 1; i++) {
         const price = prices[i];
-        const priceMagnitude = magnitude(price);
         const formattedTime =
           interval === "hourly"
             ? formattedHourTime(i)
             : interval === "minutely"
             ? formattedMinuteTime(i)
             : formattedDayTime(i);
-        data.push({ date: formattedTime, value: BigNumber(priceMagnitude) });
+        data.push({ date: formattedTime, value: BigNumber(price) });
       }
       return data;
     };
