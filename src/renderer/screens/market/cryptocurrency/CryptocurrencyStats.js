@@ -25,6 +25,12 @@ const CardStyled: ThemedComponent<{}> = styled(Card)`
   background: ${p => rgba(p.theme.colors.palette.background.default, 0.5)};
 `;
 
+const MarketCapRank: ThemedComponent<{}> = styled(Box)`
+  background-color: ${p => p.theme.colors.palette.text.shade10};
+  padding: 4px;
+  border-radius: 4px;
+`;
+
 const Divider: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.divider};
   height: 1px;
@@ -149,9 +155,11 @@ function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
         </InfoSection>
         <Divider />
         <InfoSection title="Market cap rank">
-          <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
-            {currency.market_cap_rank}
-          </Text>
+          <MarketCapRank>
+            <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
+              #{currency.market_cap_rank}
+            </Text>
+          </MarketCapRank>
         </InfoSection>
       </Box>
     </CardStyled>

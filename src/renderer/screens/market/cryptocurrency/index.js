@@ -17,8 +17,9 @@ import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Shield from "~/renderer/icons/Shield";
 import useTheme from "~/renderer/hooks/useTheme";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Divider = styled(Box)`
+const Divider: ThemedComponent<{}> = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
 `;
 

@@ -9,11 +9,25 @@ import Button from "~/renderer/components/Button";
 import { Separator, TextLink } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import { useSelector } from "react-redux";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import styled from "styled-components";
+
+const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
+  height: 10px;
+  width: 10px;
+  position: relative;
+  margin-right: 10px;
+  img {
+    height: 100%;
+  }
+`;
 
 const CryptocurrencyCrumb = () => {
   const { t } = useTranslation();
   const history = useHistory();
   const currency = ((useLocation().state: any): MarketCurrencyInfo);
+  const { currencies } = useSelector(state => state.market);
 
   return (
     <>
@@ -31,7 +45,9 @@ const CryptocurrencyCrumb = () => {
       </TextLink>
       <Separator />
       <Box horizontal>
-        <Box px={1} />
+        <CryptoCurrencyIconWrapper>
+          <img src={currencies.find(item => item.id === currency.id).image} />
+        </CryptoCurrencyIconWrapper>
         {currency.name}
       </Box>
     </>

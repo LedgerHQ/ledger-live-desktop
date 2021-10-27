@@ -5,8 +5,9 @@ import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const CryptoCurrencyIconWrapper = styled.div`
+const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   height: 56px;
   width: 56px;
   position: relative;
@@ -18,10 +19,11 @@ const CryptoCurrencyIconWrapper = styled.div`
 
 type CryptocurrencyHeaderType = { currency: MarketCurrencyInfo };
 
-const Title = styled(Text)`
+const Title: ThemedComponent<{}> = styled(Text)`
   color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 28px;
   text-transform: uppercase;
+  font-weight: 500;
 `;
 
 function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {

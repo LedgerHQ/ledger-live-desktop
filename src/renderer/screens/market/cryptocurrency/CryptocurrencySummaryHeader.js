@@ -54,7 +54,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             withIcon
           />
           <Text ff="Inter|Medium" fontSize={16} pl={2}>
-            {`(${difference} ${counterCurrency})`}
+            ({<CounterValueFormatter currency={counterCurrency} value={difference} />})
           </Text>
         </Box>
         <Box>
