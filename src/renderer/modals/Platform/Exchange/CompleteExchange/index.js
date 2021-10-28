@@ -9,6 +9,7 @@ const CompleteExchange = () => {
     <Modal
       name="MODAL_PLATFORM_EXCHANGE_COMPLETE"
       centered
+      preventBackdropClick
       render={({ data, onClose }) => <Body onClose={onClose} data={data} />}
     />
   );

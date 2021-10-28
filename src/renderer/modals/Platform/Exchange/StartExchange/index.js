@@ -16,6 +16,7 @@ const StartExchange = () => {
     <Modal
       name="MODAL_PLATFORM_EXCHANGE_START"
       centered
+      preventBackdropClick
       render={({ data, onClose }) => (
         <ModalBody
           onClose={onClose}
