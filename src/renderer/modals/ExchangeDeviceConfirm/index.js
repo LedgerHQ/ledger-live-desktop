@@ -145,6 +145,7 @@ type Props = {
     onResult: (AccountLike, ?Account, any) => null,
     verifyAddress?: boolean,
   },
+  flow?: string,
 };
 
 type PropsFooter = {
@@ -158,11 +159,11 @@ type PropsFooter = {
   },
 };
 
-const Root = ({ data, onClose, skipDevice }: Props) => {
+const Root = ({ data, onClose, skipDevice, flow }: Props) => {
   const [waitingForDevice, setWaitingForDevice] = useState(false);
   const device = useSelector(getCurrentDevice);
 
-  const { account, parentAccount, onResult, verifyAddress, flow } = data;
+  const { account, parentAccount, onResult, verifyAddress } = data;
   const mainAccount = getMainAccount(account, parentAccount);
   const tokenCurrency = account.type === "TokenAccount" ? account.token : null;
 
@@ -251,7 +252,7 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
   );
 };
 
-const BuyCrypto = () => {
+const BuyCrypto = ({flow}) => {
   const [skipDevice, setSkipDevice] = useState(false);
   const device = useSelector(getCurrentDevice);
   const { t } = useTranslation();
@@ -281,7 +282,7 @@ const BuyCrypto = () => {
             ) : null
           }
           render={() =>
-            data ? <Root data={data} skipDevice={skipDevice} onClose={onClose} /> : null
+            data ? <Root data={data} skipDevice={skipDevice} onClose={onClose} flow={flow} /> : null
           }
         />
       )}
