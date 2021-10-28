@@ -15,7 +15,8 @@ const connectAppExec = command("connectApp");
 
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
-const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
+const StepConnectDevice = (props: StepProps) => {
+  const { currency, device, transitionTo, flow } = props
   invariant(currency, "No crypto asset given");
 
   // preload currency ahead of time
@@ -42,7 +43,7 @@ const StepConnectDevice = ({ currency, device, transitionTo }: StepProps) => {
         onResult={() => {
           transitionTo("import");
         }}
-        analyticsPropertyFlow="add account"
+        analyticsPropertyFlow={flow}
       />
     </>
   );

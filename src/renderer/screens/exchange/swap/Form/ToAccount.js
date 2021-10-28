@@ -93,7 +93,7 @@ const ToAccount = ({
   }, []);
 
   const dispatch = useDispatch();
-  const addAccount = useCallback(() => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency })), [
+  const addAccount = useCallback(() => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow: "swap" })), [
     currency,
     dispatch,
   ]);

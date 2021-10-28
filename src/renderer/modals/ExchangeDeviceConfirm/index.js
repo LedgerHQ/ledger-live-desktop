@@ -162,7 +162,7 @@ const Root = ({ data, onClose, skipDevice }: Props) => {
   const [waitingForDevice, setWaitingForDevice] = useState(false);
   const device = useSelector(getCurrentDevice);
 
-  const { account, parentAccount, onResult, verifyAddress } = data;
+  const { account, parentAccount, onResult, verifyAddress, flow } = data;
   const mainAccount = getMainAccount(account, parentAccount);
   const tokenCurrency = account.type === "TokenAccount" ? account.token : null;
 
@@ -197,6 +197,7 @@ const Root = ({ data, onClose, skipDevice }: Props) => {
           action={action}
           request={{ account: mainAccount, tokenCurrency }}
           onResult={handleResult}
+          analyticsPropertyFlow={flow}
         />
       )}
     </Box>
