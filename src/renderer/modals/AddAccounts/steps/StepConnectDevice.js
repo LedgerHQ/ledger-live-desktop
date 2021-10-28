@@ -15,8 +15,7 @@ const connectAppExec = command("connectApp");
 
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
 
-const StepConnectDevice = (props: StepProps) => {
-  const { currency, device, transitionTo, flow } = props
+const StepConnectDevice = ({ currency, device, transitionTo, flow }: StepProps) => {
   invariant(currency, "No crypto asset given");
 
   // preload currency ahead of time

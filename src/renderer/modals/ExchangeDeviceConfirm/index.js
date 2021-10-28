@@ -252,7 +252,7 @@ const StepConnectDeviceFooter = ({ data, onClose, onSkipDevice }: PropsFooter) =
   );
 };
 
-const BuyCrypto = ({flow}) => {
+const BuyCrypto = ({ flow }: { flow?: string }) => {
   const [skipDevice, setSkipDevice] = useState(false);
   const device = useSelector(getCurrentDevice);
   const { t } = useTranslation();
