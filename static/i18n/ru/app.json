@@ -3983,7 +3983,8 @@
       "title": "Вы должны выбрать хотя бы одного валидатора"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }

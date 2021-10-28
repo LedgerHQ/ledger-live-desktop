@@ -3983,7 +3983,8 @@
       "title": "您必须至少选择一个验证器"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }
