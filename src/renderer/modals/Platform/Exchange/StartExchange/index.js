@@ -19,7 +19,12 @@ const StartExchange = () => {
       preventBackdropClick
       render={({ data, onClose }) => (
         <ModalBody
-          onClose={onClose}
+          onClose={() => {
+            if (data.onCancel) {
+              data.onCancel("Interrupted by user");
+            }
+            onClose();
+          }}
           render={() => (
             <Box alignItems={"center"} px={32}>
               <DeviceAction
