@@ -1,15 +1,19 @@
 // @flow
 import React, { useEffect, useState } from "react";
+
+import { toExchangeRaw } from "@ledgerhq/live-common/lib/exchange/platform/serialization";
+import type { Exchange } from "@ledgerhq/live-common/lib/exchange/platform/types";
+
+import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
+import type { Transaction, Operation } from "@ledgerhq/live-common/lib/types";
+
+import { createAction } from "@ledgerhq/live-common/lib/hw/actions/completeExchange";
+import { createAction as txCreateAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
+
 import { ModalBody } from "~/renderer/components/Modal";
 import Box from "~/renderer/components/Box";
 import DeviceAction from "~/renderer/components/DeviceAction";
-import { createAction } from "@ledgerhq/live-common/lib/hw/actions/completeExchange";
-import { createAction as txCreateAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
-import type { Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import type { Transaction, Operation } from "@ledgerhq/live-common/lib/types";
 import { command } from "~/renderer/commands";
-import { toExchangeRaw } from "@ledgerhq/live-common/lib/exchange/swap/serialization";
-import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 import BigSpinner from "~/renderer/components/BigSpinner";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
@@ -36,7 +40,7 @@ const Body = ({
   },
   onClose: () => void,
 }) => {
-  const { onResult } = data;
+  const { onResult, onCancel } = data;
   const { fromAccount: account, fromParentAccount: parentAccount } = data.exchange;
   let tokenCurrency;
   if (account.type === "TokenAccount") tokenCurrency = account.token;
@@ -45,6 +49,7 @@ const Body = ({
     exchange: toExchangeRaw(data.exchange),
     transaction: toTransactionRaw(data.transaction),
   };
+
   const broadcast = useBroadcast({ account, parentAccount });
   const [transaction, setTransaction] = useState();
   const [signedOperation, setSignedOperation] = useState();
@@ -52,18 +57,25 @@ const Body = ({
 
   useEffect(() => {
     if (signedOperation) {
-      console.log("TEST --- ", { signedOperation });
-      onResult(signedOperation);
-      // broadcast(signedOperation).then(operation => {
-      //   onResult(operation);
-      //   onClose();
-      // }, setError);
+      broadcast(signedOperation).then(operation => {
+        onResult(operation);
+        onClose();
+      }, setError);
     }
   }, [broadcast, onClose, onResult, signedOperation]);
 
+  useEffect(() => {
+    if (error) {
+      onCancel(error);
+    }
+  }, [onCancel, error]);
+
   return (
     <ModalBody
-      onClose={onClose}
+      onClose={() => {
+        onCancel("Interrupted by user");
+        onClose();
+      }}
       render={() => {
         return (
           <Box alignItems={"center"} justifyContent={"center"} px={32}>
@@ -77,7 +89,6 @@ const Body = ({
                 action={exchangeAction}
                 request={request}
                 onResult={({ completeExchangeResult, completeExchangeError }) => {
-                  console.log({ completeExchangeResult });
                   if (completeExchangeError) {
                     setError(completeExchangeError);
                   } else {
@@ -87,7 +98,7 @@ const Body = ({
               />
             ) : (
               <DeviceAction
-                key={"sign"}
+                key="sign"
                 action={sendAction}
                 request={{
                   tokenCurrency,
