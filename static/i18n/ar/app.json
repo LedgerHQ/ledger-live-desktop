@@ -3983,7 +3983,8 @@
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }
