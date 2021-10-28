@@ -161,7 +161,6 @@
     "copy-webpack-plugin": "^6.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
-    "dmg-license": "^1.0.9",
     "electron": "13.5.2",
     "electron-builder": "22.13.1",
     "electron-devtools-installer": "^3.2.0",
@@ -206,5 +205,8 @@
     "webpackbar": "^4.0.0",
     "yargs": "^15.3.1",
     "yarn-deduplicate": "^2.0.0"
+  },
+  "optionalDependencies": {
+    "dmg-license": "^1.0.9"
   }
 }
