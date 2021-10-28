@@ -1,6 +1,5 @@
 // @flow
 import { remote, WebviewTag, shell } from "electron";
-// import { BigNumber } from "bignumber.js";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -10,11 +9,7 @@ import { useTranslation } from "react-i18next";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import {
-  addPendingOperation,
-  getMainAccount,
-  // getAccountUnit,
-} from "@ledgerhq/live-common/lib/account";
+import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -140,6 +135,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       const account = accounts.find(account => account.id === accountId);
       tracking.platformReceiveRequested(manifest);
 
+      // FIXME: handle address rejection (if user reject address, we don't end up in onResult nor in onCancel 🤔)
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
@@ -177,6 +173,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
       let optimisticOperation = signedOperation.operation;
 
+      // FIXME: couldn't we use `useBroadcast` here?
       if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
         try {
           optimisticOperation = await bridge.broadcast({
@@ -334,7 +331,6 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       feesStrategy: string,
       exchangeType: number,
     }) => {
-      console.log("TEST --- completeExchange");
       // Nb get a hold of the actual accounts, and parent accounts
       const fromAccount = accounts.find(a => a.id === fromAccountId);
       let fromParentAccount;
@@ -360,41 +356,18 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
       const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
       const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
-      // const unit = getAccountUnit(mainFromAccount);
 
       transaction.family = mainFromAccount.currency.family;
-      transaction.feesStrategy = feesStrategy;
 
       const platformTransaction = deserializePlatformTransaction(transaction);
 
-      // FIXME We should either provide a helper to handle this dec to satoshi conversion
-      // or handle it on the deserializer if we just assume all partners will provide the
-      // amounts in top level units.
-      // platformTransaction.amount = BigNumber(platformTransaction.amount).times(
-      //   BigNumber(10).pow(unit.magnitude),
-      // );
+      platformTransaction.feesStrategy = feesStrategy;
 
       let processedTransaction = accountBridge.createTransaction(mainFromAccount);
       processedTransaction = accountBridge.updateTransaction(
         processedTransaction,
         platformTransaction,
       );
-      console.log("TEST --- ", { processedTransaction, feesStrategy });
-
-      console.log("TEST --- ", {
-        provider,
-        exchange: {
-          fromAccount,
-          fromParentAccount,
-          toAccount,
-          toParentAccount,
-        },
-        transaction: processedTransaction,
-        binaryPayload,
-        signature,
-        feesStrategy,
-        exchangeType,
-      });
 
       tracking.platformCompleteExchangeRequested(manifest);
       return new Promise((resolve, reject) =>
