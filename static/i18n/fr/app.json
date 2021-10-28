@@ -1387,7 +1387,7 @@
       "appCatalog": "Catalogue d'applications",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
-      "appOnDeviceSearch": "Rechercher les applications installées..."
+      "appOnDeviceSearch": "Rechercher des applications installées..."
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
@@ -1766,6 +1766,15 @@
   "releaseNotes": {
     "title": "Notes de publication",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Changer la langue de l'application ?",
+    "description": {
+      "newSupport": "Bonne nouvelle ! Grâce aux efforts de nos équipes, Ledger Live est maintenant disponible en {{language}}.",
+      "advice": "Vous pouvez toujours changer la langue plus tard dans les Paramètres."
+    },
+    "switchButton": "Basculer en {{language}}",
+    "no": "Non, merci"
   },
   "distribution": {
     "asset": "Actif ",
@@ -3974,7 +3983,8 @@
       "title": "Sélectionnez au moins un validateur."
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }
