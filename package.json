@@ -205,8 +205,5 @@
     "webpackbar": "^4.0.0",
     "yargs": "^15.3.1",
     "yarn-deduplicate": "^2.0.0"
-  },
-  "optionalDependencies": {
-    "dmg-license": "^1.0.9"
   }
 }
