@@ -107,7 +107,7 @@ const DeviceAction = <R, H, P>({
     initSwapRequested,
     initSwapError,
     initSwapResult,
-    completeExchangeRequested,
+    completeExchangeStarted,
     completeExchangeResult,
     completeExchangeError,
     allowOpeningGranted,
@@ -160,8 +160,24 @@ const DeviceAction = <R, H, P>({
     return renderListingApps();
   }
 
-  if (completeExchangeRequested && !completeExchangeResult && !completeExchangeError) {
-    return <div>{"Confirm on your device"}</div>;
+  if (completeExchangeStarted && !completeExchangeResult && !completeExchangeError) {
+    const { exchangeType } = request;
+
+    // FIXME: could use a TS enum (when LLD will be in TS) or a JS object instead of raw numbers for switch values for clarity
+    switch (exchangeType) {
+      // swap
+      case 0x00: {
+        // FIXME: should use `renderSwapDeviceConfirmationV2` but all params not available in hookState for this SDK exchange flow
+        return <div>{"Confirm swap on your device"}</div>;
+      }
+
+      // sell
+      case 0x01:
+        return renderSellDeviceConfirmation({ modelId, type });
+
+      default:
+        return <div>{"Confirm exchange on your device"}</div>;
+    }
   }
 
   if (initSwapRequested && !initSwapResult && !initSwapError) {
