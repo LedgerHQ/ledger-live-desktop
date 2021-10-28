@@ -9,14 +9,13 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
-import { track } from "~/renderer/analytics/segment";
 import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { useLastNonNull, usePrevious } from "~/renderer/hooks/usePrevious";
 import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
 import {
+  InstallingApp,
   renderAllowManager,
   renderAllowOpeningApp,
   renderBootloaderStep,
@@ -26,7 +25,6 @@ import {
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
-  renderInstallingApp,
   renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmationV2,
@@ -116,21 +114,6 @@ const DeviceAction = <R, H, P>({
     signMessageRequested,
   } = hookState;
 
-  const previousInstallingApp = usePrevious(installingApp);
-  const nonNullRequestOpenApp = useLastNonNull(requestOpenApp) || requestOpenApp;
-
-  useEffect(() => {
-    const justStartedInstall = !previousInstallingApp && installingApp;
-    const hasAllEventInfo = analyticsPropertyFlow && nonNullRequestOpenApp;
-    if (justStartedInstall && hasAllEventInfo) {
-      const trackingArgs = [
-        "In-line app install",
-        { appName: nonNullRequestOpenApp, flow: analyticsPropertyFlow },
-      ];
-      track(...trackingArgs);
-    }
-  }, [installingApp, nonNullRequestOpenApp, previousInstallingApp, analyticsPropertyFlow]);
-
   const type = useTheme("colors.palette.type");
 
   const modelId = device ? device.modelId : overridesPreferredDeviceModel || preferredDeviceModel;
@@ -154,7 +137,8 @@ const DeviceAction = <R, H, P>({
 
   if (installingApp) {
     const appName = requestOpenApp;
-    return renderInstallingApp({ appName, progress });
+    const props = { appName, progress, request, analyticsPropertyFlow };
+    return <InstallingApp {...props} />;
   }
 
   if (requiresAppInstallation) {
