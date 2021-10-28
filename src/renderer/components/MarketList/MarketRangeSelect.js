@@ -11,13 +11,14 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
+import { useTranslation } from "react-i18next";
 
 export const rangesArr = [
   {
     value: "1h",
     selectorLabel: "Last 1 hour",
     key: "1h",
-    label: "1h",
+    label: "1H",
   },
   {
     value: "24h",
@@ -48,6 +49,7 @@ export const rangesArr = [
 export const MarketRangeSelect = () => {
   const { range } = useSelector(state => state.market);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const onRangeSelected = useCallback(
     item => {
       dispatch(getMarketCryptoCurrencies({ range: item.value }));
@@ -60,7 +62,7 @@ export const MarketRangeSelect = () => {
     return (
       <Item key={item.key} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-          {item.selectorLabel}
+          {t(`market.range.${item.label}_selectorLabel`)}
         </Ellipsis>
         {isActive && (
           <Check>
@@ -87,7 +89,7 @@ export const MarketRangeSelect = () => {
             <Box flex={1} horizontal>
               <TextLink shrink>
                 <Button>
-                  <Ellipsis>{value.selectorLabel}</Ellipsis>
+                  <Ellipsis>{t(`market.range.${value.label}_selectorLabel`)}</Ellipsis>
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}

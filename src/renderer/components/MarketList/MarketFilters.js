@@ -10,6 +10,7 @@ import Ellipsis from "~/renderer/components/Ellipsis";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
 import CheckBox from "~/renderer/components/CheckBox";
+import { useTranslation } from "react-i18next";
 
 type ShowProps = {
   value: string,
@@ -66,6 +67,8 @@ const FooterWrapper = styled(Box)`
 `;
 
 const Show = ({ value, onValueChange }: ShowProps) => {
+  const { t } = useTranslation();
+
   const options = [
     {
       label: "All",
@@ -92,7 +95,7 @@ const Show = ({ value, onValueChange }: ShowProps) => {
             onChange={value => onValueChange(option.value)}
           />
           <Label ml={14} color="palette.text.shade50" fontSize={12}>
-            {option.label}
+            {t(`market.filters.${option.value}`)}
           </Label>
         </Box>
       ))}
@@ -101,15 +104,16 @@ const Show = ({ value, onValueChange }: ShowProps) => {
 };
 
 const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) => {
+  const { t } = useTranslation();
   return (
     <FooterWrapper>
       <Divider />
       <Box px={5} py={4} horizontal justifyContent="space-between">
         <BasicButton onClick={() => onClearAll()}>
-          <Ellipsis>Clear all</Ellipsis>
+          <Ellipsis>{t(`market.filters.clearAll`)}</Ellipsis>
         </BasicButton>
         <Button primary onClick={() => onApply()}>
-          <Ellipsis>Apply filters</Ellipsis>
+          <Ellipsis>{t(`market.filters.applyFilters`)}</Ellipsis>
         </Button>
       </Box>
     </FooterWrapper>

@@ -12,6 +12,7 @@ import Text from "~/renderer/components/Text";
 import { rangesArr } from "~/renderer/components/MarketList/MarketRangeSelect";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   currency: MarketCurrencyInfo,
@@ -19,6 +20,7 @@ type Props = {
 
 function CryptocurrencySummaryHeader({ currency }: Props) {
   const { counterCurrency, range } = useSelector(state => state.market);
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
   const onRangeSelected = useCallback(
@@ -30,6 +32,11 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
   );
 
   const difference = currency.difference || 0;
+
+  const ranges = rangesArr.map(range => ({
+    ...range,
+    label: t(`market.range.${range.label}_label`),
+  }))
 
   return (
     <Box>
@@ -63,7 +70,7 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             event="PillsDaysChange"
             selected={rangesArr.find(item => item.key === range)}
           />
-          <Pills items={rangesArr} activeKey={range} onChange={onRangeSelected} bordered />
+          <Pills items={ranges} activeKey={range} onChange={onRangeSelected} bordered />
         </Box>
       </Box>
     </Box>

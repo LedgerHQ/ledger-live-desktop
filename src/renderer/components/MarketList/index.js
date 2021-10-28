@@ -11,8 +11,9 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import Paginator from "~/renderer/components/Paginator";
+import { useTranslation } from "react-i18next";
 
-const ListItemHeight: number = 53;
+const ListItemHeight: number = 55;
 
 const SortIconStyled = styled(SortIcon)`
   margin: 0 5px;
@@ -86,6 +87,7 @@ function MarketList() {
   } = useSelector(state => state.market);
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!coins[0]) {
@@ -145,7 +147,7 @@ function MarketList() {
             fontSize={4}
             onClick={() => onSort("id")}
           >
-            Name
+            {t("market.marketList.name")}
             <SortIconStyled order={orderBy === "id" ? order : ""} />
           </ColumnTitleBox>
           <ColumnTitleBox
@@ -160,7 +162,7 @@ function MarketList() {
             fontSize={4}
             onClick={() => onSort("current_price")}
           >
-            Price
+            {t("market.marketList.price")}
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -174,7 +176,7 @@ function MarketList() {
             fontSize={4}
             onClick={() => onSort(`price_change_percentage_${range}`)}
           >
-            % Change({rangeData.simple})
+            % {t("market.marketList.change")} ({t(`market.range.${rangeData.simple}`)})
           </ColumnTitleBox>
           <ColumnTitleBox
             shrink
@@ -187,7 +189,7 @@ function MarketList() {
             justifyContent="flex-end"
             fontSize={4}
           >
-            Market cap
+            {t("market.marketList.marketCap")}
           </ColumnTitleBox>
         </RowContent>
       </Row>

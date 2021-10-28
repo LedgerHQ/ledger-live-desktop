@@ -198,6 +198,56 @@
     "lend": "Prêter",
     "catalog": "Discover"
   },
+  "market": {
+    "title": "Market",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "name": "Name",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price statistics",
+      "tradingVolume": "Trading volume",
+      "24hLow": "24h Low",
+      "24hHigh": "24h High",
+      "7dLow": "7d Low",
+      "7dHigh": "7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    }
+  },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
     "tooltip": "Ajouter aux favoris"

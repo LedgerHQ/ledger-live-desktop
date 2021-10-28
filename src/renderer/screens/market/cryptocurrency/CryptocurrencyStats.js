@@ -11,6 +11,7 @@ import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { useTranslation } from "react-i18next";
 
 const Wrapper: ThemedComponent<{}> = styled(Box)`
   background-color: ${p => p.theme.colors.palette.background.paper};
@@ -57,14 +58,15 @@ const InfoSection = ({
 
 function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
   const { counterCurrency } = useSelector(state => state.market);
+  const { t } = useTranslation();
 
   return (
     <CardStyled style={{ height: "100%" }} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
-        Price statistics
+        {t("market.detailsPage.priceStatistics")}
       </Text>
       <Box grow vertical justifyContent="space-between">
-        <InfoSection style={{ height: "56px" }} title="Price">
+        <InfoSection style={{ height: "56px" }} title={t("market.marketList.price")}>
           <Text color="palette.text.shade100" textAlign="right" ff="Inter|Medium" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.current_price} />
           </Text>
@@ -80,13 +82,15 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="Trading volume">
+        <InfoSection title={t("market.detailsPage.tradingVolume")}>
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.total_volume} />
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="24h Low / 24h High">
+        <InfoSection
+          title={`${t("market.detailsPage.24hLow")} / ${t("market.detailsPage.24hHigh")}`}
+        >
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <Box horizontal>
               <CounterValueFormatter currency={counterCurrency} value={currency.low_24h} />
@@ -98,7 +102,9 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="7d Low / 7d High">
+        <InfoSection
+          title={`${t("market.detailsPage.7dLow")} / ${t("market.detailsPage.7dHigh")}`}
+        >
           <Box horizontal>
             <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
               <Box horizontal>
@@ -118,7 +124,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
           </Box>
         </InfoSection>
         <Divider />
-        <InfoSection title="All time high">
+        <InfoSection title={t("market.detailsPage.allTimeHigh")}>
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.ath} />
           </Text>
@@ -127,7 +133,7 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="All time low">
+        <InfoSection title={t("market.detailsPage.allTimeLow")}>
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.atl} />
           </Text>
@@ -142,19 +148,21 @@ function PriceStats({ currency }: { currency: MarketCurrencyInfo }) {
 
 function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
   const { counterCurrency } = useSelector(state => state.market);
+  const { t } = useTranslation();
+
   return (
     <CardStyled mb={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
-        Market cap
+        {t("market.marketList.marketCap")}
       </Text>
       <Box>
-        <InfoSection title="Market cap">
+        <InfoSection title={t("market.marketList.marketCap")}>
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.market_cap} />
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection title="Market cap rank">
+        <InfoSection title={t("market.detailsPage.marketCapRank")}>
           <MarketCapRank>
             <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
               #{currency.market_cap_rank}
@@ -168,13 +176,15 @@ function MarketCap({ currency }: { currency: MarketCurrencyInfo }) {
 
 function Supply({ currency }: { currency: MarketCurrencyInfo }) {
   const { counterCurrency } = useSelector(state => state.market);
+  const { t } = useTranslation();
+
   return (
     <CardStyled mt={2} px={16} py={20}>
       <Text mb={20} fontSize={16} color="palette.text.shade100">
-        Supply
+        {t("market.detailsPage.supply")}
       </Text>
       <Box>
-        <InfoSection title="Circulating supply">
+        <InfoSection title={t("market.detailsPage.circulatingSupply")}>
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>
             <CounterValueFormatter currency={counterCurrency} value={currency.circulating_supply} />
           </Text>
