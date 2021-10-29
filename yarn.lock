@@ -2495,6 +2495,11 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
+"@ledgerhq/icons-ui@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.1.1.tgz#0f6e86cd2b70de6cd42fc4f7051f47f718149bf6"
+  integrity sha512-HB+a3osBJKyPFuBUWlXNw9g7qAjI2TKY7qhfQAwMab6W3A6wYVLYOtLgdrABzfHVLhHmzFRlLuRm5bTgG8BA6A==
+
 "@ledgerhq/json-bignumber@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/json-bignumber/-/json-bignumber-1.1.0.tgz#8d3e38118060565191518ab06bd9aa5b22b25b58"
