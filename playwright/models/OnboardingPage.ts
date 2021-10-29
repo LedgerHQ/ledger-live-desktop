@@ -23,7 +23,8 @@ export class OnboardingPage {
   async connectDevice() {
     await this.page.click(
       'button:has-text("Connect deviceConnect your Nano XIs your device already set up? Connect it to th")',
-    );
+      );
+    await this.page.waitForSelector('#modal-container', { state: 'visible' });
   }
 
   async checkDevice() {

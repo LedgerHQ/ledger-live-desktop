@@ -42,7 +42,7 @@
     "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
     "pretest": "tsc --incremental -p playwright/tsconfig.json",
     "playwright": "cross-env ALLURE_RESULTS_DIR=playwright/artifacts/allure-results npx playwright test --config=playwright/playwright.config.ts",
-    "playwright-ci": "npx nyc@latest yarn playwright",
+    "playwright-ci": "nyc yarn playwright",
     "playwright-generate-report": "npx allure generate playwright/artifacts/allure-results -o playwright/artifacts/allure-report --clean && allure open ./playwright/artifacts/allure-report",
     "playwright-recorder": "npx playwright test playwright/specs/recorder.spec.ts"
   },

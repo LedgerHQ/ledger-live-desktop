@@ -4,12 +4,14 @@ const config: PlaywrightTestConfig = {
   testDir: "specs/",
   testIgnore: "specs/recorder.spec.ts",
   outputDir: "./artifacts/test-results",
-  timeout: 60000,
+  timeout: 120000,
   globalTimeout: 0,
   globalSetup: require.resolve("./utils/global-setup"),
   globalTeardown: require.resolve("./utils/global-teardown"),
   use: {
-    headless: true,
+    launchOptions: {
+      slowMo: 200,
+    },
     ignoreHTTPSErrors: true,
     screenshot: process.env.CI ? "on" : "off",
     video: process.env.CI ? "on-first-retry" : "off", // FIXME: "off" doesn't seem to work
@@ -21,7 +23,9 @@ const config: PlaywrightTestConfig = {
   reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
   workers: process.env.CI ? 3 : 1,
   retries: process.env.CI ? 2 : 0,
-  reporter: process.env.CI ? [["allure-playwright"], ["github"]] : "list",
+  reporter: process.env.CI
+    ? [["allure-playwright"], ["github"]]
+    : [["allure-playwright"], ["list"]],
 };
 
 export default config;
