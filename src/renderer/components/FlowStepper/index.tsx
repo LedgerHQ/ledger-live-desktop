@@ -1,5 +1,6 @@
-import { Flex, Aside, Logos, Text, Button, Icons } from "@ledgerhq/react-ui";
+import { Flex, Aside, Logos, Text, Button, Icons, ProgressBar } from "@ledgerhq/react-ui";
 import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const FlowStepperContainer = styled(Flex)`
@@ -7,40 +8,56 @@ const FlowStepperContainer = styled(Flex)`
   height: 100%;
 `;
 
-const FlowStepperContent = styled(Flex)`
+const FlowStepperContentContainer = styled(Flex)`
   height: 100%;
   padding: ${p => p.theme.space[10]}px;
 `;
 
+const FlowStepperContent = styled(Flex)`
+  width: 514px;
+  height: 100%;
+`;
+
+const StepContent = styled.div`
+  flex-grow: 1;
+  margin-top: ${p => p.theme.space[10]}px;
+  margin-bottom: ${p => p.theme.space[10]}px;
+  width: 100%;
+`;
+
 type Step = {
   Illustration?: React.ReactNode;
+  Content?: React.ReactNode;
+  AsideFooter?: React.ReactNode;
+  title: string;
+  key: string;
   continueLabel?: string;
   backLabel?: string;
   disableContinue?: boolean;
+  disableBack?: boolean;
 };
 
 type FlowStepperProps = {
   steps: Step[];
-  onStepChange?: (step: number) => void;
-  onComplete: () => void;
+  currentIndex: number;
+  onBack?: () => void;
+  onContinue?: () => void;
 };
 
-const FlowStepper: React.FC<FlowStepperProps> = ({ steps, onStepChange, onComplete }) => {
-  const [step, setStep] = React.useState(0);
-
+const FlowStepper: React.FC<FlowStepperProps> = ({ steps, onBack, onContinue, currentIndex }) => {
   const handleBack = useCallback(() => {
-    setStep(step - 1);
-    onStepChange && onStepChange(step - 1);
-  }, [step, onStepChange]);
+    if (onBack) {
+      onBack();
+    }
+  }, [onBack]);
 
   const handleContinue = useCallback(() => {
-    if (step <= steps.length - 1) {
-      setStep(step + 1);
-      onStepChange && onStepChange(step + 1);
-    } else {
-      onComplete();
+    if (onContinue) {
+      onContinue();
     }
-  }, [step, onStepChange, onComplete, steps]);
+  }, [onContinue]);
+
+  const { t } = useTranslation();
 
   return (
     <FlowStepperContainer>
@@ -51,46 +68,41 @@ const FlowStepper: React.FC<FlowStepperProps> = ({ steps, onStepChange, onComple
             <Logos.LedgerLiveRegular />
           </Flex>
         }
-        footer={
-          <Flex flexDirection="column" rowGap={3}>
-            <Flex alignItems="center" columnGap={3}>
-              <Text ff="Inter|Medium" fontSize={4}>
-                Need help?
-              </Text>
-              <Icons.LifeRingMedium size={20} />
-            </Flex>
-            <Text ff="Inter|Medium" fontSize={3}>
-              Don’t know what you have to do? Get some help to close this step.
-            </Text>
-            <div />
-          </Flex>
-        }
+        footer={steps[currentIndex].AsideFooter}
         width="324px"
         p={10}
-      ></Aside>
-      <FlowStepperContent flexGrow={1}>
-        <Flex alignSelf="flex-end" justifyContent="space-between" flexGrow={1} columnGap={20}>
-          <Button
-            iconPosition="left"
-            onClick={handleBack}
-            disabled={step === 0}
-            type="main"
-            outline
-            Icon={() => <Icons.ArrowLeftMedium size={18} />}
-          >
-            {steps[step].backLabel ?? "Back"}
-          </Button>
-          {/* TODO: change the default labels by translated ones */}
-          <Button
-            onClick={handleContinue}
-            disabled={steps[step].disableContinue}
-            type="main"
-            Icon={() => <Icons.ArrowRightMedium size={18} />}
-          >
-            {steps[step].continueLabel ?? "Continue"}
-          </Button>
-        </Flex>
-      </FlowStepperContent>
+      >
+        {steps[currentIndex].Illustration}
+      </Aside>
+      <FlowStepperContentContainer flexGrow={1} justifyContent="center">
+        <FlowStepperContent flexDirection="column">
+          <ProgressBar
+            currentIndex={currentIndex}
+            steps={steps.map(({ title, key }) => ({ key, label: title }))}
+          />
+          <StepContent>{steps[currentIndex].Content}</StepContent>
+          <Flex justifyContent="space-between">
+            <Button
+              iconPosition="left"
+              onClick={handleBack}
+              disabled={steps[currentIndex].disableBack}
+              type="main"
+              outline
+              Icon={() => <Icons.ArrowLeftMedium size={18} />}
+            >
+              {steps[currentIndex].backLabel ?? t("common.back")}
+            </Button>
+            <Button
+              onClick={handleContinue}
+              disabled={steps[currentIndex].disableContinue}
+              type="main"
+              Icon={() => <Icons.ArrowRightMedium size={18} />}
+            >
+              {steps[currentIndex].continueLabel ?? t("common.continue")}
+            </Button>
+          </Flex>
+        </FlowStepperContent>
+      </FlowStepperContentContainer>
     </FlowStepperContainer>
   );
 };
