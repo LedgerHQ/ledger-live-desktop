@@ -1,10 +1,9 @@
 import React, { useCallback } from "react";
-import { Popin, Text, Flex, Checkbox, Button } from "@ledgerhq/react-ui";
+import { Popin, Text, Flex, Checkbox, Button, Icons } from "@ledgerhq/react-ui";
 import { useTranslation, Trans } from "react-i18next";
 import { acceptTerms, useDynamicUrl } from "~/renderer/terms";
 import { setShareAnalytics } from "~/renderer/actions/settings";
 import { openURL } from "~/renderer/linking";
-import { Icons } from "@ledgerhq/react-ui";
 import { useDispatch } from "react-redux";
 
 const TermsAndConditionsModal: React.FC<{
