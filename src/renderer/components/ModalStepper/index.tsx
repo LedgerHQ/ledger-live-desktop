@@ -30,8 +30,9 @@ const CloseButtonContainer = styled.div`
 const StepContainer = styled(FlexBox).attrs(() => ({
   flexDirection: "row",
   justifyContent: "space-between",
-  flex: 1,
-}))``;
+}))`
+  flex: 1;
+`;
 
 const LeftPartContainer = styled(FlexBox).attrs(() => ({
   flexDirection: "column",
@@ -45,6 +46,8 @@ const RightPartContainer = styled(FlexBox)`
   height: 100%;
   flex: 0 0 48%;
   background-color: ${p => p.bgColor || p.theme.colors.palette.primary.c60};
+  justify-content: center;
+  align-items: center;
 `;
 
 const getLightNeutral80 = (p: any) => p.theme.colors.palette.neutral.c80;
@@ -105,7 +108,10 @@ type StepLeftPartProps = {
   onClickBack: (...args: any) => any;
 };
 
-type StepRightPartProps = {};
+type StepRightPartProps = {
+  AsideRight: React.ReactNode;
+  bgColor?: string;
+};
 
 type Props = {
   title: string;
@@ -147,36 +153,32 @@ const StepLeftPart: React.FC<StepLeftPartProps> = ({
   );
 };
 
-const StepRightPart: React.FC<StepProps | StepRightPartProps> = props => {
+const StepRightPart = (props: StepRightPartProps) => {
   const { AsideRight, bgColor } = props;
   return <RightPartContainer {...{ bgColor }}>{AsideRight || null}</RightPartContainer>;
 };
 
-function Header({ title, stepIndex, stepCount }) {
-  return (
-    <FlexBox flexDirection="row" alignItems="center" mb="32px">
-      <HeaderText>{title}</HeaderText>
-      <HeaderTextSeparator />
-      <HeaderText>
-        {stepIndex + 1}/{stepCount}
-      </HeaderText>
-    </FlexBox>
-  );
-}
+const Header = ({ title, stepIndex, stepCount }) => (
+  <FlexBox flexDirection="row" alignItems="center" mb="32px">
+    <HeaderText>{title}</HeaderText>
+    <HeaderTextSeparator />
+    <HeaderText>
+      {stepIndex + 1}/{stepCount}
+    </HeaderText>
+  </FlexBox>
+);
 
-function StepSlider({ stepIndex, stepCount }) {
-  return null;
-}
+const StepSlider = ({ stepIndex, stepCount }) => null;
 
-function CloseModalButton() {
-  return (
+const CloseModalButton = ({ onClick }) => (
+  <div style={{ position: "relative" }}>
     <CloseButtonContainer>
-      <Button Icon={CloseRegular} />
+      <Button Icon={CloseRegular} {...{ onClick }} />
     </CloseButtonContainer>
-  );
-}
+  </div>
+);
 
-const ModalStepper: React.FC<Props> = (props: Props) => {
+const ModalStepper = (props: Props) => {
   const { title, steps, close, finish } = props;
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
