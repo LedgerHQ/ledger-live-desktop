@@ -1066,10 +1066,10 @@
       "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger Live.",
       "cta": "Acheter maintenant"
     },
-    "backupPack": {
-      "title": "Back-up Pack",
-      "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit.",
-      "cta": "Acheter un Back-up Pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "STAKING DE POLKADOT",
