@@ -1066,10 +1066,10 @@
       "description": "Покупайте криптоактивы через нашего партнёра и получайте их непосредственно на счёт в Ledger.",
       "cta": "Купить"
     },
-    "backupPack": {
-      "title": "Резервный набор",
-      "description": "Безопасно управляйте активами с помощью Nano X и Nano S по цене со скидкой",
-      "cta": "Купить резервный набор"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "Стейкинг POLKADOT",
