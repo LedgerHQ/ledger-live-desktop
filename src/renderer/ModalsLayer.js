@@ -53,7 +53,12 @@ const ModalsLayer = ({ visibleModals }: *) => {
     >
       {state => (
         <BackDrop state={state}>
-          <ModalStepper title="Basics" steps={stepperSteps} />
+          <ModalStepper
+            title="Basics"
+            onClose={() => console.log('onClose')}
+            onFinish={() => console.log('onFinish')}
+            steps={stepperSteps}
+          />
           {/* {// Will only render at the end of december
           isSnowTime() ? <Snow numFlakes={200} /> : null} */}
           {filteredModals.map(({ name, ...data }, i) => {

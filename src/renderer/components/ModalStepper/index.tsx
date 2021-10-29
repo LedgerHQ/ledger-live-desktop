@@ -13,7 +13,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const ModalContainer = styled(FlexBox)`
+const BodyWrapper = styled(FlexBox)`
   background-color: ${p => p.theme.colors.palette.neutral.c00};
   height: 80%;
   flex: 0 0 80%;
@@ -30,6 +30,7 @@ const CloseButtonContainer = styled.div`
 const StepContainer = styled(FlexBox).attrs(() => ({
   flexDirection: "row",
   justifyContent: "space-between",
+  position: "relative",
 }))`
   flex: 1;
 `;
@@ -38,17 +39,35 @@ const LeftPartContainer = styled(FlexBox).attrs(() => ({
   flexDirection: "column",
 }))`
   height: 100%;
-  flex: 0 0 52%;
+  flex: 0 0 48%;
   padding: 40px;
 `;
 
 const RightPartContainer = styled(FlexBox)`
   height: 100%;
-  flex: 0 0 48%;
+  flex: 0 0 52%;
   background-color: ${p => p.bgColor || p.theme.colors.palette.primary.c60};
   justify-content: center;
   align-items: center;
 `;
+
+const ProgressBar = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  width: ${p => p.percentage}%;
+  background-color: ${p => p.theme.colors.palette.neutral.c100};
+  transition: width ease-out 200ms;
+`;
+
+const StepSlider = ({ stepIndex, stepCount }) => {
+  return (
+    // TODO: need to figure out why the fuck I can't use "left: 0, right: 0"
+    <ProgressBar percentage={100 * ((stepIndex + 1) / stepCount)} />
+  );
+};
 
 const getLightNeutral80 = (p: any) => p.theme.colors.palette.neutral.c80;
 
@@ -116,8 +135,8 @@ type StepRightPartProps = {
 type Props = {
   title: string;
   steps: Array<StepProps>;
-  close: (...args: any) => any;
-  finish: (...args: any) => any;
+  onClose: (...args: any) => any;
+  onFinish: (...args: any) => any;
 };
 
 const StepLeftPart: React.FC<StepLeftPartProps> = ({
@@ -144,10 +163,17 @@ const StepLeftPart: React.FC<StepLeftPartProps> = ({
         )}
       </FlexBox>
       <FlexBox flexDirection="column">
-        <ContinueButton type="primary" Icon={ArrowRightRegular} onClick={onClickContinue}>
+        <ContinueButton
+          disabled={continueDisabled}
+          type="main"
+          Icon={ArrowRightRegular}
+          onClick={onClickContinue}
+        >
           {continueLabel}
         </ContinueButton>
-        <BackButton onClick={onClickBack}>{backLabel}</BackButton>
+        <BackButton disabled={backDisabled} onClick={onClickBack}>
+          {backLabel}
+        </BackButton>
       </FlexBox>
     </LeftPartContainer>
   );
@@ -168,36 +194,36 @@ const Header = ({ title, stepIndex, stepCount }) => (
   </FlexBox>
 );
 
-const StepSlider = ({ stepIndex, stepCount }) => null;
-
 const CloseModalButton = ({ onClick }) => (
-  <div style={{ position: "relative" }}>
-    <CloseButtonContainer>
-      <Button Icon={CloseRegular} {...{ onClick }} />
-    </CloseButtonContainer>
-  </div>
+  <CloseButtonContainer>
+    <Button Icon={CloseRegular} {...{ onClick }} />
+  </CloseButtonContainer>
 );
 
 const ModalStepper = (props: Props) => {
-  const { title, steps, close, finish } = props;
+  const { title, steps, onClose, onFinish } = props;
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
   const stepsProps = { stepIndex, stepCount };
   const step = steps[stepIndex];
 
   const onClickContinue = useCallback(() => {
-    if (stepIndex === stepCount - 1) finish();
+    if (stepIndex === stepCount - 1) onFinish();
     setStepIndex(Math.min(stepIndex + 1, stepCount - 1));
-  }, [stepIndex, stepCount, finish]);
+  }, [stepIndex, stepCount, onFinish]);
 
   const onClickBack = useCallback(() => {
-    if (stepIndex === 0) close();
+    if (stepIndex === 0) onClose();
     else setStepIndex(Math.max(0, stepIndex - 1));
-  }, [stepIndex, close]);
+  }, [stepIndex, onClose]);
+
+  const onClickBackdrop = useCallback(() => {
+    onClose();
+  }, [onClose]);
 
   return (
-    <Container>
-      <ModalContainer>
+    <Container onClick={onClickBackdrop}>
+      <BodyWrapper onClick={e => e.stopPropagation()}>
         <StepContainer>
           <StepLeftPart
             Header={<Header title={title} {...stepsProps} />}
@@ -212,9 +238,9 @@ const ModalStepper = (props: Props) => {
           />
           <StepRightPart AsideRight={step.AsideRight} bgColor={step.bgColor} />
           <StepSlider {...stepsProps} />
-          <CloseModalButton {...{ close }} />
+          <CloseModalButton onClick={onClose} />
         </StepContainer>
-      </ModalContainer>
+      </BodyWrapper>
     </Container>
   );
 };
