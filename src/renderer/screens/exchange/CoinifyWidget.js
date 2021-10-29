@@ -126,7 +126,23 @@ const CoinifyWidget = ({ account, parentAccount, mode, onReset }: Props) => {
           coinifyConfig.host,
         );
         if (currency) {
-          track("Coinify Confirm Buy End", { currencyName: currency.name });
+          const receiveBuyMessage = event => {
+            if (
+              event.origin === "https://trade-ui.coinify.com" ||
+              event.origin === "https://trade-ui.sandbox.coinify.com"
+            ) {
+              const widgetMessage = event.data;
+
+              if (widgetMessage.event === "trade.trade-created") {
+                track("Coinify Confirm Buy End", {
+                  currencyName: currency.name,
+                  medium: widgetMessage?.context?.transferIn?.medium,
+                });
+                window.removeEventListener("message", receiveBuyMessage, false);
+              }
+            }
+          };
+          window.addEventListener("message", receiveBuyMessage, false);
         }
       }
       if (tradeId.current && mode === "sell") {
