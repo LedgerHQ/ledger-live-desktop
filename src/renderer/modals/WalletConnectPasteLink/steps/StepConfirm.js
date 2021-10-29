@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import type { StepProps } from "../types";
 import Box from "~/renderer/components/Box";
@@ -43,11 +43,12 @@ const AccountContainer: ThemedComponent<*> = styled(Box)`
 
 export default function StepConfirm({ account, link, setLink }: StepProps) {
   const wcContext = useContext(context);
+  const { t } = useTranslation();
 
   return (
     <Box flow={1}>
       {wcContext.status === STATUS.ERROR ? (
-        <Box>Error</Box>
+        <Box>{wcContext.error?.message || t("walletconnect.invalidAccount")}</Box>
       ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
         <Box alignItems={"center"} p={20}>
           <Box horizontal alignItems={"center"} mb={32}>
@@ -62,12 +63,16 @@ export default function StepConfirm({ account, link, setLink }: StepProps) {
           <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
             {wcContext.dappInfo.name}
           </Text>
-          <Box style={{ height: 20 }} />
-          <Text textAlign="center" ff="Inter|Regular" fontSize={4} color="palette.text.shade50">
+          <Text
+            mt={20}
+            textAlign="center"
+            ff="Inter|Regular"
+            fontSize={4}
+            color="palette.text.shade50"
+          >
             <Trans i18nKey="walletconnect.steps.confirm.details" />
           </Text>
-          <Box style={{ height: 20 }} />
-          <AccountContainer alignItems={"center"} p={20}>
+          <AccountContainer alignItems={"center"} p={20} mt={20}>
             <Box justifyContent="center" horizontal mb="10px">
               {account?.currency ? <ParentCryptoCurrencyIcon currency={account.currency} /> : null}
               <Text
@@ -107,7 +112,7 @@ export function StepConfirmFooter({ link, onClose, account, onCloseWithoutDiscon
           }}
           outline
         >
-          Reject
+          <Trans i18nKey="common.reject" />
         </Button>
       ) : null}
       <Box style={{ width: 10 }} />
@@ -123,7 +128,7 @@ export function StepConfirmFooter({ link, onClose, account, onCloseWithoutDiscon
         disabled={!(wcContext.status === STATUS.CONNECTING && wcContext.dappInfo)}
         id="wc-paste-link-confirm-continue"
       >
-        Continue
+        <Trans i18nKey="common.continue" />
       </Button>
     </Box>
   );

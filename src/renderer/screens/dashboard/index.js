@@ -72,7 +72,7 @@ export default function DashboardPage() {
       <TopBannerContainer>
         <MigrationBanner />
         <ClearCacheBanner />
-        <CurrencyDownStatusAlert currencies={currencies} />
+        <CurrencyDownStatusAlert currencies={currencies} hideStatusIncidents />
       </TopBannerContainer>
       {showCarousel ? <Carousel /> : null}
       <TrackPage

@@ -125,7 +125,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
         {distribution ? (
           <Price from={currency} color="palette.text.shade80" fontSize={3} />
         ) : (
-          <NoCountervaluePlaceholder style={null} />
+          <NoCountervaluePlaceholder />
         )}
       </PriceSection>
       <Distribution>
@@ -163,7 +163,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               showCode
             />
           ) : (
-            <NoCountervaluePlaceholder style={null} />
+            <NoCountervaluePlaceholder />
           )}
         </Ellipsis>
       </Value>

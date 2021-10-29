@@ -9,6 +9,8 @@ const childProcess = require("child_process");
 
 const pkg = require("./../package.json");
 
+const NIGHTLY = pkg.name.includes("nightly");
+
 const { SENTRY_URL } = process.env;
 
 const GIT_REVISION = childProcess
@@ -47,6 +49,7 @@ const buildMainEnv = (mode, config, argv) => {
     __APP_VERSION__: JSON.stringify(pkg.version),
     __GIT_REVISION__: JSON.stringify(GIT_REVISION),
     __SENTRY_URL__: JSON.stringify(SENTRY_URL || null),
+    __NIGHTLY__: NIGHTLY,
   };
 
   if (mode === "development") {
@@ -62,6 +65,7 @@ const buildRendererEnv = (mode, config) => {
     __APP_VERSION__: JSON.stringify(pkg.version),
     __GIT_REVISION__: JSON.stringify(GIT_REVISION),
     __SENTRY_URL__: JSON.stringify(SENTRY_URL || null),
+    __NIGHTLY__: NIGHTLY,
   };
 
   return env;

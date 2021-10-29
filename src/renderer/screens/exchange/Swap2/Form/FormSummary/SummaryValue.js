@@ -9,7 +9,7 @@ const Container: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: row;
   column-gap: 0.375rem;
-  align-items: end;
+  align-items: center;
   color: ${p => p.theme.colors.palette.text.shade100};
 `;
 const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
@@ -19,6 +19,7 @@ const Text: ThemedComponent<{}> = styled(TextBase).attrs(() => ({
   lineHeight: "1.4",
 }))`
   display: inline-block;
+  color: ${p => p.theme.colors.palette.secondary.main};
 
   &:first-letter {
     text-transform: uppercase;
@@ -31,6 +32,12 @@ const Button: ThemedComponent<{}> = styled(ButtonBase).attrs(() => ({
   height: unset;
 `;
 
+export const NoValuePlaceholder = () => (
+  <TextBase color="palette.text.shade40" mr={3} fontSize={4} fontWeight="600">
+    {"-"}
+  </TextBase>
+);
+
 const SummaryValue = ({
   value,
   handleChange,
@@ -40,12 +47,10 @@ const SummaryValue = ({
   handleChange?: Function,
   children?: React$Node,
 }) => {
-  if (!value) return <Text>-</Text>;
-
   return (
     <Container>
       {children}
-      <Text>{value}</Text>
+      {value && <Text>{value}</Text>}
       {handleChange ? <Button onClick={handleChange}>Edit</Button> : null}
     </Container>
   );

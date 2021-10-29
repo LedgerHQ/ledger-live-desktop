@@ -2,14 +2,13 @@
 
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { fontSize, textAlign } from "styled-system";
+import { fontSize, textAlign, fontWeight, color } from "styled-system";
 import noop from "lodash/noop";
 import fontFamily from "~/renderer/styles/styled/fontFamily";
-import Spinner from "~/renderer/components/Spinner";
 import Box from "~/renderer/components/Box";
 import TranslatedError from "~/renderer/components/TranslatedError";
-import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const RenderLeftWrapper: ThemedComponent<{}> = styled(Box)`
   align-items: center;
@@ -25,7 +24,7 @@ const RenderRightWrapper: ThemedComponent<{}> = styled(Box)`
   }
 `;
 
-const Container = styled(Box).attrs(() => ({
+export const Container: ThemedComponent<*> = styled(Box).attrs(() => ({
   horizontal: true,
 }))`
   background: ${p =>
@@ -84,7 +83,7 @@ const Container = styled(Box).attrs(() => ({
     }`}
 `;
 
-const ErrorContainer = styled(Box)`
+export const ErrorContainer: ThemedComponent<*> = styled(Box)`
   margin-top: 0px;
   font-size: 12px;
   width: 100%;
@@ -105,31 +104,33 @@ const WarningDisplay = styled(Box)`
 
 const LoadingDisplay = styled(Box)`
   position: absolute;
-  background: ${p => p.theme.colors.palette.text.shade10};
-  left: 0px;
+  right: 0px;
   top: 0px;
   bottom: 0px;
   width: 100%;
   pointer-events: none;
   flex-direction: row;
   align-items: center;
-  padding: 0 15px;
+  display: flex;
+  justify-content: flex-end;
   border-radius: 4px;
-  > :first-child {
-    margin-right: 10px;
-  }
+  padding-right: 10px;
 `;
+
+export const BaseContainer: ThemedComponent<{}> = styled(Box)``;
 
 const Base = styled.input.attrs(() => ({
   fontSize: 4,
 }))`
   font-family: "Inter";
   font-weight: 600;
+  color: ${p => p.theme.colors.palette.text.shade100};
+  border: 0;
   ${fontFamily};
   ${fontSize};
   ${textAlign};
-  border: 0;
-  color: ${p => p.theme.colors.palette.text.shade100};
+  ${fontWeight};
+  ${color};
   height: 100%;
   outline: none;
   padding: 0;
@@ -167,6 +168,8 @@ type Props = {
   editInPlace?: boolean,
   disabled?: boolean,
   hideErrorMessage?: boolean,
+  value?: string,
+  placeholder?: string,
 };
 
 // $FlowFixMe @IAmMorrow
@@ -188,6 +191,7 @@ const Input = React.forwardRef(function Input(
     onFocus = noop,
     onBlur = noop,
     hideErrorMessage,
+    value,
     ...props
   }: Props,
   inputRef,
@@ -255,9 +259,11 @@ const Input = React.forwardRef(function Input(
       editInPlace={editInPlace}
     >
       {!loading || isFocus ? <RenderLeftWrapper>{renderLeft}</RenderLeftWrapper> : null}
-      <Box px={3} grow shrink>
+      <BaseContainer px={3} grow shrink>
         <Base
           {...props}
+          placeholder={loading ? "" : props.placeholder}
+          value={loading ? "" : value}
           small={small}
           disabled={disabled}
           ref={inputRef}
@@ -282,13 +288,10 @@ const Input = React.forwardRef(function Input(
         </ErrorContainer>
         {loading && !isFocus ? (
           <LoadingDisplay>
-            <Spinner size={16} color="palette.text.shade50" />
-            <Text ff="Inter" color="palette.text.shade50" fontSize={4}>
-              {"Loading"}
-            </Text>
+            <BigSpinner size={16} />
           </LoadingDisplay>
         ) : null}
-      </Box>
+      </BaseContainer>
       {renderRight ? <RenderRightWrapper>{renderRight}</RenderRightWrapper> : null}
     </Container>
   );
