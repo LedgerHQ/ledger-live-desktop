@@ -1066,10 +1066,10 @@
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "Buy now"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "POLKADOT staking",
