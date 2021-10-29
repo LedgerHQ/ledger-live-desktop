@@ -54,6 +54,7 @@ const AmountField = ({ account, status: { amount }, field }: FieldComponentProps
       fontSize={3}
       inline
       showCode
+      alwaysShowValue
       disableRounding
     />
   </TransactionConfirmField>
@@ -72,6 +73,7 @@ const FeesField = ({ account, parentAccount, status, field }: FieldComponentProp
         fontSize={3}
         inline
         showCode
+        alwaysShowValue
       />
     </TransactionConfirmField>
   );
