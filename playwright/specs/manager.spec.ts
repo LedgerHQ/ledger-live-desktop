@@ -45,4 +45,12 @@ test("Manager", async ({ page }) => {
       name: "manager-updateAll.png",
     });
   });
+
+  await test.step("can uninstall all apps", async () => {
+    await managerPage.goToInstalledAppTab();
+    await managerPage.uninstallAllApps();
+    expect(await page.screenshot()).toMatchSnapshot({
+      name: "manager-uninstallAll.png",
+    });
+  });
 });

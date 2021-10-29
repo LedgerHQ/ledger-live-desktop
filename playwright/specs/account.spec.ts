@@ -6,7 +6,7 @@ import { DeviceAction } from "../models/DeviceAction";
 // specific environment
 test.use({ userdata: "skip-onboarding" });
 
-const currencies = ["BTC"];
+const currencies = ["BTC", "LTC", "ATOM"];
 
 test.describe.parallel("Accounts", () => {
   for (const currency of currencies) {

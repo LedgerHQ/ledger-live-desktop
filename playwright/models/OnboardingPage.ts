@@ -13,7 +13,10 @@ export class OnboardingPage {
 
   async acceptTerms() {
     await this.page.click("#onboarding-terms-check");
-    await this.page.click("#onboarding-terms-submit");
+    await Promise.all([
+      this.page.waitForResponse(/\.svg$/),
+      this.page.click('#onboarding-terms-submit'),
+    ]);
   }
 
   async selectDevice(device) {

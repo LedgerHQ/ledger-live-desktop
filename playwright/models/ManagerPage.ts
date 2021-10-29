@@ -31,4 +31,10 @@ export class ManagerPage {
   async uninstallApp(currency) {
     await this.page.click(`#appActionsUninstall-${currency}`);
   }
+
+  async uninstallAllApps() {
+    await this.page.click('button:has-text("Uninstall all")');
+    await this.page.click('#modal-confirm-button');
+    await this.page.waitForSelector('text=No apps installed on your device', { state: "visible"});
+  }
 }

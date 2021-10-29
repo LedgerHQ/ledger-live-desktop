@@ -16,6 +16,7 @@ test.use({ userdata: "skip-onboarding" });
 test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined } });
 
 test("My test", async ({ page }) => {
+  test.setTimeout(6000000);
   const deviceAction = new DeviceAction(page);
 
   await page.pause();

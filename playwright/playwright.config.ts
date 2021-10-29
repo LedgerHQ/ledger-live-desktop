@@ -4,13 +4,13 @@ const config: PlaywrightTestConfig = {
   testDir: "specs/",
   testIgnore: "specs/recorder.spec.ts",
   outputDir: "./artifacts/test-results",
-  timeout: 120000,
+  timeout: 60000,
   globalTimeout: 0,
   globalSetup: require.resolve("./utils/global-setup"),
   globalTeardown: require.resolve("./utils/global-teardown"),
   use: {
     launchOptions: {
-      slowMo: 200,
+      slowMo: 100, // FIXME: slowMo doesn't seem to work
     },
     ignoreHTTPSErrors: true,
     screenshot: process.env.CI ? "on" : "off",
@@ -23,9 +23,7 @@ const config: PlaywrightTestConfig = {
   reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
   workers: process.env.CI ? 3 : 1,
   retries: process.env.CI ? 2 : 0,
-  reporter: process.env.CI
-    ? [["allure-playwright"], ["github"]]
-    : [["allure-playwright"], ["list"]],
+  reporter: process.env.CI ? [["allure-playwright"], ["github"]] : "list",
 };
 
 export default config;
