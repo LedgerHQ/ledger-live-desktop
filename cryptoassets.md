@@ -23,7 +23,6 @@
 | Polkadot | DOT | YES | polkadot |
 | Qtum | QTUM | YES | qtum |
 | Stakenet | XSN | YES | stakenet |
-| Stealth | XST | YES | stealthcoin |
 | Stellar | XLM | YES | stellar |
 | Tezos | XTZ | YES | tezos |
 | Tron | TRX | YES | tron |
@@ -86,6 +85,7 @@
 | Rise | RISE | NO | rise |
 | Solana | SOL | NO | solana |
 | Songbird | SGB | NO | songbird |
+| Stealth | XST | NO | stealthcoin |
 | Stratis | STRAT | NO | stratis |
 | Thundercore | TT | NO | thundercore |
 | TomoChain | TOMO | NO | tomo |
