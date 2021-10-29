@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 import { Button, Text } from "@ledgerhq/react-ui";
 import { ArrowRightRegular, CloseRegular } from "@ledgerhq/icons-ui/react";
@@ -63,10 +64,7 @@ const ProgressBar = styled.div`
 `;
 
 const StepSlider = ({ stepIndex, stepCount }) => {
-  return (
-    // TODO: need to figure out why the fuck I can't use "left: 0, right: 0"
-    <ProgressBar percentage={100 * ((stepIndex + 1) / stepCount)} />
-  );
+  return <ProgressBar percentage={100 * ((stepIndex + 1) / stepCount)} />;
 };
 
 const getLightNeutral80 = (p: any) => p.theme.colors.palette.neutral.c80;
@@ -139,18 +137,18 @@ type Props = {
   onFinish: (...args: any) => any;
 };
 
-const StepLeftPart: React.FC<StepLeftPartProps> = ({
+const StepLeftPart = ({
   Header,
   title,
   description,
   AsideLeft,
-  continueLabel = "Continue", // TODO: default
-  backLabel = "Back", // TODO: default
+  continueLabel = "Continue",
+  backLabel = "Back",
   continueDisabled = false,
   backDisabled = false,
   onClickContinue,
   onClickBack,
-}) => {
+}: StepLeftPartProps) => {
   return (
     <LeftPartContainer justifyContent="space-between">
       <FlexBox flexDirection="column">
@@ -202,10 +200,14 @@ const CloseModalButton = ({ onClick }) => (
 
 const ModalStepper = (props: Props) => {
   const { title, steps, onClose, onFinish } = props;
+  const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
   const stepsProps = { stepIndex, stepCount };
   const step = steps[stepIndex];
+
+  const defaultContinueLabel = t("common.continue");
+  const defaultBackLabel = t("common.back");
 
   const onClickContinue = useCallback(() => {
     if (stepIndex === stepCount - 1) onFinish();
@@ -230,8 +232,8 @@ const ModalStepper = (props: Props) => {
             title={step.title}
             description={step.description}
             AsideLeft={step.AsideLeft}
-            continueLabel={step.continueLabel}
-            backLabel={step.backLabel}
+            continueLabel={step.continueLabel || defaultContinueLabel}
+            backLabel={step.backLabel || defaultBackLabel}
             continueDisabled={step.continueDisabled}
             backDisabled={step.backDisabled}
             {...{ onClickContinue, onClickBack }}
