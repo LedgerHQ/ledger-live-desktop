@@ -22,9 +22,9 @@ import IconWyre from "~/renderer/icons/providers/Wyre";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
 import IconExternalLink from "~/renderer/icons/ExternalLink";
 import FakeLink from "~/renderer/components/FakeLink";
+import { useDynamicUrl } from "~/renderer/terms";
 
 const Footer = styled.div`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
@@ -61,6 +61,7 @@ const KYC = () => {
   const [APIError, setAPIError] = useState<any>(null);
   const [isLoading, setLoading] = useState(false);
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false);
+  const privacyPolicyUrl = useDynamicUrl("privacyPolicy");
 
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
@@ -302,7 +303,7 @@ const KYC = () => {
                 color="palette.primary.main"
                 onClick={e => {
                   e.preventDefault();
-                  openURL(urls.faq);
+                  openURL(privacyPolicyUrl);
                 }}
                 iconFirst
                 style={{ textTransform: "capitalize", display: "inline-flex" }}

@@ -47,6 +47,7 @@ Ledger Live releases are signed. The automatic update mechanism makes use of the
 - [Yarn 1.x](https://classic.yarnpkg.com/) (Classic)
 - [Python](https://www.python.org/) 2.7 or 3.5+
 - A C/C++ toolchain (see [node-gyp documentation](https://github.com/nodejs/node-gyp#on-unix))
+- On Linux: ```sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev```
 
 ## Install
 

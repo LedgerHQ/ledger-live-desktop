@@ -21,6 +21,7 @@ module.exports = {
     __SENTRY_URL__: "readonly",
     __APP_VERSION__: "readonly",
     __GIT_REVISION__: "readonly",
+    __NIGHTLY__: "readonly",
     __static: "readonly",
     $: "readonly",
   },

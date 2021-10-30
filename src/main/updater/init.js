@@ -22,7 +22,7 @@ const sendStatus = (status: UpdateStatus, payload?: *) => {
 const handleDownload = async info => {
   try {
     sendStatus("checking");
-    if (!process.env.NIGHTLY) {
+    if (!__NIGHTLY__) {
       const appUpdater = await createElectronAppUpdater({ feedURL: UPDATE_CHECK_FEED, info });
       await appUpdater.verify();
     }

@@ -62,6 +62,7 @@
     "apply": "Apply",
     "done": "Done",
     "confirm": "Confirm",
+    "reject": "Reject",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
@@ -1065,10 +1066,10 @@
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "Buy now"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "POLKADOT staking",
@@ -1112,6 +1113,7 @@
     "disconnected": "Disconnected",
     "connected": "Connected",
     "connecting": "Connecting...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Paste link",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "details": "Wants to connect to the following Ethereum account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Device",
@@ -1764,6 +1767,15 @@
     "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
+  },
   "distribution": {
     "asset": "Asset",
     "price": "Price",
@@ -1783,16 +1795,16 @@
   },
   "elrond": {
     "account": {
-     "subHeader": {
-       "cardTitle": "Powered by Elrond",
-       "moreInfo": "More info",
-       "drawerTitle": "Elrond integration",
-       "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-       "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-       "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-       "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-       "website": "The Internet Scale Blockchain"
-     }
+      "subHeader": {
+        "cardTitle": "Powered by Elrond",
+        "moreInfo": "More info",
+        "drawerTitle": "Elrond integration",
+        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
+        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
+        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
+        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "website": "The Internet Scale Blockchain"
+      }
     }
   },
   "tron": {
@@ -2582,13 +2594,9 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
-        },
-        "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use some experimental JS currencies implementations"
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -3425,6 +3433,10 @@
       "title": "An account name is required",
       "description": "Please enter an account name"
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AccountNotSupported": {
       "title": "Account not supported.",
       "description": "Please retry or contact Support ({{reason}})"
@@ -3971,7 +3983,8 @@
       "title": "You must select at least one validator"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }

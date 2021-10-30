@@ -20,12 +20,14 @@ import MODAL_TECHNICAL_DATA from "./TechnicalData";
 import MODAL_SHARE_ANALYTICS from "./ShareAnalytics";
 import MODAL_SETTINGS_ACCOUNT from "./SettingsAccount";
 import MODAL_RELEASE_NOTES from "./ReleaseNotes";
+import MODAL_SYSTEM_LANGUAGE_AVAILABLE from "./SystemLanguageAvailable";
 import MODAL_EXCHANGE_CRYPTO_DEVICE from "./ExchangeDeviceConfirm";
 import MODAL_SELL_CRYPTO_DEVICE from "./SellDeviceConfirm";
 import MODAL_SWAP from "./Swap";
 import MODAL_SWAP_RESET_KYC from "./Swap/ResetKYC";
 import MODAL_SWAP_UNAUTHORIZED_RATES from "./Swap/UnauthorizedRates";
 import MODAL_WALLETCONNECT_PASTE_LINK from "./WalletConnectPasteLink";
+import MODAL_WALLETCONNECT_DEEPLINK from "./WalletConnectDeeplink";
 
 import MODAL_FULL_NODE from "./FullNode";
 import MODAL_RECOVERY_SEED_WARNING from "./RecoverySeedWarning";
@@ -75,6 +77,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ADD_ACCOUNTS,
   MODAL_RECEIVE,
   MODAL_WALLETCONNECT_PASTE_LINK,
+  MODAL_WALLETCONNECT_DEEPLINK,
   MODAL_SEND,
   MODAL_SIGN_MESSAGE,
   MODAL_SIGN_TRANSACTION,
@@ -87,6 +90,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SHARE_ANALYTICS,
   MODAL_SETTINGS_ACCOUNT,
   MODAL_RELEASE_NOTES,
+  MODAL_SYSTEM_LANGUAGE_AVAILABLE,
   MODAL_CLAIM_REWARDS,
   MODAL_FREEZE,
   MODAL_UNFREEZE,

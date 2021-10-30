@@ -26,6 +26,7 @@ import IsUnlocked from "~/renderer/components/IsUnlocked";
 import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
+import IsSystemLanguageAvailable from "~/renderer/components/IsSystemLanguageAvailable";
 import LibcoreBusyIndicator from "~/renderer/components/LibcoreBusyIndicator";
 import DeviceBusyIndicator from "~/renderer/components/DeviceBusyIndicator";
 import KeyboardContent from "~/renderer/components/KeyboardContent";
@@ -48,7 +49,6 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
-import pkg from "../../package.json";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -155,6 +155,7 @@ export default function Default() {
                 </Route>
                 <Route>
                   <IsNewVersion />
+                  <IsSystemLanguageAvailable />
                   <SyncNewAccounts priority={2} />
 
                   <Box
@@ -174,7 +175,7 @@ export default function Default() {
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
-                        <Redirect from="/manager/reload" to="manager" />
+                        <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
                           path="/platform"
@@ -207,7 +208,7 @@ export default function Default() {
                     <ToastOverlay />
                   </Box>
 
-                  {pkg.name === "ledger-live-desktop-nightly" ? <NightlyLayer /> : null}
+                  {__NIGHTLY__ ? <NightlyLayer /> : null}
 
                   <LibcoreBusyIndicator />
                   <DeviceBusyIndicator />
