@@ -17,13 +17,14 @@ const step2 = {
 const step3 = {
   title: "Stay offline",
   description:
-    "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app.",
+    'Your Nano works as a "cold storage" wallet. This means that it never exposes your private key online, even when using the app.',
   AsideRight: <div style={{ height: 300, width: 80, backgroundColor: "lightcoral" }} />,
 };
 
 const step4 = {
   title: "Validate transactions",
-  description: "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano.",
+  description:
+    "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano.",
   AsideRight: <div style={{ height: 300, width: 80, backgroundColor: "lightgreen" }} />,
 };
 
@@ -32,6 +33,5 @@ const step5 = {
   description: "We’ll start by setting up your Nano security.",
   AsideRight: <div style={{ height: 300, width: 100, backgroundColor: "lightgreen" }} />,
 };
-
 
 export const stepperSteps = [step, step2, step3, step4, step5];
