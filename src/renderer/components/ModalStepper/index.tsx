@@ -18,8 +18,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const BodyWrapper = styled(FlexBox)`
-  background-color: ${p => p.theme.colors.palette.neutral.c00};
+const BodyWrapper = styled(FlexBox).attrs(() => ({backgroundColor: "palette.neutral.c00"}))`
   height: 80%;
   flex: 0 0 80%;
   flex-direction: column;

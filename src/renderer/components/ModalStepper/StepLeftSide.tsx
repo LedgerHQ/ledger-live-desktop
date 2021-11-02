@@ -17,13 +17,14 @@ const StepTitleText = styled(Text).attrs(() => ({
   ff: "Alpha|Medium",
   fontSize: "28px",
   uppercase: true,
-}))`
-  margin-bottom: 12px;
-`;
+  marginBottom: "12px",
+}))``;
 
-const StepDescriptionText = styled(Text).attrs(() => ({ ff: "Inter", fontSize: "14px" }))`
-  color: ${p => p.theme.colors.palette.neutral.c80};
-`;
+const StepDescriptionText = styled(Text).attrs(() => ({
+  ff: "Inter",
+  fontSize: "14px",
+  color: "palette.neutral.c80",
+}))``;
 
 type StepLeftSideProps = {
   Header: React.ReactNode;
