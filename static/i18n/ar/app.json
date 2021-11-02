@@ -62,6 +62,7 @@
     "apply": "تطبيق",
     "done": "تم",
     "confirm": "تأكيد",
+    "reject": "Reject",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
     "delete": "حذف",
@@ -1065,10 +1066,10 @@
       "description": "قم بشراء الأصول المشفرة من خلال شريكنا وتلقيها مباشرة في حسابك في ليدجر (Ledger)",
       "cta": "اشتري الان"
     },
-    "backupPack": {
-      "title": "حزمة النسخ الاحتياطي",
-      "description": "قم بإدارة أصولك بأمان باستخدام Nano X وNano S بسعر مخفّض",
-      "cta": "شراء حزمة النسخ الاحتياطي"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
@@ -1112,6 +1113,7 @@
     "disconnected": "تم قطع الاتصال",
     "connected": "تم الاتصال",
     "connecting": "جاري الاتصال...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "لصق الرابط",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:"
+        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
-        "warningTokenType": "يُرجى إرسال <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حساب {{currency}}. أي أصول مشفرة أخرى يمكن أن تفقد."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "الجهاز",
@@ -1763,6 +1766,15 @@
   "releaseNotes": {
     "title": "ملاحظات الإصدار",
     "version": "ليدجر لايف (Ledger Live) {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "الأصل",
@@ -3971,7 +3983,8 @@
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
     }
   }
 }

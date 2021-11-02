@@ -155,6 +155,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                 fontSize={4}
                 inline
                 showCode
+                alwaysShowValue
               />
               <Box textAlign="right">
                 <CounterValue
@@ -163,6 +164,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                   currency={currency}
                   value={amount}
                   alwaysShowSign={false}
+                  alwaysShowValue
                 />
               </Box>
             </Box>
@@ -176,6 +178,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                 color={feeTooHigh ? "warning" : "palette.text.shade80"}
                 disableRounding
                 unit={feesUnit}
+                alwaysShowValue
                 val={estimatedFees}
                 fontSize={4}
                 inline
@@ -188,6 +191,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                   currency={feesCurrency}
                   value={estimatedFees}
                   alwaysShowSign={false}
+                  alwaysShowValue
                 />
               </Box>
             </Box>
