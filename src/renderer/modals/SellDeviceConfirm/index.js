@@ -177,6 +177,7 @@ const Root = ({ data, onClose }: Props) => {
             setSellData(initSellResult);
           }
         }}
+        analyticsPropertyFlow="sell"
       />
     );
   }
@@ -205,6 +206,7 @@ const Root = ({ data, onClose }: Props) => {
           });
         }
       }}
+      analyticsPropertyFlow="sell"
     />
   );
 };
