@@ -38,7 +38,7 @@ const NoEthereumAccountModal = ({ currency, ...rest }: Props) => {
 
   const handleAddAccount = useCallback(() => {
     handleClose();
-    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow: "lend" }));
   }, [dispatch, handleClose, currency]);
 
   return (

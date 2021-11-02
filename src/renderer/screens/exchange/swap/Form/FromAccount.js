@@ -83,10 +83,10 @@ const FromAccount = ({
   }, []);
 
   const dispatch = useDispatch();
-  const addAccount = useCallback(() => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency })), [
-    currency,
-    dispatch,
-  ]);
+  const addAccount = useCallback(
+    () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow: "swap" })),
+    [currency, dispatch],
+  );
 
   const hasMaybeValidAccounts = availableAccounts && availableAccounts.length > 0;
 
