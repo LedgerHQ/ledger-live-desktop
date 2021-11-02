@@ -149,6 +149,9 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
             onClick={onUpdateAll}
             fontSize={3}
             event="Manager Update All"
+            eventProperties={{
+              appName: update.map(app => app.name),
+            }}
           >
             <Box horizontal alignItems="center" justifyContent="center">
               <IconLoader size={14} />
