@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Text } from "@ledgerhq/react-ui";
-import { ArrowRightRegular } from "@ledgerhq/react-ui/assets/icons";
+import { Button, Text, Icons } from "@ledgerhq/react-ui";
 
 const IllustrationContainer = styled.div`
   display: flex;
@@ -30,7 +29,7 @@ const DescriptionText = styled(Text).attrs(() => ({
 const ArrowButton = styled(Button).attrs(() => ({
   type: "primary",
   size: "large",
-  Icon: ArrowRightRegular,
+  Icon: Icons.ArrowRightRegular,
   iconButton: true,
 }))`
   margin-top: 27px;
