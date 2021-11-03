@@ -29,9 +29,8 @@ const Gallery = () => {
   const show = useMemo(() => status !== "loaded", [status]);
 
   const onSend = useCallback(() => {
-    // TODO use nft send
-    dispatch(openModal("MODAL_SEND", { account }));
-  }, [account, dispatch]);
+    dispatch(openModal("MODAL_SEND", { isNFTSend: true }));
+  }, [dispatch]);
 
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>

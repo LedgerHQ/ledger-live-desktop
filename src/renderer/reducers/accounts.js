@@ -245,7 +245,7 @@ export const hasLendEnabledAccountsSelector: OutputSelector<
 
 export const getAllNFTs: OutputSelector<State, {}, NFT[]> = createSelector(
   accountsSelector,
-  accounts => accounts.flatMap(account => account.nfts),
+  accounts => accounts.flatMap(account => account.nfts).filter(Boolean),
 );
 
 export const getNFTById: OutputSelector<State, { nftId: string }, NFT> = createSelector(

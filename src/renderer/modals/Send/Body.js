@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,6 +15,7 @@ import type { Account, AccountLike, Operation, Transaction } from "@ledgerhq/liv
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -40,6 +41,8 @@ type OwnProps = {|
     recipient?: string,
     amount?: BigNumber,
     disableBacks?: string[],
+    isNFTSend?: boolean,
+    nftId?: string,
     transaction?: Transaction,
     onConfirmationHandler: Function,
     onFailHandler: Function,
@@ -136,11 +139,13 @@ const Body = ({
   updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account;
+  const isNFTSend = !!params.isNFTSend;
   const [steps] = useState(() => createSteps(params.disableBacks));
 
   // initial values might coming from deeplink
   const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
   const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
+  const maybeNFT = useMemo(() => params.nftId, [params.nftId]);
 
   const onResetMaybeAmount = useCallback(() => {
     setMaybeAmount(null);
@@ -193,6 +198,44 @@ const Body = ({
     [account, setAccount],
   );
 
+  const handleChangeNFT = useCallback(
+    nextNft => {
+      const nextAccount = accounts.find(a => a?.nfts.find(({ id }) => nextNft.id));
+
+      if (account !== nextAccount) {
+        setAccount(nextAccount);
+      }
+      const bridge = getAccountBridge(nextAccount);
+      const standard = nextNft.collection.standard.toLowerCase();
+
+      setTransaction(
+        bridge.updateTransaction(transaction, {
+          tokenIds: [nextNft.tokenId],
+          quantities: standard === "erc1155" ? [BigNumber(1)] : undefined,
+          collection: nextNft.collection.contract,
+          mode: `${standard}.transfer`,
+        }),
+      );
+    },
+    [account, accounts, setAccount, setTransaction, transaction],
+  );
+
+  const handleChangeQuantities = useCallback(
+    nextQuantity => {
+      const bridge = getAccountBridge(account);
+      const cleanQuantity = BigNumber(nextQuantity.replace(/\D/g, "") || 0);
+
+      if (!transaction.quantities[0].eq(cleanQuantity)) {
+        setTransaction(
+          bridge.updateTransaction(transaction, {
+            quantities: [BigNumber(cleanQuantity)],
+          }),
+        );
+      }
+    },
+    [account, setTransaction, transaction],
+  );
+
   const handleRetry = useCallback(() => {
     setTransactionError(null);
     setOptimisticOperation(null);
@@ -232,7 +275,12 @@ const Body = ({
   const error = transactionError || bridgeError;
 
   const stepperProps = {
-    title: stepId === "warning" ? t("common.information") : t("send.title"),
+    title:
+      stepId === "warning"
+        ? t("common.information")
+        : isNFTSend
+        ? t("send.titleNft")
+        : t("send.title"),
     stepId,
     steps,
     errorSteps,
@@ -244,6 +292,7 @@ const Body = ({
     signed,
     currencyName,
     hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
+    isNFTSend,
     error,
     status,
     bridgePending,
@@ -254,6 +303,8 @@ const Body = ({
     closeModal: handleCloseModal,
     onChangeAccount: handleChangeAccount,
     onChangeTransaction: setTransaction,
+    onChangeNFT: handleChangeNFT,
+    onChangeQuantities: handleChangeQuantities,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onOperationBroadcasted: handleOperationBroadcasted,
@@ -262,6 +313,7 @@ const Body = ({
     onResetMaybeAmount,
     maybeRecipient,
     onResetMaybeRecipient,
+    maybeNFT,
     updateTransaction,
     onConfirmationHandler: params.onConfirmationHandler,
     onFailHandler: params.onFailHandler,

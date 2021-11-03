@@ -53,45 +53,47 @@ const Collections = ({ account }: Props) => {
   );
 
   return (
-    <TableContainer id="tokens-list" mb={50}>
-      <TableHeader title={t("NFT.collections.title")}>
-        <Button primary mr={2} onClick={onReceive} icon>
-          <Box horizontal flow={1} alignItems="center">
-            <IconReceive size={14} />
-            <Box>{t("NFT.collections.receiveCTA")}</Box>
+    <Box>
+      <TableContainer id="tokens-list" mb={50}>
+        <TableHeader title={t("NFT.collections.title")}>
+          <Button primary mr={2} onClick={onReceive} icon>
+            <Box horizontal flow={1} alignItems="center">
+              <IconReceive size={14} />
+              <Box>{t("NFT.collections.receiveCTA")}</Box>
+            </Box>
+          </Button>
+          <Button primary onClick={onOpenGallery}>
+            {t("NFT.collections.galleryCTA")}
+          </Button>
+        </TableHeader>
+        {account.nfts.length ? (
+          visibleCollection.map(({ contract, nfts }) => (
+            <Row
+              onClick={() => onOpenCollection(contract)}
+              key={contract}
+              contract={contract}
+              nfts={nfts}
+            />
+          ))
+        ) : (
+          <Box alignItems="center" justifyContent="center" p={4}>
+            <Spinner size={16} />
           </Box>
-        </Button>
-        <Button primary onClick={onOpenGallery}>
-          {t("NFT.collections.galleryCTA")}
-        </Button>
-      </TableHeader>
-      {account.nfts.length ? (
-        visibleCollection.map(({ contract, nfts }) => (
-          <Row
-            onClick={() => onOpenCollection(contract)}
-            key={contract}
-            contract={contract}
-            nfts={nfts}
-          />
-        ))
-      ) : (
-        <Box alignItems="center" justifyContent="center" p={4}>
-          <Spinner size={16} />
-        </Box>
-      )}
-      {collections.length > VISIBLE_COLLECTIONS ? (
-        <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
-          <Box horizontal alignContent="center" justifyContent="center" py={3}>
-            <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
-              {t(collapsed ? "NFT.collections.seeAll" : "NFT.collections.seeLess")}
-            </Text>
-            <IconAngleDown expanded={!collapsed}>
-              <AngleDown size={16} />
-            </IconAngleDown>
-          </Box>
-        </TokenShowMoreIndicator>
-      ) : null}
-    </TableContainer>
+        )}
+        {collections.length > VISIBLE_COLLECTIONS ? (
+          <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
+            <Box horizontal alignContent="center" justifyContent="center" py={3}>
+              <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+                {t(collapsed ? "NFT.collections.seeAll" : "NFT.collections.seeLess")}
+              </Text>
+              <IconAngleDown expanded={!collapsed}>
+                <AngleDown size={16} />
+              </IconAngleDown>
+            </Box>
+          </TokenShowMoreIndicator>
+        ) : null}
+      </TableContainer>
+    </Box>
   );
 };
 
