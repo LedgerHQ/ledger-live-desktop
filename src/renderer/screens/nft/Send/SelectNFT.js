@@ -34,13 +34,15 @@ const SelectNFT = ({ onSelect, maybeNFT }: { onSelect: any => void, maybeNFT?: s
 
   return (
     <Select
+      isSearchable={false}
       onChange={onTokenSelected}
       options={allNfts}
       value={token}
-      rowHeight={59}
+      rowHeight={50}
       getOptionValue={getOptionValue}
       renderOption={Option}
       renderValue={Option}
+      small
     />
   );
 };
