@@ -6819,8 +6819,8 @@
         "welcome": {
           "title": "WELCOME TO LEDGER LIVE",
           "description": "Safely manage your crypto from your computer.",
-          "cta": "Get started",
-          "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
+          "noDevice": "No device?",
+          "buyLink": "Buy a Ledger Nano X",
           "nextButton": "Enter the crypto world",
           "steps": [
             {
