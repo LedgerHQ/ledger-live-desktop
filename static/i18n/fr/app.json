@@ -740,7 +740,7 @@
     "title": "Prêter",
     "tabs": {
       "dashboard": "Tableau de bord",
-      "opened": "Prêts ouverts",
+      "opened": "Prêts en cours",
       "closed": "Prêts clôturés",
       "history": "Historique"
     },
@@ -756,7 +756,7 @@
       "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
       "interestEarned": "Intérêts gagnés",
       "interestEarnedTooltip": "Intérêts gagnés suite au retrait",
-      "openLoans": "Prêts ouverts",
+      "openLoans": "Prêts en cours",
       "closedLoans": "Prêts clôturés",
       "amountRedeemed": "Montant retiré",
       "date": "Date",
@@ -776,7 +776,7 @@
         "cta": "Déposer"
       },
       "opened": {
-        "title": "Vos prêts ouverts apparaîtront ici.",
+        "title": "Vos prêts en cours apparaîtront ici.",
         "description": "Vous n'avez pas encore fait de prêts.",
         "cta": "Déposer"
       },
@@ -789,7 +789,7 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Prêts ouverts",
+        "amountSupplied": "Prêts en cours",
         "amountSuppliedTooltip": "Montant déposé sur le réseau",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
