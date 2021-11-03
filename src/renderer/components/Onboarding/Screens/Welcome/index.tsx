@@ -2,13 +2,11 @@ import React, { useCallback, useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
-import Image from "~/renderer/components/Image";
 import { openURL } from "~/renderer/linking";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
-import Carroussel from "~/renderer/components/Onboarding/Screens/Welcome/Carroussel";
+import Carousel from "~/renderer/components/Onboarding/Screens/Welcome/Carousel";
 import { urls } from "~/config/urls";
-import useTheme from "~/renderer/hooks/useTheme";
-import { Log, Text, Button } from "@ledgerhq/react-ui";
+import { Log, Text, Button, Icons } from "@ledgerhq/react-ui";
 
 import accessCrypto from "./assets/access-crypto.svg";
 import ownPrivateKey from "./assets/own-private-key.svg";
@@ -37,19 +35,28 @@ const LeftContainer: ThemedComponent<any> = styled.div`
   padding: 40px;
 `;
 
-const LedgerTitle = styled.Log`
-  width: 115px;
+const LedgerTitle = styled(Log)`
+  width: 170px;
   margin-bottom: 40px;
+  font-size: 16px;
 `;
 
 const Presentation = styled.div`
-
+  display: flex;
+  flex-direction: column;
 `;
 
 const ProductHighlight = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4px;
 `;
 
+const NoDevice = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
 
 const RightContainer: ThemedComponent<any> = styled.div`
   height: 100%;
@@ -60,7 +67,7 @@ const RightContainer: ThemedComponent<any> = styled.div`
   background-color:  ${p => p.theme.colors.palette.primary.c60};
 `;
 
-const CarrousselTopBar = styled.div`
+const CarouselTopBar = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 40px;
@@ -75,8 +82,6 @@ type Props = {
 export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   const {t} = useTranslation();
 
-  const [carrousselIndex, changeCarrousselIndex] = useState(0);
-
   const handleNext = useCallback(() => {
     sendEvent("NEXT");
   }, [sendEvent]);
@@ -86,9 +91,9 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
   }, []);
 
   const steps = stepLogos.map( (logo, index) => ({
-    logo,
-    titleKey: `v3.onboarding.screens.welcome.steps.${index}.title`,
-    descKey: `v3.onboarding.screens.welcome.steps.${index}.desc`,
+    image: logo,
+    title: t(`v3.onboarding.screens.welcome.steps.${index}.title`),
+    description: t(`v3.onboarding.screens.welcome.steps.${index}.desc`),
     isLast: index === stepLogos.length - 1
   }))
 
@@ -96,23 +101,32 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
     <WelcomeContainer>
       <LeftContainer>
         <Presentation>
-          <LedgerTitle>Ledger-LIVE</LedgerTitle>
-          <Text type="h1">{t("v3.onboarding.screens.welcome.title")}</Text>
-          <Text type="body">{t("v3.onboarding.screens.welcome.description")}</Text>
+          <LedgerTitle rowGap={5}>ledger-live</LedgerTitle>
+          <Text type="h1" ff="Alpha|Medium" pb={"20px"}>{t("v3.onboarding.screens.welcome.title")}</Text>
+          <Text type="body" ff="Inter|Medium" fontSize={14}>{t("v3.onboarding.screens.welcome.description")}</Text>
         </Presentation>
         <ProductHighlight>
-          <Button type="main" onClick={handleNext}>{t("v3.onboarding.screens.welcome.nextButton")}</Button>
-          <Text>{t("v3.onboarding.screens.welcome.cta")} {t("v3.onboarding.screens.welcome.noDevice")}</Text>
+          <Button 
+            iconPosition="right"
+            Icon={Icons.ArrowRightMedium}
+            type="main" 
+            onClick={handleNext}
+            mb={24}
+          >
+            {t("v3.onboarding.screens.welcome.nextButton")}
+          </Button>
+          <NoDevice>
+            <Text>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
+            <Text onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</Text>
+          </NoDevice>
         </ProductHighlight>
       </LeftContainer>
       <RightContainer>
-        <CarrousselTopBar>
+        <CarouselTopBar>
           <LangSwitcher />
-        </CarrousselTopBar>
-        <Carroussel
-          onChange={changeCarrousselIndex}
-          currentIndex={carrousselIndex}
-          steps={steps}
+        </CarouselTopBar>
+        <Carousel
+          queue={steps}
         />
       </RightContainer>
     </WelcomeContainer>

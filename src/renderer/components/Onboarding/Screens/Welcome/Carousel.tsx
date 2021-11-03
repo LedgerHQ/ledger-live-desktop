@@ -1,16 +1,9 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 
-import { Button, Flex, Icons, Logos, Text } from "@ledgerhq/react-ui";
-import { useTranslation } from "react-i18next";
+import { Flex, Icons, Logos, Text } from "@ledgerhq/react-ui";
 import styled from "styled-components";
 import { TransitionGroup } from "react-transition-group";
 import TransitionSlide from "@ledgerhq/react-ui/components/transitions/TransitionSlide";
-
-export interface CarrousselStep {
-    logo: string,
-    titleKey: string,
-    descKey: string,
-}
 
 const Wrapper = styled(Flex)`
   flex-direction: column;
@@ -119,7 +112,7 @@ export type Props = {
   queue: SlideProps[];
 };
 
-const DEFAULT_TIMEOUT = 20000;
+const DEFAULT_TIMEOUT = 7000;
 const Carousel = ({
   timeout = DEFAULT_TIMEOUT,
   queue,
