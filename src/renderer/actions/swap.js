@@ -64,15 +64,31 @@ export const toSelector: OutputSelector<State, void, *> = createSelector(
     }),
 );
 
+// Put disabled accounts and subaccounts at the bottom of the list while preserving the parent/children position.
+function sortAccountsByStatus(accounts) {
+  const [top, bottom, childrenStack] = accounts.reduce(
+    ([enabled, disabled, childrenStack], account) => {
+      if (account.type === "Account") {
+        if (account.disabled) {
+          return [[...enabled, ...childrenStack], [...disabled, account], []];
+        }
+        return [[...enabled, ...childrenStack, account], disabled, []];
+      }
+      if (account.disabled) {
+        return [enabled, disabled, [...childrenStack, account]];
+      }
+      return [[...enabled, account], disabled, childrenStack];
+    },
+    [[], [], []],
+  );
+  return [...top, ...bottom, ...childrenStack];
+}
+
 export const fromSelector: OutputSelector<State, void, *> = createSelector(
   state => state.swap.pairs,
   pairs =>
     memoize((allAccounts: Array<Account>): Array<Account | TokenAccount> =>
-      filterAvailableFromAssets(pairs, allAccounts).sort((accountA, accountB) =>
-        accountA.type === "Account" && accountB.type === "Account"
-          ? accountA.disabled - accountB.disabled
-          : 0,
-      ),
+      sortAccountsByStatus(filterAvailableFromAssets(pairs, allAccounts)),
     ),
 );
 
