@@ -112,7 +112,8 @@ function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loadi
           </Text>
         </InfoSection>
         <Divider />
-        <InfoSection loading={loading}
+        <InfoSection
+          loading={loading}
           title={`${t("market.detailsPage.24hLow")} / ${t("market.detailsPage.24hHigh")}`}
         >
           <Text textAlign="right" color="palette.text.shade100" fontSize={14}>

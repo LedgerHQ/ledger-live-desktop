@@ -25,7 +25,11 @@ type Props = {
   loading: boolean,
 };
 
-export default function CryptocurrencySummary({ currency, counterValue, loading: propsLoading }: Props) {
+export default function CryptocurrencySummary({
+  currency,
+  counterValue,
+  loading: propsLoading,
+}: Props) {
   const discreetMode = useSelector(discreetModeSelector);
 
   const {
