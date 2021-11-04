@@ -11,7 +11,9 @@ const pkg = require("./../package.json");
 
 const NIGHTLY = pkg.name.includes("nightly");
 
-const { SENTRY_URL } = process.env;
+const SENTRY_URL =
+  process.env?.SENTRY_URL ??
+  "https://db8f5b9b021048d4a401f045371701cb@o118392.ingest.sentry.io/274561";
 
 const GIT_REVISION = childProcess
   .execSync("git rev-parse --short HEAD")

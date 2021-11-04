@@ -13,6 +13,11 @@ import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
 import logger from "~/logger";
+import installExtension, {
+  REDUX_DEVTOOLS,
+  REACT_DEVELOPER_TOOLS,
+} from "electron-devtools-installer";
+import sentry from "~/sentry/main";
 
 require("@electron/remote/main").initialize();
 
@@ -20,6 +25,12 @@ app.allowRendererProcessReuse = false;
 
 const gotLock = app.requestSingleInstanceLock();
 const userDataDirectory = resolveUserDataDirectory();
+
+const sentryEnabled = !!process.env.INITIAL_SENTRY_ENABLED || false;
+
+if (process.env.SENTRY_USER_ID) {
+  sentry(() => sentryEnabled, process.env.SENTRY_USER_ID);
+}
 
 if (!gotLock) {
   app.quit();
@@ -71,10 +82,6 @@ app.on("will-finish-launching", () => {
 });
 
 app.on("ready", async () => {
-  if (__DEV__) {
-    await installExtensions();
-  }
-
   db.init(userDataDirectory);
   app.dirname = __dirname;
   ipcMain.handle("getKey", (event, { ns, keyPath, defaultValue }) => {
@@ -153,6 +160,12 @@ app.on("ready", async () => {
   await clearSessionCache(window.webContents.session);
 });
 
+app.whenReady().then(async () => {
+  if (__DEV__) {
+    await installExtensions();
+  }
+});
+
 ipcMain.on("ready-to-show", () => {
   const w = getMainWindow();
   if (w) {
@@ -173,12 +186,8 @@ ipcMain.on("ready-to-show", () => {
 });
 
 async function installExtensions() {
-  const installer = require("electron-devtools-installer");
-  const forceDownload = true; // process.env.UPGRADE_EXTENSIONS
-  const extensions = ["REACT_DEVELOPER_TOOLS", "REDUX_DEVTOOLS"];
-  return Promise.all(
-    extensions.map(name => installer.default(installer[name], forceDownload)),
-  ).catch(console.log);
+  const extensions = [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS];
+  await installExtension(extensions);
 }
 
 function clearSessionCache(session) {
