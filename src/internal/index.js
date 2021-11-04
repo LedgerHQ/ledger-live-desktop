@@ -10,8 +10,7 @@ import logger from "~/logger";
 import LoggerTransport from "~/logger/logger-transport-internal";
 
 import { executeCommand, unsubscribeCommand, unsubscribeAllCommands } from "./commandHandler";
-import sentry from "~/sentry/node";
-// import uuid from 'uuid/v4'
+import sentry from "~/sentry/internal";
 
 process.on("exit", () => {
   logger.debug("exiting process, unsubscribing all...");
