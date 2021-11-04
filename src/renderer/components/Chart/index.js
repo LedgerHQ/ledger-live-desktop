@@ -55,6 +55,7 @@ export type Props = {
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
   valueKey?: string,
+  loading?: boolean,
 };
 
 const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
@@ -74,6 +75,7 @@ export default function Chart({
   renderTickY,
   renderTooltip,
   valueKey = "value",
+  loading,
 }: Props) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
@@ -86,10 +88,10 @@ export default function Chart({
       datasets: [
         {
           label: "all accounts",
-          borderColor: color,
+          borderColor: loading ? theme.text.shade10 : color,
           backgroundColor: ({ chart }) => {
             const gradient = chart.ctx.createLinearGradient(0, 0, 0, chart.height / 1.2);
-            gradient.addColorStop(0, Color(color).alpha(0.4));
+            gradient.addColorStop(0, Color(color).alpha(loading ? 0.1 : 0.4));
             gradient.addColorStop(1, Color(color).alpha(0.0));
             return gradient;
           },
@@ -129,7 +131,7 @@ export default function Chart({
         enabled: false,
         intersect: false,
         mode: "index",
-        custom: tooltip => setTooltip(tooltip),
+        custom: tooltip => !loading && setTooltip(tooltip),
       },
       legend: {
         display: false,
@@ -140,10 +142,10 @@ export default function Chart({
             type: "time",
             gridLines: {
               display: false,
-              color: theme.text.shade10,
+              color: loading ? theme.background.paper : theme.text.shade10,
             },
             ticks: {
-              fontColor: theme.text.shade60,
+              fontColor: loading ? theme.background.paper : theme.text.shade60,
               fontFamily: "Inter",
               maxTicksLimit: 7,
               maxRotation: 0.1, // trick to make the graph fit the whole canvas regardless of data
@@ -162,17 +164,17 @@ export default function Chart({
         yAxes: [
           {
             gridLines: {
-              color: theme.text.shade10,
+              color: loading ? theme.background.paper : theme.text.shade10,
               borderDash: [5, 5],
               drawTicks: false,
               drawBorder: false,
-              zeroLineColor: theme.text.shade10,
+              zeroLineColor: loading ? theme.background.paper : theme.text.shade10,
             },
             ticks: {
               beginAtZero: true,
               suggestedMax: 1 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
-              fontColor: theme.text.shade60,
+              fontColor: loading ? theme.background.paper : theme.text.shade60,
               fontFamily: "Inter",
               padding: 10,
               callback: value => renderTickY(value),

@@ -228,7 +228,9 @@
         "supply": "Supply",
         "circulatingSupply": "Circulating supply",
         "totalSupply": "Total supply",
-        "maxSupply": "Max supply"
+        "maxSupply": "Max supply",
+        "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+        "supportedCoinsAndTokens": "Supported coins & Tokens"
     },
     "range": {
       "1H_label": "1H",

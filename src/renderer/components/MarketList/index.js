@@ -112,7 +112,6 @@ function MarketList() {
       index={index + 1}
       counterCurrency={counterCurrency}
       style={{ ...style, pointerEvents: "auto" }}
-      rangeData={rangeData}
       key={index}
     />
   );
@@ -120,7 +119,7 @@ function MarketList() {
   const currenciesLength = currencies.length;
 
   return (
-    <Box flow={2}>
+    <Box id="market-list" flow={2}>
       <Row expanded={true}>
         <RowContent>
           <ColumnTitleBox
@@ -216,16 +215,6 @@ function MarketList() {
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}
-      <Box justifyContent="center" horizontal>
-        <Paginator
-          currentPage={page}
-          loading={loading}
-          totalSize={coinsCount}
-          limit={limit}
-          small
-          onChange={page => dispatch(getMarketCryptoCurrencies({ page }))}
-        />
-      </Box>
     </Box>
   );
 }

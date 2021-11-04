@@ -5,6 +5,7 @@ import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 import Box, { Tabbable } from "~/renderer/components/Box";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 export type Item = {
   label: string,
@@ -17,6 +18,7 @@ type Props = {
   activeKey: string,
   onChange: Item => void,
   bordered?: boolean,
+  loading?: boolean,
 };
 
 const Container: ThemedComponent<{
@@ -54,11 +56,16 @@ const Pill = styled(Tabbable).attrs(p => ({
 `;
 
 function Pills(props: Props) {
-  const { items, activeKey, onChange, bordered, ...p } = props;
+  const { items, activeKey, onChange, bordered, loading, ...p } = props;
   return (
     <Container {...p} flow={1}>
       {items.map(item => {
         const isActive = item.key === activeKey;
+
+        if (loading) {
+          return <LoadingPlaceholder style={{ height: "18px", width: "28px" }} />;
+        }
+
         return (
           <Pill
             isActive={isActive}

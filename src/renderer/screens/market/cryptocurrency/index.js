@@ -1,11 +1,11 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
 import { connect, useSelector } from "react-redux";
 import styled from "styled-components";
-import { withTranslation } from "react-i18next";
+import { Trans, withTranslation } from "react-i18next";
 
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeader";
@@ -15,9 +15,11 @@ import CryptocurrencyStats from "~/renderer/screens/market/cryptocurrency/Crypto
 import { useMarketCurrency } from "~/renderer/hooks/market/useMarketCurrency";
 import { rgba } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
-import Shield from "~/renderer/icons/Shield";
 import useTheme from "~/renderer/hooks/useTheme";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import InfoCircle from "~/renderer/icons/InfoCircle";
+import ExternalLink from "~/renderer/components/ExternalLink";
+import { openURL } from "~/renderer/linking";
 
 const Divider: ThemedComponent<{}> = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -40,24 +42,23 @@ const CryptoCurrencyPage = () => {
 
   currency.isStarred = Boolean(favorites.find(item => item.id === id));
 
-  if (loading) {
-    return null;
-  }
-
   return (
     <Box>
       <Box horizontal py={20} flow={4} style={{ justifyContent: "space-between" }}>
-        <CryptoCurrencyHeader currency={currency} />
-        <CryptocurrencyHeaderActions currency={currency} />
+        <CryptoCurrencyHeader loading={loading} currency={currency} />
+        <CryptocurrencyHeaderActions loading={loading} currency={currency} />
       </Box>
       <Divider />
-      {!currency.supportedCurrency && <NotLiveCompatible mt={3} />}
+      {!loading && !currency.supportedCurrency && <NotLiveCompatible mt={3} />}
       <Box mt={3} mb={7}>
-        {!loading && (
-          <CryptocurrencySummary currency={currency} range={range} counterValue={counterValue} />
-        )}
+        <CryptocurrencySummary
+          loading={loading}
+          currency={currency}
+          range={range}
+          counterValue={counterValue}
+        />
       </Box>
-      <CryptocurrencyStats currency={currency} />
+      <CryptocurrencyStats loading={loading} currency={currency} />
     </Box>
   );
 };
@@ -67,7 +68,7 @@ const ConnectedCryptoCurrencyPage: React$ComponentType<{}> = compose(
   withTranslation(),
 )(CryptoCurrencyPage);
 
-const NotLiveCompatibleWrapper = styled(Box)`
+const NotLiveCompatibleWrapper: ThemedComponent<{}> = styled(Box)`
   background: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
   color: ${p => p.theme.colors.palette.primary.main};
   font-size: 13px;
@@ -78,10 +79,21 @@ const NotLiveCompatibleWrapper = styled(Box)`
 
 const NotLiveCompatible = props => {
   const color = useTheme("colors.palette.primary.main");
+  const handleSupported = useCallback(
+    () => openURL("https://www.ledger.com/supported-crypto-assets"),
+    [],
+  );
   return (
     <NotLiveCompatibleWrapper horizontal alignItems="center" {...props}>
-      <Shield color={color} size={16} />
-      <Text ml={2}>This asset is not supported on Ledger Live.</Text>
+      <InfoCircle color={color} size={16} />
+      <Text ml={2} mr={1}>
+        <Trans i18nKey="market.detailsPage.assetNotSupportedOnLedgerLive" />
+      </Text>
+      <ExternalLink
+        onClick={handleSupported}
+        isInternal={false}
+        label={<Trans i18nKey="market.detailsPage.supportedCoinsAndTokens" />}
+      />
     </NotLiveCompatibleWrapper>
   );
 };

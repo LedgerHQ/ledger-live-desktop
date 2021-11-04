@@ -14,14 +14,18 @@ import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import BigNumber from "bignumber.js";
+import moment from "moment";
+import { rgba } from "~/renderer/styles/helpers";
 
 type Props = {
   currency: MarketCurrencyInfo,
   range: string,
   counterValue: any,
+  loading: boolean,
 };
 
-export default function CryptocurrencySummary({ currency, counterValue }: Props) {
+export default function CryptocurrencySummary({ currency, counterValue, loading: propsLoading }: Props) {
   const discreetMode = useSelector(discreetModeSelector);
 
   const {
@@ -42,19 +46,47 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
     chartColor = getCurrencyColor(currency.supportedCurrency, bgColor);
   }
 
-  const { loading, chartData } = useMarketCurrencyChart({ id: id || "", counterCurrency, range });
+  const chartMockColor = useTheme("colors.palette.text.shade5");
+
+  const { loading: chartLoading, chartData } = useMarketCurrencyChart({
+    id: id || "",
+    counterCurrency,
+    range,
+  });
+
+  const loading: boolean = propsLoading || chartLoading;
 
   const renderTooltip = useCallback(
-    (data: BalanceHistoryData) => (
-      <Tooltip data={data} counterCurrency={counterCurrency} range={rangeData.scale} />
-    ),
-    [counterCurrency, rangeData.scale],
+    (data: BalanceHistoryData) =>
+      !loading && (
+        <Tooltip
+          data={data}
+          counterCurrency={counterCurrency.toUpperCase()}
+          range={rangeData.scale}
+        />
+      ),
+    [counterCurrency, loading, rangeData.scale],
   );
 
-  if (loading) {
-    return null;
+  const chartMockData = [];
+
+  for (let i = 1; i < 10; i++) {
+    let value;
+    if (i < 4) {
+      value = BigNumber(i * 10);
+    } else if (i < 7) {
+      value = BigNumber(i * 7);
+    } else {
+      value = BigNumber(i * 4);
+    }
+    chartMockData.push({
+      date: moment()
+        .add(i, `${rangeData.scale}s`)
+        .toDate(),
+      value: value,
+    });
   }
-  console.log("chartData: ", chartData);
+
   currency.difference =
     chartData.length > 1
       ? parseFloat(
@@ -67,7 +99,11 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
   return (
     <Card p={0} py={5}>
       <Box px={6} data-e2e="dashboard_graph">
-        <CryptocurrencySummaryHeader currency={currency} counterValue={counterValue} />
+        <CryptocurrencySummaryHeader
+          loading={loading}
+          currency={currency}
+          counterValue={counterValue}
+        />
       </Box>
       <Box
         px={5}
@@ -77,15 +113,31 @@ export default function CryptocurrencySummary({ currency, counterValue }: Props)
         pt={5}
         style={{ overflow: "visible" }}
       >
-        <Chart
-          magnitude={currency.magnitude}
-          color={chartColor}
-          data={chartData}
-          height={250}
-          tickXScale={rangeData.scale}
-          renderTickY={discreetMode ? () => "" : renderTickY}
-          renderTooltip={renderTooltip}
-        />
+        {!loading ? (
+          <Chart
+            magnitude={currency.magnitude}
+            color={chartColor}
+            data={chartData}
+            height={250}
+            loading={false}
+            tickXScale={rangeData.scale}
+            renderTickY={discreetMode ? () => "" : renderTickY}
+            renderTooltip={renderTooltip}
+            key={1}
+          />
+        ) : (
+          <Chart
+            magnitude={1}
+            color={chartMockColor}
+            data={chartMockData}
+            height={250}
+            loading={true}
+            tickXScale={rangeData.scale}
+            renderTickY={discreetMode ? () => "" : renderTickY}
+            renderTooltip={renderTooltip}
+            key={2}
+          />
+        )}
       </Box>
     </Card>
   );

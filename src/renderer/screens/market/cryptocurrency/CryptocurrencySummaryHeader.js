@@ -13,12 +13,14 @@ import { rangesArr } from "~/renderer/components/MarketList/MarketRangeSelect";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 import { useTranslation } from "react-i18next";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 type Props = {
   currency: MarketCurrencyInfo,
+  loading: boolean,
 };
 
-function CryptocurrencySummaryHeader({ currency }: Props) {
+function CryptocurrencySummaryHeader({ currency, loading }: Props) {
   const { counterCurrency, range } = useSelector(state => state.market);
   const { t } = useTranslation();
 
@@ -36,14 +38,18 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
   const ranges = rangesArr.map(range => ({
     ...range,
     label: t(`market.range.${range.label}_label`),
-  }))
+  }));
 
   return (
     <Box>
       <Box pb={5} horizontal alignItems="center">
         <Box mt={4}>
           <Text ff="Inter|Medium" fontSize={16} color="palette.text.shade70">
-            1 {currency.name.toUpperCase()}
+            {loading ? (
+              <LoadingPlaceholder style={{ height: "8px", width: "57px" }} />
+            ) : (
+              `1 ${currency.name && currency.name.toUpperCase()}`
+            )}
           </Text>
           <Text ff="Inter|Medium" fontSize={28} color="palette.text.shade100">
             <CounterValueFormatter currency={counterCurrency} value={currency.current_price} />
@@ -52,17 +58,28 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
       </Box>
       <Box horizontal justifyContent="space-between">
         <Box horizontal>
-          <FormattedVal
-            isPercent
-            animateTicker
-            isNegative
-            val={parseFloat(currency.price_change_percentage_in_currency.toFixed(2))}
-            inline
-            withIcon
-          />
-          <Text ff="Inter|Medium" fontSize={16} pl={2}>
-            ({<CounterValueFormatter currency={counterCurrency} value={difference} />})
-          </Text>
+          {loading && !currency.price_change_percentage_in_currency ? (
+            <LoadingPlaceholder style={{ height: "24px", width: "288px" }} />
+          ) : (
+            <FormattedVal
+              isPercent
+              animateTicker
+              isNegative
+              val={
+                currency.price_change_percentage_in_currency &&
+                parseFloat(currency.price_change_percentage_in_currency.toFixed(2))
+              }
+              inline
+              withIcon
+            />
+          )}
+          {loading ? (
+            <LoadingPlaceholder style={{ height: "8px", width: "57px" }} />
+          ) : (
+            <Text ff="Inter|Medium" fontSize={16} pl={2}>
+              ({<CounterValueFormatter currency={counterCurrency} value={difference} />})
+            </Text>
+          )}
         </Box>
         <Box>
           <Track
@@ -70,7 +87,13 @@ function CryptocurrencySummaryHeader({ currency }: Props) {
             event="PillsDaysChange"
             selected={rangesArr.find(item => item.key === range)}
           />
-          <Pills items={ranges} activeKey={range} onChange={onRangeSelected} bordered />
+          <Pills
+            loading={loading}
+            items={ranges}
+            activeKey={range}
+            onChange={onRangeSelected}
+            bordered
+          />
         </Box>
       </Box>
     </Box>

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import styled from "styled-components";
 import debounce from "lodash/debounce";
 
@@ -11,16 +11,27 @@ import MarketList from "~/renderer/components/MarketList";
 import { setMarketParams, getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { MarketState } from "~/renderer/reducers/market";
+import Paginator from "~/renderer/components/Paginator";
 
 type Props = {
-  getMarketCryptoCurrencies: any,
+  getMarketCryptoCurrencies: (
+    state: $Shape<MarketState>,
+  ) => { payload: $Shape<MarketState>, type: string },
   setMarketParams: (state: $Shape<MarketState>) => { payload: $Shape<MarketState>, type: string },
   searchValue: string,
+  limit: number,
+  coinsCount: number,
+  page: number,
+  loading: boolean,
 };
 
-class MarketPage extends Component<Props> {
-  props: Props;
+const ShadowContainer = styled(Box)`
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 3%);
+  border-radius: 4px;
+  overflow: hidden;
+`;
 
+class MarketPage extends Component<Props> {
   constructor(props: Props) {
     super(props);
     this.debouncedSearch = debounce(this.debouncedSearch, 1000);
@@ -42,19 +53,31 @@ class MarketPage extends Component<Props> {
   };
 
   render() {
-    const { searchValue } = this.props;
+    const { searchValue, limit, coinsCount, page, loading, getMarketCryptoCurrencies } = this.props;
     return (
       <Box>
         <MarketHeader />
-        <SearchContainer horizontal p={0} alignItems="center">
-          <SearchBox
-            id={"market-search-input"}
-            autoFocus
-            onTextChange={e => this.onTextChange(e.target.value)}
-            search={searchValue}
+        <ShadowContainer>
+          <SearchContainer horizontal p={0} alignItems="center">
+            <SearchBox
+              id={"market-search-input"}
+              autoFocus
+              onTextChange={e => this.onTextChange(e.target.value)}
+              search={searchValue}
+            />
+          </SearchContainer>
+          <MarketList />
+        </ShadowContainer>
+        <Box mt={2} justifyContent="center" horizontal>
+          <Paginator
+            currentPage={page}
+            loading={loading}
+            totalSize={coinsCount}
+            limit={limit}
+            small
+            onChange={page => getMarketCryptoCurrencies({ page })}
           />
-        </SearchContainer>
-        <MarketList />
+        </Box>
       </Box>
     );
   }

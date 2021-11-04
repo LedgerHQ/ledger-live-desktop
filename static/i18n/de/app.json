@@ -227,7 +227,9 @@
       "marketCapRank": "Market cap rank",
       "supply": "Supply",
       "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
+      "totalSupply": "Total supply",,,
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens",
       "maxSupply": "Max supply"
     },
     "range": {

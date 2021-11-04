@@ -11,16 +11,18 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import styled from "styled-components";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 type Props = {
   currency: MarketCurrencyInfo,
+  loading: boolean,
 };
 
 const FavoriteBtn = styled(Button)`
   padding: 10px;
 `;
 
-function CryptocurrencyHeaderActions({ currency }: Props) {
+function CryptocurrencyHeaderActions({ currency, loading }: Props) {
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -47,26 +49,28 @@ function CryptocurrencyHeaderActions({ currency }: Props) {
 
   return (
     <Box horizontal alignItems="center">
-      <Box mr={12}>
-        <MarketCounterValueSelect />
-      </Box>
-      {currency.supportedCurrency && device && (
-        <>
-          <Box mr={12}>
-            <Button primary onClick={onBuy}>
-              Buy
-            </Button>
-          </Box>
-          <Box mr={12}>
-            <Button primary onClick={onSwap}>
-              Swap
-            </Button>
-          </Box>
-        </>
+      <Box mr={12}>{loading ? <LoadingPlaceholder /> : <MarketCounterValueSelect />}</Box>
+      {currency.supportedCurrency &&
+        device &&
+        !loading(
+          <>
+            <Box mr={12}>
+              <Button primary onClick={onBuy}>
+                Buy
+              </Button>
+            </Box>
+            <Box mr={12}>
+              <Button primary onClick={onSwap}>
+                Swap
+              </Button>
+            </Box>
+          </>,
+        )}
+      {!loading && (
+        <FavoriteBtn outlineGrey>
+          <CryptocurrencyStar currency={currency} />
+        </FavoriteBtn>
       )}
-      <FavoriteBtn outlineGrey>
-        <CryptocurrencyStar currency={currency} />
-      </FavoriteBtn>
     </Box>
   );
 }

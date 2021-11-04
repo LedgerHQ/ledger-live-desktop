@@ -6,6 +6,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 
 const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   height: 56px;
@@ -17,27 +18,48 @@ const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   }
 `;
 
-type CryptocurrencyHeaderType = { currency: MarketCurrencyInfo };
+type CryptocurrencyHeaderType = { currency: MarketCurrencyInfo, loading: boolean };
 
 const Title: ThemedComponent<{}> = styled(Text)`
   color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 28px;
   text-transform: uppercase;
   font-weight: 500;
+  padding-right: 8px;
 `;
 
-function CryptocurrencyHeader({ currency }: CryptocurrencyHeaderType) {
+const Symbol: ThemedComponent<{}> = styled(Text)`
+  color: ${p => p.theme.colors.palette.text.shade30};
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 500;
+`;
+
+function CryptocurrencyHeader({ currency, loading }: CryptocurrencyHeaderType) {
   return (
     <Box py={2}>
-      <Box horizontal>
+      <Box horizontal alignItems="center">
         <Box horizontal pr={3}>
           <CryptoCurrencyIconWrapper>
-            <img src={currency.image} alt={"Currency logo"} />
+            {loading ? <LoadingPlaceholder /> : <img src={currency.image} alt={"Currency logo"} />}
           </CryptoCurrencyIconWrapper>
         </Box>
         <Box px={16}>
           <Box horizontal alignItems="center">
-            <Title>{currency.name}</Title>
+            <Title>
+              {loading ? (
+                <LoadingPlaceholder style={{ height: "34px", width: "115px" }} />
+              ) : (
+                currency.name
+              )}
+            </Title>
+            <Symbol>
+              {loading ? (
+                <LoadingPlaceholder style={{ height: "30px", width: "115px" }} />
+              ) : (
+                currency.symbol
+              )}
+            </Symbol>
           </Box>
         </Box>
       </Box>
