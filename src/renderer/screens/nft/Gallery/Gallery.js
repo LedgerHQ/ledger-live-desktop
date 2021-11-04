@@ -29,8 +29,8 @@ const Gallery = () => {
   const show = useMemo(() => status !== "loaded", [status]);
 
   const onSend = useCallback(() => {
-    dispatch(openModal("MODAL_SEND", { isNFTSend: true }));
-  }, [dispatch]);
+    dispatch(openModal("MODAL_SEND", { isNFTSend: true, nftCollection: collectionId }));
+  }, [collectionId, dispatch]);
 
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>

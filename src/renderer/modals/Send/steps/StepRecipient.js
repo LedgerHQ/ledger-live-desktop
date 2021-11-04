@@ -32,10 +32,11 @@ const StepRecipient = ({
   bridgePending,
   maybeRecipient,
   onResetMaybeRecipient,
-  maybeNFT,
+  maybeNFTId,
   currencyName,
   isNFTSend,
   onChangeNFT,
+  maybeNFTCollection,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -48,7 +49,11 @@ const StepRecipient = ({
       {isNFTSend ? (
         <Box flow={1}>
           <Label>{t("send.steps.recipient.nftRecipient")}</Label>
-          <SelectNFT onSelect={onChangeNFT} maybeNFT={maybeNFT} />
+          <SelectNFT
+            onSelect={onChangeNFT}
+            maybeNFTId={maybeNFTId}
+            maybeNFTCollection={maybeNFTCollection}
+          />
         </Box>
       ) : (
         <Box flow={1}>

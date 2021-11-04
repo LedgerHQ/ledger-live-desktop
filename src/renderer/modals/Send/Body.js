@@ -43,6 +43,7 @@ type OwnProps = {|
     disableBacks?: string[],
     isNFTSend?: boolean,
     nftId?: string,
+    nftCollection?: string,
     transaction?: Transaction,
     onConfirmationHandler: Function,
     onFailHandler: Function,
@@ -145,7 +146,8 @@ const Body = ({
   // initial values might coming from deeplink
   const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
   const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
-  const maybeNFT = useMemo(() => params.nftId, [params.nftId]);
+  const maybeNFTId = useMemo(() => params.nftId, [params.nftId]);
+  const maybeNFTCollection = useMemo(() => params.nftCollection, [params.nftCollection]);
 
   const onResetMaybeAmount = useCallback(() => {
     setMaybeAmount(null);
@@ -292,7 +294,6 @@ const Body = ({
     signed,
     currencyName,
     hideBreadcrumb: (!!error && ["recipient", "amount"].includes(stepId)) || stepId === "warning",
-    isNFTSend,
     error,
     status,
     bridgePending,
@@ -303,8 +304,6 @@ const Body = ({
     closeModal: handleCloseModal,
     onChangeAccount: handleChangeAccount,
     onChangeTransaction: setTransaction,
-    onChangeNFT: handleChangeNFT,
-    onChangeQuantities: handleChangeQuantities,
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onOperationBroadcasted: handleOperationBroadcasted,
@@ -313,10 +312,14 @@ const Body = ({
     onResetMaybeAmount,
     maybeRecipient,
     onResetMaybeRecipient,
-    maybeNFT,
     updateTransaction,
     onConfirmationHandler: params.onConfirmationHandler,
     onFailHandler: params.onFailHandler,
+    isNFTSend,
+    maybeNFTId,
+    maybeNFTCollection,
+    onChangeQuantities: handleChangeQuantities,
+    onChangeNFT: handleChangeNFT,
   };
 
   if (!status) return null;
