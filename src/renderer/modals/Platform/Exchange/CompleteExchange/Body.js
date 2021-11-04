@@ -73,7 +73,7 @@ const Body = ({
   return (
     <ModalBody
       onClose={() => {
-        onCancel("Interrupted by user");
+        onCancel(new Error("Interrupted by user"));
         onClose();
       }}
       render={() => {
