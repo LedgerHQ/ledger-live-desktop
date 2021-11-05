@@ -3985,6 +3985,9 @@
     "ServiceStatusWarning": {
       "title": "{{message}}",
       "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }
