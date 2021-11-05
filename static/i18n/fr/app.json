@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin (Taproot) et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -3987,7 +3987,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
     }
   }
 }
