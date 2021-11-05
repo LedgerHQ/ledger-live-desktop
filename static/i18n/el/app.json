@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Translation testing",
