@@ -16,7 +16,12 @@ const Connect = ({ setResult }: { setResult: () => void }) => {
   return (
     <Card flex={1} p={89} alignItems="center">
       <TrackPage category="Sell" name="ConnectDeviceListApps" />
-      <DeviceAction onResult={setResult} action={action} request={null} />
+      <DeviceAction
+        onResult={setResult}
+        action={action}
+        request={null}
+        analyticsPropertyFlow="sell"
+      />
     </Card>
   );
 };

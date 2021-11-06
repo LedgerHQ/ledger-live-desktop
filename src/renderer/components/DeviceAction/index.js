@@ -15,6 +15,7 @@ import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
 import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
 import {
+  InstallingApp,
   renderAllowManager,
   renderAllowOpeningApp,
   renderBootloaderStep,
@@ -24,7 +25,6 @@ import {
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
-  renderInstallingApp,
   renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmationV2,
@@ -43,6 +43,7 @@ type Props<R, H, P> = OwnProps<R, H, P> & {
   reduxDevice?: Device,
   preferredDeviceModel: DeviceModelId,
   dispatch: (*) => void,
+  analyticsPropertyFlow?: string, // if there are some events to be sent, there will be a property "flow" with this value (e.g: "send"/"receive"/"add account" etc.)
 };
 
 class OnResult extends Component<*> {
@@ -75,6 +76,7 @@ const DeviceAction = <R, H, P>({
   overridesPreferredDeviceModel,
   preferredDeviceModel,
   dispatch,
+  analyticsPropertyFlow,
 }: Props<R, H, P>) => {
   const hookState = action.useHook(reduxDevice, request);
   const {
@@ -135,7 +137,8 @@ const DeviceAction = <R, H, P>({
 
   if (installingApp) {
     const appName = requestOpenApp;
-    return renderInstallingApp({ appName, progress });
+    const props = { appName, progress, request, analyticsPropertyFlow };
+    return <InstallingApp {...props} />;
   }
 
   if (requiresAppInstallation) {

@@ -1066,10 +1066,10 @@
       "description": "قم بشراء الأصول المشفرة من خلال شريكنا وتلقيها مباشرة في حسابك في ليدجر (Ledger)",
       "cta": "اشتري الان"
     },
-    "backupPack": {
-      "title": "حزمة النسخ الاحتياطي",
-      "description": "قم بإدارة أصولك بأمان باستخدام Nano X وNano S بسعر مخفّض",
-      "cta": "شراء حزمة النسخ الاحتياطي"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3985,6 +3985,9 @@
     "ServiceStatusWarning": {
       "title": "{{message}}",
       "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }

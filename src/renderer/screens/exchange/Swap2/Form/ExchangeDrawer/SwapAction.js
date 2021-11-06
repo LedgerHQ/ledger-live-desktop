@@ -128,6 +128,7 @@ export default function SwapAction({
           setInitData(initSwapResult);
         }
       }}
+      analyticsPropertyFlow="swap"
     />
   ) : !signedOperation ? (
     <DeviceAction
@@ -149,6 +150,7 @@ export default function SwapAction({
           setSignedOperation(signedOperation);
         }
       }}
+      analyticsPropertyFlow="swap"
     />
   ) : (
     <TransactionResult signedOperation={signedOperation} />
