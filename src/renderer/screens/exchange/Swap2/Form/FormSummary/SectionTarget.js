@@ -71,7 +71,8 @@ const SectionTarget = ({
   const dispatch = useDispatch();
   const { setDrawer } = React.useContext(context);
 
-  const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+  const handleAddAccount = () =>
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow: "swap" }));
   const hideEdit = !targetAccounts || targetAccounts.length < 2;
 
   // Using a ref to keep the drawer state synced.

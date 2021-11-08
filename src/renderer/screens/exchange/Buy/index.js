@@ -59,6 +59,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
           account,
           parentAccount,
           onResult: confirmAccount,
+          flow: "buy",
         }),
       );
     },
@@ -88,6 +89,7 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
           defaultAccount={defaultAccount}
           confirmCb={confirmButtonTracking}
           provider={provider}
+          flow="buy"
         />
       )}
     </BuyContainer>

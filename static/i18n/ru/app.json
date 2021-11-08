@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Используйте несколько экспериментальных JS-реализаций для валют"
+          "description": "Использовать экспериментальные JS-реализации для Биткойна (Taproot) и Tezos"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3985,6 +3985,9 @@
     "ServiceStatusWarning": {
       "title": "{{message}}",
       "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
     }
   }
 }

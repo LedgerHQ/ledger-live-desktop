@@ -68,6 +68,7 @@ type Props = {
     id: string,
     iconResource: string,
   },
+  flow?: string,
 };
 
 const AccountSelectorLabel = styled(Label)`
@@ -84,6 +85,7 @@ const SelectAccountAndCurrency = ({
   allowedCurrencies,
   confirmCb,
   provider,
+  flow,
 }: Props) => {
   const { t } = useTranslation();
 
@@ -104,7 +106,7 @@ const SelectAccountAndCurrency = ({
   const dispatch = useDispatch();
 
   const openAddAccounts = useCallback(() => {
-    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow }));
   }, [dispatch, currency]);
 
   const addOrSelectAccount = () => {
