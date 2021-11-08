@@ -1,6 +1,8 @@
 import React, { useCallback, useRef, useState } from "react";
-import { Flex, Header, Button, Icons, Tooltip, Text } from "@ledgerhq/react-ui";
+
+import { Flex, Header, Button, Icons, Tooltip } from "@ledgerhq/react-ui";
 import styled from "styled-components";
+
 import { useDispatch, useSelector } from "react-redux";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
@@ -12,11 +14,12 @@ import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { hasAccountsSelector } from "~/renderer/reducers/accounts";
 import { setDiscreetMode } from "~/renderer/actions/settings";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-
-import HelpSideBar from "~/renderer/modals/Help";
-import { InformationDrawer } from "./NotificationIndicator/InformationDrawer";
 import { informationCenterStateSelector } from "~/renderer/reducers/UI";
 import { openInformationCenter, closeInformationCenter } from "~/renderer/actions/UI";
+
+import HelpSideBar from "~/renderer/modals/Help";
+import Breadcrumb from "./Breadcrumb";
+import { InformationDrawer } from "./NotificationIndicator/InformationDrawer";
 import ActivityIndicator from "./ActivityIndicator";
 
 const VerticalDivider = styled.span`
@@ -98,6 +101,6 @@ const TopBarMenu: React.FC = () => {
   );
 };
 
-const TopBar: React.FC = () => <Header right={<TopBarMenu />} />;
+const TopBar: React.FC = () => <Header right={<TopBarMenu />} left={<Breadcrumb />} />;
 
 export default TopBar;
