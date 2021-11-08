@@ -1,4 +1,4 @@
-name: E2E Tests
+name: Playwright E2E Tests
 on:
   pull_request:
     branches:
