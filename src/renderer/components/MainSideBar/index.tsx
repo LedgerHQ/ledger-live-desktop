@@ -9,6 +9,7 @@ import { setFirstTimeLend } from "~/renderer/actions/settings";
 import { openModal } from "~/renderer/actions/modals";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { hasLendEnabledAccountsSelector } from "~/renderer/reducers/accounts";
+import useIsUpdateAvailable from "../Updater/useIsUpdateAvailable";
 
 const MainSideBar: React.FC = () => {
   const location = useLocation();
@@ -19,8 +20,9 @@ const MainSideBar: React.FC = () => {
   const [collapsed, setCollapsed] = React.useState(false);
   const toggleCollapsed = useCallback(() => setCollapsed(!collapsed), [collapsed]);
 
-  // TODO: add blue dot to manager item (not yet specified on Figma)
-  //const displayManagerBlueDot = useManagerBlueDot(useSelector(lastSeenDeviceSelector));
+  const isUpdateAvailable = useIsUpdateAvailable();
+
+  const displayManagerBlueDot = useManagerBlueDot(useSelector(lastSeenDeviceSelector));
 
   const push = useCallback(
     (pathname: string) => {
@@ -65,9 +67,10 @@ const MainSideBar: React.FC = () => {
     push("/swap");
   }, [push]);
 
-  const firstTimeLend = useSelector<{ settings: SettingsState }>(
+  const firstTimeLend = useSelector<{ settings: SettingsState }, boolean>(
     state => state.settings.firstTimeLend,
   );
+
   const navigateToLend = useCallback(() => {
     if (firstTimeLend) {
       dispatch(setFirstTimeLend());
@@ -88,6 +91,7 @@ const MainSideBar: React.FC = () => {
         label={t("dashboard.title")}
         onClick={navigateToDashboard}
         isActive={location.pathname === "/"}
+        displayNotificationBadge={isUpdateAvailable}
       >
         <Icons.PortfolioRegular />
       </SideBar.Item>
@@ -132,6 +136,7 @@ const MainSideBar: React.FC = () => {
             label={t("sidebar.lend")}
             onClick={navigateToLend}
             isActive={location.pathname === "/lend"}
+            displayNotificationBadge={firstTimeLend}
           >
             <Icons.LendRegular />
           </SideBar.Item>
@@ -141,6 +146,7 @@ const MainSideBar: React.FC = () => {
         label={t("sidebar.manager")}
         onClick={navigateToManager}
         isActive={location.pathname === "/manager"}
+        displayNotificationBadge={displayManagerBlueDot}
       >
         <Icons.NanoFoldedRegular />
       </SideBar.Item>
