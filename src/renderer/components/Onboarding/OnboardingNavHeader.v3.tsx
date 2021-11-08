@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Header } from "@ledgerhq/react-ui";
+import { Button, Header, Icons } from "@ledgerhq/react-ui";
 import LangSwitcher from "./LangSwitcher";
 import ledgerLogo from "./assets/ledgerLogo.svg";
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
-import { ArrowLeftRegular } from "@ledgerhq/react-ui/assets/icons";
 import { useTranslation } from "react-i18next";
 
 registerAssets([ledgerLogo]);
@@ -33,7 +32,7 @@ interface Props {
 export default function OnboardingNavHeader({ onClickPrevious }: Props) {
   const { t } = useTranslation();
   const left = (
-    <Button iconPosition="left" Icon={ArrowLeftRegular} onClick={onClickPrevious}>
+    <Button iconPosition="left" Icon={Icons.ArrowLeftRegular} onClick={onClickPrevious}>
       {t("common.previous")}
     </Button>
   );
