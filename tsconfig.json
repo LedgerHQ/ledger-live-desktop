@@ -3,7 +3,7 @@
       "target": "esnext",
       "strict": true,
       "module": "commonjs",
-      "moduleResolution": "Node",
+      "moduleResolution": "node",
       "sourceMap": true,
       "outDir": "playwright/tests-out",
   },
