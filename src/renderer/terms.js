@@ -31,7 +31,7 @@ export const useDynamicUrl = (key: string): string => {
 
   useEffect(() => {
     setUrl(urls[key][language] || urls[key].en);
-  }, [language]);
+  }, [key, language]);
 
   return url;
 };
