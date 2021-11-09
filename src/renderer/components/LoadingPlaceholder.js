@@ -9,8 +9,6 @@ const Wrapper: ThemedComponent<{}> = styled("div")`
   height: 100%;
   width: 100%;
   min-height: 20px;
-  // background-color: ${p => p.theme.colors.palette.background.default};
-  color: ${p => console.log(p)};
   background-color: ${p => p.theme.colors.palette.background.default};
   z-index: 44;
   overflow: hidden;

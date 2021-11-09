@@ -1,6 +1,7 @@
 // @flow
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
+import { MARKET_DEFAULT_PAGE_LIMIT } from "~/renderer/actions/market";
 
 export type MarketCurrencyInfo = {
   id: string,
@@ -76,7 +77,7 @@ const initialState: MarketState = {
   orderBy: "market_cap",
   counterCurrency: "usd",
   page: 1,
-  limit: 9,
+  limit: MARKET_DEFAULT_PAGE_LIMIT,
   coins: [],
   ids: [],
   filters: {

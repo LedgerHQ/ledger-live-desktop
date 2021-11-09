@@ -12,6 +12,8 @@ import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import Paginator from "~/renderer/components/Paginator";
 import { useTranslation } from "react-i18next";
+import InfiniteLoader from "react-window-infinite-loader";
+import Spinner from "~/renderer/components/Spinner";
 
 const ListItemHeight: number = 55;
 
@@ -88,6 +90,7 @@ function MarketList() {
   const { rangeData } = useRange(range);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const currenciesLength = currencies.length;
 
   useEffect(() => {
     if (!coins[0]) {
@@ -105,18 +108,35 @@ function MarketList() {
     }
   };
 
-  const CurrencyRow = ({ index, style }: CurrencyRowProps) => (
-    <MarketRowItem
-      loading={loading}
-      currency={currencies[index]}
-      index={index + 1}
-      counterCurrency={counterCurrency}
-      style={{ ...style, pointerEvents: "auto" }}
-      key={index}
-    />
-  );
+  const loadMoreItems = () => {
+    if (!loading) {
+      dispatch(getMarketCryptoCurrencies({ page: page + 1 }));
+    }
+  }
 
-  const currenciesLength = currencies.length;
+  const isItemLoaded = (index: number) => !!currencies[index]
+
+  const isLoading = loading && page === 1;
+  const isLoadingMore = loading && page > 1;
+  const CurrencyRow = ({ index, style }: CurrencyRowProps) => {
+    if (index === currenciesLength && index > limit - 2 && loading) {
+      return (
+          <Box horizontal justifyContent="center" alignItems="center" style={{ ...style, width: "100%" }}>
+            <Spinner size={16}/>
+          </Box>
+      )
+    }
+    return (
+        <Box style={{...style, pointerEvents: "auto", width: "100%"}}>
+          <MarketRowItem
+              loading={isLoading}
+              currency={currencies[index]}
+              counterCurrency={counterCurrency}
+              key={index}
+          />
+        </Box>
+    )
+  };
 
   return (
     <Box id="market-list" flow={2}>
@@ -192,7 +212,7 @@ function MarketList() {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      {loading ? (
+      {isLoading && page === 1 ? (
         <ListStyled
           height={ListItemHeight * 9}
           width="100%"
@@ -203,15 +223,25 @@ function MarketList() {
           {CurrencyRow}
         </ListStyled>
       ) : currenciesLength ? (
-        <ListStyled
-          height={currenciesLength < 9 ? currenciesLength * ListItemHeight : ListItemHeight * 9}
-          width="100%"
-          itemCount={currenciesLength}
-          itemSize={ListItemHeight}
-          style={{ overflowX: "hidden" }}
-        >
-          {CurrencyRow}
-        </ListStyled>
+          <InfiniteLoader
+              isItemLoaded={isItemLoaded}
+              itemCount={coinsCount}
+              loadMoreItems={loadMoreItems}
+          >
+            {({ onItemsRendered, ref }) => (
+                <ListStyled
+                    height={currenciesLength < 9 ? currenciesLength * ListItemHeight : ListItemHeight * 9}
+                    width="100%"
+                    itemCount={loading ? currenciesLength + 1 : currenciesLength}
+                    onItemsRendered={onItemsRendered}
+                    itemSize={ListItemHeight}
+                    style={{ overflowX: "hidden" }}
+                    ref={ref}
+                >
+                  {CurrencyRow}
+                </ListStyled>
+            )}
+          </InfiniteLoader>
       ) : (
         <NoCryptosFound searchValue={searchValue} />
       )}

@@ -29,6 +29,7 @@ const ShadowContainer = styled(Box)`
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 3%);
   border-radius: 4px;
   overflow: hidden;
+  background: ${p => p.theme.colors.palette.background.paper};
 `;
 
 class MarketPage extends Component<Props> {
@@ -69,14 +70,14 @@ class MarketPage extends Component<Props> {
           <MarketList />
         </ShadowContainer>
         <Box mt={2} justifyContent="center" horizontal>
-          <Paginator
-            currentPage={page}
-            loading={loading}
-            totalSize={coinsCount}
-            limit={limit}
-            small
-            onChange={page => getMarketCryptoCurrencies({ page })}
-          />
+          {/*<Paginator*/}
+          {/*  currentPage={page}*/}
+          {/*  loading={loading}*/}
+          {/*  totalSize={coinsCount}*/}
+          {/*  limit={limit}*/}
+          {/*  small*/}
+          {/*  onChange={page => getMarketCryptoCurrencies({ page })}*/}
+          {/*/>*/}
         </Box>
       </Box>
     );

@@ -3,7 +3,6 @@ import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
@@ -73,7 +72,6 @@ const RowContent: ThemedComponent<{
 `;
 
 type Props = {
-  index: number,
   currency: MarketCurrencyInfo,
   counterCurrency: string,
   style: any,
@@ -82,7 +80,7 @@ type Props = {
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
-  const { style, currency, loading, counterCurrency } = props;
+  const { style, currency, loading, counterCurrency, suffixSpinner } = props;
 
   const onCurrencyClick = useCallback(() => {
     setTrackingSource("accounts page");

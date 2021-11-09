@@ -58,7 +58,6 @@ export const MarketRangeSelect = () => {
   );
 
   const renderItem = useCallback(({ item, isActive }) => {
-    console.log(item);
     return (
       <Item key={item.key} isActive={isActive}>
         <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>

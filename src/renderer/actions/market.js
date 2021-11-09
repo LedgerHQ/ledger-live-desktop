@@ -12,7 +12,7 @@ import { counterCurrencyNameTable } from "~/renderer/constants/market";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { ThunkAction } from "redux-thunk";
 
-const DEFAULT_PAGE_LIMIT = 9;
+export const MARKET_DEFAULT_PAGE_LIMIT = 50;
 const marketClient = new MarketClient();
 
 export const setMarketParams = (payload: $Shape<MarketState>) => ({
@@ -90,7 +90,9 @@ export const getMarketCryptoCurrencies: ThunkAction = (
   }> = {},
 ) =>
   async function(dispatch, getState) {
-    filterParams = { ...getState().market, ...filterParams };
+    const state = getState().market;
+    const loadMore = filterParams.page && filterParams.page !== state.page;
+    filterParams = { ...state, ...filterParams };
     dispatch(
       setMarketParams({
         ...filterParams,
@@ -110,6 +112,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
       ids,
       coins,
       filters,
+      currencies
     } = filterParams;
 
     const showFavorites: boolean = filters.isFavorite;
@@ -157,7 +160,7 @@ export const getMarketCryptoCurrencies: ThunkAction = (
 
     if (unShowFavorites) {
       ids = ids.filter(id => favoriteCryptocurrencies.indexOf(id) < 0);
-      limit = DEFAULT_PAGE_LIMIT;
+      limit = MARKET_DEFAULT_PAGE_LIMIT;
     }
 
     let cryptocurrencies = [];
@@ -175,13 +178,15 @@ export const getMarketCryptoCurrencies: ThunkAction = (
       });
     }
 
-    const currencies = mergeFavoriteAndSupportedCurrencies(
-      favoriteCryptocurrencies,
-      cryptocurrencies,
-      supportedCurrenciesByLedger,
+    const newCurrencies = mergeFavoriteAndSupportedCurrencies(
+        favoriteCryptocurrencies,
+        cryptocurrencies,
+        supportedCurrenciesByLedger,
     );
 
-    limit = DEFAULT_PAGE_LIMIT;
+    currencies = loadMore ? currencies.concat(newCurrencies) : newCurrencies;
+
+    limit = MARKET_DEFAULT_PAGE_LIMIT;
     coinsCount = coins.length;
 
     if (!currencies.length) {
