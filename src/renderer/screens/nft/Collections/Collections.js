@@ -49,7 +49,7 @@ const Collections = ({ account }: Props) => {
   const collections = nftsByCollections(account.nfts);
   const visibleCollection = collections.slice(
     0,
-    !collapsed ? collections.length : VISIBLE_COLLECTIONS,
+    !collapsed ? collections?.length : VISIBLE_COLLECTIONS,
   );
 
   return (
@@ -66,7 +66,7 @@ const Collections = ({ account }: Props) => {
             {t("NFT.collections.galleryCTA")}
           </Button>
         </TableHeader>
-        {account.nfts.length ? (
+        {account.nfts?.length ? (
           visibleCollection.map(({ contract, nfts }) => (
             <Row
               onClick={() => onOpenCollection(contract)}
@@ -80,7 +80,7 @@ const Collections = ({ account }: Props) => {
             <Spinner size={16} />
           </Box>
         )}
-        {collections.length > VISIBLE_COLLECTIONS ? (
+        {collections?.length > VISIBLE_COLLECTIONS ? (
           <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
             <Box horizontal alignContent="center" justifyContent="center" py={3}>
               <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>

@@ -59,7 +59,7 @@ const Row = ({ nfts, contract, onClick }: Props) => {
       </Box>
       <Skeleton width={42} minHeight={24} barHeight={10} show={show}>
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-          {nfts.length}
+          {nfts?.length}
         </Text>
       </Skeleton>
     </Container>
