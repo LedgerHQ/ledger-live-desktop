@@ -82,7 +82,7 @@ const TopBarMenu: React.FC = () => {
           />
         </Tooltip>
         <Tooltip content={t("informationCenter.tooltip")} placement="bottom">
-          <Button onClick={openInfoCenter} Icon={Icons.ChristmasRegular} />
+          <Button onClick={openInfoCenter} Icon={Icons.NotificationsMedium} />
         </Tooltip>
         {hasPassword && (
           <Tooltip content={t("common.lock")} placement="bottom">
