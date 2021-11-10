@@ -3944,7 +3944,7 @@
       "title": "发送到该接收方时，或许需要添加 memo（目的地标签）"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "数额必须高于 {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "数额必须低于 {{maxAmountFromFormatted}}"
