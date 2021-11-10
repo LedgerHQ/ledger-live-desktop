@@ -238,7 +238,7 @@
           "rate": "Lorem Ipsum",
           "fees": "Lorem Ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Konto hinzufügen"
       },
       "from": {
