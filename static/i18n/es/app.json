@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
