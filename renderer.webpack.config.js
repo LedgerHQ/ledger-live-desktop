@@ -103,10 +103,23 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        use: ["file-loader"],
-      },
+      process.env.V3
+        ? {
+            test: /\.woff2/,
+            use: [
+              {
+                loader: "file-loader",
+                options: {
+                  name: "[name].[ext]",
+                  outputPath: "assets/fonts/",
+                },
+              },
+            ],
+          }
+        : {
+            test: /\.(woff|woff2|eot|ttf|otf)$/i,
+            use: ["file-loader"],
+          },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
         use: {
