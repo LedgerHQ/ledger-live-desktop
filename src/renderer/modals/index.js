@@ -36,6 +36,7 @@ import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
+import MODAL_CONNECTION_ERROR from "./ConnectionError";
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
@@ -66,6 +67,7 @@ import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAcc
 import MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT from "../screens/lend/modals/EmptyAccountDeposit";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
+  MODAL_CONNECTION_ERROR,
   MODAL_WEBSOCKET_BRIDGE,
   MODAL_EXPORT_OPERATIONS,
   MODAL_CONFIRM,

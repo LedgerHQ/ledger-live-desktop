@@ -9,11 +9,21 @@ import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { counterCurrencyNameTable } from "~/renderer/constants/market";
+import { openModal, closeModal } from "~/renderer/actions/modals";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { ThunkAction } from "redux-thunk";
 
 export const MARKET_DEFAULT_PAGE_LIMIT = 50;
 const marketClient = new MarketClient();
+
+export type GetMarketCryptoCurrencies = $Shape<{
+    counterCurrency: string,
+    range: string,
+    limit: number,
+    page: number,
+    order: string,
+    orderBy: string,
+}>
 
 export const setMarketParams = (payload: $Shape<MarketState>) => ({
   type: "SET_MARKET_PARAMS",
@@ -80,18 +90,11 @@ export const getCounterCurrencies: ThunkAction = () =>
   };
 
 export const getMarketCryptoCurrencies: ThunkAction = (
-  filterParams: $Shape<{
-    counterCurrency: string,
-    range: string,
-    limit: number,
-    page: number,
-    order: string,
-    orderBy: string,
-  }> = {},
+  filterParams: GetMarketCryptoCurrencies = {},
 ) =>
   async function(dispatch, getState) {
     const state = getState().market;
-    const loadMore = filterParams.page && filterParams.page !== state.page;
+    const loadMore = filterParams.page && filterParams.page !== state.page || state.failedMarketParams.loadMore;
     filterParams = { ...state, ...filterParams };
     dispatch(
       setMarketParams({
@@ -112,14 +115,24 @@ export const getMarketCryptoCurrencies: ThunkAction = (
       ids,
       coins,
       filters,
-      currencies
+      currencies,
     } = filterParams;
-
     const showFavorites: boolean = filters.isFavorite;
     const unShowFavorites: boolean = !filters.isFavorite;
-
     if (!coinsCount) {
-      coins = await marketClient.supportedCurrencies();
+        try {
+            coins = await marketClient.supportedCurrencies();
+        } catch (e) {
+            dispatch(connectionError())
+            dispatch(setMarketParams({ failedMarketParams: {
+                    counterCurrency: filterParams.counterCurrency,
+                    range: filterParams.range,
+                    limit: filterParams.limit,
+                    page: filterParams.page,
+                    order: filterParams.order,
+                    orderBy: filterParams.orderBy,
+                }}))
+        }
     }
 
     const favoriteCryptocurrencies: Array<FavoriteCryptoCurrency> = await getKey(
@@ -167,21 +180,34 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     if ((showFavorites || searchValue) && !ids.length) {
       cryptocurrencies = [];
     } else {
-      cryptocurrencies = await marketClient.listPaginated({
-        counterCurrency,
-        range,
-        limit,
-        page,
-        order,
-        orderBy,
-        ids,
-      });
+        try {
+            cryptocurrencies = await marketClient.listPaginated({
+                counterCurrency,
+                range,
+                limit,
+                page,
+                order,
+                orderBy,
+                ids,
+            });
+        } catch (e) {
+            dispatch(connectionError())
+            dispatch(setMarketParams({ failedMarketParams: {
+                counterCurrency: filterParams.counterCurrency,
+                range: filterParams.range,
+                limit: filterParams.limit,
+                page: filterParams.page,
+                order: filterParams.order,
+                orderBy: filterParams.orderBy,
+                loadMore
+            }}))
+        }
     }
 
     const newCurrencies = mergeFavoriteAndSupportedCurrencies(
-        favoriteCryptocurrencies,
-        cryptocurrencies,
-        supportedCurrenciesByLedger,
+      favoriteCryptocurrencies,
+      cryptocurrencies,
+      supportedCurrenciesByLedger,
     );
 
     currencies = loadMore ? currencies.concat(newCurrencies) : newCurrencies;
@@ -205,9 +231,25 @@ export const getMarketCryptoCurrencies: ThunkAction = (
         ids,
         coins,
         coinsCount,
+        failedMarketParams: {}
       }),
     );
   };
+
+export const connectionError = (): ThunkAction => async function (dispatch, getState) {
+    dispatch(openModal("MODAL_CONNECTION_ERROR"))
+}
+
+export const ignoreConnectionError = (): ThunkAction => async function (dispatch, getState) {
+    dispatch(setMarketParams({ loading: false }))
+    dispatch(closeModal("MODAL_CONNECTION_ERROR"))
+}
+
+export const reloadMarket = (): ThukAction => async (dispatch, getState) => {
+    const { market: { reload } } = getState();
+    dispatch(setMarketParams({ reload: reload + 1 }))
+    dispatch(ignoreConnectionError())
+}
 
 export function mergeFavoriteAndSupportedCurrencies(
   favorites: Array<FavoriteCryptoCurrency>,

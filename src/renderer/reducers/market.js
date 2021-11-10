@@ -2,6 +2,7 @@
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { handleActions } from "redux-actions";
 import { MARKET_DEFAULT_PAGE_LIMIT } from "~/renderer/actions/market";
+import type { GetMarketCryptoCurrencies } from "~/renderer/actions/market";
 
 export type MarketCurrencyInfo = {
   id: string,
@@ -66,6 +67,8 @@ export type MarketState = {
   filters: MarketFilters,
   loading: boolean,
   favorites: Array<FavoriteCryptoCurrency>,
+  failedMarketParams: GetMarketCryptoCurrencies,
+  reload: number,
 };
 
 const initialState: MarketState = {
@@ -87,6 +90,8 @@ const initialState: MarketState = {
   favorites: [],
   coinsCount: 0,
   loading: false,
+  failedMarketParams: {},
+  reload: 0,
 };
 
 const handlers = {

@@ -30,7 +30,7 @@ const CryptoCurrencyPage = () => {
     params: { id },
   } = useRouteMatch();
 
-  const { favorites } = useSelector(state => state.market);
+  const { favorites, reload } = useSelector(state => state.market);
 
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 
@@ -38,6 +38,7 @@ const CryptoCurrencyPage = () => {
     id: id || "",
     counterCurrency,
     range,
+    reload,
   });
 
   currency.isStarred = Boolean(favorites.find(item => item.id === id));

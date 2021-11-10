@@ -56,6 +56,7 @@ export default function CryptocurrencySummary({
     id: id || "",
     counterCurrency,
     range,
+    reload,
   });
 
   const loading: boolean = propsLoading || chartLoading;
