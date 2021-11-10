@@ -2423,6 +2423,11 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.2.0.tgz#7b57112fb51ee30f1fa9c3369d34cbad6608290e"
   integrity sha512-yBklUEkrUzueiwuXGnK3jXdVMSlkSLTojGdXsfG/UD7+NmH25AtsRGdt7GQvASgzsRW1mUjuLnqQIXCESVKdGA==
 
+"@ledgerhq/icons-ui@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.2.0.tgz#7b57112fb51ee30f1fa9c3369d34cbad6608290e"
+  integrity sha512-yBklUEkrUzueiwuXGnK3jXdVMSlkSLTojGdXsfG/UD7+NmH25AtsRGdt7GQvASgzsRW1mUjuLnqQIXCESVKdGA==
+
 "@ledgerhq/json-bignumber@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/json-bignumber/-/json-bignumber-1.1.0.tgz#8d3e38118060565191518ab06bd9aa5b22b25b58"
@@ -4046,6 +4051,13 @@
     blakejs "^1.1.0"
     bs58check "^2.1.2"
     buffer "^6.0.3"
+
+"@tippyjs/react@^4.2.6":
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/@tippyjs/react/-/react-4.2.6.tgz#971677a599bf663f20bb1c60a62b9555b749cc71"
+  integrity sha512-91RicDR+H7oDSyPycI13q3b7o4O60wa2oRbjlz2fyRLmHImc4vyDwuUP8NtZaN0VARJY5hybvDYrFzhY9+Lbyw==
+  dependencies:
+    tippy.js "^6.3.1"
 
 "@tippyjs/react@^4.2.6":
   version "4.2.6"
