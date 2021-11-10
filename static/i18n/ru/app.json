@@ -238,7 +238,7 @@
           "rate": "Курс",
           "fees": "Комиссия"
         },
-        "noAccount": "У вас нет счёта {{name}}",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Добавить счёт"
       },
       "from": {
