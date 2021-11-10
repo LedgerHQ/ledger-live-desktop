@@ -238,7 +238,7 @@
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{name}}",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
