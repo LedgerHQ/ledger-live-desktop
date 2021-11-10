@@ -2495,6 +2495,11 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
+"@ledgerhq/icons-ui@^0.1.0":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.1.1.tgz#0f6e86cd2b70de6cd42fc4f7051f47f718149bf6"
+  integrity sha512-HB+a3osBJKyPFuBUWlXNw9g7qAjI2TKY7qhfQAwMab6W3A6wYVLYOtLgdrABzfHVLhHmzFRlLuRm5bTgG8BA6A==
+
 "@ledgerhq/json-bignumber@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/json-bignumber/-/json-bignumber-1.1.0.tgz#8d3e38118060565191518ab06bd9aa5b22b25b58"
@@ -2618,11 +2623,13 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-5.50.0.tgz#29c6419e8379d496ab6d0426eadf3c4d100cd186"
   integrity sha512-swKHYCOZUGyVt4ge0u8a7AwNcA//h4nx5wIi0sruGye1IJ5Cva0GyK9L2/WdX+kWVTKp92ZiEo1df31lrWGPgA==
 
-"@ledgerhq/react-ui@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.1.0.tgz#5fd0e9f79a91d7955cf183cb2f296ff06a5145d1"
-  integrity sha512-y2qnLuJ+kWRKHidnCfxxQeffcKE0G9+NbXtAPECDaRAZezjersN/Sjw8oc53na0OXuIodE9A2ULq3G2XgmAu3A==
+"@ledgerhq/react-ui@0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.1.1.tgz#1712bb5a481c7b7b02e7fbb66df602ffd27442fb"
+  integrity sha512-A9LZmHOHN26nG5Teu6WrI9fC4D8hji1zP1DdeDKuIRMsk45lFf/y4wykdAtOWz2fIDdctvQSagjQoB4CrOA8Pw==
   dependencies:
+    "@ledgerhq/icons-ui" "^0.1.0"
+    "@ledgerhq/ui-shared" "^0.1.1"
     "@tippyjs/react" "^4.2.5"
     "@types/color" "^3.0.2"
     "@types/react" "~17.0.28"
@@ -2642,6 +2649,11 @@
     react-window "^1.8.6"
     styled-components "^5.2.3"
     styled-system "^5.1.5"
+
+"@ledgerhq/ui-shared@^0.1.1":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ui-shared/-/ui-shared-0.1.2.tgz#0577f24af4d93ebf1964bfd22211a62f9cf88663"
+  integrity sha512-JegsvmuXy4DECw3YQnwA9JLohOKQtKJiS3vG8GAOU2qo7GmniasIGrh10nSAVcpxtM4GCdnmh+va6ifkxeSLPw==
 
 "@mdx-js/loader@^1.6.22":
   version "1.6.22"
