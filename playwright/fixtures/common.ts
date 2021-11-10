@@ -1,18 +1,18 @@
 import { _electron as electron } from "playwright";
-import { test as base, expect } from "@playwright/test";
+import { test as base, expect, Page } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
-import * as crypto from 'crypto';
+import * as crypto from "crypto";
 
 export function generateUUID(): string {
-  return crypto.randomBytes(16).toString('hex');
+  return crypto.randomBytes(16).toString("hex");
 }
 
 type TestFixtures = {
-  lang: String;
-  theme: String;
-  userdata: String;
-  env: Object;
+  lang: string;
+  theme: "light" | "dark" | "no-preference" | undefined;
+  userdata: string;
+  env: Record<string, any>;
   page: any;
 };
 
@@ -21,7 +21,7 @@ const test = base.extend<TestFixtures>({
   env: undefined,
   lang: "en-US",
   theme: "light",
-  page: async ({ lang, theme, userdata, env }, use) => {
+  page: async ({ lang, theme, userdata, env }: TestFixtures, use: (page: Page) => void) => {
     // create userdata path
     const userDataPathKey = generateUUID();
     const userDataPath = path.join(__dirname, "../artifacts/userdata", userDataPathKey);
@@ -67,17 +67,20 @@ const test = base.extend<TestFixtures>({
     const page = await electronApp.firstWindow();
 
     // start coverage
-    const istanbulCLIOutput = path.join('playwright/artifacts/.nyc_output');
+    const istanbulCLIOutput = path.join("playwright/artifacts/.nyc_output");
 
     await page.addInitScript(() =>
-    window.addEventListener('beforeunload', () =>
-      (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__))
+      window.addEventListener("beforeunload", () =>
+        (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__)),
       ),
     );
     await fs.promises.mkdir(istanbulCLIOutput, { recursive: true });
-    await page.exposeFunction('collectIstanbulCoverage', (coverageJSON: string) => {
+    await page.exposeFunction("collectIstanbulCoverage", (coverageJSON: string) => {
       if (coverageJSON)
-        fs.writeFileSync(path.join(istanbulCLIOutput, `playwright_coverage_${generateUUID()}.json`), coverageJSON);
+        fs.writeFileSync(
+          path.join(istanbulCLIOutput, `playwright_coverage_${generateUUID()}.json`),
+          coverageJSON,
+        );
     });
 
     // app is loaded
@@ -90,7 +93,9 @@ const test = base.extend<TestFixtures>({
     await use(page);
 
     // stop coverage
-    await page.evaluate(() => (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__)));
+    await page.evaluate(() =>
+      (window as any).collectIstanbulCoverage(JSON.stringify((window as any).__coverage__)),
+    );
 
     // close app
     await electronApp.close();
