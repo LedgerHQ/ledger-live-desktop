@@ -3944,7 +3944,7 @@
       "title": "При отправке этому получателю может потребоваться Memo"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Сумма должна быть больше {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
