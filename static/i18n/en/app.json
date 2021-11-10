@@ -6817,19 +6817,36 @@
       },
       "screens": {
         "welcome": {
-          "title": "Welcome to Ledger",
+          "title": "WELCOME TO LEDGER LIVE",
           "description": "Safely manage your crypto from your computer.",
-          "cta": "Get started",
-          "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
-          "languageWarning": {
-            "title": "Get started in {{language}}",
-            "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-            "cta": "Got it"
-          }
+          "noDevice": "No device?",
+          "buyLink": "Buy a Ledger Nano X",
+          "nextButton": "Enter the crypto world",
+          "steps": [
+            {
+              "title": "Access your crypto",
+              "desc": "Your crypto assets are stored on the blockchain\nUse your private key to access and manage them"
+            },
+            {
+              "title": "Own your private key",
+              "desc": "Your private key is stored within your Nano\nYou must be the only one to own it to be in control of your money"
+            },
+            {
+              "title": "Stay offline",
+              "desc": "Your Nano workds as a ‘cold storage’ wallet\nThis means that it never exposes your private key online, even when using the app"
+            },
+            {
+              "title": "Validate transactions",
+              "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected\nYou will validate every crypto transaction with your Nano"
+            },
+            {
+              "title": "Let’s set up your nano",
+              "desc": "We’ll start by setting up your Nano securly"
+            }
+          ]
         },
         "selectDevice": {
-          "title": "SELECT YOUR DEVICE",
-          "selectLabel": "Select"
+          "title": "What's your device?"
         },
         "selectUseCase": {
           "greetings": "Hello!",
