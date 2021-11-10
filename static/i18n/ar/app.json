@@ -3944,7 +3944,7 @@
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "يجب أن يكون المبلغ أكثر من {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
