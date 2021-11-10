@@ -73,7 +73,7 @@ jobs:
           node-version: 14.x
       - uses: actions/setup-python@v1
         with:
-          python-version: "2.7.x"
+          python-version: "2.8.x"
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
