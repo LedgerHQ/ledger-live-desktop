@@ -238,7 +238,7 @@
           "rate": "lorem ipsum 随机假文",
           "fees": "lorem ipsum 随机假文"
         },
-        "noAccount": "您没有 {{name}} 账户。",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "添加账户"
       },
       "from": {
