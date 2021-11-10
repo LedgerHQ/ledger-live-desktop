@@ -6,7 +6,7 @@ import { openURL } from "~/renderer/linking";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import Carousel from "~/renderer/components/Onboarding/Screens/Welcome/Carousel";
 import { urls } from "~/config/urls";
-import { Log, Text, Button, Icons } from "@ledgerhq/react-ui";
+import { Log, Text, Button, Logos, Icons } from "@ledgerhq/react-ui";
 
 import accessCrypto from "./assets/access-crypto.svg";
 import ownPrivateKey from "./assets/own-private-key.svg";
@@ -19,26 +19,26 @@ import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano]
 registerAssets(stepLogos);
 
-const WelcomeContainer: ThemedComponent<any> = styled.div`
+const Link = styled(Text)`
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+const WelcomeContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
 `;
 
-const LeftContainer: ThemedComponent<any> = styled.div`
+const LeftContainer = styled.div`
   width: 386px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 40px;
-`;
-
-const LedgerTitle = styled(Log)`
-  width: 170px;
-  margin-bottom: 40px;
-  font-size: 16px;
+  z-index: 999;
 `;
 
 const Presentation = styled.div`
@@ -56,14 +56,16 @@ const NoDevice = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 24px;
 `;
 
-const RightContainer: ThemedComponent<any> = styled.div`
+const RightContainer = styled.div`
   height: 100%;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
   background-color:  ${p => p.theme.colors.palette.primary.c60};
 `;
 
@@ -72,6 +74,10 @@ const CarouselTopBar = styled.div`
   justify-content: flex-end;
   padding: 40px;
   width: 100%;
+`;
+
+const Description = styled(Text)`
+  white-space: pre-line;
 `;
 
 type Props = {
@@ -101,9 +107,13 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
     <WelcomeContainer>
       <LeftContainer>
         <Presentation>
-          <LedgerTitle rowGap={5}>ledger-live</LedgerTitle>
-          <Text type="h1" ff="Alpha|Medium" pb={"20px"}>{t("v3.onboarding.screens.welcome.title")}</Text>
-          <Text type="body" ff="Inter|Medium" fontSize={14}>{t("v3.onboarding.screens.welcome.description")}</Text>
+          <Logos.LedgerLiveRegular />
+          <Text type="h1" ff="Alpha|Medium" pt={"32px"} pb={"20px"}>
+            {t("v3.onboarding.screens.welcome.title")}
+          </Text>
+          <Description type="body" ff="Inter|Medium" fontSize={14}>
+            {t("v3.onboarding.screens.welcome.description")}
+          </Description>
         </Presentation>
         <ProductHighlight>
           <Button 
@@ -111,13 +121,12 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
             Icon={Icons.ArrowRightMedium}
             type="main" 
             onClick={handleNext}
-            mb={24}
           >
             {t("v3.onboarding.screens.welcome.nextButton")}
           </Button>
           <NoDevice>
-            <Text>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
-            <Text onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</Text>
+            <Text marginRight={2}>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
+            <Link onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</Link>
           </NoDevice>
         </ProductHighlight>
       </LeftContainer>

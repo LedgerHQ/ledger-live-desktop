@@ -13,7 +13,6 @@ const Wrapper = styled(Flex)`
   text-align: center;
   width: 350px;
   margin: auto;
-  z-index: 999;
 `;
 
 const SlideLogo = styled(Flex)<{ image?: string }>`

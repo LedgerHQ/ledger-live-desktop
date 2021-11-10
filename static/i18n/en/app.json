@@ -6825,19 +6825,19 @@
           "steps": [
             {
               "title": "Access your crypto",
-              "desc": "Your crypto assets are stored on the blockchain<br/>Use your private key to access and manage them"
+              "desc": "Your crypto assets are stored on the blockchain\nUse your private key to access and manage them"
             },
             {
               "title": "Own your private key",
-              "desc": "Your private key is stored within your Nano<br/>You must be the only one to own it to be in control of your money"
+              "desc": "Your private key is stored within your Nano\nYou must be the only one to own it to be in control of your money"
             },
             {
               "title": "Stay offline",
-              "desc": "Your Nano workds as a ‘cold storage’ wallet<br/>This means that it never exposes your private key online, even when using the app"
+              "desc": "Your Nano workds as a ‘cold storage’ wallet\nThis means that it never exposes your private key online, even when using the app"
             },
             {
               "title": "Validate transactions",
-              "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected<br/>You will validate every crypto transaction with your Nano"
+              "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected\nYou will validate every crypto transaction with your Nano"
             },
             {
               "title": "Let’s set up your nano",
