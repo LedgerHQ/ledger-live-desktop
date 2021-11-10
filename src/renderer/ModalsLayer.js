@@ -9,6 +9,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { modalsStateSelector } from "~/renderer/reducers/modals";
 import modals from "~/renderer/modals";
+import ModalStepper from "./components/ModalStepper";
+import { stepperSteps } from "./components/ModalStepper/testModal";
 
 // TODO: SNOOOOOOOOWW
 // import Snow, { isSnowTime } from '~/renderer/components/extra/Snow'
@@ -37,9 +39,11 @@ const ModalsLayer = ({ visibleModals }: *) => {
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),
   );
 
+  const showTestModalStepper = process.env.TEST_MODAL_STEPPER;
+
   return (
     <Transition
-      in={filteredModals.length > 0}
+      in={showTestModalStepper || filteredModals.length > 0}
       appear
       mountOnEnter
       unmountOnExit
@@ -51,6 +55,14 @@ const ModalsLayer = ({ visibleModals }: *) => {
     >
       {state => (
         <BackDrop state={state}>
+          {showTestModalStepper ? (
+            <ModalStepper
+              title="Basics"
+              onClose={() => console.log("onClose")}
+              onFinish={() => console.log("onFinish")}
+              steps={stepperSteps}
+            />
+          ) : null}
           {/* {// Will only render at the end of december
           isSnowTime() ? <Snow numFlakes={200} /> : null} */}
           {filteredModals.map(({ name, ...data }, i) => {
