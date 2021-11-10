@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -16,7 +16,7 @@ import GridIcon from "~/renderer/icons/Grid";
 import ListIcon from "~/renderer/icons/List";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
 import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
-
+import useOnScreen from "../../useOnScreen";
 import Item from "./Item";
 
 type Props = {
@@ -40,9 +40,18 @@ const ToggleButton: ThemedComponent<{ active?: boolean }> = styled(Button)`
 `;
 
 const TokensList = ({ account, collectionId }: Props) => {
+  const ref = useRef();
+  const isAtBottom = useOnScreen(ref);
+  const [maxVisibleNTFs, setMaxVisibleNFTs] = useState(1);
   const history = useHistory();
   const dispatch = useDispatch();
   const nftsViewMode = useSelector(nftsViewModeSelector);
+
+  useEffect(() => {
+    if (isAtBottom) {
+      setMaxVisibleNFTs(maxVisibleNTFs => maxVisibleNTFs + 5);
+    }
+  }, [isAtBottom]);
 
   const collections = nftsByCollections(account.nfts, collectionId);
   const setListMode = useCallback(() => dispatch(setNftsViewMode("list")), [dispatch]);
@@ -55,6 +64,54 @@ const TokensList = ({ account, collectionId }: Props) => {
     [account.id, history],
   );
 
+  const galleryRender = useMemo(() => {
+    const result = [];
+    let count = 0;
+    let shortcircuit = false;
+
+    for (const collection of collections) {
+      const children = [];
+      if (shortcircuit) break;
+
+      for (const nft of collection.nfts) {
+        if (count++ > maxVisibleNTFs) {
+          shortcircuit = true;
+          break;
+        }
+        // We can still add more nfts
+        children.push(
+          <NFTContextMenu contract={collection.contract} tokenId={nft.tokenId}>
+            <Item
+              mode={nftsViewMode}
+              id={nft.id}
+              tokenId={nft.tokenId}
+              contract={collection.contract}
+            />
+          </NFTContextMenu>,
+        );
+      }
+
+      if (children.length) {
+        // Consider adding the collection only if have children
+        result.push(
+          <div key={collection.contract}>
+            {!collectionId ? (
+              <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
+                <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
+                  <CollectionName collection={collection} />
+                </Text>
+              </Box>
+            ) : null}
+            <Container mb={20} mode={nftsViewMode}>
+              {children}
+            </Container>
+          </div>,
+        );
+      }
+    }
+    return result;
+  }, [collectionId, collections, maxVisibleNTFs, nftsViewMode, onSelectCollection]);
+
   return (
     <>
       <Card horizontal justifyContent="flex-end" p={3} mb={3}>
@@ -65,34 +122,8 @@ const TokensList = ({ account, collectionId }: Props) => {
           <GridIcon />
         </ToggleButton>
       </Card>
-
-      {collections.map(collection => (
-        <div key={collection.contract}>
-          {!collectionId ? (
-            <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
-              <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-                <CollectionName collection={collection} />
-              </Text>
-            </Box>
-          ) : null}
-          <Container mb={20} mode={nftsViewMode}>
-            {collection.nfts.map(nft => (
-              <NFTContextMenu
-                key={nft.tokenId}
-                contract={collection.contract}
-                tokenId={nft.tokenId}
-              >
-                <Item
-                  mode={nftsViewMode}
-                  id={nft.id}
-                  tokenId={nft.tokenId}
-                  contract={collection.contract}
-                />
-              </NFTContextMenu>
-            ))}
-          </Container>
-        </div>
-      ))}
+      {galleryRender}
+      <div ref={ref} />
     </>
   );
 };

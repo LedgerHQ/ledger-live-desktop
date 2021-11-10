@@ -17,7 +17,7 @@ import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import Spinner from "~/renderer/components/Spinner";
 
-const VISIBLE_COLLECTIONS = 3;
+const INCREMENT = 5;
 type Props = {
   account: Account,
 };
@@ -26,11 +26,7 @@ const Collections = ({ account }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const history = useHistory();
-  const [collapsed, setCollapsed] = useState(true);
-
-  const toggleCollapse = useCallback(() => {
-    setCollapsed(collapsed => !collapsed);
-  }, []);
+  const [numberOfVisibleCollection, setNumberOfVisibleCollections] = useState(INCREMENT);
 
   const onOpenGallery = useCallback(() => {
     history.push(`/account/${account.id}/nft-collection`);
@@ -47,10 +43,14 @@ const Collections = ({ account }: Props) => {
   );
 
   const collections = nftsByCollections(account.nfts);
-  const visibleCollection = collections.slice(
-    0,
-    !collapsed ? collections?.length : VISIBLE_COLLECTIONS,
-  );
+
+  const onShowMore = useCallback(() => {
+    setNumberOfVisibleCollections(numberOfVisibleCollection =>
+      Math.min(numberOfVisibleCollection + INCREMENT, collections.length),
+    );
+  }, [collections.length]);
+
+  const visibleCollection = collections.slice(0, numberOfVisibleCollection);
 
   return (
     <Box>
@@ -80,13 +80,13 @@ const Collections = ({ account }: Props) => {
             <Spinner size={16} />
           </Box>
         )}
-        {collections?.length > VISIBLE_COLLECTIONS ? (
-          <TokenShowMoreIndicator expanded={!collapsed} onClick={toggleCollapse}>
+        {collections?.length > numberOfVisibleCollection ? (
+          <TokenShowMoreIndicator expanded onClick={onShowMore}>
             <Box horizontal alignContent="center" justifyContent="center" py={3}>
               <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
-                {t(collapsed ? "NFT.collections.seeAll" : "NFT.collections.seeLess")}
+                {t("NFT.collections.seeMore")}
               </Text>
-              <IconAngleDown expanded={!collapsed}>
+              <IconAngleDown>
                 <AngleDown size={16} />
               </IconAngleDown>
             </Box>
