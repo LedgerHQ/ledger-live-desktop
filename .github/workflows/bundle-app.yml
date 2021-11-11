@@ -46,7 +46,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --ignore-optional
+        run: JOBS=max yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -106,7 +106,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --ignore-optional
+        run: JOBS=max yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -167,7 +167,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile --ignore-optional
+        run: yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -185,5 +185,5 @@ jobs:
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win-x64.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win-x64.exe

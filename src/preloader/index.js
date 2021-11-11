@@ -16,16 +16,14 @@ const appLoaded = () => {
   setTimeout(() => {
     const rendererNode = document.getElementById("react-root");
     const loaderContainer = document.getElementById("loader-container");
-    const loader = document.getElementById("loader");
 
-    if (rendererNode && loaderContainer && loader) {
+    if (rendererNode && loaderContainer) {
       rendererNode.style.visibility = "visible";
       requestAnimationFrame(() => {
-        loader.classList.add("loaded");
-        loaderContainer.classList.remove("loading");
+        loaderContainer.classList.add("loaded");
         setTimeout(() => {
-          loaderContainer.style.display = "none";
-        }, 1000);
+          loaderContainer.remove();
+        }, 3000);
       });
     }
   }, 2000);
@@ -49,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   if (imgNode && loaderContainer) {
     imgNode.src = logo;
-    loaderContainer.style.backgroundColor = palette.background.default;
+    loaderContainer.style.backgroundColor = "#000000";
     loaderContainer.classList.add("loading");
   }
 
