@@ -238,7 +238,7 @@
           "rate": "Курс",
           "fees": "Комиссия"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "Создайте счёт, чтобы получить {{name}}",
         "noAccountCTA": "Добавить счёт"
       },
       "from": {
@@ -1345,7 +1345,7 @@
     "loading": "Загружаем...",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
-    "unlockDeviceAfterFirmwareUpdate": "Дождитесь обновления прошивки и разблокируйте устройство с помощью PIN-кода",
+    "unlockDeviceAfterFirmwareUpdate": "Дождитесь обновления прошивки и разблокируйте устройство с помощью ПИН-кода",
     "quitApp": "Выйдите из приложения на устройстве",
     "appNotInstalledTitle": "Отсутствует необходимое приложение",
     "appNotInstalledTitle_plural": "Отсутствуют необходимые приложения",
@@ -3944,7 +3944,7 @@
       "title": "При отправке этому получателю может потребоваться Memo"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Сумма должна быть не менее {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
