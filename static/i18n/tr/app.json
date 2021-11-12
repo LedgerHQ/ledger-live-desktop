@@ -131,7 +131,7 @@
   },
   "operation": {
     "type": {
-      "IN": "Alındı",
+      "IN": "Received",
       "OUT": "Gönderildi",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
