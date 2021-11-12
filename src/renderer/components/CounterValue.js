@@ -24,6 +24,7 @@ type Props = {
   value: BigNumber | number,
 
   alwaysShowSign?: boolean,
+  alwaysShowValue?: boolean, // overrides discreet mode
 
   subMagnitude?: number,
 
@@ -60,6 +61,7 @@ export default function CounterValue({
   date,
   currency,
   alwaysShowSign = false,
+  alwaysShowValue = false,
   placeholder,
   prefix,
   suffix,
@@ -109,6 +111,7 @@ export default function CounterValue({
         unit={counterValueCurrency.units[0]}
         showCode
         alwaysShowSign={alwaysShowSign}
+        alwaysShowValue={alwaysShowValue}
       />
       {suffix || null}
     </>

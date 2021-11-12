@@ -62,6 +62,7 @@
     "apply": "Anwenden",
     "done": "Fertig",
     "confirm": "Bestätigen",
+    "reject": "Reject",
     "cancel": "Abbrechen",
     "getSupport": "Hilfe",
     "delete": "Löschen",
@@ -1065,10 +1066,10 @@
       "description": "Kaufen Sie Krypto-Vermögenswerte über unseren Partner und erhalten Sie diese direkt auf Ihr Ledger-Konto",
       "cta": "Jetzt kaufen"
     },
-    "backupPack": {
-      "title": "Backup-Paket",
-      "description": "Verwalten Sie Ihr Vermögen sicher mit einem Nano X und Nano S zu einem vergünstigten Preis",
-      "cta": "Backup-Paket kaufen"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "POLKADOT Staking",
@@ -1112,6 +1113,7 @@
     "disconnected": "Getrennt",
     "connected": "Verbunden",
     "connecting": "Verbinde ...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Link einfügen",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Verbinden",
-        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:"
+        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. {{currencyName}} Konto wählen",
         "token": "2. Token auswählen",
         "verifyTokenType": "Bitte vergewissern Sie sich, dass <0>{{token}}</0> ein <0>{{tokenType}}</0> Token ist. Jeder andere Krypto-Vermögenswert, der an ein {{currency}}-Konto gesendet wird, kann verloren gehen.",
-        "warningTokenType": "Bitte senden Sie nur <0>{{ticker}}</0> oder <0>{{tokenType}}</0> Token auf ein {{currency}} Konto. Alle anderen Krypto-Vermögenswerte können verloren gehen."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Gerät",
@@ -1763,6 +1766,15 @@
   "releaseNotes": {
     "title": "Informationen zur Version",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "Vermögenswert",
@@ -2584,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -3971,7 +3983,11 @@
       "title": "Sie müssen mindestens einen Validator auswählen"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }

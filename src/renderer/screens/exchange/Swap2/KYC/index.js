@@ -24,6 +24,10 @@ import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import Tabbable from "~/renderer/components/Box/Tabbable";
 import AngleLeft from "~/renderer/icons/AngleLeft";
 import { SWAP_VERSION, useRedirectToSwapForm } from "../utils/index";
+import { openURL } from "~/renderer/linking";
+import IconExternalLink from "~/renderer/icons/ExternalLink";
+import FakeLink from "~/renderer/components/FakeLink";
+import { useDynamicUrl } from "~/renderer/terms";
 
 const Footer = styled.div`
   border-top: 1px solid ${p => p.theme.colors.palette.divider};
@@ -46,6 +50,15 @@ const FooterBackLink = styled(Tabbable)`
   }
 `;
 
+const Disclaimer = styled(Text)`
+  flex: 1 1 auto;
+  margin-left: 14px;
+  margin-right: 14px;
+  font-size: 12px;
+  line-height: 18px;
+  color: ${p => p.theme.colors.palette.text.shade50};
+`;
+
 const renderCountry = option => {
   if (!option) return null;
   const Icon = getFlag(option.data.value);
@@ -64,6 +77,7 @@ const KYC = () => {
   const [APIError, setAPIError] = useState<any>(null);
   const [isLoading, setLoading] = useState(false);
   const [hasSubmittedOnce, setHasSubmittedOnce] = useState(false);
+  const privacyPolicyUrl = useDynamicUrl("privacyPolicy");
 
   const swapKYC = useSelector(swapKYCSelector);
   const dispatch = useDispatch();
@@ -304,6 +318,26 @@ const KYC = () => {
                 {t("common.back")}
               </Text>
             </FooterBackLink>
+            <Box flex={1} />
+            <Disclaimer ff="Inter|Regular">
+              <Trans i18nKey={"swap.kyc.wyre.disclaimer"} />{" "}
+              <FakeLink
+                underline
+                fontSize={3}
+                color="palette.primary.main"
+                onClick={e => {
+                  e.preventDefault();
+                  openURL(privacyPolicyUrl);
+                }}
+                iconFirst
+                style={{ textTransform: "capitalize", display: "inline-flex" }}
+              >
+                <Trans i18nKey="swap.kyc.wyre.policy" />
+                <Box ml={1}>
+                  <IconExternalLink size={12} />
+                </Box>
+              </FakeLink>
+            </Disclaimer>
             <Button isLoading={isLoading} primary onClick={onSubmit}>
               <Trans i18nKey={"swap2.kyc.wyre.cta"} />
             </Button>

@@ -139,7 +139,8 @@ export default function TargetAccountDrawer({
       setDrawerStateRef.current = null;
     };
   }, [setDrawerStateRef]);
-  const handleAddAccount = () => dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency }));
+  const handleAddAccount = () =>
+    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow: "swap" }));
   const handleAccountPick: $PropertyType<Props, "setToAccount"> = (
     currency,
     account,

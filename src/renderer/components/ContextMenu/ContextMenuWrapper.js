@@ -60,6 +60,9 @@ const ContextMenuItemContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
   font-size: 12px;
   font-weight: 500;
 
+  & > * {
+    pointer-events: none;
+  }
   &:hover {
     cursor: pointer;
     background: ${p => p.theme.colors.palette.background.default};

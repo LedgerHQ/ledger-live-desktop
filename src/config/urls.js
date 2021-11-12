@@ -39,13 +39,13 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360012207759?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error_syncerror",
   terms: {
     en:
-      "https://www.ledger.com/pages/terms-of-use-and-disclaimer?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=terms",
+      "https://shop.ledger.com/pages/ledger-live-terms-of-use?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=terms",
     fr:
-      "https://shop.ledger.com/pages/conditions-generales-dutilisation-du-site-web?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+      "https://shop.ledger.com/pages/conditions-dutilisation-de-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
     es:
-      "https://shop.ledger.com/pages/condiciones-de-uso-del-sitio-web?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+      "https://shop.ledger.com/pages/condiciones-de-uso-de-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
     de:
-      "https://shop.ledger.com/pages/nutzungsbedingungen-der-website?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+      "https://shop.ledger.com/pages/nutzungsbedingungen-von-ledger-live?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
   },
   noDevice: {
     buyNew:
@@ -73,6 +73,8 @@ export const urls = {
       "https://shop.ledger.com/pages/politica-de-privacidad?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
     ru:
       "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    de:
+      "https://shop.ledger.com/pages/unsere-datenschutzrichtlinie?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
   },
   troubleshootingUSB:
     "https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error",
@@ -130,8 +132,8 @@ export const urls = {
   banners: {
     blackfriday:
       "https://shop.ledger.com/pages/black-friday?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
-    backupPack:
-      "https://shop.ledger.com/products/ledger-backup-pack?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
+    familyPack:
+      "https://shop.ledger.com/products/ledger-nano-s-3pack?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ledgerAcademy:
       "https://www.ledger.com/academy?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=banner_carousel",
     ongoingScams:
