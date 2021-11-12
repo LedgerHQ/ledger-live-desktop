@@ -132,7 +132,7 @@
   "operation": {
     "type": {
       "IN": "Received",
-      "OUT": "Gönderildi",
+      "OUT": "Sent",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
       "DELEGATE": "Yetki devredildi",
@@ -539,7 +539,7 @@
       "to": "Bitiş",
       "toProvider": "Sağlayıcı adresi",
       "initialAmount": "Başlangıç tutarı",
-      "creditedAmount": "Eklenen tutar"
+      "creditedAmount": "Credited amount"
     }
   },
   "fullNode": {
