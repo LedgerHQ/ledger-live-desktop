@@ -238,7 +238,7 @@
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{name}}",
+        "noAccount": "Créez un compte pour recevoir des {{name}}.",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
@@ -3944,7 +3944,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce bénéficiaire."
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
+      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
