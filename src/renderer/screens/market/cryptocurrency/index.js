@@ -1,12 +1,11 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
-
 import Box from "~/renderer/components/Box";
 import CryptoCurrencyHeader from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeader";
 import CryptocurrencyHeaderActions from "~/renderer/screens/market/cryptocurrency/CryptocurrencyHeaderActions";
@@ -20,6 +19,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ExternalLink from "~/renderer/components/ExternalLink";
 import { openURL } from "~/renderer/linking";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
 
 const Divider: ThemedComponent<{}> = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
@@ -30,7 +30,10 @@ const CryptoCurrencyPage = () => {
     params: { id },
   } = useRouteMatch();
 
-  const { favorites, reload } = useSelector(state => state.market);
+  const { contextState } = useContext(MarketContext);
+
+  // const { favorites, reload } = useSelector(state => state.market);
+  const { favorites, reload } = contextState;
 
   const { counterCurrency, range, counterValue } = useSelector(state => state.market);
 

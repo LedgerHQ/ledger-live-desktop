@@ -17,13 +17,14 @@ export const MARKET_DEFAULT_PAGE_LIMIT = 50;
 const marketClient = new MarketClient();
 
 export type GetMarketCryptoCurrencies = $Shape<{
-    counterCurrency: string,
-    range: string,
-    limit: number,
-    page: number,
-    order: string,
-    orderBy: string,
-}>
+  counterCurrency: string,
+  range: string,
+  limit: number,
+  page: number,
+  order: string,
+  orderBy: string,
+  loadMore?: boolean,
+}>;
 
 export const setMarketParams = (payload: $Shape<MarketState>) => ({
   type: "SET_MARKET_PARAMS",
@@ -72,7 +73,7 @@ export const toggleMarketLoading = ({ loading }: { loading: boolean }) => ({
 });
 
 export const getCounterCurrencies: ThunkAction = () =>
-  async function(dispatch, getState) {
+  async function(dispatch) {
     const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
     const res: {
       key: string,
@@ -94,7 +95,8 @@ export const getMarketCryptoCurrencies: ThunkAction = (
 ) =>
   async function(dispatch, getState) {
     const state = getState().market;
-    const loadMore = filterParams.page && filterParams.page !== state.page || state.failedMarketParams.loadMore;
+    const loadMore =
+      (filterParams.page && filterParams.page !== state.page) || state.failedMarketParams.loadMore;
     filterParams = { ...state, ...filterParams };
     dispatch(
       setMarketParams({
@@ -120,19 +122,23 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     const showFavorites: boolean = filters.isFavorite;
     const unShowFavorites: boolean = !filters.isFavorite;
     if (!coinsCount) {
-        try {
-            coins = await marketClient.supportedCurrencies();
-        } catch (e) {
-            dispatch(connectionError())
-            dispatch(setMarketParams({ failedMarketParams: {
-                    counterCurrency: filterParams.counterCurrency,
-                    range: filterParams.range,
-                    limit: filterParams.limit,
-                    page: filterParams.page,
-                    order: filterParams.order,
-                    orderBy: filterParams.orderBy,
-                }}))
-        }
+      try {
+        coins = await marketClient.supportedCurrencies();
+      } catch (e) {
+        dispatch(connectionError());
+        dispatch(
+          setMarketParams({
+            failedMarketParams: {
+              counterCurrency: filterParams.counterCurrency,
+              range: filterParams.range,
+              limit: filterParams.limit,
+              page: filterParams.page,
+              order: filterParams.order,
+              orderBy: filterParams.orderBy,
+            },
+          }),
+        );
+      }
     }
 
     const favoriteCryptocurrencies: Array<FavoriteCryptoCurrency> = await getKey(
@@ -180,28 +186,32 @@ export const getMarketCryptoCurrencies: ThunkAction = (
     if ((showFavorites || searchValue) && !ids.length) {
       cryptocurrencies = [];
     } else {
-        try {
-            cryptocurrencies = await marketClient.listPaginated({
-                counterCurrency,
-                range,
-                limit,
-                page,
-                order,
-                orderBy,
-                ids,
-            });
-        } catch (e) {
-            dispatch(connectionError())
-            dispatch(setMarketParams({ failedMarketParams: {
-                counterCurrency: filterParams.counterCurrency,
-                range: filterParams.range,
-                limit: filterParams.limit,
-                page: filterParams.page,
-                order: filterParams.order,
-                orderBy: filterParams.orderBy,
-                loadMore
-            }}))
-        }
+      try {
+        cryptocurrencies = await marketClient.listPaginated({
+          counterCurrency,
+          range,
+          limit,
+          page,
+          order,
+          orderBy,
+          ids,
+        });
+      } catch (e) {
+        dispatch(connectionError());
+        dispatch(
+          setMarketParams({
+            failedMarketParams: {
+              counterCurrency: filterParams.counterCurrency,
+              range: filterParams.range,
+              limit: filterParams.limit,
+              page: filterParams.page,
+              order: filterParams.order,
+              orderBy: filterParams.orderBy,
+              loadMore,
+            },
+          }),
+        );
+      }
     }
 
     const newCurrencies = mergeFavoriteAndSupportedCurrencies(
@@ -231,25 +241,29 @@ export const getMarketCryptoCurrencies: ThunkAction = (
         ids,
         coins,
         coinsCount,
-        failedMarketParams: {}
+        failedMarketParams: {},
       }),
     );
   };
 
-export const connectionError = (): ThunkAction => async function (dispatch, getState) {
-    dispatch(openModal("MODAL_CONNECTION_ERROR"))
-}
+export const connectionError = (): ThunkAction =>
+  async function(dispatch, getState) {
+    dispatch(openModal("MODAL_CONNECTION_ERROR"));
+  };
 
-export const ignoreConnectionError = (): ThunkAction => async function (dispatch, getState) {
-    dispatch(setMarketParams({ loading: false }))
-    dispatch(closeModal("MODAL_CONNECTION_ERROR"))
-}
+export const ignoreConnectionError = (): ThunkAction =>
+  async function(dispatch, getState) {
+    dispatch(setMarketParams({ loading: false }));
+    dispatch(closeModal("MODAL_CONNECTION_ERROR"));
+  };
 
-export const reloadMarket = (): ThukAction => async (dispatch, getState) => {
-    const { market: { reload } } = getState();
-    dispatch(setMarketParams({ reload: reload + 1 }))
-    dispatch(ignoreConnectionError())
-}
+export const reloadMarket = (): ThunkAction => async (dispatch, getState) => {
+  const {
+    market: { reload },
+  } = getState();
+  dispatch(setMarketParams({ reload: reload + 1 }));
+  dispatch(ignoreConnectionError());
+};
 
 export function mergeFavoriteAndSupportedCurrencies(
   favorites: Array<FavoriteCryptoCurrency>,

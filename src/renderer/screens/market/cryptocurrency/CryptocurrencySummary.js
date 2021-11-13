@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import type { BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
@@ -17,6 +17,7 @@ import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import BigNumber from "bignumber.js";
 import moment from "moment";
 import { rgba } from "~/renderer/styles/helpers";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
 
 type Props = {
   currency: MarketCurrencyInfo,
@@ -36,7 +37,9 @@ export default function CryptocurrencySummary({
     params: { id },
   } = useRouteMatch();
 
-  const { counterCurrency, range } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { counterCurrency, range, reload } = contextState;
+  // const { counterCurrency, range, reload } = useSelector(state => state.market);
 
   const { rangeData } = useRange(range);
 

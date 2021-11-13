@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Box from "~/renderer/components/Box";
@@ -12,24 +12,31 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies, getCounterCurrencies } from "~/renderer/actions/market";
 import useTheme from "~/renderer/hooks/useTheme";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import {
+  GET_COUNTER_CURRENCIES,
+  GET_MARKET_CRYPTO_CURRENCIES,
+} from "~/renderer/contexts/actionTypes";
 
 export const MarketCounterValueSelect = () => {
-  const { counterCurrency, counterCurrencies } = useSelector(state => state.market);
+  // const { counterCurrency, counterCurrencies } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { counterCurrency, counterCurrencies, error } = contextState;
 
   const theme = useTheme();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!counterCurrencies[0]) {
-      dispatch(getCounterCurrencies());
+    if (!counterCurrencies[0] && !error) {
+      contextDispatch(GET_COUNTER_CURRENCIES);
     }
-  });
+  }, [counterCurrencies, contextDispatch, error]);
 
   const onCounterValueSelected = useCallback(
     item => {
-      dispatch(getMarketCryptoCurrencies({ counterCurrency: item.value }));
+      contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { counterCurrency: item.value });
     },
-    [dispatch],
+    [contextDispatch],
   );
 
   const renderItem = useCallback(({ item, isActive }) => {

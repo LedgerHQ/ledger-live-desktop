@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
@@ -14,6 +14,12 @@ import Paginator from "~/renderer/components/Paginator";
 import { useTranslation } from "react-i18next";
 import InfiniteLoader from "react-window-infinite-loader";
 import Spinner from "~/renderer/components/Spinner";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import {
+  GET_COUNTER_CURRENCIES,
+  GET_MARKET_CRYPTO_CURRENCIES,
+  SET_MARKET_PARAMS,
+} from "~/renderer/contexts/actionTypes";
 
 const ListItemHeight: number = 55;
 
@@ -74,7 +80,25 @@ type CurrencyRowProps = {
 };
 
 function MarketList() {
+  // const {
+  //   range,
+  //   searchValue,
+  //   counterCurrency,
+  //   order,
+  //   orderBy,
+  //   limit,
+  //   coinsCount,
+  //   page,
+  //   currencies,
+  //   loading,
+  //   reload,
+  //   failedMarketParams,
+  // } = useSelector(state => state.market);
+  const { t } = useTranslation();
+
+  const { contextState, contextDispatch } = useContext(MarketContext);
   const {
+    coins,
     range,
     searchValue,
     counterCurrency,
@@ -85,46 +109,45 @@ function MarketList() {
     page,
     currencies,
     loading,
-    coins,
     reload,
-    failedMarketParams
-  } = useSelector(state => state.market);
+    failedMarketParams,
+    error,
+  } = contextState;
   const { rangeData } = useRange(range);
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
   const currenciesLength = currencies.length;
+  console.log("contextState ", contextState);
 
   useEffect(() => {
-    if (!coins[0]) {
-      dispatch(getMarketCryptoCurrencies());
+    if (!coins[0] && !loading && !error) {
+      contextDispatch(GET_MARKET_CRYPTO_CURRENCIES);
     }
-  }, [coins, dispatch]);
-
-  useEffect(() => {
-    dispatch(getMarketCryptoCurrencies(failedMarketParams))
-  }, [reload, dispatch]);
-
+    if (error) {
+      contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, failedMarketParams);
+    }
+  }, [coins, contextDispatch, error, failedMarketParams, loading, reload]);
 
   const onSort = key => {
     if (!loading) {
       if (key === orderBy) {
-        dispatch(getMarketCryptoCurrencies({ order: order === "desc" ? "asc" : "desc", page: 1 }));
+        contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, {
+          order: order === "desc" ? "asc" : "desc",
+          page: 1,
+        });
       } else {
-        dispatch(getMarketCryptoCurrencies({ orderBy: key, page: 1 }));
+        contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { orderBy: key, page: 1 });
       }
     }
   };
 
   const loadMoreItems = () => {
     if (!loading) {
-      dispatch(getMarketCryptoCurrencies({ page: page + 1 }));
+      contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { page: page + 1, loadMore: true });
     }
   };
 
   const isItemLoaded = (index: number) => !!currencies[index];
 
   const isLoading = loading && page === 1;
-  const isLoadingMore = loading && page > 1;
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => {
     if (index === currenciesLength && index > limit - 2 && loading) {
       return (
@@ -139,14 +162,13 @@ function MarketList() {
       );
     }
     return (
-      <Box style={{ ...style, pointerEvents: "auto", width: "100%" }}>
-        <MarketRowItem
-          loading={isLoading}
-          currency={currencies[index]}
-          counterCurrency={counterCurrency}
-          key={index}
-        />
-      </Box>
+      <MarketRowItem
+        loading={isLoading}
+        currency={currencies[index]}
+        counterCurrency={counterCurrency}
+        key={index}
+        style={{ ...style, pointerEvents: "auto", width: "100%" }}
+      />
     );
   };
 
@@ -242,7 +264,7 @@ function MarketList() {
         >
           {({ onItemsRendered, ref }) => (
             <ListStyled
-              height={currenciesLength < 9 ? currenciesLength * ListItemHeight : ListItemHeight * 9}
+              height={ListItemHeight * 9}
               width="100%"
               itemCount={loading ? currenciesLength + 1 : currenciesLength}
               onItemsRendered={onItemsRendered}

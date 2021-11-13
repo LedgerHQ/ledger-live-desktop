@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Box from "~/renderer/components/Box";
@@ -14,6 +14,8 @@ import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 import { useTranslation } from "react-i18next";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import { SET_MARKET_RANGE } from "~/renderer/contexts/actionTypes";
 
 type Props = {
   currency: MarketCurrencyInfo,
@@ -21,16 +23,17 @@ type Props = {
 };
 
 function CryptocurrencySummaryHeader({ currency, loading }: Props) {
-  const { counterCurrency, range } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  // const { counterCurrency, range } = useSelector(state => state.market);
+  const { counterCurrency, range } = contextState;
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
   const onRangeSelected = useCallback(
     item => {
       const range = item.value || "1d";
-      dispatch(setMarketRange(range));
+      contextDispatch(SET_MARKET_RANGE, { range });
     },
-    [dispatch],
+    [contextDispatch],
   );
 
   const difference = currency.difference || 0;

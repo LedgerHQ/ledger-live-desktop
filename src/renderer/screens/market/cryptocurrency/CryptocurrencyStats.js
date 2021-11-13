@@ -1,6 +1,5 @@
 // @flow
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Box, { Card } from "~/renderer/components/Box";
@@ -13,6 +12,7 @@ import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
 
 const Wrapper: ThemedComponent<{}> = styled(Box)`
   background-color: ${p => p.theme.colors.palette.background.paper};
@@ -73,7 +73,9 @@ const InfoSection = ({
 };
 
 function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
-  const { counterCurrency } = useSelector(state => state.market);
+  // const { counterCurrency } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { counterCurrency } = contextState;
   const { t } = useTranslation();
 
   return (
@@ -183,7 +185,9 @@ function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loadi
 }
 
 function MarketCap({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
-  const { counterCurrency } = useSelector(state => state.market);
+  // const { counterCurrency } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { counterCurrency } = contextState;
   const { t } = useTranslation();
 
   return (
@@ -215,7 +219,9 @@ function MarketCap({ currency, loading }: { currency: MarketCurrencyInfo, loadin
 }
 
 function Supply({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
-  const { counterCurrency } = useSelector(state => state.market);
+  // const { counterCurrency } = useSelector(state => state.market);
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { counterCurrency } = contextState;
   const { t } = useTranslation();
 
   return (

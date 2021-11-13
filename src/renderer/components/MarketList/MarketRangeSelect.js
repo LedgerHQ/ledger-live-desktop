@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Box from "~/renderer/components/Box";
@@ -12,6 +12,8 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
 import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import { useTranslation } from "react-i18next";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import { GET_MARKET_CRYPTO_CURRENCIES } from "~/renderer/contexts/actionTypes";
 
 export const rangesArr = [
   {
@@ -47,14 +49,16 @@ export const rangesArr = [
 ];
 
 export const MarketRangeSelect = () => {
-  const { range } = useSelector(state => state.market);
-  const dispatch = useDispatch();
+  // const { range } = useSelector(state => state.market);
+  // const dispatch = useDispatch();
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { range } = contextState;
   const { t } = useTranslation();
   const onRangeSelected = useCallback(
     item => {
-      dispatch(getMarketCryptoCurrencies({ range: item.value }));
+      contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { range: item.value });
     },
-    [dispatch],
+    [contextDispatch],
   );
 
   const renderItem = useCallback(({ item, isActive }) => {

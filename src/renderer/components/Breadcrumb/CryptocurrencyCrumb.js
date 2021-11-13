@@ -46,7 +46,7 @@ const CryptocurrencyCrumb = () => {
       <Separator />
       <Box horizontal>
         <CryptoCurrencyIconWrapper>
-          <img src={currencies.find(item => item.id === currency.id).image} />
+          <img src={currency.image} />
         </CryptoCurrencyIconWrapper>
         {currency.name}
       </Box>

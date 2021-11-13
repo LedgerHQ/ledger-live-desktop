@@ -27,6 +27,7 @@ import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementP
 import { PlatformAppProviderWrapper } from "~/renderer/components/PlatformAppProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { themeSelector } from "./actions/general";
+import { MarketProvider } from "~/renderer/contexts/MarketContext";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -92,7 +93,9 @@ const App = ({ store, initialCountervalues }: Props) => {
   return (
     <LiveStyleSheetManager>
       <Provider store={store}>
-        <InnerApp initialCountervalues={initialCountervalues} />
+        <MarketProvider>
+          <InnerApp initialCountervalues={initialCountervalues} />
+        </MarketProvider>
       </Provider>
     </LiveStyleSheetManager>
   );

@@ -30,34 +30,34 @@ function magnitude(number) {
 export const useMarketCurrency = ({ id, counterCurrency, range, reload }: Prop) => {
   const [currency, setCurrency] = useState<MarketCurrencyInfo>({});
   const [loading, setLoading] = useState<boolean>(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const currencyById = () => {
     const marketClient = new MarketClient();
     marketClient
-        .currencyById({
-          id: id || "",
-          counterCurrency,
-          range,
-        })
-        .then(currency => {
-          const supportedCurrenciesByLedger = listSupportedCurrencies();
-          supportedCurrenciesByLedger.forEach(supportedCurrency => {
-            if (currency.id === supportedCurrency.id) {
-              currency.supportedCurrency = supportedCurrency;
-            }
-          });
-          currency.magnitude = magnitude(currency.current_price);
-          setCurrency(currency);
-          setLoading(false);
-        })
-        .catch(() => {
-          dispatch(connectionError())
-        })
-  }
+      .currencyById({
+        id: id || "",
+        counterCurrency,
+        range,
+      })
+      .then(currency => {
+        const supportedCurrenciesByLedger = listSupportedCurrencies();
+        supportedCurrenciesByLedger.forEach(supportedCurrency => {
+          if (currency.id === supportedCurrency.id) {
+            currency.supportedCurrency = supportedCurrency;
+          }
+        });
+        currency.magnitude = magnitude(currency.current_price);
+        setCurrency(currency);
+        setLoading(false);
+      })
+      .catch(() => {
+        dispatch(connectionError());
+      });
+  };
 
   useEffect(() => {
-    currencyById()
+    currencyById();
   }, [id, counterCurrency, range, reload]);
   return { loading, currency };
 };
@@ -118,8 +118,8 @@ export const useMarketCurrencyChart = ({ id = "", counterCurrency, range, reload
         setLoading(false);
       })
       .catch(() => {
-        dispatch(connectionError())
-      })
+        dispatch(connectionError());
+      });
   }, [id, counterCurrency, days, interval, reload]);
 
   return { loading, chartData };

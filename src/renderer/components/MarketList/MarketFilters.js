@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -11,6 +11,8 @@ import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
 import CheckBox from "~/renderer/components/CheckBox";
 import { useTranslation } from "react-i18next";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import { GET_MARKET_CRYPTO_CURRENCIES, SET_MARKET_FILTERS } from "~/renderer/contexts/actionTypes";
 
 type ShowProps = {
   value: string,
@@ -121,8 +123,10 @@ const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) 
 };
 
 function MarketFilters() {
-  const savedFilters = useSelector(state => state.market.filters);
   const dispatch = useDispatch();
+  const { contextState, contextDispatch } = useContext(MarketContext);
+  // const savedFilters = useSelector(state => state.market.filters);
+  const savedFilters = contextState.filters;
   const [isLedgerCompatible, setIsLedgerCompatible] = useState(savedFilters.isLedgerCompatible);
   const [isFavorite, setIsFavorites] = useState(savedFilters.isFavorite);
 
@@ -154,8 +158,8 @@ function MarketFilters() {
   };
 
   const onApplyFilters = useCallback(() => {
-    dispatch(setMarketFilters({ isLedgerCompatible, isFavorite }));
-    dispatch(getMarketCryptoCurrencies());
+    contextDispatch(SET_MARKET_FILTERS, { isLedgerCompatible, isFavorite });
+    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES);
     dispatch(closePlatformAppDrawer());
   }, [dispatch, isFavorite, isLedgerCompatible]);
 
