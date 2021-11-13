@@ -238,7 +238,7 @@
           "rate": "Lorem Ipsum",
           "fees": "Lorem Ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Konto hinzufügen"
       },
       "from": {
@@ -3944,7 +3944,7 @@
       "title": "Beim Senden an diesen Empfänger kann ein Memo erforderlich sein"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Betrag muss größer sein als {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Betrag muss kleiner sein als {{maxAmountFromFormatted}}"

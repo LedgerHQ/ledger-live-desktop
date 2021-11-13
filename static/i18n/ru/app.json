@@ -238,7 +238,7 @@
           "rate": "Курс",
           "fees": "Комиссия"
         },
-        "noAccount": "У вас нет счёта {{name}}",
+        "noAccount": "Создайте счёт, чтобы получить {{name}}",
         "noAccountCTA": "Добавить счёт"
       },
       "from": {
@@ -313,7 +313,7 @@
           "street1Placeholder": "Например: ул. Маяковского 50",
           "street2Placeholder": "Например: ул. Маяковского 50",
           "cityPlaceholder": "Например: Москва",
-          "postalCodePlaceholder": "Введите индекс",
+          "postalCodePlaceholder": "Укажите индекс",
           "dateOfBirthPlaceholder": "ММ/ДД/ГГГГ",
           "firstNameError": "Укажите имя, чтобы продолжить",
           "lastNameError": "Укажите фамилию, чтобы продолжить",
@@ -423,7 +423,7 @@
           "street1Placeholder": "Например: ул. Маяковского 50",
           "street2Placeholder": "Например: ул. Маяковского 50",
           "cityPlaceholder": "Например: Москва",
-          "postalCodePlaceholder": "Введите индекс из 5 цифр",
+          "postalCodePlaceholder": "Укажите индекс",
           "dateOfBirthPlaceholder": "ММ/ДД/ГГГГ",
           "firstNameError": "Укажите имя, чтобы продолжить",
           "lastNameError": "Укажите фамилию, чтобы продолжить",
@@ -1345,7 +1345,7 @@
     "loading": "Загружаем...",
     "connectAndUnlockDevice": "Подключите и разблокируйте устройство",
     "unlockDevice": "Разблокируйте устройство",
-    "unlockDeviceAfterFirmwareUpdate": "Дождитесь обновления прошивки и разблокируйте устройство с помощью PIN-кода",
+    "unlockDeviceAfterFirmwareUpdate": "Дождитесь обновления прошивки и разблокируйте устройство с помощью ПИН-кода",
     "quitApp": "Выйдите из приложения на устройстве",
     "appNotInstalledTitle": "Отсутствует необходимое приложение",
     "appNotInstalledTitle_plural": "Отсутствуют необходимые приложения",
@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "Использовать экспериментальные JS-реализации для Биткойна (Taproot) и Tezos"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -2996,7 +2996,7 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Установить ПИН-код",
+              "title": "Создайте ПИН-код",
               "descr": "Левой или правой кнопкой вы выбираете цифру. Нажатием обеих кнопок вы подтверждаете выбор. Выберите <0></0> для подтверждения ПИН-кода. Выберите <1></1> для удаления цифры."
             },
             "confirm": {
@@ -3944,7 +3944,7 @@
       "title": "При отправке этому получателю может потребоваться Memo"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Сумма должна быть больше {{minAmountFromFormatted}}"
+      "title": "Сумма должна быть не менее {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Сумма должна быть меньше {{maxAmountFromFormatted}}"
@@ -3987,7 +3987,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
     }
   }
 }
