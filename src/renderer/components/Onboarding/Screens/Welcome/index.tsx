@@ -1,12 +1,11 @@
-import React, { useCallback, useState } from "react";
-import { useTranslation, Trans } from "react-i18next";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import React, { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { openURL } from "~/renderer/linking";
 import LangSwitcher from "~/renderer/components/Onboarding/LangSwitcher";
 import Carousel from "~/renderer/components/Onboarding/Screens/Welcome/Carousel";
 import { urls } from "~/config/urls";
-import { Log, Text, Button, Logos, Icons } from "@ledgerhq/react-ui";
+import { Text, Button, Logos, Icons } from "@ledgerhq/react-ui";
 
 import accessCrypto from "./assets/access-crypto.svg";
 import ownPrivateKey from "./assets/own-private-key.svg";
@@ -15,8 +14,9 @@ import stayOffline from "./assets/stay-offline.svg";
 import validateTransactions from "./assets/validate-transactions.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+import { isAcceptedTerms } from "~/renderer/terms";
 
-const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano]
+const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
 
 const Link = styled(Text)`
@@ -66,12 +66,13 @@ const RightContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  background-color:  ${p => p.theme.colors.palette.primary.c60};
+  background-color: ${p => p.theme.colors.palette.primary.c60};
 `;
 
 const CarouselTopBar = styled.div`
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 40px;
   width: 100%;
 `;
@@ -86,22 +87,24 @@ type Props = {
 };
 
 export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
+
+  const hasAcceptedTerms = isAcceptedTerms();
 
   const handleNext = useCallback(() => {
-    sendEvent("NEXT");
-  }, [sendEvent]);
+    sendEvent(hasAcceptedTerms ? "NEXT" : "OPEN_TERMS_MODAL");
+  }, [hasAcceptedTerms, sendEvent]);
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
   }, []);
 
-  const steps = stepLogos.map( (logo, index) => ({
+  const steps = stepLogos.map((logo, index) => ({
     image: logo,
     title: t(`v3.onboarding.screens.welcome.steps.${index}.title`),
     description: t(`v3.onboarding.screens.welcome.steps.${index}.desc`),
-    isLast: index === stepLogos.length - 1
-  }))
+    isLast: index === stepLogos.length - 1,
+  }));
 
   return (
     <WelcomeContainer>
@@ -116,10 +119,10 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
           </Description>
         </Presentation>
         <ProductHighlight>
-          <Button 
+          <Button
             iconPosition="right"
             Icon={Icons.ArrowRightMedium}
-            type="main" 
+            type="main"
             onClick={handleNext}
           >
             {t("v3.onboarding.screens.welcome.nextButton")}
@@ -132,11 +135,14 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       </LeftContainer>
       <RightContainer>
         <CarouselTopBar>
+          {onboardingRelaunched && (
+            <Button small onClick={() => sendEvent("PREV")}>
+              {t("common.previous")}
+            </Button>
+          )}
           <LangSwitcher />
         </CarouselTopBar>
-        <Carousel
-          queue={steps}
-        />
+        <Carousel queue={steps} />
       </RightContainer>
     </WelcomeContainer>
   );

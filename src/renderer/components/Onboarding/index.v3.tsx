@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
-import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
@@ -14,7 +13,6 @@ import { urls } from "~/config/urls";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
-import { Terms } from "~/renderer/components/Onboarding/Screens/Terms";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
 import {
@@ -31,6 +29,7 @@ import RecoveryWarning from "~/renderer/components/Onboarding/Help/RecoveryWarni
 import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { SideDrawer } from "../SideDrawer";
 import Box from "../Box";
+import TermsAndConditionsModal from "./Screens/Welcome/TermsAndConditionsModal";
 
 const OnboardingContainer = styled.div`
   display: flex;
@@ -51,10 +50,29 @@ const onboardingMachine = Machine({
     welcome: {
       on: {
         NEXT: {
-          actions: () => track("Onboarding - Start"),
-          target: "terms",
+          actions: [
+            () => track("Onboarding - Start"),
+            assign({
+              showTerms: false,
+            }),
+          ],
+          target: "selectDevice",
         },
         PREV: { target: "onboardingComplete" },
+        OPEN_TERMS_MODAL: {
+          actions: [
+            assign({
+              showTerms: true,
+            }),
+          ],
+        },
+        CLOSE_TERMS_MODAL: {
+          actions: [
+            assign({
+              showTerms: false,
+            }),
+          ],
+        }
       },
     },
     terms: {
@@ -76,7 +94,7 @@ const onboardingMachine = Machine({
           ],
         },
         PREV: {
-          target: "terms",
+          target: "welcome",
         },
       },
     },
@@ -174,7 +192,6 @@ const onboardingMachine = Machine({
 
 const screens = {
   welcome: Welcome,
-  terms: Terms,
   selectDevice: SelectDevice,
   selectUseCase: SelectUseCase,
   setupNewDevice: SetupNewDevice,
@@ -230,12 +247,12 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
 
   return (
     <React.Fragment>
-      <Modal
-        isOpen={state.context.pedagogy}
-        onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}
-      >
-        <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
-      </Modal>
+      <Pedagogy isOpen={state.context.pedagogy} onClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")} onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
+      <TermsAndConditionsModal
+        isOpen={state.context.showTerms}
+        onClose={() => sendEvent("CLOSE_TERMS_MODAL")}
+        sendEvent={sendEvent}
+      />
       <SideDrawer
         isOpen={!!state.context.help.recoveryPhraseWarning}
         onRequestClose={() =>
