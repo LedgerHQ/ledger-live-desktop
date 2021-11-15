@@ -2549,7 +2549,7 @@
       "runLocalAppOpenButton": "Открыть"
     },
     "currencies": {
-      "selectPlaceholder": "Выберите криптоактив",
+      "selectPlaceholder": "Выберите актив",
       "desc": "Для изменения настроек криптоактива его необходимо выбрать.",
       "placeholder": "Нет настроек для выбранного актива",
       "confirmationsNb": "Количество подтверждений",
