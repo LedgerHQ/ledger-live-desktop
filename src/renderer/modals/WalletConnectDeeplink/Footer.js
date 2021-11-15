@@ -6,7 +6,7 @@ import Button from "~/renderer/components/Button";
 import { STATUS } from "~/renderer/screens/WalletConnect/Provider";
 import { Trans } from "react-i18next";
 
-const Footer = ({ onContinue, onReject, wcDappName, wcStatus }: FooterProps) => {
+const Footer = ({ onContinue, onReject, wcDappName, wcStatus, account }: FooterProps) => {
   return (
     <Box horizontal justifyContent="flex-end">
       {wcStatus === STATUS.CONNECTING && wcDappName ? (
@@ -18,7 +18,7 @@ const Footer = ({ onContinue, onReject, wcDappName, wcStatus }: FooterProps) => 
       <Button
         onClick={onContinue}
         primary
-        disabled={!(wcStatus === STATUS.CONNECTING && wcDappName)}
+        disabled={!(wcStatus === STATUS.CONNECTING && wcDappName && account)}
         id="wc-paste-link-confirm-continue"
       >
         <Trans i18nKey="common.continue" />

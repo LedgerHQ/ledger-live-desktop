@@ -1129,8 +1129,9 @@
       },
       "confirm": {
         "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "details": "Wants to connect to the following Ethereum account through your wallet:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect."
       }
     },
     "connectedscreen": {
