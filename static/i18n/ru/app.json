@@ -1299,7 +1299,7 @@
     "from": "Откуда",
     "to": "Куда",
     "identifier": "ID транзакции",
-    "viewOperation": "Просмотреть в Обозревателе блоков",
+    "viewOperation": "Посмотреть в Обозревателе",
     "showMore": "Показать больше {{recipients}}",
     "showLess": "Показать меньше",
     "tokenOperations": "Операции с токеном",
