@@ -17,7 +17,7 @@ import Alert from "~/renderer/components/Alert";
 
 import SplTokenSelector from "../fields/SplTokenSelector";
 
-export default function StepAsset({
+export default function StepTokens({
   account,
   parentAccount,
   onUpdateTransaction,
@@ -60,13 +60,13 @@ export default function StepAsset({
         onChange={onUpdateToken}
       />
       <Alert type="primary">
-        <Trans i18nKey="solana.optIn.flow.steps.assets.info" />
+        <Trans i18nKey="solana.optIn.flow.steps.tokens.info" />
       </Alert>
     </Box>
   );
 }
 
-export function StepAssetFooter({
+export function StepTokensFooter({
   transitionTo,
   account,
   parentAccount,

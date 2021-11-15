@@ -9,7 +9,7 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "assets",
+  stepId: "tokens",
 };
 
 class OptInModal extends PureComponent<{ name: string }, State> {

@@ -1187,6 +1187,9 @@
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})"
+    },
+    "solana": {
+      "title": "Add SPL Token"
     }
   },
   "subAccounts": {
@@ -2385,6 +2388,26 @@
             "title": "Broadcasting transaction..."
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    }
+  },
+  "solana": {
+    "optIn": {
+      "flow": {
+        "title": "Add SPL Token",
+        "steps": {
+          "tokens": {
+            "title": "Choose Token",
+            "info": "Adding a token will require an additional fee which can be claimed back by closing the token account.",
+            "selectLabel": "Select a token"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation"
+          }
         }
       }
     }
