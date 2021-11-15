@@ -144,7 +144,7 @@
       "VOTE": "Проголосовано",
       "FREEZE": "Заморожено",
       "UNFREEZE": "Разморожено",
-      "REWARD": "Получение вознаграждения",
+      "REWARD": "Вознаграждение",
       "FEES": "Комиссия",
       "OPT_IN": "Выбрать",
       "OPT_OUT": "Отказаться",
@@ -789,7 +789,7 @@
     "headers": {
       "active": {
         "accounts": "Счёт",
-        "amountSupplied": "Открытые займы",
+        "amountSupplied": "Активные займы",
         "amountSuppliedTooltip": "Сумма, кредитованная в сеть",
         "accruedInterests": "Начисленные %",
         "accruedInterestsTooltip": "Проценты с кредитования",
