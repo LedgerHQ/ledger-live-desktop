@@ -62,7 +62,7 @@
     "apply": "Uygula",
     "done": "Bitti",
     "confirm": "Onayla",
-    "reject": "Reject",
+    "reject": "Reddet",
     "cancel": "İptal et",
     "getSupport": "Destek alın",
     "delete": "Sil",
@@ -131,8 +131,8 @@
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
+      "IN": "Alındı",
+      "OUT": "Gönderildi",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
       "DELEGATE": "Yetki devredildi",
@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "{{name}} almak için bir hesap oluşturun",
         "noAccountCTA": "Hesap ekle"
       },
       "from": {
@@ -539,7 +539,7 @@
       "to": "Bitiş",
       "toProvider": "Sağlayıcı adresi",
       "initialAmount": "Başlangıç tutarı",
-      "creditedAmount": "Credited amount"
+      "creditedAmount": "Eklenen tutar"
     }
   },
   "fullNode": {
