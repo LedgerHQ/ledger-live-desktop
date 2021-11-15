@@ -58,46 +58,46 @@
     }
   },
   "common": {
-    "never": "Never",
-    "apply": "Apply",
+    "never": "절대",
+    "apply": "적용",
     "done": "완료",
-    "confirm": "Confirm",
-    "reject": "Reject",
-    "cancel": "Cancel",
-    "getSupport": "Get support",
-    "delete": "Delete",
-    "launch": "Launch",
-    "continue": "Continue",
+    "confirm": "확인",
+    "reject": "거절",
+    "cancel": "취소",
+    "getSupport": "지원 받기",
+    "delete": "삭제",
+    "launch": "실행",
+    "continue": "계속",
     "previous": "이전",
-    "learnMore": "Learn more",
-    "help": "Help",
-    "needHelp": "Need help?",
-    "areYouSure": "Are you sure?",
-    "selectAccount": "Select an account",
-    "selectAccountNoOption": "No account matching \"{{accountName}}\"",
-    "selectCurrency": "Choose a crypto asset",
-    "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "learnMore": "더 알아보기",
+    "help": "도움말",
+    "needHelp": "도움이 필요하십니까?",
+    "areYouSure": "확실합니까?",
+    "selectAccount": "계정 선택",
+    "selectAccountNoOption": "\"{{accountName}}\"와(과) 일치하는 계정 없음",
+    "selectCurrency": "암호화 자산 선택",
+    "selectCurrencyNoOption": "암호화 자산 \"{{currencyName}}\" 없음",
     "selectValidatorNoOption": "'{{accountName}}'와/과 일치하는 검증인이 없습니다",
     "selectNoResults": "'{{query}}'와/과 일치하는 결과가 없습니다",
-    "sortBy": "Sort by",
-    "save": "Save",
-    "lock": "Lock",
-    "showMore": "Show more",
-    "back": "Back",
-    "reset": "Reset",
-    "retry": "Retry",
+    "sortBy": "정렬 기준",
+    "save": "저장",
+    "lock": "잠금",
+    "showMore": "자세히 표시",
+    "back": "뒤로",
+    "reset": "재설정",
+    "retry": "다시 시도",
     "range": "범위",
-    "stop": "Stop",
+    "stop": "중지",
     "updateNow": "지금 업데이트",
-    "close": "Close",
-    "eastern": "Eastern",
-    "western": "Western",
-    "reverify": "Re-verify",
-    "verify": "Verify",
+    "close": "닫기",
+    "eastern": "동부",
+    "western": "서부",
+    "reverify": "재확인",
+    "verify": "확인",
     "verifyMyAddress": "내 주소 확인",
-    "copy": "Copy",
-    "copied": "Copied",
-    "addressCopied": "Address copied",
+    "copy": "복사",
+    "copied": "복사됨",
+    "addressCopied": "주소 복사됨",
     "addressCopiedSuspicious": "복사된 주소와 클립보드 주소가 일치하지 않습니다.",
     "experimentalFeature": "실험적",
     "information": "정보",
@@ -105,19 +105,19 @@
     "searchWithoutEllipsis": "검색",
     "manage": "관리",
     "lockScreen": {
-      "title": "Welcome back",
+      "title": "다시 돌아오신 것을 환영합니다.",
       "subTitle": null,
-      "description": "Enter your password to continue",
-      "inputPlaceholder": "Type your password",
-      "lostPassword": "I lost my password"
+      "description": "계속하려면 암호를 입력하세요",
+      "inputPlaceholder": "암호를 입력하세요",
+      "lostPassword": "암호를 잊어버렸습니다"
     },
     "sync": {
-      "syncing": "Synchronizing...",
-      "upToDate": "Synchronized",
-      "outdated": "Paused",
+      "syncing": "동기화 중...",
+      "upToDate": "동기화됨",
+      "outdated": "일시 중지됨",
       "needsMigration": "클릭하여 계정 업데이트",
-      "error": "Synchronization error",
-      "refresh": "Refresh",
+      "error": "동기화 오류",
+      "refresh": "새로고침",
       "devTools": "개발자 도구"
     },
     "exchange": "교환",
@@ -127,12 +127,12 @@
   "devices": {
     "nanoS": "Nano S",
     "nanoX": "Nano X",
-    "blue": "Blue"
+    "blue": "블루"
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
+      "IN": "수신됨",
+      "OUT": "전송됨",
       "CREATE": "생성됨",
       "REVEAL": "숨김 해제",
       "DELEGATE": "위임됨",
@@ -165,9 +165,9 @@
     "mbUnit": "{{size}} Mb"
   },
   "time": {
-    "minute": "Minute",
+    "minute": "분",
     "minute_plural": "분",
-    "hour": "Hour",
+    "hour": "시간",
     "hour_plural": "시",
     "range": {
       "day": "1일",
@@ -238,7 +238,7 @@
           "rate": "로렘 입숨",
           "fees": "로렘 입숨"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "{{name}}을(를) 수령할 계정을 생성하세요",
         "noAccountCTA": "계정 추가"
       },
       "from": {
@@ -1067,9 +1067,9 @@
       "cta": "지금 구매하기"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "패밀리 팩",
+      "description": "할인된 가격으로 3개의 Nano S로 가족과 친구들을 암호화 세상으로 초대하세요",
+      "cta": "패밀리 팩 구매"
     },
     "polkaStake": {
       "title": "Polkadot(폴카닷) 스테이킹",
@@ -1113,7 +1113,7 @@
     "disconnected": "연결 해제 완료",
     "connected": "연결됨",
     "connecting": "연결 중...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "잘못된 계정 ID",
     "steps": {
       "paste": {
         "title": "링크를 붙여넣으세요",
@@ -1123,7 +1123,7 @@
       "confirm": {
         "title": "연결",
         "details": "지갑을 통해 다음 이더리움 계정에 연결하고 싶다면:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:"
       }
     },
     "connectedscreen": {
@@ -1263,7 +1263,7 @@
     "cta": {
       "addMore": "Add more",
       "add": "Add account",
-      "add_plural": "Add accounts",
+      "add_plural": "계정 추가",
       "addAccountName": "{{currencyName}} 계정 추가",
       "receive": "수신"
     },
@@ -1768,13 +1768,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "앱의 언어를 변경하시겠습니까?",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "좋은 소식입니다! 당사 팀은 항상 최선을 다해 노력해왔으며 Ledger Live는 이제 {{language}}를 지원합니다.",
+      "advice": "나중에 설정에서 언제든지 언어를 다시 변경할 수 있습니다."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "{{language}}로 전환",
+    "no": "다음을 선호하지 않습니다:"
   },
   "distribution": {
     "asset": "자산",
@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "비트코인(Taproot) 및 Tezos에 실험적인 JS 구현 사용"
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -3944,7 +3944,7 @@
       "title": "수령인에게 보낼 때 메모가 필요할 수 있습니다"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "금액은 {{minAmountFromFormatted}} 이상이어야 합니다"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "금액은 {{minAmountFromFormatted}}보다 적어야 합니다"
@@ -3987,7 +3987,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
     }
   }
 }
