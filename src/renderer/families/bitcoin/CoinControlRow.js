@@ -58,12 +58,13 @@ export const CoinControlRow = ({
   bridge,
 }: CoinControlRowProps) => {
   const s = getUTXOStatus(utxo, utxoStrategy);
+  const utxoStatus = s.reason || "";
   const input = (status.txInputs || []).find(
     input => input.previousOutputIndex === utxo.outputIndex && input.previousTxHash === utxo.hash,
   );
 
-  const unconfirmed = (s.reason || "") === "pickUnconfirmedRBF";
-  const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length;
+  const unconfirmed = utxoStatus === "pickUnconfirmedRBF" || utxoStatus === "pickPendingNonRBF";
+  const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length; // make sure that at least one utxo is selected
   const disabled = unconfirmed || last;
 
   const onClick = () => {

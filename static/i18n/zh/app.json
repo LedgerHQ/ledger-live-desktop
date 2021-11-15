@@ -62,7 +62,7 @@
     "apply": "应用",
     "done": "已完成",
     "confirm": "确认",
-    "reject": "Reject",
+    "reject": "拒绝",
     "cancel": "取消",
     "getSupport": "获取支持",
     "delete": "删除",
@@ -238,7 +238,7 @@
           "rate": "lorem ipsum 随机假文",
           "fees": "lorem ipsum 随机假文"
         },
-        "noAccount": "您没有 {{name}} 账户。",
+        "noAccount": "创建一个账户以接收 {{name}}",
         "noAccountCTA": "添加账户"
       },
       "from": {
@@ -1067,9 +1067,9 @@
       "cta": "立即买入"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "家庭装",
+      "description": "通过 3 个 Nano S 以折扣价使您的家人和朋友入门加密",
+      "cta": "购买家庭装"
     },
     "polkaStake": {
       "title": "POLKADOT staking（权益质押）",
@@ -1113,7 +1113,7 @@
     "disconnected": "已断开连接",
     "connected": "已连接",
     "connecting": "正在连接...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "无效的账户 ID ",
     "steps": {
       "paste": {
         "title": "粘贴链接",
@@ -1123,7 +1123,7 @@
       "confirm": {
         "title": "连接",
         "details": "想要通过您的钱包连接到以下以太坊账户：",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户："
       }
     },
     "connectedscreen": {
@@ -1680,7 +1680,7 @@
         "parentAccount": "1. 选择 {{currencyName}} 账户",
         "token": "2. 选择代币",
         "verifyTokenType": "请验证 <0>{{token}}</0> 是 <0>{{tokenType}}</0> 代币。发送到 {{currency}} 账户的任何其他类型的加密资产都可能被丢失。",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
+        "warningTokenType": "请只发送 <0>{{ticker}}</0> 或 <0>{{tokenType}}</0> 代币到 {{currency}} 账户。发送其他加密资产可能导致资金的永久损失。"
       },
       "connectDevice": {
         "title": "设备",
@@ -1768,13 +1768,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "更改您应用程序的语言？",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "好消息！通过我们团队的不懈努力，Ledger Live 现在支持 {{language}}。",
+      "advice": "您可以随时在设置中更改您的语言。"
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "切换到 {{language}}",
+    "no": "我不愿意"
   },
   "distribution": {
     "asset": "资产",
@@ -2595,8 +2595,8 @@
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "title": "实验性的 JS 实现",
+          "description": "对比特币 (Taproot) 和 Tezos 使用实验性的 JS 实现"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -3434,8 +3434,8 @@
       "description": "请输入账户名称"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "请重试",
+      "description": "账户已过期。需要同步"
     },
     "AccountNotSupported": {
       "title": "不支持该账户。",
@@ -3944,7 +3944,7 @@
       "title": "发送到该接收方时，或许需要添加 memo（目的地标签）"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "数额必须高于 {{minAmountFromFormatted}}"
+      "title": "金额必须至少为 {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "数额必须低于 {{maxAmountFromFormatted}}"
@@ -3987,7 +3987,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "在激活主网之前，发送到 taproot 地址不安全"
     }
   }
 }
