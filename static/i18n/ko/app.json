@@ -189,10 +189,10 @@
     "feesAmount": "수수료 비용"
   },
   "sidebar": {
-    "menu": "Menu",
+    "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
-    "manager": "Manager",
+    "manager": "관리자",
     "exchange": "매수 / 매도",
     "swap": "스왑",
     "lend": "대출",
@@ -521,13 +521,13 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
+      "title": "스왑",
       "provider": "공급자",
       "txid": "스왑 ID",
       "status": "상태",
       "statusTooltips": {
         "expired": "자세한 정보를 확인하시려면 스왑 ID를 준비하여 스왑 제공자에게 연락하세요.",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "자세한 정보를 확인하시려면 스왑 ID를 준비하여 스왑 제공자에게 연락하세요.",
         "pending": "스왑 공급자가 트랜잭션을 처리하는 동안 기다려주세요.",
         "onhold": "상황을 해결하시려면 스왑 ID를 준비하여 스왑 제공자에게 연락하세요.",
         "finished": "스왑이 성공적으로 완료되었습니다."
@@ -538,8 +538,8 @@
       "fromAddress_plural": "발신 주소",
       "to": "수신",
       "toProvider": "공급자 주소",
-      "initialAmount": "Initial amount",
-      "creditedAmount": "Credited amount"
+      "initialAmount": "초기 금액",
+      "creditedAmount": "적립된 금액"
     }
   },
   "fullNode": {
@@ -675,24 +675,24 @@
     "contractAddress": "계약:",
     "openInExplorer": "탐색기에서 열기",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
+      "title": "아직 암호화 자산이 없나요?",
+      "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수령하세요",
       "descToken": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt; 앱이 설치되었는지 확인 &lt;3&gt;&lt;0&gt;{{ticker}}&lt;/0&gt;&lt;/3&gt; 및 &lt;5&gt;&lt;0&gt;{{tokenList}}&lt;/0&gt; 토큰을 받으세요&lt;/5&gt;",
       "buttons": {
-        "receiveFunds": "Receive",
+        "receiveFunds": "수령",
         "buy": "구매"
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "계정 수정",
       "advancedLogs": "고급",
       "advancedTips": "xpub은 개인 정보에 민감한 데이터입니다. 특히 제3자에게 공개할 때는 주의하여 사용하세요.",
       "accountName": {
-        "title": "Account name",
+        "title": "계정 이름",
         "desc": "계정 설명"
       },
       "unit": {
-        "title": "Unit",
+        "title": "단위",
         "desc": "사용할 단위를 선택하세요"
       }
     },
@@ -1046,7 +1046,7 @@
       "cta": "캐시 삭제"
     },
     "migrate": "Ledger Live 계정을 업데이트할 수 있습니다",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "genericTerminatedCrypto": "{{coinName}}은(는) 더 이상 지원되지 않습니다",
     "valentine": {
       "title": "발렌타인 데이",
       "description": "감사의 표시로, Ledger에서 Ledger Live의 구매 및 판매 수수료를 인하합니다"
@@ -1133,17 +1133,17 @@
     }
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "포트폴리오",
     "emptyAccountTile": {
       "desc": "계정을 추가하여 다른 암호화 자산을 관리하세요",
-      "createAccount": "Add account"
+      "createAccount": "계정 추가"
     },
     "recentActivity": "최신 운영",
-    "totalBalance": "Total balance",
+    "totalBalance": "총 잔액",
     "transactionsPendingConfirmation": "일부 트랜잭션이 아직 확인되지 않았습니다. 트랜잭션이 확인된 후 잔금에 반영되며 사용이 가능합니다."
   },
   "currentAddress": {
-    "title": "Current address",
+    "title": "현재 주소",
     "for": "&lt;1&gt;&lt;0&gt;{{name}}&lt;0&gt;&lt;1&gt; 주소",
     "messageIfUnverified": "공유된 주소가 장치의 주소와 정확히 일치하는지 확인하세요.",
     "messageIfSkipped": "귀하의 {{name}} 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요.",
@@ -1233,20 +1233,20 @@
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "계정 추가",
     "breadcrumb": {
-      "informations": "Crypto asset",
-      "connectDevice": "Device",
-      "import": "Accounts",
-      "finish": "Confirmation"
+      "informations": "암호화 자산",
+      "connectDevice": "장치",
+      "import": "계정",
+      "finish": "확인"
     },
     "fullNodeReadyInfo": "비트코인 풀 노드를 이용하여 계정을 추가할 것입니다.",
     "fullNodeConfigure": "노드 구성",
     "tokensTip": "{{token}} ({{ticker}})(은)는 {{tokenType}} 토큰입니다. {{currency}} 계정으로 직접 토큰을 받을 수 있습니다.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
+    "accountToImportSubtitle_plural": "기존 계정 추가",
+    "selectAll": "모든 ({{count}}) 선택",
+    "unselectAll": "모든 ({{count}}) 선택 해제",
+    "noAccountToImport": "추가할 기존 {{currencyName}} 계정이 없습니다",
     "success": "계정이 성공적으로 추가되었습니다",
     "success_plural": "계정이 성공적으로 추가되었습니다",
     "successDescription": "다른 계정을 추가하거나 포트폴리오로 돌아가세요",
@@ -1261,8 +1261,8 @@
       "segwit_or_native_segwit": "SegWit, 또는 Native SegWit?"
     },
     "cta": {
-      "addMore": "Add more",
-      "add": "Add account",
+      "addMore": "더 추가하기",
+      "add": "계정 추가",
       "add_plural": "계정 추가",
       "addAccountName": "{{currencyName}} 계정 추가",
       "receive": "수신"
