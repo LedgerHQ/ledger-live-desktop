@@ -1920,7 +1920,7 @@
       "noRewards": "Ödül yok",
       "delegate": "Ekle",
       "undelegate": "Yetkiyi iptal et",
-      "redelegate": "Yetkiyi yeniden devret",
+      "redelegate": "Yetkinin yeniden devri",
       "redelegateDisabledTooltip": "Yetkiyi başkasına devretmek için &lt;0&gt;{{days}}&lt;/0&gt; gün beklemelisiniz",
       "redelegateMaxDisabledTooltip": "Bir seferde en fazla &lt;0&gt;7&lt;/0&gt; doğrulayıcıya yetki devredebilirsiniz.",
       "undelegateDisabledTooltip": "Bir seferde en fazla &lt;0&gt;7&lt;/0&gt; doğrulayıcının yetkisini iptal edebilirsiniz.",
