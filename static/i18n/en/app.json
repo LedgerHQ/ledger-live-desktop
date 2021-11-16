@@ -62,6 +62,7 @@
     "apply": "Apply",
     "done": "Done",
     "confirm": "Confirm",
+    "reject": "Reject",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
@@ -237,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Add account"
       },
       "from": {
@@ -1065,10 +1066,10 @@
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "Buy now"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "POLKADOT staking",
@@ -1112,6 +1113,7 @@
     "disconnected": "Disconnected",
     "connected": "Connected",
     "connecting": "Connecting...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Paste link",
@@ -1120,7 +1122,8 @@
       },
       "confirm": {
         "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "details": "Wants to connect to the following Ethereum account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1677,7 +1680,7 @@
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Device",
@@ -1763,6 +1766,15 @@
   "releaseNotes": {
     "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "Asset",
@@ -2584,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -3385,6 +3397,8 @@
     "termsLabel": "Terms of service",
     "privacyLabel": "Privacy policy",
     "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "termsCheckboxLabel": "<0>I have read and agree with the </0><1>Terms of Use</1>",
+    "privacyCheckboxLabel": "<0>I have read and accepted the </0><1>Privacy Policy</1>",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -3932,7 +3946,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{maxAmountFromFormatted}}"
@@ -3971,7 +3985,11 @@
       "title": "You must select at least one validator"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   },
   "v3": {
@@ -6817,19 +6835,36 @@
       },
       "screens": {
         "welcome": {
-          "title": "Welcome to Ledger",
+          "title": "WELCOME TO LEDGER LIVE",
           "description": "Safely manage your crypto from your computer.",
-          "cta": "Get started",
-          "noDevice": "No device? <0>Buy a Ledger Nano X</0>",
-          "languageWarning": {
-            "title": "Get started in {{language}}",
-            "desc": "We are introducing additional languages  in order to help your onboarding with Ledger. Please be aware that the rest of the Ledger experience is currently only available in English.",
-            "cta": "Got it"
-          }
+          "noDevice": "No device?",
+          "buyLink": "Buy a Ledger Nano X",
+          "nextButton": "Enter the crypto world",
+          "steps": [
+            {
+              "title": "Access your crypto",
+              "desc": "Your crypto assets are stored on the blockchain\nUse your private key to access and manage them"
+            },
+            {
+              "title": "Own your private key",
+              "desc": "Your private key is stored within your Nano\nYou must be the only one to own it to be in control of your money"
+            },
+            {
+              "title": "Stay offline",
+              "desc": "Your Nano workds as a ‘cold storage’ wallet\nThis means that it never exposes your private key online, even when using the app"
+            },
+            {
+              "title": "Validate transactions",
+              "desc": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected\nYou will validate every crypto transaction with your Nano"
+            },
+            {
+              "title": "Let’s set up your nano",
+              "desc": "We’ll start by setting up your Nano securly"
+            }
+          ]
         },
         "selectDevice": {
-          "title": "SELECT YOUR DEVICE",
-          "selectLabel": "Select"
+          "title": "What's your device?"
         },
         "selectUseCase": {
           "greetings": "Hello!",

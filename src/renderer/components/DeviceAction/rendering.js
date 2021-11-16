@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
@@ -49,6 +49,7 @@ import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
 import { context } from "~/renderer/drawers/Provider";
+import { track } from "~/renderer/analytics/segment";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -253,13 +254,26 @@ export const renderRequiresAppInstallation = ({ appNames }: { appNames: string[]
   );
 };
 
-export const renderInstallingApp = ({
+export const InstallingApp = ({
   appName,
   progress,
+  request,
+  analyticsPropertyFlow = "unknown",
 }: {
   appName: string,
   progress: number,
+  request: any,
+  analyticsPropertyFlow?: string,
 }) => {
+  const currency = request?.currency || request?.account?.currency;
+  const appNameToTrack = appName || request?.appName || currency?.managerAppName;
+  useEffect(() => {
+    const trackingArgs = [
+      "In-line app install",
+      { appName: appNameToTrack, flow: analyticsPropertyFlow },
+    ];
+    track(...trackingArgs);
+  }, [appNameToTrack, analyticsPropertyFlow]);
   return (
     <Wrapper id="deviceAction-loading">
       <Header />

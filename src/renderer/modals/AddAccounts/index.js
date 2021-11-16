@@ -31,6 +31,7 @@ type Props = {
   replaceAccounts: (Account[]) => void,
   blacklistedTokenIds?: string[],
   currency: ?CryptoCurrency | ?TokenCurrency,
+  flow?: string,
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
@@ -56,6 +57,7 @@ export type StepProps = {
   editedNames: { [_: string]: string },
   setScannedAccounts: ({ scannedAccounts?: Account[], checkedAccountsIds?: string[] }) => void,
   blacklistedTokenIds?: string[],
+  flow?: string,
 };
 
 type St = Step<StepId, StepProps>;
@@ -215,7 +217,7 @@ class AddAccounts extends PureComponent<Props, State> {
   };
 
   render() {
-    const { device, existingAccounts, blacklistedTokenIds } = this.props;
+    const { device, existingAccounts, blacklistedTokenIds, flow = "add account" } = this.props;
     const {
       currency,
       scannedAccounts,
@@ -244,6 +246,7 @@ class AddAccounts extends PureComponent<Props, State> {
       setAccountName: this.handleSetAccountName,
       onGoStep1: this.onGoStep1,
       editedNames,
+      flow,
     };
     const title = <Trans i18nKey="addAccounts.title" />;
     const errorSteps = err ? [2] : [];
