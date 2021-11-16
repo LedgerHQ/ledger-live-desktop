@@ -2635,27 +2635,27 @@
     },
     "resetFallbackModal": {
       "title": "사용자 조치 필요",
-      "part1": "Could not delete cache folder. Please delete the folder manually:",
-      "part2": "Click the Open folder button, the ",
-      "part3": "app will close",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "part1": "캐시 폴더를 삭제할 수 없습니다. 폴더를 수동으로 삭제하세요:",
+      "part2": "폴더 열기 버튼을 클릭",
+      "part3": "앱이 종료됩니다",
+      "part4": ", 그리고 \"sqlite\" 폴더를 수동으로 삭제하세요.",
+      "part5": "그런 다음 앱을 정상적으로 다시 시작할 수 있습니다."
     },
     "removeAccountModal": {
-      "title": "Remove account",
+      "title": "계정 제거",
       "desc": "귀하의 암호화 자산에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
       "warning": "이 계정을 삭제하면 계정과 연결된 사용자의 스왑 트랜잭션 내역이 삭제됩니다."
     },
     "openUserDataDirectory": {
-      "title": "View user data",
+      "title": "사용자 데이터 보기",
       "desc": "계정, 캐시, 설정 등 컴퓨터에 저장된 사용자 데이터를 살펴봅니다.",
-      "btn": "View"
+      "btn": "보기"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
+      "title": "Ledger 장치 복구",
       "descSettings": "펌웨어 업데이트 중 Ledger 장치가 멈추면 이 기능으로 장치를 복구하세요.",
       "desc": "Ledger Nano S 사용자 경우, 장치에 표시된 상태를 선택하세요. Nano X 및 Blue 사용자는 지원 센터를 참고하세요.",
-      "button": "Repair"
+      "button": "복구"
     },
     "exportLogs": {
       "title": "로그 저장",
@@ -2682,38 +2682,38 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "새 암호"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "암호 확인"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "현재 암호"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "암호 잠금",
+      "subTitle": "암호 변경"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "암호 잠금",
       "subTitle": "패스워드 설정",
       "desc": "패스워드를 안전하게 보호하세요. 패스워드를 분실하면 Ledger Live를 리셋하고 계정을 다시 추가해야 합니다."
     },
     "disablePassword": {
-      "title": "Disable password lock",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "title": "암호 잠금 비활성화",
+      "desc": "Ledger Live 데이터가 암호화되지 않고 컴퓨터에 저장됩니다. 여기에는 계정 이름, 거래 및 공용 주소가 포함됩니다."
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
+    "downloadInProgress": "업데이트 다운로드 중...",
+    "downloadProgress": "{{progress}}% 완료됨",
+    "checking": "업데이트 확인 중...",
+    "checkSuccess": "업데이트 설치 준비 완료",
+    "quitAndInstall": "지금 설치",
     "updateAvailable": "Ledger Live {{version}} 버전을 업데이트할 수 있습니다",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again",
+    "error": "업데이트 중 오류가 발생했습니다. 다시 다운로드하세요",
+    "reDownload": "다시 다운로드",
     "nightlyWarning": "이 버전은 자동 업데이트되지 않습니다. 최신 버전을 수동으로 설치하세요",
     "downloadNow": "업데이트 다운로드"
   },
@@ -2737,7 +2737,7 @@
     "disclaimer": "내보내기의 등가 가치는 정보 목적으로만 제공됩니다. 당사 서비스 공급자(Kaiko)의 가치 평가 방법에 따라 트랜잭션이나 내보내기 시점의 자산 가격을 추산한 값이므로, 회계, 세금, 규제 및 법률상의 목적으로 이러한 데이터를 활용하지 마시기 바랍니다."
   },
   "language": {
-    "system": "Use system language",
+    "system": "시스템 언어 사용",
     "switcher": {
       "en": "영어",
       "fr": "프랑스어",
@@ -3784,7 +3784,7 @@
       "title": "Recipient address is the same as the sender address"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
+      "title": "죄송합니다, 연결에 실패했습니다",
       "description": "장치가 발견했지만 연결에 실패했습니다. 문제가 지속되면 다시 시도하거나 Ledger 지원 부서에 연락하세요."
     },
     "ETHAddressNonEIP": {
