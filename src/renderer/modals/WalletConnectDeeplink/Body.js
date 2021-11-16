@@ -1,7 +1,7 @@
 // @flow
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
@@ -47,10 +47,92 @@ const DottedLine = styled.hr`
   margin-right: 16px;
 `;
 
+type DAppConnectBodyProps = {
+  onChangeAccount: (?Account) => void,
+  wcContext: *,
+  selectedAccount: ?Account,
+  handleReject: () => void,
+};
+
+const DAppConnectBody = ({
+  onChangeAccount,
+  wcContext,
+  selectedAccount,
+  handleReject,
+}: DAppConnectBodyProps) => {
+  const dispatch = useDispatch();
+
+  const handleAddAccount = useCallback(() => {
+    handleReject();
+    dispatch(openModal("MODAL_ADD_ACCOUNTS"));
+  }, [dispatch, handleReject]);
+
+  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum", []);
+  const ethAccounts = useSelector(accountsSelector).filter(filterAccountSelect);
+
+  const { t } = useTranslation();
+
+  return (
+    <Box alignItems={"center"} p={20}>
+      <Box horizontal alignItems={"center"} mb={32}>
+        <LogoContainer>
+          <Logo src={WCLogo} />
+        </LogoContainer>
+        <DottedLine />
+        <LogoContainer>
+          <Logo src={LedgerLiveImg} />
+        </LogoContainer>
+      </Box>
+      <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
+        {wcContext.dappInfo.name}
+      </Text>
+      {ethAccounts.length > 0 ? (
+        <>
+          <Text
+            mt={20}
+            textAlign="center"
+            ff="Inter|Regular"
+            fontSize={4}
+            color="palette.text.shade50"
+          >
+            {t("walletconnect.steps.confirm.deeplinkDetails")}
+          </Text>
+          <Box mt={20} width="100%">
+            <SelectAccount
+              autoFocus
+              filter={filterAccountSelect}
+              onChange={onChangeAccount}
+              value={selectedAccount}
+            />
+          </Box>
+        </>
+      ) : (
+        <>
+          <Text
+            mt={20}
+            textAlign="center"
+            ff="Inter|Regular"
+            fontSize={4}
+            color="palette.text.shade50"
+          >
+            {t("walletconnect.steps.confirm.noEthAccount")}
+          </Text>
+          <Box mt={20}>
+            <Button primary onClick={handleAddAccount}>
+              {t("addAccounts.cta.addAccountName", {
+                currencyName: "Ethereum",
+              })}
+            </Button>
+          </Box>
+        </>
+      )}
+    </Box>
+  );
+};
+
 const Body = ({ onClose, link }: BodyProps) => {
   const wcContext = useContext(context);
 
-  const dispatch = useDispatch();
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -60,82 +142,37 @@ const Body = ({ onClose, link }: BodyProps) => {
     disconnect();
     onClose();
   }, [onClose]);
-  
-  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum", []);
-  const ethAccounts = useSelector(accountsSelector).filter(filterAccountSelect);
 
   useEffect(() => {
     connect(link);
   }, [link]);
 
-  const handleAddAccount = useCallback(() => {
-    handleReject();
-    dispatch(openModal("MODAL_ADD_ACCOUNTS"));
-  }, [dispatch]);
-
   return (
     <ModalBody
       title={t("walletconnect.titleAccount")}
-      onClose={handleReject}
+      onClose={wcContext.status === STATUS.CONNECTING ? handleReject : onClose}
       render={() => (
         <Box flow={1}>
           {wcContext.status === STATUS.ERROR ? (
             <Box>{wcContext.error?.message || t("walletconnect.invalidAccount")}</Box>
           ) : wcContext.status === STATUS.CONNECTING && wcContext.dappInfo ? (
+            <DAppConnectBody
+              onChangeAccount={setAccount}
+              wcContext={wcContext}
+              selectedAccount={account}
+              handleReject={handleReject}
+            />
+          ) : wcContext.status === STATUS.CONNECTED ? (
             <Box alignItems={"center"} p={20}>
-              <Box horizontal alignItems={"center"} mb={32}>
-                <LogoContainer>
-                  <Logo src={WCLogo} />
-                </LogoContainer>
-                <DottedLine />
-                <LogoContainer>
-                  <Logo src={LedgerLiveImg} />
-                </LogoContainer>
-              </Box>
-              <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
-                {wcContext.dappInfo.name}
+              <Text
+                mt={20}
+                textAlign="center"
+                ff="Inter|Regular"
+                fontSize={4}
+                color="palette.text.shade50"
+              >
+                {t("walletconnect.steps.confirm.alreadyConnected")}
               </Text>
-              {ethAccounts.length > 0 ? (
-                <>
-                  <Text
-                    mt={20}
-                    textAlign="center"
-                    ff="Inter|Regular"
-                    fontSize={4}
-                    color="palette.text.shade50"
-                  >
-                    {t("walletconnect.steps.confirm.deeplinkDetails")}
-                  </Text>
-                  <Box mt={20} width="100%">
-                    <SelectAccount
-                      autoFocus
-                      filter={filterAccountSelect}
-                      onChange={setAccount}
-                      value={account}
-                    />
-                  </Box>
-                </>
-              ) : (
-              <>
-                <Text
-                    mt={20}
-                    textAlign="center"
-                    ff="Inter|Regular"
-                    fontSize={4}
-                    color="palette.text.shade50"
-                  >
-                    {t("walletconnect.steps.confirm.noEthAccount")}
-                  </Text>
-                  <Box mt={20}>
-                    <Button primary onClick={handleAddAccount}>
-                      {t("addAccounts.cta.addAccountName", {
-                        currencyName: "Ethereum",
-                      })}
-                    </Button>
-                  </Box>
-              </>
-              )
-            }
             </Box>
           ) : (
             <Box alignItems={"center"} justifyContent={"center"} p={20}>
@@ -150,6 +187,7 @@ const Body = ({ onClose, link }: BodyProps) => {
           wcStatus={wcContext.status}
           account={account}
           onReject={handleReject}
+          onCancel={onClose}
           onContinue={() => {
             approveSession(account);
             onClose();
