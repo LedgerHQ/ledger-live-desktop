@@ -56,8 +56,12 @@ const ModalStepper = (props: Props) => {
   const defaultBackLabel = t("common.back");
 
   const onClickContinue = useCallback(() => {
-    if (stepIndex === stepCount - 1) onFinish();
-    setStepIndex(Math.min(stepIndex + 1, stepCount - 1));
+    if (stepIndex === stepCount - 1) {
+      setStepIndex(0);
+      onFinish();
+    } else {
+      setStepIndex(Math.min(stepIndex + 1, stepCount - 1));
+    }
   }, [stepIndex, stepCount, onFinish]);
 
   const onClickBack = useCallback(() => {

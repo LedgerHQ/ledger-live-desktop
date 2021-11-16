@@ -1,4 +1,4 @@
-import { Flex, Aside, Logos, Text, Button, Icons, ProgressBar } from "@ledgerhq/react-ui";
+import { Flex, Aside, Logos, Button, Icons, ProgressBar } from "@ledgerhq/react-ui";
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
