@@ -8,7 +8,9 @@ import defaultTheme from "./theme";
 import palettes from "./palettes";
 import type { Theme } from "./theme";
 
-import { defaultTheme as V3dDfaultTheme, palettes as V3Palettes, GlobalStyle } from "@ledgerhq/react-ui/styles";
+import { GlobalStyle } from "./global";
+
+import { defaultTheme as V3dDfaultTheme, palettes as V3Palettes } from "@ledgerhq/react-ui/styles";
 
 type Props = {
   children: React.ReactNode;
@@ -29,12 +31,12 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
         palette: { ...palettesAny[selectedPalette], ...V3Palettes[selectedPalette] },
       },
     }),
-    [selectedPalette],
+    [palettesAny, selectedPalette],
   );
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle fontsPath="assets/fonts" />
+      <GlobalStyle />
       {children}
     </ThemeProvider>
   );

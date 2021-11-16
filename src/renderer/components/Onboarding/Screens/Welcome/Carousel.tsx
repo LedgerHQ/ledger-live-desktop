@@ -10,9 +10,11 @@ const Wrapper = styled(Flex)`
   align-items: center;
   position: relative;
   flex: 1;
+  justify-content: center;
   text-align: center;
   width: 350px;
   margin: auto;
+  height: 100%;
 `;
 
 const SlideLogo = styled(Flex)<{ image?: string }>`

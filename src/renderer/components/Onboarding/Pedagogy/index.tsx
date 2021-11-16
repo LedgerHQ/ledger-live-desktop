@@ -8,8 +8,11 @@ import ModalStepper from "../../ModalStepper";
 import accessYourCoins from "./assets/accessYourCoins.png";
 
 const Illustration = styled(Flex)`
-  background: url(${({ src }) => src}) no-repeat center;
+  background: url(${p => p.src}) no-repeat center;
+  background-size: contain;
   margin: 0 auto;
+  width: ${p => p.width}px;
+  height: ${p => p.height}px;
 `;
 
 type PedagogyProps = {
@@ -24,27 +27,33 @@ export function Pedagogy({ isOpen, onDone, onClose }: PedagogyProps) {
   return (
     <ModalStepper
       isOpen={isOpen}
-      title={t("v3.onboarding.screens.pedagogy.title")}
+      title={t("v3.onboarding.pedagogy.heading")}
       steps={[
         {
-          title: t("v3.onboarding.screens.pedagogy.0.title"),
-          description: t("v3.onboarding.screens.pedagogy.0.description"),
+          title: t("v3.onboarding.pedagogy.screens.accessYourCoins.title"),
+          description: t("v3.onboarding.pedagogy.screens.accessYourCoins.description"),
           AsideRight: <Illustration width={280} height={280} src={accessYourCoins} />,
         },
         {
-          title: t("v3.onboarding.screens.pedagogy.1.title"),
-          description: t("v3.onboarding.screens.pedagogy.1.description"),
+          title: t("v3.onboarding.pedagogy.screens.ownYourPrivateKey.title"),
+          description: t("v3.onboarding.pedagogy.screens.ownYourPrivateKey.description"),
           AsideRight: <Illustration width={280} height={280} src={accessYourCoins} />,
         },
         {
-          title: t("v3.onboarding.screens.pedagogy.2.title"),
-          description: t("v3.onboarding.screens.pedagogy.2.description"),
+          title: t("v3.onboarding.pedagogy.screens.stayOffline.title"),
+          description: t("v3.onboarding.pedagogy.screens.stayOffline.description"),
           AsideRight: <Illustration width={280} height={280} src={accessYourCoins} />,
         },
         {
-          title: t("v3.onboarding.screens.pedagogy.4.title"),
-          description: t("v3.onboarding.screens.pedagogy.4.description"),
+          title: t("v3.onboarding.pedagogy.screens.validateTransactions.title"),
+          description: t("v3.onboarding.pedagogy.screens.validateTransactions.description"),
           AsideRight: <Illustration width={280} height={280} src={accessYourCoins} />,
+        },
+        {
+          title: t("v3.onboarding.pedagogy.screens.setUpNanoWallet.title"),
+          description: t("v3.onboarding.pedagogy.screens.setUpNanoWallet.description"),
+          AsideRight: <Illustration width={280} height={280} src={accessYourCoins} />,
+          continueLabel: t("v3.onboarding.pedagogy.screens.setUpNanoWallet.CTA"),
         },
       ]}
       onClose={onClose}

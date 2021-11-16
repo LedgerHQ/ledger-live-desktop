@@ -27,7 +27,7 @@ const SelectUseCaseContainer = styled.div`
 `;
 
 const PlaceholderIllu = styled.div`
-  background: url(${placeholderOption}) no-repeat center;
+  background: url(${() => placeholderOption}) no-repeat center;
   width: 200px;
   height: 200px;
 `;

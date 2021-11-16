@@ -5,7 +5,7 @@ import { Provider, useSelector } from "react-redux";
 import type { Store } from "redux";
 import { HashRouter as Router } from "react-router-dom";
 
-import "./global.css";
+import "./global.v3.css";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/shift-away.css";
 import "tippy.js/animations/shift-toward.css";
