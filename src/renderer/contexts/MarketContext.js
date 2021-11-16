@@ -1,6 +1,5 @@
 // @flow
 import * as React from "react";
-import typeof { createContext } from "react";
 import {
   RELOAD,
   SET_MARKET_FILTERS,
@@ -19,7 +18,7 @@ import { useDispatch } from "react-redux";
 import handlers from "~/renderer/contexts/handlers";
 import type { Dispatch } from "redux";
 
-export const MarketContext: createContext = React.createContext<any>();
+export const MarketContext: React$Context<any> = React.createContext<any>();
 
 type MarketState = {
   currencies: Array<MarketCurrencyInfo>,
@@ -107,7 +106,7 @@ export function MarketProvider({ children }: { children: React.Node }) {
       setState({ type, payload });
     }
   };
-  const value: { contextState: MarketState, contextDispatch: Promise<any> } = {
+  const value: { contextState: MarketState, contextDispatch: typeof dispatch } = {
     contextState: state,
     contextDispatch: dispatch,
   };
