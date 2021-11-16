@@ -154,6 +154,8 @@
     "@storybook/react": "^6.3.7",
     "@types/react-router-dom": "^5.3.2",
     "@types/redux-actions": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^27.3.1",
