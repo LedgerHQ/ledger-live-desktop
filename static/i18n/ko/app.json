@@ -2744,7 +2744,7 @@
       "ru": "러시아어",
       "es": "스페인어",
       "zh": "중국어",
-      "de": "German"
+      "de": "독일어"
     }
   },
   "theme": {
@@ -3561,15 +3561,15 @@
     },
     "DisconnectedDeviceDuringOperation": {
       "title": "죄송하지만 장치 연결이 해제된 것 같습니다",
-      "description": "Please reconnect and try again."
+      "description": "다시 연결하여 재시도해주세요."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "잘못된 엔드포인트",
+      "description": "유효한 엔드포인트를 입력하세요"
     },
     "FeeEstimationFailed": {
       "title": "죄송합니다. 수수료를 산정하지 못했습니다.",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "description": "맞춤 수수료 설정을 시도해주세요 (status: {{status}})"
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "펌웨어나 앱 업데이트가 필요합니다",
@@ -3584,12 +3584,12 @@
       "description": "Ledger 지원 부서에 연락하세요"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "title": "죄송하지만 리셋할 수 없습니다",
+      "description": "다시 시도하거나 문제가 지속되면 Ledger 지원에 문의해주세요."
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "title": "죄송하지만 업데이트가 필요한 항목이 없습니다",
+      "description": "장치를 사용할 수 없다면 Ledger 지원 부서에 문의하세요."
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
@@ -3600,12 +3600,12 @@
       "description": "서버가 요청을 처리할 수 없습니다. 나중에 다시 시도하거나 Ledger 지원 부서에 연락하세요. {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "title": "죄송하지만 {{currencyName}} 서비스를 이용할 수 없습니다",
+      "description": "다시 시도하거나 Ledger 지원 부서로 문의해주세요"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "죄송하지만 이미 설치되었습니다",
+      "description": "장치에 이미 설치된 앱이 무엇인지 확인하세요."
     },
     "ManagerAppDepInstallRequired": {
       "title": "{{dependency}} 앱이 필요합니다",
@@ -3624,7 +3624,7 @@
       "description": "암호화 자산에 액세스 할 수 있는 개인 키는 장치에 안전하게 보관되며 사용자의 복구 시트에 백업해 두어야 합니다."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
+      "title": "죄송하지만 남아 있는 저장 공간이 충분하지 않습니다",
       "description": "일부 앱을 삭제하여 공간을 확보하세요. 암호화 자산 접근에 사용되는 개인 키는 장치에 안전하게 보관됩니다."
     },
     "ManagerQuitPage": {
@@ -3646,34 +3646,34 @@
       "quit": "관리자 중단"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "title": "죄송하지만 반드시 필요한 앱입니다",
+      "description": "Bitcoin 또는 Ethereum 앱을 마지막으로 제거하세요"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "죄송하지만 인터넷이 끊긴 것 같습니다",
+      "description": "인터넷 연결을 확인해주세요."
     },
     "NoAddressesFound": {
       "title": "죄송하지만 발견된 계정이 없습니다",
       "description": "주소 계산에 문제가 발생했습니다. 재시도하거나 Ledger 지원 부서에 연락하세요"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "죄송하지만 자금이 부족합니다",
+      "description": "계정에 자금이 충분한지 확인해 주세요."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "수취인 주소가 비활성화되어 있습니다. 활성화하려면 최소 {{minimalAmount}}를 보내주세요"
     },
     "NotEnoughGas": {
       "title": "부모 계정의 ETH 잔금이 네트워크 수수료로 부족합니다."
     },
     "PasswordsDontMatch": {
       "title": "패스워드가 일치하지 않습니다",
-      "description": "Please try again"
+      "description": "다시 시도해주세요"
     },
     "PasswordIncorrect": {
       "title": "입력한 패스워드가 올바르지 않습니다",
-      "description": "Please try again"
+      "description": "다시 시도해주세요"
     },
     "RPCHostRequired": {
       "title": "호스트가 필요합니다."
@@ -3708,12 +3708,12 @@
       "description": "교환 트랜잭션이 완료되지 않았습니다. 다시 시도하거나 지원에 연락하세요."
     },
     "TimeoutError": {
-      "title": "Sorry, server took too long to respond",
-      "description": "Please try again."
+      "title": "죄송하지만 서버 응답에 너무 많은 시간이 소요되었습니다",
+      "description": "다시 시도해 주세요."
     },
     "TimeoutTagged": {
-      "title": "Sorry, server took too long to respond ({{tag}})",
-      "description": "Timeout occurred."
+      "title": "죄송하지만 서버 응답에 너무 많은 시간이 소요되었습니다 ({{tag}})",
+      "description": "타임아웃이 발생했습니다."
     },
     "TransportError": {
       "title": "문제가 발생했습니다. 장치를 다시 연결하세요",
@@ -3732,11 +3732,11 @@
       "description": "계정을 찾는 동안 {{appName}} 앱을 열어두세요"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "title": "죄송하지만 귀하의 장치가 부트로더 모드가 아니어야 합니다",
+      "description": "로고가 나타나면 버튼을 터치하지 말고 장치를 다시 시작하세요. 문제가 지속되면 Ledger 지원에 문의해주세요."
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "장치에서 관리자가 거부됨"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "장치의 업데이트가 취소되었습니다",
@@ -3751,38 +3751,38 @@
       "description": "확실하지 않을 경우 재시도하거나 Ledger 지원 부서에 연락하세요"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
+      "title": "수신 주소 거부됨",
       "description": "확실하지 않을 경우 다시 시도하거나 Ledger 지원 부서에 연락하세요"
     },
     "UpdateYourApp": {
-      "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "title": "앱 업데이트가 필요합니다",
+      "description": "관리자에서 {{managerAppName}} 앱을 삭제하고 재설치하세요"
     },
     "DeviceOnDashboardExpected": {
       "title": "대시보드로 돌아가기",
       "description": "장치의 대시보드로 돌아가세요"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "죄송하지만 다시 시도해주세요(웹소켓 에러)",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "죄송하지만 다시 시도해주세요(연결 종료됨)",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
+      "title": "문제가 발생했습니다",
       "description": "하드웨어 지갑이 선택된 계정과 연계된 복구 문구 또는 패스프레이즈로 설정되었는지 확인하세요."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
+      "title": "앱 업데이트가 필요합니다",
       "description": "관리자에서 {{managerAppName}} 앱을 삭제하고 재설치하세요"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "유효한 {{currencyName}} 주소가 아닙니다"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "수신자의 주소가 발신자의 주소와 동일합니다"
     },
     "CantOpenDevice": {
       "title": "죄송합니다, 연결에 실패했습니다",
