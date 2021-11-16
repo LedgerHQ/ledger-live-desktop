@@ -487,11 +487,11 @@
           "title": "概要",
           "from": "送付元",
           "to": "送付先",
-          "toExchange": "Amount to send",
-          "toReceive": "Amount to receive",
-          "terms": "Terms & Conditions",
+          "toExchange": "送付額",
+          "toReceive": "受取額",
+          "terms": "ご利用規約",
           "disclaimer": {
-            "description": "By clicking \"Confirm\", I acknowledge and accept that this service is exclusively governed by <0>{{provider}}</0>'s",
+            "description": "「同意する」をクリックすることで、私はこのサービスが<0>{{provider}}</0>の利用規約によって排他的に規定されていることを理解し、これに同意します。",
             "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
           },
           "details": {
