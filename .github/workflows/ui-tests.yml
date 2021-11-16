@@ -1,4 +1,4 @@
-name: ui tests
+name: Screenshot Tests
 on:
   pull_request:
     branches:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   ui-tests-linux:
-    name: ui tests ${{ matrix.os }}
+    name: ui tests (${{ matrix.os }})
     strategy:
       fail-fast: true
       matrix:
@@ -59,6 +59,7 @@ jobs:
             playwright/artifacts/videos
 
   ui-tests:
+    name: ui tests (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
