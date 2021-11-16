@@ -492,10 +492,10 @@
           "terms": "ご利用規約",
           "disclaimer": {
             "description": "「同意する」をクリックすることで、私はこのサービスが<0>{{provider}}</0>の利用規約によって排他的に規定されていることを理解し、これに同意します。",
-            "acceptedDescription": "This service is exclusively governed by <0>{{provider}}</0>'s"
+            "acceptedDescription": "このサービスは 、<0>{{provider}}</0>により管理されています。"
           },
           "details": {
-            "provider": "Provider",
+            "provider": "プロバイダー",
             "tradeMethod": {
               "title": "種類",
               "float": "変動レート",
@@ -505,77 +505,77 @@
           }
         },
         "device": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "dependencies": {
           "title": "アプリチェック"
         },
         "finished": {
-          "title": "Pending",
+          "title": "保留中",
           "subtitle": "スワップが正常にブロードキャストされました。 ",
-          "swap": "Your Swap ID:",
-          "seeDetails": "See details",
+          "swap": "スワップID：",
+          "seeDetails": "詳細を表示",
           "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
           "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。"
         }
       }
     },
     "operationDetailsModal": {
-      "title": "Swap",
-      "provider": "Provider",
-      "txid": "Swap ID",
-      "status": "Status",
+      "title": "スワップ",
+      "provider": "プロバイダー",
+      "txid": "スワップID",
+      "status": "ステータス",
       "statusTooltips": {
         "expired": "詳細については、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
-        "refunded": "Please contact the swap provider with your swap ID for more information.",
+        "refunded": "詳細については、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
         "pending": "スワッププロバイダーがトランザクションを処理しています。しばらくお待ちください。",
         "onhold": "問題を解決するには、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
         "finished": "スワップが正常に完了しました。"
       },
-      "date": "Date",
-      "from": "From",
+      "date": "日付",
+      "from": "送付元",
       "fromAddress": "送信元アドレス",
       "fromAddress_plural": "送信元アドレス",
-      "to": "To",
+      "to": "送付先",
       "toProvider": "プロバイダーのアドレス",
-      "initialAmount": "Initial amount",
-      "creditedAmount": "Credited amount"
+      "initialAmount": "初期設定額",
+      "creditedAmount": "クレジット額"
     }
   },
   "fullNode": {
-    "status": "Status",
-    "connect": "Connect",
-    "disconnect": "Disconnect",
-    "checkNodeSettings": "Verify node settings",
-    "edit": "Edit",
+    "status": "ステータス",
+    "connect": "接続",
+    "disconnect": "接続切断",
+    "checkNodeSettings": "ノード設定を確認",
+    "edit": "編集",
     "modal": {
-      "title": "Connect Bitcoin full node",
-      "disconnectTitle": "Disconnect full node",
+      "title": "ビットコインのフルノードを接続",
+      "disconnectTitle": "フルノードを切断",
       "steps": {
         "landing": {
-          "header": "Start your full node. Don’t trust, verify.",
-          "description": "A Bitcoin full node validates all transactions and blocks, allowing you to use Bitcoin in a trustless way while contributing to the Bitcoin network.",
+          "header": "フルノードをスタートします。「 Don’t trust, verify（信頼せず、検証しよう）」",
+          "description": "ビットコインのフルノードは、全てのトランザクションやブロックを認証するため、ビットコインネットワークに貢献しながら、誰かに頼ることなくビットコインを利用できます。",
           "list": {
-            "item1": "Set up Bitcoin Core on a device with sufficient resources.",
-            "item2": "Wait for your node to fully synchronize.",
+            "item1": "適切なデバイスに、Bitcoin Coreを設定します。",
+            "item2": "ノードの同期完了までお待ちください。",
             "item3": "ノードのRPC（遠隔手続き呼び出し）証明、IPアドレス、ポート番号を書き留めてください。"
           },
-          "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
+          "disclaimer": "フルノードには、十分なリソースを持ち、データ制限なしにブロードバンド接続可能なコンピューターが必要です。"
         },
         "node": {
-          "title": "Node",
+          "title": "ノード",
           "connectionSteps": {
             "notConnected": {
-              "header": "Enter your node parameters",
-              "disclaimer": "Your full node must be fully synchronized before connecting Ledger Live.",
+              "header": "ノードパラメータを入力してください。",
+              "disclaimer": "Ledger Liveに接続する前に、フルノードを完全に同期する必要があります。",
               "fields": {
                 "nodeHost": {
-                  "title": "Host",
-                  "tooltip": "Leave as default if node runs on this computer, or replace the node IP address and port number."
+                  "title": "ホスト",
+                  "tooltip": "ノードがこのコンピュータ上で実行されている場合はデフォルトのままにするか、ノードの IP アドレスとポート番号を変更してください。"
                 },
                 "rpcCredentials": {
-                  "title": "RPC Credentials",
-                  "tooltip": "Enter the RPC username and password of your node, found in the bitcoin.conf file.",
+                  "title": "RPCクレデンシャル",
+                  "tooltip": "bitcoin.confファイルで見つかった、ノードのRPCユーザー名とパスワードを入力してください。",
                   "usernamePlaceholder": "Username",
                   "passwordPlaceholder": "Password"
                 },
