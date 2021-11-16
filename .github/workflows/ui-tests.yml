@@ -48,14 +48,16 @@ jobs:
       - name: build electron app
         run: yarn build
       - name: run ui tests
-        run: xvfb-run yarn playwright-ci
+        run: xvfb-run --auto-servernum -- yarn playwright-ci
       - name: upload ci suggested screenshots
+        if: ${{ always() }}
         uses: actions/upload-artifact@v2
         with:
           name: results-${{ matrix.os }}
           path: |
             playwright/artifacts/test-results
             playwright/artifacts/videos
+
   ui-tests:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -92,6 +94,7 @@ jobs:
         run: yarn playwright-ci
       - name: upload ci suggested screenshots
         uses: actions/upload-artifact@v2
+        if: ${{ always() }}
         with:
           name: results-${{ matrix.os }}
           path: |
