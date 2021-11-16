@@ -2524,7 +2524,7 @@
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Region",
       "regionDesc": "지역을 선택하여 Ledger Live의시간대를 설정하세요.",
-      "stock": "Regional market indicator",
+      "stock": "지역 마켓 지표",
       "stockDesc": "서부를 선택하면 파란색, 동부를 선택하면 빨간색으로 시장 증가율이 표시됩니다.",
       "carouselVisibility": "슬라이드 활성화",
       "carouselVisibilityDesc": "포트폴리오 화면에서 슬라이드 기능을 활성화합니다."
@@ -2552,39 +2552,39 @@
       "selectPlaceholder": "암호화 자산 선택",
       "desc": "암호화 자산을 선택하여 관련 설정을 수정하세요.",
       "placeholder": "이 자산 관련 설정 값이 없음",
-      "confirmationsNb": "Number of confirmations",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "confirmationsNb": "확인 수",
+      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
     },
     "profile": {
-      "password": "Password lock",
+      "password": "암호 잠금",
       "passwordDesc": "패스워드를 설정해 계정 이름, 잔금, 트랜잭션, 공개 주소를 포함한 Ledger Live 데이터를 컴퓨터에 안전하게 보관하세요.",
-      "passwordAutoLock": "Auto-lock",
+      "passwordAutoLock": "자동 잠금",
       "passwordAutoLockDesc": "활성화 상태가 아닐 때 Ledger Live가 자동 잠깁니다.",
-      "changePassword": "Change password",
-      "softResetTitle": "Clear cache",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
-      "softReset": "Clear",
+      "changePassword": "암호 변경",
+      "softResetTitle": "캐시 지우기",
+      "softResetDesc": "블록 체인과 강제로 동기화하려면 Ledger Live 캐시를 지우세요.",
+      "softReset": "지우기",
       "resetKYC": "고객확인제도 데이터 리셋",
       "resetKYCDesc": "타사 트랜잭션 공급자에 액세스 하시려면 로컬에 저장된 고객확인제도 데이터를 모두 삭제하세요.",
-      "hardResetTitle": "Reset Ledger Live",
+      "hardResetTitle": "Ledger Live 재설정",
       "hardResetDesc": "계정, 트랜잭션 내역, 설정을 포함하여 컴퓨터에 저장된 모든 Ledger Live 데이터를 삭제합니다.",
-      "hardReset": "Reset",
-      "analytics": "Analytics",
+      "hardReset": "재설정",
+      "analytics": "애널리틱스",
       "analyticsDesc": "Ledger가 사용자 경험을 개선할 수 있도록 애널리틱스 기능을 활성화하세요. 해당 기능에는 클릭, 페이지 방문, 페이지 이동, 조치(전송, 수령, 잠금 등), 페이지 스크롤 종료, 설치 (삭제), 앱 버전, 계정 수, 암호화 자산 및 거래, 세션 시간, Ledger 장치 유형, 펌웨어가 포함됩니다.",
-      "reportErrors": "Bug reports",
+      "reportErrors": "버그 보고서",
       "reportErrorsDesc": "Ledger의 제품 개선을 위해 자동으로 보고서를 보냅니다.",
-      "launchOnboarding": "Device setup",
+      "launchOnboarding": "장치 설정",
       "launchOnboardingDesc": "새 장치를 설정거나 기존 장치를 복원합니다. 계정과 설정은 유지됮니다."
     },
     "help": {
-      "version": "Version",
-      "releaseNotesBtn": "Details",
+      "version": "버전",
+      "releaseNotesBtn": "세부 사항",
       "termsBtn": "읽기",
-      "faq": "Ledger Support",
+      "faq": "Ledger 지원",
       "faqDesc": "문제가 있다면, 하드웨어 지갑으로 Ledger Live 이용 방법에 관한 도움을 받으세요.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
+      "terms": "이용 약관",
+      "termsDesc": "Ledger Live를 사용함으로써 귀하는 당사 이용 약관에 동의하는 것으로 간주됩니다.",
+      "privacy": "개인 정보 보호 정책",
       "privacyDesc": "당사가 수집하는 개인 정보, 수집 이유 및 이용 방식에 관한 자세한 내용은 개인 정보 보호 정책을 참고하세요."
     },
     "experimental": {
@@ -2625,16 +2625,16 @@
       }
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
+      "title": "Ledger Live 재설정",
       "desc": "사용자 컴퓨터의 모든 설정과 계정을 삭제하시려면 Ledger Live를 리셋하세요. 그런 다음 원하는 패스워드를 선택하고 Ledger 장치로 계정을 다시 추가할 수 있습니다. 암호화 자산에 액세스 할 수 있는 개인 키는 Ledger 장치에 안전하게 보관되며 복구 문구로 백업됩니다.",
       "warning": "Ledger Live를 리셋하면 계정의 스왑 트랜잭션 내역이 삭제됩니다."
     },
     "softResetModal": {
-      "title": "Clear cache",
+      "title": "캐시 지우기",
       "desc": "캐시를 삭제하면 네트워크 재동기화가 강제로 실행됩니다. 귀하의 설정과 계정은 그대로 보존되며, 귀하의 암호화 자산에 액세스 할 수 있는 개인 키 역시 Ledger 장치와 복구 시트에 안전하게 남아 있습니다."
     },
     "resetFallbackModal": {
-      "title": "User action required",
+      "title": "사용자 조치 필요",
       "part1": "Could not delete cache folder. Please delete the folder manually:",
       "part2": "Click the Open folder button, the ",
       "part3": "app will close",
