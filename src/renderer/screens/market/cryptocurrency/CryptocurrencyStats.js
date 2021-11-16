@@ -74,7 +74,7 @@ const InfoSection = ({
 
 function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
   // const { counterCurrency } = useSelector(state => state.market);
-  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { contextState } = useContext(MarketContext);
   const { counterCurrency } = contextState;
   const { t } = useTranslation();
 
@@ -185,8 +185,7 @@ function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loadi
 }
 
 function MarketCap({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
-  // const { counterCurrency } = useSelector(state => state.market);
-  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { contextState } = useContext(MarketContext);
   const { counterCurrency } = contextState;
   const { t } = useTranslation();
 
@@ -219,8 +218,7 @@ function MarketCap({ currency, loading }: { currency: MarketCurrencyInfo, loadin
 }
 
 function Supply({ currency, loading }: { currency: MarketCurrencyInfo, loading: boolean }) {
-  // const { counterCurrency } = useSelector(state => state.market);
-  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { contextState } = useContext(MarketContext);
   const { counterCurrency } = contextState;
   const { t } = useTranslation();
 

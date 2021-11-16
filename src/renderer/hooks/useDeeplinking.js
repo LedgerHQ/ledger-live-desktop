@@ -1,16 +1,16 @@
 // @flow
 import { ipcRenderer } from "electron";
-import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   findCryptoCurrencyByKeyword,
   parseCurrencyUnit,
 } from "@ledgerhq/live-common/lib/currencies";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import { openModal, closeAllModal } from "~/renderer/actions/modals";
-import { deepLinkUrlSelector, areSettingsLoaded } from "~/renderer/reducers/settings";
+import { closeAllModal, openModal } from "~/renderer/actions/modals";
+import { areSettingsLoaded, deepLinkUrlSelector } from "~/renderer/reducers/settings";
 import { setDeepLinkUrl } from "~/renderer/actions/settings";
 import { setTrackingSource } from "../analytics/TrackPage";
 

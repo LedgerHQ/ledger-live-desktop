@@ -1,13 +1,11 @@
 // @flow
 
 import React, { useCallback, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import Track from "~/renderer/analytics/Track";
 import Pills from "~/renderer/components/Pills";
-import { setMarketRange } from "~/renderer/actions/market";
 import Text from "~/renderer/components/Text";
 import { rangesArr } from "~/renderer/components/MarketList/MarketRangeSelect";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";

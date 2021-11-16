@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -10,7 +9,6 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { getMarketCryptoCurrencies, getCounterCurrencies } from "~/renderer/actions/market";
 import useTheme from "~/renderer/hooks/useTheme";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 import {

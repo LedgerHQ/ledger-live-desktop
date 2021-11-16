@@ -1,5 +1,6 @@
 // @flow
-import React from "react";
+import * as React from "react";
+import typeof { createContext } from "react";
 import {
   RELOAD,
   SET_MARKET_FILTERS,
@@ -16,8 +17,9 @@ import type { GetMarketCryptoCurrencies } from "~/renderer/actions/market";
 import { MARKET_DEFAULT_PAGE_LIMIT } from "~/renderer/actions/market";
 import { useDispatch } from "react-redux";
 import handlers from "~/renderer/contexts/handlers";
+import type { Dispatch } from "redux";
 
-export const MarketContext = React.createContext();
+export const MarketContext: createContext = React.createContext<any>();
 
 type MarketState = {
   currencies: Array<MarketCurrencyInfo>,
@@ -38,7 +40,12 @@ type MarketState = {
   error: boolean,
 };
 
-function marketReducer(state, action) {
+export type ContextAction = {
+  type: string,
+  payload: $Shape<any>,
+};
+
+function marketReducer(state: MarketState, action: ContextAction) {
   switch (action.type) {
     case SET_MARKET_PARAMS: {
       return { ...state, ...action.payload };
@@ -50,9 +57,10 @@ function marketReducer(state, action) {
       };
     }
     case SET_MARKET_FILTERS: {
+      console.log(action);
       return {
         ...state,
-        filters: action.payload,
+        filters: { ...state.filters, ...action.payload },
       };
     }
     case RELOAD: {
@@ -90,15 +98,18 @@ const initialState: MarketState = {
 
 export function MarketProvider({ children }: { children: React.Node }) {
   const [state, setState] = React.useReducer(marketReducer, initialState);
-  const reduxDispatch = useDispatch();
+  const reduxDispatch: Dispatch<any> = useDispatch();
 
-  const dispatch = async (type, payload = {}): void => {
+  const dispatch = async (type: string, payload = {}): Promise<any> => {
     if (handlers[type]) {
       await handlers[type]({ dispatch, state, action: { type, payload }, reduxDispatch });
     } else {
       setState({ type, payload });
     }
   };
-  const value = { contextState: state, contextDispatch: dispatch };
+  const value: { contextState: MarketState, contextDispatch: Promise<any> } = {
+    contextState: state,
+    contextDispatch: dispatch,
+  };
   return <MarketContext.Provider value={value}>{children}</MarketContext.Provider>;
 }

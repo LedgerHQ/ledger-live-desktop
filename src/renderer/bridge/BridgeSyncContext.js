@@ -3,14 +3,14 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { BridgeSync } from "@ledgerhq/live-common/lib/bridge/react";
 import { toAccountRaw } from "@ledgerhq/live-common/lib/account";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import logger from "~/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { recentlyChangedExperimental } from "~/renderer/experimental";
-import { recentlyKilledInternalProcess, onUnusualInternalProcessError } from "~/renderer/reset";
+import { onUnusualInternalProcessError, recentlyKilledInternalProcess } from "~/renderer/reset";
 import { track } from "~/renderer/analytics/segment";
-import { prepareCurrency, hydrateCurrency } from "./cache";
+import { hydrateCurrency, prepareCurrency } from "./cache";
 import { hasOngoingSync } from "./proxy";
 import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 import { command } from "~/renderer/commands";

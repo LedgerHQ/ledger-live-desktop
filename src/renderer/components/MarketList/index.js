@@ -3,23 +3,15 @@ import React, { useContext, useEffect } from "react";
 import { FixedSizeList as List } from "react-window";
 import Box from "~/renderer/components/Box";
 import MarketRowItem from "~/renderer/components/MarketList/MarketRowItem";
-import { useDispatch, useSelector } from "react-redux";
-import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import styled from "styled-components";
 import SortIcon from "./SortIcon";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import { useRange } from "~/renderer/hooks/market/useRange";
-import Paginator from "~/renderer/components/Paginator";
 import { useTranslation } from "react-i18next";
 import InfiniteLoader from "react-window-infinite-loader";
 import Spinner from "~/renderer/components/Spinner";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
-import {
-  GET_COUNTER_CURRENCIES,
-  GET_MARKET_CRYPTO_CURRENCIES,
-  SET_MARKET_PARAMS,
-} from "~/renderer/contexts/actionTypes";
+import { GET_MARKET_CRYPTO_CURRENCIES } from "~/renderer/contexts/actionTypes";
 
 const ListItemHeight: number = 55;
 
@@ -80,27 +72,12 @@ type CurrencyRowProps = {
 };
 
 function MarketList() {
-  // const {
-  //   range,
-  //   searchValue,
-  //   counterCurrency,
-  //   order,
-  //   orderBy,
-  //   limit,
-  //   coinsCount,
-  //   page,
-  //   currencies,
-  //   loading,
-  //   reload,
-  //   failedMarketParams,
-  // } = useSelector(state => state.market);
   const { t } = useTranslation();
 
   const { contextState, contextDispatch } = useContext(MarketContext);
   const {
     coins,
     range,
-    searchValue,
     counterCurrency,
     order,
     orderBy,
@@ -147,7 +124,8 @@ function MarketList() {
 
   const isItemLoaded = (index: number) => !!currencies[index];
 
-  const isLoading = loading && page === 1;
+  const isLoadingPlaceholder = loading && !currenciesLength;
+
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => {
     if (index === currenciesLength && index > limit - 2 && loading) {
       return (
@@ -163,7 +141,7 @@ function MarketList() {
     }
     return (
       <MarketRowItem
-        loading={isLoading}
+        loading={isLoadingPlaceholder}
         currency={currencies[index]}
         counterCurrency={counterCurrency}
         key={index}
@@ -246,7 +224,7 @@ function MarketList() {
           </ColumnTitleBox>
         </RowContent>
       </Row>
-      {isLoading && page === 1 ? (
+      {isLoadingPlaceholder ? (
         <ListStyled
           height={ListItemHeight * 9}
           width="100%"
@@ -256,28 +234,28 @@ function MarketList() {
         >
           {CurrencyRow}
         </ListStyled>
-      ) : currenciesLength ? (
-        <InfiniteLoader
-          isItemLoaded={isItemLoaded}
-          itemCount={coinsCount}
-          loadMoreItems={loadMoreItems}
-        >
-          {({ onItemsRendered, ref }) => (
-            <ListStyled
-              height={ListItemHeight * 9}
-              width="100%"
-              itemCount={loading ? currenciesLength + 1 : currenciesLength}
-              onItemsRendered={onItemsRendered}
-              itemSize={ListItemHeight}
-              style={{ overflowX: "hidden" }}
-              ref={ref}
-            >
-              {CurrencyRow}
-            </ListStyled>
-          )}
-        </InfiniteLoader>
       ) : (
-        <NoCryptosFound searchValue={searchValue} />
+        currenciesLength && (
+          <InfiniteLoader
+            isItemLoaded={isItemLoaded}
+            itemCount={coinsCount}
+            loadMoreItems={loadMoreItems}
+          >
+            {({ onItemsRendered, ref }) => (
+              <ListStyled
+                height={ListItemHeight * 9}
+                width="100%"
+                itemCount={loading ? currenciesLength + 1 : currenciesLength}
+                onItemsRendered={onItemsRendered}
+                itemSize={ListItemHeight}
+                style={{ overflowX: "hidden" }}
+                ref={ref}
+              >
+                {CurrencyRow}
+              </ListStyled>
+            )}
+          </InfiniteLoader>
+        )
       )}
     </Box>
   );

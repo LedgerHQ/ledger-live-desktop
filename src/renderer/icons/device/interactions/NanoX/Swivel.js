@@ -2,7 +2,7 @@
 
 import React from "react";
 import styled from "styled-components";
-import { Motion, spring, presets } from "react-motion";
+import { Motion, presets, spring } from "react-motion";
 import useTheme from "~/renderer/hooks/useTheme";
 import colors from "../colors";
 

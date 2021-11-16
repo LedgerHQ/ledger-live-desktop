@@ -1,14 +1,12 @@
 // @flow
 import React, { useCallback, useContext, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Button from "~/renderer/components/Button";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import { closePlatformAppDrawer } from "~/renderer/actions/UI";
-import { getMarketCryptoCurrencies, setMarketFilters } from "~/renderer/actions/market";
 import CheckBox from "~/renderer/components/CheckBox";
 import { useTranslation } from "react-i18next";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
@@ -161,7 +159,7 @@ function MarketFilters() {
     contextDispatch(SET_MARKET_FILTERS, { isLedgerCompatible, isFavorite });
     contextDispatch(GET_MARKET_CRYPTO_CURRENCIES);
     dispatch(closePlatformAppDrawer());
-  }, [dispatch, isFavorite, isLedgerCompatible]);
+  }, [contextDispatch, dispatch, isFavorite, isLedgerCompatible]);
 
   return (
     <Box>

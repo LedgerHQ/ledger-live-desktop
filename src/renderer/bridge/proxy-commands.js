@@ -6,32 +6,32 @@ import { from } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { log } from "@ledgerhq/logs";
 import type {
-  AccountRawLike,
   AccountRaw,
+  AccountRawLike,
+  OperationRaw,
+  ScanAccountEventRaw,
+  SignedOperationRaw,
+  SignOperationEventRaw,
+  SyncConfig,
+  TransactionRaw,
   TransactionStatus,
   TransactionStatusRaw,
-  TransactionRaw,
-  SyncConfig,
-  ScanAccountEventRaw,
-  SignOperationEventRaw,
-  SignedOperationRaw,
-  OperationRaw,
 } from "@ledgerhq/live-common/lib/types";
 import {
+  formatTransaction,
+  fromSignedOperationRaw,
   fromTransactionRaw,
+  toSignOperationEventRaw,
   toTransactionRaw,
   toTransactionStatusRaw,
-  fromSignedOperationRaw,
-  toSignOperationEventRaw,
-  formatTransaction,
 } from "@ledgerhq/live-common/lib/transaction";
 import {
-  fromAccountRaw,
+  formatAccount,
+  formatOperation,
   fromAccountLikeRaw,
+  fromAccountRaw,
   toAccountRaw,
   toOperationRaw,
-  formatOperation,
-  formatAccount,
 } from "@ledgerhq/live-common/lib/account";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { toScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";

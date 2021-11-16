@@ -9,9 +9,9 @@ import Text from "~/renderer/components/Text";
 import styled from "styled-components";
 import TriangleWarningIcon from "~/renderer/icons/TriangleWarning";
 import { rgba } from "~/renderer/styles/helpers";
-import { reloadMarket } from "~/renderer/actions/market";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 import { RELOAD } from "~/renderer/contexts/actionTypes";
+import { useTranslation } from "react-i18next";
 
 const WarningSignWrapper = styled(Box)`
   border-radius: 50%;
@@ -25,7 +25,8 @@ const WarningSignWrapper = styled(Box)`
 `;
 
 const ConnectionErrorModal = () => {
-  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { contextDispatch } = useContext(MarketContext);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const handleReset = () => {
     dispatch(closeModal("MODAL_CONNECTION_ERROR"));
@@ -40,7 +41,7 @@ const ConnectionErrorModal = () => {
       centered
       onHide={handleReset}
       preventBackdropClick={false}
-      render={({ onClose, data }) => (
+      render={({ onClose }) => (
         <ModalBody
           noScroll
           onClose={onClose}
@@ -49,24 +50,24 @@ const ConnectionErrorModal = () => {
               <WarningSignWrapper>
                 <TriangleWarningIcon size={20} />
               </WarningSignWrapper>
-              <Text fontSize={18} fontWeight={600} mb="8px">
-                Connection Error
+              <Text fontSize="18" fontWeight="600" mb="8px">
+                {t("market.warnings.connectionError")}
               </Text>
-              <Text fontSize={13} fontWeight={400}>
-                Ledger Live is unable to retrieve data.
+              <Text fontSize="13" fontWeight="400">
+                {t("market.warnings.ledgerUnableToRetrieveData")}
               </Text>
-              <Text fontSize={13} fontWeight={400}>
-                Please check your internet connection and reload this page.
+              <Text fontSize="13" fontWeight="400">
+                {t("market.warnings.checkInternetAndReload")}
               </Text>
             </Box>
           )}
           renderFooter={() => (
             <Box horizontal justifyContent="flex-end">
               <Button onClick={handleReset} mr={2}>
-                Close
+                {t("common.close")}
               </Button>
               <Button onClick={reload} primary>
-                Reload
+                {t("market.warnings.reload")}
               </Button>
             </Box>
           )}

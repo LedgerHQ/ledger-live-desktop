@@ -1,5 +1,5 @@
 // @flow
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
 
 // handlesError can tell if the error is displayed inside the spoiler to make it auto open if an error happens

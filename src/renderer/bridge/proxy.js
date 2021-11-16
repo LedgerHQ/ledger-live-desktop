@@ -4,24 +4,24 @@
 import { BigNumber } from "bignumber.js";
 import { map, tap } from "rxjs/operators";
 import type {
-  CryptoCurrency,
   Account,
-  AccountLike,
-  CurrencyBridge,
   AccountBridge,
+  AccountLike,
+  CryptoCurrency,
+  CurrencyBridge,
 } from "@ledgerhq/live-common/lib/types";
 import isEqual from "lodash/isEqual";
 import {
-  fromTransactionRaw,
-  toTransactionRaw,
-  toSignedOperationRaw,
-  fromTransactionStatusRaw,
   fromSignOperationEventRaw,
+  fromTransactionRaw,
+  fromTransactionStatusRaw,
+  toSignedOperationRaw,
+  toTransactionRaw,
 } from "@ledgerhq/live-common/lib/transaction";
 import {
+  fromOperationRaw,
   toAccountLikeRaw,
   toAccountRaw,
-  fromOperationRaw,
 } from "@ledgerhq/live-common/lib/account";
 import { patchAccount } from "@ledgerhq/live-common/lib/reconciliation";
 import { fromScanAccountEventRaw } from "@ledgerhq/live-common/lib/bridge";

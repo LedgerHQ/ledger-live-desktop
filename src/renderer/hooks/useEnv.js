@@ -1,7 +1,7 @@
 // @flow
 import { useEffect, useState } from "react";
-import { changes, getEnv } from "@ledgerhq/live-common/lib/env";
 import type { EnvName, EnvValue } from "@ledgerhq/live-common/lib/env";
+import { changes, getEnv } from "@ledgerhq/live-common/lib/env";
 
 const useEnv = <Name: EnvName>(type: Name): EnvValue<Name> => {
   const [env, setEnv] = useState(() => getEnv(type));

@@ -3,7 +3,7 @@
 import React, { useCallback, useContext } from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import { Trans, withTranslation } from "react-i18next";
 import Box from "~/renderer/components/Box";
@@ -31,11 +31,7 @@ const CryptoCurrencyPage = () => {
   } = useRouteMatch();
 
   const { contextState } = useContext(MarketContext);
-
-  // const { favorites, reload } = useSelector(state => state.market);
-  const { favorites, reload } = contextState;
-
-  const { counterCurrency, range, counterValue } = useSelector(state => state.market);
+  const { favorites, reload, counterCurrency, range, counterValue } = contextState;
 
   const { loading, currency } = useMarketCurrency({
     id: id || "",

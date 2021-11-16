@@ -1,6 +1,5 @@
 // @flow
 import React, { useCallback, useContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import Box from "~/renderer/components/Box";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
@@ -10,7 +9,6 @@ import IconCheck from "~/renderer/icons/Check";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import Button from "~/renderer/components/Button";
-import { getMarketCryptoCurrencies } from "~/renderer/actions/market";
 import { useTranslation } from "react-i18next";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 import { GET_MARKET_CRYPTO_CURRENCIES } from "~/renderer/contexts/actionTypes";
@@ -61,20 +59,23 @@ export const MarketRangeSelect = () => {
     [contextDispatch],
   );
 
-  const renderItem = useCallback(({ item, isActive }) => {
-    return (
-      <Item key={item.key} isActive={isActive}>
-        <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-          {t(`market.range.${item.label}_selectorLabel`)}
-        </Ellipsis>
-        {isActive && (
-          <Check>
-            <IconCheck size={14} />
-          </Check>
-        )}
-      </Item>
-    );
-  }, []);
+  const renderItem = useCallback(
+    ({ item, isActive }) => {
+      return (
+        <Item key={item.key} isActive={isActive}>
+          <Ellipsis ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
+            {t(`market.range.${item.label}_selectorLabel`)}
+          </Ellipsis>
+          {isActive && (
+            <Check>
+              <IconCheck size={14} />
+            </Check>
+          )}
+        </Item>
+      );
+    },
+    [t],
+  );
 
   return (
     <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">

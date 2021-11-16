@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 import { rgba } from "~/renderer/styles/helpers";
@@ -8,8 +8,9 @@ import starAnim2 from "~/renderer/images/starAnim2.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
-import { updateFavoriteCryptocurrencies } from "~/renderer/actions/market";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
+import { UPDATE_FAVORITE_CRYPTOCURRENCIES } from "~/renderer/contexts/actionTypes";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
 
 type Props = {
   yellow?: boolean,
@@ -26,7 +27,7 @@ export default function CryptocurrencyStar({
   onClick,
   disableAnimation,
 }: Props) {
-  const dispatch = useDispatch();
+  const { contextDispatch } = useContext(MarketContext);
   const isStarred = propsIsStarred || !!currency.isStarred;
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
 
@@ -35,18 +36,16 @@ export default function CryptocurrencyStar({
       if (Object.keys(currency).length) {
         track(isStarred ? "Cryptocurrency Unstar" : "Cryptocurrency Star");
         e.stopPropagation();
-        dispatch(
-          updateFavoriteCryptocurrencies({
-            cryptocurrencyId: currency.id,
-            isStarred,
-          }),
-        );
+        contextDispatch(UPDATE_FAVORITE_CRYPTOCURRENCIES, {
+          cryptocurrencyId: currency.id,
+          isStarred,
+        });
       }
       if (onClick) {
         onClick(!isStarred);
       }
     },
-    [currency, isStarred, dispatch, onClick],
+    [contextDispatch, currency, isStarred, onClick],
   );
 
   return (
@@ -83,6 +82,7 @@ const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
   padding: 8px;
   text-align: center;
   background: ${p => (p.filled ? p.theme.colors.starYellow : "transparent")};
+
   &:hover {
     background: ${p =>
       p.filled ? p.theme.colors.starYellow : rgba(p.theme.colors.palette.divider, 0.2)};
@@ -120,6 +120,7 @@ const StarIcon: ThemedComponent<{
   background-size: 3000%;
   filter: brightness(1);
   transition: filter .1s ease-out;
+
   &:hover {
     filter: ${p =>
       p.theme.colors.palette.type === "dark" ? "brightness(1.3)" : "brightness(0.8)"};

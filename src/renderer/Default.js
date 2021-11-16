@@ -50,7 +50,6 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
-import { MarketProvider } from "~/renderer/contexts/MarketContext";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;

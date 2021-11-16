@@ -1,19 +1,20 @@
 // @flow
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import moment from "moment";
-import { useDispatch } from "react-redux";
 import { MarketClient } from "~/api/market";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import type { Data } from "~/renderer/components/Chart/types";
 import { BigNumber } from "bignumber.js";
-import { connectionError } from "~/renderer/actions/market";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import { CONNECTION_ERROR } from "~/renderer/contexts/actionTypes";
 
 type Prop = {
   id: string,
   counterCurrency: string,
   range: string,
+  reload: number,
 };
 
 function magnitude(number) {
@@ -30,9 +31,9 @@ function magnitude(number) {
 export const useMarketCurrency = ({ id, counterCurrency, range, reload }: Prop) => {
   const [currency, setCurrency] = useState<MarketCurrencyInfo>({});
   const [loading, setLoading] = useState<boolean>(true);
-  const dispatch = useDispatch();
+  const { contextDispatch } = useContext(MarketContext);
 
-  const currencyById = () => {
+  useEffect(() => {
     const marketClient = new MarketClient();
     marketClient
       .currencyById({
@@ -52,19 +53,16 @@ export const useMarketCurrency = ({ id, counterCurrency, range, reload }: Prop) 
         setLoading(false);
       })
       .catch(() => {
-        dispatch(connectionError());
+        contextDispatch(CONNECTION_ERROR);
       });
-  };
-
-  useEffect(() => {
-    currencyById();
-  }, [id, counterCurrency, range, reload]);
+  }, [id, counterCurrency, range, reload, contextDispatch]);
   return { loading, currency };
 };
 
 export const useMarketCurrencyChart = ({ id = "", counterCurrency, range, reload }: Prop) => {
   const [chartData, setChartData] = useState<Data>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const { contextDispatch } = useContext(MarketContext);
 
   const formattedHourTime = index =>
     moment()
@@ -118,9 +116,9 @@ export const useMarketCurrencyChart = ({ id = "", counterCurrency, range, reload
         setLoading(false);
       })
       .catch(() => {
-        dispatch(connectionError());
+        contextDispatch(CONNECTION_ERROR);
       });
-  }, [id, counterCurrency, days, interval, reload]);
+  }, [id, counterCurrency, days, interval, reload, contextDispatch]);
 
   return { loading, chartData };
 };

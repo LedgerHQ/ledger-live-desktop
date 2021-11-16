@@ -3,7 +3,6 @@ import React, { useCallback, useContext } from "react";
 import { useSelector } from "react-redux";
 import { useRouteMatch } from "react-router";
 import type { BalanceHistoryData } from "@ledgerhq/live-common/lib/types";
-
 import Chart from "~/renderer/components/Chart";
 import Box, { Card } from "~/renderer/components/Box";
 import { discreetModeSelector } from "~/renderer/reducers/settings";
@@ -16,7 +15,6 @@ import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import BigNumber from "bignumber.js";
 import moment from "moment";
-import { rgba } from "~/renderer/styles/helpers";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 
 type Props = {
@@ -37,9 +35,8 @@ export default function CryptocurrencySummary({
     params: { id },
   } = useRouteMatch();
 
-  const { contextState, contextDispatch } = useContext(MarketContext);
+  const { contextState } = useContext(MarketContext);
   const { counterCurrency, range, reload } = contextState;
-  // const { counterCurrency, range, reload } = useSelector(state => state.market);
 
   const { rangeData } = useRange(range);
 
@@ -79,7 +76,7 @@ export default function CryptocurrencySummary({
   const chartMockData = [];
 
   for (let i = 1; i < 10; i++) {
-    let value;
+    let value: BigNumber;
     if (i < 4) {
       value = BigNumber(i * 10);
     } else if (i < 7) {

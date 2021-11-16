@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import debounce from "lodash/debounce";
 
@@ -8,10 +8,12 @@ import Box from "~/renderer/components/Box";
 import SearchBox from "~/renderer/screens/accounts/AccountList/SearchBox";
 import MarketHeader from "~/renderer/screens/market/MarketHeader";
 import MarketList from "~/renderer/components/MarketList";
-import { setMarketParams, getMarketCryptoCurrencies } from "~/renderer/actions/market";
+import { getMarketCryptoCurrencies, setMarketParams } from "~/renderer/actions/market";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { MarketState } from "~/renderer/reducers/market";
-import Paginator from "~/renderer/components/Paginator";
+import { MarketContext } from "~/renderer/contexts/MarketContext";
+import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
+import { GET_MARKET_CRYPTO_CURRENCIES, SET_MARKET_PARAMS } from "~/renderer/contexts/actionTypes";
 
 type Props = {
   getMarketCryptoCurrencies: (
@@ -33,18 +35,20 @@ const ShadowContainer = styled(Box)`
 `;
 
 class MarketPage extends Component<Props> {
+  static contextType = MarketContext;
+
   constructor(props: Props) {
     super(props);
     this.debouncedSearch = debounce(this.debouncedSearch, 1000);
   }
 
   debouncedSearch = () => {
-    this.props.getMarketCryptoCurrencies({ page: 1 });
+    this.context.contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { page: 1 });
   };
 
   onTextChange = (value: string) => {
     const searchValue = value.trim();
-    this.props.setMarketParams({ searchValue: searchValue, loading: true });
+    this.context.contextDispatch(SET_MARKET_PARAMS, { searchValue: searchValue, loading: true });
 
     // check for not allowing search with 1 letter because of fetch error in coingecko side
     if (searchValue.length !== 0 && searchValue.length < 2) {
@@ -54,7 +58,10 @@ class MarketPage extends Component<Props> {
   };
 
   render() {
-    const { searchValue, limit, coinsCount, page, loading, getMarketCryptoCurrencies } = this.props;
+    const {
+      contextState: { searchValue, loading, currencies },
+    } = this.context;
+    const currenciesLength = currencies.length;
     return (
       <Box>
         <MarketHeader />
@@ -69,16 +76,11 @@ class MarketPage extends Component<Props> {
           </SearchContainer>
           <MarketList />
         </ShadowContainer>
-        <Box mt={2} justifyContent="center" horizontal>
-          {/*<Paginator*/}
-          {/*  currentPage={page}*/}
-          {/*  loading={loading}*/}
-          {/*  totalSize={coinsCount}*/}
-          {/*  limit={limit}*/}
-          {/*  small*/}
-          {/*  onChange={page => getMarketCryptoCurrencies({ page })}*/}
-          {/*/>*/}
-        </Box>
+        {!loading && !currenciesLength && (
+          <Box mt={2} justifyContent="center" horizontal>
+            <NoCryptosFound searchValue={searchValue} />
+          </Box>
+        )}
       </Box>
     );
   }

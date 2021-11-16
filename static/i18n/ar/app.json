@@ -201,24 +201,6 @@
   "market": {
     "title": "Market",
     "filters": {
-      "title": "Filters"
-    },
-    "range": {
-      "1H_label": "1H",
-      "1D_label": "1D",
-      "1W_label": "1W",
-      "1M_label": "1M",
-      "1Y_label": "1Y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
-    }
-  },
-  "market": {
-    "title": "Market",
-    "filters": {
       "title": "Filters",
       "show": "Show",
       "all": "All",

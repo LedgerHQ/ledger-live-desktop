@@ -26,7 +26,7 @@ export function ToastOverlay() {
   const { t } = useTranslation();
   const onOpenInformationCenter = useCallback(
     () => dispatch(openInformationCenter("announcement")),
-    [],
+    [dispatch],
   );
 
   return (

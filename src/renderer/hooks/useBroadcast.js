@@ -3,10 +3,10 @@ import invariant from "invariant";
 import { useCallback } from "react";
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type {
-  SignedOperation,
-  Operation,
-  AccountLike,
   Account,
+  AccountLike,
+  Operation,
+  SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { execAndWaitAtLeast } from "@ledgerhq/live-common/lib/promise";

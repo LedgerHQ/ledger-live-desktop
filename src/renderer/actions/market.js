@@ -9,7 +9,7 @@ import { MarketClient } from "~/api/market";
 import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { counterCurrencyNameTable } from "~/renderer/constants/market";
-import { openModal, closeModal } from "~/renderer/actions/modals";
+import { closeModal, openModal } from "~/renderer/actions/modals";
 import type { Currency } from "@ledgerhq/live-common/lib/types";
 import type { ThunkAction } from "redux-thunk";
 

@@ -1,7 +1,7 @@
 // @flow
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { USBTroubleshootingIndexSelector } from "~/renderer/reducers/settings";
 import { setUSBTroubleshootingIndex } from "~/renderer/actions/settings";
 import { setTrackingSource } from "../analytics/TrackPage";

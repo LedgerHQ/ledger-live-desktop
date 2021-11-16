@@ -216,21 +216,21 @@
       "marketCap": "Market cap"
     },
     "detailsPage": {
-        "priceStatistics": "Price statistics",
-        "tradingVolume": "Trading volume",
-        "24hLow": "24h Low",
-        "24hHigh": "24h High",
-        "7dLow": "7d Low",
-        "7dHigh": "7d High",
-        "allTimeHigh": "All time high",
-        "allTimeLow": "All time low",
-        "marketCapRank": "Market cap rank",
-        "supply": "Supply",
-        "circulatingSupply": "Circulating supply",
-        "totalSupply": "Total supply",
-        "maxSupply": "Max supply",
-        "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
-        "supportedCoinsAndTokens": "Supported coins & Tokens"
+      "priceStatistics": "Price statistics",
+      "tradingVolume": "Trading volume",
+      "24hLow": "24h Low",
+      "24hHigh": "24h High",
+      "7dLow": "7d Low",
+      "7dHigh": "7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
     },
     "range": {
       "1H_label": "1H",
@@ -248,6 +248,20 @@
       "1W_selectorLabel": "last week",
       "1M_selectorLabel": "Last month",
       "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No Cryptos found",
+      "noSearchResultsFor": "Sorry, we did not find any search results for",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
     }
   },
   "stars": {

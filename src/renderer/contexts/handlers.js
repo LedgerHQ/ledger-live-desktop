@@ -1,10 +1,9 @@
 // @flow
-import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import { counterCurrencyNameTable } from "~/renderer/constants/market";
 import { CONNECTION_ERROR, SET_MARKET_PARAMS } from "~/renderer/contexts/actionTypes";
-import type { FavoriteCryptoCurrency } from "~/renderer/reducers/market";
-import { getKey } from "~/renderer/storage";
+import type { FavoriteCryptoCurrency, MarketState } from "~/renderer/reducers/market";
+import { getKey, setKey } from "~/renderer/storage";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import {
   MARKET_DEFAULT_PAGE_LIMIT,
@@ -12,21 +11,51 @@ import {
   mergeFavoriteAndSupportedCurrencies,
 } from "~/renderer/actions/market";
 import { MarketClient } from "~/api/market";
+import type { ContextAction } from "~/renderer/contexts/MarketContext";
+import type { Dispatch } from "redux";
 
 const marketClient = new MarketClient();
 
 const handlers = {
-  CONNECTION_ERROR: ({ reduxDispatch }) => {
+  CONNECTION_ERROR: ({ reduxDispatch }: { reduxDispatch: Dispatch<any> }) => {
     reduxDispatch(openModal("MODAL_CONNECTION_ERROR"));
   },
-  GET_COUNTER_CURRENCIES: async ({ dispatch, state }) => {
+  UPDATE_FAVORITE_CRYPTOCURRENCIES: async (
+    { state, dispatch },
+    {
+      cryptocurrencyId,
+      isStarred,
+    }: {
+      cryptocurrencyId: string,
+      isStarred: boolean,
+    },
+  ) => {
+    let {
+      market: { favorites, currencies: cryptocurrencies },
+    } = state;
+
+    if (isStarred) {
+      favorites = favorites.filter(favorite => favorite.id !== cryptocurrencyId);
+    } else {
+      favorites.push({ id: cryptocurrencyId });
+    }
+
+    await setKey("app", "favorite_cryptocurrencies", favorites);
+    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(
+      favorites,
+      cryptocurrencies,
+    );
+
+    dispatch(SET_MARKET_PARAMS, { favorites, currenciesWithFavorites });
+  },
+  GET_COUNTER_CURRENCIES: async ({ dispatch }: { dispatch: Promise<any> }) => {
     const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
     const res: {
       key: string,
       label: string,
       value: string,
     }[] = [];
-    supportedCounterCurrencies.forEach((currency, i) => {
+    supportedCounterCurrencies.forEach(currency => {
       res.push({
         key: currency,
         label: `${currency.toUpperCase()} - ${counterCurrencyNameTable[currency] || currency}`,
@@ -35,7 +64,17 @@ const handlers = {
     });
     dispatch(SET_MARKET_PARAMS, { counterCurrencies: res });
   },
-  GET_MARKET_CRYPTO_CURRENCIES: async ({ dispatch, state, action, reduxDispatch }) => {
+  GET_MARKET_CRYPTO_CURRENCIES: async ({
+    dispatch,
+    state,
+    action,
+    reduxDispatch,
+  }: {
+    dispatch: Promise<any>,
+    state: MarketState,
+    action: ContextAction,
+    reduxDispatch: Dispatch,
+  }) => {
     let filterParams = action.payload;
     const loadMore = action.payload.loadMore || state.failedMarketParams.loadMore;
     try {
@@ -155,7 +194,6 @@ const handlers = {
         favorites: favoriteCryptocurrencies,
       });
     } catch (e) {
-      console.log("ERROR CATCH");
       await dispatch(CONNECTION_ERROR, { reduxDispatch });
       await dispatch(SET_MARKET_PARAMS, {
         error: true,

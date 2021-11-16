@@ -22,6 +22,7 @@ const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   height: 20px;
   width: 20px;
   position: relative;
+
   img {
     height: 100%;
   }
@@ -47,9 +48,11 @@ const Row: ThemedComponent<{}> = styled(Box)`
   //margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
+
   :hover {
     background: ${p => rgba(p.theme.colors.palette.background.default, 0.6)};
   }
+
   :active {
     border-color: ${p => p.theme.colors.palette.text.shade20};
     background: ${p => p.theme.colors.palette.action.hover};
@@ -65,6 +68,7 @@ const RowContent: ThemedComponent<{
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
   height: 53px;
+
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -80,7 +84,7 @@ type Props = {
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
-  const { style, currency, loading, counterCurrency, suffixSpinner } = props;
+  const { style, currency, loading, counterCurrency } = props;
 
   const onCurrencyClick = useCallback(() => {
     setTrackingSource("accounts page");

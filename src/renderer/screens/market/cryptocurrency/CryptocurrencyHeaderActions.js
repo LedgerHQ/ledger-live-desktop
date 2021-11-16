@@ -50,22 +50,20 @@ function CryptocurrencyHeaderActions({ currency, loading }: Props) {
   return (
     <Box horizontal alignItems="center">
       <Box mr={12}>{loading ? <LoadingPlaceholder /> : <MarketCounterValueSelect />}</Box>
-      {currency.supportedCurrency &&
-        device &&
-        !loading(
-          <>
-            <Box mr={12}>
-              <Button primary onClick={onBuy}>
-                Buy
-              </Button>
-            </Box>
-            <Box mr={12}>
-              <Button primary onClick={onSwap}>
-                Swap
-              </Button>
-            </Box>
-          </>,
-        )}
+      {currency.supportedCurrency && device && !loading && (
+        <>
+          <Box mr={12}>
+            <Button primary onClick={onBuy}>
+              Buy
+            </Button>
+          </Box>
+          <Box mr={12}>
+            <Button primary onClick={onSwap}>
+              Swap
+            </Button>
+          </Box>
+        </>
+      )}
       {!loading && (
         <FavoriteBtn outlineGrey>
           <CryptocurrencyStar currency={currency} />

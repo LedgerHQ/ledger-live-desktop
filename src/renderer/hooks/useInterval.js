@@ -1,6 +1,6 @@
 // @flow
 // Thanks Dan Abramov
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import noop from "lodash/noop";
 
 const useInterval = (callback: Function, delay: number) => {

@@ -117,7 +117,7 @@ export default function Chart({
         },
       ],
     }),
-    [color, data, valueKey, tickXScale],
+    [loading, theme.text.shade10, color, data, tickXScale, valueKey],
   );
 
   const generateOptions = useMemo(
@@ -191,7 +191,15 @@ export default function Chart({
         },
       },
     }),
-    [theme.text.shade10, theme.text.shade60, tickXScale, magnitude, renderTickY],
+    [
+      loading,
+      theme.background.paper,
+      theme.text.shade10,
+      theme.text.shade60,
+      tickXScale,
+      magnitude,
+      renderTickY,
+    ],
   );
 
   useLayoutEffect(() => {
