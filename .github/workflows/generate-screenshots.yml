@@ -1,0 +1,17 @@
+name: Generate Screenshots
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  generate-screenshots:
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase')
+    name: screenshots (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
