@@ -53,6 +53,7 @@ const test = base.extend<TestFixtures>({
         "./.webpack/main.bundle.js",
         `--user-data-dir=${userDataPath}`,
         `--window-size=${viewport.width},${viewport.height}`,
+        "--force-device-scale-factor=1",
       ],
       recordVideo: {
         dir: "playwright/artifacts/videos/",
