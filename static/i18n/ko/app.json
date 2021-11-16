@@ -1284,24 +1284,24 @@
   },
   "operationDetails": {
     "whatIsThis": "어떤 거래인가요?",
-    "title": "Operation details",
+    "title": "작업 세부 정보",
     "type": "유형",
     "amount": "금액",
-    "account": "Account",
-    "date": "Date",
+    "account": "계정",
+    "date": "날짜",
     "currentValue": "현재 가치",
-    "status": "Status",
-    "confirmed": "Confirmed",
+    "status": "상태",
+    "confirmed": "확인됨",
     "failed": "실패함",
-    "notConfirmed": "Not confirmed",
+    "notConfirmed": "확인되지 않음",
     "fees": "수수료",
-    "noFees": "No fee",
-    "from": "From",
-    "to": "To",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
+    "noFees": "수수료 없음",
+    "from": "수신",
+    "to": "발신",
+    "identifier": "트랜잭션 ID",
+    "viewOperation": "탐색기에서 보기",
+    "showMore": "{{recipients}} 자세히 표시",
+    "showLess": "간단히 표시",
     "tokenOperations": "토큰 거래",
     "subAccountOperations": "부계정 거래",
     "tokenTooltip": "이 거래는 다음 토큰 거래와 관련이 있습니다",
@@ -1336,7 +1336,7 @@
     }
   },
   "operationList": {
-    "noMoreOperations": "That's all"
+    "noMoreOperations": "모두 끝났습니다."
   },
   "DeviceAction": {
     "allowAppPermission": "내 장치에서 {{wording}} 앱 열기",
@@ -1361,7 +1361,7 @@
     "swap": {
       "notice": "장치에서 스왑 세부사항을 확인한 후 전송하세요. 주소가 안전하게 교환되어 주소를 따로 인증할 필요 없습니다.",
       "confirm": "스왑 트랜잭션을 검증하세요",
-      "amountSent": "Amount to send",
+      "amountSent": "전송 금액",
       "amountReceived": "수신 금액",
       "amountReceivedFloat": "서비스 수수료 부과 전 수신 금액",
       "fees": "수수료",
@@ -1495,7 +1495,7 @@
         },
         "cta2": "펌웨어를 업데이트하세요"
       },
-      "latest": "Firmware version {{version}} is available",
+      "latest": "펌웨어 버전 {{version}}을 사용할 수 있습니다.",
       "contactSupport": "지원 부서 연락",
       "deprecated": "장치 펌웨어가 오래되어 업데이트가 불가능합니다. Leger 지원에 연락하여 교체를 요청하세요.",
       "prepareSeed": "만약을 대비하여 24개의 단어 복구 문구를 복구 시트에 반드시 기록해 두고 언제든 사용 가능한 상태로 준비해 두세요.",
@@ -1505,29 +1505,29 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "업데이트 다운로드 중",
-        "updateMCU": "Firmware update",
+        "updateMCU": "펌웨어 업데이트",
         "updating": "펌웨어 업데이트",
         "reset": "장치를 준비합니다",
-        "osu": "Installing OSU...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
+        "osu": "OSU를 설치하는 중...",
+        "flash-mcu": "MCU 업데이트 중...",
+        "flash-bootloader": "부트로더 업데이트 중...",
+        "firmware": "펌웨어 업데이트 중...",
         "flash": "장치 준비 중..."
       },
-      "confirmIdentifier": "Verify the identifier",
+      "confirmIdentifier": "식별자 확인",
       "confirmIdentifierText": "장치의 식별자가 아래 식별자와 동일한지 확인하세요. 요청 받은 경우 PIN 코드를 확인하여 입력하세요",
-      "identifier": "Identifier",
+      "identifier": "식별자",
       "preparation": "준비",
       "newFirmware": "새 펌웨어 {{version}}",
       "confirmUpdate": "장치에서 업데이트를 확인하세요",
       "mcuTitle": "업데이트 마무리",
-      "mcuFirst": "Disconnect the USB cable from your device",
+      "mcuFirst": "장치에서 USB 케이블 분리",
       "mcuSecond": "USB 케이블을 다시 연결하는 동안에 &lt;1&gt;&lt;0&gt;{{repairProcessing}}&lt;0&gt;&lt;1&gt;스크린이 표시될 때까지 왼쪽 버튼을 길게 누르세요",
       "mcuPin": "업데이트가 완료될 때까지 기다려 주세요",
       "mcuSecondNanoX": "&lt;1&gt;&lt;0&gt;{{bootloaderOption}}(이)가 표시될 때까지 왼쪽 버튼을 길게 누르세요. 버튼 두 개를 모두 눌러 장치를 확인하고 재연결하세요.",
       "mcuBlueFirst": "측면 버튼을 10초간 길게 눌러 장치를 끄세요. 버튼에서 손을 떼세요.",
       "mcuBlueSecond": "부팅 옵션이 표시될 때까지 버튼을 5초 이상 누르세요. Bootloader 모드 탭",
-      "successTitle": "Firmware updated",
+      "successTitle": "펌웨어 업데이트됨",
       "successTextApps": "장치에 앱을 다시 설치하세요",
       "successTextNoApps": "이제 장치에 앱을 설치할 수 있습니다",
       "sucessCTAApps": "앱 재설치",
@@ -1671,23 +1671,23 @@
     "titleCrypto": "{{currency}} 매도"
   },
   "receive": {
-    "title": "Receive",
+    "title": "수령",
     "successTitle": "주소가 안전하게 공유되었습니다",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
-        "label": "Account to credit",
+        "title": "계정",
+        "label": "입금할 계정",
         "parentAccount": "1. {{currencyName}} 계정을 선택하세요",
         "token": "2. 토큰을 선택하세요",
         "verifyTokenType": "&lt;0&gt;{{token}}(이)가 &lt;0&gt;{{tokenType}} 토큰인지 확인하세요. 다른 암호화 자산이 {{currency}} 계정으로 전송되면 소실될 수 있습니다.",
         "warningTokenType": "&lt;0&gt;{{ticker}} or &lt;0&gt;{{tokenType}} 토큰은 {{currency}} 계정으로만 보내세요. 다른 암호화 자산을 보내면 영구적인 자금 손실을 초래할 수 있습니다."
       },
       "connectDevice": {
-        "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "title": "장치",
+        "withoutDevice": "장치를 가지고 있지 않나요?"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "수령"
       },
       "warning": {
         "tezos": {
@@ -1697,8 +1697,8 @@
     }
   },
   "send": {
-    "title": "Send",
-    "totalSpent": "Total to debit",
+    "title": "보내기",
+    "totalSpent": "입금할 총액",
     "steps": {
       "recipient": {
         "title": "수령인"
@@ -1739,14 +1739,14 @@
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "확인",
         "success": {
-          "title": "Transaction sent",
+          "title": "트랜잭션 전송됨",
           "text": "블록체인이 트랜잭션을 확인하면 계정 잔금이 업데이트됩니다.",
-          "cta": "View details"
+          "cta": "세부 정보 보기"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "트랜잭션 브로드캐스트 중..."
         },
         "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
       },
@@ -1764,7 +1764,7 @@
     "title": "트랜잭션 서명"
   },
   "releaseNotes": {
-    "title": "Release notes",
+    "title": "릴리즈 노트",
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
@@ -2484,14 +2484,14 @@
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "설정",
     "discreet": "토글 디스크리트 모드",
     "helpButton": "지원",
     "tabs": {
-      "display": "General",
+      "display": "일반",
       "currencies": "암호화 자산",
-      "help": "Help",
-      "about": "About",
+      "help": "도움말",
+      "about": "소개",
       "experimental": "실험적 특징",
       "accounts": "계정",
       "developer": "개발자"
@@ -2507,17 +2507,17 @@
         "desc": "컴퓨터에 계정 거래와 관련한 CSV 파일을 저장하세요."
       },
       "modal": {
-        "button": "Done",
-        "title": "Scan to export to mobile",
-        "listTitle": "On the Ledger Live mobile app:",
+        "button": "완료",
+        "title": "모바일로 내보내려면 스캔해주세요",
+        "listTitle": "Ledger Live 모바일 앱에서:",
         "step1": "<highlight><icon>+</icon></highlight> 버튼을 <highlight>계정</highlight>에서 누르십시오.",
         "step2": "<highlight>데스크탑 계정 가져오기</highlight>를 탭하세요",
         "step3": "100% 로딩될 때까지 <highlight>LiveQR 코드</highlight> 를 스캔하세요"
       }
     },
     "display": {
-      "language": "Display language",
-      "languageDesc": "Set the language displayed in Ledger Live.",
+      "language": "표시 언어",
+      "languageDesc": "Ledger Live에 표시되는 언어를 설정합니다.",
       "theme": "테마",
       "themeDesc": "테마를 선택하세요.",
       "counterValue": "선호 통화",
@@ -3788,24 +3788,24 @@
       "description": "장치가 발견했지만 연결에 실패했습니다. 문제가 지속되면 다시 시도하거나 Ledger 지원 부서에 연락하세요."
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "자동 확인을 사용할 수 없습니다: 주소를 신중하게 확인해주세요",
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "이 QR 코드를 스캔할 수 없습니다: 이 주소는 자동 확인을 지원하지 않습니다"
     },
     "FeeNotLoaded": {
       "title": "수수료 요율을 로드할 수 없습니다. 수동 수수료를 설정하세요"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "수수료가 필요합니다"
     },
     "GasLessThanEstimate": {
       "title": "너무 낮은 것 같습니다. 조금 높여주세요"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "title": "알 수 없는 MCU 버전",
+      "description": "Ledger 지원 센터에 문의해주세요"
     },
     "MCUNotGenuineToDashboard": {
       "title": "업데이트할 대시보드 액세스",
