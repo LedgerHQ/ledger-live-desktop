@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate-screenshots:
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase')
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '@live-bot generate-screenshots')
     name: screenshots (${{ matrix.os }})
     strategy:
       fail-fast: false
@@ -15,3 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CI_BOT_TOKEN }}
+      - name: show branch
+        run: git branch -v
