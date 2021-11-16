@@ -48,7 +48,7 @@ jobs:
       - name: build electron app
         run: yarn build
       - name: run ui tests
-        run: yarn playwright-ci
+        run: xvfb-run --auto-servernum -- yarn playwright-ci
       - name: upload ci suggested screenshots
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
