@@ -20,3 +20,5 @@ jobs:
           token: ${{ secrets.CI_BOT_TOKEN }}
       - name: show branch
         run: git branch -v
+      - name: echo pull_request
+        run: echo "Comment on PR #${{ github.event.issue.pull_request }}"
