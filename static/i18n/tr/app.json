@@ -62,7 +62,7 @@
     "apply": "Uygula",
     "done": "Bitti",
     "confirm": "Onayla",
-    "reject": "Reject",
+    "reject": "Reddet",
     "cancel": "İptal et",
     "getSupport": "Destek alın",
     "delete": "Sil",
@@ -131,8 +131,8 @@
   },
   "operation": {
     "type": {
-      "IN": "Received",
-      "OUT": "Sent",
+      "IN": "Alındı",
+      "OUT": "Gönderildi",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
       "DELEGATE": "Yetki devredildi",
@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "{{name}} almak için bir hesap oluşturun",
         "noAccountCTA": "Hesap ekle"
       },
       "from": {
@@ -539,7 +539,7 @@
       "to": "Bitiş",
       "toProvider": "Sağlayıcı adresi",
       "initialAmount": "Başlangıç tutarı",
-      "creditedAmount": "Credited amount"
+      "creditedAmount": "Eklenen tutar"
     }
   },
   "fullNode": {
@@ -1031,7 +1031,7 @@
       "desc": "Bizi takip edin"
     },
     "github": {
-      "title": "Github",
+      "title": "GitHub",
       "desc": "Kodumuzu inceleyin"
     }
   },
@@ -1067,9 +1067,9 @@
       "cta": "Şimdi satın al"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "Aile paketi",
+      "description": "3 adet Nano S'i indirimli alarak, ailenizi ve arkadaşlarınızı kriptoyla tanıştırın",
+      "cta": "Aile paketini satın al"
     },
     "polkaStake": {
       "title": "POLKADOT staking",
@@ -1113,7 +1113,7 @@
     "disconnected": "Bağlantı Kesildi",
     "connected": "Bağlandı",
     "connecting": "Bağlanıyor...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "Geçersiz hesap kimliği",
     "steps": {
       "paste": {
         "title": "Linki yapıştır",
@@ -1123,7 +1123,7 @@
       "confirm": {
         "title": "Bağlan",
         "details": "Cüzdanınız üzerinden bağlanmak istenen Ethereum hesabı:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Ledger Live'a bağlanmak istiyor. Ethereum adresinizi seçin:"
       }
     },
     "connectedscreen": {
@@ -1768,13 +1768,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "Uygulama dili değiştirilsin mi?",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "Güzel haberlerimiz var! Ekiplerimizin uzun süren çalışmaları sonucu, Ledger Live artık {{language}} dilini destekliyor.",
+      "advice": "Uygulama dilini ayarlar bölümünden istediğiniz zaman değiştirebilirsiniz."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "{{language}} diline geç",
+    "no": "Böyle kalsın"
   },
   "distribution": {
     "asset": "Varlık",
@@ -2596,7 +2596,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "Bitcoin (Taproot) ve Tezos için deneysel JS uygulamalarını kullanın"
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -2743,7 +2743,8 @@
       "fr": "Fransızca",
       "ru": "Rusça",
       "es": "İspanyolca",
-      "zh": "Çince"
+      "zh": "Çince",
+      "de": "German"
     }
   },
   "theme": {
@@ -3944,7 +3945,7 @@
       "title": "Bu alıcıya gönderirken bir memo gerekebilir"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Miktar, en az {{minAmountFromFormatted}} olmalıdır"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Tutar {{maxAmountFromFormatted}} tutarından az olmalıdır."
@@ -3987,7 +3988,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "Mainnet etkinleşmeden önce taproot adresine gönderim yapmak güvenli değildir"
     }
   }
 }
