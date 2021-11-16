@@ -231,7 +231,7 @@
           "provider": "Prestataire",
           "rate": "Prix",
           "fees": "Frais",
-          "target": "Compte destinataire"
+          "target": "Compte bénéficiaire"
         },
         "tooltip": {
           "provider": "Prestataire",
