@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Add account"
       },
       "from": {
@@ -1089,7 +1089,7 @@
     },
     "lending": {
       "title": "إقراض العملات المشفرة",
-      "description": "قم بإرسال العملات المستقرة إلى بروتوكول Compound واكسب فوائد اليوم"
+      "description": "قم بإقراض العملات المستقرة إلى بروتوكول Compound واكسب فوائد اليوم"
     },
     "blackfriday": {
       "title": "الجمعة السوداء ",
@@ -3944,7 +3944,7 @@
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "يجب أن يكون المبلغ أكثر من {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
