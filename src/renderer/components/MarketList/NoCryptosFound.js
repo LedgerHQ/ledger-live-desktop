@@ -6,7 +6,7 @@ import NoCryptosFoundImg from "~/renderer/images/NoCryptosFound.png";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useTranslation } from "react-i18next";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
-import { GET_MARKET_CRYPTO_CURRENCIES, SET_MARKET_FILTERS } from "~/renderer/contexts/actionTypes";
+import { GET_MARKET_CRYPTO_CURRENCIES } from "~/renderer/contexts/actionTypes";
 
 const Wrapper: ThemedComponent<{}> = styled("div")`
   width: 100%;
@@ -28,6 +28,11 @@ const Wrapper: ThemedComponent<{}> = styled("div")`
   }
 `;
 
+const BrowseAssetsBtn = styled(Button)`
+  margin: 0 auto;
+  margin-top: 36px;
+`;
+
 const NoCryptosFoundImgStyled: ThemedComponent<{}> = styled("img")`
   width: 112px;
 `;
@@ -39,9 +44,9 @@ const NoCryptosFound = ({ searchValue }: { searchValue: string }) => {
     contextDispatch,
   } = useContext(MarketContext);
 
-  const cancelFavoriteFilter = () => {
-    contextDispatch(SET_MARKET_FILTERS, { filters: { isFavorite: false } });
-    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { page: 1 });
+  const cancelFavoriteFilter = async () => {
+    filters.isFavorite = false;
+    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { page: 1, filters });
   };
 
   const message = () => {
@@ -50,9 +55,9 @@ const NoCryptosFound = ({ searchValue }: { searchValue: string }) => {
         <>
           <h4 className="title">{t("market.warnings.trackFavAssets")}</h4>
           <p className="description">{t("market.warnings.clickOnStarIcon")}</p>
-          <Button onClick={cancelFavoriteFilter} primary>
+          <BrowseAssetsBtn onClick={cancelFavoriteFilter} primary>
             {t("market.warnings.browseAssets")}
-          </Button>
+          </BrowseAssetsBtn>
         </>
       );
     }

@@ -45,7 +45,6 @@ const Row: ThemedComponent<{}> = styled(Box)`
   flex: 1;
   font-weight: 600;
   justify-content: flex-start;
-  //margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
 
@@ -133,7 +132,7 @@ function MarketRowItem(props: Props) {
       <Row expanded={true}>
         <RowContent>
           <Cell
-            style={{ maxWidth: "40px" }}
+            style={{ maxWidth: "50px" }}
             flex="5%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"

@@ -86,9 +86,11 @@ function MarketList() {
     page,
     currencies,
     loading,
+    loadingMore,
     reload,
     failedMarketParams,
     error,
+    filters,
   } = contextState;
   const { rangeData } = useRange(range);
   const currenciesLength = currencies.length;
@@ -123,8 +125,7 @@ function MarketList() {
   };
 
   const isItemLoaded = (index: number) => !!currencies[index];
-
-  const isLoadingPlaceholder = loading && !currenciesLength;
+  const isLoadingPlaceholder = loading && !loadingMore;
 
   const CurrencyRow = ({ index, style }: CurrencyRowProps) => {
     if (index === currenciesLength && index > limit - 2 && loading) {
@@ -155,7 +156,7 @@ function MarketList() {
       <Row expanded={true}>
         <RowContent>
           <ColumnTitleBox
-            style={{ maxWidth: "40px" }}
+            style={{ maxWidth: "50px" }}
             flex="5%"
             ff="Inter|SemiBold"
             color="palette.text.shade100"
@@ -234,29 +235,27 @@ function MarketList() {
         >
           {CurrencyRow}
         </ListStyled>
-      ) : (
-        currenciesLength && (
-          <InfiniteLoader
-            isItemLoaded={isItemLoaded}
-            itemCount={coinsCount}
-            loadMoreItems={loadMoreItems}
-          >
-            {({ onItemsRendered, ref }) => (
-              <ListStyled
-                height={ListItemHeight * 9}
-                width="100%"
-                itemCount={loading ? currenciesLength + 1 : currenciesLength}
-                onItemsRendered={onItemsRendered}
-                itemSize={ListItemHeight}
-                style={{ overflowX: "hidden" }}
-                ref={ref}
-              >
-                {CurrencyRow}
-              </ListStyled>
-            )}
-          </InfiniteLoader>
-        )
-      )}
+      ) : currenciesLength ? (
+        <InfiniteLoader
+          isItemLoaded={isItemLoaded}
+          itemCount={coinsCount}
+          loadMoreItems={loadMoreItems}
+        >
+          {({ onItemsRendered, ref }) => (
+            <ListStyled
+              height={ListItemHeight * 9}
+              width="100%"
+              itemCount={loading ? currenciesLength + 1 : currenciesLength}
+              onItemsRendered={onItemsRendered}
+              itemSize={ListItemHeight}
+              style={{ overflowX: "hidden" }}
+              ref={ref}
+            >
+              {CurrencyRow}
+            </ListStyled>
+          )}
+        </InfiniteLoader>
+      ) : null}
     </Box>
   );
 }

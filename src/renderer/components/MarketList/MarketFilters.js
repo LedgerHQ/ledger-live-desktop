@@ -10,7 +10,7 @@ import { closePlatformAppDrawer } from "~/renderer/actions/UI";
 import CheckBox from "~/renderer/components/CheckBox";
 import { useTranslation } from "react-i18next";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
-import { GET_MARKET_CRYPTO_CURRENCIES, SET_MARKET_FILTERS } from "~/renderer/contexts/actionTypes";
+import { GET_MARKET_CRYPTO_CURRENCIES } from "~/renderer/contexts/actionTypes";
 
 type ShowProps = {
   value: string,
@@ -23,12 +23,6 @@ type MarketFiltersFooterProps = {
 
 const Divider = styled(Box)`
   border: 1px solid ${p => p.theme.colors.palette.divider};
-`;
-
-const BasicButton = styled(Button)`
-  padding: 15px 24px;
-  border-radius: 48px;
-  color: #6490f1;
 `;
 
 const SectionWrapper = styled.div`
@@ -92,7 +86,7 @@ const Show = ({ value, onValueChange }: ShowProps) => {
           <CheckBox
             isChecked={value === option.value}
             isRadio
-            onChange={value => onValueChange(option.value)}
+            onChange={() => onValueChange(option.value)}
           />
           <Label ml={14} color="palette.text.shade50" fontSize={12}>
             {t(`market.filters.${option.value}`)}
@@ -109,9 +103,9 @@ const MarketFiltersFooter = ({ onApply, onClearAll }: MarketFiltersFooterProps) 
     <FooterWrapper>
       <Divider />
       <Box px={5} py={4} horizontal justifyContent="space-between">
-        <BasicButton onClick={() => onClearAll()}>
+        <Button onClick={() => onClearAll()}>
           <Ellipsis>{t(`market.filters.clearAll`)}</Ellipsis>
-        </BasicButton>
+        </Button>
         <Button primary onClick={() => onApply()}>
           <Ellipsis>{t(`market.filters.applyFilters`)}</Ellipsis>
         </Button>
@@ -156,8 +150,7 @@ function MarketFilters() {
   };
 
   const onApplyFilters = useCallback(() => {
-    contextDispatch(SET_MARKET_FILTERS, { isLedgerCompatible, isFavorite });
-    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES);
+    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { filters: { isLedgerCompatible, isFavorite } });
     dispatch(closePlatformAppDrawer());
   }, [contextDispatch, dispatch, isFavorite, isLedgerCompatible]);
 

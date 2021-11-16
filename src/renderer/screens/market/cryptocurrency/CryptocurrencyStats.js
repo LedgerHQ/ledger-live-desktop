@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 
-const Wrapper: ThemedComponent<{}> = styled(Box)`
+const Wrapper: ThemedComponent<{}> = styled(Card)`
   background-color: ${p => p.theme.colors.palette.background.paper};
   padding: 16px;
   border-radius: 4px;

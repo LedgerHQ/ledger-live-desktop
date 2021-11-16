@@ -1,5 +1,4 @@
 // @flow
-
 import React, { useCallback, useContext } from "react";
 import { compose } from "redux";
 import { useRouteMatch } from "react-router";
@@ -50,7 +49,7 @@ const CryptoCurrencyPage = () => {
       </Box>
       <Divider />
       {!loading && !currency.supportedCurrency && <NotLiveCompatible mt={3} />}
-      <Box mt={3} mb={7}>
+      <Box mt={3} mb={24}>
         <CryptocurrencySummary
           loading={loading}
           currency={currency}

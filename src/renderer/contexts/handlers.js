@@ -21,7 +21,13 @@ const handlers = {
     reduxDispatch(openModal("MODAL_CONNECTION_ERROR"));
   },
   UPDATE_FAVORITE_CRYPTOCURRENCIES: async (
-    { state, dispatch },
+    {
+      state,
+      dispatch,
+    }: {
+      state: MarketState,
+      dispatch: (type: string, payload: any) => Promise<any>,
+    },
     {
       cryptocurrencyId,
       isStarred,
@@ -30,9 +36,7 @@ const handlers = {
       isStarred: boolean,
     },
   ) => {
-    let {
-      market: { favorites, currencies: cryptocurrencies },
-    } = state;
+    let { favorites, currencies } = state;
 
     if (isStarred) {
       favorites = favorites.filter(favorite => favorite.id !== cryptocurrencyId);
@@ -41,14 +45,15 @@ const handlers = {
     }
 
     await setKey("app", "favorite_cryptocurrencies", favorites);
-    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(
-      favorites,
-      cryptocurrencies,
-    );
+    const currenciesWithFavorites = mergeFavoriteAndSupportedCurrencies(favorites, currencies);
 
-    dispatch(SET_MARKET_PARAMS, { favorites, currenciesWithFavorites });
+    dispatch(SET_MARKET_PARAMS, { favorites, currencies: currenciesWithFavorites });
   },
-  GET_COUNTER_CURRENCIES: async ({ dispatch }: { dispatch: Promise<any> }) => {
+  GET_COUNTER_CURRENCIES: async ({
+    dispatch,
+  }: {
+    dispatch: (type: string, payload: any) => Promise<any>,
+  }) => {
     const supportedCounterCurrencies: string[] = await marketClient.supportedCounterCurrencies();
     const res: {
       key: string,
@@ -70,18 +75,16 @@ const handlers = {
     action,
     reduxDispatch,
   }: {
-    dispatch: Promise<any>,
+    dispatch: (type: string, payload: any) => Promise<any>,
     state: MarketState,
     action: ContextAction,
-    reduxDispatch: Dispatch,
-  }) => {
+    reduxDispatch: Dispatch<any>,
+  }): Promise<any> => {
     let filterParams = action.payload;
-    const loadMore = action.payload.loadMore || state.failedMarketParams.loadMore;
+    const loadMore: boolean = action.payload.loadMore || state.failedMarketParams.loadMore;
     try {
       filterParams = { ...state, ...filterParams };
-      await dispatch(SET_MARKET_PARAMS, {
-        loading: true,
-      });
+      await dispatch(SET_MARKET_PARAMS, { loading: true, loadingMore: loadMore });
 
       let {
         counterCurrency,
@@ -198,6 +201,7 @@ const handlers = {
       await dispatch(SET_MARKET_PARAMS, {
         error: true,
         loading: false,
+        loadingMore: false,
         failedMarketParams: {
           counterCurrency: filterParams.counterCurrency,
           range: filterParams.range,
