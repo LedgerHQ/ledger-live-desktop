@@ -2521,8 +2521,8 @@
       "theme": "테마",
       "themeDesc": "테마를 선택하세요.",
       "counterValue": "선호 통화",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
-      "region": "Region",
+      "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
+      "region": "지역",
       "regionDesc": "지역을 선택하여 Ledger Live의시간대를 설정하세요.",
       "stock": "지역 마켓 지표",
       "stockDesc": "서부를 선택하면 파란색, 동부를 선택하면 빨간색으로 시장 증가율이 표시됩니다.",
@@ -3430,7 +3430,7 @@
       "description": "거래가 완료될 때까지 기다려 주세요."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
+      "title": "계정 이름이 필요합니다",
       "description": "계정 이름을 입력하세요"
     },
     "AccountNeedResync": {
@@ -3531,11 +3531,11 @@
       "description": "아직 지원되지 않는 암호화 자산입니다. Ledger 지원 부서로 문의하세요"
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
+      "title": "정품이 아닐 수 있습니다.",
       "description": "Ledger 지원 부서로 도움을 요청하세요"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "죄송합니다. 다시 시도해주세요(정품-종료).",
       "description": null
     },
     "DeviceInOSUExpected": {
@@ -3547,7 +3547,7 @@
       "description": "예상하지 못한 오류가 발생했습니다. 다시 시도해주세요"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
+      "title": "Ledger 장치를 재시작하고 다시 시도해 주세요",
       "description": "예상하지 못한 오류가 발생했습니다. 다시 시도해주세요. ({{message}})"
     },
     "DeviceSocketNoBulkStatus": {
