@@ -1017,61 +1017,61 @@
       "desc": "システムの状態を確認"
     },
     "helpCenter": {
-      "title": "Ledger Support",
-      "desc": "Get help"
+      "title": "Ledgerサポート",
+      "desc": "ヘルプ"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "desc": "Learn crypto"
+      "desc": "暗号資産について学ぶ"
     },
     "facebook": {
       "title": "Facebook",
-      "desc": "Like our page"
+      "desc": "「いいね！」する"
     },
     "twitter": {
       "title": "Twitter",
-      "desc": "Follow us"
+      "desc": "フォローする"
     },
     "github": {
       "title": "Github",
-      "desc": "Review our code"
+      "desc": "コードの確認"
     }
   },
   "blacklistToken": {
-    "title": "Hide token",
-    "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide token"
+    "title": "トークンを非表示",
+    "desc": "この操作により、すべての<1><0>{{tokenName}}</0></1>アカウントが非表示になります。<3>設定 </3>から再度表示することができます。",
+    "hideCTA": "トークンを非表示"
   },
   "banners": {
     "cleanCache": {
-      "title": "Modification of experimental settings require a clear cache",
-      "cta": "Clear cache"
+      "title": "実験的な設定の変更にはCacheをクリアする必要があります。",
+      "cta": "Cacheを消去"
     },
-    "migrate": "Ledger Live accounts update available",
-    "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
+    "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
+    "genericTerminatedCrypto": "{{coinName}} には対応していません。",
     "valentine": {
       "title": "バレンタインデー",
       "description": "Ledgerは日頃の感謝を込めて、Ledger Liveの売買手数料割引キャンペーンを開催します。"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Everything you need to know about blockchain, security, cryptocurrency and your Ledger device",
-      "cta": "Start learning"
+      "description": "ブロックチェーンやセキュリティ、暗号通貨とLedgerデバイスについて知ってほしい全てのこと。",
+      "cta": "学習をスタート"
     },
     "stakeCosmos": {
-      "title": "Staking with COSMOS",
-      "description": "Delegate your ATOM coins through the account page and earn rewards today",
-      "cta": "Stake Cosmos now"
+      "title": "COSMOSのステーキング",
+      "description": "アカウントページからATOMコインをデリゲートして、今すぐ報酬を獲得しましょう。",
+      "cta": "今すぐCosmosをステーキングする"
     },
     "buyCrypto": {
-      "title": "Buy Crypto",
+      "title": "暗号資産を購入する",
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "Buy now"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "ファミリーパック",
+      "description": "家族や友達も一緒に暗号通貨を始められる、お得なNano S 3個セットです。",
+      "cta": "ファミリーパックを購入する"
     },
     "polkaStake": {
       "title": "POLKADOTステーキング",
