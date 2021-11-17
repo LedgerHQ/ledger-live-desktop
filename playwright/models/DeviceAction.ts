@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { Page } from "@playwright/test";
 import {
   deviceInfo155 as deviceInfo,
   mockListAppsResult,
@@ -13,49 +13,62 @@ export class DeviceAction {
 
   async openApp() {
     await this.page.evaluate(() => {
-      window.mock.events.mockDeviceEvent({ type: "opened" });
+      (window as any).mock.events.mockDeviceEvent({ type: "opened" });
     });
 
     await this.page.waitForSelector("#deviceAction-loading", { state: "visible" });
   }
 
-  async genuineCheck() {
-    const result = mockListAppsResult("Bitcoin", "Bitcoin", deviceInfo);
+  async genuineCheck(appDesc: string = "Bitcoin", installedDesc: string = "Bitcoin") {
+    const result = mockListAppsResult(appDesc, installedDesc, deviceInfo);
 
-    await this.page.evaluate((args) => {
-      const [ deviceInfo, result ] = args;
+    await this.page.evaluate(
+      args => {
+        const [deviceInfo, result] = args;
 
-      window.mock.events.mockDeviceEvent({
-        type: "listingApps",
-        deviceInfo,
+        (window as any).mock.events.mockDeviceEvent(
+          {
+            type: "listingApps",
+            deviceInfo,
+          },
+          {
+            type: "result",
+            result,
+          },
+          { type: "complete" },
+        );
       },
-      {
-        type: "result",
-        result,
-      },
-      { type: "complete" });
-    }, [ deviceInfo, result ]);
+      [deviceInfo, result],
+    );
 
     await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
   }
 
-  async manager() {
-    const result = mockListAppsResult("Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar","Bitcoin,Litecoin,Ethereum (outdated)", deviceInfo);
+  async accessManager(
+    appDesc: string = "Bitcoin,Tron,Litecoin,Ethereum,Ripple,Stellar",
+    installedDesc: string = "Bitcoin,Litecoin,Ethereum (outdated)",
+  ) {
+    const result = mockListAppsResult(appDesc, installedDesc, deviceInfo);
 
-    await this.page.evaluate((args) => {
-      const [ deviceInfo, result ] = args;
+    await this.page.evaluate(
+      args => {
+        const [deviceInfo, result] = args;
 
-      window.mock.events.mockDeviceEvent({
-        type: "listingApps",
-        deviceInfo,
+        (window as any).mock.events.mockDeviceEvent(
+          {
+            type: "listingApps",
+            deviceInfo,
+          },
+          {
+            type: "result",
+            result,
+          },
+          { type: "complete" },
+        );
       },
-      {
-        type: "result",
-        result,
-      },
-      { type: "complete" });
-    }, [ deviceInfo, result ]);
+      [deviceInfo, result],
+    );
 
     await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
   }
-};
+}

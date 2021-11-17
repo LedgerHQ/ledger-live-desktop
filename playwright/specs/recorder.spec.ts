@@ -3,8 +3,8 @@
 /* eslint-disable jest/no-done-callback */
 /* eslint-disable jest/expect-expect */
 import test from "../fixtures/common";
-import { expect } from "@playwright/test";
-import { DeviceAction } from "../models/DeviceAction";
+// import { expect } from "@playwright/test";
+// import { DeviceAction } from "../models/DeviceAction";
 
 // Comment out to disable recorder
 process.env.PWDEBUG = "1";
@@ -17,7 +17,7 @@ test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined } });
 
 test("My test", async ({ page }) => {
   test.setTimeout(6000000);
-  const deviceAction = new DeviceAction(page);
+  // const deviceAction = new DeviceAction(page);
 
   await page.pause();
 });

@@ -29,9 +29,9 @@ const BackDrop: ThemedComponent<{ state: string }> = styled.div.attrs(({ state }
 `;
 
 const ModalsLayer = ({ visibleModals }: *) => {
-  const filteredModals = visibleModals.filter(
-    ({ name, MODAL_SHOW_ONCE }) => !MODAL_SHOW_ONCE || !global.sessionStorage.getItem(name),
-  );
+  const filteredModals = visibleModals
+    .filter(({ name, MODAL_SHOW_ONCE }) => !MODAL_SHOW_ONCE || !global.sessionStorage.getItem(name))
+    .slice(0, 1);
   filteredModals.forEach(
     ({ name, MODAL_SHOW_ONCE }) =>
       MODAL_SHOW_ONCE && global.sessionStorage.setItem(name, Date.now()),

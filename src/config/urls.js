@@ -73,6 +73,8 @@ export const urls = {
       "https://shop.ledger.com/pages/politica-de-privacidad?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
     ru:
       "https://shop.ledger.com/pages/nasha-politika-konfidentsialnosti?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
+    de:
+      "https://shop.ledger.com/pages/unsere-datenschutzrichtlinie?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=privacy",
   },
   troubleshootingUSB:
     "https://support.ledger.com/hc/en-us/articles/115005165269?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=error",

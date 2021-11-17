@@ -11,7 +11,7 @@ test("Manager", async ({ page }) => {
 
   await test.step("can access manager", async () => {
     await managerPage.navigate();
-    await deviceAction.manager();
+    await deviceAction.accessManager();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-catalog.png",
     });
