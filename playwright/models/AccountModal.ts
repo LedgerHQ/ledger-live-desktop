@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page, expect } from "@playwright/test";
 
 export class AccountModal {
   readonly page: Page;
@@ -8,19 +8,19 @@ export class AccountModal {
   }
 
   async navigate() {
-    await this.page.click('#drawer-menu-accounts');
+    await this.page.click("#drawer-menu-accounts");
   }
 
   async open() {
     await this.page.click('button:has-text("Add account")');
-    await this.page.waitForSelector('#modal-title', { state: 'visible' } );
-    expect(await this.page.textContent('#modal-title')).toBe("Add accounts");
+    await this.page.waitForSelector("#modal-title", { state: "visible" });
+    expect(await this.page.textContent("#modal-title")).toBe("Add accounts");
   }
 
-  async select(currency) {
-    await this.page.click('.select__indicator');
+  async select(currency: string) {
+    await this.page.click(".select__indicator");
     await this.page.fill('[placeholder="Search"]', currency);
-    await this.page.press('[placeholder="Search"]', 'Enter');
+    await this.page.press('[placeholder="Search"]', "Enter");
     await this.page.click('button:has-text("Continue")');
   }
 
@@ -28,4 +28,4 @@ export class AccountModal {
     await this.page.click('button:has-text("Add accounts")');
     await this.page.click('button:has-text("Done")');
   }
-};
+}

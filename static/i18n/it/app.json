@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Add account"
       },
       "from": {
@@ -2743,7 +2743,8 @@
       "fr": "French",
       "ru": "Russian",
       "es": "Spanish",
-      "zh": "Chinese"
+      "zh": "Chinese",
+      "de": "German"
     }
   },
   "theme": {
@@ -3944,7 +3945,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Amount must be less than {{maxAmountFromFormatted}}"

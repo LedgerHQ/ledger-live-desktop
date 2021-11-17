@@ -238,7 +238,7 @@ const SLIDES = [
       {
         // $FlowFixMe
         source: require("./banners/BackupPack/images/nanos.png").default,
-        transform: [-55, 5, 5, 5],
+        transform: [-55, 13, 5, 15],
         size: {
           width: 162,
           height: 167,
@@ -256,7 +256,7 @@ const SLIDES = [
       {
         // $FlowFixMe
         source: require("./banners/BackupPack/images/nanos.png").default,
-        transform: [55, 25, 5, 25],
+        transform: [55, 17, 5, 15],
         size: {
           width: 162,
           height: 167,
