@@ -5,13 +5,13 @@ import { SwapPage } from "../models/SwapPage";
 // Comment out to disable recorder
 process.env.PWDEBUG = "1";
 
-test.use({ userdata: "skip-onboarding" });
+test.use({ userdata: "1AccountBTC1AccountETH" });
 
 test("Swap", async ({ page }) => {
   const swapPage = new SwapPage(page);
 
   await test.step("Open Swap Page", async () => {
-    swapPage.navigate();
-    page.pause();
+    await swapPage.navigate();
+    expect(await page.screenshot()).toMatchSnapshot(`open-swap-page.png`);
   });
 });

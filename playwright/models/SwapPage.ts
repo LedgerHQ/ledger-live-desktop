@@ -9,5 +9,6 @@ export class SwapPage {
 
   async navigate() {
     await this.page.click('#drawer-swap-button');
+    await this.page.waitForSelector('span:has-text("Max")', { state: 'visible' });
   }
 }
