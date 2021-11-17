@@ -7,13 +7,12 @@ import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
 import { Account, TokenAccount, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { PortfolioRange } from "@ledgerhq/live-common/lib/types/portfolio";
+import { Icons, Text, Flex } from "@ledgerhq/react-ui";
 
 import Box from "~/renderer/components/Box";
 import AccountContextMenu from "~/renderer/components/ContextMenu/AccountContextMenu";
-import Text from "~/renderer/components/Text";
 import TokenRow from "~/renderer/components/TokenRow";
-import AngleDown from "~/renderer/icons/AngleDown";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { matchesSearch } from "../AccountList/matchesSearch";
 import AccountSyncStatusIndicator from "../AccountSyncStatusIndicator";
@@ -21,46 +20,36 @@ import Balance from "./Balance";
 import Countervalue from "./Countervalue";
 import Delta from "./Delta";
 import Header from "./Header";
-import Star from "~/renderer/components/Stars/Star";
 import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import Button from "~/renderer/components/Button";
 
 import perFamilyTokenList from "~/renderer/generated/TokenList";
 
-const Row: ThemedComponent<{}> = styled(Box)`
-  background: ${p => p.theme.colors.palette.background.paper};
-  border-radius: 4px;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px 0 #00000007;
-  color: #abadb6;
+const Row: ThemedComponent<{}> = styled(Flex)`
+  border-bottom: 1px solid ${p => p.theme.colors.palette.neutral.c40};
   cursor: pointer;
-  display: flex;
   flex-direction: column;
   flex: 1;
-  font-weight: 600;
+  padding: 0px 40px;
   justify-content: flex-start;
-  margin-bottom: 9px;
   position: relative;
   transition: background-color ease-in-out 200ms;
   :hover {
-    border-color: ${p => p.theme.colors.palette.text.shade20};
   }
   :active:not(:focus-within) {
-    border-color: ${p => p.theme.colors.palette.text.shade20};
-    background: ${p => p.theme.colors.palette.action.hover};
   }
 `;
 
 const RowContent: ThemedComponent<{
-  disabled?: boolean,
-  isSubAccountsExpanded: boolean,
-}> = styled.div`
+  disabled?: boolean;
+  isSubAccountsExpanded: boolean;
+}> = styled(Flex)`
+  height: 80px;
   align-items: center;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   opacity: ${p => (p.disabled ? 0.3 : 1)};
-  padding: 16px 20px;
   & * {
     color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
     fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
@@ -69,7 +58,6 @@ const RowContent: ThemedComponent<{
 
 const TokenContent = styled.div`
   display: flex;
-  padding: 4px 20px 15px;
   flex-direction: column;
   flex-grow: 1;
 `;
@@ -78,32 +66,14 @@ const TokenContentWrapper = styled.div`
   position: relative;
 `;
 
-const TokenBarIndicator: ThemedComponent<{}> = styled.div`
-  width: 15px;
-  border-left: 1px solid ${p => p.theme.colors.palette.divider};
-  z-index: 2;
-  margin-left: 29px;
-  position: absolute;
-  left: 0;
-  margin-top: -16px;
-  height: 100%;
-  &:hover {
-    border-color: ${p => p.theme.colors.palette.text.shade60};
-  }
-`;
-
 const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
   margin: ${p => (p.expanded ? 0 : -1)}px 0 0;
   display: flex;
   color: ${p => p.theme.colors.wallet};
   align-items: center;
   justify-content: center;
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
-  background: ${p => p.theme.colors.palette.background.paper};
-  border-radius: 0px 0px 4px 4px;
   height: 32px;
   text-align: center;
-  padding: 0;
 
   &:hover ${Text} {
     text-decoration: underline;
@@ -126,18 +96,18 @@ const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
 `;
 
 type Props = {
-  account: TokenAccount | Account,
-  parentAccount?: Account,
-  disableRounding?: boolean,
-  hideEmptyTokens?: boolean,
-  onClick: (AccountLike, Account) => void,
-  hidden?: boolean,
-  range: PortfolioRange,
-  search?: string,
+  account: TokenAccount | Account;
+  parentAccount?: Account;
+  disableRounding?: boolean;
+  hideEmptyTokens?: boolean;
+  onClick: (AccountLike, Account) => void;
+  hidden?: boolean;
+  range: PortfolioRange;
+  search?: string;
 };
 
 type State = {
-  expanded: boolean,
+  expanded: boolean;
 };
 
 const expandedStates: { [key: string]: boolean } = {};
@@ -245,12 +215,7 @@ class AccountRowItem extends PureComponent<Props, State> {
     const key = `${account.id}_${hideEmptyTokens ? "hide_empty_tokens" : ""}`;
 
     return (
-      <div
-        className={`accounts-account-row-item ${tokens && tokens.length > 0 ? "has-tokens" : ""}`}
-        style={{ position: "relative" }}
-        key={key}
-        hidden={hidden}
-      >
+      <div style={{ position: "relative" }} key={key} hidden={hidden}>
         <span style={{ position: "absolute", top: -70 }} ref={this.scrollTopFocusRef} />
         <AccountContextMenu account={account}>
           <Row expanded={expanded} tokens={showTokensIndicator} key={mainAccount.id}>
@@ -261,22 +226,15 @@ class AccountRowItem extends PureComponent<Props, State> {
               onClick={this.onClick}
             >
               <Header account={account} name={mainAccount.name} />
-              <Box flex="12%">
-                <div>
-                  <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
-                </div>
-              </Box>
+              <Flex flex="12%">
+                <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
+              </Flex>
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />
               <Countervalue account={account} currency={currency} range={range} />
               <Delta account={account} range={range} />
-              <Star
-                accountId={account.id}
-                parentId={account.type !== "Account" ? account.parentId : undefined}
-              />
             </RowContent>
             {showTokensIndicator && expanded ? (
               <TokenContentWrapper>
-                <TokenBarIndicator onClick={this.toggleAccordion} />
                 <TokenContent>
                   {tokens &&
                     tokens.map((token, index) => (
@@ -307,14 +265,14 @@ class AccountRowItem extends PureComponent<Props, State> {
                 onClick={this.toggleAccordion}
               >
                 <Box horizontal alignContent="center" justifyContent="center">
-                  <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+                  <Text color="palette.neutral.c100" variant="small" fontWeight="semibold">
                     <Trans
                       i18nKey={translationMap[expanded ? "hide" : "see"]}
                       values={{ tokenCount: tokens.length }}
                     />
                   </Text>
                   <IconAngleDown expanded={expanded}>
-                    <AngleDown size={16} />
+                    <Icons.ChevronBottomMedium color="palette.neutral.c100" />
                   </IconAngleDown>
                 </Box>
               </TokenShowMoreIndicator>
@@ -329,5 +287,7 @@ const mapStateToProps = createStructuredSelector({
   hideEmptyTokenAccounts: hideEmptyTokenAccountsSelector,
 });
 
-const ConnectedAccountRowItem: React.ReactComponentType<{}> = connect(mapStateToProps)(AccountRowItem);
+const ConnectedAccountRowItem: React.ReactComponentType<{}> = connect(mapStateToProps)(
+  AccountRowItem,
+);
 export default ConnectedAccountRowItem;

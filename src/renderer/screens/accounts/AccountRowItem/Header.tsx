@@ -14,13 +14,20 @@ type Props = {
   nested?: boolean;
 };
 
-// NB Inside Head to not break alignment with parent row;
-// and this is in fact not seen, because we draw on top
-// from AccountRowItem/index.js TokenBarIndicator
+const ICON_SIZE = 32;
+const ROW_HEIGHT = 80;
+const nestedIndicatorMargin = 4;
+const nestedIndicatorHeight = ROW_HEIGHT - ICON_SIZE - nestedIndicatorMargin / 2;
+const nestedIndicatorWidth = 1;
+
 const NestedIndicator = styled.div`
-  background-color: lightgreen;
-  height: 44px;
-  width: 14px;
+  position: absolute;
+  opacity: 0.5;
+  top: ${-nestedIndicatorHeight / 2}px;
+  left: ${(ICON_SIZE - nestedIndicatorWidth) / 2}px;
+  height: ${nestedIndicatorHeight}px;
+  width: ${nestedIndicatorWidth}px;
+  background-color: ${p => p.theme.colors.palette.neutral.c40};
 `;
 
 const Header = ({ account, nested }: Props) => {
@@ -31,10 +38,10 @@ const Header = ({ account, nested }: Props) => {
     currency.type === "CryptoCurrency" ? currency.color : theme.colors.palette.text.shade60;
   const title = currency.type === "CryptoCurrency" ? currency.name : "token";
   return (
-    <Box horizontal flow={3} flex={`${nested ? 42 : 30}%`} pr={1} alignItems="center">
-      {nested && <NestedIndicator />}
+    <Box horizontal flow={3} flex={nested ? "42%" : "30%"} pr={1} alignItems="center">
       <Box alignItems="center" justifyContent="center" style={{ color }}>
-        <CryptoCurrencyIcon currency={currency} size={32} />
+        <CryptoCurrencyIcon currency={currency} size={ICON_SIZE} />
+        {nested && <NestedIndicator />}
       </Box>
       <Box style={{ flexShrink: 1 }}>
         {!nested && account.type === "Account" && (
