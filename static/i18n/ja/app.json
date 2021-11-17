@@ -165,9 +165,9 @@
     "mbUnit": "{{size}}MB"
   },
   "time": {
-    "minute": "Minute",
+    "minute": "分",
     "minute_plural": "分",
-    "hour": "Hour",
+    "hour": "時間",
     "hour_plural": "時間",
     "range": {
       "day": "1日",
@@ -189,27 +189,27 @@
     "feesAmount": "手数料"
   },
   "sidebar": {
-    "menu": "Menu",
+    "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
-    "manager": "Manager",
-    "exchange": "Buy / Sell",
-    "swap": "Swap",
-    "lend": "Lend",
+    "manager": "マネージャー",
+    "exchange": "購入/売却",
+    "swap": "スワップ",
+    "lend": "レンディング",
     "catalog": "Discover"
   },
   "stars": {
     "placeholder": "お気に入りに登録したアカウントは、ここに表示されます。",
-    "tooltip": "Star account"
+    "tooltip": "お気に入りアカウント"
   },
   "bridge": {
-    "modalTitle": "Open Device Bridge",
-    "openHeader": "Expose your Device accounts through WebSocket",
-    "openDescription": "Opening a bridge exposes all of your accounts to third party applications.",
-    "openedHeader": "{{appName}} bridge opened",
-    "openedDescription": "You can now access your {{appName}} account on third party web application through WebSocket.",
-    "completeHeader": "Bridge session completed",
-    "completeDescription": "The websocket bridge is now closed.",
+    "modalTitle": "デバイスブリッジを開く",
+    "openHeader": "WebSocketからデバイスアカウントを連結",
+    "openDescription": "ブリッジを開いて、全てのアカウントとサードパーティのアプリを連結できます。",
+    "openedHeader": "{{appName}} ブリッジ済み",
+    "openedDescription": "サードパーティのウェブアプリで、WebSocketを通して{{appName}} アカウントにアクセス可能になりました。",
+    "completeHeader": "ブリッジのセッションが完了しました。",
+    "completeDescription": "WebSocketブリッジ解除済み",
     "openButton": "Open",
     "disconnectButton": "Disconnect"
   },
