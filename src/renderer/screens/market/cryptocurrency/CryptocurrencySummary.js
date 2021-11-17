@@ -13,7 +13,7 @@ import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useRange } from "~/renderer/hooks/market/useRange";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
-import BigNumber from "bignumber.js";
+import { BigNumber } from "bignumber.js";
 import moment from "moment";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
 
@@ -73,22 +73,22 @@ export default function CryptocurrencySummary({
     [counterCurrency, loading, rangeData.scale],
   );
 
-  const chartMockData = [];
+  const chartMockData: Array<any> = [];
 
   for (let i = 1; i < 10; i++) {
-    let value: BigNumber;
+    let value: number;
     if (i < 4) {
-      value = BigNumber(i * 10);
+      value = i * 10;
     } else if (i < 7) {
-      value = BigNumber(i * 7);
+      value = i * 7;
     } else {
-      value = BigNumber(i * 4);
+      value = i * 4;
     }
     chartMockData.push({
       date: moment()
         .add(i, `${rangeData.scale}s`)
         .toDate(),
-      value: value,
+      value: BigNumber(value),
     });
   }
 

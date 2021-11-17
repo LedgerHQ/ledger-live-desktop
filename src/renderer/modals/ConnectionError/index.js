@@ -50,13 +50,13 @@ const ConnectionErrorModal = () => {
               <WarningSignWrapper>
                 <TriangleWarningIcon size={20} />
               </WarningSignWrapper>
-              <Text fontSize="18" fontWeight="600" mb="8px">
+              <Text fontSize={18} fontWeight="600" mb="8px">
                 {t("market.warnings.connectionError")}
               </Text>
-              <Text fontSize="13" fontWeight="400">
+              <Text fontSize={13} fontWeight="400">
                 {t("market.warnings.ledgerUnableToRetrieveData")}
               </Text>
-              <Text fontSize="13" fontWeight="400">
+              <Text fontSize={13} fontWeight="400">
                 {t("market.warnings.checkInternetAndReload")}
               </Text>
             </Box>
