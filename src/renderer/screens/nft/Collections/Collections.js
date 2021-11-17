@@ -9,7 +9,7 @@ import Text from "~/renderer/components/Text";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
-import { TokenShowMoreIndicator, IconAngleDown } from "~/renderer/screens/Account/TokensList";
+import { TokenShowMoreIndicator, IconAngleDown } from "~/renderer/screens/account/TokensList";
 import IconReceive from "~/renderer/icons/Receive";
 import AngleDown from "~/renderer/icons/AngleDown";
 import Row from "./Row";
