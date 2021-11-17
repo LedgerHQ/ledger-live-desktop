@@ -17,7 +17,7 @@ import { openURL } from "~/renderer/linking";
 import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-import type { NFT } from "@ledgerhq/live-common/lib/types";
+import type { NFTMetadataResponse } from "@ledgerhq/live-common/lib/types";
 
 const Separator: ThemedComponent<{}> = styled.div`
   background-color: ${p => p.theme.colors.palette.divider};
@@ -44,10 +44,10 @@ type ItemType = DropDownItemType & {
 };
 
 type ExternalViewerButtonProps = {
-  nft: NFT,
+  links: $PropertyType<$PropertyType<NFTMetadataResponse, "result">, "links">,
 };
 
-export const ExternalViewerButton = ({ nft }: ExternalViewerButtonProps) => {
+export const ExternalViewerButton = ({ links }: ExternalViewerButtonProps) => {
   const { t } = useTranslation();
 
   const items: DropDownItemType[] = [
@@ -55,13 +55,13 @@ export const ExternalViewerButton = ({ nft }: ExternalViewerButtonProps) => {
       key: "opensea",
       label: t("NFT.viewer.actions.open", { viewer: "Opensea.io" }),
       icon: <IconOpensea size={16} />,
-      onClick: () => openURL(`https://opensea.io/assets/${nft.collection.contract}/${nft.tokenId}`),
+      onClick: () => openURL(links.opensea),
     },
     {
       key: "rarible",
       label: t("NFT.viewer.actions.open", { viewer: "Rarible" }),
       icon: <IconRarible size={16} />,
-      onClick: () => openURL(`https://rarible.com/token/${nft.collection.contract}:${nft.tokenId}`),
+      onClick: () => openURL(links.rarible),
     },
     {
       key: "sep2",
@@ -72,8 +72,7 @@ export const ExternalViewerButton = ({ nft }: ExternalViewerButtonProps) => {
       key: "etherscan",
       label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
       icon: <IconGlobe size={16} />,
-      onClick: () =>
-        openURL(`https://etherscan.io/token/${nft.collection.contract}?a=${nft.tokenId}`),
+      onClick: () => openURL(links.etherscan),
     },
   ];
 

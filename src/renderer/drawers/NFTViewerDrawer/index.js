@@ -183,7 +183,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
               </Text>
             </Button> */}
 
-            <ExternalViewerButton nft={nft} />
+            <ExternalViewerButton links={metadata.links} />
           </NFTActions>
           <NFTAttributes>
             <NFTProperties nft={nft} metadata={metadata} status={status} />

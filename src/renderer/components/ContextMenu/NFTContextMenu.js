@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import IconOpensea from "~/renderer/icons/Opensea";
 import IconRarible from "~/renderer/icons/Rarible";
 import IconGlobe from "~/renderer/icons/Globe";
@@ -16,6 +17,7 @@ type Props = {
 
 export default function NFTContextMenu({ leftClick, children, contract, tokenId }: Props) {
   const { t } = useTranslation();
+  const { metadata } = useNftMetadata(contract, tokenId);
 
   const menuItems = [
     {
@@ -23,14 +25,14 @@ export default function NFTContextMenu({ leftClick, children, contract, tokenId 
       label: t("NFT.viewer.actions.open", { viewer: "Opensea.io" }),
       Icon: IconOpensea,
       type: "external",
-      callback: () => openURL(`https://opensea.io/assets/${contract}/${tokenId}`),
+      callback: () => openURL(metadata?.links?.opensea),
     },
     {
       key: "rarible",
       label: t("NFT.viewer.actions.open", { viewer: "Rarible" }),
       Icon: IconRarible,
       type: "external",
-      callback: () => openURL(`https://rarible.com/token/${contract}:${tokenId}`),
+      callback: () => openURL(metadata?.links?.rarible),
     },
     {
       key: "sep2",
@@ -42,7 +44,7 @@ export default function NFTContextMenu({ leftClick, children, contract, tokenId 
       label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
       Icon: IconGlobe,
       type: "external",
-      callback: () => openURL(`https://etherscan.io/token/${contract}?a=${tokenId}`),
+      callback: () => openURL(metadata?.links?.etherscan),
     },
   ];
 
