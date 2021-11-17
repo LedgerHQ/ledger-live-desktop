@@ -213,7 +213,7 @@ const Body = ({
       setTransaction(
         bridge.updateTransaction(transaction, {
           tokenIds: [nextNft.tokenId],
-          quantities: standard === "erc1155" ? [BigNumber(1)] : undefined,
+          quantities: [BigNumber(1)],
           collection: nextNft.collection.contract,
           mode: `${standard}.transfer`,
         }),
