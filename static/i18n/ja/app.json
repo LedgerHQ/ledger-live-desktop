@@ -831,43 +831,43 @@
       "cta": "レンディングを管理",
       "title": "Manage loan",
       "enable": {
-        "approve": "Approve",
-        "manageLimit": "Manage limit",
-        "viewDetails": "View details",
-        "info": "You have approved <0>{{amount}}</0> on this account. You can reduce the amount at a fee.",
-        "infoNoLimit": "You have fully approved this account. You can reduce the amount at a fee.",
-        "approvedWithLimit": "You have approved <0>{{value}}</0> on this account.",
-        "enabling": "You can deposit assets once the account approval is confirmed.",
-        "notEnabled": "You need to approve this account before being able to lend assets.",
+        "approve": "承認",
+        "manageLimit": "リミットの管理",
+        "viewDetails": "詳細を表示",
+        "info": "このアカウントで<0>{{amount}}</0>を承認しました。手数料を支払うことで減額できます。",
+        "infoNoLimit": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
+        "approvedWithLimit": "このアカウントで<0>{{value}}</0>を承認しました。",
+        "enabling": "アカウントの承認が完了すると、資産をデポジットできるようになります。",
+        "notEnabled": "資産をレンディングするには、このアカウントを承認する必要があります。",
         "notEnoughApproved": "You must increase the limit approved on your account to lend."
       },
       "supply": {
-        "title": "Deposit",
-        "description": "Enter the amount of assets to lend to the protocol."
+        "title": "デポジット",
+        "description": "プロトコルにレンディングする資産の額を入力してください。"
       },
       "withdraw": {
-        "title": "Withdraw",
-        "description": "Withdraw assets from the protocol to your Ledger account."
+        "title": "引き出す",
+        "description": "プロトコルからLedgerアカウントに資産を引き出します。"
       }
     },
     "enable": {
-      "title": "Approve account",
+      "title": "アカウントを承認",
       "steps": {
         "selectAccount": {
-          "title": "Select account",
-          "selectLabel": "Account to lend from",
-          "cta": "Approve",
-          "alreadyEnabled": "This account is approved"
+          "title": "アカウントを選択",
+          "selectLabel": "レンディング用アカウント",
+          "cta": "承認",
+          "alreadyEnabled": "このアカウントは承認済みです。"
         },
         "amount": {
-          "title": "Amount",
-          "summary": "I grant access to <0>{{contractName}}</0> smart contract on my account <0>{{accountName}}</0> for a <0>{{amount}}</0> amount",
-          "limit": "limited {{amount}}",
-          "noLimit": "no limit {{assetName}}",
-          "contractName": "Compound {{currencyName}}",
-          "advanced": "Advanced",
-          "amountLabel": "Amount to approve",
-          "amountLabelTooltip": "This limits the amount available to the smart contract."
+          "title": "数量",
+          "summary": "<0>{{accountName}}</0>の<0>{{amount}}</0>分の<0>{{contractName}}</0>スマートコントラクトへのアクセスを許可します。",
+          "limit": "リミット有り：{{amount}}",
+          "noLimit": "リミット無し：{{assetName}}",
+          "contractName": "コンパウンド{{currencyName}}",
+          "advanced": "アドバンス",
+          "amountLabel": "承認額",
+          "amountLabelTooltip": "これにより、スマートコントラクトで利用できる額が制限されます。"
         },
         "connectDevice": {
           "title": "Device"
