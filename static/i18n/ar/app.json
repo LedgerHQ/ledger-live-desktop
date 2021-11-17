@@ -133,6 +133,8 @@
     "type": {
       "IN": "تم الاستلام",
       "OUT": "تم الإرسال",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "تم إنشاؤه",
       "REVEAL": "تم الإظهار",
       "DELEGATE": "تفويض",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "رموز التوكن",
     "cta": "إضافة رمز توكن",
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "لهذه العملية عمليات داخلية",
     "details": "تفاصيل {{ currency }}",
     "multipleAddresses": "لماذا عناوين متعددة؟",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
       "unfreezeAmount": "إزالة تجميد المبلغ",
@@ -1698,17 +1748,20 @@
   },
   "send": {
     "title": "إرسال",
+    "titleNft": "Send NFT",
     "totalSpent": "الإجمالي للخصم",
     "steps": {
       "recipient": {
-        "title": "المستلم"
+        "title": "المستلم",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "المبلغ",
         "banner": "المبلغ الأقصى القابل للإنفاق هو",
         "fees": "الرسوم",
         "standard": "اعتيادي",
-        "advanced": "متقدم"
+        "advanced": "متقدم",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "الملخص"
@@ -1730,7 +1783,9 @@
         "rippleTagPlaceholder": "اختياري",
         "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "سعر الغاز",
-        "unitPerByte": "{{unit}} لكل بايت"
+        "unitPerByte": "{{unit}} لكل بايت",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3440,13 @@
       "undelegate": "المدقق",
       "claimReward": "مستلم المكافأة",
       "optIn": "المستلم",
-      "nominate": "المدقق"
+      "nominate": "المدقق",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "أصوات ({{count}})"
   },
@@ -3989,6 +4050,9 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
