@@ -133,6 +133,8 @@
     "type": {
       "IN": "Recibido",
       "OUT": "Enviado",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Creado",
       "REVEAL": "Revelado",
       "DELEGATE": "Delegado",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Tokens",
     "cta": "Agregar token",
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Esta operación cuenta con operaciones internas",
     "details": "Detalles de {{ currency }}",
     "multipleAddresses": "¿Por qué hay múltiples direcciones?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Importe congelado",
       "unfreezeAmount": "Descongelar importe",
@@ -1698,17 +1748,20 @@
   },
   "send": {
     "title": "Enviar",
+    "titleNft": "Send NFT",
     "totalSpent": "Total a debitar",
     "steps": {
       "recipient": {
-        "title": "Receptor"
+        "title": "Receptor",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Importe",
         "banner": "El importe máximo que puede gastarse es",
         "fees": "Tarifas",
         "standard": "Estándar",
-        "advanced": "Avanzado"
+        "advanced": "Avanzado",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Resumen"
@@ -1730,7 +1783,9 @@
         "rippleTagPlaceholder": "Opcional",
         "ethereumGasLimit": "Límite de gas",
         "ethereumGasPrice": "Precio de gas",
-        "unitPerByte": "{{unit}} por byte"
+        "unitPerByte": "{{unit}} por byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3440,13 @@
       "undelegate": "validador",
       "claimReward": "receptor de recompensas",
       "optIn": "receptor",
-      "nominate": "validador"
+      "nominate": "validador",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Votos ({{count}})"
   },
@@ -3989,6 +4050,9 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
