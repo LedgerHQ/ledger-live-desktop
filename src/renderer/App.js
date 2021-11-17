@@ -4,6 +4,7 @@ import { hot } from "react-hot-loader/root";
 import { Provider, useSelector } from "react-redux";
 import type { Store } from "redux";
 import { HashRouter as Router } from "react-router-dom";
+import { NftMetadataProvider } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 import "./global.css";
 import "tippy.js/dist/tippy.css";
@@ -73,7 +74,9 @@ const InnerApp = ({ initialCountervalues }: { initialCountervalues: * }) => {
                     <WalletConnectProvider>
                       <PlatformAppProviderWrapper>
                         <DrawerProvider>
-                          <Default />
+                          <NftMetadataProvider>
+                            <Default />
+                          </NftMetadataProvider>
                         </DrawerProvider>
                       </PlatformAppProviderWrapper>
                     </WalletConnectProvider>

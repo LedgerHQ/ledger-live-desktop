@@ -8,6 +8,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import AccountCrumb from "./AccountCrumb";
 import AssetCrumb from "./AssetCrumb";
+import NFTCrumb from "./NFTCrumb";
 
 const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ const Breadcrumb = () => (
     <Route path="/account/:parentId/:id/" component={AccountCrumb} />
 
     <Route path="/asset/:assetId+" component={AssetCrumb} />
+    <Route path="/account/:id/nft-collection/:collectionId?" component={NFTCrumb} />
   </Wrapper>
 );
 
