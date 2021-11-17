@@ -581,7 +581,7 @@
                 },
                 "tls": {
                   "title": "Use TLS",
-                  "tooltip": "Enable Transport Layer Security, for example, when using a hosted node solution."
+                  "tooltip": "\nTLS（Transport Layer Security）を有効にしてください。例：ホストされたノードソリューションを使用する場合。"
                 }
               }
             },
