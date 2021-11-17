@@ -210,8 +210,8 @@
     "openedDescription": "サードパーティのウェブアプリで、WebSocketを通して{{appName}} アカウントにアクセス可能になりました。",
     "completeHeader": "ブリッジのセッションが完了しました。",
     "completeDescription": "WebSocketブリッジ解除済み",
-    "openButton": "Open",
-    "disconnectButton": "Disconnect"
+    "openButton": "開く",
+    "disconnectButton": "接続切断"
   },
   "swap2": {
     "title": "スワップ",
@@ -238,7 +238,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "{{name}} の受取アカウントを作成",
         "noAccountCTA": "アカウントを追加"
       },
       "from": {
@@ -336,38 +336,38 @@
     }
   },
   "swap": {
-    "title": "Swap",
-    "titleCrypto": "Swap {{currency}}",
-    "whatIsSwap": "What is Swap",
+    "title": "スワップ",
+    "titleCrypto": "{{currency}} をスワップ",
+    "whatIsSwap": "スワップとは",
     "paraswap": {
       "cta": " 確認する",
       "description": "Paraswapをお探しですか？この項目は「Discover」タブに移動されました。"
     },
     "tabs": {
-      "exchange": "Exchange",
-      "history": "History"
+      "exchange": "取引",
+      "history": "履歴"
     },
     "history": {
       "disclaimer": "デスクトップ上のスワップ取引が、Ledger Live Mobileアプリと同期されていません。",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "こちらに前回のスワップが表示されます。",
+        "description": "まだスワップを行っていないか、Ledger Liveがリセットされています。"
       }
     },
     "landing": {
-      "title": "Swap your assets",
-      "continue": "Continue",
-      "sorry": "Service temporarily unavailable, or not available in your country"
+      "title": "資産をスワップする",
+      "continue": "続行",
+      "sorry": "サービスが一時的に利用できない状態であるか、お住まいの国では利用できません。"
     },
     "missingApp": {
       "title": "お使いのデバイスに、{{appName}}アプリをインストールしてください。",
       "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをインストールしてください。",
-      "cta": "Go to manager"
+      "cta": "マネージャーに移動"
     },
     "outdatedApp": {
       "title": "デバイス上の{{appName}}アプリをアップデートしてください。",
       "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをアップデートしてください。",
-      "cta": "Go to manager"
+      "cta": "マネージャーに移動"
     },
     "providers": {
       "title": "暗号資産のスワップに利用するプロバイダーを選択",
@@ -440,16 +440,16 @@
       "resetKYCCTA": "KYC（本人確認）をリセット",
       "amount": "数量",
       "from": {
-        "title": "From",
-        "account": "Account",
-        "amount": "Amount to send",
-        "currency": "Crypto asset"
+        "title": "送付元",
+        "account": "アカウント",
+        "amount": "送付額",
+        "currency": "暗号資産"
       },
       "to": {
-        "title": "To",
-        "account": "Account",
-        "amount": "Amount to receive",
-        "currency": "Crypto asset",
+        "title": "送付先",
+        "account": "アカウント",
+        "amount": "受取額",
+        "currency": "暗号資産",
         "addAccountCTA": "新規アカウントを追加"
       },
       "tradeMethod": {
@@ -716,9 +716,9 @@
     "buy": {
       "header": "{{provider}}で暗号資産を購入する",
       "title": "&lt;0&gt;{{provider}}&lt;/0&gt;で暗号通貨を購入する",
-      "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
+      "tab": "購入",
+      "selectCrypto": "暗号資産を選択",
+      "selectAccount": "アカウントを選択",
       "continue": "Continue",
       "addAccount": "Add account"
     },
