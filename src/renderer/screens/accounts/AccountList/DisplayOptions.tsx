@@ -4,10 +4,10 @@ import PillTabs from "@ledgerhq/react-ui/components/tabs/Pill";
 import { Icons } from "@ledgerhq/react-ui";
 import { setAccountsViewMode } from "~/renderer/actions/settings";
 import { accountsViewModeSelector } from "~/renderer/reducers/settings";
-import Box from "~/renderer/components/Box";
 import AccountsOrder from "./Order";
 import AccountsRange from "./Range";
 import { track } from "~/renderer/analytics/segment";
+import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 
 const tabs = [
   {
@@ -38,15 +38,15 @@ function DisplayOptions() {
   const activeIndex = tabs.findIndex(tab => tab.mode === mode);
 
   return (
-    <>
+    <FlexBox flexDirection="row" alignSelf="flex-end">
       <AccountsRange />
-      <Box ml={4} mr={4}>
+      <FlexBox ml="20px" mr="20px">
         <AccountsOrder />
-      </Box>
+      </FlexBox>
       <PillTabs onTabChange={onTabChange} initialActiveIndex={activeIndex}>
         {tabs.map(({ node }) => node)}
       </PillTabs>
-    </>
+    </FlexBox>
   );
 }
 
