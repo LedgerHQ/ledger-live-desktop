@@ -702,78 +702,78 @@
     "energy": "Energy（エネルギー）",
     "delegatedAssets": "デリゲートされた資産",
     "undelegating": "デリゲート解除中",
-    "availableBalanceTooltip": "This amount is disposable.",
-    "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
-    "bandwidthTooltip": "Freeze assets to gain bandwidth",
-    "energyTooltip": "Freeze assets to gain energy",
-    "delegatedAssetsTooltip": "Delegated assets are used in the Cosmos voting process. This represents your total number of votes.",
-    "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
+    "availableBalanceTooltip": "これは利用可能額です。",
+    "frozenAssetsTooltip": "凍結された資産はTronの投票に使われます。これがあなたの合計票数です。",
+    "bandwidthTooltip": "資産を凍結して、Bandwidth（バンド幅）を獲得",
+    "energyTooltip": "資産を凍結して、Energy（エネルギー）を獲得",
+    "delegatedAssetsTooltip": "デリゲートされた資産は、Cosmosの投票に使われます。これがあなたの合計票数です。",
+    "undelegatingTooltip": "デリゲートを解除した資産は、21日間のロック期間後に再び利用可能になります。"
   },
   "exchange": {
-    "title": "Buy and sell crypto",
-    "reset": "Reset flow",
-    "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
+    "title": "暗号通貨の購入と売却",
+    "reset": "フローをリセット",
+    "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
       "header": "{{provider}}で暗号資産を購入する",
       "title": "&lt;0&gt;{{provider}}&lt;/0&gt;で暗号通貨を購入する",
       "tab": "購入",
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "continue": "続行",
+      "addAccount": "アカウントを追加"
     },
     "sell": {
       "header": "{{provider}}で暗号資産を売却する",
       "title": "&lt;0&gt;{{provider}}&lt;/0&gt;経由で暗号資産を売却する",
-      "tab": "Sell",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue"
+      "tab": "売却",
+      "selectCrypto": "暗号資産を選択",
+      "selectAccount": "アカウントを選択",
+      "continue": "続行"
     },
     "history": {
-      "tab": "History",
+      "tab": "履歴",
       "exporting": "エクスポートしています...",
       "exportOperations": "エクスポート処理"
     }
   },
   "lend": {
-    "title": "Lend crypto",
+    "title": "暗号資産をレンディング（貸し出す）",
     "tabs": {
-      "dashboard": "Dashboard",
+      "dashboard": "ダッシュボード",
       "opened": "貸出中の資産",
-      "closed": "Closed loans",
-      "history": "History"
+      "closed": "レンディング終了済み",
+      "history": "履歴"
     },
-    "assets": "Assets to lend",
-    "active": "Approved accounts",
+    "assets": "レンディングする資産",
+    "active": "認証済みアカウント",
     "lendAsset": "貸暗号資産（レンディング）",
     "account": {
-      "amountSupplied": "Amount deposited",
-      "amountSuppliedTooltip": "Amount lent to the network",
-      "currencyAPY": "Currency APY",
-      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
-      "accruedInterests": "Accrued interest",
-      "accruedInterestsTooltip": "Interest generated on your lent assets",
-      "interestEarned": "Interest earned",
-      "interestEarnedTooltip": "Interest you have earned after withdrawal",
-      "openLoans": "Open loans",
-      "closedLoans": "Closed loans",
-      "amountRedeemed": "Amount withdrawn",
-      "date": "Date",
-      "info": "You can lend assets directly from your {{currency}} account and earn interest.",
-      "howCompoundWorks": "How does lending on Compound work?",
-      "lend": "Deposit {{currency}}"
+      "amountSupplied": "デポジット額",
+      "amountSuppliedTooltip": "ネットワーク貸出額",
+      "currencyAPY": "通貨APY（年間利回り）",
+      "currencyAPYTooltip": "継続的に複利運用した預金に対して得られる年間収益率",
+      "accruedInterests": "未収利息",
+      "accruedInterestsTooltip": "貸し出した資産に対する利息",
+      "interestEarned": "獲得利息",
+      "interestEarnedTooltip": "引き出し後に獲得した利息",
+      "openLoans": "資産を貸し出す",
+      "closedLoans": "レンディング終了済み",
+      "amountRedeemed": "引き出し額",
+      "date": "日付",
+      "info": "{{currency}} アカウントから直接資産をレンディングし、利息を得ることができます。",
+      "howCompoundWorks": "コンパウンドでのレンディングはどのように機能しますか？",
+      "lend": "{{currency}} をデポジット"
     },
     "emptyState": {
       "active": {
-        "title": "Lending",
-        "description": "You can lend assets directly from your Ethereum accounts and earn interest.",
-        "cta": "How does lending on Compound work?"
+        "title": "レンディング",
+        "description": "イーサリアムアカウントから直接資産をレンディングし、利息を得ることができます。",
+        "cta": "コンパウンドでのレンディングはどのように機能しますか？"
       },
       "closed": {
-        "title": "Your closed loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "終了済みのレンディングはこちらに表示されます。",
+        "description": "まだレンディングを行っていません。",
+        "cta": "デポジット"
       },
       "opened": {
         "title": "貸出中のローンがここに表示されます。",
@@ -781,24 +781,24 @@
         "cta": "入金"
       },
       "history": {
-        "title": "History",
-        "description": "View the history of all your loan transactions.",
-        "cta": "Deposit"
+        "title": "履歴",
+        "description": "すべてのレンディング取引の履歴を表示します。",
+        "cta": "デポジット"
       }
     },
     "headers": {
       "active": {
-        "accounts": "Account",
+        "accounts": "アカウント",
         "amountSupplied": "資産を貸し出す",
         "amountSuppliedTooltip": "ネットワークへのデポジット額",
         "accruedInterests": "利息残高",
         "accruedInterestsTooltip": "貸出額に対する利息",
         "status": "アカウントのステータス",
-        "actions": "Actions"
+        "actions": "アクション"
       },
       "status": {
-        "enablingTooltip": "Your transaction is broadcasting",
-        "toSupplyTooltip": "You can now supply your assets"
+        "enablingTooltip": "トランザクションがブロードキャスト中です。",
+        "toSupplyTooltip": "資産を供給できるようになりました。"
       },
       "types": {
         "enabling": "有効化中",
@@ -807,10 +807,10 @@
         "earning": "収益"
       },
       "closed": {
-        "assetLended": "Asset",
-        "amountRedeemed": "Withdrawal amount",
-        "interestsEarned": "Interest earned",
-        "date": "Date"
+        "assetLended": "資産",
+        "amountRedeemed": "引き出し額",
+        "interestsEarned": "獲得利息",
+        "date": "日付"
       },
       "opened": {
         "assetLended": "資産",
@@ -819,16 +819,16 @@
         "date": "日付"
       },
       "rates": {
-        "allAssets": "Asset",
+        "allAssets": "資産",
         "totalBalance": "資産残高",
         "totalBalanceTooltip": "貸出可能額",
         "currentAPY": "預金APY（年利）",
         "currentAPYTooltip": "継続的に運用した預金に対して得られる年間収益率",
-        "actions": "Actions"
+        "actions": "アクション"
       }
     },
     "manage": {
-      "cta": "Manage lending",
+      "cta": "レンディングを管理",
       "title": "Manage loan",
       "enable": {
         "approve": "Approve",
