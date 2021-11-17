@@ -5,22 +5,14 @@ import { createStructuredSelector } from "reselect";
 import { useBridgeSync, useAccountSyncState } from "@ledgerhq/live-common/lib/bridge/react";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { AccountLike } from "@ledgerhq/live-common/lib/types";
+import { Flex, Tooltip, Icons, InfiniteLoader } from "@ledgerhq/react-ui";
 
-import Box from "~/renderer/components/Box";
-import { Rotating } from "~/renderer/components/Spinner";
-import Tooltip from "~/renderer/components/Tooltip";
 import TranslatedError from "~/renderer/components/TranslatedError";
-import IconCheck from "~/renderer/icons/Check";
 import IconSyncServer from "~/renderer/icons/SyncServer";
-import IconPending from "~/renderer/icons/Clock";
-import IconError from "~/renderer/icons/Error";
-import IconLoader from "~/renderer/icons/Loader";
-import IconWarning from "~/renderer/icons/TriangleWarning";
 import {
   accountNeedsMigrationSelector,
   isUpToDateAccountSelector,
 } from "~/renderer/reducers/accounts";
-import { colors } from "~/renderer/styles/theme";
 import { openModal } from "~/renderer/actions/modals";
 import useEnv from "~/renderer/hooks/useEnv";
 
@@ -29,14 +21,16 @@ const mapStateToProps = createStructuredSelector({
   needsMigration: accountNeedsMigrationSelector,
 });
 
+const ICON_SIZE = 18;
+
 class StatusQueued extends PureComponent<{ onClick: (any) => void }> {
   render() {
     const { onClick } = this.props;
     return (
       <Tooltip content={<Trans i18nKey="common.sync.outdated" />}>
-        <Box onClick={onClick}>
-          <IconPending color={colors.grey} size={16} />
-        </Box>
+        <Flex onClick={onClick}>
+          <Icons.ClockMedium color="palette.neutral.c80" size={ICON_SIZE} />
+        </Flex>
       </Tooltip>
     );
   }
@@ -47,11 +41,9 @@ class StatusSynchronizing extends PureComponent<{ onClick: (any) => void }> {
     const { onClick } = this.props;
     return (
       <Tooltip content={<Trans i18nKey="common.sync.syncing" />}>
-        <Box onClick={onClick}>
-          <Rotating onClick={onClick} size={16}>
-            <IconLoader color={colors.grey} size={16} />
-          </Rotating>
-        </Box>
+        <Flex onClick={onClick}>
+          <InfiniteLoader style={{ height: ICON_SIZE, width: ICON_SIZE }} />
+        </Flex>
       </Tooltip>
     );
   }
@@ -62,13 +54,17 @@ class StatusUpToDate extends PureComponent<{ showSatStackIcon?: boolean; onClick
     const { showSatStackIcon, onClick } = this.props;
     return (
       <Tooltip content={<Trans i18nKey="common.sync.upToDate" />}>
-        <Box onClick={onClick}>
+        <Flex onClick={onClick}>
           {showSatStackIcon ? (
-            <IconSyncServer onClick={onClick} color={colors.positiveGreen} size={16} />
+            <IconSyncServer onClick={onClick} color="palette.success.c100" />
           ) : (
-            <IconCheck onClick={onClick} color={colors.positiveGreen} size={16} />
+            <Icons.CircledCheckMedium
+              onClick={onClick}
+              color="palette.success.c100"
+              size={ICON_SIZE}
+            />
           )}
-        </Box>
+        </Flex>
       </Tooltip>
     );
   }
@@ -79,16 +75,15 @@ class StatusError extends PureComponent<{ onClick: (any) => void; error?: Error 
     const { onClick, error } = this.props;
     return (
       <Tooltip
-        tooltipBg="alertRed"
         content={
-          <Box style={{ maxWidth: 250 }}>
+          <Flex style={{ maxWidth: 250 }}>
             <TranslatedError error={error} />
-          </Box>
+          </Flex>
         }
       >
-        <Box onClick={onClick}>
-          <IconError onClick={onClick} color={colors.alertRed} size={16} />
-        </Box>
+        <Flex onClick={onClick}>
+          <Icons.CircledCrossMedium onClick={onClick} color="palette.error.c100" />
+        </Flex>
       </Tooltip>
     );
   }
@@ -107,9 +102,13 @@ const StatusNeedsMigration = React.memo<{}>(function StatusNeedsMigration() {
 
   return (
     <Tooltip content={<Trans i18nKey="common.sync.needsMigration" />}>
-      <Box onClick={openMigrateAccountsModal}>
-        <IconWarning onClick={openMigrateAccountsModal} color={colors.orange} size={16} />
-      </Box>
+      <Flex onClick={openMigrateAccountsModal}>
+        <Icons.WarningMedium
+          onClick={openMigrateAccountsModal}
+          color="palette.warning.c100"
+          size={ICON_SIZE}
+        />
+      </Flex>
     </Tooltip>
   );
 });
@@ -174,6 +173,6 @@ const AccountSyncStatusIndicator = ({
   return <StatusQueued onClick={onClick} />;
 };
 
-const m: React$ComponentType<OwnProps> = connect(mapStateToProps)(AccountSyncStatusIndicator);
+const m: React.ReactComponentType<OwnProps> = connect(mapStateToProps)(AccountSyncStatusIndicator);
 
 export default m;
