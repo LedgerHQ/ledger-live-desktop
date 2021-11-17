@@ -969,8 +969,8 @@
     },
     "emptyAccountDeposit": {
       "title": "{{ asset }}アカウントを持っていません。",
-      "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
-      "ctaBuy": "Buy {{ asset }}",
+      "description": "暗号資産のデポジットや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はイーサリアムアドレスで受け取ってください。",
+      "ctaBuy": "{{ asset }} を購入",
       "ctaReceive": "Receive {{ asset }}"
     }
   },
