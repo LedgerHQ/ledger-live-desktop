@@ -625,7 +625,7 @@
           "connectionSteps": {
             "notConnected": {
               "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして実行してください。",
+              "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして起動してください。",
               "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
