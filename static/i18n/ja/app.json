@@ -655,7 +655,7 @@
             },
             "syncing": {
               "header": "Node sync in progress…",
-              "description": "Recent transactions may not yet be visible, so Bitcoin account balances may be incorrect. If possible, run your node continuously to keep it in sync."
+              "description": "最近の取引はまだ表示されないため、ビットコインアカウントの残高が正しくない可能性があります。可能であれば、ノードを頻繁に実行して同期してください。"
             },
             "scanning": {
               "header": "Account scan in progress...",
@@ -684,7 +684,7 @@
       }
     },
     "settings": {
-      "title": "Edit account",
+      "title": "アカウントを編集",
       "advancedLogs": "Advanced",
       "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
       "accountName": {
