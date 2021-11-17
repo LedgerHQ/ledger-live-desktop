@@ -971,46 +971,46 @@
       "title": "{{ asset }}アカウントを持っていません。",
       "description": "暗号資産のデポジットや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はイーサリアムアドレスで受け取ってください。",
       "ctaBuy": "{{ asset }} を購入",
-      "ctaReceive": "Receive {{ asset }}"
+      "ctaReceive": "{{ asset }} を受け取る"
     }
   },
   "accounts": {
-    "title": "Accounts",
-    "noResultFound": "No accounts found.",
+    "title": "アカウント",
+    "noResultFound": "アカウントが見つかりませんでした。",
     "order": {
-      "name|asc": "Name A-Z",
-      "name|desc": "Name Z-A",
-      "balance|asc": "Lowest Balance",
-      "balance|desc": "Highest Balance"
+      "name|asc": "名前 A-Z",
+      "name|desc": "名前 Z-A",
+      "balance|asc": "残高の少ない順",
+      "balance|desc": "残高の多い順"
     },
     "range": {
       "day": "日",
-      "week": "Week",
-      "month": "Month",
-      "year": "Year",
+      "week": "週",
+      "month": "月",
+      "year": "年",
       "all": "すべて"
     },
     "optionsMenu": {
-      "title": "Options",
-      "exportOperations": "Export operation history",
-      "exportToMobile": "Export to mobile"
+      "title": "オプション",
+      "exportOperations": "オペレーション履歴を書き出す",
+      "exportToMobile": "モバイルへ書き出す"
     },
     "contextMenu": {
-      "star": "Star",
-      "receive": "Receive",
-      "send": "Send",
-      "swap": "Swap",
-      "buy": "Buy",
-      "sell": "Sell",
-      "edit": "Edit account",
-      "hideToken": "Hide token"
+      "star": "お気に入り",
+      "receive": "受け取る",
+      "send": "送る",
+      "swap": "スワップ",
+      "buy": "購入",
+      "sell": "売却",
+      "edit": "アカウントを編集",
+      "hideToken": "トークンを非表示"
     }
   },
   "help": {
-    "title": "Help & Support",
+    "title": "ヘルプとサポート",
     "gettingStarted": {
-      "title": "Getting started",
-      "desc": "Start here"
+      "title": "ご利用ガイド",
+      "desc": "スタートする"
     },
     "status": {
       "title": "Ledgerステータス",
