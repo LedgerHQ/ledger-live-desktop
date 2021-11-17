@@ -26,7 +26,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { status, metadata } = useNftMetadata(nfts[0]?.collection?.contract, nfts[0]?.tokenId);
   const show = useMemo(() => status === "loading", [status]);
 
-  return !nfts[0] ? null : (
+  return nfts.length > 0 ? (
     <>
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.nft.name")}</OpDetailsTitle>
@@ -83,7 +83,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         </OpDetailsSection>
       )}
     </>
-  );
+  ) : null;
 };
 
 export default NFTOperationDetails;
