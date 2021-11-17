@@ -47,6 +47,7 @@ export type StepProps = {
   isNFTSend?: boolean,
   maybeNFTId?: string,
   maybeNFTCollection?: string,
+  onChangeQuantities: any => void,
   onChangeNFT: any => void,
 };
 
