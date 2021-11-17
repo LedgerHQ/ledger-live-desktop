@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
+import PillTabs from "@ledgerhq/react-ui/components/tabs/Pill";
+import { Icons } from "@ledgerhq/react-ui";
 import { setAccountsViewMode } from "~/renderer/actions/settings";
 import { accountsViewModeSelector } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-import GridIcon from "~/renderer/icons/Grid";
-import ListIcon from "~/renderer/icons/List";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import AccountsOrder from "./Order";
 import AccountsRange from "./Range";
+import { track } from "~/renderer/analytics/segment";
+
+const tabs = [
+  {
+    mode: "list",
+    event: "Account view table",
+    node: <Icons.MenuBurgerMedium id="accounts-display-list" />,
+  },
+  {
+    mode: "card",
+    event: "Account view mosaic",
+    node: <Icons.ManagerMedium id="accounts-display-grid" />,
+  },
+].map((m, index) => ({ ...m, index }));
 
 function DisplayOptions() {
   const dispatch = useDispatch();
   const mode = useSelector(accountsViewModeSelector);
+
+  const onTabChange = useCallback(
+    (index: number) => {
+      const newTab = tabs[index];
+      if (!newTab) return;
+      track(newTab.event);
+      dispatch(setAccountsViewMode(newTab.mode));
+    },
+    [dispatch],
+  );
+  const activeIndex = tabs.findIndex(tab => tab.mode === mode);
 
   return (
     <>
@@ -21,34 +43,11 @@ function DisplayOptions() {
       <Box ml={4} mr={4}>
         <AccountsOrder />
       </Box>
-      <ToggleButton
-        event="Account view table"
-        id="accounts-display-list"
-        mr={1}
-        onClick={() => dispatch(setAccountsViewMode("list"))}
-        active={mode === "list"}
-      >
-        <ListIcon />
-      </ToggleButton>
-      <ToggleButton
-        event="Account view mosaic"
-        id="accounts-display-grid"
-        onClick={() => dispatch(setAccountsViewMode("card"))}
-        active={mode === "card"}
-      >
-        <GridIcon />
-      </ToggleButton>
+      <PillTabs onTabChange={onTabChange} initialActiveIndex={activeIndex}>
+        {tabs.map(({ node }) => node)}
+      </PillTabs>
     </>
   );
 }
 
-export default React.memo<{}>(DisplayOptions);
-
-const ToggleButton: ThemedComponent<{ active?: boolean }> = styled(Button)`
-  height: 30px;
-  width: 30px;
-  padding: 7px;
-  background: ${p =>
-    p.active ? p.theme.colors.pillActiveBackground : p.theme.colors.palette.background.paper};
-  color: ${p => (p.active ? p.theme.colors.wallet : p.theme.colors.palette.divider)};
-`;
+export default React.memo(DisplayOptions);
