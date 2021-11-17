@@ -23,9 +23,6 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
-      - uses: actions/setup-python@v1
-        with:
-          python-version: "2.7.x"
       - name: install linux dependencies
         if: matrix.os == 'ubuntu-20.04'
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
