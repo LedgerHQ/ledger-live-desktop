@@ -133,6 +133,8 @@
     "type": {
       "IN": "已接收",
       "OUT": "已发送",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "已创建",
       "REVEAL": "已显示",
       "DELEGATE": "已委托",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "代币",
     "cta": "添加代币",
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "此操作存在内部操作",
     "details": "{{ currency }} 详情",
     "multipleAddresses": "为什么有多个地址？",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "已冻结数额",
       "unfreezeAmount": "解冻数额",
@@ -1698,17 +1748,20 @@
   },
   "send": {
     "title": "发送",
+    "titleNft": "Send NFT",
     "totalSpent": "总借额",
     "steps": {
       "recipient": {
-        "title": "接收方"
+        "title": "接收方",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "数额",
         "banner": "最大可支出数额为",
         "fees": "费用",
         "standard": "标准",
-        "advanced": "高级"
+        "advanced": "高级",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "概要"
@@ -1730,7 +1783,9 @@
         "rippleTagPlaceholder": "可选",
         "ethereumGasLimit": "Gas 限值",
         "ethereumGasPrice": "Gas 价格",
-        "unitPerByte": "{{Unit}} 每字节"
+        "unitPerByte": "{{Unit}} 每字节",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3440,13 @@
       "undelegate": "验证器",
       "claimReward": "奖励接收方",
       "optIn": "接收方",
-      "nominate": "验证器"
+      "nominate": "验证器",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "票数 ({{count}})"
   },
@@ -3989,6 +4050,9 @@
     },
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
