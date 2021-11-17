@@ -48,6 +48,7 @@ jobs:
     steps:
       - name: prepare runner
         run: |
+          sudo killall apt apt-get
           sudo apt-get -qq update
           sudo apt-get -qq -y install cloud-initramfs-growroot
           sudo growpart /dev/nvme0n1 1
