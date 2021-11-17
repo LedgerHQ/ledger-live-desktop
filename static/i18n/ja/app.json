@@ -829,7 +829,7 @@
     },
     "manage": {
       "cta": "レンディングを管理",
-      "title": "Manage loan",
+      "title": "ローンの管理",
       "enable": {
         "approve": "承認",
         "manageLimit": "リミットの管理",
@@ -839,7 +839,7 @@
         "approvedWithLimit": "このアカウントで<0>{{value}}</0>を承認しました。",
         "enabling": "アカウントの承認が完了すると、資産をデポジットできるようになります。",
         "notEnabled": "資産をレンディングするには、このアカウントを承認する必要があります。",
-        "notEnoughApproved": "You must increase the limit approved on your account to lend."
+        "notEnoughApproved": "レンディングするアカウントで、上限額の増額を承認してください。"
       },
       "supply": {
         "title": "デポジット",
@@ -867,46 +867,46 @@
           "contractName": "コンパウンド{{currencyName}}",
           "advanced": "アドバンス",
           "amountLabel": "承認額",
-          "amountLabelTooltip": "これにより、スマートコントラクトで利用できる額が制限されます。"
+          "amountLabelTooltip": "これにより、スマートコントラクトの利用可能額が制限されます。"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "確認",
           "success": {
-            "title": "Operation sent successfully",
-            "text": "The approval was sent to the network for confirmation. You’ll be able to issue loans once it is confirmed.",
-            "done": "Close",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "オペレーションが正常に送信されました。",
+            "text": "承認が確認作業のためにネットワークに送信されました。確認終了後、ローンを行えるようになります。",
+            "done": "閉じる",
+            "info": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "withdraw": {
-      "title": "Withdraw assets",
+      "title": "資産を引き出す",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "advanced": "Advanced",
-          "amountToWithdraw": "Amount to withdraw",
-          "withdrawAll": "Withdraw Max",
-          "placeholder": "Withdraw Max",
-          "maxWithdrawble": "Maximum amount to withdraw is"
+          "title": "数量",
+          "advanced": "アドバンス",
+          "amountToWithdraw": "引き出し額",
+          "withdrawAll": "引き出し上限額",
+          "placeholder": "引き出し上限額",
+          "maxWithdrawble": "最大引き出し額は、"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "確認",
           "success": {
-            "title": "Withdrawal sent successfully",
-            "text": "Your assets will be available once the network has confirmed the withdrawal.",
-            "done": "Close",
-            "cta": "View details"
+            "title": "引き出しが正常に実行されました。",
+            "text": "資産は、ネットワークが引き出しを承認後に利用可能になります。",
+            "done": "閉じる",
+            "cta": "詳細を表示"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。",
           "tooltip": {
             "amountWithdrawn": "引き出した額は{{ tokenName }}に表示されます。{{ tokenName }}は、資産のレンディングで獲得できるERC20トークンです。"
           }
@@ -915,54 +915,54 @@
     },
     "info": {
       "terms": {
-        "title": "Lend Crypto",
-        "subtitle": "Lend assets on the Compound protocol",
-        "description": "The Compound protocol allows you to lend and borrow assets on the Ethereum network. You can lend assets and earn interest directly from your Ledger acccount.",
-        "switchLabel": "<1>I have read and agree with the </1><0>Terms of Use</0><1>.</1>"
+        "title": "暗号資産をレンディング（貸し出す）",
+        "subtitle": "コンパウンドプロトコルで資産を貸し出す",
+        "description": "コンパウンドプロトコルを使用すると、イーサリアムネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産を貸し出して利息を得ることが可能です。",
+        "switchLabel": "<1>私は</1><0>利用規約</0><1>を読み、内容に同意しました。</1>"
       },
       "steps": {
-        "title": "Step <0>{{step}} / {{total}}</0>",
+        "title": "ステップ <0>{{step}} / {{total}}</0>",
         "1": {
-          "subtitle": "Approve an account to allow the protocol to",
-          "subtitle2": "process future loans.",
-          "description": "You need to authorize the Compound smart contract to transfer up to a certain amount of assets to the protocol. Approving an account gives permission to the protocol to process future loans."
+          "subtitle": "プロトコルを許可するため、アカウントを承認",
+          "subtitle2": "次回以降のローンの流れ",
+          "description": "一定額以下の資産をプロトコルに送るには、コンパウンドスマートコントラクトを承認する必要があります。アカウントを有効にすることで、次回以降のローンを処理するための許可がプロトコルに与えられます。"
         },
         "2": {
-          "subtitle": "Supply assets to earn interest",
-          "description": "Once an account is approved, you can select the amount of assets you want to lend and issue a transaction to the protocol. Interests accrue immediately after the transaction is confirmed."
+          "subtitle": "利息を得るために、資産を提供する",
+          "description": "アカウントが承認されると、レンディングしたい資産の額を選択して、プロトコルにトランザクションを発行できます。利息は、トランザクションが承認された直後から発生します。"
         },
         "3": {
-          "subtitle": "Withdraw assets at any time",
-          "description": "You can withdraw your assets and earned interest at any time, partially or entirely, directly from your Ledger account."
+          "subtitle": "資産はいつでも引き出すことができます。",
+          "description": "資産と獲得した利息の一部または全部を、Ledgerアカウントから直接いつでも引き出すことができます。"
         }
       }
     },
     "supply": {
-      "title": "Deposit assets",
+      "title": "デポジット資産",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountToSupply": "Amount to deposit",
-          "maxSupply": "Maximum amount to lend is"
+          "title": "数量",
+          "amountToSupply": "デポジット額",
+          "maxSupply": "貸出最大額は"
         },
         "device": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
+          "title": "確認",
           "success": {
-            "title": "Deposit sent successfully",
-            "text": "You will start earning interest once the network has confirmed the deposit.",
-            "done": "Close",
-            "cta": "View details",
-            "info": "Transactions can take some time to be displayed in an explorer and to be confirmed."
+            "title": "デポジットが正常に送信されました。",
+            "text": "ネットワークによるデポジットの承認後、利息を得られるようになります。",
+            "done": "閉じる",
+            "cta": "詳細を表示",
+            "info": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。"
           }
         }
       }
     },
     "noEthAccount": {
-      "title": "Please create an ETH account",
-      "description": "<0>{{ asset }}({{ ticker }})</0> is an Ethereum ERC-20 token. To lend {{ ticker }}, install the Ethereum app and create an Ethereum account",
+      "title": "ETHアカウントを作成してください。",
+      "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、イーサリアムアプリをインストールし、イーサリアムアカウントを作成してください",
       "cta": "Add account"
     },
     "emptyAccountDeposit": {
