@@ -133,6 +133,8 @@
     "type": {
       "IN": "Получение",
       "OUT": "Отправка",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Создано",
       "REVEAL": "Показано",
       "DELEGATE": "Делегировано",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Щелкните <1>Continue</1> (Продолжить), чтобы обновить его."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Токены",
     "cta": "Добавить токен",
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Эта операция имеет внутренние операции",
     "details": "{{ currency }}: сведения",
     "multipleAddresses": "Почему несколько адресов?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Замороженная сумма",
       "unfreezeAmount": "Разморозить сумму",
@@ -1698,17 +1748,20 @@
   },
   "send": {
     "title": "Отправка",
+    "titleNft": "Send NFT",
     "totalSpent": "Всего будет списано",
     "steps": {
       "recipient": {
-        "title": "Получатель"
+        "title": "Получатель",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Кол-во",
         "banner": "Макс. можно потратить",
         "fees": "Комиссия",
         "standard": "Стандартная",
-        "advanced": "Дополнительно"
+        "advanced": "Дополнительно",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Сводка"
@@ -1730,7 +1783,9 @@
         "rippleTagPlaceholder": "Опционально",
         "ethereumGasLimit": "Лимит газа",
         "ethereumGasPrice": "Цена газа",
-        "unitPerByte": "{{unit}} за байт"
+        "unitPerByte": "{{unit}} за байт",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3440,13 @@
       "undelegate": "валидатор",
       "claimReward": "получатель вознаграждений",
       "optIn": "получатель",
-      "nominate": "валидатор"
+      "nominate": "валидатор",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Голоса ({{count}})"
   },
@@ -3989,6 +4050,9 @@
     },
     "TaprootNotActivated": {
       "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
