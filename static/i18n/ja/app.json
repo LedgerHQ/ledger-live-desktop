@@ -1066,7 +1066,7 @@
     "buyCrypto": {
       "title": "暗号資産を購入する",
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
-      "cta": "Buy now"
+      "cta": "今すぐ購入する"
     },
     "familyPack": {
       "title": "ファミリーパック",
@@ -1078,19 +1078,19 @@
       "description": "Ledger LiveでDOTをステーキング、保護、管理できるようになりました"
     },
     "sell": {
-      "title": "sell crypto",
-      "description": "Sell Bitcoin with our partner directly from Ledger Live"
+      "title": "暗号資産を売却する",
+      "description": "Ledger Liveから直接パートナーとビットコインを売却する。"
     },
     "stakeAlgorand": {
-      "title": "Staking with ALGORAND",
-      "description": "Make the most of your ALGO. Simply add funds to your accounts and earn staking rewards today."
+      "title": "ALGORANDのステーキング",
+      "description": "ALGOを最大限に活用しましょう。アカウントに資金を追加し、今すぐステーキング報酬を獲得できます。"
     },
     "swap": {
-      "title": "Swap crypto",
-      "description": "Exchange one crypto for another from Ledger Live with our partner."
+      "title": "暗号資産をスワップする",
+      "description": "Ledger Liveからパートナーを通して、暗号通貨を交換しましょう。"
     },
     "lending": {
-      "title": "Lend Crypto",
+      "title": "暗号資産をレンディング（貸し出す）",
       "description": "Lend stablecoins to the Compound protocol and earn interests today"
     },
     "blackfriday": {
@@ -1115,7 +1115,7 @@
     "disconnected": "接続を切断済み",
     "connected": "接続済み",
     "connecting": "接続しています...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "無効なアカウントID",
     "steps": {
       "paste": {
         "title": "リンクを貼り付け",
@@ -1125,7 +1125,7 @@
       "confirm": {
         "title": "接続",
         "details": "ウォレットを通じて以下のイーサリアムアカウントに接続しようとしています：",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Ledger Liveに接続します。イーサリアムアカウントを選択："
       }
     },
     "connectedscreen": {
@@ -1135,13 +1135,13 @@
     }
   },
   "dashboard": {
-    "title": "Portfolio",
+    "title": "ポートフォリオ",
     "emptyAccountTile": {
       "desc": "Add accounts to manage other crypto assets",
-      "createAccount": "Add account"
+      "createAccount": "アカウントを追加"
     },
     "recentActivity": "Latest operations",
-    "totalBalance": "Total balance",
+    "totalBalance": "合計残高",
     "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
   },
   "currentAddress": {
