@@ -133,6 +133,8 @@
     "type": {
       "IN": "수신됨",
       "OUT": "전송됨",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "생성됨",
       "REVEAL": "숨김 해제",
       "DELEGATE": "위임됨",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "토큰",
     "cta": "토큰 추가",
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "이 거래는 내부 거래입니다",
     "details": "{{ currency }} 세부정보",
     "multipleAddresses": "왜 주소가 여러 개인가요?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "동결 금액",
       "unfreezeAmount": "동결 해제 금액",
@@ -1698,17 +1748,20 @@
   },
   "send": {
     "title": "보내기",
+    "titleNft": "Send NFT",
     "totalSpent": "입금할 총액",
     "steps": {
       "recipient": {
-        "title": "수령인"
+        "title": "수령인",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "금액",
         "banner": "최대 사용 가능 금액은",
         "fees": "수수료",
         "standard": "스탠다드",
-        "advanced": "고급"
+        "advanced": "고급",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "요약"
@@ -1730,7 +1783,9 @@
         "rippleTagPlaceholder": "선택 사항",
         "ethereumGasLimit": "가스 한도",
         "ethereumGasPrice": "가스 가격",
-        "unitPerByte": "바이트당 {{unit}}"
+        "unitPerByte": "바이트당 {{unit}}",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3440,13 @@
       "undelegate": "검증인",
       "claimReward": "보상 수령인",
       "optIn": "수령인",
-      "nominate": "검증인"
+      "nominate": "검증인",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "투표 ({{count}})"
   },
@@ -3989,6 +4050,9 @@
     },
     "TaprootNotActivated": {
       "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
