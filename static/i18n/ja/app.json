@@ -591,7 +591,7 @@
             },
             "success": {
               "header": "フルノード接続に成功しました。",
-              "description": "You can now configure your full node to scan for your accounts on the blockchain."
+              "description": "ブロックチェーン上のアカウントスキャンを、フルノードに設定できるようになりました。"
             },
             "failure": {
               "header": "フルノードに接続できませんでした。",
@@ -615,85 +615,85 @@
         },
         "accounts": {
           "title": "アカウント",
-          "existing": "Existing accounts to scan",
-          "toScan": "Accounts to scan",
-          "toScanDescription": "Accounts to scan for each address type",
-          "toScanTooltip": "Increase only if you have 10+ BTC accounts.  Initial scan will be slower. "
+          "existing": "スキャンする既存のアカウント",
+          "toScan": "スキャンするアカウント",
+          "toScanDescription": "各アドレスタイプのスキャンするアカウント",
+          "toScanTooltip": "10以上のBTCアカウントを持っている場合にのみ増加します。初期スキャンの速度は低下します。 "
         },
         "satstack": {
           "title": "SatStack",
           "connectionSteps": {
             "notConnected": {
-              "header": "Download and run Ledger SatStack",
+              "header": "Ledger SatStackをダウンロードして起動する",
               "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして起動してください。",
-              "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
-              "cta": "Download SatStack"
+              "disclaimer": "SatStackはLedger Liveのフルノード接続に必要です。コンピュータ起動時のSatStackの自動起動設定を検討してください。",
+              "cta": "SatStackをダウンロード"
             },
             "satstack-disconnected": {
-              "header": "Could not reach SatStack",
-              "description": "Please verify that SatStack is running on this computer."
+              "header": "SatStackに接続ができませんでした。",
+              "description": "このコンピュータでSatStackが起動していることを確認してください。"
             },
             "satstack-outdated": {
               "header": "SatStackをアップグレードしてください。",
               "description": "お使いのSatStackが古いバージョンのため、バグや互換性の問題が含まれている可能性があります。"
             },
             "node-disconnected": {
-              "header": "Could not reach full node",
-              "description": "Please verify that your node is reachable and that the connection settings you entered are correct."
+              "header": "フルノードに接続できませんでした。",
+              "description": "ノードが接続可能な状態で、入力された接続設定が正しいことを確認してください。"
             },
             "invalid-chain": {
-              "header": "invalid-chain title",
-              "description": "invalid-chain description for tooltip"
+              "header": "無効なチェーンタイトル",
+              "description": "ツールチップの説明が無効です。"
             },
             "initializing": {
-              "header": "Loading",
+              "header": "読み込み中",
               "description": ""
             },
             "ready": {
-              "header": "Ready",
-              "description": "The full node is fully synced. Your Bitcoin account balances are now correct."
+              "header": "準備",
+              "description": "フルノードが完全に同期されました。正しいビットコインアカウントの残高が表示されています。"
             },
             "syncing": {
-              "header": "Node sync in progress…",
+              "header": "ノードの同期中です...",
               "description": "最近の取引はまだ表示されないため、ビットコインアカウントの残高が正しくない可能性があります。可能であれば、ノードを頻繁に実行して同期してください。"
             },
             "scanning": {
-              "header": "Account scan in progress...",
+              "header": "アカウントをスキャン中...",
               "description": "アカウントのスキャン完了後、アカウントの追加が可能になります。Ledgerのエクスプローラーにより、過去に追加されたBitcoinアカウントはすべて削除されました。"
             }
           }
         },
         "disconnect": {
-          "cta": "Disconnect",
-          "description": "Are you sure? Disconnecting the full node will remove all Bitcoin accounts. You can add your accounts again using Ledger’s explorers."
+          "cta": "接続切断",
+          "description": "本当によろしいですか？フルノードを切断すると、すべてのビットコインアカウントが削除されます。Ledgerのエクスプローラーを使用して、アカウントを再度追加できます。"
         }
       }
     }
   },
   "account": {
-    "lastOperations": "Latest operations",
-    "contractAddress": "Contract:",
-    "openInExplorer": "Open in explorer",
+    "lastOperations": "前回のオペレーション",
+    "contractAddress": "コントラクト：",
+    "openInExplorer": "エクスプローラーで開く",
     "emptyState": {
-      "title": "No crypto assets yet?",
-      "desc": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving",
-      "descToken": "Make sure the <1><0>{{managerAppName}}</0></1> app is installed and start receiving <3><0>{{ticker}}</0></3> and <5><0>{{tokenList}}</0> tokens</5>",
+      "title": "暗号資産をまだお持ちでないですか？",
+      "desc": "受取を開始する前に、<1><0>{{managerAppName}}</0></1> アプリがインストールされていることを確認してください。",
+      "descToken": "<1><0>{{managerAppName}}</0></1>アプリがインストールされていることを確認し、<3><0>{{ticker}}</0></3>と<5><0>{{tokenList}}</0>トークン</5>の受取を開始してください。",
       "buttons": {
-        "receiveFunds": "Receive",
-        "buy": "Buy"
+        "receiveFunds": "受取",
+        "buy": "購入"
       }
     },
     "settings": {
       "title": "アカウントを編集",
-      "advancedLogs": "Advanced",
-      "advancedTips": "Your xpub is privacy-sensitive data. Use with caution, especially when disclosing to third parties.",
+      "advancedLogs": "アドバンス",
+      "advancedTips": "xpubにはプライバシーデータが含まれます。特に第三者に開示する場合は、注意して使用してください。",
       "accountName": {
-        "title": "Account name",
-        "desc": "Description of the account"
+        "title": "アカウント名",
+        "desc": "アカウントの説明"
       },
       "unit": {
-        "title": "Unit",
-        "desc": "Choose the unit to be used"
+        "title": "ユニット",
+        "desc": "表示するユニットを選択"
       }
     },
     "availableBalance": "Available balance",
