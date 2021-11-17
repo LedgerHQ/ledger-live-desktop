@@ -696,12 +696,12 @@
         "desc": "表示するユニットを選択"
       }
     },
-    "availableBalance": "Available balance",
-    "frozenAssets": "Frozen assets",
-    "bandwidth": "Bandwidth",
-    "energy": "Energy",
-    "delegatedAssets": "Delegated assets",
-    "undelegating": "Undelegating",
+    "availableBalance": "利用可能残高",
+    "frozenAssets": "凍結済み資産",
+    "bandwidth": "Bandwidth（バンド幅）",
+    "energy": "Energy（エネルギー）",
+    "delegatedAssets": "デリゲートされた資産",
+    "undelegating": "デリゲート解除中",
     "availableBalanceTooltip": "This amount is disposable.",
     "frozenAssetsTooltip": "Frozen assets are used in the Tron voting process. This represents your total number of votes.",
     "bandwidthTooltip": "Freeze assets to gain bandwidth",
