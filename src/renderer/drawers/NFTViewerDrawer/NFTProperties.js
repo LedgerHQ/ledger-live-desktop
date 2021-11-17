@@ -34,10 +34,12 @@ const Separator = styled.div`
 type NFTPropertiesProps = {
   nft: NFT,
   metadata: NFTMetadata,
+  status: string,
 };
 
 export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
   const { t } = useTranslation();
+  const showSkeleton = status === "loading";
   if (!metadata?.properties?.length) return null;
 
   return (
@@ -72,13 +74,13 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
           ))
         ) : (
           <>
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
-            <Skeleton width={66} barHeight={50} show />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
+            <Skeleton width={66} barHeight={50} show={showSkeleton} />
           </>
         )}
       </NFTPropertiesContainer>

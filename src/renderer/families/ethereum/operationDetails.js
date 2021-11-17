@@ -61,13 +61,13 @@ const NFTAmountField = ({ operation }: Props) => {
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
   const { status, metadata } = useNftMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   return (
     <Cell>
       <Skeleton show={show} width={170} minHeight={24} barHeight={10}>
         <Text ff="Inter|SemiBold" fontSize={4} color="palette.text.shade100">
-          {metadata?.nftName}
+          {metadata?.nftName || "-"}
         </Text>
       </Skeleton>
       <Skeleton show={show} width={200} minHeight={24} barHeight={6}>

@@ -140,7 +140,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
   const { status, metadata } = useNftMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   const currency = getAccountCurrency(account);
   const mainCurrency = getAccountCurrency(mainAccount);
@@ -320,7 +320,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         <Box flex={1} mb={2} alignItems="center">
           <Skeleton show={show} width={160} barHeight={16} minHeight={32} textAlign="center">
             <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
-              {metadata?.nftName}
+              {metadata?.nftName || "-"}
             </Text>
           </Skeleton>
           <Skeleton show={show} width={200} barHeight={10} minHeight={24} mt={1} textAlign="center">

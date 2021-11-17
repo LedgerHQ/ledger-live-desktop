@@ -84,7 +84,7 @@ const Row = ({ contract, tokenId, id, mode }: Props) => {
       <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
         <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
           <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
-            {nftName}
+            {nftName || "-"}
           </Text>
         </Skeleton>
         <Skeleton width={180} minHeight={24} barHeight={6} show={show}>

@@ -24,7 +24,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const operations = useMemo(() => [operation], [operation]);
   const nfts = nftsFromOperations(operations);
   const { status, metadata } = useNftMetadata(nfts[0]?.collection?.contract, nfts[0]?.tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   return !nfts[0] ? null : (
     <>
@@ -37,7 +37,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
             </Skeleton>
             <Box ml={2}>
               <Skeleton width={200} barHeight={10} minHeight={32} show={show}>
-                <TextEllipsis>{metadata?.nftName}</TextEllipsis>
+                <TextEllipsis>{metadata?.nftName || "-"}</TextEllipsis>
               </Skeleton>
             </Box>
           </Box>

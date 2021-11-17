@@ -26,7 +26,7 @@ const LabelWithMeta = ({
 }) => (
   <Item isActive={isActive}>
     <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-      <CollectionName collection={item.collection} />
+      <CollectionName collection={item.collection} fallback={item.collection.contract} />
     </Text>
     {isActive && (
       <Check>
@@ -94,7 +94,10 @@ export default function NFTCrumb() {
             {({ isOpen, value }) => (
               <TextLink>
                 <Button>
-                  <CollectionName collection={activeItem.collection} />
+                  <CollectionName
+                    collection={activeItem.collection}
+                    fallback={activeItem.collection.contract}
+                  />
                 </Button>
                 <AngleDown>
                   {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}

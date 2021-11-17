@@ -8,7 +8,7 @@ import Text from "~/renderer/components/Text";
 // import IconSend from "~/renderer/icons/Send";
 
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getNFTById } from "~/renderer/reducers/accounts";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
@@ -127,11 +127,11 @@ type NFTViewerDrawerProps = {
 
 export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTViewerDrawerProps) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 
   // const onNFTSend = useCallback(() => {
@@ -152,7 +152,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
-                {metadata?.tokenName}
+                {metadata?.tokenName || nft?.collection?.contract}
               </Skeleton>
             </Text>
             <Text
@@ -186,7 +186,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
             <ExternalViewerButton nft={nft} />
           </NFTActions>
           <NFTAttributes>
-            <NFTProperties nft={nft} metadata={metadata} />
+            <NFTProperties nft={nft} metadata={metadata} status={status} />
             <NFTAttribute
               skeleton={show}
               title={t("NFT.viewer.attributes.about")}

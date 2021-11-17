@@ -17,7 +17,7 @@ const Summary = ({ transaction }: StepProps) => {
   const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const { nftName } = metadata || {};
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   return (
     <>
@@ -29,7 +29,7 @@ const Summary = ({ transaction }: StepProps) => {
           <Box mr={3} alignItems="flex-end">
             <Skeleton width={42} minHeight={18} barHeight={6} show={show}>
               <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={4}>
-                {nftName}
+                {nftName || "-"}
               </Text>
             </Skeleton>
             <Skeleton width={42} minHeight={18} barHeight={6} show={show}>

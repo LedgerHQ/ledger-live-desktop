@@ -34,7 +34,7 @@ type Props = {
 const Row = ({ nfts, contract, onClick }: Props) => {
   const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
   const { tokenName } = metadata || {};
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   return (
     <Container
@@ -51,15 +51,13 @@ const Row = ({ nfts, contract, onClick }: Props) => {
       <Box ml={3} flex={1}>
         <Skeleton width={136} minHeight={24} barHeight={10} show={show}>
           <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-            <Skeleton width={80} minHeight={24} barHeight={10} show={!tokenName}>
-              {tokenName}
-            </Skeleton>
+            {tokenName || contract}
           </Text>
         </Skeleton>
       </Box>
       <Skeleton width={42} minHeight={24} barHeight={10} show={show}>
         <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
-          {nfts?.length}
+          {nfts?.length ?? 0}
         </Text>
       </Skeleton>
     </Container>

@@ -26,7 +26,7 @@ const Gallery = () => {
   const collection = nftsByCollections(account.nfts, collectionId)[0];
 
   const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
 
   // const onSend = useCallback(() => {
   //   dispatch(openModal("MODAL_SEND", { isNFTSend: true, nftCollection: collectionId }));

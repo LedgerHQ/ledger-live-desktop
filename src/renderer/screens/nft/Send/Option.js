@@ -24,7 +24,7 @@ const Option = ({
   },
 }: OptionProps) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
   return (
     <Box horizontal>
       <Skeleton width={30} minHeight={30} show={show}>
@@ -34,7 +34,7 @@ const Option = ({
         <Box ml={3}>
           <Skeleton width={142} minHeight={15} barHeight={8} show={show}>
             <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={2}>
-              {metadata?.nftName}
+              {metadata?.nftName || "-"}
             </Text>
           </Skeleton>
           <Skeleton width={80} minHeight={15} barHeight={8} show={show}>
@@ -47,7 +47,7 @@ const Option = ({
         {standard === "ERC1155" ? (
           <Text ff="Inter|Medium" fontSize={3}>
             {"x"}
-            {amount.toString()}
+            {amount.toFixed()}
           </Text>
         ) : null}
       </Box>
