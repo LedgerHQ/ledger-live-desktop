@@ -90,7 +90,6 @@ function MarketList() {
     reload,
     failedMarketParams,
     error,
-    filters,
   } = contextState;
   const { rangeData } = useRange(range);
   const currenciesLength = currencies.length;

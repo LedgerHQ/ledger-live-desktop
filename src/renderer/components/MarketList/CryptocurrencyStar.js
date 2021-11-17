@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback, useContext } from "react";
 import styled, { keyframes } from "styled-components";
-import { useDispatch } from "react-redux";
 import { rgba } from "~/renderer/styles/helpers";
 import starAnim from "~/renderer/images/starAnim.png";
 import starAnim2 from "~/renderer/images/starAnim2.png";
@@ -72,7 +71,7 @@ const starBust = keyframes`
   }
 `;
 
-const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
+const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled("div")`
   cursor: pointer;
   height: 34px;
   width: 34px;
@@ -104,7 +103,7 @@ const startBurstTiming = 800;
 const StarIcon: ThemedComponent<{
   filled?: boolean,
   yellow?: boolean,
-}> = styled.div`
+}> = styled("div")`
   &.entering {
     animation: ${starBust} ${startBurstTiming}ms steps(29) 1;
   }
