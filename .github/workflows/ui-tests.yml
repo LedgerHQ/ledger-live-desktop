@@ -51,7 +51,7 @@ jobs:
         run: yarn build
       - name: run ui tests
         if: runner.os == "Linux"
-        run: xvfb-run --auto-servernum -- yarn playwright-ci
+        run: xvfb-run yarn playwright-ci
       - name: run ui tests
         if: runner.os != "Linux"
         run: yarn playwright-ci
