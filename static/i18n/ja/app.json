@@ -576,45 +576,45 @@
                 "rpcCredentials": {
                   "title": "RPCクレデンシャル",
                   "tooltip": "bitcoin.confファイルで見つかった、ノードのRPCユーザー名とパスワードを入力してください。",
-                  "usernamePlaceholder": "Username",
-                  "passwordPlaceholder": "Password"
+                  "usernamePlaceholder": "ユーザー名",
+                  "passwordPlaceholder": "パスワード"
                 },
                 "tls": {
-                  "title": "Use TLS",
+                  "title": "TLSを使用",
                   "tooltip": "\nTLS（Transport Layer Security）を有効にしてください。例：ホストされたノードソリューションを使用する場合。"
                 }
               }
             },
             "connecting": {
-              "header": "Testing node connection",
-              "description": "Please wait while we check if your full node is responding."
+              "header": "ノード接続をテスト中",
+              "description": "フルノードの応答を確認するまで、しばらくお待ちください。"
             },
             "success": {
-              "header": "Full node connection successful",
+              "header": "フルノード接続に成功しました。",
               "description": "You can now configure your full node to scan for your accounts on the blockchain."
             },
             "failure": {
-              "header": "Could not reach full node",
-              "description": "Please ensure your node is fully synchronized and verify its connection settings."
+              "header": "フルノードに接続できませんでした。",
+              "description": "ノードが完全に同期されていることを確認し、接続設定を確認してください。"
             }
           }
         },
         "device": {
-          "title": "Device",
+          "title": "デバイス",
           "connectionSteps": {
             "pending": {
-              "header": "Getting accounts from device",
-              "description": "Please wait while the accounts to scan are added to the node configuration file."
+              "header": "デバイスからアカウントを取得中",
+              "description": "スキャンするアカウントがノード設定ファイルに追加されるまで、しばらくお待ちください。"
             },
             "success": {
-              "header": "Accounts added to node configuration",
-              "description": "A configuration file was saved to the user data folder. It enables Ledger SatStack to connect to your full node and let it scan for your accounts on the blockchain.",
-              "cta": "View user data"
+              "header": "ノード設定にアカウントを追加しました。",
+              "description": "設定ファイルがユーザーデータフォルダに保存されました。 Ledger SatStackがフルノードに接続し、ブロックチェーン上のアカウントをスキャンできるようになります。",
+              "cta": "ユーザーデータを表示"
             }
           }
         },
         "accounts": {
-          "title": "Accounts",
+          "title": "アカウント",
           "existing": "Existing accounts to scan",
           "toScan": "Accounts to scan",
           "toScanDescription": "Accounts to scan for each address type",
@@ -625,7 +625,7 @@
           "connectionSteps": {
             "notConnected": {
               "header": "Download and run Ledger SatStack",
-              "description": "Ledger SatStack is a small application enabling Ledger Live to talk to your full node. Please download and run it before you continue.",
+              "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして実行してください。",
               "disclaimer": "SatStack must be running for Ledger Live to connect to your full node.  Consider setting it to launch automatically when your computer boots.",
               "cta": "Download SatStack"
             },
