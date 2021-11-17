@@ -27,10 +27,10 @@ jobs:
         with:
           python-version: "2.7.x"
       - name: install linux dependencies
-        if: ${{ runner.os == "Linux" }}
+        if: matrix.os == 'ubuntu-20.04'
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4
-        if: ${{ runner.os == "Linux" }}
+        if: matrix.os == 'ubuntu-20.04'
         run: ./tools/g++-5.4/install.sh
       - name: get yarn cache
         id: yarn-cache
@@ -50,10 +50,10 @@ jobs:
       - name: build electron app
         run: yarn build
       - name: run ui tests
-        if: ${{ runner.os == "Linux" }}
+        if: matrix.os == 'ubuntu-20.04'
         run: xvfb-run yarn playwright-ci
       - name: run ui tests
-        if: ${{ runner.os != "Linux" }}
+        if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-ci
       - name: upload ci suggested screenshots
         if: ${{ always() }}
