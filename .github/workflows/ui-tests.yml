@@ -6,10 +6,10 @@ on:
       - master
 
 jobs:
-  ui-tests-linux:
+  ui-tests:
     name: ui tests (${{ matrix.os }})
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-20.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os}}
@@ -46,10 +46,10 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests
+      - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
         run: xvfb-run yarn playwright-ci
-      - name: run ui tests
+      - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-ci
       - name: upload ci suggested screenshots
