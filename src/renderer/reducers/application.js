@@ -12,6 +12,9 @@ export type ApplicationState = {
   osDarkMode?: boolean,
   osLanguage?: LangAndRegion,
   navigationLocked?: boolean,
+  debug: {
+    alwaysShowSkeletons: boolean,
+  },
 };
 
 const { language, region } = getSystemLocale();
@@ -27,6 +30,9 @@ const state: ApplicationState = {
   },
   hasPassword: false,
   dismissedCarousel: false,
+  debug: {
+    alwaysShowSkeletons: false,
+  },
 };
 
 const handlers = {
@@ -48,6 +54,9 @@ export const hasDismissedCarouselSelector = (state: Object) =>
   state.application.dismissedCarousel === true;
 
 export const osDarkModeSelector = (state: Object) => state.application.osDarkMode;
+
+export const alwaysShowSkeletonsSelector = (state: Object) =>
+  state.application.debug.alwaysShowSkeletons;
 
 export const osLangAndRegionSelector = (state: Object) => state.application.osLanguage;
 

@@ -43,6 +43,11 @@ export type StepProps = {
   onConfirmationHandler: Function,
   onFailHandler: Function,
   currencyName: ?string,
+
+  isNFTSend?: boolean,
+  maybeNFTId?: string,
+  maybeNFTCollection?: string,
+  onChangeNFT: any => void,
 };
 
 export type St = Step<StepId, StepProps>;
