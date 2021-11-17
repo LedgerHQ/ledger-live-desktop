@@ -1156,15 +1156,15 @@
       "title": "Install apps on your device",
       "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
       "buttons": {
-        "installApp": "Go to Manager",
-        "help": "Help"
+        "installApp": "マネージャーに移動",
+        "help": "ヘルプ"
       }
     },
     "accounts": {
       "title": "Add an account to get started",
-      "desc": "Add an account to start managing your crypto assets. You must have the app for your crypto asset installed on your device.",
+      "desc": "暗号資産の管理を開始するにはアカウントを追加してください。デバイスに暗号資産のアプリがインストールされている必要があります。",
       "buttons": {
-        "addAccount": "Add account",
+        "addAccount": "アカウントを追加",
         "installApp": "Go to Manager to install apps",
         "help": "Help"
       }
@@ -1277,17 +1277,17 @@
     }
   },
   "addAccounts": {
-    "title": "Add accounts",
+    "title": "アカウントを追加",
     "breadcrumb": {
       "informations": "Crypto asset",
       "connectDevice": "Device",
-      "import": "Accounts",
-      "finish": "Confirmation"
+      "import": "アカウント",
+      "finish": "確認"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
     "fullNodeConfigure": "ノードの構成",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
-    "accountToImportSubtitle_plural": "Add existing accounts",
+    "accountToImportSubtitle_plural": "既存アカウントを追加",
     "selectAll": "Select all ({{count}})",
     "unselectAll": "Deselect all ({{count}})",
     "noAccountToImport": "No existing {{currencyName}} accounts to add",
