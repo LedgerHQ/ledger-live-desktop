@@ -963,7 +963,7 @@
     "noEthAccount": {
       "title": "ETHアカウントを作成してください。",
       "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、イーサリアムアプリをインストールし、イーサリアムアカウントを作成してください",
-      "cta": "Add account"
+      "cta": "アカウントを追加"
     },
     "emptyAccountDeposit": {
       "title": "{{ asset }}アカウントを持っていません。",
