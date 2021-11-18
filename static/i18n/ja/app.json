@@ -3185,7 +3185,7 @@
       "heading": "basics",
       "screens": {
         "accessYourCoins": {
-          "title": "Access your crypto",
+          "title": "暗号通貨にアクセス",
           "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
         },
         "ownYourPrivateKey": {
