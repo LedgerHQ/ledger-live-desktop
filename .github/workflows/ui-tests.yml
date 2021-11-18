@@ -50,7 +50,7 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: DEBUG=pw:api xvfb-run yarn playwright-ci
+        run: DEBUG=pw:api xvfb-run npx playwright test -c playwright/playwright.config.ts
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-ci
