@@ -10,7 +10,7 @@ import type { Theme } from "./theme";
 
 type Props = {
   children: React$Node,
-  selectedPalette: "light" | "dark" | "dusk",
+  selectedPalette: "light" | "dark";
 };
 
 export type ThemedComponent<T> = StyledComponent<T, Theme, *>;
