@@ -56,6 +56,8 @@ const test = base.extend<TestFixtures>({
         `--window-size=${viewport.width},${viewport.height}`,
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
+        "--no-sandbox",
+        "--enable-logging",
       ],
       executablePath: electronPath,
       recordVideo: {
