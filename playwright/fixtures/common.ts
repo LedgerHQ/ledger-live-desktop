@@ -1,5 +1,6 @@
 import { _electron as electron } from "playwright";
 import { test as base, expect, Page } from "@playwright/test";
+import electronPath from "electron";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
@@ -54,7 +55,9 @@ const test = base.extend<TestFixtures>({
         `--user-data-dir=${userDataPath}`,
         `--window-size=${viewport.width},${viewport.height}`,
         "--force-device-scale-factor=1",
+        "--disable-dev-shm-usage",
       ],
+      executablePath: electronPath,
       recordVideo: {
         dir: "playwright/artifacts/videos/",
         size: viewport,

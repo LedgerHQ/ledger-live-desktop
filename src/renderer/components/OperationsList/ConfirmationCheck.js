@@ -92,6 +92,8 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 const iconsComponent = {
   OUT: IconSend,
   IN: IconReceive,
+  NFT_OUT: IconSend,
+  NFT_IN: IconReceive,
   DELEGATE: IconDelegate,
   REDELEGATE: IconRedelegate,
   UNDELEGATE: IconUndelegate,
