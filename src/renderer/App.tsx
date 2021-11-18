@@ -42,7 +42,7 @@ type Props = {
 const InnerApp = ({ initialCountervalues }: { initialCountervalues: any }) => {
   const [reloadEnabled, setReloadEnabled] = useState(true);
   // FIXME: Remove the manual casting as soon as we rewrite the theme-selector using typescript
-  const selectedPalette = useSelector(themeSelector) as unknown as ("light" | "dark") ?? "light";
+  const selectedPalette = (useSelector(themeSelector) as unknown as ("light" | "dark") ?? "light") === "light" ? "light" : "dark";
 
   useEffect(() => {
     const reload = e => {

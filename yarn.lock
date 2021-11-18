@@ -2555,10 +2555,10 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.2.0.tgz#5b8f9dd9850ff82089f158f99a152a6f87824d48"
-  integrity sha512-av3xycZuwdrtp9Yracg95QitG40qEBHE6yQmzsTrEoApupPwKhSfLEo49mjWZEIX0TEHFdy/xoXDl2my8w1oXg==
+"@ledgerhq/react-ui@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.3.1.tgz#d7eadf65f97d38fc822ce1cf4429e2e3012904f6"
+  integrity sha512-UyZHZgsAelfaGfZN+2aoDZq0Ydtb+wlph/QC2bdbmp2VXedehO3W1TY8MZ4Ie0Cor712WjXb8RJGCIchItvvWQ==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.0"
     "@ledgerhq/ui-shared" "^0.1.3"
@@ -2580,7 +2580,6 @@
     react-select "^3.2.0"
     react-transition-group "^4.4.2"
     react-window "^1.8.6"
-    styled-components "^5.2.3"
     styled-system "^5.1.5"
 
 "@ledgerhq/ui-shared@^0.1.3":

@@ -93,7 +93,7 @@ export function DeviceSelectorOption({
         >
           {label}
         </DeviceName>
-        <SelectButton type="primary" onClick={onClick}>
+        <SelectButton variant="primary" onClick={onClick}>
           {t("v3.onboarding.screens.selectDevice.selectLabel")}
         </SelectButton>
       </ContentContainer>

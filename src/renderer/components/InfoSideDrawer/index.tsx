@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Text, Button, Tip, Link, Box } from "@ledgerhq/react-ui";
-import SideDrawer from "@ledgerhq/react-ui/components/layout/Side/Side";
+import { Drawer } from "@ledgerhq/react-ui";
 
 import { TipProps } from "@ledgerhq/react-ui/components/message/Tip";
 import { ArrowRightMedium } from "@ledgerhq/react-ui/assets/icons";
@@ -63,7 +63,7 @@ const OnboardContent = ({
       ))}
 
       <Flex mt={"auto"}>
-        <Button type={"main"} onClick={onClose} style={{ flex: 1 }} Icon={ArrowRightMedium}>
+        <Button variant={"main"} onClick={onClose} style={{ flex: 1 }} Icon={ArrowRightMedium}>
           {"Continue"}
         </Button>
       </Flex>
@@ -82,7 +82,7 @@ export const InfoSideDrawer = ({
   sections: InfoDrawerSections;
 }) => {
   return (
-    <SideDrawer
+    <Drawer
       title={
         <Text variant={"h3"} textTransform={"uppercase"}>
           Where should I keep my Recovery phrase?
@@ -94,7 +94,7 @@ export const InfoSideDrawer = ({
       {...props}
     >
       <OnboardContent sections={sections} onClose={onClose} />
-    </SideDrawer>
+    </Drawer>
   );
 };
 

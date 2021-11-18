@@ -30,7 +30,7 @@ const TermsAndConditionsModal: React.FC<{
   return (
     <Popin isOpen={isOpen} onClose={onClose} width={622} height={220}>
       <Flex justifyContent="center" mt={4} mb={3}>
-        <Text type="h2" textTransform="uppercase">
+        <Text variant="h2" textTransform="uppercase">
           {t("Terms.title")}
         </Text>
       </Flex>
@@ -63,7 +63,7 @@ const TermsAndConditionsModal: React.FC<{
       <Flex justifyContent="center" mt={8}>
         <Button
           onClick={handleAcceptTermsOfUse}
-          type="main"
+          variant="main"
           color="palette.neutral.c100"
           Icon={() => <Icons.ArrowRightMedium size={18} />}
           disabled={!acceptedTermsOfUse || !acceptedPrivacyPolicy}

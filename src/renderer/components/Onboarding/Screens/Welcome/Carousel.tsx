@@ -37,10 +37,10 @@ const Slide = ({ title, description, image }: SlideProps): React.ReactElement =>
   return (
     <Wrapper>
       <SlideLogo key={"key"} image={image} />
-      <Text mb={12} ff="Alpha|Medium" textTransform="uppercase" type="h3" fontWeight="400" fontSize={28}>
+      <Text mb={12} ff="Alpha|Medium" textTransform="uppercase" variant="h3" fontWeight="400" fontSize={28}>
         {title}
       </Text>
-      <Text mb={76} type="body" ff="Alpha|Medium" fontWeight="500" fontSize={14}>
+      <Text mb={76} variant="body" ff="Alpha|Medium" fontWeight="500" fontSize={14}>
         {description}
       </Text>
     </Wrapper>

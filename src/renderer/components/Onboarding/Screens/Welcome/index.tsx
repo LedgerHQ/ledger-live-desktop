@@ -111,10 +111,10 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
       <LeftContainer>
         <Presentation>
           <Logos.LedgerLiveRegular />
-          <Text type="h1" ff="Alpha|Medium" pt={"32px"} pb={"20px"}>
+          <Text variant="h1" ff="Alpha|Medium" pt={"32px"} pb={"20px"}>
             {t("v3.onboarding.screens.welcome.title")}
           </Text>
-          <Description type="body" ff="Inter|Medium" fontSize={14}>
+          <Description variant="body" ff="Inter|Medium" fontSize={14}>
             {t("v3.onboarding.screens.welcome.description")}
           </Description>
         </Presentation>
@@ -122,7 +122,7 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
           <Button
             iconPosition="right"
             Icon={Icons.ArrowRightMedium}
-            type="main"
+            variant="main"
             onClick={handleNext}
           >
             {t("v3.onboarding.screens.welcome.nextButton")}

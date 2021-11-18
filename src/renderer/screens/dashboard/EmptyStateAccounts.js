@@ -14,7 +14,6 @@ import { withTheme } from "styled-components";
 import FakeLink from "~/renderer/components/FakeLink";
 import { urls } from "~/config/urls";
 import { openModal } from "~/renderer/actions/modals";
-import InfoSideDrawer from "~/renderer/components/InfoSideDrawer";
 
 const EmptyStateAccounts = ({ theme }: { theme: any }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,50 +33,6 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
 
   return (
     <Box alignItems="center" pb={8} style={{ margin: "auto" }}>
-      {/* TODO: Remove when integrated to onboard page v3 */}
-      <InfoSideDrawer
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        sections={[
-          {
-            title: "How does a recovery phrase work?",
-            descriptions: [
-              "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-            ],
-          },
-          {
-            descriptions: [
-              "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-            ],
-            tips: [
-              { type: "warning", label: "test1" },
-              { type: "success", label: "test121" },
-            ],
-            link: {
-              label: "More about the Recovery phrase",
-              href: "http://somelinktothesupport.com",
-            },
-          },
-          {
-            title: "What happens if I lose access to my Nano?",
-            descriptions: [
-              "Don’t worry and follow these steps:",
-              "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-              "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-            ],
-            tips: [
-              { label: "Get a new hardware wallet." },
-              { label: "Select “Restore recovery phrase on a new device” on the Ledger app." },
-              {
-                label:
-                  "Enter your recovery phrase on your new device to restore access to your crypto.",
-              },
-            ],
-          },
-        ]}
-      />
-      <Button onClick={() => setIsOpen(!isOpen)}>Test button</Button>
-      {/* TODO: End remove */}
       <NoAccounts size={250} />
       <Box mt={5} alignItems="center">
         <Text

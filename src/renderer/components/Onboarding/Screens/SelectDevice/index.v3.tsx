@@ -54,7 +54,7 @@ export function SelectDevice({ sendEvent }: Props) {
         </Button>
       </TopRightContainer>
       <DeviceSelector onClick={handleDeviceSelect} />
-      <TitleText type="h3" fontSize="28px" ff="Alpha|Medium">
+      <TitleText variant="h3" fontSize="28px" ff="Alpha|Medium">
         {t("v3.onboarding.screens.selectDevice.title")}
       </TitleText>
     </SelectDeviceContainer>

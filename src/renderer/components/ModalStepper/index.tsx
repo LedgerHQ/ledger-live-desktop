@@ -70,7 +70,7 @@ const ModalStepper = (props: Props) => {
   }, [stepIndex, onClose]);
 
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={816} height={486}>
+    <Popin isOpen={isOpen} onClose={onClose} width={816} height={486} p={0}>
       <StepContainer>
         <StepLeftSide
           Header={<ProgressHeader title={title} {...stepsProps} />}

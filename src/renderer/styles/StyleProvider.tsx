@@ -34,6 +34,8 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
     [palettesAny, selectedPalette],
   );
 
+  console.log(V3dDfaultTheme, selectedPalette)
+
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />

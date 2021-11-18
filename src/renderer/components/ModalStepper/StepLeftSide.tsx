@@ -65,7 +65,7 @@ const StepLeftSide = ({
       <FlexBox flexDirection="column">
         <Button
           disabled={continueDisabled}
-          type="main"
+          variant="main"
           Icon={ArrowRightRegular}
           onClick={onClickContinue}
         >
