@@ -2074,27 +2074,27 @@
             "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "確認",
             "success": {
-              "title": "You have successfully redelegated your assets",
-              "text": "The redelegation will update once the blockchain has confirmed the transaction",
+              "title": "資産を正常に再デリゲートしました。",
+              "text": "ブロックチェーンがトランザクションを確認後、再デリゲートが更新されます。",
               "cta": "詳細を見る"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
     },
     "undelegation": {
-      "header": "Undelegation(s)",
-      "headerTooltip": "Available after the 21-day timelock",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards.",
+      "header": "デリゲート解除",
+      "headerTooltip": "21 日間のタイムロックの後に利用できます。",
+      "inactiveTooltip": "デリゲート解除済みの数は、報酬を生成しません。",
       "flow": {
-        "title": "Undelegate assets",
+        "title": "資産のデリゲート解除",
         "steps": {
           "amount": {
-            "title": "Amount",
-            "subtitle": "The undelegation process takes <0>21 days</0> to finalize.",
+            "title": "数量",
+            "subtitle": "デリゲートの解除は<0>21日</0>で完了します。",
             "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
             "fields": {
               "validator": "Validator",
@@ -3708,7 +3708,7 @@
     },
     "ManagerUninstallBTCDep": {
       "title": "Sorry, this app is required",
-      "description": "Uninstall the Bitcoin or Ethereum app last"
+      "description": "ビットコインまたはイーサリアムアプリを最後にアンインストールします。"
     },
     "NetworkDown": {
       "title": "Sorry, internet seems to be down",
