@@ -1725,8 +1725,8 @@
     "successTitle": "Address shared securely",
     "steps": {
       "chooseAccount": {
-        "title": "Account",
-        "label": "Account to credit",
+        "title": "アカウント",
+        "label": "入金アカウント",
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
