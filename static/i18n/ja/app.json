@@ -1606,7 +1606,7 @@
       "rewards": {
         "title": "報酬",
         "description": "おめでとうございます！バリデーターへの投票で、 <1>{{amount}}</1> を獲得しました。",
-        "info": "Rewards can be claimed once every 24 hours."
+        "info": "報酬は24時間に1回申請できます。"
       },
       "connectDevice": {
         "title": "デバイス"
@@ -1624,7 +1624,7 @@
     }
   },
   "freeze": {
-    "title": "Freeze assets",
+    "title": "資産の凍結",
     "steps": {
       "amount": {
         "title": "数量",
@@ -1632,58 +1632,58 @@
         "bandwidthDescription": "Bandwidth（バンド幅）ポイントは、トランザクションのネットワーク手数料を支払う際に、TRXの代わりに使用することができます。Bandwidth（バンド幅）を選択すると、より多くのトランザクションを毎日無料で利用できるようになります。",
         "energyDescription": "スマートコントラクトの実行には、Energy（エネルギー）ポイントが必要です。スマートコントラクトを実行しない場合は、Energy（エネルギー）ポイントで報酬を得る必要はありません。",
         "amountLabel": "凍結する額",
-        "available": "Available: {{amountAvailable}}",
-        "info": "Frozen assets cannot be sent for 3 days."
+        "available": "利用可能：{{amountAvailable}}",
+        "info": "凍結された資産は3日間送付できません。"
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "デバイス"
       },
       "confirmation": {
         "tooltip": {
-          "title": "Transaction is awaiting validation",
-          "desc": "You have to wait a minute before being able to vote"
+          "title": "承認待ちトランザクション",
+          "desc": "投票できるようになるまで、少々お待ちください。"
         },
-        "title": "Confirmation",
+        "title": "確認",
         "success": {
           "title": "",
-          "textNRG": "You will start earning Energy once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "text": "You will start earning Bandwidth once the network has confirmed the freeze. You can shortly vote for Super Representatives to also earn rewards.",
-          "votePending": "Vote in {{time}}",
-          "vote": "Vote",
-          "later": "Vote later"
+          "textNRG": "ネットワークによる凍結の承認後、報酬を得られるようになります。まもなく、スーパー代表（SR）に投票して報酬を得ることも可能になります。",
+          "text": "ネットワークが凍結を確認後、Bandwidth（バンド幅）を獲得し始めます。まもなく、スーパー代表者に投票して報酬の獲得も可能になります。",
+          "votePending": "{{time}} に投票",
+          "vote": "投票",
+          "later": "後で投票する"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
       }
     }
   },
   "unfreeze": {
-    "title": "Unfreeze assets",
+    "title": "資産の凍結を解除",
     "steps": {
       "amount": {
-        "title": "Unfreeze",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "title": "凍結解除",
+        "info": "凍結を解除すると{{resource}} が減り、投票はすべて取り消されます。"
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "デバイス"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "確認",
         "success": {
           "title": "",
-          "text": "Your assets were unfrozen successfully. Your {{resource}} points will be decreased, and your votes will be cancelled.",
-          "continue": "Continue"
+          "text": "資産は正常に凍結解除されました。 {{resource}} ポイントが減少し、投票はキャンセルされます。",
+          "continue": "続行"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
       }
     }
   },
   "vote": {
-    "title": "Cast votes",
-    "titleExisting": "Manage votes",
+    "title": "投票する",
+    "titleExisting": "投票の管理",
     "steps": {
       "castVotes": {
-        "max": "MAX",
-        "title": "Vote",
+        "max": "最大",
+        "title": "投票",
         "search": "名前またはアドレスで検索...",
         "totalVotes": "合計投票数： {{total}}",
         "selected": "選択済：{{total}}",
@@ -1801,9 +1801,9 @@
           "cta": "詳細を表示"
         },
         "pending": {
-          "title": "Broadcasting transaction..."
+          "title": "トランザクションをブロードキャスト中…"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
       },
       "warning": {
         "tezos": {
@@ -1843,7 +1843,7 @@
   },
   "accountDistribution": {
     "account": "アカウント",
-    "distribution": "Allocation",
+    "distribution": "分配",
     "amount": "数量",
     "value": "価値",
     "header": "アカウント配分（{{count}}）"
@@ -1907,11 +1907,11 @@
       },
       "unfreeze": {
         "title": "凍結解除",
-        "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
+        "description": "TRXの凍結を解除すると利用可能残高に戻ります。報酬を得ることはできなくなります。"
       },
       "vote": {
-        "title": "Vote",
-        "description": "Cast votes for Super Representatives to earn rewards.",
+        "title": "投票",
+        "description": "スーパー代表（SR）に投票して報酬を得ることができます。",
         "steps": {
           "vote": {
             "title": "Cast votes",
@@ -2003,10 +2003,10 @@
             "title": "バリデータ"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "確認",
             "success": {
               "title": "You have successfully delegated your assets",
               "text": "Your account balance will be updated when the blockchain confirms the transaction.",
@@ -2028,8 +2028,8 @@
             "compoundOrClaim": "Compound or cash in",
             "compoundDescription": "Rewards will be added to delegated amount",
             "claimDescription": "Rewards will be added to the available balance",
-            "compoundInfo": "You earned <0>{{amount}}</0>. By clicking Continue, they will be claimed now and automatically delegated to the same validator.",
-            "claimInfo": "You earned <0>{{amount}}</0> from the validator below. By clicking Continue, they will be claimed now and automatically added to the available balance.",
+            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
+            "claimInfo": "<0>{{amount}}</0>を以下のバリデータから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
             "selectLabel": "Select a delegation"
           },
           "connectDevice": {
@@ -2078,7 +2078,7 @@
             "success": {
               "title": "You have successfully redelegated your assets",
               "text": "The redelegation will update once the blockchain has confirmed the transaction",
-              "cta": "View details"
+              "cta": "詳細を見る"
             },
             "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
           }
