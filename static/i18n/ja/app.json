@@ -1914,8 +1914,8 @@
         "description": "スーパー代表（SR）に投票して報酬を得ることができます。",
         "steps": {
           "vote": {
-            "title": "Cast votes",
-            "description": "Vote for one or more Super Representatives to start earning rewards.",
+            "title": "投票する",
+            "description": "1人以上のスーパー代表（SR）に投票して、報酬を獲得しましょう。",
             "footer": {
               "doNotShowAgain": "今後表示しない",
               "next": "投票する"
@@ -2008,70 +2008,70 @@
           "confirmation": {
             "title": "確認",
             "success": {
-              "title": "You have successfully delegated your assets",
-              "text": "Your account balance will be updated when the blockchain confirms the transaction.",
-              "cta": "View details"
+              "title": "資産が正常にデリゲートされました。",
+              "text": "ブロックチェーンによりトランザクションの確認後、アカウントの残高が更新されます。",
+              "cta": "詳細を表示"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
     },
     "claimRewards": {
       "flow": {
-        "title": "Claim rewards",
+        "title": "報酬獲得を申請",
         "steps": {
           "claimRewards": {
-            "title": "Rewards",
-            "compound": "Compound",
-            "claim": "Cash in",
-            "compoundOrClaim": "Compound or cash in",
-            "compoundDescription": "Rewards will be added to delegated amount",
-            "claimDescription": "Rewards will be added to the available balance",
+            "title": "報酬",
+            "compound": "コンパウンド",
+            "claim": "キャッシュイン",
+            "compoundOrClaim": "コンパウンドとキャッシュイン？",
+            "compoundDescription": "報酬はデリゲート額に加算されます。",
+            "claimDescription": "報酬は利用可能残高に加算されます。",
             "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
             "claimInfo": "<0>{{amount}}</0>を以下のバリデータから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
-            "selectLabel": "Select a delegation"
+            "selectLabel": "デリゲートを選ぶ"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
-            "label": "Confirmation",
+            "title": "確認",
+            "label": "確認",
             "success": {
-              "title": "Rewards cashed in successfully",
-              "titleCompound": "Rewards compounded successfully",
-              "text": "Your rewards were added to your available balance",
-              "textCompound": "Your rewards <0>{{amount}}</0> were automatically delegated to <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "報酬を正常にキャッシュインしました。",
+              "titleCompound": "報酬を正常にコンパウンドしました。",
+              "text": "報酬が利用可能残高に加算されました。",
+              "textCompound": "報酬 <0>{{amount}}</0> は、自動的に<0>{{validator}}</0>へデリゲートされました。",
+              "cta": "詳細を見る"
             },
             "pending": {
-              "title": "Broadcasting transaction..."
+              "title": "トランザクションをブロードキャスト中…"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
     },
     "redelegation": {
       "flow": {
-        "title": "Redelegate assets",
+        "title": "再デリゲートされた資産",
         "steps": {
           "starter": {
-            "title": "Redelegation",
-            "description": "Use redelegation to easily change from one validator to another. But if you change your mind again, you will then have to wait because redelegation triggers a 21-day timelock.",
-            "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately. You can have a maximum of <0>7 pending redelegations</0>.",
-            "howDelegationWorks": "How delegation works?"
+            "title": "再デリゲート",
+            "description": "再デリゲートを使用して、バリデータを別のバリデータに変更できます。 しかし、再デリゲートすると21日間のタイムロックが発生するため、待たなければなりません。",
+            "warning": "バリデータを慎重に選んでください：バリデータが適切でない場合、デリゲートされた資産の一部が失われる可能性があります。 最大<0>7人の保留中再デリゲート</0>を持つことが可能です。",
+            "howDelegationWorks": "デリゲートの仕組み"
           },
           "validators": {
-            "title": "Validators",
-            "currentDelegation": "Current delegation",
-            "newDelegation": "New delegation",
-            "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "title": "バリデータ",
+            "currentDelegation": "現在のデリゲート",
+            "newDelegation": "新しいデリゲート",
+            "chooseValidator": "バリデータを選ぶ",
+            "warning": "新しいバリゲータに変更したい場合は、再デリゲートするまで<0>21日間</0> 待機しなりません。"
           },
           "device": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
             "title": "Confirmation",
@@ -2449,10 +2449,10 @@
     "header": "デリゲート（委任）",
     "validator": "Validator",
     "yield": "Est. Yield",
-    "address": "Address",
-    "transactionID": "Transaction ID",
-    "value": "Value",
-    "amount": "Amount",
+    "address": "アドレス",
+    "transactionID": "トランザクションID",
+    "value": "価値",
+    "amount": "数量",
     "delegated": "デリゲート済み",
     "completionDate": "完了日",
     "rewards": "報酬",
@@ -2535,18 +2535,18 @@
     "hidden": {
       "close": "確認",
       "undo": "もう一度表示",
-      "disclaimer": "This banner will not show up again until there is a new announcement"
+      "disclaimer": "新しいお知らせがあるまで、このバナーは再表示されません。"
     }
   },
   "settings": {
     "title": "設定",
-    "discreet": "Toggle discreet mode",
-    "helpButton": "Help",
+    "discreet": "ダークモードに切り替える",
+    "helpButton": "ヘルプ",
     "tabs": {
       "display": "一般",
-      "currencies": "Crypto assets",
+      "currencies": "暗号資産",
       "help": "ヘルプ",
-      "about": "About",
+      "about": "Ledgerについて",
       "experimental": "Experimental features",
       "accounts": "Accounts",
       "developer": "デベロッパー"
