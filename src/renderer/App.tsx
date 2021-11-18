@@ -41,6 +41,8 @@ type Props = {
 
 const InnerApp = ({ initialCountervalues }: { initialCountervalues: any }) => {
   const [reloadEnabled, setReloadEnabled] = useState(true);
+  // FIXME: Remove the manual casting as soon as we rewrite the theme-selector using typescript
+  const selectedPalette = useSelector(themeSelector) as unknown as ("light" | "dark") ?? "light";
 
   useEffect(() => {
     const reload = e => {
@@ -52,8 +54,6 @@ const InnerApp = ({ initialCountervalues }: { initialCountervalues: any }) => {
     window.addEventListener("keydown", reload);
     return () => window.removeEventListener("keydown", reload);
   }, [reloadEnabled]);
-
-  const selectedPalette = "light";
 
   return (
     <StyleProvider selectedPalette={selectedPalette}>

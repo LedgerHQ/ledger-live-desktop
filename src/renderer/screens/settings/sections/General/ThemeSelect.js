@@ -10,7 +10,6 @@ import Track from "~/renderer/analytics/Track";
 
 const themeLabels = {
   light: "theme.light",
-  dusk: "theme.dusk",
   dark: "theme.dark",
 };
 
