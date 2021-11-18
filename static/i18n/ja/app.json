@@ -2681,7 +2681,7 @@
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",
-      "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase.",
+      "desc": "Ledger Liveをリセットして、コンピュータ上のすべての設定とアカウントを消去します。 その後パスワードを選択し、Ledgerデバイスにアカウントを再度追加することが可能です。 暗号資産へのアクセスを提供する秘密鍵は、引き続きLedgerデバイスに安全に保管され、リカバリフレーズによってバックアップされます。",
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
@@ -2689,9 +2689,9 @@
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
-      "title": "User action required",
-      "part1": "Could not delete cache folder. Please delete the folder manually:",
-      "part2": "Click the Open folder button, the ",
+      "title": "必要なユーザーアクション",
+      "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
+      "part2": "フォルダを開くボタンをクリックして",
       "part3": "app will close",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "Then you can restart the app normally."
@@ -2956,98 +2956,98 @@
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restore from recovery phrase",
+            "title": "リカバリーフレーズから復元",
             "paragraph1": "リカバリーフレーズを使ってNanoを復元し、Ledgerハードウェアウォレットを復元、交換、またはバックアップできます。",
-            "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
+            "paragraph2": "Nanoによって秘密鍵が復元され、暗号資産にアクセスして管理できるようになります。",
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "OK、準備完了！",
+              "prev": "1つ前のステップ",
+              "help": "お困りですか？"
             }
           },
           "howToGetStarted": {
             "title": "The best way to get you started:",
             "rules": {
-              "1": "Plan 30 minutes and take your time.",
-              "2": "Grab a pen to write with.",
-              "3": "Stay alone, and choose a safe and quiet environment."
+              "1": "30分ほど時間を確保する。",
+              "2": "ペンを用意する。",
+              "3": "作業は1人で、安全かつ静かな場所で行う。"
             },
             "buttons": {
-              "next": "OK, I’m ready!",
-              "prev": "Previous step"
+              "next": "OK、準備完了！",
+              "prev": "1つ前のステップ"
             }
           },
           "deviceHowTo": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nanoの電源をオンにする",
+              "descr": "USBケーブルを使用して、デバイスをコンピュータに接続する。"
             },
             "browse": {
-              "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "title": "デバイスの画面をチェック",
+              "descr": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
             },
             "select": {
-              "title": "Select “Set up as new device”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "「新しいデバイスとして設定」を選択する。",
+              "descr": "両方のボタンを同時に押して、選択内容を確定します。"
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "デバイスの手順に従う",
+              "descr": "PINコードは、こちらで設定してください。"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "次のステップ",
+              "prev": "前のステップ",
+              "help": "お困りですか？"
             }
           },
           "deviceHowTo2": {
             "turnOn": {
-              "title": "Turn on Nano",
-              "descr": "Connect your device to your computer with the USB cable."
+              "title": "Nanoの電源をオンにする",
+              "descr": "USBケーブルでデバイスをコンピュータに接続する。"
             },
             "browse": {
               "title": "Browse",
-              "descr": "Learn how to interact with your device by reading the on-screen instructions."
+              "descr": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
             },
             "select": {
-              "title": "Select “Enter your recovery phrase”",
-              "descr": "Press both buttons simultaneously to validate the selection."
+              "title": "「リカバリーフレーズを入力」を選択する",
+              "descr": "両方のボタンを同時に押して、選択内容を確定します。"
             },
             "follow": {
-              "title": "Follow instructions",
-              "descr": "Come back here to follow instructions on your PIN code."
+              "title": "デバイスの手順に従う",
+              "descr": "PINコードは、こちらで設定してください。"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "次のステップ",
+              "prev": "1つ前のステップ",
+              "help": "お困りですか？"
             }
           },
           "pinCode": {
-            "title": "PIN code",
-            "paragraph": "Your PIN code is the first layer of security. It physically secures access to your private key and your Nano. Your PIN code must be 4 to 8 digits long.",
-            "disclaimer": "I understand that I must choose my PIN code myself and keep it private.",
+            "title": "PINコード",
+            "paragraph": "PINコードは、セキュリティの第一段階です。あなたのNanoと秘密鍵へのアクセスを物理的に保護します。PINコードの長さは4～8桁でなければなりません。",
+            "disclaimer": "PINコードは自分で選び、秘密にしなければならないことを理解しました。",
             "buttons": {
-              "next": "Set up PIN code",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "PINコードの設定",
+              "prev": "前のステップ",
+              "help": "お困りですか？"
             }
           },
           "quizSuccess": {
-            "title": "Already a pro!",
+            "title": "合格です！",
             "paragraph": "暗号資産を安全に管理する準備が整いました。\n\n残り1ステップです！",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "次のステップ",
+              "prev": "前のステップ",
+              "help": "お困りですか？"
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
+            "title": "もうすぐプロレベルになります...",
             "paragraph": "大丈夫、Ledgerが丁寧にガイドします。あっという間に、安心安全に暗号資産を管理できるようになります。\n\n残り1ステップです！",
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step"
+              "next": "次のステップ",
+              "prev": "前のステップ"
             }
           },
           "pinCodeHowTo": {
