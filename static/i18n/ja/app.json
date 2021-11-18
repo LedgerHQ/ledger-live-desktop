@@ -3836,8 +3836,8 @@
       "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
-      "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "title": "アプリのアップデートが必要です。",
+      "description": "マネージャーで{{managerAppName}} アプリをアンインストールし、再インストールしてください。"
     },
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
@@ -3854,20 +3854,20 @@
       "description": null
     },
     "CantScanQRCode": {
-      "title": "Couldn't scan this QR code: auto-verification not supported by this address"
+      "title": "このQRコードをスキャンできませんでした：このアドレスでは自動認証がサポートされていません。"
     },
     "FeeNotLoaded": {
       "title": "Couldn't load fee rates. Please set manual fees"
     },
     "FeeRequired": {
-      "title": "Fees are required"
+      "title": "手数料が必要です。"
     },
     "GasLessThanEstimate": {
       "title": "This may be too low. Please increase"
     },
     "UnknownMCU": {
       "title": "Unknown MCU version",
-      "description": "Please contact Ledger Support"
+      "description": "Ledgerサポートにご連絡ください。"
     },
     "MCUNotGenuineToDashboard": {
       "title": "Access dashboard to update",
