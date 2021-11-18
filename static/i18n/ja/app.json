@@ -2930,7 +2930,7 @@
         "switchDevice": "デバイスの切り替え",
         "options": {
           "1": {
-            "heading": "First use",
+            "heading": "初期設定",
             "title": "新しい{{deviceName}}をセットアップ",
             "description": "デバイスを起動してセットアップしましょう！"
           },
@@ -3097,26 +3097,26 @@
             }
           },
           "newRecoveryPhrase": {
-            "title": "Recovery phrase",
-            "paragraph1": "Your recovery phrase is a secret list of 24 words that backs up your private keys.",
-            "paragraph2": "Your Nano generates a unique recovery phrase. Ledger does not keep a copy of it.",
-            "disclaimer": "I understand that if I lose this recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
+            "title": "リカバリーフレーズ",
+            "paragraph1": "リカバリーフレーズは、秘密鍵をバックアップするための24個の単語の組み合わせです。",
+            "paragraph2": "Nanoによって、唯一無二のリカバリーフレーズが生成されます。Ledger社がコピーを保管することはありません。",
+            "disclaimer": "リカバリーフレーズを紛失すると、Nanoにアクセスできなくなった場合に、ウォレット内の暗号資産が永久に失われることを理解しました。",
             "buttons": {
-              "next": "Recovery phrase",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "リカバリーフレーズ",
+              "prev": "前のステップ",
+              "help": "お困りですか？"
             }
           },
           "recoveryHowTo": {
             "grabRecovery": {
-              "title": "Grab your recovery phrase"
+              "title": "リカバリーフレーズを用意してください。"
             },
             "selectLength": {
-              "title": "Select recovery phrase length",
+              "title": "リカバリーフレーズの長さを選択してください。",
               "descr": "リカバリーフレーズの長さは12単語、18単語、または24単語のいずれかです。暗号資産にアクセスするには、すべての単語を入力する必要があります。"
             },
             "enterWord": {
-              "title": "Enter Word #1...",
+              "title": "単語 #1を入力...",
               "descr": "単語 #1（1つ目の単語）の最初の文字を、右ボタンまたは左ボタンで選択して入力します。文字を確定するには、両方のボタンを同時に押します。"
             },
             "validateWord": {
@@ -3529,55 +3529,55 @@
       "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeInvalidSequence": {
-      "title": "Invalid sequence",
-      "description": "Please try the operation again"
+      "title": "無効なシーケンス",
+      "description": "もう一度操作を試してください。"
     },
     "CosmosBroadcastCodeUnauthorized": {
-      "title": "Unauthorized signature",
-      "description": "This account is not authorized to sign this transaction"
+      "title": "承認されていない署名",
+      "description": "このアカウントは、このトランザクションに署名する権限がありません。"
     },
     "CosmosBroadcastCodeInsufficientFunds": {
-      "title": "Insufficient funds",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "資金が不足しています。",
+      "description": "アカウントに十分な資金があることを確認し、もう一度やり直してください。"
     },
     "CosmosBroadcastCodeUnknownRequest": {
-      "title": "Something went wrong (Error #6)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#6）",
+      "description": "Ledgerサポートにご連絡ください。"
     },
     "CosmosBroadcastCodeInvalidAddress": {
-      "title": "Invalid address",
-      "description": "Please check the address and try again"
+      "title": "無効なアドレス",
+      "description": "アドレスをご確認の上、もう一度お試しください。"
     },
     "CosmosBroadcastCodeInvalidPubKey": {
-      "title": "Something went wrong (Error #8)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#8）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeUnknownAddress": {
-      "title": "Unknown address",
-      "description": "Please check the address and try again"
+      "title": "不明なアドレス",
+      "description": "アドレスをご確認の上、もう一度お試しください。"
     },
     "CosmosBroadcastCodeInsufficientCoins": {
-      "title": "Insufficient coins",
-      "description": "Make sure the account used has enough funds and try again"
+      "title": "コイン不足",
+      "description": "アカウントに十分な資金があることを確認し、もう一度やり直してください。"
     },
     "CosmosBroadcastCodeInvalidCoins": {
-      "title": "Something went wrong (Error #11)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#11）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeOutOfGas": {
-      "title": "Something went wrong (Error #12)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#12）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeMemoTooLarge": {
-      "title": "The Memo field is too long",
-      "description": "Please reduce the size of the memo text and try again"
+      "title": "Memoフィールドが長すぎます。",
+      "description": "Memoテキストのサイズを小さくして、もう一度お試しください。"
     },
     "CosmosBroadcastCodeInsufficientFee": {
-      "title": "Something went wrong (Error #14)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#14）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeTooManySignatures": {
-      "title": "Something went wrong (Error #15)",
+      "title": "問題が発生しました（エラー#15）",
       "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeGasOverflow": {
@@ -3692,48 +3692,48 @@
       "install": {
         "title": "アプリのインストールを終了しますか？",
         "description": "マネージャーを終了するとアプリのインストールが終了します。待機中アプリのインストールを完了してください。",
-        "stay": "Finish install"
+        "stay": "インストールを完了"
       },
       "uninstall": {
-        "title": "Finish app uninstallation in progress?",
-        "description": "Quitting the Manager will terminate the app uninstallations in progress.",
-        "stay": "Finish uninstalling"
+        "title": "アプリのインストールを終了しますか？",
+        "description": "マネージャーを終了すると、アンインストールも終了します。",
+        "stay": "アンインストールを終了"
       },
       "update": {
-        "title": "Finish app updates in progress?",
-        "description": "Quitting the Manager will terminate the app updates in progress.",
-        "stay": "Finish updates"
+        "title": "アプリのアップデートを終了しますか？",
+        "description": "マネージャーを終了すると、アップデートも終了します。",
+        "stay": "アップデートを終了"
       },
-      "quit": "Quit Manager"
+      "quit": "マネージャーを終了"
     },
     "ManagerUninstallBTCDep": {
-      "title": "Sorry, this app is required",
+      "title": "このアプリは必須です。",
       "description": "ビットコインまたはイーサリアムアプリを最後にアンインストールします。"
     },
     "NetworkDown": {
-      "title": "Sorry, internet seems to be down",
-      "description": "Please check your internet connection."
+      "title": "インターネットがダウンしているようです。",
+      "description": "インターネット接続を確認してください。"
     },
     "NoAddressesFound": {
-      "title": "Sorry, no accounts were found",
-      "description": "Something went wrong with the address calculation, try again or contact Ledger Support"
+      "title": "アカウントが見つかりませんでした。",
+      "description": "アドレス計算時に問題が発生しました。再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "NotEnoughBalance": {
-      "title": "Sorry, insufficient funds",
-      "description": "Please make sure the account has enough funds."
+      "title": "資金が不足しています。",
+      "description": "アカウントに十分な資金があることを確認してください。"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Recipient address is inactive. Send at least {{minimalAmount}} to activate it"
+      "title": "受信者のアドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "親アカウントのETH残高がネットワーク手数料を下回り、不足しています"
     },
     "PasswordsDontMatch": {
-      "title": "The Passwords don't match",
-      "description": "Please try again"
+      "title": "パスワードが一致しません。",
+      "description": "もう一度お試しください。"
     },
     "PasswordIncorrect": {
-      "title": "The password entered is incorrect",
+      "title": "パスワードが間違っています。",
       "description": "もう一度お試しください。"
     },
     "RPCHostRequired": {
@@ -3774,26 +3774,26 @@
     },
     "TimeoutTagged": {
       "title": "サーバーからの応答時間が長すぎます。（{{tag}}）",
-      "description": "Timeout occurred."
+      "description": "タイムアウトが発生しました。"
     },
     "TransportError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "問題が発生しました。デバイスを再接続してください。",
       "description": "{{message}}"
     },
     "TransportRaceCondition": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "問題が発生しました。デバイスを再接続してください。",
       "description": "{{message}}"
     },
     "TransportStatusError": {
-      "title": "Something went wrong. Please reconnect your device",
+      "title": "問題が発生しました。デバイスを再接続してください。",
       "description": "{{message}}"
     },
     "DeviceShouldStayInApp": {
-      "title": "Please open the {{appName}} app",
-      "description": "Keep the {{appName}} app open while we find your accounts"
+      "title": "{{appName}} アプリを開いてください。",
+      "description": "アカウントを探している時は、アプリケーション{{appName}} を開いたままにしてください。"
     },
     "UnexpectedBootloader": {
-      "title": "Sorry, your device must not be in Bootloader mode",
+      "title": "デバイスがBootloader（ブートローダー）モードになってしまっています。",
       "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
     },
     "UserRefusedAllowManager": {
@@ -3816,11 +3816,11 @@
       "description": "Please try again or contact Ledger Support if in doubt"
     },
     "UpdateYourApp": {
-      "title": "App update required",
-      "description": "Uninstall and reinstall the {{managerAppName}} app in the Manager"
+      "title": "アプリのアップデートが必要です。",
+      "description": "マネージャーで{{managerAppName}} アプリをアンインストールし、再インストールしてください。"
     },
     "DeviceOnDashboardExpected": {
-      "title": "Return to the Dashboard",
+      "title": "ダッシュボードに戻る",
       "description": "Please navigate back to the Dashboard on your device"
     },
     "WebsocketConnectionError": {
@@ -3916,94 +3916,94 @@
     },
     "SyncError": {
       "title": "Synchronization error",
-      "description": "Some accounts could not be synchronized."
+      "description": "一部のアカウントを同期できませんでした。"
     },
     "TronNoFrozenForBandwidth": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Bandwidth"
+      "title": "凍結解除する資産がありません。",
+      "description": "Bandwidth（バンド幅）に連携している凍結解除アカウントがありません。"
     },
     "TronNoFrozenForEnergy": {
-      "title": "No assets to unfreeze",
-      "description": "You do not have assets to unfreeze associated to Energy"
+      "title": "凍結解除する資産がありません。",
+      "description": "Energy（エネルギー）に連携している凍結解除アカウントがありません。"
     },
     "TronUnfreezeNotExpired": {
-      "title": "Unfreeze is not available yet",
-      "description": "You need to wait 3 days after your last Freeze operation"
+      "title": "凍結解除はまだ利用できません。",
+      "description": "前回の凍結から3日後にご利用ください。"
     },
     "TronVoteRequired": {
-      "title": "At least 1 vote is needed"
+      "title": "1票以上が必要です。"
     },
     "TronInvalidVoteCount": {
-      "title": "Vote format is incorrect",
-      "description": "You can only vote using round numbers"
+      "title": "投票の形式が間違っています。",
+      "description": "投票には整数しか使用できません。"
     },
     "TronRewardNotAvailable": {
-      "title": "Reward is not claimable yet",
-      "description": "You need to wait 24 hours between claims"
+      "title": "報酬はまだ獲得できません。",
+      "description": "次回の請求は、24時間以上が経過してから行ってください。"
     },
     "TronNoReward": {
-      "title": "There is no reward to claim"
+      "title": "請求できる報酬がありません。"
     },
     "TronInvalidFreezeAmount": {
-      "title": "Amount to freeze cannot be lower than 1"
+      "title": "凍結額を1未満にすることはできません。"
     },
     "TronSendTrc20ToNewAccountForbidden": {
-      "title": "Sending TRC20 to a new account won't activate it",
-      "description": "The recipient account must be activated prior to sending TRC20 to it. Send either TRX or TRC10 to an account to activate it."
+      "title": "TRC20を新しいアカウントに送付しても、アクティベートされません。",
+      "description": "受取アカウントは、TRC20を送信する前に有効化する必要があります。有効化するにはTRXまたはTRC10のいずれかをアカウントに送信してください。"
     },
     "TronUnexpectedFees": {
-      "title": "Additional fees may be applied"
+      "title": "追加費用が発生する場合があります。"
     },
     "TronNotEnoughTronPower": {
-      "title": "Not enough votes available"
+      "title": "票数が足りません。"
     },
     "TronTransactionExpired": {
-      "title": "Transaction has expired",
-      "description": "Signature must be applied within 30 seconds. Please try again."
+      "title": "トランザクションが期限切れです。",
+      "description": "トランザクションは、30秒以内に署名する必要があります。もう一度お試しください。"
     },
     "TronNotEnoughEnergy": {
-      "title": "Not enough Energy to send this token"
+      "title": "このトークンの送金に必要なEnergy（エネルギー）が不足しています。"
     },
     "PairingFailed": {
-      "title": "Pairing unsuccessful",
-      "description": "Please try again or contact Ledger Support if in doubt."
+      "title": "ペアリングに失敗しました。",
+      "description": "再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "GenuineCheckFailed": {
-      "title": "Genuine check failed",
-      "description": "Something went wrong. Please try again or contact Ledger Support if in doubt."
+      "title": "正規品チェックに失敗しました。",
+      "description": "問題が発生しました。再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "EthAppPleaseEnableContractData": {
-      "title": "Please enable contract data in the Ethereum app settings"
+      "title": "イーサリアムアプリの設定でコントラクトデータを有効にしてください。"
     },
     "InvalidXRPTag": {
       "title": "無効なXRP宛先タグ"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "Insufficient balance to delegate"
+      "title": "デリゲートに必要な残高が不足しています。"
     },
     "NotEnoughDelegationBalance": {
-      "title": "Insufficient balance to delegate"
+      "title": "デリゲートに必要な残高が不足しています。"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "Insufficient balance in the parent account"
+      "title": "親アカウントに十分な残高がありません。"
     },
     "NotEnoughSpendableBalance": {
-      "title": "Balance cannot be below {{minimumAmount}}"
+      "title": "残高が{{minimumAmount}} を下回ることはできません。"
     },
     "WrongAppForCurrency": {
-      "title": "Please open the {{expected}} app"
+      "title": "{{expected}} アプリを開いてください。"
     },
     "FeeTooHigh": {
-      "title": "Network fees are above 10% of the amount"
+      "title": "ネットワーク手数料が10%を超えています。"
     },
     "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
+      "title": "Memoのフォーマットに誤りがあります。"
     },
     "SourceHasMultiSign": {
-      "title": "Please disable multisign to send {{currencyName}}"
+      "title": "{{currencyName}} を送付するには、マルチシグを無効にしてください。"
     },
     "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
+      "title": "この受取人に送付するには、Memoが必要な場合があります。"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "{{minAmountFromFormatted}} 以上の数量でなければなりません。"
