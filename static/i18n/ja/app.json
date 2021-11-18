@@ -2686,13 +2686,13 @@
     },
     "softResetModal": {
       "title": "キャッシュを削除",
-      "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
+      "desc": "キャッシュデータを消去すると、ネットワークが強制的に再同期されます。設定とアカウントは保存されます。暗号資産にアクセスするためのプライベートキーは、Ledgerデバイスとリカバリーシートに安全に保管されます。"
     },
     "resetFallbackModal": {
       "title": "必要なユーザーアクション",
       "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
       "part2": "フォルダを開くボタンをクリックして",
-      "part3": "app will close",
+      "part3": "アプリを終了",
       "part4": ", and manually delete the \"sqlite\" folder.",
       "part5": "Then you can restart the app normally."
     },
@@ -3976,7 +3976,7 @@
       "title": "Please enable contract data in the Ethereum app settings"
     },
     "InvalidXRPTag": {
-      "title": "Invalid XRP Destination tag"
+      "title": "無効なXRP宛先タグ"
     },
     "NotEnoughBalanceToDelegate": {
       "title": "Insufficient balance to delegate"
@@ -4006,7 +4006,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "{{minAmountFromFormatted}} 以上の数量でなければなりません。"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "{{maxAmountFromFormatted}}以下の値でなければなりません。"
@@ -4049,7 +4049,7 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "メインネットのアクティベート前に、Taprootアドレスへの送付は安全ではありません。"
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"
