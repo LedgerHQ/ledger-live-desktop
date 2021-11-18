@@ -1794,7 +1794,7 @@
         }
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "確認",
         "success": {
           "title": "Transaction sent",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
@@ -1823,13 +1823,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "アプリの言語を変更しますか？",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "良いお知らせです！チームの働きにより、Ledger Liveが{{language}} 対応を開始しました。",
+      "advice": "設定言語は後からいつでも変更可能です。"
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "{{language}} に切り替える",
+    "no": "希望しない"
   },
   "distribution": {
     "asset": "Asset",
