@@ -2491,50 +2491,50 @@
           "toUndelegate": "デリゲート解除するアカウント",
           "validator": "バリデータ",
           "select": "選択",
-          "yield": "Est. Yield {{amount}}",
-          "randomly": "Randomly chosen validator",
-          "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
+          "yield": "推定利回り：{{amount}}",
+          "randomly": "ランダムに選択されたバリデータ",
+          "termsAndPrivacy": "正しくデリゲートしても、バリデータからの報酬は保証されません。"
         },
         "validator": {
-          "title": "Select validator",
+          "title": "バリデータを選択",
           "description": "推定報酬率を比較することでバリデータを選択できます。",
-          "customValidator": "Custom validator",
-          "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
+          "customValidator": "カスタムバリデータ",
+          "providedBy": "<1><0>{{name}}</0></1>が提供する利率。"
         },
         "custom": {
-          "title": "Custom validator",
-          "text": "Please enter the address of the custom validator to delegate your account to.",
-          "button": "Use validator"
+          "title": "カスタムバリデータ",
+          "text": "アカウントをデリゲートするには、カスタムバリデータのアドレスを入力してください。",
+          "button": "バリデータを使用"
         },
         "undelegate": {
-          "title": "Undelegate account"
+          "title": "デリゲート解除アカウント"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "確認",
+          "label": "確認",
           "success": {
-            "title": "Delegation sent",
-            "titleUndelegated": "End delegation",
-            "text": "Delegation transaction broadcasted successfully. You should earn your first rewards within around 40 days, depending on the validator.",
-            "textUndelegated": "Your account delegation will end once the operation is confirmed. You can delegate your account again at any time."
+            "title": "デリゲートが送信されました。",
+            "titleUndelegated": "デリゲート終了",
+            "text": "デリゲートのトランザクションが正常にブロードキャストされました。バリデータにもよりますが、約40日以内に最初の報酬を受け取ることができます。",
+            "textUndelegated": "処理が承認された時点で、アカウントのデリゲートは終了します。アカウントはいつでも再デリゲートすることができます。"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "contextMenu": {
-      "topUp": "Receive more",
-      "redelegate": "Change validator",
-      "stopDelegation": "End delegation"
+      "topUp": "さらに受け取る",
+      "redelegate": "バリデータを変更",
+      "stopDelegation": "デリゲート終了"
     }
   },
   "asset": {
-    "notice": "Summary of all {{currency}} accounts"
+    "notice": "すべての {{currency}} アカウントの概要"
   },
   "carousel": {
     "hidden": {
-      "close": "Confirm",
-      "undo": "Show again",
+      "close": "確認",
+      "undo": "もう一度表示",
       "disclaimer": "This banner will not show up again until there is a new announcement"
     }
   },
@@ -2702,35 +2702,35 @@
       "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
     },
     "openUserDataDirectory": {
-      "title": "View user data",
-      "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
+      "title": "ユーザーデータの閲覧",
+      "desc": "コンピューターに保存されたアカウントやCache、設定といったユーザーデータを表示します。",
       "btn": "表示"
     },
     "repairDevice": {
       "title": "Ledgerデバイスの修理",
-      "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
+      "descSettings": "ファームウェアのアップデート中にフリーズした場合、こちらからLedgerデバイスを復元してください。",
       "desc": "Ledger Nano Sをお使いの場合は、デバイスの状態を選択してください。Nano XまたはBlueをお使いの場合は、ヘルプセンターをご参照ください。",
       "button": "修理"
     },
     "exportLogs": {
-      "title": "Save logs",
-      "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
+      "title": "ログを保存",
+      "desc": "トラブルを解決するために、Ledger Liveログの保存が必要になる場合があります。",
       "btn": "保存"
     },
     "accounts": {
       "hideEmptyTokens": {
-        "title": "Hide empty token accounts",
-        "desc": "Hide token accounts with zero balance on the Accounts page."
+        "title": "空のトークンアカウントを非表示にする",
+        "desc": "アカウントページで、残高がゼロのトークンアカウントを非表示にする。"
       },
       "tokenBlacklist": {
-        "title": "Hidden tokens",
-        "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
-        "count": "{{count}} token",
-        "count_plural": "{{count}} tokens"
+        "title": "トークンを非表示",
+        "desc": "トークンを非表示にするには、親アカウントに移動し、トークンを右クリックして「トークンを非表示」を選択します。",
+        "count": "{{count}} トークン",
+        "count_plural": "{{count}} トークン"
       },
       "fullNode": {
-        "title": "Connect Bitcoin full node",
-        "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."
+        "title": "ビットコインのフルノードを接続",
+        "desc": "同期およびトランザクションの送信用のビットコインのフルノードを、Ledgerのエクスプローラを使用せずに設定する。"
       }
     }
   },
@@ -2740,7 +2740,7 @@
         "label": "New password"
       },
       "confirmPassword": {
-        "label": "Confirm password"
+        "label": "パスワードの確認"
       },
       "currentPassword": {
         "label": "現在のパスワード"
@@ -2752,12 +2752,12 @@
     },
     "setPassword": {
       "title": "パスワードロック",
-      "subTitle": "Set the password",
-      "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
+      "subTitle": "パスワードを設定する",
+      "desc": "パスワードは安全に保管してください。パスワードを紛失した場合、Ledger Liveをリセットし、アカウントをすべて追加し直す必要があります。"
     },
     "disablePassword": {
       "title": "パスワードロックを無効にする",
-      "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
+      "desc": "Ledger Liveデータはお使いのコンピューターに暗号化されていない状態で保存されます。これにはアカウント名やトランザクション、パブリックアドレスが含まれます。"
     }
   },
   "update": {
@@ -2769,30 +2769,30 @@
     "updateAvailable": "Ledger Liveバージョン {{version}} へのアップデートが利用可能です。",
     "error": "更新中のエラー。再度ダウンロードしてください",
     "reDownload": "再度ダウンロード",
-    "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
-    "downloadNow": "Download update"
+    "nightlyWarning": "このバージョンは自動更新できません。手動で最新バージョンをインストールしてください。",
+    "downloadNow": "アップデートをダウンロード"
   },
   "crash": {
-    "title": "Something went wrong",
-    "description": "Please check our support articles for possible solutions. If the problem persists, save the logs using the button below and provide them to Ledger Support.",
-    "troubleshooting": "Click here for possible solutions",
-    "logs": "Save logs",
-    "dataFolder": "View user data"
+    "title": "問題が発生しました。",
+    "description": "解決策については、サポート記事を確認してください。問題が解決しない場合は、下のボタンを使用してログを保存し、Ledgerサポートに提出してください。",
+    "troubleshooting": "解決策はこちらをクリック",
+    "logs": "ログを保存",
+    "dataFolder": "ユーザーデータを表示"
   },
   "exportOperationsModal": {
-    "title": "Operation history",
-    "desc": "Select the accounts for which to save the operation history",
-    "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
-    "titleSuccess": "Operation history saved successfully",
+    "title": "オペレーション履歴",
+    "desc": "オペレーション履歴を保存するアカウントを選択する。",
+    "descSuccess": "オペレーション履歴のCSVファイルは、選択したフォルダーに正常に保存されました。",
+    "titleSuccess": "オペレーション履歴が正常に保存されました。",
     "cta": "保存",
     "ctaSuccess": "完了",
     "noAccounts": "エクスポートするアカウントがありません。",
-    "selectedAccounts": "Accounts to be included",
-    "selectedAccounts_plural": "Accounts to be included ({{count}})",
+    "selectedAccounts": "含まれるアカウント",
+    "selectedAccounts_plural": "含まれるアカウント ({{count}})",
     "disclaimer": "エクスポートに含まれるカウンターバリューは、情報提供のみを目的としています。これらのデータは、サービスプロバイダーであるKaikoが提供する評価方法に基づき、トランザクション時およびエクスポート時の資産価値を推定したものにすぎないため、会計、税務、規制遵守、および法務上の目的にこれらのデータを使用しないでください。"
   },
   "language": {
-    "system": "Use system language",
+    "system": "システム言語を使用",
     "switcher": {
       "en": "English",
       "fr": "French",
