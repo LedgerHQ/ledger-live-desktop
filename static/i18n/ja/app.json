@@ -1263,7 +1263,7 @@
         "description": ""
       },
       "scanning": {
-        "title": "{{currencyName}} update in progress...",
+        "title": "{{currencyName}} アップデート中...",
         "description": "アカウントがアップデートされるまでお待ちください。"
       },
       "finished-empty": {
@@ -1350,10 +1350,10 @@
     "subAccountOperations": "サブアカウントオペレーション",
     "tokenTooltip": "この操作は、次のトークンオペレーションに関連しています。",
     "subAccountTooltip": "この操作は、次のサブアカウントオペレーションに関連しています。",
-    "internalOperations": "Internal operations",
-    "internalOpTooltip": "This operation has internal operations",
-    "details": "{{ currency }} details",
-    "multipleAddresses": "Why multiple addresses?",
+    "internalOperations": "インターナルオペレーション",
+    "internalOpTooltip": "この操作はインターナルオペレーションです。",
+    "details": "{{ currency }} 詳細",
+    "multipleAddresses": "なぜ複数のアドレスがあるのですか？",
     "nft": {
       "name": "Token Name",
       "contract": "Token Contract",
@@ -1361,10 +1361,10 @@
       "amount": "Amount"
     },
     "extra": {
-      "frozenAmount": "Frozen amount",
-      "unfreezeAmount": "Unfreeze amount",
-      "votes": "Votes ({{number}})",
-      "votesAddress": "<0>{{votes}}</0> to <2>{{name}}</2>",
+      "frozenAmount": "凍結額",
+      "unfreezeAmount": "凍結解除額",
+      "votes": "{{number}} 票",
+      "votesAddress": "<2>{{name}}</2>に<0>{{votes}}</0>",
       "validators": "Validators",
       "redelegated": "Redelegated",
       "redelegatedFrom": "Redelegated from",
@@ -2761,14 +2761,14 @@
     }
   },
   "update": {
-    "downloadInProgress": "Downloading update...",
-    "downloadProgress": "{{progress}}% completed",
-    "checking": "Checking update...",
-    "checkSuccess": "Update ready to install",
-    "quitAndInstall": "Install now",
-    "updateAvailable": "Update to Ledger Live version {{version}} is available",
-    "error": "Error during update. Please download again",
-    "reDownload": "Download again",
+    "downloadInProgress": "アップデートをダウンロード中...",
+    "downloadProgress": "{{progress}}%完了",
+    "checking": "アップデートの確認中...",
+    "checkSuccess": "アップデートをインストールする準備ができました。",
+    "quitAndInstall": "今すぐインストールする",
+    "updateAvailable": "Ledger Liveバージョン {{version}} へのアップデートが利用可能です。",
+    "error": "更新中のエラー。再度ダウンロードしてください",
+    "reDownload": "再度ダウンロード",
     "nightlyWarning": "This version cannot auto-update. Please install the latest version manually",
     "downloadNow": "Download update"
   },
@@ -2784,9 +2784,9 @@
     "desc": "Select the accounts for which to save the operation history",
     "descSuccess": "The CSV file of your operation history was saved successfully in the selected folder",
     "titleSuccess": "Operation history saved successfully",
-    "cta": "Save",
-    "ctaSuccess": "Done",
-    "noAccounts": "No accounts to export",
+    "cta": "保存",
+    "ctaSuccess": "完了",
+    "noAccounts": "エクスポートするアカウントがありません。",
     "selectedAccounts": "Accounts to be included",
     "selectedAccounts_plural": "Accounts to be included ({{count}})",
     "disclaimer": "エクスポートに含まれるカウンターバリューは、情報提供のみを目的としています。これらのデータは、サービスプロバイダーであるKaikoが提供する評価方法に基づき、トランザクション時およびエクスポート時の資産価値を推定したものにすぎないため、会計、税務、規制遵守、および法務上の目的にこれらのデータを使用しないでください。"
