@@ -2693,12 +2693,12 @@
       "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
       "part2": "フォルダを開くボタンをクリックして",
       "part3": "アプリを終了",
-      "part4": ", and manually delete the \"sqlite\" folder.",
-      "part5": "Then you can restart the app normally."
+      "part4": "\"sqlite\"フォルダを手作業で削除します。",
+      "part5": "その後、アプリを通常通り再起動できます。"
     },
     "removeAccountModal": {
-      "title": "Remove account",
-      "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
+      "title": "アカウントの削除",
+      "desc": "これは、あなたの暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
       "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
     },
     "openUserDataDirectory": {
@@ -2737,7 +2737,7 @@
   "password": {
     "inputFields": {
       "newPassword": {
-        "label": "New password"
+        "label": "新しいパスワード"
       },
       "confirmPassword": {
         "label": "パスワードの確認"
@@ -2803,10 +2803,10 @@
     }
   },
   "theme": {
-    "system": "Select the system theme",
-    "light": "Light",
-    "dusk": "Dusk",
-    "dark": "Dark"
+    "system": "システムテーマを選択",
+    "light": "ライト",
+    "dusk": "夕暮れ",
+    "dark": "ダーク"
   },
   "toastOverlay": {
     "toastType": {
@@ -2849,13 +2849,13 @@
   "onboarding": {
     "drawers": {
       "pinHelp": {
-        "title": "Secure your PIN code",
-        "intro": "During the setup process you choose a PIN code.",
+        "title": "安全なPINコード",
+        "intro": "セットアッププロセス中にPINコードを選びます。",
         "rules": {
           "1": "&lt;0&gt;必ず&lt;/0&gt;本人がPINコードを設定してください。",
           "2": "&lt;0&gt;必ず&lt;/0&gt;誰にも見られないようにPINコードを入力してください。",
-          "3": "You can change your PIN code if needed.",
-          "4": "Three wrong PIN code entries in a row will reset the device.",
+          "3": "PINコードは必要に応じて変更できます。",
+          "4": "間違ったPINコードを3回連続して入力すると、デバイスがリセットされます。",
           "5": "&lt;0&gt;絶対に&lt;/0&gt;0000、123456、55555555などの単純なPINコードを使用しないでください。",
           "6": "&lt;0&gt;絶対に&lt;/0&gt;PINコードを誰かと共有しないでください。Ledgerとも共有してはいけません。",
           "7": "&lt;0&gt;絶対に&lt;/0&gt;⾃分が設定していないPINコードを使⽤しないでください。",
@@ -2863,11 +2863,11 @@
         }
       },
       "recoverySeed": {
-        "title1": "How does a recovery phrase work?",
-        "paragraph1": "Your recovery phrase works like a unique master key. Your Ledger device uses it to calculate private keys for every crypto asset you own.",
-        "paragraph2": "To restore access to your crypto, any wallet can calculate the same private keys from your recovery phrase.",
-        "link": "More about the recovery phrase",
-        "title2": "What happens if I lose access to my Nano?",
+        "title1": "リカバリーフレーズの仕組みは？",
+        "paragraph1": "リカバリーフレーズは、唯一のマスターキーのように機能します。Ledgerデバイスはリカバリーフレーズを使って、保有するすべての暗号資産の秘密鍵を計算します。",
+        "paragraph2": "リカバリーフレーズさえあれば、どのウォレットでも同じ秘密鍵を計算できるため、保有する暗号資産の復元が可能です。",
+        "link": "リカバリーフレーズについての詳細はこちら",
+        "title2": "Nanoにアクセスできなくなった場合は、どうなりますか？",
         "paragraph3": "Don't worry and follow these steps:",
         "points": {
           "1": "Get a new hardware wallet.",
