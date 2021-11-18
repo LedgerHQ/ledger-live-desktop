@@ -1365,10 +1365,10 @@
       "unfreezeAmount": "凍結解除額",
       "votes": "{{number}} 票",
       "votesAddress": "<2>{{name}}</2>に<0>{{votes}}</0>",
-      "validators": "Validators",
-      "redelegated": "Redelegated",
-      "redelegatedFrom": "Redelegated from",
-      "redelegatedTo": "Redelegated to",
+      "validators": "バリデータ",
+      "redelegated": "再デリゲート済み",
+      "redelegatedFrom": "再デリゲート元",
+      "redelegatedTo": "再デリゲート先",
       "redelegatedAmount": "再デリゲート数",
       "undelegated": "デリゲート解除済み",
       "undelegatedFrom": "デリゲート解除元",
@@ -1453,56 +1453,56 @@
     "applist": {
       "placeholder": "検索条件に一致するものはありません。",
       "placeholderNoAppsInstalled": "デバイスにアプリがインストールされていません。",
-      "placeholderGoToCatalog": "Go to the App catalog to install apps",
-      "noResultsFound": "No results found",
-      "noResultsDesc": "Please verify the spelling and try again",
+      "placeholderGoToCatalog": "アプリカタログに移動して、アプリをインストールします。",
+      "noResultsFound": "一致する結果が見つかりませんでした。",
+      "noResultsDesc": "スペルを確認してから、もう一度お試しください。",
       "filter": {
-        "title": "Show",
-        "all": "All",
-        "supported": "Supported in Live",
-        "installed": "Installed",
-        "not_installed": "Not installed"
+        "title": "表示",
+        "all": "すべて",
+        "supported": "Live対応済み",
+        "installed": "インストール済み",
+        "not_installed": "未インストール"
       },
       "sort": {
-        "title": "Sort",
-        "name_asc": "Name A-Z",
-        "name_desc": "Name Z-A",
+        "title": "並べ替え",
+        "name_asc": "名前 A-Z",
+        "name_desc": "名前 Z-A",
         "marketcap_desc": "Market cap"
       },
       "installSuccess": {
-        "title": "App installed successfully. You can now add your {{app}} accounts",
+        "title": "アプリのインストールが正常に完了しました。{{app}} アカウントの追加が可能です。",
         "title_plural": "Apps installed successfully. You can now add your accounts",
-        "manageAccount": "Manage my accounts"
+        "manageAccount": "アカウントを管理"
       },
       "updatable": {
         "title": "アップデートが利用可能です。",
         "title_plural": "アップデートが利用可能です。",
         "progressTitle": "{{number}}件のアプリをアップデート",
         "progressTitle_plural": "{{number}}件のアプリをアップデート",
-        "progressWarning": "Do not quit Manager during update.",
-        "progress": "Updating all..."
+        "progressWarning": "アップデート中にマネージャーを終了しないでください。",
+        "progress": "すべてをアップデート中…"
       },
       "item": {
-        "version": "Version {{version}}",
-        "installing": "Installing...",
-        "uninstalling": "Uninstalling...",
-        "updating": "Updating...",
-        "scheduled": "Queued",
-        "update": "Update available",
-        "updateAll": "Update all",
-        "updateAllOutOfMemory": "Not enough storage. Please uninstall some apps",
-        "install": "Install",
-        "installed": "Installed",
-        "updated": "Updated",
-        "uninstall": "Uninstall",
-        "notEnoughSpace": "Not enough storage",
-        "supported": "Ledger Live supported",
-        "addAccount": "Add account",
-        "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
-        "learnMore": "Learn more",
-        "learnMoreTooltip": "Learn more about {{appName}}",
-        "removeTooltip": "Uninstall {{appName}}",
+        "version": "バージョン {{version}}",
+        "installing": "インストール中...",
+        "uninstalling": "アンインストール中...",
+        "updating": "アップデート中...",
+        "scheduled": "待機中",
+        "update": "アップデートが利用可能です。",
+        "updateAll": "すべてアップデート",
+        "updateAllOutOfMemory": "ストレージ容量が不足しています。アプリをアンインストールしてください。",
+        "install": "インストール",
+        "installed": "インストール済み",
+        "updated": "アップデート",
+        "uninstall": "アンインストール",
+        "notEnoughSpace": "十分なストレージ容量がありません。",
+        "supported": "Ledger Live対応",
+        "addAccount": "アカウントを追加",
+        "addAccountTooltip": "{{appName}} アカウントを追加",
+        "addAccountWarn": "アプリのアップデート完了までお待ちください。",
+        "learnMore": "詳細はこちら",
+        "learnMoreTooltip": "{{appName}} についての詳細",
+        "removeTooltip": "{{appName}} をアンインストール",
         "useAppForToken": "{{tokenType}} トークンを管理しますか？",
         "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
@@ -1684,8 +1684,8 @@
       "castVotes": {
         "max": "MAX",
         "title": "Vote",
-        "search": "Search by name or address...",
-        "totalVotes": "Total votes: {{total}}",
+        "search": "名前またはアドレスで検索...",
+        "totalVotes": "合計投票数： {{total}}",
         "selected": "選択済：{{total}}",
         "maxSelected": "最大選択数：{{total}}",
         "allVotesAreUsed": "すべての資産が分配されます。",
@@ -1797,8 +1797,8 @@
         "title": "確認",
         "success": {
           "title": "トランザクション送信済み",
-          "text": "Your account balance will be updated when the blockchain confirms the transaction",
-          "cta": "View details"
+          "text": "ブロックチェーンによりトランザクションの確認後、アカウントの残高が更新されます。",
+          "cta": "詳細を表示"
         },
         "pending": {
           "title": "Broadcasting transaction..."
@@ -1807,19 +1807,19 @@
       },
       "warning": {
         "tezos": {
-          "text": "The amount to be sent will be deducted from the balance of your delegated account."
+          "text": "送付額は、デリゲートアカウントから差し引かれます。"
         }
       }
     },
     "footer": {
-      "estimatedFees": "Network fees"
+      "estimatedFees": "ネットワーク手数料"
     }
   },
   "sign": {
     "title": "トランザクションに署名する"
   },
   "releaseNotes": {
-    "title": "Release notes",
+    "title": "リリースノート",
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
@@ -1832,21 +1832,21 @@
     "no": "希望しない"
   },
   "distribution": {
-    "asset": "Asset",
-    "price": "Price",
-    "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
-    "showAll": "Show all",
-    "showLess": "Show less",
-    "header": "Asset allocation ({{count}})"
+    "asset": "資産",
+    "price": "価格",
+    "distribution": "割り当て",
+    "amount": "数量",
+    "value": "価値",
+    "showAll": "すべてを表示",
+    "showLess": "表示を減らす",
+    "header": "資産配分（{{count}}）"
   },
   "accountDistribution": {
-    "account": "Account",
+    "account": "アカウント",
     "distribution": "Allocation",
-    "amount": "Amount",
-    "value": "Value",
-    "header": "Account allocation ({{count}})"
+    "amount": "数量",
+    "value": "価値",
+    "header": "アカウント配分（{{count}}）"
   },
   "elrond": {
     "account": {
@@ -1865,48 +1865,48 @@
   "tron": {
     "voting": {
       "emptyState": {
-        "description": "You can now earn rewards by freezing and voting.",
-        "info": "How voting works",
-        "votesDesc": "Cast your votes for one or more representatives to start earning staking rewards.",
-        "vote": "Cast votes",
-        "voteExisting": "Manage votes"
+        "description": "凍結と投票により、報酬を得られるようになりました。",
+        "info": "投票の仕組み",
+        "votesDesc": "1人以上の代表に投票して、報酬を得ることができます。",
+        "vote": "投票する",
+        "voteExisting": "投票の管理"
       },
-      "manageTP": "Manage assets",
-      "warnEarnRewards": "You need at least {{amount}} to start earning rewards",
-      "claimRewards": "Claim rewards",
-      "nextRewardsDate": "Rewards can be claimed {{date}}",
-      "claimAvailableRewards": "Claim {{amount}}",
-      "header": "Votes",
-      "percentageTP": "% of votes cast",
-      "noRewards": "No rewards available",
+      "manageTP": "資産管理",
+      "warnEarnRewards": "報酬を獲得するには {{amount}} 以上が必要です。",
+      "claimRewards": "報酬獲得を申請",
+      "nextRewardsDate": "報酬獲得は {{date}} に申請することができます。",
+      "claimAvailableRewards": "{{amount}} を獲得",
+      "header": "票数",
+      "percentageTP": "投票数の％",
+      "noRewards": "利用可能な報酬はありません。",
       "remainingVotes": {
-        "title": "You still have {{amount}} votes remaining",
-        "description": "You can cast your remaining votes to earn more rewards",
-        "button": "Vote now"
+        "title": "未使用の票が、{{amount}} 票残っています。",
+        "description": "残りの票を投票して、さらに多くの報酬を獲得できます。",
+        "button": "今すぐ投票"
       },
       "flow": {
         "steps": {
           "starter": {
-            "description": "Freeze TRX to earn rewards and still keep full security and control of your assets.",
+            "description": "資産を安全に管理しながら、TRXを凍結して報酬を獲得しましょう。",
             "bullet": {
-              "delegate": "Delegated assets stay yours.",
-              "access": "You can unfreeze your assets after 3 days.",
-              "ledger": "Freeze and vote securely with your Ledger device."
+              "delegate": "資産をデリゲートしても所有者は変りません。",
+              "access": "資産の凍結は、3日後に解除できます。",
+              "ledger": "Ledgerデバイスを使って、安全に資産の凍結と投票をしましょう。"
             },
-            "help": "How voting works",
-            "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your super representative."
+            "help": "投票の仕組み",
+            "termsAndPrivacy": "正しくデリゲートしても、スーパー代表（SR）からの報酬は保証されません。"
           }
         }
       }
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "資産管理",
       "freeze": {
-        "title": "Freeze",
-        "description": "Freeze TRX to earn Bandwidth or Energy. You'll also be able to vote for Super Representatives."
+        "title": "凍結",
+        "description": "TRXを凍結することで、Bandwidth（バンド幅）またはEnergy（エネルギー）を獲得できます。スーパー代表（SR）に投票することも可能です。"
       },
       "unfreeze": {
-        "title": "Unfreeze",
+        "title": "凍結解除",
         "description": "Unfreeze TRX to have them back in your available balance. You will no longer earn rewards."
       },
       "vote": {
@@ -2177,11 +2177,11 @@
           "confirmation": {
             "title": "Confirmation",
             "success": {
-              "title": "Rewards successfully claimed!",
-              "text": "Your rewards were added to your available balance",
-              "cta": "View details"
+              "title": "報酬を正常に獲得しました！",
+              "text": "報酬が利用可能残高に加算されました。",
+              "cta": "詳細を表示"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
@@ -2445,52 +2445,52 @@
     }
   },
   "delegation": {
-    "title": "Earn rewards",
-    "header": "Delegation",
+    "title": "報酬を獲得する",
+    "header": "デリゲート（委任）",
     "validator": "Validator",
     "yield": "Est. Yield",
     "address": "Address",
     "transactionID": "Transaction ID",
     "value": "Value",
     "amount": "Amount",
-    "delegated": "Delegated",
-    "completionDate": "Completion date",
-    "rewards": "Rewards",
-    "duration": "Duration",
-    "durationJustStarted": "Just started",
-    "durationDays": "{{count}} day",
-    "durationDays_plural": "{{count}} days",
-    "howItWorks": "How delegation works",
-    "delegationEarn": "You can now earn {{name}} staking rewards by delegating your account.",
-    "earnRewards": "Earn rewards",
-    "overdelegated": "Overdelegated",
-    "status": "Status",
+    "delegated": "デリゲート済み",
+    "completionDate": "完了日",
+    "rewards": "報酬",
+    "duration": "期間",
+    "durationJustStarted": "開始序盤",
+    "durationDays": "{{count}} 日間",
+    "durationDays_plural": "{{count}} 日間",
+    "howItWorks": "デリゲートの仕組み",
+    "delegationEarn": "アカウントをデリゲートすることで、ステーキング報酬を {{name}} 獲得できるようになりました。",
+    "earnRewards": "報酬を獲得する",
+    "overdelegated": "デリゲート超過",
+    "status": "ステータス",
     "flow": {
       "steps": {
         "starter": {
-          "title": "Earn staking rewards",
-          "description": "Delegate your Tezos account to a third-party validator to earn staking rewards and still keep full security and control of your assets",
+          "title": "ステーキング報酬を獲得する",
+          "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデータをデリゲートして、ステーキング報酬を得ることができます。",
           "bullet": {
-            "delegate": "Delegated accounts stay yours.",
-            "access": "You can access your assets at any time.",
-            "ledger": "Delegate securely with your Ledger device."
+            "delegate": "アカウントをデリゲートしても、アカウントの所有者は変わりません。",
+            "access": "いつでも、資産を管理することができます。",
+            "ledger": "Ledgerデバイスを使って、安全にデリゲートしましょう。"
           },
           "button": {
-            "cta": "Delegate to earn rewards"
+            "cta": "デリゲートして報酬を得る"
           }
         },
         "account": {
-          "title": "Delegate account",
-          "label": "Account",
-          "toDelegate": "Account to delegate"
+          "title": "デリゲートアカウント",
+          "label": "アカウント",
+          "toDelegate": "デリゲートするアカウント"
         },
         "summary": {
-          "title": "Delegate account",
-          "label": "Summary",
-          "toDelegate": "Account to delegate",
-          "toUndelegate": "Account to undelegate",
-          "validator": "Validator",
-          "select": "Select",
+          "title": "デリゲート数",
+          "label": "概要",
+          "toDelegate": "デリゲートするアカウント",
+          "toUndelegate": "デリゲート解除するアカウント",
+          "validator": "バリデータ",
+          "select": "選択",
           "yield": "Est. Yield {{amount}}",
           "randomly": "Randomly chosen validator",
           "termsAndPrivacy": "Delegating your voting rights does not guarantee any rewards from your validator."
