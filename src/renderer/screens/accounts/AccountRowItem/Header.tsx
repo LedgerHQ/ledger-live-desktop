@@ -38,7 +38,7 @@ const Header = ({ account, nested }: Props) => {
     currency.type === "CryptoCurrency" ? currency.color : theme.colors.palette.text.shade60;
   const title = currency.type === "CryptoCurrency" ? currency.name : "token";
   return (
-    <Box horizontal flow={3} flex={nested ? "42%" : "30%"} pr={1} alignItems="center">
+    <Box horizontal flow={3} flex={nested ? "40%" : "30%"} pr={1} alignItems="center">
       <Box alignItems="center" justifyContent="center" style={{ color }}>
         <CryptoCurrencyIcon currency={currency} size={ICON_SIZE} />
         {nested && <NestedIndicator />}

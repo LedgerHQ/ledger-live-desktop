@@ -17,7 +17,7 @@ export default function Delta({ account, range }: Props) {
     </Text>
   );
   return (
-    <Flex justifyContent="flex-end">
+    <Flex justifyContent="flex-end" flex="20%">
       <Text variant="paragraph" fontWeight="medium">
         {!countervalueChange.percentage ? (
           placeholder

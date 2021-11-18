@@ -226,7 +226,7 @@ class AccountRowItem extends PureComponent<Props, State> {
               onClick={this.onClick}
             >
               <Header account={account} name={mainAccount.name} />
-              <Flex flex="12%">
+              <Flex flex="10%">
                 <AccountSyncStatusIndicator accountId={mainAccount.id} account={account} />
               </Flex>
               <Balance unit={unit} balance={account.balance} disableRounding={disableRounding} />

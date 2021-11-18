@@ -23,7 +23,7 @@ export default function Countervalue({ account, range, currency }: Props) {
     </Text>
   );
   return (
-    <FlexBox justifyContent="flex-start" flex="20%">
+    <FlexBox justifyContent="flex-end" flex="20%">
       <Text variant="paragraph" fontWeight="semibold">
         {histo.countervalueAvailable ? (
           <CounterValue

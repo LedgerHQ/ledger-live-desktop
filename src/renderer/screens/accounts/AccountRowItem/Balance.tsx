@@ -16,7 +16,7 @@ const Balance: React.FC<Props> = (props: Props) => {
   const theme = useTheme();
   const { unit, balance, disableRounding } = props;
   return (
-    <Flex flex="30%" flexDirection="row" alignItems="center" justifyContent="flex-start">
+    <Flex flex="20%" flexDirection="row" alignItems="center" justifyContent="flex-end">
       <Text variant="paragraph" fontWeight="medium">
         <FormattedVal
           alwaysShowSign={false}
