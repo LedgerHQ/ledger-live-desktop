@@ -2,7 +2,11 @@
 
 import React, { useMemo, useCallback } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
+import {
+  listSupportedCurrencies,
+  listTokens,
+  isCurrencySupported,
+} from "@ledgerhq/live-common/lib/currencies";
 import { findTokenAccountByCurrency } from "@ledgerhq/live-common/lib/account";
 import { supportLinkByTokenType } from "~/config/urls";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -20,8 +24,10 @@ import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 import useEnv from "~/renderer/hooks/useEnv";
 import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
 
+const listSupportedTokens = () => listTokens().filter(t => isCurrencySupported(t.parentCurrency));
+
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
-  const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
+  const currencies = useMemo(() => listSupportedCurrencies().concat(listSupportedTokens()), []);
 
   const url =
     currency && currency.type === "TokenCurrency"
