@@ -3625,8 +3625,8 @@
       "description": "Please reconnect and try again."
     },
     "EnpointConfig": {
-      "title": "Invalid endpoint",
-      "description": "Please provide a valid endpoint"
+      "title": "エンドポイントが無効です",
+      "description": "有効なエンドポイントを提供してください"
     },
     "FeeEstimationFailed": {
       "title": "Sorry, fee estimation failed",
@@ -3662,7 +3662,7 @@
     },
     "LedgerAPINotAvailable": {
       "title": "Sorry, {{currencyName}} services unavailable",
-      "description": "Please retry or contact Ledger Support"
+      "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "ManagerAppAlreadyInstalled": {
       "title": "Sorry, that's already installed",
