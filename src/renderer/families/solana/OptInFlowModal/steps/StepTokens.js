@@ -35,10 +35,9 @@ export default function StepTokens({
     ({ id: tokenId }) => {
       onUpdateTransaction(transaction =>
         bridge.updateTransaction(transaction, {
-          state: {
-            kind: "unprepared",
-            mode: {
-              kind: "token.createAssociatedTokenAccount",
+          model: {
+            kind: "token.createATA",
+            uiState: {
               tokenId,
             },
           },
