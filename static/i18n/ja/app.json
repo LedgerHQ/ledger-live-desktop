@@ -1410,7 +1410,7 @@
     "listAppsDescription": "必要な全てのアプリを確認中です。しばらくお待ちください。",
     "swap": {
       "notice": "送付する前に、スワップの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
-      "confirm": "Confirm Swap transaction",
+      "confirm": "スワップ取引を確認",
       "amountSent": "送付額",
       "amountReceived": "受取額",
       "amountReceivedFloat": "サービス手数料を含まない受け取り額",
@@ -1429,30 +1429,30 @@
     },
     "sell": {
       "notice": "送付する前に、売却の詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
-      "confirm": "Confirm Sell transaction"
+      "confirm": "売却取引を確認"
     }
   },
   "manager": {
     "tabs": {
-      "appCatalog": "App catalog",
-      "appCatalogSearch": "Search app in catalog...",
-      "appsOnDevice": "Apps installed",
-      "appOnDeviceSearch": "Search installed apps..."
+      "appCatalog": "アプリカタログ",
+      "appCatalogSearch": "カタログでアプリを検索...",
+      "appsOnDevice": "インストール済みアプリ",
+      "appOnDeviceSearch": "インストール済みアプリを検索..."
     },
     "deviceStorage": {
-      "freeSpace": "<0>{{space}}</0> free",
-      "noFreeSpace": "No storage left",
-      "installed": "Apps",
-      "capacity": "Capacity",
-      "used": "Used",
-      "firmwareAvailable": "Firmware is outdated:",
-      "firmwareUpToDate": "Firmware is up to date:",
-      "genuine": "Device is genuine",
-      "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
+      "freeSpace": "<0>{{space}}</0> 使用可能",
+      "noFreeSpace": "ストレージ容量に空きがありません。",
+      "installed": "アプリ",
+      "capacity": "容量",
+      "used": "使用中",
+      "firmwareAvailable": "ファームウェアが最新ではありません。",
+      "firmwareUpToDate": "最新のファームウェア：",
+      "genuine": "お使いのデバイスは正規品です。",
+      "incomplete": "一部のアプリが認識されませんでした。アンインストールしてから、再インストールしてください。"
     },
     "applist": {
-      "placeholder": "No match for the search with the selected filters",
-      "placeholderNoAppsInstalled": "No apps installed on your device",
+      "placeholder": "検索条件に一致するものはありません。",
+      "placeholderNoAppsInstalled": "デバイスにアプリがインストールされていません。",
       "placeholderGoToCatalog": "Go to the App catalog to install apps",
       "noResultsFound": "No results found",
       "noResultsDesc": "Please verify the spelling and try again",
@@ -1504,7 +1504,7 @@
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
         "useAppForToken": "Looking to manage {{tokenType}} tokens?",
-        "tokenAppDisclaimer": "To manage {{tokenName}} {{tokenType}} tokens, <1>install the {{appName}} app</1> and please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
+        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Go to accounts",
         "intallParentApp": "Install {{appName}} app"
