@@ -57,7 +57,7 @@ const test = base.extend<TestFixtures>({
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
         "--no-sandbox",
-        "--enable-logging",
+        "--enable-logging"
       ],
       executablePath: electronPath,
       recordVideo: {
