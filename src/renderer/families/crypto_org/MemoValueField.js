@@ -11,13 +11,15 @@ const MemoValueField = ({
   onChange,
   account,
   transaction,
+  status,
 }: {
   onChange: string => void,
   account: Account,
   transaction: Transaction,
+  status: TransactionStatus,
 }) => {
   const { t } = useTranslation();
-  invariant(transaction.family === "cosmos", "MemoTypeField: cosmos family expected");
+  invariant(transaction.family === "crypto_org", "MemoTypeField: Crypto.org family expected");
 
   const bridge = getAccountBridge(account);
 
@@ -37,7 +39,7 @@ const MemoValueField = ({
       error={status.errors.transaction}
       value={transaction.memo}
       onChange={onMemoValueChange}
-      placeholder={t("families.cosmos.memoPlaceholder")}
+      placeholder={t("cryptoOrg.memoPlaceholder")}
     />
   );
 };
