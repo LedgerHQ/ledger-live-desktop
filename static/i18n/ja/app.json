@@ -3186,84 +3186,84 @@
       "screens": {
         "accessYourCoins": {
           "title": "暗号通貨にアクセス",
-          "description": "Your crypto assets are stored on the blockchain. You need a private key to access and manage them."
+          "description": "あなたの暗号資産は、ブロックチェーンに保存されています。それらにアクセスして管理するには、秘密鍵が必要です。"
         },
         "ownYourPrivateKey": {
-          "title": "Own your private key",
-          "description": "Your private key is stored within your Nano. You must be the only one to own it to be in control of your money."
+          "title": "秘密鍵は自分で管理しましょう",
+          "description": "秘密鍵はお使いのNano上に保存されています。自分の資産は、自分だけがコントロールするべきであり、所有権を持たなければなりません。"
         },
         "stayOffline": {
-          "title": "Stay offline",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "title": "常にオフラインで保管する",
+          "description": "Nanoは、「コールドストレージ」のウォレットとして機能します。つまり、アプリを使用している間も、秘密鍵がオンラインで公開されることは絶対にありません。"
         },
         "validateTransactions": {
-          "title": "Validate transactions",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "title": "トランザクションの検証",
+          "description": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、および獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
         },
         "setUpNanoWallet": {
-          "title": "Let’s set up your Nano!",
-          "description": "We'll start by setting up your Nano security.",
-          "CTA": "Let’s do this!"
+          "title": "Nanoをセットアップしましょう！",
+          "description": "最初に、Nanoのセキュリティを設定します。",
+          "CTA": "始めましょう！"
         }
       }
     },
     "quizz": {
-      "heading": "Quiz",
-      "title": "Now game on!",
-      "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
+      "heading": "クイズ",
+      "title": "さっそく始めましょう！",
+      "descr": "ハードウェアウォレットに関するよくある誤解を解消するため、3つの簡単な質問にお答えください。",
       "buttons": {
-        "start": "Let’s take the quiz",
-        "next": "Next question",
+        "start": "クイズをはじめる",
+        "next": "次の質問",
         "finish": "クイズを終了"
       },
       "questions": {
         "1": {
-          "text": "As a Ledger user, my crypto is stored:",
+          "text": "Ledgerユーザーの暗号資産が保管される場所は：",
           "answers": {
-            "1": "On my Nano",
-            "2": "On the blockchain"
+            "1": "Nanoデバイス上",
+            "2": "ブロックチェーン上"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "正解！",
+              "text": "あなたの暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives you access to your crypto."
+              "title": "不正解！",
+              "text": "あなたの暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
             }
           }
         },
         "2": {
-          "text": "If my recovery phrase is no longer secure or private...",
+          "text": "リカバリーフレーズを誰かに知られてしまうと...",
           "answers": {
-            "1": "No problem, Ledger can send me a copy",
-            "2": "My crypto is no longer safe and I need to transfer them to a secure place"
+            "1": "Ledgerに確認すれば教えてもらえるので問題ない",
+            "2": "暗号資産が安全な状態でなくなるため、別の安全な場所に移さなければならない"
           },
           "results": {
             "success": {
-              "title": "Congrats!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "正解！",
+              "text": "リカバリーフレーズを他人に知られてしまうと、簡単に暗号資産を盗まれてしまいます。\n紛失した場合は、すぐに暗号資産を安全な場所に移さなければなりません。"
             },
             "fail": {
-              "title": "Incorrect!",
-              "text": "Anyone who knows your recovery phrase can steal your crypto assets. \nIf you lose it, you must quickly transfer your crypto to a secure place."
+              "title": "不正解！",
+              "text": "リカバリーフレーズを他人に知られてしまうと、簡単に暗号資産を盗まれてしまいます。\n紛失した場合は、すぐに暗号資産を安全な場所に移さなければなりません。"
             }
           }
         },
         "3": {
-          "text": "When I connect my Nano to the Ledger app, my private key is...",
+          "text": "NanoをLedgerアプリに接続すると、私の秘密鍵は...",
           "answers": {
-            "1": "Still offline",
-            "2": "Briefly connected to the internet"
+            "1": "オフライン状態のまま",
+            "2": "短時間だけオンライン状態になる"
           },
           "results": {
             "success": {
               "title": "Congrats!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "秘密鍵は、ハードウェアウォレットに常にオフラインで保管されます。Nanoに接続されていても、Ledgerアプリは秘密鍵にはアクセスできません。そのため、デバイス上ですべてのトランザクションを毎回手動で認証する必要があります。"
             },
             "fail": {
-              "title": "Incorrect!",
+              "title": "不正解！",
               "text": "秘密鍵は、ハードウェアウォレットに常にオフラインで保管されます。Nanoに接続されていても、Ledgerアプリは秘密鍵にはアクセスできません。そのため、デバイス上ですべてのトランザクションを毎回手動で認証する必要があります。"
             }
           }
@@ -3411,21 +3411,21 @@
     "message": "メッセージ"
   },
   "TransactionConfirm": {
-    "title": "Please confirm the operation on your device to finalize it",
-    "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
-    "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
+    "title": "デバイス上で処理を確定してください。",
+    "warning": "デバイス上に表示されているアドレスが、{{recipientWording}} から受け取ったものと完全に一致しているか、毎回必ず確認してください。",
+    "secureContract": "送付する前に、デポジットの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
     "verifyData": "必ず、操作の詳細をデバイス上で確認してください。",
     "warningWording": {},
     "titleWording": {
-      "send": "Please confirm on your device to finalize the operation",
-      "claimReward": "Please confirm on your device to finalize the operation",
-      "freeze": "Please confirm on your device to finalize the operation",
-      "unfreeze": "Please confirm on your device to finalize the operation",
-      "vote": "Please confirm on your device to finalize the operation",
-      "delegate": "Please confirm on your device to finalize the operation",
-      "undelegate": "Please confirm on your device to finalize the operation",
+      "send": "操作を完了するために、デバイスで確認してください。",
+      "claimReward": "操作を完了するために、デバイスで確認してください。",
+      "freeze": "操作を完了するために、デバイスで確認してください。",
+      "unfreeze": "操作を完了するために、デバイスで確認してください。",
+      "vote": "操作を完了するために、デバイスで確認してください。",
+      "delegate": "操作を完了するために、デバイスで確認してください。",
+      "undelegate": "操作を完了するために、デバイスで確認してください。",
       "redelegate": "操作を完了するために、デバイスで確認してください。",
-      "claimRewardCompound": "Please confirm on your device to finalize the operation",
+      "claimRewardCompound": "操作を完了するために、デバイスで確認してください。",
       "nominate": "操作を完了するために、デバイスで確認してください。",
       "chill": "操作を完了するために、デバイスで確認してください。",
       "bond": "操作を完了するために、デバイスで確認してください。",
@@ -3435,10 +3435,10 @@
       "setController": "操作を完了するために、デバイスで確認してください。"
     },
     "recipientWording": {
-      "send": "recipient",
-      "delegate": "validator",
-      "undelegate": "validator",
-      "claimReward": "rewards recipient",
+      "send": "受取人",
+      "delegate": "バリデータ",
+      "undelegate": "バリデータ",
+      "claimReward": "報酬受取人",
       "optIn": "recipient",
       "nominate": "バリデータ",
       "erc721": {
@@ -3578,120 +3578,120 @@
     },
     "CosmosBroadcastCodeTooManySignatures": {
       "title": "Something went wrong (Error #15)",
-      "description": "Please contact Ledger Support"
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeGasOverflow": {
-      "title": "Something went wrong (Error #16)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#16）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CosmosBroadcastCodeNoSignatures": {
-      "title": "Something went wrong (Error #17)",
-      "description": "Please contact Ledger Support"
+      "title": "問題が発生しました（エラー#17）",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "CurrencyNotSupported": {
-      "title": "{{currencyName}} is not supported",
-      "description": "This crypto asset is not yet supported. Please contact Ledger Support."
+      "title": "{{currencyName}} には対応していません。",
+      "description": "この暗号資産には、まだ対応していません。Ledgerサポートにお問い合わせください。"
     },
     "DeviceNotGenuine": {
       "title": "正規品でない可能性があります",
-      "description": "Request assistance from Ledger Support"
+      "description": "Ledgerサポートのアシスタントを依頼する。"
     },
     "DeviceGenuineSocketEarlyClose": {
-      "title": "Sorry, try again (genuine-close)",
+      "title": "もう一度やり直してください。(genuine-close)",
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Sorry, update failed",
-      "description": "Please retry or contact Ledger Support"
+      "title": "申し訳ありません。アップデートに失敗しました。",
+      "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "DeviceHalted": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again"
+      "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
+      "description": "予期しないエラーが発生しました。もう一度お試しください。"
     },
     "DeviceSocketFail": {
-      "title": "Please restart your Ledger device and retry",
-      "description": "An unexpected error occurred. Please try again. ({{message}})"
+      "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
+      "description": "予期せぬエラーが発生しました。後でもう一度お試しください。{{message}}"
     },
     "DeviceSocketNoBulkStatus": {
-      "title": "The connection failed",
-      "description": "Please try again."
+      "title": "接続に失敗しました。",
+      "description": "もう一度お試しください。"
     },
     "DisconnectedDevice": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "デバイスの接続が切断されているようです。",
+      "description": "デバイスを再接続して、もう一度お試しください。"
     },
     "DisconnectedDeviceDuringOperation": {
-      "title": "Sorry, it looks like your device disconnected",
-      "description": "Please reconnect and try again."
+      "title": "デバイスの接続が切断されているようです。",
+      "description": "デバイスを再接続して、もう一度お試しください。"
     },
     "EnpointConfig": {
       "title": "エンドポイントが無効です",
       "description": "有効なエンドポイントを提供してください"
     },
     "FeeEstimationFailed": {
-      "title": "Sorry, fee estimation failed",
-      "description": "Try setting a custom fee (status: {{status}})"
+      "title": "手数料見積もりに失敗しました。",
+      "description": "カスタム手数料を設定してみてください。（ステータス： {{status}}）"
     },
     "FirmwareOrAppUpdateRequired": {
-      "title": "Firmware or app update required",
-      "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
+      "title": "ファームウェアまたはアプリのアップデートが必要です。",
+      "description": "マネージャーを使用してすべてのアプリをアンインストールし、ファームウェアのアップデートが利用可能かどうかを確認してから、アプリを再インストールしてください。"
     },
     "LatestFirmwareVersionRequired": {
       "title": "Nanoファームウェアのアップデート",
       "description": "この機能にアクセスするには、ファームウェアを最新バージョンにアップデートしてください。"
     },
     "FirmwareNotRecognized": {
-      "title": "Device firmware is not recognized",
-      "description": "Please contact Ledger Support"
+      "title": "デバイスのファームウェアが認識されません。",
+      "description": "Ledgerサポートにお問合せください。"
     },
     "HardResetFail": {
-      "title": "Sorry, could not reset",
-      "description": "Please try again or contact Ledger Support if the problem persists."
+      "title": "リセットできませんでした。",
+      "description": "問題が解決しない場合は、再度お試しいただくか、Ledgerサポートにお問い合わせください。"
     },
     "LatestMCUInstalledError": {
-      "title": "Sorry, there's nothing to update",
-      "description": "Please contact Ledger Support if you cannot use your device."
+      "title": "アップデートの必要はありません。",
+      "description": "デバイスを使用できない場合は、Ledgerサポートに連絡してください。"
     },
     "LedgerAPI4xx": {
       "title": "{{message}}",
-      "description": "Please check your connection and try again or contact Ledger Support."
+      "description": "接続を確認して再試行するか、またはLedgerサポートにお問い合わせください。"
     },
     "LedgerAPI5xx": {
-      "title": "Sorry, try again.",
-      "description": "The server could not handle your request. Please try again later or contact Ledger Support. {{message}}"
+      "title": "再試行してください。",
+      "description": "サーバーは要求を処理できませんでした。後ほどもう一度試すか、Ledgerサポートにお問い合わせください。 {{message}}"
     },
     "LedgerAPINotAvailable": {
-      "title": "Sorry, {{currencyName}} services unavailable",
+      "title": "申し訳ございません。{{currencyName}} サービスをご利用いただけません。",
       "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "ManagerAppAlreadyInstalled": {
-      "title": "Sorry, that's already installed",
-      "description": "Please check which apps are already installed on your device."
+      "title": "すでにインストールされています。",
+      "description": "デバイスにどのアプリがすでにインストールされているか、ご確認ください。"
     },
     "ManagerAppDepInstallRequired": {
-      "title": "{{dependency}} app required",
-      "description": "If the {{dependency}} app is already installed, please reinstall it with the latest version"
+      "title": "{{dependency}} アプリが必要です。",
+      "description": "{{dependency}} アプリがすでにインストールされている場合は、最新バージョンで再インストールしてください。"
     },
     "ManagerAppDepUninstallRequired": {
-      "title": "Sorry, this app is required",
-      "description": "You must first uninstall all apps that require the {{appName}} app"
+      "title": "このアプリは必須です。",
+      "description": "{{appName}} アプリを必要とする、すべてのアプリをアンインストールしてください。"
     },
     "ManagerDeviceLocked": {
-      "title": "Your device is locked",
-      "description": "Please unlock it"
+      "title": "デバイスがロックされています。",
+      "description": "ロックを解除してください。"
     },
     "ManagerFirmwareNotEnoughSpace": {
-      "title": "Uninstall all apps from your device",
-      "description": "The private keys to access your crypto assets will stay safe on your device and must be backed up on your Recovery sheet."
+      "title": "デバイスからすべてのアプリをアンインストール",
+      "description": "暗号資産にアクセスするための秘密鍵はデバイス上で安全に保管し、リカバリシートにバックアップする必要があります。"
     },
     "ManagerNotEnoughSpace": {
-      "title": "Sorry, not enough storage left",
-      "description": "Uninstall some apps to free up space. The private keys to access your crypto assets will stay safe on your device."
+      "title": "ストレージの残量が不足しています。",
+      "description": "スペースを確保するために、いくつかのアプリをアンインストールしてください。暗号資産にアクセスするための秘密鍵はデバイス上で安全に保管されます。"
     },
     "ManagerQuitPage": {
       "install": {
-        "title": "Finish app installation in progress?",
-        "description": "Quitting the Manager will terminate the app installation. Please finish the installation to install the apps in the queue.",
+        "title": "アプリのインストールを終了しますか？",
+        "description": "マネージャーを終了するとアプリのインストールが終了します。待機中アプリのインストールを完了してください。",
         "stay": "Finish install"
       },
       "uninstall": {
