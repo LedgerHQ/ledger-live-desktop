@@ -106,6 +106,12 @@ export default function StepAccount({
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   const tokenTypes = mainAccount ? listTokenTypesForCryptoCurrency(mainAccount.currency) : [];
 
+  // Nb in the context of LL-6449 (nft integration) simplified the wording for the warning.
+  const tokenType =
+    mainAccount?.currency.name === "Ethereum"
+      ? mainAccount.currency.name
+      : tokenTypes.map(tt => tt.toUpperCase()).join("/");
+
   const url = supportLinkByTokenType[tokenTypes[0]];
 
   return (
@@ -136,12 +142,12 @@ export default function StepAccount({
                 account.type === "TokenAccount"
                   ? {
                       token: account.token.name,
-                      tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                      tokenType,
                       currency: mainAccount && mainAccount.currency.name,
                     }
                   : {
                       ticker: account.currency.ticker,
-                      tokenType: tokenTypes.map(tt => tt.toUpperCase()).join("/"),
+                      tokenType,
                       currency: account.currency.name,
                     }
               }

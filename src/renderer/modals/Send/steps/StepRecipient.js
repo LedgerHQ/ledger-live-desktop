@@ -10,6 +10,7 @@ import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAle
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import Label from "~/renderer/components/Label";
 import SelectAccount from "~/renderer/components/SelectAccount";
+import SelectNFT from "~/renderer/screens/nft/Send/SelectNFT";
 
 import SendRecipientFields, { getFields } from "../SendRecipientFields";
 import RecipientField from "../fields/RecipientField";
@@ -31,7 +32,11 @@ const StepRecipient = ({
   bridgePending,
   maybeRecipient,
   onResetMaybeRecipient,
+  maybeNFTId,
   currencyName,
+  isNFTSend,
+  onChangeNFT,
+  maybeNFTCollection,
 }: StepProps) => {
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
@@ -41,16 +46,27 @@ const StepRecipient = ({
       <TrackPage category="Send Flow" name="Step Recipient" currencyName={currencyName} />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
-      <Box flow={1}>
-        <Label>{t("send.steps.details.selectAccountDebit")}</Label>
-        <SelectAccount
-          withSubAccounts
-          enforceHideEmptySubAccounts
-          autoFocus={!openedFromAccount}
-          onChange={onChangeAccount}
-          value={account}
-        />
-      </Box>
+      {isNFTSend ? (
+        <Box flow={1}>
+          <Label>{t("send.steps.recipient.nftRecipient")}</Label>
+          <SelectNFT
+            onSelect={onChangeNFT}
+            maybeNFTId={maybeNFTId}
+            maybeNFTCollection={maybeNFTCollection}
+          />
+        </Box>
+      ) : (
+        <Box flow={1}>
+          <Label>{t("send.steps.details.selectAccountDebit")}</Label>
+          <SelectAccount
+            withSubAccounts
+            enforceHideEmptySubAccounts
+            autoFocus={!openedFromAccount}
+            onChange={onChangeAccount}
+            value={account}
+          />
+        </Box>
+      )}
       <StepRecipientSeparator />
       {account && transaction && mainAccount && (
         <>

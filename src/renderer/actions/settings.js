@@ -25,6 +25,7 @@ export const saveSettings: SaveSettings = payload => ({
 export const setCountervalueFirst = (countervalueFirst: boolean) =>
   saveSettings({ countervalueFirst });
 export const setAccountsViewMode = (accountsViewMode: *) => saveSettings({ accountsViewMode });
+export const setNftsViewMode = (nftsViewMode: *) => saveSettings({ nftsViewMode });
 export const setSelectedTimeRange = (selectedTimeRange: PortfolioRange) =>
   saveSettings({ selectedTimeRange });
 export const setDeveloperMode = (developerMode: boolean) => saveSettings({ developerMode });
