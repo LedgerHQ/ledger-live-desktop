@@ -2497,7 +2497,7 @@
         },
         "validator": {
           "title": "Select validator",
-          "description": "You can select a validator by comparing the estimated reward rates",
+          "description": "推定報酬率を比較することでバリデータを選択できます。",
           "customValidator": "Custom validator",
           "providedBy": "Yield rates provided by <1><0>{{name}}</0></1>"
         },
