@@ -2149,7 +2149,7 @@
     "claimRewards": {
       "header": "Rewards",
       "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
-      "cta": "Claim rewards",
+      "cta": "報酬獲得を申請",
       "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
       "flow": {
         "title": "Claim rewards",
