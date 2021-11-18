@@ -18,13 +18,13 @@ export default function Countervalue({ account, range, currency }: Props) {
   const balanceEnd = histo.history[histo.history.length - 1].value;
   const theme = useTheme();
   const placeholder = (
-    <Text variant="paragraph" fontWeight="semibold">
+    <Text variant="paragraph" fontWeight="semiBold">
       -
     </Text>
   );
   return (
     <FlexBox justifyContent="flex-end" flex="20%">
-      <Text variant="paragraph" fontWeight="semibold">
+      <Text variant="paragraph" fontWeight="semiBold">
         {histo.countervalueAvailable ? (
           <CounterValue
             currency={currency}

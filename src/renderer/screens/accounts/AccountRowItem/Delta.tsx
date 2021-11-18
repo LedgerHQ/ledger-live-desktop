@@ -12,7 +12,7 @@ type Props = {
 export default function Delta({ account, range }: Props) {
   const { countervalueChange } = useBalanceHistoryWithCountervalue({ account, range });
   const placeholder = (
-    <Text variant="paragraph" fontWeight="semibold">
+    <Text variant="paragraph" fontWeight="semiBold">
       -
     </Text>
   );
