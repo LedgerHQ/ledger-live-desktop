@@ -50,7 +50,7 @@ const Header = ({ account, nested }: Props) => {
         {!isToken && (
           <Tooltip delay={1200} content={accountName}>
             <Ellipsis>
-              <Text variant="paragraph" fontWeight="medium" color="palette.neutral.c80">
+              <Text variant="paragraph" fontWeight="medium" color="palette.neutral.c70">
                 {accountName}
                 <AccountTagDerivationMode account={account} />
               </Text>

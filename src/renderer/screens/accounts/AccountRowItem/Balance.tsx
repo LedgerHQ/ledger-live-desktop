@@ -22,7 +22,7 @@ const Balance: React.FC<Props> = (props: Props) => {
           alwaysShowSign={false}
           animateTicker={false}
           ellipsis
-          color={theme.colors.palette.neutral.c80}
+          color={theme.colors.palette.neutral.c70}
           unit={unit}
           showCode
           val={balance}
