@@ -1349,7 +1349,7 @@
     "tokenOperations": "Token operations",
     "subAccountOperations": "Subaccount operations",
     "tokenTooltip": "This operation is related to the following token operations",
-    "subAccountTooltip": "This operation is related to the following subaccount operations",
+    "subAccountTooltip": "この操作は、次のサブアカウントオペレーションに関連しています。",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
