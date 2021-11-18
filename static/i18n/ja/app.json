@@ -3794,26 +3794,26 @@
     },
     "UnexpectedBootloader": {
       "title": "デバイスがBootloader（ブートローダー）モードになってしまっています。",
-      "description": "Please restart your device without touching the buttons when the logo appears. Contact Ledger Support if the problem persists."
+      "description": "デバイスを再起動するか、Ledgerサポートにお問い合わせください。"
     },
     "UserRefusedAllowManager": {
-      "title": "Manager denied on device"
+      "title": "デバイスのマネージャーが却下されました。"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "デバイス上でアップデートがキャンセルされました。",
       "description": "デバイス上のすべてのアプリがアンインストールされました。セキュリティや改善された機能を利用するために、お使いのデバイスを常に最新の状態に保ってください。"
     },
     "UserRefusedOnDevice": {
-      "title": "Action rejected",
-      "description": "User rejected the operation on the device"
+      "title": "アクションが拒否されました。",
+      "description": "デバイス上で処理を拒否しました。"
     },
     "TransactionRefusedOnDevice": {
-      "title": "Operation denied on device",
-      "description": "Please retry or contact Ledger Support if in doubt"
+      "title": "デバイス上で操作が却下されました。",
+      "description": "再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "UserRefusedAddress": {
-      "title": "Receive address rejected",
-      "description": "Please try again or contact Ledger Support if in doubt"
+      "title": "受取アドレスが却下されました。",
+      "description": "再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "UpdateYourApp": {
       "title": "アプリのアップデートが必要です。",
@@ -3821,101 +3821,101 @@
     },
     "DeviceOnDashboardExpected": {
       "title": "ダッシュボードに戻る",
-      "description": "Please navigate back to the Dashboard on your device"
+      "description": "デバイスのダッシュボードに戻ってください。"
     },
     "WebsocketConnectionError": {
-      "title": "Sorry, try again (connection error)",
+      "title": "もう一度お試しください。（接続エラー）",
       "description": null
     },
     "WebsocketConnectionFailed": {
-      "title": "Sorry, try again (connection closed)",
+      "title": "申し訳ありませんが、もう一度お試しください。（接続が切断されました）",
       "description": null
     },
     "WrongDeviceForAccount": {
-      "title": "Something went wrong",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "title": "問題が発生しました。",
+      "description": "ハードウェアウォレットに、選択したアカウントのリカバリーフレーズ、またはパスフレーズが設定されていることを確認してください。"
     },
     "DeviceAppVerifyNotSupported": {
       "title": "アプリのアップデートが必要です。",
       "description": "マネージャーで{{managerAppName}} アプリをアンインストールし、再インストールしてください。"
     },
     "InvalidAddress": {
-      "title": "This is not a valid {{currencyName}} address"
+      "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "Recipient address is the same as the sender address"
+      "title": "受取人のアドレスと送付者のアドレスが同じです。"
     },
     "CantOpenDevice": {
-      "title": "Sorry, connection failed",
-      "description": "Device detected but connection failed. Please try again or contact Ledger Support if the problem persists."
+      "title": "接続に失敗しました。",
+      "description": "デバイスが検出されましたが、接続に失敗しました。再試行するか、問題が解決しない場合はLedgerサポートにお問い合わせください。"
     },
     "ETHAddressNonEIP": {
-      "title": "Auto-verification not available: carefully verify the address",
+      "title": "自動認証が利用できません：アドレスを慎重に確認してください。",
       "description": null
     },
     "CantScanQRCode": {
       "title": "このQRコードをスキャンできませんでした：このアドレスでは自動認証がサポートされていません。"
     },
     "FeeNotLoaded": {
-      "title": "Couldn't load fee rates. Please set manual fees"
+      "title": "手数料を読み込めませんでした。マニュアル手数料を設定してください。"
     },
     "FeeRequired": {
       "title": "手数料が必要です。"
     },
     "GasLessThanEstimate": {
-      "title": "This may be too low. Please increase"
+      "title": "低すぎる可能性があります。増やしてください。"
     },
     "UnknownMCU": {
-      "title": "Unknown MCU version",
+      "title": "不明なMCUバージョンです。",
       "description": "Ledgerサポートにご連絡ください。"
     },
     "MCUNotGenuineToDashboard": {
-      "title": "Access dashboard to update",
+      "title": "ダッシュボードにアクセスしてアプデート",
       "description": "",
       "list": {
-        "1": "Disconnect and reconnect the USB cable without pressing any buttons.",
-        "2": "Press both buttons together three times to display the Dashboard.",
-        "3": "Open the Manager and click Update firmware."
+        "1": "ボタンを押さずにUSBケーブルの取り外しや再接続をしてください。",
+        "2": "両方のボタンを同時に3回押すと、ダッシュボードが表示されます。",
+        "3": "マネージャーを開き、ファームウェアをアップデートをクリック。"
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
-      "title": "Cannot receive in subaccounts",
-      "description": "If you want to receive funds, please use the parent account"
+      "title": "サブアカウントでは受け取れません。",
+      "description": "資金を受け取る場合は、親アカウントを使用してください。"
     },
     "UnavailableTezosOriginatedAccountSend": {
-      "title": "Cannot send from subaccounts yet",
-      "description": "This feature will be added at a later stage due to changes recently introduced by the Babylon update."
+      "title": "サブアカウントからは送付できません。",
+      "description": "この機能は、最近のBabylonアップデートで導入された変更のため、後から追加される予定です。"
     },
     "RecommendUndelegation": {
-      "title": "Please undelegate the account before emptying it"
+      "title": "アカウントを空にする前に、デリゲートを解除してください。"
     },
     "RecommendSubAccountsToEmpty": {
-      "title": "Please empty all subaccounts first"
+      "title": "まず、すべてのサブアカウントを空にしてください。"
     },
     "NotSupportedLegacyAddress": {
-      "title": "This legacy address format is no longer supported"
+      "title": "レガシーアドレス形式はサポートを終了しました。"
     },
     "BtcUnmatchedApp": {
-      "title": "That's the wrong app",
-      "description": "Open the '{{managerAppName}}' app on your device"
+      "title": "間違ったアプリです。",
+      "description": "デバイス上で{{managerAppName}} アプリを開いてください。"
     },
     "DeviceNameInvalid": {
-      "title": "Please choose a device name without '{{invalidCharacters}}'"
+      "title": "'{{invalidCharacters}}'を使わずに、デバイスに名前を付けてください。"
     },
     "LedgerAPIErrorWithMessage": {
       "title": "{{message}}",
-      "description": "Please retry or contact Ledger Support."
+      "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "Bitcoin and Ethereum apps required",
-      "description": "Install the latest Bitcoin and Ethereum apps first."
+      "title": "ビットコインアプリとイーサリアムアプリが必要です。",
+      "description": "最新版のビットコインアプリとイーサリアムアプリを、最初にインストールしてください。"
     },
     "UserRefusedDeviceNameChange": {
-      "title": "Rename cancelled on device",
-      "description": "Try again and allow renaming on your device"
+      "title": "デバイス上で名前の変更がキャンセルされました。",
+      "description": "もう一度やり直して、デバイスの名前を変更してください。"
     },
     "SyncError": {
-      "title": "Synchronization error",
+      "title": "同期エラー",
       "description": "一部のアカウントを同期できませんでした。"
     },
     "TronNoFrozenForBandwidth": {
