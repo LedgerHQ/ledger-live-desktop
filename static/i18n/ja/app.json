@@ -1555,18 +1555,18 @@
     "modal": {
       "steps": {
         "downloadingUpdate": "Downloading update",
-        "updateMCU": "Firmware update",
+        "updateMCU": "ファームウェアをアップデート",
         "updating": "ファームウェアをアップデート",
         "reset": "Prepare device",
-        "osu": "Installing OSU...",
+        "osu": "OSUをインストール中...",
         "flash-mcu": "MCU updating...",
         "flash-bootloader": "Bootloader updating...",
-        "firmware": "Firmware updating...",
+        "firmware": "ファームウェアのアップデート中…",
         "flash": "Preparing your device..."
       },
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
-      "identifier": "Identifier",
+      "identifier": "識別子",
       "preparation": "準備",
       "newFirmware": "新しいファームウェア{{version}}",
       "confirmUpdate": "アップデートをデバイスで確定してください。",
