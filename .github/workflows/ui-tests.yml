@@ -29,8 +29,6 @@ jobs:
       # - name: install and switch to GCC 5.4
       #   if: matrix.os == 'ubuntu-20.04'
       #   run: ./tools/g++-5.4/install.sh
-      - name: install operating system dependencies
-        run: npx playwright install-deps
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -46,9 +44,11 @@ jobs:
         run: yarn --frozen-lockfile
       - name: build electron app
         run: yarn build
+      - name: install operating system dependencies
+        run: npx playwright install-deps
       - name: prepare graphical environment (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: Xvfb $DISPLAY -screen 0 1920x1080x24 &
+        run: xvfb-run npx playwright playwright/specs/onboarding.spec.ts -c playwright/playwright.config.ts
         env:
           DISPLAY: :99
       - name: run ui tests
