@@ -1065,7 +1065,7 @@
     },
     "buyCrypto": {
       "title": "暗号資産を購入する",
-      "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
+      "description": "暗号資産を購入し、Ledgerアカウントで直接受け取ることができます。",
       "cta": "今すぐ購入する"
     },
     "familyPack": {
@@ -1091,11 +1091,11 @@
     },
     "lending": {
       "title": "暗号資産をレンディング（貸し出す）",
-      "description": "Lend stablecoins to the Compound protocol and earn interests today"
+      "description": "コンパウンドプロトコルにステーブルコインを貸し出し、利息を得ることができます。"
     },
     "blackfriday": {
-      "title": "BLACK FRIDAY ",
-      "description": "Enjoy 40% off Ledger hardware wallets with the promo code BLACKFRIDAY20"
+      "title": "ブラックフライデー",
+      "description": "プロモーションコードBLACKFRIDAY20のご利用で、Ledgerハードウェアウォレットが40%オフになります。"
     }
   },
   "signmessage": {
@@ -1137,41 +1137,41 @@
   "dashboard": {
     "title": "ポートフォリオ",
     "emptyAccountTile": {
-      "desc": "Add accounts to manage other crypto assets",
+      "desc": "アカウントを追加して、他の暗号資産を管理",
       "createAccount": "アカウントを追加"
     },
-    "recentActivity": "Latest operations",
+    "recentActivity": "前回のオペレーション",
     "totalBalance": "合計残高",
-    "transactionsPendingConfirmation": "Some transactions are not confirmed yet. These will be reflected in your balance and useable after being confirmed."
+    "transactionsPendingConfirmation": "一部のトランザクションはまだ承認されていません。これらは承認後に残高に反映され、使用可能になります。"
   },
   "currentAddress": {
     "title": "現在のアドレス",
     "for": "<1><0>{{name}}</0></1>アドレス",
-    "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
+    "messageIfUnverified": "共有アドレスが、お使いのデバイスのアドレスと完全に一致していることを確認してください。",
     "messageIfSkipped": "{{name}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。",
     "showQrCode": "QRコードを表示"
   },
   "emptyState": {
     "dashboard": {
-      "title": "Install apps on your device",
-      "desc": "Go to the Manager to install apps on your device. You can add accounts once you have apps on your device.",
+      "title": "デバイスにアプリをインストールする",
+      "desc": "デバイスにアプリをインストールするには、マネージャーに移動してください。デバイスにアプリを入手後、アカウントの追加が可能になります。",
       "buttons": {
         "installApp": "マネージャーに移動",
         "help": "ヘルプ"
       }
     },
     "accounts": {
-      "title": "Add an account to get started",
+      "title": "アカウントを追加してスタートする",
       "desc": "暗号資産の管理を開始するにはアカウントを追加してください。デバイスに暗号資産のアプリがインストールされている必要があります。",
       "buttons": {
         "addAccount": "アカウントを追加",
-        "installApp": "Go to Manager to install apps",
-        "help": "Help"
+        "installApp": "アプリをインストールするにはマネージャーに移動してください。",
+        "help": "ヘルプ"
       }
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
+    "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "NFT": {
     "viewer": {
@@ -1216,36 +1216,36 @@
     }
   },
   "tokensList": {
-    "title": "Tokens",
-    "cta": "Add token",
-    "placeholder": "To add tokens, simply send them to your {{currencyName}} address.",
-    "link": "Learn more",
-    "seeTokens": "Show tokens ({{tokenCount}})",
-    "hideTokens": "Hide tokens ({{tokenCount}})",
-    "countTooltip": "1 token",
-    "countTooltip_plural": "{{count}} tokens",
+    "title": "トークン",
+    "cta": "トークンの追加",
+    "placeholder": "トークンを追加するには、 {{currencyName}} アドレスにトークンを送付してください。",
+    "link": "詳細はこちら",
+    "seeTokens": "トークンを表示 ({{tokenCount}})",
+    "hideTokens": "トークンを非表示 ({{tokenCount}})",
+    "countTooltip": "1トークン",
+    "countTooltip_plural": "{{count}} トークン",
     "algorand": {
-      "title": "ASA (Assets)",
-      "cta": "Add ASA",
-      "placeholder": "You can add assets to your {{currencyName}} account.",
-      "link": "How Assets (ASA) works?",
-      "seeTokens": "Show ASA ({{tokenCount}})",
-      "hideTokens": "Hide ASA ({{tokenCount}})"
+      "title": "ASA（資産）",
+      "cta": "ASAを追加",
+      "placeholder": "{{currencyName}} アカウントに資産を追加できます。",
+      "link": "資産（ASA）とは？",
+      "seeTokens": "ASA を表示 ({{tokenCount}})",
+      "hideTokens": "ASAを非表示 ({{tokenCount}})"
     }
   },
   "subAccounts": {
-    "title": "Subaccounts",
-    "seeSubAccounts": "Show subaccounts ({{tokenCount}})",
-    "hideSubAccounts": "Hide subaccounts ({{tokenCount}})",
-    "countTooltip": "1 subaccount",
-    "countTooltip_plural": "{{count}} subaccounts"
+    "title": "サブアカウント",
+    "seeSubAccounts": "サブアカウントを表示 ({{tokenCount}})",
+    "hideSubAccounts": "サブアカウントを非表示 ({{tokenCount}})",
+    "countTooltip": "1 サブアカウント",
+    "countTooltip_plural": "{{count}} サブアカウント"
   },
   "migrateAccounts": {
     "overview": {
-      "title": "Ledger Live accounts update",
-      "successTitle": "Accounts updated successfully",
-      "successDescPlu": "Your {{assets}} accounts are now updated and ready to use",
-      "successDesc": "Your {{assets}} account is now updated and ready to use",
+      "title": "Ledger Liveアカウントのアップデート",
+      "successTitle": "アカウントが正常にアップデートされました。",
+      "successDescPlu": "{{assets}} アカウントがアップデートされ、使用可能になりました。",
+      "successDesc": "{{assets}} アカウントが更新され、使用できるようになりました。",
       "mobileTitle": "Export accounts to mobile",
       "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
       "mobileCTA": "Export to mobile",
