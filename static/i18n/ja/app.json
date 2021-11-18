@@ -2539,13 +2539,13 @@
     }
   },
   "settings": {
-    "title": "Settings",
+    "title": "設定",
     "discreet": "Toggle discreet mode",
     "helpButton": "Help",
     "tabs": {
-      "display": "General",
+      "display": "一般",
       "currencies": "Crypto assets",
-      "help": "Help",
+      "help": "ヘルプ",
       "about": "About",
       "experimental": "Experimental features",
       "accounts": "Accounts",
@@ -2553,16 +2553,16 @@
     },
     "export": {
       "accounts": {
-        "title": "Export accounts",
+        "title": "アカウントをエクスポート",
         "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
-        "button": "Export"
+        "button": "エクスポート"
       },
       "operations": {
         "title": "Operation history",
         "desc": "Save a CSV file of your account operations on your computer."
       },
       "modal": {
-        "button": "Done",
+        "button": "完了",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
         "step1": "<highlight><icon>+</icon></highlight>ボタンをタップ（「<highlight>アカウント</highlight>」内）",
