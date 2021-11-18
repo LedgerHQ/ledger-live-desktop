@@ -2626,13 +2626,13 @@
       "hardReset": "リセット",
       "analytics": "アナリティクス",
       "analyticsDesc": "Ledgerがユーザーエクスペリエンスを改善できるよう、アナリティクスを有効にしてください。これに含まれるのは、クリック、ページの閲覧、リダイレクト、アクション（送金、着金、ロックなど）、ページ末へのスクロール、アプリの（アン）インストール、アプリのバージョン、アカウント数、暗号資産と操作、セッションの持続時間、Ledgerデバイスの種類とファームウェアです。",
-      "reportErrors": "Bug reports",
+      "reportErrors": "バグのレポート",
       "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
-      "launchOnboarding": "Device setup",
+      "launchOnboarding": "デバイスの設定",
       "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
     },
     "help": {
-      "version": "Version",
+      "version": "バージョン",
       "releaseNotesBtn": "Details",
       "termsBtn": "Read",
       "faq": "Ledger Support",
@@ -2704,18 +2704,18 @@
     "openUserDataDirectory": {
       "title": "View user data",
       "desc": "View the user data stored on your computer, including your accounts, caches and settings.",
-      "btn": "View"
+      "btn": "表示"
     },
     "repairDevice": {
-      "title": "Repair your Ledger device",
+      "title": "Ledgerデバイスの修理",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
       "desc": "Ledger Nano Sをお使いの場合は、デバイスの状態を選択してください。Nano XまたはBlueをお使いの場合は、ヘルプセンターをご参照ください。",
-      "button": "Repair"
+      "button": "修理"
     },
     "exportLogs": {
       "title": "Save logs",
       "desc": "Saving Ledger Live logs may be needed for troubleshooting purposes.",
-      "btn": "Save"
+      "btn": "保存"
     },
     "accounts": {
       "hideEmptyTokens": {
@@ -2743,20 +2743,20 @@
         "label": "Confirm password"
       },
       "currentPassword": {
-        "label": "Current password"
+        "label": "現在のパスワード"
       }
     },
     "changePassword": {
-      "title": "Password lock",
-      "subTitle": "Change your password"
+      "title": "パスワードロック",
+      "subTitle": "パスワードを変更"
     },
     "setPassword": {
-      "title": "Password lock",
+      "title": "パスワードロック",
       "subTitle": "Set the password",
       "desc": "Keep your password safe. Losing it means resetting Ledger Live and adding the accounts again."
     },
     "disablePassword": {
-      "title": "Disable password lock",
+      "title": "パスワードロックを無効にする",
       "desc": "Ledger Live data will be stored unencrypted on your computer. This includes account names, transactions and public addresses."
     }
   },
