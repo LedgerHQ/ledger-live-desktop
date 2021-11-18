@@ -82,7 +82,6 @@ const TokenSelection = ({
 }) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency]);
 
-  console.log(tokens)
   return (
     <>
       <Label mt={30}>

@@ -22,7 +22,7 @@ import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/
 
 const StepChooseCurrency = ({ currency, setCurrency }: StepProps) => {
   const currencies = useMemo(() => listSupportedCurrencies().concat(listTokens()), []);
-  console.log('currencies', currencies.filter(c => c.name.includes("Crypto.org")))
+  
   const url =
     currency && currency.type === "TokenCurrency"
       ? supportLinkByTokenType[currency.tokenType]
