@@ -1,90 +1,108 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ArrowsUpDown from "~/renderer/icons/ArrowsUpDown";
 import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import FromRow from "./FromRow";
 import ToRow from "./ToRow";
 import type {
-  Account,
-  TokenAccount,
-  TokenCurrency,
-  CryptoCurrency,
-  Transaction,
-} from "@ledgerhq/live-common/lib/types";
-import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { State as SwapTransactionType } from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+  SwapSelectorStateType,
+  SwapTransactionType,
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+
+type FormInputsProps = {
+  fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toAccount: $PropertyType<SwapSelectorStateType, "account">,
+  fromAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  setFromAccount: $PropertyType<SwapTransactionType, "setFromAccount">,
+  setFromAmount: $PropertyType<SwapTransactionType, "setFromAmount">,
+  setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToCurrency">,
+  toggleMax: $PropertyType<SwapTransactionType, "toggleMax">,
+  reverseSwap: $PropertyType<SwapTransactionType, "reverseSwap">,
+  isMaxEnabled?: boolean,
+  fromAmountError?: Error,
+  isSwapReversable: boolean,
+  provider: ?string,
+  loadingRates: boolean,
+};
 
 const RoundButton = styled(Button)`
   padding: 8px;
   border-radius: 9999px;
   height: initial;
 `;
-function SwapButton() {
+
+const Main: ThemedComponent<{}> = styled.section`
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  margin-bottom: 5px;
+`;
+
+type SwapButtonProps = {
+  onClick: $PropertyType<SwapTransactionType, "reverseSwap">,
+  disabled: boolean,
+};
+function SwapButton({ onClick, disabled }: SwapButtonProps): React$Node {
   return (
-    <RoundButton lighterPrimary>
+    <RoundButton lighterPrimary disabled={disabled} onClick={onClick}>
       <ArrowsUpDown size={14} />
     </RoundButton>
   );
 }
 
-export type ToAccountType = {
-  account: Account | TokenAccount,
-  parentAccount: Account | null,
-  currency: (TokenCurrency | CryptoCurrency) | null,
-} | null;
-
-type FormInputsProps = {
-  fromAccount: $PropertyType<SwapTransactionType, "account">,
-  fromAmount?: $PropertyType<Transaction, "amount">,
-  isMaxEnabled?: boolean,
-  setFromAccount: (account: $PropertyType<SwapTransactionType, "account">) => void,
-  setFromAmount: (amount: $PropertyType<Transaction, "amount">) => void,
-  toggleMax: () => void,
-};
-
 export default function FormInputs({
   fromAccount = null,
+  toAccount,
   fromAmount = null,
   isMaxEnabled = false,
   setFromAccount,
   setFromAmount,
+  toCurrency,
+  toAmount,
+  setToAccount,
+  setToCurrency,
   toggleMax,
+  fromAmountError,
+  reverseSwap,
+  isSwapReversable,
+  provider,
+  loadingRates,
 }: FormInputsProps) {
-  const [toAccount, setToAccount] = useState(null);
-  const [toAmount, setToAmount] = useState(null);
-
-  const handleSetToAccountChange = (selectSate: useSelectableCurrenciesReturnType) => {
-    setToAccount({
-      account: selectSate.account ?? null,
-      parentAccount: selectSate.parentAccount ?? null,
-      currency: selectSate.currency,
-    });
-  };
-
   return (
-    <section>
-      <FromRow
-        fromAccount={fromAccount}
-        setFromAccount={setFromAccount}
-        fromAmount={fromAmount}
-        setFromAmount={setFromAmount}
-        isMaxEnabled={isMaxEnabled}
-        toggleMax={toggleMax}
-      />
-
-      <Box horizontal justifyContent="center" alignContent="center">
-        <SwapButton />
+    <Main>
+      <Box>
+        <FromRow
+          fromAccount={fromAccount}
+          setFromAccount={setFromAccount}
+          fromAmount={fromAmount}
+          setFromAmount={setFromAmount}
+          isMaxEnabled={isMaxEnabled}
+          toggleMax={toggleMax}
+          fromAmountError={fromAmountError}
+          provider={provider}
+        />
       </Box>
-      <ToRow
-        toAccount={toAccount}
-        // $FlowFixMe
-        setToAccount={handleSetToAccountChange}
-        toAmount={toAmount}
-        setToAmount={setToAmount}
-        fromAccount={fromAccount}
-      />
-    </section>
+      <Box horizontal justifyContent="center" alignContent="center">
+        <SwapButton disabled={!isSwapReversable} onClick={reverseSwap} />
+      </Box>
+      <Box style={{ marginTop: "-23px" }}>
+        <ToRow
+          toCurrency={toCurrency}
+          setToAccount={setToAccount}
+          setToCurrency={setToCurrency}
+          toAmount={toAmount}
+          fromAccount={fromAccount}
+          provider={provider}
+          toAccount={toAccount}
+          loadingRates={loadingRates}
+        />
+      </Box>
+    </Main>
   );
 }

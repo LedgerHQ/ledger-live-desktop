@@ -1,0 +1,45 @@
+name: Generate Screenshots
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  add-reaction:
+    name: add reaction to comment
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
+    runs-on: ubuntu-latest
+    steps:
+      - name: add reaction to PR
+        uses: actions/github-script@v5
+        with:
+          script: |
+            github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'rocket'
+            })
+
+  generate-screenshots:
+    needs: [add-reaction]
+    name: screenshots
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: checkout PR
+        run: gh pr checkout ${{ github.event.issue.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: show branch
+        run: git branch -v

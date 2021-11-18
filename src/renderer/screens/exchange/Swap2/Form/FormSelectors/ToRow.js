@@ -1,79 +1,140 @@
 // @flow
-import React, { useEffect } from "react";
+import React from "react";
 import { Trans } from "react-i18next";
-import { BigNumber } from "bignumber.js";
 import Box from "~/renderer/components/Box/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import SelectCurrency from "~/renderer/components/SelectCurrency";
-import { amountInputContainerProps, selectRowStylesMap } from "./utils";
+import { amountInputContainerProps, renderCurrencyValue, selectRowStylesMap } from "./utils";
 import { FormLabel } from "./FormLabel";
 import { toSelector } from "~/renderer/actions/swap";
 import { useSelector } from "react-redux";
-import { useSelectableCurrencies } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { ToAccountType } from "./FormInputs";
-import { getAccountCurrency, getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import type { useSelectableCurrenciesReturnType } from "~/renderer/screens/exchange/Swap2/utils/shared/hooks";
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import {
+  usePickDefaultCurrency,
+  useSelectableCurrencies,
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
+import type {
+  SwapSelectorStateType,
+  SwapTransactionType,
+} from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import {
+  Container as InputContainer,
+  BaseContainer as BaseInputContainer,
+} from "~/renderer/components/Input";
+import styled from "styled-components";
+import CounterValue from "~/renderer/components/CounterValue";
+import { track } from "~/renderer/analytics/segment";
+import { SWAP_VERSION } from "../../utils/index";
 
 type Props = {
-  fromAccount: ?(Account | TokenAccount),
-  toAccount: ?ToAccountType,
-  setToAccount: useSelectableCurrenciesReturnType => void,
-  toAmount: ?BigNumber,
-  setToAmount: BigNumber => void,
+  fromAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toAccount: $PropertyType<SwapSelectorStateType, "account">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  setToAccount: $PropertyType<SwapTransactionType, "setToAccount">,
+  setToCurrency: $PropertyType<SwapTransactionType, "setToCurrency">,
+  toAmount: $PropertyType<SwapSelectorStateType, "amount">,
+  provider: ?string,
+  loadingRates: boolean,
 };
 
-export default function ToRow({
-  toAccount,
+const InputCurrencyContainer = styled(Box)`
+  ${InputContainer} {
+    display: flex;
+    background: none;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  ${BaseInputContainer} {
+    flex: 0;
+  }
+`;
+
+function ToRow({
+  toCurrency,
   setToAccount,
+  setToCurrency,
   toAmount,
-  setToAmount,
   fromAccount,
+  provider,
+  toAccount,
+  loadingRates,
 }: Props) {
   const fromCurrencyId = fromAccount ? getAccountCurrency(fromAccount).id : null;
-  const toCurrency = toAccount?.account ? getAccountCurrency(toAccount.account) : null;
   const allCurrencies = useSelector(toSelector)(fromCurrencyId);
-  const selectState = useSelectableCurrencies({ currency: toCurrency, allCurrencies });
-  const unit = selectState.account ? getAccountUnit(selectState.account) : undefined;
+  const currencies = useSelectableCurrencies({ allCurrencies });
+  const unit = toCurrency?.units[0];
 
-  /* @dev: save picked account */
-  useEffect(() => {
-    if (!toAccount && !selectState.account) return;
+  usePickDefaultCurrency(currencies, toCurrency, setToCurrency);
 
-    // TODO: would be a dispatch call in the future
-    setToAccount(selectState);
-  }, [selectState.account, selectState.parentAccount]);
+  const trackEditCurrency = () =>
+    track("Page Swap Form - Edit Target Currency", {
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+  const setCurrencyAndTrack = currency => {
+    track("Page Swap Form - New Target Currency", {
+      provider,
+      swapVersion: SWAP_VERSION,
+    });
+    setToCurrency(currency);
+  };
 
   return (
     <>
-      <Box horizontal mb="8px" color={"palette.text.shade40"} fontSize={3}>
+      <Box horizontal color={"palette.text.shade40"} fontSize={3} mb={1}>
         <FormLabel>
           <Trans i18nKey="swap2.form.to.title" />
         </FormLabel>
       </Box>
       <Box horizontal>
-        <Box width="50%">
+        <Box flex="1">
           <SelectCurrency
-            currencies={selectState.currencies}
-            onChange={selectState.setCurrency}
-            value={selectState.currency}
+            currencies={currencies}
+            onChange={setCurrencyAndTrack}
+            value={toCurrency}
             stylesMap={selectRowStylesMap}
+            isDisabled={!fromAccount}
+            renderValueOverride={renderCurrencyValue}
+            onMenuOpen={trackEditCurrency}
           />
         </Box>
-        <Box width="50%">
+        <InputCurrencyContainer flex="1">
           <InputCurrency
-            value={toAmount}
-            onChange={setToAmount}
-            disabled={!toCurrency}
-            placeholder="0"
+            // @DEV: onChange props is required by the composant, there is no read-only logic
+            onChange={() => {}}
+            value={unit ? toAmount : null}
+            disabled
+            placeholder="-"
             textAlign="right"
+            fontWeight={600}
+            color="palette.text.shade40"
             containerProps={amountInputContainerProps}
             unit={unit}
-            // Flow complains if this prop is missing…
-            renderRight={null}
+            loading={loadingRates}
+            renderRight={
+              toCurrency &&
+              unit &&
+              toAmount &&
+              !loadingRates && (
+                <CounterValue
+                  currency={toCurrency}
+                  value={toAmount}
+                  color="palette.text.shade40"
+                  ff="Inter|Medium"
+                  fontSize={3}
+                  placeholderStyle={{ padding: "0 15px" }}
+                  pr={3}
+                  mt="4px"
+                  style={{ lineHeight: "1em" }}
+                />
+              )
+            }
           />
-        </Box>
+        </InputCurrencyContainer>
       </Box>
     </>
   );
 }
+export default React.memo<Props>(ToRow);

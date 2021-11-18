@@ -46,7 +46,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: JOBS=max yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -71,10 +71,46 @@ jobs:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
 
-  bundle-linux:
-    runs-on: ubuntu-20.04
+  start-runner:
+    name: start self-hosted EC2 runner
     needs: cancel-previous
+    runs-on: [ledger-live-desktop]
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
     steps:
+      - name: get latest LLD runner AMI id
+        id: get-ami-id
+        run: |
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+      - name: start EC2 runner
+        id: start-ec2-runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: start
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
+          ec2-instance-type: c5.4xlarge
+          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
+          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
+      - name: get volume-id
+        id: get-volume-id
+        run: |
+          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
+      - name: resize rootfs
+        env:
+          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
+        run: |
+          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+
+  bundle-linux:
+    needs: [cancel-previous, start-runner]
+    runs-on: ${{ needs.start-runner.outputs.label }}
+    steps:
+      - name: prepare runner
+        run: |
+          sudo growpart /dev/nvme0n1 1
+          sudo resize2fs /dev/nvme0n1p1
       - uses: ledgerhq/actions/check-member@v2.0.0
         with:
           username: ${{ github.actor }}
@@ -86,8 +122,12 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
       - uses: actions/setup-node@main
+        if: always()
         with:
           node-version: 14.x
+      - name: install yarn
+        if: always()
+        run: npm install --global yarn
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
@@ -106,7 +146,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: JOBS=max yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -130,6 +170,20 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs: [start-runner, bundle-linux]
+    runs-on: [ledger-live-desktop]
+    if: ${{ always() }}
+    steps:
+      - name: Stop EC2 runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: stop
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
 
   bundle-windows:
     runs-on: windows-latest
@@ -165,6 +219,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
+        env:
+          JOBS: max
         run: yarn --frozen-lockfile
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
@@ -183,5 +239,5 @@ jobs:
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win.exe
-          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win.exe
+          name: ${{ steps.postversion1.outputs.content }}${{ steps.postversion2.outputs.content }}-win-x64.exe
+          path: dist/${{ steps.version.outputs.name }}-${{ steps.version.outputs.version }}-win-x64.exe

@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/transaction";
+import { getUTXOStatus } from "@ledgerhq/live-common/lib/families/bitcoin/logic";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import Checkbox from "~/renderer/components/CheckBox";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -58,12 +58,13 @@ export const CoinControlRow = ({
   bridge,
 }: CoinControlRowProps) => {
   const s = getUTXOStatus(utxo, utxoStrategy);
+  const utxoStatus = s.reason || "";
   const input = (status.txInputs || []).find(
     input => input.previousOutputIndex === utxo.outputIndex && input.previousTxHash === utxo.hash,
   );
 
-  const unconfirmed = (s.reason || "") === "pickUnconfirmedRBF";
-  const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length;
+  const unconfirmed = utxoStatus === "pickUnconfirmedRBF" || utxoStatus === "pickPendingNonRBF";
+  const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length; // make sure that at least one utxo is selected
   const disabled = unconfirmed || last;
 
   const onClick = () => {

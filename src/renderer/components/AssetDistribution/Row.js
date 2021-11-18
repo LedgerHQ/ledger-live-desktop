@@ -101,7 +101,8 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
   const history = useHistory();
   const language = useSelector(languageSelector);
   const color = useCurrencyColor(currency, theme.colors.palette.background.paper);
-  const percentage = (Math.floor(distribution * 10000) / 100).toLocaleString(language, {
+  const percentage = Math.floor(distribution * 10000) / 100;
+  const percentageWording = percentage.toLocaleString(language, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -125,17 +126,17 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
         {distribution ? (
           <Price from={currency} color="palette.text.shade80" fontSize={3} />
         ) : (
-          <NoCountervaluePlaceholder style={null} />
+          <NoCountervaluePlaceholder />
         )}
       </PriceSection>
       <Distribution>
         {!!distribution && (
           <>
             <Text ff="Inter" color="palette.text.shade100" fontSize={3}>
-              {`${percentage}%`}
+              {`${percentageWording}%`}
             </Text>
             <Bar
-              progress={!process.env.SPECTRON_RUN && isVisible ? percentage : "0"}
+              progress={!process.env.SPECTRON_RUN && isVisible ? percentage.toString() : "0"}
               progressColor={color}
             />
           </>
@@ -163,7 +164,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               showCode
             />
           ) : (
-            <NoCountervaluePlaceholder style={null} />
+            <NoCountervaluePlaceholder />
           )}
         </Ellipsis>
       </Value>

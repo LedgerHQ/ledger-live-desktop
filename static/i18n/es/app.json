@@ -62,6 +62,7 @@
     "apply": "Aplicar",
     "done": "Listo",
     "confirm": "Confirmar",
+    "reject": "Reject",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
     "delete": "Eliminar",
@@ -213,43 +214,59 @@
     "disconnectButton": "Desconectar"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "Permuta",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History"
+      "history": "Historial",
+      "kyc": "KYC"
     },
     "form": {
-      "providerDrawer": {
-        "title": "Change Provider",
-        "quote": "Quote",
-        "receive": "Receive",
-        "onChain": "On Chain",
-        "offChain": "Off Chain"
+      "ratesDrawer": {
+        "title": "Tarifa",
+        "quote": "Cotización",
+        "receive": "Recibir"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "proveedor",
+          "rate": "tarifa",
+          "fees": "tarifas",
+          "target": "cuenta de destino"
         },
         "tooltip": {
           "provider": "lorem ipsum",
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{target}} account",
-        "noAccountCTA": "Add account"
+        "noAccount": "Create an account to receive {{name}}",
+        "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
         "title": "From",
-        "max": "Max",
-        "accountPlaceholder": "Select source"
+        "max": "Máx.",
+        "accountPlaceholder": "Máx.",
+        "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
       "to": {
         "title": "To"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country"
+      "notAvailable": {
+        "title": "Swap is not available yet in your area",
+        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+      },
+      "providers": {
+        "kyc": {
+          "required": "You need to complete your KYC",
+          "complete": "Completa tu KYC",
+          "update": "Refresh KYC",
+          "rejected": "KYC rejected, start the verification again",
+          "status": {
+            "pending": "KYC pending",
+            "approved": "KYC approved",
+            "closed": "KYC rejected"
+          }
+        }
+      }
     },
     "history": {
       "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
@@ -257,8 +274,65 @@
         "title": "Your previous swaps will appear here",
         "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
       },
-      "export": "Export operations",
+      "export": "No tienes ninguna cuenta de {{name}}.",
       "exporting": "Exporting..."
+    },
+    "kyc": {
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "cta": "Continue",
+        "pending": {
+          "cta": "Continuar",
+          "title": "Your information has been submitted for approval",
+          "subtitle": "It usually takes a few minutes for the review to be completed.",
+          "link": "Learn more about KYC",
+          "info": "Verificación de identidad: Enviada"
+        },
+        "closed": {
+          "cta": "Restablecer KYC",
+          "title": "Solicitud de KYC rechazada",
+          "subtitle": "Wyre ha rechazado los datos que has proporcionado para fines de KYC",
+          "link": "Más información sobre KYC"
+        },
+        "form": {
+          "firstName": "Nombre",
+          "lastName": "Apellido",
+          "street1": "Dirección postal línea 1",
+          "street2": "Dirección postal línea 2",
+          "city": "Ciudad",
+          "state": "Estado",
+          "country": "País",
+          "postalCode": "Código postal",
+          "dateOfBirth": "Fecha de nacimiento",
+          "firstNamePlaceholder": "Ingresa tu nombre",
+          "lastNamePlaceholder": "Ingresa tu apellido",
+          "street1Placeholder": "Ejemplo: Calle Maple, 13",
+          "street2Placeholder": "Ejemplo: Calle Maple, 13",
+          "cityPlaceholder": "Ejemplo: San José",
+          "postalCodePlaceholder": "Ingresa tu código postal de 5 dígitos",
+          "dateOfBirthPlaceholder": "MM/DD/AAAA",
+          "firstNameError": "Ingresa tu nombre para continuar",
+          "lastNameError": "Ingresa tu apellido para continuar",
+          "street1Error": "Ingresa tu dirección",
+          "cityError": "Ingresa la ciudad en la que vives en EE. UU.",
+          "postalCodeError": "Ingresa un código postal de EE. UU. válido",
+          "dateOfBirthError": "Ingresa tu fecha de nacimiento",
+          "dateOfBirthValidationError": "Ingresa una fecha de nacimiento válida"
+        }
+      }
+    },
+    "exchangeDrawer": {
+      "title": "Confirma tu Exchange",
+      "completed": {
+        "title": "Operación pendiente",
+        "description": "Tu operación de permuta ha sido enviada a la red para su confirmación. Puede transcurrir hasta una hora antes de que recibas tus {{targetCurrency}}.",
+        "disclaimer": "Toma nota del número de ID de permuta, en caso de que necesites ayuda del Soporte de <0><0>{{provider}}</0> support</0>.",
+        "seeDetails": "Ver detalles"
+      }
     }
   },
   "swap": {
@@ -992,10 +1066,10 @@
       "description": "Compra activos cripto a través de nuestro socio y recíbelos directamente en tu cuenta de Ledger",
       "cta": "Comprar ahora"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Administra tus activos de forma segura con un Nano X y Nano S a un precio con descuentos",
-      "cta": "Compra un Back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "Participación con POLKADOT",
@@ -1039,6 +1113,7 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
@@ -1047,7 +1122,8 @@
       },
       "confirm": {
         "title": "Conectar",
-        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:"
+        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1293,6 +1369,14 @@
       "payoutNetworkFees": "Tarifas de pago",
       "payoutNetworkFeesTooltip": "Este importe no se mostrará en el dispositivo"
     },
+    "swap2": {
+      "amountSent": "Importe a enviar",
+      "amountReceived": "Importe a recibir",
+      "provider": "Proveedor",
+      "fees": "Tarifas de red",
+      "sourceAccount": "Cuenta de origen",
+      "targetAccount": "Cuenta de destino"
+    },
     "sell": {
       "notice": "Verifica los detalles de venta en tu dispositivo antes de enviarlos. Las direcciones se intercambian de forma segura, por lo que no es necesario verificarlas.",
       "confirm": "Confirmar transacción de venta"
@@ -1403,13 +1487,13 @@
       "update": "Firmware actualizado",
       "updateBtn": "Actualizar firmware",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "Actualización disponible del Firmware a la versión {{latestFirmware}}",
+        "cta": "Ingresa a Manager",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "La versión de firmware del dispositivo es demasiado antigua para poder actualizarla. Contacta al Soporte de Ledger para obtener un reemplazo.",
+          "cta": "Ponte en contacto con Soporte"
         },
-        "cta2": "Update firmware"
+        "cta2": "Actualizar firmware"
       },
       "latest": "La versión {{version}} del firmware está disponible",
       "contactSupport": "Ponte en contacto con Soporte",
@@ -1433,9 +1517,9 @@
       "confirmIdentifier": "Verifica el identificador",
       "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo coincide con el identificador a continuación. Confirma e introduce tu código PIN, si así lo indica la aplicación.",
       "identifier": "Identificador",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "Preparación",
+      "newFirmware": "Nuevo firmware {{version}}",
+      "confirmUpdate": "Por favor, confirma la actualización en tu dispositivo",
       "mcuTitle": "Finalizar actualización",
       "mcuFirst": "Desconecta el cable USB de tu dispositivo.",
       "mcuSecond": "Presiona el botón izquierdo y mantenlo presionado mientras conectas de nuevo el cable USB, hasta que aparezca la pantalla <1><0>{{repairProcessing}}</0></1>",
@@ -1596,7 +1680,7 @@
         "parentAccount": "1. Selecciona la cuenta de {{currencyName}}",
         "token": "2. Selecciona un token",
         "verifyTokenType": "Comprueba que <0>{{token}}</0> sea un token <0>{{tokenType}}</0>. Existe la posibilidad de perder cualquier otro activo cripto enviado a una cuenta de {{currency}}.",
-        "warningTokenType": "Envía solo tokens <0>{{ticker}}</0> o <0>{{tokenType}}</0> a una cuenta de {{currency}}. Existe la posibilidad de perder cualquier otro activo cripto."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Dispositivo",
@@ -1683,6 +1767,15 @@
     "title": "Notas de versión",
     "version": "Ledger Live {{versionNb}}"
   },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
+  },
   "distribution": {
     "asset": "Activo",
     "price": "Precio",
@@ -1703,14 +1796,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "Desarrollado por Elrond",
+        "moreInfo": "Más información",
+        "drawerTitle": "Integración con Elrond",
+        "title": "El token Elrond eGold (EGLD) ya está disponible en Ledger Live",
+        "description": "Ahora puedes proteger de forma segura tus tokens eGold (EGLD) y administrarlos a través de Ledger Live.",
+        "description2": "El token de Elrond eGold (EGLD) es nativo de la red Elrond y se utilizará para todo, desde transacciones, participaciones, contratos inteligentes, hasta gobernanza y recompensas de validadores.",
+        "description3": "Estamos trabajando activamente con el equipo de Elrond para agregar más funcionalidades, como la participación, soporte a ESDT (Elrond Standard Digital Token) nativo y más.",
+        "website": "La cadena de bloques de escala de Internet"
       }
     }
   },
@@ -2198,7 +2291,7 @@
       }
     },
     "rebond": {
-      "title": "Revincular activos",
+      "title": "Volver a vincular activos",
       "steps": {
         "amount": {
           "title": "Importe",
@@ -2220,7 +2313,7 @@
             "cta": "Ver detalles"
           },
           "pending": {
-            "title": "Revincular tus activos..."
+            "title": "Volver a vincular tus activos..."
           },
           "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
         }
@@ -2501,13 +2594,9 @@
           "title": "Usar TronGrid.io",
           "description": "Usar trongrid directamente sin el proxy de Ledger"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
-        },
-        "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2538,7 +2627,7 @@
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
       "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Restablecer Ledger Live borrará tu historial de transacciones de permuta de todas tus cuentas."
     },
     "softResetModal": {
       "title": "Borrar caché",
@@ -2555,7 +2644,7 @@
     "removeAccountModal": {
       "title": "Quitar cuenta",
       "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "Eliminar esta cuenta borrará el historial de transacciones de permuta asociado a dicha cuenta."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
@@ -2654,7 +2743,8 @@
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
-      "zh": "中文"
+      "zh": "中文",
+      "de": "German"
     }
   },
   "theme": {
@@ -2670,8 +2760,8 @@
       "achievement": "Logro desbloqueado"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "Tienes {{count}} notificaciones sin leer",
+      "cta": "Ver detalles"
     }
   },
   "informationCenter": {
@@ -2743,11 +2833,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "Ponte en contacto con Soporte",
+        "continueCTA": "Continuar",
+        "title": "Por favor, verifica los contenidos de la caja",
+        "description": "Si tu {{device}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "alert": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez"
       }
     },
     "alerts": {
@@ -3127,22 +3217,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "¿Tienes dificultades para conectar tu dispositivo?",
+    "cta": "Corregir",
     "solution": "Solución nº {{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "Instrucciones para Apple",
     "nextSolution": "Solución siguiente",
     "previousSolution": "Solución anterior",
     "followSteps": "Sigue estos pasos",
     "supportArticle": "Artículo de soporte",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "Conectando...",
+    "connected": "Conectado",
+    "backToPortfolio": "Volver al Portfolio",
     "steps": {
       "entry": {
         "title": "Solucionar problemas de la conexión USB",
         "desc": "Parece que hay un problema con la conexión a tu dispositivo. No te preocupes, puedes probar varias soluciones una a una hasta que se conecte el dispositivo.",
-        "cta": "Let’s fix it!",
+        "cta": "Vamos a corregirlo.",
         "back": "Volver"
       },
       "1": {
@@ -3160,7 +3250,7 @@
           "desc": "Haz clic en el botón siguiente para agregar las reglas udev. Luego conecta y desbloquea tu dispositivo para ver si se detecta.",
           "cta": "Establecer reglas",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "Ingresa el siguiente comando en una terminal para agregar automáticamente las reglas y volver a cargar udev.",
             "1": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         }
@@ -3169,8 +3259,8 @@
         "usbPort": {
           "title": "Prueba con distintos puertos USB",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "Cambia el puerto USB que utilizas en tu equipo.",
+            "1": "Quita cualquier llave (dongle) USB.",
             "2": "Conecta y desbloquea tu dispositivo para ver si se detecta."
           }
         },
@@ -3303,11 +3393,11 @@
     "placeholder": "Ingresa la dirección de {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "title": "Términos de uso",
+    "description": "Por favor, dedica algo de tiempo a revisar nuestros términos de servicio y política de privacidad",
     "termsLabel": "Términos del servicio",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "Política de privacidad",
+    "switchLabel": "He leído y acepto los Términos del Servicio y la Política de Privacidad",
     "cta": "Ingresa a la aplicación Ledger"
   },
   "families": {
@@ -3343,6 +3433,10 @@
     "AccountNameRequired": {
       "title": "Es necesario un nombre de cuenta.",
       "description": "Ingresa un nombre de cuenta"
+    },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
     },
     "AccountNotSupported": {
       "title": "La cuenta no es compatible.",
@@ -3610,8 +3704,8 @@
       "description": "Configura el nodo completo para buscar las cuentas asociadas a este dispositivo. El nodo completo debe buscar esta cuenta primero en la cadena de bloques, antes de agregarla a tu Portfolio."
     },
     "SwapGenericAPIError": {
-      "title": "La tasa de cambio ha caducado",
-      "description": "Debes confirmar la permuta antes de que venza el temporizador. La tasa de cambio es válida durante 60 segundos."
+      "title": "Algo no funcionó",
+      "description": "La transacción de intercambio no se ha realizado. Por favor, inténtalo de nuevo o ponte en contacto con el Soporte."
     },
     "TimeoutError": {
       "title": "El servidor ha tardado demasiado en responder",
@@ -3851,7 +3945,7 @@
       "title": "Es posible que sea necesario un Memo al enviar a este receptor"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "El importe debe ser superior a {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "El importe debe ser inferior a {{maxAmountFromFormatted}}"
@@ -3890,7 +3984,11 @@
       "title": "Debes seleccionar al menos un validador"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }

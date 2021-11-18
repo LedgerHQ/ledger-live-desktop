@@ -10,14 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 
 import moment from "moment";
+import { prodStableLanguages } from "~/config/languages";
 
-const options = [
-  { value: "en", support: "full", label: languageLabels.en },
-  { value: "fr", support: "full", label: languageLabels.fr },
-  { value: "ru", support: "partial", label: languageLabels.ru },
-  { value: "zh", support: "partial", label: languageLabels.zh },
-  { value: "es", support: "partial", label: languageLabels.es },
-];
+const options = prodStableLanguages.map(value => ({
+  value,
+  support: ["en", "fr"].includes(value) ? "full" : "partial",
+  label: languageLabels[value],
+}));
 
 const styleFn = theme => ({
   container: (provided, state) => ({

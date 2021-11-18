@@ -62,6 +62,7 @@
     "apply": "تطبيق",
     "done": "تم",
     "confirm": "تأكيد",
+    "reject": "Reject",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
     "delete": "حذف",
@@ -216,15 +217,14 @@
     "title": "Swap",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History"
+      "history": "History",
+      "kyc": "KYC"
     },
     "form": {
-      "providerDrawer": {
-        "title": "Change Provider",
+      "ratesDrawer": {
+        "title": "Rate",
         "quote": "Quote",
-        "receive": "Receive",
-        "onChain": "On Chain",
-        "offChain": "Off Chain"
+        "receive": "Receive"
       },
       "details": {
         "label": {
@@ -238,18 +238,35 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{target}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Add account"
       },
       "from": {
         "title": "From",
         "max": "Max",
-        "accountPlaceholder": "Select source"
+        "accountPlaceholder": "Select source",
+        "currencyDisabledTooltip": "This currency is not available for swap yet"
       },
       "to": {
         "title": "To"
       },
-      "notAvailable": "Service temporarily unavailable, or not available in your country"
+      "notAvailable": {
+        "title": "Swap is not available yet in your area",
+        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+      },
+      "providers": {
+        "kyc": {
+          "required": "You need to complete your KYC",
+          "complete": "Complete KYC",
+          "update": "Refresh KYC",
+          "rejected": "KYC rejected, start the verification again",
+          "status": {
+            "pending": "KYC pending",
+            "approved": "KYC approved",
+            "closed": "KYC rejected"
+          }
+        }
+      }
     },
     "history": {
       "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
@@ -259,6 +276,63 @@
       },
       "export": "Export operations",
       "exporting": "Exporting..."
+    },
+    "kyc": {
+      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "wyre": {
+        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
+        "policy": "Privacy Policy",
+        "title": "Verify your identity",
+        "subtitle": "Please enter your information to swap with Wyre.",
+        "cta": "Continue",
+        "pending": {
+          "cta": "Continue",
+          "title": "Your information has been submitted for approval",
+          "subtitle": "It usually takes a few minutes for the review to be completed.",
+          "link": "Learn more about KYC",
+          "info": "Identity verification: Submitted"
+        },
+        "closed": {
+          "cta": "Reset KYC",
+          "title": "KYC application rejected",
+          "subtitle": "Wyre rejected the data you provided for KYC purposes",
+          "link": "Learn more about KYC"
+        },
+        "form": {
+          "firstName": "First Name",
+          "lastName": "Last Name",
+          "street1": "Street Address Line 1",
+          "street2": "Street Address Line 2",
+          "city": "City",
+          "state": "State",
+          "country": "Country",
+          "postalCode": "Zip Code",
+          "dateOfBirth": "Date of birth",
+          "firstNamePlaceholder": "Enter your first name",
+          "lastNamePlaceholder": "Enter your last name",
+          "street1Placeholder": "Eg. 13, Maple street",
+          "street2Placeholder": "Eg. 13, Maple street",
+          "cityPlaceholder": "Eg. San José",
+          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "dateOfBirthPlaceholder": "MM/DD/YYYY",
+          "firstNameError": "Enter your first name to continue",
+          "lastNameError": "Enter your last name to continue",
+          "street1Error": "Enter your address",
+          "cityError": "Enter the city you live in the USA",
+          "postalCodeError": "Enter a valid US ZIP code",
+          "dateOfBirthError": "Enter your date of birth",
+          "dateOfBirthValidationError": "Enter a valid date of birth"
+        }
+      }
+    },
+    "exchangeDrawer": {
+      "title": "Confirm your Exchange",
+      "completed": {
+        "title": "Pending Operation",
+        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
+        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+        "seeDetails": "See details"
+      }
     }
   },
   "swap": {
@@ -992,10 +1066,10 @@
       "description": "قم بشراء الأصول المشفرة من خلال شريكنا وتلقيها مباشرة في حسابك في ليدجر (Ledger)",
       "cta": "اشتري الان"
     },
-    "backupPack": {
-      "title": "حزمة النسخ الاحتياطي",
-      "description": "قم بإدارة أصولك بأمان باستخدام Nano X وNano S بسعر مخفّض",
-      "cta": "شراء حزمة النسخ الاحتياطي"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
@@ -1015,7 +1089,7 @@
     },
     "lending": {
       "title": "إقراض العملات المشفرة",
-      "description": "قم بإرسال العملات المستقرة إلى بروتوكول Compound واكسب فوائد اليوم"
+      "description": "قم بإقراض العملات المستقرة إلى بروتوكول Compound واكسب فوائد اليوم"
     },
     "blackfriday": {
       "title": "الجمعة السوداء ",
@@ -1039,6 +1113,7 @@
     "disconnected": "تم قطع الاتصال",
     "connected": "تم الاتصال",
     "connecting": "جاري الاتصال...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "لصق الرابط",
@@ -1047,7 +1122,8 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:"
+        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1292,6 +1368,14 @@
       "provider": "المزود",
       "payoutNetworkFees": "رسوم الدفع",
       "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك"
+    },
+    "swap2": {
+      "amountSent": "Amount to send",
+      "amountReceived": "Amount to receive",
+      "provider": "Provider",
+      "fees": "Network Fees",
+      "sourceAccount": "Source Account",
+      "targetAccount": "Target Account"
     },
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
@@ -1596,7 +1680,7 @@
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
-        "warningTokenType": "يُرجى إرسال <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حساب {{currency}}. أي أصول مشفرة أخرى يمكن أن تفقد."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "الجهاز",
@@ -1682,6 +1766,15 @@
   "releaseNotes": {
     "title": "ملاحظات الإصدار",
     "version": "ليدجر لايف (Ledger Live) {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "الأصل",
@@ -2501,13 +2594,9 @@
           "title": "استخدم TronGrid.io",
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
-        "apiElrondEndpPoint": {
-          "title": "Elrond",
-          "description": "Use elrond with ledger proxy"
-        },
-        "tezosJS": {
-          "title": "use Tezos JS impl",
-          "description": "Use Tezos JS impl"
+        "experimentalCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2654,7 +2743,8 @@
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
-      "zh": "中文（简体）"
+      "zh": "中文（简体）",
+      "de": "German"
     }
   },
   "theme": {
@@ -3344,6 +3434,10 @@
       "title": "مطلوب إدخال اسم حساب",
       "description": "يرجى إدخال اسم حساب"
     },
+    "AccountNeedResync": {
+      "title": "Please try again",
+      "description": "Account is outdated. A synchronisation is needed"
+    },
     "AccountNotSupported": {
       "title": "الحساب غير مدعوم.",
       "description": "يرجى إعادة المحاولة أو الاتصال بالدعم ({{reason}})"
@@ -3610,8 +3704,8 @@
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
     "SwapGenericAPIError": {
-      "title": "انتهت صلاحية سعر الصرف",
-      "description": "يجب عليك تأكيد المبادلة قبل انتهاء مدة العداد. يبقى سعر الصرف المعروض ساري المفعول لمدة 60 ثانية."
+      "title": "Something went wrong",
+      "description": "The exchange transaction did not go through. Please try again or contact support."
     },
     "TimeoutError": {
       "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب",
@@ -3851,7 +3945,7 @@
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "يجب أن يكون المبلغ أكثر من {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
@@ -3890,7 +3984,11 @@
       "title": "يجب عليك تحديد مدقق واحد على الأقل"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }
