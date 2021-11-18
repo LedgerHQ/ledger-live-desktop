@@ -1246,58 +1246,58 @@
       "successTitle": "アカウントが正常にアップデートされました。",
       "successDescPlu": "{{assets}} アカウントがアップデートされ、使用可能になりました。",
       "successDesc": "{{assets}} アカウントが更新され、使用できるようになりました。",
-      "mobileTitle": "Export accounts to mobile",
-      "mobileDesc": "Click the button below to export your updated accounts to the Ledger Live mobile app.",
-      "mobileCTA": "Export to mobile",
-      "description": "New features in Ledger Live require an update of your accounts.",
-      "currency": "1 {{currency}} account needs to be updated:",
-      "currency_plural": "{{count}} {{currency}} accounts need to be updated:",
-      "footer": "You need your Ledger Device to complete the update",
-      "pendingDevices": "1 account could not be updated. Please connect the device associated to the account below",
-      "pendingDevices_plural": "{{totalMigratableAccounts}} accounts could not be updated. Please connect the device associated to the account below",
-      "doItLaterBtn": "Do it later"
+      "mobileTitle": "アカウントをモバイルにエクスポート",
+      "mobileDesc": "下のボタンをクリックして、アップデートされたアカウントをLedger Live mobileアプリにエクスポートする。",
+      "mobileCTA": "モバイルへ書き出す",
+      "description": "Ledger Liveの新機能を利用するには、アカウントのアップデートが必要です。",
+      "currency": "アップデートが必要な1件の{{currency}} アカウント：",
+      "currency_plural": "アップデートが必要な{{count}} 件の{{currency}} アカウント：",
+      "footer": "アップデートの完了には、Ledgerデバイスが必要です。",
+      "pendingDevices": "1件のアカウントをアップデートできませんでした。下記のアカウントと連携しているデバイスを接続してください。",
+      "pendingDevices_plural": "{{totalMigratableAccounts}} アカウントをアップデートできませんでした。下記のアカウント連携しているデバイスを接続してください。",
+      "doItLaterBtn": "後で行う"
     },
     "progress": {
       "finished": {
-        "title": "{{currencyName}} update completed",
+        "title": "{{currencyName}} アップデート完了",
         "description": ""
       },
       "scanning": {
         "title": "{{currencyName}} update in progress...",
-        "description": "Please wait for your accounts to be updated"
+        "description": "アカウントがアップデートされるまでお待ちください。"
       },
       "finished-empty": {
-        "title": "{{currencyName}} update incomplete",
-        "description": "No {{currencyName}} accounts to update"
+        "title": "{{currencyName}} アップデート未完了",
+        "description": "アップデートする{{currencyName}} アカウントがありません。"
       }
     },
     "cta": {
-      "startUpdate": "Start update",
-      "nextCurrency": "Continue with {{currency}} update"
+      "startUpdate": "アップデートを開始",
+      "nextCurrency": "{{currency}} アップデートを続行"
     }
   },
   "addAccounts": {
     "title": "アカウントを追加",
     "breadcrumb": {
-      "informations": "Crypto asset",
-      "connectDevice": "Device",
+      "informations": "暗号資産",
+      "connectDevice": "デバイス",
       "import": "アカウント",
       "finish": "確認"
     },
-    "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
+    "fullNodeReadyInfo": "アカウントはビットコインのフルノードを使用して追加されます。",
     "fullNodeConfigure": "ノードの構成",
-    "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
+    "tokensTip": "{{token}} ({{ticker}}) は {{tokenType}} トークンです。 {{currency}} アカウントで直接トークンを受け取ることができます。",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
-    "selectAll": "Select all ({{count}})",
-    "unselectAll": "Deselect all ({{count}})",
-    "noAccountToImport": "No existing {{currencyName}} accounts to add",
-    "success": "Account added successfully",
-    "success_plural": "Accounts added successfully",
-    "successDescription": "Add other accounts or return to Portfolio",
-    "successDescription_plural": "Add other accounts or return to Portfolio",
+    "selectAll": "すべてを選択 ({{count}})",
+    "unselectAll": "全ての選択解除 ({{count}})",
+    "noAccountToImport": "追加する既存の {{currencyName}} アカウントがありません。",
+    "success": "アカウントが正常に追加されました。",
+    "success_plural": "アカウントが正常に追加されました。",
+    "successDescription": "他のアカウントを追加するか、ポートフォリオに戻る",
+    "successDescription_plural": "他のアカウントを追加するか、ポートフォリオに戻る",
     "createNewAccount": {
-      "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
-      "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
+      "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1> アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
+      "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした。",
       "showAllAddressTypes": "すべてのアドレスの種類を表示",
       "showAllAddressTypesTooltip": "古いアドレス形式で{{family}}を受け取る必要な場合のみ、アドレスの種類を変更してください。"
     },
@@ -1308,27 +1308,27 @@
       "addMore": "さらに追加",
       "add": "アカウントを追加",
       "add_plural": "アカウントを追加",
-      "addAccountName": "Add {{currencyName}} account",
-      "receive": "Receive"
+      "addAccountName": "{{currencyName}} アカウントを追加",
+      "receive": "受け取る"
     },
     "sections": {
       "importable": {
-        "title": "Add existing account"
+        "title": "既存のアカウントを追加"
       },
       "creatable": {
-        "title": "Add new account"
+        "title": "新規アカウントの追加"
       },
       "imported": {
-        "title": "Accounts already in portfolio ({{count}})"
+        "title": "ポートフォリオにすでにアカウントがあります。 ({{count}})"
       },
       "migrate": {
-        "title": "Accounts to update"
+        "title": "アカウントのアップデート"
       }
     }
   },
   "operationDetails": {
-    "whatIsThis": "What is this operation?",
-    "title": "Operation details",
+    "whatIsThis": "この操作は何ですか？",
+    "title": "オペーレーション詳細",
     "type": "種類",
     "amount": "数量",
     "account": "アカウント",
@@ -1336,19 +1336,19 @@
     "currentValue": "現在の価格",
     "status": "ステータス",
     "confirmed": "確認済み",
-    "failed": "Failed",
+    "failed": "失敗",
     "notConfirmed": "未確認",
-    "fees": "Fee",
-    "noFees": "No fee",
-    "from": "From",
-    "to": "To",
-    "identifier": "Transaction ID",
-    "viewOperation": "View in explorer",
-    "showMore": "Show {{recipients}} more",
-    "showLess": "Show less",
-    "tokenOperations": "Token operations",
-    "subAccountOperations": "Subaccount operations",
-    "tokenTooltip": "This operation is related to the following token operations",
+    "fees": "手数料",
+    "noFees": "手数料なし",
+    "from": "送付元",
+    "to": "送付先",
+    "identifier": "トランザクションID",
+    "viewOperation": "エクスプローラーで表示",
+    "showMore": "さらに{{recipients}} 件表示する",
+    "showLess": "表示を減らす",
+    "tokenOperations": "トークンオペレーション",
+    "subAccountOperations": "サブアカウントオペレーション",
+    "tokenTooltip": "この操作は、次のトークンオペレーションに関連しています。",
     "subAccountTooltip": "この操作は、次のサブアカウントオペレーションに関連しています。",
     "internalOperations": "Internal operations",
     "internalOpTooltip": "This operation has internal operations",
@@ -1503,39 +1503,39 @@
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
-        "useAppForToken": "Looking to manage {{tokenType}} tokens?",
+        "useAppForToken": "{{tokenType}} トークンを管理しますか？",
         "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
-        "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
-        "goToAccounts": "Go to accounts",
-        "intallParentApp": "Install {{appName}} app"
+        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
+        "goToAccounts": "アカウントへ移動",
+        "intallParentApp": "{{appName}} アプリをインストール"
       },
       "uninstall": {
-        "title": "Uninstall all",
-        "subtitle": "Uninstall all apps?",
-        "description": "Don't worry, uninstalling apps does not affect your crypto assets. You can reinstall apps in the App catalog."
+        "title": "すべてアンインストール",
+        "subtitle": "すべてのアプリをアンインストールしますか？",
+        "description": "アプリのアンインストールは、所有する暗号資産には影響しません。アプリは、アプリカタログから再インストールすることができます。"
       }
     },
     "apps": {
       "dependencyInstall": {
-        "title": "{{dependency}} app is required",
-        "description": "The {{dependency}} app will also be installed because the {{app}} app needs it.",
-        "confirm": "Install apps"
+        "title": "{{dependency}} アプリが必要です。",
+        "description": "{{app}} アプリに必要な{{dependency}} アプリもインストールされます。",
+        "confirm": "アプリをインストール"
       },
       "dependencyUninstall": {
-        "title": " Uninstall {{app}} and its related apps?",
-        "showAll": "Show apps to uninstall",
-        "description": "Some of your installed apps are linked to {{app}} app. They will be uninstalled as well.",
-        "confirm": "Uninstall {{app}} and other apps"
+        "title": " {{app}} と関連アプリをアンインストールしますか？",
+        "showAll": "アンインストールするアプリを表示",
+        "description": "{{app}} アプリとリンクしている、いくつかのインストール済みアプリがあります。これらもアンインストールされます。",
+        "confirm": "{{app}} とその他のアプリをアンインストール"
       }
     },
     "firmware": {
-      "updateLater": "Cancel",
-      "seedReady": "I have my recovery phrase",
-      "dontHaveSeed": "Don't have your recovery phrase? ",
-      "followTheGuide": "Follow our step by step update guide",
-      "removeApps": "Uninstall all apps before updating",
-      "update": "Firmware update",
-      "updateBtn": "Update firmware",
+      "updateLater": "キャンセル",
+      "seedReady": "リカバリーフレーズを所有しています。",
+      "dontHaveSeed": "リカバリーフレーズを持っていない場合は？ ",
+      "followTheGuide": "ステップ別アップデートガイドに従ってください。",
+      "removeApps": "アップデートする前にすべてのアプリをアンインストールする。",
+      "update": "ファームウェアをアップデート",
+      "updateBtn": "ファームウェアをアップデート",
       "banner": {
         "warning": "ファームウェアを最新の{{latestFirmware}}へアップデート可能です。",
         "cta": "マネージャーを開く",
@@ -1545,49 +1545,49 @@
         },
         "cta2": "ファームウェアをアップデート"
       },
-      "latest": "Firmware version {{version}} is available",
-      "contactSupport": "Contact support",
-      "deprecated": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-      "prepareSeed": "Ensure your 24-word recovery phrase is written down on the Recovery sheet and it is available, as a precaution.",
-      "disclaimerTitle": "You are about to install <1>firmware version {{version}}</1>.",
-      "downloadingUpdateDesc": "Please wait for the update installer to be downloaded"
+      "latest": "ファームウェアバージョン{{version}} が利用可能です。",
+      "contactSupport": "サポートへのお問い合わせ",
+      "deprecated": "デバイスのファームウェアのバージョンが古いため、アップデートできません。Ledgerサポートに連絡して、デバイスを交換してください。",
+      "prepareSeed": "万が一に備えて、24単語のリカバリーフレーズがリカバリシートに書き込まれていることを確認してください。",
+      "disclaimerTitle": "<1>ファームウェアバージョン{{version}}</1>をインストールします。",
+      "downloadingUpdateDesc": "アップデートインストーラーのダウンロードをお待ちください。"
     },
     "modal": {
       "steps": {
-        "downloadingUpdate": "Downloading update",
+        "downloadingUpdate": "アップデートをダウンロード中",
         "updateMCU": "ファームウェアをアップデート",
         "updating": "ファームウェアをアップデート",
-        "reset": "Prepare device",
+        "reset": "デバイスの準備",
         "osu": "OSUをインストール中...",
-        "flash-mcu": "MCU updating...",
-        "flash-bootloader": "Bootloader updating...",
+        "flash-mcu": "MCUをアップデート中...",
+        "flash-bootloader": "Bootloaderをアップデート中",
         "firmware": "ファームウェアのアップデート中…",
-        "flash": "Preparing your device..."
+        "flash": "デバイスの準備中..."
       },
-      "confirmIdentifier": "Verify the identifier",
-      "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
+      "confirmIdentifier": "識別子を確認",
+      "confirmIdentifierText": "デバイスの識別子が以下の識別子と同じか確認してください。必要であれば、PINコードを入力してください。",
       "identifier": "識別子",
       "preparation": "準備",
       "newFirmware": "新しいファームウェア{{version}}",
       "confirmUpdate": "アップデートをデバイスで確定してください。",
-      "mcuTitle": "Finalize update",
-      "mcuFirst": "Disconnect the USB cable from your device",
-      "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
-      "mcuPin": "Please wait for the update to finish",
-      "mcuSecondNanoX": "Press and hold the left button until <1><0>{{bootloaderOption}}</0></1> appears. Press both buttons to confirm and reconnect your device.",
-      "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
-      "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
-      "successTitle": "Firmware updated",
+      "mcuTitle": "アップデートを完了する",
+      "mcuFirst": "USBケーブルをデバイスから取り外してください。",
+      "mcuSecond": "USBケーブルを再接続している間、<1><0>{{repairProcessing}}</0></1>画面が表示されるまでLedgerデバイスの左ボタンを押し続けてください。",
+      "mcuPin": "アップデート完了までお待ちください。",
+      "mcuSecondNanoX": "<1><0>{{bootloaderOption}}</0></1>が表示されるまで、左ボタンを押し続けてください。両方のボタンを押して確定し、デバイスを再接続してください。",
+      "mcuBlueFirst": "サイドボタンを10秒間押し、デバイスの電源をオフにします。その後、ボタンを離してください。",
+      "mcuBlueSecond": "ブートオプションが表示されるまで、少なくとも5秒間ボタンを押し続けます。Bootloaderモードをタップしてください。",
+      "successTitle": "ファームウェアのアップデート済み",
       "successTextApps": "デバイスにアプリを再インストールしてください。",
       "successTextNoApps": "デバイスにアプリをインストールできるようになりました。",
       "sucessCTAApps": "アプリを再インストール",
       "SuccessCTANoApps": "アプリをインストール",
       "cancelReinstallCTA": "アップデートをインストール",
       "resetSteps": {
-        "first": "1. Reset your device",
-        "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
-        "turnOn": "Press the button on the device to turn it on.",
-        "falsePin": "Enter three wrong PINs to reset the device.",
+        "first": "1. デバイスをリセット",
+        "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続します。",
+        "turnOn": "デバイスのボタンを押して電源をオンにします。",
+        "falsePin": "デバイスをリセットするには、間違ったPINを3回入力してください。",
         "turnOff": "Press and hold the side button until {{action}} is displayed.",
         "confirmTurnOff": "Tap {{action}} to confirm.",
         "second": "2. Boot in {{mode}} mode",
@@ -1983,7 +1983,7 @@
       "currentDelegation": "Delegated: <0>{{amount}}</0>",
       "estYield": "est. yield",
       "activeTooltip": "Delegated amounts generate rewards",
-      "inactiveTooltip": "Undelegated amounts do not generate rewards",
+      "inactiveTooltip": "デリゲート解除された数は、報酬を生成しません。",
       "minSafeWarning": "Not enough funds",
       "flow": {
         "title": "Delegate",
