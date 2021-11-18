@@ -3264,7 +3264,7 @@
             },
             "fail": {
               "title": "Incorrect!",
-              "text": "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device."
+              "text": "秘密鍵は、ハードウェアウォレットに常にオフラインで保管されます。Nanoに接続されていても、Ledgerアプリは秘密鍵にはアクセスできません。そのため、デバイス上ですべてのトランザクションを毎回手動で認証する必要があります。"
             }
           }
         }
@@ -3424,7 +3424,7 @@
       "vote": "Please confirm on your device to finalize the operation",
       "delegate": "Please confirm on your device to finalize the operation",
       "undelegate": "Please confirm on your device to finalize the operation",
-      "redelegate": "Please confirm on your device to finalize the operation",
+      "redelegate": "操作を完了するために、デバイスで確認してください。",
       "claimRewardCompound": "Please confirm on your device to finalize the operation",
       "nominate": "操作を完了するために、デバイスで確認してください。",
       "chill": "操作を完了するために、デバイスで確認してください。",
