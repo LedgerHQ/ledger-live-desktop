@@ -2957,7 +2957,7 @@
         "screens": {
           "importYourRecoveryPhrase": {
             "title": "Restore from recovery phrase",
-            "paragraph1": "Restore your Nano from your recovery phrase to restore, replace or back up your Ledger hardware wallet.",
+            "paragraph1": "リカバリーフレーズを使ってNanoを復元し、Ledgerハードウェアウォレットを復元、交換、またはバックアップできます。",
             "paragraph2": "Your Nano will restore your private keys and you will be able to access and manage your crypto.",
             "buttons": {
               "next": "OK, I’m ready!",
