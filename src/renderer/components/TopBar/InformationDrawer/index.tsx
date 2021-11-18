@@ -1,10 +1,8 @@
-// @flow
-
 import React, { useMemo } from "react";
-import SideDrawer from "@ledgerhq/react-ui/components/layout/Side/Side";
+import { Drawer } from "@ledgerhq/react-ui";
 import { Flex, Tabs, Logos } from "@ledgerhq/react-ui";
 import AnnouncementPanel from "./AnnouncementPanel";
-import { ServiceStatusPanel } from "~/renderer/components/TopBar/NotificationIndicator/ServiceStatusPanel";
+import ServiceStatusPanel from "./ServiceStatusPanel";
 
 import { useTranslation } from "react-i18next";
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
@@ -57,24 +55,22 @@ const InformationDrawer = ({
   const tabIndex = useMemo(() => tabs.findIndex(tab => tab.id === tabId), [tabId, tabs]);
 
   return (
-    <SideDrawer isOpen={isOpen} onClose={onRequestClose}>
+    <Drawer isOpen={isOpen} onClose={onRequestClose}>
       <Flex my="20px" justifyContent="center">
         <Logos.LedgerLiveRegular />
       </Flex>
-      <Flex width="100%">
-        <Tabs
-          tabs={tabs.map(({ label, Component }, i) => ({
-            index: i,
-            title: label,
-            Component,
-          }))}
-          activeIndex={tabIndex}
-          onTabChange={newTabIndex => {
-            dispatch(setTabInformationCenter(tabs[newTabIndex].id));
-          }}
-        />
-      </Flex>
-    </SideDrawer>
+      <Tabs
+        tabs={tabs.map(({ label, Component }, i) => ({
+          index: i,
+          title: label,
+          Component,
+        }))}
+        activeIndex={tabIndex}
+        onTabChange={newTabIndex => {
+          dispatch(setTabInformationCenter(tabs[newTabIndex].id));
+        }}
+      />
+    </Drawer>
   );
 };
 

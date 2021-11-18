@@ -1,8 +1,7 @@
-// @flow
 import React, { useCallback, useRef, useMemo, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { InView } from "react-intersection-observer";
 
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
@@ -10,64 +9,17 @@ import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/Anno
 
 import { useDispatch } from "react-redux";
 
-import InfoCircle from "~/renderer/icons/InfoCircle";
-import TriangleWarning from "~/renderer/icons/TriangleWarning";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import Box from "~/renderer/components/Box";
-import { Text, Flex, Notification, Badge } from "@ledgerhq/react-ui";
+import { Text, Flex, Notification, Badge, Icons } from "@ledgerhq/react-ui";
 import { useDeepLinkHandler } from "~/renderer/hooks/useDeeplinking";
 
 import { closeInformationCenter } from "~/renderer/actions/UI";
 import useDateTimeFormat from "~/renderer/hooks/useDateTimeFormat";
 
-const levelThemes: any = {
-  info: {
-    title: "palette.text.shade100",
-    text: "palette.text.shade50",
-    background: undefined,
-    icon: undefined,
-    link: undefined,
-    padding: undefined,
-  },
-  warning: {
-    title: "white",
-    text: "white",
-    background: "orange",
-    icon: "white",
-    link: "white",
-    padding: "16px",
-  },
-  alert: {
-    title: "palette.text.shade100",
-    text: "palette.text.shade50",
-    background: "red",
-    icon: "white",
-    link: "white",
-    padding: undefined,
-  },
-};
-
-const getLevelTheme = (levelName: string) => {
-  const levelData = levelThemes[levelName];
-
-  if (levelData) {
-    return levelData;
-  }
-  return levelThemes.info;
-};
-
-const UnReadNotifBadge = styled.div`
-  width: 8px;
-  height: 8px;
-  background-color: ${(p: any) => p.theme.colors.wallet};
-  border-radius: 8px;
-  position: absolute;
-  top: calc(50% - 4px);
-  left: 0px;
-  z-index: 1;
-`;
+import lightUptoDateIllustration from "~/renderer/images/V3/announcements-light.png";
+import darkUptoDateIllustration from "~/renderer/images/V3/announcements-dark.png";
 
 type DateRowProps = {
   date: Date;
@@ -85,22 +37,14 @@ function DateRow({ date }: DateRowProps) {
   );
 }
 
-const ArticleContainer = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  border-radius: 4px;
-`;
+type ArticleLevels = "info" | "warning" | "alert";
 
-const ArticleRightColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
 type ArticleProps = {
-  level: string;
-  icon: string;
+  level?: ArticleLevels;
+  icon?: ArticleLevels;
   title: string;
-  text: string;
+  text?: string;
+  uuid: string;
   link?: {
     label?: string;
     href: string;
@@ -108,68 +52,6 @@ type ArticleProps = {
   utmCampaign?: string;
   isRead?: boolean;
 };
-
-const icons: any = {
-  warning: {
-    defaultIconColor: "orange",
-    Icon: TriangleWarning,
-  },
-  info: {
-    defaultIconColor: "wallet",
-    Icon: InfoCircle,
-  },
-};
-
-const getIcon = (iconName: string) => {
-  const iconData = icons[iconName];
-
-  if (iconData) {
-    return iconData;
-  }
-  return icons.info;
-};
-
-type ArticleLinkProps = {
-  label?: string;
-  href: string;
-  utmCampaign?: string;
-  color?: string;
-};
-
-function ArticleLink({ label, href, utmCampaign, color }: ArticleLinkProps) {
-  const { handler } = useDeepLinkHandler();
-  const dispatch = useDispatch();
-  const url = useMemo(() => {
-    const url = new URL(href);
-    url.searchParams.set("utm_medium", "announcement");
-
-    if (utmCampaign) {
-      url.searchParams.set("utm_campaign", utmCampaign);
-    }
-    return url;
-  }, [href, utmCampaign]);
-
-  const onLinkClick = useCallback(() => {
-    const isDeepLink = url.protocol === "ledgerlive:";
-
-    if (isDeepLink) {
-      handler(null, url.href);
-      dispatch(closeInformationCenter());
-    } else openURL(url.href);
-  }, [url, handler, dispatch]);
-
-  return (
-    <LinkWithExternalIcon
-      color={color}
-      onClick={onLinkClick}
-      style={{
-        marginTop: 15,
-      }}
-    >
-      {label || href}
-    </LinkWithExternalIcon>
-  );
-}
 
 function Article({
   level = "info",
@@ -180,70 +62,75 @@ function Article({
   utmCampaign,
   isRead,
 }: ArticleProps) {
-  const levelTheme = getLevelTheme(level);
-  const { Icon, defaultIconColor } = getIcon(icon);
+  const [backgroundColor, iconColor] = useMemo(() => {
+    switch (level) {
+      case "info":
+        return ["palette.primary.c30", "palette.primary.c90"];
+      case "warning":
+        return ["palette.warning.c40", "palette.warning.c100"];
+      case "alert":
+        return ["palette.error.c40", "palette.error.c100"];
+    }
+  }, [level]);
+
+  const Icon = useMemo(() => {
+    switch (icon) {
+      case "info":
+        return Icons.InfoRegular;
+      case "warning":
+        return Icons.WarningMedium;
+      case "alert":
+        return Icons.CircledAlertRegular;
+    }
+  }, [icon]);
+
+  const { handler } = useDeepLinkHandler();
+  const dispatch = useDispatch();
+  const url = useMemo(() => {
+    if (link) {
+      const url = new URL(link.href);
+      url.searchParams.set("utm_medium", "announcement");
+
+      if (utmCampaign) {
+        url.searchParams.set("utm_campaign", utmCampaign);
+      }
+      return url;
+    } else {
+      return null;
+    }
+  }, [link, utmCampaign]);
+
+  const onLinkClick = useCallback(() => {
+    if (url) {
+      const isDeepLink = url.protocol === "ledgerlive:";
+
+      if (isDeepLink) {
+        handler(null, url.href);
+        dispatch(closeInformationCenter());
+      } else openURL(url.href);
+    }
+  }, [url, handler, dispatch]);
 
   return (
     <Notification
-      badge={<Badge icon={<Badge active={!isRead} icon={<Icon size={15} />} />} />}
+      badge={
+        <Badge
+          icon={
+            <Badge
+              backgroundColor={backgroundColor}
+              active={!isRead}
+              icon={<Icon size={17} color={iconColor} />}
+            />
+          }
+        />
+      }
       title={title}
       description={text}
       link={link?.label}
+      onLinkClick={onLinkClick}
     />
   );
 }
-
-/* <ArticleRootContainer isRead={isSeen}>
-<ArticleContainer
-  bg={levelTheme.background}
-  py={levelTheme.padding}
-  px="16px"
-  color={levelTheme.icon || defaultIconColor}
->
-  <ArticleRightColumnContainer>
-    <Box horizontal alignItems="center" justifyContent="center">
-      <Icon size={15} />
-      <Box ml={2} flex="1">
-        <Text
-          color={levelTheme.title}
-          ff="Inter|SemiBold"
-          fontSize="14px"
-          lineHeight="16.94px"
-        >
-          {title}
-        </Text>
-      </Box>
-    </Box>
-
-    <Text
-      mt="4px"
-      color={levelTheme.text}
-      ff="Inter|Medium"
-      fontSize="12px"
-      lineHeight="18px"
-    >
-      {text}
-    </Text>
-    {link ? (
-      <ArticleLink
-        href={link.href}
-        label={link.label}
-        utmCampaign={utmCampaign}
-        color={levelTheme.link}
-      />
-    ) : null}
-  </ArticleRightColumnContainer>
-</ArticleContainer>
-{isSeen ? null : <UnReadNotifBadge />}
-</ArticleRootContainer> */
-
-const PanelContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-`;
 
 const Separator = styled.div`
   margin: 25px 0px;
@@ -252,14 +139,20 @@ const Separator = styled.div`
   background-color: ${({ theme }: { theme: any }) => theme.colors.palette.text.shade10};
 `;
 
+const Illustration = styled.img`
+  width: 100%;
+`;
+
 function AnnouncementPanel() {
+  const { t } = useTranslation();
+
   const { cache, setAsSeen, seenIds, allIds } = useAnnouncements();
-  const groupedAnnouncements = useMemo(() => groupAnnouncements(allIds.map(uuid => cache[uuid])), [
+  let groupedAnnouncements = useMemo(() => groupAnnouncements(allIds.map(uuid => cache[uuid])), [
     cache,
     allIds,
   ]);
 
-  const timeoutByUUID = useRef({});
+  const timeoutByUUID = useRef<{ [uuid: string]: NodeJS.Timeout }>({});
   const handleInView = useCallback(
     (visible, uuid) => {
       const timeouts = timeoutByUUID.current;
@@ -278,29 +171,42 @@ function AnnouncementPanel() {
     [seenIds, setAsSeen],
   );
 
+  groupedAnnouncements = [];
+
+  const theme = useTheme();
+
   if (!groupedAnnouncements.length) {
     return (
-      <PanelContainer>
+      <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1} pt="20px">
+        <Flex mt="70px" mx="80px">
+          <Illustration
+            src={
+              theme.colors.palette.type === "light"
+                ? lightUptoDateIllustration
+                : darkUptoDateIllustration
+            }
+          />
+        </Flex>
         <Text
-          color="palette.text.shade100"
-          ff="Inter|SemiBold"
-          fontSize="18px"
-          lineHeight="21.78px"
+          mt="50px"
+          textTransform="uppercase"
+          color="palette.neutral.c100"
+          ff="Alpha|Medium"
+          fontSize="28px"
           textAlign="center"
         >
-          <Trans i18nKey="informationCenter.announcement.emptyState.title" />
+          {t("informationCenter.announcement.emptyState.upToDate")}
         </Text>
         <Text
           mt="8px"
-          color="palette.text.shade50"
+          color="palette.neutral.c100"
           ff="Inter|Regular"
           fontSize="13px"
-          lineHeight="15.73px"
           textAlign="center"
         >
-          <Trans i18nKey="informationCenter.announcement.emptyState.desc" />
+          {t("informationCenter.announcement.emptyState.checkBackSoon")}
         </Text>
-      </PanelContainer>
+      </Flex>
     );
   }
 
@@ -314,12 +220,14 @@ function AnnouncementPanel() {
             group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
               <React.Fragment key={uuid}>
                 <InView as="div" onChange={visible => handleInView(visible, uuid)}>
+                  {/* conversions are made here for level, icon, text and link. These types are comming from live-common
+                  TODO: maybe sanitize the types in live-commos so they're more restrictive and we don't need this */}
                   <Article
-                    level={level}
-                    icon={icon}
+                    level={level as ArticleLevels | undefined}
+                    icon={icon as ArticleLevels | undefined}
                     title={content.title}
-                    text={content.text}
-                    link={content.link}
+                    text={content.text ?? undefined}
+                    link={content.link ?? undefined}
                     uuid={uuid}
                     utmCampaign={utmCampaign}
                     isRead={seenIds.includes(uuid)}

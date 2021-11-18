@@ -9,6 +9,7 @@ import type { Incident } from "@ledgerhq/live-common/lib/notifications/ServiceSt
 import Text from "~/renderer/components/Text";
 import SuccessAnimatedIcon from "~/renderer/components/SuccessAnimatedIcon";
 import { Trans } from "react-i18next";
+import { Flex } from "@ledgerhq/react-ui";
 import { FakeLink } from "~/renderer/components/Link";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
@@ -138,23 +139,33 @@ function StatusNotOkHeader({ incidents }: { incidents: Incident[] }) {
   );
 }
 
-const PanelContainer: ThemedComponent<{}> = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  height: 100%;
-`;
+function ServiceStatusPanel() {
+  const incidents: Incident[] = [
+    {
+      id: "1",
+      name: "Service Unavailable",
+      impact: "Impacted lalalalaala",
+      created_at: "2020-04-01T00:00:00.000Z",
+      status: "unavailable",
+      incident_updates: [],
+      monitoring_at: "2020-04-01T00:00:00.000Z",
+      page_id: "",
+      resolved_at: "2020-04-01T00:00:00.000Z",
+      shortlink: "",
+      updated_at: "2020-04-01T00:00:00.000Z",
 
-export function ServiceStatusPanel() {
-  const { incidents } = useFilteredServiceStatus();
+    }
+  ]
+  // const { incidents } = useFilteredServiceStatus();
 
   console.log({ incidents });
 
   return (
-    <PanelContainer>
+    <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1}>
       {incidents.length > 0 ? <StatusNotOkHeader incidents={incidents} /> : <StatusOkHeader />}
-    </PanelContainer>
+    </Flex>
   );
 }
+
+
+export default ServiceStatusPanel;
