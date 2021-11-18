@@ -31,33 +31,32 @@ const NestedIndicator = styled.div`
 `;
 
 const Header = ({ account, nested }: Props) => {
-  const theme = useTheme();
   const currency = getAccountCurrency(account);
-  const name = getAccountName(account);
-  const color =
-    currency.type === "CryptoCurrency" ? currency.color : theme.colors.palette.text.shade60;
-  const title = currency.type === "CryptoCurrency" ? currency.name : "token";
+  const accountName = getAccountName(account);
+  const isToken = currency.type !== "CryptoCurrency";
+  const title = isToken ? accountName : currency.name;
   return (
     <Box horizontal flow={3} flex={nested ? "40%" : "30%"} pr={1} alignItems="center">
-      <Box alignItems="center" justifyContent="center" style={{ color }}>
+      <Box alignItems="center" justifyContent="center">
         <CryptoCurrencyIcon currency={currency} size={ICON_SIZE} />
         {nested && <NestedIndicator />}
       </Box>
       <Box style={{ flexShrink: 1 }}>
-        {!nested && account.type === "Account" && (
-          <Box horizontal alignItems="center" className="accounts-account-row-crypto-name">
-            <Text variant="body" fontWeight="medium" color="palette.neutral.c100">
-              {title} <AccountTagDerivationMode account={account} />
-            </Text>
-          </Box>
+        <Box horizontal alignItems="center" className="accounts-account-row-crypto-name">
+          <Text variant="body" fontWeight="semiBold" color="palette.neutral.c100">
+            {title}
+          </Text>
+        </Box>
+        {!isToken && (
+          <Tooltip delay={1200} content={accountName}>
+            <Ellipsis>
+              <Text variant="paragraph" fontWeight="medium" color="palette.neutral.c80">
+                {accountName}
+                <AccountTagDerivationMode account={account} />
+              </Text>
+            </Ellipsis>
+          </Tooltip>
         )}
-        <Tooltip delay={1200} content={name}>
-          <Ellipsis>
-            <Text variant="paragraph" fontWeight="medium" color="palette.neutral.c80">
-              {name}
-            </Text>
-          </Ellipsis>
-        </Tooltip>
       </Box>
     </Box>
   );
