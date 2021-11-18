@@ -3492,7 +3492,7 @@
       "description": "Wait for the operation to go through."
     },
     "AccountNameRequired": {
-      "title": "An account name is required",
+      "title": "アカウント名が必要です",
       "description": "Please enter an account name"
     },
     "AccountNeedResync": {
@@ -3593,7 +3593,7 @@
       "description": "This crypto asset is not yet supported. Please contact Ledger Support."
     },
     "DeviceNotGenuine": {
-      "title": "Possibly not genuine",
+      "title": "正規品でない可能性があります",
       "description": "Request assistance from Ledger Support"
     },
     "DeviceGenuineSocketEarlyClose": {
