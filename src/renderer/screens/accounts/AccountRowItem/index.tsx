@@ -24,6 +24,7 @@ import { hideEmptyTokenAccountsSelector } from "~/renderer/reducers/settings";
 import Button from "~/renderer/components/Button";
 
 import perFamilyTokenList from "~/renderer/generated/TokenList";
+import Link from "~/renderer/components/Link";
 
 const Row: ThemedComponent<{}> = styled(Flex)`
   border-bottom: 1px solid ${p => p.theme.colors.palette.neutral.c40};
@@ -66,29 +67,15 @@ const TokenContentWrapper = styled.div`
   position: relative;
 `;
 
-const TokenShowMoreIndicator: ThemedComponent<{ expanded?: boolean }> = styled(Button)`
-  margin: ${p => (p.expanded ? 0 : -1)}px 0 0;
+const TokenShowMoreButton: ThemedComponent<{ expanded?: boolean }> = styled(Link)`
   display: flex;
-  color: ${p => p.theme.colors.wallet};
   align-items: center;
   justify-content: center;
-  height: 32px;
+  height: 44px;
   text-align: center;
-
-  &:hover ${Text} {
-    text-decoration: underline;
-  }
-  &:hover {
-    background-color: initial;
-  }
-
-  > :nth-child(2) {
-    margin-left: 8px;
-    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
-  }
 `;
 
-const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled.div`
+const IconAngleDown: ThemedComponent<{ expanded?: boolean }> = styled(Flex)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,7 +235,6 @@ class AccountRowItem extends PureComponent<Props, State> {
                           index={index}
                           range={range}
                           account={token}
-                          // $FlowFixMe
                           parentAccount={mainAccount}
                           onClick={onClick}
                         />
@@ -258,24 +244,24 @@ class AccountRowItem extends PureComponent<Props, State> {
               </TokenContentWrapper>
             ) : null}
             {showTokensIndicator && !disabled && tokens && (
-              <TokenShowMoreIndicator
+              <TokenShowMoreButton
                 expanded={expanded}
                 event="Account view tokens expand"
                 eventProperties={{ currencyName: currency.name }}
                 onClick={this.toggleAccordion}
               >
                 <Box horizontal alignContent="center" justifyContent="center">
-                  <Text color="palette.neutral.c100" variant="small" fontWeight="semibold">
+                  <Text color="palette.neutral.c100" variant="small" fontWeight="semiBold">
                     <Trans
                       i18nKey={translationMap[expanded ? "hide" : "see"]}
                       values={{ tokenCount: tokens.length }}
                     />
                   </Text>
-                  <IconAngleDown expanded={expanded}>
-                    <Icons.ChevronBottomMedium color="palette.neutral.c100" />
+                  <IconAngleDown expanded={expanded} ml={2}>
+                    <Icons.DropdownMedium color="palette.neutral.c100" size={16} />
                   </IconAngleDown>
                 </Box>
-              </TokenShowMoreIndicator>
+              </TokenShowMoreButton>
             )}
           </Row>
         </AccountContextMenu>
