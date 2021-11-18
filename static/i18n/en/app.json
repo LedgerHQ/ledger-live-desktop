@@ -4011,6 +4011,30 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaNotEnoughBalanceToPayFees": {
+      "title": "Not enouogh balance to pay fees"
+    },
+    "SolanaAssociatedTokenAccountWillBeFunded": {
+      "title": "Associated token account will be funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long"
+    },
+    "SolanaTokenAccountHoldsAnotherToken": {
+      "title": "Token account hodls another token"
+    },
+    "SolanaTokenAccounNotInitialized": {
+      "title": "Account not initialized"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
+    "SolanaTokenRecipientIsSenderATA": {
+      "title": "Recipient is associated token account of sender"
     }
   }
 }
