@@ -2547,19 +2547,19 @@
       "currencies": "暗号資産",
       "help": "ヘルプ",
       "about": "Ledgerについて",
-      "experimental": "Experimental features",
-      "accounts": "Accounts",
+      "experimental": "Experimental features（開発者向け実験機能）",
+      "accounts": "アカウント",
       "developer": "デベロッパー"
     },
     "export": {
       "accounts": {
         "title": "アカウントをエクスポート",
-        "desc": "Add your accounts in Ledger Live mobile. Your accounts will only synchronize with the blockchain, not between your mobile and desktop apps.",
+        "desc": "アカウントをLedger Live mobileアプリに追加します。アカウントは、スマホやデスクトップアプリ間ではなく、ブロックチェーンとのみ同期します。",
         "button": "エクスポート"
       },
       "operations": {
-        "title": "Operation history",
-        "desc": "Save a CSV file of your account operations on your computer."
+        "title": "オペレーション履歴",
+        "desc": "お使いのコンピューターに、アカウントオペレーションの CSV ファイルを保存します。"
       },
       "modal": {
         "button": "完了",
@@ -2571,18 +2571,18 @@
       }
     },
     "display": {
-      "language": "Display language",
+      "language": "表示言語",
       "languageDesc": "Ledger Liveに表示される言語を設定します。",
-      "theme": "Theme",
-      "themeDesc": "Select the theme.",
+      "theme": "テーマ",
+      "themeDesc": "テーマを選択",
       "counterValue": "優先する通貨",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択してください。",
       "region": "地域",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
-      "stock": "Regional market indicator",
-      "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
-      "carouselVisibility": "Carousel visibility",
-      "carouselVisibilityDesc": "Enable visibility of the carousel on Portfolio"
+      "regionDesc": "Ledger Liveのタイムゾーンを設定するには、お住まいの地域を選択してください。",
+      "stock": "マーケットインジケーターの色分け",
+      "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
+      "carouselVisibility": "カルーセルの表示",
+      "carouselVisibilityDesc": "ポートフォリオ上でカルーセルの表示を有効にする。"
     },
     "developer": {
       "toast": {
@@ -2605,45 +2605,45 @@
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
-      "desc": "Select a crypto asset to edit its settings.",
-      "placeholder": "No settings for this asset",
+      "desc": "設定を編集する暗号資産を選択してください。",
+      "placeholder": "この資産の設定はありません。",
       "confirmationsNb": "確認数",
-      "confirmationsNbDesc": "Set the number of network confirmations for a transaction to be marked as confirmed."
+      "confirmationsNbDesc": "トランザクションの確認に必要なネットワーク承認の回数を設定します。"
     },
     "profile": {
       "password": "パスワードロック",
-      "passwordDesc": "Set a password to secure the Ledger Live data on your computer, including account names, balances, transactions and public addresses.",
+      "passwordDesc": "お使いのコンピューターに保存された、アカウント名、残高、トランザクション、パブリックアドレスなどのLedger Liveデータへの不正アクセスを防ぐために、パスワードを設定します。",
       "passwordAutoLock": "オートロック",
-      "passwordAutoLockDesc": "Automatically lock Ledger Live when inactive.",
+      "passwordAutoLockDesc": "非アクティブ時にLedger Liveを自動的にロックします。",
       "changePassword": "パスワードの変更",
       "softResetTitle": "キャッシュを削除",
-      "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
+      "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期させます。",
       "softReset": "削除",
       "resetKYC": "KYC（本人確認）データをリセット",
       "resetKYCDesc": "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用されるKYC（本人確認）データをすべて消去します。",
       "hardResetTitle": "Ledger Liveをリセット",
-      "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
+      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除します。",
       "hardReset": "リセット",
       "analytics": "アナリティクス",
       "analyticsDesc": "Ledgerがユーザーエクスペリエンスを改善できるよう、アナリティクスを有効にしてください。これに含まれるのは、クリック、ページの閲覧、リダイレクト、アクション（送金、着金、ロックなど）、ページ末へのスクロール、アプリの（アン）インストール、アプリのバージョン、アカウント数、暗号資産と操作、セッションの持続時間、Ledgerデバイスの種類とファームウェアです。",
       "reportErrors": "バグのレポート",
-      "reportErrorsDesc": "Automatically send reports to help Ledger improve its products.",
+      "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信します。",
       "launchOnboarding": "デバイスの設定",
-      "launchOnboardingDesc": "Set up a new device or restore an existing device. Accounts and settings are kept."
+      "launchOnboardingDesc": "新しいデバイスとしてセットアップするか、既存のデバイスを復元します。アカウントと設定はそのまま保持されます。"
     },
     "help": {
       "version": "バージョン",
-      "releaseNotesBtn": "Details",
-      "termsBtn": "Read",
-      "faq": "Ledger Support",
-      "faqDesc": "If you have a problem, get help using Ledger Live with your hardware wallet.",
-      "terms": "Terms of Use",
-      "termsDesc": "By using Ledger Live you are deemed to have accepted our Terms of Use.",
-      "privacy": "Privacy Policy",
-      "privacyDesc": "Refer to our Privacy Policy to learn what personal data we collect, why and how we use them."
+      "releaseNotesBtn": "詳細",
+      "termsBtn": "読む",
+      "faq": "Ledgerサポート",
+      "faqDesc": "問題がある場合は、ハードウェアウォレットでLedger Liveを使用するためのヘルプを参照してください。",
+      "terms": "利用条件",
+      "termsDesc": "Ledger Liveを使用することにより、当社の利用規約に同意したものとみなされます。",
+      "privacy": "プライバシーポリシー",
+      "privacyDesc": "当社のプライバシーポリシーをお読みになり、当社が収集する個人データや使用目的および使用方法についてご理解ください。"
     },
     "experimental": {
-      "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
+      "disclaimer": "これらは、テクノロジーファンのコミュニティ向けに、現状のまま提供される実験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にすると、あなたは自己責任でこれらの機能を使用することに同意したことになります。",
       "features": {
         "apiTrongridProxy": {
           "title": "TronGrid.ioを使用",
@@ -2651,7 +2651,7 @@
         },
         "experimentalCurrencies": {
           "title": "実験的なJSの実装",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "実験的なビットコイン（Taproot）とテゾスのJS実装をご利用ください。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2680,12 +2680,12 @@
       }
     },
     "hardResetModal": {
-      "title": "Reset Ledger Live",
+      "title": "Ledger Liveをリセット",
       "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase.",
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
-      "title": "Clear cache",
+      "title": "キャッシュを削除",
       "desc": "Clearing the cache forces network resynchronization. Your settings and accounts are preserved. The private keys to access to your crypto assets remain secure on your Ledger device and Recovery sheet."
     },
     "resetFallbackModal": {
