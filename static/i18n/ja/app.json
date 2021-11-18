@@ -2095,87 +2095,87 @@
           "amount": {
             "title": "数量",
             "subtitle": "デリゲートの解除は<0>21日</0>で完了します。",
-            "warning": "Rewards will be immediately cashed in. The undelegated amount will be back in the available balance after the <0>21-day timelock</0>.",
+            "warning": "報酬はすぐにキャッシュインされます。 再デリゲート額は、<0>21日間のタイムロック</0>後に、利用可能残高へ戻されます。",
             "fields": {
-              "validator": "Validator",
-              "amount": "Amount to undelegate"
+              "validator": "バリデータ",
+              "amount": "デリゲート解除額"
             }
           },
           "device": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "確認",
             "success": {
-              "title": "You have successfully undelegated your assets.",
-              "description": "<0>{{amount}}</0> were undelegated from <0>{{validator}}</0>",
-              "cta": "View details"
+              "title": "資産のデリゲートを正常に解除しました。",
+              "description": "<0>{{validator}}</0> から<0>{{amount}}</0>数デリゲート解除されました。",
+              "cta": "詳細を表示"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
     }
   },
   "algorand": {
-    "operationHasRewards": "Rewards earned",
-    "operationEarnedRewards": "You earned <0>{{amount}}</0> rewards.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> earned rewards)",
+    "operationHasRewards": "獲得した報酬",
+    "operationEarnedRewards": "<0>{{amount}}</0>報酬を獲得しました。",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0>獲得済み報酬)",
     "optIn": {
       "flow": {
-        "title": "Add ASA (Asset)",
+        "title": "ASA（資産）の追加",
         "steps": {
           "assets": {
-            "title": "ASA (Asset)",
-            "info": "Adding an asset requires sending a transaction with minimum fees. This will appear on your transaction history",
-            "selectLabel": "Choose an ASA (Asset)",
-            "disabledTooltip": "You already have this ASA (Asset) in your Algorand account"
+            "title": "ASA（資産）",
+            "info": "資産を追加するには、最低額の手数料で取引を送信する必要があります。これは取引履歴に表示されます",
+            "selectLabel": "ASA (資産) を選択",
+            "disabledTooltip": "Algorandアカウントには、すでにこの ASA (資産) が含まれています。"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "確認",
             "success": {
-              "title": "{{token}} asset successfully added",
-              "text": "You can now receive and send <0>{{token}}</0> assets on your Algorand account.",
-              "cta": "View details"
+              "title": "{{token}} 資産が正常に追加されました。",
+              "text": "アルゴランドアカウントで、<0>{{token}}</0>資産の受取や送付ができるようになりました。",
+              "cta": "詳細を表示"
             },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
           }
         }
       }
     },
     "claimRewards": {
-      "header": "Rewards",
-      "tooltip": "Algorand rewards are distributed regularly and are claimed automatically when you do a transaction.",
+      "header": "報酬",
+      "tooltip": "アルゴランドの報酬は定期的に配布され、取引を行うと自動的に報酬を申請します。",
       "cta": "報酬獲得を申請",
-      "rewardsDisabledTooltip": "You don’t have any rewards. Algorand rewards are claimed automatically when you do a transaction. Receive ALGO to start earning rewards.",
+      "rewardsDisabledTooltip": "報酬はありません。取引を行うと、アルゴランドの報酬は自動的に受け取られます。報酬を獲得するために、ALGOを受け取りましょう。",
       "flow": {
-        "title": "Claim rewards",
+        "title": "報酬獲得を申請",
         "steps": {
           "starter": {
-            "description": "Receive Algorand rewards simply for holding Algorand control of your assets.",
+            "description": "アルゴランドの資産を保有・管理するだけで、報酬を受け取ることができます。",
             "bullet": {
-              "delegate": "A minimum balance of 1 ALGO is required to receive rewards.",
-              "access": "Increase the account’s balance to increase rewards.",
-              "ledger": "Perform a transaction to or from the account to claim rewards."
+              "delegate": "報酬を受け取るには、1ALGO以上の残高が必要です。",
+              "access": "アカウントの残高を増やすと、報酬も増えます。",
+              "ledger": "報酬を獲得するには、アカウントとの間でトランザクションを実行してください。"
             },
-            "learnMore": "How Algorand rewards work?",
+            "learnMore": "アルゴランドの報酬の仕組みとは？",
             "button": {
-              "cta": "Receive Algo"
+              "cta": "Algoを受け取る"
             }
           },
           "info": {
-            "title": "Rewards",
-            "description": "Congratulations! You earned {{amount}}. Click on Continue to claim your rewards",
-            "info": "You will be prompted to generate an empty transaction to your account. This will add your current rewards to your balance at the minimal cost of the transaction fees."
+            "title": "報酬",
+            "description": "おめでとうございます！{{amount}} を獲得しました。続けて報酬を受け取る。",
+            "info": "アカウントに空のトランザクションを生成してください。これにより、現在の報酬が最小限のトランザクション手数料で残高に追加されます。"
           },
           "connectDevice": {
-            "title": "Device"
+            "title": "デバイス"
           },
           "confirmation": {
-            "title": "Confirmation",
+            "title": "確認",
             "success": {
               "title": "報酬を正常に獲得しました！",
               "text": "報酬が利用可能残高に加算されました。",
@@ -2448,7 +2448,7 @@
     "title": "報酬を獲得する",
     "header": "デリゲート（委任）",
     "validator": "Validator",
-    "yield": "Est. Yield",
+    "yield": "推定利回り",
     "address": "アドレス",
     "transactionID": "トランザクションID",
     "value": "価値",
@@ -2948,11 +2948,11 @@
       },
       "tutorial": {
         "steps": {
-          "getStarted": "Get started",
-          "pinCode": "Pin code",
-          "recoveryPhrase": "Recovery phrase",
-          "hideRecoveryPhrase": "Hide recovery phrase",
-          "pairNano": "Connect nano"
+          "getStarted": "はじめに",
+          "pinCode": "PINコード",
+          "recoveryPhrase": "リカバリーフレーズ",
+          "hideRecoveryPhrase": "リカバリーフレーズを非表示にする",
+          "pairNano": "Nanoを接続する"
         },
         "screens": {
           "importYourRecoveryPhrase": {
@@ -2966,7 +2966,7 @@
             }
           },
           "howToGetStarted": {
-            "title": "The best way to get you started:",
+            "title": "大切な事前準備：",
             "rules": {
               "1": "30分ほど時間を確保する。",
               "2": "ペンを用意する。",
@@ -3052,22 +3052,22 @@
           },
           "pinCodeHowTo": {
             "setUp": {
-              "title": "Choose PIN code",
+              "title": "PINコードを選択",
               "descr": "左ボタンまたは右ボタンを押して、数字を変更します。数字を確定するには、両方のボタンを同時に押します。&lt;0&gt;&lt;/0&gt;を選択するとPINコードが確定されます。数字を消去したいときは&lt;1&gt;&lt;/1&gt;を選択します。"
             },
             "confirm": {
-              "title": "Confirm PIN code",
-              "descr": "Enter your PIN code again to confirm it."
+              "title": "PINコードを確認",
+              "descr": "PINコードをもう一度入力して、確定してください。"
             },
             "buttons": {
-              "next": "Next step",
-              "prev": "Previous step",
-              "help": "Need help"
+              "next": "次のステップ",
+              "prev": "前のステップ",
+              "help": "お困りですか？"
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Enter your recovery phrase",
-            "paragraph1": "Your recovery phrase is the secret list of words that you backed up when you first set up your wallet.",
+            "title": "リカバリーフレーズを入力",
+            "paragraph1": "リカバリーフレーズはウォレットの初回セットアップ時に書き留めた、秘密の単語の組み合わせです。",
             "paragraph2": "Ledger does not keep a copy of your recovery phrase.",
             "disclaimer": "I understand that if I lose my recovery phrase, I will not be able to access my crypto in case I lose access to my Nano.",
             "buttons": {
@@ -3113,7 +3113,7 @@
             },
             "selectLength": {
               "title": "Select recovery phrase length",
-              "descr": "Your recovery phrases can have 12, 18 or 24 words. You must enter all words to access your crypto."
+              "descr": "リカバリーフレーズの長さは12単語、18単語、または24単語のいずれかです。暗号資産にアクセスするには、すべての単語を入力する必要があります。"
             },
             "enterWord": {
               "title": "Enter Word #1...",
@@ -3134,7 +3134,7 @@
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirm your recovery phrase",
+              "title": "リカバリーフレーズを確認する",
               "descr": "Scroll through the words until you find Word #1 by pressing the right button. Validate by pressing both buttons."
             },
             "repeat": {
