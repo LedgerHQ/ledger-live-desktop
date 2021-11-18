@@ -118,7 +118,7 @@ const OptionsButton = () => {
       {() => (
         <Box horizontal>
           <Tooltip content={t("accounts.optionsMenu.title")}>
-            <Button type="shade" Icon={Icons.OthersMedium} />
+            <Button variant="shade" Icon={Icons.OthersMedium} />
           </Tooltip>
         </Box>
       )}

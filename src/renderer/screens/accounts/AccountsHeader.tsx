@@ -31,7 +31,7 @@ const AccountsHeader = () => {
       </Flex>
       <Flex flexDirection="row" columnGap={5} alignItems="center" justifyContent="flex-end">
         <Button
-          type="main"
+          variant="main"
           Icon={Icons.PlusMedium}
           iconPosition="left"
           onClick={openAddAccounts}
