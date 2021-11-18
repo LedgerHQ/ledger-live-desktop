@@ -1588,8 +1588,8 @@
         "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続します。",
         "turnOn": "デバイスのボタンを押して電源をオンにします。",
         "falsePin": "デバイスをリセットするには、間違ったPINを3回入力してください。",
-        "turnOff": "Press and hold the side button until {{action}} is displayed.",
-        "confirmTurnOff": "Tap {{action}} to confirm.",
+        "turnOff": "{{action}} が表示されるまで、サイドボタンを長押ししてください。",
+        "confirmTurnOff": "{{action}} をタップして確認してください。",
         "second": "2. Boot in {{mode}} mode",
         "boot": "Press and hold the side button until {{option}} is displayed",
         "recoveryMode": "Tap {{mode}} Mode. Wait until the dashboard appears.",
@@ -1686,117 +1686,117 @@
         "title": "Vote",
         "search": "Search by name or address...",
         "totalVotes": "Total votes: {{total}}",
-        "selected": "Selected: {{total}}",
-        "maxSelected": "Max selected: {{total}}",
-        "allVotesAreUsed": "All assets are distributed",
-        "maxUsed": "Insufficient assets",
-        "validators": "Validators ({{total}})",
-        "votes": "Available assets: {{total}}",
-        "noResults": "No validator found for \"<0>{{search}}</0>\"."
+        "selected": "選択済：{{total}}",
+        "maxSelected": "最大選択数：{{total}}",
+        "allVotesAreUsed": "すべての資産が分配されます。",
+        "maxUsed": "資金が不足しています。",
+        "validators": "バリデータ ({{total}})",
+        "votes": "利用可能な資産： {{total}}",
+        "noResults": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。"
       },
       "connectDevice": {
-        "title": "Device"
+        "title": "デバイス"
       },
       "confirmation": {
-        "title": "Confirmation",
+        "title": "確認",
         "success": {
-          "title": "Your votes were cast successfully.",
+          "title": "投票が正常に行われました。",
           "text": "",
-          "cta": "View details"
+          "cta": "詳細を表示"
         },
-        "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
       }
     }
   },
   "buy": {
-    "title": "Buy",
-    "titleCrypto": "Buy {{currency}}",
-    "buyCTA": "Buy {{currencyTicker}}",
+    "title": "購入",
+    "titleCrypto": "{{currency}} を購入",
+    "buyCTA": "{{currencyTicker}} を購入",
     "withoutDevice": "デバイスを使用せずに続行する",
     "connectWithoutDevice": "最適なセキュリティのため、デバイスの使用をお勧めします。",
     "skipConnect": "デバイスを使用せずに続行する"
   },
   "sell": {
-    "title": "Sell",
-    "titleCrypto": "Sell {{currency}}"
+    "title": "売却",
+    "titleCrypto": "{{currency}} を売却"
   },
   "receive": {
-    "title": "Receive",
-    "successTitle": "Address shared securely",
+    "title": "受け取る",
+    "successTitle": "安全に共有されたアドレス",
     "steps": {
       "chooseAccount": {
         "title": "アカウント",
         "label": "入金アカウント",
-        "parentAccount": "1. Select {{currencyName}} account",
-        "token": "2. Select a token",
-        "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
+        "parentAccount": "1. {{currencyName}} アカウントを選択",
+        "token": "2. トークンを選択",
+        "verifyTokenType": "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。 {{currency}} アカウントに他の暗号資産が送信されると、失われる可能性があります。",
         "warningTokenType": "{{currency}}アカウントには、&lt;0&gt;{{ticker}}&lt;/0&gt;または&lt;0&gt;{{tokenType}}&lt;/0&gt;トークンのみを送金してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
       },
       "connectDevice": {
-        "title": "Device",
-        "withoutDevice": "Don't have your device?"
+        "title": "デバイス",
+        "withoutDevice": "デバイスをお持ちではありませんか？"
       },
       "receiveFunds": {
-        "title": "Receive"
+        "title": "受取"
       },
       "warning": {
         "tezos": {
-          "text": "The amount received on a delegated account will be added to the total staked amount. Choose another account if you want to avoid this."
+          "text": "デリゲートアカウントで受け取った額は、合計ステーキング額に加算されます。これを回避したい場合は、別のアカウントを選択してください。"
         }
       }
     }
   },
   "send": {
-    "title": "Send",
+    "title": "送る",
     "titleNft": "Send NFT",
-    "totalSpent": "Total to debit",
+    "totalSpent": "引き落とし合計",
     "steps": {
       "recipient": {
-        "title": "Recipient",
+        "title": "受取人",
         "nftRecipient": "NFT to send"
       },
       "amount": {
-        "title": "Amount",
-        "banner": "Maximum spendable amount is",
+        "title": "数量",
+        "banner": "最大利用可能額は、",
         "fees": "手数料",
         "standard": "標準",
         "advanced": "アドバンス",
         "nftQuantity": "Quantity"
       },
       "summary": {
-        "title": "Summary"
+        "title": "概要"
       },
       "device": {
-        "title": "Device"
+        "title": "デバイス"
       },
       "details": {
-        "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
+        "utxoLag": "アカウントに大量のコインがあるため、このトランザクションの承認と署名には時間がかかる場合があります。",
         "subaccountsWarning": "このアカウントのトークンを送金するには、{{currencynbsp}}を補充する必要があります。",
-        "from": "From",
-        "to": "To",
-        "selectAccountDebit": "Account to debit",
-        "recipientAddress": "Recipient address",
-        "amount": "Amount",
-        "fees": "Network fees",
-        "useMax": "Send Max",
-        "rippleTag": "Tag",
-        "rippleTagPlaceholder": "Optional",
-        "ethereumGasLimit": "Gas limit",
-        "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte",
+        "from": "送付元",
+        "to": "送付先",
+        "selectAccountDebit": "引き落としアカウント",
+        "recipientAddress": "受取人アドレス",
+        "amount": "数量",
+        "fees": "ネットワーク手数料",
+        "useMax": "最大額を送る",
+        "rippleTag": "タグ",
+        "rippleTagPlaceholder": "オプション",
+        "ethereumGasLimit": "ガスリミット",
+        "ethereumGasPrice": "ガス代",
+        "unitPerByte": "1バイトあたり{{unit}}",
         "nft": "NFT",
         "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
-          "accurate": "Loading... ({{percentage}})",
-          "inaccurate": "Loading..."
+          "accurate": "読み込み中... ({{percentage}})",
+          "inaccurate": "読み込み中..."
         }
       },
       "confirmation": {
         "title": "確認",
         "success": {
-          "title": "Transaction sent",
+          "title": "トランザクション送信済み",
           "text": "Your account balance will be updated when the blockchain confirms the transaction",
           "cta": "View details"
         },
@@ -1917,18 +1917,18 @@
             "title": "Cast votes",
             "description": "Vote for one or more Super Representatives to start earning rewards.",
             "footer": {
-              "doNotShowAgain": "Don't show again",
-              "next": "Cast Votes"
+              "doNotShowAgain": "今後表示しない",
+              "next": "投票する"
             },
             "info": {
-              "message": "SR or Candidates?",
+              "message": "SRと候補者？",
               "superRepresentative": {
-                "title": "Super Representatives (SR)",
-                "description": "Super Representatives play a key role in governing the TRON community by ensuring basic functions, e.g. block generation and bookkeeping."
+                "title": "スーパー代表（SR）",
+                "description": "スーパー代表（SR）は、ブロックの生成やパラメーター変更の提案・議決など、TRONネットワークの運営において重要な役割を担っています。"
               },
               "candidates": {
-                "title": "Candidates",
-                "description": "127 individuals elected through voting by the entire token holder community. Votes are updated once every 6 hours."
+                "title": "候補者",
+                "description": "トークン所有者コミュニティ全体の投票によって123人が選出されました。投票は6時間ごとに更新されます。"
               }
             }
           }
@@ -1937,70 +1937,70 @@
     }
   },
   "bitcoin": {
-    "inputSelected": "SELECTED",
-    "toSpend": "Coins to spend",
-    "toReturn": "Change to return",
+    "inputSelected": "選択中",
+    "toSpend": "コインを使用",
+    "toReturn": "元に戻す",
     "modalTitle": "コイン管理",
     "coincontrol": "コイン管理",
     "advanced": "詳細オプション",
-    "ctaDisabled": "This account has no UTXO",
-    "whatIs": "What is coin selection?",
-    "rbf": "Allow the transaction to be replaced (Replace-By-Fee).",
-    "strategy": "Coin selection strategy",
-    "selected": "Coins selected for strategy",
-    "amount": "Amount to send:",
-    "replaceable": "replaceable",
+    "ctaDisabled": "このアカウントにはUTXOがありません。",
+    "whatIs": "コイン選択とは？",
+    "rbf": "トランザクションの変更を許可（Replace-By-Fee）",
+    "strategy": "コイン選択戦略",
+    "selected": "戦略のために選択されたコイン",
+    "amount": "送付額：",
+    "replaceable": "交換可能",
     "cannotSelect": {
-      "unconfirmed": "You cannot select coins from unconfirmed, replaceable transactions.",
-      "last": "You need at least one selected"
+      "unconfirmed": "未確認で変更な可能なトランザクションから、コインを選択することはできません。",
+      "last": "少なくとも1つ選択してください。"
     },
-    "pending": "pending",
-    "pickUnconfirmedRBF": "Include coins from unconfirmed, replaceable transactions.",
-    "pickingStrategy": "UTXO picking strategy",
+    "pending": "保留中",
+    "pickUnconfirmedRBF": "未確認の交換可能なトランザクションからのコインを含みます。",
+    "pickingStrategy": "UTXO選び方の戦略",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
-      "OPTIMIZE_SIZE": "Minimize fees (optimize size)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "OPTIMIZE_SIZE": "手数料を最小化（サイズ最適化）",
+      "MERGE_OUTPUTS": "今後の手数料を最小限化（コインを統合する）"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "You can earn ATOM rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "資産をデリゲートすることで、ATOMで報酬を獲得できます。",
+        "info": "デリゲートの仕組み",
+        "delegation": "報酬を獲得する"
       },
-      "claimRewards": "Claim rewards",
-      "header": "Delegation(s)",
-      "noRewards": "No rewards available",
-      "delegate": "Add",
-      "undelegate": "Undelegate",
-      "redelegate": "Redelegate",
-      "redelegateDisabledTooltip": "You can redelegate again <0>{{days}}</0>",
-      "redelegateMaxDisabledTooltip": "You cannot redelegate more than <0>7</0> validators at a time",
-      "undelegateDisabledTooltip": "You cannot undelegate more than <0>7</0> validators at a time",
-      "reward": "Claim rewards",
-      "currentDelegation": "Delegated: <0>{{amount}}</0>",
-      "estYield": "est. yield",
-      "activeTooltip": "Delegated amounts generate rewards",
+      "claimRewards": "報酬獲得を申請",
+      "header": "デリゲーション",
+      "noRewards": "受け取れる報酬はありません。",
+      "delegate": "追加",
+      "undelegate": "デリゲート解除",
+      "redelegate": "再デリゲート",
+      "redelegateDisabledTooltip": "<0>{{days}}</0>に再デリゲートすることができます。",
+      "redelegateMaxDisabledTooltip": "一度に<0>7</0>名以上のバリデータを再デリゲートすることはできません。",
+      "undelegateDisabledTooltip": "一度に<0>7</0>以上のバリデータをデリゲート解除することはできません。",
+      "reward": "報酬獲得を申請",
+      "currentDelegation": "デリゲート済み：<0>{{amount}}</0>",
+      "estYield": "推定利回り",
+      "activeTooltip": "デリゲートされた数が報酬になります。",
       "inactiveTooltip": "デリゲート解除された数は、報酬を生成しません。",
-      "minSafeWarning": "Not enough funds",
+      "minSafeWarning": "残高不足です。",
       "flow": {
-        "title": "Delegate",
+        "title": "デリゲート（委任）",
         "steps": {
           "starter": {
-            "description": "You may earn rewards by delegating your ATOM assets to a validator.",
+            "description": "ATOM資産をバリデーターにデリゲートすることで、報酬を得ることができます。",
             "bullet": [
-              "You keep ownership of delegated assets",
-              "Delegate using your Ledger device",
-              "Assets will be available 21 days after undelegation"
+              "デリゲートされた資産の所有者は変わりません。",
+              "Ledgerデバイスを使ってデリゲートする",
+              "資産はデリゲート解除から21日後に、利用可能になります"
             ],
             "warning": {
-              "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+              "description": "バリデータは慎重に選択してください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
             }
           },
           "validator": {
-            "title": "Validators"
+            "title": "バリデータ"
           },
           "connectDevice": {
             "title": "Device"
