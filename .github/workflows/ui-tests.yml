@@ -48,7 +48,7 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: DEBUG=pw:api xvfb-run --auto-servernum --server-args="-screen 0 1280x960x24" -- yarn playwright-ci
+        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright-ci
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-ci
