@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { Flex } from "@ledgerhq/react-ui";
+import { Flex, Text } from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -22,7 +22,7 @@ export type ContextMenuItemType = {
   callback: () => any;
   dontTranslateLabel?: boolean;
   id?: string;
-};
+} | "separator";
 
 type Props = {
   children: React.ReactNode;
@@ -50,22 +50,26 @@ const ContextMenuContainer: ThemedComponent<{ x: number; y: number }> = styled(F
 `;
 
 const ContextMenuItemContainer: ThemedComponent<{}> = styled(Flex).attrs(() => ({
-  ff: "Inter",
 }))`
-  padding: 8px 16px;
+  height: 40px;
+  padding: 0px 16px;
   text-align: center;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   border-radius: 4px;
   color: ${p => p.theme.colors.palette.neutral.c80};
-  font-size: 12px;
-  font-weight: 500;
 
   &:hover {
     cursor: pointer;
     background: ${p => p.theme.colors.palette.neutral.c30};
   }
 `;
+
+const Separator: ThemedComponent<{}> = styled(Flex).attrs(() => ({
+  height: "1px",
+  width: "100%",
+  backgroundColor: "palette.neutral.c40",
+}))``
 
 class ContextMenuWrapper extends PureComponent<Props, State> {
   state = {
@@ -104,6 +108,7 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
   setContainerRef = (ref: React.RefObject<HTMLInputElement>) => (this.containerRef = ref);
 
   renderItem = (item: ContextMenuItemType, index: number) => {
+    if (item === "separator") return <Separator />;
     const { dontTranslateLabel, callback, label, Icon, id } = item;
 
     return (
@@ -120,7 +125,9 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
             <Icon size={16} color="palette.neutral.c80" />
           </Box>
         )}
-        {(dontTranslateLabel && label) || <Trans i18nKey={label} />}
+        <Text variant="small" fontWeight="semiBold" color="palette.neutral.c80">
+          {(dontTranslateLabel && label) || <Trans i18nKey={label} />}
+        </Text>
       </ContextMenuItemContainer>
     );
   };

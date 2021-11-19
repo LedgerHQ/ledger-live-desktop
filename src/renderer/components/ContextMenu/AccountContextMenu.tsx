@@ -5,15 +5,8 @@ import { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { Icons } from "@ledgerhq/react-ui";
 import { openModal } from "~/renderer/actions/modals";
-import IconReceive from "~/renderer/icons/Receive";
-import IconSend from "~/renderer/icons/Send";
-import IconStar from "~/renderer/icons/Star";
-import IconBuy from "~/renderer/icons/Exchange";
-import IconSwap from "~/renderer/icons/Swap";
-import IconBan from "~/renderer/icons/Ban";
-import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import ContextMenuItem from "./ContextMenuItem";
-import { toggleStarAction } from "~/renderer/actions/accounts";
+import {ContextMenuItemType} from './ContextMenuWrapper';
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
@@ -43,7 +36,16 @@ export default function AccountContextMenu({
     const currency = getAccountCurrency(account);
     const mainAccount = getMainAccount(account, parentAccount);
 
-    const items = [
+    const categorySendReceive: ContextMenuItemType[] = [];
+    const categoryExchange: ContextMenuItemType[] = [];
+    const categoryOptions: ContextMenuItemType[] = [];
+    const getItemsWithSeparators = () => {
+      return [categorySendReceive, categoryExchange, categoryOptions]
+        .flatMap(category => (category.length === 0 ? [] : [...category, "separator"]))
+        .slice(0, -1);
+    };
+
+    categorySendReceive.push(
       {
         label: "accounts.contextMenu.send",
         Icon: Icons.ArrowTopMedium,
@@ -54,13 +56,13 @@ export default function AccountContextMenu({
         Icon: Icons.ArrowBottomMedium,
         callback: () => dispatch(openModal("MODAL_RECEIVE", { account, parentAccount })),
       },
-    ];
+    );
 
     const availableOnBuy = isCurrencySupported("BUY", currency);
     if (availableOnBuy) {
-      items.push({
+      categoryExchange.push({
         label: "accounts.contextMenu.buy",
-        Icon: Icons.BuyCryptoAltMedium,
+        Icon: Icons.PlusMedium,
         callback: () => {
           setTrackingSource("account context menu");
           history.push({
@@ -76,9 +78,9 @@ export default function AccountContextMenu({
 
     const availableOnSell = isCurrencySupported("SELL", currency);
     if (availableOnSell) {
-      items.push({
+      categoryExchange.push({
         label: "accounts.contextMenu.sell",
-        Icon: Icons.BuyCryptoAltMedium,
+        Icon: Icons.MinusMedium,
         callback: () => {
           setTrackingSource("account context menu");
           history.push({
@@ -95,9 +97,9 @@ export default function AccountContextMenu({
 
     const availableOnSwap = swapSelectableCurrencies.includes(currency.id);
     if (availableOnSwap) {
-      items.push({
+      categoryExchange.push({
         label: "accounts.contextMenu.swap",
-        Icon: IconSwap,
+        Icon: Icons.BuyCryptoMedium,
         callback: () => {
           setTrackingSource("account context menu");
           history.push({
@@ -112,35 +114,24 @@ export default function AccountContextMenu({
       });
     }
 
-    if (withStar) {
-      items.push({
-        label: "accounts.contextMenu.star",
-        Icon: IconStar,
-        callback: () => {
-          dispatch(
-            toggleStarAction(account.id, account.type !== "Account" ? account.parentId : undefined),
-          );
-          refreshAccountsOrdering();
-        },
+    if (account.type === "TokenAccount") {
+      categoryOptions.push({
+        label: "accounts.contextMenu.hideToken",
+        Icon: Icons.NoneMedium,
+        id: "token-menu-hide",
+        callback: () => dispatch(openModal("MODAL_BLACKLIST_TOKEN", { token: account.token })),
       });
     }
 
     if (account.type === "Account") {
-      items.push({
+      categoryOptions.push({
         label: "accounts.contextMenu.edit",
         Icon: Icons.ToolMedium,
         callback: () => dispatch(openModal("MODAL_SETTINGS_ACCOUNT", { account })),
       });
     }
 
-    if (account.type === "TokenAccount") {
-      items.push({
-        label: "accounts.contextMenu.hideToken",
-        Icon: IconBan,
-        id: "token-menu-hide",
-        callback: () => dispatch(openModal("MODAL_BLACKLIST_TOKEN", { token: account.token })),
-      });
-    }
+    const items = getItemsWithSeparators();
 
     return items;
   }, [
