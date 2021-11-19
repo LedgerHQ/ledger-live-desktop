@@ -29,6 +29,8 @@ jobs:
       # - name: install and switch to GCC 5.4
       #   if: matrix.os == 'ubuntu-20.04'
       #   run: ./tools/g++-5.4/install.sh
+      - name: install operating system dependencies
+        run: npx playwright install-deps
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -44,38 +46,11 @@ jobs:
         run: yarn --frozen-lockfile
       - name: build electron app
         run: yarn build
-      - name: install operating system dependencies
-        run: npx playwright install-deps
-      - name: prepare graphical environment (xvfb-run npm ci)
-        if: ${{ always() }}
-        run: xvfb-run yarn playwright
-        env:
-          DISPLAY: :99
-          ALLURE_RESULTS_DIR: playwright/artifacts/allure-results
-      - name: prepare graphical environment (xvfb-run npm ci)
-        if: ${{ always() }}
-        run: xvfb-run yarn playwright playwright/specs/onboarding.spec.ts
-        env:
-          DISPLAY: :99
-          ALLURE_RESULTS_DIR: playwright/artifacts/allure-results
-      - name: prepare graphical environment (xvfb-run npx + onboarding)
-        if: ${{ always() }}
-        run: xvfb-run npx playwright test playwright/specs/onboarding.spec.ts --config=playwright/playwright.config.ts
-        env:
-          DISPLAY: :99
-          ALLURE_RESULTS_DIR: playwright/artifacts/allure-results
-      - name: prepare graphical environment (xvfb start)
-        if: ${{ always() }}
-        run: xvfb start
-        env:
-          DISPLAY: :99
-          ALLURE_RESULTS_DIR: playwright/artifacts/allure-results
-      - name: run ui tests (xvfb start)
-        if: ${{ always() }}
-        run: yarn playwright-ci
-        env:
-          ALLURE_RESULTS_DIR: playwright/artifacts/allure-results
-      - name: run ui tests
+      - name: run ui tests (Linux)
+        if: matrix.os == 'ubuntu-20.04'
+        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright-ci
+      - name: run ui tests (macOS & Windows)
+        if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-ci
         env:
           DEBUG: pw:api
