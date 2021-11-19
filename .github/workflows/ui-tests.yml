@@ -48,10 +48,10 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright-ci
+        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright-ci
+        run: yarn playwright
         env:
           DEBUG: pw:api
       - name: upload ci suggested screenshots
