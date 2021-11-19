@@ -1,16 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { getAccountCurrency, getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
-import { Icons } from "@ledgerhq/react-ui";
+import { Icons, Text } from "@ledgerhq/react-ui";
 import { openModal } from "~/renderer/actions/modals";
 import ContextMenuItem from "./ContextMenuItem";
-import {ContextMenuItemType} from './ContextMenuWrapper';
+import { ContextMenuItemType } from "./ContextMenuWrapper";
 import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { context as drawersContext } from "~/renderer/drawers/Provider";
+import AccountSettingRenderBody from "~/renderer/modals/SettingsAccount/AccountSettingRenderBody";
 
 type Props = {
   account: AccountLike;
@@ -31,6 +33,8 @@ export default function AccountContextMenu({
   const dispatch = useDispatch();
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
   const swapSelectableCurrencies = useSelector(swapSelectableCurrenciesSelector);
+
+  const { setDrawer } = useContext(drawersContext);
 
   const menuItems = useMemo(() => {
     const currency = getAccountCurrency(account);
@@ -127,7 +131,9 @@ export default function AccountContextMenu({
       categoryOptions.push({
         label: "accounts.contextMenu.edit",
         Icon: Icons.ToolMedium,
-        callback: () => dispatch(openModal("MODAL_SETTINGS_ACCOUNT", { account })),
+        callback: () => {
+          setDrawer(AccountSettingRenderBody, { data: { account } }, {});
+        },
       });
     }
 
