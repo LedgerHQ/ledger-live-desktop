@@ -36,6 +36,7 @@ const test = base.extend<TestFixtures>({
     // default environment variables
     env = Object.assign(
       {
+        ...process.env,
         MOCK: true,
         HIDE_DEBUG_MOCK: true,
         CI: process.env.CI || undefined,
@@ -56,7 +57,7 @@ const test = base.extend<TestFixtures>({
         `--window-size=${viewport.width},${viewport.height}`,
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
-        "--use-gl=swiftshader"
+        // "--use-gl=swiftshader"
       ],
       executablePath: electronPath,
       recordVideo: {
