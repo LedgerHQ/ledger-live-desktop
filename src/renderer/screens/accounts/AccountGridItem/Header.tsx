@@ -5,13 +5,11 @@ import {
   getAccountUnit,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import Box from "~/renderer/components/Box";
+import { Flex, Text } from "@ledgerhq/react-ui";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import Bar from "~/renderer/components/Bar";
-import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
-import Star from "~/renderer/components/Stars/Star";
 import Tooltip from "~/renderer/components/Tooltip";
 
 import AccountSyncStatusIndicator from "../AccountSyncStatusIndicator";
@@ -26,25 +24,21 @@ class HeadText extends PureComponent<{
     const { title, name, account } = this.props;
 
     return (
-      <Box style={{ flex: 1, alignItems: "flex-start" }}>
-        <Box
-          style={{ textTransform: "uppercase" }}
-          horizontal
-          alignItems="center"
-          fontSize={10}
-          color="palette.text.shade80"
-        >
-          {title}
-          <AccountTagDerivationMode account={account} />
-        </Box>
+      <Flex flexDirection="column" flex={1}>
+        <Flex flexDirection="row" alignItems="center">
+          <Text variant="paragraph" fontWeight="semiBold" color="palette.neutral.c100">
+            {title}
+          </Text>
+        </Flex>
         <Tooltip content={name} delay={1200}>
           <Ellipsis>
-            <Text fontSize={13} color="palette.text.shade100">
+            <Text variant="paragraph" fontWeight="medium" color="palette.neutral.c70">
               {name}
             </Text>
+            <AccountTagDerivationMode account={account} />
           </Ellipsis>
         </Tooltip>
-      </Box>
+      </Flex>
     );
   }
 }
@@ -73,32 +67,30 @@ class Header extends PureComponent<{
     }
 
     return (
-      <Box flow={4}>
-        <Box horizontal ff="Inter|SemiBold" flow={3} alignItems="center">
-          <ParentCryptoCurrencyIcon currency={currency} withTooltip />
+      <Flex flexDirection="column" rowGap={6}>
+        <Flex flexDirection="row" alignItems="center" columnGap={5}>
+          <ParentCryptoCurrencyIcon currency={currency} withTooltip size={32} />
           <HeadText account={account} name={name} title={title} />
           <AccountSyncStatusIndicator
             accountId={(parentAccount && parentAccount.id) || account.id}
             account={account}
           />
-          <Star
-            accountId={account.id}
-            parentId={account.type !== "Account" ? account.parentId : undefined}
-          />
-        </Box>
-        <Bar size={1} color="palette.divider" />
-        <Box justifyContent="center">
-          <FormattedVal
-            alwaysShowSign={false}
-            animateTicker={false}
-            ellipsis
-            color="palette.text.shade100"
-            unit={unit}
-            showCode
-            val={account.balance}
-          />
-        </Box>
-      </Box>
+        </Flex>
+        <Bar size={1} color="palette.neutral.c40" />
+        <Flex>
+          <Text variant="large" fontWeight="semiBold">
+            <FormattedVal
+              alwaysShowSign={false}
+              animateTicker={false}
+              ellipsis
+              color="palette.neutral.c100"
+              unit={unit}
+              showCode
+              val={account.balance}
+            />
+          </Text>
+        </Flex>
+      </Flex>
     );
   }
 }

@@ -2,10 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
+import { Grid, Cell } from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import AccountCard from "../AccountGridItem";
 import AccountCardPlaceholder from "../AccountGridItem/Placeholder";
+
+
+const GridBox: ThemedComponent<{}> = styled(Grid).attrs(() => ({
+  gridTemplateColumns: "repeat(auto-fill, minmax(257px, 1fr))",
+}))`
+  border-top: 1px solid ${p => p.theme.colors.palette.neutral.c40};
+  border-left: 1px solid ${p => p.theme.colors.palette.neutral.c40};
+`;
 
 type Props = {
   visibleAccounts: (Account | TokenAccount)[];
@@ -50,10 +59,3 @@ export default function GridBody({
     </GridBox>
   );
 }
-
-const GridBox: ThemedComponent<{}> = styled(Box)`
-  margin-top: 18px;
-  display: grid;
-  grid-gap: 18px;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-`;
