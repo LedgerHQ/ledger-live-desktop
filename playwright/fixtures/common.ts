@@ -58,6 +58,8 @@ const test = base.extend<TestFixtures>({
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
         // "--use-gl=swiftshader"
+        "--no-sandbox",
+        "--enable-logging"
       ],
       executablePath: electronPath,
       recordVideo: {
