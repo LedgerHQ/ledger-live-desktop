@@ -107,7 +107,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnSwap =
     (providers || storedProviders) &&
     !!(providers || storedProviders).find(({ pairs }) => {
-      console.log({ pairs });
       return pairs && pairs.find(({ from, to }) => [from, to].includes(currency.id));
     });
 
