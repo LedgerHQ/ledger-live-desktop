@@ -59,6 +59,9 @@ const ContextMenuItemContainer: ThemedComponent<{}> = styled(Flex).attrs(() => (
   border-radius: 4px;
   color: ${p => p.theme.colors.palette.neutral.c80};
 
+  & > * {
+    pointer-events: none;
+  }
   &:hover {
     cursor: pointer;
     background: ${p => p.theme.colors.palette.neutral.c30};
