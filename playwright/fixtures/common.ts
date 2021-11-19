@@ -36,7 +36,6 @@ const test = base.extend<TestFixtures>({
     // default environment variables
     env = Object.assign(
       {
-        ...process.env,
         MOCK: true,
         HIDE_DEBUG_MOCK: true,
         CI: process.env.CI || undefined,
