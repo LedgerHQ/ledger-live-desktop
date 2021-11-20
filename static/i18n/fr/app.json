@@ -3412,7 +3412,7 @@
   },
   "TransactionConfirm": {
     "title": "Confirmez l'opération sur votre appareil pour la finaliser.",
-    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}.",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le {{recipientWording}}.",
     "secureContract": "Vérifiez les détails du dépôt sur votre appareil avant de l'envoyer. L'adresse du contrat est fournie de manière sécurisée afin que vous n'ayez pas à la vérifier.",
     "verifyData": "Vérifiez toujours les détails de l'opération sur votre appareil.",
     "warningWording": {},
