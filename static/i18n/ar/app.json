@@ -216,11 +216,11 @@
     "disconnectButton": "قطع الاتصال"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "مبادلة",
     "tabs": {
       "exchange": "Exchange",
-      "history": "History",
-      "kyc": "KYC"
+      "history": "السجل",
+      "kyc": "اعرف عميلك (KYC)"
     },
     "form": {
       "ratesDrawer": {
