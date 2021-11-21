@@ -28,7 +28,6 @@ const borderCSS = css`
 const SelectButton = styled(Button)`
   opacity: 0;
   margin-top: 32px;
-  background-color: ${p => p.theme.colors.palette.neutral.c100};
 `;
 
 const Container = styled.div`
@@ -93,7 +92,7 @@ export function DeviceSelectorOption({
         >
           {label}
         </DeviceName>
-        <SelectButton variant="primary" onClick={onClick}>
+        <SelectButton variant="main" onClick={onClick}>
           {t("v3.onboarding.screens.selectDevice.selectLabel")}
         </SelectButton>
       </ContentContainer>

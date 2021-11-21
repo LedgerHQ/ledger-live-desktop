@@ -2906,7 +2906,7 @@
             "buttons": {
               "next": "OK, I’m ready!",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "howToGetStarted": {
@@ -2941,7 +2941,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "deviceHowTo2": {
@@ -2964,7 +2964,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "pinCode": {
@@ -2974,7 +2974,7 @@
             "buttons": {
               "next": "Set up PIN code",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "quizSuccess": {
@@ -2983,7 +2983,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "quizFailure": {
@@ -3006,7 +3006,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "existingRecoveryPhrase": {
@@ -3017,7 +3017,7 @@
             "buttons": {
               "next": "Enter recovery phrase",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             },
             "warning": {
               "title": "Do not use a recovery phrase that you have not generated yourself.",
@@ -3037,7 +3037,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "newRecoveryPhrase": {
@@ -3048,7 +3048,7 @@
             "buttons": {
               "next": "Recovery phrase",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "recoveryHowTo": {
@@ -3073,7 +3073,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "recoveryHowTo3": {
@@ -3087,7 +3087,7 @@
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "genuineCheck": {
@@ -3098,7 +3098,7 @@
             "buttons": {
               "next": "Continue",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           },
           "hideRecoveryPhrase": {
@@ -3109,7 +3109,7 @@
             "buttons": {
               "next": "OK, I'm done!",
               "prev": "Previous step",
-              "help": "Need help",
+              "help": "Don’t know what you have to do? Get some help to close this step.",
               "learn": "Learn how to hide it"
             }
           },
@@ -3119,7 +3119,7 @@
             "buttons": {
               "next": "Check my Nano",
               "prev": "Previous step",
-              "help": "Need help"
+              "help": "Don’t know what you have to do? Get some help to close this step."
             }
           }
         }
@@ -6864,7 +6864,8 @@
           ]
         },
         "selectDevice": {
-          "title": "What's your device?"
+          "title": "What's your device?",
+          "selectLabel": "Select"
         },
         "selectUseCase": {
           "greetings": "Hello!",
@@ -6906,7 +6907,7 @@
               "buttons": {
                 "next": "OK, I’m ready!",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "howToGetStarted": {
@@ -6941,7 +6942,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "deviceHowTo2": {
@@ -6964,7 +6965,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "pinCode": {
@@ -6974,7 +6975,7 @@
               "buttons": {
                 "next": "Set up PIN code",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "quizSuccess": {
@@ -6983,7 +6984,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "quizFailure": {
@@ -7006,7 +7007,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "existingRecoveryPhrase": {
@@ -7017,7 +7018,7 @@
               "buttons": {
                 "next": "Enter recovery phrase",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               },
               "warning": {
                 "title": "Do not use a recovery phrase that you have not generated yourself.",
@@ -7037,7 +7038,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "newRecoveryPhrase": {
@@ -7048,7 +7049,7 @@
               "buttons": {
                 "next": "Recovery phrase",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "recoveryHowTo": {
@@ -7073,7 +7074,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "recoveryHowTo3": {
@@ -7087,7 +7088,7 @@
               "buttons": {
                 "next": "Next step",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "genuineCheck": {
@@ -7098,7 +7099,7 @@
               "buttons": {
                 "next": "Continue",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             },
             "hideRecoveryPhrase": {
@@ -7109,7 +7110,7 @@
               "buttons": {
                 "next": "OK, I'm done!",
                 "prev": "Previous step",
-                "help": "Need help",
+                "help": "Don’t know what you have to do? Get some help to close this step.",
                 "learn": "Learn how to hide it"
               }
             },
@@ -7119,7 +7120,7 @@
               "buttons": {
                 "next": "Check my Nano",
                 "prev": "Previous step",
-                "help": "Need help"
+                "help": "Don’t know what you have to do? Get some help to close this step."
               }
             }
           }
