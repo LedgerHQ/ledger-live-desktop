@@ -62,7 +62,7 @@
     "apply": "Aplicar",
     "done": "Listo",
     "confirm": "Confirmar",
-    "reject": "Reject",
+    "reject": "Rechazar",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
     "delete": "Eliminar",
@@ -133,8 +133,8 @@
     "type": {
       "IN": "Recibido",
       "OUT": "Enviado",
-      "NFT_IN": "NFT Received",
-      "NFT_OUT": "NFT Sent",
+      "NFT_IN": "NFT Recibido",
+      "NFT_OUT": "NFT Enviado",
       "CREATE": "Creado",
       "REVEAL": "Revelado",
       "DELEGATE": "Delegado",
@@ -240,30 +240,30 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "Crear una cuenta para recibir {{name}}",
         "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
-        "title": "From",
+        "title": "De",
         "max": "Máx.",
         "accountPlaceholder": "Máx.",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "currencyDisabledTooltip": "Esta divisa aún no está disponible para permutar"
       },
       "to": {
-        "title": "To"
+        "title": "A"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "La permuta aún no está disponible en tu área",
+        "content": "Ten un poco más de paciencia,<br/>implementaremos esta función muy pronto"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
+          "required": "Debes completar tu KYC",
           "complete": "Completa tu KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "update": "Actualiza tu KYC",
+          "rejected": "KYC rechazado, vuelve a iniciar la verificación",
           "status": {
-            "pending": "KYC pending",
+            "pending": "KYC pendiente",
             "approved": "KYC approved",
             "closed": "KYC rejected"
           }
@@ -271,20 +271,20 @@
       }
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Tus transacciones de permuta en Desktop no están sincronizadas con la aplicación Ledger Live Mobile",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Tus permutas anteriores aparecerán aquí",
+        "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
       },
       "export": "No tienes ninguna cuenta de {{name}}.",
-      "exporting": "Exporting..."
+      "exporting": "Exportando..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "No podemos completar el proceso KYC hasta que actualices la aplicación",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
+        "disclaimer": "LEDGER recopila tu información en nombre de WYRE y la transfiere a WYRE con fines de KYC. Para obtener más información, revisa nuestra",
+        "policy": "Política de Privacidad",
+        "title": "Verifica tu identidad",
         "subtitle": "Please enter your information to swap with Wyre.",
         "cta": "Continue",
         "pending": {
