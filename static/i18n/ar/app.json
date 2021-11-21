@@ -258,14 +258,14 @@
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "required": "تحتاج إلى إكمال اعرف عميلك (KYC) الخاص بك",
+          "complete": "أكمل KYC (اعرف عميلك)",
+          "update": "قم بتنشيط KYC (اعرف عميلك)",
+          "rejected": "تم رفض KYC (اعرف عميلك)، قم ببدء التحقق مرة أخرى",
           "status": {
-            "pending": "KYC pending",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "pending": "KYC (اعرف عميلك) مُعلق",
+            "approved": "تمت الموافقة على KYC (اعرف عميلك)",
+            "closed": "تم رفض KYC (اعرف عميلك)"
           }
         }
       }
@@ -280,7 +280,7 @@
       "exporting": "Exporting..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
         "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
         "policy": "Privacy Policy",
@@ -374,12 +374,12 @@
     "providers": {
       "title": "اختر أحد المزودين لمبادلة العملات المشفرة",
       "learnMore": "ما هو التبادل؟",
-      "kycRequired": "KYC (التحقق من الهوية) مطلوب",
+      "kycRequired": "KYC (اعرف عميلك) مطلوب",
       "cta": "متابعة",
       "kyc": {
         "notAvailable": "{{provider}} غير متاح في موقعك",
         "status": {
-          "required": "KYC (التحقق من الهوية) مطلوب",
+          "required": "KYC (اعرف عميلك) مطلوب",
           "pending": "التحقق من بيانات الهوية مُعلّق",
           "approved": "تم اعتماد بيانات التحقق من الهوية!",
           "closed": "تم رفض بيانات التحقق من الهوية"
@@ -392,7 +392,7 @@
       "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال/بيانات التحقق من هوية العميل."
     },
     "kyc": {
-      "updateRequired": "لا يمكننا إكمال عملية التحقق من الهوية (KYC) حتى تقوم بتحديث التطبيق",
+      "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
         "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض التحقق من هوية العميل. للتعرف على مزيد من المعلومات، يرجى مراجعة",
         "policy": "سياسة الخصوصية",
@@ -402,13 +402,13 @@
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
           "subtitle": "تم ارسال بياناتك لاعتمادها من Wyre.",
-          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "closed": {
-          "cta": "إعادة تعيين KYC (التحقق من الهوية)",
-          "title": "تم رفض طلب KYC (التحقق من الهوية)",
+          "cta": "إعادة تعيين KYC (اعرف عميلك)",
+          "title": "تم رفض طلب KYC (اعرف عميلك)",
           "subtitle": "رفضت Wyre البيانات التي قدمتها للتحقق من هوية العميل",
-          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "form": {
           "firstName": "الاسم الأول",
@@ -439,7 +439,7 @@
     },
     "form": {
       "resetKYC": "أعد تعيين بيانات التحقق من الهوية الخاصة بك وقم بتحديث Ledger Live للتبادل مع Wyre",
-      "resetKYCCTA": "إعادة تعيين KYC (التحقق من الهوية)",
+      "resetKYCCTA": "إعادة تعيين KYC (اعرف عميلك)",
       "amount": "المبلغ",
       "from": {
         "title": "من",
@@ -2619,7 +2619,7 @@
       "softResetTitle": "حذف الذاكرة المؤقتة",
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
-      "resetKYC": "إعادة تعيين بيانات KYC (التحقق من الهوية)",
+      "resetKYC": "إعادة تعيين بيانات KYC (اعرف عميلك)",
       "resetKYCDesc": "احذف بيانات التحقق من هوية العميل الخاصة بك المسجلة لديك محلياً والمستخدمة للوصول إلى مزود معاملات الطرف ثالث.",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
