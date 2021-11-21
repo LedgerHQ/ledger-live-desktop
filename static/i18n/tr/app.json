@@ -133,8 +133,8 @@
     "type": {
       "IN": "Alındı",
       "OUT": "Gönderildi",
-      "NFT_IN": "NFT Received",
-      "NFT_OUT": "NFT Sent",
+      "NFT_IN": "NFT Alındı",
+      "NFT_OUT": "NFT Gönderildi",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
       "DELEGATE": "Yetki devredildi",
@@ -1176,41 +1176,41 @@
   "NFT": {
     "viewer": {
       "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
+        "send": "Gönder",
+        "open": "{{viewer}} ile aç"
       },
       "attributes": {
-        "properties": "Properties",
+        "properties": "Özellikler",
         "about": "About Known Origin",
-        "contract": "Contract address",
-        "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "contract": "Sözleşme adresi",
+        "tokenId": "Token Kimliği",
+        "quantity": "Miktar"
       }
     },
     "collections": {
-      "title": "NFT (Non Fungible Tokens) Collections",
-      "receiveCTA": "Receive NFT",
-      "galleryCTA": "See Gallery",
-      "seeMore": "See more collections",
-      "seeAll": "See all collections",
-      "seeLess": "See less"
+      "title": "NFT (Non Fungible Token) Koleksiyonları",
+      "receiveCTA": "NFT Al",
+      "galleryCTA": "Galeriyi Göster",
+      "seeMore": "Daha fazla koleksiyon göster",
+      "seeAll": "Tüm koleksiyonları göster",
+      "seeLess": "Daha az göster"
     },
     "gallery": {
-      "title": "All NFT",
+      "title": "Tüm NFT'ler",
       "collection": {
         "header": {
-          "sendCTA": "Send",
-          "contract": "Contract: {{contract}}"
+          "sendCTA": "Gönder",
+          "contract": "Sözleşme: {{contract}}"
         },
         "operationList": {
-          "header": "Latest Operations",
+          "header": "Son İşlemler",
           "OUT": "Sent",
           "IN": "Received"
         }
       },
       "tokensList": {
         "item": {
-          "tokenId": "ID: {{tokenId}}"
+          "tokenId": "Kimlik: {{tokenId}}"
         }
       }
     }
@@ -1355,9 +1355,9 @@
     "details": "{{ currency }} ayrıntıları",
     "multipleAddresses": "Neden birden fazla adres var?",
     "nft": {
-      "name": "Token Name",
-      "contract": "Token Contract",
-      "id": "Token (NFT) ID",
+      "name": "Token Adı",
+      "contract": "Token Sözleşmesi",
+      "id": "Token (NFT) Kimliği",
       "amount": "Amount"
     },
     "extra": {
@@ -1748,12 +1748,12 @@
   },
   "send": {
     "title": "Gönder",
-    "titleNft": "Send NFT",
+    "titleNft": "NFT Gönder",
     "totalSpent": "Düşülecek tutar",
     "steps": {
       "recipient": {
         "title": "Alıcı",
-        "nftRecipient": "NFT to send"
+        "nftRecipient": "Gönderilecek NFT"
       },
       "amount": {
         "title": "Tutar",
@@ -1761,7 +1761,7 @@
         "fees": "Ücretler",
         "standard": "Standart",
         "advanced": "Gelişmiş",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Miktar"
       },
       "summary": {
         "title": "Özet"
@@ -1785,7 +1785,7 @@
         "ethereumGasPrice": "Gas ücreti",
         "unitPerByte": "Bayt başına {{unit}}",
         "nft": "NFT",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Miktar"
       },
       "verification": {
         "streaming": {
@@ -2799,7 +2799,7 @@
       "ru": "Rusça",
       "es": "İspanyolca",
       "zh": "Çince",
-      "de": "German"
+      "de": "Almanca"
     }
   },
   "theme": {
@@ -3442,10 +3442,10 @@
       "optIn": "alıcı",
       "nominate": "doğrulayıcı",
       "erc721": {
-        "transfer": "recipient"
+        "transfer": "alıcı"
       },
       "erc1155": {
-        "transfer": "recipient"
+        "transfer": "alıcı"
       }
     },
     "votes": "Oylar ({{count}})"
@@ -4052,7 +4052,7 @@
       "title": "Mainnet etkinleşmeden önce taproot adresine gönderim yapmak güvenli değildir"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "Mevcut token miktarını aştınız"
     }
   }
 }
