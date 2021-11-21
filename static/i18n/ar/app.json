@@ -283,16 +283,16 @@
       "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
         "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض KYC (اعرف عميلك). للتعرف على مزيد من المعلومات، يرجى مراجعة",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "policy": "سياسة الخصوصية",
+        "title": "قم بتأكيد هويتك",
+        "subtitle": "يرجى إدخال معلوماتك للتبادل مع Wyre.",
+        "cta": "متابعة",
         "pending": {
-          "cta": "Continue",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
+          "cta": "متابعة",
+          "title": "تم إرسال بياناتك لاعتمادها",
+          "subtitle": "عادة ما يستغرق الأمر بضع دقائق حتى تكتمل المراجعة.",
           "link": "معرفة المزيد عن KYC (اعرف عميلك)",
-          "info": "Identity verification: Submitted"
+          "info": "التحقق من الهوية: تم الإرسال"
         },
         "closed": {
           "cta": "إعادة تعيين KYC (اعرف عميلك)",
@@ -301,15 +301,15 @@
           "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
+          "firstName": "الاسم الأول",
+          "lastName": "اسم العائلة",
+          "street1": "عنوان الشارع، السطر 1",
+          "street2": "عنوان الشارع، السطر 2",
+          "city": "المدينة",
+          "state": "الولاية/المحافظة",
+          "country": "البلد",
+          "postalCode": "الرمز البريدي",
+          "dateOfBirth": "تاريخ الميلاد",
           "firstNamePlaceholder": "Enter your first name",
           "lastNamePlaceholder": "Enter your last name",
           "street1Placeholder": "Eg. 13, Maple street",
@@ -389,7 +389,7 @@
     "ip": {
       "title": "مرحبًا بك في التبادل",
       "subtitle": "قم بتداول أصول العملات المشفرة مباشرةً من جهاز Ledger الخاص بك.",
-      "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال/بيانات التحقق من هوية العميل."
+      "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال / KYC (اعرف عميلك)."
     },
     "kyc": {
       "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
@@ -479,7 +479,7 @@
     },
     "resetKYCModal": {
       "title": "حذف بيانات KYC (اعرف عميلك) الخاصة بك",
-      "subtitle": "احذف بيانات التحقق من الهوية الخاصة بك لإزالة جميع الرموز المحفوظة محلياً على الكمبيوتر الخاص بك. سيكون عليك إعادة تقديم بيانات التحقق من الهوية الخاصة بك للوصول إلى الخدمات التي يقدمها شركاؤنا.",
+      "subtitle": "احذف بيانات KYC (اعرف عميلك) الخاصة بك لإزالة جميع رموز توكن المحفوظة محلياً على الكمبيوتر الخاص بك. سيكون عليك إعادة تقديم بيانات KYC (اعرف عميلك) الخاصة بك للوصول إلى الخدمات التي يقدمها شركاؤنا.",
       "cta": "تأكيد"
     },
     "modal": {
