@@ -285,13 +285,13 @@
         "disclaimer": "LEDGER recopila tu información en nombre de WYRE y la transfiere a WYRE con fines de KYC. Para obtener más información, revisa nuestra",
         "policy": "Política de Privacidad",
         "title": "Verifica tu identidad",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "subtitle": "Ingresa tus datos para permutar con Wyre.",
+        "cta": "Continuar",
         "pending": {
           "cta": "Continuar",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
+          "title": "Tus datos han sido enviados para su aprobación",
+          "subtitle": "Completar la revisión normalmente lleva algunos minutos.",
+          "link": "Más información sobre KYC",
           "info": "Verificación de identidad: Enviada"
         },
         "closed": {
@@ -753,7 +753,7 @@
       "amountSupplied": "Importe depositado",
       "amountSuppliedTooltip": "Importe prestado a la red",
       "currencyAPY": "APY de divisa",
-      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "currencyAPYTooltip": "APY: Tasa de rendimiento anual de un monto depositado en Compound de forma continuada",
       "accruedInterests": "Interés acumulado",
       "accruedInterestsTooltip": "Interés generado por tus activos prestados",
       "interestEarned": "Interés recibido",
@@ -824,8 +824,8 @@
         "allAssets": "Activo",
         "totalBalance": "Saldo de activos",
         "totalBalanceTooltip": "Monto disponible para prestar",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "currentAPY": "Tasa APY del depósito",
+        "currentAPYTooltip": "APY: Tasa de rendimiento anual de un monto depositado en Compound de forma continuada",
         "actions": "Acciones"
       }
     },
@@ -1069,9 +1069,9 @@
       "cta": "Comprar ahora"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "Paquete familiar",
+      "description": "Interesa a tu familia y amigos en las criptomonedas con 3 Nano S a un precio con descuento",
+      "cta": "Comprar paquete familiar"
     },
     "polkaStake": {
       "title": "Participación con POLKADOT",
@@ -1115,7 +1115,7 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "ID de cuenta inválido",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
@@ -1125,7 +1125,7 @@
       "confirm": {
         "title": "Conectar",
         "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Quiere conectarse a Ledger Live. Elige tu cuenta de Ethereum:"
       }
     },
     "connectedscreen": {
@@ -1176,22 +1176,22 @@
   "NFT": {
     "viewer": {
       "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
+        "send": "Enviar",
+        "open": "Abrir en {{viewer}}"
       },
       "attributes": {
-        "properties": "Properties",
-        "about": "About Known Origin",
-        "contract": "Contract address",
-        "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "properties": "Propiedades",
+        "about": "Sobre el origen conocido",
+        "contract": "Dirección de contrato",
+        "tokenId": "ID de token",
+        "quantity": "Cantidad"
       }
     },
     "collections": {
-      "title": "NFT (Non Fungible Tokens) Collections",
-      "receiveCTA": "Receive NFT",
-      "galleryCTA": "See Gallery",
-      "seeMore": "See more collections",
+      "title": "Colecciones NFT (Tokens no fungibles)",
+      "receiveCTA": "Recibir NFT",
+      "galleryCTA": "Ver galería",
+      "seeMore": "Ver más colecciones",
       "seeAll": "See all collections",
       "seeLess": "See less"
     },
