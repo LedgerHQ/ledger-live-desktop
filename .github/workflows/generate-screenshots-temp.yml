@@ -51,4 +51,5 @@ jobs:
           git status
           git add .
           git commit -m 'update screenshots'
+          git pull
           git push
