@@ -62,7 +62,7 @@
     "apply": "تطبيق",
     "done": "تم",
     "confirm": "تأكيد",
-    "reject": "Reject",
+    "reject": "رفض",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
     "delete": "حذف",
@@ -133,8 +133,8 @@
     "type": {
       "IN": "تم الاستلام",
       "OUT": "تم الإرسال",
-      "NFT_IN": "NFT Received",
-      "NFT_OUT": "NFT Sent",
+      "NFT_IN": "تم تلقي الرمز غير قابل للاستبدال (NFT)",
+      "NFT_OUT": "تم ارسال الرمز غير قابل للاستبدال (NFT)",
       "CREATE": "تم إنشاؤه",
       "REVEAL": "تم الإظهار",
       "DELEGATE": "تفويض",
@@ -218,43 +218,43 @@
   "swap2": {
     "title": "مبادلة",
     "tabs": {
-      "exchange": "Exchange",
+      "exchange": "تداول",
       "history": "السجل",
       "kyc": "اعرف عميلك (KYC)"
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
-        "quote": "Quote",
-        "receive": "Receive"
+        "title": "مُعدل",
+        "quote": "عرض أسعار",
+        "receive": "تلقي"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "المزود",
+          "rate": "مُعدل",
+          "fees": "الرسوم",
+          "target": "الحساب المستهدف"
         },
         "tooltip": {
           "provider": "lorem ipsum",
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
-        "noAccountCTA": "Add account"
+        "noAccount": "قم بإنشاء حساب لتلقي {{name}}",
+        "noAccountCTA": "إضافة حساب"
       },
       "from": {
-        "title": "From",
-        "max": "Max",
-        "accountPlaceholder": "Select source",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "title": "من",
+        "max": "الحد الأقصى",
+        "accountPlaceholder": "اختر المصدر",
+        "currencyDisabledTooltip": "هذه العملة غير متوفرة للمبادلة بعد"
       },
       "to": {
-        "title": "To"
+        "title": "إلى"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "المبادلة غير متوفرة بعد في منطقتك",
+        "content": "اصبر قليلاً، <br/>سوف نطلق هذه الميزة قريباً جداً"
       },
       "providers": {
         "kyc": {
@@ -271,13 +271,13 @@
       }
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "عمليات المبادلة لتطبيق سطح المكتب الخاص بك غير متزامنة مع تطبيق Ledger Live للجوال",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "ستظهر مبادلاتك السابقة هنا",
+        "description": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين ليدجر لايف (Ledger Live) في غضون ذلك."
       },
-      "export": "Export operations",
-      "exporting": "Exporting..."
+      "export": "تصدير العمليات",
+      "exporting": "جاري التصدير..."
     },
     "kyc": {
       "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
@@ -328,12 +328,12 @@
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "عملية معلقة",
+        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الأمر مدة تصل إلى ساعة قبل أن تتلقى {{targetCurrency}}.",
+        "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
+        "seeDetails": "رؤية التفاصيل"
       }
     }
   },
@@ -1069,9 +1069,9 @@
       "cta": "اشتري الان"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "حزمة العائلة",
+      "description": "عرّف عائلتك وأصدقائك على التشفير مع ثلاثة Nano S بسعر مخفض",
+      "cta": "قم بشراء حزمة العائلة"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
@@ -1115,7 +1115,7 @@
     "disconnected": "تم قطع الاتصال",
     "connected": "تم الاتصال",
     "connecting": "جاري الاتصال...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "مٌعرّف حساب غير صالح",
     "steps": {
       "paste": {
         "title": "لصق الرابط",
@@ -1125,7 +1125,7 @@
       "confirm": {
         "title": "اتصال",
         "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:"
       }
     },
     "connectedscreen": {
@@ -1176,15 +1176,15 @@
   "NFT": {
     "viewer": {
       "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
+        "send": "إرسال",
+        "open": "مشاهدة في {{viewer}}"
       },
       "attributes": {
-        "properties": "Properties",
-        "about": "About Known Origin",
-        "contract": "Contract address",
-        "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "properties": "خصائص",
+        "about": "حول",
+        "contract": "عنوان العَقد",
+        "tokenId": "مُعرّف رمز التوكن",
+        "quantity": "الكمية"
       }
     },
     "collections": {
