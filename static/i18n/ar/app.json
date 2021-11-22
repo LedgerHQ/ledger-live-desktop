@@ -1569,7 +1569,7 @@
       "identifier": "المُعرّف",
       "preparation": "التحضير",
       "newFirmware": "برنامج ثابت جديد {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "confirmUpdate": "يرجى تأكيد التحديث على جهازك",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
@@ -1730,7 +1730,7 @@
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
+        "warningTokenType": "يُرجى إرسال رموز <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حسابات {{currency}}. قد يؤدي إرسال أصول مشفرة أخرى إلى خسارة دائمة للأموال."
       },
       "connectDevice": {
         "title": "الجهاز",
@@ -1748,12 +1748,12 @@
   },
   "send": {
     "title": "إرسال",
-    "titleNft": "Send NFT",
+    "titleNft": "قم بإرسال NFT (رموز غير قابلة للاستبدال)",
     "totalSpent": "الإجمالي للخصم",
     "steps": {
       "recipient": {
         "title": "المستلم",
-        "nftRecipient": "NFT to send"
+        "nftRecipient": "NFT (رموز غير قابلة للاستبدال) للإرسال"
       },
       "amount": {
         "title": "المبلغ",
@@ -1761,7 +1761,7 @@
         "fees": "الرسوم",
         "standard": "اعتيادي",
         "advanced": "متقدم",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "الكمية"
       },
       "summary": {
         "title": "الملخص"
@@ -1784,8 +1784,8 @@
         "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "سعر الغاز",
         "unitPerByte": "{{unit}} لكل بايت",
-        "nft": "NFT",
-        "nftQuantity": "Quantity"
+        "nft": "NFT (رمز غير قابلة للاستبدال)",
+        "nftQuantity": "الكمية"
       },
       "verification": {
         "streaming": {
@@ -1823,13 +1823,13 @@
     "version": "ليدجر لايف (Ledger Live) {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "تريد تغير لغة تطبيقك؟",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "أخبار جيدة! عملت فرقنا جاهدة و Ledger Live الآن يدعم {{language}}.",
+      "advice": "يمكنك دائماً تغيير لغة التطبيق في أي وقت في الإعدادات."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "التبديل إلى {{language}}",
+    "no": "أفضل عدم القيام بذلك"
   },
   "distribution": {
     "asset": "الأصل",
@@ -1851,14 +1851,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "مدعوم من Elrond",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "دمج Elrond",
+        "title": "رمز Elrond eGold (EGLD) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن تأمين رموز eGold (EGLD) الخاصة بك بشكل آمن وإدارتها من خلال Ledger Live.",
+        "description2": "إن رمز Elrond eGold (EGLD) هو أصلي لشبكة Elrond وسيتم استخدامه لكل شيء من المعاملات، والتكديس، والعقود الذكية، والحوكمة، ومكافآت المدقق.",
+        "description3": "نحن نعمل بنشاط مع فريق Elrond لإضافة المزيد من الوظائف، مثل التكديس، دعم ESDT الأصلي (رمز Elrond الرقمي القياسي) ، وأكثر من ذلك.",
+        "website": "سلسلة كتل مقياس الإنترنت"
       }
     }
   },
@@ -2650,8 +2650,8 @@
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "title": "عمليات تنفيذ JS التجريبية",
+          "description": "استخدام عمليات تنفيذ JS التجريبية لبيتكوين (Taproot) و Tezos"
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2682,7 +2682,7 @@
     "hardResetModal": {
       "title": "إعادة تعيين Ledger Live",
       "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "إعادة تعيين Ledger Live سوف يمحو سجل معاملات المبادلة الخاصة بك لجميع حساباتك."
     },
     "softResetModal": {
       "title": "حذف الذاكرة المؤقتة",
@@ -2699,7 +2699,7 @@
     "removeAccountModal": {
       "title": "إزالة حساب",
       "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -2799,7 +2799,7 @@
       "ru": "Русский",
       "es": "Español",
       "zh": "中文（简体）",
-      "de": "German"
+      "de": "Deutsch"
     }
   },
   "theme": {
@@ -2815,8 +2815,8 @@
       "achievement": "تمت إتاحة الإنجاز"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "لديك {{count}} إشعارات غير مقروءة",
+      "cta": "رؤية التفاصيل"
     }
   },
   "informationCenter": {
@@ -2888,8 +2888,8 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
+        "contactSupportCTA": "التواصل مع الدعم",
+        "continueCTA": "متابعة",
         "title": "Please check the box contents",
         "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
         "alert": "Only use a recovery phrase that your device displayed when it was set up"
