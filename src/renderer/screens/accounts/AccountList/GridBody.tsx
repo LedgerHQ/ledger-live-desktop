@@ -13,7 +13,6 @@ const GridBox: ThemedComponent<{}> = styled(Grid).attrs(() => ({
   gridTemplateColumns: "repeat(auto-fill, minmax(257px, 1fr))",
 }))`
   border-top: 1px solid ${p => p.theme.colors.palette.neutral.c40};
-  border-left: 1px solid ${p => p.theme.colors.palette.neutral.c40};
 `;
 
 type Props = {
