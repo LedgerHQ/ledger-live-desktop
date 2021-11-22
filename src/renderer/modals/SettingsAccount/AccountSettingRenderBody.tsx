@@ -25,6 +25,10 @@ import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 const Container = styled(Flex).attrs(() => ({
   flexDirection: "column",
   justifyContent: "space-between",
+  flex: 1,
+  padding: 12,
+  height: "100%",
+  backgroundColor: "palette.neutral.c00",
 }))``;
 
 const BodyContainer = styled(Flex).attrs(() => ({
@@ -210,7 +214,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
 
     const onSubmit = this.handleSubmit(account, onClose);
     return (
-      <Container flex={1} padding={12} height="100%" backgroundColor="palette.neutral.c00">
+      <Container>
         <TrackPage category="Modal" name="AccountSettings" />
         <Text mb={12} alignSelf="center" variant="h3" color="palette.neutral.c100">
           {t("account.settings.title")}
