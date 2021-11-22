@@ -11,6 +11,7 @@ import AccountCardPlaceholder from "../AccountGridItem/Placeholder";
 
 const GridBox: ThemedComponent<{}> = styled(Grid).attrs(() => ({
   gridTemplateColumns: "repeat(auto-fill, minmax(257px, 1fr))",
+  paddingRight: 5,
 }))`
   border-top: 1px solid ${p => p.theme.colors.palette.neutral.c40};
 `;
