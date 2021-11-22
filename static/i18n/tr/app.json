@@ -1204,7 +1204,7 @@
         },
         "operationList": {
           "header": "Son İşlemler",
-          "OUT": "Sent",
+          "OUT": "Gönderilen",
           "IN": "Received"
         }
       },
