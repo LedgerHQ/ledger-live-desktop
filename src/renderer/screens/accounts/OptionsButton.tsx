@@ -1,7 +1,8 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { context as drawersContext } from "~/renderer/drawers/Provider";
 
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
@@ -12,7 +13,6 @@ import DropDownSelector, {
 } from "~/renderer/components/DropDownSelector";
 import Switch from "~/renderer/components/Switch";
 import Tooltip from "~/renderer/components/Tooltip";
-import IconDots from "~/renderer/icons/Dots";
 import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
 import IconSend from "~/renderer/icons/Send";
 import { openModal } from "~/renderer/actions/modals";
@@ -20,6 +20,7 @@ import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Icons } from "@ledgerhq/react-ui";
+import ExportOperations from "~/renderer/modals/ExportOperations";
 
 const Item: ThemedComponent<{
   disableHover?: boolean;
@@ -39,6 +40,7 @@ type ItemType = DropDownItemType & {
 
 const OptionsButton = () => {
   const dispatch = useDispatch();
+  const { setDrawer } = useContext(drawersContext);
   const [hideEmptyTokenAccounts, setHideEmptyTokenAccounts] = useHideEmptyTokenAccounts();
 
   const onOpenModal = useCallback(
@@ -54,7 +56,7 @@ const OptionsButton = () => {
       key: "exportOperations",
       label: t("accounts.optionsMenu.exportOperations"),
       icon: <IconDownloadCloud size={16} />,
-      onClick: () => onOpenModal("MODAL_EXPORT_OPERATIONS"),
+      onClick: () => setDrawer(ExportOperations),
     },
     {
       key: "exportAccounts",
