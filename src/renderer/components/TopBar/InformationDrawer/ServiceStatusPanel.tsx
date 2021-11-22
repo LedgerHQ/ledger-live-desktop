@@ -1,170 +1,68 @@
-// @flow
-
-import styled from "styled-components";
-import TriangleWarning from "~/renderer/icons/TriangleWarning";
 import React from "react";
+
+import { Trans, useTranslation } from "react-i18next";
 import { openURL } from "~/renderer/linking";
 import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
 import type { Incident } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider/types";
-import Text from "~/renderer/components/Text";
-import SuccessAnimatedIcon from "~/renderer/components/SuccessAnimatedIcon";
-import { Trans } from "react-i18next";
-import { Flex } from "@ledgerhq/react-ui";
+
+import { Flex, StatusNotification, Notification, Icons, IconBox, Badge, Text } from "@ledgerhq/react-ui";
 import { FakeLink } from "~/renderer/components/Link";
-import Box from "~/renderer/components/Box";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { urls } from "~/config/urls";
 
-const IncidentContainer = styled(Box)`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  border-radius: 4px;
-  border: 1px solid ${p => p.theme.colors.palette.text.shade10};
-  padding: 16px;
-  margin: 6px;
-`;
-
-const IncidentRightColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
-const IncidentLeftColumnContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const IncidentIconContainer = styled(Box)`
-  padding-right: 14.5px;
-`;
-
-type IncidentProps = {
-  incidentData: Incident,
-};
-
-function IncidentArticle({ incidentData }: IncidentProps) {
-  const { name, incident_updates: incidentUpdates, shortlink } = incidentData;
-  return (
-    <IncidentContainer>
-      <IncidentLeftColumnContainer>
-        <IncidentIconContainer color="warning">
-          <TriangleWarning size={15} />
-        </IncidentIconContainer>
-      </IncidentLeftColumnContainer>
-      <IncidentRightColumnContainer>
-        <Text ff="Inter|SemiBold" fontSize="14px" lineHeight="16.94px">
-          {name}
-        </Text>
-        {incidentUpdates
-          ? incidentUpdates.map(({ body }, index) => (
-              <Text
-                key={index}
-                mt="4px"
-                ff="Inter|Medium"
-                fontSize="12px"
-                lineHeight="18px"
-                color="palette.text.shade50"
-              >
-                {body}
-              </Text>
-            ))
-          : null}
-        <LinkWithExternalIcon
-          onClick={shortlink ? () => openURL(shortlink) : null}
-          style={{
-            marginTop: 15,
-          }}
-        >
-          <Trans i18nKey="informationCenter.serviceStatus.statusNotOk.learnMore" />
-        </LinkWithExternalIcon>
-      </IncidentRightColumnContainer>
-    </IncidentContainer>
-  );
-}
-
 function StatusOkHeader() {
+  const { t } = useTranslation();
+
   return (
-    <>
-      <SuccessAnimatedIcon height={64} width={64} />
+    <Flex py="32px" alignItems="center" justifyContent="center" flexDirection="column" flex={1}>
+      <StatusNotification text={t("informationCenter.serviceStatus.statusOk.title")} badge={
+          (<IconBox>
+            <Icons.CircledCheckMedium size={24} color="palette.success.c100" />
+          </IconBox>)
+        } />
       <Text
-        mt="22px"
-        color="palette.text.shade100"
-        ff="Inter|SemiBold"
-        fontSize="18px"
-        lineHeight="21.78px"
-      >
-        <Trans i18nKey="informationCenter.serviceStatus.statusOk.title" />
-      </Text>
-      <Text
-        mt="8px"
-        color="palette.text.shade50"
-        ff="Inter|Regular"
-        fontSize="13px"
-        lineHeight="16px"
+        color="palette.neutral.c100"
+        variant="paragraph"
       >
         <Trans i18nKey="informationCenter.serviceStatus.statusOk.description">
           <FakeLink onClick={() => openURL(urls.ledgerStatus)} />
         </Trans>
       </Text>
-    </>
+    </Flex>
   );
 }
 
 function StatusNotOkHeader({ incidents }: { incidents: Incident[] }) {
+  const { t } = useTranslation();
+
+  const NotOkBadge = <Badge backgroundColor="palette.warning.c40" icon={<Icons.WarningMedium color="palette.warning.c100" />} />;
   return (
-    <ScrollArea hideScrollbar>
-      <Box py="32px" alignItems="center">
-        <Box color="warning">
-          <TriangleWarning size={54} />
-        </Box>
-        <Text
-          mt="22px"
-          mb="42px"
-          color="palette.text.shade100"
-          ff="Inter|SemiBold"
-          fontSize="18px"
-          lineHeight="21.78px"
-        >
-          <Trans i18nKey="informationCenter.serviceStatus.statusNotOk.title" />
-        </Text>
-        {incidents.map(incidentData => (
-          <IncidentArticle key={incidentData.id} incidentData={incidentData} />
-        ))}
-      </Box>
-    </ScrollArea>
+      <Flex py="32px" alignItems="center" justifyContent="center" flexDirection="column" flex={1}>
+        <StatusNotification text={t("informationCenter.serviceStatus.statusNotOk.title")} badge={
+          (<IconBox>
+            <Icons.WarningMedium size={24} color="palette.warning.c100" />
+          </IconBox>)
+        } />
+        {
+          incidents.map(({ name, incident_updates: incidentUpdates, shortlink }) =>
+           (
+              <Notification
+                badge={NotOkBadge}
+                title={name}                
+                description={incidentUpdates?.map(i => i.body).join("\n")}
+                link={t("informationCenter.serviceStatus.statusNotOk.learnMore")}
+                onLinkClick={() => shortlink && openURL(shortlink)}
+              />           
+            )
+          )
+        }
+      </Flex>
   );
 }
 
 function ServiceStatusPanel() {
-  const incidents: Incident[] = [
-    {
-      id: "1",
-      name: "Service Unavailable",
-      impact: "Impacted lalalalaala",
-      created_at: "2020-04-01T00:00:00.000Z",
-      status: "unavailable",
-      incident_updates: [],
-      monitoring_at: "2020-04-01T00:00:00.000Z",
-      page_id: "",
-      resolved_at: "2020-04-01T00:00:00.000Z",
-      shortlink: "",
-      updated_at: "2020-04-01T00:00:00.000Z",
+  const { incidents } = useFilteredServiceStatus();
 
-    }
-  ]
-  // const { incidents } = useFilteredServiceStatus();
-
-  console.log({ incidents });
-
-  return (
-    <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1}>
-      {incidents.length > 0 ? <StatusNotOkHeader incidents={incidents} /> : <StatusOkHeader />}
-    </Flex>
-  );
+  return incidents.length > 0 ? <StatusNotOkHeader incidents={incidents} /> : <StatusOkHeader />;
 }
 
 

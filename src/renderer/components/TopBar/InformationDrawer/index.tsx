@@ -30,22 +30,14 @@ const InformationDrawer = ({
     () => [
       {
         id: "announcement",
-        label: t(
-          unseenCount > 0
-            ? "informationCenter.tabs.announcementsUnseen"
-            : "informationCenter.tabs.announcements",
-          { unseenCount },
-        ),
+        title: t("informationCenter.tabs.announcements"),
+        badge: unseenCount || undefined,
         Component: <AnnouncementPanel />,
       },
       {
         id: "status",
-        label: t(
-          incidentCount > 0
-            ? "informationCenter.tabs.serviceStatusIncidentsOngoing"
-            : "informationCenter.tabs.serviceStatus",
-          { incidentCount },
-        ),
+        title: t("informationCenter.tabs.serviceStatus"),
+        badge: unseenCount || undefined,
         Component: <ServiceStatusPanel />,
       },
     ],
@@ -55,14 +47,15 @@ const InformationDrawer = ({
   const tabIndex = useMemo(() => tabs.findIndex(tab => tab.id === tabId), [tabId, tabs]);
 
   return (
-    <Drawer isOpen={isOpen} onClose={onRequestClose}>
+    <Drawer isOpen={isOpen} onClose={onRequestClose} big>
       <Flex my="20px" justifyContent="center">
         <Logos.LedgerLiveRegular />
       </Flex>
       <Tabs
-        tabs={tabs.map(({ label, Component }, i) => ({
-          index: i,
-          title: label,
+        tabs={tabs.map(({ title, Component, badge }, index) => ({
+          index,
+          title,
+          badge,
           Component,
         }))}
         activeIndex={tabIndex}

@@ -1,20 +1,19 @@
-import React, { useCallback, useRef, useMemo, useState } from "react";
+import React, { useCallback, useRef, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
-
-import { useTranslation } from "react-i18next";
 import { InView } from "react-intersection-observer";
-
-import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
-import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
-
-import { useDispatch } from "react-redux";
 
 import { openURL } from "~/renderer/linking";
 import { ScrollArea } from "~/renderer/components/Onboarding/ScrollArea";
 import Box from "~/renderer/components/Box";
 import { Text, Flex, Notification, Badge, Icons } from "@ledgerhq/react-ui";
-import { useDeepLinkHandler } from "~/renderer/hooks/useDeeplinking";
 
+import { groupAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider/helpers";
+import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
+
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
+import { useDeepLinkHandler } from "~/renderer/hooks/useDeeplinking";
 import { closeInformationCenter } from "~/renderer/actions/UI";
 import useDateTimeFormat from "~/renderer/hooks/useDateTimeFormat";
 
@@ -30,7 +29,7 @@ function DateRow({ date }: DateRowProps) {
 
   return (
     <Flex my="24px">
-      <Text color="palette.neutral.c60" fontSize="12px" fontWeight="600">
+      <Text color="palette.neutral.c60" variant="small" fontWeight="600">
         {dateFormatter(date)}
       </Text>
     </Flex>
@@ -115,13 +114,9 @@ function Article({
     <Notification
       badge={
         <Badge
-          icon={
-            <Badge
-              backgroundColor={backgroundColor}
-              active={!isRead}
-              icon={<Icon size={17} color={iconColor} />}
-            />
-          }
+          backgroundColor={backgroundColor}
+          active={!isRead}
+          icon={<Icon size={17} color={iconColor} />}
         />
       }
       title={title}
@@ -147,7 +142,7 @@ function AnnouncementPanel() {
   const { t } = useTranslation();
 
   const { cache, setAsSeen, seenIds, allIds } = useAnnouncements();
-  let groupedAnnouncements = useMemo(() => groupAnnouncements(allIds.map(uuid => cache[uuid])), [
+  const groupedAnnouncements = useMemo(() => groupAnnouncements(allIds.map(uuid => cache[uuid])), [
     cache,
     allIds,
   ]);
@@ -171,14 +166,12 @@ function AnnouncementPanel() {
     [seenIds, setAsSeen],
   );
 
-  groupedAnnouncements = [];
-
   const theme = useTheme();
 
   if (!groupedAnnouncements.length) {
     return (
-      <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1} pt="20px">
-        <Flex mt="70px" mx="80px">
+      <Flex flexDirection="column" alignItems="center" justifyContent="center" flex={1}>
+        <Flex mt="104px" mx="146px">
           <Illustration
             src={
               theme.colors.palette.type === "light"
@@ -191,37 +184,30 @@ function AnnouncementPanel() {
           mt="50px"
           textTransform="uppercase"
           color="palette.neutral.c100"
-          ff="Alpha|Medium"
-          fontSize="28px"
+          variant="h3"
           textAlign="center"
         >
           {t("informationCenter.announcement.emptyState.upToDate")}
         </Text>
-        <Text
-          mt="8px"
-          color="palette.neutral.c100"
-          ff="Inter|Regular"
-          fontSize="13px"
-          textAlign="center"
-        >
+        <Text mt="8px" color="palette.neutral.c100" variant="paragraph" textAlign="center">
           {t("informationCenter.announcement.emptyState.checkBackSoon")}
         </Text>
       </Flex>
     );
   }
 
+  // TODO: handle pinned announcements (DateRow to be replaced by a "Pinned" title and background=true to be used in the pinned articles)
   return (
     <ScrollArea hideScrollbar>
       <Box py="32px">
         {groupedAnnouncements.map((group, index) => (
           <React.Fragment key={index}>
             {group.day ? <DateRow date={group.day} /> : null}
-            {// $FlowFixMe
-            group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
+            {group.data.map(({ level, icon, content, uuid, utm_campaign: utmCampaign }, index) => (
               <React.Fragment key={uuid}>
                 <InView as="div" onChange={visible => handleInView(visible, uuid)}>
                   {/* conversions are made here for level, icon, text and link. These types are comming from live-common
-                  TODO: maybe sanitize the types in live-commos so they're more restrictive and we don't need this */}
+                    TODO: maybe sanitize the types in live-commos so they're more restrictive and we don't need this */}
                   <Article
                     level={level as ArticleLevels | undefined}
                     icon={icon as ArticleLevels | undefined}
