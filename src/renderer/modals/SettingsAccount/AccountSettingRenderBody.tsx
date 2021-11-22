@@ -1,4 +1,4 @@
-import React, { PureComponent, memo } from "react";
+import React, { PureComponent, memo, Component } from "react";
 import styled from "styled-components";
 import get from "lodash/get";
 import { compose } from "redux";
@@ -73,12 +73,13 @@ const AdvancedLogsContainer: ThemedComponent<{}> = styled(Flex).attrs(() => ({
 `;
 
 type State = {
-  accountName: string;
-  accountUnit: Unit;
-  endpointConfig: string;
-  accountNameError: Error;
-  endpointConfigError: Error;
+  accountName?: string;
+  accountUnit?: Unit;
+  endpointConfig?: string;
+  accountNameError?: Error;
+  endpointConfigError?: Error;
   isRemoveAccountModalOpen: boolean;
+  data: any;
 };
 
 type Props = {
@@ -99,7 +100,7 @@ const mapDispatchToProps = {
   removeAccount,
 };
 
-const defaultState = {
+const defaultState: State = {
   accountName: null,
   accountUnit: null,
   endpointConfig: null,
@@ -109,9 +110,13 @@ const defaultState = {
 };
 
 class AccountSettingRenderBody extends PureComponent<Props, State> {
-  state = {
-    ...defaultState,
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      ...defaultState,
+      data: props.data || {},
+    };
+  }
 
   getAccount(data: Object): Account {
     const { accountName } = this.state;
@@ -153,7 +158,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
         account.endpointConfig = endpointConfig;
       }
       updateAccount(account);
-      setDataModal("MODAL_SETTINGS_ACCOUNT", { account });
+      this.setState({ data: { ...this.state.data, account } });
       onClose();
     }
   };
@@ -189,8 +194,8 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
   };
 
   render() {
-    const { accountUnit, accountNameError, isRemoveAccountModalOpen } = this.state;
-    const { t, onClose, data } = this.props;
+    const { accountUnit, accountNameError, data, isRemoveAccountModalOpen } = this.state;
+    const { t, onClose } = this.props;
     if (!data) return null;
 
     const account = this.getAccount(data);
