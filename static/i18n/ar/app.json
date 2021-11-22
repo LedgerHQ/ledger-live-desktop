@@ -1188,29 +1188,29 @@
       }
     },
     "collections": {
-      "title": "NFT (Non Fungible Tokens) Collections",
-      "receiveCTA": "Receive NFT",
-      "galleryCTA": "See Gallery",
-      "seeMore": "See more collections",
-      "seeAll": "See all collections",
-      "seeLess": "See less"
+      "title": "مجموعات NFT (رموز غير قابلة للاستبدال)",
+      "receiveCTA": "قم بتلقي NFT (رموز غير قابلة للاستبدال)",
+      "galleryCTA": "شاهد المعرض",
+      "seeMore": "شاهد المزيد من المجموعات",
+      "seeAll": "شاهد جميع المجموعات",
+      "seeLess": "شاهد أقل"
     },
     "gallery": {
-      "title": "All NFT",
+      "title": "جميع NFT (رموز غير قابلة للاستبدال)",
       "collection": {
         "header": {
-          "sendCTA": "Send",
-          "contract": "Contract: {{contract}}"
+          "sendCTA": "إرسال",
+          "contract": "عقد: {{contract}}"
         },
         "operationList": {
-          "header": "Latest Operations",
-          "OUT": "Sent",
-          "IN": "Received"
+          "header": "أحدث العمليات",
+          "OUT": "تم الإرسال",
+          "IN": "تم الاستلام"
         }
       },
       "tokensList": {
         "item": {
-          "tokenId": "ID: {{tokenId}}"
+          "tokenId": "مُعرّف: {{tokenId}}"
         }
       }
     }
@@ -1355,10 +1355,10 @@
     "details": "تفاصيل {{ currency }}",
     "multipleAddresses": "لماذا عناوين متعددة؟",
     "nft": {
-      "name": "Token Name",
-      "contract": "Token Contract",
-      "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "name": "اسم رّمز التوكن",
+      "contract": "عقد رّمز التوكن",
+      "id": "مُعرّف (NFT) رمز التوكن",
+      "amount": "المبلغ"
     },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
@@ -1420,12 +1420,12 @@
       "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "المبلغ المراد إرساله",
+      "amountReceived": "المبلغ المراد تلقيه",
+      "provider": "المزود",
+      "fees": "رسوم الشبكة",
+      "sourceAccount": "حساب المصدر",
+      "targetAccount": "الحساب المستهدف"
     },
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
@@ -1537,13 +1537,13 @@
       "update": "تحديث البرنامج الثابت",
       "updateBtn": "قم بتحديث البرنامج الثابت",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "تحديث البرنامج الثابت إلى {{latestFirmware}} متاح",
+        "cta": "انتقل إلى ​المدير",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعوق تحديثه. تواصل مع دعم ليدجر (Ledger) للحصول على بديل.",
+          "cta": "التواصل مع الدعم"
         },
-        "cta2": "Update firmware"
+        "cta2": "قم بتحديث البرنامج الثابت"
       },
       "latest": "الإصدار {{version}} من البرنامج الثابت متوفر",
       "contactSupport": "اتصل بالدعم",
@@ -1567,8 +1567,8 @@
       "confirmIdentifier": "قم بالتحقق من المُعرّف",
       "confirmIdentifierText": "تحقق من أن المُعرّف على جهازك هو المُعرّف ذاته أدناه. قم بتأكيد وإدخال رمز PINال الخاص بك إذا طُلب.",
       "identifier": "المُعرّف",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
+      "preparation": "التحضير",
+      "newFirmware": "برنامج ثابت جديد {{version}}",
       "confirmUpdate": "Please confirm the update on your device",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
