@@ -16,13 +16,13 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: checkout PR
         run: gh pr checkout ${{ github.event.inputs.number }}
         env:
