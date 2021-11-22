@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Özellikler",
-        "about": "About Known Origin",
+        "about": "Açıklama",
         "contract": "Sözleşme adresi",
         "tokenId": "Token Kimliği",
         "quantity": "Miktar"
@@ -1205,7 +1205,7 @@
         "operationList": {
           "header": "Son İşlemler",
           "OUT": "Gönderilen",
-          "IN": "Received"
+          "IN": "Alınan"
         }
       },
       "tokensList": {
@@ -1358,7 +1358,7 @@
       "name": "Token Adı",
       "contract": "Token Sözleşmesi",
       "id": "Token (NFT) Kimliği",
-      "amount": "Amount"
+      "amount": "Tutar"
     },
     "extra": {
       "frozenAmount": "Dondurulan tutar",
