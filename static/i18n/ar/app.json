@@ -2891,7 +2891,7 @@
         "contactSupportCTA": "التواصل مع الدعم",
         "continueCTA": "متابعة",
         "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
+        "description": "إذا جاء {{device}} الخاص بك مع كود PIN أو عبارة الاسترداد، فإنه ليس من الآمن استخدامه، ويجب عليك التواصل مع دعم Ledger.",
         "alert": "Only use a recovery phrase that your device displayed when it was set up"
       }
     },
@@ -3455,7 +3455,7 @@
   },
   "Terms": {
     "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "description": "الرجاء أخذ بعض الوقت لمراجعة شروط الخدمة وسياسة الخصوصية",
     "termsLabel": "شروط الخدمة",
     "privacyLabel": "Privacy policy",
     "switchLabel": "I have read and accept the Terms of service and Privacy policy",
@@ -3497,7 +3497,7 @@
     },
     "AccountNeedResync": {
       "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "description": "الحساب قديم. هناك حاجة إلى التزامن"
     },
     "AccountNotSupported": {
       "title": "الحساب غير مدعوم.",
@@ -3766,7 +3766,7 @@
     },
     "SwapGenericAPIError": {
       "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "description": "لم تتم عملية التداول. الرجاء المحاولة مرة أخرى أو التواصل مع الدعم."
     },
     "TimeoutError": {
       "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب",
