@@ -135,12 +135,8 @@ const AccountPage = ({
           {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
-          {account.type === "Account" ? (
-            <>
-              <Collections account={account} />
-              <TokensList account={account} />
-            </>
-          ) : null}
+          {account?.nfts?.length ? <Collections account={account} /> : null}
+          {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
             account={account}
             parentAccount={parentAccount}

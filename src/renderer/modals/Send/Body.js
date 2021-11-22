@@ -107,12 +107,7 @@ const createSteps = (disableBacks = []): St[] => [
     excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-    onBack: !disableBacks.includes("confirmation")
-      ? ({ transitionTo, onRetry }) => {
-          onRetry();
-          transitionTo("recipient");
-        }
-      : null,
+    onBack: null,
   },
 ];
 
