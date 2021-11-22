@@ -2,8 +2,9 @@ import React, { useCallback, useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { context as drawersContext } from "~/renderer/drawers/Provider";
+import { Icons, Text } from "@ledgerhq/react-ui";
 
+import { context as drawersContext } from "~/renderer/drawers/Provider";
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -19,7 +20,6 @@ import { openModal } from "~/renderer/actions/modals";
 import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { Icons } from "@ledgerhq/react-ui";
 import ExportOperations from "~/renderer/modals/ExportOperations";
 
 const Item: ThemedComponent<{
@@ -55,19 +55,14 @@ const OptionsButton = () => {
     {
       key: "exportOperations",
       label: t("accounts.optionsMenu.exportOperations"),
-      icon: <IconDownloadCloud size={16} />,
+      icon: <Icons.ExportMedium size="18px" />,
       onClick: () => setDrawer(ExportOperations),
     },
     {
       key: "exportAccounts",
       label: t("accounts.optionsMenu.exportToMobile"),
-      icon: <IconSend size={16} />,
+      icon: <Icons.DevicesAltMedium size="18px" />,
       onClick: () => onOpenModal("MODAL_EXPORT_ACCOUNTS"),
-    },
-    {
-      key: "sep1",
-      type: "separator",
-      label: "",
     },
     {
       key: "hideEmpty",
@@ -99,12 +94,14 @@ const OptionsButton = () => {
                   : "hideEmptyTokenAccountsDisabled"
               }
             />
-            <Switch isChecked={hideEmptyTokenAccounts} onChange={setHideEmptyTokenAccounts} />
+            <Switch small isChecked={hideEmptyTokenAccounts} onChange={setHideEmptyTokenAccounts} />
           </Box>
         ) : item.icon ? (
           <Box mr={4}>{item.icon}</Box>
         ) : null}
-        {item.label}
+        <Text variant="small" fontWeight="semiBold" color="palette.neutral.c80">
+          {item.label}
+        </Text>
       </Item>
     );
   };
