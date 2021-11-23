@@ -46,9 +46,11 @@ jobs:
         run: yarn playwright-update-snapshots
         env:
           DEBUG: pw:api
-      - name: commit
+      - name: status
         run: |
           git status
+      - name: commit
+        run: |
           git add .
           git commit -m 'update screenshots'
           git pull
