@@ -2762,7 +2762,7 @@
   },
   "update": {
     "downloadInProgress": "Скачиваем обновления...",
-    "downloadProgress": "Выполнено: {{progress}}%",
+    "downloadProgress": "Загружено: {{progress}}%",
     "checking": "Проверяем обновления...",
     "checkSuccess": "Обновление готово к установке",
     "quitAndInstall": "Установить",
