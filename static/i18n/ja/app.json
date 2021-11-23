@@ -133,8 +133,8 @@
     "type": {
       "IN": "受取済み",
       "OUT": "送付済み",
-      "NFT_IN": "NFT Received",
-      "NFT_OUT": "NFT Sent",
+      "NFT_IN": "NFT受取済み",
+      "NFT_OUT": "NFT送付済み",
       "CREATE": "作成済み",
       "REVEAL": "表示済み",
       "DELEGATE": "デリゲート",
@@ -1176,41 +1176,41 @@
   "NFT": {
     "viewer": {
       "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
+        "send": "送る",
+        "open": "{{viewer}} で開く"
       },
       "attributes": {
-        "properties": "Properties",
-        "about": "About Known Origin",
-        "contract": "Contract address",
-        "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "properties": "プロパティ",
+        "about": "起源について",
+        "contract": "コントラクトアドレス",
+        "tokenId": "トークンID",
+        "quantity": "数量"
       }
     },
     "collections": {
-      "title": "NFT (Non Fungible Tokens) Collections",
-      "receiveCTA": "Receive NFT",
-      "galleryCTA": "See Gallery",
-      "seeMore": "See more collections",
-      "seeAll": "See all collections",
-      "seeLess": "See less"
+      "title": "NFT（非代替性トークン）コレクション",
+      "receiveCTA": "NFTを受け取る",
+      "galleryCTA": "ギャラリーを見る",
+      "seeMore": "他のコレクションを見る",
+      "seeAll": "すべてのコレクションを見る",
+      "seeLess": "表示を減らす"
     },
     "gallery": {
-      "title": "All NFT",
+      "title": "すべてのNFT",
       "collection": {
         "header": {
-          "sendCTA": "Send",
-          "contract": "Contract: {{contract}}"
+          "sendCTA": "送る",
+          "contract": "コントラクト：{{contract}}"
         },
         "operationList": {
-          "header": "Latest Operations",
-          "OUT": "Sent",
-          "IN": "Received"
+          "header": "前回のオペレーション",
+          "OUT": "送付済み",
+          "IN": "受取済み"
         }
       },
       "tokensList": {
         "item": {
-          "tokenId": "ID: {{tokenId}}"
+          "tokenId": "ID：{{tokenId}}"
         }
       }
     }
@@ -1355,10 +1355,10 @@
     "details": "{{ currency }} 詳細",
     "multipleAddresses": "なぜ複数のアドレスがあるのですか？",
     "nft": {
-      "name": "Token Name",
-      "contract": "Token Contract",
-      "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "name": "トークン名",
+      "contract": "トークンコントラクト",
+      "id": "トークン（NFT）ID",
+      "amount": "数量"
     },
     "extra": {
       "frozenAmount": "凍結額",
@@ -1748,12 +1748,12 @@
   },
   "send": {
     "title": "送る",
-    "titleNft": "Send NFT",
+    "titleNft": "NFTを送付",
     "totalSpent": "引き落とし合計",
     "steps": {
       "recipient": {
         "title": "受取人",
-        "nftRecipient": "NFT to send"
+        "nftRecipient": "送付するNFT"
       },
       "amount": {
         "title": "数量",
@@ -1761,7 +1761,7 @@
         "fees": "手数料",
         "standard": "標準",
         "advanced": "アドバンス",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "数量"
       },
       "summary": {
         "title": "概要"
@@ -1785,7 +1785,7 @@
         "ethereumGasPrice": "ガス代",
         "unitPerByte": "1バイトあたり{{unit}}",
         "nft": "NFT",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "数量"
       },
       "verification": {
         "streaming": {
@@ -3442,10 +3442,10 @@
       "optIn": "受取人",
       "nominate": "バリデータ",
       "erc721": {
-        "transfer": "recipient"
+        "transfer": "受取先"
       },
       "erc1155": {
-        "transfer": "recipient"
+        "transfer": "受取先"
       }
     },
     "votes": "{{count}} 票"
@@ -4052,7 +4052,7 @@
       "title": "メインネットのアクティベート前に、Taprootアドレスへの送付は安全ではありません。"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "利用可能なトークン数を超えています。"
     }
   }
 }
