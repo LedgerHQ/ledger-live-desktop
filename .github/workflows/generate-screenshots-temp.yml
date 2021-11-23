@@ -47,6 +47,7 @@ jobs:
         env:
           DEBUG: pw:api
       - name: status
+        if: ${{ always() }}
         run: |
           git status
       - name: commit
