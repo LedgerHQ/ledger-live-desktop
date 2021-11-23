@@ -1439,6 +1439,12 @@
       "appsOnDevice": "Apps installed",
       "appOnDeviceSearch": "Search installed apps..."
     },
+    "disconnected": {
+      "title":"Looks like an app is open on your device",
+      "subtitle":"Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
+    },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
       "noFreeSpace": "No storage left",

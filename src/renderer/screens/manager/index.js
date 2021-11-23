@@ -7,7 +7,7 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 import { command } from "~/renderer/commands";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { Redirect } from "react-router";
+import Disconnected from "./Disconnected";
 
 const connectManagerExec = command("connectManager");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
@@ -31,7 +31,7 @@ const Manager = () => {
       ) : !hasReset ? (
         <DeviceAction onResult={onResult} action={action} request={null} />
       ) : (
-        <Redirect to="/" />
+        <Disconnected onTryAgain={setHasReset} />
       )}
     </>
   );
