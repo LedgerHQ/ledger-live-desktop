@@ -1,0 +1,1 @@
+2021-11-23T15:03:01.601Z pw:api <= electronApplication.firstWindow succeeded
