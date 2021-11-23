@@ -41,6 +41,11 @@ const bundles = {
     wpConf: require("../webviewPreloader.webpack.config"),
     color: "yellow",
   },
+  swapConnectWebviewPreloader: {
+    name: "swapConnectWebviewPreloader",
+    wpConf: require("../swapConnectWebviewPreloader.webpack.config"),
+    color: "yellow",
+  },
 };
 
 const buildMainEnv = (mode, config, argv) => {
@@ -165,6 +170,10 @@ const startDev = async argv => {
     "webviewPreloader",
     buildMainConfig("development", bundles.webviewPreloader, argv),
   );
+  const swapConnectWebviewPreloaderWorker = new WebpackWorker(
+    "swapConnectWebviewPreloader",
+    buildMainConfig("development", bundles.swapConnectWebviewPreloader, argv),
+  );
   const rendererWorker = new WebpackWorker(
     "renderer",
     buildRendererConfig("development", bundles.renderer),
@@ -181,6 +190,9 @@ const startDev = async argv => {
     webviewPreloaderWorker.watch(() => {
       electron.reload();
     }),
+    swapConnectWebviewPreloaderWorker.watch(() => {
+      electron.reload();
+    }),
     rendererWorker.serve(argv.port),
   ]);
   electron.start();
@@ -190,18 +202,28 @@ const build = async argv => {
   const mainConfig = buildMainConfig("production", bundles.main, argv);
   const preloaderConfig = buildMainConfig("production", bundles.preloader, argv);
   const webviewPreloaderConfig = buildMainConfig("production", bundles.webviewPreloader, argv);
+  const swapConnectWebviewPreloaderWorkerConfig = buildMainConfig(
+    "production",
+    bundles.swapConnectWebviewPreloader,
+    argv,
+  );
   const rendererConfig = buildRendererConfig("production", bundles.renderer, argv);
 
   const mainWorker = new WebpackWorker("main", mainConfig);
   const rendererWorker = new WebpackWorker("renderer", rendererConfig);
   const preloaderWorker = new WebpackWorker("preloader", preloaderConfig);
   const webviewPreloaderWorker = new WebpackWorker("preloader", webviewPreloaderConfig);
+  const swapConnectWebviewPreloaderWorker = new WebpackWorker(
+    "preloader",
+    swapConnectWebviewPreloaderWorkerConfig,
+  );
 
   await Promise.all([
     mainWorker.bundle(),
     rendererWorker.bundle(),
     preloaderWorker.bundle(),
     webviewPreloaderWorker.bundle(),
+    swapConnectWebviewPreloaderWorker.bundle(),
   ]);
 };
 
