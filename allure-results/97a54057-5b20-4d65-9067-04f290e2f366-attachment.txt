@@ -1,0 +1,1 @@
+D:\a\ledger-live-desktop\ledger-live-desktop\playwright\specs\onboarding.spec.ts-snapshots\terms-win32.png is missing in snapshots, writing actual.
