@@ -40,12 +40,12 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots
+        run: xvfb-run --auto-servernum -- yarn playwright playwright/specs/onboarding.spec.ts --update-snapshots
         env:
           DEBUG: pw:browser
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright-update-snapshots
+        run: yarn playwright playwright/specs/onboarding.spec.ts --update-snapshots
         env:
           DEBUG: pw:api
       - name: status
