@@ -1,6 +1,5 @@
 import { _electron as electron } from "playwright";
-import { test as base, expect, Page } from "@playwright/test";
-import electronPath from "electron";
+import { test as base, expect, Page, ElectronApplication } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
@@ -14,7 +13,7 @@ type TestFixtures = {
   theme: "light" | "dark" | "no-preference" | undefined;
   userdata: string;
   env: Record<string, any>;
-  page: any;
+  page: Page;
 };
 
 const test = base.extend<TestFixtures>({
@@ -36,6 +35,7 @@ const test = base.extend<TestFixtures>({
     // default environment variables
     env = Object.assign(
       {
+        ...process.env,
         MOCK: true,
         HIDE_DEBUG_MOCK: true,
         CI: process.env.CI || undefined,
@@ -49,15 +49,17 @@ const test = base.extend<TestFixtures>({
     // launch app
     const viewport = { width: 1024, height: 768 };
 
-    const electronApp = await electron.launch({
+    const electronApp: ElectronApplication = await electron.launch({
       args: [
         "./.webpack/main.bundle.js",
         `--user-data-dir=${userDataPath}`,
         `--window-size=${viewport.width},${viewport.height}`,
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
+        // "--use-gl=swiftshader"
+        "--no-sandbox",
+        "--enable-logging",
       ],
-      executablePath: electronPath,
       recordVideo: {
         dir: "playwright/artifacts/videos/",
         size: viewport,
