@@ -1,0 +1,1 @@
+2021-11-23T15:03:07.217Z pw:api <= electronApplication.close succeeded
