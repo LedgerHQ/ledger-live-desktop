@@ -1975,7 +1975,7 @@
       "warnEarnRewards": "Sie benötigen mindestens {{amount}}, um Prämien zu erhalten",
       "claimRewards": "Prämie beanspruchen",
       "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
-      "claimAvailableRewards": "Anspruch {{Betrag}}",
+      "claimAvailableRewards": "Anspruch {{amount}}",
       "header": "Abstimmungen",
       "percentageTP": "% der abgegebenen Stimmen",
       "noRewards": "Keine Prämien verfügbar",
@@ -2268,7 +2268,7 @@
           },
           "info": {
             "title": "Prämien",
-            "description": "Glückwunsch! Sie haben {{Betrag}} verdient. Klicken Sie auf Weiter, um Ihre Prämien einzufordern",
+            "description": "Glückwunsch! Sie haben {{amount}} verdient. Klicken Sie auf Weiter, um Ihre Prämien einzufordern",
             "info": "Sie werden aufgefordert, eine leere Transaktion auf Ihrem Konto zu erzeugen. Dadurch werden Ihre aktuellen Prämien zu den minimalen Kosten der Transaktionsgebühren zu Ihrem Guthaben hinzugefügt."
           },
           "connectDevice": {
