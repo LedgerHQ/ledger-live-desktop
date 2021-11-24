@@ -189,8 +189,8 @@
   },
   "sidebar": {
     "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "stars": "お気に入りアカウント",
+    "accounts": "アカウント",
     "market": "Market",
     "manager": "Manager",
     "exchange": "Buy / Sell",

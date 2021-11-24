@@ -188,15 +188,15 @@
     "feesAmount": "Fees Amount"
   },
   "sidebar": {
-    "menu": "Menu",
-    "stars": "Starred accounts",
-    "accounts": "Accounts",
+    "menu": "Menü",
+    "stars": "Favori hesaplar",
+    "accounts": "Hesaplar",
     "market": "Market",
-    "manager": "Manager",
-    "exchange": "Buy / Sell",
-    "swap": "Swap",
-    "lend": "Lend",
-    "catalog": "Discover"
+    "manager": "Yönetici",
+    "exchange": "Al / Sat",
+    "swap": "Takas",
+    "lend": "Borç ver",
+    "catalog": "Keşfet"
   },
   "market": {
     "title": "Market",
