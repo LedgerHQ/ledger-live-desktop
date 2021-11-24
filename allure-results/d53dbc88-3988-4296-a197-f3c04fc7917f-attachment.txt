@@ -1,0 +1,1 @@
+2021-11-24T15:53:09.028Z pw:api   navigated to "file:///D:/a/ledger-live-desktop/ledger-live-desktop/.webpack/index.html?theme=null"

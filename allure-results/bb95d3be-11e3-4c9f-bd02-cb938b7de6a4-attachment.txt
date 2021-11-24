@@ -1,0 +1,1 @@
+2021-11-24T15:53:25.424Z pw:api waiting for selector "button:has-text("Check my Nano")"
