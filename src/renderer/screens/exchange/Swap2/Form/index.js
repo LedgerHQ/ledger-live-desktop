@@ -36,6 +36,7 @@ import { track } from "~/renderer/analytics/segment";
 import { SWAP_VERSION, trackSwapError } from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import SwapConnectFTX from "../SwapConnectFTX";
+import KYC from "../KYC";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -175,7 +176,7 @@ const SwapForm = () => {
   }
 
   if (isInKycFlow) {
-    return <SwapConnectFTX type="kyc" onClose={() => setIsInKycFlow(false)} />;
+    return <KYC provider={provider} onClose={() => setIsInKycFlow(false)} />;
   }
 
   if (providers?.length)
@@ -210,7 +211,6 @@ const SwapForm = () => {
           <FormLoginBanner provider={provider} onClick={() => setIsInLoginFlow(true)} />
         ) : null}
 
-        {/* FIXME: Make Wyre fit in this new framework */}
         {showKYCBanner ? (
           <FormKYCBanner
             provider={provider}

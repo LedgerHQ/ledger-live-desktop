@@ -9,14 +9,6 @@ import { track } from "~/renderer/analytics/segment";
 
 export const SWAP_VERSION = "2.34";
 
-export const useRedirectToSwapForm = () => {
-  const history = useHistory();
-
-  return useCallback(() => {
-    history.push("/swap");
-  }, [history]);
-};
-
 export const useRedirectToSwapHistory = () => {
   const history = useHistory();
 

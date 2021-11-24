@@ -15,7 +15,7 @@ import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
 import Button from "~/renderer/components/Button";
 import InfoCircle from "~/renderer/icons/InfoCircle";
-import { useRedirectToSwapForm, SWAP_VERSION } from "../utils/index";
+import { SWAP_VERSION } from "../../utils/index";
 
 export const CircleWrapper: ThemedComponent<{}> = styled.div`
   border-radius: 50%;
@@ -65,8 +65,7 @@ const InfoTag = styled.div`
   column-gap: 4px;
 `;
 
-const Pending = () => {
-  const redirectToSwapForm = useRedirectToSwapForm();
+const Pending = ({ onClose }: { onClose: Function }) => {
   const onLearnMore = useCallback(() => {
     openURL(urls.swap.providers.wyre.kyc);
   }, []);
@@ -99,8 +98,8 @@ const Pending = () => {
           </Text>
         </LinkWithExternalIcon>
       </Box>
-      <Button mt={28} primary onClick={redirectToSwapForm}>
-        Continue
+      <Button mt={28} primary onClick={onClose}>
+        <Trans i18nKey={`swap2.kyc.wyre.pending.cta`} />
       </Button>
     </Container>
   );
