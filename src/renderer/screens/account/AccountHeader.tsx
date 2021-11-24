@@ -16,60 +16,40 @@ import {
   shortAddressPreview,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import Box from "~/renderer/components/Box";
-import ExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
-import { colors } from "~/renderer/styles/theme";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
 import { updateAccount } from "~/renderer/actions/accounts";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
 import { noop } from "lodash";
 
-const CurName = styled(Text).attrs(() => ({
+const Subtitle = styled(Text).attrs(() => ({
   variant: "paragraph",
   fontWeight: "medium",
-  uppercase: true,
   color: "palette.neutral.c70",
-}))`
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-`;
-
-const CurNameToken = styled(Text).attrs(() => ({
-  ff: "Inter|Bold",
-  fontSize: 2,
 }))``;
 
-const CurNameTokenLink = styled(CurNameToken)`
-  margin-left: 5px;
-  padding: 2px 4px;
+const TokenContractLink = styled(Subtitle)`
+  margin: 0px 4px;
   border-radius: ${p => p.theme.radii[1]}px;
 `;
 
-const CurNameTokenIcon = styled(Text).attrs(() => ({
-  ff: "Inter|SemiBold",
-  fontSize: 2,
-}))`
-  color: ${colors.wallet};
-  display: none;
-  margin-left: 5px;
-  align-items: center;
-`;
-
-const Wrapper = styled(Box)`
+const TokenContractLinkWrapper: ThemedComponent<{}> = styled(Flex)`
   cursor: pointer;
   display: flex;
   align-items: center;
 
-  :hover ${CurNameTokenIcon} {
-    display: flex;
+  > svg {
+    display: none;
+    margin-top: -3px;
   }
 
-  :hover ${CurNameTokenLink} {
-    color: ${colors.wallet};
-    background-color: ${colors.pillActiveBackground};
+  :hover > svg {
+    display: inline;
+  }
+
+  :hover ${TokenContractLink} {
+    color: ${p => p.theme.colors.palette.neutral.c100};
+    text-decoration: underline;
   }
 `;
 
@@ -229,23 +209,20 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
         </AccountNameBox>
         {contract && account.type === "TokenAccount" ? (
           <Flex flexDirection="row" alignItems="center">
-            <CurNameToken>
+            <Subtitle>
               <Trans i18nKey="account.contractAddress" />
-            </CurNameToken>
-            <Wrapper horizontal alignItems="center" onClick={openLink}>
-              <CurNameTokenLink>
+            </Subtitle>
+            <TokenContractLinkWrapper horizontal onClick={openLink}>
+              <TokenContractLink>
                 {shortAddressPreview(account.token.contractAddress)}
-              </CurNameTokenLink>
-              <CurNameTokenIcon>
-                <ExternalLink size={12} style={{ marginRight: 5 }} />
-                <Trans i18nKey="account.openInExplorer" />
-              </CurNameTokenIcon>
-            </Wrapper>
+              </TokenContractLink>
+              <Icons.ExternalLinkMedium size={16} color="palette.neutral.c100" />
+            </TokenContractLinkWrapper>
           </Flex>
         ) : (
-          <CurName>
+          <Subtitle uppercase>
             {currency.name} <AccountTagDerivationMode account={account} />
-          </CurName>
+          </Subtitle>
         )}
       </Flex>
     </Flex>
