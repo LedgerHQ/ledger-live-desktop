@@ -124,7 +124,7 @@ export default function AccountBalanceSummaryHeader({
             valueChange={data[0].valueChange}
             unit={data[0].unit}
             isAvailable={isAvailable}
-            iconSize={12}
+            iconSize={16}
           />
         </Text>
         <PillsDaysCount />
