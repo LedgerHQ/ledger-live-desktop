@@ -1,5 +1,6 @@
 import { _electron as electron } from "playwright";
 import { test as base, expect, Page, ElectronApplication } from "@playwright/test";
+// import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/index";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
@@ -32,6 +33,9 @@ const test = base.extend<TestFixtures>({
       fs.copyFileSync(userDataFile, `${userDataPath}/app.json`);
     }
 
+    //manifest added here
+    const testAppManifest = path.resolve("playwright/test-live-app/", "manifest.json")
+
     // default environment variables
     env = Object.assign(
       {
@@ -40,6 +44,7 @@ const test = base.extend<TestFixtures>({
         HIDE_DEBUG_MOCK: true,
         CI: process.env.CI || undefined,
         SPECTRON_RUN: true,
+        TEST_LIVE_APP: testAppManifest,
         // SYNC_ALL_INTERVAL: 86400000,
         // SYNC_BOOT_DELAY: 16,
       },

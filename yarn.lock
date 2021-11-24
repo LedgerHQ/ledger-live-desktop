@@ -10673,11 +10673,6 @@ get-port@^5.1.1:
   resolved "https://registry.npmjs.org/get-port/-/get-port-5.1.1.tgz"
   integrity sha512-g/Q1aTSDOxFpchXC4i8ZWvxA1lnPqx/JHqcpIw0/LX9T8x/GBbi6YnlN5nhaKIFkT8oFsscUKgDJYxfwfS6QsQ==
 
-get-stdin@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.npmjs.org/get-stdin/-/get-stdin-5.0.1.tgz"
-  integrity sha1-Ei4WFZHiH/TFJTAwVpPyDmOTo5g=
-
 get-stream@3.0.0, get-stream@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/get-stream/-/get-stream-3.0.0.tgz"
@@ -10941,11 +10936,6 @@ globby@^9.2.0:
     ignore "^4.0.3"
     pify "^4.0.1"
     slash "^2.0.0"
-
-glur@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/glur/-/glur-1.1.2.tgz"
-  integrity sha1-8g6jbbEDv8KSNDkh8fkeg8NGdok=
 
 good-listener@^1.2.2:
   version "1.2.2"
@@ -12678,20 +12668,6 @@ jest-haste-map@^27.3.1:
     walker "^1.0.7"
   optionalDependencies:
     fsevents "^2.3.2"
-
-"jest-image-snapshot@https://github.com/machard/jest-image-snapshot#machard-patch-1":
-  version "4.2.0"
-  resolved "git+ssh://git@github.com/machard/jest-image-snapshot.git#d087e8683859dba2964b5866a4d1eb02ba64e7b9"
-  dependencies:
-    chalk "^1.1.3"
-    get-stdin "^5.0.1"
-    glur "^1.1.2"
-    lodash "^4.17.4"
-    mkdirp "^0.5.1"
-    pixelmatch "^5.1.0"
-    pngjs "^3.4.0"
-    rimraf "^2.6.2"
-    ssim.js "^3.1.1"
 
 jest-jasmine2@^26.6.3:
   version "26.6.3"
@@ -15400,7 +15376,7 @@ pirates@^4.0.0, pirates@^4.0.1:
   dependencies:
     node-modules-regexp "^1.0.0"
 
-pixelmatch@^5.1.0, pixelmatch@^5.2.1:
+pixelmatch@^5.2.1:
   version "5.2.1"
   resolved "https://registry.npmjs.org/pixelmatch/-/pixelmatch-5.2.1.tgz"
   integrity sha512-WjcAdYSnKrrdDdqTcVEY7aB7UhhwjYQKYhHiBXdJef0MOaQeYpUdQ+iVyBLa5YBKS8MPVPPMX7rpOByISLpeEQ==
@@ -15510,7 +15486,7 @@ plist@^3.0.1:
     base64-js "^1.5.1"
     xmlbuilder "^9.0.7"
 
-pngjs@^3.3.0, pngjs@^3.4.0:
+pngjs@^3.3.0:
   version "3.4.0"
   resolved "https://registry.npmjs.org/pngjs/-/pngjs-3.4.0.tgz"
   integrity sha512-NCrCHhWmnQklfH4MtJMRjZ2a8c80qXeMlQMv2uVp9ISJMTt562SbGd6n2oq0PaPgKm7Z6pL9E2UlLIhC+SHL3w==
@@ -17935,11 +17911,6 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
-
-ssim.js@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.npmjs.org/ssim.js/-/ssim.js-3.1.1.tgz"
-  integrity sha512-/AcvEnpIxwh1+t4HNRE9lg+Ka8MIsUPXsXeQjzd5IQjs1DcphrlPHKciWdZRnHAQoQIbLFzXJ+5KruYeH7oXjw==
 
 ssri@^6.0.1:
   version "6.0.2"
