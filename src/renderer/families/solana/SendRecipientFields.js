@@ -12,6 +12,9 @@ import Label from "~/renderer/components/Label";
 import type { TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { NotEnoughBalanceBecauseDestinationNotCreated } from "@ledgerhq/errors";
 import CheckBox from "~/renderer/components/CheckBox";
+import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
+import TranslatedError from "~/renderer/components/TranslatedError";
+import styled from "styled-components";
 
 type Props = {
   account: Account,
@@ -19,6 +22,10 @@ type Props = {
   onChange: Transaction => void,
   transaction: Transaction,
 };
+
+const WarningDisplay = styled(Box)`
+  color: ${p => p.theme.colors.warning};
+`;
 
 const Root = ({ onChange, account, transaction, status }: Props) => {
   invariant(transaction.family === "solana", "solana family expected");
@@ -31,36 +38,38 @@ const Root = ({ onChange, account, transaction, status }: Props) => {
     [onChange, account, transaction],
   );
 
-  const isRecipientNotCreatedError =
-    status.errors.recipient instanceof NotEnoughBalanceBecauseDestinationNotCreated;
-
-  const isRecipientNotCreatedWarning =
-    status.warnings.recipient instanceof NotEnoughBalanceBecauseDestinationNotCreated;
-
-  const shownRecipientNotCreatedCheckbox =
-    isRecipientNotCreatedError || isRecipientNotCreatedWarning;
+  const extraWarnings = [
+    status.warnings.recipientAssociatedTokenAccount,
+    status.warnings.recipientOffCurve,
+  ];
 
   return (
     <Box flow={2}>
-      {shownRecipientNotCreatedCheckbox && (
-        <Box horizontal>
-          <CheckBox
-            isChecked={transaction.allowNotCreatedRecipient}
-            onChange={allowNotCreatedRecipient => onChangeTx({ allowNotCreatedRecipient })}
-          />
-          <Label ml={5}>
-            <span>Allow not created recipient</span>
-          </Label>
+      {extraWarnings.filter(Boolean).map(warning => (
+        <Box>
+          <WarningDisplay>
+            <TranslatedError error={warning} />
+          </WarningDisplay>
         </Box>
-      )}
+      ))}
       <Box>
         <Label mb={5}>
           <span>Memo</span>
         </Label>
         <Input
           placeholder="Memo"
-          value={transaction.memo || ""}
-          onChange={memo => onChangeTx({ memo })}
+          value={transaction.model.uiState.memo || ""}
+          onChange={memo =>
+            onChangeTx({
+              model: {
+                ...transaction.model,
+                uiState: {
+                  ...transaction.model.uiState,
+                  memo,
+                },
+              },
+            })
+          }
         />
       </Box>
     </Box>
@@ -69,5 +78,5 @@ const Root = ({ onChange, account, transaction, status }: Props) => {
 
 export default {
   component: withTranslation()(Root),
-  fields: ["memo", "allowNotCreatedRecipient"],
+  fields: ["memo"],
 };

@@ -38,6 +38,7 @@ function StepConfirmation({
 }: StepProps) {
   const options = account && listTokensForCryptoCurrency(account.currency);
   const token = useMemo(
+    //TODO: fix assetId here
     () => transaction && options && options.find(({ id }) => id === transaction.assetId),
     [options, transaction],
   );

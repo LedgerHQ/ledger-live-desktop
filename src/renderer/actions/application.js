@@ -19,3 +19,7 @@ export const setOSDarkMode = createAction("APPLICATION_SET_DATA", osDarkMode => 
 export const setNavigationLock = createAction("APPLICATION_SET_DATA", navigationLocked => ({
   navigationLocked,
 }));
+export const toggleSkeletonVisibility = createAction(
+  "APPLICATION_SET_DATA",
+  alwaysShowSkeletons => ({ debug: { alwaysShowSkeletons } }),
+);

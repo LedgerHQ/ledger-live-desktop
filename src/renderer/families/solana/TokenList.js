@@ -16,12 +16,11 @@ const ReceiveButton = ({ account }: { account: Account }) => {
     dispatch(openModal("MODAL_SOLANA_OPT_IN", { account }));
   };
   return (
-    <Button small color="palette.primary.main" onClick={onReceiveClick}>
+    <Button small primary onClick={onReceiveClick}>
       <Box horizontal flow={1} alignItems="center">
         <IconPlus size={12} />
         <Box>
-          {/* TODO: solana switch to solana */}
-          <Trans i18nKey="tokensList.solana.cta" />
+          <Trans i18nKey="tokensList.cta" />
         </Box>
       </Box>
     </Button>
@@ -30,5 +29,5 @@ const ReceiveButton = ({ account }: { account: Account }) => {
 
 export default {
   ReceiveButton,
-  hasSpecificTokenWording: true,
+  //hasSpecificTokenWording: true,
 };

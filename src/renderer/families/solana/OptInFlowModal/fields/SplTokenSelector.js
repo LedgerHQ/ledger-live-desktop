@@ -44,7 +44,7 @@ const renderItem = ({
         </Text>
       </Box>
       {isDisabled && (
-        <ToolTip content={<Trans i18nKey="solana.optIn.flow.steps.assets.disabledTooltip" />}>
+        <ToolTip content={<Trans i18nKey="solana.optIn.flow.steps.tokens.disabledTooltip" />}>
           <Box color="warning">
             <ExclamationCircleThin size={16} />
           </Box>
@@ -74,7 +74,7 @@ export default function DelegationSelectorField({ account, transaction, t, onCha
         renderOption={renderItem}
         onInputChange={setQuery}
         inputValue={query}
-        placeholder={t("solana.optIn.flow.steps.assets.selectLabel")}
+        placeholder={t("solana.optIn.flow.steps.tokens.selectLabel")}
         noOptionsMessage={({ inputValue }) => t("common.selectNoResults", { query: inputValue })}
         onChange={onChange}
       />

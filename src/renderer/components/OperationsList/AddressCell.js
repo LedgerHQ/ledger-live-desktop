@@ -83,11 +83,13 @@ type Props = {
 class AddressCell extends PureComponent<Props> {
   render() {
     const { operation } = this.props;
-
-    const value =
-      operation.type === "IN" || operation.type === "REVEAL" || operation.type === "REWARD_PAYOUT"
-        ? operation.senders[0]
-        : operation.recipients[0];
+    const showSender = ["IN", "REVEAL", "REWARD_PAYOUT"];
+    const hide = ["NFT_IN", "NFT_OUT"];
+    const value = showSender.includes(operation.type)
+      ? operation.senders[0]
+      : !hide
+      ? operation.recipients[0]
+      : null;
 
     return value ? (
       <Cell>

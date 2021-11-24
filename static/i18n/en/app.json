@@ -133,6 +133,8 @@
     "type": {
       "IN": "Received",
       "OUT": "Sent",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "about": "About Known Origin",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Tokens",
     "cta": "Add token",
@@ -1187,6 +1231,9 @@
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})"
+    },
+    "solana": {
+      "title": "Add SPL Token"
     }
   },
   "subAccounts": {
@@ -1310,6 +1357,12 @@
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Frozen amount",
       "unfreezeAmount": "Unfreeze amount",
@@ -1698,17 +1751,20 @@
   },
   "send": {
     "title": "Send",
+    "titleNft": "Send NFT",
     "totalSpent": "Total to debit",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "Recipient",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Amount",
         "banner": "Maximum spendable amount is",
         "fees": "Fees",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "Advanced",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Summary"
@@ -1730,7 +1786,9 @@
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
         "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "unitPerByte": "{{unit}} per byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -2389,6 +2447,26 @@
       }
     }
   },
+  "solana": {
+    "optIn": {
+      "flow": {
+        "title": "Add SPL Token",
+        "steps": {
+          "tokens": {
+            "title": "Choose Token",
+            "info": "Adding a token will require an additional fee which can be claimed back by closing the token account.",
+            "selectLabel": "Select a token"
+          },
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation"
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
@@ -2743,7 +2821,8 @@
       "fr": "French",
       "ru": "Russian",
       "es": "Spanish",
-      "zh": "Chinese"
+      "zh": "Chinese",
+      "de": "German"
     }
   },
   "theme": {
@@ -3384,7 +3463,13 @@
       "undelegate": "validator",
       "claimReward": "rewards recipient",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "validator",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Votes ({{count}})"
   },
@@ -3988,6 +4073,33 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaNotEnoughBalanceToPayFees": {
+      "title": "Not enouogh balance to pay fees"
+    },
+    "SolanaAssociatedTokenAccountWillBeFunded": {
+      "title": "Associated token account will be funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long"
+    },
+    "SolanaTokenAccountHoldsAnotherToken": {
+      "title": "Token account hodls another token"
+    },
+    "SolanaTokenAccounNotInitialized": {
+      "title": "Account not initialized"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
+    "SolanaTokenRecipientIsSenderATA": {
+      "title": "Recipient is associated token account of sender"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }

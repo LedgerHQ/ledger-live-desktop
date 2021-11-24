@@ -25,7 +25,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepAsset, { StepAssetFooter } from "./steps/StepAsset";
+import StepTokens, { StepTokensFooter } from "./steps/StepTokens";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -54,17 +54,17 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "assets",
-    label: <Trans i18nKey="solana.optIn.flow.steps.assets.title" />,
-    component: StepAsset,
+    id: "tokens",
+    label: <Trans i18nKey="solana.optIn.flow.steps.tokens.title" />,
+    component: StepTokens,
     noScroll: true,
-    footer: StepAssetFooter,
+    footer: StepTokensFooter,
   },
   {
     id: "connectDevice",
     label: <Trans i18nKey="solana.optIn.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("assets"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("tokens"),
   },
   {
     id: "confirmation",
@@ -127,7 +127,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("assets");
+    onChangeStepId("tokens");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
