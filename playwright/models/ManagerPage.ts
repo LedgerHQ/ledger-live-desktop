@@ -19,7 +19,7 @@ export class ManagerPage {
     this.installedAppsTab = page.locator('#appsOnDevice-tab');
     this.catalogAppsTab = page.locator('#appCatalog-tab');
     this.updateAllButton = page.locator('#managerAppsList-updateAll');
-    this.appUpdateState = page.locator('text=Updating...');
+    this.appUpdateState = page.locator('text=Updating...').first();
     this.installAppButton = (currency: string) : Locator => page.locator(`#appActionsInstall-${currency}`);
     this.uninstallAppButton = (currency: string) : Locator => page.locator(`#appActionsUninstall-${currency}`);
     this.uninstallAllAppsButton = page.locator('button:has-text("Uninstall all")');

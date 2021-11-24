@@ -40,14 +40,10 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: xvfb-run --auto-servernum -- yarn playwright --update-snapshots
-        env:
-          DEBUG: pw:browser
+        run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright --update-snapshots
-        env:
-          DEBUG: pw:api
+        run: yarn playwright-update-snapshots
       - name: status
         if: ${{ always() }}
         run: |

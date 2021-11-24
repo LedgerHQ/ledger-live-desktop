@@ -1,4 +1,4 @@
-name: Screenshot Tests
+name: UI tests
 on:
   pull_request:
     branches:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   ui-tests:
-    name: ui tests (${{ matrix.os }})
+    name: UI tests (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
@@ -23,12 +23,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      # - name: install linux dependencies
-      #   if: matrix.os == 'ubuntu-20.04'
-      #   run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
-      # - name: install and switch to GCC 5.4
-      #   if: matrix.os == 'ubuntu-20.04'
-      #   run: ./tools/g++-5.4/install.sh
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: get yarn cache
@@ -48,13 +42,11 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright
+        run: xvfb-run --auto-servernum -- yarn playwright
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright
-        env:
-          DEBUG: pw:api
-      - name: git status
+      - name: diff output
         if: ${{ always() }}
         run: git status
       - name: upload ci suggested screenshots
@@ -64,4 +56,6 @@ jobs:
           name: results-${{ matrix.os }}
           path: |
             playwright/artifacts/test-results
+            playwright/artifacts/html-report
+            playwright/artifacts/coverage
             playwright/artifacts/videos
