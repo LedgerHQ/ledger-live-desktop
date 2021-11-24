@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SwapFormSummary from "./FormSummary";
 import SwapFormSelectors from "./FormSelectors";
@@ -14,7 +14,6 @@ import {
   usePollKYCStatus,
   useSwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProvidersAction,
@@ -27,6 +26,7 @@ import {
 import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 import FormKYCBanner from "./FormKYCBanner";
+import FormLoginBanner from "./FormLoginBanner";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
@@ -34,6 +34,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
 import { SWAP_VERSION, trackSwapError } from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import SwapConnectFTX from "../SwapConnectFTX";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -76,6 +77,8 @@ export const useProviders = () => {
 };
 
 const SwapForm = () => {
+  const [isInLoginFlow, setIsInLoginFlow] = useState(false);
+  const [isInKycFlow, setIsInKycFlow] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { state: locationState } = useLocation();
@@ -95,12 +98,15 @@ const SwapForm = () => {
     onNoRates: trackNoRates,
     ...locationState,
   });
+
   const exchangeRatesState = swapTransaction.swap?.rates;
   const swapKYC = useSelector(swapKYCSelector);
   const provider = exchangeRate?.provider;
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
-  const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
+  // const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
+  const showLoginBanner = true;
+  const showKYCBanner = true;
   const { setDrawer } = React.useContext(context);
 
   useEffect(() => {
@@ -155,7 +161,8 @@ const SwapForm = () => {
     swapTransaction.transaction &&
     !providersError &&
     !swapError &&
-    !showWyreKYCBanner &&
+    !showLoginBanner &&
+    !showKYCBanner &&
     exchangeRate &&
     swapTransaction.swap.to.account;
 
@@ -172,6 +179,14 @@ const SwapForm = () => {
   const sourceAccount = swapTransaction.swap.from.account;
   const sourceCurrency = swapTransaction.swap.from.currency;
   const targetCurrency = swapTransaction.swap.to.currency;
+
+  if (isInLoginFlow) {
+    return <SwapConnectFTX type="login" onClose={() => setIsInLoginFlow(false)} />;
+  }
+
+  if (isInKycFlow) {
+    return <SwapConnectFTX type="kyc" onClose={() => setIsInKycFlow(false)} />;
+  }
 
   if (providers?.length)
     return (
@@ -200,7 +215,20 @@ const SwapForm = () => {
           kycStatus={kycStatus}
           provider={provider}
         />
-        {showWyreKYCBanner ? <FormKYCBanner provider={provider} status={kycStatus} /> : null}
+
+        {showLoginBanner ? (
+          <FormLoginBanner provider={provider} onClick={() => setIsInLoginFlow(true)} />
+        ) : null}
+
+        {/* FIXME: Make Wyre fit in this new framework */}
+        {showKYCBanner ? (
+          <FormKYCBanner
+            provider={provider}
+            status={kycStatus}
+            onClick={() => setIsInKycFlow(true)}
+          />
+        ) : null}
+
         <Button primary disabled={!isSwapReady} onClick={onSubmit} data-test-id="exchange-button">
           {t("common.exchange")}
         </Button>
