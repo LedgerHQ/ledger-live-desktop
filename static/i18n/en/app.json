@@ -267,6 +267,10 @@
             "approved": "KYC approved",
             "closed": "KYC rejected"
           }
+        },
+        "login": {
+          "required": "You need to login with this provider",
+          "complete": "Login"
         }
       }
     },
