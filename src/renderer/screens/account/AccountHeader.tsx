@@ -1,12 +1,10 @@
 import React, { useCallback, useState, useEffect } from "react";
 import styled from "styled-components";
-import { fontSize, color } from "styled-system";
-import fontFamily from "~/renderer/styles/styled/fontFamily";
 import { Trans } from "react-i18next";
 import { useDispatch } from "react-redux";
 
 import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
-import { Text, Flex } from "@ledgerhq/react-ui";
+import { Button, Text, Flex, Icons } from "@ledgerhq/react-ui";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import {
   getDefaultExplorerView,
@@ -18,17 +16,14 @@ import {
   shortAddressPreview,
   getAccountName,
 } from "@ledgerhq/live-common/lib/account";
-import Box, { Tabbable } from "~/renderer/components/Box";
+import Box from "~/renderer/components/Box";
 import ExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
 import { colors } from "~/renderer/styles/theme";
-import { rgba } from "~/renderer/styles/helpers";
 import ParentCryptoCurrencyIcon from "~/renderer/components/ParentCryptoCurrencyIcon";
-import IconPen from "~/renderer/icons/Pen";
-import IconCross from "~/renderer/icons/Cross";
-import IconCheck from "~/renderer/icons/Check";
 import { updateAccount } from "~/renderer/actions/accounts";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+import { noop } from "lodash";
 
 const CurName = styled(Text).attrs(() => ({
   variant: "paragraph",
@@ -78,7 +73,7 @@ const Wrapper = styled(Box)`
   }
 `;
 
-const AccountNameBox = styled(Box)`
+const AccountNameBox = styled(Flex)`
   width: 100%;
   position: relative;
   left: -11px;
@@ -89,12 +84,14 @@ type InputProps = React.DetailedHTMLProps<
   HTMLInputElement
 >;
 
-const AccountName: ThemedComponent<InputProps> = styled(Text).attrs(() => ({
-  variant: "h5",
-  fontWeight: "medium",
-  color: "palette.neutral.c100",
-  fontSize: "20px",
-}))`
+const AccountName: ThemedComponent<InputProps & { disabled?: boolean }> = styled(Text).attrs(
+  () => ({
+    variant: "h5",
+    fontWeight: "medium",
+    color: "palette.neutral.c100",
+    fontSize: "20px", // the variant isn't enough
+  }),
+)`
   border: 1px solid;
   border-color: transparent;
   border-radius: 4px;
@@ -112,7 +109,7 @@ const AccountName: ThemedComponent<InputProps> = styled(Text).attrs(() => ({
   }
 
   :hover {
-    border-color: ${p => (!p.disabled ? p.theme.colors.palette.text.shade30 : "transparent")};
+    border-color: ${p => (!p.disabled ? p.theme.colors.palette.neutral.c70 : "transparent")};
     cursor: text;
 
     + svg {
@@ -122,8 +119,7 @@ const AccountName: ThemedComponent<InputProps> = styled(Text).attrs(() => ({
 
   :focus {
     max-width: 190px !important;
-    border-color: ${p => p.theme.colors.wallet};
-    background: ${p => (p.theme.colors.palette.type === "light" ? "#fff" : "none")};
+    border-color: ${p => p.theme.colors.palette.neutral.c100};
 
     + svg {
       display: none;
@@ -131,24 +127,14 @@ const AccountName: ThemedComponent<InputProps> = styled(Text).attrs(() => ({
   }
 `;
 
-const IconButton: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
+const InputButtonsContainer = styled(Flex).attrs(() => ({
+  position: "absolute",
+  flexDirection: "row",
   alignItems: "center",
-  justifyContent: "center",
-}))`
-  width: 34px;
-  height: 34px;
-  border: 1px solid ${p => p.theme.colors.palette.text.shade60};
-  border-radius: 4px;
-  &:hover {
-    color: ${p => (p.disabled ? "" : p.theme.colors.palette.text.shade100)};
-    background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.2))};
-    border-color: ${p => p.theme.colors.palette.text.shade100};
-  }
-
-  &:active {
-    background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.3))};
-  }
-`;
+  justifyContent: "flex-start",
+  top: 0,
+  bottom: 0,
+}))``;
 
 type Props = {
   account: AccountLike;
@@ -209,7 +195,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
     <Flex flexDirection="row" flexShrink={1} alignItems="center">
       <ParentCryptoCurrencyIcon currency={currency} size={10} />
       <Flex flex={1} flexDirection="column" alignItems="flex-start" ml={6}>
-        <AccountNameBox horizontal alignItems="center">
+        <AccountNameBox alignItems="center" columnGap={3}>
           <AccountName
             disabled={account.type !== "Account"}
             onFocus={() => {
@@ -231,20 +217,14 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
             id="account-header-name"
             as="input"
           />
-          <IconPen size={14} />
+          <Icons.PenMedium size={20} color="palette.neutral.c70" />
           {editingName && (
-            <IconButton>
-              <Box justifyContent="center">
-                <IconCross size={16} />
-              </Box>
-            </IconButton>
-          )}
-          {editingName && (
-            <IconButton onMouseDown={submitNameChange}>
-              <Box justifyContent="center" color="positiveGreen">
-                <IconCheck size={16} />
-              </Box>
-            </IconButton>
+            <div style={{ position: "relative" }}>
+              <InputButtonsContainer columnGap={3}>
+                <Button Icon={Icons.CloseMedium} variant="shade" outline onClick={noop} />
+                <Button Icon={Icons.CheckAloneMedium} variant="main" onClick={submitNameChange} />
+              </InputButtonsContainer>
+            </div>
           )}
         </AccountNameBox>
         {contract && account.type === "TokenAccount" ? (
