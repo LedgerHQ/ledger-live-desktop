@@ -12,6 +12,7 @@ test("Platform", async ({ page }) => {
   const deviceAction = new DeviceAction(page);
 
   await test.step("can access the discover apps", async () => {
+    console.log(process.env.SPECTRON_RUN);
     await discoverPage.navigate();
   });
 });

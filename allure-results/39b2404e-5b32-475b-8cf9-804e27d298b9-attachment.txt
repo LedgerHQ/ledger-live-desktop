@@ -1,1 +1,0 @@
-D:\a\ledger-live-desktop\ledger-live-desktop\playwright\specs\onboarding.spec.ts-snapshots\connect-nanox-win32.png is missing in snapshots, writing actual.
