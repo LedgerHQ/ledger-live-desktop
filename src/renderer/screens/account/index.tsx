@@ -96,7 +96,7 @@ const AccountPage = ({
   const color = getCurrencyColor(currency, bgColor);
 
   return (
-    <Box key={account.id}>
+    <Flex flexDirection="column" px={12} key={account.id}>
       <TrackPage
         category="Account"
         currency={currency.id}
@@ -104,7 +104,7 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Flex flexDirection="row" justifyContent="space-between" px={12} py={7}>
+      <Flex flexDirection="row" justifyContent="space-between" py={7}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Flex>
@@ -145,7 +145,7 @@ const AccountPage = ({
       ) : (
         <EmptyStateAccount account={account} parentAccount={parentAccount} />
       )}
-    </Box>
+    </Flex>
   );
 };
 
