@@ -5398,27 +5398,6 @@ ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
-allure-commandline@^2.13.8:
-  version "2.13.8"
-  resolved "https://registry.yarnpkg.com/allure-commandline/-/allure-commandline-2.13.8.tgz#ccc10b6296934198776a7ba3a79977cdd56eeac9"
-  integrity sha512-LxP4a/nigaH1al6TZU+JVio8j205XXYhL2ATG22tU2F7xTlEkO4SbAUY8Bq366J6C136EdZAoFUeEsGrJsI7BA==
-
-allure-js-commons@2.0.0-beta.13:
-  version "2.0.0-beta.13"
-  resolved "https://registry.npmjs.org/allure-js-commons/-/allure-js-commons-2.0.0-beta.13.tgz"
-  integrity sha512-8S6YEofR9LfGCJIMnmeqDvJ9kFD1TsVJZsH+kbsgzpf8HCU/Q6SH9eIxenYU8jWZu4359+crSsEhyNeywXaO4Q==
-  dependencies:
-    mkdirp "^1.0.4"
-    properties "^1.2.1"
-    uuid "^8.3.0"
-
-allure-playwright@^2.0.0-beta.13:
-  version "2.0.0-beta.13"
-  resolved "https://registry.npmjs.org/allure-playwright/-/allure-playwright-2.0.0-beta.13.tgz"
-  integrity sha512-imOTK2byJy5oGaIpFQ8lbPlGyXb8GTpgFxh8KrSkyb6/SErZpaLil0VgyC6wU/tFCoJAGiWUmqj0dn4UOg2ANA==
-  dependencies:
-    allure-js-commons "2.0.0-beta.13"
-
 animated@^0.2.2:
   version "0.2.2"
   resolved "https://registry.npmjs.org/animated/-/animated-0.2.2.tgz"
@@ -15806,11 +15785,6 @@ proper-lockfile@^4.1.1:
     graceful-fs "^4.2.4"
     retry "^0.12.0"
     signal-exit "^3.0.2"
-
-properties@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/properties/-/properties-1.2.1.tgz"
-  integrity sha1-Dul6f8AgsaKlW4ZZ7aSqjYaQlL0=
 
 property-information@^5.0.0, property-information@^5.3.0:
   version "5.6.0"
