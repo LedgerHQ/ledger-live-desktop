@@ -25,7 +25,7 @@ const config: PlaywrightTestConfig = {
   // FIXME: --update-snapshots doesn't work with --retries
   // retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI
-    ? [["html", { open: "never", outputFolder: "playwright/artifacts/" }], ["github"]]
+    ? [["html", { open: "never", outputFolder: "playwright/artifacts/html-report" }], ["github"]]
     : "list",
 };
 
