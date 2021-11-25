@@ -748,7 +748,7 @@
     },
     "assets": "要借出的资产",
     "active": "已批准的账户",
-    "lendAsset": "贷出",
+    "lendAsset": "借出",
     "account": {
       "amountSupplied": "已存数额",
       "amountSuppliedTooltip": "向网络贷出的数额",
