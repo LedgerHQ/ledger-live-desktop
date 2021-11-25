@@ -71,4 +71,7 @@ export class DeviceAction {
 
     await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
   }
+
+
+  // wait mockDeviceEvent({ type: "opened" });
 }
