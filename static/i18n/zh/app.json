@@ -751,11 +751,11 @@
     "lendAsset": "借出",
     "account": {
       "amountSupplied": "已存数额",
-      "amountSuppliedTooltip": "向网络贷出的数额",
+      "amountSuppliedTooltip": "向网络借出的数额",
       "currencyAPY": "货币的年收益率 APY",
       "currencyAPYTooltip": "连续复合存款年度回报率",
       "accruedInterests": "应计利息",
-      "accruedInterestsTooltip": "贷出资产产生的利息",
+      "accruedInterestsTooltip": "借出资产产生的利息",
       "interestEarned": "已赚取利息",
       "interestEarnedTooltip": "提取后您赚取的利息",
       "openLoans": "开放借贷",
@@ -769,7 +769,7 @@
     "emptyState": {
       "active": {
         "title": "放款中",
-        "description": "您可以从您的以太坊账户直接贷出资产并赚取利息。",
+        "description": "您可以从您的以太坊账户直接借出资产并赚取利息。",
         "cta": "Compound 复合贷款如何运作？"
       },
       "closed": {
@@ -840,12 +840,12 @@
         "infoNoLimit": "您已完全批准此帐户。您可以根据一定费用来减少该数额。",
         "approvedWithLimit": "您已批准此账户上的 <0>{{value}}</0>。",
         "enabling": "账户批准一经确认，您便可存入资产。",
-        "notEnabled": "账户需要获得您的批准才能贷出资产。",
-        "notEnoughApproved": "您必须提高您账户批准贷出的限额。"
+        "notEnabled": "账户需要获得您的批准才能借出资产。",
+        "notEnoughApproved": "您必须提高您账户批准借出的限额。"
       },
       "supply": {
         "title": "存入",
-        "description": "输入要贷出给协议的资产数额。"
+        "description": "输入要借出给协议的资产数额。"
       },
       "withdraw": {
         "title": "提取",
@@ -919,7 +919,7 @@
       "terms": {
         "title": "借出加密货币",
         "subtitle": "按照 Compound 复利协议借出资产",
-        "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
+        "description": "Compound 复利协议允许您在以太坊网络上借出或借入资产。您可以直接通过您的 Ledger 账户借出资产并赚取利息。",
         "switchLabel": "<1>我已阅读并同意 </1><0>使用条款</0><1>。</1>"
       },
       "steps": {
@@ -931,7 +931,7 @@
         },
         "2": {
           "subtitle": "供应资产以赚取利息",
-          "description": "一旦账户获得批准，您可以选择想要贷出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
+          "description": "一旦账户获得批准，您可以选择想要借出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
         },
         "3": {
           "subtitle": "随时提取资产",
