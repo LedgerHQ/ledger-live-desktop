@@ -2555,10 +2555,10 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.3.1.tgz#d7eadf65f97d38fc822ce1cf4429e2e3012904f6"
-  integrity sha512-UyZHZgsAelfaGfZN+2aoDZq0Ydtb+wlph/QC2bdbmp2VXedehO3W1TY8MZ4Ie0Cor712WjXb8RJGCIchItvvWQ==
+"@ledgerhq/react-ui@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.4.0.tgz#c8b81823640b00bc8b229bf3052d0fcb413b6655"
+  integrity sha512-nF1FhiRVC7wYgeyg05tdSebYosZEmaCVsGzIryzkxOA3zrRML0WQMrD+2WzptMQNijqdRAJhzGZ5oqPsLP4/6g==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.0"
     "@ledgerhq/ui-shared" "^0.1.3"
