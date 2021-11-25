@@ -46,9 +46,12 @@ jobs:
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright
-      - name: diff output
-        if: ${{ always() }}
-        run: git status
+      - name: upload diffs to imgur
+        if: always()
+        uses: ./.github/actions/upload-images
+        id: imgur
+        with:
+          path: playwright/artifacts/test-results
       - name: upload ci suggested screenshots
         if: ${{ always() }}
         uses: actions/upload-artifact@v2
