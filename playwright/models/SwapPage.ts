@@ -24,6 +24,6 @@ export class SwapPage {
   }
 
   async confirmExchange() {
-    await this.exchangeButton .click();
+    await this.exchangeButton.click();
   }
 }
