@@ -37,7 +37,7 @@ const test = base.extend<TestFixtures>({
       {
         ...process.env,
         MOCK: true,
-        HIDE_DEBUG_MOCK: true,
+        HIDE_DEBUG_MOCK: false,
         CI: process.env.CI || undefined,
         SPECTRON_RUN: true,
         // SYNC_ALL_INTERVAL: 86400000,

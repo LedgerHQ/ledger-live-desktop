@@ -74,4 +74,7 @@ export class DeviceAction {
 
     await this.deviceActionLoader.waitFor({ state: "hidden" });
   }
+
+
+  // wait mockDeviceEvent({ type: "opened" });
 }

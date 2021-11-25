@@ -9,6 +9,14 @@ export class SwapPage {
 
   async navigate() {
     await this.page.click('#drawer-swap-button');
-    await this.page.waitForSelector('span:has-text("Max")', { state: 'visible' });
+    await this.page.waitForSelector('data-test-id=swap-max-spendable-toggle', { state: 'visible' });
+  }
+
+  async sendMax() {
+    await this.page.click('data-test-id=swap-max-spendable-toggle');
+  }
+
+  async confirmExchange() {
+    await this.page.click('data-test-id=exchange-button');
   }
 }
