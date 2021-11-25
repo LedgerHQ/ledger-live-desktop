@@ -1,8 +1,7 @@
 import React from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { withTranslation } from "react-i18next";
-import { TFunction } from "react-i18next";
+import { withTranslation, TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
@@ -96,7 +95,7 @@ const AccountPage = ({
   const color = getCurrencyColor(currency, bgColor);
 
   return (
-    <Flex flexDirection="column" px={12} key={account.id}>
+    <Flex flexDirection="column" key={account.id} pb={12}>
       <TrackPage
         category="Account"
         currency={currency.id}
@@ -104,7 +103,7 @@ const AccountPage = ({
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
 
-      <Flex flexDirection="row" justifyContent="space-between" py={7}>
+      <Flex flexDirection="row" justifyContent="space-between" py={7} px={12}>
         <AccountHeader account={account} parentAccount={parentAccount} />
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Flex>
@@ -115,37 +114,40 @@ const AccountPage = ({
 
       <Divider variant="light" />
 
-      {!isAccountEmpty(account) ? (
-        <>
-          <Flex mt={9} mb={12} px={12} flexDirection="row">
-            <BalanceSummary
-              mainAccount={mainAccount}
+      <Flex px={12} rowGap={12} flexDirection="column">
+        {!isAccountEmpty(account) ? (
+          <>
+            <Flex mt={9} flexDirection="row">
+              <BalanceSummary
+                mainAccount={mainAccount}
+                account={account}
+                parentAccount={parentAccount}
+                chartColor={color}
+                countervalueFirst={countervalueFirst}
+                setCountervalueFirst={setCountervalueFirst}
+                isCompoundEnabled={isCompoundEnabled}
+                ctoken={ctoken}
+              />
+            </Flex>
+            {AccountBodyHeader ? (
+              <AccountBodyHeader account={account} parentAccount={parentAccount} />
+            ) : null}
+            {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
+              <CompoundBodyHeader account={account} parentAccount={parentAccount} />
+            ) : null}
+            {account.type === "Account" ? <TokensList account={account} /> : null}
+            <Divider variant="light" />
+            <OperationsList
+              withAccount
               account={account}
               parentAccount={parentAccount}
-              chartColor={color}
-              countervalueFirst={countervalueFirst}
-              setCountervalueFirst={setCountervalueFirst}
-              isCompoundEnabled={isCompoundEnabled}
-              ctoken={ctoken}
+              title={t("account.lastOperations")}
             />
-          </Flex>
-          {AccountBodyHeader ? (
-            <AccountBodyHeader account={account} parentAccount={parentAccount} />
-          ) : null}
-          {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
-            <CompoundBodyHeader account={account} parentAccount={parentAccount} />
-          ) : null}
-          {account.type === "Account" ? <TokensList account={account} /> : null}
-          <OperationsList
-            withAccount
-            account={account}
-            parentAccount={parentAccount}
-            title={t("account.lastOperations")}
-          />
-        </>
-      ) : (
-        <EmptyStateAccount account={account} parentAccount={parentAccount} />
-      )}
+          </>
+        ) : (
+          <EmptyStateAccount account={account} parentAccount={parentAccount} />
+        )}
+      </Flex>
     </Flex>
   );
 };
