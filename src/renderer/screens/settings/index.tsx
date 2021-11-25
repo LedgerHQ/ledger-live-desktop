@@ -4,8 +4,7 @@ import { Switch, Route, RouteComponentProps } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import type { Item } from "~/renderer/components/Pills";
-import { Text, Flex, Chip } from "@ledgerhq/react-ui";
-import { SettingsSection as Section } from "./SettingsSection";
+import { Text, Flex, Chip, Divider, Box } from "@ledgerhq/react-ui";
 import SectionDisplay from "./sections/General";
 import SectionExperimental from "./sections/Experimental";
 import SectionDeveloper from "./sections/Developer";
@@ -100,22 +99,36 @@ const Settings = ({ history, location, match }: RouteComponentProps) => {
   }, [match, history, location, items, activeTabIndex]);
 
   return (
-    <Flex flexDirection="column" px={12}>
-      <Text variant="h3" my={9}>{t("settings.title")}</Text>
-      <Chip 
-        initialActiveIndex={activeTabIndex}
-        onTabChange={handleChangeTab}
-      >
-        {items.map(i => <Text color="inherit" variant="small">{t(i.label)}</Text>)}
-      </Chip>
-      <Section>
+    <Flex flexDirection="column" rowGap={10} pt={4}>
+      <Flex flexDirection="column" rowGap={10} px={12}>
+        <Text variant="h3" lineHeight="1.15">{t("settings.title")}</Text>
+        <Chip 
+          initialActiveIndex={activeTabIndex}
+          onTabChange={handleChangeTab}
+        >
+          {
+            items.map((item, i) => (
+                <Text
+                  lineHeight="1.15"
+                  fontWeight="600"
+                  color={i === activeTabIndex ? "palette.neutral.c100" : "palette.neutral.c80"}
+                  variant="small"
+                >
+                  {t(item.label)}
+                </Text>
+            ))
+          }
+        </Chip>
+      </Flex>
+      <Divider variant="light" />
+      <Box px={12}>
         <Switch>
           {processedItems.map(i => (
             <Route key={i.key} path={`${match.url}/${i.key}`} component={i.value} />
           ))}
           <Route component={defaultItem.value} />
         </Switch>
-      </Section>
+      </Box>
     </Flex>
   );
 };

@@ -1,6 +1,5 @@
-import { handleActions, ReducerMap, ReducerMapMeta } from "redux-actions";
+import { handleActions } from "redux-actions";
 import { createSelector } from "reselect";
-import type { OutputSelector } from "reselect";
 import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
@@ -92,6 +91,7 @@ export type SettingsState = {
   accountsViewMode: "card" | "list",
   showAccountsHelperBanner: boolean,
   hideEmptyTokenAccounts: boolean,
+  sidebarCollapsed: boolean,
   discreetMode: boolean,
   carouselVisibility: number,
   starredAccountIds?: string[],
@@ -149,6 +149,7 @@ const INITIAL_STATE: SettingsState = {
   accountsViewMode: "list",
   showAccountsHelperBanner: true,
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+  sidebarCollapsed: false,
   discreetMode: false,
   preferredDeviceModel: DeviceModelId.nanoS,
   hasInstalledApps: true,
@@ -407,6 +408,7 @@ export const confirmationsNbForCurrencySelector = (
 };
 
 export const preferredDeviceModelSelector = (state: State) => state.settings.preferredDeviceModel;
+export const sidebarCollapsedSelector = (state: State) => state.settings.sidebarCollapsed;
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode;
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator;
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs;
@@ -458,8 +460,8 @@ export const showClearCacheBannerSelector = (state: State) => state.settings.sho
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
-  state => state.settings.currenciesSettings,
-  state => state.settings.pairExchanges,
+  (state: State) => state.settings.currenciesSettings,
+  (state: State) => state.settings.pairExchanges,
   developerModeSelector,
   blacklistedTokenIdsSelector,
   (
