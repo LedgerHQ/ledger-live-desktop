@@ -5,7 +5,6 @@ import { createGlobalStyle } from "styled-components";
 
 import { rgba } from "./helpers";
 
-import reset from "@ledgerhq/react-ui/styles/reset";
 import tippyStyles from "@ledgerhq/react-ui/components/message/Tooltip/styles";
 
 export type GlobalStyleProps = {
@@ -14,8 +13,6 @@ export type GlobalStyleProps = {
 };
 
 export const GlobalStyle = createGlobalStyle<GlobalStyleProps>`
-  ${reset};
-
   body {
     font-family: Inter;
     font-size: 100%;
