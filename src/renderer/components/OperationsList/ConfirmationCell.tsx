@@ -18,7 +18,6 @@ import { getMarketColor } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 
 import ConfirmationCheck from "./ConfirmationCheck";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import perFamilyOperationDetails from "~/renderer/generated/operationDetails";
 
@@ -30,7 +29,7 @@ const mapStateToProps = createStructuredSelector({
   marketIndicator: marketIndicatorSelector,
 });
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const Cell = styled(Box).attrs(() => ({
   horizontal: true,
   alignItems: "center",
 }))``;

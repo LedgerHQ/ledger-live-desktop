@@ -6,9 +6,8 @@ import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import Tooltip from "~/renderer/components/Tooltip";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const Cell = styled(Box).attrs(() => ({
   px: 4,
   horizontal: true,
   alignItems: "center",

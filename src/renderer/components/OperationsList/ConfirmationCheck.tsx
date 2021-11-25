@@ -4,7 +4,6 @@ import { Icons, Flex, Tooltip } from "@ledgerhq/react-ui";
 import { OperationType } from "@ledgerhq/live-common/lib/types";
 import { TFunction } from "react-i18next";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import Box from "~/renderer/components/Box";
 
 const getTopRightRectangleClippedPolygon = (boxSize: number, rectangleSize: number) => {
   // clipping path that hides {rectangleSize}px top right rectangle
@@ -31,28 +30,6 @@ const BadgeContainer: ThemedComponent<{ iconSize: number }> = styled.div`
     top: -${p.iconSize / 2 - 2}px;
     right: -${p.iconSize / 2 - 2}px;`}
 `;
-
-const border = p =>
-  p.hasFailed
-    ? `1px solid ${p.theme.colors.alertRed}`
-    : p.isConfirmed
-    ? 0
-    : `1px solid ${
-        p.type === "IN" ? p.marketColor : rgba(p.theme.colors.palette.text.shade60, 0.2)
-      }`;
-
-function inferColor(p) {
-  switch (p.type) {
-    case "IN":
-      return p.marketColor;
-    case "FREEZE":
-      return p.theme.colors.wallet;
-    case "REWARD":
-      return p.theme.colors.gold;
-    default:
-      return p.theme.colors.palette.text.shade60;
-  }
-}
 
 const iconsComponent = {
   OUT: Icons.ArrowTopMedium,
@@ -102,7 +79,7 @@ class ConfirmationCheck extends PureComponent<{
   };
 
   render() {
-    const { marketColor, isConfirmed, t, type, withTooltip, hasFailed, ...props } = this.props;
+    const { isConfirmed, t, type, withTooltip, hasFailed } = this.props;
 
     const Icon = iconsComponent[type];
 

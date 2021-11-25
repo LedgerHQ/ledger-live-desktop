@@ -2,15 +2,14 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { getOperationAmountNumber } from "@ledgerhq/live-common/lib/operation";
 import { Currency, Unit, Operation } from "@ledgerhq/live-common/lib/types";
-import {Text} from "@ledgerhq/react-ui";
+import { Text } from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import perFamilyOperationDetails from "~/renderer/generated/operationDetails";
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const Cell = styled(Box).attrs(() => ({
   pl: 4,
   horizontal: false,
   alignItems: "flex-end",

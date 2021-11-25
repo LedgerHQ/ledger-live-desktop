@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
 import { listTokenTypesForCryptoCurrency } from "@ledgerhq/live-common/lib/currencies";
-import { Divider, Flex, Text } from "@ledgerhq/react-ui";
+import { Divider, Text } from "@ledgerhq/react-ui";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
@@ -169,7 +169,7 @@ function ReceiveButton(props: { onClick: () => void }) {
   );
 }
 
-const EmptyState: ThemedComponent<{}> = styled.div`
+const EmptyState = styled.div`
   padding: 15px 20px;
   border-radius: 4px;
   display: flex;
@@ -183,7 +183,7 @@ const EmptyState: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const Placeholder: ThemedComponent<{}> = styled.div`
+const Placeholder = styled.div`
   flex-direction: column;
   display: flex;
   padding-right: 50px;

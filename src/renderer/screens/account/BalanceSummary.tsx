@@ -5,7 +5,7 @@ import { BigNumber } from "bignumber.js";
 import { formatShort } from "@ledgerhq/live-common/lib/currencies";
 import { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { Flex, Chart, Text } from "@ledgerhq/react-ui";
+import { Flex, Chart } from "@ledgerhq/react-ui";
 import { useTimeRange } from "~/renderer/actions/settings";
 import { counterValueCurrencySelector, discreetModeSelector } from "~/renderer/reducers/settings";
 import Box from "~/renderer/components/Box";
@@ -148,4 +148,3 @@ export default function AccountBalanceSummary({
     </Flex>
   );
 }
-

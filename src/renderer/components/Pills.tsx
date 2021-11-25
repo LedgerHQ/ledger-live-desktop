@@ -1,6 +1,7 @@
 import React from "react";
 import { Bar, Text } from "@ledgerhq/react-ui";
 
+/* eslint-disable-next-line flowtype/no-types-missing-file-annotation */
 export type Item = {
   label: string;
   key: string;

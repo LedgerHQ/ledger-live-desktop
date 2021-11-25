@@ -2,9 +2,8 @@ import React, { useCallback, useContext } from "react";
 import { compose } from "redux";
 import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans, TFunction } from "react-i18next";
-import styled from "styled-components";
 import { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { Text, Button, Flex, Icons } from "@ledgerhq/react-ui";
+import { Button, Flex, Icons } from "@ledgerhq/react-ui";
 import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import Tooltip from "~/renderer/components/Tooltip";
 import { context as drawersContext } from "~/renderer/drawers/Provider";
@@ -15,12 +14,10 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
-import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import perFamily from "~/renderer/generated/AccountHeaderActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
-import Box, { Tabbable } from "~/renderer/components/Box";
 import {
   BuyActionDefault,
   ReceiveActionDefault,
@@ -28,7 +25,6 @@ import {
   SwapActionDefault,
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
@@ -36,8 +32,6 @@ import IconSend from "~/renderer/icons/Send";
 import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Graph from "~/renderer/icons/Graph";
-import IconAngleDown from "~/renderer/icons/AngleDown";
-import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
@@ -199,7 +193,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           buttonId="account-actions-manage"
         >
           {({ isOpen }) => (
-            <Button variant="main" Icon={isOpen ? Icons.DropupMedium : Icons.DropdownMedium} iconPosition="right">
+            <Button
+              variant="main"
+              Icon={isOpen ? Icons.DropupMedium : Icons.DropdownMedium}
+              iconPosition="right"
+            >
               <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
             </Button>
           )}

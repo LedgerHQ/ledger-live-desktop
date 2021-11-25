@@ -33,7 +33,7 @@ const TokenContractLink = styled(Subtitle)`
   border-radius: ${p => p.theme.radii[1]}px;
 `;
 
-const TokenContractLinkWrapper: ThemedComponent<{}> = styled(Flex)`
+const TokenContractLinkWrapper = styled(Flex)`
   cursor: pointer;
   display: flex;
   align-items: center;

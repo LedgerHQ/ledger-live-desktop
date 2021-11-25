@@ -11,7 +11,6 @@ import useTheme from "~/renderer/hooks/useTheme";
 import Box from "~/renderer/components/Box";
 import CurrencyUnitValue from "~/renderer/components/CurrencyUnitValue";
 import IconActivity from "~/renderer/icons/Activity";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NoCountervaluePlaceholder } from "./CounterValue";
 
 type RenderRawProps = {
@@ -39,6 +38,15 @@ type Props = {
   placeholder?: React$Node;
   renderRaw?: (props: RenderRawProps) => any;
 };
+
+const PriceWrapper = styled(Box).attrs(() => ({
+  ff: "Inter",
+  horizontal: true,
+}))`
+  line-height: 1.2;
+  white-space: pre;
+  align-items: baseline;
+`;
 
 export default function Price({
   from,
@@ -132,12 +140,3 @@ export default function Price({
     </PriceWrapper>
   );
 }
-
-const PriceWrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  ff: "Inter",
-  horizontal: true,
-}))`
-  line-height: 1.2;
-  white-space: pre;
-  align-items: baseline;
-`;

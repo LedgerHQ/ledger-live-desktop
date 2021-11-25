@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Unit, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { ValueChange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
-import { Text } from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
@@ -30,6 +29,13 @@ type BalanceTotalProps = {
 type Props = {
   unit: Unit;
 } & BalanceSinceProps;
+
+const Sub = styled(Box).attrs(() => ({
+  ff: "Inter",
+  fontSize: 4,
+}))`
+  text-transform: lowercase;
+`;
 
 export function BalanceDiff({
   totalBalance,
@@ -136,10 +142,3 @@ export default function BalanceInfos({ totalBalance, valueChange, isAvailable, u
     </Box>
   );
 }
-
-const Sub = styled(Box).attrs(() => ({
-  ff: "Inter",
-  fontSize: 4,
-}))`
-  text-transform: lowercase;
-`;

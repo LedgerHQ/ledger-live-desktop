@@ -5,9 +5,8 @@ import { Flex, Text } from "@ledgerhq/react-ui";
 import { TFunction } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import OperationDate from "./OperationDate";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const Cell = styled(Box).attrs(() => ({
   horizontal: false,
   px: 6,
 }))`
@@ -38,7 +37,7 @@ class DateCell extends PureComponent<Props> {
 
     return (
       <Cell compact={compact}>
-        <Flex style={ellipsis}>
+        <Flex {...ellipsis}>
           <Text variant="body" fontWeight="medium" color="palette.neutral.c100">
             {text ||
               t(

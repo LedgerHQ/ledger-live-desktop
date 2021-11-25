@@ -11,7 +11,6 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 import { Button, Flex, Icons, Text } from "@ledgerhq/react-ui";
 import logger from "~/logger";
-import { openModal } from "~/renderer/actions/modals";
 import Box from "~/renderer/components/Box";
 import { track } from "~/renderer/analytics/segment";
 import { createStructuredSelector } from "reselect";
@@ -22,16 +21,11 @@ import TableContainer, { TableHeader } from "../TableContainer";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
-const mapDispatchToProps = {
-  openModal,
-};
-
 type Props = {
   account: AccountLike;
   parentAccount?: Account;
   accounts: AccountLike[];
   allAccounts: AccountLike[];
-  openModal: (arg0: string, arg1: Object) => any;
   t: TFunction;
   withAccount?: boolean;
   withSubAccounts?: boolean;
@@ -171,6 +165,5 @@ export default compose(
     createStructuredSelector({
       allAccounts: accountsSelector,
     }),
-    mapDispatchToProps,
   ),
 )(OperationsList);

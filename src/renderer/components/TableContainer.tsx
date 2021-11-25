@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 import { Flex, Text } from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import ToolTip from "./Tooltip";
 import InfoCircle from "../icons/InfoCircle";
 
-const TableContainer: ThemedComponent<any> = styled(Flex).attrs(() => ({
+const TableContainer = styled(Flex).attrs(() => ({
   flexDirection: "column",
   overflow: "hidden",
 }))``;
-const TableHeaderRow: ThemedComponent<any> = styled(Flex).attrs(() => ({
+
+const TableHeaderRow = styled(Flex).attrs(() => ({
   flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
@@ -19,7 +19,7 @@ const TableHeaderRow: ThemedComponent<any> = styled(Flex).attrs(() => ({
   mb: 8,
 }))``;
 
-export const HeaderWrapper: ThemedComponent<{}> = styled(Flex).attrs(() => ({
+export const HeaderWrapper = styled(Flex).attrs(() => ({
   flexDirection: "row",
   padding: 5,
   backgroundColor: "palette.neutral.c30",
@@ -27,13 +27,13 @@ export const HeaderWrapper: ThemedComponent<{}> = styled(Flex).attrs(() => ({
   border-radius: 4px;
 `;
 
-const TableHeaderTitle: ThemedComponent<any> = styled(Text).attrs(() => ({
+const TableHeaderTitle = styled(Text).attrs(() => ({
   color: "palette.neutral.c100",
   variant: "h5",
   fontSize: "20px", // for some unknown reason h5 is overriden/not applied to fontSize
 }))``;
 
-export const TableRow: ThemedComponent<{}> = styled(Flex).attrs(() => ({
+export const TableRow = styled(Flex).attrs(() => ({
   flexDirection: "row",
   alignItems: "center",
   color: "#abadb6",

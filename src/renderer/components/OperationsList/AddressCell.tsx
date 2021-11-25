@@ -16,14 +16,14 @@ export const Cell: ThemedComponent<{ px?: number }> = styled(Box).attrs(p => ({
   display: block;
 `;
 
-const Left: ThemedComponent<{}> = styled.div`
+const Left = styled.div`
   overflow: hidden;
   white-space: nowrap;
   font-kerning: none;
   letter-spacing: 0px;
 `;
 
-const Right: ThemedComponent<{}> = styled.div`
+const Right = styled.div`
   display: inline-block;
   flex-shrink: 1;
   direction: rtl;
