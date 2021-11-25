@@ -52,5 +52,5 @@ jobs:
         run: |
           git add .
           git commit -m 'update screenshots'
-          git pull
+          git pull --rebase
           git push
