@@ -31,7 +31,6 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  pl: 4,
   horizontal: true,
   alignItems: "center",
 }))``;

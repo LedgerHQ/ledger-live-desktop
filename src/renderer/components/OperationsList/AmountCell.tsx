@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { getOperationAmountNumber } from "@ledgerhq/live-common/lib/operation";
 import { Currency, Unit, Operation } from "@ledgerhq/live-common/lib/types";
+import {Text} from "@ledgerhq/react-ui";
 import Box from "~/renderer/components/Box";
 import CounterValue from "~/renderer/components/CounterValue";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -10,14 +11,13 @@ import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import perFamilyOperationDetails from "~/renderer/generated/operationDetails";
 
 const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  px: 4,
+  pl: 4,
   horizontal: false,
   alignItems: "flex-end",
 }))`
   flex: 0 0 auto;
   text-align: right;
   justify-content: center;
-  height: 32px;
   min-width: 150px;
 `;
 
@@ -59,23 +59,24 @@ class AmountCell extends PureComponent<Props> {
               />
             ) : (
               <>
-                <FormattedVal
-                  val={amount}
-                  unit={unit}
-                  showCode
-                  fontSize={4}
-                  alwaysShowSign
-                  color={amount.isNegative() ? "palette.text.shade80" : undefined}
-                />
-
-                <CounterValue
-                  color="palette.text.shade60"
-                  fontSize={3}
-                  alwaysShowSign
-                  date={operation.date}
-                  currency={currency}
-                  value={amount}
-                />
+                <Text variant="paragraph" fontWeight="medium">
+                  <FormattedVal
+                    val={amount}
+                    unit={unit}
+                    showCode
+                    alwaysShowSign
+                    color={amount.isNegative() ? "palette.neutral.c80" : undefined}
+                  />
+                </Text>
+                <Text variant="small" fontWeight="medium">
+                  <CounterValue
+                    color="palette.neutral.c80"
+                    alwaysShowSign
+                    date={operation.date}
+                    currency={currency}
+                    value={amount}
+                  />
+                </Text>
               </>
             )}
           </Cell>

@@ -1,16 +1,36 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
-
+import { Icons, Flex, Tooltip } from "@ledgerhq/react-ui";
 import { OperationType } from "@ledgerhq/live-common/lib/types";
-
-import { rgba, mix } from "~/renderer/styles/helpers";
-
 import { TFunction } from "react-i18next";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
 import Box from "~/renderer/components/Box";
-import Tooltip from "~/renderer/components/Tooltip";
-import { Icons } from "@ledgerhq/react-ui";
+
+const getTopRightRectangleClippedPolygon = (boxSize: number, rectangleSize: number) => {
+  // clipping path that hides {rectangleSize}px top right rectangle
+  const diff = boxSize - rectangleSize;
+  return `polygon(0 0, 0 0, 0 0, ${diff}px 0, ${diff}px ${rectangleSize}px, 100% ${rectangleSize}px, 100% 100%, 100% 100%, 100% 100%, 0 100%, 0 100%, 0 100%)`;
+};
+
+const IconBox: ThemedComponent<{ size?: number; hasFailed?: boolean }> = styled(Flex)`
+  height: ${p => p.size || 40}px;
+  width: ${p => p.size || 40}px;
+  border: 1px solid ${p => p.theme.colors.palette[p.hasFailed ? "error" : "neutral"].c40};
+  ${p => {
+    const size = p.size || 40;
+    return p.withBadge && `clip-path: ${getTopRightRectangleClippedPolygon(size, 15)};`;
+  }}
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BadgeContainer: ThemedComponent<{ iconSize: number }> = styled.div`
+  position: absolute;
+  ${p => `
+    top: -${p.iconSize / 2 - 2}px;
+    right: -${p.iconSize / 2 - 2}px;`}
+`;
 
 const border = p =>
   p.hasFailed
@@ -34,42 +54,9 @@ function inferColor(p) {
   }
 }
 
-export const Container: ThemedComponent<{
-  isConfirmed: boolean;
-  type: string;
-  marketColor: string;
-  hasFailed?: boolean;
-}> = styled(Box).attrs(p => ({
-  bg: p.hasFailed
-    ? mix(p.theme.colors.palette.error.c100, p.theme.colors.palette.neutral.c00, 0.95)
-    : p.isConfirmed
-    ? mix(inferColor(p), p.theme.colors.palette.neutral.c00, 0.8)
-    : p.theme.colors.palette.neutral.c00,
-  color: p.hasFailed ? p.theme.colors.palette.error.c100 : inferColor(p),
-  alignItems: "center",
-  justifyContent: "center",
-}))`
-  border: ${border};
-  border-radius: 50%;
-  position: relative;
-  height: 24px;
-  width: 24px;
-`;
-
-const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  bg: "palette.background.paper",
-  color: "palette.text.shade60",
-}))`
-  border-radius: 50%;
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  padding: 1px;
-`;
-
 const iconsComponent = {
-  OUT: Icons.ArrowFromBottomMedium,
-  IN: Icons.ArrowToBottomMedium,
+  OUT: Icons.ArrowTopMedium,
+  IN: Icons.ArrowBottomMedium,
   DELEGATE: Icons.HandshakeMedium,
   REDELEGATE: Icons.DelegateMedium,
   UNDELEGATE: Icons.UndelegateMedium,
@@ -79,7 +66,7 @@ const iconsComponent = {
   FREEZE: Icons.FreezeMedium,
   UNFREEZE: Icons.UnfreezeMedium,
   VOTE: Icons.VoteMedium,
-  REWARD: Icons.ClaimRewardsMedium,
+  REWARD: Icons.StarMedium,
   FEES: Icons.FeesMedium,
   OPT_IN: Icons.PlusMedium,
   OPT_OUT: Icons.TrashMedium,
@@ -119,21 +106,30 @@ class ConfirmationCheck extends PureComponent<{
 
     const Icon = iconsComponent[type];
 
+    const withBadge = !isConfirmed || hasFailed;
+    const BadgeIcon = hasFailed ? Icons.CircledCrossSolidMedium : Icons.ClockSolidMedium;
+
     const content = (
-      <Container
-        {...props}
-        type={type}
-        isConfirmed={isConfirmed}
-        marketColor={marketColor}
-        hasFailed={hasFailed}
-      >
-        {Icon ? <Icon size={12} /> : null}
-        {!isConfirmed && !hasFailed && (
-          <WrapperClock>
-            <Icons.ClockMedium size={10} />
-          </WrapperClock>
+      <div style={{ position: "relative" }}>
+        <IconBox hasFailed={hasFailed} withBadge={withBadge}>
+          {Icon ? (
+            <Icon
+              color={
+                hasFailed
+                  ? "palette.error.c100"
+                  : isConfirmed
+                  ? "palette.neutral.c100"
+                  : "palette.neutral.c50"
+              }
+            />
+          ) : null}
+        </IconBox>
+        {withBadge && (
+          <BadgeContainer iconSize={20}>
+            <BadgeIcon size={20} color={hasFailed ? "palette.error.c100" : "palette.neutral.c70"} />
+          </BadgeContainer>
         )}
-      </Container>
+      </div>
     );
 
     return withTooltip ? (

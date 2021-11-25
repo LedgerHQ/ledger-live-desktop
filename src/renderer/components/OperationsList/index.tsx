@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation, TFunction } from "react-i18next";
@@ -10,10 +9,9 @@ import {
   groupAccountsOperationsByDay,
   flattenAccounts,
 } from "@ledgerhq/live-common/lib/account";
-import { Flex, Text } from "@ledgerhq/react-ui";
+import { Button, Flex, Icons, Text } from "@ledgerhq/react-ui";
 import logger from "~/logger";
 import { openModal } from "~/renderer/actions/modals";
-import IconAngleDown from "~/renderer/icons/AngleDown";
 import Box from "~/renderer/components/Box";
 import { track } from "~/renderer/analytics/segment";
 import { createStructuredSelector } from "reselect";
@@ -23,21 +21,6 @@ import OperationC from "./Operation";
 import TableContainer, { TableHeader } from "../TableContainer";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
-
-const ShowMore = styled(Box).attrs(() => ({
-  horizontal: true,
-  flow: 1,
-  ff: "Inter|SemiBold",
-  fontSize: 3,
-  justifyContent: "center",
-  alignItems: "center",
-  p: 3,
-  color: "wallet",
-}))`
-  &:hover {
-    text-decoration: underline;
-  }
-`;
 
 const mapDispatchToProps = {
   openModal,
@@ -123,7 +106,7 @@ export class OperationsList extends PureComponent<Props, State> {
           {groupedOperations.sections.map(group => (
             <Box key={group.day.toISOString()}>
               <SectionTitle day={group.day} />
-              <Flex flexDirection="column" p={5}>
+              <Flex flexDirection="column" py={5}>
                 {group.data.map(operation => {
                   const account = accountsMap[operation.accountId];
                   if (!account) {
@@ -161,10 +144,15 @@ export class OperationsList extends PureComponent<Props, State> {
           ))}
         </TableContainer>
         {!groupedOperations.completed ? (
-          <ShowMore onClick={this.fetchMoreOperations}>
+          <Button
+            variant="shade"
+            outline
+            onClick={this.fetchMoreOperations}
+            Icon={Icons.DropdownMedium}
+            iconPosition="right"
+          >
             <span>{t("common.showMore")}</span>
-            <IconAngleDown size={12} />
-          </ShowMore>
+          </Button>
         ) : (
           <Box p={3} alignItems="center">
             <Text ff="Inter" fontSize={3}>

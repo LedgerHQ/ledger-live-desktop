@@ -137,6 +137,7 @@ const AccountPage = ({
           ) : null}
           {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
+            withAccount
             account={account}
             parentAccount={parentAccount}
             title={t("account.lastOperations")}

@@ -1,15 +1,15 @@
 import React, { PureComponent } from "react";
 import styled from "styled-components";
 import { Operation } from "@ledgerhq/live-common/lib/types";
+import { Flex, Text } from "@ledgerhq/react-ui";
 import { TFunction } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import OperationDate from "./OperationDate";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { NanoImportLight } from "@ledgerhq/react-ui/assets/icons";
 
 const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  px: 3,
   horizontal: false,
+  px: 6,
 }))`
   width: auto;
   min-width: ${p => (p.compact ? 90 : 120)}px;
@@ -38,10 +38,16 @@ class DateCell extends PureComponent<Props> {
 
     return (
       <Cell compact={compact}>
-        <Box ff="Inter|SemiBold" fontSize={3} color="palette.text.shade80" style={ellipsis}>
-          {text ||
-            t(operation.hasFailed ? "operationDetails.failed" : `operation.type.${operation.type}`)}
-        </Box>
+        <Flex style={ellipsis}>
+          <Text variant="body" fontWeight="medium" color="palette.neutral.c100">
+            {text ||
+              t(
+                operation.hasFailed
+                  ? "operationDetails.failed"
+                  : `operation.type.${operation.type}`,
+              )}
+          </Text>
+        </Flex>
         <OperationDate date={operation.date} />
       </Cell>
     );
