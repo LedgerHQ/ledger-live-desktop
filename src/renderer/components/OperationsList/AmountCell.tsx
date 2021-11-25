@@ -65,7 +65,7 @@ class AmountCell extends PureComponent<Props> {
                     unit={unit}
                     showCode
                     alwaysShowSign
-                    color={amount.isNegative() ? "palette.neutral.c80" : undefined}
+                    color={amount.isNegative() ? "palette.neutral.c100" : undefined}
                   />
                 </Text>
                 <Text variant="small" fontWeight="medium">
