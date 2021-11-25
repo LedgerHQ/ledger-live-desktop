@@ -11,10 +11,6 @@ import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/acco
 import { openModal } from "~/renderer/actions/modals";
 import { DeviceShouldStayInApp } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  getDefaultPreferredNewAccountScheme,
-  getPreferredNewAccountScheme,
-} from "@ledgerhq/live-common/lib/derivation";
 
 import uniq from "lodash/uniq";
 import { urls } from "~/config/urls";
