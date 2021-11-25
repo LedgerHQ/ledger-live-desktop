@@ -255,13 +255,12 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     if (!currency) return null;
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
 
-    const newAccountSchemes = getPreferredNewAccountScheme(mainCurrency);
-
-    const preferedNewAccountScheme = getDefaultPreferredNewAccountScheme(mainCurrency);
-
-    const preferredNewAccountSchemes = preferedNewAccountScheme
-      ? [preferedNewAccountScheme]
-      : undefined;
+    // Find accounts that are (scanned && !existing && !used)
+    const newAccountSchemes = scannedAccounts
+      .filter(a1 => !existingAccounts.map(a2 => a2.id).includes(a1.id) && !a1.used)
+      .map(a => a.derivationMode);
+    const preferredNewAccountScheme =
+      newAccountSchemes && newAccountSchemes.length > 0 ? newAccountSchemes[0] : undefined;
 
     if (err) {
       return (
@@ -277,9 +276,9 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
 
     const { sections, alreadyEmptyAccount } = groupAddAccounts(existingAccounts, scannedAccounts, {
       scanning: scanStatus === "scanning",
-      preferredNewAccountSchemes: this.state.showAllCreatedAccounts
+      preferredNewAccountScheme: this.state.showAllCreatedAccounts
         ? undefined
-        : preferredNewAccountSchemes,
+        : preferredNewAccountScheme,
     });
 
     const emptyTexts = {
