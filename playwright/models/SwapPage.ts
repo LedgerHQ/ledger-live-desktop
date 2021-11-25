@@ -1,22 +1,29 @@
-import { Page, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class SwapPage {
   readonly page: Page;
+  readonly swapMenuButton: Locator;
+  readonly maxSpendableToggle: Locator;
+  readonly exchangeButton: Locator;
+
 
   constructor(page: Page) {
     this.page = page;
+    this.swapMenuButton = page.locator('#drawer-swap-button');
+    this.maxSpendableToggle = page.locator('data-test-id=swap-max-spendable-toggle');
+    this.exchangeButton = page.locator('data-test-id=exchange-button');
   }
 
   async navigate() {
-    await this.page.click('#drawer-swap-button');
-    await this.page.waitForSelector('data-test-id=swap-max-spendable-toggle', { state: 'visible' });
+    await this.swapMenuButton.click();
+    await this.maxSpendableToggle.waitFor({ state: 'visible' });
   }
 
   async sendMax() {
-    await this.page.click('data-test-id=swap-max-spendable-toggle');
+    await this.maxSpendableToggle.click();
   }
 
   async confirmExchange() {
-    await this.page.click('data-test-id=exchange-button');
+    await this.exchangeButton .click();
   }
 }
