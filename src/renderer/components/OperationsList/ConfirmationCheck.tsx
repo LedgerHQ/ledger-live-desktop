@@ -8,29 +8,9 @@ import { rgba, mix } from "~/renderer/styles/helpers";
 import { TFunction } from "react-i18next";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-import IconClock from "~/renderer/icons/Clock";
-import IconReceive from "~/renderer/icons/Receive";
-import IconDelegate from "~/renderer/icons/Delegate";
-import IconUndelegate from "~/renderer/icons/Undelegate";
-import IconRedelegate from "~/renderer/icons/Redelegate";
-import IconSend from "~/renderer/icons/Send";
-import IconPlus from "~/renderer/icons/Plus";
-import IconEye from "~/renderer/icons/Eye";
-import IconFees from "~/renderer/icons/Fees";
-import IconTrash from "~/renderer/icons/Trash";
-import IconSupply from "~/renderer/icons/Supply";
-import IconWithdraw from "~/renderer/icons/Withdraw";
-import IconLink from "~/renderer/icons/LinkIcon";
-import IconCoins from "~/renderer/icons/Coins";
-
-import Freeze from "~/renderer/icons/Freeze";
-import Unfreeze from "~/renderer/icons/Unfreeze";
-
 import Box from "~/renderer/components/Box";
 import Tooltip from "~/renderer/components/Tooltip";
-import ClaimRewards from "~/renderer/icons/ClaimReward";
-import Vote from "~/renderer/icons/Vote";
-import VoteNay from "~/renderer/icons/VoteNay";
+import { Icons } from "@ledgerhq/react-ui";
 
 const border = p =>
   p.hasFailed
@@ -61,11 +41,11 @@ export const Container: ThemedComponent<{
   hasFailed?: boolean;
 }> = styled(Box).attrs(p => ({
   bg: p.hasFailed
-    ? mix(p.theme.colors.alertRed, p.theme.colors.palette.background.paper, 0.95)
+    ? mix(p.theme.colors.palette.error.c100, p.theme.colors.palette.neutral.c00, 0.95)
     : p.isConfirmed
-    ? mix(inferColor(p), p.theme.colors.palette.background.paper, 0.8)
-    : p.theme.colors.palette.background.paper,
-  color: p.hasFailed ? p.theme.colors.alertRed : inferColor(p),
+    ? mix(inferColor(p), p.theme.colors.palette.neutral.c00, 0.8)
+    : p.theme.colors.palette.neutral.c00,
+  color: p.hasFailed ? p.theme.colors.palette.error.c100 : inferColor(p),
   alignItems: "center",
   justifyContent: "center",
 }))`
@@ -88,33 +68,33 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 const iconsComponent = {
-  OUT: IconSend,
-  IN: IconReceive,
-  DELEGATE: IconDelegate,
-  REDELEGATE: IconRedelegate,
-  UNDELEGATE: IconUndelegate,
-  REVEAL: IconEye,
-  CREATE: IconPlus,
-  NONE: IconSend,
-  FREEZE: Freeze,
-  UNFREEZE: Unfreeze,
-  VOTE: Vote,
-  REWARD: ClaimRewards,
-  FEES: IconFees,
-  OPT_IN: IconPlus,
-  OPT_OUT: IconTrash,
-  CLOSE_ACCOUNT: IconTrash,
-  REDEEM: IconWithdraw,
-  SUPPLY: IconSupply,
-  APPROVE: IconPlus,
-  BOND: IconLink,
-  UNBOND: IconUndelegate,
-  WITHDRAW_UNBONDED: IconCoins,
-  SLASH: IconTrash,
-  NOMINATE: Vote,
-  CHILL: VoteNay,
-  REWARD_PAYOUT: ClaimRewards,
-  SET_CONTROLLER: IconSend,
+  OUT: Icons.ArrowFromBottomMedium,
+  IN: Icons.ArrowToBottomMedium,
+  DELEGATE: Icons.HandshakeMedium,
+  REDELEGATE: Icons.DelegateMedium,
+  UNDELEGATE: Icons.UndelegateMedium,
+  REVEAL: Icons.EyeMedium,
+  CREATE: Icons.PlusMedium,
+  NONE: Icons.ArrowFromBottomMedium,
+  FREEZE: Icons.FreezeMedium,
+  UNFREEZE: Icons.UnfreezeMedium,
+  VOTE: Icons.VoteMedium,
+  REWARD: Icons.ClaimRewardsMedium,
+  FEES: Icons.FeesMedium,
+  OPT_IN: Icons.PlusMedium,
+  OPT_OUT: Icons.TrashMedium,
+  CLOSE_ACCOUNT: Icons.TrashMedium,
+  REDEEM: Icons.MinusMedium,
+  SUPPLY: Icons.ArrowRightMedium,
+  APPROVE: Icons.PlusMedium,
+  BOND: Icons.LinkMedium,
+  UNBOND: Icons.LinkNoneMedium,
+  WITHDRAW_UNBONDED: Icons.CoinsMedium,
+  SLASH: Icons.TrashMedium,
+  NOMINATE: Icons.VoteMedium,
+  CHILL: Icons.VoteMedium,
+  REWARD_PAYOUT: Icons.ClaimRewardsMedium,
+  SET_CONTROLLER: Icons.ArrowFromBottomMedium,
 };
 
 class ConfirmationCheck extends PureComponent<{
@@ -150,7 +130,7 @@ class ConfirmationCheck extends PureComponent<{
         {Icon ? <Icon size={12} /> : null}
         {!isConfirmed && !hasFailed && (
           <WrapperClock>
-            <IconClock size={10} />
+            <Icons.ClockMedium size={10} />
           </WrapperClock>
         )}
       </Container>
