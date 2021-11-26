@@ -42,8 +42,8 @@ import {
   getKYCStatusFromCheckQuoteStatus,
 } from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import SwapConnectFTX from "../SwapConnectFTX";
 import KYC from "../KYC";
+import Login from "../Login";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
@@ -191,7 +191,18 @@ const SwapForm = () => {
     [swapError],
   );
 
-  // FIXME: Too complicated, seems to handle to much things (KYC status + non KYC related errors)
+  // close login widget once we get a bearer token (i.e: the user is logged in)
+  useEffect(() => {
+    if (providerKYC?.id) {
+      setIsInLoginFlow(false);
+    }
+  }, [providerKYC?.id]);
+
+  /**
+   * FIXME
+   * Too complicated, seems to handle to much things (KYC status + non KYC related errors)
+   * KYC related stuff should be handled in usePollKYCStatus
+   */
   useEffect(() => {
     if (!providerKYC?.id || !exchangeRate?.rateId) {
       return;
@@ -206,16 +217,17 @@ const SwapForm = () => {
       });
 
       if (status.code === "OK") {
+        // If trade can be done and KYC already approved, we are good
+        // PS: this can't be checked before the `checkQuote` call since a KYC status can become expierd
         if (kycStatus === KYC_STATUS.approved) {
           return;
         }
-        dispatch(setSwapKYCStatus({ provider, id: userId, status: KYC_STATUS.approved }));
-      }
 
-      // Handle all non KYC related errors
-      if (!status.code.startsWith("KYC_")) {
-        // FIXME: handle error messages
-        console.log("TEST --- ERROR", { status });
+        // If status is ok, close login and kyc widgets even if open
+        setIsInLoginFlow(false);
+        setIsInKycFlow(false);
+
+        dispatch(setSwapKYCStatus({ provider, id: userId, status: KYC_STATUS.approved }));
         return;
       }
 
@@ -225,7 +237,12 @@ const SwapForm = () => {
         if (updatedKycStatus !== kycStatus) {
           dispatch(setSwapKYCStatus({ provider, id: userId, status: updatedKycStatus }));
         }
+        return;
       }
+
+      // Handle all non KYC related errors
+      // FIXME: handle error messages
+      console.log("TEST --- ERROR", { status });
     };
 
     handleCheckQuote();
@@ -257,9 +274,7 @@ const SwapForm = () => {
   const targetCurrency = swapTransaction.swap.to.currency;
 
   if (isInLoginFlow) {
-    return (
-      <SwapConnectFTX provider={provider} type="login" onClose={() => setIsInLoginFlow(false)} />
-    );
+    return <Login provider={provider} onClose={() => setIsInLoginFlow(false)} />;
   }
 
   if (isInKycFlow) {

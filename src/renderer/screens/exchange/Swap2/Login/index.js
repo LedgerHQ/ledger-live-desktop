@@ -2,16 +2,12 @@
 
 import React from "react";
 
-import FTXKYC from "./FTX";
-import WyreKYC from "./Wyre";
+import FTXLogin from "./FTX";
 
 const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => {
   switch (provider) {
-    case "wyre":
-      return <WyreKYC onClose={onClose} />;
-
     case "ftx":
-      return <FTXKYC onClose={onClose} />;
+      return <FTXLogin onClose={onClose} />;
 
     default:
       return null;
