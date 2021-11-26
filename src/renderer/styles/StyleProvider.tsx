@@ -28,6 +28,7 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
       ...V3dDfaultTheme,
       colors: {
         ...defaultTheme.colors,
+        ...V3Palettes[selectedPalette],
         palette: { ...palettesAny[selectedPalette], ...V3Palettes[selectedPalette] },
       },
     }),
