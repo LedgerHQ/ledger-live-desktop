@@ -236,9 +236,9 @@
           "target": "الحساب المستهدف"
         },
         "tooltip": {
-          "provider": "lorem ipsum",
-          "rate": "lorem ipsum",
-          "fees": "lorem ipsum"
+          "provider": "مزود الخدمة",
+          "rate": "المعدل",
+          "fees": "الرسوم"
         },
         "noAccount": "قم بإنشاء حساب لتلقي {{name}}",
         "noAccountCTA": "إضافة حساب"
@@ -2890,9 +2890,9 @@
       "recoverySeedWarning": {
         "contactSupportCTA": "التواصل مع الدعم",
         "continueCTA": "متابعة",
-        "title": "Please check the box contents",
+        "title": "الرجاء التحقق من محتويات الصندوق",
         "description": "إذا جاء {{device}} الخاص بك مع كود PIN أو عبارة الاسترداد، فإنه ليس من الآمن استخدامه، ويجب عليك التواصل مع دعم Ledger.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "alert": "فقط استخدم عبارة الاسترداد التي عرضها جهازك عند إعداده"
       }
     },
     "alerts": {
@@ -3272,22 +3272,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "هل تواجه مشاكل في توصيل جهازك؟",
+    "cta": "أصلحة",
     "solution": "الحل رقم #{{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "إرشادات Apple",
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "مقالة دعم",
-    "connecting": "Connecting...",
+    "connecting": "جاري الاتصال...",
     "connected": "تم الاتصال!",
-    "backToPortfolio": "Back to Portfolio",
+    "backToPortfolio": "الرجوع إلى المحفظة الاستثمارية",
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
-        "cta": "Let’s fix it!",
+        "cta": "لنقوم بإصلاحها!",
         "back": "رجوع"
       },
       "1": {
@@ -3305,7 +3305,7 @@
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائياً وإعادة تحميل udev.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
@@ -3314,8 +3314,8 @@
         "usbPort": {
           "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك.",
+            "1": "إزالة أي دونجل USB.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
@@ -3442,10 +3442,10 @@
       "optIn": "المستلم",
       "nominate": "المدقق",
       "erc721": {
-        "transfer": "recipient"
+        "transfer": "المستلم"
       },
       "erc1155": {
-        "transfer": "recipient"
+        "transfer": "المستلم"
       }
     },
     "votes": "أصوات ({{count}})"
@@ -3454,11 +3454,11 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of use",
+    "title": "شروط الاستخدام",
     "description": "الرجاء أخذ بعض الوقت لمراجعة شروط الخدمة وسياسة الخصوصية",
     "termsLabel": "شروط الخدمة",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "سياسة الخصوصية",
+    "switchLabel": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
@@ -3496,7 +3496,7 @@
       "description": "يرجى إدخال اسم حساب"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
+      "title": "يرجى إعادة المحاولة مرة أخرى",
       "description": "الحساب قديم. هناك حاجة إلى التزامن"
     },
     "AccountNotSupported": {
@@ -3765,7 +3765,7 @@
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
+      "title": "حدث خطأ ما",
       "description": "لم تتم عملية التداول. الرجاء المحاولة مرة أخرى أو التواصل مع الدعم."
     },
     "TimeoutError": {
@@ -4006,7 +4006,7 @@
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "يجب أن يكون المبلغ على الأقل {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
@@ -4049,10 +4049,10 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
     }
   }
 }
