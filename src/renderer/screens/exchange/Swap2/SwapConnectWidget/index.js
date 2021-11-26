@@ -2,26 +2,17 @@
 
 import { remote } from "electron";
 
-import React, { useEffect, useMemo, useRef, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useCallback, forwardRef } from "react";
+import { useDispatch } from "react-redux";
 
 import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
-import { swapKYCSelector } from "~/renderer/reducers/settings";
 import TopBar from "./TopBar";
 
-type WidgetType = "login" | "kyc";
-
 type Message = { type: "setToken", token: string } | { type: "closeWidget" };
-
-const getFTXURL = (type: WidgetType) => {
-  // TODO: fetch domain (.com vs .us) through API
-  const domain = "ftx.com";
-  return `https://${domain}/${type}?hideFrame=true&ledgerLive=true`;
-};
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -44,20 +35,17 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
   position: relative;
 `;
 
-type Props = { provider: String, type: WidgetType, onClose: () => void };
+type Props = {
+  provider: string,
+  url: string,
+  onClose: () => void,
+};
 
-// FIXME rename, should be generic and provider agnostic
-const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
-  const webviewRef = useRef(null);
+const SwapConnectWidget = (
+  { provider, url, onClose }: Props,
+  webviewRef: React.MutableRefObject<any>,
+) => {
   const dispatch = useDispatch();
-
-  /**
-   * FIXME: this is only use in KYC status. Maybe could break this component down
-   * in more specialized ones (one for login and one for kyc).
-   */
-  const swapKYC = useSelector(swapKYCSelector);
-  const providerKYC = swapKYC?.[provider];
-  const authToken = providerKYC?.id;
 
   const handleMessageData = useCallback(
     (data: Message) => {
@@ -84,10 +72,6 @@ const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
     [handleMessageData],
   );
 
-  const url = useMemo(() => {
-    return getFTXURL(type);
-  }, [type]);
-
   // Setup communication between webview and application
   useEffect(() => {
     const webview = webviewRef.current;
@@ -100,29 +84,7 @@ const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
         webview.removeEventListener("ipc-message", handleMessage);
       }
     };
-  }, [type, handleMessage]);
-
-  // FIXME: only used in KYC flow
-  const handleExecuteJavaScript = useCallback(() => {
-    const webview = webviewRef.current;
-    if (webview && type === "kyc" && authToken) {
-      webview.executeJavaScript(`localStorage.setItem('authToken', "${authToken}")`);
-    }
-  }, [authToken, type]);
-
-  // FIXME: only used in KYC flow
-  useEffect(() => {
-    const webview = webviewRef.current;
-    if (webview && type === "kyc" && authToken) {
-      webview.addEventListener("dom-ready", handleExecuteJavaScript);
-    }
-
-    return () => {
-      if (webview && type === "kyc" && authToken) {
-        webview.removeEventListener("dom-ready", handleExecuteJavaScript);
-      }
-    };
-  }, [type, authToken, handleExecuteJavaScript]);
+  }, [handleMessage, webviewRef]);
 
   return (
     <Container>
@@ -143,4 +105,4 @@ const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
   );
 };
 
-export default SwapConnectFTX;
+export default forwardRef(SwapConnectWidget);

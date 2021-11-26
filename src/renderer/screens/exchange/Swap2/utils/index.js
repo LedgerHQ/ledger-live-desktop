@@ -80,3 +80,11 @@ export const getKYCStatusFromCheckQuoteStatus = (
       return null;
   }
 };
+
+// FIXME: should move to LLC
+export type WidgetType = "login" | "kyc";
+export const getFTXURL = (type: WidgetType) => {
+  // TODO: fetch domain (.com vs .us) through API
+  const domain = "ftx.com";
+  return `https://${domain}/${type}?hideFrame=true&ledgerLive=true`;
+};
