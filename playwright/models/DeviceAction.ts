@@ -91,29 +91,23 @@ export class DeviceAction {
         {
           type: "init-swap-result",
           initSwapResult: {
-            transaction: fromTransactionRaw({
-              family: "bitcoin",
-              recipient: "1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e",
-              amount: "1",
-              feePerByte: "1",
-              networkInfo: {
-                family: "bitcoin",
-                feeItems: {
-                  items: [
-                    { key: "0", speed: "high", feePerByte: "3" },
-                    { key: "1", speed: "standard", feePerByte: "2" },
-                    { key: "2", speed: "low", feePerByte: "1" },
-                  ],
-                  defaultFeePerByte: "1",
-                },
-              },
+            transaction: {
+              amount: { s: 1, e: 0, c: [ 1 ] },
+              recipient: '1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e',
               rbf: false,
-              utxoStrategy: {
-                strategy: 0,
-                pickUnconfirmedRBF: false,
-                excludeUTXOs: [],
+              utxoStrategy: { strategy: 0, pickUnconfirmedRBF: false, excludeUTXOs: [] },
+              family: 'bitcoin',
+              feePerByte: { s: 1, e: 0, c: [ 1 ] },
+              networkInfo: {
+                family: 'bitcoin',
+                feeItems: { items: [
+                  { key: "0", speed: "high", feePerByte: "3" },
+                  { key: "1", speed: "standard", feePerByte: "2" },
+                  { key: "2", speed: "low", feePerByte: "1" },
+                ], defaultFeePerByte: 1 }
               },
-            }),
+            feesStrategy: undefined
+          },
             swapId: "12345",
           }
         },
@@ -122,7 +116,12 @@ export class DeviceAction {
         }
       )
     });
+  }
 
-    // await this.page.waitForSelector("#deviceAction-loading", { state: "visible" });
+  async silentSign() {
+    await this.page.evaluate(() => {
+      (window as any).mock.events.mockDeviceEvent({ type: "opened" }, { type: "complete"});
+    });
   }
 }
+
