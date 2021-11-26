@@ -315,7 +315,8 @@ const handlers: Object = {
     const { provider, id, status } = payload;
     const KYC = { ...state.swap.KYC };
 
-    if (id && status) {
+    // If we have an id but a "null" KYC status, this means user is logged in to provider but has not gone through KYC yet
+    if (id && typeof status !== "undefined") {
       KYC[provider] = { id, status };
     } else {
       delete KYC[provider];

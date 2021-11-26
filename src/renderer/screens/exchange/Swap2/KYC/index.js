@@ -11,7 +11,7 @@ const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => 
       return <WyreKYC onClose={onClose} />;
 
     case "ftx":
-      return <SwapConnectFTX type="kyc" onClose={onClose} />;
+      return <SwapConnectFTX provider={provider} type="kyc" onClose={onClose} />;
 
     default:
       return null;
