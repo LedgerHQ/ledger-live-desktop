@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Attributs",
-        "about": "About Known Origin",
+        "about": "Description",
         "contract": "Adresse du contrat",
         "tokenId": "Identifiant du token",
         "quantity": "Quantité"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
       "showAllAddressTypes": "Montrer tous les types d'adresses",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit ou Native SegWit ?"
