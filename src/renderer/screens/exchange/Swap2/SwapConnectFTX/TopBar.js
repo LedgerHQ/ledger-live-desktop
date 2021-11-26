@@ -11,6 +11,7 @@ import { rgba } from "~/renderer/styles/helpers";
 
 import Box, { Tabbable } from "~/renderer/components/Box";
 
+import IconReload from "~/renderer/icons/UpdateCircle";
 import LightBulb from "~/renderer/icons/LightBulb";
 import IconClose from "~/renderer/icons/Cross";
 
@@ -106,11 +107,25 @@ export type Props = {
   name: string,
   icon?: boolean,
   onClose?: Function,
-  onOpenDevTools: Function,
+  webviewRef: React.MutableRefObject<any>,
 };
 
-const WebPlatformTopBar = ({ name, onClose, onOpenDevTools }: Props) => {
+const TopBar = ({ name, onClose, webviewRef }: Props) => {
   const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
+
+  const handleReload = () => {
+    const webview = webviewRef.current;
+    if (webview) {
+      webview.reloadIgnoringCache();
+    }
+  };
+
+  const handleOpenDevTools = () => {
+    const webview = webviewRef.current;
+    if (webview) {
+      webview.openDevTools();
+    }
+  };
 
   return (
     <Container>
@@ -119,11 +134,18 @@ const WebPlatformTopBar = ({ name, onClose, onOpenDevTools }: Props) => {
         {/* <LiveAppIcon name={name} icon={icon || undefined} size={20} /> */}
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
+      <Separator />
+      <ItemContainer isInteractive onClick={handleReload}>
+        <IconReload size={16} />
+        <ItemContent>
+          <Trans i18nKey="common.sync.refresh" />
+        </ItemContent>
+      </ItemContainer>
 
       {enablePlatformDevTools ? (
         <>
           <Separator />
-          <ItemContainer isInteractive onClick={onOpenDevTools}>
+          <ItemContainer isInteractive onClick={handleOpenDevTools}>
             <LightBulb size={16} />
             <ItemContent>
               <Trans i18nKey="common.sync.devTools" />
@@ -140,4 +162,4 @@ const WebPlatformTopBar = ({ name, onClose, onOpenDevTools }: Props) => {
   );
 };
 
-export default WebPlatformTopBar;
+export default TopBar;
