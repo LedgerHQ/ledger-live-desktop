@@ -8,6 +8,7 @@ export class SwapPage {
   readonly swapId: Locator;
   readonly seeDetailsButton: Locator;
   readonly detailsSwapId: Locator;
+  readonly sideDrawerCloseButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -17,6 +18,7 @@ export class SwapPage {
     this.swapId = page.locator('data-test-id=swap-id');
     this.seeDetailsButton = page.locator('button:has-text("See details")');
     this.detailsSwapId = page.locator('data-test-id=details-swap-id');
+    this.sideDrawerCloseButton = page.locator('.sidedrawer-close');
   }
 
   async navigate() {
@@ -38,12 +40,12 @@ export class SwapPage {
   }
 
   async verifyExchangeDetails() {
-    this.seeDetailsButton.click();
+    await this.seeDetailsButton.click();
     await this.detailsSwapId.waitFor({ state: 'visible'});
     return this.detailsSwapId.innerText();
   }
 
-  // async exitExchangeDrawer() {
-  //   originalSwapId
-  // }
+  async exitExchangeDrawer() {
+    await this.sideDrawerCloseButton.click();
+  }
 }
