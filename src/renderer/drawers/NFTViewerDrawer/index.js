@@ -1,14 +1,14 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
-// import Button from "~/renderer/components/Button";
-// import IconSend from "~/renderer/icons/Send";
+import Button from "~/renderer/components/Button";
+import IconSend from "~/renderer/icons/Send";
 
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getNFTById } from "~/renderer/reducers/accounts";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
@@ -18,7 +18,7 @@ import Image from "~/renderer/screens/nft/Image";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
-// import { openModal } from "~/renderer/actions/modals";
+import { openModal } from "~/renderer/actions/modals";
 
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
@@ -127,16 +127,16 @@ type NFTViewerDrawerProps = {
 
 export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTViewerDrawerProps) {
   const { t } = useTranslation();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status === "loading", [status]);
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 
-  // const onNFTSend = useCallback(() => {
-  //   dispatch(openModal("MODAL_SEND", { isNFTSend: true, nftId }));
-  // }, [dispatch, nftId]);
+  const onNFTSend = useCallback(() => {
+    dispatch(openModal("MODAL_SEND", { isNFTSend: true, nftId }));
+  }, [dispatch, nftId]);
 
   return (
     <Box height={height}>
@@ -170,7 +170,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
             <Image nft={metadata} full />
           </Skeleton>
           <NFTActions>
-            {/* <Button
+            <Button
               style={{ flex: 1, justifyContent: "center" }}
               mr={4}
               primary
@@ -181,7 +181,7 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
               <Text ml={1} fontSize={3} lineHeight="18px">
                 {t("NFT.viewer.actions.send")}
               </Text>
-            </Button> */}
+            </Button>
 
             <ExternalViewerButton links={metadata.links} />
           </NFTActions>
