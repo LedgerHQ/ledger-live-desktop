@@ -3,11 +3,14 @@
 import { remote } from "electron";
 
 import React, { useEffect, useMemo, useRef, useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { setSwapKYCStatus } from "~/renderer/actions/settings";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
 import TopBar from "./TopBar";
 
 type WidgetType = "login" | "kyc";
@@ -41,24 +44,31 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
   position: relative;
 `;
 
-const AUTH_TOKEN = process.env.AUTH_TOKEN || "";
+type Props = { provider: String, type: WidgetType, onClose: () => void };
 
 // FIXME rename, should be genberaic and provider agnostic
-const SwapConnectFTX = ({ type, onClose }: { type: WidgetType, onClose: () => void }) => {
+const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
   const webviewRef = useRef(null);
+  const dispatch = useDispatch();
+
+  /**
+   * FIXME: this is only use in KYC status. Maybe could break this component down
+   * in more specialized ones (one for login and one for kyc).
+   */
+  const swapKYC = useSelector(swapKYCSelector);
+  const providerKYC = swapKYC?.[provider];
+  const authToken = providerKYC?.id;
 
   const handleMessageData = useCallback(
     (data: Message) => {
+      // FIXME: is try / catch needed here? Don't think so
       try {
-        // const data: Message = JSON.parse(event.data);
         switch (data.type) {
           case "setToken":
-            console.log("TOKEN --- ", { token: data.token });
-            // saveToken(data.token);
+            dispatch(setSwapKYCStatus({ provider, id: data?.token, status: null }));
             break;
           case "closeWidget":
             onClose();
-            // call `onClose`
             break;
           default:
             break;
@@ -68,7 +78,7 @@ const SwapConnectFTX = ({ type, onClose }: { type: WidgetType, onClose: () => vo
         console.error(e);
       }
     },
-    [onClose],
+    [onClose, dispatch, provider],
   );
 
   const handleMessage = useCallback(
@@ -87,11 +97,10 @@ const SwapConnectFTX = ({ type, onClose }: { type: WidgetType, onClose: () => vo
   useEffect(() => {
     const webview = webviewRef.current;
     if (webview) {
-      // $FlowFixMe
+      // FIXME: this will be called multiple times, might lead to issues
       webview.addEventListener("dom-ready", () => {
-        // $FlowFixMe
-        if (type === "kyc") {
-          webview.executeJavaScript(`localStorage.setItem('authToken', "${AUTH_TOKEN}")`);
+        if (type === "kyc" && authToken) {
+          webview.executeJavaScript(`localStorage.setItem('authToken', "${authToken}")`);
         }
       });
 
@@ -104,7 +113,7 @@ const SwapConnectFTX = ({ type, onClose }: { type: WidgetType, onClose: () => vo
         webview.removeEventListener("ipc-message", handleMessage);
       }
     };
-  }, [type, handleMessage]);
+  }, [type, handleMessage, authToken]);
 
   const handleReload = () => {
     const webview = webviewRef.current;
@@ -124,8 +133,8 @@ const SwapConnectFTX = ({ type, onClose }: { type: WidgetType, onClose: () => vo
   return (
     <Container>
       <TopBar
-        // FIXME: provider name should be a variable
-        name="FTX"
+        // FIXME: should get display name from provider key
+        name={provider}
         onReload={handleReload}
         onClose={onClose}
         onOpenDevTools={handleOpenDevTools}

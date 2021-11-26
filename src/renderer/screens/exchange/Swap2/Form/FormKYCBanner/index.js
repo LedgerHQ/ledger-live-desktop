@@ -18,7 +18,9 @@ const FormKYCBanner = ({
 }) => {
   const { t } = useTranslation();
 
-  if (!provider || (status && status !== KYC_STATUS.rejected)) return null;
+  // we render the component only if KYC is rejected or need to be upgraded
+  // i.e: we don't render it if the KYC is "pending". FIXME: could add a "refresh KYC" button in this case
+  if (!provider || (status && status === KYC_STATUS.pending)) return null;
 
   const { message, cta } = status
     ? { message: "swap2.form.providers.kyc.rejected", cta: "swap2.form.providers.kyc.update" }
