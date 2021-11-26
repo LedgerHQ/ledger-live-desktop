@@ -184,7 +184,11 @@ export const setSwapHasAcceptedIPSharing = (hasAcceptedIPSharing: boolean) => ({
   payload: hasAcceptedIPSharing,
 });
 
-export const setSwapKYCStatus = (payload: { provider: string, id?: string, status?: string }) => ({
+export const setSwapKYCStatus = (payload: {
+  provider: string,
+  id?: string,
+  status?: string | null,
+}) => ({
   type: "SET_SWAP_KYC",
   payload,
 });
