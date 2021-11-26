@@ -14,6 +14,9 @@ import {
   usePollKYCStatus,
   useSwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
+import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { checkQuote } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProvidersAction,
@@ -32,7 +35,12 @@ import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
-import { SWAP_VERSION, trackSwapError } from "../utils/index";
+import {
+  SWAP_VERSION,
+  trackSwapError,
+  isJwtExpired,
+  getKYCStatusFromCheckQuoteStatus,
+} from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import SwapConnectFTX from "../SwapConnectFTX";
 import KYC from "../KYC";
@@ -77,6 +85,28 @@ export const useProviders = () => {
   };
 };
 
+const shouldShowLoginBanner = ({ provider, token }: { provider: string, token: string }) => {
+  if (!["ftx"].includes(provider)) {
+    return false;
+  }
+
+  return !token || isJwtExpired(token);
+};
+
+const shouldShowKYCBanner = ({
+  provider,
+  kycStatus,
+}: {
+  provider: string,
+  kycStatus: KYCStatus,
+}) => {
+  if (!["ftx", "wyre"].includes(provider)) {
+    return false;
+  }
+
+  return kycStatus !== KYC_STATUS.approved;
+};
+
 const SwapForm = () => {
   const [isInLoginFlow, setIsInLoginFlow] = useState(false);
   const [isInKycFlow, setIsInKycFlow] = useState(false);
@@ -105,9 +135,13 @@ const SwapForm = () => {
   const provider = exchangeRate?.provider;
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
-  // const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
-  const showLoginBanner = true;
-  const showKYCBanner = true;
+
+  const showLoginBanner = shouldShowLoginBanner({ provider, token: providerKYC?.id });
+
+  // we display the KYC banner component if partner requiers KYC and is not yet approved
+  // we don't display it if user needs to login first
+  const showKYCBanner = !showLoginBanner && shouldShowKYCBanner({ provider, kycStatus });
+
   const { setDrawer } = React.useContext(context);
 
   useEffect(() => {
@@ -124,6 +158,7 @@ const SwapForm = () => {
     // eslint-disable-next-line
   }, [accounts]);
 
+  // FIXME: update usePollKYCStatus to use checkQuote for KYC status (?)
   usePollKYCStatus(
     {
       provider,
@@ -156,6 +191,46 @@ const SwapForm = () => {
     [swapError],
   );
 
+  // FIXME: Too complicated, seems to handle to much things (KYC status + non KYC related errors)
+  useEffect(() => {
+    if (!providerKYC?.id || !exchangeRate?.rateId) {
+      return;
+    }
+
+    const userId = providerKYC.id;
+
+    const handleCheckQuote = async () => {
+      const status = await checkQuote({
+        quoteId: exchangeRate.rateId,
+        bearerToken: userId,
+      });
+
+      if (status.code === "OK") {
+        if (kycStatus === KYC_STATUS.approved) {
+          return;
+        }
+        dispatch(setSwapKYCStatus({ provider, id: userId, status: KYC_STATUS.approved }));
+      }
+
+      // Handle all non KYC related errors
+      if (!status.code.startsWith("KYC_")) {
+        // FIXME: handle error messages
+        console.log("TEST --- ERROR", { status });
+        return;
+      }
+
+      // Handle all KYC related errors
+      if (status.code.startsWith("KYC_")) {
+        const updatedKycStatus = getKYCStatusFromCheckQuoteStatus(status);
+        if (updatedKycStatus !== kycStatus) {
+          dispatch(setSwapKYCStatus({ provider, id: userId, status: updatedKycStatus }));
+        }
+      }
+    };
+
+    handleCheckQuote();
+  }, [providerKYC, exchangeRate, dispatch, provider, kycStatus]);
+
   const isSwapReady =
     !swapTransaction.bridgePending &&
     exchangeRatesState.status !== "loading" &&
@@ -182,7 +257,9 @@ const SwapForm = () => {
   const targetCurrency = swapTransaction.swap.to.currency;
 
   if (isInLoginFlow) {
-    return <SwapConnectFTX type="login" onClose={() => setIsInLoginFlow(false)} />;
+    return (
+      <SwapConnectFTX provider={provider} type="login" onClose={() => setIsInLoginFlow(false)} />
+    );
   }
 
   if (isInKycFlow) {
