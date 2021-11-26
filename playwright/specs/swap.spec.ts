@@ -18,33 +18,40 @@ test("Swap", async ({ page }) => {
 
   await test.step("Open Swap Page", async () => {
     await swapPage.navigate();
-    // expect(await page.screenshot()).toMatchSnapshot(`open-swap-page.png`);
+    expect(await page.screenshot()).toMatchSnapshot("open-swap-page.png");
   });
 
   await test.step("Select Max Spendable", async () => {
     await swapPage.sendMax();
+    expect(await page.screenshot()).toMatchSnapshot("max-spendable-swap.png");
   });
 
   await test.step("Confirm Exchange", async () => {
     await swapPage.confirmExchange();
+    expect(await page.screenshot()).toMatchSnapshot("confirm-exchange.png");
   });
 
   await test.step("Initiate swap with Nano App", async () => {
     await deviceAction.initiateSwap();
+    expect(await page.screenshot()).toMatchSnapshot("initiate-swap.png");
   });
 
   await test.step("Confirm swap with Nano App", async () => {
     await deviceAction.confirmSwap();
     await deviceAction.silentSign();
     const originalSwapId = await swapPage.verifySuccessfulExchange();
-    console.log("ORIGINAL INNER TEST > " + originalSwapId);
     swapId = originalSwapId.replace("#", "");
-    console.log("INNER TEST > " + swapId);
+    expect(await page.screenshot()).toMatchSnapshot("confirm-swap.png");
   });
 
   await test.step("Verify Swap details are present in the exchange drawer", async () => {
     detailsSwapId = await swapPage.verifyExchangeDetails();
     expect(detailsSwapId).toEqual(swapId);
-    await page.pause();
+    expect(await page.screenshot()).toMatchSnapshot("verify-swap-details.png");
+  });
+
+  await test.step("Verify Swap details are present in the swap history", async () => {
+    await swapPage.exitExchangeDrawer();
+    expect(await page.screenshot()).toMatchSnapshot("verify-swap-history.png");
   });
 });
