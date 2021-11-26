@@ -1,4 +1,3 @@
-// @flow
 import { createSelector, createSelectorCreator, defaultMemoize } from "reselect";
 import { handleActions } from "redux-actions";
 import type {

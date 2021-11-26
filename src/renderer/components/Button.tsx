@@ -3,12 +3,12 @@
 import React, { PureComponent } from "react";
 import noop from "lodash/noop";
 import { Button as BaseButton } from "@ledgerhq/react-ui";
+import type { ButtonProps } from "@ledgerhq/react-ui/components/cta/Button";
 import { track } from "~/renderer/analytics/segment";
 import { isGlobalTabEnabled } from "~/config/global-tab";
 
 export const Base: any = BaseButton;
-
-export type Props = {
+export interface Props extends Omit<ButtonProps, "onClick"> {
   children?: any;
   icon?: boolean;
   primary?: boolean;

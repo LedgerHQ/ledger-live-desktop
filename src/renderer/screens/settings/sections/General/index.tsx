@@ -46,8 +46,7 @@ const SectionGeneral = () => {
         <Row title={t("settings.display.theme")} desc={t("settings.display.themeDesc")}>
           <ThemeSelect />
         </Row>
-        {/* TODO: replace the 'true' for the actual env variable check, if you see this, don't let this PR pass */}
-        {true ? (
+        {EXPERIMENTAL_MARKET_INDICATOR_SETTINGS ? (
           <Row title={t("settings.display.stock")} desc={t("settings.display.stockDesc")}>
             <MarketIndicatorRadio />
           </Row>
