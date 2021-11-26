@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1> アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
       "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした。",
       "showAllAddressTypes": "すべてのアドレスの種類を表示",
-      "showAllAddressTypesTooltip": "古いアドレス形式で{{family}}を受け取る必要な場合のみ、アドレスの種類を変更してください。"
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegwitとNative Segwit？"
