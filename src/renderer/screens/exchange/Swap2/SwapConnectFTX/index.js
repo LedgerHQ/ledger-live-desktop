@@ -46,7 +46,7 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs(() => ({
 
 type Props = { provider: String, type: WidgetType, onClose: () => void };
 
-// FIXME rename, should be genberaic and provider agnostic
+// FIXME rename, should be generic and provider agnostic
 const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
   const webviewRef = useRef(null);
   const dispatch = useDispatch();
@@ -61,21 +61,15 @@ const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
 
   const handleMessageData = useCallback(
     (data: Message) => {
-      // FIXME: is try / catch needed here? Don't think so
-      try {
-        switch (data.type) {
-          case "setToken":
-            dispatch(setSwapKYCStatus({ provider, id: data?.token, status: null }));
-            break;
-          case "closeWidget":
-            onClose();
-            break;
-          default:
-            break;
-        }
-      } catch (e) {
-        // TODO: tracking
-        console.error(e);
+      switch (data.type) {
+        case "setToken":
+          dispatch(setSwapKYCStatus({ provider, id: data?.token, status: null }));
+          break;
+        case "closeWidget":
+          onClose();
+          break;
+        default:
+          break;
       }
     },
     [onClose, dispatch, provider],
@@ -94,50 +88,49 @@ const SwapConnectFTX = ({ provider, type, onClose }: Props) => {
     return getFTXURL(type);
   }, [type]);
 
+  // Setup communication between webview and application
   useEffect(() => {
     const webview = webviewRef.current;
     if (webview) {
-      // FIXME: this will be called multiple times, might lead to issues
-      webview.addEventListener("dom-ready", () => {
-        if (type === "kyc" && authToken) {
-          webview.executeJavaScript(`localStorage.setItem('authToken', "${authToken}")`);
-        }
-      });
-
       webview.addEventListener("ipc-message", handleMessage);
     }
 
     return () => {
-      // FIXME: remove all event listener
       if (webview) {
         webview.removeEventListener("ipc-message", handleMessage);
       }
     };
-  }, [type, handleMessage, authToken]);
+  }, [type, handleMessage]);
 
-  const handleReload = () => {
+  // FIXME: only used in KYC flow
+  const handleExecuteJavaScript = useCallback(() => {
     const webview = webviewRef.current;
-    if (webview) {
-      webview.reloadIgnoringCache();
+    if (webview && type === "kyc" && authToken) {
+      webview.executeJavaScript(`localStorage.setItem('authToken', "${authToken}")`);
     }
-  };
+  }, [authToken, type]);
 
-  const handleOpenDevTools = () => {
+  // FIXME: only used in KYC flow
+  useEffect(() => {
     const webview = webviewRef.current;
-
-    if (webview) {
-      webview.openDevTools();
+    if (webview && type === "kyc" && authToken) {
+      webview.addEventListener("dom-ready", handleExecuteJavaScript);
     }
-  };
+
+    return () => {
+      if (webview && type === "kyc" && authToken) {
+        webview.removeEventListener("dom-ready", handleExecuteJavaScript);
+      }
+    };
+  }, [type, authToken, handleExecuteJavaScript]);
 
   return (
     <Container>
       <TopBar
         // FIXME: should get display name from provider key
         name={provider}
-        onReload={handleReload}
         onClose={onClose}
-        onOpenDevTools={handleOpenDevTools}
+        webviewRef={webviewRef}
       />
       <Wrapper>
         <CustomWebview
