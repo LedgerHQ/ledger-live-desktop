@@ -272,9 +272,9 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
 
     const { sections, alreadyEmptyAccount } = groupAddAccounts(existingAccounts, scannedAccounts, {
       scanning: scanStatus === "scanning",
-      preferredNewAccountScheme: this.state.showAllCreatedAccounts
+      preferredNewAccountSchemes: this.state.showAllCreatedAccounts
         ? undefined
-        : preferredNewAccountScheme,
+        : [preferredNewAccountScheme],
     });
 
     const emptyTexts = {
