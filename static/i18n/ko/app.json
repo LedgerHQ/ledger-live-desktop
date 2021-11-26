@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}} 계정으로 자산을 수신하기 전에는 새 계정을 추가할 수 없습니다",
       "noAccountToCreate": " &lt;1&gt;&lt;0&gt;{{currencyName}} 계정이 생성되지 않은 것 같습니다",
       "showAllAddressTypes": "모든 주소 유형을 표시하세요",
-      "showAllAddressTypesTooltip": "옛 주소 형식으로 {{family}}(을)를 수신하려면 주소 유형만 변경해 주세요."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit, 또는 Native SegWit?"
