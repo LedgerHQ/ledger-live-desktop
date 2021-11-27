@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}}&lt;/0&gt;&lt;/1&gt; hesabınıza varlık gelmeden önce yeni bir hesap ekleyemezsiniz",
       "noAccountToCreate": "Oluşturulabilecek bir &lt;1&gt;&lt;0&gt;{{currencyName}}&lt;/0&gt;&lt;/1&gt; hesabı bulunamadı",
       "showAllAddressTypes": "Tüm adres türlerini göster",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Yalnızca diğer adres biçimlerinde {{family}} almanız gerekiyorsa adres türünü değiştirin."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit mi yoksa Native Segwit mi?"
