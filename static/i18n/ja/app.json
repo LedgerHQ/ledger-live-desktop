@@ -140,7 +140,7 @@
       "DELEGATE": "デリゲート",
       "REDELEGATE": "再デリゲート",
       "UNDELEGATE": "デリゲート解除済み",
-      "SUPPLY": "デポジット済み",
+      "SUPPLY": "預け入れ済み",
       "REDEEM": "引き出し済み",
       "APPROVE": "承認済み",
       "VOTE": "投票済み",
@@ -780,7 +780,7 @@
       "opened": {
         "title": "貸出中のローンがここに表示されます。",
         "description": "まだ貸出を行っていません。",
-        "cta": "入金"
+        "cta": "預け入れ"
       },
       "history": {
         "title": "履歴",
@@ -1379,7 +1379,7 @@
       "rewards": "獲得した報酬",
       "bondedAmount": "ボンド済み額",
       "unbondedAmount": "ボンド解除済み額",
-      "withdrawUnbondedAmount": "引き出し数量",
+      "withdrawUnbondedAmount": "Withdrawn Amount",
       "palletMethod": "方法",
       "transferAmount": "送付額",
       "validatorsCount": "バリデータ（{{number}}）"
