@@ -12,8 +12,9 @@ test("Manager", async ({ page }) => {
   await test.step("can access manager", async () => {
     await managerPage.navigate();
     await deviceAction.accessManager();
+    await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
     expect(await page.screenshot()).toMatchSnapshot({
-      name: "manager-catalog.png",
+      name: "manager-app-catalog.png",
     });
   });
 
@@ -27,7 +28,7 @@ test("Manager", async ({ page }) => {
   await test.step("can access installed apps tab", async () => {
     await managerPage.goToInstalledAppTab();
     expect(await page.screenshot()).toMatchSnapshot({
-      name: "manager-appsOnDevice.png",
+      name: "manager-installed-apps.png",
     });
   });
 

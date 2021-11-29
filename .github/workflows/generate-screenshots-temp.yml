@@ -40,14 +40,10 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: xvfb-run --auto-servernum -- yarn playwright playwright/specs/onboarding.spec.ts --update-snapshots
-        env:
-          DEBUG: pw:browser
+        run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright playwright/specs/onboarding.spec.ts --update-snapshots
-        env:
-          DEBUG: pw:api
+        run: yarn playwright-update-snapshots --retries 0
       - name: status
         if: ${{ always() }}
         run: |
@@ -56,5 +52,5 @@ jobs:
         run: |
           git add .
           git commit -m 'update screenshots'
-          git pull
+          git pull --rebase
           git push

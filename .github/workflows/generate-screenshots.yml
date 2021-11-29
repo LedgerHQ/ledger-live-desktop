@@ -1,4 +1,4 @@
-name: Generate Screenshots
+name: Update UI tests snapshots
 on:
   issue_comment:
     types: [created]
@@ -54,13 +54,11 @@ jobs:
         run: yarn build
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
-        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright-update-snapshots
+        run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: run ui tests (macOS & Windows)
         if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright-update-snapshots
-        env:
-          DEBUG: pw:api
-      - name: commit
+        run: yarn playwright-update-snapshots --retries 0
+      - name: commit new screenshots
         run: |
           git status
           git add .
