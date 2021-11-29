@@ -49,6 +49,7 @@ jobs:
         run: |
           git status
       - name: commit
+        if: ${{ always() }}
         run: |
           git add .
           git commit -m 'update screenshots'
