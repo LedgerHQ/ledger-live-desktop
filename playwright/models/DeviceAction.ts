@@ -4,10 +4,9 @@ import {
   mockListAppsResult,
 } from "@ledgerhq/live-common/lib/apps/mock";
 
-// fromTransactionRaw doesn't work as expected but I'm not sure why
-// It produces the following error:
+// fromTransactionRaw doesn't work as expected but I'm not sure why it produces the following error:
 // page.evaluate: ReferenceError: _transaction is not defined
-import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
+// import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 export class DeviceAction {
   readonly page: Page;
