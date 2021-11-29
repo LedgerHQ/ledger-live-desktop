@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Özellikler",
-        "about": "Açıklama",
+        "description": "Description",
         "contract": "Sözleşme adresi",
         "tokenId": "Token Kimliği",
         "quantity": "Miktar"
