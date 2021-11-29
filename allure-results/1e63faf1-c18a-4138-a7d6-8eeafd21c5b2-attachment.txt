@@ -1,1 +1,0 @@
-2021-11-23T15:03:29.807Z pw:api <= locator.click succeeded

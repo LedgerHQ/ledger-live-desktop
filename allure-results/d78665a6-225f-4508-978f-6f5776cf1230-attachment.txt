@@ -1,1 +1,0 @@
-D:\a\ledger-live-desktop\ledger-live-desktop\playwright\specs\onboarding.spec.ts-snapshots\genuine-check-done-win32.png is missing in snapshots, writing actual.

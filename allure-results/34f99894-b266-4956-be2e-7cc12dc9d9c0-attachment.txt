@@ -1,1 +1,0 @@
-2021-11-23T15:03:15.210Z pw:api => electronApplication.close started
