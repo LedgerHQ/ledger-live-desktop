@@ -3,6 +3,10 @@ import {
   deviceInfo155 as deviceInfo,
   mockListAppsResult,
 } from "@ledgerhq/live-common/lib/apps/mock";
+
+// fromTransactionRaw doesn't work as expected but I'm not sure why
+// It produces the following error:
+// page.evaluate: ReferenceError: _transaction is not defined
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 export class DeviceAction {
@@ -87,6 +91,8 @@ export class DeviceAction {
 
   async confirmSwap() {
     await this.page.evaluate(() => {
+      // Transaction taken from original test here (and not using fromRawTransaction)
+      // https://github.com/LedgerHQ/ledger-live-desktop/blob/7a7ae3218f941dea5b9cdb2637acaa026b4f4a10/tests/specs/swap.spec.js
       (window as any).mock.events.mockDeviceEvent(
         {
           type: "init-swap-result",
