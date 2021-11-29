@@ -38,8 +38,16 @@ jobs:
         env:
           JOBS: max
         run: yarn --frozen-lockfile
+      - name: run code checks
+        if: always()
+        run: yarn ci 2> >(tee lint.txt)
       - name: build electron app
+        env:
+          INSTRUMENT_BUILD: true
         run: yarn build
+      - name: tests
+        if: always()
+        run: yarn test 2> >(tee jest.txt)
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
         run: xvfb-run --auto-servernum -- yarn playwright
@@ -52,11 +60,25 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
-      - name: upload ci suggested screenshots
-        if: ${{ always() }}
+      - name: save PR number
+        if: always()
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/NR
+      - name: upload tests data
+        if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: results-${{ matrix.os }}
+          name: report-${{ matrix.os }}
+          path: |
+            lint.txt
+            jest.txt
+            pr/NR
+      - name: upload ci suggested screenshots
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results-${{ matrix.os }}
           path: |
             playwright/artifacts/test-results
             playwright/artifacts/html-report
