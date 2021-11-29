@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "属性",
-        "about": "关于已知来源",
+        "description": "Description",
         "contract": "合约地址",
         "tokenId": "代币 ID",
         "quantity": "数量"
