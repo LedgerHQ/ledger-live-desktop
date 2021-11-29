@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Свойства",
-        "description": "Description",
+        "description": "Описание",
         "contract": "Адрес контракта",
         "tokenId": "ID токена",
         "quantity": "Кол-во"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "Невозможно добавить новый счёт, пока вы не получили средства на <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Счета <1><0>{{currencyName}}</0></1> не найдены",
       "showAllAddressTypes": "Показать все типы адресов",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Изменяйте тип адреса только в том случае, если вам нужно получать {{family}} с использованием адресов в другом формате."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit или Native segwit?"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Поиск установленных приложений..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Похоже, на вашем устройстве открыто приложение",
+      "subtitle": "Открытие Диспетчера закроет приложение на вашем устройстве",
+      "ctaReopen": "Перезапустить Диспетчер",
+      "ctaPortfolio": "Вернуться к Портфелю"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> свободно",
