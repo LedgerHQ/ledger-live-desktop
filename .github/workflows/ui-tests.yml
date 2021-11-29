@@ -112,12 +112,8 @@ jobs:
       - name: tests
         if: always()
         run: yarn test 2> >(tee jest.txt)
-      - name: run ui tests (Linux)
-        if: matrix.os == 'ubuntu-20.04'
+      - name: run ui tests
         run: xvfb-run --auto-servernum -- yarn playwright
-      - name: run ui tests (macOS & Windows)
-        if: matrix.os != 'ubuntu-20.04'
-        run: yarn playwright
       - name: upload diffs to imgur
         if: always()
         uses: ./.github/actions/upload-images
