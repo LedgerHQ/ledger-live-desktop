@@ -166,8 +166,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
-      - name: install operating system dependencies
-        run: npx playwright install-deps
       - name: get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -181,6 +179,8 @@ jobs:
         env:
           JOBS: max
         run: yarn --frozen-lockfile
+      - name: install operating system dependencies
+        run: npx playwright install-deps
       - name: run code checks
         if: always()
         run: yarn ci 2> >(tee lint.txt)
