@@ -11,7 +11,7 @@ import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { getLanguages } from "~/config/languages";
+import { getLanguages, LangKeys } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
 
@@ -69,7 +69,7 @@ export type SettingsState = {
   hasInstalledApps: boolean,
   lastSeenDevice: DeviceModelInfo | null,
   latestFirmware: any,
-  language?: string,
+  language?: LangKeys,
   theme: string | null,
   region: string | null,
   orderAccounts: string,

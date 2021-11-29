@@ -1,6 +1,5 @@
 import React from "react";
 import { Flex, Text } from "@ledgerhq/react-ui";
-import { Column } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 
 type SectionRowProps = {
   title?: React.ReactNode;
@@ -11,7 +10,7 @@ type SectionRowProps = {
 };
 
 export const SectionRow = ({ title, desc, children, onClick, inset = false }: SectionRowProps) => (
-  // todo copy sqtyles from settings sectrion row container handling inset prop
+  // todo copy styles from settings section row container handling inset prop
   <Flex onClick={onClick} tabIndex={-1} justifyContent="space-between">
     <Flex flexDirection="column" flexGrow={1} flexShrink={1} mr={12}>
       {title && (
