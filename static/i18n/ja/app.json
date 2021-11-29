@@ -1439,6 +1439,12 @@
       "appsOnDevice": "インストール済みアプリ",
       "appOnDeviceSearch": "インストール済みアプリを検索..."
     },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
+    },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> 使用可能",
       "noFreeSpace": "ストレージ容量に空きがありません。",
