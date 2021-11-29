@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Свойства",
-        "about": "О Known Origin",
+        "description": "Description",
         "contract": "Адрес контракта",
         "tokenId": "ID токена",
         "quantity": "Кол-во"
