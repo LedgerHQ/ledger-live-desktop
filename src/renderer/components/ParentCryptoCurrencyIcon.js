@@ -61,6 +61,7 @@ type Props = {
   bigger?: boolean,
   inactive?: boolean,
   flat?: boolean,
+  size?: number,
 };
 
 const ParentCryptoCurrencyIcon = ({
@@ -69,15 +70,16 @@ const ParentCryptoCurrencyIcon = ({
   bigger,
   inactive,
   flat = false,
+  size,
 }: Props) => {
   const parent = currency.type === "TokenCurrency" ? currency.parentCurrency : null;
 
   const content = (
     <ParentCryptoCurrencyIconWrapper doubleIcon={!!parent} bigger={bigger} flat={flat}>
       {parent && (
-        <CryptoCurrencyIcon inactive={inactive} currency={parent} size={bigger ? 20 : 16} />
+        <CryptoCurrencyIcon inactive={inactive} currency={parent} size={size || bigger ? 20 : 16} />
       )}
-      <CryptoCurrencyIcon inactive={inactive} currency={currency} size={bigger ? 20 : 16} />
+      <CryptoCurrencyIcon inactive={inactive} currency={currency} size={size || bigger ? 20 : 16} />
     </ParentCryptoCurrencyIconWrapper>
   );
 
