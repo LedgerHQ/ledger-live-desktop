@@ -43,7 +43,7 @@ jobs:
         env:
           VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
         run: |
-          aws ec2 modify-volume --size 100 --volume-id $VOLUME_ID
+          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
 
   stop-runner:
     name: Stop self-hosted EC2 runner
@@ -65,27 +65,23 @@ jobs:
     runs-on: ${{ needs.start-runner.outputs.label }}
 
     steps:
-      - name: disk before cloning
-        run: df -h
+      - name: prepare runner
+        run: |
+          sudo growpart /dev/nvme0n1 1
+          sudo resize2fs /dev/nvme0n1p1
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: disk space after cloning
-        run: df -h
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
-      - name: disk space before gh
-        run: df -h
       - name: install gh
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
           echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
           sudo apt-get update
           sudo apt-get install -y gh
-      - name: disk space after gh
-        run: df -h
       - name: checkout PR
         run: gh pr checkout ${{ github.event.inputs.number }}
         env:
@@ -95,16 +91,12 @@ jobs:
           node-version: 14.x
       - name: install yarn
         run: npm i -g yarn
-      - name: disk space before install deps
-        run: df -h
       - name: install dependencies
         env:
           JOBS: max
         run: yarn --frozen-lockfile
       - name: install operating system dependencies
         run: npx playwright install-deps
-      - name: disk space after install deps
-        run: df -h
       - name: build electron app
         run: yarn build
       - name: run ui tests
