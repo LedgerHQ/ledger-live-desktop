@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "プロパティ",
-        "about": "起源について",
+        "description": "Description",
         "contract": "コントラクトアドレス",
         "tokenId": "トークンID",
         "quantity": "数量"
