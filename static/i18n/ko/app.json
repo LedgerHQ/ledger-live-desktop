@@ -1439,6 +1439,12 @@
       "appsOnDevice": "앱 설치됨",
       "appOnDeviceSearch": "설치된 앱 검색..."
     },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
+    },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}&lt;/0&gt; 남음",
       "noFreeSpace": "남은 저장 공간 없음",
