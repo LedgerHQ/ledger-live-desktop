@@ -28,6 +28,7 @@ export default (
     isRight,
     isLeft,
     error,
+    rowHeight,
   }: {
     width: number,
     minWidth: number,
@@ -35,6 +36,7 @@ export default (
     isRight: boolean,
     isLeft: boolean,
     error: ?Error,
+    rowHeight: number,
   },
 ): CreateStylesReturnType => ({
   control: (styles: Object, { isFocused }: Object) => ({
@@ -42,7 +44,7 @@ export default (
     width,
     minWidth,
     ...ff("Inter|SemiBold"),
-    height: small ? 34 : 48,
+    height: rowHeight || (small ? 34 : 48),
     minHeight: "unset",
     borderRadius: isRight ? "0 4px 4px 0" : isLeft ? "4px 0 0 4px" : 4,
     borderColor: error ? theme.colors.pearl : theme.colors.palette.divider,
@@ -59,6 +61,7 @@ export default (
     ...styles,
     paddingLeft: 15,
     color: theme.colors.palette.text.shade100,
+    minHeight: rowHeight,
   }),
   singleValue: (styles: Object) => ({
     ...styles,
@@ -84,7 +87,8 @@ export default (
       isSelected || isFocused
         ? theme.colors.palette.text.shade100
         : theme.colors.palette.text.shade80,
-    padding: small ? "8px 15px 8px 15px" : "10px 15px 11px 15px",
+    height: rowHeight,
+    padding: small ? "8px 15px" : "10px 15px",
     cursor: isDisabled ? "not-allowed" : "default",
     backgroundColor: isFocused ? theme.colors.palette.background.default : null,
     // NB hover doesn't trigger isFocused since we disabled the onMouseMove/onMouseOver

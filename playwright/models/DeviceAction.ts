@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 import {
   deviceInfo155 as deviceInfo,
   mockListAppsResult,
@@ -7,9 +7,11 @@ import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
 
 export class DeviceAction {
   readonly page: Page;
+  readonly deviceActionLoader: Locator;
 
   constructor(page: Page) {
     this.page = page;
+    this.deviceActionLoader = page.locator('#deviceAction-loading');
   }
 
   async openApp() {
@@ -17,7 +19,8 @@ export class DeviceAction {
       (window as any).mock.events.mockDeviceEvent({ type: "opened" });
     });
 
-    await this.page.waitForSelector("#deviceAction-loading", { state: "visible" });
+    await this.deviceActionLoader.waitFor({ state: "visible" });
+    await this.deviceActionLoader.waitFor({ state: "detached" });
   }
 
   async genuineCheck(appDesc: string = "Bitcoin", installedDesc: string = "Bitcoin") {
@@ -42,7 +45,7 @@ export class DeviceAction {
       [deviceInfo, result],
     );
 
-    await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
+    await this.deviceActionLoader.waitFor({ state: "hidden" });
   }
 
   async accessManager(
@@ -70,7 +73,7 @@ export class DeviceAction {
       [deviceInfo, result],
     );
 
-    await this.page.waitForSelector("#deviceAction-loading", { state: "hidden" });
+    await this.deviceActionLoader.waitFor({ state: "hidden" });
   }
 
   async initiateSwap() {

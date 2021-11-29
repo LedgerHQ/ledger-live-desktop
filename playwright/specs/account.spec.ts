@@ -8,7 +8,7 @@ test.use({ userdata: "skip-onboarding", env: { DEV_TOOLS: true } });
 
 process.env.PWDEBUG = "1";
 
-const currencies = ["BTC", "LTC", "ATOM"];
+const currencies = ["BTC", "LTC", "ETH", "ATOM", "XTZ", "XRP"];
 
 test.describe.parallel("Accounts", () => {
   for (const currency of currencies) {
@@ -18,12 +18,10 @@ test.describe.parallel("Accounts", () => {
 
       await test.step(`[${currency}] Open modal`, async () => {
         await accountModal.open();
-        expect(await page.screenshot()).toMatchSnapshot(`open-modal.png`);
       });
 
       await test.step(`[${currency}] Select currency`, async () => {
         await accountModal.select(currency);
-        expect(await page.screenshot()).toMatchSnapshot(`${currency}-select-currency.png`);
       });
 
       await test.step(`[${currency}] Open device app`, async () => {
@@ -32,8 +30,8 @@ test.describe.parallel("Accounts", () => {
         expect(await page.screenshot()).toMatchSnapshot(`${currency}-device-open-app.png`);
       });
 
-      await test.step(`[${currency}] Complete`, async () => {
-        await accountModal.complete();
+      await test.step(`[${currency}] Add accounts`, async () => {
+        await accountModal.addAccounts(currency);
         expect(await page.screenshot()).toMatchSnapshot(`${currency}-complete.png`);
       });
     });
