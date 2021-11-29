@@ -2786,6 +2786,8 @@
     "announcement": {
       "emptyState": {
         "title": "No news for the moment",
+        "upToDate": "You're up to date",
+        "checkBackSoon": "Check back soon for news on Ledger and Ledger Live",
         "desc": "You will find here all the news related to Ledger and Ledger Live"
       }
     }
