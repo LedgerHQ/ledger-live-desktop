@@ -12,6 +12,7 @@ import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import CryptocurrencyStar from "~/renderer/components/MarketList/CryptocurrencyStar";
 import styled from "styled-components";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 
 type Props = {
   currency: MarketCurrencyInfo,
@@ -50,18 +51,22 @@ function CryptocurrencyHeaderActions({ currency, loading }: Props) {
   return (
     <Box horizontal alignItems="center">
       <Box mr={12}>{loading ? <LoadingPlaceholder /> : <MarketCounterValueSelect />}</Box>
-      {currency.supportedCurrency && device && !loading && (
+      {!loading && currency.supportedCurrency && device && (
         <>
-          <Box mr={12}>
-            <Button primary onClick={onBuy}>
-              Buy
-            </Button>
-          </Box>
-          <Box mr={12}>
-            <Button primary onClick={onSwap}>
-              Swap
-            </Button>
-          </Box>
+          {isCurrencySupported("BUY", currency.supportedCurrency) && (
+            <Box mr={12}>
+              <Button primary onClick={onBuy}>
+                Buy
+              </Button>
+            </Box>
+          )}
+          {isCurrencySupported("SELL", currency.supportedCurrency) && (
+            <Box mr={12}>
+              <Button primary onClick={onSwap}>
+                Swap
+              </Button>
+            </Box>
+          )}
         </>
       )}
       {!loading && (

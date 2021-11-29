@@ -13,6 +13,7 @@ import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 
 const Cell = styled(Box)`
   padding: 15px 20px;
@@ -175,12 +176,16 @@ function MarketRowItem(props: Props) {
                 )}
                 {!loading && currency.supportedCurrency && device && (
                   <>
-                    <Button outlineGrey small mr={20} onClick={onBuy}>
-                      Buy
-                    </Button>
-                    <Button outlineGrey small onClick={onSwap}>
-                      Swap
-                    </Button>
+                    {isCurrencySupported("BUY", currency.supportedCurrency) && (
+                      <Button outlineGrey small mr={20} onClick={onBuy}>
+                        Buy
+                      </Button>
+                    )}
+                    {isCurrencySupported("SELL", currency.supportedCurrency) && (
+                      <Button outlineGrey small onClick={onSwap}>
+                        Swap
+                      </Button>
+                    )}
                   </>
                 )}
               </Box>
