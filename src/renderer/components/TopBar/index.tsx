@@ -19,7 +19,7 @@ import { openInformationCenter, closeInformationCenter } from "~/renderer/action
 
 import HelpSideBar from "~/renderer/modals/Help";
 import Breadcrumb from "./Breadcrumb";
-import { InformationDrawer } from "./NotificationIndicator/InformationDrawer";
+import InformationDrawer from "./InformationDrawer";
 import ActivityIndicator from "./ActivityIndicator";
 
 const VerticalDivider = styled.span`
