@@ -19,6 +19,7 @@ export class DeviceAction {
     });
 
     await this.deviceActionLoader.waitFor({ state: "visible" });
+    await this.deviceActionLoader.waitFor({ state: "detached" });
   }
 
   async genuineCheck(appDesc: string = "Bitcoin", installedDesc: string = "Bitcoin") {

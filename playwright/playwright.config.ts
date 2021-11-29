@@ -23,7 +23,7 @@ const config: PlaywrightTestConfig = {
   reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
   workers: process.env.CI ? 3 : 1,
   // FIXME: --update-snapshots doesn't work with --retries
-  // retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI
     ? [["html", { open: "never", outputFolder: "playwright/artifacts/html-report" }], ["github"]]
     : "list",
