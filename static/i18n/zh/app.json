@@ -1439,6 +1439,12 @@
       "appsOnDevice": "已安装的应用程序",
       "appOnDeviceSearch": "搜索已安装的应用程序……"
     },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
+    },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0>可用",
       "noFreeSpace": "存储空间不足",
