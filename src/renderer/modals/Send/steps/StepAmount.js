@@ -38,7 +38,7 @@ const StepAmount = ({
   isNFTSend,
 }: StepProps) => {
   const allNfts = useSelector(getAllNFTs);
-  const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
+  const nft = allNfts?.find(nft => nft.tokenId === transaction?.tokenIds?.[0]);
   if (!status) return null;
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
 
