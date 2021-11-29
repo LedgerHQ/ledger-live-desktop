@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "속성",
-        "about": "알려진 출처 정보",
+        "description": "Description",
         "contract": "계약 주소",
         "tokenId": "토큰 ID",
         "quantity": "수량"
