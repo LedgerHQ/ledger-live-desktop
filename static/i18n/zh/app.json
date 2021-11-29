@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "属性",
-        "description": "Description",
+        "description": "描述",
         "contract": "合约地址",
         "tokenId": "代币 ID",
         "quantity": "数量"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "搜索已安装的应用程序……"
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "看起来您的设备上有开启的应用程序",
+      "subtitle": "重新打开 Manager（管理器）将退出您设备上的应用程序",
+      "ctaReopen": "重新打开 Manager（管理器）",
+      "ctaPortfolio": "返回投资组合"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0>可用",
