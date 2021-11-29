@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Rechercher des applications installées..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Application ouverte sur votre appareil ?",
+      "subtitle": "Rouvrir le Gestionnaire fermera l'application sur votre appareil.",
+      "ctaReopen": "Rouvrir le Gestionnaire",
+      "ctaPortfolio": "Retour au Portefeuille"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
