@@ -1,13 +1,12 @@
-// @flow
-
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import type { Unit } from "@ledgerhq/live-common/lib/types";
+import { Unit } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { Icons } from "@ledgerhq/react-ui";
 import {
   marketIndicatorSelector,
   localeSelector,
@@ -16,13 +15,11 @@ import {
 import { getMarketColor } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import FlipTicker from "~/renderer/components/FlipTicker";
-import IconBottom from "~/renderer/icons/ArrowDownRight";
-import IconTop from "~/renderer/icons/ArrowUpRight";
 import Ellipsis from "~/renderer/components/Ellipsis";
 
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-const T: ThemedComponent<{ color?: string, inline?: boolean, ff?: string }> = styled(Box).attrs(
+const T: ThemedComponent<{ color?: string; inline?: boolean; ff?: string }> = styled(Box).attrs(
   p => ({
     horizontal: true,
     color: p.color,
@@ -36,7 +33,7 @@ const T: ThemedComponent<{ color?: string, inline?: boolean, ff?: string }> = st
   overflow: hidden;
 `;
 
-const I = ({ color, children }: { color?: string, children: any }) => (
+const I = ({ color, children }: { color?: string; children: any }) => (
   <Box color={color}>{children}</Box>
 );
 
@@ -45,21 +42,22 @@ I.defaultProps = {
 };
 
 type OwnProps = {
-  unit?: Unit,
-  val: BigNumber | number,
-  alwaysShowSign?: boolean,
-  showCode?: boolean,
-  withIcon?: boolean,
-  color?: string,
-  animateTicker?: boolean,
-  disableRounding?: boolean,
-  isPercent?: boolean,
-  subMagnitude?: number,
-  prefix?: string,
-  ellipsis?: boolean,
-  suffix?: string,
-  showAllDigits?: boolean,
-  alwaysShowValue?: boolean, // overrides discreet mode
+  unit?: Unit;
+  val: BigNumber | number;
+  alwaysShowSign?: boolean;
+  showCode?: boolean;
+  withIcon?: boolean;
+  iconSize?: number;
+  color?: string;
+  animateTicker?: boolean;
+  disableRounding?: boolean;
+  isPercent?: boolean;
+  subMagnitude?: number;
+  prefix?: string;
+  ellipsis?: boolean;
+  suffix?: string;
+  showAllDigits?: boolean;
+  alwaysShowValue?: boolean; // overrides discreet mode
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -69,9 +67,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 type Props = OwnProps & {
-  marketIndicator: string,
-  discreet: boolean,
-  locale: string,
+  marketIndicator: string;
+  discreet: boolean;
+  locale: string;
 };
 
 function FormattedVal(props: Props) {
@@ -83,6 +81,7 @@ function FormattedVal(props: Props) {
     alwaysShowSign,
     showCode,
     withIcon,
+    iconSize,
     locale,
     marketIndicator,
     color,
@@ -147,9 +146,13 @@ function FormattedVal(props: Props) {
     <T {...p} color={color || marketColor} withIcon={withIcon}>
       {withIcon ? (
         <Box horizontal alignItems="center">
-          <Box mr={1}>
+          <Box mr={3}>
             <I color={marketColor}>
-              {isNegative ? <IconBottom size={24} /> : isZero ? null : <IconTop size={24} />}
+              {isNegative ? (
+                <Icons.ArrowDownMedium size={iconSize || 24} />
+              ) : isZero ? null : (
+                <Icons.ArrowUpMedium size={iconSize || 24} />
+              )}
             </I>
           </Box>
           <Box horizontal alignItems="center">

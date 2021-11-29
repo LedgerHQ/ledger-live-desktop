@@ -2,8 +2,8 @@ import React, { useCallback, useContext } from "react";
 import { compose } from "redux";
 import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans, TFunction } from "react-i18next";
-import styled from "styled-components";
 import { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { Button, Flex, Icons } from "@ledgerhq/react-ui";
 import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import Tooltip from "~/renderer/components/Tooltip";
 import { context as drawersContext } from "~/renderer/drawers/Provider";
@@ -14,13 +14,10 @@ import {
   getAccountCurrency,
 } from "@ledgerhq/live-common/lib/account";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
-import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import perFamily from "~/renderer/generated/AccountHeaderActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
-import Box, { Tabbable } from "~/renderer/components/Box";
-import Star from "~/renderer/components/Stars/Star";
 import {
   BuyActionDefault,
   ReceiveActionDefault,
@@ -28,41 +25,17 @@ import {
   SwapActionDefault,
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import IconSend from "~/renderer/icons/Send";
 import IconReceive from "~/renderer/icons/Receive";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
-import Button from "~/renderer/components/Button";
-import Text from "~/renderer/components/Text";
 import Graph from "~/renderer/icons/Graph";
-import IconAngleDown from "~/renderer/icons/AngleDown";
-import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 import AccountSettingRenderBody from "~/renderer/modals/SettingsAccount/AccountSettingRenderBody";
-
-const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
-  alignItems: "center",
-  justifyContent: "center",
-}))`
-  width: 34px;
-  height: 34px;
-  border: 1px solid ${p => p.theme.colors.palette.text.shade60};
-  border-radius: 4px;
-  &:hover {
-    color: ${p => (p.disabled ? "" : p.theme.colors.palette.text.shade100)};
-    background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.2))};
-    border-color: ${p => p.theme.colors.palette.text.shade100};
-  }
-
-  &:active {
-    background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.3))};
-  }
-`;
 
 const mapDispatchToProps = {
   openModal,
@@ -151,13 +124,15 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     ({ item: { label, onClick, event, eventProperties, icon } }) => {
       const Icon = icon;
       return (
-        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
-          <Box horizontal flow={1} alignItems="center">
-            {Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
-            <Box>
-              <Text ff="Inter|SemiBold">{label}</Text>
-            </Box>
-          </Box>
+        <Button
+          Icon={Icon}
+          iconPosition="left"
+          onClick={onClick}
+          event={event}
+          eventProperties={eventProperties}
+          variant="main"
+        >
+          {label}
         </Button>
       );
     },
@@ -218,13 +193,12 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           buttonId="account-actions-manage"
         >
           {({ isOpen }) => (
-            <Button small primary>
-              <Box horizontal flow={1} alignItems="center">
-                <Box>
-                  <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
-                </Box>
-                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
-              </Box>
+            <Button
+              variant="main"
+              Icon={isOpen ? Icons.DropupMedium : Icons.DropdownMedium}
+              iconPosition="right"
+            >
+              <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
             </Button>
           )}
         </DropDownSelector>
@@ -233,7 +207,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   );
 
   return (
-    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
+    <Flex flexDirection="row" alignItems="center" justifyContent="flex-end" columnGap={5}>
       {!isAccountEmpty(account) ? (
         canBuySwap ? (
           <BuySwapHeader />
@@ -249,28 +223,20 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           </>
         )
       ) : null}
-      <Tooltip content={t("stars.tooltip")}>
-        <Star
-          accountId={account.id}
-          parentId={account.type !== "Account" ? account.parentId : undefined}
-          yellow
-        />
-      </Tooltip>
       {account.type === "Account" ? (
         <Tooltip content={t("account.settings.title")}>
-          <ButtonSettings
+          <Button
+            variant="shade"
+            outline
             id="account-settings-button"
             onClick={() =>
               setDrawer(AccountSettingRenderBody, { data: { parentAccount, account } }, {})
             }
-          >
-            <Box justifyContent="center">
-              <IconAccountSettings size={14} />
-            </Box>
-          </ButtonSettings>
+            Icon={IconAccountSettings}
+          />
         </Tooltip>
       ) : null}
-    </Box>
+    </Flex>
   );
 };
 
