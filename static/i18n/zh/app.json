@@ -1087,7 +1087,7 @@
     },
     "swap": {
       "title": "Swap 互换加密货币",
-      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行交易。"
+      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行兑换。"
     },
     "lending": {
       "title": "借出加密货币",
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "在您在 <1><0>{{accountName}}</0></1> 账户上收到资产前，无法创建新账户",
       "noAccountToCreate": "未找到待创建的 <1><0>{{currencyName}}</0></1> 账户",
       "showAllAddressTypes": "显示所有地址类型",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "仅在当您需要在其他地址格式上接收 {{family}} 时，才更改地址类型。"
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
