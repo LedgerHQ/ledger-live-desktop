@@ -1439,6 +1439,12 @@
       "appsOnDevice": "Yüklenmiş uygulamalar",
       "appOnDeviceSearch": "Yüklenmiş uygulamalarda ara..."
     },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
+    },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}}&lt;/0&gt; boş",
       "noFreeSpace": "Depolama alanı kalmadı",
