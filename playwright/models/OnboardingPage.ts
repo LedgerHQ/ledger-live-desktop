@@ -30,7 +30,7 @@ export class OnboardingPage {
   async acceptTerms() {
     await this.termsCheckbox.click();
     await Promise.all([
-      this.page.waitForResponse(/\.svg$/),
+      this.page.waitForResponse("**/*.svg"),
       this.termsSubmitButton.click(),
     ]);
   }

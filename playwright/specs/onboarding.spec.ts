@@ -44,6 +44,6 @@ test("Onboarding", async ({ page }) => {
 
   await test.step("Reach app", async () => {
     await onboardingPage.continue();
-    expect(await page.screenshot()).toMatchSnapshot(`landing.png`);
+    expect(await page.screenshot()).toMatchSnapshot(`onboarding-complete.png`);
   });
 });
