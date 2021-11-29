@@ -4,9 +4,7 @@ import { AccountModal } from "../models/AccountModal";
 import { DeviceAction } from "../models/DeviceAction";
 
 // specific environment
-test.use({ userdata: "skip-onboarding", env: { DEV_TOOLS: true } });
-
-process.env.PWDEBUG = "1";
+test.use({ userdata: "skip-onboarding" });
 
 const currencies = ["BTC", "LTC", "ETH", "ATOM", "XTZ", "XRP"];
 
@@ -26,7 +24,6 @@ test.describe.parallel("Accounts", () => {
 
       await test.step(`[${currency}] Open device app`, async () => {
         await deviceAction.openApp();
-        await page.pause();
         expect(await page.screenshot()).toMatchSnapshot(`${currency}-device-open-app.png`);
       });
 
