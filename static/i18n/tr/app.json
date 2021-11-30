@@ -133,6 +133,8 @@
     "type": {
       "IN": "Alındı",
       "OUT": "Gönderildi",
+      "NFT_IN": "NFT Alındı",
+      "NFT_OUT": "NFT Gönderildi",
       "CREATE": "Oluşturuldu",
       "REVEAL": "Adres gösterildi",
       "DELEGATE": "Yetki devredildi",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için &lt;1&gt;Devam&lt;/1&gt;'a tıklayın."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Gönder",
+        "open": "{{viewer}} ile aç"
+      },
+      "attributes": {
+        "properties": "Özellikler",
+        "description": "Description",
+        "contract": "Sözleşme adresi",
+        "tokenId": "Token Kimliği",
+        "quantity": "Miktar"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Token) Koleksiyonları",
+      "receiveCTA": "NFT Al",
+      "galleryCTA": "Galeriyi Göster",
+      "seeMore": "Daha fazla koleksiyon göster",
+      "seeAll": "Tüm koleksiyonları göster",
+      "seeLess": "Daha az göster"
+    },
+    "gallery": {
+      "title": "Tüm NFT'ler",
+      "collection": {
+        "header": {
+          "sendCTA": "Gönder",
+          "contract": "Sözleşme: {{contract}}"
+        },
+        "operationList": {
+          "header": "Son İşlemler",
+          "OUT": "Gönderilen",
+          "IN": "Alınan"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "Kimlik: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Token'lar",
     "cta": "Token ekle",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}}&lt;/0&gt;&lt;/1&gt; hesabınıza varlık gelmeden önce yeni bir hesap ekleyemezsiniz",
       "noAccountToCreate": "Oluşturulabilecek bir &lt;1&gt;&lt;0&gt;{{currencyName}}&lt;/0&gt;&lt;/1&gt; hesabı bulunamadı",
       "showAllAddressTypes": "Tüm adres türlerini göster",
-      "showAllAddressTypesTooltip": "Yalnızca eski adres biçimlerinde {{family}} almanız gerekiyorsa adres türünü değiştirin."
+      "showAllAddressTypesTooltip": "Yalnızca diğer adres biçimlerinde {{family}} almanız gerekiyorsa adres türünü değiştirin."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit mi yoksa Native Segwit mi?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Bu işlem, iç işlemlere sahiptir",
     "details": "{{ currency }} ayrıntıları",
     "multipleAddresses": "Neden birden fazla adres var?",
+    "nft": {
+      "name": "Token Adı",
+      "contract": "Token Sözleşmesi",
+      "id": "Token (NFT) Kimliği",
+      "amount": "Tutar"
+    },
     "extra": {
       "frozenAmount": "Dondurulan tutar",
       "unfreezeAmount": "Çözülen tutar",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "Uygulamayı katalogda ara...",
       "appsOnDevice": "Yüklenmiş uygulamalar",
       "appOnDeviceSearch": "Yüklenmiş uygulamalarda ara..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}}&lt;/0&gt; boş",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "Gönder",
+    "titleNft": "NFT Gönder",
     "totalSpent": "Düşülecek tutar",
     "steps": {
       "recipient": {
-        "title": "Alıcı"
+        "title": "Alıcı",
+        "nftRecipient": "Gönderilecek NFT"
       },
       "amount": {
         "title": "Tutar",
         "banner": "Maksimum harcanabilir tutar",
         "fees": "Ücretler",
         "standard": "Standart",
-        "advanced": "Gelişmiş"
+        "advanced": "Gelişmiş",
+        "nftQuantity": "Miktar"
       },
       "summary": {
         "title": "Özet"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "Opsiyonel",
         "ethereumGasLimit": "Gas limiti",
         "ethereumGasPrice": "Gas ücreti",
-        "unitPerByte": "Bayt başına {{unit}}"
+        "unitPerByte": "Bayt başına {{unit}}",
+        "nft": "NFT",
+        "nftQuantity": "Miktar"
       },
       "verification": {
         "streaming": {
@@ -2744,7 +2805,7 @@
       "ru": "Rusça",
       "es": "İspanyolca",
       "zh": "Çince",
-      "de": "German"
+      "de": "Almanca"
     }
   },
   "theme": {
@@ -3385,7 +3446,13 @@
       "undelegate": "doğrulayıcı",
       "claimReward": "ödüllerin alıcısı",
       "optIn": "alıcı",
-      "nominate": "doğrulayıcı"
+      "nominate": "doğrulayıcı",
+      "erc721": {
+        "transfer": "alıcı"
+      },
+      "erc1155": {
+        "transfer": "alıcı"
+      }
     },
     "votes": "Oylar ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "Mainnet etkinleşmeden önce taproot adresine gönderim yapmak güvenli değildir"
+    },
+    "NotEnoughNftOwned": {
+      "title": "Mevcut token miktarını aştınız"
     }
   }
 }

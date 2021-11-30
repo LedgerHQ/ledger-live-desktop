@@ -62,7 +62,7 @@
     "apply": "Aplicar",
     "done": "Listo",
     "confirm": "Confirmar",
-    "reject": "Reject",
+    "reject": "Rechazar",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
     "delete": "Eliminar",
@@ -133,6 +133,8 @@
     "type": {
       "IN": "Recibido",
       "OUT": "Enviado",
+      "NFT_IN": "NFT Recibido",
+      "NFT_OUT": "NFT Enviado",
       "CREATE": "Creado",
       "REVEAL": "Revelado",
       "DELEGATE": "Delegado",
@@ -238,30 +240,30 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "Crear una cuenta para recibir {{name}}",
         "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
-        "title": "From",
+        "title": "De",
         "max": "Máx.",
         "accountPlaceholder": "Máx.",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "currencyDisabledTooltip": "Esta divisa aún no está disponible para permutar"
       },
       "to": {
-        "title": "To"
+        "title": "A"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "La permuta aún no está disponible en tu área",
+        "content": "Ten un poco más de paciencia,<br/>implementaremos esta función muy pronto"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
+          "required": "Debes completar tu KYC",
           "complete": "Completa tu KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "update": "Actualiza tu KYC",
+          "rejected": "KYC rechazado, vuelve a iniciar la verificación",
           "status": {
-            "pending": "KYC pending",
+            "pending": "KYC pendiente",
             "approved": "KYC approved",
             "closed": "KYC rejected"
           }
@@ -269,27 +271,27 @@
       }
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "Tus transacciones de permuta en Desktop no están sincronizadas con la aplicación Ledger Live Mobile",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "Tus permutas anteriores aparecerán aquí",
+        "description": "No has hecho ninguna permuta todavía o Ledger Live ha sido restablecido en el interín."
       },
       "export": "No tienes ninguna cuenta de {{name}}.",
-      "exporting": "Exporting..."
+      "exporting": "Exportando..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "No podemos completar el proceso KYC hasta que actualices la aplicación",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "disclaimer": "LEDGER recopila tu información en nombre de WYRE y la transfiere a WYRE con fines de KYC. Para obtener más información, revisa nuestra",
+        "policy": "Política de Privacidad",
+        "title": "Verifica tu identidad",
+        "subtitle": "Ingresa tus datos para permutar con Wyre.",
+        "cta": "Continuar",
         "pending": {
           "cta": "Continuar",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
+          "title": "Tus datos han sido enviados para su aprobación",
+          "subtitle": "Completar la revisión normalmente lleva algunos minutos.",
+          "link": "Más información sobre KYC",
           "info": "Verificación de identidad: Enviada"
         },
         "closed": {
@@ -751,7 +753,7 @@
       "amountSupplied": "Importe depositado",
       "amountSuppliedTooltip": "Importe prestado a la red",
       "currencyAPY": "APY de divisa",
-      "currencyAPYTooltip": "Yearly return rate of a deposit that’s continuously compounded",
+      "currencyAPYTooltip": "APY: Tasa de rendimiento anual de un monto depositado en Compound de forma continuada",
       "accruedInterests": "Interés acumulado",
       "accruedInterestsTooltip": "Interés generado por tus activos prestados",
       "interestEarned": "Interés recibido",
@@ -822,8 +824,8 @@
         "allAssets": "Activo",
         "totalBalance": "Saldo de activos",
         "totalBalanceTooltip": "Monto disponible para prestar",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "currentAPY": "Tasa APY del depósito",
+        "currentAPYTooltip": "APY: Tasa de rendimiento anual de un monto depositado en Compound de forma continuada",
         "actions": "Acciones"
       }
     },
@@ -1067,9 +1069,9 @@
       "cta": "Comprar ahora"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "Paquete familiar",
+      "description": "Interesa a tu familia y amigos en las criptomonedas con 3 Nano S a un precio con descuento",
+      "cta": "Comprar paquete familiar"
     },
     "polkaStake": {
       "title": "Participación con POLKADOT",
@@ -1113,7 +1115,7 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "ID de cuenta inválido",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
@@ -1123,7 +1125,7 @@
       "confirm": {
         "title": "Conectar",
         "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Quiere conectarse a Ledger Live. Elige tu cuenta de Ethereum:"
       }
     },
     "connectedscreen": {
@@ -1170,6 +1172,48 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Enviar",
+        "open": "Abrir en {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Propiedades",
+        "description": "Description",
+        "contract": "Dirección de contrato",
+        "tokenId": "ID de token",
+        "quantity": "Cantidad"
+      }
+    },
+    "collections": {
+      "title": "Colecciones NFT (Tokens no fungibles)",
+      "receiveCTA": "Recibir NFT",
+      "galleryCTA": "Ver galería",
+      "seeMore": "Ver más colecciones",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "Tokens",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "No es posible agregar nuevas cuentas antes de haber recibido activos en tu cuenta <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "No se detectó ninguna cuenta de <1><0>{{currencyName}}</0></1> para crear",
       "showAllAddressTypes": "Mostrar todos los tipos de direcciones",
-      "showAllAddressTypesTooltip": "Solo modifica la dirección en caso de que necesites recibir {{family}} en formatos de dirección más antiguos."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "¿Segwit o Native Segwit?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Esta operación cuenta con operaciones internas",
     "details": "Detalles de {{ currency }}",
     "multipleAddresses": "¿Por qué hay múltiples direcciones?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Importe congelado",
       "unfreezeAmount": "Descongelar importe",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "Buscar aplicación en el catálogo...",
       "appsOnDevice": "Aplicaciones instaladas",
       "appOnDeviceSearch": "Buscar aplicaciones instaladas..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libres",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "Enviar",
+    "titleNft": "Send NFT",
     "totalSpent": "Total a debitar",
     "steps": {
       "recipient": {
-        "title": "Receptor"
+        "title": "Receptor",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Importe",
         "banner": "El importe máximo que puede gastarse es",
         "fees": "Tarifas",
         "standard": "Estándar",
-        "advanced": "Avanzado"
+        "advanced": "Avanzado",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Resumen"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "Opcional",
         "ethereumGasLimit": "Límite de gas",
         "ethereumGasPrice": "Precio de gas",
-        "unitPerByte": "{{unit}} por byte"
+        "unitPerByte": "{{unit}} por byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3446,13 @@
       "undelegate": "validador",
       "claimReward": "receptor de recompensas",
       "optIn": "receptor",
-      "nominate": "validador"
+      "nominate": "validador",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Votos ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
