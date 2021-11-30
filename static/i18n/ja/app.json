@@ -1,73 +1,74 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "today": "今日",
+    "tomorrow": "明日",
+    "yesterday": "昨日",
+    "transactionDate": "トランザクション日"
   },
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "アカウントを選択"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
-          "text": "Click here to see operation details"
+          "title": "トランザクションが送信されました！",
+          "text": "処理の詳細はこちらをクリック"
         }
       }
     },
     "app": {
       "informations": {
-        "title": "Information",
-        "website": "Website"
+        "title": "情報",
+        "website": "ウェブサイト"
       }
     },
     "catalog": {
       "title": "Discover",
       "branch": {
-        "soon": "coming soon",
-        "experimental": "experimental",
-        "debug": "debug"
+        "soon": "近日公開",
+        "experimental": "実験",
+        "debug": "デバッグ"
       },
       "banner": {
-        "title": "Discover our Live Apps Catalog",
-        "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
+        "title": "Live Appsカタログをチェック",
+        "description": "Ledger LiveからDeFiやNTFなどへ、安全なアクセスを提供できるよう懸命に取り組んでいます！"
       },
       "twitterBanner": {
-        "description": "Tell us what’s the next service you want to see on Ledger Live with the hashtag",
-        "tweetText": "The next Ledger App should be..."
+        "description": "Ledger Liveに追加してほしいサービスを、ハッシュタグでお知らせください。",
+        "tweetText": "次のLedgerアプリには..."
       },
       "pollCTA": {
-        "title": "Poll",
-        "description": "Which service do you want to see in Ledger Live?",
-        "button": "Let’s vote!"
+        "title": "アンケート",
+        "description": "どのサービスをLedger Liveでご希望ですか？",
+        "button": "投票しましょう！"
       },
       "developerCTA": {
-        "title": "For Developers",
-        "description": "All the information you need to integrate your applications on Ledger Live.",
-        "button": "Go to portal"
+        "title": "開発者向け",
+        "description": "Ledger Liveでのアプリケーション管理に必要な全ての情報。",
+        "button": "ポータルサイトに移動"
       }
     },
     "disclaimer": {
-      "title": "External Application",
-      "description": "You are about to be redirected to an application not operated by Ledger.",
-      "legalAdvice": "This application is not operated by Ledger. Ledger is not responsible for any loss of funds or quality of service of such application.\n\nAlways make sure to carefully verify the information displayed on your device.",
-      "checkbox": "Do not remind me again.",
-      "CTA": "Continue"
+      "title": "外部アプリケーション",
+      "description": "Ledger外部のアプリケーションにリダイレクトしようとしています。",
+      "legalAdvice": "このアプリケーションは、Ledgerによって運営されていません。Ledgerは、そのようなアプリケーションの使用による資金の損失、およびそのサービス品質について一切の責任を負いません。\n\n必ず、デバイスに表示される情報を慎重に確認してください。",
+      "checkbox": "今後、このメッセージを表示しない。",
+      "CTA": "続行"
     }
   },
   "common": {
     "never": "Never",
     "apply": "Apply",
-    "done": "Done",
+    "done": "完了",
     "confirm": "Confirm",
+    "reject": "Reject",
     "cancel": "Cancel",
     "getSupport": "Get support",
     "delete": "Delete",
     "launch": "Launch",
     "continue": "Continue",
-    "previous": "Previous",
+    "previous": "前",
     "learnMore": "Learn more",
     "help": "Help",
     "needHelp": "Need help?",
@@ -76,8 +77,8 @@
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
     "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
-    "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
-    "selectNoResults": "No results found matching \"{{query}}\"",
+    "selectValidatorNoOption": "\"{{accountName}}\"に一致するバリデータがありません。",
+    "selectNoResults": "\"{{query}}\"に一致する結果は見つかりませんでした。",
     "sortBy": "Sort by",
     "save": "Save",
     "lock": "Lock",
@@ -85,24 +86,24 @@
     "back": "Back",
     "reset": "Reset",
     "retry": "Retry",
-    "range": "Range",
+    "range": "表示範囲",
     "stop": "Stop",
-    "updateNow": "Update now",
+    "updateNow": "今すぐアップデート",
     "close": "Close",
     "eastern": "Eastern",
     "western": "Western",
     "reverify": "Re-verify",
     "verify": "Verify",
-    "verifyMyAddress": "Verify my address",
+    "verifyMyAddress": "アドレスを認証",
     "copy": "Copy",
     "copied": "Copied",
     "addressCopied": "Address copied",
-    "addressCopiedSuspicious": "Mismatch between the copied address and the one in the clipboard.",
-    "experimentalFeature": "Experimental",
-    "information": "Information",
-    "search": "Search...",
-    "searchWithoutEllipsis": "Search",
-    "manage": "Manage",
+    "addressCopiedSuspicious": "コピーしたアドレスとクリップボードのアドレスが一致しません。",
+    "experimentalFeature": "実験的機能",
+    "information": "インフォメーション",
+    "search": "検索…",
+    "searchWithoutEllipsis": "検索",
+    "manage": "管理",
     "lockScreen": {
       "title": "Welcome back",
       "subTitle": null,
@@ -114,14 +115,14 @@
       "syncing": "Synchronizing...",
       "upToDate": "Synchronized",
       "outdated": "Paused",
-      "needsMigration": "Click to update account",
+      "needsMigration": "クリックしてアカウントをアップデート",
       "error": "Synchronization error",
       "refresh": "Refresh",
-      "devTools": "Dev tools"
+      "devTools": "開発ツール"
     },
-    "exchange": "Exchange",
-    "info": "Info",
-    "connectDevice": "Connect your device"
+    "exchange": "取引",
+    "info": "情報",
+    "connectDevice": "デバイスを接続"
   },
   "devices": {
     "nanoS": "Nano S",
@@ -132,60 +133,60 @@
     "type": {
       "IN": "Received",
       "OUT": "Sent",
-      "CREATE": "Created",
-      "REVEAL": "Revealed",
+      "CREATE": "作成済み",
+      "REVEAL": "表示済み",
       "DELEGATE": "Delegated",
       "REDELEGATE": "Redelegated",
-      "UNDELEGATE": "Undelegated",
-      "SUPPLY": "Deposited",
-      "REDEEM": "Withdrawn",
-      "APPROVE": "Approved",
-      "VOTE": "Voted",
-      "FREEZE": "Frozen",
-      "UNFREEZE": "Unfrozen",
-      "REWARD": "Claimed reward",
-      "FEES": "Fees",
-      "OPT_IN": "Opt in",
-      "OPT_OUT": "Opt out",
-      "CLOSE_ACCOUNT": "Close account",
-      "BOND": "Bond",
-      "UNBOND": "Unbond",
-      "REWARD_PAYOUT": "Reward",
-      "SLASH": "Slash",
-      "WITHDRAW_UNBONDED": "Withdrawal",
-      "NOMINATE": "Nomination",
-      "CHILL": "Clear nominations",
-      "SET_CONTROLLER": "Set controller"
+      "UNDELEGATE": "デリゲート解除済み",
+      "SUPPLY": "デポジット済み",
+      "REDEEM": "引き出し済み",
+      "APPROVE": "承認済み",
+      "VOTE": "投票済み",
+      "FREEZE": "凍結中",
+      "UNFREEZE": "凍結解除済み",
+      "REWARD": "獲得した報酬",
+      "FEES": "手数料",
+      "OPT_IN": "オプトイン",
+      "OPT_OUT": "オプトアウト",
+      "CLOSE_ACCOUNT": "アカウントを閉じる",
+      "BOND": "ボンド（預入れ）",
+      "UNBOND": "ボンド解除",
+      "REWARD_PAYOUT": "報酬",
+      "SLASH": "スラッシュ",
+      "WITHDRAW_UNBONDED": "引き出す",
+      "NOMINATE": "ノミネート",
+      "CHILL": "ノミネートを解除する",
+      "SET_CONTROLLER": "コントローラーを設定"
     }
   },
   "byteSize": {
-    "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "bytes": "{{size}}バイト",
+    "kbUnit": "{{size}}KB",
+    "mbUnit": "{{size}}MB"
   },
   "time": {
     "minute": "Minute",
-    "minute_plural": "Minutes",
+    "minute_plural": "分",
     "hour": "Hour",
-    "hour_plural": "Hours",
+    "hour_plural": "時間",
     "range": {
-      "day": "1D",
-      "week": "1W",
-      "month": "1M",
-      "year": "1Y",
-      "all": "ALL"
+      "day": "1日",
+      "week": "週",
+      "month": "月",
+      "year": "年",
+      "all": "全期間"
     }
   },
   "fees": {
-    "advanced": "Advanced",
-    "custom": "Custom",
-    "fast": "Fast",
-    "high": "High",
-    "low": "Low",
-    "slow": "Slow",
-    "standard": "Standard",
-    "medium": "Medium",
-    "feesAmount": "Fees Amount"
+    "advanced": "アドバンス",
+    "custom": "カスタム",
+    "fast": "高速",
+    "high": "高速",
+    "low": "低速",
+    "slow": "低速",
+    "standard": "標準",
+    "medium": "普通",
+    "feesAmount": "手数料"
   },
   "sidebar": {
     "menu": "Menu",
@@ -265,7 +266,7 @@
     }
   },
   "stars": {
-    "placeholder": "Star an account to display it here.",
+    "placeholder": "お気に入りに登録したアカウントは、ここに表示されます。",
     "tooltip": "Star account"
   },
   "bridge": {
@@ -280,124 +281,124 @@
     "disconnectButton": "Disconnect"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "スワップ",
     "tabs": {
-      "exchange": "Exchange",
-      "history": "History",
-      "kyc": "KYC"
+      "exchange": "取引",
+      "history": "履歴",
+      "kyc": "KYC（本人確認）"
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
-        "quote": "Quote",
-        "receive": "Receive"
+        "title": "レート",
+        "quote": "見積もり",
+        "receive": "受け取る"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "プロバイダー",
+          "rate": "レート",
+          "fees": "手数料",
+          "target": "ターゲットアカウント"
         },
         "tooltip": {
           "provider": "lorem ipsum",
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
-        "noAccountCTA": "Add account"
+        "noAccount": "Create an account to receive {{name}}",
+        "noAccountCTA": "アカウントを追加"
       },
       "from": {
-        "title": "From",
-        "max": "Max",
-        "accountPlaceholder": "Select source",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "title": "送付元",
+        "max": "最大",
+        "accountPlaceholder": "ソースを選択",
+        "currencyDisabledTooltip": "現在、この通貨はスワップに利用できません。"
       },
       "to": {
-        "title": "To"
+        "title": "送付先"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "お住まいの地域では、スワップを利用できません。",
+        "content": "この機能は近々追加予定ですので<br/>今しばらくお待ちください。"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "required": "KYC（本人確認）を完了する必要があります。",
+          "complete": "KYC（本人確認）を完了",
+          "update": "KYC（本人確認）を更新",
+          "rejected": "KYCが却下されたため、承認申請をやり直す必要があります。",
           "status": {
-            "pending": "KYC pending",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "pending": "KYC（本人確認）申請中",
+            "approved": "KYC（本人確認）承認済み",
+            "closed": "KYC（本人確認）却下"
           }
         }
       }
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "デスクトップ上のスワップ取引が、Ledger Live Mobileアプリと同期されていません。",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "過去のスワップがここに表示されます。",
+        "description": "まだスワップを行っていないか、Ledger Liveがリセットされています。"
       },
-      "export": "Export operations",
-      "exporting": "Exporting..."
+      "export": "エクスポート処理",
+      "exporting": "エクスポートしています..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "アプリケーションをアップデートするまで、KYC（本人確認）を完了できません。",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "disclaimer": "個人情報はKYC用にLedgerによって収集された後、WYREに転送されます。詳しくは以下をご確認ください：",
+        "policy": "プライバシーポリシー",
+        "title": "本人認証を行う",
+        "subtitle": "Wyreでのスワップ実行に必要な情報を、入力してください。",
+        "cta": "続行",
         "pending": {
-          "cta": "Continue",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
-          "info": "Identity verification: Submitted"
+          "cta": "続行",
+          "title": "個人情報が提出されました。",
+          "subtitle": "通常、審査が完了するまでに数分かかります。",
+          "link": "KYC（本人確認）についての詳細",
+          "info": "本人認証：提出済み"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "KYC（本人確認）をリセット",
+          "title": "KYC（本人確認）の申請却下",
+          "subtitle": "KYC（本人確認）用に提出したデータがWyreによって却下されました。",
+          "link": "KYC（本人確認）についての詳細"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
+          "firstName": "名前（名）",
+          "lastName": "名前（姓）",
+          "street1": "住所1",
+          "street2": "住所2",
+          "city": "市区町村",
+          "state": "都道府県",
+          "country": "国",
+          "postalCode": "郵便番号",
+          "dateOfBirth": "生年月日",
+          "firstNamePlaceholder": "名前（名）を入力",
+          "lastNamePlaceholder": "名前（姓）を入力",
           "street1Placeholder": "Eg. 13, Maple street",
           "street2Placeholder": "Eg. 13, Maple street",
           "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "postalCodePlaceholder": "5桁の郵便番号を入力",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstNameError": "名前（名）を入力して続行",
+          "lastNameError": "名前（姓）を入力して続行",
+          "street1Error": "住所を入力",
+          "cityError": "米国の州を入力",
+          "postalCodeError": "有効な米国の郵便番号を入力してください。",
+          "dateOfBirthError": "生年月日を入力",
+          "dateOfBirthValidationError": "有効な生年月日を入力してください"
         }
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "取引を確認",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "保留中の処理",
+        "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。",
+        "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+        "seeDetails": "詳細を表示"
       }
     }
   },
@@ -406,15 +407,15 @@
     "titleCrypto": "Swap {{currency}}",
     "whatIsSwap": "What is Swap",
     "paraswap": {
-      "cta": " Check it out",
-      "description": "Looking for Paraswap? It has been moved to the Discover tab."
+      "cta": " 確認する",
+      "description": "Paraswapをお探しですか？この項目は「Discover」タブに移動されました。"
     },
     "tabs": {
       "exchange": "Exchange",
       "history": "History"
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "デスクトップ上のスワップ取引が、Ledger Live Mobileアプリと同期されていません。",
       "empty": {
         "title": "Your previous swaps will appear here",
         "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
@@ -426,85 +427,85 @@
       "sorry": "Service temporarily unavailable, or not available in your country"
     },
     "missingApp": {
-      "title": "Please install the {{appName}} app on your device",
-      "subtitle": "Go to manager and install {{appName}} app to swap assets.",
+      "title": "お使いのデバイスに、{{appName}}アプリをインストールしてください。",
+      "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをインストールしてください。",
       "cta": "Go to manager"
     },
     "outdatedApp": {
-      "title": "Please update the {{appName}} app on your device",
-      "subtitle": "Go to manager and update {{appName}} app to swap assets.",
+      "title": "デバイス上の{{appName}}アプリをアップデートしてください。",
+      "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをアップデートしてください。",
       "cta": "Go to manager"
     },
     "providers": {
-      "title": "Choose a provider to swap crypto",
-      "learnMore": "What is Swap?",
-      "kycRequired": "KYC Required",
-      "cta": "Continue",
+      "title": "暗号資産のスワップに利用するプロバイダーを選択",
+      "learnMore": "スワップとは？",
+      "kycRequired": "必要なKYC（本人確認）",
+      "cta": "続行",
       "kyc": {
-        "notAvailable": "{{provider}} is unavailable in your location",
+        "notAvailable": "{{provider}} はお住まいの地域ではご利用いただけません。",
         "status": {
-          "required": "KYC Required",
-          "pending": "KYC Pending",
-          "approved": "KYC Approved!",
-          "closed": "KYC Rejected"
+          "required": "KYC（本人確認）が必要です。",
+          "pending": "KYC（本人確認）申請中",
+          "approved": "KYC（本人確認）が承認されました！",
+          "closed": "KYC（本人確認）却下"
         }
       }
     },
     "ip": {
-      "title": "Welcome to Swap",
-      "subtitle": "Exchange crypto assets directly from your Ledger device.",
-      "disclaimer": "By continuing, you accept that your location data will be shared with third party service providers in order for them to comply with their AML/KYC procedures."
+      "title": "スワップへようこそ",
+      "subtitle": "Ledgerデバイスから直接、暗号資産を取引できます。",
+      "disclaimer": "続行することで、AML/KYCに準拠するために位置情報がサードパーティ（第三者団体）のサービスプロバイダーと共有されることに、同意したことになります。"
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "アプリケーションをアップデートするまで、KYC（本人確認）を完了できません。",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
+        "disclaimer": "個人情報はKYC用にLedgerによって収集された後、WYREに転送されます。詳しくは以下をご確認ください：",
+        "policy": "プライバシーポリシー",
+        "title": "本人認証を行う",
+        "subtitle": "Wyreでのスワップ実行に必要な情報を、入力してください。",
         "pending": {
-          "cta": "Continue",
-          "title": "Pending approval",
-          "subtitle": "Your information was submitted for approval by Wyre.",
-          "link": "Learn more about KYC"
+          "cta": "続行",
+          "title": "承認申請中",
+          "subtitle": "個人情報がWyreに提出されました。",
+          "link": "KYC（本人確認）についての詳細"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "KYC（本人確認）をリセット",
+          "title": "KYC（本人確認）の申請却下",
+          "subtitle": "KYC（本人確認）用に提出したデータがWyreによって却下されました。",
+          "link": "KYC（本人確認）についての詳細"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
+          "firstName": "名前（名）",
+          "lastName": "名前（姓）",
+          "street1": "住所1",
+          "street2": "住所2",
+          "city": "市区町村",
+          "state": "都道府県",
+          "country": "国",
+          "postalCode": "郵便番号",
+          "dateOfBirth": "生年月日",
+          "firstNamePlaceholder": "名前（名）を入力",
+          "lastNamePlaceholder": "名前（姓）を入力",
           "street1Placeholder": "Eg. 13, Maple street",
           "street2Placeholder": "Eg. 13, Maple street",
           "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
+          "postalCodePlaceholder": "5桁の郵便番号を入力",
           "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstNameError": "名前（名）を入力して続行",
+          "lastNameError": "名前（姓）を入力して続行",
+          "street1Error": "住所を入力",
+          "cityError": "米国の州を入力",
+          "postalCodeError": "有効な米国の郵便番号を入力してください。",
+          "dateOfBirthError": "生年月日を入力",
+          "dateOfBirthValidationError": "有効な生年月日を入力してください"
         }
       }
     },
     "form": {
-      "resetKYC": "Reset your KYC and Update Live to Swap with Wyre",
-      "resetKYCCTA": "Reset KYC",
-      "amount": "Amount",
+      "resetKYC": "Wyreでスワップを行うには、KYC（本人確認）をリセットしてLiveアプリをアップデートする必要があります。",
+      "resetKYCCTA": "KYC（本人確認）をリセット",
+      "amount": "数量",
       "from": {
         "title": "From",
         "account": "Account",
@@ -519,14 +520,14 @@
         "addAccountCTA": "Add new account"
       },
       "tradeMethod": {
-        "title": "Rate",
-        "float": "Floating rate",
-        "floatUnavailable": "Floating rate not supported for this pair",
-        "fixed": "Fixed rate",
-        "fixedUnavailable": "Fixed rate not supported for this pair",
-        "floatDesc": "Your amount could change depending on the market conditions.",
-        "fixedDesc": "Your amount will stay the same even if the market changes. Updates every 60 seconds.",
-        "by": "Provided by"
+        "title": "レート",
+        "float": "変動レート",
+        "floatUnavailable": "このペアは、変動レートがご利用になれません。",
+        "fixed": "固定レート",
+        "fixedUnavailable": "このペアは、固定レートがご利用になれません。",
+        "floatDesc": "マーケットの状況によって金額が変動する可能性があります。",
+        "fixedDesc": "市場が変化しても金額は変わりません。60秒ごとに更新されます。",
+        "by": "提供："
       },
       "exchange": "Exchange",
       "helpCTA": "What is Swap?",
@@ -534,17 +535,17 @@
       "noAccounts": "You don't have {{currencyName}} accounts with balance",
       "noApp": "{{currencyName}} app not installed.",
       "outdatedApp": "{{currencyName}} app update available.",
-      "loadingRates": "Loading rates..."
+      "loadingRates": "レートを読み込んでいます..."
     },
     "unauthorizedRatesModal": {
-      "title": "Ledger Live needs an update",
-      "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
-      "cta": "Reset verification"
+      "title": "Ledger Liveのアップデートが必要です。",
+      "subtitle": "Wyreでスワップを実行するために、Ledger Liveを最新バージョンにアップデートし、本人確認を再度行ってください。",
+      "cta": "認証をリセット"
     },
     "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
-      "cta": "Confirm"
+      "title": "KYC（本人確認）を削除",
+      "subtitle": "KYC（本人確認）を削除すると、コンピューター上にローカルで保有しているすべてのトークンが消去されます。Ledgerのパートナーが提供するサービスにアクセスするには、KYC（本人確認）を再提出する必要があります。",
+      "cta": "確認"
     },
     "modal": {
       "title": "Swap",
@@ -563,26 +564,26 @@
           "details": {
             "provider": "Provider",
             "tradeMethod": {
-              "title": "Type",
-              "float": "Floating rate",
-              "fixed": "Fixed rate"
+              "title": "種類",
+              "float": "変動レート",
+              "fixed": "固定レート"
             },
-            "address": "Address"
+            "address": "アドレス"
           }
         },
         "device": {
           "title": "Device"
         },
         "dependencies": {
-          "title": "App checks"
+          "title": "アプリチェック"
         },
         "finished": {
           "title": "Pending",
-          "subtitle": "Swap broadcast successfully ",
+          "subtitle": "スワップが正常にブロードキャストされました。 ",
           "swap": "Your Swap ID:",
           "seeDetails": "See details",
-          "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-          "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}."
+          "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+          "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。"
         }
       }
     },
@@ -592,18 +593,18 @@
       "txid": "Swap ID",
       "status": "Status",
       "statusTooltips": {
-        "expired": "Please contact the swap provider with your swap ID for more information.",
+        "expired": "詳細については、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
         "refunded": "Please contact the swap provider with your swap ID for more information.",
-        "pending": "Please wait while the swap provider is processing the transaction.",
-        "onhold": "Please contact the swap provider with your swap ID to solve the situation.",
-        "finished": "Your swap was completed successfully."
+        "pending": "スワッププロバイダーがトランザクションを処理しています。しばらくお待ちください。",
+        "onhold": "問題を解決するには、スワップIDをご用意の上、スワッププロバイダーまでお問い合わせください。",
+        "finished": "スワップが正常に完了しました。"
       },
       "date": "Date",
       "from": "From",
-      "fromAddress": "Origin address",
-      "fromAddress_plural": "Origin addresses",
+      "fromAddress": "送信元アドレス",
+      "fromAddress_plural": "送信元アドレス",
       "to": "To",
-      "toProvider": "Provider address",
+      "toProvider": "プロバイダーのアドレス",
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
     }
@@ -624,7 +625,7 @@
           "list": {
             "item1": "Set up Bitcoin Core on a device with sufficient resources.",
             "item2": "Wait for your node to fully synchronize.",
-            "item3": "Make note of your node RPC credentials, IP address, and port number."
+            "item3": "ノードのRPC（遠隔手続き呼び出し）証明、IPアドレス、ポート番号を書き留めてください。"
           },
           "disclaimer": "Running a full node requires a computer with sufficient resources and a broadband connection without data restrictions."
         },
@@ -700,8 +701,8 @@
               "description": "Please verify that SatStack is running on this computer."
             },
             "satstack-outdated": {
-              "header": "Please upgrade SatStack",
-              "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+              "header": "SatStackをアップグレードしてください。",
+              "description": "お使いのSatStackが古いバージョンのため、バグや互換性の問題が含まれている可能性があります。"
             },
             "node-disconnected": {
               "header": "Could not reach full node",
@@ -725,7 +726,7 @@
             },
             "scanning": {
               "header": "Account scan in progress...",
-              "description": "You can add your accounts once the account scan is completed. Any Bitcoin accounts previously added through Ledger's explorers were removed."
+              "description": "アカウントのスキャン完了後、アカウントの追加が可能になります。Ledgerのエクスプローラーにより、過去に追加されたBitcoinアカウントはすべて削除されました。"
             }
           }
         },
@@ -780,8 +781,8 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
+      "header": "{{provider}}で暗号資産を購入する",
+      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;で暗号通貨を購入する",
       "tab": "Buy",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -789,8 +790,8 @@
       "addAccount": "Add account"
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
-      "title": "Sell crypto via <0>{{provider}}</0>",
+      "header": "{{provider}}で暗号資産を売却する",
+      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;経由で暗号資産を売却する",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
@@ -798,21 +799,21 @@
     },
     "history": {
       "tab": "History",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
+      "exporting": "エクスポートしています...",
+      "exportOperations": "エクスポート処理"
     }
   },
   "lend": {
     "title": "Lend crypto",
     "tabs": {
       "dashboard": "Dashboard",
-      "opened": "Opened loans",
+      "opened": "貸出中の資産",
       "closed": "Closed loans",
       "history": "History"
     },
     "assets": "Assets to lend",
     "active": "Approved accounts",
-    "lendAsset": "Lend",
+    "lendAsset": "貸暗号資産（レンディング）",
     "account": {
       "amountSupplied": "Amount deposited",
       "amountSuppliedTooltip": "Amount lent to the network",
@@ -842,9 +843,9 @@
         "cta": "Deposit"
       },
       "opened": {
-        "title": "Your opened loans will appear here",
-        "description": "You have not made any loans yet.",
-        "cta": "Deposit"
+        "title": "貸出中のローンがここに表示されます。",
+        "description": "まだ貸出を行っていません。",
+        "cta": "入金"
       },
       "history": {
         "title": "History",
@@ -855,11 +856,11 @@
     "headers": {
       "active": {
         "accounts": "Account",
-        "amountSupplied": "Open loan",
-        "amountSuppliedTooltip": "Amount deposited in the network",
-        "accruedInterests": "Interest balance",
-        "accruedInterestsTooltip": "Interest being earned on loans",
-        "status": "Account status",
+        "amountSupplied": "資産を貸し出す",
+        "amountSuppliedTooltip": "ネットワークへのデポジット額",
+        "accruedInterests": "利息残高",
+        "accruedInterestsTooltip": "貸出額に対する利息",
+        "status": "アカウントのステータス",
         "actions": "Actions"
       },
       "status": {
@@ -867,10 +868,10 @@
         "toSupplyTooltip": "You can now supply your assets"
       },
       "types": {
-        "enabling": "Enabling",
-        "inactive": "Inactive",
-        "supplying": "Supplying",
-        "earning": "Earning"
+        "enabling": "有効化中",
+        "inactive": "停止中",
+        "supplying": "供給中",
+        "earning": "収益"
       },
       "closed": {
         "assetLended": "Asset",
@@ -879,17 +880,17 @@
         "date": "Date"
       },
       "opened": {
-        "assetLended": "Asset",
-        "amount": "Amount",
-        "accruedInterest": "Accrued interest",
-        "date": "Date"
+        "assetLended": "資産",
+        "amount": "数量",
+        "accruedInterest": "未収利息",
+        "date": "日付"
       },
       "rates": {
         "allAssets": "Asset",
-        "totalBalance": "Asset balance",
-        "totalBalanceTooltip": "Amount available to lend",
-        "currentAPY": "Deposit APY",
-        "currentAPYTooltip": "Annual return rate earned on a continuously compounded deposit",
+        "totalBalance": "資産残高",
+        "totalBalanceTooltip": "貸出可能額",
+        "currentAPY": "預金APY（年利）",
+        "currentAPYTooltip": "継続的に運用した預金に対して得られる年間収益率",
         "actions": "Actions"
       }
     },
@@ -974,7 +975,7 @@
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
           "tooltip": {
-            "amountWithdrawn": "The amount withdrawn is displayed in {{ tokenName }}. {{ tokenName }} are ERC20 tokens that you earn after lending assets."
+            "amountWithdrawn": "引き出した額は{{ tokenName }}に表示されます。{{ tokenName }}は、資産のレンディングで獲得できるERC20トークンです。"
           }
         }
       }
@@ -1032,7 +1033,7 @@
       "cta": "Add account"
     },
     "emptyAccountDeposit": {
-      "title": "You don't have a {{ asset }} account.",
+      "title": "{{ asset }}アカウントを持っていません。",
       "description": "In order to deposit funds and lend crypto you need a {{ asset }} account. Please Receive funds on your Ethereum address.",
       "ctaBuy": "Buy {{ asset }}",
       "ctaReceive": "Receive {{ asset }}"
@@ -1048,11 +1049,11 @@
       "balance|desc": "Highest Balance"
     },
     "range": {
-      "day": "Day",
+      "day": "日",
       "week": "Week",
       "month": "Month",
       "year": "Year",
-      "all": "All"
+      "all": "すべて"
     },
     "optionsMenu": {
       "title": "Options",
@@ -1077,8 +1078,8 @@
       "desc": "Start here"
     },
     "status": {
-      "title": "Ledger Status",
-      "desc": "Check our system status"
+      "title": "Ledgerステータス",
+      "desc": "システムの状態を確認"
     },
     "helpCenter": {
       "title": "Ledger Support",
@@ -1114,8 +1115,8 @@
     "migrate": "Ledger Live accounts update available",
     "genericTerminatedCrypto": "{{coinName}} is not supported anymore",
     "valentine": {
-      "title": "Valentine’s day",
-      "description": "As a proof of our love, Ledger is reducing buy & sell fees on Ledger Live"
+      "title": "バレンタインデー",
+      "description": "Ledgerは日頃の感謝を込めて、Ledger Liveの売買手数料割引キャンペーンを開催します。"
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
@@ -1132,14 +1133,14 @@
       "description": "Purchase crypto assets through our partner and receive them directly in your Ledger account",
       "cta": "Buy now"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Securely manage your assets with a Nano X and Nano S at a discounted price",
-      "cta": "Buy back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
-      "title": "POLKADOT staking",
-      "description": "You can now stake, secure and manage your DOT directly in Ledger Live"
+      "title": "POLKADOTステーキング",
+      "description": "Ledger LiveでDOTをステーキング、保護、管理できるようになりました"
     },
     "sell": {
       "title": "sell crypto",
@@ -1163,37 +1164,39 @@
     }
   },
   "signmessage": {
-    "title": "Sign message",
+    "title": "メッセージに署名",
     "steps": {
       "summary": {
-        "title": "Summary"
+        "title": "概要"
       },
       "sign": {
-        "title": "Device"
+        "title": "デバイス"
       }
     }
   },
   "walletconnect": {
     "titleAccount": "Wallet Connect",
-    "disconnect": "Disconnect",
-    "disconnected": "Disconnected",
-    "connected": "Connected",
-    "connecting": "Connecting...",
+    "disconnect": "接続を切断",
+    "disconnected": "接続を切断済み",
+    "connected": "接続済み",
+    "connecting": "接続しています...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
-        "title": "Paste link",
-        "label": "Wallet Connect address",
-        "placeholder": "Paste Wallet Connect Link"
+        "title": "リンクを貼り付け",
+        "label": "Wallet Connectアドレス",
+        "placeholder": "Wallet Connectのリンクを貼り付ける"
       },
       "confirm": {
-        "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :"
+        "title": "接続",
+        "details": "ウォレットを通じて以下のイーサリアムアカウントに接続しようとしています：",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
-      "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
-      "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
+      "info": "デスクトップからdAppにアクセス可能になりました。",
+      "warning": "dAppsからの受取アドレスの共有は安全ではありません。資金を受け取るためのアドレスを共有するときは、必ずLedger Liveを使用してください。",
+      "disconnected": "dApp、WalletConnect、Ledger Live間の接続に問題があります。しばらく待つか、接続を再起動してください。"
     }
   },
   "dashboard": {
@@ -1211,7 +1214,7 @@
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "QRコードを表示"
   },
   "emptyState": {
     "dashboard": {
@@ -1305,7 +1308,7 @@
       "finish": "Confirmation"
     },
     "fullNodeReadyInfo": "Accounts will be added using your Bitcoin full node.",
-    "fullNodeConfigure": "Configure node",
+    "fullNodeConfigure": "ノードの構成",
     "tokensTip": "{{token}} ({{ticker}}) is an {{tokenType}} token. You can receive tokens directly on an {{currency}} account.",
     "accountToImportSubtitle_plural": "Add existing accounts",
     "selectAll": "Select all ({{count}})",
@@ -1318,11 +1321,11 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
-      "showAllAddressTypes": "Show all address types",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypes": "すべてのアドレスの種類を表示",
+      "showAllAddressTypesTooltip": "古いアドレス形式で{{family}}を受け取る必要な場合のみ、アドレスの種類を変更してください。"
     },
     "supportLinks": {
-      "segwit_or_native_segwit": "Segwit or Native Segwit?"
+      "segwit_or_native_segwit": "SegwitとNative Segwit？"
     },
     "cta": {
       "addMore": "Add more",
@@ -1349,11 +1352,11 @@
   "operationDetails": {
     "whatIsThis": "What is this operation?",
     "title": "Operation details",
-    "type": "Type",
-    "amount": "Amount",
+    "type": "種類",
+    "amount": "数量",
     "account": "Account",
     "date": "Date",
-    "currentValue": "Current value",
+    "currentValue": "現在の価格",
     "status": "Status",
     "confirmed": "Confirmed",
     "failed": "Failed",
@@ -1391,12 +1394,12 @@
       "memo": "Memo",
       "assetId": "Asset ID",
       "rewards": "Earned rewards",
-      "bondedAmount": "Bonded Amount",
-      "unbondedAmount": "Unbonded Amount",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
-      "palletMethod": "Method",
-      "transferAmount": "Transfer Amount",
-      "validatorsCount": "Validators ({{number}})"
+      "bondedAmount": "ボンド済み額",
+      "unbondedAmount": "ボンド解除済み額",
+      "withdrawUnbondedAmount": "引き出し数量",
+      "palletMethod": "方法",
+      "transferAmount": "送付額",
+      "validatorsCount": "バリデータ（{{number}}）"
     }
   },
   "operationList": {
@@ -1409,37 +1412,37 @@
     "loading": "Loading...",
     "connectAndUnlockDevice": "Connect and unlock your device",
     "unlockDevice": "Unlock your device",
-    "unlockDeviceAfterFirmwareUpdate": "Wait for the firmware to update and unlock your device with your PIN",
+    "unlockDeviceAfterFirmwareUpdate": "ファームウェアのアップデート完了を待ってから、デバイスのロックをPINコードで解除してください。",
     "quitApp": "Quit the application on your device",
-    "appNotInstalledTitle": "Missing required app",
-    "appNotInstalledTitle_plural": "Missing required apps",
-    "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
-    "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
+    "appNotInstalledTitle": "必要なアプリが揃っていません。",
+    "appNotInstalledTitle_plural": "必要なアプリが揃っていません。",
+    "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。マネージャーに移動して、デバイスにインストールしてください。",
+    "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。マネージャーに移動して、デバイスにインストールしてください",
     "openManager": "Open Manager",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
-    "installApp": "{{appName}} App installation",
-    "installAppDescription": "Please wait until the installation is finished",
-    "listApps": "Checking App dependencies",
-    "listAppsDescription": "Please wait while we make sure you have all the required apps",
+    "installApp": "{{appName}}アプリのインストール",
+    "installAppDescription": "インストールが完了するまでお待ちください。",
+    "listApps": "アプリの依存関係を確認しています。",
+    "listAppsDescription": "必要な全てのアプリを確認中です。しばらくお待ちください。",
     "swap": {
       "notice": "Verify the Swap details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Swap transaction",
       "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "amountReceivedFloat": "Amount to receive before service fees",
-      "fees": "Fees",
-      "provider": "Provider",
-      "payoutNetworkFees": "Payout fees",
-      "payoutNetworkFeesTooltip": "This amount will not be shown on your device"
+      "amountReceived": "受取額",
+      "amountReceivedFloat": "サービス手数料を含まない受け取り額",
+      "fees": "手数料",
+      "provider": "プロバイダー",
+      "payoutNetworkFees": "ペイアウト手数料",
+      "payoutNetworkFeesTooltip": "これはデバイスには表示されません。"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "送付額",
+      "amountReceived": "受取額",
+      "provider": "プロバイダー",
+      "fees": "ネットワーク手数料",
+      "sourceAccount": "送金元アカウント",
+      "targetAccount": "受取先アカウント"
     },
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
@@ -1489,10 +1492,10 @@
         "manageAccount": "Manage my accounts"
       },
       "updatable": {
-        "title": "Update available",
-        "title_plural": "Updates available",
-        "progressTitle": "{{number}} App update",
-        "progressTitle_plural": "{{number}} App updates",
+        "title": "アップデートが利用可能です。",
+        "title_plural": "アップデートが利用可能です。",
+        "progressTitle": "{{number}}件のアプリをアップデート",
+        "progressTitle_plural": "{{number}}件のアプリをアップデート",
         "progressWarning": "Do not quit Manager during update.",
         "progress": "Updating all..."
       },
@@ -1551,13 +1554,13 @@
       "update": "Firmware update",
       "updateBtn": "Update firmware",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "ファームウェアを最新の{{latestFirmware}}へアップデート可能です。",
+        "cta": "マネージャーを開く",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "デバイスのファームウェアのバージョンが古いため、アップデートできません。Ledgerサポートに連絡して、デバイスを交換してください。",
+          "cta": "サポートへのお問い合わせ"
         },
-        "cta2": "Update firmware"
+        "cta2": "ファームウェアをアップデート"
       },
       "latest": "Firmware version {{version}} is available",
       "contactSupport": "Contact support",
@@ -1570,7 +1573,7 @@
       "steps": {
         "downloadingUpdate": "Downloading update",
         "updateMCU": "Firmware update",
-        "updating": "Firmware update",
+        "updating": "ファームウェアをアップデート",
         "reset": "Prepare device",
         "osu": "Installing OSU...",
         "flash-mcu": "MCU updating...",
@@ -1581,9 +1584,9 @@
       "confirmIdentifier": "Verify the identifier",
       "confirmIdentifierText": "Verify that the identifier on your device is the same as the identifier below. Confirm and enter your PIN code if requested.",
       "identifier": "Identifier",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "準備",
+      "newFirmware": "新しいファームウェア{{version}}",
+      "confirmUpdate": "アップデートをデバイスで確定してください。",
       "mcuTitle": "Finalize update",
       "mcuFirst": "Disconnect the USB cable from your device",
       "mcuSecond": "Press the left button and hold it while you reconnect the USB cable until the <1><0>{{repairProcessing}}</0></1> screen appears",
@@ -1592,11 +1595,11 @@
       "mcuBlueFirst": "Press and hold the side button for 10 seconds to turn off the device. Release the button.",
       "mcuBlueSecond": "Press and hold the button for at least 5 seconds until the Boot Options are displayed. Tap Bootloader Mode",
       "successTitle": "Firmware updated",
-      "successTextApps": "Please re-install the apps on your device",
-      "successTextNoApps": "You can now install apps on your device",
-      "sucessCTAApps": "Re-install apps",
-      "SuccessCTANoApps": "Install apps",
-      "cancelReinstallCTA": "Install update",
+      "successTextApps": "デバイスにアプリを再インストールしてください。",
+      "successTextNoApps": "デバイスにアプリをインストールできるようになりました。",
+      "sucessCTAApps": "アプリを再インストール",
+      "SuccessCTANoApps": "アプリをインストール",
+      "cancelReinstallCTA": "アップデートをインストール",
       "resetSteps": {
         "first": "1. Reset your device",
         "connect": "Connect the {{deviceName}} to your computer using the USB cable.",
@@ -1726,9 +1729,9 @@
     "title": "Buy",
     "titleCrypto": "Buy {{currency}}",
     "buyCTA": "Buy {{currencyTicker}}",
-    "withoutDevice": "Continue without my device",
-    "connectWithoutDevice": "It's better to use your device for optimal security.",
-    "skipConnect": "Continue without my device"
+    "withoutDevice": "デバイスを使用せずに続行する",
+    "connectWithoutDevice": "最適なセキュリティのため、デバイスの使用をお勧めします。",
+    "skipConnect": "デバイスを使用せずに続行する"
   },
   "sell": {
     "title": "Sell",
@@ -1744,7 +1747,7 @@
         "parentAccount": "1. Select {{currencyName}} account",
         "token": "2. Select a token",
         "verifyTokenType": "Please verify that <0>{{token}}</0> is an <0>{{tokenType}}</0> token. Any other crypto asset sent to an {{currency}} account may be lost.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to an {{currency}} account. Any other crypto assets may be lost."
+        "warningTokenType": "{{currency}}アカウントには、&lt;0&gt;{{ticker}}&lt;/0&gt;または&lt;0&gt;{{tokenType}}&lt;/0&gt;トークンのみを送金してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
       },
       "connectDevice": {
         "title": "Device",
@@ -1770,9 +1773,9 @@
       "amount": {
         "title": "Amount",
         "banner": "Maximum spendable amount is",
-        "fees": "Fees",
-        "standard": "Standard",
-        "advanced": "Advanced"
+        "fees": "手数料",
+        "standard": "標準",
+        "advanced": "アドバンス"
       },
       "summary": {
         "title": "Summary"
@@ -1782,7 +1785,7 @@
       },
       "details": {
         "utxoLag": "This transaction may take long to verify and sign because the account has a significant number of coins.",
-        "subaccountsWarning": "You will need to refill this account with {{ currency }} in order to send the tokens of this account",
+        "subaccountsWarning": "このアカウントのトークンを送金するには、{{currencynbsp}}を補充する必要があります。",
         "from": "From",
         "to": "To",
         "selectAccountDebit": "Account to debit",
@@ -1825,11 +1828,20 @@
     }
   },
   "sign": {
-    "title": "Sign transaction"
+    "title": "トランザクションに署名する"
   },
   "releaseNotes": {
     "title": "Release notes",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "Asset",
@@ -1852,12 +1864,12 @@
     "account": {
       "subHeader": {
         "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
+        "moreInfo": "詳細はこちら",
+        "drawerTitle": "Elrondの統合",
+        "title": "Ledger Liveは、Elrond eGold（EGLD）トークン対応です。",
+        "description": "Ledger Liveで、eGold（EGLD）トークンを安全に保管・管理できるようになりました。",
+        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデータの報酬など、さまざまな用途に使用されます。",
+        "description3": "LedgerはElrondチームと積極的に協力し、ステーキングやESDT（Elrond Standard Digital Token）のネイティブサポートなどの機能を追加していく予定です。",
         "website": "The Internet Scale Blockchain"
       }
     }
@@ -2188,258 +2200,258 @@
     }
   },
   "polkadot": {
-    "lockedBalance": "Bonded",
-    "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
-    "unlockingBalance": "Unbonding",
-    "unlockingTooltip": "Unbonding assets stay locked for 28 days before they can be withdrawn.",
-    "unlockedBalance": "Unbonded",
-    "unlockedTooltip": "Unbonded assets can now be moved using the withdraw operation.",
-    "networkFees": "Network fees are automatically set by the Polkadot consensus, you won't be able to review them on your device",
-    "bondedBalanceBelowMinimum": "Your bonded balance is below the current minimum of {{minimumBondBalance}}. Your nominations are at risk of being removed.",
+    "lockedBalance": "ボンド中",
+    "lockedTooltip": "報酬を得るには、選出されたバリデータに資産をボンド（預け入れ）する必要があります。",
+    "unlockingBalance": "ボンド解除中",
+    "unlockingTooltip": "ボンド解除中の資産は、引き出せるようになるまで28日間ロックされます。",
+    "unlockedBalance": "ボンド解除済み",
+    "unlockedTooltip": "ボンド解除済み資産が、引き出し可能になりました。",
+    "networkFees": "ネットワーク手数料は、Polkadotのコンセンサスアルゴリズムによって自動的に設定されるため、デバイス上で確認することはできません",
+    "bondedBalanceBelowMinimum": "ボンド残高が、現在の下限額{{minimumBondBalance}}を下回っています。ノミネートが解除されてしまう可能性があります。",
     "nomination": {
       "emptyState": {
-        "description": "You can earn rewards by bonding assets and then nominating your validator(s).",
-        "info": "How nominations work"
+        "description": "資産をボンド（預け入れ）後、バリデータをノミネートすることで報酬を獲得できます。",
+        "info": "ノミネートの仕組み"
       },
-      "header": "Nominations",
-      "nominate": "Nominate",
-      "setController": "Change Controller",
-      "chill": "Clear nominations",
-      "totalStake": "Total Stake",
-      "amount": "Bonded Amount",
-      "commission": "Commission",
-      "active": "Active",
-      "activeTooltip": "This validator is elected and is collecting rewards on your bonded assets.",
-      "inactive": "Inactive",
-      "inactiveTooltip": "This validator is elected but is not collecting rewards on your bonded assets.",
-      "waiting": "Unelected",
-      "waitingTooltip": "This validator is not elected, therefore is not collecting rewards.",
-      "notValidator": "Not a validator",
-      "notValidatorTooltip": "This address is no longer a validator",
-      "elected": "Elected",
-      "nominatorsCount": "{{nominatorsCount}} nominators",
-      "nominatorsTooltip": "This validator is currently elected by {{count}} nominators.",
-      "oversubscribed": "Oversubscribed ({{nominatorsCount}})",
-      "oversubscribedTooltip": "Only the top {{maxNominatorRewardedPerValidator}} nominators with the highest bonded amount earn rewards",
-      "hasPendingBondOperation": "A bond operation is still pending confirmation",
-      "electionOpen": "The election of new validators is currently ongoing. As such, staking operations are not available for 15 minutes at most.",
-      "electionOpenTooltip": "This operation is disabled during the election of validators",
-      "externalControllerTooltip": "This account is controlled by another account.",
-      "externalControllerUnsupported": "<0>This stash account is controlled by a separate account whose address is <0>{{controllerAddress}}</0>.</0><1>To stake with Ledger Live, you must set this stash account as its own controller.</1>",
-      "externalStashTooltip": "This account controls another account.",
-      "externalStashUnsupported": "<0>This account is the controller of a separate stash account whose address is <0>{{stashAddress}}</0>.</0><1>To stake with Ledger Live, you must set your stash account as its own controller.</1>",
-      "showInactiveNominations": "Show all nominations ({{count}})",
-      "hideInactiveNominations": "Show active nominations only",
-      "noActiveNominations": "There are no active nominations.",
-      "showAllUnlockings": "Show all unbonding amounts ({{count}})",
-      "hideAllUnlockings": "Hide unbonding amounts"
+      "header": "ノミネーション",
+      "nominate": "ノミネート",
+      "setController": "コントローラーを変更",
+      "chill": "ノミネートを解除する",
+      "totalStake": "合計ステーキング量",
+      "amount": "ボンド済み額",
+      "commission": "コミッション",
+      "active": "アクティブ",
+      "activeTooltip": "このバリデータは選出済みで、ボンド済み資産に対する報酬を獲得中です。",
+      "inactive": "停止中",
+      "inactiveTooltip": "このバリデータは選出済みですが、ボンドされた資産に対する報酬を獲得していません。",
+      "waiting": "未選出",
+      "waitingTooltip": "このバリデータは選出されていないため、報酬を獲得していません。",
+      "notValidator": "バリデータではありません。",
+      "notValidatorTooltip": "このアドレスはバリデータではありません。",
+      "elected": "選出済み",
+      "nominatorsCount": "{{nominatorsCount}}名のノミネーター",
+      "nominatorsTooltip": "現在、このバリデータは{{count}}名のノミネーターにより選出されています。",
+      "oversubscribed": "ノミネーター超過（{{nominatorsCount}}）名",
+      "oversubscribedTooltip": "ステーキング量上位{{maxNominatorRewardedPerValidator}}名のノミネーターだけが報酬を獲得できます。",
+      "hasPendingBondOperation": "ボンドの承認がまだ完了していません。",
+      "electionOpen": "現在、新しいバリデータを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
+      "electionOpenTooltip": "バリデータ選出中の操作は、無効となります。",
+      "externalControllerTooltip": "このアカウントは、別のアカウントに管理されています。",
+      "externalControllerUnsupported": "&lt;0&gt;このStashアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のアカウントによってコントロールされています。&lt;1&gt;Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalStashTooltip": "このアカウントは、別のアカウントを管理しています。",
+      "externalStashUnsupported": "&lt;0&gt;このアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のStashアカウントのコントローラーです。&lt;1&gt;Ledger Liveでステーキングするには、Stashアカウントを独自のコントローラーとして設定する必要があります。",
+      "showInactiveNominations": "すべてのノミネートを表示（{{count}}）",
+      "hideInactiveNominations": "アクティブなノミネートのみを表示",
+      "noActiveNominations": "アクティブなノミネートはありません。",
+      "showAllUnlockings": "ボンド解除中の数量をすべて表示（{{count}}）",
+      "hideAllUnlockings": "ボンド解除中の数量を非表示"
     },
     "unlockings": {
-      "header": "Unbonding",
-      "headerTooltip": "Available after the 28-day unbonding period",
-      "withdrawUnbonded": "Withdraw ({{amount}})",
-      "withdrawTooltip": "The unbonded amount will be credited to your available balance.",
-      "noUnlockedWarning": "No unbonded balance to withdraw yet.",
-      "rebond": "Rebond",
-      "unbonded": "Unbonded"
+      "header": "ボンド解除中",
+      "headerTooltip": "ボンド解除から28日後に引き出し可能",
+      "withdrawUnbonded": "（{{amount}}）を引き出す",
+      "withdrawTooltip": "ボンド解除された資産は、利用可能残高に加算されます。",
+      "noUnlockedWarning": "引出し可能なボンド解除済み残高はまだありません。",
+      "rebond": "再ボンド",
+      "unbonded": "ボンド解除済み"
     },
     "manage": {
-      "title": "Manage assets",
+      "title": "資産管理",
       "bond": {
-        "title": "Bond",
-        "description": "To earn rewards, first bond an amount. Then you must nominate your validator(s)."
+        "title": "ボンド（預入れ）",
+        "description": "報酬を得るには、まず任意の数量をボンドします。次に、バリデータのノミネートを行う必要があります。"
       },
       "unbond": {
-        "title": "Unbond",
-        "description": "To make a bonded amount available again, first you need to unbond it. You can withdraw it after the 28-day unbonding period."
+        "title": "ボンド解除",
+        "description": "ボンド済み資産を再び引き出せるようにするには、ボンドを解除する必要があります。ボンドの解除が終了する28日後に、引き出せるようになります。"
       },
       "withdrawUnbonded": {
-        "title": "Withdraw",
-        "description": "To retrieve an unbonded amount back to the available balance, you need to withdraw it manually."
+        "title": "引き出し",
+        "description": "ボンド解除済み資産を利用可能残高に戻すには、手動で引き出す必要があります。"
       },
       "nominate": {
-        "title": "Nominate",
-        "description": "Choose up to 16 validators. Ensure nominations are Active to earn rewards."
+        "title": "ノミネート",
+        "description": "最大16人のバリデータを選択できます。報酬を獲得するには、ノミネートがアクティブであることを確認する必要があります。"
       },
       "chill": {
-        "title": "Clear nominations",
-        "description": "Remove all nominations. You will stop earning rewards. Your bonded amount remains bonded."
+        "title": "ノミネートを解除する",
+        "description": "ノミネートをすべて削除します。報酬を獲得することはできなくなります。資産のボンドは解除されません。"
       }
     },
     "nominate": {
-      "title": "Nominate",
+      "title": "ノミネート",
       "steps": {
         "validators": {
-          "title": "Validators",
-          "notValidatorsRemoved": "You have nominated {{count}} addresses who are no longer validators. They will automatically be removed from your nominate transaction.",
-          "maybeChill": "Clear nominations instead"
+          "title": "バリデータ",
+          "notValidatorsRemoved": "現在バリデータではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
+          "maybeChill": "代わりにノミネートを解除する"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "承認",
+          "label": "承認",
           "success": {
-            "title": "You have successfully nominated validators",
-            "text": "You will start earning rewards when your assets are bonded to your elected validator(s).",
-            "cta": "View details"
+            "title": "バリデータが正常にノミネートされました。",
+            "text": "選んだバリデータに資産がボンド（預入れ）されると、報酬の獲得が開始します。",
+            "cta": "詳細を表示"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "トランザクションをブロードキャスト中…"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "bond": {
-      "title": "Bond assets",
+      "title": "資産をボンド（預入れ）",
       "rewardDestination": {
-        "label": "Rewards Destination",
-        "stash": "Available Balance",
-        "stashDescription": "Rewards are credited to your available balance.",
-        "staked": "Bonded Balance",
-        "stakedDescription": "Rewards are credited to your bonded balance for compound earning.",
-        "optionTitle": "Note",
-        "optionDescription": "Once set, the option is fixed for the lifetime of this bond. If you change your mind, please read the article down below"
+        "label": "報酬の受取先",
+        "stash": "利用可能残高",
+        "stashDescription": "報酬は利用可能残高に加算されます。",
+        "staked": "ボンド残高",
+        "stakedDescription": "獲得した報酬は複利獲得のために、ボンド残高に加算されます。",
+        "optionTitle": "注意",
+        "optionDescription": "一度設定すると、このオプションはこのボンドが解除されるまで継続します。もし気が変わった場合は、以下の記事を参照してください"
       },
       "steps": {
         "starter": {
-          "description": "You may earn rewards by bonding your assets and then nominate your validators.",
+          "description": "資産をボンド（預入れ）した後、バリデータをノミネートすることで報酬を獲得できます。",
           "bullet": [
-            "You keep ownership of bonded assets",
-            "Nominate using your Ledger device",
-            "Assets will be available again, 28 days after unbonding"
+            "ボンドされた資産の所有者は変わりません。",
+            "Ledgerデバイスを使ってノミネートする。",
+            "ボンド解除28日後に、資産を再び引き出せるようになります。"
           ],
-          "help": "How nominations work",
-          "warning": "Choose your validator wisely: Part of your bonded assets may be irrevocably lost if the validator does not behave appropriately."
+          "help": "ノミネートの仕組み",
+          "warning": "バリデータは慎重に選んでください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
         },
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to bond",
-          "availableLabel": "Available",
-          "maxLabel": "Max",
-          "info": "Bonded assets can be unbonded at any time, but unbonding takes 28 days.",
-          "learnMore": "Learn More"
+          "title": "数量",
+          "amountLabel": "ボンドする数量",
+          "availableLabel": "利用可能",
+          "maxLabel": "最大",
+          "info": "ボンドされた資産はいつでも解除できますが、ボンド解除には28日かかります。",
+          "learnMore": "詳細はこちら"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
           "tooltip": {
-            "title": "Transaction awaiting confirmation",
-            "desc": "You have to wait a moment before nominating"
+            "title": "承認待ちトランザクション",
+            "desc": "ノミネート実行まで、しばらくお待ちください。"
           },
-          "title": "Confirmation",
+          "title": "承認",
           "success": {
-            "title": "Assets successfully bonded",
-            "text": "You can nominate validators once the network has confirmed the transaction.",
-            "textNominate": "You will be able to nominate validators once the network has confirmed your transaction.",
-            "nominate": "Nominate",
-            "later": "Nominate later"
+            "title": "資産が正常にボンドされました。",
+            "text": "ネットワークによるトランザクションの承認後、バリデータをノミネートすることができます。",
+            "textNominate": "ネットワークによるトランザクションの承認後、バリデータをノミネートできるようになります。",
+            "nominate": "ノミネート",
+            "later": "後でノミネートする。"
           },
           "pending": {
-            "title": "Bonding your assets..."
+            "title": "資産のボンド中..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "rebond": {
-      "title": "Rebond assets",
+      "title": "資産を再ボンドする",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to rebond",
-          "availableLabel": "Unbonding",
-          "maxLabel": "Max",
-          "info": "Rebonded assets are immediately added to the bonded amount.",
-          "learnMore": "Learn More"
+          "title": "数量",
+          "amountLabel": "再ボンド額",
+          "availableLabel": "ボンド解除中",
+          "maxLabel": "最大",
+          "info": "再ボンドした資産は、すぐにボンド額に追加されます。",
+          "learnMore": "詳細はこちら"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "承認",
+          "label": "承認",
           "success": {
-            "title": "Assets successfully rebonded",
-            "text": "Your account balance will update once the network has confirmed the transaction.",
-            "cta": "View details"
+            "title": "資産が正常に再ボンドされました。",
+            "text": "ネットワークによるトランザクションの承認後、アカウントの残高が更新されます。",
+            "cta": "詳細を表示"
           },
           "pending": {
-            "title": "Rebonding your assets..."
+            "title": "資産の再ボンド中..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "unbond": {
-      "title": "Unbond assets",
+      "title": "資産のボンドを解除",
       "steps": {
         "amount": {
-          "title": "Amount",
-          "amountLabel": "Amount to unbond",
-          "availableLabel": "Bonded",
-          "maxLabel": "Max",
-          "info": "Unbonded assets can be withdrawn after the 28-day unbonding period.",
-          "learnMore": "Learn More"
+          "title": "数量",
+          "amountLabel": "ボンドを解除する数量",
+          "availableLabel": "ボンド中",
+          "maxLabel": "最大",
+          "info": "ボンドを解除した資産は、28日後に引き出せるようになります。",
+          "learnMore": "詳細はこちら"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "承認",
+          "label": "承認",
           "success": {
-            "title": "Unbond transaction sent successfully",
-            "text": "Unbonded assets can be withdrawn in 28 days.",
-            "cta": "View details"
+            "title": "ボンド解除のトランザクションが正常に送信されました。",
+            "text": "ボンドを解除した資産は、28日後に引き出せるようになります。",
+            "cta": "詳細を表示"
           },
           "pending": {
-            "title": "Unbonding your assets..."
+            "title": "資産のボンド解除中..."
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     },
     "simpleOperation": {
       "modes": {
         "withdrawUnbonded": {
-          "title": "Withdraw",
-          "description": "After the 28-day unbonding period you can withdraw unbonded assets.",
-          "info": "You can then withdraw unbonded assets to your available balance."
+          "title": "引き出し",
+          "description": "ボンドを解除した資産は、28日後に引き出せるようになります。",
+          "info": "その後、ボンド解除済み資産を利用可能残高に引き出すことができます。"
         },
         "chill": {
-          "title": "Clear nominations",
-          "description": "Clears all nominations and stops earning rewards.",
-          "info": "Bonded assets will remain bonded. If you unbond them, they will be available after 28 days."
+          "title": "ノミネートを解除する",
+          "description": "すべてのノミネートを解除し、報酬の獲得を停止します。",
+          "info": "ボンド資産は解除されません。ボンドを解除した場合は、28日後に引き出し可能になります。"
         },
         "setController": {
-          "title": "Change Controller",
-          "description": "Set this Ledger account as its own controller",
-          "info": "Ledger Live doesn't support operations on separate stash and controller accounts."
+          "title": "コントローラーを変更",
+          "description": "このLedgerアカウントを、独自のコントローラーとして設定する。",
+          "info": "Ledger Liveは、別々のスタッシュとコントローラーアカウントでの操作をサポートしていません。"
         }
       },
       "steps": {
         "info": {
-          "title": "Info"
+          "title": "情報"
         },
         "connectDevice": {
-          "title": "Device"
+          "title": "デバイス"
         },
         "confirmation": {
-          "title": "Confirmation",
-          "label": "Confirmation",
+          "title": "承認",
+          "label": "承認",
           "success": {
-            "title": "Transaction sent successfully",
-            "text": "You will see your operation in history soon.",
-            "cta": "View details"
+            "title": "トランザクションが正常に送信されました。",
+            "text": "操作は、すぐに履歴で確認できます。",
+            "cta": "詳細を表示"
           },
           "pending": {
-            "title": "Broadcasting transaction..."
+            "title": "トランザクションをブロードキャスト中…"
           },
-          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
         }
       }
     }
@@ -2549,7 +2561,7 @@
       "about": "About",
       "experimental": "Experimental features",
       "accounts": "Accounts",
-      "developer": "Developer"
+      "developer": "デベロッパー"
     },
     "export": {
       "accounts": {
@@ -2565,9 +2577,9 @@
         "button": "Done",
         "title": "Scan to export to mobile",
         "listTitle": "On the Ledger Live mobile app:",
-        "step1": "Tap the <highlight><icon>+</icon></highlight> button in <highlight>accounts</highlight>",
-        "step2": "Tap <highlight>Import desktop accounts</highlight>",
-        "step3": "Scan the <highlight>LiveQR code</highlight> until the loader hits 100%"
+        "step1": "<highlight><icon>+</icon></highlight>ボタンをタップ（「<highlight>アカウント</highlight>」内）",
+        "step2": "<highlight>デスクトップアカウントのインポート</highlight>をタップ",
+        "step3": "ローダーが100%になるまで<highlight>LiveQRコード</highlight>をスキャンする"
       }
     },
     "display": {
@@ -2575,7 +2587,7 @@
       "languageDesc": "Set the language displayed in Ledger Live.",
       "theme": "Theme",
       "themeDesc": "Select the theme.",
-      "counterValue": "Preferred currency",
+      "counterValue": "優先する通貨",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Region",
       "regionDesc": "Choose your region to set the time zone of Ledger Live.",
@@ -2586,25 +2598,25 @@
     },
     "developer": {
       "toast": {
-        "title": "You are now a developer !",
-        "text": "Welcome to wonderland"
+        "title": "デベロッパーになりました！",
+        "text": "ワンダーランドへようこそ"
       },
-      "debugApps": "Allow debug apps",
-      "debugAppsDesc": "Display and allow opening debug tagged platform apps.",
-      "experimentalApps": "Allow experimental apps",
-      "experimentalAppsDesc": "Display and allow opening experimental tagged platform apps.",
-      "catalogServer": "Set the catalog provider",
-      "catalogServerDesc": "Switch between multiple platform apps sources",
-      "enablePlatformDevTools": "Enable platform dev tools",
-      "enablePlatformDevToolsDesc": "Enable opening platform apps dev tools window",
-      "addLocalApp": "Add a local app",
-      "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
-      "addLocalAppButton": "Browse",
-      "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "debugApps": "デバッグアプリを許可する",
+      "debugAppsDesc": "デバッグとしてタグ付けされたプラットフォームアプリの表示と実行を許可します。",
+      "experimentalApps": "実験的なアプリを許可する",
+      "experimentalAppsDesc": "実験的としてタグ付けされたプラットフォームアプリの表示と実行を許可する",
+      "catalogServer": "カタログプロバイダーの設定",
+      "catalogServerDesc": "複数のプラットフォームアプリのソースを切り替える",
+      "enablePlatformDevTools": "プラットフォーム開発ツールの有効化",
+      "enablePlatformDevToolsDesc": "プラットフォームアプリの開発ツールウィンドウ表示を有効化",
+      "addLocalApp": "ローカルアプリを追加",
+      "addLocalAppDesc": "ローカルファイルを参照し、ローカルのマニフェストファイルを使用してローカルアプリを追加する",
+      "addLocalAppButton": "画面をチェックする",
+      "runLocalAppDeleteButton": "削除",
+      "runLocalAppOpenButton": "開く"
     },
     "currencies": {
-      "selectPlaceholder": "Select crypto asset",
+      "selectPlaceholder": "暗号資産を選択",
       "desc": "Select a crypto asset to edit its settings.",
       "placeholder": "No settings for this asset",
       "confirmationsNb": "Number of confirmations",
@@ -2619,8 +2631,8 @@
       "softResetTitle": "Clear cache",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetKYC": "KYC（本人確認）データをリセット",
+      "resetKYCDesc": "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用されるKYC（本人確認）データをすべて消去します。",
       "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
       "hardReset": "Reset",
@@ -2646,43 +2658,43 @@
       "disclaimer": "These are experimental features we provide on an \"as is\" basis for our tech savvy community to test. They may change, break or be removed at any time. By enabling them, you agree to use them at your own risk.",
       "features": {
         "apiTrongridProxy": {
-          "title": "use TronGrid.io",
-          "description": "Use trongrid directly without ledger proxy"
+          "title": "TronGrid.ioを使用",
+          "description": "LedgerプロキシなしでTronGridを直接を使用する"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "title": "実験的なJSの実装",
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
-          "title": "Translation testing",
-          "description": "Adds unreleased languages to the language list in the general settings tab."
+          "title": "翻訳テスト",
+          "description": "未リリースの言語を、一般設定タブの言語リストに追加します。"
         },
         "managerDevMode": {
-          "title": "Developer mode",
-          "description": "Show developer and testnet apps in the Manager."
+          "title": "デベロッパーモード",
+          "description": "開発者用アプリとテストネットアプリをマネージャーに表示します。"
         },
         "scanForInvalidPaths": {
-          "title": "Extended account search",
-          "description": "Scan for accounts with erroneous derivation paths. Please send potentially found assets to a regular account."
+          "title": "拡張アカウント検索",
+          "description": "誤った派生パスを持つアカウントをスキャンする検出された資産は、通常のアカウントに送金してください。"
         },
         "experimentalExplorers": {
-          "title": "Experimental Explorers API",
-          "description": "Try an upcoming version of Ledger's blockchain explorers. Changing this setting may affect the account balance and synchronization as well as the send feature.\n(<0></0>)"
+          "title": "実験的なエクスプローラーAPI",
+          "description": "Ledgerのブロックチェーンエクスプローラーの、新バージョンをお試しいただけます。この設定を変更すると、アカウントの残高と同期、および送金機能に影響を与える可能性があります。\n(&lt;0&gt;&lt;/0&gt;)"
         },
         "keychainObservableRange": {
-          "title": "Custom gap limit",
-          "description": "Custom gap limit for all accounts. Increasing this value above its default value (20) scans more unused public addresses for coins. Advanced users only, this may break compatibility when restoring your accounts."
+          "title": "ギャップリミットを設定",
+          "description": "全てのアカウントのギャップリミットを設定。この値をデフォルト（20）より大きくすると、さらに多くの未使用パブリックアドレスがスキャンされるようになります。ただし、アカウントを復元する際に互換性が失われる可能性があるため、詳しい知識のあるユーザー以外はこの値を変更しないでください。"
         },
         "forceProvider": {
-          "title": "Manager provider",
-          "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+          "title": "プロバイダー管理",
+          "description": "プロバイダー管理でアプリプロバイダーを変更すると、Ledgerデバイスにアプリをインストールまたはアンインストールできなくなる場合があります。"
         }
       }
     },
     "hardResetModal": {
       "title": "Reset Ledger Live",
       "desc": "Reset Ledger Live to erase all settings and accounts on your computer. You can then choose your password and add your accounts back with your Ledger device. The private keys giving access to your crypto assets remain secure on your Ledger device and are backed up by your recovery phrase.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
       "title": "Clear cache",
@@ -2699,7 +2711,7 @@
     "removeAccountModal": {
       "title": "Remove account",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
     },
     "openUserDataDirectory": {
       "title": "View user data",
@@ -2709,7 +2721,7 @@
     "repairDevice": {
       "title": "Repair your Ledger device",
       "descSettings": "Use this to restore your Ledger device if it froze during a firmware update.",
-      "desc": "For Ledger Nano S users, please select the state displayed on your device. For Nano X and Blue users kindly refer to the help center.",
+      "desc": "Ledger Nano Sをお使いの場合は、デバイスの状態を選択してください。Nano XまたはBlueをお使いの場合は、ヘルプセンターをご参照ください。",
       "button": "Repair"
     },
     "exportLogs": {
@@ -2789,7 +2801,7 @@
     "noAccounts": "No accounts to export",
     "selectedAccounts": "Accounts to be included",
     "selectedAccounts_plural": "Accounts to be included ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "エクスポートに含まれるカウンターバリューは、情報提供のみを目的としています。これらのデータは、サービスプロバイダーであるKaikoが提供する評価方法に基づき、トランザクション時およびエクスポート時の資産価値を推定したものにすぎないため、会計、税務、規制遵守、および法務上の目的にこれらのデータを使用しないでください。"
   },
   "language": {
     "system": "Use system language",
@@ -2798,7 +2810,8 @@
       "fr": "French",
       "ru": "Russian",
       "es": "Spanish",
-      "zh": "Chinese"
+      "zh": "Chinese",
+      "de": "German"
     }
   },
   "theme": {
@@ -2809,39 +2822,39 @@
   },
   "toastOverlay": {
     "toastType": {
-      "announcement": "News",
-      "operation": "Operation",
-      "achievement": "Achievement Unlocked"
+      "announcement": "最新情報",
+      "operation": "オペレーション",
+      "achievement": "目標達成"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "{{count}}件の未読通知があります。",
+      "cta": "詳細を表示"
     }
   },
   "informationCenter": {
-    "tooltip": "Information center",
-    "ongoingIncidentsTooltip": "There is {{count}} ongoing incident",
-    "ongoingIncidentsTooltip_plural": "There are {{count}} ongoing incidents",
+    "tooltip": "お知らせ・最新情報",
+    "ongoingIncidentsTooltip": "進行中のインシデントが{{count}}件あります。",
+    "ongoingIncidentsTooltip_plural": "進行中のインシデントが{{count}}件あります。",
     "tabs": {
-      "announcements": "News",
-      "announcementsUnseen": "News ({{unseenCount}})",
-      "serviceStatus": "Status",
-      "serviceStatusIncidentsOngoing": "Status ({{incidentCount}})"
+      "announcements": "最新情報",
+      "announcementsUnseen": "最新情報（{{unseenCount}}）",
+      "serviceStatus": "ステータス",
+      "serviceStatusIncidentsOngoing": "ステータス（{{incidentCount}}）"
     },
     "serviceStatus": {
       "statusOk": {
-        "title": "Ledger Live is up and running",
-        "description": "Having trouble ? Go on our <0>help page</0>"
+        "title": "Ledger Liveは正常に作動しています。",
+        "description": "お困りですか？&lt;0&gt;ヘルプページ&lt;/0&gt;を参照してください。"
       },
       "statusNotOk": {
-        "title": "Ledger Live is experiencing issues",
-        "learnMore": "Learn more"
+        "title": "Ledger Liveで問題が発生しています。",
+        "learnMore": "詳細はこちら"
       }
     },
     "announcement": {
       "emptyState": {
-        "title": "No news for the moment",
-        "desc": "You will find here all the news related to Ledger and Ledger Live"
+        "title": "最新情報はありません",
+        "desc": "ここでは、LedgerとLedger Liveに関連するすべての最新情報をご覧いただけます。"
       }
     }
   },
@@ -2851,14 +2864,14 @@
         "title": "Secure your PIN code",
         "intro": "During the setup process you choose a PIN code.",
         "rules": {
-          "1": "<0>Always</0> choose a PIN code yourself.",
-          "2": "<0>Always</0> enter your PIN code out of sight.",
+          "1": "&lt;0&gt;必ず&lt;/0&gt;本人がPINコードを設定してください。",
+          "2": "&lt;0&gt;必ず&lt;/0&gt;誰にも見られないようにPINコードを入力してください。",
           "3": "You can change your PIN code if needed.",
           "4": "Three wrong PIN code entries in a row will reset the device.",
-          "5": "<0>Never</0> use an easy PIN code like 0000, 123456, or 55555555.",
-          "6": "<0>Never</0> share your PIN code with someone else. Not even with Ledger.",
-          "7": "<0>Never</0> use a PIN code you did not choose yourself.",
-          "8": "<0>Never</0> store your PIN code on a computer or phone."
+          "5": "&lt;0&gt;絶対に&lt;/0&gt;0000、123456、55555555などの単純なPINコードを使用しないでください。",
+          "6": "&lt;0&gt;絶対に&lt;/0&gt;PINコードを誰かと共有しないでください。Ledgerとも共有してはいけません。",
+          "7": "&lt;0&gt;絶対に&lt;/0&gt;⾃分が設定していないPINコードを使⽤しないでください。",
+          "8": "&lt;0&gt;絶対に&lt;/0&gt;PINコードをコンピューターやスマートフォン上に保存しないでください。"
         }
       },
       "recoverySeed": {
@@ -2877,9 +2890,9 @@
       "whereToHide": {
         "title": "Where should I keep my recovery phrase?",
         "points": {
-          "1": "<0>NEVER</0> enter it on a computer, smartphone or any other device. Don't take a picture of it.",
-          "2": "<0>NEVER</0> share your 24 words with anyone.",
-          "3": "<0>ALWAYS</0> store it in a secure place, out of sight.",
+          "1": "&lt;0&gt;絶対に&lt;/0&gt;コンピューターやスマートフォンなどのデバイス上に入力しないでください。写真に撮らないでください。",
+          "2": "&lt;0&gt;絶対に&lt;/0&gt;24単語を誰かと共有しないでください。",
+          "3": "&lt;0&gt;必ず&lt;/0&gt;他の人に見られない安全な場所に保管してください。",
           "4": "Ledger will never ask for your recovery phrase.",
           "5": "If any person or application asks for it, assume it is a scam!"
         }
@@ -2887,11 +2900,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "サポートへのお問い合わせ",
+        "continueCTA": "続行",
+        "title": "箱の中身を確認してください。",
+        "description": "{{device}}にPINコードまたはリカバリーフレーズが付属していた場合、そのデバイスは安全ではありません。絶対に使用せず、Ledgerサポートに連絡してください。",
+        "alert": "デバイスのセットアップ時に表示されたリカバリーフレーズのみを使用してください。"
       }
     },
     "alerts": {
@@ -2923,25 +2936,25 @@
       },
       "selectUseCase": {
         "greetings": "Hello!",
-        "hasNoRecovery": "First time using your {{deviceName}}?",
+        "hasNoRecovery": "{{deviceName}}を初めてお使いですか？",
         "hasRecovery": "Already have a recovery phrase?",
         "separator": "or",
-        "switchDevice": "Switch device",
+        "switchDevice": "デバイスの切り替え",
         "options": {
           "1": {
             "heading": "First use",
-            "title": "Set up a new {{deviceName}}",
+            "title": "新しい{{deviceName}}をセットアップ",
             "description": "Let’s start and set up your device!"
           },
           "2": {
             "heading": "Connect device",
-            "title": "Connect your {{deviceName}}",
+            "title": "{{deviceName}}を接続",
             "description": "Is your device already set up? Connect it to the app!"
           },
           "3": {
             "heading": "Restore device",
             "title": "Restore your recovery phrase on a new device",
-            "description": "Use an existing recovery phrase to restore your private keys on a new {{deviceName}}!"
+            "description": "既存のリカバリーフレーズを使って、新しい {{deviceName}}に秘密鍵を復元できます。"
           }
         }
       },
@@ -3034,7 +3047,7 @@
           },
           "quizSuccess": {
             "title": "Already a pro!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "暗号資産を安全に管理する準備が整いました。\n\n残り1ステップです！",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step",
@@ -3043,7 +3056,7 @@
           },
           "quizFailure": {
             "title": "You will soon become a pro...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "大丈夫、Ledgerが丁寧にガイドします。あっという間に、安心安全に暗号資産を管理できるようになります。\n\n残り1ステップです！",
             "buttons": {
               "next": "Next step",
               "prev": "Previous step"
@@ -3052,7 +3065,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "Choose PIN code",
-              "descr": "Press the left or right button to change digits. Press both buttons to validate a digit. Select <0></0> to confirm your PIN code. Select <1></1> to erase a digit."
+              "descr": "左ボタンまたは右ボタンを押して、数字を変更します。数字を確定するには、両方のボタンを同時に押します。&lt;0&gt;&lt;/0&gt;を選択するとPINコードが確定されます。数字を消去したいときは&lt;1&gt;&lt;/1&gt;を選択します。"
             },
             "confirm": {
               "title": "Confirm PIN code",
@@ -3075,9 +3088,9 @@
               "help": "Need help"
             },
             "warning": {
-              "title": "Do not use a recovery phrase that you have not generated yourself.",
-              "desc": "Your Ledger hardware wallet’s pin code and recovery phrase should be initialized by you and only you. If you have received a device with a pre-existing seed word or an already initialized pin code do not use the product and contact our customer support.",
-              "supportLink": "Contact customer support"
+              "title": "自分で取得していないリカバリーフレーズは使用しないでください。",
+              "desc": "LedgerハードウェアウォレットのPINコードとリカバリーフレーズの初期化は、絶対にご自身のみで行ってください。シードワードがすでに設定されていたり、PINコードがすでに初期化されたデバイスを受け取った場合は、そのデバイスを使用せず、カスタマーサポートまでご連絡ください。",
+              "supportLink": "カスタマーサポートに問い合わせる"
             }
           },
           "useRecoverySheet": {
@@ -3086,8 +3099,8 @@
               "descr": "Grab a blank Recovery sheet, included with your Nano. Please reach out to Ledger Support if the Recovery sheet did not come blank."
             },
             "writeDownWords": {
-              "title": "Write down 24 words",
-              "descr": "Write Word #1 displayed on your Nano in position 1 of your Recovery sheet. Then press right on your Nano to display Word #2 and write it down in position 2.\n\nRepeat the process for all words while carefully respecting the order and spelling. Press left on your Nano to check for any mistakes."
+              "title": "24個の単語を書き留めてください。",
+              "descr": "Nanoの画面に表示された1つ目の単語を、リカバリーシートの1つ目の単語に書き留めます。続いて、Nanoの右ボタンを押し、Word #2（2つ目の単語）をシートの2番目の単語の位置に書き留めます。\n\n同様の操作を繰り返して、すべての単語を正しい順番・スペルで書き留めてください。Nanoの左ボタンを押すと、単語の順番・スペルに誤りがないかを確認できます。"
             },
             "buttons": {
               "next": "Next step",
@@ -3213,7 +3226,7 @@
       "buttons": {
         "start": "Let’s take the quiz",
         "next": "Next question",
-        "finish": "Finish quiz"
+        "finish": "クイズを終了"
       },
       "questions": {
         "1": {
@@ -3271,149 +3284,149 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
-    "solution": "Solution #{{number}}",
-    "applesInstructions": "Apple’s instructions",
-    "nextSolution": "Next solution",
-    "previousSolution": "Previous solution",
-    "followSteps": "Follow these steps",
-    "supportArticle": "Support article",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "desc": "デバイスの接続に問題がありますか？",
+    "cta": "修正する",
+    "solution": "解決策 #{{number}}",
+    "applesInstructions": "Appleのトラブルシューティング",
+    "nextSolution": "次の解決策",
+    "previousSolution": "前の解決策",
+    "followSteps": "以下の手順に従ってください。",
+    "supportArticle": "サポート記事",
+    "connecting": "接続しています...",
+    "connected": "接続しました！",
+    "backToPortfolio": "ポートフォリオに戻る",
     "steps": {
       "entry": {
-        "title": "Troubleshoot USB connection",
-        "desc": "There seems to be a problem connecting to your device. Don’t worry, you can try different solutions one by one until your device connects!",
-        "cta": "Let’s fix it!",
-        "back": "Go back"
+        "title": "USB接続のトラブルシューティング",
+        "desc": "デバイスとの接続に問題があるようです。でも、ご心配なく。デバイスが正常に接続されるまで、いろいろな解決策を1つずつ試しましょう！",
+        "cta": "問題を解決しましょう！",
+        "back": "戻る"
       },
       "1": {
         "windows": {
-          "title": "Run Ledger Live as Administrator",
+          "title": "Ledger Liveを管理者として実行する",
           "bullets": {
-            "0": "Quit Ledger Live.",
-            "1": "Right-click the Ledger Live application.",
-            "2": "Select “Run as Administrator”.",
-            "3": "Connect and unlock your device to see if it’s detected."
+            "0": "Ledger Liveを終了する",
+            "1": "Ledger Liveアプリケーションを右クリックする",
+            "2": "「管理者として実行」を選択",
+            "3": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         },
         "linux": {
-          "title": "Update the udev rules on Linux",
-          "desc": "Click the button below to add the udev rules. Then connect and unlock your device to see if it’s detected.",
-          "cta": "Set Rules",
+          "title": "Linuxでudevルールをアップデート",
+          "desc": "以下のボタンをクリックして、udevルールを追加するその後、デバイスを接続してロックを解除し、検出されるかどうかを確認する",
+          "cta": "ルールの設定",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "ターミナルで以下のコマンドを入力すると、ルールが自動的に追加され、udevの再読み込みが行われます。",
+            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         }
       },
       "2": {
         "usbPort": {
-          "title": "Try different USB ports",
+          "title": "別のUSBポートを試す",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "コンピューターで使用するUSBポートを交換してください。",
+            "1": "接続されているUSBドングルを取り外してください。",
+            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         },
         "usbCable": {
-          "title": "Change the USB cable",
+          "title": "USBケーブルを交換する",
           "bullets": {
-            "0": "Use the original USB cable if possible.",
-            "1": "Try a different USB cable, making sure it supports data transfer.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "可能であれば、デバイス付属の純正USBケーブルを使用してください。",
+            "1": "データ転送に対応している別のUSBケーブルをお試しください。",
+            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         },
         "restart": {
-          "title": "Restart your computer",
+          "title": "コンピューターを再起動",
           "bullets": {
-            "0": "Restart your computer.",
-            "1": "Start Ledger Live.",
-            "2": "Connect and unlock your device to see if it’s detected."
+            "0": "コンピューターを再起動します。",
+            "1": "Ledger Liveを起動します。",
+            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         },
         "antiVirus": {
-          "title": "Turn off Anti-virus and VPN",
+          "title": "アンチウイルスとVPNをオフにする",
           "bullets": {
-            "0": "Turn off any anti-virus, firewall, and VPN software.",
-            "1": "Connect and unlock your device to see if it’s detected.",
-            "2": "Whitelist Ledger Live in your anti-virus if that worked."
+            "0": "アンチウイルス、ファイアウォール、およびVPNソフトウェアをオフにしてください。",
+            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。",
+            "2": "解決した場合は、アンチウイルスの例外リストにLedger Liveを追加してください。"
           }
         },
         "anotherComputer": {
-          "title": "Try another computer",
+          "title": "別のコンピュータを試す",
           "bullets": {
-            "0": "Go to <0>{{link}}</0> on another computer to download and install Ledger Live.",
-            "1": "Connect and unlock your device to see if it’s detected."
+            "0": "別のコンピューターで&lt;0&gt;{{link}}&lt;/0&gt;にアクセスし、Ledger Liveをダウンロードしてインストールします。",
+            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         }
       },
       "3": {
         "windows": {
-          "title": "Update the USB device drivers",
+          "title": "USBデバイスドライバをアップデート",
           "bullets": {
-            "0": "Visit this <0>{{link}}</0>",
-            "1": "Follow the instructions to update USB device drivers.",
-            "2": "Connect and unlock your device to see if it's detected."
+            "0": "この&lt;0&gt;{{link}}&lt;/0&gt;にアクセス",
+            "1": "指示に従って、USBデバイスドライバをアップデートします。",
+            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
           }
         },
         "mac": {
           "0": {
-            "title": "Enable Full Disk Access",
+            "title": "フルディスクアクセスの有効化",
             "bullets": {
-              "0": "Open “System Preferences”.",
-              "1": "Go to “Security & Privacy”.",
-              "2": "In the “Privacy” tab, go to “Full Disk Access” in the left column.",
-              "3": "Add “Ledger Live”.",
-              "4": "Connect and unlock your device to see if it’s detected."
+              "0": "「システム環境設定」を開きます。",
+              "1": "「セキュリティとプライバシー」に移動します。",
+              "2": "「プライバシー」タブの左側にある「フルディスクアクセス」を開きます。",
+              "3": "「Ledger Live」を追加します。",
+              "4": "デバイスを接続してロックを解除し、検出されるか確認します。"
             }
           },
           "1": {
-            "title": "Reset NVRAM",
-            "link": "Apple’s instructions",
+            "title": "NVRAMをリセット",
+            "link": "Apple取扱説明書",
             "bullets": {
-              "0": "If your Mac has an intel processor, follow <0>{{link}}</0> to reset the NVRAM.",
-              "1": "Connect and unlock your device to see if it’s detected."
+              "0": "Intel搭載のMacの場合は、&lt;0&gt;{{link}}&lt;/0&gt;に従ってNVRAMをリセットしてください。",
+              "1": "デバイスを接続してロックを解除し、検出されるか確認します。"
             }
           }
         }
       },
       "4": {
         "deviceSelection": {
-          "title": "What’s your device?",
-          "desc": "If you have a Nano S, you can try repairing your devices Firmware. For Nano X and Blue users, kindly contact Ledger support"
+          "title": "どのデバイスをお使いですか？",
+          "desc": "Nano Sをお使いの場合は、デバイスのファームウェアを修復してみてください。Nano XまたはBlueをお使いの場合は、Ledger サポートまでご連絡ください。"
         },
         "notFixed": {
-          "title": " USB connection problem still not fixed?",
-          "desc": "If you've tried every possible solution, please reach out to Ledger Support. Otherwise, please follow the instructions of any solution you haven’t tried yet.",
-          "back": "Back to portfolio",
-          "cta": "Contact Support"
+          "title": " USB接続の問題が解決されませんか？",
+          "desc": "全ての解決策を試しても解決できない場合は、Ledgerサポートまでご連絡ください。まだ試していない解決策がある場合は、それらの手順を実行してください。",
+          "back": "ポートフォリオに戻る",
+          "cta": "サポートへのお問い合わせ"
         },
         "repair": {
-          "title": "Repair your Nano S",
-          "desc": "What is the message displayed on your device?",
-          "mcuOutdated": "MCU firmware is outdated",
-          "mcuNotGenuine": "MCU firmware is not genuine",
-          "repairInstructions": "Follow device repair instructions",
-          "updateInstructions": "Follow device update instructions",
-          "somethingElse": "Something else"
+          "title": "Nano Sを修理する",
+          "desc": "デバイスに表示されたメッセージは？",
+          "mcuOutdated": "MCUファームウェアが最新ではありません",
+          "mcuNotGenuine": "MCUファームウェアが正規のものではありません",
+          "repairInstructions": "デバイスの修理手順に従ってください。",
+          "updateInstructions": "デバイスのアップデート手順に従ってください。",
+          "somethingElse": "その他"
         }
       }
     }
   },
   "SignMessageConfirm": {
-    "stringHash": "Message Hash",
-    "domainHash": "Domain Hash",
-    "messageHash": "Message Hash",
-    "message": "Message"
+    "stringHash": "メッセージのハッシュ",
+    "domainHash": "ドメインのハッシュ",
+    "messageHash": "メッセージのハッシュ",
+    "message": "メッセージ"
   },
   "TransactionConfirm": {
     "title": "Please confirm the operation on your device to finalize it",
     "warning": "Always verify the address displayed on your device exactly matches the one given by the {{recipientWording}}",
     "secureContract": "Verify the deposit details on your device before sending it. The contract address is provided securely so you don’t have to verify it.",
-    "verifyData": "Always verify the operation details on your device.",
+    "verifyData": "必ず、操作の詳細をデバイス上で確認してください。",
     "warningWording": {},
     "titleWording": {
       "send": "Please confirm on your device to finalize the operation",
@@ -3425,13 +3438,13 @@
       "undelegate": "Please confirm on your device to finalize the operation",
       "redelegate": "Please confirm on your device to finalize the operation",
       "claimRewardCompound": "Please confirm on your device to finalize the operation",
-      "nominate": "Please confirm on your device to finalize the operation",
-      "chill": "Please confirm on your device to finalize the operation",
-      "bond": "Please confirm on your device to finalize the operation",
-      "unbond": "Please confirm on your device to finalize the operation",
-      "rebond": "Please confirm on your device to finalize the operation",
-      "withdrawUnbonded": "Please confirm on your device to finalize the operation",
-      "setController": "Please confirm on your device to finalize the operation"
+      "nominate": "操作を完了するために、デバイスで確認してください。",
+      "chill": "操作を完了するために、デバイスで確認してください。",
+      "bond": "操作を完了するために、デバイスで確認してください。",
+      "unbond": "操作を完了するために、デバイスで確認してください。",
+      "rebond": "操作を完了するために、デバイスで確認してください。",
+      "withdrawUnbonded": "操作を完了するために、デバイスで確認してください。",
+      "setController": "操作を完了するために、デバイスで確認してください。"
     },
     "recipientWording": {
       "send": "recipient",
@@ -3439,7 +3452,7 @@
       "undelegate": "validator",
       "claimReward": "rewards recipient",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "バリデータ"
     },
     "votes": "Votes ({{count}})"
   },
@@ -3447,11 +3460,11 @@
     "placeholder": "Enter {{currencyName}} address"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
-    "termsLabel": "Terms of service",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "title": "利用規約",
+    "description": "サービス利用規約とプライバシーポリシーをご確認ください。",
+    "termsLabel": "サービス利用規約",
+    "privacyLabel": "プライバシーポリシー",
+    "switchLabel": "私はサービス利用規約とプライバシーポリシーを読んだ上で、内容に同意します。",
     "cta": "Enter Ledger app"
   },
   "families": {
@@ -3474,7 +3487,7 @@
   },
   "errors": {
     "countervaluesUnavailable": {
-      "title": "We're not able to provide a countervalue for this asset at the moment"
+      "title": "現在、この資産のカウンターバリュー（表示通貨）を提供できません。"
     },
     "generic": {
       "title": "{{message}}",
@@ -3489,8 +3502,8 @@
       "description": "Please enter an account name"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "もう一度お試しください。",
+      "description": "アカウントが最新の状態ではありません。同期が必要です。"
     },
     "AccountNotSupported": {
       "title": "Account not supported.",
@@ -3630,8 +3643,8 @@
       "description": "Please use the Manager to uninstall all apps then check if a firmware update is available before reinstalling them"
     },
     "LatestFirmwareVersionRequired": {
-      "title": "Update Nano Firmware",
-      "description": "Please update your devices Firmware to the latest version to access this feature"
+      "title": "Nanoファームウェアのアップデート",
+      "description": "この機能にアクセスするには、ファームウェアを最新バージョンにアップデートしてください。"
     },
     "FirmwareNotRecognized": {
       "title": "Device firmware is not recognized",
@@ -3750,16 +3763,16 @@
       "description": "Please wait while your node is syncing. Sending is not possible since your Bitcoin account balances may be incorrect."
     },
     "SatStackVersionTooOld": {
-      "title": "Please upgrade SatStack",
-      "description": "The SatStack version you are using is too old and may contain bugs or incompatibilities."
+      "title": "SatStackをアップグレードしてください。",
+      "description": "お使いのSatStackが古いバージョンのため、バグや互換性の問題が含まれている可能性があります。"
     },
     "SatStackDescriptorNotImported": {
-      "title": "Account not scanned by full node",
-      "description": "Please configure your full node to scan for the accounts associated with this device. Your full node must first scan the blockchain for this account before you can add it to your portfolio."
+      "title": "アカウントがフルノードによってスキャンされていません。",
+      "description": "このデバイスのアカウントがスキャンされるように、フルノードを設定してください。ポートフォリオに追加する前に、フルノードでこのアカウントのブロックチェーンをスキャンする必要があります。"
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "title": "問題が発生しました。",
+      "description": "トランザクションが成立しませんでした。もう一度お試しいただくか、サポートまでご連絡ください。"
     },
     "TimeoutError": {
       "title": "Sorry, server took too long to respond",
@@ -3793,8 +3806,8 @@
       "title": "Manager denied on device"
     },
     "UserRefusedFirmwareUpdate": {
-      "title": "Update cancelled on device",
-      "description": "All apps on your device have been uninstalled. Keep your device up to date to benefit from improvements in security and functionality."
+      "title": "デバイス上でアップデートがキャンセルされました。",
+      "description": "デバイス上のすべてのアプリがアンインストールされました。セキュリティや改善された機能を利用するために、お使いのデバイスを常に最新の状態に保ってください。"
     },
     "UserRefusedOnDevice": {
       "title": "Action rejected",
@@ -3999,46 +4012,50 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be more than {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
-      "title": "Amount must be less than {{maxAmountFromFormatted}}"
+      "title": "{{maxAmountFromFormatted}}以下の値でなければなりません。"
     },
     "PolkadotElectionClosed": {
-      "title": "Validators election must be closed"
+      "title": "バリデータの選出を終了しなければなりません。"
     },
     "PolkadotNotValidator": {
-      "title": "Some selected addresses are not validators"
+      "title": "選択した一部のアドレスはバリデータではありません。"
     },
     "PolkadotLowBondedBalance": {
-      "title": "All bonded assets will be unbonded if < 1 DOT"
+      "title": "1DOT未満の場合、ボンドされた資産はすべて解除されます。"
     },
     "PolkadotNoUnlockedBalance": {
-      "title": "You have no unbonded assets"
+      "title": "ボンド解除済みの資産はありません。"
     },
     "PolkadotNoNominations": {
-      "title": "You have no nominations"
+      "title": "ノミネートしていません。"
     },
     "PolkadotAllFundsWarning": {
-      "title": "Ensure you have enough balance left for future transaction fees"
+      "title": "今後のトランザクション手数料に十分な残高を、確保しておいてください。"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "Balance cannot be below {{minimumBalance}}. Send max to empty account."
+      "title": "残高が{{minimumBalance}}を下回ることはできません。空のアカウントに最大額を送金してください。"
     },
     "PolkadotBondMinimumAmount": {
-      "title": "You must bond at least {{minimumBondAmount}}."
+      "title": "{{minimumBondAmount}}以上ボンドする必要があります。"
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "You bonded balance should be at least {{minimumBondBalance}}."
+      "title": "ボンド残高は{{minimumBondBalance}}以上でなければなりません。"
     },
     "PolkadotMaxUnbonding": {
-      "title": "You have exceeded the unbond limit"
+      "title": "ボンド解除の上限を超えています。"
     },
     "PolkadotValidatorsRequired": {
-      "title": "You must select at least one validator"
+      "title": "1人以上のバリデータを選択する必要があります。"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }
