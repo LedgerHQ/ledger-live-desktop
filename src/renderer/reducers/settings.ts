@@ -80,9 +80,7 @@ export type SettingsState = {
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
   },
-  pairExchanges: {
-    [pair: string]: string | null,
-  },
+  pairExchanges: Record<string, string>,
   developerMode: boolean,
   shareAnalytics: boolean,
   sentryLogs: boolean,
