@@ -92,7 +92,7 @@ jobs:
       - name: install yarn
         run: npm i -g yarn
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
         env:
           JOBS: max
       - name: install operating system dependencies
@@ -141,7 +141,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: build electron app
         run: yarn build
       - name: run ui tests (${{ matrix.os }})

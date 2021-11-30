@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
   preserveOutput: process.env.CI ? "failures-only" : "always",
   maxFailures: process.env.CI ? 5 : undefined,
   reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
-  workers: process.env.CI ? 3 : 1,
+  workers: process.env.CI ? 1 : 1,
   // FIXME: --update-snapshots doesn't work with --retries
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI
