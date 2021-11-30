@@ -99,7 +99,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies for playwright
         run: npx playwright install-deps
       - name: run code checks
@@ -175,7 +175,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: run code checks

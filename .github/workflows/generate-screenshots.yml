@@ -106,7 +106,7 @@ jobs:
       - name: install yarn
         run: npm i -g yarn
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
         env:
           JOBS: max
       - name: install operating system dependencies
@@ -115,15 +115,14 @@ jobs:
         run: yarn build
       - name: run ui tests
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
-      - name: status
-        if: ${{ always() }}
-        run: |
-          git status
+      - name: check for changes
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
       - name: commit
-        if: ${{ always() }}
+        if: steps.changes.outputs.changed == 1
         run: |
           git add .
-          git commit -m 'update screenshots'
+          git commit -m 'update screenshots (Linux)'
           git pull --rebase
           git push
 
@@ -154,7 +153,7 @@ jobs:
       - name: install yarn
         run: npm i -g yarn
       - name: install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
         env:
           JOBS: max
       - name: install operating system dependencies
@@ -164,14 +163,13 @@ jobs:
       - name: run ui tests (${{ matrix.os }})
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
-      - name: status
-        if: ${{ always() }}
-        run: |
-          git status
+      - name: check for changes
+        id: changes
+        uses: UnicornGlobal/has-changes-action@v1.0.11
       - name: commit
-        if: ${{ always() }}
+        if: steps.changes.outputs.changed == 1
         run: |
           git add .
-          git commit -m 'update screenshots'
+          git commit -m 'update screenshots (${{ matrix.os }})'
           git pull --rebase
           git push
