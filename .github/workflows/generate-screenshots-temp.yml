@@ -103,7 +103,7 @@ jobs:
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: status
         id: status
-        run: echo "::set-output status::$(git status)"
+        run: echo "::set-output name=status::$(git status)"
       - name: commit
         if: contains(steps.status.outputs.status,  'Changes to be committed')
         run: |
@@ -149,7 +149,7 @@ jobs:
           DEBUG: pw:browser
       - name: status
         id: status
-        run: echo "::set-output status::$(git status)"
+        run: echo "::set-output name=status::$(git status)"
       - name: commit
         if: contains(steps.status.outputs.status,  'Changes to be committed')
         run: |
