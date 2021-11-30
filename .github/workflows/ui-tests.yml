@@ -146,6 +146,7 @@ jobs:
             playwright/artifacts/videos
 
   ui-tests:
+    needs: cancel-previous
     name: UI tests (${{ matrix.os }})
     strategy:
       fail-fast: false
@@ -180,6 +181,7 @@ jobs:
       - name: run code checks
         if: always()
         run: yarn ci 2> >(tee lint.txt)
+        shell: bash
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
@@ -187,6 +189,7 @@ jobs:
       - name: tests
         if: always()
         run: yarn test 2> >(tee jest.txt)
+        shell: bash
       - name: run ui tests (Linux)
         if: matrix.os == 'ubuntu-20.04'
         run: xvfb-run --auto-servernum -- yarn playwright

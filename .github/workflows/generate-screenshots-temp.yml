@@ -145,10 +145,9 @@ jobs:
       - name: build electron app
         run: yarn build
       - name: run ui tests (${{ matrix.os }})
-        if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
         env:
-           DEBUG: pw:api
+          DEBUG: pw:api
       - name: status
         if: ${{ always() }}
         run: |
