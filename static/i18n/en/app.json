@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Properties",
-        "about": "About Known Origin",
+        "description": "Description",
         "contract": "Contract address",
         "tokenId": "Token ID",
         "quantity": "Quantity"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
       "showAllAddressTypes": "Show all address types",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
@@ -1438,6 +1438,12 @@
       "appCatalogSearch": "Search app in catalog...",
       "appsOnDevice": "Apps installed",
       "appOnDeviceSearch": "Search installed apps..."
+    },
+    "disconnected": {
+      "title":"Looks like an app is open on your device",
+      "subtitle":"Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
