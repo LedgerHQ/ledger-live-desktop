@@ -133,6 +133,8 @@
     "type": {
       "IN": "Fogadott",
       "OUT": "Küldött",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Készítve",
       "REVEAL": "Feltárva",
       "DELEGATE": "Delegated",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "description": "Description",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Tokenek",
     "cta": "Token hozzáadása",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
       "showAllAddressTypes": "Show all address types",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Ennek a műveletnek belső műveletei vannak",
     "details": "{{ currency }} részletek",
     "multipleAddresses": "Miért van több cím?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Befagyasztott mennyiség",
       "unfreezeAmount": "Kiolvasztott mennyiség",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "Alkalmazás keresése a listában...",
       "appsOnDevice": "Telepített alkalmazások",
       "appOnDeviceSearch": "Telepített alkalmazások keresése..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> szabad",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "Küldés",
+    "titleNft": "Send NFT",
     "totalSpent": "Összesen jóváírandó",
     "steps": {
       "recipient": {
-        "title": "Fogadó"
+        "title": "Fogadó",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Mennyiség",
         "banner": "Maximum elkölthető mennyiség",
         "fees": "Fees",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "Advanced",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Összegzés"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "Opcionális",
         "ethereumGasLimit": "Gas határ",
         "ethereumGasPrice": "Gas ár",
-        "unitPerByte": "{{unit}} byte-onként"
+        "unitPerByte": "{{unit}} byte-onként",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3446,13 @@
       "undelegate": "megerősítő",
       "claimReward": "rewards recipient",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "validator",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Szavazatok ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
