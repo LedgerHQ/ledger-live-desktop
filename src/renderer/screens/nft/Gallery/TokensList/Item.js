@@ -50,7 +50,7 @@ type Props = {
 const Row = ({ contract, tokenId, id, mode }: Props) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
   const { nftName } = metadata || {};
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
   const isGrid = mode === "grid";
 
   const onItemClick = useCallback(() => {
