@@ -133,6 +133,8 @@
     "type": {
       "IN": "수신됨",
       "OUT": "전송됨",
+      "NFT_IN": "NFT 수령됨",
+      "NFT_OUT": "NFT 전송됨",
       "CREATE": "생성됨",
       "REVEAL": "숨김 해제",
       "DELEGATE": "위임됨",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "보내기",
+        "open": "{{viewer}}에서 열기"
+      },
+      "attributes": {
+        "properties": "속성",
+        "description": "Description",
+        "contract": "계약 주소",
+        "tokenId": "토큰 ID",
+        "quantity": "수량"
+      }
+    },
+    "collections": {
+      "title": "NFT(대체 불가능한 토큰) 컬렉션",
+      "receiveCTA": "NFT 수령",
+      "galleryCTA": "갤러리 보기",
+      "seeMore": "더 많은 컬렉션 보기",
+      "seeAll": "모든 컬렉션 보기",
+      "seeLess": "간략히 보기"
+    },
+    "gallery": {
+      "title": "모든 NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "보내기",
+          "contract": "계약: {{contract}}"
+        },
+        "operationList": {
+          "header": "최신 운영",
+          "OUT": "전송됨",
+          "IN": "수령됨"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "토큰",
     "cta": "토큰 추가",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}} 계정으로 자산을 수신하기 전에는 새 계정을 추가할 수 없습니다",
       "noAccountToCreate": " &lt;1&gt;&lt;0&gt;{{currencyName}} 계정이 생성되지 않은 것 같습니다",
       "showAllAddressTypes": "모든 주소 유형을 표시하세요",
-      "showAllAddressTypesTooltip": "옛 주소 형식으로 {{family}}(을)를 수신하려면 주소 유형만 변경해 주세요."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit, 또는 Native SegWit?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "이 거래는 내부 거래입니다",
     "details": "{{ currency }} 세부정보",
     "multipleAddresses": "왜 주소가 여러 개인가요?",
+    "nft": {
+      "name": "토큰명",
+      "contract": "토큰 계약",
+      "id": "토큰 (NFT) ID",
+      "amount": "금액"
+    },
     "extra": {
       "frozenAmount": "동결 금액",
       "unfreezeAmount": "동결 해제 금액",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "카탈로그 앱 검색...",
       "appsOnDevice": "앱 설치됨",
       "appOnDeviceSearch": "설치된 앱 검색..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}&lt;/0&gt; 남음",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "보내기",
+    "titleNft": "NFT 보내기",
     "totalSpent": "입금할 총액",
     "steps": {
       "recipient": {
-        "title": "수령인"
+        "title": "수령인",
+        "nftRecipient": "보낼 NFT"
       },
       "amount": {
         "title": "금액",
         "banner": "최대 사용 가능 금액은",
         "fees": "수수료",
         "standard": "스탠다드",
-        "advanced": "고급"
+        "advanced": "고급",
+        "nftQuantity": "수량"
       },
       "summary": {
         "title": "요약"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "선택 사항",
         "ethereumGasLimit": "가스 한도",
         "ethereumGasPrice": "가스 가격",
-        "unitPerByte": "바이트당 {{unit}}"
+        "unitPerByte": "바이트당 {{unit}}",
+        "nft": "NFT",
+        "nftQuantity": "수량"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3446,13 @@
       "undelegate": "검증인",
       "claimReward": "보상 수령인",
       "optIn": "수령인",
-      "nominate": "검증인"
+      "nominate": "검증인",
+      "erc721": {
+        "transfer": "수령인"
+      },
+      "erc1155": {
+        "transfer": "수령인"
+      }
     },
     "votes": "투표 ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
+    },
+    "NotEnoughNftOwned": {
+      "title": "사용 가능한 토큰 수를 초과했습니다"
     }
   }
 }

@@ -62,7 +62,7 @@
     "apply": "تطبيق",
     "done": "تم",
     "confirm": "تأكيد",
-    "reject": "Reject",
+    "reject": "رفض",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
     "delete": "حذف",
@@ -133,6 +133,8 @@
     "type": {
       "IN": "تم الاستلام",
       "OUT": "تم الإرسال",
+      "NFT_IN": "تم تلقي الرمز غير قابل للاستبدال (NFT)",
+      "NFT_OUT": "تم ارسال الرمز غير قابل للاستبدال (NFT)",
       "CREATE": "تم إنشاؤه",
       "REVEAL": "تم الإظهار",
       "DELEGATE": "تفويض",
@@ -214,124 +216,124 @@
     "disconnectButton": "قطع الاتصال"
   },
   "swap2": {
-    "title": "Swap",
+    "title": "مبادلة",
     "tabs": {
-      "exchange": "Exchange",
-      "history": "History",
-      "kyc": "KYC"
+      "exchange": "تداول",
+      "history": "السجل",
+      "kyc": "اعرف عميلك (KYC)"
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
-        "quote": "Quote",
-        "receive": "Receive"
+        "title": "مُعدل",
+        "quote": "عرض أسعار",
+        "receive": "تلقي"
       },
       "details": {
         "label": {
-          "provider": "provider",
-          "rate": "rate",
-          "fees": "fees",
-          "target": "target account"
+          "provider": "المزود",
+          "rate": "مُعدل",
+          "fees": "الرسوم",
+          "target": "الحساب المستهدف"
         },
         "tooltip": {
-          "provider": "lorem ipsum",
-          "rate": "lorem ipsum",
-          "fees": "lorem ipsum"
+          "provider": "مزود الخدمة",
+          "rate": "المعدل",
+          "fees": "الرسوم"
         },
-        "noAccount": "Create an account to receive {{name}}",
-        "noAccountCTA": "Add account"
+        "noAccount": "قم بإنشاء حساب لتلقي {{name}}",
+        "noAccountCTA": "إضافة حساب"
       },
       "from": {
-        "title": "From",
-        "max": "Max",
-        "accountPlaceholder": "Select source",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "title": "من",
+        "max": "الحد الأقصى",
+        "accountPlaceholder": "اختر المصدر",
+        "currencyDisabledTooltip": "هذه العملة غير متوفرة للمبادلة بعد"
       },
       "to": {
-        "title": "To"
+        "title": "إلى"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "المبادلة غير متوفرة بعد في منطقتك",
+        "content": "اصبر قليلاً، <br/>سوف نطلق هذه الميزة قريباً جداً"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "required": "تحتاج إلى إكمال اعرف عميلك (KYC) الخاص بك",
+          "complete": "أكمل KYC (اعرف عميلك)",
+          "update": "قم بتنشيط KYC (اعرف عميلك)",
+          "rejected": "تم رفض KYC (اعرف عميلك)، قم ببدء التحقق مرة أخرى",
           "status": {
-            "pending": "KYC pending",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "pending": "KYC (اعرف عميلك) مُعلق",
+            "approved": "تمت الموافقة على KYC (اعرف عميلك)",
+            "closed": "تم رفض KYC (اعرف عميلك)"
           }
         }
       }
     },
     "history": {
-      "disclaimer": "Your swap desktop transactions are not synchronized with the Ledger Live mobile application",
+      "disclaimer": "عمليات المبادلة لتطبيق سطح المكتب الخاص بك غير متزامنة مع تطبيق Ledger Live للجوال",
       "empty": {
-        "title": "Your previous swaps will appear here",
-        "description": "Either you have not made any swaps yet, or Ledger Live has been reset in the meantime."
+        "title": "ستظهر مبادلاتك السابقة هنا",
+        "description": "إما أنك لم تقم بأي مبادلات حتى الآن، أو تمت إعادة تعيين ليدجر لايف (Ledger Live) في غضون ذلك."
       },
-      "export": "Export operations",
-      "exporting": "Exporting..."
+      "export": "تصدير العمليات",
+      "exporting": "جاري التصدير..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض KYC (اعرف عميلك). للتعرف على مزيد من المعلومات، يرجى مراجعة",
+        "policy": "سياسة الخصوصية",
+        "title": "قم بتأكيد هويتك",
+        "subtitle": "يرجى إدخال معلوماتك للتبادل مع Wyre.",
+        "cta": "متابعة",
         "pending": {
-          "cta": "Continue",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
-          "info": "Identity verification: Submitted"
+          "cta": "متابعة",
+          "title": "تم إرسال بياناتك لاعتمادها",
+          "subtitle": "عادة ما يستغرق الأمر بضع دقائق حتى تكتمل المراجعة.",
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)",
+          "info": "التحقق من الهوية: تم الإرسال"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "إعادة تعيين KYC (اعرف عميلك)",
+          "title": "تم رفض طلب KYC (اعرف عميلك)",
+          "subtitle": "رفضت Wyre البيانات التي قدمتها لأغراض KYC (اعرف عميلك)",
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "firstName": "الاسم الأول",
+          "lastName": "اسم العائلة",
+          "street1": "عنوان الشارع، السطر 1",
+          "street2": "عنوان الشارع، السطر 2",
+          "city": "المدينة",
+          "state": "الولاية/المحافظة",
+          "country": "البلد",
+          "postalCode": "الرمز البريدي",
+          "dateOfBirth": "تاريخ الميلاد",
+          "firstNamePlaceholder": "أدخل اسمك الأول",
+          "lastNamePlaceholder": "أدخل اسم العائلة",
+          "street1Placeholder": "مثال: ‎13 شارع مابل",
+          "street2Placeholder": "مثال: ‎13 شارع مابل",
+          "cityPlaceholder": "مثال: سان خوسيه",
+          "postalCodePlaceholder": "أدخل رمزك البريدي المكوّن من 5 أرقام",
+          "dateOfBirthPlaceholder": "اليوم/الشهر/السنة",
+          "firstNameError": "أدخل اسمك الأول للمتابعة",
+          "lastNameError": "أدخل اسم العائلة للمتابعة",
+          "street1Error": "أدخل عنوانك",
+          "cityError": "أدخل المدينة التي تعيش بها في الولايات المتحدة الأمريكية",
+          "postalCodeError": "أدخل رمزاً بريدياً صالحاً في الولايات المتحدة الأمريكية",
+          "dateOfBirthError": "أدخل تاريخ ميلادك",
+          "dateOfBirthValidationError": "أدخل تاريخ ميلاد صحيحاً"
         }
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "عملية معلقة",
+        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الأمر مدة تصل إلى ساعة قبل أن تتلقى {{targetCurrency}}.",
+        "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
+        "seeDetails": "رؤية التفاصيل"
       }
     }
   },
@@ -372,27 +374,27 @@
     "providers": {
       "title": "اختر أحد المزودين لمبادلة العملات المشفرة",
       "learnMore": "ما هو التبادل؟",
-      "kycRequired": "KYC (التحقق من الهوية) مطلوب",
+      "kycRequired": "KYC (اعرف عميلك) مطلوب",
       "cta": "متابعة",
       "kyc": {
         "notAvailable": "{{provider}} غير متاح في موقعك",
         "status": {
-          "required": "KYC (التحقق من الهوية) مطلوب",
-          "pending": "التحقق من بيانات الهوية مُعلّق",
-          "approved": "تم اعتماد بيانات التحقق من الهوية!",
-          "closed": "تم رفض بيانات التحقق من الهوية"
+          "required": "KYC (اعرف عميلك) مطلوب",
+          "pending": "KYC (اعرف عميلك) مُعلق",
+          "approved": "تمت الموافقة على KYC (اعرف عميلك)!",
+          "closed": "تم رفض KYC (اعرف عميلك)"
         }
       }
     },
     "ip": {
       "title": "مرحبًا بك في التبادل",
       "subtitle": "قم بتداول أصول العملات المشفرة مباشرةً من جهاز Ledger الخاص بك.",
-      "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال/بيانات التحقق من هوية العميل."
+      "disclaimer": "من خلال المتابعة، فإنك توافق على أنه قد تتم مشاركة بيانات موقعك مع مزودي خدمة الطرف الثالث من أجل امتثالهم لإجراءات مكافحة غسيل الأموال / KYC (اعرف عميلك)."
     },
     "kyc": {
-      "updateRequired": "لا يمكننا إكمال عملية التحقق من الهوية (KYC) حتى تقوم بتحديث التطبيق",
+      "updateRequired": "لا يمكننا إكمال عملية اعرف عميلك (KYC) حتى تقوم بتحديث التطبيق",
       "wyre": {
-        "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض التحقق من هوية العميل. للتعرف على مزيد من المعلومات، يرجى مراجعة",
+        "disclaimer": "يتم جمع معلوماتك من قبل LEDGER بالنيابة عن WYRE كما يتم نقل هذه المعلومات إليها لأغراض KYC (اعرف عميلك). للتعرف على مزيد من المعلومات، يرجى مراجعة",
         "policy": "سياسة الخصوصية",
         "title": "التحقق من هويتك",
         "subtitle": "يرجى إدخال معلوماتك للتبادل مع Wyre.",
@@ -400,13 +402,13 @@
           "cta": "متابعة",
           "title": "بانتظار الاعتماد",
           "subtitle": "تم ارسال بياناتك لاعتمادها من Wyre.",
-          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "closed": {
-          "cta": "إعادة تعيين KYC (التحقق من الهوية)",
-          "title": "تم رفض طلب KYC (التحقق من الهوية)",
-          "subtitle": "رفضت Wyre البيانات التي قدمتها للتحقق من هوية العميل",
-          "link": "معرفة المزيد عن KYC (التحقق من الهوية)"
+          "cta": "إعادة تعيين KYC (اعرف عميلك)",
+          "title": "تم رفض طلب KYC (اعرف عميلك)",
+          "subtitle": "رفضت Wyre البيانات التي قدمتها لأغراض KYC (اعرف عميلك)",
+          "link": "معرفة المزيد عن KYC (اعرف عميلك)"
         },
         "form": {
           "firstName": "الاسم الأول",
@@ -436,8 +438,8 @@
       }
     },
     "form": {
-      "resetKYC": "أعد تعيين بيانات التحقق من الهوية الخاصة بك وقم بتحديث Ledger Live للتبادل مع Wyre",
-      "resetKYCCTA": "إعادة تعيين KYC (التحقق من الهوية)",
+      "resetKYC": "أعد تعيين بيانات KYC (اعرف عميلك) الخاصة بك وقم بتحديث Ledger Live للمبادلة مع Wyre",
+      "resetKYCCTA": "إعادة تعيين KYC (اعرف عميلك)",
       "amount": "المبلغ",
       "from": {
         "title": "من",
@@ -476,8 +478,8 @@
       "cta": "إعادة تعيين التحقق"
     },
     "resetKYCModal": {
-      "title": "حذف بيانات التحقق من الهوية الخاصة بك",
-      "subtitle": "احذف بيانات التحقق من الهوية الخاصة بك لإزالة جميع الرموز المحفوظة محلياً على الكمبيوتر الخاص بك. سيكون عليك إعادة تقديم بيانات التحقق من الهوية الخاصة بك للوصول إلى الخدمات التي يقدمها شركاؤنا.",
+      "title": "حذف بيانات KYC (اعرف عميلك) الخاصة بك",
+      "subtitle": "احذف بيانات KYC (اعرف عميلك) الخاصة بك لإزالة جميع رموز توكن المحفوظة محلياً على الكمبيوتر الخاص بك. سيكون عليك إعادة تقديم بيانات KYC (اعرف عميلك) الخاصة بك للوصول إلى الخدمات التي يقدمها شركاؤنا.",
       "cta": "تأكيد"
     },
     "modal": {
@@ -1067,9 +1069,9 @@
       "cta": "اشتري الان"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "حزمة العائلة",
+      "description": "عرّف عائلتك وأصدقائك على التشفير مع ثلاثة Nano S بسعر مخفض",
+      "cta": "قم بشراء حزمة العائلة"
     },
     "polkaStake": {
       "title": "رهن POLKADOT",
@@ -1113,7 +1115,7 @@
     "disconnected": "تم قطع الاتصال",
     "connected": "تم الاتصال",
     "connecting": "جاري الاتصال...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "مٌعرّف حساب غير صالح",
     "steps": {
       "paste": {
         "title": "لصق الرابط",
@@ -1123,7 +1125,7 @@
       "confirm": {
         "title": "اتصال",
         "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:"
       }
     },
     "connectedscreen": {
@@ -1170,6 +1172,48 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "إرسال",
+        "open": "مشاهدة في {{viewer}}"
+      },
+      "attributes": {
+        "properties": "خصائص",
+        "description": "Description",
+        "contract": "عنوان العَقد",
+        "tokenId": "مُعرّف رمز التوكن",
+        "quantity": "الكمية"
+      }
+    },
+    "collections": {
+      "title": "مجموعات NFT (رموز غير قابلة للاستبدال)",
+      "receiveCTA": "قم بتلقي NFT (رموز غير قابلة للاستبدال)",
+      "galleryCTA": "شاهد المعرض",
+      "seeMore": "شاهد المزيد من المجموعات",
+      "seeAll": "شاهد جميع المجموعات",
+      "seeLess": "شاهد أقل"
+    },
+    "gallery": {
+      "title": "جميع NFT (رموز غير قابلة للاستبدال)",
+      "collection": {
+        "header": {
+          "sendCTA": "إرسال",
+          "contract": "عقد: {{contract}}"
+        },
+        "operationList": {
+          "header": "أحدث العمليات",
+          "OUT": "تم الإرسال",
+          "IN": "تم الاستلام"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "مُعرّف: {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "رموز التوكن",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "لا يمكن إضافة حساب جديد قبل أن تتلقى الأصول على حسابك <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "لم يتم العثور على حساب <1><0>{{currencyName}}</0></1> ليتم إنشاءه",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
-      "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ العناوين القديمة."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit أو Native Segwit؟"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "لهذه العملية عمليات داخلية",
     "details": "تفاصيل {{ currency }}",
     "multipleAddresses": "لماذا عناوين متعددة؟",
+    "nft": {
+      "name": "اسم رّمز التوكن",
+      "contract": "عقد رّمز التوكن",
+      "id": "مُعرّف (NFT) رمز التوكن",
+      "amount": "المبلغ"
+    },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
       "unfreezeAmount": "إزالة تجميد المبلغ",
@@ -1370,12 +1420,12 @@
       "payoutNetworkFeesTooltip": "هذا المبلغ لن يظهر على جهازك"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "المبلغ المراد إرساله",
+      "amountReceived": "المبلغ المراد تلقيه",
+      "provider": "المزود",
+      "fees": "رسوم الشبكة",
+      "sourceAccount": "حساب المصدر",
+      "targetAccount": "الحساب المستهدف"
     },
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "ابحث عن التطبيق في القائمة...",
       "appsOnDevice": "التطبيقات المثبّتة",
       "appOnDeviceSearch": "البحث في التطبيقات المثبتة..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> متاح",
@@ -1487,13 +1543,13 @@
       "update": "تحديث البرنامج الثابت",
       "updateBtn": "قم بتحديث البرنامج الثابت",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "تحديث البرنامج الثابت إلى {{latestFirmware}} متاح",
+        "cta": "انتقل إلى ​المدير",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "إصدار البرنامج الثابت للجهاز قديم للغاية مما يعوق تحديثه. تواصل مع دعم ليدجر (Ledger) للحصول على بديل.",
+          "cta": "التواصل مع الدعم"
         },
-        "cta2": "Update firmware"
+        "cta2": "قم بتحديث البرنامج الثابت"
       },
       "latest": "الإصدار {{version}} من البرنامج الثابت متوفر",
       "contactSupport": "اتصل بالدعم",
@@ -1517,9 +1573,9 @@
       "confirmIdentifier": "قم بالتحقق من المُعرّف",
       "confirmIdentifierText": "تحقق من أن المُعرّف على جهازك هو المُعرّف ذاته أدناه. قم بتأكيد وإدخال رمز PINال الخاص بك إذا طُلب.",
       "identifier": "المُعرّف",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "التحضير",
+      "newFirmware": "برنامج ثابت جديد {{version}}",
+      "confirmUpdate": "يرجى تأكيد التحديث على جهازك",
       "mcuTitle": "الانتهاء من التحديث",
       "mcuFirst": "قم بفضل كبل الUSB من جهازك",
       "mcuSecond": "اضغط مع الاستمرار على الزر الأيسر أثناء إعادة توصيل كبل USB حتى تظهر الشاشة <1><0>{{repairProcessing}}</0></1>",
@@ -1680,7 +1736,7 @@
         "parentAccount": "1. اختار حساب {{currencyName}}",
         "token": "2. اختار رمز التوكن",
         "verifyTokenType": "يُرجى التحقق من أن <0>{{token}}</0> هو رمز توكن <0>{{tokenType}}</0>. أي أصل مشفر أخر مرسل إلى حساب {{currency}} قد يتم فقده.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
+        "warningTokenType": "يُرجى إرسال رموز <0>{{ticker}}</0> أو <0>{{tokenType}}</0> فقط إلى حسابات {{currency}}. قد يؤدي إرسال أصول مشفرة أخرى إلى خسارة دائمة للأموال."
       },
       "connectDevice": {
         "title": "الجهاز",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "إرسال",
+    "titleNft": "قم بإرسال NFT (رموز غير قابلة للاستبدال)",
     "totalSpent": "الإجمالي للخصم",
     "steps": {
       "recipient": {
-        "title": "المستلم"
+        "title": "المستلم",
+        "nftRecipient": "NFT (رموز غير قابلة للاستبدال) للإرسال"
       },
       "amount": {
         "title": "المبلغ",
         "banner": "المبلغ الأقصى القابل للإنفاق هو",
         "fees": "الرسوم",
         "standard": "اعتيادي",
-        "advanced": "متقدم"
+        "advanced": "متقدم",
+        "nftQuantity": "الكمية"
       },
       "summary": {
         "title": "الملخص"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "اختياري",
         "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "سعر الغاز",
-        "unitPerByte": "{{unit}} لكل بايت"
+        "unitPerByte": "{{unit}} لكل بايت",
+        "nft": "NFT (رمز غير قابلة للاستبدال)",
+        "nftQuantity": "الكمية"
       },
       "verification": {
         "streaming": {
@@ -1768,13 +1829,13 @@
     "version": "ليدجر لايف (Ledger Live) {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "تريد تغير لغة تطبيقك؟",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "أخبار جيدة! عملت فرقنا جاهدة و Ledger Live الآن يدعم {{language}}.",
+      "advice": "يمكنك دائماً تغيير لغة التطبيق في أي وقت في الإعدادات."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "التبديل إلى {{language}}",
+    "no": "أفضل عدم القيام بذلك"
   },
   "distribution": {
     "asset": "الأصل",
@@ -1796,14 +1857,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "مدعوم من Elrond",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "دمج Elrond",
+        "title": "رمز Elrond eGold (EGLD) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن تأمين رموز eGold (EGLD) الخاصة بك بشكل آمن وإدارتها من خلال Ledger Live.",
+        "description2": "إن رمز Elrond eGold (EGLD) هو أصلي لشبكة Elrond وسيتم استخدامه لكل شيء من المعاملات، والتكديس، والعقود الذكية، والحوكمة، ومكافآت المدقق.",
+        "description3": "نحن نعمل بنشاط مع فريق Elrond لإضافة المزيد من الوظائف، مثل التكديس، دعم ESDT الأصلي (رمز Elrond الرقمي القياسي) ، وأكثر من ذلك.",
+        "website": "سلسلة كتل مقياس الإنترنت"
       }
     }
   },
@@ -2564,7 +2625,7 @@
       "softResetTitle": "حذف الذاكرة المؤقتة",
       "softResetDesc": "احذف الذاكرة المؤقتة الخاصة بليدجر لايف (Ledger Live) لفرض إعادة المزامنة مع البلوك تشين.",
       "softReset": "حذف",
-      "resetKYC": "إعادة تعيين بيانات KYC (التحقق من الهوية)",
+      "resetKYC": "إعادة تعيين بيانات KYC (اعرف عميلك)",
       "resetKYCDesc": "احذف بيانات التحقق من هوية العميل الخاصة بك المسجلة لديك محلياً والمستخدمة للوصول إلى مزود معاملات الطرف ثالث.",
       "hardResetTitle": "إعادة تعيين ليدجر لايف (Ledger Live)",
       "hardResetDesc": "حذف جميع بيانات ليدجر لايف (Ledger Live) المخزنة على جهاز الكمبيوتر لديك، بما في ذلك حساباتك والإعدادات وسجلات المعاملات.",
@@ -2595,8 +2656,8 @@
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "title": "عمليات تنفيذ JS التجريبية",
+          "description": "استخدام عمليات تنفيذ JS التجريبية لبيتكوين (Taproot) و Tezos"
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2627,7 +2688,7 @@
     "hardResetModal": {
       "title": "إعادة تعيين Ledger Live",
       "desc": "قم بإعادة تعيين ليدجر لايف (Ledger Live) لمسح جميع الإعدادات والحسابات على جهاز الكمبيوتر الخاص بك. يمكنك بعد ذلك اختيار كلمة المرور الخاصة بك وإضافة حساباتك مرة أخرى باستخدام جهاز ليدجر الخاص بك. تظل المفاتيح الخاصة التي تتيح الوصول إلى الأصول المشفرة الخاصة بك آمنة على جهاز ليدجر الخاص بك ومدعومة بواسطة عبارة الاسترداد الخاصة بك.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "إعادة تعيين Ledger Live سوف يمحو سجل معاملات المبادلة الخاصة بك لجميع حساباتك."
     },
     "softResetModal": {
       "title": "حذف الذاكرة المؤقتة",
@@ -2644,7 +2705,7 @@
     "removeAccountModal": {
       "title": "إزالة حساب",
       "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -2744,7 +2805,7 @@
       "ru": "Русский",
       "es": "Español",
       "zh": "中文（简体）",
-      "de": "German"
+      "de": "Deutsch"
     }
   },
   "theme": {
@@ -2760,8 +2821,8 @@
       "achievement": "تمت إتاحة الإنجاز"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "لديك {{count}} إشعارات غير مقروءة",
+      "cta": "رؤية التفاصيل"
     }
   },
   "informationCenter": {
@@ -2833,11 +2894,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "التواصل مع الدعم",
+        "continueCTA": "متابعة",
+        "title": "الرجاء التحقق من محتويات الصندوق",
+        "description": "إذا جاء {{device}} الخاص بك مع كود PIN أو عبارة الاسترداد، فإنه ليس من الآمن استخدامه، ويجب عليك التواصل مع دعم Ledger.",
+        "alert": "فقط استخدم عبارة الاسترداد التي عرضها جهازك عند إعداده"
       }
     },
     "alerts": {
@@ -3217,22 +3278,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "هل تواجه مشاكل في توصيل جهازك؟",
+    "cta": "أصلحة",
     "solution": "الحل رقم #{{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "إرشادات Apple",
     "nextSolution": "الحل التالي",
     "previousSolution": "الحل السابق",
     "followSteps": "اتبع هذه الخطوات",
     "supportArticle": "مقالة دعم",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "جاري الاتصال...",
+    "connected": "تم الاتصال!",
+    "backToPortfolio": "الرجوع إلى المحفظة الاستثمارية",
     "steps": {
       "entry": {
         "title": "استكشاف وحل مشكلات الUSB",
         "desc": "يبدو أن هناك مشكلة في الاتصال بجهازك. لا تقلق، حيث يمكنك تجربة حلول مختلفة واحدًا بعد الآخر حتى يتصل جهازك!",
-        "cta": "Let’s fix it!",
+        "cta": "لنقوم بإصلاحها!",
         "back": "رجوع"
       },
       "1": {
@@ -3250,7 +3311,7 @@
           "desc": "انقر على الزر أدناه لإضافة قواعد udev. ثم قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه.",
           "cta": "تعيين القواعد",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "أدخل الأمر التالي في شاشة الأوامر لإضافة القواعد تلقائياً وإعادة تحميل udev.",
             "1": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         }
@@ -3259,8 +3320,8 @@
         "usbPort": {
           "title": "تجربة منافذ USB مختلفة",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "قم بتغيير منفذ الUSB على الكمبيوتر لديك.",
+            "1": "إزالة أي دونجل USB.",
             "2": "قم بتوصيل جهازك وإلغاء قفله لمعرفة ما إذا تم اكتشافه."
           }
         },
@@ -3385,7 +3446,13 @@
       "undelegate": "المدقق",
       "claimReward": "مستلم المكافأة",
       "optIn": "المستلم",
-      "nominate": "المدقق"
+      "nominate": "المدقق",
+      "erc721": {
+        "transfer": "المستلم"
+      },
+      "erc1155": {
+        "transfer": "المستلم"
+      }
     },
     "votes": "أصوات ({{count}})"
   },
@@ -3393,11 +3460,11 @@
     "placeholder": "أدخل عنوان {{currencyName}}"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "title": "شروط الاستخدام",
+    "description": "الرجاء أخذ بعض الوقت لمراجعة شروط الخدمة وسياسة الخصوصية",
     "termsLabel": "شروط الخدمة",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "سياسة الخصوصية",
+    "switchLabel": "لقد قرأت وأوافق على شروط الخدمة وسياسة الخصوصية",
     "cta": "دخول تطبيق ليدجر (Ledger)"
   },
   "families": {
@@ -3435,8 +3502,8 @@
       "description": "يرجى إدخال اسم حساب"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "يرجى إعادة المحاولة مرة أخرى",
+      "description": "الحساب قديم. هناك حاجة إلى التزامن"
     },
     "AccountNotSupported": {
       "title": "الحساب غير مدعوم.",
@@ -3704,8 +3771,8 @@
       "description": "يرجى تكوين العقدة الكاملة الخاصة بك للبحث عن الحسابات المرتبطة بهذا الجهاز. يجب أن تقوم العقدة الكاملة أولاً بفحص البلوك تشين لهذا الحساب قبل أن تتمكن من إضافته إلى حافظتك."
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "title": "حدث خطأ ما",
+      "description": "لم تتم عملية التداول. الرجاء المحاولة مرة أخرى أو التواصل مع الدعم."
     },
     "TimeoutError": {
       "title": "عفوًا، استغرق خادم البيانات وقتًا أطول من اللازم ليستجيب",
@@ -3945,7 +4012,7 @@
       "title": "قد يلزم إضافة ملاحظة عند الإرسال إلى هذا المستلم"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "يجب أن يكون المبلغ على الأقل {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "يجب أن يكون المبلغ أقل من {{maxAmountFromFormatted}}"
@@ -3988,7 +4055,10 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
+    },
+    "NotEnoughNftOwned": {
+      "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
     }
   }
 }
