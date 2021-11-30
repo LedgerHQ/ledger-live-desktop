@@ -105,7 +105,7 @@ jobs:
         id: status
         run: echo "::set-output status::$(git status)"
       - name: commit
-        if: contains(steps.status.outputs.status,  "nothing to commit") != true
+        if: S{{ contains(steps.status.outputs.status,  'Changes to be committed') }}
         run: |
           git add .
           git commit -m 'update screenshots (Linux)'
@@ -151,7 +151,7 @@ jobs:
         id: status
         run: echo "::set-output status::$(git status)"
       - name: commit
-        if: contains(steps.status.outputs.status,  "nothing to commit") != true
+        if: S{{ contains(steps.status.outputs.status,  'Changes to be committed') }}
         run: |
           git add .
           git commit -m 'update screenshots (${{ matrix.os }})'
