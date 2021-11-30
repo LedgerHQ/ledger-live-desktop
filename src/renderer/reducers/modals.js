@@ -10,7 +10,11 @@ export type ModalsState = {
   },
 };
 
-const state: ModalsState = {};
+const state: ModalsState = {
+  MODAL_ONBOARDING_QUIZZ: {
+    isOpened: true,
+  }
+};
 
 type OpenPayload = {
   name: string,
