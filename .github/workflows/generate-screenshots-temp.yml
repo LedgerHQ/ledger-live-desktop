@@ -147,7 +147,7 @@ jobs:
       - name: run ui tests (${{ matrix.os }})
         run: yarn playwright-update-snapshots --retries 0
         env:
-          DEBUG: pw:api
+          DEBUG: pw:browser
       - name: status
         if: ${{ always() }}
         run: |
