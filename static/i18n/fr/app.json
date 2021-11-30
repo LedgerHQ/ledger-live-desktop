@@ -62,6 +62,7 @@
     "apply": "Appliquer",
     "done": "Terminé",
     "confirm": "Confirmer",
+    "reject": "Refuser",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
     "delete": "Supprimer",
@@ -132,6 +133,8 @@
     "type": {
       "IN": "Reçu",
       "OUT": "Envoyé",
+      "NFT_IN": "NFT reçu",
+      "NFT_OUT": "NFT envoyé",
       "CREATE": "Créé",
       "REVEAL": "Révélé",
       "DELEGATE": "Délégué",
@@ -297,14 +300,14 @@
           "provider": "Prestataire",
           "rate": "Prix",
           "fees": "Frais",
-          "target": "Compte destinataire"
+          "target": "Compte bénéficiaire"
         },
         "tooltip": {
           "provider": "Prestataire",
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{name}}",
+        "noAccount": "Créez un compte pour recevoir des {{name}}.",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
@@ -806,7 +809,7 @@
     "title": "Prêter",
     "tabs": {
       "dashboard": "Tableau de bord",
-      "opened": "Prêts ouverts",
+      "opened": "Prêts en cours",
       "closed": "Prêts clôturés",
       "history": "Historique"
     },
@@ -822,7 +825,7 @@
       "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
       "interestEarned": "Intérêts gagnés",
       "interestEarnedTooltip": "Intérêts gagnés suite au retrait",
-      "openLoans": "Prêts ouverts",
+      "openLoans": "Prêts en cours",
       "closedLoans": "Prêts clôturés",
       "amountRedeemed": "Montant retiré",
       "date": "Date",
@@ -842,7 +845,7 @@
         "cta": "Déposer"
       },
       "opened": {
-        "title": "Vos prêts ouverts apparaîtront ici.",
+        "title": "Vos prêts en cours apparaîtront ici.",
         "description": "Vous n'avez pas encore fait de prêts.",
         "cta": "Déposer"
       },
@@ -855,7 +858,7 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Prêts ouverts",
+        "amountSupplied": "Prêts en cours",
         "amountSuppliedTooltip": "Montant déposé sur le réseau",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
@@ -1132,10 +1135,10 @@
       "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger Live.",
       "cta": "Acheter maintenant"
     },
-    "backupPack": {
-      "title": "Back-up Pack",
-      "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit.",
-      "cta": "Acheter un Back-up Pack"
+    "familyPack": {
+      "title": "Family Pack",
+      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit",
+      "cta": "Acheter un Family Pack"
     },
     "polkaStake": {
       "title": "STAKING DE POLKADOT",
@@ -1179,6 +1182,7 @@
     "disconnected": "Déconnecté",
     "connected": "Connecté",
     "connecting": "Connexion en cours...",
+    "invalidAccount": "Identifiant de compte invalide",
     "steps": {
       "paste": {
         "title": "Coller le lien",
@@ -1187,13 +1191,14 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
+        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :"
       }
     },
     "connectedscreen": {
-      "info": "Vous pouvez maintenant accéder à la DApp sur votre ordinateur.",
-      "warning": "Partager des adresses de bénéficiaire par DApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
-      "disconnected": "Il y a un problème de connexion entre la DApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
+      "info": "Vous pouvez maintenant accéder à la dApp sur votre ordinateur.",
+      "warning": "Partager des adresses de bénéficiaire par dApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
+      "disconnected": "Il y a un problème de connexion entre la dApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
   },
   "dashboard": {
@@ -1234,6 +1239,48 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Envoyer",
+        "open": "Ouvrir dans {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Attributs",
+        "description": "Description",
+        "contract": "Adresse du contrat",
+        "tokenId": "Identifiant du token",
+        "quantity": "Quantité"
+      }
+    },
+    "collections": {
+      "title": "Collections de NFT (tokens non fongibles)",
+      "receiveCTA": "Recevoir NFT",
+      "galleryCTA": "Voir la galerie",
+      "seeMore": "Voir plus de collections",
+      "seeAll": "Voir toutes les collections",
+      "seeLess": "Voir moins"
+    },
+    "gallery": {
+      "title": "Tous les NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Envoyer",
+          "contract": "Contrat : {{contract}}"
+        },
+        "operationList": {
+          "header": "Dernières opérations",
+          "OUT": "Envoyé",
+          "IN": "Reçu"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "Identifiant : {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "Tokens",
@@ -1319,7 +1366,7 @@
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
       "showAllAddressTypes": "Montrer tous les types d'adresses",
-      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'anciens formats d'adresse."
+      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit ou Native SegWit ?"
@@ -1374,6 +1421,12 @@
     "internalOpTooltip": "Cette opération a des opérations internes.",
     "details": "Détails sur {{ currency }}",
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
+    "nft": {
+      "name": "Nom du token",
+      "contract": "Contrat du token",
+      "id": "Identifiant du token (NFT)",
+      "amount": "Montant"
+    },
     "extra": {
       "frozenAmount": "Montant gelé",
       "unfreezeAmount": "Dégeler le montant",
@@ -1451,7 +1504,13 @@
       "appCatalog": "Catalogue d'applications",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
-      "appOnDeviceSearch": "Rechercher les applications installées..."
+      "appOnDeviceSearch": "Rechercher des applications installées..."
+    },
+    "disconnected": {
+      "title": "Application ouverte sur votre appareil ?",
+      "subtitle": "Rouvrir le Gestionnaire fermera l'application sur votre appareil.",
+      "ctaReopen": "Rouvrir le Gestionnaire",
+      "ctaPortfolio": "Retour au Portefeuille"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
@@ -1744,7 +1803,7 @@
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un token.",
         "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "warningTokenType": "Envoyez uniquement des <0>{{ticker}}</0> ou tokens <0>{{tokenType}}</0> sur des comptes {{currency}}. Tout autre crypto-actif risque d'être définitivement perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1762,17 +1821,20 @@
   },
   "send": {
     "title": "Envoyer",
+    "titleNft": "Envoyer le NFT",
     "totalSpent": "Total à débiter",
     "steps": {
       "recipient": {
-        "title": "Bénéficiaire"
+        "title": "Bénéficiaire",
+        "nftRecipient": "NFT à envoyer"
       },
       "amount": {
         "title": "Montant",
         "banner": "Le montant maximal pouvant être envoyé est",
         "fees": "Frais",
         "standard": "Standard",
-        "advanced": "Avancé"
+        "advanced": "Avancé",
+        "nftQuantity": "Quantité"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -1794,7 +1856,9 @@
         "rippleTagPlaceholder": "Facultatif",
         "ethereumGasLimit": "Limite de gaz",
         "ethereumGasPrice": "Prix du gaz",
-        "unitPerByte": "{{unit}} par byte"
+        "unitPerByte": "{{unit}} par byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantité"
       },
       "verification": {
         "streaming": {
@@ -1830,6 +1894,15 @@
   "releaseNotes": {
     "title": "Notes de publication",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Changer la langue de l'application ?",
+    "description": {
+      "newSupport": "Bonne nouvelle ! Grâce aux efforts de nos équipes, Ledger Live est maintenant disponible en {{language}}.",
+      "advice": "Vous pouvez toujours changer la langue plus tard dans les Paramètres."
+    },
+    "switchButton": "Basculer en {{language}}",
+    "no": "Non, merci"
   },
   "distribution": {
     "asset": "Actif ",
@@ -2651,7 +2724,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour certaines cryptos."
+          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin (Taproot) et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2798,7 +2871,8 @@
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
-      "zh": "中文（简体）"
+      "zh": "中文（简体）",
+      "de": "Deutsch"
     }
   },
   "theme": {
@@ -3411,7 +3485,7 @@
   },
   "TransactionConfirm": {
     "title": "Confirmez l'opération sur votre appareil pour la finaliser.",
-    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}.",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le {{recipientWording}}.",
     "secureContract": "Vérifiez les détails du dépôt sur votre appareil avant de l'envoyer. L'adresse du contrat est fournie de manière sécurisée afin que vous n'ayez pas à la vérifier.",
     "verifyData": "Vérifiez toujours les détails de l'opération sur votre appareil.",
     "warningWording": {},
@@ -3439,7 +3513,13 @@
       "undelegate": "validateur",
       "claimReward": "bénéficiaire des récompenses",
       "optIn": "bénéficiaire",
-      "nominate": "validateur"
+      "nominate": "validateur",
+      "erc721": {
+        "transfer": "Destinataire"
+      },
+      "erc1155": {
+        "transfer": "Destinataire"
+      }
     },
     "votes": "Votes ({{count}})"
   },
@@ -3999,7 +4079,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce bénéficiaire."
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
+      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
@@ -4038,7 +4118,14 @@
       "title": "Sélectionnez au moins un validateur."
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
+    },
+    "NotEnoughNftOwned": {
+      "title": "Nombre de tokens disponibles insuffisant"
     }
   }
 }

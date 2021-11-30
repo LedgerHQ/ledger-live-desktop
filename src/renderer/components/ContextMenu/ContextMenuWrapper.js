@@ -5,6 +5,7 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import IconExternal from "~/renderer/icons/ExternalLink";
 
 // $FlowFixMe
 export const ContextMenuContext = React.createContext({});
@@ -24,6 +25,7 @@ export type ContextMenuItemType = {
   callback: any => any,
   dontTranslateLabel?: boolean,
   id?: string,
+  type?: string,
 };
 
 type Props = {
@@ -35,6 +37,13 @@ type State = {
   x: number,
   y: number,
 };
+
+const Separator: ThemedComponent<{}> = styled.div`
+  background-color: ${p => p.theme.colors.palette.divider};
+  height: 1px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`;
 
 const ContextMenuContainer: ThemedComponent<{ x: number, y: number }> = styled(Box)`
   position: absolute;
@@ -48,18 +57,31 @@ const ContextMenuContainer: ThemedComponent<{ x: number, y: number }> = styled(B
   padding: 10px;
 `;
 
-const ContextMenuItemContainer: ThemedComponent<{}> = styled(Box).attrs(() => ({
+const ContextMenuItemContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   ff: "Inter",
+  color: p.disabled
+    ? "palette.text.shade50"
+    : p.isActive
+    ? "palette.text.shade100"
+    : "palette.text.shade60",
+  bg: p.isActive && !p.disabled ? "palette.background.default" : "",
 }))`
   padding: 8px 16px;
   text-align: center;
   flex-direction: row;
   align-items: flex-start;
   border-radius: 4px;
-  color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 12px;
   font-weight: 500;
+  justify-content: space-between;
 
+  & > * {
+    pointer-events: none;
+  }
+
+  & > * {
+    pointer-events: none;
+  }
   &:hover {
     cursor: pointer;
     background: ${p => p.theme.colors.palette.background.default};
@@ -104,22 +126,32 @@ class ContextMenuWrapper extends PureComponent<Props, State> {
 
   renderItem = (item: ContextMenuItemType, index: number) => {
     const { dontTranslateLabel, callback, label, Icon, id } = item;
+    if (item.type === "separator") {
+      return <Separator key={id} />;
+    }
 
     return (
       <ContextMenuItemContainer
-        key={index}
+        key={id}
+        id={id}
         onClick={e => {
           callback(e);
           this.hideContextMenu();
         }}
-        id={id}
       >
-        {Icon && (
-          <Box pr={2} color="palette.text.shade60">
-            <Icon size={16} />
+        <Box horizontal>
+          {Icon && (
+            <Box pr={2} color="palette.text.shade60">
+              <Icon size={16} />
+            </Box>
+          )}
+          {(dontTranslateLabel && label) || <Trans i18nKey={label} />}
+        </Box>
+        {item.type === "external" ? (
+          <Box ml={4}>
+            <IconExternal size={16} />
           </Box>
-        )}
-        {(dontTranslateLabel && label) || <Trans i18nKey={label} />}
+        ) : null}
       </ContextMenuItemContainer>
     );
   };

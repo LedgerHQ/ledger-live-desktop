@@ -1,0 +1,54 @@
+name: Generate Screenshots Test
+on:
+  workflow_dispatch:
+    inputs:
+      number:
+        description: PR to checkout
+        required: true
+
+jobs:
+  generate-screenshots:
+    name: screenshots
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-20.04, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: checkout PR
+        run: gh pr checkout ${{ github.event.inputs.number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: install operating system dependencies
+        run: npx playwright install-deps
+      - name: install dependencies
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile
+      - name: build electron app
+        run: yarn build
+      - name: run ui tests (Linux)
+        if: matrix.os == 'ubuntu-20.04'
+        run: DEBUG=pw:browser xvfb-run --auto-servernum -- yarn playwright-update-snapshots
+      - name: run ui tests (macOS & Windows)
+        if: matrix.os != 'ubuntu-20.04'
+        run: yarn playwright-update-snapshots
+        env:
+          DEBUG: pw:api
+      - name: commit
+        run: |
+          git status
+          git add .
+          git commit -m 'update screenshots'
+          git push

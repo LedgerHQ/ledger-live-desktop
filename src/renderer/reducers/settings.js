@@ -90,6 +90,7 @@ export type SettingsState = {
   lastUsedVersion: string,
   dismissedBanners: string[],
   accountsViewMode: "card" | "list",
+  nftsViewMode: "grid" | "list",
   showAccountsHelperBanner: boolean,
   hideEmptyTokenAccounts: boolean,
   sidebarCollapsed: boolean,
@@ -128,10 +129,17 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   };
 };
 
+export const pushedLanguages = ["fr", "ru"];
+export const defaultLanguage: () => string = () => {
+  // Nb If the os language is in the list [fr, ru] (LL-7027) default to it
+  const detectedLanguage = window.navigator?.language || "en";
+  return pushedLanguages.find(lang => detectedLanguage.startsWith(lang)) || "en";
+};
+
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  language: "en",
+  language: defaultLanguage(),
   theme: null,
   region: null,
   orderAccounts: "balance|desc",
@@ -148,6 +156,7 @@ const INITIAL_STATE: SettingsState = {
   lastUsedVersion: __APP_VERSION__,
   dismissedBanners: [],
   accountsViewMode: "list",
+  nftsViewMode: "list",
   showAccountsHelperBanner: true,
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
   sidebarCollapsed: false,
@@ -416,6 +425,7 @@ export const confirmationsNbForCurrencySelector = (
 export const preferredDeviceModelSelector = (state: State) => state.settings.preferredDeviceModel;
 export const sidebarCollapsedSelector = (state: State) => state.settings.sidebarCollapsed;
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode;
+export const nftsViewModeSelector = (state: State) => state.settings.nftsViewMode;
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator;
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs;
 export const autoLockTimeoutSelector = (state: State) => state.settings.autoLockTimeout;

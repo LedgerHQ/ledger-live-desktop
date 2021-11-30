@@ -20,6 +20,7 @@ import Asset from "~/renderer/screens/asset";
 import Lend from "~/renderer/screens/lend";
 import PlatformCatalog from "~/renderer/screens/platform";
 import PlatformApp from "~/renderer/screens/platform/App";
+import NFTGallery from "~/renderer/screens/nft/Gallery";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -28,6 +29,7 @@ import IsUnlocked from "~/renderer/components/IsUnlocked";
 import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
+import IsSystemLanguageAvailable from "~/renderer/components/IsSystemLanguageAvailable";
 import LibcoreBusyIndicator from "~/renderer/components/LibcoreBusyIndicator";
 import DeviceBusyIndicator from "~/renderer/components/DeviceBusyIndicator";
 import KeyboardContent from "~/renderer/components/KeyboardContent";
@@ -42,6 +44,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Page from "~/renderer/components/Page";
 import AnalyticsConsole from "~/renderer/components/AnalyticsConsole";
 import DebugMock from "~/renderer/components/debug/DebugMock";
+import DebugSkeletons from "~/renderer/components/debug/DebugSkeletons";
 import { DebugWrapper } from "~/renderer/components/debug/shared";
 import useDeeplink from "~/renderer/hooks/useDeeplinking";
 import useUSBTroubleshooting from "~/renderer/hooks/useUSBTroubleshooting";
@@ -147,6 +150,7 @@ export default function Default() {
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}
               {process.env.DEBUG_UPDATE ? <DebugUpdater /> : null}
+              {process.env.DEBUG_SKELETONS ? <DebugSkeletons /> : null}
               {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
             <OnboardingOrElse>
@@ -156,6 +160,7 @@ export default function Default() {
                 </Route>
                 <Route>
                   <IsNewVersion />
+                  <IsSystemLanguageAvailable />
                   <SyncNewAccounts priority={2} />
 
                   <Box
@@ -175,7 +180,7 @@ export default function Default() {
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
-                        <Redirect from="/manager/reload" to="manager" />
+                        <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
                           path="/platform"
@@ -188,6 +193,10 @@ export default function Default() {
                         />
                         <Route path="/lend" render={props => <Lend {...props} />} />
                         <Route path="/exchange" render={props => <Exchange {...props} />} />
+                        <Route
+                          path="/account/:id/nft-collection/:collectionId?"
+                          render={props => <NFTGallery {...props} />}
+                        />
                         <Route
                           path="/account/:parentId/:id"
                           render={props => <Account {...props} />}

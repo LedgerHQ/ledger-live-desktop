@@ -10,83 +10,105 @@ on:
       - master
 
 jobs:
-  test:
-    runs-on: ubuntu-20.04
+  start-runner:
+    name: start self-hosted EC2 runner
+    runs-on: [ledger-live-desktop]
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
     steps:
-      - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
-      - name: install linux dependencies
+      - name: get latest LLD runner AMI id
+        id: get-ami-id
         run: |
-          sudo apt-get update && sudo apt-get install -y libudev-dev libusb-1.0-0-dev
-      - name: Setup xvfb
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+      - name: start EC2 runner
+        id: start-ec2-runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: start
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
+          ec2-instance-type: c5.4xlarge
+          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
+          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
+      - name: get volume-id
+        id: get-volume-id
         run: |
-          sudo apt-get -qqy install xvfb libnss3-dev libgconf-2-4 fuse libgtk2.0-0 libgtk-3-0 libasound2 libudev-dev libusb-1.0-0 libusb-1.0-0-dev lib32z1 rpm fakeroot dpkg libdbus-1-dev libx11-dev libavahi-compat-libdnssd-dev g++ gcc gcc-multilib g++-multilib libgtk-3-dev libxtst6 libxss1 libnss3
+          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
+      - name: resize rootfs
+        env:
+          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
+        run: |
+          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+
+  test:
+    name: run UI tests
+    runs-on: ${{ needs.start-runner.outputs.label }}
+    needs: start-runner
+    steps:
+      - name: prepare runner
+        run: |
+          sudo growpart /dev/nvme0n1 1
+          sudo resize2fs /dev/nvme0n1p1
       - uses: actions/checkout@v2
-        if: always() && job.status != 'cancelled'
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
       - uses: actions/setup-node@main
-        if: always() && job.status != 'cancelled'
         with:
           node-version: 14.x
+      - name: install yarn
+        if: always()
+        run: npm install --global yarn
       - name: install and switch to GCC 5.4
+        if: always()
         run: ./tools/g++-5.4/install.sh
-      - name: get yarn cache
-        if: always() && job.status != 'cancelled'
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        if: always() && job.status != 'cancelled'
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: install dependencies
-        if: always() && job.status != 'cancelled'
+        if: always()
+        env:
+          JOBS: max
         run: yarn --frozen-lockfile
       - name: run code checks
-        if: always() && job.status != 'cancelled'
+        if: always()
         run: yarn ci 2> >(tee lint.txt)
       - name: check build
-        if: always() && job.status != 'cancelled'
+        if: always()
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
       - name: Tests
-        if: always() && job.status != 'cancelled'
+        if: always()
         run: yarn test 2> >(tee jest.txt)
       - name: start electron webdriver
-        if: always() && job.status != 'cancelled'
+        if: always()
         env:
           DISPLAY: :99.0
           TZ: America/New_York
         run: |
           xvfb-run -a --server-args="-screen 0 1024x788x24 -ac +extension RANDR" node_modules/electron-chromedriver/chromedriver.js --port=9515 --whitelisted-ips="" --url-base=/ &
       - name: wait for webdriver
-        if: always() && job.status != 'cancelled'
+        if: always()
         run: bash -c 'while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:9515)" != "404" ]]; do sleep 5; done'
       - name: run spectron
-        if: always() && job.status != 'cancelled'
+        if: always()
         run: yarn spectron --no-color 2> >(tee output.txt)
       - name: run coverage generation
-        if: always() && github.event_name == 'push' && job.status != 'cancelled'
+        if: always() && github.event_name == 'push'
         run: yarn spectron-coverage
         env:
           CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
       - name: upload diffs to imgur
-        if: always() && job.status != 'cancelled'
+        if: always()
         uses: ./.github/actions/upload-images
         id: imgur
         with:
           path: tests/specs/__image_snapshots__/__diff_output__
       - name: clean diff
-        if: always() && job.status != 'cancelled'
+        if: always()
         run: rm -f tests/specs/__image_snapshots__/__diff_output__/*.png
       - name: upload ci suggested screenshots
         uses: actions/upload-artifact@v2
-        if: always() && job.status != 'cancelled'
+        if: always()
         with:
           name: ci-suggested-screenshots
           path: tests/specs/__image_snapshots__/__diff_output__/
@@ -97,7 +119,7 @@ jobs:
           git diff --name-only ledger/${{github.base_ref}}..${{github.event.pull_request.head.sha}} -- tests/specs/__image_snapshots__ >imgChanged.txt
         if: always() && github.event_name == 'pull_request'
       - name: send comment
-        if: always() && job.status != 'cancelled'
+        if: always()
         id: comment
         uses: ./.github/actions/comment
         with:
@@ -115,9 +137,23 @@ jobs:
           sha: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Send message to Slack channel
         uses: archive/github-actions-slack@v1.0.3
-        if: always() && github.event_name == 'push' && job.status != 'cancelled'
+        if: always() && github.event_name == 'push'
         id: notify
         with:
           slack-bot-user-oauth-access-token: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
           slack-channel: live-ui-tests
           slack-text: ${{ steps.comment.outputs.bodySlack }}
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs: [start-runner, test]
+    runs-on: [ledger-live-desktop]
+    if: ${{ always() }}
+    steps:
+      - name: Stop EC2 runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: stop
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}

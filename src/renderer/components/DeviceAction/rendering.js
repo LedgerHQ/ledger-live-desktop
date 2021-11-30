@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
@@ -49,6 +49,7 @@ import { getProviderIcon } from "~/renderer/screens/exchange/Swap2/utils";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
 import { context } from "~/renderer/drawers/Provider";
+import { track } from "~/renderer/analytics/segment";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -69,7 +70,7 @@ const ProgressWrapper: ThemedComponent<{}> = styled.div`
   justify-content: center;
 `;
 
-const Wrapper: ThemedComponent<{}> = styled.div`
+export const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -106,7 +107,7 @@ export const Footer: ThemedComponent<{}> = styled.div`
   align-items: center;
 `;
 
-const Title = styled(Text).attrs({
+export const Title: ThemedComponent<{}> = styled(Text).attrs({
   ff: "Inter|SemiBold",
   color: "palette.text.shade100",
   textAlign: "center",
@@ -115,7 +116,7 @@ const Title = styled(Text).attrs({
   white-space: pre-line;
 `;
 
-const SubTitle = styled(Text).attrs({
+export const SubTitle: ThemedComponent<{}> = styled(Text).attrs({
   ff: "Inter|Regular",
   color: "palette.text.shade100",
   textAlign: "center",
@@ -253,13 +254,26 @@ export const renderRequiresAppInstallation = ({ appNames }: { appNames: string[]
   );
 };
 
-export const renderInstallingApp = ({
+export const InstallingApp = ({
   appName,
   progress,
+  request,
+  analyticsPropertyFlow = "unknown",
 }: {
   appName: string,
   progress: number,
+  request: any,
+  analyticsPropertyFlow?: string,
 }) => {
+  const currency = request?.currency || request?.account?.currency;
+  const appNameToTrack = appName || request?.appName || currency?.managerAppName;
+  useEffect(() => {
+    const trackingArgs = [
+      "In-line app install",
+      { appName: appNameToTrack, flow: analyticsPropertyFlow },
+    ];
+    track(...trackingArgs);
+  }, [appNameToTrack, analyticsPropertyFlow]);
   return (
     <Wrapper id="deviceAction-loading">
       <Header />

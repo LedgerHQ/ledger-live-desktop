@@ -62,6 +62,7 @@
     "apply": "Anwenden",
     "done": "Fertig",
     "confirm": "Bestätigen",
+    "reject": "Reject",
     "cancel": "Abbrechen",
     "getSupport": "Hilfe",
     "delete": "Löschen",
@@ -132,6 +133,8 @@
     "type": {
       "IN": "Empfangen",
       "OUT": "Gesendet",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Erstellt",
       "REVEAL": "Enthüllt",
       "DELEGATE": "Delegiert",
@@ -304,7 +307,7 @@
           "rate": "Lorem Ipsum",
           "fees": "Lorem Ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "Konto hinzufügen"
       },
       "from": {
@@ -1132,10 +1135,10 @@
       "description": "Kaufen Sie Krypto-Vermögenswerte über unseren Partner und erhalten Sie diese direkt auf Ihr Ledger-Konto",
       "cta": "Jetzt kaufen"
     },
-    "backupPack": {
-      "title": "Backup-Paket",
-      "description": "Verwalten Sie Ihr Vermögen sicher mit einem Nano X und Nano S zu einem vergünstigten Preis",
-      "cta": "Backup-Paket kaufen"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "POLKADOT Staking",
@@ -1179,6 +1182,7 @@
     "disconnected": "Getrennt",
     "connected": "Verbunden",
     "connecting": "Verbinde ...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Link einfügen",
@@ -1187,7 +1191,8 @@
       },
       "confirm": {
         "title": "Verbinden",
-        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:"
+        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1234,6 +1239,48 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "description": "Description",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "Token",
@@ -1319,7 +1366,7 @@
       "noOperationOnLastAccount": "Sie können kein neues Konto hinzufügen, bevor Sie Guthaben auf Ihrem <1><0>{{accountName}}</0></1> Konto erhalten haben",
       "noAccountToCreate": "Es wurde kein <1><0>{{currencyName}}}}</0></1> Konto gefunden, das erstellt werden kann",
       "showAllAddressTypes": "Alle Adresstypen anzeigen",
-      "showAllAddressTypesTooltip": "Ändern Sie den Adresstyp nur, wenn Sie über ältere Adressformate {{family}} empfangen müssen."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit oder Native Segwit?"
@@ -1374,6 +1421,12 @@
     "internalOpTooltip": "Diese Aktion hat interne Aktionen",
     "details": "{{ currency }} Details",
     "multipleAddresses": "Warum mehrere Adressen?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Eingefrorener Betrag",
       "unfreezeAmount": "Betrag entsperren",
@@ -1452,6 +1505,12 @@
       "appCatalogSearch": "App im Katalog suchen ...",
       "appsOnDevice": "Installierte Apps",
       "appOnDeviceSearch": "Installierte Apps suchen..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> frei",
@@ -1744,7 +1803,7 @@
         "parentAccount": "1. {{currencyName}} Konto wählen",
         "token": "2. Token auswählen",
         "verifyTokenType": "Bitte vergewissern Sie sich, dass <0>{{token}}</0> ein <0>{{tokenType}}</0> Token ist. Jeder andere Krypto-Vermögenswert, der an ein {{currency}}-Konto gesendet wird, kann verloren gehen.",
-        "warningTokenType": "Bitte senden Sie nur <0>{{ticker}}</0> oder <0>{{tokenType}}</0> Token auf ein {{currency}} Konto. Alle anderen Krypto-Vermögenswerte können verloren gehen."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Gerät",
@@ -1762,17 +1821,20 @@
   },
   "send": {
     "title": "Senden",
+    "titleNft": "Send NFT",
     "totalSpent": "Zu belastende Summe",
     "steps": {
       "recipient": {
-        "title": "Empfänger"
+        "title": "Empfänger",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Betrag",
         "banner": "Maximaler Auszahlungsbetrag ist",
         "fees": "Gebühren",
         "standard": "Standart",
-        "advanced": "Erweitert"
+        "advanced": "Erweitert",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Zusammenfassung"
@@ -1794,7 +1856,9 @@
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas Limit",
         "ethereumGasPrice": "Gaspreis",
-        "unitPerByte": "{{unit}} pro Byte"
+        "unitPerByte": "{{unit}} pro Byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -1830,6 +1894,15 @@
   "releaseNotes": {
     "title": "Informationen zur Version",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "Vermögenswert",
@@ -2651,7 +2724,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -2798,7 +2871,8 @@
       "fr": "Französisch",
       "ru": "Russisch",
       "es": "Spanisch",
-      "zh": "Chinesisch"
+      "zh": "Chinesisch",
+      "de": "German"
     }
   },
   "theme": {
@@ -3439,7 +3513,13 @@
       "undelegate": "Validator",
       "claimReward": "Prämienempfänger",
       "optIn": "Empfänger",
-      "nominate": "Validator"
+      "nominate": "Validator",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Stimmen ({{count}})"
   },
@@ -3999,7 +4079,7 @@
       "title": "Beim Senden an diesen Empfänger kann ein Memo erforderlich sein"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Betrag muss größer sein als {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Betrag muss kleiner sein als {{maxAmountFromFormatted}}"
@@ -4038,7 +4118,14 @@
       "title": "Sie müssen mindestens einen Validator auswählen"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
