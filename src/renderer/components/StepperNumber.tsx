@@ -56,7 +56,8 @@ const StepperNumber = ({ max, min, onChange, step = 1, value }: Props) => {
       justifyContent="center"
       backgroundColor="neutral.c40"
       display="inline-flex"
-      columnGap={2}
+      columnGap={4}
+      maxHeight={24}
       p={2}
     >
       <SmallButton

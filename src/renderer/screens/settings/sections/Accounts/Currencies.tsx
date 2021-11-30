@@ -33,7 +33,7 @@ export default function Currencies() {
   );
 
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" rowGap={10}>
       {currencyId && currencyName && (
         <>
           <TrackPage category="Settings" name="Currencies" currencyId={currencyId} />
@@ -55,9 +55,7 @@ export default function Currencies() {
         />
       </Row>
       {currency && (
-        <Flex flexDirection="column" rowGap={12}>
           <CurrencyRows currency={currency} />
-        </Flex>
       )}
     </Flex>
   );
