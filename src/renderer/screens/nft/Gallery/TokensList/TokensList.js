@@ -98,7 +98,7 @@ const TokensList = ({ account, collectionId }: Props) => {
             {!collectionId ? (
               <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
                 <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-                  <CollectionName collection={collection} />
+                  <CollectionName collection={collection} fallback={collection.contract} />
                 </Text>
               </Box>
             ) : null}
