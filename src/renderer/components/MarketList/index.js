@@ -170,7 +170,7 @@ function MarketList() {
   const CurrencyRow = useCallback(
     ({ index, style }: CurrencyRowProps) => {
       const currency = currencies[index];
-      if (index === currenciesLength && loading) {
+      if (index === currenciesLength && index > 20 && loading) {
         return (
           <Box
             horizontal

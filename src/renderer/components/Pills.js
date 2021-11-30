@@ -59,7 +59,7 @@ function Pills(props: Props) {
   const { items, activeKey, onChange, bordered, loading, ...p } = props;
   return (
     <Container {...p} flow={1}>
-      {items.map(item => {
+      {items.map((item, index) => {
         const isActive = item.key === activeKey;
 
         if (loading) {
@@ -70,7 +70,7 @@ function Pills(props: Props) {
           <Pill
             isActive={isActive}
             onClick={() => onChange(item)}
-            key={item.key}
+            key={item.key + index}
             bordered={bordered}
             id={`settings-${item.key}-tab`}
           >
