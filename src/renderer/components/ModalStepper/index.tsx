@@ -1,28 +1,8 @@
 import React, { useCallback, useState } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
-import { Button, Popin } from "@ledgerhq/react-ui";
-import { CloseRegular } from "@ledgerhq/icons-ui/react";
-import ProgressBar from "./ProgressBar";
-import StepLeftSide from "./StepLeftSide";
-import StepRightSide from "./StepRightSide";
-import ProgressHeader from "./ProgressHeader";
 
-const CloseButtonContainer = styled.div`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-`;
-
-const StepContainer = styled(FlexBox).attrs(() => ({
-  flexDirection: "row",
-  justifyContent: "space-between",
-  position: "relative",
-}))`
-  flex: 1;
-  height: 100%;
-`;
+import { Popin } from "@ledgerhq/react-ui";
+import ModalStepperBody from "./ModalStepperBody";
 
 type StepProps = {
   title?: string;
@@ -33,7 +13,9 @@ type StepProps = {
   continueLabel?: string;
   backLabel?: string;
   continueDisabled?: boolean;
+  hideContinueButton?: boolean,
   backDisabled?: boolean;
+  hideBackButton?: boolean,
 };
 
 type Props = {
@@ -71,21 +53,23 @@ const ModalStepper = (props: Props) => {
 
   return (
     <Popin isOpen={isOpen} onClose={onClose} width={816} height={486} p={0}>
-      <StepContainer>
-        <StepLeftSide
-          Header={<ProgressHeader title={title} {...stepsProps} />}
-          title={step.title}
-          description={step.description}
-          AsideLeft={step.AsideLeft}
-          continueLabel={step.continueLabel || defaultContinueLabel}
-          backLabel={step.backLabel || defaultBackLabel}
-          continueDisabled={step.continueDisabled}
-          backDisabled={step.backDisabled}
-          {...{ onClickContinue, onClickBack }}
-        />
-        <StepRightSide AsideRight={step.AsideRight} bgColor={step.bgColor} />
-        <ProgressBar {...stepsProps} />
-      </StepContainer>
+      <ModalStepperBody
+        AsideLeft={step.AsideLeft}
+        AsideRight={step.AsideRight}
+        backDisabled={step.backDisabled}
+        backLabel={step.backLabel || defaultBackLabel}
+        continueDisabled={step.continueDisabled}
+        continueLabel={step.continueLabel || defaultContinueLabel}
+        description={step.description}
+        hideBackButton={step.hideBackButton}
+        hideContinueButton={step.hideContinueButton}
+        onClickBack={onClickBack}
+        onClickContinue={onClickContinue}
+        rightSideBgColor={step.bgColor}
+        stepTitle={step.title}
+        title={title}
+        {...stepsProps}
+      />
     </Popin>
   );
 };

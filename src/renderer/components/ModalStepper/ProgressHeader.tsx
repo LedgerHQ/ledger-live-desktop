@@ -17,7 +17,13 @@ const HeaderTextSeparator = styled.div`
   transform: rotate(45deg);
 `;
 
-const ProgressHeader = ({ title, stepIndex, stepCount }) => (
+export type ProgressHeaderProps = {
+  title: string;
+  stepIndex: number;
+  stepCount: number;
+};
+
+const ProgressHeader = ({ title, stepIndex, stepCount }: ProgressHeaderProps) => (
   <FlexBox flexDirection="row" alignItems="center" mb="32px">
     <HeaderText>{title}</HeaderText>
     <HeaderTextSeparator />

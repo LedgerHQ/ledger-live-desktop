@@ -6,34 +6,21 @@ import { ArrowRightRegular } from "@ledgerhq/icons-ui/react";
 
 const Container = styled(FlexBox).attrs(() => ({
   flexDirection: "column",
+  p: 12,
 }))`
-  height: 100%;
   flex: 0 0 48%;
-  padding: 40px;
 `;
 
-const StepTitleText = styled(Text).attrs(() => ({
-  type: "h3",
-  ff: "Alpha|Medium",
-  fontSize: "28px",
-  uppercase: true,
-  marginBottom: "12px",
-}))``;
-
-const StepDescriptionText = styled(Text).attrs(() => ({
-  ff: "Inter",
-  fontSize: "14px",
-  color: "palette.neutral.c80",
-}))``;
-
-type StepLeftSideProps = {
+export type StepLeftSideProps = {
   Header: React.ReactNode;
-  title?: string;
+  stepTitle?: string;
   description?: string;
   AsideLeft?: React.ReactNode;
   continueLabel?: string;
   backLabel?: string;
+  hideContinueButton?: boolean,
   continueDisabled?: boolean;
+  hideBackButton?: boolean,
   backDisabled?: boolean;
   onClickContinue: (...args: any) => any;
   onClickBack: (...args: any) => any;
@@ -41,13 +28,15 @@ type StepLeftSideProps = {
 
 const StepLeftSide = ({
   Header,
-  title,
+  stepTitle,
   description,
   AsideLeft,
   continueLabel = "Continue",
   backLabel = "Back",
+  hideContinueButton = false,
   continueDisabled = false,
   backDisabled = false,
+  hideBackButton = false,
   onClickContinue,
   onClickBack,
 }: StepLeftSideProps) => {
@@ -57,23 +46,23 @@ const StepLeftSide = ({
         {Header}
         {AsideLeft || (
           <>
-            <StepTitleText>{title}</StepTitleText>
-            <StepDescriptionText>{description}</StepDescriptionText>
+            <Text variant="h3" mb={5}>{stepTitle}</Text>
+            <Text variant="body" fontWeight="medium" color="palette.neutral.c80">{description}</Text>
           </>
         )}
       </FlexBox>
       <FlexBox flexDirection="column">
-        <Button
+        {!hideContinueButton && <Button
           disabled={continueDisabled}
           variant="main"
           Icon={ArrowRightRegular}
           onClick={onClickContinue}
         >
           {continueLabel}
-        </Button>
-        <Button disabled={backDisabled} onClick={onClickBack}>
+        </Button>}
+        {!hideBackButton && <Button disabled={backDisabled} onClick={onClickBack}>
           {backLabel}
-        </Button>
+        </Button>}
       </FlexBox>
     </Container>
   );

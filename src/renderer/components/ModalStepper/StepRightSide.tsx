@@ -9,15 +9,15 @@ const Container = styled(FlexBox)`
   align-items: center;
 `;
 
-type StepRightSideProps = {
+export type StepRightSideProps = {
   AsideRight: React.ReactNode;
-  bgColor?: string;
+  rightSideBgColor?: string;
 };
 
 const StepRightSide = (props: StepRightSideProps) => {
-  const { AsideRight, bgColor } = props;
+  const { AsideRight, rightSideBgColor } = props;
   return (
-    <Container backgroundColor={bgColor || "palette.primary.c60"}>{AsideRight || null}</Container>
+    <Container backgroundColor={rightSideBgColor || "palette.primary.c60"}>{AsideRight || null}</Container>
   );
 };
 
