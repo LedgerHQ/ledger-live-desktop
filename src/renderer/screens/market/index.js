@@ -12,7 +12,6 @@ import { getMarketCryptoCurrencies, setMarketParams } from "~/renderer/actions/m
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { MarketState } from "~/renderer/reducers/market";
 import { MarketContext } from "~/renderer/contexts/MarketContext";
-import NoCryptosFound from "~/renderer/components/MarketList/NoCryptosFound";
 import { GET_MARKET_CRYPTO_CURRENCIES, SET_MARKET_PARAMS } from "~/renderer/contexts/actionTypes";
 
 type Props = {
@@ -26,13 +25,6 @@ type Props = {
   page: number,
   loading: boolean,
 };
-
-const ShadowContainer = styled(Box)`
-  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 3%);
-  border-radius: 4px;
-  overflow: hidden;
-  background: ${p => p.theme.colors.palette.background.paper};
-`;
 
 class MarketPage extends Component<Props> {
   static contextType = MarketContext;
@@ -59,28 +51,20 @@ class MarketPage extends Component<Props> {
 
   render() {
     const {
-      contextState: { searchValue, loading, currencies },
+      contextState: { searchValue },
     } = this.context;
-    const currenciesLength = currencies.length;
     return (
-      <Box>
+      <Box flex="1">
         <MarketHeader />
-        <ShadowContainer>
-          <SearchContainer horizontal p={0} alignItems="center">
-            <SearchBox
-              id={"market-search-input"}
-              autoFocus
-              onTextChange={e => this.onTextChange(e.target.value)}
-              search={searchValue}
-            />
-          </SearchContainer>
-          <MarketList />
-        </ShadowContainer>
-        {!loading && !currenciesLength && (
-          <Box mt={2} justifyContent="center" horizontal>
-            <NoCryptosFound searchValue={searchValue} />
-          </Box>
-        )}
+        <SearchContainer horizontal p={0} alignItems="center">
+          <SearchBox
+            id={"market-search-input"}
+            autoFocus
+            onTextChange={e => this.onTextChange(e.target.value)}
+            search={searchValue}
+          />
+        </SearchContainer>
+        <MarketList />
       </Box>
     );
   }
@@ -88,7 +72,6 @@ class MarketPage extends Component<Props> {
 
 const SearchContainer: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
-  flex: 1;
   padding: 15px 20px;
   margin-bottom: 2px;
   color: #abadb6;

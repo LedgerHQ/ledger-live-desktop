@@ -62,6 +62,7 @@
     "apply": "Appliquer",
     "done": "Terminé",
     "confirm": "Confirmer",
+    "reject": "Refuser",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
     "delete": "Supprimer",
@@ -304,7 +305,7 @@
           "rate": "Taux",
           "fees": "Frais"
         },
-        "noAccount": "Pas de compte {{name}}",
+        "noAccount": "Créez un compte pour recevoir des {{name}}.",
         "noAccountCTA": "Ajouter un compte"
       },
       "from": {
@@ -806,7 +807,7 @@
     "title": "Prêter",
     "tabs": {
       "dashboard": "Tableau de bord",
-      "opened": "Prêts ouverts",
+      "opened": "Prêts en cours",
       "closed": "Prêts clôturés",
       "history": "Historique"
     },
@@ -822,7 +823,7 @@
       "accruedInterestsTooltip": "Intérêts produits par vos actifs prêtés",
       "interestEarned": "Intérêts gagnés",
       "interestEarnedTooltip": "Intérêts gagnés suite au retrait",
-      "openLoans": "Prêts ouverts",
+      "openLoans": "Prêts en cours",
       "closedLoans": "Prêts clôturés",
       "amountRedeemed": "Montant retiré",
       "date": "Date",
@@ -842,7 +843,7 @@
         "cta": "Déposer"
       },
       "opened": {
-        "title": "Vos prêts ouverts apparaîtront ici.",
+        "title": "Vos prêts en cours apparaîtront ici.",
         "description": "Vous n'avez pas encore fait de prêts.",
         "cta": "Déposer"
       },
@@ -855,7 +856,7 @@
     "headers": {
       "active": {
         "accounts": "Compte",
-        "amountSupplied": "Prêts ouverts",
+        "amountSupplied": "Prêts en cours",
         "amountSuppliedTooltip": "Montant déposé sur le réseau",
         "accruedInterests": "Solde des intérêts",
         "accruedInterestsTooltip": "Intérêts gagnés sur les prêts",
@@ -1132,10 +1133,10 @@
       "description": "Achetez des crypto-actifs via notre partenaire et recevez-les directement dans votre compte Ledger Live.",
       "cta": "Acheter maintenant"
     },
-    "backupPack": {
-      "title": "Back-up Pack",
-      "description": "Gérez vos actifs en toute sécurité avec un Nano X et un Nano S à un prix réduit.",
-      "cta": "Acheter un Back-up Pack"
+    "familyPack": {
+      "title": "Family Pack",
+      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit",
+      "cta": "Acheter un Family Pack"
     },
     "polkaStake": {
       "title": "STAKING DE POLKADOT",
@@ -1179,6 +1180,7 @@
     "disconnected": "Déconnecté",
     "connected": "Connecté",
     "connecting": "Connexion en cours...",
+    "invalidAccount": "Identifiant de compte invalide",
     "steps": {
       "paste": {
         "title": "Coller le lien",
@@ -1187,7 +1189,8 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :"
+        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
+        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :"
       }
     },
     "connectedscreen": {
@@ -1451,7 +1454,7 @@
       "appCatalog": "Catalogue d'applications",
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
-      "appOnDeviceSearch": "Rechercher les applications installées..."
+      "appOnDeviceSearch": "Rechercher des applications installées..."
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
@@ -1744,7 +1747,7 @@
         "parentAccount": "1. Sélectionnez le compte {{currencyName}}.",
         "token": "2. Sélectionnez un token.",
         "verifyTokenType": "Vérifiez que <0>{{token}}</0> est bien un token <0>{{tokenType}}</0>. Tout autre crypto-actif envoyé sur un compte {{currency}} risque d'être perdu.",
-        "warningTokenType": "Envoyez uniquement des tokens <0>{{ticker}}</0> ou <0>{{tokenType}}</0> sur un compte {{currency}}. Tout autre crypto-actif risque d'être perdu."
+        "warningTokenType": "Envoyez uniquement des <0>{{ticker}}</0> ou tokens <0>{{tokenType}}</0> sur des comptes {{currency}}. Tout autre crypto-actif risque d'être définitivement perdu."
       },
       "connectDevice": {
         "title": "Appareil",
@@ -1830,6 +1833,15 @@
   "releaseNotes": {
     "title": "Notes de publication",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Changer la langue de l'application ?",
+    "description": {
+      "newSupport": "Bonne nouvelle ! Grâce aux efforts de nos équipes, Ledger Live est maintenant disponible en {{language}}.",
+      "advice": "Vous pouvez toujours changer la langue plus tard dans les Paramètres."
+    },
+    "switchButton": "Basculer en {{language}}",
+    "no": "Non, merci"
   },
   "distribution": {
     "asset": "Actif ",
@@ -2651,7 +2663,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour certaines cryptos."
+          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin (Taproot) et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2798,7 +2810,8 @@
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
-      "zh": "中文（简体）"
+      "zh": "中文（简体）",
+      "de": "Deutsch"
     }
   },
   "theme": {
@@ -3999,7 +4012,7 @@
       "title": "Un mémo peut être requis lors de l'envoi à ce bénéficiaire."
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Le montant doit être supérieur à {{minAmountFromFormatted}}"
+      "title": "Le montant doit être d'au moins {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Le montant doit être inférieur à {{maxAmountFromFormatted}}"
@@ -4038,7 +4051,11 @@
       "title": "Sélectionnez au moins un validateur."
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
     }
   }
 }

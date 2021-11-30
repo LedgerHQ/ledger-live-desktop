@@ -43,11 +43,11 @@ const dataTable: { [key: string]: RangeData } = {
 };
 
 export const useRange = (range: string = "24h") => {
+  const [rangeData, setRangeData] = useState<RangeData>(dataTable[range]);
+
   useEffect(() => {
     setRangeData(dataTable[range]);
   }, [range]);
-
-  const [rangeData, setRangeData] = useState<RangeData>(dataTable[range]);
 
   return {
     rangeData,

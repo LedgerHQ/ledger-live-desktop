@@ -1,7 +1,6 @@
 // @flow
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -10,14 +9,10 @@ import Button from "~/renderer/components/Button";
 import LoadingPlaceholder from "~/renderer/components/LoadingPlaceholder";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { MarketCurrencyInfo } from "~/renderer/reducers/market";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { rgba } from "~/renderer/styles/helpers";
 import CounterValueFormatter from "~/renderer/components/CounterValueFormatter";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
-
-const Cell = styled(Box)`
-  padding: 15px 20px;
-`;
+import { Cell, ItemRow } from ".";
 
 const CryptoCurrencyIconWrapper: ThemedComponent<{}> = styled("div")`
   height: 20px;
@@ -59,28 +54,14 @@ const Row: ThemedComponent<{}> = styled(Box)`
   }
 `;
 
-const RowContent: ThemedComponent<{
-  disabled?: boolean,
-}> = styled("div")`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  opacity: ${p => (p.disabled ? 0.3 : 1)};
-  height: 53px;
-
-  & * {
-    color: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-    fill: ${p => (p.disabled ? p.theme.colors.palette.text.shade100 : "auto")};
-  }
-`;
-
 type Props = {
   currency: MarketCurrencyInfo,
   counterCurrency: string,
   style: any,
   loading: boolean,
 };
+
+const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
 function MarketRowItem(props: Props) {
   const history = useHistory();
@@ -98,7 +79,7 @@ function MarketRowItem(props: Props) {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("cryptocurrency actions");
+      setTrackingSource("market page");
       history.push({
         pathname: "/exchange",
         state: {
@@ -113,7 +94,7 @@ function MarketRowItem(props: Props) {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("cryptocurrency actions");
+      setTrackingSource("market page");
       history.push({
         pathname: "/swap",
         state: {
@@ -124,35 +105,18 @@ function MarketRowItem(props: Props) {
     [currency, history],
   );
 
-  const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
-
-  const device = useSelector(getCurrentDevice);
-
   return (
     <div style={{ ...style }} onClick={onCurrencyClick}>
       <Row expanded={true}>
-        <RowContent>
-          <Cell
-            style={{ maxWidth: "50px" }}
-            flex="5%"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            horizontal
-            alignItems="center"
-            fontSize={4}
-          >
-            {loading ? <LoadingPlaceholder style={{ width: "20px" }} /> : currency.market_cap_rank}
+        <ItemRow>
+          <Cell>
+            {loading ? (
+              <LoadingPlaceholder style={{ width: "20px" }} />
+            ) : (
+              currency?.market_cap_rank ?? "-"
+            )}
           </Cell>
-          <Cell
-            shrink
-            grow
-            flex="40%"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            horizontal
-            alignItems="center"
-            fontSize={4}
-          >
+          <Cell>
             <CryptoCurrencyIconWrapper>
               {loading ? (
                 <LoadingPlaceholder />
@@ -174,7 +138,7 @@ function MarketRowItem(props: Props) {
                     </Box>
                   </>
                 )}
-                {!loading && currency.supportedCurrency && device && (
+                {!loading && currency.supportedCurrency && (
                   <>
                     {isCurrencySupported("BUY", currency.supportedCurrency) && (
                       <Button outlineGrey small mr={20} onClick={onBuy}>
@@ -191,34 +155,14 @@ function MarketRowItem(props: Props) {
               </Box>
             </div>
           </Cell>
-          <Cell
-            shrink
-            grow
-            flex="20%"
-            ff="Inter|SemiBold"
-            horizontal
-            justifyContent="flex-end"
-            alignItems="center"
-            fontSize={4}
-            color="palette.text.shade100"
-          >
+          <Cell>
             {loading ? (
               <LoadingPlaceholder />
             ) : (
               <CounterValueFormatter value={currency.current_price} currency={counterCurrency} />
             )}
           </Cell>
-          <Cell
-            shrink
-            grow
-            flex="15%"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            horizontal
-            justifyContent="flex-end"
-            alignItems="center"
-            fontSize={4}
-          >
+          <Cell>
             {loading ? (
               <LoadingPlaceholder />
             ) : (
@@ -234,17 +178,7 @@ function MarketRowItem(props: Props) {
               )
             )}
           </Cell>
-          <Cell
-            shrink
-            grow
-            flex="14%"
-            ff="Inter|SemiBold"
-            color="palette.text.shade100"
-            horizontal
-            alignItems="center"
-            justifyContent="flex-end"
-            fontSize={4}
-          >
+          <Cell>
             {loading ? (
               <LoadingPlaceholder />
             ) : (
@@ -255,10 +189,10 @@ function MarketRowItem(props: Props) {
               />
             )}
           </Cell>
-        </RowContent>
+        </ItemRow>
       </Row>
     </div>
   );
 }
 
-export default MarketRowItem;
+export default memo<Props>(MarketRowItem);

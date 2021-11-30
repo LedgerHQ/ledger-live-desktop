@@ -1,5 +1,5 @@
 // @flow
-import * as React from "react";
+import React, { useCallback } from "react";
 import {
   RELOAD,
   SET_MARKET_FILTERS,
@@ -57,7 +57,6 @@ function marketReducer(state: MarketState, action: ContextAction) {
       };
     }
     case SET_MARKET_FILTERS: {
-      console.log(action);
       return {
         ...state,
         filters: { ...state.filters, ...action.payload },
@@ -97,17 +96,20 @@ const initialState: MarketState = {
   error: false,
 };
 
-export function MarketProvider({ children }: { children: React.Node }) {
+export function MarketProvider({ children }: { children: React$Node }) {
   const [state, setState] = React.useReducer(marketReducer, initialState);
   const reduxDispatch: Dispatch<any> = useDispatch();
 
-  const dispatch = async (type: string, payload = {}): Promise<any> => {
-    if (handlers[type]) {
-      await handlers[type]({ dispatch, state, action: { type, payload }, reduxDispatch });
-    } else {
-      setState({ type, payload });
-    }
-  };
+  const dispatch = useCallback(
+    async (type: string, payload = {}): Promise<any> => {
+      if (handlers[type]) {
+        await handlers[type]({ dispatch, state, action: { type, payload }, reduxDispatch });
+      } else {
+        setState({ type, payload });
+      }
+    },
+    [reduxDispatch, state],
+  );
   const value: { contextState: MarketState, contextDispatch: typeof dispatch } = {
     contextState: state,
     contextDispatch: dispatch,

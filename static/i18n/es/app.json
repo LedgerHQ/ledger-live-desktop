@@ -62,6 +62,7 @@
     "apply": "Aplicar",
     "done": "Listo",
     "confirm": "Confirmar",
+    "reject": "Reject",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
     "delete": "Eliminar",
@@ -304,7 +305,7 @@
           "rate": "lorem ipsum",
           "fees": "lorem ipsum"
         },
-        "noAccount": "You don't have {{name}} account",
+        "noAccount": "Create an account to receive {{name}}",
         "noAccountCTA": "No tienes ninguna cuenta de {{name}}."
       },
       "from": {
@@ -1132,10 +1133,10 @@
       "description": "Compra activos cripto a través de nuestro socio y recíbelos directamente en tu cuenta de Ledger",
       "cta": "Comprar ahora"
     },
-    "backupPack": {
-      "title": "Back-up pack",
-      "description": "Administra tus activos de forma segura con un Nano X y Nano S a un precio con descuentos",
-      "cta": "Compra un Back-up pack"
+    "familyPack": {
+      "title": "Family pack",
+      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
+      "cta": "Buy family pack"
     },
     "polkaStake": {
       "title": "Participación con POLKADOT",
@@ -1179,6 +1180,7 @@
     "disconnected": "Desconectado",
     "connected": "Conectado",
     "connecting": "Conectando...",
+    "invalidAccount": "Invalid account id",
     "steps": {
       "paste": {
         "title": "Pegar enlace",
@@ -1187,7 +1189,8 @@
       },
       "confirm": {
         "title": "Conectar",
-        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:"
+        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
       }
     },
     "connectedscreen": {
@@ -1744,7 +1747,7 @@
         "parentAccount": "1. Selecciona la cuenta de {{currencyName}}",
         "token": "2. Selecciona un token",
         "verifyTokenType": "Comprueba que <0>{{token}}</0> sea un token <0>{{tokenType}}</0>. Existe la posibilidad de perder cualquier otro activo cripto enviado a una cuenta de {{currency}}.",
-        "warningTokenType": "Envía solo tokens <0>{{ticker}}</0> o <0>{{tokenType}}</0> a una cuenta de {{currency}}. Existe la posibilidad de perder cualquier otro activo cripto."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Dispositivo",
@@ -1830,6 +1833,15 @@
   "releaseNotes": {
     "title": "Notas de versión",
     "version": "Ledger Live {{versionNb}}"
+  },
+  "systemLanguageAvailable": {
+    "title": "Change your app's language?",
+    "description": {
+      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
+      "advice": "You can always change your language back later in the settings."
+    },
+    "switchButton": "Switch to {{language}}",
+    "no": "I prefer not to"
   },
   "distribution": {
     "asset": "Activo",
@@ -2346,7 +2358,7 @@
       }
     },
     "rebond": {
-      "title": "Revincular activos",
+      "title": "Volver a vincular activos",
       "steps": {
         "amount": {
           "title": "Importe",
@@ -2368,7 +2380,7 @@
             "cta": "Ver detalles"
           },
           "pending": {
-            "title": "Revincular tus activos..."
+            "title": "Volver a vincular tus activos..."
           },
           "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo."
         }
@@ -2651,7 +2663,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use some experimental JS currencies implementations"
+          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2798,7 +2810,8 @@
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
-      "zh": "中文"
+      "zh": "中文",
+      "de": "German"
     }
   },
   "theme": {
@@ -3999,7 +4012,7 @@
       "title": "Es posible que sea necesario un Memo al enviar a este receptor"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "El importe debe ser superior a {{minAmountFromFormatted}}"
+      "title": "Amount must be at least {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "El importe debe ser inferior a {{maxAmountFromFormatted}}"
@@ -4038,7 +4051,11 @@
       "title": "Debes seleccionar al menos un validador"
     },
     "ServiceStatusWarning": {
-      "title": "{{message}}"
+      "title": "{{message}}",
+      "description": ""
+    },
+    "TaprootNotActivated": {
+      "title": "Sending to a taproot address is unsafe before mainnet activation"
     }
   }
 }

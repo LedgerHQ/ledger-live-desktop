@@ -29,7 +29,7 @@ function CryptocurrencySummaryHeader({ currency, loading }: Props) {
   const onRangeSelected = useCallback(
     item => {
       const range = item.value || "1d";
-      contextDispatch(SET_MARKET_RANGE, { range });
+      contextDispatch(SET_MARKET_RANGE, range);
     },
     [contextDispatch],
   );
