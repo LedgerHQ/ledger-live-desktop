@@ -9,9 +9,10 @@ const config: PlaywrightTestConfig = {
   globalSetup: require.resolve("./utils/global-setup"),
   globalTeardown: require.resolve("./utils/global-teardown"),
   use: {
-    launchOptions: {
-      slowMo: 100, // FIXME: slowMo doesn't seem to work
+    launchOptions: { // FIXME: launchOptions doesn't seem to work, go to fixtures/common.ts
+      slowMo: 100,
     },
+    viewport: { width: 1024, height: 768 }, // FIXME: viewport doesn't seem to work
     ignoreHTTPSErrors: true,
     screenshot: process.env.CI ? "on" : "off",
     video: process.env.CI ? "on-first-retry" : "off", // FIXME: "off" doesn't seem to work
@@ -21,9 +22,8 @@ const config: PlaywrightTestConfig = {
   preserveOutput: process.env.CI ? "failures-only" : "always",
   maxFailures: process.env.CI ? 5 : undefined,
   reportSlowTests: process.env.CI ? { max: 0, threshold: 60000 } : null,
-  workers: process.env.CI ? 1 : 1,
-  // FIXME: --update-snapshots doesn't work with --retries
-  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : 1, // NOTE: 'macos-latest' and 'windows-latest' can't run 3 concurrent workers
+  retries: process.env.CI ? 2 : 0, // FIXME: --update-snapshots doesn't work with --retries
   reporter: process.env.CI
     ? [["html", { open: "never", outputFolder: "playwright/artifacts/html-report" }], ["github"]]
     : "list",

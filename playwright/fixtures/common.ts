@@ -47,13 +47,13 @@ const test = base.extend<TestFixtures>({
     );
 
     // launch app
-    const viewport = { width: 1024, height: 768 };
+    const window = { width: 1024, height: 768 };
 
     const electronApp: ElectronApplication = await electron.launch({
       args: [
         "./.webpack/main.bundle.js",
         `--user-data-dir=${userDataPath}`,
-        `--window-size=${viewport.width},${viewport.height}`,
+        // `--window-size=${window.width},${window.height}`, // FIXME: Doesn't work, window size can't be forced?
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
         // "--use-gl=swiftshader"
@@ -62,7 +62,7 @@ const test = base.extend<TestFixtures>({
       ],
       recordVideo: {
         dir: "playwright/artifacts/videos/",
-        size: viewport,
+        size: window, // FIXME: no default value, it could come from viewport property in conf file but it's not the case
       },
       env,
       colorScheme: theme,
