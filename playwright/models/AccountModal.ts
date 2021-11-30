@@ -17,7 +17,7 @@ export class AccountModal extends PortfolioPage {
     this.page = page;
     this.accountsMenu = page.locator('#drawer-menu-accounts');
     this.addAccountButton = page.locator('button:has-text("Add account")');
-    this.modalContainer = page.locator('#modal-container');
+    this.modalContainer = page.locator('#modal-container[style="opacity: 1; transform: scale(1);"]');
     this.modalTitle = page.locator("#modal-title");
     this.selectAccount = page.locator(".select__indicator");
     this.selectAccountInput = page.locator('[placeholder="Search"]');
