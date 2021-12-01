@@ -1,69 +1,70 @@
 import { Icons } from "@ledgerhq/react-ui";
 import React from "react";
+import { useTranslation, TFunction } from "react-i18next";
 import ModalQuizz from "~/renderer/components/ModalQuizz/ModalQuizz";
 
 const Illustration = Icons.BracketsUltraLight;
 
-const quizzSteps = [
+const quizzSteps = (t: TFunction<"translation", undefined>) => [
   {
-    title: "As a Ledger user, my crypto is stored:",
+    title: t("v3.onboarding.quizz.questions.1.text"),
     Illustration,
     choices: [
       {
-        label: "On my Nano",
+        label: t("v3.onboarding.quizz.questions.1.answers.1"),
         correct: false,
       },
       {
-        label: "On the blockchain",
+        label: t("v3.onboarding.quizz.questions.1.answers.2"),
         correct: true,
       },
     ],
-    correctAnswerTitle: "Congrats!",
-    incorrectAnswerTitle: "Incorrect!",
-    answerExplanation:
-      "Your crypto is always stored on the blockchain. Your hardware wallet only holds your private key, which gives access to your crypto.",
+    correctAnswerTitle: t("v3.onboarding.quizz.questions.1.results.success.title"),
+    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.1.results.fail.title"),
+    correctAnswerExplanation: t("v3.onboarding.quizz.questions.1.results.success.text"),
+    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.1.results.fail.text"),
   },
   {
-    title: "If my recovery phrase is no longer secure or private...",
+    title: t("v3.onboarding.quizz.questions.2.text"),
     Illustration,
     choices: [
       {
-        label: "No problem, Ledger can send me a copy",
+        label: t("v3.onboarding.quizz.questions.2.answers.1"),
         correct: false,
       },
       {
-        label:
-          "My wallet is compromised. I need to generate a new recovery phrase and transfer all my coins to it from the old one",
+        label: t("v3.onboarding.quizz.questions.2.answers.2"),
         correct: true,
       },
     ],
-    correctAnswerTitle: "Congrats!",
-    incorrectAnswerTitle: "Incorrect!",
-    answerExplanation:
-      "Anyone who knows your recovery phrase can steal your crypto assets. If you lose it, you must quickly transfer your crypto to a secure place.",
+    correctAnswerTitle: t("v3.onboarding.quizz.questions.2.results.success.title"),
+    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.2.results.fail.title"),
+    correctAnswerExplanation: t("v3.onboarding.quizz.questions.2.results.success.text"),
+    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.2.results.fail.text"),
   },
   {
-    title: "When I connect my Nano to the Ledger app, my private key is...",
+    title: t("v3.onboarding.quizz.questions.3.text"),
     Illustration,
     choices: [
       {
-        label: "Still offline",
+        label: t("v3.onboarding.quizz.questions.3.answers.1"),
         correct: true,
       },
       {
-        label: "Briefly connected to the Internet",
+        label: t("v3.onboarding.quizz.questions.3.answers.2"),
         correct: false,
       },
     ],
-    correctAnswerTitle: "Congrats!",
-    incorrectAnswerTitle: "Incorrect!",
-    answerExplanation:
-      "Your private key always remains offline in your hardware wallet. Even when connected to your Nano, the Ledger app cannot access your private key. You must physically authorize every transaction on your device.",
+    correctAnswerTitle: t("v3.onboarding.quizz.questions.3.results.success.title"),
+    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.3.results.fail.title"),
+    correctAnswerExplanation: t("v3.onboarding.quizz.questions.3.results.success.text"),
+    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.3.results.fail.text"),
   },
 ];
 
 export default function QuizzModal() {
+  const { t } = useTranslation();
   return (
-    <ModalQuizz title="Quizz" isOpen steps={quizzSteps} onClose={() => {}} onFinish={() => {}} />
+    <ModalQuizz title="Quizz" isOpen steps={quizzSteps(t)} onClose={() => {}} onFinish={() => {}} />
   );
 }
