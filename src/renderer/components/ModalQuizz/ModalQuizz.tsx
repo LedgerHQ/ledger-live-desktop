@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Flex, Popin, Radio, Text } from "@ledgerhq/react-ui";
+import { Box, Flex, Popin, Radio, Text } from "@ledgerhq/react-ui";
 import RadioElement from "@ledgerhq/react-ui/components/form/Radio/RadioElement";
 import ModalStepperBody from "../ModalStepper/ModalStepperBody";
 
@@ -172,8 +172,10 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
     />
   );
 
+  const [width, height] = [816, 486];
+
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={816} height={486} p={0}>
+    <Popin isOpen={isOpen} onClose={onClose} width={width} height={height} p={0}>
       <ModalStepperBody
         AsideLeft={AsideLeft}
         AsideRight={AsideRight}

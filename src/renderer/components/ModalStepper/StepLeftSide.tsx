@@ -8,7 +8,7 @@ const Container = styled(FlexBox).attrs(() => ({
   flexDirection: "column",
   p: 12,
 }))`
-  flex: 0 0 48%;
+  width: 48%;
 `;
 
 export type StepLeftSideProps = {

@@ -51,8 +51,10 @@ const ModalStepper = (props: Props) => {
     else setStepIndex(Math.max(0, stepIndex - 1));
   }, [stepIndex, onClose]);
 
+  const [width, height] = [816, 486];
+
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={816} height={486} p={0}>
+    <Popin isOpen={isOpen} onClose={onClose} width={width} height={height} p={0}>
       <ModalStepperBody
         AsideLeft={step.AsideLeft}
         AsideRight={step.AsideRight}
