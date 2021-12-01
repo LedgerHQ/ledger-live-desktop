@@ -35,7 +35,7 @@ export const SectionRow = ({
     p={inset ? 7 : 0}
     inset={inset}
   >
-    <Flex flexDirection="column" flexGrow={1} flexShrink={1} mr={12}>
+    <Flex flexDirection="column" flexGrow={1} flexShrink={1} mr={12} alignItems="start" rowGap={2}>
       {title && (
         <Text ff="Inter|SemiBold" color="palette.neutral.c100" fontSize={14}>
           {title}
@@ -48,9 +48,9 @@ export const SectionRow = ({
         <Link
           href={linkHref}
           iconPosition="right"
-          justifyContent="flex-start"
           type="main"
           size="medium"
+          alwaysUnderline
           Icon={Icons.ExternalLinkMedium}
           onClick={e => {
             e.preventDefault();
