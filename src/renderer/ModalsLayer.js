@@ -9,8 +9,6 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { modalsStateSelector } from "~/renderer/reducers/modals";
 import modals from "~/renderer/modals";
-import ModalStepper from "./components/ModalStepper";
-import { stepperSteps } from "./components/ModalStepper/testModal";
 
 // TODO: SNOOOOOOOOWW
 // import Snow, { isSnowTime } from '~/renderer/components/extra/Snow'
