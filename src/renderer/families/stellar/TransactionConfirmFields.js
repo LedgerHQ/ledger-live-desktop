@@ -42,9 +42,47 @@ const StellarNetworkField = ({ field }: FieldComponentProps) => (
   </TransactionConfirmField>
 );
 
+const StellarAssetCodeField = ({
+  transaction,
+  field,
+}: {
+  transaction: Transaction,
+  field: FieldComponentProps,
+}) => {
+  invariant(transaction.family === "stellar", "stellar transaction");
+
+  return (
+    <TransactionConfirmField label={field.label}>
+      <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
+        {transaction.assetCode}
+      </Text>
+    </TransactionConfirmField>
+  );
+};
+
+const StellarAssetIssuerField = ({
+  transaction,
+  field,
+}: {
+  transaction: Transaction,
+  field: FieldComponentProps,
+}) => {
+  invariant(transaction.family === "stellar", "stellar transaction");
+
+  return (
+    <TransactionConfirmField label={field.label}>
+      <Text ff="Inter|Medium" color="palette.text.shade80" fontSize={3}>
+        {transaction.assetIssuer}
+      </Text>
+    </TransactionConfirmField>
+  );
+};
+
 const fieldComponents = {
   "stellar.memo": StellarMemoField,
   "stellar.network": StellarNetworkField,
+  "stellar.assetCode": StellarAssetCodeField,
+  "stellar.assetIssuer": StellarAssetIssuerField,
 };
 
 export default {
