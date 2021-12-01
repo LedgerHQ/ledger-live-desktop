@@ -8,7 +8,7 @@ import CloseButton from "../ModalStepper/CloseButton";
 
 type QuizzChoice = {
   /**
-   *
+   * Displayed label
    */
   label: string;
   /**
@@ -28,13 +28,25 @@ type QuizzChoice = {
 };
 
 export type QuizzStep = {
+  /**
+   *  Title of the question
+   */
   title: string;
+  /**
+   * Answer choices for this question
+   */
   choices: Array<QuizzChoice>;
+  /**
+   * Default illustration to display on the right
+   */
   Illustration?: React.ReactNode;
   /**
    * generic explanation to display on any answer
    */
   answerExplanation?: string;
+  /**
+   * Illustration to display on the right in case of a correct answer
+   */
   CorrectAnswerIllustration?: React.ReactNode;
   /**
    * generic title to display in case the user picks a correct answer
@@ -45,13 +57,16 @@ export type QuizzStep = {
    *    if defined, it will override answerExplanation
    */
   correctAnswerExplanation?: string;
+  /**
+   * Illustration to display on the right in case of an incorrect answer
+   */
   IncorrectAnswerIllustration?: React.ReactNode;
   /**
-   * generic title to display in case the user picks a correct answer
+   * generic title to display in case the user picks an incorrect answer
    */
   incorrectAnswerTitle: string;
   /**
-   * generic explanation to display in case the user picks a correct answer
+   * generic explanation to display in case the user picks an incorrect answer
    *    if defined, it will override answerExplanation
    */
   incorrectAnswerExplanation?: string;
@@ -64,10 +79,18 @@ export type Props = {
   steps: Array<QuizzStep>;
   onClose: () => void;
   isOpen: boolean;
+  dismissable?: boolean;
 };
 
-const ModalQuizz: React.FC<Props> = (props: Props) => {
-  const { title, steps, isOpen, onClose = () => {}, started, StartScreen } = props;
+const ModalQuizz: React.FunctionComponent<Props> = ({
+  title,
+  steps,
+  isOpen,
+  onClose = () => {},
+  started,
+  StartScreen,
+  dismissable = true,
+}: Props) => {
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
 
@@ -84,10 +107,21 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
     } else {
       setStepIndex(stepIndex + 1);
     }
-  }, [stepIndex, stepCount, setStepIndex, setUserChoiceIndex]);
+  }, [stepIndex, stepCount, setStepIndex, setUserChoiceIndex, onClose]);
 
-  const step = steps[stepIndex];
-  const choices = step.choices;
+  const {
+    title: stepTitle,
+    choices,
+    answerExplanation,
+    correctAnswerExplanation,
+    CorrectAnswerIllustration,
+    correctAnswerTitle,
+    Illustration,
+    incorrectAnswerExplanation,
+    IncorrectAnswerIllustration,
+    incorrectAnswerTitle,
+  } = steps[stepIndex];
+
   const userMadeAChoice = userChoiceIndex !== undefined;
   const userChoice = userMadeAChoice ? choices[userChoiceIndex] : undefined;
   const isCorrectChoice = userChoice ? userChoice.correct : undefined;
@@ -96,7 +130,7 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
 
   const AsideLeft = (
     <Flex flexDirection="column" rowGap={12}>
-      <Text variant="h5">{step.title}</Text>
+      <Text variant="h5">{stepTitle}</Text>
       <Radio
         name={`quizz-${title}-step-${stepIndex}`}
         onChange={value => !userMadeAChoice && setUserChoiceIndex(value)}
@@ -118,19 +152,19 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
   const rightSideIllustration =
     (userMadeAChoice
       ? isCorrectChoice
-        ? step.CorrectAnswerIllustration
-        : step.IncorrectAnswerIllustration
-      : step.Illustration) || step.Illustration;
+        ? CorrectAnswerIllustration
+        : IncorrectAnswerIllustration
+      : Illustration) || Illustration;
 
   const rightSideTitle = userMadeAChoice
     ? userChoice?.specificAnswerTitle ||
-      (isCorrectChoice ? step.correctAnswerTitle : step.incorrectAnswerTitle)
+      (isCorrectChoice ? correctAnswerTitle : incorrectAnswerTitle)
     : null;
 
   const rightSideExplanation = userMadeAChoice
     ? userChoice?.specificAnswerExplanation ||
-      (isCorrectChoice ? step.correctAnswerExplanation : step.incorrectAnswerExplanation) ||
-      step.answerExplanation
+      (isCorrectChoice ? correctAnswerExplanation : incorrectAnswerExplanation) ||
+      answerExplanation
     : null;
 
   const rightSideBgColor = userMadeAChoice
@@ -179,7 +213,7 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
           stepCount={stepCount}
         />
       )}
-      <CloseButton onClick={onClose} />
+      {dismissable && <CloseButton onClick={onClose} />}
     </Popin>
   );
 };

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { noop } from "lodash";
-import { Box, Button, Icons } from "@ledgerhq/react-ui";
 import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 import ProgressBar from "./ProgressBar";
 import StepLeftSide, { StepLeftSideProps } from "./StepLeftSide";
