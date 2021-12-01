@@ -13,9 +13,9 @@ type StepProps = {
   continueLabel?: string;
   backLabel?: string;
   continueDisabled?: boolean;
-  hideContinueButton?: boolean,
+  hideContinueButton?: boolean;
   backDisabled?: boolean;
-  hideBackButton?: boolean,
+  hideBackButton?: boolean;
 };
 
 type Props = {

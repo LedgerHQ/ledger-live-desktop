@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
+import { noop } from "lodash";
 import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 import ProgressBar from "./ProgressBar";
 import StepLeftSide, { StepLeftSideProps } from "./StepLeftSide";
-import StepRightSide, { StepRightSideProps } from "./StepRightSide";
+import StepRightSide, { StepRightSideProps } from "./StepRightSide";
 import ProgressHeader, { ProgressHeaderProps } from "./ProgressHeader";
 
 export type Props = Omit<StepLeftSideProps, "Header"> & StepRightSideProps & ProgressHeaderProps;
@@ -29,8 +30,8 @@ export default function ModalStepperBody({
   continueDisabled,
   hideBackButton,
   backDisabled,
-  onClickContinue,
-  onClickBack,
+  onClickContinue = noop,
+  onClickBack = noop,
   AsideRight,
   rightSideBgColor,
   stepIndex,
@@ -38,7 +39,7 @@ export default function ModalStepperBody({
 }: Props) {
   const { t } = useTranslation();
 
-  const stepsProps = {stepIndex, stepCount};
+  const stepsProps = { stepIndex, stepCount };
 
   const defaultContinueLabel = t("common.continue");
   const defaultBackLabel = t("common.back");
@@ -55,10 +56,11 @@ export default function ModalStepperBody({
         continueDisabled={continueDisabled}
         hideBackButton={hideBackButton}
         backDisabled={backDisabled}
-        {...{ onClickContinue, onClickBack }}
+        onClickContinue={onClickContinue}
+        onClickBack={onClickBack}
       />
       <StepRightSide AsideRight={AsideRight} rightSideBgColor={rightSideBgColor} />
       <ProgressBar {...stepsProps} />
     </StepContainer>
-  )
+  );
 }
