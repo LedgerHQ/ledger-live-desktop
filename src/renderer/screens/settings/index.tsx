@@ -99,7 +99,7 @@ const Settings = ({ history, location, match }: RouteComponentProps) => {
   }, [match, history, location, items, activeTabIndex]);
 
   return (
-    <Flex flexDirection="column" rowGap={10} pt={4}>
+    <Flex flexDirection="column" rowGap={10} pt={4} pb={10}>
       <Flex flexDirection="column" rowGap={10} px={12}>
         <Text variant="h3" lineHeight="1.15">{t("settings.title")}</Text>
         <Chip 

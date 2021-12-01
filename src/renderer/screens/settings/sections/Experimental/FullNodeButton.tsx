@@ -1,4 +1,3 @@
-// @flow
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import { openModal } from "~/renderer/actions/modals";
@@ -15,7 +14,7 @@ const FullNodeButton = () => {
   return (
     <>
       <Track onUpdate event={fullNodeEnabled ? "editFullNode" : "setupFullNode"} />
-      <Button onClick={onOpenModal} primary>
+      <Button onClick={onOpenModal} variant="main">
         <Trans i18nKey={fullNodeEnabled ? "fullNode.edit" : "fullNode.connect"} />
       </Button>
     </>

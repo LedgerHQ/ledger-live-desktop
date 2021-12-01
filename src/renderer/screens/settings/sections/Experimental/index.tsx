@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { isEnvDefault } from "@ledgerhq/live-common/lib/env";
 import { experimentalFeatures, isReadOnlyEnv } from "~/renderer/experimental";
 import { useDispatch } from "react-redux";
@@ -8,20 +8,14 @@ import type { Feature } from "~/renderer/experimental";
 import { openModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import useEnv from "~/renderer/hooks/useEnv";
-import Alert from "~/renderer/components/Alert";
 import Button from "~/renderer/components/Button";
 import { setShowClearCacheBanner } from "~/renderer/actions/settings";
 import { SectionRow as Row } from "../../Rows";
-import { Flex } from "@ledgerhq/react-ui";
+import { Flex, Alert } from "@ledgerhq/react-ui";
 
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
-import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
-
-const experimentalTypesMap = {
-  toggle: ExperimentalSwitch,
-  integer: ExperimentalInteger,
-};
+import FullNode from "./FullNode";
 
 const ExperimentalFeatureRow = ({
   feature,
@@ -31,7 +25,6 @@ const ExperimentalFeatureRow = ({
   onDirtyChange: () => void,
 }) => {
   const { type, dirty, ...rest } = feature;
-  const Children = experimentalTypesMap[feature.type];
   const envValue = useEnv(feature.name);
   const isDefault = isEnvDefault(feature.name);
   const onChange = useCallback(
@@ -101,13 +94,13 @@ const SectionExperimental = () => {
     };
   }, [dispatch, needsCleanCache]);
 
+  const { t } = useTranslation();
+
   return (
     <div data-e2e="experimental_section_title">
       <TrackPage category="Settings" name="Experimental" />
       <Flex flexDirection="column" rowGap={12}>
-        <Alert type="security" m={4}>
-          <Trans i18nKey="settings.experimental.disclaimer"></Trans>
-        </Alert>
+        <Alert type="warning" showIcon title={t("settings.experimental.disclaimer")} />
         {experimentalFeatures.map(feature =>
           !feature.shadow || (feature.shadow && !isEnvDefault(feature.name)) ? (
             <ExperimentalFeatureRow
