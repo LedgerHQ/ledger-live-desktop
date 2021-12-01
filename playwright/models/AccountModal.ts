@@ -2,7 +2,6 @@ import { Page, Locator, Handle, expect } from "@playwright/test";
 import { PortfolioPage } from "./PortfolioPage";
 export class AccountModal extends PortfolioPage {
   readonly page: Page;
-  readonly accountsMenu: Locator;
   readonly addAccountButton: Locator;
   readonly modalContainer: Locator;
   readonly modalTitle: Locator;
@@ -11,23 +10,22 @@ export class AccountModal extends PortfolioPage {
   readonly continueButton: Locator;
   readonly addAccountsButton: Locator;
   readonly doneButton: Locator;
+  readonly closeButton: Locator;
+  readonly tokenAddAccountButton: Locator;
 
   constructor(page: Page) {
     super(page);
     this.page = page;
-    this.accountsMenu = page.locator('#drawer-menu-accounts');
     this.addAccountButton = page.locator('button:has-text("Add account")');
     this.modalContainer = page.locator('#modal-container[style="opacity: 1; transform: scale(1);"]');
-    this.modalTitle = page.locator("#modal-title");
+    this.modalTitle = page.locator('#modal-title');
     this.selectAccount = page.locator("text=Choose a crypto asset");
     this.selectAccountInput = page.locator('[placeholder="Search"]');
     this.continueButton = page.locator('button:has-text("Continue")');
-    this.addAccountsButton = page.locator('button:has-text("Add accounts")');
-    this.doneButton = page.locator('button:has-text("Done")');
-  }
-
-  async navigate() {
-    await this.accountsMenu.click();
+    this.addAccountsButton = page.locator('#add-accounts-import-add-button');
+    this.doneButton = page.locator('#add-accounts-finish-close-button');
+    this.closeButton = page.locator('#modal-close-button');
+    this.tokenAddAccountButton = page.locator('#modal-token-continue-button');
   }
 
   async open() {
@@ -37,13 +35,25 @@ export class AccountModal extends PortfolioPage {
   }
 
   async select(currency: string) {
+    await this.selectCurrency(currency);
+    await this.continue();
+  } 
+
+  async selectCurrency(currency: string) {
     await this.selectAccount.click();
     await this.selectAccountInput.fill(currency);
     await this.selectAccountInput.press("Enter");
-    expect(await this.modalContainer.screenshot()).toMatchSnapshot(`${currency}-select.png`);
+  }
+
+  async continue() {
     await this.continueButton.click();
   }
 
+  // Add ETH account button
+  async continueParent() {
+    await this.tokenAddAccountButton.click();
+  }
+  
   async addAccounts(currency: string) {
     await this.addAccountsButton.isEnabled();
     expect(await this.modalContainer.screenshot()).toMatchSnapshot(`${currency}-accounts-list.png`);
@@ -52,4 +62,15 @@ export class AccountModal extends PortfolioPage {
     await this.doneButton.click();
     await this.totalBalance.waitFor({ state: "visible" });
   }
+
+  async complete() {
+    await this.addAccountsButton.click();
+    await this.doneButton.click();
+  }
+
+  async close() {
+    await this.closeButton.click();
+  }
+
+
 }

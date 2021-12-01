@@ -2,7 +2,6 @@ import { Page, Locator } from "@playwright/test";
 
 export class ManagerPage {
   readonly page: Page;
-  readonly managerMenu: Locator;
   readonly firmwareUpdateButton: Locator;
   readonly installedAppsTab: Locator;
   readonly catalogAppsTab: Locator;
@@ -17,7 +16,6 @@ export class ManagerPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.managerMenu = page.locator('#drawer-manager-button');
     this.firmwareUpdateButton = page.locator("#manager-update-firmware-button");
     this.installedAppsTab = page.locator('#appsOnDevice-tab');
     this.catalogAppsTab = page.locator('#appCatalog-tab');
@@ -29,10 +27,6 @@ export class ManagerPage {
     this.uninstallAllAppsButton = page.locator('button:has-text("Uninstall all")');
     this.confirmButton = page.locator("#modal-confirm-button");
     this.installedAppEmptyState = page.locator("text=No apps installed on your device");
-  }
-
-  async navigate() {
-    await this.managerMenu.click();
   }
 
   async goToInstalledAppTab() {
