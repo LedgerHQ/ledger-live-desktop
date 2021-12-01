@@ -52,7 +52,7 @@ const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
   useEffect(() => {
     setTimeout(() => {
       setReadyToDecide(true);
-    }, 2000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
