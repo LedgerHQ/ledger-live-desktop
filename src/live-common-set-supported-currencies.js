@@ -35,5 +35,7 @@ setSupportedCurrencies([
   "bitcoin_testnet",
   "ethereum_ropsten",
   "cosmos_testnet",
-  "solana"
+  "solana",
+  "solana_devnet",
+  "solana_testnet"
 ]);
