@@ -13,16 +13,16 @@ export default function QuizzModal() {
   const onClose = useCallback(() => {
     dispatch(closeModal("MODAL_ONBOARDING_QUIZZ"));
   }, [dispatch]);
-  const onCloseLoop = useCallback(() => {
-    setStarted(false);
-  }, [setStarted]);
+  // const onCloseLoop = useCallback(() => {
+  //   setStarted(false);
+  // }, [setStarted]);
   return (
     <ModalQuizz
       started={started}
       title={t("v3.onboarding.quizz.heading")}
       isOpen
       steps={getQuizzSteps(t)}
-      onClose={onCloseLoop}
+      onClose={onClose}
       StartScreen={<StartScreen onStart={() => setStarted(true)} />}
     />
   );
