@@ -47,7 +47,7 @@ export default function Currencies() {
       >
         <SelectCurrency
           small
-          minWidth={200}
+          minWidth={260}
           value={currency}
           // $FlowFixMe Mayday we have a problem with <Select /> and its props
           onChange={handleChangeCurrency}

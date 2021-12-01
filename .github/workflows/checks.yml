@@ -20,7 +20,7 @@ jobs:
       - name: get latest LLD runner AMI id
         id: get-ami-id
         run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
       - name: start EC2 runner
         id: start-ec2-runner
         uses: machulav/ec2-github-runner@v2

@@ -133,6 +133,8 @@
     "type": {
       "IN": "Received",
       "OUT": "Sent",
+      "NFT_IN": "NFT Received",
+      "NFT_OUT": "NFT Sent",
       "CREATE": "Created",
       "REVEAL": "Revealed",
       "DELEGATE": "Delegated",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Send",
+        "open": "Open in {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Properties",
+        "description": "Description",
+        "contract": "Contract address",
+        "tokenId": "Token ID",
+        "quantity": "Quantity"
+      }
+    },
+    "collections": {
+      "title": "NFT (Non Fungible Tokens) Collections",
+      "receiveCTA": "Receive NFT",
+      "galleryCTA": "See Gallery",
+      "seeMore": "See more collections",
+      "seeAll": "See all collections",
+      "seeLess": "See less"
+    },
+    "gallery": {
+      "title": "All NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Send",
+          "contract": "Contract: {{contract}}"
+        },
+        "operationList": {
+          "header": "Latest Operations",
+          "OUT": "Sent",
+          "IN": "Received"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "Tokens",
     "cta": "Add token",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "Can't add a new account before you've received assets on your <1><0>{{accountName}}</0></1> account",
       "noAccountToCreate": "No <1><0>{{currencyName}}</0></1> account was found to be created",
       "showAllAddressTypes": "Show all address types",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on older address formats."
+      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit or Native Segwit?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "This operation has internal operations",
     "details": "{{ currency }} details",
     "multipleAddresses": "Why multiple addresses?",
+    "nft": {
+      "name": "Token Name",
+      "contract": "Token Contract",
+      "id": "Token (NFT) ID",
+      "amount": "Amount"
+    },
     "extra": {
       "frozenAmount": "Frozen amount",
       "unfreezeAmount": "Unfreeze amount",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "Search app in catalog...",
       "appsOnDevice": "Apps installed",
       "appOnDeviceSearch": "Search installed apps..."
+    },
+    "disconnected": {
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "Send",
+    "titleNft": "Send NFT",
     "totalSpent": "Total to debit",
     "steps": {
       "recipient": {
-        "title": "Recipient"
+        "title": "Recipient",
+        "nftRecipient": "NFT to send"
       },
       "amount": {
         "title": "Amount",
         "banner": "Maximum spendable amount is",
         "fees": "Fees",
         "standard": "Standard",
-        "advanced": "Advanced"
+        "advanced": "Advanced",
+        "nftQuantity": "Quantity"
       },
       "summary": {
         "title": "Summary"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "Optional",
         "ethereumGasLimit": "Gas limit",
         "ethereumGasPrice": "Gas price",
-        "unitPerByte": "{{unit}} per byte"
+        "unitPerByte": "{{unit}} per byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantity"
       },
       "verification": {
         "streaming": {
@@ -3385,7 +3446,13 @@
       "undelegate": "validator",
       "claimReward": "rewards recipient",
       "optIn": "recipient",
-      "nominate": "validator"
+      "nominate": "validator",
+      "erc721": {
+        "transfer": "recipient"
+      },
+      "erc1155": {
+        "transfer": "recipient"
+      }
     },
     "votes": "Votes ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "NotEnoughNftOwned": {
+      "title": "You have exceeded the number of available tokens"
     }
   }
 }
