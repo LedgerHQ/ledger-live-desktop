@@ -96,13 +96,31 @@ const SwapConnectWidget = (
       />
       <Wrapper>
         <CustomWebview
-          src={url.toString()}
+          src={process.env.MOCK_FTX_WIDGETS ? { html: "<h1>YOOOOOOO</h1>" } : url.toString()}
           ref={webviewRef}
           preload={`file://${remote.app.dirname}/swapConnectWebviewPreloader.bundle.js`}
         />
       </Wrapper>
     </Container>
   );
+};
+
+const html = {
+  html: `<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+  
+    <title>Test login widget</title>
+  </head>
+  
+  <body>
+    // <script src="js/scripts.js"></script>
+    <h1>YOOOOOO TESTINGGGG</h1>
+  </body>
+  </html>
+  `,
 };
 
 export default forwardRef(SwapConnectWidget);
