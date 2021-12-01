@@ -1,39 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { Box, Flex, Popin, Radio, Text } from "@ledgerhq/react-ui";
+import { Flex, Popin, Radio, Text } from "@ledgerhq/react-ui";
 import RadioElement from "@ledgerhq/react-ui/components/form/Radio/RadioElement";
 import ModalStepperBody from "../ModalStepper/ModalStepperBody";
-
-type ResultScreenProps = {
-  Illustration?:
-    | React.ComponentType<{ size?: number }>
-    | ((props: { size?: number }) => React.ReactNode);
-  illustrationSize?: number;
-  title?: string | null;
-  description?: string | null;
-};
-
-export const GenericResultScreen = ({
-  Illustration,
-  illustrationSize,
-  title,
-  description,
-}: ResultScreenProps) => {
-  return (
-    <Flex flexDirection="column" alignItems="center" alignSelf="center" p={12}>
-      {Illustration && <Illustration size={illustrationSize} />}
-      {title && (
-        <Text variant="h1" mt={7} mb={5}>
-          {title}
-        </Text>
-      )}
-      {description && (
-        <Text variant="paragraph" fontWeight="medium" textAlign="center">
-          {description}
-        </Text>
-      )}
-    </Flex>
-  );
-};
+import Answer from "./Answer";
+import { useTranslation } from "react-i18next";
+import CloseButton from "../ModalStepper/CloseButton";
 
 type QuizzChoice = {
   /**
@@ -88,15 +59,19 @@ export type QuizzStep = {
 
 export type Props = {
   title: string;
+  StartScreen: React.ReactNode;
+  started?: boolean;
   steps: Array<QuizzStep>;
   onClose: () => void;
   isOpen: boolean;
 };
 
 const ModalQuizz: React.FC<Props> = (props: Props) => {
-  const { title, steps, isOpen, onClose = () => {} } = props;
+  const { title, steps, isOpen, onClose = () => {}, started, StartScreen } = props;
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
+
+  const { t } = useTranslation();
 
   const [userChoiceIndex, setUserChoiceIndex] = useState(undefined);
 
@@ -104,6 +79,7 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
     setUserChoiceIndex(undefined);
     if (stepIndex >= stepCount - 1) {
       // TODO: handle continue pressed on last question;
+      onClose();
       setStepIndex(0);
     } else {
       setStepIndex(stepIndex + 1);
@@ -164,7 +140,7 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
     : "primary.c60";
 
   const AsideRight = (
-    <GenericResultScreen
+    <Answer
       Illustration={rightSideIllustration}
       illustrationSize={userMadeAChoice ? 176 : 280}
       title={rightSideTitle}
@@ -175,18 +151,35 @@ const ModalQuizz: React.FC<Props> = (props: Props) => {
   const [width, height] = [816, 486];
 
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={width} height={height} p={0}>
-      <ModalStepperBody
-        AsideLeft={AsideLeft}
-        AsideRight={AsideRight}
-        hideBackButton
-        hideContinueButton={!userMadeAChoice}
-        onClickContinue={onClickContinue}
-        rightSideBgColor={rightSideBgColor}
-        title={title}
-        stepIndex={stepIndex}
-        stepCount={stepCount}
-      />
+    <Popin
+      isOpen={isOpen}
+      onClose={onClose}
+      width={width}
+      height={height}
+      p={0}
+      position="relative"
+    >
+      {!started && StartScreen ? (
+        StartScreen
+      ) : (
+        <ModalStepperBody
+          AsideLeft={AsideLeft}
+          AsideRight={AsideRight}
+          hideBackButton
+          continueLabel={
+            stepIndex + 1 >= stepCount
+              ? t("v3.onboarding.quizz.buttons.finish")
+              : t("v3.onboarding.quizz.buttons.next")
+          }
+          hideContinueButton={!userMadeAChoice}
+          onClickContinue={onClickContinue}
+          rightSideBgColor={rightSideBgColor}
+          title={title}
+          stepIndex={stepIndex}
+          stepCount={stepCount}
+        />
+      )}
+      <CloseButton onClick={onClose} />
     </Popin>
   );
 };

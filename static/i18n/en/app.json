@@ -7159,7 +7159,7 @@
         "title": "Now game on!",
         "descr": "Answer 3 simple questions to avoid common misconceptions about your hardware wallet.",
         "buttons": {
-          "start": "Let’s take the quiz",
+          "start": "I'm ready",
           "next": "Next question",
           "finish": "Finish quiz"
         },

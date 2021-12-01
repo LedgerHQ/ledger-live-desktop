@@ -1,70 +1,29 @@
-import { Icons } from "@ledgerhq/react-ui";
-import React from "react";
-import { useTranslation, TFunction } from "react-i18next";
+import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { closeModal } from "~/renderer/actions/modals";
 import ModalQuizz from "~/renderer/components/ModalQuizz/ModalQuizz";
-
-const Illustration = Icons.BracketsUltraLight;
-
-const quizzSteps = (t: TFunction<"translation", undefined>) => [
-  {
-    title: t("v3.onboarding.quizz.questions.1.text"),
-    Illustration,
-    choices: [
-      {
-        label: t("v3.onboarding.quizz.questions.1.answers.1"),
-        correct: false,
-      },
-      {
-        label: t("v3.onboarding.quizz.questions.1.answers.2"),
-        correct: true,
-      },
-    ],
-    correctAnswerTitle: t("v3.onboarding.quizz.questions.1.results.success.title"),
-    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.1.results.fail.title"),
-    correctAnswerExplanation: t("v3.onboarding.quizz.questions.1.results.success.text"),
-    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.1.results.fail.text"),
-  },
-  {
-    title: t("v3.onboarding.quizz.questions.2.text"),
-    Illustration,
-    choices: [
-      {
-        label: t("v3.onboarding.quizz.questions.2.answers.1"),
-        correct: false,
-      },
-      {
-        label: t("v3.onboarding.quizz.questions.2.answers.2"),
-        correct: true,
-      },
-    ],
-    correctAnswerTitle: t("v3.onboarding.quizz.questions.2.results.success.title"),
-    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.2.results.fail.title"),
-    correctAnswerExplanation: t("v3.onboarding.quizz.questions.2.results.success.text"),
-    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.2.results.fail.text"),
-  },
-  {
-    title: t("v3.onboarding.quizz.questions.3.text"),
-    Illustration,
-    choices: [
-      {
-        label: t("v3.onboarding.quizz.questions.3.answers.1"),
-        correct: true,
-      },
-      {
-        label: t("v3.onboarding.quizz.questions.3.answers.2"),
-        correct: false,
-      },
-    ],
-    correctAnswerTitle: t("v3.onboarding.quizz.questions.3.results.success.title"),
-    incorrectAnswerTitle: t("v3.onboarding.quizz.questions.3.results.fail.title"),
-    correctAnswerExplanation: t("v3.onboarding.quizz.questions.3.results.success.text"),
-    incorrectAnswerExplanation: t("v3.onboarding.quizz.questions.3.results.fail.text"),
-  },
-];
+import { getQuizzSteps } from "./quizzSteps";
+import StartScreen from "./StartScreen";
 
 export default function QuizzModal() {
+  const [started, setStarted] = useState(false);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const onClose = useCallback(() => {
+    dispatch(closeModal("MODAL_ONBOARDING_QUIZZ"));
+  }, [dispatch]);
+  const onCloseLoop = useCallback(() => {
+    setStarted(false);
+  }, [setStarted]);
   return (
-    <ModalQuizz title="Quizz" isOpen steps={quizzSteps(t)} onClose={() => {}} onFinish={() => {}} />
+    <ModalQuizz
+      started={started}
+      title={t("v3.onboarding.quizz.heading")}
+      isOpen
+      steps={getQuizzSteps(t)}
+      onClose={onCloseLoop}
+      StartScreen={<StartScreen onStart={() => setStarted(true)} />}
+    />
   );
 }
