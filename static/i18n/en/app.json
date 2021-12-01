@@ -1231,6 +1231,14 @@
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})"
+    },
+    "stellar": {
+      "title": "Assets",
+      "cta": "Add asset",
+      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "link": "Learn more about Stellar assets",
+      "seeTokens": "Show assets ({{tokenCount}})",
+      "hideTokens": "Hide assets ({{tokenCount}})"
     }
   },
   "subAccounts": {
@@ -2438,6 +2446,31 @@
           },
           "pending": {
             "title": "Broadcasting transaction..."
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    }
+  },
+  "stellar": {
+    "addAsset": {
+      "title": "Add asset",
+      "steps": {
+        "assets": {
+          "title": "Asset",
+          "info": "[TODO]",
+          "selectLabel": "Choose an asset",
+          "disabledTooltip": "You already have this asset on your Stellar account"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "{{token}} asset successfully added",
+            "text": "You can now receive and send <0>{{token}}</0> assets on your Stellar account.",
+            "cta": "View details"
           },
           "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
         }
