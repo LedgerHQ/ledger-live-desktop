@@ -18,6 +18,7 @@ setSupportedCurrencies([
   "dash",
   "tron",
   "tezos",
+  "elrond",
   "ethereum_classic",
   "zcash",
   "decred",

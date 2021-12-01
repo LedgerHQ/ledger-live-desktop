@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+
   bundle-macos:
     runs-on: macos-latest
     needs: cancel-previous
@@ -82,7 +83,7 @@ jobs:
       - name: get latest LLD runner AMI id
         id: get-ami-id
         run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
       - name: start EC2 runner
         id: start-ec2-runner
         uses: machulav/ec2-github-runner@v2
