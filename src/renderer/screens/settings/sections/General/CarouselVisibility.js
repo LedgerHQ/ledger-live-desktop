@@ -21,7 +21,7 @@ const CarouselVisibility = () => {
       <Switch
         isChecked={carouselVisibility !== CAROUSEL_NONCE}
         onChange={onSetCarouselVisibility}
-        id="settings-display-carousel"
+        data-test-id="settings-display-carousel"
       />
     </>
   );

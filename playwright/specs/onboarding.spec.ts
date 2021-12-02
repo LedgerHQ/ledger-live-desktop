@@ -3,14 +3,12 @@ import { expect } from "@playwright/test";
 import { OnboardingPage } from "../models/OnboardingPage";
 import { DeviceAction } from "../models/DeviceAction";
 
-// Comment out to disable recorder
-// process.env.PWDEBUG = "1";
-
 test("Onboarding", async ({ page }) => {
   const onboardingPage = new OnboardingPage(page);
   const deviceAction = new DeviceAction(page);
 
   await test.step("Get started", async () => {
+    expect(await onboardingPage.getStartedButton).toBeVisible();
     expect(await page.screenshot()).toMatchSnapshot(`getstarted.png`);
     await onboardingPage.getStarted();
   });
