@@ -77,7 +77,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: kill apt-get
-        sudo killall apt-get apt || return 0
+        run: sudo killall apt-get apt || return 0
       - name: install gh
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
