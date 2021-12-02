@@ -7,7 +7,6 @@ import { DeviceAction } from "../models/DeviceAction";
 // process.env.PWDEBUG = "1";
 
 test.use({ userdata: "1AccountBTC1AccountETH" });
-// test.use({ env: { DEV_TOOLS: true } });
 
 test("Swap", async ({ page }) => {
   const swapPage = new SwapPage(page);
