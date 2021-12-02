@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import invariant from "invariant";
 import { BigNumber } from "bignumber.js";
-import { Trans, withTranslation } from "react-i18next";
+import { withTranslation, useTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import type { Account, Transaction } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -15,6 +15,10 @@ import CheckBox from "~/renderer/components/CheckBox";
 import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 import TranslatedError from "~/renderer/components/TranslatedError";
 import styled from "styled-components";
+import { urls } from "~/config/urls";
+import { openURL } from "~/renderer/linking";
+import { track } from "~/renderer/analytics/segment";
+import LabelWithExternalIcon from "~/renderer/components/LabelWithExternalIcon";
 
 type Props = {
   account: Account,
@@ -29,6 +33,8 @@ const WarningDisplay = styled(Box)`
 
 const Root = ({ onChange, account, transaction, status }: Props) => {
   invariant(transaction.family === "solana", "solana family expected");
+
+  const { t } = useTranslation();
 
   const onChangeTx = useCallback(
     patch => {
@@ -45,6 +51,15 @@ const Root = ({ onChange, account, transaction, status }: Props) => {
 
   return (
     <Box flow={2}>
+      {status.warnings.recipient && (
+        <LabelWithExternalIcon
+          onClick={() => {
+            openURL(urls.solana.recipient_info);
+            track("Solana Recipient Info Requested");
+          }}
+          label={t("solana.send.flow.steps.recipient.info_label")}
+        />
+      )}
       {extraWarnings.filter(Boolean).map(warning => (
         <Box>
           <WarningDisplay>

@@ -2471,6 +2471,15 @@
           }
         }
       }
+    },
+    "send": {
+      "flow": {
+        "steps": {
+          "recipient": {
+            "info_label": "Info"
+          }
+        }
+      }
     }
   },
   "delegation": {
