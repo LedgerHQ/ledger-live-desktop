@@ -1,0 +1,30 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      h1 {color:red;}
+      p {color:blue;}
+    </style>
+    
+  
+    <title>Test KYC widget</title>
+  </head>
+  
+  <body style="background-color:powderblue;">
+    
+    <h1>KYC TIMMMME</h1>
+    <button onclick="closeKYC()">
+      Click me to close KYC!
+    </button>
+    <p id="login-message"></p>
+
+    <script>
+      function closeKYC() {
+        document.getElementById("not-logged-in-message").innerHTML = "Not logged in";
+        window.ledger.closeWidget();
+      }
+    </script>
+  </body>
+  </html>

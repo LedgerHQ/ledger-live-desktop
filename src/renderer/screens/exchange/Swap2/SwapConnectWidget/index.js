@@ -52,9 +52,13 @@ const SwapConnectWidget = (
       switch (data.type) {
         case "setToken":
           dispatch(setSwapKYCStatus({ provider, id: data?.token, status: null }));
+          console.log("======== TOKEN SET ==========");
+          console.log(data.type.toString());
+          console.log(data.token.toString());
           break;
         case "closeWidget":
           onClose();
+          console.log("======== CLOSING WIDGET ==========");
           break;
         default:
           break;
@@ -98,7 +102,7 @@ const SwapConnectWidget = (
         <CustomWebview
           src={
             process.env.MOCK_FTX_WIDGETS
-              ? "https://github.com/LedgerHQ/ledger-live-desktop/blob/test/add-test-ftx-widgets/src/renderer/screens/exchange/Swap2/SwapConnectWidget/testLoginWidget.html"
+              ? "http://127.0.0.1:3456/testLoginWidget.html"
               : url.toString()
           }
           ref={webviewRef}
