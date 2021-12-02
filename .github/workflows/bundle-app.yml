@@ -1,4 +1,4 @@
-name: bundle app
+name: Bundle App
 on:
   pull_request:
     branches:
@@ -46,7 +46,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile
+        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -82,7 +82,7 @@ jobs:
       - name: get latest LLD runner AMI id
         id: get-ami-id
         run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
       - name: start EC2 runner
         id: start-ec2-runner
         uses: machulav/ec2-github-runner@v2
@@ -132,6 +132,8 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: kill apt-get
+        run: sudo killall apt-get apt || echo OK
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4
@@ -146,7 +148,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile
+        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name
@@ -221,7 +223,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/get-package-infos@v2.0.0
         id: version
       - name: set beta name

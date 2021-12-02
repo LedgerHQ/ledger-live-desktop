@@ -43,7 +43,7 @@ class PasswordForm extends PureComponent<Props> {
               </Label>
               <InputPassword
                 autoFocus
-                id="current-password-input"
+                data-test-id="current-password-input"
                 onChange={onChange("currentPassword")}
                 value={currentPassword}
                 error={incorrectPassword}
@@ -55,7 +55,7 @@ class PasswordForm extends PureComponent<Props> {
             <InputPassword
               style={{ mt: 4, width: 240 }}
               autoFocus={!hasPassword}
-              id="new-password-input"
+              data-test-id="new-password-input"
               onChange={onChange("newPassword")}
               value={newPassword}
             />
@@ -67,7 +67,7 @@ class PasswordForm extends PureComponent<Props> {
             <InputPassword
               style={{ width: 240 }}
               onEnter={onSubmit}
-              id="confirm-password-input"
+              data-test-id="confirm-password-input"
               onChange={onChange("confirmPassword")}
               value={confirmPassword}
               error={!isValid() && confirmPassword.length > 0 && new PasswordsDontMatchError()}

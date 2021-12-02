@@ -70,7 +70,7 @@ const ProgressWrapper: ThemedComponent<{}> = styled.div`
   justify-content: center;
 `;
 
-const Wrapper: ThemedComponent<{}> = styled.div`
+export const Wrapper: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -107,7 +107,7 @@ export const Footer: ThemedComponent<{}> = styled.div`
   align-items: center;
 `;
 
-const Title = styled(Text).attrs({
+export const Title: ThemedComponent<{}> = styled(Text).attrs({
   ff: "Inter|SemiBold",
   color: "palette.text.shade100",
   textAlign: "center",
@@ -116,7 +116,7 @@ const Title = styled(Text).attrs({
   white-space: pre-line;
 `;
 
-const SubTitle = styled(Text).attrs({
+export const SubTitle: ThemedComponent<{}> = styled(Text).attrs({
   ff: "Inter|Regular",
   color: "palette.text.shade100",
   textAlign: "center",
