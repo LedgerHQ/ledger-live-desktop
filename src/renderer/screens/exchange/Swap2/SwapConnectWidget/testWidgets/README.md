@@ -1,0 +1,1 @@
+- Run `npx http-server -p 3456 ~/dev/ledger-live-desktop/src/renderer/screens/exchange/Swap2/SwapConnectWidget/testWidgets && DEV_TOOLS=1 MOCK_FTX_WIDGETS=1 yarn start`
