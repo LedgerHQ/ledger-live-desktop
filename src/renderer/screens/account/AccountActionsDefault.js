@@ -7,22 +7,37 @@ import IconSwap from "~/renderer/icons/Swap";
 import IconExchange from "~/renderer/icons/Exchange";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import ToolTip from "~/renderer/components/Tooltip";
+import styled from "styled-components";
 
-const ActionDefault = ({
+const IconButton = styled(Button)`
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  justify-content: center;
+  padding: 0;
+`;
+
+export const ActionDefault = ({
   onClick,
   iconComponent,
   labelComponent,
+  event,
+  eventProperties,
 }: {
   onClick: () => void,
   iconComponent: any,
   labelComponent: any,
+  event: string,
+  eventProperties: Object,
 }) => (
-  <Button small primary onClick={onClick}>
-    <Box horizontal flow={1} alignItems="center">
-      {iconComponent}
-      <Box>{labelComponent}</Box>
-    </Box>
-  </Button>
+  <ToolTip content={labelComponent}>
+    <IconButton primary onClick={onClick}>
+      <Box horizontal alignItems="center">
+        {iconComponent}
+      </Box>
+    </IconButton>
+  </ToolTip>
 );
 
 export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (

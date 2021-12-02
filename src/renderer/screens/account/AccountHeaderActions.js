@@ -18,27 +18,23 @@ import type { TFunction } from "react-i18next";
 import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
-import perFamily from "~/renderer/generated/AccountHeaderActions";
-import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Star from "~/renderer/components/Stars/Star";
 import {
+  ActionDefault,
   BuyActionDefault,
   ReceiveActionDefault,
   SendActionDefault,
   SwapActionDefault,
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
+import perFamily from "~/renderer/generated/AccountHeaderActions";
+import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
-import DropDownSelector from "~/renderer/components/DropDownSelector";
-import Button from "~/renderer/components/Button";
-import Text from "~/renderer/components/Text";
 import Graph from "~/renderer/icons/Graph";
-import IconAngleDown from "~/renderer/icons/AngleDown";
-import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
@@ -49,10 +45,10 @@ const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable)
   alignItems: "center",
   justifyContent: "center",
 }))`
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   border: 1px solid ${p => p.theme.colors.palette.text.shade60};
-  border-radius: 4px;
+  border-radius: 20px;
   &:hover {
     color: ${p => (p.disabled ? "" : p.theme.colors.palette.text.shade100)};
     background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.2))};
@@ -154,22 +150,18 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     openModal("MODAL_RECEIVE", { parentAccount, account });
   }, [parentAccount, account, openModal]);
 
-  const renderItem = useCallback(
-    ({ item: { label, onClick, event, eventProperties, icon } }) => {
-      const Icon = icon;
-      return (
-        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
-          <Box horizontal flow={1} alignItems="center">
-            {Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
-            <Box>
-              <Text ff="Inter|SemiBold">{label}</Text>
-            </Box>
-          </Box>
-        </Button>
-      );
-    },
-    [currency, contrastText],
-  );
+  const renderAction = ({ label, onClick, event, eventProperties, icon }) => {
+    const Icon = icon;
+    return (
+      <ActionDefault
+        onClick={onClick}
+        event={event}
+        eventProperties={eventProperties}
+        iconComponent={Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
+        labelComponent={label}
+      />
+    );
+  };
 
   const manageActions = [
     ...manageList,
@@ -202,27 +194,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   const SwapHeader = () => <SwapActionDefault onClick={onSwap} />;
 
-  const ManageActionsHeader = () => (
-    <DropDownSelector
-      border
-      horizontal
-      items={manageActions}
-      renderItem={renderItem}
-      controlled
-      buttonId="account-actions-manage"
-    >
-      {({ isOpen }) => (
-        <Button small primary>
-          <Box horizontal flow={1} alignItems="center">
-            <Box>
-              <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
-            </Box>
-            {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
-          </Box>
-        </Button>
-      )}
-    </DropDownSelector>
-  );
+  const ManageActionsHeader = () => manageActions.map(item => renderAction(item));
 
   const NonEmptyAccountHeader = () => (
     <>
@@ -245,6 +217,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           accountId={account.id}
           parentId={account.type !== "Account" ? account.parentId : undefined}
           yellow
+          rounded
         />
       </Tooltip>
       {account.type === "Account" ? (
