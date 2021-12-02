@@ -222,7 +222,7 @@ class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
         {state => {
           return (
             <Container
-              id="modal-backdrop"
+              data-test-id="modal-backdrop"
               state={state}
               centered={centered}
               isOpened={isOpened}
@@ -241,7 +241,7 @@ class Modal extends PureComponent<Props, { directlyClickedBackdrop: boolean }> {
                   this.onIndirectMouseDown();
                   e.stopPropagation();
                 }}
-                id="modal-container"
+                data-test-id="modal-container"
               >
                 {render && render(renderProps)}
                 {children}

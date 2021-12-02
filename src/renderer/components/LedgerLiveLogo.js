@@ -12,7 +12,7 @@ class LedgerLiveLogo extends PureComponent<Props> {
   render() {
     const { icon, ...p } = this.props;
     return (
-      <LiveLogoContainer {...p} id="logo">
+      <LiveLogoContainer {...p} data-test-id="logo">
         {icon}
       </LiveLogoContainer>
     );
