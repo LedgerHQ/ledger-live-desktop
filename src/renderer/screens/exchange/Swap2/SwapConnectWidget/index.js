@@ -96,7 +96,11 @@ const SwapConnectWidget = (
       />
       <Wrapper>
         <CustomWebview
-          src={process.env.MOCK_FTX_WIDGETS ? { html: "<h1>YOOOOOOO</h1>" } : url.toString()}
+          src={
+            process.env.MOCK_FTX_WIDGETS
+              ? "https://github.com/LedgerHQ/ledger-live-desktop/blob/test/add-test-ftx-widgets/src/renderer/screens/exchange/Swap2/SwapConnectWidget/testLoginWidget.html"
+              : url.toString()
+          }
           ref={webviewRef}
           preload={`file://${remote.app.dirname}/swapConnectWebviewPreloader.bundle.js`}
         />
@@ -105,22 +109,6 @@ const SwapConnectWidget = (
   );
 };
 
-const html = {
-  html: `<!doctype html>
-
-  <html lang="en">
-  <head>
-    <meta charset="utf-8">
-  
-    <title>Test login widget</title>
-  </head>
-  
-  <body>
-    // <script src="js/scripts.js"></script>
-    <h1>YOOOOOO TESTINGGGG</h1>
-  </body>
-  </html>
-  `,
-};
+// const html2 = '<html><head></head><body><script type="text/javascript" src="http://example.com/LaunchWidget.js?widget=Posting&css=default&foo=BAR&showheader=1></script></body></html>'
 
 export default forwardRef(SwapConnectWidget);

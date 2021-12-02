@@ -213,7 +213,7 @@ const SwapForm = () => {
         }
 
         // If status is ok, close login and kyc widgets even if open
-        setIsInLoginFlow(false);
+        setIsInLoginFlow(true);
         setIsInKycFlow(false);
 
         dispatch(setSwapKYCStatus({ provider, id: userId, status: KYC_STATUS.approved }));
@@ -262,8 +262,9 @@ const SwapForm = () => {
   const sourceCurrency = swapTransaction.swap.from.currency;
   const targetCurrency = swapTransaction.swap.to.currency;
 
-  if (isInLoginFlow) {
-    return <Login provider={provider} onClose={() => setIsInLoginFlow(false)} />;
+  if (true) {
+    console.log(process.env);
+    return <Login provider={"ftx"} onClose={() => setIsInLoginFlow(false)} />;
   }
 
   if (isInKycFlow) {
