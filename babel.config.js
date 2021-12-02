@@ -20,6 +20,7 @@ module.exports = api =>
         ],
         plugins: [
           ...babelPlugins,
+          "istanbul",
           [
             "module-resolver",
             {

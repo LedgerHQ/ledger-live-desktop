@@ -53,7 +53,11 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
           </Text>
         </Box>
         <Box mt={5} mb={5} horizontal style={{ width: 300 }} flow={3} justifyContent="center">
-          <Button primary onClick={openAddAccounts} id="accounts-empty-state-add-account-button">
+          <Button
+            primary
+            onClick={openAddAccounts}
+            data-test-id="portfolio-empty-state-add-account-button"
+          >
             {t("emptyState.accounts.buttons.addAccount")}
           </Button>
         </Box>
