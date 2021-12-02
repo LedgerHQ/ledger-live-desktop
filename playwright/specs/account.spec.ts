@@ -32,7 +32,7 @@ test.describe.parallel("Accounts", () => {
       await test.step(`[${currency}] Open device app`, async () => {
         await deviceAction.openApp();
         await addAccountModal.stopButton.isVisible();
-        await addAccountModal.addAccountsButton.isEnabled();
+        await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
           `${currency}-accounts-list.png`,
         );
