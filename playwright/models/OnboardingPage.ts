@@ -18,7 +18,7 @@ export class OnboardingPage {
     this.termsSubmitButton = page.locator('#onboarding-terms-submit');
     this.selectDeviceButton = (device: string): Locator => page.locator(`button:has-text("${device}")`);
     this.connectDeviceButton = page.locator('button:has-text("Connect deviceConnect your Nano XIs your device already set up? Connect it to th")');
-    this.modalContainer = page.locator('#modal-container');
+    this.modalContainer = page.locator('data-test-id=modal-container');
     this.checkMyNanoButton = page.locator('button:has-text("Check my Nano")');
     this.continueButton = page.locator('button:has-text("Continue")')
   }
