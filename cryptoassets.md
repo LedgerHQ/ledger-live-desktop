@@ -103,7 +103,7 @@
 | stacks | STX | NO | stacks |
 | æternity | AE | NO | aeternity |
 
-## Tokens (9620)
+## Tokens (9629)
 | parent currency | ticker | contract | name | status | ledger id |
 |--|--|--|--|--|--|
 | Algorand | ARCC | MESEJMPXKL7YUWEQGNRCKSLMQDKHOHWIZ3RBWP7BV4JDMUJXFUVQZWUBJM | Asia Reserve Currency Coin | countervalues disabled | algorand/asa/163650 |
@@ -2157,7 +2157,7 @@
 | Ethereum | DEBASE | 0x9248c485b0B80f76DA451f167A8db30F33C70907 | Debase |  | ethereum/erc20/debase |
 | Ethereum | DBET | 0x9b68bFaE21DF5A510931A262CECf63f41338F264 | Decent.Bet |  | ethereum/erc20/decent_bet |
 | Ethereum | DEC | 0x30f271C9E86D2B7d00a6376Cd96A1cFBD5F0b9b3 | Decentr | countervalues disabled | ethereum/erc20/decentr |
-| Ethereum | MANA | 0x0F5D2fB29fb7d3CFeE444a200298f468908cC942 | Decentraland MANA | delisted, countervalues disabled | ethereum/erc20/decentraland_mana |
+| Ethereum | MANA | 0x0F5D2fB29fb7d3CFeE444a200298f468908cC942 | Decentraland MANA |  | ethereum/erc20/decentraland_mana |
 | Ethereum | DCA | 0x18aa7c90d3ae4C5BB219d0a2813F441704084625 | DecentralizeCurrency |  | ethereum/erc20/decentralizecurrency |
 | Ethereum | DACC | 0xF8C595D070d104377f58715ce2E6C93E49a87f3c | Decentralized Accessible Content Chain |  | ethereum/erc20/decentralized_accessible_content_chain |
 | Ethereum | DATP | 0x813b428aF3920226E059B68A62e4c04933D4eA7a | Decentralized Asset Trading Platform |  | ethereum/erc20/decentralized_asset_trading_platform |
@@ -2832,6 +2832,7 @@
 | Ethereum | GMNG | 0xCF81E6FDB8d7a743c3d4C3542a5356ff197eA1C0 | GMNGCoin |  | ethereum/erc20/gmngcoin |
 | Ethereum | GYEN | 0xC08512927D12348F6620a698105e1BAac6EcD911 | GMO JPY |  | ethereum/erc20/gmo_jpy |
 | Ethereum | GMT | 0xb3Bd49E28f8F832b8d1E246106991e546c323502 | GMT |  | ethereum/erc20/gmt |
+| Ethereum | GMT | 0x7Ddc52c4De30e94Be3A6A0A2b259b2850f421989 | GMT | countervalues disabled | ethereum/erc20/gomining_token |
 | Ethereum | GNY | 0x247551F2EB3362E222c742E9c788B8957D9BC87e | GNY |  | ethereum/erc20/gny |
 | Ethereum | GNYERC20 | 0xb1f871Ae9462F1b2C6826E88A7827e76f86751d4 | GNYerc20 |  | ethereum/erc20/gnyerc20 |
 | Ethereum | GOAT | 0x37611b28aCa5673744161Dc337128cfdD2657F69 | GOAT Coin |  | ethereum/erc20/goat_coin |
@@ -2946,7 +2947,6 @@
 | Ethereum | GLY | 0x299948bc2CA54a5e814B19849327A6d9a0e7de1b | Glyph |  | ethereum/erc20/glyph |
 | Ethereum | GNO | 0x6810e776880C02933D47DB1b9fc05908e5386b96 | Gnosis |  | ethereum/erc20/gnosis |
 | Ethereum | BLANK | 0x41A3Dba3D677E573636BA691a70ff2D606c29666 | GoBlank Token |  | ethereum/erc20/goblank_token |
-| Ethereum | GMT | 0x7Ddc52c4De30e94Be3A6A0A2b259b2850f421989 | GoMining Token | countervalues disabled | ethereum/erc20/gomining_token |
 | Ethereum | GOM2 | 0x48783486ddD7fa85ECa6B0C4AE8920Bc25DfbcD7 | GoMoney2 |  | ethereum/erc20/gomoney2 |
 | Ethereum | GOT | 0x423b5F62b328D0D6D44870F4Eee316befA0b2dF5 | GoToken | delisted, countervalues disabled | ethereum/erc20/gotoken |
 | Ethereum | GMAT | 0xB13dE094Cc5CEe6C4cC0A3737bf0290166D9Ca5D | GoWithMi |  | ethereum/erc20/gowithmi |
@@ -3739,7 +3739,7 @@
 | Ethereum | MIT | 0xe23cd160761f63FC3a1cF78Aa034b6cdF97d3E0C | Mainstreet | countervalues disabled | ethereum/erc20/mainstreet |
 | Ethereum | MKR | 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2 | MakerDAO |  | ethereum/erc20/makerdao |
 | Ethereum | OLD_MKR | 0xC66eA802717bFb9833400264Dd12c2bCeAa34a6d | MakerDAO | delisted, countervalues disabled | ethereum/erc20/makerdao_ |
-| Ethereum | MANA | 0x35A9b440Da4410dD63dF8c54672b728970560328 | Mana |  | ethereum/erc20/mana |
+| Ethereum | MANA | 0x35A9b440Da4410dD63dF8c54672b728970560328 | Mana | delisted, countervalues disabled | ethereum/erc20/mana |
 | Ethereum | MANDI | 0x5aA485E6b794bcf5F834BF5c7FF43B9B83322764 | Mandi |  | ethereum/erc20/mandi |
 | Ethereum | MGP | 0x8a845Fc339CeB022A695281554890429a34DF120 | MangoChain |  | ethereum/erc20/mangochain |
 | Ethereum | FOLD | 0xd084944d3c05CD115C09d072B9F44bA3E0E45921 | Manifold Finance |  | ethereum/erc20/manifold_finance |
@@ -6715,6 +6715,7 @@
 | Polygon | LPT | 0x3962F4A0A0051DccE0be73A7e09cEf5756736712 | Livepeer Token |  | polygon/erc20/livepeer_token |
 | Polygon | LRC | 0x84e1670F61347CDaeD56dcc736FB990fBB47ddC1 | LoopringCoin V2 |  | polygon/erc20/loopringcoin_v2 |
 | Polygon | OM | 0xC3Ec80343D2bae2F8E680FDADDe7C17E71E114ea | MANTRA DAO |  | polygon/erc20/mantra_dao |
+| Polygon | MST | 0xa353dEb6Fb81dF3844D8bd614D33d040fDBb8188 | MagicStone | delisted, countervalues disabled | polygon/erc20/magicstone |
 | Polygon | MFT | 0x91cA694d2B293f70Fe722fbA7d8A5259188959c3 | Mainframe Token |  | polygon/erc20/mainframe_token |
 | Polygon | MKR | 0x6f7C932e7684666C9fd1d44527765433e01fF61d | Maker |  | polygon/erc20/maker |
 | Polygon | POND | 0x73580A2416A57f1C4b6391DBA688A9e4f7DBECE0 | Marlin POND |  | polygon/erc20/marlin_pond |
@@ -6757,6 +6758,7 @@
 | Polygon | PUP | 0xcFe2cF35D2bDDE84967e67d00aD74237e234CE59 | Pup Token |  | polygon/erc20/pup_token |
 | Polygon | QI | 0x580A84C73811E1839F75d86d75d88cCa0c241fF4 | Qi Dao |  | polygon/erc20/qi_dao |
 | Polygon | QUICK | 0x831753DD7087CaC61aB5644b308642cc1c33Dc13 | Quickswap |  | polygon/erc20/quickswap |
+| Polygon | REVV | 0x70c006878a5A50Ed185ac4C87d837633923De296 | REVV | delisted, countervalues disabled | polygon/erc20/revv |
 | Polygon | RLC | 0xbe662058e00849C3Eef2AC9664f37fEfdF2cdbFE | RLC |  | polygon/erc20/rlc |
 | Polygon | RARI | 0x780053837cE2CeEaD2A90D9151aA21FC89eD49c2 | Rarible |  | polygon/erc20/rarible |
 | Polygon | RNDR | 0x61299774020dA444Af134c82fa83E3810b309991 | Render Token |  | polygon/erc20/render_token |
@@ -6775,6 +6777,7 @@
 | Polygon | AGIX | 0x190Eb8a183D22a4bdf278c6791b152228857c033 | SingularityNET Token |  | polygon/erc20/singularitynet_token |
 | Polygon | SRAT | 0x1132f58810Ee9fF13E97aECCd8DDa688Cc5eb8F4 | SpaceRat |  | polygon/erc20/spacerat |
 | Polygon | STACK | 0xccBe9B810d6574701d324fD6DbE0A1b68f9d5bf7 | Stacker Ventures Token (PoS) |  | polygon/erc20/stacker_ventures_token_(pos) |
+| Polygon | SSX | 0x9E2d266D6c90F6C0D80a88159b15958f7135B8Af | StakeShare | delisted, countervalues disabled | polygon/erc20/stakeshare |
 | Polygon | SWISE | 0xBbbe128568222623D21299f019a978C8587B33dC | StakeWise |  | polygon/erc20/stakewise |
 | Polygon | STC | 0x779b299eA455D35A44FE9baC48648be22C08DEa2 | Student Coin |  | polygon/erc20/student_coin |
 | Polygon | SUSHI | 0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a | SushiToken (PoS) |  | polygon/erc20/sushitoken_(pos) |
@@ -6796,6 +6799,10 @@
 | Polygon | ERSDL | 0x5095cC6511B70e287bc525Aa57AfbC60EB73ac47 | UnFederalReserveToken |  | polygon/erc20/unfederalreservetoken |
 | Polygon | UBT | 0x7FBc10850caE055B27039aF31bD258430e714c62 | UniBright |  | polygon/erc20/unibright |
 | Polygon | UNI | 0xb33EaAd8d922B1083446DC23f610c2567fB5180f | Uniswap (PoS) |  | polygon/erc20/uniswap_(pos) |
+| Polygon | UNIWEWM | 0xadbF1854e5883eB8aa7BAf50705338739e558E5b | Uniswap V2 | delisted, countervalues disabled | polygon/erc20/uniswap_v2 |
+| Polygon | UNIWEUSDC | 0x853Ee4b2A13f8a742d64C8F088bE7bA2131f670d | Uniswap V2 | delisted, countervalues disabled | polygon/erc20/uniswap_v2_ |
+| Polygon | UNIWMUSDC | 0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827 | Uniswap V2 | delisted, countervalues disabled | polygon/erc20/uniswap_v2__ |
+| Polygon | UNIWMUSDT | 0x604229c960e5CACF2aaEAc8Be68Ac07BA9dF81c3 | Uniswap V2 | delisted, countervalues disabled | polygon/erc20/uniswap_v2___ |
 | Polygon | VSP | 0x09C5a4BCA808bD1ba2b8E6B3aAF7442046B4ca5B | VesperToken |  | polygon/erc20/vespertoken |
 | Polygon | VGX | 0x054c42b6414747F5263b4A86f21B1aFAD00326Bf | Voyager |  | polygon/erc20/voyager |
 | Polygon | WEXPOLY | 0x4c4BF319237D98a30A929A96112EfFa8DA3510EB | WaultSwap Polygon |  | polygon/erc20/waultswap_polygon |
@@ -6803,6 +6810,7 @@
 | Polygon | WOOFY | 0xfce22AD802Bbc9FE74534575b166D06198bD66ea | Woofy |  | polygon/erc20/woofy |
 | Polygon | WOO | 0x1B815d120B3eF02039Ee11dC2d33DE7aA4a8C603 | Wootrade Network |  | polygon/erc20/wootrade_network |
 | Polygon | WCELO | 0xc30DD0cCE2e683aA68c87C280e73beB3DEc9B3BA | Wrapped Celo |  | polygon/erc20/wrapped_celo |
+| Polygon | WETH | 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619 | Wrapped Ether | delisted, countervalues disabled | polygon/erc20/wrapped_ether |
 | Polygon | WFIL | 0xEde1B77C0Ccc45BFa949636757cd2cA7eF30137F | Wrapped Filecoin (PoS) |  | polygon/erc20/wrapped_filecoin_(pos) |
 | Polygon | WMATIC | 0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270 | Wrapped Matic |  | polygon/erc20/wrapped_matic |
 | Polygon | UST | 0x692597b009d13C4049a947CAB2239b7d6517875F | Wrapped UST Token |  | polygon/erc20/wrapped_ust_token |
@@ -6814,6 +6822,7 @@
 | Polygon | BUSD | 0xdAb529f40E671A1D4bF91361c21bf9f0C9712ab7 | binance-usd |  | polygon/erc20/binance-usd |
 | Polygon | CHZ | 0xf1938Ce12400f9a761084E7A80d37e732a4dA056 | chiliZ |  | polygon/erc20/chiliz |
 | Polygon | DHT | 0x8C92e38eCA8210f4fcBf17F0951b198Dd7668292 | dHedge DAO Token |  | polygon/erc20/dhedge_dao_token |
+| Polygon | $DG | 0x2a93172c8DCCbfBC60a39d56183B7279a2F647b4 | decentral.games | delisted, countervalues disabled | polygon/erc20/decentral.games |
 | Polygon | MIMATIC | 0xa3Fa99A148fA48D14Ed51d610c367C61876997F1 | miMATIC |  | polygon/erc20/mimatic |
 | Polygon | WOLF | 0x8f18dC399594b451EdA8c5da02d0563c0b2d0f16 | moonwolf.io |  | polygon/erc20/moonwolf.io |
 | Polygon | ONG | 0xB6f10Be9201fb110b3Aa275267a234E84ade8e95 | onG |  | polygon/erc20/ong |
