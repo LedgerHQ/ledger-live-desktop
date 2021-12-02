@@ -17,17 +17,17 @@ export class ManagerPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.managerMenu = page.locator('#drawer-manager-button');
+    this.managerMenu = page.locator('data-test-id=drawer-manager-button');
     this.firmwareUpdateButton = page.locator("#manager-update-firmware-button");
-    this.installedAppsTab = page.locator('#appsOnDevice-tab');
-    this.catalogAppsTab = page.locator('#appCatalog-tab');
+    this.installedAppsTab = page.locator('data-test-id=manager-installed-apps-tab');
+    this.catalogAppsTab = page.locator('data-test-id=manager-app-catalog-tab');
     this.updateAllButton = page.locator('#managerAppsList-updateAll');
     this.appUpdateState = page.locator('text=Updating...').first();
     this.appInstallState = page.locator('text=Installing...').first();
     this.installAppButton = (currency: string) : Locator => page.locator(`#appActionsInstall-${currency}`);
     this.uninstallAppButton = (currency: string) : Locator => page.locator(`#appActionsUninstall-${currency}`);
     this.uninstallAllAppsButton = page.locator('button:has-text("Uninstall all")');
-    this.confirmButton = page.locator("#modal-confirm-button");
+    this.confirmButton = page.locator('data-test-id=modal-confirm-button');
     this.installedAppEmptyState = page.locator("text=No apps installed on your device");
   }
 

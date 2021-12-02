@@ -86,7 +86,7 @@ export function StepConfirmationFooter({
 
   return (
     <Box horizontal alignItems="right">
-      <Button id="modal-close-button" ml={2} onClick={onClose}>
+      <Button data-test-id="modal-close-button" ml={2} onClick={onClose}>
         <Trans i18nKey="common.close" />
       </Button>
       {concernedOperation ? (

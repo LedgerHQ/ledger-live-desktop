@@ -133,6 +133,8 @@
     "type": {
       "IN": "已接收",
       "OUT": "已发送",
+      "NFT_IN": "已收 NFT",
+      "NFT_OUT": "已发 NFT",
       "CREATE": "已创建",
       "REVEAL": "已显示",
       "DELEGATE": "已委托",
@@ -746,14 +748,14 @@
     },
     "assets": "要借出的资产",
     "active": "已批准的账户",
-    "lendAsset": "贷出",
+    "lendAsset": "借出",
     "account": {
       "amountSupplied": "已存数额",
-      "amountSuppliedTooltip": "向网络贷出的数额",
+      "amountSuppliedTooltip": "向网络借出的数额",
       "currencyAPY": "货币的年收益率 APY",
       "currencyAPYTooltip": "连续复合存款年度回报率",
       "accruedInterests": "应计利息",
-      "accruedInterestsTooltip": "贷出资产产生的利息",
+      "accruedInterestsTooltip": "借出资产产生的利息",
       "interestEarned": "已赚取利息",
       "interestEarnedTooltip": "提取后您赚取的利息",
       "openLoans": "开放借贷",
@@ -767,7 +769,7 @@
     "emptyState": {
       "active": {
         "title": "放款中",
-        "description": "您可以从您的以太坊账户直接贷出资产并赚取利息。",
+        "description": "您可以从您的以太坊账户直接借出资产并赚取利息。",
         "cta": "Compound 复合贷款如何运作？"
       },
       "closed": {
@@ -838,12 +840,12 @@
         "infoNoLimit": "您已完全批准此帐户。您可以根据一定费用来减少该数额。",
         "approvedWithLimit": "您已批准此账户上的 <0>{{value}}</0>。",
         "enabling": "账户批准一经确认，您便可存入资产。",
-        "notEnabled": "账户需要获得您的批准才能贷出资产。",
-        "notEnoughApproved": "您必须提高您账户批准贷出的限额。"
+        "notEnabled": "账户需要获得您的批准才能借出资产。",
+        "notEnoughApproved": "您必须提高您账户批准借出的限额。"
       },
       "supply": {
         "title": "存入",
-        "description": "输入要贷出给协议的资产数额。"
+        "description": "输入要借出给协议的资产数额。"
       },
       "withdraw": {
         "title": "提取",
@@ -917,7 +919,7 @@
       "terms": {
         "title": "借出加密货币",
         "subtitle": "按照 Compound 复利协议借出资产",
-        "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
+        "description": "Compound 复利协议允许您在以太坊网络上借出或借入资产。您可以直接通过您的 Ledger 账户借出资产并赚取利息。",
         "switchLabel": "<1>我已阅读并同意 </1><0>使用条款</0><1>。</1>"
       },
       "steps": {
@@ -929,7 +931,7 @@
         },
         "2": {
           "subtitle": "供应资产以赚取利息",
-          "description": "一旦账户获得批准，您可以选择想要贷出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
+          "description": "一旦账户获得批准，您可以选择想要借出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
         },
         "3": {
           "subtitle": "随时提取资产",
@@ -1085,7 +1087,7 @@
     },
     "swap": {
       "title": "Swap 互换加密货币",
-      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行交易。"
+      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行兑换。"
     },
     "lending": {
       "title": "借出加密货币",
@@ -1171,6 +1173,48 @@
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "发送",
+        "open": "在 {{viewer}} 中打开"
+      },
+      "attributes": {
+        "properties": "属性",
+        "description": "描述",
+        "contract": "合约地址",
+        "tokenId": "代币 ID",
+        "quantity": "数量"
+      }
+    },
+    "collections": {
+      "title": "NFT (非同质化代币) 收藏集",
+      "receiveCTA": "接收 NFT",
+      "galleryCTA": "查看图库",
+      "seeMore": "查看更多收藏",
+      "seeAll": "查看所有收藏",
+      "seeLess": "查看更少"
+    },
+    "gallery": {
+      "title": "所有 NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "发送",
+          "contract": "合约：{{contract}}"
+        },
+        "operationList": {
+          "header": "近期操作",
+          "OUT": "已发送",
+          "IN": "已接收"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
+  },
   "tokensList": {
     "title": "代币",
     "cta": "添加代币",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "在您在 <1><0>{{accountName}}</0></1> 账户上收到资产前，无法创建新账户",
       "noAccountToCreate": "未找到待创建的 <1><0>{{currencyName}}</0></1> 账户",
       "showAllAddressTypes": "显示所有地址类型",
-      "showAllAddressTypesTooltip": "只有当您需要在旧地址格式上接收 {{family}} 时，才能更改地址类型。"
+      "showAllAddressTypesTooltip": "仅在当您需要在其他地址格式上接收 {{family}} 时，才更改地址类型。"
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "此操作存在内部操作",
     "details": "{{ currency }} 详情",
     "multipleAddresses": "为什么有多个地址？",
+    "nft": {
+      "name": "代币名称",
+      "contract": "代币合约",
+      "id": "代币 (NFT) ID",
+      "amount": "数额"
+    },
     "extra": {
       "frozenAmount": "已冻结数额",
       "unfreezeAmount": "解冻数额",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "在目录中搜索应用程序……",
       "appsOnDevice": "已安装的应用程序",
       "appOnDeviceSearch": "搜索已安装的应用程序……"
+    },
+    "disconnected": {
+      "title": "看起来您的设备上有开启的应用程序",
+      "subtitle": "重新打开 Manager（管理器）将退出您设备上的应用程序",
+      "ctaReopen": "重新打开 Manager（管理器）",
+      "ctaPortfolio": "返回投资组合"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0>可用",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "发送",
+    "titleNft": "发送 NFT",
     "totalSpent": "总借额",
     "steps": {
       "recipient": {
-        "title": "接收方"
+        "title": "接收方",
+        "nftRecipient": "待发 NFT"
       },
       "amount": {
         "title": "数额",
         "banner": "最大可支出数额为",
         "fees": "费用",
         "standard": "标准",
-        "advanced": "高级"
+        "advanced": "高级",
+        "nftQuantity": "数量"
       },
       "summary": {
         "title": "概要"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "可选",
         "ethereumGasLimit": "Gas 限值",
         "ethereumGasPrice": "Gas 价格",
-        "unitPerByte": "{{Unit}} 每字节"
+        "unitPerByte": "{{Unit}} 每字节",
+        "nft": "NFT",
+        "nftQuantity": "数量"
       },
       "verification": {
         "streaming": {
@@ -2744,7 +2805,7 @@
       "ru": "Русский",
       "es": "Español",
       "zh": "中文（简体）",
-      "de": "German"
+      "de": "德语"
     }
   },
   "theme": {
@@ -3385,7 +3446,13 @@
       "undelegate": "验证器",
       "claimReward": "奖励接收方",
       "optIn": "接收方",
-      "nominate": "验证器"
+      "nominate": "验证器",
+      "erc721": {
+        "transfer": "接收方"
+      },
+      "erc1155": {
+        "transfer": "接收方"
+      }
     },
     "votes": "票数 ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
+    },
+    "NotEnoughNftOwned": {
+      "title": "您已超过可用代币的数量"
     }
   }
 }

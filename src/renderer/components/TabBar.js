@@ -127,7 +127,7 @@ const TabBar = ({
           fullWidth={fullWidth}
           tabIndex={j}
           onClick={() => updateIndex(j)}
-          id={withId && ids?.length ? `${ids[j]}-tab` : ""}
+          data-test-id={withId && ids?.length ? `${ids[j]}-tab` : ""}
           fontSize={fontSize}
         >
           <Text ff="Inter|SemiBold" fontSize={5}>

@@ -27,7 +27,7 @@ jobs:
       - name: get latest LLD runner AMI id
         id: get-ami-id
         run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-desktop-runner' --query 'Images[*].ImageId' --output text)"
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
       - name: start EC2 runner
         id: start-ec2-runner
         uses: machulav/ec2-github-runner@v2
@@ -99,7 +99,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies for playwright
         run: npx playwright install-deps
       - name: run code checks
@@ -112,7 +112,7 @@ jobs:
       - name: tests
         if: always()
         run: yarn test 2> >(tee jest.txt)
-      - name: run ui tests
+      - name: generate new screenshots
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur
         if: always()
@@ -129,7 +129,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: report-ubuntu-20.04
+          name: report-
           path: |
             lint.txt
             jest.txt
@@ -146,11 +146,13 @@ jobs:
             playwright/artifacts/videos
 
   ui-tests:
+    needs: cancel-previous
     name: UI tests (${{ matrix.os }})
     strategy:
       fail-fast: false
       matrix:
         os: [macos-latest, windows-latest]
+        # os: [windows-latest]
     runs-on: ${{ matrix.os}}
 
     steps:
@@ -174,24 +176,14 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies
         run: npx playwright install-deps
-      - name: run code checks
-        if: always()
-        run: yarn ci 2> >(tee lint.txt)
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
-      - name: tests
-        if: always()
-        run: yarn test 2> >(tee jest.txt)
-      - name: run ui tests (Linux)
-        if: matrix.os == 'ubuntu-20.04'
-        run: xvfb-run --auto-servernum -- yarn playwright
-      - name: run ui tests (macOS & Windows)
-        if: matrix.os != 'ubuntu-20.04'
+      - name: generate new screenshots (${{ matrix.os }})
         run: yarn playwright
       - name: upload diffs to imgur
         if: always()
@@ -199,20 +191,6 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
-      - name: save PR number
-        if: always()
-        run: |
-          mkdir -p ./pr
-          echo ${{ github.event.number }} > ./pr/NR
-      - name: upload tests data
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: report-${{ matrix.os }}
-          path: |
-            lint.txt
-            jest.txt
-            pr/NR
       - name: upload ci suggested screenshots
         if: always()
         uses: actions/upload-artifact@v2
