@@ -1055,7 +1055,7 @@
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Blok zinciri, güvenlik, kripto dövizler ve Ledger cihazınız hakkında bilmeniz gereken her şey",
+      "description": "Blok zinciri, güvenlik, kripto paralar ve Ledger cihazınız hakkında bilmeniz gereken her şey",
       "cta": "Öğrenmeye başla"
     },
     "stakeCosmos": {
@@ -1079,7 +1079,7 @@
     },
     "sell": {
       "title": "kripto sat",
-      "description": "Bitcoin satışlarınızı ortağımızla doğrudan Ledger Live'da gerçekleştirin"
+      "description": "Bitcoin satışlarınızı ortağımız aracılığıyla doğrudan Ledger Live'da gerçekleştirin"
     },
     "stakeAlgorand": {
       "title": "ALGORAND ile staking",
@@ -1087,7 +1087,7 @@
     },
     "swap": {
       "title": "Kripto takas edin",
-      "description": "Ortağımız ile Ledger Live üzerinden bir kriptoyu diğeriyle takas edin."
+      "description": "Ortağımız aracılığıyla Ledger Live üzerinden bir kriptoyu diğeriyle takas edin."
     },
     "lending": {
       "title": "Kripto borç ver",
