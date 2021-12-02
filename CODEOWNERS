@@ -1,4 +1,6 @@
 *                                      @ledgerhq/live-hub
+yarn.lock                              @ledgerhq/ledger-live
+package.json                           @ledgerhq/ledger-live
 .github                                @ledgerhq/live-devx
 scripts                                @ledgerhq/live-devx
 tools                                  @ledgerhq/live-devx
