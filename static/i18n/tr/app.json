@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Yüklenmiş uygulamalarda ara..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Cihazınızda bir uygulama açık görünüyor",
+      "subtitle": "Yöneticiyi yeniden açmak, cihazın uygulamadan çıkmasını sağlar",
+      "ctaReopen": "Yöneticiyi yeniden aç",
+      "ctaPortfolio": "Portföye geri dön"
     },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}}&lt;/0&gt; boş",
@@ -1495,7 +1495,7 @@
         "updating": "Güncelleniyor...",
         "scheduled": "Sıraya Alındı",
         "update": "Güncelleme mevcut",
-        "updateAll": "Hepsini güncelle",
+        "updateAll": "Tümünü güncelle",
         "updateAllOutOfMemory": "Yeterli depolama alanı yok. Lütfen bazı uygulamaları kaldırın",
         "install": "Yükle",
         "installed": "Yüklenmiş",
