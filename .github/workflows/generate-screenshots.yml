@@ -115,11 +115,11 @@ jobs:
         run: yarn build
       - name: run ui tests
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
-      - name: check for changes
-        id: changes
-        uses: UnicornGlobal/has-changes-action@v1.0.11
+      - name: status
+        id: status
+        run: echo "::set-output name=status::$(git status --porcelain | wc -l)"
       - name: commit
-        if: steps.changes.outputs.changed == 1
+        if: steps.status.outputs.status != 0
         run: |
           git add .
           git commit -m 'update screenshots (Linux)'
@@ -163,13 +163,13 @@ jobs:
       - name: run ui tests (${{ matrix.os }})
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
-      - name: check for changes
-        id: changes
-        uses: UnicornGlobal/has-changes-action@v1.0.11
+      - name: status
+        id: status
+        run: echo "::set-output name=status::$(git status --porcelain | wc -l)"
       - name: commit
-        if: steps.changes.outputs.changed == 1
+        if: steps.status.outputs.status != 0
         run: |
           git add .
-          git commit -m 'update screenshots (${{ matrix.os }})'
+          git commit -m 'update screenshots (Linux)'
           git pull --rebase
           git push
