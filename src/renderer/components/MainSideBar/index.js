@@ -271,7 +271,11 @@ const MainSideBar = () => {
         const secondAnim = !(state === "entered" && !collapsed);
         return (
           <SideBar className="unstoppableAnimation" style={sideBarTransitionStyles[state]}>
-            <Collapser collapsed={collapsed} onClick={handleCollapse} data-test-id="drawer-collapse-button">
+            <Collapser
+              collapsed={collapsed}
+              onClick={handleCollapse}
+              data-test-id="drawer-collapse-button"
+            >
               <IconChevron size={16} />
             </Collapser>
             <TopGradient />
