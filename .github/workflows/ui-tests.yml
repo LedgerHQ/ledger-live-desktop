@@ -112,7 +112,7 @@ jobs:
       - name: tests
         if: always()
         run: yarn test 2> >(tee jest.txt)
-      - name: generate new screenshots
+      - name: run ui tests (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur
         if: always()
@@ -183,7 +183,7 @@ jobs:
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
-      - name: generate new screenshots (${{ matrix.os }})
+      - name: run ui tests (${{ matrix.os }})
         run: yarn playwright
       - name: upload diffs to imgur
         if: always()

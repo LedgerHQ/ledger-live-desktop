@@ -115,7 +115,7 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests
+      - name: generate new screenshots (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: status
         id: status
@@ -163,7 +163,7 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests (${{ matrix.os }})
+      - name: generate new screenshots (${{ matrix.os }})
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
       - name: status

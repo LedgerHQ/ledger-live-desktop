@@ -101,7 +101,7 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests
+      - name: generate new screenshots (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: status
         id: status
@@ -146,7 +146,7 @@ jobs:
         run: yarn --frozen-lockfile --network-timeout 100000
       - name: build electron app
         run: yarn build
-      - name: run ui tests (${{ matrix.os }})
+      - name: generate new screenshots (${{ matrix.os }})
         run: yarn playwright-update-snapshots --retries 0
         env:
           DEBUG: pw:browser
