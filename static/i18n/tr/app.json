@@ -226,7 +226,7 @@
       "ratesDrawer": {
         "title": "Kur",
         "quote": "Teklif",
-        "receive": "Alınacak tutar"
+        "receive": "Al"
       },
       "details": {
         "label": {
@@ -244,7 +244,7 @@
         "noAccountCTA": "Hesap ekle"
       },
       "from": {
-        "title": "Gönderici",
+        "title": "Gönder",
         "max": "Maksimum",
         "accountPlaceholder": "Kaynak seç",
         "currencyDisabledTooltip": "Bu para biriminde takas işlemleri henüz mevcut değil"
@@ -442,7 +442,7 @@
       "resetKYCCTA": "KYC'yi sıfırla",
       "amount": "Tutar",
       "from": {
-        "title": "Gönderici",
+        "title": "Gönder",
         "account": "Hesap",
         "amount": "Gönderilecek tutar",
         "currency": "Kripto varlık"
@@ -487,7 +487,7 @@
       "steps": {
         "summary": {
           "title": "Özet",
-          "from": "Gönderici",
+          "from": "Gönder",
           "to": "Alıcı",
           "toExchange": "Gönderilecek tutar",
           "toReceive": "Alınacak tutar",
@@ -535,7 +535,7 @@
         "finished": "Takas işleminiz başarıyla tamamlandı."
       },
       "date": "Tarih",
-      "from": "Başlangıç",
+      "from": "Gönder",
       "fromAddress": "Kaynak adresi",
       "fromAddress_plural": "Kaynak adresleri",
       "to": "Bitiş",
