@@ -22,14 +22,10 @@ export const ActionDefault = ({
   onClick,
   iconComponent,
   labelComponent,
-  event,
-  eventProperties,
 }: {
   onClick: () => void,
   iconComponent: any,
   labelComponent: any,
-  event: string,
-  eventProperties: Object,
 }) => (
   <ToolTip content={labelComponent}>
     <IconButton primary onClick={onClick}>
