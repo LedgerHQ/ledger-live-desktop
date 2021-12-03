@@ -34,15 +34,18 @@ jobs:
             var reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "report-${{ matrix.os }}"
             })[0];
-            var playwrightArtifacts artifacts.data.artifacts.filter((artifact) => {
+
+            var playwrightArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "playwright-results-${{ matrix.os }}"
             })[0];
+
             var downloadReport = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: reportArtifacts.id,
                archive_format: 'zip',
             });
+
             var downloadPlaywright = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
