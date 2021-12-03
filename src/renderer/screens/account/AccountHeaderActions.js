@@ -174,7 +174,13 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     );
   };
 
-  const manageActions = [
+  const manageActions: {
+    label: any,
+    onClick: () => void,
+    event?: string,
+    eventProperties?: Object,
+    icon: React$ComponentType<{ size: number }> | (({ size: number }) => React$Element<any>),
+  }[] = [
     ...manageList,
     ...(availableOnCompound
       ? [
