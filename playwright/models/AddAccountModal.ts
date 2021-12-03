@@ -11,6 +11,7 @@ export class AddAccountModal extends Modal {
   readonly retryButton: Locator;
   readonly addMoreButton: Locator;
   readonly doneButton: Locator;
+  readonly tokenAddAccountButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -23,6 +24,7 @@ export class AddAccountModal extends Modal {
     this.stopButton = page.locator('data-test-id=add-accounts-import-stop-button');
     this.addMoreButton = page.locator('data-test-id=add-accounts-finish-add-more-button');
     this.doneButton = page.locator('data-test-id=add-accounts-finish-close-button');
+    this.tokenAddAccountButton = page.locator('data-test-id=modal-token-continue-button');
   }
 
   async open() {
@@ -37,6 +39,10 @@ export class AddAccountModal extends Modal {
 
   async addAccounts() {
     await this.addAccountsButton.click();
+  }
+
+  async continueParent() {
+    await this.tokenAddAccountButton.click();
   }
 
   async done() {

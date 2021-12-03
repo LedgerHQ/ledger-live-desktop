@@ -2,15 +2,17 @@ import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { ManagerPage } from "../models/ManagerPage";
 import { DeviceAction } from "../models/DeviceAction";
+import { Layout } from "../models/Layout";
 
 test.use({ userdata: "skip-onboarding" });
 
 test("Manager", async ({ page }) => {
   const managerPage = new ManagerPage(page);
   const deviceAction = new DeviceAction(page);
+  const layout = new Layout(page);
 
   await test.step("can access manager", async () => {
-    await managerPage.navigate();
+    await layout.goToManager();
     await deviceAction.accessManager();
     await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
     expect(await page.screenshot()).toMatchSnapshot({
