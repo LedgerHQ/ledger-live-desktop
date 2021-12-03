@@ -5,7 +5,6 @@ on:
 
 jobs:
   add-reaction:
-    needs: [cancel-previous]
     name: add reaction to comment
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
     runs-on: ubuntu-latest
