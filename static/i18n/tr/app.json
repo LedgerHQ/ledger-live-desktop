@@ -2676,8 +2676,8 @@
           "description": "Ledger'ın blok zinciri tarayıcılarının gelecek bir sürümünü deneyin. Bu ayarın değiştirilmesi, hesap bakiyesi ve senkronizasyonun yanı sıra gönderme özelliğini de etkileyebilir.\n(&lt;0&gt;&lt;/0&gt;)"
         },
         "keychainObservableRange": {
-          "title": "Özel boşluk sınırı",
-          "description": "Tüm hesaplar için özel boşluk sınırı. Bu değerin, varsayılan değerinin (20) üzerine çıkartılması, coin'ler için pek kullanılmayan açık adresleri taramaya yarar. Yalnızca ileri düzey kullanıcılar içindir. Bu özellik, hesaplarınızı geri yüklerken uyumluluğu bozabilir."
+          "title": "Özel gap limit",
+          "description": "Tüm hesaplar için özel gap limit. Bu değerin, varsayılan değerinin (20) üzerine çıkartılması, coin'ler için pek kullanılmayan açık adresleri taramaya yarar. Yalnızca ileri düzey kullanıcılar içindir. Bu özellik, hesaplarınızı geri yüklerken uyumluluğu bozabilir."
         },
         "forceProvider": {
           "title": "Yönetici sağlayıcı",
