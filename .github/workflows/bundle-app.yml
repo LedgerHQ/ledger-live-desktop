@@ -133,7 +133,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: kill apt-get
-        run: sudo killall apt-get apt || echo OK
+        run: sudo killall -w apt-get apt || echo OK
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4

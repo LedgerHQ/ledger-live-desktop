@@ -1,0 +1,27 @@
+name: stop self-hosted EC2 runner
+on:
+  workflow_call:
+    secrets:
+      CI_BOT_TOKEN:
+        required: true
+    inputs:
+      label:
+        description: name of runner to use
+        required: true
+      ec2-instance-id:
+        description: ec2 instance id
+        required: true
+
+jobs:
+  stop-runner:
+    name: stop self-hosted EC2 runner
+    runs-on: [ledger-live-desktop]
+    if: ${{ always() }}
+    steps:
+      - name: Stop EC2 runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: stop
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          label: ${{ inputs.label }}
+          ec2-instance-id: ${{ inputs.ec2-instance-id }}

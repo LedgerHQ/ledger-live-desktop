@@ -21,50 +21,19 @@ jobs:
             })
 
   start-runner:
-    name: start self-hosted EC2 runner
     needs: [add-reaction]
-    runs-on: [ledger-live-desktop]
-    outputs:
-      label: ${{ steps.start-ec2-runner.outputs.label }}
-      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
-    steps:
-      - name: get latest LLD runner AMI id
-        id: get-ami-id
-        run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
-      - name: start EC2 runner
-        id: start-ec2-runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: start
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
-          ec2-instance-type: c5.4xlarge
-          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
-          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
-      - name: get volume-id
-        id: get-volume-id
-        run: |
-          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
-      - name: resize rootfs
-        env:
-          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
-        run: |
-          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: Stop self-hosted EC2 runner
     needs: [start-runner, generate-screenshots-linux]
-    runs-on: [ledger-live-desktop]
-    if: ${{ always() }}
-    steps:
-      - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: stop
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml
+    with:
+      label: ${{ needs.start-runner.outputs.label }}
+      ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   generate-screenshots-linux:
     name: screenshots linux
@@ -84,7 +53,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: kill apt-get
-        run: sudo killall apt-get apt || echo OK
+        run: sudo killall -w apt-get apt || echo OK
       - name: install gh
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg

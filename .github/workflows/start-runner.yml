@@ -1,0 +1,46 @@
+name: start self-hosted EC2 runner
+on:
+  workflow_call:
+    secrets:
+      CI_BOT_TOKEN:
+        required: true
+    outputs:
+      label:
+        description: name of runner to use
+        value: ${{ jobs.start-runner.outputs.label }}
+      ec2-instance-id:
+        description: ec2 instance id
+        value: ${{ jobs.start-runner.outputs.ec2-instance-id }}
+
+jobs:
+  start-runner:
+    name: start self-hosted EC2 runner
+    needs: cancel-previous
+    runs-on: [ledger-live-desktop]
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    steps:
+      - name: get latest LLD runner AMI id
+        id: get-ami-id
+        run: |
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
+      - name: start EC2 runner
+        id: start-ec2-runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: start
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
+          ec2-instance-type: c5.4xlarge
+          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
+          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
+      - name: get volume-id
+        id: get-volume-id
+        run: |
+          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
+      - name: resize rootfs
+        env:
+          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
+        run: |
+          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
