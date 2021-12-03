@@ -204,19 +204,19 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     ...(currency.id === "ethereum"
       ? [
           {
+            key: "Stake",
+            onClick: onPlatformStake,
+            event: "Eth Stake Account Button",
+            icon: IconCoins,
+            label: <Trans i18nKey="account.stake" values={{ currency: currency.name }} />,
+          },
+          {
             key: "WalletConnect",
             onClick: onWalletConnect,
             event: "Wallet Connect Account Button",
             eventProperties: { currencyName: currency.name },
             icon: IconWalletConnect,
             label: <Trans i18nKey="walletconnect.titleAccount" />,
-          },
-          {
-            key: "Stake",
-            onClick: onPlatformStake,
-            event: "Eth Stake Account Button",
-            icon: IconCoins,
-            label: <Trans i18nKey="account.stake" values={{ currency: currency.name }} />,
           },
         ]
       : []),
