@@ -1,4 +1,4 @@
-name: Generate Screenshots Test
+name: "[TESTS] Screenshots Update Test"
 on:
   workflow_dispatch:
     inputs:

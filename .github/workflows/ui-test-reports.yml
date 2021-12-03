@@ -1,4 +1,4 @@
-name: CI Report
+name: "[REPORT] Screenshot Testing Reports"
 on:
   workflow_dispatch:
     inputs:
@@ -7,7 +7,7 @@ on:
         required: true
 
   workflow_run:
-    workflows: ["UI tests"]
+    workflows: ["[TESTS] Screenshot Testing"]
     types:
       - "completed"
 
@@ -37,7 +37,10 @@ jobs:
             })[0];
 
             var playwrightArtifacts = artifacts.data.artifacts.filter((artifact) => {
-              return artifact.name == "playwright-results-windows-latest" || artifact.name === "playwright-results-linux"
+              return (
+                artifact.name == "playwright-results-windows-latest" ||
+                artifact.name === "playwright-results-linux"
+              );
             });
 
             var downloadReport = await github.actions.downloadArtifact({
@@ -47,29 +50,33 @@ jobs:
                archive_format: 'zip',
             });
 
-            var pwartifacts = []
+            var pPWArtifacts = await Promise.all(
+              playwrightArtifacts.map((artifact) => {
+                return github.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                  archive_format: "zip",
+                });
+              })
+            );
 
-            playwrightArtifacts.forEach(async artifact => {
-              var downloadPlaywright = await github.actions.downloadArtifact({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                artifact_id: artifact.id,
-                archive_format: 'zip',
-              });
-
-              if (downloadPlaywright) {
-                pwartifacts.push(downloadPlaywright)
-              }
+            pPWArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + playwrightArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data)
+              )
             })
 
-            fs.writeFileSync('${{github.workspace}}/tests-reports.zip', Buffer.from(downloadReport.data));
+            fs.writeFileSync(
+              "${{github.workspace}}/" + reportArtifacts.name + ".zip",
+              Buffer.from(downloadReport.data)
+            )
 
-            pwartifacts.forEach((a) => {
-              fs.writeFileSync('${{github.workspace}}/' + artifact.name + '.zip', Buffer.from(a.data));
-            })
       - name: unzip stuff
         run: |
           unzip tests-reports.zip
           unzip playwright-results-windows-latest.zip
+          unzip playwright-results-linux.zip
       - name: ls on files
         run: ls

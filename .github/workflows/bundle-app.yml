@@ -1,4 +1,4 @@
-name: Bundle App
+name: "[TESTS] Bundle App"
 on:
   pull_request:
     branches:
@@ -20,11 +20,6 @@ jobs:
     runs-on: macos-latest
     needs: cancel-previous
     steps:
-      - uses: ledgerhq/actions/check-member@v2.0.0
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
-        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}

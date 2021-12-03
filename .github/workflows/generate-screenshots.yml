@@ -1,4 +1,4 @@
-name: Update UI tests snapshots
+name: "[TESTS] Screenshots Update"
 on:
   issue_comment:
     types: [created]

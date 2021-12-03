@@ -1,4 +1,4 @@
-name: start self-hosted EC2 runner
+name: Start self-hosted EC2 runner
 on:
   workflow_call:
     secrets:

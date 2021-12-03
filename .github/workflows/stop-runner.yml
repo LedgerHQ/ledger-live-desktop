@@ -1,4 +1,4 @@
-name: stop self-hosted EC2 runner
+name: Stop self-hosted EC2 runner
 on:
   workflow_call:
     secrets:
