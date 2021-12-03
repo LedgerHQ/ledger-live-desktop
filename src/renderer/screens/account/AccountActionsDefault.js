@@ -7,10 +7,12 @@ import IconSwap from "~/renderer/icons/Swap";
 import IconExchange from "~/renderer/icons/Exchange";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import type { Props as ButtonProps } from "~/renderer/components/Button";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ToolTip from "~/renderer/components/Tooltip";
 import styled from "styled-components";
 
-const IconButton = styled(Button)`
+const IconButton: ThemedComponent<ButtonProps> = styled(Button)`
   height: 40px;
   width: 40px;
   border-radius: 20px;
@@ -18,21 +20,23 @@ const IconButton = styled(Button)`
   padding: 0;
 `;
 
+type Props = {
+  onClick: () => void,
+  iconComponent: any,
+  labelComponent: any,
+  event?: string,
+  eventProperties?: Object,
+};
+
 export const ActionDefault = ({
   onClick,
   iconComponent,
   labelComponent,
   event,
   eventProperties,
-}: {
-  onClick: () => void,
-  iconComponent: any,
-  labelComponent: any,
-  event: string,
-  eventProperties: Object,
-}) => (
+}: Props) => (
   <ToolTip content={labelComponent}>
-    <IconButton primary onClick={onClick}>
+    <IconButton primary onClick={onClick} event={event} eventProperties={eventProperties}>
       <Box horizontal alignItems="center">
         {iconComponent}
       </Box>
