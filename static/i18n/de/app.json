@@ -62,7 +62,7 @@
     "apply": "Anwenden",
     "done": "Fertig",
     "confirm": "Bestätigen",
-    "reject": "Reject",
+    "reject": "Ablehnen",
     "cancel": "Abbrechen",
     "getSupport": "Hilfe",
     "delete": "Löschen",
@@ -133,8 +133,8 @@
     "type": {
       "IN": "Empfangen",
       "OUT": "Gesendet",
-      "NFT_IN": "NFT Received",
-      "NFT_OUT": "NFT Sent",
+      "NFT_IN": "NFT erhalten",
+      "NFT_OUT": "NFT gesendet",
       "CREATE": "Erstellt",
       "REVEAL": "Enthüllt",
       "DELEGATE": "Delegiert",
@@ -224,9 +224,9 @@
     },
     "form": {
       "ratesDrawer": {
-        "title": "Rate",
+        "title": "Kurs",
         "quote": "Quote",
-        "receive": "Receive"
+        "receive": "Erhalten"
       },
       "details": {
         "label": {
@@ -240,32 +240,32 @@
           "rate": "Lorem Ipsum",
           "fees": "Lorem Ipsum"
         },
-        "noAccount": "Create an account to receive {{name}}",
+        "noAccount": "Erstellen Sie ein Konto um {{name}} zu erhalten",
         "noAccountCTA": "Konto hinzufügen"
       },
       "from": {
         "title": "Von",
         "max": "Max.",
         "accountPlaceholder": "Quelle auswählen",
-        "currencyDisabledTooltip": "This currency is not available for swap yet"
+        "currencyDisabledTooltip": "Diese Währung ist für swap noch nicht verfügbar"
       },
       "to": {
         "title": "An"
       },
       "notAvailable": {
-        "title": "Swap is not available yet in your area",
-        "content": "Have a little more patience,<br/>we will launch this feature very soon"
+        "title": "Swap ist in Ihrem Land noch nicht verfügbar",
+        "content": "Haben Sie noch etwas Geduld,<br/>wir werden diese Funktion sehr bald einführen"
       },
       "providers": {
         "kyc": {
-          "required": "You need to complete your KYC",
-          "complete": "Complete KYC",
-          "update": "Refresh KYC",
-          "rejected": "KYC rejected, start the verification again",
+          "required": "Sie müssen Ihr KYC vervollständigen",
+          "complete": "Vervollständigen Sie Ihr KYC",
+          "update": "KYC aktualisieren",
+          "rejected": "KYC abgelehnt, erneute Überprüfung starten",
           "status": {
-            "pending": "KYC pending",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "pending": "KYC ausstehend",
+            "approved": "KYC genehmigt",
+            "closed": "KYC abgelehnt"
           }
         }
       }
@@ -280,44 +280,44 @@
       "exporting": "Wird exportiert..."
     },
     "kyc": {
-      "updateRequired": "We are unable to complete the KYC process until you update the application",
+      "updateRequired": "Wir können den KYC-Prozess nicht abschließen, bis Sie die Anwendung aktualisiert haben",
       "wyre": {
-        "disclaimer": "Your information is collected by LEDGER on behalf of and transferred to WYRE for KYC purposes. For more information, please check our",
-        "policy": "Privacy Policy",
-        "title": "Verify your identity",
-        "subtitle": "Please enter your information to swap with Wyre.",
-        "cta": "Continue",
+        "disclaimer": "Ihre Daten werden von LEDGER im Auftrag von WYRE gesammelt und an WYRE für KYC-Zwecke übertragen. Für weitere Informationen lesen Sie bitte unsere",
+        "policy": "Datenschutzrichtlinie",
+        "title": "Verifizieren Sie Ihre Identität",
+        "subtitle": "Bitte geben Sie Ihre Daten ein, um mit Wyre zu tauschen.",
+        "cta": "Weiter",
         "pending": {
-          "cta": "Continue",
-          "title": "Your information has been submitted for approval",
-          "subtitle": "It usually takes a few minutes for the review to be completed.",
-          "link": "Learn more about KYC",
-          "info": "Identity verification: Submitted"
+          "cta": "Weiter",
+          "title": "Ihre Daten wurden zur Bestätigung übermittelt",
+          "subtitle": "Normalerweise dauert es ein paar Minuten, bis die Überprüfung abgeschlossen ist.",
+          "link": "Erfahren Sie mehr über KYC",
+          "info": "Identitätsüberprüfung: Übermittelt"
         },
         "closed": {
-          "cta": "Reset KYC",
-          "title": "KYC application rejected",
-          "subtitle": "Wyre rejected the data you provided for KYC purposes",
-          "link": "Learn more about KYC"
+          "cta": "KYC zurücksetzen",
+          "title": "KYC-Antrag abgelehnt",
+          "subtitle": "Wyre hat die von Ihnen für KYC-Zwecke angegebenen Daten abgelehnt",
+          "link": "Erfahren Sie mehr über KYC"
         },
         "form": {
-          "firstName": "First Name",
-          "lastName": "Last Name",
-          "street1": "Street Address Line 1",
-          "street2": "Street Address Line 2",
-          "city": "City",
-          "state": "State",
-          "country": "Country",
-          "postalCode": "Zip Code",
-          "dateOfBirth": "Date of birth",
-          "firstNamePlaceholder": "Enter your first name",
-          "lastNamePlaceholder": "Enter your last name",
-          "street1Placeholder": "Eg. 13, Maple street",
-          "street2Placeholder": "Eg. 13, Maple street",
-          "cityPlaceholder": "Eg. San José",
-          "postalCodePlaceholder": "Enter your 5 digit Zip code",
-          "dateOfBirthPlaceholder": "MM/DD/YYYY",
-          "firstNameError": "Enter your first name to continue",
+          "firstName": "Vorname",
+          "lastName": "Nachname",
+          "street1": "Straße Adresse Zeile 1",
+          "street2": "Straße Adresse Zeile 2",
+          "city": "Stadt",
+          "state": "Bundesland",
+          "country": "Land",
+          "postalCode": "Postleitzahl",
+          "dateOfBirth": "Geburtsdatum",
+          "firstNamePlaceholder": "Geben Sie Ihren Vornamen ein",
+          "lastNamePlaceholder": "Geben Sie Ihren Nachnamen ein",
+          "street1Placeholder": "z. B. Musterstraße 21",
+          "street2Placeholder": "z. B. Musterstraße 21",
+          "cityPlaceholder": "z. B. Berlin",
+          "postalCodePlaceholder": "Geben Sie Ihre Postleitzahl ein",
+          "dateOfBirthPlaceholder": "TT.MM.JJJJ",
+          "firstNameError": "Geben Sie Ihren Vornamen ein, um fortzufahren",
           "lastNameError": "Enter your last name to continue",
           "street1Error": "Enter your address",
           "cityError": "Enter the city you live in the USA",
@@ -1549,7 +1549,7 @@
           "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
           "cta": "Contact support"
         },
-        "cta2": "Update firmware"
+        "cta2": "Firmware aktualisieren"
       },
       "latest": "Firmware-Version {{version}} ist verfügbar",
       "contactSupport": "Support kontaktieren",
@@ -1573,9 +1573,9 @@
       "confirmIdentifier": "Überprüfen Sie die Kennung",
       "confirmIdentifierText": "Vergewissern Sie sich, dass die Kennung auf Ihrem Gerät mit der unten stehenden Kennung übereinstimmt. Bestätigen Sie und geben Sie Ihren PIN-Code ein, wenn Sie dazu aufgefordert werden.",
       "identifier": "Kennung",
-      "preparation": "Preparation",
-      "newFirmware": "New firmware {{version}}",
-      "confirmUpdate": "Please confirm the update on your device",
+      "preparation": "Vorbereitung",
+      "newFirmware": "Neue Firmware {{version}}",
+      "confirmUpdate": "Bitte bestätigen Sie den Vorgang auf Ihrem Gerät",
       "mcuTitle": "Update abschließen",
       "mcuFirst": "Trennen Sie das USB-Kabel von Ihrem Gerät",
       "mcuSecond": "Drücken Sie die linke Taste und halten Sie sie gedrückt, während Sie das USB-Kabel wieder einstecken, bis der <1><0>{{repairProcessing}}</0></1> Bildschirm erscheint",
@@ -1736,7 +1736,7 @@
         "parentAccount": "1. {{currencyName}} Konto wählen",
         "token": "2. Token auswählen",
         "verifyTokenType": "Bitte vergewissern Sie sich, dass <0>{{token}}</0> ein <0>{{tokenType}}</0> Token ist. Jeder andere Krypto-Vermögenswert, der an ein {{currency}}-Konto gesendet wird, kann verloren gehen.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
+        "warningTokenType": "Bitte senden Sie nur <0>{{ticker}}</0> oder <0>{{tokenType}}</0> Token auf ein {{currency}} Konto. Alle anderen Krypto-Vermögenswerte können verloren gehen."
       },
       "connectDevice": {
         "title": "Gerät",
@@ -1754,12 +1754,12 @@
   },
   "send": {
     "title": "Senden",
-    "titleNft": "Send NFT",
+    "titleNft": "NFT senden",
     "totalSpent": "Zu belastende Summe",
     "steps": {
       "recipient": {
         "title": "Empfänger",
-        "nftRecipient": "NFT to send"
+        "nftRecipient": "Zu sendende NFT"
       },
       "amount": {
         "title": "Betrag",
@@ -1767,7 +1767,7 @@
         "fees": "Gebühren",
         "standard": "Standart",
         "advanced": "Erweitert",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Menge"
       },
       "summary": {
         "title": "Zusammenfassung"
@@ -1791,7 +1791,7 @@
         "ethereumGasPrice": "Gaspreis",
         "unitPerByte": "{{unit}} pro Byte",
         "nft": "NFT",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Menge"
       },
       "verification": {
         "streaming": {
@@ -1829,13 +1829,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "App-Sprache ändern?",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "Gute Neuigkeiten! Unsere Teams haben hart gearbeitet und Ledger Live unterstützt jetzt {{language}}.",
+      "advice": "Sie können Ihre Sprache jederzeit später in den Einstellungen wieder ändern."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "Zu {{language}} wechseln",
+    "no": "Lieber nicht"
   },
   "distribution": {
     "asset": "Vermögenswert",
@@ -1857,14 +1857,14 @@
   "elrond": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Elrond",
-        "moreInfo": "More info",
-        "drawerTitle": "Elrond integration",
-        "title": "Elrond eGold (EGLD) token is now available on Ledger Live",
-        "description": "You can now safely secure your eGold (EGLD) tokens and manage them through Ledger Live.",
-        "description2": "The Elrond eGold (EGLD) Token is native to the Elrond Network and will be used for everything from transactions, staking, smart contracts, governance and validator rewards.",
-        "description3": "We are actively working with the Elrond team to add more functionality, such as staking, native ESDT (Elrond Standard Digital Token) support, and more.",
-        "website": "The Internet Scale Blockchain"
+        "cardTitle": "Betrieben von Elrond",
+        "moreInfo": "Mehr Infos",
+        "drawerTitle": "Elrond Integration",
+        "title": "Elrond eGold (EGLD) Token ist jetzt auf Ledger Live verfügbar",
+        "description": "Sie können jetzt Ihre eGold (EGLD) Token sicher sichern und über Ledger Live verwalten.",
+        "description2": "Der Elrond eGold (EGLD) Token ist nativ im Elrond Netzwerk und wird verwendet für alle Transaktionen, staken, intelligente Verträge, Governance und Validator-Belohnungen.",
+        "description3": "Wir arbeiten aktiv mit dem Elrond Team zusammen, um mehr Funktionalitäten wie Staking, native ESDT (Elrond Standard Digital Token) Unterstützung und mehr hinzuzufügen.",
+        "website": "Die Internet Scale Blockchain"
       }
     }
   },
@@ -2656,8 +2656,8 @@
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "title": "Experimentelle JS-Implementierungen",
+          "description": "Experimentelle JS-Implementierungen für Bitcoin (Taproot) und Tezos verwenden"
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -2688,7 +2688,7 @@
     "hardResetModal": {
       "title": "Ledger live zurücksetzen",
       "desc": "Setzen Sie Ledger Live zurück, um alle Einstellungen und Konten auf Ihrem Computer zu löschen. Sie können dann Ihr Passwort wählen und Ihre Konten wieder mit Ihrem Ledger-Gerät hinzufügen. Die privaten Schlüssel, die Zugang zu Ihren Krypto-Vermögenswerten geben, bleiben sicher auf Ihrem Ledger-Gerät und werden durch Ihren Wiederherstellungssatz gesichert.",
-      "warning": "Resetting Ledger Live will erase your swap transaction history for all your accounts."
+      "warning": "Das Zurücksetzen von Ledger Live löscht Ihren Swap-Transaktionsverlauf für alle Ihre Konten."
     },
     "softResetModal": {
       "title": "Cache leeren",
@@ -2705,7 +2705,7 @@
     "removeAccountModal": {
       "title": "Konto entfernen",
       "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "warning": "Das Löschen dieses Kontos löscht Ihren zugehörigen Swap-Transaktionsverlauf."
     },
     "openUserDataDirectory": {
       "title": "Benutzerdaten anzeigen",
@@ -2805,7 +2805,7 @@
       "ru": "Russisch",
       "es": "Spanisch",
       "zh": "Chinesisch",
-      "de": "German"
+      "de": "Deutsch"
     }
   },
   "theme": {
@@ -2821,8 +2821,8 @@
       "achievement": "Erfolge entsperrt"
     },
     "groupedToast": {
-      "text": "You have {{count}} unread notifications",
-      "cta": "See details"
+      "text": "Sie haben {{count}} ungelesene Benachrichtigungen",
+      "cta": "Siehe Details"
     }
   },
   "informationCenter": {
@@ -2894,11 +2894,11 @@
     },
     "modals": {
       "recoverySeedWarning": {
-        "contactSupportCTA": "Contact Support",
-        "continueCTA": "Continue",
-        "title": "Please check the box contents",
-        "description": "If your {{device}} came with a PIN code or recovery phrase, it’s not safe to use and you should contact Ledger Support.",
-        "alert": "Only use a recovery phrase that your device displayed when it was set up"
+        "contactSupportCTA": "Support kontaktieren",
+        "continueCTA": "Weiter",
+        "title": "Bitte überprüfen Sie den Inhalt der Box",
+        "description": "Wenn Ihr {{device}} mit einem PIN-Code oder einer Wiederherstellungsphrase geliefert wurde, ist die Verwendung des Geräts nicht sicher und Sie sollten sich an den Ledger Support wenden.",
+        "alert": "Verwenden Sie nur eine Wiederherstellungsphrase, die Ihr Gerät angezeigt hat, wenn es eingerichtet wurde"
       }
     },
     "alerts": {
@@ -3278,22 +3278,22 @@
     }
   },
   "connectTroubleshooting": {
-    "desc": "Having trouble connecting your device?",
-    "cta": "Fix it",
+    "desc": "Haben Sie Schwierigkeiten, Ihr Gerät zu verbinden?",
+    "cta": "Reparieren",
     "solution": "Lösung #{{number}}",
-    "applesInstructions": "Apple’s instructions",
+    "applesInstructions": "Apples Anweisungen",
     "nextSolution": "Nächste Lösung",
     "previousSolution": "Vorherige Lösung",
     "followSteps": "Diesen Schritten folgen",
     "supportArticle": "Hilfeseite",
-    "connecting": "Connecting...",
-    "connected": "Connected!",
-    "backToPortfolio": "Back to Portfolio",
+    "connecting": "Verbinde...",
+    "connected": "Verbunden!",
+    "backToPortfolio": "Zurück zum Portfolio",
     "steps": {
       "entry": {
         "title": "Fehlerbehebung bei der USB-Verbindung",
         "desc": "Es scheint ein Problem beim Verbinden mit Ihrem Gerät zu geben. Keine Sorge, Sie können verschiedene Lösungen nacheinander ausprobieren, bis Ihr Gerät eine Verbindung herstellt!",
-        "cta": "Let’s fix it!",
+        "cta": "Bringen wir es in Ordnung!",
         "back": "Zurückgehen"
       },
       "1": {
@@ -3311,7 +3311,7 @@
           "desc": "Klicken Sie auf die Schaltfläche unten, um die udev-Regeln hinzuzufügen. Verbinden Sie dann Ihr Gerät und entsperren Sie es, um zu sehen, ob es erkannt wird.",
           "cta": "Regeln festlegen",
           "bullets": {
-            "0": "Enter the following command in a terminal to automatically add the rules and reload udev.",
+            "0": "Geben Sie den folgenden Befehl in ein Terminal ein, um die Regeln automatisch hinzuzufügen und udev neu zu laden.",
             "1": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         }
@@ -3320,8 +3320,8 @@
         "usbPort": {
           "title": "Versuchen Sie verschiedene USB-Anschlüsse",
           "bullets": {
-            "0": "Change the USB port used on your computer.",
-            "1": "Remove any USB dongles.",
+            "0": "Ändern Sie den an Ihrem Computer verwendeten USB-Anschluss.",
+            "1": "Entfernen Sie alle USB-Dongles.",
             "2": "Schließen Sie Ihr Gerät an und entsperren Sie es, um zu sehen, ob es erkannt wird."
           }
         },
@@ -3448,10 +3448,10 @@
       "optIn": "Empfänger",
       "nominate": "Validator",
       "erc721": {
-        "transfer": "recipient"
+        "transfer": "Empfänger"
       },
       "erc1155": {
-        "transfer": "recipient"
+        "transfer": "Empfänger"
       }
     },
     "votes": "Stimmen ({{count}})"
@@ -3460,11 +3460,11 @@
     "placeholder": "{{currencyName}} Adresse eingeben"
   },
   "Terms": {
-    "title": "Terms of use",
-    "description": "Please take some time to review our Terms of service and Privacy policy",
+    "title": "Nutzungsbedingungen",
+    "description": "Bitte nehmen Sie sich etwas Zeit, um unsere Nutzungsbedingungen und Datenschutzrichtlinien zu lesen",
     "termsLabel": "Allgemeine Geschäftsbedingungen",
-    "privacyLabel": "Privacy policy",
-    "switchLabel": "I have read and accept the Terms of service and Privacy policy",
+    "privacyLabel": "Datenschutzrichtlinie",
+    "switchLabel": "Ich habe die Nutzungsbedingungen und Datenschutzrichtlinien gelesen und akzeptiere sie",
     "cta": "Zur Ledger-App"
   },
   "families": {
@@ -3502,8 +3502,8 @@
       "description": "Bitte geben Sie einen Kontonamen ein"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "Bitte versuchen Sie es erneut",
+      "description": "Konto ist veraltet. Eine Synchronisierung ist erforderlich"
     },
     "AccountNotSupported": {
       "title": "Konto wird nicht unterstützt.",
@@ -3771,8 +3771,8 @@
       "description": "Bitte konfigurieren Sie Ihren Full Node so, dass er nach den Konten sucht, die mit diesem Gerät verbunden sind. Ihr Full Node muss zuerst die Blockchain nach diesem Konto durchsuchen, bevor Sie es zu Ihrem Portfolio hinzufügen können."
     },
     "SwapGenericAPIError": {
-      "title": "Something went wrong",
-      "description": "The exchange transaction did not go through. Please try again or contact support."
+      "title": "Etwas ist schief gelaufen",
+      "description": "Der Umtauschvorgang wurde nicht durchgeführt. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support."
     },
     "TimeoutError": {
       "title": "Entschuldigung, der Server hat zu lange für die Antwort gebraucht",
@@ -4012,7 +4012,7 @@
       "title": "Beim Senden an diesen Empfänger kann ein Memo erforderlich sein"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "Betrag muss größer sein als {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "Betrag muss kleiner sein als {{maxAmountFromFormatted}}"
@@ -4055,10 +4055,10 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "Das Senden an eine taproot-Adresse ist vor der Aktivierung des Netzwerks (mainnet) unsicher"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "Sie haben die Anzahl der verfügbaren Token überschritten"
     }
   }
 }

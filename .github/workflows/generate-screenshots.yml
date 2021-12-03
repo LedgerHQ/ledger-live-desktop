@@ -29,7 +29,7 @@ jobs:
 
   start-runner:
     name: start self-hosted EC2 runner
-    needs: [cancel-previous, add-reaction]
+    needs: [add-reaction]
     runs-on: [ledger-live-desktop]
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
@@ -91,7 +91,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: kill apt-get
-        run: sudo killall apt apt-get
+        run: sudo killall apt-get apt || echo OK
       - name: install gh
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -99,7 +99,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gh
       - name: checkout PR
-        run: gh pr checkout ${{ github.event.inputs.number }}
+        run: gh pr checkout ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2
@@ -115,7 +115,7 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests
+      - name: generate new screenshots (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: status
         id: status
@@ -134,7 +134,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, windows-latest]
+        # os: [macos-latest, windows-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -162,7 +163,7 @@ jobs:
         run: npx playwright install-deps
       - name: build electron app
         run: yarn build
-      - name: run ui tests (${{ matrix.os }})
+      - name: generate new screenshots (${{ matrix.os }})
         if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
       - name: status

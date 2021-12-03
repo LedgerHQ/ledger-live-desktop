@@ -535,7 +535,7 @@
         "finished": "Takas işleminiz başarıyla tamamlandı."
       },
       "date": "Tarih",
-      "from": "Başlangıç",
+      "from": "Gönderici",
       "fromAddress": "Kaynak adresi",
       "fromAddress_plural": "Kaynak adresleri",
       "to": "Bitiş",
@@ -1055,7 +1055,7 @@
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "Blok zinciri, güvenlik, kripto dövizler ve Ledger cihazınız hakkında bilmeniz gereken her şey",
+      "description": "Blok zinciri, güvenlik, kripto paralar ve Ledger cihazınız hakkında bilmeniz gereken her şey",
       "cta": "Öğrenmeye başla"
     },
     "stakeCosmos": {
@@ -1079,7 +1079,7 @@
     },
     "sell": {
       "title": "kripto sat",
-      "description": "Bitcoin satışlarınızı ortağımızla doğrudan Ledger Live'da gerçekleştirin"
+      "description": "Bitcoin satışlarınızı ortağımız aracılığıyla doğrudan Ledger Live'da gerçekleştirin"
     },
     "stakeAlgorand": {
       "title": "ALGORAND ile staking",
@@ -1087,7 +1087,7 @@
     },
     "swap": {
       "title": "Kripto takas edin",
-      "description": "Ortağımız ile Ledger Live üzerinden bir kriptoyu diğeriyle takas edin."
+      "description": "Ortağımız aracılığıyla Ledger Live üzerinden bir kriptoyu diğeriyle takas edin."
     },
     "lending": {
       "title": "Kripto borç ver",
@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Özellikler",
-        "description": "Description",
+        "description": "Açıklama",
         "contract": "Sözleşme adresi",
         "tokenId": "Token Kimliği",
         "quantity": "Miktar"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Yüklenmiş uygulamalarda ara..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Cihazınızda bir uygulama açık görünüyor",
+      "subtitle": "Yöneticiyi yeniden açmak, cihazın uygulamadan çıkmasını sağlar",
+      "ctaReopen": "Yöneticiyi yeniden aç",
+      "ctaPortfolio": "Portföye geri dön"
     },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}}&lt;/0&gt; boş",
@@ -1495,7 +1495,7 @@
         "updating": "Güncelleniyor...",
         "scheduled": "Sıraya Alındı",
         "update": "Güncelleme mevcut",
-        "updateAll": "Hepsini güncelle",
+        "updateAll": "Tümünü güncelle",
         "updateAllOutOfMemory": "Yeterli depolama alanı yok. Lütfen bazı uygulamaları kaldırın",
         "install": "Yükle",
         "installed": "Yüklenmiş",
@@ -2676,8 +2676,8 @@
           "description": "Ledger'ın blok zinciri tarayıcılarının gelecek bir sürümünü deneyin. Bu ayarın değiştirilmesi, hesap bakiyesi ve senkronizasyonun yanı sıra gönderme özelliğini de etkileyebilir.\n(&lt;0&gt;&lt;/0&gt;)"
         },
         "keychainObservableRange": {
-          "title": "Özel boşluk sınırı",
-          "description": "Tüm hesaplar için özel boşluk sınırı. Bu değerin, varsayılan değerinin (20) üzerine çıkartılması, coin'ler için pek kullanılmayan açık adresleri taramaya yarar. Yalnızca ileri düzey kullanıcılar içindir. Bu özellik, hesaplarınızı geri yüklerken uyumluluğu bozabilir."
+          "title": "Özel gap limit",
+          "description": "Tüm hesaplar için özel gap limit. Bu değerin, varsayılan değerinin (20) üzerine çıkartılması, coin'ler için pek kullanılmayan açık adresleri taramaya yarar. Yalnızca ileri düzey kullanıcılar içindir. Bu özellik, hesaplarınızı geri yüklerken uyumluluğu bozabilir."
         },
         "forceProvider": {
           "title": "Yönetici sağlayıcı",
