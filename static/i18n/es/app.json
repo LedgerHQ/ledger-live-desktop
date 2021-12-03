@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Propiedades",
-        "description": "Description",
+        "description": "Descripción",
         "contract": "Dirección de contrato",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
