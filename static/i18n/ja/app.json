@@ -1441,9 +1441,9 @@
     },
     "disconnected": {
       "title": "お使いのデバイスでアプリが開いているようです",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "subtitle": "「管理」を再度開いて、デバイスのアプリが終了する",
+      "ctaReopen": "「管理」を再度開く",
+      "ctaPortfolio": "「ポートフォリオ」に戻る"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> 使用可能",
