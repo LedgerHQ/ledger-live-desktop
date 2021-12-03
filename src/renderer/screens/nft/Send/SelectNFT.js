@@ -1,29 +1,29 @@
 // @flow
 import React, { useMemo, useEffect, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import type { NFT } from "@ledgerhq/live-common/lib/types";
 import Select from "~/renderer/components/Select";
-import { getAllNFTs } from "~/renderer/reducers/accounts";
 import Option from "./Option";
 
 const SelectNFT = ({
   onSelect,
   maybeNFTId,
   maybeNFTCollection,
+  nfts,
 }: {
   onSelect: any => void,
   maybeNFTId?: string,
   maybeNFTCollection?: string,
+  nfts: NFT[],
 }) => {
   const [token, setToken] = useState(null);
   const getOptionValue = useCallback(item => item, []);
-  const allNFTs = useSelector(getAllNFTs);
 
   const filteredNFTs = useMemo(
     () =>
       maybeNFTCollection
-        ? allNFTs.filter(nft => nft.collection.contract === maybeNFTCollection)
-        : allNFTs,
-    [allNFTs, maybeNFTCollection],
+        ? nfts.filter(nft => nft.collection.contract === maybeNFTCollection)
+        : nfts,
+    [nfts, maybeNFTCollection],
   );
 
   const onTokenSelected = useCallback(

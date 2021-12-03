@@ -7,6 +7,8 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import IconSend from "~/renderer/icons/Send";
 
+import type { Account } from "@ledgerhq/live-common/lib/types";
+
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { getNFTById } from "~/renderer/reducers/accounts";
@@ -119,13 +121,20 @@ function NFTAttribute({
 }
 
 type NFTViewerDrawerProps = {
+  account: Account,
   nftId: string,
   isOpen: boolean,
   height?: number,
   onRequestClose: () => void,
 };
 
-export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTViewerDrawerProps) {
+export function NFTViewerDrawer({
+  account,
+  nftId,
+  isOpen,
+  onRequestClose,
+  height,
+}: NFTViewerDrawerProps) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -135,8 +144,8 @@ export function NFTViewerDrawer({ nftId, isOpen, onRequestClose, height }: NFTVi
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 
   const onNFTSend = useCallback(() => {
-    dispatch(openModal("MODAL_SEND", { isNFTSend: true, nftId }));
-  }, [dispatch, nftId]);
+    dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
+  }, [dispatch, nftId, account]);
 
   return (
     <Box height={height}>

@@ -107,6 +107,7 @@ const TokensList = ({ account, collectionId }: Props) => {
               id={nft.id}
               tokenId={nft.tokenId}
               contract={collection.contract}
+              account={account}
             />
           </NFTContextMenu>,
         );
@@ -138,7 +139,7 @@ const TokensList = ({ account, collectionId }: Props) => {
       }
     }
     return result;
-  }, [collectionId, collections, maxVisibleNTFs, nftsViewMode, onSelectCollection]);
+  }, [collectionId, collections, maxVisibleNTFs, nftsViewMode, onSelectCollection, account]);
 
   return (
     <>
