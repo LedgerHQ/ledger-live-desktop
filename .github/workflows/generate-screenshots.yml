@@ -99,7 +99,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gh
       - name: checkout PR
-        run: gh pr checkout ${{ github.event.inputs.number }}
+        run: gh pr checkout ${{ github.event.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2
@@ -147,7 +147,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: checkout PR
-        run: gh pr checkout ${{ github.event.inputs.number }}
+        run: gh pr checkout ${{ github.event.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2
