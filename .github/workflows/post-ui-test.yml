@@ -1,4 +1,4 @@
-name: "PR Reporting"
+name: CI Report
 on:
   workflow_dispatch:
     inputs:

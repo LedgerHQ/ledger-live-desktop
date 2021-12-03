@@ -15,7 +15,6 @@ on:
 jobs:
   start-runner:
     name: start self-hosted EC2 runner
-    needs: cancel-previous
     runs-on: [ledger-live-desktop]
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
