@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { compose } from "redux";
-import { useSelector, connect } from "react-redux";
+import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -38,8 +38,7 @@ import Graph from "~/renderer/icons/Graph";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
-import { useSwapProviders } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { providersSelector } from "~/renderer/actions/swap";
+import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -58,6 +57,16 @@ const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable)
   &:active {
     background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.3))};
   }
+`;
+
+const FadeInButtonsContainer = styled(Box).attrs(() => ({
+  horizontal: true,
+  flow: 2,
+  alignItems: "center",
+}))`
+  pointer-events: ${p => !p.show && "none"};
+  opacity: ${p => (p.show ? 1 : 0)};
+  transition: opacity 400ms ease-in;
 `;
 
 const mapDispatchToProps = {
@@ -98,8 +107,10 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
 
-  const { providers } = useSwapProviders();
-  const storedProviders = useSelector(providersSelector);
+  const { providers, storedProviders, providersError } = useProviders();
+
+  // don't show buttons until we know whether or not we can show swap button, otherwise possible click jacking
+  const showButtons = !!(providers || storedProviders || providersError);
   const availableOnSwap =
     (providers || storedProviders) &&
     !!(providers || storedProviders).find(({ pairs }) => {
@@ -190,28 +201,28 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       : []),
   ];
 
-  const BuyHeader = () => <BuyActionDefault onClick={onBuy} />;
+  const BuyHeader = <BuyActionDefault onClick={onBuy} />;
 
-  const SwapHeader = () => <SwapActionDefault onClick={onSwap} />;
+  const SwapHeader = <SwapActionDefault onClick={onSwap} />;
 
-  const ManageActionsHeader = () => manageActions.map(item => renderAction(item));
+  const ManageActionsHeader = manageActions.map(item => renderAction(item));
 
-  const NonEmptyAccountHeader = () => (
-    <>
+  const NonEmptyAccountHeader = (
+    <FadeInButtonsContainer show={showButtons}>
       {canSend(account, parentAccount) && (
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
       <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {availableOnBuy && <BuyHeader />}
-      {availableOnSwap && <SwapHeader />}
-      {manageActions.length > 0 && <ManageActionsHeader />}
+      {availableOnBuy && BuyHeader}
+      {availableOnSwap && SwapHeader}
+      {manageActions.length > 0 && ManageActionsHeader}
       {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
-    </>
+    </FadeInButtonsContainer>
   );
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
-      {!isAccountEmpty(account) ? <NonEmptyAccountHeader /> : null}
+      {!isAccountEmpty(account) ? NonEmptyAccountHeader : null}
       <Tooltip content={t("stars.tooltip")}>
         <Star
           accountId={account.id}
