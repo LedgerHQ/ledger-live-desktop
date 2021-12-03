@@ -318,21 +318,21 @@
           "postalCodePlaceholder": "Geben Sie Ihre Postleitzahl ein",
           "dateOfBirthPlaceholder": "TT.MM.JJJJ",
           "firstNameError": "Geben Sie Ihren Vornamen ein, um fortzufahren",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "lastNameError": "Geben Sie Ihren Nachnamen ein, um fortzufahren",
+          "street1Error": "Geben Sie Ihre Adresse ein",
+          "cityError": "Geben Sie die Stadt ein, in der Sie in den USA leben",
+          "postalCodeError": "Geben Sie eine gültige US-Postleitzahl ein",
+          "dateOfBirthError": "Geben Sie Ihr Geburtsdatum ein",
+          "dateOfBirthValidationError": "Geben Sie ein gültiges Geburtsdatum ein"
         }
       }
     },
     "exchangeDrawer": {
       "title": "Confirm your Exchange",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
+        "title": "Vorgang ausstehend",
+        "description": "Ihr Tauschvorgang (Swap) wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten.",
+        "disclaimer": "Notieren Sie sich Ihre Swap-ID-Nummer, falls Sie Unterstützung von <0><0>{{provider}}</0> Unterstützung</0> benötigen.",
         "seeDetails": "See details"
       }
     }
