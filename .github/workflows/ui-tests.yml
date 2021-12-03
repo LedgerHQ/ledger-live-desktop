@@ -98,7 +98,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: report-
+          name: tests-reports
           path: |
             lint.txt
             jest.txt
@@ -107,7 +107,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: playwright-results-ubuntu-20.04
+          name: playwright-results-linux
           path: |
             playwright/artifacts/test-results
             playwright/artifacts/html-report
