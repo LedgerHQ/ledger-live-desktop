@@ -8,9 +8,11 @@ on:
       label:
         description: name of runner to use
         required: true
+        type: string
       ec2-instance-id:
         description: ec2 instance id
         required: true
+        type: string
 
 jobs:
   stop-runner:
