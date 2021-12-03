@@ -6,6 +6,7 @@ import { useSelector, connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import { swapSelectableCurrenciesSelector } from "~/renderer/reducers/settings";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -18,37 +19,41 @@ import type { TFunction } from "react-i18next";
 import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
+import perFamily from "~/renderer/generated/AccountHeaderActions";
+import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Star from "~/renderer/components/Stars/Star";
 import {
-  ActionDefault,
   BuyActionDefault,
   ReceiveActionDefault,
   SendActionDefault,
   SwapActionDefault,
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
-import perFamily from "~/renderer/generated/AccountHeaderActions";
-import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
+import IconSend from "~/renderer/icons/Send";
+import IconReceive from "~/renderer/icons/Receive";
+import DropDownSelector from "~/renderer/components/DropDownSelector";
+import Button from "~/renderer/components/Button";
+import Text from "~/renderer/components/Text";
 import Graph from "~/renderer/icons/Graph";
+import IconAngleDown from "~/renderer/icons/AngleDown";
+import IconAngleUp from "~/renderer/icons/AngleUp";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
-import { useSwapProviders } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { providersSelector } from "~/renderer/actions/swap";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
   justifyContent: "center",
 }))`
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border: 1px solid ${p => p.theme.colors.palette.text.shade60};
-  border-radius: 20px;
+  border-radius: 4px;
   &:hover {
     color: ${p => (p.disabled ? "" : p.theme.colors.palette.text.shade100)};
     background: ${p => (p.disabled ? "" : rgba(p.theme.colors.palette.divider, 0.2))};
@@ -97,15 +102,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
 
   const availableOnBuy = isCurrencySupported("BUY", currency);
-
-  const { providers } = useSwapProviders();
-  const storedProviders = useSelector(providersSelector);
-  const availableOnSwap =
-    (providers || storedProviders) &&
-    !!(providers || storedProviders).find(({ pairs }) => {
-      return pairs && pairs.find(({ from, to }) => [from, to].includes(currency.id));
-    });
-
+  const availableOnSwap = useSelector(swapSelectableCurrenciesSelector);
   const history = useHistory();
 
   const onBuy = useCallback(() => {
@@ -150,20 +147,36 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     openModal("MODAL_RECEIVE", { parentAccount, account });
   }, [parentAccount, account, openModal]);
 
-  const renderAction = ({ label, onClick, event, eventProperties, icon }) => {
-    const Icon = icon;
-    return (
-      <ActionDefault
-        onClick={onClick}
-        event={event}
-        eventProperties={eventProperties}
-        iconComponent={Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
-        labelComponent={label}
-      />
-    );
-  };
+  const renderItem = useCallback(
+    ({ item: { label, onClick, event, eventProperties, icon } }) => {
+      const Icon = icon;
+      return (
+        <Button onClick={onClick} event={event} eventProperties={eventProperties}>
+          <Box horizontal flow={1} alignItems="center">
+            {Icon && <Icon size={14} overrideColor={contrastText} currency={currency} />}
+            <Box>
+              <Text ff="Inter|SemiBold">{label}</Text>
+            </Box>
+          </Box>
+        </Button>
+      );
+    },
+    [currency, contrastText],
+  );
 
   const manageActions = [
+    {
+      key: "Send",
+      onClick: onSend,
+      icon: IconSend,
+      label: <Trans i18nKey="send.title" />,
+    },
+    {
+      key: "Receive",
+      onClick: onReceive,
+      icon: IconReceive,
+      label: <Trans i18nKey="receive.title" />,
+    },
     ...manageList,
     ...(availableOnCompound
       ? [
@@ -190,34 +203,57 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       : []),
   ];
 
-  const BuyHeader = () => <BuyActionDefault onClick={onBuy} />;
-
-  const SwapHeader = () => <SwapActionDefault onClick={onSwap} />;
-
-  const ManageActionsHeader = () => manageActions.map(item => renderAction(item));
-
-  const NonEmptyAccountHeader = () => (
+  const canBuySwap = availableOnBuy || availableOnSwap.includes(currency.id);
+  const BuySwapHeader = () => (
     <>
-      {canSend(account, parentAccount) && (
-        <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-      )}
-      <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {availableOnBuy && <BuyHeader />}
-      {availableOnSwap && <SwapHeader />}
-      {manageActions.length > 0 && <ManageActionsHeader />}
-      {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
+      {availableOnBuy ? <BuyActionDefault onClick={onBuy} /> : null}
+      {availableOnSwap.includes(currency.id) ? <SwapActionDefault onClick={onSwap} /> : null}
+      {manageActions && manageActions.length > 0 ? (
+        <DropDownSelector
+          border
+          horizontal
+          items={manageActions}
+          renderItem={renderItem}
+          controlled
+          buttonId="account-actions-manage"
+        >
+          {({ isOpen }) => (
+            <Button small primary>
+              <Box horizontal flow={1} alignItems="center">
+                <Box>
+                  <Trans i18nKey="common.manage" values={{ currency: currency.name }} />
+                </Box>
+                {isOpen ? <IconAngleUp size={16} /> : <IconAngleDown size={16} />}
+              </Box>
+            </Button>
+          )}
+        </DropDownSelector>
+      ) : null}
     </>
   );
 
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
-      {!isAccountEmpty(account) ? <NonEmptyAccountHeader /> : null}
+      {!isAccountEmpty(account) ? (
+        canBuySwap ? (
+          <BuySwapHeader />
+        ) : (
+          <>
+            {canSend(account, parentAccount) ? (
+              <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+            ) : null}
+
+            <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+
+            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
+          </>
+        )
+      ) : null}
       <Tooltip content={t("stars.tooltip")}>
         <Star
           accountId={account.id}
           parentId={account.type !== "Account" ? account.parentId : undefined}
           yellow
-          rounded
         />
       </Tooltip>
       {account.type === "Account" ? (
