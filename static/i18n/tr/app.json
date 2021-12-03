@@ -717,7 +717,7 @@
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
       "header": "{{provider}} ile kripto alın",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt; üzerinden kripto alın",
+      "title": "<0>{{provider}}</0> üzerinden kripto alın",
       "tab": "Al",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
@@ -726,7 +726,7 @@
     },
     "sell": {
       "header": "{{provider}} ile kripto satın",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt; üzerinden kripto satın",
+      "title": "<0>{{provider}}</0> üzerinden kripto satın",
       "tab": "Sat",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
