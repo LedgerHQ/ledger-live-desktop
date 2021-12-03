@@ -45,7 +45,7 @@ export default function NFTCrumb() {
   const items = useMemo(
     () =>
       collections.map(collection => ({
-        key: collection.tokenId,
+        key: collection.contract,
         label: collection.contract,
         collection,
       })),
