@@ -14,36 +14,36 @@ on:
 jobs:
   comment-on-pr:
     # if: github.event.workflow_run.event == 'pull_request'
-    strategy:
-      fail-fast: false
-      matrix:
-        # os: [ubuntu-20.04, macos-latest, windows-latest]
-        os: [ubuntu-20.04, windows-latest]
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     os: [ubuntu-20.04, macos-latest, windows-latest]
+    #     os: [ubuntu-20.04, windows-latest]
     runs-on: ubuntu-20.04
     steps:
       - name: download artifacts
         uses: actions/github-script@v3.1.0
         with:
           script: |
-            const fs = require('fs');
-            const artifacts = await github.actions.listWorkflowRunArtifacts({
+            var fs = require('fs');
+            var artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: ${{github.event.workflow_run.id || github.event.inputs.runId }},
             });
-            const reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
+            var reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "report-${{ matrix.os }}"
             })[0];
-            const playwrightArtifacts artifacts.data.artifacts.filter((artifact) => {
+            var playwrightArtifacts artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "playwright-results-${{ matrix.os }}"
             })[0];
-            const downloadReport = await github.actions.downloadArtifact({
+            var downloadReport = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: reportArtifacts.id,
                archive_format: 'zip',
             });
-            const downloadPlaywright = await github.actions.downloadArtifact({
+            var downloadPlaywright = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: reportArtifacts.id,
