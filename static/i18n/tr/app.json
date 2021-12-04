@@ -1279,7 +1279,7 @@
   "addAccounts": {
     "title": "Hesap ekle",
     "breadcrumb": {
-      "informations": "Kripto varlığı",
+      "informations": "Kripto varlık",
       "connectDevice": "Cihaz",
       "import": "Hesaplar",
       "finish": "Onay"
@@ -1407,7 +1407,7 @@
     "installApp": "{{appName}} Uygulama yüklemesi",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
     "listApps": "Uygulama şartları denetleniyor",
-    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuzu kontrol ederken lütfen bekleyin",
+    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuz kontrol edilirken lütfen bekleyin",
     "swap": {
       "notice": "Göndermeden önce cihazınızdaki takas bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız.",
       "confirm": "Takas işlemini onayla",
