@@ -1305,7 +1305,7 @@
       "segwit_or_native_segwit": "Segwit mi yoksa Native Segwit mi?"
     },
     "cta": {
-      "addMore": "Başka ekle",
+      "addMore": "Daha fazla ekle",
       "add": "Hesap ekle",
       "add_plural": "Hesap ekle",
       "addAccountName": "{{currencyName}} hesabı ekle",
@@ -1319,7 +1319,7 @@
         "title": "Yeni hesap ekle"
       },
       "imported": {
-        "title": "Portföyde bulunan hesaplar ({{count}})"
+        "title": "Portföydeki Hesaplar ({{count}})"
       },
       "migrate": {
         "title": "Güncellenecek hesaplar"
