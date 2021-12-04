@@ -835,7 +835,7 @@
       "enable": {
         "approve": "Onayla",
         "manageLimit": "Limiti yönet",
-        "viewDetails": "Ayrıntıları gör",
+        "viewDetails": "Ayrıntıları göster",
         "info": "Bu hesapta <0>{{amount}}</0> onayladınız. Ücret karşılığında tutarı düşürebilirsiniz.",
         "infoNoLimit": "Bu hesabı tamamen onayladınız. Ücret karşılığında tutarı düşürebilirsiniz.",
         "approvedWithLimit": "Bu hesapta <0>{{value}}</0> onayladınız.",
@@ -906,7 +906,7 @@
             "title": "Çekim talebi başarıyla gönderildi",
             "text": "Çekim işlemi ağ tarafından doğrulandıktan sonra varlıklarınız kullanıma açılacaktır.",
             "done": "Kapat",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin.",
           "tooltip": {
@@ -956,7 +956,7 @@
             "title": "Yatırım başarıyla gönderildi",
             "text": "Yatırımınız ağ tarafından doğrulandıktan sonra faiz getirisi kazanmaya başlayacaksınız.",
             "done": "Kapat",
-            "cta": "Ayrıntıları gör",
+            "cta": "Ayrıntıları göster",
             "info": "İşlemlerin bir tarayıcıda görünmesi ve doğrulanması biraz zaman alabilir."
           }
         }
@@ -1622,7 +1622,7 @@
         "success": {
           "title": "Alınan ödüller",
           "text": "Ödülleriniz mevcut bakiyenize eklendi.",
-          "cta": "Ayrıntıları gör",
+          "cta": "Ayrıntıları göster",
           "done": "Tamam"
         },
         "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
@@ -1708,7 +1708,7 @@
         "success": {
           "title": "Oylarınız başarılı bir şekilde verildi.",
           "text": "",
-          "cta": "Ayrıntıları gör"
+          "cta": "Ayrıntıları göster"
         },
         "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
       }
@@ -1804,7 +1804,7 @@
         "success": {
           "title": "İşlem gönderildi",
           "text": "İşlem blok zinciri tarafından onaylandığında hesap bakiyeniz güncellenecek",
-          "cta": "Ayrıntıları gör"
+          "cta": "Ayrıntıları göster"
         },
         "pending": {
           "title": "İşlem yayınlanıyor..."
@@ -2016,7 +2016,7 @@
             "success": {
               "title": "Varlıklarınıza başarıyla yetki devrettiniz.",
               "text": "İşlem blok zinciri tarafından onaylandığında hesap bakiyeniz güncellenecek",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2049,7 +2049,7 @@
               "titleCompound": "Ödüller başarıyla birleştirildi",
               "text": "Ödülleriniz mevcut bakiyenize eklendi.",
               "textCompound": "<0>{{amount}}</0> tutarındaki ödülünüz otomatik olarak <0>{{validator}}</0> hesabına devredildi",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -2084,7 +2084,7 @@
             "success": {
               "title": "Varlıklarınızın yetkisini başarıyla yeniden devrettiniz",
               "text": "İşlem blok zinciri tarafından onaylandığında yetkinizin yeniden devri gerçekleşecek",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2115,7 +2115,7 @@
             "success": {
               "title": "Varlıklarınızdaki yetki devrini başarıyla iptal ettiniz.",
               "description": "<0>{{validator}}</0> hesabına devredilen <0>{{amount}}</0> tutarındaki yetki iptal edildi",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2145,7 +2145,7 @@
             "success": {
               "title": "{{token}} varlığı başarıyla eklendi",
               "text": "Artık Algorand hesabınıza <0>{{token}}</0> varlıklarını alıp gönderebilirsiniz.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2185,7 +2185,7 @@
             "success": {
               "title": "Ödüller başarıyla alındı!",
               "text": "Ödülleriniz mevcut bakiyenize eklendi.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2289,7 +2289,7 @@
           "success": {
             "title": "Doğrulayıcıları başarıyla aday gösterdiniz",
             "text": "Varlıklarınız, seçtiğiniz doğrulayıcı(lar) ile bağlandığında ödül kazanmaya başlayacaksınız.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "İşlem yayınlanıyor..."
@@ -2371,7 +2371,7 @@
           "success": {
             "title": "Varlıklar başarıyla tekrar bağlandı",
             "text": "İşlem, ağ tarafından onaylandıktan sonra hesap bakiyeniz güncellenecek.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "Varlıklarınız tekrar bağlanıyor..."
@@ -2400,7 +2400,7 @@
           "success": {
             "title": "Çözme işlemi başarıyla gönderildi",
             "text": "Çözülmüş varlıklar 28 gün içinde çekilebilir.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "Varlıklarınız çözülüyor..."
@@ -2440,7 +2440,7 @@
           "success": {
             "title": "İşlem başarıyla gönderildi",
             "text": "İşlem kısa süre içinde işlem geçmişinde görünecek.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "İşlem yayınlanıyor..."
