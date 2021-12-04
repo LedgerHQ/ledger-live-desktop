@@ -1784,7 +1784,7 @@
         "recipientAddress": "Alıcı adresi",
         "amount": "Tutar",
         "fees": "Ağ ücretleri",
-        "useMax": "Gönderilebilecek Maksimum Tutar",
+        "useMax": "Tamamını Gönder",
         "rippleTag": "Etiket",
         "rippleTagPlaceholder": "Opsiyonel",
         "ethereumGasLimit": "Gas limiti",
