@@ -1780,7 +1780,7 @@
         "subaccountsWarning": "Bu hesabın token'larını göndermek için bu hesabı {{ currency }} ile doldurmanız gerekir",
         "from": "Gönderici",
         "to": "Alıcı",
-        "selectAccountDebit": "Düşülecek hesap",
+        "selectAccountDebit": "Gönderen hesap",
         "recipientAddress": "Alıcı adresi",
         "amount": "Tutar",
         "fees": "Ağ ücretleri",
