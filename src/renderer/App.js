@@ -28,6 +28,8 @@ import { AnnouncementProviderWrapper } from "~/renderer/components/AnnouncementP
 import { PlatformAppProviderWrapper } from "~/renderer/components/PlatformAppProviderWrapper";
 import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
 import { themeSelector } from "./actions/general";
+// $FlowFixMe
+import MarketDataProvider from "~/renderer/screens/market/MarketDataProviderWrapper";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
@@ -75,7 +77,9 @@ const InnerApp = ({ initialCountervalues }: { initialCountervalues: * }) => {
                       <PlatformAppProviderWrapper>
                         <DrawerProvider>
                           <NftMetadataProvider>
-                            <Default />
+                            <MarketDataProvider>
+                              <Default />
+                            </MarketDataProvider>
                           </NftMetadataProvider>
                         </DrawerProvider>
                       </PlatformAppProviderWrapper>

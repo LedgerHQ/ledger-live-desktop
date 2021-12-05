@@ -56,3 +56,10 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "Alpha";
+  src: url("./fonts/alpha/HMAlphaMono-Medium.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}

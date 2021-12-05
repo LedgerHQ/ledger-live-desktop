@@ -17,6 +17,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import { starredAccountsSelector } from "./accounts";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -120,6 +121,7 @@ export type SettingsState = {
       },
     },
   },
+  starredMarketCoins: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -184,6 +186,7 @@ const INITIAL_STATE: SettingsState = {
     selectableCurrencies: [],
     KYC: {},
   },
+  starredMarketCoins: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -319,6 +322,14 @@ const handlers: Object = {
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
+  ADD_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: [...state.starredMarketCoins, payload],
+  }),
+  REMOVE_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: state.starredMarketCoins.filter(id => id !== payload),
+  }),
 };
 
 // TODO refactor selectors to *Selector naming convention
@@ -493,6 +504,20 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
     developerModeEnabled,
     blacklistedTokenIds,
   }),
+);
+
+export const starredMarketCoinsSelector: OutputSelector<State, void, *> = createSelector(
+  starredAccountsSelector,
+  (state: State) => state.settings.starredMarketCoins,
+  (starredAccounts: any[], starredMarketCoins: string[]) => {
+    const starredAccountsCurrency = starredAccounts
+      .map(({ currency }) => currency?.id)
+      .filter(Boolean);
+
+    return starredAccountsCurrency.length
+      ? [...new Set([...starredMarketCoins, ...starredAccountsCurrency])]
+      : starredMarketCoins;
+  },
 );
 
 export default handleActions(handlers, INITIAL_STATE);

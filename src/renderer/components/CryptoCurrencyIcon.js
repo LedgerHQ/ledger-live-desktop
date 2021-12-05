@@ -14,6 +14,7 @@ type Props = {
   overrideColor?: string,
   inactive?: boolean,
   theme: any,
+  fallback?: React$Node,
 };
 
 // NB this is to avoid seeing the parent icon through
@@ -67,7 +68,15 @@ const Container = styled.div`
   }
 `;
 
-const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, theme }: Props) => {
+const CryptoCurrencyIcon = ({
+  currency,
+  circle,
+  size,
+  overrideColor,
+  inactive,
+  theme,
+  fallback,
+}: Props) => {
   const currencyColor = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const color = overrideColor || (inactive ? theme.colors.palette.text.shade60 : currencyColor);
 
@@ -96,7 +105,9 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
         <IconCurrency size={size} color={color} />
       </Container>
     )
-  ) : null;
+  ) : (
+    fallback || null
+  );
 };
 
 export default withTheme(CryptoCurrencyIcon);

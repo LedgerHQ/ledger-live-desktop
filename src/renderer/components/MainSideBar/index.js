@@ -36,6 +36,7 @@ import IconChevron from "~/renderer/icons/ChevronRightSmall";
 import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
+import IconMarket from "~/renderer/icons/ChartLine";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -228,6 +229,10 @@ const MainSideBar = () => {
     push("/");
   }, [push]);
 
+  const handleClickMarket = useCallback(() => {
+    push("/market");
+  }, [push]);
+
   const handleClickManager = useCallback(() => {
     push("/manager");
   }, [push]);
@@ -300,6 +305,15 @@ const MainSideBar = () => {
                 onClick={handleClickDashboard}
                 isActive={location.pathname === "/"}
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
+                collapsed={secondAnim}
+              />
+              <SideBarListItem
+                id={"market"}
+                label={t("sidebar.market")}
+                icon={IconMarket}
+                iconActiveColor="wallet"
+                onClick={handleClickMarket}
+                isActive={location.pathname === "/market"}
                 collapsed={secondAnim}
               />
               <SideBarListItem
