@@ -1,0 +1,1 @@
+2021-11-23T15:03:26.781Z pw:api   checking that element receives pointer events at (685.31,592)

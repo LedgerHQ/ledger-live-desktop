@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { BigNumber } from "bignumber.js";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -15,6 +15,7 @@ import type { Account, AccountLike, Operation, Transaction } from "@ledgerhq/liv
 import logger from "~/logger";
 import Stepper from "~/renderer/components/Stepper";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -40,6 +41,9 @@ type OwnProps = {|
     recipient?: string,
     amount?: BigNumber,
     disableBacks?: string[],
+    isNFTSend?: boolean,
+    nftId?: string,
+    nftCollection?: string,
     transaction?: Transaction,
     onConfirmationHandler: Function,
     onFailHandler: Function,
@@ -103,12 +107,7 @@ const createSteps = (disableBacks = []): St[] => [
     excludeFromBreadcrumb: true,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-    onBack: !disableBacks.includes("confirmation")
-      ? ({ transitionTo, onRetry }) => {
-          onRetry();
-          transitionTo("recipient");
-        }
-      : null,
+    onBack: null,
   },
 ];
 
@@ -136,11 +135,14 @@ const Body = ({
   updateAccountWithUpdater,
 }: Props) => {
   const openedFromAccount = !!params.account;
+  const isNFTSend = !!params.isNFTSend;
   const [steps] = useState(() => createSteps(params.disableBacks));
 
   // initial values might coming from deeplink
   const [maybeAmount, setMaybeAmount] = useState(() => params.amount || null);
   const [maybeRecipient, setMaybeRecipient] = useState(() => params.recipient || null);
+  const maybeNFTId = useMemo(() => params.nftId, [params.nftId]);
+  const maybeNFTCollection = useMemo(() => params.nftCollection, [params.nftCollection]);
 
   const onResetMaybeAmount = useCallback(() => {
     setMaybeAmount(null);
@@ -193,6 +195,44 @@ const Body = ({
     [account, setAccount],
   );
 
+  const handleChangeNFT = useCallback(
+    nextNft => {
+      const nextAccount = accounts.find(a => a?.nfts.find(({ id }) => nextNft.id));
+
+      if (account !== nextAccount) {
+        setAccount(nextAccount);
+      }
+      const bridge = getAccountBridge(nextAccount);
+      const standard = nextNft.collection.standard.toLowerCase();
+
+      setTransaction(
+        bridge.updateTransaction(transaction, {
+          tokenIds: [nextNft.tokenId],
+          quantities: [BigNumber(1)],
+          collection: nextNft.collection.contract,
+          mode: `${standard}.transfer`,
+        }),
+      );
+    },
+    [account, accounts, setAccount, setTransaction, transaction],
+  );
+
+  const handleChangeQuantities = useCallback(
+    nextQuantity => {
+      const bridge = getAccountBridge(account);
+      const cleanQuantity = BigNumber(nextQuantity.replace(/\D/g, "") || 0);
+
+      if (!transaction.quantities[0].eq(cleanQuantity)) {
+        setTransaction(
+          bridge.updateTransaction(transaction, {
+            quantities: [BigNumber(cleanQuantity)],
+          }),
+        );
+      }
+    },
+    [account, setTransaction, transaction],
+  );
+
   const handleRetry = useCallback(() => {
     setTransactionError(null);
     setOptimisticOperation(null);
@@ -232,7 +272,12 @@ const Body = ({
   const error = transactionError || bridgeError;
 
   const stepperProps = {
-    title: stepId === "warning" ? t("common.information") : t("send.title"),
+    title:
+      stepId === "warning"
+        ? t("common.information")
+        : isNFTSend
+        ? t("send.titleNft")
+        : t("send.title"),
     stepId,
     steps,
     errorSteps,
@@ -265,13 +310,18 @@ const Body = ({
     updateTransaction,
     onConfirmationHandler: params.onConfirmationHandler,
     onFailHandler: params.onFailHandler,
+    isNFTSend,
+    maybeNFTId,
+    maybeNFTCollection,
+    onChangeQuantities: handleChangeQuantities,
+    onChangeNFT: handleChangeNFT,
   };
 
   if (!status) return null;
 
   return (
     <Stepper {...stepperProps}>
-      <SyncSkipUnderPriority priority={100} />
+      {stepId === "confirmation" ? null : <SyncSkipUnderPriority priority={100} />}
       <Track onUnmount event="CloseModalSend" />
     </Stepper>
   );

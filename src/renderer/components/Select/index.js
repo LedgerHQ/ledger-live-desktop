@@ -44,6 +44,7 @@ export type Props = {
   autoFocus: boolean,
   virtual: boolean,
   rowHeight: number,
+  disableOptionPadding?: boolean,
   error: ?Error, // NB at least a different rendering for now
   stylesMap: CreateStylesReturnType => CreateStylesReturnType,
   extraRenderers?: { [string]: (props: *) => React$ElementType }, // Allows overriding react-select components. See: https://react-select.com/components
@@ -200,14 +201,22 @@ class Select extends PureComponent<Props> {
       error,
       stylesMap,
       virtual = true,
-      rowHeight = small ? 34 : 40,
+      rowHeight = small ? 34 : 48,
       autoFocus,
       extraRenderers,
       ...props
     } = this.props;
 
     const Comp = async ? AsyncReactSelect : ReactSelect;
-    let styles = createStyles(theme, { width, minWidth, small, isRight, isLeft, error });
+    let styles = createStyles(theme, {
+      width,
+      minWidth,
+      small,
+      isRight,
+      isLeft,
+      error,
+      rowHeight,
+    });
     styles = stylesMap ? stylesMap(styles) : styles;
 
     return (

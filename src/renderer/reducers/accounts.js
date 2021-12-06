@@ -7,6 +7,7 @@ import type {
   AccountLike,
   CryptoCurrency,
   TokenCurrency,
+  NFT,
 } from "@ledgerhq/live-common/lib/types";
 import {
   flattenAccounts,
@@ -240,6 +241,17 @@ export const hasLendEnabledAccountsSelector: OutputSelector<
   boolean,
 > = createSelector(shallowAccountsSelector, accounts =>
   flattenAccounts(accounts).some(accounts => useCompoundAccountEnabled(accounts)),
+);
+
+export const getAllNFTs: OutputSelector<State, {}, NFT[]> = createSelector(
+  accountsSelector,
+  accounts => accounts.flatMap(account => account.nfts).filter(Boolean),
+);
+
+export const getNFTById: OutputSelector<State, { nftId: string }, NFT> = createSelector(
+  getAllNFTs,
+  (_, { nftId }: { nftId: string }) => nftId,
+  (nfts, nftId) => nfts.find(nft => nft.id === nftId),
 );
 
 export const decodeAccountsModel = (raws: *) => (raws || []).map(accountModel.decode);

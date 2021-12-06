@@ -5,7 +5,7 @@ import { Trans } from "react-i18next";
 import type { Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 
-import { listTokens } from "@ledgerhq/live-common/lib/currencies";
+import { listTokens, isCurrencySupported } from "@ledgerhq/live-common/lib/currencies";
 import manager from "@ledgerhq/live-common/lib/manager";
 
 import Text from "~/renderer/components/Text";
@@ -29,8 +29,9 @@ const Placeholder = ({ query, addAccount, dispatch, installed, apps }: Props) =>
     () =>
       tokens.find(
         token =>
-          token.name.toLowerCase().includes(query.toLowerCase()) ||
-          token.ticker.toLowerCase().includes(query.toLowerCase()),
+          isCurrencySupported(token.parentCurrency) &&
+          (token.name.toLowerCase().includes(query.toLowerCase()) ||
+            token.ticker.toLowerCase().includes(query.toLowerCase())),
       ),
     [query],
   );
