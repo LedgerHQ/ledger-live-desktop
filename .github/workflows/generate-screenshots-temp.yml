@@ -15,13 +15,13 @@ jobs:
 
   start-runner:
     needs: cancel-previous
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@develop
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
     needs: [start-runner, generate-screenshots-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@develop
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
