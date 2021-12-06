@@ -81,10 +81,9 @@ type Props = {
   manifest: AppManifest,
   onClose?: Function,
   inputs?: Object,
-  shouldDisplayTopBar?: boolean,
 };
 
-const WebPlatformPlayer = ({ manifest, onClose, inputs, shouldDisplayTopBar = true }: Props) => {
+const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
   const theme = useTheme("colors.palette");
 
   const targetRef: { current: null | WebviewTag } = useRef(null);
@@ -382,14 +381,12 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, shouldDisplayTopBar = tr
 
   return (
     <Container>
-      {shouldDisplayTopBar && (
-        <TopBar
-          manifest={manifest}
-          onReload={handleReload}
-          onClose={onClose}
-          onOpenDevTools={handleOpenDevTools}
-        />
-      )}
+      <TopBar
+        manifest={manifest}
+        onReload={handleReload}
+        onClose={onClose}
+        onOpenDevTools={handleOpenDevTools}
+      />
 
       <Wrapper>
         <CustomWebview

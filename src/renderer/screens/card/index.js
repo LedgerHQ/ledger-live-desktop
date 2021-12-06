@@ -10,6 +10,11 @@ import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
 const APP_ID = "ledger-card";
 
+/**
+ * FIXME
+ * Duplicate from src/renderer/screens/platform/App.js
+ */
+
 export default function CardPlatformApp() {
   const { state: urlParams } = useLocation();
   const { manifests } = usePlatformApp();
@@ -27,7 +32,6 @@ export default function CardPlatformApp() {
       {manifest ? (
         <WebPlatformPlayer
           manifest={manifest}
-          shouldDisplayTopBar={false}
           inputs={{
             theme: themeType,
             ...urlParams,
