@@ -6,23 +6,15 @@ import { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/typ
 import { Text, Icons, Flex } from "@ledgerhq/react-ui";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-
 import ByteSize from "~/renderer/components/ByteSize";
-import Box from "~/renderer/components/Box";
-
 import AppActions from "./AppActions";
-
 import AppIcon from "./AppIcon";
 
-const AppRow = styled.div`
-  display: flex;
-  /* background-color: lightgreen; */
-  flex-direction: row;
-  align-items: center;
-  margin-top: 4px;
-  margin-bottom: 20px;
-  padding: 6px 0px;
-`;
+const AppRow = styled(Flex).attrs(() => ({
+  flexDirection: "row",
+  alignItems: "center",
+  py: "6px",
+}))``;
 
 const AppName = styled.div`
   flex: 1;
@@ -37,7 +29,7 @@ const AppName = styled.div`
 const AppSize = styled.div`
   flex: 0 0 50px;
   text-align: center;
-  color: ${p => p.theme.colors.palette.text.shade60};
+  color: ${p => p.theme.colors.neutral.c70};
 `;
 
 type Props = {
@@ -53,6 +45,7 @@ type Props = {
   setAppInstallDep?: (...args: any[]) => void;
   setAppUninstallDep?: (...args: any[]) => void;
   addAccount?: (...args: any[]) => void;
+  containerProps: Record<string, unknown>;
 };
 
 // eslint-disable-next-line react/display-name
@@ -69,6 +62,7 @@ const Item: React.ComponentType<Props> = ({
   setAppInstallDep,
   setAppUninstallDep,
   addAccount,
+  containerProps,
 }: Props) => {
   const { name } = app;
   const { deviceModel, deviceInfo } = state;
@@ -89,14 +83,14 @@ const Item: React.ComponentType<Props> = ({
   const newVersion = installed && installed.availableVersion;
 
   return (
-    <AppRow id={`managerAppsList-${name}`}>
-      <Flex flex={1} horizontal>
+    <AppRow id={`managerAppsList-${name}`} {...containerProps}>
+      <Flex flex={1} alignItems="center">
         <AppIcon app={app} />
         <AppName>
-          <Text type="paragraph" fontWeight="medium" color="palette.neutral.c100">{`${app.displayName}${
-            currency ? ` (${currency.ticker})` : ""
-          }`}</Text>
-          <Text variant="small" color="palette.neutral.c70">
+          <Text variant="paragraph" fontWeight="medium" mb={1} color="neutral.c100">{`${
+            app.displayName
+          }${currency ? ` (${currency.ticker})` : ""}`}</Text>
+          <Text variant="small" color="neutral.c70">
             <Trans
               i18nKey="manager.applist.item.version"
               values={{
@@ -107,10 +101,11 @@ const Item: React.ComponentType<Props> = ({
         </AppName>
       </Flex>
       <AppSize>
-        <Text variant="small" color="palette.neutral.c70">
+        <Text variant="small" color="neutral.c70">
           <ByteSize
             value={
-              ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+              ((installed && installed.blocks) || 0) *
+                deviceModel.getBlockSize(deviceInfo.version) ||
               app.bytes ||
               0
             }
@@ -122,8 +117,8 @@ const Item: React.ComponentType<Props> = ({
       <Flex flex={1} flexDirection="row" alignItems="center" justifyContent="center">
         {isLiveSupported && (
           <>
-            <Icons.CircledCheckMedium size="20px" color="palette.success.c100" />
-            <Text variant="small" ml="6px" color="palette.neutral.c70">
+            <Icons.CircledCheckMedium size="20px" color="success.c100" />
+            <Text variant="small" ml="6px" color="neutral.c70">
               <Trans i18nKey="manager.applist.item.supported" />
             </Text>
           </>

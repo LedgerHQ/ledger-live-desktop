@@ -145,6 +145,10 @@ const AppsList = ({
         setAppInstallDep={setAppInstallDep}
         setAppUninstallDep={setAppUninstallDep}
         addAccount={addAccount}
+        containerProps={{
+          marginTop: 2,
+          marginBottom: 7,
+        }}
       />
     ),
     [
