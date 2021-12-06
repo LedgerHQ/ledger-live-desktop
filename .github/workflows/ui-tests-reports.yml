@@ -43,6 +43,10 @@ jobs:
               );
             });
 
+            const imagesArtifacts = artifacts.data.artifacts.filter((artifact) => {
+              return artifact.name.includes("images-");
+            });
+
             const downloadReport = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,

@@ -18,13 +18,13 @@ jobs:
 
   start-runner:
     needs: cancel-previous
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@develop
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
     needs: [start-runner, ui-tests-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
+    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@develop
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
@@ -89,6 +89,15 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+      - name: save images output
+        run: |
+          echo ${{ steps.imgur.outputs.images }} > images-linux.json
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-linux.json
+          path: images-linux.json
       - name: save PR number
         if: always()
         run: |
@@ -160,6 +169,14 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+      - name: save images outputs
+        run: echo ${{ steps.imgur.outputs.images }} > images-${{ matrix.os }}.json
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-${{ matrix.os }}.json
+          path: images-${{ matrix.os }}.json
       - name: upload ci suggested screenshots
         if: always()
         uses: actions/upload-artifact@v2

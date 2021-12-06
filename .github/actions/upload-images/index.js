@@ -57,7 +57,6 @@ const uploadImage = async () => {
   let files;
   try {
     files = getAllFiles(fullPath);
-    console.log(files);
   } catch {
     return core.setOutput("images", []);
   }
