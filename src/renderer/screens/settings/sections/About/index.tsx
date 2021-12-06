@@ -1,15 +1,18 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import TrackPage from "~/renderer/analytics/TrackPage";
+
 import { SectionRow as Row } from "../../Rows";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import ReleaseNotesButton from "./ReleaseNotesButton";
-import { setDeveloperMode } from "../../../../actions/settings";
-import { useDispatch, useSelector } from "react-redux";
-import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import { v4 as uuidv4 } from "uuid";
-import { developerModeSelector } from "../../../../reducers/settings";
+import { setDeveloperMode } from "~/renderer/actions/settings";
+import { developerModeSelector } from "~/renderer/reducers/settings";
 import { useDynamicUrl } from "~/renderer/terms";
-import { Flex } from "@ledgerhq/react-ui";
+import { openURL } from "~/renderer/linking";
+
+import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
+import { Flex, Link, Icons } from "@ledgerhq/react-ui";
 
 const SectionHelp = () => {
   const { t } = useTranslation();
@@ -52,19 +55,35 @@ const SectionHelp = () => {
           <ReleaseNotesButton />
         </Row>
 
-        <Row
-          title={t("settings.help.terms")}
-          desc={t("settings.help.termsDesc")}
-          linkHref={termsUrl}
-          linkLabel={t("common.learnMore")}
-        />
+        <Row title={t("settings.help.terms")} desc={t("settings.help.termsDesc")}>
+          <Link
+            iconPosition="right"
+            type="main"
+            size="medium"
+            Icon={Icons.ExternalLinkMedium}
+            onClick={e => {
+              e.preventDefault();
+              openURL(termsUrl);
+            }}
+          >
+            {t("common.learnMore")}
+          </Link>
+        </Row>
 
-        <Row
-          title={t("settings.help.privacy")}
-          desc={t("settings.help.privacyDesc")}
-          linkHref={privacyPolicyUrl}
-          linkLabel={t("common.learnMore")}
-        />
+        <Row title={t("settings.help.privacy")} desc={t("settings.help.privacyDesc")}>
+          <Link
+            iconPosition="right"
+            type="main"
+            size="medium"
+            Icon={Icons.ExternalLinkMedium}
+            onClick={e => {
+              e.preventDefault();
+              openURL(privacyPolicyUrl);
+            }}
+          >
+            {t("common.learnMore")}
+          </Link>
+        </Row>
       </Flex>
     </>
   );

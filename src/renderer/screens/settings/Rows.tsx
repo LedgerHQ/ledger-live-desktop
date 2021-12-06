@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { openURL } from "~/renderer/linking";
-import { Flex, Text, Link, Icons } from "@ledgerhq/react-ui";
+import { Flex, Text } from "@ledgerhq/react-ui";
 
 type SectionRowProps = {
   title?: React.ReactNode;
   desc: React.ReactNode;
   children?: any;
-  linkLabel?: string;
-  linkHref?: string;
   onClick?: () => void;
   inset?: boolean;
 };
@@ -17,15 +14,7 @@ const SectionRowContainer = styled(Flex)<{ inset: boolean }>`
   border-radius: ${p => (p.inset ? p.theme.radii[3] : 0)}px;
 `;
 
-export const SectionRow = ({
-  title,
-  desc,
-  children,
-  onClick,
-  inset = false,
-  linkHref,
-  linkLabel,
-}: SectionRowProps) => (
+export const SectionRow = ({ title, desc, children, onClick, inset = false }: SectionRowProps) => (
   <SectionRowContainer
     onClick={onClick}
     tabIndex={-1}
@@ -44,22 +33,6 @@ export const SectionRow = ({
       <Text fontSize={3} color="palette.neutral.c80" mt={1}>
         {desc}
       </Text>
-      {linkLabel && linkHref && (
-        <Link
-          href={linkHref}
-          iconPosition="right"
-          type="main"
-          size="medium"
-          alwaysUnderline
-          Icon={Icons.ExternalLinkMedium}
-          onClick={e => {
-            e.preventDefault();
-            openURL(linkHref);
-          }}
-        >
-          {linkLabel}
-        </Link>
-      )}
     </Flex>
     <Flex>{children}</Flex>
   </SectionRowContainer>
