@@ -187,7 +187,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
               >
                 <div>
                   <Button
-                    type="shade"
+                    variant="shade"
                     Icon={Icons.ArrowToBottomMedium}
                     iconPosition="left"
                     id={`appActionsInstall-${name}`}

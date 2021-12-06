@@ -2,6 +2,7 @@ import React, { useState, memo, useCallback } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 import { Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
+import { Icons } from "@ledgerhq/react-ui";
 
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -43,18 +44,8 @@ const UninstallAllButton = ({ installedApps, uninstallQueue, dispatch }: Props) 
 
   return (
     <>
-      <Button
-        primary
-        inverted
-        style={{ background: "transparent" }}
-        fontSize={3}
-        onClick={openModal}
-        event="Manager Uninstall All"
-      >
-        <Trash size={14} />
-        <Text style={{ marginLeft: 8 }}>
-          <Trans i18nKey="manager.applist.uninstall.title" />
-        </Text>
+      <Button variant="shade" onClick={openModal} event="Manager Uninstall All" Icon={Icons.TrashMedium} iconPosition="left">
+        <Trans i18nKey="manager.applist.uninstall.title" />
       </Button>
       <ConfirmModal
         isOpened={isOpened}
