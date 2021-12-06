@@ -12,7 +12,7 @@ export class SwapPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.swapMenuButton = page.locator('#drawer-swap-button');
+    this.swapMenuButton = page.locator('data-test-id=drawer-swap-button');
     this.maxSpendableToggle = page.locator('data-test-id=swap-max-spendable-toggle');
     this.exchangeButton = page.locator('data-test-id=exchange-button');
     this.swapId = page.locator('data-test-id=swap-id');
