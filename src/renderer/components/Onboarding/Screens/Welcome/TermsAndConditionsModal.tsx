@@ -62,6 +62,7 @@ const TermsAndConditionsModal: React.FC<{
       </Flex>
       <Flex justifyContent="center" mt={8}>
         <Button
+          data-testid="onboarding-cta-done"
           onClick={handleAcceptTermsOfUse}
           variant="main"
           color="palette.neutral.c100"
