@@ -90,6 +90,7 @@ jobs:
         with:
           path: playwright/artifacts/test-results
       - name: save images output
+        if: always()
         run: |
           echo ${{ steps.imgur.outputs.images }} > images-linux.json
       - name: upload images
@@ -170,7 +171,9 @@ jobs:
         with:
           path: playwright/artifacts/test-results
       - name: save images outputs
-        run: echo ${{ steps.imgur.outputs.images }} > images-${{ matrix.os }}.json
+        if: always()
+        run: |
+          echo ${{ steps.imgur.outputs.images }} > images-${{ matrix.os }}.json
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
