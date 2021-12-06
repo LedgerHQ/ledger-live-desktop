@@ -194,7 +194,7 @@
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
-    "manager": "マネージャー",
+    "manager": "管理",
     "exchange": "購入/売却",
     "swap": "スワップ",
     "lend": "レンディング",
@@ -1441,8 +1441,8 @@
     },
     "disconnected": {
       "title": "お使いのデバイスでアプリが開いているようです",
-      "subtitle": "「管理」を再度開いて、デバイスのアプリが終了する",
-      "ctaReopen": "「管理」を再度開く",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
       "ctaPortfolio": "「ポートフォリオ」に戻る"
     },
     "deviceStorage": {
@@ -1544,7 +1544,7 @@
       "updateBtn": "ファームウェアをアップデート",
       "banner": {
         "warning": "ファームウェアを最新の{{latestFirmware}}へアップデート可能です。",
-        "cta": "マネージャーを開く",
+        "cta": "「管理」を開く",
         "old": {
           "warning": "デバイスのファームウェアのバージョンが古いため、アップデートできません。Ledgerサポートに連絡して、デバイスを交換してください。",
           "cta": "サポートへのお問い合わせ"
@@ -2665,7 +2665,7 @@
         },
         "managerDevMode": {
           "title": "デベロッパーモード",
-          "description": "開発者用アプリとテストネットアプリをマネージャーに表示します。"
+          "description": "開発者用アプリとテストネットアプリを「管理」に表示します。"
         },
         "scanForInvalidPaths": {
           "title": "拡張アカウント検索",
