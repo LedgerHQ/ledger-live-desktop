@@ -92,7 +92,7 @@ jobs:
       - name: save images output
         if: always()
         run: |
-          echo ${{ steps.imgur.outputs.images }} > images-linux.json
+          echo '${{ steps.imgur.outputs.images }}' > images-linux.json
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
@@ -173,7 +173,7 @@ jobs:
       - name: save images outputs
         if: always()
         run: |
-          echo ${{ steps.imgur.outputs.images }} > images-${{ matrix.os }}.json
+          echo '${{ steps.imgur.outputs.images }}' > images-${{ matrix.os }}.json
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
