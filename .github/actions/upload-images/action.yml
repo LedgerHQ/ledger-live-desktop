@@ -1,9 +1,15 @@
 name: upload-images
-description: uploads images found in a folder to imgur
+description: uploads images found in a folder to imgur and creates a json file for later reference
 author: valpinkman
 inputs:
   path:
     description: path to look for images to upload (relative to root of current project)
+    required: true
+  workspace:
+    description: github.workspace context or $GITHUB_WORKSPACE
+    required: true
+  os:
+    description: running os to scope json file name
     required: true
 outputs:
   images:

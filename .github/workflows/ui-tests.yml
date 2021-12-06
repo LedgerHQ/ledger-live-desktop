@@ -89,6 +89,8 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+          workspace: $GITHUB_WORKSPACE
+          os: linux
       - name: save images output
         if: always()
         run: |
@@ -170,6 +172,8 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+          workspace: $GITHUB_WORKSPACE
+          os: ${{ matrix.os }}
       - name: save images outputs
         if: always()
         run: |

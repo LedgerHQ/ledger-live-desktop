@@ -6,8 +6,19 @@ const { resolve } = require("path");
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+const clean = str =>
+  str
+    .replace("-expected.png", "")
+    .replace("-actual.png", "")
+    .replace("-diff.png", "");
+
+const isDiff = str => str.includes("diff");
+const isActual = str => str.includes("actual");
+
 const uploadImage = async () => {
   const path = core.getInput("path");
+  const os = core.getInput("os");
+  const workspace = core.getInput("workspace");
   const fullPath = resolve(path);
 
   const upload = async (file, i = 0) => {
@@ -43,6 +54,7 @@ const uploadImage = async () => {
     let results = [];
     const dirents = fs.readdirSync(currentPath, { withFileTypes: true });
     dirents.forEach(dirent => {
+      if (dirent.name.toLocaleLowerCase().includes("retry")) return;
       const newPath = resolve(currentPath, dirent.name);
       const stat = fs.statSync(newPath);
       if (stat && stat.isDirectory()) {
@@ -67,14 +79,25 @@ const uploadImage = async () => {
   });
 
   const results = await Promise.all(resultsP);
-  const res = results.map((link, index) => {
-    return {
-      link,
-      name: files[index].replace("-diff.png", ""),
-    };
+
+  const formatted = {};
+  results.forEach((link, index) => {
+    const file = files[index];
+    const key = clean(file);
+    if (!formatted[key]) formatted[key] = { actual: {}, diff: {}, expected: {} };
+
+    const subKey = isActual(file) ? "actual" : isDiff(file) ? "diff" : "expected";
+
+    formatted[key][subKey].link = link;
+    formatted[key][subKey].name = file;
   });
 
-  core.setOutput("images", JSON.stringify(res));
+  const final = JSON.stringify(Object.values(formatted));
+
+  console.log(final);
+
+  fs.writeFileSync(`${workspace}/images-${os}.json`, final);
+  core.setOutput("images", final);
 };
 
 uploadImage().catch(err => {
