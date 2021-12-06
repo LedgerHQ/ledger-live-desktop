@@ -57,7 +57,7 @@ const Root = ({ onChange, account, transaction, status }: Props) => {
             openURL(urls.solana.recipient_info);
             track("Solana Recipient Info Requested");
           }}
-          label={t("solana.send.flow.steps.recipient.info_label")}
+          label={t("common.info")}
         />
       )}
       {extraWarnings.filter(Boolean).map(warning => (
