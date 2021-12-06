@@ -172,11 +172,11 @@
     "hour": "時間",
     "hour_plural": "時間",
     "range": {
-      "day": "1日",
+      "day": "日",
       "week": "週",
       "month": "月",
       "year": "年",
-      "all": "全期間"
+      "all": "すべて"
     }
   },
   "fees": {
@@ -1510,9 +1510,9 @@
         "learnMoreTooltip": "{{appName}} についての詳細",
         "removeTooltip": "{{appName}} をアンインストール",
         "useAppForToken": "{{tokenType}} トークンを管理しますか？",
-        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
-        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
-        "goToAccounts": "アカウントへ移動",
+        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
+        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
+        "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール"
       },
       "uninstall": {
@@ -1591,11 +1591,11 @@
       "cancelReinstallCTA": "アップデートをインストール",
       "resetSteps": {
         "first": "1. デバイスをリセット",
-        "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続します。",
-        "turnOn": "デバイスのボタンを押して電源をオンにします。",
+        "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続する。",
+        "turnOn": "デバイスのボタンを押して電源をオンにする。",
         "falsePin": "デバイスをリセットするには、間違ったPINを3回入力してください。",
         "turnOff": "{{action}} が表示されるまで、サイドボタンを長押ししてください。",
-        "confirmTurnOff": "{{action}} をタップして確認してください。",
+        "confirmTurnOff": "{{action}} をタップして確認する。",
         "second": "2. {{mode}} モードで起動",
         "boot": "{{option}} が表示されるまで、サイドボタンを長押ししてください。",
         "recoveryMode": "{{mode}} モードをタップします。ダッシュボードが表示されるまでお待ちください。",
@@ -2553,7 +2553,7 @@
       "currencies": "暗号資産",
       "help": "ヘルプ",
       "about": "Ledgerについて",
-      "experimental": "Experimental features（開発者向け実験機能）",
+      "experimental": "実験的機能",
       "accounts": "アカウント",
       "developer": "デベロッパー"
     },
