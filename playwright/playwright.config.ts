@@ -1,7 +1,7 @@
 import { PlaywrightTestConfig } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
-  testDir: "specs/",
+  testDir: process.env.V3 ? "specs/v3" : "specs/",
   testIgnore: "specs/recorder.spec.ts",
   outputDir: "./artifacts/test-results",
   timeout: 60000,
