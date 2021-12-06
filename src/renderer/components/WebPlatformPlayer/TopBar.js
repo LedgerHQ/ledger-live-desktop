@@ -116,7 +116,11 @@ export type Props = {
 };
 
 const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools }: Props) => {
-  const { name, icon } = manifest;
+  const { name, icon, branch } = manifest;
+
+  const shouldDisplayName = branch !== "private";
+  const shouldDisplayInfo = branch !== "private";
+  const shouldDisplayCloseButton = !!onClose;
 
   const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
   const dispatch = useDispatch();
@@ -127,18 +131,22 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
 
   return (
     <Container>
-      <TitleContainer>
-        <LiveAppIcon name={name} icon={icon || undefined} size={20} />
-        <ItemContent>{name}</ItemContent>
-      </TitleContainer>
-      <Separator />
+      {shouldDisplayName && (
+        <>
+          <TitleContainer>
+            <LiveAppIcon name={name} icon={icon || undefined} size={20} />
+            <ItemContent>{name}</ItemContent>
+          </TitleContainer>
+          <Separator />
+        </>
+      )}
       <ItemContainer isInteractive onClick={onReload}>
         <IconReload size={16} />
         <ItemContent>
           <Trans i18nKey="common.sync.refresh" />
         </ItemContent>
       </ItemContainer>
-      {enablePlatformDevTools ? (
+      {enablePlatformDevTools && (
         <>
           <Separator />
           <ItemContainer isInteractive onClick={onOpenDevTools}>
@@ -148,15 +156,22 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
             </ItemContent>
           </ItemContainer>
         </>
-      ) : null}
-      <RightContainer>
-        <ItemContainer isInteractive onClick={onClick}>
-          <IconInfoCircle size={16} />
-        </ItemContainer>
-        <ItemContainer isInteractive onClick={onClose}>
-          <IconClose size={16} />
-        </ItemContainer>
-      </RightContainer>
+      )}
+      {(shouldDisplayInfo || shouldDisplayCloseButton) && (
+        <RightContainer>
+          {shouldDisplayInfo && (
+            <ItemContainer isInteractive onClick={onClick}>
+              <IconInfoCircle size={16} />
+            </ItemContainer>
+          )}
+
+          {shouldDisplayCloseButton && (
+            <ItemContainer isInteractive onClick={onClose}>
+              <IconClose size={16} />
+            </ItemContainer>
+          )}
+        </RightContainer>
+      )}
     </Container>
   );
 };
