@@ -24,12 +24,14 @@ const AppActionsWrapper = styled.div`
   display: flex;
   flex: 1;
   min-width: 150px;
-  justify-content: flex-end;
+  justify-content: space-between;
   flex-direction: row;
-  > *:not(:last-child) {
-    margin-right: 16px;
-  }
 `;
+
+const Cell = styled(Flex)`
+  width: 50%;
+  flex-direction: row;
+`
 
 type Props = {
   state: State;
@@ -104,140 +106,149 @@ const AppActions: React$ComponentType<Props> = React.memo(
     return (
       <AppActionsWrapper>
         {installing || uninstalling ? (
-          <Progress
-            state={state}
-            name={name}
-            updating={updating}
-            installing={installing}
-            isCurrent={installQueue.length > 0 && installQueue[0] === name}
-            uninstalling={uninstalling}
-          />
+          <>
+            <Cell />
+            <Cell justifyContent="flex-end">
+              <Progress
+                state={state}
+                name={name}
+                updating={updating}
+                installing={installing}
+                isCurrent={installQueue.length > 0 && installQueue[0] === name}
+                uninstalling={uninstalling}
+              />
+            </Cell>
+          </>
         ) : showActions ? (
           <>
-            {installed ? (
-              isLiveSupported ? (
-                <Tooltip
-                  content={
-                    canAddAccount ? (
+            <Cell justifyContent="center">
+              {installed ? (
+                isLiveSupported ? (
+                  <Tooltip
+                    content={
+                      canAddAccount ? (
+                        <Trans
+                          i18nKey="manager.applist.item.addAccountTooltip"
+                          values={{ appName: name }}
+                        />
+                      ) : (
+                        <Trans i18nKey="manager.applist.item.addAccountWarn" />
+                      )
+                    }
+                  >
+                    <div>
+                      <Link
+                        iconPosition="left"
+                        event="Manager AddAccount Click"
+                        eventProperties={{
+                          appName: name,
+                          appVersion: app.version,
+                        }}
+                        onClick={onAddAccount}
+                        disabled={!canAddAccount}
+                        Icon={Icons.WalletAddMedium}
+                        type="shade"
+                      >
+                        <Trans i18nKey="manager.applist.item.addAccount" />
+                      </Link>
+                    </div>
+                  </Tooltip>
+                ) : (
+                  <Tooltip
+                    content={
                       <Trans
-                        i18nKey="manager.applist.item.addAccountTooltip"
+                        i18nKey="manager.applist.item.learnMoreTooltip"
                         values={{ appName: name }}
                       />
-                    ) : (
-                      <Trans i18nKey="manager.applist.item.addAccountWarn" />
-                    )
-                  }
-                >
-                  <div>
-                    <Link
-                      iconPosition="left"
-                      event="Manager AddAccount Click"
-                      eventProperties={{
-                        appName: name,
-                        appVersion: app.version,
-                      }}
-                      onClick={onAddAccount}
-                      disabled={!canAddAccount}
-                      Icon={Icons.WalletAddMedium}
-                      type="shade"
-                    >
-                      <Trans i18nKey="manager.applist.item.addAccount" />
-                    </Link>
-                  </div>
-                </Tooltip>
-              ) : (
-                <Tooltip
-                  content={
-                    <Trans
-                      i18nKey="manager.applist.item.learnMoreTooltip"
-                      values={{ appName: name }}
-                    />
-                  }
-                >
-                  <div>
-                    <Link
-                      iconPosition="left"
-                      event="Manager SupportLink Click"
-                      eventProperties={{
-                        appName: name,
-                        appVersion: app.version,
-                      }}
-                      onClick={onSupportLink}
-                      Icon={Icons.LinkMedium}
-                      type="shade"
-                    >
-                      <Trans i18nKey="manager.applist.item.learnMore" />
-                    </Link>
-                  </div>
-                </Tooltip>
-              )
-            ) : null}
-            {appStoreView && installed && (
-              <Flex flexDirection="row" alignItems="center" justifyContent="center">
-                <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
-                <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
-                  <Trans i18nKey="manager.applist.item.installed" />
-                </Text>
-              </Flex>
-            )}
-            {!installed && (
-              <Tooltip
-                disabled={!notEnoughMemoryToInstall}
-                content={<Trans i18nKey="manager.applist.item.notEnoughSpace" />}
-              >
-                <div>
-                  <Button
-                    variant="shade"
-                    Icon={Icons.ArrowToBottomMedium}
-                    iconPosition="left"
-                    id={`appActionsInstall-${name}`}
-                    disabled={!canInstall || notEnoughMemoryToInstall}
-                    onClick={onInstall}
-                    event="Manager Install Click"
-                    eventProperties={{
-                      appName: name,
-                      appVersion: app.version,
-                    }}
+                    }
                   >
-                    <Trans i18nKey="manager.applist.item.install" />
-                  </Button>
-                </div>
-              </Tooltip>
-            )}
-            {(((installed || !installedAvailable) && !appStoreView && !onlyUpdate) ||
-              forceUninstall) && (
-              <Tooltip
+                    <div>
+                      <Link
+                        iconPosition="left"
+                        event="Manager SupportLink Click"
+                        eventProperties={{
+                          appName: name,
+                          appVersion: app.version,
+                        }}
+                        onClick={onSupportLink}
+                        Icon={Icons.LinkMedium}
+                        type="shade"
+                      >
+                        <Trans i18nKey="manager.applist.item.learnMore" />
+                      </Link>
+                    </div>
+                  </Tooltip>
+                )
+              ) : null}
+            </Cell>
+            <Cell justifyContent="flex-end">
+              {appStoreView && installed ? (
+                <Flex flexDirection="row" alignItems="center" justifyContent="center">
+                  <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
+                  <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
+                    <Trans i18nKey="manager.applist.item.installed" />
+                  </Text>
+                </Flex>
+              ) : !installed ? (
+                  <Tooltip
+                    disabled={!notEnoughMemoryToInstall}
+                    content={<Trans i18nKey="manager.applist.item.notEnoughSpace" />}
+                  >
+                    <div>
+                      <Button
+                        variant="shade"
+                        Icon={Icons.ArrowToBottomMedium}
+                        iconPosition="left"
+                        id={`appActionsInstall-${name}`}
+                        disabled={!canInstall || notEnoughMemoryToInstall}
+                        onClick={onInstall}
+                        event="Manager Install Click"
+                        eventProperties={{
+                          appName: name,
+                          appVersion: app.version,
+                        }}
+                      >
+                        <Trans i18nKey="manager.applist.item.install" />
+                      </Button>
+                    </div>
+                  </Tooltip>
+              ) : (((installed || !installedAvailable) && !appStoreView && !onlyUpdate) || forceUninstall) ? (
+                <Tooltip
                 content={
                   <Trans i18nKey="manager.applist.item.removeTooltip" values={{ appName: name }} />
                 }
               >
-                <div>
-                  <Link
-                    id={`appActionsUninstall-${name}`}
-                    event="Manager Uninstall Click"
-                    eventProperties={{
-                      appName: name,
-                      appVersion: app.version,
-                    }}
-                    onClick={onUninstall}
-                    Icon={Icons.TrashMedium}
-                    type="shade"
-                  />
-                </div>
+                <Link
+                  id={`appActionsUninstall-${name}`}
+                  event="Manager Uninstall Click"
+                  eventProperties={{
+                    appName: name,
+                    appVersion: app.version,
+                  }}
+                  onClick={onUninstall}
+                  Icon={Icons.TrashMedium}
+                  type="shade"
+                />
               </Tooltip>
-            )}
+              ) : null}
+            </Cell>
           </>
         ) : (
           onlyUpdate &&
           updating &&
           !uninstalling &&
           installed && (
-            <Flex flexDirection="row" alignItems="center" justifyContent="center">
-              <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
-              <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
-                <Trans i18nKey="manager.applist.item.updated" />
-              </Text>
-            </Flex>
+            <>
+              <Cell />
+              <Cell justifyContent="flex-end">
+                <Flex flexDirection="row" alignItems="center" justifyContent="center">
+                  <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
+                  <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
+                    <Trans i18nKey="manager.applist.item.updated" />
+                  </Text>
+                </Flex>
+              </Cell>
+            </>
           )
         )}
       </AppActionsWrapper>

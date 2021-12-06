@@ -90,7 +90,7 @@ const Item: React.ComponentType<Props> = ({
 
   return (
     <AppRow id={`managerAppsList-${name}`}>
-      <Flex flex="0.7" horizontal>
+      <Flex flex={1} horizontal>
         <AppIcon app={app} />
         <AppName>
           <Text type="paragraph" fontWeight="medium" color="palette.neutral.c100">{`${app.displayName}${
@@ -119,7 +119,7 @@ const Item: React.ComponentType<Props> = ({
           />
         </Text>
       </AppSize>
-      <Flex flex="0.6" flexDirection="row" alignItems="center" justifyContent="center">
+      <Flex flex={1} flexDirection="row" alignItems="center" justifyContent="center">
         {isLiveSupported && (
           <>
             <Icons.CircledCheckMedium size="20px" color="palette.success.c100" />
