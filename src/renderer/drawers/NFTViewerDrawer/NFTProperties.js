@@ -56,7 +56,7 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
       <NFTPropertiesContainer>
         {metadata ? (
           metadata.properties.map(({ key, value }) => (
-            <NFTProperty key={key}>
+            <NFTProperty key={key + value}>
               <Text
                 mb="2px"
                 lineHeight="12.1px"
