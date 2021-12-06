@@ -23,6 +23,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 
 import { darken, rgba } from "~/renderer/styles/helpers";
 
+import IconCard from "~/renderer/icons/Card";
 import IconManager from "~/renderer/icons/Manager";
 import IconWallet from "~/renderer/icons/Wallet";
 import IconPortfolio from "~/renderer/icons/Portfolio";
@@ -306,15 +307,6 @@ const MainSideBar = () => {
                 collapsed={secondAnim}
               />
               <SideBarListItem
-                id={"card"}
-                label={t("sidebar.card")}
-                icon={IconWallet}
-                iconActiveColor="wallet"
-                isActive={location.pathname === "/card"}
-                onClick={handleClickCard}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
                 id={"catalog"}
                 label={t("sidebar.catalog")}
                 icon={IconApps}
@@ -374,7 +366,15 @@ const MainSideBar = () => {
                   NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
                 />
               )}
-
+              <SideBarListItem
+                id={"card"}
+                label={t("sidebar.card")}
+                icon={IconCard}
+                iconActiveColor="wallet"
+                isActive={location.pathname === "/card"}
+                onClick={handleClickCard}
+                collapsed={secondAnim}
+              />
               <SideBarListItem
                 id={"manager"}
                 label={t("sidebar.manager")}
