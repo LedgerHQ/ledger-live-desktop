@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Properties",
-        "about": "About Known Origin",
+        "description": "Description",
         "contract": "Contract address",
         "tokenId": "Token ID",
         "quantity": "Quantity"
@@ -1438,6 +1438,12 @@
       "appCatalogSearch": "Search app in catalog...",
       "appsOnDevice": "Apps installed",
       "appOnDeviceSearch": "Search installed apps..."
+    },
+    "disconnected": {
+      "title":"Looks like an app is open on your device",
+      "subtitle":"Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
+      "ctaPortfolio": "Back to Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> free",

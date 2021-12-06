@@ -133,6 +133,8 @@
     "type": {
       "IN": "Reçu",
       "OUT": "Envoyé",
+      "NFT_IN": "NFT reçu",
+      "NFT_OUT": "NFT envoyé",
       "CREATE": "Créé",
       "REVEAL": "Révélé",
       "DELEGATE": "Délégué",
@@ -231,7 +233,7 @@
           "provider": "Prestataire",
           "rate": "Prix",
           "fees": "Frais",
-          "target": "Compte destinataire"
+          "target": "Compte bénéficiaire"
         },
         "tooltip": {
           "provider": "Prestataire",
@@ -1068,7 +1070,7 @@
     },
     "familyPack": {
       "title": "Family Pack",
-      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit",
+      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit.",
       "cta": "Acheter un Family Pack"
     },
     "polkaStake": {
@@ -1127,9 +1129,9 @@
       }
     },
     "connectedscreen": {
-      "info": "Vous pouvez maintenant accéder à la DApp sur votre ordinateur.",
-      "warning": "Partager des adresses de bénéficiaire par DApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
-      "disconnected": "Il y a un problème de connexion entre la DApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
+      "info": "Vous pouvez maintenant accéder à la dApp sur votre ordinateur.",
+      "warning": "Partager des adresses de bénéficiaire par dApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
+      "disconnected": "Il y a un problème de connexion entre la dApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
   },
   "dashboard": {
@@ -1170,6 +1172,48 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "Envoyer",
+        "open": "Ouvrir dans {{viewer}}"
+      },
+      "attributes": {
+        "properties": "Attributs",
+        "description": "Description",
+        "contract": "Adresse du contrat",
+        "tokenId": "Identifiant du token",
+        "quantity": "Quantité"
+      }
+    },
+    "collections": {
+      "title": "Collections de NFT (tokens non fongibles)",
+      "receiveCTA": "Recevoir NFT",
+      "galleryCTA": "Voir la galerie",
+      "seeMore": "Voir plus de collections",
+      "seeAll": "Voir toutes les collections",
+      "seeLess": "Voir moins"
+    },
+    "gallery": {
+      "title": "Tous les NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "Envoyer",
+          "contract": "Contrat : {{contract}}"
+        },
+        "operationList": {
+          "header": "Dernières opérations",
+          "OUT": "Envoyé",
+          "IN": "Reçu"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "Identifiant : {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "Tokens",
@@ -1255,7 +1299,7 @@
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
       "showAllAddressTypes": "Montrer tous les types d'adresses",
-      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'anciens formats d'adresse."
+      "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit ou Native SegWit ?"
@@ -1310,6 +1354,12 @@
     "internalOpTooltip": "Cette opération a des opérations internes.",
     "details": "Détails sur {{ currency }}",
     "multipleAddresses": "Pourquoi plusieurs adresses ?",
+    "nft": {
+      "name": "Nom du token",
+      "contract": "Contrat du token",
+      "id": "Identifiant du token (NFT)",
+      "amount": "Montant"
+    },
     "extra": {
       "frozenAmount": "Montant gelé",
       "unfreezeAmount": "Dégeler le montant",
@@ -1345,7 +1395,7 @@
     "loading": "Chargement...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
     "unlockDevice": "Déverrouillez votre appareil.",
-    "unlockDeviceAfterFirmwareUpdate": "Patientez pendant la mise à jour du micrologiciel et déverrouillez votre appareil avec votre code PIN.",
+    "unlockDeviceAfterFirmwareUpdate": "Patientez pendant la mise à jour du micrologiciel, puis déverrouillez votre appareil avec votre code PIN.",
     "quitApp": "Quittez l'application sur votre appareil.",
     "appNotInstalledTitle": "Application nécessaire manquante",
     "appNotInstalledTitle_plural": "Applications nécessaires manquantes",
@@ -1388,6 +1438,12 @@
       "appCatalogSearch": "Rechercher une application dans le catalogue",
       "appsOnDevice": "Applications installées",
       "appOnDeviceSearch": "Rechercher des applications installées..."
+    },
+    "disconnected": {
+      "title": "Application ouverte sur votre appareil ?",
+      "subtitle": "Rouvrir le Gestionnaire fermera l'application sur votre appareil.",
+      "ctaReopen": "Rouvrir le Gestionnaire",
+      "ctaPortfolio": "Retour au Portefeuille"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> disponibles",
@@ -1528,7 +1584,7 @@
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Faites un appui long sur le bouton pendant au moins 5 secondes jusqu'à ce que les options de Boot apparaissent. Sélectionnez le mode Bootloader.",
       "successTitle": "Micrologiciel mis à jour",
-      "successTextApps": "Merci de réinstaller les applications sur votre appareil",
+      "successTextApps": "Vous pouvez réinstaller vos applications sur votre appareil.",
       "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil.",
       "sucessCTAApps": "Réinstaller des applications",
       "SuccessCTANoApps": "Installer des applications",
@@ -1698,17 +1754,20 @@
   },
   "send": {
     "title": "Envoyer",
+    "titleNft": "Envoyer le NFT",
     "totalSpent": "Total à débiter",
     "steps": {
       "recipient": {
-        "title": "Bénéficiaire"
+        "title": "Bénéficiaire",
+        "nftRecipient": "NFT à envoyer"
       },
       "amount": {
         "title": "Montant",
         "banner": "Le montant maximal pouvant être envoyé est",
         "fees": "Frais",
         "standard": "Standard",
-        "advanced": "Avancé"
+        "advanced": "Avancé",
+        "nftQuantity": "Quantité"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -1730,7 +1789,9 @@
         "rippleTagPlaceholder": "Facultatif",
         "ethereumGasLimit": "Limite de gaz",
         "ethereumGasPrice": "Prix du gaz",
-        "unitPerByte": "{{unit}} par byte"
+        "unitPerByte": "{{unit}} par byte",
+        "nft": "NFT",
+        "nftQuantity": "Quantité"
       },
       "verification": {
         "streaming": {
@@ -3357,7 +3418,7 @@
   },
   "TransactionConfirm": {
     "title": "Confirmez l'opération sur votre appareil pour la finaliser.",
-    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par {{recipientWording}}.",
+    "warning": "Vérifiez toujours que l'adresse affichée sur votre appareil est identique à celle donnée par le {{recipientWording}}.",
     "secureContract": "Vérifiez les détails du dépôt sur votre appareil avant de l'envoyer. L'adresse du contrat est fournie de manière sécurisée afin que vous n'ayez pas à la vérifier.",
     "verifyData": "Vérifiez toujours les détails de l'opération sur votre appareil.",
     "warningWording": {},
@@ -3385,7 +3446,13 @@
       "undelegate": "validateur",
       "claimReward": "bénéficiaire des récompenses",
       "optIn": "bénéficiaire",
-      "nominate": "validateur"
+      "nominate": "validateur",
+      "erc721": {
+        "transfer": "Destinataire"
+      },
+      "erc1155": {
+        "transfer": "Destinataire"
+      }
     },
     "votes": "Votes ({{count}})"
   },
@@ -3989,6 +4056,9 @@
     },
     "TaprootNotActivated": {
       "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
+    },
+    "NotEnoughNftOwned": {
+      "title": "Nombre de tokens disponibles insuffisant"
     }
   }
 }

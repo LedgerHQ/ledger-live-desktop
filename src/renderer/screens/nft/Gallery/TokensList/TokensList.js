@@ -16,6 +16,7 @@ import GridIcon from "~/renderer/icons/Grid";
 import ListIcon from "~/renderer/icons/List";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
 import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
+import Spinner from "~/renderer/components/Spinner";
 import useOnScreen from "../../useOnScreen";
 import Item from "./Item";
 
@@ -37,6 +38,26 @@ const ToggleButton: ThemedComponent<{ active?: boolean }> = styled(Button)`
   background: ${p =>
     p.active ? p.theme.colors.pillActiveBackground : p.theme.colors.palette.background.paper};
   color: ${p => (p.active ? p.theme.colors.wallet : p.theme.colors.palette.divider)};
+`;
+
+const SpinnerContainer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const SpinnerBackground: ThemedComponent<{}> = styled.div`
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 100%;
+  padding: 2px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid ${p => p.theme.colors.palette.background.paper};
 `;
 
 const TokensList = ({ account, collectionId }: Props) => {
@@ -80,12 +101,13 @@ const TokensList = ({ account, collectionId }: Props) => {
         }
         // We can still add more nfts
         children.push(
-          <NFTContextMenu contract={collection.contract} tokenId={nft.tokenId}>
+          <NFTContextMenu key={nft.id} contract={collection.contract} tokenId={nft.tokenId}>
             <Item
               mode={nftsViewMode}
               id={nft.id}
               tokenId={nft.tokenId}
               contract={collection.contract}
+              account={account}
             />
           </NFTContextMenu>,
         );
@@ -98,19 +120,26 @@ const TokensList = ({ account, collectionId }: Props) => {
             {!collectionId ? (
               <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
                 <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-                  <CollectionName collection={collection} />
+                  <CollectionName collection={collection} fallback={collection.contract} />
                 </Text>
               </Box>
             ) : null}
             <Container mb={20} mode={nftsViewMode}>
               {children}
+              {children.length < count ? (
+                <SpinnerContainer>
+                  <SpinnerBackground>
+                    <Spinner size={14} />
+                  </SpinnerBackground>
+                </SpinnerContainer>
+              ) : null}
             </Container>
           </div>,
         );
       }
     }
     return result;
-  }, [collectionId, collections, maxVisibleNTFs, nftsViewMode, onSelectCollection]);
+  }, [collectionId, collections, maxVisibleNTFs, nftsViewMode, onSelectCollection, account]);
 
   return (
     <>

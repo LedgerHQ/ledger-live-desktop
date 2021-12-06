@@ -131,6 +131,15 @@ export const experimentalFeatures: Feature[] = [
     description: <Trans i18nKey="settings.experimental.features.forceProvider.description" />,
     minValue: 1,
   },
+  {
+    type: "toggle",
+    name: "NFT",
+    title: "NFT management features",
+    description:
+      "Display your Ethereum NFT and their metadata in your accounts. Send Ethereum NFT directly from Ledger Live.",
+    valueOn: true,
+    valueOff: false,
+  },
 ];
 
 const lsKey = "experimentalFlags";

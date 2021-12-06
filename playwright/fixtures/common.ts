@@ -12,24 +12,34 @@ type TestFixtures = {
   lang: string;
   theme: "light" | "dark" | "no-preference" | undefined;
   userdata: string;
+  userdataDestinationPath: string;
+  userdataOriginalFile: string;
+  userdataFile: any;
   env: Record<string, any>;
   page: Page;
 };
 
 const test = base.extend<TestFixtures>({
-  userdata: undefined,
   env: undefined,
   lang: "en-US",
   theme: "light",
-  page: async ({ lang, theme, userdata, env }: TestFixtures, use: (page: Page) => void) => {
+  userdata: undefined,
+  userdataDestinationPath: async ({}, use) => {
+    use(path.join(__dirname, "../artifacts/userdata", generateUUID()));
+  },
+  userdataOriginalFile: async ({ userdata }, use) => {
+    use(path.resolve("playwright/userdata/", `${userdata}.json`));
+  },
+  userdataFile: async ({ userdataDestinationPath }, use) => {
+    const fullFilePath = path.join(userdataDestinationPath, 'app.json');
+    use(fullFilePath);
+  },
+  page: async ({ lang, theme, userdata, userdataDestinationPath, userdataOriginalFile, env }: TestFixtures, use: (page: Page) => void) => {
     // create userdata path
-    const userDataPathKey = generateUUID();
-    const userDataPath = path.join(__dirname, "../artifacts/userdata", userDataPathKey);
-    fs.mkdirSync(userDataPath, { recursive: true });
+    fs.mkdirSync(userdataDestinationPath, { recursive: true });
 
     if (userdata) {
-      const userDataFile = path.resolve("playwright/userdata/", `${userdata}.json`);
-      fs.copyFileSync(userDataFile, `${userDataPath}/app.json`);
+      fs.copyFileSync(userdataOriginalFile, `${userdataDestinationPath}/app.json`);
     }
 
     // default environment variables
@@ -47,13 +57,13 @@ const test = base.extend<TestFixtures>({
     );
 
     // launch app
-    const viewport = { width: 1024, height: 768 };
+    const window = { width: 1024, height: 768 };
 
     const electronApp: ElectronApplication = await electron.launch({
       args: [
         "./.webpack/main.bundle.js",
-        `--user-data-dir=${userDataPath}`,
-        `--window-size=${viewport.width},${viewport.height}`,
+        `--user-data-dir=${userdataDestinationPath}`,
+        // `--window-size=${window.width},${window.height}`, // FIXME: Doesn't work, window size can't be forced?
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
         // "--use-gl=swiftshader"
@@ -62,7 +72,7 @@ const test = base.extend<TestFixtures>({
       ],
       recordVideo: {
         dir: "playwright/artifacts/videos/",
-        size: viewport,
+        size: window, // FIXME: no default value, it could come from viewport property in conf file but it's not the case
       },
       env,
       colorScheme: theme,
@@ -93,7 +103,7 @@ const test = base.extend<TestFixtures>({
     expect(await page.title()).toBe("Ledger Live");
     await page.waitForSelector("#__app__ready__", { state: "attached" });
     await page.waitForLoadState("domcontentloaded");
-    await page.waitForSelector("#loading-logo", { state: "hidden" });
+    await page.waitForSelector("#loader-container", { state: "hidden" });
 
     // use page in the test
     await use(page);
