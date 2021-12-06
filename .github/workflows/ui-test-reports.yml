@@ -22,35 +22,35 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: download artifacts
-        uses: actions/github-script@v3.1.0
+        uses: actions/github-script@v5
         with:
           script: |
-            var fs = require('fs');
-            var artifacts = await github.actions.listWorkflowRunArtifacts({
+            const fs = require('fs');
+            const artifacts = await github.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: ${{github.event.workflow_run.id || github.event.inputs.runId }},
             });
 
-            var reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
+            const reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "tests-reports"
             })[0];
 
-            var playwrightArtifacts = artifacts.data.artifacts.filter((artifact) => {
+            const playwrightArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return (
                 artifact.name == "playwright-results-windows-latest" ||
                 artifact.name === "playwright-results-linux"
               );
             });
 
-            var downloadReport = await github.actions.downloadArtifact({
+            const downloadReport = await github.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: reportArtifacts.id,
                archive_format: 'zip',
             });
 
-            var pPWArtifacts = await Promise.all(
+            const pPWArtifacts = await Promise.all(
               playwrightArtifacts.map((artifact) => {
                 return github.actions.downloadArtifact({
                   owner: context.repo.owner,
