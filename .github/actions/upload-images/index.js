@@ -2,7 +2,7 @@ const fetch = require("isomorphic-unfetch");
 const core = require("@actions/core");
 const fs = require("fs");
 const FormData = require("form-data");
-const { resolve } = require("path");
+const path = require("path");
 
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -19,7 +19,7 @@ const uploadImage = async () => {
   const path = core.getInput("path");
   const os = core.getInput("os");
   const workspace = core.getInput("workspace");
-  const fullPath = resolve(path);
+  const fullPath = path.resolve(path);
 
   const upload = async (file, i = 0) => {
     if (i > 2) {
@@ -55,7 +55,7 @@ const uploadImage = async () => {
     const dirents = fs.readdirSync(currentPath, { withFileTypes: true });
     dirents.forEach(dirent => {
       if (dirent.name.toLocaleLowerCase().includes("retry")) return;
-      const newPath = resolve(currentPath, dirent.name);
+      const newPath = path.resolve(currentPath, dirent.name);
       const stat = fs.statSync(newPath);
       if (stat && stat.isDirectory()) {
         results = results.concat(getAllFiles(newPath));
@@ -84,12 +84,16 @@ const uploadImage = async () => {
   results.forEach((link, index) => {
     const file = files[index];
     const key = clean(file);
+
     if (!formatted[key]) formatted[key] = { actual: {}, diff: {}, expected: {} };
 
     const subKey = isActual(file) ? "actual" : isDiff(file) ? "diff" : "expected";
+    const name = path.parse(file).name;
 
-    formatted[key][subKey].link = link;
-    formatted[key][subKey].name = file;
+    formatted[key][subKey] = {
+      link,
+      name,
+    };
   });
 
   const final = JSON.stringify(Object.values(formatted));
