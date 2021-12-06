@@ -45,7 +45,7 @@ const SectionHelp = () => {
           <CleanButton />
         </Row>
         <Row title={t("settings.exportLogs.title")} desc={t("settings.exportLogs.desc")}>
-          <ExportLogsBtn />
+          <ExportLogsBtn style={{ width: "120px" }} />
         </Row>
         <Row
           title={t("settings.profile.launchOnboarding")}
@@ -57,7 +57,7 @@ const SectionHelp = () => {
           title={t("settings.openUserDataDirectory.title")}
           desc={t("settings.openUserDataDirectory.desc")}
         >
-          <OpenUserDataDirectoryBtn variant="main" />
+          <OpenUserDataDirectoryBtn variant="main" style={{ width: "120px" }} />
         </Row>
         <Row
           title={t("settings.repairDevice.title")}

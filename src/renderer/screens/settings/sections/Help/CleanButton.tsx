@@ -29,7 +29,7 @@ export default function CleanButton() {
 
   return (
     <>
-      <Button variant="main" onClick={open} event="ClearCacheIntent">
+      <Button variant="main" onClick={open} event="ClearCacheIntent" style={{ width: "120px" }}>
         {t("settings.profile.softReset")}
       </Button>
 

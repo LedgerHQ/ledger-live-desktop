@@ -16,7 +16,7 @@ const LaunchOnboardingBtn = () => {
   return (
     <>
       <Track onUpdate event={"Launch Onboarding from Settings"} />
-      <Button variant="main" onClick={handleLaunchOnboarding}>
+      <Button variant="main" onClick={handleLaunchOnboarding} style={{ width: "120px" }}>
         {t("common.launch")}
       </Button>
     </>

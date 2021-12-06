@@ -95,7 +95,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
 
     return (
       <>
-        <Button {...buttonProps} variant="main" onClick={this.open} event="RepairDeviceButton">
+        <Button {...buttonProps} variant="main" onClick={this.open} event="RepairDeviceButton" style={{ width: "120px" }}>
           {t("settings.repairDevice.button")}
         </Button>
 

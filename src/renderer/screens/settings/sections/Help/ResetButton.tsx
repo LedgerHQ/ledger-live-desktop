@@ -1,17 +1,13 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import logger from "~/logger";
 import { useHardReset } from "~/renderer/reset";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import ResetFallbackModal from "~/renderer/modals/ResetFallbackModal";
 import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
-import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import Alert from "~/renderer/components/Alert";
-import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useActionModal } from "./logic";
+import { Box, Alert, BoxedIcon, Icons } from "@ledgerhq/react-ui";
 
 export default function ResetButton() {
   const { t } = useTranslation();
@@ -35,7 +31,7 @@ export default function ResetButton() {
 
   return (
     <>
-      <Button variant="main" onClick={open} event="HardResetIntent">
+      <Button variant="main" onClick={open} event="HardResetIntent" style={{ width: "120px" }}>
         {t("common.reset")}
       </Button>
 
@@ -53,17 +49,10 @@ export default function ResetButton() {
         desc={
           <Box>
             {t("settings.hardResetModal.desc")}
-            <Alert type="warning" mt={4}>
-              {t("settings.hardResetModal.warning")}
-            </Alert>
+            <Alert type="warning" title={t("settings.hardResetModal.warning")} />
           </Box>
         }
-        renderIcon={() => (
-          // FIXME why not pass in directly the DOM 🤷🏻
-          <IconWrapperCircle color="alertRed">
-            <IconTriangleWarning width={23} height={21} />
-          </IconWrapperCircle>
-        )}
+        renderIcon={() => <BoxedIcon Icon={Icons.WarningMedium} />}
       >
         <SyncSkipUnderPriority priority={999} />
       </ConfirmModal>
@@ -72,12 +61,3 @@ export default function ResetButton() {
     </>
   );
 }
-
-export const IconWrapperCircle = styled(Box)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #ea2e4919;
-  align-items: center;
-  justify-content: center;
-`;
