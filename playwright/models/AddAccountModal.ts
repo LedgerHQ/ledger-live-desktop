@@ -6,6 +6,7 @@ export class AddAccountModal extends Modal {
   readonly addAccountButton: Locator;
   readonly selectAccount: Locator;
   readonly selectAccountInput: Locator;
+  readonly accountsListLoader: Locator;
   readonly addAccountsButton: Locator;
   readonly stopButton: Locator;
   readonly retryButton: Locator;
@@ -18,6 +19,7 @@ export class AddAccountModal extends Modal {
     this.addAccountButton = page.locator('data-test-id=portfolio-empty-state-add-account-button');
     this.selectAccount = page.locator("text=Choose a crypto asset"); // FIXME: I need an id
     this.selectAccountInput = page.locator('[placeholder="Search"]'); // FIXME: I need an id
+    this.accountsListLoader = page.locator('data-test-id=add-accounts-sync-loader');
     this.addAccountsButton = page.locator('data-test-id=add-accounts-import-add-button');
     this.retryButton = page.locator('data-test-id=add-accounts-import-retry-button');
     this.stopButton = page.locator('data-test-id=add-accounts-import-stop-button');
