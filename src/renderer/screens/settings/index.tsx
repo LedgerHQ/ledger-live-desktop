@@ -43,7 +43,7 @@ const getItems = (t: (key: string) => string, devMode?: boolean): Item[] => {
     },
   ];
 
-  if (devMode) {
+  if (true) {
     items.push({
       key: "developer",
       label: t("settings.tabs.developer"),
