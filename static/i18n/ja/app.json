@@ -551,12 +551,12 @@
     "checkNodeSettings": "ノード設定を確認",
     "edit": "編集",
     "modal": {
-      "title": "ビットコインのフルノードを接続",
+      "title": "Bitcoinのフルノードを接続",
       "disconnectTitle": "フルノードを切断",
       "steps": {
         "landing": {
           "header": "フルノードをスタートします。「 Don’t trust, verify（信頼せず、検証しよう）」",
-          "description": "ビットコインのフルノードは、全てのトランザクションやブロックを認証するため、ビットコインネットワークに貢献しながら、誰かに頼ることなくビットコインを利用できます。",
+          "description": "Bitcoinのフルノードは、全てのトランザクションやブロックを認証するため、Bitcoinネットワークに貢献しながら、誰かに頼ることなくBitcoinを利用できます。",
           "list": {
             "item1": "適切なデバイスに、Bitcoin Coreを設定します。",
             "item2": "ノードの同期完了までお待ちください。",
@@ -653,7 +653,7 @@
             },
             "ready": {
               "header": "準備",
-              "description": "フルノードが完全に同期されました。正しいビットコインアカウントの残高が表示されています。"
+              "description": "フルノードが完全に同期されました。正しいBitcoinアカウントの残高が表示されています。"
             },
             "syncing": {
               "header": "ノードの同期中です...",
@@ -667,7 +667,7 @@
         },
         "disconnect": {
           "cta": "接続切断",
-          "description": "本当によろしいですか？フルノードを切断すると、すべてのビットコインアカウントが削除されます。Ledgerのエクスプローラーを使用して、アカウントを再度追加できます。"
+          "description": "本当によろしいですか？フルノードを切断すると、すべてのBitcoinアカウントが削除されます。Ledgerのエクスプローラーを使用して、アカウントを再度追加できます。"
         }
       }
     }
@@ -992,8 +992,8 @@
     },
     "optionsMenu": {
       "title": "オプション",
-      "exportOperations": "オペレーション履歴を書き出す",
-      "exportToMobile": "モバイルへ書き出す"
+      "exportOperations": "オペレーション履歴をエクスポート",
+      "exportToMobile": "モバイルへエクスポート"
     },
     "contextMenu": {
       "star": "お気に入り",
@@ -1079,7 +1079,7 @@
     },
     "sell": {
       "title": "暗号資産を売却する",
-      "description": "Ledger Liveから直接パートナーとビットコインを売却する。"
+      "description": "Ledger Liveから直接パートナーへBitcoinを売却する。"
     },
     "stakeAlgorand": {
       "title": "ALGORANDのステーキング",
@@ -1087,7 +1087,7 @@
     },
     "swap": {
       "title": "暗号資産をスワップする",
-      "description": "Ledger Liveからパートナーを通して、暗号通貨を交換しましょう。"
+      "description": "Ledger Liveからパートナーを通して、暗号通貨を取引できます。"
     },
     "lending": {
       "title": "暗号資産をレンディング（貸し出す）",
@@ -1248,7 +1248,7 @@
       "successDesc": "{{assets}} アカウントが更新され、使用できるようになりました。",
       "mobileTitle": "アカウントをモバイルにエクスポート",
       "mobileDesc": "下のボタンをクリックして、アップデートされたアカウントをLedger Live mobileアプリにエクスポートする。",
-      "mobileCTA": "モバイルへ書き出す",
+      "mobileCTA": "モバイルへエクスポート",
       "description": "Ledger Liveの新機能を利用するには、アカウントのアップデートが必要です。",
       "currency": "アップデートが必要な1件の{{currency}} アカウント：",
       "currency_plural": "アップデートが必要な{{count}} 件の{{currency}} アカウント：",
@@ -1284,7 +1284,7 @@
       "import": "アカウント",
       "finish": "確認"
     },
-    "fullNodeReadyInfo": "アカウントはビットコインのフルノードを使用して追加されます。",
+    "fullNodeReadyInfo": "アカウントはBitcoinのフルノードを使用して追加されます。",
     "fullNodeConfigure": "ノードの構成",
     "tokensTip": "{{token}} ({{ticker}}) は {{tokenType}} トークンです。 {{currency}} アカウントで直接トークンを受け取ることができます。",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
@@ -2560,12 +2560,12 @@
     "export": {
       "accounts": {
         "title": "アカウントをエクスポート",
-        "desc": "アカウントをLedger Live mobileアプリに追加します。アカウントは、スマホやデスクトップアプリ間ではなく、ブロックチェーンとのみ同期します。",
+        "desc": "アカウントをLedger Live mobileアプリに追加する。アカウントは、スマホやデスクトップアプリ間ではなく、ブロックチェーンとのみ同期します。",
         "button": "エクスポート"
       },
       "operations": {
         "title": "オペレーション履歴",
-        "desc": "お使いのコンピューターに、アカウントオペレーションの CSV ファイルを保存します。"
+        "desc": "コンピューターに、アカウントオペレーションのCSV ファイルを保存する。"
       },
       "modal": {
         "button": "完了",
@@ -2611,7 +2611,7 @@
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
-      "desc": "設定を編集する暗号資産を選択してください。",
+      "desc": "設定を編集する暗号資産を選択する。",
       "placeholder": "この資産の設定はありません。",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "トランザクションの確認に必要なネットワーク承認の回数を設定します。"
@@ -2623,19 +2623,19 @@
       "passwordAutoLockDesc": "非アクティブ時にLedger Liveを自動的にロックします。",
       "changePassword": "パスワードの変更",
       "softResetTitle": "キャッシュを削除",
-      "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期させます。",
+      "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期する。",
       "softReset": "削除",
       "resetKYC": "KYC（本人確認）データをリセット",
       "resetKYCDesc": "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用されるKYC（本人確認）データをすべて消去します。",
       "hardResetTitle": "Ledger Liveをリセット",
-      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除します。",
+      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除する。",
       "hardReset": "リセット",
       "analytics": "アナリティクス",
       "analyticsDesc": "Ledgerがユーザーエクスペリエンスを改善できるよう、アナリティクスを有効にしてください。これに含まれるのは、クリック、ページの閲覧、リダイレクト、アクション（送金、着金、ロックなど）、ページ末へのスクロール、アプリの（アン）インストール、アプリのバージョン、アカウント数、暗号資産と操作、セッションの持続時間、Ledgerデバイスの種類とファームウェアです。",
       "reportErrors": "バグのレポート",
       "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信する。",
       "launchOnboarding": "デバイスの設定",
-      "launchOnboardingDesc": "新しいデバイスとしてセットアップするか、既存のデバイスを復元します。アカウントと設定はそのまま保持されます。"
+      "launchOnboardingDesc": "新しいデバイスをセットアップ、または既存のデバイスを復元する。アカウントと設定はそのまま保持されます。"
     },
     "help": {
       "version": "バージョン",
@@ -2653,23 +2653,23 @@
       "features": {
         "apiTrongridProxy": {
           "title": "TronGrid.ioを使用",
-          "description": "LedgerプロキシなしでTronGridを直接を使用する"
+          "description": "LedgerプロキシなしでTronGridを直接を使用する。"
         },
         "experimentalCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Bitcoin (Taproot) とTezosの試験的JS実装を利用する"
+          "description": "Bitcoin (Taproot) とTezosの試験的JS実装を利用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
-          "description": "未リリースの言語を、一般設定タブの言語リストに追加します。"
+          "description": "未リリースの言語を、一般設定タブの言語リストに追加する。"
         },
         "managerDevMode": {
           "title": "デベロッパーモード",
-          "description": "開発者用アプリとテストネットアプリを「管理」に表示します。"
+          "description": "開発者用アプリとテストネットアプリを「管理」に表示する。"
         },
         "scanForInvalidPaths": {
           "title": "拡張アカウント検索",
-          "description": "誤った派生パスを持つアカウントをスキャンする検出された資産は、通常のアカウントに送金してください。"
+          "description": "誤った派生パスを持つアカウントをスキャンする。検出された場合は、通常のアカウントに送付してください。"
         },
         "experimentalExplorers": {
           "title": "試験的エクスプローラーAPI",
@@ -2677,7 +2677,7 @@
         },
         "keychainObservableRange": {
           "title": "ギャップリミットを設定",
-          "description": "全てのアカウントのギャップリミットを設定。この値をデフォルト（20）より大きくすると、さらに多くの未使用パブリックアドレスがスキャンされるようになります。ただし、アカウントを復元する際に互換性が失われる可能性があるため、詳しい知識のあるユーザー以外はこの値を変更しないでください。"
+          "description": "全てのアカウントのギャップリミットを設定する。この値をデフォルト（20）より大きくすると、さらに多くの未使用パブリックアドレスがスキャンされるようになります。ただし、アカウントを復元する際に互換性が失われる可能性があるため、詳しい知識のあるユーザー以外はこの値を変更しないでください。"
         },
         "forceProvider": {
           "title": "プロバイダー管理",
@@ -2709,7 +2709,7 @@
     },
     "openUserDataDirectory": {
       "title": "ユーザーデータの閲覧",
-      "desc": "コンピューターに保存されたアカウントやCache、設定といったユーザーデータを表示します。",
+      "desc": "コンピューターに保存されたアカウントやCache、設定といったユーザーデータを表示する。",
       "btn": "表示"
     },
     "repairDevice": {
@@ -2730,13 +2730,13 @@
       },
       "tokenBlacklist": {
         "title": "トークンを非表示",
-        "desc": "トークンを非表示にするには、親アカウントに移動し、トークンを右クリックして「トークンを非表示」を選択します。",
+        "desc": "トークンを非表示にするには、親アカウントに移動し、トークンを右クリックして「トークンを非表示」を選択してください。",
         "count": "{{count}} トークン",
         "count_plural": "{{count}} トークン"
       },
       "fullNode": {
-        "title": "ビットコインのフルノードを接続",
-        "desc": "同期およびトランザクションの送信用のビットコインのフルノードを、Ledgerのエクスプローラを使用せずに設定する。"
+        "title": "Bitcoinのフルノードを接続",
+        "desc": "同期およびトランザクションの送信用のBitcoinのフルノードを、Ledgerのエクスプローラを使用せずに設定する。"
       }
     }
   },
@@ -3714,7 +3714,7 @@
     },
     "ManagerUninstallBTCDep": {
       "title": "このアプリは必須です。",
-      "description": "ビットコインまたはイーサリアムアプリを最後にアンインストールします。"
+      "description": "BitcoinまたはEthereumアプリを最後にアンインストールする。"
     },
     "NetworkDown": {
       "title": "インターネットがダウンしているようです。",
@@ -3760,7 +3760,7 @@
     },
     "SatStackStillSyncing": {
       "title": "ノード同期中...",
-      "description": "ノードの同期が完了するまでお待ちください。ビットコインの残高が正しくない可能性がありますので、送付できません。"
+      "description": "ノードの同期が完了するまでお待ちください。Bitcoinの残高が正しくない可能性がありますので、送付できません。"
     },
     "SatStackVersionTooOld": {
       "title": "SatStackをアップグレードしてください。",
@@ -3913,8 +3913,8 @@
       "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "ビットコインアプリとイーサリアムアプリが必要です。",
-      "description": "最新版のビットコインアプリとイーサリアムアプリを、最初にインストールしてください。"
+      "title": "BitcoinアプリとEthereumアプリが必要です。",
+      "description": "最新版のBitcoinアプリとEthereumアプリを、最初にインストールしてください。"
     },
     "UserRefusedDeviceNameChange": {
       "title": "デバイス上で名前の変更がキャンセルされました。",
