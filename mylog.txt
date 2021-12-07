@@ -1,0 +1,311 @@
+yarn run v1.22.15
+$ nyc playwright test --config=playwright/playwright.config.ts
+
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [BTC] Add account[39m[2m (17s)[22m
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [LTC] Add account[39m[2m (15s)[22m
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [ETH] Add account[39m[2m (16s)[22m
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [ATOM] Add account[39m[2m (16s)[22m
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [XTZ] Add account[39m[2m (15s)[22m
+[2K[0G[31m  ✘  account.spec.ts:13:5 › Accounts › [XRP] Add account[39m[2m (15s)[22m
+[2K[0G[31m  ✘  manager.spec.ts:8:1 › Manager[39m[2m (15s)[22m
+[2K[0G[31m  ✘  onboarding.spec.ts:6:1 › Onboarding[39m[2m (12s)[22m
+[2K[0G[31m  ✘  passwordlock.spec.ts:12:1 › Enable password lock[39m[2m (11s)[22m
+[2K[0G[31m  ✘  settings.spec.ts:7:1 › Settings[39m[2m (10s)[22m
+
+
+[31m  1) account.spec.ts:13:5 › Accounts › [BTC] Add account [90m===========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 498px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-BTC-Add-account/BTC-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-BTC-Add-account/BTC-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-BTC-Add-account/BTC-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-BTC-Add-account/BTC-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  2) account.spec.ts:13:5 › Accounts › [LTC] Add account [90m===========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 498px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-LTC-Add-account/LTC-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-LTC-Add-account/LTC-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-LTC-Add-account/LTC-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-LTC-Add-account/LTC-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  3) account.spec.ts:13:5 › Accounts › [ETH] Add account [90m===========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 528px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-ETH-Add-account/ETH-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-ETH-Add-account/ETH-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-ETH-Add-account/ETH-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-ETH-Add-account/ETH-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  4) account.spec.ts:13:5 › Accounts › [ATOM] Add account [90m==========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 528px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-ATOM-Add-account/ATOM-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-ATOM-Add-account/ATOM-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-ATOM-Add-account/ATOM-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-ATOM-Add-account/ATOM-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  5) account.spec.ts:13:5 › Accounts › [XTZ] Add account [90m===========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 528px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-XTZ-Add-account/XTZ-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-XTZ-Add-account/XTZ-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-XTZ-Add-account/XTZ-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-XTZ-Add-account/XTZ-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  6) account.spec.ts:13:5 › Accounts › [XRP] Add account [90m===========================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+      Sizes differ; expected image 500px X 528px, but got 500px X 328px. 
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-XRP-Add-account/XRP-accounts-list-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/account-Accounts-XRP-Add-account/XRP-accounts-list-actual.png
+
+      34 |         await addAccountModal.stopButton.isVisible();
+      35 |         await addAccountModal.addAccountsButton.waitFor({ state: "visible" });
+    > 36 |         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+         |                                                              ^
+      37 |           `${currency}-accounts-list.png`,
+      38 |         );
+      39 |       });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:36:62[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/account.spec.ts:32:7[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-XRP-Add-account/XRP-accounts-list-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/account-Accounts-XRP-Add-account/XRP-accounts-list-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  7) manager.spec.ts:8:1 › Manager [90m=================================================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/manager-Manager/manager-app-catalog-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/manager-Manager/manager-app-catalog-actual.png
+        Diff: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/manager-Manager/manager-app-catalog-diff.png
+
+      14 |     await deviceAction.accessManager();
+      15 |     await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
+    > 16 |     expect(await page.screenshot()).toMatchSnapshot({
+         |                                     ^
+      17 |       name: "manager-app-catalog.png",
+      18 |     });
+      19 |   });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/manager.spec.ts:16:37[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/manager.spec.ts:12:3[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/manager-Manager/manager-app-catalog-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/manager-Manager/manager-app-catalog-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #3: diff (image/png) [90m----------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/manager-Manager/manager-app-catalog-diff.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  8) onboarding.spec.ts:6:1 › Onboarding [90m===========================================================[31m[39m
+
+    Error: Snapshot comparison failed:
+
+    Expected: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/onboarding-Onboarding/device-selection-expected.png
+    Received: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/onboarding-Onboarding/device-selection-actual.png
+        Diff: /Users/valmeida/projects/live/ledger-live-desktop/playwright/artifacts/test-results/onboarding-Onboarding/device-selection-diff.png
+
+      20 |
+      21 |   await test.step("Select Nano X", async () => {
+    > 22 |     expect(await page.screenshot()).toMatchSnapshot(`device-selection.png`);
+         |                                     ^
+      23 |     await onboardingPage.selectDevice("Nano X");
+      24 |   });
+      25 |
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/onboarding.spec.ts:22:37[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/onboarding.spec.ts:21:3[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[36m    attachment #1: expected (image/png) [90m------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/onboarding-Onboarding/device-selection-expected.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #2: actual (image/png) [90m--------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/onboarding-Onboarding/device-selection-actual.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[36m    attachment #3: diff (image/png) [90m----------------------------------------------------------------[36m[39m
+[36m    playwright/artifacts/test-results/onboarding-Onboarding/device-selection-diff.png[39m
+[36m    [90m------------------------------------------------------------------------------------------------[36m[39m
+
+[31m  9) passwordlock.spec.ts:12:1 › Enable password lock [90m==============================================[31m[39m
+
+    Error: /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/passwordlock.spec.ts-snapshots/set-passwordlock-modal-darwin.png is missing in snapshots, writing actual.
+
+      25 |     await settingsPage.goToSettings();
+      26 |     await passwordlockModal.toggle();
+    > 27 |     expect(await passwordlockModal.container.screenshot()).toMatchSnapshot(
+         |                                                            ^
+      28 |       "set-passwordlock-modal.png",
+      29 |     );
+      30 |   });
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/passwordlock.spec.ts:27:60[22m
+    [2m    at runNextTicks (internal/process/task_queues.js:60:5)[22m
+    [2m    at processImmediate (internal/timers.js:437:9)[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/passwordlock.spec.ts:24:3[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+[31m  10) settings.spec.ts:7:1 › Settings [90m==============================================================[31m[39m
+
+    Error: /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/settings.spec.ts-snapshots/settings-general-page-darwin.png is missing in snapshots, writing actual.
+
+      10 |   await test.step("go to settings", async () => {
+      11 |     await settingsPage.goToSettings();
+    > 12 |     expect(await page.screenshot()).toMatchSnapshot("settings-general-page.png");
+         |                                     ^
+      13 |   });
+      14 |
+      15 |   await test.step("go to settings -> accounts", async () => {
+
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/settings.spec.ts:12:37[22m
+    [2m    at TestTypeImpl._step (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/testType.js:214:7)[22m
+    [2m    at /Users/valmeida/projects/live/ledger-live-desktop/playwright/specs/settings.spec.ts:10:3[22m
+    [2m    at WorkerRunner._runTestWithBeforeHooks (/Users/valmeida/projects/live/ledger-live-desktop/node_modules/@playwright/test/lib/workerRunner.js:478:7)[22m
+
+
+[31m  10 failed[39m
+[31m    account.spec.ts:13:5 › Accounts › [BTC] Add account [90m============================================[31m[39m
+[31m    account.spec.ts:13:5 › Accounts › [LTC] Add account [90m============================================[31m[39m
+[31m    account.spec.ts:13:5 › Accounts › [ETH] Add account [90m============================================[31m[39m
+[31m    account.spec.ts:13:5 › Accounts › [ATOM] Add account [90m===========================================[31m[39m
+[31m    account.spec.ts:13:5 › Accounts › [XTZ] Add account [90m============================================[31m[39m
+[31m    account.spec.ts:13:5 › Accounts › [XRP] Add account [90m============================================[31m[39m
+[31m    manager.spec.ts:8:1 › Manager [90m==================================================================[31m[39m
+[31m    onboarding.spec.ts:6:1 › Onboarding [90m============================================================[31m[39m
+[31m    passwordlock.spec.ts:12:1 › Enable password lock [90m===============================================[31m[39m
+[31m    settings.spec.ts:7:1 › Settings [90m================================================================[31m[39m
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

@@ -20,8 +20,10 @@ const main = async () => {
         |:------:|:----:|:--------:|
       `;
       current.forEach(({ actual, diff, expected }) => {
-        str += "\n\n";
-        str += `| ![${actual.name}](${actual.link}) | ![${diff.name}](${diff.link}) | ![${expected.name}](${expected.link}) |`;
+        str += `
+          | ${actual.name} | ${diff.name} | ${expected.name} |
+          | ![${actual.name}](${actual.link}) | ![${diff.name}](${diff.link}) | ![${expected.name}](${expected.link}) |
+        `;
       });
       str += "\n\n";
     }
@@ -70,23 +72,23 @@ Diff output ${imgDiffFailed ? "❌" : " ✅"}
 https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
 `;
 
-  const githubSlackMap = {
-    machard: "U01DJR04M8Q",
-    "juan-cortes": "UE1D1FS77",
-    dasilvarosa: "UA14024H4",
-    valpinkman: "U98KPAN86",
-    MortalKastor: "U5FLVJ709",
-    LFBarreto: "UR6U4QKKN",
-    IAmMorrow: "UKFTXAZGF",
-  };
+  // const githubSlackMap = {
+  //   machard: "U01DJR04M8Q",
+  //   "juan-cortes": "UE1D1FS77",
+  //   dasilvarosa: "UA14024H4",
+  //   valpinkman: "U98KPAN86",
+  //   MortalKastor: "U5FLVJ709",
+  //   LFBarreto: "UR6U4QKKN",
+  //   IAmMorrow: "UKFTXAZGF",
+  // };
 
   const strSlackAuthor = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Jest outputs ${jestFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
-https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 `;
+  // https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
