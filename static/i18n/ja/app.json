@@ -743,7 +743,7 @@
     "tabs": {
       "dashboard": "ダッシュボード",
       "opened": "貸出中の資産",
-      "closed": "レンディング終了済み",
+      "closed": "貸出解除済み",
       "history": "履歴"
     },
     "assets": "レンディングする資産",
@@ -759,7 +759,7 @@
       "interestEarned": "獲得利息",
       "interestEarnedTooltip": "引き出し後に獲得した利息",
       "openLoans": "資産を貸し出す",
-      "closedLoans": "レンディング終了済み",
+      "closedLoans": "貸出解除済み",
       "amountRedeemed": "引き出し額",
       "date": "日付",
       "info": "{{currency}} アカウントから直接資産をレンディングし、利息を得ることができます。",
@@ -773,7 +773,7 @@
         "cta": "コンパウンドでのレンディングはどのように機能しますか？"
       },
       "closed": {
-        "title": "終了済みのレンディングはこちらに表示されます。",
+        "title": "貸出解除済みの資産はこちらに表示されます。",
         "description": "まだレンディングを行っていません。",
         "cta": "デポジット"
       },
