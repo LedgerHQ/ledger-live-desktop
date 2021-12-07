@@ -1930,7 +1930,7 @@
               "message": "ST mi Adaylar mı?",
               "superRepresentative": {
                 "title": "Süper Temsilciler (ST)",
-                "description": "Süper Temsilciler, temel işlevleri sağlayarak TRON topluluğunun yönetiminde önemli bir rol oynar, örn. blok oluşturma ve kayıt tutma."
+                "description": "Süper Temsilciler, blok oluşturma ve kayıt tutma gibi temel işlevleri sağlayarak TRON topluluğunun yönetiminde önemli bir rol oynar."
               },
               "candidates": {
                 "title": "Adaylar",
