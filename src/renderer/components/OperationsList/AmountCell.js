@@ -50,7 +50,7 @@ class AmountCell extends PureComponent<Props> {
             <Element operation={operation} unit={unit} currency={currency} />
           </Cell>
         )}
-        {!amount.isZero() && (
+        {(!amount.isZero() || AmountElement) && (
           <Cell>
             {AmountElement ? (
               <AmountElement
