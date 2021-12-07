@@ -5,7 +5,7 @@ on:
 
 jobs:
   add-reaction:
-    name: add reaction to comment
+    name: "[Reaction] 🚀"
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
     runs-on: ubuntu-latest
     steps:
@@ -21,12 +21,14 @@ jobs:
             })
 
   start-runner:
+    name: "start ec2 instance"
     needs: [add-reaction]
     uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
+    name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, generate-screenshots-linux]
     uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
@@ -37,7 +39,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   generate-screenshots-linux:
-    name: screenshots linux
+    name: "[Linux Screenshots]"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
 
@@ -93,7 +95,7 @@ jobs:
 
   generate-screenshots:
     needs: [add-reaction]
-    name: screenshots
+    name: "[${{ matrix.os }} Screenshots]"
     strategy:
       fail-fast: false
       matrix:

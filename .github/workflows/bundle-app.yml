@@ -11,12 +11,14 @@ on:
 
 jobs:
   cancel-previous:
+    name: "cancel previous workflow"
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
   bundle-macos:
+    name: "[macOS Build]"
     runs-on: macos-latest
     needs: cancel-previous
     steps:
@@ -68,12 +70,14 @@ jobs:
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
 
   start-runner:
+    name: "start ec2 instance"
     needs: cancel-previous
     uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
+    name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, bundle-linux]
     uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
@@ -84,6 +88,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   bundle-linux:
+    name: "[Linux Build]"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
     steps:
@@ -154,6 +159,7 @@ jobs:
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
 
   bundle-windows:
+    name: "[Windows Build]"
     runs-on: windows-latest
     needs: cancel-previous
     steps:
