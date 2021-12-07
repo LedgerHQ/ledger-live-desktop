@@ -332,7 +332,7 @@
       "completed": {
         "title": "保留中の処理",
         "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。",
-        "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+        "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
         "seeDetails": "詳細を表示"
       }
     }
@@ -517,7 +517,7 @@
           "subtitle": "スワップが正常にブロードキャストされました。 ",
           "swap": "スワップID：",
           "seeDetails": "詳細を表示",
-          "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+          "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
           "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。"
         }
       }
@@ -717,7 +717,7 @@
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
       "header": "{{provider}}で暗号資産を購入する",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;で暗号通貨を購入する",
+      "title": "<0>{{provider}}</0>で暗号通貨を購入する",
       "tab": "購入",
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
@@ -726,7 +726,7 @@
     },
     "sell": {
       "header": "{{provider}}で暗号資産を売却する",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;経由で暗号資産を売却する",
+      "title": "<0>{{provider}}</0>で暗号資産を売却する",
       "tab": "売却",
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
@@ -1736,7 +1736,7 @@
         "parentAccount": "1. {{currencyName}} アカウントを選択",
         "token": "2. トークンを選択",
         "verifyTokenType": "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。 {{currency}} アカウントに他の暗号資産が送信されると、失われる可能性があります。",
-        "warningTokenType": "{{currency}}アカウントには、&lt;0&gt;{{ticker}}&lt;/0&gt;または&lt;0&gt;{{tokenType}}&lt;/0&gt;トークンのみを送金してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
+        "warningTokenType": "{{currency}}アカウントには、<0>{{ticker}}</0>または<0>{{tokenType}}</0>トークンのみを送付してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
       },
       "connectDevice": {
         "title": "デバイス",
@@ -2231,7 +2231,7 @@
       "electionOpen": "現在、新しいバリデータを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
       "electionOpenTooltip": "バリデータ選出中の操作は、無効となります。",
       "externalControllerTooltip": "このアカウントは、別のアカウントに管理されています。",
-      "externalControllerUnsupported": "&lt;0&gt;このStashアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のアカウントによってコントロールされています。&lt;1&gt;Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalControllerUnsupported": "<0>このStashアカウントは、<0>{{controllerAddress}}</0>の別のアカウントに管理されています。</0><1>Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。</1>",
       "externalStashTooltip": "このアカウントは、別のアカウントを管理しています。",
       "externalStashUnsupported": "&lt;0&gt;このアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のStashアカウントのコントローラーです。&lt;1&gt;Ledger Liveでステーキングするには、Stashアカウントを独自のコントローラーとして設定する必要があります。",
       "showInactiveNominations": "すべてのノミネートを表示（{{count}}）",
