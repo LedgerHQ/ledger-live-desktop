@@ -27,11 +27,13 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const artifacts = await github.actions.listWorkflowRunArtifacts({
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
                run_id: ${{github.event.workflow_run.id || github.event.inputs.runId }},
             });
+
+            // Filter Artifacts
 
             const reportArtifacts = artifacts.data.artifacts.filter((artifact) => {
               return artifact.name == "tests-reports"
@@ -48,40 +50,62 @@ jobs:
               return artifact.name.includes("images-");
             });
 
-            const downloadReport = await github.actions.downloadArtifact({
+            // Download Artifacts
+
+            const downloadReport = await github.rest.actions.downloadArtifact({
                owner: context.repo.owner,
                repo: context.repo.repo,
                artifact_id: reportArtifacts.id,
                archive_format: 'zip',
             });
 
+            fs.writeFileSync(
+              "${{github.workspace}}/" + reportArtifacts.name + ".zip",
+              Buffer.from(downloadReport.data)
+            );
+
             const pPWArtifacts = await Promise.all(
               playwrightArtifacts.map((artifact) => {
-                return github.actions.downloadArtifact({
+                return github.rest.actions.downloadArtifact({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   artifact_id: artifact.id,
                   archive_format: "zip",
                 });
-              })
+              });
             );
 
             pPWArtifacts.forEach((artifact, i) => {
               fs.writeFileSync(
                 "${{github.workspace}}/" + playwrightArtifacts[i].name + ".zip",
-                Buffer.from(artifact.data)
-              )
-            })
+                Buffer.from(artifact.data),
+              );
+            });
 
-            fs.writeFileSync(
-              "${{github.workspace}}/" + reportArtifacts.name + ".zip",
-              Buffer.from(downloadReport.data)
-            )
+            const pImagesArtifacts = await Promise.all(
+              imagesArtifacts.map((image) => {
+                return github.rest.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: image.id,
+                  archive_format: "zip",
+                });
+              });
+            );
+
+            pImagesArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + imagesArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data),
+              )
+            });
 
       - name: unzip stuff
         run: |
           unzip tests-reports.zip
           unzip playwright-results-windows-latest.zip
           unzip playwright-results-linux.zip
+          unzip images-linux.json.zip
+          unzip images-windows-latest.json.zip
       - name: ls on files
         run: ls
