@@ -103,11 +103,7 @@ class InputPassword extends PureComponent<Props, State> {
           type={inputType}
           onChange={this.handleChange}
           renderRight={
-            <InputRight
-              onClick={this.toggleInputType}
-              style={{ cursor: "default" }}
-              id="lockscreen-reveal-button"
-            >
+            <InputRight onClick={this.toggleInputType} style={{ cursor: "default" }}>
               {inputType === "password" ? <IconEye size={16} /> : <IconEyeOff size={16} />}
             </InputRight>
           }

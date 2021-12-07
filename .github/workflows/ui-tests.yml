@@ -1,0 +1,203 @@
+name: UI tests
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+  push:
+    branches:
+      - develop
+      - master
+
+jobs:
+  cancel-previous:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel Previous Runs
+        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+
+  start-runner:
+    name: start self-hosted EC2 runner
+    needs: cancel-previous
+    runs-on: [ledger-live-desktop]
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    steps:
+      - name: get latest LLD runner AMI id
+        id: get-ami-id
+        run: |
+          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
+      - name: start EC2 runner
+        id: start-ec2-runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: start
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
+          ec2-instance-type: c5.4xlarge
+          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
+          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
+      - name: get volume-id
+        id: get-volume-id
+        run: |
+          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
+      - name: resize rootfs
+        env:
+          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
+        run: |
+          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs: [start-runner, ui-tests-linux]
+    runs-on: [ledger-live-desktop]
+    if: ${{ always() }}
+    steps:
+      - name: Stop EC2 runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: stop
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+
+  ui-tests-linux:
+    name: UI tests (Linux)
+    needs: [start-runner]
+    runs-on: ${{ needs.start-runner.outputs.label }}
+    steps:
+      - name: prepare runner
+        run: |
+          sudo growpart /dev/nvme0n1 1
+          sudo resize2fs /dev/nvme0n1p1
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@v2
+        if: always()
+        with:
+          node-version: 14.x
+      - name: install yarn
+        if: always()
+        run: npm install --global yarn
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - name: get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install dependencies
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
+      - name: install operating system dependencies for playwright
+        run: npx playwright install-deps
+      - name: run code checks
+        if: always()
+        run: yarn ci 2> >(tee lint.txt)
+      - name: build electron app
+        env:
+          INSTRUMENT_BUILD: true
+        run: yarn build
+      - name: tests
+        if: always()
+        run: yarn test 2> >(tee jest.txt)
+      - name: run ui tests (Linux)
+        run: xvfb-run --auto-servernum -- yarn playwright
+      - name: upload diffs to imgur
+        if: always()
+        uses: ./.github/actions/upload-images
+        id: imgur
+        with:
+          path: playwright/artifacts/test-results
+      - name: save PR number
+        if: always()
+        run: |
+          mkdir -p ./pr
+          echo ${{ github.event.number }} > ./pr/NR
+      - name: upload tests data
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: report-
+          path: |
+            lint.txt
+            jest.txt
+            pr/NR
+      - name: upload ci suggested screenshots
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results-ubuntu-20.04
+          path: |
+            playwright/artifacts/test-results
+            playwright/artifacts/html-report
+            playwright/artifacts/coverage
+            playwright/artifacts/videos
+
+  ui-tests:
+    needs: cancel-previous
+    name: UI tests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        # os: [macos-latest, windows-latest]
+        os: [windows-latest]
+    runs-on: ${{ matrix.os}}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      - name: get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: install dependencies
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
+      - name: install operating system dependencies
+        run: npx playwright install-deps
+      - name: build electron app
+        env:
+          INSTRUMENT_BUILD: true
+        run: yarn build
+      - name: run ui tests (${{ matrix.os }})
+        run: yarn playwright
+      - name: upload diffs to imgur
+        if: always()
+        uses: ./.github/actions/upload-images
+        id: imgur
+        with:
+          path: playwright/artifacts/test-results
+      - name: upload ci suggested screenshots
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results-${{ matrix.os }}
+          path: |
+            playwright/artifacts/test-results
+            playwright/artifacts/html-report
+            playwright/artifacts/coverage
+            playwright/artifacts/videos

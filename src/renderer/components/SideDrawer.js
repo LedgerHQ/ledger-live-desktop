@@ -11,6 +11,7 @@ import { Trans } from "react-i18next";
 import IconAngleLeft from "~/renderer/icons/AngleLeft";
 import { Base as Button } from "./Button";
 import Box from "./Box/Box";
+import { createPortal } from "react-dom";
 
 const TouchButton = styled.button`
   border: none;
@@ -36,7 +37,7 @@ const DURATION = 250;
 const transitionBackdropStyles = {
   entering: {},
   entered: { opacity: 1 },
-  exiting: {},
+  exiting: { pointerEvents: "none" },
   exited: {},
 };
 
@@ -89,7 +90,9 @@ const DrawerContent = styled.div.attrs(({ state }) => ({
 const transitionContainerStyles = {
   entering: {},
   entered: {},
-  exiting: {},
+  exiting: {
+    pointerEvents: "none",
+  },
   exited: {
     pointerEvents: "none",
     visibility: "hidden",
@@ -119,6 +122,8 @@ export type DrawerProps = {
   title?: string,
   preventBackdropClick?: boolean,
 };
+
+const domNode = document.getElementById("modals");
 
 export function SideDrawer({
   children,
@@ -190,65 +195,68 @@ export function SideDrawer({
     return null;
   }
 
-  return (
-    <Transition
-      in={isOpen}
-      timeout={{
-        appear: 0,
-        enter: DURATION,
-        exit: DURATION * 3, // leaves extra time for the animation to end before unmount
-      }}
-      onEntered={onEntered}
-      onExited={onExited}
-      unmountOnExit
-    >
-      {state => (
-        <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
-          <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
-            {onRequestClose || onRequestBack || title ? (
-              <Box
-                horizontal
-                justifyContent="space-between"
-                height={62}
-                alignItems="center"
-                m={0}
-                p="24px"
-                style={{ zIndex: 200 }}
-              >
-                {onRequestBack ? (
-                  <Button onClick={onRequestBack} className="sidedrawer-close">
-                    <IconAngleLeft size={12} />
-                    <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
-                      <Trans i18nKey="common.back" />
-                    </Text>
-                  </Button>
-                ) : (
-                  <Box />
-                )}
+  return domNode
+    ? createPortal(
+        <Transition
+          in={isOpen}
+          timeout={{
+            appear: 0,
+            enter: DURATION,
+            exit: DURATION * 3, // leaves extra time for the animation to end before unmount
+          }}
+          onEntered={onEntered}
+          onExited={onExited}
+          unmountOnExit
+        >
+          {state => (
+            <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
+              <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
+                {onRequestClose || onRequestBack || title ? (
+                  <Box
+                    horizontal
+                    justifyContent="space-between"
+                    height={62}
+                    alignItems="center"
+                    m={0}
+                    p="24px"
+                    style={{ zIndex: 200 }}
+                  >
+                    {onRequestBack ? (
+                      <Button onClick={onRequestBack} className="sidedrawer-close">
+                        <IconAngleLeft size={12} />
+                        <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
+                          <Trans i18nKey="common.back" />
+                        </Text>
+                      </Button>
+                    ) : (
+                      <Box />
+                    )}
 
-                {title && (
-                  <Text ff="Inter|SemiBold" fontWeight="600" fontSize="18px">
-                    {title}
-                  </Text>
-                )}
+                    {title && (
+                      <Text ff="Inter|SemiBold" fontWeight="600" fontSize="18px">
+                        {title}
+                      </Text>
+                    )}
 
-                {onRequestClose ? (
-                  <TouchButton onClick={onRequestClose} className="sidedrawer-close">
-                    <IconCross size={16} />
-                  </TouchButton>
-                ) : (
-                  <Box />
-                )}
-              </Box>
-            ) : null}
-            {children}
-          </DrawerContent>
-          <DrawerBackdrop
-            state={state}
-            onClick={preventBackdropClick ? undefined : onRequestClose}
-          />
-        </DrawerContainer>
-      )}
-    </Transition>
-  );
+                    {onRequestClose ? (
+                      <TouchButton onClick={onRequestClose} className="sidedrawer-close">
+                        <IconCross size={16} />
+                      </TouchButton>
+                    ) : (
+                      <Box />
+                    )}
+                  </Box>
+                ) : null}
+                {children}
+              </DrawerContent>
+              <DrawerBackdrop
+                state={state}
+                onClick={preventBackdropClick ? undefined : onRequestClose}
+              />
+            </DrawerContainer>
+          )}
+        </Transition>,
+        domNode,
+      )
+    : null;
 }

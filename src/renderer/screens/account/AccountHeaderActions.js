@@ -196,6 +196,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             key: "WalletConnect",
             onClick: onWalletConnect,
             event: "Wallet Connect Account Button",
+            eventProperties: { currencyName: currency.name },
             icon: IconWalletConnect,
             label: <Trans i18nKey="walletconnect.titleAccount" />,
           },

@@ -28,7 +28,7 @@ export function ServiceStatusIndicator() {
           placement="bottom"
         >
           <ItemContainer
-            id="topbar-service-status-button"
+            data-test-id="topbar-service-status-button"
             isInteractive
             onClick={() => {
               dispatch(openInformationCenter("status"));
