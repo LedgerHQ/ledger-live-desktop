@@ -1441,8 +1441,8 @@
     },
     "disconnected": {
       "title": "Parece que una aplicación está abierta en tu dispositivo",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
+      "subtitle": "Volver a abrir el Manager cerrará la aplicación en tu dispositivo",
+      "ctaReopen": "Volver a abrir el Manager",
       "ctaPortfolio": "Volver al Portfolio"
     },
     "deviceStorage": {
