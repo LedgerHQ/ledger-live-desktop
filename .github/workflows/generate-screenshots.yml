@@ -4,14 +4,7 @@ on:
     types: [created]
 
 jobs:
-  cancel-previous:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
-
   add-reaction:
-    needs: [cancel-previous]
     name: add reaction to comment
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
     runs-on: ubuntu-latest
@@ -29,7 +22,7 @@ jobs:
 
   start-runner:
     name: start self-hosted EC2 runner
-    needs: [cancel-previous, add-reaction]
+    needs: [add-reaction]
     runs-on: [ledger-live-desktop]
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
@@ -99,7 +92,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gh
       - name: checkout PR
-        run: gh pr checkout ${{ github.event.inputs.number }}
+        run: gh pr checkout ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2
@@ -147,7 +140,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: checkout PR
-        run: gh pr checkout ${{ github.event.inputs.number }}
+        run: gh pr checkout ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-node@v2

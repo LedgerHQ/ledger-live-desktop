@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Propiedades",
-        "description": "Description",
+        "description": "Descripción",
         "contract": "Dirección de contrato",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "No es posible agregar nuevas cuentas antes de haber recibido activos en tu cuenta <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "No se detectó ninguna cuenta de <1><0>{{currencyName}}</0></1> para crear",
       "showAllAddressTypes": "Mostrar todos los tipos de direcciones",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Solo modifica el tipo de dirección en caso de que necesites recibir {{family}} en otros formatos de dirección."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "¿Segwit o Native Segwit?"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Buscar aplicaciones instaladas..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
+      "title": "Parece que una aplicación está abierta en tu dispositivo",
       "subtitle": "Reopening the Manager will quit the app on your device",
       "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "ctaPortfolio": "Volver al Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libres",

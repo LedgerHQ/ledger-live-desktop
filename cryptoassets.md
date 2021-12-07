@@ -22,6 +22,7 @@
 | Peercoin | PPC | YES | peercoin |
 | PivX | PIVX | YES | pivx |
 | Polkadot | DOT | YES | polkadot |
+| Polygon | MATIC | YES | polygon |
 | Qtum | QTUM | YES | qtum |
 | Stakenet | XSN | YES | stakenet |
 | Stellar | XLM | YES | stellar |
@@ -81,7 +82,6 @@
 | POA | POA | NO | poa |
 | Particl | PART | NO | particl |
 | Pirl | PIRL | NO | pirl |
-| Polygon | MATIC | NO | polygon |
 | QRL | QRL | NO | qrl |
 | REOSC | REOSC | NO | reosc |
 | Ravencoin | RVN | NO | ravencoin |
