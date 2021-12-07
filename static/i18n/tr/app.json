@@ -2624,7 +2624,7 @@
       "changePassword": "Parola değiştir",
       "softResetTitle": "Önbelleği temizle",
       "softResetDesc": "Blok zinciri ile tekrar senkronizasyona zorlamak için Ledger Live önbelleğini temizleyin.",
-      "softReset": "Temiz",
+      "softReset": "Temizle",
       "resetKYC": "KYC verilerini sıfırla",
       "resetKYCDesc": "Üçüncü taraf işlem sağlayıcısına erişmek için yerel olarak depolanan tüm Müşterinizi Tanıyın (KYC) verilerinizi silin.",
       "hardResetTitle": "Ledger Live'ı Sıfırla",
@@ -2898,7 +2898,7 @@
         "continueCTA": "Devam",
         "title": "Lütfen kutunun içindekileri kontrol edin",
         "description": "{{device}} cihazınız bir PIN kodu veya kurtarma ifadesi ile geldiyse kullanımı güvenli değildir ve Ledger Destek Ekibiyle iletişime geçmelisiniz.",
-        "alert": "Sadece cihazınız kurulduğunda görüntülenen kurtarma ifadesini kullanın"
+        "alert": "Yalnızca kurulum sırasında cihaz ekranında görüntülenmiş olan kurtarma ifadesini kullanın"
       }
     },
     "alerts": {
@@ -3154,8 +3154,8 @@
           },
           "genuineCheck": {
             "success": {
-              "title": "Hepsi tamam!",
-              "desc": "Ledger {{deviceName}} cihazınız orijinaldir ve Ledger Live ile kullanıma hazırdır"
+              "title": "Her şey yolunda!",
+              "desc": "Ledger {{deviceName}} cihazınız orijinal ve Ledger Live ile kullanıma hazır"
             },
             "buttons": {
               "next": "Devam",
