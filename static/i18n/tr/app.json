@@ -2569,7 +2569,7 @@
       },
       "modal": {
         "button": "Tamam",
-        "title": "Mobil cihaza aktarmak için tara",
+        "title": "Mobil cihaza aktarmak için tarayın",
         "listTitle": "Ledger Live mobil uygulamasında:",
         "step1": "<highlight>Hesaplardaki</highlight> <highlight><icon>+</icon></highlight> butonuna dokunun",
         "step2": "<highlight>Masaüstü hesaplarını içe aktar</highlight> seçeneğine dokunun",
