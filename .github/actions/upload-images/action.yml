@@ -6,7 +6,7 @@ inputs:
     description: path to look for images to upload (relative to root of current project)
     required: true
   workspace:
-    description: github.workspace context or $GITHUB_WORKSPACE
+    description: github.workspace context
     required: true
   os:
     description: running os to scope json file name

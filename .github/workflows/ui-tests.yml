@@ -90,12 +90,8 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
-          workspace: $GITHUB_WORKSPACE
+          workspace: ${{ github.workspace }}
           os: linux
-      - name: save images output
-        if: always()
-        run: |
-          echo '${{ steps.imgur.outputs.images }}' > images-linux.json
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
@@ -173,12 +169,8 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
-          workspace: $GITHUB_WORKSPACE
+          workspace: ${{ github.workspace }}
           os: ${{ matrix.os }}
-      - name: save images outputs
-        if: always()
-        run: |
-          echo '${{ steps.imgur.outputs.images }}' > images-${{ matrix.os }}.json
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
