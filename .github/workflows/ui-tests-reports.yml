@@ -117,11 +117,12 @@ jobs:
 
             const files = ["images-linux", "images-windows-latest"];
 
-            let result = [];
-            for (const file in files) {
+            let result = {};
+            for (const file of files) {
               try {
                 const raw = JSON.parse(fs.readFileSync("${{github.workspace}}/" + file + ".json"));
-                result = result.concat(raw);
+                const key = file.replace("images-", "")
+                result[key] = raw;
               } catch (err) {
                 console.log(err);
               }
