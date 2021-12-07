@@ -26,6 +26,7 @@ import perFamilyAccountSubHeader from "~/renderer/generated/AccountSubHeader";
 import Box from "~/renderer/components/Box";
 import OperationsList from "~/renderer/components/OperationsList";
 import useTheme from "~/renderer/hooks/useTheme";
+import Collections from "~/renderer/screens/nft/Collections";
 
 import BalanceSummary from "./BalanceSummary";
 import AccountHeader from "./AccountHeader";
@@ -134,6 +135,7 @@ const AccountPage = ({
           {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
+          {account?.nfts?.length ? <Collections account={account} /> : null}
           {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
             account={account}

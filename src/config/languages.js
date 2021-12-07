@@ -23,7 +23,7 @@ export const allLanguages = [
   "zh",
 ];
 
-export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de"];
+export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
 
 export const getLanguages = () =>
   getEnv("EXPERIMENTAL_LANGUAGES") ? allLanguages : prodStableLanguages;

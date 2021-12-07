@@ -111,6 +111,7 @@ const StepSummary = ({
               val={fromAmount}
               unit={fromUnit}
               showCode
+              alwaysShowValue
             />
           </Text>
         </Box>
@@ -142,6 +143,7 @@ const StepSummary = ({
               val={toAmount}
               unit={toUnit}
               showCode
+              alwaysShowValue
             />
           </Text>
         </Box>

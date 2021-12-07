@@ -65,7 +65,7 @@ function Pills(props: Props) {
             onClick={() => onChange(item)}
             key={item.key}
             bordered={bordered}
-            id={`settings-${item.key}-tab`}
+            data-test-id={`settings-${item.key}-tab`}
           >
             {item.label}
           </Pill>
