@@ -86,7 +86,7 @@
     "back": "Geri",
     "reset": "Sıfırla",
     "retry": "Tekrar Dene",
-    "range": "Aralık",
+    "range": "Dönem",
     "stop": "Durdur",
     "updateNow": "Şimdi güncelle",
     "close": "Kapat",
@@ -332,7 +332,7 @@
       "completed": {
         "title": "İşlem Beklemede",
         "description": "Takas işleminiz onaylanmak üzere ağa gönderildi. {{targetCurrency}} tutarınızı almanız yaklaşık bir saat sürebilir.",
-        "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt; desteğinden&lt;/0&gt; yardıma ihtiyacınız olursa gerekli olacak Swap ID'nizi (Takas Kimliği) not edin.",
+        "disclaimer": "<0><0>{{provider}}</0> desteğinden</0> yardıma ihtiyacınız olursa gerekli olacak Swap ID'nizi (Takas Kimliği) not edin.",
         "seeDetails": "Ayrıntıları gör"
       }
     }
@@ -493,8 +493,8 @@
           "toReceive": "Alınacak tutar",
           "terms": "Hüküm ve Koşullar",
           "disclaimer": {
-            "description": "&quot;Onayla&quot; butonuna tıklayarak, bu hizmetin tamamen &lt;0&gt;{{provider}}&lt;/0&gt; Hüküm ve Koşulları çerçevesinde sağlandığını anladığımı beyan ve kabul ederim.",
-            "acceptedDescription": "Bu hizmet tamamen &lt;0&gt;{{provider}}&lt;/0&gt; Hüküm ve Koşulları çerçevesinde sağlanmaktadır."
+            "description": "&quot;Onayla&quot; butonuna tıklayarak, bu hizmetin tamamen <0>{{provider}}</0> Hüküm ve Koşulları çerçevesinde sağlandığını anladığımı beyan ve kabul ederim.",
+            "acceptedDescription": "Bu hizmet tamamen <0>{{provider}}</0> Hüküm ve Koşulları çerçevesinde sağlanmaktadır."
           },
           "details": {
             "provider": "Sağlayıcı",
@@ -517,7 +517,7 @@
           "subtitle": "Takas işlemi başarıyla yayınlandı ",
           "swap": "Swap ID'si:",
           "seeDetails": "Ayrıntıları gör",
-          "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt; desteğinden&lt;/0&gt; yardıma ihtiyacınız olursa gerekli olacak Swap ID'nizi (Takas Kimliği) not edin.",
+          "disclaimer": "<0><0>{{provider}}</0> desteğinden</0> yardıma ihtiyacınız olursa gerekli olacak Swap ID'nizi (Takas Kimliği) not edin.",
           "description": "Takas işleminiz onaylanmak üzere ağa gönderildi. {{targetCurrency}} tutarınızı almanız yaklaşık bir saat sürebilir."
         }
       }
@@ -678,8 +678,8 @@
     "openInExplorer": "Tarayıcıda aç",
     "emptyState": {
       "title": "Herhangi bir kripto varlığı yok mu?",
-      "desc": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt; uygulamasının yüklü olduğundan emin olun ve almaya başlayın",
-      "descToken": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt; uygulamasının yüklü olduğundan emin olun ve &lt;3&gt;&lt;0&gt;{{ticker}}&lt;/0&gt;&lt;/3&gt; ile &lt;5&gt;&lt;0&gt;{{tokenList}}&lt;/0&gt;token'larını&lt;/5&gt;almaya başlayın",
+      "desc": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve almaya başlayın",
+      "descToken": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve <3><0>{{ticker}}</0></3> ile <5><0>{{tokenList}}</0>token'larını almaya başlayın</5>",
       "buttons": {
         "receiveFunds": "Al",
         "buy": "Satın al"
@@ -717,7 +717,7 @@
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
       "header": "{{provider}} ile kripto alın",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt; üzerinden kripto alın",
+      "title": "<0>{{provider}}</0> üzerinden kripto alın",
       "tab": "Al",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
@@ -726,7 +726,7 @@
     },
     "sell": {
       "header": "{{provider}} ile kripto satın",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt; üzerinden kripto satın",
+      "title": "<0>{{provider}}</0> üzerinden kripto satın",
       "tab": "Sat",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
@@ -835,10 +835,10 @@
       "enable": {
         "approve": "Onayla",
         "manageLimit": "Limiti yönet",
-        "viewDetails": "Ayrıntıları gör",
-        "info": "Bu hesapta &lt;0&gt;{{amount}}&lt;/0&gt; onayladınız. Ücret karşılığında tutarı düşürebilirsiniz.",
+        "viewDetails": "Ayrıntıları göster",
+        "info": "Bu hesapta <0>{{amount}}</0> onayladınız. Ücret karşılığında tutarı düşürebilirsiniz.",
         "infoNoLimit": "Bu hesabı tamamen onayladınız. Ücret karşılığında tutarı düşürebilirsiniz.",
-        "approvedWithLimit": "Bu hesapta &lt;0&gt;{{value}}&lt;/0&gt; onayladınız.",
+        "approvedWithLimit": "Bu hesapta <0>{{value}}</0> onayladınız.",
         "enabling": "Hesap onayı verildikten sonra varlıklarınızı yatırmaya başlayabilirsiniz.",
         "notEnabled": "Varlık kredisi vermeden önce bu hesabı onaylamanız gerekiyor.",
         "notEnoughApproved": "Kredi vermek için hesabınızda onaylı limitleri arttırmalısınız."
@@ -863,7 +863,7 @@
         },
         "amount": {
           "title": "Tutar",
-          "summary": "&lt;0&gt;{{contractName}}&lt;/0&gt; akıllı sözleşmesine &lt;0&gt;{{accountName}}&lt;/0&gt; hesabımdaki &lt;0&gt;{{amount}}&lt;/0&gt; tutarı için erişim izni veriyorum.",
+          "summary": "<0>{{contractName}}</0> akıllı sözleşmesine <0>{{accountName}}</0> hesabımdaki <0>{{amount}}</0> tutarı için erişim izni veriyorum.",
           "limit": "{{amount}} limitli",
           "noLimit": "limitsiz {{assetName}}",
           "contractName": "Compound {{currencyName}}",
@@ -906,7 +906,7 @@
             "title": "Çekim talebi başarıyla gönderildi",
             "text": "Çekim işlemi ağ tarafından doğrulandıktan sonra varlıklarınız kullanıma açılacaktır.",
             "done": "Kapat",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin.",
           "tooltip": {
@@ -920,10 +920,10 @@
         "title": "Kripto Borç Ver",
         "subtitle": "Varlıklarınızı Compound protokolünde borç verin",
         "description": "Compound protokolü, Ethereum ağındaki varlıkları borç vermenizi ve almanızı sağlar. Doğrudan Ledger hesabınızı kullanarak varlıklarınızı borç verebilir ve faiz getirisi kazanabilirsiniz.",
-        "switchLabel": "&lt;0&gt;Kullanım Koşullarını&lt;/0&gt;&lt;1&gt; okudum ve kabul ediyorum.&lt;/1&gt;"
+        "switchLabel": "<0>Kullanım Koşullarını</0><1> okudum ve kabul ediyorum.</1>"
       },
       "steps": {
-        "title": "Adım &lt;0&gt;{{step}}/{{total}}&lt;/0&gt;",
+        "title": "Adım <0>{{step}}/{{total}}</0>",
         "1": {
           "subtitle": "Bir hesabı onaylayarak protokolün",
           "subtitle2": "gelecekteki kredileri işleme almasını sağlayın.",
@@ -956,7 +956,7 @@
             "title": "Yatırım başarıyla gönderildi",
             "text": "Yatırımınız ağ tarafından doğrulandıktan sonra faiz getirisi kazanmaya başlayacaksınız.",
             "done": "Kapat",
-            "cta": "Ayrıntıları gör",
+            "cta": "Ayrıntıları göster",
             "info": "İşlemlerin bir tarayıcıda görünmesi ve doğrulanması biraz zaman alabilir."
           }
         }
@@ -964,7 +964,7 @@
     },
     "noEthAccount": {
       "title": "Lütfen bir ETH hesabı oluşturun",
-      "description": "&lt;0&gt;{{asset}}({{ ticker }})&lt;/0&gt; bir Ethereum ERC-20 token'ıdır. {{ticker}} kredi vermek için Ethereum uygulamasını yükleyin ve bir Ethereum hesabı oluşturun",
+      "description": "<0>{{asset}}({{ ticker }})</0> bir Ethereum ERC-20 token'ıdır. {{ticker}} kredi vermek için Ethereum uygulamasını yükleyin ve bir Ethereum hesabı oluşturun",
       "cta": "Hesap ekle"
     },
     "emptyAccountDeposit": {
@@ -1039,7 +1039,7 @@
   },
   "blacklistToken": {
     "title": "Token'ı gizle",
-    "desc": "Bu eylem tüm &lt;1&gt;&lt;0&gt;{{tokenName}}&lt;/0&gt;&lt;/1&gt; hesaplarını gizler; &lt;3&gt;Ayarlar'ı&lt;/3&gt;kullanarak tekrar görünür hale getirebilirsiniz",
+    "desc": "Bu eylem tüm <1><0>{{tokenName}}</0></1> hesaplarını gizler; <3>Ayarlar'ı</3> kullanarak tekrar görünür hale getirebilirsiniz",
     "hideCTA": "Token'ı gizle"
   },
   "banners": {
@@ -1146,7 +1146,7 @@
   },
   "currentAddress": {
     "title": "Geçerli adres",
-    "for": "&lt;1&gt;&lt;0&gt;{{name}}&lt;/0&gt;&lt;/1&gt; için adres",
+    "for": "<1><0>{{name}}</0></1> için adres",
     "messageIfUnverified": "Lütfen paylaşılan adres ile cihazınızdaki adresin tam olarak eşleştiğini doğrulayın",
     "messageIfSkipped": "{{name}} adresiniz Ledger cihazınızda doğrulanmadı. Güvenlik için lütfen doğrulayın.",
     "showQrCode": "QR Kodunu Göster"
@@ -1171,7 +1171,7 @@
     }
   },
   "genuinecheck": {
-    "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için &lt;1&gt;Devam&lt;/1&gt;'a tıklayın."
+    "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
   },
   "NFT": {
     "viewer": {
@@ -1279,7 +1279,7 @@
   "addAccounts": {
     "title": "Hesap ekle",
     "breadcrumb": {
-      "informations": "Kripto varlığı",
+      "informations": "Kripto varlık",
       "connectDevice": "Cihaz",
       "import": "Hesaplar",
       "finish": "Onay"
@@ -1296,8 +1296,8 @@
     "successDescription": "Başka hesap ekleyin veya Portföye geri dönün",
     "successDescription_plural": "Başka hesap ekleyin veya Portföye geri dönün",
     "createNewAccount": {
-      "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}}&lt;/0&gt;&lt;/1&gt; hesabınıza varlık gelmeden önce yeni bir hesap ekleyemezsiniz",
-      "noAccountToCreate": "Oluşturulabilecek bir &lt;1&gt;&lt;0&gt;{{currencyName}}&lt;/0&gt;&lt;/1&gt; hesabı bulunamadı",
+      "noOperationOnLastAccount": "<1><0>{{accountName}}</0></1> hesabınıza varlık gelmeden önce yeni bir hesap ekleyemezsiniz",
+      "noAccountToCreate": "Oluşturulabilecek bir <1><0>{{currencyName}}</0></1> hesabı bulunamadı",
       "showAllAddressTypes": "Tüm adres türlerini göster",
       "showAllAddressTypesTooltip": "Yalnızca diğer adres biçimlerinde {{family}} almanız gerekiyorsa adres türünü değiştirin."
     },
@@ -1305,7 +1305,7 @@
       "segwit_or_native_segwit": "Segwit mi yoksa Native Segwit mi?"
     },
     "cta": {
-      "addMore": "Başka ekle",
+      "addMore": "Daha fazla ekle",
       "add": "Hesap ekle",
       "add_plural": "Hesap ekle",
       "addAccountName": "{{currencyName}} hesabı ekle",
@@ -1319,7 +1319,7 @@
         "title": "Yeni hesap ekle"
       },
       "imported": {
-        "title": "Portföyde bulunan hesaplar ({{count}})"
+        "title": "Portföydeki Hesaplar ({{count}})"
       },
       "migrate": {
         "title": "Güncellenecek hesaplar"
@@ -1364,7 +1364,7 @@
       "frozenAmount": "Dondurulan tutar",
       "unfreezeAmount": "Çözülen tutar",
       "votes": "Oylar ({{number}})",
-      "votesAddress": "&lt;0&gt;{{votes}}&lt;/0&gt; - &lt;2&gt;{{name}}&lt;/2&gt;",
+      "votesAddress": "<0>{{votes}}</0> - <2>{{name}}</2>",
       "validators": "Doğrulayıcılar",
       "redelegated": "Yetki yeniden devredildi",
       "redelegatedFrom": "Yetkiyi bırakan taraf",
@@ -1407,7 +1407,7 @@
     "installApp": "{{appName}} Uygulama yüklemesi",
     "installAppDescription": "Lütfen kurulum bitene kadar bekleyin",
     "listApps": "Uygulama şartları denetleniyor",
-    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuzu kontrol ederken lütfen bekleyin",
+    "listAppsDescription": "Gerekli tüm uygulamalara sahip olduğunuz kontrol edilirken lütfen bekleyin",
     "swap": {
       "notice": "Göndermeden önce cihazınızdaki takas bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız.",
       "confirm": "Takas işlemini onayla",
@@ -1446,7 +1446,7 @@
       "ctaPortfolio": "Portföye geri dön"
     },
     "deviceStorage": {
-      "freeSpace": "&lt;0&gt;{{space}}}&lt;/0&gt; boş",
+      "freeSpace": "<0>{{space}}}</0> boş",
       "noFreeSpace": "Depolama alanı kalmadı",
       "installed": "Uygulamalar",
       "capacity": "Kapasite",
@@ -1510,8 +1510,8 @@
         "learnMoreTooltip": "{{appName}} uygulaması hakkında daha fazla bilgi edinin",
         "removeTooltip": "{{appName}} Uygulamasını Kaldır",
         "useAppForToken": "{{tokenType}} token'larını yönetmek mi istiyorsunuz?",
-        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} token'larını yönetmek için &lt;1&gt;{{appName}} uygulamasını yükleyin&lt;/1&gt; ve lütfen &lt;3&gt;{{appName}} hesabınıza&lt;/3&gt; göndermeden önce &lt;1&gt;{{tokenType}} sürümüne&lt;/1&gt; sahip olduğunuzdan emin olun.",
-        "tokenAppDisclaimerInstalled": "&lt;1&gt;{{tokenName}} {{tokenType}} token'larını&lt;/1&gt; yönetmek için lütfen &lt;3&gt;{{appName}} hesabınıza&lt;/3&gt; göndermeden önce &lt;1&gt;{{tokenType}} sürümüne&lt;/1&gt; sahip olduğunuzdan emin olun.",
+        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} token'larını yönetmek için <1>{{appName}} uygulamasını yükleyin</1> ve lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
+        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
         "intallParentApp": "{{appName}} uygulamasını yükleyin"
       },
@@ -1555,7 +1555,7 @@
       "contactSupport": "Destek Al",
       "deprecated": "Cihazın yazılım sürümü güncellenemeyecek kadar eski. Değiştirmek için Ledger Destek ekibiyle iletişime geçin.",
       "prepareSeed": "Önlem olarak, 24 kelimelik kurtarma ifadenizi bir Kurtarma kağıdına yazdığınızdan ve ona kolayca ulaşabileceğinizden emin olun.",
-      "disclaimerTitle": "&lt;1&gt;Donanım yazılımının {{version}} sürümünü&lt;/1&gt; yüklemek üzeresiniz.",
+      "disclaimerTitle": "<1>Donanım yazılımının {{version}} sürümünü</1> yüklemek üzeresiniz.",
       "downloadingUpdateDesc": "Lütfen güncelleme yükleyicisinin indirilmesini bekleyin"
     },
     "modal": {
@@ -1578,9 +1578,9 @@
       "confirmUpdate": "Lütfen cihazınızdaki güncellemeyi onaylayın",
       "mcuTitle": "Güncellemeyi tamamla",
       "mcuFirst": "USB kablosunu cihazınızdan çıkartın",
-      "mcuSecond": "Sol tuşa basın ve basılı tutarken USB kablosunu tekrar bağlayıp, &lt;1&gt;&lt;0&gt;{{repairProcessing}}&lt;/0&gt;&lt;/1&gt; ekranı görünene kadar basılı tutmaya devam edin",
+      "mcuSecond": "Sol tuşa basın ve basılı tutarken USB kablosunu tekrar bağlayıp, <1><0>{{repairProcessing}}</0></1> ekranı görünene kadar basılı tutmaya devam edin",
       "mcuPin": "Lütfen güncellemenin bitmesini bekleyin",
-      "mcuSecondNanoX": "&lt;1&gt;&lt;0&gt;{{bootloaderOption}}&lt;/0&gt;&lt;/1&gt; görünene kadar sol tuşa basılı tutun. Onaylamak ve cihazınızı tekrar bağlamak için her iki tuşa da basın.",
+      "mcuSecondNanoX": "<1><0>{{bootloaderOption}}</0></1> görünene kadar sol tuşa basılı tutun. Onaylamak ve cihazınızı tekrar bağlamak için her iki tuşa da basın.",
       "mcuBlueFirst": "Cihazı kapatmak için yan tuşu 10 saniye basılı tutun. Tuşu bırakın.",
       "mcuBlueSecond": "Başlatma Seçenekleri görüntülenene kadar tuşu en az 5 saniye basılı tutun. Bootlader Moduna dokunun",
       "successTitle": "Donanım yazılımı güncellendi",
@@ -1611,7 +1611,7 @@
     "steps": {
       "rewards": {
         "title": "Ödüller",
-        "description": "Tebrikler! Doğrulayıcılara oy vererek &lt;1&gt;{{amount}}&lt;/1&gt; kazandınız.",
+        "description": "Tebrikler! Doğrulayıcılara oy vererek <1>{{amount}}</1> kazandınız.",
         "info": "Ödüller her 24 saatte bir alınabilir."
       },
       "connectDevice": {
@@ -1622,7 +1622,7 @@
         "success": {
           "title": "Alınan ödüller",
           "text": "Ödülleriniz mevcut bakiyenize eklendi.",
-          "cta": "Ayrıntıları gör",
+          "cta": "Ayrıntıları göster",
           "done": "Tamam"
         },
         "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
@@ -1698,7 +1698,7 @@
         "maxUsed": "Yetersiz varlık",
         "validators": "Doğrulayıcılar ({{total}})",
         "votes": "Kullanılabilir varlıklar: {{total}}",
-        "noResults": "&quot;&lt;0&gt;{ {{search}}&lt;/0&gt;&quot; için doğrulayıcı bulunamadı."
+        "noResults": "&quot;<0>{ {{search}}</0>&quot; için doğrulayıcı bulunamadı."
       },
       "connectDevice": {
         "title": "Cihaz"
@@ -1708,7 +1708,7 @@
         "success": {
           "title": "Oylarınız başarılı bir şekilde verildi.",
           "text": "",
-          "cta": "Ayrıntıları gör"
+          "cta": "Ayrıntıları göster"
         },
         "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
       }
@@ -1735,8 +1735,8 @@
         "label": "Alacak hesap",
         "parentAccount": "1. {{currencyName}} hesabı seçin",
         "token": "2. Token seçin",
-        "verifyTokenType": "Lütfen &lt;0&gt;{{token}}&lt;/0&gt; token'ının &lt;0&gt;{{tokenType}}&lt;/0&gt; türü bir token olduğunu doğrulayın. {{currency}} hesabına gönderilen diğer tüm kripto varlıklar kaybolabilir.",
-        "warningTokenType": "Lütfen {{currency}} hesaplarına sadece &lt;0&gt;{{ticker}}&lt;/0&gt; veya &lt;0&gt;{{tokenType}}&lt;/0&gt; türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
+        "verifyTokenType": "Lütfen <0>{{token}}</0> token'ının <0>{{tokenType}}</0> türü bir token olduğunu doğrulayın. {{currency}} hesabına gönderilen diğer tüm kripto varlıklar kaybolabilir.",
+        "warningTokenType": "Lütfen {{currency}} hesaplarına sadece <0>{{ticker}}</0> veya <0>{{tokenType}}</0> türü token'lar gönderin. Diğer kripto varlıklarının gönderilmesi, fonların kalıcı olarak kaybedilmesine yol açabilir."
       },
       "connectDevice": {
         "title": "Cihaz",
@@ -1780,11 +1780,11 @@
         "subaccountsWarning": "Bu hesabın token'larını göndermek için bu hesabı {{ currency }} ile doldurmanız gerekir",
         "from": "Gönderici",
         "to": "Alıcı",
-        "selectAccountDebit": "Düşülecek hesap",
+        "selectAccountDebit": "Gönderen hesap",
         "recipientAddress": "Alıcı adresi",
         "amount": "Tutar",
         "fees": "Ağ ücretleri",
-        "useMax": "Gönderilebilecek Maksimum Tutar",
+        "useMax": "Tamamını Gönder",
         "rippleTag": "Etiket",
         "rippleTagPlaceholder": "Opsiyonel",
         "ethereumGasLimit": "Gas limiti",
@@ -1804,7 +1804,7 @@
         "success": {
           "title": "İşlem gönderildi",
           "text": "İşlem blok zinciri tarafından onaylandığında hesap bakiyeniz güncellenecek",
-          "cta": "Ayrıntıları gör"
+          "cta": "Ayrıntıları göster"
         },
         "pending": {
           "title": "İşlem yayınlanıyor..."
@@ -1982,11 +1982,11 @@
       "delegate": "Ekle",
       "undelegate": "Yetkiyi iptal et",
       "redelegate": "Yetkiyi yeniden devret",
-      "redelegateDisabledTooltip": "Yetkiyi başkasına devretmek için &lt;0&gt;{{days}}&lt;/0&gt; gün beklemelisiniz",
-      "redelegateMaxDisabledTooltip": "Bir seferde en fazla &lt;0&gt;7&lt;/0&gt; doğrulayıcıya yetki devredebilirsiniz.",
-      "undelegateDisabledTooltip": "Bir seferde en fazla &lt;0&gt;7&lt;/0&gt; doğrulayıcının yetkisini iptal edebilirsiniz.",
+      "redelegateDisabledTooltip": "Yetkiyi başkasına devretmek için <0>{{days}}</0> gün beklemelisiniz",
+      "redelegateMaxDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcıya yetki devredebilirsiniz.",
+      "undelegateDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcının yetkisini iptal edebilirsiniz.",
       "reward": "Ödüllerinizi alın",
-      "currentDelegation": "Yetkisi devredilen tutar: &lt;0&gt;{{amount}}&lt;/0&gt;",
+      "currentDelegation": "Yetkisi devredilen tutar: <0>{{amount}}</0>",
       "estYield": "tahmini getiri",
       "activeTooltip": "Yetkisi devredilen tutarlar üzerinden ödül kazanırsınız",
       "inactiveTooltip": "Yetkisi iptal edilen tutarlar üzerinden ödül kazanamazsınız",
@@ -2016,7 +2016,7 @@
             "success": {
               "title": "Varlıklarınıza başarıyla yetki devrettiniz.",
               "text": "İşlem blok zinciri tarafından onaylandığında hesap bakiyeniz güncellenecek",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2034,8 +2034,8 @@
             "compoundOrClaim": "Birleştir veya hesaba al",
             "compoundDescription": "Ödülleriniz, yetki devrinde kullanılan tutara eklenecek",
             "claimDescription": "Ödüller mevcut bakiyeye eklenecek",
-            "compoundInfo": "&lt;0&gt;{{amount}}&lt;/0&gt; kazandınız. Devam butonuna tıklayarak ödünüzü hemen alın ve otomatik olarak aynı doğrulayıcıya devredin.",
-            "claimInfo": "Aşağıdaki doğrulayıcıdan &lt;0&gt;{{amount}}&lt;/0&gt; kazandınız. Devam butonuna tıklayarak ödünüzü hemen alın ve otomatik olarak mevcut bakiyenize ekleyin.",
+            "compoundInfo": "<0>{{amount}}</0> kazandınız. Devam butonuna tıklayarak ödünüzü hemen alın ve otomatik olarak aynı doğrulayıcıya devredin.",
+            "claimInfo": "Aşağıdaki doğrulayıcıdan <0>{{amount}}</0> kazandınız. Devam butonuna tıklayarak ödünüzü hemen alın ve otomatik olarak mevcut bakiyenize ekleyin.",
             "selectLabel": "Bir yetkili seçin"
           },
           "connectDevice": {
@@ -2048,8 +2048,8 @@
               "title": "Ödüller başarıyla hesaba alındı",
               "titleCompound": "Ödüller başarıyla birleştirildi",
               "text": "Ödülleriniz mevcut bakiyenize eklendi.",
-              "textCompound": "&lt;0&gt;{{amount}}&lt;/0&gt; tutarındaki ödülünüz otomatik olarak &lt;0&gt;{{validator}}&lt;/0&gt; hesabına devredildi",
-              "cta": "Ayrıntıları gör"
+              "textCompound": "<0>{{amount}}</0> tutarındaki ödülünüz otomatik olarak <0>{{validator}}</0> hesabına devredildi",
+              "cta": "Ayrıntıları göster"
             },
             "pending": {
               "title": "İşlem yayınlanıyor..."
@@ -2066,7 +2066,7 @@
           "starter": {
             "title": "Yetkinin Yeniden Devri",
             "description": "Yetkinin Yeniden Devrini kullanarak yetkiyi kolayca bir doğrulayıcıdan diğerine devredebilirsiniz. Fikrinizi değiştirdiğiniz takdirde beklemeniz gerekir çünkü yetkiyi yeniden devretmek 21 günlük bir zaman kilidini etkinleştirir.",
-            "warning": "Doğrulayıcınızı dikkatle seçin: Doğrulayıcının yanlış kararlar vermesi halinde yetki devrinde kullandığınız varlıkların bir kısmını geri dönülemez bir şekilde kaybedebilirsiniz. Aynı anda en fazla &lt;0&gt;7 tane yetki devri beklemede&lt;/0&gt; olabilir.",
+            "warning": "Doğrulayıcınızı dikkatle seçin: Doğrulayıcının yanlış kararlar vermesi halinde yetki devrinde kullandığınız varlıkların bir kısmını geri dönülemez bir şekilde kaybedebilirsiniz. Aynı anda en fazla <0>7 tane yetki devri beklemede</0> olabilir.",
             "howDelegationWorks": "Yetki devri nasıl çalışır?"
           },
           "validators": {
@@ -2074,7 +2074,7 @@
             "currentDelegation": "Mevcut yetkili",
             "newDelegation": "Yeni yetkili",
             "chooseValidator": "Doğrulayıcı seçin",
-            "warning": "Fikrinizin tekrar değiştiği takdirde, yeni doğrulayıcının yetkisini başkasına devretmek için &lt;0&gt;21 gün&lt;/0&gt; beklemeniz gerekir"
+            "warning": "Fikrinizin tekrar değiştiği takdirde, yeni doğrulayıcının yetkisini başkasına devretmek için <0>21 gün</0> beklemeniz gerekir"
           },
           "device": {
             "title": "Cihaz"
@@ -2084,7 +2084,7 @@
             "success": {
               "title": "Varlıklarınızın yetkisini başarıyla yeniden devrettiniz",
               "text": "İşlem blok zinciri tarafından onaylandığında yetkinizin yeniden devri gerçekleşecek",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2100,8 +2100,8 @@
         "steps": {
           "amount": {
             "title": "Tutar",
-            "subtitle": "Yetki iptal etme işleminin sonuçlanması &lt;0&gt;21 gün&lt;/0&gt; sürer.",
-            "warning": "Ödüller hemen hesaba alınır. Yetkisi iptal edilen tutar &lt;0&gt;21 günlük zaman kilidinden&lt;/0&gt; sonra kullanılabilir bakiyeye geri döner.",
+            "subtitle": "Yetki iptal etme işleminin sonuçlanması <0>21 gün</0> sürer.",
+            "warning": "Ödüller hemen hesaba alınır. Yetkisi iptal edilen tutar <0>21 günlük zaman kilidinden</0> sonra kullanılabilir bakiyeye geri döner.",
             "fields": {
               "validator": "Doğrulayıcı",
               "amount": "Yetkisi iptal edilecek tutar"
@@ -2114,8 +2114,8 @@
             "title": "Onay",
             "success": {
               "title": "Varlıklarınızdaki yetki devrini başarıyla iptal ettiniz.",
-              "description": "&lt;0&gt;{{validator}}&lt;/0&gt; hesabına devredilen &lt;0&gt;{{amount}}&lt;/0&gt; tutarındaki yetki iptal edildi",
-              "cta": "Ayrıntıları gör"
+              "description": "<0>{{validator}}</0> hesabına devredilen <0>{{amount}}</0> tutarındaki yetki iptal edildi",
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2125,8 +2125,8 @@
   },
   "algorand": {
     "operationHasRewards": "Kazanılan ödüller",
-    "operationEarnedRewards": "&lt;0&gt;{{amount}}&lt;/0&gt; tutarında ödül kazandınız.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (&lt;0&gt;+{{reward}}&lt;/0&gt; kazanılan ödül)",
+    "operationEarnedRewards": "<0>{{amount}}</0> tutarında ödül kazandınız.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> kazanılan ödül)",
     "optIn": {
       "flow": {
         "title": "ASA Ekle (Varlık)",
@@ -2144,8 +2144,8 @@
             "title": "Onay",
             "success": {
               "title": "{{token}} varlığı başarıyla eklendi",
-              "text": "Artık Algorand hesabınıza &lt;0&gt;{{token}}&lt;/0&gt; varlıklarını alıp gönderebilirsiniz.",
-              "cta": "Ayrıntıları gör"
+              "text": "Artık Algorand hesabınıza <0>{{token}}</0> varlıklarını alıp gönderebilirsiniz.",
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2185,7 +2185,7 @@
             "success": {
               "title": "Ödüller başarıyla alındı!",
               "text": "Ödülleriniz mevcut bakiyenize eklendi.",
-              "cta": "Ayrıntıları gör"
+              "cta": "Ayrıntıları göster"
             },
             "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin."
           }
@@ -2231,9 +2231,9 @@
       "electionOpen": "Yeni doğrulayıcıların seçimi an itibarıyla devam ediyor. Bu nedenle, staking işlemleri yaklaşık 15 dakika süreyle kullanılamayabilir.",
       "electionOpenTooltip": "Doğrulayıcıların seçimi yapılırken bu işlem devre dışıdır.",
       "externalControllerTooltip": "Bu hesap başka bir hesap tarafından kontrol ediliyor.",
-      "externalControllerUnsupported": "&lt;0&gt;Bu stash hesabı, &lt;0&gt;{{controllerAddress}}&lt;/0&gt; adresli ayrı bir hesap tarafından kontrol ediliyor&lt;/0&gt;.&lt;1&gt;Ledger Live ile staking yapmak için bu stash hesabını kendi denetleyicisi olarak ayarlamalısınız.&lt;/1&gt;",
+      "externalControllerUnsupported": "<0>Bu stash hesabı, <0>{{controllerAddress}}</0> adresli ayrı bir hesap tarafından kontrol ediliyor</0>.<1>Ledger Live ile staking yapmak için bu stash hesabını kendi denetleyicisi olarak ayarlamalısınız.</1>",
       "externalStashTooltip": "Bu hesap başka bir hesabı kontrol ediyor.",
-      "externalStashUnsupported": "&lt;0&gt;Bu hesap, &lt;0&gt;{{stashAddress}}&lt;/0&gt; adresli ayrı bir stash hesabını kontrol ediyor&lt;/0&gt;.&lt;1&gt;Ledger Live ile staking yapmak için bu stash hesabını kendi denetleyicisi olarak ayarlamalısınız.&lt;/1&gt;",
+      "externalStashUnsupported": "<0>Bu hesap, <0>{{stashAddress}}</0> adresli ayrı bir stash hesabını kontrol ediyor</0>.<1>Ledger Live ile staking yapmak için bu stash hesabını kendi denetleyicisi olarak ayarlamalısınız.</1>",
       "showInactiveNominations": "Tüm adaylıkları göster ({{count}})",
       "hideInactiveNominations": "Sadece aktif adaylıkları göster",
       "noActiveNominations": "Aktif adaylık yok.",
@@ -2289,7 +2289,7 @@
           "success": {
             "title": "Doğrulayıcıları başarıyla aday gösterdiniz",
             "text": "Varlıklarınız, seçtiğiniz doğrulayıcı(lar) ile bağlandığında ödül kazanmaya başlayacaksınız.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "İşlem yayınlanıyor..."
@@ -2371,7 +2371,7 @@
           "success": {
             "title": "Varlıklar başarıyla tekrar bağlandı",
             "text": "İşlem, ağ tarafından onaylandıktan sonra hesap bakiyeniz güncellenecek.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "Varlıklarınız tekrar bağlanıyor..."
@@ -2400,7 +2400,7 @@
           "success": {
             "title": "Çözme işlemi başarıyla gönderildi",
             "text": "Çözülmüş varlıklar 28 gün içinde çekilebilir.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "Varlıklarınız çözülüyor..."
@@ -2440,7 +2440,7 @@
           "success": {
             "title": "İşlem başarıyla gönderildi",
             "text": "İşlem kısa süre içinde işlem geçmişinde görünecek.",
-            "cta": "Ayrıntıları gör"
+            "cta": "Ayrıntıları göster"
           },
           "pending": {
             "title": "İşlem yayınlanıyor..."
@@ -2505,7 +2505,7 @@
           "title": "Doğrulayıcı Seç",
           "description": "Tahmini ödül oranlarını karşılaştırarak bir doğrulayıcı seçebilirsiniz",
           "customValidator": "Özel doğrulayıcı",
-          "providedBy": "&lt;1&gt;&lt;0&gt;{{name}}&lt;/0&gt;&lt;/1&gt; tarafından sağlanan getiri oranları"
+          "providedBy": "<1><0>{{name}}</0></1> tarafından sağlanan getiri oranları"
         },
         "custom": {
           "title": "Özel doğrulayıcı",
@@ -2673,7 +2673,7 @@
         },
         "experimentalExplorers": {
           "title": "Deneysel Tarayıcılar API'ı",
-          "description": "Ledger'ın blok zinciri tarayıcılarının gelecek bir sürümünü deneyin. Bu ayarın değiştirilmesi, hesap bakiyesi ve senkronizasyonun yanı sıra gönderme özelliğini de etkileyebilir.\n(&lt;0&gt;&lt;/0&gt;)"
+          "description": "Ledger'ın blok zinciri tarayıcılarının gelecek bir sürümünü deneyin. Bu ayarın değiştirilmesi, hesap bakiyesi ve senkronizasyonun yanı sıra gönderme özelliğini de etkileyebilir.\n(<0></0>)"
         },
         "keychainObservableRange": {
           "title": "Özel gap limit",
@@ -2838,7 +2838,7 @@
     "serviceStatus": {
       "statusOk": {
         "title": "Ledger Live çalışır durumda",
-        "description": "Sorun mu yaşıyorsunuz? &lt;0&gt;Yardım sayfamıza&lt;/0&gt; gidin"
+        "description": "Sorun mu yaşıyorsunuz? <0>Yardım sayfamıza</0> gidin"
       },
       "statusNotOk": {
         "title": "Ledger Live'de bir sorun var",
@@ -2858,14 +2858,14 @@
         "title": "PIN kodunuzu güvende tutun",
         "intro": "Kurulum işlemi sırasında bir PIN kodu seçersiniz.",
         "rules": {
-          "1": "PIN kodunuzu &lt;0&gt;her zaman&lt;/0&gt; kendiniz seçin.",
-          "2": "PIN kodunuzu &lt;0&gt;her zaman&lt;/0&gt; gözden uzak bir şekilde girin.",
+          "1": "PIN kodunuzu <0>her zaman</0> kendiniz seçin.",
+          "2": "PIN kodunuzu <0>her zaman</0> gözden uzak bir şekilde girin.",
           "3": "Gerekirse PIN kodunuzu değiştirebilirsiniz.",
           "4": "PIN kodunun arka arkaya üç kez yanlış girilmesi halinde cihaz sıfırlanır.",
-          "5": "&lt;0&gt;Asla&lt;/0&gt; 0000, 123456 veya 55555555 gibi kolay bir PIN kodu kullanmayın.",
-          "6": "PIN kodunuzu &lt;0&gt;asla &lt;/0&gt; başkasıyla paylaşmayın. Ledger'la bile paylaşmayın.",
-          "7": "&lt;0&gt;Asla&lt;/0&gt; kendiniz seçmediğiniz bir PIN kodu kullanmayın.",
-          "8": "PIN kodunuzu &lt;0&gt;asla&lt;/0&gt; bir bilgisayarda veya telefonda saklamayın."
+          "5": "<0>Asla</0> 0000, 123456 veya 55555555 gibi kolay bir PIN kodu kullanmayın.",
+          "6": "PIN kodunuzu <0>asla </0> başkasıyla paylaşmayın. Ledger'la bile paylaşmayın.",
+          "7": "<0>Asla</0> kendiniz seçmediğiniz bir PIN kodu kullanmayın.",
+          "8": "PIN kodunuzu <0>asla</0> bir bilgisayarda veya telefonda saklamayın."
         }
       },
       "recoverySeed": {
@@ -2884,9 +2884,9 @@
       "whereToHide": {
         "title": "Kurtarma ifademi nerede saklamalıyım?",
         "points": {
-          "1": "&lt;0&gt;ASLA&lt;/0&gt; bir bilgisayar, akıllı telefon veya başka bir cihazda saklamayın. Resmini çekmeyin.",
-          "2": "&lt;0&gt;ASLA&lt;/0&gt; 24 kelimenizi kimseyle paylaşmayın.",
-          "3": "&lt;0&gt;HER ZAMAN&lt;/0&gt; güvenli ve gözden uzak bir yerde saklayın.",
+          "1": "<0>ASLA</0> bir bilgisayar, akıllı telefon veya başka bir cihazda saklamayın. Resmini çekmeyin.",
+          "2": "<0>ASLA</0> 24 kelimenizi kimseyle paylaşmayın.",
+          "3": "<0>HER ZAMAN</0> güvenli ve gözden uzak bir yerde saklayın.",
           "4": "Ledger sizden asla kurtarma ifadenizi istemez.",
           "5": "Herhangi bir kişi veya uygulama bunu isterse dolandırıcılık olduğunu varsayın!"
         }
@@ -2918,7 +2918,7 @@
         "title": "Ledger'a Hoş Geldiniz",
         "description": "Kriptonuzu bilgisayarınızdan güvenli bir şekilde yönetin.",
         "cta": "Hemen başla",
-        "noDevice": "Cihazınız yok mu? &lt;0&gt;Bir Ledger Nano X satın alın&lt;/0&gt;",
+        "noDevice": "Cihazınız yok mu? <0>Bir Ledger Nano X satın alın</0>",
         "languageWarning": {
           "title": "{{language}} dilinde kullanmaya başlayın",
           "desc": "Ledger'ı kullanmaya başlamanızı kolaylaştırmak için ek diller sunuyoruz. Ledger deneyiminin geri kalanının an itibarıyla sadece İngilizce olarak mevcut olduğunu lütfen unutmayın.",
@@ -3059,7 +3059,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "PIN kodu seçin",
-              "descr": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için &lt;0&gt;&lt;/0&gt; seçin. Bir rakamı silmek için &lt;1&gt;&lt;/1&gt; seçin."
+              "descr": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için <0></0> seçin. Bir rakamı silmek için <1></1> seçin."
             },
             "confirm": {
               "title": "PIN kodunu onayla",
@@ -3352,7 +3352,7 @@
         "anotherComputer": {
           "title": "Başka bir bilgisayarı deneyin",
           "bullets": {
-            "0": "Ledger Live'ı indirmek ve yüklemek için başka bir bilgisayarda &lt;0&gt;{{link}}&lt;/0&gt; adresine gidin.",
+            "0": "Ledger Live'ı indirmek ve yüklemek için başka bir bilgisayarda <0>{{link}}</0> adresine gidin.",
             "1": "Cihazınızın algılanıp algılanmadığını görmek için cihazınızı bağlayın ve kilidini açın."
           }
         }
@@ -3361,7 +3361,7 @@
         "windows": {
           "title": "USB aygıt sürücülerini güncelleyin",
           "bullets": {
-            "0": "Bu &lt;0&gt;{{link}}&lt;/0&gt; adresini ziyaret edin",
+            "0": "Bu <0>{{link}}</0> adresini ziyaret edin",
             "1": "USB aygıt sürücülerini güncellemek için yönergeleri izleyin.",
             "2": "Cihazınızın algılanıp algılanmadığını görmek için cihazınızı bağlayın ve kilidini açın."
           }
@@ -3381,7 +3381,7 @@
             "title": "NVRAM'i sıfırlayın",
             "link": "Apple'ın yönergeleri",
             "bullets": {
-              "0": "Mac'inizde bir intel işlemcisi varsa NVRAM'i sıfırlamak için &lt;0&gt;{{link}}&lt;/0&gt; adresine gidin.",
+              "0": "Mac'inizde bir intel işlemcisi varsa NVRAM'i sıfırlamak için <0>{{link}}</0> adresine gidin.",
               "1": "Cihazınızın algılanıp algılanmadığını görmek için cihazınızı bağlayın ve kilidini açın."
             }
           }
