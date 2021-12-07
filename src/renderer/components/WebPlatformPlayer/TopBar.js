@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
+import type { TopBarConfig } from "./type";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 
@@ -113,14 +114,24 @@ export type Props = {
   onClose?: Function,
   onHelp?: Function,
   onOpenDevTools: Function,
+  config?: TopBarConfig,
 };
 
-const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools }: Props) => {
-  const { name, icon, branch } = manifest;
+const WebPlatformTopBar = ({
+  manifest,
+  onReload,
+  onHelp,
+  onClose,
+  onOpenDevTools,
+  config = {},
+}: Props) => {
+  const { name, icon } = manifest;
 
-  const shouldDisplayName = branch !== "private";
-  const shouldDisplayInfo = branch !== "private";
-  const shouldDisplayCloseButton = !!onClose;
+  const {
+    shouldDisplayName = true,
+    shouldDisplayInfo = true,
+    shouldDisplayClose = !!onClose,
+  } = config;
 
   const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
   const dispatch = useDispatch();
@@ -157,7 +168,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
           </ItemContainer>
         </>
       )}
-      {(shouldDisplayInfo || shouldDisplayCloseButton) && (
+      {(shouldDisplayInfo || shouldDisplayClose) && (
         <RightContainer>
           {shouldDisplayInfo && (
             <ItemContainer isInteractive onClick={onClick}>
@@ -165,7 +176,7 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
             </ItemContainer>
           )}
 
-          {shouldDisplayCloseButton && (
+          {shouldDisplayClose && (
             <ItemContainer isInteractive onClick={onClose}>
               <IconClose size={16} />
             </ItemContainer>

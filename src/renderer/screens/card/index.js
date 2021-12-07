@@ -31,6 +31,13 @@ export default function CardPlatformApp() {
       <TrackPage category="Card" name="Card" appId={APP_ID} />
       {manifest ? (
         <WebPlatformPlayer
+          config={{
+            topBarConfig: {
+              shouldDisplayName: false,
+              shouldDisplayInfo: false,
+              shouldDisplayClose: false,
+            },
+          }}
           manifest={manifest}
           inputs={{
             theme: themeType,
