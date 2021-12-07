@@ -16,10 +16,10 @@ const isDiff = str => str.includes("diff");
 const isActual = str => str.includes("actual");
 
 const uploadImage = async () => {
-  const path = core.getInput("path");
+  const p = core.getInput("path");
   const os = core.getInput("os");
   const workspace = core.getInput("workspace");
-  const fullPath = path.resolve(path);
+  const fullPath = path.resolve(p);
 
   const upload = async (file, i = 0) => {
     if (i > 2) {
@@ -70,6 +70,7 @@ const uploadImage = async () => {
   try {
     files = getAllFiles(fullPath);
   } catch {
+    fs.writeFileSync(`${workspace}/images-${os}.json`, JSON.stringify([]));
     return core.setOutput("images", []);
   }
 
