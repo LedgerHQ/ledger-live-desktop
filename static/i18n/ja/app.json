@@ -1758,7 +1758,7 @@
     "totalSpent": "引き落とし合計",
     "steps": {
       "recipient": {
-        "title": "宛先",
+        "title": "送付先",
         "nftRecipient": "送付するNFT"
       },
       "amount": {
@@ -1781,7 +1781,7 @@
         "from": "送付元",
         "to": "送付先",
         "selectAccountDebit": "引き落としアカウント",
-        "recipientAddress": "受取アドレス",
+        "recipientAddress": "受取先アドレス",
         "amount": "数量",
         "fees": "ネットワーク手数料",
         "useMax": "最大額を送る",
@@ -3441,11 +3441,11 @@
       "setController": "操作を完了するために、デバイスで確認してください。"
     },
     "recipientWording": {
-      "send": "受取人",
+      "send": "受取先",
       "delegate": "バリデータ",
       "undelegate": "バリデータ",
-      "claimReward": "報酬受取人",
-      "optIn": "受取人",
+      "claimReward": "報酬受取先",
+      "optIn": "受取先",
       "nominate": "バリデータ",
       "erc721": {
         "transfer": "受取先"
@@ -3477,7 +3477,7 @@
         "MEMO_HASH": "Memoのハッシュ",
         "MEMO_RETURN": "Memo Return"
       },
-      "memoWarningText": "Memoを使用する場合は、受取人とMemoのタイプをしっかりと確認してください。"
+      "memoWarningText": "Memoを使用する場合は、受取先とMemoのタイプをしっかりと確認してください。"
     },
     "cosmos": {
       "memo": "Memo",
@@ -3729,7 +3729,7 @@
       "description": "アカウントに十分な資金があることを確認してください。"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "受信者のアドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
+      "title": "受取先アドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
     },
     "NotEnoughGas": {
       "title": "親アカウントのETH残高がネットワーク手数料を下回り、不足しています"
