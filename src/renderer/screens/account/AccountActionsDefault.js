@@ -26,6 +26,7 @@ type Props = {
   labelComponent: any,
   event?: string,
   eventProperties?: Object,
+  disabled?: boolean,
 };
 
 export const ActionDefault = ({
@@ -34,9 +35,16 @@ export const ActionDefault = ({
   labelComponent,
   event,
   eventProperties,
+  disabled,
 }: Props) => (
   <ToolTip content={labelComponent}>
-    <IconButton primary onClick={onClick} event={event} eventProperties={eventProperties}>
+    <IconButton
+      primary
+      onClick={onClick}
+      event={event}
+      eventProperties={eventProperties}
+      disabled={disabled}
+    >
       <Box horizontal alignItems="center">
         {iconComponent}
       </Box>

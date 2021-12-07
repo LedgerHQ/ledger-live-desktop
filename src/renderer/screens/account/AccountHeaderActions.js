@@ -159,10 +159,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     openModal("MODAL_RECEIVE", { parentAccount, account });
   }, [parentAccount, account, openModal]);
 
-  const renderAction = ({ label, onClick, event, eventProperties, icon }) => {
+  const renderAction = ({ label, onClick, event, eventProperties, icon, disabled }) => {
     const Icon = icon;
     return (
       <ActionDefault
+        disabled={disabled}
         onClick={onClick}
         event={event}
         eventProperties={eventProperties}
@@ -178,6 +179,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     event?: string,
     eventProperties?: Object,
     icon: React$ComponentType<{ size: number }> | (({ size: number }) => React$Element<any>),
+    disabled?: boolean,
   }[] = [
     ...manageList,
     ...(availableOnCompound
