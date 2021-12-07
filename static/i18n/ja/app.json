@@ -1781,7 +1781,7 @@
         "from": "送付元",
         "to": "送付先",
         "selectAccountDebit": "引き落としアカウント",
-        "recipientAddress": "受取先アドレス",
+        "recipientAddress": "送付先アドレス",
         "amount": "数量",
         "fees": "ネットワーク手数料",
         "useMax": "最大額を送る",
@@ -3849,7 +3849,7 @@
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "受取アドレスと送付アドレスが同じです。"
+      "title": "受取先アドレスと送付元アドレスが同じです。"
     },
     "CantOpenDevice": {
       "title": "接続に失敗しました。",
@@ -3955,7 +3955,7 @@
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "TRC20を新しいアカウントに送付しても、アクティベートされません。",
-      "description": "受取アカウントは、TRC20を送信する前に有効化する必要があります。有効化するにはTRXまたはTRC10のいずれかをアカウントに送信してください。"
+      "description": "受取アカウントは、TRC20を送信する前に有効化する必要があります。有効化するにはTRXまたはTRC10のいずれかをアカウントに送付してください。"
     },
     "TronUnexpectedFees": {
       "title": "追加費用が発生する場合があります。"
@@ -4009,7 +4009,7 @@
       "title": "{{currencyName}} を送付するには、マルチシグを無効にしてください。"
     },
     "StellarMemoRecommended": {
-      "title": "この受取人に送付するには、Memoが必要な場合があります。"
+      "title": "この受取先に送付するには、Memoが必要な場合があります。"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "{{minAmountFromFormatted}} 以上の数量でなければなりません。"
