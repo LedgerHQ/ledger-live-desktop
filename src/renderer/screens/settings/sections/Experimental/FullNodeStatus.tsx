@@ -5,6 +5,7 @@ import { SectionRow as Row } from "../../Rows";
 import styled from "styled-components";
 import useSatStackStatus from "~/renderer/hooks/useSatStackStatus";
 import type { SatStackStatus } from "@ledgerhq/live-common/lib/families/bitcoin/satstack";
+import useEnv from "~/renderer/hooks/useEnv";
 
 const Dot = styled(Flex)`
   border-radius: 50%;
@@ -29,7 +30,7 @@ const getColorsForStatus = (status: string) => {
 const FullNodeStatus = () => {
   const { t } = useTranslation();
   const latestStatus: SatStackStatus = useSatStackStatus() || { type: "initializing" };
-  const satStackAlreadyConfigured = true;
+  const satStackAlreadyConfigured = useEnv("SATSTACK");
   if (!satStackAlreadyConfigured) return null;
 
   const { type } = latestStatus;
