@@ -140,7 +140,7 @@
       "DELEGATE": "デリゲート",
       "REDELEGATE": "再デリゲート",
       "UNDELEGATE": "デリゲート解除済み",
-      "SUPPLY": "預け入れ済み",
+      "SUPPLY": "預入済み",
       "REDEEM": "引き出し済み",
       "APPROVE": "承認済み",
       "VOTE": "投票済み",
@@ -750,10 +750,10 @@
     "active": "認証済みアカウント",
     "lendAsset": "貸し出す",
     "account": {
-      "amountSupplied": "デポジット額",
+      "amountSupplied": "預入額",
       "amountSuppliedTooltip": "ネットワーク貸出額",
       "currencyAPY": "通貨APY（年間利回り）",
-      "currencyAPYTooltip": "継続的に複利運用した預金に対して得られる年間収益率",
+      "currencyAPYTooltip": "継続的に複利運用した預入に対して得られる年間収益率",
       "accruedInterests": "未収利息",
       "accruedInterestsTooltip": "貸し出した資産に対する利息",
       "interestEarned": "獲得利息",
@@ -764,7 +764,7 @@
       "date": "日付",
       "info": "{{currency}} アカウントから直接資産を貸し出し、利息を得ることができます。",
       "howCompoundWorks": "コンパウンドでの貸暗号資産はどのように機能しますか？",
-      "lend": "{{currency}} をデポジット"
+      "lend": "{{currency}} を預け入れる"
     },
     "emptyState": {
       "active": {
@@ -775,7 +775,7 @@
       "closed": {
         "title": "貸出解除済みの資産はこちらに表示されます。",
         "description": "まだ貸し出しを行っていません。",
-        "cta": "デポジット"
+        "cta": "預け入れ"
       },
       "opened": {
         "title": "貸出中の資産がここに表示されます。",
@@ -785,7 +785,7 @@
       "history": {
         "title": "履歴",
         "description": "すべての貸出履歴を表示する。",
-        "cta": "デポジット"
+        "cta": "預け入れ"
       }
     },
     "headers": {
@@ -839,12 +839,12 @@
         "info": "このアカウントで<0>{{amount}}</0>を承認しました。手数料を支払うことで減額できます。",
         "infoNoLimit": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
         "approvedWithLimit": "このアカウントで<0>{{value}}</0>を承認しました。",
-        "enabling": "アカウントの承認が完了すると、資産をデポジットできるようになります。",
+        "enabling": "アカウントの承認が完了すると、資産の預け入れが可能になります。",
         "notEnabled": "資産を貸し出すには、このアカウントを承認する必要があります。",
         "notEnoughApproved": "貸出アカウントで、上限額の増額を承認してください。"
       },
       "supply": {
-        "title": "デポジット",
+        "title": "預け入れ",
         "description": "プロトコルに貸し出す資産の額を入力してください。"
       },
       "withdraw": {
@@ -940,11 +940,11 @@
       }
     },
     "supply": {
-      "title": "デポジット資産",
+      "title": "資産を預け入れる",
       "steps": {
         "amount": {
           "title": "数量",
-          "amountToSupply": "デポジット額",
+          "amountToSupply": "預入額",
           "maxSupply": "貸出最大額は"
         },
         "device": {
@@ -953,8 +953,8 @@
         "confirmation": {
           "title": "確認",
           "success": {
-            "title": "デポジットが正常に送信されました。",
-            "text": "ネットワークによるデポジットの承認後、利息を得られるようになります。",
+            "title": "預け入れが正常に送信されました。",
+            "text": "預け入れがネットワークにより承認されると、利息を得られるようになります。",
             "done": "閉じる",
             "cta": "詳細を表示",
             "info": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。"
@@ -969,7 +969,7 @@
     },
     "emptyAccountDeposit": {
       "title": "{{ asset }}アカウントを持っていません。",
-      "description": "暗号資産のデポジットや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はイーサリアムアドレスで受け取ってください。",
+      "description": "暗号資産の預け入れや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はEthereumアドレスで受け取ってください。",
       "ctaBuy": "{{ asset }} を購入",
       "ctaReceive": "{{ asset }} を受け取る"
     }
@@ -3419,7 +3419,7 @@
   "TransactionConfirm": {
     "title": "デバイス上で処理を確定してください。",
     "warning": "デバイス上に表示されているアドレスが、{{recipientWording}} から受け取ったものと完全に一致しているか、毎回必ず確認してください。",
-    "secureContract": "送付する前に、デポジットの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
+    "secureContract": "送付する前に、預け入れの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
     "verifyData": "必ず、操作の詳細をデバイス上で確認してください。",
     "warningWording": {},
     "titleWording": {
@@ -3524,7 +3524,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "アクティブなデポジットがある間は、承認額を減らすことはできません。"
+      "title": "アクティブな預け入れがある間は、承認額を減らすことはできません。"
     },
     "CosmosBroadcastCodeInternal": {
       "title": "問題が発生しました（エラー#1）",
