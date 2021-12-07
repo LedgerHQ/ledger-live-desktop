@@ -499,7 +499,7 @@
           "details": {
             "provider": "Sağlayıcı",
             "tradeMethod": {
-              "title": "Tür",
+              "title": "İşlem türü",
               "float": "Dalgalı kur",
               "fixed": "Sabit kur"
             },
@@ -1087,7 +1087,7 @@
     },
     "swap": {
       "title": "Kripto takas edin",
-      "description": "Ortağımız aracılığıyla Ledger Live üzerinden bir kriptoyu diğeriyle takas edin."
+      "description": "Ortağımız aracılığıyla Ledger Live üzerinden bir kriptoyu başka bir kriptoyla takas edin."
     },
     "lending": {
       "title": "Kripto borç ver",
@@ -1329,7 +1329,7 @@
   "operationDetails": {
     "whatIsThis": "Bu işlem nedir?",
     "title": "İşlem detayları",
-    "type": "Tür",
+    "type": "İşlem türü",
     "amount": "Tutar",
     "account": "Hesap",
     "date": "Tarih",
