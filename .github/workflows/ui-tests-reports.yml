@@ -12,6 +12,17 @@ on:
       - "completed"
 
 jobs:
+  log:
+    name: "Check previous github object"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log github object
+        with:
+          GITHUB: ${{ toJSON(github) }}
+          RUN: ${{ toJSON(github.event.workflow_run) }}
+        run: |
+          echo $GITHUB
+          echo $RUN
   comment-on-pr:
     name: "Comment report on PR"
     # if: github.event.workflow_run.event == 'pull_request'

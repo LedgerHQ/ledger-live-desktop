@@ -3,46 +3,36 @@ const fetch = require("isomorphic-unfetch");
 const { promises: fs } = require("fs");
 
 const main = async () => {
-  const images = core.getInput("images");
-  const runId = core.getInput("runId");
-  const pullId = core.getInput("pullId");
-  const from = core.getInput("from");
-  const to = core.getInput("to");
-  const author = core.getInput("author");
-  let imgChanged;
-  try {
-    imgChanged = (await fs.readFile(core.getInput("imgChanged"), "utf8")).split("\n");
-    if (imgChanged.length === 1 && imgChanged[0] === "") {
-      imgChanged = [];
-    }
-  } catch (e) {
-    imgChanged = [];
-  }
-  const testoutput = await fs.readFile(core.getInput("testoutput"), "utf8");
+  const imagesObject = await fs.readFile(core.getInput("images"));
   const lintoutput = await fs.readFile(core.getInput("lintoutput"), "utf8");
   const jestoutput = await fs.readFile(core.getInput("jestoutput"), "utf8");
-  const fullrepo = core.getInput("fullrepo").split("/");
-  const imgArr = JSON.parse(images);
 
   let str = "";
-  if (imgArr.length) {
-    imgArr.forEach(image => {
-      str += image.name + "\n\n";
-      str += "![](" + image.link + ")\n\n";
-    });
-    // from what I understood it's a bit cumbersome to get the artifact url before the workflow finishes
-    // so this is a workaround. the endpoint will redirect to the artifact url.
-    // https://github.com/machard/github-action-artifact-redirect
-    str += `[Suggested snapshots to update](https://github-actions-live.ledger.tools/api?owner=${fullrepo[0]}&repo=${fullrepo[1]}&runId=${runId})`;
+  let hasFailed = false;
+  for (const platform of imagesObject) {
+    const current = imagesObject[platform];
+    if (Array.isArray(current) && current.length) {
+      if (!hasFailed) hasFailed = true;
+      str += `
+        <strong>${platform}</strong>
+
+        | Actual | Diff | Expected |
+        |:------:|:----:|:--------:|
+      `;
+      current.forEach(({ actual, diff, expected }) => {
+        str += "\n\n";
+        str += `| ![${actual.name}](${actual.link}) | ![${diff.name}](${diff.link}) | ![${expected.name}](${expected.link}) |`;
+      });
+      str += "\n\n";
+    }
   }
 
   const lintFailed = (lintoutput || "").indexOf("exit code 255") >= 0;
-  const testsFailed = (testoutput || "").indexOf("FAIL") >= 0;
   const jestFailed = (jestoutput || "").indexOf("FAIL") >= 0;
-  const imgDiffFailed = !!imgArr.length;
+  const imgDiffFailed = !!hasFailed;
 
+  // cc @${author}
   str = `
-cc @${author}
 
 <details>
 <summary><b>Lint outputs ${lintFailed ? "❌" : " ✅"}</b></summary>
@@ -63,15 +53,6 @@ ${jestoutput}
 </details>
 
 <details>
-<summary><b>Tests outputs ${testsFailed ? "❌" : " ✅"}</b></summary>
-<p>
-
-${testoutput}
-
-</p>
-</details>
-
-<details>
 <summary><b>Diff output ${imgDiffFailed ? "❌" : " ✅"}</b></summary>
 <p>
 
@@ -81,33 +62,9 @@ ${str}
 </details>
 `;
 
-  if (imgChanged.length) {
-    imgChanged = imgChanged.map(
-      img => `
-${img}
-![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${from}/${img}) | ![](https://raw.githubusercontent.com/LedgerHQ/ledger-live-desktop/${to}/${img})
-|---|---
-| Old | New
-`,
-    );
-    const diffStr = imgChanged.join("\n\n");
-    str += `
-
-<details>
-<summary><b>Screenshots diff with develop  :warning:</b></summary>
-<p>
-
-${diffStr}
-
-</p>
-</details>
-`;
-  }
-
   const strSlack = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Jest outputs ${jestFailed ? "❌" : " ✅"}
-Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
 https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
@@ -126,7 +83,6 @@ https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
   const strSlackAuthor = `
 Lint outputs ${lintFailed ? "❌" : " ✅"}
 Jest outputs ${jestFailed ? "❌" : " ✅"}
-Tests outputs ${testsFailed ? "❌" : " ✅"}
 Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
 https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
@@ -134,7 +90,7 @@ https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
   core.setOutput("bodySlack", strSlack);
   core.setOutput("bodySlackAuthor", strSlackAuthor);
-  core.setOutput("slackAuthor", githubSlackMap[author] || "");
+  // core.setOutput("slackAuthor", githubSlackMap[author] || "");
 
   console.log(str);
 
