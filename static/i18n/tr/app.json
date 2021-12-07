@@ -677,7 +677,7 @@
     "contractAddress": "Sözleşme:",
     "openInExplorer": "Tarayıcıda aç",
     "emptyState": {
-      "title": "Herhangi bir kripto varlığı yok mu?",
+      "title": "Henüz kripto varlığınız yok mu?",
       "desc": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve almaya başlayın",
       "descToken": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve <3><0>{{ticker}}</0></3> ile <5><0>{{tokenList}}</0>token'larını almaya başlayın</5>",
       "buttons": {
@@ -713,7 +713,7 @@
   },
   "exchange": {
     "title": "Kripto al ve sat",
-    "reset": "Akışı sıfırla",
+    "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
       "header": "{{provider}} ile kripto alın",
