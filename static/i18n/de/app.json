@@ -318,22 +318,22 @@
           "postalCodePlaceholder": "Geben Sie Ihre Postleitzahl ein",
           "dateOfBirthPlaceholder": "TT.MM.JJJJ",
           "firstNameError": "Geben Sie Ihren Vornamen ein, um fortzufahren",
-          "lastNameError": "Enter your last name to continue",
-          "street1Error": "Enter your address",
-          "cityError": "Enter the city you live in the USA",
-          "postalCodeError": "Enter a valid US ZIP code",
-          "dateOfBirthError": "Enter your date of birth",
-          "dateOfBirthValidationError": "Enter a valid date of birth"
+          "lastNameError": "Geben Sie Ihren Nachnamen ein, um fortzufahren",
+          "street1Error": "Geben Sie Ihre Adresse ein",
+          "cityError": "Geben Sie die Stadt ein, in der Sie in den USA leben",
+          "postalCodeError": "Geben Sie eine gültige US-Postleitzahl ein",
+          "dateOfBirthError": "Geben Sie Ihr Geburtsdatum ein",
+          "dateOfBirthValidationError": "Geben Sie ein gültiges Geburtsdatum ein"
         }
       }
     },
     "exchangeDrawer": {
-      "title": "Confirm your Exchange",
+      "title": "Swap bestätigen",
       "completed": {
-        "title": "Pending Operation",
-        "description": "Your Swap operation has been sent to the network for confirmation. It may take up to an hour before you receive your {{targetCurrency}}.",
-        "disclaimer": "Take note of your Swap ID number in case you’d need assistance from <0><0>{{provider}}</0> support</0>.",
-        "seeDetails": "See details"
+        "title": "Vorgang ausstehend",
+        "description": "Ihr Tauschvorgang (Swap) wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten.",
+        "disclaimer": "Notieren Sie sich Ihre Swap-ID-Nummer, falls Sie Unterstützung von <0><0>{{provider}}</0> Unterstützung</0> benötigen.",
+        "seeDetails": "Siehe Details"
       }
     }
   },
@@ -1069,9 +1069,9 @@
       "cta": "Jetzt kaufen"
     },
     "familyPack": {
-      "title": "Family pack",
-      "description": "Get your family and friends into crypto with 3 Nano S at a discounted price",
-      "cta": "Buy family pack"
+      "title": "Familien-Paket",
+      "description": "Begeistern Sie Ihre Familie und Freunde für Krypto mit 3 Nano S zu einem ermäßigten Preis",
+      "cta": "Familien-Paket kaufen"
     },
     "polkaStake": {
       "title": "POLKADOT Staking",
@@ -1115,7 +1115,7 @@
     "disconnected": "Getrennt",
     "connected": "Verbunden",
     "connecting": "Verbinde ...",
-    "invalidAccount": "Invalid account id",
+    "invalidAccount": "Ungültige Konto-ID",
     "steps": {
       "paste": {
         "title": "Link einfügen",
@@ -1125,7 +1125,7 @@
       "confirm": {
         "title": "Verbinden",
         "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Mit Ledger Live verbinden. Wählen Sie Ihr Ethereum-Konto"
       }
     },
     "connectedscreen": {
@@ -1176,36 +1176,36 @@
   "NFT": {
     "viewer": {
       "actions": {
-        "send": "Send",
-        "open": "Open in {{viewer}}"
+        "send": "Senden",
+        "open": "In {{viewer}} öffnen"
       },
       "attributes": {
-        "properties": "Properties",
-        "description": "Description",
-        "contract": "Contract address",
+        "properties": "Eigenschaften",
+        "description": "Beschreibung",
+        "contract": "Vertragsadresse",
         "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "quantity": "Menge"
       }
     },
     "collections": {
-      "title": "NFT (Non Fungible Tokens) Collections",
-      "receiveCTA": "Receive NFT",
-      "galleryCTA": "See Gallery",
-      "seeMore": "See more collections",
-      "seeAll": "See all collections",
-      "seeLess": "See less"
+      "title": "NFT (Non Fungible Tokens) Sammlungen",
+      "receiveCTA": "NFT erhalten",
+      "galleryCTA": "Galerie ansehen",
+      "seeMore": "Weitere Sammlungen ansehen",
+      "seeAll": "Alle Sammlungen anzeigen",
+      "seeLess": "Weniger anzeigen"
     },
     "gallery": {
-      "title": "All NFT",
+      "title": "Alle NFT",
       "collection": {
         "header": {
-          "sendCTA": "Send",
-          "contract": "Contract: {{contract}}"
+          "sendCTA": "Senden",
+          "contract": "Vertrag: {{contract}}"
         },
         "operationList": {
-          "header": "Latest Operations",
-          "OUT": "Sent",
-          "IN": "Received"
+          "header": "Letzte Aktionen",
+          "OUT": "Gesendet",
+          "IN": "Empfangen"
         }
       },
       "tokensList": {
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "Sie können kein neues Konto hinzufügen, bevor Sie Guthaben auf Ihrem <1><0>{{accountName}}</0></1> Konto erhalten haben",
       "noAccountToCreate": "Es wurde kein <1><0>{{currencyName}}}}</0></1> Konto gefunden, das erstellt werden kann",
       "showAllAddressTypes": "Alle Adresstypen anzeigen",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Ändern Sie nur den Adresstyp wenn Sie {{family}} in anderen Adressformaten erhalten möchten."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit oder Native Segwit?"
@@ -1355,10 +1355,10 @@
     "details": "{{ currency }} Details",
     "multipleAddresses": "Warum mehrere Adressen?",
     "nft": {
-      "name": "Token Name",
-      "contract": "Token Contract",
+      "name": "Token-Name",
+      "contract": "Token-Vertrag",
       "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "amount": "Betrag"
     },
     "extra": {
       "frozenAmount": "Eingefrorener Betrag",
@@ -1420,12 +1420,12 @@
       "payoutNetworkFeesTooltip": "Dieser Betrag wird nicht auf Ihrem Gerät angezeigt"
     },
     "swap2": {
-      "amountSent": "Amount to send",
-      "amountReceived": "Amount to receive",
-      "provider": "Provider",
-      "fees": "Network Fees",
-      "sourceAccount": "Source Account",
-      "targetAccount": "Target Account"
+      "amountSent": "Zu sendender Betrag",
+      "amountReceived": "Betrag, den Sie erhalten",
+      "provider": "Anbieter",
+      "fees": "Netzwerk-Gebühren",
+      "sourceAccount": "Abbuchungskonto",
+      "targetAccount": "Zielkonto"
     },
     "sell": {
       "notice": "Überprüfen Sie die Verkaufsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen.",
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Installierte Apps suchen..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Es sieht so aus, als ob eine App auf Ihrem Gerät geöffnet ist",
+      "subtitle": "Beim erneuten Öffnen des Managers wird die App auf Ihrem Gerät beendet",
+      "ctaReopen": "Manager erneut öffnen",
+      "ctaPortfolio": "Zurück zum Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> frei",
@@ -1543,11 +1543,11 @@
       "update": "Firmware-Update",
       "updateBtn": "Firmware aktualisieren",
       "banner": {
-        "warning": "Update Firmware to {{latestFirmware}} is available",
-        "cta": "Go to manager",
+        "warning": "Update-Firmware zu {{latestFirmware}} ist verfügbar",
+        "cta": "Zum Manager gehen",
         "old": {
-          "warning": "Device firmware version too old to be updated. Contact Ledger Support for a replacement.",
-          "cta": "Contact support"
+          "warning": "Geräte-Firmware-Version zu alt, um aktualisiert zu werden. Kontaktieren Sie den Ledger-Support für einen Ersatz.",
+          "cta": "Support kontaktieren"
         },
         "cta2": "Firmware aktualisieren"
       },
