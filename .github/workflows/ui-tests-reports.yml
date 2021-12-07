@@ -100,7 +100,7 @@ jobs:
               )
             });
 
-      - name: unzip stuff
+      - name: unzip files
         run: |
           unzip tests-reports.zip
           unzip playwright-results-windows-latest.zip
@@ -109,3 +109,22 @@ jobs:
           unzip images-windows-latest.json.zip
       - name: ls on files
         run: ls
+      - name: parse images
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require("fs");
+
+            const files = ["images-linux", "images-windows-latest"];
+
+            let result = [];
+            for (const file in files) {
+              try {
+                const raw = JSON.parse(fs.readFileSync("${{github.workspace}}/" + file + ".json"));
+                result = result.concat(raw);
+              } catch (err) {
+                console.log(err);
+              }
+            }
+
+            fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
