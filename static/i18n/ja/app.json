@@ -92,7 +92,7 @@
     "close": "閉じる",
     "eastern": "イースタン",
     "western": "ウエスタン",
-    "reverify": "再認証",
+    "reverify": "再確認",
     "verify": "認証",
     "verifyMyAddress": "アドレスを認証",
     "copy": "コピー",
@@ -992,7 +992,7 @@
     },
     "optionsMenu": {
       "title": "オプション",
-      "exportOperations": "オペレーション履歴をエクスポート",
+      "exportOperations": "取引履歴をエクスポート",
       "exportToMobile": "モバイルへエクスポート"
     },
     "contextMenu": {
@@ -1503,7 +1503,7 @@
         "uninstall": "アンインストール",
         "notEnoughSpace": "十分なストレージ容量がありません。",
         "supported": "Ledger Live対応",
-        "addAccount": "アカウントを追加",
+        "addAccount": "アカウント追加",
         "addAccountTooltip": "{{appName}} アカウントを追加",
         "addAccountWarn": "アプリのアップデート完了までお待ちください。",
         "learnMore": "詳細はこちら",
@@ -1728,11 +1728,11 @@
   },
   "receive": {
     "title": "受け取る",
-    "successTitle": "安全に共有されたアドレス",
+    "successTitle": "アドレスが安全に共有されました",
     "steps": {
       "chooseAccount": {
         "title": "アカウント",
-        "label": "入金アカウント",
+        "label": "受取アカウント",
         "parentAccount": "1. {{currencyName}} アカウントを選択",
         "token": "2. トークンを選択",
         "verifyTokenType": "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。 {{currency}} アカウントに他の暗号資産が送信されると、失われる可能性があります。",
@@ -1758,7 +1758,7 @@
     "totalSpent": "引き落とし合計",
     "steps": {
       "recipient": {
-        "title": "受取人",
+        "title": "送付",
         "nftRecipient": "送付するNFT"
       },
       "amount": {
@@ -1781,7 +1781,7 @@
         "from": "送付元",
         "to": "送付先",
         "selectAccountDebit": "引き落としアカウント",
-        "recipientAddress": "受取人アドレス",
+        "recipientAddress": "受取アドレス",
         "amount": "数量",
         "fees": "ネットワーク手数料",
         "useMax": "最大額を送る",
@@ -2565,7 +2565,7 @@
       },
       "operations": {
         "title": "オペレーション履歴",
-        "desc": "コンピューターに、アカウントオペレーションのCSV ファイルを保存する。"
+        "desc": "コンピューターに、アカウント取引のCSVファイルを保存する。"
       },
       "modal": {
         "button": "完了",
@@ -2786,10 +2786,10 @@
     "dataFolder": "ユーザーデータを表示"
   },
   "exportOperationsModal": {
-    "title": "オペレーション履歴",
-    "desc": "オペレーション履歴を保存するアカウントを選択する。",
-    "descSuccess": "オペレーション履歴のCSVファイルは、選択したフォルダーに正常に保存されました。",
-    "titleSuccess": "オペレーション履歴が正常に保存されました。",
+    "title": "取引履歴",
+    "desc": "取引履歴を保存するアカウントを選択する。",
+    "descSuccess": "取引履歴のCSVファイルは、選択したフォルダに正常に保存されました。",
+    "titleSuccess": "取引履歴が正常に保存されました。",
     "cta": "保存",
     "ctaSuccess": "完了",
     "noAccounts": "エクスポートするアカウントがありません。",
@@ -3279,7 +3279,7 @@
   },
   "connectTroubleshooting": {
     "desc": "デバイスの接続に問題がありますか？",
-    "cta": "修正する",
+    "cta": "解決する",
     "solution": "解決策 #{{number}}",
     "applesInstructions": "Appleのトラブルシューティング",
     "nextSolution": "次の解決策",
@@ -3292,8 +3292,8 @@
     "steps": {
       "entry": {
         "title": "USB接続のトラブルシューティング",
-        "desc": "デバイスとの接続に問題があるようです。でも、ご心配なく。デバイスが正常に接続されるまで、いろいろな解決策を1つずつ試しましょう！",
-        "cta": "問題を解決しましょう！",
+        "desc": "デバイスとの接続に問題があるようです。デバイスが正常に接続されるまで、いろいろな解決策を1つずつ試しましょう！",
+        "cta": "問題を解決する！",
         "back": "戻る"
       },
       "1": {
@@ -3849,7 +3849,7 @@
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "受取人のアドレスと送付者のアドレスが同じです。"
+      "title": "受取アドレスと送付アドレスが同じです。"
     },
     "CantOpenDevice": {
       "title": "接続に失敗しました。",
