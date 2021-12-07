@@ -10,15 +10,7 @@ export type ModalsState = {
   },
 };
 
-const state: ModalsState = {
-  ...(process.env.TEST_ONBOARDING_QUIZZ
-    ? {
-        MODAL_ONBOARDING_QUIZZ: {
-          isOpened: true,
-        },
-      }
-    : {}),
-};
+const state: ModalsState = {};
 
 type OpenPayload = {
   name: string,
