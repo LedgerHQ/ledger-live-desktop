@@ -1391,7 +1391,7 @@
   "DeviceAction": {
     "allowAppPermission": "デバイスで{{wording}} アプリを開く",
     "allowAppPermissionSubtitleToken": "{{token}} トークンを管理",
-    "allowManagerPermission": "デバイスで{{wording}} を許可する",
+    "allowManagerPermission": "デバイスで{{wording}} を許可してください",
     "loading": "読み込み中...",
     "connectAndUnlockDevice": "デバイスを接続してロックを解除する",
     "unlockDevice": "デバイスのロックを解除する",
