@@ -28,7 +28,6 @@ import {
   SwapActionDefault,
 } from "./AccountActionsDefault";
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
-import perFamily from "~/renderer/generated/AccountHeaderActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
@@ -87,7 +86,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
 
-  const PerFamily = perFamily[mainAccount.currency.family];
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
   const manage = perFamilyManageActions[mainAccount.currency.family];
   let manageList = [];
@@ -222,7 +220,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       {availableOnBuy && BuyHeader}
       {availableOnSwap && SwapHeader}
       {manageActions.length > 0 && ManageActionsHeader}
-      {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
     </FadeInButtonsContainer>
   );
 
