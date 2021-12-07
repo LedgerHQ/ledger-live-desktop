@@ -96,12 +96,11 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
 
   const { t } = useTranslation();
 
-  const [userChoiceIndex, setUserChoiceIndex] = useState(undefined);
+  const [userChoiceIndex, setUserChoiceIndex] = useState();
 
   const onClickContinue = useCallback(() => {
     setUserChoiceIndex(undefined);
     if (stepIndex >= stepCount - 1) {
-      // TODO: handle continue pressed on last question;
       onClose();
       setStepIndex(0);
     } else {
@@ -152,9 +151,9 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
   const rightSideIllustration =
     (userMadeAChoice
       ? isCorrectChoice
-        ? CorrectAnswerIllustration
-        : IncorrectAnswerIllustration
-      : Illustration) || Illustration;
+        ? CorrectAnswerIllustration || Illustration
+        : IncorrectAnswerIllustration || Illustration
+      : Illustration);
 
   const rightSideTitle = userMadeAChoice
     ? userChoice?.specificAnswerTitle ||

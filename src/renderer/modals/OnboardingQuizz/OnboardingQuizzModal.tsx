@@ -13,9 +13,6 @@ export default function QuizzModal() {
   const onClose = useCallback(() => {
     dispatch(closeModal("MODAL_ONBOARDING_QUIZZ"));
   }, [dispatch]);
-  // const onCloseLoop = useCallback(() => {
-  //   setStarted(false);
-  // }, [setStarted]);
   return (
     <ModalQuizz
       started={started}

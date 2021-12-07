@@ -5,9 +5,8 @@ import styled from "styled-components";
 const CloseContainer = styled(Box).attrs(() => ({
   top: 7,
   right: 7,
-}))`
-  position: absolute;
-`;
+  position: "absolute",
+}))``;
 
 export default function CloseButton({ onClick }: { onClick: () => void }) {
   return (
