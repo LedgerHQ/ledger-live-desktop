@@ -23,6 +23,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
+    if: ${{ always() }}
     needs: [start-runner, ui-tests-linux]
     uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
     with:
