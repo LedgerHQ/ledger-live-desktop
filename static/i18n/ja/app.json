@@ -1379,7 +1379,7 @@
       "rewards": "獲得した報酬",
       "bondedAmount": "ボンド済み額",
       "unbondedAmount": "ボンド解除済み額",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
+      "withdrawUnbondedAmount": "引き出し額",
       "palletMethod": "方法",
       "transferAmount": "送付額",
       "validatorsCount": "バリデータ（{{number}}）"
@@ -1441,8 +1441,8 @@
     },
     "disconnected": {
       "title": "お使いのデバイスでアプリが開いているようです",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
+      "subtitle": "「管理」を再度開いて、デバイスのアプリを終了する",
+      "ctaReopen": "「管理」を再度開く",
       "ctaPortfolio": "「ポートフォリオ」に戻る"
     },
     "deviceStorage": {
