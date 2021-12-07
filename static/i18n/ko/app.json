@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "속성",
-        "description": "Description",
+        "description": "설명",
         "contract": "계약 주소",
         "tokenId": "토큰 ID",
         "quantity": "수량"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}} 계정으로 자산을 수신하기 전에는 새 계정을 추가할 수 없습니다",
       "noAccountToCreate": " &lt;1&gt;&lt;0&gt;{{currencyName}} 계정이 생성되지 않은 것 같습니다",
       "showAllAddressTypes": "모든 주소 유형을 표시하세요",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "다른 주소 형식으로 {{family}}(을)를 수령하려면 주소 유형만 변경해 주세요."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "SegWit, 또는 Native SegWit?"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "설치된 앱 검색..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "귀하의 장치에서 앱이 실행되고 있는 것 같습니다",
+      "subtitle": "관리자를 다시 열면 장치에서 앱이 종료됩니다",
+      "ctaReopen": "관리자 다시 열기",
+      "ctaPortfolio": "포트폴리오로 돌아가기"
     },
     "deviceStorage": {
       "freeSpace": "&lt;0&gt;{{space}}&lt;/0&gt; 남음",
@@ -2898,7 +2898,7 @@
         "continueCTA": "계속",
         "title": "박스 내용을 확인하세요",
         "description": "{{device}}의 PIN 코드 또는 복구 문구가 이미 지정된 경우, 사용하기에 안전하지 않으며 Ledger 지원 부서에 문의해야 합니다.",
-        "alert": "기기 설정 시에 화면에 표시된 복구 문구만 사용하세요"
+        "alert": "장치 설정 시에 화면에 표시된 복구 문구만 사용하세요"
       }
     },
     "alerts": {
