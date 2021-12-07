@@ -1,10 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Flex, Popin, Radio, Text } from "@ledgerhq/react-ui";
 import RadioElement from "@ledgerhq/react-ui/components/form/Radio/RadioElement";
 import ModalStepperBody from "../ModalStepper/ModalStepperBody";
 import Answer from "./Answer";
 import { useTranslation } from "react-i18next";
 import CloseButton from "../ModalStepper/CloseButton";
+import { track } from "~/renderer/analytics/segment";
 
 type QuizzChoice = {
   /**
@@ -72,12 +73,17 @@ export type QuizzStep = {
   incorrectAnswerExplanation?: string;
 };
 
+type StartScreenProps = {
+  onStart: () => void;
+};
+
 export type Props = {
   title: string;
-  StartScreen: React.ReactNode;
-  started?: boolean;
+  StartScreen: React.ComponentType<StartScreenProps> | ((props: StartScreenProps) => JSX.Element);
   steps: Array<QuizzStep>;
   onClose: () => void;
+  onLose: () => void;
+  onWin: () => void;
   isOpen: boolean;
   dismissable?: boolean;
 };
@@ -86,27 +92,20 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
   title,
   steps,
   isOpen,
-  onClose = () => {},
-  started,
+  onClose,
+  onLose,
+  onWin,
   StartScreen,
   dismissable = true,
 }: Props) => {
+  const [started, setStarted] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
+  const [score, setScore] = useState(0);
   const stepCount = steps.length;
 
   const { t } = useTranslation();
 
   const [userChoiceIndex, setUserChoiceIndex] = useState();
-
-  const onClickContinue = useCallback(() => {
-    setUserChoiceIndex(undefined);
-    if (stepIndex >= stepCount - 1) {
-      onClose();
-      setStepIndex(0);
-    } else {
-      setStepIndex(stepIndex + 1);
-    }
-  }, [stepIndex, stepCount, setStepIndex, setUserChoiceIndex, onClose]);
 
   const {
     title: stepTitle,
@@ -125,6 +124,35 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
   const userChoice = userMadeAChoice ? choices[userChoiceIndex] : undefined;
   const isCorrectChoice = userChoice ? userChoice.correct : undefined;
 
+  useEffect(() => {
+    track(`Onboarding - Quizz step ${stepIndex}`);
+  }, [stepIndex]);
+
+  const onClickContinue = useCallback(() => {
+    setUserChoiceIndex(undefined);
+    if (stepIndex >= stepCount - 1) {
+      onClose();
+      if (score === stepCount) {
+        onWin();
+      } else {
+        onLose();
+      }
+    } else {
+      setStepIndex(stepIndex + 1);
+    }
+  }, [stepIndex, stepCount, setStepIndex, setUserChoiceIndex, score, onClose, onLose, onWin]);
+
+  const onChoiceChanged = useCallback(
+    value => {
+      if (userMadeAChoice) return;
+      setUserChoiceIndex(value);
+      const isCorrect = choices[value].correct;
+      if (isCorrect) setScore(score + 1);
+      track(`Onboarding - Quizz step ${stepIndex} ${isCorrect ? "correct" : "false"}`);
+    },
+    [score, stepIndex, userMadeAChoice, setUserChoiceIndex, choices, setScore],
+  );
+
   const radioName = `quizz-${title}-step-${stepIndex}`;
 
   const AsideLeft = (
@@ -132,7 +160,7 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
       <Text variant="h5">{stepTitle}</Text>
       <Radio
         name={`quizz-${title}-step-${stepIndex}`}
-        onChange={value => !userMadeAChoice && setUserChoiceIndex(value)}
+        onChange={onChoiceChanged}
         currentValue={userChoiceIndex}
         containerProps={{ flexDirection: "column", rowGap: 5 }}
       >
@@ -148,12 +176,11 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
     </Flex>
   );
 
-  const rightSideIllustration =
-    (userMadeAChoice
-      ? isCorrectChoice
-        ? CorrectAnswerIllustration || Illustration
-        : IncorrectAnswerIllustration || Illustration
-      : Illustration);
+  const rightSideIllustration = userMadeAChoice
+    ? isCorrectChoice
+      ? CorrectAnswerIllustration || Illustration
+      : IncorrectAnswerIllustration || Illustration
+    : Illustration;
 
   const rightSideTitle = userMadeAChoice
     ? userChoice?.specificAnswerTitle ||
@@ -184,16 +211,9 @@ const ModalQuizz: React.FunctionComponent<Props> = ({
   const [width, height] = [816, 486];
 
   return (
-    <Popin
-      isOpen={isOpen}
-      onClose={onClose}
-      width={width}
-      height={height}
-      p={0}
-      position="relative"
-    >
+    <Popin isOpen onClose={onClose} width={width} height={height} p={0} position="relative">
       {!started && StartScreen ? (
-        StartScreen
+        <StartScreen onStart={() => setStarted(true)} />
       ) : (
         <ModalStepperBody
           AsideLeft={AsideLeft}

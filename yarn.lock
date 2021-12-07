@@ -2555,7 +2555,7 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@0.5.0":
+"@ledgerhq/react-ui@~0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.5.0.tgz#b5410a4683470323e895e5ec44adc1cea9614724"
   integrity sha512-262fJHEO93eMeAKmFPQAPxfCeQcKfoowOzcXHsmEc4TI0llFk+/LuA054Wv2/3lVNIEXu612Kji7JjhGlBkjVA==
