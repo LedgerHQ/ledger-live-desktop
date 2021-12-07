@@ -27,7 +27,7 @@
       "title": "Discover",
       "branch": {
         "soon": "近日公開",
-        "experimental": "実験",
+        "experimental": "試験的",
         "debug": "デバッグ"
       },
       "banner": {
@@ -99,7 +99,7 @@
     "copied": "コピー済み",
     "addressCopied": "アドレスをコピーしました",
     "addressCopiedSuspicious": "コピーしたアドレスとクリップボードのアドレスが一致しません。",
-    "experimentalFeature": "実験的機能",
+    "experimentalFeature": "試験的",
     "information": "インフォメーション",
     "search": "検索…",
     "searchWithoutEllipsis": "検索",
@@ -172,11 +172,11 @@
     "hour": "時間",
     "hour_plural": "時間",
     "range": {
-      "day": "1日",
+      "day": "日",
       "week": "週",
       "month": "月",
       "year": "年",
-      "all": "全期間"
+      "all": "すべて"
     }
   },
   "fees": {
@@ -194,7 +194,7 @@
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
-    "manager": "マネージャー",
+    "manager": "管理",
     "exchange": "購入/売却",
     "swap": "スワップ",
     "lend": "レンディング",
@@ -363,13 +363,13 @@
     },
     "missingApp": {
       "title": "お使いのデバイスに、{{appName}}アプリをインストールしてください。",
-      "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをインストールしてください。",
-      "cta": "マネージャーに移動"
+      "subtitle": "「管理」から{{appName}} アプリをインストールして、暗号資産をスワップする。",
+      "cta": "「管理」に移動"
     },
     "outdatedApp": {
       "title": "デバイス上の{{appName}}アプリをアップデートしてください。",
-      "subtitle": "暗号資産をスワップするには、マネージャーに移動して{{appName}}アプリをアップデートしてください。",
-      "cta": "マネージャーに移動"
+      "subtitle": "「管理」から{{appName}} アプリをインストールして、暗号資産をスワップする。",
+      "cta": "「管理」に移動"
     },
     "providers": {
       "title": "暗号資産のスワップに利用するプロバイダーを選択",
@@ -1044,7 +1044,7 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "実験的な設定の変更にはCacheをクリアする必要があります。",
+      "title": "試験的設定の変更には、Cacheをクリアする必要があります。",
       "cta": "Cacheを消去"
     },
     "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
@@ -1156,7 +1156,7 @@
       "title": "デバイスにアプリをインストールする",
       "desc": "デバイスにアプリをインストールするには、マネージャーに移動してください。デバイスにアプリを入手後、アカウントの追加が可能になります。",
       "buttons": {
-        "installApp": "マネージャーに移動",
+        "installApp": "「管理」に移動",
         "help": "ヘルプ"
       }
     },
@@ -1165,7 +1165,7 @@
       "desc": "暗号資産の管理を開始するにはアカウントを追加してください。デバイスに暗号資産のアプリがインストールされている必要があります。",
       "buttons": {
         "addAccount": "アカウントを追加",
-        "installApp": "アプリをインストールするにはマネージャーに移動してください。",
+        "installApp": "「管理」に移動してアプリをインストール",
         "help": "ヘルプ"
       }
     }
@@ -1399,11 +1399,11 @@
     "quitApp": "デバイスのアプリケーションを終了する",
     "appNotInstalledTitle": "必要なアプリが揃っていません。",
     "appNotInstalledTitle_plural": "必要なアプリが揃っていません。",
-    "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。マネージャーに移動して、デバイスにインストールしてください。",
-    "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。マネージャーに移動して、デバイスにインストールしてください",
+    "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
+    "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "openManager": "マネージャーを開く",
     "outdated": "アプリのバージョンが最新ではありません。",
-    "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。マネージャーに移動してアップデートしてください。",
+    "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
     "installAppDescription": "インストールが完了するまでお待ちください。",
     "listApps": "アプリの依存関係を確認しています。",
@@ -1441,8 +1441,8 @@
     },
     "disconnected": {
       "title": "お使いのデバイスでアプリが開いているようです",
-      "subtitle": "「管理」を再度開いて、デバイスのアプリが終了する",
-      "ctaReopen": "「管理」を再度開く",
+      "subtitle": "Reopening the Manager will quit the app on your device",
+      "ctaReopen": "Reopen Manager",
       "ctaPortfolio": "「ポートフォリオ」に戻る"
     },
     "deviceStorage": {
@@ -1510,9 +1510,9 @@
         "learnMoreTooltip": "{{appName}} についての詳細",
         "removeTooltip": "{{appName}} をアンインストール",
         "useAppForToken": "{{tokenType}} トークンを管理しますか？",
-        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
-        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>を持っていることを確認してください。",
-        "goToAccounts": "アカウントへ移動",
+        "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
+        "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
+        "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール"
       },
       "uninstall": {
@@ -1544,7 +1544,7 @@
       "updateBtn": "ファームウェアをアップデート",
       "banner": {
         "warning": "ファームウェアを最新の{{latestFirmware}}へアップデート可能です。",
-        "cta": "マネージャーを開く",
+        "cta": "「管理」を開く",
         "old": {
           "warning": "デバイスのファームウェアのバージョンが古いため、アップデートできません。Ledgerサポートに連絡して、デバイスを交換してください。",
           "cta": "サポートへのお問い合わせ"
@@ -1591,11 +1591,11 @@
       "cancelReinstallCTA": "アップデートをインストール",
       "resetSteps": {
         "first": "1. デバイスをリセット",
-        "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続します。",
-        "turnOn": "デバイスのボタンを押して電源をオンにします。",
+        "connect": "USBケーブルを使用して、{{deviceName}} をコンピュータに接続する。",
+        "turnOn": "デバイスのボタンを押して電源をオンにする。",
         "falsePin": "デバイスをリセットするには、間違ったPINを3回入力してください。",
         "turnOff": "{{action}} が表示されるまで、サイドボタンを長押ししてください。",
-        "confirmTurnOff": "{{action}} をタップして確認してください。",
+        "confirmTurnOff": "{{action}} をタップして確認する。",
         "second": "2. {{mode}} モードで起動",
         "boot": "{{option}} が表示されるまで、サイドボタンを長押ししてください。",
         "recoveryMode": "{{mode}} モードをタップします。ダッシュボードが表示されるまでお待ちください。",
@@ -2553,7 +2553,7 @@
       "currencies": "暗号資産",
       "help": "ヘルプ",
       "about": "Ledgerについて",
-      "experimental": "Experimental features（開発者向け実験機能）",
+      "experimental": "試験的機能",
       "accounts": "アカウント",
       "developer": "デベロッパー"
     },
@@ -2581,7 +2581,7 @@
       "languageDesc": "Ledger Liveに表示される言語を設定します。",
       "theme": "テーマ",
       "themeDesc": "テーマを選択",
-      "counterValue": "優先する通貨",
+      "counterValue": "表示通貨",
       "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択してください。",
       "region": "地域",
       "regionDesc": "Ledger Liveのタイムゾーンを設定するには、お住まいの地域を選択してください。",
@@ -2597,8 +2597,8 @@
       },
       "debugApps": "デバッグアプリを許可する",
       "debugAppsDesc": "デバッグとしてタグ付けされたプラットフォームアプリの表示と実行を許可します。",
-      "experimentalApps": "実験的なアプリを許可する",
-      "experimentalAppsDesc": "実験的としてタグ付けされたプラットフォームアプリの表示と実行を許可する",
+      "experimentalApps": "試験的なアプリを許可する",
+      "experimentalAppsDesc": "試験的とタグ付けされたプラットフォームアプリの表示と実行を許可する。",
       "catalogServer": "カタログプロバイダーの設定",
       "catalogServerDesc": "複数のプラットフォームアプリのソースを切り替える",
       "enablePlatformDevTools": "プラットフォーム開発ツールの有効化",
@@ -2649,15 +2649,15 @@
       "privacyDesc": "当社のプライバシーポリシーをお読みになり、当社が収集する個人データや使用目的および使用方法についてご理解ください。"
     },
     "experimental": {
-      "disclaimer": "これらは、テクノロジーファンのコミュニティ向けに、現状のまま提供される実験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にすると、あなたは自己責任でこれらの機能を使用することに同意したことになります。",
+      "disclaimer": "テクノロジーファンのコミュニティ向けに、現状のまま提供される試験的な機能です。これらの機能は随時変更、破損、または削除される可能性があります。このオプションを有効にした場合、自己責任でこれらの機能を利用することに同意したことになります。",
       "features": {
         "apiTrongridProxy": {
           "title": "TronGrid.ioを使用",
           "description": "LedgerプロキシなしでTronGridを直接を使用する"
         },
         "experimentalCurrencies": {
-          "title": "実験的なJSの実装",
-          "description": "実験的なビットコイン（Taproot）とテゾスのJS実装をご利用ください。"
+          "title": "試験的JSの実装",
+          "description": "Bitcoin (Taproot) とTezosの試験的JS実装を利用する"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2665,14 +2665,14 @@
         },
         "managerDevMode": {
           "title": "デベロッパーモード",
-          "description": "開発者用アプリとテストネットアプリをマネージャーに表示します。"
+          "description": "開発者用アプリとテストネットアプリを「管理」に表示します。"
         },
         "scanForInvalidPaths": {
           "title": "拡張アカウント検索",
           "description": "誤った派生パスを持つアカウントをスキャンする検出された資産は、通常のアカウントに送金してください。"
         },
         "experimentalExplorers": {
-          "title": "実験的なエクスプローラーAPI",
+          "title": "試験的エクスプローラーAPI",
           "description": "Ledgerのブロックチェーンエクスプローラーの、新バージョンをお試しいただけます。この設定を変更すると、アカウントの残高と同期、および送金機能に影響を与える可能性があります。\n(&lt;0&gt;&lt;/0&gt;)"
         },
         "keychainObservableRange": {
@@ -3640,7 +3640,7 @@
     },
     "FirmwareOrAppUpdateRequired": {
       "title": "ファームウェアまたはアプリのアップデートが必要です。",
-      "description": "マネージャーを使用してすべてのアプリをアンインストールし、ファームウェアのアップデートが利用可能かどうかを確認してから、アプリを再インストールしてください。"
+      "description": "「管理」からすべてのアプリをアンインストール後、ファームウェアのアップデートが利用可能かどうかを確認してから、アプリを再インストールしてください。"
     },
     "LatestFirmwareVersionRequired": {
       "title": "Nanoファームウェアのアップデート",
@@ -3823,7 +3823,7 @@
     },
     "UpdateYourApp": {
       "title": "アプリのアップデートが必要です。",
-      "description": "マネージャーで{{managerAppName}} アプリをアンインストールし、再インストールしてください。"
+      "description": "「管理」で{{managerAppName}} アプリをアンインストール後、再インストールしてください。"
     },
     "DeviceOnDashboardExpected": {
       "title": "ダッシュボードに戻る",
@@ -3843,7 +3843,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "アプリのアップデートが必要です。",
-      "description": "マネージャーで{{managerAppName}} アプリをアンインストールし、再インストールしてください。"
+      "description": "「管理」で{{managerAppName}} アプリをアンインストール後、再インストールしてください。"
     },
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}} アドレスではありません。"
@@ -3881,7 +3881,7 @@
       "list": {
         "1": "ボタンを押さずにUSBケーブルの取り外しや再接続をしてください。",
         "2": "両方のボタンを同時に3回押すと、ダッシュボードが表示されます。",
-        "3": "マネージャーを開き、ファームウェアをアップデートをクリック。"
+        "3": "「管理」を開き、ファームウェアをアップデートをクリック。"
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {
