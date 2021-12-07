@@ -678,7 +678,7 @@
     "openInExplorer": "Tarayıcıda aç",
     "emptyState": {
       "title": "Henüz kripto varlığınız yok mu?",
-      "desc": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve almaya başlayın",
+      "desc": "<1><0>{{managerAppName}}</0></1> uygulaması yüklüyse hesabınıza varlık almaya başlayabilirsiniz",
       "descToken": "<1><0>{{managerAppName}}</0></1> uygulamasının yüklü olduğundan emin olun ve <3><0>{{ticker}}</0></3> ile <5><0>{{tokenList}}</0>token'larını almaya başlayın</5>",
       "buttons": {
         "receiveFunds": "Al",
