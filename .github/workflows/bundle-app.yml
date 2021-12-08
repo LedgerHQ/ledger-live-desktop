@@ -119,6 +119,8 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: kill dpkg
+        run: sudo killall -w dpkg || echo OK
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
       - name: get yarn cache
