@@ -4,9 +4,11 @@ import { SwapPage } from "../models/SwapPage";
 import { DeviceAction } from "../models/DeviceAction";
 
 // Comment out to disable recorder
-// process.env.PWDEBUG = "1";
+process.env.PWDEBUG = "1";
 
-test.use({ userdata: "1AccountBTC1AccountETH" });
+test.use({ userdata: "1AccountBTC1AccountETH", 
+// env: { DEV_TOOLS: true }
+});
 
 test("Swap", async ({ page }) => {
   const swapPage = new SwapPage(page);
@@ -42,12 +44,15 @@ test("Swap", async ({ page }) => {
     const originalSwapId = await swapPage.verifySuccessfulExchange();
     swapId = originalSwapId.replace("#", "");
     expect(await page.screenshot()).toMatchSnapshot("confirm-swap.png");
+    // await page.pause();
   });
 
   await test.step("Verify Swap details are present in the exchange drawer", async () => {
+    await swapPage.navigateToExchangeDetails();
     detailsSwapId = await swapPage.verifyExchangeDetails();
     expect(detailsSwapId).toEqual(swapId);
     expect(await page.screenshot()).toMatchSnapshot("verify-swap-details.png");
+    // await page.pause();
   });
 
   await test.step("Verify Swap details are present in the swap history", async () => {

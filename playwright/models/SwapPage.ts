@@ -39,8 +39,11 @@ export class SwapPage {
     return this.swapId.innerText();
   }
 
-  async verifyExchangeDetails() {
+  async navigateToExchangeDetails() {
     await this.seeDetailsButton.click();
+  }
+
+  async verifyExchangeDetails() {
     await this.detailsSwapId.waitFor({ state: 'visible'});
     return this.detailsSwapId.innerText();
   }
