@@ -17,7 +17,7 @@ export class SwapPage {
     this.exchangeButton = page.locator('data-test-id=exchange-button');
     this.swapId = page.locator('data-test-id=swap-id');
     this.seeDetailsButton = page.locator('button:has-text("See details")');
-    this.detailsSwapId = page.locator('data-test-id=details-swap-id');
+    this.detailsSwapId = page.locator('data-test-id=details-swap-id').first();
     this.sideDrawerCloseButton = page.locator('.sidedrawer-close');
   }
 
@@ -41,6 +41,7 @@ export class SwapPage {
 
   async navigateToExchangeDetails() {
     await this.seeDetailsButton.click();
+    await this.swapId.waitFor({ state: 'hidden'}); // for some reason the detailsSwapId visible check below is not sufficient and we need to check that this element is gone before checking the new page is available.
   }
 
   async verifyExchangeDetails() {
