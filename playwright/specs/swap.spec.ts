@@ -17,6 +17,7 @@ test("Swap", async ({ page }) => {
 
   await test.step("Open Swap Page", async () => {
     await swapPage.navigate();
+    await swapPage.moveToExchangeButton(); // force the mouse to move to this button so the drawer collapse button disappears
     expect(await page.screenshot()).toMatchSnapshot("open-swap-page.png");
   });
 

@@ -48,4 +48,8 @@ export class SwapPage {
   async exitExchangeDrawer() {
     await this.sideDrawerCloseButton.click();
   }
+
+  async moveToExchangeButton() {
+    await this.exchangeButton.hover({ force: true });
+  }
 }
