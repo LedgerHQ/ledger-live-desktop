@@ -673,7 +673,7 @@
     }
   },
   "account": {
-    "lastOperations": "前回のオペレーション",
+    "lastOperations": "前回の取引",
     "contractAddress": "コントラクト：",
     "openInExplorer": "エクスプローラーで開く",
     "emptyState": {
@@ -1140,7 +1140,7 @@
       "desc": "アカウントを追加して、他の暗号資産を管理",
       "createAccount": "アカウントを追加"
     },
-    "recentActivity": "前回のオペレーション",
+    "recentActivity": "前回の取引",
     "totalBalance": "総資産",
     "transactionsPendingConfirmation": "一部のトランザクションはまだ承認されていません。これらは承認後に残高に反映され、使用可能になります。"
   },
@@ -1328,7 +1328,7 @@
   },
   "operationDetails": {
     "whatIsThis": "この操作は何ですか？",
-    "title": "オペーレーション詳細",
+    "title": "取引詳細",
     "type": "種類",
     "amount": "数量",
     "account": "アカウント",
@@ -2439,7 +2439,7 @@
           "label": "承認",
           "success": {
             "title": "トランザクションが正常に送信されました。",
-            "text": "操作は、すぐに履歴で確認できます。",
+            "text": "取引はすぐに履歴で確認できます。",
             "cta": "詳細を表示"
           },
           "pending": {
@@ -2564,7 +2564,7 @@
         "button": "エクスポート"
       },
       "operations": {
-        "title": "オペレーション履歴",
+        "title": "取引履歴",
         "desc": "コンピューターに、アカウント取引のCSVファイルを保存する。"
       },
       "modal": {
@@ -3431,7 +3431,7 @@
       "delegate": "操作を完了するために、デバイスで確認してください。",
       "undelegate": "操作を完了するために、デバイスで確認してください。",
       "redelegate": "操作を完了するために、デバイスで確認してください。",
-      "claimRewardCompound": "操作を完了するために、デバイスで確認してください。",
+      "claimRewardCompound": "取引を完了するために、デバイスで確認してください。",
       "nominate": "操作を完了するために、デバイスで確認してください。",
       "chill": "操作を完了するために、デバイスで確認してください。",
       "bond": "操作を完了するために、デバイスで確認してください。",
@@ -3494,8 +3494,8 @@
       "description": "エラーが発生しました。再試行するかLedgerサポートにお問い合わせください。"
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "このアカウントには保留中のオペレーションがあります。",
-      "description": "処理が完了するまでお待ちください。"
+      "title": "このアカウントには保留中の取引があります。",
+      "description": "取引が完了するまでお待ちください。"
     },
     "AccountNameRequired": {
       "title": "アカウント名が必要です",
