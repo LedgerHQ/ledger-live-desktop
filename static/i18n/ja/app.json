@@ -176,7 +176,7 @@
       "week": "週",
       "month": "月",
       "year": "年",
-      "all": "すべて"
+      "all": "ALL"
     }
   },
   "fees": {
@@ -964,7 +964,7 @@
     },
     "noEthAccount": {
       "title": "ETHアカウントを作成してください。",
-      "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、イーサリアムアプリをインストールし、イーサリアムアカウントを作成してください",
+      "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、Ethereumアプリをインストールし、Ethereumアカウントを作成してください",
       "cta": "アカウントを追加"
     },
     "emptyAccountDeposit": {
@@ -988,7 +988,7 @@
       "week": "週",
       "month": "月",
       "year": "年",
-      "all": "すべて"
+      "all": "All"
     },
     "optionsMenu": {
       "title": "オプション",
@@ -1124,8 +1124,8 @@
       },
       "confirm": {
         "title": "接続",
-        "details": "ウォレットを通じて以下のイーサリアムアカウントに接続しようとしています：",
-        "deeplinkDetails": "Ledger Liveに接続します。イーサリアムアカウントを選択："
+        "details": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
+        "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択："
       }
     },
     "connectedscreen": {
@@ -1464,7 +1464,7 @@
       "noResultsDesc": "スペルを確認してから、もう一度お試しください。",
       "filter": {
         "title": "表示",
-        "all": "すべて",
+        "all": "All",
         "supported": "Live対応済み",
         "installed": "インストール済み",
         "not_installed": "未インストール"
@@ -1601,7 +1601,7 @@
         "recoveryMode": "{{mode}} モードをタップします。ダッシュボードが表示されるまでお待ちください。",
         "third": "3. すべてのアプリをアンインストール",
         "openLive": "Ledger Liveで「管理」を開く",
-        "uninstall": "{{deviceName}} に現在インストールされている、すべてのアプリのグレーのゴミ箱アイコンをクリックします。これにより、ファームウェアインストーラ用のスペースが確保されます。",
+        "uninstall": "現在{{deviceName}} にインストールされている、すべてのアプリのグレーのゴミ箱アイコンをクリックする。これにより、ファームウェアインストーラ用のスペースが確保されます。",
         "disclaimer": "注意：あなたの資金は、この操作の影響を受けません。 ブロックチェーンの暗号資産にアクセスするための秘密鍵は、リカバリーシートに保管されています。"
       }
     }
@@ -3979,7 +3979,7 @@
       "description": "問題が発生しました。再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "EthAppPleaseEnableContractData": {
-      "title": "イーサリアムアプリの設定でコントラクトデータを有効にしてください。"
+      "title": "Ethereumアプリの設定でコントラクトデータを有効にしてください。"
     },
     "InvalidXRPTag": {
       "title": "無効なXRP宛先タグ"
