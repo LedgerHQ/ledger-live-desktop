@@ -144,7 +144,7 @@ export const StepChooseCurrencyFooter = ({
           primary
           disabled={!currency || fullNodeNotReady}
           onClick={() => transitionTo("connectDevice")}
-          id="modal-continue-button"
+          data-test-id="modal-continue-button"
         >
           {t("common.continue")}
         </Button>
