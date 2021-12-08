@@ -16,7 +16,8 @@
       "~/*": ["src/*"]
     },
     "skipLibCheck": true,
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "noEmit": true
   },
   "include": ["src/**/*"],
   "exclude": [
@@ -25,6 +26,6 @@
     "metro.config.js",
     "jest.config.js",
     "./scripts",
-    "./lib",
+    "./lib"
   ]
 }
