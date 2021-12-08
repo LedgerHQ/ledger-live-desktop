@@ -13,7 +13,7 @@
       "broadcast": {
         "toast": {
           "title": "トランザクションが送信されました！",
-          "text": "処理の詳細はこちらをクリック"
+          "text": "取引の詳細はこちらをクリック"
         }
       }
     },
@@ -3811,7 +3811,7 @@
     },
     "UserRefusedOnDevice": {
       "title": "アクションが拒否されました。",
-      "description": "デバイス上で処理を拒否しました。"
+      "description": "デバイス上で操作を拒否しました。"
     },
     "TransactionRefusedOnDevice": {
       "title": "デバイス上で操作が却下されました。",
