@@ -1386,7 +1386,7 @@
     }
   },
   "operationList": {
-    "noMoreOperations": "これで全部です。"
+    "noMoreOperations": "以上です。"
   },
   "DeviceAction": {
     "allowAppPermission": "デバイスで{{wording}} アプリを開く",
@@ -1840,16 +1840,16 @@
   "distribution": {
     "asset": "資産",
     "price": "価格",
-    "distribution": "割り当て",
+    "distribution": "配分",
     "amount": "数量",
-    "value": "価値",
+    "value": "金額",
     "showAll": "すべてを表示",
     "showLess": "表示を減らす",
     "header": "資産配分（{{count}}）"
   },
   "accountDistribution": {
     "account": "アカウント",
-    "distribution": "分配",
+    "distribution": "配分",
     "amount": "数量",
     "value": "価値",
     "header": "アカウント配分（{{count}}）"
