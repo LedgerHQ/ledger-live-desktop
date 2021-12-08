@@ -6,12 +6,12 @@ export class AddAccountModal extends Modal {
   readonly addAccountButton: Locator;
   readonly selectAccount: Locator;
   readonly selectAccountInput: Locator;
+  readonly accountsListLoader: Locator;
   readonly addAccountsButton: Locator;
   readonly stopButton: Locator;
   readonly retryButton: Locator;
   readonly addMoreButton: Locator;
   readonly doneButton: Locator;
-  readonly tokenAddAccountButton: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -19,12 +19,12 @@ export class AddAccountModal extends Modal {
     this.addAccountButton = page.locator('data-test-id=portfolio-empty-state-add-account-button');
     this.selectAccount = page.locator("text=Choose a crypto asset"); // FIXME: I need an id
     this.selectAccountInput = page.locator('[placeholder="Search"]'); // FIXME: I need an id
+    this.accountsListLoader = page.locator('data-test-id=add-accounts-sync-loader');
     this.addAccountsButton = page.locator('data-test-id=add-accounts-import-add-button');
     this.retryButton = page.locator('data-test-id=add-accounts-import-retry-button');
     this.stopButton = page.locator('data-test-id=add-accounts-import-stop-button');
     this.addMoreButton = page.locator('data-test-id=add-accounts-finish-add-more-button');
     this.doneButton = page.locator('data-test-id=add-accounts-finish-close-button');
-    this.tokenAddAccountButton = page.locator('data-test-id=modal-token-continue-button');
   }
 
   async open() {
@@ -41,11 +41,13 @@ export class AddAccountModal extends Modal {
     await this.addAccountsButton.click();
   }
 
-  async continueParent() {
-    await this.tokenAddAccountButton.click();
-  }
-
   async done() {
     await this.doneButton.click();
+  }
+
+  async waitForSync() {
+    await this.accountsListLoader.waitFor({ state: "hidden" });
+    await this.stopButton.waitFor({ state: "hidden" });
+    await this.addAccountsButton.waitFor({ state: "visible" }); 
   }
 }

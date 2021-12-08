@@ -23,7 +23,7 @@ const Receive2NoDevice = ({
           </Button>
         ) : null}
         {onContinue ? (
-          <Button ml={2} primary onClick={onContinue}>
+          <Button ml={2} primary onClick={onContinue} data-test-id="modal-continue-button">
             <Trans i18nKey="common.continue" />
           </Button>
         ) : null}
