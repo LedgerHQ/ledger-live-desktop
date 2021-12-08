@@ -1988,7 +1988,7 @@
       "reward": "報酬獲得を申請",
       "currentDelegation": "デリゲート済み：<0>{{amount}}</0>",
       "estYield": "推定利回り",
-      "activeTooltip": "デリゲートされた数が報酬になります。",
+      "activeTooltip": "デリゲートした分の報酬になります。",
       "inactiveTooltip": "デリゲート解除された数は、報酬を生成しません。",
       "minSafeWarning": "残高不足です。",
       "flow": {
@@ -2034,8 +2034,8 @@
             "compoundOrClaim": "コンパウンドとキャッシュイン？",
             "compoundDescription": "報酬はデリゲート額に加算されます。",
             "claimDescription": "報酬は利用可能残高に加算されます。",
-            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
-            "claimInfo": "<0>{{amount}}</0>を以下のバリデーターから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
+            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすると、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
+            "claimInfo": "以下のバリデーターから<0>{{amount}}</0>を獲得しました。「続行」をクリックすると、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
             "selectLabel": "デリゲートを選ぶ"
           },
           "connectDevice": {
@@ -3520,7 +3520,7 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "報酬が、獲得に必要となる推定手数料を下回っています。",
+      "title": "報酬額が、申請に必要な推定手数料を下回っています。",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
