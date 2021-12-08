@@ -35,7 +35,7 @@ const mapDispatchToProps = (dispatch: () => {}, { name, onClose = () => {} }: Pr
 };
 
 export type RenderProps = {
-  onClose?: () => {};
+  onClose?: () => void;
   data: any;
 };
 
@@ -43,13 +43,13 @@ type Props = {
   isOpened?: boolean;
   children?: any;
   centered?: boolean;
-  onClose?: () => {};
-  onHide?: () => {};
+  onClose?: () => void;
+  onHide?: () => void;
   render?: (props: RenderProps) => React.ReactNode;
   data?: any;
   preventBackdropClick?: boolean;
   width?: number;
-  theme: any;
+  theme?: any;
   name?: string;
   onBeforeOpen?: ({ data }: { data: Pick<RenderProps, "data"> }) => {};
   backdropColor?: boolean;
