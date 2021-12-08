@@ -23,14 +23,16 @@ type CryptocurrencyHeaderType = { currency: MarketCurrencyInfo, loading: boolean
 const Title: ThemedComponent<{}> = styled(Text)`
   color: ${p => p.theme.colors.palette.text.shade100};
   font-size: 28px;
+  line-height: 34px;
   text-transform: uppercase;
-  font-weight: 500;
-  padding-right: 8px;
+  font-weight: 600;
+  margin-right: 8px;
 `;
 
 const Symbol: ThemedComponent<{}> = styled(Text)`
   color: ${p => p.theme.colors.palette.text.shade30};
   font-size: 22px;
+  line-height: 140%;
   text-transform: uppercase;
   font-weight: 500;
 `;
@@ -39,13 +41,13 @@ function CryptocurrencyHeader({ currency, loading }: CryptocurrencyHeaderType) {
   return (
     <Box py={2}>
       <Box horizontal alignItems="center">
-        <Box horizontal pr={3}>
+        <Box horizontal>
           <CryptoCurrencyIconWrapper>
             {loading ? <LoadingPlaceholder /> : <img src={currency.image} alt={"Currency logo"} />}
           </CryptoCurrencyIconWrapper>
         </Box>
-        <Box px={16}>
-          <Box horizontal alignItems="center">
+        <Box ml={12}>
+          <Box horizontal alignItems="flex-end">
             <Title>
               {loading ? (
                 <LoadingPlaceholder style={{ height: "34px", width: "115px" }} />

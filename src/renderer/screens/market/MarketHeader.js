@@ -29,7 +29,7 @@ const MarketHeader = () => {
 
   const onFilterClick = useCallback(() => {
     dispatch(openMarketFilterDrawer());
-  }, [dispatch]);
+  });
 
   return (
     <Box horizontal style={{ paddingBottom: 32 }}>

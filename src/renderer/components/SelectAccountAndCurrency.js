@@ -107,7 +107,7 @@ const SelectAccountAndCurrency = ({
 
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow }));
-  }, [dispatch, currency]);
+  }, [dispatch, currency, flow]);
 
   const addOrSelectAccount = () => {
     if (!currency) {

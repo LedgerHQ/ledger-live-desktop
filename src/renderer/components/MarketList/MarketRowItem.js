@@ -29,6 +29,14 @@ const CurrencyTicker: ThemedComponent<{}> = styled("div")`
   color: ${p => p.theme.colors.palette.text.shade30};
 `;
 
+const BuySwapBtn = styled(Button)`
+  background-color: ${p => rgba(p.theme.colors.palette.primary.main, 0.1)};
+  color: ${p => p.theme.colors.palette.primary.main};
+  border: none;
+  height: unset;
+  padding: 5px 8px;
+`;
+
 const Row: ThemedComponent<{}> = styled(Box)`
   background: ${p => p.theme.colors.palette.background.paper};
   border-radius: 4px;
@@ -40,7 +48,7 @@ const Row: ThemedComponent<{}> = styled(Box)`
   flex-direction: column;
   flex: 1;
   font-weight: 600;
-  justify-content: flex-start;
+  justify-content: flex-end;
   position: relative;
   transition: background-color ease-in-out 200ms;
 
@@ -141,14 +149,14 @@ function MarketRowItem(props: Props) {
                 {!loading && currency.supportedCurrency && (
                   <>
                     {isCurrencySupported("BUY", currency.supportedCurrency) && (
-                      <Button outlineGrey small mr={20} onClick={onBuy}>
+                      <BuySwapBtn outlineGrey small mr={20} onClick={onBuy}>
                         Buy
-                      </Button>
+                      </BuySwapBtn>
                     )}
                     {isCurrencySupported("SELL", currency.supportedCurrency) && (
-                      <Button outlineGrey small onClick={onSwap}>
+                      <BuySwapBtn outlineGrey small onClick={onSwap}>
                         Swap
-                      </Button>
+                      </BuySwapBtn>
                     )}
                   </>
                 )}

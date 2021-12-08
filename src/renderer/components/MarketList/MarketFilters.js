@@ -150,7 +150,10 @@ function MarketFilters() {
   };
 
   const onApplyFilters = useCallback(() => {
-    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, { filters: { isLedgerCompatible, isFavorite } });
+    contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, {
+      filters: { isLedgerCompatible, isFavorite },
+      page: 1,
+    });
     dispatch(closePlatformAppDrawer());
   }, [contextDispatch, dispatch, isFavorite, isLedgerCompatible]);
 

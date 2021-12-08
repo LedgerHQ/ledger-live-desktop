@@ -98,7 +98,6 @@ function PriceStats({ currency, loading }: { currency: MarketCurrencyInfo, loadi
             {currency.price_change_percentage_in_currency ? (
               <FormattedVal
                 isPercent
-                animateTicker
                 isNegative
                 val={Math.round(currency.price_change_percentage_in_currency)}
                 inline

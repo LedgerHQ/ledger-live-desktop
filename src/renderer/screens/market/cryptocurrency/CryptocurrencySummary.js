@@ -129,6 +129,7 @@ export default function CryptocurrencySummary({
             renderTickY={discreetMode ? () => "" : renderTickY}
             renderTooltip={renderTooltip}
             key={1}
+            beginAtZero={false}
           />
         ) : (
           <Chart

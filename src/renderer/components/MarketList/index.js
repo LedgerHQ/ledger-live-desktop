@@ -74,8 +74,13 @@ export const RowContent: ThemedComponent<{
   ${Cell}:nth-child(2) {
     flex: 1;
   }
-  ${Cell}:nth-child(3+4) {
+  ${Cell}:nth-child(3) {
     flex: 0 0 150px;
+    justify-content: flex-end;
+  }
+  ${Cell}:nth-child(4) {
+    width: 150px;
+    box-sizing: border-box;
     justify-content: flex-end;
   }
   ${Cell}:nth-child(5) {
@@ -113,6 +118,7 @@ function MarketList() {
   const { t } = useTranslation();
 
   const { contextState, contextDispatch } = useContext(MarketContext);
+
   const {
     coins,
     range,
@@ -140,7 +146,7 @@ function MarketList() {
     if (error) {
       contextDispatch(GET_MARKET_CRYPTO_CURRENCIES, failedMarketParams);
     }
-  }, [coins, contextDispatch, error, failedMarketParams, loading, reload]);
+  }, [coins, error, failedMarketParams, loading, reload]);
 
   const onSort = useCallback(
     key => {
@@ -209,8 +215,8 @@ function MarketList() {
             {t("market.marketList.name")}
             <SortIconStyled order={orderBy === "id" ? order : ""} />
           </Cell>
-          <Cell onClick={() => onSort("current_price")}>{t("market.marketList.price")}</Cell>
-          <Cell onClick={() => onSort(`price_change_percentage_${range}`)}>
+          <Cell>{t("market.marketList.price")}</Cell>
+          <Cell>
             % {t("market.marketList.change")} ({t(`market.range.${rangeData.simple}`)})
           </Cell>
           <Cell>{t("market.marketList.marketCap")}</Cell>

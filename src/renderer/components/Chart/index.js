@@ -56,6 +56,7 @@ export type Props = {
   renderTickY: (t: number) => string | number,
   valueKey?: string,
   loading?: boolean,
+  beginAtZero?: boolean,
 };
 
 const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
@@ -76,6 +77,7 @@ export default function Chart({
   renderTooltip,
   valueKey = "value",
   loading,
+  beginAtZero = true,
 }: Props) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
@@ -171,7 +173,7 @@ export default function Chart({
               zeroLineColor: loading ? theme.background.paper : theme.text.shade10,
             },
             ticks: {
-              beginAtZero: true,
+              beginAtZero: beginAtZero,
               suggestedMax: 1 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: loading ? theme.background.paper : theme.text.shade60,
@@ -199,6 +201,7 @@ export default function Chart({
       tickXScale,
       magnitude,
       renderTickY,
+      beginAtZero,
     ],
   );
 
