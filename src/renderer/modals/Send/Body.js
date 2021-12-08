@@ -197,12 +197,8 @@ const Body = ({
 
   const handleChangeNFT = useCallback(
     nextNft => {
-      const nextAccount = accounts.find(a => a?.nfts.find(({ id }) => nextNft.id));
-
-      if (account !== nextAccount) {
-        setAccount(nextAccount);
-      }
-      const bridge = getAccountBridge(nextAccount);
+      setAccount(account);
+      const bridge = getAccountBridge(account);
       const standard = nextNft.collection.standard.toLowerCase();
 
       setTransaction(
@@ -214,7 +210,7 @@ const Body = ({
         }),
       );
     },
-    [account, accounts, setAccount, setTransaction, transaction],
+    [account, setAccount, setTransaction, transaction],
   );
 
   const handleChangeQuantities = useCallback(

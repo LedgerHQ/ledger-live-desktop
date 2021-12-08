@@ -15,7 +15,7 @@ const main = async () => {
     if (imgChanged.length === 1 && imgChanged[0] === "") {
       imgChanged = [];
     }
-  } catch(e) {
+  } catch (e) {
     imgChanged = [];
   }
   const testoutput = await fs.readFile(core.getInput("testoutput"), "utf8");
