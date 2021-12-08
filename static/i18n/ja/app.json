@@ -1141,7 +1141,7 @@
       "createAccount": "アカウントを追加"
     },
     "recentActivity": "前回のオペレーション",
-    "totalBalance": "合計残高",
+    "totalBalance": "総資産",
     "transactionsPendingConfirmation": "一部のトランザクションはまだ承認されていません。これらは承認後に残高に反映され、使用可能になります。"
   },
   "currentAddress": {
