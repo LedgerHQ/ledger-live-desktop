@@ -1044,7 +1044,7 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "試験的設定の変更には、Cacheをクリアする必要があります。",
+      "title": "試験的設定の変更には、Cacheを削除する必要があります。",
       "cta": "Cacheを消去"
     },
     "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
@@ -2622,7 +2622,7 @@
       "passwordAutoLock": "オートロック",
       "passwordAutoLockDesc": "非アクティブ時にLedger Liveを自動的にロックします。",
       "changePassword": "パスワードの変更",
-      "softResetTitle": "キャッシュを削除",
+      "softResetTitle": "Cacheを削除",
       "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期する。",
       "softReset": "削除",
       "resetKYC": "本人確認手続きデータをリセット",
@@ -2691,12 +2691,12 @@
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
-      "title": "キャッシュを削除",
-      "desc": "キャッシュデータを消去すると、ネットワークが強制的に再同期されます。設定とアカウントは保存されます。暗号資産にアクセスするためのプライベートキーは、Ledgerデバイスとリカバリーシートに安全に保管されます。"
+      "title": "Cacheを削除",
+      "desc": "Cacheデータを削除すると、ネットワークが強制的に再同期されます。設定とアカウントは保存されます。暗号資産にアクセスするためのプライベートキーは、Ledgerデバイスとリカバリーシートに安全に保管されます。"
     },
     "resetFallbackModal": {
       "title": "必要なユーザーアクション",
-      "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
+      "part1": "Cacheフォルダを削除できませんでした。手作業でフォルダを削除してください。",
       "part2": "フォルダを開くボタンをクリックして",
       "part3": "アプリを終了",
       "part4": "\"sqlite\"フォルダを手作業で削除します。",
