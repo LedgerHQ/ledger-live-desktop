@@ -3520,7 +3520,7 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "Ödüller, ödülü almak için gereken tahmini ücretlerden daha küçük.",
+      "title": "Ödül miktarı, ödülü almak için gereken tahmini ağ ücretlerinden daha az",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
