@@ -77,7 +77,7 @@
     "selectAccountNoOption": "{{accountName}} と一致するアカウントがありません。",
     "selectCurrency": "暗号資産を選択",
     "selectCurrencyNoOption": "{{currencyName}} が見つかりませんでした。",
-    "selectValidatorNoOption": "\"{{accountName}}\"に一致するバリデータがありません。",
+    "selectValidatorNoOption": "\"{{accountName}}\"に一致するバリデーターがありません。",
     "selectNoResults": "\"{{query}}\"に一致する結果は見つかりませんでした。",
     "sortBy": "並び替え",
     "save": "保存",
@@ -1365,7 +1365,7 @@
       "unfreezeAmount": "凍結解除額",
       "votes": "{{number}} 票",
       "votesAddress": "<2>{{name}}</2>に<0>{{votes}}</0>",
-      "validators": "バリデータ",
+      "validators": "バリデーター",
       "redelegated": "再デリゲート済み",
       "redelegatedFrom": "再デリゲート元",
       "redelegatedTo": "再デリゲート先",
@@ -1382,7 +1382,7 @@
       "withdrawUnbondedAmount": "引き出し額",
       "palletMethod": "方法",
       "transferAmount": "送付額",
-      "validatorsCount": "バリデータ（{{number}}）"
+      "validatorsCount": "バリデーター（{{number}}）"
     }
   },
   "operationList": {
@@ -1696,9 +1696,9 @@
         "maxSelected": "最大選択数：{{total}}",
         "allVotesAreUsed": "すべての資産が分配されます。",
         "maxUsed": "資金が不足しています。",
-        "validators": "バリデータ ({{total}})",
+        "validators": "バリデーター ({{total}})",
         "votes": "利用可能な資産： {{total}}",
-        "noResults": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。"
+        "noResults": "<0>{{search}}</0>に該当するバリデーターが見つかりませんでした。"
       },
       "connectDevice": {
         "title": "デバイス"
@@ -1862,7 +1862,7 @@
         "drawerTitle": "Elrondの統合",
         "title": "Ledger Liveは、Elrond eGold（EGLD）トークン対応です。",
         "description": "Ledger Liveで、eGold（EGLD）トークンを安全に保管・管理できるようになりました。",
-        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデータの報酬など、さまざまな用途に使用されます。",
+        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデーターの報酬など、さまざまな用途に使用されます。",
         "description3": "LedgerはElrondチームと積極的に協力し、ステーキングやESDT（Elrond Standard Digital Token）のネイティブサポートなどの機能を追加していく予定です。",
         "website": "The Internet Scale Blockchain"
       }
@@ -1977,14 +1977,14 @@
         "delegation": "報酬を獲得する"
       },
       "claimRewards": "報酬獲得を申請",
-      "header": "デリゲーション",
+      "header": "デリゲート",
       "noRewards": "受け取れる報酬はありません。",
       "delegate": "追加",
       "undelegate": "デリゲート解除",
       "redelegate": "再デリゲート",
       "redelegateDisabledTooltip": "<0>{{days}}</0>に再デリゲートすることができます。",
-      "redelegateMaxDisabledTooltip": "一度に<0>7</0>名以上のバリデータを再デリゲートすることはできません。",
-      "undelegateDisabledTooltip": "一度に<0>7</0>以上のバリデータをデリゲート解除することはできません。",
+      "redelegateMaxDisabledTooltip": "一度に<0>7</0>名以上のバリデーターを再デリゲートすることはできません。",
+      "undelegateDisabledTooltip": "一度に<0>7</0>以上のバリデーターをデリゲート解除することはできません。",
       "reward": "報酬獲得を申請",
       "currentDelegation": "デリゲート済み：<0>{{amount}}</0>",
       "estYield": "推定利回り",
@@ -2002,11 +2002,11 @@
               "資産はデリゲート解除から21日後に、利用可能です。"
             ],
             "warning": {
-              "description": "バリデータは慎重に選択してください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
+              "description": "バリデーターは慎重に選択してください。良くないバリデーターに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
             }
           },
           "validator": {
-            "title": "バリデータ"
+            "title": "バリデーター"
           },
           "connectDevice": {
             "title": "デバイス"
@@ -2034,8 +2034,8 @@
             "compoundOrClaim": "コンパウンドとキャッシュイン？",
             "compoundDescription": "報酬はデリゲート額に加算されます。",
             "claimDescription": "報酬は利用可能残高に加算されます。",
-            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
-            "claimInfo": "<0>{{amount}}</0>を以下のバリデータから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
+            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
+            "claimInfo": "<0>{{amount}}</0>を以下のバリデーターから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
             "selectLabel": "デリゲートを選ぶ"
           },
           "connectDevice": {
@@ -2065,15 +2065,15 @@
         "steps": {
           "starter": {
             "title": "再デリゲート",
-            "description": "再デリゲートを使用して、バリデータを別のバリデータに変更できます。 しかし、再デリゲートすると21日間のタイムロックが発生するため、待たなければなりません。",
-            "warning": "バリデータを慎重に選んでください：バリデータが適切でない場合、デリゲートされた資産の一部が失われる可能性があります。 最大<0>7人の保留中再デリゲート</0>を持つことが可能です。",
+            "description": "再デリゲートを使用して、バリデーターを別のバリデーターに変更できます。 しかし、再デリゲートすると21日間のタイムロックが発生するため、待たなければなりません。",
+            "warning": "バリデーターを慎重に選んでください：バリデーターが適切でない場合、デリゲートされた資産の一部が失われる可能性があります。 最大<0>7人の保留中再デリゲート</0>を持つことが可能です。",
             "howDelegationWorks": "デリゲートの仕組み"
           },
           "validators": {
-            "title": "バリデータ",
+            "title": "バリデーター",
             "currentDelegation": "現在のデリゲート",
             "newDelegation": "新しいデリゲート",
-            "chooseValidator": "バリデータを選ぶ",
+            "chooseValidator": "バリデーターを選ぶ",
             "warning": "新しいバリゲータに変更したい場合は、再デリゲートするまで<0>21日間</0> 待機しなりません。"
           },
           "device": {
@@ -2103,7 +2103,7 @@
             "subtitle": "デリゲートの解除は<0>21日</0>で完了します。",
             "warning": "報酬はすぐにキャッシュインされます。 再デリゲート額は、<0>21日間のタイムロック</0>後に、利用可能残高へ戻されます。",
             "fields": {
-              "validator": "バリデータ",
+              "validator": "バリデーター",
               "amount": "デリゲート解除額"
             }
           },
@@ -2195,7 +2195,7 @@
   },
   "polkadot": {
     "lockedBalance": "ボンド中",
-    "lockedTooltip": "報酬を得るには、選出されたバリデータに資産をボンド（預け入れ）する必要があります。",
+    "lockedTooltip": "報酬を得るには、選出されたバリデーターに資産をボンド（預け入れ）する必要があります。",
     "unlockingBalance": "ボンド解除中",
     "unlockingTooltip": "ボンド解除中の資産は、引き出せるようになるまで28日間ロックされます。",
     "unlockedBalance": "ボンド解除済み",
@@ -2204,7 +2204,7 @@
     "bondedBalanceBelowMinimum": "ボンド残高が、現在の下限額{{minimumBondBalance}}を下回っています。ノミネートが解除されてしまう可能性があります。",
     "nomination": {
       "emptyState": {
-        "description": "資産をボンド（預け入れ）後、バリデータをノミネートすることで報酬を獲得できます。",
+        "description": "資産をボンド（預け入れ）後、バリデーターをノミネートすることで報酬を獲得できます。",
         "info": "ノミネートの仕組み"
       },
       "header": "ノミネーション",
@@ -2215,21 +2215,21 @@
       "amount": "ボンド済み額",
       "commission": "コミッション",
       "active": "アクティブ",
-      "activeTooltip": "このバリデータは選出済みで、ボンド済み資産に対する報酬を獲得中です。",
+      "activeTooltip": "このバリデーターは選出済みで、ボンド済み資産に対する報酬を獲得中です。",
       "inactive": "停止中",
-      "inactiveTooltip": "このバリデータは選出済みですが、ボンドされた資産に対する報酬を獲得していません。",
+      "inactiveTooltip": "このバリデーターは選出済みですが、ボンドされた資産に対する報酬を獲得していません。",
       "waiting": "未選出",
-      "waitingTooltip": "このバリデータは選出されていないため、報酬を獲得していません。",
-      "notValidator": "バリデータではありません。",
-      "notValidatorTooltip": "このアドレスはバリデータではありません。",
+      "waitingTooltip": "このバリデーターは選出されていないため、報酬を獲得していません。",
+      "notValidator": "バリデーターではありません。",
+      "notValidatorTooltip": "このアドレスはバリデーターではありません。",
       "elected": "選出済み",
       "nominatorsCount": "{{nominatorsCount}}名のノミネーター",
-      "nominatorsTooltip": "現在、このバリデータは{{count}}名のノミネーターにより選出されています。",
+      "nominatorsTooltip": "現在、このバリデーターは{{count}}名のノミネーターにより選出されています。",
       "oversubscribed": "ノミネーター超過（{{nominatorsCount}}）名",
       "oversubscribedTooltip": "ステーキング量上位{{maxNominatorRewardedPerValidator}}名のノミネーターだけが報酬を獲得できます。",
       "hasPendingBondOperation": "ボンドの承認がまだ完了していません。",
-      "electionOpen": "現在、新しいバリデータを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
-      "electionOpenTooltip": "バリデータ選出中の操作は、無効となります。",
+      "electionOpen": "現在、新しいバリデーターを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
+      "electionOpenTooltip": "バリデーター選出中の操作は、無効となります。",
       "externalControllerTooltip": "このアカウントは、別のアカウントに管理されています。",
       "externalControllerUnsupported": "<0>このStashアカウントは、<0>{{controllerAddress}}</0>の別のアカウントに管理されています。</0><1>Ledger Liveでステーキングするには、このStashアカウントをコントローラーとして設定する必要があります。</1>",
       "externalStashTooltip": "このアカウントは、別のアカウントを管理しています。",
@@ -2253,7 +2253,7 @@
       "title": "資産管理",
       "bond": {
         "title": "ボンド（預入れ）",
-        "description": "報酬を得るには、まず任意の数量をボンドします。次に、バリデータのノミネートを行う必要があります。"
+        "description": "報酬を得るには、まず任意の数量をボンドします。次に、バリデーターのノミネートを行う必要があります。"
       },
       "unbond": {
         "title": "ボンド解除",
@@ -2265,7 +2265,7 @@
       },
       "nominate": {
         "title": "ノミネート",
-        "description": "最大16人のバリデータを選択できます。報酬を獲得するには、ノミネートがアクティブであることを確認する必要があります。"
+        "description": "最大16人のバリデーターを選択できます。報酬を獲得するには、ノミネートがアクティブであることを確認する必要があります。"
       },
       "chill": {
         "title": "ノミネートを解除する",
@@ -2276,8 +2276,8 @@
       "title": "ノミネート",
       "steps": {
         "validators": {
-          "title": "バリデータ",
-          "notValidatorsRemoved": "現在バリデータではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
+          "title": "バリデーター",
+          "notValidatorsRemoved": "現在バリデーターではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
           "maybeChill": "代わりにノミネートを解除する"
         },
         "connectDevice": {
@@ -2287,8 +2287,8 @@
           "title": "承認",
           "label": "承認",
           "success": {
-            "title": "バリデータが正常にノミネートされました。",
-            "text": "選んだバリデータに資産がボンド（預入れ）されると、報酬の獲得が開始します。",
+            "title": "バリデーターが正常にノミネートされました。",
+            "text": "選んだバリデーターに資産がボンド（預入れ）されると、報酬の獲得が開始します。",
             "cta": "詳細を表示"
           },
           "pending": {
@@ -2311,14 +2311,14 @@
       },
       "steps": {
         "starter": {
-          "description": "資産をボンド（預入れ）した後、バリデータをノミネートすることで報酬を獲得できます。",
+          "description": "資産をボンド（預入れ）した後、バリデーターをノミネートすることで報酬を獲得できます。",
           "bullet": [
             "ボンドされた資産の所有者は変わりません。",
             "Ledgerデバイスを使ってノミネートする。",
             "ボンド解除28日後に、資産を再び引き出せるようになります。"
           ],
           "help": "ノミネートの仕組み",
-          "warning": "バリデータは慎重に選んでください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
+          "warning": "バリデーターは慎重に選んでください。良くないバリデーターに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
         },
         "amount": {
           "title": "数量",
@@ -2339,8 +2339,8 @@
           "title": "承認",
           "success": {
             "title": "資産が正常にボンドされました。",
-            "text": "ネットワークによるトランザクションの承認後、バリデータをノミネートすることができます。",
-            "textNominate": "ネットワークによるトランザクションの承認後、バリデータをノミネートできるようになります。",
+            "text": "ネットワークによるトランザクションの承認後、バリデーターをノミネートすることができます。",
+            "textNominate": "ネットワークによるトランザクションの承認後、バリデーターをノミネートできるようになります。",
             "nominate": "ノミネート",
             "later": "後でノミネートする。"
           },
@@ -2452,7 +2452,7 @@
   },
   "delegation": {
     "title": "報酬を獲得する",
-    "header": "デリゲート（委任）",
+    "header": "デリゲート",
     "validator": "Validator",
     "yield": "推定利回り",
     "address": "アドレス",
@@ -2475,7 +2475,7 @@
       "steps": {
         "starter": {
           "title": "ステーキング報酬を獲得する",
-          "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデータをデリゲートして、ステーキング報酬を得ることができます。",
+          "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデーターをデリゲートして、ステーキング報酬を得ることができます。",
           "bullet": {
             "delegate": "アカウントをデリゲートしても、アカウントの所有者は変わりません。",
             "access": "いつでも、資産を管理することができます。",
@@ -2495,22 +2495,22 @@
           "label": "概要",
           "toDelegate": "デリゲートするアカウント",
           "toUndelegate": "デリゲート解除するアカウント",
-          "validator": "バリデータ",
+          "validator": "バリデーター",
           "select": "選択",
           "yield": "推定利回り：{{amount}}",
-          "randomly": "ランダムに選択されたバリデータ",
-          "termsAndPrivacy": "正しくデリゲートしても、バリデータからの報酬は保証されません。"
+          "randomly": "ランダムに選択されたバリデーター",
+          "termsAndPrivacy": "正しくデリゲートしても、バリデーターからの報酬は保証されません。"
         },
         "validator": {
-          "title": "バリデータを選択",
-          "description": "推定報酬率を比較することでバリデータを選択できます。",
-          "customValidator": "カスタムバリデータ",
+          "title": "バリデーターを選択",
+          "description": "推定報酬率を比較することでバリデーターを選択できます。",
+          "customValidator": "カスタムバリデーター",
           "providedBy": "<1><0>{{name}}</0></1>が提供する利率。"
         },
         "custom": {
-          "title": "カスタムバリデータ",
-          "text": "アカウントをデリゲートするには、カスタムバリデータのアドレスを入力してください。",
-          "button": "バリデータを使用"
+          "title": "カスタムバリデーター",
+          "text": "アカウントをデリゲートするには、カスタムバリデーターのアドレスを入力してください。",
+          "button": "バリデーターを使用"
         },
         "undelegate": {
           "title": "デリゲート解除アカウント"
@@ -2521,7 +2521,7 @@
           "success": {
             "title": "デリゲートが送信されました。",
             "titleUndelegated": "デリゲート終了",
-            "text": "デリゲートのトランザクションが正常にブロードキャストされました。バリデータにもよりますが、約40日以内に最初の報酬を受け取ることができます。",
+            "text": "デリゲートのトランザクションが正常にブロードキャストされました。バリデーターにもよりますが、約40日以内に最初の報酬を受け取ることができます。",
             "textUndelegated": "処理が承認された時点で、アカウントのデリゲートは終了します。アカウントはいつでも再デリゲートすることができます。"
           },
           "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
@@ -2530,7 +2530,7 @@
     },
     "contextMenu": {
       "topUp": "さらに受け取る",
-      "redelegate": "バリデータを変更",
+      "redelegate": "バリデーターを変更",
       "stopDelegation": "デリゲート終了"
     }
   },
@@ -3442,11 +3442,11 @@
     },
     "recipientWording": {
       "send": "受取先",
-      "delegate": "バリデータ",
-      "undelegate": "バリデータ",
+      "delegate": "バリデーター",
+      "undelegate": "バリデーター",
       "claimReward": "報酬受取先",
       "optIn": "受取先",
-      "nominate": "バリデータ",
+      "nominate": "バリデーター",
       "erc721": {
         "transfer": "受取先"
       },
@@ -4018,10 +4018,10 @@
       "title": "{{maxAmountFromFormatted}}以下の値でなければなりません。"
     },
     "PolkadotElectionClosed": {
-      "title": "バリデータの選出を終了しなければなりません。"
+      "title": "バリデーターの選出を終了しなければなりません。"
     },
     "PolkadotNotValidator": {
-      "title": "選択した一部のアドレスはバリデータではありません。"
+      "title": "選択した一部のアドレスはバリデーターではありません。"
     },
     "PolkadotLowBondedBalance": {
       "title": "1DOT未満の場合、ボンドされた資産はすべて解除されます。"
@@ -4048,7 +4048,7 @@
       "title": "ボンド解除の上限を超えています。"
     },
     "PolkadotValidatorsRequired": {
-      "title": "1人以上のバリデータを選択する必要があります。"
+      "title": "1人以上のバリデーターを選択する必要があります。"
     },
     "ServiceStatusWarning": {
       "title": "{{message}}",
