@@ -13,8 +13,9 @@ import AppIcon from "./AppIcon";
 const AppRow = styled(Flex).attrs(() => ({
   flexDirection: "row",
   alignItems: "center",
-  py: "6px",
-}))``;
+}))`
+  height: 52px;
+`;
 
 const AppName = styled.div`
   flex: 1;

@@ -31,7 +31,7 @@ const AppActionsWrapper = styled.div`
 const Cell = styled(Flex)`
   width: 50%;
   flex-direction: row;
-`
+`;
 
 type Props = {
   state: State;
