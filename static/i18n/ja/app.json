@@ -162,7 +162,7 @@
     }
   },
   "byteSize": {
-    "bytes": "{{size}}バイト",
+    "bytes": "{{size}} bytes",
     "kbUnit": "{{size}}KB",
     "mbUnit": "{{size}}MB"
   },
@@ -1755,7 +1755,7 @@
   "send": {
     "title": "送る",
     "titleNft": "NFTを送付",
-    "totalSpent": "引き落とし合計",
+    "totalSpent": "合計引落額",
     "steps": {
       "recipient": {
         "title": "送付先",
@@ -1789,7 +1789,7 @@
         "rippleTagPlaceholder": "オプション",
         "ethereumGasLimit": "ガスリミット",
         "ethereumGasPrice": "ガス代",
-        "unitPerByte": "1バイトあたり{{unit}}",
+        "unitPerByte": "{{unit}} per byte",
         "nft": "NFT",
         "nftQuantity": "数量"
       },
