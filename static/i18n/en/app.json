@@ -4083,9 +4083,6 @@
     "SolanaAccountNotFunded": {
       "title": "Account not funded"
     },
-    "SolanaNotEnoughBalanceToPayFees": {
-      "title": "Not enouogh balance to pay fees"
-    },
     "SolanaAssociatedTokenAccountWillBeFunded": {
       "title": "Associated token account will be funded"
     },
