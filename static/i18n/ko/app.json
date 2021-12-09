@@ -198,7 +198,7 @@
     "exchange": "매수 / 매도",
     "swap": "스왑",
     "lend": "대출",
-    "catalog": "찾기"
+    "catalog": "탐색"
   },
   "stars": {
     "placeholder": "계정을 즐겨찾기 하여 여기서 바로 확인하세요.",
@@ -343,7 +343,7 @@
     "whatIsSwap": "스왑이란",
     "paraswap": {
       "cta": " 확인해 보세요",
-      "description": "Paraswap을 찾으세요? 찾기 탭으로 이동했습니다."
+      "description": "Paraswap을 찾으세요? 탐색 탭으로 이동했습니다."
     },
     "tabs": {
       "exchange": "교환",
