@@ -3,7 +3,7 @@ import React, { useReducer, useEffect, useCallback } from "react";
 import type { DrawerProps as SideDrawerProps } from "~/renderer/components/SideDrawer";
 
 type State = {
-  Component?: React.ReactNode,
+  Component?: React.ComponentType,
   props?: null | Record<string, any>,
   open: boolean,
   options: Omit<SideDrawerProps, "children" | "isOpen" | "onRequestBack" | "onRequestClose"> | {},
@@ -24,7 +24,7 @@ const reducer = (state: State, update: State) => {
     ...update,
   };
 };
-const initialState: State = { Component: null, props: null, open: false, options: {} };
+const initialState: State = { Component: undefined, props: null, open: false, options: {} };
 
 type ContextValue = { state: State, setDrawer: typeof setDrawer };
 
