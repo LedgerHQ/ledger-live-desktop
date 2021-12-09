@@ -2957,7 +2957,7 @@
           "getStarted": "Başlangıç",
           "pinCode": "PIN kodu",
           "recoveryPhrase": "Kurtarma ifadesi",
-          "hideRecoveryPhrase": "Kurtarma ifadesi",
+          "hideRecoveryPhrase": "Kurtarma ifadenizi saklayın",
           "pairNano": "Nano'yu bağla"
         },
         "screens": {
@@ -3059,7 +3059,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "PIN kodu seçin",
-              "descr": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için <0></0> seçin. Bir rakamı silmek için <1></1> seçin."
+              "descr": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için <0></0> simgesini seçin. Bir rakamı silmek için <1></1> simgesini seçin."
             },
             "confirm": {
               "title": "PIN kodunu onaylayın",
