@@ -716,8 +716,8 @@
     "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
-      "header": "{{provider}} ile kripto alın",
-      "title": "<0>{{provider}}</0> üzerinden kripto alın",
+      "header": "{{provider}} ile kripto satın alın",
+      "title": "<0>{{provider}}</0> üzerinden kripto satın alın",
       "tab": "Al",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
