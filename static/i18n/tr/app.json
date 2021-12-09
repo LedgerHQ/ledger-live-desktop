@@ -992,7 +992,7 @@
     },
     "optionsMenu": {
       "title": "Seçenekler",
-      "exportOperations": "Dışa aktarma işlem geçmişi",
+      "exportOperations": "İşlem geçmişini dışa aktar",
       "exportToMobile": "Mobil cihaza aktar"
     },
     "contextMenu": {
