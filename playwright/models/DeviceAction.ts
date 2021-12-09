@@ -74,4 +74,10 @@ export class DeviceAction {
 
     await this.deviceActionLoader.waitFor({ state: "hidden" });
   }
+
+  async complete() {
+    await this.page.evaluate(() => {
+      (window as any).mock.events.mockDeviceEvent({ type: "complete" });
+    });
+  }
 }

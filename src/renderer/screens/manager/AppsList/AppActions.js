@@ -126,6 +126,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
       <AppActionsWrapper>
         {installing || uninstalling ? (
           <Progress
+            data-test-id="manager-app-progress-bar"
             state={state}
             name={name}
             updating={updating}
@@ -220,7 +221,6 @@ const AppActions: React$ComponentType<Props> = React.memo(
               >
                 <Button
                   style={{ display: "flex" }}
-                  id={`appActionsInstall-${name}`}
                   lighterPrimary
                   disabled={!canInstall || notEnoughMemoryToInstall}
                   onClick={onInstall}
@@ -229,6 +229,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     appName: name,
                     appVersion: app.version,
                   }}
+                  data-test-id={`manager-install-${name}-app-button`}
                 >
                   <IconArrowDown size={14} />
                   <Text style={{ marginLeft: 8 }}>
@@ -247,7 +248,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                 <Button
                   style={{ padding: 13 }}
                   onClick={onUninstall}
-                  id={`appActionsUninstall-${name}`}
+                  data-test-id={`manager-uninstall-${name}-app-button`}
                   event="Manager Uninstall Click"
                   eventProperties={{
                     appName: name,

@@ -1,5 +1,6 @@
 import test from "../fixtures/common";
 import { expect } from "@playwright/test";
+import { PortfolioPage } from "../models/PortfolioPage";
 import { AddAccountModal } from "../models/AddAccountModal";
 import { DeviceAction } from "../models/DeviceAction";
 import { Layout } from "../models/Layout";
@@ -11,12 +12,13 @@ const currencies = ["BTC", "LTC", "ETH", "ATOM", "XTZ", "XRP"];
 test.describe.parallel("Accounts", () => {
   for (const currency of currencies) {
     test(`[${currency}] Add account`, async ({ page }) => {
+      const portfolioPage = new PortfolioPage(page);
       const addAccountModal = new AddAccountModal(page);
       const deviceAction = new DeviceAction(page);
       const layout = new Layout(page);
 
       await test.step(`[${currency}] Open modal`, async () => {
-        await addAccountModal.open();
+        await portfolioPage.openAddAccountModal();
         expect(await addAccountModal.title.textContent()).toBe("Add accounts");
         expect(await addAccountModal.container.screenshot()).toMatchSnapshot(`open-modal.png`);
       });

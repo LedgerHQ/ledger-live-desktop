@@ -10,7 +10,7 @@ test("Manager", async ({ page }) => {
   const deviceAction = new DeviceAction(page);
 
   await test.step("can access manager", async () => {
-    await managerPage.navigate();
+    await managerPage.goToManager();
     await deviceAction.accessManager();
     await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
     expect(await page.screenshot()).toMatchSnapshot({
