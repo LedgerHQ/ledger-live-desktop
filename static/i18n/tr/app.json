@@ -3049,8 +3049,8 @@
             }
           },
           "quizFailure": {
-            "title": "Profesyonel olmanıza az kaldı...",
-            "paragraph": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda ekstra rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
+            "title": "You will soon become a pro...",
+            "paragraph": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
               "prev": "Önceki adım"
@@ -3266,11 +3266,11 @@
           "results": {
             "success": {
               "title": "Tebrikler!",
-              "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Nano'ya bağlandığında bile, Ledger uygulaması özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
+              "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Ledger uygulaması Nano'ya bağlandığında bile özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
             },
             "fail": {
               "title": "Yanlış!",
-              "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Nano'ya bağlandığında bile, Ledger uygulaması özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
+              "text": "Özel anahtarınız donanım cüzdanınızda her zaman çevrim dışı kalır. Ledger uygulaması Nano'ya bağlandığında bile özel anahtarınıza erişemez. Cihazınızdaki her işlemi fiziksel olarak onaylamanız gerekir."
             }
           }
         }
