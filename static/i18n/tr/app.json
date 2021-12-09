@@ -2989,11 +2989,11 @@
               "descr": "Cihazınızı USB kablosuyla bilgisayarınıza bağlayın."
             },
             "browse": {
-              "title": "Göz At",
+              "title": "Göz Atın",
               "descr": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
             },
             "select": {
-              "title": "“Yeni cihaz olarak kur” seçeneğini seçin",
+              "title": "“Set up as new device” (Yeni cihaz olarak kur) seçeneğini onaylayın",
               "descr": "Seçimi onaylamak için her iki tuşa da aynı anda basın."
             },
             "follow": {
@@ -3012,7 +3012,7 @@
               "descr": "Cihazınızı USB kablosuyla bilgisayarınıza bağlayın."
             },
             "browse": {
-              "title": "Göz At",
+              "title": "Göz Atın",
               "descr": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
             },
             "select": {
@@ -3062,7 +3062,7 @@
               "descr": "Rakamları değiştirmek için sol veya sağ tuşa basın. Bir rakamı onaylamak için her iki tuşa da basın. PIN kodunuzu onaylamak için <0></0> seçin. Bir rakamı silmek için <1></1> seçin."
             },
             "confirm": {
-              "title": "PIN kodunu onayla",
+              "title": "PIN kodunu onaylayın",
               "descr": "Onaylamak için PIN kodunuzu tekrar girin."
             },
             "buttons": {
