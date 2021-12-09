@@ -140,7 +140,7 @@
       "DELEGATE": "Делегировано",
       "REDELEGATE": "Переделегировано",
       "UNDELEGATE": "Не делегировано",
-      "SUPPLY": "Депонировано",
+      "SUPPLY": "Депонирование",
       "REDEEM": "Выведено",
       "APPROVE": "Подтверждено",
       "VOTE": "Проголосовано",
@@ -1788,7 +1788,7 @@
         "rippleTag": "Тег",
         "rippleTagPlaceholder": "Опционально",
         "ethereumGasLimit": "Лимит газа",
-        "ethereumGasPrice": "Цена газа",
+        "ethereumGasPrice": "Цена Газа",
         "unitPerByte": "{{unit}} за байт",
         "nft": "NFT",
         "nftQuantity": "Кол-во"
