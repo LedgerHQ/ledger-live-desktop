@@ -3016,7 +3016,7 @@
               "descr": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
             },
             "select": {
-              "title": "“Kurtarma ifadenizi girin” seçeneğini seçin",
+              "title": "\"Enter your recovery phrase\" (Kurtarma ifadenizi girin) seçeneğini onaylayın",
               "descr": "Seçimi onaylamak için her iki tuşa da aynı anda basın."
             },
             "follow": {
