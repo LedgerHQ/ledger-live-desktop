@@ -2622,12 +2622,12 @@
       "passwordAutoLock": "Otomatik kilitleme",
       "passwordAutoLockDesc": "Ledger Live etkin olmadığında otomatik olarak kilitleyin.",
       "changePassword": "Parola değiştir",
-      "softResetTitle": "Önbelleği temizle",
+      "softResetTitle": "Önbelleği temizleyin",
       "softResetDesc": "Blok zinciri ile tekrar senkronizasyona zorlamak için Ledger Live önbelleğini temizleyin.",
       "softReset": "Temizle",
       "resetKYC": "KYC verilerini sıfırla",
       "resetKYCDesc": "Üçüncü taraf işlem sağlayıcısına erişmek için yerel olarak depolanan tüm Müşterinizi Tanıyın (KYC) verilerinizi silin.",
-      "hardResetTitle": "Ledger Live'ı Sıfırla",
+      "hardResetTitle": "Ledger Live'ı sıfırlayın",
       "hardResetDesc": "Hesaplarınız, işlem geçmişleriniz ve ayarlarınız da dahil olmak üzere bilgisayarınızda depolanan tüm Ledger Live verilerini silin.",
       "hardReset": "Sıfırla",
       "analytics": "Analiz",
@@ -2686,12 +2686,12 @@
       }
     },
     "hardResetModal": {
-      "title": "Ledger Live'ı Sıfırla",
+      "title": "Ledger Live'ı sıfırlayın",
       "desc": "Bilgisayarınızdaki tüm ayarları ve hesapları silmek için Ledger Live'ı sıfırlayın. Daha sonra parolanızı seçebilir ve hesaplarınızı Ledger cihazınızla geri ekleyebilirsiniz. Kripto varlıklarınıza erişim sağlayan özel anahtarlar, Ledger cihazınızda güvende kalır ve kurtarma ifadesi ile yedeklenir.",
       "warning": "Ledger Live'ı sıfırlamak, tüm hesaplarınız için takas işlem geçmişinizi siler."
     },
     "softResetModal": {
-      "title": "Önbelleği temizle",
+      "title": "Önbelleği temizleyin",
       "desc": "Önbellek temizlenmesi ağla yeniden senkronizasyona zorlar. Ayarlarınız ve hesaplarınız korunur. Kripto varlıklarınıza erişmek için gereken özel anahtarlar, Ledger cihazınızda ve Kurtarma kağıdınızda güvende kalır."
     },
     "resetFallbackModal": {
@@ -2719,7 +2719,7 @@
       "button": "Onar"
     },
     "exportLogs": {
-      "title": "Logları kaydet",
+      "title": "Logları kaydedin",
       "desc": "Ledger Live loglarını kaydetmek sorun giderme amacıyla gerekli olabilir.",
       "btn": "Kaydet"
     },
