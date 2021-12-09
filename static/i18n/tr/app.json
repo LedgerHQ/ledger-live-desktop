@@ -611,7 +611,7 @@
             "success": {
               "header": "Hesaplar düğüm yapılandırmasına eklendi",
               "description": "Kullanıcı veri klasörüne bir yapılandırma dosyası kaydedildi. Bu, Ledger SatStack uygulamasının tam düğümünüze bağlanmasını ve blok zincirindeki hesaplarınızı taramasını sağlar.",
-              "cta": "Kullanıcı verilerini gör"
+              "cta": "Kullanıcı verilerini görün"
             }
           }
         },
@@ -2708,7 +2708,7 @@
       "warning": "Bu hesabın silinmesi, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
     },
     "openUserDataDirectory": {
-      "title": "Kullanıcı verilerini gör",
+      "title": "Kullanıcı verilerini görün",
       "desc": "Hesaplarınız, önbellekleriniz ve ayarlarınız da dahil olmak üzere bilgisayarınızda depolanan kullanıcı verilerini görüntüleyin.",
       "btn": "Görüntüle"
     },
@@ -2783,7 +2783,7 @@
     "description": "Olası çözümler için lütfen destek makalelerimizi inceleyin. Sorun devam ederse, aşağıdaki butonu kullanarak günlükleri kaydedin ve Ledger Destek Ekibine gönderin.",
     "troubleshooting": "Olası çözümler için tıklayınız",
     "logs": "Logları kaydet",
-    "dataFolder": "Kullanıcı verilerini gör"
+    "dataFolder": "Kullanıcı verilerini görün"
   },
   "exportOperationsModal": {
     "title": "İşlem geçmişi",
