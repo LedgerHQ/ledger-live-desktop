@@ -5,7 +5,9 @@ import CheckBox from "~/renderer/components/CheckBox";
 import { Button } from ".";
 import styled from "styled-components";
 
-const Label = styled(Text)`
+const Label = styled(Text).attrs<{ disabled: boolean }>(({ disabled }) => ({
+  color: disabled ? "neutral.c60" : "neutral.c100",
+}))<{ disabled?: boolean }>`
   font-size: 12px;
 `;
 
@@ -15,7 +17,10 @@ export default function SideDrawerFilter({
   t,
 }: {
   refresh: () => void;
-  filters: Record<"starred" | "liveCompatible", { value: boolean; toggle: () => void }>;
+  filters: Record<
+    "starred" | "liveCompatible",
+    { value: boolean; toggle: () => void; disabled?: boolean }
+  >;
   t: any;
 }) {
   const { starred, liveCompatible } = filters;
@@ -59,14 +64,22 @@ export default function SideDrawerFilter({
               </Label>
             </Flex>
             <Flex my={4} flexDirection="row">
-              <CheckBox isChecked={liveCompatible.value} onChange={liveCompatible.toggle} />
-              <Label variant="body" ml={2}>
+              <CheckBox
+                disabled={liveCompatible.disabled}
+                isChecked={liveCompatible.value}
+                onChange={liveCompatible.toggle}
+              />
+              <Label variant="body" disabled={liveCompatible.disabled} ml={2}>
                 {t("market.filters.isLedgerCompatible")}
               </Label>
             </Flex>
             <Flex flexDirection="row">
-              <CheckBox isChecked={starred.value} onChange={starred.toggle} />
-              <Label variant="body" ml={2}>
+              <CheckBox
+                disabled={starred.disabled}
+                isChecked={starred.value}
+                onChange={starred.toggle}
+              />
+              <Label variant="body" disabled={starred.disabled} ml={2}>
                 {t("market.filters.isFavorite")}
               </Label>
             </Flex>

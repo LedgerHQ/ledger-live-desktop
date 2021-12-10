@@ -124,7 +124,7 @@ function MarketInfo({
           <Label>{t("market.marketList.price")}</Label>
           <ColumnRight>
             <LoadingLabel loading={loading}>
-              {counterValueFormatter({ value: price, counterCurrency, locale })}
+              {counterValueFormatter({ value: price, currency: counterCurrency, locale })}
             </LoadingLabel>
             <LoadingLabel loading={loading}>
               {priceChangePercentage ? (
@@ -144,21 +144,21 @@ function MarketInfo({
         <Line>
           <Label>{t("market.detailsPage.tradingVolume")}</Label>
           <LoadingLabel loading={loading}>
-            {counterValueFormatter({ value: totalVolume, counterCurrency, locale })}
+            {counterValueFormatter({ value: totalVolume, currency: counterCurrency, locale })}
           </LoadingLabel>
         </Line>
         <Line>
           <Label>{t("market.detailsPage.24hLowHight")}</Label>
           <LoadingLabel loading={loading}>
-            {counterValueFormatter({ value: high24h, counterCurrency, locale })}/
-            {counterValueFormatter({ value: low24h, counterCurrency, locale })}
+            {counterValueFormatter({ value: high24h, currency: counterCurrency, locale })}/
+            {counterValueFormatter({ value: low24h, currency: counterCurrency, locale })}
           </LoadingLabel>
         </Line>
         <Line>
           <Label>{t("market.detailsPage.allTimeHigh")}</Label>
           <ColumnRight>
             <LoadingLabel loading={loading}>
-              {counterValueFormatter({ value: ath, counterCurrency, locale })}
+              {counterValueFormatter({ value: ath, currency: counterCurrency, locale })}
             </LoadingLabel>
             <LoadingLabel color="neutral.c80" loading={loading}>
               {athDate ? <FormattedDate date={athDate} /> : "-"}
@@ -169,7 +169,7 @@ function MarketInfo({
           <Label>{t("market.detailsPage.allTimeLow")}</Label>
           <ColumnRight>
             <LoadingLabel loading={loading}>
-              {counterValueFormatter({ value: atl, counterCurrency, locale })}
+              {counterValueFormatter({ value: atl, currency: counterCurrency, locale })}
             </LoadingLabel>
             <LoadingLabel color="neutral.c80" loading={loading}>
               {atlDate ? <FormattedDate date={atlDate} /> : "-"}
@@ -184,8 +184,8 @@ function MarketInfo({
             <Label>{t("market.marketList.marketCap")}</Label>
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
-                value: marketcapRank,
-                counterCurrency,
+                value: marketcap,
+                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}
@@ -194,7 +194,12 @@ function MarketInfo({
           <Line>
             <Label>{t("market.detailsPage.marketCapRank")}</Label>
             <LoadingLabel loading={loading}>
-              {counterValueFormatter({ value: marketcap, counterCurrency, locale })}
+              {marketcapRank !== undefined
+                ? `#${counterValueFormatter({
+                    value: marketcapRank,
+                    locale,
+                  })}`
+                : "-"}
             </LoadingLabel>
           </Line>
           <Line>
@@ -221,7 +226,7 @@ function MarketInfo({
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
                 value: circulatingSupply,
-                counterCurrency,
+                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}
@@ -232,7 +237,7 @@ function MarketInfo({
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
                 value: totalSupply,
-                counterCurrency,
+                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}
@@ -243,7 +248,7 @@ function MarketInfo({
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
                 value: maxSupply,
-                counterCurrency,
+                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}

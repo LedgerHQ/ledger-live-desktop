@@ -7,6 +7,7 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import styled from "styled-components";
 import Chart from "~/renderer/components/Chart";
 import FormattedDate from "~/renderer/components/FormattedDate";
+import ChartPlaceholder from "../assets/ChartPlaceholder";
 
 const Title = styled(Text).attrs({ variant: "h3", color: "neutral.c100", mt: 1, mb: 5 })`
   font-size: 28px;
@@ -38,7 +39,7 @@ function Tooltip({
     <Flex flexDirection="column" p={1}>
       <TooltipText variant="large">
         {counterValueFormatter({
-          counterCurrency,
+          currency: counterCurrency,
           value: data.value,
           locale,
         })}
@@ -77,7 +78,7 @@ function MarkeCoinChartComponent({
   loading,
 }: Props) {
   const { range, counterCurrency } = chartRequestParams;
-  const { scale, mockData = [] } = rangeDataTable[range];
+  const { scale } = rangeDataTable[range];
   const activeRangeIndex = ranges.indexOf(range);
   const data = useMemo(() => {
     return chartData?.[range]
@@ -116,7 +117,7 @@ function MarkeCoinChartComponent({
           <SubTitle>{t("market.marketList.price")}</SubTitle>
           <Title>
             {counterValueFormatter({
-              counterCurrency,
+              currency: counterCurrency,
               value: price,
               locale,
             })}
@@ -141,20 +142,26 @@ function MarkeCoinChartComponent({
           ))}
         </Bar>
       </Flex>
-      <Chart
-        magnitude={1}
-        color={color}
-        data={data}
-        height={250}
-        width="100%"
-        loading={loading}
-        tickXScale={scale}
-        renderTickY={val => val}
-        renderTooltip={renderTooltip}
-        suggestedMin={suggestedMin}
-        suggestedMax={suggestedMax}
-        key={2}
-      />
+      {loading || !data.length ? (
+        <Flex height={250}>
+          <ChartPlaceholder color={color} />
+        </Flex>
+      ) : (
+        <Chart
+          magnitude={1}
+          color={color}
+          data={data}
+          height={250}
+          width="100%"
+          loading={loading}
+          tickXScale={scale}
+          renderTickY={val => val}
+          renderTooltip={renderTooltip}
+          suggestedMin={suggestedMin}
+          suggestedMax={suggestedMax}
+          key={2}
+        />
+      )}
     </Flex>
   );
 }

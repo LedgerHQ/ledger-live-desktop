@@ -243,8 +243,8 @@ export const MarketDataProvider = ({ children, fetchApi, countervalue }: Props):
           page: 1,
         })
         .then(
-          marketData =>
-            dispatch({ type: ACTIONS.UPDATE_SINGLE_MARKET_DATA, payload: marketData[0] }),
+          ([{ chartData, ...marketData }]) =>
+            dispatch({ type: ACTIONS.UPDATE_SINGLE_MARKET_DATA, payload: marketData }),
           handleError,
         );
     }

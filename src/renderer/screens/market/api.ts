@@ -4,6 +4,7 @@ import {
   CurrencyData,
   SupportedCoins,
   MarketCoin,
+  SparklineSvgData,
 } from "./types";
 import {
   listCryptoCurrencies,
@@ -37,7 +38,7 @@ const matchSearch = (search: string) => (currency: MarketCoin): boolean => {
   return match.toLowerCase().includes(search.toLowerCase());
 };
 
-function distributedCopy(items, n) {
+function distributedCopy(items: number[], n: number): number[] {
   const elements = [items[0]];
   const totalItems = items.length - 2;
   const interval = Math.floor(totalItems / (n - 2));
@@ -46,6 +47,30 @@ function distributedCopy(items, n) {
   }
   elements.push(items[items.length - 1]);
   return elements;
+}
+
+const sparklineXMagnitude = 5;
+const sparklineYHeight = 50;
+
+function sparklineAsSvgData(points: number[]): SparklineSvgData {
+  const totalXSteps = sparklineXMagnitude * points.length;
+  const min = Math.min(...points);
+  const max = Math.max(...points);
+
+  const yOffset = max - min;
+
+  return {
+    path: points
+      .map((d, i) => {
+        const [x, y] = [
+          i * sparklineXMagnitude,
+          sparklineYHeight + 3 - ((d - min) * sparklineYHeight) / yOffset,
+        ];
+        return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
+      })
+      .join(" "),
+    viewBox: `0 0 ${totalXSteps} ${sparklineYHeight + 3}`,
+  };
 }
 
 // fetches currencies data for selected currencies ids
@@ -62,9 +87,8 @@ async function listPaginated({
   sparkline = true,
   liveCompatible = false,
 }: MarketListRequestParams): Promise<CurrencyData[]> {
-  let path = `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=${
-    sparkline ? "true" : "false"
-  }&price_change_percentage=${range}`;
+  let path = `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=${sparkline ? "true" : "false"
+    }&price_change_percentage=${range}`;
 
   let ids = starred.length ? starred : _ids;
 
@@ -94,42 +118,86 @@ async function listPaginated({
 
   const currenciesJson = await response.json();
 
-  return currenciesJson.map(currency => ({
-    id: currency.id,
-    name: currency.name,
-    image: currency.image,
-    internalCurrency: cryptoCurrenciesList.find(({ id }) => id === currency.id),
-    marketcap: currency.market_cap,
-    marketcapRank: currency.market_cap_rank,
-    totalVolume: currency.total_volume,
-    high24h: currency.high_24h,
-    low24h: currency.low_24h,
-    ticker: currency.symbol,
-    price: currency.current_price,
-    priceChangePercentage: currency[`price_change_percentage_${range}_in_currency`],
-    marketCapChangePercentage24h: currency.market_cap_change_percentage_24h,
-    circulatingSupply: currency.circulating_supply,
-    totalSupply: currency.total_supply,
-    maxSupply: currency.max_supply,
-    ath: currency.ath,
-    athDate: currency.ath_date,
-    atl: currency.atl,
-    atlDate: currency.atl_date,
-    sparklineIn7d: currency?.sparkline_in_7d?.price
-      ? distributedCopy(currency.sparkline_in_7d.price, 3 * 7)
-      : null,
-    chartData: [],
-  }));
+  return currenciesJson.map(
+    (currency: {
+      [x: string]: any;
+      id: string;
+      name: any;
+      image: any;
+      ["market_cap"]: any;
+      ["market_cap_rank"]: any;
+      ["total_volume"]: any;
+      ["high_24h"]: any;
+      ["low_24h"]: any;
+      symbol: any;
+      ["current_price"]: any;
+      ["market_cap_change_percentage_24h"]: any;
+      ["circulating_supply"]: any;
+      ["total_supply"]: any;
+      ["max_supply"]: any;
+      ath: any;
+      ["ath_date"]: any;
+      atl: any;
+      ["atl_date"]: any;
+      ["sparkline_in_7d"]: { price: any };
+    }) => ({
+      id: currency.id,
+      name: currency.name,
+      image: currency.image,
+      internalCurrency: cryptoCurrenciesList.find(({ id }) => id === currency.id),
+      marketcap: currency.market_cap,
+      marketcapRank: currency.market_cap_rank,
+      totalVolume: currency.total_volume,
+      high24h: currency.high_24h,
+      low24h: currency.low_24h,
+      ticker: currency.symbol,
+      price: currency.current_price,
+      priceChangePercentage: currency[`price_change_percentage_${range}_in_currency`],
+      marketCapChangePercentage24h: currency.market_cap_change_percentage_24h,
+      circulatingSupply: currency.circulating_supply,
+      totalSupply: currency.total_supply,
+      maxSupply: currency.max_supply,
+      ath: currency.ath,
+      athDate: currency.ath_date,
+      atl: currency.atl,
+      atlDate: currency.atl_date,
+      sparklineIn7d: currency?.sparkline_in_7d?.price
+        ? sparklineAsSvgData(distributedCopy(currency.sparkline_in_7d.price, 6 * 7)) // keep 6 points per day
+        : null,
+      chartData: [],
+    }),
+  );
 }
 
 // Fetches list of supported counterCurrencies
-async function supportedCounterCurrencies(): Promise<string[]> {
+async function supportedCounterCurrencies(this: {
+  setSupportedCoinsList: () => Promise<SupportedCoins>;
+  listPaginated: ({
+    counterCurrency,
+    range,
+    limit,
+    page,
+    ids: _ids,
+    starred,
+    orderBy,
+    order,
+    search,
+    sparkline,
+    liveCompatible,
+  }: MarketListRequestParams) => Promise<CurrencyData[]>;
+  supportedCounterCurrencies: () => Promise<string[]>;
+  currencyChartData: ({
+    id,
+    counterCurrency,
+    range,
+  }: MarketCurrencyChartDataRequestParams) => Promise<{ [range: string]: number[] }>;
+}): Promise<string[]> {
   const path = `${ROOT_PATH}/simple/supported_vs_currencies`;
 
-  const response = await this.http.get(path);
+  const response = await fetch(path);
 
   if (!response.ok) {
-    throw new Error(response);
+    throw new Error();
   }
 
   return response.json();

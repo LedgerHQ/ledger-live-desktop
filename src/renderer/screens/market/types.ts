@@ -31,6 +31,11 @@ export type MarketCurrencyChartDataRequestParams = {
   lastRequestTime?: Date;
 };
 
+export type SparklineSvgData = {
+  path: string;
+  viewBox: string;
+};
+
 export type CurrencyData = {
   id: string;
   name: string;
@@ -52,7 +57,7 @@ export type CurrencyData = {
   athDate: Date;
   atl: number;
   atlDate: Date;
-  sparklineIn7d: number[];
+  sparklineIn7d: SparklineSvgData;
   chartData: Record<string, number[]>;
 };
 

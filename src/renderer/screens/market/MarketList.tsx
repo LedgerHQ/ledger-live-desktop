@@ -1,7 +1,7 @@
 import React, { useCallback, memo } from "react";
 import { MarketDataContextType, useMarketData } from "./MarketDataProvider";
 import styled from "styled-components";
-import { Flex, Text, Icons, Icon } from "@ledgerhq/react-ui";
+import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";
 import { FixedSizeList as List } from "react-window";
 import InfiniteLoader from "react-window-infinite-loader";
@@ -70,7 +70,7 @@ export const SortTableCell = ({
   order: string;
   children?: React.ReactNode;
 }) => (
-  <TableCellBase onClick={() => onClick(orderByKey)} {...props}>
+  <TableCellBase onClick={() => !!onClick && onClick(orderByKey)} {...props}>
     {children}
     <ChevronContainer m={2} show={orderBy === orderByKey} orderDirection={order}>
       <Icon name="ChevronBottom" size={10} />
@@ -118,7 +118,7 @@ export const TableRow = styled(Flex).attrs({
     padding-left: 5px;
   }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 200px;
+    flex: 1 0 150px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
@@ -126,16 +126,13 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(4),
-  ${TableCellBase}:nth-child(5),
-  ${TableCellBase}:nth-child(6) {
+  ${TableCellBase}:nth-child(5) {
     flex: 1 0 100px;
     justify-content: flex-end;
   }
-  @media (max-width: ${miniChartThreshold}px) { 
-    ${TableCellBase}:nth-child(6) {
-      display: none;
-      pointer-events: none;
-    }
+  ${TableCellBase}:nth-child(6) {
+    flex: 1 0 70px;
+    pointer-events: none;
   }
   
   ${TableCellBase}:nth-child(7) {
@@ -190,7 +187,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
   selectCurrency,
   starredMarketCoins,
   locale,
-  hideSparkline,
   style,
 }: any) {
   const currency = data ? data[index] : null;
@@ -205,7 +201,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
       key={index}
       locale={locale}
       selectCurrency={selectCurrency}
-      hideSparkline={hideSparkline}
       style={{ ...style }}
     />
   );
@@ -261,7 +256,7 @@ function MarketList({
             },
       );
     },
-    [order, orderBy],
+    [order, orderBy, refresh],
   );
 
   const isItemLoaded = useCallback((index: number) => !!marketData[index], [marketData]);
@@ -288,12 +283,12 @@ function MarketList({
             <TableCell>{t("market.marketList.marketCap")}</TableCell>
             <TableCell>{t("market.marketList.last7d")}</TableCell>
             <TableCell onClick={toggleStarredAccounts}>
-              <Icon name={starred.length > 0 ? "StarSolid" : "Star"} size={18} />
+              <Icon name={starred?.length > 0 ? "StarSolid" : "Star"} size={18} />
             </TableCell>
           </TableRow>
           <Flex flex="1">
             <AutoSizer style={{ height: "100%", width: "100%" }}>
-              {({ height, width }) =>
+              {({ height }: { height: number }) =>
                 freshLoading ? (
                   <List
                     height={height}
@@ -342,7 +337,6 @@ function MarketList({
                             selectCurrency={selectCurrency}
                             starredMarketCoins={starredMarketCoins}
                             locale={locale}
-                            hideSparkline={width < 700}
                           />
                         )}
                       </List>

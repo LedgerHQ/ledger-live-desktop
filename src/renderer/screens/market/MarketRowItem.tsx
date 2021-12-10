@@ -11,7 +11,6 @@ import { TableCell, TableRow } from "./MarketList";
 import { SmallMarketItemChart } from "./MarketItemChart";
 import { CurrencyData } from "./types";
 import { Button } from ".";
-import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { useTranslation } from "react-i18next";
 
 const CryptoCurrencyIconWrapper = styled.div`
@@ -32,12 +31,9 @@ type Props = {
   loading: boolean;
   locale: string;
   isStarred: boolean;
-  hideSparkline: boolean;
   toggleStar: () => void;
   selectCurrency: (currencyId: string) => void;
 };
-
-const overflowStyles = { textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" };
 
 function MarketRowItem({
   style,
@@ -46,16 +42,13 @@ function MarketRowItem({
   locale,
   loading,
   isStarred,
-  hideSparkline,
   toggleStar,
   selectCurrency,
 }: Props) {
   const { t } = useTranslation();
   const history = useHistory();
   const { colors } = useTheme();
-  const color = currency?.internalCurrency
-    ? getCurrencyColor(currency.internalCurrency, colors.background.main)
-    : colors.primary.c80;
+  const graphColor = currency?.priceChangePercentage < 0 ? colors.error.c60 : colors.success.c60;
 
   const onCurrencyClick = useCallback(() => {
     selectCurrency(currency.id);
@@ -64,7 +57,7 @@ function MarketRowItem({
       pathname: `/market/${currency.id}`,
       state: currency,
     });
-  }, [currency, history]);
+  }, [currency, history, selectCurrency]);
 
   const onBuy = useCallback(
     e => {
@@ -94,6 +87,15 @@ function MarketRowItem({
       });
     },
     [currency, history],
+  );
+
+  const onStarClick = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleStar();
+    },
+    [toggleStar],
   );
 
   return (
@@ -127,7 +129,7 @@ function MarketRowItem({
               )}
             </CryptoCurrencyIconWrapper>
             <Flex pl={3} flexDirection="row" alignItems="center">
-              <Flex flexDirection="column" alignItems="left" pr={16}>
+              <Flex flexDirection="column" alignItems="left" pr={2}>
                 <Text variant="body">{currency.name}</Text>
                 <Text variant="small" color="neutral.c60">
                   {currency.ticker.toUpperCase()}
@@ -136,7 +138,7 @@ function MarketRowItem({
               {currency.internalCurrency && (
                 <>
                   {isCurrencySupported("BUY", currency.internalCurrency) && (
-                    <Button variant="shade" mr={20} onClick={onBuy}>
+                    <Button variant="shade" mr={1} onClick={onBuy}>
                       {t("accounts.contextMenu.buy")}
                     </Button>
                   )}
@@ -151,7 +153,7 @@ function MarketRowItem({
           </TableCell>
           <TableCell>
             <Text variant="body">
-              {counterValueFormatter({ value: currency.price, counterCurrency, locale })}
+              {counterValueFormatter({ value: currency.price, currency: counterCurrency, locale })}
             </Text>
           </TableCell>
           <TableCell>
@@ -169,18 +171,18 @@ function MarketRowItem({
             <Text>
               {counterValueFormatter({
                 shorten: true,
-                counterCurrency,
+                currency: counterCurrency,
                 value: currency.marketcap,
                 locale,
               })}
             </Text>
           </TableCell>
           <TableCell>
-            {currency.sparklineIn7d && !hideSparkline && (
-              <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={color} />
+            {currency.sparklineIn7d && (
+              <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
             )}
           </TableCell>
-          <TableCell onClick={toggleStar}>
+          <TableCell onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>
         </TableRow>

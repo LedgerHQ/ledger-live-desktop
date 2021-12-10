@@ -17,7 +17,6 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
-import { starredAccountsSelector } from "./accounts";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -506,18 +505,6 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
   }),
 );
 
-export const starredMarketCoinsSelector: OutputSelector<State, void, *> = createSelector(
-  starredAccountsSelector,
-  (state: State) => state.settings.starredMarketCoins,
-  (starredAccounts: any[], starredMarketCoins: string[]) => {
-    const starredAccountsCurrency = starredAccounts
-      .map(({ currency }) => currency?.id)
-      .filter(Boolean);
-
-    return starredAccountsCurrency.length
-      ? [...new Set([...starredMarketCoins, ...starredAccountsCurrency])]
-      : starredMarketCoins;
-  },
-);
+export const starredMarketCoinsSelector = (state: State) => state.settings.starredMarketCoins;
 
 export default handleActions(handlers, INITIAL_STATE);

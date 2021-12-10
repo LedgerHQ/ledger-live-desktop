@@ -1,25 +1,31 @@
-import React, { useMemo, memo } from "react";
-
-import { Chart } from "@ledgerhq/react-ui";
-
-const weekStep = 7 * 24 * 60 * 60 * 1000;
+import React, { memo } from "react";
+import { SparklineSvgData } from "./types";
 
 type Props = {
-  sparklineIn7d: number[];
+  sparklineIn7d: SparklineSvgData;
   color?: string;
 };
 
 function SmallMarketItemChartComponent({ sparklineIn7d, color }: Props) {
-  const data = useMemo(
-    () =>
-      sparklineIn7d.map((value, index, arr) => ({
-        date: new Date(Date.now() - (weekStep / arr.length) * index),
-        value,
-      })),
-    [sparklineIn7d],
-  );
+  const { path, viewBox } = sparklineIn7d;
 
-  return <Chart variant="small" data={data} color={color} />;
+  return (
+    <svg
+      style={{ transform: "rotate 180deg" }}
+      viewBox={viewBox}
+      fill="none"
+      width="100%"
+      height="100%"
+    >
+      <path
+        stroke={color}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3px"
+        d={path}
+      />
+    </svg>
+  );
 }
 
 export const SmallMarketItemChart = memo<Props>(SmallMarketItemChartComponent);

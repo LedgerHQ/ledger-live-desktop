@@ -66,13 +66,15 @@ export default function Market() {
   );
 
   const toggleFilterByStarredAccounts = useCallback(() => {
-    const starred = starFilterOn ? [] : starredMarketCoins;
-    refresh({ starred });
-  }, [starFilterOn, starredMarketCoins]);
+    if (starredMarketCoins.length > 0) {
+      const starred = starFilterOn ? [] : starredMarketCoins;
+      refresh({ starred });
+    }
+  }, [refresh, starFilterOn, starredMarketCoins]);
 
   const toggleLiveCompatible = useCallback(() => {
     refresh({ liveCompatible: !liveCompatible });
-  }, [liveCompatible]);
+  }, [liveCompatible, refresh]);
 
   const timeRanges = useMemo(
     () => Object.keys(rangeDataTable).map(value => ({ value, label: t(`market.range.${value}`) })),
@@ -106,6 +108,7 @@ export default function Market() {
               starred: {
                 toggle: toggleFilterByStarredAccounts,
                 value: starFilterOn,
+                disabled: !starredMarketCoins?.length,
               },
               liveCompatible: {
                 toggle: toggleLiveCompatible,
