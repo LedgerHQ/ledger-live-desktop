@@ -117,7 +117,13 @@ function FromRow({
           <Text ff="Inter|Medium" marginRight={1} fontSize={2}>
             {t("swap2.form.from.max")}
           </Text>
-          <Switch small isChecked={isMaxEnabled} onChange={toggleMax} disabled={!fromAccount} />
+          <Switch
+            small
+            isChecked={isMaxEnabled}
+            onChange={toggleMax}
+            disabled={!fromAccount}
+            data-test-id="swap-max-spendable-toggle"
+          />
         </Box>
       </Box>
       <Box horizontal boxShadow="0px 2px 4px rgba(0, 0, 0, 0.05);">
