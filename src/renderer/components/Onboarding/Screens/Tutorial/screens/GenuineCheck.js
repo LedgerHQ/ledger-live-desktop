@@ -94,7 +94,7 @@ type Props = {
 export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId, device } = context;
-  
+
   const reduxDispatch = useDispatch();
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -110,11 +110,11 @@ export function GenuineCheck({ sendEvent, context }: Props) {
       };
 
       command("getLatestFirmwareForDevice")(deviceInfo)
-      .toPromise()
-      .then(latestFirmware => {
-        reduxDispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware }));
-      })
-      .catch(console.error)
+        .toPromise()
+        .then(latestFirmware => {
+          reduxDispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware }));
+        })
+        .catch(console.error);
     },
     [sendEvent],
   );
