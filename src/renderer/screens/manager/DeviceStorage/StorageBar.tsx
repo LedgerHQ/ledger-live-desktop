@@ -6,9 +6,9 @@ import { DeviceInfo } from "@ledgerhq/live-common/lib/types/manager";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import { DeviceModel } from "@ledgerhq/devices";
+import { Tooltip } from "@ledgerhq/react-ui";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-import Tooltip from "~/renderer/components/Tooltip";
 import ByteSize from "~/renderer/components/ByteSize";
 import { rgba } from "~/renderer/styles/helpers";
 import OldText from "~/renderer/components/Text";
@@ -82,12 +82,12 @@ const StorageBarItem: ThemedComponent<{ ratio: number }> = styled.div.attrs(prop
 
 const TooltipContentWrapper: ThemedComponent<{}> = styled.div`
   & > :nth-child(1) {
-    color: ${p => rgba(p.theme.colors.palette.background.paper, 0.7)};
+    color: ${p => p.theme.colors.neutral.c00};
     text-align: center;
     display: block;
   }
   & > :nth-child(2) {
-    color: ${p => p.theme.colors.palette.background.paper};
+    color: ${p => p.theme.colors.neutral.c00};
     text-align: center;
   }
 `;
@@ -142,25 +142,26 @@ const StorageBar = ({
         {distribution.apps.map(({ name, currency, bytes, blocks }, index, arr) => (
           <Transition timeout={{ appear: 333, enter: 333, exit: 1200 }} key={`${name}`}>
             {state => (
-              <StorageBarItem
-                state={state}
-                installing={installQueue.includes(name) || uninstallQueue.includes(name)}
-                color={getAppStorageBarColor({ name, currency })}
-                ratio={blocks / (distribution.totalBlocks - distribution.osBlocks)}
-                isLast={index === arr.length - 1}
+              <Tooltip
+                placement="top"
+                hideOnClick={false}
+                content={
+                  <TooltipContent
+                    name={name}
+                    bytes={bytes}
+                    deviceModel={deviceModel}
+                    deviceInfo={deviceInfo}
+                  />
+                }
               >
-                <Tooltip
-                  hideOnClick={false}
-                  content={
-                    <TooltipContent
-                      name={name}
-                      bytes={bytes}
-                      deviceModel={deviceModel}
-                      deviceInfo={deviceInfo}
-                    />
-                  }
+                <StorageBarItem
+                  state={state}
+                  installing={installQueue.includes(name) || uninstallQueue.includes(name)}
+                  color={getAppStorageBarColor({ name, currency })}
+                  ratio={blocks / (distribution.totalBlocks - distribution.osBlocks)}
+                  isLast={index === arr.length - 1}
                 />
-              </StorageBarItem>
+              </Tooltip>
             )}
           </Transition>
         ))}
