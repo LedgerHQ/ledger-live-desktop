@@ -15,7 +15,7 @@ on:
 jobs:
   start-runner:
     name: start self-hosted EC2 runner
-    runs-on: [ledger-live-desktop]
+    runs-on: [ledger-live]
     outputs:
       label: ${{ steps.start-ec2-runner.outputs.label }}
       ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
@@ -32,7 +32,7 @@ jobs:
           github-token: ${{ secrets.CI_BOT_TOKEN }}
           ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
           ec2-instance-type: c5.4xlarge
-          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
+          subnet-id: subnet-0eeb962bb7d9d96ef # production-shared-private-eu-west-1a
           security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
       - name: get volume-id
         id: get-volume-id
