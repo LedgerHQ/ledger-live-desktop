@@ -27,7 +27,7 @@ export function NotificationIndicator() {
       />
       <Tooltip content={t("informationCenter.tooltip")} placement="bottom">
         <ItemContainer
-          id="topbar-notification-button"
+          data-test-id="topbar-notification-button"
           isInteractive
           onClick={() => {
             dispatch(openInformationCenter());

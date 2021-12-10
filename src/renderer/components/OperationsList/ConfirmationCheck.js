@@ -40,12 +40,15 @@ const border = p =>
     : p.isConfirmed
     ? 0
     : `1px solid ${
-        p.type === "IN" ? p.marketColor : rgba(p.theme.colors.palette.text.shade60, 0.2)
+        p.type === "IN" || p.type === "NFT_IN"
+          ? p.marketColor
+          : rgba(p.theme.colors.palette.text.shade60, 0.2)
       }`;
 
 function inferColor(p) {
   switch (p.type) {
     case "IN":
+    case "NFT_IN":
       return p.marketColor;
     case "FREEZE":
       return p.theme.colors.wallet;
@@ -92,6 +95,8 @@ const WrapperClock: ThemedComponent<{}> = styled(Box).attrs(() => ({
 const iconsComponent = {
   OUT: IconSend,
   IN: IconReceive,
+  NFT_OUT: IconSend,
+  NFT_IN: IconReceive,
   DELEGATE: IconDelegate,
   REDELEGATE: IconRedelegate,
   UNDELEGATE: IconUndelegate,

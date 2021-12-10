@@ -87,6 +87,7 @@ export function BalanceTotal({
               disableRounding
               showCode
               val={totalBalance}
+              data-test-id="total-balance"
             />
           )}
           {withTransactionsPendingConfirmationWarning ? (

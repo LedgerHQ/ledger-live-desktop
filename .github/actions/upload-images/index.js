@@ -10,10 +10,6 @@ const uploadImage = async () => {
   const path = core.getInput("path");
   const fullPath = resolve(path);
 
-  // if (fs.existsSync(fullPath)) {
-  //   throw new Error("the path provided does not exists");
-  // }
-
   const upload = async (file, i = 0) => {
     if (i > 2) {
       return "error";
@@ -43,16 +39,31 @@ const uploadImage = async () => {
     }
   };
 
+  const getAllFiles = currentPath => {
+    let results = [];
+    const dirents = fs.readdirSync(currentPath, { withFileTypes: true });
+    dirents.forEach(dirent => {
+      const newPath = resolve(currentPath, dirent.name);
+      const stat = fs.statSync(newPath);
+      if (stat && stat.isDirectory()) {
+        results = results.concat(getAllFiles(newPath));
+      } else {
+        results.push(newPath);
+      }
+    });
+    return results;
+  };
+
   let files;
   try {
-    files = fs.readdirSync(fullPath, { withFileTypes: true });
-    files = files.filter(f => f.isFile()).map(f => f.name);
+    files = getAllFiles(fullPath);
+    console.log(files);
   } catch {
     return core.setOutput("images", []);
   }
 
-  const resultsP = files.map(file => {
-    const img = fs.readFileSync(`${fullPath}/${file}`);
+  const resultsP = files.map(async file => {
+    const img = fs.readFileSync(`${file}`);
     return upload(img);
   });
 
