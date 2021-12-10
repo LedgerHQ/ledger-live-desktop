@@ -1,4 +1,4 @@
-name: "[TESTS] Screenshots Update"
+name: "[Tests] Screenshots Update"
 on:
   issue_comment:
     types: [created]
@@ -23,7 +23,7 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: [add-reaction]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-linux-runner.yml@develop
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@v3.0.1
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
@@ -31,7 +31,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, generate-screenshots-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-linux-runner.yml@develop
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@v3.0.1
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}

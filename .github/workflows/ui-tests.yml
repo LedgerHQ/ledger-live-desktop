@@ -1,4 +1,4 @@
-name: "[TESTS] Screenshot Testing"
+name: "[Tests] Screenshot Testing"
 on:
   pull_request:
     branches:
@@ -20,7 +20,7 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: cancel-previous
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-linux-runner.yml@develop
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@v3.0.1
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
@@ -28,7 +28,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, ui-tests-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-linux-runner.yml@develop
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@v3.0.1
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
