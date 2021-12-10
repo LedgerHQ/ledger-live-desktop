@@ -46,7 +46,7 @@ export default function PortfolioBalanceSummary({
 
   return (
     <Card p={0} py={5}>
-      <Box px={6} data-e2e="dashboard_graph">
+      <Box px={6}>
         <BalanceInfos
           unit={counterValue.units[0]}
           isAvailable={portfolio.balanceAvailable}

@@ -42,6 +42,11 @@ export const ff = (v: string) => {
 export const multiline = (str: string): React$Node[] =>
   str.split("\n").map(line => <p key={uniqueId()}>{line}</p>);
 
+export const centerEllipsis = (str: string, maxLength: number = 25) =>
+  str?.length > maxLength
+    ? `${str.substr(0, Math.floor(maxLength / 2))}...${str.substr(Math.floor(-maxLength / 2))}`
+    : str;
+
 export function getMarketColor({
   marketIndicator,
   isNegative,

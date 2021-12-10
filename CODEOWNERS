@@ -1,3 +1,10 @@
-*            @ledgerhq/ledger-live-maintainer
-tests/       @ledgerhq/live-qa
-src/         @ledgerhq/live-squad-yellow @ledgerhq/live-squad-blue
+*                                      @ledgerhq/live-hub
+yarn.lock                              @ledgerhq/ledger-live
+package.json                           @ledgerhq/ledger-live
+.github                                @ledgerhq/live-devx
+scripts                                @ledgerhq/live-devx
+tools                                  @ledgerhq/live-devx
+src/renderer/families                  @ledgerhq/live-blockchain-support
+src/live-common-set-supported-currencies.js  @ledgerhq/live-blockchain-support
+src/renderer/components/DeviceAction   @ledgerhq/live-devices
+src/renderer/screens/exchange          @ledgerhq/live-platform-and-services
