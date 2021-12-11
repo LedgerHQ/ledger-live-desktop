@@ -1944,8 +1944,8 @@
   },
   "bitcoin": {
     "inputSelected": "SEÇİLDİ",
-    "toSpend": "Harcanabilir coin'ler",
-    "toReturn": "Dönmek için değiştir",
+    "toSpend": "Harcanacak coin'ler",
+    "toReturn": "Change to return",
     "modalTitle": "Coin yönetimi",
     "coincontrol": "Coin yönetimi",
     "advanced": "Gelişmiş seçenekler",
@@ -1965,8 +1965,8 @@
     "pickingStrategy": "UTXO toplama stratejisi",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "Önce en eski coin'ler (FIFO)",
-      "OPTIMIZE_SIZE": "Ücretleri en aza indirin (boyutu optimize edin)",
-      "MERGE_OUTPUTS": "Gelecekteki ücretleri en aza indirin (coin'leri birleştirin)"
+      "OPTIMIZE_SIZE": "Ücretleri en aza indir (boyut optimizasyonu)",
+      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
     }
   },
   "cosmos": {
