@@ -1,41 +1,56 @@
-import React, { useCallback, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setCounterValue } from "~/renderer/actions/settings";
-import { counterValueCurrencySelector, supportedCountervalues } from "~/renderer/reducers/settings";
+import React, { useCallback, useMemo, memo } from "react";
+import { supportedCountervalues } from "~/renderer/reducers/settings";
+
 import { Dropdown } from "@ledgerhq/react-ui";
 import Track from "~/renderer/analytics/Track";
 import { useTranslation } from "react-i18next";
 
-const CounterValueSelect = React.memo(function CounterValueSelect() {
+type Props = {
+  counterCurrency: string;
+  setCounterCurrency: (counterCurrency: string) => void;
+  supportedCounterCurrencies: string[];
+};
+
+function CounterValueSelect({
+  counterCurrency,
+  setCounterCurrency,
+  supportedCounterCurrencies,
+}: Props) {
   const { t } = useTranslation();
-  const counterValueCurrency: any = useSelector(counterValueCurrencySelector);
-  const dispatch = useDispatch();
 
   const handleChangeCounterValue = useCallback(
     item => {
-      dispatch(setCounterValue(item.currency.ticker));
+      setCounterCurrency(item.currency.ticker);
     },
-    [dispatch],
+    [setCounterCurrency],
+  );
+
+  const options = useMemo(
+    () =>
+      supportedCountervalues.filter(({ value }) =>
+        supportedCounterCurrencies.includes(value.toLowerCase()),
+      ),
+    [supportedCounterCurrencies],
   );
 
   const cvOption = useMemo(
-    () => supportedCountervalues.find(f => f.value === counterValueCurrency.ticker),
-    [counterValueCurrency],
+    () => supportedCountervalues.find(f => f.value.toLowerCase() === counterCurrency),
+    [counterCurrency],
   );
 
   return (
     <>
-      <Track onUpdate event="CounterValueSelect" counterValue={cvOption && cvOption.value} />
+      <Track onUpdate event="MarketCounterValueSelect" counterValue={cvOption && cvOption.value} />
       <Dropdown
         label={t("market.currency")}
         name="currency"
         menuPortalTarget={document.body}
         onChange={handleChangeCounterValue}
-        options={supportedCountervalues}
+        options={options}
         value={cvOption}
       />
     </>
   );
-});
+}
 
-export default CounterValueSelect;
+export default memo<Props>(CounterValueSelect);

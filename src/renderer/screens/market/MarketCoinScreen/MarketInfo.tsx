@@ -54,7 +54,7 @@ const Block = styled(Flex).attrs({
   py: 3,
   px: 2,
   mt: 3,
-  bg: "rgba(0,0,0,0.1)",
+  bg: "neutral.c30",
   borderRadius: "8px",
   flexDirection: "column",
 })``;

@@ -170,28 +170,7 @@ async function listPaginated({
 }
 
 // Fetches list of supported counterCurrencies
-async function supportedCounterCurrencies(this: {
-  setSupportedCoinsList: () => Promise<SupportedCoins>;
-  listPaginated: ({
-    counterCurrency,
-    range,
-    limit,
-    page,
-    ids: _ids,
-    starred,
-    orderBy,
-    order,
-    search,
-    sparkline,
-    liveCompatible,
-  }: MarketListRequestParams) => Promise<CurrencyData[]>;
-  supportedCounterCurrencies: () => Promise<string[]>;
-  currencyChartData: ({
-    id,
-    counterCurrency,
-    range,
-  }: MarketCurrencyChartDataRequestParams) => Promise<{ [range: string]: number[] }>;
-}): Promise<string[]> {
+async function supportedCounterCurrencies(): Promise<string[]> {
   const path = `${ROOT_PATH}/simple/supported_vs_currencies`;
 
   const response = await fetch(path);

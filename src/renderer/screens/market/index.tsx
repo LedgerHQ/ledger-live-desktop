@@ -46,7 +46,13 @@ const Title = styled(Text).attrs({ variant: "h3" })`
 
 export default function Market() {
   const { t } = useTranslation();
-  const { marketData, requestParams, refresh } = useMarketData();
+  const {
+    requestParams,
+    refresh,
+    counterCurrency,
+    setCounterCurrency,
+    supportedCounterCurrencies,
+  } = useMarketData();
   const { search, range, starred, liveCompatible } = requestParams;
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const starFilterOn = starred.length > 0;
@@ -87,14 +93,20 @@ export default function Market() {
     <Container>
       <Title>{t("market.title")}</Title>
       <Flex flexDirection="row" pr="6px" my={2} alignItems="center" justifyContent="space-between">
-        <SearchInput
-          flex="1"
-          value={search}
-          onChange={updateSearch}
-          placeholder={t("common.search")}
-        />
+        <Flex flex="1">
+          <SearchInput
+            flex="1"
+            value={search}
+            onChange={updateSearch}
+            placeholder={t("common.search")}
+          />
+        </Flex>
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
-          <CounterValueSelect />
+          <CounterValueSelect
+            counterCurrency={counterCurrency}
+            setCounterCurrency={setCounterCurrency}
+            supportedCounterCurrencies={supportedCounterCurrencies}
+          />
           <Dropdown
             label={t("market.rangeLabel")}
             menuPortalTarget={document.body}

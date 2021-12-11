@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 // @flow
 import React, {
   createContext,
-  useMemo,
   useCallback,
   useContext,
   ReactElement,
@@ -17,6 +17,7 @@ import {
   MarketDataApi,
   MarketListRequestParams,
   MarketCurrencyChartDataRequestParams,
+  CurrencyData,
 } from "./types";
 import defaultFetchApi from "./api";
 
@@ -26,11 +27,11 @@ type Props = {
   countervalue?: Currency;
 };
 type API = {
-  counterCurrency: string;
   refresh: (param?: MarketListRequestParams) => void;
   refreshChart: (param?: MarketCurrencyChartDataRequestParams) => void;
-  selectCurrency: (string) => void;
+  selectCurrency: (key: string) => void;
   loadNextPage: () => Promise<boolean>;
+  setCounterCurrency: (counterCurrency: string) => void;
 };
 
 export type MarketDataContextType = State & API;
@@ -38,7 +39,7 @@ export type MarketDataContextType = State & API;
 const initialState: State = {
   ready: false,
   marketData: [],
-  selectedCurrency: null,
+  selectedCurrency: undefined,
   requestParams: {
     range: "24h",
     limit: 50,
@@ -56,24 +57,20 @@ const initialState: State = {
   loading: false,
   loadingChart: false,
   endOfList: false,
-  error: null,
+  error: undefined,
   totalCoinsAvailable: 0,
-  selectedCoinData: null,
+  supportedCounterCurrencies: [],
+  selectedCoinData: undefined,
+  counterCurrency: undefined,
 };
 
 const MarketDataContext = createContext<MarketDataContextType>({
   ...initialState,
-  counterCurrency: undefined,
-  refresh: () => {
-    return null;
-  },
-  refreshChart: () => {
-    return null;
-  },
-  selectCurrency: () => {
-    return null;
-  },
-  loadNextPage: () => Promise.reject(new Error()),
+  refresh: () => {},
+  refreshChart: () => {},
+  selectCurrency: () => {},
+  loadNextPage: () => Promise.resolve(true),
+  setCounterCurrency: () => {},
 });
 
 const ACTIONS = {
@@ -95,9 +92,10 @@ const ACTIONS = {
 };
 
 function marketDataReducer(state, action) {
+  console.log(action, state);
   switch (action.type) {
     case ACTIONS.IS_READY:
-      return { ...state, isReady: true, totalCoinsAvailable: action.payload };
+      return { ...state, ...action.payload, isReady: true };
     case ACTIONS.UPDATE_MARKET_DATA: {
       const newData = action.payload.marketData;
       const page = action.payload.page || state.requestParams.page;
@@ -163,7 +161,14 @@ function marketDataReducer(state, action) {
         lastRequestTime: Date.now(),
         counterCurrency: action.payload,
       };
-      return { ...state, marketData: [], requestParams, chartRequestParams, loading: true };
+      return {
+        ...state,
+        counterCurrency: action.payload,
+        marketData: [],
+        requestParams,
+        chartRequestParams,
+        loading: true,
+      };
     }
 
     case ACTIONS.SET_LOADING:
@@ -190,26 +195,38 @@ export const MarketDataProvider = ({ children, fetchApi, countervalue }: Props):
     loadingChart,
     page,
   } = useDebounce(state, 300);
-  const counterCurrency = useMemo(() => countervalue?.ticker, [countervalue]);
 
   const handleError = useCallback(payload => {
     dispatch({ type: ACTIONS.SET_ERROR, payload });
   }, []);
 
   useEffect(() => {
-    api.setSupportedCoinsList().then(
-      coins =>
-        dispatch({
-          type: ACTIONS.IS_READY,
-          payload: coins.length,
-        }),
+    api.supportedCounterCurrencies().then(
+      supportedCounterCurrencies =>
+        api.setSupportedCoinsList().then(coins => {
+          dispatch({
+            type: ACTIONS.IS_READY,
+            payload: {
+              totalCoinsAvailable: coins.length,
+              supportedCounterCurrencies,
+            },
+          });
+          dispatch({
+            type: ACTIONS.UPDATE_COUNTERVALUE,
+            payload: supportedCounterCurrencies.includes(countervalue.ticker)
+              ? countervalue.ticker
+              : "usd",
+          });
+        }, handleError),
       handleError,
     );
-  }, [api, handleError]);
+  }, [api, countervalue, handleError]);
 
   useEffect(() => {
     if (chartRequestParams?.id && chartRequestParams?.counterCurrency && !loadingChart) {
-      const currentMarketData = marketData.find(({ id }) => id === chartRequestParams.id);
+      const currentMarketData = marketData.find(
+        ({ id }: CurrencyData) => id === chartRequestParams.id,
+      );
       const range = chartRequestParams.range;
 
       if (currentMarketData && !currentMarketData?.chartData?.[range]) {
@@ -298,17 +315,18 @@ export const MarketDataProvider = ({ children, fetchApi, countervalue }: Props):
     });
   }, [loading, page, api, requestParams, handleError]);
 
-  useEffect(() => {
-    dispatch({ type: ACTIONS.UPDATE_COUNTERVALUE, payload: counterCurrency });
-  }, [counterCurrency]);
+  const setCounterCurrency = useCallback(
+    payload => dispatch({ type: ACTIONS.UPDATE_COUNTERVALUE, payload }),
+    [dispatch],
+  );
 
   const value = {
     ...state,
-    counterCurrency,
     refresh,
     refreshChart,
     selectCurrency,
     loadNextPage,
+    setCounterCurrency,
   };
 
   return <MarketDataContext.Provider value={value}>{children}</MarketDataContext.Provider>;
@@ -318,7 +336,9 @@ export function useMarketData(): MarketDataContextType {
   return useContext(MarketDataContext);
 }
 
-export function useSingleCoinMarketData(currencyId): MarketDataContextType {
+export function useSingleCoinMarketData(
+  currencyId: string,
+): Omit<MarketDataContextType, "marketData" | "setCurrency"> {
   const {
     marketData,
     selectedCurrency,
@@ -328,11 +348,12 @@ export function useSingleCoinMarketData(currencyId): MarketDataContextType {
     error,
     counterCurrency,
     refreshChart,
-    selectCurrency,
+    setCounterCurrency,
+    supportedCounterCurrencies,
   } = useContext(MarketDataContext);
 
   const [state, setState] = useState({
-    selectedCoinData: null,
+    selectedCoinData: undefined,
     selectedCurrency,
     chartRequestParams,
     loading,
@@ -340,20 +361,23 @@ export function useSingleCoinMarketData(currencyId): MarketDataContextType {
     error,
     counterCurrency,
     refreshChart,
-    selectCurrency,
+    setCounterCurrency,
+    supportedCounterCurrencies,
   });
 
   useEffect(() => {
-    setState(s => ({
-      ...s,
-      selectedCoinData: marketData.find(({ id }) => id === currencyId) || s.selectedCoinData,
-      selectedCurrency,
-      chartRequestParams,
-      loading,
-      loadingChart,
-      error,
-      counterCurrency,
-    }));
+    if (marketData)
+      setState(s => ({
+        ...s,
+        selectedCoinData: marketData.find(({ id }) => id === currencyId) || s.selectedCoinData,
+        selectedCurrency,
+        chartRequestParams,
+        loading,
+        loadingChart,
+        error,
+        counterCurrency,
+        supportedCounterCurrencies,
+      }));
   }, [
     marketData,
     currencyId,
@@ -363,8 +387,8 @@ export function useSingleCoinMarketData(currencyId): MarketDataContextType {
     loadingChart,
     error,
     counterCurrency,
+    supportedCounterCurrencies,
   ]);
 
-  // @ts-expect-error error
   return state;
 }

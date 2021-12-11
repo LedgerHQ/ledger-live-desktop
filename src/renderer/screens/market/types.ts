@@ -73,7 +73,9 @@ export type State = {
   endOfList: boolean;
   error?: Error;
   totalCoinsAvailable: number;
+  supportedCounterCurrencies: string[];
   selectedCoinData?: CurrencyData;
+  counterCurrency?: string;
 };
 
 export type MarketDataApi = {

@@ -1,8 +1,9 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useCallback } from "react";
 import { Flex, Text, Icons } from "@ledgerhq/react-ui";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { starredMarketCoinsSelector, localeSelector } from "~/renderer/reducers/settings";
 import { useSingleCoinMarketData } from "../MarketDataProvider";
 import styled, { useTheme } from "styled-components";
@@ -54,8 +55,10 @@ export default function MarketCoinScreen() {
     loading,
     loadingChart,
     error,
-    counterCurrency,
     refreshChart,
+    counterCurrency,
+    setCounterCurrency,
+    supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
 
   const {
@@ -90,7 +93,7 @@ export default function MarketCoinScreen() {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page");
+      setTrackingSource("market page details");
       history.push({
         pathname: "/exchange",
         state: {
@@ -105,7 +108,7 @@ export default function MarketCoinScreen() {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page");
+      setTrackingSource("market page details");
       history.push({
         pathname: "/swap",
         state: {
@@ -171,7 +174,11 @@ export default function MarketCoinScreen() {
               )}
             </>
           )}
-          <CounterValueSelect />
+          <CounterValueSelect
+            counterCurrency={counterCurrency}
+            setCounterCurrency={setCounterCurrency}
+            supportedCounterCurrencies={supportedCounterCurrencies}
+          />
         </Flex>
       </Flex>
       <MarketCoinChart
