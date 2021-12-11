@@ -182,12 +182,12 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapides",
+    "fast": "Rapide",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lents",
+    "slow": "Lent",
     "standard": "Standard",
-    "medium": "Moyens",
+    "medium": "Moyen",
     "feesAmount": "Montant des frais"
   },
   "sidebar": {
@@ -774,7 +774,7 @@
       },
       "closed": {
         "title": "Vos prêts clôturés apparaîtront ici.",
-        "description": "Vous n'avez pas encore fait de prêts.",
+        "description": "Vous n'avez pas encore clôturé de prêts.",
         "cta": "Déposer"
       },
       "opened": {
