@@ -26,6 +26,7 @@ import type {
   RawPlatformTransaction,
   RawPlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/rawTypes";
+import type { MessageData } from "@ledgerhq/live-common/lib/hw/signMessage/types";
 
 import {
   serializePlatformAccount,
@@ -44,6 +45,18 @@ import BigSpinner from "~/renderer/components/BigSpinner";
 
 import * as tracking from "./tracking";
 import TopBar from "./TopBar";
+
+function hexEncode(text: string) {
+  let hex, i;
+  let result = "";
+
+  for (i = 0; i < text.length; i++) {
+    hex = text.charCodeAt(i).toString(16);
+    result += ("000" + hex).slice(-4);
+  }
+
+  return result;
+}
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -280,6 +293,51 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
     [manifest, dispatch, accounts],
   );
 
+  const signMessage = useCallback(
+    ({
+      accountId,
+      message: initialMessage,
+      params = {},
+    }: {
+      accountId: string,
+      message: string,
+      params: any,
+    }) => {
+      const account = accounts.find(account => account.id === accountId);
+
+      if (!account) return null;
+
+      const message: MessageData = {
+        currency: account.currency,
+        path: account.freshAddressPath,
+        verify: true,
+        derivationMode: account.derivationMode,
+        message: initialMessage,
+        rawMessage: hexEncode(initialMessage),
+      };
+
+      // tracking.platformSignTransactionRequested(manifest);
+
+      return new Promise((resolve, reject) =>
+        dispatch(
+          openModal("MODAL_SIGN_MESSAGE", {
+            account,
+            message,
+            onConfirmationHandler: signedMessage => {
+              // tracking.platformSignTransactionRequested(manifest);
+              resolve(signedMessage);
+            },
+            onFailHandler: error => {
+              // tracking.platformSignTransactionFail(manifest);
+              reject(error);
+            },
+          }),
+        ),
+      );
+    },
+    [dispatch, accounts],
+  );
+
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
@@ -287,12 +345,14 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       "account.request": requestAccount,
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
+      "message.sign": signMessage,
       "transaction.broadcast": broadcastTransaction,
     }),
     [
       listAccounts,
       receiveOnAccount,
       signTransaction,
+      signMessage,
       broadcastTransaction,
       requestAccount,
       listCurrencies,

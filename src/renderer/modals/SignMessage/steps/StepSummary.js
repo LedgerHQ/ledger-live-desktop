@@ -52,7 +52,7 @@ export default function StepSummary({ account, message }: StepProps) {
         </Box>
       </Box>
       <Separator />
-      <Text>{message.message.domain ? JSON.stringify(message.message) : message.message}</Text>
+      <Text>{message.message?.domain ? JSON.stringify(message.message) : message.message}</Text>
     </Box>
   );
 }
