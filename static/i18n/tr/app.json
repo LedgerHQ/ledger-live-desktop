@@ -1945,7 +1945,7 @@
   "bitcoin": {
     "inputSelected": "SEÇİLDİ",
     "toSpend": "Harcanacak coin'ler",
-    "toReturn": "Change to return",
+    "toReturn": "Dönecek para üstü",
     "modalTitle": "Coin yönetimi",
     "coincontrol": "Coin yönetimi",
     "advanced": "Gelişmiş seçenekler",
@@ -1966,7 +1966,7 @@
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "Önce en eski coin'ler (FIFO)",
       "OPTIMIZE_SIZE": "Ücretleri en aza indir (boyut optimizasyonu)",
-      "MERGE_OUTPUTS": "Minimize future fees (merge coins)"
+      "MERGE_OUTPUTS": "Gelecekteki ücretleri en aza indir (coin'leri birleştirme)"
     }
   },
   "cosmos": {
