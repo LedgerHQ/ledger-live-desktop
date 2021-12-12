@@ -1459,7 +1459,7 @@
     "applist": {
       "placeholder": "Pas de résultat pour cette recherche avec les filtres choisis",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
-      "placeholderGoToCatalog": "Aller dans le catalogue pour installer des applications",
+      "placeholderGoToCatalog": "Allez dans le Catalogue pour installer des applications.",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "filter": {
