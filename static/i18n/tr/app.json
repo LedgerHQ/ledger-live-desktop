@@ -1715,7 +1715,7 @@
     }
   },
   "buy": {
-    "title": "Al",
+    "title": "Satın al",
     "titleCrypto": "{{currency}} Al",
     "buyCTA": "{{currencyTicker}} Al",
     "withoutDevice": "Cihazım olmadan devam et",
