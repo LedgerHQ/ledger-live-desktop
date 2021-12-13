@@ -211,12 +211,12 @@ const AppsList = ({
                 autoFocus
                 onChange={onTextChange}
                 search={query}
-                style={{paddingTop: 0, paddingBottom: 0}} 
+                style={{ paddingTop: 0, paddingBottom: 0 }}
                 placeholder={t(
                   !isDeviceTab ? "manager.tabs.appCatalogSearch" : "manager.tabs.appOnDeviceSearch",
-                  )}
-                  ref={inputRef}
-                />
+                )}
+                ref={inputRef}
+              />
             </Flex>
             {filterHeaderRightPart}
           </FilterHeaderContainer>
