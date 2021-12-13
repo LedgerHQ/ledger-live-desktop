@@ -35,17 +35,15 @@ const StickyContainer = styled.div`
   z-index: 1;
 `;
 
-const TabsContainer = styled.div`
-  display: flex;
-  padding: 20px 0px;
-`;
+const TabsContainer = styled(Flex).attrs(() => ({
+  py: 7,
+}))``;
 
-const FilterHeaderContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 20px 0px;
-`;
+const FilterHeaderContainer = styled(Flex).attrs(() => ({
+  flexDirection: "row",
+  alignItems: "center",
+  my: 7,
+}))``;
 
 const Divider = styled.div`
   height: 1px;
@@ -208,17 +206,18 @@ const AppsList = ({
         <Divider />
         {!noAppToShow && (
           <FilterHeaderContainer isIncomplete={isIncomplete}>
-            <Box flex="1" horizontal height={40}>
+            <Flex flex={1}>
               <SearchInput
                 autoFocus
                 onChange={onTextChange}
                 search={query}
+                style={{paddingTop: 0, paddingBottom: 0}} 
                 placeholder={t(
                   !isDeviceTab ? "manager.tabs.appCatalogSearch" : "manager.tabs.appOnDeviceSearch",
-                )}
-                ref={inputRef}
-              />
-            </Box>
+                  )}
+                  ref={inputRef}
+                />
+            </Flex>
             {filterHeaderRightPart}
           </FilterHeaderContainer>
         )}
