@@ -8,7 +8,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
-export const CARD_APP_ID = "ledger-card";
+export const CARD_APP_ID = "cl-card";
 
 /**
  * FIXME
