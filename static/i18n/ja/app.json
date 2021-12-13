@@ -1045,7 +1045,7 @@
   "banners": {
     "cleanCache": {
       "title": "試験的設定の変更には、Cacheを削除する必要があります。",
-      "cta": "Cacheを消去"
+      "cta": "Cacheを削除"
     },
     "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
     "genericTerminatedCrypto": "{{coinName}} には対応していません。",
