@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from "react";
-import { Flex, Button as BaseButton, Dropdown, Text, SearchInput } from "@ledgerhq/react-ui";
+import { Flex, Button as BaseButton, Text, SearchInput } from "@ledgerhq/react-ui";
 import { useSelector } from "react-redux";
 import { starredMarketCoinsSelector } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
@@ -8,6 +8,7 @@ import styled from "styled-components";
 import CounterValueSelect from "./CountervalueSelect";
 import MarketList from "./MarketList";
 import SideDrawerFilter from "./SideDrawerFilter";
+import Dropdown from "./DropDown";
 import { rangeDataTable } from "./utils/rangeDataTable";
 
 const Container = styled(Flex).attrs({
@@ -20,7 +21,7 @@ const Container = styled(Flex).attrs({
   mx: -1,
 })``;
 
-const SearchContainer = styled(Flex).attrs({ flex: "1" })`
+const SearchContainer = styled(Flex).attrs({ flex: "0.8" })`
   > div {
     width: 100%;
   }
@@ -103,18 +104,23 @@ export default function Market() {
           <SearchInput value={search} onChange={updateSearch} placeholder={t("common.search")} />
         </SearchContainer>
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
-          <CounterValueSelect
-            counterCurrency={counterCurrency}
-            setCounterCurrency={setCounterCurrency}
-            supportedCounterCurrencies={supportedCounterCurrencies}
-          />
-          <Dropdown
-            label={t("market.rangeLabel")}
-            menuPortalTarget={document.body}
-            onChange={updateTimeRange}
-            options={timeRanges}
-            value={timeRangeValue}
-          />
+          <Flex width="290px" justifyContent="flex-end" ml={3}>
+            <CounterValueSelect
+              counterCurrency={counterCurrency}
+              setCounterCurrency={setCounterCurrency}
+              supportedCounterCurrencies={supportedCounterCurrencies}
+            />
+          </Flex>
+          <Flex mx={3}>
+            <Dropdown
+              label={t("market.rangeLabel")}
+              menuPortalTarget={document.body}
+              onChange={updateTimeRange}
+              options={timeRanges}
+              value={timeRangeValue}
+              searchable={false}
+            />
+          </Flex>
           <SideDrawerFilter
             refresh={refresh}
             filters={{

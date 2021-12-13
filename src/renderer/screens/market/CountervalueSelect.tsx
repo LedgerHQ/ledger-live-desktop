@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, memo } from "react";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 
-import { Dropdown } from "@ledgerhq/react-ui";
+import Dropdown from "./DropDown";
 import Track from "~/renderer/analytics/Track";
 import { useTranslation } from "react-i18next";
 
@@ -34,7 +34,7 @@ function CounterValueSelect({
   );
 
   const cvOption = useMemo(
-    () => supportedCountervalues.find(f => f.value.toLowerCase() === counterCurrency),
+    () => supportedCountervalues.find(f => f.value.toLowerCase() === counterCurrency.toLowerCase()),
     [counterCurrency],
   );
 
@@ -48,6 +48,7 @@ function CounterValueSelect({
         onChange={handleChangeCounterValue}
         options={options}
         value={cvOption}
+        searchable
       />
     </>
   );

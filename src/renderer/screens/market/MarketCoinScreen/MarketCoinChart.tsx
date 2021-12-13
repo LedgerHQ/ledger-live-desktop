@@ -35,7 +35,7 @@ const transitionStyles = {
 
 const FadeIn = styled.div.attrs(p => ({ style: transitionStyles[p.state] }))`
   opacity: 0;
-  transition: opacity 0.2s ease-out;
+  transition: opacity 1s ease-out;
 `;
 
 const ranges = Object.keys(rangeDataTable);
@@ -159,7 +159,7 @@ function MarkeCoinChartComponent({
       <SwitchTransition>
         <Transition
           key={loading || !data.length ? "loading" : "ready"}
-          timeout={400}
+          timeout={200}
           unmountOnExit
           mountOnEnter
         >

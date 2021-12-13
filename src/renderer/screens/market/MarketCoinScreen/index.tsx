@@ -157,7 +157,7 @@ export default function MarketCoinScreen() {
 
   return currency ? (
     <Container>
-      <Flex flexDirection="row" pr="6px" my={2} alignItems="center" justifyContent="space-between">
+      <Flex flexDirection="row" my={2} alignItems="center" justifyContent="space-between">
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-start">
           <CryptoCurrencyIconWrapper>
             {internalCurrency ? (
@@ -207,11 +207,13 @@ export default function MarketCoinScreen() {
               )}
             </>
           )}
-          <CounterValueSelect
-            counterCurrency={counterCurrency}
-            setCounterCurrency={setCounterCurrency}
-            supportedCounterCurrencies={supportedCounterCurrencies}
-          />
+          <Flex justifyContent="flex-end" ml={4}>
+            <CounterValueSelect
+              counterCurrency={counterCurrency}
+              setCounterCurrency={setCounterCurrency}
+              supportedCounterCurrencies={supportedCounterCurrencies}
+            />
+          </Flex>
         </Flex>
       </Flex>
       <MarketCoinChart

@@ -13,7 +13,7 @@ const pathAnim = keyframes`
 const AnimatedPath = styled.path`
   stroke-dashoffset: 1413px;
   stroke-dasharray: 1413px;
-  animation: ${pathAnim} 400ms ease-in-out forwards;
+  animation: ${pathAnim} 1000ms ease-in-out forwards;
 `;
 
 export default function ChartPlaceholder() {
@@ -24,38 +24,39 @@ export default function ChartPlaceholder() {
       viewBox="0 0 680 167"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
     >
       <line
-        x1="-100"
+        x1="-70"
         y1="1"
-        x2="780"
+        x2="750"
         y2="1"
         stroke="currentColor"
         strokeOpacity="0.5"
         strokeDasharray="3 3"
       />
       <line
-        x1="-100"
+        x1="-70"
         y1="55.6"
-        x2="780"
+        x2="750"
         y2="55.6"
         stroke="currentColor"
         strokeOpacity="0.5"
         strokeDasharray="3 3"
       />
       <line
-        x1="-100"
+        x1="-70"
         y1="111.3"
-        x2="780"
+        x2="750"
         y2="111.3"
         stroke="currentColor"
         strokeOpacity="0.5"
         strokeDasharray="3 3"
       />
       <line
-        x1="-100"
+        x1="-70"
         y1="166"
-        x2="780"
+        x2="750"
         y2="166"
         stroke="currentColor"
         strokeOpacity="0.5"
