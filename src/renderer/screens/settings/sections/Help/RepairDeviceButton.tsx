@@ -45,7 +45,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     if (this.sub) this.sub.unsubscribe();
   }
 
-  open = () => this.setState({ opened: true, error: null });
+  open = () => this.setState({ opened: true, error: undefined });
 
   sub: any;
   timeout: any;
@@ -57,17 +57,17 @@ class RepairDeviceButton extends PureComponent<Props, State> {
     if (onRepair) {
       onRepair(false);
     }
-    this.setState({ opened: false, isLoading: false, error: null, progress: 0 });
+    this.setState({ opened: false, isLoading: false, error: undefined, progress: 0 });
   };
 
-  repair = (version = null) => {
+  repair = (version?: string) => {
     if (this.state.isLoading) return;
     const { history, onRepair } = this.props;
     if (onRepair) {
       onRepair(true);
     }
     this.timeout = setTimeout(() => this.setState({ isLoading: true }), 500);
-    this.sub = command("firmwareRepair")({ version }).subscribe({
+    this.sub = command("firmwareRepair")({ version: version ?? null }).subscribe({
       next: patch => {
         this.setState(patch);
       },
@@ -90,12 +90,12 @@ class RepairDeviceButton extends PureComponent<Props, State> {
   };
 
   render() {
-    const { t, buttonProps } = this.props;
+    const { t } = this.props;
     const { opened, isLoading, error, progress } = this.state;
 
     return (
       <>
-        <Button {...buttonProps} variant="main" onClick={this.open} event="RepairDeviceButton" style={{ width: "120px" }}>
+        <Button variant="main" onClick={this.open} event="RepairDeviceButton" style={{ width: "120px" }}>
           {t("settings.repairDevice.button")}
         </Button>
 
@@ -103,7 +103,6 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           cancellable
           analyticsName="RepairDevice"
           isOpened={opened}
-          onClose={this.close}
           onReject={this.close}
           repair={this.repair}
           isLoading={isLoading}
