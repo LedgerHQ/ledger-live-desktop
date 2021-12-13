@@ -74,7 +74,7 @@ const PlatformCatalog = () => {
   const history = useHistory();
 
   const { manifests } = usePlatformApp();
-  console.log(manifests)
+  console.log(manifests);
   const allowDebugApps = useSelector(allowDebugAppsSelector);
   const allowExperimentalApps = useSelector(allowExperimentalAppsSelector);
 

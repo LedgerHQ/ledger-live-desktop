@@ -80,9 +80,9 @@ export type State = {
 
 export type MarketDataApi = {
   setSupportedCoinsList: () => Promise<SupportedCoins>;
-  listPaginated: (MarketListRequestParams) => Promise<CurrencyData[]>;
+  listPaginated: (params: MarketListRequestParams) => Promise<CurrencyData[]>;
   supportedCounterCurrencies: () => Promise<string[]>;
   currencyChartData: (
-    MarketCurrencyChartDataRequestParams,
+    params: MarketCurrencyChartDataRequestParams,
   ) => Promise<{ [range: string]: number[] }>;
 };

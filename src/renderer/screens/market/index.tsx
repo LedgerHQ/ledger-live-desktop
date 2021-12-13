@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from "react";
-import { Flex, Button as BaseButton, Dropdown, Text, SearchInput, Icons } from "@ledgerhq/react-ui";
+import { Flex, Button as BaseButton, Dropdown, Text, SearchInput } from "@ledgerhq/react-ui";
 import { useSelector } from "react-redux";
 import { starredMarketCoinsSelector } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
@@ -59,7 +59,7 @@ export default function Market() {
     setCounterCurrency,
     supportedCounterCurrencies,
   } = useMarketData();
-  const { search, range, starred, liveCompatible } = requestParams;
+  const { search = "", range, starred = [], liveCompatible } = requestParams;
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const starFilterOn = starred.length > 0;
 

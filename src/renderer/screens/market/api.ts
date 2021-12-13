@@ -114,9 +114,11 @@ async function listPaginated({
 
   ids = ids.slice((page - 1) * limit, limit * page);
 
-  const path = `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&sparkline=${sparkline ? "true" : "false"
-    }&price_change_percentage=${range}${ids.length > 0 ? `&page=1&&ids=${ids.toString()}` : `&page=${page}`
-    }`;
+  const path =
+    `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}` +
+    `&sparkline=${sparkline ? "true" : "false"}&price_change_percentage=${range}` +
+    `${ids.length > 0 ? `&page=1&&ids=${ids.toString()}` : `&page=${page}`}`;
+
   const response = await fetch(path);
 
   if (!response.ok) {
