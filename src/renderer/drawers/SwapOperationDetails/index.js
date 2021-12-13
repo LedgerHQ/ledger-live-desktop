@@ -239,7 +239,7 @@ const SwapOperationDetails = ({
         <OpDetailsData>
           <Box>
             <SelectableTextWrapper selectable>
-              <Value>{swapId}</Value>
+              <Value data-test-id="details-swap-id">{swapId}</Value>
               <GradientHover>
                 <CopyWithFeedback text={swapId} />
               </GradientHover>
