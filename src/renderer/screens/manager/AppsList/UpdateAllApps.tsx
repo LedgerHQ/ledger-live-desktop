@@ -117,6 +117,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
             </Tag>
           </Flex>
           <Tooltip
+            disabled={!outOfMemory}
             content={
               outOfMemory ? <Trans i18nKey="manager.applist.item.updateAllOutOfMemory" /> : null
             }
