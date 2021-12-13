@@ -718,7 +718,7 @@
     "buy": {
       "header": "{{provider}} ile kripto satın alın",
       "title": "<0>{{provider}}</0> üzerinden kripto satın alın",
-      "tab": "Al",
+      "tab": "Satın al",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
       "continue": "Devam",
