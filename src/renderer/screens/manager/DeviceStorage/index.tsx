@@ -1,18 +1,14 @@
 import React, { memo } from "react";
-import styled from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 
 import manager from "@ledgerhq/live-common/lib/manager";
-import { Flex, Icons, Tag, Text } from "@ledgerhq/react-ui";
+import { Box, Flex, Icons, Tag, Text, Tooltip } from "@ledgerhq/react-ui";
 
 import { DeviceInfo, FirmwareUpdateContext } from "@ledgerhq/live-common/lib/types/manager";
 import { AppsDistribution } from "@ledgerhq/live-common/lib/apps";
 import { DeviceModel } from "@ledgerhq/devices";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import ByteSize from "~/renderer/components/ByteSize";
-import Tooltip from "~/renderer/components/Tooltip";
-import Box from "~/renderer/components/Box";
 import DeviceIllustration from "~/renderer/components/DeviceIllustration";
 import StorageBar from "./StorageBar";
 
@@ -57,21 +53,23 @@ const DeviceStorage = ({
   const firmwareOutdated = manager.firmwareUnsupported(deviceModel.id, deviceInfo) || firmware;
 
   return (
-    <Flex horizontal alignItems="center">
+    <Flex flexDirection="row" alignItems="center">
       <DeviceIllustration height={132} width={120} deviceId={deviceModel?.id} />
-      <Flex p="16px 0px 16px 16px" flexDirection="column" flex={1}>
-        <Flex horizontal mb="8px" alignItems="center">
+      <Flex py={6} pl={6} pr={0} flexDirection="column" flex={1}>
+        <Flex horizontal mb={3} alignItems="center">
           <Text variant="h3" fontWeight="medium" uppercase color="palette.neutral.c100">
             {deviceModel.productName}
           </Text>
           <Box ml={2}>
             <Tooltip content={<Trans i18nKey="manager.deviceStorage.genuine" />}>
-              <Icons.CircledCheckRegular color="palette.success.c100" ml="6px" size={24} />
+              <Flex>
+                <Icons.CircledCheckRegular color="palette.success.c100" ml="6px" size={24} />
+              </Flex>
             </Tooltip>
           </Box>
         </Flex>
-        <Flex horizontal mb="18px" alignItems="center">
-          <Tag active type="opacity" mr="8px">
+        <Flex flexDirection="row" mb="18px" alignItems="center">
+          <Tag active type="opacity" mr={3}>
             v{deviceInfo.version}
           </Tag>
           <Text variant="small" fontWeight="medium" color="palette.neutral.c80">
@@ -97,8 +95,8 @@ const DeviceStorage = ({
           uninstallQueue={uninstallQueue}
           jobInProgress={jobInProgress}
         />
-        <Flex horizontal mt="12px" justifyContent="space-between" alignItems="center">
-          <Flex horizontal>
+        <Flex flexDirection="row" mt={5} justifyContent="space-between" alignItems="center">
+          <Flex flexDirection="row">
             <InfoParticle
               label={t("manager.deviceStorage.used")}
               value={
@@ -124,7 +122,7 @@ const DeviceStorage = ({
               value={!isIncomplete ? distribution.apps.length : "—"}
             />
           </Flex>
-          <Flex horizontal alignItems="center">
+          <Flex flexDirection="row" alignItems="center">
             <Text uppercase variant="subtitle" color="palette.light.neutral.c80">
               {isIncomplete ? (
                 <Trans i18nKey="manager.deviceStorage.incomplete" />
