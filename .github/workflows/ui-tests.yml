@@ -1,4 +1,4 @@
-name: UI tests
+name: "[Tests] Screenshot Testing"
 on:
   pull_request:
     branches:
@@ -11,59 +11,34 @@ on:
 
 jobs:
   cancel-previous:
+    name: "cancel previous workflow"
     runs-on: ubuntu-20.04
     steps:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
   start-runner:
-    name: start self-hosted EC2 runner
+    name: "start ec2 instance"
     needs: cancel-previous
-    runs-on: [ledger-live-desktop]
-    outputs:
-      label: ${{ steps.start-ec2-runner.outputs.label }}
-      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
-    steps:
-      - name: get latest LLD runner AMI id
-        id: get-ami-id
-        run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
-      - name: start EC2 runner
-        id: start-ec2-runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: start
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
-          ec2-instance-type: c5.4xlarge
-          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
-          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
-      - name: get volume-id
-        id: get-volume-id
-        run: |
-          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
-      - name: resize rootfs
-        env:
-          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
-        run: |
-          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@master
+    with:
+      instance-type: c5.4xlarge
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: Stop self-hosted EC2 runner
-    needs: [start-runner, ui-tests-linux]
-    runs-on: [ledger-live-desktop]
+    name: "stop ec2 instance"
     if: ${{ always() }}
-    steps:
-      - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: stop
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    needs: [start-runner, ui-tests-linux]
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@master
+    with:
+      label: ${{ needs.start-runner.outputs.label }}
+      ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   ui-tests-linux:
-    name: UI tests (Linux)
+    name: "[UI Linux]"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
     steps:
@@ -120,6 +95,14 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+          workspace: ${{ github.workspace }}
+          os: linux
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-linux.json
+          path: images-linux.json
       - name: save PR number
         if: always()
         run: |
@@ -129,7 +112,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: report-
+          name: tests-reports
           path: |
             lint.txt
             jest.txt
@@ -138,7 +121,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: playwright-results-ubuntu-20.04
+          name: playwright-results-linux
           path: |
             playwright/artifacts/test-results
             playwright/artifacts/html-report
@@ -147,7 +130,7 @@ jobs:
 
   ui-tests:
     needs: cancel-previous
-    name: UI tests (${{ matrix.os }})
+    name: "[UI ${{ matrix.os }}]"
     strategy:
       fail-fast: false
       matrix:
@@ -191,6 +174,14 @@ jobs:
         id: imgur
         with:
           path: playwright/artifacts/test-results
+          workspace: ${{ github.workspace }}
+          os: ${{ matrix.os }}
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-${{ matrix.os }}.json
+          path: images-${{ matrix.os }}.json
       - name: upload ci suggested screenshots
         if: always()
         uses: actions/upload-artifact@v2
