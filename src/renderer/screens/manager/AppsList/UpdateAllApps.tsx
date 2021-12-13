@@ -10,15 +10,14 @@ import {
 } from "@ledgerhq/live-common/lib/apps";
 import { App } from "@ledgerhq/live-common/lib/types/manager";
 import { State, Action } from "@ledgerhq/live-common/lib/apps/types";
-import { Flex, Icons, Text, Tag, Tooltip } from "@ledgerhq/react-ui";
+import { Flex, InfiniteLoader, Icons, Text, Tag, Tooltip } from "@ledgerhq/react-ui";
 
+import { Loader, LoaderContainer, LOADER_SIZE } from "./Progress";
 import CollapsibleCard from "~/renderer/components/CollapsibleCard";
-import Box from "~/renderer/components/Box/Box";
 import FadeInOutBox from "~/renderer/components/FadeInOutBox";
 import Button from "~/renderer/components/Button";
 
 import Item from "./Item";
-import Progress from "~/renderer/components/Progress";
 
 const UpdatableHeader = styled(Flex).attrs(() => ({
   flex: 1,
@@ -26,14 +25,6 @@ const UpdatableHeader = styled(Flex).attrs(() => ({
   alignItems: "center",
   justifyContent: "space-between",
 }))``;
-
-const ProgressHolder = styled.div`
-  width: 100px;
-  height: 5px;
-  position: relative;
-  border-radius: 5px;
-  overflow: hidden;
-`;
 
 type Props = {
   update: App[];
@@ -84,26 +75,18 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
                 count={updateAllQueue.length}
               />
             </Text>
-            <Text ff="Inter|SemiBold" fontSize={2} color="palette.text.shade60">
-              <Trans i18nKey="manager.applist.updatable.progressWarning" />
-            </Text>
           </Flex>
-          <Flex flexDirection="column" alignItems="flex-end" alignSelf="flex-end">
-            <Box
-              flex="0 0 auto"
-              horizontal
-              alignItems="center"
-              justifyContent="center"
-              py={1}
-              maxWidth="100%"
-            >
-              <Text ff="Inter|SemiBold" fontSize={3} color="palette.primary.main">
-                <Trans i18nKey="manager.applist.updatable.progress" />
-              </Text>
-            </Box>
-            <ProgressHolder>
-              <Progress progress={updateProgress} timing={1200} infinite />
-            </ProgressHolder>
+          <Flex flexDirection="row" alignItems="center" alignSelf="center">
+            <Text variant="paragraph" fontWeight="semibold" color="primary.c80" mr={2}>
+              <Trans i18nKey="manager.applist.updatable.progress" />
+            </Text>
+            <LoaderContainer>
+              {updateProgress !== 1 ? (
+                <Loader progress={(updateProgress || 0) * 100} />
+              ) : (
+                <InfiniteLoader size={LOADER_SIZE} />
+              )}
+            </LoaderContainer>
           </Flex>
         </>
       ) : (
@@ -168,6 +151,4 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
   );
 };
 
-// export default memo<Props>(UpdateAllApps);
-
-export default UpdateAllApps;
+export default memo<Props>(UpdateAllApps);

@@ -16,9 +16,9 @@ type Props = {
   isCurrent: boolean;
 };
 
-const LOADER_SIZE = 18;
+export const LOADER_SIZE = 18;
 
-const Loader = styled(ProgressLoader).attrs(p => ({
+export const Loader = styled(ProgressLoader).attrs(p => ({
   frontStrokeColor: p.theme.colors.primary.c80,
   radius: LOADER_SIZE / 2,
   stroke: 3.5,
@@ -26,7 +26,7 @@ const Loader = styled(ProgressLoader).attrs(p => ({
   showPercentage: false,
 }))``;
 
-const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div`
   height: ${LOADER_SIZE}px;
   width: ${LOADER_SIZE}px;
 `;
