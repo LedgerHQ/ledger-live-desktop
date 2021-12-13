@@ -11,15 +11,13 @@ import { ChevronBottomMedium, ChevronTopMedium } from "@ledgerhq/icons-ui/react"
 import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 
 export type Props<O> = SelectInputProps<O, false, GroupBase<O>> & {
-  label: string;
   searchable?: boolean;
 };
 
 function DropdownControl<O, M extends boolean, G extends GroupBase<O>>(
   props: ControlProps<O, M, G>,
 ) {
-  const { selectProps, children } = props;
-  const { label } = (selectProps as unknown) as Props<O>;
+  const { children } = props;
 
   return (
     <components.Control {...props}>
