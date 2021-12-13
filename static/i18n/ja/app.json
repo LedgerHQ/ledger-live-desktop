@@ -673,7 +673,7 @@
     }
   },
   "account": {
-    "lastOperations": "前回の取引",
+    "lastOperations": "最近の取引",
     "contractAddress": "コントラクト：",
     "openInExplorer": "エクスプローラーで開く",
     "emptyState": {
