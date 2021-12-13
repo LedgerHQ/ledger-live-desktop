@@ -1,4 +1,4 @@
-name: "[TESTS] Screenshots Update Test"
+name: "[Tests] Screenshots Update Test"
 on:
   workflow_dispatch:
     inputs:
@@ -17,7 +17,9 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: cancel-previous
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@master
+    with:
+      instance-type: c5.4xlarge
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
@@ -25,7 +27,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, generate-screenshots-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@master
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
