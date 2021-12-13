@@ -8,7 +8,7 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
-const APP_ID = "ledger-card";
+export const CARD_APP_ID = "ledger-card";
 
 /**
  * FIXME
@@ -18,7 +18,7 @@ const APP_ID = "ledger-card";
 export default function CardPlatformApp() {
   const { state: urlParams } = useLocation();
   const { manifests } = usePlatformApp();
-  const manifest = manifests.get(APP_ID);
+  const manifest = manifests.get(CARD_APP_ID);
 
   const themeType = useTheme("colors.palette.type");
 
@@ -28,7 +28,7 @@ export default function CardPlatformApp() {
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
-      <TrackPage category="Card" name="Card" appId={APP_ID} />
+      <TrackPage category="Card" name="Card" appId={CARD_APP_ID} />
       {manifest ? (
         <WebPlatformPlayer
           config={{
