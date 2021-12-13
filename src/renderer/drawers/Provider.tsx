@@ -1,19 +1,19 @@
 import React, { useReducer, useEffect, useCallback } from "react";
-
-import type { DrawerProps as SideDrawerProps } from "~/renderer/components/SideDrawer";
+import { DrawerProps } from "@ledgerhq/react-ui/components/layout/Drawer";
 
 type State = {
-  Component?: React.ComponentType,
-  props?: null | Record<string, any>,
-  open: boolean,
-  options: Omit<SideDrawerProps, "children" | "isOpen" | "onRequestBack" | "onRequestClose"> | {},
+  Component?: React.ComponentType;
+  componentProps?: null | Record<string, any>;
+  open: boolean;
+  options?: Partial<Omit<DrawerProps, "children" | "isOpen">>;
+  // isOpen and children are controlled by the Drawer component itself according to the context
 };
 
 // actions
 // it makes them available and current from connector events handlers
 export let setDrawer: (
   Component?: State["Component"],
-  props?: State["props"],
+  componentProps?: State["componentProps"],
   options?: State["options"],
 ) => void = () => {};
 
@@ -24,9 +24,14 @@ const reducer = (state: State, update: State) => {
     ...update,
   };
 };
-const initialState: State = { Component: undefined, props: null, open: false, options: {} };
+const initialState: State = {
+  Component: undefined,
+  componentProps: null,
+  open: false,
+  options: {},
+};
 
-type ContextValue = { state: State, setDrawer: typeof setDrawer };
+type ContextValue = { state: State; setDrawer: typeof setDrawer };
 
 export const context = React.createContext<ContextValue>({
   state: initialState,
@@ -35,10 +40,10 @@ export const context = React.createContext<ContextValue>({
 
 const DrawerProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const _setDrawer: typeof setDrawer = useCallback(
-    (Component, props, options = {}) => dispatch({ Component, props, open: !!Component, options }),
-    [],
-  );
+  const _setDrawer: typeof setDrawer = useCallback((Component, componentProps, options) => {
+    console.log("options in provider", options);
+    dispatch({ Component, componentProps, open: !!Component, options });
+  }, []);
 
   useEffect(() => {
     setDrawer = _setDrawer;

@@ -1,10 +1,9 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { Icons, Text } from "@ledgerhq/react-ui";
 
-import { context as drawersContext } from "~/renderer/drawers/Provider";
 import Track from "~/renderer/analytics/Track";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -14,17 +13,12 @@ import DropDownSelector, {
 } from "~/renderer/components/DropDownSelector";
 import Switch from "~/renderer/components/Switch";
 import Tooltip from "~/renderer/components/Tooltip";
-import IconDownloadCloud from "~/renderer/icons/DownloadCloud";
-import IconSend from "~/renderer/icons/Send";
 import { openModal } from "~/renderer/actions/modals";
 import { useHideEmptyTokenAccounts } from "~/renderer/actions/settings";
 
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import ExportOperations from "~/renderer/modals/ExportOperations";
+import ExportOperations from "~/renderer/drawers/ExportOperations";
 
-const Item: ThemedComponent<{
-  disableHover?: boolean;
-}> = styled(DropDownItem)`
+const Item = styled(DropDownItem)`
   width: 230px;
   cursor: pointer;
   white-space: pre-wrap;
@@ -34,14 +28,21 @@ const Item: ThemedComponent<{
 
 type ItemType = DropDownItemType & {
   icon?: React.ReactElement<any>;
-  onClick?: () => void;
+  onClick?: (e?: MouseEvent) => void;
   type?: "separator";
 };
 
 const OptionsButton = () => {
   const dispatch = useDispatch();
-  const { setDrawer } = useContext(drawersContext);
+  const [isOperationsDrawerOpen, setIsOperationsDrawerOpen] = useState(false);
   const [hideEmptyTokenAccounts, setHideEmptyTokenAccounts] = useHideEmptyTokenAccounts();
+
+  const openOperationsDrawer = useCallback(() => setIsOperationsDrawerOpen(true), [
+    setIsOperationsDrawerOpen,
+  ]);
+  const closeOperationsDrawer = useCallback(() => setIsOperationsDrawerOpen(false), [
+    setIsOperationsDrawerOpen,
+  ]);
 
   const onOpenModal = useCallback(
     (modal: string) => {
@@ -51,12 +52,12 @@ const OptionsButton = () => {
   );
   const { t } = useTranslation();
 
-  const items: DropDownItemType[] = [
+  const items: ItemType[] = [
     {
       key: "exportOperations",
       label: t("accounts.optionsMenu.exportOperations"),
       icon: <Icons.ExportMedium size="18px" />,
-      onClick: () => setDrawer(ExportOperations),
+      onClick: openOperationsDrawer,
     },
     {
       key: "exportAccounts",
@@ -67,9 +68,11 @@ const OptionsButton = () => {
     {
       key: "hideEmpty",
       label: t("settings.accounts.hideEmptyTokens.title"),
-      onClick: (e: MouseEvent) => {
-        e.preventDefault();
-        e.stopPropagation();
+      onClick: (e?: MouseEvent) => {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
         setHideEmptyTokenAccounts(!hideEmptyTokenAccounts);
       },
     },
@@ -94,7 +97,11 @@ const OptionsButton = () => {
                   : "hideEmptyTokenAccountsDisabled"
               }
             />
-            <Switch small isChecked={hideEmptyTokenAccounts} onChange={setHideEmptyTokenAccounts} />
+            <Switch
+              name="hide-empty-accounts"
+              isChecked={hideEmptyTokenAccounts}
+              onChange={setHideEmptyTokenAccounts}
+            />
           </Box>
         ) : item.icon ? (
           <Box mr={4}>{item.icon}</Box>
@@ -106,22 +113,19 @@ const OptionsButton = () => {
     );
   };
 
-  // TODO: replace this dropdown
   return (
-    <DropDownSelector
-      buttonId="accounts-options-button"
-      horizontal
-      items={items}
-      renderItem={renderItem}
-    >
-      {() => (
-        <Box horizontal>
-          <Tooltip content={t("accounts.optionsMenu.title")}>
-            <Button variant="shade" Icon={Icons.OthersMedium} />
-          </Tooltip>
-        </Box>
-      )}
-    </DropDownSelector>
+    <>
+      <ExportOperations isOpen={isOperationsDrawerOpen} onClose={closeOperationsDrawer} />
+      <DropDownSelector buttonId="accounts-options-button" items={items} renderItem={renderItem}>
+        {() => (
+          <Box horizontal>
+            <Tooltip content={t("accounts.optionsMenu.title")}>
+              <Button variant="shade" Icon={Icons.OthersMedium} />
+            </Tooltip>
+          </Box>
+        )}
+      </DropDownSelector>
+    </>
   );
 };
 
