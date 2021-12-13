@@ -20,6 +20,12 @@ const Container = styled(Flex).attrs({
   mx: -1,
 })``;
 
+const SearchContainer = styled(Flex).attrs({ flex: "1" })`
+  > div {
+    width: 100%;
+  }
+`;
+
 export const Button = styled(BaseButton)<{ big?: boolean }>`
   border-radius: 44px;
 
@@ -33,7 +39,7 @@ export const Button = styled(BaseButton)<{ big?: boolean }>`
           font-size:  ${p.big ? 14 : 12}px;
           height: ${p.big ? 48 : 32}px;
           line-height: ${p.big ? 48 : 32}px;
-          padding: 0 15px;
+          padding: 0 ${p.big ? 25 : 15}px;
       `}
 
   ${p => (p.variant === "shade" ? `background-color: transparent!important;` : ``)}
@@ -93,14 +99,9 @@ export default function Market() {
     <Container>
       <Title>{t("market.title")}</Title>
       <Flex flexDirection="row" pr="6px" my={2} alignItems="center" justifyContent="space-between">
-        <Flex flex="1">
-          <SearchInput
-            flex="1"
-            value={search}
-            onChange={updateSearch}
-            placeholder={t("common.search")}
-          />
-        </Flex>
+        <SearchContainer>
+          <SearchInput value={search} onChange={updateSearch} placeholder={t("common.search")} />
+        </SearchContainer>
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
           <CounterValueSelect
             counterCurrency={counterCurrency}

@@ -1,13 +1,15 @@
 // @flow
 import React, { useMemo, memo, useCallback } from "react";
 import { Flex, Text, Bar } from "@ledgerhq/react-ui";
+import { SwitchTransition, Transition } from "react-transition-group";
 import { rangeDataTable } from "../utils/rangeDataTable";
 import counterValueFormatter from "../utils/countervalueFormatter";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Chart from "~/renderer/components/Chart";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import ChartPlaceholder from "../assets/ChartPlaceholder";
+import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
 const Title = styled(Text).attrs({ variant: "h3", color: "neutral.c100", mt: 1, mb: 5 })`
   font-size: 28px;
@@ -22,6 +24,18 @@ const TooltipText = styled(Text).attrs({ variant: "body", color: "neutral.c100",
 `;
 const SubTooltipText = styled(Text).attrs({ variant: "small", color: "neutral.c60" })`
   font-size: 12px;
+`;
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 },
+};
+
+const FadeIn = styled.div.attrs(p => ({ style: transitionStyles[p.state] }))`
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 `;
 
 const ranges = Object.keys(rangeDataTable);
@@ -142,26 +156,45 @@ function MarkeCoinChartComponent({
           ))}
         </Bar>
       </Flex>
-      {loading || !data.length ? (
-        <Flex height={250}>
-          <ChartPlaceholder color={color} />
-        </Flex>
-      ) : (
-        <Chart
-          magnitude={1}
-          color={color}
-          data={data}
-          height={250}
-          width="100%"
-          loading={loading}
-          tickXScale={scale}
-          renderTickY={val => val}
-          renderTooltip={renderTooltip}
-          suggestedMin={suggestedMin}
-          suggestedMax={suggestedMax}
-          key={2}
-        />
-      )}
+      <SwitchTransition>
+        <Transition
+          key={loading || !data.length ? "loading" : "ready"}
+          timeout={400}
+          unmountOnExit
+          mountOnEnter
+        >
+          {state => (
+            <FadeIn state={state}>
+              {loading || !data.length ? (
+                <Flex height={250} color="neutral.c60">
+                  <ChartPlaceholder />
+                </Flex>
+              ) : (
+                <Chart
+                  magnitude={1}
+                  color={color}
+                  data={data}
+                  height={250}
+                  width="100%"
+                  loading={loading}
+                  tickXScale={scale}
+                  renderTickY={value =>
+                    counterValueFormatter({
+                      value,
+                      shorten: String(value).length > 7,
+                      locale,
+                    })
+                  }
+                  renderTooltip={renderTooltip}
+                  suggestedMin={suggestedMin}
+                  suggestedMax={suggestedMax}
+                  key={2}
+                />
+              )}
+            </FadeIn>
+          )}
+        </Transition>
+      </SwitchTransition>
     </Flex>
   );
 }

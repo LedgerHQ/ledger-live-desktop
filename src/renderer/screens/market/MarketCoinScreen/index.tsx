@@ -15,6 +15,7 @@ import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/acti
 import { Button } from "..";
 import MarketCoinChart from "./MarketCoinChart";
 import MarketInfo from "./MarketInfo";
+import { useProviders } from "../../exchange/Swap2/Form";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -48,6 +49,13 @@ export default function MarketCoinScreen() {
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);
   const locale = useSelector(localeSelector);
+  const { providers, storedProviders } = useProviders();
+  const swapAvailableIds =
+    providers || storedProviders
+      ? (providers || storedProviders)
+          .map(({ pairs }) => pairs.map(({ from, to }) => [from, to]))
+          .flat(2)
+      : [];
 
   const {
     selectedCoinData: currency,
@@ -60,6 +68,10 @@ export default function MarketCoinScreen() {
     setCounterCurrency,
     supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
+
+  const availableOnSell = currency && isCurrencySupported("SELL", currency);
+  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
+  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
 
   const {
     id,
@@ -102,6 +114,22 @@ export default function MarketCoinScreen() {
       });
     },
     [internalCurrency, history],
+  );
+
+  const onSell = useCallback(
+    e => {
+      e.preventDefault();
+      e.stopPropagation();
+      setTrackingSource("market page details");
+      history.push({
+        pathname: "/exchange",
+        state: {
+          tab: 1,
+          defaultCurrency: internalCurrency,
+        },
+      });
+    },
+    [history, internalCurrency],
   );
 
   const onSwap = useCallback(
@@ -162,13 +190,18 @@ export default function MarketCoinScreen() {
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
           {internalCurrency && (
             <>
-              {isCurrencySupported("BUY", internalCurrency) && (
-                <Button variant="main" big mr={20} px={4} onClick={onBuy}>
+              {availableOnBuy && (
+                <Button variant="shade" mr={1} onClick={onBuy}>
                   {t("accounts.contextMenu.buy")}
                 </Button>
               )}
-              {isCurrencySupported("SELL", internalCurrency) && (
-                <Button variant="main" big px={4} onClick={onSwap}>
+              {availableOnSell && (
+                <Button variant="shade" mr={1} onClick={onSell}>
+                  {t("accounts.contextMenu.sell")}
+                </Button>
+              )}
+              {availableOnSwap && (
+                <Button variant="shade" onClick={onSwap}>
                   {t("accounts.contextMenu.swap")}
                 </Button>
               )}

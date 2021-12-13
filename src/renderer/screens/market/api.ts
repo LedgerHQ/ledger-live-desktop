@@ -8,15 +8,18 @@ import {
 } from "./types";
 import {
   listCryptoCurrencies,
+  listTokens,
   listSupportedCurrencies,
 } from "@ledgerhq/live-common/lib/currencies";
 import { rangeDataTable } from "./utils/rangeDataTable";
 
-const cryptoCurrenciesList = listCryptoCurrencies();
+const cryptoCurrenciesList = [...listCryptoCurrencies(), ...listTokens()];
 
-const liveCompatibleIds = listSupportedCurrencies()
-  .map(({ id }) => id)
-  .filter(Boolean);
+const supportedCurrencies = listSupportedCurrencies();
+
+const liveCompatibleIds = supportedCurrencies.map(({ id }) => id).filter(Boolean);
+
+let LIVE_COINS_LIST: string[] = [];
 
 const ROOT_PATH = "https://api.coingecko.com/api/v3";
 
@@ -29,6 +32,11 @@ async function setSupportedCoinsList(): Promise<SupportedCoins> {
   }
 
   SUPPORTED_COINS_LIST = await response.json();
+
+  LIVE_COINS_LIST = SUPPORTED_COINS_LIST.filter(({ id }) => liveCompatibleIds.includes(id)).map(
+    ({ id }) => id,
+  );
+
   return SUPPORTED_COINS_LIST;
 }
 
@@ -87,29 +95,28 @@ async function listPaginated({
   sparkline = true,
   liveCompatible = false,
 }: MarketListRequestParams): Promise<CurrencyData[]> {
-  let path = `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&page=${page}&sparkline=${sparkline ? "true" : "false"
-    }&price_change_percentage=${range}`;
-
-  let ids = starred.length ? starred : _ids;
+  let ids = _ids;
 
   if (liveCompatible) {
-    if (starred.length > 0) {
-      ids = starred.filter(star => liveCompatibleIds.includes(star));
-    } else ids = liveCompatibleIds;
+    ids = ids.concat(LIVE_COINS_LIST);
+  }
+
+  if (starred.length > 0) {
+    ids = ids.concat(starred);
   }
 
   if (search) {
-    ids = SUPPORTED_COINS_LIST.filter(matchSearch(search))
-      .map(({ id }) => id)
-      .slice((page - 1) * limit, limit * page);
+    ids = SUPPORTED_COINS_LIST.filter(matchSearch(search)).map(({ id }) => id);
     if (!ids.length) {
       return [];
     }
   }
 
-  if (ids.length) {
-    path += `&ids=${ids.toString()}`;
-  }
+  ids = ids.slice((page - 1) * limit, limit * page);
+
+  const path = `${ROOT_PATH}/coins/markets?vs_currency=${counterCurrency}&order=${orderBy}_${order}&per_page=${limit}&sparkline=${sparkline ? "true" : "false"
+    }&price_change_percentage=${range}${ids.length > 0 ? `&page=1&&ids=${ids.toString()}` : `&page=${page}`
+    }`;
   const response = await fetch(path);
 
   if (!response.ok) {
@@ -144,7 +151,9 @@ async function listPaginated({
       id: currency.id,
       name: currency.name,
       image: currency.image,
-      internalCurrency: cryptoCurrenciesList.find(({ id }) => id === currency.id),
+      internalCurrency: cryptoCurrenciesList.find(
+        ({ ticker }) => ticker.toLowerCase() === currency.symbol,
+      ),
       marketcap: currency.market_cap,
       marketcapRank: currency.market_cap_rank,
       totalVolume: currency.total_volume,

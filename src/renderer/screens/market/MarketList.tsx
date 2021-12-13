@@ -10,9 +10,11 @@ import MarketRowItem from "./MarketRowItem";
 import LoadingPlaceholder from "../../components/LoadingPlaceholder";
 import NoCryptoFound from "./assets/noCryptoFound";
 import { Button } from ".";
+import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
+import { useProviders } from "../exchange/Swap2/Form";
 
 type Props = {
   data: MarketDataContextType;
@@ -187,10 +189,14 @@ const CurrencyRow = memo(function CurrencyRowItem({
   selectCurrency,
   starredMarketCoins,
   locale,
+  swapAvailableIds,
   style,
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
+  const availableOnSell = currency && isCurrencySupported("SELL", currency);
+  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
+  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
   return (
     <MarketRowItem
       loading={!currency || (index === data.length && index > 50 && loading)}
@@ -201,6 +207,9 @@ const CurrencyRow = memo(function CurrencyRowItem({
       key={index}
       locale={locale}
       selectCurrency={selectCurrency}
+      availableOnSell={availableOnSell}
+      availableOnBuy={availableOnBuy}
+      availableOnSwap={availableOnSwap}
       style={{ ...style }}
     />
   );
@@ -215,6 +224,14 @@ function MarketList({
 }) {
   const { t } = useTranslation();
   const locale = useSelector(localeSelector);
+  const { providers, storedProviders } = useProviders();
+  const swapAvailableIds =
+    providers || storedProviders
+      ? (providers || storedProviders)
+          .map(({ pairs }) => pairs.map(({ from, to }) => [from, to]))
+          .flat(2)
+      : [];
+
   const {
     marketData,
     loading,
@@ -307,6 +324,7 @@ function MarketList({
                         selectCurrency={selectCurrency}
                         starredMarketCoins={starredMarketCoins}
                         locale={locale}
+                        swapAvailableIds={swapAvailableIds}
                       />
                     )}
                   </List>
@@ -337,6 +355,7 @@ function MarketList({
                             selectCurrency={selectCurrency}
                             starredMarketCoins={starredMarketCoins}
                             locale={locale}
+                            swapAvailableIds={swapAvailableIds}
                           />
                         )}
                       </List>

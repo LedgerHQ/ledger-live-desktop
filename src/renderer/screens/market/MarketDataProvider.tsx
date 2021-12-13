@@ -92,7 +92,6 @@ const ACTIONS = {
 };
 
 function marketDataReducer(state, action) {
-  console.log(action, state);
   switch (action.type) {
     case ACTIONS.IS_READY:
       return { ...state, ...action.payload, isReady: true };
