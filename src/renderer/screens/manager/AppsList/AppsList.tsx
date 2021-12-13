@@ -85,10 +85,7 @@ const AppsList = ({
   const [sort, setSort] = useState({ type: "marketcap", order: "desc" });
   const [activeTab, setActiveTab] = useState(0);
 
-  const onTextChange = useCallback(
-    (evt: SyntheticInputEvent<HTMLInputElement>, v) => setQuery(evt.target.value),
-    [setQuery],
-  );
+  const onTextChange = useCallback((v: string) => setQuery(v), [setQuery]);
 
   /** clear search field on tab change */
   useEffect(() => {
