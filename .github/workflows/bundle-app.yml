@@ -72,7 +72,7 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: cancel-previous
-    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@master
+    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
     secrets:
@@ -82,7 +82,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, bundle-linux]
-    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@master
+    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
