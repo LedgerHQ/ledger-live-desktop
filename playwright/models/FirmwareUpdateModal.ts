@@ -15,7 +15,6 @@ export class FirmwareUpdateModal extends Modal {
     this.downloadProgress = page.locator('data-test-id=firmware-update-download-progress');
     this.flashProgress = page.locator('data-test-id=firmware-update-flash-mcu-progress');
     this.updateDone = page.locator('data-test-id=firmware-update-done');
-    
   }
 
   async tickCheckbox() {

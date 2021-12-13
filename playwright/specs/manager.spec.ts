@@ -16,6 +16,7 @@ test("Manager", async ({ page }) => {
     expect(await page.screenshot()).toMatchSnapshot({
       name: "manager-app-catalog.png",
     });
+    await managerPage.installAppButton("Tron").hover(); // FIXME: workaround for slow CI machines (windows & macos)
   });
 
   await test.step("can install an app", async () => {
