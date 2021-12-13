@@ -20,18 +20,20 @@ import Link from "~/renderer/components/Link";
 import Button from "~/renderer/components/Button";
 import Progress from "~/renderer/screens/manager/AppsList/Progress";
 
-const AppActionsWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  min-width: 150px;
-  justify-content: space-between;
-  flex-direction: row;
-`;
+const AppActionsWrapper = styled(Flex).attrs(() => ({
+  flex: 1,
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  minWidth: "150px",
+}))``;
 
-const Cell = styled(Flex)`
-  width: 50%;
-  flex-direction: row;
-`;
+const Cell = styled(Flex).attrs(() => ({
+  flex: 1,
+  flexDirection: "row",
+  alignItems: "center",
+  width: "50px",
+}))``;
 
 type Props = {
   state: State;
@@ -136,7 +138,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                       )
                     }
                   >
-                    <div>
+                    <Flex>
                       <Link
                         iconPosition="left"
                         event="Manager AddAccount Click"
@@ -151,7 +153,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                       >
                         <Trans i18nKey="manager.applist.item.addAccount" />
                       </Link>
-                    </div>
+                    </Flex>
                   </Tooltip>
                 ) : (
                   <Tooltip
@@ -162,7 +164,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                       />
                     }
                   >
-                    <div>
+                    <Flex>
                       <Link
                         iconPosition="left"
                         event="Manager SupportLink Click"
@@ -176,7 +178,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                       >
                         <Trans i18nKey="manager.applist.item.learnMore" />
                       </Link>
-                    </div>
+                    </Flex>
                   </Tooltip>
                 )
               ) : null}
@@ -185,51 +187,62 @@ const AppActions: React$ComponentType<Props> = React.memo(
               {appStoreView && installed ? (
                 <Flex flexDirection="row" alignItems="center" justifyContent="center">
                   <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
-                  <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
+                  <Text
+                    ml="4px"
+                    variant="paragraph"
+                    fontWeight="medium"
+                    color="palette.success.c100"
+                  >
                     <Trans i18nKey="manager.applist.item.installed" />
                   </Text>
                 </Flex>
               ) : !installed ? (
-                  <Tooltip
-                    disabled={!notEnoughMemoryToInstall}
-                    content={<Trans i18nKey="manager.applist.item.notEnoughSpace" />}
-                  >
-                    <div>
-                      <Button
-                        variant="shade"
-                        Icon={Icons.ArrowToBottomMedium}
-                        iconPosition="left"
-                        id={`appActionsInstall-${name}`}
-                        disabled={!canInstall || notEnoughMemoryToInstall}
-                        onClick={onInstall}
-                        event="Manager Install Click"
-                        eventProperties={{
-                          appName: name,
-                          appVersion: app.version,
-                        }}
-                      >
-                        <Trans i18nKey="manager.applist.item.install" />
-                      </Button>
-                    </div>
-                  </Tooltip>
-              ) : (((installed || !installedAvailable) && !appStoreView && !onlyUpdate) || forceUninstall) ? (
                 <Tooltip
-                content={
-                  <Trans i18nKey="manager.applist.item.removeTooltip" values={{ appName: name }} />
-                }
-              >
-                <Link
-                  id={`appActionsUninstall-${name}`}
-                  event="Manager Uninstall Click"
-                  eventProperties={{
-                    appName: name,
-                    appVersion: app.version,
-                  }}
-                  onClick={onUninstall}
-                  Icon={Icons.TrashMedium}
-                  type="shade"
-                />
-              </Tooltip>
+                  disabled={!notEnoughMemoryToInstall}
+                  content={<Trans i18nKey="manager.applist.item.notEnoughSpace" />}
+                >
+                  <Flex>
+                    <Button
+                      variant="shade"
+                      Icon={Icons.ArrowToBottomMedium}
+                      iconPosition="left"
+                      id={`appActionsInstall-${name}`}
+                      disabled={!canInstall || notEnoughMemoryToInstall}
+                      onClick={onInstall}
+                      event="Manager Install Click"
+                      eventProperties={{
+                        appName: name,
+                        appVersion: app.version,
+                      }}
+                    >
+                      <Trans i18nKey="manager.applist.item.install" />
+                    </Button>
+                  </Flex>
+                </Tooltip>
+              ) : ((installed || !installedAvailable) && !appStoreView && !onlyUpdate) ||
+                forceUninstall ? (
+                <Tooltip
+                  content={
+                    <Trans
+                      i18nKey="manager.applist.item.removeTooltip"
+                      values={{ appName: name }}
+                    />
+                  }
+                >
+                  <Flex>
+                    <Link
+                      id={`appActionsUninstall-${name}`}
+                      event="Manager Uninstall Click"
+                      eventProperties={{
+                        appName: name,
+                        appVersion: app.version,
+                      }}
+                      onClick={onUninstall}
+                      Icon={Icons.TrashMedium}
+                      type="shade"
+                    />
+                  </Flex>
+                </Tooltip>
               ) : null}
             </Cell>
           </>
@@ -243,7 +256,12 @@ const AppActions: React$ComponentType<Props> = React.memo(
               <Cell justifyContent="flex-end">
                 <Flex flexDirection="row" alignItems="center" justifyContent="center">
                   <Icons.CheckAloneMedium size={15} color="palette.success.c100" />
-                  <Text ml="4px" variant="paragraph" fontWeight="medium" color="palette.success.c100">
+                  <Text
+                    ml="4px"
+                    variant="paragraph"
+                    fontWeight="medium"
+                    color="palette.success.c100"
+                  >
                     <Trans i18nKey="manager.applist.item.updated" />
                   </Text>
                 </Flex>
