@@ -11,30 +11,27 @@ test("Firmware Update", async ({ page }) => {
   const firmwareUpdateModal = new FirmwareUpdateModal(page);
   const deviceAction = new DeviceAction(page);
 
-  await test.step("access manager", async () => {
+  await test.step("Access manager", async () => {
     await managerPage.goToManager();
     await deviceAction.accessManager();
     await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
-    expect(await page.screenshot()).toMatchSnapshot({
-      name: "manager-page.png",
-    });
   });
 
-  await test.step("firmware update flow-2", async () => {
+  await test.step("Open firmware update modal", async () => {
     await managerPage.openFirmwareUpdateModal();
     expect(await firmwareUpdateModal.container.screenshot()).toMatchSnapshot({
       name: "firmware-update-button.png",
     });
   });
 
-  await test.step("firmware update flow-3", async () => {
+  await test.step("Firmware update changelog", async () => {
     await firmwareUpdateModal.tickCheckbox();
     expect(await firmwareUpdateModal.container.screenshot()).toMatchSnapshot({
       name: "modal-checkbox.png",
     });
   });
 
-  await test.step("firmware update flow-5", async () => {
+  await test.step("MCU download step", async () => {
     await firmwareUpdateModal.continue();
     await firmwareUpdateModal.downloadProgress.waitFor({ state: "visible" });
     expect(await firmwareUpdateModal.container.screenshot()).toMatchSnapshot({
@@ -42,7 +39,7 @@ test("Firmware Update", async ({ page }) => {
     });
   });
 
-  await test.step("firmware update flow-6", async () => {
+  await test.step("MCU flash step", async () => {
     await deviceAction.complete(); // .complete() install full firmware -> flash mcu
     await firmwareUpdateModal.flashProgress.waitFor({ state: "visible" });
     expect(await firmwareUpdateModal.container.screenshot()).toMatchSnapshot({
@@ -50,7 +47,7 @@ test("Firmware Update", async ({ page }) => {
     });
   });
 
-  await test.step("firmware update flow-7", async () => {
+  await test.step("Firmware update done", async () => {
     await deviceAction.complete(); // .complete() flash mcu -> completed
     await firmwareUpdateModal.updateDone.waitFor({ state: "visible" });
     expect(await firmwareUpdateModal.container.screenshot()).toMatchSnapshot({
@@ -58,7 +55,7 @@ test("Firmware Update", async ({ page }) => {
     });
   });
 
-  await test.step("firmware update flow-8", async () => {
+  await test.step("Modal is closed", async () => {
     await firmwareUpdateModal.close();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "modal-closed.png",
