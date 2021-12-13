@@ -3506,6 +3506,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4083,14 +4087,11 @@
     "SolanaAccountNotFunded": {
       "title": "Account not funded"
     },
-    "SolanaNotEnoughBalanceToPayFees": {
-      "title": "Not enouogh balance to pay fees"
-    },
     "SolanaAssociatedTokenAccountWillBeFunded": {
       "title": "Associated token account will be funded"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long"
+      "title": "Memo is too long. Max length is {{maxLength}}"
     },
     "SolanaTokenAccountHoldsAnotherToken": {
       "title": "Token account hodls another token"
