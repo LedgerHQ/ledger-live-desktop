@@ -1070,7 +1070,7 @@
     },
     "familyPack": {
       "title": "Family Pack",
-      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit",
+      "description": "Faites entrer votre famille et vos amis dans la crypto avec 3 Ledger Nano S à prix réduit.",
       "cta": "Acheter un Family Pack"
     },
     "polkaStake": {
@@ -1395,7 +1395,7 @@
     "loading": "Chargement...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
     "unlockDevice": "Déverrouillez votre appareil.",
-    "unlockDeviceAfterFirmwareUpdate": "Patientez pendant la mise à jour du micrologiciel et déverrouillez votre appareil avec votre code PIN.",
+    "unlockDeviceAfterFirmwareUpdate": "Patientez pendant la mise à jour du micrologiciel, puis déverrouillez votre appareil avec votre code PIN.",
     "quitApp": "Quittez l'application sur votre appareil.",
     "appNotInstalledTitle": "Application nécessaire manquante",
     "appNotInstalledTitle_plural": "Applications nécessaires manquantes",
@@ -1584,7 +1584,7 @@
       "mcuBlueFirst": "Appuyez sur le bouton latéral pendant 10 secondes pour éteindre l'appareil. Relâchez le bouton.",
       "mcuBlueSecond": "Faites un appui long sur le bouton pendant au moins 5 secondes jusqu'à ce que les options de Boot apparaissent. Sélectionnez le mode Bootloader.",
       "successTitle": "Micrologiciel mis à jour",
-      "successTextApps": "Merci de réinstaller les applications sur votre appareil",
+      "successTextApps": "Vous pouvez réinstaller vos applications sur votre appareil.",
       "successTextNoApps": "Vous pouvez maintenant installer des applications sur votre appareil.",
       "sucessCTAApps": "Réinstaller des applications",
       "SuccessCTANoApps": "Installer des applications",

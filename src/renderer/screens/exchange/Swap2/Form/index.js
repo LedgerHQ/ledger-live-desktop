@@ -190,7 +190,7 @@ const SwapForm = () => {
           provider={provider}
         />
         {showWyreKYCBanner ? <FormKYCBanner provider={provider} status={kycStatus} /> : null}
-        <Button primary disabled={!isSwapReady} onClick={onSubmit}>
+        <Button primary disabled={!isSwapReady} onClick={onSubmit} data-test-id="exchange-button">
           {t("common.exchange")}
         </Button>
       </Wrapper>

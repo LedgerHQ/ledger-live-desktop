@@ -405,27 +405,30 @@ export const StepImportFooter = ({
       <Box grow>{currency && <CurrencyBadge currency={currency} />}</Box>
       {scanStatus === "error" &&
         (isHandledError ? (
-          <Button id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
+          <Button data-test-id={"add-accounts-full-node-reconfigure"} primary onClick={goFullNode}>
             {t("addAccounts.fullNodeConfigure")}
           </Button>
         ) : (
           <>
             <RetryButton
-              id={"add-accounts-import-retry-button"}
+              data-test-id={"add-accounts-import-retry-button"}
               primary
               onClick={() => setScanStatus("scanning")}
             />
           </>
         ))}
       {scanStatus === "scanning" && (
-        <Button id={"add-accounts-import-stop-button"} onClick={() => setScanStatus("finished")}>
+        <Button
+          data-test-id={"add-accounts-import-stop-button"}
+          onClick={() => setScanStatus("finished")}
+        >
           {t("common.stop")}
         </Button>
       )}
 
       {isHandledError || scanStatus === "error" ? null : (
         <Button
-          id={"add-accounts-import-add-button"}
+          data-test-id={"add-accounts-import-add-button"}
           primary
           disabled={scanStatus !== "finished"}
           onClick={onClick}

@@ -40,6 +40,7 @@ module.exports = {
     "promise/param-names": 0,
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "jest/no-done-callback": 0,
   },
   settings: {
     react: {

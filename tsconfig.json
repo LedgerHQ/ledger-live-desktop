@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "strict": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "playwright/tests-out"
+  },
+  "include": ["playwright"],
+  "exclude": ["node_modules"]
+}

@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "خصائص",
-        "description": "Description",
+        "description": "الوصف",
         "contract": "عنوان العَقد",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "لا يمكن إضافة حساب جديد قبل أن تتلقى الأصول على حسابك <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "لم يتم العثور على حساب <1><0>{{currencyName}}</0></1> ليتم إنشاءه",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ عناوين أخرى."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit أو Native Segwit؟"
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "البحث في التطبيقات المثبتة..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "يبدو أن التطبيق مفتوح على جهازك",
+      "subtitle": "إعادة فتح المدير سوف يغلق التطبيق على جهازك",
+      "ctaReopen": "إعادة فتح المدير",
+      "ctaPortfolio": "الرجوع إلى المحفظة الاستثمارية"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> متاح",
@@ -1790,7 +1790,7 @@
         "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "سعر الغاز",
         "unitPerByte": "{{unit}} لكل بايت",
-        "nft": "NFT (رمز غير قابلة للاستبدال)",
+        "nft": "NFT (رمز غير قابل للاستبدال)",
         "nftQuantity": "الكمية"
       },
       "verification": {
