@@ -4,7 +4,6 @@ import React, { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
@@ -12,6 +11,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
+import type { DProps } from "~/renderer/screens/exchange";
 import { useExchangeProvider, useCoinifyCurrencies } from "../hooks";
 import CoinifyWidget from "../CoinifyWidget";
 
@@ -22,12 +22,7 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   flex: 1;
 `;
 
-type Props = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
-};
-
-const Coinify = ({ defaultCurrency, defaultAccount }: Props) => {
+const Coinify = ({ defaultCurrency, defaultAccount }: DProps) => {
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,

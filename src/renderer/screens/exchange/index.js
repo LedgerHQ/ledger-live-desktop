@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
@@ -30,7 +32,12 @@ const tabs = [
   },
 ];
 
-const Exchange = () => {
+export type DProps = {
+  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
+  defaultAccount?: ?Account,
+};
+
+const Exchange = (props: DProps) => {
   const location = useLocation();
   const [provider] = useExchangeProvider();
   const { state } = location;
@@ -49,7 +56,7 @@ const Exchange = () => {
         onIndexChange={setActiveTabIndex}
       />
       <Card grow style={{ overflow: "hidden" }}>
-        <Component {...location?.state} provider={provider} />
+        <Component {...location?.state} {...props} provider={provider} />
       </Card>
     </Container>
   );

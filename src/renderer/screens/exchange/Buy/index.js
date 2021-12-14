@@ -13,6 +13,7 @@ import Box from "~/renderer/components/Box";
 import { CoinifySquare, MoonPay } from "~/renderer/icons/providers";
 import Button from "~/renderer/components/Button";
 import Coinify from "~/renderer/screens/exchange/Buy/Coinify";
+import type { DProps } from "~/renderer/screens/exchange";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -40,20 +41,16 @@ const ContinueButton: ThemedComponent<{}> = styled(Button).attrs(() => ({}))`
   padding: 12px 16px;
 `;
 
-type Providers = "moonpay" | "coinify" | null;
+type Provider = "moonpay" | "coinify" | null;
 
-const Buy = () => {
-  const [selected, setSelected] = useState<Providers>(null);
+const Buy = (props: DProps) => {
+  const [selected, setSelected] = useState<Provider>(null);
   const [isCoinify, setIsCoinify] = useState(false);
   const { t } = useTranslation();
   const history = useHistory();
 
-  const toggleMoonPay = useCallback(() => {
-    setSelected(prev => (prev === "moonpay" ? null : "moonpay"));
-  }, []);
-
-  const toggleCoinify = useCallback(() => {
-    setSelected(prev => (prev === "coinify" ? null : "coinify"));
+  const toggle = useCallback((provider: Provider) => {
+    setSelected(prev => (prev === provider ? null : provider));
   }, []);
 
   const onContinue = useCallback(() => {
@@ -70,7 +67,7 @@ const Buy = () => {
     <BuyContainer isCoinify={isCoinify}>
       <TrackPage category="Buy Crypto" />
       {isCoinify ? (
-        <Coinify />
+        <Coinify {...props} />
       ) : (
         <>
           <Text ff="Inter|SemiBold" fontSize={18} color="palette.text.shade90">
@@ -80,7 +77,7 @@ const Buy = () => {
             <SelectProvider
               provider="MoonPay"
               cryptoCount={40}
-              onClick={toggleMoonPay}
+              onClick={() => toggle("moonpay")}
               isActive={selected === "moonpay"}
             >
               <MoonPay size={48} />
@@ -88,7 +85,7 @@ const Buy = () => {
             <SelectProvider
               provider="Coinify"
               cryptoCount={10}
-              onClick={toggleCoinify}
+              onClick={() => toggle("coinify")}
               isActive={selected === "coinify"}
             >
               <CoinifySquare size={48} />
