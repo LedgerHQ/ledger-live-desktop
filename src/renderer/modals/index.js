@@ -57,8 +57,6 @@ import MODAL_POLKADOT_BOND from "../families/polkadot/BondFlowModal";
 import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
 
-import MODAL_SOLANA_OPT_IN from "../families/solana/OptInFlowModal";
-
 // Lending
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
 import MODAL_LEND_ENABLE_INFO from "../screens/lend/modals/EnableInfoModal";
@@ -119,7 +117,6 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_REBOND,
   MODAL_FULL_NODE,
   MODAL_RECOVERY_SEED_WARNING,
-  MODAL_SOLANA_OPT_IN,
   // Lending
   MODAL_LEND_MANAGE,
   MODAL_LEND_ENABLE_INFO,
