@@ -131,7 +131,7 @@
   },
   "operation": {
     "type": {
-      "IN": "수신됨",
+      "IN": "수령됨",
       "OUT": "전송됨",
       "NFT_IN": "NFT 수령됨",
       "NFT_OUT": "NFT 전송됨",
