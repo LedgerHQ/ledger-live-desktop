@@ -3,6 +3,7 @@ import React from "react";
 import { Trans, withTranslation } from "react-i18next";
 import MemoTypeField from "./MemoTypeField";
 import MemoValueField from "./MemoValueField";
+import FeeField from "./FeeField";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Text from "~/renderer/components/Text";
@@ -37,6 +38,18 @@ const Root = (props: *) => {
           </Text>
         </Box>
       )}
+      <Box>
+        <Label>
+          <LabelInfoTooltip text={<Trans i18nKey="families.stellar.feeInfoText" />}>
+            <span>
+              <Trans i18nKey="families.stellar.fee" />
+            </span>
+          </LabelInfoTooltip>
+        </Label>
+      </Box>
+      <Box mb={10} horizontal grow>
+        <FeeField {...props} />
+      </Box>
     </Box>
   );
 };

@@ -3504,7 +3504,16 @@
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient",
+      "fee": "Fee",
+      "feeInfoText": "TODO: Stellar fee",
+      "recommendedFee": "Recommended fee",
+      "networkCongestion": "network congestion",
+      "networkCongestionLevel": {
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "High"
+      }
     },
     "cosmos": {
       "memo": "Memo",
