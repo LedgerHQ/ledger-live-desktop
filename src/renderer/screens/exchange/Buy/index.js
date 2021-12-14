@@ -49,12 +49,12 @@ const Buy = () => {
   const history = useHistory();
 
   const toggleMoonPay = useCallback(() => {
-    selected === "moonpay" ? setSelected(null) : setSelected("moonpay");
-  }, [selected]);
+    setSelected(prev => (prev === "moonpay" ? null : "moonpay"));
+  }, []);
 
   const toggleCoinify = useCallback(() => {
-    selected === "coinify" ? setSelected(null) : setSelected("coinify");
-  }, [selected]);
+    setSelected(prev => (prev === "coinify" ? null : "coinify"));
+  }, []);
 
   const onContinue = useCallback(() => {
     if (selected === "moonpay") {
