@@ -75,8 +75,8 @@
     "areYouSure": "확실합니까?",
     "selectAccount": "계정 선택",
     "selectAccountNoOption": "\"{{accountName}}\"와(과) 일치하는 계정 없음",
-    "selectCurrency": "암호화 자산 선택",
-    "selectCurrencyNoOption": "암호화 자산 \"{{currencyName}}\" 없음",
+    "selectCurrency": "암호화폐 선택",
+    "selectCurrencyNoOption": "암호화폐 \"{{currencyName}}\" 없음",
     "selectValidatorNoOption": "'{{accountName}}'와/과 일치하는 검증인이 없습니다",
     "selectNoResults": "'{{query}}'와/과 일치하는 결과가 없습니다",
     "sortBy": "정렬 기준",
@@ -388,7 +388,7 @@
     },
     "ip": {
       "title": "스왑 거래에 오신 것을 환영합니다",
-      "subtitle": "나의 Ledger 장치에서 암호화 자산을 바로 교환하세요.",
+      "subtitle": "나의 Ledger 장치에서 암호화폐를 바로 교환하세요.",
       "disclaimer": "계속함으로써 공급자의 고객확인제도 절차 준수를 위해 사용자의 위치 데이터가 제3자 서비스 공급자와 공유될 수 있음을 수락합니다."
     },
     "kyc": {
