@@ -1946,14 +1946,14 @@
     "inputSelected": "選択中",
     "toSpend": "コインを使用",
     "toReturn": "元に戻す",
-    "modalTitle": "コイン管理",
-    "coincontrol": "コイン管理",
+    "modalTitle": "コインコントロール",
+    "coincontrol": "コインコントロール",
     "advanced": "詳細オプション",
     "ctaDisabled": "このアカウントにはUTXOがありません。",
     "whatIs": "コイン選択とは？",
     "rbf": "トランザクションの変更を許可（Replace-By-Fee）",
-    "strategy": "コイン選択戦略",
-    "selected": "戦略のために選択されたコイン",
+    "strategy": "コイン選択方式",
+    "selected": "コイン選択の方式",
     "amount": "送付額：",
     "replaceable": "交換可能",
     "cannotSelect": {
@@ -1962,11 +1962,11 @@
     },
     "pending": "保留中",
     "pickUnconfirmedRBF": "未確認の交換可能なトランザクションからのコインを含みます。",
-    "pickingStrategy": "UTXO選び方の戦略",
+    "pickingStrategy": "UTXO選択方式",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "DEEP_OUTPUTS_FIRST": "先入れ先出し方式 (FIFO)",
       "OPTIMIZE_SIZE": "手数料を最小化（サイズ最適化）",
-      "MERGE_OUTPUTS": "今後の手数料を最小限化（コインを統合する）"
+      "MERGE_OUTPUTS": "今後の手数料を最小化（コインをマージ）"
     }
   },
   "cosmos": {
