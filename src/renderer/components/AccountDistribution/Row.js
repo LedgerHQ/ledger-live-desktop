@@ -75,6 +75,11 @@ export default function Row({
             <ToolTip content={displayName} delay={1200}>
               <Ellipsis ff="Inter|SemiBold" color="palette.text.shade100" fontSize={3}>
                 {displayName}
+                {
+                  account.accountProvider ? (
+                  <span style={{color: "#FFFF00"}}> ({account.accountProvider})</span>
+                  ) : ""
+                }
               </Ellipsis>
             </ToolTip>
           </Box>
