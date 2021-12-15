@@ -105,8 +105,14 @@ export default function DashboardPage() {
               handleChangeSelectedTime={handleChangeSelectedTime}
               selectedTimeRange={selectedTimeRange}
             />
-            <Button onClick={() => handleImportExchangeData()}>Import exchange data</Button>
-            <Button onClick={() => handleImportAddressData()}>Import from address</Button>
+            <Box horizontal alignItems="center" justifyContent="space-between" grow>
+              <Button primary onClick={() => handleImportExchangeData()}>
+                Import exchange data
+              </Button>
+              <Button primary onClick={() => handleImportAddressData()}>
+                Import from address
+              </Button>
+            </Box>
             <AssetDistribution />
             {totalOperations > 0 && (
               <OperationsList

@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   name: undefined,
 };
 
-class ReceiveModal extends PureComponent<{}, State> {
+class ImportExchangeModal extends PureComponent<{}, State> {
   state = INITIAL_STATE;
 
   handleReset = () => this.setState({ ...INITIAL_STATE });
@@ -102,4 +102,4 @@ class ReceiveModal extends PureComponent<{}, State> {
   }
 }
 
-export default ReceiveModal;
+export default ImportExchangeModal;
