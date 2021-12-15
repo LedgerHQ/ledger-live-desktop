@@ -83,6 +83,15 @@ type Props = {
   inputs?: Object,
 };
 
+export type MessageData = {
+  currency: CryptoCurrency,
+  path: string,
+  verify?: boolean,
+  derivationMode: DerivationMode,
+  message: string,
+  rawMessage: string,
+};
+
 const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
   const theme = useTheme("colors.palette");
 
@@ -280,6 +289,50 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
     [manifest, dispatch, accounts],
   );
 
+  const signPersonalMessage = useCallback(
+    ({ accountId, message, params }) => {
+      const account = accounts.find(account => account.id === accountId);
+
+      if (!account) return null;
+
+      // personal_sign is for only ethereum
+      if (account.currency.family !== "ethereum") {
+        throw new Error("Account is not an Ethereum account");
+      }
+
+      const platformMessage = {
+        ...params,
+        message: message,
+        rawMessage: message,
+        path: account.freshAddressPath,
+        derivationMode: account.derivationMode,
+      };
+      return new Promise((resolve, reject) => {
+        dispatch(
+          // This is a hack actually.
+          // I haven't been able to set up a new modal
+          // so I'm levraging on the fact that the
+          // `signMessage` method on the ethereum family
+          // falls back to `signPersonalMessage` when
+          // the message passed is a string
+          openModal("MODAL_SIGN_PERSONAL_MESSAGE", {
+            message: platformMessage,
+            account,
+            onConfirmationHandler: signature => {
+              // I don't know how tracking is done yet
+              resolve(signature);
+            },
+            onFailHandler: err => {
+              // I don't know how tracking is done yet
+              reject(err);
+            },
+          }),
+        );
+      });
+    },
+    [dispatch, accounts],
+  );
+
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
@@ -288,6 +341,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
+      "personal.sign": signPersonalMessage,
     }),
     [
       listAccounts,
@@ -296,6 +350,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       broadcastTransaction,
       requestAccount,
       listCurrencies,
+      signPersonalMessage,
     ],
   );
 

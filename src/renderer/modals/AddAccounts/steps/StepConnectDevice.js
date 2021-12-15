@@ -13,7 +13,48 @@ import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 
 const connectAppExec = command("connectApp");
 
-const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
+const mapResult = ({ opened, device, appAndVersion, displayUpgradeWarning }) =>
+  opened && device && !displayUpgradeWarning
+    ? {
+        device,
+        appAndVersion,
+      }
+    : null;
+
+const getInitialState = (device?) => ({
+  isLoading: !device,
+  requestQuitApp: false,
+  requestOpenApp: null,
+  unresponsive: false,
+  requiresAppInstallation: null,
+  allowOpeningRequestedWording: null,
+  allowOpeningGranted: false,
+  allowManagerRequestedWording: null,
+  allowManagerGranted: false,
+  device: device,
+  opened: !!device,
+  appAndVersion: {
+    name: "app",
+    version: "1.9.14",
+  },
+  error: null,
+  derivation: null,
+  displayUpgradeWarning: false,
+  installingApp: false,
+  listingApps: false,
+});
+
+const useHook = (device, appRequest) => {
+  return getInitialState({
+    deviceName: "speculos",
+    modelId: "nanoS",
+    deviceId: "somee",
+  });
+};
+
+// const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectAppExec);
+
+const action = { useHook, mapResult };
 
 const StepConnectDevice = ({ currency, device, transitionTo, flow }: StepProps) => {
   invariant(currency, "No crypto asset given");

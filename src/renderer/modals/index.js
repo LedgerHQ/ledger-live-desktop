@@ -11,6 +11,7 @@ import MODAL_ADD_ACCOUNTS from "./AddAccounts";
 import MODAL_RECEIVE from "./Receive";
 import MODAL_SEND from "./Send";
 import MODAL_SIGN_MESSAGE from "./SignMessage";
+import MODAL_SIGN_PERSONAL_MESSAGE from "./SignPersonalMessage";
 import MODAL_SIGN_TRANSACTION from "./SignTransaction";
 import MODAL_REQUEST_ACCOUNT from "./RequestAccount";
 import MODAL_UPDATE_FIRMWARE from "./UpdateFirmwareModal";
@@ -80,6 +81,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_WALLETCONNECT_DEEPLINK,
   MODAL_SEND,
   MODAL_SIGN_MESSAGE,
+  MODAL_SIGN_PERSONAL_MESSAGE,
   MODAL_SIGN_TRANSACTION,
   MODAL_REQUEST_ACCOUNT,
   MODAL_UPDATE_FIRMWARE,
