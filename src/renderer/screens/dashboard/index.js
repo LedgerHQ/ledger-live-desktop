@@ -28,6 +28,9 @@ import EmptyStateAccounts from "~/renderer/screens/dashboard/EmptyStateAccounts"
 import { useRefreshAccountsOrderingEffect } from "~/renderer/actions/general";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 
+import Button from "~/renderer/components/Button";
+import { openModal } from "~/renderer/actions/modals";
+
 // This forces only one visible top banner at a time
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   z-index: 19;
@@ -65,6 +68,10 @@ export default function DashboardPage() {
   );
   const showCarousel = hasInstalledApps && totalAccounts > 0;
 
+  const handleImportExchangeData = () => {
+    dispatch(openModal("MODAL_IMPORT_EXTERNAL_DATA", null));
+  };
+
   useRefreshAccountsOrderingEffect({ onMount: true });
 
   return (
@@ -94,6 +101,8 @@ export default function DashboardPage() {
               handleChangeSelectedTime={handleChangeSelectedTime}
               selectedTimeRange={selectedTimeRange}
             />
+            <Button onClick={() => handleImportExchangeData()}>Import exchange data</Button>
+            <Button>Import from address</Button>
             <AssetDistribution />
             {totalOperations > 0 && (
               <OperationsList
