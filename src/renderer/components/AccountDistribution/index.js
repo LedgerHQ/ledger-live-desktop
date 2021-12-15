@@ -9,17 +9,52 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import Header from "./Header";
 import Row from "./Row";
+import fetch from "node-fetch";
+import cloneDeep from "clone-deep";
 
 type Props = {
   accounts: AccountLike[],
 };
 
+function hktModifyAccounts(accounts, accountModifier) {
+  let ea = accounts[0];
+  let matchTickers = [...new Set(accounts.map((elem) => elem.currency.ticker))];
+  fetch("http://localhost:40222/api/1/exchanges", {headers: {
+    'Content-Type': 'application/json'}}).then(async (resp) => {
+      const doc = await resp.json();
+      let locations = [...new Set(doc.result.map((elem) => elem.location))];
+      for (var location of locations) {
+        let balanceResp = await fetch(`http://localhost:40222/api/1/exchanges/balances/${location}`);
+        let balanceDoc = await balanceResp.json();
+        for (const [ticker, balance] of Object.entries(balanceDoc.result))
+        {
+          if (matchTickers.includes(ticker)) {
+            let new_account = {
+              balance: BigNumber(balance.amount * `1${"0".repeat(ea.currency.units[0].magnitude)}`),
+              currency: ea.currency,
+              id: ea.id,
+              name: location,
+              operations: [],
+              pendingOperations: [],
+              type: "Account",
+              unit: ea.unit,
+              accountProvider: location
+            };
+            accountModifier([...accounts, new_account]);
+          }
+        }
+      }
+  });
+}
+
 export default function AccountDistribution({ accounts }: Props) {
+  const [extAccounts, setExtAccounts] = useState(cloneDeep(accounts));
+  hktModifyAccounts(accounts, setExtAccounts);
   const { t } = useTranslation();
-  const total = accounts.reduce((total, a) => total.plus(a.balance), BigNumber(0));
+  const total = useMemo(() => extAccounts.reduce((total, a) => total.plus(a.balance), BigNumber(0)));
   const accountDistribution = useMemo(
-    () =>
-      accounts
+    () => {
+    return extAccounts
         .map(a => {
           const from = getAccountCurrency(a);
           return {
@@ -29,8 +64,8 @@ export default function AccountDistribution({ accounts }: Props) {
             amount: a.balance,
           };
         })
-        .sort((a, b) => b.distribution - a.distribution),
-    [accounts, total],
+        .sort((a, b) => b.distribution - a.distribution)
+    }, [extAccounts, total],
   );
 
   const cardRef = useRef(null);
