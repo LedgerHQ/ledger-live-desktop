@@ -167,7 +167,8 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const urlWhatIsThis =
     specific && specific.getURLWhatIsThis && specific.getURLWhatIsThis(operation);
   const urlFeesInfo = specific && specific.getURLFeesInfo && specific.getURLFeesInfo(operation);
-  const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash);
+  //const url = getTransactionExplorer(getDefaultExplorerView(mainAccount.currency), operation.hash);
+  const url = `http://localhost:3000/${mainAccount.currency.id}/tx/${operation.hash}`
   const uniqueSenders = uniq(senders);
 
   const OpDetailsExtra =
