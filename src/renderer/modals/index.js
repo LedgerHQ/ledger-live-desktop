@@ -67,7 +67,8 @@ import MODAL_LEND_WITHDRAW_FLOW from "../screens/lend/modals/Withdraw";
 import MODAL_LEND_NO_ETHEREUM_ACCOUNT from "../screens/lend/modals/NoEthereumAccount";
 import MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT from "../screens/lend/modals/EmptyAccountDeposit";
 
-import MODAL_IMPORT_EXTERNAL_DATA from "../screens/dashboard/ImportExternalDataModal";
+import MODAL_IMPORT_EXCHANGE_DATA from "../screens/dashboard/ImportExchangeDataModal";
+import MODAL_IMPORT_ADDRESS_DATA from "../screens/dashboard/ImportAddressDataModal";
 
 const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_WEBSOCKET_BRIDGE,
@@ -133,7 +134,8 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP_UNAUTHORIZED_RATES,
   MODAL_SWAP_RESET_KYC,
 
-  MODAL_IMPORT_EXTERNAL_DATA,
+  MODAL_IMPORT_EXCHANGE_DATA,
+  MODAL_IMPORT_ADDRESS_DATA,
 
   // NB We have dettached modals such as the repair modal,
   // in the meantime, we can rely on this to add the backdrop

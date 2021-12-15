@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
 import Modal from "~/renderer/components/Modal";
+import fetch from "node-fetch";
 
 type State = {
   exchange: string,
@@ -22,13 +23,35 @@ class ReceiveModal extends PureComponent<{}, State> {
   handleReset = () => this.setState({ ...INITIAL_STATE });
 
   handleOnSubmit = () => {
-    console.log({ state: this.state });
+    const exchange = this.state.exchange;
+    const name = this.state.name;
+    const apiKey = this.state.api_key;
+    const apiSecret = this.state.api_secret;
+    const options = {
+      method: "PUT",
+      path: `http://127.0.0.1:4242/api/1/exchanges`,
+      accept: "application/json;charset=UTF-8",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        location: exchange,
+        api_key: apiKey,
+        api_secret: apiSecret,
+      }),
+    };
+    fetch(options.path, options)
+      .then(response => response.json())
+      .then(userData => {
+        //tbd
+        console.log(userData);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
     return (
       <Modal
-        name="MODAL_IMPORT_EXTERNAL_DATA"
+        name="MODAL_IMPORT_EXCHANGE_DATA"
         centered
         onHide={this.handleReset}
         preventBackdropClick={false}

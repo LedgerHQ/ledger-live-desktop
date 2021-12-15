@@ -69,7 +69,11 @@ export default function DashboardPage() {
   const showCarousel = hasInstalledApps && totalAccounts > 0;
 
   const handleImportExchangeData = () => {
-    dispatch(openModal("MODAL_IMPORT_EXTERNAL_DATA", null));
+    dispatch(openModal("MODAL_IMPORT_EXCHANGE_DATA", null));
+  };
+
+  const handleImportAddressData = () => {
+    dispatch(openModal("MODAL_IMPORT_ADDRESS_DATA", null));
   };
 
   useRefreshAccountsOrderingEffect({ onMount: true });
@@ -102,7 +106,7 @@ export default function DashboardPage() {
               selectedTimeRange={selectedTimeRange}
             />
             <Button onClick={() => handleImportExchangeData()}>Import exchange data</Button>
-            <Button>Import from address</Button>
+            <Button onClick={() => handleImportAddressData()}>Import from address</Button>
             <AssetDistribution />
             {totalOperations > 0 && (
               <OperationsList
