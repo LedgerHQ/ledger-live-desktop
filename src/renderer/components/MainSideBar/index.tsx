@@ -93,41 +93,41 @@ const MainSideBar: React.FC = () => {
         isActive={location.pathname === "/"}
         displayNotificationBadge={isUpdateAvailable}
       >
-        <Icons.PortfolioRegular />
+        <Icons.PortfolioRegular size={20} />
       </SideBar.Item>
       <SideBar.Item
         label={t("sidebar.accounts")}
         onClick={navigateToAccounts}
         isActive={location.pathname === "/accounts"}
       >
-        <Icons.WalletRegular />
+        <Icons.WalletRegular size={20} />
       </SideBar.Item>
       <SideBar.Item
         label={t("sidebar.catalog")}
         onClick={navigateToCatalog}
         isActive={location.pathname.startsWith("/platform")}
       >
-        <Icons.ManagerRegular />
+        <Icons.ManagerRegular size={20} />
       </SideBar.Item>
       <SideBar.Item label={t("send.title")} onClick={openSendModal}>
         <Icons.ArrowTopRegular />
       </SideBar.Item>
       <SideBar.Item label={t("receive.title")} onClick={openReceiveModal}>
-        <Icons.ArrowBottomRegular />
+        <Icons.ArrowBottomRegular size={20} />
       </SideBar.Item>
       <SideBar.Item
         label={t("sidebar.exchange")}
         onClick={navigateToExchange}
         isActive={location.pathname === "/exchange"}
       >
-        <Icons.BuyCryptoAltRegular />
+        <Icons.BuyCryptoAltRegular size={20} />
       </SideBar.Item>
       <SideBar.Item
         label={t("sidebar.swap")}
         onClick={navigateToSwap}
         isActive={location.pathname.startsWith("/swap")}
       >
-        <Icons.BuyCryptoRegular />
+        <Icons.BuyCryptoRegular size={20} />
       </SideBar.Item>
       {/* wrap in a fragment because the boolean is not assignable to JSX.Element by itself */}
       <>
@@ -138,7 +138,7 @@ const MainSideBar: React.FC = () => {
             isActive={location.pathname === "/lend"}
             displayNotificationBadge={firstTimeLend}
           >
-            <Icons.LendRegular />
+            <Icons.LendRegular size={20} />
           </SideBar.Item>
         )}
       </>
@@ -148,7 +148,7 @@ const MainSideBar: React.FC = () => {
         isActive={location.pathname === "/manager"}
         displayNotificationBadge={displayManagerBlueDot}
       >
-        <Icons.NanoFoldedRegular />
+        <Icons.NanoFoldedRegular size={20} />
       </SideBar.Item>
     </SideBar>
   );
