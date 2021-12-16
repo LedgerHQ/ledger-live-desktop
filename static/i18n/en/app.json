@@ -1440,8 +1440,8 @@
       "appOnDeviceSearch": "Search installed apps..."
     },
     "disconnected": {
-      "title":"Looks like an app is open on your device",
-      "subtitle":"Reopening the Manager will quit the app on your device",
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
       "ctaReopen": "Reopen Manager",
       "ctaPortfolio": "Back to Portfolio"
     },
@@ -2025,15 +2025,15 @@
     },
     "cryptoOrg": {
       "account": {
-       "subHeader": {
-         "cardTitle": "Powered by Crypto.org",
-         "moreInfo": "More info",
-         "drawerTitle": "Crypto.org integration",
-         "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-         "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-         "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-         "website": "Cryptocurrency in every wallet"
-       }
+        "subHeader": {
+          "cardTitle": "Powered by Crypto.org",
+          "moreInfo": "More info",
+          "drawerTitle": "Crypto.org integration",
+          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+          "website": "Cryptocurrency in every wallet"
+        }
       },
       "memo": "Memo",
       "memoPlaceholder": "Optional",
@@ -3499,8 +3499,7 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
-    },
-    
+    }
   },
   "errors": {
     "countervaluesUnavailable": {
