@@ -52,7 +52,7 @@ export default function StepSummary({ account, message }: StepProps) {
         </Box>
       </Box>
       <Separator />
-      <Text>{message.rawMessage}</Text>
+      <Text>{message.message}</Text>
     </Box>
   );
 }

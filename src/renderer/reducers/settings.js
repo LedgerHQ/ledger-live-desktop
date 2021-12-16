@@ -175,7 +175,7 @@ const INITIAL_STATE: SettingsState = {
   // developer settings
   allowDebugApps: false,
   allowExperimentalApps: false,
-  enablePlatformDevTools: true,
+  enablePlatformDevTools: false,
   catalogProvider: "production",
   USBTroubleshootingIndex: undefined,
   swap: {

@@ -12,7 +12,7 @@ import { closeModal } from "~/renderer/actions/modals";
 const connectAppExec = command("connectApp");
 const signMessageExec = command("personalSign");
 const action = createAction(
-  getEnv("MOCK") ? connectAppExec : connectAppExec, // TODO: Change back to mockedEventEmitter
+  getEnv("MOCK") ? mockedEventEmitter : connectAppExec,
   getEnv("MOCK") ? mockedEventEmitter : signMessageExec,
 );
 

@@ -84,12 +84,8 @@ type Props = {
 };
 
 export type MessageData = {
-  currency: CryptoCurrency,
   path: string,
-  verify?: boolean,
-  derivationMode: DerivationMode,
   message: string,
-  rawMessage: string,
 };
 
 const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
@@ -301,20 +297,12 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
       }
 
       const platformMessage = {
-        ...params,
-        message: message,
-        rawMessage: message,
+        message: Buffer.from(message.slice(2), "hex").toString(),
         path: account.freshAddressPath,
         derivationMode: account.derivationMode,
       };
       return new Promise((resolve, reject) => {
         dispatch(
-          // This is a hack actually.
-          // I haven't been able to set up a new modal
-          // so I'm levraging on the fact that the
-          // `signMessage` method on the ethereum family
-          // falls back to `signPersonalMessage` when
-          // the message passed is a string
           openModal("MODAL_SIGN_PERSONAL_MESSAGE", {
             message: platformMessage,
             account,
