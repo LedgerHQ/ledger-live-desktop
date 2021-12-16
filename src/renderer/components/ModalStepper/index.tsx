@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-
 import { Popin } from "@ledgerhq/react-ui";
 import ModalStepperBody from "./ModalStepperBody";
+import CloseButton from "./CloseButton";
 
 type StepProps = {
   title?: string;
@@ -13,21 +13,22 @@ type StepProps = {
   continueLabel?: string;
   backLabel?: string;
   continueDisabled?: boolean;
-  hideContinueButton?: boolean,
+  hideContinueButton?: boolean;
   backDisabled?: boolean;
-  hideBackButton?: boolean,
+  hideBackButton?: boolean;
 };
 
 type Props = {
   isOpen: boolean;
   title: string;
   steps: Array<StepProps>;
-  onClose: (...args: any) => any;
-  onFinish: (...args: any) => any;
+  onClose: () => void;
+  onFinish: () => void;
+  dismissable?: boolean;
 };
 
 const ModalStepper = (props: Props) => {
-  const { title, steps, onClose, onFinish, isOpen } = props;
+  const { title, steps, onClose, onFinish, isOpen, dismissable = true } = props;
   const { t } = useTranslation();
   const [stepIndex, setStepIndex] = useState(0);
   const stepCount = steps.length;
@@ -51,8 +52,17 @@ const ModalStepper = (props: Props) => {
     else setStepIndex(Math.max(0, stepIndex - 1));
   }, [stepIndex, onClose]);
 
+  const [width, height] = [816, 486];
+
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={816} height={486} p={0}>
+    <Popin
+      isOpen={isOpen}
+      onClose={onClose}
+      width={width}
+      height={height}
+      p={0}
+      position="relative"
+    >
       <ModalStepperBody
         AsideLeft={step.AsideLeft}
         AsideRight={step.AsideRight}
@@ -70,6 +80,7 @@ const ModalStepper = (props: Props) => {
         title={title}
         {...stepsProps}
       />
+      {dismissable && <CloseButton onClick={onClose} />}
     </Popin>
   );
 };

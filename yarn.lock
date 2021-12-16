@@ -1710,6 +1710,17 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
+"@emotion/cache@^11.4.0", "@emotion/cache@^11.7.1":
+  version "11.7.1"
+  resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-11.7.1.tgz#08d080e396a42e0037848214e8aa7bf879065539"
+  integrity sha512-r65Zy4Iljb8oyjtLeCuBH8Qjiy107dOYC6SJq7g7GV5UCQWMObY4SJDPGFjiiVpPrOJ2hmJOoBiYTC7hwx9E2A==
+  dependencies:
+    "@emotion/memoize" "^0.7.4"
+    "@emotion/sheet" "^1.1.0"
+    "@emotion/utils" "^1.0.0"
+    "@emotion/weak-memoize" "^0.2.5"
+    stylis "4.0.13"
+
 "@emotion/core@^10.0.9", "@emotion/core@^10.1.1":
   version "10.1.1"
   resolved "https://registry.npmjs.org/@emotion/core/-/core-10.1.1.tgz"
@@ -1753,6 +1764,19 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.5.tgz#2c40f81449a4e554e9fc6396910ed4843ec2be50"
   integrity sha512-igX9a37DR2ZPGYtV6suZ6whr8pTFtyHL3K/oLUotxpSVO2ASaprmAe2Dkq7tBo7CRY7MMDrAa9nuQP9/YG8FxQ==
 
+"@emotion/react@^11.1.1":
+  version "11.7.1"
+  resolved "https://registry.yarnpkg.com/@emotion/react/-/react-11.7.1.tgz#3f800ce9b20317c13e77b8489ac4a0b922b2fe07"
+  integrity sha512-DV2Xe3yhkF1yT4uAUoJcYL1AmrnO5SVsdfvu+fBuS7IbByDeTVx9+wFmvx9Idzv7/78+9Mgx2Hcmr7Fex3tIyw==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@emotion/cache" "^11.7.1"
+    "@emotion/serialize" "^1.0.2"
+    "@emotion/sheet" "^1.1.0"
+    "@emotion/utils" "^1.0.0"
+    "@emotion/weak-memoize" "^0.2.5"
+    hoist-non-react-statics "^3.3.1"
+
 "@emotion/serialize@^0.11.15", "@emotion/serialize@^0.11.16":
   version "0.11.16"
   resolved "https://registry.npmjs.org/@emotion/serialize/-/serialize-0.11.16.tgz"
@@ -1764,7 +1788,7 @@
     "@emotion/utils" "0.11.3"
     csstype "^2.5.7"
 
-"@emotion/serialize@^1.0.0":
+"@emotion/serialize@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@emotion/serialize/-/serialize-1.0.2.tgz#77cb21a0571c9f68eb66087754a65fa97bfcd965"
   integrity sha512-95MgNJ9+/ajxU7QIAruiOAdYNjxZX7G2mhgrtDWswA21VviYIRP1R5QilZ/bDY42xiKsaktP4egJb3QdYQZi1A==
@@ -1779,6 +1803,11 @@
   version "0.9.4"
   resolved "https://registry.npmjs.org/@emotion/sheet/-/sheet-0.9.4.tgz"
   integrity sha512-zM9PFmgVSqBw4zL101Q0HrBVTGmpAxFZH/pYx/cjJT5advXguvcgjHFTCaIO3enL/xr89vK2bh0Mfyj9aa0ANA==
+
+"@emotion/sheet@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.1.0.tgz#56d99c41f0a1cda2726a05aa6a20afd4c63e58d2"
+  integrity sha512-u0AX4aSo25sMAygCuQTzS+HsImZFuS8llY8O7b9MDRzbJM0kVJlAz6KNDqcG7pOuQZJmj/8X/rAW+66kMnMW+g==
 
 "@emotion/styled-base@^10.0.27":
   version "10.0.31"
@@ -1818,9 +1847,9 @@
   resolved "https://registry.yarnpkg.com/@emotion/utils/-/utils-1.0.0.tgz#abe06a83160b10570816c913990245813a2fd6af"
   integrity sha512-mQC2b3XLDs6QCW+pDQDiyO/EdGZYOygE8s5N5rrzjSI4M3IejPE/JPndCBwRT9z982aqQNi6beWs1UeayrQxxA==
 
-"@emotion/weak-memoize@0.2.5":
+"@emotion/weak-memoize@0.2.5", "@emotion/weak-memoize@^0.2.5":
   version "0.2.5"
-  resolved "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz"
+  resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
 "@eslint/eslintrc@^0.4.3":
@@ -2646,10 +2675,13 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
-"@ledgerhq/icons-ui@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.2.0.tgz#7b57112fb51ee30f1fa9c3369d34cbad6608290e"
-  integrity sha512-yBklUEkrUzueiwuXGnK3jXdVMSlkSLTojGdXsfG/UD7+NmH25AtsRGdt7GQvASgzsRW1mUjuLnqQIXCESVKdGA==
+"@ledgerhq/icons-ui@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.2.1.tgz#a3ddcfc6cc5c17a789c87173542f64211fa98814"
+  integrity sha512-kn/eHUg4KmYwSLlR8/gcQVVhTWGF6uPkh9vJ4NkEU0Yp/fnjySx8TZ+QJSsm81OnFH9JImjKNr8FyQbuwIyQmA==
+  dependencies:
+    "@types/styled-components" "^5.1.14"
+    styled-components "^5.2.3"
 
 "@ledgerhq/json-bignumber@^1.1.0":
   version "1.1.0"
@@ -2783,18 +2815,17 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.4.0.tgz#c8b81823640b00bc8b229bf3052d0fcb413b6655"
-  integrity sha512-nF1FhiRVC7wYgeyg05tdSebYosZEmaCVsGzIryzkxOA3zrRML0WQMrD+2WzptMQNijqdRAJhzGZ5oqPsLP4/6g==
+"@ledgerhq/react-ui@~0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.6.0.tgz#f1e52228b9593de57ab6ae69218cb8396bddb2cc"
+  integrity sha512-VyINgOEUiX0KkyzfiFdkS/2h3XFAPhoAGLbN0PK2oJcCLua4UDSBdoBFkKJ72/0gSRlTmy0XWpb2cQiqmBIxYg==
   dependencies:
-    "@ledgerhq/icons-ui" "^0.2.0"
-    "@ledgerhq/ui-shared" "^0.1.3"
+    "@ledgerhq/icons-ui" "^0.2.1"
+    "@ledgerhq/ui-shared" "^0.1.4"
     "@tippyjs/react" "^4.2.6"
     "@types/color" "^3.0.2"
-    "@types/react" "~17.0.34"
+    "@types/react" "~17.0.37"
     "@types/react-dom" "^17.0.11"
-    "@types/react-select" "^4.0.18"
     "@types/react-transition-group" "^4.4.2"
     "@types/react-window" "^1.8.5"
     "@types/styled-components" "^5.1.14"
@@ -2805,15 +2836,15 @@
     moment "^2.29.1"
     react-chartjs-2 "^3.0.5"
     react-is "^17.0.2"
-    react-select "^3.2.0"
+    react-select "^5.2.1"
     react-transition-group "^4.4.2"
     react-window "^1.8.6"
     styled-system "^5.1.5"
 
-"@ledgerhq/ui-shared@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/ui-shared/-/ui-shared-0.1.3.tgz#2364297020c1e9906d103c6f7cd5b3e4ad71a2eb"
-  integrity sha512-XGg/bw6b37EV0fh8FnMtPmLqkZsbHR0w3fEBwiN3H169HPv1GLWmrJH+85Zqsae6QXkOQtS3V9LnNlz73tsfbw==
+"@ledgerhq/ui-shared@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/ui-shared/-/ui-shared-0.1.4.tgz#a90c9b95476d0d6c5115bc5d75ebe5bb321e81ea"
+  integrity sha512-BwyDX8YbNIgsM5/ZcloU4Rc+9Pfn623zFVtdY3PE7BQD0ZOpfAx2vIrib+AnjvGtisNjHTUr9t49Lho2kuFtag==
 
 "@malept/cross-spawn-promise@^1.1.0":
   version "1.1.1"
@@ -4772,13 +4803,6 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-dom@*":
-  version "17.0.9"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.9.tgz#441a981da9d7be117042e1a6fd3dac4b30f55add"
-  integrity sha512-wIvGxLfgpVDSAMH5utdL9Ngm5Owu0VsGmldro3ORLXV8CShrL8awVj06NuEXFQ5xyaYfdca7Sgbk/50Ri1GdPg==
-  dependencies:
-    "@types/react" "*"
-
 "@types/react-dom@^17.0.11":
   version "17.0.11"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.11.tgz#e1eadc3c5e86bdb5f7684e00274ae228e7bcc466"
@@ -4813,16 +4837,6 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-select@^4.0.18":
-  version "4.0.18"
-  resolved "https://registry.yarnpkg.com/@types/react-select/-/react-select-4.0.18.tgz#f907f406411afa862217a9d86c54a301367a35c1"
-  integrity sha512-uCPRMPshd96BwHuT7oCrFduiv5d6km3VwmtW7rVl9g4XetS3VoJ9nZo540LiwtQgaFcW96POwaxQDZDAyYaepg==
-  dependencies:
-    "@emotion/serialize" "^1.0.0"
-    "@types/react" "*"
-    "@types/react-dom" "*"
-    "@types/react-transition-group" "*"
-
 "@types/react-syntax-highlighter@11.0.5":
   version "11.0.5"
   resolved "https://registry.npmjs.org/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.5.tgz"
@@ -4830,7 +4844,14 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-transition-group@*", "@types/react-transition-group@^4.4.2":
+"@types/react-transition-group@^4.4.0":
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.4.tgz#acd4cceaa2be6b757db61ed7b432e103242d163e"
+  integrity sha512-7gAPz7anVK5xzbeQW9wFBDg7G++aPLAFY0QaSMOou9rJZpbuI58WAuJrgu+qR92l61grlnCUe7AFX8KGahAgug==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-transition-group@^4.4.2":
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.3.tgz#b0994da0a7023d67dbb4a8910a62112bc00d5688"
   integrity sha512-fUx5muOWSYP8Bw2BUQ9M9RK9+W1XBK/7FLJ8PTQpnpTEkn0ccyMffyEQvan4C3h53gHdx7KE5Qrxi/LnUGQtdg==
@@ -4853,7 +4874,7 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@~17.0.34":
+"@types/react@~17.0.37":
   version "17.0.37"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.37.tgz#6884d0aa402605935c397ae689deed115caad959"
   integrity sha512-2FS1oTqBGcH/s0E+CjrCCR9+JMpsu9b69RTFO+40ua43ZqP5MmQ4iUde/dMjWR909KxZwmOQIFq6AV6NjEG5xg==
@@ -11538,7 +11559,7 @@ hmac-drbg@^1.0.1:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
+hoist-non-react-statics@^3.0.0, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.1, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -16688,6 +16709,19 @@ react-select@^3.2.0:
     react-input-autosize "^3.0.0"
     react-transition-group "^4.3.0"
 
+react-select@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-select/-/react-select-5.2.1.tgz#416c25c6b79b94687702374e019c4f2ed9d159d6"
+  integrity sha512-OOyNzfKrhOcw/BlembyGWgdlJ2ObZRaqmQppPFut1RptJO423j+Y+JIsmxkvsZ4D/3CpOmwIlCvWbbAWEdh12A==
+  dependencies:
+    "@babel/runtime" "^7.12.0"
+    "@emotion/cache" "^11.4.0"
+    "@emotion/react" "^11.1.1"
+    "@types/react-transition-group" "^4.4.0"
+    memoize-one "^5.0.0"
+    prop-types "^15.6.0"
+    react-transition-group "^4.3.0"
+
 react-sizeme@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/react-sizeme/-/react-sizeme-3.0.1.tgz"
@@ -18621,6 +18655,11 @@ styled-system@^5.1.5:
     "@styled-system/typography" "^5.1.2"
     "@styled-system/variant" "^5.1.5"
     object-assign "^4.1.1"
+
+stylis@4.0.13:
+  version "4.0.13"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.0.13.tgz#f5db332e376d13cc84ecfe5dace9a2a51d954c91"
+  integrity sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==
 
 sumchecker@^3.0.1:
   version "3.0.1"

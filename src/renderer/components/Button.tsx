@@ -1,86 +1,43 @@
 // @flow
 
 import React, { PureComponent } from "react";
-import noop from "lodash/noop";
-import { Button as BaseButton } from "@ledgerhq/react-ui";
-import type { ButtonProps } from "@ledgerhq/react-ui/components/cta/Button";
+import { Button as BaseButton, InvertTheme } from "@ledgerhq/react-ui";
+import { ButtonProps as BaseButtonProps } from "@ledgerhq/react-ui/components/cta/Button";
 import { track } from "~/renderer/analytics/segment";
-import { isGlobalTabEnabled } from "~/config/global-tab";
 
-export const Base: any = BaseButton;
-export interface Props extends Omit<ButtonProps, "onClick"> {
-  children?: any;
-  icon?: boolean;
-  primary?: boolean;
-  inverted?: boolean; // only used with primary for now
-  lighterPrimary?: boolean;
-  danger?: boolean;
-  lighterDanger?: boolean;
+export const Base: typeof BaseButton = BaseButton;
+
+export type Props = BaseButtonProps & {
+  inverted?: boolean;
   disabled?: boolean;
-  outline?: boolean;
-  outlineGrey?: boolean;
-  onClick?: Function;
-  small?: boolean;
   isLoading?: boolean;
   event?: string;
-  eventProperties?: Object;
-  mr?: number;
-  mx?: number;
+  eventProperties?: Record<string, unknown>;
 };
 
-class Button extends PureComponent<
-  Props,
-  {
-    isFocused: boolean;
-  }
-> {
-  static defaultProps = {
-    onClick: noop,
-    primary: false,
-    small: false,
-    danger: false,
-    inverted: false,
-  };
-
-  state = {
-    isFocused: false,
-  };
-
-  handleFocus = () => {
-    if (isGlobalTabEnabled()) {
-      this.setState({ isFocused: true });
+export default function Button({
+  onClick,
+  inverted,
+  disabled,
+  children,
+  isLoading,
+  event,
+  eventProperties,
+  ...rest
+}: Props) {
+  const isClickDisabled = disabled || isLoading;
+  const onClickHandler = (e: React.SyntheticEvent<HTMLButtonElement, Event>) => {
+    if (onClick) {
+      if (event) {
+        track(event, eventProperties || {});
+      }
+      onClick(e);
     }
   };
-
-  handleBlur = () => {
-    this.setState({ isFocused: false });
-  };
-
-  render() {
-    const { isFocused } = this.state;
-    const { disabled } = this.props;
-    const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props;
-    const isClickDisabled = disabled || isLoading;
-    const onClickHandler = (e: any) => {
-      if (onClick) {
-        if (event) {
-          track(event, eventProperties || {});
-        }
-        onClick(e);
-      }
-    };
-    return (
-      <Base
-        {...rest}
-        onClick={isClickDisabled ? undefined : onClickHandler}
-        isFocused={isFocused}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
-      >
-        {children}
-      </Base>
-    );
-  }
+  const inner = (
+    <Base {...rest} onClick={isClickDisabled ? undefined : onClickHandler}>
+      {children}
+    </Base>
+  );
+  return inverted ? <InvertTheme>{inner}</InvertTheme> : inner;
 }
-
-export default Button;
