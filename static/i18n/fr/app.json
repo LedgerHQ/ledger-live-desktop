@@ -182,12 +182,12 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapides",
+    "fast": "Rapide",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lents",
+    "slow": "Lent",
     "standard": "Standard",
-    "medium": "Moyens",
+    "medium": "Moyen",
     "feesAmount": "Montant des frais"
   },
   "sidebar": {
@@ -774,7 +774,7 @@
       },
       "closed": {
         "title": "Vos prêts clôturés apparaîtront ici.",
-        "description": "Vous n'avez pas encore fait de prêts.",
+        "description": "Vous n'avez pas encore clôturé de prêts.",
         "cta": "Déposer"
       },
       "opened": {
@@ -1459,7 +1459,7 @@
     "applist": {
       "placeholder": "Pas de résultat pour cette recherche avec les filtres choisis",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
-      "placeholderGoToCatalog": "Aller dans le catalogue pour installer des applications",
+      "placeholderGoToCatalog": "Allez dans le Catalogue pour installer des applications.",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "filter": {
@@ -2634,7 +2634,7 @@
       "analyticsDesc": "Autoriser les statistiques pour aider Ledger à améliorer l'expérience utilisateur. Ces statistiques comprennent les clics, les visites de pages, les redirections, les actions (envoyer, recevoir, verrouiller, etc.), les défilements en bas de page, les installations, désinstallations et mises à jour des applications, les versions des applications, le nombre de comptes, de crypto-actifs et d'opérations, la durée des sessions, le type d'appareil Ledger et de micrologiciel.",
       "reportErrors": "Rapports de bugs",
       "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
-      "launchOnboarding": "Configuration de l'appareil",
+      "launchOnboarding": "Configuration de votre appareil",
       "launchOnboardingDesc": "Configurer un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés."
     },
     "help": {
