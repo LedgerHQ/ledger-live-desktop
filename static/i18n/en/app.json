@@ -3499,8 +3499,7 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
-    },
-    
+    }
   },
   "errors": {
     "countervaluesUnavailable": {

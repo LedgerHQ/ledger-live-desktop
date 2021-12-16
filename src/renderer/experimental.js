@@ -141,6 +141,14 @@ export const experimentalFeatures: Feature[] = [
     valueOn: true,
     valueOff: false,
   },
+  {
+    type: "toggle",
+    name: "NFT_ETH_METADATA_SERVICE",
+    title: "NFT staging metadata service",
+    description: "Use staging metadata service instead of production.",
+    valueOn: "https://nft.api.live.ledger-stg.com/v1/ethereum/1/contracts/tokens/infos",
+    valueOff: "https://nft.api.live.ledger.com/v1/ethereum/1/contracts/tokens/infos",
+  },
 ];
 
 const lsKey = "experimentalFlags";
