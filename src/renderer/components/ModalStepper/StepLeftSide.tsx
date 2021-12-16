@@ -8,7 +8,7 @@ const Container = styled(FlexBox).attrs(() => ({
   flexDirection: "column",
   p: 12,
 }))`
-  flex: 0 0 48%;
+  width: 48%;
 `;
 
 export type StepLeftSideProps = {
@@ -18,12 +18,12 @@ export type StepLeftSideProps = {
   AsideLeft?: React.ReactNode;
   continueLabel?: string;
   backLabel?: string;
-  hideContinueButton?: boolean,
+  hideContinueButton?: boolean;
   continueDisabled?: boolean;
-  hideBackButton?: boolean,
+  hideBackButton?: boolean;
   backDisabled?: boolean;
-  onClickContinue: (...args: any) => any;
-  onClickBack: (...args: any) => any;
+  onClickContinue?: (...args: any) => any;
+  onClickBack?: (...args: any) => any;
 };
 
 const StepLeftSide = ({
@@ -44,25 +44,34 @@ const StepLeftSide = ({
     <Container justifyContent="space-between">
       <FlexBox flexDirection="column">
         {Header}
-        {AsideLeft || (
-          <>
-            <Text variant="h3" mb={5}>{stepTitle}</Text>
-            <Text variant="body" fontWeight="medium" color="palette.neutral.c80">{description}</Text>
-          </>
+        {stepTitle && (
+          <Text variant="h3" mb={5}>
+            {stepTitle}
+          </Text>
         )}
+        {description && (
+          <Text variant="body" fontWeight="medium" color="palette.neutral.c80">
+            {description}
+          </Text>
+        )}
+        {AsideLeft}
       </FlexBox>
       <FlexBox flexDirection="column">
-        {!hideContinueButton && <Button
-          disabled={continueDisabled}
-          variant="main"
-          Icon={ArrowRightRegular}
-          onClick={onClickContinue}
-        >
-          {continueLabel}
-        </Button>}
-        {!hideBackButton && <Button disabled={backDisabled} onClick={onClickBack}>
-          {backLabel}
-        </Button>}
+        {!hideContinueButton && (
+          <Button
+            disabled={continueDisabled}
+            variant="main"
+            Icon={ArrowRightRegular}
+            onClick={onClickContinue}
+          >
+            {continueLabel}
+          </Button>
+        )}
+        {!hideBackButton && (
+          <Button disabled={backDisabled} onClick={onClickBack}>
+            {backLabel}
+          </Button>
+        )}
       </FlexBox>
     </Container>
   );

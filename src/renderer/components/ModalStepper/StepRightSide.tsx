@@ -5,6 +5,7 @@ import FlexBox from "@ledgerhq/react-ui/components/layout/Flex";
 const Container = styled(FlexBox)`
   height: 100%;
   flex: 0 0 52%;
+  width: 52%;
   justify-content: center;
   align-items: center;
 `;

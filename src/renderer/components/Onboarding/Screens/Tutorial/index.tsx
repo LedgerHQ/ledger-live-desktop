@@ -3,8 +3,6 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
-import { CSSTransition } from "react-transition-group";
-import { Stepper } from "~/renderer/components/Onboarding/Screens/Tutorial/Stepper";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
 import { DeviceHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo";
 import { DeviceHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo2";
@@ -28,11 +26,11 @@ import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Al
 import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
 import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
 import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/UseRecoverySheet";
-import { Quizz } from "~/renderer/components/Onboarding/Quizz";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
 import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
 import RecoveryWarning from "../../Help/RecoveryWarning";
+import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
 const screens = {
   howToGetStarted: {
@@ -229,9 +227,18 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
 
   return (
     <>
-      <Popin isOpen={state.context.quizzOpen}>
-        <Quizz onWin={() => sendEvent("QUIZ_SUCCESS")} onLose={() => sendEvent("QUIZ_FAILURE")} />
-      </Popin>
+      <QuizzPopin
+        isOpen={state.context.quizzOpen}
+        onWin={() => {
+          sendEvent("QUIZ_SUCCESS");
+        }}
+        onLose={() => {
+          sendEvent("QUIZ_FAILURE");
+        }}
+        onClose={() => {
+          sendEvent("QUIZ_FAILURE");
+        }}
+      />
       <Popin isOpen={state.context.alerts.beCareful}>
         <CarefullyFollowInstructions
           onClose={() =>
