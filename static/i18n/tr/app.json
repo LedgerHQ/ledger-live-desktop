@@ -718,7 +718,7 @@
     "buy": {
       "header": "{{provider}} ile kripto satın alın",
       "title": "<0>{{provider}}</0> üzerinden kripto satın alın",
-      "tab": "Al",
+      "tab": "Satın al",
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
       "continue": "Devam",
@@ -992,7 +992,7 @@
     },
     "optionsMenu": {
       "title": "Seçenekler",
-      "exportOperations": "Dışa aktarma işlem geçmişi",
+      "exportOperations": "İşlem geçmişini dışa aktar",
       "exportToMobile": "Mobil cihaza aktar"
     },
     "contextMenu": {
@@ -1715,7 +1715,7 @@
     }
   },
   "buy": {
-    "title": "Al",
+    "title": "Satın al",
     "titleCrypto": "{{currency}} Al",
     "buyCTA": "{{currencyTicker}} Al",
     "withoutDevice": "Cihazım olmadan devam et",
@@ -1944,15 +1944,15 @@
   },
   "bitcoin": {
     "inputSelected": "SEÇİLDİ",
-    "toSpend": "Harcanabilir coin'ler",
-    "toReturn": "Dönmek için değiştir",
+    "toSpend": "Harcanacak coin'ler",
+    "toReturn": "Dönecek para üstü",
     "modalTitle": "Coin yönetimi",
     "coincontrol": "Coin yönetimi",
     "advanced": "Gelişmiş seçenekler",
     "ctaDisabled": "Bu hesapta UTXO yok",
     "whatIs": "Coin seçimi nedir?",
-    "rbf": "İşlemin değiştirilmesine izin verin (Ücretli Değiştirme).",
-    "strategy": "Coin seçim stratejisi",
+    "rbf": "İşlemin değiştirilmesine izin ver (Ücretle Değiştir).",
+    "strategy": "Coin seçimi stratejisi",
     "selected": "Strateji için seçilen coin'ler",
     "amount": "Gönderilecek tutar:",
     "replaceable": "değiştirilebilir",
@@ -1965,8 +1965,8 @@
     "pickingStrategy": "UTXO toplama stratejisi",
     "pickingStrategyLabels": {
       "DEEP_OUTPUTS_FIRST": "Önce en eski coin'ler (FIFO)",
-      "OPTIMIZE_SIZE": "Ücretleri en aza indirin (boyutu optimize edin)",
-      "MERGE_OUTPUTS": "Gelecekteki ücretleri en aza indirin (coin'leri birleştirin)"
+      "OPTIMIZE_SIZE": "Ücretleri en aza indir (boyut optimizasyonu)",
+      "MERGE_OUTPUTS": "Gelecekteki ücretleri en aza indir (coin'leri birleştirme)"
     }
   },
   "cosmos": {
@@ -3016,7 +3016,7 @@
               "descr": "Ekrandaki yönergeleri okuyarak cihazınızı nasıl kullanacağınızı öğrenin."
             },
             "select": {
-              "title": "“Kurtarma ifadenizi girin” seçeneğini seçin",
+              "title": "\"Enter your recovery phrase\" (Kurtarma ifadenizi girin) seçeneğini onaylayın",
               "descr": "Seçimi onaylamak için her iki tuşa da aynı anda basın."
             },
             "follow": {
@@ -3049,7 +3049,7 @@
             }
           },
           "quizFailure": {
-            "title": "You will soon become a pro...",
+            "title": "İşin uzmanı olmanıza az kaldı...",
             "paragraph": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
