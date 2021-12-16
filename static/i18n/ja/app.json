@@ -244,13 +244,13 @@
         "noAccountCTA": "アカウントを追加"
       },
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "max": "最大",
-        "accountPlaceholder": "ソースを選択",
+        "accountPlaceholder": "アカウントを選択",
         "currencyDisabledTooltip": "現在、この通貨はスワップに利用できません。"
       },
       "to": {
-        "title": "送付先"
+        "title": "交換先"
       },
       "notAvailable": {
         "title": "お住まいの地域では、スワップを利用できません。",
@@ -442,13 +442,13 @@
       "resetKYCCTA": "本人確認手続きをリセット",
       "amount": "数量",
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "account": "アカウント",
         "amount": "送付額",
         "currency": "暗号資産"
       },
       "to": {
-        "title": "送付先",
+        "title": "交換先",
         "account": "アカウント",
         "amount": "受取額",
         "currency": "暗号資産",
@@ -487,8 +487,8 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "送付元",
-          "to": "送付先",
+          "from": "交換元",
+          "to": "交換先",
           "toExchange": "送付額",
           "toReceive": "受取額",
           "terms": "ご利用規約",
@@ -535,10 +535,10 @@
         "finished": "スワップが正常に完了しました。"
       },
       "date": "日付",
-      "from": "送付元",
+      "from": "交換元",
       "fromAddress": "送信元アドレス",
       "fromAddress_plural": "送信元アドレス",
-      "to": "送付先",
+      "to": "交換先",
       "toProvider": "プロバイダーのアドレス",
       "initialAmount": "初期設定額",
       "creditedAmount": "受取額"
