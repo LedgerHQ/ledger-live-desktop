@@ -6,7 +6,7 @@ export class DiscoverPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.discoverMenuButton = page.locator("data-test-id=drawer-discover-button");
+    this.discoverMenuButton = page.locator("data-test-id=drawer-catalog-button");
   }
 
   async navigate() {
