@@ -1982,11 +1982,11 @@
       "delegate": "추가",
       "undelegate": "위임 해제",
       "redelegate": "재위임",
-      "redelegateDisabledTooltip": "재위임할 수 있습니다 &lt;0&gt;{{days}}&lt;/0&gt;",
-      "redelegateMaxDisabledTooltip": "한 번에 &lt;0&gt;7&lt;/0&gt;명 이상의 검증인을 재위임할 수 없습니다",
-      "undelegateDisabledTooltip": "한 번에 &lt;0&gt;7&lt;/0&gt;명 이상의 검증인을 위임 해제할 수 없습니다",
+      "redelegateDisabledTooltip": "<0>{{days}}</0>에 재위임할 수 있습니다",
+      "redelegateMaxDisabledTooltip": "한 번에 <0>7</0>개 이상의 검증인을 재위임할 수 없습니다",
+      "undelegateDisabledTooltip": "한 번에 <0>7</0>개 이상의 검증인을 위임 해제할 수 없습니다",
       "reward": "보상 수령",
-      "currentDelegation": "위임됨: &lt;0&gt;{{amount}}&lt;/0&gt;",
+      "currentDelegation": "위임됨: <0>{{amount}}</0>",
       "estYield": "추산 수익",
       "activeTooltip": "위임된 금액이 보상을 생성합니다",
       "inactiveTooltip": "위임되지 않은 금액은 보상을 생성하지 않습니다",
@@ -2050,8 +2050,8 @@
             "compoundOrClaim": "컴파운드 또는 현금화",
             "compoundDescription": "위임된 금액에 보상이 추가됩니다",
             "claimDescription": "가용 잔금에 보상이 추가됩니다",
-            "compoundInfo": "&lt;0&gt;{{amount}}&lt;0&gt;의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 동일한 검증인에게 자동 위임합니다.",
-            "claimInfo": "아래 검증인으로부터 ed &lt;0&gt;{{amount}}&lt;0&gt;(이)의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 가용 잔금에 자동 추가됩니다.",
+            "compoundInfo": "<0>{{amount}}</0>의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 동일한 검증인에게 자동 위임합니다.",
+            "claimInfo": "아래 검증인으로부터 <0>{{amount}}</0>의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 가용 잔금에 자동 추가됩니다.",
             "selectLabel": "위임 선택"
           },
           "connectDevice": {
@@ -2064,7 +2064,7 @@
               "title": "보상을 성공적으로 현금화 했습니다",
               "titleCompound": "성공적으로 보상에 복리를 적용했습니다.",
               "text": "보상이 가용 잔금에 추가되었습니다",
-              "textCompound": "귀하의 보상이 &lt;0&gt;{{amount}}&lt;/0&gt; 자동으로 &lt;0&gt;{{validator}}&lt;/0&gt;에게 위임되었습니다",
+              "textCompound": "귀하의 보상이 <0>{{amount}}</0>자동으로 <0>{{validator}}</0>에게 위임되었습니다",
               "cta": "세부사항 보기"
             },
             "pending": {
@@ -2082,7 +2082,7 @@
           "starter": {
             "title": "재위임",
             "description": "재위임 기능을 이용하여 손쉽게 검증인을 변경하세요. 하지만 재위임 시 21일 타임 락이 적용되기 때문에, 다시 변경을 원하는 경우 21일을 기다려야 합니다.",
-            "warning": "검증인을 현명하게 선택하세요. 검증인이 부적절한 행동을 하는 경우 위임된 자산의 일부가 영구 손실될 수 있습니다. 최대 &lt;0&gt;7개의 대기 중 재위임&lt;/0&gt;이 있을 수 있습니다.",
+            "warning": "검증인을 현명하게 선택하세요. 검증인이 부적절한 행동을 하는 경우 위임된 자산의 일부가 영구 손실될 수 있습니다. 최대 <0>7개의 대기 중 재위임</0>이 있을 수 있습니다.",
             "howDelegationWorks": "위임은 어떤 원리인가요?"
           },
           "validators": {
@@ -2090,7 +2090,7 @@
             "currentDelegation": "현재 위임",
             "newDelegation": "새로운 위임",
             "chooseValidator": "검증인 선택",
-            "warning": "다시 마음이 바뀌어 새로운 검증인 교체하고 재위임하려면 &lt;0&gt;21 days&lt;/0&gt;일을 기다려야 합니다"
+            "warning": "다시 마음이 바뀌어 새로운 검증인 교체하고 재위임하려면 <0>21일</0>을 기다려야 합니다"
           },
           "device": {
             "title": "장치"
@@ -2116,8 +2116,8 @@
         "steps": {
           "amount": {
             "title": "금액",
-            "subtitle": "위임 해제 절차 완료까지 &lt;0&gt;21일&lt;/0&gt;이 소요됩니다.",
-            "warning": "보상은 즉시 현금화할 수 있습니다. 위임 해제 금액은 &lt;0&gt;21일 시간 잠금&lt;/0&gt; 후에 가용 잔금으로 되돌아옵니다.",
+            "subtitle": "위임 해제 절차 완료까지 <0>21일</0>이 소요됩니다.",
+            "warning": "보상은 즉시 현금화할 수 있습니다. 위임 해제 금액은 <0>21일 시간 잠금</0> 후에 가용 잔금으로 되돌아옵니다.",
             "fields": {
               "validator": "검증인",
               "amount": "위임 해제 금액"
@@ -2130,7 +2130,7 @@
             "title": "확인",
             "success": {
               "title": "귀하의 자산을 성공적으로 위임 해제했습니다.",
-              "description": "&lt;0&gt;{{amount}}&lt;/0&gt;(이)가 &lt;0&gt;{{validator}}&lt;/0&gt;로부터 위임 해제되었습니다",
+              "description": "<0>{{amount}}</0>(이)가 <0>{{validator}}</0>로부터 위임 해제되었습니다",
               "cta": "세부사항 보기"
             },
             "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
@@ -2141,8 +2141,8 @@
   },
   "algorand": {
     "operationHasRewards": "획득한 보상",
-    "operationEarnedRewards": "&lt;0&gt;{{amount}}의 보상을 획득했습니다.",
-    "operationDetailsAmountBreakDown": "{{initialAmount}} (&lt;0&gt;+{{reward}}&lt;/0&gt; 획득한 보상)",
+    "operationEarnedRewards": "<0>{{amount}}</0>의 보상을 획득했습니다.",
+    "operationDetailsAmountBreakDown": "{{initialAmount}} (<0>+{{reward}}</0> 획득한 보상)",
     "optIn": {
       "flow": {
         "title": "ASA(자산) 추가",
@@ -2160,7 +2160,7 @@
             "title": "확인",
             "success": {
               "title": "{{token}} 자산이 추가되었습니다",
-              "text": "이제 Algorand 계정에서 &lt;0&gt;{{token}}&lt;/0&gt; 자산을 보내고 받을 수 있습니다.",
+              "text": "이제 Algorand 계정에서<0>{{token}}</0> 자산을 보내고 받을 수 있습니다.",
               "cta": "세부사항 보기"
             },
             "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
@@ -2247,9 +2247,9 @@
       "electionOpen": "현재 새 검증인 선출이 진행 중입니다. 따라서 약 15분 동안 스테이킹 거래를 이용할 수 없습니다.",
       "electionOpenTooltip": "검증인 선출 중에는 이 거래를 이용할 수 없습니다.",
       "externalControllerTooltip": "이 계정은 다른 계정에서 관리됩니다.",
-      "externalControllerUnsupported": "&lt;0&gt;이 스태시 계정은 별도의 계정(주소: &lt;0&gt;{{controllerAddress}}&lt;/0&gt;)에 관리됩니다.&lt;/0&gt; &lt;1&gt; Ledger Live로 스테이킹 하려면, 이 스태시 계정을 관리자로 설정해야 합니다.&lt;/1&gt;",
+      "externalControllerUnsupported": "<0>이 스태시 계정은 별도의 계정(주소: <0>{{controllerAddress}}</0>)에 관리됩니다.</0><1>Ledger Live로 스테이킹 하려면, 이 스태시 계정을 관리자로 설정해야 합니다.</1>",
       "externalStashTooltip": "이 계정은 다른 계정을 관리합니다.",
-      "externalStashUnsupported": "&lt;0&gt;이 계정은 별도 스태시 계정(주소: &lt;0&gt;{{stashAddress}})의 관리자입니다&lt;/0&gt;.&lt;/0&gt; &lt;1&gt;Ledger Live로 스테이킹 하려면, 이 스태시 계정을 관리자로 설정해야 합니다.&lt;/1&gt;",
+      "externalStashUnsupported": "<0>이 계정은 별도 스태시 계정(주소: <0>{{stashAddress}}</0>)의 관리자입니다.</0><1>Ledger Live로 스테이킹 하려면, 이 스태시 계정을 관리자로 설정해야 합니다.</1>",
       "showInactiveNominations": "모든 지명자를 보여줍니다 ({{count}})",
       "hideInactiveNominations": "활성 지명만 보기",
       "noActiveNominations": "활성 지명이 없습니다.",
@@ -2521,7 +2521,7 @@
           "title": "검증인 선택",
           "description": "추정된 보상율을 비교하여 검증인을 선택할 수 있습니다",
           "customValidator": "커스텀 검증인",
-          "providedBy": "&lt;1&gt;&lt;0&gt;{{name}}&lt;/0&gt;&lt;/1&gt; 제공 수익률"
+          "providedBy": "<1><0>{{name}}</0></1> 제공 수익률"
         },
         "custom": {
           "title": "커스텀 검증인",
@@ -2689,7 +2689,7 @@
         },
         "experimentalExplorers": {
           "title": "실험적 탐색기 API",
-          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔금과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(&lt;0&gt;)"
+          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔금과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
         },
         "keychainObservableRange": {
           "title": "맞춤형 갭 한도",
@@ -2854,7 +2854,7 @@
     "serviceStatus": {
       "statusOk": {
         "title": "Ledger Live가 실행 중입니다",
-        "description": "문제가 있나요? &lt;0&gt;지원 페이지&lt;/0&gt;로 이동"
+        "description": "문제가 있나요? <0>지원 페이지</0>로 이동"
       },
       "statusNotOk": {
         "title": "Ledger Live에 문제가 있습니다",
@@ -2874,7 +2874,7 @@
         "title": "Pin 코드 보호",
         "intro": "설정 과정에서 Pin 코드를 선택했습니다.",
         "rules": {
-          "1": "Pin 코드는 &lt;0&gt;항상&lt;/0&gt; 직접 선택하세요.",
+          "1": "Pin 코드는 <0>항상</0> 직접 선택하세요.",
           "2": "&lt;0&gt;항상&lt;0&gt; Pin 코드는 눈에 띄지 않는 곳에 두세요.",
           "3": "필요한 경우, Pin 코드를 변경할 수 있습니다.",
           "4": "Pin 코드를 연속으로 잘못 입력하면 장치가 리셋됩니다.",
