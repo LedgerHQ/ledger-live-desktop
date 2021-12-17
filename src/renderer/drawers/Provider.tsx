@@ -41,7 +41,6 @@ export const context = React.createContext<ContextValue>({
 const DrawerProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const _setDrawer: typeof setDrawer = useCallback((Component, componentProps, options) => {
-    console.log("options in provider", options);
     dispatch({ Component, componentProps, open: !!Component, options });
   }, []);
 
