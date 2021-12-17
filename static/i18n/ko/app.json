@@ -332,7 +332,7 @@
       "completed": {
         "title": "교환 대기 중",
         "description": "확인을 위해 귀하의 스왑 거래를 네트워크로 전송했습니다. {{targetCurrency}}(을)를 받기까지 최대 한 시간이 소요될 수 있습니다.",
-        "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt; support&lt;0&gt;의 지원이 필요할 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
+        "disclaimer": "<0><0>{{provider}}</0> 지원</0>의 도움이 필요한 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
         "seeDetails": "세부사항 확인"
       }
     }
@@ -493,8 +493,8 @@
           "toReceive": "수신 금액",
           "terms": "이용약관",
           "disclaimer": {
-            "description": "&quot;확인&quot;을 클릭하여 &lt;0&gt;{{provider}}&lt;/0&gt;에서 독점적으로 관리하는 서비스임을 인지하고 수락합니다",
-            "acceptedDescription": "&lt;0&gt;{{provider}}&lt;/0&gt;에서 독점적으로 관리하는 서비스입니다"
+            "description": "\"확인\"을 클릭함으로써 본인은 이 서비스가 <0>{{provider}}</0>의 독점적으로 관리하는 서비스임을 인지하고 수락합니다",
+            "acceptedDescription": "<0>{{provider}}</0>에서 독점적으로 관리하는 서비스입니다"
           },
           "details": {
             "provider": "공급자",
@@ -517,7 +517,7 @@
           "subtitle": "스왑 브로드캐스트가 성공적으로 완료되었습니다 ",
           "swap": "사용자 스왑 ID:",
           "seeDetails": "세부사항 확인",
-          "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt; support&lt;0&gt;의 도움이 필요할 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
+          "disclaimer": "<0><0>{{provider}}</0> 지원</0>의 도움이 필요한 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
           "description": "확인을 위해 귀하의 스왑 거래를 네트워크로 전송했습니다. {{targetCurrency}}(을)를 받기까지 최대 한 시간이 소요될 수 있습니다."
         }
       }
@@ -679,7 +679,7 @@
     "emptyState": {
       "title": "아직 암호화폐가 없나요?",
       "desc": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 수령하세요",
-      "descToken": "&lt;1&gt;&lt;0&gt;{{managerAppName}}&lt;/0&gt;&lt;/1&gt; 앱이 설치되었는지 확인 &lt;3&gt;&lt;0&gt;{{ticker}}&lt;/0&gt;&lt;/3&gt; 및 &lt;5&gt;&lt;0&gt;{{tokenList}}&lt;/0&gt; 토큰을 받으세요&lt;/5&gt;",
+      "descToken": "<1><0>{{managerAppName}}</0></1> 앱이 설치되어 있는지 확인하고 <3><0>{{ticker}}</0></3> 및 <5><0>{{tokenList}}</0> 토큰</5> 수령을 시작합니다.",
       "buttons": {
         "receiveFunds": "수령",
         "buy": "구매"
@@ -716,8 +716,8 @@
     "reset": "플로우 리셋",
     "verifyAddress": "장치에 표시된 주소와 정확히 일치하는지 확인하세요",
     "buy": {
-      "header": "{{provider}}(으)로 암호화폐 구매",
-      "title": "&lt;0&gt;{{provider}}(으)로 암호화폐 구매",
+      "header": "{{provider}}로 암호화폐 구매",
+      "title": "<0>{{provider}}</0>로 암호화폐 구매",
       "tab": "구매",
       "selectCrypto": "암호화폐 선택",
       "selectAccount": "계정 선택",
@@ -726,7 +726,7 @@
     },
     "sell": {
       "header": "{{provider}}(으)로 암호화폐 판매",
-      "title": "&lt;0&gt;{{provider}}(을)를 통해 암호화폐 판매",
+      "title": "<0>{{provider}}를</0> 통해 암호화폐 판매",
       "tab": "판매",
       "selectCrypto": "암호화폐 선택",
       "selectAccount": "계정 선택",
@@ -836,9 +836,9 @@
         "approve": "승인",
         "manageLimit": "한도 관리",
         "viewDetails": "세부사항 보기",
-        "info": "이 계정에서 &lt;0&gt;{{amount}}&lt;/0&gt;(을)를 승인했습니다. 수수료를 내고 금액을 낮출 수 있습니다.",
+        "info": "이 계정에서 <0>{{amount}}</0>(을)를 승인했습니다. 수수료를 내고 금액을 낮출 수 있습니다.",
         "infoNoLimit": "이 계정을 완전히 승인했습니다. 수수료를 내고 금액을 낮출 수 있습니다. ",
-        "approvedWithLimit": "이 계정에서 &lt;0&gt;{{value}}&lt;/0&gt;(을)를 승인했습니다.",
+        "approvedWithLimit": "이 계정에서 <0>{{value}}</0>(을)를 승인했습니다.",
         "enabling": "계정 승인이 확인되면 자산을 예치할 수 있습니다.",
         "notEnabled": "이 계정을 승인한 후에 자산을 대출해 줄 수 있습니다.",
         "notEnoughApproved": "자산을 대출해 주기 위해서는 귀하 계정의 승인 한도를 높여야 합니다."
@@ -863,7 +863,7 @@
         },
         "amount": {
           "title": "금액",
-          "summary": "본인은 &lt;0&gt;{{amount}}&lt;0&gt; 금액에 대한 내 계정 &lt;0&gt;{{accountName}}&lt;/0&gt;의 &lt;0&gt;{{contractName}}&lt;/0&gt; 스마트 계약에 대한 액세스 권한을 부여합니다.",
+          "summary": "본인은 <0>{{amount}}</0> 금액에 대한 내 계정 <0>{{accountName}}</0>의 <0>{{contractName}}</0> 스마트 계약에 대한 액세스 권한을 부여합니다.",
           "limit": "제한된 {{amount}}",
           "noLimit": "미제한 {{assetName}}",
           "contractName": "{{currencyName}} 컴파운드",
@@ -920,10 +920,10 @@
         "title": "암호화폐 대출",
         "subtitle": "컴파운드 프로토콜에서 자산 대출",
         "description": "컴파운드 프로토콜로 이더리움 네트워크에서 자산을 대출해 주거나 받을 수 있습니다. Ledger 계정에서 바로 자산을 대출해 주고 이자를 받을 수 있습니다.",
-        "switchLabel": "&lt;1&gt;&lt;/1&gt;&lt;0&gt;이용 약관&lt;/0&gt;&lt;1&gt;을 읽고 동의합니다.&lt;/1&gt;"
+        "switchLabel": "<1>본인은</1><0>이용 약관</0><1>을 읽고 동의합니다.</1>"
       },
       "steps": {
-        "title": "단계 &lt;0&gt;{{step}} / {{total}}&lt;/0&gt;",
+        "title": "단계 <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "계정에서 프로토콜이 향후",
           "subtitle2": "대출을 처리하도록 승인합니다.",
@@ -964,7 +964,7 @@
     },
     "noEthAccount": {
       "title": "ETH 계정을 생성하세요",
-      "description": "&lt;0&gt;{{ asset }}({{ ticker }})&lt;/0&gt;(은)는 이더리움 ERC-20 토큰입니다. 대출을 서비스를 제공하려면 {{ ticker }}, 이더리움 앱을 설치하고 이더리움 계정을 생성하세요.",
+      "description": "<0>{{ asset }}({{ ticker }})</0>(은)는 이더리움 ERC-20 토큰입니다. {{ ticker }}의 대출을 서비스를 제공하려면, 이더리움 앱을 설치하고 이더리움 계정을 생성하세요.",
       "cta": "계정 추가"
     },
     "emptyAccountDeposit": {
@@ -1039,7 +1039,7 @@
   },
   "blacklistToken": {
     "title": "토큰 숨기기",
-    "desc": "이 작업은 모든 &lt;1&gt;&lt;0&gt;{{tokenName}}의 계정을 숨기며 &lt;3&gt;설정&lt;3&gt;을 사용하여 다시 표시할 수 있습니다",
+    "desc": "이 작업은 모든 <1><0>{{tokenName}}</0></1>의 계정을 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
     "hideCTA": "토큰 숨기기"
   },
   "banners": {
@@ -1146,7 +1146,7 @@
   },
   "currentAddress": {
     "title": "현재 주소",
-    "for": "&lt;1&gt;&lt;0&gt;{{name}}&lt;0&gt;&lt;1&gt; 주소",
+    "for": "<1><0>{{name}}</0></1> 주소",
     "messageIfUnverified": "공유된 주소가 장치의 주소와 정확히 일치하는지 확인하세요.",
     "messageIfSkipped": "귀하의 {{name}} 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요.",
     "showQrCode": "QR 코드 보기"
@@ -1296,8 +1296,8 @@
     "successDescription": "다른 계정을 추가하거나 포트폴리오로 돌아가세요",
     "successDescription_plural": "다른 계정을 추가하거나 포트폴리오로 돌아가세요",
     "createNewAccount": {
-      "noOperationOnLastAccount": "&lt;1&gt;&lt;0&gt;{{accountName}} 계정으로 자산을 수신하기 전에는 새 계정을 추가할 수 없습니다",
-      "noAccountToCreate": " &lt;1&gt;&lt;0&gt;{{currencyName}} 계정이 생성되지 않은 것 같습니다",
+      "noOperationOnLastAccount": "<1><0>{{accountName}}</0></1> 계정으로 자산을 수신하기 전에는 새 계정을 추가할 수 없습니다",
+      "noAccountToCreate": "<1><0>{{currencyName}}</0></1> 계정이 생성되지 않은 것 같습니다",
       "showAllAddressTypes": "모든 주소 유형을 표시하세요",
       "showAllAddressTypesTooltip": "다른 주소 형식으로 {{family}}(을)를 수령하려면 주소 유형만 변경해 주세요."
     },
@@ -1364,7 +1364,7 @@
       "frozenAmount": "동결 금액",
       "unfreezeAmount": "동결 해제 금액",
       "votes": "투표 ({{number}})",
-      "votesAddress": "&lt;2&gt;{{name}}&lt;/2&gt;에게 &lt;0&gt;{{votes}}&lt;0&gt;",
+      "votesAddress": "<2>{{name}}</2>에게 <0>{{votes}}</0>",
       "validators": "검증인",
       "redelegated": "재위임됨",
       "redelegatedFrom": "다음으로부터 재위임됨",
@@ -1446,7 +1446,7 @@
       "ctaPortfolio": "포트폴리오로 돌아가기"
     },
     "deviceStorage": {
-      "freeSpace": "&lt;0&gt;{{space}}&lt;/0&gt; 남음",
+      "freeSpace": "<0>{{space}}</0> 남음",
       "noFreeSpace": "남은 저장 공간 없음",
       "installed": "앱",
       "capacity": "용량",
@@ -1578,9 +1578,9 @@
       "confirmUpdate": "장치에서 업데이트를 확인하세요",
       "mcuTitle": "업데이트 마무리",
       "mcuFirst": "장치에서 USB 케이블 분리",
-      "mcuSecond": "USB 케이블을 다시 연결하는 동안에 &lt;1&gt;&lt;0&gt;{{repairProcessing}}&lt;0&gt;&lt;1&gt;스크린이 표시될 때까지 왼쪽 버튼을 길게 누르세요",
+      "mcuSecond": "USB 케이블을 다시 연결하는 동안에 <1><0>{{repairProcessing}}</0></1>스크린이 표시될 때까지 왼쪽 버튼을 길게 누르세요",
       "mcuPin": "업데이트가 완료될 때까지 기다려 주세요",
-      "mcuSecondNanoX": "&lt;1&gt;&lt;0&gt;{{bootloaderOption}}(이)가 표시될 때까지 왼쪽 버튼을 길게 누르세요. 버튼 두 개를 모두 눌러 장치를 확인하고 재연결하세요.",
+      "mcuSecondNanoX": "<1><0>{{bootloaderOption}}</0></1>이(가) 표시될 때까지 왼쪽 버튼을 길게 누르세요. 버튼 두 개를 모두 눌러 장치를 확인하고 재연결하세요.",
       "mcuBlueFirst": "측면 버튼을 10초간 길게 눌러 장치를 끄세요. 버튼에서 손을 떼세요.",
       "mcuBlueSecond": "부팅 옵션이 표시될 때까지 버튼을 5초 이상 누르세요. Bootloader 모드 탭",
       "successTitle": "펌웨어 업데이트됨",
@@ -1698,7 +1698,7 @@
         "maxUsed": "자산 부족",
         "validators": "검증인 ({{total}})",
         "votes": "가용 자산: {{total}}",
-        "noResults": "&quot;&lt;0&gt;{{search}}&lt;/0&gt;&quot;에 대한 검증인이 없습니다."
+        "noResults": "\"<0>{{search}}</0>\"에 대한 검증인이 없습니다."
       },
       "connectDevice": {
         "title": "장치"
@@ -2934,7 +2934,7 @@
         "title": "Ledger에 오신 것을 환영합니다",
         "description": "컴퓨터에서 암호화폐를 안전하게 관리하세요.",
         "cta": "시작하기",
-        "noDevice": "장치가 없으세요? &lt;0&gt;Ledger Nano X 구매하기&lt;/0&gt;",
+        "noDevice": "장치가 없으세요? <0>Ledger Nano X 구매하기</0>",
         "languageWarning": {
           "title": "{{language}}로 시작하기",
           "desc": "신규 사용자가 원활하게 Ledger 제품을 시작할 수 있도록 새로운 언어를 추가했습니다. 현재 Ledger의 나머지 기능은 영어로만 이용 가능합니다.",
