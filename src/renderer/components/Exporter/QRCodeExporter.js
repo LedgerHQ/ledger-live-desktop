@@ -22,6 +22,9 @@ const QRCodeContainer = styled.div`
   position: relative;
   padding: 12px;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.03);
   border: solid 1px ${props => props.theme.colors.palette.divider};
   background-color: ${p => p.theme.colors.white};

@@ -11,10 +11,10 @@ type Props = {
   title?: React.ReactNode;
   subTitle?: React.ReactNode;
   headerStyle?: any;
-  onBack?: () => {};
-  onClose?: () => {};
-  render?: (props?: RenderProps) => {};
-  renderFooter?: (props?: RenderProps) => {};
+  onBack?: () => void;
+  onClose?: () => void;
+  render?: (props?: RenderProps) => React.ReactNode;
+  renderFooter?: (props?: RenderProps) => React.ReactNode;
   modalFooterStyle?: any;
   renderProps?: RenderProps;
   noScroll?: boolean;
