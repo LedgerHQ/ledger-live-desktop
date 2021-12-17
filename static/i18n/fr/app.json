@@ -3748,7 +3748,7 @@
       "title": "L'adresse du bénéficiaire est inactive. Envoyez au minimum {{minimalAmount}} pour l'activer."
     },
     "NotEnoughGas": {
-      "title": "Le solde ETH du compte parent ne suffit pas pour couvrir les frais de réseau."
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Mots de passe non identiques",
