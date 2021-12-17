@@ -159,8 +159,8 @@ export default function Default() {
                   <Box
                     grow
                     horizontal
-                    bg="palette.background.default"
-                    color="palette.text.shade60"
+                    bg="neutral.c20"
+                    color="neutral.c100"
                     style={{ width: "100%", height: "100%" }}
                   >
                     <MainSideBar />

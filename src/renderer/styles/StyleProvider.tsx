@@ -1,5 +1,3 @@
-// @flow
-
 import "@ledgerhq/react-ui/assets/fonts";
 import React, { useMemo } from "react";
 import { ThemeProvider } from "styled-components";
@@ -8,7 +6,7 @@ import defaultTheme from "./theme";
 import palettes from "./palettes";
 import type { Theme } from "./theme";
 
-import { GlobalStyle } from "./global";
+import { GlobalStyle } from "@ledgerhq/react-ui/styles";
 
 import { defaultTheme as V3dDfaultTheme, palettes as V3Palettes } from "@ledgerhq/react-ui/styles";
 
