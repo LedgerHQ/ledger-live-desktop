@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Drawer } from "@ledgerhq/react-ui";
+import { SideDrawer } from "~/renderer/components/SideDrawer";
 import { Flex, Tabs, Logos } from "@ledgerhq/react-ui";
 import AnnouncementPanel from "./AnnouncementPanel";
 import ServiceStatusPanel from "./ServiceStatusPanel";
@@ -47,7 +47,7 @@ const InformationDrawer = ({
   const tabIndex = useMemo(() => tabs.findIndex(tab => tab.id === tabId), [tabId, tabs]);
 
   return (
-    <Drawer isOpen={isOpen} onClose={onRequestClose} big>
+    <SideDrawer isOpen={isOpen} onClose={onRequestClose} big>
       <Flex my="20px" justifyContent="center">
         <Logos.LedgerLiveRegular />
       </Flex>
@@ -63,7 +63,7 @@ const InformationDrawer = ({
           dispatch(setTabInformationCenter(tabs[newTabIndex].id));
         }}
       />
-    </Drawer>
+    </SideDrawer>
   );
 };
 
