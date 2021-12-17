@@ -3748,7 +3748,7 @@
       "title": "La dirección del destinatario está inactiva. Envía al menos {{minimalAmount}} para activarla."
     },
     "NotEnoughGas": {
-      "title": "El saldo de ETH en la cuenta principal es insuficiente para las tarifas de red"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Las contraseñas no coinciden",
