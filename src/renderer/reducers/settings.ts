@@ -1,6 +1,5 @@
-import { handleActions, ReducerMap, ReducerMapMeta } from "redux-actions";
+import { handleActions } from "redux-actions";
 import { createSelector } from "reselect";
-import type { OutputSelector } from "reselect";
 import {
   findCurrencyByTicker,
   getCryptoCurrencyById,
@@ -12,7 +11,7 @@ import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { getLanguages } from "~/config/languages";
+import { getLanguages, LangKeys } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
 
@@ -70,7 +69,7 @@ export type SettingsState = {
   hasInstalledApps: boolean,
   lastSeenDevice: DeviceModelInfo | null,
   latestFirmware: any,
-  language?: string,
+  language?: LangKeys,
   theme: string | null,
   region: string | null,
   orderAccounts: string,
@@ -81,9 +80,7 @@ export type SettingsState = {
   currenciesSettings: {
     [currencyId: string]: CurrencySettings,
   },
-  pairExchanges: {
-    [pair: string]: string | null,
-  },
+  pairExchanges: Record<string, string>,
   developerMode: boolean,
   shareAnalytics: boolean,
   sentryLogs: boolean,
@@ -92,6 +89,7 @@ export type SettingsState = {
   accountsViewMode: "card" | "list",
   showAccountsHelperBanner: boolean,
   hideEmptyTokenAccounts: boolean,
+  sidebarCollapsed: boolean,
   discreetMode: boolean,
   carouselVisibility: number,
   starredAccountIds?: string[],
@@ -149,6 +147,7 @@ const INITIAL_STATE: SettingsState = {
   accountsViewMode: "list",
   showAccountsHelperBanner: true,
   hideEmptyTokenAccounts: getEnv("HIDE_EMPTY_TOKEN_ACCOUNTS"),
+  sidebarCollapsed: false,
   discreetMode: false,
   preferredDeviceModel: DeviceModelId.nanoS,
   hasInstalledApps: true,
@@ -407,6 +406,7 @@ export const confirmationsNbForCurrencySelector = (
 };
 
 export const preferredDeviceModelSelector = (state: State) => state.settings.preferredDeviceModel;
+export const sidebarCollapsedSelector = (state: State) => state.settings.sidebarCollapsed;
 export const accountsViewModeSelector = (state: State) => state.settings.accountsViewMode;
 export const marketIndicatorSelector = (state: State) => state.settings.marketIndicator;
 export const sentryLogsSelector = (state: State) => state.settings.sentryLogs;
@@ -458,8 +458,8 @@ export const showClearCacheBannerSelector = (state: State) => state.settings.sho
 
 export const exportSettingsSelector = createSelector(
   counterValueCurrencySelector,
-  state => state.settings.currenciesSettings,
-  state => state.settings.pairExchanges,
+  (state: State) => state.settings.currenciesSettings,
+  (state: State) => state.settings.pairExchanges,
   developerModeSelector,
   blacklistedTokenIdsSelector,
   (

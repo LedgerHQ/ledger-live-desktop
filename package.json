@@ -150,6 +150,7 @@
     "@babel/preset-flow": "^7.13.13",
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.15.0",
+    "@types/ip": "^1.1.0",
     "@types/react-router-dom": "^5.3.2",
     "@types/redux-actions": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.3.0",

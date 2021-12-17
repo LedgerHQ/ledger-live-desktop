@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory, useLocation } from "react-router-dom";
-import { lastSeenDeviceSelector, SettingsState } from "~/renderer/reducers/settings";
-import { setFirstTimeLend } from "~/renderer/actions/settings";
+import { sidebarCollapsedSelector, lastSeenDeviceSelector, SettingsState } from "~/renderer/reducers/settings";
+import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 import { openModal } from "~/renderer/actions/modals";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { hasLendEnabledAccountsSelector } from "~/renderer/reducers/accounts";
@@ -17,8 +17,8 @@ const MainSideBar: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [collapsed, setCollapsed] = React.useState(false);
-  const toggleCollapsed = useCallback(() => setCollapsed(!collapsed), [collapsed]);
+  const collapsed = useSelector(sidebarCollapsedSelector);
+  const toggleCollapsed = useCallback(() => dispatch(setSidebarCollapsed(!collapsed)), [dispatch, collapsed]);
 
   const isUpdateAvailable = useIsUpdateAvailable();
 

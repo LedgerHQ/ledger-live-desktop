@@ -3,9 +3,8 @@ import { useTranslation } from "react-i18next";
 import { setLanguage } from "~/renderer/actions/settings";
 import { langAndRegionSelector } from "~/renderer/reducers/settings";
 import { useDispatch, useSelector } from "react-redux";
-import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 import { Dropdown } from "@ledgerhq/react-ui";
-import { getLanguages } from "~/config/languages";
+import { getLanguages, languageLabels } from "~/config/languages";
 
 import moment from "moment";
 

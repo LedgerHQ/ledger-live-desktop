@@ -1,4 +1,6 @@
-import React from "react";
+// @flow
+
+import React, { PureComponent } from "react";
 import { Button as BaseButton, InvertTheme } from "@ledgerhq/react-ui";
 import { ButtonProps as BaseButtonProps } from "@ledgerhq/react-ui/components/cta/Button";
 import { track } from "~/renderer/analytics/segment";
