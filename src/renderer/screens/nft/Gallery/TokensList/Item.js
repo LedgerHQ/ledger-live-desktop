@@ -3,6 +3,7 @@
 import React, { useMemo, useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Box, { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -41,24 +42,26 @@ const Dots: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
+  account: Account,
   contract: string,
   tokenId: string,
   id: string,
   mode: "grid" | "list",
 };
 
-const Row = ({ contract, tokenId, id, mode }: Props) => {
+const Row = ({ contract, tokenId, id, mode, account }: Props) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
   const { nftName } = metadata || {};
-  const show = useMemo(() => status !== "loaded", [status]);
+  const show = useMemo(() => status === "loading", [status]);
   const isGrid = mode === "grid";
 
   const onItemClick = useCallback(() => {
     setDrawer(NFTViewerDrawer, {
+      account,
       nftId: id,
       isOpen: true,
     });
-  }, [id]);
+  }, [id, account]);
 
   const onDotsClick = useCallback(
     event => {

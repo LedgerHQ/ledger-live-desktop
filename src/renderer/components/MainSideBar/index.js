@@ -173,7 +173,7 @@ const TagContainer = ({ collapsed }: { collapsed: boolean }) => {
 
   return isExperimental || hasFullNodeConfigured ? (
     <Tag
-      id="drawer-experimental-button"
+      data-test-id="drawer-experimental-button"
       to={{ pathname: "/settings/experimental" }}
       onClick={() => setTrackingSource("sidebar")}
     >
@@ -271,7 +271,11 @@ const MainSideBar = () => {
         const secondAnim = !(state === "entered" && !collapsed);
         return (
           <SideBar className="unstoppableAnimation" style={sideBarTransitionStyles[state]}>
-            <Collapser collapsed={collapsed} onClick={handleCollapse} id="drawer-collapse-button">
+            <Collapser
+              collapsed={collapsed}
+              onClick={handleCollapse}
+              data-test-id="drawer-collapse-button"
+            >
               <IconChevron size={16} />
             </Collapser>
             <TopGradient />
@@ -376,7 +380,7 @@ const MainSideBar = () => {
             </Hide>
 
             <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-              <div id="bookmarked-accounts">
+              <div data-test-id="bookmarked-accounts">
                 <Stars pathname={location.pathname} collapsed={secondAnim} />
               </div>
             </SideBarList>

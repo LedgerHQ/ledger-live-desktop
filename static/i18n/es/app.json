@@ -264,8 +264,8 @@
           "rejected": "KYC rechazado, vuelve a iniciar la verificación",
           "status": {
             "pending": "KYC pendiente",
-            "approved": "KYC approved",
-            "closed": "KYC rejected"
+            "approved": "KYC aprobado",
+            "closed": "KYC rechazado"
           }
         }
       }
@@ -1181,7 +1181,7 @@
       },
       "attributes": {
         "properties": "Propiedades",
-        "description": "Description",
+        "description": "Descripción",
         "contract": "Dirección de contrato",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
@@ -1192,20 +1192,20 @@
       "receiveCTA": "Recibir NFT",
       "galleryCTA": "Ver galería",
       "seeMore": "Ver más colecciones",
-      "seeAll": "See all collections",
-      "seeLess": "See less"
+      "seeAll": "Ver todas las colecciones",
+      "seeLess": "Ver menos"
     },
     "gallery": {
-      "title": "All NFT",
+      "title": "Todos los NFTs",
       "collection": {
         "header": {
-          "sendCTA": "Send",
-          "contract": "Contract: {{contract}}"
+          "sendCTA": "Enviar",
+          "contract": "Contrato: {{contract}}"
         },
         "operationList": {
-          "header": "Latest Operations",
-          "OUT": "Sent",
-          "IN": "Received"
+          "header": "Operaciones recientes",
+          "OUT": "Enviado",
+          "IN": "Recibido"
         }
       },
       "tokensList": {
@@ -1299,7 +1299,7 @@
       "noOperationOnLastAccount": "No es posible agregar nuevas cuentas antes de haber recibido activos en tu cuenta <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "No se detectó ninguna cuenta de <1><0>{{currencyName}}</0></1> para crear",
       "showAllAddressTypes": "Mostrar todos los tipos de direcciones",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "Solo modifica el tipo de dirección en caso de que necesites recibir {{family}} en otros formatos de dirección."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "¿Segwit o Native Segwit?"
@@ -1355,10 +1355,10 @@
     "details": "Detalles de {{ currency }}",
     "multipleAddresses": "¿Por qué hay múltiples direcciones?",
     "nft": {
-      "name": "Token Name",
-      "contract": "Token Contract",
-      "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "name": "Nombre del token",
+      "contract": "Contrato del token",
+      "id": "ID del token (NFT)",
+      "amount": "Importe"
     },
     "extra": {
       "frozenAmount": "Importe congelado",
@@ -1440,10 +1440,10 @@
       "appOnDeviceSearch": "Buscar aplicaciones instaladas..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "Parece que una aplicación está abierta en tu dispositivo",
+      "subtitle": "Volver a abrir el Manager cerrará la aplicación en tu dispositivo",
+      "ctaReopen": "Volver a abrir el Manager",
+      "ctaPortfolio": "Volver al Portfolio"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> libres",
@@ -1667,7 +1667,7 @@
     "steps": {
       "amount": {
         "title": "Descongelar",
-        "info": "Unfreezing will decrease your {{resource}} and will cancel your votes."
+        "info": "El descongelamiento disminuirá tu {{resource}} y cancelará tus votos."
       },
       "connectDevice": {
         "title": "Dispositivo"
@@ -1736,7 +1736,7 @@
         "parentAccount": "1. Selecciona la cuenta de {{currencyName}}",
         "token": "2. Selecciona un token",
         "verifyTokenType": "Comprueba que <0>{{token}}</0> sea un token <0>{{tokenType}}</0>. Existe la posibilidad de perder cualquier otro activo cripto enviado a una cuenta de {{currency}}.",
-        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
+        "warningTokenType": "Envía solo tokens <0>{{ticker}}</0> o <0>{{tokenType}}</0> a una cuenta de {{currency}}. Existe la posibilidad de perder cualquier otro activo cripto."
       },
       "connectDevice": {
         "title": "Dispositivo",
@@ -1754,12 +1754,12 @@
   },
   "send": {
     "title": "Enviar",
-    "titleNft": "Send NFT",
+    "titleNft": "Enviar NFT",
     "totalSpent": "Total a debitar",
     "steps": {
       "recipient": {
         "title": "Receptor",
-        "nftRecipient": "NFT to send"
+        "nftRecipient": "NFT a enviar"
       },
       "amount": {
         "title": "Importe",
@@ -1767,7 +1767,7 @@
         "fees": "Tarifas",
         "standard": "Estándar",
         "advanced": "Avanzado",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Cantidad"
       },
       "summary": {
         "title": "Resumen"
@@ -1791,7 +1791,7 @@
         "ethereumGasPrice": "Precio de gas",
         "unitPerByte": "{{unit}} por byte",
         "nft": "NFT",
-        "nftQuantity": "Quantity"
+        "nftQuantity": "Cantidad"
       },
       "verification": {
         "streaming": {
@@ -1829,13 +1829,13 @@
     "version": "Ledger Live {{versionNb}}"
   },
   "systemLanguageAvailable": {
-    "title": "Change your app's language?",
+    "title": "¿Deseas cambiar el idioma de tu app?",
     "description": {
-      "newSupport": "Good news! our teams have been working hard and Ledger Live now supports {{language}}.",
-      "advice": "You can always change your language back later in the settings."
+      "newSupport": "¡Buenas noticias! Nuestros equipos han estado trabajando duro y Ledger Live ahora está en {{language}}.",
+      "advice": "Puedes cambiar el idioma más adelante desde Ajustes."
     },
-    "switchButton": "Switch to {{language}}",
-    "no": "I prefer not to"
+    "switchButton": "Cambiar a {{language}}",
+    "no": "Prefiero no hacerlo"
   },
   "distribution": {
     "asset": "Activo",
@@ -2022,6 +2022,22 @@
           }
         }
       }
+    },
+    "cryptoOrg": {
+      "account": {
+        "subHeader": {
+          "cardTitle": "Powered by Crypto.org",
+          "moreInfo": "More info",
+          "drawerTitle": "Crypto.org integration",
+          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+          "website": "Cryptocurrency in every wallet"
+        }
+      },
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "When using a memo, carefully check the information with the recipient"
     },
     "claimRewards": {
       "flow": {
@@ -2656,8 +2672,8 @@
           "description": "Usar trongrid directamente sin el proxy de Ledger"
         },
         "experimentalCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "title": "Implementaciones JS experimentales",
+          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2795,7 +2811,7 @@
     "noAccounts": "No hay cuentas que exportar",
     "selectedAccounts": "Cuentas a incluir",
     "selectedAccounts_plural": "Cuentas a incluir ({{count}})",
-    "disclaimer": "The countervalues in the export is provided for information purposes only. Do not rely on such data for accounting, tax, regulation or legal purposes, as they only represent an estimation of the price of the assets at the time of transactions and export, under the valuation methods provided by our service provider, Kaiko"
+    "disclaimer": "Los contravalores de la exportación se ofrecen únicamente a título informativo. No se debe confiar en estos datos para fines contables, fiscales, regulatorios o legales, ya que solo representan una estimación del precio de los activos en el momento de las transacciones y la exportación, según los métodos de valoración proporcionados por nuestro proveedor de servicios, Kaiko."
   },
   "language": {
     "system": "Utilizar idioma del sistema",
@@ -2805,7 +2821,7 @@
       "ru": "Русский",
       "es": "Español",
       "zh": "中文",
-      "de": "German"
+      "de": "Alemán"
     }
   },
   "theme": {
@@ -3402,7 +3418,7 @@
           "title": "Reparar tu Nano S",
           "desc": "¿Cuál es el mensaje que muestra tu dispositivo?",
           "mcuOutdated": "El firmware de la MCU está desactualizado",
-          "mcuNotGenuine": "MCU firmware is not genuine",
+          "mcuNotGenuine": "El firmware de la MCU no es original",
           "repairInstructions": "Sigue las instrucciones de reparación del dispositivo",
           "updateInstructions": "Sigue las instrucciones de actualización del dispositivo",
           "somethingElse": "Otros"
@@ -3448,10 +3464,10 @@
       "optIn": "receptor",
       "nominate": "validador",
       "erc721": {
-        "transfer": "recipient"
+        "transfer": "Destinatario"
       },
       "erc1155": {
-        "transfer": "recipient"
+        "transfer": "Destinatario"
       }
     },
     "votes": "Votos ({{count}})"
@@ -3502,8 +3518,8 @@
       "description": "Ingresa un nombre de cuenta"
     },
     "AccountNeedResync": {
-      "title": "Please try again",
-      "description": "Account is outdated. A synchronisation is needed"
+      "title": "Por favor, inténtalo de nuevo",
+      "description": "La cuenta está desactualizada. Es necesaria una nueva sincronización"
     },
     "AccountNotSupported": {
       "title": "La cuenta no es compatible.",
@@ -3732,7 +3748,7 @@
       "title": "La dirección del destinatario está inactiva. Envía al menos {{minimalAmount}} para activarla."
     },
     "NotEnoughGas": {
-      "title": "El saldo de ETH en la cuenta principal es insuficiente para las tarifas de red"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Las contraseñas no coinciden",
@@ -4012,7 +4028,7 @@
       "title": "Es posible que sea necesario un Memo al enviar a este receptor"
     },
     "SwapExchangeRateAmountTooLow": {
-      "title": "Amount must be at least {{minAmountFromFormatted}}"
+      "title": "El importe debe ser de al menos {{minAmountFromFormatted}}"
     },
     "SwapExchangeRateAmountTooHigh": {
       "title": "El importe debe ser inferior a {{maxAmountFromFormatted}}"
@@ -4055,10 +4071,10 @@
       "description": ""
     },
     "TaprootNotActivated": {
-      "title": "Sending to a taproot address is unsafe before mainnet activation"
+      "title": "Los envíos a una dirección taproot antes de la activación de la red principal no son seguros"
     },
     "NotEnoughNftOwned": {
-      "title": "You have exceeded the number of available tokens"
+      "title": "Has superado la cantidad de tokens disponibles"
     }
   }
 }

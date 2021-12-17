@@ -49,7 +49,8 @@ export const experimentalFeatures: Feature[] = [
     description: (
       <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
     ),
-    valueOn: "bitcoin,bitcoin_testnet,tezos",
+    valueOn:
+      "bitcoin,bitcoin_testnet,tezos,bitcoin_cash,litecoin,dash,qtum,zcash,bitcoin_gold,stratis,dogecoin,digibyte,komodo,pivx,zencash,vertcoin,peercoin,viacoin,stakenet,stealthcoin,decred",
     valueOff: "",
   },
   ...(deltaExperimentalExplorers.length
@@ -130,6 +131,23 @@ export const experimentalFeatures: Feature[] = [
     title: <Trans i18nKey="settings.experimental.features.forceProvider.title" />,
     description: <Trans i18nKey="settings.experimental.features.forceProvider.description" />,
     minValue: 1,
+  },
+  {
+    type: "toggle",
+    name: "NFT",
+    title: "NFT management features",
+    description:
+      "Display your Ethereum NFT and their metadata in your accounts. Send Ethereum NFT directly from Ledger Live.",
+    valueOn: true,
+    valueOff: false,
+  },
+  {
+    type: "toggle",
+    name: "NFT_ETH_METADATA_SERVICE",
+    title: "NFT staging metadata service",
+    description: "Use staging metadata service instead of production.",
+    valueOn: "https://nft.api.live.ledger-stg.com",
+    valueOff: "https://nft.api.live.ledger.com",
   },
 ];
 
