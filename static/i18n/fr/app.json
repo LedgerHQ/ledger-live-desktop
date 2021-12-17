@@ -3748,7 +3748,7 @@
       "title": "L'adresse du bénéficiaire est inactive. Envoyez au minimum {{minimalAmount}} pour l'activer."
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "Solde du compte parent insuffisant pour les frais de réseau"
     },
     "PasswordsDontMatch": {
       "title": "Mots de passe non identiques",
