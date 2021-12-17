@@ -3748,7 +3748,7 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "رصيد ETH في الحساب الرئيسي غير كافٍ لتغطية رسوم الشبكة"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "كلمتين المرور غير متطابقتين",

@@ -3748,7 +3748,7 @@
       "title": "受取先アドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
     },
     "NotEnoughGas": {
-      "title": "親アカウントのETH残高がネットワーク手数料を下回り、不足しています"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "パスワードが一致しません。",

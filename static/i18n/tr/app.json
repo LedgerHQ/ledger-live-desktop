@@ -3748,7 +3748,7 @@
       "title": "Alıcı adresi etkin değil. Etkinleştirmek için en az {{minimalAmount}} gönderin"
     },
     "NotEnoughGas": {
-      "title": "Ana hesaptaki ETH bakiyesi ağ ücretlerini karşılamak için yetersiz"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Parolalar eşleşmiyor",
