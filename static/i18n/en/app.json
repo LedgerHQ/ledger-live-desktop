@@ -738,11 +738,6 @@
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
       "continue": "Continue"
-    },
-    "history": {
-      "tab": "History",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
     }
   },
   "lend": {

@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -93,7 +93,7 @@ const Buy = (props: DProps) => {
           </Box>
           <Footer>
             <ContinueButton primary disabled={!selected} onClick={onContinue}>
-              <Trans i18nKey="common.continue" />
+              {t("common.continue")}
             </ContinueButton>
           </Footer>
         </>
