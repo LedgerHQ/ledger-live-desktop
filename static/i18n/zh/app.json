@@ -3748,7 +3748,7 @@
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "主账户 ETH 余额不足以支付网络费用"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
