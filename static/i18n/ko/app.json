@@ -3748,7 +3748,7 @@
       "title": "수취인 주소가 비활성화되어 있습니다. 활성화하려면 최소 {{minimalAmount}}를 보내주세요"
     },
     "NotEnoughGas": {
-      "title": "부모 계정의 ETH 잔금이 네트워크 수수료로 부족합니다."
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "패스워드가 일치하지 않습니다",
