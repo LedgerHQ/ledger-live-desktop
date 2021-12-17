@@ -3748,7 +3748,7 @@
       "title": "Адрес неактивен. Чтобы активировать его, отправьте на него как минимум {{minimalAmount}}"
     },
     "NotEnoughGas": {
-      "title": "На основном счёте ETH недостаточно средств для покрытия комиссии сети"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают",
