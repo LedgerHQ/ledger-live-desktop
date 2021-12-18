@@ -1357,7 +1357,7 @@
     "nft": {
       "name": "Nom du token",
       "contract": "Contrat du token",
-      "id": "Identifiant du token (NFT)",
+      "id": "Identifiant token (NFT)",
       "amount": "Montant"
     },
     "extra": {
