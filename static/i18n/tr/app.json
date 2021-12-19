@@ -3417,7 +3417,7 @@
         "repair": {
           "title": "Nano S cihazınızı onarın",
           "desc": "Cihazınızda görüntülenen mesaj nedir?",
-          "mcuOutdated": "MCU donanım yazılımı eski sürüm",
+          "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU donanım yazılımı orijinal değil",
           "repairInstructions": "Cihaz onarım yönergelerini izleyin",
           "updateInstructions": "Cihaz güncelleme yönergelerini izleyin",
