@@ -31,10 +31,13 @@ const test = base.extend<TestFixtures>({
     use(path.resolve("playwright/userdata/", `${userdata}.json`));
   },
   userdataFile: async ({ userdataDestinationPath }, use) => {
-    const fullFilePath = path.join(userdataDestinationPath, 'app.json');
+    const fullFilePath = path.join(userdataDestinationPath, "app.json");
     use(fullFilePath);
   },
-  page: async ({ lang, theme, userdata, userdataDestinationPath, userdataOriginalFile, env }: TestFixtures, use: (page: Page) => void) => {
+  page: async (
+    { lang, theme, userdata, userdataDestinationPath, userdataOriginalFile, env }: TestFixtures,
+    use: (page: Page) => void,
+  ) => {
     // create userdata path
     fs.mkdirSync(userdataDestinationPath, { recursive: true });
 
@@ -47,7 +50,7 @@ const test = base.extend<TestFixtures>({
       {
         ...process.env,
         MOCK: true,
-        HIDE_DEBUG_MOCK: true,
+        HIDE_DEBUG_MOCK: false,
         CI: process.env.CI || undefined,
         SPECTRON_RUN: true,
         // SYNC_ALL_INTERVAL: 86400000,
