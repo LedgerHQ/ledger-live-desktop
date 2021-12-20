@@ -2023,6 +2023,22 @@
         }
       }
     },
+    "cryptoOrg": {
+      "account": {
+        "subHeader": {
+          "cardTitle": "Propulsé par Crypto.org",
+          "moreInfo": "Plus d'informations",
+          "drawerTitle": "Intégration de Crypto.org",
+          "title": "Le token Crypto.org (CRO) désormais disponible sur Ledger Live",
+          "description": "Vous pouvez maintenant gérer et sécuriser vos tokens Crypto.org (CRO) via Ledger Live.",
+          "description2": "Le token Crypto.org (CRO) est natif de la Crypto.org Chain. Il est utilisé pour les transactions, le staking et de nombreuses fonctionnalités à venir.",
+          "website": "Cryptocurrency in Every Wallet"
+        }
+      },
+      "memo": "Mémo",
+      "memoPlaceholder": "Facultatif",
+      "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez soigneusement les informations avec le destinataire."
+    },
     "claimRewards": {
       "flow": {
         "title": "Demander les récompenses",
@@ -2657,7 +2673,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin (Taproot) et Tezos."
+          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin, tous les forks de Bitcoin, et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -3732,7 +3748,7 @@
       "title": "L'adresse du bénéficiaire est inactive. Envoyez au minimum {{minimalAmount}} pour l'activer."
     },
     "NotEnoughGas": {
-      "title": "Le solde ETH du compte parent ne suffit pas pour couvrir les frais de réseau."
+      "title": "Solde du compte parent insuffisant pour les frais de réseau"
     },
     "PasswordsDontMatch": {
       "title": "Mots de passe non identiques",
