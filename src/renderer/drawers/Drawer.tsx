@@ -1,6 +1,6 @@
 import React, { useContext, useCallback, useState, useEffect } from "react";
 import { context } from "./Provider";
-import { Drawer as SideDrawer } from "@ledgerhq/react-ui";
+import { SideDrawer } from "~/renderer/components/SideDrawer";
 
 export const Drawer = () => {
   const { state, setDrawer } = useContext(context);
