@@ -9,8 +9,7 @@ test("Settings", async ({ page }) => {
 
   await test.step("go to settings", async () => {
     await settingsPage.goToSettings();
-    expect(await page.screenshot()).toMatchSnapshot("settings-general-page.png");
-    await settingsPage.accountsTab.hover(); // FIXME: workaround for slow CI machines (windows & macos)
+    // expect(await page.screenshot()).toMatchSnapshot("settings-general-page.png"); FIXME: flaky on slow machines
   });
 
   await test.step("go to settings -> accounts", async () => {
