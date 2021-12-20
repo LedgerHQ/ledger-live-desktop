@@ -5459,8 +5459,8 @@
         "installed": "Apps",
         "capacity": "Capacity",
         "used": "Used",
-        "firmwareAvailable": "Firmware is outdated:",
-        "firmwareUpToDate": "Firmware is up to date:",
+        "firmwareAvailable": "Outdated",
+        "firmwareUpToDate": "Up to date",
         "genuine": "Device is genuine",
         "incomplete": "Some apps were not recognized. Please uninstall, then reinstall them."
       },
