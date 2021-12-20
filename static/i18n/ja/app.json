@@ -172,10 +172,10 @@
     "hour": "時間",
     "hour_plural": "時間",
     "range": {
-      "day": "日",
-      "week": "週",
-      "month": "月",
-      "year": "年",
+      "day": "1日",
+      "week": "1週",
+      "month": "1月",
+      "year": "1年",
       "all": "ALL"
     }
   },
