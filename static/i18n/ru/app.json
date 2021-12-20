@@ -13,7 +13,7 @@
       "broadcast": {
         "toast": {
           "title": "Транзакция отправлена!",
-          "text": "Нажмите сюда, чтобы посмотреть детали операции"
+          "text": "Нажмите, чтобы посмотреть детали операции"
         }
       }
     },
@@ -41,7 +41,7 @@
       "pollCTA": {
         "title": "Опрос",
         "description": "Какой услуги вам не хватает в Ledger Live?",
-        "button": "Давайте проголосовать!"
+        "button": "Давайте голосовать!"
       },
       "developerCTA": {
         "title": "Для разработчиков",
@@ -140,7 +140,7 @@
       "DELEGATE": "Делегировано",
       "REDELEGATE": "Переделегировано",
       "UNDELEGATE": "Не делегировано",
-      "SUPPLY": "Депонировано",
+      "SUPPLY": "Депонирование",
       "REDEEM": "Выведено",
       "APPROVE": "Подтверждено",
       "VOTE": "Проголосовано",
@@ -233,7 +233,7 @@
           "provider": "Поставщик",
           "rate": "Курс",
           "fees": "Комиссия",
-          "target": "Целевой счет"
+          "target": "Целевой счёт"
         },
         "tooltip": {
           "provider": "Поставщик",
@@ -839,7 +839,7 @@
         "info": "Вы одобрили <0>{{value}}</0> для данного счёта. Сумму можно уменьшить с дополнительной комиссией.",
         "infoNoLimit": "Этот счёт полностью утверждён. Сумму можно уменьшить с дополнительной комиссией.",
         "approvedWithLimit": "Вы одобрили <0>{{value}}</0> для данного счёта.",
-        "enabling": "Активы можно депонировать активы после того, как счёт будет утверждён.",
+        "enabling": "Активы можно депонировать после того, как счёт будет утверждён.",
         "notEnabled": "Чтобы предоставлять этот актив в кредит, необходимо утвердить счета.",
         "notEnoughApproved": "Для кредитования необходимо увеличить утверждённый лимит для счёта."
       },
@@ -1146,9 +1146,9 @@
   },
   "currentAddress": {
     "title": "Текущий адрес",
-    "for": "Адрес для <1><0>{{name}}</0></1>",
+    "for": "Адрес <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
-    "messageIfSkipped": "Адрес {{name}} не утверждён на устройстве Ledger. В целях безопасности вам нужно утвердить его.",
+    "messageIfSkipped": "Адрес {{name}} не подверждён на устройстве Ledger. В целях безопасности вам нужно подвердить его.",
     "showQrCode": "Показать QR-код"
   },
   "emptyState": {
@@ -1788,7 +1788,7 @@
         "rippleTag": "Тег",
         "rippleTagPlaceholder": "Опционально",
         "ethereumGasLimit": "Лимит газа",
-        "ethereumGasPrice": "Цена газа",
+        "ethereumGasPrice": "Цена Газа",
         "unitPerByte": "{{unit}} за байт",
         "nft": "NFT",
         "nftQuantity": "Кол-во"
@@ -2022,6 +2022,22 @@
           }
         }
       }
+    },
+    "cryptoOrg": {
+      "account": {
+        "subHeader": {
+          "cardTitle": "Powered by Crypto.org",
+          "moreInfo": "More info",
+          "drawerTitle": "Crypto.org integration",
+          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+          "website": "Cryptocurrency in every wallet"
+        }
+      },
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "When using a memo, carefully check the information with the recipient"
     },
     "claimRewards": {
       "flow": {
@@ -2478,8 +2494,8 @@
           "description": "Делегируйте счёт Tezos стороннему валидатору, и безопасно получайте вознаграждения за стейкинг, не теряя контроль над активами",
           "bullet": {
             "delegate": "Делегированные счета остаются в вашей собственности",
-            "access": "Вы можете воспользоваться активами в любое время.",
-            "ledger": "Делегируйте безопасно на устройстве Ledger."
+            "access": "Вы можете воспользоваться активами в любое время",
+            "ledger": "Делегируйте безопасно на устройстве Ledger"
           },
           "button": {
             "cta": "Делегировать и получить вознаграждение"
@@ -2657,7 +2673,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Использовать экспериментальные JS-реализации для Биткойна (Taproot) и Tezos"
+          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -2705,7 +2721,7 @@
     "removeAccountModal": {
       "title": "Удаление счёта",
       "desc": "Это не повлияет на ваши криптоактивы. Существующие счета всегда можно добавить позже.",
-      "warning": "Удаление этого счёта удалит связанную с ним историю обменов."
+      "warning": "Удаление этого счёта сотрёт связанную с ним историю обменов."
     },
     "openUserDataDirectory": {
       "title": "Просмотр пользовательских данных",
@@ -3729,10 +3745,10 @@
       "description": "Пожалуйста, убедитесь, что на счёте достаточно средств."
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "Адрес получения неактивен. Чтобы активировать его, укажите сумму не менее {{minimalAmount}}"
+      "title": "Адрес неактивен. Чтобы активировать его, отправьте на него как минимум {{minimalAmount}}"
     },
     "NotEnoughGas": {
-      "title": "На основном счёте ETH недостаточно средств для покрытия комиссии сети"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают",
@@ -3818,7 +3834,7 @@
       "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений"
     },
     "UserRefusedAddress": {
-      "title": "Адрес получения отклонён.",
+      "title": "Адрес отклонён",
       "description": "Повторите попытку или обратитесь в Поддержку Ledger в случае сомнений"
     },
     "UpdateYourApp": {

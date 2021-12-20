@@ -23,7 +23,7 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: [add-reaction]
-    uses: LedgerHQ/actions/.github/workflows/start-linux-runner.yml@main
+    uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
     secrets:
@@ -33,7 +33,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, generate-screenshots-linux]
-    uses: LedgerHQ/actions/.github/workflows/stop-linux-runner.yml@main
+    uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}

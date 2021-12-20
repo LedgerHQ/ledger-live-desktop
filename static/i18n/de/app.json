@@ -2023,6 +2023,22 @@
         }
       }
     },
+    "cryptoOrg": {
+      "account": {
+        "subHeader": {
+          "cardTitle": "Powered by Crypto.org",
+          "moreInfo": "More info",
+          "drawerTitle": "Crypto.org integration",
+          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+          "website": "Cryptocurrency in every wallet"
+        }
+      },
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    },
     "claimRewards": {
       "flow": {
         "title": "Prämien beanspruchen",
@@ -2657,7 +2673,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Experimentelle JS-Implementierungen für Bitcoin (Taproot) und Tezos verwenden"
+          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -3732,7 +3748,7 @@
       "title": "Die Adresse des Empfängers ist inaktiv. Senden Sie mindestens {{minimalAmount}}, um sie zu aktivieren"
     },
     "NotEnoughGas": {
-      "title": "Das ETH-Guthaben auf dem übergeordneten Konto reicht nicht für die Netzwerkgebühren aus"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "Die Passwörter stimmen nicht überein",

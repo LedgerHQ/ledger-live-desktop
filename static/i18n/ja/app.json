@@ -68,7 +68,7 @@
     "delete": "削除",
     "launch": "開始",
     "continue": "続行",
-    "previous": "前",
+    "previous": "戻る",
     "learnMore": "詳細",
     "help": "ヘルプ",
     "needHelp": "お困りですか？",
@@ -244,13 +244,13 @@
         "noAccountCTA": "アカウントを追加"
       },
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "max": "最大",
-        "accountPlaceholder": "ソースを選択",
+        "accountPlaceholder": "アカウントを選択",
         "currencyDisabledTooltip": "現在、この通貨はスワップに利用できません。"
       },
       "to": {
-        "title": "送付先"
+        "title": "交換先"
       },
       "notAvailable": {
         "title": "お住まいの地域では、スワップを利用できません。",
@@ -442,13 +442,13 @@
       "resetKYCCTA": "本人確認手続きをリセット",
       "amount": "数量",
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "account": "アカウント",
         "amount": "送付額",
         "currency": "暗号資産"
       },
       "to": {
-        "title": "送付先",
+        "title": "交換先",
         "account": "アカウント",
         "amount": "受取額",
         "currency": "暗号資産",
@@ -487,8 +487,8 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "送付元",
-          "to": "送付先",
+          "from": "交換元",
+          "to": "交換先",
           "toExchange": "送付額",
           "toReceive": "受取額",
           "terms": "ご利用規約",
@@ -535,10 +535,10 @@
         "finished": "スワップが正常に完了しました。"
       },
       "date": "日付",
-      "from": "送付元",
+      "from": "交換元",
       "fromAddress": "送信元アドレス",
       "fromAddress_plural": "送信元アドレス",
-      "to": "送付先",
+      "to": "交換先",
       "toProvider": "プロバイダーのアドレス",
       "initialAmount": "初期設定額",
       "creditedAmount": "受取額"
@@ -673,7 +673,7 @@
     }
   },
   "account": {
-    "lastOperations": "前回の取引",
+    "lastOperations": "最近の取引",
     "contractAddress": "コントラクト：",
     "openInExplorer": "エクスプローラーで開く",
     "emptyState": {
@@ -1045,7 +1045,7 @@
   "banners": {
     "cleanCache": {
       "title": "試験的設定の変更には、Cacheを削除する必要があります。",
-      "cta": "Cacheを消去"
+      "cta": "Cacheを削除"
     },
     "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
     "genericTerminatedCrypto": "{{coinName}} には対応していません。",
@@ -1946,14 +1946,14 @@
     "inputSelected": "選択中",
     "toSpend": "コインを使用",
     "toReturn": "元に戻す",
-    "modalTitle": "コイン管理",
-    "coincontrol": "コイン管理",
+    "modalTitle": "コインコントロール",
+    "coincontrol": "コインコントロール",
     "advanced": "詳細オプション",
     "ctaDisabled": "このアカウントにはUTXOがありません。",
     "whatIs": "コイン選択とは？",
     "rbf": "トランザクションの変更を許可（Replace-By-Fee）",
-    "strategy": "コイン選択戦略",
-    "selected": "戦略のために選択されたコイン",
+    "strategy": "コイン選択方式",
+    "selected": "コイン選択の方式",
     "amount": "送付額：",
     "replaceable": "交換可能",
     "cannotSelect": {
@@ -1962,11 +1962,11 @@
     },
     "pending": "保留中",
     "pickUnconfirmedRBF": "未確認の交換可能なトランザクションからのコインを含みます。",
-    "pickingStrategy": "UTXO選び方の戦略",
+    "pickingStrategy": "UTXO選択方式",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "DEEP_OUTPUTS_FIRST": "先入れ先出し方式 (FIFO)",
       "OPTIMIZE_SIZE": "手数料を最小化（サイズ最適化）",
-      "MERGE_OUTPUTS": "今後の手数料を最小限化（コインを統合する）"
+      "MERGE_OUTPUTS": "今後の手数料を最小化（コインをマージ）"
     }
   },
   "cosmos": {
@@ -2022,6 +2022,22 @@
           }
         }
       }
+    },
+    "cryptoOrg": {
+      "account": {
+        "subHeader": {
+          "cardTitle": "Powered by Crypto.org",
+          "moreInfo": "More info",
+          "drawerTitle": "Crypto.org integration",
+          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+          "website": "Cryptocurrency in every wallet"
+        }
+      },
+      "memo": "Memo",
+      "memoPlaceholder": "Optional",
+      "memoWarningText": "When using a memo, carefully check the information with the recipient"
     },
     "claimRewards": {
       "flow": {
@@ -2144,7 +2160,7 @@
             "title": "確認",
             "success": {
               "title": "{{token}} 資産が正常に追加されました。",
-              "text": "アルゴランドアカウントで、<0>{{token}}</0>資産の受取や送付ができるようになりました。",
+              "text": "Algorandアカウントで、<0>{{token}}</0>資産の受取や送付ができるようになりました。",
               "cta": "詳細を表示"
             },
             "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
@@ -2154,20 +2170,20 @@
     },
     "claimRewards": {
       "header": "報酬",
-      "tooltip": "アルゴランドの報酬は定期的に配布され、取引を行うと自動的に報酬を申請します。",
+      "tooltip": "Algorandの報酬は定期的に配布され、取引を行うと自動的に報酬を申請します。",
       "cta": "報酬獲得を申請",
-      "rewardsDisabledTooltip": "報酬はありません。取引を行うと、アルゴランドの報酬は自動的に受け取られます。報酬を獲得するために、ALGOを受け取りましょう。",
+      "rewardsDisabledTooltip": "報酬はありません。取引を行うと、Algorandの報酬は自動的に受け取られます。報酬を獲得するために、ALGOを受け取りましょう。",
       "flow": {
         "title": "報酬獲得を申請",
         "steps": {
           "starter": {
-            "description": "アルゴランドの資産を保有・管理するだけで、報酬を受け取ることができます。",
+            "description": "Algorandの資産を保有・管理するだけで、報酬を受け取ることができます。",
             "bullet": {
               "delegate": "報酬を受け取るには、1ALGO以上の残高が必要です。",
               "access": "アカウントの残高を増やすと、報酬も増えます。",
               "ledger": "報酬を獲得するには、アカウントとの間でトランザクションを実行してください。"
             },
-            "learnMore": "アルゴランドの報酬の仕組みとは？",
+            "learnMore": "Algorandの報酬の仕組みとは？",
             "button": {
               "cta": "Algoを受け取る"
             }
@@ -2657,7 +2673,7 @@
         },
         "experimentalCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Bitcoin (Taproot) とTezosの試験的JS実装を利用する。"
+          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2884,7 +2900,7 @@
       "whereToHide": {
         "title": "リカバリーフレーズはどこに保管すればいいですか？",
         "points": {
-          "1": "<0>絶対に</0>コンピューターやスマートフォンなどのデバイス上に入力しないでください。写真にも撮らないでください。",
+          "1": "<0>絶対に</0>コンピューターやスマートフォンに入力しないでください。写真にも撮らないでください。",
           "2": "<0>絶対に</0>24単語を誰かと共有しないでください。",
           "3": "<0>必ず</0>他の人に見られない安全な場所に保管してください。",
           "4": "Ledger社がリカバリーフレーズを尋ねることは絶対にありません。",
@@ -2909,15 +2925,15 @@
       },
       "useLedgerSeeds": {
         "title": "Ledgerのリカバリーフレーズのみを推奨",
-        "descr": "Ledgerは、外部で生成されたリカバリーフレーズのセキュリティを保証できません。リカバリーフレーズがLedgerで生成されたものでない場合は、Nanoを新しいデバイスとして設定することをお勧めします。",
+        "descr": "Ledgerは、外部で生成されたリカバリーフレーズのセキュリティを保証できません。リカバリーフレーズがLedgerで作成されたものでない場合は、Nanoを新しいデバイスとして設定することをお勧めします。",
         "gotIt": "了解"
       }
     },
     "screens": {
       "welcome": {
-        "title": "Ledgerへようこそ",
+        "title": "ようこそ、Ledgerへ",
         "description": "コンピュータで暗号資産を安全に管理しましょう。",
-        "cta": "はじめに",
+        "cta": "はじめる",
         "noDevice": "デバイスがありませんか？<0>Ledger Nano Xを購入</0>",
         "languageWarning": {
           "title": "{{language}} で始める",
@@ -2974,7 +2990,7 @@
           "howToGetStarted": {
             "title": "大切な事前準備：",
             "rules": {
-              "1": "30分ほど時間を確保する。",
+              "1": "30分程度の時間を確保する。",
               "2": "ペンを用意する。",
               "3": "作業は1人で、安全かつ静かな場所で行う。"
             },
@@ -2993,7 +3009,7 @@
               "descr": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
             },
             "select": {
-              "title": "「新しいデバイスとして設定」を選択する。",
+              "title": "「Set up as new device」を選択する。",
               "descr": "両方のボタンを同時に押して、選択内容を確定します。"
             },
             "follow": {
@@ -3031,7 +3047,7 @@
           },
           "pinCode": {
             "title": "PINコード",
-            "paragraph": "PINコードは、セキュリティの第一段階です。あなたのNanoと秘密鍵へのアクセスを物理的に保護します。PINコードの長さは4～8桁でなければなりません。",
+            "paragraph": "PINコードは、セキュリティの第一段階です。Nanoと秘密鍵へのアクセスを保護します。PINコードの長さは4～8桁で設定してください。",
             "disclaimer": "PINコードは自分で選び、秘密にしなければならないことを理解しました。",
             "buttons": {
               "next": "PINコードの設定",
@@ -3050,7 +3066,7 @@
           },
           "quizFailure": {
             "title": "もうすぐプロレベルになります...",
-            "paragraph": "大丈夫、Ledgerが丁寧にガイドします。あっという間に、安心安全に暗号資産を管理できるようになります。\n\n残り1ステップです！",
+            "paragraph": "大丈夫、Ledgerがガイドします。安心安全に暗号資産を管理しましょう。\n\n残り1ステップです！",
             "buttons": {
               "next": "次のステップ",
               "prev": "前のステップ"
@@ -3059,7 +3075,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "PINコードを選択",
-              "descr": "左ボタンまたは右ボタンを押して、数字を変更します。数字を確定するには、両方のボタンを同時に押します。<0></0>を選択するとPINコードが確定されます。数字を消去したいときは<1></1>を選択します。"
+              "descr": "左ボタンまたは右ボタンを押して、数字を変更できます。数字を確定するには、両方のボタンを同時に押してください。<0></0>を選択するとPINコードが確定されます。数字を消去したいときは<1></1>を選択します。"
             },
             "confirm": {
               "title": "PINコードを確認",
@@ -3089,7 +3105,7 @@
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "リカバリーシートを手元に用意する",
+              "title": "リカバリーシートを手元に用意する。",
               "descr": "Nanoに同梱されているリカバリーシートを手元に用意してください。リカバリーシートが最初から空白でない場合は、Ledgerサポートまでお問い合わせください。"
             },
             "writeDownWords": {
@@ -3104,8 +3120,8 @@
           },
           "newRecoveryPhrase": {
             "title": "リカバリーフレーズ",
-            "paragraph1": "リカバリーフレーズは、秘密鍵をバックアップするための24個の単語の組み合わせです。",
-            "paragraph2": "Nanoによって、唯一無二のリカバリーフレーズが生成されます。Ledger社がコピーを保管することはありません。",
+            "paragraph1": "リカバリーフレーズは、秘密鍵をバックアップするための24個の単語です。",
+            "paragraph2": "Nanoによって、唯一無二のリカバリーフレーズが作成されます。Ledgerがコピーを保管することはありません。",
             "disclaimer": "リカバリーフレーズを紛失すると、Nanoにアクセスできなくなった場合に、ウォレット内の暗号資産が永久に失われることを理解しました。",
             "buttons": {
               "next": "リカバリーフレーズ",
@@ -3130,7 +3146,7 @@
               "descr": "表示された候補の中から、Word #1を選びます。単語を確定するには、両方のボタンを同時に押します。"
             },
             "andNext": {
-              "title": "すべての単語を同様に確認しましょう！"
+              "title": "すべての単語を同様の手順で確認しましょう！"
             },
             "buttons": {
               "next": "次のステップ",
@@ -3144,7 +3160,7 @@
               "descr": "Word #1が表示されるまで、右ボタンで単語をスクロールします。表示されたら、両方のボタンを同時に押して確定します。"
             },
             "repeat": {
-              "title": "すべての単語を同様に確認しましょう！"
+              "title": "すべての単語を同様の手順で確認しましょう！"
             },
             "buttons": {
               "next": "次のステップ",
@@ -3159,14 +3175,14 @@
             },
             "buttons": {
               "next": "続行",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           },
           "hideRecoveryPhrase": {
             "title": "リカバリーフレーズを非表示にする",
             "paragraph": "万が一Nanoを使用できなくなってしまった場合、リカバリーフレーズが最後の復旧手段です。必ず安全な場所に保管してください。",
-            "keepItOffline": "これらの単語は、ハードウェアウォレットのみに入力してください。絶対に、コンピューターやスマートフォンに入力しないでください。",
+            "keepItOffline": "コンピューターやスマートフォンではなく、ハードウェアウォレットのみに入力してください。",
             "neverShowToAnyone": "絶対に24単語を誰かと共有しないでください。これにはLedger社も含まれます。",
             "buttons": {
               "next": "完了！",
@@ -3177,10 +3193,10 @@
           },
           "pairMyNano": {
             "title": "正規品チェック",
-            "paragraph": "お使いのNano が正規品かどうかを確認します。素早く簡単にチェックできます！",
+            "paragraph": "お使いのNano が正規品かどうかを確認します。短時間で簡単にチェックできます！",
             "buttons": {
               "next": "Nanoをチェックする",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           }
@@ -3192,11 +3208,11 @@
       "screens": {
         "accessYourCoins": {
           "title": "暗号通貨にアクセス",
-          "description": "あなたの暗号資産は、ブロックチェーンに保存されています。それらにアクセスして管理するには、秘密鍵が必要です。"
+          "description": "暗号資産は、ブロックチェーンに保存されています。資産にアクセスして管理するには、秘密鍵が必要です。"
         },
         "ownYourPrivateKey": {
           "title": "秘密鍵は自分で管理しましょう",
-          "description": "秘密鍵はお使いのNano上に保存されています。自分の資産は、自分だけがコントロールするべきであり、所有権を持たなければなりません。"
+          "description": "秘密鍵はお使いのNano上に保存されています。資産は、お客様ご自身で管理・所有しなければなりません。"
         },
         "stayOffline": {
           "title": "常にオフラインで保管する",
@@ -3204,7 +3220,7 @@
         },
         "validateTransactions": {
           "title": "トランザクションの検証",
-          "description": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、および獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
+          "description": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、報酬の獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
         },
         "setUpNanoWallet": {
           "title": "Nanoをセットアップしましょう！",
@@ -3244,7 +3260,7 @@
           "text": "リカバリーフレーズを誰かに知られてしまうと...",
           "answers": {
             "1": "Ledgerに確認すれば教えてもらえるので問題ない",
-            "2": "暗号資産が安全な状態でなくなるため、別の安全な場所に移さなければならない"
+            "2": "暗号資産が安全ではなくなるため、別の安全な場所に移す必要がある"
           },
           "results": {
             "success": {
@@ -3732,7 +3748,7 @@
       "title": "受取先アドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
     },
     "NotEnoughGas": {
-      "title": "親アカウントのETH残高がネットワーク手数料を下回り、不足しています"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "パスワードが一致しません。",
