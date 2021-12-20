@@ -1,35 +1,7 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
-import { Icons, Flex, Tooltip } from "@ledgerhq/react-ui";
+import { Icons, Tooltip, BoxedIcon } from "@ledgerhq/react-ui";
 import { OperationType } from "@ledgerhq/live-common/lib/types";
 import { TFunction } from "react-i18next";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
-const getTopRightRectangleClippedPolygon = (boxSize: number, rectangleSize: number) => {
-  // clipping path that hides {rectangleSize}px top right rectangle
-  const diff = boxSize - rectangleSize;
-  return `polygon(0 0, 0 0, 0 0, ${diff}px 0, ${diff}px ${rectangleSize}px, 100% ${rectangleSize}px, 100% 100%, 100% 100%, 100% 100%, 0 100%, 0 100%, 0 100%)`;
-};
-
-const IconBox: ThemedComponent<{ size?: number; hasFailed?: boolean }> = styled(Flex)`
-  height: ${p => p.size || 40}px;
-  width: ${p => p.size || 40}px;
-  border: 1px solid ${p => p.theme.colors.palette[p.hasFailed ? "error" : "neutral"].c40};
-  ${p => {
-    const size = p.size || 40;
-    return p.withBadge && `clip-path: ${getTopRightRectangleClippedPolygon(size, 15)};`;
-  }}
-  border-radius: 4px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const BadgeContainer: ThemedComponent<{ iconSize: number }> = styled.div`
-  position: absolute;
-  ${p => `
-    top: -${p.iconSize / 2 - 2}px;
-    right: -${p.iconSize / 2 - 2}px;`}
-`;
 
 const iconsComponent = {
   OUT: Icons.ArrowTopMedium,
@@ -59,6 +31,8 @@ const iconsComponent = {
   CHILL: Icons.VoteMedium,
   REWARD_PAYOUT: Icons.ClaimRewardsMedium,
   SET_CONTROLLER: Icons.ArrowFromBottomMedium,
+  NFT_IN: undefined, // TODO: get icon from designers
+  NFT_OUT: undefined, // TODO: get icon from designers
 };
 
 class ConfirmationCheck extends PureComponent<{
@@ -81,32 +55,26 @@ class ConfirmationCheck extends PureComponent<{
   render() {
     const { isConfirmed, t, type, withTooltip, hasFailed } = this.props;
 
-    const Icon = iconsComponent[type];
+    const Icon = iconsComponent[type] || iconsComponent.NONE;
 
-    const withBadge = !isConfirmed || hasFailed;
-    const BadgeIcon = hasFailed ? Icons.CircledCrossSolidMedium : Icons.ClockSolidMedium;
+    const BadgeIcon = hasFailed
+      ? Icons.CircledCrossSolidMedium
+      : isConfirmed
+      ? undefined
+      : Icons.ClockSolidMedium;
+
+    const borderColor = hasFailed ? "error.c40" : "neutral.c40";
+    const iconColor = hasFailed ? "error.c100" : isConfirmed ? "neutral.c100" : "neutral.c50";
+    const badgeColor = hasFailed ? "error.c100" : "neutral.c70";
 
     const content = (
-      <div style={{ position: "relative" }}>
-        <IconBox hasFailed={hasFailed} withBadge={withBadge}>
-          {Icon ? (
-            <Icon
-              color={
-                hasFailed
-                  ? "palette.error.c100"
-                  : isConfirmed
-                  ? "palette.neutral.c100"
-                  : "palette.neutral.c50"
-              }
-            />
-          ) : null}
-        </IconBox>
-        {withBadge && (
-          <BadgeContainer iconSize={20}>
-            <BadgeIcon size={20} color={hasFailed ? "palette.error.c100" : "palette.neutral.c70"} />
-          </BadgeContainer>
-        )}
-      </div>
+      <BoxedIcon
+        Icon={Icon}
+        Badge={BadgeIcon}
+        borderColor={borderColor}
+        iconColor={iconColor}
+        badgeColor={badgeColor}
+      />
     );
 
     return withTooltip ? (
