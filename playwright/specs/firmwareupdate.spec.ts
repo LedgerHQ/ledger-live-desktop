@@ -3,6 +3,7 @@ import { expect } from "@playwright/test";
 import { ManagerPage } from "../models/ManagerPage";
 import { FirmwareUpdateModal } from "../models/FirmwareUpdateModal";
 import { DeviceAction } from "../models/DeviceAction";
+import { Layout } from "../models/Layout";
 
 test.use({ userdata: "skip-onboarding" });
 
@@ -10,9 +11,10 @@ test("Firmware Update", async ({ page }) => {
   const managerPage = new ManagerPage(page);
   const firmwareUpdateModal = new FirmwareUpdateModal(page);
   const deviceAction = new DeviceAction(page);
+  const layout = new Layout(page);
 
   await test.step("Access manager", async () => {
-    await managerPage.goToManager();
+    await layout.goToManager();
     await deviceAction.accessManager();
     await managerPage.firmwareUpdateButton.waitFor({ state: "visible" });
   });

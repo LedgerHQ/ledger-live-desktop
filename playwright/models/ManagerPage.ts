@@ -1,7 +1,6 @@
 import { Page, Locator } from "@playwright/test";
-import { Layout } from "./Layout";
 
-export class ManagerPage extends Layout {
+export class ManagerPage {
   readonly page: Page;
   readonly managerMenu: Locator;
   readonly firmwareUpdateButton: Locator;
@@ -16,7 +15,6 @@ export class ManagerPage extends Layout {
   readonly installedAppEmptyState: Locator;
 
   constructor(page: Page) {
-    super(page);
     this.page = page;
     this.managerMenu = page.locator('data-test-id=drawer-manager-button');
     this.firmwareUpdateButton = page.locator('data-test-id=manager-update-firmware-button');
