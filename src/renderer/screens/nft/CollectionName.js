@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 
 // TODO Make me pretty
@@ -12,7 +12,7 @@ const CollectionName = ({
   fallback?: string,
 }) => {
   const { nfts } = collection;
-  const { status, metadata } = useNftMetadata(collection.contract, nfts[0]?.tokenId);
+  const { status, metadata } = useNftResource(nfts[0]);
   const { tokenName } = metadata || {};
   const loading = status === "loading";
 

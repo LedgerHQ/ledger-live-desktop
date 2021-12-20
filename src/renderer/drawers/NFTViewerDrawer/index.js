@@ -18,7 +18,7 @@ import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
 import { centerEllipsis } from "~/renderer/styles/helpers";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
 
@@ -139,7 +139,7 @@ export function NFTViewerDrawer({
   const dispatch = useDispatch();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftResource(nft);
   const show = useMemo(() => status === "loading", [status]);
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 

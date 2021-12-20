@@ -9,13 +9,13 @@ import Text from "~/renderer/components/Text";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const Summary = ({ transaction }: { transaction: Transaction }) => {
   const allNfts = useSelector(getAllNFTs);
   const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftResource(nft);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 

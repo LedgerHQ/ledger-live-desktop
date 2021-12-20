@@ -9,7 +9,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const Container: ThemedComponent<{}> = styled(Box)`
   &.disabled {
@@ -32,7 +32,7 @@ type Props = {
 };
 
 const Row = ({ nfts, contract, onClick }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
+  const { status, metadata } = useNftResource(nfts[0]);
   const { tokenName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 

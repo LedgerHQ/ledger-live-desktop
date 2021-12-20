@@ -101,9 +101,15 @@ const TokensList = ({ account, collectionId }: Props) => {
         }
         // We can still add more nfts
         children.push(
-          <NFTContextMenu key={nft.id} contract={collection.contract} tokenId={nft.tokenId}>
+          <NFTContextMenu
+            nft={nft}
+            key={nft.id}
+            contract={collection.contract}
+            tokenId={nft.tokenId}
+          >
             <Item
               mode={nftsViewMode}
+              nft={nft}
               id={nft.id}
               tokenId={nft.tokenId}
               contract={collection.contract}

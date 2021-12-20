@@ -1,7 +1,8 @@
 // @flow
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { NFT } from "@ledgerhq/live-common/lib/types";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import IconOpensea from "~/renderer/icons/Opensea";
 import IconRarible from "~/renderer/icons/Rarible";
 import IconGlobe from "~/renderer/icons/Globe";
@@ -9,15 +10,16 @@ import { openURL } from "~/renderer/linking";
 import ContextMenuItem from "./ContextMenuItem";
 
 type Props = {
+  nft: NFT,
   contract: string,
   tokenId: string,
   leftClick?: boolean,
   children: any,
 };
 
-export default function NFTContextMenu({ leftClick, children, contract, tokenId }: Props) {
+export default function NFTContextMenu({ leftClick, children, contract, tokenId, nft }: Props) {
   const { t } = useTranslation();
-  const { metadata } = useNftMetadata(contract, tokenId);
+  const { metadata } = useNftResource(nft);
 
   const defaultLinks = {
     openSea: `https://opensea.io/assets/${contract}/${tokenId}`,

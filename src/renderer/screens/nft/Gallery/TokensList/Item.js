@@ -11,7 +11,7 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftResource } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { NFTViewerDrawer } from "~/renderer/drawers/NFTViewerDrawer";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
@@ -43,14 +43,15 @@ const Dots: ThemedComponent<{}> = styled.div`
 
 type Props = {
   account: Account,
+  nft: NFT,
   contract: string,
   tokenId: string,
   id: string,
   mode: "grid" | "list",
 };
 
-const Row = ({ contract, tokenId, id, mode, account }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, tokenId);
+const Row = ({ nft, contract, tokenId, id, mode, account }: Props) => {
+  const { status, metadata } = useNftResource(nft);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
   const isGrid = mode === "grid";
