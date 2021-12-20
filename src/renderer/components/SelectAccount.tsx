@@ -136,8 +136,8 @@ const AddAccountFooter = (props: any) => {
   return (
     <>
       <components.MenuList {...props} />
-      <AddAccountContainer onClick={openAddAccounts}>
-        <AddButton>
+      <AddAccountContainer>
+        <AddButton onClick={openAddAccounts}>
           <Text color="neutral.c80">
             <Plus size={12} />
             <span style={{ marginLeft: 8 }}>
@@ -259,7 +259,7 @@ const SelectAccount = ({
   autoFocus,
   filter,
   disabledTooltipText,
-  showAddAccount = true,
+  showAddAccount = false,
 }: Props) => {
   const { t } = useTranslation();
   const theme = useTheme();
