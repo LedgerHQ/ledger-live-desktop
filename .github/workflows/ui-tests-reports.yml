@@ -1,4 +1,4 @@
-name: "[REPORT] Screenshot Testing Reports"
+name: "[Report] Screenshot Testing Reports"
 on:
   workflow_dispatch:
     inputs:
@@ -7,7 +7,8 @@ on:
         required: true
 
   workflow_run:
-    workflows: ["[TESTS] Screenshot Testing"]
+    workflows: ["[Tests] Screenshot Testing"]
+    branches: ["chore/fix-builds"]
     types:
       - "completed"
 
@@ -26,11 +27,6 @@ jobs:
   comment-on-pr:
     name: "Comment report on PR"
     # if: github.event.workflow_run.event == 'pull_request'
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     os: [ubuntu-20.04, macos-latest, windows-latest]
-    #     os: [ubuntu-20.04, windows-latest]
     runs-on: ubuntu-20.04
     steps:
       - name: download artifacts

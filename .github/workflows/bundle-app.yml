@@ -1,4 +1,4 @@
-name: "[TESTS] Bundle App"
+name: "[Tests] Bundle App"
 on:
   pull_request:
     branches:
@@ -34,21 +34,16 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: install dependencies
         run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
+      - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
+        with:
+          path: ${{ github.workspace }}
       - name: set beta name
-        uses: ./.github/actions/change-product-name
+        uses: ledgerhq/actions/packages/change-product-name@main
+        with:
+          path: ${{ github.workspace }}
       - name: make local version pr
         if: github.event_name == 'pull_request'
         env:
@@ -61,8 +56,10 @@ jobs:
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn build-ci
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
+      - uses: ledgerhq/actions/packages/get-package-infos@main
         id: post-version
+        with:
+          path: ${{ github.workspace }}
       - name: upload macOS app
         uses: actions/upload-artifact@v1
         with:
@@ -72,7 +69,9 @@ jobs:
   start-runner:
     name: "start ec2 instance"
     needs: cancel-previous
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/start-runner.yml@LL-8541
+    uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
+    with:
+      instance-type: c5.4xlarge
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
@@ -80,7 +79,7 @@ jobs:
     name: "stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, bundle-linux]
-    uses: ledgerhq/ledger-live-desktop/.github/workflows/stop-runner.yml@LL-8541
+    uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
       ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
@@ -96,11 +95,6 @@ jobs:
         run: |
           sudo growpart /dev/nvme0n1 1
           sudo resize2fs /dev/nvme0n1p1
-      - uses: ledgerhq/actions/check-member@v2.0.0
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
-        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -117,23 +111,20 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: kill dpkg
+        run: sudo killall -w dpkg || echo OK
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: install dependencies
         run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
+      - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
+        with:
+          path: ${{ github.workspace }}
       - name: set beta name
-        uses: ./.github/actions/change-product-name
+        uses: ledgerhq/actions/packages/change-product-name@main
+        with:
+          path: ${{ github.workspace }}
       - name: make local version pr
         if: github.event_name == 'pull_request'
         env:
@@ -146,8 +137,10 @@ jobs:
         run: yarn version --new-version="$VERSION"
       - name: build the app
         run: yarn build-ci
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
+      - uses: ledgerhq/actions/packages/get-package-infos@main
         id: post-version
+        with:
+          path: ${{ github.workspace }}
       - name: upload linux app
         uses: actions/upload-artifact@v1
         with:
@@ -159,11 +152,6 @@ jobs:
     runs-on: windows-latest
     needs: cancel-previous
     steps:
-      - uses: ledgerhq/actions/check-member@v2.0.0
-        with:
-          username: ${{ github.actor }}
-          ban: ledgerlive
-        if: github.event_name == 'pull_request'
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -179,23 +167,18 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
-      - name: get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: install dependencies
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
-      - uses: ledgerhq/actions/get-package-infos@v2.0.0
+      - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
+        with:
+          path: ${{ github.workspace }}
       - name: set beta name
-        uses: ./.github/actions/change-product-name
+        uses: ledgerhq/actions/packages/change-product-name@main
+        with:
+          path: ${{ github.workspace }}
       - name: make local version pr
         id: postversion1
         if: github.event_name == 'pull_request'
