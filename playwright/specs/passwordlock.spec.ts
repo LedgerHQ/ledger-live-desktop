@@ -51,7 +51,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   await test.step("Lock app", async () => {
     await layout.lockApp();
     expect(await lockscreenPage.container).toBeVisible();
-    expect(await lockscreenPage.logo).toBeVisible();
+    expect(await layout.logo).toBeVisible();
     expect(await page.screenshot()).toMatchSnapshot("app-locked.png");
   });
 
