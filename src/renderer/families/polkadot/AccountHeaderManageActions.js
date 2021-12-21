@@ -1,8 +1,8 @@
 // @flow
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import invariant from "invariant";
 import { useDispatch } from "react-redux";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import {
@@ -20,6 +20,7 @@ type Props = {
 };
 
 const AccountHeaderManageActions = ({ account }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const { polkadotResources } = account;
@@ -53,22 +54,26 @@ const AccountHeaderManageActions = ({ account }: Props) => {
     (!hasBondedBalance && hasPendingBondOperation)
   );
 
-  if (!manageEnabled) return null;
+  const disabledLabel = manageEnabled
+    ? ""
+    : ` - ${t(
+        _hasExternalController
+          ? "polkadot.nomination.externalControllerTooltip"
+          : _hasExternalStash
+          ? "polkadot.nomination.externalStashTooltip"
+          : "polkadot.nomination.hasPendingBondOperation",
+      )}`;
+  const label = `${t(
+    hasBondedBalance || hasPendingBondOperation ? "polkadot.manage.title" : "delegation.title",
+  )}${disabledLabel}`;
 
   return [
     {
       key: "polkadot",
       onClick: onClick,
       icon: hasBondedBalance ? CryptoCurrencyIcon : IconChartLine,
-      label: (
-        <Trans
-          i18nKey={
-            hasBondedBalance || hasPendingBondOperation
-              ? "polkadot.manage.title"
-              : "delegation.title"
-          }
-        />
-      ),
+      disabled: !manageEnabled,
+      label,
     },
   ];
 };
