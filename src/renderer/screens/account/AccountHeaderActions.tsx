@@ -36,6 +36,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 import AccountSettingRenderBody from "~/renderer/modals/SettingsAccount/AccountSettingRenderBody";
+import { ReceiveDrawer } from "~/renderer/drawers/ReceiveFlow";
 
 const mapDispatchToProps = {
   openModal,
@@ -117,8 +118,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   }, [parentAccount, account, openModal]);
 
   const onReceive = useCallback(() => {
-    openModal("MODAL_RECEIVE", { parentAccount, account });
-  }, [parentAccount, account, openModal]);
+    setDrawer(ReceiveDrawer, { account, parentAccount }, ReceiveDrawer.initialOptions);
+  }, [parentAccount, account, setDrawer]);
 
   const renderItem = useCallback(
     ({ item: { label, onClick, event, eventProperties, icon } }) => {

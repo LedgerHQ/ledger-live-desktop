@@ -1,4 +1,4 @@
-import React, { useCallback, useState, memo } from "react";
+import React, { useCallback, useState, memo, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { listSubAccounts } from "@ledgerhq/live-common/lib/account/helpers";
@@ -22,6 +22,8 @@ import perFamilyTokenList from "~/renderer/generated/TokenList";
 import { useTimeRange } from "~/renderer/actions/settings";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 import AngleDown from "~/renderer/icons/AngleDown";
+import { ReceiveDrawer } from "~/renderer/drawers/ReceiveFlow";
+import { context as drawersContext } from "~/renderer/drawers/Provider";
 
 type Props = {
   account: Account;
@@ -34,6 +36,7 @@ function TokensList({ account }: Props) {
   const [range] = useTimeRange();
   const dispatch = useDispatch();
   const history = useHistory();
+  const { setDrawer } = useContext(drawersContext);
 
   const onAccountClick = useCallback(
     (account: AccountLike, parentAccount: Account) => {
@@ -46,8 +49,8 @@ function TokensList({ account }: Props) {
   );
 
   const onReceiveClick = useCallback(() => {
-    dispatch(openModal("MODAL_RECEIVE", { account, receiveTokenMode: true }));
-  }, [dispatch, account]);
+    setDrawer(ReceiveDrawer, { account, receiveTokenMode: true }, ReceiveDrawer.initialOptions);
+  }, [account, setDrawer]);
 
   const [collapsed, setCollapsed] = useState(true);
 

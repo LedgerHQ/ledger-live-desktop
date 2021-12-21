@@ -1,24 +1,34 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { SideBar, Icons } from "@ledgerhq/react-ui";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useHistory, useLocation } from "react-router-dom";
-import { sidebarCollapsedSelector, lastSeenDeviceSelector, SettingsState } from "~/renderer/reducers/settings";
+import {
+  sidebarCollapsedSelector,
+  lastSeenDeviceSelector,
+  SettingsState,
+} from "~/renderer/reducers/settings";
 import { setFirstTimeLend, setSidebarCollapsed } from "~/renderer/actions/settings";
 import { openModal } from "~/renderer/actions/modals";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { hasLendEnabledAccountsSelector } from "~/renderer/reducers/accounts";
 import useIsUpdateAvailable from "../Updater/useIsUpdateAvailable";
+import { context as drawersContext } from "~/renderer/drawers/Provider";
+import { ReceiveDrawer } from "~/renderer/drawers/ReceiveFlow";
 
 const MainSideBar: React.FC = () => {
   const location = useLocation();
   const history = useHistory();
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { setDrawer } = useContext(drawersContext);
 
   const collapsed = useSelector(sidebarCollapsedSelector);
-  const toggleCollapsed = useCallback(() => dispatch(setSidebarCollapsed(!collapsed)), [dispatch, collapsed]);
+  const toggleCollapsed = useCallback(() => dispatch(setSidebarCollapsed(!collapsed)), [
+    dispatch,
+    collapsed,
+  ]);
 
   const isUpdateAvailable = useIsUpdateAvailable();
 
@@ -52,12 +62,9 @@ const MainSideBar: React.FC = () => {
     dispatch(openModal("MODAL_SEND", null));
   }, [dispatch, location.pathname, push]);
 
-  const openReceiveModal = useCallback(() => {
-    if (location.pathname === "/manager") {
-      push("/accounts");
-    }
-    dispatch(openModal("MODAL_RECEIVE", null));
-  }, [dispatch, location.pathname, push]);
+  const openReceiveDrawer = useCallback(() => {
+    setDrawer(ReceiveDrawer, null, ReceiveDrawer.initialOptions);
+  }, [setDrawer]);
 
   const navigateToExchange = useCallback(() => {
     push("/exchange");
@@ -112,7 +119,7 @@ const MainSideBar: React.FC = () => {
       <SideBar.Item label={t("send.title")} onClick={openSendModal}>
         <Icons.ArrowTopRegular />
       </SideBar.Item>
-      <SideBar.Item label={t("receive.title")} onClick={openReceiveModal}>
+      <SideBar.Item label={t("receive.title")} onClick={openReceiveDrawer}>
         <Icons.ArrowBottomRegular size={20} />
       </SideBar.Item>
       <SideBar.Item
