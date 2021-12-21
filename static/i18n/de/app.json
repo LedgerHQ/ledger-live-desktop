@@ -1503,6 +1503,7 @@
         "uninstall": "Deinstallieren",
         "notEnoughSpace": "Nicht genug Speicherplatz",
         "supported": "Ledger Live unterstützt",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Konto hinzufügen",
         "addAccountTooltip": "Konto {{appName}} hinzufügen",
         "addAccountWarn": "Bitte warten Sie, bis die App-Updates abgeschlossen sind",
