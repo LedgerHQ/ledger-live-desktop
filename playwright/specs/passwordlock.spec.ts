@@ -2,7 +2,6 @@ import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { Layout } from "../models/Layout";
 import { Modal } from "../models/Modal";
-import { SettingsPage } from "../models/SettingsPage";
 import { PasswordlockModal } from "../models/PasswordlockModal";
 import { LockscreenPage } from "../models/LockscreenPage";
 import * as fs from "fs";
@@ -12,7 +11,6 @@ test.use({ userdata: "skip-onboarding" });
 test("Enable password lock", async ({ page, userdataFile }) => {
   const layout = new Layout(page);
   const modal = new Modal(page);
-  const settingsPage = new SettingsPage(page);
   const passwordlockModal = new PasswordlockModal(page);
   const lockscreenPage = new LockscreenPage(page);
 
@@ -22,7 +20,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   }
 
   await test.step("Open password lock modal", async () => {
-    await settingsPage.goToSettings();
+    await layout.goToSettings();
     await passwordlockModal.toggle();
     expect(await passwordlockModal.container.screenshot()).toMatchSnapshot(
       "set-passwordlock-modal.png",
@@ -53,7 +51,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   await test.step("Lock app", async () => {
     await layout.lockApp();
     expect(await lockscreenPage.container).toBeVisible();
-    expect(await lockscreenPage.logo).toBeVisible();
+    expect(await layout.logo).toBeVisible();
     expect(await page.screenshot()).toMatchSnapshot("app-locked.png");
   });
 

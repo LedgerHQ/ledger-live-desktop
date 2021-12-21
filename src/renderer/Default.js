@@ -131,19 +131,6 @@ export default function Default() {
         <BridgeSyncProvider>
           <ContextMenuWrapper>
             <ModalsLayer />
-            {process.env.SPECTRON_RUN ? (
-              <div
-                id="unfocus-please"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 500,
-                  width: 10,
-                  height: 10,
-                  zIndex: 999,
-                }}
-              />
-            ) : null}
             <DebugWrapper>
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}

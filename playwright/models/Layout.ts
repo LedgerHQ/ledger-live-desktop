@@ -25,7 +25,7 @@ export class Layout {
   constructor(page: Page) {
     this.page = page;
 
-    // portfolio
+    // portfolio && accounts
     this.totalBalance = page.locator('data-test-id=total-balance');
 
     // drawer

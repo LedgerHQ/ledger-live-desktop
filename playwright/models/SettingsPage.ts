@@ -1,7 +1,6 @@
 import { Page, Locator } from '@playwright/test';
-import { Layout } from './Layout';
 
-export class SettingsPage extends Layout {
+export class SettingsPage {
   readonly page: Page;
   readonly accountsTab: Locator;
   readonly aboutTab: Locator;
@@ -9,7 +8,6 @@ export class SettingsPage extends Layout {
   readonly experimentalTab: Locator;
 
   constructor(page: Page) {
-    super(page);
     this.page = page;
     this.accountsTab = page.locator('data-test-id=settings-accounts-tab');
     this.aboutTab = page.locator('data-test-id=settings-about-tab');

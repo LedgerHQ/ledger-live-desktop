@@ -3,7 +3,6 @@ import { Modal } from "./Modal";
 
 export class AddAccountModal extends Modal {
   readonly page: Page;
-  readonly addAccountButton: Locator;
   readonly selectAccount: Locator;
   readonly selectAccountInput: Locator;
   readonly accountsListLoader: Locator;
@@ -16,7 +15,6 @@ export class AddAccountModal extends Modal {
   constructor(page: Page) {
     super(page);
     this.page = page;
-    this.addAccountButton = page.locator('data-test-id=portfolio-empty-state-add-account-button');
     this.selectAccount = page.locator("text=Choose a crypto asset"); // FIXME: I need an id
     this.selectAccountInput = page.locator('[placeholder="Search"]'); // FIXME: I need an id
     this.accountsListLoader = page.locator('data-test-id=add-accounts-sync-loader');
@@ -25,10 +23,6 @@ export class AddAccountModal extends Modal {
     this.stopButton = page.locator('data-test-id=add-accounts-import-stop-button');
     this.addMoreButton = page.locator('data-test-id=add-accounts-finish-add-more-button');
     this.doneButton = page.locator('data-test-id=add-accounts-finish-close-button');
-  }
-
-  async open() {
-    await this.addAccountButton.click();
   }
 
   async select(currency: string) {
