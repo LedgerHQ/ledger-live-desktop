@@ -1503,6 +1503,7 @@
         "uninstall": "Kaldır",
         "notEnoughSpace": "Yeterli depolama alanı yok",
         "supported": "Ledger Live tarafından destekleniyor",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Hesap ekle",
         "addAccountTooltip": "{{appName}} hesabı ekle",
         "addAccountWarn": "Lütfen uygulama güncellemelerinin bitmesini bekleyin",
