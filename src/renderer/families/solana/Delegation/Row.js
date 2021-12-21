@@ -153,7 +153,7 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
   );
   */
   //const name = validator?.name ?? validatorAddress;
-  const name = stake.delegation?.voteAddr ?? "NONE";
+  const validatorName = stake.delegation?.voteAddr ?? "Not Delegated";
 
   /*
   const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
@@ -175,9 +175,9 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
     <Wrapper>
       <Column strong clickable onClick={null}>
         <Box mr={2}>
-          <FirstLetterIcon label={stake.stakeAccAddr} />
+          <FirstLetterIcon label={stake.delegation?.voteAddr ?? "-"} />
         </Box>
-        <Ellipsis>{name}</Ellipsis>
+        <Ellipsis>{validatorName}</Ellipsis>
       </Column>
       <Column>
         {stake.activation.state === "active" || stake.activation.state === "activating" ? (
@@ -195,9 +195,8 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
         )}
         <div>{stake.activation.state}</div>
       </Column>
-      <Column>{formatAmount(stake.activation.active)}</Column>
-      <Column>{formatAmount(stake.activation.inactive)}</Column>
       <Column>{formatAmount(stake.stakeAccBalance)}</Column>
+      <Column>{formatAmount(stake.activation.active)}</Column>
       <Column>
         <DropDown items={[]} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (
