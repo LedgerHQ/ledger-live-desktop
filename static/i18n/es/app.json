@@ -1503,6 +1503,7 @@
         "uninstall": "Desinstalar",
         "notEnoughSpace": "No hay suficiente espacio",
         "supported": "Compatible con Ledger Live",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Agregar cuenta",
         "addAccountTooltip": "Agregar cuenta {{appName}}",
         "addAccountWarn": "Espera a que finalicen las actualizaciones de aplicaciones",
