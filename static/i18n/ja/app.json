@@ -3865,7 +3865,7 @@
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "受取先アドレスと送付元アドレスが同じです。"
+      "title": "送付先アドレスが送付元アドレスと同じです。"
     },
     "CantOpenDevice": {
       "title": "接続に失敗しました。",
