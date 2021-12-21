@@ -7,8 +7,7 @@ export class ManagerPage {
   readonly installedAppsTab: Locator;
   readonly catalogAppsTab: Locator;
   readonly updateAllButton: Locator;
-  readonly appUpdateState: Locator;
-  readonly appInstallState: Locator;
+  readonly appProgressBar: Locator;
   readonly installAppButton: Function;
   readonly uninstallAppButton: Function;
   readonly uninstallAllAppsButton: Locator;
@@ -18,21 +17,16 @@ export class ManagerPage {
   constructor(page: Page) {
     this.page = page;
     this.managerMenu = page.locator('data-test-id=drawer-manager-button');
-    this.firmwareUpdateButton = page.locator("#manager-update-firmware-button");
+    this.firmwareUpdateButton = page.locator('data-test-id=manager-update-firmware-button');
     this.installedAppsTab = page.locator('data-test-id=manager-installed-apps-tab');
     this.catalogAppsTab = page.locator('data-test-id=manager-app-catalog-tab');
-    this.updateAllButton = page.locator('#managerAppsList-updateAll');
-    this.appUpdateState = page.locator('text=Updating...').first();
-    this.appInstallState = page.locator('text=Installing...').first();
-    this.installAppButton = (currency: string) : Locator => page.locator(`#appActionsInstall-${currency}`);
-    this.uninstallAppButton = (currency: string) : Locator => page.locator(`#appActionsUninstall-${currency}`);
-    this.uninstallAllAppsButton = page.locator('button:has-text("Uninstall all")');
+    this.updateAllButton = page.locator('data-test-id=manager-update-all-apps-button');
+    this.appProgressBar = page.locator('data-test-id=manager-app-progress-bar').first();
+    this.installAppButton = (currency: string) : Locator => page.locator(`data-test-id=manager-install-${currency}-app-button`);
+    this.uninstallAppButton = (currency: string) : Locator => page.locator(`data-test-id=manager-uninstall-${currency}-app-button`);
+    this.uninstallAllAppsButton = page.locator('data-test-id=manager-uninstall-all-apps-button');
     this.confirmButton = page.locator('data-test-id=modal-confirm-button');
-    this.installedAppEmptyState = page.locator("text=No apps installed on your device");
-  }
-
-  async navigate() {
-    await this.managerMenu.click();
+    this.installedAppEmptyState = page.locator('data-test-id=manager-no-apps-empty-state');
   }
 
   async goToInstalledAppTab() {
@@ -45,12 +39,12 @@ export class ManagerPage {
 
   async updateAllApps() {
     await this.updateAllButton.click();
-    await this.appUpdateState.waitFor({ state: "detached" });
+    await this.appProgressBar.waitFor({ state: "detached" });
   }
 
   async installApp(currency: string) {
     await this.installAppButton(currency).click();
-    await this.appInstallState.waitFor({ state: "detached" });
+    await this.appProgressBar.waitFor({ state: "detached" });
   }
 
   async uninstallApp(currency: string) {
@@ -61,5 +55,9 @@ export class ManagerPage {
     await this.uninstallAllAppsButton.click();
     await this.confirmButton.click();
     await this.installedAppEmptyState.waitFor({ state: "visible" });
+  }
+
+  async openFirmwareUpdateModal() {
+    await this.firmwareUpdateButton.click();
   }
 }

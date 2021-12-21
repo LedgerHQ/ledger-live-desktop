@@ -187,8 +187,8 @@ const StepFullFirmwareInstall = ({
   const hasHash = !!firmware?.osu?.hash;
 
   return (
-    <Container>
-      <Title id={"firmware-update-download-mcu-title"}>
+    <Container data-test-id="firmware-update-download-progress">
+      <Title>
         {!displayedOnDevice
           ? t("manager.modal.steps.downloadingUpdate")
           : hasHash
