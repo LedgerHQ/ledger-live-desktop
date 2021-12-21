@@ -197,7 +197,7 @@
     "manager": "管理",
     "exchange": "購入/売却",
     "swap": "スワップ",
-    "lend": "貸暗号資産",
+    "lend": "レンディング",
     "catalog": "Discover"
   },
   "stars": {
@@ -748,7 +748,7 @@
     },
     "assets": "貸暗号資産",
     "active": "認証済みアカウント",
-    "lendAsset": "貸し出す",
+    "lendAsset": "レンディング",
     "account": {
       "amountSupplied": "預入額",
       "amountSuppliedTooltip": "ネットワーク貸出額",
@@ -759,7 +759,7 @@
       "interestEarned": "獲得利息",
       "interestEarnedTooltip": "引き出し後に獲得した利息",
       "openLoans": "資産を貸し出す",
-      "closedLoans": "貸出解除済み",
+      "closedLoans": "終了済み",
       "amountRedeemed": "引き出し額",
       "date": "日付",
       "info": "{{currency}} アカウントから直接資産を貸し出し、利息を得ることができます。",
@@ -768,13 +768,13 @@
     },
     "emptyState": {
       "active": {
-        "title": "貸し出す",
+        "title": "レンディング",
         "description": "Ethereumアカウントから直接資産を貸し出し、利息を得ることができます。",
         "cta": "コンパウンドでの貸暗号資産はどのように機能しますか？"
       },
       "closed": {
-        "title": "貸出解除済みの資産はこちらに表示されます。",
-        "description": "まだ貸し出しを行っていません。",
+        "title": "レンディング終了済みの資産はこちらに表示されます。",
+        "description": "まだレンディングを行っていません。",
         "cta": "預け入れ"
       },
       "opened": {
@@ -784,7 +784,7 @@
       },
       "history": {
         "title": "履歴",
-        "description": "すべての貸出履歴を表示する。",
+        "description": "すべてのレンディング履歴を表示する。",
         "cta": "預け入れ"
       }
     },
@@ -840,12 +840,12 @@
         "infoNoLimit": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
         "approvedWithLimit": "このアカウントで<0>{{value}}</0>を承認しました。",
         "enabling": "アカウントの承認が完了すると、資産の預け入れが可能になります。",
-        "notEnabled": "資産を貸し出すには、このアカウントを承認する必要があります。",
-        "notEnoughApproved": "貸出アカウントで、上限額の増額を承認してください。"
+        "notEnabled": "資産のレンディングには、このアカウントを承認する必要があります。",
+        "notEnoughApproved": "貸暗号資産のアカウントで、上限額の増額を承認してください。"
       },
       "supply": {
         "title": "預け入れ",
-        "description": "プロトコルに貸し出す資産の額を入力してください。"
+        "description": "プロトコルにレンディングする資産の額を入力してください。"
       },
       "withdraw": {
         "title": "引き出す",
