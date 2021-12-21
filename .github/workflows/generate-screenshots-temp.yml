@@ -15,7 +15,7 @@ jobs:
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
   start-runner:
-    name: "start ec2 instance"
+    name: "[Runner] start ec2 instance"
     needs: cancel-previous
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
@@ -24,7 +24,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: "stop ec2 instance"
+    name: "[Runner] stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, generate-screenshots-linux]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
@@ -35,7 +35,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   generate-screenshots-linux:
-    name: "[Linux Screenshots]"
+    name: "[Linux] Screenshots"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
 
@@ -90,7 +90,7 @@ jobs:
           git push
 
   generate-screenshots:
-    name: "[${{ matrix.os }} Screenshots]"
+    name: "[${{ matrix.os }}] Screenshots"
     strategy:
       fail-fast: false
       matrix:

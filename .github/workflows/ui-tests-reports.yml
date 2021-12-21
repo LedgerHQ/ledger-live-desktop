@@ -136,3 +136,12 @@ jobs:
             }
 
             fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
+      - name: prepare comment body
+        id: comment-body
+        uses: ./.github/actions/prepare-comment
+        with:
+          images: images.json
+          lintoutput: tests-reports/lint.txt
+          jestoutput: tests-reports/jest.txt
+      - name: display comment
+        run: echo ${{ steps.comment-body.outputs.body }}
