@@ -8,7 +8,7 @@ on:
 
   workflow_run:
     workflows: ["Tests | Screenshot Testing"]
-    branches: ["chore/fix-builds"]
+    branches: ["LL-8541-3"]
     types:
       - "completed"
 
