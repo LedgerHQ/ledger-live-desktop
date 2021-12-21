@@ -57,7 +57,7 @@ const Exchange = (props: DProps) => {
         onIndexChange={setActiveTabIndex}
       />
       <Card grow style={{ overflow: "hidden" }}>
-        <Component {...location?.state} {...props} provider={provider} />
+        <Component {...(location && location.state)} {...props} provider={provider} />
       </Card>
     </Container>
   );
