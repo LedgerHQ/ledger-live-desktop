@@ -1503,6 +1503,7 @@
         "uninstall": "アンインストール",
         "notEnoughSpace": "十分なストレージ容量がありません。",
         "supported": "Ledger Live対応",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "アカウント追加",
         "addAccountTooltip": "{{appName}} アカウントを追加",
         "addAccountWarn": "アプリのアップデート完了までお待ちください。",
