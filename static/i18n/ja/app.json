@@ -739,11 +739,11 @@
     }
   },
   "lend": {
-    "title": "暗号資産を貸し出す",
+    "title": "暗号資産のレンディング",
     "tabs": {
       "dashboard": "ダッシュボード",
       "opened": "貸出中",
-      "closed": "貸出解除済み",
+      "closed": "終了済み",
       "history": "履歴"
     },
     "assets": "貸暗号資産",
