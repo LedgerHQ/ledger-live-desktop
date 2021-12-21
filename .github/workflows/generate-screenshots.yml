@@ -1,4 +1,4 @@
-name: "Tests | Screenshots Update"
+name: "Generate | Screenshots"
 on:
   issue_comment:
     types: [created]
