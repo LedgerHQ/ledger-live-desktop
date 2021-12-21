@@ -1503,7 +1503,7 @@
         "uninstall": "Удалить",
         "notEnoughSpace": "Недостаточно места",
         "supported": "Поддерживается Ledger Live",
-        "not_supported": "Requires 3rd-party wallet",
+        "not_supported": "Требуется сторонний кошелёк",
         "addAccount": "Добавить счёт",
         "addAccountTooltip": "Добавить счёт {{appName}}",
         "addAccountWarn": "Дождитесь полного обновления приложения",
