@@ -1503,6 +1503,7 @@
         "uninstall": "제거",
         "notEnoughSpace": "저장 용량이 부족합니다",
         "supported": "Ledger Live 지원됨",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "계정 추가",
         "addAccountTooltip": "{{appName}} 계정 추가",
         "addAccountWarn": "앱 업데이트가 완료될 때까지 기다려 주세요",
