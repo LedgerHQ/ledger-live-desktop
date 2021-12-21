@@ -1503,6 +1503,7 @@
         "uninstall": "Törlés",
         "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Számla hozzáadása",
         "addAccountTooltip": "{{appName}} számla hozzáadása",
         "addAccountWarn": "Kérlek várj az alkalmazásfrissítés befejezéséig",
