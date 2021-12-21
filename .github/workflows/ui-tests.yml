@@ -1,4 +1,4 @@
-name: "[Tests] Screenshot Testing"
+name: "Tests | Screenshot Testing"
 on:
   pull_request:
     branches:
