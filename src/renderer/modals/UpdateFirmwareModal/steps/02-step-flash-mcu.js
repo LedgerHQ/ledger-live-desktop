@@ -113,10 +113,8 @@ const StepFlashMcu = ({ firmware, deviceModelId, setError, transitionTo }: Props
   }
 
   return (
-    <Container>
-      <Title id={"firmware-update-flash-mcu-title"}>
-        {installing ? "" : t("manager.modal.mcuTitle")}
-      </Title>
+    <Container data-test-id="firmware-update-flash-mcu-progress">
+      <Title>{installing ? "" : t("manager.modal.mcuTitle")}</Title>
       <TrackPage category="Manager" name="FlashMCU" />
       <Body
         deviceModelId={deviceModelId}

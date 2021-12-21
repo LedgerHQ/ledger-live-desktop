@@ -143,7 +143,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
           }
         >
           <Button
-            id={"managerAppsList-updateAll"}
+            data-test-id="manager-update-all-apps-button"
             primary
             disabled={outOfMemory}
             onClick={onUpdateAll}

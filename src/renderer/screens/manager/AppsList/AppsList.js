@@ -192,7 +192,7 @@ const AppsList = ({
       )}
       <Card mt={0}>
         {isDeviceTab && !installedApps.length ? (
-          <Box py={8}>
+          <Box py={8} data-test-id="manager-no-apps-empty-state">
             <Text textAlign="center" ff="Inter|SemiBold" fontSize={6}>
               <Trans i18nKey="manager.applist.placeholderNoAppsInstalled" />
             </Text>
