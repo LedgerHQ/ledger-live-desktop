@@ -42,6 +42,6 @@ export class AddAccountModal extends Modal {
   async waitForSync() {
     await this.accountsListLoader.waitFor({ state: "hidden" });
     await this.stopButton.waitFor({ state: "hidden" });
-    await this.addAccountsButton.waitFor({ state: "visible" }); 
+    await this.addAccountsButton.waitFor({ state: "visible" });
   }
 }

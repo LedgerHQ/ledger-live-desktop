@@ -5,27 +5,27 @@ import { AddAccountModal } from "../models/AddAccountModal";
 import { ReceiveModal } from "../models/ReceiveModal";
 import { Layout } from "../models/Layout";
 import { DeviceAction } from "../models/DeviceAction";
-import { Modal } from "../models/Modal";
+import { PortfolioPage } from "../models/PortfolioPage";
 
 test.use({ userdata: "skip-onboarding" });
 
 test("subAccounts", async ({ page }) => {
   const addAccountModal = new AddAccountModal(page);
-  const modal = new Modal(page);
   const accountsPage = new AccountsPage(page);
   const receiveModal = new ReceiveModal(page);
   const deviceAction = new DeviceAction(page);
   const layout = new Layout(page);
+  const portfolioPage = new PortfolioPage(page);
 
   // When parent is missing
   await test.step("should find token in the currencies list", async () => {
-    await addAccountModal.open();
+    await portfolioPage.openAddAccountModal();
     await addAccountModal.select("chainlink");
     expect(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-noParent.png");
   });
 
   await test.step("should scan parent", async () => {
-    await modal.continue();
+    await addAccountModal.continue();
     await deviceAction.openApp();
     await addAccountModal.waitForSync();
     expect(await addAccountModal.addAccountsButton).toBeVisible();
