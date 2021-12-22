@@ -2815,10 +2815,10 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@~0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.6.0.tgz#f1e52228b9593de57ab6ae69218cb8396bddb2cc"
-  integrity sha512-VyINgOEUiX0KkyzfiFdkS/2h3XFAPhoAGLbN0PK2oJcCLua4UDSBdoBFkKJ72/0gSRlTmy0XWpb2cQiqmBIxYg==
+"@ledgerhq/react-ui@~0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.7.0.tgz#3d7ea0d471312dbc89843886a7cad1ace3a785aa"
+  integrity sha512-W5SFqVxzcfiSeTEe/F7UdUNUi2/cjhDqh3yD5xzaiG+m3HUObXNV9C7qAH0fcpzuofl+frjd4Z6ziDNgY5Evyg==
   dependencies:
     "@ledgerhq/icons-ui" "^0.2.1"
     "@ledgerhq/ui-shared" "^0.1.4"
