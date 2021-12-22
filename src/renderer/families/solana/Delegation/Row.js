@@ -7,6 +7,7 @@ import moment from "moment";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { SolanaStake } from "@ledgerhq/live-common/lib/families/solana/types";
+import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
@@ -107,6 +108,9 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
 
   //const redelegationDate = !_canRedelegate && getRedelegationCompletionDate(account, delegation);
   //const formattedRedelegationDate = redelegationDate ? moment(redelegationDate).fromNow() : "";
+  //
+
+  const stakeActions = solanaStakeActions(stake.activation.state).map(toStakeDropDownItem);
 
   /*
   const dropDownItems = useMemo(
@@ -195,10 +199,10 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
         )}
         <div>{stake.activation.state}</div>
       </Column>
-      <Column>{formatAmount(stake.stakeAccBalance)}</Column>
+      <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
       <Column>{formatAmount(stake.activation.active)}</Column>
       <Column>
-        <DropDown items={[]} renderItem={ManageDropDownItem} onChange={onSelect}>
+        <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (
             <Box flex horizontal alignItems="center">
               <Trans i18nKey="common.manage" />
@@ -211,6 +215,33 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
       </Column>
     </Wrapper>
   );
+}
+
+function toStakeDropDownItem(stakeAction: string) {
+  switch (stakeAction) {
+    case "unstake":
+      return {
+        key: "MODAL_SOLANA_UNSTAKE",
+        label: <Trans i18nKey="solana.delegation.unstake" />,
+      };
+    case "restake":
+      return {
+        key: "MODAL_SOLANA_RESTAKE",
+        label: <Trans i18nKey="solana.delegation.restake" />,
+      };
+    case "undelegate":
+      return {
+        key: "MODAL_SOLANA_UNDELEGATE",
+        label: <Trans i18nKey="solana.delegation.undelegate" />,
+      };
+    case "redelegate":
+      return {
+        key: "MODAL_SOLANA_REDELEGATE",
+        label: <Trans i18nKey="solana.delegation.redelegate" />,
+      };
+    default:
+      throw new Error(`unsupported stake action: ${stakeAction}`);
+  }
 }
 
 /*

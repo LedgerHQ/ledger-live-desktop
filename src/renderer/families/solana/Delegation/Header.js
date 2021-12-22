@@ -35,7 +35,7 @@ export const Header = () => (
       <Trans i18nKey="delegation.status" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.balance" />
+      <Trans i18nKey="delegation.delegated" />
     </TableLine>
     <TableLine>
       <Trans i18nKey="delegation.active" />

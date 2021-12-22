@@ -67,7 +67,7 @@ const Delegation = ({ account }: Props) => {
 
   const onDelegate = useCallback(() => {
     dispatch(
-      openModal("MODAL_COSMOS_DELEGATE", {
+      openModal("MODAL_SOLANA_DELEGATE", {
         account,
       }),
     );
