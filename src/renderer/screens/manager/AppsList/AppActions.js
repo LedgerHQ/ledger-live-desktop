@@ -118,7 +118,6 @@ const AppActions: React$ComponentType<Props> = React.memo(
       <AppActionsWrapper>
         {installing || uninstalling ? (
           <Progress
-            data-test-id="manager-app-progress-bar"
             state={state}
             name={name}
             updating={updating}
