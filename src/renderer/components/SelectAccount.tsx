@@ -269,7 +269,7 @@ type OwnProps = {
   showAddAccount?: boolean;
   enforceHideEmptySubAccounts?: boolean;
   withSubAccounts?: boolean;
-} & SelectInputProps;
+} & Omit<SelectInputProps, "onChange">;
 
 type Props = OwnProps & {
   accounts: Account[];
@@ -390,6 +390,6 @@ const mapStateToProps = createStructuredSelector({
   accounts: shallowAccountsSelector,
 });
 
-const ConnectedSelectAccount = connect(mapStateToProps)(SelectAccount) as typeof SelectAccount;
+const ConnectedSelectAccount = connect(mapStateToProps)(SelectAccount);
 
 export default ConnectedSelectAccount;
