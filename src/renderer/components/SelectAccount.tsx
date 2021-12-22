@@ -27,7 +27,7 @@ import { shallowAccountsSelector } from "../reducers/accounts";
 import { openModal } from "../actions/modals";
 import Plus from "../icons/Plus";
 
-const Tick = styled.div`
+const IndentLine = styled.div`
   height: 36px;
   width: 1px;
   background: ${p => p.theme.colors.neutral.c70};
@@ -61,13 +61,13 @@ export const AccountOption = ({
 
   return (
     <Flex flexGrow={1} alignItems="center" columnGap={4} height={48}>
-      {!isSelectedValue && nested ? <Tick /> : null}
+      {!isSelectedValue && nested ? <IndentLine /> : null}
       {!isSelectedValue && (
         <Text color="neutral.c100">
           <CryptoCurrencyIcon currency={currency} size={16} />
         </Text>
       )}
-      <Text flex={1} ff="Inter|SemiBold" color="inherit" fontSize={4}>
+      <Text flex={1} variant="body" fontWeight="medium" color="inherit" fontSize={4}>
         {name}
       </Text>
       {!hideDerivationTag && <AccountTagDerivationMode account={account} />}
@@ -75,7 +75,8 @@ export const AccountOption = ({
         <Text color="neutral.c100" mr={4}>
           <FormattedVal
             color="palette.text.shade40"
-            ff="Inter|Medium"
+            variant="body"
+            fontWeight="medium"
             fontSize={3}
             val={balance}
             unit={unit}
@@ -89,14 +90,20 @@ export const AccountOption = ({
 
 const defaultRenderOption = (props: OptionProps<SelectOption, false>) => {
   return (
-    <SelectOption {...props} render={({ data }) => <AccountOption account={data.account} />} />
+    <SelectOption {...props} render={({ data }) => <AccountOption account={data?.account} />} />
   );
 };
 
 const defaultRenderValue = (props: SingleValueProps<SelectOption>) => {
+  const propsValue = props.getValue();
+  if (!propsValue) {
+    return <components.SingleValue {...props} />;
+  }
+
+  const selectedOption = propsValue[0];
   return (
     <components.SingleValue {...props}>
-      <AccountOption account={props.getValue()[0].account} isSelectedValue />
+      <AccountOption account={selectedOption?.account} isSelectedValue />
     </components.SingleValue>
   );
 };
@@ -140,9 +147,9 @@ const AddAccountFooter = (props: any) => {
         <AddButton onClick={openAddAccounts}>
           <Text color="neutral.c80">
             <Plus size={12} />
-            <span style={{ marginLeft: 8 }}>
+            <Box as="span" ml={4}>
               <Trans i18nKey="swap2.form.details.noAccountCTA" />
-            </span>
+            </Box>
           </Text>
         </AddButton>
       </AddAccountContainer>
@@ -150,8 +157,20 @@ const AddAccountFooter = (props: any) => {
   );
 };
 
+const getAccountFromProps = (props: SelectInputProps<SelectOption>): AccountLike | null => {
+  const propsValue = props.getValue();
+  if (!propsValue) {
+    return null;
+  }
+
+  const selectedOption = propsValue[0];
+  const account = selectedOption?.account;
+
+  return account ?? null;
+};
+
 const renderLeft = (props: SelectInputProps<SelectOption>) => {
-  const account: AccountLike = props.getValue()[0].account;
+  const account = getAccountFromProps(props);
 
   if (!account) {
     return null;
@@ -169,7 +188,7 @@ const renderLeft = (props: SelectInputProps<SelectOption>) => {
 };
 
 const renderRight = (props: SelectInputProps<SelectOption>) => {
-  const account: AccountLike = props.getValue()[0].account;
+  const account = getAccountFromProps(props);
 
   if (!account) {
     return null;
@@ -187,8 +206,9 @@ const renderRight = (props: SelectInputProps<SelectOption>) => {
       <Text color="neutral.c00" mr={4}>
         <FormattedVal
           color="palette.text.shade40"
-          ff="Inter|Medium"
+          variant="body"
           fontSize={3}
+          fontWeight="medium"
           val={balance}
           unit={unit}
           showCode
