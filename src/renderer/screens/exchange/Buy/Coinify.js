@@ -20,6 +20,7 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
+  width: 100%;
 `;
 
 const Coinify = ({ defaultCurrency, defaultAccount }: DProps) => {
