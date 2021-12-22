@@ -15,7 +15,13 @@ import {
 } from "@ledgerhq/live-common/lib/account";
 
 import { Trans, useTranslation } from "react-i18next";
-import { components, createFilter, OptionProps, SingleValueProps } from "react-select";
+import {
+  components,
+  createFilter,
+  MenuListComponentProps,
+  OptionProps,
+  SingleValueProps,
+} from "react-select";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import styled, { useTheme } from "styled-components";
@@ -95,15 +101,15 @@ const defaultRenderOption = (props: OptionProps<SelectOption, false>) => {
 };
 
 const defaultRenderValue = (props: SingleValueProps<SelectOption>) => {
-  const propsValue = props.getValue();
-  if (!propsValue) {
-    return <components.SingleValue {...props} />;
+  const selectedOption = props.getValue()[0];
+
+  if (!selectedOption) {
+    return null;
   }
 
-  const selectedOption = propsValue[0];
   return (
     <components.SingleValue {...props}>
-      <AccountOption account={selectedOption?.account} isSelectedValue />
+      <AccountOption account={selectedOption.account} isSelectedValue />
     </components.SingleValue>
   );
 };
@@ -134,7 +140,7 @@ const AddButton = styled(Button.Unstyled)`
   }
 `;
 
-const AddAccountFooter = (props: any) => {
+const AddAccountFooter = (props: MenuListComponentProps<SelectOption, false>) => {
   const dispatch = useDispatch();
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS", null));
@@ -158,15 +164,13 @@ const AddAccountFooter = (props: any) => {
 };
 
 const getAccountFromProps = (props: SelectInputProps<SelectOption>): AccountLike | null => {
-  const propsValue = props.getValue();
-  if (!propsValue) {
+  const selectedOption = props.getValue()[0];
+
+  if (!selectedOption) {
     return null;
   }
 
-  const selectedOption = propsValue[0];
-  const account = selectedOption?.account;
-
-  return account ?? null;
+  return selectedOption.account ?? null;
 };
 
 const renderLeft = (props: SelectInputProps<SelectOption>) => {
