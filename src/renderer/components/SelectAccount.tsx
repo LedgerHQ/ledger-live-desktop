@@ -13,15 +13,7 @@ import {
   getAccountUnit,
   listSubAccounts,
 } from "@ledgerhq/live-common/lib/account";
-
 import { Trans, useTranslation } from "react-i18next";
-import {
-  components,
-  createFilter,
-  MenuListComponentProps,
-  OptionProps,
-  SingleValueProps,
-} from "react-select";
 import { connect, useDispatch } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import styled, { useTheme } from "styled-components";
@@ -32,6 +24,17 @@ import AccountTagDerivationMode from "./AccountTagDerivationMode";
 import { shallowAccountsSelector } from "../reducers/accounts";
 import { openModal } from "../actions/modals";
 import Plus from "../icons/Plus";
+
+// TODO: update react-select just before V3 gets merged instead of relying on a nested version…
+import {
+  components,
+  createFilter,
+  MenuListProps,
+  OptionProps,
+  SingleValueProps,
+  ControlProps,
+  IndicatorsContainerProps,
+} from "@ledgerhq/react-ui/node_modules/react-select";
 
 const IndentLine = styled.div`
   height: 36px;
@@ -100,7 +103,7 @@ const defaultRenderOption = (props: OptionProps<SelectOption, false>) => {
   );
 };
 
-const defaultRenderValue = (props: SingleValueProps<SelectOption>) => {
+const defaultRenderValue = (props: SingleValueProps<SelectOption, false>) => {
   const selectedOption = props.getValue()[0];
 
   if (!selectedOption) {
@@ -140,7 +143,7 @@ const AddButton = styled(Button.Unstyled)`
   }
 `;
 
-const AddAccountFooter = (props: MenuListComponentProps<SelectOption, false>) => {
+const AddAccountFooter = (props: MenuListProps<SelectOption, false>) => {
   const dispatch = useDispatch();
   const openAddAccounts = useCallback(() => {
     dispatch(openModal("MODAL_ADD_ACCOUNTS", null));
@@ -163,7 +166,9 @@ const AddAccountFooter = (props: MenuListComponentProps<SelectOption, false>) =>
   );
 };
 
-const getAccountFromProps = (props: SelectInputProps<SelectOption>): AccountLike | null => {
+const getAccountFromProps = (
+  props: ControlProps<SelectOption> | IndicatorsContainerProps<SelectOption>,
+): AccountLike | null => {
   const selectedOption = props.getValue()[0];
 
   if (!selectedOption) {
@@ -173,7 +178,7 @@ const getAccountFromProps = (props: SelectInputProps<SelectOption>): AccountLike
   return selectedOption.account ?? null;
 };
 
-const renderLeft = (props: SelectInputProps<SelectOption>) => {
+const renderLeft = (props: ControlProps<SelectOption>) => {
   const account = getAccountFromProps(props);
 
   if (!account) {
@@ -191,7 +196,7 @@ const renderLeft = (props: SelectInputProps<SelectOption>) => {
   );
 };
 
-const renderRight = (props: SelectInputProps<SelectOption>) => {
+const renderRight = (props: IndicatorsContainerProps<SelectOption>) => {
   const account = getAccountFromProps(props);
 
   if (!account) {
@@ -222,7 +227,7 @@ const renderRight = (props: SelectInputProps<SelectOption>) => {
   );
 };
 
-const defaultFilter = createFilter({
+const defaultFilter = createFilter<AccountLike>({
   stringify: ({ data: account }) => {
     const currency = getAccountCurrency(account);
     const name = getAccountName(account);
@@ -282,7 +287,6 @@ const SelectAccount = ({
   placeholder,
   autoFocus,
   filter,
-  disabledTooltipText,
   showAddAccount = false,
 }: Props) => {
   const { t } = useTranslation();
@@ -358,7 +362,6 @@ const SelectAccount = ({
       noOptionsMessage={({ inputValue }) =>
         t("common.selectAccountNoOption", { accountName: inputValue })
       }
-      disabledTooltipText={disabledTooltipText}
       menuPortalTarget={document.body}
       renderLeft={renderLeft}
       renderRight={renderRight}
@@ -387,6 +390,6 @@ const mapStateToProps = createStructuredSelector({
   accounts: shallowAccountsSelector,
 });
 
-const ConnectedSelectAccount = connect(mapStateToProps)(SelectAccount);
+const ConnectedSelectAccount = connect(mapStateToProps)(SelectAccount) as typeof SelectAccount;
 
 export default ConnectedSelectAccount;

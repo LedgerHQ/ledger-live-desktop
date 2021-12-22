@@ -13,7 +13,14 @@ import {
   Props as OptionProps,
   Option,
 } from "@ledgerhq/react-ui/components/form/SelectInput/Option";
-import { components, SingleValueProps, ValueContainerProps } from "react-select";
+
+// TODO: update react-select just before V3 gets merged instead of relying on a nested version…
+import {
+  components,
+  SingleValueProps,
+  ValueContainerProps,
+  ControlProps,
+} from "@ledgerhq/react-ui/node_modules/react-select";
 
 // it seems this component only uses crypto and token currencies, not fiat ones
 // since it uses the 'id' prop that is not present on fiat currencies
@@ -31,7 +38,7 @@ type Props = {
   isCurrencyDisabled?: (currency: Currency) => boolean;
   isDisabled?: boolean;
   id?: string;
-  renderOptionOverride?: (option: OptionProps<Currency, false>) => JSX.Element;
+  renderOptionOverride?: (option: OptionProps<Currency>) => JSX.Element;
   renderValueOverride?: (option: ValueContainerProps<Currency, false>) => JSX.Element;
   stylesMap?: (styles: CreateStylesReturnType) => CreateStylesReturnType;
 };
@@ -93,7 +100,7 @@ const renderOption = (props: OptionProps<Currency, false>) => {
   return <Option {...props} render={({ data }) => <CurrencyOption currency={data} />} />;
 };
 
-const renderValue = (props: SingleValueProps<Currency>) => {
+const renderValue = (props: SingleValueProps<Currency, false>) => {
   return (
     <components.SingleValue {...props}>
       <CurrencyOption currency={props.getValue()[0]} isSelectedValue />
@@ -101,7 +108,7 @@ const renderValue = (props: SingleValueProps<Currency>) => {
   );
 };
 
-const renderLeft = (props: SelectInputProps<Currency>) => {
+const renderLeft = (props: ControlProps<Currency>) => {
   const value = props.getValue()[0];
   return (
     value && (
