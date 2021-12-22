@@ -174,10 +174,9 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
           <Box horizontal justifyContent="flex-end">
             <Button
               disabled={!success && !checkedIds.length}
-              data-e2e="continue_button"
               onClick={handleButtonClick}
               event={!success ? "Operation history" : undefined}
-              id="export-operations-save-button"
+              data-test-id="export-operations-save-button"
               primary
             >
               {success ? (

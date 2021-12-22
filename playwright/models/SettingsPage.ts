@@ -6,6 +6,7 @@ export class SettingsPage {
   readonly aboutTab: Locator;
   readonly helpTab: Locator;
   readonly experimentalTab: Locator;
+  readonly experimentalDevModeToggle: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -13,6 +14,7 @@ export class SettingsPage {
     this.aboutTab = page.locator('data-test-id=settings-about-tab');
     this.helpTab = page.locator('data-test-id=settings-help-tab');
     this.experimentalTab = page.locator('data-test-id=settings-experimental-tab');
+    this.experimentalDevModeToggle = page.locator('data-test-id=MANAGER_DEV_MODE_button');
   }
 
   async goToAccountsTab() {
@@ -29,5 +31,9 @@ export class SettingsPage {
 
   async goToExperimentalTab() {
     await this.experimentalTab.click();
+  }
+
+  async enableDevMode() {
+    await this.experimentalDevModeToggle.click();
   }
 }
