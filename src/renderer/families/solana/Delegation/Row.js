@@ -157,7 +157,7 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
   );
   */
   //const name = validator?.name ?? validatorAddress;
-  const validatorName = stake.delegation?.voteAddr ?? "Not Delegated";
+  const validatorName = stake.delegation?.voteAccAddr ?? "Not Delegated";
 
   /*
   const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [

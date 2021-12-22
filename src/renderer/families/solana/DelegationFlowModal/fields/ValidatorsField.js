@@ -13,6 +13,7 @@ import {
   //useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import type { SolanaValidator } from "@ledgerhq/live-common/lib/families/solana/types";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -41,9 +42,9 @@ const ValidatorField = ({
   //onChangeDelegations,
   status,
   bridgePending,
-}: //delegations,
-//validators,
-Props) => {
+}: Props) => {
+  if (!status) return null;
+
   invariant(account && account.solanaResources, "solana account and resources required");
 
   const { solanaResources } = account;
@@ -52,7 +53,9 @@ Props) => {
 
   const unit = getAccountUnit(account);
 
-  const { validators } = useSolanaPreloadData();
+  const { validators } = useSolanaPreloadData(account.currency);
+
+  //const SR = validators;
 
   //const SR = useSortedValidators(search, vali, formattedDelegations);
   //const currentDelegations = mapDelegations(delegations, solanaValidators, unit);
@@ -105,101 +108,65 @@ Props) => {
     }
   }, []);
 
-  const renderItem = useCallback(
-    ({ validator, rank }: CosmosMappedValidator, i) => {
-      const item = validators.find(v => v.address === validator.validatorAddress);
-      const d = currentDelegations.find(v => v.validatorAddress === validator.validatorAddress);
+  const renderItem = (validator: SolanaValidator, i: number) => {
+    return (
+      <ValidatorRow
+        key={validator.voteAccAddr}
+        validator={{ address: validator.voteAccAddr }}
+        icon={
+          <IconContainer isSR>
+            <FirstLetterIcon label={validator.voteAccAddr} />
+          </IconContainer>
+        }
+        title={validator.voteAccAddr}
+        subtitle={
+          <>
+            <Trans i18nKey="solana.delegation.totalStake"></Trans>
+            <Text style={{ marginLeft: 5 }}>
+              {formatCurrencyUnit(unit, new BigNumber(validator.activatedStake), {
+                showCode: true,
+              })}
+            </Text>
+          </>
+        }
+        onExternalLink={onExternalLink}
+        unit={unit}
+        sideInfo={
+          <Box pr={1}>
+            <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
+              {`${validator.commission} %`}
+            </Text>
+            <Text textAlign="center" fontSize={1}>
+              <Trans i18nKey="solana.delegation.commission" />
+            </Text>
+          </Box>
+        }
+      ></ValidatorRow>
+    );
+  };
 
-      const currentMax = item
-        ? max
-        : getMaxDelegationAvailable(account, delegationsSelected + 1).minus(delegationsUsed);
-
-      const onMax = () =>
-        onUpdateDelegation(validator.validatorAddress, item ? item.amount.plus(max) : currentMax);
-
-      const disabled =
-        !item && (currentMax.lte(0) || delegationsSelected >= COSMOS_MAX_DELEGATIONS);
-
-      return (
-        <ValidatorRow
-          key={`SR_${validator.validatorAddress}_${i}`}
-          validator={{ ...validator, address: validator.validatorAddress }}
-          icon={
-            <IconContainer isSR>
-              <FirstLetterIcon label={validator.name || validator.validatorAddress} />
-            </IconContainer>
-          }
-          title={`${rank}. ${validator.name || validator.validatorAddress}`}
-          subtitle={
-            d ? (
-              <Trans
-                i18nKey="cosmos.delegation.currentDelegation"
-                values={{ amount: d.formattedAmount }}
-              >
-                <b style={{ marginLeft: 5 }}></b>
-              </Trans>
-            ) : null
-          }
-          sideInfo={
-            <Box pr={1}>
-              <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
-                {/* $FlowFixMe */}
-                {validator.estimatedYearlyRewardsRate
-                  ? `${(validator.estimatedYearlyRewardsRate * 1e2).toFixed(2)} %`
-                  : "N/A"}
-              </Text>
-              <Text textAlign="center" fontSize={1}>
-                <Trans i18nKey="cosmos.delegation.estYield" />
-              </Text>
-            </Box>
-          }
-          value={item && item.amount.toNumber()}
-          onExternalLink={onExternalLink}
-          notEnoughVotes={item && item.amount && max.lt(0)}
-          maxAvailable={max.toNumber()}
-          unit={unit}
-          onUpdateVote={onUpdateDelegation}
-          onMax={onMax}
-          shouldRenderMax={currentMax.gt(0)}
-          disabled={disabled}
-        />
-      );
-    },
-    [
-      validators,
-      onUpdateDelegation,
-      onExternalLink,
-      max,
-      unit,
-      currentDelegations,
-      delegationsSelected,
-      account,
-      delegationsUsed,
-    ],
-  );
-
-  const formatMax = max.dividedBy(10 ** unit.magnitude).toNumber();
-  const formatMaxText = formatCurrencyUnit(unit, max, { showCode: true });
-
-  if (!status) return null;
   return (
     <>
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
-      <ValidatorListHeader
-        votesSelected={delegationsSelected}
-        votesAvailable={max.toNumber()}
-        max={formatMax}
-        maxText={formatMaxText}
-        maxVotes={COSMOS_MAX_DELEGATIONS}
-        totalValidators={SR.length}
-        notEnoughVotes={notEnoughDelegations}
-      />
+      {/*
+        <ValidatorListHeader
+          votesSelected={delegationsSelected}
+          votesAvailable={max.toNumber()}
+          max={formatMax}
+          maxText={formatMaxText}
+          maxVotes={COSMOS_MAX_DELEGATIONS}
+          totalValidators={SR.length}
+          notEnoughVotes={notEnoughDelegations}
+        />
+        */}
       <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
-          data={SR}
+          data={validators}
           style={{ flex: "1 0 240px" }}
           renderItem={renderItem}
-          noResultPlaceholder={SR.length <= 0 && search && <NoResultPlaceholder search={search} />}
+          noResultPlaceholder={
+            validators.length <= 0 && search && <NoResultPlaceholder search={search} />
+          }
         />
       </Box>
     </>
