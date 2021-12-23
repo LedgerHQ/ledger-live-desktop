@@ -14,7 +14,7 @@ export class SettingsPage {
     this.aboutTab = page.locator('data-test-id=settings-about-tab');
     this.helpTab = page.locator('data-test-id=settings-help-tab');
     this.experimentalTab = page.locator('data-test-id=settings-experimental-tab');
-    this.experimentalDevModeToggle = page.locator('data-test-id=MANAGER_DEV_MODE_button');
+    this.experimentalDevModeToggle = page.locator('data-test-id=MANAGER_DEV_MODE-button');
   }
 
   async goToAccountsTab() {
