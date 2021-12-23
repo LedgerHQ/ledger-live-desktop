@@ -38,7 +38,7 @@ const ExperimentalSwitch = ({
         disabled={readOnly}
         isChecked={checked}
         onChange={readOnly ? null : handleOnChange}
-        id={`${name}_button`}
+        data-test-id={`${name}-button`}
       />
     </>
   );
