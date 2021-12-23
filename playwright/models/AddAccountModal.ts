@@ -38,4 +38,10 @@ export class AddAccountModal extends Modal {
   async done() {
     await this.doneButton.click();
   }
+
+  async waitForSync() {
+    await this.accountsListLoader.waitFor({ state: "hidden" });
+    await this.stopButton.waitFor({ state: "hidden" });
+    await this.addAccountsButton.waitFor({ state: "visible" });
+  }
 }

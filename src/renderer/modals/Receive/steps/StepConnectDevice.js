@@ -56,7 +56,7 @@ export function StepConnectDeviceFooter({
       />
       <Button
         event="Receive Flow Without Device Clicked"
-        id={"receive-connect-device-skip-device-button"}
+        data-test-id="receive-connect-device-skip-device-button"
         onClick={onSkipConfirm}
       >
         {t("receive.steps.connectDevice.withoutDevice")}

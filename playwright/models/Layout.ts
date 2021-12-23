@@ -20,6 +20,7 @@ export class Layout {
   readonly topbarSettingsButton: Locator;
   readonly topbarLockButton: Locator;
   readonly bookmarkedAccountsList: Locator;
+  readonly drawerSwapButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -35,6 +36,7 @@ export class Layout {
     this.drawerReceiveButton = page.locator('data-test-id=drawer-receive-button');
     this.drawerManagerButton = page.locator('data-test-id=drawer-manager-button');
     this.drawerBuycryptoButton = page.locator('data-test-id=drawer-exchange-button');
+    this.drawerSwapButton = page.locator('data-test-id=drawer-swap-button');
     this.drawerExperimentalButton = page.locator('data-test-id=drawer-experimental-button');
     this.bookmarkedAccountsList = page.locator("data-test-id=bookmarked-accounts");
 
@@ -65,6 +67,10 @@ export class Layout {
 
   async goToBuyCrypto() {
     await this.drawerBuycryptoButton.click();
+  }
+
+  async goToSwap() {
+    await this.drawerSwapButton.click();
   }
 
   async toggleDiscreetMode() {
