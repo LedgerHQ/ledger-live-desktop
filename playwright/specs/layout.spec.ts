@@ -37,7 +37,7 @@ test("Layout", async ({ page }) => {
   await test.step("shows a starred account, and can access the page", async () => {
     expect(await layout.bookmarkedAccounts.count()).toBe(1);
     await layout.bookmarkedAccounts.first().click();
-    expect(await accountPage.buttonsGroup).toHaveCSS("opacity", "1");
+    expect(await accountPage.buttonsGroup).toHaveCSS("opacity", "1", { timeout: 10000 });
     expect(await page.screenshot()).toMatchSnapshot("bookmarked-account-link.png");
   });
 
