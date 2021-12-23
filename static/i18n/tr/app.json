@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Artık dApp'e masaüstünüzden erişebilirsiniz.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Alım adreslerini dApps üzerinden paylaşmak güvenli değildir. Tarafınıza gönderilen fonları almak için adresinizi paylaşırken her zaman Ledger Live kullanın.",
       "disconnected": "dApp, WalletConnect ve Ledger Live arasında bir bağlantı sorunu var. Birkaç dakika bekleyin veya bağlantıyı yeniden başlatın"
     }
