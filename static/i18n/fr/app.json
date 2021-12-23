@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the {{name}} dApp on your web browser.",
+      "info": "Vous pouvez accéder à la dApp {{name}} sur votre navigateur.",
       "warning": "Partager des adresses de bénéficiaire par dApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
       "disconnected": "Il y a un problème de connexion entre la dApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
