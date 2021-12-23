@@ -1,5 +1,5 @@
 import test from "../fixtures/common";
-import { expect } from "@playwright/test";
+import { chromium, expect } from "@playwright/test";
 import { DiscoverPage } from "../models/DiscoverPage";
 // import { UploadDummyApp } from "../../src/renderer/screens/settings/sections/Developer/TestApp/UploadDummyApp.js";
 
@@ -15,8 +15,19 @@ test.beforeAll(async () => {});
 
 test("Navigate to live app", async ({ page }) => {
   const discoverPage = new DiscoverPage(page);
-  await discoverPage.navigate();
+  await discoverPage.navigateToCatalog();
+  await discoverPage.openTestApp();
   await page.pause();
+  await discoverPage.acceptLiveAppDisclaimer();
+  await page.pause();
+
+  //   // // Open new page
+  const context = await page.context();
+  const page2 = await context.newPage();
+  await page2.goto('http://localhost:3001/?theme=light&backgroundColor=%23FFFFFF&textColor=rgb%2820%2C+37%2C+51%29');
+  // Go to http://localhost:3001/?theme=light&backgroundColor=%23FFFFFF&textColor=rgb%2820%2C+37%2C+51%29
+  await page2.goto('http://localhost:3001/?theme=light&backgroundColor=%23FFFFFF&textColor=rgb%2820%2C+37%2C+51%29');
+
   expect(true).toBeTruthy();
 });
 // });

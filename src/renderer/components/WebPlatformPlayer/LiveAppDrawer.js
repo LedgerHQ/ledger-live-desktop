@@ -93,7 +93,7 @@ export const LiveAppDrawer = () => {
                   </Text>
                 </Box>
 
-                <Button primary onClick={onContinue}>
+                <Button primary onClick={onContinue} data-test-id="live-app-disclaimer-continue">
                   {t("platform.disclaimer.CTA")}
                 </Button>
               </Box>

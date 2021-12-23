@@ -1,8 +1,9 @@
 import { _electron as electron } from "playwright";
-import { test as base, expect, Page, ElectronApplication } from "@playwright/test";
+import { test as base, expect, Page, ElectronApplication, BrowserContext } from "@playwright/test";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
+import { async } from "rxjs";
 
 export function generateUUID(): string {
   return crypto.randomBytes(16).toString("hex");
@@ -17,6 +18,7 @@ type TestFixtures = {
   userdataFile: any;
   env: Record<string, any>;
   page: Page;
+  context: BrowserContext;
 };
 
 const test = base.extend<TestFixtures>({
@@ -119,6 +121,7 @@ const test = base.extend<TestFixtures>({
     // close app
     await electronApp.close();
   },
+  // context: async ()
 });
 
 export default test;
