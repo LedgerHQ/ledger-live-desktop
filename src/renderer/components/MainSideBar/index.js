@@ -380,9 +380,7 @@ const MainSideBar = () => {
             </Hide>
 
             <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-              <div data-test-id="bookmarked-accounts">
-                <Stars pathname={location.pathname} collapsed={secondAnim} />
-              </div>
+              <Stars pathname={location.pathname} collapsed={secondAnim} />
             </SideBarList>
             <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />
