@@ -42,6 +42,7 @@ const Progress = ({ state, name, updating, installing, uninstalling, isCurrent }
           justifyContent="center"
           py={1}
           maxWidth="100%"
+          data-test-id={`manager-${name}-app-progress-bar`}
         >
           <Text ff="Inter|SemiBold" fontSize={3} color="palette.primary.main">
             <Trans
