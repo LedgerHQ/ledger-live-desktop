@@ -21,7 +21,6 @@ test("Enable dev mode from settings", async ({ page }) => {
   for (const currency of currencies) {
     await test.step(`when devMode OFF -> ${currency} shouldn't be available`, async () => {
       await layout.goToAccounts();
-      await layout.goToAccounts();
       await accountsPage.openAddAccountModal();
       await addAccountModal.select(currency);
       expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
