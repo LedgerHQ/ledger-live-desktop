@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "デスクトップからdAppにアクセス可能になりました。",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "dAppsからの受取アドレスの共有は安全ではありません。資金を受け取るためのアドレスを共有するときは、必ずLedger Liveを使用してください。",
       "disconnected": "dApp、WalletConnect、Ledger Live間の接続に問題があります。しばらく待つか、接続を再起動してください。"
     }
