@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "이제 데스크탑에서 디앱에 접속할 수 있습니다.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "디앱에서 수신 주소를 공유하는 것은 안전하지 않습니다. 자금 수신을 위해 주소를 공유할 때는 언제나 Ledger Live를 이용하세요.",
       "disconnected": "디앱, WalletConnect, Ledger Live 사이에 연결 문제가 있습니다. 잠시 기다리거나 연결을 다시 시작하세요"
     }
