@@ -1140,7 +1140,7 @@
       "desc": "アカウントを追加して、他の暗号資産を管理",
       "createAccount": "アカウントを追加"
     },
-    "recentActivity": "前回の取引",
+    "recentActivity": "最近の取引",
     "totalBalance": "総資産",
     "transactionsPendingConfirmation": "一部のトランザクションはまだ承認されていません。これらは承認後に残高に反映され、使用可能になります。"
   },
