@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Sie können nun auf die dApp auf Ihrem Desktop zugreifen.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Das Teilen von Empfangsadressen von dApps ist nicht sicher. Verwenden Sie immer Ledger Live, wenn Sie Ihre Adresse teilen, um Geld zu empfangen.",
       "disconnected": "Es besteht ein Verbindungsproblem zwischen der dApp, WalletConnect und Ledger Live. Warten Sie ein paar Augenblicke oder starten Sie die Verbindung neu"
     }
