@@ -74,7 +74,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
           ) : null}
         </OpDetailsData>
       </OpDetailsSection>
-      {operation.value && operation.standard !== "ERC721" && (
+      {operation.value && operation.standard === "ERC1155" && (
         <OpDetailsSection>
           <OpDetailsTitle>{t("operationDetails.nft.amount")}</OpDetailsTitle>
           <OpDetailsData>
