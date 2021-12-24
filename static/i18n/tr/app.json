@@ -2024,22 +2024,6 @@
         }
       }
     },
-    "cryptoOrg": {
-      "account": {
-        "subHeader": {
-          "cardTitle": "Powered by Crypto.org",
-          "moreInfo": "More info",
-          "drawerTitle": "Crypto.org integration",
-          "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-          "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-          "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-          "website": "Cryptocurrency in every wallet"
-        }
-      },
-      "memo": "Memo",
-      "memoPlaceholder": "Optional",
-      "memoWarningText": "When using a memo, carefully check the information with the recipient"
-    },
     "claimRewards": {
       "flow": {
         "title": "Ödüllerinizi alın",
@@ -4077,5 +4061,21 @@
     "NotEnoughNftOwned": {
       "title": "Mevcut token miktarını aştınız"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Crypto.org",
+        "moreInfo": "More info",
+        "drawerTitle": "Crypto.org integration",
+        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+        "website": "Cryptocurrency in every wallet"
+      }
+    },
+    "memo": "Memo",
+    "memoPlaceholder": "Optional",
+    "memoWarningText": "When using a memo, carefully check the information with the recipient"
   }
 }
