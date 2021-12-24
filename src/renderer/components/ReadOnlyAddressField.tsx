@@ -59,7 +59,9 @@ function ReadOnlyAddressField({ address, extraCopyContainerProps, allowCopy = tr
             </Flex>
           </Button.Unstyled>
         ) : null}
-        <Text variant="small">{address}</Text>
+        <Text variant="small" color="inherit">
+          {address}
+        </Text>
       </Flex>
     </Flex>
   );

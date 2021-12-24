@@ -1,12 +1,15 @@
 import React, { useContext, useCallback, useState, useEffect } from "react";
+import { useTheme } from "styled-components";
 import { context } from "./Provider";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import { useDeviceBlocked } from "../components/DeviceAction/DeviceBlocker";
+import { InvertTheme } from "@ledgerhq/react-ui";
 
 export const Drawer = () => {
   const { state, setDrawer } = useContext(context);
   const [isOpen, setIsOpen] = useState(false);
   const deviceBlocked = useDeviceBlocked();
+  const theme = useTheme();
 
   const onClose = useCallback(() => {
     if (deviceBlocked) {
@@ -34,14 +37,16 @@ export const Drawer = () => {
   }, [state.open]);
 
   return (
-    <SideDrawer
-      isOpen={isOpen}
-      onClose={onClose}
-      onBack={deviceBlocked ? undefined : onBack}
-      {...state.options}
-    >
-      {state.Component && <state.Component {...state.componentProps} />}
-    </SideDrawer>
+    <InvertTheme if={state?.options?.useLightTheme && theme.theme !== "light"}>
+      <SideDrawer
+        isOpen={isOpen}
+        onClose={onClose}
+        onBack={deviceBlocked ? undefined : onBack}
+        {...state.options}
+      >
+        {state.Component && <state.Component {...state.componentProps} />}
+      </SideDrawer>
+    </InvertTheme>
   );
 };
 

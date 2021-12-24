@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Trans } from "react-i18next";
 import { useTheme } from "styled-components";
-import { Box, Flex, Icons, Link, Log, Text, Divider, Button, Alert } from "@ledgerhq/react-ui";
+import { Box, Flex, Link, Log, Text, Divider, Button, Alert } from "@ledgerhq/react-ui";
 import { rgba } from "@ledgerhq/react-ui/styles";
 import { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountName, getMainAccount } from "@ledgerhq/live-common/lib/account";

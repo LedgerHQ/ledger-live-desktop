@@ -93,7 +93,9 @@ export function StepVerifyAddress({
           <Text variant="subtitle" color="neutral.c80">
             <Trans i18nKey="v3.receive.steps.receiveFunds.address" />
           </Text>
-          <ReadOnlyAddressField address={address} />
+          <Text color="neutral.c100">
+            <ReadOnlyAddressField address={address} />
+          </Text>
         </Flex>
         <Divider variant="light" />
         <Flex alignItems="center" justifyContent="space-between">

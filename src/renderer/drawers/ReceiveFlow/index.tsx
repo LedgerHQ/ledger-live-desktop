@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect, useContext } from "react";
-import { FlowStepper } from "@ledgerhq/react-ui";
+import { FlowStepper, InvertTheme } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";
 import { Account, AccountLike, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
@@ -14,6 +14,7 @@ import { StepConnectDevice, StepConnectDeviceFooter } from "./StepConnectDevice"
 import { StepVerifyAddress } from "./StepVerifyAddress";
 import { FinalStepShareAddress } from "./FinalStepShareAddress";
 import { FinalStepVerificationError } from "./FinalStepVerificationError";
+import { useTheme } from "styled-components";
 
 type Props = React.PropsWithChildren<{
   account?: Account;
@@ -37,6 +38,7 @@ const finalStepOptions = {
   extraFooterDividerProps: {
     variant: "default" as "default" | "light",
   },
+  useLightTheme: true,
 };
 
 const stepOptions = (step: number, navigateTo: (step: number) => void) => ({

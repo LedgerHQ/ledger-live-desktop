@@ -30,6 +30,7 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
         ...PalettesV3[selectedPalette],
         palette: merge(palettesAny[selectedPalette], PalettesV3[selectedPalette]),
       },
+      theme: selectedPalette,
     }),
     [palettesAny, selectedPalette],
   );
