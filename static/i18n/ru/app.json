@@ -2024,22 +2024,6 @@
         }
       }
     },
-    "cryptoOrg": {
-      "account": {
-        "subHeader": {
-          "cardTitle": "Разработано Crypto.org",
-          "moreInfo": "Подробнее",
-          "drawerTitle": "Интеграция с Crypto.org",
-          "title": "Токен Crypto.org (CRO) теперь доступен на Ledger Live",
-          "description": "Теперь вы можете начать управлять своими монетами Crypto.org (CRO) и хранить их в Ledger Live.",
-          "description2": "Монета Crypto.org (CRO) – нативная монета блокчейна Crypto.org, которая используется для всех транзакций, стейкинга и множества предстоящих функций.",
-          "website": "Криптовалюта в каждом кошельке"
-        }
-      },
-      "memo": "Memo (примечание)",
-      "memoPlaceholder": "Опционально",
-      "memoWarningText": "При использовании Memo необходимо тщательно проверять информацию с получателем"
-    },
     "claimRewards": {
       "flow": {
         "title": "Получение вознаграждения",
@@ -4077,5 +4061,21 @@
     "NotEnoughNftOwned": {
       "title": "Вы превысили кол-во доступных токенов"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Crypto.org",
+        "moreInfo": "More info",
+        "drawerTitle": "Crypto.org integration",
+        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+        "website": "Cryptocurrency in every wallet"
+      }
+    },
+    "memo": "Memo",
+    "memoPlaceholder": "Optional",
+    "memoWarningText": "When using a memo, carefully check the information with the recipient"
   }
 }
