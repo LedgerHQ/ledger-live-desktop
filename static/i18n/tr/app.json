@@ -764,7 +764,7 @@
       "date": "Tarih",
       "info": "{{currency}} hesabınızdaki varlıkları doğrudan kredi olarak verebilir ve faiz kazanabilirsiniz.",
       "howCompoundWorks": "Compound protokolünde borç verme nasıl çalışır?",
-      "lend": "{{currency}} Yatırın"
+      "lend": "{{currency}} fonla"
     },
     "emptyState": {
       "active": {
@@ -775,12 +775,12 @@
       "closed": {
         "title": "Kapatılmış borçlarınız burada görünecektir",
         "description": "Henüz hiç borcunuz yok.",
-        "cta": "Yatır"
+        "cta": "Fonla"
       },
       "opened": {
         "title": "Açılmış borçlarınız burada görünecektir",
         "description": "Henüz hiç borcunuz yok.",
-        "cta": "Yatır"
+        "cta": "Fonla"
       },
       "history": {
         "title": "Geçmiş",
