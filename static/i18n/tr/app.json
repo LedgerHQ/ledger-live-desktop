@@ -785,7 +785,7 @@
       "history": {
         "title": "Geçmiş",
         "description": "Tüm borç işlemlerinizin geçmişini görüntüleyin.",
-        "cta": "Yatırım"
+        "cta": "Yatır"
       }
     },
     "headers": {
@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Artık dApp'e masaüstünüzden erişebilirsiniz.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Alım adreslerini dApps üzerinden paylaşmak güvenli değildir. Tarafınıza gönderilen fonları almak için adresinizi paylaşırken her zaman Ledger Live kullanın.",
       "disconnected": "dApp, WalletConnect ve Ledger Live arasında bir bağlantı sorunu var. Birkaç dakika bekleyin veya bağlantıyı yeniden başlatın"
     }
@@ -1503,6 +1503,7 @@
         "uninstall": "Kaldır",
         "notEnoughSpace": "Yeterli depolama alanı yok",
         "supported": "Ledger Live tarafından destekleniyor",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Hesap ekle",
         "addAccountTooltip": "{{appName}} hesabı ekle",
         "addAccountWarn": "Lütfen uygulama güncellemelerinin bitmesini bekleyin",
@@ -3401,7 +3402,7 @@
         "repair": {
           "title": "Nano S cihazınızı onarın",
           "desc": "Cihazınızda görüntülenen mesaj nedir?",
-          "mcuOutdated": "MCU donanım yazılımı eski sürüm",
+          "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU donanım yazılımı orijinal değil",
           "repairInstructions": "Cihaz onarım yönergelerini izleyin",
           "updateInstructions": "Cihaz güncelleme yönergelerini izleyin",
