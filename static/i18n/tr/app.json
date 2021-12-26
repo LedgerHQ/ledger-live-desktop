@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the {{name}} dApp on your web browser.",
+      "info": "Artık web tarayıcınızdan {{name}} dApp'e erişebilirsiniz.",
       "warning": "Alım adreslerini dApps üzerinden paylaşmak güvenli değildir. Tarafınıza gönderilen fonları almak için adresinizi paylaşırken her zaman Ledger Live kullanın.",
       "disconnected": "dApp, WalletConnect ve Ledger Live arasında bir bağlantı sorunu var. Birkaç dakika bekleyin veya bağlantıyı yeniden başlatın"
     }
@@ -1503,7 +1503,7 @@
         "uninstall": "Kaldır",
         "notEnoughSpace": "Yeterli depolama alanı yok",
         "supported": "Ledger Live tarafından destekleniyor",
-        "not_supported": "Requires 3rd-party wallet",
+        "not_supported": "3. taraf cüzdan gerektirir",
         "addAccount": "Hesap ekle",
         "addAccountTooltip": "{{appName}} hesabı ekle",
         "addAccountWarn": "Lütfen uygulama güncellemelerinin bitmesini bekleyin",
@@ -2658,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "Bitcoin, tüm Bitcoin fork'ları ve Tezos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -3733,7 +3733,7 @@
       "title": "Alıcı adresi etkin değil. Etkinleştirmek için en az {{minimalAmount}} gönderin"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "Ana hesap bakiyesi ağ ücretlerini karşılamak için yetersiz"
     },
     "PasswordsDontMatch": {
       "title": "Parolalar eşleşmiyor",
@@ -4065,17 +4065,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Crypto.org aracılığıyla",
+        "moreInfo": "Daha fazla bilgi",
+        "drawerTitle": "Crypto.org entegrasyonu",
+        "title": "Crypto.org (CRO) token'ı artık Ledger Live'da",
+        "description": "Artık Ledger Live ile Crypto.org (CRO) token'larınızı yönetmeye ve güvenle saklamaya başlayabilirsiniz.",
+        "description2": "Crypto.org (CRO) token'ı, Crypto.org zincirinin yerel token'ıdır ve işlemler, staking ve yakında çıkacak pek çok özellik için kullanılır.",
+        "website": "Her cüzdanda kripto para"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "İsteğe bağlı",
+    "memoWarningText": "Memo kullanırken, bilgileri alıcıyla dikkatlice kontrol edin"
   }
 }
