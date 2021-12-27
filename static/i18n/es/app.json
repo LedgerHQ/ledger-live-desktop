@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Ya puedes acceder a la dApp en Desktop.",
+      "info": "Ahora puedes acceder a la dApp {{name}} desde tu navegador web.",
       "warning": "No es seguro compartir direcciones de recepción de una dApp. Utiliza siempre Ledger Live para compartir tu dirección para recibir fondos.",
       "disconnected": "Hay un problema de conexión entre la dApp, WalletConnect y Ledger Live. Espera unos momentos o intenta de nuevo la conexión"
     }
@@ -1503,6 +1503,7 @@
         "uninstall": "Desinstalar",
         "notEnoughSpace": "No hay suficiente espacio",
         "supported": "Compatible con Ledger Live",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Agregar cuenta",
         "addAccountTooltip": "Agregar cuenta {{appName}}",
         "addAccountWarn": "Espera a que finalicen las actualizaciones de aplicaciones",
