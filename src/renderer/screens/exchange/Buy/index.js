@@ -37,13 +37,22 @@ const Footer: ThemedComponent<{}> = styled.div`
   }
 `;
 
+const ProvidersRow: ThemedComponent<{}> = styled(Box).attrs(() => ({
+  horizontal: true,
+  p: "0 40.5px",
+  width: "100%",
+  my: 48,
+}))`
+  column-gap: 24px;
+`;
+
 const ContinueButton: ThemedComponent<{}> = styled(Button).attrs(() => ({}))`
   padding: 12px 16px;
 `;
 
 type Provider = "moonpay" | "coinify" | null;
 
-const Buy = (props: DProps) => {
+const Buy = ({ defaultCurrency, defaultAccount }: DProps) => {
   const [selected, setSelected] = useState<Provider>(null);
   const [isCoinify, setIsCoinify] = useState(false);
   const { t } = useTranslation();
@@ -67,13 +76,13 @@ const Buy = (props: DProps) => {
     <BuyContainer isCoinify={isCoinify}>
       <TrackPage category="Buy Crypto" />
       {isCoinify ? (
-        <Coinify {...props} />
+        <Coinify defaultCurrency={defaultCurrency} defaultAccount={defaultAccount} />
       ) : (
         <>
           <Text ff="Inter|SemiBold" fontSize={18} color="palette.text.shade90">
             {t("exchange.buy.title")}
           </Text>
-          <Box horizontal width="100%" p="0 40.5px" my={48}>
+          <ProvidersRow>
             <SelectProvider
               provider="MoonPay"
               cryptoCount={40}
@@ -90,7 +99,7 @@ const Buy = (props: DProps) => {
             >
               <CoinifySquare size={48} />
             </SelectProvider>
-          </Box>
+          </ProvidersRow>
           <Footer>
             <ContinueButton primary disabled={!selected} onClick={onContinue}>
               {t("common.continue")}

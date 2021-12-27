@@ -38,7 +38,7 @@ export type DProps = {
   defaultAccount?: ?Account,
 };
 
-const Exchange = (props: DProps) => {
+const Exchange = () => {
   const location = useLocation();
   const [provider] = useExchangeProvider();
   const { state } = location;
@@ -57,7 +57,11 @@ const Exchange = (props: DProps) => {
         onIndexChange={setActiveTabIndex}
       />
       <Card grow style={{ overflow: "hidden" }}>
-        <Component {...(location && location.state)} {...props} provider={provider} />
+        <Component
+          defaultCurrency={state?.defaultCurrency}
+          defaultAccount={state?.defaultAccount}
+          provider={provider}
+        />
       </Card>
     </Container>
   );

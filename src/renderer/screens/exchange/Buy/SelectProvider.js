@@ -14,14 +14,10 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(p => ({
   alignItems: "center",
   cursor: "pointer",
   boxShadow: p.isActive ? `0 0 0 4px ${rgba(p.theme.colors.palette.primary.main, 0.25)}` : "",
+  grow: 1,
 }))`
   border: 1px solid ${p => p.theme.colors.palette.divider};
   border-radius: 4px;
-  width: calc(50% - 12px);
-
-  :last-of-type {
-    margin-left: 24px;
-  }
 
   &:hover {
     ${p =>
