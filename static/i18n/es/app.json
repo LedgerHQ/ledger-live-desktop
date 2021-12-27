@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Ahora puedes acceder a la dApp {{name}} desde tu navegador web.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "No es seguro compartir direcciones de recepción de una dApp. Utiliza siempre Ledger Live para compartir tu dirección para recibir fondos.",
       "disconnected": "Hay un problema de conexión entre la dApp, WalletConnect y Ledger Live. Espera unos momentos o intenta de nuevo la conexión"
     }
