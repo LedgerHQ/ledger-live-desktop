@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import React, { useCallback, useState, useRef, useEffect, useMemo } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
 import type { TFunction } from "react-i18next";
@@ -28,8 +28,6 @@ import Text from "~/renderer/components/Text";
 
 type Props = {
   t: TFunction,
-  //validators: CosmosDelegationInfo[],
-  //delegations: CosmosDelegation[],
   account: Account,
   status: TransactionStatus,
   //onChangeDelegations: (updater: (CosmosDelegationInfo[]) => CosmosDelegationInfo[]) => void,
@@ -55,32 +53,9 @@ const ValidatorField = ({
 
   const { validatorsWithMeta } = useSolanaPreloadData(account.currency);
 
-  //const SR = validators;
-
-  //const SR = useSortedValidators(search, vali, formattedDelegations);
-  //const currentDelegations = mapDelegations(delegations, solanaValidators, unit);
-
-  //const delegationsUsed = validators.reduce((sum, v) => sum.plus(v.amount), BigNumber(0));
-  //const delegationsSelected = validators.length;
-
-  //const max = getMaxDelegationAvailable(account, delegationsSelected).minus(delegationsUsed);
-
-  /*
-  const onUpdateDelegation = useCallback(
-    (address, value) => {
-      const amount = BigNumber(value);
-
-      onChangeDelegations(existing => {
-        const update = existing.filter(v => v.address !== address);
-        if (amount.gt(0)) {
-          update.push({ address, amount });
-        }
-        return update;
-      });
-    },
-    [onChangeDelegations],
-  );
-  */
+  const validatorsWithMetaSearched = validatorsWithMeta.filter(({ meta, validator }) => {
+    return meta.name?.startsWith(search) || validator.voteAccAddr.startsWith(search);
+  });
 
   const containerRef = useRef();
 
@@ -96,8 +71,6 @@ const ValidatorField = ({
   );
 
   const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
-
-  //const notEnoughDelegations = max.lt(0);
 
   /** auto focus first input on mount */
   useEffect(() => {
@@ -151,11 +124,12 @@ const ValidatorField = ({
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
       <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
-          data={validatorsWithMeta}
+          data={validatorsWithMetaSearched}
           style={{ flex: "1 0 240px" }}
           renderItem={renderItem}
           noResultPlaceholder={
-            validatorsWithMeta.length <= 0 && search && <NoResultPlaceholder search={search} />
+            validatorsWithMetaSearched.length <= 0 &&
+            search.length > 0 && <NoResultPlaceholder search={search} />
           }
         />
       </Box>
