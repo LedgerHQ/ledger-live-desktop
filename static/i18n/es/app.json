@@ -4071,11 +4071,11 @@
         "title": "El token de Crypto.org (CRO) ya está disponible en Ledger Live",
         "description": "Ahora puedes gestionar tus tokens de Crypto.org (CRO) y protegerlos con Ledger Live.",
         "description2": "El token Crypto.org (CRO) es nativo de la cadena Crypto.org y se utiliza para todo tipo de transacciones, poner en participación y muchas características futuras.",
-        "website": "Cryptocurrency in every wallet"
+        "website": "Criptomonedas en todas las billeteras"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "Opcional",
+    "memoWarningText": "Al utilizar un Memo, comprueba cuidadosamente la información con el receptor"
   }
 }
