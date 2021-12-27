@@ -1,5 +1,5 @@
 const core = require("@actions/core");
-const fetch = require("isomorphic-unfetch");
+// const fetch = require("isomorphic-unfetch");
 const { promises: fs } = require("fs");
 
 const main = async () => {
@@ -64,13 +64,13 @@ ${str}
 </details>
 `;
 
-  const strSlack = `
-Lint outputs ${lintFailed ? "❌" : " ✅"}
-Jest outputs ${jestFailed ? "❌" : " ✅"}
-Diff output ${imgDiffFailed ? "❌" : " ✅"}
+  //   const strSlack = `
+  // Lint outputs ${lintFailed ? "❌" : " ✅"}
+  // Jest outputs ${jestFailed ? "❌" : " ✅"}
+  // Diff output ${imgDiffFailed ? "❌" : " ✅"}
 
-https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
-`;
+  // https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
+  // `;
 
   // const githubSlackMap = {
   //   machard: "U01DJR04M8Q",
@@ -82,32 +82,34 @@ https://github.com/LedgerHQ/ledger-live-desktop/commits/develop
   //   IAmMorrow: "UKFTXAZGF",
   // };
 
-  const strSlackAuthor = `
-Lint outputs ${lintFailed ? "❌" : " ✅"}
-Jest outputs ${jestFailed ? "❌" : " ✅"}
-Diff output ${imgDiffFailed ? "❌" : " ✅"}
+  // const strSlackAuthor = `
+  // Lint outputs ${lintFailed ? "❌" : " ✅"}
+  // Jest outputs ${jestFailed ? "❌" : " ✅"}
+  // Diff output ${imgDiffFailed ? "❌" : " ✅"}
+  // `;
 
-`;
   // https://github.com/LedgerHQ/ledger-live-desktop/pull/${pullId}
 
-  core.setOutput("bodySlack", strSlack);
-  core.setOutput("bodySlackAuthor", strSlackAuthor);
+  // core.setOutput("bodySlack", strSlack);
+  // core.setOutput("bodySlackAuthor", strSlackAuthor);
   // core.setOutput("slackAuthor", githubSlackMap[author] || "");
 
   console.log(str);
 
-  const sha = core.getInput("sha");
+  // const sha = core.getInput("sha");
 
-  await fetch(
-    `https://github-actions-live.ledger.tools/api/comment/v2?owner=LedgerHQ&repo=ledger-live-desktop&sha=${sha}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ comment: str }),
-    },
-  );
+  // await fetch(
+  //   `https://github-actions-live.ledger.tools/api/comment/v2?owner=LedgerHQ&repo=ledger-live-desktop&sha=${sha}`,
+  //   {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ comment: str }),
+  //   },
+  // );
+
+  core.setOutput("body", str);
 };
 
 main().catch(err => core.setFailed(err));

@@ -1,4 +1,4 @@
-name: "[Report] Screenshot Testing Reports"
+name: "Report | Screenshot Testing Reports"
 on:
   workflow_dispatch:
     inputs:
@@ -7,8 +7,8 @@ on:
         required: true
 
   workflow_run:
-    workflows: ["[Tests] Screenshot Testing"]
-    branches: ["chore/fix-builds"]
+    workflows: ["Tests | Screenshot Testing"]
+    branches: [LL-8541-4]
     types:
       - "completed"
 
@@ -136,3 +136,12 @@ jobs:
             }
 
             fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
+      - name: prepare comment body
+        id: comment-body
+        uses: ./.github/actions/prepare-comment
+        with:
+          images: images.json
+          lintoutput: tests-reports/lint.txt
+          jestoutput: tests-reports/jest.txt
+      - name: display comment
+        run: echo ${{ steps.comment-body.outputs.body }}
