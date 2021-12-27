@@ -77,7 +77,13 @@ jobs:
         run: yarn build
       - name: tests
         if: always()
-        run: yarn test 2> >(tee jest.txt)
+        run: yarn test --silent --ci --coverage --json --testLocationInResults --outputFile=report.json 2> >(tee jest.txt)
+      - uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        with:
+          github-token: ${{ github.token }}
+          package-manager: yarn
+          skip-step: all
+          coverage-file: ./report.json
       - name: run ui tests (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur

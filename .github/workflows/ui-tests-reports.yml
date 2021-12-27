@@ -135,10 +135,6 @@ jobs:
             }
 
             fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
-      - name: ls on files
-        run: |
-          ls
-          cat pr/NR
       - name: prepare comment body
         id: comment-body
         uses: ledgerhq/actions/packages/prepare-comment@main
@@ -153,12 +149,10 @@ jobs:
             const fs = require("fs");
             const issueNumber = Number(fs.readFileSync("./pr/NR"));
 
-            console.log(issueNumber)
-
             await github.rest.issues.createComment({
-              owner: "ledgerhq",
+              owner: "LedgerHQ",
               repo: "ledger-live-desktop",
-              issues_number: issueNumber,
+              issue_number: issueNumber,
               body: `
                 ${{ steps.comment-body.outputs.body }}
               `
