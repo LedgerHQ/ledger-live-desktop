@@ -13,7 +13,7 @@ import {
   //useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import type { SolanaValidator } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { SolanaValidatorWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -53,7 +53,7 @@ const ValidatorField = ({
 
   const unit = getAccountUnit(account);
 
-  const { validators } = useSolanaPreloadData(account.currency);
+  const { validatorsWithMeta } = useSolanaPreloadData(account.currency);
 
   //const SR = validators;
 
@@ -108,7 +108,8 @@ const ValidatorField = ({
     }
   }, []);
 
-  const renderItem = (validator: SolanaValidator, i: number) => {
+  const renderItem = (validatorWithMeta: SolanaValidatorWithMeta, i: number) => {
+    const { validator, meta } = validatorWithMeta;
     return (
       <ValidatorRow
         key={validator.voteAccAddr}
@@ -118,7 +119,7 @@ const ValidatorField = ({
             <FirstLetterIcon label={validator.voteAccAddr} />
           </IconContainer>
         }
-        title={validator.voteAccAddr}
+        title={meta.name ?? validator.voteAccAddr}
         subtitle={
           <>
             <Trans i18nKey="solana.delegation.totalStake"></Trans>
@@ -150,11 +151,11 @@ const ValidatorField = ({
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
       <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
-          data={validators}
+          data={validatorsWithMeta}
           style={{ flex: "1 0 240px" }}
           renderItem={renderItem}
           noResultPlaceholder={
-            validators.length <= 0 && search && <NoResultPlaceholder search={search} />
+            validatorsWithMeta.length <= 0 && search && <NoResultPlaceholder search={search} />
           }
         />
       </Box>
