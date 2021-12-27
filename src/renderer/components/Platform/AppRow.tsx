@@ -4,10 +4,7 @@ import styled, { css } from "styled-components";
 import { Box, Flex, Text } from "@ledgerhq/react-ui";
 import LiveAppIcon from "../WebPlatformPlayer/LiveAppIcon";
 import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
-import {
-  listCryptoCurrencies,
-  listSupportedCurrencies,
-} from "@ledgerhq/live-common/lib/currencies";
+import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import { useTranslation } from "react-i18next";
 
@@ -110,7 +107,7 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
     icon,
     name,
     branch,
-    params: { networks = [] } = {},
+    params: { networks } = {},
     categories: [category],
     content: {
       description: { en: description },
@@ -128,7 +125,7 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
 
   const networksCurrencies: CryptoCurrency[] = useMemo(() => {
     const currencies = listSupportedCurrencies();
-    return networks.map(({ currency }) => currencies.find(c => c.id === currency));
+    return networks ? networks.map(({ currency }) => currencies.find(c => c.id === currency)) : [];
   }, [networks]);
   return (
     <Container disabled={isDisabled} onClick={handleClick}>

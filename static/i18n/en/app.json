@@ -30,6 +30,21 @@
         "experimental": "experimental",
         "debug": "debug"
       },
+      "category": {
+        "card": "Card",
+        "buy": "Buy",
+        "swap": "Swap",
+        "defi": "Defi",
+        "staking": "Staking",
+        "gift cards": "Gift Cards",
+        "exchange": "Exchange",
+        "portfolio": "Portfolio",
+        "nft": "NFT",
+        "lend": "Lend",
+        "compound": "Compound",
+        "dex": "Decentralized Exchange",
+        "tools": "Tools"
+      },
       "banner": {
         "title": "Discover our Live Apps Catalog",
         "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
