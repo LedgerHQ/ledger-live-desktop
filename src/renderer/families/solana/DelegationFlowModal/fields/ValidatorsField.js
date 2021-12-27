@@ -148,17 +148,6 @@ const ValidatorField = ({
   return (
     <>
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
-      {/*
-        <ValidatorListHeader
-          votesSelected={delegationsSelected}
-          votesAvailable={max.toNumber()}
-          max={formatMax}
-          maxText={formatMaxText}
-          maxVotes={COSMOS_MAX_DELEGATIONS}
-          totalValidators={SR.length}
-          notEnoughVotes={notEnoughDelegations}
-        />
-        */}
       <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
           data={validators}

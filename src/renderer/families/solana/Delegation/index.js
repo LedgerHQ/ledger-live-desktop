@@ -8,7 +8,10 @@ import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 //import { canDelegate } from "@ledgerhq/live-common/lib/families/solana/logic";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import { useSolanaPreloadData } from "@ledgerhq/live-common/lib/families/solana/react";
+import {
+  useSolanaPreloadData,
+  useSolanaStakesWithMeta,
+} from "@ledgerhq/live-common/lib/families/solana/react";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -39,13 +42,12 @@ const Wrapper = styled(Box).attrs(() => ({
 `;
 
 const Delegation = ({ account }: Props) => {
+  const { solanaResources } = account;
+  invariant(solanaResources, "solana account and resources expected");
+
   const dispatch = useDispatch();
 
-  const solanaPreloadData = useSolanaPreloadData(account.currency);
-
-  const { solanaResources } = account;
-  invariant(solanaResources, "solana account expected");
-  const { stakes } = solanaResources;
+  const stakesWithMeta = useSolanaStakesWithMeta(account.currency, solanaResources.stakes);
 
   //const delegationEnabled = canDelegate(account);
   const delegationEnabled = true;
@@ -104,7 +106,7 @@ const Delegation = ({ account }: Props) => {
     [explorerView],
   );
 
-  const hasStakes = stakes.length > 0;
+  const hasStakes = stakesWithMeta.length > 0;
 
   return (
     <>
@@ -138,10 +140,10 @@ const Delegation = ({ account }: Props) => {
         {hasStakes ? (
           <>
             <Header />
-            {stakes.map(stake => (
+            {stakesWithMeta.map(stakeWithMeta => (
               <Row
-                stake={stake}
-                key={stake.stakeAccAddr}
+                stakeWithMeta={stakeWithMeta}
+                key={stakeWithMeta.stakeAccAddr}
                 account={account}
                 onManageAction={onRedirect}
                 onExternalLink={onExternalLink}

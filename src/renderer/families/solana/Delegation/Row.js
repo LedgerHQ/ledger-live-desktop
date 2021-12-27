@@ -6,7 +6,7 @@ import { Trans } from "react-i18next";
 import moment from "moment";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { SolanaStake } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
@@ -85,7 +85,7 @@ const ManageDropDownItem = ({
 
 type Props = {
   account: Account,
-  stake: SolanaStake,
+  stakeWithMeta: SolanaStakeWithMeta,
   onManageAction: (
     address: string,
     action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
@@ -93,7 +93,7 @@ type Props = {
   onExternalLink: (address: string) => void,
 };
 
-export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
+export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: Props) {
   const onSelect = useCallback(
     action => {
       //onManageAction(validatorAddress, action.key);
@@ -109,6 +109,8 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
   //const redelegationDate = !_canRedelegate && getRedelegationCompletionDate(account, delegation);
   //const formattedRedelegationDate = redelegationDate ? moment(redelegationDate).fromNow() : "";
   //
+
+  const { stake, meta } = stakeWithMeta;
 
   const stakeActions = solanaStakeActions(stake.activation.state).map(toStakeDropDownItem);
 
@@ -157,7 +159,11 @@ export function Row({ account, stake, onManageAction, onExternalLink }: Props) {
   );
   */
   //const name = validator?.name ?? validatorAddress;
-  const validatorName = stake.delegation?.voteAccAddr ?? "Not Delegated";
+  const isDelegated = stake.delegation !== undefined;
+
+  const validatorName = isDelegated
+    ? meta.validator?.name ?? stake.delegation.voteAccAddr
+    : "Not Delegated";
 
   /*
   const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
