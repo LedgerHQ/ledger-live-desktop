@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Özellikler",
         "description": "Açıklama",
-        "contract": "Sözleşme adresi",
+        "tokenAddress": "Token Address",
         "tokenId": "Token Kimliği",
         "quantity": "Miktar"
       }
