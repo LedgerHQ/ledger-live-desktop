@@ -157,7 +157,6 @@ export function NFTViewerDrawer({
               fontSize={5}
               lineHeight="18px"
               color="palette.text.shade50"
-              uppercase
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
@@ -169,6 +168,7 @@ export function NFTViewerDrawer({
               fontSize={7}
               lineHeight="29px"
               color="palette.text.shade100"
+              uppercase
               pb={5}
             >
               {name}
