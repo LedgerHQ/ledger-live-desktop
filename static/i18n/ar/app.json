@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "خصائص",
         "description": "الوصف",
-        "contract": "عنوان العَقد",
+        "tokenAddress": "Token Address",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
       }
@@ -1503,6 +1503,7 @@
         "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "لا توجد مساحة تخزين كافية",
         "supported": "ليدجر لايف (Ledger Live) مدعوم",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
