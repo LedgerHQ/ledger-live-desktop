@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "プロパティ",
         "description": "説明",
-        "contract": "コントラクトアドレス",
+        "tokenAddress": "Token Address",
         "tokenId": "トークンID",
         "quantity": "数量"
       }
