@@ -213,7 +213,7 @@ export function NFTViewerDrawer({
               color="palette.text.shade60"
               fontWeight="400"
             >
-              {t("NFT.viewer.attributes.contract")}
+              {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
               <CopiableField value={nft.collection.contract} />
