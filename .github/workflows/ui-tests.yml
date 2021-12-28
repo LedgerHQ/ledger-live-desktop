@@ -84,6 +84,7 @@ jobs:
           package-manager: yarn
           skip-step: all
           coverage-file: ./report.json
+          base-coverage-file: ./report.json
       - name: run ui tests (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur
