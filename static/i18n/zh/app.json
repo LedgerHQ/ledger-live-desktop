@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "属性",
         "description": "描述",
-        "contract": "合约地址",
+        "tokenAddress": "Token Address",
         "tokenId": "代币 ID",
         "quantity": "数量"
       }
@@ -1503,6 +1503,7 @@
         "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live 支持",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
