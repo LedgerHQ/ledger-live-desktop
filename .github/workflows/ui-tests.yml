@@ -41,6 +41,9 @@ jobs:
     name: "[Linux] UI"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: prepare runner
         run: |
