@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Propiedades",
         "description": "Descripción",
-        "contract": "Dirección de contrato",
+        "tokenAddress": "Token Address",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
       }
