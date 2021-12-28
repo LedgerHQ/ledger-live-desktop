@@ -1,17 +1,12 @@
 // @flow
 
 import React, { useCallback, useState } from "react";
-import type { CryptoCurrency, TokenCurrency, Account } from "@ledgerhq/live-common/lib/types";
 import Connect from "./Connect";
 import MissingOrOutdatedSellApp from "./MissingOrOutdatedSellApp";
 import Sell from "./Sell";
+import type { DProps } from "~/renderer/screens/exchange";
 
-type Props = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
-};
-
-const MaybeSell = ({ defaultCurrency, defaultAccount }: Props) => {
+const MaybeSell = ({ defaultCurrency, defaultAccount }: DProps) => {
   const [installedApps, setInstalledApps] = useState();
 
   const onSetResult = useCallback(
