@@ -4068,14 +4068,14 @@
         "cardTitle": "Powered by Crypto.org",
         "moreInfo": "詳細",
         "drawerTitle": "Crypto.orgを統合",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+        "title": "Crypto.org (CRO) トークンがLedger Liveで利用可能になりました",
+        "description": "Crypto.org (CRO) トークンを管理し、Ledger Liveを通じて保護することができます。",
+        "description2": "Crypto.orgチェーンのネイティブトークンであるCrypto.org (CRO) は、トランザクション、ステーキングに利用されています。今後さらに多くの機能へ対応予定です。",
         "website": "Cryptocurrency in every wallet"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "任意",
+    "memoWarningText": "Memoを使用する場合は、送付先とMemoのタイプをしっかりと確認してください。"
   }
 }
