@@ -10,8 +10,11 @@ import Track from "~/renderer/analytics/Track";
 
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
 
+import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+
+import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
@@ -29,6 +32,7 @@ import StepDelegation, { StepDelegationFooter } from "./steps/StepDelegation";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
+import { BigNumber } from "bignumber.js";
 
 type OwnProps = {|
   stepId: StepId,
@@ -112,14 +116,14 @@ const Body = ({
 
     invariant(account && account.solanaResources, "solana: account and solana resources required");
 
-    const bridge = getAccountBridge(account, undefined);
+    const bridge: AccountBridge<Transaction> = getAccountBridge(account, undefined);
 
-    const t = bridge.createTransaction(account);
-
-    const transaction = bridge.updateTransaction(t, {
-      mode: "delegate",
-      validators: [],
-      recipient: account.freshAddress,
+    const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
+      amount: new BigNumber(0.1),
+      model: {
+        kind: "stake.createAccount",
+        uiState: {},
+      },
     });
 
     return { account, parentAccount: undefined, transaction };

@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import type { StepProps } from "../types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -12,35 +12,44 @@ import ValidatorsField from "../fields/ValidatorsField";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
+import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
+import type {
+  SolanaValidatorWithMeta,
+  Transaction,
+} from "@ledgerhq/live-common/lib/families/solana/types";
+
 export default function StepDelegation({
   account,
   parentAccount,
   onUpdateTransaction,
   transaction,
   status,
-  bridgePending,
   error,
   t,
 }: StepProps) {
-  invariant(account && transaction && transaction, "account and transaction required");
-  const bridge = getAccountBridge(account, parentAccount);
-
+  invariant(
+    account && account.solanaResources && transaction,
+    "solana account, resources and transaction required",
+  );
   const { solanaResources } = account;
 
-  invariant(solanaResources, "solanaResources required");
+  const updateValidator = ({ address }: { address: string }) => {
+    const bridge: AccountBridge<Transaction> = getAccountBridge(account, parentAccount);
+    onUpdateTransaction(tx => {
+      return bridge.updateTransaction(transaction, {
+        model: {
+          kind: "stake.createAccount",
+          uiState: {
+            delegate: {
+              voteAccAddress: address,
+            },
+          },
+        },
+      });
+    });
+  };
 
-  const delegations = solanaResources.delegations || [];
-
-  const updateDelegation = useCallback(
-    updater => {
-      onUpdateTransaction(transaction =>
-        bridge.updateTransaction(transaction, {
-          validators: updater(transaction.validators || []),
-        }),
-      );
-    },
-    [bridge, onUpdateTransaction],
-  );
+  const chosenVoteAccAddr = transaction.model.uiState.delegate?.voteAccAddress;
 
   return (
     <Box flow={1}>
@@ -48,10 +57,8 @@ export default function StepDelegation({
       {error && <ErrorBanner error={error} />}
       <ValidatorsField
         account={account}
-        validators={transaction.validators || []}
-        delegations={delegations}
-        bridgePending={bridgePending}
-        onChangeDelegations={updateDelegation}
+        chosenVoteAccAddr={chosenVoteAccAddr}
+        onChangeValidator={updateValidator}
         status={status}
         t={t}
       />

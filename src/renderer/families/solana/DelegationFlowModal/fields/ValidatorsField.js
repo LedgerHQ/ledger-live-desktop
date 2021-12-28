@@ -30,17 +30,11 @@ type Props = {
   t: TFunction,
   account: Account,
   status: TransactionStatus,
-  //onChangeDelegations: (updater: (CosmosDelegationInfo[]) => CosmosDelegationInfo[]) => void,
-  bridgePending: boolean,
+  chosenVoteAccAddr: ?string,
+  onChangeValidator: (v: SolanaValidatorWithMeta) => void,
 };
 
-const ValidatorField = ({
-  t,
-  account,
-  //onChangeDelegations,
-  status,
-  bridgePending,
-}: Props) => {
+const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
   if (!status) return null;
 
   invariant(account && account.solanaResources, "solana account and resources required");
@@ -53,9 +47,11 @@ const ValidatorField = ({
 
   const { validatorsWithMeta } = useSolanaPreloadData(account.currency);
 
-  const validatorsWithMetaSearched = validatorsWithMeta.filter(({ meta, validator }) => {
-    return meta.name?.startsWith(search) || validator.voteAccAddr.startsWith(search);
-  });
+  const validatorsWithMetaSearched = useMemo(() => {
+    return validatorsWithMeta.filter(({ meta, validator }) => {
+      return meta.name?.startsWith(search) || validator.voteAccAddr.startsWith(search);
+    });
+  }, [validatorsWithMeta, search]);
 
   const containerRef = useRef();
 
@@ -70,7 +66,7 @@ const ValidatorField = ({
     [explorerView],
   );
 
-  const onSearch = useCallback(evt => setSearch(evt.target.value), [setSearch]);
+  const onSearch = (event: SyntheticInputEvent<HTMLInputElement>) => setSearch(event.target.value);
 
   /** auto focus first input on mount */
   useEffect(() => {
@@ -81,10 +77,13 @@ const ValidatorField = ({
     }
   }, []);
 
-  const renderItem = (validatorWithMeta: SolanaValidatorWithMeta, i: number) => {
+  const renderItem = (validatorWithMeta: SolanaValidatorWithMeta) => {
     const { validator, meta } = validatorWithMeta;
     return (
       <ValidatorRow
+        // HACK: if value > 0 then row is shown as active
+        value={chosenVoteAccAddr === validatorWithMeta.validator.voteAccAddr ? 1 : 0}
+        onClick={onChangeValidator}
         key={validator.voteAccAddr}
         validator={{ address: validator.voteAccAddr }}
         icon={

@@ -61,7 +61,7 @@ const Delegation = ({ account }: Props) => {
 
   const onEarnRewards = useCallback(() => {
     dispatch(
-      openModal("MODAL_COSMOS_REWARDS_INFO", {
+      openModal("MODAL_SOLANA_DELEGATE", {
         account,
       }),
     );
