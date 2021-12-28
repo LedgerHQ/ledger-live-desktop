@@ -169,7 +169,6 @@ export function NFTViewerDrawer({
               fontSize={7}
               lineHeight="29px"
               color="palette.text.shade100"
-              uppercase
               pb={5}
             >
               {name}
