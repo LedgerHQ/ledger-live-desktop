@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Sie können nun auf die dApp auf Ihrem Desktop zugreifen.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Das Teilen von Empfangsadressen von dApps ist nicht sicher. Verwenden Sie immer Ledger Live, wenn Sie Ihre Adresse teilen, um Geld zu empfangen.",
       "disconnected": "Es besteht ein Verbindungsproblem zwischen der dApp, WalletConnect und Ledger Live. Warten Sie ein paar Augenblicke oder starten Sie die Verbindung neu"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Eigenschaften",
         "description": "Beschreibung",
-        "contract": "Vertragsadresse",
+        "tokenAddress": "Token Address",
         "tokenId": "Token ID",
         "quantity": "Menge"
       }
@@ -1503,6 +1503,7 @@
         "uninstall": "Deinstallieren",
         "notEnoughSpace": "Nicht genug Speicherplatz",
         "supported": "Ledger Live unterstützt",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Konto hinzufügen",
         "addAccountTooltip": "Konto {{appName}} hinzufügen",
         "addAccountWarn": "Bitte warten Sie, bis die App-Updates abgeschlossen sind",
