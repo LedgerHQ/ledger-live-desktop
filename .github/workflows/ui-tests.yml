@@ -41,6 +41,9 @@ jobs:
     name: "[Linux] UI"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: prepare runner
         run: |
@@ -77,8 +80,17 @@ jobs:
         run: yarn build
       - name: tests
         if: always()
-        run: yarn test 2> >(tee jest.txt)
+        run: yarn test --silent --ci --coverage --json --testLocationInResults --outputFile=report.json 2> >(tee jest.txt)
+      - uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        if: github.event.pull_request != ''
+        with:
+          github-token: ${{ github.token }}
+          package-manager: yarn
+          skip-step: all
+          coverage-file: ./report.json
+          annotations: none
       - name: run ui tests (Linux)
+        if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur
         if: always()

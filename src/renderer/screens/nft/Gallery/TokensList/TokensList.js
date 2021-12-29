@@ -7,7 +7,6 @@ import type { Account, NFT } from "@ledgerhq/live-common/lib/types";
 import Box from "~/renderer/components/Box";
 import { useSelector } from "react-redux";
 import { nftsViewModeSelector } from "~/renderer/reducers/settings";
-import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
 import Spinner from "~/renderer/components/Spinner";
 import Item from "./Item";
 
@@ -50,15 +49,13 @@ const TokensList = ({ account, isLoading, nfts, collectionId }: Props) => {
   return (
     <Container mb={20} mode={nftsViewMode}>
       {nfts.map(nft => (
-        <NFTContextMenu key={nft.id} contract={collectionId} tokenId={nft.tokenId}>
-          <Item
-            mode={nftsViewMode}
-            id={nft.id}
-            tokenId={nft.tokenId}
-            contract={collectionId}
-            account={account}
-          />
-        </NFTContextMenu>
+        <Item
+          mode={nftsViewMode}
+          id={nft.id}
+          tokenId={nft.tokenId}
+          contract={collectionId}
+          account={account}
+        />
       ))}
       {isLoading && (
         <SpinnerContainer>
