@@ -3608,7 +3608,7 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Maalesef, güncelleme başarısız",
+      "title": "Üzgünüz, güncelleme başarısız",
       "description": "Lütfen tekrar deneyin veya Ledger Destek ile iletişime geçin."
     },
     "DeviceHalted": {
@@ -3692,7 +3692,7 @@
       "description": "Kripto varlıklarınıza erişim sağlamak için gerekli olan özel anahtarlar cihazınızda güvenle saklanır ve Kurtarma kağıdınıza yedeklenmelidir."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Maalesef, yeterli depolama alanı kalmadı",
+      "title": "Üzgünüz, yeterli depolama alanı kalmadı",
       "description": "Yer açmak için uygulamalardan bazılarını kaldırın. Kripto varlıklarınıza erişim sağlamak için gerekli olan özel anahtarlar cihazınızda güvenle saklanır."
     },
     "ManagerQuitPage": {
