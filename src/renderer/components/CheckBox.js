@@ -64,7 +64,7 @@ const Base: ThemedComponent<{
   ${p => (p.disabled ? `pointer-events: none; cursor: default;` : "")}
 `;
 
-type Props = {
+export type Props = {
   isChecked: boolean,
   onChange?: Function,
   isRadio?: boolean,

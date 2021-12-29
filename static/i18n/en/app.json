@@ -30,6 +30,9 @@
         "experimental": "experimental",
         "debug": "debug"
       },
+      "networks": "Networks",
+      "noNetwork": "No network",
+      "categories": "Categories",
       "category": {
         "card": "Card",
         "buy": "Buy",
@@ -73,6 +76,8 @@
     }
   },
   "common": {
+    "all": "All",
+    "none": "None",
     "never": "Never",
     "apply": "Apply",
     "done": "Done",

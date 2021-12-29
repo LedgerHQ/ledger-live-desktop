@@ -8,7 +8,7 @@ import {
   allowExperimentalAppsSelector,
   dismissedBannersSelector,
 } from "~/renderer/reducers/settings";
-import { Text, Flex, Box, Button, Icons } from "@ledgerhq/react-ui";
+import { Text, Flex } from "@ledgerhq/react-ui";
 
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
@@ -79,13 +79,13 @@ const PlatformCatalog = () => {
   );
 
   return (
-    <>
+    <Flex flexDirection="column" pb="60px">
       <TrackPage category="Platform" name="Catalog" />
       <Title mb="48px">{t("platform.catalog.title")}</Title>
       <SectionSuggested manifests={filteredManifests} handleClick={handleClick} />
       <SectionRecentlyUsed manifests={filteredManifests} handleClick={handleClick} />
       <SectionLiveApps manifests={filteredManifests} handleClick={handleClick} />
-    </>
+    </Flex>
   );
 };
 

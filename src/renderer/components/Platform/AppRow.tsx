@@ -21,11 +21,7 @@ const Container = styled(Flex).attrs({
   ${p =>
     p.disabled
       ? css`
-          opacity: 0.5;
-          > :first-child {
-            filter: grayscale(100%);
-            margin-top: 10px;
-          }
+          opacity: 0.6;
         `
       : css`
           cursor: pointer;
@@ -68,22 +64,29 @@ const Description = styled(Text).attrs({
   text-overflow: ellipsis;
 `;
 
-/* TODO at some point: reuse react-ui's Tag, it's just not working properly in pre-v3 environment */
-const TagContainer = styled(Flex).attrs({
-  padding: "3px 5px",
-  borderRadius: "4px",
-})`
-  border: 1px solid ${p => p.theme.colors.neutral.c70};
-`;
+type TagProps = {
+  highlight?: boolean;
+  disabled?: boolean;
+};
 
-const TagText = styled(Text).attrs({
+/* TODO at some point: reuse react-ui's Tag, it's just not working properly in pre-v3 environment */
+const TagContainer = styled(Flex).attrs((p: TagProps) => ({
+  padding: "3px 5px",
+  backgroundColor: p.highlight ? "primary.c90" : p.disabled ? "neutral.c50" : "",
+  border: "1px solid",
+  borderColor: p.highlight ? "primary.c90" : p.disabled ? "neutral.c50" : "neutral.c70",
+  borderRadius: "4px",
+}))<TagProps>``;
+
+/* TODO at some point: reuse react-ui's Tag, it's just not working properly in pre-v3 environment */
+const TagText = styled(Text).attrs((p: TagProps) => ({
   variant: "tiny",
   fontWeight: "semiBold",
   fontSize: "10px",
   lineHeight: "12px",
-  color: "neutral.c70",
+  color: p.highlight || p.disabled ? "neutral.c30" : "neutral.c70",
   uppercase: true,
-})``;
+}))``;
 
 const CurrencyIconsContainer = styled(Flex).attrs({
   ml: "5px",
@@ -127,6 +130,13 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
     const currencies = listSupportedCurrencies();
     return networks ? networks.map(({ currency }) => currencies.find(c => c.id === currency)) : [];
   }, [networks]);
+
+  const tagContent = showBranchTag ? t(`platform.catalog.branch.${manifest.branch}`) : category;
+  const tagProps = {
+    disabled: isDisabled,
+    highlight: branch === "experimental",
+  };
+
   return (
     <Container disabled={isDisabled} onClick={handleClick}>
       <LiveAppIcon icon={icon || undefined} name={name} size={40} />
@@ -144,16 +154,11 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
               );
             })}
           </CurrencyIconsContainer>
-          {showBranchTag && (
-            <TagContainer>
-              <TagText>{t(`platform.catalog.branch.${manifest.branch}`)}</TagText>
-            </TagContainer>
-          )}
         </TitleContainer>
         <Description>{description}</Description>
       </LeftContainer>
-      <TagContainer>
-        <TagText>{category}</TagText>
+      <TagContainer {...tagProps}>
+        <TagText {...tagProps}>{tagContent}</TagText>
       </TagContainer>
     </Container>
   );
