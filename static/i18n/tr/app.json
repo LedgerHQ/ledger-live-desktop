@@ -3718,11 +3718,11 @@
       "description": "Bitcoin veya Ethereum uygulamasını en son kaldırın"
     },
     "NetworkDown": {
-      "title": "Maalesef, internet bağlantısı görünmüyor",
+      "title": "Üzgünüz, internet bağlantısı görünmüyor",
       "description": "Lütfen internet bağlantınızı kontrol edin."
     },
     "NoAddressesFound": {
-      "title": "Maalesef, hesap bulunamadı",
+      "title": "Üzgünüz, hesap bulunamadı",
       "description": "Adres hesaplamasında bir hata oluştu; tekrar deneyin veya Ledger Destek ile iletişime geçin"
     },
     "NotEnoughBalance": {
@@ -3776,11 +3776,11 @@
       "description": "Takas işlemi gerçekleştirilemedi. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin."
     },
     "TimeoutError": {
-      "title": "Maalesef, sunucunun yanıt vermesi çok uzun sürdü",
+      "title": "Üzgünüz, sunucunun yanıt vermesi çok uzun sürdü",
       "description": "Lütfen tekrar deneyin."
     },
     "TimeoutTagged": {
-      "title": "Maalesef, sunucunun yanıt vermesi çok uzun sürdü ({{tag}})",
+      "title": "Üzgünüz, sunucunun yanıt vermesi çok uzun sürdü ({{tag}})",
       "description": "Zaman aşımı oldu."
     },
     "TransportError": {
@@ -3853,7 +3853,7 @@
       "title": "Alıcı adresi, gönderen adresiyle aynı"
     },
     "CantOpenDevice": {
-      "title": "Maalesef, bağlantı başarısız oldu",
+      "title": "Üzgünüz, bağlantı başarısız",
       "description": "Cihaz algılandı ancak bağlantı başarısız oldu. Lütfen tekrar deneyin veya sorun devam ederse Ledger Destek ile iletişime geçin."
     },
     "ETHAddressNonEIP": {
