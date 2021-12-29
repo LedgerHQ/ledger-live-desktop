@@ -207,6 +207,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
       </Column>
       <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
       <Column>{formatAmount(stake.activation.active)}</Column>
+      <Column>{stake.reward ? formatAmount(stake.reward.amount) : "-"}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (

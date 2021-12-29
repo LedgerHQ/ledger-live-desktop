@@ -40,6 +40,9 @@ export const Header = () => (
     <TableLine>
       <Trans i18nKey="delegation.active" />
     </TableLine>
+    <TableLine>
+      <Trans i18nKey="delegation.reward" />
+    </TableLine>
     <TableLine />
   </HeaderWrapper>
 );
