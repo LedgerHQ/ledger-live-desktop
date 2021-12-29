@@ -58,6 +58,7 @@ import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
 
 import MODAL_SOLANA_DELEGATE from "../families/solana/DelegationFlowModal";
+import MODAL_SOLANA_UNSTAKE from "../families/solana/UnstakeFlowModal";
 
 // Lending
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
@@ -118,6 +119,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
   MODAL_SOLANA_DELEGATE,
+  MODAL_SOLANA_UNSTAKE,
   MODAL_FULL_NODE,
   MODAL_RECOVERY_SEED_WARNING,
   // Lending

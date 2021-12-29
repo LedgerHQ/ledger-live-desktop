@@ -86,17 +86,14 @@ const ManageDropDownItem = ({
 type Props = {
   account: Account,
   stakeWithMeta: SolanaStakeWithMeta,
-  onManageAction: (
-    address: string,
-    action: "MODAL_COSMOS_REDELEGATE" | "MODAL_COSMOS_UNDELEGATE" | "MODAL_COSMOS_CLAIM_REWARDS",
-  ) => void,
+  onManageAction: (stakeWithMeta: SolanaStakeWithMeta, action: "MODAL_SOLANA_UNSTAKE") => void,
   onExternalLink: (address: string) => void,
 };
 
 export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: Props) {
   const onSelect = useCallback(
     action => {
-      //onManageAction(validatorAddress, action.key);
+      onManageAction(stakeWithMeta, action.key);
     },
     [onManageAction],
   );

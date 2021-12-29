@@ -13,6 +13,8 @@ import {
   useSolanaStakesWithMeta,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 
+import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
@@ -84,11 +86,11 @@ const Delegation = ({ account }: Props) => {
   }, [account, dispatch]);
 
   const onRedirect = useCallback(
-    (validatorAddress: string, modalName: string) => {
+    (stakeWithMeta: SolanaStakeWithMeta, modalName: string) => {
       dispatch(
         openModal(modalName, {
           account,
-          validatorAddress,
+          stakeWithMeta,
         }),
       );
     },
