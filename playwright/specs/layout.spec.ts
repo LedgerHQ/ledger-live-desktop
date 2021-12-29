@@ -13,7 +13,7 @@ test("Layout", async ({ page }) => {
   const sendModal = new SendModal(page);
   const receiveModal = new ReceiveModal(page);
   const portfolioPage = new PortfolioPage(page);
-  const accountPage = new AccountPage(page);
+  // const accountPage = new AccountPage(page);
 
   await test.step("can open send modal", async () => {
     await layout.openSendModal();
