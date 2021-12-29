@@ -16,7 +16,7 @@ jobs:
   add-reaction:
     name: "[Reaction] 🚀"
     needs: [is-org-member]
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == "success"
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR
