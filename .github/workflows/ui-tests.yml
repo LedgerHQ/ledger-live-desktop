@@ -1,4 +1,4 @@
-name: "[Tests] Screenshot Testing"
+name: "Tests | Screenshot Testing"
 on:
   pull_request:
     branches:
@@ -18,7 +18,7 @@ jobs:
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
   start-runner:
-    name: "start ec2 instance"
+    name: "[Runner] start ec2 instance"
     needs: cancel-previous
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
@@ -27,7 +27,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: "stop ec2 instance"
+    name: "[Runner] stop ec2 instance"
     if: ${{ always() }}
     needs: [start-runner, ui-tests-linux]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
@@ -38,9 +38,12 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   ui-tests-linux:
-    name: "[UI Linux]"
+    name: "[Linux] UI"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: prepare runner
         run: |
@@ -77,7 +80,14 @@ jobs:
         run: yarn build
       - name: tests
         if: always()
-        run: yarn test 2> >(tee jest.txt)
+        run: yarn test --silent --ci --coverage --json --testLocationInResults --outputFile=report.json 2> >(tee jest.txt)
+      - uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        with:
+          github-token: ${{ github.token }}
+          package-manager: yarn
+          skip-step: all
+          coverage-file: ./report.json
+          annotations: none
       - name: run ui tests (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright
       - name: upload diffs to imgur
@@ -121,7 +131,7 @@ jobs:
 
   ui-tests:
     needs: cancel-previous
-    name: "[UI ${{ matrix.os }}]"
+    name: "[${{ matrix.os }}] UI"
     strategy:
       fail-fast: false
       matrix:

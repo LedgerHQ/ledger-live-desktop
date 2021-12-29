@@ -12,6 +12,7 @@ import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
 import { NFTViewerDrawer } from "~/renderer/drawers/NFTViewerDrawer";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
@@ -47,9 +48,10 @@ type Props = {
   tokenId: string,
   id: string,
   mode: "grid" | "list",
+  withContextMenu?: boolean,
 };
 
-const Row = ({ contract, tokenId, id, mode, account }: Props) => {
+const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
@@ -63,48 +65,52 @@ const Row = ({ contract, tokenId, id, mode, account }: Props) => {
     });
   }, [id, account]);
 
-  const onDotsClick = useCallback(
-    event => {
-      event.stopPropagation();
-      if (!show) return;
-      alert("dots click");
-    },
-    [show],
-  );
+  const MaybeContext = ({ children }: any) =>
+    withContextMenu ? (
+      <NFTContextMenu key={id} contract={contract} tokenId={tokenId}>
+        {children}
+      </NFTContextMenu>
+    ) : (
+      <>{children}</>
+    );
 
   return (
-    <Wrapper
-      px={3}
-      py={isGrid ? 3 : 2}
-      className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
-      horizontal={!isGrid}
-      alignItems={!isGrid ? "center" : undefined}
-      onClick={onItemClick}
-    >
-      <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
-        <Image nft={metadata} size={40} full={isGrid} />
-      </Skeleton>
-      <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
-        <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
-          <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
-            {nftName || "-"}
-          </Text>
+    <MaybeContext>
+      <Wrapper
+        px={3}
+        py={isGrid ? 3 : 2}
+        className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
+        horizontal={!isGrid}
+        alignItems={!isGrid ? "center" : undefined}
+        onClick={onItemClick}
+      >
+        <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
+          <Image nft={metadata} size={40} full={isGrid} />
         </Skeleton>
-        <Skeleton width={180} minHeight={24} barHeight={6} show={show}>
-          <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
-            <Trans
-              i18nKey="NFT.gallery.tokensList.item.tokenId"
-              values={{ tokenId: centerEllipsis(tokenId) }}
-            />
-          </Text>
-        </Skeleton>
-      </Box>
-      {!isGrid ? (
-        <Dots onClick={onDotsClick}>
-          <IconDots size={20} />
-        </Dots>
-      ) : null}
-    </Wrapper>
+        <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
+          <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
+            <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
+              {nftName || "-"}
+            </Text>
+          </Skeleton>
+          <Skeleton width={180} minHeight={24} barHeight={6} show={show}>
+            <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
+              <Trans
+                i18nKey="NFT.gallery.tokensList.item.tokenId"
+                values={{ tokenId: centerEllipsis(tokenId) }}
+              />
+            </Text>
+          </Skeleton>
+        </Box>
+        {!isGrid ? (
+          <NFTContextMenu key={id} contract={contract} tokenId={tokenId} leftClick={true}>
+            <Dots>
+              <IconDots size={20} />
+            </Dots>
+          </NFTContextMenu>
+        ) : null}
+      </Wrapper>
+    </MaybeContext>
   );
 };
 
