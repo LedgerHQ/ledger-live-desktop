@@ -13,7 +13,7 @@ process.env.PWDEBUG = "1";
 test.use({ userdata: "skip-onboarding" });
 
 // app env
-test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined } });
+test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined, DEBUG_UPDATE: true } });
 
 test("My test", async ({ page }) => {
   test.setTimeout(6000000);
