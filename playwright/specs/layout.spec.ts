@@ -40,7 +40,7 @@ test("Layout", async ({ page }) => {
     // expect(await accountPage.buttonsGroup).toHaveCSS("opacity", "1");
     // expect(await page.screenshot()).toMatchSnapshot("bookmarked-account-link.png");
     // FIXME: even if opacity = 1, screenshot is flaky
-    await expect(page).toHaveURL(/.*account/);
+    await expect(page).toHaveURL(/.*\/account\/.*/);
   });
 
   await test.step("can toggle discreet mode", async () => {
