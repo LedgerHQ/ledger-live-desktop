@@ -18,7 +18,7 @@ export type StepProps = {
   onRetry: void => void,
   onClose: () => void,
   openModal: (key: string, config?: any) => void,
-  optimisticOperation: *,
+  optimisticOperation: Operation,
   error: *,
   signed: boolean,
   transaction: ?Transaction,

@@ -77,19 +77,12 @@ export function StepConfirmationFooter({
   optimisticOperation,
   transaction,
 }: StepProps) {
-  const concernedOperation =
-    transaction?.validators.length === 1 && optimisticOperation
-      ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
-        ? optimisticOperation.subOperations[0]
-        : optimisticOperation
-      : null;
-
   return (
     <Box horizontal alignItems="right">
       <Button data-test-id="modal-close-button" ml={2} onClick={onClose}>
         <Trans i18nKey="common.close" />
       </Button>
-      {concernedOperation ? (
+      {optimisticOperation ? (
         // FIXME make a standalone component!
         <Button
           primary
@@ -97,9 +90,9 @@ export function StepConfirmationFooter({
           event="Vote Flow Step 3 View OpD Clicked"
           onClick={() => {
             onClose();
-            if (account && concernedOperation) {
+            if (account && optimisticOperation) {
               setDrawer(OperationDetails, {
-                operationId: concernedOperation.id,
+                operationId: optimisticOperation.id,
                 accountId: account.id,
                 parentId: parentAccount && parentAccount.id,
               });

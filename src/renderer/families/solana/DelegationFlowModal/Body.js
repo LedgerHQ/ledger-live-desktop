@@ -119,7 +119,7 @@ const Body = ({
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, undefined);
 
     const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
-      amount: new BigNumber(0.1),
+      amount: new BigNumber(10000000),
       model: {
         kind: "stake.createAccount",
         uiState: {},
