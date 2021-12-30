@@ -27,7 +27,6 @@ import {
   flattenOperationWithInternalsAndNfts,
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 
@@ -137,9 +136,8 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
   const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
-  const operations = useMemo(() => [operation], [operation]);
-  const nfts = nftsFromOperations(operations);
-  const { status, metadata } = useNftMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
+  const isNftOperation = ["NFT_IN", "NFT_OUT"].includes(operation.type);
   const show = useMemo(() => status === "loading", [status]);
 
   const currency = getAccountCurrency(account);
@@ -286,7 +284,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         <Trans i18nKey={`operation.type.${operation.type}`} />
       </Text>
       {/* TODO clean up these conditional components into currency specific blocks */}
-      {!nfts[0] ? (
+      {!isNftOperation ? (
         <Box alignItems="center" mt={0}>
           {!amount.isZero() && (
             <Box selectable>
@@ -320,12 +318,12 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         <Box flex={1} mb={2} alignItems="center">
           <Skeleton show={show} width={160} barHeight={16} minHeight={32} textAlign="center">
             <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
-              {metadata?.nftName || "-"}
+              {metadata?.tokenName || "-"}
             </Text>
           </Skeleton>
           <Skeleton show={show} width={200} barHeight={10} minHeight={24} mt={1} textAlign="center">
             <Text ff="Inter|Regular" textAlign="center" fontSize={5} color="palette.text.shade50">
-              {centerEllipsis(metadata?.contract)}
+              ID {centerEllipsis(operation.tokenId)}
             </Text>
           </Skeleton>
         </Box>
@@ -339,7 +337,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           />
         </Box>
       ) : null}
-      {!nfts[0] ? (
+      {!isNftOperation ? (
         <OpDetailsSection>
           <OpDetailsTitle>{t("operationDetails.amount")}</OpDetailsTitle>
           <OpDetailsData onClick={openAmountDetails}>
@@ -557,7 +555,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
           </Box>
         </OpDetailsData>
       </OpDetailsSection>
-      {nfts[0] && <NFTOperationDetails operation={operation} />}
+      {isNftOperation ? <NFTOperationDetails operation={operation} /> : null}
       <OpDetailsSection>
         <OpDetailsTitle>{t("operationDetails.date")}</OpDetailsTitle>
         <OpDetailsData>
