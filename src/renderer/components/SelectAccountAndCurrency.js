@@ -111,9 +111,10 @@ const SelectAccountAndCurrency = ({
       openModal("MODAL_ADD_ACCOUNTS", {
         currency,
         flow,
+        onClose: () => selectAccount(),
       }),
     );
-  }, [dispatch, currency, flow]);
+  }, [dispatch, currency, flow, selectAccount]);
 
   const addOrSelectAccount = () => {
     if (!currency) {
