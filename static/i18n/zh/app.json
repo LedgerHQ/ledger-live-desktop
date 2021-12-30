@@ -1358,7 +1358,7 @@
       "name": "代币名称",
       "contract": "代币合约",
       "id": "代币 (NFT) ID",
-      "amount": "数额"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "已冻结数额",
