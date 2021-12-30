@@ -4070,12 +4070,12 @@
         "drawerTitle": "تكامل Crypto.org",
         "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
         "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، والتكديس و العديد من الميزات القادمة.",
+        "website": "العملات المشفرة في كل محفظة"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "ملاحظة",
+    "memoPlaceholder": "اختياري",
+    "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
   }
 }
