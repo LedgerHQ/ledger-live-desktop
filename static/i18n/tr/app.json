@@ -1358,7 +1358,7 @@
       "name": "Token Adı",
       "contract": "Token Sözleşmesi",
       "id": "Token (NFT) Kimliği",
-      "quantity": "Quantity"
+      "quantity": "Miktar"
     },
     "extra": {
       "frozenAmount": "Dondurulan tutar",
