@@ -1358,7 +1358,7 @@
       "name": "Название токена",
       "contract": "Контракт токена",
       "id": "ID токена (NFT)",
-      "amount": "Кол-во"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Замороженная сумма",
