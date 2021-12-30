@@ -50,6 +50,7 @@ const TokensList = ({ account, isLoading, nfts, collectionId }: Props) => {
     <Container mb={20} mode={nftsViewMode}>
       {nfts.map(nft => (
         <Item
+          key={nft.id}
           mode={nftsViewMode}
           id={nft.id}
           tokenId={nft.tokenId}

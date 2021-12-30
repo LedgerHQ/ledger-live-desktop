@@ -26,7 +26,6 @@ const Collection = () => {
   const { id, collectionId } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const collection = nftsByCollections(account.nfts, collectionId)[0];
-  if (!collection) return null;
 
   const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
   const show = useMemo(() => status === "loading", [status]);
