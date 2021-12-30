@@ -1,12 +1,14 @@
 import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import React, { useCallback, useMemo } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import { Box, Flex, Text } from "@ledgerhq/react-ui";
 import LiveAppIcon from "../WebPlatformPlayer/LiveAppIcon";
 import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
-import { useTranslation } from "react-i18next";
+import AppName from "./AppName";
+import { containerButtonCSS } from "./styles";
 
 const Container = styled(Flex).attrs({
   borderRadius: "8px",
@@ -16,19 +18,8 @@ const Container = styled(Flex).attrs({
   p: "16px",
   columnGap: "16px",
 })<{ disabled?: boolean }>`
-  --background-color: ${p => p.theme.colors.neutral.c30};
-  background-color: var(--background-color);
-  ${p =>
-    p.disabled
-      ? css`
-          opacity: 0.6;
-        `
-      : css`
-          cursor: pointer;
-          :hover {
-            --background-color: ${p => p.theme.colors.neutral.c20};
-          }
-        `}
+  background-color: ${p => p.theme.colors.neutral.c30};
+  ${containerButtonCSS};
 `;
 
 const LeftContainer = styled(Flex).attrs({
@@ -41,13 +32,6 @@ const TitleContainer = styled(Flex).attrs({
   flexDirection: "row",
   alignItems: "center",
   columnGap: "6px",
-})``;
-
-const Title = styled(Text).attrs({
-  variant: "body",
-  fontWeight: "semiBold",
-  fontSize: "14px",
-  lineHeight: "17px",
 })``;
 
 const Description = styled(Text).attrs({
@@ -96,7 +80,7 @@ const CurrencyIconContainer = styled(Box).attrs({
   my: "-2px",
   ml: "-5px",
 })`
-  border: 2px solid var(--background-color);
+  border: 2px solid ${p => p.theme.colors.neutral.c30};
   border-radius: 20px;
 `;
 
@@ -142,7 +126,7 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
       <LiveAppIcon icon={icon || undefined} name={name} size={40} />
       <LeftContainer>
         <TitleContainer>
-          <Title>{name}</Title>
+          <AppName>{name}</AppName>
           <CurrencyIconsContainer>
             {networksCurrencies.map((currency: CryptoCurrency) => {
               return (

@@ -5,6 +5,7 @@ import { Text, Flex } from "@ledgerhq/react-ui";
 const Container = styled(Flex).attrs({
   flexDirection: "row",
   justifyContent: "space-between",
+  alignItems: "center",
   alignSelf: "stretch",
   mb: "24px",
 })``;

@@ -30,6 +30,9 @@
         "experimental": "experimental",
         "debug": "debug"
       },
+      "liveApps": "Live Apps",
+      "recentlyUsed": "Recently Used",
+      "suggested": "Suggested",
       "networks": "Networks",
       "noNetwork": "No network",
       "categories": "Categories",

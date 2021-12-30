@@ -133,8 +133,8 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
   }, [manifests, enabledNetworks, enabledCategories, isAllOnNetworks, isAllOnCategories]);
 
   return (
-    <>
-      <SectionHeader title="live apps" right={right} />
+    <Flex flexDirection="column">
+      <SectionHeader title={t("platform.catalog.liveApps")} right={right} />
       <Flex flexDirection="column" rowGap="12px">
         {filteredManifests.map(manifest => (
           <AppRow
@@ -145,7 +145,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
           />
         ))}
       </Flex>
-    </>
+    </Flex>
   );
 };
 

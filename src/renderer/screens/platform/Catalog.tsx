@@ -19,8 +19,15 @@ import { openPlatformAppDisclaimerDrawer } from "~/renderer/actions/UI";
 import SectionSuggested from "./SectionSuggested";
 import SectionRecentlyUsed from "./SectionRecentlyUsed";
 import SectionLiveApps from "./SectionLiveApps";
+import { setPlatformAppLastOpened } from "~/renderer/actions/settings";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
+
+const Container = styled(Flex).attrs({
+  flexDirection: "column",
+  rowGap: "48px",
+  paddingBottom: "60px",
+})``;
 
 const Title = styled(Text).attrs({
   variant: "h3",
@@ -61,7 +68,10 @@ const PlatformCatalog = () => {
 
   const handleClick = useCallback(
     manifest => {
-      const openApp = () => history.push(`/platform/${manifest.id}`);
+      const openApp = () => {
+        dispatch(setPlatformAppLastOpened(manifest.name, Date.now()));
+        return history.push(`/platform/${manifest.id}`);
+      };
 
       if (!isDismissed) {
         dispatch(
@@ -79,13 +89,13 @@ const PlatformCatalog = () => {
   );
 
   return (
-    <Flex flexDirection="column" pb="60px">
+    <Container>
       <TrackPage category="Platform" name="Catalog" />
-      <Title mb="48px">{t("platform.catalog.title")}</Title>
+      <Title>{t("platform.catalog.title")}</Title>
       <SectionSuggested manifests={filteredManifests} handleClick={handleClick} />
       <SectionRecentlyUsed manifests={filteredManifests} handleClick={handleClick} />
       <SectionLiveApps manifests={filteredManifests} handleClick={handleClick} />
-    </Flex>
+    </Container>
   );
 };
 
