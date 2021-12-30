@@ -1358,7 +1358,7 @@
       "name": "Nom du token",
       "contract": "Contrat du token",
       "id": "Identifiant token (NFT)",
-      "amount": "Montant"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Montant gelé",
