@@ -1358,7 +1358,7 @@
       "name": "토큰명",
       "contract": "토큰 계약",
       "id": "토큰 (NFT) ID",
-      "amount": "금액"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "동결 금액",
