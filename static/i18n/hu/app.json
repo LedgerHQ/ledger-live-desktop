@@ -1358,7 +1358,7 @@
       "name": "Token Name",
       "contract": "Token Contract",
       "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Befagyasztott mennyiség",
