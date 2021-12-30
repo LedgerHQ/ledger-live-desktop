@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the {{name}} dApp on your web browser.",
+      "info": "يمكنك الآن الوصول إلى {{name}} التطبيق اللامركزي (dApp) على متصفح الويب الخاص بك.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "خصائص",
         "description": "الوصف",
-        "tokenAddress": "Token Address",
+        "tokenAddress": "عنوان رمز التوكن",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
       }
@@ -1503,7 +1503,7 @@
         "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "لا توجد مساحة تخزين كافية",
         "supported": "ليدجر لايف (Ledger Live) مدعوم",
-        "not_supported": "Requires 3rd-party wallet",
+        "not_supported": "يتطلب محفظة طرف ثالث",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
@@ -2658,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "استخدم تشغيل جافا سكريبت\n التجريبي لبيتكوين، جميع إنقسامات بيتكوين، و Tezos."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3733,7 +3733,7 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "رصيد الحساب الأصلي غير كاف لرسوم الشبكة"
     },
     "PasswordsDontMatch": {
       "title": "كلمتين المرور غير متطابقتين",
@@ -4065,11 +4065,11 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+        "cardTitle": "مدعوم من Crypto.org",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "تكامل Crypto.org",
+        "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
         "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
         "website": "Cryptocurrency in every wallet"
       }
