@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, memo } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -42,6 +42,14 @@ const Dots: ThemedComponent<{}> = styled.div`
   }
 `;
 
+const TitleContainer: ThemedComponent<{}> = styled(Text)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
+
 type Props = {
   account: Account,
   contract: string,
@@ -51,7 +59,7 @@ type Props = {
   withContextMenu?: boolean,
 };
 
-const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
+const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
@@ -89,9 +97,13 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
         </Skeleton>
         <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
           <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
-            <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
+            <TitleContainer
+              ff="Inter|Medium"
+              color="palette.text.shade100"
+              fontSize={isGrid ? 4 : 3}
+            >
               {nftName || "-"}
-            </Text>
+            </TitleContainer>
           </Skeleton>
           <Skeleton width={180} minHeight={24} barHeight={6} show={show}>
             <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
@@ -114,4 +126,5 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
   );
 };
 
-export default Row;
+// $FlowFixMe
+export default memo(NftCard);
