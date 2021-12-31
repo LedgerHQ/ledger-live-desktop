@@ -94,13 +94,13 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
 
   const handleAllPressedNetworks = useCallback(() => {
     setNetworksOptions(networksOptions.map(opt => ({ ...opt, checked: !isAllOnNetworks })));
-  }, [networksOptions, isAllOnNetworks, setNetworksOptions]);
+  }, [networksOptions, setNetworksOptions]);
   const handleAllPressedCategories = useCallback(() => {
     setCategoriesOptions(categoriesOptions.map(opt => ({ ...opt, checked: !isAllOnCategories })));
-  }, [categoriesOptions, isAllOnCategories, setCategoriesOptions]);
+  }, [categoriesOptions, setCategoriesOptions]);
 
   const right = (
-    <Flex flexDirection="row">
+    <Flex flexDirection="row" zIndex={1}>
       <DropdownPicker
         isAllOn={isAllOnNetworks}
         isAllIndeterminate={isAllIndeterminateNetworks}
@@ -127,14 +127,12 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
       const networks = getManifestNetworks(manifest);
       const categories = getManifestCategories(manifest);
       const networksCondition =
-        isAllOnNetworks ||
         networks.some(n => enabledNetworks.includes(n)) ||
         (networks.length === 0 && enabledNetworks.includes("none"));
-      const categoriesCondition =
-        isAllOnCategories || categories.some(c => enabledCategories.includes(c));
+      const categoriesCondition = categories.some(c => enabledCategories.includes(c));
       return networksCondition && categoriesCondition;
     });
-  }, [manifests, enabledNetworks, enabledCategories, isAllOnNetworks, isAllOnCategories]);
+  }, [manifests, enabledNetworks, enabledCategories]);
 
   return (
     <Flex flexDirection="column">
