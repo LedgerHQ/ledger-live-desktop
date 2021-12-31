@@ -122,7 +122,7 @@ const DropdownPicker: React.FC<Props> = ({
 
   return (
     <DropdownGeneric label={Label} placement={placement || "bottom-end"}>
-      <Flex flexDirection="column" maxHeight="300px">
+      <Flex flexDirection="column" maxHeight="300px" overflowY="auto">
         {showAll && (
           <CheckboxWithLabel
             onChange={onPressAll}
