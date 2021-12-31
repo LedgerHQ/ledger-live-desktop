@@ -92,7 +92,6 @@ const PlatformCatalog = () => {
     <Container>
       <TrackPage category="Platform" name="Catalog" />
       <Title>{t("platform.catalog.title")}</Title>
-      <SectionSuggested manifests={filteredManifests} handleClick={handleClick} />
       <SectionRecentlyUsed manifests={filteredManifests} handleClick={handleClick} />
       <SectionLiveApps manifests={filteredManifests} handleClick={handleClick} />
     </Container>
