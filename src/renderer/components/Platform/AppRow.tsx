@@ -8,7 +8,7 @@ import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import AppName from "./AppName";
-import { containerButtonCSS } from "./styles";
+import { containerButtonCSS, getBackgroundColor } from "./styles";
 
 const Container = styled(Flex).attrs({
   borderRadius: "8px",
@@ -18,7 +18,6 @@ const Container = styled(Flex).attrs({
   p: "16px",
   columnGap: "16px",
 })<{ disabled?: boolean }>`
-  background-color: ${p => p.theme.colors.neutral.c30};
   ${containerButtonCSS};
 `;
 
@@ -80,7 +79,7 @@ const CurrencyIconContainer = styled(Box).attrs({
   my: "-2px",
   ml: "-5px",
 })`
-  border: 2px solid ${p => p.theme.colors.neutral.c30};
+  border: 2px solid ${p => getBackgroundColor(p.theme)};
   border-radius: 20px;
 `;
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Check from "~/renderer/icons/Check";
+import Minus from "~/renderer/icons/Minus";
 import { Tabbable } from "~/renderer/components/Box";
 
 const Base: ThemedComponent<{
@@ -66,6 +67,7 @@ const Base: ThemedComponent<{
 
 export type Props = {
   isChecked: boolean,
+  isIndeterminate?: boolean,
   onChange?: Function,
   isRadio?: boolean,
   disabled?: boolean,
@@ -73,7 +75,7 @@ export type Props = {
 };
 
 function CheckBox(props: Props) {
-  const { isChecked, onChange, isRadio, disabled } = props;
+  const { isChecked, isIndeterminate = false, onChange, isRadio, disabled } = props;
 
   const onClick = useCallback(
     e => {
@@ -92,7 +94,7 @@ function CheckBox(props: Props) {
         checked={typeof isChecked === "boolean" ? isChecked : null}
         onChange={onClick}
       />
-      <Check size={12} />
+      {isIndeterminate ? <Minus size={12} /> : <Check size={12} />}
     </Base>
   );
 }

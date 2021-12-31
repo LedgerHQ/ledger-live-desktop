@@ -5,8 +5,6 @@ import { Props as DropdownProps } from "@ledgerhq/react-ui/components/form/Dropd
 import { useTranslation } from "react-i18next";
 import CheckBox, { Props as CheckboxProps } from "./CheckBox";
 
-type AllCheckboxState = "checked" | "unchecked" | "minus";
-
 export type Option = {
   value: string;
   label: string;
@@ -20,7 +18,7 @@ export type Props = {
   onPressAll: () => void;
   showAll?: boolean;
   isAllOn?: boolean;
-  allBoxState?: AllCheckboxState;
+  isAllIndeterminate?: boolean;
 } & Pick<DropdownProps, "placement">;
 
 const CountPill = styled(Flex).attrs({
@@ -68,6 +66,7 @@ const CheckboxText = styled(Text).attrs({
 /* DO NOT REUSE, Temporary until we fully migrate to V3 and reuse Checkbox from the UI lib */
 const CheckboxWithLabel = ({
   isChecked,
+  isIndeterminate,
   onChange,
   label,
   disabled,
@@ -77,7 +76,7 @@ const CheckboxWithLabel = ({
   }, [disabled, onChange, isChecked]);
   return (
     <CheckboxContainer onClick={handleClick}>
-      <CheckBox onChange={onChange} isChecked={isChecked} />
+      <CheckBox onChange={onChange} isChecked={isChecked} isIndeterminate={isIndeterminate} />
       <CheckboxText>{label}</CheckboxText>
     </CheckboxContainer>
   );
@@ -90,6 +89,7 @@ const DropdownPicker: React.FC<Props> = ({
   showAll = true,
   onPressAll,
   isAllOn,
+  isAllIndeterminate,
   placement,
 }: Props) => {
   const { t } = useTranslation();
@@ -127,6 +127,7 @@ const DropdownPicker: React.FC<Props> = ({
           <CheckboxWithLabel
             onChange={onPressAll}
             isChecked={isAllOn || false}
+            isIndeterminate={isAllIndeterminate}
             label={t("common.all")}
           />
         )}

@@ -87,8 +87,10 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
   const [networksOptions, setNetworksOptions] = useState(getInitialOptions(networks));
   const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(categories));
 
-  const isAllOnNetworks = networksOptions.every(opt => opt.checked);
-  const isAllOnCategories = categoriesOptions.every(opt => opt.checked);
+  const isAllOnNetworks = networksOptions.some(opt => opt.checked);
+  const isAllIndeterminateNetworks = networksOptions.some(opt => !opt.checked);
+  const isAllOnCategories = categoriesOptions.some(opt => opt.checked);
+  const isAllIndeterminateCategories = categoriesOptions.some(opt => !opt.checked);
 
   const handleAllPressedNetworks = useCallback(() => {
     setNetworksOptions(networksOptions.map(opt => ({ ...opt, checked: !isAllOnNetworks })));
@@ -101,6 +103,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
     <Flex flexDirection="row">
       <DropdownPicker
         isAllOn={isAllOnNetworks}
+        isAllIndeterminate={isAllIndeterminateNetworks}
         options={networksOptions}
         onChange={setNetworksOptions}
         onPressAll={handleAllPressedNetworks}
@@ -108,6 +111,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
       />
       <DropdownPicker
         isAllOn={isAllOnCategories}
+        isAllIndeterminate={isAllIndeterminateCategories}
         options={categoriesOptions}
         onChange={setCategoriesOptions}
         onPressAll={handleAllPressedCategories}
