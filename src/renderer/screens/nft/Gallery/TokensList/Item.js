@@ -108,7 +108,7 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
               </Text>
               {nft.collection.standard === "ERC1155" && isGrid && (
                 <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
-                  {`x${nft.amount.toString()}`}
+                  {`x${nft.amount.toFixed()}`}
                 </Text>
               )}
             </Box>
@@ -118,7 +118,7 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
           <>
             {nft.collection.standard === "ERC1155" && (
               <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3} mr={15}>
-                {`x${nft.amount.toString()}`}
+                {`x${nft.amount.toFixed()}`}
               </Text>
             )}
             <NFTContextMenu key={id} contract={contract} tokenId={tokenId} leftClick={true}>
