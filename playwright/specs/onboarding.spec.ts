@@ -83,21 +83,25 @@ test.describe.parallel("Onboarding",() => {
 
     await test.step("Go through Basics Carrousel", async () => {
       expect(await page.screenshot()).toMatchSnapshot(`carrousel-1.png`);
-      await onboardingPage.basicsCarrousel();
+      await onboardingPage.basicsCarrouselRight();
       expect(await page.screenshot()).toMatchSnapshot(`carrousel-2.png`);
-      await onboardingPage.basicsCarrousel();
+      await onboardingPage.basicsCarrouselRight();
       expect(await page.screenshot()).toMatchSnapshot(`carrousel-3.png`);
-      await onboardingPage.basicsCarrousel();
+      await onboardingPage.basicsCarrouselRight();
       expect(await page.screenshot()).toMatchSnapshot(`carrousel-4.png`);
-      await onboardingPage.basicsCarrousel();
+      await onboardingPage.basicsCarrouselRight();
       expect(await page.screenshot()).toMatchSnapshot(`carrousel-5.png`);
       await onboardingPage.setupWallet();
       expect(await page.screenshot()).toMatchSnapshot(`setup-wallet`);
     });
 
     await test.step("Set Up new device", async () => {
-      expect(await page.screenshot()).toMatchSnapshot(`get-started.png`);
-      await onboardingPage.newSetup();
+      expect(await page.screenshot()).toMatchSnapshot(`start-setup.png`);
+      await onboardingPage.startSetup();
+      expect(await page.screenshot()).toMatchSnapshot(`set-pincode.png`);
+      await onboardingPage.setPincode();
+      expect(await page.screenshot()).toMatchSnapshot(`set-passphrase.png`);
+      await onboardingPage.setPassphrase();
     });
 
     await test.step("Pass Quiz", async () => {
@@ -109,11 +113,11 @@ test.describe.parallel("Onboarding",() => {
       await onboardingPage.quizNextQuestion();
       expect(await page.screenshot()).toMatchSnapshot(`quiz-second-question.png`);
       await onboardingPage.answerQuizBottom();
-      expect(await page.screenshot()).toMatchSnapshot(`quiz-next-question2.png`);
+      expect(await page.screenshot()).toMatchSnapshot(`quiz-next-question-2.png`);
       await onboardingPage.quizNextQuestion();
       expect(await page.screenshot()).toMatchSnapshot(`quiz-third-question.png`);
       await onboardingPage.answerQuizTop();
-      expect(await page.screenshot()).toMatchSnapshot(`quiz-next-question3.png`);
+      expect(await page.screenshot()).toMatchSnapshot(`quiz-next-question-3.png`);
       await onboardingPage.quizNextQuestion();
       expect(await page.screenshot()).toMatchSnapshot(`quiz-success.png`);
       await onboardingPage.quizEnd();
@@ -122,18 +126,18 @@ test.describe.parallel("Onboarding",() => {
     await test.step(`[${nano}]"Device genuine check"`, async () => {
        expect(await page.screenshot()).toMatchSnapshot(`connect-${nano}-new.png`);
        await onboardingPage.checkDevice();
-       expect(await page.screenshot()).toMatchSnapshot(`before-genuine-check1.png`);
+       expect(await page.screenshot()).toMatchSnapshot(`before-genuine-check-new.png`);
      });
 
 
     await test.step("Pass genuine check", async () => {
       await deviceAction.genuineCheck();
-      expect(await page.screenshot()).toMatchSnapshot("genuine-check-done1.png");
+      expect(await page.screenshot()).toMatchSnapshot("genuine-check-done-new.png");
     });
 
     await test.step("Reach app", async () => {
       await onboardingPage.continue();
-      expect(await page.screenshot()).toMatchSnapshot(`onboarding-complete1.png`);
+      expect(await page.screenshot()).toMatchSnapshot(`onboarding-complete-new.png`);
     });
 
   }); 

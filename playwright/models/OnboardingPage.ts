@@ -70,17 +70,23 @@ export class OnboardingPage {
     await this.firstUseButton.click();
   }
 
-  async basicsCarrousel() {
+  async basicsCarrouselRight() {
     await this.rightArrowBasicsButton.click();
   }
 
-  async newSetup() {
+  async startSetup() {
     await this.getStartedCtaButton.click();
     await this.beCarefulButton.click();
     await this.startSetupButton.click();
+  }
+
+   async setPincode() {
     await this.pincodeCheckbox.click();
     await this.setupPincodeButton.click();
     await this.confirmPincodeButton.click();
+  }
+
+   async setPassphrase() {
     await this.recoveryPhraseCheckbox.click();
     await this.recoverySetupButton.click();
     await this.writeRecoveryPhraseButton.click();
