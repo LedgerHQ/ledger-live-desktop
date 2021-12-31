@@ -38,7 +38,7 @@ const LabelWithMeta = ({
 
 export default function NFTCrumb() {
   const history = useHistory();
-  const { id, collectionId } = useParams();
+  const { id, collectionAddress } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const collections = nftsByCollections(account.nfts);
 
@@ -52,7 +52,7 @@ export default function NFTCrumb() {
     [collections],
   );
   const activeItem =
-    items.find((item: any) => item.collection.contract === collectionId) || items[0];
+    items.find((item: any) => item.collection.contract === collectionAddress) || items[0];
 
   const onCollectionSelected = useCallback(
     item => {
@@ -78,7 +78,7 @@ export default function NFTCrumb() {
         <Button onClick={onSeeAll}>{"NFT"}</Button>
       </TextLink>
 
-      {collectionId ? (
+      {collectionAddress ? (
         <>
           <Separator />
           <DropDownSelector

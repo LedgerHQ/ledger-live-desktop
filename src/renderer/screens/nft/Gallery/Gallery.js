@@ -1,20 +1,42 @@
 // @flow
 
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect, useMemo } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import styled from "styled-components";
 import IconSend from "~/renderer/icons/Send";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
 import TokensList from "./TokensList";
 import Box from "~/renderer/components/Box";
+import Spinner from "~/renderer/components/Spinner";
 import useOnScreen from "../useOnScreen";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import GridListToggle from "./GridListToggle";
+
+const SpinnerContainer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const SpinnerBackground: ThemedComponent<{}> = styled.div`
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 100%;
+  padding: 2px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid ${p => p.theme.colors.palette.background.paper};
+`;
 
 const Gallery = () => {
   const { t } = useTranslation();
@@ -30,44 +52,56 @@ const Gallery = () => {
   }, [dispatch, account]);
 
   const onSelectCollection = useCallback(
-    collectionId => {
-      history.push({ pathname: `/account/${account.id}/nft-collection/${collectionId}` });
+    collectionAddress => {
+      history.push({ pathname: `/account/${account.id}/nft-collection/${collectionAddress}` });
     },
     [account.id, history],
   );
 
   const ref = useRef();
   const isAtBottom = useOnScreen(ref);
-  const [maxVisibleNTFs, setMaxVisibleNFTs] = useState(1);
+  const [maxVisibleNFTs, setMaxVisibleNFTs] = useState(1);
+
+  const totalNFTs = useMemo(() => collections.map(c => c.nfts.length).reduce((a, b) => a + b), [
+    collections,
+  ]);
 
   useEffect(() => {
-    if (isAtBottom) {
-      setMaxVisibleNFTs(maxVisibleNTFs => maxVisibleNTFs + 5);
+    if (isAtBottom && maxVisibleNFTs < totalNFTs) {
+      setMaxVisibleNFTs(maxVisibleNFTs => maxVisibleNFTs + 5);
     }
   }, [isAtBottom]);
 
-  const collectionsRender = [];
-  let displayedNFTs = 0;
-  collections.forEach(collection => {
-    if (displayedNFTs > maxVisibleNTFs) return;
-    collectionsRender.push(
-      <div key={collection.contract}>
-        <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
-          <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-            <CollectionName collection={collection} fallback={collection.contract} />
-          </Text>
-        </Box>
-        <TokensList
-          collectionId={collection.contract}
-          account={account}
-          nfts={collection.nfts.slice(0, maxVisibleNTFs - displayedNFTs)}
-          isLoading={displayedNFTs + collection.nfts.length > maxVisibleNTFs}
-        />
-      </div>,
-    );
+  const [collectionsRender, isLoading] = useMemo(() => {
+    const collectionsRender = [];
+    let isLoading = false;
+    let displayedNFTs = 0;
+    collections.forEach(collection => {
+      if (displayedNFTs > maxVisibleNFTs) return;
+      collectionsRender.push(
+        <div key={collection.contract}>
+          <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
+            <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
+              <CollectionName collection={collection} fallback={collection.contract} />
+            </Text>
+          </Box>
+          <TokensList
+            collectionAddress={collection.contract}
+            account={account}
+            nfts={collection.nfts.slice(0, maxVisibleNFTs - displayedNFTs)}
+          />
+        </div>,
+      );
 
-    displayedNFTs += collection.nfts.length;
-  });
+      if (displayedNFTs + collection.nfts.length > maxVisibleNFTs) {
+        isLoading = true;
+      }
+
+      displayedNFTs += collection.nfts.length;
+    });
+
+    return [collectionsRender, isLoading];
+  }, [collections, maxVisibleNFTs, account]);
 
   return (
     <>
@@ -86,6 +120,13 @@ const Gallery = () => {
       </Box>
       <GridListToggle />
       {collectionsRender}
+      {isLoading && (
+        <SpinnerContainer>
+          <SpinnerBackground>
+            <Spinner size={14} />
+          </SpinnerBackground>
+        </SpinnerContainer>
+      )}
       <div ref={ref} />
     </>
   );

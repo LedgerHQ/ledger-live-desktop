@@ -8,10 +8,12 @@ import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
+import styled from "styled-components";
 import useOnScreen from "../useOnScreen";
 import Image from "~/renderer/screens/nft/Image";
 import IconSend from "~/renderer/icons/Send";
 import TokensList from "./TokensList";
+import Spinner from "~/renderer/components/Spinner";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
@@ -20,33 +22,65 @@ import CollectionName from "../CollectionName";
 import GridListToggle from "./GridListToggle";
 import Skeleton from "../Skeleton";
 
+const SpinnerContainer: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+`;
+
+const SpinnerBackground: ThemedComponent<{}> = styled.div`
+  background: ${p => p.theme.colors.palette.background.paper};
+  border-radius: 100%;
+  padding: 2px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid ${p => p.theme.colors.palette.background.paper};
+`;
+
 const Collection = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { id, collectionId } = useParams();
+  const { id, collectionAddress } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
-  const collection = nftsByCollections(account.nfts, collectionId)[0];
+
+  const collection = useMemo(() => nftsByCollections(account.nfts, collectionAddress)[0], [
+    account.nfts,
+    collectionAddress,
+  ]);
 
   const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
   const show = useMemo(() => status === "loading", [status]);
 
   const onSend = useCallback(() => {
-    dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftCollection: collectionId }));
-  }, [collectionId, dispatch, account]);
+    dispatch(
+      openModal("MODAL_SEND", { account, isNFTSend: true, nftCollection: collectionAddress }),
+    );
+  }, [collectionAddress, dispatch, account]);
 
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>
-    !!op.nftOperations?.length && !!op.nftOperations.find(nftOp => nftOp.contract === collectionId);
+    !!op.nftOperations?.length &&
+    !!op.nftOperations.find(nftOp => nftOp.contract === collectionAddress);
 
   const ref = useRef();
   const isAtBottom = useOnScreen(ref);
   const [maxVisibleNTFs, setMaxVisibleNFTs] = useState(1);
 
   useEffect(() => {
-    if (isAtBottom) {
+    if (isAtBottom && maxVisibleNTFs < collection.nfts.length) {
       setMaxVisibleNFTs(maxVisibleNTFs => maxVisibleNTFs + 5);
     }
   }, [isAtBottom]);
+
+  const slicedNfts = useMemo(() => collection.nfts.slice(0, maxVisibleNTFs), [
+    collection.nfts,
+    maxVisibleNTFs,
+  ]);
 
   return (
     <>
@@ -76,17 +110,19 @@ const Collection = () => {
         </Button>
       </Box>
       <GridListToggle />
-      <TokensList
-        account={account}
-        collectionId={collectionId}
-        nfts={collection.nfts.slice(0, maxVisibleNTFs)}
-        isLoading={collection.nfts.length > maxVisibleNTFs}
-      />
+      <TokensList account={account} collectionAddress={collectionAddress} nfts={slicedNfts} />
+      {collection.nfts.length > maxVisibleNTFs && (
+        <SpinnerContainer>
+          <SpinnerBackground>
+            <Spinner size={14} />
+          </SpinnerBackground>
+        </SpinnerContainer>
+      )}
       <div ref={ref} />
       <OperationsList
         account={account}
         title={t("NFT.gallery.collection.operationList.header")}
-        filterOperation={collectionId ? filterOperation : undefined}
+        filterOperation={collectionAddress ? filterOperation : undefined}
       />
     </>
   );

@@ -185,7 +185,7 @@ export default function Default() {
                           render={props => <NFTGallery {...props} />}
                         />
                         <Route
-                          path="/account/:id/nft-collection/:collectionId?"
+                          path="/account/:id/nft-collection/:collectionAddress?"
                           render={props => <NFTCollection {...props} />}
                         />
                         <Route
