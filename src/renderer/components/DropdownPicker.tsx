@@ -46,13 +46,23 @@ const CheckboxContainer = styled(Flex).attrs({
   flexDirection: "row",
   alignItems: "center",
   columnGap: "8px",
-  flex: 1,
   borderRadius: "4px",
   px: "12px",
 })`
+  box-sizing: content-box;
   :hover {
     background-color: ${p => p.theme.colors.primary.c30};
   }
+`;
+
+const CheckboxText = styled(Text).attrs({
+  flexShrink: 0,
+  variant: "paragraph",
+  fontWeight: "semiBold",
+  fontSize: "13px",
+  lineHeight: "15.73px",
+})`
+  white-space: nowrap;
 `;
 
 /* DO NOT REUSE, Temporary until we fully migrate to V3 and reuse Checkbox from the UI lib */
@@ -66,14 +76,10 @@ const CheckboxWithLabel = ({
     !disabled && onChange && onChange(!isChecked);
   }, [disabled, onChange, isChecked]);
   return (
-    <Flex flex={1}>
-      <CheckboxContainer onClick={handleClick}>
-        <CheckBox onChange={onChange} isChecked={isChecked} />
-        <Text variant="paragraph" fontWeight="semiBold" fontSize="13px" lineHeight="15.73px">
-          {label}
-        </Text>
-      </CheckboxContainer>
-    </Flex>
+    <CheckboxContainer onClick={handleClick}>
+      <CheckBox onChange={onChange} isChecked={isChecked} />
+      <CheckboxText>{label}</CheckboxText>
+    </CheckboxContainer>
   );
 };
 
@@ -116,26 +122,24 @@ const DropdownPicker: React.FC<Props> = ({
 
   return (
     <DropdownGeneric label={Label} placement={placement || "bottom-end"}>
-      <Flex flexDirection="row" maxHeight="300px">
-        <Flex flexDirection="column" flex={1}>
-          {showAll && (
+      <Flex flexDirection="column" maxHeight="300px">
+        {showAll && (
+          <CheckboxWithLabel
+            onChange={onPressAll}
+            isChecked={isAllOn || false}
+            label={t("common.all")}
+          />
+        )}
+        {options.map(({ value, label, checked }) => {
+          return (
             <CheckboxWithLabel
-              onChange={onPressAll}
-              isChecked={isAllOn || false}
-              label={t("common.all")}
+              key={value}
+              label={label}
+              onChange={newChecked => handleChange(value, newChecked)}
+              isChecked={checked}
             />
-          )}
-          {options.map(({ value, label, checked }) => {
-            return (
-              <CheckboxWithLabel
-                key={value}
-                label={label}
-                onChange={newChecked => handleChange(value, newChecked)}
-                isChecked={checked}
-              />
-            );
-          })}
-        </Flex>
+          );
+        })}
       </Flex>
     </DropdownGeneric>
   );
