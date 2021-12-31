@@ -88,9 +88,11 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
   const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(categories));
 
   const isAllOnNetworks = networksOptions.some(opt => opt.checked);
-  const isAllIndeterminateNetworks = networksOptions.some(opt => opt.checked) && networksOptions.some(opt => !opt.checked);
+  const isAllIndeterminateNetworks =
+    networksOptions.some(opt => opt.checked) && networksOptions.some(opt => !opt.checked);
   const isAllOnCategories = categoriesOptions.some(opt => opt.checked);
-  const isAllIndeterminateCategories = categoriesOptions.some(opt => opt.checked) && categoriesOptions.some(opt => !opt.checked);
+  const isAllIndeterminateCategories =
+    categoriesOptions.some(opt => opt.checked) && categoriesOptions.some(opt => !opt.checked);
 
   const handleAllPressedNetworks = useCallback(() => {
     setNetworksOptions(networksOptions.map(opt => ({ ...opt, checked: !isAllOnNetworks })));
