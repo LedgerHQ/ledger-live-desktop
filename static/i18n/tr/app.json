@@ -555,7 +555,7 @@
       "disconnectTitle": "Tam düğümün bağlantısını kes",
       "steps": {
         "landing": {
-          "header": "Tam düğümünüzü başlatın. Hemen güvenmeyin; önce doğrulayın.",
+          "header": "Tam düğümünüzü başlatın. Güvenmek yerine kendiniz doğrulayın.",
           "description": "Bir Bitcoin tam düğümü, tüm işlemleri ve blokları doğrulayıp Bitcoin ağına katkıda bulunur ve Bitcoin'i kimseye güven gerektirmeyen bir şekilde kullanmanıza izin verir.",
           "list": {
             "item1": "Bitcoin Core'u yeterli kaynaklara sahip bir cihazda kurun.",
