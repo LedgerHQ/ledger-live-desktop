@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the {{name}} dApp on your web browser.",
+      "info": "이제 웹 브라우저에서 {{name}} 디앱을 이용할 수 있습니다.",
       "warning": "디앱에서 수신 주소를 공유하는 것은 안전하지 않습니다. 자금 수신을 위해 주소를 공유할 때는 언제나 Ledger Live를 이용하세요.",
       "disconnected": "디앱, WalletConnect, Ledger Live 사이에 연결 문제가 있습니다. 잠시 기다리거나 연결을 다시 시작하세요"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "속성",
         "description": "설명",
-        "tokenAddress": "Token Address",
+        "tokenAddress": "토큰 주소",
         "tokenId": "토큰 ID",
         "quantity": "수량"
       }
@@ -1358,7 +1358,7 @@
       "name": "토큰명",
       "contract": "토큰 계약",
       "id": "토큰 (NFT) ID",
-      "quantity": "Quantity"
+      "quantity": "수량"
     },
     "extra": {
       "frozenAmount": "동결 금액",
@@ -1503,7 +1503,7 @@
         "uninstall": "제거",
         "notEnoughSpace": "저장 용량이 부족합니다",
         "supported": "Ledger Live 지원됨",
-        "not_supported": "Requires 3rd-party wallet",
+        "not_supported": "타사 지갑 필요",
         "addAccount": "계정 추가",
         "addAccountTooltip": "{{appName}} 계정 추가",
         "addAccountWarn": "앱 업데이트가 완료될 때까지 기다려 주세요",
@@ -2658,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "비트코인, 모든 비트코인 포크 및 태조스에 실험적인 JS 구현을 사용하세요."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -3733,7 +3733,7 @@
       "title": "수취인 주소가 비활성화되어 있습니다. 활성화하려면 최소 {{minimalAmount}}를 보내주세요"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "상위 계정 잔액이 네트워크 수수료에 충분하지 않습니다"
     },
     "PasswordsDontMatch": {
       "title": "패스워드가 일치하지 않습니다",
@@ -4065,17 +4065,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Crypto.org에서 제공됨",
+        "moreInfo": "자세한 정보",
+        "drawerTitle": "Crypto.org 통합",
+        "title": "이제 Ledger Live에서 Crypto.org(CRO) 토큰을 사용할 수 있습니다",
+        "description": "이제 CRO(Crypto.org) 토큰 관리를 시작하고 Ledger Live를 통해 토큰을 보호할 수 있습니다.",
+        "description2": "Crypto.org(CRO) 토큰은 Crypto.org 체인의 기본 토큰이며 트랜잭션, 스테이킹 및 향후 많은 기능에 사용됩니다.",
+        "website": "모든 지갑의 암호화폐"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "메모",
+    "memoPlaceholder": "선택사항",
+    "memoWarningText": "메모 기능을 사용할 때는 해당 정보를 수령인과 신중하게 확인하세요"
   }
 }
