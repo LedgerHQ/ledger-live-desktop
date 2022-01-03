@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
+      "info": "يمكنك الآن الوصول إلى {{name}} التطبيق اللامركزي (dApp) على متصفح الويب الخاص بك.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "خصائص",
         "description": "الوصف",
-        "contract": "عنوان العَقد",
+        "tokenAddress": "عنوان رمز التوكن",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
       }
@@ -1358,7 +1358,7 @@
       "name": "اسم رّمز التوكن",
       "contract": "عقد رّمز التوكن",
       "id": "مُعرّف (NFT) رمز التوكن",
-      "amount": "المبلغ"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
@@ -1503,6 +1503,7 @@
         "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "لا توجد مساحة تخزين كافية",
         "supported": "ليدجر لايف (Ledger Live) مدعوم",
+        "not_supported": "يتطلب محفظة طرف ثالث",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
@@ -2657,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "استخدم تشغيل جافا سكريبت\n التجريبي لبيتكوين، جميع إنقسامات بيتكوين، و Tezos."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3483,6 +3484,10 @@
       "memo": "ملاحظة",
       "memoPlaceholder": "اختياري",
       "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3737,7 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "رصيد الحساب الأصلي غير كاف لرسوم الشبكة"
     },
     "PasswordsDontMatch": {
       "title": "كلمتين المرور غير متطابقتين",
@@ -4057,6 +4062,15 @@
     "TaprootNotActivated": {
       "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
     }
@@ -4064,17 +4078,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "مدعوم من Crypto.org",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "تكامل Crypto.org",
+        "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، والتكديس و العديد من الميزات القادمة.",
+        "website": "العملات المشفرة في كل محفظة"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "ملاحظة",
+    "memoPlaceholder": "اختياري",
+    "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
   }
 }
