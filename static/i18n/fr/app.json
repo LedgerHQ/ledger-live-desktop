@@ -3486,8 +3486,8 @@
       "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez bien les informations requises auprès du bénéficiaire."
     },
     "solana": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memo": "Mémo",
+      "memoPlaceholder": "Facultatif"
     }
   },
   "errors": {
@@ -4066,7 +4066,7 @@
       "title": "Account not funded"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Mémo trop long. Longueur maximale : {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
       "title": "Address off ed25519 curve"
