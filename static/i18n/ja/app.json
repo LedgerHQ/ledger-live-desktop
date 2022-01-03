@@ -3484,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "オプション",
       "memoWarningText": "Memoを使用する場合は、受取先とMemoのタイプをしっかりと確認してください。"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "メインネットのアクティベート前に、Taprootアドレスへの送付は安全ではありません。"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "利用可能なトークン数を超えています。"
