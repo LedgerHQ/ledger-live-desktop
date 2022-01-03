@@ -4063,13 +4063,13 @@
       "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Pas de fonds sur le compte"
     },
     "SolanaMemoIsTooLong": {
       "title": "Mémo trop long. Longueur maximale : {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Adresse en dehors de la courbe ed25519"
     },
     "NotEnoughNftOwned": {
       "title": "Nombre de tokens disponibles insuffisant"
