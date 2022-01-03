@@ -1358,7 +1358,7 @@
       "name": "Token Name",
       "contract": "Token Contract",
       "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Frozen amount",
@@ -3484,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"
