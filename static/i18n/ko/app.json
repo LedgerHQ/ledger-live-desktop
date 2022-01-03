@@ -3484,6 +3484,10 @@
       "memo": "메모",
       "memoPlaceholder": "선택 사항",
       "memoWarningText": "메모 기능을 사용할 때는 해당 정보를 수령인과 신중하게 확인하세요"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "사용 가능한 토큰 수를 초과했습니다"
