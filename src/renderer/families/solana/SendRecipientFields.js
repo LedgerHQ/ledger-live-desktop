@@ -4,7 +4,6 @@ import { Trans, withTranslation } from "react-i18next";
 import MemoValueField from "./MemoValueField";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
-import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 
 const Root = (props: *) => {
   return (
