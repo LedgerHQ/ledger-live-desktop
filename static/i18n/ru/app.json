@@ -3484,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Опционально",
       "memoWarningText": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "Вы превысили кол-во доступных токенов"
