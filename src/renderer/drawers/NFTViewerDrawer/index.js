@@ -141,7 +141,7 @@ export function NFTViewerDrawer({
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status === "loading", [status]);
-  const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
+  const name = metadata?.nftName || nft.tokenId;
 
   const onNFTSend = useCallback(() => {
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
@@ -169,8 +169,13 @@ export function NFTViewerDrawer({
               fontSize={7}
               lineHeight="29px"
               color="palette.text.shade100"
+              style={{
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                display: "-webkit-box",
+              }}
               uppercase
-              pb={5}
             >
               {name}
             </Text>
