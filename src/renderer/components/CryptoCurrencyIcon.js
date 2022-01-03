@@ -10,6 +10,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 type Props = {
   currency: Currency,
   circle?: boolean,
+  circleOverrideIconColor?: string,
   size: number,
   overrideColor?: string,
   inactive?: boolean,
@@ -71,6 +72,7 @@ const Container = styled.div`
 const CryptoCurrencyIcon = ({
   currency,
   circle,
+  circleOverrideIconColor,
   size,
   overrideColor,
   inactive,
@@ -98,7 +100,10 @@ const CryptoCurrencyIcon = ({
   return IconCurrency ? (
     circle ? (
       <CircleWrapper size={size} color={color}>
-        <IconCurrency size={size * 0.8} color={theme.colors.palette.background.paper} />
+        <IconCurrency
+          size={size * 0.8}
+          color={circleOverrideIconColor || theme.colors.palette.background.paper}
+        />
       </CircleWrapper>
     ) : (
       <Container size={size}>

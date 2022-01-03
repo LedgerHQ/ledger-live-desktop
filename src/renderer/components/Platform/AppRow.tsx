@@ -131,7 +131,13 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
               return (
                 currency && (
                   <CurrencyIconContainer>
-                    <CryptoCurrencyIcon key={currency.id} circle currency={currency} size={18} />
+                    <CryptoCurrencyIcon
+                      key={currency.id}
+                      circle
+                      currency={currency}
+                      size={18}
+                      circleOverrideIconColor="white"
+                    />
                   </CurrencyIconContainer>
                 )
               );

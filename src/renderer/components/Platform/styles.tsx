@@ -3,7 +3,7 @@ import { Theme } from "~/renderer/styles/theme";
 
 export function getBackgroundColor(theme: Theme) {
   const isLight = theme.colors.type === "light";
-  return theme.colors.neutral[isLight ? "c40" : "c30"];
+  return theme.colors.neutral[isLight ? "c00" : "c30"];
 }
 
 export function getBorderColor(theme: Theme) {
