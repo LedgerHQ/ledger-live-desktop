@@ -3484,6 +3484,10 @@
       "memo": "Mémo",
       "memoPlaceholder": "Facultatif",
       "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez bien les informations requises auprès du bénéficiaire."
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "Nombre de tokens disponibles insuffisant"
