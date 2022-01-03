@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Ya puedes acceder a la dApp en Desktop.",
+      "info": "Ahora puedes acceder a la dApp {{name}} desde tu navegador web.",
       "warning": "No es seguro compartir direcciones de recepción de una dApp. Utiliza siempre Ledger Live para compartir tu dirección para recibir fondos.",
       "disconnected": "Hay un problema de conexión entre la dApp, WalletConnect y Ledger Live. Espera unos momentos o intenta de nuevo la conexión"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Propiedades",
         "description": "Descripción",
-        "contract": "Dirección de contrato",
+        "tokenAddress": "Token Address",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
       }
@@ -1358,7 +1358,7 @@
       "name": "Nombre del token",
       "contract": "Contrato del token",
       "id": "ID del token (NFT)",
-      "amount": "Importe"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Importe congelado",
@@ -1503,6 +1503,7 @@
         "uninstall": "Desinstalar",
         "notEnoughSpace": "No hay suficiente espacio",
         "supported": "Compatible con Ledger Live",
+        "not_supported": "Requiere una billetera de terceros",
         "addAccount": "Agregar cuenta",
         "addAccountTooltip": "Agregar cuenta {{appName}}",
         "addAccountWarn": "Espera a que finalicen las actualizaciones de aplicaciones",
@@ -2657,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "Usar implementaciones de JS experimentales para Bitcoin, todas las divisiones de Bitcoin y Tezos."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -3483,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Opcional",
       "memoWarningText": "Al utilizar un Memo, comprueba cuidadosamente la información con el receptor"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3737,7 @@
       "title": "La dirección del destinatario está inactiva. Envía al menos {{minimalAmount}} para activarla."
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "El saldo de la cuenta principal es insuficiente para las comisiones de red"
     },
     "PasswordsDontMatch": {
       "title": "Las contraseñas no coinciden",
@@ -4057,6 +4062,15 @@
     "TaprootNotActivated": {
       "title": "Los envíos a una dirección taproot antes de la activación de la red principal no son seguros"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "Has superado la cantidad de tokens disponibles"
     }
@@ -4064,17 +4078,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Desarrollado por Crypto.org",
+        "moreInfo": "Más información",
+        "drawerTitle": "Integración con Crypto.org",
+        "title": "El token de Crypto.org (CRO) ya está disponible en Ledger Live",
+        "description": "Ahora puedes gestionar tus tokens de Crypto.org (CRO) y protegerlos con Ledger Live.",
+        "description2": "El token Crypto.org (CRO) es nativo de la cadena Crypto.org y se utiliza para todo tipo de transacciones, poner en participación y muchas características futuras.",
+        "website": "Criptomonedas en todas las billeteras"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "Opcional",
+    "memoWarningText": "Al utilizar un Memo, comprueba cuidadosamente la información con el receptor"
   }
 }

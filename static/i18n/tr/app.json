@@ -555,7 +555,7 @@
       "disconnectTitle": "Tam düğümün bağlantısını kes",
       "steps": {
         "landing": {
-          "header": "Tam düğümünüzü başlatın. Hemen güvenmeyin; önce doğrulayın.",
+          "header": "Tam düğümünüzü başlatın. Güvenmek yerine kendiniz doğrulayın.",
           "description": "Bir Bitcoin tam düğümü, tüm işlemleri ve blokları doğrulayıp Bitcoin ağına katkıda bulunur ve Bitcoin'i kimseye güven gerektirmeyen bir şekilde kullanmanıza izin verir.",
           "list": {
             "item1": "Bitcoin Core'u yeterli kaynaklara sahip bir cihazda kurun.",
@@ -764,7 +764,7 @@
       "date": "Tarih",
       "info": "{{currency}} hesabınızdaki varlıkları doğrudan kredi olarak verebilir ve faiz kazanabilirsiniz.",
       "howCompoundWorks": "Compound protokolünde borç verme nasıl çalışır?",
-      "lend": "{{currency}} Yatırın"
+      "lend": "{{currency}} fonla"
     },
     "emptyState": {
       "active": {
@@ -775,17 +775,17 @@
       "closed": {
         "title": "Kapatılmış borçlarınız burada görünecektir",
         "description": "Henüz hiç borcunuz yok.",
-        "cta": "Yatır"
+        "cta": "Fonla"
       },
       "opened": {
         "title": "Açılmış borçlarınız burada görünecektir",
         "description": "Henüz hiç borcunuz yok.",
-        "cta": "Yatır"
+        "cta": "Fonla"
       },
       "history": {
         "title": "Geçmiş",
         "description": "Tüm borç işlemlerinizin geçmişini görüntüleyin.",
-        "cta": "Yatırım"
+        "cta": "Yatır"
       }
     },
     "headers": {
@@ -806,7 +806,7 @@
         "enabling": "Etkinleştiriliyor",
         "inactive": "Devre Dışı",
         "supplying": "Arz ediliyor",
-        "earning": "Kazandırıyor"
+        "earning": "Kazanç"
       },
       "closed": {
         "assetLended": "Varlık",
@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Artık dApp'e masaüstünüzden erişebilirsiniz.",
+      "info": "Artık web tarayıcınızdan {{name}} dApp'e erişebilirsiniz.",
       "warning": "Alım adreslerini dApps üzerinden paylaşmak güvenli değildir. Tarafınıza gönderilen fonları almak için adresinizi paylaşırken her zaman Ledger Live kullanın.",
       "disconnected": "dApp, WalletConnect ve Ledger Live arasında bir bağlantı sorunu var. Birkaç dakika bekleyin veya bağlantıyı yeniden başlatın"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Özellikler",
         "description": "Açıklama",
-        "contract": "Sözleşme adresi",
+        "tokenAddress": "Token Adresi",
         "tokenId": "Token Kimliği",
         "quantity": "Miktar"
       }
@@ -1358,7 +1358,7 @@
       "name": "Token Adı",
       "contract": "Token Sözleşmesi",
       "id": "Token (NFT) Kimliği",
-      "amount": "Tutar"
+      "quantity": "Miktar"
     },
     "extra": {
       "frozenAmount": "Dondurulan tutar",
@@ -1503,6 +1503,7 @@
         "uninstall": "Kaldır",
         "notEnoughSpace": "Yeterli depolama alanı yok",
         "supported": "Ledger Live tarafından destekleniyor",
+        "not_supported": "3. taraf cüzdan gerektirir",
         "addAccount": "Hesap ekle",
         "addAccountTooltip": "{{appName}} hesabı ekle",
         "addAccountWarn": "Lütfen uygulama güncellemelerinin bitmesini bekleyin",
@@ -2657,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "Bitcoin, tüm Bitcoin fork'ları ve Tezos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -3401,7 +3402,7 @@
         "repair": {
           "title": "Nano S cihazınızı onarın",
           "desc": "Cihazınızda görüntülenen mesaj nedir?",
-          "mcuOutdated": "MCU donanım yazılımı eski sürüm",
+          "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU donanım yazılımı orijinal değil",
           "repairInstructions": "Cihaz onarım yönergelerini izleyin",
           "updateInstructions": "Cihaz güncelleme yönergelerini izleyin",
@@ -3483,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Opsiyonel",
       "memoWarningText": "Memo kullanırken, bilgileri alıcıyla dikkatlice kontrol edin"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3607,7 +3612,7 @@
       "description": null
     },
     "DeviceInOSUExpected": {
-      "title": "Maalesef, güncelleme başarısız",
+      "title": "Üzgünüz, güncelleme başarısız",
       "description": "Lütfen tekrar deneyin veya Ledger Destek ile iletişime geçin."
     },
     "DeviceHalted": {
@@ -3691,7 +3696,7 @@
       "description": "Kripto varlıklarınıza erişim sağlamak için gerekli olan özel anahtarlar cihazınızda güvenle saklanır ve Kurtarma kağıdınıza yedeklenmelidir."
     },
     "ManagerNotEnoughSpace": {
-      "title": "Maalesef, yeterli depolama alanı kalmadı",
+      "title": "Üzgünüz, yeterli depolama alanı kalmadı",
       "description": "Yer açmak için uygulamalardan bazılarını kaldırın. Kripto varlıklarınıza erişim sağlamak için gerekli olan özel anahtarlar cihazınızda güvenle saklanır."
     },
     "ManagerQuitPage": {
@@ -3717,11 +3722,11 @@
       "description": "Bitcoin veya Ethereum uygulamasını en son kaldırın"
     },
     "NetworkDown": {
-      "title": "Maalesef, internet bağlantısı görünmüyor",
+      "title": "Üzgünüz, internet bağlantısı görünmüyor",
       "description": "Lütfen internet bağlantınızı kontrol edin."
     },
     "NoAddressesFound": {
-      "title": "Maalesef, hesap bulunamadı",
+      "title": "Üzgünüz, hesap bulunamadı",
       "description": "Adres hesaplamasında bir hata oluştu; tekrar deneyin veya Ledger Destek ile iletişime geçin"
     },
     "NotEnoughBalance": {
@@ -3732,7 +3737,7 @@
       "title": "Alıcı adresi etkin değil. Etkinleştirmek için en az {{minimalAmount}} gönderin"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "Ana hesap bakiyesi ağ ücretlerini karşılamak için yetersiz"
     },
     "PasswordsDontMatch": {
       "title": "Parolalar eşleşmiyor",
@@ -3775,11 +3780,11 @@
       "description": "Takas işlemi gerçekleştirilemedi. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin."
     },
     "TimeoutError": {
-      "title": "Maalesef, sunucunun yanıt vermesi çok uzun sürdü",
+      "title": "Üzgünüz, sunucunun yanıt vermesi çok uzun sürdü",
       "description": "Lütfen tekrar deneyin."
     },
     "TimeoutTagged": {
-      "title": "Maalesef, sunucunun yanıt vermesi çok uzun sürdü ({{tag}})",
+      "title": "Üzgünüz, sunucunun yanıt vermesi çok uzun sürdü ({{tag}})",
       "description": "Zaman aşımı oldu."
     },
     "TransportError": {
@@ -3852,7 +3857,7 @@
       "title": "Alıcı adresi, gönderen adresiyle aynı"
     },
     "CantOpenDevice": {
-      "title": "Maalesef, bağlantı başarısız oldu",
+      "title": "Üzgünüz, bağlantı başarısız",
       "description": "Cihaz algılandı ancak bağlantı başarısız oldu. Lütfen tekrar deneyin veya sorun devam ederse Ledger Destek ile iletişime geçin."
     },
     "ETHAddressNonEIP": {
@@ -4057,6 +4062,15 @@
     "TaprootNotActivated": {
       "title": "Mainnet etkinleşmeden önce taproot adresine gönderim yapmak güvenli değildir"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "Mevcut token miktarını aştınız"
     }
@@ -4064,17 +4078,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Crypto.org aracılığıyla",
+        "moreInfo": "Daha fazla bilgi",
+        "drawerTitle": "Crypto.org entegrasyonu",
+        "title": "Crypto.org (CRO) token'ı artık Ledger Live'da",
+        "description": "Artık Ledger Live ile Crypto.org (CRO) token'larınızı yönetmeye ve güvenle saklamaya başlayabilirsiniz.",
+        "description2": "Crypto.org (CRO) token'ı, Crypto.org zincirinin yerel token'ıdır ve işlemler, staking ve yakında çıkacak pek çok özellik için kullanılır.",
+        "website": "Her cüzdanda kripto para"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "İsteğe bağlı",
+    "memoWarningText": "Memo kullanırken, bilgileri alıcıyla dikkatlice kontrol edin"
   }
 }
