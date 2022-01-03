@@ -1,10 +1,10 @@
 name: "Report | Screenshot Testing Reports"
 on:
-  workflow_dispatch:
-    inputs:
-      runId:
-        description: run id
-        required: true
+  # workflow_dispatch:
+  #   inputs:
+  #     runId:
+  #       description: run id
+  #       required: true
 
   workflow_run:
     workflows: ["Tests | Screenshot Testing"]
@@ -138,22 +138,22 @@ jobs:
           images: images.json
           lintoutput: lint.txt
           jestoutput: jest.txt
-      - name: comment (manual trigger)
-        if: github.event.workflow_dispatch != ''
-        uses: actions/github-script@v5
-        with:
-          script: |
-            const fs = require("fs");
-            const issueNumber = Number(fs.readFileSync("./pr/NR"));
+      # - name: comment (manual trigger)
+      #   if: github.event.workflow_dispatch != ''
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       const fs = require("fs");
+      #       const issueNumber = Number(fs.readFileSync("./pr/NR"));
 
-            await github.rest.issues.createComment({
-              owner: "LedgerHQ",
-              repo: "ledger-live-desktop",
-              issue_number: issueNumber,
-              body: `
-                ${{ steps.comment-body.outputs.body }}
-              `
-            });
+      #       await github.rest.issues.createComment({
+      #         owner: "LedgerHQ",
+      #         repo: "ledger-live-desktop",
+      #         issue_number: issueNumber,
+      #         body: `
+      #           ${{ steps.comment-body.outputs.body }}
+      #         `
+      #       });
       - name: comment (auto trigger)
         if: github.event.workflow_run != ''
         uses: actions/github-script@v5

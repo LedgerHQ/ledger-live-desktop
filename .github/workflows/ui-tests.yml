@@ -106,11 +106,11 @@ jobs:
         with:
           name: images-linux.json
           path: images-linux.json
-      - name: save PR number
-        if: always()
-        run: |
-          mkdir -p ./pr
-          echo ${{ github.event.number }} > ./pr/NR
+      # - name: save PR number
+      #   if: always() && github.event.pull_request != ''
+      #   run: |
+      #     mkdir -p ./pr
+      #     echo ${{ github.event.number }} > ./pr/NR
       - name: upload tests data
         if: always()
         uses: actions/upload-artifact@v2
@@ -119,7 +119,7 @@ jobs:
           path: |
             lint.txt
             jest.txt
-            pr/NR
+      # pr/NR
       - name: upload ci suggested screenshots
         if: always()
         uses: actions/upload-artifact@v2
