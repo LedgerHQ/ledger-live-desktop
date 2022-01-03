@@ -4,7 +4,6 @@ import { Layout } from "../models/Layout";
 import { SendModal } from "../models/SendModal";
 import { ReceiveModal } from "../models/ReceiveModal";
 import { PortfolioPage } from "../models/PortfolioPage";
-import { AccountPage } from "../models/AccountPage";
 
 test.use({ userdata: "1AccountBTC1AccountETHStarred" });
 
@@ -13,7 +12,6 @@ test("Layout", async ({ page }) => {
   const sendModal = new SendModal(page);
   const receiveModal = new ReceiveModal(page);
   const portfolioPage = new PortfolioPage(page);
-  // const accountPage = new AccountPage(page);
 
   await test.step("can open send modal", async () => {
     await layout.openSendModal();
@@ -37,9 +35,6 @@ test("Layout", async ({ page }) => {
   await test.step("shows a starred account, and can access the page", async () => {
     expect(await layout.bookmarkedAccounts.count()).toBe(1);
     await layout.bookmarkedAccounts.first().click();
-    // expect(await accountPage.buttonsGroup).toHaveCSS("opacity", "1");
-    // expect(await page.screenshot()).toMatchSnapshot("bookmarked-account-link.png");
-    // FIXME: even if opacity = 1, screenshot is flaky
     await expect(page).toHaveURL(/.*\/account\/.*/);
   });
 
