@@ -17,7 +17,6 @@ import { CopiableField } from "./CopiableField";
 import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
-import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
