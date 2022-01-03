@@ -3484,6 +3484,10 @@
       "memo": "Memo 标签",
       "memoPlaceholder": "可选",
       "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4057,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "您已超过可用代币的数量"
