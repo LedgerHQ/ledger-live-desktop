@@ -5208,7 +5208,7 @@
     },
     "currentAddress": {
       "title": "Current address",
-      "for": "Address for <1><0>{{name}}</0></1>",
+      "for": "Address for the <0><0>{{name}}</0></0> account.",
       "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
       "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
       "showQrCode": "Show QR Code"
@@ -5737,6 +5737,7 @@
     "receive": {
       "title": "Receive",
       "successTitle": "Address shared securely",
+      "successTitleNoVerification": "Address shared",
       "steps": {
         "chooseAccount": {
           "title": "Account",
@@ -5751,7 +5752,12 @@
           "withoutDevice": "Don't have your device?"
         },
         "receiveFunds": {
-          "title": "Receive"
+          "title": "Receive",
+          "address": "Address",
+          "qrCode": "QR Code",
+          "showQrCode": "Show QR Code",
+          "verificationMessage": "Verify that the shared address matches on your device",
+          "messageIfUnverified": "Always verify the address displayed on your device exactly matches the one on your device"
         },
         "warning": {
           "tezos": {

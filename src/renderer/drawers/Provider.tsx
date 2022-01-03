@@ -5,7 +5,9 @@ type State = {
   Component?: React.ComponentType;
   componentProps?: null | Record<string, any>;
   open: boolean;
-  options?: Partial<Omit<DrawerProps, "children" | "isOpen">>;
+  options?: Partial<Omit<DrawerProps, "children" | "isOpen">> & {
+    useLightTheme?: boolean;
+  };
   // isOpen and children are controlled by the Drawer component itself according to the context
 };
 

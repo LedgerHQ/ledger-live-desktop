@@ -29,7 +29,8 @@ export function SideDrawer({
     focusTrap.current = createFocusTrap(ref, {
       fallbackFocus: ref,
       escapeDeactivates: false,
-      clickOutsideDeactivates: false,
+      // Allows clicks inside portalled elements - i.e. selectors
+      allowOutsideClick: true,
       preventScroll: true,
     });
   };

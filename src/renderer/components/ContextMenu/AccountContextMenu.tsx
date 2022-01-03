@@ -13,6 +13,7 @@ import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { context as drawersContext } from "~/renderer/drawers/Provider";
 import AccountSettingRenderBody from "~/renderer/modals/SettingsAccount/AccountSettingRenderBody";
+import { ReceiveDrawer } from "~/renderer/drawers/ReceiveFlow";
 
 type Props = {
   account: AccountLike;
@@ -58,7 +59,8 @@ export default function AccountContextMenu({
       {
         label: "accounts.contextMenu.receive",
         Icon: Icons.ArrowBottomMedium,
-        callback: () => dispatch(openModal("MODAL_RECEIVE", { account, parentAccount })),
+        callback: () =>
+          setDrawer(ReceiveDrawer, { account, parentAccount }, ReceiveDrawer.initialOptions),
       },
     );
 

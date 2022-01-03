@@ -5,10 +5,11 @@ import type { StyledComponent } from "styled-components";
 import defaultTheme from "./theme";
 import palettes from "./palettes";
 import type { Theme } from "./theme";
+import { merge } from "lodash"
 
 import { GlobalStyle } from "@ledgerhq/react-ui/styles";
 
-import { defaultTheme as V3dDfaultTheme, palettes as V3Palettes } from "@ledgerhq/react-ui/styles";
+import { defaultTheme as DefaultThemeV3, palettes as PalettesV3 } from "@ledgerhq/react-ui/styles";
 
 type Props = {
   children: React.ReactNode;
@@ -23,17 +24,16 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
   const theme: Theme = useMemo(
     () => ({
       ...defaultTheme,
-      ...V3dDfaultTheme,
+      ...DefaultThemeV3,
       colors: {
         ...defaultTheme.colors,
-        ...V3Palettes[selectedPalette],
-        palette: { ...palettesAny[selectedPalette], ...V3Palettes[selectedPalette] },
+        ...PalettesV3[selectedPalette],
+        palette: merge(palettesAny[selectedPalette], PalettesV3[selectedPalette]),
       },
+      theme: selectedPalette,
     }),
     [palettesAny, selectedPalette],
   );
-
-  console.log(V3dDfaultTheme, selectedPalette)
 
   return (
     <ThemeProvider theme={theme}>
