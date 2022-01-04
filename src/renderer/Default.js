@@ -56,6 +56,8 @@ import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import Market from "~/renderer/screens/market";
 // $FlowFixMe
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
+import { useSelector } from "react-redux";
+import { developerModeSelector } from "./reducers/settings";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -115,6 +117,7 @@ export default function Default() {
   const ref: React$ElementRef<any> = useRef();
   useDeeplink();
   useUSBTroubleshooting();
+  const devMode = useSelector(developerModeSelector);
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -202,11 +205,15 @@ export default function Default() {
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
                         />
-                        <Route
-                          path="/market/:currencyId"
-                          render={props => <MarketCoinScreen {...props} />}
-                        />
-                        <Route path="/market" render={props => <Market {...props} />} />
+                        {devMode ? (
+                          <>
+                            <Route
+                              path="/market/:currencyId"
+                              render={props => <MarketCoinScreen {...props} />}
+                            />
+                            <Route path="/market" render={props => <Market {...props} />} />
+                          </>
+                        ) : null}
                       </Switch>
                     </Page>
                     <Drawer />

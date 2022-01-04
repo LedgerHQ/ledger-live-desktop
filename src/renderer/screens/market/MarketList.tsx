@@ -134,7 +134,7 @@ export const TableRow = styled(Flex).attrs({
   }
   ${TableCellBase}:nth-child(6) {
     flex: 1 0 70px;
-    pointer-events: none;
+    justify-content: flex-end;
   }
   
   ${TableCellBase}:nth-child(7) {
@@ -194,7 +194,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
-  const availableOnSell = currency && isCurrencySupported("SELL", currency);
   const availableOnBuy = currency && isCurrencySupported("BUY", currency);
   const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
   return (
@@ -207,7 +206,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
       key={index}
       locale={locale}
       selectCurrency={selectCurrency}
-      availableOnSell={availableOnSell}
       availableOnBuy={availableOnBuy}
       availableOnSwap={availableOnSwap}
       style={{ ...style }}
@@ -268,8 +266,8 @@ function MarketList({
         isFreshSort
           ? { orderBy: newOrderBy, order: "desc" }
           : {
-              orderBy: order === "asc" ? undefined : newOrderBy,
-              order: !order ? "desc" : order === "desc" ? "asc" : undefined,
+              orderBy: newOrderBy,
+              order: !order ? "desc" : "asc",
             },
       );
     },
@@ -300,7 +298,7 @@ function MarketList({
             <TableCell>{t("market.marketList.marketCap")}</TableCell>
             <TableCell>{t("market.marketList.last7d")}</TableCell>
             <TableCell onClick={toggleStarredAccounts}>
-              <Icon name={starred?.length > 0 ? "StarSolid" : "Star"} size={18} />
+              <Icon name={starred && starred.length > 0 ? "StarSolid" : "Star"} size={18} />
             </TableCell>
           </TableRow>
           <Flex flex="1">

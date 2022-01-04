@@ -32,7 +32,6 @@ type Props = {
   isStarred: boolean;
   toggleStar: () => void;
   selectCurrency: (currencyId: string) => void;
-  availableOnSell: boolean;
   availableOnBuy: boolean;
   availableOnSwap: boolean;
 };
@@ -46,7 +45,6 @@ function MarketRowItem({
   isStarred,
   toggleStar,
   selectCurrency,
-  availableOnSell,
   availableOnBuy,
   availableOnSwap,
 }: Props) {
@@ -72,22 +70,6 @@ function MarketRowItem({
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency.internalCurrency,
-        },
-      });
-    },
-    [currency, history],
-  );
-
-  const onSell = useCallback(
-    e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("market page");
-      history.push({
-        pathname: "/echange",
-        state: {
-          tab: 1,
           defaultCurrency: currency.internalCurrency,
         },
       });
@@ -161,11 +143,6 @@ function MarketRowItem({
                   {availableOnBuy && (
                     <Button variant="shade" mr={1} onClick={onBuy}>
                       {t("accounts.contextMenu.buy")}
-                    </Button>
-                  )}
-                  {availableOnSell && (
-                    <Button variant="shade" mr={1} onClick={onSell}>
-                      {t("accounts.contextMenu.sell")}
                     </Button>
                   )}
                   {availableOnSwap && (

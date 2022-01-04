@@ -5,11 +5,10 @@ import { SwitchTransition, Transition } from "react-transition-group";
 import { rangeDataTable } from "../utils/rangeDataTable";
 import counterValueFormatter from "../utils/countervalueFormatter";
 import FormattedVal from "~/renderer/components/FormattedVal";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import Chart from "~/renderer/components/Chart";
 import FormattedDate from "~/renderer/components/FormattedDate";
 import ChartPlaceholder from "../assets/ChartPlaceholder";
-import { useDebounce } from "@ledgerhq/live-common/lib/hooks/useDebounce";
 
 const Title = styled(Text).attrs({ variant: "h3", color: "neutral.c100", mt: 1, mb: 5 })`
   font-size: 28px;
@@ -33,7 +32,9 @@ const transitionStyles = {
   exited: { opacity: 0 },
 };
 
-const FadeIn = styled.div.attrs(p => ({ style: transitionStyles[p.state] }))`
+const FadeIn = styled.div.attrs<{ state: string }>(p => ({ style: transitionStyles[p.state] }))<{
+  state: string;
+}>`
   opacity: 0;
   transition: opacity 1s ease-out;
 `;
@@ -126,7 +127,7 @@ function MarkeCoinChartComponent({
 
   return (
     <Flex py={6} flexDirection="column" alignContent="stretch">
-      <Flex mb={2} flexDirection="row" justifyContent="space-between" alignItems="baseline">
+      <Flex mb={2} flexDirection="row" justifyContent="space-between" alignItems="flex-end">
         <Flex flexDirection="column">
           <SubTitle>{t("market.marketList.price")}</SubTitle>
           <Title>

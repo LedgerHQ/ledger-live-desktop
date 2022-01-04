@@ -79,7 +79,7 @@ export default function Market() {
   );
 
   const toggleFilterByStarredAccounts = useCallback(() => {
-    if (starredMarketCoins.length > 0) {
+    if (starredMarketCoins.length > 0 || starFilterOn) {
       const starred = starFilterOn ? [] : starredMarketCoins;
       refresh({ starred });
     }

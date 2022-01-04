@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Flex, Text, Icons } from "@ledgerhq/react-ui";
+import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -35,6 +35,14 @@ const Container = styled(Flex).attrs({
   justifyContent: "flex-start",
 })``;
 
+const StarContainer = styled(Flex).attrs({
+  height: 33,
+  ml: 2,
+  p: 1,
+})`
+  cursor: pointer;
+`;
+
 const Title = styled(Text).attrs({ variant: "h3" })`
   font-size: 28px;
   line-height: 33px;
@@ -43,7 +51,7 @@ const Title = styled(Text).attrs({ variant: "h3" })`
 export default function MarketCoinScreen() {
   const { t } = useTranslation();
   const history = useHistory();
-  const { currencyId } = useParams();
+  const { currencyId } = useParams<{ currencyId: string }>();
   const { colors } = useTheme();
   const dispatch = useDispatch();
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
@@ -62,14 +70,12 @@ export default function MarketCoinScreen() {
     chartRequestParams,
     loading,
     loadingChart,
-    error,
     refreshChart,
     counterCurrency,
     setCounterCurrency,
     supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
 
-  const availableOnSell = currency && isCurrencySupported("SELL", currency);
   const availableOnBuy = currency && isCurrencySupported("BUY", currency);
   const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
 
@@ -116,22 +122,6 @@ export default function MarketCoinScreen() {
     [internalCurrency, history],
   );
 
-  const onSell = useCallback(
-    e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("market page details");
-      history.push({
-        pathname: "/exchange",
-        state: {
-          tab: 1,
-          defaultCurrency: internalCurrency,
-        },
-      });
-    },
-    [history, internalCurrency],
-  );
-
   const onSwap = useCallback(
     e => {
       e.preventDefault();
@@ -174,13 +164,9 @@ export default function MarketCoinScreen() {
           <Flex pl={3} flexDirection="column" alignItems="left" pr={16}>
             <Flex flexDirection="row" alignItems="center">
               <Title>{name}</Title>
-              <Button
-                height="33"
-                ml={2}
-                p={1}
-                onClick={toggleStar}
-                Icon={isStarred ? Icons.StarSolidRegular : Icons.StarRegular}
-              />
+              <StarContainer onClick={toggleStar}>
+                <Icon name={isStarred > 0 ? "StarSolid" : "Star"} size={18} />
+              </StarContainer>
             </Flex>
             <Text variant="small" color="neutral.c60">
               {ticker.toUpperCase()}
@@ -193,11 +179,6 @@ export default function MarketCoinScreen() {
               {availableOnBuy && (
                 <Button variant="shade" mr={1} onClick={onBuy}>
                   {t("accounts.contextMenu.buy")}
-                </Button>
-              )}
-              {availableOnSell && (
-                <Button variant="shade" mr={1} onClick={onSell}>
-                  {t("accounts.contextMenu.sell")}
                 </Button>
               )}
               {availableOnSwap && (

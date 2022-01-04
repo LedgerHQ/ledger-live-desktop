@@ -172,7 +172,7 @@ async function listPaginated({
       athDate: currency.ath_date,
       atl: currency.atl,
       atlDate: currency.atl_date,
-      sparklineIn7d: currency?.sparkline_in_7d?.price
+      sparklineIn7d: currency?.sparkline_in_7d?.price?.length >= 6 * 7
         ? sparklineAsSvgData(distributedCopy(currency.sparkline_in_7d.price, 6 * 7)) // keep 6 points per day
         : null,
       chartData: [],
