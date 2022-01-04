@@ -1,4 +1,4 @@
-name: "Report | Screenshot Testing Reports"
+name: "Report | Tests Reports"
 on:
   # workflow_dispatch:
   #   inputs:
@@ -7,7 +7,7 @@ on:
   #       required: true
 
   workflow_run:
-    workflows: ["Tests | Screenshot Testing"]
+    workflows: ["Tests | Test Suite"]
     types:
       - "completed"
 
