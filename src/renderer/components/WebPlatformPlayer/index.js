@@ -45,6 +45,8 @@ import BigSpinner from "~/renderer/components/BigSpinner";
 import * as tracking from "./tracking";
 import TopBar from "./TopBar";
 
+import type { TopBarConfig } from "./type";
+
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
   flex-direction: column;
@@ -77,13 +79,18 @@ const Loader: ThemedComponent<{}> = styled.div`
   bottom: 0;
 `;
 
+type WebPlatformPlayerConfig = {
+  topBarConfig?: TopBarConfig,
+};
+
 type Props = {
   manifest: AppManifest,
   onClose?: Function,
   inputs?: Object,
+  config?: WebPlatformPlayerConfig,
 };
 
-const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
+const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
   const theme = useTheme("colors.palette");
 
   const targetRef: { current: null | WebviewTag } = useRef(null);
@@ -386,7 +393,9 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs }: Props) => {
         onReload={handleReload}
         onClose={onClose}
         onOpenDevTools={handleOpenDevTools}
+        config={config?.topBarConfig}
       />
+
       <Wrapper>
         <CustomWebview
           src={url.toString()}
