@@ -60,7 +60,7 @@ const buildTasks = args => [
   {
     title: "Compiling assets",
     task: async () => {
-      await exec("pnpm", ["build"]);
+      await exec("pnpm", ["run", "build"]);
     },
   },
   {
@@ -85,7 +85,7 @@ const buildTasks = args => [
         commands.push("electron-builder-ci.yml");
       }
 
-      await exec("pnpm", commands, {
+      await exec("pnpm", ["run", ...commands], {
         env: args.publish
           ? {
               SENTRY_URL:
