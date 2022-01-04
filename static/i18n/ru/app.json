@@ -191,6 +191,7 @@
     "feesAmount": "Размер комиссии"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Меню",
     "stars": "Избранные счета",
     "accounts": "Счета",
