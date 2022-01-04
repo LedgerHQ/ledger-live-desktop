@@ -5,6 +5,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { accountSelector } from "~/renderer/reducers/accounts";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import styled from "styled-components";

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { accountSelector } from "~/renderer/reducers/accounts";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import styled from "styled-components";
 import useOnScreen from "../useOnScreen";
