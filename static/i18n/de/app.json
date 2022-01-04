@@ -191,6 +191,7 @@
     "feesAmount": "Gebührenbetrag"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
