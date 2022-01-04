@@ -5,3 +5,9 @@ export type Manifest = {
   url: URL,
   icon?: string,
 };
+
+export type TopBarConfig = {
+  shouldDisplayName?: boolean,
+  shouldDisplayInfo?: boolean,
+  shouldDisplayClose?: boolean,
+};
