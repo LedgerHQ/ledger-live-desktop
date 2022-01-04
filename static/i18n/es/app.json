@@ -191,6 +191,7 @@
     "feesAmount": "Importe de tarifas"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menú",
     "stars": "Cuentas destacadas",
     "accounts": "Cuentas",
