@@ -191,6 +191,7 @@
     "feesAmount": "手数料"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
