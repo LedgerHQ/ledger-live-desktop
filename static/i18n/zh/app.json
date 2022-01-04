@@ -191,6 +191,7 @@
     "feesAmount": "费用额度"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
