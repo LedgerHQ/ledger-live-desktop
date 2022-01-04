@@ -41,7 +41,7 @@ export function CopiableField({ value }: CopiableFieldProps) {
   return (
     <CopiableFieldContainer>
       <HashContainer>
-        <SplitAddress value={value} />
+        <SplitAddress value={value} ff="Inter|Regular" />
       </HashContainer>
       <GradientHover>
         <CopyWithFeedback text={value} />
