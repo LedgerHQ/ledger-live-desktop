@@ -30,12 +30,14 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
+      - name: install pnpm
+        run: npm i -g pnpm
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+        run: pnpm --frozen-lockfile
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -48,14 +50,14 @@ jobs:
         if: github.event_name == 'pull_request'
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
-        run: yarn version --new-version="$VERSION"
+        run: pnpm version --new-version="$VERSION"
       - name: make local version push
         if: github.event_name == 'push'
         env:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
-        run: yarn build-ci
+        run: pnpm build-ci
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: post-version
         with:
@@ -107,6 +109,8 @@ jobs:
       - name: install yarn
         if: always()
         run: npm install --global yarn
+      - name: install pnpm
+        run: npm i -g pnpm
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
@@ -116,7 +120,7 @@ jobs:
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+        run: pnpm --frozen-lockfile
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -136,7 +140,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
-        run: yarn build-ci
+        run: pnpm build-ci
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: post-version
         with:
@@ -160,6 +164,8 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
+      - name: install pnpm
+        run: npm i -g pnpm
       - uses: actions/setup-python@v1
         with:
           python-version: "2.7.x"
@@ -168,9 +174,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install dependencies
-        env:
-          JOBS: max
-        run: yarn --frozen-lockfile --network-timeout 100000
+        run: pnpm --frozen-lockfile
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -188,7 +192,7 @@ jobs:
         if: github.event_name == 'push'
         run: echo "::set-output name=content::${{ steps.version.outputs.clean }}-sha.${{ github.sha }}"
       - name: build the app
-        run: yarn build-ci
+        run: pnpm build-ci
       - name: upload windows
         uses: actions/upload-artifact@v1
         with:
