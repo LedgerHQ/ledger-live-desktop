@@ -191,6 +191,7 @@
     "feesAmount": "Fees Amount"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menü",
     "stars": "Csillagozott számlák",
     "accounts": "Számlák",
