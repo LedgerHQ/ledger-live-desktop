@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { FrameLocator } from "playwright";
 
 export class DiscoverPage {
   readonly page: Page;
@@ -23,6 +24,18 @@ export class DiscoverPage {
 
   async acceptLiveAppDisclaimer() {
     await this.liveAppDisclaimerContinueButton.click();
+  }
+
+  async getAccountsList() {
+    // console.log(await this.page.mainFrame().childFrames()[0])
+    const accountsListResult = await this.page.mainFrame().childFrames()[0].evaluate(() => {
+    //   return getAccountsList();
+    // }, []);
+
+      (window as any).getAccounts();
+    });
+
+    console.log(accountsListResult)
   }
 
   // // Open new page
