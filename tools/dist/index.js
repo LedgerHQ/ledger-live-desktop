@@ -68,7 +68,7 @@ const buildTasks = args => [
       ? "Bundling and publishing the electron application"
       : "Bundling the electron application",
     task: async () => {
-      const commands = ["dist:internal"];
+      const commands = ["dist:internal", "--"];
       if (args.dir) commands.push("--dir");
       if (args.publish) {
         commands.push("--publish", "always");
