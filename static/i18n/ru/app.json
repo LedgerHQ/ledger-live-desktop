@@ -3487,7 +3487,7 @@
     },
     "solana": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memoPlaceholder": "Опционально"
     }
   },
   "errors": {
@@ -4063,13 +4063,13 @@
       "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Счёт не пополнен"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Слишком длинное примечание (Memo). Макс. длина {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Адрес за пределами кривой ed25519"
     },
     "NotEnoughNftOwned": {
       "title": "Вы превысили кол-во доступных токенов"
