@@ -16,7 +16,7 @@ import networkApi from "../../../tests/mocks/serviceStatusHelpers";
 let notificationsApi;
 let serviceStatusApi;
 
-if (process.env.MOCK || process.env.SPECTRON_RUN) {
+if (process.env.MOCK || process.env.PLAYWRIGHT_RUN) {
   notificationsApi = fetchApi;
   serviceStatusApi = networkApi;
 }
@@ -137,7 +137,7 @@ export function AnnouncementProviderWrapper({ children }: Props) {
     [dismissToast],
   );
 
-  const autoUpdateDelay = process.env.SPECTRON_RUN || process.env.MOCK ? 16 : 60000;
+  const autoUpdateDelay = process.env.PLAYWRIGHT_RUN || process.env.MOCK ? 16 : 60000;
 
   return (
     <AnnouncementProvider

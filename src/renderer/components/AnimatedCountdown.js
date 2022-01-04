@@ -26,7 +26,7 @@ const AnimatedCountdown = ({
   return (
     <WrappedSvg bgColor={bgColor} width={size} height={size} viewBox={"0 0 32 32"}>
       <circle r={16} cx={16} cy={16} strokeWidth={32} fill={fillColor} stroke={bgColor}>
-        {process.env.SPECTRON_RUN ? null : (
+        {process.env.PLAYWRIGHT_RUN ? null : (
           <animate
             attributeName="stroke-dasharray"
             from="0 100"

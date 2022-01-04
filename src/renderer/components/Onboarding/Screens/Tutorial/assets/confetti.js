@@ -14,7 +14,7 @@ function fire(particleRatio, opts) {
 }
 
 export const fireConfetti = () => {
-  if (process.env.SPECTRON_RUN) {
+  if (process.env.PLAYWRIGHT_RUN) {
     return;
   }
   fire(0.25, {

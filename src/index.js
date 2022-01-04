@@ -1,4 +1,4 @@
-if (process.env.SPECTRON_RUN) {
+if (process.env.PLAYWRIGHT_RUN) {
   const timemachine = require("timemachine");
   timemachine.config({
     dateString: require("../tests/time").default,

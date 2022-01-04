@@ -21,7 +21,7 @@ const SectionHelp = () => {
   const dispatch = useDispatch();
   const { pushToast } = useToasts();
 
-  const version = process.env.SPECTRON_RUN ? "0.0.0" : __APP_VERSION__;
+  const version = process.env.PLAYWRIGHT_RUN ? "0.0.0" : __APP_VERSION__;
   const [clickCounter, setClickCounter] = useState(0);
   const onVersionClick = useCallback(() => {
     if (clickCounter < 10) {

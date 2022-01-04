@@ -69,7 +69,7 @@ const extraProperties = store => {
 let storeInstance; // is the redux store. it's also used as a flag to know if analytics is on or off.
 
 export const start = async (store: *) => {
-  if (!user || process.env.MOCK || process.env.SPECTRON_RUN) return;
+  if (!user || process.env.MOCK || process.env.PLAYWRIGHT_RUN) return;
   const { id } = await user();
   logger.analyticsStart(id, extraProperties(store));
   storeInstance = store;
