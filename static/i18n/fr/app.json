@@ -191,6 +191,7 @@
     "feesAmount": "Montant des frais"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
