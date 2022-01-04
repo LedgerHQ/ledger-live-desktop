@@ -54,6 +54,7 @@ specifiers:
   copy-webpack-plugin: ^6.1.0
   cross-env: ^7.0.3
   css-loader: ^3.5.3
+  debug: ^4.3.3
   dotenv: ^8.2.0
   electron: 13.5.2
   electron-builder: 22.13.1
@@ -123,6 +124,7 @@ specifiers:
   react-markdown: ^4.3.0
   react-motion: ^0.5.2
   react-redux: ^7.2.6
+  react-router: 5.2.0
   react-router-dom: ^5.2.0
   react-select: ^3.2.0
   react-spring: ^8.0.27
@@ -150,6 +152,7 @@ specifiers:
   uncontrollable: ^7.2.1
   unused-webpack-plugin: ^2.4.0
   url-loader: ^4.1.1
+  usb-detection: ^4.13.0
   uuid: ^8.3.2
   v8-to-istanbul: ^8.1.0
   webpack: ^4.44.1
@@ -174,10 +177,10 @@ dependencies:
   '@ledgerhq/electron-updater': 4.2.2
   '@ledgerhq/errors': 6.10.0
   '@ledgerhq/hw-transport': 6.20.0
-  '@ledgerhq/hw-transport-http': 6.20.0
+  '@ledgerhq/hw-transport-http': 6.20.0_debug@4.3.3
   '@ledgerhq/hw-transport-node-hid-singleton': 6.20.0
   '@ledgerhq/ledger-core': 6.14.5
-  '@ledgerhq/live-common': 21.23.0_1b32975b1e59c369fcaf7e57e74bfbba
+  '@ledgerhq/live-common': 21.23.0_c38b90c5c4f225309042819f3dff1fbe
   '@ledgerhq/logs': 6.10.0
   '@polkadot/react-identicon': 0.87.6_react-dom@17.0.2+react@17.0.2
   '@tippyjs/react': 4.2.6_react-dom@17.0.2+react@17.0.2
@@ -186,11 +189,12 @@ dependencies:
   '@xstate/react': 1.6.3_react@17.0.2+xstate@4.27.0
   animated: 0.2.2_react-dom@17.0.2+react@17.0.2
   async: 3.2.2
-  axios: 0.24.0
+  axios: 0.24.0_debug@4.3.3
   bignumber.js: 9.0.2
   canvas-confetti: 1.4.0
   chart.js: 2.9.4
   color: 3.2.1
+  debug: 4.3.3
   dotenv: 8.6.0
   electron-context-menu: 2.5.2
   ethereumjs-tx: 2.1.2
@@ -228,6 +232,7 @@ dependencies:
   react-markdown: 4.3.1_react@17.0.2
   react-motion: 0.5.2_react@17.0.2
   react-redux: 7.2.6_react-dom@17.0.2+react@17.0.2
+  react-router: 5.2.0_react@17.0.2
   react-router-dom: 5.3.0_react@17.0.2
   react-select: 3.2.0_react-dom@17.0.2+react@17.0.2
   react-spring: 8.0.27_react-dom@17.0.2+react@17.0.2
@@ -250,6 +255,7 @@ dependencies:
   tippy.js: 6.3.7
   tree-kill: 1.2.2
   uncontrollable: 7.2.1_react@17.0.2
+  usb-detection: 4.13.0
   uuid: 8.3.2
   winston: 3.3.3
   winston-transport: 4.4.1
@@ -1921,14 +1927,14 @@ packages:
       xstream: 11.14.0
     dev: false
 
-  /@cosmjs/launchpad/0.24.1:
+  /@cosmjs/launchpad/0.24.1_debug@4.3.3:
     resolution: {integrity: sha512-syqVGKRH6z1vw4DdAJOSu4OgUXJdkXQozqvDde0cXYwnvhb7EXGSg5CTtp+2GqTBJuNVfMZ2DSvrC2Ig8cWBQQ==}
     dependencies:
       '@cosmjs/crypto': 0.24.1
       '@cosmjs/encoding': 0.24.1
       '@cosmjs/math': 0.24.1
       '@cosmjs/utils': 0.24.1
-      axios: 0.21.4
+      axios: 0.21.4_debug@4.3.3
       fast-deep-equal: 3.1.3
     transitivePeerDependencies:
       - debug
@@ -1952,10 +1958,10 @@ packages:
       bn.js: 4.12.0
     dev: false
 
-  /@cosmjs/proto-signing/0.24.1:
+  /@cosmjs/proto-signing/0.24.1_debug@4.3.3:
     resolution: {integrity: sha512-/rnyNx+FlG6b6O+igsb42eMN1/RXY+pTrNnAE8/YZaRloP9A6MXiTMO5JdYSTcjaD0mEVhejiy96bcyflKYXBg==}
     dependencies:
-      '@cosmjs/launchpad': 0.24.1
+      '@cosmjs/launchpad': 0.24.1_debug@4.3.3
       long: 4.0.0
       protobufjs: 6.10.2
     transitivePeerDependencies:
@@ -1982,7 +1988,7 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@cosmjs/stargate/0.25.0-alpha.2:
+  /@cosmjs/stargate/0.25.0-alpha.2_debug@4.3.3:
     resolution: {integrity: sha512-r6VT720EuF6yPwS1WGPPUAPUOfD5aVIRlVJNJHkePWGg4l+ztJtoUbr7QN1CoPrxvG3b+WflNug1EQ7dG44UsA==}
     dependencies:
       '@confio/ics23': 0.6.5
@@ -1991,7 +1997,7 @@ packages:
       '@cosmjs/math': 0.25.6
       '@cosmjs/proto-signing': 0.25.6
       '@cosmjs/stream': 0.25.6
-      '@cosmjs/tendermint-rpc': 0.25.0-alpha.2
+      '@cosmjs/tendermint-rpc': 0.25.0-alpha.2_debug@4.3.3
       '@cosmjs/utils': 0.25.6
       long: 4.0.0
       protobufjs: 6.10.2
@@ -2007,7 +2013,7 @@ packages:
       xstream: 11.14.0
     dev: false
 
-  /@cosmjs/tendermint-rpc/0.25.0-alpha.2:
+  /@cosmjs/tendermint-rpc/0.25.0-alpha.2_debug@4.3.3:
     resolution: {integrity: sha512-1xK8mPwFWiWnyGafZhAdwYfcYmXl1l7UxQRR3yI2Q3kDk7CQhT87mgeAd56jw9JOaZvLYKKTgCRZkLNiKjXNew==}
     dependencies:
       '@cosmjs/crypto': 0.25.6
@@ -2016,7 +2022,7 @@ packages:
       '@cosmjs/math': 0.25.6
       '@cosmjs/socket': 0.25.6
       '@cosmjs/stream': 0.25.6
-      axios: 0.21.4
+      axios: 0.21.4_debug@4.3.3
       readonly-date: 1.0.0
       xstream: 11.14.0
     transitivePeerDependencies:
@@ -2033,16 +2039,16 @@ packages:
     resolution: {integrity: sha512-ofOYiuxVKNo238vCPPlaDzqPXy2AQ/5/nashBo5rvPZJkxt9LciGfUEQWPCOb1BIJDNx2Dzu0z4XCf/dwzl0Dg==}
     dev: false
 
-  /@crypto-com/chain-jslib/0.0.19:
+  /@crypto-com/chain-jslib/0.0.19_debug@4.3.3:
     resolution: {integrity: sha512-kMPc4nSweAbbvqkAkUZxDvaHVc+ZtEpsZjKfIp4IPx9edHGq5teakghnYOUE4beRj1/M6dGBBRtWAtzP460L1A==}
     dependencies:
       '@cosmjs/amino': 0.25.0-alpha.2
       '@cosmjs/encoding': 0.23.1
       '@cosmjs/math': 0.23.1
-      '@cosmjs/proto-signing': 0.24.1
-      '@cosmjs/stargate': 0.25.0-alpha.2
-      '@cosmjs/tendermint-rpc': 0.25.0-alpha.2
-      axios: 0.21.1
+      '@cosmjs/proto-signing': 0.24.1_debug@4.3.3
+      '@cosmjs/stargate': 0.25.0-alpha.2_debug@4.3.3
+      '@cosmjs/tendermint-rpc': 0.25.0-alpha.2_debug@4.3.3
+      axios: 0.21.1_debug@4.3.3
       bech32: 1.1.4
       big.js: 6.0.0
       bip32: 2.0.6
@@ -2893,14 +2899,14 @@ packages:
       bip32-path: 0.4.2
     dev: false
 
-  /@ledgerhq/hw-app-eth/6.21.3:
+  /@ledgerhq/hw-app-eth/6.21.3_debug@4.3.3:
     resolution: {integrity: sha512-/0sbQVpzqi2q+2k2C9KRWt8eIBe3bXka+bCaSyAP2a26aEbTquAWYPJ4z+vmr103jTc1ZeuBN/okspUXoYPOzA==}
     dependencies:
       '@ledgerhq/cryptoassets': 6.21.3
       '@ledgerhq/errors': 6.10.0
       '@ledgerhq/hw-transport': 6.20.0
       '@ledgerhq/logs': 6.10.0
-      axios: 0.24.0
+      axios: 0.24.0_debug@4.3.3
       bignumber.js: 9.0.2
       ethers: 5.5.2
     transitivePeerDependencies:
@@ -2958,13 +2964,13 @@ packages:
       bip32-path: 0.4.2
     dev: false
 
-  /@ledgerhq/hw-transport-http/6.20.0:
+  /@ledgerhq/hw-transport-http/6.20.0_debug@4.3.3:
     resolution: {integrity: sha512-YNXPqOt7mGO7/OEzM4ArTYCfay2ShzWLIzBnfIMLn8Rykni07sA99cAsTDlqilB/0jIaLLX2N4MqSxkBXINw3A==}
     dependencies:
       '@ledgerhq/errors': 6.10.0
       '@ledgerhq/hw-transport': 6.20.0
       '@ledgerhq/logs': 6.10.0
-      axios: 0.24.0
+      axios: 0.24.0_debug@4.3.3
       ws: 7.5.6
     transitivePeerDependencies:
       - bufferutil
@@ -3053,7 +3059,7 @@ packages:
       json-rpc-2.0: 0.2.19
     dev: false
 
-  /@ledgerhq/live-common/21.23.0_1b32975b1e59c369fcaf7e57e74bfbba:
+  /@ledgerhq/live-common/21.23.0_c38b90c5c4f225309042819f3dff1fbe:
     resolution: {integrity: sha512-YeiRHv3u0ouCt1NnpMlAknjp0xPx8wxWz7DBww6c/fvbfRJIMrscSZjCqirVnpssxBe3ekT1lWies6WlgiFwzw==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -3061,7 +3067,7 @@ packages:
       react-dom: '>=16'
       react-redux: '7'
     dependencies:
-      '@crypto-com/chain-jslib': 0.0.19
+      '@crypto-com/chain-jslib': 0.0.19_debug@4.3.3
       '@ledgerhq/compressjs': 1.3.2
       '@ledgerhq/cryptoassets': 6.21.3
       '@ledgerhq/devices': 6.20.0
@@ -3069,7 +3075,7 @@ packages:
       '@ledgerhq/hw-app-algorand': 6.20.0
       '@ledgerhq/hw-app-btc': 6.21.0
       '@ledgerhq/hw-app-cosmos': 6.20.0
-      '@ledgerhq/hw-app-eth': 6.21.3
+      '@ledgerhq/hw-app-eth': 6.21.3_debug@4.3.3
       '@ledgerhq/hw-app-polkadot': 6.20.0
       '@ledgerhq/hw-app-solana': 6.20.0
       '@ledgerhq/hw-app-str': 6.20.0
@@ -3095,7 +3101,7 @@ packages:
       '@zondax/ledger-filecoin': 0.11.2
       algosdk: 1.12.0
       async: 3.2.2
-      axios: 0.24.0
+      axios: 0.24.0_debug@4.3.3
       axios-retry: 3.2.4
       base32-decode: 1.0.0
       bchaddrjs: 0.5.2
@@ -3146,7 +3152,7 @@ packages:
       secp256k1: 4.0.2
       semver: 7.3.5
       sha.js: 2.4.11
-      stellar-sdk: 9.1.0
+      stellar-sdk: 9.1.0_debug@4.3.3
       triple-beam: 1.3.0
       winston: 3.3.3
       xstate: 4.27.0
@@ -7053,26 +7059,26 @@ packages:
       is-retry-allowed: 2.2.0
     dev: false
 
-  /axios/0.21.1:
+  /axios/0.21.1_debug@4.3.3:
     resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
     dependencies:
-      follow-redirects: 1.14.6
+      follow-redirects: 1.14.6_debug@4.3.3
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /axios/0.21.4:
+  /axios/0.21.4_debug@4.3.3:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.14.6
+      follow-redirects: 1.14.6_debug@4.3.3
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /axios/0.24.0:
+  /axios/0.24.0_debug@4.3.3:
     resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
     dependencies:
-      follow-redirects: 1.14.6
+      follow-redirects: 1.14.6_debug@4.3.3
     transitivePeerDependencies:
       - debug
     dev: false
@@ -9967,7 +9973,7 @@ packages:
       bn.js: 2.0.4
       brorand: 1.1.0
       hash.js: 1.1.7
-      inherits: 2.0.1
+      inherits: 2.0.4
     dev: false
 
   /elliptic/6.5.4:
@@ -11301,7 +11307,7 @@ packages:
       tabbable: 5.2.1
     dev: false
 
-  /follow-redirects/1.14.6:
+  /follow-redirects/1.14.6_debug@4.3.3:
     resolution: {integrity: sha512-fhUl5EwSJbbl8AR+uYL2KQDxLkdSjZGR36xy46AO7cOMTrCMON6Sa28FmAnC2tRTDbd/Uuzz3aJBv7EBN7JH8A==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -11309,6 +11315,8 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dependencies:
+      debug: 4.3.3
     dev: false
 
   /for-in/1.0.2:
@@ -17194,6 +17202,24 @@ packages:
       react-router: 6.2.1_react@17.0.2
     dev: true
 
+  /react-router/5.2.0_react@17.0.2:
+    resolution: {integrity: sha512-smz1DUuFHRKdcJC0jobGo8cVbhO3x50tCL4icacOlcwDOEQPq4TMqwx3sY1TP+DvtTgz4nm3thuo7A+BK2U0Dw==}
+    peerDependencies:
+      react: '>=15'
+    dependencies:
+      '@babel/runtime': 7.16.7
+      history: 4.10.1
+      hoist-non-react-statics: 3.3.2
+      loose-envify: 1.4.0
+      mini-create-react-context: 0.4.1_prop-types@15.8.0+react@17.0.2
+      path-to-regexp: 1.8.0
+      prop-types: 15.8.0
+      react: 17.0.2
+      react-is: 16.13.1
+      tiny-invariant: 1.2.0
+      tiny-warning: 1.0.3
+    dev: false
+
   /react-router/5.2.1_react@17.0.2:
     resolution: {integrity: sha512-lIboRiOtDLFdg1VTemMwud9vRVuOCZmUIT/7lUoZiSpPODiiH1UQlfXy+vPLC/7IWdFYnhRwAyNqA/+I7wnvKQ==}
     peerDependencies:
@@ -18684,14 +18710,14 @@ packages:
       sodium-native: 2.4.9
     dev: false
 
-  /stellar-sdk/9.1.0:
+  /stellar-sdk/9.1.0_debug@4.3.3:
     resolution: {integrity: sha512-Y2B/pGM+eEC4Iuf6vGBGD86AdXYHCahuEiTa7kMOSDR/SXv7UQdOcrEpho+ZjTqZP0cYBe9UOTkYiW12Sm3IzQ==}
     dependencies:
       '@types/eventsource': 1.1.8
       '@types/node': 17.0.7
       '@types/randombytes': 2.0.0
       '@types/urijs': 1.19.17
-      axios: 0.21.4
+      axios: 0.21.4_debug@4.3.3
       bignumber.js: 4.1.0
       detect-node: 2.1.0
       es6-promise: 4.2.8
