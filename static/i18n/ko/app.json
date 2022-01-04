@@ -191,6 +191,7 @@
     "feesAmount": "수수료 비용"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
