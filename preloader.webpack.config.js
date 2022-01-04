@@ -27,6 +27,7 @@ const babelConfig = {
 };
 
 module.exports = {
+  stats: "errors-only",
   target: "electron-renderer",
   entry: ["./src/preloader/index.js"],
   output: {

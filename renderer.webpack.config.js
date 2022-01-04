@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const babelPlugins = require("./babel.plugins");
 const UnusedWebpackPlugin = require("unused-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
 
 const babelConfig = {
   presets: [
@@ -31,6 +30,7 @@ const babelConfig = {
 };
 
 module.exports = {
+  stats: "errors-only",
   target: "electron-renderer",
   entry: ["./src/renderer/index.js"],
   output: {

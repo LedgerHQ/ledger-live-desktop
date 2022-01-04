@@ -27,6 +27,7 @@ const babelConfig = {
 };
 
 module.exports = {
+  stats: "errors-only",
   target: "electron-renderer",
   entry: ["./src/webviewPreloader/index.js"],
   output: {
@@ -68,10 +69,10 @@ module.exports = {
         },
       },
       {
-        type: 'javascript/auto',
+        type: "javascript/auto",
         test: /\.mjs$/,
-        use: []
-      }
+        use: [],
+      },
     ],
   },
   resolve: {

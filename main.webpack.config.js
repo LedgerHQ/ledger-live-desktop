@@ -20,6 +20,7 @@ const babelConfig = {
 };
 
 module.exports = {
+  stats: "errors-only",
   target: "electron-main",
   optimization: {
     minimize: false,
