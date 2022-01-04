@@ -191,6 +191,7 @@
     "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
