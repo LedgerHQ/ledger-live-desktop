@@ -191,6 +191,7 @@
     "feesAmount": "Ücret Tutarı"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
