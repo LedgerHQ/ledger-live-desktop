@@ -9,7 +9,7 @@ const tasks = new Listr(
       title: "Run eslint",
       task: async () => {
         try {
-          const { stdout } = await execa("yarn", ["lint"]);
+          const { stdout } = await execa("pnpm", ["lint"]);
           return stdout;
         } catch (error) {
           process.stderr.write(error.message);
@@ -21,7 +21,7 @@ const tasks = new Listr(
       title: "Run prettier check",
       task: async () => {
         try {
-          const { stdout } = await execa("yarn", ["prettier:check"]);
+          const { stdout } = await execa("pnpm", ["prettier:check"]);
           return stdout;
         } catch (error) {
           process.stderr.write(error.message);
@@ -33,7 +33,7 @@ const tasks = new Listr(
       title: "Run flow",
       task: async () => {
         try {
-          const { stdout } = await execa("yarn", ["flow"]);
+          const { stdout } = await execa("pnpm", ["flow"]);
           return stdout;
         } catch (error) {
           process.stderr.write(error.message);

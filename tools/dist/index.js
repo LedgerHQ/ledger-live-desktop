@@ -51,7 +51,7 @@ const setupTasks = args => [
   {
     title: "Installing packages",
     task: async () => {
-      await exec("yarn", ["-s", "--frozen-lockfile"]);
+      await exec("pnpm", ["i", "--frozen-lockfile"]);
     },
   },
 ];
@@ -60,7 +60,7 @@ const buildTasks = args => [
   {
     title: "Compiling assets",
     task: async () => {
-      await exec("yarn", ["build"]);
+      await exec("pnpm", ["build"]);
     },
   },
   {
@@ -85,7 +85,7 @@ const buildTasks = args => [
         commands.push("electron-builder-ci.yml");
       }
 
-      await exec("yarn", commands, {
+      await exec("pnpm", commands, {
         env: args.publish
           ? {
               SENTRY_URL:
