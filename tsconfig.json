@@ -21,7 +21,7 @@
     "outDir": "tests/tests-out",
     "rootDir": "./src"
   },
-  "include": ["tests", "playwright", "src/**/*"],
+  "include": ["tests", "src/**/*"],
   "exclude": [
     "node_modules",
     "babel.config.js",
