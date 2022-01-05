@@ -122,6 +122,7 @@ export type SettingsState = {
       },
     },
   },
+  starredMarketCoins: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -189,6 +190,7 @@ const INITIAL_STATE: SettingsState = {
     selectableCurrencies: [],
     KYC: {},
   },
+  starredMarketCoins: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -324,6 +326,14 @@ const handlers: Object = {
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
+  ADD_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: [...state.starredMarketCoins, payload],
+  }),
+  REMOVE_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: state.starredMarketCoins.filter(id => id !== payload),
+  }),
 };
 
 // TODO refactor selectors to *Selector naming convention
@@ -515,5 +525,7 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
     blacklistedTokenIds,
   }),
 );
+
+export const starredMarketCoinsSelector = (state: State) => state.settings.starredMarketCoins;
 
 export default handleActions(handlers, INITIAL_STATE);

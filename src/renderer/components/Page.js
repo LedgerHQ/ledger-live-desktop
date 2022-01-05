@@ -66,6 +66,7 @@ const PageContentContainer = styled.div`
   flex-direction: column;
   position: relative;
   flex: 1;
+  height: 100%;
 `;
 
 const ScrollUpButton = styled.div.attrs(p => ({

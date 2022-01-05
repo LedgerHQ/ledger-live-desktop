@@ -55,6 +55,8 @@ export type Props = {
   renderTooltip?: Function,
   renderTickY: (t: number) => string | number,
   valueKey?: string,
+  suggestedMin?: number,
+  suggestedMax?: number,
 };
 
 const ChartContainer: ThemedComponent<{}> = styled.div.attrs(({ height }) => ({
@@ -74,6 +76,8 @@ export default function Chart({
   renderTickY,
   renderTooltip,
   valueKey = "value",
+  suggestedMin,
+  suggestedMax,
 }: Props) {
   const canvasRef = useRef(null);
   const chartRef = useRef(null);
@@ -95,13 +99,17 @@ export default function Chart({
           },
           pointRadius: 0,
           borderWidth: 2,
-          data: data.map(d => ({
+          data: data.map((d, i) => ({
             x:
               tickXScale === "week"
                 ? new Date(d.date)
                 : tickXScale === "day"
                 ? moment(new Date(d.date))
                     .startOf("hour")
+                    .toDate()
+                : tickXScale === "minute"
+                ? moment()
+                    .subtract(i * 5, "minutes")
                     .toDate()
                 : moment(new Date(d.date))
                     .startOf("day")
@@ -147,9 +155,10 @@ export default function Chart({
               padding: 12,
             },
             time: {
-              minUnit: tickXScale === "day" ? "hour" : "day",
+              unit: tickXScale === "day" ? "hour" : tickXScale === "minute" ? "minute" : "day",
               displayFormats: {
                 quarter: "MMM YYYY",
+                minute: "HH:mm",
               },
             },
           },
@@ -164,8 +173,8 @@ export default function Chart({
               zeroLineColor: theme.text.shade10,
             },
             ticks: {
-              beginAtZero: true,
-              suggestedMax: 10 ** Math.max(magnitude - 4, 1),
+              suggestedMin: suggestedMin || 0,
+              suggestedMax: suggestedMin || 10 ** Math.max(magnitude - 4, 1),
               maxTicksLimit: 4,
               fontColor: theme.text.shade60,
               fontFamily: "Inter",
@@ -184,7 +193,15 @@ export default function Chart({
         },
       },
     }),
-    [theme.text.shade10, theme.text.shade60, tickXScale, magnitude, renderTickY],
+    [
+      theme.text.shade10,
+      theme.text.shade60,
+      tickXScale,
+      magnitude,
+      renderTickY,
+      suggestedMin,
+      suggestedMax,
+    ],
   );
 
   useLayoutEffect(() => {
