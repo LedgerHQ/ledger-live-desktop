@@ -703,6 +703,7 @@
     "frozenAssets": "Donmuş varlıklar",
     "bandwidth": "Bant Genişliği",
     "energy": "Enerji",
+    "stake": "Stake",
     "delegatedAssets": "Yetkisi devredilen varlıklar",
     "undelegating": "Yetki iptali",
     "availableBalanceTooltip": "Bu tutar, kullanabileceğiniz fondur.",
