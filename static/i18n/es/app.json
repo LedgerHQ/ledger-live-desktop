@@ -703,6 +703,7 @@
     "frozenAssets": "Activos congelados",
     "bandwidth": "Ancho de banda",
     "energy": "Energía",
+    "stake": "Stake",
     "delegatedAssets": "Activos delegados",
     "undelegating": "Desdelegando",
     "availableBalanceTooltip": "Este importe está disponible.",
