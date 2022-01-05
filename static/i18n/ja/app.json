@@ -233,7 +233,7 @@
         "label": {
           "provider": "プロバイダー",
           "rate": "レート",
-          "fees": "手数料",
+          "fees": "network fees",
           "target": "ターゲットアカウント"
         },
         "tooltip": {
