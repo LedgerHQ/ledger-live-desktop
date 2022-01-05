@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, memo } from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -46,6 +46,14 @@ const Dots: ThemedComponent<{}> = styled.div`
   }
 `;
 
+const TitleContainer: ThemedComponent<{}> = styled(Text)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+`;
+
 type Props = {
   account: Account,
   contract: string,
@@ -55,7 +63,7 @@ type Props = {
   withContextMenu?: boolean,
 };
 
-const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
+const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
   const { status, metadata } = useNftMetadata(contract, tokenId);
   const nft = useSelector(state => getNFTById(state, { nftId: id }));
   const { nftName } = metadata || {};
@@ -94,9 +102,13 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
         </Skeleton>
         <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
           <Skeleton width={142} minHeight={24} barHeight={10} show={show}>
-            <Text ff="Inter|Medium" color="palette.text.shade100" fontSize={isGrid ? 4 : 3}>
+            <TitleContainer
+              ff="Inter|Medium"
+              color="palette.text.shade100"
+              fontSize={isGrid ? 4 : 3}
+            >
               {nftName || "-"}
-            </Text>
+            </TitleContainer>
           </Skeleton>
           <Skeleton width={180} minHeight={24} barHeight={6} show={show}>
             <Box horizontal justifyContent="space-between">
@@ -133,4 +145,5 @@ const Row = ({ contract, tokenId, id, mode, account, withContextMenu = false }: 
   );
 };
 
-export default Row;
+// $FlowFixMe
+export default memo(NftCard);
