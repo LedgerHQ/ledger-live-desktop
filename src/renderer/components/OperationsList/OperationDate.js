@@ -19,7 +19,7 @@ export default class OperationDate extends PureComponent<{ date: Date }> {
     const { date } = this.props;
     return (
       <Hour>
-        <FormattedDate date={date} format={"HH:mm"} />
+        <FormattedDate date={date} format="LT" />
       </Hour>
     );
   }

@@ -65,7 +65,7 @@ export default function AccountBalanceSummary({
             <FormattedVal fontSize={4} color="warmGrey" showCode {...data[1]} />
           ) : null}
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-            <FormattedDate date={d.date} format="LL" />
+            <FormattedDate date={d.date} format="L" />
           </Box>
           <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
             <FormattedDate date={d.date} format="LT" />

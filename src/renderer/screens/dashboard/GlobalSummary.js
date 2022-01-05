@@ -101,7 +101,7 @@ function Tooltip({ data, counterValue }: { data: BalanceHistoryData, counterValu
         val={data.value}
       />
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3} mt={2}>
-        <FormattedDate date={data.date} format="LL" />
+        <FormattedDate date={data.date} format="L" />
       </Box>
       <Box ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
         <FormattedDate date={data.date} format="LT" />

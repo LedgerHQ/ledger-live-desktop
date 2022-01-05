@@ -68,7 +68,7 @@ export const RowOpened = ({ opened, account }: OpenedProps) => {
         <Discreet>{interestEarned}</Discreet>
       </Column>
       <Column>
-        <FormattedDate date={opened.startingDate} format="MMMM Do, YYYY" />
+        <FormattedDate date={opened.startingDate} format="L" />
       </Column>
     </Wrapper>
   );
@@ -115,7 +115,7 @@ export const RowClosed = ({ closed, account }: ClosedProps) => {
         <Discreet>{interestEarned}</Discreet>
       </Column>
       <Column>
-        <FormattedDate date={closed.endDate} formate="MMMM Do, YYYY" />
+        <FormattedDate date={closed.endDate} format="L" />
       </Column>
     </Wrapper>
   );
