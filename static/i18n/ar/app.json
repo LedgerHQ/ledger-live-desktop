@@ -703,6 +703,7 @@
     "frozenAssets": "الأصول المجمدة",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
+    "stake": "Stake",
     "delegatedAssets": "الأصول المفوضة",
     "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
