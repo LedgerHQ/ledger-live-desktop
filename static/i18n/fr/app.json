@@ -233,7 +233,7 @@
         "label": {
           "provider": "Prestataire",
           "rate": "Prix",
-          "fees": "network fees",
+          "fees": "Frais de réseau",
           "target": "Compte bénéficiaire"
         },
         "tooltip": {
