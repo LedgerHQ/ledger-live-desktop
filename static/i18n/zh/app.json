@@ -233,7 +233,7 @@
         "label": {
           "provider": "提供方",
           "rate": "费率",
-          "fees": "费用",
+          "fees": "network fees",
           "target": "目标账户"
         },
         "tooltip": {
