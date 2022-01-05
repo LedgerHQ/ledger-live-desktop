@@ -29,6 +29,31 @@ const babelConfig = {
     ],
   ],
 };
+const babelTsConfig = {
+  presets: [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          electron: "7.1.9",
+        },
+      },
+    ],
+    "@babel/preset-react",
+    "@babel/preset-flow",
+  ],
+  plugins: [
+    ...babelPlugins,
+    "react-hot-loader/babel",
+    [
+      "babel-plugin-styled-components",
+      {
+        ssr: false,
+      },
+    ],
+  ],
+};
 
 module.exports = {
   target: "electron-renderer",
@@ -63,6 +88,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(ts)x?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: babelTsConfig,
+      },
+      {
         test: /\.js$/i,
         loader: "babel-loader",
         exclude: /node_modules/,
@@ -72,10 +103,23 @@ module.exports = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        use: ["file-loader"],
-      },
+      process.env.V3
+        ? {
+            test: /\.woff2/,
+            use: [
+              {
+                loader: "file-loader",
+                options: {
+                  name: "[name].[ext]",
+                  outputPath: "assets/fonts/",
+                },
+              },
+            ],
+          }
+        : {
+            test: /\.(woff|woff2|eot|ttf|otf)$/i,
+            use: ["file-loader"],
+          },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
         use: {
@@ -97,5 +141,32 @@ module.exports = {
     alias: {
       "~": path.resolve(__dirname, "src"),
     },
+    ...(process.env.V3
+      ? {
+          extensions: [
+            ".v3.tsx",
+            ".v3.ts",
+            ".v3.jsx",
+            ".v3.js",
+            ".tsx",
+            ".ts",
+            ".jsx",
+            ".js",
+            "...",
+          ],
+        }
+      : {
+          extensions: [
+            ".jsx",
+            ".js",
+            ".v3.tsx",
+            ".v3.ts",
+            ".v3.jsx",
+            ".v3.js",
+            ".tsx",
+            ".ts",
+            "...",
+          ],
+        }),
   },
 };
