@@ -703,6 +703,7 @@
     "frozenAssets": "Gesperrte Vermögenswerte",
     "bandwidth": "Bandbreite",
     "energy": "Energie",
+    "stake": "Stake",
     "delegatedAssets": "Delegierte Vermögenswerte",
     "undelegating": "Delegierung aufheben",
     "availableBalanceTooltip": "Dieser Betrag ist verfügbar.",
