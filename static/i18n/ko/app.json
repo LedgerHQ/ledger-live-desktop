@@ -703,6 +703,7 @@
     "frozenAssets": "동결 자산",
     "bandwidth": "대역폭",
     "energy": "에너지",
+    "stake": "Stake",
     "delegatedAssets": "위임된 자산",
     "undelegating": "위임 해제",
     "availableBalanceTooltip": "가처분 금액입니다.",
