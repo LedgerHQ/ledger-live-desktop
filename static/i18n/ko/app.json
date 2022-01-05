@@ -233,7 +233,7 @@
         "label": {
           "provider": "공급자",
           "rate": "요율",
-          "fees": "수수료",
+          "fees": "network fees",
           "target": "보내는 계정"
         },
         "tooltip": {
