@@ -703,6 +703,7 @@
     "frozenAssets": "Befagyasztott eszközök",
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
+    "stake": "Stake",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
