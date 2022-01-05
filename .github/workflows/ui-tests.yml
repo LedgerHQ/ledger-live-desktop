@@ -49,8 +49,8 @@ jobs:
 
   codecheck:
     name: "[Codecheck] Lint"
-    needs: [start-runner, prepare-runner]
-    runs-on: ${{ needs.start-runner.outputs.label }}
+    needs: cancel-previous
+    runs-on: ubuntu-20.04
     permissions:
       issues: write
       pull-requests: write
