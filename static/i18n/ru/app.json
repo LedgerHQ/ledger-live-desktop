@@ -703,6 +703,7 @@
     "frozenAssets": "Замороженные активы",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "stake": "Stake",
     "delegatedAssets": "Делегированные активы",
     "undelegating": "Отзыв средств",
     "availableBalanceTooltip": "Это сумма токенов в вашем распоряжении.",
