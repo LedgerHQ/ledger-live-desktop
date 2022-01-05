@@ -34,13 +34,13 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
             </Skeleton>
             <Box ml={2}>
               <Skeleton width={200} barHeight={10} minHeight={32} show={show}>
-                <TextEllipsis>{metadata?.nftName || "-"}</TextEllipsis>
+                <TextEllipsis>{metadata?.tokenName || "-"}</TextEllipsis>
               </Skeleton>
             </Box>
           </Box>
           {!show ? (
             <GradientHover>
-              <CopyWithFeedback text={metadata?.nftName} />
+              <CopyWithFeedback text={metadata?.tokenName} />
             </GradientHover>
           ) : null}
         </OpDetailsData>
