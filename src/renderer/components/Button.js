@@ -280,6 +280,7 @@ export const Base: ThemedComponent<*> = styled.button.attrs(p => ({
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? "none" : "")};
+  width: ${p => (p.fullWidth ? "100%" : "auto")};
   outline: none;
 
   ${p => getStyles(p, "default")};
@@ -305,6 +306,7 @@ export type Props = {
   lighterDanger?: boolean,
   disabled?: boolean,
   outline?: boolean,
+  fullWidth?: boolean,
   outlineGrey?: boolean,
   onClick?: Function,
   small?: boolean,
