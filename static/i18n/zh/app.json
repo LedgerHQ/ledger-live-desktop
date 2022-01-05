@@ -703,6 +703,7 @@
     "frozenAssets": "冻结资产",
     "bandwidth": "带宽",
     "energy": "能量",
+    "stake": "Stake",
     "delegatedAssets": "已委托资产",
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
