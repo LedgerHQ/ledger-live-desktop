@@ -13,11 +13,7 @@ import {
   starredAccountsSelector,
   hasLendEnabledAccountsSelector,
 } from "~/renderer/reducers/accounts";
-import {
-  sidebarCollapsedSelector,
-  lastSeenDeviceSelector,
-  developerModeSelector,
-} from "~/renderer/reducers/settings";
+import { sidebarCollapsedSelector, lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 import { isNavigationLocked } from "~/renderer/reducers/application";
 
 import { openModal } from "~/renderer/actions/modals";
@@ -209,7 +205,6 @@ const MainSideBar = () => {
   const hasStarredAccounts = useSelector(starredAccountsSelector).length > 0;
   const displayBlueDot = useManagerBlueDot(lastSeenDevice);
   const firstTimeLend = useSelector(state => state.settings.firstTimeLend);
-  const devMode = useSelector(developerModeSelector);
 
   const lendingEnabled = useSelector(hasLendEnabledAccountsSelector);
 
@@ -312,7 +307,7 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-              {devMode ? (
+              {process.env.NODE_ENV !== "production" && !process.env.SPECTRON_RUN ? (
                 <SideBarListItem
                   id={"market"}
                   label={t("sidebar.market")}

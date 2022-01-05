@@ -27,6 +27,7 @@ const SearchContainer = styled(Flex).attrs({ flex: "0.8" })`
   }
 `;
 
+// @ts-expect-error typing issue
 export const Button = styled(BaseButton)<{ big?: boolean }>`
   border-radius: 44px;
 
@@ -91,7 +92,7 @@ export default function Market() {
 
   const timeRanges = useMemo(
     () => Object.keys(rangeDataTable).map(value => ({ value, label: t(`market.range.${value}`) })),
-    [],
+    [t],
   );
 
   const timeRangeValue = timeRanges.find(({ value }) => value === range);
