@@ -233,7 +233,7 @@
         "label": {
           "provider": "المزود",
           "rate": "مُعدل",
-          "fees": "الرسوم",
+          "fees": "network fees",
           "target": "الحساب المستهدف"
         },
         "tooltip": {
