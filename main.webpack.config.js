@@ -33,6 +33,11 @@ module.exports = {
   plugins: [
     new HardSourceWebpackPlugin({
       cacheDirectory: path.resolve(__dirname, ".webpack", "cacheMain"),
+      environmentHash: {
+        root: process.cwd(),
+        directories: [],
+        files: ["pnpm-lock.yaml"],
+      },
     }),
     new UnusedWebpackPlugin({
       directories: [path.join(__dirname, "src/main"), path.join(__dirname, "src/internal")],

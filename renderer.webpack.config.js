@@ -48,6 +48,11 @@ module.exports = {
     }),
     new HardSourceWebpackPlugin({
       cacheDirectory: path.resolve(__dirname, ".webpack", "cacheRenderer"),
+      environmentHash: {
+        root: process.cwd(),
+        directories: [],
+        files: ["pnpm-lock.yaml"],
+      },
     }),
     new UnusedWebpackPlugin({
       directories: [path.join(__dirname, "src/renderer")],

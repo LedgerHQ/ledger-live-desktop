@@ -135,3 +135,9 @@ ui-lib/storybook-static/*
 
 # IDE
 .vscode/*
+
+# Pnpm local store
+.pnpm-store
+
+# VSCODE remote docker containers
+.devcontainer

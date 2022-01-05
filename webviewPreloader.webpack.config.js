@@ -40,6 +40,11 @@ module.exports = {
   plugins: [
     new HardSourceWebpackPlugin({
       cacheDirectory: path.resolve(__dirname, ".webpack", "cacheWebviewPreloader"),
+      environmentHash: {
+        root: process.cwd(),
+        directories: [],
+        files: ["pnpm-lock.yaml"],
+      },
     }),
   ],
   module: {
