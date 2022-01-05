@@ -106,12 +106,12 @@ function NFTAttribute({
         lineHeight="15.73px"
         fontSize={4}
         color="palette.text.shade60"
-        ff="Inter|Regular"
+        ff="Inter|SemiBold"
       >
         {title}
       </Text>
       <Skeleton show={skeleton} width={120} minHeight={24} barHeight={10}>
-        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|SemiBold">
+        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|Regular">
           <Pre>{value}</Pre>
         </Text>
       </Skeleton>
@@ -157,11 +157,10 @@ export function NFTViewerDrawer({
               fontSize={5}
               lineHeight="18px"
               color="palette.text.shade50"
-              uppercase
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
-                {metadata?.tokenName || nft?.collection?.contract}
+                {metadata?.tokenName || "-"}
               </Skeleton>
             </Text>
             <Text
@@ -211,7 +210,7 @@ export function NFTViewerDrawer({
               lineHeight="15.73px"
               fontSize={4}
               color="palette.text.shade60"
-              fontWeight="400"
+              fontWeight="600"
             >
               {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
@@ -224,7 +223,7 @@ export function NFTViewerDrawer({
               lineHeight="15.73px"
               fontSize={4}
               color="palette.text.shade60"
-              fontWeight="400"
+              fontWeight="600"
             >
               {t("NFT.viewer.attributes.tokenId")}
             </Text>

@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "Properties",
         "description": "Description",
-        "contract": "Contract address",
+        "tokenAddress": "Token Address",
         "tokenId": "Token ID",
         "quantity": "Quantity"
       }
@@ -1358,7 +1358,7 @@
       "name": "Token Name",
       "contract": "Token Contract",
       "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Frozen amount",
@@ -1503,6 +1503,7 @@
         "uninstall": "Uninstall",
         "notEnoughSpace": "Not enough storage",
         "supported": "Ledger Live supported",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
         "addAccountWarn": "Please wait for the app updates to finish",
@@ -3483,6 +3484,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -4056,6 +4061,15 @@
     },
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"

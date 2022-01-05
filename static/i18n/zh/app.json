@@ -1129,7 +1129,7 @@
       }
     },
     "connectedscreen": {
-      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
+      "info": "您现在可以从您的浏览器上访问 {{name}} dApp 去中心化应用。",
       "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接"
     }
@@ -1182,7 +1182,7 @@
       "attributes": {
         "properties": "属性",
         "description": "描述",
-        "contract": "合约地址",
+        "tokenAddress": "代币地址",
         "tokenId": "代币 ID",
         "quantity": "数量"
       }
@@ -1358,7 +1358,7 @@
       "name": "代币名称",
       "contract": "代币合约",
       "id": "代币 (NFT) ID",
-      "amount": "数额"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "已冻结数额",
@@ -1503,6 +1503,7 @@
         "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live 支持",
+        "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
@@ -2657,7 +2658,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "对比特币、所有比特币分叉和 Tezos 使用实验性的 JS 实现。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -3483,6 +3484,10 @@
       "memo": "Memo 标签",
       "memoPlaceholder": "可选",
       "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3737,7 @@
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "父账户余额不足以支付网络费用"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
@@ -4057,6 +4062,15 @@
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "您已超过可用代币的数量"
     }
@@ -4064,17 +4078,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "由 Crypto.org 提供支持",
+        "moreInfo": "更多信息",
+        "drawerTitle": "Crypto.org 整合",
+        "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 令牌，并通过 Ledger Live 保护它们。",
+        "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
+        "website": "每个钱包中的加密货币"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "Memo 标签",
+    "memoPlaceholder": "可选",
+    "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
   }
 }
