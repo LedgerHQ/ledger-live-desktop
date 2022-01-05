@@ -233,7 +233,7 @@
         "label": {
           "provider": "proveedor",
           "rate": "tarifa",
-          "fees": "tarifas",
+          "fees": "network fees",
           "target": "cuenta de destino"
         },
         "tooltip": {
