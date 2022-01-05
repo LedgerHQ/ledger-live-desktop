@@ -1,12 +1,13 @@
 // @flow
 /* eslint-disable react/jsx-no-literals */
 
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import { UpdaterContext } from "../Updater/UpdaterContext";
 import type { UpdateStatus, MaybeUpdateContextType } from "../Updater/UpdaterContext";
-import { Item, MockContainer } from "./shared";
+import { Item, MockContainer, MockedGlobalStyle } from "./shared";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 const statusToDebug: UpdateStatus[] = [
   "idle",
@@ -22,6 +23,14 @@ const DebugUpdater = () => {
   const context = useContext<MaybeUpdateContextType>(UpdaterContext);
   const { setStatus, quitAndInstall } = context || {};
   const toggleExpanded = useCallback(() => setExpanded(!expanded), [expanded, setExpanded]);
+
+  useEffect(() => {
+    if (getEnv("MOCK")) {
+      window.mock.updater = {
+        setStatus: setStatus,
+      };
+    }
+  }, [setStatus]);
 
   return (
     <MockContainer>
