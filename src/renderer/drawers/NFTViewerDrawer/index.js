@@ -160,7 +160,7 @@ export function NFTViewerDrawer({
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
-                {metadata?.tokenName || nft?.collection?.contract}
+                {metadata?.tokenName || "-"}
               </Skeleton>
             </Text>
             <Text
