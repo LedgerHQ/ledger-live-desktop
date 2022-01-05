@@ -7,7 +7,7 @@ const child_process = require("child_process");
 console.log("running");
 
 const rebuildDeps = async (folder, file) => {
-  await execa("pnpm", ["run", "install-deps"], {
+  await execa("npm", ["run", "install-deps"], {
     // env: { DEBUG: "electron-builder" },
   }).stdout.pipe(process.stdout);
   const checksum = await hasha.fromFile("yarn.lock", { algorithm: "md5" });

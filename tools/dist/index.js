@@ -85,7 +85,7 @@ const buildTasks = args => [
         commands.push("electron-builder-ci.yml");
       }
 
-      await exec("pnpm", ["run", ...commands], {
+      await exec("npm", ["run", ...commands], {
         env: args.publish
           ? {
               SENTRY_URL:
