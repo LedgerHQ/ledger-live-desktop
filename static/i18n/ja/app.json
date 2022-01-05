@@ -703,6 +703,7 @@
     "frozenAssets": "凍結済み資産",
     "bandwidth": "Bandwidth（バンド幅）",
     "energy": "Energy（エネルギー）",
+    "stake": "Stake",
     "delegatedAssets": "デリゲートされた資産",
     "undelegating": "デリゲート解除中",
     "availableBalanceTooltip": "これは利用可能額です。",
