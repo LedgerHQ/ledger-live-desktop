@@ -233,7 +233,7 @@
         "label": {
           "provider": "Anbieter",
           "rate": "Kurs",
-          "fees": "Gebühren",
+          "fees": "network fees",
           "target": "Zielkonto"
         },
         "tooltip": {
