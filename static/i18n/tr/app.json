@@ -233,7 +233,7 @@
         "label": {
           "provider": "sağlayıcı",
           "rate": "kur",
-          "fees": "ücret",
+          "fees": "network fees",
           "target": "hedef hesap"
         },
         "tooltip": {
