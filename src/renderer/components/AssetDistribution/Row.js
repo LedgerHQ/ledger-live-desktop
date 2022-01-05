@@ -136,7 +136,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               {`${percentageWording}%`}
             </Text>
             <Bar
-              progress={!process.env.SPECTRON_RUN && isVisible ? percentage.toString() : "0"}
+              progress={!process.env.PLAYWRIGHT_RUN && isVisible ? percentage.toString() : "0"}
               progressColor={color}
             />
           </>

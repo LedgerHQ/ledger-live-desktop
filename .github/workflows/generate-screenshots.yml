@@ -31,8 +31,7 @@ jobs:
             })
 
             const body = `
-              Generating new screenshots
-              [action](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+              [Generating new screenshots](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
             `
 
             github.rest.issues.createComment({

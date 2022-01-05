@@ -1,17 +1,11 @@
 // @flow
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Fallback from "~/renderer/images/nftFallback.jpg";
 import Skeleton from "./Skeleton";
-
-type Props = {
-  nft: NFTWithMetadata,
-  full?: boolean,
-  size?: number,
-};
 
 /**
  * Nb: This image component can be used for small listings, large gallery rendering,
@@ -21,8 +15,8 @@ type Props = {
  * The text in the fallback image is only visible if we are in `full` mode, since list
  * mode is not large enough for the text to be readable.
  */
-const Wrapper: ThemedComponent<{ full?: boolean, size?: number, isLoading: boolean }> = styled.div`
-  width: ${({ full, size = 32 }) => (full ? "100%" : `${size}px`)};
+const Wrapper: ThemedComponent<{ full?: boolean, size?: number, loaded: boolean }> = styled.div`
+  width: ${({ full, size }) => (full ? "100%" : `${size}px`)};
   aspect-ratio: 1 / 1;
   border-radius: 4px;
   background: ${p => p.theme.colors.palette.background.default};
@@ -76,16 +70,47 @@ const Gen = styled.div`
   }
 `;
 
-const Image = (props: Props) => {
-  const { full, nft, size } = props || {};
-  const [isLoading, setLoading] = useState(!!nft?.media); // Only attempt to load if we have a url
-
-  return (
-    <Wrapper full={full} size={size} isLoading={isLoading}>
-      <Skeleton full />
-      {nft?.media ? <img onLoad={() => setLoading(false)} src={nft.media} /> : <Gen nft={nft} />}
-    </Wrapper>
-  );
+type Props = {
+  nft: NFTWithMetadata,
+  full?: boolean,
+  size?: number,
 };
+
+type State = {
+  loaded: boolean,
+  error: boolean,
+};
+
+class Image extends React.PureComponent<Props, State> {
+  static defaultProps = {
+    full: false,
+    size: 32,
+  };
+
+  state = {
+    loaded: false,
+    error: false,
+  };
+
+  render() {
+    const { full, size, nft } = this.props;
+    const { loaded, error } = this.state;
+
+    return (
+      <Wrapper full={full} size={size} loaded={loaded || error}>
+        <Skeleton full />
+        {nft?.media && !error ? (
+          <img
+            onLoad={() => this.setState({ loaded: true })}
+            onError={() => this.setState({ error: true })}
+            src={nft.media}
+          />
+        ) : (
+          <Gen nft={nft} />
+        )}
+      </Wrapper>
+    );
+  }
+}
 
 export default Image;

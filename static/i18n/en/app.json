@@ -233,7 +233,7 @@
         "label": {
           "provider": "provider",
           "rate": "rate",
-          "fees": "fees",
+          "fees": "network fees",
           "target": "target account"
         },
         "tooltip": {
@@ -703,6 +703,7 @@
     "frozenAssets": "Frozen assets",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "stake": "Stake",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
