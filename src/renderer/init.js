@@ -61,8 +61,8 @@ async function init() {
     connect,
   });
 
-  if (process.env.SPECTRON_RUN) {
-    const spectronData = await getKey("app", "SPECTRON_RUN", {});
+  if (process.env.PLAYWRIGHT_RUN) {
+    const spectronData = await getKey("app", "PLAYWRIGHT_RUN", {});
     _.each(spectronData.localStorage, (value, key) => {
       global.localStorage.setItem(key, value);
     });

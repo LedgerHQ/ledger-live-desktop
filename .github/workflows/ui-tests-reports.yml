@@ -154,7 +154,7 @@ jobs:
       #           ${{ steps.comment-body.outputs.body }}
       #         `
       #       });
-      - name: comment (auto trigger)
+      - name: comment
         if: github.event.workflow_run != ''
         uses: actions/github-script@v5
         with:
@@ -162,7 +162,7 @@ jobs:
             await github.rest.repos.createCommitComment({
               owner: "LedgerHQ",
               repo: "ledger-live-desktop",
-              commit_sha: ${{ github.event.workflow_run.head_sha }},
+              commit_sha: "${{ github.event.workflow_run.head_sha }}",
               body: `
                 ${{ steps.comment-body.outputs.body }}
               `
