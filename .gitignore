@@ -114,15 +114,9 @@ dist
 !tools/dist
 
 src/renderer/generated/
-tests/specs/__image_snapshots__/__diff_output__
-tests/dump.json
-tests/tmp/*
 tests/coverage/
-!tests/tmp/.gitkeep
-tests/docker-electron-webdriver/.lastbuild
-tests/docker-electron-webdriver/.lastyarn
-playwright/artifacts/*
-!playwright/artifacts/.gitkeep
+tests/artifacts/*
+!tests/artifacts/.gitkeep
 
 # Yalc
 .yalc

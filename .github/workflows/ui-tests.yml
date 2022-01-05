@@ -49,8 +49,8 @@ jobs:
 
   codecheck:
     name: "[Codecheck] Lint"
-    needs: [start-runner, prepare-runner]
-    runs-on: ${{ needs.start-runner.outputs.label }}
+    needs: cancel-previous
+    runs-on: ubuntu-20.04
     permissions:
       issues: write
       pull-requests: write
@@ -82,7 +82,7 @@ jobs:
         if: always()
         run: yarn test --silent --ci --coverage --json --testLocationInResults --outputFile=report.json 2> >(tee jest.txt)
       - uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
-        if: github.event.pull_request != ''
+        if: always() && github.event.pull_request != ''
         with:
           github-token: ${{ github.token }}
           package-manager: yarn
@@ -146,7 +146,7 @@ jobs:
         uses: ledgerhq/actions/packages/upload-images@main
         id: imgur
         with:
-          path: playwright/artifacts/test-results
+          path: tests/artifacts/test-results
           workspace: ${{ github.workspace }}
           os: linux
       - name: upload images
@@ -161,10 +161,10 @@ jobs:
         with:
           name: playwright-results-linux
           path: |
-            playwright/artifacts/test-results
-            playwright/artifacts/html-report
-            playwright/artifacts/coverage
-            playwright/artifacts/videos
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos
 
   ui-tests:
     needs: cancel-previous
@@ -202,7 +202,7 @@ jobs:
         uses: ledgerhq/actions/packages/upload-images@main
         id: imgur
         with:
-          path: playwright/artifacts/test-results
+          path: tests/artifacts/test-results
           workspace: ${{ github.workspace }}
           os: ${{ matrix.os }}
       - name: upload images
@@ -217,7 +217,7 @@ jobs:
         with:
           name: playwright-results-${{ matrix.os }}
           path: |
-            playwright/artifacts/test-results
-            playwright/artifacts/html-report
-            playwright/artifacts/coverage
-            playwright/artifacts/videos
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos

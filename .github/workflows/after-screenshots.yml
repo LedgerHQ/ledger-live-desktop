@@ -1,0 +1,159 @@
+name: "Tests | After Screenshots"
+on:
+  workflow_run:
+    workflows: ["Generate | Screenshots"]
+    types:
+      - "completed"
+
+jobs:
+  log:
+    name: "Check previous github object"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log github object
+        env:
+          GITHUB: ${{ toJSON(github) }}
+        run: |
+          echo $GITHUB
+  # start-runner:
+  #   name: "[Runner] start ec2 instance"
+  #   needs: cancel-previous
+  #   uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
+  #   with:
+  #     instance-type: c5.4xlarge
+  #   secrets:
+  #     CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
+  # stop-runner:
+  #   name: "[Runner] stop ec2 instance"
+  #   if: ${{ always() }}
+  #   needs: [start-runner, ui-tests-linux]
+  #   uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
+  #   with:
+  #     label: ${{ needs.start-runner.outputs.label }}
+  #     ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+  #   secrets:
+  #     CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
+  # prepare-runner:
+  #   name: "[Runner] prepare"
+  #   needs: [start-runner]
+  #   runs-on: ${{ needs.start-runner.outputs.label }}
+  #   steps:
+  #     - name: prepare runner
+  #       run: |
+  #         sudo growpart /dev/nvme0n1 1
+  #         sudo resize2fs /dev/nvme0n1p1
+  # ui-tests-linux:
+  #   name: "[Linux] UI"
+  #   needs: [start-runner, prepare-runner]
+  #   runs-on: ${{ needs.start-runner.outputs.label }}
+  #   permissions:
+  #     issues: write
+  #     pull-requests: write
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #         repository: ${{github.event.pull_request.head.repo.full_name}}
+  #         persist-credentials: false
+  #     - uses: actions/setup-node@v2
+  #       if: always()
+  #       with:
+  #         node-version: 14.x
+  #     - name: install yarn
+  #       if: always()
+  #       run: npm install --global yarn
+  #     - name: set git user
+  #       run: |
+  #         git config user.email "team-live@ledger.fr"
+  #         git config user.name "Team Live"
+  #     - name: install dependencies
+  #       env:
+  #         JOBS: max
+  #       run: yarn --frozen-lockfile --network-timeout 100000
+  #     - name: install operating system dependencies for playwright
+  #       run: npx playwright install-deps
+  #     - name: build electron app
+  #       env:
+  #         INSTRUMENT_BUILD: true
+  #       run: yarn build
+  #     - name: run ui tests (Linux)
+  #       if: always()
+  #       run: xvfb-run --auto-servernum -- yarn playwright
+  #     - name: upload diffs to imgur
+  #       if: always()
+  #       uses: ledgerhq/actions/packages/upload-images@main
+  #       id: imgur
+  #       with:
+  #         path: tests/artifacts/test-results
+  #         workspace: ${{ github.workspace }}
+  #         os: linux
+  #     - name: upload images
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: images-linux.json
+  #         path: images-linux.json
+  #     - name: upload ci suggested screenshots
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: playwright-results-linux
+  #         path: |
+  #           tests/artifacts/test-results
+  #           tests/artifacts/html-report
+  #           tests/artifacts/coverage
+  #           tests/artifacts/videos
+  # ui-tests:
+  #   needs: cancel-previous
+  #   name: "[${{ matrix.os }}] UI"
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       # os: [macos-latest, windows-latest]
+  #       os: [windows-latest]
+  #   runs-on: ${{ matrix.os}}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #         repository: ${{github.event.pull_request.head.repo.full_name}}
+  #         persist-credentials: false
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 14.x
+  #     - name: install dependencies
+  #       env:
+  #         JOBS: max
+  #       run: yarn --frozen-lockfile --network-timeout 100000
+  #     - name: install operating system dependencies
+  #       run: npx playwright install-deps
+  #     - name: build electron app
+  #       env:
+  #         INSTRUMENT_BUILD: true
+  #       run: yarn build
+  #     - name: run ui tests (${{ matrix.os }})
+  #       run: yarn playwright
+  #     - name: upload diffs to imgur
+  #       if: always()
+  #       uses: ledgerhq/actions/packages/upload-images@main
+  #       id: imgur
+  #       with:
+  #         path: tests/artifacts/test-results
+  #         workspace: ${{ github.workspace }}
+  #         os: ${{ matrix.os }}
+  #     - name: upload images
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: images-${{ matrix.os }}.json
+  #         path: images-${{ matrix.os }}.json
+  #     - name: upload ci suggested screenshots
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: playwright-results-${{ matrix.os }}
+  #         path: |
+  #           tests/artifacts/test-results
+  #           tests/artifacts/html-report
+  #           tests/artifacts/coverage
+  #           tests/artifacts/videos

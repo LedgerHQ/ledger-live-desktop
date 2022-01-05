@@ -101,7 +101,7 @@ class QRCodeExporter extends PureComponent<
     const { frame, framesRendered } = this.state;
     const { size } = this.props;
     const { chunks } = this;
-    const chunkValues = process.env.SPECTRON_RUN ? [0, 1] : [0, framesRendered];
+    const chunkValues = process.env.PLAYWRIGHT_RUN ? [0, 1] : [0, framesRendered];
     return (
       <QRCodeContainer style={{ width: size, height: size }}>
         {chunks.slice(...chunkValues).map((chunk, i) => (

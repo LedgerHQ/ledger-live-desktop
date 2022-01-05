@@ -23,7 +23,7 @@ const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
 `;
 
 const ConnectTroubleshooting = ({
-  appearsAfterDelay = process.env.SPECTRON_RUN ? 3000 : 15000,
+  appearsAfterDelay = process.env.PLAYWRIGHT_RUN ? 3000 : 15000,
 }: Props) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {

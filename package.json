@@ -35,14 +35,9 @@
     "release": "node ./tools/dist --publish -v",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "start-electron-webdriver": "node tests/docker-electron-webdriver/start.js",
-    "spectron": "jest \"tests/specs/.*\\.spec\\.js\" --maxWorkers=16",
-    "spectron-inband": "jest \"tests/specs/.*\\.spec\\.js\" --runInBand",
-    "spectron-coverage": "nyc report --reporter=text-lcov --temp-dir=tests/coverage | codecov --pipe --disable=gcov",
-    "generate-screenshots": "PWD=$(pwd); cd docker; docker run -v \"$PWD:/github/workspace\" -w \"/github/workspace\" --rm -it $(docker build -q .)",
-    "playwright": "nyc playwright test --config=playwright/playwright.config.ts",
+    "playwright": "nyc playwright test --config=tests/playwright.config.ts",
     "playwright-update-snapshots": "yarn playwright --update-snapshots",
-    "playwright-recorder": "playwright test playwright/specs/recorder.spec.ts"
+    "playwright-recorder": "playwright test tests/specs/recorder.spec.ts"
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
@@ -198,7 +193,6 @@
     "nyc": "^15.1.0",
     "playwright": "1.17",
     "prettier": "^1.19.1",
-    "spectron": "^15.0.0",
     "style-loader": "^1.2.1",
     "typescript": "^4.4.3",
     "unused-webpack-plugin": "^2.4.0",

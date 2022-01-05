@@ -437,7 +437,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
               : isConfirmed
               ? t("operationDetails.confirmed")
               : t("operationDetails.notConfirmed")}
-            {process.env.SPECTRON_RUN
+            {process.env.PLAYWRIGHT_RUN
               ? ""
               : hasFailed
               ? null

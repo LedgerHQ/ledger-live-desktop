@@ -5,8 +5,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "playwright/tests-out"
+    "outDir": "tests/tests-out"
   },
-  "include": ["playwright"],
+  "include": ["tests"],
   "exclude": ["node_modules"]
 }

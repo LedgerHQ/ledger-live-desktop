@@ -270,7 +270,7 @@ export const useDefaultSlides = () => {
   return useMemo(
     () =>
       // $FlowFixMe
-      _.map(process.env.SPECTRON_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
+      _.map(process.env.PLAYWRIGHT_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
         id: slide.name,
         // eslint-disable-next-line react/display-name
         Component: () => <Slide {...slide} />,
