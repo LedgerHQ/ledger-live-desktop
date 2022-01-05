@@ -233,7 +233,7 @@
         "label": {
           "provider": "Поставщик",
           "rate": "Курс",
-          "fees": "Комиссия",
+          "fees": "network fees",
           "target": "Целевой счёт"
         },
         "tooltip": {
