@@ -52,6 +52,10 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+// $FlowFixMe
+import Market from "~/renderer/screens/market";
+// $FlowFixMe
+import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -198,6 +202,15 @@ export default function Default() {
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
                         />
+                        {process.env.NODE_ENV !== "production" && !process.env.SPECTRON_RUN ? (
+                          <>
+                            <Route
+                              path="/market/:currencyId"
+                              render={props => <MarketCoinScreen {...props} />}
+                            />
+                            <Route path="/market" render={props => <Market {...props} />} />
+                          </>
+                        ) : null}
                       </Switch>
                     </Page>
                     <Drawer />
