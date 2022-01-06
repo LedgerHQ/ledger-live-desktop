@@ -318,7 +318,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
         <Box flex={1} mb={2} alignItems="center">
           <Skeleton show={show} width={160} barHeight={16} minHeight={32} textAlign="center">
             <Text ff="Inter|SemiBold" textAlign="center" fontSize={7} color="palette.text.shade80">
-              {metadata?.tokenName || "-"}
+              {metadata?.nftName || "-"}
             </Text>
           </Skeleton>
           <Skeleton show={show} width={200} barHeight={10} minHeight={24} mt={1} textAlign="center">
@@ -437,7 +437,7 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
               : isConfirmed
               ? t("operationDetails.confirmed")
               : t("operationDetails.notConfirmed")}
-            {process.env.SPECTRON_RUN
+            {process.env.PLAYWRIGHT_RUN
               ? ""
               : hasFailed
               ? null

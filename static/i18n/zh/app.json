@@ -191,6 +191,7 @@
     "feesAmount": "费用额度"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -198,7 +199,8 @@
     "exchange": "买入 / 卖出",
     "swap": "Swap 互换",
     "lend": "借出",
-    "catalog": "发现"
+    "catalog": "发现",
+    "market": "Market"
   },
   "stars": {
     "placeholder": "星标账户以在此显示。",
@@ -232,7 +234,7 @@
         "label": {
           "provider": "提供方",
           "rate": "费率",
-          "fees": "费用",
+          "fees": "network fees",
           "target": "目标账户"
         },
         "tooltip": {
@@ -702,6 +704,7 @@
     "frozenAssets": "冻结资产",
     "bandwidth": "带宽",
     "energy": "能量",
+    "stake": "Stake",
     "delegatedAssets": "已委托资产",
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
@@ -1129,7 +1132,7 @@
       }
     },
     "connectedscreen": {
-      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
+      "info": "您现在可以从您的浏览器上访问 {{name}} dApp 去中心化应用。",
       "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接"
     }
@@ -1173,6 +1176,75 @@
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
+  "market": {
+    "title": "Market",
+    "currency": "Currency",
+    "rangeLabel": "Time",
+    "goBack": "Go back",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap",
+      "last7d": "Last 7 days"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price stats",
+      "tradingVolume": "Trading volume",
+      "24hLowHight": "24h Low / 24h High",
+      "7dLowHigh": "7d Low / 7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "marketCapDominance": "Market cap dominance",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No coins found",
+      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1254,7 @@
       "attributes": {
         "properties": "属性",
         "description": "描述",
-        "contract": "合约地址",
+        "tokenAddress": "代币地址",
         "tokenId": "代币 ID",
         "quantity": "数量"
       }
@@ -1358,7 +1430,7 @@
       "name": "代币名称",
       "contract": "代币合约",
       "id": "代币 (NFT) ID",
-      "amount": "数额"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "已冻结数额",
@@ -1503,6 +1575,7 @@
         "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live 支持",
+        "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
@@ -2657,7 +2730,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "对比特币、所有比特币分叉和 Tezos 使用实验性的 JS 实现。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -3483,6 +3556,10 @@
       "memo": "Memo 标签",
       "memoPlaceholder": "可选",
       "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3809,7 @@
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "父账户余额不足以支付网络费用"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
@@ -4057,6 +4134,15 @@
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "您已超过可用代币的数量"
     }
@@ -4064,17 +4150,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "由 Crypto.org 提供支持",
+        "moreInfo": "更多信息",
+        "drawerTitle": "Crypto.org 整合",
+        "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 令牌，并通过 Ledger Live 保护它们。",
+        "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
+        "website": "每个钱包中的加密货币"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "Memo 标签",
+    "memoPlaceholder": "可选",
+    "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
   }
 }

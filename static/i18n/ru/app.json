@@ -191,6 +191,7 @@
     "feesAmount": "Размер комиссии"
   },
   "sidebar": {
+    "card": "Карта",
     "menu": "Меню",
     "stars": "Избранные счета",
     "accounts": "Счета",
@@ -198,7 +199,8 @@
     "exchange": "Купить/Продать",
     "swap": "Обмен",
     "lend": "Кредитование",
-    "catalog": "Исследуйте"
+    "catalog": "Исследуйте",
+    "market": "Market"
   },
   "stars": {
     "placeholder": "Выделите счёт, чтобы он отобразился здесь",
@@ -232,7 +234,7 @@
         "label": {
           "provider": "Поставщик",
           "rate": "Курс",
-          "fees": "Комиссия",
+          "fees": "комиссия сети",
           "target": "Целевой счёт"
         },
         "tooltip": {
@@ -702,6 +704,7 @@
     "frozenAssets": "Замороженные активы",
     "bandwidth": "Bandwidth",
     "energy": "Energy",
+    "stake": "Доля",
     "delegatedAssets": "Делегированные активы",
     "undelegating": "Отзыв средств",
     "availableBalanceTooltip": "Это сумма токенов в вашем распоряжении.",
@@ -1129,7 +1132,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Теперь вы можете пользоваться dApp в настольном приложении.",
+      "info": "Теперь dApp {{name}} доступно в веб-браузере.",
       "warning": "Совместное использование адресов, полученных в dApp, несёт риск для безопасности. Обязательно используйте Ledger Live при отправке адреса для получения средств.",
       "disconnected": "Проблема с подключением между dApp, WalletConnect и Ledger Live. Подождите пару секунд или попробуйте подключиться снова"
     }
@@ -1173,6 +1176,75 @@
   "genuinecheck": {
     "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Щелкните <1>Continue</1> (Продолжить), чтобы обновить его."
   },
+  "market": {
+    "title": "Market",
+    "currency": "Currency",
+    "rangeLabel": "Time",
+    "goBack": "Go back",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap",
+      "last7d": "Last 7 days"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price stats",
+      "tradingVolume": "Trading volume",
+      "24hLowHight": "24h Low / 24h High",
+      "7dLowHigh": "7d Low / 7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "marketCapDominance": "Market cap dominance",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No coins found",
+      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1254,7 @@
       "attributes": {
         "properties": "Свойства",
         "description": "Описание",
-        "contract": "Адрес контракта",
+        "tokenAddress": "Адрес токена",
         "tokenId": "ID токена",
         "quantity": "Кол-во"
       }
@@ -1358,7 +1430,7 @@
       "name": "Название токена",
       "contract": "Контракт токена",
       "id": "ID токена (NFT)",
-      "amount": "Кол-во"
+      "quantity": "Кол-во"
     },
     "extra": {
       "frozenAmount": "Замороженная сумма",
@@ -1503,6 +1575,7 @@
         "uninstall": "Удалить",
         "notEnoughSpace": "Недостаточно места",
         "supported": "Поддерживается Ledger Live",
+        "not_supported": "Требуется сторонний кошелёк",
         "addAccount": "Добавить счёт",
         "addAccountTooltip": "Добавить счёт {{appName}}",
         "addAccountWarn": "Дождитесь полного обновления приложения",
@@ -1736,7 +1809,7 @@
         "parentAccount": "1. Выберите счёт {{currencyName}}",
         "token": "2. Выберите токен",
         "verifyTokenType": "Убедитесь, что <0>{{token}}</0> является токеном <0>{{tokenType}}</0>. Любой другой криптоактив, отправленный на счёт {{currency}}, может быть потерян.",
-        "warningTokenType": "Отправляйте только токены <0>{{ticker}}</0> или <0>{{tokenType}}</0> на счета {{currency}}. Любые другие криптоактивы могут быть потеряны."
+        "warningTokenType": "Отправляйте только <0>{{ticker}}</0> или токены сети <0>{{tokenType}}</0> на счета {{currency}}. Любые другие криптоактивы могут быть потеряны."
       },
       "connectDevice": {
         "title": "Устройство",
@@ -2657,7 +2730,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "Использовать экспериментальные JS-реализации для Биткойна, всех фортов Биткойна и Tezos"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3483,6 +3556,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Опционально",
       "memoWarningText": "При использовании Memo необходимо тщательно проверять соответствие типа с получателем"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Опционально"
     }
   },
   "errors": {
@@ -3732,7 +3809,7 @@
       "title": "Адрес неактивен. Чтобы активировать его, отправьте на него как минимум {{minimalAmount}}"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "Баланса на основном счету недостаточно для покрытия комиссии сети"
     },
     "PasswordsDontMatch": {
       "title": "Пароли не совпадают",
@@ -4057,6 +4134,15 @@
     "TaprootNotActivated": {
       "title": "До активации мейннета отправлять монеты на Taproot-адрес небезопасно"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Счёт не пополнен"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Слишком длинное примечание (Memo). Макс. длина {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Адрес за пределами кривой ed25519"
+    },
     "NotEnoughNftOwned": {
       "title": "Вы превысили кол-во доступных токенов"
     }
@@ -4064,17 +4150,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "Разработано Crypto.org",
+        "moreInfo": "Подробнее",
+        "drawerTitle": "Интеграция с Crypto.org",
+        "title": "Токен Crypto.org (CRO) теперь доступен на Ledger Live",
+        "description": "Теперь вы можете начать управлять своими монетами Crypto.org (CRO) и хранить их в Ledger Live.",
+        "description2": "Монета Crypto.org (CRO) – нативная монета блокчейна Crypto.org, которая используется для всех транзакций, стейкинга и множества предстоящих функций.",
+        "website": "Криптовалюта в каждом кошельке"
       }
     },
     "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memoPlaceholder": "Опционально",
+    "memoWarningText": "При использовании Memo необходимо тщательно проверять информацию с получателем"
   }
 }
