@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
-import { getRemoteConfig, fetchAndActivate } from "firebase/remote-config";
+import { getRemoteConfig, fetchAndActivate, RemoteConfig } from "firebase/remote-config";
 
-export const FirebaseRemoteConfigContext = React.createContext({});
+export const FirebaseRemoteConfigContext = React.createContext<RemoteConfig | null>(null);
 
 export const useFirebaseRemoteConfig = () => useContext(FirebaseRemoteConfigContext);
 
@@ -19,8 +19,12 @@ const firebaseDefaultConfig = {
   feature_receive: true,
 };
 
-export const FirebaseRemoteConfigProvider = ({ children }) => {
-  const [config, setConfig] = useState(null);
+type Props = {
+  children?: ReactNode;
+};
+
+export const FirebaseRemoteConfigProvider = ({ children }: Props): JSX.Element => {
+  const [config, setConfig] = useState<RemoteConfig | null>(null);
 
   useEffect(() => {
     initializeApp(firebaseCredentials);
