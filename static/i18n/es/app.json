@@ -719,13 +719,20 @@
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
-      "header": "Comprar cripto con {{provider}}",
-      "title": "Comprar cripto mediante <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Comprar",
-      "selectCrypto": "Elige un activo cripto",
-      "selectAccount": "Elegir cuenta",
-      "continue": "Continuar",
-      "addAccount": "Agregar cuenta"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "Vender cripto con {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "Elige un activo cripto",
       "selectAccount": "Elegir cuenta",
       "continue": "Continuar"
-    },
-    "history": {
-      "tab": "Historial",
-      "exporting": "Exportando...",
-      "exportOperations": "Exportar operaciones"
     }
   },
   "lend": {
