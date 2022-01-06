@@ -10,6 +10,7 @@ export class Layout {
   readonly drawerCollapseButton: Locator;
   readonly drawerPortfolioButton: Locator;
   readonly drawerAccountsButton: Locator;
+  readonly drawerDiscoverButton: Locator;
   readonly drawerSendButton: Locator;
   readonly drawerReceiveButton: Locator;
   readonly drawerManagerButton: Locator;
@@ -19,7 +20,9 @@ export class Layout {
   readonly topbarSynchronizeButton: Locator;
   readonly topbarSettingsButton: Locator;
   readonly topbarLockButton: Locator;
+  readonly topbarHelpButton: Locator;
   readonly bookmarkedAccountsList: Locator;
+  readonly bookmarkedAccounts: Locator;
   readonly drawerSwapButton: Locator;
 
   constructor(page: Page) {
@@ -32,19 +35,22 @@ export class Layout {
     this.drawerCollapseButton = page.locator('data-test-id=drawer-collapse-button');
     this.drawerPortfolioButton = page.locator('data-test-id=drawer-dashboard-button');
     this.drawerAccountsButton = page.locator('data-test-id=drawer-accounts-button');
+    this.drawerDiscoverButton = page.locator('data-test-id=drawer-catalog-button');
     this.drawerSendButton = page.locator('data-test-id=drawer-send-button');
     this.drawerReceiveButton = page.locator('data-test-id=drawer-receive-button');
     this.drawerManagerButton = page.locator('data-test-id=drawer-manager-button');
     this.drawerBuycryptoButton = page.locator('data-test-id=drawer-exchange-button');
     this.drawerSwapButton = page.locator('data-test-id=drawer-swap-button');
     this.drawerExperimentalButton = page.locator('data-test-id=drawer-experimental-button');
-    this.bookmarkedAccountsList = page.locator("data-test-id=bookmarked-accounts");
+    this.bookmarkedAccountsList = page.locator("data-test-id=drawer-bookmarked-accounts");
+    this.bookmarkedAccounts = this.bookmarkedAccountsList.locator(".bookmarked-account-item");
 
     // topbar
     this.topbarDiscreetButton = page.locator('data-test-id=topbar-discreet-button');
     this.topbarSynchronizeButton = page.locator('data-test-id=topbar-synchronize-button');
     this.topbarSettingsButton = page.locator('data-test-id=topbar-settings-button');
     this.topbarLockButton = page.locator('data-test-id=topbar-password-lock-button');
+    this.topbarHelpButton = page.locator('data-test-id=topbar-help-button');
     
     // general
     this.loadingLogo = page.locator('id=loading-logo');
@@ -59,6 +65,10 @@ export class Layout {
 
   async goToAccounts() {
     await this.drawerAccountsButton.click();
+  }
+
+  async goToDiscover() {
+    await this.drawerDiscoverButton.click();
   }
 
   async goToManager() {
@@ -83,5 +93,13 @@ export class Layout {
 
   async lockApp() {
     await this.topbarLockButton.click();
+  }
+
+  async openSendModal() {
+    await this.drawerSendButton.click();
+  }
+
+  async openReceiveModal() {
+    await this.drawerReceiveButton.click();
   }
 };

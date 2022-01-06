@@ -37,7 +37,7 @@ const EmptyStateAccounts = ({ theme }: { theme: any }) => {
           ff="Inter|SemiBold"
           color="palette.text.shade100"
           fontSize={5}
-          id="portfolio-empty-state-title"
+          data-test-id="portfolio-empty-state-title"
         >
           {t("emptyState.accounts.title")}
         </Text>
