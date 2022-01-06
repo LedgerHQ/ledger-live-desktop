@@ -719,13 +719,20 @@
     "reset": "フローをリセット",
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
-      "header": "{{provider}}で暗号資産を購入する",
-      "title": "<0>{{provider}}</0>で暗号通貨を購入する",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "購入",
-      "selectCrypto": "暗号資産を選択",
-      "selectAccount": "アカウントを選択",
-      "continue": "続行",
-      "addAccount": "アカウントを追加"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "{{provider}}で暗号資産を売却する",
@@ -734,11 +741,6 @@
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
       "continue": "続行"
-    },
-    "history": {
-      "tab": "履歴",
-      "exporting": "エクスポートしています...",
-      "exportOperations": "エクスポート処理"
     }
   },
   "lend": {
