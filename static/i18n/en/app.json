@@ -719,13 +719,20 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "Sell crypto with {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
       "continue": "Continue"
-    },
-    "history": {
-      "tab": "History",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -2657,7 +2659,7 @@
       "counterValue": "Preferred currency",
       "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Region",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Regional market indicator",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",

@@ -17,6 +17,7 @@ import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages } from "~/config/languages";
 import type { State } from ".";
 import { osLangAndRegionSelector } from "~/renderer/reducers/application";
+import regionsByKey from "../screens/settings/sections/General/regions.json";
 
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -73,6 +74,7 @@ export type SettingsState = {
   language: ?string,
   theme: ?string,
   region: ?string,
+  locale: ?string,
   orderAccounts: string,
   countervalueFirst: boolean,
   autoLockTimeout: number,
@@ -130,6 +132,8 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   };
 };
 
+const DEFAULT_LOCALE = "en-US";
+
 export const pushedLanguages = ["fr", "ru"];
 export const defaultLanguage: () => string = () => {
   // Nb If the os language is in the list [fr, ru] (LL-7027) default to it
@@ -143,6 +147,7 @@ const INITIAL_STATE: SettingsState = {
   language: defaultLanguage(),
   theme: null,
   region: null,
+  locale: DEFAULT_LOCALE,
   orderAccounts: "balance|desc",
   countervalueFirst: false,
   autoLockTimeout: 10,
@@ -372,6 +377,25 @@ export const userLangAndRegionSelector = (
   }
 };
 
+const isValidRegionLocale = (locale: string) => {
+  return regionsByKey.hasOwnProperty(locale);
+};
+
+const localeFallbackToLanguageSelector = (state: State): { locale: string } => {
+  const { language, locale, region } = state.settings;
+  if (!locale && language) {
+    /*
+      Handle settings data saved with the old logic, where the region settings'
+        entire locale was not being saved (the locale was split in 2 strings on
+        "-" and only the 2nd part was saved)
+        e.g: for "fr-BE" we would only save {region: "BE"}
+    */
+    const potentialLocale = region ? `${language}-${region}` : language;
+    if (isValidRegionLocale(potentialLocale)) return { locale: potentialLocale };
+  } else if (locale && isValidRegionLocale(locale)) return { locale };
+  return { locale: language || DEFAULT_LOCALE };
+};
+
 export const langAndRegionSelector: OutputSelector<State, void, LangAndRegion> = createSelector(
   userLangAndRegionSelector,
   osLangAndRegionSelector,
@@ -385,12 +409,9 @@ export const languageSelector: OutputSelector<State, void, string> = createSelec
   o => o.language,
 );
 
-export const localeSelector: OutputSelector<
-  State,
-  void,
-  string,
-> = createSelector(langAndRegionSelector, ({ language, region }) =>
-  region ? `${language}-${region}` : language,
+export const localeSelector: OutputSelector<State, void, string> = createSelector(
+  localeFallbackToLanguageSelector,
+  o => o.locale,
 );
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts;
