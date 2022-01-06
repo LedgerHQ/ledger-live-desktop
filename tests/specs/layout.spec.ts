@@ -53,10 +53,11 @@ test("Layout", async ({ page }) => {
     expect(await page.screenshot()).toMatchSnapshot("experimental-features.png");
   });
 
-  await test.skip("shows a starred account, and can access the page", async () => { // FIXME: LL-8899
-    expect(await layout.bookmarkedAccounts.count()).toBe(1);
-    await layout.bookmarkedAccounts.first().click();
-    await expect(page).toHaveURL(/.*\/account\/.*/);
+  await test.step("shows a starred account, and can access the page", async () => {
+    // FIXME: LL-8899
+    // expect(await layout.bookmarkedAccounts.count()).toBe(1);
+    // await layout.bookmarkedAccounts.first().click();
+    // await expect(page).toHaveURL(/.*\/account\/.*/);
   });
 
   await test.step("can toggle discreet mode", async () => {
