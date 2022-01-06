@@ -10,9 +10,9 @@ import { noop } from "lodash";
 export type Option = {
   value: string;
   /** Label displayed next to the checkbox */
-  label: string;
+  label: string | React.ReactNode;
   /** Checked state of the checkbox */
-  checked: boolean;
+  checked?: boolean;
 };
 
 // eslint-disable-next-line flowtype/no-types-missing-file-annotation
@@ -90,7 +90,7 @@ const CheckboxContainer = styled(Flex).attrs({
   }
 `;
 
-const CheckboxText = styled(Text).attrs({
+export const CheckboxText = styled(Text).attrs({
   flexShrink: 0,
   variant: "paragraph",
   fontWeight: "semiBold",
@@ -107,14 +107,14 @@ const CheckboxWithLabel = ({
   onChange,
   label,
   disabled,
-}: CheckboxProps & { label: string }) => {
+}: CheckboxProps & { label: string | React.ReactNode }) => {
   const handleClick = useCallback(() => {
     !disabled && onChange && onChange(!isChecked);
   }, [disabled, onChange, isChecked]);
   return (
     <CheckboxContainer onClick={handleClick}>
       <CheckBox onChange={onChange} isChecked={isChecked} isIndeterminate={isIndeterminate} />
-      <CheckboxText>{label}</CheckboxText>
+      {typeof label === "string" ? <CheckboxText>{label}</CheckboxText> : label}
     </CheckboxContainer>
   );
 };
@@ -147,13 +147,9 @@ const DropdownPicker: React.FC<Props> = ({
       <LabelText color={isLight ? "neutral.c80" : "neutral.c60"}>{label}</LabelText>
       {optionsCheckedCount === options.length ? (
         <LabelText color="neutral.c100">{t("common.all")}</LabelText>
-      ) : optionsCheckedCount === 1 ? (
-        <LabelText color="neutral.c100">{options.find(opt => opt.checked)?.label}</LabelText>
       ) : (
         <CountPill>
-          <CountPillText>
-            {optionsCheckedCount}
-          </CountPillText>
+          <CountPillText>{optionsCheckedCount}</CountPillText>
         </CountPill>
       )}
     </Flex>
@@ -170,7 +166,7 @@ const DropdownPicker: React.FC<Props> = ({
             label={t("common.all")}
           />
         )}
-        {options.map(({ value, label, checked }) => {
+        {options.map(({ value, label, checked = false }) => {
           return (
             <CheckboxWithLabel
               key={value}
