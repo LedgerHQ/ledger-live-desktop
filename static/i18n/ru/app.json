@@ -719,13 +719,20 @@
     "reset": "Сбросить",
     "verifyAddress": "Убедитесь, что показанный адрес в точности совпадает с адресом на экране устройства",
     "buy": {
-      "header": "Покупка криптовалюты через {{provider}}",
-      "title": "Покупка криптовалюты через <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Покупка",
-      "selectCrypto": "Выберите криптоактив",
-      "selectAccount": "Выберите счёт",
-      "continue": "Продолжить",
-      "addAccount": "Добавить счёт"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "Продажа криптовалюты через {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "Выберите криптоактив",
       "selectAccount": "Выберите счёт",
       "continue": "Продолжить"
-    },
-    "history": {
-      "tab": "История",
-      "exporting": "Экспортируем…",
-      "exportOperations": "Экспорт истории"
     }
   },
   "lend": {
