@@ -2659,7 +2659,7 @@
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Fuseau horaire",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Choisissez votre région pour personnaliser les formats des dates, heure et monnaie.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
