@@ -719,13 +719,20 @@
     "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
-      "header": "{{provider}} ile kripto satın alın",
-      "title": "<0>{{provider}}</0> üzerinden kripto satın alın",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Satın al",
-      "selectCrypto": "Bir kripto varlık seçin",
-      "selectAccount": "Bir hesap seçin",
-      "continue": "Devam",
-      "addAccount": "Hesap ekle"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "{{provider}} ile kripto satın",
@@ -734,11 +741,6 @@
       "selectCrypto": "Bir kripto varlık seçin",
       "selectAccount": "Bir hesap seçin",
       "continue": "Devam"
-    },
-    "history": {
-      "tab": "Geçmiş",
-      "exporting": "Dışa aktarılıyor...",
-      "exportOperations": "Dışa aktarma işlemleri"
     }
   },
   "lend": {
