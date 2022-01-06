@@ -3938,6 +3938,10 @@
       "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement.",
       "description": null
     },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+    },
     "CantScanQRCode": {
       "title": "Échec du scan de ce code QR. Cette adresse ne prend pas en charge la vérification automatique."
     },
