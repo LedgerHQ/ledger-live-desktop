@@ -2659,7 +2659,7 @@
       "counterValue": "Bevorzugte Währung",
       "counterValueDesc": "Wählen Sie die Währung, die neben Ihrem Saldo und den Aktionen angezeigt wird.",
       "region": "Region",
-      "regionDesc": "Wählen Sie Ihre Region, um die Zeitzone von Ledger Live einzustellen.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Regionaler Marktindikator",
       "stockDesc": "Wählen Sie Westlich, um Marktsteigerungen in Blau anzuzeigen, oder Östlich, um sie in Rot anzuzeigen.",
       "carouselVisibility": "Karussell-Sichtbarkeit",
