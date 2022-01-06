@@ -10,6 +10,7 @@ export class Layout {
   readonly drawerCollapseButton: Locator;
   readonly drawerPortfolioButton: Locator;
   readonly drawerAccountsButton: Locator;
+  readonly drawerDiscoverButton: Locator;
   readonly drawerSendButton: Locator;
   readonly drawerReceiveButton: Locator;
   readonly drawerManagerButton: Locator;
@@ -34,6 +35,7 @@ export class Layout {
     this.drawerCollapseButton = page.locator('data-test-id=drawer-collapse-button');
     this.drawerPortfolioButton = page.locator('data-test-id=drawer-dashboard-button');
     this.drawerAccountsButton = page.locator('data-test-id=drawer-accounts-button');
+    this.drawerDiscoverButton = page.locator('data-test-id=drawer-catalog-button');
     this.drawerSendButton = page.locator('data-test-id=drawer-send-button');
     this.drawerReceiveButton = page.locator('data-test-id=drawer-receive-button');
     this.drawerManagerButton = page.locator('data-test-id=drawer-manager-button');
@@ -63,6 +65,10 @@ export class Layout {
 
   async goToAccounts() {
     await this.drawerAccountsButton.click();
+  }
+
+  async goToDiscover() {
+    await this.drawerDiscoverButton.click();
   }
 
   async goToManager() {

@@ -4,6 +4,7 @@ import { Layout } from "../models/Layout";
 import { SendModal } from "../models/SendModal";
 import { ReceiveModal } from "../models/ReceiveModal";
 import { PortfolioPage } from "../models/PortfolioPage";
+import { SettingsPage } from "../models/SettingsPage";
 
 test.use({ userdata: "1AccountBTC1AccountETHStarred" });
 
@@ -12,6 +13,7 @@ test("Layout", async ({ page }) => {
   const sendModal = new SendModal(page);
   const receiveModal = new ReceiveModal(page);
   const portfolioPage = new PortfolioPage(page);
+  const settingsPage = new SettingsPage(page);
 
   await test.step("can open send modal", async () => {
     await layout.openSendModal();
@@ -27,7 +29,26 @@ test("Layout", async ({ page }) => {
     await receiveModal.close();
   });
 
+  await test.step("go to accounts", async () => {
+    await layout.goToAccounts();
+    expect(await page.screenshot()).toMatchSnapshot("accounts.png");
+  });
+
+  await test.step("go to discover", async () => {
+    await layout.goToDiscover();
+    expect(await page.screenshot()).toMatchSnapshot("discover.png");
+  });
+
   await test.step("go to buy / sell cryto", async () => {
+    await layout.goToBuyCrypto();
+    expect(await page.screenshot()).toMatchSnapshot("buy-sell.png");
+  });
+
+  await test.step("go to experimental features", async () => {
+    await layout.goToSettings();
+    await settingsPage.experimentalTab.click();
+    await settingsPage.enableDevMode();
+    await layout.goToPortfolio();
     await layout.drawerExperimentalButton.click();
     expect(await page.screenshot()).toMatchSnapshot("experimental-features.png");
   });
