@@ -1,11 +1,11 @@
-import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { AppManifest, AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
 import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Box, Flex, Text } from "@ledgerhq/react-ui";
 import LiveAppIcon from "../WebPlatformPlayer/LiveAppIcon";
 import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById, listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import AppName from "./AppName";
 import { containerButtonCSS, getBackgroundColor } from "./styles";
@@ -85,20 +85,21 @@ const CurrencyIconContainer = styled(Box).attrs({
 
 type Props = {
   manifest: AppManifest;
+  appMetadata: AppMetadata;
   onClick: (manifest: AppManifest) => any;
 };
 
-const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
+const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
   const {
     icon,
     name,
     branch,
-    params: { networks } = {},
-    categories: [category],
     content: {
       description: { en: description },
     },
   } = manifest;
+
+  const { networks = [], category } = appMetadata;
 
   const isDisabled = branch === "soon";
   const showBranchTag = branch !== "stable";
@@ -110,8 +111,7 @@ const AppRow: React.FC<Props> = ({ manifest, onClick }: Props) => {
   }, [manifest, onClick, isDisabled]);
 
   const networksCurrencies: CryptoCurrency[] = useMemo(() => {
-    const currencies = listSupportedCurrencies();
-    return networks ? networks.map(({ currency }) => currencies.find(c => c.id === currency)) : [];
+    return networks ? networks.map(network => getCryptoCurrencyById(network)) : [];
   }, [networks]);
 
   const tagContent = showBranchTag ? t(`platform.catalog.branch.${manifest.branch}`) : category;
