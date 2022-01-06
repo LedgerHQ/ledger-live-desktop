@@ -39,8 +39,8 @@ const PlatformCatalog = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { manifests } = usePlatformApp();
-  console.log("manifests", { manifests });
+  const { manifests, catalogMetadata } = usePlatformApp();
+  console.log("manifests", { manifests, catalogMetadata });
   const allowDebugApps = useSelector(allowDebugAppsSelector);
   const allowExperimentalApps = useSelector(allowExperimentalAppsSelector);
 
@@ -92,8 +92,17 @@ const PlatformCatalog = () => {
     <Container>
       <TrackPage category="Platform" name="Catalog" />
       <Title>{t("platform.catalog.title")}</Title>
+      {/* <SectionPromotedApps
+        manifests={filteredManifests}
+        catalogMetadata={catalogMetadata}
+        handleClick={handleClick}
+      /> */}
       <SectionRecentlyUsed manifests={filteredManifests} handleClick={handleClick} />
-      <SectionLiveApps manifests={filteredManifests} handleClick={handleClick} />
+      <SectionLiveApps
+        manifests={filteredManifests}
+        catalogMetadata={catalogMetadata}
+        handleClick={handleClick}
+      />
     </Container>
   );
 };

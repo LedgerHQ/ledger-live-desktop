@@ -1,17 +1,17 @@
 import React, { useCallback, useMemo, useState } from "react";
 import { Flex } from "@ledgerhq/react-ui";
-import { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
+import { AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
 import { useTranslation } from "react-i18next";
-import { sortBy } from "lodash";
+import { keyBy, sortBy } from "lodash";
 import SectionHeader from "~/renderer/components/Platform/SectionHeader";
 import AppRow from "~/renderer/components/Platform/AppRow";
 import { SectionBaseProps } from "./types";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import DropdownPicker, { Option } from "~/renderer/components/DropdownPicker";
 
 type Props = SectionBaseProps;
 
-type CategoriesIdsAndNetworksIds = { categoriesIds: string[]; networksIds: string[] };
+type CategoriesIdsAndNetworksIds = { supercategories: string[]; networksIds: string[] };
 
 const getInitialOptions = (possibilities: { value: string; label: string }[]): Option[] => {
   return [
@@ -22,52 +22,60 @@ const getInitialOptions = (possibilities: { value: string; label: string }[]): O
   ];
 };
 
-const getManifestNetworks = (manifest: AppManifest): string[] => {
-  const { params = {} } = manifest;
-  const networks: { currency: string }[] = params.networks || [];
-  return networks.map(n => n.currency);
+const getAppMetadataNetworks = (appMetadata: AppMetadata): string[] => {
+  return appMetadata.networks || [];
 };
 
-const getManifestCategories = (manifest: AppManifest): string[] => {
-  const { categories = [] } = manifest;
-  return categories;
+const getAppMetadataSuperCategory = (appMetadata: AppMetadata): string => {
+  return appMetadata.supercategory;
 };
 
 const getEnabledOptionsValues = (options: Option[]): string[] => {
   return options.filter(o => o.checked).map(o => o.value);
 };
 
-const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }: Props) => {
+const SectionLiveApps: React.FC<SectionBaseProps> = ({
+  manifests,
+  catalogMetadata,
+  handleClick,
+}: Props) => {
   const { t } = useTranslation();
+  const { appsMetadata = [] } = catalogMetadata || {};
 
-  const { categories, networks } = useMemo(() => {
-    const currencies = listSupportedCurrencies();
+  const appsMetadataMappedById = useMemo(() => keyBy(appsMetadata, "id"), [appsMetadata]);
+
+  const { supercategories, networks } = useMemo(() => {
     const reducer = (
       {
-        categoriesIds: accCategoriesIds = [],
+        supercategories: accSupercategories = [],
         networksIds: accNetworksIds = [],
       }: CategoriesIdsAndNetworksIds,
-      manifest: AppManifest,
-    ): { categoriesIds: string[]; networksIds: string[] } => {
-      const categories = getManifestCategories(manifest);
-      const networks = getManifestNetworks(manifest);
+      appMetadata: AppMetadata,
+    ): { supercategories: string[]; networksIds: string[] } => {
+      const supercategory = getAppMetadataSuperCategory(appMetadata);
+      const networks = getAppMetadataNetworks(appMetadata);
       const pushIfNotIncluded = (acc: string[] = [], val: string) => {
         return acc.includes(val) ? acc : [...acc, val];
       };
       return {
         networksIds: networks.reduce(pushIfNotIncluded, accNetworksIds),
-        categoriesIds: categories.reduce(pushIfNotIncluded, accCategoriesIds),
+        supercategories: accSupercategories.includes(supercategory)
+          ? accSupercategories
+          : [...accSupercategories, supercategory],
       };
     };
-    const { categoriesIds, networksIds }: CategoriesIdsAndNetworksIds = manifests.reduce(reducer, {
-      categoriesIds: [],
-      networksIds: [],
-    });
+    const { supercategories, networksIds }: CategoriesIdsAndNetworksIds = appsMetadata.reduce(
+      reducer,
+      {
+        supercategories: [],
+        networksIds: [],
+      },
+    );
     return {
-      categories: sortBy(
-        categoriesIds.map(categoryId => ({
+      supercategories: sortBy(
+        supercategories.map(categoryId => ({
           value: categoryId,
-          label: t(`platform.catalog.category.${categoryId}`),
+          label: t(`platform.catalog.category.${categoryId}`, categoryId),
         })),
         "label",
       ),
@@ -76,16 +84,16 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
         ...sortBy(
           networksIds.map(networkId => ({
             value: networkId,
-            label: currencies.find(c => c.id === networkId)?.name || networkId,
+            label: getCryptoCurrencyById(networkId)?.name || networkId,
           })),
           "label",
         ),
       ],
     };
-  }, [manifests, t]);
+  }, [appsMetadata, t]);
 
   const [networksOptions, setNetworksOptions] = useState(getInitialOptions(networks));
-  const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(categories));
+  const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(supercategories));
 
   const isAllOnNetworks = networksOptions.some(opt => opt.checked);
   const isAllIndeterminateNetworks =
@@ -96,10 +104,10 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
 
   const handleAllPressedNetworks = useCallback(() => {
     setNetworksOptions(networksOptions.map(opt => ({ ...opt, checked: !isAllOnNetworks })));
-  }, [networksOptions, setNetworksOptions]);
+  }, [networksOptions, setNetworksOptions, isAllOnNetworks]);
   const handleAllPressedCategories = useCallback(() => {
     setCategoriesOptions(categoriesOptions.map(opt => ({ ...opt, checked: !isAllOnCategories })));
-  }, [categoriesOptions, setCategoriesOptions]);
+  }, [categoriesOptions, setCategoriesOptions, isAllOnCategories]);
 
   const right = (
     <Flex flexDirection="row" zIndex={1}>
@@ -126,28 +134,36 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({ manifests, handleClick }:
   const enabledCategories = getEnabledOptionsValues(categoriesOptions);
   const filteredManifests = useMemo(() => {
     return manifests.filter(manifest => {
-      const networks = getManifestNetworks(manifest);
-      const categories = getManifestCategories(manifest);
+      const appMetadata = appsMetadataMappedById[manifest.id];
+      const networks = getAppMetadataNetworks(appMetadata);
+      const supercategory = getAppMetadataSuperCategory(appMetadata);
       const networksCondition =
         networks.some(n => enabledNetworks.includes(n)) ||
         (networks.length === 0 && enabledNetworks.includes("none"));
-      const categoriesCondition = categories.some(c => enabledCategories.includes(c));
+      const categoriesCondition = enabledCategories.includes(supercategory);
       return networksCondition && categoriesCondition;
     });
-  }, [manifests, enabledNetworks, enabledCategories]);
+  }, [appsMetadataMappedById, enabledNetworks, enabledCategories, manifests]);
+
+  const content = useMemo(
+    () =>
+      filteredManifests.map(manifest => (
+        <AppRow
+          key={manifest.id}
+          id={`platform-catalog-app-${manifest.id}`}
+          manifest={manifest}
+          appMetadata={appsMetadataMappedById[manifest.id]}
+          onClick={() => handleClick(manifest)}
+        />
+      )),
+    [filteredManifests, handleClick, appsMetadataMappedById],
+  );
 
   return (
     <Flex flexDirection="column">
       <SectionHeader title={t("platform.catalog.liveApps")} right={right} />
       <Flex flexDirection="column" rowGap="12px">
-        {filteredManifests.map(manifest => (
-          <AppRow
-            key={manifest.id}
-            id={`platform-catalog-app-${manifest.id}`}
-            manifest={manifest}
-            onClick={() => handleClick(manifest)}
-          />
-        ))}
+        {content}
       </Flex>
     </Flex>
   );
