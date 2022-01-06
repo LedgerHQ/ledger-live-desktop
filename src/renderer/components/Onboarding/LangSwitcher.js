@@ -9,7 +9,6 @@ import { langAndRegionSelector } from "~/renderer/reducers/settings";
 import { useDispatch, useSelector } from "react-redux";
 import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 
-import moment from "moment";
 import { prodStableLanguages } from "~/config/languages";
 
 const options = prodStableLanguages.map(value => ({
@@ -110,7 +109,6 @@ const LangSwitcher = () => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    moment.locale(language);
     i18n.changeLanguage(language);
   }, [i18n, language]);
 
