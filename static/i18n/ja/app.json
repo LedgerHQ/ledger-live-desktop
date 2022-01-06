@@ -2659,7 +2659,7 @@
       "counterValue": "表示通貨",
       "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択する。",
       "region": "地域",
-      "regionDesc": "Ledger Liveのタイムゾーンを設定するには、お住まいの地域を選択してください。",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "carouselVisibility": "カルーセルの表示",
