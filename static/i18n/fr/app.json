@@ -719,19 +719,19 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "Acheter et vendre des cryptos",
+      "title": "Choisissez un prestataire pour acheter des cryptos.",
+      "buyFrom": "Achetez de là où vous vous trouvez",
+      "cryptoSupported": "cryptos prises en charge",
+      "payWith": "Payez par carte ou via SEPA",
       "tab": "Acheter",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "Acheter des cryptos avec {{provider}}",
+        "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
+        "selectCrypto": "Choisir un crypto-actif",
+        "selectAccount": "Sélectionner un compte",
+        "continue": "Continuer",
+        "addAccount": "Ajouter un compte"
       }
     },
     "sell": {
