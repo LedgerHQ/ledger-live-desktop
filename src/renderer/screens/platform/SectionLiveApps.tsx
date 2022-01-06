@@ -16,7 +16,6 @@ const VerticalSeparator = styled(Flex).attrs({
   height: "16px",
   borderLeft: "1px solid",
   borderColor: "neutral.c40",
-  mx: "20px",
 })``;
 
 const ResetCTA = styled(Text).attrs({
@@ -157,7 +156,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   }, [setNetworksOptions, networks, setCategoriesOptions, supercategories]);
 
   const right = catalogMetadata && (
-    <Flex flexDirection="row" zIndex={1} alignItems="center">
+    <Flex flexDirection="row" zIndex={1} alignItems="center" columnGap="20px">
       {showResetCTA && (
         <>
           <ResetCTA onClick={handleClickReset}>{t("platform.catalog.resetFilters")}</ResetCTA>
