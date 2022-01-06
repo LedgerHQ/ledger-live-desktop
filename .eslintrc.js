@@ -12,6 +12,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    "plugin:json/recommended",
   ],
   globals: {
     __DEV__: "readonly",
