@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback, useState } from "react";
 import { Flex, Text } from "@ledgerhq/react-ui";
-import { AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
+import { AppManifest, AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
 import { useTranslation, TFunction } from "react-i18next";
 import { keyBy, sortBy } from "lodash";
 import SectionHeader from "~/renderer/components/Platform/SectionHeader";
@@ -81,6 +81,13 @@ const makeNetworkOption = (t: TFunction, networkId: string): Option => {
   };
 };
 
+const getAppMetadataFromManifest = (
+  manifest: AppManifest,
+  map: Record<string, AppMetadata>,
+): AppMetadata | undefined => {
+  return map[manifest.id] || undefined;
+};
+
 const SectionLiveApps: React.FC<SectionBaseProps> = ({
   manifests,
   catalogMetadata,
@@ -89,7 +96,10 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   const { t } = useTranslation();
   const { appsMetadata = [] } = catalogMetadata || {};
 
-  const appsMetadataMappedById = useMemo(() => keyBy(appsMetadata, "id"), [appsMetadata]);
+  const appsMetadataMappedById: Record<string, AppMetadata> = useMemo(
+    () => keyBy(appsMetadata, "id"),
+    [appsMetadata],
+  );
 
   const { supercategories, networks } = useMemo(() => {
     const reducer = (
@@ -144,7 +154,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
     setCategoriesOptions(getInitialOptions(supercategories));
   }, [setNetworksOptions, networks, setCategoriesOptions, supercategories]);
 
-  const right = (
+  const right = catalogMetadata && (
     <Flex flexDirection="row" zIndex={1} alignItems="center">
       {showResetCTA && (
         <>
@@ -169,7 +179,8 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   const enabledCategories = getEnabledOptionsValues(categoriesOptions);
   const filteredManifests = useMemo(() => {
     return manifests.filter(manifest => {
-      const appMetadata = appsMetadataMappedById[manifest.id];
+      const appMetadata = getAppMetadataFromManifest(manifest, appsMetadataMappedById);
+      if (!appMetadata) return true;
       const networks = getAppMetadataNetworks(appMetadata);
       const supercategory = getAppMetadataSuperCategory(appMetadata);
       const networksCondition =
@@ -187,7 +198,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
           key={manifest.id}
           id={`platform-catalog-app-${manifest.id}`}
           manifest={manifest}
-          appMetadata={appsMetadataMappedById[manifest.id]}
+          appMetadata={getAppMetadataFromManifest(manifest, appsMetadataMappedById)}
           onClick={() => handleClick(manifest)}
         />
       )),

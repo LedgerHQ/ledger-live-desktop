@@ -5,7 +5,10 @@ import { useTranslation } from "react-i18next";
 import { Box, Flex, Text } from "@ledgerhq/react-ui";
 import LiveAppIcon from "../WebPlatformPlayer/LiveAppIcon";
 import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
-import { getCryptoCurrencyById, listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import {
+  getCryptoCurrencyById,
+  listSupportedCurrencies,
+} from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import AppName from "./AppName";
 import { containerButtonCSS, getBackgroundColor } from "./styles";
@@ -85,7 +88,7 @@ const CurrencyIconContainer = styled(Box).attrs({
 
 type Props = {
   manifest: AppManifest;
-  appMetadata: AppMetadata;
+  appMetadata?: AppMetadata;
   onClick: (manifest: AppManifest) => any;
 };
 
@@ -99,7 +102,7 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
     },
   } = manifest;
 
-  const { networks = [], category } = appMetadata;
+  const { networks = [], category } = appMetadata || {};
 
   const isDisabled = branch === "soon";
   const showBranchTag = branch !== "stable";
@@ -146,9 +149,11 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
         </TitleContainer>
         <Description>{description}</Description>
       </LeftContainer>
-      <TagContainer {...tagProps}>
-        <TagText {...tagProps}>{tagContent}</TagText>
-      </TagContainer>
+      {tagContent && (
+        <TagContainer {...tagProps}>
+          <TagText {...tagProps}>{tagContent}</TagText>
+        </TagContainer>
+      )}
     </Container>
   );
 };
