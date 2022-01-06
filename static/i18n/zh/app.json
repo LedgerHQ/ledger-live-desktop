@@ -3938,6 +3938,10 @@
       "title": "无法自动验证：请仔细核对该地址。",
       "description": null
     },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+    },
     "CantScanQRCode": {
       "title": "无法扫描此二维码：此地址不支持自动验证"
     },
