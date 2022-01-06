@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { Flex } from "@ledgerhq/react-ui";
+import React, { useMemo, useCallback, useState } from "react";
+import { Flex, Text } from "@ledgerhq/react-ui";
 import { AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
 import { useTranslation } from "react-i18next";
 import { keyBy, sortBy } from "lodash";
@@ -8,6 +8,28 @@ import AppRow from "~/renderer/components/Platform/AppRow";
 import { SectionBaseProps } from "./types";
 import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import DropdownPicker, { Option } from "~/renderer/components/DropdownPicker";
+import styled from "styled-components";
+
+const VerticalSeparator = styled(Flex).attrs({
+  width: "0",
+  height: "16px",
+  borderLeft: "1px solid",
+  borderColor: "neutral.c40",
+  mx: "20px",
+})``;
+
+const ResetCTA = styled(Text).attrs({
+  color: "primary.c80",
+  variant: "paragraph",
+  fontWeight: "medium",
+  fontSize: "13px",
+  lineHeight: "16px",
+})`
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+`;
 
 type Props = SectionBaseProps;
 
@@ -95,37 +117,31 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   const [networksOptions, setNetworksOptions] = useState(getInitialOptions(networks));
   const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(supercategories));
 
-  const isAllOnNetworks = networksOptions.some(opt => opt.checked);
-  const isAllIndeterminateNetworks =
-    networksOptions.some(opt => opt.checked) && networksOptions.some(opt => !opt.checked);
-  const isAllOnCategories = categoriesOptions.some(opt => opt.checked);
-  const isAllIndeterminateCategories =
-    categoriesOptions.some(opt => opt.checked) && categoriesOptions.some(opt => !opt.checked);
+  const showResetCTA =
+    networksOptions.some(opt => !opt.checked) || categoriesOptions.some(opt => !opt.checked);
 
-  const handleAllPressedNetworks = useCallback(() => {
-    setNetworksOptions(networksOptions.map(opt => ({ ...opt, checked: !isAllOnNetworks })));
-  }, [networksOptions, setNetworksOptions, isAllOnNetworks]);
-  const handleAllPressedCategories = useCallback(() => {
-    setCategoriesOptions(categoriesOptions.map(opt => ({ ...opt, checked: !isAllOnCategories })));
-  }, [categoriesOptions, setCategoriesOptions, isAllOnCategories]);
+  const handleClickReset = useCallback(() => {
+    setNetworksOptions(getInitialOptions(networks));
+    setCategoriesOptions(getInitialOptions(supercategories));
+  }, [setNetworksOptions, networks, setCategoriesOptions, supercategories]);
 
   const right = (
-    <Flex flexDirection="row" zIndex={1}>
+    <Flex flexDirection="row" zIndex={1} alignItems="center">
+      {showResetCTA && (
+        <>
+          <ResetCTA onClick={handleClickReset}>{t("platform.catalog.resetFilters")}</ResetCTA>
+          <VerticalSeparator />
+        </>
+      )}
       <DropdownPicker
-        isAllOn={isAllOnNetworks}
-        isAllIndeterminate={isAllIndeterminateNetworks}
         options={networksOptions}
         onChange={setNetworksOptions}
-        onPressAll={handleAllPressedNetworks}
-        label={t("platform.catalog.networks")}
+        label={t("platform.catalog.networkFilterLabel")}
       />
       <DropdownPicker
-        isAllOn={isAllOnCategories}
-        isAllIndeterminate={isAllIndeterminateCategories}
         options={categoriesOptions}
         onChange={setCategoriesOptions}
-        onPressAll={handleAllPressedCategories}
-        label={t("platform.catalog.categories")}
+        label={t("platform.catalog.categoryFilterLabel")}
       />
     </Flex>
   );

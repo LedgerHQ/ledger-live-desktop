@@ -30,12 +30,13 @@
         "experimental": "experimental",
         "debug": "debug"
       },
+      "resetFilters": "Reset filters",
       "liveApps": "Live Apps",
       "recentlyUsed": "Recently Used",
       "suggested": "Suggested",
-      "networks": "Networks",
+      "networkFilterLabel": "Network",
       "noNetwork": "No network",
-      "categories": "Categories",
+      "categoryFilterLabel": "Category",
       "category": {
         "buy": "Buy",
         "card": "Card",

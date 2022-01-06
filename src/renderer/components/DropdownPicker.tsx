@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Flex, Text, DropdownGeneric } from "@ledgerhq/react-ui";
 import { Props as DropdownProps } from "@ledgerhq/react-ui/components/form/DropdownGeneric";
 import { useTranslation } from "react-i18next";
@@ -57,8 +57,15 @@ const CountPill = styled(Flex).attrs({
   borderRadius: "20px",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "primary.c60",
-  color: "neutral.c100",
+  backgroundColor: "primary.c80",
+})``;
+
+const CountPillText = styled(Text).attrs({
+  variant: "small",
+  fontWeight: "semiBold",
+  fontSize: "12px",
+  lineHeight: "15px",
+  color: "neutral.c00",
 })``;
 
 const LabelText = styled(Text).attrs({
@@ -123,6 +130,8 @@ const DropdownPicker: React.FC<Props> = ({
   placement,
 }: Props) => {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isLight = theme.colors.type === "light";
 
   const handleChange = useCallback(
     (value, checked) => {
@@ -135,16 +144,16 @@ const DropdownPicker: React.FC<Props> = ({
   const optionsCheckedCount = options.filter(o => o.checked).length;
   const Label = (
     <Flex flexDirection="row" alignItems="center" columnGap="4px" marginRight="-10px">
-      <LabelText color="neutral.c80">{label}</LabelText>
+      <LabelText color={isLight ? "neutral.c80" : "neutral.c60"}>{label}</LabelText>
       {optionsCheckedCount === options.length ? (
         <LabelText color="neutral.c100">{t("common.all")}</LabelText>
       ) : optionsCheckedCount === 1 ? (
         <LabelText color="neutral.c100">{options.find(opt => opt.checked)?.label}</LabelText>
       ) : (
         <CountPill>
-          <Text variant="small" fontWeight="semiBold" fontSize="12px" lineHeight="15px">
+          <CountPillText>
             {optionsCheckedCount}
-          </Text>
+          </CountPillText>
         </CountPill>
       )}
     </Flex>
