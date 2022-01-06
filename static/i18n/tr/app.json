@@ -731,7 +731,7 @@
         "selectCrypto": "Choose a crypto asset",
         "selectAccount": "Choose an account",
         "continue": "Continue",
-        "addAccount": "Add account"
+        "addAccount": "Hesap ekle"
       }
     },
     "sell": {
@@ -1179,45 +1179,45 @@
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
-    "rangeLabel": "Time",
-    "goBack": "Go back",
+    "title": "Piyasa",
+    "currency": "Para birimi",
+    "rangeLabel": "Dönem",
+    "goBack": "Geri dön",
     "filters": {
-      "title": "Filters",
-      "show": "Show",
-      "all": "All",
-      "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
-      "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "title": "Filtreler",
+      "show": "Göster",
+      "all": "Tümü",
+      "isLedgerCompatible": "Ledger Live ile Uyumlu",
+      "isFavorite": "Yıldızlanan Varlıklar",
+      "applyFilters": "Filtreleri uygula",
+      "clearAll": "Tümünü temizle"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "Kripto",
+      "price": "Fiyat",
+      "change": "Değişim",
+      "marketCap": "Piyasa değeri",
+      "last7d": "Son 7 gün"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
-      "marketCapRank": "Market cap rank",
-      "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
-      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
-      "supportedCoinsAndTokens": "Supported coins & Tokens"
+      "priceStatistics": "Fiyat istatistikleri",
+      "tradingVolume": "İşlem hacmi",
+      "24hLowHight": "24sa Min. / 24sa Maks.",
+      "7dLowHigh": "7g Min. / 7g Maks.",
+      "allTimeHigh": "Tüm zamanlar maks.",
+      "allTimeLow": "Tüm zamanlar min.",
+      "marketCapRank": "Piyasa değeri sıralaması",
+      "marketCapDominance": "Piyasa değeri hakimiyeti",
+      "supply": "Arz",
+      "circulatingSupply": "Dolaşımdaki arz",
+      "totalSupply": "Toplam arz",
+      "maxSupply": "Maksimum arz",
+      "assetNotSupportedOnLedgerLive": "Bu varlık Ledger Live'da desteklenmiyor.",
+      "supportedCoinsAndTokens": "Desteklenen coin'ler ve token'lar"
     },
     "range": {
-      "1H_label": "1H",
-      "1D_label": "1D",
+      "1H_label": "1S",
+      "1D_label": "1G",
       "1W_label": "1W",
       "1M_label": "1M",
       "1Y_label": "1Y",
