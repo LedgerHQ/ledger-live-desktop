@@ -4,20 +4,50 @@ import { Flex, Text, DropdownGeneric } from "@ledgerhq/react-ui";
 import { Props as DropdownProps } from "@ledgerhq/react-ui/components/form/DropdownGeneric";
 import { useTranslation } from "react-i18next";
 import CheckBox, { Props as CheckboxProps } from "./CheckBox";
+import { noop } from "lodash";
 
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
 export type Option = {
   value: string;
+  /** Label displayed next to the checkbox */
   label: string;
+  /** Checked state of the checkbox */
   checked: boolean;
 };
 
+// eslint-disable-next-line flowtype/no-types-missing-file-annotation
 export type Props = {
+  /**
+   * Label displayed in the dropdown button, before the chevron
+   * */
   label: string;
+  /**
+   * Options to display as a list of checkboxes
+   */
   options: Option[];
+  /**
+   * Called when a checkbox is pressed, with the new state for all options
+   * */
   onChange: (options: Option[]) => void;
-  onPressAll: () => void;
+  /**
+   * Whether to show an "all" button.
+   * Defaults to false.
+   * */
   showAll?: boolean;
+  /**
+   * Called when pressing the "all" button (requires `showAll={true}`)
+   * */
+  onPressAll?: () => void;
+  /**
+   * Checked state of the "all" button (requires `showAll={true}`)
+   * Defaults to false.
+   * */
   isAllOn?: boolean;
+  /**
+   * Indeterminate state of the "all" button, if it's true and if `isAllOn`
+   * the checkbox will contain a dash instead of a chec
+   * (requires `showAll={true}`)
+   * */
   isAllIndeterminate?: boolean;
 } & Pick<DropdownProps, "placement">;
 
@@ -86,9 +116,9 @@ const DropdownPicker: React.FC<Props> = ({
   label,
   options,
   onChange,
-  showAll = true,
+  showAll = false,
   onPressAll,
-  isAllOn,
+  isAllOn = false,
   isAllIndeterminate,
   placement,
 }: Props) => {
@@ -125,7 +155,7 @@ const DropdownPicker: React.FC<Props> = ({
       <Flex flexDirection="column" maxHeight="300px" overflowY="auto">
         {showAll && (
           <CheckboxWithLabel
-            onChange={onPressAll}
+            onChange={onPressAll || noop}
             isChecked={isAllOn || false}
             isIndeterminate={isAllIndeterminate}
             label={t("common.all")}
@@ -136,7 +166,7 @@ const DropdownPicker: React.FC<Props> = ({
             <CheckboxWithLabel
               key={value}
               label={label}
-              onChange={newChecked => handleChange(value, newChecked)}
+              onChange={(newChecked: boolean) => handleChange(value, newChecked)}
               isChecked={checked}
             />
           );
