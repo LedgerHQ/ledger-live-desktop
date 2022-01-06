@@ -2659,7 +2659,7 @@
       "counterValue": "Tercih edilen para birimi",
       "counterValueDesc": "Bakiye ve işlemlerinizin yanında gösterilecek para birimini seçin.",
       "region": "Bölge",
-      "regionDesc": "Ledger Live'ın saat dilimini ayarlamak için bölgenizi seçin.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Bölgesel piyasa göstergesi",
       "stockDesc": "Piyasalardaki artışları maviyle göstermek için Batı, kırmızıyla göstermek için Doğu'yu seçin.",
       "carouselVisibility": "Afiş görünürlüğü",
