@@ -12,7 +12,7 @@ import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
 
-const disableAnimation = process.env.SPECTRON_RUN;
+const disableAnimation = process.env.PLAYWRIGHT_RUN;
 
 type Props = {
   accountId: string,

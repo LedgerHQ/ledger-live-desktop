@@ -5,7 +5,6 @@ import SelectAccountAndCurrency from "./SelectAccountAndCurrency";
 import styled from "styled-components";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useSelector } from "react-redux";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { getCurrenciesWithStatus } from "@ledgerhq/live-common/lib/exchange/swap/logic";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -14,6 +13,7 @@ import CoinifyWidget from "../CoinifyWidget";
 import type { InstalledItem } from "@ledgerhq/live-common/lib/apps";
 import { useCoinifyCurrencies } from "~/renderer/screens/exchange/hooks";
 import { track } from "~/renderer/analytics/segment";
+import type { DProps } from "~/renderer/screens/exchange";
 
 const SellContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -23,8 +23,7 @@ const SellContainer: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+  ...DProps,
   installedApps: InstalledItem[],
 };
 

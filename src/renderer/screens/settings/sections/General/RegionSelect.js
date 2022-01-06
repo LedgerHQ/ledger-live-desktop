@@ -2,8 +2,10 @@
 
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegion } from "~/renderer/actions/settings";
-import { langAndRegionSelector } from "~/renderer/reducers/settings";
+import moment from "moment";
+import { upperFirst } from "lodash";
+import { setLocale, setRegion } from "~/renderer/actions/settings";
+import { localeSelector } from "~/renderer/reducers/settings";
 import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 import regionsByKey from "./regions.json";
@@ -11,23 +13,30 @@ import regionsByKey from "./regions.json";
 const regions = Object.keys(regionsByKey)
   .map(key => {
     const [language, region] = key.split("-");
-    return { value: key, language, region, label: regionsByKey[key] };
+    const locale = key;
+    const languageDisplayName = new window.Intl.DisplayNames([locale], { type: "language" }).of(
+      language,
+    );
+    const regionDisplayName = new window.Intl.DisplayNames([locale], { type: "region" }).of(region);
+    const label = `${upperFirst(regionDisplayName)} (${upperFirst(languageDisplayName)})`;
+    return { value: key, locale: key, language, region, label };
   })
   .sort((a, b) => a.label.localeCompare(b.label));
 
 const RegionSelect = () => {
   const dispatch = useDispatch();
-  const { language, region } = useSelector(langAndRegionSelector);
+  const locale = useSelector(localeSelector);
 
   const handleChangeRegion = useCallback(
-    ({ region }: { region: string }) => {
+    ({ locale, region }: { locale: string, region: string }) => {
+      moment.locale(locale);
       dispatch(setRegion(region));
+      dispatch(setLocale(locale));
     },
     [dispatch],
   );
 
-  const regionsFiltered = regions.filter(item => language === item.language);
-  const currentRegion = regionsFiltered.find(item => item.region === region) || regionsFiltered[0];
+  const currentRegion = regions.find(item => item.locale === locale) || regions[0];
 
   return (
     <>
@@ -38,7 +47,7 @@ const RegionSelect = () => {
         onChange={handleChangeRegion}
         renderSelected={item => item && item.name}
         value={currentRegion}
-        options={regionsFiltered}
+        options={regions}
       />
     </>
   );
