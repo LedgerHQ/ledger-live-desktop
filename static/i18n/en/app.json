@@ -34,8 +34,8 @@
       "liveApps": "Live Apps",
       "recentlyUsed": "Recently Used",
       "suggested": "Suggested",
-      "networkFilterLabel": "Network",
-      "noNetwork": "No network",
+      "networkFilterLabel": "Dapp network",
+      "noNetwork": "Other (Off chain apps)",
       "categoryFilterLabel": "Category",
       "category": {
         "buy": "Buy",
