@@ -22,6 +22,11 @@ export type Props = {
    * */
   label: string;
   /**
+   * Whether to display the label value between the label and the chevron.
+   * Defaults to false.
+   */
+  hideLabelValue?: boolean;
+  /**
    * Options to display as a list of checkboxes
    */
   options: Option[];
@@ -121,6 +126,7 @@ const CheckboxWithLabel = ({
 
 const DropdownPicker: React.FC<Props> = ({
   label,
+  hideLabelValue = false,
   options,
   onChange,
   showAll = false,
@@ -145,13 +151,14 @@ const DropdownPicker: React.FC<Props> = ({
   const Label = (
     <Flex flexDirection="row" alignItems="center" columnGap="4px" marginRight="-10px">
       <LabelText color={isLight ? "neutral.c80" : "neutral.c60"}>{label}</LabelText>
-      {optionsCheckedCount === options.length ? (
-        <LabelText color="neutral.c100">{t("common.all")}</LabelText>
-      ) : (
-        <CountPill>
-          <CountPillText>{optionsCheckedCount}</CountPillText>
-        </CountPill>
-      )}
+      {!hideLabelValue &&
+        (optionsCheckedCount === options.length ? (
+          <LabelText color="neutral.c100">{t("common.all")}</LabelText>
+        ) : (
+          <CountPill>
+            <CountPillText>{optionsCheckedCount}</CountPillText>
+          </CountPill>
+        ))}
     </Flex>
   );
 

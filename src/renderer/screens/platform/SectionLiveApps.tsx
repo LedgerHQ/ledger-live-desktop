@@ -40,7 +40,7 @@ const getInitialOptions = (options: Option[]): Option[] => {
   return [
     ...options.map(opt => ({
       ...opt,
-      checked: true,
+      checked: false,
     })),
   ];
 };
@@ -134,11 +134,11 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
         "label",
       ),
       networks: [
-        { value: "none", label: t("platform.catalog.noNetwork") },
         ...sortBy(
           networksIds.map(networkId => makeNetworkOption(t, networkId)),
           "label",
         ),
+        { value: "none", label: t("platform.catalog.noNetwork") },
       ],
     };
   }, [appsMetadata, t]);
@@ -146,8 +146,10 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   const [networksOptions, setNetworksOptions] = useState(getInitialOptions(networks));
   const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(supercategories));
 
-  const showResetCTA =
-    networksOptions.some(opt => !opt.checked) || categoriesOptions.some(opt => !opt.checked);
+  const noNetworkSelected = networksOptions.every(opt => !opt.checked);
+  const noCategorySelected = categoriesOptions.every(opt => !opt.checked);
+
+  const showResetCTA = !(noNetworkSelected && noCategorySelected);
 
   const handleClickReset = useCallback(() => {
     setNetworksOptions(getInitialOptions(networks));
@@ -164,11 +166,13 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
       )}
       <DropdownPicker
         options={networksOptions}
+        hideLabelValue={noNetworkSelected}
         onChange={setNetworksOptions}
         label={t("platform.catalog.networkFilterLabel")}
       />
       <DropdownPicker
         options={categoriesOptions}
+        hideLabelValue={noCategorySelected}
         onChange={setCategoriesOptions}
         label={t("platform.catalog.categoryFilterLabel")}
       />
@@ -183,13 +187,22 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
       if (!appMetadata) return true;
       const networks = getAppMetadataNetworks(appMetadata);
       const supercategory = getAppMetadataSuperCategory(appMetadata);
+      const hasNoNetwork = networks.length === 0;
       const networksCondition =
-        networks.some(n => enabledNetworks.includes(n)) ||
-        (networks.length === 0 && enabledNetworks.includes("none"));
-      const categoriesCondition = enabledCategories.includes(supercategory);
+        noNetworkSelected ||
+        (!hasNoNetwork && enabledNetworks.every(n => networks.includes(n))) ||
+        (hasNoNetwork && enabledNetworks.includes("none"));
+      const categoriesCondition = noCategorySelected || enabledCategories.includes(supercategory);
       return networksCondition && categoriesCondition;
     });
-  }, [appsMetadataMappedById, enabledNetworks, enabledCategories, manifests]);
+  }, [
+    appsMetadataMappedById,
+    enabledNetworks,
+    enabledCategories,
+    noNetworkSelected,
+    noCategorySelected,
+    manifests,
+  ]);
 
   const content = useMemo(
     () =>
