@@ -15,6 +15,10 @@ const firebaseCredentials = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
+const firebaseDefaultConfig = {
+  feature_receive: true,
+};
+
 export const FirebaseRemoteConfigProvider = ({ children }) => {
   const [config, setConfig] = useState(null);
 
@@ -23,6 +27,7 @@ export const FirebaseRemoteConfigProvider = ({ children }) => {
 
     const fetchConfig = async () => {
       const remoteConfig = getRemoteConfig();
+      remoteConfig.defaultConfig = firebaseDefaultConfig;
       await fetchAndActivate(remoteConfig);
       setConfig(remoteConfig);
     };

@@ -26,7 +26,6 @@ import Button from "~/renderer/components//Button";
 import Plus from "~/renderer/icons/Plus";
 import Text from "./Text";
 import { openModal } from "../actions/modals";
-import FeatureFlag from "../components/FeatureFlag";
 
 const mapStateToProps = createStructuredSelector({
   accounts: shallowAccountsSelector,
@@ -296,34 +295,25 @@ export const RawSelectAccount = ({
 
   const structuredResults = manualFilter();
   return (
-    <FeatureFlag
-      feature="receive"
-      fallback={
-        <Text ff="Inter|SemiBold" color="palette.primary.main" fontSize={3}>
-          This feature is disabled
-        </Text>
+    <Select
+      {...props}
+      value={selectedOption}
+      options={structuredResults}
+      getOptionValue={getOptionValue}
+      renderValue={renderValue || defaultRenderValue}
+      renderOption={renderOption || defaultRenderOption}
+      onInputChange={v => setSearchInputValue(v)}
+      inputValue={searchInputValue}
+      filterOption={false}
+      isOptionDisabled={option => !option.matched}
+      placeholder={placeholder || t("common.selectAccount")}
+      noOptionsMessage={({ inputValue }) =>
+        t("common.selectAccountNoOption", { accountName: inputValue })
       }
-    >
-      <Select
-        {...props}
-        value={selectedOption}
-        options={structuredResults}
-        getOptionValue={getOptionValue}
-        renderValue={renderValue || defaultRenderValue}
-        renderOption={renderOption || defaultRenderOption}
-        onInputChange={v => setSearchInputValue(v)}
-        inputValue={searchInputValue}
-        filterOption={false}
-        isOptionDisabled={option => !option.matched}
-        placeholder={placeholder || t("common.selectAccount")}
-        noOptionsMessage={({ inputValue }) =>
-          t("common.selectAccountNoOption", { accountName: inputValue })
-        }
-        onChange={onChangeCallback}
-        extraRenderers={extraRenderers}
-        disabledTooltipText={disabledTooltipText}
-      />
-    </FeatureFlag>
+      onChange={onChangeCallback}
+      extraRenderers={extraRenderers}
+      disabledTooltipText={disabledTooltipText}
+    />
   );
 };
 

@@ -19,6 +19,8 @@ import StepAccount, { StepAccountFooter } from "./steps/StepAccount";
 import StepConnectDevice, { StepConnectDeviceFooter } from "./steps/StepConnectDevice";
 import StepWarning, { StepWarningFooter } from "./steps/StepWarning";
 import StepReceiveFunds from "./steps/StepReceiveFunds";
+import FeatureToggle from "../../components/FeatureToggle";
+import Text from "../../components/Text";
 
 export type StepId = "warning" | "account" | "device" | "receive";
 
@@ -210,10 +212,19 @@ const Body = ({
   };
 
   return (
-    <Stepper {...stepperProps}>
-      <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalReceive" />
-    </Stepper>
+    <FeatureToggle
+      feature="feature_receive"
+      fallback={
+        <Text ff="Inter|SemiBold" color="palette.primary.main" fontSize={3}>
+          This feature is disabled
+        </Text>
+      }
+    >
+      <Stepper {...stepperProps}>
+        <SyncSkipUnderPriority priority={100} />
+        <Track onUnmount event="CloseModalReceive" />
+      </Stepper>
+    </FeatureToggle>
   );
 };
 
