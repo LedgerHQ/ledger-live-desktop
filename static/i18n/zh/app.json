@@ -2659,7 +2659,7 @@
       "counterValue": "首选币种",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
-      "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "区域性市场指标",
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
