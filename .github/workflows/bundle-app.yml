@@ -37,7 +37,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install dependencies
-        run: pnpm install --frozen-lockfile --unsafe-perm
+        run: pnpm install --frozen-lockfile --unsafe-perm --node-linker=hoisted --package-import-method=copy
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -120,7 +120,7 @@ jobs:
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
       - name: install dependencies
-        run: pnpm install --frozen-lockfile --unsafe-perm
+        run: pnpm install --frozen-lockfile --unsafe-perm --node-linker=hoisted --package-import-method=copy
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -174,7 +174,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: install dependencies
-        run: pnpm install --frozen-lockfile --unsafe-perm
+        run: pnpm install --frozen-lockfile --unsafe-perm --node-linker=hoisted --package-import-method=copy
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:

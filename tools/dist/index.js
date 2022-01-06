@@ -51,7 +51,13 @@ const setupTasks = args => [
   {
     title: "Installing packages",
     task: async () => {
-      await exec("pnpm", ["i", "--frozen-lockfile", "--unsafe-perm"]);
+      await exec("pnpm", [
+        "i",
+        "--frozen-lockfile",
+        "--unsafe-perm",
+        "--package-import-method=copy",
+        "--node-linker=hoisted",
+      ]);
     },
   },
 ];
