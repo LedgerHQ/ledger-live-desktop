@@ -20,6 +20,7 @@ import SectionSuggested from "./SectionSuggested";
 import SectionRecentlyUsed from "./SectionRecentlyUsed";
 import SectionLiveApps from "./SectionLiveApps";
 import { setPlatformAppLastOpened } from "~/renderer/actions/settings";
+import SectionSuggestedApps from "./SectionSuggestedApps";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
@@ -92,11 +93,11 @@ const PlatformCatalog = () => {
     <Container>
       <TrackPage category="Platform" name="Catalog" />
       <Title>{t("platform.catalog.title")}</Title>
-      {/* <SectionPromotedApps
+      <SectionSuggestedApps
         manifests={filteredManifests}
         catalogMetadata={catalogMetadata}
         handleClick={handleClick}
-      /> */}
+      />
       <SectionRecentlyUsed manifests={filteredManifests} handleClick={handleClick} />
       <SectionLiveApps
         manifests={filteredManifests}
