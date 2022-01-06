@@ -2659,7 +2659,7 @@
       "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
-      "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
