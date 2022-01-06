@@ -2659,7 +2659,7 @@
       "counterValue": "선호 통화",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
       "region": "지역",
-      "regionDesc": "지역을 선택하여 Ledger Live의시간대를 설정하세요.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "지역 마켓 지표",
       "stockDesc": "서부를 선택하면 파란색, 동부를 선택하면 빨간색으로 시장 증가율이 표시됩니다.",
       "carouselVisibility": "슬라이드 활성화",
