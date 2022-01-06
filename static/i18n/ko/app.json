@@ -719,13 +719,20 @@
     "reset": "플로우 리셋",
     "verifyAddress": "장치에 표시된 주소와 정확히 일치하는지 확인하세요",
     "buy": {
-      "header": "{{provider}}로 암호화폐 구매",
-      "title": "<0>{{provider}}</0>로 암호화폐 구매",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "구매",
-      "selectCrypto": "암호화폐 선택",
-      "selectAccount": "계정 선택",
-      "continue": "계속",
-      "addAccount": "계정 추가"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "{{provider}}(으)로 암호화폐 판매",
@@ -734,11 +741,6 @@
       "selectCrypto": "암호화폐 선택",
       "selectAccount": "계정 선택",
       "continue": "계속"
-    },
-    "history": {
-      "tab": "내역",
-      "exporting": "내보내기 중...",
-      "exportOperations": "거래 내보내기"
     }
   },
   "lend": {
