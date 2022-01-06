@@ -2659,7 +2659,7 @@
       "counterValue": "Preferred currency",
       "counterValueDesc": "Válaszd ki az egyenleged, és a műveleteid mellett megjelenő valutát.",
       "region": "Régió",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Regionális piaci mutató",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
