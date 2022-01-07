@@ -10,7 +10,7 @@ const rebuildDeps = async (folder, file) => {
   await execa("pnpm", ["run", "install-deps"], {
     // env: { DEBUG: "electron-builder" },
   }).stdout.pipe(process.stdout);
-  const checksum = await hasha.fromFile("yarn.lock", { algorithm: "md5" });
+  const checksum = await hasha.fromFile("pnpm-lock.yaml", { algorithm: "md5" });
   console.log(chalk.blue("creating a new file with checksum"));
   if (fs.existsSync(folder)) {
     await fs.promises.writeFile(`${folder}${file}`, checksum);
@@ -23,12 +23,12 @@ const rebuildDeps = async (folder, file) => {
 
 async function main() {
   const folder = "node_modules/.cache/";
-  const file = "LEDGER_HASH_yarn.lock.hash";
+  const file = "LEDGER_HASH_pnpm-lock.yaml.hash";
   const fullPath = `${folder}${file}`;
 
   try {
     const oldChecksum = await fs.promises.readFile(fullPath, { encoding: "utf8" });
-    const currentChecksum = await hasha.fromFile("yarn.lock", { algorithm: "md5" });
+    const currentChecksum = await hasha.fromFile("pnpm-lock.yaml", { algorithm: "md5" });
     if (oldChecksum !== currentChecksum) {
       rebuildDeps(folder, file);
     } else {
