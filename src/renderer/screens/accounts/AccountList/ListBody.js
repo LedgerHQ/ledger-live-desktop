@@ -26,7 +26,7 @@ const ListBody = ({
   lookupParentAccount,
   search,
 }: Props) => (
-  <Box id="accounts-list">
+  <Box data-test-id="accounts-list">
     {[...visibleAccounts, ...(showNewAccount ? [null] : []), ...hiddenAccounts].map((account, i) =>
       !account ? (
         <AccountItemPlaceholder key="placeholder" />

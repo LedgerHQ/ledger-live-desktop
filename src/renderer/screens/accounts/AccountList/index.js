@@ -63,7 +63,7 @@ export default function AccountList({ accounts, range, onAccountClick, mode }: P
     <div style={{ paddingBottom: 70 }}>
       <GenericBox horizontal p={0} alignItems="center">
         <SearchBox
-          id={"accounts-search-input"}
+          data-test-id="accounts-search-input"
           autoFocus
           onTextChange={onTextChange}
           search={search}
