@@ -49,7 +49,7 @@ const SectionSuggestedApps = ({ manifests, catalogMetadata, handleClick }: Secti
     rightButtonEnabled && setPageIndex(pageIndex + 1);
   }, [rightButtonEnabled, setPageIndex, pageIndex]);
 
-  if (!promotedApps) return null;
+  if (apps.length === 0) return null;
   const arrowButtons = showArrows && (
     <Flex flexDirection="row" columnGap="4px">
       <Button enabled={leftButtonEnabled} onClick={handleClickLeft}>
