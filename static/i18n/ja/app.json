@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Bitcoinや全てのBitcoinフォーク、Tezosの試験的JS実装を利用する。"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",

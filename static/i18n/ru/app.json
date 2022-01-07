@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Использовать экспериментальные JS-реализации для Биткойна, всех фортов Биткойна и Tezos"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",

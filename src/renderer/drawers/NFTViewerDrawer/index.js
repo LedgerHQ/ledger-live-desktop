@@ -17,7 +17,6 @@ import { CopiableField } from "./CopiableField";
 import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
-import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
@@ -142,7 +141,7 @@ export function NFTViewerDrawer({
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status === "loading", [status]);
-  const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
+  const name = metadata?.nftName || nft.tokenId;
 
   const onNFTSend = useCallback(() => {
     setDrawer();
@@ -170,8 +169,13 @@ export function NFTViewerDrawer({
               fontSize={7}
               lineHeight="29px"
               color="palette.text.shade100"
+              style={{
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                display: "-webkit-box",
+              }}
               uppercase
-              pb={5}
             >
               {name}
             </Text>

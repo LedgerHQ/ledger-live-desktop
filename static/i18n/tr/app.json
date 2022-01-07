@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Bitcoin, tüm Bitcoin fork'ları ve Tezos için deneysel JS uygulamalarını kullanın."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
