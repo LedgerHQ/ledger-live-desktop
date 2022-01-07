@@ -6,10 +6,8 @@ import { keyBy, sortBy } from "lodash";
 import SectionHeader from "~/renderer/components/Platform/SectionHeader";
 import AppRow from "~/renderer/components/Platform/AppRow";
 import { SectionBaseProps } from "./types";
-import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-import DropdownPicker, { CheckboxText, Option } from "~/renderer/components/DropdownPicker";
+import DropdownPicker, { Option } from "~/renderer/components/DropdownPicker";
 import styled from "styled-components";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 
 const VerticalSeparator = styled(Flex).attrs({
   width: "0",
@@ -111,10 +109,12 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
       appMetadata: AppMetadata,
     ): { supercategories: string[] } => {
       const supercategory = getAppMetadataSuperCategory(appMetadata);
+      const isAppInManifest = manifests.find(app => app.id === appMetadata.id);
       return {
-        supercategories: accSupercategories.includes(supercategory)
-          ? accSupercategories
-          : [...accSupercategories, supercategory],
+        supercategories:
+          !isAppInManifest || accSupercategories.includes(supercategory)
+            ? accSupercategories
+            : [...accSupercategories, supercategory],
       };
     };
     const { supercategories }: AppsMetadataReducerAccumulator = appsMetadata.reduce(reducer, {
@@ -126,7 +126,7 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
         "label",
       ),
     };
-  }, [appsMetadata, t]);
+  }, [manifests, appsMetadata, t]);
 
   /**
    * For now this feature (displaying filtering by network) is put on hold but I will
