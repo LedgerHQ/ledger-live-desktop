@@ -30,6 +30,32 @@
         "experimental": "experimental",
         "debug": "debug"
       },
+      "resetFilters": "Reset filters",
+      "liveApps": "Live Apps",
+      "recentlyUsed": "Recently Used",
+      "suggested": "Suggested",
+      "networkFilterLabel": "Dapp network",
+      "noNetwork": "Other (Off chain apps)",
+      "categoryFilterLabel": "Category",
+      "category": {
+        "buy": "Buy",
+        "card": "Card",
+        "compound": "Compound",
+        "defi": "Defi",
+        "dex": "Decentralized Exchange",
+        "earn": "Earn",
+        "exchange": "Exchange",
+        "gift cards": "Gift Cards",
+        "lend": "Lend",
+        "nft": "NFT",
+        "portfolio": "Portfolio",
+        "services": "Services",
+        "spend": "Spend",
+        "staking": "Staking",
+        "swap": "Swap",
+        "tools": "Tools",
+        "trade": "Trade"
+      },
       "banner": {
         "title": "Discover our Live Apps Catalog",
         "description": "We're working hard to bring you access to the world of DeFi, NFTs and more, securely, right inside Ledger Live!"
@@ -58,6 +84,8 @@
     }
   },
   "common": {
+    "all": "All",
+    "none": "None",
     "never": "Never",
     "apply": "Apply",
     "done": "Done",

@@ -201,3 +201,11 @@ export const toggleStarredMarketCoins = (payload: string) => ({
   type: "TOGGLE_STARRED_MARKET_COINS",
   payload,
 });
+
+export const setPlatformAppLastOpened = (platformAppName: string, timestamp: number) => ({
+  type: "SET_PLATFORM_APP_LAST_OPENED",
+  payload: {
+    platformAppName,
+    timestamp,
+  },
+});

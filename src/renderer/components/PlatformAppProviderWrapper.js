@@ -17,7 +17,10 @@ export function PlatformAppProviderWrapper({ children }: Props) {
   }, [provider]);
 
   return (
-    <PlatformAppProvider platformAppsServerURL={platformAppsServer.url}>
+    <PlatformAppProvider
+      platformAppsServerURL={platformAppsServer.url}
+      platformCatalogServerURL={platformAppsServer.catalogUrl}
+    >
       {children}
     </PlatformAppProvider>
   );
