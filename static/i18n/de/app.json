@@ -1154,7 +1154,8 @@
     "for": "Adresse für <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Überprüfen Sie, ob die freigegebene Adresse genau mit der auf Ihrem Gerät übereinstimmt",
     "messageIfSkipped": "Ihre {{name}} Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie diese zur Sicherheit.",
-    "showQrCode": "QR-Code anzeigen"
+    "showQrCode": "QR-Code anzeigen",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
