@@ -65,11 +65,11 @@ const SectionSuggestedApps = ({ manifests, catalogMetadata, handleClick }: Secti
     <Flex flexDirection="column">
       <SectionHeader title={t("platform.catalog.suggested")} right={arrowButtons} />
       <AppsContainer>
-        {visibleApps.map((promotedApp: PromotedApp, index: number) => {
+        {visibleApps.map((promotedApp: PromotedApp) => {
           const manifest = manifestsById[promotedApp.id];
           return (
             <AppThumbnailBig
-              key={`thumbnail_${promotedApp.id}_${index}`}
+              key={`thumbnail_${promotedApp.id}`}
               manifest={manifest}
               thumbnailUrl={promotedApp.thumbnailUrl}
               onClick={handleClick}
