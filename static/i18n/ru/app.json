@@ -1154,7 +1154,8 @@
     "for": "Адрес <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
     "messageIfSkipped": "Адрес {{name}} не подверждён на устройстве Ledger. В целях безопасности вам нужно подвердить его.",
-    "showQrCode": "Показать QR-код"
+    "showQrCode": "Показать QR-код",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
