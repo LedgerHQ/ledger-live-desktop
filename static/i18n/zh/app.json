@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "对比特币、所有比特币分叉和 Tezos 使用实验性的 JS 实现。"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "翻译测试",
