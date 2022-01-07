@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
     "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
     "showQrCode": "Afficher le code QR",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "Vérifiez que l'émetteur prend en charge Taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -3929,7 +3929,7 @@
       "title": "Adresse {{currencyName}} invalide"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Votre compte est déjà délégué à ce validateur"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "L'adresse du bénéficiaire est identique à l'adresse du donneur d'ordre."
