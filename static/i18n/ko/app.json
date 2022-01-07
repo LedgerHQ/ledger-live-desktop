@@ -3928,6 +3928,9 @@
     "InvalidAddress": {
       "title": "유효한 {{currencyName}} 주소가 아닙니다"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "수신자의 주소가 발신자의 주소와 동일합니다"
     },
