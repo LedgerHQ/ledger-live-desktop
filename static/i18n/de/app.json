@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Verwenden Sie experimentelle JS-Implementierungen für Bitcoin, alle Bitcoin-Forks und Tezos."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
