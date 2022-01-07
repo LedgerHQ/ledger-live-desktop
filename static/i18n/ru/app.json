@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "Убедитесь, что предоставленный адрес в точности совпадает с адресом на экране устройства",
     "messageIfSkipped": "Адрес {{name}} не подверждён на устройстве Ledger. В целях безопасности вам нужно подвердить его.",
     "showQrCode": "Показать QR-код",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "Убедитесь, что у отправителя есть поддержка Taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -3928,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Некорректный адрес {{currencyName}}"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Адрес получателя совпадает с адресом отправителя"
     },
@@ -3940,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "Операция недоступна на этом устройстве",
+      "description": "Функция отправки NFT доступна только в Nano X. Пожалуйста, обратитесь в нашу Поддержку, чтобы узнать, как отправлять NFT с Nano S."
     },
     "CantScanQRCode": {
       "title": "Не удалось сканировать этот QR-код: этот адрес не поддерживает автопроверку."
