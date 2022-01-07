@@ -1154,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1> için adres",
     "messageIfUnverified": "Lütfen paylaşılan adres ile cihazınızdaki adresin tam olarak eşleştiğini doğrulayın",
     "messageIfSkipped": "{{name}} adresiniz Ledger cihazınızda doğrulanmadı. Güvenlik için lütfen doğrulayın.",
-    "showQrCode": "QR Kodunu Göster"
+    "showQrCode": "QR Kodunu Göster",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
