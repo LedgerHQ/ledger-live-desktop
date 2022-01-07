@@ -18,6 +18,22 @@ const statusToDebug: UpdateStatus[] = [
   "error",
 ];
 
+const ExposeUpdaterWhenInMock = () => {
+  const context = useContext<MaybeUpdateContextType>(UpdaterContext);
+  const { setStatus, quitAndInstall } = context || {};
+
+  useEffect(() => {
+    if (getEnv("MOCK")) {
+      window.mock.updater = {
+        setStatus: setStatus,
+        quitAndInstall: quitAndInstall,
+      };
+    }
+  }, [setStatus]);
+
+  return <MockedGlobalStyle />; // Still do the styles thingie
+}
+
 const DebugUpdater = () => {
   const [expanded, setExpanded] = useState(true);
   const context = useContext<MaybeUpdateContextType>(UpdaterContext);
@@ -74,4 +90,4 @@ const DebugUpdater = () => {
   );
 };
 
-export default DebugUpdater;
+export default process.env.HIDE_DEBUG_MOCK ? ExposeUpdaterWhenInMock : DebugUpdater;

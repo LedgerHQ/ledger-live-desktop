@@ -8,8 +8,12 @@ export class AppUpdater {
   }
 
   async setStatus(s: string) {
-    await this.page.evaluate(() => {
-      (window as any).mock.updater.setStatus(s);
-    }, [s]);
+    await this.page.evaluate(
+      args => {
+        [s] = args;
+        (window as any).mock.updater.setStatus(s);
+      },
+      [s],
+    );
   }
 }

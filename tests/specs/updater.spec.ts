@@ -6,7 +6,7 @@ import { AppUpdater } from "../models/AppUpdater";
 
 test.use({
   userdata: "1AccountBTC1AccountETHwCarousel",
-  env: { DEBUG_UPDATE: true, HIDE_DEBUG_UPDATE: true },
+  env: { DEBUG_UPDATE: true },
 });
 
 test("Updater", async ({ page }) => {
@@ -20,7 +20,7 @@ test("Updater", async ({ page }) => {
   });
 
   await test.step("[checking] state should be visible", async () => {
-    await appUpdater.setStatus("idle");
+    await appUpdater.setStatus("checking");
     expect(await page.screenshot()).toMatchSnapshot("app-updater-layout.png");
     expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-checking.png");
   });
