@@ -1,5 +1,8 @@
 lockfileVersion: 5.3
 
+overrides:
+  stellar-base>sodium-native: ^3.2.1
+
 specifiers:
   '@actions/core': ^1.6.0
   '@actions/github': ^5.0.0
