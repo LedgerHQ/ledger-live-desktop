@@ -3928,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Bu geçerli bir {{currencyName}} adresi değil"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Alıcı adresi, gönderen adresiyle aynı"
     },
