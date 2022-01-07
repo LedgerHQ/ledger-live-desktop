@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "비트코인, 모든 비트코인 포크 및 태조스에 실험적인 JS 구현을 사용하세요."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
