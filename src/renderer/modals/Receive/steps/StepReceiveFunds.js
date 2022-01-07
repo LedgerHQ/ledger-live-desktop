@@ -47,7 +47,7 @@ const QRCodeWrapper = styled.div`
   background: white;
 `;
 
-const AlertBoxContainer: ThemedComponent<*> = styled.div`
+const AlertBoxContainer = styled.div`
   margin-top: 20px;
 `;
 
