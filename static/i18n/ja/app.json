@@ -1154,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1>アドレス",
     "messageIfUnverified": "共有アドレスが、お使いのデバイスのアドレスと完全に一致していることを確認してください。",
     "messageIfSkipped": "{{name}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。",
-    "showQrCode": "QRコードを表示"
+    "showQrCode": "QRコードを表示",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
