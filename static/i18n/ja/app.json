@@ -3928,6 +3928,9 @@
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "送付先アドレスが送付元アドレスと同じです。"
     },
