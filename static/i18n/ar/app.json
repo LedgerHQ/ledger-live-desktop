@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدم تشغيل جافا سكريبت\n التجريبي لبيتكوين، جميع إنقسامات بيتكوين، و Tezos."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
