@@ -719,13 +719,20 @@
     "reset": "重置流程",
     "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
-      "header": "使用 {{provider}} 买入加密",
-      "title": "通过 <0>{{provider}}</0> 买入加密",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "买入",
-      "selectCrypto": "选择加密资产",
-      "selectAccount": "选择帐户",
-      "continue": "继续",
-      "addAccount": "添加账户"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "使用 {{provider}} 卖出加密",
@@ -734,11 +741,6 @@
       "selectCrypto": "选择加密资产",
       "selectAccount": "选择帐户",
       "continue": "继续"
-    },
-    "history": {
-      "tab": "历史记录",
-      "exporting": "正在导出...",
-      "exportOperations": "导出操作"
     }
   },
   "lend": {
@@ -1152,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
     "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。",
-    "showQrCode": "显示二维码"
+    "showQrCode": "显示二维码",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -2657,7 +2660,7 @@
       "counterValue": "首选币种",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
-      "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "区域性市场指标",
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
@@ -3925,6 +3928,9 @@
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "接收地址与发送地址相同"
     },
@@ -3935,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "无法自动验证：请仔细核对该地址。",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "无法扫描此二维码：此地址不支持自动验证"

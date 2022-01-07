@@ -719,13 +719,20 @@
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "شراء العملات المشفرة باستخدام {{provider}}",
-      "title": "شراء العملات المشفرة من خلال <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "شراء",
-      "selectCrypto": "اختار أصل مشفّر",
-      "selectAccount": "اختار حسابًا",
-      "continue": "متابعة",
-      "addAccount": "إضافة حساب"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "بيع العملات المشفرة باستخدام {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
-    },
-    "history": {
-      "tab": "السجل",
-      "exporting": "جاري التصدير...",
-      "exportOperations": "تصدير العمليات"
     }
   },
   "lend": {
@@ -1152,7 +1154,8 @@
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
-    "showQrCode": "إظهار رمز QR"
+    "showQrCode": "إظهار رمز QR",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -2657,7 +2660,7 @@
       "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
-      "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
@@ -3925,6 +3928,9 @@
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "عنوان المستلم هو نفسه عنوان المرسل"
     },
@@ -3935,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "التحقق التلقائي غير متاح: تحقق بعناية من العنوان",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "تعذر فحص رمز الاستجابة السريعة (QR) هذا: التحقق التلقائي غير مدعوم من قبل هذا العنوان"
