@@ -91,7 +91,8 @@ const buildTasks = args => [
         commands.push("electron-builder-ci.yml");
       }
 
-      await exec("pnpm", ["run", ...commands], {
+      // Using npm here because pnpm will refuse to rebuild cached modules.
+      await exec("npm", ["run", ...commands], {
         env: args.publish
           ? {
               SENTRY_URL:
