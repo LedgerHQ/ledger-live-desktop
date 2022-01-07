@@ -1154,7 +1154,8 @@
     "for": "Dirección para <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Comprueba que la dirección compartida coincida exactamente con la de tu dispositivo",
     "messageIfSkipped": "Tu dirección {{name}} no ha sido confirmada en tu dispositivo Ledger. Verifícala para mayor seguridad.",
-    "showQrCode": "Mostrar código QR"
+    "showQrCode": "Mostrar código QR",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
