@@ -49,8 +49,7 @@ export const experimentalFeatures: Feature[] = [
     description: (
       <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
     ),
-    valueOn:
-      "bitcoin,bitcoin_testnet,tezos,bitcoin_cash,litecoin,dash,qtum,zcash,bitcoin_gold,stratis,dogecoin,digibyte,komodo,pivx,zencash,vertcoin,peercoin,viacoin,stakenet,stealthcoin,decred",
+    valueOn: "tezos,algorand",
     valueOff: "",
   },
   ...(deltaExperimentalExplorers.length
