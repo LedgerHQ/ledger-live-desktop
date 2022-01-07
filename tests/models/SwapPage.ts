@@ -8,6 +8,7 @@ export class SwapPage {
   readonly swapId: Locator;
   readonly seeDetailsButton: Locator;
   readonly detailsSwapId: Locator;
+  readonly historyRow: Locator;
   readonly sideDrawerCloseButton: Locator;
 
   constructor(page: Page) {
@@ -18,6 +19,7 @@ export class SwapPage {
     this.swapId = page.locator('data-test-id=swap-id');
     this.seeDetailsButton = page.locator('button:has-text("See details")');
     this.detailsSwapId = page.locator('data-test-id=details-swap-id').first();
+    this.historyRow = page.locator('.swap-history-row').first();
     this.sideDrawerCloseButton = page.locator('.sidedrawer-close');
   }
 
