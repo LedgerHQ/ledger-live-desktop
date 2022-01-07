@@ -1154,7 +1154,8 @@
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Show QR Code",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -3927,6 +3928,9 @@
     "InvalidAddress": {
       "title": "This is not a valid {{currencyName}} address"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Recipient address is the same as the sender address"
     },
@@ -3937,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "Auto-verification not available: carefully verify the address",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "Couldn't scan this QR code: auto-verification not supported by this address"
