@@ -2660,7 +2660,7 @@
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Région",
-      "regionDesc": "Choisissez votre région pour personnaliser les formats de date, heure et monnaies.",
+      "regionDesc": "Choisissez votre région pour personnaliser les formats de date, d'heure et de nombre.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
@@ -3927,6 +3927,9 @@
     },
     "InvalidAddress": {
       "title": "Adresse {{currencyName}} invalide"
+    },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "L'adresse du bénéficiaire est identique à l'adresse du donneur d'ordre."
