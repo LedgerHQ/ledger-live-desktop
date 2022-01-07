@@ -1154,7 +1154,8 @@
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
-    "showQrCode": "إظهار رمز QR"
+    "showQrCode": "إظهار رمز QR",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
