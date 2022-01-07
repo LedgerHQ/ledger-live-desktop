@@ -30,24 +30,24 @@ const ArrowRight = styled(Arrow)``.withComponent(Icons.ArrowRightMedium);
 
 const SectionSuggestedApps = ({ manifests, catalogMetadata, handleClick }: SectionBaseProps) => {
   const { t } = useTranslation();
-  const [pageIndex, setPageIndex] = useState(0);
+  const [firstVisibleIndex, setFirstVisibleIndex] = useState(0);
   const manifestsById = useMemo(() => keyBy(manifests, "id"), [manifests]);
   const { promotedApps = [] } = catalogMetadata || {};
   const apps = promotedApps.filter(p => !!manifestsById[p.id]);
-  const visibleApps = apps.slice(pageIndex * NB_PER_PAGE, (pageIndex + 1) * NB_PER_PAGE);
+  const visibleApps = apps.slice(firstVisibleIndex, firstVisibleIndex + NB_PER_PAGE);
   const totalAppsLength = apps.length;
   const visibleAppsLength = visibleApps.length;
 
   const showArrows = visibleAppsLength < totalAppsLength;
-  const leftButtonEnabled = pageIndex > 0;
-  const rightButtonEnabled = totalAppsLength >= (pageIndex + 1) * NB_PER_PAGE;
+  const leftButtonEnabled = firstVisibleIndex > 0;
+  const rightButtonEnabled = totalAppsLength > firstVisibleIndex + NB_PER_PAGE;
 
   const handleClickLeft = useCallback(() => {
-    leftButtonEnabled && setPageIndex(pageIndex - 1);
-  }, [leftButtonEnabled, setPageIndex, pageIndex]);
+    leftButtonEnabled && setFirstVisibleIndex(firstVisibleIndex - 1);
+  }, [leftButtonEnabled, setFirstVisibleIndex, firstVisibleIndex]);
   const handleClickRight = useCallback(() => {
-    rightButtonEnabled && setPageIndex(pageIndex + 1);
-  }, [rightButtonEnabled, setPageIndex, pageIndex]);
+    rightButtonEnabled && setFirstVisibleIndex(firstVisibleIndex + 1);
+  }, [rightButtonEnabled, setFirstVisibleIndex, firstVisibleIndex]);
 
   if (apps.length === 0) return null;
   const arrowButtons = showArrows && (
