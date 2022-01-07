@@ -1154,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1> 주소",
     "messageIfUnverified": "공유된 주소가 장치의 주소와 정확히 일치하는지 확인하세요.",
     "messageIfSkipped": "귀하의 {{name}} 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요.",
-    "showQrCode": "QR 코드 보기"
+    "showQrCode": "QR 코드 보기",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
