@@ -21,6 +21,7 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
@@ -144,6 +145,7 @@ export function NFTViewerDrawer({
   const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
 
   const onNFTSend = useCallback(() => {
+    setDrawer();
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
   }, [dispatch, nftId, account]);
 
@@ -160,7 +162,7 @@ export function NFTViewerDrawer({
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
-                {metadata?.tokenName || nft?.collection?.contract}
+                {metadata?.tokenName || "-"}
               </Skeleton>
             </Text>
             <Text

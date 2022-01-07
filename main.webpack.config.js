@@ -19,6 +19,32 @@ const babelConfig = {
   plugins: babelPlugins,
 };
 
+const babelTsConfig = {
+  presets: [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          electron: "7.1.9",
+        },
+      },
+    ],
+    "@babel/preset-react",
+    "@babel/preset-flow",
+  ],
+  plugins: [
+    ...babelPlugins,
+    "react-hot-loader/babel",
+    [
+      "babel-plugin-styled-components",
+      {
+        ssr: false,
+      },
+    ],
+  ],
+};
+
 module.exports = {
   target: "electron-main",
   optimization: {
