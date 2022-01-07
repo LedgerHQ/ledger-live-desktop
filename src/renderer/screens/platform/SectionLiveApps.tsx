@@ -96,37 +96,20 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   handleClick,
 }: Props) => {
   const { t } = useTranslation();
-  const { appsMetadata = [] } = catalogMetadata || {};
+  const { appsMetadata = [], supercategories: allSupercategories = [] } = catalogMetadata || {};
 
   const appsMetadataMappedById: Record<string, AppMetadata> = useMemo(
     () => keyBy(appsMetadata, "id"),
     [appsMetadata],
   );
 
-  const { supercategories } = useMemo(() => {
-    const reducer = (
-      { supercategories: accSupercategories = [] }: AppsMetadataReducerAccumulator,
-      appMetadata: AppMetadata,
-    ): { supercategories: string[] } => {
-      const supercategory = getAppMetadataSuperCategory(appMetadata);
-      const isAppInManifest = manifests.find(app => app.id === appMetadata.id);
-      return {
-        supercategories:
-          !isAppInManifest || accSupercategories.includes(supercategory)
-            ? accSupercategories
-            : [...accSupercategories, supercategory],
-      };
-    };
-    const { supercategories }: AppsMetadataReducerAccumulator = appsMetadata.reduce(reducer, {
-      supercategories: [],
-    });
-    return {
-      supercategories: sortBy(
-        supercategories.map(supercategory => makeCategoryOption(t, supercategory)),
-        "label",
-      ),
-    };
-  }, [manifests, appsMetadata, t]);
+  const supercategories = useMemo(
+    () =>
+      allSupercategories
+        ?.filter(supercategory => !!appsMetadata.find(app => app.supercategory === supercategory))
+        .map(supercategory => makeCategoryOption(t, supercategory)),
+    [allSupercategories, appsMetadata, t],
+  );
 
   /**
    * For now this feature (displaying filtering by network) is put on hold but I will
