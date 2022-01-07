@@ -1,14 +1,11 @@
+import React, { memo, useCallback } from "react";
 import { AppManifest, AppMetadata } from "@ledgerhq/live-common/lib/platform/types";
-import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Box, Flex, Text } from "@ledgerhq/react-ui";
 import LiveAppIcon from "../WebPlatformPlayer/LiveAppIcon";
 import CryptoCurrencyIcon from "../CryptoCurrencyIcon";
-import {
-  getCryptoCurrencyById,
-  listSupportedCurrencies,
-} from "@ledgerhq/live-common/lib/currencies";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 import { CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import AppName from "./AppName";
 import { containerButtonCSS, getBackgroundColor } from "./styles";
@@ -102,7 +99,18 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
     },
   } = manifest;
 
-  const { networks = [], category } = appMetadata || {};
+  const { category } = appMetadata || {};
+
+  /**
+   * For now this feature (displaying networks icons) is put on hold but I will
+   * leave this here so it can be reimplemented easily when the spec gets clarified.
+   * Otherwise, networks is an array of string identifying cryptocurrencies.
+   * It should come either from appMetadata.networks or from manifest.currencies
+   */
+  const networks: string[] = [];
+  const networksCurrencies: CryptoCurrency[] = networks
+    ? networks.map(network => getCryptoCurrencyById(network))
+    : [];
 
   const isDisabled = branch === "soon";
   const showBranchTag = branch !== "stable";
@@ -112,10 +120,6 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
   const handleClick = useCallback(() => {
     if (!isDisabled) onClick(manifest);
   }, [manifest, onClick, isDisabled]);
-
-  const networksCurrencies: CryptoCurrency[] = useMemo(() => {
-    return networks ? networks.map(network => getCryptoCurrencyById(network)) : [];
-  }, [networks]);
 
   const tagContent = showBranchTag ? t(`platform.catalog.branch.${manifest.branch}`) : category;
   const tagProps = {
@@ -129,23 +133,25 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
       <LeftContainer>
         <TitleContainer>
           <AppName>{name}</AppName>
-          <CurrencyIconsContainer>
-            {networksCurrencies.map((currency: CryptoCurrency) => {
-              return (
-                currency && (
-                  <CurrencyIconContainer>
-                    <CryptoCurrencyIcon
-                      key={currency.id}
-                      circle
-                      currency={currency}
-                      size={18}
-                      circleOverrideIconColor="white"
-                    />
-                  </CurrencyIconContainer>
-                )
-              );
-            })}
-          </CurrencyIconsContainer>
+          {networksCurrencies.length > 0 && (
+            <CurrencyIconsContainer>
+              {networksCurrencies.map((currency: CryptoCurrency) => {
+                return (
+                  currency && (
+                    <CurrencyIconContainer>
+                      <CryptoCurrencyIcon
+                        key={currency.id}
+                        circle
+                        currency={currency}
+                        size={18}
+                        circleOverrideIconColor="white"
+                      />
+                    </CurrencyIconContainer>
+                  )
+                );
+              })}
+            </CurrencyIconsContainer>
+          )}
         </TitleContainer>
         <Description>{description}</Description>
       </LeftContainer>
@@ -158,4 +164,4 @@ const AppRow: React.FC<Props> = ({ manifest, appMetadata, onClick }: Props) => {
   );
 };
 
-export default AppRow;
+export default memo(AppRow);

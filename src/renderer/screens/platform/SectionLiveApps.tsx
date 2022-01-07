@@ -33,7 +33,7 @@ const ResetCTA = styled(Text).attrs({
 
 type Props = SectionBaseProps;
 
-type CategoriesIdsAndNetworksIds = { supercategories: string[]; networksIds: string[] };
+type AppsMetadataReducerAccumulator = { supercategories: string[] };
 
 const getInitialOptions = (options: Option[]): Option[] => {
   return [
@@ -44,23 +44,11 @@ const getInitialOptions = (options: Option[]): Option[] => {
   ];
 };
 
-const getAppMetadataNetworks = (appMetadata: AppMetadata): string[] => {
-  return appMetadata.networks || [];
-};
-
-const getAppMetadataSuperCategory = (appMetadata: AppMetadata): string => {
-  return appMetadata.supercategory;
-};
-
-const getEnabledOptionsValues = (options: Option[]): string[] => {
-  return options.filter(o => o.checked).map(o => o.value);
-};
-
-const makeCategoryOption = (t: TFunction, categoryId: string): Option => ({
-  value: categoryId,
-  label: t(`platform.catalog.category.${categoryId}`, categoryId),
-});
-
+/**
+ * Leaving the following block here so it can be reimplemented quickly when the networks
+ * filtering spec is clarified.
+ **/
+/*
 const makeNetworkOption = (t: TFunction, networkId: string): Option => {
   const currency = getCryptoCurrencyById(networkId);
   return {
@@ -79,6 +67,23 @@ const makeNetworkOption = (t: TFunction, networkId: string): Option => {
     ),
   };
 };
+const getAppMetadataNetworks = (appMetadata: AppMetadata): string[] => {
+  return appMetadata.networks || [];
+};
+*/
+
+const getAppMetadataSuperCategory = (appMetadata: AppMetadata): string => {
+  return appMetadata.supercategory;
+};
+
+const getEnabledOptionsValues = (options: Option[]): string[] => {
+  return options.filter(o => o.checked).map(o => o.value);
+};
+
+const makeCategoryOption = (t: TFunction, categoryId: string): Option => ({
+  value: categoryId,
+  label: t(`platform.catalog.category.${categoryId}`, categoryId),
+});
 
 const getAppMetadataFromManifest = (
   manifest: AppManifest,
@@ -100,49 +105,36 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
     [appsMetadata],
   );
 
-  const { supercategories, networks } = useMemo(() => {
+  const { supercategories } = useMemo(() => {
     const reducer = (
-      {
-        supercategories: accSupercategories = [],
-        networksIds: accNetworksIds = [],
-      }: CategoriesIdsAndNetworksIds,
+      { supercategories: accSupercategories = [] }: AppsMetadataReducerAccumulator,
       appMetadata: AppMetadata,
-    ): { supercategories: string[]; networksIds: string[] } => {
+    ): { supercategories: string[] } => {
       const supercategory = getAppMetadataSuperCategory(appMetadata);
-      const networks = getAppMetadataNetworks(appMetadata);
-      const pushIfNotIncluded = (acc: string[] = [], val: string) => {
-        return acc.includes(val) ? acc : [...acc, val];
-      };
       return {
-        networksIds: networks.reduce(pushIfNotIncluded, accNetworksIds),
         supercategories: accSupercategories.includes(supercategory)
           ? accSupercategories
           : [...accSupercategories, supercategory],
       };
     };
-    const { supercategories, networksIds }: CategoriesIdsAndNetworksIds = appsMetadata.reduce(
-      reducer,
-      {
-        supercategories: [],
-        networksIds: [],
-      },
-    );
+    const { supercategories }: AppsMetadataReducerAccumulator = appsMetadata.reduce(reducer, {
+      supercategories: [],
+    });
     return {
       supercategories: sortBy(
         supercategories.map(supercategory => makeCategoryOption(t, supercategory)),
         "label",
       ),
-      networks: [
-        ...sortBy(
-          networksIds.map(networkId => makeNetworkOption(t, networkId)),
-          "label",
-        ),
-        { value: "none", label: t("platform.catalog.noNetwork") },
-      ],
     };
   }, [appsMetadata, t]);
 
-  const [networksOptions, setNetworksOptions] = useState(getInitialOptions(networks));
+  /**
+   * For now this feature (displaying filtering by network) is put on hold but I will
+   * leave this here so it can be reimplemented easily when the spec gets clarified.
+   * Otherwise, networks is an array of string identifying cryptocurrencies.
+   * It should come either from appsMetadata.
+   */
+  const [networksOptions, setNetworksOptions] = useState(getInitialOptions([]));
   const [categoriesOptions, setCategoriesOptions] = useState(getInitialOptions(supercategories));
 
   const noNetworkSelected = networksOptions.every(opt => !opt.checked);
@@ -151,9 +143,8 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
   const showResetCTA = !(noNetworkSelected && noCategorySelected);
 
   const handleClickReset = useCallback(() => {
-    setNetworksOptions(getInitialOptions(networks));
     setCategoriesOptions(getInitialOptions(supercategories));
-  }, [setNetworksOptions, networks, setCategoriesOptions, supercategories]);
+  }, [setCategoriesOptions, supercategories]);
 
   const right = catalogMetadata && (
     <Flex flexDirection="row" zIndex={1} alignItems="center" columnGap="20px">
@@ -163,12 +154,14 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
           <VerticalSeparator />
         </>
       )}
-      <DropdownPicker
-        options={networksOptions}
-        hideLabelValue={noNetworkSelected}
-        onChange={setNetworksOptions}
-        label={t("platform.catalog.networkFilterLabel")}
-      />
+      {networksOptions.length > 0 && (
+        <DropdownPicker
+          options={networksOptions}
+          hideLabelValue={noNetworkSelected}
+          onChange={setNetworksOptions}
+          label={t("platform.catalog.networkFilterLabel")}
+        />
+      )}
       <DropdownPicker
         options={categoriesOptions}
         hideLabelValue={noCategorySelected}
@@ -178,30 +171,30 @@ const SectionLiveApps: React.FC<SectionBaseProps> = ({
     </Flex>
   );
 
-  const enabledNetworks = getEnabledOptionsValues(networksOptions);
+  // const enabledNetworks = getEnabledOptionsValues(networksOptions);
   const enabledCategories = getEnabledOptionsValues(categoriesOptions);
   const filteredManifests = useMemo(() => {
     return manifests.filter(manifest => {
       const appMetadata = getAppMetadataFromManifest(manifest, appsMetadataMappedById);
       if (!appMetadata) return true;
-      const networks = getAppMetadataNetworks(appMetadata);
       const supercategory = getAppMetadataSuperCategory(appMetadata);
+      /**
+       * Leaving the following block here so it can be reimplemented quickly when the networks
+       * filtering spec is clarified.
+       **/
+      /*
+      const networks = getAppMetadataNetworks(appMetadata);
       const hasNoNetwork = networks.length === 0;
       const networksCondition =
         noNetworkSelected ||
         (!hasNoNetwork && enabledNetworks.every(n => networks.includes(n))) ||
         (hasNoNetwork && enabledNetworks.includes("none"));
+      */
+      const networksCondition = true;
       const categoriesCondition = noCategorySelected || enabledCategories.includes(supercategory);
       return networksCondition && categoriesCondition;
     });
-  }, [
-    appsMetadataMappedById,
-    enabledNetworks,
-    enabledCategories,
-    noNetworkSelected,
-    noCategorySelected,
-    manifests,
-  ]);
+  }, [appsMetadataMappedById, enabledCategories, noCategorySelected, manifests]);
 
   const content = useMemo(
     () =>
