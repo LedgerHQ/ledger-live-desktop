@@ -719,13 +719,20 @@
     "reset": "Zurücksetzen",
     "verifyAddress": "Bitte bestätigen Sie, dass die angezeigte Adresse genau mit der auf Ihrem Gerät angezeigten Adresse übereinstimmt",
     "buy": {
-      "header": "Krypto kaufen mit {{provider}}",
-      "title": "Krypto kaufen über <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Kaufen",
-      "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
-      "selectAccount": "Wählen Sie ein Konto",
-      "continue": "Weiter",
-      "addAccount": "Konto hinzufügen"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "Krypto verkaufen mit {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
       "selectAccount": "Wählen Sie ein Konto",
       "continue": "Weiter"
-    },
-    "history": {
-      "tab": "Verlauf",
-      "exporting": "Wird exportiert...",
-      "exportOperations": "Exportvorgänge"
     }
   },
   "lend": {
@@ -1152,7 +1154,8 @@
     "for": "Adresse für <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Überprüfen Sie, ob die freigegebene Adresse genau mit der auf Ihrem Gerät übereinstimmt",
     "messageIfSkipped": "Ihre {{name}} Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie diese zur Sicherheit.",
-    "showQrCode": "QR-Code anzeigen"
+    "showQrCode": "QR-Code anzeigen",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -2657,7 +2660,7 @@
       "counterValue": "Bevorzugte Währung",
       "counterValueDesc": "Wählen Sie die Währung, die neben Ihrem Saldo und den Aktionen angezeigt wird.",
       "region": "Region",
-      "regionDesc": "Wählen Sie Ihre Region, um die Zeitzone von Ledger Live einzustellen.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Regionaler Marktindikator",
       "stockDesc": "Wählen Sie Westlich, um Marktsteigerungen in Blau anzuzeigen, oder Östlich, um sie in Rot anzuzeigen.",
       "carouselVisibility": "Karussell-Sichtbarkeit",
@@ -3925,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Dies ist keine gültige {{currencyName}} Adresse"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Empfängeradresse ist die gleiche wie die Absenderadresse"
     },
@@ -3935,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "Automatische Verifizierung nicht verfügbar: Überprüfen Sie die Adresse sorgfältig",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "Dieser QR-Code konnte nicht gescannt werden: Auto-Verifizierung wird von dieser Adresse nicht unterstützt"

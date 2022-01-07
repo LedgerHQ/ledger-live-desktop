@@ -719,13 +719,20 @@
     "reset": "フローをリセット",
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
-      "header": "{{provider}}で暗号資産を購入する",
-      "title": "<0>{{provider}}</0>で暗号通貨を購入する",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "購入",
-      "selectCrypto": "暗号資産を選択",
-      "selectAccount": "アカウントを選択",
-      "continue": "続行",
-      "addAccount": "アカウントを追加"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "{{provider}}で暗号資産を売却する",
@@ -734,11 +741,6 @@
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
       "continue": "続行"
-    },
-    "history": {
-      "tab": "履歴",
-      "exporting": "エクスポートしています...",
-      "exportOperations": "エクスポート処理"
     }
   },
   "lend": {
@@ -1152,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1>アドレス",
     "messageIfUnverified": "共有アドレスが、お使いのデバイスのアドレスと完全に一致していることを確認してください。",
     "messageIfSkipped": "{{name}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。",
-    "showQrCode": "QRコードを表示"
+    "showQrCode": "QRコードを表示",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1966,9 +1969,9 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "資産を安全に管理しながら、TRXを凍結して報酬を獲得しましょう。",
+            "description": "安全かつ完全に資産を所有しながら、TRXを凍結して報酬を獲得しましょう。",
             "bullet": {
-              "delegate": "資産をデリゲートしても所有者は変りません。",
+              "delegate": "デリゲートしても資産の所有者は変わりません。",
               "access": "資産の凍結は、3日後に解除できます。",
               "ledger": "Ledgerデバイスを使って、安全に資産の凍結と投票をしましょう。"
             },
@@ -2550,9 +2553,9 @@
           "title": "ステーキング報酬を獲得する",
           "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデーターをデリゲートして、ステーキング報酬を得ることができます。",
           "bullet": {
-            "delegate": "アカウントをデリゲートしても、アカウントの所有者は変わりません。",
+            "delegate": "デリゲートしてもアカウントの所有者は変わりません。",
             "access": "いつでも、資産を管理することができます。",
-            "ledger": "Ledgerデバイスを使って、安全にデリゲートしましょう。"
+            "ledger": "Ledgerデバイスで安全にデリゲートする。"
           },
           "button": {
             "cta": "デリゲートして報酬を得る"
@@ -2657,7 +2660,7 @@
       "counterValue": "表示通貨",
       "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択する。",
       "region": "地域",
-      "regionDesc": "Ledger Liveのタイムゾーンを設定するには、お住まいの地域を選択してください。",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "carouselVisibility": "カルーセルの表示",
@@ -3925,6 +3928,9 @@
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "送付先アドレスが送付元アドレスと同じです。"
     },
@@ -3935,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "自動認証が利用できません：アドレスを慎重に確認してください。",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "このQRコードをスキャンできませんでした：このアドレスでは自動認証がサポートされていません。"
