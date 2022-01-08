@@ -1060,7 +1060,7 @@
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "ブロックチェーンやセキュリティ、暗号通貨とLedgerデバイスについて知ってほしい全てのこと。",
+      "description": "ブロックチェーンやセキュリティ、暗号通貨とLedgerデバイスの全てを学ぶ。",
       "cta": "学習をスタート"
     },
     "stakeCosmos": {
@@ -1368,8 +1368,8 @@
     "noAccountToImport": "追加する既存の {{currencyName}} アカウントがありません。",
     "success": "アカウントが正常に追加されました。",
     "success_plural": "アカウントが正常に追加されました。",
-    "successDescription": "他のアカウントを追加するか、ポートフォリオに戻る",
-    "successDescription_plural": "他のアカウントを追加するか、ポートフォリオに戻る",
+    "successDescription": "他のアカウントを追加、またはポートフォリオに戻る",
+    "successDescription_plural": "他のアカウントを追加、またはポートフォリオに戻る",
     "createNewAccount": {
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1> アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
       "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした。",
