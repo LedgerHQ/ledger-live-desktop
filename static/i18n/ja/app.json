@@ -708,10 +708,10 @@
     "delegatedAssets": "デリゲートされた資産",
     "undelegating": "デリゲート解除中",
     "availableBalanceTooltip": "これは利用可能額です。",
-    "frozenAssetsTooltip": "凍結された資産はTronの投票に使われます。これがあなたの合計票数です。",
+    "frozenAssetsTooltip": "凍結された資産はTronの投票に使われます。こちらが合計票数です。",
     "bandwidthTooltip": "資産を凍結して、Bandwidth（バンド幅）を獲得",
     "energyTooltip": "資産を凍結して、Energy（エネルギー）を獲得",
-    "delegatedAssetsTooltip": "デリゲートされた資産は、Cosmosの投票に使われます。これがあなたの合計票数です。",
+    "delegatedAssetsTooltip": "デリゲートされた資産は、Cosmosの投票に使われます。こちらが合計票数です。",
     "undelegatingTooltip": "デリゲートを解除した資産は、21日間のロック期間後に再び利用可能になります。"
   },
   "exchange": {
