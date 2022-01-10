@@ -1,12 +1,22 @@
-name: "[Tests] Screenshots Update"
+name: "Generate | Screenshots"
 on:
   issue_comment:
     types: [created]
 
 jobs:
+  is-org-member:
+    runs-on: ubuntu-latest
+    name: "[Check] Is user from LedgerHQ"
+    steps:
+      - uses: ledgerhq/actions/packages/is-org-member@main
+        with:
+          user: ${{ github.actor }}
+          organisation: ledgerhq
+
   add-reaction:
     name: "[Reaction] 🚀"
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
+    needs: [is-org-member]
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR
@@ -20,8 +30,19 @@ jobs:
               content: 'rocket'
             })
 
+            const body = `
+              [Generating new screenshots](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
   start-runner:
-    name: "start ec2 instance"
+    name: "[Runner] start ec2 instance"
     needs: [add-reaction]
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
@@ -30,8 +51,8 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: "stop ec2 instance"
-    if: ${{ always() }}
+    name: "[Runner] stop ec2 instance"
+    if: always() && github.event.issue.pull_request != ''
     needs: [start-runner, generate-screenshots-linux]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
@@ -41,7 +62,7 @@ jobs:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   generate-screenshots-linux:
-    name: "[Linux Screenshots]"
+    name: "[Linux] Screenshots"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
 
@@ -97,7 +118,7 @@ jobs:
 
   generate-screenshots:
     needs: [add-reaction]
-    name: "[${{ matrix.os }} Screenshots]"
+    name: "[${{ matrix.os }}] Screenshots"
     strategy:
       fail-fast: false
       matrix:

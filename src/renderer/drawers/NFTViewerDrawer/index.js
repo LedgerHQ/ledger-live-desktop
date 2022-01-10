@@ -17,10 +17,10 @@ import { CopiableField } from "./CopiableField";
 import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
-import { centerEllipsis } from "~/renderer/styles/helpers";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
@@ -106,12 +106,12 @@ function NFTAttribute({
         lineHeight="15.73px"
         fontSize={4}
         color="palette.text.shade60"
-        ff="Inter|Regular"
+        ff="Inter|SemiBold"
       >
         {title}
       </Text>
       <Skeleton show={skeleton} width={120} minHeight={24} barHeight={10}>
-        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|SemiBold">
+        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|Regular">
           <Pre>{value}</Pre>
         </Text>
       </Skeleton>
@@ -141,9 +141,10 @@ export function NFTViewerDrawer({
   const nft = useSelector(state => getNFTById(state, { nftId }));
   const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
   const show = useMemo(() => status === "loading", [status]);
-  const name = centerEllipsis(metadata?.nftName || nft.tokenId, 26);
+  const name = metadata?.nftName || nft.tokenId;
 
   const onNFTSend = useCallback(() => {
+    setDrawer();
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
   }, [dispatch, nftId, account]);
 
@@ -157,11 +158,10 @@ export function NFTViewerDrawer({
               fontSize={5}
               lineHeight="18px"
               color="palette.text.shade50"
-              uppercase
               pb={2}
             >
               <Skeleton show={show} width={100} barHeight={10} minHeight={24}>
-                {metadata?.tokenName || nft?.collection?.contract}
+                {metadata?.tokenName || "-"}
               </Skeleton>
             </Text>
             <Text
@@ -169,8 +169,13 @@ export function NFTViewerDrawer({
               fontSize={7}
               lineHeight="29px"
               color="palette.text.shade100"
+              style={{
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+                display: "-webkit-box",
+              }}
               uppercase
-              pb={5}
             >
               {name}
             </Text>
@@ -211,9 +216,9 @@ export function NFTViewerDrawer({
               lineHeight="15.73px"
               fontSize={4}
               color="palette.text.shade60"
-              fontWeight="400"
+              fontWeight="600"
             >
-              {t("NFT.viewer.attributes.contract")}
+              {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
               <CopiableField value={nft.collection.contract} />
@@ -224,7 +229,7 @@ export function NFTViewerDrawer({
               lineHeight="15.73px"
               fontSize={4}
               color="palette.text.shade60"
-              fontWeight="400"
+              fontWeight="600"
             >
               {t("NFT.viewer.attributes.tokenId")}
             </Text>

@@ -13,7 +13,7 @@ import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import type { Vote } from "@ledgerhq/live-common/lib/families/tron/types";
-import { languageSelector } from "~/renderer/reducers/settings";
+import { localeSelector } from "~/renderer/reducers/settings";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import Trophy from "~/renderer/icons/Trophy";
@@ -41,7 +41,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
   const { tronResources } = account;
   invariant(tronResources && votes, "tron transaction required");
 
-  const language = useSelector(languageSelector);
+  const locale = useSelector(localeSelector);
 
   const superRepresentatives = useTronSuperRepresentatives();
   const SR = useSortedSr(search, superRepresentatives, votes);
@@ -112,7 +112,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
           subtitle={
             <Trans
               i18nKey="vote.steps.castVotes.totalVotes"
-              values={{ total: sr.voteCount.toLocaleString(language) }}
+              values={{ total: sr.voteCount.toLocaleString(locale) }}
             >
               <b></b>
             </Trans>
@@ -131,7 +131,7 @@ const AmountField = ({ t, account, onChangeVotes, status, bridgePending, votes }
     },
     [
       votes,
-      language,
+      locale,
       onUpdateVote,
       onExternalLink,
       notEnoughVotes,

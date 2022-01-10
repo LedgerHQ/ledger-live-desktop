@@ -56,6 +56,7 @@ export const setCounterValue = (counterValue: string) =>
 export const setLanguage = (language: ?string) => saveSettings({ language });
 export const setTheme = (theme: ?string) => saveSettings({ theme });
 export const setRegion = (region: ?string) => saveSettings({ region });
+export const setLocale = (locale: string) => saveSettings({ locale });
 export const setUSBTroubleshootingIndex = (USBTroubleshootingIndex?: number) =>
   saveSettings({ USBTroubleshootingIndex });
 
@@ -183,5 +184,20 @@ export const setSwapHasAcceptedIPSharing = (hasAcceptedIPSharing: boolean) => ({
 
 export const setSwapKYCStatus = (payload: { provider: string, id?: string, status?: string }) => ({
   type: "SET_SWAP_KYC",
+  payload,
+});
+
+export const addStarredMarketCoins = (payload: string) => ({
+  type: "ADD_STARRED_MARKET_COINS",
+  payload,
+});
+
+export const removeStarredMarketCoins = (payload: string) => ({
+  type: "REMOVE_STARRED_MARKET_COINS",
+  payload,
+});
+
+export const toggleStarredMarketCoins = (payload: string) => ({
+  type: "TOGGLE_STARRED_MARKET_COINS",
   payload,
 });

@@ -3,7 +3,9 @@
   "include": [
     "src/"
   ],
-  "reporter": [ "html" ],
-  "report-dir": "playwright/artifacts/coverage",
-  "temp-dir": "playwright/artifacts/.nyc_output"
+  "reporter": [
+    "html"
+  ],
+  "report-dir": "tests/artifacts/coverage",
+  "temp-dir": "tests/artifacts/.nyc_output"
 }

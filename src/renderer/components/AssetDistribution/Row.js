@@ -18,7 +18,7 @@ import Tooltip from "~/renderer/components/Tooltip";
 import Bar from "./Bar";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import { languageSelector } from "~/renderer/reducers/settings";
+import { localeSelector } from "~/renderer/reducers/settings";
 
 export type DistributionItem = {
   currency: CryptoCurrency | TokenCurrency,
@@ -99,11 +99,11 @@ const Value: ThemedComponent<{}> = styled.div`
 const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => {
   const theme = useTheme();
   const history = useHistory();
-  const language = useSelector(languageSelector);
+  const locale = useSelector(localeSelector);
   const color = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const percentage = Math.floor(distribution * 10000) / 100;
-  const percentageWording = percentage.toLocaleString(language, {
-    minimumFractionDigits: 2,
+  const percentageWording = percentage.toLocaleString(locale, {
+    minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
   const icon = <CryptoCurrencyIcon currency={currency} size={16} />;
@@ -136,7 +136,7 @@ const Row = ({ item: { currency, amount, distribution }, isVisible }: Props) => 
               {`${percentageWording}%`}
             </Text>
             <Bar
-              progress={!process.env.SPECTRON_RUN && isVisible ? percentage.toString() : "0"}
+              progress={!process.env.PLAYWRIGHT_RUN && isVisible ? percentage.toString() : "0"}
               progressColor={color}
             />
           </>
