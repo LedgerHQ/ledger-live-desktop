@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Usar implementaciones de JS experimentales para Algorand y Tezos."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -3562,7 +3562,7 @@
     },
     "solana": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memoPlaceholder": "Opcional"
     }
   },
   "errors": {
@@ -3929,7 +3929,7 @@
       "title": "Esta no es una dirección de {{currencyName}} válida"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Tu cuenta ya está delegada a este validador"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "La dirección de recepción es la misma que la dirección de emisión"
@@ -3943,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "Operación no disponible en este dispositivo",
+      "description": "La función Enviar NFT sólo está disponible en el Nano X. Por favor visita nuestra plataforma de soporte al cliente para saber cómo enviar NFTs con un Nano S."
     },
     "CantScanQRCode": {
       "title": "No fue posible escanear este código QR: esta dirección no es compatible con la verificación automática"
@@ -4145,7 +4145,7 @@
       "title": "Los envíos a una dirección taproot antes de la activación de la red principal no son seguros"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Cuenta sin fondos"
     },
     "SolanaMemoIsTooLong": {
       "title": "Memo is too long. Max length is {{maxLength}}"
