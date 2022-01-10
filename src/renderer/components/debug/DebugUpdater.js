@@ -32,7 +32,7 @@ const ExposeUpdaterWhenInMock = () => {
   }, [setStatus]);
 
   return <MockedGlobalStyle />; // Still do the styles thingie
-}
+};
 
 const DebugUpdater = () => {
   const [expanded, setExpanded] = useState(true);
