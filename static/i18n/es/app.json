@@ -1227,10 +1227,10 @@
       "7d": "7d",
       "30d": "30d",
       "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
+      "1H_selectorLabel": "Última hora",
       "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
+      "1W_selectorLabel": "semana anterior",
+      "1M_selectorLabel": "Mes anterior",
       "1Y_selectorLabel": "Last year"
     },
     "warnings": {
