@@ -44,6 +44,7 @@ export class OnboardingPage {
     this.quizSuccessButton = page.locator("#quizz-success-cta");
   }
 
+
   async getStarted() {
     await this.getStartedButton.click();
   }

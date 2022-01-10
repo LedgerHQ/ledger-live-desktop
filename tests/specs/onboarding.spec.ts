@@ -51,6 +51,7 @@ test.describe.parallel("Onboarding", () => {
     });
   }
 
+
   test.describe.parallel("Onboarding", () => {
     for (const nano of nanos) {
       test(`[${nano}] Onboarding flow new device`, async ({ page }) => {
