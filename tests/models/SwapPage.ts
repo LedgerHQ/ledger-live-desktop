@@ -59,6 +59,7 @@ export class SwapPage {
     await this.exchangeButton.hover({ force: true });
   }
 
+  // TODO: pull this function out into a utility function so we can use it elsewhere
   async verifyHistoricalSwapsHaveLoadedFully() {
     await this.page.waitForFunction(() => {
       const swapHistoryRow = document.querySelector(".swap-history-row");
