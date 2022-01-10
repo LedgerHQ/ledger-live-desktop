@@ -1182,7 +1182,7 @@
   "market": {
     "title": "Mercado",
     "currency": "Divisa",
-    "rangeLabel": "Time",
+    "rangeLabel": "Hora",
     "goBack": "Volver",
     "filters": {
       "title": "Filtros",
@@ -1245,7 +1245,7 @@
       "retrySearchParams": "Por favor, intenta de nuevo con otros parámetros.",
       "trackFavAssets": "Sigue a tus favoritas",
       "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "browseAssets": "Buscar activos"
     }
   },
   "NFT": {
@@ -1257,7 +1257,7 @@
       "attributes": {
         "properties": "Propiedades",
         "description": "Descripción",
-        "tokenAddress": "Token Address",
+        "tokenAddress": "Dirección de token",
         "tokenId": "ID de token",
         "quantity": "Cantidad"
       }
@@ -1433,7 +1433,7 @@
       "name": "Nombre del token",
       "contract": "Contrato del token",
       "id": "ID del token (NFT)",
-      "quantity": "Quantity"
+      "quantity": "Cantidad"
     },
     "extra": {
       "frozenAmount": "Importe congelado",
@@ -2660,7 +2660,7 @@
       "counterValue": "Divisa preferida",
       "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
       "region": "Región",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Elige tu región para actualizar formatos de fechas, hora y monedas.",
       "stock": "Indicador de mercado regional",
       "stockDesc": "Elige Occidental para mostrar las subidas del mercado en azul o Eastern para mostrarlas en rojo.",
       "carouselVisibility": "Visibilidad del carrusel",
