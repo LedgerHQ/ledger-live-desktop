@@ -53,7 +53,7 @@ test("Swap", async ({ page }) => {
 
   await test.step("Verify Swap details are present in the swap history", async () => {
     await swapPage.exitExchangeDrawer();
-    await expect(swapPage.historyRow).toHaveCSS("opacity", "1");
+    await swapPage.verifyHistoricalSwapsHaveLoadedFully();
     expect(await page.screenshot()).toMatchSnapshot("verify-swap-history.png");
   });
 });
