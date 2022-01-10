@@ -722,16 +722,16 @@
       "header": "Krypto kaufen und verkaufen",
       "title": "Wählen Sie einen Anbieter um Krypto zu kaufen",
       "buyFrom": "Von überall aus kaufen",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "cryptoSupported": "Krypto unterstützt",
+      "payWith": "Mit Karte oder SEPA bezahlen",
       "tab": "Kaufen",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "Krypto kaufen mit {{provider}}",
+        "title": "Krypto kaufen über <0>{{provider}}</0>",
+        "selectCrypto": "Wählen Sie einen Krypto-Wert",
+        "selectAccount": "Wählen Sie ein Konto",
+        "continue": "Weiter",
+        "addAccount": "Konto hinzufügen"
       }
     },
     "sell": {
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "Überprüfen Sie, ob die freigegebene Adresse genau mit der auf Ihrem Gerät übereinstimmt",
     "messageIfSkipped": "Ihre {{name}} Adresse wurde auf Ihrem Ledger-Gerät nicht bestätigt. Bitte verifizieren Sie diese zur Sicherheit.",
     "showQrCode": "QR-Code anzeigen",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "Stellen Sie sicher, dass der Absender taproot unterstützt"
   },
   "emptyState": {
     "dashboard": {
@@ -1180,31 +1180,31 @@
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
-    "rangeLabel": "Time",
-    "goBack": "Go back",
+    "title": "Markt",
+    "currency": "Währung",
+    "rangeLabel": "Zeit",
+    "goBack": "Zurückgehen",
     "filters": {
-      "title": "Filters",
-      "show": "Show",
-      "all": "All",
-      "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
-      "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "title": "Filter",
+      "show": "Anzeigen",
+      "all": "Alle",
+      "isLedgerCompatible": "Ledger Live kompatibel",
+      "isFavorite": "Favorisierte Werte",
+      "applyFilters": "Filter anwenden",
+      "clearAll": "Alle löschen"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "Krypto",
+      "price": "Preis",
+      "change": "Ändern",
+      "marketCap": "Marktkapitalisierung",
+      "last7d": "Letzte 7 Tage"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
+      "priceStatistics": "Preisstatistik",
+      "tradingVolume": "Handelsvolumen",
+      "24hLowHight": "24h Tief / 24h Hoch",
+      "7dLowHigh": "7T Tief / 7T Hoch",
       "allTimeHigh": "All time high",
       "allTimeLow": "All time low",
       "marketCapRank": "Market cap rank",
