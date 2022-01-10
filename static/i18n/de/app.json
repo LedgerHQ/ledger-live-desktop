@@ -1217,35 +1217,35 @@
       "supportedCoinsAndTokens": "Unterstützte Coins und Token"
     },
     "range": {
-      "1H_label": "1S",
+      "1H_label": "1Std",
       "1D_label": "1T",
       "1W_label": "1W",
       "1M_label": "1M",
-      "1Y_label": "1Y",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7d",
-      "30d": "30d",
-      "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
+      "1Y_label": "1J",
+      "1h": "1Std",
+      "24h": "24Std",
+      "7d": "7T",
+      "30d": "30T",
+      "1y": "1J",
+      "1H_selectorLabel": "Letzte Stunde",
+      "1D_selectorLabel": "Letzte 24 Stunden",
+      "1W_selectorLabel": "Letzte Woche",
+      "1M_selectorLabel": "Letzter Monat",
+      "1Y_selectorLabel": "Letztes Jahr"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "Verbindungsfehler",
+      "ledgerUnableToRetrieveData": "Ledger Live kann keine Daten abrufen.",
+      "checkInternetAndReload": "Bitte überprüfen Sie Ihre Internetverbindung und laden Sie die Seite erneut.",
+      "reload": "Aktualisieren",
+      "noCryptosFound": "Keine Coins gefunden",
+      "noSearchResultsFor": "Leider haben wir keine Coins für <0>{{search}}</0> gefunden. Bitte versuchen Sie es erneut mit einem anderen Stichwort.",
+      "noSearchResults": "Sorry, wir haben wir keine Suchergebnisse gefunden.",
+      "retrySearchKeyword": "Bitte wiederholen Sie die Suche mit einem anderen Stichwort.",
+      "retrySearchParams": "Bitte versuchen Sie die Suche mit anderen Parametern erneut.",
+      "trackFavAssets": "Verfolgen Sie Ihre Favoriten",
+      "clickOnStarIcon": "Klicken Sie auf das Sternsymbol neben einem Wert, um ihn zu Ihren Favoriten hinzuzufügen.",
+      "browseAssets": "Werte durchsuchen"
     }
   },
   "NFT": {
@@ -2660,7 +2660,7 @@
       "counterValue": "Bevorzugte Währung",
       "counterValueDesc": "Wählen Sie die Währung, die neben Ihrem Saldo und den Aktionen angezeigt wird.",
       "region": "Region",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Wählen Sie Ihre Region, um Datums-, Zeit- und Währungsformate zu aktualisieren.",
       "stock": "Regionaler Marktindikator",
       "stockDesc": "Wählen Sie Westlich, um Marktsteigerungen in Blau anzuzeigen, oder Östlich, um sie in Rot anzuzeigen.",
       "carouselVisibility": "Karussell-Sichtbarkeit",
@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Verwenden Sie experimentelle JS-Implementierungen für Algorand und Tezos."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
