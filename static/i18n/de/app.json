@@ -191,7 +191,7 @@
     "feesAmount": "Gebührenbetrag"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "Karte",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
@@ -200,7 +200,7 @@
     "swap": "Tauschen",
     "lend": "Leihen",
     "catalog": "Entdecken",
-    "market": "Market"
+    "market": "Markt"
   },
   "stars": {
     "placeholder": "Gebe einem Konto einen Stern, um es hier anzuzeigen.",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "Anbieter",
           "rate": "Kurs",
-          "fees": "network fees",
+          "fees": "Netzwerk-Gebühren",
           "target": "Zielkonto"
         },
         "tooltip": {
@@ -719,9 +719,9 @@
     "reset": "Zurücksetzen",
     "verifyAddress": "Bitte bestätigen Sie, dass die angezeigte Adresse genau mit der auf Ihrem Gerät angezeigten Adresse übereinstimmt",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
+      "header": "Krypto kaufen und verkaufen",
+      "title": "Wählen Sie einen Anbieter um Krypto zu kaufen",
+      "buyFrom": "Von überall aus kaufen",
       "cryptoSupported": "crypto supported",
       "payWith": "Pay with card or SEPA",
       "tab": "Kaufen",
