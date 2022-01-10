@@ -1180,31 +1180,31 @@
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
+    "title": "Mercado",
+    "currency": "Divisa",
     "rangeLabel": "Time",
-    "goBack": "Go back",
+    "goBack": "Volver",
     "filters": {
-      "title": "Filters",
-      "show": "Show",
-      "all": "All",
-      "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
-      "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "title": "Filtros",
+      "show": "Mostrar",
+      "all": "Todo",
+      "isLedgerCompatible": "Compatible con Ledger Live",
+      "isFavorite": "Activos destacados",
+      "applyFilters": "Aplicar filtros",
+      "clearAll": "Borrar todo"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "Cripto",
+      "price": "Precio",
+      "change": "Cambio",
+      "marketCap": "Capitalización de mercado",
+      "last7d": "Últimos 7 días"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
+      "priceStatistics": "Estadísticas de precio",
+      "tradingVolume": "Volumen de operaciones",
       "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
+      "7dLowHigh": "7d Bajo/7d Alto",
       "allTimeHigh": "All time high",
       "allTimeLow": "All time low",
       "marketCapRank": "Market cap rank",
