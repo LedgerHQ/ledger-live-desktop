@@ -4148,10 +4148,10 @@
       "title": "Cuenta sin fondos"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memo demasiado largo. La longitud máxima es {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Dirección fuera de la curva ed25519"
     },
     "NotEnoughNftOwned": {
       "title": "Has superado la cantidad de tokens disponibles"
