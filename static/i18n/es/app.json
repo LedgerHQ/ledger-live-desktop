@@ -1209,10 +1209,10 @@
       "allTimeLow": "Mínimo histórico",
       "marketCapRank": "Posición según capitalización de mercado",
       "marketCapDominance": "Dominio de capitalización de mercado",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
+      "supply": "Suministro",
+      "circulatingSupply": "Suministro circulante",
+      "totalSupply": "Suministro total",
+      "maxSupply": "Suministro máximo",
       "assetNotSupportedOnLedgerLive": "Este activo no es compatible con Ledger Live.",
       "supportedCoinsAndTokens": "Monedas y tokens admitidos"
     },
@@ -1226,7 +1226,7 @@
       "24h": "24h",
       "7d": "7d",
       "30d": "30d",
-      "1y": "1y",
+      "1y": "1a",
       "1H_selectorLabel": "Última hora",
       "1D_selectorLabel": "Last 24 hours",
       "1W_selectorLabel": "semana anterior",
@@ -1234,7 +1234,7 @@
       "1Y_selectorLabel": "Last year"
     },
     "warnings": {
-      "connectionError": "Connection Error",
+      "connectionError": "Error de conexión",
       "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
       "checkInternetAndReload": "Please check your internet connection and reload this page.",
       "reload": "Reload",
