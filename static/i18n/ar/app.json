@@ -191,7 +191,7 @@
     "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "بطاقة",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -200,7 +200,7 @@
     "swap": "مبادلة",
     "lend": "إقراض",
     "catalog": "اكتشف",
-    "market": "Market"
+    "market": "سوق"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "المزود",
           "rate": "مُعدل",
-          "fees": "network fees",
+          "fees": "رسوم الشبكة",
           "target": "الحساب المستهدف"
         },
         "tooltip": {
@@ -704,7 +704,7 @@
     "frozenAssets": "الأصول المجمدة",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
-    "stake": "Stake",
+    "stake": "تكديس",
     "delegatedAssets": "الأصول المفوضة",
     "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
@@ -719,19 +719,19 @@
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "شراء وبيع الأصول المشفرة",
+      "title": "اختار مزود لشراء الأصول المشفرة",
+      "buyFrom": "قم بالشراء من أي مكان",
+      "cryptoSupported": "الأصول المشفرة المدعومة",
+      "payWith": "الدفع بواسطة البطاقة أو SEPA",
       "tab": "شراء",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "قم بشراء الأصول المشفرة باستخدام {{provider}}",
+        "title": "قم بشراء الأصول المشفرة من خلال <0>{{provider}}</0>",
+        "selectCrypto": "اختر أصل مشفّر",
+        "selectAccount": "اختر حساباً",
+        "continue": "متابعة",
+        "addAccount": "إضافة حساب"
       }
     },
     "sell": {
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
     "showQrCode": "إظهار رمز QR",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "تأكد من أن المُرسل يدعم taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1180,29 +1180,29 @@
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
-    "rangeLabel": "Time",
-    "goBack": "Go back",
+    "title": "سوق",
+    "currency": "العملة",
+    "rangeLabel": "الوقت",
+    "goBack": "رجوع",
     "filters": {
       "title": "Filters",
-      "show": "Show",
-      "all": "All",
-      "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
+      "show": "عرض",
+      "all": "الكل",
+      "isLedgerCompatible": "متوافق مع Ledger Live",
+      "isFavorite": "الأصول المفضلة",
       "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "clearAll": "ازالة الكل"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "الأصول المشفرة",
+      "price": "السعر",
+      "change": "تغيير",
+      "marketCap": "الحد الأقصى للسوق",
+      "last7d": "آخر 7 أيام"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
+      "priceStatistics": "إحصائيات الأسعار",
+      "tradingVolume": "حجم التداول",
       "24hLowHight": "24h Low / 24h High",
       "7dLowHigh": "7d Low / 7d High",
       "allTimeHigh": "All time high",
@@ -1217,11 +1217,11 @@
       "supportedCoinsAndTokens": "Supported coins & Tokens"
     },
     "range": {
-      "1H_label": "1H",
-      "1D_label": "1D",
-      "1W_label": "1W",
-      "1M_label": "1M",
-      "1Y_label": "1Y",
+      "1H_label": "1 ساعة",
+      "1D_label": "1 يوم",
+      "1W_label": "1 أسبوع",
+      "1M_label": "1 شهر",
+      "1Y_label": "1 سنة",
       "1h": "1h",
       "24h": "24h",
       "7d": "7d",
