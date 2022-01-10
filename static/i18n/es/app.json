@@ -191,7 +191,7 @@
     "feesAmount": "Importe de tarifas"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "Tarjeta",
     "menu": "Menú",
     "stars": "Cuentas destacadas",
     "accounts": "Cuentas",
@@ -200,7 +200,7 @@
     "swap": "Permutar",
     "lend": "Prestar",
     "catalog": "Discover",
-    "market": "Market"
+    "market": "Mercado"
   },
   "stars": {
     "placeholder": "Tus cuentas favoritas aparecerán aquí.",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "proveedor",
           "rate": "tarifa",
-          "fees": "network fees",
+          "fees": "tarifas de red",
           "target": "cuenta de destino"
         },
         "tooltip": {
@@ -719,19 +719,19 @@
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "Compra y vende cripto",
+      "title": "Elige un proveedor para comprar cripto",
+      "buyFrom": "Compra dondequiera que estés",
+      "cryptoSupported": "cripto compatibles",
+      "payWith": "Paga con tarjeta o con SEPA",
       "tab": "Comprar",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "Compra cripto con {{provider}}",
+        "title": "Compra cripto mediante <0>{{provider}}</0>",
+        "selectCrypto": "Elige un activo cripto",
+        "selectAccount": "Elige una cuenta",
+        "continue": "Continuar",
+        "addAccount": "Agregar cuenta"
       }
     },
     "sell": {
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "Comprueba que la dirección compartida coincida exactamente con la de tu dispositivo",
     "messageIfSkipped": "Tu dirección {{name}} no ha sido confirmada en tu dispositivo Ledger. Verifícala para mayor seguridad.",
     "showQrCode": "Mostrar código QR",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "Asegúrate de que el remitente soporta taproot"
   },
   "emptyState": {
     "dashboard": {
