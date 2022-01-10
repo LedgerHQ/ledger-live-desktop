@@ -1205,11 +1205,11 @@
       "tradingVolume": "حجم التداول",
       "24hLowHight": "24h Low / 24h High",
       "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
+      "allTimeHigh": "الحد الأقصى التاريخي",
+      "allTimeLow": "الحد الأدنى التاريخي",
       "marketCapRank": "Market cap rank",
       "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
+      "supply": "توريد",
       "circulatingSupply": "Circulating supply",
       "totalSupply": "Total supply",
       "maxSupply": "Max supply",
@@ -1222,30 +1222,30 @@
       "1W_label": "1 أسبوع",
       "1M_label": "1 شهر",
       "1Y_label": "1 سنة",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7d",
-      "30d": "30d",
-      "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
+      "1h": "1 ساعة",
+      "24h": "24 ساعة",
+      "7d": "7 أيام",
+      "30d": "30 يوم",
+      "1y": "1 سنة",
+      "1H_selectorLabel": "أخر 1 ساعة‏",
+      "1D_selectorLabel": "آخر 24 ساعة",
+      "1W_selectorLabel": "الأسبوع الماضي",
+      "1M_selectorLabel": "الشهر الماضي",
+      "1Y_selectorLabel": "العام الماضي"
     },
     "warnings": {
-      "connectionError": "Connection Error",
+      "connectionError": "خطأ في الاتصال",
       "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
       "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
+      "reload": "إعادة تحميل",
+      "noCryptosFound": "لم يتم العثور على عملات",
       "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
       "noSearchResults": "Sorry, we did not find any search results.",
       "retrySearchKeyword": "Please retry the search with another keyword.",
       "retrySearchParams": "Please retry the search with another parameters.",
       "trackFavAssets": "Track your favourite",
       "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "browseAssets": "تصفح الأصول"
     }
   },
   "NFT": {
@@ -1433,7 +1433,7 @@
       "name": "اسم رّمز التوكن",
       "contract": "عقد رّمز التوكن",
       "id": "مُعرّف (NFT) رمز التوكن",
-      "quantity": "Quantity"
+      "quantity": "الكمية"
     },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
@@ -2660,7 +2660,7 @@
       "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "اختر منطقتك لتحديث صِيغ التواريخ والوقت والعملات.",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "استخدم عمليات تنفيذ JS التجريبية لAlgorand و Tezos."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3561,8 +3561,8 @@
       "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
     },
     "solana": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memo": "ملاحظة",
+      "memoPlaceholder": "اختياري"
     }
   },
   "errors": {
@@ -3929,7 +3929,7 @@
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "تم تفويض حسابك بالفعل إلى هذا المدقق"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "عنوان المستلم هو نفسه عنوان المرسل"
@@ -3943,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "العملية غير متوفرة لهذا الجهاز",
+      "description": "خاصية إرسال NFT متوفرة فقط لـ Nano X. الرجاء زيارة منصة دعم العملاء لدينا لمعرفة كيفية إرسال NFT باستخدام Nano S."
     },
     "CantScanQRCode": {
       "title": "تعذر فحص رمز الاستجابة السريعة (QR) هذا: التحقق التلقائي غير مدعوم من قبل هذا العنوان"
@@ -4145,13 +4145,13 @@
       "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "الحساب غير ممول"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "الملاحظة طويلة جداً. الطول الأقصى هو {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "العنوان خارج المنحنى ed25519"
     },
     "NotEnoughNftOwned": {
       "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
