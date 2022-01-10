@@ -1211,10 +1211,10 @@
       "marketCapDominance": "Market cap dominance",
       "supply": "توريد",
       "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
+      "totalSupply": "إجمالي التوريد",
+      "maxSupply": "الحد الاقصى للتوريد",
       "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
-      "supportedCoinsAndTokens": "Supported coins & Tokens"
+      "supportedCoinsAndTokens": "العملات و رموز التوكن المدعومة"
     },
     "range": {
       "1H_label": "1 ساعة",
@@ -1235,16 +1235,16 @@
     },
     "warnings": {
       "connectionError": "خطأ في الاتصال",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "ledgerUnableToRetrieveData": "Ledger Live غير قادر على استرداد البيانات.",
+      "checkInternetAndReload": "يُرجى التحقق من اتصالك بالإنترنت وإعادة تحميل هذه الصفحة.",
       "reload": "إعادة تحميل",
       "noCryptosFound": "لم يتم العثور على عملات",
       "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
+      "noSearchResults": "عذراً، لم نجد أي نتائج بحث.",
       "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "retrySearchParams": "الرجاء إعادة محاولة البحث مع معلمات أخرى.",
+      "trackFavAssets": "تتبع المفضلة لديك",
+      "clickOnStarIcon": "النقر على أيقونة النجمة بجوار أحد الأصول سيضفها تلقائياً إلى المفضلة لديك.",
       "browseAssets": "تصفح الأصول"
     }
   },
