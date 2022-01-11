@@ -24,6 +24,7 @@ export class Layout {
   readonly bookmarkedAccountsList: Locator;
   readonly bookmarkedAccounts: Locator;
   readonly drawerSwapButton: Locator;
+  readonly appUpdateBanner: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -57,6 +58,9 @@ export class Layout {
     this.logo = page.locator("data-test-id=logo");
     this.inputError = page.locator('id=input-error'); // no data-test-id because css style is applied
     this.inputWarning = page.locator('id=input-warning'); // no data-test-id because css style is applied
+
+    // updater
+    this.appUpdateBanner = page.locator('data-test-id=layout-app-update-banner');
   }
 
   async goToPortfolio() {
