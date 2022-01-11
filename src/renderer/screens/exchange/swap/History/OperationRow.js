@@ -133,7 +133,7 @@ const OperationRow = ({
           {provider}
         </Text>
         <Text ff={"Inter|Regular"} color={"palette.text.shade50"} fontSize={3}>
-          <FormattedDate date={operation.date} format="HH:mm" />
+          <FormattedDate date={operation.date} format="LT" />
         </Text>
       </Box>
       <Box horizontal mx={20}>

@@ -47,6 +47,10 @@ const QRCodeWrapper = styled.div`
   background: white;
 `;
 
+const AlertBoxContainer = styled.div`
+  margin-top: 20px;
+`;
+
 const Receive1ShareAddress = ({
   account,
   name,
@@ -214,7 +218,7 @@ const StepReceiveFunds = ({
                 <Button event="Page Receive Step 3 re-verify" outlineGrey onClick={onVerify}>
                   <Trans i18nKey="common.reverify" />
                 </Button>
-                <Button id={"receive-receive-continue-button"} primary onClick={onClose}>
+                <Button data-test-id="modal-continue-button" primary onClick={onClose}>
                   <Trans i18nKey="common.done" />
                 </Button>
               </Box>
@@ -248,6 +252,13 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
+            {mainAccount.derivationMode === "taproot" ? (
+              <AlertBoxContainer>
+                <Alert type="warning">
+                  <Trans i18nKey="currentAddress.taprootWarning" />
+                </Alert>
+              </AlertBoxContainer>
+            ) : null}
             <Separator />
             <Receive2Device device={device} onVerify={onVerify} name={name} />
           </>

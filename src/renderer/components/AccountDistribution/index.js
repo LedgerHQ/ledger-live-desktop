@@ -34,7 +34,7 @@ export default function AccountDistribution({ accounts }: Props) {
   );
 
   const cardRef = useRef(null);
-  const [isVisible, setVisible] = useState(!!process.env.SPECTRON_RUN || false);
+  const [isVisible, setVisible] = useState(!!process.env.PLAYWRIGHT_RUN || false);
 
   useLayoutEffect(() => {
     const scrollArea = document.getElementById("scroll-area");

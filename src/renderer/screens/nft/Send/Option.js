@@ -40,7 +40,7 @@ const Option = ({
           <Skeleton width={80} minHeight={15} barHeight={8} show={show}>
             <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={2}>
               {"ID:"}
-              {centerEllipsis(metadata?.tokenId)}
+              {centerEllipsis(tokenId)}
             </Text>
           </Skeleton>
         </Box>

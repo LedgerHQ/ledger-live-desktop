@@ -203,4 +203,7 @@ export const urls = {
   elrond: {
     website: "https://elrond.com",
   },
+  solana: {
+    recipient_info: "https://support.ledger.com",
+  },
 };
