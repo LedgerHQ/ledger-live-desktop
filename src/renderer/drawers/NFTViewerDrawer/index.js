@@ -83,6 +83,14 @@ const NFTAttributes = styled.div`
   flex-direction: column;
 `;
 
+// need spec from design to design the best indicator for the click
+const NFTImageContainer = styled.div`
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
 function NFTAttribute({
   title,
   value,
@@ -148,6 +156,10 @@ export function NFTViewerDrawer({
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
   }, [dispatch, nftId, account]);
 
+  const openNftPanAndZoom = useCallback(() => {
+    dispatch(openModal("MODAL_NFT_PAN_ZOOM", { nftId }));
+  }, [dispatch, nftId]);
+
   return (
     <Box height={height}>
       <NFTViewerDrawerContainer>
@@ -181,7 +193,9 @@ export function NFTViewerDrawer({
             </Text>
           </StickyWrapper>
           <Skeleton show={show} width={393} minHeight={393}>
-            <Image nft={metadata} full />
+            <NFTImageContainer onClick={openNftPanAndZoom}>
+              <Image nft={metadata} full />
+            </NFTImageContainer>
           </Skeleton>
           <NFTActions>
             <Button

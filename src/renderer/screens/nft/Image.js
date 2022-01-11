@@ -15,9 +15,14 @@ import Skeleton from "./Skeleton";
  * The text in the fallback image is only visible if we are in `full` mode, since list
  * mode is not large enough for the text to be readable.
  */
-const Wrapper: ThemedComponent<{ full?: boolean, size?: number, loaded: boolean }> = styled.div`
+const Wrapper: ThemedComponent<{
+  full?: boolean,
+  size?: number,
+  loaded: boolean,
+  square: boolean,
+}> = styled.div`
   width: ${({ full, size }) => (full ? "100%" : `${size}px`)};
-  aspect-ratio: 1 / 1;
+  aspect-ratio: ${({ square }) => (square ? "1 / 1" : "initial")};
   border-radius: 4px;
   background: ${p => p.theme.colors.palette.background.default};
   background-size: contain;
@@ -74,6 +79,7 @@ type Props = {
   nft: NFTWithMetadata,
   full?: boolean,
   size?: number,
+  square?: boolean,
 };
 
 type State = {
@@ -93,11 +99,11 @@ class Image extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { full, size, nft } = this.props;
+    const { full, size, nft, square = true } = this.props;
     const { loaded, error } = this.state;
 
     return (
-      <Wrapper full={full} size={size} loaded={loaded || error}>
+      <Wrapper full={full} size={size} loaded={loaded || error} square={square}>
         <Skeleton full />
         {nft?.media && !error ? (
           <img
