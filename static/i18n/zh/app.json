@@ -3944,7 +3944,7 @@
     },
     "EthAppNftNotSupported": {
       "title": "操作不可用于此设备",
-      "description": "发送 NFT 功能仅可用于 Nano X。请访问我们的客户支持平台，以了解如何使用 Nano S 来发送 NFT。"
+      "description": "发送 NFT 功能仅可用于 Nano X。请访问我们的客服平台，以了解如何使用 Nano S 来发送 NFT。"
     },
     "CantScanQRCode": {
       "title": "无法扫描此二维码：此地址不支持自动验证"
