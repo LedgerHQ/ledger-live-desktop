@@ -4,7 +4,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { EXPERIMENTAL_MARKET_INDICATOR_SETTINGS } from "~/config/constants";
-import { langAndRegionSelector } from "~/renderer/reducers/settings";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import CounterValueSelect from "./CounterValueSelect";
@@ -20,7 +19,6 @@ import CarouselVisibility from "./CarouselVisibility";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 
 const SectionGeneral = () => {
-  const { useSystem } = useSelector(langAndRegionSelector);
   const hasPassword = useSelector(hasPasswordSelector);
   const { t } = useTranslation();
 
@@ -38,11 +36,10 @@ const SectionGeneral = () => {
         <Row title={t("settings.display.language")} desc={t("settings.display.languageDesc")}>
           <LanguageSelect />
         </Row>
-        {useSystem ? null : (
-          <Row title={t("settings.display.region")} desc={t("settings.display.regionDesc")}>
-            <RegionSelect />
-          </Row>
-        )}
+
+        <Row title={t("settings.display.region")} desc={t("settings.display.regionDesc")}>
+          <RegionSelect />
+        </Row>
 
         <Row title={t("settings.display.theme")} desc={t("settings.display.themeDesc")}>
           <ThemeSelect />
