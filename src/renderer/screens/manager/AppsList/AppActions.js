@@ -28,7 +28,7 @@ import IconArrowDown from "~/renderer/icons/ArrowDown";
 
 const AppActionsWrapper = styled.div`
   display: flex;
-  flex: 0.7;
+  flex: 0.8;
   min-width: 150px;
   justify-content: flex-end;
   flex-direction: row;
