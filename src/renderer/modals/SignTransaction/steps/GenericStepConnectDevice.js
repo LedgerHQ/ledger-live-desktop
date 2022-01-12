@@ -14,6 +14,7 @@ import type {
   TransactionStatus,
   SignedOperation,
 } from "@ledgerhq/live-common/lib/types";
+import type { AppRequest } from "@ledgerhq/live-common/lib/hw/actions/app";
 import { command } from "~/renderer/commands";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
@@ -47,6 +48,7 @@ export default function StepConnectDevice({
   transitionTo,
   onTransactionSigned,
   onTransactionError,
+  dependencies,
 }: {
   transitionTo: string => void,
   account: ?AccountLike,
@@ -56,6 +58,7 @@ export default function StepConnectDevice({
   status: TransactionStatus,
   onTransactionError: Error => void,
   onTransactionSigned: SignedOperation => void,
+  dependencies?: AppRequest[],
 }) {
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
@@ -71,6 +74,7 @@ export default function StepConnectDevice({
         appName: useApp,
         transaction,
         status,
+        dependencies,
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {
