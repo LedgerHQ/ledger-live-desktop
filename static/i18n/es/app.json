@@ -704,7 +704,7 @@
     "frozenAssets": "Activos congelados",
     "bandwidth": "Ancho de banda",
     "energy": "Energía",
-    "stake": "Stake",
+    "stake": "Participación",
     "delegatedAssets": "Activos delegados",
     "undelegating": "Desdelegando",
     "availableBalanceTooltip": "Este importe está disponible.",
@@ -1203,7 +1203,7 @@
     "detailsPage": {
       "priceStatistics": "Estadísticas de precio",
       "tradingVolume": "Volumen de operaciones",
-      "24hLowHight": "24h Low / 24h High",
+      "24hLowHight": "24h Bajo/24h Alto",
       "7dLowHigh": "7d Bajo/7d Alto",
       "allTimeHigh": "Máximo histórico",
       "allTimeLow": "Mínimo histórico",
@@ -1228,10 +1228,10 @@
       "30d": "30d",
       "1y": "1a",
       "1H_selectorLabel": "Última hora",
-      "1D_selectorLabel": "Last 24 hours",
+      "1D_selectorLabel": "Últimas 24 horas",
       "1W_selectorLabel": "semana anterior",
       "1M_selectorLabel": "Mes anterior",
-      "1Y_selectorLabel": "Last year"
+      "1Y_selectorLabel": "Año anterior"
     },
     "warnings": {
       "connectionError": "Error de conexión",
@@ -1244,7 +1244,7 @@
       "retrySearchKeyword": "Por favor, intenta de nuevo con otra palabra clave.",
       "retrySearchParams": "Por favor, intenta de nuevo con otros parámetros.",
       "trackFavAssets": "Sigue a tus favoritas",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "clickOnStarIcon": "Al hacer clic en el icono de la estrella junto a un activo se añadirá automáticamente a tus destacados.",
       "browseAssets": "Buscar activos"
     }
   },
