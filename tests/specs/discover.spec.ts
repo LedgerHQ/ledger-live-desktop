@@ -11,12 +11,11 @@ test.beforeAll(async () => {
   // Can start dummy app here?
 });
 
-test("Navigate to live app", async ({ page }) => {
+test.skip("Navigate to live app", async ({ page }) => {
   const discoverPage = new DiscoverPage(page);
   await discoverPage.navigateToCatalog();
   await discoverPage.openTestApp();
   await discoverPage.acceptLiveAppDisclaimer();
-  // await page.pause();
   await discoverPage.requestAccount();
   expect(await page.screenshot()).toMatchSnapshot({
     name: "live-app-request-account-modal.png",

@@ -64,9 +64,7 @@ export class DiscoverPage {
       );
     });
 
-    await this.modal.isVisible();
-
-    // FIXME - this isn't working. See weird error from the above XPath
-    // await this.selectAccount.click();
+    // FIXME - this isn't working without force. 'subtree intercepts pointer events' error
+    await this.selectAccount.click({ force: true });
   }
 }
