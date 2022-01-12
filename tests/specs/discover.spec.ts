@@ -11,6 +11,7 @@ test.beforeAll(async () => {
   // Can start dummy app here?
 });
 
+// TODO: tidy up test and add more features to test app before making test run
 test.skip("Navigate to live app", async ({ page }) => {
   const discoverPage = new DiscoverPage(page);
   await discoverPage.navigateToCatalog();
