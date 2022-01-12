@@ -1505,6 +1505,10 @@
     "sell": {
       "notice": "Verify the Sell details on your device before sending it. The addresses are exchanged securely so you don’t have to verify them.",
       "confirm": "Confirm Sell transaction"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {

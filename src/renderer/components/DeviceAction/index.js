@@ -28,7 +28,7 @@ import {
   renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmationV2,
-  renderSellDeviceConfirmation,
+  renderSecureTransferDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -173,7 +173,13 @@ const DeviceAction = <R, H, P>({
 
       // sell
       case 0x01:
-        return renderSellDeviceConfirmation({ modelId, type });
+      // fund
+      case 0x02:
+        return renderSecureTransferDeviceConfirmation({
+          exchangeType: exchangeType === 0x01 ? "sell" : "fund",
+          modelId,
+          type,
+        });
 
       default:
         return <div>{"Confirm exchange on your device"}</div>;
@@ -197,7 +203,7 @@ const DeviceAction = <R, H, P>({
   }
 
   if (initSellRequested && !initSellResult && !initSellError) {
-    return renderSellDeviceConfirmation({ modelId, type });
+    return renderSecureTransferDeviceConfirmation({ exchangeType: "sell", modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {
