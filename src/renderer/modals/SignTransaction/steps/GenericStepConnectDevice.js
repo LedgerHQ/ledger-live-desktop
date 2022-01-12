@@ -49,6 +49,7 @@ export default function StepConnectDevice({
   onTransactionSigned,
   onTransactionError,
   dependencies,
+  requireLatestFirmware,
 }: {
   transitionTo: string => void,
   account: ?AccountLike,
@@ -59,6 +60,7 @@ export default function StepConnectDevice({
   onTransactionError: Error => void,
   onTransactionSigned: SignedOperation => void,
   dependencies?: AppRequest[],
+  requireLatestFirmware?: boolean,
 }) {
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
@@ -75,6 +77,7 @@ export default function StepConnectDevice({
         transaction,
         status,
         dependencies,
+        requireLatestFirmware,
       }}
       Result={Result}
       onResult={({ signedOperation, transactionSignError }) => {

@@ -30,6 +30,7 @@ export default function StepConnectDevice({
         onTransactionError={onTransactionError}
         onTransactionSigned={onTransactionSigned}
         dependencies={dependencies}
+        requireLatestFirmware
       />
     </>
   );
