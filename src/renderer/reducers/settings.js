@@ -16,7 +16,6 @@ import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/type
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getLanguages, defaultLocaleForLanguage } from "~/config/languages";
 import type { State } from ".";
-import { osLangAndRegionSelector } from "~/renderer/reducers/application";
 import regionsByKey from "../screens/settings/sections/General/regions.json";
 export type CurrencySettings = {
   confirmationsNb: number,
@@ -61,7 +60,6 @@ export const timeRangeDaysByKey = {
 };
 
 export type LangAndRegion = { language: string, region: ?string, useSystem: boolean };
-
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
@@ -370,28 +368,32 @@ export const lastUsedVersionSelector = (state: State): string => state.settings.
 
 export const userThemeSelector = (state: State): ?string => state.settings.theme;
 
-const userLangAndRegionSelector = (
-  state: State,
-): ?{ language: string, region: ?string, useSystem: boolean } => {
-  const languages = getLanguages();
-  const { language, region } = state.settings;
-  if (language && languages.includes(language)) {
-    return { language, region, useSystem: false };
+type LanguageAndUseSystemLanguage = {
+  language: string,
+  useSystemLanguage: boolean,
+};
+
+const languageAndUseSystemLangSelector = (state: State): LanguageAndUseSystemLanguage => {
+  const { language } = state.settings;
+  if (language && getLanguages().includes(language)) {
+    return { language, useSystemLanguage: false };
+  } else {
+    return {
+      language: getInitialLanguageLocale(),
+      useSystemLanguage: true,
+    };
   }
 };
 
-export const langAndRegionSelector: OutputSelector<State, void, LangAndRegion> = createSelector(
-  userLangAndRegionSelector,
-  osLangAndRegionSelector,
-  (userLang, osLang) => {
-    return userLang || osLang;
-  },
-);
-
 /** Use this for translations */
 export const languageSelector: OutputSelector<State, void, string> = createSelector(
-  langAndRegionSelector,
+  languageAndUseSystemLangSelector,
   o => o.language,
+);
+
+export const useSystemLanguageSelector: OutputSelector<State, void, boolean> = createSelector(
+  languageAndUseSystemLangSelector,
+  o => o.useSystemLanguage,
 );
 
 const isValidRegionLocale = (locale: string) => {
@@ -416,7 +418,7 @@ const localeFallbackToLanguageSelector = (state: State): { locale: string } => {
 /** Use this for number and dates formatting. */
 export const localeSelector: OutputSelector<State, void, string> = createSelector(
   localeFallbackToLanguageSelector,
-  o => o.locale,
+  o => o.locale || getInitialLocale(),
 );
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts;
