@@ -2518,10 +2518,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.26.0":
+"@ledgerhq/live-common@git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#test/add-manifests-directly-to-app-for-testing":
   version "21.26.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.26.0.tgz#15f80f7f47f158dbae7d7a809cdadbebcb1a2d93"
-  integrity sha512-P/Np4DDT4lXzMNP4x6LyeIMj/DJvA3L4dGscbj5n5HLQRGxBVRKWgXalEZ5ARIj4NMx/P6fo4qYU2yF1izsEgA==
+  resolved "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#399a13639dc602c80300f2efc2f58299578facf0"
   dependencies:
     "@crypto-com/chain-jslib" "0.0.19"
     "@ledgerhq/compressjs" "1.3.2"
