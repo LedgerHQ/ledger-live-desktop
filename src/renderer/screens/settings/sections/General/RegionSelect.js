@@ -38,7 +38,7 @@ const RegionSelect = () => {
     [dispatch],
   );
 
-  const currentRegionOption = useMemo(() => getRegionOption(locale), [locale]);
+  const currentRegionOption = useMemo(() => (regionsOptions.find(o => o.value === locale) || getRegionOption(locale)), [locale]);
 
   return (
     <>
