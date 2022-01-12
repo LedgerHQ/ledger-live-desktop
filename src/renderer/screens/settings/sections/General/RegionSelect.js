@@ -28,9 +28,8 @@ const RegionSelect = () => {
   const locale = useSelector(localeSelector);
 
   const handleChangeRegion = useCallback(
-    ({ locale, region }: { locale: string, region: string }) => {
+    ({ locale }: { locale: string }) => {
       moment.locale(locale);
-      dispatch(setRegion(region));
       dispatch(setLocale(locale));
     },
     [dispatch],
