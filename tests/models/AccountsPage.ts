@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator } from "@playwright/test";
 
 export class AccountsPage {
   readonly page: Page;
@@ -6,13 +6,13 @@ export class AccountsPage {
   readonly accountsPageTitle: Locator;
   readonly accountsList: Locator;
   readonly accountsSearchInput: Locator;
-  
+
   constructor(page: Page) {
     this.page = page;
-    this.addAccountButton = page.locator('data-test-id=accounts-add-account-button');
-    this.accountsPageTitle = page.locator('data-test-id=accounts-title');
-    this.accountsList = page.locator('data-test-id=accounts-list');
-    this.accountsSearchInput = page.locator('data-test-id=accounts-search-input');
+    this.addAccountButton = page.locator("data-test-id=accounts-add-account-button");
+    this.accountsPageTitle = page.locator("data-test-id=accounts-title");
+    this.accountsList = page.locator("data-test-id=accounts-list");
+    this.accountsSearchInput = page.locator("data-test-id=accounts-search-input");
   }
 
   async openAddAccountModal() {
@@ -23,8 +23,7 @@ export class AccountsPage {
     await this.accountsPageTitle.textContent();
   }
 
-  async openAccount() {
-    await this.accountsSearchInput.fill("Ethereum");
-    await this.page.click(':has-text("Ethereum 2")');
- }
+  async openAccount(account: string) {
+    await this.accountsList.locator(`text="${account}"`).click();
+  }
 }

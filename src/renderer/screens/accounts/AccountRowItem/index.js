@@ -249,6 +249,7 @@ class AccountRowItem extends PureComponent<Props, State> {
     return (
       <div
         className={`accounts-account-row-item ${tokens && tokens.length > 0 ? "has-tokens" : ""}`}
+        data-test-id="account-row"
         style={{ position: "relative" }}
         key={key}
         hidden={hidden}
