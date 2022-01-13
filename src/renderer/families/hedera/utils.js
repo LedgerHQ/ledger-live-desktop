@@ -1,0 +1,1 @@
+export const supportArticleLink = "https://launchbadge.com/blog/using-a-ledger-nano-to-create-your-hedera-account";
