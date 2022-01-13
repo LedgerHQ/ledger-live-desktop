@@ -16,6 +16,7 @@ import uniq from "lodash/uniq";
 import { urls } from "~/config/urls";
 import logger from "~/logger";
 import { prepareCurrency } from "~/renderer/bridge/cache";
+import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import RetryButton from "~/renderer/components/RetryButton";
 import Box from "~/renderer/components/Box";
@@ -26,10 +27,12 @@ import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import Switch from "~/renderer/components/Switch";
+import LinkWithExternalIcon from "../../../components/LinkWithExternalIcon";
 
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
+import { supportArticleLink } from "~/renderer/families/hedera/utils.js";
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
@@ -277,24 +280,46 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
         : [preferredNewAccountScheme],
     });
 
-    const emptyTexts = {
-      importable: t("addAccounts.noAccountToImport", { currencyName }),
-
-      creatable: alreadyEmptyAccount ? (
+    let creatable;
+    if (alreadyEmptyAccount) {
+      creatable = (
         <Trans i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount" parent="div">
           {" "}
           <Text ff="Inter|SemiBold" color="palette.text.shade100">
             {alreadyEmptyAccount.name}
           </Text>{" "}
         </Trans>
-      ) : (
-        <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
-          {" "}
-          <Text ff="Inter|SemiBold" color="palette.text.shade100">
-            {currencyName}
-          </Text>{" "}
-        </Trans>
-      ),
+      );
+    } else {
+      // Hedera's "no associated accounts" text
+      const isHedera = mainCurrency.family === t("Hedera.name").toString()
+      if (isHedera) {
+        creatable = (
+          <div>
+            <Trans i18nKey="Hedera.createHederaAccountHelp.text"></Trans>{" "}
+            <LinkWithExternalIcon
+              fontSize={3}
+              onClick={() => openURL(supportArticleLink)}
+              label={t("Hedera.createHederaAccountHelp.link")}
+            />
+          </div>
+        );
+      } else { // default "no accounts to add" text
+        creatable = (
+          <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
+            {" "}
+            <Text ff="Inter|SemiBold" color="palette.text.shade100">
+              {currencyName}
+            </Text>{" "}
+          </Trans>
+        );
+      }
+
+    }
+
+    const emptyTexts = {
+      importable: t("addAccounts.noAccountToImport", { currencyName }),
+      creatable
     };
 
     return (
