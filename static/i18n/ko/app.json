@@ -191,7 +191,7 @@
     "feesAmount": "수수료 비용"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "카드",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
@@ -200,7 +200,7 @@
     "swap": "스왑",
     "lend": "대출",
     "catalog": "탐색",
-    "market": "Market"
+    "market": "시장"
   },
   "stars": {
     "placeholder": "계정을 즐겨찾기 하여 여기서 바로 확인하세요.",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "공급자",
           "rate": "요율",
-          "fees": "network fees",
+          "fees": "네트워크 수수료",
           "target": "보내는 계정"
         },
         "tooltip": {
@@ -704,7 +704,7 @@
     "frozenAssets": "동결 자산",
     "bandwidth": "대역폭",
     "energy": "에너지",
-    "stake": "Stake",
+    "stake": "스테이크",
     "delegatedAssets": "위임된 자산",
     "undelegating": "위임 해제",
     "availableBalanceTooltip": "가처분 금액입니다.",
@@ -719,19 +719,19 @@
     "reset": "플로우 리셋",
     "verifyAddress": "장치에 표시된 주소와 정확히 일치하는지 확인하세요",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "암호화폐 매수 및 매도",
+      "title": "암호화폐를 구매할 공급자를 선택하세요",
+      "buyFrom": "어디서나 구매 가능",
+      "cryptoSupported": "암호화폐 지원됨",
+      "payWith": "카드 또는 SEPA로 지불",
       "tab": "구매",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "{{provider}}로 암호화폐 구매",
+        "title": "<0>{{provider}}</0>로 암호화폐 구매",
+        "selectCrypto": "암호화폐 선택",
+        "selectAccount": "계정 선택",
+        "continue": "계속",
+        "addAccount": "계정 추가"
       }
     },
     "sell": {
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "공유된 주소가 장치의 주소와 정확히 일치하는지 확인하세요.",
     "messageIfSkipped": "귀하의 {{name}} 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요.",
     "showQrCode": "QR 코드 보기",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "발송자가 탭루트를 지원하는지 확인해 주세요"
   },
   "emptyState": {
     "dashboard": {
@@ -1180,72 +1180,72 @@
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
-    "rangeLabel": "Time",
-    "goBack": "Go back",
+    "title": "시장",
+    "currency": "통화",
+    "rangeLabel": "시간",
+    "goBack": "돌아가기",
     "filters": {
-      "title": "Filters",
-      "show": "Show",
-      "all": "All",
-      "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
-      "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "title": "필터",
+      "show": "보기",
+      "all": "전체",
+      "isLedgerCompatible": "Ledger Live 호환",
+      "isFavorite": "별표 표시된 자산",
+      "applyFilters": "필터 적용",
+      "clearAll": "모두 지우기"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "암호화폐",
+      "price": "가격",
+      "change": "변경",
+      "marketCap": "시가총액",
+      "last7d": "지난 7 일"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
-      "marketCapRank": "Market cap rank",
-      "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
-      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
-      "supportedCoinsAndTokens": "Supported coins & Tokens"
+      "priceStatistics": "가격 통계",
+      "tradingVolume": "거래량",
+      "24hLowHight": "24시간 최저 / 24시간 최고",
+      "7dLowHigh": "7일 최저 / 7일 최고",
+      "allTimeHigh": "사상 최고치",
+      "allTimeLow": "사상 최저치",
+      "marketCapRank": "시가총액 순위",
+      "marketCapDominance": "시가총액 도미넌스",
+      "supply": "공급",
+      "circulatingSupply": "유통량",
+      "totalSupply": "총 공급량",
+      "maxSupply": "최대 공급량",
+      "assetNotSupportedOnLedgerLive": "이 자산은 Ledger Live에서 지원되지 않습니다.",
+      "supportedCoinsAndTokens": "지원되는 코인 및 토큰"
     },
     "range": {
-      "1H_label": "1H",
-      "1D_label": "1D",
-      "1W_label": "1W",
-      "1M_label": "1M",
-      "1Y_label": "1Y",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7d",
-      "30d": "30d",
-      "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
+      "1H_label": "1시간",
+      "1D_label": "1일",
+      "1W_label": "1주",
+      "1M_label": "1달",
+      "1Y_label": "1년",
+      "1h": "1시간",
+      "24h": "24시간",
+      "7d": "7일",
+      "30d": "30일",
+      "1y": "1년",
+      "1H_selectorLabel": "지난 1시간",
+      "1D_selectorLabel": "지난 24시간",
+      "1W_selectorLabel": "지난 주",
+      "1M_selectorLabel": "지난 달",
+      "1Y_selectorLabel": "지난 해"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "연결 오류",
+      "ledgerUnableToRetrieveData": "Ledger Live는 데이터를 검색할 수 없습니다.",
+      "checkInternetAndReload": "인터넷 연결을 확인하고 이 페이지를 새로고침하세요.",
+      "reload": "새로고침",
+      "noCryptosFound": "발견된 코인이 없습니다",
+      "noSearchResultsFor": "죄송합니다. <0>{{search}}</0>에 대한 코인을 찾지 못했습니다. 다른 키워드로 검색을 다시 시도해 주세요.",
+      "noSearchResults": "죄송합니다. 검색 결과를 찾지 못했습니다.",
+      "retrySearchKeyword": "다른 키워드로 검색을 다시 시도해 주세요.",
+      "retrySearchParams": "다른 매개변수로 검색을 다시 시도해 주세요.",
+      "trackFavAssets": "귀하의 즐겨찾기 추적",
+      "clickOnStarIcon": "자산 옆에 있는 별 아이콘을 클릭하면 자산이 자동으로 즐겨찾기에 추가됩니다.",
+      "browseAssets": "자산 찾기"
     }
   },
   "NFT": {
@@ -2660,7 +2660,7 @@
       "counterValue": "선호 통화",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
       "region": "지역",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "날짜, 시간 및 통화 형식을 업데이트하려면 지역을 선택해 주세요.",
       "stock": "지역 마켓 지표",
       "stockDesc": "서부를 선택하면 파란색, 동부를 선택하면 빨간색으로 시장 증가율이 표시됩니다.",
       "carouselVisibility": "슬라이드 활성화",
@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "알고랜드 및 테조스에 실험적인 JS 구현을 사용합니다."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -3561,8 +3561,8 @@
       "memoWarningText": "메모 기능을 사용할 때는 해당 정보를 수령인과 신중하게 확인하세요"
     },
     "solana": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memo": "메모",
+      "memoPlaceholder": "선택사항"
     }
   },
   "errors": {
@@ -3929,7 +3929,7 @@
       "title": "유효한 {{currencyName}} 주소가 아닙니다"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "귀하의 계정은 이미 이 검증인에게 위임되었습니다"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "수신자의 주소가 발신자의 주소와 동일합니다"
@@ -3943,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "이 장치에서 사용할 수 없는 작업",
+      "description": "NFT 보내기 기능은 Nano X에서만 사용할 수 있습니다. Nano S로 NFT를 보내는 방법을 알아보려면 고객 지원 플랫폼을 방문해 주세요."
     },
     "CantScanQRCode": {
       "title": "이 QR 코드를 스캔할 수 없습니다: 이 주소는 자동 확인을 지원하지 않습니다"
@@ -4145,13 +4145,13 @@
       "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "자금이 입금되지 않은 계정"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "메모가 너무 깁니다. 최대 길이는 {{maxLength}}입니다."
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "주소 끄기 ed25519 곡선"
     },
     "NotEnoughNftOwned": {
       "title": "사용 가능한 토큰 수를 초과했습니다"
