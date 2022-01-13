@@ -191,7 +191,7 @@
     "feesAmount": "Ücret Tutarı"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "Kart",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
@@ -200,7 +200,7 @@
     "swap": "Takas",
     "lend": "Borç ver",
     "catalog": "Keşfet",
-    "market": "Market"
+    "market": "Piyasa"
   },
   "stars": {
     "placeholder": "Favori hesaplarınızı yıldızlayarak burada görüntüleyebilirsiniz.",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "sağlayıcı",
           "rate": "kur",
-          "fees": "network fees",
+          "fees": "ağ ücretleri",
           "target": "hedef hesap"
         },
         "tooltip": {
@@ -704,7 +704,7 @@
     "frozenAssets": "Donmuş varlıklar",
     "bandwidth": "Bant Genişliği",
     "energy": "Enerji",
-    "stake": "Stake",
+    "stake": "Stake et",
     "delegatedAssets": "Yetkisi devredilen varlıklar",
     "undelegating": "Yetki iptali",
     "availableBalanceTooltip": "Bu tutar, kullanabileceğiniz fondur.",
@@ -719,18 +719,18 @@
     "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "Kripto alın ve satın",
+      "title": "Kripto satın almak için bir sağlayıcı seçin",
+      "buyFrom": "İstediğiniz yerden satın alın",
+      "cryptoSupported": "desteklenen kriptolar",
+      "payWith": "Kart veya SEPA ile ödeme yapın",
       "tab": "Satın al",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
+        "header": "{{provider}} ile kripto satın alın",
+        "title": "<0>{{provider}}</0> aracılığıyla kripto satın alın",
+        "selectCrypto": "Bir kripto varlık seçin",
+        "selectAccount": "Bir hesap seçin",
+        "continue": "Devam",
         "addAccount": "Hesap ekle"
       }
     },
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "Lütfen paylaşılan adres ile cihazınızdaki adresin tam olarak eşleştiğini doğrulayın",
     "messageIfSkipped": "{{name}} adresiniz Ledger cihazınızda doğrulanmadı. Güvenlik için lütfen doğrulayın.",
     "showQrCode": "QR Kodunu Göster",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "Göndericinin taproot desteklediğinden emin olun"
   },
   "emptyState": {
     "dashboard": {
@@ -1219,33 +1219,33 @@
     "range": {
       "1H_label": "1S",
       "1D_label": "1G",
-      "1W_label": "1W",
-      "1M_label": "1M",
+      "1W_label": "1H",
+      "1M_label": "1A",
       "1Y_label": "1Y",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7d",
-      "30d": "30d",
+      "1h": "1s",
+      "24h": "24s",
+      "7d": "7g",
+      "30d": "30g",
       "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
+      "1H_selectorLabel": "Son 1 saat",
+      "1D_selectorLabel": "Son 24 Saat",
+      "1W_selectorLabel": "geçen hafta",
+      "1M_selectorLabel": "Geçen ay",
+      "1Y_selectorLabel": "Geçen yıl"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "Bağlantı Hatası",
+      "ledgerUnableToRetrieveData": "Ledger Live verilere ulaşamadı.",
+      "checkInternetAndReload": "Lütfen internet bağlantınızı kontrol edin ve daha sonra tekrar deneyin.",
+      "reload": "Yenile",
+      "noCryptosFound": "Coin bulunamadı",
+      "noSearchResultsFor": "Üzgünüz, <0>{{search}}</0> için bir coin bulamadık. Lütfen başka bir anahtar kelimeyle yeniden aramayı deneyin.",
+      "noSearchResults": "Üzgünüz, herhangi bir arama sonucu bulamadık.",
+      "retrySearchKeyword": "Lütfen başka bir anahtar kelimeyle yeniden aramayı deneyin.",
+      "retrySearchParams": "Lütfen başka parametrelerle yeniden aramayı deneyin.",
+      "trackFavAssets": "Favorilerinizi takip edin",
+      "clickOnStarIcon": "Bir varlığın yanında bulunan yıldız sembolüne tıklayarak onu otomatik olarak favorilerinize ekleyebilirsiniz.",
+      "browseAssets": "Varlıklara göz atın"
     }
   },
   "NFT": {
@@ -2660,7 +2660,7 @@
       "counterValue": "Tercih edilen para birimi",
       "counterValueDesc": "Bakiye ve işlemlerinizin yanında gösterilecek para birimini seçin.",
       "region": "Bölge",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "Tarih, saat ve para birimi formatlarını güncellemek için bölgenizi seçin.",
       "stock": "Bölgesel piyasa göstergesi",
       "stockDesc": "Piyasalardaki artışları maviyle göstermek için Batı, kırmızıyla göstermek için Doğu'yu seçin.",
       "carouselVisibility": "Afiş görünürlüğü",
@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Algorand ve Tezos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -3562,7 +3562,7 @@
     },
     "solana": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memoPlaceholder": "İsteğe bağlı"
     }
   },
   "errors": {
@@ -3929,7 +3929,7 @@
       "title": "Bu geçerli bir {{currencyName}} adresi değil"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Hesabınızla bu doğrulayıcıya zaten yetki devredilmiş"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Alıcı adresi, gönderen adresiyle aynı"
@@ -3943,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "İşlem bu cihazda kullanılamıyor",
+      "description": "NFT Gönder özelliği yalnızca Nano X için mevcuttur. Nano S ile nasıl NFT gönderebileceğinizi öğrenmek için lütfen müşteri destek platformumuzu ziyaret edin."
     },
     "CantScanQRCode": {
       "title": "Bu QR kodu taranamadı; otomatik doğrulama bu adres tarafından desteklenmiyor"
@@ -4145,13 +4145,13 @@
       "title": "Mainnet etkinleşmeden önce taproot adresine gönderim yapmak güvenli değildir"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "Hesap fonlanmadı"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memo çok uzun. Maksimum uzunluk {{maxLength}}"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "Adres ed25519 eğrisi dışında"
     },
     "NotEnoughNftOwned": {
       "title": "Mevcut token miktarını aştınız"

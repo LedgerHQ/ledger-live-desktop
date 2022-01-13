@@ -191,7 +191,7 @@
     "feesAmount": "手数料"
   },
   "sidebar": {
-    "card": "Card",
+    "card": "カード",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -200,7 +200,7 @@
     "swap": "スワップ",
     "lend": "レンディング",
     "catalog": "Discover",
-    "market": "Market"
+    "market": "マーケット"
   },
   "stars": {
     "placeholder": "お気に入りに登録したアカウントは、ここに表示されます。",
@@ -234,7 +234,7 @@
         "label": {
           "provider": "プロバイダー",
           "rate": "レート",
-          "fees": "network fees",
+          "fees": "ネットワーク手数料",
           "target": "ターゲットアカウント"
         },
         "tooltip": {
@@ -704,14 +704,14 @@
     "frozenAssets": "凍結済み資産",
     "bandwidth": "Bandwidth（バンド幅）",
     "energy": "Energy（エネルギー）",
-    "stake": "Stake",
+    "stake": "ステーキング",
     "delegatedAssets": "デリゲートされた資産",
     "undelegating": "デリゲート解除中",
     "availableBalanceTooltip": "これは利用可能額です。",
-    "frozenAssetsTooltip": "凍結された資産はTronの投票に使われます。これがあなたの合計票数です。",
+    "frozenAssetsTooltip": "凍結された資産はTronの投票に使われます。こちらが合計票数です。",
     "bandwidthTooltip": "資産を凍結して、Bandwidth（バンド幅）を獲得",
     "energyTooltip": "資産を凍結して、Energy（エネルギー）を獲得",
-    "delegatedAssetsTooltip": "デリゲートされた資産は、Cosmosの投票に使われます。これがあなたの合計票数です。",
+    "delegatedAssetsTooltip": "デリゲートされた資産は、Cosmosの投票に使われます。こちらが合計票数です。",
     "undelegatingTooltip": "デリゲートを解除した資産は、21日間のロック期間後に再び利用可能になります。"
   },
   "exchange": {
@@ -719,19 +719,19 @@
     "reset": "フローをリセット",
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
-      "header": "Buy and sell crypto",
-      "title": "Choose a provider to buy crypto",
-      "buyFrom": "Buy from anywhere",
-      "cryptoSupported": "crypto supported",
-      "payWith": "Pay with card or SEPA",
+      "header": "暗号資産の購入と売却",
+      "title": "暗号資産を購入するプロバイダーを選択",
+      "buyFrom": "好きな場所から購入",
+      "cryptoSupported": "暗号資産対応",
+      "payWith": "カード、またはSEPAで支払う",
       "tab": "購入",
       "coinify": {
-        "header": "Buy crypto with {{provider}}",
-        "title": "Buy crypto via <0>{{provider}}</0>",
-        "selectCrypto": "Choose a crypto asset",
-        "selectAccount": "Choose an account",
-        "continue": "Continue",
-        "addAccount": "Add account"
+        "header": "{{provider}}で暗号資産を購入する",
+        "title": "<0>{{provider}}</0>から暗号資産を購入する",
+        "selectCrypto": "暗号資産を選ぶ",
+        "selectAccount": "アカウントを選ぶ",
+        "continue": "続行",
+        "addAccount": "アカウントを追加"
       }
     },
     "sell": {
@@ -1060,7 +1060,7 @@
     },
     "ledgerAcademy": {
       "title": "Ledger Academy",
-      "description": "ブロックチェーンやセキュリティ、暗号通貨とLedgerデバイスについて知ってほしい全てのこと。",
+      "description": "ブロックチェーンやセキュリティ、暗号通貨とLedgerデバイスの全てを学ぶ。",
       "cta": "学習をスタート"
     },
     "stakeCosmos": {
@@ -1155,7 +1155,7 @@
     "messageIfUnverified": "共有アドレスが、お使いのデバイスのアドレスと完全に一致していることを確認してください。",
     "messageIfSkipped": "{{name}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。",
     "showQrCode": "QRコードを表示",
-    "taprootWarning": "Make sure the sender supports taproot"
+    "taprootWarning": "送付元がtaprootに対応しているか確認してください"
   },
   "emptyState": {
     "dashboard": {
@@ -1180,72 +1180,72 @@
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "market": {
-    "title": "Market",
-    "currency": "Currency",
-    "rangeLabel": "Time",
-    "goBack": "Go back",
+    "title": "マーケット",
+    "currency": "通貨",
+    "rangeLabel": "時間",
+    "goBack": "戻る",
     "filters": {
-      "title": "Filters",
-      "show": "Show",
-      "all": "All",
+      "title": "フィルター",
+      "show": "表示",
+      "all": "すべて",
       "isLedgerCompatible": "Ledger Live Compatible",
-      "isFavorite": "Starred Assets",
-      "applyFilters": "Apply filters",
-      "clearAll": "Clear all"
+      "isFavorite": "お気に入り登録済み資産",
+      "applyFilters": "フィルターを適用",
+      "clearAll": "全消去"
     },
     "marketList": {
-      "crypto": "Crypto",
-      "price": "Price",
-      "change": "Change",
-      "marketCap": "Market cap",
-      "last7d": "Last 7 days"
+      "crypto": "暗号資産",
+      "price": "価格",
+      "change": "変更",
+      "marketCap": "マーケットキャップ",
+      "last7d": "過去7日間"
     },
     "detailsPage": {
-      "priceStatistics": "Price stats",
-      "tradingVolume": "Trading volume",
-      "24hLowHight": "24h Low / 24h High",
-      "7dLowHigh": "7d Low / 7d High",
-      "allTimeHigh": "All time high",
-      "allTimeLow": "All time low",
-      "marketCapRank": "Market cap rank",
-      "marketCapDominance": "Market cap dominance",
-      "supply": "Supply",
-      "circulatingSupply": "Circulating supply",
-      "totalSupply": "Total supply",
-      "maxSupply": "Max supply",
-      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
-      "supportedCoinsAndTokens": "Supported coins & Tokens"
+      "priceStatistics": "価格統計",
+      "tradingVolume": "トレーディングボリューム",
+      "24hLowHight": "当日安値 / 当日高値",
+      "7dLowHigh": "週安値 / 週高値",
+      "allTimeHigh": "最高値",
+      "allTimeLow": "最安値",
+      "marketCapRank": "マーケットキャップランク",
+      "marketCapDominance": "マーケットキャップドミナンス",
+      "supply": "供給",
+      "circulatingSupply": "現在の供給量",
+      "totalSupply": "総供給量",
+      "maxSupply": "最大供給量",
+      "assetNotSupportedOnLedgerLive": "この資産はLedger Live未対応です。",
+      "supportedCoinsAndTokens": "対応済みのコインとトークン"
     },
     "range": {
-      "1H_label": "1H",
-      "1D_label": "1D",
-      "1W_label": "1W",
-      "1M_label": "1M",
-      "1Y_label": "1Y",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7d",
-      "30d": "30d",
-      "1y": "1y",
-      "1H_selectorLabel": "Last 1 hour",
-      "1D_selectorLabel": "Last 24 hours",
-      "1W_selectorLabel": "last week",
-      "1M_selectorLabel": "Last month",
-      "1Y_selectorLabel": "Last year"
+      "1H_label": "時",
+      "1D_label": "日",
+      "1W_label": "週",
+      "1M_label": "月",
+      "1Y_label": "年",
+      "1h": "時",
+      "24h": "24時間",
+      "7d": "7日間",
+      "30d": "30日間",
+      "1y": "1年",
+      "1H_selectorLabel": "過去1時間",
+      "1D_selectorLabel": "過去24時間",
+      "1W_selectorLabel": "先週",
+      "1M_selectorLabel": "先月",
+      "1Y_selectorLabel": "昨年"
     },
     "warnings": {
-      "connectionError": "Connection Error",
-      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
-      "checkInternetAndReload": "Please check your internet connection and reload this page.",
-      "reload": "Reload",
-      "noCryptosFound": "No coins found",
-      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
-      "noSearchResults": "Sorry, we did not find any search results.",
-      "retrySearchKeyword": "Please retry the search with another keyword.",
-      "retrySearchParams": "Please retry the search with another parameters.",
-      "trackFavAssets": "Track your favourite",
-      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
-      "browseAssets": "Browse assets"
+      "connectionError": "接続エラー",
+      "ledgerUnableToRetrieveData": "Ledger Liveでデータが取得できません。",
+      "checkInternetAndReload": "インターネットの接続を確認して、再度ページを読み込んでください。",
+      "reload": "再読み込み",
+      "noCryptosFound": "コインが見つかりません",
+      "noSearchResultsFor": "大変申し訳ありませんが、<0>{{search}}</0>に該当するコインが見つかりませんでした。他のキーワードをお試しください。",
+      "noSearchResults": "大変申し訳ありませんが、検索結果が見つかりませんでした。",
+      "retrySearchKeyword": "他のキーワードで再検索してください。",
+      "retrySearchParams": "他のパラメーターで再検索してください。",
+      "trackFavAssets": "お気に入りを追跡する",
+      "clickOnStarIcon": "資産の横に表示される星のアイコンをクリックすると、お気に入りに追加されます。",
+      "browseAssets": "資産を参照する"
     }
   },
   "NFT": {
@@ -1257,7 +1257,7 @@
       "attributes": {
         "properties": "プロパティ",
         "description": "説明",
-        "tokenAddress": "Token Address",
+        "tokenAddress": "トークンアドレス",
         "tokenId": "トークンID",
         "quantity": "数量"
       }
@@ -1368,8 +1368,8 @@
     "noAccountToImport": "追加する既存の {{currencyName}} アカウントがありません。",
     "success": "アカウントが正常に追加されました。",
     "success_plural": "アカウントが正常に追加されました。",
-    "successDescription": "他のアカウントを追加するか、ポートフォリオに戻る",
-    "successDescription_plural": "他のアカウントを追加するか、ポートフォリオに戻る",
+    "successDescription": "他のアカウントを追加、またはポートフォリオに戻る",
+    "successDescription_plural": "他のアカウントを追加、またはポートフォリオに戻る",
     "createNewAccount": {
       "noOperationOnLastAccount": "<1><0>{{accountName}}</0> </1> アカウントで資産を受け取る前に、新しいアカウントを追加することはできません。",
       "noAccountToCreate": "作成する <1><0>{{currencyName}}</0></1> アカウントが見つかりませんでした。",
@@ -1433,7 +1433,7 @@
       "name": "トークン名",
       "contract": "トークンコントラクト",
       "id": "トークン（NFT）ID",
-      "quantity": "Quantity"
+      "quantity": "数量"
     },
     "extra": {
       "frozenAmount": "凍結額",
@@ -2660,7 +2660,7 @@
       "counterValue": "表示通貨",
       "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択する。",
       "region": "地域",
-      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
+      "regionDesc": "地域を選択して日付や時間、通貨をアップデートする。",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "carouselVisibility": "カルーセルの表示",
@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Algorand and Tezosの試験的JS実装を利用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -3562,7 +3562,7 @@
     },
     "solana": {
       "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memoPlaceholder": "任意"
     }
   },
   "errors": {
@@ -3929,7 +3929,7 @@
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "アカウントは既にバリデーターへデリゲート済みです"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "送付先アドレスが送付元アドレスと同じです。"
@@ -3943,8 +3943,8 @@
       "description": null
     },
     "EthAppNftNotSupported": {
-      "title": "Operation not available for this device",
-      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
+      "title": "お使いのデバイスではこの操作をご利用いただけません",
+      "description": "NFTの送付は、Nano Xでのみご利用いただけます。カスタマーサポートページから、Nano SでNFTを送付する方法をご確認ください。"
     },
     "CantScanQRCode": {
       "title": "このQRコードをスキャンできませんでした：このアドレスでは自動認証がサポートされていません。"
@@ -4145,13 +4145,13 @@
       "title": "メインネットのアクティベート前に、Taprootアドレスへの送付は安全ではありません。"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "アカウントに資金がありません"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "Memoが長すぎます。最長{{maxLength}}以内で入力してください。"
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "アドレスオフed25519 curve"
     },
     "NotEnoughNftOwned": {
       "title": "利用可能なトークン数を超えています。"
