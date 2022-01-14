@@ -142,10 +142,19 @@ const TokensList = ({ account, collectionId }: Props) => {
   return (
     <>
       <Card horizontal justifyContent="flex-end" p={3} mb={3}>
-        <ToggleButton mr={1} active={nftsViewMode === "list"} onClick={setListMode}>
+        <ToggleButton
+          mr={1}
+          active={nftsViewMode === "list"}
+          onClick={setListMode}
+          data-test-id="listview-button"
+        >
           <ListIcon />
         </ToggleButton>
-        <ToggleButton active={nftsViewMode === "grid"} onClick={setGridMode}>
+        <ToggleButton
+          active={nftsViewMode === "grid"}
+          onClick={setGridMode}
+          data-test-id="gridview-button"
+        >
           <GridIcon />
         </ToggleButton>
       </Card>

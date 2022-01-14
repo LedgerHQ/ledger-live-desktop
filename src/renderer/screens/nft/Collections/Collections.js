@@ -62,7 +62,7 @@ const Collections = ({ account }: Props) => {
               <Box>{t("NFT.collections.receiveCTA")}</Box>
             </Box>
           </Button>
-          <Button primary onClick={onOpenGallery}>
+          <Button primary onClick={onOpenGallery} data-test-id="see-gallery-button">
             {t("NFT.collections.galleryCTA")}
           </Button>
         </TableHeader>
