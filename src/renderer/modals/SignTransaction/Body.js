@@ -169,8 +169,6 @@ const Body = ({
     return { account, parentAccount, transaction };
   });
 
-  console.log({ account, parentAccount, transaction });
-
   const [transactionError, setTransactionError] = useState(null);
 
   const handleCloseModal = useCallback(() => {

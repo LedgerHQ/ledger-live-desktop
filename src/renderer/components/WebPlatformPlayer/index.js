@@ -96,7 +96,6 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
   const targetRef: { current: null | WebviewTag } = useRef(null);
   const dispatch = useDispatch();
   const accounts = flattenAccounts(useSelector(accountsSelector));
-  console.log({ accounts });
   const currencies = useMemo(() => {
     const allTokens = listTokens().filter(
       token => token.tokenType === "erc20" || token.tokenType === "bep20",
@@ -275,8 +274,6 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
       const parentAccount =
         account.type === "TokenAccount" ? accounts.find(a => a.id === account.parentId) : undefined;
-
-      console.log({ parentAccount });
 
       if (
         (account.type === "TokenAccount"
