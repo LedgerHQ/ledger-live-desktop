@@ -24,7 +24,6 @@ import StepConnectDevice from "./steps/StepConnectDevice";
 import StepSummary, { StepSummaryFooter } from "./steps/StepSummary";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import type { St, StepId } from "./types";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge/index";
 import logger from "~/logger/logger";
 
@@ -153,7 +152,7 @@ const Body = ({
     bridgePending,
   } = useBridgeTransaction(() => {
     const parentAccount = params && params.parentAccount;
-    const account = getMainAccount((params && params.account) || accounts[0], parentAccount);
+    const account = params && params.account;
 
     const bridge = getAccountBridge(account, parentAccount);
     const tx = bridge.createTransaction(account);
@@ -161,6 +160,7 @@ const Body = ({
     const { recipient, ...txData } = transactionData;
     const tx2 = bridge.updateTransaction(tx, {
       recipient,
+      subAccountId: account.type === "TokenAccount" ? account.id : undefined,
     });
     const transaction = bridge.updateTransaction(tx2, {
       ...txData,
@@ -168,6 +168,8 @@ const Body = ({
 
     return { account, parentAccount, transaction };
   });
+
+  console.log({ account, parentAccount, transaction });
 
   const [transactionError, setTransactionError] = useState(null);
 

@@ -54,7 +54,7 @@
     "@ledgerhq/hw-transport-http": "6.20.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.20.0",
     "@ledgerhq/ledger-core": "6.14.5",
-    "@ledgerhq/live-common": "^21.24.0",
+    "@ledgerhq/live-common": "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#LL-8775/add-erc20-to-platform",
     "@ledgerhq/logs": "6.10.0",
     "@polkadot/react-identicon": "0.87.6",
     "@tippyjs/react": "^4.2.6",

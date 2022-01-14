@@ -70,6 +70,7 @@ export default function StepConnectDevice({
   const tokenCurrency = account && account.type === "TokenAccount" && account.token;
 
   if (!transaction || !account) return null;
+  console.log("LAAAAAAA", { parentAccount, account, transaction, status });
 
   return (
     <DeviceAction

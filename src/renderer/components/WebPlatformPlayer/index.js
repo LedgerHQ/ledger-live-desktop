@@ -9,8 +9,8 @@ import { useTranslation } from "react-i18next";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
-import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
+import { addPendingOperation, flattenAccounts } from "@ledgerhq/live-common/lib/account";
+import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -95,8 +95,14 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
   const targetRef: { current: null | WebviewTag } = useRef(null);
   const dispatch = useDispatch();
-  const accounts = useSelector(accountsSelector);
-  const currencies = useMemo(() => listSupportedCurrencies(), []);
+  const accounts = flattenAccounts(useSelector(accountsSelector));
+  console.log({ accounts });
+  const currencies = useMemo(() => {
+    const allTokens = listTokens().filter(
+      token => token.tokenType === "erc20" || token.tokenType === "bep20",
+    );
+    return [...listSupportedCurrencies(), ...allTokens];
+  }, []);
   const { pushToast } = useToasts();
   const { t } = useTranslation();
 
@@ -123,7 +129,12 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
   }, [manifest.url, theme, inputs, manifest.params]);
 
   const listAccounts = useCallback(() => {
-    return accounts.map(account => serializePlatformAccount(accountToPlatformAccount(account)));
+    return accounts.map(account =>
+      accountToPlatformAccount(
+        account,
+        account.type === "TokenAccount" ? accounts.find(a => a.id === account.parentId) : undefined,
+      ),
+    );
   }, [accounts]);
 
   const listCurrencies = useCallback(() => {
@@ -224,7 +235,16 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
             allowAddAccount,
             onResult: account => {
               tracking.platformRequestAccountSuccess(manifest);
-              resolve(serializePlatformAccount(accountToPlatformAccount(account)));
+              resolve(
+                serializePlatformAccount(
+                  accountToPlatformAccount(
+                    account,
+                    account.type === "TokenAccount"
+                      ? accounts.find(a => a.id === account.parentId)
+                      : undefined,
+                  ),
+                ),
+              );
             },
             onCancel: error => {
               tracking.platformRequestAccountFail(manifest);
@@ -234,7 +254,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
         ),
       );
     },
-    [manifest, dispatch],
+    [manifest, dispatch, accounts],
   );
 
   const signTransaction = useCallback(
@@ -253,7 +273,16 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
       if (!account) return null;
 
-      if (account.currency.family !== platformTransaction.family) {
+      const parentAccount =
+        account.type === "TokenAccount" ? accounts.find(a => a.id === account.parentId) : undefined;
+
+      console.log({ parentAccount });
+
+      if (
+        (account.type === "TokenAccount"
+          ? parentAccount.currency.family
+          : account.currency.family) !== platformTransaction.family
+      ) {
         throw new Error("Transaction family not matching account currency family");
       }
 
@@ -271,7 +300,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
             transactionData: liveTx,
             useApp: params.useApp,
             account,
-            parentAccount: null,
+            parentAccount,
             onResult: signedOperation => {
               tracking.platformSignTransactionRequested(manifest);
               resolve(serializePlatformSignedTransaction(signedOperation));
