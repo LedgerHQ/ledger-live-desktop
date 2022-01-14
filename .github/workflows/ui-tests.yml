@@ -17,9 +17,20 @@ jobs:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
+  check-if-fork:
+    needs: [cancel-previous]
+    runs-on: ubuntu-20.04
+    outputs:
+      forked: ${{ steps.forked.outputs.forked }}
+    steps:
+      - name: check if we are on a forked repo
+        id: forked
+        run: echo "::set-output name=forked::$(${{github.event.pull_request.head.repo.full_name != github.repository}})"
+
   start-runner:
     name: "[Runner] start ec2 instance"
-    needs: cancel-previous
+    needs: check-if-fork
+    if: ${{ !needs.check-if-fork.outputs.forked }}
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
@@ -29,7 +40,7 @@ jobs:
   stop-runner:
     name: "[Runner] stop ec2 instance"
     if: ${{ always() }}
-    needs: [start-runner, ui-tests-linux]
+    needs: [start-runner, ui-tests-linux-hosted]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
@@ -104,13 +115,10 @@ jobs:
             jest.txt
       # pr/NR
 
-  ui-tests-linux:
+  ui-tests-linux-hosted:
     name: "[Linux] UI"
     needs: [start-runner, prepare-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -128,6 +136,66 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: install dependencies
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
+      - name: install operating system dependencies for playwright
+        run: npx playwright install-deps
+      - name: build electron app
+        env:
+          INSTRUMENT_BUILD: true
+        run: yarn build
+      - name: run ui tests (Linux)
+        if: always()
+        run: xvfb-run --auto-servernum -- yarn playwright
+      - name: upload diffs to imgur
+        if: always()
+        uses: ledgerhq/actions/packages/upload-images@main
+        id: imgur
+        with:
+          path: tests/artifacts/test-results
+          workspace: ${{ github.workspace }}
+          os: linux
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-linux.json
+          path: images-linux.json
+      - name: upload ci suggested screenshots
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results-linux
+          path: |
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos
+
+  ui-tests-linux-guest:
+    name: "[Linux] UI"
+    needs: [check-if-fork]
+    runs-on: ubuntu-20.04
+    if: needs.check-if-fork.outputs.forked
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@v2
+        if: always()
+        with:
+          node-version: 14.x
+          cache: yarn
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - name: install linux dependencies
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install dependencies
         env:
           JOBS: max

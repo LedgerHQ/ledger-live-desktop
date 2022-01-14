@@ -17,6 +17,16 @@ jobs:
       - name: Cancel Previous Runs
         run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
 
+  check-if-fork:
+    needs: [cancel-previous]
+    runs-on: ubuntu-20.04
+    outputs:
+      forked: ${{ steps.forked.outputs.forked }}
+    steps:
+      - name: check if we are on a forked repo
+        id: forked
+        run: echo "::set-output name=forked::$(${{github.event.pull_request.head.repo.full_name != github.repository}})"
+
   bundle-macos:
     name: "[macOS] Build"
     runs-on: macos-latest
@@ -68,7 +78,8 @@ jobs:
 
   start-runner:
     name: "[Runner] start ec2 instance"
-    needs: cancel-previous
+    needs: check-if-fork
+    if: ${{ !needs.check-if-fork.outputs.forked }}
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
@@ -78,7 +89,7 @@ jobs:
   stop-runner:
     name: "[Runner] stop ec2 instance"
     if: ${{ always() }}
-    needs: [start-runner, bundle-linux]
+    needs: [start-runner, bundle-linux-hosted]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
@@ -86,7 +97,7 @@ jobs:
     secrets:
       CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
-  bundle-linux:
+  bundle-linux-hosted:
     name: "[Linux] Build"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
@@ -113,6 +124,62 @@ jobs:
           git config user.name "Team Live"
       - name: kill dpkg
         run: sudo killall -w dpkg || echo OK
+      - name: install and switch to GCC 5.4
+        run: ./tools/g++-5.4/install.sh
+      - name: install dependencies
+        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+      - uses: ledgerhq/actions/packages/get-package-infos@main
+        id: version
+        with:
+          path: ${{ github.workspace }}
+      - name: set beta name
+        uses: ledgerhq/actions/packages/change-product-name@main
+        with:
+          path: ${{ github.workspace }}
+      - name: make local version pr
+        if: github.event_name == 'pull_request'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.event.pull_request.head.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: make local version push
+        if: github.event_name == 'push'
+        env:
+          VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
+        run: yarn version --new-version="$VERSION"
+      - name: build the app
+        run: yarn build-ci
+      - uses: ledgerhq/actions/packages/get-package-infos@main
+        id: post-version
+        with:
+          path: ${{ github.workspace }}
+      - name: upload linux app
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+          path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+
+  bundle-linux-guest:
+    name: "[Linux] Build"
+    needs: [check-if-fork]
+    runs-on: ubuntu-20.04
+    if: needs.check-if-fork.outputs.forked
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@main
+        if: always()
+        with:
+          node-version: 14.x
+          cache: yarn
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - name: install linux dependencies
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
       - name: install dependencies
