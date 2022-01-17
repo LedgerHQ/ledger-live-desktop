@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import IconSend from "~/renderer/icons/Send";
+import ZoomInIcon from "~/renderer/icons/ZoomIn";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
@@ -83,11 +84,24 @@ const NFTAttributes = styled.div`
   flex-direction: column;
 `;
 
-// need spec from design to design the best indicator for the click
 const NFTImageContainer = styled.div`
+  position: relative;
   cursor: pointer;
+`;
+
+const NFTImageOverlay = styled.div`
+  opacity: 0;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   &:hover {
-    opacity: 0.5;
+    opacity: 1;
   }
 `;
 
@@ -157,6 +171,7 @@ export function NFTViewerDrawer({
   }, [dispatch, nftId, account]);
 
   const openNftPanAndZoom = useCallback(() => {
+    console.log("yolo");
     dispatch(openModal("MODAL_NFT_PAN_ZOOM", { nftId }));
   }, [dispatch, nftId]);
 
@@ -192,9 +207,12 @@ export function NFTViewerDrawer({
               {name}
             </Text>
           </StickyWrapper>
-          <Skeleton show={show} width={393} minHeight={393}>
+          <Skeleton show={show} width={393}>
             <NFTImageContainer onClick={openNftPanAndZoom}>
-              <Image nft={metadata} full />
+              <Image nft={metadata} full square={false} maxHeight={700} />
+              <NFTImageOverlay>
+                <ZoomInIcon color="white" />
+              </NFTImageOverlay>
             </NFTImageContainer>
           </Skeleton>
           <NFTActions>

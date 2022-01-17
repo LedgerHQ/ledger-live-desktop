@@ -20,10 +20,16 @@ const Wrapper: ThemedComponent<{
   size?: number,
   loaded: boolean,
   square: boolean,
+  maxHeight?: number,
+  maxWidth?: number,
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
 }> = styled.div`
   width: ${({ full, size }) => (full ? "100%" : `${size}px`)};
   aspect-ratio: ${({ square }) => (square ? "1 / 1" : "initial")};
+  max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
+  max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
   border-radius: 4px;
+  overflow: hidden;
   background: ${p => p.theme.colors.palette.background.default};
   background-size: contain;
 
@@ -39,7 +45,7 @@ const Wrapper: ThemedComponent<{
     display: ${p => (p.isLoading ? "none" : "block")};
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: ${p => p.objectFit ?? "cover"};
     border-radius: 4px;
     user-select: none;
     pointer-events: none;
@@ -79,6 +85,9 @@ type Props = {
   nft: NFTWithMetadata,
   full?: boolean,
   size?: number,
+  maxHeight?: number,
+  maxWidth?: number,
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
   square?: boolean,
 };
 
@@ -99,11 +108,19 @@ class Image extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { full, size, nft, square = true } = this.props;
+    const { full, size, nft, maxHeight, maxWidth, objectFit, square = true } = this.props;
     const { loaded, error } = this.state;
 
     return (
-      <Wrapper full={full} size={size} loaded={loaded || error} square={square}>
+      <Wrapper
+        full={full}
+        size={size}
+        loaded={loaded || error}
+        square={square}
+        maxHeight={maxHeight}
+        maxWidth={maxWidth}
+        objectFit={objectFit}
+      >
         <Skeleton full />
         {nft?.media && !error ? (
           <img
