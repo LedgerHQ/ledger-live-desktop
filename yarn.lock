@@ -2442,10 +2442,10 @@
     "@ledgerhq/logs" "^6.10.0"
     node-hid "2.1.1"
 
-"@ledgerhq/hw-transport-node-hid-singleton@6.20.0":
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid-singleton/-/hw-transport-node-hid-singleton-6.20.0.tgz#b6991cc5fe0cb0e40e967d1ba74f1fcf1f8292ec"
-  integrity sha512-VVua1hG+aDAueiTzWaS+PQc0z+X/WjUD9GuFtwE6jBE5FGGz5IbL5hsiVujyWg+nsmrjfp72YmoHv8wWt+sA+w==
+"@ledgerhq/hw-transport-node-hid-singleton@6.23.0":
+  version "6.23.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid-singleton/-/hw-transport-node-hid-singleton-6.23.0.tgz#383e2a4b1b980d680a2183ec33cf0493a4d2df13"
+  integrity sha512-YnqzvmPh6iNAEjGQjxbaKfNUyQwE7ReACRlkuiIxIO9yGrevV2LUSVzCC7JYTR+5A4NjSWMVoKX5qhO8EX82vA==
   dependencies:
     "@ledgerhq/devices" "^6.20.0"
     "@ledgerhq/errors" "^6.10.0"
