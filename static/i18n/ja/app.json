@@ -140,8 +140,8 @@
       "DELEGATE": "デリゲート",
       "REDELEGATE": "再デリゲート",
       "UNDELEGATE": "デリゲート解除済み",
-      "SUPPLY": "預け入れ済み",
-      "REDEEM": "引き出し済み",
+      "SUPPLY": "預け入れ",
+      "REDEEM": "引き出し",
       "APPROVE": "承認済み",
       "VOTE": "投票済み",
       "FREEZE": "凍結中",
@@ -874,7 +874,7 @@
           "contractName": "コンパウンド{{currencyName}}",
           "advanced": "アドバンス",
           "amountLabel": "承認額",
-          "amountLabelTooltip": "これにより、スマートコントラクトの利用可能額が制限されます。"
+          "amountLabelTooltip": "スマートコントラクトの利用可能額が制限されます。"
         },
         "connectDevice": {
           "title": "デバイス"
@@ -3088,7 +3088,7 @@
               "descr": "USBケーブルでデバイスをコンピュータに接続する。"
             },
             "browse": {
-              "title": "Browse",
+              "title": "デバイスの画面をチェック",
               "descr": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
             },
             "select": {
