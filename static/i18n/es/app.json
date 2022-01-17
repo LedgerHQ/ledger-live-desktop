@@ -2763,7 +2763,7 @@
     },
     "hardResetModal": {
       "title": "Restablecer Ledger Live",
-      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu frase de recuperación.",
+      "desc": "Restablece Ledger Live para borrar todos los ajustes y cuentas de tu PC. Luego podrás elegir tu contraseña y agregar de nuevo tus cuentas con tu dispositivo Ledger. Las claves privadas que dan acceso a tus activos cripto permanecen seguras en tu dispositivo Ledger y están respaldadas por tu Frase de recuperación.",
       "warning": "Restablecer Ledger Live borrará tu historial de transacciones de permuta de todas tus cuentas."
     },
     "softResetModal": {
@@ -2973,8 +2973,8 @@
         "contactSupportCTA": "Ponte en contacto con Soporte",
         "continueCTA": "Continuar",
         "title": "Por favor, verifica los contenidos de la caja",
-        "description": "Si tu {{device}} ya tiene un código PIN o una frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
-        "alert": "Usa solo la frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez"
+        "description": "Si tu {{device}} ya tiene un código PIN o una Frase de recuperación, no es seguro usarlo y deberías ponerte en contacto con el Soporte de Ledger.",
+        "alert": "Usa solo la Frase de recuperación que haya generado tu dispositivo al configurarlo por primera vez"
       }
     },
     "alerts": {
@@ -3117,7 +3117,7 @@
           },
           "quizSuccess": {
             "title": "¡Ya tienes nivel de profesional!",
-            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
+            "paragraph": "Ya puedes administrar de forma segura tus cripto. ¡Solo te queda un breve paso!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior",
@@ -3126,7 +3126,7 @@
           },
           "quizFailure": {
             "title": "Pronto tendrás nivel de profesional...",
-            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
+            "paragraph": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto tendrás completa confianza con respecto a la protección de tus cripto. ¡Solo te queda un breve paso!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior"
@@ -3158,7 +3158,7 @@
               "help": "Necesitas ayuda"
             },
             "warning": {
-              "title": "No utilices una frase de recuperación que no hayas generado tú mismo.",
+              "title": "No utilices una Frase de recuperación que no hayas generado tú mismo.",
               "desc": "Tú y solo tú debes inicializar el código PIN y la Frase de recuperación de la billetera de hardware Ledger. Si has recibido un dispositivo con una palabra semilla existente o un código PIN ya inicializado, no utilices el producto y ponte en contacto con el Soporte.",
               "supportLink": "Ponte en contacto con Soporte"
             }
@@ -3195,7 +3195,7 @@
             },
             "selectLength": {
               "title": "Selecciona la cantidad de palabras de la Frase de recuperación",
-              "descr": "Tus frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus cripto."
+              "descr": "Tus Frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus cripto."
             },
             "enterWord": {
               "title": "Ingresa la palabra 1...",
@@ -3280,7 +3280,7 @@
         },
         "validateTransactions": {
           "title": "Validar transacciones",
-          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
+          "description": "Ledger Live te permite comprar, vender, administrar, intercambiar y ganar cripto con seguridad. Deberás validar cada transacción cripto con tu Nano."
         },
         "setUpNanoWallet": {
           "title": "¡Vamos a configurar tu Nano!",
@@ -3919,7 +3919,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Algo ha salido mal",
-      "description": "Comprueba que tu billetera de hardware esté configurada con la frase de recuperación o frase de contraseña asociada a la cuenta seleccionada."
+      "description": "Comprueba que tu billetera de hardware esté configurada con la frase de recuperación o Passphrase asociada a la cuenta seleccionada."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Es necesario actualizar la aplicación.",
