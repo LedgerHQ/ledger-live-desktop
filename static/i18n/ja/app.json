@@ -541,7 +541,7 @@
       "fromAddress": "送信元アドレス",
       "fromAddress_plural": "送信元アドレス",
       "to": "交換先",
-      "toProvider": "プロバイダーのアドレス",
+      "toProvider": "プロバイダーアドレス",
       "initialAmount": "初期設定額",
       "creditedAmount": "受取額"
     }
@@ -763,7 +763,7 @@
       "accruedInterestsTooltip": "貸し出した資産に対する利息",
       "interestEarned": "獲得利息",
       "interestEarnedTooltip": "引き出し後に獲得した利息",
-      "openLoans": "資産を貸し出す",
+      "openLoans": "貸出中",
       "closedLoans": "終了済み",
       "amountRedeemed": "引き出し額",
       "date": "日付",
@@ -796,7 +796,7 @@
     "headers": {
       "active": {
         "accounts": "アカウント",
-        "amountSupplied": "資産を貸し出す",
+        "amountSupplied": "貸出中",
         "amountSuppliedTooltip": "ネットワークへの預入額",
         "accruedInterests": "利息残高",
         "accruedInterestsTooltip": "貸出額に対する利息",
@@ -2529,7 +2529,7 @@
   "delegation": {
     "title": "報酬を獲得する",
     "header": "デリゲート",
-    "validator": "Validator",
+    "validator": "バリデーター",
     "yield": "推定利回り",
     "address": "アドレス",
     "transactionID": "トランザクションID",
@@ -2581,7 +2581,7 @@
           "title": "バリデーターを選択",
           "description": "推定報酬率を比較することでバリデーターを選択できます。",
           "customValidator": "カスタムバリデーター",
-          "providedBy": "<1><0>{{name}}</0></1>が提供する利率。"
+          "providedBy": "利率は<1><0>{{name}}</0></1>により提供。"
         },
         "custom": {
           "title": "カスタムバリデーター",
