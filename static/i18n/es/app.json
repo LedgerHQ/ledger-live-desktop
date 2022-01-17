@@ -715,7 +715,7 @@
     "undelegatingTooltip": "Los activos desdelegados presentan un bloqueo temporal de 21 días antes de estar disponibles."
   },
   "exchange": {
-    "title": "Buy and sell crypto",
+    "title": "Comprar y vender cripto",
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
@@ -2947,14 +2947,14 @@
       "recoverySeed": {
         "title1": "¿Cómo funciona una Frase de recuperación?",
         "paragraph1": "Tu Frase de recuperación funciona como una llave maestra única. Tu dispositivo Ledger la utiliza para calcular las claves privadas de cada activo cripto que posees.",
-        "paragraph2": "Para restaurar el acceso a tus criptos, cualquier billetera puede calcular las mismas claves privadas a partir de tu Frase de recuperación.",
+        "paragraph2": "Para restaurar el acceso a tus cripto, cualquier billetera puede calcular las mismas claves privadas a partir de tu Frase de recuperación.",
         "link": "Más información acerca del funcionamiento de la Frase de recuperación",
         "title2": "¿Qué pasa si pierdo el acceso a mi Nano?",
         "paragraph3": "No te preocupes, sigue estos pasos:",
         "points": {
           "1": "Utiliza una billetera de hardware distinta.",
           "2": "Selecciona “Restore recovery phrase on a new device” en la aplicación Ledger.",
-          "3": "Ingresa tu Frase de recuperación en tu nuevo dispositivo para restaurar el acceso a tus criptos."
+          "3": "Ingresa tu Frase de recuperación en tu nuevo dispositivo para restaurar el acceso a tus cripto."
         }
       },
       "whereToHide": {
@@ -2992,7 +2992,7 @@
     "screens": {
       "welcome": {
         "title": "Bienvenidos a Ledger",
-        "description": "Administra de manera segura tus criptos desde tu PC.",
+        "description": "Administra de manera segura tus cripto desde tu PC.",
         "cta": "Comenzar",
         "noDevice": "¿No tienes un dispositivo? <0>Compra un Ledger Nano X</0>",
         "languageWarning": {
@@ -3040,7 +3040,7 @@
           "importYourRecoveryPhrase": {
             "title": "Restaurar a partir de Frase de recuperación",
             "paragraph1": "Restaura tu Nano a partir de tu Frase de recuperación para restaurar, reemplazar o hacer una copia de seguridad de tu billetera de hardware Ledger.",
-            "paragraph2": "Tu Nano restaurará tus claves privadas y podrás acceder a tus criptos y administrarlas.",
+            "paragraph2": "Tu Nano restaurará tus claves privadas y podrás acceder a tus cripto y administrarlas.",
             "buttons": {
               "next": "De acuerdo, ¡todo listo!",
               "prev": "Paso anterior",
@@ -3117,7 +3117,7 @@
           },
           "quizSuccess": {
             "title": "¡Ya tienes nivel de profesional!",
-            "paragraph": "Ya puedes administrar de forma segura tus criptos. ¡Solo te queda un breve paso!",
+            "paragraph": "You are ready to safely manage your crypto.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior",
@@ -3126,7 +3126,7 @@
           },
           "quizFailure": {
             "title": "Pronto tendrás nivel de profesional...",
-            "paragraph": "No te preocupes, Ledger está aquí para guiarte en este proceso. Pronto tendrás completa confianza con respecto a la protección de tus criptos. ¡Solo te queda un breve paso!",
+            "paragraph": "Don’t worry, Ledger is here to guide you through your journey. You will soon feel extra comfortable about your crypto safety.\n\nOnly one quick step left!",
             "buttons": {
               "next": "Siguiente paso",
               "prev": "Paso anterior"
@@ -3151,7 +3151,7 @@
             "title": "Ingresa tu Frase de recuperación",
             "paragraph1": "Tu Frase de recuperación es la lista secreta de palabras de la que se guardó una copia de seguridad cuando configuraste tu billetera por primera vez.",
             "paragraph2": "Ledger no conserva copias de tu Frase de recuperación.",
-            "disclaimer": "Comprendo que, si pierdo mi Frase de recuperación, no podré acceder a mis criptos en caso de que pierda acceso a mi Nano.",
+            "disclaimer": "Comprendo que, si pierdo mi Frase de recuperación, no podré acceder a mis cripto en caso de que pierda acceso a mi Nano.",
             "buttons": {
               "next": "Ingresar Frase de recuperación",
               "prev": "Paso anterior",
@@ -3182,7 +3182,7 @@
             "title": "Frase de recuperación",
             "paragraph1": "Tu Frase de recuperación es una lista secreta de 24 palabras que genera una copia de respaldo de tus claves privadas.",
             "paragraph2": "Tu Nano genera una Frase de recuperación única. Ledger no conserva copias de la misma.",
-            "disclaimer": "Comprendo que si pierdo la Frase de recuperación no podré acceder a mis criptos en caso de no tener acceso a mi Nano.",
+            "disclaimer": "Comprendo que si pierdo la Frase de recuperación, no podré acceder a mis cripto en caso de no tener acceso a mi Nano.",
             "buttons": {
               "next": "Frase de recuperación",
               "prev": "Paso anterior",
@@ -3195,7 +3195,7 @@
             },
             "selectLength": {
               "title": "Selecciona la cantidad de palabras de la Frase de recuperación",
-              "descr": "Tus frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus criptos."
+              "descr": "Tus frases de recuperación pueden tener 12, 18 o 24 palabras. Debes ingresar todas las palabras para acceder a tus cripto."
             },
             "enterWord": {
               "title": "Ingresa la palabra 1...",
@@ -3241,7 +3241,7 @@
           },
           "hideRecoveryPhrase": {
             "title": "Oculta tu Frase de recuperación",
-            "paragraph": "Tu Frase de recuperación es la única manera de recuperar tus criptos, en caso de no ser posible utilizar tu Nano. Debes conservarla en un lugar seguro.",
+            "paragraph": "Tu Frase de recuperación es la única manera de recuperar tus cripto, en caso de no ser posible utilizar tu Nano. Debes conservarla en un lugar seguro.",
             "keepItOffline": "Ingresa estas palabras únicamente en una billetera de hardware, no en PCs, ni en smartphones.",
             "neverShowToAnyone": "Nunca compartas tus 24 palabras con nadie, ni siquiera con Ledger.",
             "buttons": {
@@ -3267,7 +3267,7 @@
       "heading": "Nociones básicas",
       "screens": {
         "accessYourCoins": {
-          "title": "Accede a tus criptos",
+          "title": "Accede a tus cripto",
           "description": "Tus activos cripto se almacenan en la cadena de bloques. Necesitas una clave privada para acceder a ellos y administrarlos."
         },
         "ownYourPrivateKey": {
@@ -3280,7 +3280,7 @@
         },
         "validateTransactions": {
           "title": "Validar transacciones",
-          "description": "Ledger Live te permite comprar, vender, administrar, intercambiar y ganar criptos con seguridad. Deberás validar cada transacción cripto con tu Nano."
+          "description": "Ledger Live allows you to buy, sell, manage, exchange and earn crypto while remaining protected. You will validate every crypto transaction with your Nano."
         },
         "setUpNanoWallet": {
           "title": "¡Vamos a configurar tu Nano!",
