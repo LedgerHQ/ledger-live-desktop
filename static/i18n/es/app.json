@@ -715,7 +715,7 @@
     "undelegatingTooltip": "Los activos desdelegados presentan un bloqueo temporal de 21 días antes de estar disponibles."
   },
   "exchange": {
-    "title": "Comprar y vender criptos",
+    "title": "Buy and sell crypto",
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
