@@ -721,9 +721,9 @@
     "buy": {
       "header": "暗号資産の購入と売却",
       "title": "暗号資産を購入するプロバイダーを選択",
-      "buyFrom": "好きな場所から購入",
+      "buyFrom": "どこからでも購入可能",
       "cryptoSupported": "暗号資産対応",
-      "payWith": "カード、またはSEPAで支払う",
+      "payWith": "カード/SEPAで支払い可能",
       "tab": "購入",
       "coinify": {
         "header": "{{provider}}で暗号資産を購入する",
