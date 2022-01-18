@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getNFTById } from "~/renderer/reducers/accounts";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
+import NftPanAndZoom from "./NftPanAndZoom";
 import { ExternalViewerButton } from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
@@ -150,13 +151,7 @@ type NFTViewerDrawerProps = {
   onRequestClose: () => void,
 };
 
-export function NFTViewerDrawer({
-  account,
-  nftId,
-  isOpen,
-  onRequestClose,
-  height,
-}: NFTViewerDrawerProps) {
+export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -170,13 +165,19 @@ export function NFTViewerDrawer({
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true, nftId }));
   }, [dispatch, nftId, account]);
 
+  const [isPanAndZoomOpen, setPanAndZoomOpen] = useState(false);
+
   const openNftPanAndZoom = useCallback(() => {
-    console.log("yolo");
-    dispatch(openModal("MODAL_NFT_PAN_ZOOM", { nftId }));
-  }, [dispatch, nftId]);
+    setPanAndZoomOpen(true);
+  }, [setPanAndZoomOpen]);
+  
+  const closeNftPanAndZoom = useCallback(() => {
+    setPanAndZoomOpen(false);
+  }, [setPanAndZoomOpen]);
 
   return (
     <Box height={height}>
+      {isPanAndZoomOpen && <NftPanAndZoom nft={metadata} onClose={closeNftPanAndZoom} />}
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
           <StickyWrapper top={0} pb={3} pt="24px">

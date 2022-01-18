@@ -30,7 +30,6 @@ const Wrapper: ThemedComponent<{
   max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
   border-radius: 4px;
   overflow: hidden;
-  background: ${p => p.theme.colors.palette.background.default};
   background-size: contain;
 
   display: flex;
