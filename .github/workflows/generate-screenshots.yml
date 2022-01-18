@@ -4,19 +4,9 @@ on:
     types: [created]
 
 jobs:
-  is-org-member:
-    runs-on: ubuntu-latest
-    name: "[Check] Is user from LedgerHQ"
-    steps:
-      - uses: ledgerhq/actions/packages/is-org-member@main
-        with:
-          user: ${{ github.actor }}
-          organisation: ledgerhq
-
   add-reaction:
     name: "[Reaction] 🚀"
-    needs: [is-org-member]
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == 'success'
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR
