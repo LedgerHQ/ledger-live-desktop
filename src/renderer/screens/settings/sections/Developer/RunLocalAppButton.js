@@ -53,7 +53,7 @@ const RunLocalAppButton = () => {
           small
           primary
           onClick={onBrowseLocalManifest}
-          id="settings-enable-platform-dev-tools-apps"
+          data-test-id="settings-enable-platform-dev-tools-apps"
         >
           {t("settings.developer.addLocalAppButton")}
         </Button>

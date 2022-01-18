@@ -6,16 +6,21 @@ import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 
 import styled from "styled-components";
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import ByteSize from "~/renderer/components/ByteSize";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
+import IconInfoCircleFull from "~/renderer/icons/InfoCircleFull";
+
 import AppActions from "./AppActions";
 
 import AppIcon from "./AppIcon";
+import ExternalLink from "~/renderer/components/ExternalLink";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 const AppRow = styled.div`
   display: flex;
@@ -34,12 +39,6 @@ const AppName = styled.div`
   & > * {
     display: block;
   }
-`;
-
-const AppSize = styled.div`
-  flex: 0 0 50px;
-  text-align: center;
-  color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
 type Props = {
@@ -72,6 +71,7 @@ const Item: React$ComponentType<Props> = ({
   setAppUninstallDep,
   addAccount,
 }: Props) => {
+  const { t } = useTranslation();
   const { name } = app;
   const { deviceModel, deviceInfo } = state;
 
@@ -80,6 +80,10 @@ const Item: React$ComponentType<Props> = ({
   const currency = useMemo(() => app.currencyId && getCryptoCurrencyById(app.currencyId), [
     app.currencyId,
   ]);
+
+  const onSupportLink = useCallback(() => {
+    openURL(urls.appSupport[app.name] || urls.appSupport.default);
+  }, [app.name]);
 
   const isLiveSupported = !!currency && isCurrencySupported(currency);
 
@@ -104,29 +108,57 @@ const Item: React$ComponentType<Props> = ({
               values={{
                 version: onlyUpdate && newVersion && newVersion !== version ? newVersion : version,
               }}
+            />{" "}
+            •{" "}
+            <ByteSize
+              value={
+                ((installed && installed.blocks) || 0) *
+                  deviceModel.getBlockSize(deviceInfo.version) ||
+                app.bytes ||
+                0
+              }
+              deviceModel={deviceModel}
+              firmwareVersion={deviceInfo.version}
             />
           </Text>
         </AppName>
       </Box>
-      <AppSize>
-        <ByteSize
-          value={
-            ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
-            app.bytes ||
-            0
-          }
-          deviceModel={deviceModel}
-          firmwareVersion={deviceInfo.version}
-        />
-      </AppSize>
-      <Box flex="0.6" horizontal alignContent="center" justifyContent="center">
-        {isLiveSupported && (
+      <Box
+        flex="0.7"
+        horizontal
+        alignContent="center"
+        justifyContent="flex-start"
+        flexWrap={"wrap"}
+        ml={5}
+      >
+        {isLiveSupported ? (
           <>
-            <Box pr={2}>
+            <Box>
               <IconCheckFull size={16} />
             </Box>
-            <Text ml={1} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.supported" />
+            </Text>
+          </>
+        ) : (
+          <>
+            <Box>
+              <IconInfoCircleFull size={16} />
+            </Box>
+            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+              <Trans i18nKey="manager.applist.item.not_supported" />
+            </Text>
+            <Text ml={1} ff="Inter|Medium" color="palette.primary.main">
+              <ExternalLink
+                label={t("manager.applist.item.learnMore")}
+                onClick={onSupportLink}
+                event="Manager SupportLink Click"
+                isInternal={false}
+                eventProperties={{
+                  appName: name,
+                  appVersion: app.version,
+                }}
+              />
             </Text>
           </>
         )}

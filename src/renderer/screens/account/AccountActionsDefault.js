@@ -7,22 +7,49 @@ import IconSwap from "~/renderer/icons/Swap";
 import IconExchange from "~/renderer/icons/Exchange";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import type { Props as ButtonProps } from "~/renderer/components/Button";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import ToolTip from "~/renderer/components/Tooltip";
+import styled from "styled-components";
 
-const ActionDefault = ({
-  onClick,
-  iconComponent,
-  labelComponent,
-}: {
+const IconButton: ThemedComponent<ButtonProps> = styled(Button)`
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  justify-content: center;
+  padding: 0;
+`;
+
+type Props = {
   onClick: () => void,
   iconComponent: any,
   labelComponent: any,
-}) => (
-  <Button small primary onClick={onClick}>
-    <Box horizontal flow={1} alignItems="center">
-      {iconComponent}
-      <Box>{labelComponent}</Box>
-    </Box>
-  </Button>
+  event?: string,
+  eventProperties?: Object,
+  disabled?: boolean,
+};
+
+export const ActionDefault = ({
+  onClick,
+  iconComponent,
+  labelComponent,
+  event,
+  eventProperties,
+  disabled,
+}: Props) => (
+  <ToolTip content={labelComponent}>
+    <IconButton
+      primary
+      onClick={onClick}
+      event={event}
+      eventProperties={eventProperties}
+      disabled={disabled}
+    >
+      <Box horizontal alignItems="center">
+        {iconComponent}
+      </Box>
+    </IconButton>
+  </ToolTip>
 );
 
 export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (

@@ -130,7 +130,7 @@ export const StepChooseCurrencyFooter = ({
       {isToken ? (
         <Box horizontal>
           {parentCurrency ? (
-            <Button ml={2} primary onClick={onTokenCta} id="modal-token-continue-button">
+            <Button ml={2} primary onClick={onTokenCta} data-test-id="modal-continue-button">
               {parentTokenAccount
                 ? t("addAccounts.cta.receive")
                 : t("addAccounts.cta.addAccountName", {
@@ -144,7 +144,7 @@ export const StepChooseCurrencyFooter = ({
           primary
           disabled={!currency || fullNodeNotReady}
           onClick={() => transitionTo("connectDevice")}
-          id="modal-continue-button"
+          data-test-id="modal-continue-button"
         >
           {t("common.continue")}
         </Button>

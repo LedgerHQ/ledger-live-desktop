@@ -53,13 +53,34 @@ const trackNoRates = ({ toState }) => {
   });
 };
 
+export const useProviders = () => {
+  const dispatch = useDispatch();
+  const { providers, error: providersError } = useSwapProviders();
+  const storedProviders = useSelector(providersSelector);
+
+  useEffect(() => {
+    if (providers) dispatch(updateProvidersAction(providers));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [providers]);
+
+  useEffect(() => {
+    if (providersError) dispatch(resetSwapAction());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [providersError]);
+
+  return {
+    storedProviders,
+    providers,
+    providersError,
+  };
+};
+
 const SwapForm = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { state: locationState } = useLocation();
   const accounts = useSelector(shallowAccountsSelector);
-  const { providers, error: providersError } = useSwapProviders();
-  const storedProviders = useSelector(providersSelector);
+  const { storedProviders, providers, providersError } = useProviders();
   const exchangeRate = useSelector(rateSelector);
   const setExchangeRate = useCallback(
     rate => {
@@ -81,16 +102,6 @@ const SwapForm = () => {
   const kycStatus = providerKYC?.status;
   const showWyreKYCBanner = provider === "wyre" && kycStatus !== KYC_STATUS.approved;
   const { setDrawer } = React.useContext(context);
-
-  useEffect(() => {
-    if (providers) dispatch(updateProvidersAction(providers));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [providers]);
-
-  useEffect(() => {
-    if (providersError) dispatch(resetSwapAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [providersError]);
 
   useEffect(() => {
     dispatch(updateTransactionAction(swapTransaction.transaction));
@@ -190,7 +201,7 @@ const SwapForm = () => {
           provider={provider}
         />
         {showWyreKYCBanner ? <FormKYCBanner provider={provider} status={kycStatus} /> : null}
-        <Button primary disabled={!isSwapReady} onClick={onSubmit}>
+        <Button primary disabled={!isSwapReady} onClick={onSubmit} data-test-id="exchange-button">
           {t("common.exchange")}
         </Button>
       </Wrapper>

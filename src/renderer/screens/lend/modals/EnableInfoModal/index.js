@@ -115,7 +115,7 @@ export default function LendTermsModal({
                     <CheckBox
                       isChecked={accepted}
                       onChange={onSwitchAccept}
-                      id="modal-terms-checkbox"
+                      data-test-id="modal-terms-checkbox"
                     />
                     <Text ff="Inter|SemiBold" fontSize={4} style={{ marginLeft: 8, flex: 1 }}>
                       <Trans i18nKey="lend.info.terms.switchLabel">

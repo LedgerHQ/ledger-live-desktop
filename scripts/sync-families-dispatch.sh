@@ -7,7 +7,6 @@ targets="\
 operationDetails.js \
 accountActions.js \
 TransactionConfirmFields.js \
-AccountHeaderActions.js \
 AccountBodyHeader.js \
 AccountSubHeader.js \
 SendAmountFields.js \

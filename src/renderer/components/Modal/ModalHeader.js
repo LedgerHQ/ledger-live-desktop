@@ -111,7 +111,7 @@ const ModalHeader = ({
   return (
     <Container hasTitle={Boolean(children || subTitle)} style={style}>
       {onBack ? (
-        <ModalHeaderAction onClick={onBack} id="modal-back-button">
+        <ModalHeaderAction onClick={onBack} data-test-id="modal-back-button">
           <IconAngleLeft size={12} />
           <Text ff="Inter|Medium" fontSize={4} color="palette.text.shade40">
             {t("common.back")}
@@ -122,12 +122,12 @@ const ModalHeader = ({
       )}
       {children || subTitle ? (
         <TitleContainer>
-          {subTitle && <ModalSubTitle id="modal-subtitle">{subTitle}</ModalSubTitle>}
-          <ModalTitle id="modal-title">{children}</ModalTitle>
+          {subTitle && <ModalSubTitle data-id="modal-subtitle">{subTitle}</ModalSubTitle>}
+          <ModalTitle data-test-id="modal-title">{children}</ModalTitle>
         </TitleContainer>
       ) : null}
       {onClose ? (
-        <ModalHeaderAction right onClick={onClose} id="modal-close-button">
+        <ModalHeaderAction right onClick={onClose} data-test-id="modal-close-button">
           <IconCross size={16} />
         </ModalHeaderAction>
       ) : (

@@ -20,7 +20,7 @@ type Props = {
   device: Device,
   deviceInfo: DeviceInfo,
   result: ?ListAppsResult,
-  onReset: (?(string[])) => void,
+  onReset: (?(string[]), ?boolean) => void,
   appsToRestore: string[],
 };
 
@@ -56,7 +56,7 @@ const Dashboard = ({ device, deviceInfo, result, onReset, appsToRestore }: Props
 
     // we need to reset only if device is unplugged OR a disconnection happened during firmware update
     if (!currentDevice || hasDisconnectedDuringFU.current) {
-      onReset();
+      onReset([], firmwareUpdateOpened);
     }
   }, [onReset, firmwareUpdateOpened, currentDevice]);
 

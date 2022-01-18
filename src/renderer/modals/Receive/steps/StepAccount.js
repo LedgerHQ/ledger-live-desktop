@@ -81,6 +81,7 @@ const TokenSelection = ({
   onChangeToken: (token: ?TokenCurrency) => void,
 }) => {
   const tokens = useMemo(() => listTokensForCryptoCurrency(currency), [currency]);
+
   return (
     <>
       <Label mt={30}>
@@ -171,7 +172,7 @@ export function StepAccountFooter({
   const error = account ? getReceiveFlowError(account, parentAccount) : null;
   return (
     <Button
-      id={"receive-account-continue-button"}
+      data-test-id="modal-continue-button"
       disabled={!account || (receiveTokenMode && !token) || !!error}
       primary
       onClick={() => transitionTo("device")}

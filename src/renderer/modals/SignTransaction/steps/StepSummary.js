@@ -160,6 +160,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                 fontSize={4}
                 inline
                 showCode
+                alwaysShowValue
               />
               <Box textAlign="right">
                 <CounterValue
@@ -169,6 +170,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                   value={amount}
                   alwaysShowSign={false}
                   subMagnitude={1}
+                  alwaysShowValue
                 />
               </Box>
             </Box>
@@ -186,6 +188,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                 fontSize={4}
                 inline
                 showCode
+                alwaysShowValue
               />
               <Box textAlign="right">
                 <CounterValue
@@ -195,6 +198,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                   value={estimatedFees}
                   alwaysShowSign={false}
                   subMagnitude={1}
+                  alwaysShowValue
                 />
               </Box>
             </Box>
@@ -225,6 +229,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                     fontSize={4}
                     inline
                     showCode
+                    alwaysShowValue
                   />
                   <Box textAlign="right">
                     <CounterValue
@@ -234,6 +239,7 @@ export default class StepSummary extends PureComponent<StepProps> {
                       value={totalSpent}
                       alwaysShowSign={false}
                       subMagnitude={1}
+                      alwaysShowValue
                     />
                   </Box>
                 </Box>

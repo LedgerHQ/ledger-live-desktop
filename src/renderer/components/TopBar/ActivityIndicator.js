@@ -35,7 +35,7 @@ export default function ActivityIndicatorInner() {
     track("SyncRefreshClick");
   }, [cvPolling, bridgeSync]);
 
-  const isSpectronRun = !!process.env.SPECTRON_RUN; // we will keep 'spinning' in spectron case
+  const isSpectronRun = !!process.env.PLAYWRIGHT_RUN; // we will keep 'spinning' in spectron case
   const userClickTime = isSpectronRun ? 10000 : 1000;
   const isUserClick = Date.now() - lastClickTime < userClickTime; // time to keep display the spinning on a UI click.
   const isRotating = isPending && (!isUpToDate || isUserClick);
@@ -43,7 +43,7 @@ export default function ActivityIndicatorInner() {
 
   const content = (
     <ItemContainer
-      id="topbar-synchronize-button"
+      data-test-id="topbar-synchronize-button"
       disabled={isDisabled}
       onClick={isDisabled ? undefined : onClick}
     >
@@ -94,7 +94,7 @@ export default function ActivityIndicatorInner() {
             </Box>
           </>
         ) : isUpToDate ? (
-          <span id="topbar-synchronized">
+          <span data-test-id="topbar-synchronized">
             <Trans i18nKey="common.sync.upToDate" />
           </span>
         ) : (

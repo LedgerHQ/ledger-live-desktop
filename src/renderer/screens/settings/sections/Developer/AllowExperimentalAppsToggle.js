@@ -20,7 +20,7 @@ const AllowExperimentalAppsToggle = () => {
       <Switch
         isChecked={allowExperimentalApps}
         onChange={onSetAllowExperimentalApps}
-        id="settings-allow-experimental-apps"
+        data-test-id="settings-allow-experimental-apps"
       />
     </>
   );

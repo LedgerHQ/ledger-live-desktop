@@ -64,7 +64,11 @@ const ModalContent: React$ComponentType<Props> = React.forwardRef(function Modal
   }, [containerRef, onHeightUpdate]);
   return (
     <ContentWrapper>
-      <ContentScrollableContainer ref={containerRef} noScroll={noScroll} id="modal-content">
+      <ContentScrollableContainer
+        ref={containerRef}
+        noScroll={noScroll}
+        data-test-id="modal-content"
+      >
         {children}
       </ContentScrollableContainer>
       <ContentScrollableContainerGradient opacity={isScrollable && !noScroll ? 1 : 0} />

@@ -131,7 +131,7 @@ class FirmwareUpdate extends PureComponent<Props, State> {
                 </Box>
               )}
               <FakeLink
-                id={"manager-update-firmware-button"}
+                data-test-id="manager-update-firmware-button"
                 disabled={disableFirmwareUpdate}
                 onClick={this.handleDisclaimerModal}
               >

@@ -1,0 +1,52 @@
+{
+  "data": {
+    "PLAYWRIGHT_RUN": {
+      "localStorage": {
+        "acceptedTermsVersion": "2019-12-04"
+      }
+    },
+    "settings": {
+      "hasCompletedOnboarding": true,
+      "counterValue": "USD",
+      "language": "en",
+      "theme": "light",
+      "region": null,
+      "orderAccounts": "balance|desc",
+      "countervalueFirst": false,
+      "autoLockTimeout": 10,
+      "selectedTimeRange": "month",
+      "marketIndicator": "western",
+      "currenciesSettings": {},
+      "pairExchanges": {},
+      "developerMode": false,
+      "loaded": true,
+      "shareAnalytics": true,
+      "sentryLogs": true,
+      "lastUsedVersion": "99.99.99",
+      "dismissedBanners": [],
+      "accountsViewMode": "list",
+      "showAccountsHelperBanner": true,
+      "hideEmptyTokenAccounts": false,
+      "sidebarCollapsed": false,
+      "discreetMode": false,
+      "preferredDeviceModel": "nanoS",
+      "hasInstalledApps": true,
+      "carouselVisibility": 0,
+      "hasAcceptedSwapKYC": false,
+      "lastSeenDevice": null,
+      "blacklistedTokenIds": [],
+      "swapAcceptedProviderIds": [],
+      "deepLinkUrl": null,
+      "firstTimeLend": false,
+      "swapProviders": [],
+      "showClearCacheBanner": false,
+      "starredAccountIds": [],
+      "hasPassword": false
+    },
+    "user": {
+      "id": "08cf3393-c5eb-4ea7-92de-0deea22e3971"
+    },
+    "accounts": [],
+    "countervalues": {}
+  }
+}

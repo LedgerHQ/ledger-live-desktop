@@ -77,7 +77,6 @@ export default function AccountList({ accounts, range, onAccountClick, mode }: P
       ) : null}
       <Body
         horizontal
-        data-e2e="dashboard_AccountList"
         range={range}
         search={search}
         visibleAccounts={visibleAccounts}

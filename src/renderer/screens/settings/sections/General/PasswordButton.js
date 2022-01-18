@@ -38,14 +38,18 @@ const PasswordButton = () => {
       <Track onUpdate event={hasPassword ? "PasswordEnabled" : "PasswordDisabled"} />
       <Box horizontal flow={2} alignItems="center">
         {hasPassword && (
-          <Button small onClick={handleOpenPasswordModal} id="settings-password-change-button">
+          <Button
+            small
+            onClick={handleOpenPasswordModal}
+            data-test-id="settings-password-change-button"
+          >
             {t("settings.profile.changePassword")}
           </Button>
         )}
         <Switch
           isChecked={hasPassword}
           onChange={handleChangePasswordCheck}
-          id="settings-password-lock-switch"
+          data-test-id="settings-password-lock-switch"
         />
       </Box>
     </>

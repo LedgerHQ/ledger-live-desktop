@@ -1,8 +1,8 @@
 // @flow
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import invariant from "invariant";
 import { useDispatch } from "react-redux";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
@@ -18,6 +18,7 @@ type Props = {
 };
 
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const mainAccount = getMainAccount(account, parentAccount);
 
@@ -34,14 +35,18 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
     );
   }, [dispatch, account]);
 
-  if (parentAccount || delegations.length > 0 || !earnRewardEnabled) return null;
+  if (parentAccount || delegations.length > 0) return null;
+
+  const disabledLabel = earnRewardEnabled ? "" : ` - ${t("cosmos.delegation.minSafeWarning")}`;
+  const label = `${t("delegation.title")}${disabledLabel}`;
 
   return [
     {
       key: "cosmos",
       onClick: onClick,
       icon: IconChartLine,
-      label: <Trans i18nKey="delegation.title" />,
+      disabled: !earnRewardEnabled,
+      label,
     },
   ];
 };

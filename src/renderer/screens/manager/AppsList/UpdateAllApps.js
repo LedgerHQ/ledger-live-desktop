@@ -97,7 +97,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
   const updateHeader =
     updateAllQueue.length > 0 ? (
       <>
-        <Box vertical>
+        <Box vertical data-test-id="manager-update-all-progress-bar">
           <Text ff="Inter|SemiBold" fontSize={5} color="palette.primary.main">
             <Trans
               i18nKey="manager.applist.updatable.progressTitle"
@@ -143,7 +143,7 @@ const UpdateAllApps = ({ update, state, optimisticState, dispatch, isIncomplete 
           }
         >
           <Button
-            id={"managerAppsList-updateAll"}
+            data-test-id="manager-update-all-apps-button"
             primary
             disabled={outOfMemory}
             onClick={onUpdateAll}

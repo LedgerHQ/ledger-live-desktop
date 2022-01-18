@@ -133,6 +133,8 @@
     "type": {
       "IN": "已接收",
       "OUT": "已发送",
+      "NFT_IN": "已收 NFT",
+      "NFT_OUT": "已发 NFT",
       "CREATE": "已创建",
       "REVEAL": "已显示",
       "DELEGATE": "已委托",
@@ -189,6 +191,7 @@
     "feesAmount": "费用额度"
   },
   "sidebar": {
+    "card": "卡",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -196,7 +199,8 @@
     "exchange": "买入 / 卖出",
     "swap": "Swap 互换",
     "lend": "借出",
-    "catalog": "发现"
+    "catalog": "发现",
+    "market": "市场"
   },
   "stars": {
     "placeholder": "星标账户以在此显示。",
@@ -230,7 +234,7 @@
         "label": {
           "provider": "提供方",
           "rate": "费率",
-          "fees": "费用",
+          "fees": "网络费用",
           "target": "目标账户"
         },
         "tooltip": {
@@ -700,6 +704,7 @@
     "frozenAssets": "冻结资产",
     "bandwidth": "带宽",
     "energy": "能量",
+    "stake": "质押",
     "delegatedAssets": "已委托资产",
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
@@ -714,13 +719,20 @@
     "reset": "重置流程",
     "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
-      "header": "使用 {{provider}} 买入加密",
-      "title": "通过 <0>{{provider}}</0> 买入加密",
+      "header": "买入和卖出加密货币",
+      "title": "选择一个购买加密货币的供应方",
+      "buyFrom": "可从任何地方购买",
+      "cryptoSupported": "已支持的加密币种",
+      "payWith": "使用卡或 SEPA 支付",
       "tab": "买入",
-      "selectCrypto": "选择加密资产",
-      "selectAccount": "选择帐户",
-      "continue": "继续",
-      "addAccount": "添加账户"
+      "coinify": {
+        "header": "使用 {{provider}} 买入加密",
+        "title": "通过 <0>{{provider}}</0> 买入加密",
+        "selectCrypto": "选择加密资产",
+        "selectAccount": "选择一个账户",
+        "continue": "继续",
+        "addAccount": "添加账户"
+      }
     },
     "sell": {
       "header": "使用 {{provider}} 卖出加密",
@@ -729,11 +741,6 @@
       "selectCrypto": "选择加密资产",
       "selectAccount": "选择帐户",
       "continue": "继续"
-    },
-    "history": {
-      "tab": "历史记录",
-      "exporting": "正在导出...",
-      "exportOperations": "导出操作"
     }
   },
   "lend": {
@@ -746,14 +753,14 @@
     },
     "assets": "要借出的资产",
     "active": "已批准的账户",
-    "lendAsset": "贷出",
+    "lendAsset": "借出",
     "account": {
       "amountSupplied": "已存数额",
-      "amountSuppliedTooltip": "向网络贷出的数额",
+      "amountSuppliedTooltip": "向网络借出的数额",
       "currencyAPY": "货币的年收益率 APY",
       "currencyAPYTooltip": "连续复合存款年度回报率",
       "accruedInterests": "应计利息",
-      "accruedInterestsTooltip": "贷出资产产生的利息",
+      "accruedInterestsTooltip": "借出资产产生的利息",
       "interestEarned": "已赚取利息",
       "interestEarnedTooltip": "提取后您赚取的利息",
       "openLoans": "开放借贷",
@@ -767,7 +774,7 @@
     "emptyState": {
       "active": {
         "title": "放款中",
-        "description": "您可以从您的以太坊账户直接贷出资产并赚取利息。",
+        "description": "您可以从您的以太坊账户直接借出资产并赚取利息。",
         "cta": "Compound 复合贷款如何运作？"
       },
       "closed": {
@@ -838,12 +845,12 @@
         "infoNoLimit": "您已完全批准此帐户。您可以根据一定费用来减少该数额。",
         "approvedWithLimit": "您已批准此账户上的 <0>{{value}}</0>。",
         "enabling": "账户批准一经确认，您便可存入资产。",
-        "notEnabled": "账户需要获得您的批准才能贷出资产。",
-        "notEnoughApproved": "您必须提高您账户批准贷出的限额。"
+        "notEnabled": "账户需要获得您的批准才能借出资产。",
+        "notEnoughApproved": "您必须提高您账户批准借出的限额。"
       },
       "supply": {
         "title": "存入",
-        "description": "输入要贷出给协议的资产数额。"
+        "description": "输入要借出给协议的资产数额。"
       },
       "withdraw": {
         "title": "提取",
@@ -917,7 +924,7 @@
       "terms": {
         "title": "借出加密货币",
         "subtitle": "按照 Compound 复利协议借出资产",
-        "description": "Compound 复利协议允许您在以太坊网络上贷出或借入资产。您可以直接通过您的 Ledger 账户贷出资产并赚取利息。",
+        "description": "Compound 复利协议允许您在以太坊网络上借出或借入资产。您可以直接通过您的 Ledger 账户借出资产并赚取利息。",
         "switchLabel": "<1>我已阅读并同意 </1><0>使用条款</0><1>。</1>"
       },
       "steps": {
@@ -929,7 +936,7 @@
         },
         "2": {
           "subtitle": "供应资产以赚取利息",
-          "description": "一旦账户获得批准，您可以选择想要贷出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
+          "description": "一旦账户获得批准，您可以选择想要借出的资产数额，并向该协议发出一个交易。交易一经确认，立即累计利息。"
         },
         "3": {
           "subtitle": "随时提取资产",
@@ -1085,7 +1092,7 @@
     },
     "swap": {
       "title": "Swap 互换加密货币",
-      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行交易。"
+      "description": "通过 Ledger Live 及我们的合作伙伴，在加密货币之间进行兑换。"
     },
     "lending": {
       "title": "借出加密货币",
@@ -1127,7 +1134,7 @@
       }
     },
     "connectedscreen": {
-      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
+      "info": "您现在可以从您的浏览器上访问 {{name}} dApp 去中心化应用。",
       "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接"
     }
@@ -1147,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
     "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。",
-    "showQrCode": "显示二维码"
+    "showQrCode": "显示二维码",
+    "taprootWarning": "请确保发送方支持 taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1170,6 +1178,117 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
+  },
+  "market": {
+    "title": "市场",
+    "currency": "币种",
+    "rangeLabel": "时间",
+    "goBack": "返回",
+    "filters": {
+      "title": "筛选器",
+      "show": "显示",
+      "all": "全部",
+      "isLedgerCompatible": "Ledger Live 兼容",
+      "isFavorite": "已星标资产",
+      "applyFilters": "应用筛选器",
+      "clearAll": "全部清除"
+    },
+    "marketList": {
+      "crypto": "加密货币",
+      "price": "价格",
+      "change": "更改",
+      "marketCap": "市值",
+      "last7d": "过去 7 天"
+    },
+    "detailsPage": {
+      "priceStatistics": "价格统计",
+      "tradingVolume": "交易量",
+      "24hLowHight": "24小时 最低 / 24小时 最高",
+      "7dLowHigh": "7天 最低 / 7天 最高",
+      "allTimeHigh": "历史最高",
+      "allTimeLow": "历史最低",
+      "marketCapRank": "市值排名",
+      "marketCapDominance": "市值主导",
+      "supply": "供应",
+      "circulatingSupply": "流通供应量",
+      "totalSupply": "总供应量",
+      "maxSupply": "最大供应量",
+      "assetNotSupportedOnLedgerLive": "Ledger Live 不支持此资产。",
+      "supportedCoinsAndTokens": "支持的币种和代币"
+    },
+    "range": {
+      "1H_label": "1 小时",
+      "1D_label": "1 天",
+      "1W_label": "1 周",
+      "1M_label": "1 月",
+      "1Y_label": "1 年",
+      "1h": "1 小时",
+      "24h": "24 小时",
+      "7d": "7 天",
+      "30d": "30 天",
+      "1y": "1 年",
+      "1H_selectorLabel": "最近 1 小时",
+      "1D_selectorLabel": "最近 24 小时",
+      "1W_selectorLabel": "上周",
+      "1M_selectorLabel": "上个月",
+      "1Y_selectorLabel": "过去一年"
+    },
+    "warnings": {
+      "connectionError": "连接错误",
+      "ledgerUnableToRetrieveData": "Ledger Live 无法检索数据。",
+      "checkInternetAndReload": "请检查您的网络连接，然后重新加载页面。",
+      "reload": "重新加载",
+      "noCryptosFound": "未能找到币种",
+      "noSearchResultsFor": "很抱歉，我们没能为 <0>{{search}}</0> 找到任何币种。请改用其他关键词重试搜索。",
+      "noSearchResults": "对不起，我们没有找到任何结果。",
+      "retrySearchKeyword": "请用其他关键词重试搜索。",
+      "retrySearchParams": "请用其他参数重试搜索。",
+      "trackFavAssets": "追踪您最喜欢的",
+      "clickOnStarIcon": "点击资产旁边的星形图标将自动将其添加到您的收藏夹。",
+      "browseAssets": "浏览资产"
+    }
+  },
+  "NFT": {
+    "viewer": {
+      "actions": {
+        "send": "发送",
+        "open": "在 {{viewer}} 中打开"
+      },
+      "attributes": {
+        "properties": "属性",
+        "description": "描述",
+        "tokenAddress": "代币地址",
+        "tokenId": "代币 ID",
+        "quantity": "数量"
+      }
+    },
+    "collections": {
+      "title": "NFT (非同质化代币) 收藏集",
+      "receiveCTA": "接收 NFT",
+      "galleryCTA": "查看图库",
+      "seeMore": "查看更多收藏",
+      "seeAll": "查看所有收藏",
+      "seeLess": "查看更少"
+    },
+    "gallery": {
+      "title": "所有 NFT",
+      "collection": {
+        "header": {
+          "sendCTA": "发送",
+          "contract": "合约：{{contract}}"
+        },
+        "operationList": {
+          "header": "近期操作",
+          "OUT": "已发送",
+          "IN": "已接收"
+        }
+      },
+      "tokensList": {
+        "item": {
+          "tokenId": "ID: {{tokenId}}"
+        }
+      }
+    }
   },
   "tokensList": {
     "title": "代币",
@@ -1255,7 +1374,7 @@
       "noOperationOnLastAccount": "在您在 <1><0>{{accountName}}</0></1> 账户上收到资产前，无法创建新账户",
       "noAccountToCreate": "未找到待创建的 <1><0>{{currencyName}}</0></1> 账户",
       "showAllAddressTypes": "显示所有地址类型",
-      "showAllAddressTypesTooltip": "只有当您需要在旧地址格式上接收 {{family}} 时，才能更改地址类型。"
+      "showAllAddressTypesTooltip": "仅在当您需要在其他地址格式上接收 {{family}} 时，才更改地址类型。"
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit 或 Native Segwit 地址格式？"
@@ -1310,6 +1429,12 @@
     "internalOpTooltip": "此操作存在内部操作",
     "details": "{{ currency }} 详情",
     "multipleAddresses": "为什么有多个地址？",
+    "nft": {
+      "name": "代币名称",
+      "contract": "代币合约",
+      "id": "代币 (NFT) ID",
+      "quantity": "数量"
+    },
     "extra": {
       "frozenAmount": "已冻结数额",
       "unfreezeAmount": "解冻数额",
@@ -1389,6 +1514,12 @@
       "appsOnDevice": "已安装的应用程序",
       "appOnDeviceSearch": "搜索已安装的应用程序……"
     },
+    "disconnected": {
+      "title": "看起来您的设备上有开启的应用程序",
+      "subtitle": "重新打开 Manager（管理器）将退出您设备上的应用程序",
+      "ctaReopen": "重新打开 Manager（管理器）",
+      "ctaPortfolio": "返回投资组合"
+    },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0>可用",
       "noFreeSpace": "存储空间不足",
@@ -1447,6 +1578,7 @@
         "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live 支持",
+        "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
@@ -1698,17 +1830,20 @@
   },
   "send": {
     "title": "发送",
+    "titleNft": "发送 NFT",
     "totalSpent": "总借额",
     "steps": {
       "recipient": {
-        "title": "接收方"
+        "title": "接收方",
+        "nftRecipient": "待发 NFT"
       },
       "amount": {
         "title": "数额",
         "banner": "最大可支出数额为",
         "fees": "费用",
         "standard": "标准",
-        "advanced": "高级"
+        "advanced": "高级",
+        "nftQuantity": "数量"
       },
       "summary": {
         "title": "概要"
@@ -1730,7 +1865,9 @@
         "rippleTagPlaceholder": "可选",
         "ethereumGasLimit": "Gas 限值",
         "ethereumGasPrice": "Gas 价格",
-        "unitPerByte": "{{Unit}} 每字节"
+        "unitPerByte": "{{Unit}} 每字节",
+        "nft": "NFT",
+        "nftQuantity": "数量"
       },
       "verification": {
         "streaming": {
@@ -2523,7 +2660,7 @@
       "counterValue": "首选币种",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
-      "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
+      "regionDesc": "选择您的地区来更新日期、时间和货币的格式。",
       "stock": "区域性市场指标",
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
@@ -2596,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "对比特币 (Taproot) 和 Tezos 使用实验性的 JS 实现"
+          "description": "对 Algorand 和 Tezos 使用实验性的 JS 实现。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -2744,7 +2881,7 @@
       "ru": "Русский",
       "es": "Español",
       "zh": "中文（简体）",
-      "de": "German"
+      "de": "德语"
     }
   },
   "theme": {
@@ -3385,7 +3522,13 @@
       "undelegate": "验证器",
       "claimReward": "奖励接收方",
       "optIn": "接收方",
-      "nominate": "验证器"
+      "nominate": "验证器",
+      "erc721": {
+        "transfer": "接收方"
+      },
+      "erc1155": {
+        "transfer": "接收方"
+      }
     },
     "votes": "票数 ({{count}})"
   },
@@ -3416,6 +3559,10 @@
       "memo": "Memo 标签",
       "memoPlaceholder": "可选",
       "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
+    },
+    "solana": {
+      "memo": "Memo 标签",
+      "memoPlaceholder": "可选"
     }
   },
   "errors": {
@@ -3665,7 +3812,7 @@
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "主账户 ETH 余额不足以支付网络费用"
+      "title": "父账户余额不足以支付网络费用"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
@@ -3781,6 +3928,9 @@
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "您的账户已经委托给此验证器"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "接收地址与发送地址相同"
     },
@@ -3791,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "无法自动验证：请仔细核对该地址。",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "操作不可用于此设备",
+      "description": "发送 NFT 功能仅可用于 Nano X。请访问我们的客服平台，以了解如何使用 Nano S 来发送 NFT。"
     },
     "CantScanQRCode": {
       "title": "无法扫描此二维码：此地址不支持自动验证"
@@ -3989,6 +4143,34 @@
     },
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
+    },
+    "SolanaAccountNotFunded": {
+      "title": "账户没有资金"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo 标签太长。最大长度为 {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "地址关闭 ed25519 曲线"
+    },
+    "NotEnoughNftOwned": {
+      "title": "您已超过可用代币的数量"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "由 Crypto.org 提供支持",
+        "moreInfo": "更多信息",
+        "drawerTitle": "Crypto.org 整合",
+        "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 令牌，并通过 Ledger Live 保护它们。",
+        "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
+        "website": "每个钱包中的加密货币"
+      }
+    },
+    "memo": "Memo 标签",
+    "memoPlaceholder": "可选",
+    "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
   }
 }

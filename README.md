@@ -1,6 +1,5 @@
 **[We are hiring, join us! 👨‍💻👩‍💻](https://jobs.lever.co/ledger/?department=Engineering)**
 
-
 # Ledger Live (desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
 
 - Related: [ledger-live-mobile](https://github.com/ledgerhq/ledger-live-mobile)
@@ -29,6 +28,7 @@ The latest stable release is available on [ledger.com/ledger-live](https://www.l
 Previous versions and pre-releases can be downloaded on here from the [Releases](https://github.com/LedgerHQ/ledger-live-desktop/releases) section.
 
 ### Compatibility
+
 - macOS 10.14+
 - Windows 8.1+ (x64)
 - Linux (x64)
@@ -47,7 +47,7 @@ Ledger Live releases are signed. The automatic update mechanism makes use of the
 - [Yarn 1.x](https://classic.yarnpkg.com/) (Classic)
 - [Python](https://www.python.org/) 2.7 or 3.5+
 - A C/C++ toolchain (see [node-gyp documentation](https://github.com/nodejs/node-gyp#on-unix))
-- On Linux: ```sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev```
+- On Linux: `sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev`
 
 ## Install
 
@@ -70,6 +70,48 @@ yarn start
 # Creates a .dmg for Mac, .exe installer for Windows, or .AppImage for Linux
 # Output files will be created in dist/ folder
 yarn dist
+```
+
+## Debug
+
+If you are using [Visual Studio Code](https://code.visualstudio.com/) IDE, here is a [Launch Configuration](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration) that should allow you to run and debug the main process as well as the render process of the application.
+
+As stated in the [debugging documentation](https://code.visualstudio.com/docs/editor/debugging), this file should be named `launch.json` and located under the `.vscode` folder.
+
+```json
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Run and Debug LLD",
+      "configurations": ["Debug Main Process", "Debug Renderer Process"],
+      "stopAll": true
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Debug Main Process",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "yarn",
+      "args": ["start"],
+      "outputCapture": "std",
+      "resolveSourceMapLocations": null,
+      "env": {
+        "ELECTRON_ARGS": "--remote-debugging-port=8315"
+      }
+    },
+    {
+      "name": "Debug Renderer Process",
+      "type": "chrome",
+      "request": "attach",
+      "address": "localhost",
+      "port": 8315,
+      "timeout": 60000
+    }
+  ]
+}
 ```
 
 ---
@@ -97,22 +139,27 @@ other envs can be seen in [live-common:src/env.js](https://github.com/LedgerHQ/l
 ### Run tests
 
 In a terminal you need to have webpack dev server running
+
 ```bash
 yarn start
 ```
 
 In an other terminal you need to launch the webdriver/electron container. First run will be slow.
 Next ones will be fast unless some changes are made to the container or package.json. You need to kill and re run the command if package.json changed. Make sure you are running Docker.
+
 ```bash
 yarn start-electron-webdriver
 ```
 
 You can point VNCViewer to `localhost::5900` to check what is happening in the container. `secret` is the password.
 Then you can launch tests.
+
 ```bash
 yarn spectron
 ```
+
 or
+
 ```bash
 node_modules/.bin/jest tests/specs/<FILEREGEX>.spec.js
 ```
@@ -165,4 +212,3 @@ src
 ├── network.js : network implementation. will eventually move back to live-common.
 └── sentry : related to bug report API
 ```
-
