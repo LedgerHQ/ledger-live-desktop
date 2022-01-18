@@ -2711,7 +2711,7 @@
       "reportErrors": "Rapports de bugs",
       "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
       "launchOnboarding": "Configuration de votre appareil",
-      "launchOnboardingDesc": "Configurer un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés."
+      "launchOnboardingDesc": "Configurez un nouvel appareil ou restaurez un appareil existant. Vos comptes et paramètres sont conservés."
     },
     "help": {
       "version": "Version",
