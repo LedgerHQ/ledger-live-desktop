@@ -2991,7 +2991,7 @@
     },
     "screens": {
       "welcome": {
-        "title": "Bienvenue sur Ledger Live",
+        "title": "Bienvenue chez Ledger",
         "description": "Gérez vos cryptos en toute sécurité depuis votre ordinateur.",
         "cta": "Commencer",
         "noDevice": "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
