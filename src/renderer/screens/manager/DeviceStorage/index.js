@@ -179,7 +179,12 @@ const TooltipContent = ({
   <TooltipContentWrapper>
     <Text>{name}</Text>
     <Text>
-      <ByteSize value={bytes} deviceModel={deviceModel} firmwareVersion={deviceInfo.version} />
+      <ByteSize
+        value={bytes}
+        deviceModel={deviceModel}
+        firmwareVersion={deviceInfo.version}
+        formatFunction={Math.ceil}
+      />
     </Text>
   </TooltipContentWrapper>
 );
@@ -307,6 +312,7 @@ const DeviceStorage = ({
                 deviceModel={deviceModel}
                 value={distribution.totalAppsBytes}
                 firmwareVersion={deviceInfo.version}
+                formatFunction={Math.ceil}
               />
             </Text>
           </div>
@@ -319,6 +325,7 @@ const DeviceStorage = ({
                 deviceModel={deviceModel}
                 value={distribution.appsSpaceBytes}
                 firmwareVersion={deviceInfo.version}
+                formatFunction={Math.floor}
               />
             </Text>
           </div>
@@ -353,6 +360,7 @@ const DeviceStorage = ({
                       value={distribution.freeSpaceBytes}
                       deviceModel={deviceModel}
                       firmwareVersion={deviceInfo.version}
+                      formatFunction={Math.floor}
                     />
                     {"free"}
                   </Trans>
