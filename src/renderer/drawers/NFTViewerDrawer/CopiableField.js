@@ -27,6 +27,7 @@ const CopiableFieldContainer: ThemedComponent<{}> = styled.div`
 
 type CopiableFieldProps = {
   value: string,
+  children?: React$Node,
 };
 
 export function CopiableField({ value, children }: CopiableFieldProps) {
