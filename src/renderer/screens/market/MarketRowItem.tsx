@@ -1,5 +1,8 @@
 import React, { useCallback, memo } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import styled, { useTheme } from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -11,6 +14,7 @@ import { SmallMarketItemChart } from "./MarketItemChart";
 import { CurrencyData } from "./types";
 import { Button } from ".";
 import { useTranslation } from "react-i18next";
+import { openModal } from "~/renderer/actions/modals";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 32px;
@@ -49,6 +53,21 @@ function MarketRowItem({
   availableOnSwap,
 }: Props) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const accounts = useSelector(accountsSelector);
+  const currencyAccounts = accounts.filter(
+    a => getAccountCurrency(a) === currency.internalCurrency,
+  );
+
+  const openAddAccounts = useCallback(() => {
+    dispatch(
+      openModal("MODAL_ADD_ACCOUNTS", {
+        currency: currency.internalCurrency,
+        preventSkippingCurrencySelection: true,
+      }),
+    );
+  }, [dispatch, currency]);
+
   const history = useHistory();
   const { colors } = useTheme();
   const graphColor = currency?.priceChangePercentage < 0 ? colors.error.c60 : colors.success.c60;
@@ -82,14 +101,18 @@ function MarketRowItem({
       e.preventDefault();
       e.stopPropagation();
       setTrackingSource("market page");
-      history.push({
-        pathname: "/swap",
-        state: {
-          defaultCurrency: currency.internalCurrency,
-        },
-      });
+      if (currencyAccounts.length > 0) {
+        history.push({
+          pathname: "/swap",
+          state: {
+            defaultCurrency: currency.internalCurrency,
+          },
+        });
+      } else {
+        openAddAccounts();
+      }
     },
-    [currency, history],
+    [currency, currencyAccounts, history],
   );
 
   const onStarClick = useCallback(
