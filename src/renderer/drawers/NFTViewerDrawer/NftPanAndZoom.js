@@ -3,6 +3,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 
+import IconCross from "~/renderer/icons/Cross";
 import Image from "~/renderer/screens/nft/Image";
 
 import PrismaZoom from "react-prismazoom";
@@ -17,7 +18,7 @@ const Container = styled.div`
   right: 0;
   bottom: 0;
   z-index: 100;
-  padding: 60px 60px;
+  padding: 32px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,6 +33,17 @@ const NFTImageContainer = styled.div`
   overflow: hidden;
 `;
 
+const CloseButton = styled.button`
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  color: white;
+  cursor: pointer;
+  z-index: 1;
+`;
+
 const domNode = document.getElementById("modals");
 
 type NftPanAndZoomProps = {
@@ -41,26 +53,37 @@ type NftPanAndZoomProps = {
 
 type BodyProps = { nft: NFTWithMetadata };
 
-const NftPanAndZoomBody = ({ nft }: BodyProps) => {
-  return (
-    <NFTImageContainer>
-      <div
+const NftPanAndZoomBody = ({ nft }: BodyProps) => (
+  <NFTImageContainer>
+    <PrismaZoom
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Image
+        nft={nft}
+        full
+        square={false}
+        objectFit="scale-down"
         onClick={(e: Event) => {
           e.preventDefault();
           e.stopPropagation();
         }}
-      >
-        <PrismaZoom>
-          <Image nft={nft} full square={false} objectFit="scale-down" />
-        </PrismaZoom>
-      </div>
-    </NFTImageContainer>
-  );
-};
+      />
+    </PrismaZoom>
+  </NFTImageContainer>
+);
 
 const NftPanAndZoom = ({ onClose, nft }: NftPanAndZoomProps) => {
   const modal = (
     <Container onClick={onClose}>
+      <CloseButton onClick={onClose} className="sidedrawer-close">
+        <IconCross size={32} />
+      </CloseButton>
       <NftPanAndZoomBody nft={nft} />
     </Container>
   );

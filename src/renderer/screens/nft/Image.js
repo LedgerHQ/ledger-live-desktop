@@ -25,6 +25,7 @@ const Wrapper: ThemedComponent<{
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
 }> = styled.div`
   width: ${({ full, size }) => (full ? "100%" : `${size}px`)};
+  height: ${({ full }) => full && "100%"};
   aspect-ratio: ${({ square }) => (square ? "1 / 1" : "initial")};
   max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
   max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
@@ -42,12 +43,15 @@ const Wrapper: ThemedComponent<{
 
   & > img {
     display: ${p => (p.isLoading ? "none" : "block")};
-    width: 100%;
-    height: 100%;
+    ${({ objectFit }) =>
+      objectFit === "cover"
+        ? `width: 100%;
+         height: 100%;`
+        : `max-width: 100%;
+        max-height: 100%;`}
     object-fit: ${p => p.objectFit ?? "cover"};
     border-radius: 4px;
     user-select: none;
-    pointer-events: none;
   }
 `;
 
@@ -88,6 +92,7 @@ type Props = {
   maxWidth?: number,
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
   square?: boolean,
+  onClick?: (e: Event) => void,
 };
 
 type State = {
@@ -107,7 +112,7 @@ class Image extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { full, size, nft, maxHeight, maxWidth, objectFit, square = true } = this.props;
+    const { full, size, nft, maxHeight, onClick, square = true, objectFit = "cover" } = this.props;
     const { loaded, error } = this.state;
 
     return (
@@ -117,12 +122,12 @@ class Image extends React.PureComponent<Props, State> {
         loaded={loaded || error}
         square={square}
         maxHeight={maxHeight}
-        maxWidth={maxWidth}
         objectFit={objectFit}
       >
         <Skeleton full />
         {nft?.media && !error ? (
           <img
+            onClick={onClick}
             onLoad={() => this.setState({ loaded: true })}
             onError={() => this.setState({ error: true })}
             src={nft.media}
