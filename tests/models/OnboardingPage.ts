@@ -1,5 +1,4 @@
 import { Page, Locator } from "@playwright/test";
-import { Modal } from "./Modal";
 
 export class OnboardingPage {
   readonly page: Page;
@@ -56,11 +55,11 @@ export class OnboardingPage {
     this.writeRecoveryPhraseButton = page.locator("data-test-id=use-recovery-sheet");
     this.confirmRecoveryPhraseButton = page.locator("data-test-id=recovery-howto-3");
     this.hideRecoveryPhraseButton = page.locator("data-test-id=hide-recovery-cta");
-    this.quizStartButton = page.locator("data-test-id=quizz-start-cta");
-    this.quizAnswerTopButton = page.locator("data-test-id=answer-0");
-    this.quizAnswerBottomButton = page.locator("data-test-id=answer-1");
-    this.quizNextButton = page.locator("data-test-id=quizz-next-cta");
-    this.quizSuccessButton = page.locator("data-test-id=quizz-success-cta");
+    this.quizStartButton = page.locator("data-test-id=quiz-start-cta");
+    this.quizAnswerTopButton = page.locator("data-test-id=quiz-answer-0");
+    this.quizAnswerBottomButton = page.locator("data-test-id=quiz-answer-1");
+    this.quizNextButton = page.locator("data-test-id=quiz-next-cta");
+    this.quizSuccessButton = page.locator("data-test-id=quiz-success-cta");
   }
 
   async getStarted() {
