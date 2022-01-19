@@ -3,6 +3,7 @@
 import React from "react";
 import { createPortal } from "react-dom";
 
+import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import IconCross from "~/renderer/icons/Cross";
 import Image from "~/renderer/screens/nft/Image";
 
