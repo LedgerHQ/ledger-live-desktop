@@ -2543,7 +2543,7 @@
     "durationDays": "{{count}} jour",
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Fonctionnement de la délégation",
-    "delegationEarn": "Gagnez des récompenses de staking de {{name}} en déléguant votre compte.",
+    "delegationEarn": "Gagnez des récompenses de staking {{name}} en déléguant votre compte.",
     "earnRewards": "Gagner des récompenses",
     "overdelegated": "Surdélégué",
     "status": "Statut",
