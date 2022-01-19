@@ -2950,7 +2950,7 @@
   dependencies:
     "@octokit/openapi-types" "^11.2.0"
 
-"@playwright/test@^1.17.2":
+"@playwright/test@^1.17.1":
   version "1.17.2"
   resolved "https://registry.yarnpkg.com/@playwright/test/-/test-1.17.2.tgz#0c67e329a28ffe43a79dc15a0e139dadd9cb250f"
   integrity sha512-lxauaOlLNddQsgknCDJZEo8spTlSUF7gU4jXf0sUDLFsH/KE4ySe4SOPUGbtw+lCMrUfSbSRz0e7wnw5z78LNA==

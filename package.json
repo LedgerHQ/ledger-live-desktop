@@ -148,7 +148,7 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.15.0",
     "@octokit/rest": "^18.12.0",
-    "@playwright/test": "^1.17.2",
+    "@playwright/test": "^1.17.1",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
