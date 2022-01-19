@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { allLanguages, prodStableLanguages } from "~/config/languages";
 import useEnv from "~/renderer/hooks/useEnv";
 import { setLanguage } from "~/renderer/actions/settings";
-import { langAndRegionSelector } from "~/renderer/reducers/settings";
+import { useSystemLanguageSelector, languageSelector } from "~/renderer/reducers/settings";
 import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 
@@ -36,7 +36,8 @@ type LangKeys = $Keys<typeof languageLabels>;
 type ChangeLangArgs = { value: LangKeys, label: string };
 
 const LanguageSelect = () => {
-  const { useSystem, language } = useSelector(langAndRegionSelector);
+  const useSystem = useSelector(useSystemLanguageSelector);
+  const language = useSelector(languageSelector);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
