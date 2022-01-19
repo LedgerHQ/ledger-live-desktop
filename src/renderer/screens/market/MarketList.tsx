@@ -267,7 +267,7 @@ function MarketList({
           ? { orderBy: newOrderBy, order: "desc" }
           : {
               orderBy: newOrderBy,
-              order: !order ? "desc" : "asc",
+              order: order === "asc" ? "desc" : "asc",
             },
       );
     },
