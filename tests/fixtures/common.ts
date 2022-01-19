@@ -3,8 +3,10 @@ import {
   expect,
   Page,
   ElectronApplication,
-  _electron as electron,
+  // _electron as electron,
 } from "@playwright/test";
+
+import { _electron as electron } from "playwright";
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
