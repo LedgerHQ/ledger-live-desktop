@@ -134,7 +134,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
-              id="first-use"
+              data-test-id="first-use"
               heading={t("onboarding.screens.selectUseCase.options.1.heading")}
               title={
                 <Trans
@@ -157,7 +157,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
-              id="initialized-device"
+              data-test-id="onboarding-initialized-device-step"
               heading={t("onboarding.screens.selectUseCase.options.2.heading")}
               title={
                 <Trans

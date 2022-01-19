@@ -119,7 +119,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
             {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.prev")}
           </Text>
         </Button>
-        <Button id="get-started-cta" inverted primary onClick={() => sendEvent("NEXT")}>
+        <Button data-test-id="get-started-cta" inverted primary onClick={() => sendEvent("NEXT")}>
           <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.next")}
           </Text>

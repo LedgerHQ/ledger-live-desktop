@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import { Modal } from "./Modal";
 
 export class OnboardingPage {
   readonly page: Page;
@@ -7,43 +8,60 @@ export class OnboardingPage {
   readonly termsSubmitButton: Locator;
   readonly selectDeviceButton: Function;
   readonly connectDeviceButton: Locator;
-  readonly modalContainer: Locator;
   readonly checkMyNanoButton: Locator;
   readonly continueButton: Locator;
+  readonly firstUseButton: Locator;
+  readonly leftArrowBasicsButton: Locator;
+  readonly rightArrowBasicsButton: Locator;
+  readonly setupWalletButton: Locator;
+  readonly getStartedCtaButton: Locator;
+  readonly beCarefulButton: Locator;
+  readonly startSetupButton: Locator;
+  readonly pincodeCheckbox: Locator;
+  readonly setupPincodeButton: Locator;
+  readonly confirmPincodeButton: Locator;
+  readonly recoveryPhraseCheckbox: Locator;
+  readonly recoverySetupButton: Locator;
+  readonly writeRecoveryPhraseButton: Locator;
+  readonly confirmRecoveryPhraseButton: Locator;
+  readonly hideRecoveryPhraseButton: Locator;
+  readonly quizStartButton: Locator;
+  readonly quizAnswerTopButton: Locator;
+  readonly quizAnswerBottomButton: Locator;
+  readonly quizNextButton: Locator;
+  readonly quizSuccessButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    this.getStartedButton = page.locator("#onboarding-get-started-button");
-    this.termsCheckbox = page.locator("#onboarding-terms-check");
-    this.termsSubmitButton = page.locator("#onboarding-terms-submit");
+    this.getStartedButton = page.locator("data-test-id=onboarding-get-started-button");
+    this.termsCheckbox = page.locator("data-test-id=onboarding-terms-checkbox");
+    this.termsSubmitButton = page.locator("data-test-id=onboarding-terms-submit");
     this.selectDeviceButton = (device: string): Locator =>
       page.locator(`button:has-text("${device}")`);
-    this.connectDeviceButton = page.locator("#initialized-device");
-    this.modalContainer = page.locator("data-test-id=modal-container");
+    this.connectDeviceButton = page.locator("data-test-id=onboarding-initialized-device-step");
     this.checkMyNanoButton = page.locator('button:has-text("Check my Nano")');
     this.continueButton = page.locator('button:has-text("Continue")');
-    this.firstUseButton = page.locator("#first-use");
-    this.leftArrowBasicsButton = page.locator("#pedagogy-left");
-    this.rightArrowBasicsButton = page.locator("#pedagogy-right");
-    this.setupWalletButton = page.locator("#setup-nano-wallet-cta");
-    this.getStartedCtaButton = page.locator("#get-started-cta");
-    this.beCarefulButton = page.locator("#be-careful-cta");
-    this.startSetupButton = page.locator("#device-howto-cta");
-    this.pincodeCheckbox = page.locator("#pincode-private-cb");
-    this.setupPincodeButton = page.locator("#device-pincode-cta");
-    this.confirmPincodeButton = page.locator("#pincode-howto-cta");
-    this.recoveryPhraseCheckbox = page.locator("#recoveryphrase-private-cb");
-    this.recoverySetupButton = page.locator("#device-recoveryphrase-cta");
-    this.writeRecoveryPhraseButton = page.locator("#use-recovery-sheet");
-    this.confirmRecoveryPhraseButton = page.locator("#recovery-howto-3");
-    this.hideRecoveryPhraseButton = page.locator("#hide-recovery-cta");
-    this.quizStartButton = page.locator("#quizz-start-cta");
-    this.quizAnswerTopButton = page.locator("#answer-0");
-    this.quizAnswerBottomButton = page.locator("#answer-1");
-    this.quizNextButton = page.locator("#quizz-next-cta");
-    this.quizSuccessButton = page.locator("#quizz-success-cta");
+    this.firstUseButton = page.locator("data-test-id=first-use");
+    this.leftArrowBasicsButton = page.locator("data-test-id=pedagogy-left");
+    this.rightArrowBasicsButton = page.locator("data-test-id=pedagogy-right");
+    this.setupWalletButton = page.locator("data-test-id=setup-nano-wallet-cta");
+    this.getStartedCtaButton = page.locator("data-test-id=get-started-cta");
+    this.beCarefulButton = page.locator("data-test-id=be-careful-cta");
+    this.startSetupButton = page.locator("data-test-id=device-howto-cta");
+    this.pincodeCheckbox = page.locator("data-test-id=pincode-private-cb");
+    this.setupPincodeButton = page.locator("data-test-id=device-pincode-cta");
+    this.confirmPincodeButton = page.locator("data-test-id=pincode-howto-cta");
+    this.recoveryPhraseCheckbox = page.locator("data-test-id=recoveryphrase-private-cb");
+    this.recoverySetupButton = page.locator("data-test-id=device-recoveryphrase-cta");
+    this.writeRecoveryPhraseButton = page.locator("data-test-id=use-recovery-sheet");
+    this.confirmRecoveryPhraseButton = page.locator("data-test-id=recovery-howto-3");
+    this.hideRecoveryPhraseButton = page.locator("data-test-id=hide-recovery-cta");
+    this.quizStartButton = page.locator("data-test-id=quizz-start-cta");
+    this.quizAnswerTopButton = page.locator("data-test-id=answer-0");
+    this.quizAnswerBottomButton = page.locator("data-test-id=answer-1");
+    this.quizNextButton = page.locator("data-test-id=quizz-next-cta");
+    this.quizSuccessButton = page.locator("data-test-id=quizz-success-cta");
   }
-
 
   async getStarted() {
     await this.getStartedButton.click();
@@ -54,13 +72,12 @@ export class OnboardingPage {
     await Promise.all([this.page.waitForResponse("**/*.svg"), this.termsSubmitButton.click()]);
   }
 
-  async selectDevice(device: "Nano S" | "Nano X" | "Blue") {
+  async selectDevice(device: "Nano S" | "Nano X" | "Blue" | string) {
     await this.selectDeviceButton(device).click();
   }
 
   async connectDevice() {
     await this.connectDeviceButton.click();
-    await this.modalContainer.waitFor({ state: "visible" });
   }
 
   async newDevice() {
