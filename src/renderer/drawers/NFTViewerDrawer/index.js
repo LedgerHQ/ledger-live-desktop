@@ -170,7 +170,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
   const openNftPanAndZoom = useCallback(() => {
     setPanAndZoomOpen(true);
   }, [setPanAndZoomOpen]);
-  
+
   const closeNftPanAndZoom = useCallback(() => {
     setPanAndZoomOpen(false);
   }, [setPanAndZoomOpen]);
