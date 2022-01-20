@@ -84,7 +84,7 @@ const NFTAttributes = styled.div`
   flex-direction: column;
 `;
 
-const HashContainer: ThemedComponent<{}> = styled.div`
+const HashContainer = styled.div`
   word-break: break-all;
   user-select: text;
   width: 100%;
