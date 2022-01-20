@@ -9,6 +9,7 @@ test.use({ userdata: "1AccountBTC1AccountETH" });
 
 test.beforeAll(async () => {
   // Can start dummy app here?
+  // perhaps add new script in package.json to also kickoff test app
 });
 
 // TODO: tidy up test and add more features to test app before making test run
