@@ -171,10 +171,8 @@ const DeviceAction = <R, H, P>({
         return <div>{"Confirm swap on your device"}</div>;
       }
 
-      // sell
-      case 0x01:
-      // fund
-      case 0x02:
+      case 0x01: // sell
+      case 0x02: // fund
         return renderSecureTransferDeviceConfirmation({
           exchangeType: exchangeType === 0x01 ? "sell" : "fund",
           modelId,
