@@ -65,10 +65,20 @@ export class DiscoverPage {
     `,
       );
     });
+  }
 
+  async openAccountDropdown() {
     // FIXME - this isn't working without force. 'subtree intercepts pointer events' error
     await this.selectAccountDropdown.click({ force: true });
+  }
+
+  async selectAccount() {
+    // TODO: make this dynamic with passed in variable
     await this.selectBtcAccount.click({ force: true });
+  }
+
+  async exitModal() {
+    // TODO: use modal.ts model
     await this.modalContinueButton.click({ force: true });
   }
 
@@ -84,5 +94,7 @@ export class DiscoverPage {
     `,
       );
     });
+
+    // TODO: mocked device events for test
   }
 }
