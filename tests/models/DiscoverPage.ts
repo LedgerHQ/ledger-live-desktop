@@ -61,8 +61,36 @@ export class DiscoverPage {
     `,
       );
     });
+  }
 
+  async openAccountDropdown() {
     // FIXME - this isn't working without force. 'subtree intercepts pointer events' error
-    await this.selectAccount.click({ force: true });
+    await this.selectAccountDropdown.click({ force: true });
+  }
+
+  async selectAccount() {
+    // TODO: make this dynamic with passed in variable
+    await this.selectBtcAccount.click({ force: true });
+  }
+
+  async exitModal() {
+    // TODO: use modal.ts model
+    await this.modalContinueButton.click({ force: true });
+  }
+
+  async verifyAddress() {
+    // TODO: make this into a generic function for interacting with webview app elements
+    await this.page.evaluate(() => {
+      const webview = document.querySelector("webview");
+      (webview as any).executeJavaScript(
+        `(function() {
+        const button = document.querySelector('[data-test-id=verify-address-button]');
+        button.click();
+      })();
+    `,
+      );
+    });
+
+    // TODO: mocked device events for test
   }
 }
