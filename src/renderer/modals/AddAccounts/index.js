@@ -146,7 +146,7 @@ const INITIAL_STATE = {
 
 class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE;
-  STEPS = createSteps(this.props.currency && this.props.preventSkippingCurrencySelection);
+  STEPS = createSteps(this.props.currency && !this.props.preventSkippingCurrencySelection);
 
   handleClickAdd = async () => {
     const { replaceAccounts, existingAccounts } = this.props;
