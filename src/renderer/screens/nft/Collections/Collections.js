@@ -38,7 +38,7 @@ const Collections = ({ account }: Props) => {
   ]);
 
   const onOpenCollection = useCallback(
-    collectionId => history.push(`/account/${account.id}/nft-collection/${collectionId}`),
+    collectionAddress => history.push(`/account/${account.id}/nft-collection/${collectionAddress}`),
     [account.id, history],
   );
 

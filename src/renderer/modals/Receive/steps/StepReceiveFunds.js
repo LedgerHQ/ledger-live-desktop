@@ -233,6 +233,13 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
+            {mainAccount.derivationMode === "taproot" ? (
+              <AlertBoxContainer>
+                <Alert type="warning">
+                  <Trans i18nKey="currentAddress.taprootWarning" />
+                </Alert>
+              </AlertBoxContainer>
+            ) : null}
             <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
               <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
             </Alert>
