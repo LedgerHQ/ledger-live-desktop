@@ -1,4 +1,4 @@
-import React, { useCallback, memo } from "react";
+import React, { useCallback, useEffect, useState, memo } from "react";
 import { MarketDataContextType, useMarketData } from "./MarketDataProvider";
 import styled from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
@@ -191,6 +191,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   locale,
   swapAvailableIds,
   style,
+  displayChart,
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
@@ -209,6 +210,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
       availableOnBuy={availableOnBuy}
       availableOnSwap={availableOnSwap}
       style={{ ...style }}
+      displayChart={displayChart}
     />
   );
 });
@@ -277,6 +279,14 @@ function MarketList({
   const isItemLoaded = useCallback((index: number) => !!marketData[index], [marketData]);
   const itemCount = endOfList ? currenciesLength : currenciesLength + 1;
 
+  const [width, setWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   return (
     <Flex flex="1" flexDirection="column">
       {!currenciesLength && !loading ? (
@@ -296,7 +306,7 @@ function MarketList({
             <TableCell>{t("market.marketList.price")}</TableCell>
             <TableCell>{t("market.marketList.change")}</TableCell>
             <TableCell>{t("market.marketList.marketCap")}</TableCell>
-            <TableCell>{t("market.marketList.last7d")}</TableCell>
+            {width > miniChartThreshold && <TableCell>{t("market.marketList.last7d")}</TableCell>}
             <TableCell onClick={toggleStarredAccounts}>
               <Icon name={starred && starred.length > 0 ? "StarSolid" : "Star"} size={18} />
             </TableCell>
@@ -354,6 +364,7 @@ function MarketList({
                             starredMarketCoins={starredMarketCoins}
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
+                            displayChart={width > miniChartThreshold}
                           />
                         )}
                       </List>
