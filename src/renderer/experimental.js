@@ -45,11 +45,21 @@ export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
     name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
+    title: <Trans i18nKey="settings.experimental.features.experimentalJSCurrencies.title" />,
+    description: (
+      <Trans i18nKey="settings.experimental.features.experimentalJSCurrencies.description" />
+    ),
+    valueOn: "tezos,algorand",
+    valueOff: "",
+  },
+  {
+    type: "toggle",
+    name: "EXPERIMENTAL_CURRENCIES",
     title: <Trans i18nKey="settings.experimental.features.experimentalCurrencies.title" />,
     description: (
       <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
     ),
-    valueOn: "tezos,algorand",
+    valueOn: "solana",
     valueOff: "",
   },
   ...(deltaExperimentalExplorers.length
