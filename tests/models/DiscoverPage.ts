@@ -8,7 +8,9 @@ export class DiscoverPage {
   readonly getAllAccountsButton: Locator;
   readonly requestAccountButton: Locator;
   readonly modal: Locator;
-  readonly selectAccount: Locator;
+  readonly selectAccountDropdown: Locator;
+  readonly selectBtcAccount: Locator;
+  readonly modalContinueButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -21,7 +23,9 @@ export class DiscoverPage {
     // FIXME: the bellow select dropdown at src/renderer/components/SelectAccountAndCurrency.js
     //        is tricky to grab a hold of (subtree intercepts pointer events), need to find a
     //        way of grabbing these custom elements
-    this.selectAccount = page.locator("//*[@data-test-id='select-account-dropdown']/div");
+    this.selectAccountDropdown = page.locator("//*[@data-test-id='select-account-dropdown']/div");
+    this.selectBtcAccount = page.locator("text=Bitcoin (BTC)");
+    this.modalContinueButton = page.locator("button:has-text('Continue')");
   }
 
   async navigateToCatalog() {
@@ -63,6 +67,22 @@ export class DiscoverPage {
     });
 
     // FIXME - this isn't working without force. 'subtree intercepts pointer events' error
-    await this.selectAccount.click({ force: true });
+    await this.selectAccountDropdown.click({ force: true });
+    await this.selectBtcAccount.click({ force: true });
+    await this.modalContinueButton.click({ force: true });
+  }
+
+  async verifyAddress() {
+    // TODO: make this into a generic function for interacting with webview app elements
+    await this.page.evaluate(() => {
+      const webview = document.querySelector("webview");
+      (webview as any).executeJavaScript(
+        `(function() {
+        const button = document.querySelector('[data-test-id=verify-address-button]');
+        button.click();
+      })();
+    `,
+      );
+    });
   }
 }
