@@ -26,7 +26,6 @@ import IconSettings from "~/renderer/icons/Settings";
 
 // TODO: ActivityIndicator
 import ActivityIndicator from "./ActivityIndicator";
-import { ServiceStatusIndicator } from "./ServiceStatusIndicator";
 import { setDiscreetMode } from "~/renderer/actions/settings";
 import { hasPasswordSelector } from "~/renderer/reducers/application";
 import { NotificationIndicator } from "~/renderer/components/TopBar/NotificationIndicator";
@@ -105,7 +104,6 @@ const TopBar = () => {
               </>
             )}
             <LiveAppDrawer />
-            <ServiceStatusIndicator />
             <NotificationIndicator />
             <Box justifyContent="center">
               <Bar />
