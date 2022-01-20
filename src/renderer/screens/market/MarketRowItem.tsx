@@ -38,6 +38,7 @@ type Props = {
   selectCurrency: (currencyId: string) => void;
   availableOnBuy: boolean;
   availableOnSwap: boolean;
+  displayChart: boolean;
 };
 
 function MarketRowItem({
@@ -51,6 +52,7 @@ function MarketRowItem({
   selectCurrency,
   availableOnBuy,
   availableOnSwap,
+  displayChart,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -203,11 +205,13 @@ function MarketRowItem({
               })}
             </Text>
           </TableCell>
-          <TableCell>
-            {currency.sparklineIn7d && (
-              <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
-            )}
-          </TableCell>
+          {displayChart && (
+            <TableCell>
+              {currency.sparklineIn7d && (
+                <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
+              )}
+            </TableCell>
+          )}
           <TableCell onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>
