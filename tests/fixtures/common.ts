@@ -1,5 +1,11 @@
-import { _electron as electron } from "playwright";
 import { test as base, expect, Page, ElectronApplication } from "@playwright/test";
+
+// TODO: the below _electron import should also be imported as part of @playwright/test,
+//       then we can get rid of the playwright package,
+//       but it's not working in the CI
+//       https://github.com/microsoft/playwright/issues/8208
+import { _electron as electron } from "playwright";
+
 import * as fs from "fs";
 import * as path from "path";
 import * as crypto from "crypto";
