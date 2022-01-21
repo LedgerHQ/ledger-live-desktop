@@ -28,13 +28,10 @@ test("Live App", async ({ page }) => {
 
   await test.step("Open Test App", async () => {
     await discoverPage.openTestApp();
-    console.log("-------> waiting for disclaimer");
     await discoverPage.waitForDisclaimerToBeVisible();
-    console.log("-------> starting snapshot");
     expect(await page.screenshot()).toMatchSnapshot({
       name: "open-test-app.png",
     });
-    console.log("-------> ended snapshot");
   });
 
   await test.step("Accept Live App Disclaimer", async () => {
