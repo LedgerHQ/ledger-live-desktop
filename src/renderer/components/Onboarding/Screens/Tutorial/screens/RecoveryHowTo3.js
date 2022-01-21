@@ -40,8 +40,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`

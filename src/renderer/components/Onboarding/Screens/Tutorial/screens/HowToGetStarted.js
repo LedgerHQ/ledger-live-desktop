@@ -71,7 +71,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Text>
         <Row>
           <IconContainer>
-            <Clock size={12} color="#6490F1" />
+            <Clock size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
@@ -85,7 +85,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Row>
         <Row>
           <IconContainer>
-            <Pen size={12} color="#6490F1" />
+            <Pen size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
@@ -99,7 +99,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Row>
         <Row>
           <IconContainer>
-            <Flower size={12} color="#6490F1" />
+            <Flower size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
