@@ -8,14 +8,21 @@ import { Layout } from "../models/Layout";
 
 test.use({ userdata: "1AccountBTC1AccountETH" });
 
-// TODO: Remove test app here
+let continueTest = false;
 
-test.beforeAll(async () => {
-  // Can start dummy app here?
+test.beforeAll(async ({ request }) => {
+  try {
+    const response = await request.get("http://localhost:3001");
+    if (response.ok() === true) continueTest = true;
+  } catch (error) {
+    console.log("========> Dummy test app not running on port 3001! <=========");
+  }
 });
 
 // TODO: tidy up test and add more features to test app before making test run
 test("Live App", async ({ page }) => {
+  if (!continueTest) return;
+
   const discoverPage = new DiscoverPage(page);
   const layout = new Layout(page);
 
