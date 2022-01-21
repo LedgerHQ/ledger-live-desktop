@@ -19,8 +19,8 @@ test.beforeAll(async ({ request }) => {
   }
 });
 
-// TODO: tidy up test and add more features to test app before making test run
 test("Live App", async ({ page }) => {
+  // Don't run test if server is not running
   if (!continueTest) return;
 
   const discoverPage = new DiscoverPage(page);
