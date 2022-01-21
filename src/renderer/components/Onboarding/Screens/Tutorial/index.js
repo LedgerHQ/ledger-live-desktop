@@ -64,7 +64,7 @@ const RightContainer = styled.div`
   flex: 1;
   background: ${({ bgTheme, theme }) => {
     if (bgTheme === "light") {
-      return "rgba(100, 144, 241, 0.1)";
+      return "rgba(138, 128, 219, 0.1)";
     }
     if (bgTheme === "dark") {
       return theme.colors.palette.primary.main;
