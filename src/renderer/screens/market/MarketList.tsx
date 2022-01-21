@@ -1,5 +1,8 @@
 import React, { useCallback, memo } from "react";
-import { MarketDataContextType, useMarketData } from "./MarketDataProvider";
+import {
+  MarketDataContextType,
+  useMarketData,
+} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";
@@ -15,6 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
 import { useProviders } from "../exchange/Swap2/Form";
+import Track from "~/renderer/analytics/Track";
 
 type Props = {
   data: MarketDataContextType;
@@ -156,6 +160,7 @@ const NoCryptoPlaceholder = ({ requestParams, t, resetSearch }: any) => (
     width="400px"
     flexDirection="column"
   >
+    <Track event="Page Market Search" success={false} />
     <Flex justifyContent="center" alignItems="center">
       <NoCryptoFound size={75} />
     </Flex>
@@ -242,7 +247,7 @@ function MarketList({
   } = useMarketData();
   const dispatch = useDispatch();
 
-  const { orderBy, order, starred } = requestParams;
+  const { orderBy, order, starred, search } = requestParams;
   const currenciesLength = marketData.length;
   const freshLoading = loading && !currenciesLength;
 
@@ -283,6 +288,9 @@ function MarketList({
         <NoCryptoPlaceholder requestParams={requestParams} t={t} resetSearch={resetSearch} />
       ) : (
         <>
+          {search && currenciesLength > 0 && (
+            <Track event="Page Market Search" onMount success={true} />
+          )}
           <TableRow header>
             <SortTableCell
               onClick={toggleSortBy}

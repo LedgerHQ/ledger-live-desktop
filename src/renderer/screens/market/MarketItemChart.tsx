@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { SparklineSvgData } from "./types";
+import { SparklineSvgData } from "@ledgerhq/live-common/lib/market/types";
 
 type Props = {
   sparklineIn7d: SparklineSvgData;

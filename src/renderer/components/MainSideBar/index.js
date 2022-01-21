@@ -307,17 +307,16 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-              {process.env.NODE_ENV !== "production" && !process.env.PLAYWRIGHT_RUN ? (
-                <SideBarListItem
-                  id={"market"}
-                  label={t("sidebar.market")}
-                  icon={IconMarket}
-                  iconActiveColor="wallet"
-                  onClick={handleClickMarket}
-                  isActive={location.pathname === "/market"}
-                  collapsed={secondAnim}
-                />
-              ) : null}
+
+              <SideBarListItem
+                id={"market"}
+                label={t("sidebar.market")}
+                icon={IconMarket}
+                iconActiveColor="wallet"
+                onClick={handleClickMarket}
+                isActive={location.pathname === "/market"}
+                collapsed={secondAnim}
+              />
 
               <SideBarListItem
                 id={"accounts"}
