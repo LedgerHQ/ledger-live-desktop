@@ -1,10 +1,10 @@
 // @flow
 import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
-// @ts-expect-error error
 // $FlowFixMe
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
-import { MarketDataProvider } from "./MarketDataProvider";
+import { MarketDataProvider } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import apiMock from "@ledgerhq/live-common/lib/market/api/api.mock";
 
 type Props = {
   children: React.ReactNode;
@@ -13,9 +13,12 @@ type Props = {
 export default function MarketDataProviderWrapper({ children }: Props): ReactElement {
   const counterValueCurrency: any = useSelector(counterValueCurrencySelector);
 
-  return process.env.NODE_ENV !== "production" && !process.env.SPECTRON_RUN ? (
-    <MarketDataProvider countervalue={counterValueCurrency}>{children}</MarketDataProvider>
-  ) : (
-    <>{children}</>
+  return (
+    <MarketDataProvider
+      {...(process.env.PLAYWRIGHT_RUN ? { fetchApi: apiMock } : {})}
+      countervalue={counterValueCurrency}
+    >
+      {children}
+    </MarketDataProvider>
   );
 }

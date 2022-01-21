@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { starredMarketCoinsSelector, localeSelector } from "~/renderer/reducers/settings";
-import { useSingleCoinMarketData } from "../MarketDataProvider";
+import { useSingleCoinMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
 import CounterValueSelect from "../CountervalueSelect";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
@@ -16,6 +16,7 @@ import { Button } from "..";
 import MarketCoinChart from "./MarketCoinChart";
 import MarketInfo from "./MarketInfo";
 import { useProviders } from "../../exchange/Swap2/Form";
+import Track from "~/renderer/analytics/Track";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -111,7 +112,7 @@ export default function MarketCoinScreen() {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page details");
+      setTrackingSource("Page Market Coin");
       history.push({
         pathname: "/exchange",
         state: {
@@ -126,7 +127,7 @@ export default function MarketCoinScreen() {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page details");
+      setTrackingSource("Page Market Coin");
       history.push({
         pathname: "/swap",
         state: {
@@ -147,6 +148,15 @@ export default function MarketCoinScreen() {
 
   return currency ? (
     <Container>
+      <Track
+        event="Page Market Coin"
+        onMount
+        onUpdate
+        currencyName={name}
+        starred={isStarred}
+        timeframe={chartRequestParams.range}
+        countervalue={counterCurrency}
+      />
       <Flex flexDirection="row" my={2} alignItems="center" justifyContent="space-between">
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-start">
           <CryptoCurrencyIconWrapper>

@@ -7,11 +7,11 @@ import styled, { useTheme } from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import counterValueFormatter from "./utils/countervalueFormatter";
+import counterValueFormatter from "@ledgerhq/live-common/lib/market/utils/countervalueFormatter";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { TableCell, TableRow } from "./MarketList";
 import { SmallMarketItemChart } from "./MarketItemChart";
-import { CurrencyData } from "./types";
+import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
 import { Button } from ".";
 import { useTranslation } from "react-i18next";
 import { openModal } from "~/renderer/actions/modals";
@@ -55,17 +55,15 @@ function MarketRowItem({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const accounts = useSelector(accountsSelector);
-  const currencyAccounts = accounts.filter(
-    a => getAccountCurrency(a) === currency.internalCurrency,
-  );
 
   const openAddAccounts = useCallback(() => {
-    dispatch(
-      openModal("MODAL_ADD_ACCOUNTS", {
-        currency: currency.internalCurrency,
-        preventSkippingCurrencySelection: true,
-      }),
-    );
+    if (currency)
+      dispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency.internalCurrency,
+          preventSkippingCurrencySelection: true,
+        }),
+      );
   }, [dispatch, currency]);
 
   const history = useHistory();
@@ -74,7 +72,7 @@ function MarketRowItem({
 
   const onCurrencyClick = useCallback(() => {
     selectCurrency(currency.id);
-    setTrackingSource("accounts page");
+    setTrackingSource("Page Market");
     history.push({
       pathname: `/market/${currency.id}`,
       state: currency,
@@ -85,7 +83,7 @@ function MarketRowItem({
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page");
+      setTrackingSource("Page Market");
       history.push({
         pathname: "/exchange",
         state: {
@@ -100,8 +98,10 @@ function MarketRowItem({
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page");
-      if (currencyAccounts.length > 0) {
+      setTrackingSource("Page Market");
+      const hasCurrencyAccounts =
+        currency && accounts.some(a => getAccountCurrency(a) === currency.internalCurrency);
+      if (hasCurrencyAccounts) {
         history.push({
           pathname: "/swap",
           state: {
@@ -112,7 +112,7 @@ function MarketRowItem({
         openAddAccounts();
       }
     },
-    [currency, currencyAccounts, history],
+    [currency, accounts, history, openAddAccounts],
   );
 
   const onStarClick = useCallback(
