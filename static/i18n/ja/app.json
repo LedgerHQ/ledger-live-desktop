@@ -3541,7 +3541,7 @@
     "termsLabel": "サービス利用規約",
     "privacyLabel": "プライバシーポリシー",
     "switchLabel": "私はサービス利用規約とプライバシーポリシーを読んだ上で、内容に同意します。",
-    "cta": "Ledgerアプリを入力"
+    "cta": "Ledgerアプリを設定"
   },
   "families": {
     "stellar": {
