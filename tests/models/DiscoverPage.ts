@@ -5,9 +5,11 @@ export class DiscoverPage {
   readonly discoverMenuButton: Locator;
   readonly testAppCatalogItem: Locator;
   readonly liveAppDisclaimerContinueButton: Locator;
+  readonly disclaimerText: Locator;
   readonly getAllAccountsButton: Locator;
   readonly requestAccountButton: Locator;
   readonly modal: Locator;
+  readonly selectAccountTitle: Locator;
   readonly selectAccountDropdown: Locator;
   readonly selectBtcAccount: Locator;
   readonly modalContinueButton: Locator;
@@ -17,9 +19,12 @@ export class DiscoverPage {
     this.discoverMenuButton = page.locator("data-test-id=drawer-catalog-button");
     this.testAppCatalogItem = page.locator("#platform-catalog-app-playwright-test-live-app");
     this.liveAppDisclaimerContinueButton = page.locator("button:has-text('Continue')");
+    this.disclaimerText = page.locator("text=External Application");
     this.getAllAccountsButton = page.locator("data-test-id=get-all-accounts-button"); // TODO: make this into its own model
     this.requestAccountButton = page.locator("data-test-id=request-single-account-button");
     this.modal = page.locator("data-test-id=modal-container");
+    this.selectAccountTitle = page.locator("text=Choose a crypto asset)");
+
     // FIXME: the bellow select dropdown at src/renderer/components/SelectAccountAndCurrency.js
     //        is tricky to grab a hold of (subtree intercepts pointer events), need to find a
     //        way of grabbing these custom elements
@@ -36,8 +41,20 @@ export class DiscoverPage {
     await this.testAppCatalogItem.click();
   }
 
+  async waitForDisclaimerToBeVisible() {
+    await this.disclaimerText.waitFor({ state: "attached" });
+    await this.disclaimerText.waitFor({ state: "visible" });
+    await this.liveAppDisclaimerContinueButton.waitFor({ state: "visible" });
+  }
+
   async acceptLiveAppDisclaimer() {
+    await this.liveAppDisclaimerContinueButton.waitFor({ state: "visible" });
     await this.liveAppDisclaimerContinueButton.click();
+  }
+
+  async waitForSelectAccountModalToBeVisible() {
+    await this.modal.waitFor({ state: "attached" });
+    await this.modal.waitFor({ state: "visible" });
   }
 
   async getAccountsList() {
@@ -65,6 +82,8 @@ export class DiscoverPage {
     `,
       );
     });
+
+    this.waitForSelectAccountModalToBeVisible();
   }
 
   async openAccountDropdown() {
