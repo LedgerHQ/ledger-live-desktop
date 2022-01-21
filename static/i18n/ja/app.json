@@ -829,7 +829,7 @@
         "allAssets": "資産",
         "totalBalance": "資産残高",
         "totalBalanceTooltip": "貸出可能額",
-        "currentAPY": "預入APY（年利）",
+        "currentAPY": "APY（年利）",
         "currentAPYTooltip": "継続的に運用した預入に対して得られる年間収益率",
         "actions": "アクション"
       }
@@ -3043,7 +3043,7 @@
             "paragraph2": "Nanoによって秘密鍵が復元され、暗号資産にアクセスして管理できるようになります。",
             "buttons": {
               "next": "OK、準備完了！",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           },
@@ -3056,7 +3056,7 @@
             },
             "buttons": {
               "next": "OK、準備完了！",
-              "prev": "1つ前のステップ"
+              "prev": "前のステップ"
             }
           },
           "deviceHowTo": {
@@ -3101,7 +3101,7 @@
             },
             "buttons": {
               "next": "次のステップ",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           },
