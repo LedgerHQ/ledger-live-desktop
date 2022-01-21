@@ -42,19 +42,17 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
-    await this.disclaimerText.waitFor({ state: "attached" });
     await this.disclaimerText.waitFor({ state: "visible" });
-    await this.liveAppDisclaimerContinueButton.waitFor({ state: "visible" });
+    await this.disclaimerText.click();
   }
 
   async acceptLiveAppDisclaimer() {
-    await this.liveAppDisclaimerContinueButton.waitFor({ state: "visible" });
     await this.liveAppDisclaimerContinueButton.click();
   }
 
   async waitForSelectAccountModalToBeVisible() {
-    await this.modal.waitFor({ state: "attached" });
     await this.modal.waitFor({ state: "visible" });
+    await this.modal.click();
   }
 
   async getAccountsList() {
