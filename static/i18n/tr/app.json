@@ -2027,7 +2027,7 @@
     "advanced": "Gelişmiş seçenekler",
     "ctaDisabled": "Bu hesapta UTXO yok",
     "whatIs": "Coin seçimi nedir?",
-    "rbf": "İşlemin değiştirilmesine izin ver (Ücretle Değiştir).",
+    "rbf": "İşlemin değiştirilmesine izin ver (Replace-By-Fee).",
     "strategy": "Coin seçimi stratejisi",
     "selected": "Strateji için seçilen coin'ler",
     "amount": "Gönderilecek tutar:",
