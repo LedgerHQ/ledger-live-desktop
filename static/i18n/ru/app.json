@@ -1856,7 +1856,7 @@
         "subaccountsWarning": "Чтобы отправлять токены с этого счёта, на нём должен быть запас {{ currency }}",
         "from": "Откуда",
         "to": "Куда",
-        "selectAccountDebit": "Счёт для пополнения",
+        "selectAccountDebit": "Счёт для списания",
         "recipientAddress": "Адрес получателя",
         "amount": "Кол-во",
         "fees": "Комиссия сети",
