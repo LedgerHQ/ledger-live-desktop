@@ -53,7 +53,7 @@ const Gallery = () => {
                 </Text>
               </Skeleton>
               <Skeleton width={143} minHeight={33} barHeight={12} show={show}>
-                <Text uppercase ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
+                <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
                   <CollectionName collection={collection} />
                 </Text>
               </Skeleton>

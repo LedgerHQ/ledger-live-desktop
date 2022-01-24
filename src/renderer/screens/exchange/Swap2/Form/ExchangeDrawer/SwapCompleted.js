@@ -87,7 +87,7 @@ const SwapCompleted = ({
 
   const SwapPill = ({ swapId }: { swapId: string }) => (
     <SwapIdWrapper>
-      <Pill color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>
+      <Pill color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4} data-test-id="swap-id">
         #{swapId}
       </Pill>
       <GradientHover>

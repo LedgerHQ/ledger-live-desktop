@@ -662,7 +662,7 @@ export const renderSwapDeviceConfirmationV2 = ({
           <Trans i18nKey="DeviceAction.swap.notice" />
         </Alert>
       </Box>
-      <Box mx={6}>
+      <Box mx={6} data-test-id="device-confirm-swap">
         {map(
           {
             amountSent: (

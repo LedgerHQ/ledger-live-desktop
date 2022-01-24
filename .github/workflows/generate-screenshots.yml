@@ -1,12 +1,22 @@
-name: Update UI tests snapshots
+name: "Generate | Screenshots"
 on:
   issue_comment:
     types: [created]
 
 jobs:
+  is-org-member:
+    runs-on: ubuntu-latest
+    name: "[Check] Is user from LedgerHQ"
+    steps:
+      - uses: ledgerhq/actions/packages/is-org-member@main
+        with:
+          user: ${{ github.actor }}
+          organisation: ledgerhq
+
   add-reaction:
-    name: add reaction to comment
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
+    name: "[Reaction] 🚀"
+    needs: [is-org-member]
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR
@@ -20,54 +30,39 @@ jobs:
               content: 'rocket'
             })
 
+            const body = `
+              [Generating new screenshots](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            `
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+
   start-runner:
-    name: start self-hosted EC2 runner
+    name: "[Runner] start ec2 instance"
     needs: [add-reaction]
-    runs-on: [ledger-live-desktop]
-    outputs:
-      label: ${{ steps.start-ec2-runner.outputs.label }}
-      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
-    steps:
-      - name: get latest LLD runner AMI id
-        id: get-ami-id
-        run: |
-          echo "::set-output name=ami-id::$(aws ec2 describe-images  --filters 'Name=name,Values=ledger-live-runner' --query 'Images[*].ImageId' --output text)"
-      - name: start EC2 runner
-        id: start-ec2-runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: start
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          ec2-image-id: ${{ steps.get-ami-id.outputs.ami-id }}
-          ec2-instance-type: c5.4xlarge
-          subnet-id: subnet-03b7b4dff904e0142 # production-shared-private-eu-west-1a
-          security-group-id: sg-010daba499648d1e7 # infra-gha-runner-sg
-      - name: get volume-id
-        id: get-volume-id
-        run: |
-          echo "::set-output name=volume-id::$(aws ec2 describe-instances --instance-ids ${{ steps.start-ec2-runner.outputs.ec2-instance-id }} --query 'Reservations[*].Instances[*].BlockDeviceMappings[*].Ebs.VolumeId' --output text)"
-      - name: resize rootfs
-        env:
-          VOLUME_ID: ${{ steps.get-volume-id.outputs.volume-id }}
-        run: |
-          aws ec2 modify-volume --size 30 --volume-id $VOLUME_ID
+    uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
+    with:
+      instance-type: c5.4xlarge
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   stop-runner:
-    name: Stop self-hosted EC2 runner
+    name: "[Runner] stop ec2 instance"
+    if: always() && github.event.issue.pull_request != ''
     needs: [start-runner, generate-screenshots-linux]
-    runs-on: [ledger-live-desktop]
-    if: ${{ always() }}
-    steps:
-      - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@v2
-        with:
-          mode: stop
-          github-token: ${{ secrets.CI_BOT_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
-          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
+    with:
+      label: ${{ needs.start-runner.outputs.label }}
+      ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
+    secrets:
+      CI_BOT_TOKEN: ${{ secrets.CI_BOT_TOKEN }}
 
   generate-screenshots-linux:
-    name: screenshots linux
+    name: "[Linux] Screenshots"
     needs: [start-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
 
@@ -84,7 +79,7 @@ jobs:
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
       - name: kill apt-get
-        run: sudo killall apt-get apt || echo OK
+        run: sudo killall -w apt-get apt || echo OK
       - name: install gh
         run: |
           curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -117,13 +112,13 @@ jobs:
         if: steps.status.outputs.status != 0
         run: |
           git add .
-          git commit -m 'update screenshots (Linux)'
+          git commit -m 'update screenshots (linux)'
           git pull --rebase
           git push
 
   generate-screenshots:
     needs: [add-reaction]
-    name: screenshots
+    name: "[${{ matrix.os }}] Screenshots"
     strategy:
       fail-fast: false
       matrix:
@@ -157,7 +152,6 @@ jobs:
       - name: build electron app
         run: yarn build
       - name: generate new screenshots (${{ matrix.os }})
-        if: matrix.os != 'ubuntu-20.04'
         run: yarn playwright-update-snapshots --retries 0
       - name: status
         id: status
@@ -166,6 +160,6 @@ jobs:
         if: steps.status.outputs.status != 0
         run: |
           git add .
-          git commit -m 'update screenshots (Linux)'
+          git commit -m 'update screenshots (${{ matrix.os }})'
           git pull --rebase
           git push

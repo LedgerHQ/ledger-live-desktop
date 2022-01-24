@@ -191,6 +191,7 @@
     "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -198,7 +199,8 @@
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
     "lend": "إقراض",
-    "catalog": "اكتشف"
+    "catalog": "اكتشف",
+    "market": "Market"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
@@ -232,7 +234,7 @@
         "label": {
           "provider": "المزود",
           "rate": "مُعدل",
-          "fees": "الرسوم",
+          "fees": "network fees",
           "target": "الحساب المستهدف"
         },
         "tooltip": {
@@ -702,6 +704,7 @@
     "frozenAssets": "الأصول المجمدة",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
+    "stake": "Stake",
     "delegatedAssets": "الأصول المفوضة",
     "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
@@ -716,13 +719,20 @@
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "شراء العملات المشفرة باستخدام {{provider}}",
-      "title": "شراء العملات المشفرة من خلال <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "شراء",
-      "selectCrypto": "اختار أصل مشفّر",
-      "selectAccount": "اختار حسابًا",
-      "continue": "متابعة",
-      "addAccount": "إضافة حساب"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "بيع العملات المشفرة باستخدام {{provider}}",
@@ -731,11 +741,6 @@
       "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
-    },
-    "history": {
-      "tab": "السجل",
-      "exporting": "جاري التصدير...",
-      "exportOperations": "تصدير العمليات"
     }
   },
   "lend": {
@@ -1129,7 +1134,7 @@
       }
     },
     "connectedscreen": {
-      "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
+      "info": "يمكنك الآن الوصول إلى {{name}} التطبيق اللامركزي (dApp) على متصفح الويب الخاص بك.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
@@ -1149,7 +1154,8 @@
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
-    "showQrCode": "إظهار رمز QR"
+    "showQrCode": "إظهار رمز QR",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1179,75 @@
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
+  "market": {
+    "title": "Market",
+    "currency": "Currency",
+    "rangeLabel": "Time",
+    "goBack": "Go back",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap",
+      "last7d": "Last 7 days"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price stats",
+      "tradingVolume": "Trading volume",
+      "24hLowHight": "24h Low / 24h High",
+      "7dLowHigh": "7d Low / 7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "marketCapDominance": "Market cap dominance",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No coins found",
+      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1181,8 +1256,8 @@
       },
       "attributes": {
         "properties": "خصائص",
-        "description": "Description",
-        "contract": "عنوان العَقد",
+        "description": "الوصف",
+        "tokenAddress": "عنوان رمز التوكن",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
       }
@@ -1299,7 +1374,7 @@
       "noOperationOnLastAccount": "لا يمكن إضافة حساب جديد قبل أن تتلقى الأصول على حسابك <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "لم يتم العثور على حساب <1><0>{{currencyName}}</0></1> ليتم إنشاءه",
       "showAllAddressTypes": "عرض جميع أنواع العناوين",
-      "showAllAddressTypesTooltip": "Only change the address type if you need to receive {{family}} on other address formats."
+      "showAllAddressTypesTooltip": "قم بتغيير نوع العنوان فقط إذا كنت بحاجة إلى تلقي {{family}} على صيغ عناوين أخرى."
     },
     "supportLinks": {
       "segwit_or_native_segwit": "Segwit أو Native Segwit؟"
@@ -1358,7 +1433,7 @@
       "name": "اسم رّمز التوكن",
       "contract": "عقد رّمز التوكن",
       "id": "مُعرّف (NFT) رمز التوكن",
-      "amount": "المبلغ"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
@@ -1440,10 +1515,10 @@
       "appOnDeviceSearch": "البحث في التطبيقات المثبتة..."
     },
     "disconnected": {
-      "title": "Looks like an app is open on your device",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
-      "ctaPortfolio": "Back to Portfolio"
+      "title": "يبدو أن التطبيق مفتوح على جهازك",
+      "subtitle": "إعادة فتح المدير سوف يغلق التطبيق على جهازك",
+      "ctaReopen": "إعادة فتح المدير",
+      "ctaPortfolio": "الرجوع إلى المحفظة الاستثمارية"
     },
     "deviceStorage": {
       "freeSpace": "<0>{{space}}</0> متاح",
@@ -1503,6 +1578,7 @@
         "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "لا توجد مساحة تخزين كافية",
         "supported": "ليدجر لايف (Ledger Live) مدعوم",
+        "not_supported": "يتطلب محفظة طرف ثالث",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
@@ -1790,7 +1866,7 @@
         "ethereumGasLimit": "حد الغاز",
         "ethereumGasPrice": "سعر الغاز",
         "unitPerByte": "{{unit}} لكل بايت",
-        "nft": "NFT (رمز غير قابلة للاستبدال)",
+        "nft": "NFT (رمز غير قابل للاستبدال)",
         "nftQuantity": "الكمية"
       },
       "verification": {
@@ -2584,7 +2660,7 @@
       "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
-      "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
@@ -2657,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدام عمليات تنفيذ JS التجريبية لبيتكوين (Taproot) و Tezos"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3483,6 +3559,10 @@
       "memo": "ملاحظة",
       "memoPlaceholder": "اختياري",
       "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3812,7 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "رصيد ETH في الحساب الرئيسي غير كافٍ لتغطية رسوم الشبكة"
+      "title": "رصيد الحساب الأصلي غير كاف لرسوم الشبكة"
     },
     "PasswordsDontMatch": {
       "title": "كلمتين المرور غير متطابقتين",
@@ -3848,6 +3928,9 @@
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "عنوان المستلم هو نفسه عنوان المرسل"
     },
@@ -3858,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "التحقق التلقائي غير متاح: تحقق بعناية من العنوان",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "تعذر فحص رمز الاستجابة السريعة (QR) هذا: التحقق التلقائي غير مدعوم من قبل هذا العنوان"
@@ -4057,8 +4144,33 @@
     "TaprootNotActivated": {
       "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "مدعوم من Crypto.org",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "تكامل Crypto.org",
+        "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، والتكديس و العديد من الميزات القادمة.",
+        "website": "العملات المشفرة في كل محفظة"
+      }
+    },
+    "memo": "ملاحظة",
+    "memoPlaceholder": "اختياري",
+    "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
   }
 }

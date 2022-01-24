@@ -12,6 +12,7 @@ module.exports = {
     "plugin:prettier/recommended",
     "plugin:jest/recommended",
     "plugin:jest/style",
+    "plugin:json/recommended",
   ],
   globals: {
     __DEV__: "readonly",
@@ -42,6 +43,34 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
     "jest/no-done-callback": 0,
   },
+  overrides: [
+    {
+      files: ["**/*.ts", "**/*.tsx"],
+      plugins: ["react", "react-hooks", "@typescript-eslint"],
+      extends: [
+        "plugin:react/recommended",
+        "standard",
+        "plugin:prettier/recommended",
+        "plugin:jest/recommended",
+        "plugin:jest/style",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+      ],
+      parser: "@typescript-eslint/parser",
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+      rules: {
+        "space-before-function-paren": 0,
+        "no-prototype-builtins": 0,
+        "promise/param-names": 0,
+        "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+        "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-use-before-define": ["error"],
+      },
+    },
+  ],
   settings: {
     react: {
       version: "detect",

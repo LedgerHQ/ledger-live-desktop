@@ -1,0 +1,169 @@
+name: "Report | Tests Reports"
+on:
+  # workflow_dispatch:
+  #   inputs:
+  #     runId:
+  #       description: run id
+  #       required: true
+
+  workflow_run:
+    workflows: ["Tests | Test Suite"]
+    types:
+      - "completed"
+
+jobs:
+  log:
+    name: "Check previous github object"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log github object
+        env:
+          GITHUB: ${{ toJSON(github) }}
+        run: |
+          echo $GITHUB
+  comment-on-pr:
+    name: "Comment report on PR"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: download artifacts
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require('fs');
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{github.event.workflow_run.id || github.event.inputs.runId }},
+            });
+
+            // Filter Artifacts
+
+            const reportArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return artifact.name == "tests-reports";
+            })[0];
+
+            const playwrightArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return (
+                artifact.name == "playwright-results-windows-latest" ||
+                artifact.name === "playwright-results-linux"
+              );
+            });
+
+            const imagesArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return artifact.name.includes("images-");
+            });
+
+            // Download Artifacts
+
+            const downloadReport = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: reportArtifacts.id,
+              archive_format: "zip",
+            });
+
+            fs.writeFileSync(
+              "${{github.workspace}}/" + reportArtifacts.name + ".zip",
+              Buffer.from(downloadReport.data)
+            );
+
+            const pPWArtifacts = await Promise.all(
+              playwrightArtifacts.map(artifact => {
+                return github.rest.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                  archive_format: "zip",
+                });
+              })
+            );
+
+            pPWArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + playwrightArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data)
+              );
+            });
+
+            const pImagesArtifacts = await Promise.all(
+              imagesArtifacts.map(image => {
+                return github.rest.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: image.id,
+                  archive_format: "zip",
+                });
+              })
+            );
+
+            pImagesArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + imagesArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data)
+              );
+            });
+
+      - name: unzip files
+        run: |
+          unzip tests-reports.zip
+          unzip playwright-results-windows-latest.zip -d pw-windows
+          unzip playwright-results-linux.zip -d pw-linux
+          unzip images-linux.json.zip
+          unzip images-windows-latest.json.zip
+          rm tests-reports.zip playwright-results-windows-latest.zip playwright-results-linux.zip images-linux.json.zip images-windows-latest.json.zip
+      - name: parse images
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const fs = require("fs");
+
+            const files = ["images-linux", "images-windows-latest"];
+
+            let result = {};
+            for (const file of files) {
+              try {
+                const raw = JSON.parse(fs.readFileSync("${{github.workspace}}/" + file + ".json"));
+                const key = file.replace("images-", "").replace("-latest", "").trim()
+                result[key] = raw;
+              } catch (err) {
+                console.log(err);
+              }
+            }
+
+            fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
+      - name: prepare comment body
+        id: comment-body
+        uses: ledgerhq/actions/packages/prepare-comment@main
+        with:
+          images: images.json
+          lintoutput: lint.txt
+          jestoutput: jest.txt
+      # - name: comment (manual trigger)
+      #   if: github.event.workflow_dispatch != ''
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       const fs = require("fs");
+      #       const issueNumber = Number(fs.readFileSync("./pr/NR"));
+
+      #       await github.rest.issues.createComment({
+      #         owner: "LedgerHQ",
+      #         repo: "ledger-live-desktop",
+      #         issue_number: issueNumber,
+      #         body: `
+      #           ${{ steps.comment-body.outputs.body }}
+      #         `
+      #       });
+      - name: comment
+        if: github.event.workflow_run != ''
+        uses: actions/github-script@v5
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: "LedgerHQ",
+              repo: "ledger-live-desktop",
+              commit_sha: "${{ github.event.workflow_run.head_sha }}",
+              body: `
+                ${{ steps.comment-body.outputs.body }}
+              `
+            });

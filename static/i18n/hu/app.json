@@ -191,6 +191,7 @@
     "feesAmount": "Fees Amount"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "Menü",
     "stars": "Csillagozott számlák",
     "accounts": "Számlák",
@@ -198,7 +199,8 @@
     "exchange": "Buy / Sell",
     "swap": "Swap",
     "lend": "Lend",
-    "catalog": "Discover"
+    "catalog": "Discover",
+    "market": "Market"
   },
   "stars": {
     "placeholder": "Star an account to display it here.",
@@ -232,7 +234,7 @@
         "label": {
           "provider": "provider",
           "rate": "rate",
-          "fees": "fees",
+          "fees": "network fees",
           "target": "target account"
         },
         "tooltip": {
@@ -702,6 +704,7 @@
     "frozenAssets": "Befagyasztott eszközök",
     "bandwidth": "Sávszélesség",
     "energy": "Energia",
+    "stake": "Stake",
     "delegatedAssets": "Delegated assets",
     "undelegating": "Undelegating",
     "availableBalanceTooltip": "This amount is disposable.",
@@ -716,13 +719,20 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy crypto with {{provider}}",
-      "title": "Buy crypto via <0>{{provider}}</0>",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "Buy",
-      "selectCrypto": "Choose a crypto asset",
-      "selectAccount": "Choose an account",
-      "continue": "Continue",
-      "addAccount": "Add account"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "Sell crypto with {{provider}}",
@@ -731,11 +741,6 @@
       "selectCrypto": "Choose a crypto asset",
       "selectAccount": "Choose an account",
       "continue": "Continue"
-    },
-    "history": {
-      "tab": "History",
-      "exporting": "Exporting...",
-      "exportOperations": "Export operations"
     }
   },
   "lend": {
@@ -1129,7 +1134,7 @@
       }
     },
     "connectedscreen": {
-      "info": "You can now access the dApp on your desktop.",
+      "info": "You can now access the {{name}} dApp on your web browser.",
       "warning": "Sharing receive addresses from dApps is not secure. Always use Ledger Live when sharing your address to receive funds.",
       "disconnected": "There is a connection problem between the dApp, WalletConnect and Ledger Live. Wait a few moments or relaunch the connection"
     }
@@ -1149,7 +1154,8 @@
     "for": "Cím <1><0>{{name}}</0></1> -hoz",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
-    "showQrCode": "Show QR Code"
+    "showQrCode": "Show QR Code",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1179,75 @@
   "genuinecheck": {
     "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
   },
+  "market": {
+    "title": "Market",
+    "currency": "Currency",
+    "rangeLabel": "Time",
+    "goBack": "Go back",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap",
+      "last7d": "Last 7 days"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price stats",
+      "tradingVolume": "Trading volume",
+      "24hLowHight": "24h Low / 24h High",
+      "7dLowHigh": "7d Low / 7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "marketCapDominance": "Market cap dominance",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No coins found",
+      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1257,7 @@
       "attributes": {
         "properties": "Properties",
         "description": "Description",
-        "contract": "Contract address",
+        "tokenAddress": "Token Address",
         "tokenId": "Token ID",
         "quantity": "Quantity"
       }
@@ -1358,7 +1433,7 @@
       "name": "Token Name",
       "contract": "Token Contract",
       "id": "Token (NFT) ID",
-      "amount": "Amount"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "Befagyasztott mennyiség",
@@ -1503,6 +1578,7 @@
         "uninstall": "Törlés",
         "notEnoughSpace": "Nincs elég hely",
         "supported": "Ledger Live által támogatott",
+        "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Számla hozzáadása",
         "addAccountTooltip": "{{appName}} számla hozzáadása",
         "addAccountWarn": "Kérlek várj az alkalmazásfrissítés befejezéséig",
@@ -2584,7 +2660,7 @@
       "counterValue": "Preferred currency",
       "counterValueDesc": "Válaszd ki az egyenleged, és a műveleteid mellett megjelenő valutát.",
       "region": "Régió",
-      "regionDesc": "Choose your region to set the time zone of Ledger Live.",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "Regionális piaci mutató",
       "stockDesc": "Choose Western to display market increases in blue or Eastern to display them in red.",
       "carouselVisibility": "Carousel visibility",
@@ -2657,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Bitcoin (Taproot) and Tezos"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -3483,6 +3559,10 @@
       "memo": "Memo",
       "memoPlaceholder": "Optional",
       "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3732,7 +3812,7 @@
       "title": "A fogadó cím inaktív. Küldj minimum {{minimalAmount}} mennyiséget az aktiválásához"
     },
     "NotEnoughGas": {
-      "title": "The ETH balance in the parent account is insufficient for network fees"
+      "title": "The parent account balance is insufficient for network fees"
     },
     "PasswordsDontMatch": {
       "title": "The Passwords don't match",
@@ -3848,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Ez nem egy valós {{currencyName}} cím"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "A fogadó cím megegyezik a küldő címmel"
     },
@@ -3858,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "Az automatikus ellenőrzés nem elérhető: gondosan ellenőrizd a címet",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "Nem sikerült beolvasni ezt a QR-kódot: az automatikus hitelesítés nem támogatott ennél a címnél"
@@ -4057,8 +4144,33 @@
     "TaprootNotActivated": {
       "title": "Sending to a taproot address is unsafe before mainnet activation"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Crypto.org",
+        "moreInfo": "More info",
+        "drawerTitle": "Crypto.org integration",
+        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
+        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
+        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
+        "website": "Cryptocurrency in every wallet"
+      }
+    },
+    "memo": "Memo",
+    "memoPlaceholder": "Optional",
+    "memoWarningText": "When using a memo, carefully check the information with the recipient"
   }
 }

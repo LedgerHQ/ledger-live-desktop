@@ -182,15 +182,16 @@
   "fees": {
     "advanced": "Avancé",
     "custom": "Personnalisé",
-    "fast": "Rapides",
+    "fast": "Rapide",
     "high": "Élevé",
     "low": "Bas",
-    "slow": "Lents",
+    "slow": "Lent",
     "standard": "Standard",
-    "medium": "Moyens",
+    "medium": "Moyen",
     "feesAmount": "Montant des frais"
   },
   "sidebar": {
+    "card": "Carte",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -198,7 +199,8 @@
     "exchange": "Acheter / Vendre",
     "swap": "Swap",
     "lend": "Prêter",
-    "catalog": "Discover"
+    "catalog": "Discover",
+    "market": "Marché"
   },
   "stars": {
     "placeholder": "Mettez une étoile sur un compte pour l'afficher ici.",
@@ -232,7 +234,7 @@
         "label": {
           "provider": "Prestataire",
           "rate": "Prix",
-          "fees": "Frais",
+          "fees": "Frais de réseau",
           "target": "Compte bénéficiaire"
         },
         "tooltip": {
@@ -702,6 +704,7 @@
     "frozenAssets": "Actifs gelés",
     "bandwidth": "Bande passante",
     "energy": "Énergie",
+    "stake": "Staker",
     "delegatedAssets": "Actifs délégués",
     "undelegating": "Délégation interrompue",
     "availableBalanceTooltip": "Ce montant est disponible.",
@@ -716,13 +719,20 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
-      "header": "Acheter des cryptos avec {{provider}}",
-      "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
+      "header": "Acheter et vendre des cryptos",
+      "title": "Choisissez un prestataire pour acheter des cryptos.",
+      "buyFrom": "Achetez de là où vous vous trouvez",
+      "cryptoSupported": "cryptos prises en charge",
+      "payWith": "Payez par carte ou via SEPA",
       "tab": "Acheter",
-      "selectCrypto": "Choisir un crypto-actif",
-      "selectAccount": "Sélectionner un compte",
-      "continue": "Continuer",
-      "addAccount": "Ajouter un compte"
+      "coinify": {
+        "header": "Acheter des cryptos avec {{provider}}",
+        "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
+        "selectCrypto": "Choisir un crypto-actif",
+        "selectAccount": "Sélectionner un compte",
+        "continue": "Continuer",
+        "addAccount": "Ajouter un compte"
+      }
     },
     "sell": {
       "header": "Vendre des cryptos avec {{provider}}",
@@ -731,11 +741,6 @@
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
       "continue": "Continuer"
-    },
-    "history": {
-      "tab": "Historique",
-      "exporting": "Exportation...",
-      "exportOperations": "Exporter les opérations"
     }
   },
   "lend": {
@@ -774,7 +779,7 @@
       },
       "closed": {
         "title": "Vos prêts clôturés apparaîtront ici.",
-        "description": "Vous n'avez pas encore fait de prêts.",
+        "description": "Vous n'avez pas encore clôturé de prêts.",
         "cta": "Déposer"
       },
       "opened": {
@@ -1082,7 +1087,7 @@
       "description": "Vendez vos bitcoins via notre partenaire sans sortir de Ledger Live."
     },
     "stakeAlgorand": {
-      "title": "Staking avec ALGORAND",
+      "title": "Les récompenses avec ALGORAND",
       "description": "Profitez au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et commencez à gagner des récompenses dès aujourd'hui."
     },
     "swap": {
@@ -1129,7 +1134,7 @@
       }
     },
     "connectedscreen": {
-      "info": "Vous pouvez maintenant accéder à la dApp sur votre ordinateur.",
+      "info": "Vous pouvez accéder à la dApp {{name}} sur votre navigateur.",
       "warning": "Partager des adresses de bénéficiaire par dApp n'est pas sécurisé. Utilisez toujours Ledger Live lorsque vous partagez votre adresse pour recevoir des fonds.",
       "disconnected": "Il y a un problème de connexion entre la dApp, WalletConnect et Ledger Live. Merci de patienter quelques instants ou de réessayer de vous connecter."
     }
@@ -1149,7 +1154,8 @@
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
     "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
-    "showQrCode": "Afficher le code QR"
+    "showQrCode": "Afficher le code QR",
+    "taprootWarning": "Vérifiez que l'émetteur prend en charge Taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1179,75 @@
   "genuinecheck": {
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
+  "market": {
+    "title": "Marché",
+    "currency": "Devise",
+    "rangeLabel": "Période",
+    "goBack": "Retour",
+    "filters": {
+      "title": "Filtres",
+      "show": "Afficher",
+      "all": "Tout",
+      "isLedgerCompatible": "Compatible Ledger Live",
+      "isFavorite": "Actifs favoris",
+      "applyFilters": "Appliquer filtres",
+      "clearAll": "Tout effacer"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Cours",
+      "change": "Variation",
+      "marketCap": "Capitalisation",
+      "last7d": "7 derniers jours"
+    },
+    "detailsPage": {
+      "priceStatistics": "Cours",
+      "tradingVolume": "Volume de trading",
+      "24hLowHight": "24h Bas / 24h Haut",
+      "7dLowHigh": "7j Bas / 7j Haut",
+      "allTimeHigh": "+ Haut",
+      "allTimeLow": "+ Bas",
+      "marketCapRank": "Rang",
+      "marketCapDominance": "Position dominante",
+      "supply": "Offre",
+      "circulatingSupply": "Offre en circulation",
+      "totalSupply": "Offre totale",
+      "maxSupply": "Offre maximale",
+      "assetNotSupportedOnLedgerLive": "Cet actif n'est pas pris en charge sur Ledger Live.",
+      "supportedCoinsAndTokens": "Coins et tokens pris en charge"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1J",
+      "1W_label": "1S",
+      "1M_label": "1M",
+      "1Y_label": "1A",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7j",
+      "30d": "30j",
+      "1y": "1a",
+      "1H_selectorLabel": "Heure passée",
+      "1D_selectorLabel": "Dernières 24h",
+      "1W_selectorLabel": "Semaine passée",
+      "1M_selectorLabel": "Mois passé",
+      "1Y_selectorLabel": "Année passée"
+    },
+    "warnings": {
+      "connectionError": "Erreur de connexion",
+      "ledgerUnableToRetrieveData": "Échec de la recherche des données par Ledger Live.",
+      "checkInternetAndReload": "Veuillez vérifier votre connexion Internet et actualiser la page.",
+      "reload": "Actualiser",
+      "noCryptosFound": "Crypto non trouvée",
+      "noSearchResultsFor": "Nous n'avons pas trouvé de cryptos correspondant à <0>{{search}}</0>. Réessayez avec un autre mot-clé.",
+      "noSearchResults": "Nous n'avons trouvé aucun résultat.",
+      "retrySearchKeyword": "Veuillez réessayer avec un autre mot-clé.",
+      "retrySearchParams": "Veuillez réessayer avec des paramètres différents.",
+      "trackFavAssets": "Surveillez vos favoris",
+      "clickOnStarIcon": "Cliquez sur l'étoile à côté d'un actif pour l'ajouter à vos favoris.",
+      "browseAssets": "Parcourir les actifs"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1257,7 @@
       "attributes": {
         "properties": "Attributs",
         "description": "Description",
-        "contract": "Adresse du contrat",
+        "tokenAddress": "Adresse du token",
         "tokenId": "Identifiant du token",
         "quantity": "Quantité"
       }
@@ -1357,8 +1432,8 @@
     "nft": {
       "name": "Nom du token",
       "contract": "Contrat du token",
-      "id": "Identifiant du token (NFT)",
-      "amount": "Montant"
+      "id": "Identifiant token (NFT)",
+      "quantity": "Quantité"
     },
     "extra": {
       "frozenAmount": "Montant gelé",
@@ -1459,7 +1534,7 @@
     "applist": {
       "placeholder": "Pas de résultat pour cette recherche avec les filtres choisis",
       "placeholderNoAppsInstalled": "Aucune application installée sur votre appareil",
-      "placeholderGoToCatalog": "Aller dans le catalogue pour installer des applications",
+      "placeholderGoToCatalog": "Allez dans le Catalogue pour installer des applications.",
       "noResultsFound": "Aucun résultat",
       "noResultsDesc": "Merci de vérifier l'orthographe et réessayer",
       "filter": {
@@ -1503,6 +1578,7 @@
         "uninstall": "Désinstaller",
         "notEnoughSpace": "Espace insuffisant",
         "supported": "Prise en charge par Ledger Live",
+        "not_supported": "Wallet externe requis",
         "addAccount": "Ajouter un compte",
         "addAccountTooltip": "Ajouter un compte {{appName}}",
         "addAccountWarn": "Merci d'attendre que les mises à jour soient terminées",
@@ -2583,8 +2659,8 @@
       "themeDesc": "Sélectionnez un thème.",
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
-      "region": "Fuseau horaire",
-      "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
+      "region": "Région",
+      "regionDesc": "Choisissez votre région pour personnaliser les formats de date, d'heure et de nombre.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
@@ -2634,7 +2710,7 @@
       "analyticsDesc": "Autoriser les statistiques pour aider Ledger à améliorer l'expérience utilisateur. Ces statistiques comprennent les clics, les visites de pages, les redirections, les actions (envoyer, recevoir, verrouiller, etc.), les défilements en bas de page, les installations, désinstallations et mises à jour des applications, les versions des applications, le nombre de comptes, de crypto-actifs et d'opérations, la durée des sessions, le type d'appareil Ledger et de micrologiciel.",
       "reportErrors": "Rapports de bugs",
       "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
-      "launchOnboarding": "Configuration de l'appareil",
+      "launchOnboarding": "Configuration de votre appareil",
       "launchOnboardingDesc": "Configurer un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés."
     },
     "help": {
@@ -2657,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin (Taproot) et Tezos."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -3483,6 +3559,10 @@
       "memo": "Mémo",
       "memoPlaceholder": "Facultatif",
       "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez bien les informations requises auprès du bénéficiaire."
+    },
+    "solana": {
+      "memo": "Mémo",
+      "memoPlaceholder": "Facultatif"
     }
   },
   "errors": {
@@ -3732,7 +3812,7 @@
       "title": "L'adresse du bénéficiaire est inactive. Envoyez au minimum {{minimalAmount}} pour l'activer."
     },
     "NotEnoughGas": {
-      "title": "Le solde ETH du compte parent ne suffit pas pour couvrir les frais de réseau."
+      "title": "Solde du compte parent insuffisant pour les frais de réseau"
     },
     "PasswordsDontMatch": {
       "title": "Mots de passe non identiques",
@@ -3848,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Adresse {{currencyName}} invalide"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Votre compte est déjà délégué à ce validateur"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "L'adresse du bénéficiaire est identique à l'adresse du donneur d'ordre."
     },
@@ -3858,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement.",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Opération non disponible sur cet appareil",
+      "description": "La fonctionnalité Envoi de NFT n'est disponible que pour le Nano X. Visitez notre centre d'aide pour découvrir comment envoyer un NFT avec un Nano S."
     },
     "CantScanQRCode": {
       "title": "Échec du scan de ce code QR. Cette adresse ne prend pas en charge la vérification automatique."
@@ -4057,8 +4144,33 @@
     "TaprootNotActivated": {
       "title": "L'envoi à une adresse Taproot avant l'activation du réseau présente un risque"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Pas de fonds sur le compte"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Mémo trop long. Longueur maximale : {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Adresse en dehors de la courbe ed25519"
+    },
     "NotEnoughNftOwned": {
       "title": "Nombre de tokens disponibles insuffisant"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Propulsé par Crypto.org",
+        "moreInfo": "Plus d'informations",
+        "drawerTitle": "Intégration de Crypto.org",
+        "title": "Le token Crypto.org (CRO) désormais disponible sur Ledger Live",
+        "description": "Vous pouvez maintenant gérer et sécuriser vos tokens Crypto.org (CRO) via Ledger Live.",
+        "description2": "Le token Crypto.org (CRO) est natif de la Crypto.org Chain. Il est utilisé pour les transactions, le staking et de nombreuses fonctionnalités à venir.",
+        "website": "Cryptocurrency in Every Wallet"
+      }
+    },
+    "memo": "Mémo",
+    "memoPlaceholder": "Facultatif",
+    "memoWarningText": "Lorsque vous utilisez un mémo, vérifiez soigneusement les informations avec le destinataire."
   }
 }

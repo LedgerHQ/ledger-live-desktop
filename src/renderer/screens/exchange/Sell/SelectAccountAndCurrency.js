@@ -148,7 +148,7 @@ const SelectAccountAndCurrency = ({
             <span>{t("exchange.sell.selectAccount")}</span>
             <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
               <PlusIcon size={10} />
-              <Text style={{ marginLeft: 4 }}>{t("exchange.buy.addAccount")}</Text>
+              <Text style={{ marginLeft: 4 }}>{t("exchange.buy.coinify.addAccount")}</Text>
             </FakeLink>
           </AccountSelectorLabel>
           {currency ? (

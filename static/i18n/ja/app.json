@@ -13,7 +13,7 @@
       "broadcast": {
         "toast": {
           "title": "トランザクションが送信されました！",
-          "text": "処理の詳細はこちらをクリック"
+          "text": "取引の詳細はこちらをクリック"
         }
       }
     },
@@ -68,7 +68,7 @@
     "delete": "削除",
     "launch": "開始",
     "continue": "続行",
-    "previous": "前",
+    "previous": "戻る",
     "learnMore": "詳細",
     "help": "ヘルプ",
     "needHelp": "お困りですか？",
@@ -77,7 +77,7 @@
     "selectAccountNoOption": "{{accountName}} と一致するアカウントがありません。",
     "selectCurrency": "暗号資産を選択",
     "selectCurrencyNoOption": "{{currencyName}} が見つかりませんでした。",
-    "selectValidatorNoOption": "\"{{accountName}}\"に一致するバリデータがありません。",
+    "selectValidatorNoOption": "\"{{accountName}}\"に一致するバリデーターがありません。",
     "selectNoResults": "\"{{query}}\"に一致する結果は見つかりませんでした。",
     "sortBy": "並び替え",
     "save": "保存",
@@ -92,7 +92,7 @@
     "close": "閉じる",
     "eastern": "イースタン",
     "western": "ウエスタン",
-    "reverify": "再認証",
+    "reverify": "再確認",
     "verify": "認証",
     "verifyMyAddress": "アドレスを認証",
     "copy": "コピー",
@@ -162,7 +162,7 @@
     }
   },
   "byteSize": {
-    "bytes": "{{size}}バイト",
+    "bytes": "{{size}} bytes",
     "kbUnit": "{{size}}KB",
     "mbUnit": "{{size}}MB"
   },
@@ -172,11 +172,11 @@
     "hour": "時間",
     "hour_plural": "時間",
     "range": {
-      "day": "日",
-      "week": "週",
-      "month": "月",
-      "year": "年",
-      "all": "すべて"
+      "day": "1日",
+      "week": "1週",
+      "month": "1月",
+      "year": "1年",
+      "all": "ALL"
     }
   },
   "fees": {
@@ -191,6 +191,7 @@
     "feesAmount": "手数料"
   },
   "sidebar": {
+    "card": "Card",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -198,7 +199,8 @@
     "exchange": "購入/売却",
     "swap": "スワップ",
     "lend": "レンディング",
-    "catalog": "Discover"
+    "catalog": "Discover",
+    "market": "Market"
   },
   "stars": {
     "placeholder": "お気に入りに登録したアカウントは、ここに表示されます。",
@@ -220,7 +222,7 @@
     "tabs": {
       "exchange": "取引",
       "history": "履歴",
-      "kyc": "KYC（本人確認）"
+      "kyc": "本人確認手続き"
     },
     "form": {
       "ratesDrawer": {
@@ -232,7 +234,7 @@
         "label": {
           "provider": "プロバイダー",
           "rate": "レート",
-          "fees": "手数料",
+          "fees": "network fees",
           "target": "ターゲットアカウント"
         },
         "tooltip": {
@@ -244,13 +246,13 @@
         "noAccountCTA": "アカウントを追加"
       },
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "max": "最大",
-        "accountPlaceholder": "ソースを選択",
+        "accountPlaceholder": "アカウントを選択",
         "currencyDisabledTooltip": "現在、この通貨はスワップに利用できません。"
       },
       "to": {
-        "title": "送付先"
+        "title": "交換先"
       },
       "notAvailable": {
         "title": "お住まいの地域では、スワップを利用できません。",
@@ -258,14 +260,14 @@
       },
       "providers": {
         "kyc": {
-          "required": "KYC（本人確認）を完了する必要があります。",
-          "complete": "KYC（本人確認）を完了",
-          "update": "KYC（本人確認）を更新",
+          "required": "本人確認手続きを完了する必要があります。",
+          "complete": "本人確認手続きを完了",
+          "update": "本人確認手続きを更新",
           "rejected": "KYCが却下されたため、承認申請をやり直す必要があります。",
           "status": {
-            "pending": "KYC（本人確認）申請中",
-            "approved": "KYC（本人確認）承認済み",
-            "closed": "KYC（本人確認）却下"
+            "pending": "本人確認手続き申請中",
+            "approved": "本人確認手続き承認済み",
+            "closed": "本人確認手続き却下"
           }
         }
       }
@@ -280,7 +282,7 @@
       "exporting": "エクスポートしています..."
     },
     "kyc": {
-      "updateRequired": "アプリケーションをアップデートするまで、KYC（本人確認）を完了できません。",
+      "updateRequired": "アプリケーションをアップデートするまで、本人確認手続きを完了できません。",
       "wyre": {
         "disclaimer": "個人情報はKYC用にLedgerによって収集された後、WYREに転送されます。詳しくは以下をご確認ください：",
         "policy": "プライバシーポリシー",
@@ -291,14 +293,14 @@
           "cta": "続行",
           "title": "個人情報が提出されました。",
           "subtitle": "通常、審査が完了するまでに数分かかります。",
-          "link": "KYC（本人確認）についての詳細",
+          "link": "本人確認手続きについての詳細",
           "info": "本人認証：提出済み"
         },
         "closed": {
-          "cta": "KYC（本人確認）をリセット",
-          "title": "KYC（本人確認）の申請却下",
-          "subtitle": "KYC（本人確認）用に提出したデータがWyreによって却下されました。",
-          "link": "KYC（本人確認）についての詳細"
+          "cta": "本人確認手続きをリセット",
+          "title": "本人確認手続きの申請却下",
+          "subtitle": "本人確認手続き用に提出したデータがWyreによって却下されました。",
+          "link": "本人確認手続きについての詳細"
         },
         "form": {
           "firstName": "名前（名）",
@@ -332,7 +334,7 @@
       "completed": {
         "title": "保留中の処理",
         "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。",
-        "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+        "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
         "seeDetails": "詳細を表示"
       }
     }
@@ -374,15 +376,15 @@
     "providers": {
       "title": "暗号資産のスワップに利用するプロバイダーを選択",
       "learnMore": "スワップとは？",
-      "kycRequired": "必要なKYC（本人確認）",
+      "kycRequired": "必要な本人確認手続き",
       "cta": "続行",
       "kyc": {
         "notAvailable": "{{provider}} はお住まいの地域ではご利用いただけません。",
         "status": {
-          "required": "KYC（本人確認）が必要です。",
-          "pending": "KYC（本人確認）申請中",
-          "approved": "KYC（本人確認）が承認されました！",
-          "closed": "KYC（本人確認）却下"
+          "required": "本人確認手続きが必要です。",
+          "pending": "本人確認手続き申請中",
+          "approved": "本人確認手続きが承認されました！",
+          "closed": "本人確認手続き却下"
         }
       }
     },
@@ -392,7 +394,7 @@
       "disclaimer": "続行することで、AML/KYCに準拠するために位置情報がサードパーティ（第三者団体）のサービスプロバイダーと共有されることに、同意したことになります。"
     },
     "kyc": {
-      "updateRequired": "アプリケーションをアップデートするまで、KYC（本人確認）を完了できません。",
+      "updateRequired": "アプリケーションをアップデートするまで、本人確認手続きを完了できません。",
       "wyre": {
         "disclaimer": "個人情報はKYC用にLedgerによって収集された後、WYREに転送されます。詳しくは以下をご確認ください：",
         "policy": "プライバシーポリシー",
@@ -402,13 +404,13 @@
           "cta": "続行",
           "title": "承認申請中",
           "subtitle": "個人情報がWyreに提出されました。",
-          "link": "KYC（本人確認）についての詳細"
+          "link": "本人確認手続きについての詳細"
         },
         "closed": {
-          "cta": "KYC（本人確認）をリセット",
-          "title": "KYC（本人確認）の申請却下",
-          "subtitle": "KYC（本人確認）用に提出したデータがWyreによって却下されました。",
-          "link": "KYC（本人確認）についての詳細"
+          "cta": "本人確認手続きをリセット",
+          "title": "本人確認手続きの申請却下",
+          "subtitle": "本人確認手続き用に提出したデータがWyreによって却下されました。",
+          "link": "本人確認手続きについての詳細"
         },
         "form": {
           "firstName": "名前（名）",
@@ -438,17 +440,17 @@
       }
     },
     "form": {
-      "resetKYC": "Wyreでスワップを行うには、KYC（本人確認）をリセットしてLiveアプリをアップデートする必要があります。",
-      "resetKYCCTA": "KYC（本人確認）をリセット",
+      "resetKYC": "Wyreでスワップを行うには、本人確認手続きをリセットしてLiveアプリをアップデートする必要があります。",
+      "resetKYCCTA": "本人確認手続きをリセット",
       "amount": "数量",
       "from": {
-        "title": "送付元",
+        "title": "交換元",
         "account": "アカウント",
         "amount": "送付額",
         "currency": "暗号資産"
       },
       "to": {
-        "title": "送付先",
+        "title": "交換先",
         "account": "アカウント",
         "amount": "受取額",
         "currency": "暗号資産",
@@ -478,8 +480,8 @@
       "cta": "認証をリセット"
     },
     "resetKYCModal": {
-      "title": "KYC（本人確認）を削除",
-      "subtitle": "KYC（本人確認）を削除すると、コンピューター上にローカルで保有しているすべてのトークンが消去されます。Ledgerのパートナーが提供するサービスにアクセスするには、KYC（本人確認）を再提出する必要があります。",
+      "title": "本人確認手続きを削除",
+      "subtitle": "本人確認手続きを削除すると、コンピューター上にローカルで保有しているすべてのトークンが消去されます。Ledgerのパートナーが提供するサービスにアクセスするには、本人確認手続きを再提出する必要があります。",
       "cta": "確認"
     },
     "modal": {
@@ -487,8 +489,8 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "送付元",
-          "to": "送付先",
+          "from": "交換元",
+          "to": "交換先",
           "toExchange": "送付額",
           "toReceive": "受取額",
           "terms": "ご利用規約",
@@ -517,7 +519,7 @@
           "subtitle": "スワップが正常にブロードキャストされました。 ",
           "swap": "スワップID：",
           "seeDetails": "詳細を表示",
-          "disclaimer": "&lt;0&gt;&lt;0&gt;{{provider}}&lt;/0&gt;サポート&lt;/0&gt;が必要な場合に備えて、スワップID番号を書き留めてください。",
+          "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
           "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。"
         }
       }
@@ -535,13 +537,13 @@
         "finished": "スワップが正常に完了しました。"
       },
       "date": "日付",
-      "from": "送付元",
+      "from": "交換元",
       "fromAddress": "送信元アドレス",
       "fromAddress_plural": "送信元アドレス",
-      "to": "送付先",
+      "to": "交換先",
       "toProvider": "プロバイダーのアドレス",
       "initialAmount": "初期設定額",
-      "creditedAmount": "クレジット額"
+      "creditedAmount": "受取額"
     }
   },
   "fullNode": {
@@ -551,12 +553,12 @@
     "checkNodeSettings": "ノード設定を確認",
     "edit": "編集",
     "modal": {
-      "title": "ビットコインのフルノードを接続",
+      "title": "Bitcoinのフルノードを接続",
       "disconnectTitle": "フルノードを切断",
       "steps": {
         "landing": {
           "header": "フルノードをスタートします。「 Don’t trust, verify（信頼せず、検証しよう）」",
-          "description": "ビットコインのフルノードは、全てのトランザクションやブロックを認証するため、ビットコインネットワークに貢献しながら、誰かに頼ることなくビットコインを利用できます。",
+          "description": "Bitcoinのフルノードは、全てのトランザクションやブロックを認証するため、Bitcoinネットワークに貢献しながら、誰かに頼ることなくBitcoinを利用できます。",
           "list": {
             "item1": "適切なデバイスに、Bitcoin Coreを設定します。",
             "item2": "ノードの同期完了までお待ちください。",
@@ -653,11 +655,11 @@
             },
             "ready": {
               "header": "準備",
-              "description": "フルノードが完全に同期されました。正しいビットコインアカウントの残高が表示されています。"
+              "description": "フルノードが完全に同期されました。正しいBitcoinアカウントの残高が表示されています。"
             },
             "syncing": {
               "header": "ノードの同期中です...",
-              "description": "最近の取引はまだ表示されないため、ビットコインアカウントの残高が正しくない可能性があります。可能であれば、ノードを頻繁に実行して同期してください。"
+              "description": "最近の取引はまだ表示されないため、Bitcoinアカウントの残高が正しくない可能性があります。可能であれば、ノードを頻繁に実行して同期してください。"
             },
             "scanning": {
               "header": "アカウントをスキャン中...",
@@ -667,13 +669,13 @@
         },
         "disconnect": {
           "cta": "接続切断",
-          "description": "本当によろしいですか？フルノードを切断すると、すべてのビットコインアカウントが削除されます。Ledgerのエクスプローラーを使用して、アカウントを再度追加できます。"
+          "description": "本当によろしいですか？フルノードを切断すると、すべてのBitcoinアカウントが削除されます。Ledgerのエクスプローラーを使用して、アカウントを再度追加できます。"
         }
       }
     }
   },
   "account": {
-    "lastOperations": "前回のオペレーション",
+    "lastOperations": "最近の取引",
     "contractAddress": "コントラクト：",
     "openInExplorer": "エクスプローラーで開く",
     "emptyState": {
@@ -691,7 +693,7 @@
       "advancedTips": "xpubにはプライバシーデータが含まれます。特に第三者に開示する場合は、注意して使用してください。",
       "accountName": {
         "title": "アカウント名",
-        "desc": "アカウントの説明"
+        "desc": "アカウントの名前"
       },
       "unit": {
         "title": "ユニット",
@@ -702,6 +704,7 @@
     "frozenAssets": "凍結済み資産",
     "bandwidth": "Bandwidth（バンド幅）",
     "energy": "Energy（エネルギー）",
+    "stake": "Stake",
     "delegatedAssets": "デリゲートされた資産",
     "undelegating": "デリゲート解除中",
     "availableBalanceTooltip": "これは利用可能額です。",
@@ -716,83 +719,85 @@
     "reset": "フローをリセット",
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
-      "header": "{{provider}}で暗号資産を購入する",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;で暗号通貨を購入する",
+      "header": "Buy and sell crypto",
+      "title": "Choose a provider to buy crypto",
+      "buyFrom": "Buy from anywhere",
+      "cryptoSupported": "crypto supported",
+      "payWith": "Pay with card or SEPA",
       "tab": "購入",
-      "selectCrypto": "暗号資産を選択",
-      "selectAccount": "アカウントを選択",
-      "continue": "続行",
-      "addAccount": "アカウントを追加"
+      "coinify": {
+        "header": "Buy crypto with {{provider}}",
+        "title": "Buy crypto via <0>{{provider}}</0>",
+        "selectCrypto": "Choose a crypto asset",
+        "selectAccount": "Choose an account",
+        "continue": "Continue",
+        "addAccount": "Add account"
+      }
     },
     "sell": {
       "header": "{{provider}}で暗号資産を売却する",
-      "title": "&lt;0&gt;{{provider}}&lt;/0&gt;経由で暗号資産を売却する",
+      "title": "<0>{{provider}}</0>で暗号資産を売却する",
       "tab": "売却",
       "selectCrypto": "暗号資産を選択",
       "selectAccount": "アカウントを選択",
       "continue": "続行"
-    },
-    "history": {
-      "tab": "履歴",
-      "exporting": "エクスポートしています...",
-      "exportOperations": "エクスポート処理"
     }
   },
   "lend": {
-    "title": "暗号資産をレンディング（貸し出す）",
+    "title": "暗号資産のレンディング",
     "tabs": {
       "dashboard": "ダッシュボード",
-      "opened": "貸出中の資産",
-      "closed": "レンディング終了済み",
+      "opened": "貸出中",
+      "closed": "終了済み",
       "history": "履歴"
     },
-    "assets": "レンディングする資産",
+    "assets": "貸暗号資産",
     "active": "認証済みアカウント",
-    "lendAsset": "貸暗号資産（レンディング）",
+    "lendAsset": "レンディング",
     "account": {
-      "amountSupplied": "デポジット額",
+      "amountSupplied": "預入額",
       "amountSuppliedTooltip": "ネットワーク貸出額",
       "currencyAPY": "通貨APY（年間利回り）",
-      "currencyAPYTooltip": "継続的に複利運用した預金に対して得られる年間収益率",
+      "currencyAPYTooltip": "継続的に複利運用した預入に対して得られる年間収益率",
       "accruedInterests": "未収利息",
       "accruedInterestsTooltip": "貸し出した資産に対する利息",
       "interestEarned": "獲得利息",
       "interestEarnedTooltip": "引き出し後に獲得した利息",
       "openLoans": "資産を貸し出す",
-      "closedLoans": "レンディング終了済み",
+      "closedLoans": "終了済み",
       "amountRedeemed": "引き出し額",
       "date": "日付",
-      "info": "{{currency}} アカウントから直接資産をレンディングし、利息を得ることができます。",
-      "howCompoundWorks": "コンパウンドでのレンディングはどのように機能しますか？",
-      "lend": "{{currency}} をデポジット"
+      "info": "{{currency}} アカウントから直接資産を貸し出し、利息を得ることができます。",
+      "howCompoundWorks": "コンパウンドでの貸暗号資産はどのように機能しますか？",
+      "lend": "{{currency}} を預け入れる"
     },
     "emptyState": {
       "active": {
         "title": "レンディング",
-        "description": "イーサリアムアカウントから直接資産をレンディングし、利息を得ることができます。",
-        "cta": "コンパウンドでのレンディングはどのように機能しますか？"
+        "description": "Ethereumアカウントから直接資産を貸し出し、利息を得ることができます。",
+        "cta": "コンパウンドでの貸暗号資産はどのように機能しますか？"
       },
       "closed": {
-        "title": "終了済みのレンディングはこちらに表示されます。",
+        "title": "レンディング終了済みの資産はこちらに表示されます。",
         "description": "まだレンディングを行っていません。",
-        "cta": "デポジット"
+        "cta": "預け入れ"
       },
       "opened": {
-        "title": "貸出中のローンがここに表示されます。",
-        "description": "まだ貸出を行っていません。",
+        "title": "貸出中の資産がここに表示されます。",
+        "description": "まだ貸出しを行っていません。",
         "cta": "預け入れ"
       },
       "history": {
         "title": "履歴",
-        "description": "すべてのレンディング取引の履歴を表示します。",
-        "cta": "デポジット"
+        "description": "すべてのレンディング履歴を表示する。",
+        "cta": "預け入れ"
       }
     },
     "headers": {
       "active": {
         "accounts": "アカウント",
         "amountSupplied": "資産を貸し出す",
-        "amountSuppliedTooltip": "ネットワークへのデポジット額",
+        "amountSuppliedTooltip": "ネットワークへの預入額",
         "accruedInterests": "利息残高",
         "accruedInterestsTooltip": "貸出額に対する利息",
         "status": "アカウントのステータス",
@@ -824,14 +829,14 @@
         "allAssets": "資産",
         "totalBalance": "資産残高",
         "totalBalanceTooltip": "貸出可能額",
-        "currentAPY": "預金APY（年利）",
-        "currentAPYTooltip": "継続的に運用した預金に対して得られる年間収益率",
+        "currentAPY": "預入APY（年利）",
+        "currentAPYTooltip": "継続的に運用した預入に対して得られる年間収益率",
         "actions": "アクション"
       }
     },
     "manage": {
-      "cta": "レンディングを管理",
-      "title": "ローンの管理",
+      "cta": "貸暗号資産を管理",
+      "title": "貸暗号資産を管理",
       "enable": {
         "approve": "承認",
         "manageLimit": "リミットの管理",
@@ -839,12 +844,12 @@
         "info": "このアカウントで<0>{{amount}}</0>を承認しました。手数料を支払うことで減額できます。",
         "infoNoLimit": "このアカウントを完全に承認しました。手数料を支払うことで減額できます。",
         "approvedWithLimit": "このアカウントで<0>{{value}}</0>を承認しました。",
-        "enabling": "アカウントの承認が完了すると、資産をデポジットできるようになります。",
-        "notEnabled": "資産をレンディングするには、このアカウントを承認する必要があります。",
-        "notEnoughApproved": "レンディングするアカウントで、上限額の増額を承認してください。"
+        "enabling": "アカウントの承認が完了すると、資産の預け入れが可能になります。",
+        "notEnabled": "資産のレンディングには、このアカウントを承認する必要があります。",
+        "notEnoughApproved": "貸暗号資産のアカウントで、上限額の増額を承認してください。"
       },
       "supply": {
-        "title": "デポジット",
+        "title": "預け入れ",
         "description": "プロトコルにレンディングする資産の額を入力してください。"
       },
       "withdraw": {
@@ -857,7 +862,7 @@
       "steps": {
         "selectAccount": {
           "title": "アカウントを選択",
-          "selectLabel": "レンディング用アカウント",
+          "selectLabel": "貸暗号資産アカウント",
           "cta": "承認",
           "alreadyEnabled": "このアカウントは承認済みです。"
         },
@@ -878,7 +883,7 @@
           "title": "確認",
           "success": {
             "title": "オペレーションが正常に送信されました。",
-            "text": "承認が確認作業のためにネットワークに送信されました。確認終了後、ローンを行えるようになります。",
+            "text": "承認がネットワークに送信されました。確認終了後、レンディングが可能になります。",
             "done": "閉じる",
             "info": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。"
           },
@@ -917,21 +922,21 @@
     },
     "info": {
       "terms": {
-        "title": "暗号資産をレンディング（貸し出す）",
+        "title": "暗号資産をレンディング",
         "subtitle": "コンパウンドプロトコルで資産を貸し出す",
-        "description": "コンパウンドプロトコルを使用すると、イーサリアムネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産を貸し出して利息を得ることが可能です。",
+        "description": "コンパウンドプロトコルを使用すると、Ethereumネットワーク上で資産の貸し出しや借り入れを行うことができます。Ledgerアカウントから直接、資産を貸し出して利息を得ることが可能です。",
         "switchLabel": "<1>私は</1><0>利用規約</0><1>を読み、内容に同意しました。</1>"
       },
       "steps": {
         "title": "ステップ <0>{{step}} / {{total}}</0>",
         "1": {
           "subtitle": "プロトコルを許可するため、アカウントを承認",
-          "subtitle2": "次回以降のローンの流れ",
-          "description": "一定額以下の資産をプロトコルに送るには、コンパウンドスマートコントラクトを承認する必要があります。アカウントを有効にすることで、次回以降のローンを処理するための許可がプロトコルに与えられます。"
+          "subtitle2": "次回以降のレンディングの流れ。",
+          "description": "一定額以下の資産をプロトコルに送るには、コンパウンドスマートコントラクトを承認する必要があります。アカウントを有効にすることで、次回以降のレンディングを処理するための許可がプロトコルに与えられます。"
         },
         "2": {
           "subtitle": "利息を得るために、資産を提供する",
-          "description": "アカウントが承認されると、レンディングしたい資産の額を選択して、プロトコルにトランザクションを発行できます。利息は、トランザクションが承認された直後から発生します。"
+          "description": "アカウントが承認されると、貸暗号資産の額を選択してプロトコルで取引可能です。利息は、トランザクションが承認された直後から発生します。"
         },
         "3": {
           "subtitle": "資産はいつでも引き出すことができます。",
@@ -940,11 +945,11 @@
       }
     },
     "supply": {
-      "title": "デポジット資産",
+      "title": "資産を預け入れる",
       "steps": {
         "amount": {
           "title": "数量",
-          "amountToSupply": "デポジット額",
+          "amountToSupply": "預入額",
           "maxSupply": "貸出最大額は"
         },
         "device": {
@@ -953,8 +958,8 @@
         "confirmation": {
           "title": "確認",
           "success": {
-            "title": "デポジットが正常に送信されました。",
-            "text": "ネットワークによるデポジットの承認後、利息を得られるようになります。",
+            "title": "預け入れが正常に送信されました。",
+            "text": "預け入れがネットワークにより承認されると、利息を得られるようになります。",
             "done": "閉じる",
             "cta": "詳細を表示",
             "info": "トランザクションがエクスプローラーに表示され、承認されるまでには時間がかかる場合があります。"
@@ -964,12 +969,12 @@
     },
     "noEthAccount": {
       "title": "ETHアカウントを作成してください。",
-      "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、イーサリアムアプリをインストールし、イーサリアムアカウントを作成してください",
+      "description": "<0>{{ asset }}({{ ticker }})</0> は Ethereum ERC-20 トークンです。 {{ ticker }} を貸し出すには、Ethereumアプリをインストールし、Ethereumアカウントを作成してください",
       "cta": "アカウントを追加"
     },
     "emptyAccountDeposit": {
       "title": "{{ asset }}アカウントを持っていません。",
-      "description": "暗号資産のデポジットや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はイーサリアムアドレスで受け取ってください。",
+      "description": "暗号資産の預け入れや貸し出しを行うには、{{ asset }} アカウントが必要です。資金はEthereumアドレスで受け取ってください。",
       "ctaBuy": "{{ asset }} を購入",
       "ctaReceive": "{{ asset }} を受け取る"
     }
@@ -988,12 +993,12 @@
       "week": "週",
       "month": "月",
       "year": "年",
-      "all": "すべて"
+      "all": "All"
     },
     "optionsMenu": {
       "title": "オプション",
-      "exportOperations": "オペレーション履歴を書き出す",
-      "exportToMobile": "モバイルへ書き出す"
+      "exportOperations": "取引履歴をエクスポート",
+      "exportToMobile": "モバイルへエクスポート"
     },
     "contextMenu": {
       "star": "お気に入り",
@@ -1010,7 +1015,7 @@
     "title": "ヘルプとサポート",
     "gettingStarted": {
       "title": "ご利用ガイド",
-      "desc": "スタートする"
+      "desc": "はじめる"
     },
     "status": {
       "title": "Ledgerステータス",
@@ -1044,8 +1049,8 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "試験的設定の変更には、Cacheをクリアする必要があります。",
-      "cta": "Cacheを消去"
+      "title": "試験的設定の変更には、Cacheを削除する必要があります。",
+      "cta": "Cacheを削除"
     },
     "migrate": "Ledger Liveアカウントのアップデートが利用可能です。",
     "genericTerminatedCrypto": "{{coinName}} には対応していません。",
@@ -1060,7 +1065,7 @@
     },
     "stakeCosmos": {
       "title": "COSMOSのステーキング",
-      "description": "アカウントページからATOMコインをデリゲートして、今すぐ報酬を獲得しましょう。",
+      "description": "アカウントページからATOMをデリゲートして、今すぐ報酬を獲得しましょう。",
       "cta": "今すぐCosmosをステーキングする"
     },
     "buyCrypto": {
@@ -1079,7 +1084,7 @@
     },
     "sell": {
       "title": "暗号資産を売却する",
-      "description": "Ledger Liveから直接パートナーとビットコインを売却する。"
+      "description": "Ledger Liveから直接パートナーへBitcoinを売却する。"
     },
     "stakeAlgorand": {
       "title": "ALGORANDのステーキング",
@@ -1087,10 +1092,10 @@
     },
     "swap": {
       "title": "暗号資産をスワップする",
-      "description": "Ledger Liveからパートナーを通して、暗号通貨を交換しましょう。"
+      "description": "Ledger Liveからパートナーを通して、暗号通貨を取引できます。"
     },
     "lending": {
-      "title": "暗号資産をレンディング（貸し出す）",
+      "title": "暗号資産のレンディング",
       "description": "コンパウンドプロトコルにステーブルコインを貸し出し、利息を得ることができます。"
     },
     "blackfriday": {
@@ -1124,12 +1129,12 @@
       },
       "confirm": {
         "title": "接続",
-        "details": "ウォレットを通じて以下のイーサリアムアカウントに接続しようとしています：",
-        "deeplinkDetails": "Ledger Liveに接続します。イーサリアムアカウントを選択："
+        "details": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
+        "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択："
       }
     },
     "connectedscreen": {
-      "info": "デスクトップからdAppにアクセス可能になりました。",
+      "info": "ウェブブラウザから、{{name}}dAppにアクセス可能になりました。",
       "warning": "dAppsからの受取アドレスの共有は安全ではありません。資金を受け取るためのアドレスを共有するときは、必ずLedger Liveを使用してください。",
       "disconnected": "dApp、WalletConnect、Ledger Live間の接続に問題があります。しばらく待つか、接続を再起動してください。"
     }
@@ -1140,8 +1145,8 @@
       "desc": "アカウントを追加して、他の暗号資産を管理",
       "createAccount": "アカウントを追加"
     },
-    "recentActivity": "前回のオペレーション",
-    "totalBalance": "合計残高",
+    "recentActivity": "最近の取引",
+    "totalBalance": "総資産",
     "transactionsPendingConfirmation": "一部のトランザクションはまだ承認されていません。これらは承認後に残高に反映され、使用可能になります。"
   },
   "currentAddress": {
@@ -1149,7 +1154,8 @@
     "for": "<1><0>{{name}}</0></1>アドレス",
     "messageIfUnverified": "共有アドレスが、お使いのデバイスのアドレスと完全に一致していることを確認してください。",
     "messageIfSkipped": "{{name}} のアドレスが、Ledgerデバイスで確認できません。セキュリティを最適化するために、アドレスを確認してください。",
-    "showQrCode": "QRコードを表示"
+    "showQrCode": "QRコードを表示",
+    "taprootWarning": "Make sure the sender supports taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1179,75 @@
   "genuinecheck": {
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
+  "market": {
+    "title": "Market",
+    "currency": "Currency",
+    "rangeLabel": "Time",
+    "goBack": "Go back",
+    "filters": {
+      "title": "Filters",
+      "show": "Show",
+      "all": "All",
+      "isLedgerCompatible": "Ledger Live Compatible",
+      "isFavorite": "Starred Assets",
+      "applyFilters": "Apply filters",
+      "clearAll": "Clear all"
+    },
+    "marketList": {
+      "crypto": "Crypto",
+      "price": "Price",
+      "change": "Change",
+      "marketCap": "Market cap",
+      "last7d": "Last 7 days"
+    },
+    "detailsPage": {
+      "priceStatistics": "Price stats",
+      "tradingVolume": "Trading volume",
+      "24hLowHight": "24h Low / 24h High",
+      "7dLowHigh": "7d Low / 7d High",
+      "allTimeHigh": "All time high",
+      "allTimeLow": "All time low",
+      "marketCapRank": "Market cap rank",
+      "marketCapDominance": "Market cap dominance",
+      "supply": "Supply",
+      "circulatingSupply": "Circulating supply",
+      "totalSupply": "Total supply",
+      "maxSupply": "Max supply",
+      "assetNotSupportedOnLedgerLive": "This asset is not supported on Ledger Live.",
+      "supportedCoinsAndTokens": "Supported coins & Tokens"
+    },
+    "range": {
+      "1H_label": "1H",
+      "1D_label": "1D",
+      "1W_label": "1W",
+      "1M_label": "1M",
+      "1Y_label": "1Y",
+      "1h": "1h",
+      "24h": "24h",
+      "7d": "7d",
+      "30d": "30d",
+      "1y": "1y",
+      "1H_selectorLabel": "Last 1 hour",
+      "1D_selectorLabel": "Last 24 hours",
+      "1W_selectorLabel": "last week",
+      "1M_selectorLabel": "Last month",
+      "1Y_selectorLabel": "Last year"
+    },
+    "warnings": {
+      "connectionError": "Connection Error",
+      "ledgerUnableToRetrieveData": "Ledger Live is unable to retrieve data.",
+      "checkInternetAndReload": "Please check your internet connection and reload this page.",
+      "reload": "Reload",
+      "noCryptosFound": "No coins found",
+      "noSearchResultsFor": "Sorry, we did not find any coins for <0>{{search}}</0>. Please retry the search with another keyword.",
+      "noSearchResults": "Sorry, we did not find any search results.",
+      "retrySearchKeyword": "Please retry the search with another keyword.",
+      "retrySearchParams": "Please retry the search with another parameters.",
+      "trackFavAssets": "Track your favourite",
+      "clickOnStarIcon": "Clicking on the star icon next to an asset will automatically add them to your favorites.",
+      "browseAssets": "Browse assets"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1257,7 @@
       "attributes": {
         "properties": "プロパティ",
         "description": "説明",
-        "contract": "コントラクトアドレス",
+        "tokenAddress": "Token Address",
         "tokenId": "トークンID",
         "quantity": "数量"
       }
@@ -1248,7 +1323,7 @@
       "successDesc": "{{assets}} アカウントが更新され、使用できるようになりました。",
       "mobileTitle": "アカウントをモバイルにエクスポート",
       "mobileDesc": "下のボタンをクリックして、アップデートされたアカウントをLedger Live mobileアプリにエクスポートする。",
-      "mobileCTA": "モバイルへ書き出す",
+      "mobileCTA": "モバイルへエクスポート",
       "description": "Ledger Liveの新機能を利用するには、アカウントのアップデートが必要です。",
       "currency": "アップデートが必要な1件の{{currency}} アカウント：",
       "currency_plural": "アップデートが必要な{{count}} 件の{{currency}} アカウント：",
@@ -1284,7 +1359,7 @@
       "import": "アカウント",
       "finish": "確認"
     },
-    "fullNodeReadyInfo": "アカウントはビットコインのフルノードを使用して追加されます。",
+    "fullNodeReadyInfo": "アカウントはBitcoinのフルノードを使用して追加されます。",
     "fullNodeConfigure": "ノードの構成",
     "tokensTip": "{{token}} ({{ticker}}) は {{tokenType}} トークンです。 {{currency}} アカウントで直接トークンを受け取ることができます。",
     "accountToImportSubtitle_plural": "既存アカウントを追加",
@@ -1316,7 +1391,7 @@
         "title": "既存のアカウントを追加"
       },
       "creatable": {
-        "title": "新規アカウントの追加"
+        "title": "新規アカウントを追加"
       },
       "imported": {
         "title": "ポートフォリオにすでにアカウントがあります。 ({{count}})"
@@ -1328,7 +1403,7 @@
   },
   "operationDetails": {
     "whatIsThis": "この操作は何ですか？",
-    "title": "オペーレーション詳細",
+    "title": "取引詳細",
     "type": "種類",
     "amount": "数量",
     "account": "アカウント",
@@ -1358,14 +1433,14 @@
       "name": "トークン名",
       "contract": "トークンコントラクト",
       "id": "トークン（NFT）ID",
-      "amount": "数量"
+      "quantity": "Quantity"
     },
     "extra": {
       "frozenAmount": "凍結額",
       "unfreezeAmount": "凍結解除額",
       "votes": "{{number}} 票",
       "votesAddress": "<2>{{name}}</2>に<0>{{votes}}</0>",
-      "validators": "バリデータ",
+      "validators": "バリデーター",
       "redelegated": "再デリゲート済み",
       "redelegatedFrom": "再デリゲート元",
       "redelegatedTo": "再デリゲート先",
@@ -1379,19 +1454,19 @@
       "rewards": "獲得した報酬",
       "bondedAmount": "ボンド済み額",
       "unbondedAmount": "ボンド解除済み額",
-      "withdrawUnbondedAmount": "Withdrawn Amount",
+      "withdrawUnbondedAmount": "引き出し額",
       "palletMethod": "方法",
       "transferAmount": "送付額",
-      "validatorsCount": "バリデータ（{{number}}）"
+      "validatorsCount": "バリデーター（{{number}}）"
     }
   },
   "operationList": {
-    "noMoreOperations": "これで全部です。"
+    "noMoreOperations": "以上です。"
   },
   "DeviceAction": {
     "allowAppPermission": "デバイスで{{wording}} アプリを開く",
     "allowAppPermissionSubtitleToken": "{{token}} トークンを管理",
-    "allowManagerPermission": "デバイスで{{wording}} を許可する",
+    "allowManagerPermission": "デバイスで{{wording}} を許可してください",
     "loading": "読み込み中...",
     "connectAndUnlockDevice": "デバイスを接続してロックを解除する",
     "unlockDevice": "デバイスのロックを解除する",
@@ -1401,12 +1476,12 @@
     "appNotInstalledTitle_plural": "必要なアプリが揃っていません。",
     "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
-    "openManager": "マネージャーを開く",
+    "openManager": "「管理」を開く",
     "outdated": "アプリのバージョンが最新ではありません。",
     "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
     "installAppDescription": "インストールが完了するまでお待ちください。",
-    "listApps": "アプリの依存関係を確認しています。",
+    "listApps": "アプリの状態を確認しています。",
     "listAppsDescription": "必要な全てのアプリを確認中です。しばらくお待ちください。",
     "swap": {
       "notice": "送付する前に、スワップの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
@@ -1441,8 +1516,8 @@
     },
     "disconnected": {
       "title": "お使いのデバイスでアプリが開いているようです",
-      "subtitle": "Reopening the Manager will quit the app on your device",
-      "ctaReopen": "Reopen Manager",
+      "subtitle": "「管理」を再度開いて、デバイスのアプリを終了する",
+      "ctaReopen": "「管理」を再度開く",
       "ctaPortfolio": "「ポートフォリオ」に戻る"
     },
     "deviceStorage": {
@@ -1464,7 +1539,7 @@
       "noResultsDesc": "スペルを確認してから、もう一度お試しください。",
       "filter": {
         "title": "表示",
-        "all": "すべて",
+        "all": "All",
         "supported": "Live対応済み",
         "installed": "インストール済み",
         "not_installed": "未インストール"
@@ -1503,7 +1578,8 @@
         "uninstall": "アンインストール",
         "notEnoughSpace": "十分なストレージ容量がありません。",
         "supported": "Ledger Live対応",
-        "addAccount": "アカウントを追加",
+        "not_supported": "サードパーティのウォレットが必要です",
+        "addAccount": "アカウント追加",
         "addAccountTooltip": "{{appName}} アカウントを追加",
         "addAccountWarn": "アプリのアップデート完了までお待ちください。",
         "learnMore": "詳細はこちら",
@@ -1600,9 +1676,9 @@
         "boot": "{{option}} が表示されるまで、サイドボタンを長押ししてください。",
         "recoveryMode": "{{mode}} モードをタップします。ダッシュボードが表示されるまでお待ちください。",
         "third": "3. すべてのアプリをアンインストール",
-        "openLive": "Ledger Liveでマネージャーを開く",
-        "uninstall": "{{deviceName}} に現在インストールされている、すべてのアプリのグレーのゴミ箱アイコンをクリックします。これにより、ファームウェアインストーラ用のスペースが確保されます。",
-        "disclaimer": "注意：あなたの資金は、この操作の影響を受けません。 ブロックチェーンの暗号資産にアクセスするための秘密鍵は、リカバリーシートに保管されています。"
+        "openLive": "Ledger Liveで「管理」を開く",
+        "uninstall": "現在{{deviceName}} にインストールされている、すべてのアプリのグレーのゴミ箱アイコンをクリックする。これにより、ファームウェアインストーラ用のスペースが確保されます。",
+        "disclaimer": "注意：お客様の資金は、この操作の影響を受けません。 ブロックチェーンの暗号資産にアクセスするための秘密鍵は、リカバリーシートに保管されています。"
       }
     }
   },
@@ -1696,9 +1772,9 @@
         "maxSelected": "最大選択数：{{total}}",
         "allVotesAreUsed": "すべての資産が分配されます。",
         "maxUsed": "資金が不足しています。",
-        "validators": "バリデータ ({{total}})",
+        "validators": "バリデーター ({{total}})",
         "votes": "利用可能な資産： {{total}}",
-        "noResults": "<0>{{search}}</0>に該当するバリデータが見つかりませんでした。"
+        "noResults": "<0>{{search}}</0>に該当するバリデーターが見つかりませんでした。"
       },
       "connectDevice": {
         "title": "デバイス"
@@ -1728,15 +1804,15 @@
   },
   "receive": {
     "title": "受け取る",
-    "successTitle": "安全に共有されたアドレス",
+    "successTitle": "アドレスが安全に共有されました",
     "steps": {
       "chooseAccount": {
         "title": "アカウント",
-        "label": "入金アカウント",
+        "label": "受取アカウント",
         "parentAccount": "1. {{currencyName}} アカウントを選択",
         "token": "2. トークンを選択",
         "verifyTokenType": "<0>{{token}}</0>が<0>{{tokenType}}</0>トークンであることを確認してください。 {{currency}} アカウントに他の暗号資産が送信されると、失われる可能性があります。",
-        "warningTokenType": "{{currency}}アカウントには、&lt;0&gt;{{ticker}}&lt;/0&gt;または&lt;0&gt;{{tokenType}}&lt;/0&gt;トークンのみを送金してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
+        "warningTokenType": "{{currency}}アカウントには、<0>{{ticker}}</0>または<0>{{tokenType}}</0>トークンのみを送付してください。他の暗号資産を送信すると、資金が永久に失われる可能性があります。"
       },
       "connectDevice": {
         "title": "デバイス",
@@ -1755,10 +1831,10 @@
   "send": {
     "title": "送る",
     "titleNft": "NFTを送付",
-    "totalSpent": "引き落とし合計",
+    "totalSpent": "合計引落額",
     "steps": {
       "recipient": {
-        "title": "受取人",
+        "title": "送付先",
         "nftRecipient": "送付するNFT"
       },
       "amount": {
@@ -1781,7 +1857,7 @@
         "from": "送付元",
         "to": "送付先",
         "selectAccountDebit": "引き落としアカウント",
-        "recipientAddress": "受取人アドレス",
+        "recipientAddress": "送付先アドレス",
         "amount": "数量",
         "fees": "ネットワーク手数料",
         "useMax": "最大額を送る",
@@ -1789,7 +1865,7 @@
         "rippleTagPlaceholder": "オプション",
         "ethereumGasLimit": "ガスリミット",
         "ethereumGasPrice": "ガス代",
-        "unitPerByte": "1バイトあたり{{unit}}",
+        "unitPerByte": "{{unit}} per byte",
         "nft": "NFT",
         "nftQuantity": "数量"
       },
@@ -1840,16 +1916,16 @@
   "distribution": {
     "asset": "資産",
     "price": "価格",
-    "distribution": "割り当て",
+    "distribution": "配分",
     "amount": "数量",
-    "value": "価値",
+    "value": "金額",
     "showAll": "すべてを表示",
     "showLess": "表示を減らす",
     "header": "資産配分（{{count}}）"
   },
   "accountDistribution": {
     "account": "アカウント",
-    "distribution": "分配",
+    "distribution": "配分",
     "amount": "数量",
     "value": "価値",
     "header": "アカウント配分（{{count}}）"
@@ -1862,7 +1938,7 @@
         "drawerTitle": "Elrondの統合",
         "title": "Ledger Liveは、Elrond eGold（EGLD）トークン対応です。",
         "description": "Ledger Liveで、eGold（EGLD）トークンを安全に保管・管理できるようになりました。",
-        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデータの報酬など、さまざまな用途に使用されます。",
+        "description2": "Elrond eGold（EGLD）トークンは、Elrond Networkのネイティブトークンであり、トランザクション、ステーキング、スマートコントラクト、ガバナンス、バリデーターの報酬など、さまざまな用途に使用されます。",
         "description3": "LedgerはElrondチームと積極的に協力し、ステーキングやESDT（Elrond Standard Digital Token）のネイティブサポートなどの機能を追加していく予定です。",
         "website": "The Internet Scale Blockchain"
       }
@@ -1893,9 +1969,9 @@
       "flow": {
         "steps": {
           "starter": {
-            "description": "資産を安全に管理しながら、TRXを凍結して報酬を獲得しましょう。",
+            "description": "安全かつ完全に資産を所有しながら、TRXを凍結して報酬を獲得しましょう。",
             "bullet": {
-              "delegate": "資産をデリゲートしても所有者は変りません。",
+              "delegate": "デリゲートしても資産の所有者は変わりません。",
               "access": "資産の凍結は、3日後に解除できます。",
               "ledger": "Ledgerデバイスを使って、安全に資産の凍結と投票をしましょう。"
             },
@@ -1946,14 +2022,14 @@
     "inputSelected": "選択中",
     "toSpend": "コインを使用",
     "toReturn": "元に戻す",
-    "modalTitle": "コイン管理",
-    "coincontrol": "コイン管理",
+    "modalTitle": "コインコントロール",
+    "coincontrol": "コインコントロール",
     "advanced": "詳細オプション",
     "ctaDisabled": "このアカウントにはUTXOがありません。",
     "whatIs": "コイン選択とは？",
     "rbf": "トランザクションの変更を許可（Replace-By-Fee）",
-    "strategy": "コイン選択戦略",
-    "selected": "戦略のために選択されたコイン",
+    "strategy": "コイン選択方式",
+    "selected": "コイン選択の方式",
     "amount": "送付額：",
     "replaceable": "交換可能",
     "cannotSelect": {
@@ -1962,51 +2038,51 @@
     },
     "pending": "保留中",
     "pickUnconfirmedRBF": "未確認の交換可能なトランザクションからのコインを含みます。",
-    "pickingStrategy": "UTXO選び方の戦略",
+    "pickingStrategy": "UTXO選択方式",
     "pickingStrategyLabels": {
-      "DEEP_OUTPUTS_FIRST": "Oldest coins first (FIFO)",
+      "DEEP_OUTPUTS_FIRST": "先入れ先出し方式 (FIFO)",
       "OPTIMIZE_SIZE": "手数料を最小化（サイズ最適化）",
-      "MERGE_OUTPUTS": "今後の手数料を最小限化（コインを統合する）"
+      "MERGE_OUTPUTS": "今後の手数料を最小化（コインをマージ）"
     }
   },
   "cosmos": {
     "delegation": {
       "emptyState": {
-        "description": "資産をデリゲートすることで、ATOMで報酬を獲得できます。",
+        "description": "資産をデリゲートすることで、ATOMの報酬を獲得できます。",
         "info": "デリゲートの仕組み",
         "delegation": "報酬を獲得する"
       },
       "claimRewards": "報酬獲得を申請",
-      "header": "デリゲーション",
+      "header": "デリゲート",
       "noRewards": "受け取れる報酬はありません。",
       "delegate": "追加",
       "undelegate": "デリゲート解除",
       "redelegate": "再デリゲート",
       "redelegateDisabledTooltip": "<0>{{days}}</0>に再デリゲートすることができます。",
-      "redelegateMaxDisabledTooltip": "一度に<0>7</0>名以上のバリデータを再デリゲートすることはできません。",
-      "undelegateDisabledTooltip": "一度に<0>7</0>以上のバリデータをデリゲート解除することはできません。",
+      "redelegateMaxDisabledTooltip": "一度に<0>7</0>名以上のバリデーターを再デリゲートすることはできません。",
+      "undelegateDisabledTooltip": "一度に<0>7</0>以上のバリデーターをデリゲート解除することはできません。",
       "reward": "報酬獲得を申請",
       "currentDelegation": "デリゲート済み：<0>{{amount}}</0>",
       "estYield": "推定利回り",
-      "activeTooltip": "デリゲートされた数が報酬になります。",
+      "activeTooltip": "デリゲートした分の報酬になります。",
       "inactiveTooltip": "デリゲート解除された数は、報酬を生成しません。",
       "minSafeWarning": "残高不足です。",
       "flow": {
-        "title": "デリゲート（委任）",
+        "title": "デリゲート",
         "steps": {
           "starter": {
-            "description": "ATOM資産をバリデーターにデリゲートすることで、報酬を得ることができます。",
+            "description": "ATOMをバリデーターにデリゲートすると、報酬を獲得できます。",
             "bullet": [
               "デリゲートされた資産の所有者は変わりません。",
-              "Ledgerデバイスを使ってデリゲートする",
-              "資産はデリゲート解除から21日後に、利用可能になります"
+              "Ledgerデバイスを使ってデリゲートする。",
+              "資産はデリゲート解除から21日後に、利用可能です。"
             ],
             "warning": {
-              "description": "バリデータは慎重に選択してください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
+              "description": "バリデーターは慎重に選択してください。良くないバリデーターに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
             }
           },
           "validator": {
-            "title": "バリデータ"
+            "title": "バリデーター"
           },
           "connectDevice": {
             "title": "デバイス"
@@ -2034,8 +2110,8 @@
             "compoundOrClaim": "コンパウンドとキャッシュイン？",
             "compoundDescription": "報酬はデリゲート額に加算されます。",
             "claimDescription": "報酬は利用可能残高に加算されます。",
-            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
-            "claimInfo": "<0>{{amount}}</0>を以下のバリデータから獲得しました。「続行」をクリックすることで、すぐに報酬獲得が申請され、自動的に同じバリデータにデリゲートされます。",
+            "compoundInfo": "<0>{{amount}}</0>を獲得しました。「続行」をクリックすると、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
+            "claimInfo": "以下のバリデーターから<0>{{amount}}</0>を獲得しました。「続行」をクリックすると、すぐに報酬獲得が申請され、自動的に同じバリデーターにデリゲートされます。",
             "selectLabel": "デリゲートを選ぶ"
           },
           "connectDevice": {
@@ -2065,15 +2141,15 @@
         "steps": {
           "starter": {
             "title": "再デリゲート",
-            "description": "再デリゲートを使用して、バリデータを別のバリデータに変更できます。 しかし、再デリゲートすると21日間のタイムロックが発生するため、待たなければなりません。",
-            "warning": "バリデータを慎重に選んでください：バリデータが適切でない場合、デリゲートされた資産の一部が失われる可能性があります。 最大<0>7人の保留中再デリゲート</0>を持つことが可能です。",
+            "description": "再デリゲートを使用して、バリデーターを別のバリデーターに変更できます。 しかし、再デリゲートすると21日間のタイムロックが発生するため、待たなければなりません。",
+            "warning": "バリデーターを慎重に選んでください：バリデーターが適切でない場合、デリゲートされた資産の一部が失われる可能性があります。 最大<0>7人の保留中再デリゲート</0>を持つことが可能です。",
             "howDelegationWorks": "デリゲートの仕組み"
           },
           "validators": {
-            "title": "バリデータ",
+            "title": "バリデーター",
             "currentDelegation": "現在のデリゲート",
             "newDelegation": "新しいデリゲート",
-            "chooseValidator": "バリデータを選ぶ",
+            "chooseValidator": "バリデーターを選ぶ",
             "warning": "新しいバリゲータに変更したい場合は、再デリゲートするまで<0>21日間</0> 待機しなりません。"
           },
           "device": {
@@ -2103,7 +2179,7 @@
             "subtitle": "デリゲートの解除は<0>21日</0>で完了します。",
             "warning": "報酬はすぐにキャッシュインされます。 再デリゲート額は、<0>21日間のタイムロック</0>後に、利用可能残高へ戻されます。",
             "fields": {
-              "validator": "バリデータ",
+              "validator": "バリデーター",
               "amount": "デリゲート解除額"
             }
           },
@@ -2144,7 +2220,7 @@
             "title": "確認",
             "success": {
               "title": "{{token}} 資産が正常に追加されました。",
-              "text": "アルゴランドアカウントで、<0>{{token}}</0>資産の受取や送付ができるようになりました。",
+              "text": "Algorandアカウントで、<0>{{token}}</0>資産の受取や送付ができるようになりました。",
               "cta": "詳細を表示"
             },
             "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
@@ -2154,20 +2230,20 @@
     },
     "claimRewards": {
       "header": "報酬",
-      "tooltip": "アルゴランドの報酬は定期的に配布され、取引を行うと自動的に報酬を申請します。",
+      "tooltip": "Algorandの報酬は定期的に配布され、取引を行うと自動的に報酬を申請します。",
       "cta": "報酬獲得を申請",
-      "rewardsDisabledTooltip": "報酬はありません。取引を行うと、アルゴランドの報酬は自動的に受け取られます。報酬を獲得するために、ALGOを受け取りましょう。",
+      "rewardsDisabledTooltip": "報酬はありません。取引を行うと、Algorandの報酬は自動的に受け取られます。報酬を獲得するために、ALGOを受け取りましょう。",
       "flow": {
         "title": "報酬獲得を申請",
         "steps": {
           "starter": {
-            "description": "アルゴランドの資産を保有・管理するだけで、報酬を受け取ることができます。",
+            "description": "Algorandの資産を保有・管理するだけで、報酬を受け取ることができます。",
             "bullet": {
               "delegate": "報酬を受け取るには、1ALGO以上の残高が必要です。",
               "access": "アカウントの残高を増やすと、報酬も増えます。",
               "ledger": "報酬を獲得するには、アカウントとの間でトランザクションを実行してください。"
             },
-            "learnMore": "アルゴランドの報酬の仕組みとは？",
+            "learnMore": "Algorandの報酬の仕組みとは？",
             "button": {
               "cta": "Algoを受け取る"
             }
@@ -2195,7 +2271,7 @@
   },
   "polkadot": {
     "lockedBalance": "ボンド中",
-    "lockedTooltip": "報酬を得るには、選出されたバリデータに資産をボンド（預け入れ）する必要があります。",
+    "lockedTooltip": "報酬を得るには、選出されたバリデーターに資産をボンド（預け入れ）する必要があります。",
     "unlockingBalance": "ボンド解除中",
     "unlockingTooltip": "ボンド解除中の資産は、引き出せるようになるまで28日間ロックされます。",
     "unlockedBalance": "ボンド解除済み",
@@ -2204,7 +2280,7 @@
     "bondedBalanceBelowMinimum": "ボンド残高が、現在の下限額{{minimumBondBalance}}を下回っています。ノミネートが解除されてしまう可能性があります。",
     "nomination": {
       "emptyState": {
-        "description": "資産をボンド（預け入れ）後、バリデータをノミネートすることで報酬を獲得できます。",
+        "description": "資産をボンド（預け入れ）後、バリデーターをノミネートすることで報酬を獲得できます。",
         "info": "ノミネートの仕組み"
       },
       "header": "ノミネーション",
@@ -2215,25 +2291,25 @@
       "amount": "ボンド済み額",
       "commission": "コミッション",
       "active": "アクティブ",
-      "activeTooltip": "このバリデータは選出済みで、ボンド済み資産に対する報酬を獲得中です。",
+      "activeTooltip": "このバリデーターは選出済みで、ボンド済み資産に対する報酬を獲得中です。",
       "inactive": "停止中",
-      "inactiveTooltip": "このバリデータは選出済みですが、ボンドされた資産に対する報酬を獲得していません。",
+      "inactiveTooltip": "このバリデーターは選出済みですが、ボンドされた資産に対する報酬を獲得していません。",
       "waiting": "未選出",
-      "waitingTooltip": "このバリデータは選出されていないため、報酬を獲得していません。",
-      "notValidator": "バリデータではありません。",
-      "notValidatorTooltip": "このアドレスはバリデータではありません。",
+      "waitingTooltip": "このバリデーターは選出されていないため、報酬を獲得していません。",
+      "notValidator": "バリデーターではありません。",
+      "notValidatorTooltip": "このアドレスはバリデーターではありません。",
       "elected": "選出済み",
       "nominatorsCount": "{{nominatorsCount}}名のノミネーター",
-      "nominatorsTooltip": "現在、このバリデータは{{count}}名のノミネーターにより選出されています。",
+      "nominatorsTooltip": "現在、このバリデーターは{{count}}名のノミネーターにより選出されています。",
       "oversubscribed": "ノミネーター超過（{{nominatorsCount}}）名",
       "oversubscribedTooltip": "ステーキング量上位{{maxNominatorRewardedPerValidator}}名のノミネーターだけが報酬を獲得できます。",
       "hasPendingBondOperation": "ボンドの承認がまだ完了していません。",
-      "electionOpen": "現在、新しいバリデータを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
-      "electionOpenTooltip": "バリデータ選出中の操作は、無効となります。",
+      "electionOpen": "現在、新しいバリデーターを選出中です。そのため、最大15分間ほどステーキング処理を行うことができません。",
+      "electionOpenTooltip": "バリデーター選出中の操作は、無効となります。",
       "externalControllerTooltip": "このアカウントは、別のアカウントに管理されています。",
-      "externalControllerUnsupported": "&lt;0&gt;このStashアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のアカウントによってコントロールされています。&lt;1&gt;Ledger Liveでステーキングするには、このStashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalControllerUnsupported": "<0>このStashアカウントは、<0>{{controllerAddress}}</0>の別のアカウントに管理されています。</0><1>Ledger Liveでステーキングするには、このStashアカウントをコントローラーとして設定する必要があります。</1>",
       "externalStashTooltip": "このアカウントは、別のアカウントを管理しています。",
-      "externalStashUnsupported": "&lt;0&gt;このアカウントは、アドレス&lt;0&gt;{{stashAddress}}&lt;/0&gt;を持つ別のStashアカウントのコントローラーです。&lt;1&gt;Ledger Liveでステーキングするには、Stashアカウントを独自のコントローラーとして設定する必要があります。",
+      "externalStashUnsupported": "<0>このアカウントは、<0>{{stashAddress}}</0>の別のStashアカウントに管理されています。</0><1>Ledger Liveでステーキングするには、自身のStashアカウントをコントローラーとして設定する必要があります。</1>",
       "showInactiveNominations": "すべてのノミネートを表示（{{count}}）",
       "hideInactiveNominations": "アクティブなノミネートのみを表示",
       "noActiveNominations": "アクティブなノミネートはありません。",
@@ -2253,7 +2329,7 @@
       "title": "資産管理",
       "bond": {
         "title": "ボンド（預入れ）",
-        "description": "報酬を得るには、まず任意の数量をボンドします。次に、バリデータのノミネートを行う必要があります。"
+        "description": "報酬を得るには、まず任意の数量をボンドします。次に、バリデーターのノミネートを行う必要があります。"
       },
       "unbond": {
         "title": "ボンド解除",
@@ -2265,7 +2341,7 @@
       },
       "nominate": {
         "title": "ノミネート",
-        "description": "最大16人のバリデータを選択できます。報酬を獲得するには、ノミネートがアクティブであることを確認する必要があります。"
+        "description": "最大16人のバリデーターを選択できます。報酬を獲得するには、ノミネートがアクティブであることを確認する必要があります。"
       },
       "chill": {
         "title": "ノミネートを解除する",
@@ -2276,8 +2352,8 @@
       "title": "ノミネート",
       "steps": {
         "validators": {
-          "title": "バリデータ",
-          "notValidatorsRemoved": "現在バリデータではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
+          "title": "バリデーター",
+          "notValidatorsRemoved": "現在バリデーターではない{{count}}個のアドレスを、ノミネートしました。これらのアドレスは、ノミネートのトランザクションから自動的に削除されます。",
           "maybeChill": "代わりにノミネートを解除する"
         },
         "connectDevice": {
@@ -2287,8 +2363,8 @@
           "title": "承認",
           "label": "承認",
           "success": {
-            "title": "バリデータが正常にノミネートされました。",
-            "text": "選んだバリデータに資産がボンド（預入れ）されると、報酬の獲得が開始します。",
+            "title": "バリデーターが正常にノミネートされました。",
+            "text": "選んだバリデーターに資産がボンド（預入れ）されると、報酬の獲得が開始します。",
             "cta": "詳細を表示"
           },
           "pending": {
@@ -2311,14 +2387,14 @@
       },
       "steps": {
         "starter": {
-          "description": "資産をボンド（預入れ）した後、バリデータをノミネートすることで報酬を獲得できます。",
+          "description": "資産をボンド（預入れ）した後、バリデーターをノミネートすることで報酬を獲得できます。",
           "bullet": [
             "ボンドされた資産の所有者は変わりません。",
             "Ledgerデバイスを使ってノミネートする。",
             "ボンド解除28日後に、資産を再び引き出せるようになります。"
           ],
           "help": "ノミネートの仕組み",
-          "warning": "バリデータは慎重に選んでください。良くないバリデータに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
+          "warning": "バリデーターは慎重に選んでください。良くないバリデーターに資産を預けると、資産の一部がペナルティによって失われてしまう危険があります。"
         },
         "amount": {
           "title": "数量",
@@ -2339,8 +2415,8 @@
           "title": "承認",
           "success": {
             "title": "資産が正常にボンドされました。",
-            "text": "ネットワークによるトランザクションの承認後、バリデータをノミネートすることができます。",
-            "textNominate": "ネットワークによるトランザクションの承認後、バリデータをノミネートできるようになります。",
+            "text": "ネットワークによるトランザクションの承認後、バリデーターをノミネートすることができます。",
+            "textNominate": "ネットワークによるトランザクションの承認後、バリデーターをノミネートできるようになります。",
             "nominate": "ノミネート",
             "later": "後でノミネートする。"
           },
@@ -2439,7 +2515,7 @@
           "label": "承認",
           "success": {
             "title": "トランザクションが正常に送信されました。",
-            "text": "操作は、すぐに履歴で確認できます。",
+            "text": "取引はすぐに履歴で確認できます。",
             "cta": "詳細を表示"
           },
           "pending": {
@@ -2452,7 +2528,7 @@
   },
   "delegation": {
     "title": "報酬を獲得する",
-    "header": "デリゲート（委任）",
+    "header": "デリゲート",
     "validator": "Validator",
     "yield": "推定利回り",
     "address": "アドレス",
@@ -2475,11 +2551,11 @@
       "steps": {
         "starter": {
           "title": "ステーキング報酬を獲得する",
-          "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデータをデリゲートして、ステーキング報酬を得ることができます。",
+          "description": "資産をしっかり管理しつつ、Tezosアカウントをサードパーティのバリデーターをデリゲートして、ステーキング報酬を得ることができます。",
           "bullet": {
-            "delegate": "アカウントをデリゲートしても、アカウントの所有者は変わりません。",
+            "delegate": "デリゲートしてもアカウントの所有者は変わりません。",
             "access": "いつでも、資産を管理することができます。",
-            "ledger": "Ledgerデバイスを使って、安全にデリゲートしましょう。"
+            "ledger": "Ledgerデバイスで安全にデリゲートする。"
           },
           "button": {
             "cta": "デリゲートして報酬を得る"
@@ -2495,22 +2571,22 @@
           "label": "概要",
           "toDelegate": "デリゲートするアカウント",
           "toUndelegate": "デリゲート解除するアカウント",
-          "validator": "バリデータ",
+          "validator": "バリデーター",
           "select": "選択",
           "yield": "推定利回り：{{amount}}",
-          "randomly": "ランダムに選択されたバリデータ",
-          "termsAndPrivacy": "正しくデリゲートしても、バリデータからの報酬は保証されません。"
+          "randomly": "ランダムに選択されたバリデーター",
+          "termsAndPrivacy": "正しくデリゲートしても、バリデーターからの報酬は保証されません。"
         },
         "validator": {
-          "title": "バリデータを選択",
-          "description": "推定報酬率を比較することでバリデータを選択できます。",
-          "customValidator": "カスタムバリデータ",
+          "title": "バリデーターを選択",
+          "description": "推定報酬率を比較することでバリデーターを選択できます。",
+          "customValidator": "カスタムバリデーター",
           "providedBy": "<1><0>{{name}}</0></1>が提供する利率。"
         },
         "custom": {
-          "title": "カスタムバリデータ",
-          "text": "アカウントをデリゲートするには、カスタムバリデータのアドレスを入力してください。",
-          "button": "バリデータを使用"
+          "title": "カスタムバリデーター",
+          "text": "アカウントをデリゲートするには、カスタムバリデーターのアドレスを入力してください。",
+          "button": "バリデーターを使用"
         },
         "undelegate": {
           "title": "デリゲート解除アカウント"
@@ -2521,7 +2597,7 @@
           "success": {
             "title": "デリゲートが送信されました。",
             "titleUndelegated": "デリゲート終了",
-            "text": "デリゲートのトランザクションが正常にブロードキャストされました。バリデータにもよりますが、約40日以内に最初の報酬を受け取ることができます。",
+            "text": "デリゲートのトランザクションが正常にブロードキャストされました。バリデーターにもよりますが、約40日以内に最初の報酬を受け取ることができます。",
             "textUndelegated": "処理が承認された時点で、アカウントのデリゲートは終了します。アカウントはいつでも再デリゲートすることができます。"
           },
           "broadcastError": "トランザクションが失敗した可能性があります。しばらく待ってから、取引履歴を確認した上でもう一度やり直してください。"
@@ -2530,7 +2606,7 @@
     },
     "contextMenu": {
       "topUp": "さらに受け取る",
-      "redelegate": "バリデータを変更",
+      "redelegate": "バリデーターを変更",
       "stopDelegation": "デリゲート終了"
     }
   },
@@ -2552,7 +2628,7 @@
       "display": "一般",
       "currencies": "暗号資産",
       "help": "ヘルプ",
-      "about": "Ledgerについて",
+      "about": "アプリについて",
       "experimental": "試験的機能",
       "accounts": "アカウント",
       "developer": "デベロッパー"
@@ -2560,12 +2636,12 @@
     "export": {
       "accounts": {
         "title": "アカウントをエクスポート",
-        "desc": "アカウントをLedger Live mobileアプリに追加します。アカウントは、スマホやデスクトップアプリ間ではなく、ブロックチェーンとのみ同期します。",
+        "desc": "アカウントをLedger Live mobileアプリに追加する。アカウントは、スマホやデスクトップアプリ間ではなく、ブロックチェーンとのみ同期します。",
         "button": "エクスポート"
       },
       "operations": {
-        "title": "オペレーション履歴",
-        "desc": "お使いのコンピューターに、アカウントオペレーションの CSV ファイルを保存します。"
+        "title": "取引履歴",
+        "desc": "コンピューターに、アカウント取引のCSVファイルを保存する。"
       },
       "modal": {
         "button": "完了",
@@ -2578,13 +2654,13 @@
     },
     "display": {
       "language": "表示言語",
-      "languageDesc": "Ledger Liveに表示される言語を設定します。",
+      "languageDesc": "Ledger Liveに表示される言語を設定する。",
       "theme": "テーマ",
       "themeDesc": "テーマを選択",
       "counterValue": "表示通貨",
-      "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択してください。",
+      "counterValueDesc": "残高とオペレーションの横に表示する通貨を選択する。",
       "region": "地域",
-      "regionDesc": "Ledger Liveのタイムゾーンを設定するには、お住まいの地域を選択してください。",
+      "regionDesc": "Choose your region to update formats of dates, time and currencies.",
       "stock": "マーケットインジケーターの色分け",
       "stockDesc": "マーケットの上昇を緑色で表示したい場合は「ウエスタン」、赤色で表示したい場合は「イースタン」を選択してください。",
       "carouselVisibility": "カルーセルの表示",
@@ -2611,31 +2687,31 @@
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
-      "desc": "設定を編集する暗号資産を選択してください。",
+      "desc": "設定を編集する暗号資産を選択する。",
       "placeholder": "この資産の設定はありません。",
       "confirmationsNb": "確認数",
       "confirmationsNbDesc": "トランザクションの確認に必要なネットワーク承認の回数を設定します。"
     },
     "profile": {
       "password": "パスワードロック",
-      "passwordDesc": "お使いのコンピューターに保存された、アカウント名、残高、トランザクション、パブリックアドレスなどのLedger Liveデータへの不正アクセスを防ぐために、パスワードを設定します。",
+      "passwordDesc": "お使いのコンピューターに保存された、アカウント名、残高、トランザクション、パブリックアドレスなどのLedger Liveデータへの不正アクセスを防ぐために、パスワードを設定する。",
       "passwordAutoLock": "オートロック",
       "passwordAutoLockDesc": "非アクティブ時にLedger Liveを自動的にロックします。",
       "changePassword": "パスワードの変更",
-      "softResetTitle": "キャッシュを削除",
-      "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期させます。",
+      "softResetTitle": "Cacheを削除",
+      "softResetDesc": "Ledger LiveのCacheを削除し、ブロックチェーンと再同期する。",
       "softReset": "削除",
-      "resetKYC": "KYC（本人確認）データをリセット",
-      "resetKYCDesc": "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用されるKYC（本人確認）データをすべて消去します。",
+      "resetKYC": "本人確認手続きデータをリセット",
+      "resetKYCDesc": "ローカルに保存されている、サードパーティの取引プロバイダーへのアクセスに使用される本人確認手続きデータをすべて消去します。",
       "hardResetTitle": "Ledger Liveをリセット",
-      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除します。",
+      "hardResetDesc": "お使いのコンピューターに保存された、アカウント、取引履歴、設定などのLedger Liveデータすべてを削除する。",
       "hardReset": "リセット",
       "analytics": "アナリティクス",
       "analyticsDesc": "Ledgerがユーザーエクスペリエンスを改善できるよう、アナリティクスを有効にしてください。これに含まれるのは、クリック、ページの閲覧、リダイレクト、アクション（送金、着金、ロックなど）、ページ末へのスクロール、アプリの（アン）インストール、アプリのバージョン、アカウント数、暗号資産と操作、セッションの持続時間、Ledgerデバイスの種類とファームウェアです。",
       "reportErrors": "バグのレポート",
-      "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信します。",
+      "reportErrorsDesc": "製品の向上に役立つレポートを、Ledgerに自動的に送信する。",
       "launchOnboarding": "デバイスの設定",
-      "launchOnboardingDesc": "新しいデバイスとしてセットアップするか、既存のデバイスを復元します。アカウントと設定はそのまま保持されます。"
+      "launchOnboardingDesc": "新しいデバイスをセットアップ、または既存のデバイスを復元する。アカウントと設定はそのまま保持されます。"
     },
     "help": {
       "version": "バージョン",
@@ -2643,7 +2719,7 @@
       "termsBtn": "読む",
       "faq": "Ledgerサポート",
       "faqDesc": "問題がある場合は、ハードウェアウォレットでLedger Liveを使用するためのヘルプを参照してください。",
-      "terms": "利用条件",
+      "terms": "利用規約",
       "termsDesc": "Ledger Liveを使用することにより、当社の利用規約に同意したものとみなされます。",
       "privacy": "プライバシーポリシー",
       "privacyDesc": "当社のプライバシーポリシーをお読みになり、当社が収集する個人データや使用目的および使用方法についてご理解ください。"
@@ -2653,31 +2729,31 @@
       "features": {
         "apiTrongridProxy": {
           "title": "TronGrid.ioを使用",
-          "description": "LedgerプロキシなしでTronGridを直接を使用する"
+          "description": "LedgerプロキシなしでTronGridを直接を使用する。"
         },
         "experimentalCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Bitcoin (Taproot) とTezosの試験的JS実装を利用する"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
-          "description": "未リリースの言語を、一般設定タブの言語リストに追加します。"
+          "description": "未リリースの言語を、一般設定タブの言語リストに追加する。"
         },
         "managerDevMode": {
           "title": "デベロッパーモード",
-          "description": "開発者用アプリとテストネットアプリを「管理」に表示します。"
+          "description": "開発者用アプリとテストネットアプリを「管理」に表示する。"
         },
         "scanForInvalidPaths": {
           "title": "拡張アカウント検索",
-          "description": "誤った派生パスを持つアカウントをスキャンする検出された資産は、通常のアカウントに送金してください。"
+          "description": "誤った派生パスを持つアカウントをスキャンする。検出された場合は、通常のアカウントに送付してください。"
         },
         "experimentalExplorers": {
           "title": "試験的エクスプローラーAPI",
-          "description": "Ledgerのブロックチェーンエクスプローラーの、新バージョンをお試しいただけます。この設定を変更すると、アカウントの残高と同期、および送金機能に影響を与える可能性があります。\n(&lt;0&gt;&lt;/0&gt;)"
+          "description": "Ledgerのブロックチェーンエクスプローラーの、新バージョンをお試しいただけます。この設定を変更すると、アカウントの残高と同期、および送金機能に影響を与える可能性があります。\n（<0></0>）"
         },
         "keychainObservableRange": {
           "title": "ギャップリミットを設定",
-          "description": "全てのアカウントのギャップリミットを設定。この値をデフォルト（20）より大きくすると、さらに多くの未使用パブリックアドレスがスキャンされるようになります。ただし、アカウントを復元する際に互換性が失われる可能性があるため、詳しい知識のあるユーザー以外はこの値を変更しないでください。"
+          "description": "全てのアカウントのギャップリミットを設定する。この値をデフォルト（20）より大きくすると、さらに多くの未使用パブリックアドレスがスキャンされるようになります。ただし、アカウントを復元する際に互換性が失われる可能性があるため、詳しい知識のあるユーザー以外はこの値を変更しないでください。"
         },
         "forceProvider": {
           "title": "プロバイダー管理",
@@ -2691,12 +2767,12 @@
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
-      "title": "キャッシュを削除",
-      "desc": "キャッシュデータを消去すると、ネットワークが強制的に再同期されます。設定とアカウントは保存されます。暗号資産にアクセスするためのプライベートキーは、Ledgerデバイスとリカバリーシートに安全に保管されます。"
+      "title": "Cacheを削除",
+      "desc": "Cacheデータを削除すると、ネットワークが強制的に再同期されます。設定とアカウントは保存されます。暗号資産にアクセスするためのプライベートキーは、Ledgerデバイスとリカバリーシートに安全に保管されます。"
     },
     "resetFallbackModal": {
       "title": "必要なユーザーアクション",
-      "part1": "キャッシュフォルダを削除できませんでした。手作業でフォルダを削除してください。",
+      "part1": "Cacheフォルダを削除できませんでした。手作業でフォルダを削除してください。",
       "part2": "フォルダを開くボタンをクリックして",
       "part3": "アプリを終了",
       "part4": "\"sqlite\"フォルダを手作業で削除します。",
@@ -2704,12 +2780,12 @@
     },
     "removeAccountModal": {
       "title": "アカウントの削除",
-      "desc": "これは、あなたの暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
+      "desc": "これは、お客様の暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
       "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
     },
     "openUserDataDirectory": {
       "title": "ユーザーデータの閲覧",
-      "desc": "コンピューターに保存されたアカウントやCache、設定といったユーザーデータを表示します。",
+      "desc": "コンピューターに保存されたアカウントやCache、設定といったユーザーデータを表示する。",
       "btn": "表示"
     },
     "repairDevice": {
@@ -2730,13 +2806,13 @@
       },
       "tokenBlacklist": {
         "title": "トークンを非表示",
-        "desc": "トークンを非表示にするには、親アカウントに移動し、トークンを右クリックして「トークンを非表示」を選択します。",
+        "desc": "トークンを非表示にするには、親アカウントに移動し、トークンを右クリックして「トークンを非表示」を選択してください。",
         "count": "{{count}} トークン",
         "count_plural": "{{count}} トークン"
       },
       "fullNode": {
-        "title": "ビットコインのフルノードを接続",
-        "desc": "同期およびトランザクションの送信用のビットコインのフルノードを、Ledgerのエクスプローラを使用せずに設定する。"
+        "title": "Bitcoinのフルノードを接続",
+        "desc": "同期およびトランザクションの送信用のBitcoinのフルノードを、Ledgerのエクスプローラを使用せずに設定する。"
       }
     }
   },
@@ -2786,10 +2862,10 @@
     "dataFolder": "ユーザーデータを表示"
   },
   "exportOperationsModal": {
-    "title": "オペレーション履歴",
-    "desc": "オペレーション履歴を保存するアカウントを選択する。",
-    "descSuccess": "オペレーション履歴のCSVファイルは、選択したフォルダーに正常に保存されました。",
-    "titleSuccess": "オペレーション履歴が正常に保存されました。",
+    "title": "取引履歴",
+    "desc": "取引履歴を保存するアカウントを選択する。",
+    "descSuccess": "取引履歴のCSVファイルは、選択したフォルダに正常に保存されました。",
+    "titleSuccess": "取引履歴が正常に保存されました。",
     "cta": "保存",
     "ctaSuccess": "完了",
     "noAccounts": "エクスポートするアカウントがありません。",
@@ -2809,7 +2885,7 @@
     }
   },
   "theme": {
-    "system": "システムテーマを選択",
+    "system": "システムテーマを選択する。",
     "light": "ライト",
     "dusk": "夕暮れ",
     "dark": "ダーク"
@@ -2838,7 +2914,7 @@
     "serviceStatus": {
       "statusOk": {
         "title": "Ledger Liveは正常に作動しています。",
-        "description": "お困りですか？&lt;0&gt;ヘルプページ&lt;/0&gt;を参照してください。"
+        "description": "お困りですか？<0>ヘルプページ</0>を参照してください。"
       },
       "statusNotOk": {
         "title": "Ledger Liveで問題が発生しています。",
@@ -2858,14 +2934,14 @@
         "title": "安全なPINコード",
         "intro": "セットアッププロセス中にPINコードを選びます。",
         "rules": {
-          "1": "&lt;0&gt;必ず&lt;/0&gt;本人がPINコードを設定してください。",
-          "2": "&lt;0&gt;必ず&lt;/0&gt;誰にも見られないようにPINコードを入力してください。",
+          "1": "<0>必ず</0>本人がPINコードを設定してください。",
+          "2": "<0>必ず</0>誰にも見られないようにPINコードを入力してください。",
           "3": "PINコードは必要に応じて変更できます。",
           "4": "間違ったPINコードを3回連続して入力すると、デバイスがリセットされます。",
-          "5": "&lt;0&gt;絶対に&lt;/0&gt;0000、123456、55555555などの単純なPINコードを使用しないでください。",
-          "6": "&lt;0&gt;絶対に&lt;/0&gt;PINコードを誰かと共有しないでください。Ledgerとも共有してはいけません。",
-          "7": "&lt;0&gt;絶対に&lt;/0&gt;⾃分が設定していないPINコードを使⽤しないでください。",
-          "8": "&lt;0&gt;絶対に&lt;/0&gt;PINコードをコンピューターやスマートフォン上に保存しないでください。"
+          "5": "<0>絶対に</0>0000、123456、55555555などの単純なPINコードを使用しないでください。",
+          "6": "<0>絶対に</0>PINコードを誰かと共有しないでください。Ledgerとも共有してはいけません。",
+          "7": "<0>絶対に</0>⾃分が設定していないPINコードを使⽤しないでください。",
+          "8": "<0>絶対に</0>PINコードをコンピューターやスマートフォン上に保存しないでください。"
         }
       },
       "recoverySeed": {
@@ -2884,9 +2960,9 @@
       "whereToHide": {
         "title": "リカバリーフレーズはどこに保管すればいいですか？",
         "points": {
-          "1": "&lt;0&gt;絶対に&lt;/0&gt;コンピューターやスマートフォンなどのデバイス上に入力しないでください。写真に撮らないでください。",
-          "2": "&lt;0&gt;絶対に&lt;/0&gt;24単語を誰かと共有しないでください。",
-          "3": "&lt;0&gt;必ず&lt;/0&gt;他の人に見られない安全な場所に保管してください。",
+          "1": "<0>絶対に</0>コンピューターやスマートフォンに入力しないでください。写真にも撮らないでください。",
+          "2": "<0>絶対に</0>24単語を誰かと共有しないでください。",
+          "3": "<0>必ず</0>他の人に見られない安全な場所に保管してください。",
           "4": "Ledger社がリカバリーフレーズを尋ねることは絶対にありません。",
           "5": "誰か、もしくは何らかのアプリケーションがリカバリーフレーズを要求してきた場合、それは詐欺だと認識しましょう！"
         }
@@ -2909,15 +2985,15 @@
       },
       "useLedgerSeeds": {
         "title": "Ledgerのリカバリーフレーズのみを推奨",
-        "descr": "Ledgerは、外部で生成されたリカバリーフレーズのセキュリティを保証できません。リカバリーフレーズがLedgerで生成されたものでない場合は、Nanoを新しいデバイスとして設定することをお勧めします。",
+        "descr": "Ledgerは、外部で生成されたリカバリーフレーズのセキュリティを保証できません。リカバリーフレーズがLedgerで作成されたものでない場合は、Nanoを新しいデバイスとして設定することをお勧めします。",
         "gotIt": "了解"
       }
     },
     "screens": {
       "welcome": {
-        "title": "Ledgerへようこそ",
+        "title": "ようこそ、Ledgerへ",
         "description": "コンピュータで暗号資産を安全に管理しましょう。",
-        "cta": "はじめに",
+        "cta": "はじめる",
         "noDevice": "デバイスがありませんか？<0>Ledger Nano Xを購入</0>",
         "languageWarning": {
           "title": "{{language}} で始める",
@@ -2974,7 +3050,7 @@
           "howToGetStarted": {
             "title": "大切な事前準備：",
             "rules": {
-              "1": "30分ほど時間を確保する。",
+              "1": "30分程度の時間を確保する。",
               "2": "ペンを用意する。",
               "3": "作業は1人で、安全かつ静かな場所で行う。"
             },
@@ -2993,7 +3069,7 @@
               "descr": "デバイスの画面に表示される手順に従って、操作方法を学びましょう。"
             },
             "select": {
-              "title": "「新しいデバイスとして設定」を選択する。",
+              "title": "「Set up as new device」を選択する。",
               "descr": "両方のボタンを同時に押して、選択内容を確定します。"
             },
             "follow": {
@@ -3031,7 +3107,7 @@
           },
           "pinCode": {
             "title": "PINコード",
-            "paragraph": "PINコードは、セキュリティの第一段階です。あなたのNanoと秘密鍵へのアクセスを物理的に保護します。PINコードの長さは4～8桁でなければなりません。",
+            "paragraph": "PINコードは、セキュリティの第一段階です。Nanoと秘密鍵へのアクセスを保護します。PINコードの長さは4～8桁で設定してください。",
             "disclaimer": "PINコードは自分で選び、秘密にしなければならないことを理解しました。",
             "buttons": {
               "next": "PINコードの設定",
@@ -3050,7 +3126,7 @@
           },
           "quizFailure": {
             "title": "もうすぐプロレベルになります...",
-            "paragraph": "大丈夫、Ledgerが丁寧にガイドします。あっという間に、安心安全に暗号資産を管理できるようになります。\n\n残り1ステップです！",
+            "paragraph": "大丈夫、Ledgerがガイドします。安心安全に暗号資産を管理しましょう。\n\n残り1ステップです！",
             "buttons": {
               "next": "次のステップ",
               "prev": "前のステップ"
@@ -3059,7 +3135,7 @@
           "pinCodeHowTo": {
             "setUp": {
               "title": "PINコードを選択",
-              "descr": "左ボタンまたは右ボタンを押して、数字を変更します。数字を確定するには、両方のボタンを同時に押します。&lt;0&gt;&lt;/0&gt;を選択するとPINコードが確定されます。数字を消去したいときは&lt;1&gt;&lt;/1&gt;を選択します。"
+              "descr": "左ボタンまたは右ボタンを押して、数字を変更できます。数字を確定するには、両方のボタンを同時に押してください。<0></0>を選択するとPINコードが確定されます。数字を消去したいときは<1></1>を選択します。"
             },
             "confirm": {
               "title": "PINコードを確認",
@@ -3073,7 +3149,7 @@
           },
           "existingRecoveryPhrase": {
             "title": "リカバリーフレーズを入力",
-            "paragraph1": "リカバリーフレーズはウォレットの初回セットアップ時に書き留めた、秘密の単語の組み合わせです。",
+            "paragraph1": "リカバリーフレーズは、ウォレットの初回セットアップ時に書き留めた秘密の単語リストです。",
             "paragraph2": "Ledger社はお客様のリカバリーフレーズを保存しません。",
             "disclaimer": "リカバリーフレーズを紛失すると、Nanoにアクセスできなくなった場合に、ウォレット内の暗号資産が永久に失われることを理解しました。",
             "buttons": {
@@ -3089,12 +3165,12 @@
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "リカバリーシートを手元に用意する",
+              "title": "リカバリーシートを手元に用意する。",
               "descr": "Nanoに同梱されているリカバリーシートを手元に用意してください。リカバリーシートが最初から空白でない場合は、Ledgerサポートまでお問い合わせください。"
             },
             "writeDownWords": {
               "title": "24個の単語を書き留めてください。",
-              "descr": "Nanoの画面に表示された1つ目の単語を、リカバリーシートの1つ目の単語に書き留めます。続いて、Nanoの右ボタンを押し、Word #2（2つ目の単語）をシートの2番目の単語の位置に書き留めます。\n\n同様の操作を繰り返して、すべての単語を正しい順番・スペルで書き留めてください。Nanoの左ボタンを押すと、単語の順番・スペルに誤りがないかを確認できます。"
+              "descr": "Nanoの画面に表示されたWord #1（1個目の単語）を、リカバリーシートの1番目の欄に書き留めます。続いて、Nanoの右ボタンを押し、Word #2（2個目の単語）をシートの2番目の欄に書き留めます。\n\n同様の操作を繰り返して、すべての単語を正しい順番・スペルで書き留めてください。Nanoの左ボタンを押すと、単語の順番・スペルに誤りがないかを確認できます。"
             },
             "buttons": {
               "next": "次のステップ",
@@ -3104,8 +3180,8 @@
           },
           "newRecoveryPhrase": {
             "title": "リカバリーフレーズ",
-            "paragraph1": "リカバリーフレーズは、秘密鍵をバックアップするための24個の単語の組み合わせです。",
-            "paragraph2": "Nanoによって、唯一無二のリカバリーフレーズが生成されます。Ledger社がコピーを保管することはありません。",
+            "paragraph1": "リカバリーフレーズは、秘密鍵をバックアップするための24個の単語です。",
+            "paragraph2": "Nanoによって、唯一無二のリカバリーフレーズが作成されます。Ledgerがコピーを保管することはありません。",
             "disclaimer": "リカバリーフレーズを紛失すると、Nanoにアクセスできなくなった場合に、ウォレット内の暗号資産が永久に失われることを理解しました。",
             "buttons": {
               "next": "リカバリーフレーズ",
@@ -3122,15 +3198,15 @@
               "descr": "リカバリーフレーズの長さは12単語、18単語、または24単語のいずれかです。暗号資産にアクセスするには、すべての単語を入力する必要があります。"
             },
             "enterWord": {
-              "title": "単語 #1を入力...",
-              "descr": "単語 #1（1つ目の単語）の最初の文字を、右ボタンまたは左ボタンで選択して入力します。文字を確定するには、両方のボタンを同時に押します。"
+              "title": "Word #1を入力...",
+              "descr": "Word #1（1個目の単語）の最初の文字を、右ボタンまたは左ボタンで選択します。文字を確定するには、両方のボタンを同時に押します。"
             },
             "validateWord": {
-              "title": "単語 #1（1つ目の単語）を確認...",
-              "descr": "表示された候補の中から、1つ目の単語を選びます。単語を確定するには、両方のボタンを同時に押します。"
+              "title": "Word #1を確認...",
+              "descr": "表示された候補の中から、 Word #1の単語を選びます。単語を確定するには、両方のボタンを同時に押します。"
             },
             "andNext": {
-              "title": "すべての単語を同様に確認しましょう！"
+              "title": "すべての単語を同様の手順で確認しましょう！"
             },
             "buttons": {
               "next": "次のステップ",
@@ -3141,10 +3217,10 @@
           "recoveryHowTo3": {
             "reEnterWord": {
               "title": "リカバリーフレーズを確認する",
-              "descr": "1つ目の単語が表示されるまで、右ボタンで単語をスクロールします。表示されたら、両方のボタンを同時に押して確定します。"
+              "descr": "Word #1が表示されるまで、右ボタンで単語をスクロールします。表示されたら、両方のボタンを同時に押して確定します。"
             },
             "repeat": {
-              "title": "すべての単語を同様に確認しましょう！"
+              "title": "すべての単語を同様の手順で確認しましょう！"
             },
             "buttons": {
               "next": "次のステップ",
@@ -3159,14 +3235,14 @@
             },
             "buttons": {
               "next": "続行",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           },
           "hideRecoveryPhrase": {
             "title": "リカバリーフレーズを非表示にする",
             "paragraph": "万が一Nanoを使用できなくなってしまった場合、リカバリーフレーズが最後の復旧手段です。必ず安全な場所に保管してください。",
-            "keepItOffline": "これらの単語は、ハードウェアウォレットのみに入力してください。絶対に、コンピューターやスマートフォンに入力しないでください。",
+            "keepItOffline": "コンピューターやスマートフォンではなく、ハードウェアウォレットのみに入力してください。",
             "neverShowToAnyone": "絶対に24単語を誰かと共有しないでください。これにはLedger社も含まれます。",
             "buttons": {
               "next": "完了！",
@@ -3177,10 +3253,10 @@
           },
           "pairMyNano": {
             "title": "正規品チェック",
-            "paragraph": "お使いのNano が正規品かどうかを確認します。素早く簡単にチェックできます！",
+            "paragraph": "お使いのNano が正規品かどうかを確認します。短時間で簡単にチェックできます！",
             "buttons": {
               "next": "Nanoをチェックする",
-              "prev": "1つ前のステップ",
+              "prev": "前のステップ",
               "help": "お困りですか？"
             }
           }
@@ -3192,11 +3268,11 @@
       "screens": {
         "accessYourCoins": {
           "title": "暗号通貨にアクセス",
-          "description": "あなたの暗号資産は、ブロックチェーンに保存されています。それらにアクセスして管理するには、秘密鍵が必要です。"
+          "description": "暗号資産は、ブロックチェーンに保存されています。資産にアクセスして管理するには、秘密鍵が必要です。"
         },
         "ownYourPrivateKey": {
           "title": "秘密鍵は自分で管理しましょう",
-          "description": "秘密鍵はお使いのNano上に保存されています。自分の資産は、自分だけがコントロールするべきであり、所有権を持たなければなりません。"
+          "description": "秘密鍵はお使いのNano上に保存されています。資産は、お客様ご自身で管理・所有しなければなりません。"
         },
         "stayOffline": {
           "title": "常にオフラインで保管する",
@@ -3204,7 +3280,7 @@
         },
         "validateTransactions": {
           "title": "トランザクションの検証",
-          "description": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、および獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
+          "description": "Ledger Liveでは、暗号資産の購入、売却、管理、交換、報酬の獲得を、保護された安全な状態で行うことができます。暗号資産の取引はすべて、Nanoを使って認証することになります。"
         },
         "setUpNanoWallet": {
           "title": "Nanoをセットアップしましょう！",
@@ -3232,11 +3308,11 @@
           "results": {
             "success": {
               "title": "正解！",
-              "text": "あなたの暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
+              "text": "お客様の暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
             },
             "fail": {
               "title": "不正解！",
-              "text": "あなたの暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
+              "text": "お客様の暗号資産は、常にブロックチェーンに保存されています。ハードウェアウォレットに保存されているのは、暗号資産へのアクセスを可能にする秘密鍵だけです。"
             }
           }
         },
@@ -3244,7 +3320,7 @@
           "text": "リカバリーフレーズを誰かに知られてしまうと...",
           "answers": {
             "1": "Ledgerに確認すれば教えてもらえるので問題ない",
-            "2": "暗号資産が安全な状態でなくなるため、別の安全な場所に移さなければならない"
+            "2": "暗号資産が安全ではなくなるため、別の安全な場所に移す必要がある"
           },
           "results": {
             "success": {
@@ -3279,7 +3355,7 @@
   },
   "connectTroubleshooting": {
     "desc": "デバイスの接続に問題がありますか？",
-    "cta": "修正する",
+    "cta": "解決する",
     "solution": "解決策 #{{number}}",
     "applesInstructions": "Appleのトラブルシューティング",
     "nextSolution": "次の解決策",
@@ -3292,8 +3368,8 @@
     "steps": {
       "entry": {
         "title": "USB接続のトラブルシューティング",
-        "desc": "デバイスとの接続に問題があるようです。でも、ご心配なく。デバイスが正常に接続されるまで、いろいろな解決策を1つずつ試しましょう！",
-        "cta": "問題を解決しましょう！",
+        "desc": "デバイスとの接続に問題があるようです。デバイスが正常に接続されるまで、いろいろな解決策を1つずつ試しましょう！",
+        "cta": "問題を解決する！",
         "back": "戻る"
       },
       "1": {
@@ -3303,16 +3379,16 @@
             "0": "Ledger Liveを終了する",
             "1": "Ledger Liveアプリケーションを右クリックする",
             "2": "「管理者として実行」を選択",
-            "3": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "3": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         },
         "linux": {
           "title": "Linuxでudevルールをアップデート",
-          "desc": "以下のボタンをクリックして、udevルールを追加するその後、デバイスを接続してロックを解除し、検出されるかどうかを確認する",
+          "desc": "下のボタンをクリックして、udevルールを追加する。その後、デバイスを接続してロックを解除し、検出されるか確認する。",
           "cta": "ルールの設定",
           "bullets": {
             "0": "ターミナルで以下のコマンドを入力すると、ルールが自動的に追加され、udevの再読み込みが行われます。",
-            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認する。"
           }
         }
       },
@@ -3320,40 +3396,40 @@
         "usbPort": {
           "title": "別のUSBポートを試す",
           "bullets": {
-            "0": "コンピューターで使用するUSBポートを交換してください。",
-            "1": "接続されているUSBドングルを取り外してください。",
-            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "0": "コンピューターで使用しているUSBポートを変える。",
+            "1": "接続されているUSBドングルを取り外す。",
+            "2": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         },
         "usbCable": {
           "title": "USBケーブルを交換する",
           "bullets": {
-            "0": "可能であれば、デバイス付属の純正USBケーブルを使用してください。",
-            "1": "データ転送に対応している別のUSBケーブルをお試しください。",
-            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "0": "可能であれば、デバイス付属の純正USBケーブルを使用する。",
+            "1": "データ転送に対応している別のUSBケーブルを試す。",
+            "2": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         },
         "restart": {
           "title": "コンピューターを再起動",
           "bullets": {
-            "0": "コンピューターを再起動します。",
-            "1": "Ledger Liveを起動します。",
-            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "0": "コンピューターを再起動する。",
+            "1": "Ledger Liveを起動する。",
+            "2": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         },
         "antiVirus": {
           "title": "アンチウイルスとVPNをオフにする",
           "bullets": {
-            "0": "アンチウイルス、ファイアウォール、およびVPNソフトウェアをオフにしてください。",
-            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。",
-            "2": "解決した場合は、アンチウイルスの例外リストにLedger Liveを追加してください。"
+            "0": "アンチウイルス、ファイアウォール、およびVPNソフトウェアをオフにする。",
+            "1": "デバイスを接続してロックを解除し、検出されるか確認する。",
+            "2": "解決した場合は、アンチウイルスの例外リストにLedger Liveを追加する。"
           }
         },
         "anotherComputer": {
           "title": "別のコンピュータを試す",
           "bullets": {
-            "0": "別のコンピューターで&lt;0&gt;{{link}}&lt;/0&gt;にアクセスし、Ledger Liveをダウンロードしてインストールします。",
-            "1": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "0": "別のコンピューターで<0>{{link}}</0>にアクセスし、Ledger Liveをダウンロードしてインストールする。",
+            "1": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         }
       },
@@ -3361,28 +3437,28 @@
         "windows": {
           "title": "USBデバイスドライバをアップデート",
           "bullets": {
-            "0": "この&lt;0&gt;{{link}}&lt;/0&gt;にアクセス",
+            "0": "このリンク<0>{{link}}</0>にアクセスする。",
             "1": "指示に従って、USBデバイスドライバをアップデートします。",
-            "2": "デバイスを接続してロックを解除し、検出されるかどうかを確認します。"
+            "2": "デバイスを接続してロックを解除し、検出されるか確認する。"
           }
         },
         "mac": {
           "0": {
             "title": "フルディスクアクセスの有効化",
             "bullets": {
-              "0": "「システム環境設定」を開きます。",
-              "1": "「セキュリティとプライバシー」に移動します。",
-              "2": "「プライバシー」タブの左側にある「フルディスクアクセス」を開きます。",
-              "3": "「Ledger Live」を追加します。",
-              "4": "デバイスを接続してロックを解除し、検出されるか確認します。"
+              "0": "「システム環境設定」を開く。",
+              "1": "「セキュリティとプライバシー」に移動する。",
+              "2": "「プライバシー」タブの左側にある「フルディスクアクセス」を開く。",
+              "3": "「Ledger Live」を追加する。",
+              "4": "デバイスを接続してロックを解除し、検出されるか確認する。"
             }
           },
           "1": {
             "title": "NVRAMをリセット",
             "link": "Apple取扱説明書",
             "bullets": {
-              "0": "Intel搭載のMacの場合は、&lt;0&gt;{{link}}&lt;/0&gt;に従ってNVRAMをリセットしてください。",
-              "1": "デバイスを接続してロックを解除し、検出されるか確認します。"
+              "0": "Intel搭載のMacの場合は、<0>{{link}}</0>に従ってNVRAMをリセットする。",
+              "1": "デバイスを接続してロックを解除し、検出されるか確認する。"
             }
           }
         }
@@ -3419,7 +3495,7 @@
   "TransactionConfirm": {
     "title": "デバイス上で処理を確定してください。",
     "warning": "デバイス上に表示されているアドレスが、{{recipientWording}} から受け取ったものと完全に一致しているか、毎回必ず確認してください。",
-    "secureContract": "送付する前に、デポジットの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
+    "secureContract": "送付する前に、預け入れの詳細をデバイス上で確認してください。アドレスは安全にやりとりされるため、確認の必要はありません。",
     "verifyData": "必ず、操作の詳細をデバイス上で確認してください。",
     "warningWording": {},
     "titleWording": {
@@ -3431,7 +3507,7 @@
       "delegate": "操作を完了するために、デバイスで確認してください。",
       "undelegate": "操作を完了するために、デバイスで確認してください。",
       "redelegate": "操作を完了するために、デバイスで確認してください。",
-      "claimRewardCompound": "操作を完了するために、デバイスで確認してください。",
+      "claimRewardCompound": "取引を完了するために、デバイスで確認してください。",
       "nominate": "操作を完了するために、デバイスで確認してください。",
       "chill": "操作を完了するために、デバイスで確認してください。",
       "bond": "操作を完了するために、デバイスで確認してください。",
@@ -3441,12 +3517,12 @@
       "setController": "操作を完了するために、デバイスで確認してください。"
     },
     "recipientWording": {
-      "send": "受取人",
-      "delegate": "バリデータ",
-      "undelegate": "バリデータ",
-      "claimReward": "報酬受取人",
-      "optIn": "受取人",
-      "nominate": "バリデータ",
+      "send": "受取先",
+      "delegate": "バリデーター",
+      "undelegate": "バリデーター",
+      "claimReward": "報酬受取先",
+      "optIn": "受取先",
+      "nominate": "バリデーター",
       "erc721": {
         "transfer": "受取先"
       },
@@ -3477,12 +3553,16 @@
         "MEMO_HASH": "Memoのハッシュ",
         "MEMO_RETURN": "Memo Return"
       },
-      "memoWarningText": "Memoを使用する場合は、受取人とMemoのタイプをしっかりと確認してください。"
+      "memoWarningText": "Memoを使用する場合は、受取先とMemoのタイプをしっかりと確認してください。"
     },
     "cosmos": {
       "memo": "Memo",
       "memoPlaceholder": "オプション",
-      "memoWarningText": "Memoを使用する場合は、受取人とMemoのタイプをしっかりと確認してください。"
+      "memoWarningText": "Memoを使用する場合は、受取先とMemoのタイプをしっかりと確認してください。"
+    },
+    "solana": {
+      "memo": "Memo",
+      "memoPlaceholder": "Optional"
     }
   },
   "errors": {
@@ -3494,8 +3574,8 @@
       "description": "エラーが発生しました。再試行するかLedgerサポートにお問い合わせください。"
     },
     "AccountAwaitingSendPendingOperations": {
-      "title": "このアカウントには保留中のオペレーションがあります。",
-      "description": "処理が完了するまでお待ちください。"
+      "title": "このアカウントには保留中の取引があります。",
+      "description": "取引が完了するまでお待ちください。"
     },
     "AccountNameRequired": {
       "title": "アカウント名が必要です",
@@ -3520,11 +3600,11 @@
       "description": ""
     },
     "ClaimRewardsFeesWarning": {
-      "title": "報酬が、獲得に必要となる推定手数料を下回っています。",
+      "title": "報酬額が、申請に必要な推定手数料を下回っています。",
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "アクティブなデポジットがある間は、承認額を減らすことはできません。"
+      "title": "アクティブな預け入れがある間は、承認額を減らすことはできません。"
     },
     "CosmosBroadcastCodeInternal": {
       "title": "問題が発生しました（エラー#1）",
@@ -3714,7 +3794,7 @@
     },
     "ManagerUninstallBTCDep": {
       "title": "このアプリは必須です。",
-      "description": "ビットコインまたはイーサリアムアプリを最後にアンインストールします。"
+      "description": "BitcoinまたはEthereumアプリを最後にアンインストールする。"
     },
     "NetworkDown": {
       "title": "インターネットがダウンしているようです。",
@@ -3729,10 +3809,10 @@
       "description": "アカウントに十分な資金があることを確認してください。"
     },
     "NotEnoughBalanceBecauseDestinationNotCreated": {
-      "title": "受信者のアドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
+      "title": "受取先アドレスが無効です。少なくとも {{minimalAmount}} を送付して有効化してください。"
     },
     "NotEnoughGas": {
-      "title": "親アカウントのETH残高がネットワーク手数料を下回り、不足しています"
+      "title": "親アカウントで、ネットワーク手数料用の残高が不足しています"
     },
     "PasswordsDontMatch": {
       "title": "パスワードが一致しません。",
@@ -3760,7 +3840,7 @@
     },
     "SatStackStillSyncing": {
       "title": "ノード同期中...",
-      "description": "ノードの同期が完了するまでお待ちください。ビットコインの残高が正しくない可能性がありますので、送付できません。"
+      "description": "ノードの同期が完了するまでお待ちください。Bitcoinの残高が正しくない可能性がありますので、送付できません。"
     },
     "SatStackVersionTooOld": {
       "title": "SatStackをアップグレードしてください。",
@@ -3811,7 +3891,7 @@
     },
     "UserRefusedOnDevice": {
       "title": "アクションが拒否されました。",
-      "description": "デバイス上で処理を拒否しました。"
+      "description": "デバイス上で操作を拒否しました。"
     },
     "TransactionRefusedOnDevice": {
       "title": "デバイス上で操作が却下されました。",
@@ -3848,8 +3928,11 @@
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}} アドレスではありません。"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Your account is already delegated to this validator"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
-      "title": "受取人のアドレスと送付者のアドレスが同じです。"
+      "title": "送付先アドレスが送付元アドレスと同じです。"
     },
     "CantOpenDevice": {
       "title": "接続に失敗しました。",
@@ -3858,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "自動認証が利用できません：アドレスを慎重に確認してください。",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Operation not available for this device",
+      "description": "Send NFT feature is only available for Nano X. Please visit our customer support platform to know how to send a NFT with a Nano S."
     },
     "CantScanQRCode": {
       "title": "このQRコードをスキャンできませんでした：このアドレスでは自動認証がサポートされていません。"
@@ -3913,8 +4000,8 @@
       "description": "再試行するか、Ledgerサポートにお問い合わせください。"
     },
     "ManagerAppRelyOnBTC": {
-      "title": "ビットコインアプリとイーサリアムアプリが必要です。",
-      "description": "最新版のビットコインアプリとイーサリアムアプリを、最初にインストールしてください。"
+      "title": "BitcoinアプリとEthereumアプリが必要です。",
+      "description": "最新版のBitcoinアプリとEthereumアプリを、最初にインストールしてください。"
     },
     "UserRefusedDeviceNameChange": {
       "title": "デバイス上で名前の変更がキャンセルされました。",
@@ -3955,7 +4042,7 @@
     },
     "TronSendTrc20ToNewAccountForbidden": {
       "title": "TRC20を新しいアカウントに送付しても、アクティベートされません。",
-      "description": "受取アカウントは、TRC20を送信する前に有効化する必要があります。有効化するにはTRXまたはTRC10のいずれかをアカウントに送信してください。"
+      "description": "受取アカウントは、TRC20を送信する前に有効化する必要があります。有効化するにはTRXまたはTRC10のいずれかをアカウントに送付してください。"
     },
     "TronUnexpectedFees": {
       "title": "追加費用が発生する場合があります。"
@@ -3979,7 +4066,7 @@
       "description": "問題が発生しました。再試行するか、疑わしい場合はLedgerサポートにお問い合わせください。"
     },
     "EthAppPleaseEnableContractData": {
-      "title": "イーサリアムアプリの設定でコントラクトデータを有効にしてください。"
+      "title": "Ethereumアプリの設定でコントラクトデータを有効にしてください。"
     },
     "InvalidXRPTag": {
       "title": "無効なXRP宛先タグ"
@@ -4009,7 +4096,7 @@
       "title": "{{currencyName}} を送付するには、マルチシグを無効にしてください。"
     },
     "StellarMemoRecommended": {
-      "title": "この受取人に送付するには、Memoが必要な場合があります。"
+      "title": "この受取先に送付するには、Memoが必要な場合があります。"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "{{minAmountFromFormatted}} 以上の数量でなければなりません。"
@@ -4018,10 +4105,10 @@
       "title": "{{maxAmountFromFormatted}}以下の値でなければなりません。"
     },
     "PolkadotElectionClosed": {
-      "title": "バリデータの選出を終了しなければなりません。"
+      "title": "バリデーターの選出を終了しなければなりません。"
     },
     "PolkadotNotValidator": {
-      "title": "選択した一部のアドレスはバリデータではありません。"
+      "title": "選択した一部のアドレスはバリデーターではありません。"
     },
     "PolkadotLowBondedBalance": {
       "title": "1DOT未満の場合、ボンドされた資産はすべて解除されます。"
@@ -4048,7 +4135,7 @@
       "title": "ボンド解除の上限を超えています。"
     },
     "PolkadotValidatorsRequired": {
-      "title": "1人以上のバリデータを選択する必要があります。"
+      "title": "1人以上のバリデーターを選択する必要があります。"
     },
     "ServiceStatusWarning": {
       "title": "{{message}}",
@@ -4057,8 +4144,33 @@
     "TaprootNotActivated": {
       "title": "メインネットのアクティベート前に、Taprootアドレスへの送付は安全ではありません。"
     },
+    "SolanaAccountNotFunded": {
+      "title": "Account not funded"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo is too long. Max length is {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "Address off ed25519 curve"
+    },
     "NotEnoughNftOwned": {
       "title": "利用可能なトークン数を超えています。"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "Powered by Crypto.org",
+        "moreInfo": "詳細",
+        "drawerTitle": "Crypto.orgを統合",
+        "title": "Crypto.org (CRO) トークンがLedger Liveで利用可能になりました",
+        "description": "Crypto.org (CRO) トークンを管理し、Ledger Liveを通じて保護することができます。",
+        "description2": "Crypto.orgチェーンのネイティブトークンであるCrypto.org (CRO) は、トランザクション、ステーキングに利用されています。今後さらに多くの機能へ対応予定です。",
+        "website": "Cryptocurrency in every wallet"
+      }
+    },
+    "memo": "Memo",
+    "memoPlaceholder": "任意",
+    "memoWarningText": "Memoを使用する場合は、送付先とMemoのタイプをしっかりと確認してください。"
   }
 }
