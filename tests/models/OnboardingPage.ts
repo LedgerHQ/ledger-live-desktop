@@ -6,10 +6,12 @@ export class OnboardingPage {
   readonly termsCheckbox: Locator;
   readonly termsSubmitButton: Locator;
   readonly selectDeviceButton: Function;
+  readonly newDeviceButton: Locator;
   readonly connectDeviceButton: Locator;
+  readonly restoreDeviceButton: Locator;
+  readonly pedagogyModal: Locator;
   readonly checkMyNanoButton: Locator;
   readonly continueButton: Locator;
-  readonly firstUseButton: Locator;
   readonly leftArrowBasicsButton: Locator;
   readonly rightArrowBasicsButton: Locator;
   readonly setupWalletButton: Locator;
@@ -37,10 +39,12 @@ export class OnboardingPage {
     this.termsSubmitButton = page.locator("data-test-id=onboarding-terms-submit");
     this.selectDeviceButton = (device: string): Locator =>
       page.locator(`button:has-text("${device}")`);
-    this.connectDeviceButton = page.locator("data-test-id=onboarding-initialized-device-step");
     this.checkMyNanoButton = page.locator('button:has-text("Check my Nano")');
     this.continueButton = page.locator('button:has-text("Continue")');
-    this.firstUseButton = page.locator("data-test-id=first-use");
+    this.newDeviceButton = page.locator("data-test-id=onboarding-new-device");
+    this.connectDeviceButton = page.locator("data-test-id=onboarding-initialized-device");
+    this.restoreDeviceButton = page.locator("data-test-id=onboarding-restore-device");
+    this.pedagogyModal = page.locator("data-test-id=onboarding-pedagogy-modal");
     this.leftArrowBasicsButton = page.locator("data-test-id=pedagogy-left");
     this.rightArrowBasicsButton = page.locator("data-test-id=pedagogy-right");
     this.setupWalletButton = page.locator("data-test-id=setup-nano-wallet-cta");
@@ -80,7 +84,7 @@ export class OnboardingPage {
   }
 
   async newDevice() {
-    await this.firstUseButton.click();
+    await this.newDeviceButton.click();
   }
 
   async basicsCarrouselRight() {
