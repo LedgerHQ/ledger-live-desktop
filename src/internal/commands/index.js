@@ -10,6 +10,7 @@ import getSatStackStatus from "./getSatStackStatus";
 import libcoreGetVersion from "./libcoreGetVersion";
 import libcoreReset from "./libcoreReset";
 import listenDevices from "./listenDevices";
+import listenDevicesBLE from "./listenDevicesBLE";
 import listApps from "./listApps";
 import signMessage from "./signMessage";
 import ping from "./ping";
@@ -41,6 +42,7 @@ export const commandsById = {
   libcoreGetVersion,
   libcoreReset,
   listenDevices,
+  listenDevicesBLE,
   connectApp,
   connectManager,
   listApps,

@@ -22,6 +22,7 @@ import IconLock from "~/renderer/icons/Lock";
 import IconEye from "~/renderer/icons/Eye";
 import IconHelp from "~/renderer/icons/Question";
 import IconEyeOff from "~/renderer/icons/EyeOff";
+import IconNano from "~/renderer/icons/NanoAltSmall";
 import IconSettings from "~/renderer/icons/Settings";
 
 // TODO: ActivityIndicator
@@ -105,6 +106,16 @@ const TopBar = () => {
               </>
             )}
             <LiveAppDrawer />
+            <ItemContainer
+              data-test-id="topbar-device-button"
+              isInteractive
+              onClick={() => dispatch(openModal("MODAL_SELECT_DEVICE"))}
+            >
+              <IconNano size={16} />
+            </ItemContainer>
+            <Box justifyContent="center">
+              <Bar />
+            </Box>
             <ServiceStatusIndicator />
             <NotificationIndicator />
             <Box justifyContent="center">

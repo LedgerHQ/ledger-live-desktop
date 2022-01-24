@@ -47,6 +47,7 @@
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.20.0",
     "@ledgerhq/hw-transport-http": "6.20.0",
+    "@ledgerhq/hw-transport-node-ble": "file:.yalc/@ledgerhq/hw-transport-node-ble",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.20.0",
     "@ledgerhq/ledger-core": "6.14.5",
     "@ledgerhq/live-common": "^21.26.1",

@@ -1,4 +1,5 @@
 // @flow
+import MODAL_SELECT_DEVICE from "./SelectDevice";
 import MODAL_WEBSOCKET_BRIDGE from "./WebSocketBridge";
 import MODAL_DELEGATE from "../families/tezos/DelegateFlowModal";
 import MODAL_TRON_REWARDS_INFO from "../families/tron/EarnRewardsInfoModal";
@@ -131,6 +132,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_SWAP_UNAUTHORIZED_RATES,
   MODAL_SWAP_RESET_KYC,
 
+  MODAL_SELECT_DEVICE,
   // NB We have dettached modals such as the repair modal,
   // in the meantime, we can rely on this to add the backdrop
   MODAL_STUB: () => null,

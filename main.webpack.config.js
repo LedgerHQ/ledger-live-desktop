@@ -52,6 +52,7 @@ module.exports = {
   },
   entry: "./src/index.js",
   output: {
+    devtoolModuleFilenameTemplate: "[absolute-resource-path]",
     path: path.resolve(__dirname, ".webpack"),
     filename: "main.bundle.js",
   },

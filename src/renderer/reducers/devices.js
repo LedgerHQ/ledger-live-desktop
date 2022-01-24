@@ -14,20 +14,19 @@ const initialState: DevicesState = {
   devices: [],
 };
 
-function setCurrentDevice(state) {
-  const currentDevice = state.devices.length ? state.devices[state.devices.length - 1] : null;
-  return { ...state, currentDevice };
-}
+// function setCurrentDevice(state) {
+//   const currentDevice = state.devices.length ? state.devices[state.devices.length - 1] : null;
+//   return { ...state, currentDevice };
+// }
 
 const handlers: Object = {
   RESET_DEVICES: () => initialState,
-  ADD_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) =>
-    setCurrentDevice({
-      ...state,
-      devices: [...state.devices, device].filter(
-        (v, i, s) => s.findIndex(t => t.deviceId === v.deviceId) === i,
-      ),
-    }),
+  ADD_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
+    ...state,
+    devices: [...state.devices, device].filter(
+      (v, i, s) => s.findIndex(t => t.deviceId === v.deviceId) === i,
+    ),
+  }),
   REMOVE_DEVICE: (state: DevicesState, { payload: device }: { payload: Device }) => ({
     ...state,
     currentDevice:
