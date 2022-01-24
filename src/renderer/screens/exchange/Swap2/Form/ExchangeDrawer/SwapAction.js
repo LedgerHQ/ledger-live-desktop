@@ -118,7 +118,6 @@ export default function SwapAction({
         transaction,
         status,
         device: deviceRef,
-        requireLatestFirmware: true,
         userId: providerKYC?.id,
       }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
