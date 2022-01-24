@@ -2381,7 +2381,7 @@
         "stash": "이용 가능 잔액",
         "stashDescription": "보상이 사용자의 이용 가능 잔액에 입금됩니다.",
         "staked": "본딩된 잔액",
-        "stakedDescription": "본딩된 잔금에 보상이 입금되고 복리 수입이 들어옵니다.",
+        "stakedDescription": "본딩된 잔액에 보상이 입금되고 컴파운드 수익이 들어옵니다.",
         "optionTitle": "주의",
         "optionDescription": "옵션을 한 번 설정하고 나면 해당 본딩 만료 시점까지 고정됩니다. 마음이 바뀌었을 경우, 아래 글을 읽어보세요"
       },
@@ -2446,7 +2446,7 @@
           "label": "확인",
           "success": {
             "title": "자산이 성공적으로 재본딩 되었습니다",
-            "text": "네트워크가 트랜잭션을 확인한 후에 계정 잔금이 업데이트됩니다.",
+            "text": "네트워크가 트랜잭션을 확인한 후에 계정 잔액이 업데이트됩니다.",
             "cta": "세부사항 보기"
           },
           "pending": {
@@ -2490,7 +2490,7 @@
         "withdrawUnbonded": {
           "title": "출금",
           "description": "28일의 언본딩 기간이 지나면 언본드된 자산을 출금할 수 있습니다.",
-          "info": "그런 다음 언본딩한 자산을 가용 잔금으로 출금할 수 있습니다."
+          "info": "그런 다음 언본딩한 자산을 이용 가능 잔액으로 출금할 수 있습니다."
         },
         "chill": {
           "title": "지명 해제",
@@ -2694,7 +2694,7 @@
     },
     "profile": {
       "password": "암호 잠금",
-      "passwordDesc": "패스워드를 설정해 계정 이름, 잔금, 트랜잭션, 공개 주소를 포함한 Ledger Live 데이터를 컴퓨터에 안전하게 보관하세요.",
+      "passwordDesc": "패스워드를 설정해 계정 이름, 잔액, 트랜잭션, 공개 주소를 포함한 Ledger Live 데이터를 컴퓨터에 안전하게 보관하세요.",
       "passwordAutoLock": "자동 잠금",
       "passwordAutoLockDesc": "활성화 상태가 아닐 때 Ledger Live가 자동 잠깁니다.",
       "changePassword": "암호 변경",
@@ -2749,7 +2749,7 @@
         },
         "experimentalExplorers": {
           "title": "실험적 탐색기 API",
-          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔금과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
+          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔액과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
         },
         "keychainObservableRange": {
           "title": "맞춤형 갭 한도",
@@ -2802,7 +2802,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "빈 토큰 계정 숨기기",
-        "desc": "계정 페이지에서 잔금이 0인 토큰 계정을 숨기세요."
+        "desc": "계정 페이지에서 잔액이 0인 토큰 계정을 숨기세요."
       },
       "tokenBlacklist": {
         "title": "숨겨진 토큰",
@@ -3840,7 +3840,7 @@
     },
     "SatStackStillSyncing": {
       "title": "노드 동기화가 진행 중입니다...",
-      "description": "노드가 동기화될 때까지 기다려 주세요 비트코인 계정 잔금이 올바르지 않아 전송할 수 없습니다"
+      "description": "노드가 동기화될 때까지 기다려 주세요 비트코인 계정 잔액이 올바르지 않아 전송할 수 없습니다"
     },
     "SatStackVersionTooOld": {
       "title": "SatStack을 업그레이드하세요",
@@ -4072,16 +4072,16 @@
       "title": "유효하지 않은 XRP 데스티네이션 태그"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "위임에 필요한 잔금이 부족합니다"
+      "title": "위임에 필요한 잔액이 부족합니다"
     },
     "NotEnoughDelegationBalance": {
-      "title": "위임에 필요한 잔금이 부족합니다"
+      "title": "위임에 필요한 잔액이 부족합니다"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "상위 계정의 잔금이 부족합니다"
+      "title": "상위 계정의 잔액이 부족합니다"
     },
     "NotEnoughSpendableBalance": {
-      "title": "잔금은 {{minimumAmount}} 미만일 수 없습니다"
+      "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
     },
     "WrongAppForCurrency": {
       "title": "{{expected}} 앱을 실행해주세요"
@@ -4120,16 +4120,16 @@
       "title": "현재 지명이 없습니다"
     },
     "PolkadotAllFundsWarning": {
-      "title": "향후 트랜잭션 수수료 지불에 필요한 잔금을 충분히 남겨 두세요"
+      "title": "향후 트랜잭션 수수료 지불에 필요한 잔액을 충분히 남겨 두세요"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "잔금은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
+      "title": "잔액은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
     },
     "PolkadotBondMinimumAmount": {
       "title": "적어도 {{minimumBondAmount}} 이상 본딩해야 합니다."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "본딩된 잔금은 {{minimumBondAmount}} 이상이어야 합니다."
+      "title": "본딩된 잔액은 {{minimumBondAmount}} 이상이어야 합니다."
     },
     "PolkadotMaxUnbonding": {
       "title": "언본딩 한도를 초과했습니다."
