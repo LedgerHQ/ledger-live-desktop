@@ -10,7 +10,7 @@
   "license": "MIT",
   "private": true,
   "main": "./.webpack/main.bundle.js",
-  "version": "2.36.3",
+  "version": "2.37.1",
   "scripts": {
     "start:prod": "electron ./.webpack/main.bundle.js",
     "start": "cross-env NODE_ENV=development node ./tools/main.js",
@@ -49,7 +49,7 @@
     "@ledgerhq/hw-transport-http": "6.20.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.20.0",
     "@ledgerhq/ledger-core": "6.14.5",
-    "@ledgerhq/live-common": "^21.26.1",
+    "@ledgerhq/live-common": "21.26.3",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/react-ui": "^0.7.1",
     "@polkadot/react-identicon": "0.87.6",
