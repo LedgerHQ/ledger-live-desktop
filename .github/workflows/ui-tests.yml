@@ -140,10 +140,10 @@ jobs:
         run: npm install --global yarn
       - name: install dependencies
         env:
-          JOBS: max
         run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
       - name: start server
         run: cd ./dummy-live-app && yarn start
+        timeout-minutes: 25
 
   ui-tests-linux-hosted:
     name: "[Linux] UI"
@@ -267,7 +267,7 @@ jobs:
             tests/artifacts/videos
 
   ui-tests:
-    needs: cancel-previous
+    needs: [cancel-previous]
     name: "[${{ matrix.os }}] UI"
     strategy:
       fail-fast: false
