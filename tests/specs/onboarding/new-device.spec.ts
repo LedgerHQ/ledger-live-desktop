@@ -28,7 +28,7 @@ test.describe.parallel("Onboarding", () => {
       });
 
       await test.step(`[${nano}]" Set Up new"`, async () => {
-        expect(await page.screenshot()).toMatchSnapshot('onboarding-flows.png');
+        expect(await page.screenshot()).toMatchSnapshot(`${nano}-onboarding-flows.png`);
         await onboardingPage.newDevice();
       });
 
