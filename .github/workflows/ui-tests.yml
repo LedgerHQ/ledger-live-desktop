@@ -115,17 +115,42 @@ jobs:
             jest.txt
       # pr/NR
 
+  start-dummy-live-app:
+    name: "Start Dummy Live App for Discover/SDK tests"
+    steps:
+      - name: checkout Dummy Live App for 'Discover' Playwright tests
+        uses: actions/checkout@v2
+        with:
+          repository: LedgerHQ/dummy-live-app
+          path: main
+      - name: setup node
+        uses: actions/setup-node@v2
+        if: always()
+        with:
+          node-version: 14.x
+      - name: install yarn
+        if: always()
+        run: npm install --global yarn
+      - name: install dependencies
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
+      - name: start server
+        run: yarn start
+
   ui-tests-linux-hosted:
     name: "[Linux] UI"
     needs: [start-runner, prepare-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout feature branch for testing
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
-      - uses: actions/setup-node@v2
+      - name: setup node
+        uses: actions/setup-node@v2
         if: always()
         with:
           node-version: 14.x
