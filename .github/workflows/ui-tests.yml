@@ -143,7 +143,7 @@ jobs:
           JOBS: max
         run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
       - name: start server
-        run: yarn start
+        run: cd ./dummy-live-app && yarn start
 
   ui-tests-linux-hosted:
     name: "[Linux] UI"
