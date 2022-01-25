@@ -635,7 +635,7 @@
             },
             "satstack-disconnected": {
               "header": "No fue posible conectar con SatStack",
-              "description": "Comprueba que SatStack está en ejecución en esta PC."
+              "description": "Comprueba que SatStack esté en ejecución en esta PC."
             },
             "satstack-outdated": {
               "header": "Actualiza SatStack",
@@ -1647,7 +1647,7 @@
         "flash": "Preparando tu dispositivo..."
       },
       "confirmIdentifier": "Verifica el identificador",
-      "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo coincide con el identificador a continuación. Confirma e introduce tu código PIN, si así lo indica la aplicación.",
+      "confirmIdentifierText": "Comprueba que el identificador de tu dispositivo coincida con el identificador a continuación. Confirma e introduce tu código PIN, si así lo indica la aplicación.",
       "identifier": "Identificador",
       "preparation": "Preparación",
       "newFirmware": "Nuevo firmware {{version}}",
@@ -3919,7 +3919,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Algo ha salido mal",
-      "description": "Comprueba que tu billetera de hardware esté configurada con la frase de recuperación o Passphrase asociada a la cuenta seleccionada."
+      "description": "Comprueba que tu billetera de hardware esté configurada con la Frase de recuperación o Passphrase asociada a la cuenta seleccionada."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Es necesario actualizar la aplicación.",
