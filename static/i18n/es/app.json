@@ -1540,7 +1540,7 @@
       "filter": {
         "title": "Mostrar",
         "all": "Todas",
-        "supported": "Compatible con Live",
+        "supported": "Supported in Live",
         "installed": "Instaladas",
         "not_installed": "No instaladas"
       },
@@ -1573,7 +1573,7 @@
         "updateAll": "Actualizar todo",
         "updateAllOutOfMemory": "No hay espacio suficiente. Desinstala algunas aplicaciones",
         "install": "Instalar",
-        "installed": "Instaladas",
+        "installed": "Instalada",
         "updated": "Actualizadas",
         "uninstall": "Desinstalar",
         "notEnoughSpace": "No hay suficiente espacio",
@@ -2658,7 +2658,7 @@
       "theme": "Tema",
       "themeDesc": "Selecciona el tema.",
       "counterValue": "Divisa preferida",
-      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
+      "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
       "region": "Región",
       "regionDesc": "Elige tu región para actualizar formatos de fechas, hora y monedas.",
       "stock": "Indicador de mercado regional",
