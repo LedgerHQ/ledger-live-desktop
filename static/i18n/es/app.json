@@ -2648,7 +2648,7 @@
         "title": "Escanear para exportar a Mobile",
         "listTitle": "En la aplicación Ledger Live Mobile:",
         "step1": "Toca el botón <highlight><icon>+</icon></highlight> en <highlight>cuentas</highlight>",
-        "step2": "Toca <highlight>Importar cuentas de Desktop</highlight>",
+        "step2": "Toca <highlight>Importar cuentas desde Desktop</highlight>",
         "step3": "Escanea el <highlight>código LiveQR</highlight> hasta que la carga llegue a 100%"
       }
     },
