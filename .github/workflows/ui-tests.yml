@@ -119,14 +119,17 @@ jobs:
     name: "Start Dummy Live App for Discover/SDK tests"
     runs-on: ubuntu-20.04
     steps:
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        timeout-minutes: 15
       - name: checkout Dummy Live App for 'Discover' Playwright tests
         uses: actions/checkout@v2
         with:
           repository: LedgerHQ/dummy-live-app
           # path: ./dummy-live-app
+      - name: show files
+        run: |
+          echo "files: "
+          ls -a
+          echo "directory: "
+          pwd
       - name: setup node
         uses: actions/setup-node@v2
         if: always()
