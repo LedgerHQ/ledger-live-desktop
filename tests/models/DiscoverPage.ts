@@ -28,7 +28,9 @@ export class DiscoverPage {
     // FIXME: the bellow select dropdown at src/renderer/components/SelectAccountAndCurrency.js
     //        is tricky to grab a hold of (subtree intercepts pointer events), need to find a
     //        way of grabbing these custom elements
-    this.selectAccount = page.locator("//*[@data-test-id='select-account-dropdown']/div");
+    this.selectAccountDropdown = page.locator("//*[@data-test-id='select-account-dropdown']/div");
+    this.selectBtcAccount = page.locator("text=Bitcoin (BTC)");
+    this.modalContinueButton = page.locator("button:has-text('Continue')");
   }
 
   async navigateToCatalog() {
