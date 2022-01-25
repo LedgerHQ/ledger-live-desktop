@@ -118,6 +118,9 @@ jobs:
   start-dummy-live-app:
     name: "Start Dummy Live App for Discover/SDK tests"
     steps:
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        timeout-minutes: 15
       - name: checkout Dummy Live App for 'Discover' Playwright tests
         uses: actions/checkout@v2
         with:
@@ -134,7 +137,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: cd dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
+        run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
       - name: start server
         run: yarn start
 
