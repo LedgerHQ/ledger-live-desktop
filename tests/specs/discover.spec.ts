@@ -1,3 +1,4 @@
+import { exec } from "child_process";
 import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { DiscoverPage } from "../models/DiscoverPage";
@@ -11,6 +12,8 @@ test.use({ userdata: "1AccountBTC1AccountETH" });
 let continueTest = false;
 
 test.beforeAll(async ({ request }) => {
+  exec("serve -s ../utils/dummy-app-build -l 3001");
+
   try {
     const response = await request.get("http://localhost:3001");
     if (response.ok() === true) continueTest = true;

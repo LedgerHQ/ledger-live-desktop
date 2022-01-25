@@ -31,35 +31,6 @@ jobs:
               body,
             });
 
-  start-dummy-live-app:
-    name: "Start Dummy Live App for Discover/SDK tests"
-    runs-on: ubuntu-20.04
-    timeout-minutes: 25
-    steps:
-      - name: checkout Dummy Live App for 'Discover' Playwright tests
-        uses: actions/checkout@v2
-        with:
-          repository: LedgerHQ/dummy-live-app
-          path: ./dummy-live-app
-      - name: show files
-        run: |
-          echo "files: "
-          ls -a
-          echo "directory: "
-          pwd
-      - name: setup node
-        uses: actions/setup-node@v2
-        if: always()
-        with:
-          node-version: 14.x
-      - name: install yarn
-        if: always()
-        run: npm install --global yarn
-      - name: install dependencies
-        run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
-      - name: start server
-        run: cd ./dummy-live-app && yarn start
-
   start-runner:
     name: "[Runner] start ec2 instance"
     needs: [add-reaction]
