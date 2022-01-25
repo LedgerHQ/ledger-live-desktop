@@ -26,6 +26,7 @@ export class OnboardingPage {
   readonly writeRecoveryPhraseButton: Locator;
   readonly confirmRecoveryPhraseButton: Locator;
   readonly hideRecoveryPhraseButton: Locator;
+  readonly quizContainer: Locator;
   readonly quizStartButton: Locator;
   readonly quizAnswerTopButton: Locator;
   readonly quizAnswerBottomButton: Locator;
@@ -59,6 +60,7 @@ export class OnboardingPage {
     this.writeRecoveryPhraseButton = page.locator("data-test-id=use-recovery-sheet");
     this.confirmRecoveryPhraseButton = page.locator("data-test-id=recovery-howto-3");
     this.hideRecoveryPhraseButton = page.locator("data-test-id=hide-recovery-cta");
+    this.quizContainer = page.locator("data-test-id=quiz-container");
     this.quizStartButton = page.locator("data-test-id=quiz-start-cta");
     this.quizAnswerTopButton = page.locator("data-test-id=quiz-answer-0");
     this.quizAnswerBottomButton = page.locator("data-test-id=quiz-answer-1");
@@ -72,7 +74,7 @@ export class OnboardingPage {
 
   async acceptTerms() {
     await this.termsCheckbox.click();
-    await Promise.all([this.page.waitForResponse("**/*.svg"), this.termsSubmitButton.click()]);
+    await this.termsSubmitButton.click();
   }
 
   async selectDevice(device: "Nano S" | "Nano X" | "Blue" | string) {
