@@ -118,6 +118,7 @@ jobs:
   start-dummy-live-app:
     name: "Start Dummy Live App for Discover/SDK tests"
     runs-on: ubuntu-20.04
+    timeout-minutes: 25
     steps:
       - name: checkout Dummy Live App for 'Discover' Playwright tests
         uses: actions/checkout@v2
@@ -139,6 +140,7 @@ jobs:
         if: always()
         run: npm install --global yarn
       - name: install dependencies
+        env:
         run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
       - name: start server
         run: cd ./dummy-live-app && yarn start
