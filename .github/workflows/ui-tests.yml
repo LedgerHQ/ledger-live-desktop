@@ -123,9 +123,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: LedgerHQ/dummy-live-app
-          ref: main
-          # token: ${{ secrets.GH_PAT }}
-          # path: ./dummy-live-app
+          path: ./dummy-live-app
       - name: show files
         run: |
           echo "files: "
