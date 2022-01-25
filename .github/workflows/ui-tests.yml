@@ -117,6 +117,7 @@ jobs:
 
   start-dummy-live-app:
     name: "Start Dummy Live App for Discover/SDK tests"
+    runs-on: ubuntu-20.04
     steps:
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
