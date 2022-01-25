@@ -140,7 +140,6 @@ jobs:
         if: always()
         run: npm install --global yarn
       - name: install dependencies
-        env:
         run: cd ./dummy-live-app && yarn --frozen-lockfile --network-timeout 100000
       - name: start server
         run: cd ./dummy-live-app && yarn start
