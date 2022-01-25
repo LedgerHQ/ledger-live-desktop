@@ -2658,7 +2658,7 @@
       "theme": "Tema",
       "themeDesc": "Selecciona el tema.",
       "counterValue": "Divisa preferida",
-      "counterValueDesc": "Elige la moneda a mostrar al lado de tu saldo y operaciones.",
+      "counterValueDesc": "Choose the currency shown next to your balance and operations.",
       "region": "Región",
       "regionDesc": "Elige tu región para actualizar formatos de fechas, hora y monedas.",
       "stock": "Indicador de mercado regional",
