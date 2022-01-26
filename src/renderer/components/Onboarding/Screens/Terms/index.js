@@ -97,14 +97,23 @@ export const Terms = ({ sendEvent }: TermsProps) => {
         </TermsLinks>
 
         <Box horizontal my={2} alignItems="flex-start" justifyContent="flex-start">
-          <CheckBox id="onboarding-terms-check" isChecked={isAccepted} onChange={onSwitchAccept} />
+          <CheckBox
+            data-test-id="onboarding-terms-checkbox"
+            isChecked={isAccepted}
+            onChange={onSwitchAccept}
+          />
           <TermsCheckLabel ff="Inter|Medium" fontSize={12}>
             {t("Terms.switchLabel")}
           </TermsCheckLabel>
         </Box>
       </TermsBody>
 
-      <TermsCTA primary onClick={handleNext} disabled={!isAccepted} id="onboarding-terms-submit">
+      <TermsCTA
+        primary
+        onClick={handleNext}
+        disabled={!isAccepted}
+        data-test-id="onboarding-terms-submit"
+      >
         {t("Terms.cta")}
         <Box ml={2}>
           <ChevronRight size={13} />

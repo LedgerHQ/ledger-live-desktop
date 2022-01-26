@@ -71,7 +71,7 @@ export function QuizSuccess({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.quizSuccess.buttons.prev")}
           </Text>
         </Button>
-        <Button id="quizz-success-cta" inverted primary onClick={() => sendEvent("NEXT")}>
+        <Button data-test-id="quiz-success-cta" inverted primary onClick={() => sendEvent("NEXT")}>
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.quizSuccess.buttons.next")}
           </Text>

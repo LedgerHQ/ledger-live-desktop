@@ -96,7 +96,7 @@ export function NewRecoveryPhrase({ sendEvent, context }: Props) {
           }}
         >
           <CheckBox
-            id="recoveryphrase-private-cb"
+            data-test-id="recoveryphrase-private-cb"
             isChecked={userUnderstandConsequences}
             inverted
           />
@@ -126,7 +126,7 @@ export function NewRecoveryPhrase({ sendEvent, context }: Props) {
           disabled={!userUnderstandConsequences}
           primary
           onClick={() => sendEvent("NEXT")}
-          id="device-recoveryphrase-cta"
+          data-test-id="device-recoveryphrase-cta"
         >
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.newRecoveryPhrase.buttons.next")}

@@ -50,7 +50,7 @@ export function Intro({ sendEvent, t, meta }: Props) {
       >
         {t("onboarding.quizz.descr")}
       </Text>
-      <Button id="quizz-start-cta" primary onClick={() => sendEvent("START")}>
+      <Button data-test-id="quiz-start-cta" primary onClick={() => sendEvent("START")}>
         <Text>{t("onboarding.quizz.buttons.start")}</Text>
       </Button>
     </IntroContainer>
