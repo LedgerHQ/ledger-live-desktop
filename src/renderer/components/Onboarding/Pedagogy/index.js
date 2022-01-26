@@ -162,7 +162,7 @@ export function Pedagogy({ onDone }: PedagogyProps) {
   const CurrentScreen = screens[state.value];
 
   return (
-    <PedagogyContainer>
+    <PedagogyContainer data-test-id="onboarding-pedagogy-modal">
       <Text
         mt="72px"
         color="palette.primary.main"
