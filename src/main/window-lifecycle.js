@@ -57,6 +57,7 @@ const defaultWindowOptions = {
     experimentalFeatures: true,
     nodeIntegration: true,
     contextIsolation: false,
+    spellcheck: false,
   },
 };
 

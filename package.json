@@ -10,7 +10,7 @@
   "license": "MIT",
   "private": true,
   "main": "./.webpack/main.bundle.js",
-  "version": "2.36.3",
+  "version": "2.37.2",
   "scripts": {
     "start:prod": "electron ./.webpack/main.bundle.js",
     "start": "cross-env NODE_ENV=development node ./tools/main.js",
@@ -47,9 +47,9 @@
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.20.0",
     "@ledgerhq/hw-transport-http": "6.20.0",
-    "@ledgerhq/hw-transport-node-hid-singleton": "6.20.0",
+    "@ledgerhq/hw-transport-node-hid-singleton": "6.23.1",
     "@ledgerhq/ledger-core": "6.14.5",
-    "@ledgerhq/live-common": "^21.26.1",
+    "@ledgerhq/live-common": "^21.29.0",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/react-ui": "^0.7.1",
     "@polkadot/react-identicon": "0.87.6",
@@ -131,7 +131,7 @@
     "winston-transport": "^4.3.0",
     "write-file-atomic": "^3.0.3",
     "ws": "^7.5.3",
-    "xstate": "^4.26.1",
+    "xstate": "^4.28.1",
     "zxcvbn": "^4.4.2"
   },
   "devDependencies": {
