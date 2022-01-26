@@ -4,9 +4,19 @@ on:
     types: [created]
 
 jobs:
+  check-if-fork:
+    runs-on: ubuntu-20.04
+    outputs:
+      forked: ${{ steps.forked.outputs.forked }}
+    steps:
+      - name: check if we are on a forked repo
+        id: forked
+        run: echo "::set-output name=forked::$(${{github.event.issue.pull_request.head.repo.full_name != github.repository }})"
+
   add-reaction:
+    needs: [check-if-fork]
     name: "[Reaction] 🚀"
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots')
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && !needs.check-if-fork.outputs.forked
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR
