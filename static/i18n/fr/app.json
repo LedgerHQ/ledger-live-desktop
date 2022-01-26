@@ -273,7 +273,7 @@
       }
     },
     "history": {
-      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live pour l'ordinateur ne sont pas synchronisées avec votre application Ledger Live pour le mobile.",
       "empty": {
         "title": "Vos swaps réalisés apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
