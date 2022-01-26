@@ -13,4 +13,5 @@ export type FooterProps = {
   wcStatus: STATUS,
   onContinue: Function,
   onReject: Function,
+  onCancel: Function,
 };
