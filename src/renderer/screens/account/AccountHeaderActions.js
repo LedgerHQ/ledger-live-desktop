@@ -229,7 +229,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const ManageActionsHeader = manageActions.map(item => renderAction(item));
 
   const NonEmptyAccountHeader = (
-    <FadeInButtonsContainer show={showButtons}>
+    <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
       {canSend(account, parentAccount) && (
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
@@ -254,7 +254,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       {account.type === "Account" ? (
         <Tooltip content={t("account.settings.title")}>
           <ButtonSettings
-            id="account-settings-button"
+            data-test-id="account-settings-button"
             onClick={() => openModal("MODAL_SETTINGS_ACCOUNT", { parentAccount, account })}
           >
             <Box justifyContent="center">

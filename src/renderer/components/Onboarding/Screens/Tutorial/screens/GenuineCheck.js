@@ -15,7 +15,8 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import IconCheck from "~/renderer/icons/Check";
 import { ContentContainer } from "../shared";
 import DeviceAction from "~/renderer/components/DeviceAction";
-
+import { setLastSeenDeviceInfo } from "~/renderer/actions/settings";
+import { useDispatch } from "react-redux";
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { command } from "~/renderer/commands";
 
@@ -94,12 +95,26 @@ export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId, device } = context;
 
+  const reduxDispatch = useDispatch();
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
 
   const onResult = useCallback(
     res => {
+      const { device, deviceInfo, result } = res;
       sendEvent({ type: "GENUINE_CHECK_SUCCESS", device: res.device });
+      const lastSeenDevice = {
+        modelId: device.modelId,
+        deviceInfo: deviceInfo,
+        apps: result.installed.map(({ name, version }) => ({ name, version })),
+      };
+
+      command("getLatestFirmwareForDevice")(deviceInfo)
+        .toPromise()
+        .then(latestFirmware => {
+          reduxDispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware }));
+        })
+        .catch(console.error);
     },
     [sendEvent],
   );

@@ -140,7 +140,6 @@ export default function SwapAction({
         account: fromAccount,
         transaction: initData.transaction,
         appName: "Exchange",
-        requireLatestFirmware: true,
       }}
       Result={TransactionResult}
       onResult={({ signedOperation, transactionSignError }) => {

@@ -719,13 +719,20 @@
     "reset": "Réinitialiser",
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
-      "header": "Acheter des cryptos avec {{provider}}",
-      "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
+      "header": "Acheter et vendre des cryptos",
+      "title": "Choisissez un prestataire pour acheter des cryptos.",
+      "buyFrom": "Achetez de là où vous vous trouvez",
+      "cryptoSupported": "cryptos prises en charge",
+      "payWith": "Payez par carte ou via SEPA",
       "tab": "Acheter",
-      "selectCrypto": "Choisir un crypto-actif",
-      "selectAccount": "Sélectionner un compte",
-      "continue": "Continuer",
-      "addAccount": "Ajouter un compte"
+      "coinify": {
+        "header": "Acheter des cryptos avec {{provider}}",
+        "title": "Achetez des cryptos avec <0>{{provider}}</0>.",
+        "selectCrypto": "Choisir un crypto-actif",
+        "selectAccount": "Sélectionner un compte",
+        "continue": "Continuer",
+        "addAccount": "Ajouter un compte"
+      }
     },
     "sell": {
       "header": "Vendre des cryptos avec {{provider}}",
@@ -734,11 +741,6 @@
       "selectCrypto": "Choisir un crypto-actif",
       "selectAccount": "Sélectionner un compte",
       "continue": "Continuer"
-    },
-    "history": {
-      "tab": "Historique",
-      "exporting": "Exportation...",
-      "exportOperations": "Exporter les opérations"
     }
   },
   "lend": {
@@ -1085,7 +1087,7 @@
       "description": "Vendez vos bitcoins via notre partenaire sans sortir de Ledger Live."
     },
     "stakeAlgorand": {
-      "title": "Staking avec ALGORAND",
+      "title": "Les récompenses avec ALGORAND",
       "description": "Profitez au mieux de vos ALGO. Ajoutez simplement des fonds à vos comptes et commencez à gagner des récompenses dès aujourd'hui."
     },
     "swap": {
@@ -1152,7 +1154,8 @@
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
     "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
-    "showQrCode": "Afficher le code QR"
+    "showQrCode": "Afficher le code QR",
+    "taprootWarning": "Vérifiez que l'émetteur prend en charge Taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -2656,8 +2659,8 @@
       "themeDesc": "Sélectionnez un thème.",
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
-      "region": "Fuseau horaire",
-      "regionDesc": "Choisissez votre région pour définir le fuseau horaire de Ledger Live.",
+      "region": "Région",
+      "regionDesc": "Choisissez votre région pour personnaliser les formats de date, d'heure et de nombre.",
       "stock": "Indicateur de marché régional",
       "stockDesc": "Choisissez Ouest pour afficher les hausses du marché en bleu ou Est pour les afficher en rouge.",
       "carouselVisibility": "Visibilité du carrousel",
@@ -2730,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Bitcoin, tous les forks de Bitcoin, et Tezos."
+          "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2738,7 +2741,7 @@
         },
         "managerDevMode": {
           "title": "Mode développeur",
-          "description": "Afficher les applications développeurs et testnet dans le Gestionnaire."
+          "description": "Affichez les applications développeurs et testnet dans le Gestionnaire."
         },
         "scanForInvalidPaths": {
           "title": "Recherche de compte étendue",
@@ -3925,6 +3928,9 @@
     "InvalidAddress": {
       "title": "Adresse {{currencyName}} invalide"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "Votre compte est déjà délégué à ce validateur"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "L'adresse du bénéficiaire est identique à l'adresse du donneur d'ordre."
     },
@@ -3935,6 +3941,10 @@
     "ETHAddressNonEIP": {
       "title": "Vérification automatique indisponible : vérifiez l'adresse attentivement.",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "Opération non disponible sur cet appareil",
+      "description": "La fonctionnalité Envoi de NFT n'est disponible que pour le Nano X. Visitez notre centre d'aide pour découvrir comment envoyer un NFT avec un Nano S."
     },
     "CantScanQRCode": {
       "title": "Échec du scan de ce code QR. Cette adresse ne prend pas en charge la vérification automatique."

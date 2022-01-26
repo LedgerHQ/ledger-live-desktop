@@ -307,7 +307,7 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-              {process.env.NODE_ENV !== "production" && !process.env.SPECTRON_RUN ? (
+              {process.env.NODE_ENV !== "production" && !process.env.PLAYWRIGHT_RUN ? (
                 <SideBarListItem
                   id={"market"}
                   label={t("sidebar.market")}
@@ -417,9 +417,7 @@ const MainSideBar = () => {
             </Hide>
 
             <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-              <div data-test-id="bookmarked-accounts">
-                <Stars pathname={location.pathname} collapsed={secondAnim} />
-              </div>
+              <Stars pathname={location.pathname} collapsed={secondAnim} />
             </SideBarList>
             <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />
