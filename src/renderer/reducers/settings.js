@@ -277,7 +277,7 @@ const handlers: Object = {
     ...state,
     lastSeenDevice: {
       ...(state.lastSeenDevice || {}),
-      ...payload.lastSeenDevice,
+      ...(payload.lastSeenDevice || {}),
     },
     latestFirmware: payload.latestFirmware,
   }),
