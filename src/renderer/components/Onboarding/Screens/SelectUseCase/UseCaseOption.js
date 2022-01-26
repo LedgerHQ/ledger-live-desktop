@@ -53,6 +53,7 @@ type UseCaseOptionProps = {
   Illu: React$Node,
   onClick: () => void,
   id?: string,
+  dataTestId?: string,
 };
 
 export function UseCaseOption({
