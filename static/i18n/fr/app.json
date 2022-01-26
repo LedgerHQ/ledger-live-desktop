@@ -352,7 +352,7 @@
       "history": "Historique"
     },
     "history": {
-      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live pour l'ordinateur ne sont pas synchronisées avec votre application Ledger Live pour le mobile.",
       "empty": {
         "title": "Vos swaps réalisés apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
@@ -1322,8 +1322,8 @@
       "successDescPlu": "Vos comptes {{assets}} sont maintenant à jour et prêts à être utilisés.",
       "successDesc": "Votre compte {{assets}} est maintenant à jour et prêt à être utilisé.",
       "mobileTitle": "Exporter les comptes vers l'application mobile",
-      "mobileDesc": "Appuyez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live mobile.",
-      "mobileCTA": "Exporter vers Ledger Live mobile",
+      "mobileDesc": "Appuyez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live pour le mobile.",
+      "mobileCTA": "Exporter vers Ledger Live pour le mobile",
       "description": "Mettez vos comptes à jour pour bénéficier des nouvelles fonctionnalités de Ledger Live.",
       "currency": "Mise à jour nécessaire pour 1 compte {{currency}}",
       "currency_plural": "Mise à jour nécessaire pour {{count}} comptes {{currency}}",
@@ -2636,7 +2636,7 @@
     "export": {
       "accounts": {
         "title": "Exporter les comptes",
-        "desc": "Ajoutez vos comptes dans Ledger Live mobile. Vos comptes se synchroniseront avec la blockchain, pas entre les applications Ledger Live mobile et ordinateur.",
+        "desc": "Ajoutez vos comptes dans Ledger Live pour le mobile. Vos comptes se synchroniseront avec la blockchain, pas entre les applications Ledger Live pour le mobile et pour l'ordinateur.",
         "button": "Exporter"
       },
       "operations": {
@@ -2646,7 +2646,7 @@
       "modal": {
         "button": "Terminé",
         "title": "Scanner pour exporter vers un mobile",
-        "listTitle": "Sur l'application mobile Ledger Live :",
+        "listTitle": "Sur l'application Ledger Live pour le mobile :",
         "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
         "step3": "Scannez le <highlight>code QR</highlight> jusqu'à ce que la barre soit à 100 %."
@@ -2839,7 +2839,7 @@
     },
     "disablePassword": {
       "title": "Désactiver le verrouillage par mot de passe",
-      "desc": "Les données Ledger Live seront stockées sur votre ordinateur sans être chiffrées. Ces données comprennent les noms, transactions et adresses publiques de vos comptes."
+      "desc": "Les données de Ledger Live seront stockées sur votre ordinateur sans être chiffrées. Ces données comprennent les noms, transactions et adresses publiques de vos comptes."
     }
   },
   "update": {
