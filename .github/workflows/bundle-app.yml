@@ -23,9 +23,14 @@ jobs:
     outputs:
       forked: ${{ steps.forked.outputs.forked }}
     steps:
+      - name: echo
+        run: |
+          echo ${{github.event.pull_request.head.repo.full_name }}
+          echo ${{ github.repository }}
+
       - name: check if we are on a forked repo
         id: forked
-        run: echo "::set-output name=forked::$(${{github.event.pull_request.head.repo.full_name != github.repository}})"
+        run: echo "::set-output name=forked::$(${{github.event.pull_request.head.repo.full_name != github.repository }})"
 
   bundle-macos:
     name: "[macOS] Build"
@@ -79,7 +84,7 @@ jobs:
   start-runner:
     name: "[Runner] start ec2 instance"
     needs: check-if-fork
-    if: ${{ !needs.check-if-fork.outputs.forked }}
+    if: ${{ !needs.check-if-fork.outputs.forked && github.actor != 'dependabot[bot]' }}
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
@@ -162,7 +167,7 @@ jobs:
     name: "[Linux] Build"
     needs: [check-if-fork]
     runs-on: ubuntu-20.04
-    if: needs.check-if-fork.outputs.forked
+    if: ${{needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v2
         with:
