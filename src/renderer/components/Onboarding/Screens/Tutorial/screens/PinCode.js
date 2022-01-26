@@ -88,7 +88,11 @@ export function PinCode({ sendEvent, context }: Props) {
             cursor: "pointer",
           }}
         >
-          <CheckBox id="pincode-private-cb" isChecked={userChosePincodeHimself} inverted />
+          <CheckBox
+            data-test-id="pincode-private-cb"
+            isChecked={userChosePincodeHimself}
+            inverted
+          />
           <Text
             color="palette.primary.contrastText"
             ff="Inter|Regular"
@@ -108,7 +112,7 @@ export function PinCode({ sendEvent, context }: Props) {
           </Text>
         </Button>
         <Button
-          id="device-pincode-cta"
+          data-test-id="device-pincode-cta"
           inverted
           disabled={!userChosePincodeHimself}
           primary
