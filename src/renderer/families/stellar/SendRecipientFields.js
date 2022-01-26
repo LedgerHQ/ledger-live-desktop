@@ -7,6 +7,7 @@ import FeeField from "./FeeField";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Text from "~/renderer/components/Text";
+import Spoiler from "~/renderer/components/Spoiler";
 import LabelInfoTooltip from "~/renderer/components/LabelInfoTooltip";
 
 const Root = (props: *) => {
@@ -38,18 +39,20 @@ const Root = (props: *) => {
           </Text>
         </Box>
       )}
-      <Box>
-        <Label>
-          <LabelInfoTooltip text={<Trans i18nKey="families.stellar.feeInfoText" />}>
-            <span>
-              <Trans i18nKey="families.stellar.fee" />
-            </span>
-          </LabelInfoTooltip>
-        </Label>
-      </Box>
-      <Box mb={10} horizontal grow>
-        <FeeField {...props} />
-      </Box>
+      <Spoiler textTransform title={<Trans i18nKey="fees.advanced" />}>
+        <Box mt={15}>
+          <Label>
+            <LabelInfoTooltip text={<Trans i18nKey="families.stellar.feeInfoText" />}>
+              <span>
+                <Trans i18nKey="families.stellar.fee" />
+              </span>
+            </LabelInfoTooltip>
+          </Label>
+        </Box>
+        <Box mb={10} horizontal grow>
+          <FeeField {...props} />
+        </Box>
+      </Spoiler>
     </Box>
   );
 };

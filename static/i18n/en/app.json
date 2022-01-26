@@ -1448,8 +1448,8 @@
       "appOnDeviceSearch": "Search installed apps..."
     },
     "disconnected": {
-      "title":"Looks like an app is open on your device",
-      "subtitle":"Reopening the Manager will quit the app on your device",
+      "title": "Looks like an app is open on your device",
+      "subtitle": "Reopening the Manager will quit the app on your device",
       "ctaReopen": "Reopen Manager",
       "ctaPortfolio": "Back to Portfolio"
     },
@@ -2464,7 +2464,7 @@
       "steps": {
         "assets": {
           "title": "Asset",
-          "info": "[TODO]",
+          "info": "Adding an asset requires sending a transaction with minimum fees. This will appear in your transaction history",
           "selectLabel": "Choose an asset",
           "disabledTooltip": "You already have this asset on your Stellar account"
         },
@@ -3512,7 +3512,7 @@
       },
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient",
       "fee": "Fee",
-      "feeInfoText": "TODO: Stellar fee",
+      "feeInfoText": "Transaction on the Stellar network require a minimum transaction fee of 0.00001 XLM",
       "recommendedFee": "Recommended fee",
       "networkCongestion": "network congestion",
       "networkCongestionLevel": {
@@ -4044,14 +4044,8 @@
     "FeeTooHigh": {
       "title": "Network fees are above 10% of the amount"
     },
-    "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
-    },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
-    },
-    "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "Amount must be at least {{minAmountFromFormatted}}"
@@ -4101,6 +4095,33 @@
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "StellarMemoRecommended": {
+      "title": "A memo may be required when sending to this recipient"
+    },
+    "StellarInvalidAddress": {
+      "title": "Invalid address. Public addresses are uppercase and begin with letter 'G' or 'M'"
+    },
+    "StellarAssetNotAccepted": {
+      "title": "This recipient doesn't have a trustline to {{assetCode}} yet"
+    },
+    "StellarAssetRequired": {
+      "title": "A Stellar asset should be selected before adding a trustline"
+    },
+    "StellarAssetNotFound": {
+      "title": "Selected Stellar asset could not be found"
+    },
+    "StellarNotEnoughNativeBalance": {
+      "title": "TODO:"
+    },
+    "StellarFeeSmallerThanRecommended": {
+      "title": "TODO:"
+    },
+    "StellarNotEnoughNativeBalanceToAddTrustline": {
+      "title": "TODO:"
     }
   }
 }
