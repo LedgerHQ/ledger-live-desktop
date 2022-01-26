@@ -131,23 +131,6 @@ export const experimentalFeatures: Feature[] = [
     description: <Trans i18nKey="settings.experimental.features.forceProvider.description" />,
     minValue: 1,
   },
-  {
-    type: "toggle",
-    name: "NFT",
-    title: "NFT management features",
-    description:
-      "Display your Ethereum NFT and their metadata in your accounts. Send Ethereum NFT directly from Ledger Live.",
-    valueOn: true,
-    valueOff: false,
-  },
-  {
-    type: "toggle",
-    name: "NFT_ETH_METADATA_SERVICE",
-    title: "NFT staging metadata service",
-    description: "Use staging metadata service instead of production.",
-    valueOn: "https://nft.api.live.ledger-stg.com",
-    valueOff: "https://nft.api.live.ledger.com",
-  },
 ];
 
 const lsKey = "experimentalFlags";
