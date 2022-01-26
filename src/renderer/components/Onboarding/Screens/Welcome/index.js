@@ -95,7 +95,7 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
         {t("onboarding.screens.welcome.description")}
       </Text>
       <ButtonContainer>
-        <Button onClick={handleNext} primary id="onboarding-get-started-button">
+        <Button onClick={handleNext} primary data-test-id="onboarding-get-started-button">
           {t("onboarding.screens.welcome.cta")}
         </Button>
         {onboardingRelaunched && (
