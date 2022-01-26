@@ -115,6 +115,13 @@ jobs:
             jest.txt
       # pr/NR
 
+  start-dummy-server:
+    name: "Start Dummy Server"
+    needs: [cancel-previous]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout feature branch for testing
+
   ui-tests-linux-hosted:
     name: "[Linux] UI"
     needs: [start-runner, prepare-runner]

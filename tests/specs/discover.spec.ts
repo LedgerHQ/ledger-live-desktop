@@ -1,4 +1,3 @@
-import { exec } from "child_process";
 import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { DiscoverPage } from "../models/DiscoverPage";
@@ -9,22 +8,25 @@ import { Layout } from "../models/Layout";
 
 test.use({ userdata: "1AccountBTC1AccountETH" });
 
-// let continueTest = false;
+let continueTest = false;
 
 test.beforeAll(async ({ request }) => {
-  exec("serve -s ../utils/dummy-app-build -l 3001");
-
-  // try {
-  //   const response = await request.get("http://localhost:3001");
-  //   if (response.ok() === true) continueTest = true;
-  // } catch (error) {
-  //   console.log("========> Dummy test app not running on port 3001! <=========");
-  // }
+  // Check that dummy app in tests/utils/dummy-app-build has been started successfully (see playwright.config.ts 'webServer' option for more info)
+  // If it hasn't, set the test to not run
+  try {
+    const response = await request.get("http://localhost:3001");
+    if (response.ok() === true) {
+      continueTest = true;
+      console.info("========> Dummy test app successfully running on port 3001! <=========");
+    }
+  } catch (error) {
+    console.warn("========> Dummy test app not running on port 3001! <=========");
+  }
 });
 
 test("Live App", async ({ page }) => {
   // Don't run test if server is not running
-  // if (!continueTest) return;
+  if (!continueTest) return;
 
   const discoverPage = new DiscoverPage(page);
   const layout = new Layout(page);

@@ -52,7 +52,7 @@ export class DiscoverPage {
 
   async waitForSelectAccountModalToBeVisible() {
     await this.modal.waitFor({ state: "visible" });
-    await this.modal.click();
+    await this.modal.click(); // hack to force the modal to be visible for the subsequent screenshot check
   }
 
   async getAccountsList() {
