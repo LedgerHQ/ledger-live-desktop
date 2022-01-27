@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "接続",
         "details": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
-        "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択："
+        "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択：",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
