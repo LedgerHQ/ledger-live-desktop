@@ -2731,9 +2731,13 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
-        "experimentalCurrencies": {
+        "experimentalJSCurrencies": {
           "title": "Experimental JS implementations",
           "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
+        "experimentalCurrencies": {
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "Translation testing",
