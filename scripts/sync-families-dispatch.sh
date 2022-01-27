@@ -12,6 +12,7 @@ AccountBodyHeader.js \
 AccountSubHeader.js \
 SendAmountFields.js \
 SendRecipientFields.js \
+SendRecipientCustomFields.js \
 SendWarning.js \
 ReceiveWarning.js \
 AccountBalanceSummaryFooter.js \

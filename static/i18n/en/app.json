@@ -3514,6 +3514,7 @@
       "fee": "Fee",
       "feeInfoText": "Transaction on the Stellar network require a minimum transaction fee of 0.00001 XLM",
       "recommendedFee": "Recommended fee",
+      "recommenndedFeeInfo": "You can still submit this transaction with lower fee than recommended but it may not be completed",
       "networkCongestion": "network congestion",
       "networkCongestionLevel": {
         "LOW": "Low",
@@ -4103,7 +4104,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "StellarInvalidAddress": {
-      "title": "Invalid address. Public addresses are uppercase and begin with letter 'G' or 'M'"
+      "title": "Public addresses are uppercase and begin with letter 'G' or 'M'"
     },
     "StellarAssetNotAccepted": {
       "title": "This recipient doesn't have a trustline to {{assetCode}} yet"
@@ -4115,13 +4116,18 @@
       "title": "Selected Stellar asset could not be found"
     },
     "StellarNotEnoughNativeBalance": {
-      "title": "TODO:"
+      "title": "Sorry, insufficient Funds",
+      "description": "Please make sure the account has enough funds to cover the transaction fee"
     },
     "StellarFeeSmallerThanRecommended": {
-      "title": "TODO:"
+      "title": "The selected fee is lower than the recommended fee"
+    },
+    "StellarFeeSmallerThanBase": {
+      "title": "The minimum transaction fee is 0.00001 XLM"
     },
     "StellarNotEnoughNativeBalanceToAddTrustline": {
-      "title": "TODO:"
+      "title": "Sorry, insufficient Funds",
+      "description": "Please make sure the account has enough funds to cover the new trustline"
     }
   }
 }

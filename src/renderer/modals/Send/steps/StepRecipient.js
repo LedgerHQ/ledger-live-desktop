@@ -13,6 +13,7 @@ import SelectAccount from "~/renderer/components/SelectAccount";
 import SelectNFT from "~/renderer/screens/nft/Send/SelectNFT";
 
 import SendRecipientFields, { getFields } from "../SendRecipientFields";
+import SendRecipientCustomFields from "../SendRecipientCustomFields";
 import RecipientField from "../fields/RecipientField";
 
 import type { StepProps } from "../types";
@@ -46,6 +47,12 @@ const StepRecipient = ({
       <TrackPage category="Send Flow" name="Step Recipient" currencyName={currencyName} />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
+      <SendRecipientCustomFields
+        account={mainAccount}
+        status={status}
+        transaction={transaction}
+        onChange={onChangeTransaction}
+      />
       {isNFTSend ? (
         <Box flow={1}>
           <Label>{t("send.steps.recipient.nftRecipient")}</Label>

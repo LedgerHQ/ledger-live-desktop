@@ -8,6 +8,7 @@ import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
+import Alert from "~/renderer/components/Alert";
 import invariant from "invariant";
 import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 
@@ -49,7 +50,7 @@ const FeeField = ({
 
   // We use transaction as an error here.
   return (
-    <Box>
+    <Box maxWidth="100%">
       {networkCongestionLevel ? (
         <FeeMessageRow>
           <Text color={getCongestionColor(networkCongestionLevel)}>
@@ -80,6 +81,14 @@ const FeeField = ({
         onChange={onFeeValueChange}
         renderRight={<InputRight>XLM</InputRight>}
       />
+
+      {status.warnings?.transaction?.name === "StellarFeeSmallerThanRecommended" && (
+        <Box mt={25}>
+          <Alert type="secondary">
+            <Trans i18nKey="families.stellar.recommenndedFeeInfo" />
+          </Alert>
+        </Box>
+      )}
     </Box>
   );
 };
