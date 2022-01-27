@@ -2732,12 +2732,12 @@
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "Implémentations JS expérimentales",
+          "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "Intégrations expérimentales",
+          "description": "Utilisez l'intégration expérimentale de Solana."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
