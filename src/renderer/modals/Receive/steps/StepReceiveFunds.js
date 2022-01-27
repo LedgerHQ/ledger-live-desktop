@@ -285,7 +285,7 @@ const StepReceiveFunds = ({
               
               {isHederaAddress ? (
                 <Alert type="security" mt={4}>
-                  <Trans i18nKey="currentAddress.messageIfVirtual" values={{ name }} />
+                  <Trans i18nKey="Hedera.currentAddress.messageIfVirtual" values={{ name }} />
                 </Alert>
               ) : null}
             </>

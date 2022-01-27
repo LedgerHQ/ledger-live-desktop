@@ -1167,7 +1167,6 @@
     "title": "Current address",
     "for": "Address for <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Verify that the shared address exactly matches the one on your device",
-    "messageIfVirtual": "Your {{name}} address cannot be confirmed on your Ledger device. Use at your own risk.",
     "messageIfSkipped": "Your {{name}} address was not confirmed on your Ledger device. Please verify it for security.",
     "showQrCode": "Show QR Code",
     "taprootWarning": "Make sure the sender supports taproot"
@@ -4347,6 +4346,9 @@
     "createHederaAccountHelp": {
       "text": "Please refer to this support article for",
       "link": "how to create a Hedera account"
+    },
+    "currentAddress": {
+      "messageIfVirtual": "Your {{name}} address cannot be confirmed on your Ledger device. Use at your own risk."
     }
   }
 }
