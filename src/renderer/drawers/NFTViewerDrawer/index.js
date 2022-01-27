@@ -140,8 +140,6 @@ type NFTViewerDrawerProps = {
 export function NFTViewerDrawer({
   account,
   nftId,
-  isOpen,
-  onRequestClose,
   height,
 }: NFTViewerDrawerProps) {
   const { t } = useTranslation();
@@ -247,7 +245,16 @@ export function NFTViewerDrawer({
               {t("NFT.viewer.attributes.tokenId")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
-              <CopiableField value={nft.tokenId}>{nft.tokenId}</CopiableField>
+              <CopiableField value={nft.tokenId}>
+                {// only needed for very long tokenIds but works with any length > 4
+                nft.tokenId?.length >= 4 ? (
+                  <HashContainer>
+                    <SplitAddress value={nft.tokenId} />
+                  </HashContainer>
+                ) : (
+                  nft.tokenId
+                )}
+              </CopiableField>
             </Text>
             {nft.collection.standard === "ERC1155" ? (
               <React.Fragment>
