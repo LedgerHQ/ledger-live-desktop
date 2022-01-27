@@ -2731,9 +2731,13 @@
           "title": "TronGrid.io verwenden",
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
+        "experimentalJSCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
         "experimentalCurrencies": {
-          "title": "Experimentelle JS-Implementierungen",
-          "description": "Verwenden Sie experimentelle JS-Implementierungen für Algorand und Tezos."
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
