@@ -1,4 +1,5 @@
 // @flow
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { STATUS } from "~/renderer/screens/WalletConnect/Provider";
 
 export type BodyProps = {
@@ -8,7 +9,9 @@ export type BodyProps = {
 
 export type FooterProps = {
   wcDappName: ?string,
+  account: ?Account,
   wcStatus: STATUS,
   onContinue: Function,
   onReject: Function,
+  onCancel: Function,
 };
