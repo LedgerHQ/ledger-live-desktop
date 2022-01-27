@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "Подключить",
         "details": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:",
-        "deeplinkDetails": "Вы собираетесь подключиться к Ledger Live. Выберите счёт в сети Эфириума:"
+        "deeplinkDetails": "Вы собираетесь подключиться к Ledger Live. Выберите счёт в сети Эфириума:",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
