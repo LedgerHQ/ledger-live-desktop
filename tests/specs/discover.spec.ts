@@ -33,9 +33,10 @@ test("Live App", async ({ page }) => {
 
   await test.step("Navigate to catalog", async () => {
     await discoverPage.navigateToCatalog();
-    expect(await page.screenshot()).toMatchSnapshot({
-      name: "catalog.png",
-    });
+    // FIXME: flaky on CI - Can see scroll bar sometimes
+    // expect(await page.screenshot()).toMatchSnapshot({
+    //   name: "catalog.png",
+    // });
   });
 
   await test.step("Open Test App", async () => {
