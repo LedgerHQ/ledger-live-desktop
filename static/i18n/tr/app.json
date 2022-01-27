@@ -2731,9 +2731,13 @@
           "title": "TronGrid.io kullanın",
           "description": "Trongrid'i doğrudan Ledger sunucusu olmadan kullanın"
         },
+        "experimentalJSCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
         "experimentalCurrencies": {
-          "title": "Deneysel JS uygulamaları",
-          "description": "Algorand ve Tezos için deneysel JS uygulamalarını kullanın."
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
