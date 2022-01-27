@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "연결",
         "details": "지갑을 통해 다음 이더리움 계정에 연결하고 싶다면:",
-        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:"
+        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
