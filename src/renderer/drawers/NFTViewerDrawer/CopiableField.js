@@ -31,7 +31,6 @@ type CopiableFieldProps = {
 };
 
 export function CopiableField({ value, children }: CopiableFieldProps) {
-  console.log(value);
   return (
     <CopiableFieldContainer>
       {children}
