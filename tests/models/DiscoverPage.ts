@@ -56,31 +56,11 @@ export class DiscoverPage {
   }
 
   async getAccountsList() {
-    // TODO: make this into a generic function for interacting with webview app elements
-    await this.page.evaluate(() => {
-      const webview = document.querySelector("webview");
-      (webview as any).executeJavaScript(
-        `(function() {
-        const button = document.querySelector('[data-test-id=get-all-accounts-button]');
-        button.click();
-      })();
-    `,
-      );
-    });
+    await this.clickWebviewElement("[data-test-id=get-all-accounts-button]");
   }
 
   async requestAccount() {
-    await this.page.evaluate(() => {
-      const webview = document.querySelector("webview");
-      (webview as any).executeJavaScript(
-        `(function() {
-        const button = document.querySelector('[data-test-id=request-single-account-button]');
-        button.click();
-      })();
-    `,
-      );
-    });
-
+    await this.clickWebviewElement("[data-test-id=request-single-account-button]");
     this.waitForSelectAccountModalToBeVisible();
   }
 
@@ -100,18 +80,21 @@ export class DiscoverPage {
   }
 
   async verifyAddress() {
-    // TODO: make this into a generic function for interacting with webview app elements
-    await this.page.evaluate(() => {
+    await this.clickWebviewElement("[data-test-id=verify-address-button]]");
+  }
+
+  async clickWebviewElement(elementName: string) {
+    await this.page.evaluate(elementName => {
       const webview = document.querySelector("webview");
       (webview as any).executeJavaScript(
         `(function() {
-        const button = document.querySelector('[data-test-id=verify-address-button]');
-        button.click();
+        const element = document.querySelector('${elementName}');
+        element.click();
       })();
     `,
       );
-    });
-
-    // TODO: mocked device events for test
+    }, elementName);
   }
+
+  // TODO: mocked device events for test
 }
