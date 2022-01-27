@@ -2731,9 +2731,13 @@
           "title": "TronGrid.ioを使用",
           "description": "LedgerプロキシなしでTronGridを直接を使用する。"
         },
+        "experimentalJSCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
         "experimentalCurrencies": {
-          "title": "試験的JSの実装",
-          "description": "Algorand and Tezosの試験的JS実装を利用する。"
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
