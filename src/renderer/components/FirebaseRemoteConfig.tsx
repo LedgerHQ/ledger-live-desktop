@@ -1,6 +1,9 @@
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { getRemoteConfig, fetchAndActivate, RemoteConfig } from "firebase/remote-config";
+import { defaultFeatures } from "@ledgerhq/live-common/lib/featureFlags";
+import { DefaultFeatures } from "@ledgerhq/live-common/lib/types";
+import { reduce } from "lodash";
 
 export const FirebaseRemoteConfigContext = React.createContext<RemoteConfig | null>(null);
 
@@ -15,9 +18,18 @@ const firebaseCredentials = {
   appId: process.env.FIREBASE_APP_ID,
 };
 
-const firebaseDefaultConfig = {
-  feature_receive: true,
-};
+export const formatFeatureId = (id: string) => `feature_${id}`;
+
+// Firebase SDK treat JSON values as strings
+const formatDefaultFeatures = (config: DefaultFeatures) =>
+  reduce(
+    config,
+    (acc, feature, featureId) => ({
+      ...acc,
+      [formatFeatureId(featureId)]: JSON.stringify(feature),
+    }),
+    {},
+  );
 
 type Props = {
   children?: ReactNode;
@@ -31,7 +43,9 @@ export const FirebaseRemoteConfigProvider = ({ children }: Props): JSX.Element =
 
     const fetchConfig = async () => {
       const remoteConfig = getRemoteConfig();
-      remoteConfig.defaultConfig = firebaseDefaultConfig;
+      remoteConfig.defaultConfig = {
+        ...formatDefaultFeatures(defaultFeatures),
+      };
       await fetchAndActivate(remoteConfig);
       setConfig(remoteConfig);
     };
