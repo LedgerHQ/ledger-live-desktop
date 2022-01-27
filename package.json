@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@electron/remote": "^1.2.1",
-    "@hashgraph/sdk": "^2.0.30",
     "@hot-loader/react-dom": "^17.0.1",
     "@ledgerhq/devices": "6.24.1",
     "@ledgerhq/electron-updater": "^4.2.2",
