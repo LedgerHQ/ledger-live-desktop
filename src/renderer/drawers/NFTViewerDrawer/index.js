@@ -137,11 +137,7 @@ type NFTViewerDrawerProps = {
   onRequestClose: () => void,
 };
 
-export function NFTViewerDrawer({
-  account,
-  nftId,
-  height,
-}: NFTViewerDrawerProps) {
+export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
