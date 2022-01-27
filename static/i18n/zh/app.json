@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "连接",
         "details": "想要通过您的钱包连接到以下以太坊账户：",
-        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户："
+        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户：",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
