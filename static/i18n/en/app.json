@@ -4104,7 +4104,7 @@
       "title": "A memo may be required when sending to this recipient"
     },
     "StellarInvalidAddress": {
-      "title": "Public addresses are uppercase and begin with letter 'G' or 'M'"
+      "title": "This is not a valid Stellar address"
     },
     "StellarAssetNotAccepted": {
       "title": "This recipient doesn't have a trustline to {{assetCode}} yet"
@@ -4116,7 +4116,7 @@
       "title": "Selected Stellar asset could not be found"
     },
     "StellarNotEnoughNativeBalance": {
-      "title": "Sorry, insufficient Funds",
+      "title": "Sorry, insufficient funds",
       "description": "Please make sure the account has enough funds to cover the transaction fee"
     },
     "StellarFeeSmallerThanRecommended": {
@@ -4126,7 +4126,7 @@
       "title": "The minimum transaction fee is 0.00001 XLM"
     },
     "StellarNotEnoughNativeBalanceToAddTrustline": {
-      "title": "Sorry, insufficient Funds",
+      "title": "Sorry, insufficient funds",
       "description": "Please make sure the account has enough funds to cover the new trustline"
     }
   }
