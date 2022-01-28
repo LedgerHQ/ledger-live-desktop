@@ -252,7 +252,7 @@
         "currencyDisabledTooltip": "此货币尚不可用于 swap 互换"
       },
       "to": {
-        "title": "发往"
+        "title": "到"
       },
       "notAvailable": {
         "title": "Swap 互换在您所在的区域尚不可用",
@@ -1857,7 +1857,7 @@
         "utxoLag": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
         "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
         "from": "从",
-        "to": "发往",
+        "to": "到",
         "selectAccountDebit": "借记账户",
         "recipientAddress": "接收方地址",
         "amount": "数额",
