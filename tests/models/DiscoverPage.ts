@@ -48,6 +48,10 @@ export class DiscoverPage {
     // Workaround since sometimes on CI the background isn't fully opaque.
     // This grabs the sidedrawer element and makes sure the opacity value is correct.
     await this.page.waitForFunction(() => {
+      setTimeout(function() {
+        console.log("waiting for element");
+      }, 1000);
+
       const sideDrawer = document.querySelector(".sidedrawer");
       let sideDrawerStyles;
       if (sideDrawer) {
