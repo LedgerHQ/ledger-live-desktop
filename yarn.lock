@@ -2452,8 +2452,10 @@
     "@ledgerhq/hw-transport" "^6.20.0"
     "@ledgerhq/logs" "^6.10.0"
 
-"@ledgerhq/hw-transport-node-ble@file:.yalc/@ledgerhq/hw-transport-node-ble":
-  version "6.20.0-4eecaede"
+"@ledgerhq/hw-transport-node-ble@6.23.2-node-ble.0":
+  version "6.23.2-node-ble.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-ble/-/hw-transport-node-ble-6.23.2-node-ble.0.tgz#25e143324ef8e669cf3412aad3e18917dfc3d132"
+  integrity sha512-I69MUtv3Xso0CTGMsK7XHqiR6S5DIGfljrSqd8b1pi/wBVRENtP+EQVONAfIIrqNqfMBFt17pPPX8nRr7UlREA==
   dependencies:
     "@abandonware/noble" "1.9.2-15"
     "@ledgerhq/devices" "^6.20.0"
