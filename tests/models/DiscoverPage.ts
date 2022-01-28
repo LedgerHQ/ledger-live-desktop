@@ -42,6 +42,9 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
+    await this.disclaimerText.isVisible();
+    await this.disclaimerText.focus();
+
     // Workaround since sometimes on CI the background isn't fully opaque.
     // This grabs the sidedrawer element and makes sure the opacity value is correct.
     await this.page.waitForFunction(() => {
@@ -52,9 +55,6 @@ export class DiscoverPage {
         return sideDrawerStyles.getPropertyValue("opacity") === "1";
       }
     });
-
-    await this.disclaimerText.isVisible();
-    await this.disclaimerText.hover();
   }
 
   async acceptLiveAppDisclaimer() {
@@ -76,8 +76,13 @@ export class DiscoverPage {
       const webview = document.querySelector("webview");
       (webview as any).executeJavaScript(
         `(function() {
-          const element = document.querySelector('.output-container');
-          element.focus();
+          if (document.querySelector('.output-container').innerText.includes("mock:1:bitcoin")) {
+            console.log("element found";
+          } else {
+            setTimeout(function() {
+              console.log("waiting for element")
+          }, 1000);
+          }
       })();
     `,
       );
