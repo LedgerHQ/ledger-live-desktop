@@ -53,8 +53,8 @@ export class DiscoverPage {
       }
     });
 
-    await this.disclaimerText.waitFor({ state: "visible" });
-    await this.disclaimerText.focus();
+    await this.disclaimerText.isVisible();
+    await this.disclaimerText.hover();
   }
 
   async acceptLiveAppDisclaimer() {
@@ -62,7 +62,7 @@ export class DiscoverPage {
   }
 
   async waitForSelectAccountModalToBeVisible() {
-    await this.modal.waitFor({ state: "visible" });
+    await this.modal.isVisible();
     await this.modal.click(); // hack to force the modal to be visible for the subsequent screenshot check
   }
 
@@ -71,13 +71,13 @@ export class DiscoverPage {
   }
 
   async waitForAccountsList() {
-    // method to force the app to wait for the pre output element by clicking on it
+    // method to force the app to wait for the pre output element by focussing on it
     await this.page.evaluate(() => {
       const webview = document.querySelector("webview");
       (webview as any).executeJavaScript(
         `(function() {
           const element = document.querySelector('.output-container');
-          element.click();
+          element.focus();
       })();
     `,
       );
