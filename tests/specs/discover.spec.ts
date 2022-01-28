@@ -57,6 +57,7 @@ test("Live App", async ({ page }) => {
 
   await test.step("List all accounts", async () => {
     await discoverPage.getAccountsList();
+    await discoverPage.waitForAccountsList();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-list-all-accounts.png",
     });

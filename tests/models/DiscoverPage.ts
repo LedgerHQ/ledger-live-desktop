@@ -69,6 +69,20 @@ export class DiscoverPage {
     await this.clickWebviewElement("[data-test-id=get-all-accounts-button]");
   }
 
+  async waitForAccountsList() {
+    // method to force the app to wait for the pre output element by clicking on it
+    await this.page.evaluate(() => {
+      const webview = document.querySelector("webview");
+      (webview as any).executeJavaScript(
+        `(function() {
+          const element = document.querySelector('.output-container');
+          element.click();
+      })();
+    `,
+      );
+    });
+  }
+
   async requestAccount() {
     await this.clickWebviewElement("[data-test-id=request-single-account-button]");
     this.waitForSelectAccountModalToBeVisible();
