@@ -42,8 +42,18 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
+    // Workaround since sometimes on CI the background isn't fully opaque.
+    // This grabs the sidedrawer element and makes sure the opacity value is correct.
+    await this.page.waitForFunction(() => {
+      const sideDrawer = document.querySelector(".sidedrawer");
+      let sideDrawerStyles;
+      if (sideDrawer) {
+        sideDrawerStyles = window.getComputedStyle(sideDrawer);
+        return sideDrawerStyles.getPropertyValue("opacity") === "1";
+      }
+    });
+
     await this.disclaimerText.waitFor({ state: "visible" });
-    await this.disclaimerText.click();
   }
 
   async acceptLiveAppDisclaimer() {
