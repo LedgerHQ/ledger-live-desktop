@@ -1131,8 +1131,8 @@
         "title": "连接",
         "details": "想要通过您的钱包连接到以下以太坊账户：",
         "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户：",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "您没有任何以太坊账户。请添加一个以太坊账户来使用 Wallet Connect（钱包连接）。",
+        "alreadyConnected": "您正在尝试连接到一个 dApp（去中心化应用），然而您已连接到了另一个。 请先断开已连接的 dApp 后，再重新将 Live 连接到新的 dApp。"
       }
     },
     "connectedscreen": {
@@ -2734,12 +2734,12 @@
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "实验性的 JS 实现",
+          "description": "对 Algorand 和 Tezos 使用实验性的 JS 实现。"
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "实验集成",
+          "description": "使用 Solana 的实验集成。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
