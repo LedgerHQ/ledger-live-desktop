@@ -167,7 +167,7 @@ jobs:
     name: "[Linux] Build"
     needs: [check-if-fork]
     runs-on: ubuntu-20.04
-    if: $ {{needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
+    if: ${{needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v2
         with:

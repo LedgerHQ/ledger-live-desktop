@@ -39,7 +39,7 @@ jobs:
 
   stop-runner:
     name: "[Runner] stop ec2 instance"
-    if: ${{ always() }}
+    if: ${{ always() && !needs.check-if-fork.outputs.forked && github.actor != 'dependabot[bot]' }}
     needs: [start-runner, ui-tests-linux-hosted]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
@@ -178,7 +178,7 @@ jobs:
     name: "[Linux] UI"
     needs: [check-if-fork]
     runs-on: ubuntu-20.04
-    if: $ {{ needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
+    if: ${{ needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
     steps:
       - uses: actions/checkout@v2
         with:
