@@ -246,7 +246,7 @@
         "noAccountCTA": "添加账户"
       },
       "from": {
-        "title": "来自",
+        "title": "从",
         "max": "最大值",
         "accountPlaceholder": "选择来源",
         "currencyDisabledTooltip": "此货币尚不可用于 swap 互换"
@@ -444,7 +444,7 @@
       "resetKYCCTA": "重置 KYC",
       "amount": "数额",
       "from": {
-        "title": "来自",
+        "title": "从",
         "account": "账户",
         "amount": "发送数额",
         "currency": "加密资产"
@@ -489,7 +489,7 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "来自",
+          "from": "从",
           "to": "到",
           "toExchange": "发送数额",
           "toReceive": "待收数额",
@@ -537,7 +537,7 @@
         "finished": "您的 swap 互换已成功完成"
       },
       "date": "日期",
-      "from": "来自",
+      "from": "从",
       "fromAddress": "初始地址",
       "fromAddress_plural": "初始地址",
       "to": "到",
@@ -1856,7 +1856,7 @@
       "details": {
         "utxoLag": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
         "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
-        "from": "来自",
+        "from": "从",
         "to": "发往",
         "selectAccountDebit": "借记账户",
         "recipientAddress": "接收方地址",
