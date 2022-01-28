@@ -38,7 +38,7 @@ export const TableCell = ({
   ...props
 }: {
   loading?: boolean;
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   children?: React.ReactNode;
 }) => (
   <TableCellBase {...props}>
