@@ -54,6 +54,7 @@ export class DiscoverPage {
     });
 
     await this.disclaimerText.waitFor({ state: "visible" });
+    await this.disclaimerText.focus();
   }
 
   async acceptLiveAppDisclaimer() {
