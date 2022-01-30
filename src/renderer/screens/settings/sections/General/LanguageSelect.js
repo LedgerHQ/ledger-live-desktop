@@ -11,6 +11,7 @@ import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 
 export const languageLabels = {
+  ar: "العربية",
   de: "Deutsch",
   el: "Ελληνικά",
   en: "English",

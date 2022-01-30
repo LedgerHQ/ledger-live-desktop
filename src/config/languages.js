@@ -21,9 +21,10 @@ export const allLanguages = [
   "sv",
   "tr",
   "zh",
+  "ar",
 ];
 
-export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
+export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko", "ar"];
 
 export const pushedLanguages = ["fr", "ru"];
 
@@ -50,4 +51,5 @@ export const defaultLocaleForLanguage = {
   sv: "sv-SV",
   tr: "tr-TR",
   zh: "zh-CN",
+  ar: "ar-YE",
 };
