@@ -3828,6 +3828,9 @@
       "title": "Mot de passe incorrect",
       "description": "Veuillez réessayer."
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "Hôte requis."
     },
