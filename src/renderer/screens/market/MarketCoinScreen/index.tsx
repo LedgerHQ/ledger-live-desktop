@@ -1,11 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { starredMarketCoinsSelector, localeSelector } from "~/renderer/reducers/settings";
-import { useSingleCoinMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import {
+  useSingleCoinMarketData,
+  useMarketData,
+} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
 import CounterValueSelect from "../CountervalueSelect";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
@@ -50,6 +53,7 @@ const Title = styled(Text).attrs({ variant: "h3" })`
 `;
 
 export default function MarketCoinScreen() {
+  const { refresh, selectCurrency } = useMarketData();
   const { t } = useTranslation();
   const history = useHistory();
   const { currencyId } = useParams<{ currencyId: string }>();
@@ -103,6 +107,14 @@ export default function MarketCoinScreen() {
     internalCurrency,
     chartData,
   } = currency || {};
+
+  useEffect(() => {
+    return () => {
+      // @ts-expect-error can be an input
+      selectCurrency(undefined);
+      refresh({});
+    };
+  }, [selectCurrency, refresh]);
 
   const color = internalCurrency
     ? getCurrencyColor(internalCurrency, colors.background.main)
