@@ -1,11 +1,12 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
+import { track } from "~/renderer/analytics/segment";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
@@ -51,6 +52,10 @@ const Collections = ({ account }: Props) => {
   }, [collections.length]);
 
   const visibleCollection = collections.slice(0, numberOfVisibleCollection);
+
+  useEffect(() => {
+    track("View NFT Collections (Account Page)");
+  }, []);
 
   return (
     <Box>

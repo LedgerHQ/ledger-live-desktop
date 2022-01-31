@@ -240,7 +240,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
             >
               {t("NFT.viewer.attributes.tokenId")}
             </Text>
-            <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
+            <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100">
               <CopiableField value={nft.tokenId}>
                 {// only needed for very long tokenIds but works with any length > 4
                 nft.tokenId?.length >= 4 ? (
