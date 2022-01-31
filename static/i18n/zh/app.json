@@ -1507,6 +1507,10 @@
     "sell": {
       "notice": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。",
       "confirm": "确认卖出交易"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
