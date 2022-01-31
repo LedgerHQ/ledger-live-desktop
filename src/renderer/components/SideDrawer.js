@@ -209,7 +209,13 @@ export function SideDrawer({
           unmountOnExit
         >
           {state => (
-            <DrawerContainer className="sidedrawer" state={state} ref={focusTrapElem} tabIndex="-1">
+            <DrawerContainer
+              className="sidedrawer"
+              state={state}
+              ref={focusTrapElem}
+              tabIndex="-1"
+              data-test-id="sidedrawer"
+            >
               <DrawerContent {...props} isOpened={isOpen} state={state} direction={direction}>
                 {onRequestClose || onRequestBack || title ? (
                   <Box

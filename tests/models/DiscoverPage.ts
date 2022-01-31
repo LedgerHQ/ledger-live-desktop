@@ -44,21 +44,23 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
-    await this.disclaimerText.isVisible();
-    // await this.disclaimerText.hover();
-    const sidedrawer = await this.page.$(".sidedrawer");
-    await sidedrawer.waitForElementState("stable");
+    await this.disclaimerText.waitFor({ state: "visible" });
+    const sidedrawer = await this.page.$("[data-test-id=sidedrawer]");
+
+    if (sidedrawer) {
+      await sidedrawer.waitForElementState("stable");
+    }
 
     // Workaround since sometimes on CI the background isn't fully opaque.
     // // This grabs the sidedrawer element and makes sure the opacity value is correct.
-    // await this.page.waitForFunction(() => {
-    //   const sideDrawer = document.querySelector(".sidedrawer");
-    //   let sideDrawerStyles;
-    //   if (sideDrawer) {
-    //     sideDrawerStyles = window.getComputedStyle(sideDrawer);
-    //     return sideDrawerStyles.getPropertyValue("opacity") === "1";
-    //   }
-    // });
+    await this.page.waitForFunction(() => {
+      const sideDrawer = document.querySelector("[data-test-id=sidedrawer]");
+      let sideDrawerStyles;
+      if (sideDrawer) {
+        sideDrawerStyles = window.getComputedStyle(sideDrawer);
+        return sideDrawerStyles.getPropertyValue("opacity") === "1";
+      }
+    });
   }
 
   async acceptLiveAppDisclaimer() {
