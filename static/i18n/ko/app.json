@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "교환을 확인해 주세요",
       "completed": {
-        "title": "교환 대기 중",
-        "description": "확인을 위해 귀하의 스왑 거래를 네트워크로 전송했습니다. {{targetCurrency}}(을)를 받기까지 최대 한 시간이 소요될 수 있습니다.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "<0><0>{{provider}}</0> 지원</0>의 도움이 필요한 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
         "seeDetails": "세부사항 확인"
       }
