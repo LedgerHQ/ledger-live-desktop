@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Подтвердите обмен",
       "completed": {
-        "title": "Операция в ожидании",
-        "description": "Операция обмена отправлена в сеть для подтверждения. Может пройти около часа, прежде чем вы получите ваши токены {{targetCurrency}}.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "Сохраните ID обмена на случай, если в дальнейшем потребуется помощь от <0><0>{{provider}}</0></0>.",
         "seeDetails": "Подробности"
       }
