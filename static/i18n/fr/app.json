@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Confirmer l'échange",
       "completed": {
-        "title": "Opération en attente",
-        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
         "seeDetails": "Voir les détails"
       }
