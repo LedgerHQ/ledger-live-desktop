@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Swap bestätigen",
       "completed": {
-        "title": "Vorgang ausstehend",
-        "description": "Ihr Tauschvorgang (Swap) wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "Notieren Sie sich Ihre Swap-ID-Nummer, falls Sie Unterstützung von <0><0>{{provider}}</0> Unterstützung</0> benötigen.",
         "seeDetails": "Siehe Details"
       }
