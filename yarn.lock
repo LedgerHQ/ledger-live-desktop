@@ -18,7 +18,7 @@
   optionalDependencies:
     usb "^1.7.2"
 
-"@abandonware/noble@1.9.2-15":
+"@abandonware/noble@^1.9.2-15":
   version "1.9.2-15"
   resolved "https://registry.yarnpkg.com/@abandonware/noble/-/noble-1.9.2-15.tgz#b30de175177af689dfee8b98266a0936663b8cc4"
   integrity sha512-qD9NN5fzvbtHdWYFPDzxY2AveILvDSRX/PTdL0V+CUfyF70ggIJtLBc1WW1hbVMIpu8rZylYgrK+PUEBwIpjCg==
@@ -2273,17 +2273,17 @@
     "@ledgerhq/hw-transport" "^6.20.0"
     "@ledgerhq/logs" "^6.10.0"
 
-"@ledgerhq/hw-transport-node-ble@6.23.2-node-ble.0":
-  version "6.23.2-node-ble.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-ble/-/hw-transport-node-ble-6.23.2-node-ble.0.tgz#25e143324ef8e669cf3412aad3e18917dfc3d132"
-  integrity sha512-I69MUtv3Xso0CTGMsK7XHqiR6S5DIGfljrSqd8b1pi/wBVRENtP+EQVONAfIIrqNqfMBFt17pPPX8nRr7UlREA==
+"@ledgerhq/hw-transport-node-ble@6.23.2-node-ble-winrt.0":
+  version "6.23.2-node-ble-winrt.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-ble/-/hw-transport-node-ble-6.23.2-node-ble-winrt.0.tgz#2e603c327b8c54b9bace4e728de6743a886f205d"
+  integrity sha512-1EHrpV0aDIrzSxGt/jjNgn6IlROAeaHpSjhJTxXRHxKleanyqViETu7mngMTCkRWEf83SsU2sEitcf6MidlJmQ==
   dependencies:
-    "@abandonware/noble" "1.9.2-15"
     "@ledgerhq/devices" "^6.20.0"
     "@ledgerhq/errors" "^6.10.0"
     "@ledgerhq/hw-transport" "^6.20.0"
     "@ledgerhq/logs" "^6.10.0"
     invariant "^2.2.4"
+    noble-winrt "git://github.com/juan-cortes/noble-winrt#191dc35e3625366c647c3cce6f706d9cf3d3e1d2"
     rxjs "6"
 
 "@ledgerhq/hw-transport-node-hid-noevents@^6.20.0":
@@ -7375,6 +7375,11 @@ chownr@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/chownr/-/chownr-2.0.0.tgz"
   integrity sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==
+
+chrome-native-messaging@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/chrome-native-messaging/-/chrome-native-messaging-0.2.0.tgz#c142cde524bd1b1854e14f57e078a396a6da3826"
+  integrity sha1-wULN5SS9GxhU4U9X4HijlqbaOCY=
 
 chrome-trace-event@^1.0.2:
   version "1.0.2"
@@ -13984,7 +13989,7 @@ ms@^2.1.1, ms@^2.1.2:
 
 nan@^2.12.1, nan@^2.13.2, nan@^2.14.0, nan@^2.14.2, nan@^2.15.0, nan@^2.2.1:
   version "2.15.0"
-  resolved "https://registry.npmjs.org/nan/-/nan-2.15.0.tgz"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
   integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
 
 nanoassert@^2.0.0:
@@ -14060,6 +14065,13 @@ no-case@^3.0.4:
   dependencies:
     lower-case "^2.0.2"
     tslib "^2.0.3"
+
+"noble-winrt@git://github.com/juan-cortes/noble-winrt#191dc35e3625366c647c3cce6f706d9cf3d3e1d2":
+  version "0.1.1"
+  resolved "git://github.com/juan-cortes/noble-winrt#191dc35e3625366c647c3cce6f706d9cf3d3e1d2"
+  dependencies:
+    "@abandonware/noble" "^1.9.2-15"
+    chrome-native-messaging "^0.2.0"
 
 node-abi@^2.21.0, node-abi@^2.30.0:
   version "2.30.1"
