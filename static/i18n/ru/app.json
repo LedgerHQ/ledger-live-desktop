@@ -1507,6 +1507,10 @@
     "sell": {
       "notice": "Перед отправкой проверьте детали об обмене на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения.",
       "confirm": "Подтвердите продажу"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
