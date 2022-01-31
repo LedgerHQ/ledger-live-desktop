@@ -1507,6 +1507,10 @@
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de vente"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
