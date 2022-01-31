@@ -1595,7 +1595,8 @@
         "tokenAppDisclaimer": "Um {{tokenName}} zu verwalten {{tokenType}} Token zu verwalten, <1>installieren Sie die {{appName}} App</1> und vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}} Version</1> haben, bevor Sie <3>an Ihr {{appName}} Konto</3> senden.",
         "tokenAppDisclaimerInstalled": "Zur Verwaltung von <1>{{tokenName}} {{tokenType}}-Token</1> zu verwalten, vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}}-Version</1> haben, bevor Sie <3>an Ihr {{appName}}-Konto</3> senden.",
         "goToAccounts": "Zu den Konten gehen",
-        "intallParentApp": "{{appName}} App installieren"
+        "intallParentApp": "{{appName}} App installieren",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "Alle deinstallieren",
