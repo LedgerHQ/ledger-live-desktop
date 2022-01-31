@@ -3828,6 +3828,9 @@
       "title": "Введён неправильный пароль",
       "description": "Пожалуйста, попробуйте ещё раз"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "Не указан хост."
     },
