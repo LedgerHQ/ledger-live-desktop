@@ -3828,6 +3828,9 @@
       "title": "Girilen parola yanlış",
       "description": "Lütfen tekrar deneyin"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "Sunucu gerekli."
     },
