@@ -280,7 +280,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
       </LeftContainer>
       <RightContainer bgTheme={theme}>
         <WaveContainer>
-          <AnimatedWave height={500} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+          <AnimatedWave height={500} color={"#453a9c"} />
         </WaveContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="slide-switch">
           <ScreenContainer>

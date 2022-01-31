@@ -30,6 +30,7 @@ export const TableCellBase = styled(Flex).attrs({
 })`
   padding-left: 5px;
   padding-right: 5px;
+  cursor: ${p => (p.disabled ? "default" : "pointer")};
 `;
 
 export const TableCell = ({
@@ -37,6 +38,7 @@ export const TableCell = ({
   children,
   ...props
 }: {
+  disabled?: boolean;
   loading?: boolean;
   onClick?: (e: any) => void;
   children?: React.ReactNode;
@@ -310,12 +312,17 @@ function MarketList({
             >
               #
             </SortTableCell>
-            <TableCell>{t("market.marketList.crypto")}</TableCell>
-            <TableCell>{t("market.marketList.price")}</TableCell>
-            <TableCell>{t("market.marketList.change")}</TableCell>
-            <TableCell>{t("market.marketList.marketCap")}</TableCell>
-            {width > miniChartThreshold && <TableCell>{t("market.marketList.last7d")}</TableCell>}
-            <TableCell onClick={toggleStarredAccounts}>
+            <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
+            <TableCell disabled>{t("market.marketList.price")}</TableCell>
+            <TableCell disabled>{t("market.marketList.change")}</TableCell>
+            <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
+            {width > miniChartThreshold && (
+              <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
+            )}
+            <TableCell
+              disabled={starredMarketCoins.length <= 0 && starred.length <= 0}
+              onClick={toggleStarredAccounts}
+            >
               <Icon name={starred && starred.length > 0 ? "StarSolid" : "Star"} size={18} />
             </TableCell>
           </TableRow>
