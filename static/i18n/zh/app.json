@@ -3828,6 +3828,9 @@
       "title": "输入的密码不正确",
       "description": "请重试"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "需要输入主机。"
     },
