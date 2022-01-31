@@ -1507,6 +1507,10 @@
     "sell": {
       "notice": "Göndermeden önce cihazınızdaki Satış bilgilerini doğrulayın. Adresler güvenli bir şekilde değiştirilir, böylece onları doğrulamak zorunda kalmazsınız.",
       "confirm": "Satış işlemini onayla"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
