@@ -3828,6 +3828,9 @@
       "title": "La contraseña ingresada es incorrecta",
       "description": "Inténtalo de nuevo."
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "Es necesario un anfitrión."
     },
