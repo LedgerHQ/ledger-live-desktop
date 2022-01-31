@@ -3828,6 +3828,9 @@
       "title": "パスワードが間違っています。",
       "description": "もう一度お試しください。"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "ホストは必須です。"
     },
