@@ -1,6 +1,7 @@
 // @flow
 import React, { useState, useMemo } from "react";
 import { Trans } from "react-i18next";
+import styled from "styled-components";
 
 import type { TokenCurrency } from "@ledgerhq/live-common/lib/types";
 
@@ -13,6 +14,14 @@ import Text from "~/renderer/components/Text";
 import ToolTip from "~/renderer/components/Tooltip";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 
+const Container = styled(Box)`
+  white-space: break-spaces;
+`;
+
+const WrappedAssetId = styled(Box)`
+  word-break: break-all;
+`;
+
 const renderItem = ({
   data: { id, name },
   isDisabled,
@@ -22,6 +31,7 @@ const renderItem = ({
   isDisabled: boolean,
 }) => {
   const tokenId = id.split("/")[2];
+  const [assetCode, assetIssuer] = tokenId.split(":");
   return (
     <Box
       key={id}
@@ -30,17 +40,28 @@ const renderItem = ({
       color={isDisabled ? "palette.text.shade40" : "palette.text.shade100"}
       justifyContent="space-between"
     >
-      <Box horizontal alignItems="center" justifyContent="flex-start">
-        <FirstLetterIcon
-          color={isDisabled ? "palette.text.shade40" : "palette.text.shade100"}
-          label={name}
-          mr={2}
-        />
-        <Text ff="Inter|Medium">{name}</Text>
-        <Text fontSize={3} color="palette.text.shade40">
-          - ID {tokenId}
-        </Text>
-      </Box>
+      <Container horizontal alignItems="center" justifyContent="flex-start" width="100%">
+        <Box horizontal alignItems="center">
+          <FirstLetterIcon
+            color={isDisabled ? "palette.text.shade40" : "palette.text.shade100"}
+            label={name}
+            mr={2}
+          />
+          <Text ff="Inter|Medium">{name}</Text>
+          <Text fontSize={3} color="palette.text.shade40">
+            - ID {assetCode}:
+          </Text>
+        </Box>
+        <WrappedAssetId
+          horizontal
+          alignItems="center"
+          flex="1"
+          fontSize={3}
+          color="palette.text.shade40"
+        >
+          {assetIssuer}
+        </WrappedAssetId>
+      </Container>
       {isDisabled && (
         <ToolTip content={<Trans i18nKey="stellar.addAsset.steps.assets.disabledTooltip" />}>
           <Box color="warning">
