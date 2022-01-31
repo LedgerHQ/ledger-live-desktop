@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "取引を確認",
       "completed": {
-        "title": "保留中の処理",
-        "description": "承認のため、スワップ処理がネットワークに送信されました。{{targetCurrency}}を受け取るまでに、最大1時間かかる場合があります。",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
         "seeDetails": "詳細を表示"
       }
