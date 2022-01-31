@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "确认兑换",
       "completed": {
-        "title": "待执行操作",
-        "description": "您的 Swap 互换操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "请记下您的 Swap ID 互换号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
         "seeDetails": "查看详情"
       }
