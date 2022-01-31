@@ -1595,7 +1595,8 @@
         "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> ويرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
-        "intallParentApp": "تثبيت تطبيق {{appName}}"
+        "intallParentApp": "تثبيت تطبيق {{appName}}",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
