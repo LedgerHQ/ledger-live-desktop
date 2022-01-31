@@ -1261,7 +1261,7 @@
         "description": "Description",
         "tokenAddress": "Adresse du token",
         "tokenId": "Identifiant du token",
-        "quantity": "Quantité"
+        "quantity": "Nombre"
       }
     },
     "collections": {
@@ -1435,7 +1435,7 @@
       "name": "Nom du token",
       "contract": "Contrat du token",
       "id": "Identifiant token (NFT)",
-      "quantity": "Quantité"
+      "quantity": "Nombre"
     },
     "extra": {
       "frozenAmount": "Montant gelé",
@@ -1845,7 +1845,7 @@
         "fees": "Frais",
         "standard": "Standard",
         "advanced": "Avancé",
-        "nftQuantity": "Quantité"
+        "nftQuantity": "Nombre"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -1869,7 +1869,7 @@
         "ethereumGasPrice": "Prix du gaz",
         "unitPerByte": "{{unit}} par byte",
         "nft": "NFT",
-        "nftQuantity": "Quantité"
+        "nftQuantity": "Nombre"
       },
       "verification": {
         "streaming": {
@@ -3829,7 +3829,7 @@
       "description": "Veuillez réessayer."
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "Le nombre doit être supérieur à 0."
     },
     "RPCHostRequired": {
       "title": "Hôte requis."
