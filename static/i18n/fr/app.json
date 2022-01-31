@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Confirmer l'échange",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "Transaction bien émise.",
+        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Veuillez attendre que votre transaction soit confirmée, puis que le prestataire traite et vous envoie vos {{targetCurrency}}.",
         "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
         "seeDetails": "Voir les détails"
       }
@@ -1509,8 +1509,8 @@
       "confirm": "Confirmer la transaction de vente"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "Vérifiez les détails de l'achat sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction d'achat"
     }
   },
   "manager": {
