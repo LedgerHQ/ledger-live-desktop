@@ -1595,7 +1595,8 @@
         "tokenAppDisclaimer": "Чтобы управлять токенами {{tokenName}} {{tokenType}}, <1>установите приложение {{appName}}</1> и перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия​ <1>{{tokenType}}</1>.",
         "tokenAppDisclaimerInstalled": "Чтобы управлять токенами <1>{{tokenName}} {{tokenType}}</1>, перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия <1>{{tokenType}}</1>.",
         "goToAccounts": "Перейти к Счетам",
-        "intallParentApp": "Установить приложение {{appName}}"
+        "intallParentApp": "Установить приложение {{appName}}",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "Удалить все",
