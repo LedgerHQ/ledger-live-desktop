@@ -8,6 +8,7 @@ const WalletConnectDeeplink = () => {
     <Modal
       name="MODAL_WALLETCONNECT_DEEPLINK"
       centered
+      preventBackdropClick
       render={({ data, onClose }) => <Body link={data.link} onClose={onClose} />}
     />
   );
