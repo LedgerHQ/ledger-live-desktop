@@ -1507,6 +1507,10 @@
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
       "confirm": "تأكيد معاملة البيع"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
