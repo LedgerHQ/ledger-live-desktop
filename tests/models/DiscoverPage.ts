@@ -13,6 +13,7 @@ export class DiscoverPage {
   readonly selectAccountDropdown: Locator;
   readonly selectBtcAccount: Locator;
   readonly modalContinueButton: Locator;
+  readonly sidebar: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -31,6 +32,7 @@ export class DiscoverPage {
     this.selectAccountDropdown = page.locator("//*[@data-test-id='select-account-dropdown']/div");
     this.selectBtcAccount = page.locator("text=Bitcoin (BTC)");
     this.modalContinueButton = page.locator("button:has-text('Continue')");
+    this.sidebar = page.locator('[class=sidedrawer][style="opacity: 1;"]');
   }
 
   async navigateToCatalog() {
@@ -43,22 +45,20 @@ export class DiscoverPage {
 
   async waitForDisclaimerToBeVisible() {
     await this.disclaimerText.isVisible();
-    await this.disclaimerText.focus();
+    // await this.disclaimerText.hover();
+    const sidedrawer = await this.page.$(".sidedrawer");
+    await sidedrawer.waitForElementState("stable");
 
     // Workaround since sometimes on CI the background isn't fully opaque.
-    // This grabs the sidedrawer element and makes sure the opacity value is correct.
-    await this.page.waitForFunction(() => {
-      setTimeout(function() {
-        console.log("waiting for element");
-      }, 1000);
-
-      const sideDrawer = document.querySelector(".sidedrawer");
-      let sideDrawerStyles;
-      if (sideDrawer) {
-        sideDrawerStyles = window.getComputedStyle(sideDrawer);
-        return sideDrawerStyles.getPropertyValue("opacity") === "1";
-      }
-    });
+    // // This grabs the sidedrawer element and makes sure the opacity value is correct.
+    // await this.page.waitForFunction(() => {
+    //   const sideDrawer = document.querySelector(".sidedrawer");
+    //   let sideDrawerStyles;
+    //   if (sideDrawer) {
+    //     sideDrawerStyles = window.getComputedStyle(sideDrawer);
+    //     return sideDrawerStyles.getPropertyValue("opacity") === "1";
+    //   }
+    // });
   }
 
   async acceptLiveAppDisclaimer() {
