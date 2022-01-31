@@ -24,7 +24,7 @@ import { Item, MockContainer, EllipsesText, MockedGlobalStyle } from "./shared";
 const mockListAppsResult = (...params) => {
   // Nb Should move this polyfill to live-common eventually.
   const result = innerMockListAppResult(...params);
-  Object.keys(result?.appByName).forEach((key, index) => {
+  Object.keys(result?.appByName).forEach(key => {
     result.appByName[key] = { ...result.appByName[key], type: "app" };
   });
   return result;
