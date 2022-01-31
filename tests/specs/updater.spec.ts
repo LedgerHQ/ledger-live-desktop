@@ -13,6 +13,9 @@ test("Updater", async ({ page }) => {
   const layout = new Layout(page);
   const settingsPage = new SettingsPage(page);
   const appUpdater = new AppUpdater(page);
+  await page.evaluate(() => {
+    document.body.style.overflow = "hidden";
+  });
 
   await test.step("[idle] state should not be visible", async () => {
     expect(await layout.appUpdateBanner.isHidden()).toBe(true);
