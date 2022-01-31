@@ -3828,6 +3828,9 @@
       "title": "Das eingegebene Passwort ist falsch",
       "description": "Bitte versuchen Sie es erneut"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "Host ist erforderlich."
     },
