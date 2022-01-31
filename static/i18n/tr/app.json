@@ -1595,7 +1595,8 @@
         "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} token'larını yönetmek için <1>{{appName}} uygulamasını yükleyin</1> ve lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
-        "intallParentApp": "{{appName}} uygulamasını yükleyin"
+        "intallParentApp": "{{appName}} uygulamasını yükleyin",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "Tümünü kaldır",
