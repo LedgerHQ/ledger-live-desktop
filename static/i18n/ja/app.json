@@ -1595,7 +1595,8 @@
         "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} トークンを管理するには、<1> {{appName}} アプリ</1>をインストールし、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
-        "intallParentApp": "{{appName}} アプリをインストール"
+        "intallParentApp": "{{appName}} アプリをインストール",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "すべてアンインストール",
