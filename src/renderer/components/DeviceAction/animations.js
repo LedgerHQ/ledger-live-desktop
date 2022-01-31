@@ -81,6 +81,11 @@ const blue = {
   validate: {
     light: require("~/renderer/animations/blue/7Validate/data.json"),
   },
+  // Nb We are dropping the assets for blue soon, this is temp
+  firmwareUpdating: {
+    light: require("~/renderer/animations/nanoS/2FirmwareUpdating/light.json"),
+    dark: require("~/renderer/animations/nanoS/2FirmwareUpdating/dark.json"),
+  },
 };
 
 const animations = { nanoX, nanoS, blue };
