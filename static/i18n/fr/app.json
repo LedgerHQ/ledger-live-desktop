@@ -1509,8 +1509,8 @@
       "confirm": "Confirmer la transaction de vente"
     },
     "fund": {
-      "notice": "Vérifiez les détails de l'achat sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
-      "confirm": "Confirmer la transaction d'achat"
+      "notice": "Vérifiez les détails du dépôt sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de dépôt"
     }
   },
   "manager": {
