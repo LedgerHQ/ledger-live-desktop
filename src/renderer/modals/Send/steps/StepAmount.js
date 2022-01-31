@@ -44,7 +44,12 @@ const StepAmount = ({
 
   return (
     <Box flow={4}>
-      <TrackPage category="Send Flow" name="Step Amount" currencyName={currencyName} />
+      <TrackPage
+        category="Send Flow"
+        name="Step Amount"
+        currencyName={currencyName}
+        isNFTSend={isNFTSend}
+      />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (

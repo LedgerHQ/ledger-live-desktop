@@ -6,12 +6,12 @@ import React from "react";
 import styled from "styled-components";
 import { GradientHover } from "~/renderer/drawers/OperationDetails/styledComponents";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
-import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 
 const CopiableFieldContainer: ThemedComponent<{}> = styled.div`
   display: inline-flex;
   position: relative;
   max-width: 100%;
+  min-width: 12ex;
 
   ${GradientHover} {
     display: none;
@@ -25,24 +25,15 @@ const CopiableFieldContainer: ThemedComponent<{}> = styled.div`
   }
 `;
 
-const HashContainer: ThemedComponent<{}> = styled.div`
-  word-break: break-all;
-  user-select: text;
-  width: 100%;
-  min-width: 100px;
-  user-select: none;
-`;
-
 type CopiableFieldProps = {
   value: string,
+  children?: React$Node,
 };
 
-export function CopiableField({ value }: CopiableFieldProps) {
+export function CopiableField({ value, children }: CopiableFieldProps) {
   return (
     <CopiableFieldContainer>
-      <HashContainer>
-        <SplitAddress value={value} ff="Inter|Regular" />
-      </HashContainer>
+      {children}
       <GradientHover>
         <CopyWithFeedback text={value} />
       </GradientHover>

@@ -77,7 +77,12 @@ export default class StepSummary extends PureComponent<StepProps> {
 
     return (
       <Box flow={4} mx={40}>
-        <TrackPage category="Send Flow" name="Step Summary" currencyName={currencyName} />
+        <TrackPage
+          category="Send Flow"
+          name="Step Summary"
+          currencyName={currencyName}
+          isNFTSend={isNFTSend}
+        />
         {utxoLag ? (
           <Alert type="warning">
             <Trans i18nKey="send.steps.details.utxoLag" />

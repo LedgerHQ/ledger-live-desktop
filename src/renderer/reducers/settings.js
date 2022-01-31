@@ -275,7 +275,7 @@ const handlers: Object = {
     { payload }: { payload: { lastSeenDevice: DeviceModelInfo, latestFirmware: any } },
   ) => ({
     ...state,
-    lastSeenDevice: payload.lastSeenDevice,
+    lastSeenDevice: Object.assign({}, state.lastSeenDevice, payload.lastSeenDevice),
     latestFirmware: payload.latestFirmware,
   }),
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
