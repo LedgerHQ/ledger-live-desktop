@@ -1,5 +1,5 @@
 // @flow
-import React, { memo, useState, useEffect, useCallback } from "react";
+import React, { memo, useState, useEffect, useCallback, useMemo } from "react";
 import styled, { useTheme } from "styled-components";
 import { Trans } from "react-i18next";
 import { DrawerTitle } from "../DrawerTitle";
@@ -54,10 +54,12 @@ const TargetAccount = memo(function TargetAccount({
   account,
   selected,
   setAccount,
+  isChild,
 }: {
   account: AccountLike,
   selected?: boolean,
-  setAccount: $PropertyType<Props, "setToAccount">,
+  setAccount?: $PropertyType<Props, "setToAccount">,
+  isChild?: boolean,
 }) {
   const allAccounts = useSelector(shallowAccountsSelector);
   const theme = useTheme();
@@ -70,22 +72,25 @@ const TargetAccount = memo(function TargetAccount({
     account.type !== "ChildAccount" && account.spendableBalance
       ? account.spendableBalance
       : account.balance;
-  const onClick = useCallback(() => setAccount(currency, account, parentAccount), [
+  const onClick = useCallback(() => setAccount && setAccount(currency, account, parentAccount), [
     setAccount,
     currency,
     account,
     parentAccount,
   ]);
 
+  const Wrapper = setAccount ? AccountWrapper : Box;
+
   return (
-    <AccountWrapper
-      horizontal
-      p={3}
-      justifyContent="space-between"
-      selected={selected}
-      onClick={onClick}
-    >
-      <Box horizontal alignItems="center">
+    <Wrapper horizontal p={3} justifyContent="space-between" selected={selected} onClick={onClick}>
+      <Box horizontal alignItems="center" pl={isChild ? "8px" : 0}>
+        {isChild && (
+          <Box
+            pr={3}
+            style={{ borderLeft: `1px solid ${theme.colors.palette.divider}` }}
+            height="200%"
+          />
+        )}
         <Box mr={3}>
           <CryptoCurrencyIcon currency={currency} size={16} />
         </Box>
@@ -108,7 +113,7 @@ const TargetAccount = memo(function TargetAccount({
           </Box>
         )}
       </Box>
-    </AccountWrapper>
+    </Wrapper>
   );
 });
 
@@ -126,6 +131,7 @@ export default function TargetAccountDrawer({
   setToAccount,
   setDrawerStateRef,
 }: Props) {
+  const allAccounts = useSelector(shallowAccountsSelector);
   const dispatch = useDispatch();
   const { setDrawer } = React.useContext(context);
   const [{ selectedAccount, targetAccounts }, setState] = useState({
@@ -149,17 +155,51 @@ export default function TargetAccountDrawer({
     setToAccount(currency, account, parentAccount);
     setDrawer(undefined);
   };
+
+  // $FlowFixMe
+  const accountsList: { account: AccountLike, subAccounts: AccountLike[] }[] = useMemo(
+    () =>
+      Object.values(
+        targetAccounts.reduce((result, account) => {
+          const parentId = account.parentId;
+          if (parentId) {
+            result[parentId] = result[parentId] ?? {
+              account: allAccounts.find(acc => acc.id === parentId),
+              subAccounts: [],
+            };
+            result[parentId].subAccounts.push(account);
+            return result;
+          } else {
+            result[account.id] = result[account.id] ?? { account, subAccounts: [] };
+            return result;
+          }
+        }, {}),
+      ),
+    [targetAccounts, allAccounts],
+  );
+
   return (
     <Box height="100%">
       <DrawerTitle i18nKey="swap2.form.to.title" />
       <Box>
-        {targetAccounts.map(account => (
-          <TargetAccount
-            key={account.id}
-            account={account}
-            selected={selectedAccount?.id === account.id}
-            setAccount={handleAccountPick}
-          />
+        {accountsList.map(({ account, subAccounts }) => (
+          <>
+            <TargetAccount
+              key={account.id}
+              account={account}
+              selected={selectedAccount?.id === account.id}
+              setAccount={subAccounts.length === 0 ? handleAccountPick : null}
+            />
+            {subAccounts.map(account => (
+              <TargetAccount
+                key={account.id}
+                account={account}
+                selected={selectedAccount?.id === account.id}
+                setAccount={handleAccountPick}
+                isChild
+              />
+            ))}
+          </>
         ))}
         <Tabbable
           onClick={handleAddAccount}
