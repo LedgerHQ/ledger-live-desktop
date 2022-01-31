@@ -3828,6 +3828,9 @@
       "title": "입력한 패스워드가 올바르지 않습니다",
       "description": "다시 시도해주세요"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
+    },
     "RPCHostRequired": {
       "title": "호스트가 필요합니다."
     },
