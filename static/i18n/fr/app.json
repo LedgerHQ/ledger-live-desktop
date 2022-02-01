@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}",
-        "platform": "Go to app"
+        "platform": "Accéder à l'application"
       },
       "uninstall": {
         "title": "Tout désinstaller",
