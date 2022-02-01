@@ -60,6 +60,10 @@ export class DiscoverPage {
     });
   }
 
+  async waitForDisclaimerToBeHidden() {
+    await this.disclaimerText.waitFor({ state: "hidden" });
+  }
+
   async acceptLiveAppDisclaimer() {
     await this.liveAppDisclaimerContinueButton.click();
   }
@@ -118,10 +122,6 @@ export class DiscoverPage {
     `,
       );
     }, elementName);
-
-    setTimeout(function() {
-      console.log("waiting for iframe to load");
-    }, 500);
   }
 
   // TODO: mocked device events for test

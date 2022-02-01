@@ -49,6 +49,7 @@ test("Live App", async ({ page }) => {
   await test.step("Accept Live App Disclaimer", async () => {
     await discoverPage.acceptLiveAppDisclaimer();
     await layout.waitForLoadingSpinnerToDisappear();
+    await discoverPage.waitForDisclaimerToBeHidden;
     // expect(await page.screenshot()).toMatchSnapshot({
     //   name: "live-disclaimer-accepted.png",
     // });
