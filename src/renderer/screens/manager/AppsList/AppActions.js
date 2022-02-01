@@ -6,6 +6,7 @@ import {
   useAppUninstallNeedsDeps,
 } from "@ledgerhq/live-common/lib/apps/react";
 import manager from "@ledgerhq/live-common/lib/manager";
+import { useHistory } from "react-router-dom";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
@@ -81,7 +82,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
     isLiveSupported,
     addAccount,
   }: Props) => {
-    const { name } = app;
+    const { name, type } = app;
+    const history = useHistory();
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     // $FlowFixMe
@@ -104,6 +106,10 @@ const AppActions: React$ComponentType<Props> = React.memo(
     const onAddAccount = useCallback(() => {
       if (addAccount) addAccount();
     }, [addAccount]);
+
+    const onNavigateToPlatform = useCallback(() => {
+      history.push("/platform");
+    }, [history]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
@@ -128,40 +134,62 @@ const AppActions: React$ComponentType<Props> = React.memo(
         ) : showActions ? (
           <>
             {installed && isLiveSupported ? (
-              <Tooltip
-                content={
-                  canAddAccount ? (
-                    <Trans
-                      i18nKey="manager.applist.item.addAccountTooltip"
-                      values={{ appName: name }}
-                    />
-                  ) : (
-                    <Trans i18nKey="manager.applist.item.addAccountWarn" />
-                  )
-                }
-              >
+              type === "app" ? (
+                <Tooltip
+                  content={
+                    canAddAccount ? (
+                      <Trans
+                        i18nKey="manager.applist.item.addAccountTooltip"
+                        values={{ appName: name }}
+                      />
+                    ) : (
+                      <Trans i18nKey="manager.applist.item.addAccountWarn" />
+                    )
+                  }
+                >
+                  <Button
+                    color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
+                    inverted
+                    style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+                    fontSize={3}
+                    disabled={!canAddAccount}
+                    onClick={onAddAccount}
+                    justifyContent="center"
+                    event="Manager AddAccount Click"
+                    eventProperties={{
+                      appName: name,
+                      appVersion: app.version,
+                    }}
+                  >
+                    <Box horizontal alignContent="center" justifyContent="center">
+                      <AccountAdd size={16} />
+                      <Text style={{ marginLeft: 8 }}>
+                        <Trans i18nKey="manager.applist.item.addAccount" />
+                      </Text>
+                    </Box>
+                  </Button>
+                </Tooltip>
+              ) : (
                 <Button
                   color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
                   inverted
                   style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
                   fontSize={3}
-                  disabled={!canAddAccount}
-                  onClick={onAddAccount}
+                  onClick={onNavigateToPlatform}
                   justifyContent="center"
-                  event="Manager AddAccount Click"
+                  event="Manager Plugin Platform Click"
                   eventProperties={{
                     appName: name,
                     appVersion: app.version,
                   }}
                 >
                   <Box horizontal alignContent="center" justifyContent="center">
-                    <AccountAdd size={16} />
                     <Text style={{ marginLeft: 8 }}>
-                      <Trans i18nKey="manager.applist.item.addAccount" />
+                      <Trans i18nKey="manager.applist.item.platform" />
                     </Text>
                   </Box>
                 </Button>
-              </Tooltip>
+              )
             ) : null}
             {appStoreView && installed && (
               <SuccessInstall>

@@ -1,9 +1,17 @@
 import { Page, Locator } from "@playwright/test";
 import {
   deviceInfo155 as deviceInfo,
-  mockListAppsResult,
+  mockListAppsResult as innerMockListAppResult,
 } from "@ledgerhq/live-common/lib/apps/mock";
 
+const mockListAppsResult = (...params) => {
+  // Nb Should move this polyfill to live-common eventually.
+  const result = innerMockListAppResult(...params);
+  Object.keys(result?.appByName).forEach(key => {
+    result.appByName[key] = { ...result.appByName[key], type: "app" };
+  });
+  return result;
+};
 
 // fromTransactionRaw doesn't work as expected but I'm not sure why it produces the following error:
 // page.evaluate: ReferenceError: _transaction is not defined
