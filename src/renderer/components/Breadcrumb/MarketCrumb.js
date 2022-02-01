@@ -24,12 +24,11 @@ export default function MarketCrumb() {
 
   return selectedCoinData ? (
     <>
+      <TextLink>
+        <Button onClick={goBackToMarket}>{t("market.title")}</Button>
+      </TextLink>
       <Separator />
       <Text>{selectedCoinData.name}</Text>
     </>
-  ) : (
-    <TextLink>
-      <Button onClick={goBackToMarket}>{t("market.title")}</Button>
-    </TextLink>
-  );
+  ) : null;
 }

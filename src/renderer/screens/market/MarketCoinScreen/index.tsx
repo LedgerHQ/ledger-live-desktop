@@ -20,6 +20,9 @@ import MarketCoinChart from "./MarketCoinChart";
 import MarketInfo from "./MarketInfo";
 import { useProviders } from "../../exchange/Swap2/Form";
 import Track from "~/renderer/analytics/Track";
+import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+import { openModal } from "~/renderer/actions/modals";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -62,6 +65,7 @@ export default function MarketCoinScreen() {
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);
   const locale = useSelector(localeSelector);
+  const allAccounts = useSelector(accountsSelector);
   const { providers, storedProviders } = useProviders();
   const swapAvailableIds =
     providers || storedProviders
@@ -135,19 +139,37 @@ export default function MarketCoinScreen() {
     [internalCurrency, history],
   );
 
+  const openAddAccounts = useCallback(() => {
+    if (currency)
+      dispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency.internalCurrency,
+          preventSkippingCurrencySelection: true,
+        }),
+      );
+  }, [dispatch, currency]);
+
   const onSwap = useCallback(
     e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("Page Market Coin");
-      history.push({
-        pathname: "/swap",
-        state: {
-          defaultCurrency: internalCurrency,
-        },
-      });
+      if (currency?.internalCurrency?.id) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTrackingSource("Page Market");
+
+        const defaultAccount = getAvailableAccountsById(
+          currency?.internalCurrency?.id,
+          allAccounts,
+        ).find(Boolean);
+
+        if (!defaultAccount) return openAddAccounts();
+
+        history.push({
+          pathname: "/swap",
+          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
+        });
+      }
     },
-    [internalCurrency, history],
+    [allAccounts, currency, history, openAddAccounts],
   );
 
   const toggleStar = useCallback(() => {
@@ -158,7 +180,7 @@ export default function MarketCoinScreen() {
     }
   }, [dispatch, isStarred, id]);
 
-  return currency ? (
+  return currency && counterCurrency ? (
     <Container>
       <Track
         event="Page Market Coin"

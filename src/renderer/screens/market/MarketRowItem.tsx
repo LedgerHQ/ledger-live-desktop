@@ -98,18 +98,23 @@ function MarketRowItem({
 
   const onSwap = useCallback(
     e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("Page Market");
+      if (currency?.internalCurrency?.id) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTrackingSource("Page Market");
 
-      const defaultAccount = getAvailableAccountsById(currency?.id, allAccounts).find(Boolean);
+        const defaultAccount = getAvailableAccountsById(
+          currency?.internalCurrency?.id,
+          allAccounts,
+        ).find(Boolean);
 
-      if (!defaultAccount) return openAddAccounts();
+        if (!defaultAccount) return openAddAccounts();
 
-      history.push({
-        pathname: "/swap",
-        state: { defaultCurrency: currency, defaultAccount },
-      });
+        history.push({
+          pathname: "/swap",
+          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
+        });
+      }
     },
     [currency, allAccounts, history, openAddAccounts],
   );
