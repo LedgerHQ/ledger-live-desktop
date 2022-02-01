@@ -16025,10 +16025,10 @@ react-popper@^2.2.4:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
-react-prismazoom@^2.1.1-rc1:
-  version "2.1.1-rc1"
-  resolved "https://registry.yarnpkg.com/react-prismazoom/-/react-prismazoom-2.1.1-rc1.tgz#ae88fc05442d4344d19a094b3887c98567e8dd79"
-  integrity sha512-xMTgjgr+A56H97iM88g2oqhAvJgFwp33vOm8kwrCHqWfYcBzR3nL0IFl0SHJzLMqrjpiewWs7M9iWZfw+9gMcQ==
+react-prismazoom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-prismazoom/-/react-prismazoom-3.0.0.tgz#03476719a671461d01316b852a8cc09f1d3001d1"
+  integrity sha512-4kx+girmigjXMA4KQBhakkdR25V6ty2Cbzs3skV5J4CSzbtIyNQdhWT2VqRZE+V4h27YsKRC8tT9oyUu7Q9vNg==
   optionalDependencies:
     fsevents "*"
 
