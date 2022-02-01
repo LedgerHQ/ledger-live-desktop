@@ -61,6 +61,9 @@ export class DiscoverPage {
         return sideDrawerStyles.getPropertyValue("opacity") === "1";
       }
     });
+
+    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+    await delay(1000);
   }
 
   async acceptLiveAppDisclaimer() {
