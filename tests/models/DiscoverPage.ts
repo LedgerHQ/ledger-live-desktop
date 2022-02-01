@@ -46,13 +46,10 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
-    await this.disclaimerText.waitFor({ state: "visible" });
-
     // Not really necessary for test but forces the drawer to be visible for the screenshot
     await this.disclaimerCheckbox.click();
 
-    // Workaround since sometimes on CI the background isn't fully opaque.
-    // // This grabs the sidedrawer element and makes sure the opacity value is correct.
+    // Waits for rest of the app to be opaque, meaning the sidebar has loaded
     await this.page.waitForFunction(() => {
       const sideDrawer = document.querySelector("[data-test-id=sidedrawer]");
       let sideDrawerStyles;
@@ -68,7 +65,17 @@ export class DiscoverPage {
   }
 
   async waitForSelectAccountModalToBeVisible() {
-    await this.modal.isVisible();
+    await this.modal.waitFor({ state: "visible" });
+
+    await this.page.waitForFunction(() => {
+      const modal = document.querySelector("[data-test-id=modal-container]");
+      let modalStyles;
+      if (modal) {
+        modalStyles = window.getComputedStyle(modal);
+        return modalStyles.getPropertyValue("opacity") === "1";
+      }
+    });
+
     await this.modal.click(); // hack to force the modal to be visible for the subsequent screenshot check
   }
 
@@ -76,28 +83,9 @@ export class DiscoverPage {
     await this.clickWebviewElement("[data-test-id=get-all-accounts-button]");
   }
 
-  async waitForAccountsList() {
-    // method to force the app to wait for the pre output element by focussing on it
-    await this.page.evaluate(() => {
-      const webview = document.querySelector("webview");
-      (webview as any).executeJavaScript(
-        `(function() {
-          if (document.querySelector('.output-container').innerText.includes("mock:1:bitcoin")) {
-            console.log("element found";
-          } else {
-            setTimeout(function() {
-              console.log("waiting for element")
-          }, 1000);
-          }
-      })();
-    `,
-      );
-    });
-  }
-
   async requestAccount() {
     await this.clickWebviewElement("[data-test-id=request-single-account-button]");
-    this.waitForSelectAccountModalToBeVisible();
+    await this.waitForSelectAccountModalToBeVisible();
   }
 
   async openAccountDropdown() {
@@ -130,6 +118,10 @@ export class DiscoverPage {
     `,
       );
     }, elementName);
+
+    setTimeout(function() {
+      console.log("waiting for iframe to load");
+    }, 500);
   }
 
   // TODO: mocked device events for test

@@ -12,7 +12,6 @@ let continueTest = false;
 
 test.beforeAll(async ({ request }) => {
   // Check that dummy app in tests/utils/dummy-app-build has been started successfully (see playwright.config.ts 'webServer' option for more info)
-  // If it hasn't, set the test to not run
   try {
     const response = await request.get("http://localhost:3001");
     if (response.ok() === true) {
@@ -24,6 +23,7 @@ test.beforeAll(async ({ request }) => {
   }
 });
 
+// Due to flakiness on different OS's and CI, we won't run the screenshots where unncessary for testing
 test("Live App", async ({ page }) => {
   // Don't run test if server is not running
   if (!continueTest) return;
@@ -33,7 +33,6 @@ test("Live App", async ({ page }) => {
 
   await test.step("Navigate to catalog", async () => {
     await discoverPage.navigateToCatalog();
-    // FIXME: flaky on CI - Can see scroll bar sometimes
     // expect(await page.screenshot()).toMatchSnapshot({
     //   name: "catalog.png",
     // });
@@ -42,22 +41,21 @@ test("Live App", async ({ page }) => {
   await test.step("Open Test App", async () => {
     await discoverPage.openTestApp();
     await discoverPage.waitForDisclaimerToBeVisible();
-    expect(await page.screenshot()).toMatchSnapshot({
-      name: "open-test-app.png",
-    });
+    // expect(await page.screenshot()).toMatchSnapshot({
+    //   name: "open-test-app.png",
+    // });
   });
 
   await test.step("Accept Live App Disclaimer", async () => {
     await discoverPage.acceptLiveAppDisclaimer();
     await layout.waitForLoadingSpinnerToDisappear();
-    expect(await page.screenshot()).toMatchSnapshot({
-      name: "live-disclaimer-accepted.png",
-    });
+    // expect(await page.screenshot()).toMatchSnapshot({
+    //   name: "live-disclaimer-accepted.png",
+    // });
   });
 
   await test.step("List all accounts", async () => {
     await discoverPage.getAccountsList();
-    await discoverPage.waitForAccountsList();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-list-all-accounts.png",
     });
@@ -66,10 +64,9 @@ test("Live App", async ({ page }) => {
   await test.step("Request Account modal - open", async () => {
     await discoverPage.requestAccount();
     await discoverPage.waitForSelectAccountModalToBeVisible();
-    // FIXME: this screenshot is flaky. Sometimes the modal has appeared and other times is hasn't.
-    // expect(await page.screenshot()).toMatchSnapshot({
-    //   name: "live-app-request-account-modal-1.png",
-    // });
+    expect(await page.screenshot()).toMatchSnapshot({
+      name: "live-app-request-account-modal-1.png",
+    });
   });
 
   await test.step("Request Account - account dropdown", async () => {
