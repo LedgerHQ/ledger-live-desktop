@@ -23,6 +23,7 @@ import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvide
 import { space, layout, position } from "styled-system";
 import { openModal } from "~/renderer/actions/modals";
 import { setDrawer } from "~/renderer/drawers/Provider";
+import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 
 const NFTViewerDrawerContainer = styled.div`
   flex: 1;
@@ -104,6 +105,14 @@ const NFTImageOverlay = styled.div`
   &:hover {
     opacity: 1;
   }
+`;
+
+const HashContainer = styled.div`
+  word-break: break-all;
+  user-select: text;
+  width: 100%;
+  min-width: 100px;
+  user-select: none;
 `;
 
 function NFTAttribute({
@@ -254,7 +263,11 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
               {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
-              <CopiableField value={nft.collection.contract} />
+              <CopiableField value={nft.collection.contract}>
+                <HashContainer>
+                  <SplitAddress value={nft.collection.contract} ff="Inter|Regular" />
+                </HashContainer>
+              </CopiableField>
             </Text>
             <Separator />
             <Text
@@ -267,7 +280,16 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
               {t("NFT.viewer.attributes.tokenId")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
-              <CopiableField value={nft.tokenId} />
+              <CopiableField value={nft.tokenId}>
+                {// only needed for very long tokenIds but works with any length > 4
+                nft.tokenId?.length >= 4 ? (
+                  <HashContainer>
+                    <SplitAddress value={nft.tokenId} />
+                  </HashContainer>
+                ) : (
+                  nft.tokenId
+                )}
+              </CopiableField>
             </Text>
             {nft.collection.standard === "ERC1155" ? (
               <React.Fragment>

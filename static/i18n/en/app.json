@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "Connect",
         "details": "Wants to connect to the following Ethereum account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:"
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
@@ -2731,9 +2733,13 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
-        "experimentalCurrencies": {
+        "experimentalJSCurrencies": {
           "title": "Experimental JS implementations",
           "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
+        "experimentalCurrencies": {
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -3821,6 +3827,9 @@
     "PasswordIncorrect": {
       "title": "The password entered is incorrect",
       "description": "Please try again"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
     },
     "RPCHostRequired": {
       "title": "Host is required."
