@@ -46,6 +46,11 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
+    await this.disclaimerText.waitFor({ state: "visible" });
+
+    // Not really necessary for test but forces the drawer to be visible for the screenshot
+    await this.disclaimerCheckbox.click();
+
     // Workaround since sometimes on CI the background isn't fully opaque.
     // // This grabs the sidedrawer element and makes sure the opacity value is correct.
     await this.page.waitForFunction(() => {
@@ -56,11 +61,6 @@ export class DiscoverPage {
         return sideDrawerStyles.getPropertyValue("opacity") === "1";
       }
     });
-
-    await this.disclaimerText.waitFor({ state: "visible" });
-
-    // Not really necessary for test but forces the drawer to be visible for the screenshot
-    await this.disclaimerCheckbox.click();
   }
 
   async acceptLiveAppDisclaimer() {
