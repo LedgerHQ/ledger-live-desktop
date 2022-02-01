@@ -14,6 +14,7 @@ export class DiscoverPage {
   readonly selectBtcAccount: Locator;
   readonly modalContinueButton: Locator;
   readonly sidebar: Locator;
+  readonly disclaimerCheckbox: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,6 +34,7 @@ export class DiscoverPage {
     this.selectBtcAccount = page.locator("text=Bitcoin (BTC)");
     this.modalContinueButton = page.locator("button:has-text('Continue')");
     this.sidebar = page.locator('[class=sidedrawer][style="opacity: 1;"]');
+    this.disclaimerCheckbox = page.locator("data-test-id=disclaimer-checkbox");
   }
 
   async navigateToCatalog() {
@@ -57,8 +59,8 @@ export class DiscoverPage {
 
     await this.disclaimerText.waitFor({ state: "visible" });
 
-    const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-    await delay(1000);
+    // Not really necessary for test but forces the drawer to be visible for the screenshot
+    await this.disclaimerCheckbox.click();
   }
 
   async acceptLiveAppDisclaimer() {

@@ -4,9 +4,9 @@ import { DiscoverPage } from "../models/DiscoverPage";
 import { Layout } from "../models/Layout";
 
 // Comment out to disable recorder
-// process.env.PWDEBUG = "1";
+process.env.PWDEBUG = "1";
 
-test.use({ userdata: "1AccountBTC1AccountETH" });
+test.use({ userdata: "1AccountBTC1AccountETH", env: { DEV_TOOLS: true } });
 
 let continueTest = false;
 
