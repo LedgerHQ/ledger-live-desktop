@@ -33,7 +33,8 @@ const Grid = styled.div`
   grid-gap: 20px;
   width: 100%;
   justify-content: stretch;
-  margin-bottom: auto;
+  margin: auto;
+  padding-bottom: 16px;
 `;
 
 const GridItem = styled.div`
