@@ -44,13 +44,6 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
-    await this.disclaimerText.waitFor({ state: "visible" });
-    const sidedrawer = await this.page.$("[data-test-id=sidedrawer]");
-
-    if (sidedrawer) {
-      await sidedrawer.waitForElementState("stable");
-    }
-
     // Workaround since sometimes on CI the background isn't fully opaque.
     // // This grabs the sidedrawer element and makes sure the opacity value is correct.
     await this.page.waitForFunction(() => {
@@ -61,6 +54,8 @@ export class DiscoverPage {
         return sideDrawerStyles.getPropertyValue("opacity") === "1";
       }
     });
+
+    await this.disclaimerText.waitFor({ state: "visible" });
 
     const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
     await delay(1000);
