@@ -2792,7 +2792,7 @@
     "removeAccountModal": {
       "title": "Supprimer le compte",
       "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-      "warning": "Supprimer ce compte effacera l'historique de vos transactions de swap avec ce dernier."
+      "warning": "La suppression de ce compte effacera l'historique de vos transactions de swap avec ce dernier."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
