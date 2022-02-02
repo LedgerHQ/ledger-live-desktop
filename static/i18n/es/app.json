@@ -1510,7 +1510,7 @@
     },
     "fund": {
       "notice": "Verifica los detalles de tus fondos en tu dispositivo antes de enviar. Las direcciones se intercambian de forma segura por lo que no es necesario verificarlas.",
-      "confirm": "Confirm Fund transaction"
+      "confirm": "Confirmar transacción con fondos"
     }
   },
   "manager": {
@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "Para administrar los tokens <1>{{tokenType}} {{tokenName}}</1>, por favor verifica que tienes la versión <1>{{tokenType}} </1> antes de enviarlos <3>a tu cuenta de {{appName}} </3>.",
         "goToAccounts": "Ir a cuentas",
         "intallParentApp": "Instalar aplicación {{appName}}",
-        "platform": "Go to app"
+        "platform": "Ir a la App"
       },
       "uninstall": {
         "title": "Desinstalar todas",
@@ -2739,12 +2739,12 @@
           "description": "Usar trongrid directamente sin el proxy de Ledger"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "Implementaciones JS experimentales",
+          "description": "Usar implementaciones de JS experimentales para Algorand y Tezos."
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "Integraciones experimentales",
+          "description": "Usar integración experimental de Solana."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -3834,7 +3834,7 @@
       "description": "Inténtalo de nuevo."
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "La cantidad debe ser mayor a 0"
     },
     "RPCHostRequired": {
       "title": "Es necesario un anfitrión."
