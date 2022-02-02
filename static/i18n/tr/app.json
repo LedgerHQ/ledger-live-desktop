@@ -333,7 +333,7 @@
       "title": "Takas işleminizi onaylayın",
       "completed": {
         "title": "İşlem başarıyla yayınlandı",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "description": "Takas işleminiz onaylanmak üzere ağa gönderildi. Lütfen işleminizin onaylanmasını ve sağlayıcının işlemi gerçekleştirerek {{targetCurrency}} varlığınızı göndermesini bekleyin.",
         "disclaimer": "<0><0>{{provider}}</0> desteğinden</0> yardıma ihtiyacınız olursa gerekli olacak Swap ID'nizi (Takas Kimliği) not edin.",
         "seeDetails": "Ayrıntıları gör"
       }
@@ -1131,8 +1131,8 @@
         "title": "Bağlan",
         "details": "Cüzdanınız üzerinden bağlanmak istenen Ethereum hesabı:",
         "deeplinkDetails": "Ledger Live'a bağlanmak istiyor. Ethereum adresinizi seçin:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "Ethereum hesabınız yok. Wallet Connect kullanmak için lütfen bir Ethereum hesabı ekleyin.",
+        "alreadyConnected": "Başka bir dApp bağlıyken yeni bir dApp'e bağlanmaya çalışıyorsunuz. Live'ı yeni bir dApp'e bağlamadan önce lütfen bağlı olduğunuz dApp'in bağlantısını kesin."
       }
     },
     "connectedscreen": {
@@ -1509,8 +1509,8 @@
       "confirm": "Satış işlemini onayla"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "Göndermeden önce cihazınızdaki Fonlama bilgilerini doğrulayın. Adresler güvenli bir şekilde aktarılır, böylece onları doğrulamak zorunda kalmazsınız.",
+      "confirm": "Fonlama işlemini onayla"
     }
   },
   "manager": {
@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
         "intallParentApp": "{{appName}} uygulamasını yükleyin",
-        "platform": "Go to app"
+        "platform": "Uygulamaya git"
       },
       "uninstall": {
         "title": "Tümünü kaldır",
@@ -2739,12 +2739,12 @@
           "description": "Trongrid'i doğrudan Ledger sunucusu olmadan kullanın"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "Deneysel JS uygulamaları",
+          "description": "Algorand ve Tezos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "Deneysel entegrasyonlar",
+          "description": "Solana deneysel entegrasyonunu kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -3834,7 +3834,7 @@
       "description": "Lütfen tekrar deneyin"
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "Miktar 0'dan büyük olmalıdır"
     },
     "RPCHostRequired": {
       "title": "Sunucu gerekli."
