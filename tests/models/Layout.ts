@@ -61,6 +61,7 @@ export class Layout {
     this.logo = page.locator("data-test-id=logo");
     this.inputError = page.locator("id=input-error"); // no data-test-id because css style is applied
     this.inputWarning = page.locator("id=input-warning"); // no data-test-id because css style is applied
+    this.bigSpinner = page.locator("data-test-id=big-loading-spinner");
 
     // updater
     this.appUpdateBanner = page.locator("data-test-id=layout-app-update-banner");
