@@ -110,4 +110,9 @@ export class Layout {
   async openReceiveModal() {
     await this.drawerReceiveButton.click();
   }
+
+  async waitForLoadingSpinnerToDisappear() {
+    await this.bigSpinner.waitFor({ state: "hidden" });
+    await this.bigSpinner.waitFor({ state: "detached" });
+  }
 }
