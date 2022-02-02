@@ -72,11 +72,9 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
       - uses: actions/setup-node@v2
-        if: always()
         with:
           node-version: 14.x
       - name: install yarn
-        if: always()
         run: npm install --global yarn
       - name: set git user
         run: |
@@ -126,11 +124,9 @@ jobs:
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
       - uses: actions/setup-node@v2
-        if: always()
         with:
           node-version: 14.x
       - name: install yarn
-        if: always()
         run: npm install --global yarn
       - name: set git user
         run: |
@@ -189,7 +185,6 @@ jobs:
         if: always()
         with:
           node-version: 14.x
-          cache: yarn
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
