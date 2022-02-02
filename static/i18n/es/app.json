@@ -1131,8 +1131,8 @@
         "title": "Conectar",
         "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
         "deeplinkDetails": "Quiere conectarse a Ledger Live. Elige tu cuenta de Ethereum:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "No tienes ninguna cuenta de Ethereum. Por favor, añade una cuenta de Ethereum para usar Wallet Connect.",
+        "alreadyConnected": "Estás intentando conectarte a una dApp mientras estás conectado a otra. Por favor, desconéctate de la dApp conectada antes de volver a conectar Live con una nueva dApp."
       }
     },
     "connectedscreen": {
@@ -1509,7 +1509,7 @@
       "confirm": "Confirmar transacción de venta"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "notice": "Verifica los detalles de tus fondos en tu dispositivo antes de enviar. Las direcciones se intercambian de forma segura por lo que no es necesario verificarlas.",
       "confirm": "Confirm Fund transaction"
     }
   },
