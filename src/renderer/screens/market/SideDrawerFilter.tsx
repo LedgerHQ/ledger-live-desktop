@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from "react";
-import { Flex, Divider, Text, Icons } from "@ledgerhq/react-ui";
+import { Flex, Text, Icons } from "@ledgerhq/react-ui";
 import { SideDrawer } from "~/renderer/components/SideDrawer";
 import CheckBox from "~/renderer/components/CheckBox";
 import { Button } from ".";
 import styled from "styled-components";
+import Track from "~/renderer/analytics/Track";
 
 const Label = styled(Text).attrs<{ disabled: boolean }>(({ disabled }) => ({
   color: disabled ? "neutral.c60" : "neutral.c100",
@@ -40,6 +41,13 @@ export default function SideDrawerFilter({
         direction="left"
         title={t("market.filters.title")}
       >
+        <Track
+          event="Page Market Filters"
+          onMount
+          onUpdate
+          favourites={starred.length > 0}
+          liveCompatible={liveCompatible.value}
+        />
         <Flex flex="1" flexDirection="column" alignItems="stretch">
           <Flex p={4} flexDirection="column" alignItems="stretch">
             <Label
@@ -83,13 +91,6 @@ export default function SideDrawerFilter({
                 {t("market.filters.isFavorite")}
               </Label>
             </Flex>
-          </Flex>
-          <Flex flex="1" />
-          <Divider />
-          <Flex flexDirection="row" justifyContent="flex-end" px={4} py={2} alignItems="center">
-            <Button variant="main" big onClick={closeDrawer}>
-              {t("market.filters.applyFilters")}
-            </Button>
           </Flex>
         </Flex>
       </SideDrawer>

@@ -131,6 +131,12 @@ const Separator = styled(Box).attrs(() => ({
   background: ${p => p.theme.colors.palette.divider};
 `;
 
+const StarredAcountList = styled.div`
+  @media (max-height: 800px) {
+    display: none;
+  }
+`;
+
 const sideBarTransitionStyles = {
   entering: { flexBasis: MAIN_SIDEBAR_WIDTH },
   entered: { flexBasis: MAIN_SIDEBAR_WIDTH },
@@ -307,17 +313,16 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-              {process.env.NODE_ENV !== "production" && !process.env.PLAYWRIGHT_RUN ? (
-                <SideBarListItem
-                  id={"market"}
-                  label={t("sidebar.market")}
-                  icon={IconMarket}
-                  iconActiveColor="wallet"
-                  onClick={handleClickMarket}
-                  isActive={location.pathname === "/market"}
-                  collapsed={secondAnim}
-                />
-              ) : null}
+
+              <SideBarListItem
+                id={"market"}
+                label={t("sidebar.market")}
+                icon={IconMarket}
+                iconActiveColor="wallet"
+                onClick={handleClickMarket}
+                isActive={location.pathname === "/market"}
+                collapsed={secondAnim}
+              />
 
               <SideBarListItem
                 id={"accounts"}
@@ -411,14 +416,17 @@ const MainSideBar = () => {
               />
               <Space of={30} />
             </SideBarList>
-            <Space grow of={30} />
-            <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
-              <Separator />
-            </Hide>
+            <StarredAcountList>
+              <Space grow of={30} />
 
-            <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-              <Stars pathname={location.pathname} collapsed={secondAnim} />
-            </SideBarList>
+              <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
+                <Separator />
+              </Hide>
+
+              <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
+                <Stars pathname={location.pathname} collapsed={secondAnim} />
+              </SideBarList>
+            </StarredAcountList>
             <Space of={30} grow />
             <TagContainer collapsed={!secondAnim} />
           </SideBar>
