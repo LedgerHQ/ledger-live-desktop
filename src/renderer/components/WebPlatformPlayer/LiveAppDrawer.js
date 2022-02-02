@@ -83,11 +83,7 @@ export const LiveAppDrawer = () => {
                   onClick={() => setDismissDisclaimerChecked(!dismissDisclaimerChecked)}
                   style={{ flex: 1, cursor: "pointer" }}
                 >
-                  <CheckBox
-                    isChecked={dismissDisclaimerChecked}
-                    id="dismiss-disclaimer"
-                    data-test-id="disclaimer-checkbox"
-                  />
+                  <CheckBox isChecked={dismissDisclaimerChecked} id="dismiss-disclaimer" />
                   <Text
                     ff="Inter|SemiBold"
                     fontSize={4}

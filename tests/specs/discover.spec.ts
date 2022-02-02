@@ -86,6 +86,7 @@ test("Live App", async ({ page }) => {
 
   await test.step("Request Account - single account output", async () => {
     await discoverPage.exitModal();
+    await discoverPage.letLiveAppLoad();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-single-account-output.png",
     });

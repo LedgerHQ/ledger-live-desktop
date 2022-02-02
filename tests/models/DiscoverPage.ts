@@ -33,8 +33,7 @@ export class DiscoverPage {
     this.selectAccountDropdown = page.locator("//*[@data-test-id='select-account-dropdown']/div");
     this.selectBtcAccount = page.locator("text=Bitcoin (BTC)");
     this.modalContinueButton = page.locator("button:has-text('Continue')");
-    this.sidebar = page.locator('[class=sidedrawer][style="opacity: 1;"]');
-    this.disclaimerCheckbox = page.locator("data-test-id=disclaimer-checkbox");
+    this.disclaimerCheckbox = page.locator("#dismiss-disclaimer");
   }
 
   async navigateToCatalog() {
@@ -46,18 +45,18 @@ export class DiscoverPage {
   }
 
   async waitForDisclaimerToBeVisible() {
-    // Not really necessary for test but forces the drawer to be visible for the screenshot
-    await this.disclaimerCheckbox.click();
-
     // Waits for rest of the app to be opaque, meaning the sidebar has loaded
     await this.page.waitForFunction(() => {
-      const sideDrawer = document.querySelector("[data-test-id=sidedrawer]");
+      const sideDrawer = document.querySelector(".sidedrawer");
       let sideDrawerStyles;
       if (sideDrawer) {
         sideDrawerStyles = window.getComputedStyle(sideDrawer);
         return sideDrawerStyles.getPropertyValue("opacity") === "1";
       }
     });
+
+    // Not really necessary for test but forces the drawer to be visible for the screenshot
+    await this.disclaimerCheckbox.click();
   }
 
   async waitForDisclaimerToBeHidden() {
@@ -123,12 +122,20 @@ export class DiscoverPage {
       );
     }, elementName);
 
-    await this.delay(500);
+    await this.letLiveAppLoad();
   }
 
-  async delay(time: number) {
+  async letLiveAppLoad() {
+    /* 
+      This is cheeky. Basically it's pausing execution for 1 second.
+      The main reason is that it is tricky to wait for internal elements in the iframe
+      and the without a short pause after each Live App action the screenshots are very 
+      flaky. Adding a 1 second wait is not good practice but it will fix flakiness and it
+      should only be used in this cicumstance (hence the name 'letLiveAppLoad'). When 
+      waiting for elements in LLD we should always do proper waits. 
+    */
     return new Promise(function(resolve) {
-      setTimeout(resolve, time);
+      setTimeout(resolve, 1000);
     });
   }
 
