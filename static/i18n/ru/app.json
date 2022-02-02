@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Подтвердите обмен",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "Транзакция успешно передана",
+        "description": "Транзакция в рамках обмена была отправлена и ожидает подтверждения в сети. Дождитесь подтверждения транзакции, после чего оператор вышлет вам ваши {{targetCurrency}}.",
         "disclaimer": "Сохраните ID обмена на случай, если в дальнейшем потребуется помощь от <0><0>{{provider}}</0></0>.",
         "seeDetails": "Подробности"
       }
@@ -1131,8 +1131,8 @@
         "title": "Подключить",
         "details": "Хочет подключиться к указанному счёту Ethereum через ваш кошелёк:",
         "deeplinkDetails": "Вы собираетесь подключиться к Ledger Live. Выберите счёт в сети Эфириума:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "У вас нет счетов Ethereum. Пожалуйста, добавьте счёт Ethereum, чтобы использовать Wallet Connect.",
+        "alreadyConnected": "Вы пытаетесь подключиться к dApp-приложению при другом активном подключении. Пожалуйста, отключитесь от предыдущего приложения, прежде чем подключить новое."
       }
     },
     "connectedscreen": {
@@ -1509,8 +1509,8 @@
       "confirm": "Подтвердите продажу"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "Перед отправкой проверьте данные на устройстве. Обмен адресами осуществляется безопасно и не требует подтверждения.",
+      "confirm": "Подтвердить Пополнение"
     }
   },
   "manager": {
@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "Чтобы управлять токенами <1>{{tokenName}} {{tokenType}}</1>, перед отправкой средств <3>на счёт {{appName}}</3> убедитесь, что у вас установлена версия <1>{{tokenType}}</1>.",
         "goToAccounts": "Перейти к Счетам",
         "intallParentApp": "Установить приложение {{appName}}",
-        "platform": "Go to app"
+        "platform": "Перейти в приложение"
       },
       "uninstall": {
         "title": "Удалить все",
@@ -2739,12 +2739,12 @@
           "description": "Использовать TronGrid напрямую без прокси Ledger"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "Экспериментальные реализации JS",
+          "description": "Использовать экспериментальные JS-реализации для Algorand и Tezos"
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "Экспериментальная интеграция",
+          "description": "Использовать экспериментальную интеграцию с Solana."
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3834,7 +3834,7 @@
       "description": "Пожалуйста, попробуйте ещё раз"
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "Кол-во должно быть больше 0"
     },
     "RPCHostRequired": {
       "title": "Не указан хост."
