@@ -47,7 +47,7 @@ const extraProperties = store => {
     ? {
         modelId: device.modelId,
         deviceVersion: device.deviceInfo.version,
-        appLength: device.apps.length,
+        appLength: device.apps?.length,
       }
     : {};
 

@@ -733,21 +733,23 @@ export const renderSwapDeviceConfirmationV2 = ({
   );
 };
 
-export const renderSellDeviceConfirmation = ({
+export const renderSecureTransferDeviceConfirmation = ({
+  exchangeType,
   modelId,
   type,
 }: {
+  exchangeType: "sell" | "fund",
   modelId: DeviceModelId,
   type: "light" | "dark",
 }) => (
   <>
     <Alert type="primary" learnMoreUrl={urls.swap.learnMore} horizontal={false}>
-      <Trans i18nKey="DeviceAction.sell.notice" />
+      <Trans i18nKey={`DeviceAction.${exchangeType}.notice`} />
     </Alert>
     {renderVerifyUnwrapped({ modelId, type })}
     <Box alignItems={"center"}>
       <Text textAlign="center" ff="Inter|SemiBold" color="palette.text.shade100" fontSize={5}>
-        <Trans i18nKey="DeviceAction.sell.confirm" />
+        <Trans i18nKey={`DeviceAction.${exchangeType}.confirm`} />
       </Text>
     </Box>
   </>

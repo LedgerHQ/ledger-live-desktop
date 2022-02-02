@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 import { useToasts } from "@ledgerhq/live-common/lib/notifications/ToastProvider";
-import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import { addPendingOperation, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { listSupportedCurrencies } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
@@ -135,6 +135,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       const account = accounts.find(account => account.id === accountId);
       tracking.platformReceiveRequested(manifest);
 
+      // FIXME: handle address rejection (if user reject address, we don't end up in onResult nor in onCancel 🤔)
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
@@ -172,6 +173,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
       let optimisticOperation = signedOperation.operation;
 
+      // FIXME: couldn't we use `useBroadcast` here?
       if (!getEnv("DISABLE_TRANSACTION_BROADCAST")) {
         try {
           optimisticOperation = await bridge.broadcast({
@@ -287,6 +289,118 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
     [manifest, dispatch, accounts],
   );
 
+  const startExchange = useCallback(
+    ({ exchangeType }: { exchangeType: number }) => {
+      tracking.platformStartExchangeRequested(manifest);
+      return new Promise((resolve, reject) =>
+        dispatch(
+          openModal("MODAL_PLATFORM_EXCHANGE_START", {
+            exchangeType,
+            onResult: nonce => {
+              tracking.platformStartExchangeSuccess(manifest);
+              resolve(nonce);
+            },
+            onCancel: error => {
+              tracking.platformStartExchangeFail(manifest);
+              reject(error);
+            },
+          }),
+        ),
+      );
+    },
+    [manifest, dispatch],
+  );
+
+  const completeExchange = useCallback(
+    ({
+      provider,
+      fromAccountId,
+      toAccountId,
+      transaction,
+      binaryPayload,
+      signature,
+      feesStrategy,
+      exchangeType,
+    }: {
+      provider: string,
+      fromAccountId: string,
+      toAccountId: string,
+      transaction: RawPlatformTransaction,
+      binaryPayload: string,
+      signature: string,
+      feesStrategy: string,
+      exchangeType: number,
+    }) => {
+      // Nb get a hold of the actual accounts, and parent accounts
+      const fromAccount = accounts.find(a => a.id === fromAccountId);
+      let fromParentAccount;
+
+      const toAccount = accounts.find(a => a.id === toAccountId);
+      let toParentAccount;
+
+      if (!fromAccount) {
+        return null;
+      }
+
+      if (exchangeType === 0x00 && !toAccount) {
+        // if we do a swap, a destination account must be provided
+        return null;
+      }
+
+      if (fromAccount.type === "TokenAccount") {
+        fromParentAccount = accounts.find(a => a.id === fromAccount.parentId);
+      }
+      if (toAccount && toAccount.type === "TokenAccount") {
+        toParentAccount = accounts.find(a => a.id === toAccount.parentId);
+      }
+
+      const accountBridge = getAccountBridge(fromAccount, fromParentAccount);
+      const mainFromAccount = getMainAccount(fromAccount, fromParentAccount);
+
+      transaction.family = mainFromAccount.currency.family;
+
+      const platformTransaction = deserializePlatformTransaction(transaction);
+
+      platformTransaction.feesStrategy = feesStrategy;
+
+      let processedTransaction = accountBridge.createTransaction(mainFromAccount);
+      processedTransaction = accountBridge.updateTransaction(
+        processedTransaction,
+        platformTransaction,
+      );
+
+      tracking.platformCompleteExchangeRequested(manifest);
+      return new Promise((resolve, reject) =>
+        dispatch(
+          openModal("MODAL_PLATFORM_EXCHANGE_COMPLETE", {
+            provider,
+            exchange: {
+              fromAccount,
+              fromParentAccount,
+              toAccount,
+              toParentAccount,
+            },
+            transaction: processedTransaction,
+            binaryPayload,
+            signature,
+            feesStrategy,
+            exchangeType,
+
+            onResult: operation => {
+              tracking.platformCompleteExchangeSuccess(manifest);
+              resolve(operation);
+            },
+            onCancel: error => {
+              tracking.platformCompleteExchangeFail(manifest);
+              reject(error);
+            },
+          }),
+        ),
+      );
+    },
+    [accounts, dispatch, manifest],
+  );
+
   const handlers = useMemo(
     () => ({
       "account.list": listAccounts,
@@ -295,14 +409,18 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
       "account.receive": receiveOnAccount,
       "transaction.sign": signTransaction,
       "transaction.broadcast": broadcastTransaction,
+      "exchange.start": startExchange,
+      "exchange.complete": completeExchange,
     }),
     [
       listAccounts,
+      listCurrencies,
+      requestAccount,
       receiveOnAccount,
       signTransaction,
       broadcastTransaction,
-      requestAccount,
-      listCurrencies,
+      startExchange,
+      completeExchange,
     ],
   );
 
