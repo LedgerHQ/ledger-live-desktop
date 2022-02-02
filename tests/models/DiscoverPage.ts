@@ -122,6 +122,14 @@ export class DiscoverPage {
     `,
       );
     }, elementName);
+
+    await this.delay(500);
+  }
+
+  async delay(time: number) {
+    return new Promise(function(resolve) {
+      setTimeout(resolve, time);
+    });
   }
 
   // TODO: mocked device events for test
