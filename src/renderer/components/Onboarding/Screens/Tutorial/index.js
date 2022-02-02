@@ -89,6 +89,8 @@ const ScreenContainer = styled.div`
     opacity: 1;
     transition: opacity ${DURATION}ms ease-in;
   }
+
+  ${p => p.theme.overflow.y};
 `;
 
 const screens = {

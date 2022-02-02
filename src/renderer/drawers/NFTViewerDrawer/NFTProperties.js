@@ -49,7 +49,7 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
         lineHeight="17px"
         fontSize="14px"
         color="palette.text.shade50"
-        ff="Inter|Regular"
+        ff="Inter|SemiBold"
       >
         {t("NFT.viewer.attributes.properties")}
       </Text>
@@ -67,7 +67,7 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
               >
                 {key}
               </Text>
-              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|SemiBold">
+              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|Regular">
                 {value}
               </Text>
             </NFTProperty>

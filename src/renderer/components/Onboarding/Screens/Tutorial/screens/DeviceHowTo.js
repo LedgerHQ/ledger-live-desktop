@@ -160,7 +160,7 @@ export function DeviceHowTo({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.prev")}
           </Text>
         </Button>
-        <Button id="device-howto-cta" primary onClick={onClickNext}>
+        <Button data-test-id="device-howto-cta" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.deviceHowTo.buttons.next")}
           </Text>

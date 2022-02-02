@@ -142,7 +142,10 @@ const WalletConnect = () => {
             {wcContext.socketReady ? (
               <InfoBoxContainer>
                 <Alert type="primary">
-                  <Trans i18nKey="walletconnect.connectedscreen.info" />
+                  <Trans
+                    i18nKey="walletconnect.connectedscreen.info"
+                    values={{ name: wcContext.dappInfo?.name }}
+                  />
                 </Alert>
               </InfoBoxContainer>
             ) : null}

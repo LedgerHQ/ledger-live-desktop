@@ -8,9 +8,10 @@ import { getSystemLocale } from "~/helpers/systemLocale";
 import user from "~/helpers/user";
 import {
   sidebarCollapsedSelector,
-  langAndRegionSelector,
   shareAnalyticsSelector,
   lastSeenDeviceSelector,
+  localeSelector,
+  languageSelector,
 } from "~/renderer/reducers/settings";
 import type { State } from "~/renderer/reducers";
 
@@ -38,14 +39,15 @@ const getContext = _store => ({
 
 const extraProperties = store => {
   const state: State = store.getState();
-  const { language, region } = langAndRegionSelector(state);
+  const language = languageSelector(state);
+  const region = (localeSelector(state).split("-")[1] || "").toUpperCase() || null;
   const systemLocale = getSystemLocale();
   const device = lastSeenDeviceSelector(state);
   const deviceInfo = device
     ? {
         modelId: device.modelId,
         deviceVersion: device.deviceInfo.version,
-        appLength: device.apps.length,
+        appLength: device.apps?.length,
       }
     : {};
 
@@ -69,7 +71,7 @@ const extraProperties = store => {
 let storeInstance; // is the redux store. it's also used as a flag to know if analytics is on or off.
 
 export const start = async (store: *) => {
-  if (!user || process.env.MOCK || process.env.SPECTRON_RUN) return;
+  if (!user || process.env.MOCK || process.env.PLAYWRIGHT_RUN) return;
   const { id } = await user();
   logger.analyticsStart(id, extraProperties(store));
   storeInstance = store;

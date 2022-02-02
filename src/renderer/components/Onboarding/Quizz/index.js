@@ -94,7 +94,7 @@ export function Quizz({ onWin, onLose }: QuizzProps) {
   }
 
   return (
-    <QuizzContainer>
+    <QuizzContainer data-test-id="quiz-container">
       <CSSTransition in classNames="screen" timeout={DURATION} key={state.value} appear>
         <ScreenContainer>
           <CurrentScreen t={t} sendEvent={sendEvent} meta={meta} state={state} />

@@ -19,7 +19,7 @@ const ConnectTroubleshootingHelpButton = ({ buttonProps, textColor }: Props) => 
   const dispatch = useDispatch();
 
   const onStartTroubleshootingFlow = useCallback(() => {
-    history.push({ pathname: "USBTroubleshooting" });
+    history.push({ pathname: "/USBTroubleshooting" });
     dispatch(closeAllModal());
   }, [dispatch, history]);
 

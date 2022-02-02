@@ -39,7 +39,7 @@ export const getKey = async (ns: string, keyPath: string, defaultValue: any) => 
 };
 
 let debounceToUse = debounce;
-if (process.env.SPECTRON_RUN) {
+if (process.env.PLAYWRIGHT_RUN) {
   // $FlowFixMe
   debounceToUse = fn => (...args) => setTimeout(() => fn(...args));
 }

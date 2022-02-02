@@ -57,12 +57,13 @@ const defaultWindowOptions = {
     experimentalFeatures: true,
     nodeIntegration: true,
     contextIsolation: false,
+    spellcheck: false,
   },
 };
 
 export const loadWindow = async () => {
   let url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
-  if (process.env.SPECTRON_RUN && !process.env.CI) {
+  if (process.env.PLAYWRIGHT_RUN && !process.env.CI) {
     url = url.replace("localhost", "host.docker.internal");
   }
   if (mainWindow) {

@@ -25,7 +25,13 @@ class InternalProcess {
   }
 
   run() {
-    while (this.messageQueue.length && this.active && this.process) {
+    while (
+      this.messageQueue.length &&
+      this.active &&
+      this.process &&
+      this.process.pid &&
+      this.process.connected
+    ) {
       const message = this.messageQueue.shift();
       this.process.send(message);
     }

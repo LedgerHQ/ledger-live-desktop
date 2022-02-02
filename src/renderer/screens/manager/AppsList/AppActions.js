@@ -6,15 +6,13 @@ import {
   useAppUninstallNeedsDeps,
 } from "@ledgerhq/live-common/lib/apps/react";
 import manager from "@ledgerhq/live-common/lib/manager";
+import { useHistory } from "react-router-dom";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-
-import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
 
 import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
@@ -28,11 +26,10 @@ import AccountAdd from "~/renderer/icons/AccountAdd";
 import IconCheck from "~/renderer/icons/Check";
 import IconTrash from "~/renderer/icons/Trash";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
-import LinkIcon from "~/renderer/icons/LinkIcon";
 
 const AppActionsWrapper = styled.div`
   display: flex;
-  flex: 1;
+  flex: 0.8;
   min-width: 150px;
   justify-content: flex-end;
   flex-direction: row;
@@ -85,7 +82,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
     isLiveSupported,
     addAccount,
   }: Props) => {
-    const { name } = app;
+    const { name, type } = app;
+    const history = useHistory();
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     // $FlowFixMe
@@ -109,9 +107,9 @@ const AppActions: React$ComponentType<Props> = React.memo(
       if (addAccount) addAccount();
     }, [addAccount]);
 
-    const onSupportLink = useCallback(() => {
-      openURL(urls.appSupport[app.name] || urls.appSupport.default);
-    }, [app.name]);
+    const onNavigateToPlatform = useCallback(() => {
+      history.push("/platform");
+    }, [history]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
@@ -135,8 +133,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
           />
         ) : showActions ? (
           <>
-            {installed ? (
-              isLiveSupported ? (
+            {installed && isLiveSupported ? (
+              type === "app" ? (
                 <Tooltip
                   content={
                     canAddAccount ? (
@@ -172,33 +170,25 @@ const AppActions: React$ComponentType<Props> = React.memo(
                   </Button>
                 </Tooltip>
               ) : (
-                <Tooltip
-                  content={
-                    <Trans
-                      i18nKey="manager.applist.item.learnMoreTooltip"
-                      values={{ appName: name }}
-                    />
-                  }
+                <Button
+                  color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
+                  inverted
+                  style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+                  fontSize={3}
+                  onClick={onNavigateToPlatform}
+                  justifyContent="center"
+                  event="Manager Plugin Platform Click"
+                  eventProperties={{
+                    appName: name,
+                    appVersion: app.version,
+                  }}
                 >
-                  <Button
-                    inverted
-                    style={{ display: "flex" }}
-                    fontSize={3}
-                    onClick={onSupportLink}
-                    event="Manager SupportLink Click"
-                    eventProperties={{
-                      appName: name,
-                      appVersion: app.version,
-                    }}
-                  >
-                    <Box horizontal alignContent="center" justifyContent="center">
-                      <LinkIcon size={16} />
-                      <Text ff="Inter" style={{ marginLeft: 8 }}>
-                        <Trans i18nKey="manager.applist.item.learnMore" />
-                      </Text>
-                    </Box>
-                  </Button>
-                </Tooltip>
+                  <Box horizontal alignContent="center" justifyContent="center">
+                    <Text style={{ marginLeft: 8 }}>
+                      <Trans i18nKey="manager.applist.item.platform" />
+                    </Text>
+                  </Box>
+                </Button>
               )
             ) : null}
             {appStoreView && installed && (
@@ -220,7 +210,6 @@ const AppActions: React$ComponentType<Props> = React.memo(
               >
                 <Button
                   style={{ display: "flex" }}
-                  id={`appActionsInstall-${name}`}
                   lighterPrimary
                   disabled={!canInstall || notEnoughMemoryToInstall}
                   onClick={onInstall}
@@ -229,6 +218,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     appName: name,
                     appVersion: app.version,
                   }}
+                  data-test-id={`manager-install-${name}-app-button`}
                 >
                   <IconArrowDown size={14} />
                   <Text style={{ marginLeft: 8 }}>
@@ -247,7 +237,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                 <Button
                   style={{ padding: 13 }}
                   onClick={onUninstall}
-                  id={`appActionsUninstall-${name}`}
+                  data-test-id={`manager-uninstall-${name}-app-button`}
                   event="Manager Uninstall Click"
                   eventProperties={{
                     appName: name,
