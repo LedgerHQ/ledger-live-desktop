@@ -100,6 +100,10 @@ module.exports = {
         options: babelConfig,
       },
       {
+        test: /\.js$/i,
+        loader: require.resolve('@open-wc/webpack-import-meta-loader'),
+      },
+      {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
       },
