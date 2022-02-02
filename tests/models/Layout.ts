@@ -26,6 +26,7 @@ export class Layout {
   readonly bookmarkedAccounts: Locator;
   readonly drawerSwapButton: Locator;
   readonly appUpdateBanner: Locator;
+  readonly discreetTooltip: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -53,11 +54,11 @@ export class Layout {
     this.topbarSettingsButton = page.locator("data-test-id=topbar-settings-button");
     this.topbarLockButton = page.locator("data-test-id=topbar-password-lock-button");
     this.topbarHelpButton = page.locator("data-test-id=topbar-help-button");
+    this.discreetTooltip = page.locator("#tippy-12"); //automatically generated tippy id but it's consistent
 
     // general
     this.loadingLogo = page.locator("id=loading-logo");
     this.logo = page.locator("data-test-id=logo");
-    this.bigSpinner = page.locator("data-test-id=big-loading-spinner");
     this.inputError = page.locator("id=input-error"); // no data-test-id because css style is applied
     this.inputWarning = page.locator("id=input-warning"); // no data-test-id because css style is applied
 
@@ -91,6 +92,7 @@ export class Layout {
 
   async toggleDiscreetMode() {
     await this.topbarDiscreetButton.click();
+    await this.discreetTooltip.waitFor({ state: "hidden" }); // makes sure the tooltip has disappeared to prevent flakiness
   }
 
   async goToSettings() {
@@ -107,10 +109,5 @@ export class Layout {
 
   async openReceiveModal() {
     await this.drawerReceiveButton.click();
-  }
-
-  async waitForLoadingSpinnerToDisappear() {
-    await this.bigSpinner.waitFor({ state: "hidden" });
-    await this.bigSpinner.waitFor({ state: "detached" });
   }
 }
