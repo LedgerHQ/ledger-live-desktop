@@ -1190,7 +1190,7 @@
       "title": "Filtres",
       "show": "Afficher",
       "all": "Tout",
-      "isLedgerCompatible": "Compatible Ledger Live",
+      "isLedgerCompatible": "Compatible avec Ledger Live",
       "isFavorite": "Actifs favoris",
       "applyFilters": "Appliquer filtres",
       "clearAll": "Tout effacer"
