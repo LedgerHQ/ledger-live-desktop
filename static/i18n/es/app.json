@@ -1546,7 +1546,7 @@
       "filter": {
         "title": "Mostrar",
         "all": "Todas",
-        "supported": "Supported in Live",
+        "supported": "Compatibles con Live",
         "installed": "Instaladas",
         "not_installed": "No instaladas"
       },
