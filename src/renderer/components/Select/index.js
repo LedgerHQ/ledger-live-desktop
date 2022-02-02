@@ -11,6 +11,7 @@ import debounce from "lodash/debounce";
 
 import createStyles from "./createStyles";
 import createRenderers from "./createRenderers";
+import i18next from "i18next";
 
 export type Option = {
   value: "string",
@@ -131,6 +132,7 @@ class MenuList extends PureComponent<*, *> {
         itemCount={children.length}
         itemSize={rowHeight}
         initialScrollOffset={initialOffset}
+        direction={i18next.dir()}
       >
         {({ index, style }) => (
           <Row className={"option"} style={style}>

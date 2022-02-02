@@ -23,7 +23,7 @@ export const allLanguages = [
   "zh",
 ];
 
-export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
+export const prodStableLanguages = ["en", "fr", "ar", "es", "ru", "zh", "de", "tr", "ja", "ko"];
 
 export const pushedLanguages = ["fr", "ru"];
 

@@ -121,6 +121,7 @@
     "source-map-support": "^0.5.21",
     "styled-components": "^5.2.3",
     "styled-system": "^5.1.5",
+    "stylis-plugin-rtl": "^1",
     "timemachine": "^0.3.2",
     "tippy.js": "^6.3.7",
     "tree-kill": "^1.2.2",

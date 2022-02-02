@@ -48,6 +48,9 @@ const FeesWrapper = styled(Box)`
   padding: 20px 16px;
   width: 100%;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   border-radius: 4px;
   ${p => (p.disabled ? `background: ${p.theme.colors.palette.background.default};` : "")};
 

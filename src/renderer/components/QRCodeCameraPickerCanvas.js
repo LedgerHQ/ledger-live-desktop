@@ -35,6 +35,9 @@ const CameraWrapper: ThemedComponent<{ width: number, height: number }> = styled
     flex-grow: 1;
     p {
       font-family: "Inter";
+      [lang="ar"] & {
+        font-family: "Cairo";
+      }
       font-weight: 600;
       padding: 12px 24px;
       font-size: 13px;

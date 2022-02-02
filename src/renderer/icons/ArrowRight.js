@@ -1,17 +1,25 @@
 // @flow
 
+import i18next from "i18next";
 import React from "react";
 
 const ArrowRight = ({
   size,
   flipped,
   color = "currentColor",
+  ignoreRtl = false,
 }: {
   size: number,
   flipped?: boolean, // NB the "LeftArrow" is not the same anymore, it's the long one
   color?: string,
+  ignoreRtl?: boolean,
 }) => (
-  <svg viewBox="0 0 16 16" height={size} width={size}>
+  <svg
+    viewBox="0 0 16 16"
+    height={size}
+    width={size}
+    style={!ignoreRtl && i18next.dir() === "rtl" ? { transform: "scaleX(-1)" } : {}}
+  >
     <path
       fill={color}
       transform={`rotate(90 7.75 8.25) ${flipped ? "scale(1, -1) translate(0, -16)" : ""}`}

@@ -14,6 +14,7 @@ import emptyBookmarksLight from "~/renderer/images/light-empty-bookmarks.png";
 
 import Item from "./Item";
 import { starredAccountsSelector } from "~/renderer/reducers/accounts";
+import i18next from "i18next";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -73,6 +74,7 @@ const Stars = ({ pathname, collapsed }: Props) => {
           }}
           width="95"
           height="53"
+          style={i18next.dir() === "rtl" ? { transform: "scaleX(-1)" } : {}}
         />
         <Text
           ff="Inter|SemiBold"

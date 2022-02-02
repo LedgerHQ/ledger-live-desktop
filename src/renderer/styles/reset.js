@@ -25,6 +25,10 @@ body {
   cursor: default;
 }
 
+[lang="ar"] body {
+  font-family: "Cairo", Arial, Helvetica, sans-serif;
+}
+
 b {
   font-weight: bold;
 }

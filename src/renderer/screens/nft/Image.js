@@ -64,6 +64,9 @@ const Gen = styled.div`
     justify-content: center;
     text-align: center;
     font-family: "Inter", Arial;
+    [lang="ar"] & {
+      font-family: "Cairo", Arial;
+    }
     font-weight: 600;
     width: 100%;
     height: 100%;

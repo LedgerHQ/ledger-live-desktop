@@ -23,6 +23,9 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   white-space: nowrap;
   > * {
     font-family: "Inter";
+    [lang="ar"] & {
+      font-family: "Cairo";
+    }
     font-weight: 600;
     font-size: 12px;
     color: ${p => p.theme.colors.palette.text.shade60};
