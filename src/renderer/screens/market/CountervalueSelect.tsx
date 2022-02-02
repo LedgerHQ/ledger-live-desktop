@@ -42,6 +42,7 @@ function CounterValueSelect({
     <>
       <Track onUpdate event="MarketCounterValueSelect" counterValue={cvOption && cvOption.value} />
       <Dropdown
+        data-test-id="market-counter-value-select"
         label={t("market.currency")}
         name="currency"
         menuPortalTarget={document.body}

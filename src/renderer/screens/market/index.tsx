@@ -110,7 +110,12 @@ export default function Market() {
       <Title>{t("market.title")}</Title>
       <Flex flexDirection="row" pr="6px" my={2} alignItems="center" justifyContent="space-between">
         <SearchContainer>
-          <SearchInput value={search} onChange={updateSearch} placeholder={t("common.search")} />
+          <SearchInput
+            data-test-id="market-search-input"
+            value={search}
+            onChange={updateSearch}
+            placeholder={t("common.search")}
+          />
         </SearchContainer>
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
           <Flex width="290px" justifyContent="flex-end" ml={3}>
@@ -122,6 +127,7 @@ export default function Market() {
           </Flex>
           <Flex mx={3}>
             <Dropdown
+              data-test-id="market-range-select"
               label={t("market.rangeLabel")}
               menuPortalTarget={document.body}
               onChange={updateTimeRange}

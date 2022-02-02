@@ -320,6 +320,7 @@ function MarketList({
               <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
             )}
             <TableCell
+              data-test-id="market-star-button"
               disabled={starredMarketCoins.length <= 0 && starred.length <= 0}
               onClick={toggleStarredAccounts}
             >

@@ -9,6 +9,7 @@ export class Layout {
   readonly inputWarning: Locator;
   readonly drawerCollapseButton: Locator;
   readonly drawerPortfolioButton: Locator;
+  readonly drawerMarketButton: Locator;
   readonly drawerAccountsButton: Locator;
   readonly drawerDiscoverButton: Locator;
   readonly drawerSendButton: Locator;
@@ -36,6 +37,7 @@ export class Layout {
     // drawer
     this.drawerCollapseButton = page.locator("data-test-id=drawer-collapse-button");
     this.drawerPortfolioButton = page.locator("data-test-id=drawer-dashboard-button");
+    this.drawerMarketButton = page.locator('data-test-id=drawer-market-button');
     this.drawerAccountsButton = page.locator("data-test-id=drawer-accounts-button");
     this.drawerDiscoverButton = page.locator("data-test-id=drawer-catalog-button");
     this.drawerSendButton = page.locator("data-test-id=drawer-send-button");
@@ -67,6 +69,10 @@ export class Layout {
 
   async goToPortfolio() {
     await this.drawerPortfolioButton.click();
+  }
+
+  async goToMarket() {
+    await this.drawerMarketButton.click();
   }
 
   async goToAccounts() {

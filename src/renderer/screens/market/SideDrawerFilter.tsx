@@ -34,7 +34,13 @@ export default function SideDrawerFilter({
 
   return (
     <>
-      <Button Icon={Icons.FiltersRegular} variant="shade" outline onClick={openDrawer} />
+      <Button
+        data-test-id="market-filter-drawer-button"
+        Icon={Icons.FiltersRegular}
+        variant="shade"
+        outline
+        onClick={openDrawer}
+      />
       <SideDrawer
         isOpen={isOpen}
         onRequestClose={closeDrawer}
