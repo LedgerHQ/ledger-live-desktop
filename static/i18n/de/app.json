@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Swap bestätigen",
       "completed": {
-        "title": "Vorgang ausstehend",
-        "description": "Ihr Tauschvorgang (Swap) wurde zur Bestätigung an das Netzwerk gesendet. Es kann bis zu einer Stunde dauern, bis Sie Ihre {{targetCurrency}} erhalten.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "Notieren Sie sich Ihre Swap-ID-Nummer, falls Sie Unterstützung von <0><0>{{provider}}</0> Unterstützung</0> benötigen.",
         "seeDetails": "Siehe Details"
       }
@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "Verbinden",
         "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:",
-        "deeplinkDetails": "Mit Ledger Live verbinden. Wählen Sie Ihr Ethereum-Konto"
+        "deeplinkDetails": "Mit Ledger Live verbinden. Wählen Sie Ihr Ethereum-Konto",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
@@ -1505,6 +1507,10 @@
     "sell": {
       "notice": "Überprüfen Sie die Verkaufsdetails auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, sodass Sie diese nicht verifizieren müssen.",
       "confirm": "Verkaufstransaktion bestätigen"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
@@ -1589,7 +1595,8 @@
         "tokenAppDisclaimer": "Um {{tokenName}} zu verwalten {{tokenType}} Token zu verwalten, <1>installieren Sie die {{appName}} App</1> und vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}} Version</1> haben, bevor Sie <3>an Ihr {{appName}} Konto</3> senden.",
         "tokenAppDisclaimerInstalled": "Zur Verwaltung von <1>{{tokenName}} {{tokenType}}-Token</1> zu verwalten, vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}}-Version</1> haben, bevor Sie <3>an Ihr {{appName}}-Konto</3> senden.",
         "goToAccounts": "Zu den Konten gehen",
-        "intallParentApp": "{{appName}} App installieren"
+        "intallParentApp": "{{appName}} App installieren",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "Alle deinstallieren",
@@ -2731,9 +2738,13 @@
           "title": "TronGrid.io verwenden",
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
+        "experimentalJSCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
         "experimentalCurrencies": {
-          "title": "Experimentelle JS-Implementierungen",
-          "description": "Verwenden Sie experimentelle JS-Implementierungen für Algorand und Tezos."
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -3821,6 +3832,9 @@
     "PasswordIncorrect": {
       "title": "Das eingegebene Passwort ist falsch",
       "description": "Bitte versuchen Sie es erneut"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
     },
     "RPCHostRequired": {
       "title": "Host ist erforderlich."

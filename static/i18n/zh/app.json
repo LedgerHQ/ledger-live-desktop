@@ -246,13 +246,13 @@
         "noAccountCTA": "添加账户"
       },
       "from": {
-        "title": "来自",
+        "title": "从",
         "max": "最大值",
         "accountPlaceholder": "选择来源",
         "currencyDisabledTooltip": "此货币尚不可用于 swap 互换"
       },
       "to": {
-        "title": "发往"
+        "title": "到"
       },
       "notAvailable": {
         "title": "Swap 互换在您所在的区域尚不可用",
@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "确认兑换",
       "completed": {
-        "title": "待执行操作",
-        "description": "您的 Swap 互换操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "请记下您的 Swap ID 互换号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
         "seeDetails": "查看详情"
       }
@@ -444,7 +444,7 @@
       "resetKYCCTA": "重置 KYC",
       "amount": "数额",
       "from": {
-        "title": "来自",
+        "title": "从",
         "account": "账户",
         "amount": "发送数额",
         "currency": "加密资产"
@@ -489,7 +489,7 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "来自",
+          "from": "从",
           "to": "到",
           "toExchange": "发送数额",
           "toReceive": "待收数额",
@@ -537,7 +537,7 @@
         "finished": "您的 swap 互换已成功完成"
       },
       "date": "日期",
-      "from": "来自",
+      "from": "从",
       "fromAddress": "初始地址",
       "fromAddress_plural": "初始地址",
       "to": "到",
@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "连接",
         "details": "想要通过您的钱包连接到以下以太坊账户：",
-        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户："
+        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户：",
+        "noEthAccount": "您没有任何以太坊账户。请添加一个以太坊账户来使用 Wallet Connect（钱包连接）。",
+        "alreadyConnected": "您正在尝试连接到一个 dApp（去中心化应用），然而您已连接到了另一个。 请先断开已连接的 dApp 后，再重新将 Live 连接到新的 dApp。"
       }
     },
     "connectedscreen": {
@@ -1505,6 +1507,10 @@
     "sell": {
       "notice": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。",
       "confirm": "确认卖出交易"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
@@ -1589,7 +1595,8 @@
         "tokenAppDisclaimer": "如需管理 {{tokenName}} {{tokenType}} 代币，<1>请安装 {{appName}} 应用程序</1> 并验证您确实拥有 <1>{{tokenType}} 版本，</1>然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
-        "intallParentApp": "安装 {{appName}} 应用程序"
+        "intallParentApp": "安装 {{appName}} 应用程序",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "卸载全部",
@@ -1854,8 +1861,8 @@
       "details": {
         "utxoLag": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
         "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
-        "from": "来自",
-        "to": "发往",
+        "from": "从",
+        "to": "到",
         "selectAccountDebit": "借记账户",
         "recipientAddress": "接收方地址",
         "amount": "数额",
@@ -2731,9 +2738,13 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
-        "experimentalCurrencies": {
+        "experimentalJSCurrencies": {
           "title": "实验性的 JS 实现",
           "description": "对 Algorand 和 Tezos 使用实验性的 JS 实现。"
+        },
+        "experimentalCurrencies": {
+          "title": "实验集成",
+          "description": "使用 Solana 的实验集成。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -3821,6 +3832,9 @@
     "PasswordIncorrect": {
       "title": "输入的密码不正确",
       "description": "请重试"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
     },
     "RPCHostRequired": {
       "title": "需要输入主机。"
