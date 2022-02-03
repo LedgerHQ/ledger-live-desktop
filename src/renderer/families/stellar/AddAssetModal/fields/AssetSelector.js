@@ -31,7 +31,6 @@ const renderItem = ({
   isDisabled: boolean,
 }) => {
   const tokenId = id.split("/")[2];
-  const [assetCode, assetIssuer] = tokenId.split(":");
   return (
     <Box
       key={id}
@@ -48,8 +47,8 @@ const renderItem = ({
             mr={2}
           />
           <Text ff="Inter|Medium">{name}</Text>
-          <Text fontSize={3} color="palette.text.shade40">
-            - ID {assetCode}:
+          <Text fontSize={3} color="palette.text.shade40" mr="4px">
+            - ID
           </Text>
         </Box>
         <WrappedAssetId
@@ -59,7 +58,7 @@ const renderItem = ({
           fontSize={3}
           color="palette.text.shade40"
         >
-          {assetIssuer}
+          {tokenId}
         </WrappedAssetId>
       </Container>
       {isDisabled && (

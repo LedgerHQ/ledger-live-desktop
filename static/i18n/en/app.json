@@ -3520,7 +3520,9 @@
         "LOW": "Low",
         "MEDIUM": "Medium",
         "HIGH": "High"
-      }
+      },
+      "assetCode": "Asset code",
+      "assetIssuer": "Asset issuer"
     },
     "cosmos": {
       "memo": "Memo",
