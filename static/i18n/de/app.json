@@ -1509,8 +1509,8 @@
       "confirm": "Verkaufstransaktion bestätigen"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "Überprüfen Sie die Zahlungsdaten auf Ihrem Gerät, bevor Sie sie senden. Die Adressen werden sicher ausgetauscht, so dass Sie diese nicht überprüfen müssen.",
+      "confirm": "Transaktion bestätigen"
     }
   },
   "manager": {
