@@ -91,7 +91,10 @@ export default function Market() {
   }, [liveCompatible, refresh]);
 
   const timeRanges = useMemo(
-    () => Object.keys(rangeDataTable).map(value => ({ value, label: t(`market.range.${value}`) })),
+    () =>
+      Object.keys(rangeDataTable)
+        .filter(k => k !== "1h")
+        .map(value => ({ value, label: t(`market.range.${value}`) })),
     [t],
   );
 

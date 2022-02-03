@@ -150,11 +150,13 @@ function MarkeCoinChartComponent({
           </Flex>
         </Flex>
         <Bar onTabChange={setRange} initialActiveIndex={activeRangeIndex}>
-          {ranges.map(key => (
-            <Text color="inherit" variant="small" key={key}>
-              {t(`market.range.${key}`)}
-            </Text>
-          ))}
+          {ranges
+            .filter(k => k !== "1h")
+            .map(key => (
+              <Text color="inherit" variant="small" key={key}>
+                {t(`market.range.${key}`)}
+              </Text>
+            ))}
         </Bar>
       </Flex>
       <SwitchTransition>
