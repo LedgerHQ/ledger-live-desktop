@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "取引を確認",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "トランザクションが正常にブロードキャストされました",
+        "description": "スワップ操作が確認のためネットワークに送信されました。 取引が確認され、プロバイダが {{targetCurrency}}を送信するまでお待ちください。",
         "disclaimer": "<0><0>{{provider}}</0>サポート</0>が必要な場合に備えて、スワップID番号を書き留めてください。",
         "seeDetails": "詳細を表示"
       }
@@ -1131,8 +1131,8 @@
         "title": "接続",
         "details": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
         "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択：",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "Ethereumアカウントがありません。Wallet Connectに使用するEthereumアカウントを追加してください。",
+        "alreadyConnected": "既に別のアプリが接続されている状態でdAppに接続しようとしています。Ledger Liveを新しいdAppに再接続する前に、接続済みのdAppを切断してください。"
       }
     },
     "connectedscreen": {
@@ -1509,8 +1509,8 @@
       "confirm": "売却取引を確認"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "送付する前に、詳細をデバイス上で確認してください。アドレスは安全に取引されるため、確認の必要はありません。",
+      "confirm": "資金のトランザクションを確認"
     }
   },
   "manager": {
@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
-        "platform": "Go to app"
+        "platform": "アプリに移動する"
       },
       "uninstall": {
         "title": "すべてアンインストール",
@@ -2739,12 +2739,12 @@
           "description": "LedgerプロキシなしでTronGridを直接を使用する。"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "試験的JSの実装",
+          "description": "Algorand and Tezosの試験的JS実装を利用する。"
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "試験的統合",
+          "description": "Solanaの試験的統合を使用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -3834,7 +3834,7 @@
       "description": "もう一度お試しください。"
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "数量は 0 より大きい値でなければなりません"
     },
     "RPCHostRequired": {
       "title": "ホストは必須です。"
