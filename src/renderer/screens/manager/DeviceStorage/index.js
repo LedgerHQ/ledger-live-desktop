@@ -24,11 +24,13 @@ import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 
 import nanoS from "./images/nanoS.png";
+import nanoSP from "./images/nanoSP.png";
 import nanoX from "./images/nanoX.png";
 import blue from "./images/blue.png";
 
 const illustrations = {
   nanoS,
+  nanoSP,
   nanoX,
   blue,
 };
