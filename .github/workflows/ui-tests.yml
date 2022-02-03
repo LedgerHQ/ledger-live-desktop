@@ -120,12 +120,14 @@ jobs:
     needs: [start-runner, prepare-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout feature branch for testing
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
-      - uses: actions/setup-node@v2
+      - name: setup node
+        uses: actions/setup-node@v2
         if: always()
         with:
           node-version: 14.x

@@ -180,7 +180,7 @@ const SelectAccountAndCurrency = ({
       <FormContainer>
         {currency ? <CurrencyDownStatusAlert currencies={[currency]} /> : null}
         {allCurrencies.length !== 1 ? (
-          <FormContent>
+          <FormContent data-test-id="select-account-dropdown">
             <Label>{t("exchange.buy.coinify.selectCrypto")}</Label>
             <SelectCurrency
               onChange={setCurrency}
