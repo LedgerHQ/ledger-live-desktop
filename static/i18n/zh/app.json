@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "确认兑换",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "交易播送成功",
+        "description": "您的互换操作已经发送到网络进行确认。 请等待您的交易被确认，并等待提供商处理和发送您的 {{targetCurrency}}。",
         "disclaimer": "请记下您的 Swap ID 互换号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
         "seeDetails": "查看详情"
       }
@@ -1509,8 +1509,8 @@
       "confirm": "确认卖出交易"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "发送之前请在您的设备上验证资金详情。地址会被安全地交换因此您不必对其进行验证。",
+      "confirm": "确认资金交易"
     }
   },
   "manager": {
@@ -1596,7 +1596,7 @@
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
         "intallParentApp": "安装 {{appName}} 应用程序",
-        "platform": "Go to app"
+        "platform": "前往应用"
       },
       "uninstall": {
         "title": "卸载全部",
@@ -3834,7 +3834,7 @@
       "description": "请重试"
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "数量需大于 0"
     },
     "RPCHostRequired": {
       "title": "需要输入主机。"
@@ -4178,7 +4178,7 @@
         "moreInfo": "更多信息",
         "drawerTitle": "Crypto.org 整合",
         "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
-        "description": "您现在可以开始管理您的 Crypto.org (CRO) 令牌，并通过 Ledger Live 保护它们。",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 代币，并通过 Ledger Live 保护它们。",
         "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
         "website": "每个钱包中的加密货币"
       }
