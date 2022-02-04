@@ -56,19 +56,16 @@ const devices = [
     Illu: NanoS,
   },
   {
+    id: "nanoSP",
+    label: "nano S Plus",
+    Illu: NanoSP,
+  },
+  {
     id: "nanoX",
     label: "Nano X",
     Illu: NanoX,
   }
 ];
-if(true){
-  devices.push({
-    id: "nanoSP",
-    label: "nano S Plus",
-    Illu: NanoSP,
-  })
-}
-
 
 type DeviceSelectorProps = {
   onClick: DeviceModelId => void,
