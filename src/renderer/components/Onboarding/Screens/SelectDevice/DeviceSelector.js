@@ -6,12 +6,12 @@ import type { DeviceModelId } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import nanoX from "./assets/nanoX.svg";
 import nanoS from "./assets/nanoS.svg";
-import nanoBlue from "./assets/nanoBlue.svg";
+import nanoSP from "./assets/NanoSP.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
 
-registerAssets([nanoX, nanoS, nanoBlue]);
+registerAssets([nanoX, nanoS, nanoSP]);
 
 const DeviceSelectContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -32,20 +32,21 @@ const DeviceSelectContainer: ThemedComponent<*> = styled.div`
 
 const NanoX = styled.div`
   background: url(${nanoX}) no-repeat top right;
-  width: 153px;
-  height: 218px;
+  background-position: center;
+  width: 36px;
+  height: 180px;
 `;
 
 const NanoS = styled.div`
   background: url(${nanoS}) no-repeat top right;
-  width: 149px;
-  height: 221px;
+  width: 36px;
+  height: 180px;
 `;
 
-const NanoBlue = styled.div`
-  width: 191px;
-  height: 221px;
-  background: url(${nanoBlue}) no-repeat top right;
+const NanoSP = styled.div`
+  width: 36px;
+  height: 180px;
+  background: url(${nanoSP}) no-repeat top right;
 `;
 
 const devices = [
@@ -55,15 +56,15 @@ const devices = [
     Illu: NanoS,
   },
   {
+    id: "nanoSP",
+    label: "nano S Plus",
+    Illu: NanoSP,
+  },
+  {
     id: "nanoX",
     label: "Nano X",
     Illu: NanoX,
-  },
-  {
-    id: "blue",
-    label: "Blue",
-    Illu: NanoBlue,
-  },
+  }
 ];
 
 type DeviceSelectorProps = {
