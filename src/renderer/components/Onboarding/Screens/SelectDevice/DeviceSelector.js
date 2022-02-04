@@ -64,7 +64,7 @@ const devices = [
     id: "nanoX",
     label: "Nano X",
     Illu: NanoX,
-  }
+  },
 ];
 
 type DeviceSelectorProps = {

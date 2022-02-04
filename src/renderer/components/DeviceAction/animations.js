@@ -119,7 +119,7 @@ const blue = {
   },
 };
 
-const animations = { nanoX, nanoS, blue };
+const animations = { nanoX, nanoS, nanoSP, blue };
 
 type InferredKeys = $Keys<typeof nanoS>;
 
@@ -128,7 +128,7 @@ export const getDeviceAnimation = (
   theme: "light" | "dark",
   key: InferredKeys,
 ) => {
-  modelId = process.env.OVERRIDE_MODEL_ID || modelId
+  modelId = process.env.OVERRIDE_MODEL_ID || modelId;
   const lvl1 = animations[modelId] || animations.nanoX;
   const lvl2 = lvl1[key] || animations.nanoX[key];
   if (theme === "dark" && lvl2.dark) return lvl2.dark;

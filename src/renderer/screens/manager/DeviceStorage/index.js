@@ -24,34 +24,34 @@ import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 
 import nanoS from "./images/nanoS.png";
-import nanoS_dark from "./images/nanoS_dark.png";
+import nanoSDark from "./images/nanoS_dark.png";
 import nanoSP from "./images/nanoSP.png";
-import nanoSP_dark from "./images/nanoSP_dark.png";
+import nanoSPDark from "./images/nanoSP_dark.png";
 import nanoX from "./images/nanoX.png";
-import nanoX_dark from "./images/nanoX_dark.png";
+import nanoXDark from "./images/nanoX_dark.png";
 import blue from "./images/blue.png";
 
 const illustrations = {
-  nanoS : {
+  nanoS: {
     light: nanoS,
-    dark: nanoS_dark
+    dark: nanoSDark,
   },
   nanoSP: {
     light: nanoSP,
-    dark: nanoSP_dark
+    dark: nanoSPDark,
   },
   nanoX: {
     light: nanoX,
-    dark: nanoX_dark
+    dark: nanoXDark,
   },
   blue: {
     light: blue,
-    dark: blue
+    dark: blue,
   },
 };
 
 export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
-  src: illustrations[p.deviceModel.id][p.theme.colors.palette.type || 'light'],
+  src: illustrations[p.deviceModel.id][p.theme.colors.palette.type || "light"],
 }))`
   position: absolute;
   top: 0;
