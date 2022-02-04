@@ -7,8 +7,8 @@ import Text from "~/renderer/components/Text";
 
 const DeviceIllustrationContainer = styled.div`
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 93px;
+  right: 58px;
   transform: translateX(8px);
   transition: transform ease-out 150ms;
   will-change: transform;
