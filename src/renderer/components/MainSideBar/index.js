@@ -37,6 +37,7 @@ import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 import IconMarket from "~/renderer/icons/ChartLine";
+import IconLearn from "~/renderer/icons/Learn";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -225,6 +226,10 @@ const MainSideBar = () => {
     push("/card");
   }, [push]);
 
+  const handleClickLearn = useCallback(() => {
+    push("/learn");
+  }, [push]);
+
   const handleClickDashboard = useCallback(() => {
     push("/");
   }, [push]);
@@ -318,6 +323,15 @@ const MainSideBar = () => {
                   collapsed={secondAnim}
                 />
               ) : null}
+              <SideBarListItem
+                id="learn"
+                label={t("sidebar.learn")}
+                icon={IconLearn}
+                iconActiveColor="wallet"
+                isActive={location.pathname.startsWith("/learn")}
+                onClick={handleClickLearn}
+                collapsed={secondAnim}
+              />
 
               <SideBarListItem
                 id={"accounts"}

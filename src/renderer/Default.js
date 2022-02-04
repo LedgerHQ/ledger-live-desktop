@@ -9,6 +9,7 @@ import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
 import Card from "~/renderer/screens/card";
+import Learn from "~/renderer/screens/learn";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
@@ -172,6 +173,7 @@ export default function Default() {
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
                         <Route path="/card" render={props => <Card {...props} />} />
+                        <Route path="/learn" render={props => <Learn {...props} />} />
                         <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
