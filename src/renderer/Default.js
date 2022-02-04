@@ -57,6 +57,8 @@ import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import Market from "~/renderer/screens/market";
 // $FlowFixMe
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
+// $FlowFixMe
+import Learn from "~/renderer/screens/learn";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -172,6 +174,7 @@ export default function Default() {
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
                         <Route path="/card" render={props => <Card {...props} />} />
+                        <Route path="/learn" render={props => <Learn {...props} />} />
                         <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
