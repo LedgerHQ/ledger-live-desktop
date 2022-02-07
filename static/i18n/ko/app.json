@@ -2697,7 +2697,7 @@
       "desc": "암호화폐를 선택하여 관련 설정을 수정하세요.",
       "placeholder": "이 자산 관련 설정 값이 없음",
       "confirmationsNb": "확인 수",
-      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
+      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 컨펌 수를 설정합니다."
     },
     "profile": {
       "password": "암호 잠금",
