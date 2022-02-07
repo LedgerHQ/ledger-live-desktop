@@ -57,7 +57,7 @@ const devices = [
   },
   {
     id: "nanoSP",
-    label: "nano S Plus",
+    label: "Nano S Plus",
     Illu: NanoSP,
   },
   {
