@@ -2523,15 +2523,6 @@
     "@ledgerhq/errors" "^5.50.0"
     events "^3.3.0"
 
-"@ledgerhq/hw-transport@~5.11.0":
-  version "5.11.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport/-/hw-transport-5.11.0.tgz#f5c45a34d9b68d81fd2f6641b49815527720364b"
-  integrity sha512-z56iwv0DZZu20T5q9sNMHFQNVuRKYqzCuNFhY9woWSpmOQkyVHCRiEgOQbN5h6kVri6fkfPkDzqqcsYjJlnT9g==
-  dependencies:
-    "@ledgerhq/devices" "^5.11.0"
-    "@ledgerhq/errors" "^5.11.0"
-    events "^3.1.0"
-
 "@ledgerhq/icons-ui@^0.2.2":
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/@ledgerhq/icons-ui/-/icons-ui-0.2.2.tgz#703e101913be430aa3c2d4b5c99c0d64a7fd9cea"
