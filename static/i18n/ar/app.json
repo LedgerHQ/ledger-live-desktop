@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "تم بث المعاملة بنجاح",
+        "description": "تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. الرجاء الانتظار حتى يتم تأكيد معاملتك وحتى يقوم المزود بمعالجة وإرسال {{targetCurrency}} الخاص بك.",
         "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
         "seeDetails": "رؤية التفاصيل"
       }
@@ -1131,7 +1131,7 @@
         "title": "اتصال",
         "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
         "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "noEthAccount": "ليس لديك أي حساب إيثيريوم. يرجى أن تقوم بإضافة حساب إيثيريوم لاستخدام Wallet Connect.",
         "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
