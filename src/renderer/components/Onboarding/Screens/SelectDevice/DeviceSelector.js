@@ -53,7 +53,7 @@ const deviceNanoSP = {
   id: "nanoSP",
   label: "Nano S Plus",
   Illu: NanoSP,
-}
+};
 
 const devices = [
   {
@@ -68,9 +68,9 @@ const devices = [
   },
 ];
 
-if(process.env.SHOW_NANOSP){
+if (process.env.SHOW_NANOSP) {
   // adding at second position
-  devices.splice(1, 0, deviceNanoSP)
+  devices.splice(1, 0, deviceNanoSP);
 }
 
 type DeviceSelectorProps = {
