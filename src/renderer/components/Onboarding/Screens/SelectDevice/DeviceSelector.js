@@ -49,6 +49,12 @@ const NanoSP = styled.div`
   background: url(${nanoSP}) no-repeat top right;
 `;
 
+const deviceNanoSP = {
+  id: "nanoSP",
+  label: "Nano S Plus",
+  Illu: NanoSP,
+}
+
 const devices = [
   {
     id: "nanoS",
@@ -56,16 +62,16 @@ const devices = [
     Illu: NanoS,
   },
   {
-    id: "nanoSP",
-    label: "Nano S Plus",
-    Illu: NanoSP,
-  },
-  {
     id: "nanoX",
     label: "Nano X",
     Illu: NanoX,
   },
 ];
+
+if(process.env.SHOW_NANOSP){
+  // adding at second position
+  devices.splice(1, 0, deviceNanoSP)
+}
 
 type DeviceSelectorProps = {
   onClick: DeviceModelId => void,
