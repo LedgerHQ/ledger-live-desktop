@@ -68,6 +68,7 @@
     "dotenv": "^8.2.0",
     "electron-context-menu": "^2.5.2",
     "ethereumjs-tx": "^2.1.1",
+    "firebase": "^9.6.6",
     "focus-trap": "^6.6.1",
     "form-data": "^3.0.0",
     "fuse.js": "^3.6.1",
