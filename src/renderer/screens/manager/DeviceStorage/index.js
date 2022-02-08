@@ -23,13 +23,13 @@ import Box from "~/renderer/components/Box";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 
-import nanoS from "./images/nanoS.png";
-import nanoSDark from "./images/nanoS_dark.png";
-import nanoSP from "./images/nanoSP.png";
-import nanoSPDark from "./images/nanoSP_dark.png";
-import nanoX from "./images/nanoX.png";
-import nanoXDark from "./images/nanoX_dark.png";
-import blue from "./images/blue.png";
+import nanoS from "~/renderer/images/devices/nanoS.png";
+import nanoSDark from "~/renderer/images/devices/nanoS_dark.png";
+import nanoSP from "~/renderer/images/devices/nanoSP.png";
+import nanoSPDark from "~/renderer/images/devices/nanoSP_dark.png";
+import nanoX from "~/renderer/images/devices/nanoX.png";
+import nanoXDark from "~/renderer/images/devices/nanoX_dark.png";
+import blue from "~/renderer/images/devices/blue.png";
 
 const illustrations = {
   nanoS: {
@@ -50,9 +50,12 @@ const illustrations = {
   },
 };
 
-export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
-  src: illustrations[p.deviceModel.id][p.theme.colors.palette.type || "light"],
-}))`
+export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => {
+  console.log('theme is', p.theme.colors.palette.type)
+  return {
+    src: illustrations[p.deviceModel.id][p.theme.colors.palette.type || "light"],
+  }
+})`
   position: absolute;
   top: 0;
   left: 50%;
