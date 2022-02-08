@@ -20,6 +20,10 @@ import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
+// $FlowFixMe
+import { FirebaseRemoteConfigProvider } from "~/renderer/components/FirebaseRemoteConfig";
+// $FlowFixMe
+import { FirebaseFeatureFlagsProvider } from "~/renderer/components/FirebaseFeatureFlags";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
@@ -68,27 +72,31 @@ const InnerApp = ({ initialCountervalues }: { initialCountervalues: * }) => {
         }}
       >
         <RemoteConfigProvider>
-          <UpdaterProvider>
-            <CountervaluesProvider initialState={initialCountervalues}>
-              <ToastProvider>
-                <AnnouncementProviderWrapper>
-                  <Router>
-                    <WalletConnectProvider>
-                      <PlatformAppProviderWrapper>
-                        <DrawerProvider>
-                          <NftMetadataProvider>
-                            <MarketDataProvider>
-                              <Default />
-                            </MarketDataProvider>
-                          </NftMetadataProvider>
-                        </DrawerProvider>
-                      </PlatformAppProviderWrapper>
-                    </WalletConnectProvider>
-                  </Router>
-                </AnnouncementProviderWrapper>
-              </ToastProvider>
-            </CountervaluesProvider>
-          </UpdaterProvider>
+          <FirebaseRemoteConfigProvider>
+            <FirebaseFeatureFlagsProvider>
+              <UpdaterProvider>
+                <CountervaluesProvider initialState={initialCountervalues}>
+                  <ToastProvider>
+                    <AnnouncementProviderWrapper>
+                      <Router>
+                        <WalletConnectProvider>
+                          <PlatformAppProviderWrapper>
+                            <DrawerProvider>
+                              <NftMetadataProvider>
+                                <MarketDataProvider>
+                                  <Default />
+                                </MarketDataProvider>
+                              </NftMetadataProvider>
+                            </DrawerProvider>
+                          </PlatformAppProviderWrapper>
+                        </WalletConnectProvider>
+                      </Router>
+                    </AnnouncementProviderWrapper>
+                  </ToastProvider>
+                </CountervaluesProvider>
+              </UpdaterProvider>
+            </FirebaseFeatureFlagsProvider>
+          </FirebaseRemoteConfigProvider>
         </RemoteConfigProvider>
       </ThrowBlock>
     </StyleProvider>
