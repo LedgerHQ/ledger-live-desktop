@@ -20,7 +20,10 @@ import { UpdaterProvider } from "~/renderer/components/Updater/UpdaterContext";
 import ThrowBlock from "~/renderer/components/ThrowBlock";
 import LiveStyleSheetManager from "~/renderer/styles/LiveStyleSheetManager";
 import { RemoteConfigProvider } from "~/renderer/components/RemoteConfig";
+// $FlowFixMe
 import { FirebaseRemoteConfigProvider } from "~/renderer/components/FirebaseRemoteConfig";
+// $FlowFixMe
+import { FirebaseFeatureFlagsProvider } from "~/renderer/components/FirebaseFeatureFlags";
 import CountervaluesProvider from "~/renderer/components/CountervaluesProvider";
 import DrawerProvider from "~/renderer/drawers/Provider";
 import Default from "./Default";
@@ -31,7 +34,6 @@ import { ToastProvider } from "@ledgerhq/live-common/lib/notifications/ToastProv
 import { themeSelector } from "./actions/general";
 // $FlowFixMe
 import MarketDataProvider from "~/renderer/screens/market/MarketDataProviderWrapper";
-import { FirebaseFeatureFlagsProvider } from "./components/FirebaseFeatureFlags";
 
 const reloadApp = event => {
   if ((event.ctrlKey || event.metaKey) && event.key === "r") {
