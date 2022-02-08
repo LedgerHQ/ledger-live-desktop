@@ -26,7 +26,7 @@ const LottieDebugger = () => {
       };
     }
     if (onBoardingKeys.includes(key)) {
-      return {}
+      return {};
       // return lottieAnimations[modelId][key];
     }
     return null;
