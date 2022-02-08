@@ -546,6 +546,9 @@
       "creditedAmount": "Credited amount"
     }
   },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
+  },
   "fullNode": {
     "status": "Status",
     "connect": "Connect",
@@ -2769,6 +2772,10 @@
         "forceProvider": {
           "title": "Manager provider",
           "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
