@@ -68,6 +68,9 @@ const Tag = styled(Link)`
   justify-content: flex-start;
   align-items: center;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: bold;
   font-size: 10px;
   padding: 2px ${p => p.theme.space[3] - 1}px;

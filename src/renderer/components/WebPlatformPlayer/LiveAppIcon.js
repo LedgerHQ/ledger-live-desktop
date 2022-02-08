@@ -16,6 +16,9 @@ export const IconWrapper: ThemedComponent<{
 }> = styled.div`
   font-size: ${p => p.size / 2}px;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: bold;
   color: ${p => p.theme.colors.palette.secondary.main};
   background-color: ${p => p.theme.colors.palette.background.paper};

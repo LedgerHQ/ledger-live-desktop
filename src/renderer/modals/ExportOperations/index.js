@@ -196,6 +196,9 @@ const LabelWrapper = styled(Box)`
   text-align: center;
   font-size: 13px;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: ;
 `;
 

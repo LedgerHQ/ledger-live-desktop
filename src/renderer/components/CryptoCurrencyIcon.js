@@ -39,6 +39,9 @@ export const TokenIcon: ThemedComponent<{
 }> = styled.div`
   font-size: ${p => (p.fontSize ? p.fontSize : p.size / 2)}px;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: bold;
   color: ${p => p.color};
   background-color: ${p => mix(p.color, p.theme.colors.palette.background.default, 0.9)};

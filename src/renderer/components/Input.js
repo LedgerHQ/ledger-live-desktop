@@ -123,6 +123,9 @@ const Base = styled.input.attrs(() => ({
   fontSize: 4,
 }))`
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: 600;
   color: ${p => p.theme.colors.palette.text.shade100};
   border: 0;

@@ -102,6 +102,7 @@ async function init() {
   );
 
   const state = store.getState();
+
   const language = languageSelector(state);
   const locale = localeSelector(state);
 

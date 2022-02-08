@@ -68,5 +68,8 @@ const LabelWrapper = styled(Label)`
   color: ${p => p.theme.colors.wallet};
   font-size: 13px;
   font-family: "Inter", Arial;
+  [lang="ar"] & {
+    font-family: "Cairo", "Arial";
+  }
   font-weight: 600;
 `;

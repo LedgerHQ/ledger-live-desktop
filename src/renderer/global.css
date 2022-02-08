@@ -2,6 +2,10 @@ body {
   font-family: Inter;
 }
 
+[lang="ar"] body {
+  font-family: "Cairo";
+}
+
 .spectron-run canvas:not(.visible-for-spectron) {
   visibility: hidden;
 }
@@ -15,6 +19,7 @@ body {
   height: 100vh;
 }
 
+/* Inter */
 @font-face {
   font-family: "Inter";
   src: url("./fonts/inter/Inter-ExtraLight-BETA.woff2") format("woff2");
@@ -61,5 +66,56 @@ body {
   font-family: "Alpha";
   src: url("./fonts/alpha/HMAlphaMono-Medium.woff2") format("woff2");
   font-weight: 600;
+  font-style: normal;
+}
+
+/* Alpha */
+@font-face {
+  font-family: "Alpha";
+  src: url("./fonts/alpha/HMAlphaMono-Medium.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Cairo */
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-ExtraLight.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Cairo";
+  src: url("./fonts/cairo/Cairo-ExtraBold.woff2") format("woff2");
+  font-weight: 900;
   font-style: normal;
 }

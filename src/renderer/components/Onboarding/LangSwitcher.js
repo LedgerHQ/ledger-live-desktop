@@ -15,9 +15,10 @@ const options = prodStableLanguages.map(value => ({
   value,
   support: ["en", "fr"].includes(value) ? "full" : "partial",
   label: languageLabels[value],
+  fontFamily: value === "ar" ? "Cairo" : "Inter",
 }));
 
-const styleFn = theme => ({
+const styleFn = (theme, rtl) => ({
   container: (provided, state) => ({
     ...provided,
     width: 120,
@@ -38,15 +39,15 @@ const styleFn = theme => ({
   },
   valueContainer: (provided, state) => ({
     ...provided,
-    paddingLeft: 14,
-    paddingRight: 0,
+    paddingLeft: rtl ? 0 : 14,
+    paddingRight: rtl ? 14 : 0,
     justifyContent: "center",
   }),
   singleValue: (provided, state) => ({
     ...provided,
-    fontFamily: "Inter",
+    fontFamily: state.data?.fontFamily ?? "Inter",
     fontWeight: 700,
-    fontSize: 12,
+    fontSize: state.data?.fontFamily === "Cairo" ? 14 : 12,
     textTransform: "uppercase",
     color: theme.colors.palette.text.shade100,
   }),
@@ -54,8 +55,8 @@ const styleFn = theme => ({
   indicatorSeparator: () => ({ display: "none" }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
-    paddingLeft: 0,
-    paddingRight: 14,
+    paddingLeft: rtl ? 14 : 0,
+    paddingRight: rtl ? 0 : 14,
     color: theme.colors.palette.text.shade100,
     ":hover": {
       color: theme.colors.palette.text.shade100,
@@ -75,10 +76,11 @@ const styleFn = theme => ({
     return {
       ...provided,
       position: "relative",
-      fontFamily: "Inter",
+      fontFamily: state.data?.fontFamily ?? "Inter",
       fontWeight: 800,
-      fontSize: 10,
+      fontSize: state.data?.fontFamily === "Cairo" ? 14 : 10,
       textTransform: "uppercase",
+      lineHeight: "16px",
       color:
         state.isSelected || state.isFocused
           ? theme.colors.wallet
@@ -103,10 +105,14 @@ const styleFn = theme => ({
 
 const LangSwitcher = () => {
   const theme = useTheme();
-  const styles = useMemo(() => styleFn(theme), [theme]);
-  const language = useSelector(languageSelector);
-  const dispatch = useDispatch();
   const { i18n } = useTranslation();
+  const language = useSelector(languageSelector);
+  const styles = useMemo(() => styleFn(theme, i18n?.dir(language) === "rtl"), [
+    theme,
+    language,
+    i18n,
+  ]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     i18n.changeLanguage(language);
@@ -124,8 +130,18 @@ const LangSwitcher = () => {
     [language],
   );
 
+  console.log("options = ", options);
+
   return (
-    <Select onChange={changeLanguage} value={currentLanguage} styles={styles} options={options} />
+    <>
+      <Select
+        onChange={changeLanguage}
+        value={currentLanguage}
+        styles={styles}
+        options={options}
+        isRtl={i18n.dir() === "rtl"}
+      />
+    </>
   );
 };
 

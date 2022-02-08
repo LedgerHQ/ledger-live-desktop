@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
 import { useProviders } from "../exchange/Swap2/Form";
+import i18next from "i18next";
 
 type Props = {
   data: MarketDataContextType;
@@ -208,7 +209,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
       selectCurrency={selectCurrency}
       availableOnBuy={availableOnBuy}
       availableOnSwap={availableOnSwap}
-      style={{ ...style }}
+      style={{ ...style, direction: i18next.dir() }}
     />
   );
 });

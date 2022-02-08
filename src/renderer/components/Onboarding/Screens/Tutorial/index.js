@@ -39,6 +39,7 @@ import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/s
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
 import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
 import RecoveryWarning from "../../Help/RecoveryWarning";
+import i18n from "~/renderer/i18n/init";
 
 const TutorialContainer: ThemedComponent<*> = styled.div`
   height: 100%;
@@ -211,6 +212,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
 
   const Screen = screens[state.value].component;
   const theme = screens[state.value].bgTheme;
+  const direction = i18n.dir() === "ltr" ? "left" : "right";
 
   return (
     <TutorialContainer>
@@ -236,7 +238,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         onRequestClose={() =>
           sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })
         }
-        direction="left"
+        direction={direction}
       >
         <Box px={40}>
           <PinHelp />
@@ -247,7 +249,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         onRequestClose={() =>
           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
         }
-        direction="left"
+        direction={direction}
       >
         <Box px={40}>
           <RecoverySeed />
@@ -258,7 +260,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         onRequestClose={() =>
           sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
         }
-        direction="left"
+        direction={direction}
       >
         <Box px={40}>
           <HideRecoverySeed />
@@ -269,7 +271,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
         onRequestClose={() =>
           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
         }
-        direction="left"
+        direction={direction}
       >
         <Box px={40}>
           <RecoveryWarning />

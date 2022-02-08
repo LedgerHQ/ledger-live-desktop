@@ -40,6 +40,36 @@ export const fontFamilies = {
       style: "normal",
     },
   },
+  Cairo: {
+    ExtraLight: {
+      weight: 100,
+      style: "normal",
+    },
+    Light: {
+      weight: 300,
+      style: "normal",
+    },
+    Regular: {
+      weight: 400,
+      style: "normal",
+    },
+    Medium: {
+      weight: 500,
+      style: "normal",
+    },
+    SemiBold: {
+      weight: 600,
+      style: "normal",
+    },
+    Bold: {
+      weight: 700,
+      style: "normal",
+    },
+    ExtraBold: {
+      weight: 800,
+      style: "normal",
+    },
+  },
 };
 
 const colors = {

@@ -20,6 +20,21 @@ const config = {
 
 i18n.use(initReactI18next).init(config);
 
+// Alternately, use react-helmet to manage html attribute
+i18n.on("languageChanged", lang => {
+  const htmlElement = document.querySelector("html");
+  const htmlLang = htmlElement.getAttribute("lang");
+  const htmlDir = htmlElement.getAttribute("dir");
+  const dir = i18n.dir(lang);
+
+  if (lang !== htmlLang) {
+    htmlElement.setAttribute("lang", lang);
+  }
+  if (dir !== htmlDir) {
+    htmlElement.setAttribute("dir", dir);
+  }
+});
+
 if (module.hot) {
   module.hot.accept("./index", () => {
     const newResources = require("./index").default;

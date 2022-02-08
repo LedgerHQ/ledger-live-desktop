@@ -20,6 +20,9 @@ const SearchInput: ThemedComponent<{}> = styled.input`
   outline: none;
   flex-grow: 1;
   font-family: "Inter";
+  [lang="ar"] & {
+    font-family: "Cairo";
+  }
   font-weight: 500;
   font-size: 13px;
   cursor: text;

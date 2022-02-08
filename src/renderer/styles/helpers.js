@@ -27,8 +27,16 @@ export const mix = (c: string, b: string, a: number) =>
     .mix(Color(b), a)
     .toString();
 
+const cairoLang = ["ar"];
+
 export const ff = (v: string) => {
-  const [font, type = "Regular"] = v.split("|");
+  const [preferredFont, type = "Regular"] = v.split("|");
+  const font =
+    preferredFont === "Inter" &&
+    cairoLang.includes(document.querySelector("html").getAttribute("lang"))
+      ? "Cairo"
+      : preferredFont;
+
   const { style, weight } = fontFamilies[font][type];
   const fallback = fontFamilies[font].fallback || "Arial";
 
