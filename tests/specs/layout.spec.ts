@@ -64,7 +64,7 @@ test("Layout", async ({ page }) => {
 
   await test.step("can toggle discreet mode", async () => {
     await layout.goToPortfolio(); // FIXME: remove this line when LL-8899 is fixed
-    await layout.topbarDiscreetButton.click();
+    await layout.toggleDiscreetMode();
     expect(await page.screenshot()).toMatchSnapshot("discreet-mode.png");
   });
 

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { OutdatedApp, LatestFirmwareVersionRequired } from "@ledgerhq/live-common/lib/errors";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
-import { setPreferredDeviceModel } from "~/renderer/actions/settings";
+import { setPreferredDeviceModel, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
@@ -88,6 +88,7 @@ const DeviceAction = <R, H, P>({
     allowManagerRequestedWording,
     requestQuitApp,
     deviceInfo,
+    latestFirmware,
     repairModalOpened,
     requestOpenApp,
     allowOpeningRequestedWording,
@@ -125,6 +126,17 @@ const DeviceAction = <R, H, P>({
       dispatch(setPreferredDeviceModel(modelId));
     }
   }, [dispatch, modelId, preferredDeviceModel]);
+
+  useEffect(() => {
+    if (deviceInfo) {
+      const lastSeenDevice = {
+        modelId: device.modelId,
+        deviceInfo,
+      };
+
+      dispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware }));
+    }
+  }, [dispatch, device, deviceInfo, latestFirmware]);
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({ appName: appAndVersion.name, passWarning });

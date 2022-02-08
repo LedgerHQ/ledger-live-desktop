@@ -34,7 +34,7 @@ jobs:
 
   bundle-macos:
     name: "[macOS] Build"
-    runs-on: macos-latest
+    runs-on: [ledger-live, macos]
     needs: cancel-previous
     steps:
       - uses: actions/checkout@v2
@@ -45,6 +45,8 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
+      - name: install yarn
+        run: npm i -g yarn
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"
@@ -70,6 +72,8 @@ jobs:
           VERSION: ${{ steps.version.outputs.clean }}-sha.${{ github.sha }}
         run: yarn version --new-version="$VERSION"
       - name: build the app
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: false
         run: yarn build-ci
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: post-version

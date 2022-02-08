@@ -19,6 +19,13 @@ const config: PlaywrightTestConfig = {
     video: process.env.CI ? "on-first-retry" : "off", // FIXME: "off" doesn't seem to work
     trace: process.env.CI ? "retain-on-failure" : "off", // FIXME: traceview doesn't seem to work
   },
+  webServer: {
+    command: "serve -l 3001",
+    port: 3001,
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI,
+    cwd: "tests/utils/dummy-app-build",
+  },
   forbidOnly: !!process.env.CI,
   preserveOutput: process.env.CI ? "failures-only" : "always",
   maxFailures: process.env.CI ? 5 : undefined,
