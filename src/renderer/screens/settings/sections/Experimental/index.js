@@ -17,7 +17,7 @@ import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../Se
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
 import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
-import LottieTester from "./LottieTester"
+import LottieTester from "./LottieTester";
 
 const experimentalTypesMap = {
   toggle: ExperimentalSwitch,

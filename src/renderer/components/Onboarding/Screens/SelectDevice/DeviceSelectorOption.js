@@ -20,7 +20,8 @@ const Container = styled.div`
   outline: none;
   width: 100%;
   height: 100%;
-  background-color: ${p => p.theme.colors.palette.type === "dark" ? "rgba(20, 37, 51, 0.9)" : "rgba(100, 144, 241, 0.2)"};
+  background-color: ${p =>
+    p.theme.colors.palette.type === "dark" ? "rgba(20, 37, 51, 0.9)" : "rgba(100, 144, 241, 0.2)"};
   border-radius: 4px;
   overflow: hidden;
   position: relative;

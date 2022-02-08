@@ -35,7 +35,7 @@ const DeviceSelectContainer: ThemedComponent<*> = styled.div`
 `;
 
 const DeviceIllustration = styled.div`
-  background: url(${p=> p.url}) no-repeat top right;
+  background: url(${p => p.url}) no-repeat top right;
   background-position: center;
   width: 36px;
   height: 180px;
@@ -46,7 +46,7 @@ const deviceNanoSP = {
   label: "Nano S Plus",
   images: {
     dark: nanoSPDark,
-    light: nanoSP
+    light: nanoSP,
   },
 };
 
@@ -56,7 +56,7 @@ const devices = [
     label: "Nano S",
     images: {
       dark: nanoSDark,
-      light: nanoS
+      light: nanoS,
     },
   },
   {
@@ -64,7 +64,7 @@ const devices = [
     label: "Nano X",
     images: {
       dark: nanoXDark,
-      light: nanoX
+      light: nanoX,
     },
   },
 ];
@@ -87,7 +87,7 @@ export function DeviceSelector({ onClick }: DeviceSelectorProps) {
           id={`device-${id}`}
           key={id}
           label={label}
-          Illu={<DeviceIllustration url={ images[type] } />}
+          Illu={<DeviceIllustration url={images[type]} />}
           onClick={() => onClick(id)}
         />
       ))}
