@@ -109,7 +109,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
 
   const { stake, meta } = stakeWithMeta;
 
-  const stakeActions = solanaStakeActions(stake.activation.state).map(toStakeDropDownItem);
+  const stakeActions = solanaStakeActions(stake).map(toStakeDropDownItem);
 
   /*
   const dropDownItems = useMemo(
@@ -202,9 +202,12 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
         )}
         <div>{stake.activation.state}</div>
       </Column>
-      <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
-      <Column>{formatAmount(stake.activation.active)}</Column>
-      <Column>{stake.reward ? formatAmount(stake.reward.amount) : "-"}</Column>
+      <Column>{formatAmount(stake.stakeAccBalance)}</Column>
+      <Column>
+        {formatAmount(stake.activation.state === "inactive" ? 0 : stake.delegation?.stake ?? 0)}
+      </Column>
+      <Column>{(stake.activation.active / stake.delegation?.stake) * 100} %</Column>
+      <Column>{formatAmount(stake.withdrawable)}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
           {({ isOpen, value }) => (
@@ -223,25 +226,25 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
 
 function toStakeDropDownItem(stakeAction: string) {
   switch (stakeAction) {
-    case "unstake":
+    case "activate":
       return {
-        key: "MODAL_SOLANA_UNSTAKE",
-        label: <Trans i18nKey="solana.delegation.unstake" />,
+        key: "MODAL_SOLANA_DELEGATION_ACTIVATE",
+        label: <Trans i18nKey="solana.delegation.activate" />,
       };
-    case "restake":
+    case "reactivate":
       return {
-        key: "MODAL_SOLANA_RESTAKE",
-        label: <Trans i18nKey="solana.delegation.restake" />,
+        key: "MODAL_SOLANA_DELEGATION_REACTIVATE",
+        label: <Trans i18nKey="solana.delegation.reactivate" />,
       };
-    case "undelegate":
+    case "deactivate":
       return {
-        key: "MODAL_SOLANA_UNDELEGATE",
+        key: "MODAL_SOLANA_DELEGATION_DEACTIVATE",
         label: <Trans i18nKey="solana.delegation.undelegate" />,
       };
-    case "redelegate":
+    case "withdraw":
       return {
-        key: "MODAL_SOLANA_REDELEGATE",
-        label: <Trans i18nKey="solana.delegation.redelegate" />,
+        key: "MODAL_SOLANA_DELEGATION_WITHDRAW",
+        label: <Trans i18nKey="solana.delegation.withdraw" />,
       };
     default:
       throw new Error(`unsupported stake action: ${stakeAction}`);
