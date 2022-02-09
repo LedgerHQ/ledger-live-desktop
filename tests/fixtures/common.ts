@@ -17,6 +17,7 @@ type TestFixtures = {
   userdataFile: any;
   env: Record<string, any>;
   page: Page;
+  windowSize: { width: number; height: number };
 };
 
 const test = base.extend<TestFixtures>({
@@ -24,6 +25,7 @@ const test = base.extend<TestFixtures>({
   lang: "en-US",
   theme: "light",
   userdata: undefined,
+  windowSize: undefined,
   userdataDestinationPath: async ({}, use) => {
     use(path.join(__dirname, "../artifacts/userdata", generateUUID()));
   },
@@ -35,7 +37,15 @@ const test = base.extend<TestFixtures>({
     use(fullFilePath);
   },
   page: async (
-    { lang, theme, userdata, userdataDestinationPath, userdataOriginalFile, env }: TestFixtures,
+    {
+      windowSize,
+      lang,
+      theme,
+      userdata,
+      userdataDestinationPath,
+      userdataOriginalFile,
+      env,
+    }: TestFixtures,
     use: (page: Page) => void,
   ) => {
     // create userdata path
@@ -58,13 +68,11 @@ const test = base.extend<TestFixtures>({
     );
 
     // launch app
-    const windowSize = { width: 1024, height: 768 };
-
     const electronApp: ElectronApplication = await electron.launch({
       args: [
         "./.webpack/main.bundle.js",
         `--user-data-dir=${userdataDestinationPath}`,
-        // `--window-size=${window.width},${window.height}`, // FIXME: Doesn't work, window size can't be forced?
+        // `--window-size=${windowSize.width},${windowSize.height}`, // FIXME: Doesn't work, window size can't be forced?
         "--force-device-scale-factor=1",
         "--disable-dev-shm-usage",
         // "--use-gl=swiftshader"
@@ -73,7 +81,7 @@ const test = base.extend<TestFixtures>({
       ],
       recordVideo: {
         dir: "tests/artifacts/videos/",
-        size: windowSize, // FIXME: no default value, it could come from viewport property in conf file but it's not the case
+        size: windowSize || { width: 1024, height: 768 }, // FIXME: no default value, it could come from viewport property in conf file but it's not the case
       },
       env,
       colorScheme: theme,

@@ -188,7 +188,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
     <Box height={height}>
       {isPanAndZoomOpen && <NftPanAndZoom nft={metadata} onClose={closeNftPanAndZoom} />}
       <NFTViewerDrawerContainer>
-        <NFTViewerDrawerContent>
+        <NFTViewerDrawerContent data-test-id="nft-details-drawer">
           <StickyWrapper top={0} pb={3} pt="24px">
             <Text
               ff="Inter|SemiBold"
@@ -218,7 +218,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
             </Text>
           </StickyWrapper>
           <Skeleton show={show} width={393}>
-            <NFTImageContainer onClick={openNftPanAndZoom}>
+            <NFTImageContainer onClick={openNftPanAndZoom} data-test-id="nft-drawer-image">
               <Image nft={metadata} full square={false} maxHeight={700} />
               <NFTImageOverlay>
                 <ZoomInIcon color="white" />
@@ -232,6 +232,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
               primary
               onClick={onNFTSend}
               center
+              data-test-id="nft-drawer-send-button"
             >
               <IconSend size={12} />
               <Text ml={1} fontSize={3} lineHeight="18px">

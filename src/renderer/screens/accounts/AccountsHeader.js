@@ -22,7 +22,13 @@ const AccountsHeader = () => {
 
   return (
     <Box horizontal style={{ paddingBottom: 32 }}>
-      <Box grow ff="Inter|SemiBold" fontSize={7} color="palette.text.shade100" id="accounts-title">
+      <Box
+        grow
+        ff="Inter|SemiBold"
+        fontSize={7}
+        color="palette.text.shade100"
+        data-test-id="accounts-title"
+      >
         {t("accounts.title")}
       </Box>
       <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">

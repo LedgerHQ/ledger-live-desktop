@@ -98,7 +98,7 @@ const AccountPage = ({
   const color = getCurrencyColor(currency, bgColor);
 
   return (
-    <Box key={account.id}>
+    <Box key={account.id} data-test-id="account-container">
       <TrackPage
         category="Account"
         currency={currency.id}
@@ -135,7 +135,7 @@ const AccountPage = ({
           {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
-          {account?.nfts?.length ? <Collections account={account} /> : null}
+          {account?.nfts?.length ? <Collections account={account} data-test-id="nft-list" /> : null}
           {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
             account={account}

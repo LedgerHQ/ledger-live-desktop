@@ -239,7 +239,11 @@ export function SideDrawer({
                     )}
 
                     {onRequestClose ? (
-                      <TouchButton onClick={onRequestClose} className="sidedrawer-close">
+                      <TouchButton
+                        onClick={onRequestClose}
+                        className="sidedrawer-close"
+                        data-test-id="sidedrawer-close-button"
+                      >
                         <IconCross size={16} />
                       </TouchButton>
                     ) : (

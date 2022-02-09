@@ -26,7 +26,7 @@ const TokensList = ({ account, isLoading, nfts, collectionAddress }: Props) => {
   const nftsViewMode = useSelector(nftsViewModeSelector);
 
   return (
-    <Container mb={20} mode={nftsViewMode}>
+    <Container mb={20} mode={nftsViewMode} data-test-id="collection-nft-items-list">
       {nfts.map(nft => (
         <Item
           key={nft.id}

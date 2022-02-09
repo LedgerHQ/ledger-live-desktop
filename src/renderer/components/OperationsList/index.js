@@ -119,7 +119,7 @@ export class OperationsList extends PureComponent<Props, State> {
 
     return (
       <>
-        <TableContainer id="operation-list">
+        <TableContainer data-test-id="operation-list">
           {title && (
             <TableHeader title={title} titleProps={{ "data-e2e": "dashboard_OperationList" }} />
           )}
