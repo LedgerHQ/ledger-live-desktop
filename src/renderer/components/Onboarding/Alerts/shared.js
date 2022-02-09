@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const AlertIconContainer = styled.div`
-  color: #6490f1;
-  background-color: #6490f120;
+  color: #8a80db;
+  background-color: #8a80db20;
   border-radius: 50%;
   display: flex;
   align-items: center;

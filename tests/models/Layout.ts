@@ -59,9 +59,17 @@ export class Layout {
     // general
     this.loadingLogo = page.locator("id=loading-logo");
     this.logo = page.locator("data-test-id=logo");
+<<<<<<< HEAD
     this.inputError = page.locator("id=input-error"); // no data-test-id because css style is applied
     this.inputWarning = page.locator("id=input-warning"); // no data-test-id because css style is applied
     this.bigSpinner = page.locator("data-test-id=big-loading-spinner");
+||||||| 01bb13fe2
+    this.inputError = page.locator('id=input-error'); // no data-test-id because css style is applied
+    this.inputWarning = page.locator('id=input-warning'); // no data-test-id because css style is applied
+=======
+    this.inputError = page.locator("id=input-error"); // no data-test-id because css style is applied
+    this.inputWarning = page.locator("id=input-warning"); // no data-test-id because css style is applied
+>>>>>>> releases/2.38.x
 
     // updater
     this.appUpdateBanner = page.locator("data-test-id=layout-app-update-banner");

@@ -62,7 +62,7 @@ export const BulletRowIcon: ThemedComponent<{}> = styled(Box).attrs(() => ({
   color: "wallet",
   pl: 2,
 }))`
-  background-color: rgba(100, 144, 241, 0.2);
+  background-color: rgba(138, 128, 219, 0.2);
   border-radius: 12px;
   display: inline-flex;
   height: 18px;
