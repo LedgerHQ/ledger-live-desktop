@@ -1,3 +1,4 @@
+// @flow
 import React, { useMemo, useState } from "react";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
@@ -7,7 +8,6 @@ import Animation from "~/renderer/animations";
 import Alert from "~/renderer/components/Alert";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
-import Text from "~/renderer/components/Text";
 import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animations";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
@@ -21,7 +21,7 @@ const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.di
   justify-content: center;
 `;
 
-const LottieDebugger = ({ name }) => {
+const LottieDebugger = ({ name }: { name: string }) => {
   const keys = useMemo(
     () => ["plugAndPinCode", "enterPinCode", "quitApp", "allowManager", "openApp", "validate"],
     [],
@@ -33,27 +33,10 @@ const LottieDebugger = ({ name }) => {
 
   const [modelId, setModelId] = useState("nanoX");
   const [key, setKey] = useState("enterPinCode");
-  const [keyModalVisible, setKeyModalVisible] = useState(false);
-  const animation = useMemo(() => {
-    if (keys.includes(key)) {
-      // Normal deviceAction animations
-      // return getDeviceAnimation({
-      return {
-        device: { modelId },
-        key,
-      };
-    }
-    if (onBoardingKeys.includes(key)) {
-      return {};
-      // return lottieAnimations[modelId][key];
-    }
-    return null;
-    // Onboarding animations
-  }, [key, keys, modelId, onBoardingKeys]);
 
   const allKeys = [...keys, ...onBoardingKeys];
   return (
-    <Modal 
+    <Modal
       name={name}
       centered
       render={() => (
@@ -78,25 +61,33 @@ const LottieDebugger = ({ name }) => {
                   onClick={() => {
                     setModelId("nanoS");
                   }}
-                >Nano S</Button>
+                >
+                  Nano S
+                </Button>
                 <Button
                   primary
                   onClick={() => {
                     setModelId("nanoSP");
                   }}
-                >Nano S Plus</Button>
+                >
+                  Nano S Plus
+                </Button>
                 <Button
                   primary
                   onClick={() => {
                     setModelId("nanoX");
                   }}
-                >Nano X</Button>
+                >
+                  Nano X
+                </Button>
                 <Button
                   primary
                   onClick={() => {
                     setModelId("blue");
                   }}
-                >Nano Blue</Button>
+                >
+                  Nano Blue
+                </Button>
               </Box>
               <Box>
                 <div>
@@ -105,7 +96,6 @@ const LottieDebugger = ({ name }) => {
                       key={_key + i}
                       onClick={() => {
                         setKey(_key);
-                        setKeyModalVisible(false);
                       }}
                     >
                       <div>{_key}</div>
