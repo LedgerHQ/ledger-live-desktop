@@ -12,7 +12,7 @@ const NFTProperty = styled.div`
   display: inline-flex;
   flex-direction: column;
   padding: 8px 12px;
-  background: rgba(100, 144, 241, 0.1);
+  background: rgba(138, 128, 219, 0.1);
   border-radius: 4px;
 `;
 
@@ -61,13 +61,13 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
                 mb="2px"
                 lineHeight="12.1px"
                 fontSize={2}
-                color="rgba(100, 144, 241, 0.5);"
+                color="rgba(138, 128, 219, 0.5);"
                 ff="Inter|SemiBold"
                 uppercase
               >
                 {key}
               </Text>
-              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|Regular">
+              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#8a80db" ff="Inter|Regular">
                 {value}
               </Text>
             </NFTProperty>

@@ -23,7 +23,7 @@ const Container: ThemedComponent<*> = styled.div`
   flex-direction: column;
   position: relative;
   flex: 1;
-  background: rgba(100, 144, 241, 0.1);
+  background: rgba(138, 128, 219, 0.1);
 `;
 
 const InnerContainer: ThemedComponent<*> = styled(Box)`

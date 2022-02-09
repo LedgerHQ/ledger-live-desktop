@@ -55,7 +55,7 @@ export const LiveAppDrawer = () => {
             <AppDetails manifest={manifest} />
             <Divider my={6} />
             <Text ff="Inter|SemiBold">{t(`platform.app.informations.website`)}</Text>
-            <Text ff="Inter" color="#6490F1">
+            <Text ff="Inter" color="#8a80db">
               <ExternalLink
                 label={manifest?.homepageUrl}
                 isInternal={false}

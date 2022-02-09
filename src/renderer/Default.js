@@ -208,15 +208,12 @@ export default function Default() {
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
                         />
-                        {process.env.NODE_ENV !== "production" && !process.env.SPECTRON_RUN ? (
-                          <>
-                            <Route
-                              path="/market/:currencyId"
-                              render={props => <MarketCoinScreen {...props} />}
-                            />
-                            <Route path="/market" render={props => <Market {...props} />} />
-                          </>
-                        ) : null}
+
+                        <Route
+                          path="/market/:currencyId"
+                          render={props => <MarketCoinScreen {...props} />}
+                        />
+                        <Route path="/market" render={props => <Market {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />
