@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Использовать экспериментальные JS-реализации для Algorand и Tezos"
         },
         "experimentalLanguages": {
           "title": "Тестирование перевода",
@@ -3929,7 +3929,7 @@
       "title": "Некорректный адрес {{currencyName}}"
     },
     "InvalidAddressBecauseAlreadyDelegated": {
-      "title": "Your account is already delegated to this validator"
+      "title": "Ваш счёт уже делегирован этому валидатору"
     },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "Адрес получателя совпадает с адресом отправителя"

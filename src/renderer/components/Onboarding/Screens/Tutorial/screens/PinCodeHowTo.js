@@ -49,8 +49,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -178,7 +178,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
             <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev" />
           </Text>
         </Button>
-        <Button id="pincode-howto-cta" primary onClick={onClickNext}>
+        <Button data-test-id="pincode-howto-cta" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next" />
           </Text>

@@ -2733,7 +2733,7 @@
         },
         "experimentalCurrencies": {
           "title": "Utiliser des implémentations JS expérimentales",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2741,7 +2741,7 @@
         },
         "managerDevMode": {
           "title": "Mode développeur",
-          "description": "Afficher les applications développeurs et testnet dans le Gestionnaire."
+          "description": "Affichez les applications développeurs et testnet dans le Gestionnaire."
         },
         "scanForInvalidPaths": {
           "title": "Recherche de compte étendue",

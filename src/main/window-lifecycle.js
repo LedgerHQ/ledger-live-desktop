@@ -57,6 +57,7 @@ const defaultWindowOptions = {
     experimentalFeatures: true,
     nodeIntegration: true,
     contextIsolation: false,
+    spellcheck: false,
   },
 };
 
@@ -71,7 +72,10 @@ export const loadWindow = async () => {
 };
 
 export async function createMainWindow({ dimensions, positions }: any, settings: any) {
-  theme = settings && settings.theme ? settings.theme : "null";
+  theme =
+    settings && settings.theme && ["light", "dark"].includes(settings.theme)
+      ? settings.theme
+      : "null";
 
   // TODO renderer should provide the saved window rectangle
   const width = dimensions ? dimensions.width : DEFAULT_WINDOW_WIDTH;

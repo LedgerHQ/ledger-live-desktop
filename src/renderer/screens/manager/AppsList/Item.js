@@ -72,7 +72,7 @@ const Item: React$ComponentType<Props> = ({
   addAccount,
 }: Props) => {
   const { t } = useTranslation();
-  const { name } = app;
+  const { name, type } = app;
   const { deviceModel, deviceInfo } = state;
 
   const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(optimisticState, name);
@@ -85,7 +85,7 @@ const Item: React$ComponentType<Props> = ({
     openURL(urls.appSupport[app.name] || urls.appSupport.default);
   }, [app.name]);
 
-  const isLiveSupported = !!currency && isCurrencySupported(currency);
+  const isLiveSupported = (!!currency && isCurrencySupported(currency)) || type === "plugin";
 
   const onAddAccount = useCallback(() => {
     if (addAccount) addAccount(currency);
@@ -117,6 +117,7 @@ const Item: React$ComponentType<Props> = ({
                 app.bytes ||
                 0
               }
+              formatFunction={Math.ceil}
               deviceModel={deviceModel}
               firmwareVersion={deviceInfo.version}
             />

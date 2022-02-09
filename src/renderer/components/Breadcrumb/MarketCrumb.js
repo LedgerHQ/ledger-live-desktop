@@ -6,8 +6,7 @@ import Text from "~/renderer/components/Text";
 import { Separator, TextLink } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { useTranslation } from "react-i18next";
-// $FlowFixMe
-import { useSingleCoinMarketData } from "~/renderer/screens/market/MarketDataProvider";
+import { useSingleCoinMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 
 export default function MarketCrumb() {
   const { t } = useTranslation();
@@ -17,7 +16,7 @@ export default function MarketCrumb() {
 
   const goBackToMarket = useCallback(
     item => {
-      setTrackingSource("Market breadcrumb");
+      setTrackingSource("Page Market Coin - Breadcrumb");
       history.push({ pathname: `/market` });
     },
     [history],
@@ -25,12 +24,11 @@ export default function MarketCrumb() {
 
   return selectedCoinData ? (
     <>
+      <TextLink>
+        <Button onClick={goBackToMarket}>{t("market.title")}</Button>
+      </TextLink>
       <Separator />
       <Text>{selectedCoinData.name}</Text>
     </>
-  ) : (
-    <TextLink>
-      <Button onClick={goBackToMarket}>{t("market.title")}</Button>
-    </TextLink>
-  );
+  ) : null;
 }

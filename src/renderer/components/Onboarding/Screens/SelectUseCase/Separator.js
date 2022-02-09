@@ -11,11 +11,11 @@ const SeparatorContainer: ThemedComponent<*> = styled.div`
   padding: 50px 0px;
   width: 100%;
   align-items: center;
-  color: rgba(100, 144, 241, 0.7);
+  color: rgba(138, 128, 219, 0.7);
 `;
 
 const SeparatorLine = styled.div`
-  background-color: rgba(100, 144, 241, 0.7);
+  background-color: rgba(138, 128, 219, 0.7);
   height: 1px;
   flex: 1;
 `;

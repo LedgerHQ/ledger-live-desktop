@@ -17,7 +17,7 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter",
   color: "palette.text.shade80",
 }))`
-  background-color: rgba(100, 144, 241, 0.1);
+  background-color: rgba(138, 128, 219, 0.1);
   border-radius: 12px;
   display: inline-flex;
   height: 24px;
@@ -25,7 +25,7 @@ const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 const Btn = styled(Box).attrs(p => ({
-  bg: p.disabled ? "rgba(100, 144, 241, 0.5)" : "wallet",
+  bg: p.disabled ? "rgba(138, 128, 219, 0.5)" : "wallet",
   color: "white",
   alignItems: "center",
   justifyContent: "center",

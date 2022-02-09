@@ -8,9 +8,10 @@ import { getSystemLocale } from "~/helpers/systemLocale";
 import user from "~/helpers/user";
 import {
   sidebarCollapsedSelector,
-  langAndRegionSelector,
   shareAnalyticsSelector,
   lastSeenDeviceSelector,
+  localeSelector,
+  languageSelector,
 } from "~/renderer/reducers/settings";
 import type { State } from "~/renderer/reducers";
 
@@ -38,14 +39,15 @@ const getContext = _store => ({
 
 const extraProperties = store => {
   const state: State = store.getState();
-  const { language, region } = langAndRegionSelector(state);
+  const language = languageSelector(state);
+  const region = (localeSelector(state).split("-")[1] || "").toUpperCase() || null;
   const systemLocale = getSystemLocale();
   const device = lastSeenDeviceSelector(state);
   const deviceInfo = device
     ? {
         modelId: device.modelId,
         deviceVersion: device.deviceInfo.version,
-        appLength: device.apps.length,
+        appLength: device.apps?.length,
       }
     : {};
 

@@ -40,8 +40,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -169,7 +169,7 @@ export function RecoveryHowTo3({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.prev")}
           </Text>
         </Button>
-        <Button id="recovery-howto-3" primary onClick={onClickNext}>
+        <Button data-test-id="recovery-howto-3" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.next")}
           </Text>

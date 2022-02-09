@@ -4,19 +4,19 @@ on:
     types: [created]
 
 jobs:
-  is-org-member:
-    runs-on: ubuntu-latest
-    name: "[Check] Is user from LedgerHQ"
+  check-if-fork:
+    runs-on: ubuntu-20.04
+    outputs:
+      forked: ${{ steps.forked.outputs.forked }}
     steps:
-      - uses: ledgerhq/actions/packages/is-org-member@main
-        with:
-          user: ${{ github.actor }}
-          organisation: ledgerhq
+      - name: check if we are on a forked repo
+        id: forked
+        run: echo "::set-output name=forked::$(${{github.event.issue.pull_request.head.repo.full_name != github.repository }})"
 
   add-reaction:
+    needs: [check-if-fork]
     name: "[Reaction] 🚀"
-    needs: [is-org-member]
-    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && needs.is-org-member.result == 'success'
+    if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/generate-screenshots') && !needs.check-if-fork.outputs.forked
     runs-on: ubuntu-latest
     steps:
       - name: add reaction to PR

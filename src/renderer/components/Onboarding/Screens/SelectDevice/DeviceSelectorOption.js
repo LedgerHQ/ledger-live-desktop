@@ -20,7 +20,7 @@ const Container = styled.div`
   outline: none;
   width: 100%;
   height: 100%;
-  background-color: rgba(100, 144, 241, 0.2);
+  background-color: rgba(138, 128, 219, 0.2);
   border-radius: 4px;
   overflow: hidden;
   position: relative;
