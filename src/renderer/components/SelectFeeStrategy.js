@@ -44,7 +44,7 @@ const FeesWrapper = styled(Box)`
     `1px solid ${
       p.selected ? p.theme.colors.palette.primary.main : p.theme.colors.palette.divider
     }`};
-  ${p => (p.selected ? "box-shadow: 0px 0px 0px 4px rgba(100, 144, 241, 0.3);" : "")}
+  ${p => (p.selected ? "box-shadow: 0px 0px 0px 4px rgba(138, 128, 219, 0.3);" : "")}
   padding: 20px 16px;
   width: 100%;
   font-family: "Inter";

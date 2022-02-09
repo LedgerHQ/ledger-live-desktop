@@ -13,7 +13,7 @@ import { defaultTheme as V3dDfaultTheme, palettes as V3Palettes } from "@ledgerh
 
 type Props = {
   children: React$Node,
-  selectedPalette: "light" | "dark" | "dusk",
+  selectedPalette: "light" | "dark",
 };
 
 export type ThemedComponent<T> = StyledComponent<T, Theme, any>;
@@ -29,10 +29,10 @@ const StyleProvider = ({ children, selectedPalette }: Props) => {
       colors: {
         ...V3Palettes[v3SelectedPalettes],
         ...defaultTheme.colors,
-        palette: { ...V3Palettes[v3SelectedPalettes], ...palettesAny[selectedPalette] },
+        palette: { ...V3Palettes[v3SelectedPalettes], ...palettesAny[v3SelectedPalettes] },
       },
     }),
-    [palettesAny, selectedPalette, v3SelectedPalettes],
+    [palettesAny, v3SelectedPalettes],
   );
 
   return (

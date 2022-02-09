@@ -32,7 +32,6 @@ const DebugTheme = () => {
         style={{ backgroundColor: "#FFFFFF" }}
         onClick={() => handleChangeTheme("light")}
       ></Item>
-      <Item style={{ backgroundColor: "#182532" }} onClick={() => handleChangeTheme("dusk")}></Item>
       <Item style={{ backgroundColor: "#1C1D1F" }} onClick={() => handleChangeTheme("dark")}></Item>
     </Box>
   );

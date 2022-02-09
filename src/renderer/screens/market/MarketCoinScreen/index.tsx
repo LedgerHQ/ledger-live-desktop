@@ -1,11 +1,14 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import { starredMarketCoinsSelector, localeSelector } from "~/renderer/reducers/settings";
-import { useSingleCoinMarketData } from "../MarketDataProvider";
+import {
+  useSingleCoinMarketData,
+  useMarketData,
+} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
 import CounterValueSelect from "../CountervalueSelect";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
@@ -16,6 +19,10 @@ import { Button } from "..";
 import MarketCoinChart from "./MarketCoinChart";
 import MarketInfo from "./MarketInfo";
 import { useProviders } from "../../exchange/Swap2/Form";
+import Track from "~/renderer/analytics/Track";
+import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+import { openModal } from "~/renderer/actions/modals";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -49,6 +56,7 @@ const Title = styled(Text).attrs({ variant: "h3" })`
 `;
 
 export default function MarketCoinScreen() {
+  const { refresh, selectCurrency } = useMarketData();
   const { t } = useTranslation();
   const history = useHistory();
   const { currencyId } = useParams<{ currencyId: string }>();
@@ -57,6 +65,7 @@ export default function MarketCoinScreen() {
   const starredMarketCoins: string[] = useSelector(starredMarketCoinsSelector);
   const isStarred = starredMarketCoins.includes(currencyId);
   const locale = useSelector(localeSelector);
+  const allAccounts = useSelector(accountsSelector);
   const { providers, storedProviders } = useProviders();
   const swapAvailableIds =
     providers || storedProviders
@@ -103,6 +112,14 @@ export default function MarketCoinScreen() {
     chartData,
   } = currency || {};
 
+  useEffect(() => {
+    return () => {
+      // @ts-expect-error can be an input
+      selectCurrency(undefined);
+      refresh({});
+    };
+  }, [selectCurrency, refresh]);
+
   const color = internalCurrency
     ? getCurrencyColor(internalCurrency, colors.background.main)
     : colors.primary.c80;
@@ -111,7 +128,7 @@ export default function MarketCoinScreen() {
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page details");
+      setTrackingSource("Page Market Coin");
       history.push({
         pathname: "/exchange",
         state: {
@@ -122,19 +139,37 @@ export default function MarketCoinScreen() {
     [internalCurrency, history],
   );
 
+  const openAddAccounts = useCallback(() => {
+    if (currency)
+      dispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency.internalCurrency,
+          preventSkippingCurrencySelection: true,
+        }),
+      );
+  }, [dispatch, currency]);
+
   const onSwap = useCallback(
     e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("market page details");
-      history.push({
-        pathname: "/swap",
-        state: {
-          defaultCurrency: internalCurrency,
-        },
-      });
+      if (currency?.internalCurrency?.id) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTrackingSource("Page Market");
+
+        const defaultAccount = getAvailableAccountsById(
+          currency?.internalCurrency?.id,
+          allAccounts,
+        ).find(Boolean);
+
+        if (!defaultAccount) return openAddAccounts();
+
+        history.push({
+          pathname: "/swap",
+          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
+        });
+      }
     },
-    [internalCurrency, history],
+    [allAccounts, currency, history, openAddAccounts],
   );
 
   const toggleStar = useCallback(() => {
@@ -145,8 +180,17 @@ export default function MarketCoinScreen() {
     }
   }, [dispatch, isStarred, id]);
 
-  return currency ? (
+  return currency && counterCurrency ? (
     <Container>
+      <Track
+        event="Page Market Coin"
+        onMount
+        onUpdate
+        currencyName={name}
+        starred={isStarred}
+        timeframe={chartRequestParams.range}
+        countervalue={counterCurrency}
+      />
       <Flex flexDirection="row" my={2} alignItems="center" justifyContent="space-between">
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-start">
           <CryptoCurrencyIconWrapper>
