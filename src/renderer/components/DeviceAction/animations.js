@@ -128,6 +128,7 @@ export const getDeviceAnimation = (
   theme: "light" | "dark",
   key: InferredKeys,
 ) => {
+  // $FlowFixMe Ignore the type to allow override from env.
   modelId = process.env.OVERRIDE_MODEL_ID || modelId;
   const lvl1 = animations[modelId] || animations.nanoX;
   const lvl2 = lvl1[key] || animations.nanoX[key];

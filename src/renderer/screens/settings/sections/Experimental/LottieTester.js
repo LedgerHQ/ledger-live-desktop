@@ -13,10 +13,7 @@ const LottieTester = () => {
   const onOpenModal = useCallback(() => dispatch(openModal("MODAL_LOTTIE_DEBUGGER")), [dispatch]);
 
   return (
-    <SettingsSectionRow
-      title={t("settings.experimental.features.testAnimations.title")}
-      desc={t("settings.experimental.features.testAnimations.desc")}
-    >
+    <SettingsSectionRow title={t("settings.experimental.features.testAnimations.title")} desc="">
       <Button onClick={onOpenModal} primary>
         <Trans i18nKey={"lottieDebugger.buttonTitle"} />
       </Button>

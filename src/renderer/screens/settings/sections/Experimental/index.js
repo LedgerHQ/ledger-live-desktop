@@ -112,7 +112,7 @@ const SectionExperimental = () => {
           ) : null,
         )}
         {process.env.SHOW_ETHEREUM_BRIDGE ? <EthereumBridgeRow /> : null}
-        <LottieTester />
+        {process.env.DEBUG_LOTTIE ? <LottieTester /> : null}
         <FullNode />
       </Body>
     </div>

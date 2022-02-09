@@ -13,10 +13,18 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
+import NanoSPAnim from "../assets/animations/nanoSP/pin-code.json";
 import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
 import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
 import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
 import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: NanoXAnim,
+  nanoS: NanoSAnim,
+  nanoSP: NanoSPAnim,
+  blue: null,
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -159,7 +167,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

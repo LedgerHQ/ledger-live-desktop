@@ -14,7 +14,15 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer } from "../shared";
 import NanoSAnim from "../assets/animations/nanoS/number-of-words.json";
+import NanoSPAnim from "../assets/animations/nanoSP/number-of-words.json";
 import NanoXAnim from "../assets/animations/nanoX/number-of-words.json";
+
+const animations = {
+  nanoX: NanoXAnim,
+  nanoS: NanoSAnim,
+  nanoSP: NanoSPAnim,
+  blue: null,
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -145,7 +153,7 @@ export function RecoveryHowTo1({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

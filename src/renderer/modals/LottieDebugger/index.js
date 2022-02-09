@@ -8,18 +8,69 @@ import Animation from "~/renderer/animations";
 import Alert from "~/renderer/components/Alert";
 import Box from "~/renderer/components/Box";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
+import Select from "~/renderer/components/Select";
 import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animations";
+import type { DeviceModelId } from "@ledgerhq/devices";
+
+// All animations used on onboarding
+import NanoSConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/confirm-words.json";
+import NanoSNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/number-of-words.json";
+import NanoSPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/pin-code.json";
+import NanoSPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/power-on-recovery.json";
+import NanoSPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/power-on.json";
+import NanoSRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/recover.json";
+
+import NanoSPConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirm-words.json";
+import NanoSPNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/number-of-words.json";
+import NanoSPPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/pin-code.json";
+import NanoSPPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/power-on-recovery.json";
+import NanoSPPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/power-on.json";
+import NanoSPRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover.json";
+
+import NanoXConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/confirm-words.json";
+import NanoXNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/number-of-words.json";
+import NanoXPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/pin-code.json";
+import NanoXPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/power-on-recovery.json";
+import NanoXPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/power-on.json";
+import NanoXRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/recover.json";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
   max-width: 100%;
-  height: ${p => (p.modelId === "blue" ? 300 : 200)}px;
-  padding-bottom: ${p => (p.modelId === "blue" ? 20 : 0)}px;
+  padding-bottom: 0px;
   align-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${p => (p.dark ? "#000" : "#fff")};
 `;
+
+export const lottieAnimations = {
+  nanoS: {
+    confirmWords: NanoSConfirmWords,
+    numberOfWords: NanoSNumberOfWords,
+    pinCode: NanoSPinCode,
+    powerOnRecovery: NanoSPowerOnRecovery,
+    powerOn: NanoSPowerOn,
+    recover: NanoSRecover,
+  },
+  nanoSP: {
+    confirmWords: NanoSPConfirmWords,
+    numberOfWords: NanoSPNumberOfWords,
+    pinCode: NanoSPPinCode,
+    powerOnRecovery: NanoSPPowerOnRecovery,
+    powerOn: NanoSPPowerOn,
+    recover: NanoSPRecover,
+  },
+  nanoX: {
+    confirmWords: NanoXConfirmWords,
+    numberOfWords: NanoXNumberOfWords,
+    pinCode: NanoXPinCode,
+    powerOnRecovery: NanoXPowerOnRecovery,
+    powerOn: NanoXPowerOn,
+    recover: NanoXRecover,
+  },
+};
 
 const LottieDebugger = ({ name }: { name: string }) => {
   const keys = useMemo(
@@ -31,10 +82,35 @@ const LottieDebugger = ({ name }: { name: string }) => {
     [],
   );
 
-  const [modelId, setModelId] = useState("nanoX");
-  const [key, setKey] = useState("enterPinCode");
+  const [modelId, setModelId] = useState<any>("nanoS");
+  const [key, setKey] = useState<any>("enterPinCode");
 
   const allKeys = [...keys, ...onBoardingKeys];
+
+  const animation = useMemo(() => {
+    if (keys.includes(key)) {
+      // Normal deviceAction animations
+      return getDeviceAnimation(modelId, "light", key);
+    }
+    if (onBoardingKeys.includes(key) && modelId !== "blue") {
+      return lottieAnimations[modelId][key];
+    }
+    return null;
+    // Onboarding animations
+  }, [key, keys, modelId, onBoardingKeys]);
+
+  const animation2 = useMemo(() => {
+    if (keys.includes(key)) {
+      // Normal deviceAction animations
+      return getDeviceAnimation(modelId, "dark", key);
+    }
+    if (onBoardingKeys.includes(key) && modelId !== "blue") {
+      return lottieAnimations[modelId][key];
+    }
+    return null;
+    // Onboarding animations
+  }, [key, keys, modelId, onBoardingKeys]);
+
   return (
     <Modal
       name={name}
@@ -53,10 +129,14 @@ const LottieDebugger = ({ name }: { name: string }) => {
               </Alert>
               <div>{!key ? "Select Animation" : `Showing '${key}' for ${modelId}`}</div>
               <AnimationWrapper>
-                <Animation animation={getDeviceAnimation(modelId, "light", key)} />
+                <Animation animation={animation} />
               </AnimationWrapper>
-              <Box horizontal justifyContent="space-around">
+              <AnimationWrapper dark>
+                <Animation animation={animation2} />
+              </AnimationWrapper>
+              <Box mt={2} mb={2} horizontal>
                 <Button
+                  mr={2}
                   primary
                   onClick={() => {
                     setModelId("nanoS");
@@ -65,6 +145,7 @@ const LottieDebugger = ({ name }: { name: string }) => {
                   Nano S
                 </Button>
                 <Button
+                  mr={2}
                   primary
                   onClick={() => {
                     setModelId("nanoSP");
@@ -80,29 +161,16 @@ const LottieDebugger = ({ name }: { name: string }) => {
                 >
                   Nano X
                 </Button>
-                <Button
-                  primary
-                  onClick={() => {
-                    setModelId("blue");
-                  }}
-                >
-                  Nano Blue
-                </Button>
               </Box>
               <Box>
-                <div>
-                  {allKeys.map((_key, i) => (
-                    <div
-                      key={_key + i}
-                      onClick={() => {
-                        setKey(_key);
-                      }}
-                    >
-                      <div>{_key}</div>
-                      {/* {key === _key && <Check size={16} color={colors.live} />} */}
-                    </div>
-                  ))}
-                </div>
+                <Select
+                  isSearchable={false}
+                  onChange={({ value }) => setKey(value)}
+                  value={key}
+                  options={allKeys.map(k => ({ label: k, value: k }))}
+                  renderOption={({ label }) => label}
+                  renderValue={({ data: { label } }) => label}
+                />
               </Box>
             </>
           )}

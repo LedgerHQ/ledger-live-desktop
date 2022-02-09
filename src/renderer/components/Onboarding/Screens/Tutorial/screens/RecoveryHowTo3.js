@@ -14,7 +14,15 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import { ContentContainer, HeaderContainer } from "../shared";
 import NanoSAnim from "../assets/animations/nanoS/recover.json";
+import NanoSPAnim from "../assets/animations/nanoSP/recover.json";
 import NanoXAnim from "../assets/animations/nanoX/recover.json";
+
+const animations = {
+  nanoX: NanoXAnim,
+  nanoS: NanoSAnim,
+  nanoSP: NanoSPAnim,
+  blue: null,
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -145,7 +153,7 @@ export function RecoveryHowTo3({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

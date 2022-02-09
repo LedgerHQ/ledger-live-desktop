@@ -50,12 +50,12 @@ const illustrations = {
   },
 };
 
-export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => {
-  console.log("theme is", p.theme.colors.palette.type);
-  return {
-    src: illustrations[p.deviceModel.id][p.theme.colors.palette.type || "light"],
-  };
-})`
+export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
+  src:
+    illustrations[process.env.OVERRIDE_MODEL_ID || p.deviceModel.id][
+      p.theme.colors.palette.type || "light"
+    ],
+}))`
   position: absolute;
   top: 0;
   left: 50%;

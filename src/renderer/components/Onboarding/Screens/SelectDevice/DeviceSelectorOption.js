@@ -6,11 +6,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
 const DeviceIllustrationContainer = styled.div`
-  position: absolute;
-  top: 93px;
-  right: 58px;
-  transform: translateX(8px);
   transition: transform ease-out 150ms;
+  margin-top: 34px;
   will-change: transform;
   display: flex;
 `;
@@ -35,15 +32,16 @@ const Container = styled.div`
 const DeviceSelectOptionContainer: ThemedComponent<{}> = styled.button`
   border: none;
   outline: none;
-  width: 152px;
   height: 318px;
+  flex: 1;
+  justify-content: center;
   background-color: transparent;
   overflow: hidden;
   position: relative;
   cursor: pointer;
 
   &:hover ${DeviceIllustrationContainer} {
-    transform: translateX(0px);
+    transform: scale(1.05);
   }
 
   &:active ${Container} {

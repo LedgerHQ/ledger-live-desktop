@@ -20,6 +20,7 @@ registerAssets([nanoX, nanoS, nanoSP, nanoXDark, nanoSDark, nanoSPDark]);
 const DeviceSelectContainer: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: row;
+  width: 480px;
 
   & > * {
     margin: 0px 8px;
@@ -36,6 +37,7 @@ const DeviceSelectContainer: ThemedComponent<*> = styled.div`
 
 const DeviceIllustration = styled.div`
   background: url(${p => p.url}) no-repeat top right;
+  background-size: cover;
   background-position: center;
   width: 36px;
   height: 180px;
@@ -88,7 +90,10 @@ export function DeviceSelector({ onClick }: DeviceSelectorProps) {
           key={id}
           label={label}
           Illu={<DeviceIllustration url={images[type]} />}
-          onClick={() => onClick(id)}
+          onClick={() => {
+            // $FlowFixMe @ledgerhq/devices resolving to old version without nanoSP.
+            onClick(id);
+          }}
         />
       ))}
     </DeviceSelectContainer>
