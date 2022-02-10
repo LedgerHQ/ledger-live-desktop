@@ -153,10 +153,6 @@ export default function Default() {
       title: "Change theme...",
       mdIcon: "desktop_windows",
       children: ["Light Theme", "Dark Theme"],
-      handler: () => {
-        ninja.open({ parent: "Theme" });
-        return { keepOpen: true };
-      },
     },
     {
       id: "Open Ledger Support",
@@ -170,10 +166,6 @@ export default function Default() {
       id: "Analytics",
       title: "Analytics...",
       children: ["Enable Analytics", "Disable Analytics"],
-      handler: () => {
-        ninja.open({ parent: "Analytics" });
-        return { keepOpen: true };
-      },
     },
     {
       id: "Enable Analytics",
