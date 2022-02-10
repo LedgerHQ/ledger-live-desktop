@@ -59,7 +59,7 @@ import Market from "~/renderer/screens/market";
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 import "ninja-keys";
 import { useDispatch, useSelector } from "react-redux";
-import { setShareAnalytics, setTheme } from "~/renderer/actions/settings";
+import { setCounterValue, setShareAnalytics, setTheme } from "~/renderer/actions/settings";
 import { themeSelector } from "./actions/general";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
@@ -117,6 +117,18 @@ const NightlyLayerR = () => {
 };
 
 const NightlyLayer = React.memo(NightlyLayerR);
+
+function getCountervaluesHotkeys(supportedCountervalues, dispatch) {
+  return supportedCountervalues.map(countervalue => ({
+    id: countervalue.currency.ticker,
+    title: `Change preferred currency to ${countervalue.label}`,
+    parent: "countervalues",
+    handler: item => {
+      dispatch(setCounterValue(item.id));
+    },
+  }));
+}
+
 
 export default function Default() {
   const location = useLocation();
@@ -265,6 +277,12 @@ export default function Default() {
         history.push("/market");
       },
     },
+    {
+      id: "countervalues",
+      title: "Change preferred currency...",
+      children: supportedCountervalues.map(countervalue => countervalue.currency.ticker),
+    },
+    ...getCountervaluesHotkeys(supportedCountervalues, dispatch),
   ]);
 
   useEffect(() => {
