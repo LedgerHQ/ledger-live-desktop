@@ -7,5 +7,15 @@ test.use({ userdata: "allLiveCoinsNoOperations", env: { DEV_TOOLS: true, MOCK: u
 test("Performance while sync", async ({ page }) => {
   const portfolioPage = new PortfolioPage(page);
 
+  const continueButton = await page.locator("text='Continue'");
+  if (continueButton) {
+    continueButton.click();
+  }
+
+  const syncLoadingSpinner = await page.locator("text='Continue'");
+  if (!syncLoadingSpinner) {
+    return;
+  }
+
   await page.pause();
 });
