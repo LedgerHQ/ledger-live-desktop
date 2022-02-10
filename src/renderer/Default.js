@@ -1,5 +1,5 @@
 // @flow
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation, useHistory } from "react-router-dom";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
@@ -130,8 +130,6 @@ export default function Default() {
   const accounts = useSelector(accountsSelector);
   const dispatch = useDispatch();
 
-  console.log(accounts);
-
   const hkAccounts = useMemo(() => {
     if (accounts.length) {
       const flatten = flattenAccounts(accounts)
@@ -175,7 +173,6 @@ export default function Default() {
         id: "Home",
         title: "Open Home",
         hotkey: "cmd+h",
-        mdIcon: "home",
         handler: () => {
           history.push("/");
         },
@@ -183,7 +180,6 @@ export default function Default() {
       {
         id: "Theme",
         title: "Change theme...",
-        mdIcon: "desktop_windows",
         children: ["Light Theme", "Dark Theme"],
         handler: () => {
           return { keepOpen: true };
@@ -224,7 +220,6 @@ export default function Default() {
       {
         id: "Light Theme",
         title: "Change theme to Light",
-        mdIcon: "light_mode",
         parent: "Theme",
         handler: () => {
           dispatch(setTheme("light"));
@@ -233,7 +228,6 @@ export default function Default() {
       {
         id: "Dark Theme",
         title: "Change theme to Dark",
-        mdIcon: "dark_mode",
         keywords: "lol",
         parent: "Theme",
         handler: () => {
