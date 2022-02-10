@@ -1,7 +1,7 @@
 // @flow
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation, useHistory } from "react-router-dom";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -120,6 +120,7 @@ const NightlyLayer = React.memo(NightlyLayerR);
 
 export default function Default() {
   const location = useLocation();
+  const history = useHistory();
   const ref: React$ElementRef<any> = useRef();
   useDeeplink();
   useUSBTroubleshooting();
@@ -144,16 +145,17 @@ export default function Default() {
       hotkey: "cmd+h",
       mdIcon: "home",
       handler: () => {
-        console.log("navigation to home");
+        history.push("/");
       },
     },
     {
-      id: "Open Projects",
-      title: "Open Projects",
-      hotkey: "cmd+p",
-      mdIcon: "apps",
+      id: "Theme",
+      title: "Change theme...",
+      mdIcon: "desktop_windows",
+      children: ["Light Theme", "Dark Theme"],
       handler: () => {
-        console.log("navigation to projects");
+        ninja.open({ parent: "Theme" });
+        return { keepOpen: true };
       },
     },
     {
@@ -165,50 +167,111 @@ export default function Default() {
       },
     },
     {
-      id: "Theme",
-      title: "Change theme...",
-      mdIcon: "desktop_windows",
-      children: [
-        {
-          id: "Light Theme",
-          title: "Change theme to Light",
-          mdIcon: "light_mode",
-          handler: () => {
-            console.log("theme light");
-            dispatch(setTheme("light"));
-          },
-        },
-        {
-          id: "Dark Theme",
-          title: "Change theme to Dark",
-          mdIcon: "dark_mode",
-          keywords: "lol",
-          handler: () => {
-            console.log("theme dark");
-            dispatch(setTheme("dark"));
-          },
-        },
-      ],
-    },
-    {
       id: "Analytics",
       title: "Analytics...",
-      children: [
-        {
-          id: "Enable Analytics",
-          title: "Enable Analytics",
-          handler: () => {
-            dispatch(setShareAnalytics(true));
-          },
-        },
-        {
-          id: "Disable Analytics",
-          title: "Disable Analytics",
-          handler: () => {
-            dispatch(setShareAnalytics(false));
-          },
-        },
-      ],
+      children: ["Enable Analytics", "Disable Analytics"],
+      handler: () => {
+        ninja.open({ parent: "Analytics" });
+        return { keepOpen: true };
+      },
+    },
+    {
+      id: "Enable Analytics",
+      title: "Enable Analytics",
+      parent: "Analytics",
+      handler: () => {
+        dispatch(setShareAnalytics(true));
+      },
+    },
+    {
+      id: "Disable Analytics",
+      title: "Disable Analytics",
+      parent: "Analytics",
+      handler: () => {
+        dispatch(setShareAnalytics(false));
+      },
+    },
+    {
+      id: "Light Theme",
+      title: "Change theme to Light",
+      mdIcon: "light_mode",
+      parent: "Theme",
+      handler: () => {
+        dispatch(setTheme("light"));
+      },
+    },
+    {
+      id: "Dark Theme",
+      title: "Change theme to Dark",
+      mdIcon: "dark_mode",
+      keywords: "lol",
+      parent: "Theme",
+      handler: () => {
+        dispatch(setTheme("dark"));
+      },
+    },
+    {
+      id: "settings",
+      title: "Settings Page",
+      handler: () => {
+        history.push("/settings");
+      },
+    },
+    {
+      id: "accounts",
+      title: "Accounts Page",
+      handler: () => {
+        history.push("/accounts");
+      },
+    },
+    {
+      id: "card",
+      title: "Ledger Card Page",
+      handler: () => {
+        history.push("/card");
+      },
+    },
+    {
+      id: "manager",
+      title: "Manager Page",
+      handler: () => {
+        history.push("/manager");
+      },
+    },
+    {
+      id: "platform",
+      title: "Platform Page",
+      handler: () => {
+        history.push("/platform");
+      },
+    },
+    {
+      id: "lend",
+      title: "Lend Page",
+      handler: () => {
+        history.push("/lend");
+      },
+    },
+    {
+      id: "exchange",
+      title: "Buy Page",
+      handler: () => {
+        history.push("/exchange");
+      },
+    },
+    {
+      id: "swap",
+      title: "Swap Page",
+      handler: () => {
+        history.push("/swap");
+      },
+    },
+    {
+      id: "market",
+      title: "Market Page",
+      handler: () => {
+        history.push("/market");
+      },
     },
   ]);
 
@@ -220,7 +283,7 @@ export default function Default() {
 
   return (
     <>
-      <ninja-keys class={selectedPalette} ref={ninjaKeys}></ninja-keys>
+      <ninja-keys class={selectedPalette} ref={ninjaKeys} goBackHotkey={null}></ninja-keys>
 
       <TriggerAppReady />
       <ListenDevices />
