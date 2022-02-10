@@ -94,6 +94,7 @@
     "raven": "^2.6.4",
     "raven-js": "^3.27.2",
     "react": "^17.0.2",
+    "react-chromecast": "^0.0.5-alpha",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
     "react-i18next": "^11.14.3",

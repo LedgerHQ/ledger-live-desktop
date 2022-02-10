@@ -185,6 +185,20 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
           </StickyWrapper>
           <Skeleton show={show} width={393} minHeight={393}>
             <Image nft={metadata} full />
+            <google-cast-launcher
+              style={{
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                width: 44,
+                height: 44,
+                padding: 8,
+                background: "#ffffff8c",
+                borderRadius: "10px 0px 0px 0px",
+                zIndex: 10,
+                cursor: "pointer",
+              }}
+            ></google-cast-launcher>
           </Skeleton>
           <NFTActions>
             <Button

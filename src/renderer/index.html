@@ -7,6 +7,7 @@
       async
       src="https://resources.live.ledger.app/public_resources/analytics.min.js"
     ></script>
+    <script defer src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
     <style>
       html {
         overflow: hidden;
@@ -122,4 +123,17 @@
     </div>
     <div id="modals"></div>
   </body>
+  <script>
+    initializeCastApi = function() {
+      cast.framework.CastContext.getInstance().setOptions({
+        receiverApplicationId: chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID
+      });
+    };
+    window['__onGCastApiAvailable'] = function(isAvailable) {
+      console.log({isAvailable})
+      if (isAvailable) {
+        initializeCastApi();
+      }
+    };
+  </script>
 </html>

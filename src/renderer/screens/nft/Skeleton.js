@@ -24,6 +24,7 @@ const Wrapper: ThemedComponent<{}> = styled.div`
   ${p => (p.full ? "width: 100%;" : "")}
   align-items: center;
   display: grid;
+  position: relative;
 `;
 
 const Item: ThemedComponent<{}> = styled.div.attrs(({ state }) => ({
