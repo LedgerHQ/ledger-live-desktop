@@ -59,8 +59,11 @@ import Market from "~/renderer/screens/market";
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 import "ninja-keys";
 import { useDispatch, useSelector } from "react-redux";
-import { setTheme } from "~/renderer/actions/settings";
+import { setShareAnalytics, setTheme } from "~/renderer/actions/settings";
 import { themeSelector } from "./actions/general";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
+import { supportedCountervalues } from "~/renderer/reducers/settings";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -129,6 +132,8 @@ export default function Default() {
     }
   }, [location]);
 
+  console.log(supportedCountervalues[0]);
+
   const dispatch = useDispatch();
 
   const ninjaKeys = useRef(null);
@@ -152,6 +157,14 @@ export default function Default() {
       },
     },
     {
+      id: "Open Ledger Support",
+      title: "Open  Ledger Support",
+      hotkey: "cmd+s",
+      handler: () => {
+        openURL(urls.faq);
+      },
+    },
+    {
       id: "Theme",
       title: "Change theme...",
       mdIcon: "desktop_windows",
@@ -162,7 +175,7 @@ export default function Default() {
           mdIcon: "light_mode",
           handler: () => {
             console.log("theme light");
-            dispatch(setTheme('light'));
+            dispatch(setTheme("light"));
           },
         },
         {
@@ -172,8 +185,27 @@ export default function Default() {
           keywords: "lol",
           handler: () => {
             console.log("theme dark");
-            dispatch(setTheme('dark'));
-
+            dispatch(setTheme("dark"));
+          },
+        },
+      ],
+    },
+    {
+      id: "Analytics",
+      title: "Analytics...",
+      children: [
+        {
+          id: "Enable Analytics",
+          title: "Enable Analytics",
+          handler: () => {
+            dispatch(setShareAnalytics(true));
+          },
+        },
+        {
+          id: "Disable Analytics",
+          title: "Disable Analytics",
+          handler: () => {
+            dispatch(setShareAnalytics(false));
           },
         },
       ],
