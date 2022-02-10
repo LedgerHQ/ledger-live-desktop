@@ -83,6 +83,7 @@
     "lru-cache": "^5.1.1",
     "measure-scrollbar": "^1.1.0",
     "moment": "^2.29.1",
+    "ninja-keys": "^1.1.12",
     "node-abi": "^2.30.0",
     "openpgp": "^4.10.10",
     "os-locale": "^5.0.0",
