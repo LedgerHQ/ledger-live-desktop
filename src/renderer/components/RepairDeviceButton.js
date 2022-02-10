@@ -18,7 +18,10 @@ type Props = {
   Component?: any,
 };
 
-const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
+const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function RepairDevice(
+  { onRepair, buttonProps, Component }: Props,
+  ref: React$ElementRef<*>,
+) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [opened, setOpened] = useState(false);
@@ -104,7 +107,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
       {Component ? (
         <Component onClick={open} />
       ) : (
-        <Button {...buttonProps} onClick={open} event="RepairDeviceButton">
+        <Button {...buttonProps} ref={ref} onClick={open} event="RepairDeviceButton">
           {t("settings.repairDevice.button")}
         </Button>
       )}
@@ -123,6 +126,6 @@ const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
       />
     </>
   );
-};
+});
 
 export default RepairDeviceButton;
