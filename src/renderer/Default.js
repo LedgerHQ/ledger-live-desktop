@@ -59,6 +59,9 @@ import Market from "~/renderer/screens/market";
 // $FlowFixMe
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 import "ninja-keys";
+import { useDispatch, useSelector } from "react-redux";
+import { userThemeSelector } from "~/renderer/reducers/settings";
+import { setTheme } from "~/renderer/actions/settings";
 import { themeSelector } from "./actions/general";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
@@ -128,6 +131,8 @@ export default function Default() {
     }
   }, [location]);
 
+  const dispatch = useDispatch();
+
   const ninjaKeys = useRef(null);
   const [hotkeys, setHotkeys] = useState([
     {
@@ -159,6 +164,7 @@ export default function Default() {
           mdIcon: "light_mode",
           handler: () => {
             console.log("theme light");
+            dispatch(setTheme('light'));
           },
         },
         {
@@ -168,6 +174,8 @@ export default function Default() {
           keywords: "lol",
           handler: () => {
             console.log("theme dark");
+            dispatch(setTheme('dark'));
+
           },
         },
       ],
