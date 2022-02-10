@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -58,6 +59,7 @@ import Market from "~/renderer/screens/market";
 // $FlowFixMe
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 import "ninja-keys";
+import { themeSelector } from "./actions/general";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -117,6 +119,7 @@ export default function Default() {
   const ref: React$ElementRef<any> = useRef();
   useDeeplink();
   useUSBTroubleshooting();
+  const selectedPalette = useSelector(themeSelector) || "light";
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -179,7 +182,7 @@ export default function Default() {
 
   return (
     <>
-      <ninja-keys class="dark" ref={ninjaKeys}></ninja-keys>
+      <ninja-keys class={selectedPalette} ref={ninjaKeys}></ninja-keys>
 
       <TriggerAppReady />
       <ListenDevices />
