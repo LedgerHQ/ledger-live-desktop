@@ -9,7 +9,7 @@
       "hasCompletedOnboarding": true,
       "counterValue": "USD",
       "language": "en",
-      "theme": "light",
+      "theme": null,
       "region": null,
       "orderAccounts": "balance|desc",
       "countervalueFirst": false,
