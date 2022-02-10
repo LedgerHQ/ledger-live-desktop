@@ -23,10 +23,11 @@ const LiveLogoContainer: ThemedComponent<{
   width?: number,
   height?: number,
 }> = styled(Box).attrs(() => ({
-  borderRadius: "50%",
+  borderRadius: "4px",
   alignItems: "center",
   justifyContent: "center",
 }))`
+  color: ${p => p.theme.colors.palette.secondary.main};
   background-color: ${p => p.theme.colors.palette.primary.contrastText};
   box-shadow: 0 2px 24px 0 #00000014;
   width: ${p => (p.width ? p.width : "80px")};

@@ -9,10 +9,9 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
 import LedgerLiveLogo from "~/renderer/components/LedgerLiveLogo";
-import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import InfoIcon from "~/renderer/icons/InfoCircle";
 import { rgba } from "~/renderer/styles/helpers";
-import Image from "~/renderer/components/Image";
+import Logo from "~/renderer/icons/Logo";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 
@@ -39,13 +38,6 @@ const Dashes: ThemedComponent<{}> = styled.div`
     p.theme.colors.palette.primary.main.slice(
       1,
     )}' stroke-opacity='0.5' stroke-width='2' stroke-linecap='round' stroke-dasharray='2 6'/%3E%3C/svg%3E%0A");
-`;
-
-const LogoContainer: ThemedComponent<{}> = styled(LedgerLiveLogo)`
-  box-shadow: initial;
-  height: 48px;
-  width: 48px;
-  border: 1px solid #ececec;
 `;
 
 const Title: ThemedComponent<{}> = styled(Text).attrs(p => ({
@@ -96,9 +88,7 @@ export const LiveAppDisclaimer = ({ manifest }: Props) => {
   return (
     <>
       <Head>
-        <LogoContainer
-          icon={<Image resource={LedgerLiveImg} alt="" draggable="false" width={31} height={31} />}
-        />
+        <LedgerLiveLogo width={48} height={48} icon={<Logo size={31} />} />
         <Dashes />
         <LiveAppIcon size={48} name={manifest.name} icon={manifest.icon || ""} />
       </Head>
