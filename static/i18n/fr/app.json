@@ -2983,9 +2983,9 @@
       "recoverySeedWarning": {
         "contactSupportCTA": "Contacter l'Assistance",
         "continueCTA": "Continuer",
-        "title": "Vérifier le contenu de votre coffret",
+        "title": "Vérifiez le contenu de votre coffret.",
         "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
-        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil Ledger lors de sa configuration."
       }
     },
     "alerts": {
