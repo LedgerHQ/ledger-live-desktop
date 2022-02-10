@@ -2495,10 +2495,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.32.0":
-  version "21.32.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.32.0.tgz#61fdee8f315f4f85c73fd56167430a98920172ef"
-  integrity sha512-3BNQ5TEGxK6HiFbSAqeBSIoO2C/fdUhI4+IE0hzHGRAFGI4hBzprvC+qoPzCBP8eyDW67nkggC9q3Yg18n23ng==
+"@ledgerhq/live-common@^21.32.0-hotfix.2":
+  version "21.32.0-hotfix.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.32.0-hotfix.2.tgz#07ece4c39201eaf08afae8c7a2a5a3b9732b85c8"
+  integrity sha512-o9S3ueaCQYaMATUcpYM8PiIPYRyPRD5/UUXebMJEPdksKXrt1TXIqP3rVdofaDroqLH5Bp24HDet5UUZ9Ci99w==
   dependencies:
     "@celo/contractkit" "^1.5.1"
     "@celo/wallet-base" "^1.5.1"
@@ -17675,11 +17675,6 @@ safe-stable-stringify@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/safe-stable-stringify/-/safe-stable-stringify-1.1.1.tgz#c8a220ab525cd94e60ebf47ddc404d610dc5d84a"
   integrity sha512-ERq4hUjKDbJfE4+XtZLFPCDi8Vb1JqaxAPTxWFLBx8XcAlf9Bda/ZJdVezs/NAfsMQScyIlUMx+Yeu7P7rx5jw==
-
-safe-stable-stringify@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/safe-stable-stringify/-/safe-stable-stringify-2.3.1.tgz#ab67cbe1fe7d40603ca641c5e765cb942d04fc73"
-  integrity sha512-kYBSfT+troD9cDA85VDnHZ1rpHC50O0g1e6WlGHVCz/g+JS+9WKLj+XwFYyR8UbrZN8ll9HUpDAAddY58MGisg==
 
 "safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0", safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"
