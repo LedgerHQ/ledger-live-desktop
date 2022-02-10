@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -60,7 +59,6 @@ import Market from "~/renderer/screens/market";
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 import "ninja-keys";
 import { useDispatch, useSelector } from "react-redux";
-import { userThemeSelector } from "~/renderer/reducers/settings";
 import { setTheme } from "~/renderer/actions/settings";
 import { themeSelector } from "./actions/general";
 
