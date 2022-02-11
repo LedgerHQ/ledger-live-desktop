@@ -1,8 +1,9 @@
 // @flow
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation, useHistory } from "react-router-dom";
-import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
+import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -66,6 +67,8 @@ import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
 import { accountsSelector } from "~/renderer/reducers/accounts";
+import StyleProvider from "~/renderer/styles/StyleProvider";
+import CryptoCurrencyIcon from "./components/CryptoCurrencyIcon";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -129,20 +132,25 @@ export default function Default() {
   const selectedPalette = useSelector(themeSelector) || "light";
   const accounts = useSelector(accountsSelector);
   const dispatch = useDispatch();
+  const [hkAccounts, setHkAccounts] = useState([]);
 
-  const hkAccounts = useMemo(() => {
+  useEffect(() => {
     if (accounts.length) {
       const flatten = flattenAccounts(accounts)
         .map((a, _, arr) => {
+          const currency = getAccountCurrency(a);
           if (a.type === "Account") {
+            const childrenAccounts = arr.filter(f => f.parentId === a.id).map(f => f.id);
+            const hasChildAccounts = childrenAccounts.length > 0;
             return {
               id: a.id,
               title: a.name,
+              currency,
               parent: "accountsList",
-              children: arr.filter(f => f.parentId === a.id).map(f => f.id),
+              children: childrenAccounts,
               handler: () => {
                 history.push(`/account/${a.id}`);
-                return { keepOpen: true };
+                return { keepOpen: hasChildAccounts };
               },
             };
           }
@@ -151,6 +159,7 @@ export default function Default() {
             return {
               id: a.id,
               title: a?.token?.name ?? a.name,
+              currency,
               parent: a.parentId,
               handler: () => {
                 history.push(`/account/${a.parentId}/${a.id}`);
@@ -159,13 +168,23 @@ export default function Default() {
           }
           return undefined;
         })
-        .filter(Boolean);
+        .filter(Boolean)
+        .map(item => ({
+          ...item,
+          icon: renderToStaticMarkup(
+            <StyleProvider selectedPalette={selectedPalette}>
+              <div style={{ width: "1.5em", height: "1.5em", marginRight: "0.5em" }}>
+                <CryptoCurrencyIcon currency={item.currency} />
+              </div>
+            </StyleProvider>,
+          ),
+        }));
 
-      return flatten;
+      Promise.all(flatten).then(setHkAccounts);
+    } else {
+      setHkAccounts([]);
     }
-
-    return [];
-  }, [accounts, history]);
+  }, [accounts, history, selectedPalette]);
 
   const hkBase = useMemo(
     () => [
