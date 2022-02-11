@@ -9,13 +9,16 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "connectDevice",
+  stepId: "castDelegations",
 };
 
-class UnstakeModal extends PureComponent<{ name: string }, State> {
+class DelegationModal extends PureComponent<{ name: string }, State> {
   state = INITIAL_STATE;
+
   handleReset = () => this.setState({ ...INITIAL_STATE });
+
   handleStepChange = (stepId: StepId) => this.setState({ stepId });
+
   render() {
     const { stepId } = this.state;
     const { name } = this.props;
@@ -44,4 +47,4 @@ class UnstakeModal extends PureComponent<{ name: string }, State> {
   }
 }
 
-export default UnstakeModal;
+export default DelegationModal;

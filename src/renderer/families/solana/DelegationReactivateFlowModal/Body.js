@@ -14,10 +14,7 @@ import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type {
-  Transaction,
-  SolanaStakeWithMeta,
-} from "@ledgerhq/live-common/lib/families/solana/types";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
 
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
@@ -31,6 +28,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
+import StepDelegation, { StepDelegationFooter } from "./steps/StepDelegation";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -42,7 +40,6 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   params: {
     account: Account,
-    stakeWithMeta: SolanaStakeWithMeta,
     parentAccount: ?Account,
   },
   name: string,
@@ -60,6 +57,13 @@ type StateProps = {|
 type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
+  {
+    id: "castDelegations",
+    label: <Trans i18nKey="cosmos.delegation.flow.steps.validator.title" />,
+    component: StepDelegation,
+    noScroll: true,
+    footer: StepDelegationFooter,
+  },
   {
     id: "connectDevice",
     label: <Trans i18nKey="cosmos.delegation.flow.steps.connectDevice.title" />,
@@ -115,9 +119,10 @@ const Body = ({
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, undefined);
 
     const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
+      amount: new BigNumber(10000000),
       model: {
-        kind: "stake.undelegate",
-        uiState: { stakeAccAddr: params.stakeWithMeta.stake.stakeAccAddr },
+        kind: "stake.createAccount",
+        uiState: {},
       },
     });
 

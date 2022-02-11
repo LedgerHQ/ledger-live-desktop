@@ -228,7 +228,7 @@ function toStakeDropDownItem(stakeAction: string) {
   switch (stakeAction) {
     case "activate":
       return {
-        key: "MODAL_SOLANA_DELEGATION_ACTIVATE",
+        key: "MODAL_SOLANA_DELEGATE",
         label: <Trans i18nKey="solana.delegation.activate" />,
       };
     case "reactivate":
@@ -238,7 +238,7 @@ function toStakeDropDownItem(stakeAction: string) {
       };
     case "deactivate":
       return {
-        key: "MODAL_SOLANA_DELEGATION_DEACTIVATE",
+        key: "MODAL_SOLANA_UNDELEGATE",
         label: <Trans i18nKey="solana.delegation.undelegate" />,
       };
     case "withdraw":
