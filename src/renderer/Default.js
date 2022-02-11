@@ -222,6 +222,7 @@ export default function Default() {
         title: "List accounts",
         section: "Commands",
         hotkey: "cmd+a, ctrl+a",
+        icon: iconMarkup("List", selectedPalette),
         children: accounts.map(a => a.id),
         handler: () => {
           return { keepOpen: true };
@@ -384,15 +385,6 @@ export default function Default() {
         icon: iconMarkup("Portfolio", selectedPalette),
         handler: () => {
           history.push("/market");
-        },
-      },
-      {
-        id: "accountsList",
-        title: "List accounts",
-        icon: iconMarkup("List", selectedPalette),
-        children: accounts.map(a => a.id),
-        handler: () => {
-          return { keepOpen: true };
         },
       },
       {
