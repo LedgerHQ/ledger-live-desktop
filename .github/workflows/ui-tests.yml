@@ -175,6 +175,7 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+            tests/artifacts/performance-results
 
   ui-tests-linux-guest:
     name: "[Linux] UI"
@@ -235,6 +236,7 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+            tests/artifacts/performance-results
 
   ui-tests-windows:
     needs: cancel-previous
@@ -286,6 +288,7 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+            tests/artifacts/performance-results
   # ui-tests-macos:
   #   needs: cancel-previous
   #   name: "[macOS] UI"
@@ -337,3 +340,4 @@ jobs:
   #           tests/artifacts/html-report
   #           tests/artifacts/coverage
   #           tests/artifacts/videos
+  #           tests/artifacts/performance-results
