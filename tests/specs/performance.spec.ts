@@ -47,10 +47,7 @@ test("Performance while syncing", async ({ page }) => {
   await fs.promises.mkdir(writeDirectory, { recursive: true });
 
   fs.writeFileSync(
-    path.join(
-      "tests/artifacts/performance-results",
-      `performance-results-${dateString}-${generateUUID()}.json`,
-    ),
+    path.join(writeDirectory, `performance-results-${dateString}-${generateUUID()}.json`),
     jsonResults,
   );
 
