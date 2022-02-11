@@ -2,6 +2,9 @@ import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { Layout } from "../models/Layout";
 import { measurePerformanceInMs } from "../utils/performance-utils";
+import * as fs from "fs";
+import * as path from "path";
+import { generateUUID } from "../fixtures/common";
 
 test.use({
   userdata: "allLiveCoinsNoOperations",
@@ -24,13 +27,12 @@ test("Performance while sync", async ({ page }) => {
     return;
   }
 
-  const accountNavigation = await measurePerformanceInMs(layout.goToAccounts(), "Accounts");
-  const swapNavigation = await measurePerformanceInMs(layout.goToSwap(), "Swap");
-  const marketNavigation = await measurePerformanceInMs(layout.goToMarket(), "Market");
-
-  console.log({ accountNavigation });
-  console.log({ swapNavigation });
-  console.log({ marketNavigation });
+  const accountNavigation = await measurePerformanceInMs(
+    layout.goToAccounts(),
+    "Navigate to Accounts",
+  );
+  const swapNavigation = await measurePerformanceInMs(layout.goToSwap(), "Navigate to Swap");
+  const marketNavigation = await measurePerformanceInMs(layout.goToMarket(), "Navigate to Market");
 
   results.push(accountNavigation);
   results.push(swapNavigation);
@@ -40,7 +42,16 @@ test("Performance while sync", async ({ page }) => {
 
   const jsonResults = JSON.stringify(results);
 
-  console.log(jsonResults);
+  const today = new Date();
+  const dateString = `${today.getFullYear()}-${today.getMonth()}-${today.getDay()}`;
+
+  fs.writeFileSync(
+    path.join(
+      "tests/artifacts/performance-results",
+      `performance-results-${dateString}-${generateUUID()}.json`,
+    ),
+    jsonResults,
+  );
 
   expect(true).toBeTruthy();
 });
