@@ -69,7 +69,7 @@ function MarketRowItem({
 
   const history = useHistory();
   const { colors } = useTheme();
-  const graphColor = currency?.priceChangePercentage < 0 ? colors.error.c60 : colors.success.c60;
+  const graphColor = colors.neutral.c80;
   const allAccounts = useSelector(accountsSelector);
 
   const onCurrencyClick = useCallback(() => {

@@ -273,7 +273,7 @@
       }
     },
     "history": {
-      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live pour l'ordinateur ne sont pas synchronisées avec votre application Ledger Live pour le mobile.",
       "empty": {
         "title": "Vos swaps réalisés apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "Confirmer l'échange",
       "completed": {
-        "title": "Opération en attente",
-        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Cela peut prendre jusqu'à une heure avant que vous ne receviez vos {{targetCurrency}}.",
+        "title": "Transaction bien émise.",
+        "description": "Votre opération de swap a été envoyée au réseau pour confirmation. Veuillez attendre que votre transaction soit confirmée, puis que le prestataire traite et vous envoie vos {{targetCurrency}}.",
         "disclaimer": "Notez bien l'identifiant de votre swap au cas où vous auriez besoin de contacter <0>l'assistance de <0>{{provider}}</0></0>.",
         "seeDetails": "Voir les détails"
       }
@@ -352,7 +352,7 @@
       "history": "Historique"
     },
     "history": {
-      "disclaimer": "Vos transactions swap sur Ledger Live ordinateur ne sont pas synchronisées avec votre application Ledger Live mobile.",
+      "disclaimer": "Vos transactions swap sur Ledger Live pour l'ordinateur ne sont pas synchronisées avec votre application Ledger Live pour le mobile.",
       "empty": {
         "title": "Vos swaps réalisés apparaîtront ici.",
         "description": "Vous n'avez pas encore effectué de swaps ou Ledger Live a été réinitialisé depuis votre dernier swap."
@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "Connecter",
         "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
-        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :"
+        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :",
+        "noEthAccount": "Vous n'avez pas de compte Ethereum. Veuillez ajouter un compte Ethereum pour utiliser WalletConnect.",
+        "alreadyConnected": "Ledger Live est déjà connecté à une dApp. Veuillez vous déconnecter de la dApp actuellement connectée, puis connectez Ledger Live à la nouvelle dApp."
       }
     },
     "connectedscreen": {
@@ -1188,7 +1190,7 @@
       "title": "Filtres",
       "show": "Afficher",
       "all": "Tout",
-      "isLedgerCompatible": "Compatible Ledger Live",
+      "isLedgerCompatible": "Compatible avec Ledger Live",
       "isFavorite": "Actifs favoris",
       "applyFilters": "Appliquer filtres",
       "clearAll": "Tout effacer"
@@ -1201,12 +1203,12 @@
       "last7d": "7 derniers jours"
     },
     "detailsPage": {
-      "priceStatistics": "Cours",
+      "priceStatistics": "Statistiques du cours",
       "tradingVolume": "Volume de trading",
-      "24hLowHight": "24h Bas / 24h Haut",
+      "24hLowHight": "+ Haut / + Bas (24h)",
       "7dLowHigh": "7j Bas / 7j Haut",
-      "allTimeHigh": "+ Haut",
-      "allTimeLow": "+ Bas",
+      "allTimeHigh": "+ Haut (historique)",
+      "allTimeLow": "+ Bas (historique)",
       "marketCapRank": "Rang",
       "marketCapDominance": "Position dominante",
       "supply": "Offre",
@@ -1222,11 +1224,11 @@
       "1W_label": "1S",
       "1M_label": "1M",
       "1Y_label": "1A",
-      "1h": "1h",
-      "24h": "24h",
-      "7d": "7j",
-      "30d": "30j",
-      "1y": "1a",
+      "1h": "1H",
+      "24h": "24H",
+      "7d": "7J",
+      "30d": "30J",
+      "1y": "1A",
       "1H_selectorLabel": "Heure passée",
       "1D_selectorLabel": "Dernières 24h",
       "1W_selectorLabel": "Semaine passée",
@@ -1259,7 +1261,7 @@
         "description": "Description",
         "tokenAddress": "Adresse du token",
         "tokenId": "Identifiant du token",
-        "quantity": "Quantité"
+        "quantity": "Nombre"
       }
     },
     "collections": {
@@ -1322,8 +1324,8 @@
       "successDescPlu": "Vos comptes {{assets}} sont maintenant à jour et prêts à être utilisés.",
       "successDesc": "Votre compte {{assets}} est maintenant à jour et prêt à être utilisé.",
       "mobileTitle": "Exporter les comptes vers l'application mobile",
-      "mobileDesc": "Appuyez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live mobile.",
-      "mobileCTA": "Exporter vers Ledger Live mobile",
+      "mobileDesc": "Appuyez sur le bouton ci-dessous pour exporter vos comptes mis à jour vers l'application Ledger Live pour le mobile.",
+      "mobileCTA": "Exporter vers Ledger Live pour le mobile",
       "description": "Mettez vos comptes à jour pour bénéficier des nouvelles fonctionnalités de Ledger Live.",
       "currency": "Mise à jour nécessaire pour 1 compte {{currency}}",
       "currency_plural": "Mise à jour nécessaire pour {{count}} comptes {{currency}}",
@@ -1433,7 +1435,7 @@
       "name": "Nom du token",
       "contract": "Contrat du token",
       "id": "Identifiant token (NFT)",
-      "quantity": "Quantité"
+      "quantity": "Nombre"
     },
     "extra": {
       "frozenAmount": "Montant gelé",
@@ -1481,7 +1483,7 @@
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} sur votre appareil. Merci d'aller dans le Gestionnaire pour mettre à jour.",
     "installApp": "Installation de l'application {{appName}}",
     "installAppDescription": "Merci d'attendre la fin de l'installation.",
-    "listApps": "Vérification en cours des dépendances des applications",
+    "listApps": "Vérification en cours des applications nécessaires",
     "listAppsDescription": "Merci de patienter pendant que nous nous assurons que vous avez toutes les applications requises.",
     "swap": {
       "notice": "Vérifiez les détails du swap sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
@@ -1505,6 +1507,10 @@
     "sell": {
       "notice": "Vérifiez les détails de la vente sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
       "confirm": "Confirmer la transaction de vente"
+    },
+    "fund": {
+      "notice": "Vérifiez les détails du dépôt sur votre appareil avant de l'envoyer. Les adresses sont échangées de manière sécurisée afin que vous n'ayez pas à les vérifier.",
+      "confirm": "Confirmer la transaction de dépôt"
     }
   },
   "manager": {
@@ -1589,7 +1595,8 @@
         "tokenAppDisclaimer": "Pour gérer des tokens {{tokenName}} {{tokenType}}, <1>installez l'application {{appName}}</1> et vérifiez que vous avez bien la <1>version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
-        "intallParentApp": "Installer l'application {{appName}}"
+        "intallParentApp": "Installer l'application {{appName}}",
+        "platform": "Accéder à l'application"
       },
       "uninstall": {
         "title": "Tout désinstaller",
@@ -1843,7 +1850,7 @@
         "fees": "Frais",
         "standard": "Standard",
         "advanced": "Avancé",
-        "nftQuantity": "Quantité"
+        "nftQuantity": "Nombre"
       },
       "summary": {
         "title": "Récapitulatif"
@@ -1867,7 +1874,7 @@
         "ethereumGasPrice": "Prix du gaz",
         "unitPerByte": "{{unit}} par byte",
         "nft": "NFT",
-        "nftQuantity": "Quantité"
+        "nftQuantity": "Nombre"
       },
       "verification": {
         "streaming": {
@@ -2543,7 +2550,7 @@
     "durationDays": "{{count}} jour",
     "durationDays_plural": "{{count}} jours",
     "howItWorks": "Fonctionnement de la délégation",
-    "delegationEarn": "Gagnez des récompenses de staking de {{name}} en déléguant votre compte.",
+    "delegationEarn": "Gagnez des récompenses de staking {{name}} en déléguant votre compte.",
     "earnRewards": "Gagner des récompenses",
     "overdelegated": "Surdélégué",
     "status": "Statut",
@@ -2636,7 +2643,7 @@
     "export": {
       "accounts": {
         "title": "Exporter les comptes",
-        "desc": "Ajoutez vos comptes dans Ledger Live mobile. Vos comptes se synchroniseront avec la blockchain, pas entre les applications Ledger Live mobile et ordinateur.",
+        "desc": "Ajoutez vos comptes dans Ledger Live pour le mobile. Vos comptes se synchroniseront avec la blockchain, pas entre les applications Ledger Live pour le mobile et pour l'ordinateur.",
         "button": "Exporter"
       },
       "operations": {
@@ -2646,7 +2653,7 @@
       "modal": {
         "button": "Terminé",
         "title": "Scanner pour exporter vers un mobile",
-        "listTitle": "Sur l'application mobile Ledger Live :",
+        "listTitle": "Sur l'application Ledger Live pour le mobile :",
         "step1": "Appuyez sur <highlight><icon>+</icon></highlight> dans <highlight>Comptes</highlight>.",
         "step2": "Appuyez sur <highlight>Importer les comptes de l'ordinateur</highlight>.",
         "step3": "Scannez le <highlight>code QR</highlight> jusqu'à ce que la barre soit à 100 %."
@@ -2711,7 +2718,7 @@
       "reportErrors": "Rapports de bugs",
       "reportErrorsDesc": "Envoyer automatiquement des rapports pour aider Ledger à améliorer ses produits.",
       "launchOnboarding": "Configuration de votre appareil",
-      "launchOnboardingDesc": "Configurer un nouvel appareil ou restaurer un appareil existant. Vos comptes et paramètres sont conservés."
+      "launchOnboardingDesc": "Configurez un nouvel appareil ou restaurez un appareil existant. Vos comptes et paramètres sont conservés."
     },
     "help": {
       "version": "Version",
@@ -2731,9 +2738,13 @@
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
         },
-        "experimentalCurrencies": {
-          "title": "Utiliser des implémentations JS expérimentales",
+        "experimentalJSCurrencies": {
+          "title": "Implémentations JS expérimentales",
           "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
+        },
+        "experimentalCurrencies": {
+          "title": "Intégrations expérimentales",
+          "description": "Utilisez l'intégration expérimentale de Solana."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2764,7 +2775,7 @@
     "hardResetModal": {
       "title": "Réinitialiser Ledger Live",
       "desc": "Réinitialisez Ledger Live pour effacer tous vos paramètres et comptes de votre ordinateur. Vous pouvez ensuite choisir votre mot de passe et rajouter vos comptes avec votre appareil Ledger. Les clés privées donnant accès à vos crypto-actifs restent protégées sur votre appareil Ledger. Elles sont également sauvegardées grâce à votre phrase de récupération.",
-      "warning": "Réinitialiser Ledger Live effacera l'historique de vos transactions de swap de tous vos comptes."
+      "warning": "La réinitialisation de Ledger Live effacera l'historique des transactions de swap de tous vos comptes."
     },
     "softResetModal": {
       "title": "Vider le cache",
@@ -2781,7 +2792,7 @@
     "removeAccountModal": {
       "title": "Supprimer le compte",
       "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-      "warning": "Supprimer ce compte effacera l'historique de vos transactions de swap avec ce dernier."
+      "warning": "La suppression de ce compte effacera l'historique de vos transactions de swap avec ce dernier."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
@@ -2839,7 +2850,7 @@
     },
     "disablePassword": {
       "title": "Désactiver le verrouillage par mot de passe",
-      "desc": "Les données Ledger Live seront stockées sur votre ordinateur sans être chiffrées. Ces données comprennent les noms, transactions et adresses publiques de vos comptes."
+      "desc": "Les données de Ledger Live seront stockées sur votre ordinateur sans être chiffrées. Ces données comprennent les noms, transactions et adresses publiques de vos comptes."
     }
   },
   "update": {
@@ -2876,7 +2887,7 @@
   "language": {
     "system": "Utiliser la langue du système",
     "switcher": {
-      "en": "Anglais",
+      "en": "English",
       "fr": "Français",
       "ru": "Русский",
       "es": "Español",
@@ -2991,7 +3002,7 @@
     },
     "screens": {
       "welcome": {
-        "title": "Bienvenue sur Ledger Live",
+        "title": "Bienvenue chez Ledger",
         "description": "Gérez vos cryptos en toute sécurité depuis votre ordinateur.",
         "cta": "Commencer",
         "noDevice": "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
@@ -3821,6 +3832,9 @@
     "PasswordIncorrect": {
       "title": "Mot de passe incorrect",
       "description": "Veuillez réessayer."
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "Le nombre doit être supérieur à 0."
     },
     "RPCHostRequired": {
       "title": "Hôte requis."

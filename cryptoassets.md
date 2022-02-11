@@ -399,7 +399,7 @@
 | Binance Smart Chain | MDT | 0x668DB7aa38eaC6B40c9D13dBE61361DC4c4611d1 | Measurable Data Token | countervalues disabled | bsc/bep20/measurable_data_token |
 | Binance Smart Chain | HERO | 0xD40bEDb44C081D2935eebA6eF5a3c8A31A1bBE13 | Metahero |  | bsc/bep20/metahero |
 | Binance Smart Chain | MILK | 0x8E9f5173e16Ff93F81579d73A7f9723324d6B6aF | Milk Protocol | countervalues disabled | bsc/bep20/milk_protocol |
-| Binance Smart Chain | MIST | 0x68E374F856bF25468D365E539b700b648Bf94B67 | Mist |  | bsc/bep20/mist |
+| Binance Smart Chain | MIST | 0x68E374F856bF25468D365E539b700b648Bf94B67 | Mist | countervalues disabled | bsc/bep20/mist |
 | Binance Smart Chain | MIX | 0xB67754f5b4C704A24d2db68e661b2875a4dDD197 | Mix |  | bsc/bep20/mix |
 | Binance Smart Chain | MBOX | 0x3203c9E46cA618C8C1cE5dC67e7e9D75f5da2377 | Mobox |  | bsc/bep20/mobox |
 | Binance Smart Chain | MDA | 0xd72aA9e1cDDC2F6D6e0444580002170fbA1f8eED | Moeda Loyalty Points | countervalues disabled | bsc/bep20/moeda_loyalty_points |
@@ -4857,7 +4857,7 @@
 | Ethereum | RSV | 0x196f4727526eA7FB1e17b2071B3d8eAA38486988 | Reserve | countervalues disabled | ethereum/erc20/reserve |
 | Ethereum | RSV | 0x1C5857e110CD8411054660F60B5De6a6958CfAE2 | Reserve (old) | delisted, countervalues disabled | ethereum/erc20/reserve_ |
 | Ethereum | RSR | 0x320623b8E4fF03373931769A31Fc52A4E78B5d70 | Reserve Rights |  | ethereum/erc20/reserve_rights |
-| Ethereum | RSR_ | 0x8762db106B2c2A0bccB3A80d1Ed41273552616E8 | Reserve Rights |  | ethereum/erc20/reserve_rights_old |
+| Ethereum | RSR_ | 0x8762db106B2c2A0bccB3A80d1Ed41273552616E8 | Reserve Rights (legacy) |  | ethereum/erc20/reserve_rights_old |
 | Ethereum | RES | 0x0a9f693FcE6F00A51A8e0db4351B5a8078B4242e | Resfinex |  | ethereum/erc20/resfinex |
 | Ethereum | REST | 0x6753795d67eD0b2b65B57FC45C7Ac0F53b55f4FE | Restore |  | ethereum/erc20/restore |
 | Ethereum | REV | 0x2ef52Ed7De8c5ce03a4eF0efbe9B7450F2D7Edc9 | Revain | delisted, countervalues disabled | ethereum/erc20/revain |

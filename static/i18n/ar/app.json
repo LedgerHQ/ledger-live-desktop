@@ -332,8 +332,8 @@
     "exchangeDrawer": {
       "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "عملية معلقة",
-        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الأمر مدة تصل إلى ساعة قبل أن تتلقى {{targetCurrency}}.",
+        "title": "Transaction broadcast successfully",
+        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
         "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
         "seeDetails": "رؤية التفاصيل"
       }
@@ -1130,7 +1130,9 @@
       "confirm": {
         "title": "اتصال",
         "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:"
+        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:",
+        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
     "connectedscreen": {
@@ -1505,6 +1507,10 @@
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
       "confirm": "تأكيد معاملة البيع"
+    },
+    "fund": {
+      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
+      "confirm": "Confirm Fund transaction"
     }
   },
   "manager": {
@@ -1589,7 +1595,8 @@
         "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> ويرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
-        "intallParentApp": "تثبيت تطبيق {{appName}}"
+        "intallParentApp": "تثبيت تطبيق {{appName}}",
+        "platform": "Go to app"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
@@ -2731,9 +2738,13 @@
           "title": "استخدم TronGrid.io",
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
+        "experimentalJSCurrencies": {
+          "title": "Experimental JS implementations",
+          "description": "Use experimental JS implementations for Algorand and Tezos."
+        },
         "experimentalCurrencies": {
-          "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدم عمليات تنفيذ JS التجريبية لAlgorand و Tezos."
+          "title": "Experimental integrations",
+          "description": "Use experimental integration of Solana."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -3821,6 +3832,9 @@
     "PasswordIncorrect": {
       "title": "كلمة المرور التي تم إدخالها غير صحيحة",
       "description": "يرجى إعادة المحاولة"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "The quantity needs to be greater than 0"
     },
     "RPCHostRequired": {
       "title": "المضيف مطلوب."

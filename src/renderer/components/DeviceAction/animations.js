@@ -56,6 +56,10 @@ const nanoX = {
     light: require("~/renderer/animations/nanoX/7Validate/light.json"),
     dark: require("~/renderer/animations/nanoX/7Validate/dark.json"),
   },
+  firmwareUpdating: {
+    light: require("~/renderer/animations/nanoX/2FirmwareUpdating/light.json"),
+    dark: require("~/renderer/animations/nanoX/2FirmwareUpdating/dark.json"),
+  },
 };
 
 const blue = {
@@ -77,6 +81,11 @@ const blue = {
   validate: {
     light: require("~/renderer/animations/blue/7Validate/data.json"),
   },
+  // Nb We are dropping the assets for blue soon, this is temp
+  firmwareUpdating: {
+    light: require("~/renderer/animations/nanoS/2FirmwareUpdating/light.json"),
+    dark: require("~/renderer/animations/nanoS/2FirmwareUpdating/dark.json"),
+  },
 };
 
 const animations = { nanoX, nanoS, blue };
@@ -89,12 +98,7 @@ export const getDeviceAnimation = (
   key: InferredKeys,
 ) => {
   const lvl1 = animations[modelId] || animations.nanoX;
-  let lvl2;
-  if (key === "firmwareUpdating") {
-    lvl2 = animations.nanoS[key];
-  } else {
-    lvl2 = lvl1[key] || animations.nanoX[key];
-  }
+  const lvl2 = lvl1[key] || animations.nanoX[key];
   if (theme === "dark" && lvl2.dark) return lvl2.dark;
   return lvl2.light;
 };
