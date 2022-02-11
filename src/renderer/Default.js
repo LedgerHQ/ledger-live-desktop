@@ -148,6 +148,7 @@ export default function Default() {
               currency,
               parent: "accountsList",
               children: childrenAccounts,
+              section: "Accounts",
               handler: () => {
                 history.push(`/account/${a.id}`);
                 return { keepOpen: hasChildAccounts };
@@ -161,6 +162,7 @@ export default function Default() {
               title: a?.token?.name ?? a.name,
               currency,
               parent: a.parentId,
+              section: "Accounts",
               handler: () => {
                 history.push(`/account/${a.parentId}/${a.id}`);
               },
@@ -189,9 +191,19 @@ export default function Default() {
   const hkBase = useMemo(
     () => [
       {
+        id: "accountsList",
+        title: "List accounts",
+        section: "Commands",
+        children: accounts.map(a => a.id),
+        handler: () => {
+          return { keepOpen: true };
+        },
+      },
+      {
         id: "Home",
         title: "Open Home",
         hotkey: "cmd+h",
+        section: "Navigation",
         handler: () => {
           history.push("/");
         },
@@ -199,6 +211,7 @@ export default function Default() {
       {
         id: "Theme",
         title: "Change theme...",
+        section: "Commands",
         children: ["Light Theme", "Dark Theme"],
         handler: () => {
           return { keepOpen: true };
@@ -208,6 +221,7 @@ export default function Default() {
         id: "Open Ledger Support",
         title: "Open  Ledger Support",
         hotkey: "cmd+s",
+        section: "Commands",
         handler: () => {
           openURL(urls.faq);
         },
@@ -215,6 +229,7 @@ export default function Default() {
       {
         id: "Analytics",
         title: "Analytics...",
+        section: "Commands",
         children: ["Enable Analytics", "Disable Analytics"],
         handler: () => {
           return { keepOpen: true };
@@ -224,6 +239,7 @@ export default function Default() {
         id: "Enable Analytics",
         title: "Enable Analytics",
         parent: "Analytics",
+        section: "Commands",
         handler: () => {
           dispatch(setShareAnalytics(true));
         },
@@ -232,6 +248,7 @@ export default function Default() {
         id: "Disable Analytics",
         title: "Disable Analytics",
         parent: "Analytics",
+        section: "Commands",
         handler: () => {
           dispatch(setShareAnalytics(false));
         },
@@ -239,7 +256,9 @@ export default function Default() {
       {
         id: "Light Theme",
         title: "Change theme to Light",
+        keyword: "light",
         parent: "Theme",
+        section: "Commands",
         handler: () => {
           dispatch(setTheme("light"));
         },
@@ -247,8 +266,9 @@ export default function Default() {
       {
         id: "Dark Theme",
         title: "Change theme to Dark",
-        keywords: "lol",
+        keyword: "dark",
         parent: "Theme",
+        section: "Commands",
         handler: () => {
           dispatch(setTheme("dark"));
         },
@@ -256,6 +276,7 @@ export default function Default() {
       {
         id: "settings",
         title: "Settings Page",
+        section: "Navigation",
         handler: () => {
           history.push("/settings");
         },
@@ -263,6 +284,7 @@ export default function Default() {
       {
         id: "accounts",
         title: "Accounts Page",
+        section: "Navigation",
         handler: () => {
           history.push("/accounts");
         },
@@ -270,6 +292,7 @@ export default function Default() {
       {
         id: "card",
         title: "Ledger Card Page",
+        section: "Navigation",
         handler: () => {
           history.push("/card");
         },
@@ -277,6 +300,7 @@ export default function Default() {
       {
         id: "manager",
         title: "Manager Page",
+        section: "Navigation",
         handler: () => {
           history.push("/manager");
         },
@@ -284,6 +308,7 @@ export default function Default() {
       {
         id: "platform",
         title: "Platform Page",
+        section: "Navigation",
         handler: () => {
           history.push("/platform");
         },
@@ -291,6 +316,7 @@ export default function Default() {
       {
         id: "lend",
         title: "Lend Page",
+        section: "Navigation",
         handler: () => {
           history.push("/lend");
         },
@@ -298,6 +324,7 @@ export default function Default() {
       {
         id: "exchange",
         title: "Buy Page",
+        section: "Navigation",
         handler: () => {
           history.push("/exchange");
         },
@@ -305,6 +332,7 @@ export default function Default() {
       {
         id: "swap",
         title: "Swap Page",
+        section: "Navigation",
         handler: () => {
           history.push("/swap");
         },
@@ -312,16 +340,9 @@ export default function Default() {
       {
         id: "market",
         title: "Market Page",
+        section: "Navigation",
         handler: () => {
           history.push("/market");
-        },
-      },
-      {
-        id: "accountsList",
-        title: "List accounts",
-        children: accounts.map(a => a.id),
-        handler: () => {
-          return { keepOpen: true };
         },
       },
     ],
