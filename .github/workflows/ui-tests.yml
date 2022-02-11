@@ -151,9 +151,9 @@ jobs:
       - name: run ui tests (Linux)
         if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
-       - name: run ui perf tests (Linux)
+      - name: run ui tests (Linux) perf
         if: always()
-        run: xvfb-run --auto-servernum -- yarn playwright tests/specs/performance.spec.ts  
+        run: xvfb-run --auto-servernum -- yarn playwright tests/specs/performance.spec.ts
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
@@ -279,8 +279,8 @@ jobs:
         run: yarn build
       - name: run ui tests (windows)
         run: yarn playwright
-      - name: run ui perf tests (windows)
-        run: yarn playwright tests/specs/performance.spec.ts  
+      - name: run ui tests (windows) perf
+        run: yarn playwright tests/specs/performance.spec.ts
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
@@ -305,10 +305,6 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
-      - name: print directories
-        run: echo 'ls -a'
-      - name: print perf folder
-        run: echo 'ls -a tests/artifacts'
       - name: upload performance results
         if: always()
         uses: actions/upload-artifact@v2
