@@ -221,9 +221,6 @@ jobs:
       - name: run ui tests (Linux)
         if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
-      - name: run ui perf tests (Linux)
-        if: always()
-        run: xvfb-run --auto-servernum -- yarn playwright tests/specs/performance.spec.ts 
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
