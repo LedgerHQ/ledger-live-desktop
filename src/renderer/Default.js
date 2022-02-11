@@ -206,6 +206,7 @@ export default function Default() {
         id: "accountsList",
         title: "List accounts",
         section: "Commands",
+        hotkey: "cmd+a, ctrl+a",
         children: accounts.map(a => a.id),
         handler: () => {
           return { keepOpen: true };
@@ -214,7 +215,7 @@ export default function Default() {
       {
         id: "Home",
         title: "Open Home",
-        hotkey: "cmd+h",
+        hotkey: "cmd+h, ctrl+h",
         section: "Navigation",
         handler: () => {
           history.push("/");
@@ -232,7 +233,6 @@ export default function Default() {
       {
         id: "Open Ledger Support",
         title: "Open  Ledger Support",
-        hotkey: "cmd+s",
         section: "Commands",
         handler: () => {
           openURL(urls.faq);
@@ -288,6 +288,7 @@ export default function Default() {
       {
         id: "settings",
         title: "Settings Page",
+        hotkey: "cmd+s, ctrl+s",
         section: "Navigation",
         handler: () => {
           history.push("/settings");
