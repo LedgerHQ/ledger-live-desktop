@@ -101,7 +101,7 @@ module.exports = {
       },
       {
         test: /\.js$/i,
-        loader: require.resolve('@open-wc/webpack-import-meta-loader'),
+        loader: require.resolve("@open-wc/webpack-import-meta-loader"),
       },
       {
         test: /\.css$/i,
@@ -121,11 +121,11 @@ module.exports = {
             ],
           }
         : {
-            test: /\.(woff|woff2|eot|ttf|otf)$/i,
+            test: /\.(woff|woff2|eot|ttf|otf|mp3|gif)$/i,
             use: ["file-loader"],
           },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|svg)$/i,
         use: {
           loader: "url-loader",
           options: {
