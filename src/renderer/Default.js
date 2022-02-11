@@ -1,7 +1,9 @@
 // @flow
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation, useHistory } from "react-router-dom";
+import { flattenAccounts, getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -64,6 +66,9 @@ import { themeSelector } from "./actions/general";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import { supportedCountervalues } from "~/renderer/reducers/settings";
+import { accountsSelector } from "~/renderer/reducers/accounts";
+import StyleProvider from "~/renderer/styles/StyleProvider";
+import CryptoCurrencyIcon from "./components/CryptoCurrencyIcon";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -129,7 +134,6 @@ function getCountervaluesHotkeys(supportedCountervalues, dispatch) {
   }));
 }
 
-
 export default function Default() {
   const location = useLocation();
   const history = useHistory();
@@ -137,6 +141,211 @@ export default function Default() {
   useDeeplink();
   useUSBTroubleshooting();
   const selectedPalette = useSelector(themeSelector) || "light";
+  const accounts = useSelector(accountsSelector);
+  const dispatch = useDispatch();
+  const [hkAccounts, setHkAccounts] = useState([]);
+
+  useEffect(() => {
+    if (accounts.length) {
+      const flatten = flattenAccounts(accounts)
+        .map((a, _, arr) => {
+          const currency = getAccountCurrency(a);
+          if (a.type === "Account") {
+            const childrenAccounts = arr.filter(f => f.parentId === a.id).map(f => f.id);
+            const hasChildAccounts = childrenAccounts.length > 0;
+            return {
+              id: a.id,
+              title: a.name,
+              currency,
+              parent: "accountsList",
+              children: childrenAccounts,
+              handler: () => {
+                history.push(`/account/${a.id}`);
+                return { keepOpen: hasChildAccounts };
+              },
+            };
+          }
+
+          if (a.type === "TokenAccount" || a.type === "ChildAccount") {
+            return {
+              id: a.id,
+              title: a?.token?.name ?? a.name,
+              currency,
+              parent: a.parentId,
+              handler: () => {
+                history.push(`/account/${a.parentId}/${a.id}`);
+              },
+            };
+          }
+          return undefined;
+        })
+        .filter(Boolean)
+        .map(item => ({
+          ...item,
+          icon: renderToStaticMarkup(
+            <StyleProvider selectedPalette={selectedPalette}>
+              <div style={{ width: "1.5em", height: "1.5em", marginRight: "0.5em" }}>
+                <CryptoCurrencyIcon currency={item.currency} />
+              </div>
+            </StyleProvider>,
+          ),
+        }));
+
+      Promise.all(flatten).then(setHkAccounts);
+    } else {
+      setHkAccounts([]);
+    }
+  }, [accounts, history, selectedPalette]);
+
+  const hkBase = useMemo(
+    () => [
+      {
+        id: "Home",
+        title: "Open Home",
+        hotkey: "cmd+h",
+        handler: () => {
+          history.push("/");
+        },
+      },
+      {
+        id: "Theme",
+        title: "Change theme...",
+        children: ["Light Theme", "Dark Theme"],
+        handler: () => {
+          return { keepOpen: true };
+        },
+      },
+      {
+        id: "Open Ledger Support",
+        title: "Open  Ledger Support",
+        hotkey: "cmd+s",
+        handler: () => {
+          openURL(urls.faq);
+        },
+      },
+      {
+        id: "Analytics",
+        title: "Analytics...",
+        children: ["Enable Analytics", "Disable Analytics"],
+        handler: () => {
+          return { keepOpen: true };
+        },
+      },
+      {
+        id: "Enable Analytics",
+        title: "Enable Analytics",
+        parent: "Analytics",
+        handler: () => {
+          dispatch(setShareAnalytics(true));
+        },
+      },
+      {
+        id: "Disable Analytics",
+        title: "Disable Analytics",
+        parent: "Analytics",
+        handler: () => {
+          dispatch(setShareAnalytics(false));
+        },
+      },
+      {
+        id: "Light Theme",
+        title: "Change theme to Light",
+        parent: "Theme",
+        handler: () => {
+          dispatch(setTheme("light"));
+        },
+      },
+      {
+        id: "Dark Theme",
+        title: "Change theme to Dark",
+        keywords: "lol",
+        parent: "Theme",
+        handler: () => {
+          dispatch(setTheme("dark"));
+        },
+      },
+      {
+        id: "settings",
+        title: "Settings Page",
+        handler: () => {
+          history.push("/settings");
+        },
+      },
+      {
+        id: "accounts",
+        title: "Accounts Page",
+        handler: () => {
+          history.push("/accounts");
+        },
+      },
+      {
+        id: "card",
+        title: "Ledger Card Page",
+        handler: () => {
+          history.push("/card");
+        },
+      },
+      {
+        id: "manager",
+        title: "Manager Page",
+        handler: () => {
+          history.push("/manager");
+        },
+      },
+      {
+        id: "platform",
+        title: "Platform Page",
+        handler: () => {
+          history.push("/platform");
+        },
+      },
+      {
+        id: "lend",
+        title: "Lend Page",
+        handler: () => {
+          history.push("/lend");
+        },
+      },
+      {
+        id: "exchange",
+        title: "Buy Page",
+        handler: () => {
+          history.push("/exchange");
+        },
+      },
+      {
+        id: "swap",
+        title: "Swap Page",
+        handler: () => {
+          history.push("/swap");
+        },
+      },
+      {
+        id: "market",
+        title: "Market Page",
+        handler: () => {
+          history.push("/market");
+        },
+      },
+      {
+        id: "accountsList",
+        title: "List accounts",
+        children: accounts.map(a => a.id),
+        handler: () => {
+          return { keepOpen: true };
+        },
+      },
+      {
+        id: "countervalues",
+        title: "Change preferred currency...",
+        children: supportedCountervalues.map(countervalue => countervalue.currency.ticker),
+      },
+      ...getCountervaluesHotkeys(supportedCountervalues, dispatch),
+    ],
+    [history, dispatch, accounts],
+  );
+
+  const hotkeys = useMemo(() => [...hkBase, ...hkAccounts], [hkBase, hkAccounts]);
 
   // every time location changes, scroll back up
   useEffect(() => {
@@ -145,151 +354,13 @@ export default function Default() {
     }
   }, [location]);
 
-  console.log(supportedCountervalues[0]);
-
-  const dispatch = useDispatch();
-
   const ninjaKeys = useRef(null);
-  const [hotkeys, setHotkeys] = useState([
-    {
-      id: "Home",
-      title: "Open Home",
-      hotkey: "cmd+h",
-      mdIcon: "home",
-      handler: () => {
-        history.push("/");
-      },
-    },
-    {
-      id: "Theme",
-      title: "Change theme...",
-      mdIcon: "desktop_windows",
-      children: ["Light Theme", "Dark Theme"],
-    },
-    {
-      id: "Open Ledger Support",
-      title: "Open  Ledger Support",
-      hotkey: "cmd+s",
-      handler: () => {
-        openURL(urls.faq);
-      },
-    },
-    {
-      id: "Analytics",
-      title: "Analytics...",
-      children: ["Enable Analytics", "Disable Analytics"],
-    },
-    {
-      id: "Enable Analytics",
-      title: "Enable Analytics",
-      parent: "Analytics",
-      handler: () => {
-        dispatch(setShareAnalytics(true));
-      },
-    },
-    {
-      id: "Disable Analytics",
-      title: "Disable Analytics",
-      parent: "Analytics",
-      handler: () => {
-        dispatch(setShareAnalytics(false));
-      },
-    },
-    {
-      id: "Light Theme",
-      title: "Change theme to Light",
-      mdIcon: "light_mode",
-      parent: "Theme",
-      handler: () => {
-        dispatch(setTheme("light"));
-      },
-    },
-    {
-      id: "Dark Theme",
-      title: "Change theme to Dark",
-      mdIcon: "dark_mode",
-      keywords: "lol",
-      parent: "Theme",
-      handler: () => {
-        dispatch(setTheme("dark"));
-      },
-    },
-    {
-      id: "settings",
-      title: "Settings Page",
-      handler: () => {
-        history.push("/settings");
-      },
-    },
-    {
-      id: "accounts",
-      title: "Accounts Page",
-      handler: () => {
-        history.push("/accounts");
-      },
-    },
-    {
-      id: "card",
-      title: "Ledger Card Page",
-      handler: () => {
-        history.push("/card");
-      },
-    },
-    {
-      id: "manager",
-      title: "Manager Page",
-      handler: () => {
-        history.push("/manager");
-      },
-    },
-    {
-      id: "platform",
-      title: "Platform Page",
-      handler: () => {
-        history.push("/platform");
-      },
-    },
-    {
-      id: "lend",
-      title: "Lend Page",
-      handler: () => {
-        history.push("/lend");
-      },
-    },
-    {
-      id: "exchange",
-      title: "Buy Page",
-      handler: () => {
-        history.push("/exchange");
-      },
-    },
-    {
-      id: "swap",
-      title: "Swap Page",
-      handler: () => {
-        history.push("/swap");
-      },
-    },
-    {
-      id: "market",
-      title: "Market Page",
-      handler: () => {
-        history.push("/market");
-      },
-    },
-    {
-      id: "countervalues",
-      title: "Change preferred currency...",
-      children: supportedCountervalues.map(countervalue => countervalue.currency.ticker),
-    },
-    ...getCountervaluesHotkeys(supportedCountervalues, dispatch),
-  ]);
 
   useEffect(() => {
     if (ninjaKeys.current) {
       ninjaKeys.current.data = hotkeys;
     }
-  }, []);
+  }, [hotkeys]);
 
   return (
     <>
