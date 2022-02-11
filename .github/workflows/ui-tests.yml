@@ -175,6 +175,12 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-linux
+          path: |
             tests/artifacts/performance-results
 
   ui-tests-linux-guest:
@@ -236,6 +242,12 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-linux
+          path: |
             tests/artifacts/performance-results
 
   ui-tests-windows:
@@ -288,6 +300,12 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-windows
+          path: |
             tests/artifacts/performance-results
   # ui-tests-macos:
   #   needs: cancel-previous
@@ -340,4 +358,3 @@ jobs:
   #           tests/artifacts/html-report
   #           tests/artifacts/coverage
   #           tests/artifacts/videos
-  #           tests/artifacts/performance-results
