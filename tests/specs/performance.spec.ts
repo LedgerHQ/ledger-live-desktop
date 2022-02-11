@@ -46,6 +46,10 @@ test("Performance while sync", async ({ page }) => {
   const dateString = `${today.getFullYear()}-${today.getMonth()}-${today.getDay()}`;
 
   console.log("--------> Writing performance results<--------");
+
+  const writeDirectory = "tests/artifacts/performance-results";
+  await fs.promises.mkdir(writeDirectory, { recursive: true });
+
   fs.writeFileSync(
     path.join(
       "tests/artifacts/performance-results",
