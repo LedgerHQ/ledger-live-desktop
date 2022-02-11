@@ -69,6 +69,7 @@ import { supportedCountervalues } from "~/renderer/reducers/settings";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import StyleProvider from "~/renderer/styles/StyleProvider";
 import CryptoCurrencyIcon from "./components/CryptoCurrencyIcon";
+import { Icons, Flex } from "@ledgerhq/react-ui";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -122,6 +123,20 @@ const NightlyLayerR = () => {
 };
 
 const NightlyLayer = React.memo(NightlyLayerR);
+
+const ICONS = {};
+function iconMarkup(prefix, selectedPalette) {
+  const name = prefix + "Medium";
+  if (ICONS[name]) return ICONS[name];
+  const Icon = Icons[name];
+  return renderToStaticMarkup(
+    <StyleProvider selectedPalette={selectedPalette}>
+      <div style={{ marginRight: "10px", display: "flex" }}>
+        <Icon />
+      </div>
+    </StyleProvider>,
+  );
+}
 
 function getCountervaluesHotkeys(supportedCountervalues, dispatch) {
   return supportedCountervalues.map(countervalue => ({
@@ -217,6 +232,7 @@ export default function Default() {
         title: "Open Home",
         hotkey: "cmd+h, ctrl+h",
         section: "Navigation",
+        icon: iconMarkup("House", selectedPalette),
         handler: () => {
           history.push("/");
         },
@@ -226,6 +242,7 @@ export default function Default() {
         title: "Change theme...",
         section: "Commands",
         children: ["Light Theme", "Dark Theme"],
+        icon: iconMarkup("Instagram", selectedPalette),
         handler: () => {
           return { keepOpen: true };
         },
@@ -234,6 +251,7 @@ export default function Default() {
         id: "Open Ledger Support",
         title: "Open  Ledger Support",
         section: "Commands",
+        icon: iconMarkup("Phone", selectedPalette),
         handler: () => {
           openURL(urls.faq);
         },
@@ -243,6 +261,7 @@ export default function Default() {
         title: "Analytics...",
         section: "Commands",
         children: ["Enable Analytics", "Disable Analytics"],
+        icon: iconMarkup("Logs", selectedPalette),
         handler: () => {
           return { keepOpen: true };
         },
@@ -290,6 +309,7 @@ export default function Default() {
         title: "Settings Page",
         hotkey: "cmd+s, ctrl+s",
         section: "Navigation",
+        icon: iconMarkup("Settings", selectedPalette),
         handler: () => {
           history.push("/settings");
         },
@@ -298,6 +318,7 @@ export default function Default() {
         id: "accounts",
         title: "Accounts Page",
         section: "Navigation",
+        icon: iconMarkup("Wallet", selectedPalette),
         handler: () => {
           history.push("/accounts");
         },
@@ -306,6 +327,7 @@ export default function Default() {
         id: "card",
         title: "Ledger Card Page",
         section: "Navigation",
+        icon: iconMarkup("Card", selectedPalette),
         handler: () => {
           history.push("/card");
         },
@@ -314,6 +336,7 @@ export default function Default() {
         id: "manager",
         title: "Manager Page",
         section: "Navigation",
+        icon: iconMarkup("Manager", selectedPalette),
         handler: () => {
           history.push("/manager");
         },
@@ -322,6 +345,7 @@ export default function Default() {
         id: "platform",
         title: "Platform Page",
         section: "Navigation",
+        icon: iconMarkup("ChartNetwork", selectedPalette),
         handler: () => {
           history.push("/platform");
         },
@@ -330,6 +354,7 @@ export default function Default() {
         id: "lend",
         title: "Lend Page",
         section: "Navigation",
+        icon: iconMarkup("Lend", selectedPalette),
         handler: () => {
           history.push("/lend");
         },
@@ -338,6 +363,7 @@ export default function Default() {
         id: "exchange",
         title: "Buy Page",
         section: "Navigation",
+        icon: iconMarkup("Coin", selectedPalette),
         handler: () => {
           history.push("/exchange");
         },
@@ -346,6 +372,7 @@ export default function Default() {
         id: "swap",
         title: "Swap Page",
         section: "Navigation",
+        icon: iconMarkup("Redelegate", selectedPalette),
         handler: () => {
           history.push("/swap");
         },
@@ -354,19 +381,30 @@ export default function Default() {
         id: "market",
         title: "Market Page",
         section: "Navigation",
+        icon: iconMarkup("Portfolio", selectedPalette),
         handler: () => {
           history.push("/market");
+        },
+      },
+      {
+        id: "accountsList",
+        title: "List accounts",
+        icon: iconMarkup("List", selectedPalette),
+        children: accounts.map(a => a.id),
+        handler: () => {
+          return { keepOpen: true };
         },
       },
       {
         id: "countervalues",
         title: "Change preferred currency...",
         section: "Commands",
+        icon: iconMarkup("SearchDollar", selectedPalette),
         children: supportedCountervalues.map(countervalue => countervalue.currency.ticker),
       },
       ...getCountervaluesHotkeys(supportedCountervalues, dispatch),
     ],
-    [history, dispatch, accounts],
+    [history, dispatch, accounts, selectedPalette],
   );
 
   const hotkeys = useMemo(() => [...hkBase, ...hkAccounts], [hkBase, hkAccounts]);
