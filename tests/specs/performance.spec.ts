@@ -7,7 +7,7 @@ import * as path from "path";
 import { generateUUID } from "../fixtures/common";
 
 test.use({
-  userdata: "fourAccountsNoOperations",
+  userdata: "allLiveCoinsNoOperations",
   env: { MOCK: undefined, HIDE_RELEASE_NOTES: true },
 });
 
