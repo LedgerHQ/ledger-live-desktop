@@ -7,17 +7,13 @@ import * as path from "path";
 import { generateUUID } from "../fixtures/common";
 
 test.use({
-  userdata: "allLiveCoinsNoOperations",
-  env: {
-    // DEV_TOOLS: true,
-    MOCK: undefined,
-    HIDE_RELEASE_NOTES: true,
-  },
+  userdata: "fourAccountsNoOperations",
+  env: { MOCK: undefined, HIDE_RELEASE_NOTES: true },
 });
 
 // process.env.PWDEBUG = "1";
 
-test("Performance while sync", async ({ page }) => {
+test("Performance while syncing", async ({ page }) => {
   const results = [];
 
   const layout = new Layout(page);

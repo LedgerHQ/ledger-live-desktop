@@ -300,6 +300,10 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: print directories
+        run: echo 'ls -a'
+      - name: print perf folder
+        run: echo 'ls -a tests/artifacts'
       - name: upload performance results
         if: always()
         uses: actions/upload-artifact@v2
