@@ -70,6 +70,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import StyleProvider from "~/renderer/styles/StyleProvider";
 import CryptoCurrencyIcon from "./components/CryptoCurrencyIcon";
 import { Icons, Flex } from "@ledgerhq/react-ui";
+import { openModal } from "~/renderer/actions/modals";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -250,7 +251,7 @@ export default function Default() {
       },
       {
         id: "Open Ledger Support",
-        title: "Open  Ledger Support",
+        title: "Open Ledger Support",
         section: "Commands",
         icon: iconMarkup("Phone", selectedPalette),
         handler: () => {
@@ -395,6 +396,24 @@ export default function Default() {
         children: supportedCountervalues.map(countervalue => countervalue.currency.ticker),
       },
       ...getCountervaluesHotkeys(supportedCountervalues, dispatch),
+      {
+        id: "send",
+        title: "Send crypto",
+        section: "Transaction",
+        icon: iconMarkup("ArrowTop", selectedPalette),
+        handler: () => {
+          dispatch(openModal("MODAL_SEND"));
+        },
+      },
+      {
+        id: "Receive",
+        title: "Receive crypto",
+        section: "Transaction",
+        icon: iconMarkup("ArrowBottom", selectedPalette),
+        handler: () => {
+          dispatch(openModal("MODAL_RECEIVE"));
+        },
+      },
     ],
     [history, dispatch, accounts, selectedPalette],
   );
