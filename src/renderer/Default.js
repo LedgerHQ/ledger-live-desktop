@@ -348,7 +348,12 @@ export default function Default() {
 
   return (
     <>
-      <ninja-keys class={selectedPalette} ref={ninjaKeys} goBackHotkey={null}></ninja-keys>
+      <ninja-keys
+        class={selectedPalette}
+        ref={ninjaKeys}
+        goBackHotkey={null}
+        noAutoLoadMdIcons
+      ></ninja-keys>
 
       <TriggerAppReady />
       <ListenDevices />
