@@ -169,6 +169,7 @@ export default function Default() {
           return undefined;
         })
         .filter(Boolean)
+        .sort((a, b) => a.title.localeCompare(b.title))
         .map(item => ({
           ...item,
           icon: renderToStaticMarkup(
