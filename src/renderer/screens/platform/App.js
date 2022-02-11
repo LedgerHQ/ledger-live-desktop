@@ -7,6 +7,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
+import { useLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/LiveAppProvider";
 
 type Props = {
   match: {
@@ -23,8 +24,9 @@ export default function PlatformApp({ match }: Props) {
   const history = useHistory();
   const { state: urlParams } = useLocation();
   const { appId } = match.params;
-  const { manifests } = usePlatformApp();
-  const manifest = manifests.get(appId);
+  const manifest = useLiveAppManifest(appId);
+
+  console.log(appId, manifest);
 
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
   const themeType = useTheme("colors.palette.type");

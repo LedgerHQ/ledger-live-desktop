@@ -11,9 +11,11 @@ import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
 import Card from "~/renderer/components/Box/Card";
-import Buy from "./Buy";
-import Sell from "./Sell";
-import { useExchangeProvider } from "./hooks";
+import OnRamp from "./Buy";
+import OffRamp from "./Sell";
+import { useExchangeProvider, useRampCatalogCurrencies } from "./hooks";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import type { RampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
 
 const Container: ThemedComponent<{ selectable: boolean, pb: number }> = styled(Box)`
   flex: 1;
@@ -24,21 +26,24 @@ const tabs = [
   {
     header: "exchange.buy.header",
     title: "exchange.buy.tab",
-    component: Buy,
+    component: OnRamp,
   },
   {
     header: "exchange.sell.header",
     title: "exchange.sell.tab",
-    component: Sell,
+    component: OffRamp,
   },
 ];
 
 export type DProps = {
   defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
   defaultAccount?: ?Account,
+  rampCatalog: RampCatalog,
 };
 
 const Exchange = () => {
+  const rampCatalog = useRampCatalog();
+
   const location = useLocation();
   const [provider] = useExchangeProvider();
   const { state } = location;
@@ -60,7 +65,7 @@ const Exchange = () => {
         <Component
           defaultCurrency={state?.defaultCurrency}
           defaultAccount={state?.defaultAccount}
-          provider={provider}
+          rampCatalog={rampCatalog}
         />
       </Card>
     </Container>
