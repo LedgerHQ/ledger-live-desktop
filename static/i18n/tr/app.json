@@ -722,7 +722,7 @@
       "header": "Kripto alın ve satın",
       "title": "Kripto satın almak için bir sağlayıcı seçin",
       "buyFrom": "İstediğiniz yerden satın alın",
-      "cryptoSupported": "desteklenen kriptolar",
+      "cryptoSupported": "kripto destekleniyor",
       "payWith": "Kart veya SEPA ile ödeme yapın",
       "tab": "Satın al",
       "coinify": {
