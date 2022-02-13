@@ -2382,7 +2382,7 @@
       }
     },
     "bond": {
-      "title": "Varlıkları bağla",
+      "title": "Varlıkları bağlayın",
       "rewardDestination": {
         "label": "Ödül Hedefi",
         "stash": "Mevcut bakiye",
@@ -2464,7 +2464,7 @@
       }
     },
     "unbond": {
-      "title": "Varlıkları çöz",
+      "title": "Varlıkları çözün",
       "steps": {
         "amount": {
           "title": "Tutar",
