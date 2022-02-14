@@ -2534,6 +2534,27 @@
     }
   },
   "solana": {
+    "delegation": {
+      "reactivate": {
+        "flow": {
+          "title": "Reactivate",
+          "steps": {
+            "connectDevice": {
+              "title": "Device"
+            },
+            "confirmation": {
+              "title": "Confirmation",
+              "success": {
+                "title": "You have successfully reactivated you delegation.",
+                "text": "Some info about cool down period here",
+                "cta": "View details"
+              },
+              "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+            }
+          }
+        }
+      }
+    },
     "undelegation": {
       "flow": {
         "title": "Undelegate",

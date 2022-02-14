@@ -234,7 +234,7 @@ function toStakeDropDownItem(stakeAction: string) {
     case "reactivate":
       return {
         key: "MODAL_SOLANA_DELEGATION_REACTIVATE",
-        label: <Trans i18nKey="solana.delegation.reactivate" />,
+        label: <Trans i18nKey="solana.delegation.reactivate.flow.title" />,
       };
     case "deactivate":
       return {
