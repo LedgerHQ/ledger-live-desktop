@@ -2,19 +2,19 @@ import React, { useCallback, memo } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
-import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import styled, { useTheme } from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import counterValueFormatter from "./utils/countervalueFormatter";
+import counterValueFormatter from "@ledgerhq/live-common/lib/market/utils/countervalueFormatter";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { TableCell, TableRow } from "./MarketList";
 import { SmallMarketItemChart } from "./MarketItemChart";
-import { CurrencyData } from "./types";
+import { CurrencyData } from "@ledgerhq/live-common/lib/market/types";
 import { Button } from ".";
 import { useTranslation } from "react-i18next";
 import { openModal } from "~/renderer/actions/modals";
+import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 32px;
@@ -38,6 +38,7 @@ type Props = {
   selectCurrency: (currencyId: string) => void;
   availableOnBuy: boolean;
   availableOnSwap: boolean;
+  displayChart: boolean;
 };
 
 function MarketRowItem({
@@ -51,30 +52,29 @@ function MarketRowItem({
   selectCurrency,
   availableOnBuy,
   availableOnSwap,
+  displayChart,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const accounts = useSelector(accountsSelector);
-  const currencyAccounts = accounts.filter(
-    a => getAccountCurrency(a) === currency.internalCurrency,
-  );
 
   const openAddAccounts = useCallback(() => {
-    dispatch(
-      openModal("MODAL_ADD_ACCOUNTS", {
-        currency: currency.internalCurrency,
-        preventSkippingCurrencySelection: true,
-      }),
-    );
+    if (currency)
+      dispatch(
+        openModal("MODAL_ADD_ACCOUNTS", {
+          currency: currency.internalCurrency,
+          preventSkippingCurrencySelection: true,
+        }),
+      );
   }, [dispatch, currency]);
 
   const history = useHistory();
   const { colors } = useTheme();
-  const graphColor = currency?.priceChangePercentage < 0 ? colors.error.c60 : colors.success.c60;
+  const graphColor = colors.neutral.c80;
+  const allAccounts = useSelector(accountsSelector);
 
   const onCurrencyClick = useCallback(() => {
     selectCurrency(currency.id);
-    setTrackingSource("accounts page");
+    setTrackingSource("Page Market");
     history.push({
       pathname: `/market/${currency.id}`,
       state: currency,
@@ -85,7 +85,7 @@ function MarketRowItem({
     e => {
       e.preventDefault();
       e.stopPropagation();
-      setTrackingSource("market page");
+      setTrackingSource("Page Market");
       history.push({
         pathname: "/exchange",
         state: {
@@ -98,21 +98,25 @@ function MarketRowItem({
 
   const onSwap = useCallback(
     e => {
-      e.preventDefault();
-      e.stopPropagation();
-      setTrackingSource("market page");
-      if (currencyAccounts.length > 0) {
+      if (currency?.internalCurrency?.id) {
+        e.preventDefault();
+        e.stopPropagation();
+        setTrackingSource("Page Market");
+
+        const defaultAccount = getAvailableAccountsById(
+          currency?.internalCurrency?.id,
+          allAccounts,
+        ).find(Boolean);
+
+        if (!defaultAccount) return openAddAccounts();
+
         history.push({
           pathname: "/swap",
-          state: {
-            defaultCurrency: currency.internalCurrency,
-          },
+          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
         });
-      } else {
-        openAddAccounts();
       }
     },
-    [currency, currencyAccounts, history],
+    [currency, allAccounts, history, openAddAccounts],
   );
 
   const onStarClick = useCallback(
@@ -203,11 +207,13 @@ function MarketRowItem({
               })}
             </Text>
           </TableCell>
-          <TableCell>
-            {currency.sparklineIn7d && (
-              <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
-            )}
-          </TableCell>
+          {displayChart && (
+            <TableCell>
+              {currency.sparklineIn7d && (
+                <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
+              )}
+            </TableCell>
+          )}
           <TableCell onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>

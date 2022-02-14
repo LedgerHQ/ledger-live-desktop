@@ -4,7 +4,7 @@ import React from "react";
 
 const CheckFull = ({
   size,
-  color = "#6490f1",
+  color = "#8a80db",
   tickColor = "white",
 }: {
   size: number,

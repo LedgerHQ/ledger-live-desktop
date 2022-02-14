@@ -1,7 +1,7 @@
 {
   "type": "light",
   "primary": {
-    "main": "#6490F1",
+    "main": "#8a80db",
     "contrastText": "#FFFFFF"
   },
   "secondary": {
@@ -14,7 +14,7 @@
   },
   "action": {
     "active": "rgba(20, 37, 51, 0.1)",
-    "hover": "rgba(100, 144, 241, 0.1)",
+    "hover": "rgba(138, 128, 219, 0.1)",
     "disabled": "rgba(20, 37, 51, 0.1)"
   }
 }

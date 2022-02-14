@@ -2,8 +2,8 @@
 import React, { useMemo, memo, useCallback } from "react";
 import { Flex, Text, Bar } from "@ledgerhq/react-ui";
 import { SwitchTransition, Transition } from "react-transition-group";
-import { rangeDataTable } from "../utils/rangeDataTable";
-import counterValueFormatter from "../utils/countervalueFormatter";
+import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
+import counterValueFormatter from "@ledgerhq/live-common/lib/market/utils/countervalueFormatter";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import styled from "styled-components";
 import Chart from "~/renderer/components/Chart";
@@ -150,11 +150,13 @@ function MarkeCoinChartComponent({
           </Flex>
         </Flex>
         <Bar onTabChange={setRange} initialActiveIndex={activeRangeIndex}>
-          {ranges.map(key => (
-            <Text color="inherit" variant="small" key={key}>
-              {t(`market.range.${key}`)}
-            </Text>
-          ))}
+          {ranges
+            .filter(k => k !== "1h")
+            .map(key => (
+              <Text color="inherit" variant="small" key={key}>
+                {t(`market.range.${key}`)}
+              </Text>
+            ))}
         </Bar>
       </Flex>
       <SwitchTransition>
