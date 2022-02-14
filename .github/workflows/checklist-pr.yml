@@ -1,0 +1,45 @@
+name: "PR | Checklist"
+on:
+  pull_request:
+    branches:
+      - "support/**"
+      - "bugfix/**"
+
+jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - name: comment on PR
+        uses: actions/github-script@v5
+        with:
+          script: |
+            await github.rest.repos.createCommitComment({
+              owner: "LedgerHQ",
+              repo: "ledger-live-desktop",
+              commit_sha: "${{ github.event.pull_request.head.sha }}",
+              body: `
+                Thanks for opening a Pull Request.
+                To be able to merge in _develop_ branch, you need to:
+
+                - [ ] CI is green
+                - [ ] if needed, \`/generate-screenshots\`
+                - [ ] Dev review
+                - [ ] QA review
+                - [ ] if needed, \`/upgrade-llc\`
+
+
+                ### Why /generate-screenshots ?
+                If your PR contains UI related changes,
+                it might be necessary to regenerate screenshots.
+
+                ### Why /upgrade-llc ?
+                If your PR requires an update to the ledger-live-common library,
+                once the PR is merged on develop on ledger-live-common side,
+                you need to run \`/upgrade-llc\` to switch back to ledger-live-common@develop here before merging.
+              `
+            });
