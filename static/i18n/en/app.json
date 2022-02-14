@@ -2533,6 +2533,27 @@
       }
     }
   },
+  "solana": {
+    "undelegation": {
+      "flow": {
+        "title": "Undelegate",
+        "steps": {
+          "connectDevice": {
+            "title": "Device"
+          },
+          "confirmation": {
+            "title": "Confirmation",
+            "success": {
+              "title": "You have successfully undelegated your assets.",
+              "text": "Some info about cool down period here",
+              "cta": "View details"
+            },
+            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",

@@ -39,11 +39,11 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Cosmos" name="Step Confirmed" />
+        <TrackPage category="Undelegation Solana" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.success.title" />}
-          description={multiline(t("cosmos.delegation.flow.steps.confirmation.success.text"))}
+          title={<Trans i18nKey="solana.undelegation.flow.steps.confirmation.success.title" />}
+          description={multiline(t("solana.undelegation.flow.steps.confirmation.success.text"))}
         />
       </Container>
     );
@@ -52,10 +52,10 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Delegation Cosmos" name="Step Confirmation Error" />
+        <TrackPage category="Undelegation Solana" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="solana.undelegation.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
@@ -99,7 +99,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="cosmos.delegation.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="solana.undelegation.flow.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />
