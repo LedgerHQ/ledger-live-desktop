@@ -525,7 +525,7 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Takas et",
+      "title": "Takas",
       "provider": "Sağlayıcı",
       "txid": "Swap ID'si",
       "status": "Durum",
