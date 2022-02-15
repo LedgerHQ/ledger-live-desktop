@@ -18,7 +18,7 @@ import type {
   Transaction,
 } from "@ledgerhq/live-common/lib/families/solana/types";
 
-export default function StepDelegation({
+export default function StepValidator({
   account,
   parentAccount,
   onUpdateTransaction,
@@ -66,7 +66,7 @@ export default function StepDelegation({
   );
 }
 
-export function StepDelegationFooter({
+export function StepValidatorFooter({
   transitionTo,
   account,
   parentAccount,
@@ -91,7 +91,7 @@ export function StepDelegationFooter({
           id="delegate-continue-button"
           disabled={!canNext}
           primary
-          onClick={() => transitionTo("connectDevice")}
+          onClick={() => transitionTo("amount")}
         >
           <Trans i18nKey="common.continue" />
         </Button>

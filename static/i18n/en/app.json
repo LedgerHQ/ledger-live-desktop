@@ -2545,6 +2545,16 @@
       }
     },
     "delegation": {
+      "flow": {
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Amount"
+          }
+        }
+      },
       "withdraw": {
         "flow": {
           "title": "Withdraw",
