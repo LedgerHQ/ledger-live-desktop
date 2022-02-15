@@ -218,7 +218,7 @@
     "disconnectButton": "Bağlantıyı Kes"
   },
   "swap2": {
-    "title": "Takas",
+    "title": "Takas et",
     "tabs": {
       "exchange": "Takas",
       "history": "Geçmiş",
@@ -340,7 +340,7 @@
     }
   },
   "swap": {
-    "title": "Takas",
+    "title": "Takas et",
     "titleCrypto": "{{currency}} takas et",
     "whatIsSwap": "Takas (Swap) Nedir?",
     "paraswap": {
@@ -485,7 +485,7 @@
       "cta": "Onayla"
     },
     "modal": {
-      "title": "Takas",
+      "title": "Takas et",
       "steps": {
         "summary": {
           "title": "Özet",
@@ -525,7 +525,7 @@
       }
     },
     "operationDetailsModal": {
-      "title": "Takas",
+      "title": "Takas et",
       "provider": "Sağlayıcı",
       "txid": "Swap ID'si",
       "status": "Durum",
