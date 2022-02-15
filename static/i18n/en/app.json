@@ -2534,22 +2534,42 @@
     }
   },
   "solana": {
+    "common": {
+      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+      "viewDetails": "View details",
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
     "delegation": {
+      "withdraw": {
+        "flow": {
+          "title": "Withdraw",
+          "steps": {
+            "amount": {
+              "title": "Amount"
+            },
+            "confirmation": {
+              "success": {
+                "title": "You have successfully withdrawn your assets.",
+                "text": "Your account balance will be updated when the blockchain confirms the transaction."
+              }
+            }
+          }
+        }
+      },
       "reactivate": {
         "flow": {
           "title": "Reactivate",
           "steps": {
-            "connectDevice": {
-              "title": "Device"
-            },
             "confirmation": {
-              "title": "Confirmation",
               "success": {
                 "title": "You have successfully reactivated you delegation.",
-                "text": "Some info about cool down period here",
-                "cta": "View details"
-              },
-              "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+                "text": "Some info about cool down period here"
+              }
             }
           }
         }
@@ -2559,17 +2579,11 @@
       "flow": {
         "title": "Undelegate",
         "steps": {
-          "connectDevice": {
-            "title": "Device"
-          },
           "confirmation": {
-            "title": "Confirmation",
             "success": {
               "title": "You have successfully undelegated your assets.",
-              "text": "Some info about cool down period here",
-              "cta": "View details"
-            },
-            "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+              "text": "Some info about cool down period here"
+            }
           }
         }
       }

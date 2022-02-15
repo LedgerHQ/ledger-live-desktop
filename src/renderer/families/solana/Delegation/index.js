@@ -145,7 +145,7 @@ const Delegation = ({ account }: Props) => {
             {stakesWithMeta.map(stakeWithMeta => (
               <Row
                 stakeWithMeta={stakeWithMeta}
-                key={stakeWithMeta.stakeAccAddr}
+                key={stakeWithMeta.stake.stakeAccAddr}
                 account={account}
                 onManageAction={onRedirect}
                 onExternalLink={onExternalLink}

@@ -210,14 +210,16 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
       <Column>{formatAmount(stake.withdrawable)}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
-          {({ isOpen, value }) => (
-            <Box flex horizontal alignItems="center">
-              <Trans i18nKey="common.manage" />
-              <div style={{ transform: "rotate(90deg)" }}>
-                <ChevronRight size={16} />
-              </div>
-            </Box>
-          )}
+          {({ isOpen, value }) => {
+            return (
+              <Box flex horizontal alignItems="center">
+                <Trans i18nKey="common.manage" />
+                <div style={{ transform: "rotate(90deg)" }}>
+                  <ChevronRight size={16} />
+                </div>
+              </Box>
+            );
+          }}
         </DropDown>
       </Column>
     </Wrapper>
@@ -239,12 +241,12 @@ function toStakeDropDownItem(stakeAction: string) {
     case "deactivate":
       return {
         key: "MODAL_SOLANA_UNDELEGATE",
-        label: <Trans i18nKey="solana.delegation.undelegate" />,
+        label: <Trans i18nKey="solana.undelegation.flow.title" />,
       };
     case "withdraw":
       return {
         key: "MODAL_SOLANA_DELEGATION_WITHDRAW",
-        label: <Trans i18nKey="solana.delegation.withdraw" />,
+        label: <Trans i18nKey="solana.delegation.withdraw.flow.title" />,
       };
     default:
       throw new Error(`unsupported stake action: ${stakeAction}`);

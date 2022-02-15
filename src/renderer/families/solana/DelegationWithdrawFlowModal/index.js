@@ -9,7 +9,7 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "castDelegations",
+  stepId: "amount",
 };
 
 class DelegationModal extends PureComponent<{ name: string }, State> {

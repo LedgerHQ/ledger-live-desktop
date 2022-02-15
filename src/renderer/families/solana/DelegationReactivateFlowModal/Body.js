@@ -14,7 +14,10 @@ import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { Transaction, StakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import type {
+  Transaction,
+  SolanaStakeWithMeta,
+} from "@ledgerhq/live-common/lib/families/solana/types";
 
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
@@ -39,7 +42,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   params: {
     account: Account,
-    stakeWithMeta: StakeWithMeta,
+    stakeWithMeta: SolanaStakeWithMeta,
     parentAccount: ?Account,
   },
   name: string,

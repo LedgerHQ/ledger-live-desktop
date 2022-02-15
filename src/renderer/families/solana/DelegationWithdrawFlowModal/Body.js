@@ -14,7 +14,10 @@ import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import type {
+  Transaction,
+  SolanaStakeWithMeta,
+} from "@ledgerhq/live-common/lib/families/solana/types";
 
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
@@ -28,9 +31,9 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepDelegation, { StepDelegationFooter } from "./steps/StepDelegation";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
+import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 import logger from "~/logger/logger";
 import { BigNumber } from "bignumber.js";
 
@@ -40,6 +43,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   params: {
     account: Account,
+    stakeWithMeta: SolanaStakeWithMeta,
     parentAccount: ?Account,
   },
   name: string,
@@ -58,21 +62,21 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "castDelegations",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.validator.title" />,
-    component: StepDelegation,
+    id: "amount",
+    label: <Trans i18nKey="solana.delegation.withdraw.flow.steps.amount.title" />,
+    component: StepAmount,
     noScroll: true,
-    footer: StepDelegationFooter,
+    footer: StepAmountFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="solana.common.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("castDelegations"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="solana.common.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -112,17 +116,25 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const { account } = params;
+    const { account, stakeWithMeta } = params;
+    const { stake } = stakeWithMeta;
 
     invariant(account && account.solanaResources, "solana: account and solana resources required");
+
+    invariant(
+      stake.withdrawable > 0,
+      "solana: can withdraw only if there is something to withdraw",
+    );
 
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, undefined);
 
     const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
-      amount: new BigNumber(10000000),
+      amount: new BigNumber(stake.withdrawable),
       model: {
-        kind: "stake.createAccount",
-        uiState: {},
+        kind: "stake.withdraw",
+        uiState: {
+          stakeAccAddr: stake.stakeAccAddr,
+        },
       },
     });
 
@@ -137,7 +149,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("castDelegations");
+    onChangeStepId("amount");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -172,7 +184,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.delegation.flow.title"),
+    title: t("solana.delegation.withdraw.flow.title"),
     device,
     account,
     parentAccount,
@@ -182,7 +194,7 @@ const Body = ({
     steps,
     errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error && ["castDelegations"].includes(stepId),
+    hideBreadcrumb: !!error && ["amount"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
