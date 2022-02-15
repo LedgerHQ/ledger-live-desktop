@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: download artifacts
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
@@ -112,7 +112,7 @@ jobs:
           unzip images-windows-latest.json.zip
           rm tests-reports.zip playwright-results-windows-latest.zip playwright-results-linux.zip images-linux.json.zip images-windows-latest.json.zip
       - name: parse images
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require("fs");
@@ -140,7 +140,7 @@ jobs:
           jestoutput: jest.txt
       # - name: comment (manual trigger)
       #   if: github.event.workflow_dispatch != ''
-      #   uses: actions/github-script@v5
+      #   uses: actions/github-script@v6
       #   with:
       #     script: |
       #       const fs = require("fs");
@@ -156,7 +156,7 @@ jobs:
       #       });
       - name: comment
         if: github.event.workflow_run != ''
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             await github.rest.repos.createCommitComment({
