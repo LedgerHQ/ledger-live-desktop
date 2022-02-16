@@ -1604,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Go to accounts",
         "intallParentApp": "Install {{appName}} app",
-        "platform": "Go to app"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Uninstall all",
