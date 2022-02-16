@@ -19,10 +19,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            await github.rest.repos.createCommitComment({
+            await github.rest.issues.createComment({
               owner: "LedgerHQ",
               repo: "ledger-live-desktop",
-              commit_sha: "${{ github.event.pull_request.head.sha }}",
+              issue_number: "${{ github.event.pull_request.number }}",
               body: `
               Thanks for your contribution.
               To be able to merge in _develop_ branch, you need to:
@@ -51,10 +51,10 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            await github.rest.repos.createCommitComment({
+            await github.rest.issues.createCommitComment({
               owner: "LedgerHQ",
               repo: "ledger-live-desktop",
-              commit_sha: "${{ github.event.pull_request.head.sha }}",
+              issue_number: "${{ github.event.pull_request.number }}",
               body: `
               Thanks for your contribution.
               To be groomed for next release, you need to:
