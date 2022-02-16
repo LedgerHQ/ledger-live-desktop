@@ -163,7 +163,7 @@
   },
   "byteSize": {
     "bytes": "{{size}} 字节",
-    "kbUnit": "{{size}} kB",
+    "kbUnit": "{{size}} KB",
     "mbUnit": "{{size}} MB"
   },
   "time": {
