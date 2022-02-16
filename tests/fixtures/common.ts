@@ -11,10 +11,12 @@ export function generateUUID(): string {
 type TestFixtures = {
   lang: string;
   theme: "light" | "dark" | "no-preference" | undefined;
+  remoteConfig: { [_: string]: any };
   userdata: string;
   userdataDestinationPath: string;
   userdataOriginalFile: string;
   userdataFile: any;
+  remoteConfigFile: any;
   env: Record<string, any>;
   page: Page;
 };
@@ -23,6 +25,7 @@ const test = base.extend<TestFixtures>({
   env: undefined,
   lang: "en-US",
   theme: "light",
+  remoteConfig: {},
   userdata: undefined,
   userdataDestinationPath: async ({}, use) => {
     use(path.join(__dirname, "../artifacts/userdata", generateUUID()));
@@ -34,8 +37,20 @@ const test = base.extend<TestFixtures>({
     const fullFilePath = path.join(userdataDestinationPath, "app.json");
     use(fullFilePath);
   },
+  remoteConfigFile: async ({ userdataDestinationPath }, use) => {
+    const fullFilePath = path.join(userdataDestinationPath, "remoteConfig.json");
+    use(fullFilePath);
+  },
   page: async (
-    { lang, theme, userdata, userdataDestinationPath, userdataOriginalFile, env }: TestFixtures,
+    {
+      lang,
+      theme,
+      remoteConfig,
+      userdata,
+      userdataDestinationPath,
+      userdataOriginalFile,
+      env,
+    }: TestFixtures,
     use: (page: Page) => void,
   ) => {
     // create userdata path
@@ -43,6 +58,13 @@ const test = base.extend<TestFixtures>({
 
     if (userdata) {
       fs.copyFileSync(userdataOriginalFile, `${userdataDestinationPath}/app.json`);
+    }
+
+    if (remoteConfig) {
+      fs.writeFileSync(
+        `${userdataDestinationPath}/remoteConfig.json`,
+        JSON.stringify(remoteConfig),
+      );
     }
 
     // default environment variables

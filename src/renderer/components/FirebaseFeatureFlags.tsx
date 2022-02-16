@@ -17,15 +17,21 @@ export const FirebaseFeatureFlagsProvider = ({ children }: Props): JSX.Element =
       return null;
     }
 
+    let jsonValue: string;
     try {
-      const value = getValue(remoteConfig, formatFeatureId(key));
-      const feature: Feature = JSON.parse(value.asString());
-
-      return feature;
+      jsonValue = getValue(remoteConfig, formatFeatureId(key)).asString();
     } catch (error) {
-      console.error(`Failed to retrieve feature "${key}"`);
-      return null;
+      if (process.env.PLAYWRIGHT_RUN) {
+        jsonValue = remoteConfig[formatFeatureId(key)];
+      } else {
+        console.error(`Failed to retrieve feature "${key}"`);
+        return null;
+      }
     }
+
+    const feature: Feature = JSON.parse(jsonValue);
+
+    return feature;
   };
 
   return <FeatureFlagsProvider getFeature={getFeature}>{children}</FeatureFlagsProvider>;
