@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import type { Currency } from "@ledgerhq/live-common/lib/types";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
@@ -22,11 +23,16 @@ const LabelWithMeta = ({
   item: {
     label: string,
     collection: { nfts: any[], contract: string, standard: string },
+    currency: Currency,
   },
 }) => (
   <Item isActive={isActive}>
     <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-      <CollectionName collection={item.collection} fallback={item.collection.contract} />
+      <CollectionName
+        collection={item.collection}
+        fallback={item.collection.contract}
+        currency={item.currency}
+      />
     </Text>
     {isActive && (
       <Check>
@@ -48,8 +54,9 @@ export default function NFTCrumb() {
         key: collection.contract,
         label: collection.contract,
         collection,
+        currency: account.currency,
       })),
-    [collections],
+    [account.currency, collections],
   );
   const activeItem =
     items.find((item: any) => item.collection.contract === collectionAddress) || items[0];
@@ -97,6 +104,7 @@ export default function NFTCrumb() {
                   <CollectionName
                     collection={activeItem.collection}
                     fallback={activeItem.collection.contract}
+                    currency={account.currency}
                   />
                 </Button>
                 <AngleDown>

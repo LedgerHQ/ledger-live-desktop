@@ -54,7 +54,11 @@ const Collection = () => {
     collectionAddress,
   ]);
 
-  const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
+  const { status, metadata } = useNftMetadata(
+    collection.contract,
+    collection.nfts[0].tokenId,
+    account.currency,
+  );
   const show = useMemo(() => status === "loading", [status]);
 
   const onSend = useCallback(() => {
@@ -99,7 +103,7 @@ const Collection = () => {
           </Skeleton>
           <Skeleton width={143} minHeight={33} barHeight={12} show={show}>
             <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
-              <CollectionName collection={collection} />
+              <CollectionName collection={collection} currency={account.currency} />
             </Text>
           </Skeleton>
         </Box>

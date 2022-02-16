@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import styled from "styled-components";
 import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
-import type { AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
+import type { AccountLike, Operation, Currency } from "@ledgerhq/live-common/lib/types";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
@@ -44,6 +44,7 @@ const OperationDetailsExtra = ({ extra, type }: OperationDetailsExtraProps) => {
 
 type Props = {
   operation: Operation,
+  currency: Currency,
 };
 
 const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
@@ -56,8 +57,8 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
   min-width: 150px;
 `;
 
-const NFTAmountField = ({ operation }: Props) => {
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
+const NFTAmountField = ({ operation, currency }: Props) => {
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId, currency);
   const show = useMemo(() => status === "loading", [status]);
 
   return (

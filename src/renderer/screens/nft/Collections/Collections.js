@@ -78,6 +78,7 @@ const Collections = ({ account }: Props) => {
               key={contract}
               contract={contract}
               nfts={nfts}
+              currency={account.currency}
             />
           ))
         ) : (

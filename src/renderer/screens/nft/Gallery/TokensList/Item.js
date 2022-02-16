@@ -64,7 +64,7 @@ type Props = {
 };
 
 const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, tokenId);
+  const { status, metadata } = useNftMetadata(contract, tokenId, account.currency);
   const nft = useSelector(state => getNFTById(state, { nftId: id }));
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
@@ -80,7 +80,7 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
 
   const MaybeContext = ({ children }: any) =>
     withContextMenu ? (
-      <NFTContextMenu key={id} contract={contract} tokenId={tokenId}>
+      <NFTContextMenu key={id} contract={contract} tokenId={tokenId} currency={account.currency}>
         {children}
       </NFTContextMenu>
     ) : (
@@ -133,7 +133,13 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
                 {`x${nft.amount.toFixed()}`}
               </Text>
             )}
-            <NFTContextMenu key={id} contract={contract} tokenId={tokenId} leftClick={true}>
+            <NFTContextMenu
+              key={id}
+              contract={contract}
+              tokenId={tokenId}
+              currency={account.currency}
+              leftClick={true}
+            >
               <Dots>
                 <IconDots size={20} />
               </Dots>

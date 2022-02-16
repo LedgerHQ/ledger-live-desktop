@@ -165,7 +165,11 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
   const dispatch = useDispatch();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftMetadata(
+    nft.collection.contract,
+    nft.tokenId,
+    account.currency,
+  );
   const show = useMemo(() => status === "loading", [status]);
   const name = metadata?.nftName || nft.tokenId;
 

@@ -10,7 +10,7 @@ import {
   TextEllipsis,
   HashContainer,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
-import type { Operation } from "@ledgerhq/live-common/lib/types";
+import type { Operation, Currency } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Box from "~/renderer/components/Box";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
@@ -18,9 +18,15 @@ import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
-const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
+const NFTOperationDetails = ({
+  operation,
+  currency,
+}: {
+  operation: Operation,
+  currency: Currency,
+}) => {
   const { t } = useTranslation();
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId, currency);
   const show = useMemo(() => status === "loading", [status]);
 
   return operation.contract && operation.tokenId ? (

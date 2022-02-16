@@ -1,15 +1,15 @@
 // @flow
 
 import React, { useMemo } from "react";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import type { Currency, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const Container: ThemedComponent<{}> = styled(Box)`
   &.disabled {
@@ -29,10 +29,11 @@ type Props = {
   nfts: NFTWithMetadata[],
   contract: string,
   onClick: string => void,
+  currency: Currency,
 };
 
-const Row = ({ nfts, contract, onClick }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
+const Row = ({ nfts, contract, currency, onClick }: Props) => {
+  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId, currency);
   const { tokenName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 

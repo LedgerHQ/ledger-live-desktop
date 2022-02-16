@@ -59,6 +59,7 @@ const StepRecipient = ({
             maybeNFTId={maybeNFTId}
             maybeNFTCollection={maybeNFTCollection}
             nfts={account?.nfts || []}
+            account={account}
           />
         </Box>
       ) : (

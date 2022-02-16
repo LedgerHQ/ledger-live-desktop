@@ -84,7 +84,11 @@ const Gallery = () => {
         <div key={collection.contract}>
           <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-              <CollectionName collection={collection} fallback={collection.contract} />
+              <CollectionName
+                collection={collection}
+                fallback={collection.contract}
+                currency={account.currency}
+              />
             </Text>
           </Box>
           <TokensList
