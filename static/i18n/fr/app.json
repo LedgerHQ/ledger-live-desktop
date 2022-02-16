@@ -164,7 +164,7 @@
   "byteSize": {
     "bytes": "{{size}} octets",
     "kbUnit": "{{size}} Ko",
-    "mbUnit": "{{size}} MB"
+    "mbUnit": "{{size}} Mo"
   },
   "time": {
     "minute": "Minute",
