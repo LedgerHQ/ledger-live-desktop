@@ -163,7 +163,7 @@
   },
   "byteSize": {
     "bytes": "{{size}} байт",
-    "kbUnit": "{{size}} kB",
+    "kbUnit": "{{size}} KB",
     "mbUnit": "{{size}} MB"
   },
   "time": {
