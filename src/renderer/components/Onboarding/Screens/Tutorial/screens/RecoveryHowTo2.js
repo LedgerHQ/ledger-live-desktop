@@ -14,13 +14,23 @@ import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import { ContentContainer, HeaderContainer } from "../shared";
 import NanoSAnim from "../assets/animations/nanoS/confirm-words.json";
-import NanoSPAnim from "../assets/animations/nanoSP/confirm-words.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/confirmWords/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/confirmWords/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/confirm-words.json";
 
 const animations = {
-  nanoX: NanoXAnim,
-  nanoS: NanoSAnim,
-  nanoSP: NanoSPAnim,
+  nanoX: {
+    light: NanoXAnim,
+    dark: NanoXAnim,
+  },
+  nanoS: {
+    light: NanoSAnim,
+    dark: NanoSAnim,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
   blue: null,
 };
 

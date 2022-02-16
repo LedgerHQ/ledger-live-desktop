@@ -20,12 +20,18 @@ import NanoSPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutor
 import NanoSPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/power-on.json";
 import NanoSRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/recover.json";
 
-import NanoSPConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirm-words.json";
-import NanoSPNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/number-of-words.json";
-import NanoSPPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/pin-code.json";
-import NanoSPPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/power-on-recovery.json";
-import NanoSPPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/power-on.json";
-import NanoSPRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover.json";
+import NanoSPConfirmWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirmWords/light.json";
+import NanoSPConfirmWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirmWords/dark.json";
+import NanoSPNumberOfWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/numberOfWords/light.json";
+import NanoSPNumberOfWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/numberOfWords/dark.json";
+import NanoSPPinCodeLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/pinCode/light.json";
+import NanoSPPinCodeDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/pinCode/dark.json";
+import NanoSPPowerOnRecoveryLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/powerOnRecovery/light.json";
+import NanoSPPowerOnRecoveryDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/powerOnRecovery/dark.json";
+import NanoSPPowerOnLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/powerOn/light.json";
+import NanoSPPowerOnDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/powerOn/dark.json";
+import NanoSPRecoverLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover/light.json";
+import NanoSPRecoverDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover/dark.json";
 
 import NanoXConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/confirm-words.json";
 import NanoXNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/number-of-words.json";
@@ -47,28 +53,82 @@ const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.di
 
 export const lottieAnimations = {
   nanoS: {
-    confirmWords: NanoSConfirmWords,
-    numberOfWords: NanoSNumberOfWords,
-    pinCode: NanoSPinCode,
-    powerOnRecovery: NanoSPowerOnRecovery,
-    powerOn: NanoSPowerOn,
-    recover: NanoSRecover,
+    confirmWords: {
+      light: NanoSConfirmWords,
+      dark: NanoSConfirmWords,
+    },
+    numberOfWords: {
+      light: NanoSNumberOfWords,
+      dark: NanoSNumberOfWords,
+    },
+    pinCode: {
+      light: NanoSPinCode,
+      dark: NanoSPinCode,
+    },
+    powerOnRecovery: {
+      light: NanoSPowerOnRecovery,
+      dark: NanoSPowerOnRecovery,
+    },
+    powerOn: {
+      light: NanoSPowerOn,
+      dark: NanoSPowerOn,
+    },
+    recover: {
+      light: NanoSRecover,
+      dark: NanoSRecover,
+    },
   },
   nanoSP: {
-    confirmWords: NanoSPConfirmWords,
-    numberOfWords: NanoSPNumberOfWords,
-    pinCode: NanoSPPinCode,
-    powerOnRecovery: NanoSPPowerOnRecovery,
-    powerOn: NanoSPPowerOn,
-    recover: NanoSPRecover,
+    confirmWords: {
+      light: NanoSPConfirmWordsLight,
+      dark: NanoSPConfirmWordsDark,
+    },
+    numberOfWords: {
+      light: NanoSPNumberOfWordsLight,
+      dark: NanoSPNumberOfWordsDark,
+    },
+    pinCode: {
+      light: NanoSPPinCodeLight,
+      dark: NanoSPPinCodeDark,
+    },
+    powerOnRecovery: {
+      light: NanoSPPowerOnRecoveryLight,
+      dark: NanoSPPowerOnRecoveryDark,
+    },
+    powerOn: {
+      light: NanoSPPowerOnLight,
+      dark: NanoSPPowerOnDark,
+    },
+    recover: {
+      light: NanoSPRecoverLight,
+      dark: NanoSPRecoverDark,
+    },
   },
   nanoX: {
-    confirmWords: NanoXConfirmWords,
-    numberOfWords: NanoXNumberOfWords,
-    pinCode: NanoXPinCode,
-    powerOnRecovery: NanoXPowerOnRecovery,
-    powerOn: NanoXPowerOn,
-    recover: NanoXRecover,
+    confirmWords: {
+      light: NanoXConfirmWords,
+      dark: NanoXConfirmWords,
+    },
+    numberOfWords: {
+      light: NanoXNumberOfWords,
+      dark: NanoXNumberOfWords,
+    },
+    pinCode: {
+      light: NanoXPinCode,
+      dark: NanoXPinCode,
+    },
+    powerOnRecovery: {
+      light: NanoXPowerOnRecovery,
+      dark: NanoXPowerOnRecovery,
+    },
+    powerOn: {
+      light: NanoXPowerOn,
+      dark: NanoXPowerOn,
+    },
+    recover: {
+      light: NanoXRecover,
+      dark: NanoXRecover,
+    },
   },
 };
 
@@ -93,7 +153,7 @@ const LottieDebugger = ({ name }: { name: string }) => {
       return getDeviceAnimation(modelId, "light", key);
     }
     if (onBoardingKeys.includes(key) && modelId !== "blue") {
-      return lottieAnimations[modelId][key];
+      return lottieAnimations[modelId][key].light;
     }
     return null;
     // Onboarding animations
@@ -105,7 +165,7 @@ const LottieDebugger = ({ name }: { name: string }) => {
       return getDeviceAnimation(modelId, "dark", key);
     }
     if (onBoardingKeys.includes(key) && modelId !== "blue") {
-      return lottieAnimations[modelId][key];
+      return lottieAnimations[modelId][key].dark;
     }
     return null;
     // Onboarding animations

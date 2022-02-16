@@ -5,7 +5,7 @@
   "op": 768,
   "w": 1000,
   "h": 286,
-  "nm": "NANO S PLUS LIGHT ONBOARDING---- POWER ON 2",
+  "nm": "5 powerOn l o",
   "ddd": 0,
   "assets": [
     {
@@ -5816,7 +5816,7 @@
       "ddd": 0,
       "ind": 22,
       "ty": 4,
-      "nm": "Choose PIN code of 4 to 8 digits Silhouettes",
+      "nm": "Choose PIN code of 4 to 8 digits Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -5900,7 +5900,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -5993,7 +5993,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6089,7 +6089,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -6099,7 +6099,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6195,7 +6195,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -6205,7 +6205,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6307,7 +6307,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6415,7 +6415,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -6425,7 +6425,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6533,7 +6533,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -6543,7 +6543,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6609,7 +6609,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6699,7 +6699,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6783,7 +6783,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -6879,7 +6879,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -6889,7 +6889,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7006,7 +7006,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7016,7 +7016,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7124,7 +7124,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7134,7 +7134,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7230,7 +7230,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7240,7 +7240,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7342,7 +7342,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7462,7 +7462,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7472,7 +7472,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7574,7 +7574,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7670,7 +7670,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7680,7 +7680,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7827,7 +7827,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7837,7 +7837,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -7954,7 +7954,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -7964,7 +7964,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8060,7 +8060,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -8070,7 +8070,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8199,7 +8199,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -8209,7 +8209,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8305,7 +8305,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -8315,7 +8315,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8417,7 +8417,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8519,7 +8519,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8553,7 +8553,7 @@
       "ddd": 0,
       "ind": 24,
       "ty": 4,
-      "nm": "+ Silhouettes",
+      "nm": "+ Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -8631,7 +8631,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8665,7 +8665,7 @@
       "ddd": 0,
       "ind": 26,
       "ty": 4,
-      "nm": "Set up as new device  Silhouettes",
+      "nm": "Set up as new device  Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -8755,7 +8755,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8863,7 +8863,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -8873,7 +8873,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -8975,7 +8975,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9068,7 +9068,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9185,7 +9185,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -9195,7 +9195,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9324,7 +9324,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -9334,7 +9334,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9436,7 +9436,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9529,7 +9529,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9637,7 +9637,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -9647,7 +9647,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9749,7 +9749,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9866,7 +9866,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -9876,7 +9876,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -9984,7 +9984,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -9994,7 +9994,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10072,7 +10072,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10168,7 +10168,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -10178,7 +10178,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10262,7 +10262,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10370,7 +10370,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -10380,7 +10380,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10414,7 +10414,7 @@
       "ddd": 0,
       "ind": 28,
       "ty": 4,
-      "nm": "Start Ledger Live to get assistance during setup Silhouettes",
+      "nm": "Start Ledger Live to get assistance during setup Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -10504,7 +10504,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10606,7 +10606,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10735,7 +10735,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -10745,7 +10745,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10832,7 +10832,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -10934,7 +10934,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11006,7 +11006,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11114,7 +11114,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11124,7 +11124,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11241,7 +11241,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11251,7 +11251,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11380,7 +11380,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11390,7 +11390,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11498,7 +11498,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11508,7 +11508,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11595,7 +11595,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11667,7 +11667,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11763,7 +11763,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11773,7 +11773,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11851,7 +11851,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -11959,7 +11959,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -11969,7 +11969,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12071,7 +12071,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12167,7 +12167,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -12177,7 +12177,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12306,7 +12306,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -12316,7 +12316,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12424,7 +12424,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -12434,7 +12434,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12536,7 +12536,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12665,7 +12665,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -12675,7 +12675,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12777,7 +12777,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12879,7 +12879,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -12975,7 +12975,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -12985,7 +12985,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13087,7 +13087,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13189,7 +13189,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13318,7 +13318,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -13328,7 +13328,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13421,7 +13421,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13505,7 +13505,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13613,7 +13613,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -13623,7 +13623,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13740,7 +13740,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -13750,7 +13750,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13843,7 +13843,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -13930,7 +13930,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14026,7 +14026,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -14036,7 +14036,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14129,7 +14129,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14258,7 +14258,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -14268,7 +14268,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14370,7 +14370,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14478,7 +14478,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -14488,7 +14488,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14590,7 +14590,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14683,7 +14683,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14800,7 +14800,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -14810,7 +14810,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -14844,7 +14844,7 @@
       "ddd": 0,
       "ind": 30,
       "ty": 4,
-      "nm": "Hodl both buttons anytime to access control center to power off and more Silhouettes",
+      "nm": "Hodl both buttons anytime to access control center to power off and more Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -14922,7 +14922,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15018,7 +15018,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -15028,7 +15028,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15145,7 +15145,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -15155,7 +15155,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15221,7 +15221,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15338,7 +15338,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -15348,7 +15348,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15444,7 +15444,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -15454,7 +15454,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15556,7 +15556,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15649,7 +15649,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15766,7 +15766,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -15776,7 +15776,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15869,7 +15869,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -15971,7 +15971,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16073,7 +16073,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16169,7 +16169,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -16179,7 +16179,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16272,7 +16272,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16374,7 +16374,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16503,7 +16503,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -16513,7 +16513,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16606,7 +16606,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16696,7 +16696,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16798,7 +16798,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -16894,7 +16894,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -16904,7 +16904,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17021,7 +17021,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17129,7 +17129,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -17139,7 +17139,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17241,7 +17241,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17337,7 +17337,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -17347,7 +17347,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17476,7 +17476,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -17486,7 +17486,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17570,7 +17570,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17654,7 +17654,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17762,7 +17762,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -17772,7 +17772,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17874,7 +17874,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -17976,7 +17976,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18060,7 +18060,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18156,7 +18156,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -18166,7 +18166,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18259,7 +18259,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18361,7 +18361,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18448,7 +18448,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18544,7 +18544,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -18554,7 +18554,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18620,7 +18620,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18704,7 +18704,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18812,7 +18812,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -18822,7 +18822,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -18915,7 +18915,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19017,7 +19017,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19125,7 +19125,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -19135,7 +19135,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19222,7 +19222,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19324,7 +19324,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19420,7 +19420,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -19430,7 +19430,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19547,7 +19547,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -19557,7 +19557,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19653,7 +19653,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -19663,7 +19663,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19765,7 +19765,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19873,7 +19873,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -19883,7 +19883,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -19970,7 +19970,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20066,7 +20066,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -20076,7 +20076,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20178,7 +20178,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20280,7 +20280,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20409,7 +20409,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -20419,7 +20419,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20512,7 +20512,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20629,7 +20629,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -20639,7 +20639,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20756,7 +20756,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20852,7 +20852,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -20862,7 +20862,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -20949,7 +20949,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21057,7 +21057,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -21067,7 +21067,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21101,7 +21101,7 @@
       "ddd": 0,
       "ind": 32,
       "ty": 4,
-      "nm": "Press both buttons to validate  a selection Silhouettes",
+      "nm": "Press both buttons to validate  a selection Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -21197,7 +21197,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -21207,7 +21207,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21294,7 +21294,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21402,7 +21402,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -21412,7 +21412,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21514,7 +21514,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21616,7 +21616,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21733,7 +21733,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -21743,7 +21743,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21839,7 +21839,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -21849,7 +21849,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -21951,7 +21951,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22044,7 +22044,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22161,7 +22161,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -22171,7 +22171,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22264,7 +22264,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22366,7 +22366,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22468,7 +22468,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22564,7 +22564,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -22574,7 +22574,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22667,7 +22667,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22769,7 +22769,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22871,7 +22871,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -22967,7 +22967,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -22977,7 +22977,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23055,7 +23055,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23184,7 +23184,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23194,7 +23194,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23260,7 +23260,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23356,7 +23356,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23366,7 +23366,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23483,7 +23483,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23493,7 +23493,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23622,7 +23622,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23632,7 +23632,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23734,7 +23734,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23842,7 +23842,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23852,7 +23852,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -23981,7 +23981,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -23991,7 +23991,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24093,7 +24093,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24201,7 +24201,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -24211,7 +24211,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24277,7 +24277,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24385,7 +24385,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -24395,7 +24395,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24479,7 +24479,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24581,7 +24581,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24677,7 +24677,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -24687,7 +24687,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24783,7 +24783,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -24793,7 +24793,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24886,7 +24886,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -24920,7 +24920,7 @@
       "ddd": 0,
       "ind": 34,
       "ty": 4,
-      "nm": "Press left or right  button to browse through menus and lists. Silhouettes",
+      "nm": "Press left or right  button to browse through menus and lists. Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -25016,7 +25016,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -25026,7 +25026,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25113,7 +25113,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25221,7 +25221,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -25231,7 +25231,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25333,7 +25333,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25435,7 +25435,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25501,7 +25501,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25609,7 +25609,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -25619,7 +25619,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25721,7 +25721,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25823,7 +25823,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -25919,7 +25919,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -25929,7 +25929,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26016,7 +26016,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26103,7 +26103,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26199,7 +26199,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -26209,7 +26209,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26338,7 +26338,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -26348,7 +26348,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26441,7 +26441,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26543,7 +26543,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26660,7 +26660,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -26670,7 +26670,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26763,7 +26763,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26865,7 +26865,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -26967,7 +26967,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27063,7 +27063,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -27073,7 +27073,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27166,7 +27166,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27268,7 +27268,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27364,7 +27364,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -27374,7 +27374,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27491,7 +27491,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -27501,7 +27501,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27588,7 +27588,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27684,7 +27684,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -27694,7 +27694,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27796,7 +27796,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -27898,7 +27898,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28006,7 +28006,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -28016,7 +28016,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28118,7 +28118,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28211,7 +28211,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28298,7 +28298,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28394,7 +28394,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -28404,7 +28404,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28497,7 +28497,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28626,7 +28626,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -28636,7 +28636,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28729,7 +28729,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28846,7 +28846,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -28954,7 +28954,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -28964,7 +28964,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29057,7 +29057,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29150,7 +29150,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29252,7 +29252,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29381,7 +29381,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -29391,7 +29391,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29484,7 +29484,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29601,7 +29601,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -29611,7 +29611,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29677,7 +29677,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29773,7 +29773,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -29783,7 +29783,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29885,7 +29885,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -29987,7 +29987,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30089,7 +30089,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30155,7 +30155,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30189,7 +30189,7 @@
       "ddd": 0,
       "ind": 36,
       "ty": 4,
-      "nm": "Download  Ledger live at ledger.com/start then press right Silhouettes",
+      "nm": "Download  Ledger live at ledger.com/start then press right Outlines",
       "cl": "com",
       "parent": 1,
       "sr": 1,
@@ -30280,7 +30280,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -30290,7 +30290,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30386,7 +30386,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -30396,7 +30396,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30498,7 +30498,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30591,7 +30591,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30657,7 +30657,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30753,7 +30753,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -30763,7 +30763,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -30892,7 +30892,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -30902,7 +30902,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31019,7 +31019,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31029,7 +31029,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31101,7 +31101,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31209,7 +31209,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31219,7 +31219,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31336,7 +31336,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31346,7 +31346,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31475,7 +31475,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31485,7 +31485,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31593,7 +31593,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31603,7 +31603,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31690,7 +31690,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31756,7 +31756,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31852,7 +31852,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -31862,7 +31862,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -31940,7 +31940,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32048,7 +32048,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32058,7 +32058,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32187,7 +32187,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32197,7 +32197,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32299,7 +32299,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32365,7 +32365,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32473,7 +32473,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32483,7 +32483,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32600,7 +32600,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32610,7 +32610,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32739,7 +32739,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32749,7 +32749,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32857,7 +32857,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -32867,7 +32867,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -32954,7 +32954,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33020,7 +33020,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33104,7 +33104,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33200,7 +33200,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -33210,7 +33210,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33327,7 +33327,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33393,7 +33393,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33495,7 +33495,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33597,7 +33597,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33726,7 +33726,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -33736,7 +33736,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33823,7 +33823,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -33925,7 +33925,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34027,7 +34027,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34120,7 +34120,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34228,7 +34228,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -34238,7 +34238,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34331,7 +34331,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34448,7 +34448,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -34458,7 +34458,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34545,7 +34545,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34653,7 +34653,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -34663,7 +34663,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34765,7 +34765,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34867,7 +34867,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -34954,7 +34954,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35050,7 +35050,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -35060,7 +35060,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35189,7 +35189,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -35199,7 +35199,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35292,7 +35292,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35394,7 +35394,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35428,7 +35428,7 @@
       "ddd": 0,
       "ind": 38,
       "ty": 4,
-      "nm": "Welcome to Ledger Nano S Plus Press right button to continue Silhouettes",
+      "nm": "Welcome to Ledger Nano S Plus Press right button to continue Outlines",
       "parent": 1,
       "sr": 1,
       "ks": {
@@ -35518,7 +35518,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35626,7 +35626,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -35636,7 +35636,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35702,7 +35702,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35786,7 +35786,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -35882,7 +35882,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -35892,7 +35892,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36009,7 +36009,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36117,7 +36117,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36127,7 +36127,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36229,7 +36229,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36325,7 +36325,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36335,7 +36335,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36407,7 +36407,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36515,7 +36515,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36525,7 +36525,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36642,7 +36642,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36652,7 +36652,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36781,7 +36781,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36791,7 +36791,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36899,7 +36899,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -36909,7 +36909,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -36996,7 +36996,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37086,7 +37086,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37215,7 +37215,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -37225,7 +37225,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37318,7 +37318,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37414,7 +37414,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -37424,7 +37424,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37526,7 +37526,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37634,7 +37634,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -37644,7 +37644,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37710,7 +37710,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37803,7 +37803,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -37905,7 +37905,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38013,7 +38013,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -38023,7 +38023,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38110,7 +38110,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38218,7 +38218,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -38228,7 +38228,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38330,7 +38330,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38432,7 +38432,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38519,7 +38519,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38615,7 +38615,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -38625,7 +38625,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38754,7 +38754,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -38764,7 +38764,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38857,7 +38857,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -38959,7 +38959,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39076,7 +39076,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -39086,7 +39086,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39179,7 +39179,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39281,7 +39281,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39383,7 +39383,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39479,7 +39479,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -39489,7 +39489,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39582,7 +39582,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39684,7 +39684,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39780,7 +39780,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -39790,7 +39790,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39874,7 +39874,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -39970,7 +39970,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -39980,7 +39980,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40073,7 +40073,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40175,7 +40175,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40271,7 +40271,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -40281,7 +40281,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40374,7 +40374,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40467,7 +40467,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -40575,7 +40575,7 @@
             {
               "ty": "mm",
               "mm": 1,
-              "nm": "Fusionner les tracés 1",
+              "nm": "Merge Paths 1",
               "mn": "ADBE Vector Filter - Merge",
               "hd": false
             },
@@ -40585,7 +40585,7 @@
               "o": { "a": 0, "k": 100, "ix": 5 },
               "r": 1,
               "bm": 0,
-              "nm": "Fond 1",
+              "nm": "Fill 1",
               "mn": "ADBE Vector Graphic - Fill",
               "hd": false
             },
@@ -41929,7 +41929,7 @@
       "ddd": 0,
       "ind": 48,
       "ty": 0,
-      "nm": "NANO S PLUS LIGHT + USB CABLE",
+      "nm": "Splus cable animation",
       "refId": "comp_0",
       "sr": 1,
       "ks": {

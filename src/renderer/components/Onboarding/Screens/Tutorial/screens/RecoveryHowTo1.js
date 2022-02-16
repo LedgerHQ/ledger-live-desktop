@@ -14,13 +14,23 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer } from "../shared";
 import NanoSAnim from "../assets/animations/nanoS/number-of-words.json";
-import NanoSPAnim from "../assets/animations/nanoSP/number-of-words.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/numberOfWords/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/numberOfWords/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/number-of-words.json";
 
 const animations = {
-  nanoX: NanoXAnim,
-  nanoS: NanoSAnim,
-  nanoSP: NanoSPAnim,
+  nanoX: {
+    light: NanoXAnim,
+    dark: NanoXAnim,
+  },
+  nanoS: {
+    light: NanoSAnim,
+    dark: NanoSAnim,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
   blue: null,
 };
 

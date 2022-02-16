@@ -11,14 +11,24 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Animation from "~/renderer/animations";
 import NanoSAnim from "../assets/animations/nanoS/power-on.json";
-import NanoSPAnim from "../assets/animations/nanoSP/power-on.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/powerOn/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/powerOn/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/power-on.json";
 import { ContentContainer } from "../shared";
 
 const animations = {
-  nanoX: NanoXAnim,
-  nanoS: NanoSAnim,
-  nanoSP: NanoSPAnim,
+  nanoX: {
+    light: NanoXAnim,
+    dark: NanoXAnim,
+  },
+  nanoS: {
+    light: NanoSAnim,
+    dark: NanoSAnim,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
   blue: null,
 };
 
