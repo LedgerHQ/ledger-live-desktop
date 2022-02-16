@@ -21,6 +21,7 @@ export default function LearnScreen() {
       </Text>
       <Flex flexGrow={1}>
         <iframe
+          data-test-id="learn-content-iframe"
           loading="eager"
           sandbox="allow-scripts"
           frameBorder="0"
