@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -545,6 +546,9 @@
       "initialAmount": "Начальная сумма",
       "creditedAmount": "Внесённая сумма"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Статус",
@@ -2769,6 +2773,10 @@
         "forceProvider": {
           "title": "Поставщик приложений",
           "description": "Смена поставщика приложений в Диспетчере может сделать невозможной установку или удаление приложений на вашем устройстве Ledger."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
