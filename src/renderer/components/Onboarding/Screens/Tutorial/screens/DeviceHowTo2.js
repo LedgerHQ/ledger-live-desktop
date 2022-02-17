@@ -11,8 +11,30 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Animation from "~/renderer/animations";
 import NanoSAnim from "../assets/animations/nanoS/power-on-recovery.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/powerOnRecovery/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/powerOnRecovery/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/power-on-recovery.json";
 import { ContentContainer } from "../shared";
+import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: {
+    light: NanoXAnim,
+    dark: NanoXAnim,
+  },
+  nanoS: {
+    light: NanoSAnim,
+    dark: NanoSAnim,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
+  blue: {
+    light: null,
+    dark: null,
+  },
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -132,6 +154,7 @@ type Props = {
 export function DeviceHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
@@ -141,7 +164,7 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
       <ContentContainer style={{ marginTop: 94 }}>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

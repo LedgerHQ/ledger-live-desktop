@@ -5,6 +5,9 @@ const devices = {
   nanoX: {
     productName: "Nano X",
   },
+  nanoSP: {
+    productName: "Nano S Plus",
+  },
   blue: {
     productName: "Ledger Blue",
   },
