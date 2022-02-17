@@ -15,6 +15,7 @@ import NanoSPAnimLight from "../assets/animations/nanoSP/powerOnRecovery/light.j
 import NanoSPAnimDark from "../assets/animations/nanoSP/powerOnRecovery/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/power-on-recovery.json";
 import { ContentContainer } from "../shared";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const animations = {
   nanoX: {
@@ -29,7 +30,10 @@ const animations = {
     light: NanoSPAnimLight,
     dark: NanoSPAnimDark,
   },
-  blue: null,
+  blue: {
+    light: null,
+    dark: null,
+  },
 };
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
@@ -150,6 +154,7 @@ type Props = {
 export function DeviceHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
@@ -159,7 +164,7 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
       <ContentContainer style={{ marginTop: 94 }}>
         <Animation
           loop
-          animation={animations[deviceId]}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

@@ -17,6 +17,7 @@ import NanoSAnim from "../assets/animations/nanoS/confirm-words.json";
 import NanoSPAnimLight from "../assets/animations/nanoSP/confirmWords/light.json";
 import NanoSPAnimDark from "../assets/animations/nanoSP/confirmWords/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/confirm-words.json";
+import useTheme from "~/renderer/hooks/useTheme";
 
 const animations = {
   nanoX: {
@@ -31,7 +32,10 @@ const animations = {
     light: NanoSPAnimLight,
     dark: NanoSPAnimDark,
   },
-  blue: null,
+  blue: {
+    light: null,
+    dark: null,
+  },
 };
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
@@ -149,6 +153,7 @@ type Props = {
 export function RecoveryHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -167,7 +172,7 @@ export function RecoveryHowTo2({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={animations[deviceId]}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

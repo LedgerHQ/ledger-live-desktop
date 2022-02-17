@@ -33,7 +33,10 @@ const animations = {
     light: NanoSPAnimLight,
     dark: NanoSPAnimDark,
   },
-  blue: null,
+  blue: {
+    light: null,
+    dark: null,
+  },
 };
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
@@ -159,6 +162,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
   const { deviceId } = context;
   const colors = useTheme("colors");
   const allSteps = useMemo(() => steps(colors.wallet), [colors]);
+  const theme = useTheme("colors.palette.type");
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -177,7 +181,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={animations[deviceId]}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}
