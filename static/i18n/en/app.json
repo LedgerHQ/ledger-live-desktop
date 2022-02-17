@@ -3513,6 +3513,7 @@
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient",
       "fee": "Fee",
       "feeInfoText": "Transaction on the Stellar network require a minimum transaction fee of 0.00001 XLM",
+      "suggested": "Suggested",
       "recommendedFee": "Recommended fee",
       "recommenndedFeeInfo": "You can still submit this transaction with lower fee than recommended but it may not be completed",
       "networkCongestion": "network congestion",
