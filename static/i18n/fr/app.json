@@ -548,7 +548,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Tester"
   },
   "fullNode": {
     "status": "Statut",
@@ -2775,8 +2775,8 @@
           "description": "Changer le fournisseur d'applications dans le Gestionnaire peut rendre impossible l'installation ou désinstallation d'applications sur votre appareil Ledger."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Tester les animations Lottie",
+          "description": "Testez toutes les animations utilisées dans Ledger Live."
         }
       }
     },
