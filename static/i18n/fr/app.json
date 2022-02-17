@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -545,6 +546,9 @@
       "initialAmount": "Montant initial",
       "creditedAmount": "Montant crédité"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Statut",
@@ -2769,6 +2773,10 @@
         "forceProvider": {
           "title": "Fournisseur du Gestionnaire",
           "description": "Changer le fournisseur d'applications dans le Gestionnaire peut rendre impossible l'installation ou désinstallation d'applications sur votre appareil Ledger."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
