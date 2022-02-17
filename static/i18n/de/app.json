@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blau"
   },
@@ -545,6 +546,9 @@
       "initialAmount": "Anfangsbetrag",
       "creditedAmount": "Gutschrift"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Status",
@@ -2769,6 +2773,10 @@
         "forceProvider": {
           "title": "Manager-Anbieter",
           "description": "Das Ändern des App-Anbieters im Manager kann es unmöglich machen, Apps auf Ihrem Ledger-Gerät zu installieren oder zu deinstallieren."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
