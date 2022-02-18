@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "卡",
+    "learn": "Learn",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "市场",
