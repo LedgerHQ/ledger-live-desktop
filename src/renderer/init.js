@@ -23,7 +23,7 @@ import "~/renderer/i18n/init";
 import logger, { enableDebugLogger } from "~/logger";
 import LoggerTransport from "~/logger/logger-transport-renderer";
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/global-tab";
-import sentry from "~/sentry/browser";
+import sentry from "~/sentry/renderer";
 import { setEnvOnAllThreads } from "~/helpers/env";
 import { command } from "~/renderer/commands";
 import dbMiddleware from "~/renderer/middlewares/db";

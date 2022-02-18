@@ -75,9 +75,9 @@ const captureBreadcrumb = (breadcrumb: any) => {
   if (!process.env.STORYBOOK_ENV) {
     try {
       if (typeof window !== "undefined") {
-        require("~/sentry/browser").captureBreadcrumb(breadcrumb);
+        require("~/sentry/renderer").captureBreadcrumb(breadcrumb);
       } else {
-        require("~/sentry/node").captureBreadcrumb(breadcrumb);
+        require("~/sentry/internal").captureBreadcrumb(breadcrumb);
       }
     } catch (e) {
       logger.log("warn", "Can't captureBreadcrumb", e);
@@ -88,9 +88,9 @@ const captureBreadcrumb = (breadcrumb: any) => {
 const captureException = (error: Error) => {
   try {
     if (typeof window !== "undefined") {
-      require("~/sentry/browser").captureException(error);
+      require("~/sentry/renderer").captureException(error);
     } else {
-      require("~/sentry/node").captureException(error);
+      require("~/sentry/internal").captureException(error);
     }
   } catch (e) {
     logger.log("warn", "Can't send to sentry", error, e);
