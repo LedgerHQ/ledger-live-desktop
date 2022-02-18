@@ -43,9 +43,8 @@ const Container = styled(Flex).attrs({
 })``;
 
 const StarContainer = styled(Flex).attrs({
-  height: 33,
-  ml: 2,
-  p: 1,
+  ml: 3,
+  pb: 1,
 })`
   cursor: pointer;
 `;
@@ -206,10 +205,10 @@ export default function MarketCoinScreen() {
             )}
           </CryptoCurrencyIconWrapper>
           <Flex pl={3} flexDirection="column" alignItems="left" pr={16}>
-            <Flex flexDirection="row" alignItems="center">
+            <Flex flexDirection="row" alignItems="center" justifyContent={"center"}>
               <Title>{name}</Title>
               <StarContainer data-test-id="market-coin-star-button" onClick={toggleStar}>
-                <Icon name={isStarred > 0 ? "StarSolid" : "Star"} size={18} />
+                <Icon name={isStarred > 0 ? "StarSolid" : "Star"} size={28} />
               </StarContainer>
             </Flex>
             <Text variant="small" color="neutral.c60">
