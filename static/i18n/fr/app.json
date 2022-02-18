@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "Carte",
+    "learn": "Learn",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "Marché",
