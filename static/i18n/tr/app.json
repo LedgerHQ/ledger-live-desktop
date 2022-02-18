@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "Kart",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "Piyasa",
