@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "Card",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Csillagozott számlák",
     "accounts": "Számlák",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "Market",
