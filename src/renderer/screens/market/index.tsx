@@ -7,7 +7,6 @@ import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvid
 import styled from "styled-components";
 import CounterValueSelect from "./CountervalueSelect";
 import MarketList from "./MarketList";
-import SideDrawerFilter from "./SideDrawerFilter";
 import Dropdown from "./DropDown";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import Track from "~/renderer/analytics/Track";
@@ -86,10 +85,6 @@ export default function Market() {
     }
   }, [refresh, starFilterOn, starredMarketCoins]);
 
-  const toggleLiveCompatible = useCallback(() => {
-    refresh({ liveCompatible: !liveCompatible });
-  }, [liveCompatible, refresh]);
-
   const timeRanges = useMemo(
     () =>
       Object.keys(rangeDataTable)
@@ -133,21 +128,6 @@ export default function Market() {
               searchable={false}
             />
           </Flex>
-          <SideDrawerFilter
-            refresh={refresh}
-            filters={{
-              starred: {
-                toggle: toggleFilterByStarredAccounts,
-                value: starFilterOn,
-                disabled: !starredMarketCoins?.length,
-              },
-              liveCompatible: {
-                toggle: toggleLiveCompatible,
-                value: liveCompatible,
-              },
-            }}
-            t={t}
-          />
         </Flex>
       </Flex>
       <MarketList
