@@ -35,16 +35,13 @@ export const Header = () => (
       <Trans i18nKey="delegation.status" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.totalBalance" />
-    </TableLine>
-    <TableLine>
       <Trans i18nKey="delegation.delegated" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.active" />
+      <Trans i18nKey="solana.delegation.active" />
     </TableLine>
     <TableLine>
-      <Trans i18nKey="delegation.availableBalance" />
+      <Trans i18nKey="solana.delegation.availableBalance" />
     </TableLine>
     <TableLine />
   </HeaderWrapper>

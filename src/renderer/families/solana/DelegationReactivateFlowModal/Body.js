@@ -62,13 +62,12 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "connectDevice",
-    label: <Trans i18nKey="solana.delegation.reactivate.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="solana.common.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    //onBack: ({ transitionTo }: StepProps) => transitionTo("castDelegations"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="solana.delegation.reactivate.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="solana.common.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },

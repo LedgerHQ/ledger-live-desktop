@@ -2545,6 +2545,8 @@
       }
     },
     "delegation": {
+      "availableBalance": "Available balance",
+      "active": "Active",
       "flow": {
         "steps": {
           "validator": {
@@ -2578,7 +2580,7 @@
             "confirmation": {
               "success": {
                 "title": "You have successfully reactivated you delegation.",
-                "text": "Some info about cool down period here"
+                "text": "Deactivating part of the delegation is immediately active."
               }
             }
           }
@@ -2592,7 +2594,7 @@
           "confirmation": {
             "success": {
               "title": "You have successfully undelegated your assets.",
-              "text": "Some info about cool down period here"
+              "text": "It can take a couple of epochs before you can withdraw."
             }
           }
         }

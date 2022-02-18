@@ -54,9 +54,7 @@ function StepConfirmation({
       <Container shouldSpace={signed}>
         <TrackPage category="Undelegation Solana" name="Step Confirmation Error" />
         {signed ? (
-          <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="solana.undelegation.flow.steps.confirmation.broadcastError" />}
-          />
+          <BroadcastErrorDisclaimer title={<Trans i18nKey="solana.common.broadcastError" />} />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
       </Container>
@@ -99,7 +97,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="solana.undelegation.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="solana.common.viewDetails" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

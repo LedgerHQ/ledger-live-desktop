@@ -105,7 +105,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="solana.delegation.reactivate.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="solana.common.viewDetails" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />
