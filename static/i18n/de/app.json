@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "Karte",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "Markt",
