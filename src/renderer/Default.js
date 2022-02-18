@@ -175,9 +175,6 @@ export default function Default() {
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
                         <Route path="/card" render={props => <Card {...props} />} />
-                        <FeatureToggle feature="learn">
-                          <Route path="/learn" render={props => <Learn {...props} />} />
-                        </FeatureToggle>
                         <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
@@ -220,6 +217,9 @@ export default function Default() {
                           render={props => <MarketCoinScreen {...props} />}
                         />
                         <Route path="/market" render={props => <Market {...props} />} />
+                        <FeatureToggle feature="learn">
+                          <Route path="/learn" render={props => <Learn {...props} />} />
+                        </FeatureToggle>
                       </Switch>
                     </Page>
                     <Drawer />
