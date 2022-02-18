@@ -2547,6 +2547,7 @@
     "delegation": {
       "availableBalance": "Available balance",
       "active": "Active",
+      "activate": "Activate",
       "flow": {
         "steps": {
           "validator": {
