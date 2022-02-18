@@ -193,7 +193,6 @@
   },
   "sidebar": {
     "card": "Card",
-    "learn": "Learn",
     "menu": "Menu",
     "stars": "Starred accounts",
     "accounts": "Accounts",
@@ -1185,9 +1184,6 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
-  },
-  "learn": {
-    "title": "Learn"
   },
   "market": {
     "title": "Market",
