@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "카드",
+    "learn": "Learn",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "시장",
