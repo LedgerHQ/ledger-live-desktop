@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "カード",
+    "learn": "Learn",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "マーケット",
