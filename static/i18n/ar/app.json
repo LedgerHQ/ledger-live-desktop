@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "بطاقة",
+    "learn": "Learn",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "سوق",
