@@ -193,6 +193,7 @@
   },
   "sidebar": {
     "card": "Карта",
+    "learn": "Learn",
     "menu": "Меню",
     "stars": "Избранные счета",
     "accounts": "Счета",
@@ -1184,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Щелкните <1>Continue</1> (Продолжить), чтобы обновить его."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "Рынок",
