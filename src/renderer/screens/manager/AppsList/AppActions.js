@@ -116,25 +116,22 @@ const AppActions: React$ComponentType<Props> = React.memo(
       if (addAccount) addAccount();
     }, [addAccount]);
 
-    const onNavigateTo = useCallback(
-      type => {
-        switch (type) {
-          case "plugin":
-            history.push("/platform");
-            break;
-          case "app":
-            openURL(urls.appSupport[app.name] || urls.appSupport.default);
-            break;
-          case "tool":
-            openURL(urls.managerAppLearnMore);
-            break;
-          case "swap":
-            history.push("/swap");
-            break;
-        }
-      },
-      [app.name, history],
-    );
+    const onNavigateTo = useCallback(() => {
+      switch (type) {
+        case "plugin":
+          history.push("/platform");
+          break;
+        case "app":
+          openURL(urls.appSupport[name] || urls.appSupport.default);
+          break;
+        case "tool":
+          openURL(urls.managerAppLearnMore);
+          break;
+        case "swap":
+          history.push("/swap");
+          break;
+      }
+    }, [name, type, history]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
@@ -157,7 +154,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
             color={"palette.primary.main"}
             style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
             fontSize={3}
-            onClick={() => onNavigateTo(type)}
+            onClick={onNavigateTo}
             justifyContent="center"
             event={`Manager ${type} Click`}
             eventProperties={{
@@ -227,7 +224,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                   color={"palette.primary.main"}
                   style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
                   fontSize={3}
-                  onClick={() => onNavigateTo(type)}
+                  onClick={onNavigateTo}
                   justifyContent="center"
                   event={`Manager ${type} Click`}
                   eventProperties={{
