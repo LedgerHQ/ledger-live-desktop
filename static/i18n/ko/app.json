@@ -1604,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "&lt;1&gt;{{tokenName}} {{tokenType}} 토큰을 관리하려면, &lt;1&gt;{{tokenType}} 버전인지 확인한 후 &lt;3&gt;귀하의 {{appName}} 계정으로 전송하세요.",
         "goToAccounts": "계정으로 이동",
         "intallParentApp": "{{appName}} 앱 설치",
-        "platform": "앱으로 이동"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "모두 제거",
