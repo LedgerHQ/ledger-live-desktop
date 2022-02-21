@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blau"
   },
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "Karte",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
@@ -545,6 +547,9 @@
       "initialAmount": "Anfangsbetrag",
       "creditedAmount": "Gutschrift"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Status",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "Markt",
     "currency": "Währung",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "Zur Verwaltung von <1>{{tokenName}} {{tokenType}}-Token</1> zu verwalten, vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}}-Version</1> haben, bevor Sie <3>an Ihr {{appName}}-Konto</3> senden.",
         "goToAccounts": "Zu den Konten gehen",
         "intallParentApp": "{{appName}} App installieren",
-        "platform": "Zur App gehen"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Alle deinstallieren",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimentelle Integrationen",
-          "description": "Experimentelle Integration von Solana verwenden."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "Manager-Anbieter",
           "description": "Das Ändern des App-Anbieters im Manager kann es unmöglich machen, Apps auf Ihrem Ledger-Gerät zu installieren oder zu deinstallieren."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
