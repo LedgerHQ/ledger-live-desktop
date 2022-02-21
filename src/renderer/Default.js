@@ -54,6 +54,7 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+import NftProviderSwitcher from "~/renderer/components/NftProviderSwitcher";
 // $FlowFixMe
 import Market from "~/renderer/screens/market";
 // $FlowFixMe
@@ -167,6 +168,7 @@ export default function Default() {
                     <MainSideBar />
                     <Page>
                       <TopBannerContainer>
+                        <NftProviderSwitcher />
                         <UpdateBanner />
                         <FirmwareUpdateBanner />
                       </TopBannerContainer>
