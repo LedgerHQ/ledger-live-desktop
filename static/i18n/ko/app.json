@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "블루"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} 바이트",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "분",
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "카드",
+    "learn": "Learn",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
@@ -545,6 +547,9 @@
       "initialAmount": "초기 금액",
       "creditedAmount": "적립된 금액"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "상태",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "시장",
     "currency": "통화",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "&lt;1&gt;{{tokenName}} {{tokenType}} 토큰을 관리하려면, &lt;1&gt;{{tokenType}} 버전인지 확인한 후 &lt;3&gt;귀하의 {{appName}} 계정으로 전송하세요.",
         "goToAccounts": "계정으로 이동",
         "intallParentApp": "{{appName}} 앱 설치",
-        "platform": "앱으로 이동"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "모두 제거",
@@ -2697,7 +2708,7 @@
       "desc": "암호화폐를 선택하여 관련 설정을 수정하세요.",
       "placeholder": "이 자산 관련 설정 값이 없음",
       "confirmationsNb": "확인 수",
-      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
+      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 컨펌 수를 설정합니다."
     },
     "profile": {
       "password": "암호 잠금",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 통합",
-          "description": "솔라나의 실험적 통합을 사용합니다."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "관리자 공급자",
           "description": "관리자에서 앱 공급자를 변경하면 Ledger 기기에서 앱 설치 또는 삭제가 불가능해질 수 있습니다."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
