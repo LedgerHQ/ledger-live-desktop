@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bayt",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "Dakika",
@@ -192,12 +193,13 @@
   },
   "sidebar": {
     "card": "Kart",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
     "manager": "Yönetici",
     "exchange": "Al / Sat",
-    "swap": "Takas",
+    "swap": "Takas et",
     "lend": "Borç ver",
     "catalog": "Keşfet",
     "market": "Piyasa"
@@ -218,7 +220,7 @@
     "disconnectButton": "Bağlantıyı Kes"
   },
   "swap2": {
-    "title": "Takas",
+    "title": "Takas et",
     "tabs": {
       "exchange": "Takas",
       "history": "Geçmiş",
@@ -340,7 +342,7 @@
     }
   },
   "swap": {
-    "title": "Takas",
+    "title": "Takas et",
     "titleCrypto": "{{currency}} takas et",
     "whatIsSwap": "Takas (Swap) Nedir?",
     "paraswap": {
@@ -485,7 +487,7 @@
       "cta": "Onayla"
     },
     "modal": {
-      "title": "Takas",
+      "title": "Takas et",
       "steps": {
         "summary": {
           "title": "Özet",
@@ -545,6 +547,9 @@
       "initialAmount": "Başlangıç tutarı",
       "creditedAmount": "Eklenen tutar"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Durum",
@@ -722,7 +727,7 @@
       "header": "Kripto alın ve satın",
       "title": "Kripto satın almak için bir sağlayıcı seçin",
       "buyFrom": "İstediğiniz yerden satın alın",
-      "cryptoSupported": "desteklenen kriptolar",
+      "cryptoSupported": "kripto destekleniyor",
       "payWith": "Kart veya SEPA ile ödeme yapın",
       "tab": "Satın al",
       "coinify": {
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "Piyasa",
     "currency": "Para birimi",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
         "intallParentApp": "{{appName}} uygulamasını yükleyin",
-        "platform": "Uygulamaya git"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Tümünü kaldır",
@@ -2382,7 +2393,7 @@
       }
     },
     "bond": {
-      "title": "Varlıkları bağla",
+      "title": "Varlıkları bağlayın",
       "rewardDestination": {
         "label": "Ödül Hedefi",
         "stash": "Mevcut bakiye",
@@ -2464,7 +2475,7 @@
       }
     },
     "unbond": {
-      "title": "Varlıkları çöz",
+      "title": "Varlıkları çözün",
       "steps": {
         "amount": {
           "title": "Tutar",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
-          "description": "Solana deneysel entegrasyonunu kullanın."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "Yönetici sağlayıcı",
           "description": "Yönetici'de uygulama sağlayıcısını değiştirmek, Ledger cihazınıza uygulama yüklemeyi veya kaldırmayı imkansız hale getirebilir."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },

@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "Carte",
+    "learn": "Approfondir",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -545,6 +547,9 @@
       "initialAmount": "Montant initial",
       "creditedAmount": "Montant crédité"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Tester"
   },
   "fullNode": {
     "status": "Statut",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
+  "learn": {
+    "title": "Approfondir"
+  },
   "market": {
     "title": "Marché",
     "currency": "Devise",
@@ -1205,10 +1213,10 @@
     "detailsPage": {
       "priceStatistics": "Statistiques du cours",
       "tradingVolume": "Volume de trading",
-      "24hLowHight": "+ Haut / + Bas (24h)",
-      "7dLowHigh": "7j Bas / 7j Haut",
-      "allTimeHigh": "+ Haut (historique)",
-      "allTimeLow": "+ Bas (historique)",
+      "24hLowHight": "Bas / Haut (24h)",
+      "7dLowHigh": "Bas / Haut (7j)",
+      "allTimeHigh": "Haut (historique)",
+      "allTimeLow": "Bas (historique)",
       "marketCapRank": "Rang",
       "marketCapDominance": "Position dominante",
       "supply": "Offre",
@@ -1468,7 +1476,7 @@
   "DeviceAction": {
     "allowAppPermission": "Ouvrez l'application {{wording}} sur votre appareil",
     "allowAppPermissionSubtitleToken": "pour gérer vos tokens {{token}}",
-    "allowManagerPermission": "Autoriser {{wording}} sur l'appareil",
+    "allowManagerPermission": "Autorisez {{wording}} sur l'appareil.",
     "loading": "Chargement...",
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
     "unlockDevice": "Déverrouillez votre appareil.",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}",
-        "platform": "Accéder à l'application"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Tout désinstaller",
@@ -1621,7 +1632,7 @@
       "updateLater": "Annuler",
       "seedReady": "J'ai ma phrase de récupération.",
       "dontHaveSeed": "Vous n'avez pas votre phrase de récupération ?",
-      "followTheGuide": "Laissez-vous guider.",
+      "followTheGuide": "Laissez-vous guider",
       "removeApps": "Désinstaller toutes les applications avant de mettre à jour",
       "update": "Mise à jour du micrologiciel",
       "updateBtn": "Mettre à jour le micrologiciel",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "Intégrations expérimentales",
-          "description": "Utilisez l'intégration expérimentale de Solana."
+          "description": "Utilisez les intégrations expérimentales disponibles pour les crypto-actifs concernés."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "Fournisseur du Gestionnaire",
           "description": "Changer le fournisseur d'applications dans le Gestionnaire peut rendre impossible l'installation ou désinstallation d'applications sur votre appareil Ledger."
+        },
+        "testAnimations": {
+          "title": "Tester les animations Lottie",
+          "description": "Testez toutes les animations utilisées dans Ledger Live."
         }
       }
     },
@@ -2983,9 +2998,9 @@
       "recoverySeedWarning": {
         "contactSupportCTA": "Contacter l'Assistance",
         "continueCTA": "Continuer",
-        "title": "Vérifier le contenu de votre coffret",
+        "title": "Vérifiez le contenu de votre coffret.",
         "description": "Si votre {{device}} est livré avec un code PIN ou une phrase de récupération, l'utiliser présente un risque. Contactez l'Assistance Ledger.",
-        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil lors de sa configuration."
+        "alert": "Utilisez uniquement la phrase de récupération affichée par votre appareil Ledger lors de sa configuration."
       }
     },
     "alerts": {
