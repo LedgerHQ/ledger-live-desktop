@@ -19,6 +19,8 @@ import Tooltip from "~/renderer/components/Tooltip";
 import Button from "~/renderer/components/Button";
 import Progress from "~/renderer/screens/manager/AppsList/Progress";
 import Box from "~/renderer/components/Box/Box";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 import { colors } from "~/renderer/styles/theme";
 
@@ -26,12 +28,19 @@ import AccountAdd from "~/renderer/icons/AccountAdd";
 import IconCheck from "~/renderer/icons/Check";
 import IconTrash from "~/renderer/icons/Trash";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
+import IconExternalLink from "~/renderer/icons/ExternalLink";
+
+const ExternalLinkIconContainer = styled.span`
+  display: inline-flex;
+  margin-left: 4px;
+`;
 
 const AppActionsWrapper = styled.div`
   display: flex;
   flex: 0.8;
   min-width: 150px;
-  justify-content: flex-end;
+  max-width: 300px;
+  justify-content: ${p => (p.right ? "flex-end" : "space-between")};
   flex-direction: row;
   > *:not(:last-child) {
     margin-right: 10px;
@@ -107,9 +116,22 @@ const AppActions: React$ComponentType<Props> = React.memo(
       if (addAccount) addAccount();
     }, [addAccount]);
 
-    const onNavigateToPlatform = useCallback(() => {
-      history.push("/platform");
-    }, [history]);
+    const onNavigateTo = useCallback(() => {
+      switch (type) {
+        case "plugin":
+          history.push("/platform");
+          break;
+        case "app":
+          openURL(urls.appSupport[name] || urls.appSupport.default);
+          break;
+        case "tool":
+          openURL(urls.managerAppLearnMore);
+          break;
+        case "swap":
+          history.push("/swap");
+          break;
+      }
+    }, [name, type, history]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
@@ -120,8 +142,36 @@ const AppActions: React$ComponentType<Props> = React.memo(
       [installQueue.length, installed, uninstallQueue.length],
     );
 
+    const showLearnMore = type === "tool" || (type === "app" && !isLiveSupported);
+    const hasSpecificAction =
+      ["swap", "plugin"].includes(type) || (type === "app" && isLiveSupported);
+    const hasTwoCTAS = showLearnMore || installed;
+
     return (
-      <AppActionsWrapper>
+      <AppActionsWrapper right={!hasTwoCTAS}>
+        {showLearnMore ? (
+          <Button
+            color={"palette.primary.main"}
+            style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+            fontSize={3}
+            onClick={onNavigateTo}
+            justifyContent="center"
+            event={`Manager ${type} Click`}
+            eventProperties={{
+              appName: name,
+              appVersion: app.version,
+            }}
+          >
+            <Box horizontal alignContent="center" justifyContent="center">
+              <Text>
+                <Trans i18nKey={`manager.applist.item.${type}`} />
+              </Text>
+              <ExternalLinkIconContainer>
+                <IconExternalLink size={16} />
+              </ExternalLinkIconContainer>
+            </Box>
+          </Button>
+        ) : null}
         {installing || uninstalling ? (
           <Progress
             state={state}
@@ -133,8 +183,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
           />
         ) : showActions ? (
           <>
-            {installed && isLiveSupported ? (
-              type === "app" ? (
+            {installed ? (
+              type === "app" && isLiveSupported ? (
                 <Tooltip
                   content={
                     canAddAccount ? (
@@ -169,27 +219,26 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     </Box>
                   </Button>
                 </Tooltip>
-              ) : (
+              ) : hasSpecificAction ? (
                 <Button
-                  color={canAddAccount ? "palette.primary.main" : "palette.text.shade40"}
-                  inverted
+                  color={"palette.primary.main"}
                   style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
                   fontSize={3}
-                  onClick={onNavigateToPlatform}
+                  onClick={onNavigateTo}
                   justifyContent="center"
-                  event="Manager Plugin Platform Click"
+                  event={`Manager ${type} Click`}
                   eventProperties={{
                     appName: name,
                     appVersion: app.version,
                   }}
                 >
                   <Box horizontal alignContent="center" justifyContent="center">
-                    <Text style={{ marginLeft: 8 }}>
-                      <Trans i18nKey="manager.applist.item.platform" />
+                    <Text>
+                      <Trans i18nKey={`manager.applist.item.${type}`} />
                     </Text>
                   </Box>
                 </Button>
-              )
+              ) : null
             ) : null}
             {appStoreView && installed && (
               <SuccessInstall>

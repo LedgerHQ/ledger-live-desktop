@@ -7,6 +7,7 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 
 import {
   accountsSelector,
@@ -37,6 +38,7 @@ import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 import IconMarket from "~/renderer/icons/ChartLine";
+import IconLearn from "~/renderer/icons/Learn";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -231,6 +233,10 @@ const MainSideBar = () => {
     push("/card");
   }, [push]);
 
+  const handleClickLearn = useCallback(() => {
+    push("/learn");
+  }, [push]);
+
   const handleClickDashboard = useCallback(() => {
     push("/");
   }, [push]);
@@ -313,7 +319,6 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-
               <SideBarListItem
                 id={"market"}
                 label={t("sidebar.market")}
@@ -323,7 +328,17 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/market"}
                 collapsed={secondAnim}
               />
-
+              <FeatureToggle feature="learn">
+                <SideBarListItem
+                  id="learn"
+                  label={t("sidebar.learn")}
+                  icon={IconLearn}
+                  iconActiveColor="wallet"
+                  isActive={location.pathname.startsWith("/learn")}
+                  onClick={handleClickLearn}
+                  collapsed={secondAnim}
+                />
+              </FeatureToggle>
               <SideBarListItem
                 id={"accounts"}
                 label={t("sidebar.accounts")}
