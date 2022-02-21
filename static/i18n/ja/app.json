@@ -2752,7 +2752,7 @@
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
-          "description": "Solanaの試験的統合を使用する。"
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
