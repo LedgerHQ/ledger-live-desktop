@@ -24,6 +24,7 @@
 | Polkadot | DOT | YES | polkadot |
 | Polygon | MATIC | YES | polygon |
 | Qtum | QTUM | YES | qtum |
+| Solana | SOL | YES | solana |
 | Stakenet | XSN | YES | stakenet |
 | Stellar | XLM | YES | stellar |
 | Tezos | XTZ | YES | tezos |
@@ -89,7 +90,6 @@
 | Ravencoin | RVN | NO | ravencoin |
 | Resistance | RES | NO | resistance |
 | Rise | RISE | NO | rise |
-| Solana | SOL | NO | solana |
 | Songbird | SGB | NO | songbird |
 | Thundercore | TT | NO | thundercore |
 | TomoChain | TOMO | NO | tomo |
