@@ -2752,7 +2752,7 @@
         },
         "experimentalCurrencies": {
           "title": "Intégrations expérimentales",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Utilisez les intégrations expérimentales disponibles pour les crypto-actifs concernés."
         },
         "experimentalLanguages": {
           "title": "Tester les traductions",
