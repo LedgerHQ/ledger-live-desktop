@@ -89,6 +89,10 @@ export default function Market() {
     }
   }, [refresh, starFilterOn, starredMarketCoins]);
 
+  const toggleLiveCompatible = useCallback(() => {
+    refresh({ liveCompatible: !liveCompatible });
+  }, [liveCompatible, refresh]);
+
   const timeRanges = useMemo(
     () =>
       Object.keys(rangeDataTable)
