@@ -12,6 +12,7 @@ import { retry } from "@ledgerhq/live-common/lib/promise";
 import TransportNodeHidSingleton from "@ledgerhq/hw-transport-node-hid-singleton";
 import TransportHttp from "@ledgerhq/hw-transport-http";
 import { DisconnectedDevice } from "@ledgerhq/errors";
+import logger from "../logger";
 
 /* eslint-disable guard-for-in */
 for (const k in process.env) {
@@ -60,6 +61,9 @@ if (getEnv("DEVICE_PROXY_URL")) {
     id: "hid",
     open: devicePath => retry(() => TransportNodeHidSingleton.open(), { maxRetry: 4 }),
     disconnect: () => Promise.resolve(),
+    setAllowAutoDisconnect: (transport, _, allow) => {
+      transport.setAllowAutoDisconnect(allow);
+    },
   });
 }
 
