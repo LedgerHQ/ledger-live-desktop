@@ -2752,7 +2752,7 @@
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
-          "description": "Solana deneysel entegrasyonunu kullanın."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
