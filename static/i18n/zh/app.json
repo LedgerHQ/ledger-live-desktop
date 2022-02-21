@@ -2752,7 +2752,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验集成",
-          "description": "使用 Solana 的实验集成。"
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "翻译测试",
