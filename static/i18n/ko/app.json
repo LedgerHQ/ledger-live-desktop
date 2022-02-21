@@ -2752,7 +2752,7 @@
         },
         "experimentalCurrencies": {
           "title": "실험적 통합",
-          "description": "솔라나의 실험적 통합을 사용합니다."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
