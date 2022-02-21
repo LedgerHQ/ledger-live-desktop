@@ -1604,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
         "intallParentApp": "安装 {{appName}} 应用程序",
-        "platform": "前往应用"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "卸载全部",
