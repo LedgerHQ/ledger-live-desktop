@@ -305,6 +305,7 @@ function MarketList({
           )}
           <TableRow header>
             <SortTableCell
+              data-test-id="market-sort-button"
               onClick={toggleSortBy}
               orderByKey="market_cap"
               orderBy={orderBy}
