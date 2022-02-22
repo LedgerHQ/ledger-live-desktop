@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Carte",
-    "learn": "Approfondir",
+    "learn": "Learn",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -1187,7 +1187,7 @@
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "learn": {
-    "title": "Approfondir"
+    "title": "Learn"
   },
   "market": {
     "title": "Marché",
@@ -1604,10 +1604,10 @@
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}",
-        "plugin": "Go to app",
+        "plugin": "Accéder à l'application",
         "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "tool": "En savoir plus",
+        "app": "En savoir plus"
       },
       "uninstall": {
         "title": "Tout désinstaller",
