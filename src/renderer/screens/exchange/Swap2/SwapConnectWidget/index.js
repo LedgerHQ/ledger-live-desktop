@@ -1,6 +1,6 @@
 // @flow
 
-import { remote } from "electron";
+import { remote, WebviewTag, shell } from "electron";
 
 import React, { useEffect, useCallback, forwardRef } from "react";
 import { useDispatch } from "react-redux";
@@ -43,7 +43,7 @@ type Props = {
 
 const SwapConnectWidget = (
   { provider, url, onClose }: Props,
-  webviewRef: React.MutableRefObject<any>,
+  webviewRef: React.MutableRefObject<WebviewTag>,
 ) => {
   const dispatch = useDispatch();
 
@@ -72,19 +72,28 @@ const SwapConnectWidget = (
     [handleMessageData],
   );
 
+  const handleNewWindow = useCallback(async e => {
+    const protocol = new URL(e.url).protocol;
+    if (protocol === "http:" || protocol === "https:") {
+      await shell.openExternal(e.url);
+    }
+  }, []);
+
   // Setup communication between webview and application
   useEffect(() => {
     const webview = webviewRef.current;
     if (webview) {
       webview.addEventListener("ipc-message", handleMessage);
+      webview.addEventListener("new-window", handleNewWindow);
     }
 
     return () => {
       if (webview) {
         webview.removeEventListener("ipc-message", handleMessage);
+        webview.removeEventListener("new-window", handleNewWindow);
       }
     };
-  }, [handleMessage, webviewRef]);
+  }, [handleMessage, handleNewWindow, webviewRef]);
 
   return (
     <Container>

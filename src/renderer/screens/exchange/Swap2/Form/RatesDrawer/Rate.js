@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
 import styled from "styled-components";
-import capitalize from "lodash/capitalize";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
@@ -13,7 +12,7 @@ import IconLock from "~/renderer/icons/Lock";
 import IconLockOpen from "~/renderer/icons/LockOpen";
 import Price from "~/renderer/components/Price";
 import CounterValue from "~/renderer/components/CounterValue";
-import * as providerIcons from "~/renderer/icons/providers";
+import { iconByProviderName } from "../../utils";
 
 const ProviderContainer: ThemedComponent<{}> = styled(Box).attrs({
   horizontal: true,
@@ -46,8 +45,8 @@ export type Props = {
 function Rate({ value, selected, onSelect, fromCurrency, toCurrency }: Props) {
   const handleSelection = useCallback(() => onSelect(value), [value, onSelect]);
 
-  const amount = value.toAmount;
-  const ProviderIcon = providerIcons[capitalize(value.provider)];
+  const { toAmount: amount, provider } = value;
+  const ProviderIcon = provider && iconByProviderName[provider.toLowerCase()];
 
   return (
     <ProviderContainer p={3} mb={3} selected={selected} onClick={handleSelection}>

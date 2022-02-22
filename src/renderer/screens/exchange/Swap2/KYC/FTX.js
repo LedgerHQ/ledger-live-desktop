@@ -1,21 +1,20 @@
 // @flow
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import SwapConnectWidget from "../SwapConnectWidget";
+
+import type { FTXProviders } from "../utils";
 import { getFTXURL } from "../utils";
 
-// FIXME: should use constant instead of string
-const provider = "ftx";
+type Props = { onClose: Function, provider: FTXProviders };
 
-const url = getFTXURL("kyc");
-
-type Props = { onClose: Function };
-
-const FTXKYC = ({ onClose }: Props) => {
+const FTXKYC = ({ onClose, provider }: Props) => {
   const webviewRef = useRef(null);
+
+  const url = useMemo(() => getFTXURL({ type: "kyc", provider }), [provider]);
 
   const swapKYC = useSelector(swapKYCSelector);
   const providerKYC = swapKYC?.[provider];
