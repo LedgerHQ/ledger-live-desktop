@@ -1,18 +1,41 @@
 // @flow
 
-import React, { useRef } from "react";
+import React, { useRef, useMemo, useCallback, useEffect } from "react";
 import SwapConnectWidget from "../SwapConnectWidget";
+
+import type { FTXProviders } from "../utils";
 import { getFTXURL } from "../utils";
 
-// FIXME: should use constant instead of string
-const provider = "ftx";
+type Props = { onClose: Function, provider: FTXProviders };
 
-const url = getFTXURL("login");
+const FTXLogin = ({ onClose, provider }: Props) => {
+  const url = useMemo(() => getFTXURL({ type: "login", provider }), [provider]);
 
-type Props = { onClose: Function };
-
-const FTXLogin = ({ onClose }: Props) => {
   const webviewRef = useRef(null);
+
+  /**
+   * Force removal of authToken item from webview local storage when user is
+   * asked to login. Done to allow for FTX login reset (when cleaning app.json)
+   */
+  const handleExecuteJavaScript = useCallback(() => {
+    const webview = webviewRef.current;
+    if (webview) {
+      webview.executeJavaScript(`localStorage.removeItem('authToken')`);
+    }
+  }, []);
+
+  useEffect(() => {
+    const webview = webviewRef.current;
+    if (webview) {
+      webview.addEventListener("dom-ready", handleExecuteJavaScript);
+    }
+
+    return () => {
+      if (webview) {
+        webview.removeEventListener("dom-ready", handleExecuteJavaScript);
+      }
+    };
+  }, [handleExecuteJavaScript]);
 
   return <SwapConnectWidget provider={provider} onClose={onClose} url={url} ref={webviewRef} />;
 };
