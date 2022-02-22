@@ -77,7 +77,7 @@ export function StepValidatorFooter({
 }: StepProps) {
   invariant(account, "account required");
   const { errors } = status;
-  const canNext = !bridgePending && !errors.voteAccAddress;
+  const canNext = !bridgePending && !errors.voteAccAddr;
 
   return (
     <>
