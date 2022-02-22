@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} 字节",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "分钟",
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "卡",
+    "learn": "Learn",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -545,6 +547,9 @@
       "initialAmount": "初始额",
       "creditedAmount": "贷记额"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "状态",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "市场",
     "currency": "币种",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
         "intallParentApp": "安装 {{appName}} 应用程序",
-        "platform": "前往应用"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "卸载全部",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "实验集成",
-          "description": "使用 Solana 的实验集成。"
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "管理器提供商",
           "description": "在管理器中更改应用程序提供商可能会导致无法在您的 Ledger 设备上安装或卸载应用程序。"
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
