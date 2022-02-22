@@ -905,7 +905,7 @@
           "amountToWithdraw": "Montant à retirer",
           "withdrawAll": "Retirer le maximum",
           "placeholder": "Retirer le maximum",
-          "maxWithdrawble": "Le montant maximal à retirer est"
+          "maxWithdrawble": "Montant maximal à retirer :"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -955,7 +955,7 @@
         "amount": {
           "title": "Montant",
           "amountToSupply": "Montant à déposer",
-          "maxSupply": "Le montant maximal disponible est"
+          "maxSupply": "Montant maximal disponible :"
         },
         "device": {
           "title": "Appareil"
@@ -1857,7 +1857,7 @@
       },
       "amount": {
         "title": "Montant",
-        "banner": "Le montant maximal pouvant être envoyé est",
+        "banner": "Montant maximal pouvant être envoyé :",
         "fees": "Frais",
         "standard": "Standard",
         "advanced": "Avancé",
