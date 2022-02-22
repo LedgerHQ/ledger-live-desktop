@@ -2782,8 +2782,8 @@
           "description": "Cambiar el proveedor de aplicaciones en el Manager puede imposibilitar la instalación o desinstalación de aplicaciones en tu dispositivo Ledger."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Probar animaciones Lottie",
+          "description": "Probar todas las animaciones utilizadas en Ledger Live"
         }
       }
     },
