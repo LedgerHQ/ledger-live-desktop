@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Tarjeta",
-    "learn": "Learn",
+    "learn": "Aprender",
     "menu": "Menú",
     "stars": "Cuentas destacadas",
     "accounts": "Cuentas",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Probar"
   },
   "fullNode": {
     "status": "Estado",
@@ -1187,7 +1187,7 @@
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Aprender"
   },
   "market": {
     "title": "Mercado",
@@ -1605,9 +1605,9 @@
         "goToAccounts": "Ir a cuentas",
         "intallParentApp": "Instalar aplicación {{appName}}",
         "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "swap": "Permuta",
+        "tool": "Más información",
+        "app": "Más información"
       },
       "uninstall": {
         "title": "Desinstalar todas",
@@ -2751,11 +2751,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Usar implementaciones de JS experimentales para Algorand y Tezos."
         },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Utilizar integraciones experimentales de actrivos cripto disponibles."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
