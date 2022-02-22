@@ -14,7 +14,7 @@ import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { Transaction, StakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 
 import type { StepId, StepProps, St } from "./types";
 import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
@@ -32,8 +32,6 @@ import StepValidator, { StepValidatorFooter } from "./steps/StepValidator";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
-import { BigNumber } from "bignumber.js";
-import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
 
 type OwnProps = {|
   stepId: StepId,
@@ -41,6 +39,7 @@ type OwnProps = {|
   onChangeStepId: StepId => void,
   params: {
     account: Account,
+    stakeWithMeta: StakeWithMeta,
     parentAccount: ?Account,
   },
   name: string,
@@ -66,18 +65,9 @@ const steps: Array<St> = [
     footer: StepValidatorFooter,
   },
   {
-    id: "amount",
-    label: <Trans i18nKey="solana.delegation.flow.steps.amount.title" />,
-    component: StepAmount,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("validator"),
-    noScroll: true,
-    footer: StepAmountFooter,
-  },
-  {
     id: "connectDevice",
     label: <Trans i18nKey="solana.common.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
@@ -121,7 +111,7 @@ const Body = ({
     bridgeError,
     bridgePending,
   } = useBridgeTransaction(() => {
-    const { account } = params;
+    const { account, stakeWithMeta } = params;
 
     invariant(account && account.solanaResources, "solana: account and solana resources required");
 
@@ -129,11 +119,10 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
       model: {
-        kind: "stake.createAccount",
+        kind: "stake.delegate",
         uiState: {
-          delegate: {
-            voteAccAddress: "",
-          },
+          stakeAccAddr: stakeWithMeta.stake.stakeAccAddr,
+          voteAccAddr: stakeWithMeta.stake.delegation?.voteAccAddr ?? "",
         },
       },
     });
@@ -149,7 +138,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("connectDevice");
+    onChangeStepId("validator");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -184,7 +173,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.delegation.flow.title"),
+    title: t("solana.delegation.activate.flow.title"),
     device,
     account,
     parentAccount,

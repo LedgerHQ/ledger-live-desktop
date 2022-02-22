@@ -158,9 +158,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
   //const name = validator?.name ?? validatorAddress;
   const isDelegated = stake.delegation !== undefined;
 
-  const validatorName = isDelegated
-    ? meta.validator?.name ?? stake.delegation.voteAccAddr
-    : "Not Delegated";
+  const validatorName = isDelegated ? meta.validator?.name ?? stake.delegation.voteAccAddr : "N/A";
 
   /*
   const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
@@ -205,7 +203,12 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
       <Column>
         {formatAmount(stake.activation.state === "inactive" ? 0 : stake.delegation?.stake ?? 0)}
       </Column>
-      <Column>{(stake.activation.active / stake.delegation?.stake) * 100} %</Column>
+      <Column>
+        {stake.delegation === undefined
+          ? 0
+          : (stake.activation.active / stake.delegation.stake) * 100}{" "}
+        %
+      </Column>
       <Column>{formatAmount(stake.withdrawable)}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
@@ -229,8 +232,8 @@ function toStakeDropDownItem(stakeAction: string) {
   switch (stakeAction) {
     case "activate":
       return {
-        key: "MODAL_SOLANA_DELEGATE",
-        label: <Trans i18nKey="solana.delegation.activate" />,
+        key: "MODAL_SOLANA_DELEGATION_ACTIVATE",
+        label: <Trans i18nKey="solana.delegation.activate.flow.title" />,
       };
     case "reactivate":
       return {

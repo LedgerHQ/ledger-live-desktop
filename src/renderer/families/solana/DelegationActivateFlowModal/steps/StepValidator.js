@@ -36,20 +36,19 @@ export default function StepValidator({
   const updateValidator = ({ address }: { address: string }) => {
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, parentAccount);
     onUpdateTransaction(tx => {
-      return bridge.updateTransaction(transaction, {
+      return bridge.updateTransaction(tx, {
         model: {
-          kind: "stake.createAccount",
+          ...tx.model,
           uiState: {
-            delegate: {
-              voteAccAddress: address,
-            },
+            ...tx.model.uiState,
+            voteAccAddr: address,
           },
         },
       });
     });
   };
 
-  const chosenVoteAccAddr = transaction.model.uiState.delegate?.voteAccAddress;
+  const chosenVoteAccAddr = transaction.model.uiState.voteAccAddr;
 
   return (
     <Box flow={1}>
@@ -77,7 +76,7 @@ export function StepValidatorFooter({
 }: StepProps) {
   invariant(account, "account required");
   const { errors } = status;
-  const canNext = !bridgePending && !errors.voteAccAddress;
+  const canNext = !bridgePending && !errors.voteAccAddr;
 
   return (
     <>
@@ -90,7 +89,7 @@ export function StepValidatorFooter({
           id="delegate-continue-button"
           disabled={!canNext}
           primary
-          onClick={() => transitionTo("amount")}
+          onClick={() => transitionTo("connectDevice")}
         >
           <Trans i18nKey="common.continue" />
         </Button>
