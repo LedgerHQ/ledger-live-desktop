@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
