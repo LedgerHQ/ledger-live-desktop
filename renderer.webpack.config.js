@@ -126,14 +126,14 @@ module.exports = {
     rules: [
       {
         test: /\.(ts)x?$/,
-        exclude: exceptionToTranspile,
+        exclude: /node_modules/,
         loader: "babel-loader",
         options: babelTsConfig,
       },
       {
         test: /\.js$/i,
         loader: "babel-loader",
-        exclude: exceptionToTranspile,
+        exclude: /node_modules/,
         options: babelConfig,
       },
       {
