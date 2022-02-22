@@ -67,6 +67,7 @@ const NftPanAndZoomBody = ({ nft }: BodyProps) => (
     >
       <Image
         nft={nft}
+        mediaType="original"
         full
         square={false}
         objectFit="scale-down"

@@ -219,7 +219,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
           </StickyWrapper>
           <Skeleton show={show} width={393}>
             <NFTImageContainer onClick={openNftPanAndZoom}>
-              <Image nft={metadata} full square={false} maxHeight={700} />
+              <Image nft={metadata} mediaType="big" full square={false} maxHeight={700} />
               <NFTImageOverlay>
                 <ZoomInIcon color="white" />
               </NFTImageOverlay>
