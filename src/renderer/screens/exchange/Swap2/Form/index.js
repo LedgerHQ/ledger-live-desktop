@@ -86,7 +86,7 @@ export const useProviders = () => {
 };
 
 const shouldShowLoginBanner = ({ provider, token }: { provider: string, token: string }) => {
-  if (!["ftx"].includes(provider)) {
+  if (!["ftx", "ftxus"].includes(provider)) {
     return false;
   }
 
@@ -100,7 +100,7 @@ const shouldShowKYCBanner = ({
   provider: string,
   kycStatus: KYCStatus,
 }) => {
-  if (!["ftx", "wyre"].includes(provider)) {
+  if (!["ftx", "ftxus", "wyre"].includes(provider)) {
     return false;
   }
 
@@ -212,11 +212,16 @@ const SwapForm = () => {
 
     const handleCheckQuote = async () => {
       const status = await checkQuote({
+        provider,
         quoteId: exchangeRate.rateId,
         bearerToken: userId,
       });
 
-      if (status.code === "OK") {
+      console.log("KYC_STATUS: ", { status });
+
+      if (status.codeName === "RATE_VALID") {
+        console.log({ status, kycStatus });
+
         // If trade can be done and KYC already approved, we are good
         // PS: this can't be checked before the `checkQuote` call since a KYC status can become expierd
         if (kycStatus === KYC_STATUS.approved) {
@@ -232,7 +237,7 @@ const SwapForm = () => {
       }
 
       // Handle all KYC related errors
-      if (status.code.startsWith("KYC_")) {
+      if (status.codeName.startsWith("KYC_")) {
         const updatedKycStatus = getKYCStatusFromCheckQuoteStatus(status);
         if (updatedKycStatus !== kycStatus) {
           dispatch(setSwapKYCStatus({ provider, id: userId, status: updatedKycStatus }));

@@ -10,8 +10,9 @@ const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => 
     case "wyre":
       return <WyreKYC onClose={onClose} />;
 
+    case "ftxus":
     case "ftx":
-      return <FTXKYC onClose={onClose} />;
+      return <FTXKYC onClose={onClose} provider={provider} />;
 
     default:
       return null;

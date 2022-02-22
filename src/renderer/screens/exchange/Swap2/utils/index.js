@@ -61,7 +61,7 @@ export const isJwtExpired = (jwtToken: string) => {
 export const getKYCStatusFromCheckQuoteStatus = (
   checkQuoteStatus: CheckQuoteStatus,
 ): KYCStatus | null => {
-  switch (checkQuoteStatus.code) {
+  switch (checkQuoteStatus.codeName) {
     case "KYC_PENDING":
       return KYC_STATUS.pending;
 
@@ -72,7 +72,7 @@ export const getKYCStatusFromCheckQuoteStatus = (
     case "KYC_UPGRADE_REQUIRED":
       return KYC_STATUS.upgradeRequierd;
 
-    case "OK":
+    case "RATE_VALID":
       return KYC_STATUS.approved;
 
     // FIXME: should handle all other non KYC related error cases somewhere
@@ -82,9 +82,25 @@ export const getKYCStatusFromCheckQuoteStatus = (
 };
 
 // FIXME: should move to LLC
-export type WidgetType = "login" | "kyc";
-export const getFTXURL = (type: WidgetType) => {
-  // TODO: fetch domain (.com vs .us) through API
-  const domain = "ftx.com";
+export type WidgetTypes = "login" | "kyc";
+export type FTXProviders = "ftx" | "ftxus";
+export const getFTXURL = ({ type, provider }: { type: WidgetTypes, provider: FTXProviders }) => {
+  const domain = (() => {
+    switch (provider) {
+      case "ftx":
+        return "ftx.com";
+
+      case "ftxus":
+        return "ftx.us";
+
+      default:
+        break;
+    }
+  })();
+
+  if (!domain) {
+    throw new Error(`Could not find domain for ${provider}`);
+  }
+
   return `https://${domain}/${type}?hideFrame=true&ledgerLive=true`;
 };
