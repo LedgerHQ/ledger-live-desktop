@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدم عمليات تنفيذ JS التجريبية لAlgorand و Tezos."
+          "description": "Use experimental JS implementation for Tezos."
         },
         "experimentalCurrencies": {
           "title": "تكاملات تجريبية",
