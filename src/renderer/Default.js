@@ -2,7 +2,6 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
-import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
@@ -217,9 +216,7 @@ export default function Default() {
                           render={props => <MarketCoinScreen {...props} />}
                         />
                         <Route path="/market" render={props => <Market {...props} />} />
-                        <FeatureToggle feature="learn">
-                          <Route path="/learn" render={props => <Learn {...props} />} />
-                        </FeatureToggle>
+                        <Route path="/learn" render={props => <Learn {...props} />} />
                       </Switch>
                     </Page>
                     <Drawer />

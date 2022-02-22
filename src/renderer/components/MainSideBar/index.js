@@ -7,7 +7,6 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
-import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 
 import {
   accountsSelector,
@@ -328,17 +327,15 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/market"}
                 collapsed={secondAnim}
               />
-              <FeatureToggle feature="learn">
-                <SideBarListItem
-                  id="learn"
-                  label={t("sidebar.learn")}
-                  icon={IconLearn}
-                  iconActiveColor="wallet"
-                  isActive={location.pathname.startsWith("/learn")}
-                  onClick={handleClickLearn}
-                  collapsed={secondAnim}
-                />
-              </FeatureToggle>
+              <SideBarListItem
+                id="learn"
+                label={t("sidebar.learn")}
+                icon={IconLearn}
+                iconActiveColor="wallet"
+                isActive={location.pathname.startsWith("/learn")}
+                onClick={handleClickLearn}
+                collapsed={secondAnim}
+              />
               <SideBarListItem
                 id={"accounts"}
                 label={t("sidebar.accounts")}
