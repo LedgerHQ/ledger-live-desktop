@@ -10,7 +10,7 @@ const Container = styled(Flex).attrs({
   alignItems: "stretch",
   justifyContent: "flex-start",
 })`
-  margin: -${p => p.theme.space[6]}px;
+  margin-left: -${p => p.theme.space[6]}px;
   margin-right: -${p => p.theme.space[6] - p.theme.overflow.trackSize}px;
 `;
 
