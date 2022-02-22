@@ -38,13 +38,14 @@ type Props = {
 };
 
 const Row = ({ nfts, contract, account, onClick }: Props) => {
+  const [nft] = nfts;
   const { status: collectionStatus, metadata: collectionMetadata } = useNftCollectionMetadata(
     contract,
     account.currency.id,
   );
   const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
     contract,
-    nfts[0].tokenId,
+    nft.tokenId,
     account.currency.id,
   );
   const { tokenName } = collectionMetadata || {};
@@ -68,7 +69,7 @@ const Row = ({ nfts, contract, account, onClick }: Props) => {
         onClick={onClick}
       >
         <Skeleton width={32} minHeight={32} show={loading}>
-          <Image nft={nftMetadata} />
+          <Image metadata={nftMetadata} tokenId={nft?.tokenId} />
         </Skeleton>
         <Box ml={3} flex={1}>
           <Skeleton width={136} minHeight={24} barHeight={10} show={loading}>

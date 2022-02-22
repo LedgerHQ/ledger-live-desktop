@@ -50,7 +50,7 @@ const HiddenNftCollectionRow = ({
   return (
     <HiddenNftCollectionRowContainer>
       <Skeleton width={32} minHeight={32} show={loading}>
-        <Image nft={nftMetadata} />
+        <Image metadata={nftMetadata} tokenId={firstNft?.tokenId} />
       </Skeleton>
       <Text
         style={{ marginLeft: 10, flex: 1 }}

@@ -6,7 +6,7 @@ import Text from "~/renderer/components/Text";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { useTranslation } from "react-i18next";
 
-import type { NFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
+import type { NFT } from "@ledgerhq/live-common/lib/types";
 
 const NFTProperty = styled.div`
   display: inline-flex;
@@ -33,13 +33,13 @@ const Separator = styled.div`
 
 type NFTPropertiesProps = {
   nft: NFT,
-  metadata: NFTMetadata,
   status: string,
 };
 
-export function NFTProperties({ nft, metadata, status }: NFTPropertiesProps) {
+export function NFTProperties({ nft, status }: NFTPropertiesProps) {
   const { t } = useTranslation();
   const showSkeleton = useMemo(() => status === "loading", [status]);
+  const { metadata } = nft;
   if (!metadata?.properties?.length) return null;
 
   return (

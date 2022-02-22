@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import type { NFTMetadata, NFTMediaSizes } from "@ledgerhq/live-common/lib/types";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Fallback from "~/renderer/images/nftFallback.jpg";
 import Skeleton from "./Skeleton";
@@ -57,7 +57,7 @@ const Wrapper: ThemedComponent<{
 
 // TODO Figure out if we really need this once we know who creates/processes the media.
 const Gen = styled.div`
-  --hue: ${p => (p?.nft?.tokenId || "abcdefg").substr(-8) % 360};
+  --hue: ${p => (p?.tokenId || "abcdefg").substr(-8) % 360};
   background-image: url(${Fallback});
   background-size: contain;
   border-radius: 4px;
@@ -69,7 +69,7 @@ const Gen = styled.div`
 
   &:after {
     display: ${p => (p.full ? "flex" : "none")}
-    content: "${p => p?.nft?.nftName || centerEllipsis(p?.nft?.tokenId || "-")}";
+    content: "${p => p?.metadata?.nftName || centerEllipsis(p?.tokenId || "-")}";
     font-size: 16px;
     font-size: 1vw;
     color: #fff;
@@ -85,7 +85,9 @@ const Gen = styled.div`
 `;
 
 type Props = {
-  nft: NFTWithMetadata,
+  metadata: NFTMetadata,
+  tokenId: string,
+  mediaType?: NFTMediaSizes,
   full?: boolean,
   size?: number,
   maxHeight?: number,
@@ -104,6 +106,7 @@ class Image extends React.PureComponent<Props, State> {
   static defaultProps = {
     full: false,
     size: 32,
+    mediaType: "preview",
   };
 
   state = {
@@ -112,8 +115,19 @@ class Image extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { full, size, nft, maxHeight, onClick, square = true, objectFit = "cover" } = this.props;
+    const {
+      full,
+      mediaType = "preview",
+      size,
+      metadata,
+      tokenId,
+      maxHeight,
+      onClick,
+      square = true,
+      objectFit = "cover",
+    } = this.props;
     const { loaded, error } = this.state;
+    const mediaUri = metadata?.medias?.[mediaType]?.uri;
 
     return (
       <Wrapper
@@ -125,15 +139,15 @@ class Image extends React.PureComponent<Props, State> {
         objectFit={objectFit}
       >
         <Skeleton full />
-        {nft?.media && !error ? (
+        {mediaUri && !error ? (
           <img
             onClick={onClick}
             onLoad={() => this.setState({ loaded: true })}
             onError={() => this.setState({ error: true })}
-            src={nft.media}
+            src={mediaUri}
           />
         ) : (
-          <Gen nft={nft} />
+          <Gen tokenId={tokenId} metadata={metadata} />
         )}
       </Wrapper>
     );

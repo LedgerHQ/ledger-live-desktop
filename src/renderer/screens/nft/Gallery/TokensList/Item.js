@@ -97,7 +97,7 @@ const NftCard = ({ id, mode, account, withContextMenu = false, onHideCollection 
         onClick={onItemClick}
       >
         <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
-          <Image nft={metadata} size={40} full={isGrid} />
+          <Image metadata={metadata} tokenId={nft.tokenId} size={40} full={isGrid} />
         </Skeleton>
         <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
           <Skeleton width={142} minHeight={24} barHeight={10} show={show}>

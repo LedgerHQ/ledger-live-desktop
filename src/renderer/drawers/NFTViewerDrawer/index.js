@@ -2,7 +2,7 @@
 
 import React, { useMemo, useCallback, useState, memo } from "react";
 import {
-  useNftMetadata,
+  useNft,
   useNftCollectionMetadata,
 } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import styled from "styled-components";
@@ -170,21 +170,17 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const nft = useSelector(state => getNFTById(state, { nftId })) || {};
+  const protoNft = useSelector(state => getNFTById(state, { nftId })) || {};
   const { status: collectionStatus, metadata: collectionMetadata } = useNftCollectionMetadata(
-    nft.contract,
-    nft.currencyId,
+    protoNft.contract,
+    protoNft.currencyId,
   );
-  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
-    nft.contract,
-    nft.tokenId,
-    nft.currencyId,
-  );
+  const { status: nftStatus, nft } = useNft(protoNft);
   const loading = useMemo(() => nftStatus === "loading" || collectionStatus === "loading", [
     collectionStatus,
     nftStatus,
   ]);
-  const name = nftMetadata?.nftName || nft.tokenId;
+  const name = nft?.metadata?.nftName || nft.tokenId;
 
   const onNFTSend = useCallback(() => {
     setDrawer();
@@ -203,7 +199,7 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
 
   return (
     <Box height={height}>
-      {isPanAndZoomOpen && <NftPanAndZoom nft={nftMetadata} onClose={closeNftPanAndZoom} />}
+      {isPanAndZoomOpen && <NftPanAndZoom nft={nft} onClose={closeNftPanAndZoom} />}
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
           <StickyWrapper top={0} pb={3} pt="24px">
@@ -238,7 +234,14 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
           </StickyWrapper>
           <Skeleton show={loading} width={393}>
             <NFTImageContainer onClick={openNftPanAndZoom}>
-              <Image nft={nftMetadata} full square={false} maxHeight={700} />
+              <Image
+                metadata={nft.metadata}
+                tokenId={nft.tokenId}
+                mediaType="big"
+                full
+                square={false}
+                maxHeight={700}
+              />
               <NFTImageOverlay>
                 <ZoomInIcon color="white" />
               </NFTImageOverlay>
@@ -258,14 +261,14 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
               </Text>
             </Button>
 
-            <ExternalViewerButton nft={nft} account={account} metadata={nftMetadata} />
+            <ExternalViewerButton nft={nft} account={account} metadata={nft.metadata} />
           </NFTActions>
           <NFTAttributes>
-            <NFTProperties nft={nft} metadata={nftMetadata} status={status} />
+            <NFTProperties nft={nft} status={status} />
             <NFTAttribute
               skeleton={loading}
               title={t("NFT.viewer.attributes.description")}
-              value={nftMetadata?.description}
+              value={nft.metadata?.description}
               separatorBottom
             />
             <Text

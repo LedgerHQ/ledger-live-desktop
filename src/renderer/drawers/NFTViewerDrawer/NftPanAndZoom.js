@@ -1,9 +1,9 @@
 // @flow
 
-import React from "react";
+import React, { memo } from "react";
 import { createPortal } from "react-dom";
 
-import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import type { NFT } from "@ledgerhq/live-common/lib/types";
 import IconCross from "~/renderer/icons/Cross";
 import Image from "~/renderer/screens/nft/Image";
 
@@ -49,10 +49,10 @@ const domNode = document.getElementById("modals");
 
 type NftPanAndZoomProps = {
   onClose: () => void,
-  nft: NFTWithMetadata,
+  nft: NFT,
 };
 
-type BodyProps = { nft: NFTWithMetadata };
+type BodyProps = { nft: NFT };
 
 const NftPanAndZoomBody = ({ nft }: BodyProps) => (
   <NFTImageContainer>
@@ -66,7 +66,9 @@ const NftPanAndZoomBody = ({ nft }: BodyProps) => (
       }}
     >
       <Image
-        nft={nft}
+        metadata={nft.metadata}
+        tokenId={nft.tokenId}
+        mediaType="original"
         full
         square={false}
         objectFit="scale-down"
@@ -94,4 +96,4 @@ const NftPanAndZoom = ({ onClose, nft }: NftPanAndZoomProps) => {
   return domNode ? createPortal(modal, domNode) : null;
 };
 
-export default NftPanAndZoom;
+export default memo<NftPanAndZoomProps>(NftPanAndZoom);

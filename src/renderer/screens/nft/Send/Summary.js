@@ -47,7 +47,7 @@ const Summary = ({ transaction }: Props) => {
             </Skeleton>
           </Box>
           <Skeleton width={48} minHeight={48} show={show}>
-            <Image nft={metadata} size={48} />
+            <Image metadata={metadata} tokenId={tokenId} size={48} />
           </Skeleton>
         </Box>
       </Box>

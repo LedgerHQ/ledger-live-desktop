@@ -46,7 +46,7 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsData>
           <Box horizontal alignItems="center">
             <Skeleton width={24} minHeight={24} show={show}>
-              <Image nft={nftMetadata} size={24} />
+              <Image metadata={nftMetadata} tokenId={operation.tokenId} size={24} />
             </Skeleton>
             <Box ml={2}>
               <Skeleton width={200} barHeight={10} minHeight={32} show={show}>

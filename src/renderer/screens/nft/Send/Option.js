@@ -24,7 +24,7 @@ const Option = ({ data: { tokenId, amount, contract, standard, currencyId } }: O
   return (
     <Box horizontal>
       <Skeleton width={30} minHeight={30} show={show}>
-        <Image nft={metadata} size={30} />
+        <Image metadata={metadata} tokenId={tokenId} size={30} />
       </Skeleton>
       <Box horizontal alignItems="center" justifyContent="space-between" flex={1}>
         <Box ml={3}>
