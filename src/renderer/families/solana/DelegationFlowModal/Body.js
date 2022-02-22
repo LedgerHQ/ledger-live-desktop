@@ -130,7 +130,11 @@ const Body = ({
     const transaction = bridge.updateTransaction(bridge.createTransaction(account), {
       model: {
         kind: "stake.createAccount",
-        uiState: {},
+        uiState: {
+          delegate: {
+            voteAccAddress: "",
+          },
+        },
       },
     });
 
