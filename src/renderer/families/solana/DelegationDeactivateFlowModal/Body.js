@@ -165,7 +165,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("solana.undelegation.flow.title"),
+    title: t("solana.delegation.deactivate.flow.title"),
     device,
     account,
     parentAccount,

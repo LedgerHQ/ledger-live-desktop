@@ -239,8 +239,8 @@ function toStakeDropDownItem(stakeAction: string) {
       };
     case "deactivate":
       return {
-        key: "MODAL_SOLANA_UNDELEGATE",
-        label: <Trans i18nKey="solana.undelegation.flow.title" />,
+        key: "MODAL_SOLANA_DELEGATION_DEACTIVATE",
+        label: <Trans i18nKey="solana.delegation.deactivate.flow.title" />,
       };
     case "withdraw":
       return {

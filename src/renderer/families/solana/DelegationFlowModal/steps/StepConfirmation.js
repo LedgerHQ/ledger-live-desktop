@@ -43,7 +43,7 @@ function StepConfirmation({
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.success.title" />}
-          description={multiline(t("cosmos.delegation.flow.steps.confirmation.success.text"))}
+          description={multiline(t("solana.delegation.statusUpdateNotice"))}
         />
       </Container>
     );

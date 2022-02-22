@@ -39,11 +39,13 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Undelegation Solana" name="Step Confirmed" />
+        <TrackPage category="Delegation Deactivate Solana" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="solana.undelegation.flow.steps.confirmation.success.title" />}
-          description={multiline(t("solana.undelegation.flow.steps.confirmation.success.text"))}
+          title={
+            <Trans i18nKey="solana.delegation.deactivate.flow.steps.confirmation.success.title" />
+          }
+          description={multiline(t("solana.delegation.statusUpdateNotice"))}
         />
       </Container>
     );
@@ -52,7 +54,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Undelegation Solana" name="Step Confirmation Error" />
+        <TrackPage category="Delegation Deactivate Solana" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer title={<Trans i18nKey="solana.common.broadcastError" />} />
         ) : null}

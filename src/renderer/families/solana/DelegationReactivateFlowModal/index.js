@@ -13,13 +13,10 @@ const INITIAL_STATE = {
   stepId: "connectDevice",
 };
 
-class UndelegationModal extends PureComponent<{ name: string }, State> {
+class DelegationReactivateModal extends PureComponent<{ name: string }, State> {
   state = INITIAL_STATE;
-
   handleReset = () => this.setState({ ...INITIAL_STATE });
-
   handleStepChange = (stepId: StepId) => this.setState({ stepId });
-
   render() {
     const { stepId } = this.state;
     const { name } = this.props;
@@ -48,4 +45,4 @@ class UndelegationModal extends PureComponent<{ name: string }, State> {
   }
 }
 
-export default UndelegationModal;
+export default DelegationReactivateModal;

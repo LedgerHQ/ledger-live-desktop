@@ -2548,6 +2548,7 @@
       "availableBalance": "Available balance",
       "active": "Active",
       "activate": "Activate",
+      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
       "flow": {
         "steps": {
           "validator": {
@@ -2568,7 +2569,7 @@
             "confirmation": {
               "success": {
                 "title": "You have successfully withdrawn your assets.",
-                "text": "Your account balance will be updated when the blockchain confirms the transaction."
+                "text": "Your account balance will be updated when the transaction is confirmed."
               }
             }
           }
@@ -2580,22 +2581,20 @@
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully reactivated you delegation.",
-                "text": "Deactivating part of the delegation is immediately active."
+                "title": "You have successfully reactivated you delegation."
               }
             }
           }
         }
-      }
-    },
-    "undelegation": {
-      "flow": {
-        "title": "Undelegate",
-        "steps": {
-          "confirmation": {
-            "success": {
-              "title": "You have successfully undelegated your assets.",
-              "text": "It can take a couple of epochs before you can withdraw."
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully deactivated your delegation."
+              }
             }
           }
         }

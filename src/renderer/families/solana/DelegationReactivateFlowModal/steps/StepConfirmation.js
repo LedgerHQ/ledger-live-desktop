@@ -45,9 +45,7 @@ function StepConfirmation({
           title={
             <Trans i18nKey="solana.delegation.reactivate.flow.steps.confirmation.success.title" />
           }
-          description={multiline(
-            t("solana.delegation.reactivate.flow.steps.confirmation.success.text"),
-          )}
+          description={multiline(t("solana.delegation.statusUpdateNotice"))}
         />
       </Container>
     );
