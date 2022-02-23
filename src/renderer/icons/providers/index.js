@@ -4,7 +4,9 @@ import CoinifySquare from "./CoinifySquare";
 import MoonPay from "./MoonPay";
 import Paraswap from "./Paraswap";
 import Wyre from "./Wyre";
-import FTX from "./FTX";
-import FTXUS from "./FTXUS";
+import FTXLogo from "./FTX";
+
+const FTX = FTXLogo();
+const FTXUS = FTXLogo(true);
 
 export { Changelly, Coinify, CoinifySquare, MoonPay, Paraswap, Wyre, FTX, FTXUS };
