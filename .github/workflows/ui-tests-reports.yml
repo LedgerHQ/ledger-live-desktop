@@ -1,13 +1,13 @@
-name: "Report | Screenshot Testing Reports"
+name: "Report | Tests Reports"
 on:
-  workflow_dispatch:
-    inputs:
-      runId:
-        description: run id
-        required: true
+  # workflow_dispatch:
+  #   inputs:
+  #     runId:
+  #       description: run id
+  #       required: true
 
   workflow_run:
-    workflows: ["Tests | Screenshot Testing"]
+    workflows: ["Tests | Test Suite"]
     types:
       - "completed"
 
@@ -19,17 +19,14 @@ jobs:
       - name: log github object
         env:
           GITHUB: ${{ toJSON(github) }}
-          RUN: ${{ toJSON(github.event.workflow_run) }}
         run: |
           echo $GITHUB
-          echo $RUN
   comment-on-pr:
     name: "Comment report on PR"
-    # if: github.event.workflow_run.event == 'pull_request'
     runs-on: ubuntu-20.04
     steps:
       - name: download artifacts
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require('fs');
@@ -115,7 +112,7 @@ jobs:
           unzip images-windows-latest.json.zip
           rm tests-reports.zip playwright-results-windows-latest.zip playwright-results-linux.zip images-linux.json.zip images-windows-latest.json.zip
       - name: parse images
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           script: |
             const fs = require("fs");
@@ -141,17 +138,31 @@ jobs:
           images: images.json
           lintoutput: lint.txt
           jestoutput: jest.txt
-      - name: comment on PR
-        uses: actions/github-script@v5
+      # - name: comment (manual trigger)
+      #   if: github.event.workflow_dispatch != ''
+      #   uses: actions/github-script@v6
+      #   with:
+      #     script: |
+      #       const fs = require("fs");
+      #       const issueNumber = Number(fs.readFileSync("./pr/NR"));
+
+      #       await github.rest.issues.createComment({
+      #         owner: "LedgerHQ",
+      #         repo: "ledger-live-desktop",
+      #         issue_number: issueNumber,
+      #         body: `
+      #           ${{ steps.comment-body.outputs.body }}
+      #         `
+      #       });
+      - name: comment
+        if: github.event.workflow_run != ''
+        uses: actions/github-script@v6
         with:
           script: |
-            const fs = require("fs");
-            const issueNumber = Number(fs.readFileSync("./pr/NR"));
-
-            await github.rest.issues.createComment({
+            await github.rest.repos.createCommitComment({
               owner: "LedgerHQ",
               repo: "ledger-live-desktop",
-              issue_number: issueNumber,
+              commit_sha: "${{ github.event.workflow_run.head_sha }}",
               body: `
                 ${{ steps.comment-body.outputs.body }}
               `

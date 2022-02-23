@@ -33,6 +33,7 @@ type Props = {
   currency: ?CryptoCurrency | ?TokenCurrency,
   flow?: string,
   onClose?: () => void,
+  preventSkippingCurrencySelection: ?Boolean,
 };
 
 type StepId = "chooseCurrency" | "connectDevice" | "import" | "finish";
@@ -146,7 +147,7 @@ const INITIAL_STATE = {
 
 class AddAccounts extends PureComponent<Props, State> {
   state = INITIAL_STATE;
-  STEPS = createSteps(this.props.currency);
+  STEPS = createSteps(this.props.currency && !this.props.preventSkippingCurrencySelection);
 
   handleClickAdd = async () => {
     const { replaceAccounts, existingAccounts } = this.props;
@@ -217,7 +218,13 @@ class AddAccounts extends PureComponent<Props, State> {
   };
 
   render() {
-    const { device, existingAccounts, blacklistedTokenIds, flow = "add account" } = this.props;
+    const {
+      device,
+      existingAccounts,
+      blacklistedTokenIds,
+      flow = "add account",
+      preventSkippingCurrencySelection,
+    } = this.props;
     const {
       currency,
       scannedAccounts,
@@ -249,7 +256,7 @@ class AddAccounts extends PureComponent<Props, State> {
     };
     const title = <Trans i18nKey="addAccounts.title" />;
     const errorSteps = err ? [2] : [];
-    if (stepId === "chooseCurrency" && this.props.currency) {
+    if (stepId === "chooseCurrency" && this.props.currency && !preventSkippingCurrencySelection) {
       stepId = "connectDevice";
     }
     stepperProps.currency = stepperProps.currency || this.props.currency;

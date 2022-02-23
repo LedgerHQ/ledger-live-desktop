@@ -162,7 +162,7 @@ export function Pedagogy({ onDone }: PedagogyProps) {
   const CurrentScreen = screens[state.value];
 
   return (
-    <PedagogyContainer>
+    <PedagogyContainer data-test-id="onboarding-pedagogy-modal">
       <Text
         mt="72px"
         color="palette.primary.main"
@@ -183,14 +183,14 @@ export function Pedagogy({ onDone }: PedagogyProps) {
         </ScreenContainer>
       </CSSTransition>
       <LeftButton
-        id="pedagogy-left"
+        data-test-id="pedagogy-left"
         visible={state.nextEvents.includes("PREV")}
         onClick={() => sendEvent("PREV")}
       >
         <ChevronLeft size={16} />
       </LeftButton>
       <RightButton
-        id="pedagogy-right"
+        data-test-id="pedagogy-right"
         visible={state.nextEvents.includes("NEXT")}
         onClick={() => sendEvent("NEXT")}
       >

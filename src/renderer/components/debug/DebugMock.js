@@ -6,7 +6,10 @@ import Text from "~/renderer/components/Text";
 import { ReplaySubject } from "rxjs";
 import { deserializeError } from "@ledgerhq/errors";
 import { fromTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import { deviceInfo155, mockListAppsResult } from "@ledgerhq/live-common/lib/apps/mock";
+import {
+  deviceInfo155,
+  mockListAppsResult as innerMockListAppResult,
+} from "@ledgerhq/live-common/lib/apps/mock";
 
 import { useAnnouncements } from "@ledgerhq/live-common/lib/notifications/AnnouncementProvider";
 import { useFilteredServiceStatus } from "@ledgerhq/live-common/lib/notifications/ServiceStatusProvider";
@@ -18,6 +21,14 @@ import useInterval from "~/renderer/hooks/useInterval";
 import Box from "~/renderer/components/Box";
 import { Item, MockContainer, EllipsesText, MockedGlobalStyle } from "./shared";
 
+const mockListAppsResult = (...params) => {
+  // Nb Should move this polyfill to live-common eventually.
+  const result = innerMockListAppResult(...params);
+  Object.keys(result?.appByName).forEach(key => {
+    result.appByName[key] = { ...result.appByName[key], type: "app" };
+  });
+  return result;
+};
 /**
  * List of events that will be displayed in the quick-link section of the mock menu
  * to ease the usability when mock is done manually instead of through spectron.

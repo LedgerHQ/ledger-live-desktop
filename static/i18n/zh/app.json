@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} 字节",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "分钟",
@@ -191,6 +192,8 @@
     "feesAmount": "费用额度"
   },
   "sidebar": {
+    "card": "卡",
+    "learn": "Learn",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -198,7 +201,8 @@
     "exchange": "买入 / 卖出",
     "swap": "Swap 互换",
     "lend": "借出",
-    "catalog": "发现"
+    "catalog": "发现",
+    "market": "市场"
   },
   "stars": {
     "placeholder": "星标账户以在此显示。",
@@ -232,7 +236,7 @@
         "label": {
           "provider": "提供方",
           "rate": "费率",
-          "fees": "费用",
+          "fees": "网络费用",
           "target": "目标账户"
         },
         "tooltip": {
@@ -244,13 +248,13 @@
         "noAccountCTA": "添加账户"
       },
       "from": {
-        "title": "来自",
+        "title": "从",
         "max": "最大值",
         "accountPlaceholder": "选择来源",
         "currencyDisabledTooltip": "此货币尚不可用于 swap 互换"
       },
       "to": {
-        "title": "发往"
+        "title": "到"
       },
       "notAvailable": {
         "title": "Swap 互换在您所在的区域尚不可用",
@@ -330,8 +334,8 @@
     "exchangeDrawer": {
       "title": "确认兑换",
       "completed": {
-        "title": "待执行操作",
-        "description": "您的 Swap 互换操作已经发送到网络上确认。最多一个小时后，您就可以收到您的 {{targetCurrency}}。",
+        "title": "交易播送成功",
+        "description": "您的互换操作已经发送到网络进行确认。 请等待您的交易被确认，并等待提供商处理和发送您的 {{targetCurrency}}。",
         "disclaimer": "请记下您的 Swap ID 互换号码，以便今后有需要时从 <0><0>{{provider}}</0> 处</0>获得帮助。",
         "seeDetails": "查看详情"
       }
@@ -442,7 +446,7 @@
       "resetKYCCTA": "重置 KYC",
       "amount": "数额",
       "from": {
-        "title": "来自",
+        "title": "从",
         "account": "账户",
         "amount": "发送数额",
         "currency": "加密资产"
@@ -487,7 +491,7 @@
       "steps": {
         "summary": {
           "title": "概要",
-          "from": "来自",
+          "from": "从",
           "to": "到",
           "toExchange": "发送数额",
           "toReceive": "待收数额",
@@ -535,7 +539,7 @@
         "finished": "您的 swap 互换已成功完成"
       },
       "date": "日期",
-      "from": "来自",
+      "from": "从",
       "fromAddress": "初始地址",
       "fromAddress_plural": "初始地址",
       "to": "到",
@@ -543,6 +547,9 @@
       "initialAmount": "初始额",
       "creditedAmount": "贷记额"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "状态",
@@ -702,6 +709,7 @@
     "frozenAssets": "冻结资产",
     "bandwidth": "带宽",
     "energy": "能量",
+    "stake": "质押",
     "delegatedAssets": "已委托资产",
     "undelegating": "正在解除委托",
     "availableBalanceTooltip": "该数额可自由支配。",
@@ -716,13 +724,20 @@
     "reset": "重置流程",
     "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
-      "header": "使用 {{provider}} 买入加密",
-      "title": "通过 <0>{{provider}}</0> 买入加密",
+      "header": "买入和卖出加密货币",
+      "title": "选择一个购买加密货币的供应方",
+      "buyFrom": "可从任何地方购买",
+      "cryptoSupported": "已支持的加密币种",
+      "payWith": "使用卡或 SEPA 支付",
       "tab": "买入",
-      "selectCrypto": "选择加密资产",
-      "selectAccount": "选择帐户",
-      "continue": "继续",
-      "addAccount": "添加账户"
+      "coinify": {
+        "header": "使用 {{provider}} 买入加密",
+        "title": "通过 <0>{{provider}}</0> 买入加密",
+        "selectCrypto": "选择加密资产",
+        "selectAccount": "选择一个账户",
+        "continue": "继续",
+        "addAccount": "添加账户"
+      }
     },
     "sell": {
       "header": "使用 {{provider}} 卖出加密",
@@ -731,11 +746,6 @@
       "selectCrypto": "选择加密资产",
       "selectAccount": "选择帐户",
       "continue": "继续"
-    },
-    "history": {
-      "tab": "历史记录",
-      "exporting": "正在导出...",
-      "exportOperations": "导出操作"
     }
   },
   "lend": {
@@ -1125,11 +1135,13 @@
       "confirm": {
         "title": "连接",
         "details": "想要通过您的钱包连接到以下以太坊账户：",
-        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户："
+        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户：",
+        "noEthAccount": "您没有任何以太坊账户。请添加一个以太坊账户来使用 Wallet Connect（钱包连接）。",
+        "alreadyConnected": "您正在尝试连接到一个 dApp（去中心化应用），然而您已连接到了另一个。 请先断开已连接的 dApp 后，再重新将 Live 连接到新的 dApp。"
       }
     },
     "connectedscreen": {
-      "info": "您现在可以在您的桌面应用程序上访问 dApp 去中心化应用。",
+      "info": "您现在可以从您的浏览器上访问 {{name}} dApp 去中心化应用。",
       "warning": "通过 dApp（去中心化应用）分享接收地址并不安全。在分享地址以接收资金时，要一直使用 Ledger Live。",
       "disconnected": "在 dApp、WalletConnect 和 Ledger Live 之间出现了连接问题。请稍候片刻或重新发起连接"
     }
@@ -1149,7 +1161,8 @@
     "for": "<1><0>{{name}}</0></1>地址",
     "messageIfUnverified": "请验证该共享地址与您设备上的地址完全匹配",
     "messageIfSkipped": "未在您的 Ledger 设备上确认您的 {{name}} 地址。请验证以确保安全性。",
-    "showQrCode": "显示二维码"
+    "showQrCode": "显示二维码",
+    "taprootWarning": "请确保发送方支持 taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1186,78 @@
   "genuinecheck": {
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
+  "learn": {
+    "title": "Learn"
+  },
+  "market": {
+    "title": "市场",
+    "currency": "币种",
+    "rangeLabel": "时间",
+    "goBack": "返回",
+    "filters": {
+      "title": "筛选器",
+      "show": "显示",
+      "all": "全部",
+      "isLedgerCompatible": "Ledger Live 兼容",
+      "isFavorite": "已星标资产",
+      "applyFilters": "应用筛选器",
+      "clearAll": "全部清除"
+    },
+    "marketList": {
+      "crypto": "加密货币",
+      "price": "价格",
+      "change": "更改",
+      "marketCap": "市值",
+      "last7d": "过去 7 天"
+    },
+    "detailsPage": {
+      "priceStatistics": "价格统计",
+      "tradingVolume": "交易量",
+      "24hLowHight": "24小时 最低 / 24小时 最高",
+      "7dLowHigh": "7天 最低 / 7天 最高",
+      "allTimeHigh": "历史最高",
+      "allTimeLow": "历史最低",
+      "marketCapRank": "市值排名",
+      "marketCapDominance": "市值主导",
+      "supply": "供应",
+      "circulatingSupply": "流通供应量",
+      "totalSupply": "总供应量",
+      "maxSupply": "最大供应量",
+      "assetNotSupportedOnLedgerLive": "Ledger Live 不支持此资产。",
+      "supportedCoinsAndTokens": "支持的币种和代币"
+    },
+    "range": {
+      "1H_label": "1 小时",
+      "1D_label": "1 天",
+      "1W_label": "1 周",
+      "1M_label": "1 月",
+      "1Y_label": "1 年",
+      "1h": "1 小时",
+      "24h": "24 小时",
+      "7d": "7 天",
+      "30d": "30 天",
+      "1y": "1 年",
+      "1H_selectorLabel": "最近 1 小时",
+      "1D_selectorLabel": "最近 24 小时",
+      "1W_selectorLabel": "上周",
+      "1M_selectorLabel": "上个月",
+      "1Y_selectorLabel": "过去一年"
+    },
+    "warnings": {
+      "connectionError": "连接错误",
+      "ledgerUnableToRetrieveData": "Ledger Live 无法检索数据。",
+      "checkInternetAndReload": "请检查您的网络连接，然后重新加载页面。",
+      "reload": "重新加载",
+      "noCryptosFound": "未能找到币种",
+      "noSearchResultsFor": "很抱歉，我们没能为 <0>{{search}}</0> 找到任何币种。请改用其他关键词重试搜索。",
+      "noSearchResults": "对不起，我们没有找到任何结果。",
+      "retrySearchKeyword": "请用其他关键词重试搜索。",
+      "retrySearchParams": "请用其他参数重试搜索。",
+      "trackFavAssets": "追踪您最喜欢的",
+      "clickOnStarIcon": "点击资产旁边的星形图标将自动将其添加到您的收藏夹。",
+      "browseAssets": "浏览资产"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1267,7 @@
       "attributes": {
         "properties": "属性",
         "description": "描述",
-        "contract": "合约地址",
+        "tokenAddress": "代币地址",
         "tokenId": "代币 ID",
         "quantity": "数量"
       }
@@ -1358,7 +1443,7 @@
       "name": "代币名称",
       "contract": "代币合约",
       "id": "代币 (NFT) ID",
-      "amount": "数额"
+      "quantity": "数量"
     },
     "extra": {
       "frozenAmount": "已冻结数额",
@@ -1430,6 +1515,10 @@
     "sell": {
       "notice": "发送之前请验证卖出详情。地址会被安全地交换因此您不必对其进行验证。",
       "confirm": "确认卖出交易"
+    },
+    "fund": {
+      "notice": "发送之前请在您的设备上验证资金详情。地址会被安全地交换因此您不必对其进行验证。",
+      "confirm": "确认资金交易"
     }
   },
   "manager": {
@@ -1503,6 +1592,7 @@
         "uninstall": "卸载",
         "notEnoughSpace": "储存空间不足",
         "supported": "Ledger Live 支持",
+        "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
         "addAccountWarn": "请等待应用程序完成更新",
@@ -1513,7 +1603,11 @@
         "tokenAppDisclaimer": "如需管理 {{tokenName}} {{tokenType}} 代币，<1>请安装 {{appName}} 应用程序</1> 并验证您确实拥有 <1>{{tokenType}} 版本，</1>然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
-        "intallParentApp": "安装 {{appName}} 应用程序"
+        "intallParentApp": "安装 {{appName}} 应用程序",
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "卸载全部",
@@ -1778,8 +1872,8 @@
       "details": {
         "utxoLag": "由于该账户持有大量硬币，本次交易可能需要花费较长时间来验证和签署。",
         "subaccountsWarning": "您需要向此账户充值 {{ currency }} 才能发送此账户的代币",
-        "from": "来自",
-        "to": "发往",
+        "from": "从",
+        "to": "到",
         "selectAccountDebit": "借记账户",
         "recipientAddress": "接收方地址",
         "amount": "数额",
@@ -2584,7 +2678,7 @@
       "counterValue": "首选币种",
       "counterValueDesc": "选择在余额和操作旁显示的币种。",
       "region": "地区",
-      "regionDesc": "选择您所在的区域来设置 Ledger Live 的时区。",
+      "regionDesc": "选择您的地区来更新日期、时间和货币的格式。",
       "stock": "区域性市场指标",
       "stockDesc": "选择西方以蓝色来显示市场增长；或选择东方以红色来显示市场增长。",
       "carouselVisibility": "轮播可见性",
@@ -2655,9 +2749,13 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
-        "experimentalCurrencies": {
+        "experimentalJSCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "Use experimental JS implementations for Bitcoin, all Bitcoin forks, and Tezos."
+          "description": "对 Algorand 和 Tezos 使用实验性的 JS 实现。"
+        },
+        "experimentalCurrencies": {
+          "title": "实验集成",
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -2682,6 +2780,10 @@
         "forceProvider": {
           "title": "管理器提供商",
           "description": "在管理器中更改应用程序提供商可能会导致无法在您的 Ledger 设备上安装或卸载应用程序。"
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
@@ -3483,6 +3585,10 @@
       "memo": "Memo 标签",
       "memoPlaceholder": "可选",
       "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
+    },
+    "solana": {
+      "memo": "Memo 标签",
+      "memoPlaceholder": "可选"
     }
   },
   "errors": {
@@ -3732,7 +3838,7 @@
       "title": "接收地址未激活。发送至少 {{minimalAmount}} 来将其激活"
     },
     "NotEnoughGas": {
-      "title": "The parent account balance is insufficient for network fees"
+      "title": "父账户余额不足以支付网络费用"
     },
     "PasswordsDontMatch": {
       "title": "密码不匹配",
@@ -3741,6 +3847,9 @@
     "PasswordIncorrect": {
       "title": "输入的密码不正确",
       "description": "请重试"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "数量需大于 0"
     },
     "RPCHostRequired": {
       "title": "需要输入主机。"
@@ -3848,6 +3957,9 @@
     "InvalidAddress": {
       "title": "此 {{currencyName}} 地址无效"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "您的账户已经委托给此验证器"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "接收地址与发送地址相同"
     },
@@ -3858,6 +3970,10 @@
     "ETHAddressNonEIP": {
       "title": "无法自动验证：请仔细核对该地址。",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "操作不可用于此设备",
+      "description": "发送 NFT 功能仅可用于 Nano X。请访问我们的客服平台，以了解如何使用 Nano S 来发送 NFT。"
     },
     "CantScanQRCode": {
       "title": "无法扫描此二维码：此地址不支持自动验证"
@@ -4057,6 +4173,15 @@
     "TaprootNotActivated": {
       "title": "在激活主网之前，发送到 taproot 地址不安全"
     },
+    "SolanaAccountNotFunded": {
+      "title": "账户没有资金"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "Memo 标签太长。最大长度为 {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "地址关闭 ed25519 曲线"
+    },
     "NotEnoughNftOwned": {
       "title": "您已超过可用代币的数量"
     }
@@ -4064,17 +4189,17 @@
   "cryptoOrg": {
     "account": {
       "subHeader": {
-        "cardTitle": "Powered by Crypto.org",
-        "moreInfo": "More info",
-        "drawerTitle": "Crypto.org integration",
-        "title": "The Crypto.org (CRO) token is now available on Ledger Live",
-        "description": "You can now start to manage your Crypto.org (CRO) tokens and secure them through Ledger Live.",
-        "description2": "The Crypto.org (CRO) token is native to the Crypto.org chain and is used for everything from transactions, staking and many upcoming features.",
-        "website": "Cryptocurrency in every wallet"
+        "cardTitle": "由 Crypto.org 提供支持",
+        "moreInfo": "更多信息",
+        "drawerTitle": "Crypto.org 整合",
+        "title": "Crypto.org (CRO) 代币现在可以在 Ledger Live 上使用",
+        "description": "您现在可以开始管理您的 Crypto.org (CRO) 代币，并通过 Ledger Live 保护它们。",
+        "description2": "Crypto.org (CRO) 代币是 Crypto.org 链的原生币种，用于所有交易、 质押和许多即将到来的功能。",
+        "website": "每个钱包中的加密货币"
       }
     },
-    "memo": "Memo",
-    "memoPlaceholder": "Optional",
-    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+    "memo": "Memo 标签",
+    "memoPlaceholder": "可选",
+    "memoWarningText": "当使用 Memo 标签时，请仔细核对接收方的信息。"
   }
 }

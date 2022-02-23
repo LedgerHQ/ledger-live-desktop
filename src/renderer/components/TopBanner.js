@@ -72,9 +72,10 @@ type Props = {
   dismissable?: boolean,
   bannerId?: string,
   id?: string,
+  testId?: string,
 };
 
-const TopBanner = ({ id, content, status = "", dismissable = false, bannerId }: Props) => {
+const TopBanner = ({ id, testId, content, status = "", dismissable = false, bannerId }: Props) => {
   const dispatch = useDispatch();
   const dismissedBanners = useSelector(dismissedBannersSelector);
 
@@ -89,7 +90,7 @@ const TopBanner = ({ id, content, status = "", dismissable = false, bannerId }: 
   const { Icon, message, right } = content;
 
   return (
-    <Container status={status} id={id}>
+    <Container status={status} id={id} data-test-id={testId}>
       {Icon && (
         <IconContainer>
           <Icon size={16} />

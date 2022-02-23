@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import TrackPage from "~/renderer/analytics/TrackPage";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import GenericStepConnectDevice from "./GenericStepConnectDevice";
 import type { StepProps } from "../types";
 
@@ -14,6 +15,8 @@ export default function StepConnectDevice({
   onTransactionError,
   onTransactionSigned,
 }: StepProps) {
+  // Nb setting the mainAccount as a dependency will ensure latest versions of plugins.
+  const dependencies = [getMainAccount(account, parentAccount)];
   return (
     <>
       <TrackPage category="Sign Transaction Flow" name="Step ConnectDevice" />
@@ -26,6 +29,8 @@ export default function StepConnectDevice({
         transitionTo={transitionTo}
         onTransactionError={onTransactionError}
         onTransactionSigned={onTransactionSigned}
+        dependencies={dependencies}
+        requireLatestFirmware
       />
     </>
   );

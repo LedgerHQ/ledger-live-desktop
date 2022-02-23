@@ -43,7 +43,7 @@ const devices = {
 };
 
 const Interactions = ({ type = "nanoS", wire, screen, error, action, width }: Props) => {
-  const Device = devices[type];
+  const Device = devices[type] || NanoS;
   const props = {
     error: !!error,
     screen: error ? "fail" : screen,

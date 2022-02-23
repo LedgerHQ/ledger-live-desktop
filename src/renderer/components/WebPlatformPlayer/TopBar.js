@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
 
+import type { TopBarConfig } from "./type";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { rgba } from "~/renderer/styles/helpers";
 
@@ -113,10 +114,24 @@ export type Props = {
   onClose?: Function,
   onHelp?: Function,
   onOpenDevTools: Function,
+  config?: TopBarConfig,
 };
 
-const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools }: Props) => {
+const WebPlatformTopBar = ({
+  manifest,
+  onReload,
+  onHelp,
+  onClose,
+  onOpenDevTools,
+  config = {},
+}: Props) => {
   const { name, icon } = manifest;
+
+  const {
+    shouldDisplayName = true,
+    shouldDisplayInfo = true,
+    shouldDisplayClose = !!onClose,
+  } = config;
 
   const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
   const dispatch = useDispatch();
@@ -127,18 +142,22 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
 
   return (
     <Container>
-      <TitleContainer>
-        <LiveAppIcon name={name} icon={icon || undefined} size={20} />
-        <ItemContent>{name}</ItemContent>
-      </TitleContainer>
-      <Separator />
+      {shouldDisplayName && (
+        <>
+          <TitleContainer>
+            <LiveAppIcon name={name} icon={icon || undefined} size={20} />
+            <ItemContent>{name}</ItemContent>
+          </TitleContainer>
+          <Separator />
+        </>
+      )}
       <ItemContainer isInteractive onClick={onReload}>
         <IconReload size={16} />
         <ItemContent>
           <Trans i18nKey="common.sync.refresh" />
         </ItemContent>
       </ItemContainer>
-      {enablePlatformDevTools ? (
+      {enablePlatformDevTools && (
         <>
           <Separator />
           <ItemContainer isInteractive onClick={onOpenDevTools}>
@@ -148,15 +167,22 @@ const WebPlatformTopBar = ({ manifest, onReload, onHelp, onClose, onOpenDevTools
             </ItemContent>
           </ItemContainer>
         </>
-      ) : null}
-      <RightContainer>
-        <ItemContainer isInteractive onClick={onClick}>
-          <IconInfoCircle size={16} />
-        </ItemContainer>
-        <ItemContainer isInteractive onClick={onClose}>
-          <IconClose size={16} />
-        </ItemContainer>
-      </RightContainer>
+      )}
+      {(shouldDisplayInfo || shouldDisplayClose) && (
+        <RightContainer>
+          {shouldDisplayInfo && (
+            <ItemContainer isInteractive onClick={onClick}>
+              <IconInfoCircle size={16} />
+            </ItemContainer>
+          )}
+
+          {shouldDisplayClose && (
+            <ItemContainer isInteractive onClick={onClose}>
+              <IconClose size={16} />
+            </ItemContainer>
+          )}
+        </RightContainer>
+      )}
     </Container>
   );
 };

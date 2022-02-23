@@ -64,7 +64,7 @@ const RightContainer = styled.div`
   flex: 1;
   background: ${({ bgTheme, theme }) => {
     if (bgTheme === "light") {
-      return "rgba(100, 144, 241, 0.1)";
+      return "rgba(138, 128, 219, 0.1)";
     }
     if (bgTheme === "dark") {
       return theme.colors.palette.primary.main;
@@ -280,7 +280,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
       </LeftContainer>
       <RightContainer bgTheme={theme}>
         <WaveContainer>
-          <AnimatedWave height={500} color={theme === "dark" ? "#587ED4" : "#4385F016"} />
+          <AnimatedWave height={500} color={"#453a9c"} />
         </WaveContainer>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="slide-switch">
           <ScreenContainer>

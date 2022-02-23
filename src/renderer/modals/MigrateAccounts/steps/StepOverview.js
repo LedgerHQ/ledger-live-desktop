@@ -19,10 +19,8 @@ import IconExternalLink from "~/renderer/icons/ExternalLink";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
 import type { StepProps } from "~/renderer/modals/MigrateAccounts";
-
-import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
 import MobileExport from "~/renderer/images/mobile-export.svg";
-import Image from "~/renderer/components/Image";
+import Logo from "~/renderer/icons/Logo";
 
 const getAllImportedAccounts = accountsByAsset =>
   reduce(accountsByAsset, (acc, accounts) => [...acc, ...accounts], []);
@@ -84,7 +82,7 @@ const MobileContent = styled.div`
   flex-direction: row;
 `;
 const Currency = styled.div``;
-const Logo = styled.div`
+const LogoWrapper = styled.div`
   margin-bottom: 15px;
 `;
 const Title = styled.div`
@@ -182,17 +180,13 @@ const StepOverview = ({
     <Box alignItems="center">
       <TrackPage category="MigrateAccounts" name="Step1" />
 
-      <Logo>
+      <LogoWrapper>
         {migratableAccounts.length ? (
-          <LedgerLiveLogo
-            width="58px"
-            height="58px"
-            icon={<Image resource={LedgerLiveImg} alt="" width={35} height={35} />}
-          />
+          <LedgerLiveLogo width="58px" height="58px" icon={<Logo size={35} />} />
         ) : (
           <SuccessAnimatedIcon width={70} height={70} />
         )}
-      </Logo>
+      </LogoWrapper>
       <Title>
         <Text ff="Inter|Regular" fontSize={6} color="palette.text.shade100">
           <Trans

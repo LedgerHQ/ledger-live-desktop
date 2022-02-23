@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
 import { OutdatedApp, LatestFirmwareVersionRequired } from "@ledgerhq/live-common/lib/errors";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
-import { setPreferredDeviceModel } from "~/renderer/actions/settings";
+import { setPreferredDeviceModel, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import AutoRepair from "~/renderer/components/AutoRepair";
@@ -28,7 +28,7 @@ import {
   renderListingApps,
   renderWarningOutdated,
   renderSwapDeviceConfirmationV2,
-  renderSellDeviceConfirmation,
+  renderSecureTransferDeviceConfirmation,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -88,6 +88,7 @@ const DeviceAction = <R, H, P>({
     allowManagerRequestedWording,
     requestQuitApp,
     deviceInfo,
+    latestFirmware,
     repairModalOpened,
     requestOpenApp,
     allowOpeningRequestedWording,
@@ -107,6 +108,9 @@ const DeviceAction = <R, H, P>({
     initSwapRequested,
     initSwapError,
     initSwapResult,
+    completeExchangeStarted,
+    completeExchangeResult,
+    completeExchangeError,
     allowOpeningGranted,
     initSellRequested,
     initSellResult,
@@ -122,6 +126,17 @@ const DeviceAction = <R, H, P>({
       dispatch(setPreferredDeviceModel(modelId));
     }
   }, [dispatch, modelId, preferredDeviceModel]);
+
+  useEffect(() => {
+    if (deviceInfo) {
+      const lastSeenDevice = {
+        modelId: device.modelId,
+        deviceInfo,
+      };
+
+      dispatch(setLastSeenDeviceInfo({ lastSeenDevice, latestFirmware }));
+    }
+  }, [dispatch, device, deviceInfo, latestFirmware]);
 
   if (displayUpgradeWarning && appAndVersion) {
     return renderWarningOutdated({ appName: appAndVersion.name, passWarning });
@@ -157,6 +172,30 @@ const DeviceAction = <R, H, P>({
     return renderListingApps();
   }
 
+  if (completeExchangeStarted && !completeExchangeResult && !completeExchangeError) {
+    const { exchangeType } = request;
+
+    // FIXME: could use a TS enum (when LLD will be in TS) or a JS object instead of raw numbers for switch values for clarity
+    switch (exchangeType) {
+      // swap
+      case 0x00: {
+        // FIXME: should use `renderSwapDeviceConfirmationV2` but all params not available in hookState for this SDK exchange flow
+        return <div>{"Confirm swap on your device"}</div>;
+      }
+
+      case 0x01: // sell
+      case 0x02: // fund
+        return renderSecureTransferDeviceConfirmation({
+          exchangeType: exchangeType === 0x01 ? "sell" : "fund",
+          modelId,
+          type,
+        });
+
+      default:
+        return <div>{"Confirm exchange on your device"}</div>;
+    }
+  }
+
   if (initSwapRequested && !initSwapResult && !initSwapError) {
     const { transaction, exchange, exchangeRate, status } = request;
     const { amountExpectedTo, estimatedFees } = hookState;
@@ -174,7 +213,7 @@ const DeviceAction = <R, H, P>({
   }
 
   if (initSellRequested && !initSellResult && !initSellError) {
-    return renderSellDeviceConfirmation({ modelId, type });
+    return renderSecureTransferDeviceConfirmation({ exchangeType: "sell", modelId, type });
   }
 
   if (allowOpeningRequestedWording || requestOpenApp) {

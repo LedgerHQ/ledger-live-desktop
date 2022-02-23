@@ -416,7 +416,7 @@ const NoAccountsImage = ({ size = 250 }: Props) => (
         gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#3670C6" />
-        <stop offset="0.494792" stopColor="#6490F1" />
+        <stop offset="0.494792" stopColor="#8a80db" />
         <stop offset="1" stopColor="#64BEF1" />
       </linearGradient>
       <linearGradient

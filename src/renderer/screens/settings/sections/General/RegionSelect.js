@@ -1,44 +1,58 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setRegion } from "~/renderer/actions/settings";
-import { langAndRegionSelector } from "~/renderer/reducers/settings";
+import moment from "moment";
+import { upperFirst } from "lodash";
+import { setLocale } from "~/renderer/actions/settings";
+import { localeSelector } from "~/renderer/reducers/settings";
 import Select from "~/renderer/components/Select";
 import Track from "~/renderer/analytics/Track";
 import regionsByKey from "./regions.json";
 
-const regions = Object.keys(regionsByKey)
-  .map(key => {
-    const [language, region] = key.split("-");
-    return { value: key, language, region, label: regionsByKey[key] };
-  })
+const getRegionOption = locale => {
+  const [language, region = ""] = locale.split("-");
+  const languageDisplayName = new window.Intl.DisplayNames([locale], { type: "language" }).of(
+    language,
+  );
+  const regionDisplayName = new window.Intl.DisplayNames([locale], { type: "region" }).of(region);
+  const labelPrefix = upperFirst(regionDisplayName);
+  const labelSuffix = regionDisplayName ? ` (${upperFirst(languageDisplayName)})` : "";
+  const label = `${labelPrefix}${labelSuffix}`;
+  return { value: locale, locale, language, region, label };
+};
+
+const regionsOptions = Object.keys(regionsByKey)
+  .map(getRegionOption)
   .sort((a, b) => a.label.localeCompare(b.label));
 
 const RegionSelect = () => {
   const dispatch = useDispatch();
-  const { language, region } = useSelector(langAndRegionSelector);
+  const locale = useSelector(localeSelector);
 
   const handleChangeRegion = useCallback(
-    ({ region }: { region: string }) => {
-      dispatch(setRegion(region));
+    ({ locale }: { locale: string }) => {
+      moment.locale(locale);
+      dispatch(setLocale(locale));
     },
     [dispatch],
   );
 
-  const regionsFiltered = regions.filter(item => language === item.language);
-  const currentRegion = regionsFiltered.find(item => item.region === region) || regionsFiltered[0];
+  const currentRegionOption = useMemo(
+    () => regionsOptions.find(o => o.value === locale) || getRegionOption(locale),
+    [locale],
+  );
 
   return (
     <>
-      <Track onUpdate event="RegionSelectChange" currentRegion={currentRegion.region} />
+      <Track onUpdate event="RegionSelectChange" currentRegion={currentRegionOption.region} />
       <Select
         small
         minWidth={260}
         onChange={handleChangeRegion}
         renderSelected={item => item && item.name}
-        value={currentRegion}
-        options={regionsFiltered}
+        value={currentRegionOption}
+        options={regionsOptions}
       />
     </>
   );

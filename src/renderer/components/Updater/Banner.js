@@ -106,7 +106,7 @@ const UpdaterTopBanner = () => {
 
     return (
       <TopBanner
-        id={"app-update-banner"}
+        testId="layout-app-update-banner"
         content={content}
         status={status === "error" ? "alertRed" : "warning"}
       />

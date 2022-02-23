@@ -47,6 +47,10 @@ const QRCodeWrapper = styled.div`
   background: white;
 `;
 
+const AlertBoxContainer = styled.div`
+  margin-top: 20px;
+`;
+
 const Receive1ShareAddress = ({
   account,
   name,
@@ -229,6 +233,13 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
+            {mainAccount.derivationMode === "taproot" ? (
+              <AlertBoxContainer>
+                <Alert type="warning">
+                  <Trans i18nKey="currentAddress.taprootWarning" />
+                </Alert>
+              </AlertBoxContainer>
+            ) : null}
             <Alert type="security" learnMoreUrl={urls.recipientAddressInfo} mt={4}>
               <Trans i18nKey="currentAddress.messageIfSkipped" values={{ name }} />
             </Alert>
@@ -248,6 +259,13 @@ const StepReceiveFunds = ({
               address={address}
               showQRCodeModal={showQRCodeModal}
             />
+            {mainAccount.derivationMode === "taproot" ? (
+              <AlertBoxContainer>
+                <Alert type="warning">
+                  <Trans i18nKey="currentAddress.taprootWarning" />
+                </Alert>
+              </AlertBoxContainer>
+            ) : null}
             <Separator />
             <Receive2Device device={device} onVerify={onVerify} name={name} />
           </>

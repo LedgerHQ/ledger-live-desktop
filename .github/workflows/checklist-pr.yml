@@ -1,0 +1,73 @@
+name: "PR | Checklist"
+on:
+  pull_request:
+    branches:
+      - develop
+    types: [opened, reopened]
+
+jobs:
+  comment-on-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - name: comment on PR (support and bugfix branches)
+        if: contains(github.head_ref, 'support/') || contains(github.head_ref, 'bugfix/')
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: "LedgerHQ",
+              repo: "ledger-live-desktop",
+              issue_number: "${{ github.event.pull_request.number }}",
+              body: `
+              Thanks for your contribution.
+              To be able to merge in _develop_ branch, you need to:
+
+              - [ ] pass the CI
+              - [ ] if needed, run \`/generate-screenshots\`
+              - [ ] have a dev review
+              - [ ] have a QA review
+              - [ ] if needed, \`/upgrade-llc\`
+
+
+              ### Why /generate-screenshots ?
+
+              If your PR contains UI related changes,
+              it might be necessary to regenerate screenshots.
+
+              ### Why /upgrade-llc ?
+
+              If your PR requires an update to the ledger-live-common library,
+              once the PR is merged on develop on ledger-live-common side,
+              you need to run \`/upgrade-llc\` to switch back to ledger-live-common@develop here before merging.
+              `
+            });
+      - name: comment on PR (feature branches)
+        if: contains(github.head_ref, 'feat/')
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.issues.createCommitComment({
+              owner: "LedgerHQ",
+              repo: "ledger-live-desktop",
+              issue_number: "${{ github.event.pull_request.number }}",
+              body: `
+              Thanks for your contribution.
+              To be groomed for next release, you need to:
+
+              - [ ] pass the CI
+              - [ ] if needed, run \`/generate-screenshots\`
+              - [ ] have a dev review
+              - [ ] have a QA review
+
+
+              ### Why /generate-screenshots ?
+
+              If your PR contains UI related changes,
+              it might be necessary to regenerate screenshots.
+              `
+            });

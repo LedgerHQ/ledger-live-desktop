@@ -16,19 +16,12 @@ import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformA
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
-import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
-
-import IconCode from "~/renderer/icons/Code";
-import IconExternalLink from "~/renderer/icons/ExternalLink";
 
 import { openPlatformAppDisclaimerDrawer } from "~/renderer/actions/UI";
 
 import AppCard from "~/renderer/components/Platform/AppCard";
-import CatalogCTA from "./CatalogCTA";
 import CatalogBanner from "./CatalogBanner";
 import TwitterBanner from "./TwitterBanner";
 
@@ -40,7 +33,8 @@ const Grid = styled.div`
   grid-gap: 20px;
   width: 100%;
   justify-content: stretch;
-  margin-bottom: auto;
+  margin: auto;
+  padding-bottom: 32px;
 `;
 
 const GridItem = styled.div`
@@ -59,15 +53,6 @@ const Title: ThemedComponent<{}> = styled(Box).attrs(p => ({
   fontSize: 7,
   color: p.theme.colors.palette.secondary.main,
 }))``;
-
-const DeveloperCTA = styled(CatalogCTA)`
-  background: ${p => p.theme.colors.palette.text.shade5};
-  margin-top: 24px;
-  flex-grow: 0;
-  color: ${p => p.theme.colors.palette.secondary.main};
-`;
-
-const DeveloperText = styled(Text).attrs(p => ({ color: p.theme.colors.palette.text.shade50 }))``;
 
 const PlatformCatalog = () => {
   const dispatch = useDispatch();
@@ -98,10 +83,6 @@ const PlatformCatalog = () => {
   const isDismissed = dismissedBanners.includes(DAPP_DISCLAIMER_ID);
 
   const { t } = useTranslation();
-
-  const handleDeveloperCTA = useCallback(() => {
-    openURL(urls.platform.developerPage);
-  }, []);
 
   const handleClick = useCallback(
     manifest => {
@@ -141,20 +122,6 @@ const PlatformCatalog = () => {
           </GridItem>
         ))}
       </Grid>
-      <DeveloperCTA
-        title={t("platform.catalog.developerCTA.title")}
-        Icon={IconCode}
-        onClick={handleDeveloperCTA}
-        ctaLabel={
-          <>
-            <span>{t("platform.catalog.developerCTA.button")}</span>
-            <IconExternalLink size={14} />
-          </>
-        }
-        ctaOutline
-      >
-        <DeveloperText>{t("platform.catalog.developerCTA.description")}</DeveloperText>
-      </DeveloperCTA>
     </>
   );
 };
