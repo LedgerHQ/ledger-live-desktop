@@ -61,7 +61,8 @@ const ChevronContainer = styled(Flex).attrs({ m: 1 })<{
   }
 `;
 
-export const miniChartThreshold = 1050;
+export const miniChartThreshold = 1150;
+export const miniMarketCapThreshold = 1050;
 
 export const SortTableCell = ({
   onClick,
@@ -126,16 +127,22 @@ export const TableRow = styled(Flex).attrs({
     padding-left: 5px;
   }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 150px;
+    flex: 1 0 250px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
     flex: 1 0 150px;
     justify-content: flex-end;
   }
-  ${TableCellBase}:nth-child(4),
-  ${TableCellBase}:nth-child(5) {
+  ${TableCellBase}:nth-child(4) {
     flex: 1 0 100px;
+    justify-content: flex-end;
+  }
+  ${TableCellBase}:nth-child(5) {
+    @media (min-width: ${miniMarketCapThreshold}px) {
+      flex: 1 0 150px;
+    }
+    flex: 1 0 70px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(6) {
@@ -199,6 +206,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   swapAvailableIds,
   style,
   displayChart,
+  displayMarketCap,
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
@@ -218,6 +226,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
       availableOnSwap={availableOnSwap}
       style={{ ...style }}
       displayChart={displayChart}
+      displayMarketCap={displayMarketCap}
     />
   );
 });
@@ -315,7 +324,9 @@ function MarketList({
             <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
             <TableCell disabled>{t("market.marketList.price")}</TableCell>
             <TableCell disabled>{t("market.marketList.change")}</TableCell>
-            <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
+            {width > miniMarketCapThreshold && (
+              <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
+            )}
             {width > miniChartThreshold && (
               <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
             )}
@@ -380,6 +391,7 @@ function MarketList({
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
                             displayChart={width > miniChartThreshold}
+                            displayMarketCap={width > miniMarketCapThreshold}
                           />
                         )}
                       </List>
