@@ -86,6 +86,10 @@ export const useProviders = () => {
 };
 
 const shouldShowLoginBanner = ({ provider, token }: { provider: string, token: string }) => {
+  /**
+   * FIXME: Should not hardcode the list of provider requiering login.
+   * Could get it from LLC
+   */
   if (!["ftx", "ftxus"].includes(provider)) {
     return false;
   }
@@ -100,6 +104,10 @@ const shouldShowKYCBanner = ({
   provider: string,
   kycStatus: KYCStatus,
 }) => {
+  /**
+   * FIXME: Should not hardcode the list of provider requiering KYC.
+   * Could get it from LLC
+   */
   if (!["ftx", "ftxus", "wyre"].includes(provider)) {
     return false;
   }
@@ -217,11 +225,7 @@ const SwapForm = () => {
         bearerToken: userId,
       });
 
-      console.log("KYC_STATUS: ", { status });
-
       if (status.codeName === "RATE_VALID") {
-        console.log({ status, kycStatus });
-
         // If trade can be done and KYC already approved, we are good
         // PS: this can't be checked before the `checkQuote` call since a KYC status can become expierd
         if (kycStatus === KYC_STATUS.approved) {
@@ -242,12 +246,10 @@ const SwapForm = () => {
         if (updatedKycStatus !== kycStatus) {
           dispatch(setSwapKYCStatus({ provider, id: userId, status: updatedKycStatus }));
         }
-        return;
       }
 
       // Handle all non KYC related errors
       // FIXME: handle error messages
-      console.log("TEST --- ERROR", { status });
     };
 
     handleCheckQuote();
