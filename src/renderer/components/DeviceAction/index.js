@@ -152,7 +152,7 @@ const DeviceAction = <R, H, P>({
 
   if (installingApp) {
     const appName = requestOpenApp;
-    const props = { appName, progress, request, analyticsPropertyFlow };
+    const props = { type, modelId, appName, progress, request, analyticsPropertyFlow };
     return <InstallingApp {...props} />;
   }
 
