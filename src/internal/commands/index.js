@@ -6,6 +6,7 @@ import firmwareRepair from "./firmwareRepair";
 import flushDevice from "./flushDevice";
 import firmwareUpdating from "./firmwareUpdating";
 import getLatestFirmwareForDevice from "./getLatestFirmwareForDevice";
+import getOnboarding from "./getOnboarding";
 import getSatStackStatus from "./getSatStackStatus";
 import libcoreGetVersion from "./libcoreGetVersion";
 import libcoreReset from "./libcoreReset";
@@ -39,6 +40,7 @@ export const commandsById = {
   flushDevice,
   firmwareUpdating,
   getLatestFirmwareForDevice,
+  getOnboarding,
   getSatStackStatus,
   libcoreGetVersion,
   libcoreReset,

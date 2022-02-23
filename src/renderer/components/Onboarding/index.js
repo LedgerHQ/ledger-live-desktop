@@ -11,6 +11,8 @@ import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 import { track } from "~/renderer/analytics/segment";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
+import { command } from "~/renderer/commands";
+import useInterval from "~/renderer/hooks/useInterval";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
@@ -228,6 +230,7 @@ const ScreenContainer = styled.div`
 export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
   const dispatch = useDispatch();
   const [imgsLoaded, setImgsLoaded] = useState(false);
+  const [onboardingFromDevice, updateOnboardingFromDevice] = useState(undefined);
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
     actions: {
@@ -252,7 +255,48 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
     preloadAssets().then(() => setImgsLoaded(true));
   }, []);
 
-  const CurrentScreen = screens[state.value];
+  useInterval(() => {
+    console.log("toto");
+    command("getOnboarding")({ deviceId: "" }).subscribe({
+      next: res => {
+        console.log("ONBOARDING", res);
+        updateOnboardingFromDevice(res);
+      },
+    });
+  }, 3000);
+
+  let CurrentScreen = screens[state.value];
+  let sentence = "";
+
+  if (onboardingFromDevice) {
+    if (onboardingFromDevice.isOnboarded) {
+      sentence = "ONBOARDED";
+    } else {
+      if (onboardingFromDevice.isRecoveryMode) {
+        sentence = "IN RECOVERY MODE";
+      } else {
+        if (onboardingFromDevice.isSeedRecovery) {
+          sentence = "SEED RECOVERY";
+          CurrentScreen = screens["useRecoveryPhrase"];
+        }
+        // New seed
+        else {
+          sentence = "NEW SEED";
+          CurrentScreen = screens["setupNewDevice"];
+          if (onboardingFromDevice.isConfirming) {
+            sentence += " - CONFIRMING";
+          }
+          // writing
+          else {
+            sentence += " - WRITING";
+          }
+        }
+        sentence += ` : ${onboardingFromDevice.currentWord} / ${onboardingFromDevice.seedSize}`;
+      }
+    }
+  }
+
+  console.log("onboarding sentence", sentence);
 
   return (
     <React.Fragment>

@@ -1,11 +1,21 @@
 // @flow
 import type { Observable } from "rxjs";
 import { from } from "rxjs";
-import onboarding from "@ledgerhq/live-common/lib/hw/onboarding";
+import getOnboarding from "@ledgerhq/live-common/lib/hw/getOnboardingStatus";
+import { withDevice } from "@ledgerhq/live-common/lib/hw/deviceAccess";
 
-type Input = string;
-type Result = void;
+type Input = {
+  deviceId: string,
+};
 
-const cmd = (deviceId: Input): Observable<Result> => from(onboarding(deviceId));
-
+const cmd = ({
+  deviceId,
+}: Input): Observable<{
+  isOnboarded?: boolean,
+  isRecoveryMode?: boolean,
+  isSeedRecovery?: boolean,
+  isConfirming?: boolean,
+  seedSize?: SeedSize,
+  currentWord?: number,
+}> => withDevice(deviceId)(t => from(getOnboarding(t)));
 export default cmd;
