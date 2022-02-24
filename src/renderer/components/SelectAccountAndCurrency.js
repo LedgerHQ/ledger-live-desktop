@@ -18,7 +18,7 @@ import type {
 } from "@ledgerhq/live-common/lib/types";
 import FakeLink from "~/renderer/components/FakeLink";
 import PlusIcon from "~/renderer/icons/Plus";
-import { openModal } from "~/renderer/actions/modals";
+import { openModal, closeModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
@@ -106,8 +106,15 @@ const SelectAccountAndCurrency = ({
   const dispatch = useDispatch();
 
   const openAddAccounts = useCallback(() => {
-    dispatch(openModal("MODAL_ADD_ACCOUNTS", { currency, flow }));
-  }, [dispatch, currency]);
+    dispatch(closeModal("MODAL_REQUEST_ACCOUNT"));
+    dispatch(
+      openModal("MODAL_ADD_ACCOUNTS", {
+        currency,
+        flow,
+        onClose: () => selectAccount(),
+      }),
+    );
+  }, [dispatch, currency, flow, selectAccount]);
 
   const addOrSelectAccount = () => {
     if (!currency) {
@@ -118,6 +125,7 @@ const SelectAccountAndCurrency = ({
       return (
         <>
           <FormContent>
+            {/* FIXME: should display add account button only if allowAddAccount is true */}
             <AccountSelectorLabel>
               <span>{t("exchange.buy.coinify.selectAccount")}</span>
               <FakeLink fontSize={3} ff="Inter|SemiBold" onClick={openAddAccounts}>
@@ -154,6 +162,7 @@ const SelectAccountAndCurrency = ({
       );
     }
 
+    // FIXME: should display add account button only if allowAddAccount is true
     return (
       <FormContent>
         <ConfirmButton primary onClick={openAddAccounts}>

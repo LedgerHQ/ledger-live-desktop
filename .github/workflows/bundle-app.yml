@@ -246,9 +246,9 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v2
         with:
-          python-version: "2.7.x"
+          python-version: 2.x
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"

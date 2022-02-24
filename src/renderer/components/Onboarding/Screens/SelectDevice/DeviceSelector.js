@@ -43,15 +43,6 @@ const DeviceIllustration = styled.div`
   height: 180px;
 `;
 
-const deviceNanoSP = {
-  id: "nanoSP",
-  label: "Nano S Plus",
-  images: {
-    dark: nanoSPDark,
-    light: nanoSP,
-  },
-};
-
 const devices = [
   {
     id: "nanoS",
@@ -59,6 +50,14 @@ const devices = [
     images: {
       dark: nanoSDark,
       light: nanoS,
+    },
+  },
+  {
+    id: "nanoSP",
+    label: "Nano S Plus",
+    images: {
+      dark: nanoSPDark,
+      light: nanoSP,
     },
   },
   {
@@ -70,11 +69,6 @@ const devices = [
     },
   },
 ];
-
-if (process.env.SHOW_NANOSP) {
-  // adding at second position
-  devices.splice(1, 0, deviceNanoSP);
-}
 
 type DeviceSelectorProps = {
   onClick: DeviceModelId => void,
