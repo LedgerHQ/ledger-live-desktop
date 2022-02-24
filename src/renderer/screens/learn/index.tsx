@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { Flex } from "@ledgerhq/react-ui";
 import useTheme from "~/renderer/hooks/useTheme";
+import { useSelector } from "react-redux";
+import { enableLearnPageStagingUrlSelector } from "~/renderer/reducers/settings";
 
 const Container = styled(Flex).attrs({
   flex: 1,
@@ -14,11 +16,13 @@ const Container = styled(Flex).attrs({
   margin-right: -${p => p.theme.space[6] - p.theme.overflow.trackSize}px;
 `;
 
-const learnURL = "https://www.ledger.com/ledger-live-learn";
+const learnProdURL = "https://www.ledger.com/ledger-live-learn";
+const learnStagingURL = "https://ecommerce-website.aws.stg.ldg-tech.com/ledger-live-learn";
 
 export default function LearnScreen() {
   const { i18n } = useTranslation();
   const themeType: string = useTheme("colors.palette.type");
+  const useStagingUrl = useSelector(enableLearnPageStagingUrlSelector);
 
   return (
     <Container>
@@ -30,7 +34,9 @@ export default function LearnScreen() {
           allowFullScreen={false}
           width="100%"
           height="100%"
-          src={`${learnURL}?theme=${themeType}&lang=${i18n.languages[0]}`}
+          src={`${useStagingUrl ? learnStagingURL : learnProdURL}?theme=${themeType}&lang=${
+            i18n.languages[0]
+          }`}
         />
       </Flex>
     </Container>

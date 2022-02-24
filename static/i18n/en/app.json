@@ -2701,7 +2701,9 @@
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
       "addLocalAppButton": "Browse",
       "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "runLocalAppOpenButton": "Open",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "Select crypto asset",
