@@ -6,11 +6,8 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 
 const DeviceIllustrationContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translateX(8px);
   transition: transform ease-out 150ms;
+  margin-top: 34px;
   will-change: transform;
   display: flex;
 `;
@@ -20,7 +17,8 @@ const Container = styled.div`
   outline: none;
   width: 100%;
   height: 100%;
-  background-color: rgba(138, 128, 219, 0.2);
+  background-color: ${p =>
+    p.theme.colors.palette.type === "dark" ? "rgba(20, 37, 51, 0.9)" : "rgba(100, 144, 241, 0.2)"};
   border-radius: 4px;
   overflow: hidden;
   position: relative;
@@ -34,15 +32,16 @@ const Container = styled.div`
 const DeviceSelectOptionContainer: ThemedComponent<{}> = styled.button`
   border: none;
   outline: none;
-  width: 152px;
   height: 318px;
+  flex: 1;
+  justify-content: center;
   background-color: transparent;
   overflow: hidden;
   position: relative;
   cursor: pointer;
 
   &:hover ${DeviceIllustrationContainer} {
-    transform: translateX(0px);
+    transform: scale(1.05);
   }
 
   &:active ${Container} {
@@ -63,7 +62,7 @@ type DeviceSelectOptionProps = {
 
 export function DeviceSelectorOption({ label, Illu, onClick, id }: DeviceSelectOptionProps) {
   return (
-    <DeviceSelectOptionContainer id={id} onClick={onClick}>
+    <DeviceSelectOptionContainer id={id} data-test-id={id} onClick={onClick}>
       <Container>
         <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
           {label}

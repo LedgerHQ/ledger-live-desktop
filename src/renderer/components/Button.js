@@ -315,9 +315,10 @@ export type Props = {
   eventProperties?: Object,
   mr?: number,
   mx?: number,
+  innerRef?: any,
 };
 
-class Button extends PureComponent<
+class ButtonInner extends PureComponent<
   Props,
   {
     isFocused: boolean,
@@ -347,7 +348,7 @@ class Button extends PureComponent<
 
   render() {
     const { isFocused } = this.state;
-    const { disabled } = this.props;
+    const { disabled, innerRef } = this.props;
     const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props;
     const isClickDisabled = disabled || isLoading;
     const onClickHandler = e => {
@@ -361,6 +362,7 @@ class Button extends PureComponent<
     return (
       <Base
         {...rest}
+        ref={innerRef}
         onClick={isClickDisabled ? undefined : onClickHandler}
         isFocused={isFocused}
         onFocus={this.handleFocus}
@@ -376,5 +378,9 @@ class Button extends PureComponent<
     );
   }
 }
+
+const Button: React$ComponentType<Props> = React.forwardRef((props, ref) => (
+  <ButtonInner {...props} innerRef={ref} />
+));
 
 export default Button;

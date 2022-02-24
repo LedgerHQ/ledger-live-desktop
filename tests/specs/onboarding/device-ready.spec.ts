@@ -3,11 +3,15 @@ import { expect } from "@playwright/test";
 import { OnboardingPage } from "../../models/OnboardingPage";
 import { DeviceAction } from "../../models/DeviceAction";
 
-const nanos = ["Nano X", "Nano S", "Blue"];
+const nanos = {
+  nanoX: "Nano X",
+  nanoS: "Nano S",
+  nanoSP: "Nano S Plus",
+};
 
 test.describe.parallel("Onboarding", () => {
-  for (const nano of nanos) {
-    test(`[${nano}] Onboarding flow already set up`, async ({ page }) => {
+  for (const nano of Object.keys(nanos)) {
+    test(`[${nanos[nano]}] Onboarding flow already set up`, async ({ page }) => {
       const onboardingPage = new OnboardingPage(page);
       const deviceAction = new DeviceAction(page);
 
@@ -20,15 +24,15 @@ test.describe.parallel("Onboarding", () => {
         await onboardingPage.acceptTerms();
       });
 
-      await test.step(`[${nano}] Select Device`, async () => {
+      await test.step(`[${nanos[nano]}] Select Device`, async () => {
         await onboardingPage.selectDevice(nano);
       });
 
-      await test.step(`[${nano}] Already set up`, async () => {
+      await test.step(`[${nanos[nano]}] Already set up`, async () => {
         await onboardingPage.connectDevice();
       });
 
-      await test.step(`[${nano}] Device genuine check`, async () => {
+      await test.step(`[${nanos[nano]}] Device genuine check`, async () => {
         await onboardingPage.continue();
         await onboardingPage.checkDevice();
       });

@@ -85,6 +85,16 @@ jobs:
           name: ${{ steps.post-version.outputs.version }}-mac.dmg
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-mac.dmg
 
+  clean-macos-runner:
+    runs-on: [ledger-live, macos]
+    needs: [bundle-macos]
+    steps:
+      - name: Clean working directory
+        run: |
+          cd $RUNNER_WORKSPACE
+          cd ..
+          rm -r *
+
   start-runner:
     name: "[Runner] start ec2 instance"
     needs: check-if-fork
@@ -236,9 +246,9 @@ jobs:
       - uses: actions/setup-node@main
         with:
           node-version: 14.x
-      - uses: actions/setup-python@v1
+      - uses: actions/setup-python@v2
         with:
-          python-version: "2.7.x"
+          python-version: 2.x
       - name: set git user
         run: |
           git config user.email "team-live@ledger.fr"

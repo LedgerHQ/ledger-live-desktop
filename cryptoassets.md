@@ -9,6 +9,7 @@
 | Bitcoin Cash | BCH | YES | bitcoin_cash |
 | Bitcoin Gold | BTG | YES | bitcoin_gold |
 | Cosmos | ATOM | YES | cosmos |
+| Crypto.org | CRO | YES | crypto_org |
 | Dash | DASH | YES | dash |
 | Decred | DCR | YES | decred |
 | DigiByte | DGB | YES | digibyte |
@@ -24,6 +25,7 @@
 | Polkadot | DOT | YES | polkadot |
 | Polygon | MATIC | YES | polygon |
 | Qtum | QTUM | YES | qtum |
+| Solana | SOL | YES | solana |
 | Stakenet | XSN | YES | stakenet |
 | Stellar | XLM | YES | stellar |
 | Tezos | XTZ | YES | tezos |
@@ -42,7 +44,6 @@
 | Callisto | CLO | NO | callisto |
 | Cardano | ADA | NO | cardano |
 | Celo | CELO | NO | celo |
-| Crypto.org | CRO | NO | crypto_org |
 | DEXON | DXN | NO | dexon |
 | EOS | EOS | NO | eos |
 | Elastos | ELA | NO | elastos |
@@ -89,7 +90,6 @@
 | Ravencoin | RVN | NO | ravencoin |
 | Resistance | RES | NO | resistance |
 | Rise | RISE | NO | rise |
-| Solana | SOL | NO | solana |
 | Songbird | SGB | NO | songbird |
 | Thundercore | TT | NO | thundercore |
 | TomoChain | TOMO | NO | tomo |
