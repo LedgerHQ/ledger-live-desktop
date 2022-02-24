@@ -41,6 +41,10 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
   })
   .filter(Boolean);
 
+// comma-separated list of currencies that we want to enable as experimental, e.g:
+// const experimentalCurrencies = "solana,cardano";
+const experimentalCurrencies = "";
+
 export const experimentalFeatures: Feature[] = [
   {
     type: "toggle",
@@ -52,16 +56,20 @@ export const experimentalFeatures: Feature[] = [
     valueOn: "tezos,algorand",
     valueOff: "",
   },
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_CURRENCIES",
-    title: <Trans i18nKey="settings.experimental.features.experimentalCurrencies.title" />,
-    description: (
-      <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
-    ),
-    valueOn: "solana",
-    valueOff: "",
-  },
+  ...(experimentalCurrencies.length
+    ? [
+        {
+          type: "toggle",
+          name: "EXPERIMENTAL_CURRENCIES",
+          title: <Trans i18nKey="settings.experimental.features.experimentalCurrencies.title" />,
+          description: (
+            <Trans i18nKey="settings.experimental.features.experimentalCurrencies.description" />
+          ),
+          valueOn: experimentalCurrencies,
+          valueOff: "",
+        },
+      ]
+    : []),
   ...(deltaExperimentalExplorers.length
     ? [
         {

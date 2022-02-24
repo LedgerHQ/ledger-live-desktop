@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "أزرق"
   },
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "بطاقة",
+    "learn": "Learn",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -332,8 +334,8 @@
     "exchangeDrawer": {
       "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "Transaction broadcast successfully",
-        "description": "Your Swap operation has been sent to the network for confirmation. Please wait for your transaction to be confirmed and for the provider to process and send your {{targetCurrency}}.",
+        "title": "تم بث المعاملة بنجاح",
+        "description": "تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. الرجاء الانتظار حتى يتم تأكيد معاملتك وحتى يقوم المزود بمعالجة وإرسال {{targetCurrency}} الخاص بك.",
         "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
         "seeDetails": "رؤية التفاصيل"
       }
@@ -545,6 +547,9 @@
       "initialAmount": "المبلغ الأولي",
       "creditedAmount": "المبلغ المضاف"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "الحالة",
@@ -1131,8 +1136,8 @@
         "title": "اتصال",
         "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
         "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
-        "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
+        "noEthAccount": "ليس لديك أي حساب إيثيريوم. يرجى أن تقوم بإضافة حساب إيثيريوم لاستخدام Wallet Connect.",
+        "alreadyConnected": "أنت تحاول الاتصال بـ dApp أثناء وجود تطبيق آخر متصل بالفعل. الرجاء قطع الاتصال من تطبيق dApp المتصل قبل إعادة اتصال Live مع تطبيق جديد."
       }
     },
     "connectedscreen": {
@@ -1180,6 +1185,9 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
+  },
+  "learn": {
+    "title": "Learn"
   },
   "market": {
     "title": "سوق",
@@ -1509,8 +1517,8 @@
       "confirm": "تأكيد معاملة البيع"
     },
     "fund": {
-      "notice": "Verify the Fund details on your device before sending it. The addresses are exchanged securely so you don't have to verify them.",
-      "confirm": "Confirm Fund transaction"
+      "notice": "تحقق من تفاصيل الأموال على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
+      "confirm": "قم بتأكيد معاملة الأموال"
     }
   },
   "manager": {
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
         "intallParentApp": "تثبيت تطبيق {{appName}}",
-        "platform": "Go to app"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
@@ -2739,12 +2750,12 @@
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
         "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "title": "عمليات تنفيذ JS التجريبية",
+          "description": "استخدم عمليات تنفيذ JS التجريبية لAlgorand و Tezos."
         },
         "experimentalCurrencies": {
-          "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "title": "تكاملات تجريبية",
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "مزود المدير",
           "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
@@ -3834,7 +3849,7 @@
       "description": "يرجى إعادة المحاولة"
     },
     "QuantityNeedsToBePositive": {
-      "title": "The quantity needs to be greater than 0"
+      "title": "يجب أن تكون الكمية أكبر من 0"
     },
     "RPCHostRequired": {
       "title": "المضيف مطلوب."
@@ -4179,7 +4194,7 @@
         "drawerTitle": "تكامل Crypto.org",
         "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
         "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
-        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، والتكديس و العديد من الميزات القادمة.",
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، إلى التكديس و العديد من الميزات القادمة.",
         "website": "العملات المشفرة في كل محفظة"
       }
     },
