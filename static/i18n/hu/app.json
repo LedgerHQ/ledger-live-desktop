@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bájt",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "Perc",
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "Card",
+    "learn": "Learn",
     "menu": "Menü",
     "stars": "Csillagozott számlák",
     "accounts": "Számlák",
@@ -545,6 +547,9 @@
       "initialAmount": "Initial amount",
       "creditedAmount": "Credited amount"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Status",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "Market",
     "currency": "Currency",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "To manage <1>{{tokenName}} {{tokenType}} tokens</1>, please verify you indeed have the <1>{{tokenType}} version</1> before sending <3>to your {{appName}} account</3>.",
         "goToAccounts": "Irány a számlákhoz",
         "intallParentApp": "{{appName}} alkalmazás telepítése",
-        "platform": "Go to app"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Összes törlése",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "Experimental integrations",
-          "description": "Use experimental integration of Solana."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "Translation testing",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "Manager provider",
           "description": "Changing the app provider in the Manager may make it impossible to install or uninstall apps on your Ledger device."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },

@@ -62,7 +62,7 @@ type DeviceSelectOptionProps = {
 
 export function DeviceSelectorOption({ label, Illu, onClick, id }: DeviceSelectOptionProps) {
   return (
-    <DeviceSelectOptionContainer id={id} onClick={onClick}>
+    <DeviceSelectOptionContainer id={id} data-test-id={id} onClick={onClick}>
       <Container>
         <Text mt={"32px"} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={"22px"}>
           {label}
