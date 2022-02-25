@@ -85,7 +85,7 @@ jobs:
       - name: install dependencies
         env:
           JOBS: max
-        run: yarn --frozen-lockfile --network-timeout 100000
+        run: yarn --frozen-lockfile --network-timeout 100000 --skip-integrity-check
       - name: run code checks
         if: always()
         run: yarn ci 2> >(tee lint.txt)
