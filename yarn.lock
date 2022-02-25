@@ -2616,10 +2616,17 @@
   dependencies:
     commander "^2.20.0"
 
-"@ledgerhq/cryptoassets@6.24.1", "@ledgerhq/cryptoassets@^6.24.1":
+"@ledgerhq/cryptoassets@6.24.1":
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.24.1.tgz#edac116eaa2d5da5e7c0cda3bc039aa6aedfd7d5"
   integrity sha512-RCl2T5Qeu4fch5O+6pgT9s9AWs0ATWdBDwN2MSUuLxj7BfwdXig5+hcSObM3OIJPryNeDCtIYNK3z0blgxfTiA==
+  dependencies:
+    invariant "2"
+
+"@ledgerhq/cryptoassets@^6.24.1":
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.25.0.tgz#9e9307c69c436c938fafd27d5351526c21a2a114"
+  integrity sha512-WjE94BGv9bh70UrgAKH3mAflnAYUGnln/GNEP3UWJKtCkE64RCvRYFI9J4OpnSLEIs9Yf9h48Mjbu6Q2CYao+Q==
   dependencies:
     invariant "2"
 
@@ -2897,10 +2904,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@^21.32.5":
-  version "21.32.5"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.32.5.tgz#580b35803cf79500b7e8d724ad14b60d8523a45d"
-  integrity sha512-+Auvln68XOH3RO3yEtw+zz47bqqb/PAbARHslbT025v0TTOIaucnGVphzLgJptD9qrriGxuPYJsQTp3hAxEoYg==
+"@ledgerhq/live-common@21.32.6":
+  version "21.32.6"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.32.6.tgz#fe9e70f429ce730556cbe54065439f5645942d84"
+  integrity sha512-yNmoOSanI1YErmJaM+o3chLYIf9Q9JqwWYUCj+ku5PdWaDVitkL563F7RicC8LymuPW/UJ+ZEdRyrrIWM/Exgw==
   dependencies:
     "@celo/contractkit" "^1.5.1"
     "@celo/wallet-base" "^1.5.1"
@@ -18227,9 +18234,9 @@ rxjs@6, rxjs@^6.3.3, rxjs@^6.6.3, rxjs@^6.6.7:
     tslib "^1.9.0"
 
 rxjs@^7.5.2:
-  version "7.5.2"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.2.tgz#11e4a3a1dfad85dbf7fb6e33cbba17668497490b"
-  integrity sha512-PwDt186XaL3QN5qXj/H9DGyHhP3/RYYgZZwqBv9Tv8rsAaiwFH1IsJJlcgD37J7UW5a6O67qX0KWKS3/pu0m4w==
+  version "7.5.4"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-7.5.4.tgz#3d6bd407e6b7ce9a123e76b1e770dc5761aa368d"
+  integrity sha512-h5M3Hk78r6wAheJF0a5YahB1yRQKCsZ4MsGdZ5O9ETbVtjPcScGfrMmoOq7EBsCRzd4BDkvDJ7ogP8Sz5tTFiQ==
   dependencies:
     tslib "^2.1.0"
 
