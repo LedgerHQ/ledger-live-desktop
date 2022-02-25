@@ -100,10 +100,20 @@ jobs:
           node-version: 14.x
       - name: install yarn
         run: npm i -g yarn
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
-        run: yarn --frozen-lockfile --network-timeout 100000
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
         env:
           JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: build electron app
@@ -148,10 +158,20 @@ jobs:
           node-version: 14.x
       - name: install yarn
         run: npm i -g yarn
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
-        run: yarn --frozen-lockfile --network-timeout 100000
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
         env:
           JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: build electron app
