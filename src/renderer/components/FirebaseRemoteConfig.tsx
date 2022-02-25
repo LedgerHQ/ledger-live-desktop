@@ -5,7 +5,7 @@ import { defaultFeatures } from "@ledgerhq/live-common/lib/featureFlags";
 import { DefaultFeatures } from "@ledgerhq/live-common/lib/types";
 import { reduce } from "lodash";
 
-import { firebaseConfig } from "~/firebase-setup";
+import { getFirebaseConfig } from "~/firebase-setup";
 
 export const FirebaseRemoteConfigContext = React.createContext<RemoteConfig | null>(null);
 
@@ -32,6 +32,8 @@ export const FirebaseRemoteConfigProvider = ({ children }: Props): JSX.Element =
   const [config, setConfig] = useState<RemoteConfig | null>(null);
 
   useEffect(() => {
+    const firebaseConfig = getFirebaseConfig();
+
     initializeApp(firebaseConfig);
 
     const fetchConfig = async () => {
