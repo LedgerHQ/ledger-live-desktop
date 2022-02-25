@@ -203,6 +203,10 @@ export const setSwapKYCStatus = (payload: {
   payload,
 });
 
+export const resetSwapLoginAndKYCData = () => ({
+  type: "RESET_SWAP_LOGIN_AND_KYC_DATA",
+});
+
 export const addStarredMarketCoins = (payload: string) => ({
   type: "ADD_STARRED_MARKET_COINS",
   payload,

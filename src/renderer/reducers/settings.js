@@ -354,6 +354,13 @@ const handlers: Object = {
     ...state,
     starredMarketCoins: state.starredMarketCoins.filter(id => id !== payload),
   }),
+  RESET_SWAP_LOGIN_AND_KYC_DATA: (state: SettingsState) => ({
+    ...state,
+    swap: {
+      ...state.swap,
+      KYC: {},
+    },
+  }),
 };
 
 // TODO refactor selectors to *Selector naming convention
