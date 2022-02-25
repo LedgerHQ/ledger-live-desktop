@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { setSwapKYCStatus } from "~/renderer/actions/settings";
+import { resetSwapLoginAndKYCData } from "~/renderer/actions/settings";
 import { closeModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
@@ -28,6 +28,13 @@ const Logo: ThemedComponent<{}> = styled.div`
   border-radius: 50px;
 `;
 
+/**
+ * FIXME: update wording for this modal
+ * not limited to KYC anymore (and might not need to resend KYC info depending
+ * on provider)
+ * Need more generic message
+ */
+
 const SwapResetKYC = () => {
   const dispatch = useDispatch();
 
@@ -36,7 +43,7 @@ const SwapResetKYC = () => {
   }, [dispatch]);
 
   const onResetKYC = useCallback(() => {
-    dispatch(setSwapKYCStatus({ provider: "wyre" }));
+    dispatch(resetSwapLoginAndKYCData());
     onClose();
   }, [dispatch, onClose]);
 

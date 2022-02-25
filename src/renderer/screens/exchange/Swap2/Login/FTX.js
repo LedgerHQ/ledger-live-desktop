@@ -20,7 +20,14 @@ const FTXLogin = ({ onClose, provider }: Props) => {
   const handleExecuteJavaScript = useCallback(() => {
     const webview = webviewRef.current;
     if (webview) {
-      webview.executeJavaScript(`localStorage.removeItem('authToken')`);
+      /**
+       * FIXME:
+       * should remove auth token and ask the user to log in again (by provider
+       * his login / password infos)
+       */
+
+      webview.executeJavaScript(`window.localStorage.removeItem("authToken");`);
+      webview.executeJavaScript(`window.localStorage.clear();`);
     }
   }, []);
 
