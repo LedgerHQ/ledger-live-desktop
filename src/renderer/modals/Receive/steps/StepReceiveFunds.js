@@ -30,6 +30,7 @@ import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+import { HederaReceiveAddressWarning } from "~/renderer/families/hedera/StepReceiveFunds";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -267,37 +268,33 @@ const StepReceiveFunds = ({
         ) : device ? (
           // verification with device
           <>
-            <>
-              <Receive1ShareAddress
-                account={mainAccount}
-                name={name}
-                address={address}
-                showQRCodeModal={showQRCodeModal}
-              />
-              
-              {mainAccount.derivationMode === "taproot" ? (
-                <AlertBoxContainer>
-                  <Alert type="warning">
-                    <Trans i18nKey="currentAddress.taprootWarning" />
-                  </Alert>
-                </AlertBoxContainer>
-              ) : null}
-              
-              {isHederaAddress ? (
-                <Alert type="security" mt={4}>
-                  <Trans i18nKey="Hedera.currentAddress.messageIfVirtual" values={{ name }} />
-                </Alert>
-              ) : null}
-            </>
+            <Receive1ShareAddress
+              account={mainAccount}
+              name={name}
+              address={address}
+              showQRCodeModal={showQRCodeModal}
+            />
 
-            <>
+            {mainAccount.derivationMode === "taproot" ? (
+              <AlertBoxContainer>
+                <Alert type="warning">
+                  <Trans i18nKey="currentAddress.taprootWarning" />
+                </Alert>
+              </AlertBoxContainer>
+            ) : null}
+
+            {isHederaAddress ? (
+              // show warning for unverified address (hedera only)
+              <HederaReceiveAddressWarning name={name} />
+            ) : null}
+
             {!isHederaAddress ? (
-                <>
-                  <Separator />
-                  <Receive2Device device={device} onVerify={onVerify} name={name} /> 
-                </>
-              ) : null}
-            </>
+              // verification action for non-hedera families
+              <>
+                <Separator />
+                <Receive2Device device={device} onVerify={onVerify} name={name} />
+              </>
+            ) : null}
           </>
         ) : null // should not happen
         }
