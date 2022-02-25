@@ -19,6 +19,9 @@ import LaunchOnboardingBtn from "./LaunchOnboardingBtn";
 const SectionHelp = () => {
   const { t } = useTranslation();
   const swapKYC = useSelector(swapKYCSelector);
+
+  const hasSwapLoginOrKYCInfo = Object.keys(swapKYC).length !== 0;
+
   return (
     <>
       <TrackPage category="Settings" name="Help" />
@@ -51,7 +54,7 @@ const SectionHelp = () => {
         >
           <RepairDeviceButton buttonProps={{ small: true, primary: true }} />
         </Row>
-        {swapKYC.wyre ? (
+        {hasSwapLoginOrKYCInfo ? (
           <Row title={t("settings.profile.resetKYC")} desc={t("settings.profile.resetKYCDesc")}>
             <ResetKYCButton />
           </Row>
