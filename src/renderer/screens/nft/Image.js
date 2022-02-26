@@ -86,6 +86,7 @@ const Gen = styled.div`
 
 type Props = {
   nft: NFTWithMetadata,
+  mediaType?: "preview" | "big" | "original",
   full?: boolean,
   size?: number,
   maxHeight?: number,
@@ -104,6 +105,7 @@ class Image extends React.PureComponent<Props, State> {
   static defaultProps = {
     full: false,
     size: 32,
+    mediaType: "preview",
   };
 
   state = {
@@ -112,8 +114,18 @@ class Image extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { full, size, nft, maxHeight, onClick, square = true, objectFit = "cover" } = this.props;
+    const {
+      full,
+      mediaType,
+      size,
+      nft,
+      maxHeight,
+      onClick,
+      square = true,
+      objectFit = "cover",
+    } = this.props;
     const { loaded, error } = this.state;
+    const mediaUri = nft?.medias?.[mediaType]?.uri;
 
     return (
       <Wrapper
@@ -125,12 +137,12 @@ class Image extends React.PureComponent<Props, State> {
         objectFit={objectFit}
       >
         <Skeleton full />
-        {nft?.media && !error ? (
+        {mediaUri && !error ? (
           <img
             onClick={onClick}
             onLoad={() => this.setState({ loaded: true })}
             onError={() => this.setState({ error: true })}
-            src={nft.media}
+            src={mediaUri}
           />
         ) : (
           <Gen nft={nft} />
