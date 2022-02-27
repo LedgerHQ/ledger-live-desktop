@@ -48,6 +48,7 @@ export default function ActivityIndicatorInner() {
       onClick={isDisabled ? undefined : onClick}
     >
       <Rotating
+        data-test-id="sync-loading-spinner"
         size={16}
         isRotating={isRotating}
         color={

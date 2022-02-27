@@ -151,6 +151,9 @@ jobs:
       - name: run ui tests (Linux)
         if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
+      - name: run ui tests (Linux) perf
+        if: always()
+        run: xvfb-run --auto-servernum -- yarn playwright tests/specs/performance.spec.ts
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
@@ -175,6 +178,13 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-linux
+          path: |
+            tests/artifacts/performance-results
 
   ui-tests-linux-guest:
     name: "[Linux] UI"
@@ -235,6 +245,13 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-linux
+          path: |
+            tests/artifacts/performance-results
 
   ui-tests-windows:
     needs: cancel-previous
@@ -262,6 +279,8 @@ jobs:
         run: yarn build
       - name: run ui tests (windows)
         run: yarn playwright
+      - name: run ui tests (windows) perf
+        run: yarn playwright tests/specs/performance.spec.ts
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
@@ -286,6 +305,13 @@ jobs:
             tests/artifacts/html-report
             tests/artifacts/coverage
             tests/artifacts/videos
+      - name: upload performance results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: performance-results-windows
+          path: |
+            tests/artifacts/performance-results
   # ui-tests-macos:
   #   needs: cancel-previous
   #   name: "[macOS] UI"
