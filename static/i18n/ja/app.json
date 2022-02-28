@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Algorand and Tezosの試験的JS実装を利用する。"
+          "description": "Use experimental JS implementations for Algorand and Tezos."
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
@@ -3257,7 +3257,7 @@
           "genuineCheck": {
             "success": {
               "title": "All good!",
-              "desc": "{{deviceName}} は正規品で、Ledger Liveを使う準備が整いました。"
+              "desc": "{{deviceName}} は正規品です。Ledger Liveの準備が整いました。"
             },
             "buttons": {
               "next": "続行",
