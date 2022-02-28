@@ -27,7 +27,7 @@ export default function LearnScreen() {
 
   return (
     <Container>
-      <Track onMount event="PageLearn" />
+      <Track onMount event="Page Learn" />
       <Flex flexGrow={1}>
         <iframe
           loading="eager"
