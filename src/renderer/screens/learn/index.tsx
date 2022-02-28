@@ -5,6 +5,7 @@ import { Flex } from "@ledgerhq/react-ui";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useSelector } from "react-redux";
 import { enableLearnPageStagingUrlSelector } from "~/renderer/reducers/settings";
+import Track from "~/renderer/analytics/Track";
 
 const Container = styled(Flex).attrs({
   flex: 1,
@@ -26,6 +27,7 @@ export default function LearnScreen() {
 
   return (
     <Container>
+      <Track onMount event="PageLearn" />
       <Flex flexGrow={1}>
         <iframe
           loading="eager"
