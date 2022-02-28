@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import { rgba } from "~/renderer/styles/helpers";
+import { clearStorageData } from "~/renderer/storage";
 
 const Logo: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -42,8 +43,11 @@ const SwapResetKYC = () => {
     dispatch(closeModal("MODAL_SWAP_RESET_KYC"));
   }, [dispatch]);
 
-  const onResetKYC = useCallback(() => {
+  const onResetKYC = useCallback(async () => {
     dispatch(resetSwapLoginAndKYCData());
+
+    await clearStorageData();
+
     onClose();
   }, [dispatch, onClose]);
 
