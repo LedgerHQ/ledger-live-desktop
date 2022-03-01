@@ -56,7 +56,7 @@ export default function LearnScreen() {
     return () => {
       timer.current && clearTimeout(timer.current);
     };
-  }, [uri, setInitialLoadingDone, setLoading, timer, setErrored, setIsTimeout]);
+  }, []);
 
   const handleOnLoad = useCallback(() => {
     if (initialLoadingDone) return;
