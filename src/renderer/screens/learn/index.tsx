@@ -91,7 +91,10 @@ export default function LearnScreen() {
           frameBorder="0"
           allowFullScreen={false}
           width="100%"
-          height={isTimeout || errored || loading ? 0 : "100%"}
+          height={"100%"}
+          style={{
+            opacity: isTimeout || errored || loading ? 0 : 1,
+          }}
           src={uri}
         />
       </Flex>
