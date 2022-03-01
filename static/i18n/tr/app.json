@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Algorand ve Tezos için deneysel JS uygulamalarını kullanın."
+          "description": "Use experimental JS implementation for Tezos."
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
