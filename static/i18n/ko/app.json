@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "알고랜드 및 테조스에 실험적인 JS 구현을 사용합니다."
+          "description": "Use experimental JS implementation for Tezos."
         },
         "experimentalCurrencies": {
           "title": "실험적 통합",
