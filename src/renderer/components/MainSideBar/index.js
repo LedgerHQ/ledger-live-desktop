@@ -344,7 +344,7 @@ const MainSideBar = () => {
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
-                isActive={location.pathname === "/accounts"}
+                isActive={location.pathname.startsWith("/account")}
                 onClick={handleClickAccounts}
                 disabled={noAccounts}
                 collapsed={secondAnim}
