@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Карта",
-    "learn": "Learn",
+    "learn": "Образование",
     "menu": "Меню",
     "stars": "Избранные счета",
     "accounts": "Счета",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Протестировать"
   },
   "fullNode": {
     "status": "Статус",
@@ -1187,7 +1187,7 @@
     "deviceInBootloader": "Ваше устройство находится в режиме Bootloader. Щелкните <1>Continue</1> (Продолжить), чтобы обновить его."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Образование"
   },
   "market": {
     "title": "Рынок",
@@ -1605,7 +1605,7 @@
         "goToAccounts": "Перейти к Счетам",
         "intallParentApp": "Установить приложение {{appName}}",
         "plugin": "Перейти в приложение",
-        "swap": "Swap",
+        "swap": "Обмен",
         "tool": "Подробнее",
         "app": "Подробнее"
       },
@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Экспериментальные реализации JS",
-          "description": "Использовать экспериментальные JS-реализации для Algorand и Tezos."
+          "description": "Use experimental JS implementation for Tezos."
         },
         "experimentalCurrencies": {
           "title": "Экспериментальная интеграция",
