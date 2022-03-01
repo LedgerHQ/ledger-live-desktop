@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { Flex, Text } from "@ledgerhq/react-ui";
+import { Flex } from "@ledgerhq/react-ui";
 import useTheme from "~/renderer/hooks/useTheme";
 import { useSelector } from "react-redux";
 import { enableLearnPageStagingUrlSelector } from "~/renderer/reducers/settings";
-import LoadingScreen from "./LoadingScreen";
 import Track from "~/renderer/analytics/Track";
+import useIsOnline from "~/renderer/hooks/useIsOnline";
+import LoadingScreen from "./LoadingScreen";
+import NoConnectionScreen from "./NoConnectionScreen";
+import ErrorScreen from "./ErrorScreen";
 
 const Container = styled(Flex).attrs({
   flex: 1,
@@ -17,17 +20,19 @@ const Container = styled(Flex).attrs({
 
 const learnProdURL = "https://www.ledger.com/ledger-live-learn";
 const learnStagingURL = "https://ecommerce-website.aws.stg.ldg-tech.com/ledger-live-learn";
+const TIMEOUT = 60 * 1000;
 
-const ErrorScreen = () => (
-  <Flex height="100%" width="100%" alignItems={"center"} justifyContent="center">
-    <Text variant="h1">ERROR</Text>
-  </Flex>
+/** TODO: once design & wording are ready, implement properly */
+const GenericErrorScreen = () => (
+  <ErrorScreen title="Error" description="Something unexpected happened, please come back later." />
 );
 
+/** TODO: once design & wording are ready, implement properly */
 const TimeoutScreen = () => (
-  <Flex height="100%" width="100%" alignItems={"center"} justifyContent="center">
-    <Text variant="h1">TIMEOUT</Text>
-  </Flex>
+  <ErrorScreen
+    title="Server unreachable"
+    description="It appears that our server is not responding, please come back later."
+  />
 );
 
 export default function LearnScreen() {
@@ -38,25 +43,30 @@ export default function LearnScreen() {
     i18n.languages[0]
   }`;
 
+  const online = useIsOnline();
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isTimeout, setIsTimeout] = useState(false);
   const [errored, setErrored] = useState(false);
-
   const timer = useRef<NodeJS.Timeout>();
 
   useEffect(() => {
-    setInitialLoadingDone(false);
-    setLoading(true);
-    setIsTimeout(false);
-    timer.current = setTimeout(() => {
-      setIsTimeout(true);
+    if (online) {
+      setInitialLoadingDone(false);
+      setLoading(true);
+      setIsTimeout(false);
+      timer.current = setTimeout(() => {
+        setIsTimeout(true);
+        setLoading(false);
+      }, TIMEOUT);
+    } else {
       setLoading(false);
-    }, 60 * 1000);
+      setInitialLoadingDone(false);
+    }
     return () => {
       timer.current && clearTimeout(timer.current);
     };
-  }, []);
+  }, [online]);
 
   const handleOnLoad = useCallback(() => {
     if (initialLoadingDone) return;
@@ -76,27 +86,33 @@ export default function LearnScreen() {
     <Container>
       <Track onMount event="Page Learn" />
       <Flex flexGrow={1}>
-        {errored ? (
-          <ErrorScreen />
-        ) : isTimeout ? (
-          <TimeoutScreen />
-        ) : loading ? (
-          <LoadingScreen />
-        ) : null}
-        <iframe
-          loading="eager"
-          onLoad={handleOnLoad}
-          onError={handleError}
-          sandbox="allow-scripts allow-same-origin"
-          frameBorder="0"
-          allowFullScreen={false}
-          width="100%"
-          height={"100%"}
-          style={{
-            opacity: isTimeout || errored || loading ? 0 : 1,
-          }}
-          src={uri}
-        />
+        {!online ? (
+          <NoConnectionScreen />
+        ) : (
+          <>
+            {errored ? (
+              <GenericErrorScreen />
+            ) : isTimeout ? (
+              <TimeoutScreen />
+            ) : loading ? (
+              <LoadingScreen />
+            ) : null}
+            <iframe
+              loading="eager"
+              onLoad={handleOnLoad}
+              onError={handleError}
+              sandbox="allow-scripts allow-same-origin"
+              frameBorder="0"
+              allowFullScreen={false}
+              width="100%"
+              height={"100%"}
+              style={{
+                opacity: isTimeout || errored || loading ? 0 : 1,
+              }}
+              src={uri}
+            />
+          </>
+        )}
       </Flex>
     </Container>
   );

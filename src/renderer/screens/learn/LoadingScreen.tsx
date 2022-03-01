@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
-import { Button, Flex, Icons, Text } from "@ledgerhq/react-ui";
+import { Flex, Icons, Text } from "@ledgerhq/react-ui";
 import styled from "@ledgerhq/react-ui/components/styled";
 import { useTranslation } from "react-i18next";
 import { keyframes } from "styled-components";
+import Header from "./Header";
 
 const loading = keyframes`
 {
@@ -39,12 +40,6 @@ const Container = styled(Flex).attrs({
   width: "100%",
   flexDirection: "column",
   alignItems: "stretch",
-})``;
-
-const TitleContainer = styled(Flex).attrs({
-  height: "48px",
-  alignItems: "center",
-  mb: "40px",
 })``;
 
 const ScrollContainer = styled(Flex).attrs({
@@ -153,11 +148,7 @@ export default function LearnSkeleton() {
   const emptyArray = useMemo(() => new Array(10).fill(undefined), []);
   return (
     <Container>
-      <TitleContainer>
-        <Text variant="h3" fontSize="28px">
-          {t("learn.title")}
-        </Text>
-      </TitleContainer>
+      <Header />
       <Flex flexDirection="column" alignItems="stretch" width="100%" overflowY="scroll">
         <Section title={t("learn.sectionShows")} columnGap="12px">
           {emptyArray.map((i, key) => (
