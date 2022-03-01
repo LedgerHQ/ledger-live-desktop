@@ -119,74 +119,51 @@ export function SelectUseCase({ sendEvent, context }: Props) {
       </TopRightContainer>
       <SelectUseCaseContainer>
         <Row>
-          <LeftColumn>
-            <Text mb="8px" color="palette.text.shade100" ff="Inter|SemiBold" fontSize="18px">
-              {t("onboarding.screens.selectUseCase.greetings")}
-            </Text>
-            <LeftText>
+          <UseCaseOption
+            dataTestId="onboarding-new-device"
+            heading={t("onboarding.screens.selectUseCase.options.1.heading")}
+            title={
               <Trans
-                i18nKey="onboarding.screens.selectUseCase.hasNoRecovery"
+                i18nKey="onboarding.screens.selectUseCase.options.1.title"
                 values={{
                   deviceName: device.productName,
                 }}
               />
-            </LeftText>
-          </LeftColumn>
-          <RightColumn>
-            <UseCaseOption
-              dataTestId="onboarding-new-device"
-              heading={t("onboarding.screens.selectUseCase.options.1.heading")}
-              title={
-                <Trans
-                  i18nKey="onboarding.screens.selectUseCase.options.1.title"
-                  values={{
-                    deviceName: device.productName,
-                  }}
-                />
-              }
-              description={t("onboarding.screens.selectUseCase.options.1.description")}
-              Illu={<NanoBox />}
-              onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
-            />
-          </RightColumn>
-        </Row>
-        <Separator label={t("onboarding.screens.selectUseCase.separator")} />
-        <Row>
-          <LeftColumn>
-            <LeftText>{t("onboarding.screens.selectUseCase.hasRecovery")}</LeftText>
-          </LeftColumn>
-          <RightColumn>
-            <UseCaseOption
-              dataTestId="onboarding-initialized-device"
-              heading={t("onboarding.screens.selectUseCase.options.2.heading")}
-              title={
-                <Trans
-                  i18nKey="onboarding.screens.selectUseCase.options.2.title"
-                  values={{
-                    deviceName: device.productName,
-                  }}
-                />
-              }
-              description={t("onboarding.screens.selectUseCase.options.2.description")}
-              Illu={<DeviceConnect />}
-              onClick={() => onWrappedUseCase("CONNECT_SETUP_DEVICE")}
-            />
-            <UseCaseOption
-              dataTestId="onboarding-restore-device"
-              heading={t("onboarding.screens.selectUseCase.options.3.heading")}
-              title={t("onboarding.screens.selectUseCase.options.3.title")}
-              description={
-                <Trans
-                  i18nKey="onboarding.screens.selectUseCase.options.3.description"
-                  values={{
-                    deviceName: device.productName,
-                  }}
-                />
-              }
-              Illu={<ImportRecovery />}
-              onClick={() => onWrappedUseCase("USE_RECOVERY_PHRASE")}
-            />
-          </RightColumn>
+            }
+            description={t("onboarding.screens.selectUseCase.options.1.description")}
+            Illu={<NanoBox />}
+            onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
+          />
+          <UseCaseOption
+            dataTestId="onboarding-initialized-device"
+            heading={t("onboarding.screens.selectUseCase.options.2.heading")}
+            title={
+              <Trans
+                i18nKey="onboarding.screens.selectUseCase.options.2.title"
+                values={{
+                  deviceName: device.productName,
+                }}
+              />
+            }
+            description={t("onboarding.screens.selectUseCase.options.2.description")}
+            Illu={<DeviceConnect />}
+            onClick={() => onWrappedUseCase("CONNECT_SETUP_DEVICE")}
+          />
+          <UseCaseOption
+            dataTestId="onboarding-restore-device"
+            heading={t("onboarding.screens.selectUseCase.options.3.heading")}
+            title={t("onboarding.screens.selectUseCase.options.3.title")}
+            description={
+              <Trans
+                i18nKey="onboarding.screens.selectUseCase.options.3.description"
+                values={{
+                  deviceName: device.productName,
+                }}
+              />
+            }
+            Illu={<ImportRecovery />}
+            onClick={() => onWrappedUseCase("USE_RECOVERY_PHRASE")}
+          />
         </Row>
       </SelectUseCaseContainer>
     </ScrollArea>

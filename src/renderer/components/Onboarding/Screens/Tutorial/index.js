@@ -187,6 +187,7 @@ export function UseRecoveryPhrase({ sendEvent, context }: Props) {
       sendEventToParent={sendEvent}
       machine={useRecoveryPhraseMachine}
       parentContext={context}
+      initial="recoveryHowTo2"
     />
   );
 }
@@ -195,15 +196,17 @@ type TutorialProps = {
   sendEventToParent: ({ type: string, [string]: * } | string, *) => void,
   machine: *,
   parentContext: *,
+  initial?: any,
 };
 
-function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) {
+function Tutorial({ sendEventToParent, machine, parentContext, initial }: TutorialProps) {
   const [state, sendEvent] = useMachine(machine, {
     actions: {
       topLevelPrev: () => sendEventToParent("PREV"),
       topLevelNext: () => sendEventToParent("NEXT"),
       fireConfetti,
     },
+    initial,
     context: {
       deviceId: parentContext.deviceId,
     },

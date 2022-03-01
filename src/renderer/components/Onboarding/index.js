@@ -5,6 +5,7 @@ import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
+import SyncOnboardingController from "~/renderer/components/Onboarding/SyncOnboardingController";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
@@ -139,6 +140,10 @@ const onboardingMachine = Machine({
           target: "connectSetupDevice",
           actions: () => track("Onboarding - Connect"),
         },
+        FINISH: {
+          target: "onboardingComplete",
+          actions: () => track("Onboarding - Connect"),
+        },
         PREV: {
           target: "selectDevice",
         },
@@ -259,13 +264,13 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
       <OnboardingLogoContainer>
         <LedgerLogo />
       </OnboardingLogoContainer>
-      <Modal
+      {/* <Modal
         isOpen={state.context.pedagogy}
         onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}
       >
         <Pedagogy onDone={() => sendEvent("SETUP_NEW_DEVICE")} />
-      </Modal>
-      <SideDrawer
+      </Modal> */}
+      {/* <SideDrawer
         isOpen={!!state.context.help.recoveryPhraseWarning}
         onRequestClose={() =>
           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
@@ -275,8 +280,9 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
         <Box px={40}>
           <RecoveryWarning />
         </Box>
-      </SideDrawer>
+      </SideDrawer> */}
       <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
+        <SyncOnboardingController state={state} sendEvent={sendEvent} />
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <CurrentScreen

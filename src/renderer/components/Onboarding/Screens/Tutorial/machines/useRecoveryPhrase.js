@@ -3,7 +3,7 @@ import { setStepperStatus } from "./helpers";
 
 export const useRecoveryPhraseMachine = Machine({
   id: "useRecoveryPhrase",
-  initial: "importRecoveryPhrase",
+  initial: "recoveryHowTo2",
   context: {
     steps: [
       {
@@ -197,7 +197,7 @@ export const useRecoveryPhraseMachine = Machine({
           }),
         },
         NEXT: {
-          target: "pairMyNano",
+          target: "genuineCheck",
         },
         PREV: {
           target: "recoveryHowTo1",
@@ -237,7 +237,7 @@ export const useRecoveryPhraseMachine = Machine({
           ],
         },
         NEXT: {
-          cond: context => context.device,
+          // cond: context => context.device,
           actions: ["topLevelNext"],
         },
         PREV: {

@@ -11,6 +11,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import SyncOnboardingWords from "~/renderer/components/Onboarding/SyncOnboardingWords";
 
 import { ContentContainer, HeaderContainer } from "../shared";
 import NanoSAnim from "../assets/animations/nanoS/confirm-words.json";
@@ -188,6 +189,7 @@ export function RecoveryHowTo2({ sendEvent, context }: Props) {
             />
           ))}
         </StepList>
+        <SyncOnboardingWords onComplete={onClickNext} />
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.text.shade30" onClick={onClickPrev}>

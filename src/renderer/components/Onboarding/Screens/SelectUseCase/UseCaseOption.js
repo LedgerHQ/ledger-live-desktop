@@ -22,6 +22,7 @@ const Container = styled.div`
   flex-direction: column;
   transition: transform 100ms ease-in-out;
   text-align: left;
+  min-height: 400px;
 `;
 
 const UseCaseOptionContainer: ThemedComponent<*> = styled.button`

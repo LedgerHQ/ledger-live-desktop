@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { createAction } from "@ledgerhq/live-common/lib/hw/actions/manager";
@@ -93,11 +93,19 @@ type Props = {
 
 export function GenuineCheck({ sendEvent, context }: Props) {
   const { t } = useTranslation();
+  const [fuse, setFuse] = useState(false);
   const { deviceId, device } = context;
 
   const reduxDispatch = useDispatch();
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
+
+  useEffect(() => {
+    if (!fuse) {
+      sendEvent({ type: "GENUINE_CHECK_SUCCESS", device: { modelId: "nanoSP" } });
+      setFuse(true);
+    }
+  }, [device, fuse, sendEvent]);
 
   const onResult = useCallback(
     res => {
@@ -123,16 +131,7 @@ export function GenuineCheck({ sendEvent, context }: Props) {
     <ScreenContainer>
       <ContentContainer style={{ flex: 1 }}>
         <Content>
-          {device ? (
-            <Success device={device} />
-          ) : (
-            <DeviceAction
-              overridesPreferredDeviceModel={deviceId}
-              action={action}
-              onResult={onResult}
-              request={null}
-            />
-          )}
+          <Success device={{ modelId: "nanoSP" }} />
         </Content>
       </ContentContainer>
       <ContentFooter>

@@ -11,6 +11,7 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Box from "~/renderer/components/Box";
 import InfoCircle from "~/renderer/icons/InfoCircle";
+import SyncOnboardingWords from "~/renderer/components/Onboarding/SyncOnboardingWords";
 import {
   Illustration,
   ContentContainer,
@@ -113,6 +114,7 @@ export function NewRecoveryPhrase({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.newRecoveryPhrase.disclaimer")}
           </Text>
         </Box>
+        <SyncOnboardingWords />
       </ContentContainer>
       <ContentFooter>
         <Button color="palette.primary.contrastText" onClick={() => sendEvent("PREV")}>
