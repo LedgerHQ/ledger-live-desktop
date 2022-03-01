@@ -50,7 +50,6 @@ export default function LearnScreen() {
     setLoading(true);
     setIsTimeout(false);
     timer.current = setTimeout(() => {
-      console.log("learn handle timeout");
       setIsTimeout(true);
       setLoading(false);
     }, 60 * 1000);
