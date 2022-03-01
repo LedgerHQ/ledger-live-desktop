@@ -1383,7 +1383,7 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
-      "showAllAddressTypes": "Montrer tous les types d'adresses",
+      "showAllAddressTypes": "Afficher tous les types d'adresses",
       "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
