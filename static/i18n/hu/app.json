@@ -2751,7 +2751,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Use experimental JS implementation for Tezos."
         },
         "experimentalCurrencies": {
           "title": "Experimental integrations",
