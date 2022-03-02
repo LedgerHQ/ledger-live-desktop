@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "learn": {
-    "title": "Learn"
+    "title": "Learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "マーケット",
@@ -2701,7 +2707,9 @@
       "addLocalAppDesc": "ローカルファイルを参照し、ローカルのマニフェストファイルを使用してローカルアプリを追加する",
       "addLocalAppButton": "画面をチェックする",
       "runLocalAppDeleteButton": "削除",
-      "runLocalAppOpenButton": "開く"
+      "runLocalAppOpenButton": "開く",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
