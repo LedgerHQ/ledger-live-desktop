@@ -217,9 +217,9 @@ export default function Default() {
                           render={props => <MarketCoinScreen {...props} />}
                         />
                         <Route path="/market" render={props => <Market {...props} />} />
-                        {/* <FeatureToggle feature="learn"> */}
-                        <Route path="/learn" render={props => <Learn {...props} />} />
-                        {/* </FeatureToggle> */}
+                        <FeatureToggle feature="learn">
+                          <Route path="/learn" render={props => <Learn {...props} />} />
+                        </FeatureToggle>
                       </Switch>
                     </Page>
                     <Drawer />
