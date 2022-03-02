@@ -2708,8 +2708,8 @@
       "addLocalAppButton": "Naviguer",
       "runLocalAppDeleteButton": "Effacer",
       "runLocalAppOpenButton": "Ouvrir",
-      "enableLearnStagingUrl": "Learn page staging URL",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrl": "Activer l'URL de test de la page Apprendre",
+      "enableLearnStagingUrlDesc": "Activez l'URL de test de la page Apprendre."
     },
     "currencies": {
       "selectPlaceholder": "Crypto-actif",
