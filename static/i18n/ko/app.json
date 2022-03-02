@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "시장",
@@ -2701,7 +2707,9 @@
       "addLocalAppDesc": "로컬 매니페스트 기능으로 로컬 파일을 둘러보고 로컬 앱 추가하기",
       "addLocalAppButton": "둘러보기",
       "runLocalAppDeleteButton": "삭제",
-      "runLocalAppOpenButton": "열기"
+      "runLocalAppOpenButton": "열기",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "암호화폐 선택",
