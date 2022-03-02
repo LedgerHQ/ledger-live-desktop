@@ -58,8 +58,6 @@ export default function LearnScreen() {
     lightBackgroundColor: `${palettes.light.background.default}`,
   });
   const uri = `${useStagingUrl ? learnStagingURL : learnProdURL}?${params.toString()}`;
-  console.log("params", params);
-  console.log("uri", uri);
 
   const online = useIsOnline();
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
