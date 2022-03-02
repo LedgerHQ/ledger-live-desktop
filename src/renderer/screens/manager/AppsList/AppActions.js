@@ -37,9 +37,8 @@ const ExternalLinkIconContainer = styled.span`
 
 const AppActionsWrapper = styled.div`
   display: flex;
-  flex: 0.8;
-  min-width: 150px;
-  max-width: 300px;
+  min-width: 300px;
+  padding-left: 10px;
   justify-content: ${p => (p.right ? "flex-end" : "space-between")};
   flex-direction: row;
   > *:not(:last-child) {
