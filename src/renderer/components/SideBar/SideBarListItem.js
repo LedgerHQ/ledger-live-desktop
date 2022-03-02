@@ -11,7 +11,7 @@ export type Props = {
   label: string | (Props => React$Node),
   desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
-  iconSize?: number;
+  iconSize?: number,
   disabled?: boolean,
   iconActiveColor: ?string,
   NotifComponent?: React$Node,
