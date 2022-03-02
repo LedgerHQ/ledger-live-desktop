@@ -87,6 +87,20 @@ const Item: React$ComponentType<Props> = ({
   const version = (installed && installed.version) || app.version;
   const newVersion = installed && installed.availableVersion;
 
+  const availableApp = useMemo(() => state.apps.find(({ name }) => name === app.name), [
+    app.name,
+    state.apps,
+  ]);
+
+  const bytes = useMemo(
+    () =>
+      (onlyUpdate && availableApp?.bytes) ||
+      ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+      app.bytes ||
+      0,
+    [app.bytes, availableApp.bytes, deviceInfo.version, deviceModel, installed, onlyUpdate],
+  );
+
   return (
     <AppRow id={`managerAppsList-${name}`}>
       <Box flex="0.7" horizontal>
@@ -104,12 +118,7 @@ const Item: React$ComponentType<Props> = ({
             />{" "}
             •{" "}
             <ByteSize
-              value={
-                ((installed && installed.blocks) || 0) *
-                  deviceModel.getBlockSize(deviceInfo.version) ||
-                app.bytes ||
-                0
-              }
+              value={bytes}
               formatFunction={Math.ceil}
               deviceModel={deviceModel}
               firmwareVersion={deviceInfo.version}
