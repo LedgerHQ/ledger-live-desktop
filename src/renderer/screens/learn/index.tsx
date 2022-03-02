@@ -10,6 +10,8 @@ import useIsOnline from "~/renderer/hooks/useIsOnline";
 import LoadingScreen from "./LoadingScreen";
 import NoConnectionScreen from "./NoConnectionScreen";
 import ErrorScreen from "./ErrorScreen";
+import { getPagePaddingLeft, getPagePaddingRight } from "~/renderer/components/Page";
+import palettes from "~/renderer/styles/palettes";
 
 const Container = styled(Flex).attrs({
   flex: 1,
@@ -17,6 +19,13 @@ const Container = styled(Flex).attrs({
   alignItems: "stretch",
   justifyContent: "flex-start",
 })``;
+
+const Iframe = styled.iframe`
+  height: 100%;
+  width: calc(100% + ${p => getPagePaddingLeft(p) + getPagePaddingRight(p)}px);
+  margin-left: ${p => -getPagePaddingLeft(p)}px;
+  margin-right: ${p => -getPagePaddingRight(p)}px;
+`;
 
 const learnProdURL = "https://www.ledger.com/ledger-live-learn";
 const learnStagingURL = "https://ecommerce-website.aws.stg.ldg-tech.com/ledger-live-learn";
@@ -37,11 +46,20 @@ const TimeoutScreen = () => (
 
 export default function LearnScreen() {
   const { i18n } = useTranslation();
+  const theme = useTheme();
   const themeType: string = useTheme("colors.palette.type");
   const useStagingUrl = useSelector(enableLearnPageStagingUrlSelector);
-  const uri = `${useStagingUrl ? learnStagingURL : learnProdURL}?theme=${themeType}&lang=${
-    i18n.languages[0]
-  }`;
+  const params = new URLSearchParams({
+    theme: themeType,
+    lang: i18n.languages[0],
+    pagePaddingLeft: `${getPagePaddingLeft({ theme })}px`,
+    pagePaddingRight: `${getPagePaddingRight({ theme })}px`,
+    darkBackgroundColor: `${palettes.dark.background.default}`,
+    lightBackgroundColor: `${palettes.light.background.default}`,
+  });
+  const uri = `${useStagingUrl ? learnStagingURL : learnProdURL}?${params.toString()}`;
+  console.log("params", params);
+  console.log("uri", uri);
 
   const online = useIsOnline();
   const [initialLoadingDone, setInitialLoadingDone] = useState(false);
@@ -97,15 +115,13 @@ export default function LearnScreen() {
             ) : loading ? (
               <LoadingScreen />
             ) : null}
-            <iframe
+            <Iframe
               loading="eager"
               onLoad={handleOnLoad}
               onError={handleError}
               sandbox="allow-scripts allow-same-origin"
               frameBorder="0"
               allowFullScreen={false}
-              width="100%"
-              height={"100%"}
               style={{
                 opacity: isTimeout || errored || loading ? 0 : 1,
               }}

@@ -10,8 +10,7 @@ import {
   PlaceholderPodcast,
   PlaceholderArticle,
 } from "./LoadingPlaceholders";
-const getPagePaddingLeft = (p) => p.theme.space[6];
-const getPagePaddingRight = (p) => p.theme.space[6] + p.theme.overflow.trackSize;
+import { getPagePaddingLeft, getPagePaddingRight } from "~/renderer/components/Page";
 
 const Container = styled(Flex).attrs({
   flexDirection: "column",
