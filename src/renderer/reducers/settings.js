@@ -109,6 +109,7 @@ export type SettingsState = {
   enablePlatformDevTools: boolean,
   catalogProvider: string,
   USBTroubleshootingIndex?: number,
+  enableLearnPageStagingUrl?: boolean,
   swap: {
     hasAcceptedIPSharing: false,
     selectableCurrencies: string[],
@@ -184,6 +185,7 @@ const INITIAL_STATE: SettingsState = {
   allowExperimentalApps: false,
   enablePlatformDevTools: false,
   catalogProvider: "production",
+  enableLearnPageStagingUrl: false,
   USBTroubleshootingIndex: undefined,
   swap: {
     hasAcceptedIPSharing: false,
@@ -482,6 +484,9 @@ export const allowExperimentalAppsSelector = (state: State) => state.settings.al
 export const enablePlatformDevToolsSelector = (state: State) =>
   state.settings.enablePlatformDevTools;
 export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
+
+export const enableLearnPageStagingUrlSelector = (state: State) =>
+  state.settings.enableLearnPageStagingUrl;
 
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
 export const hasCompletedOnboardingSelector = (state: State) =>

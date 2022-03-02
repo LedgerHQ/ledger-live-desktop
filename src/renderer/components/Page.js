@@ -19,9 +19,12 @@ const PageContainer: ThemedComponent<{}> = styled.div`
   position: relative;
 `;
 
+export const getPagePaddingLeft = (p: any) => p.theme.space[6];
+export const getPagePaddingRight = (p: any) => p.theme.space[6] - p.theme.overflow.trackSize;
+
 const PageScroller: ThemedComponent<{}> = styled.div`
-  padding: ${p => p.theme.space[3]}px ${p => p.theme.space[6]}px;
-  padding-right: ${p => p.theme.space[6] - p.theme.overflow.trackSize}px;
+  padding: ${p => p.theme.space[3]}px ${p => getPagePaddingLeft(p)}px;
+  padding-right: ${p => getPagePaddingRight(p)}px;
   ${p => p.theme.overflow.y};
   display: flex;
   flex-direction: column;
