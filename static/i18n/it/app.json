@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Device in Bootloader mode. Click on <1>Continue</1> to update it."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "Market",
@@ -2701,7 +2707,9 @@
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
       "addLocalAppButton": "Browse",
       "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "runLocalAppOpenButton": "Open",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "Select crypto asset",
