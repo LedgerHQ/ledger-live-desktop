@@ -44,7 +44,7 @@ const Container = styled(Flex).attrs({
 
 const ScrollContainer = styled(Flex).attrs({
   flexDirection: "row",
-  overflowX: "scroll",
+  overflowX: "hidden",
 })``;
 
 const PlaceholderShow = styled(PlaceholderBig).attrs({
