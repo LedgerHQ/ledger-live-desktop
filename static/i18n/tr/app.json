@@ -2076,7 +2076,7 @@
       "delegate": "Ekle",
       "undelegate": "Yetkiyi iptal et",
       "redelegate": "Yetkiyi yeniden devret",
-      "redelegateDisabledTooltip": "Yetkiyi başkasına devretmek için <0>{{days}}</0> gün beklemelisiniz",
+      "redelegateDisabledTooltip": "Yetkiyi yeniden devretmek için <0>{{days}}</0> gün beklemelisiniz",
       "redelegateMaxDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcıya yetki devredebilirsiniz.",
       "undelegateDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcının yetkisini iptal edebilirsiniz.",
       "reward": "Ödüllerinizi alın",
@@ -2155,7 +2155,7 @@
     },
     "redelegation": {
       "flow": {
-        "title": "Varlıkların Yetkisini Başkasına Devretme",
+        "title": "Varlıkların Yetkisini Yeniden Devretme",
         "steps": {
           "starter": {
             "title": "Yetkinin Yeniden Devri",
