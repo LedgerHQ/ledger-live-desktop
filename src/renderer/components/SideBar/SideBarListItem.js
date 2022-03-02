@@ -11,6 +11,7 @@ export type Props = {
   label: string | (Props => React$Node),
   desc?: Props => any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
   icon?: any, // TODO: type should be more precise, but, eh ¯\_(ツ)_/¯
+  iconSize?: number,
   disabled?: boolean,
   iconActiveColor: ?string,
   NotifComponent?: React$Node,
@@ -25,6 +26,7 @@ class SideBarListItem extends PureComponent<Props> {
   render() {
     const {
       icon: Icon,
+      iconSize,
       label,
       desc,
       iconActiveColor,
@@ -54,7 +56,7 @@ class SideBarListItem extends PureComponent<Props> {
           onClick={disabled ? undefined : onClick}
           disabled={disabled}
         >
-          {!!Icon && <Icon size={16} />}
+          {!!Icon && <Icon size={iconSize || 16} />}
           <Box grow shrink>
             <Hide visible={!collapsed}>
               <Box horizontal justifyContent="space-between" alignItems="center">
