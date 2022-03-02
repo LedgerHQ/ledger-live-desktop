@@ -328,18 +328,18 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/market"}
                 collapsed={secondAnim}
               />
-              <FeatureToggle feature="learn">
-                <SideBarListItem
-                  id="learn"
-                  label={t("sidebar.learn")}
-                  icon={Icons.GraduationMedium}
-                  iconSize={20}
-                  iconActiveColor="wallet"
-                  isActive={location.pathname.startsWith("/learn")}
-                  onClick={handleClickLearn}
-                  collapsed={secondAnim}
-                />
-              </FeatureToggle>
+              {/* <FeatureToggle feature="learn"> */}
+              <SideBarListItem
+                id="learn"
+                label={t("sidebar.learn")}
+                icon={Icons.GraduationMedium}
+                iconSize={20}
+                iconActiveColor="wallet"
+                isActive={location.pathname.startsWith("/learn")}
+                onClick={handleClickLearn}
+                collapsed={secondAnim}
+              />
+              {/* </FeatureToggle> */}
               <SideBarListItem
                 id={"accounts"}
                 label={t("sidebar.accounts")}
