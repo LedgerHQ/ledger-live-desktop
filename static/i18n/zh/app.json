@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
   "learn": {
-    "title": "Learn"
+    "title": "Learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "市场",
@@ -2701,7 +2707,9 @@
       "addLocalAppDesc": "浏览本地文件并使用本地清单添加本地应用程序",
       "addLocalAppButton": "浏览",
       "runLocalAppDeleteButton": "删除",
-      "runLocalAppOpenButton": "打开"
+      "runLocalAppOpenButton": "打开",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "选择加密资产",
