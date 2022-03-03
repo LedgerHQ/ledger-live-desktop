@@ -1493,6 +1493,7 @@
     "appNotInstalled": "Для этого действия необходимо приложение {{appName}}. Пожалуйста, перейдите в Диспетчер и установите его на ваше устройство",
     "appNotInstalled_plural": "Для этого действия необходимы приложения {{appName}}. Пожалуйста, перейдите в Диспетчер и установите их на устройство",
     "openManager": "Открыть Диспетчер",
+    "openOnboarding": "Setup device",
     "outdated": "Версия приложения устарела",
     "outdatedDesc": "Для приложения {{appName}} на вашем устройстве появилось важное обновление. Чтобы установить обновления, перейдите в Диспетчер.",
     "installApp": "Установка приложения {{appName}}",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "Пожалуйста, перезапустите Ledger и повторите попытку",
       "description": "Произошла непредвиденная ошибка. Повторите попытку"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Перезагрузите устройство Ledger и повторите попытку",
