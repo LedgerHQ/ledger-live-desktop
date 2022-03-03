@@ -1493,6 +1493,7 @@
     "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
     "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Eszközkezelő megnyitása",
+    "openOnboarding": "Setup device",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "installApp": "{{appName}} App installation",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "Kérlek, indítsd újra a Ledger eszközöd, és próbáld meg újra",
       "description": "An unexpected error occurred. Please try again"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Kérlek, indítsd újra a Ledger eszközöd, és próbáld meg újra",
