@@ -3601,6 +3601,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "The {{appName}} app cannot be found for your specific configuration.",
+      "description": "Try reinstalling the app from the Manager"
+    },
     "countervaluesUnavailable": {
       "title": "Şu anda bu varlık için bir karşı değer sağlayamıyoruz"
     },
