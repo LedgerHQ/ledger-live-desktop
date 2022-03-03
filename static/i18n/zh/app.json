@@ -1493,6 +1493,7 @@
     "appNotInstalled": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "appNotInstalled_plural": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "openManager": "打开 Manager（管理器）",
+    "openOnboarding": "Setup device",
     "outdated": "应用程序版本过期",
     "outdatedDesc": "您设备上的 {{appName}} 应用程序有可用的重要更新。请前往管理器对其进行更新。",
     "installApp": "{{appName}} 应用程序安装",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "请重启您的 Ledger 设备并重试",
       "description": "发生意外错误。请重试。"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "请重启您的 Ledger 设备并重试",
