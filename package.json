@@ -49,7 +49,7 @@
     "@ledgerhq/hw-transport-http": "6.24.1",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.24.1",
     "@ledgerhq/ledger-core": "6.14.5",
-    "@ledgerhq/live-common": "21.34.0",
+    "@ledgerhq/live-common": "https://github.com/ledgerhq/ledger-live-common#11c05cf921a9b527f0b7416e73a86f2cac2a243b",
     "@ledgerhq/logs": "6.10.0",
     "@ledgerhq/react-ui": "^0.7.3",
     "@open-wc/webpack-import-meta-loader": "^0.4.7",
