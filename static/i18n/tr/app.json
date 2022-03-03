@@ -1493,6 +1493,7 @@
     "appNotInstalled": "Bu eylemi tamamlamak için {{appName}} uygulaması gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "appNotInstalled_plural": "Bu işlemi tamamlamak için {{appName}} uygulamaları gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "openManager": "Yöneticiyi Aç",
+    "openOnboarding": "Setup device",
     "outdated": "Uygulama sürümü eski",
     "outdatedDesc": "Cihazınızdaki {{appName}} uygulaması için önemli bir güncelleme mevcut. Güncellemek için lütfen Yöneticiye gidin.",
     "installApp": "{{appName}} Uygulama yüklemesi",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "Lütfen Ledger cihazınızı yeniden başlatın ve tekrar deneyin",
       "description": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Lütfen Ledger cihazınızı yeniden başlatın ve tekrar deneyin",
