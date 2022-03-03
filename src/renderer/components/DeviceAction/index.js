@@ -8,6 +8,7 @@ import {
   OutdatedApp,
   LatestFirmwareVersionRequired,
   DeviceNotOnboarded,
+  NoSuchAppOnProvider,
 } from "@ledgerhq/live-common/lib/errors";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
@@ -269,6 +270,14 @@ const DeviceAction = <R, H, P>({
         error: new DeviceNotOnboarded(),
         withOnboardingCTA: true,
         info: true,
+      });
+    }
+
+    if (error instanceof NoSuchAppOnProvider) {
+      return renderError({
+        error,
+        withOpenManager: true,
+        withExportLogs: true,
       });
     }
 
