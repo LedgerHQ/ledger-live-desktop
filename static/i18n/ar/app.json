@@ -1493,6 +1493,7 @@
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "افتح المدير",
+    "openOnboarding": "Setup device",
     "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "تثبيت تطبيق {{appName}}",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
