@@ -1981,7 +1981,7 @@
       "warnEarnRewards": "Sie benötigen mindestens {{amount}}, um Prämien zu erhalten",
       "claimRewards": "Prämie beanspruchen",
       "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
-      "claimAvailableRewards": "Anspruch {{Betrag}}",
+      "claimAvailableRewards": "Anspruch {{amount}}",
       "header": "Abstimmungen",
       "percentageTP": "% der abgegebenen Stimmen",
       "noRewards": "Keine Prämien verfügbar",
