@@ -3601,6 +3601,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "The {{appName}} app cannot be found for your specific configuration.",
+      "description": "Try reinstalling the app from the Manager"
+    },
     "countervaluesUnavailable": {
       "title": "현재 이 자산에 대한 등가를 제공할 수 없습니다"
     },
