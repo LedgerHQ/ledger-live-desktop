@@ -1493,6 +1493,7 @@
     "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "openManager": "「管理」を開く",
+    "openOnboarding": "Setup device",
     "outdated": "アプリのバージョンが最新ではありません。",
     "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
       "description": "予期しないエラーが発生しました。もう一度お試しください。"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
