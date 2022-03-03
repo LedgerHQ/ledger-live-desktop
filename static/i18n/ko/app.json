@@ -1493,6 +1493,7 @@
     "appNotInstalled": "이 조치를 완료하려면 {{appName}} 앱이 필요합니다. 관리자로 이동하여 장치에 앱을 설치하세요",
     "appNotInstalled_plural": "이 조치를 완료하려면 {{appName}} 앱이 필요합니다. 관리자로 이동해 장치에 앱을 설치하세요.",
     "openManager": "관리자 열기",
+    "openOnboarding": "Setup device",
     "outdated": "앱 버전이 오래됨",
     "outdatedDesc": "장치의 {{appName}} 앱에 중요한 업데이트가 있습니다. 관리자로 이동하여 업데이트하세요.",
     "installApp": "{{appName}} 앱 설치",
@@ -3727,6 +3728,10 @@
     "DeviceHalted": {
       "title": "Ledger 장치를 재시작하고 다시 시도해 주세요",
       "description": "예상하지 못한 오류가 발생했습니다. 다시 시도해주세요"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Ledger 장치를 재시작하고 다시 시도해 주세요",
