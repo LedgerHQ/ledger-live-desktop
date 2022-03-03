@@ -3956,7 +3956,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Lütfen donanım cüzdanınızın seçilen hesapla ilişkili kurtarma ifadesi veya passphrasse ile ayarlandığını kontrol edin."
+      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Uygulama güncellemesi gerekli",
