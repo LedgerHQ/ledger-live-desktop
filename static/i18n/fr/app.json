@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "Échec de la localisation de l'application {{appName}} pour votre appareil.",
+      "description": "Veuillez essayer de réinstaller l'application depuis le Gestionnaire."
     },
     "countervaluesUnavailable": {
       "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
