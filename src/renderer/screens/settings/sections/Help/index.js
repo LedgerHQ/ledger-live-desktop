@@ -55,7 +55,10 @@ const SectionHelp = () => {
           <RepairDeviceButton buttonProps={{ small: true, primary: true }} />
         </Row>
         {hasSwapLoginOrKYCInfo ? (
-          <Row title={t("settings.profile.resetKYC")} desc={t("settings.profile.resetKYCDesc")}>
+          <Row
+            title={t("settings.profile.resetThirdPartyData")}
+            desc={t("settings.profile.resetThirdPartyDataDesc")}
+          >
             <ResetKYCButton />
           </Row>
         ) : null}

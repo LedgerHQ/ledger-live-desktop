@@ -66,7 +66,7 @@ const SwapResetKYC = () => {
                   <IconTriangleWarning size={23} />
                 </Logo>
                 <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={6} mb={2}>
-                  {<Trans i18nKey={"swap.resetKYCModal.title"} />}
+                  {<Trans i18nKey={"swap.resetThirdPartyDataModal.title"} />}
                 </Text>
                 <Text
                   ff="Inter|Regular"
@@ -74,7 +74,7 @@ const SwapResetKYC = () => {
                   textAlign={"center"}
                   fontSize={4}
                 >
-                  {<Trans i18nKey={"swap.resetKYCModal.subtitle"} />}
+                  {<Trans i18nKey={"swap.resetThirdPartyDataModal.subtitle"} />}
                 </Text>
               </Box>
             </>
@@ -85,7 +85,7 @@ const SwapResetKYC = () => {
                 {<Trans i18nKey={"common.close"} />}
               </Button>
               <Button primary onClick={onResetKYC}>
-                {<Trans i18nKey={"swap.resetKYCModal.cta"} />}
+                {<Trans i18nKey={"swap.resetThirdPartyDataModal.cta"} />}
               </Button>
             </Box>
           )}

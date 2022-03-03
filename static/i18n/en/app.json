@@ -486,9 +486,9 @@
       "subtitle": "Please update Ledger Live to the latest version, and re verify your identity to swap with wyre",
       "cta": "Reset verification"
     },
-    "resetKYCModal": {
-      "title": "Delete your KYC",
-      "subtitle": "Delete your KYC to erase all tokens stored locally on your computer. You will have to resubmit your KYC to access services provided by our partners.",
+    "resetThirdPartyDataModal": {
+      "title": "Delete your local third party data",
+      "subtitle": "Delete your local third party data. You may have to resubmit your KYC and/or login again to access services provided by our partners.",
       "cta": "Confirm"
     },
     "modal": {
@@ -2849,8 +2849,8 @@
       "softResetTitle": "Clear cache",
       "softResetDesc": "Clear the Ledger Live cache to force resynchronization with the blockchain.",
       "softReset": "Clear",
-      "resetKYC": "Reset KYC data",
-      "resetKYCDesc": "Erase all your Know your Customer data stored locally used to access third-party transaction provider.",
+      "resetThirdPartyData": "Reset third party data",
+      "resetThirdPartyDataDesc": "Erase all your local third party data, used to access third-party transaction provider.",
       "hardResetTitle": "Reset Ledger Live",
       "hardResetDesc": "Erase all Ledger Live data stored on your computer, including your accounts, transaction histories and settings.",
       "hardReset": "Reset",
