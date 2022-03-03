@@ -2890,9 +2890,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#develop":
-  version "21.33.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#2f1461f5d6df8eb18e4035051fc80cf71bebfe89"
+"@ledgerhq/live-common@21.34.0":
+  version "21.34.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-21.34.0.tgz#2bd86b286b22cc31cfb788b8758195e91855f1f9"
+  integrity sha512-m7wlqEVLqlqwvB/y3D5aeadY55yUQ/qI1npjtUv74SK0fQd9/Yw9RsfDcoGlXEiXN5Pr5Xt60YJw7OPy6fNEKw==
   dependencies:
     "@celo/contractkit" "^1.5.1"
     "@celo/wallet-base" "^1.5.1"
@@ -3391,7 +3392,7 @@
     "@polkadot/util" "8.4.1"
     "@polkadot/util-crypto" "8.4.1"
 
-"@polkadot/networks@8.4.1", "@polkadot/networks@^8.3.2", "@polkadot/networks@^8.4.1":
+"@polkadot/networks@8.4.1", "@polkadot/networks@^8.4.1":
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/@polkadot/networks/-/networks-8.4.1.tgz#c22585edb38f5ae0a329a1f471577d8b35bf64e4"
   integrity sha512-YFY3fPLbc1Uz9zsX4TOzjY/FF09nABMgrMkvqddrVbSgo71NvoBv3Gqw3mKV/7bX1Gzk1ODfvTzamdpsKEWSnA==
@@ -3399,6 +3400,14 @@
     "@babel/runtime" "^7.17.2"
     "@polkadot/util" "8.4.1"
     "@substrate/ss58-registry" "^1.14.0"
+
+"@polkadot/networks@^8.3.2":
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/networks/-/networks-8.3.2.tgz#e5306f5d795ea3ee9fb6389d643577817c6fb4f0"
+  integrity sha512-9SDcGsasnKNjbjFrrp/WlllrR/pIxDDl3DZH1jXuRdWQ3BF+kTHCddxE9ffmu/EIlRpaX8rfu5mQyJxefc98zQ==
+  dependencies:
+    "@babel/runtime" "^7.16.7"
+    "@polkadot/util" "8.3.2"
 
 "@polkadot/react-identicon@0.89.2":
   version "0.89.2"
@@ -3506,7 +3515,7 @@
     ed2curve "^0.3.0"
     tweetnacl "^1.0.3"
 
-"@polkadot/util@8.4.1", "@polkadot/util@^8.3.2", "@polkadot/util@^8.4.1":
+"@polkadot/util@8.4.1", "@polkadot/util@^8.4.1":
   version "8.4.1"
   resolved "https://registry.yarnpkg.com/@polkadot/util/-/util-8.4.1.tgz#b84835c55585c8b5fc5608a99aa62ac815292ae7"
   integrity sha512-8+wqHgFbFWI5TfrvtcL888w0nWvFpbTTYIcbpEw+zYGp3n1YZTAMMP26bXWAaQX5AttxynJRij7JP3ySxYY1fg==
@@ -3518,6 +3527,20 @@
     "@polkadot/x-textencoder" "8.4.1"
     "@types/bn.js" "^5.1.0"
     bn.js "^5.2.0"
+    ip-regex "^4.3.0"
+
+"@polkadot/util@^8.3.2":
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/@polkadot/util/-/util-8.3.2.tgz#7e2568e0e1b5c26800dc498434a854fedf5ac247"
+  integrity sha512-ZxvP93F0rEo7gH0jiy44BkB+7TvAGfTei3VK2ftp2pf7TCgsx3uPYsY4+qtOk+OcAhXOOhtgomy8yF4QqAeVdQ==
+  dependencies:
+    "@babel/runtime" "^7.16.7"
+    "@polkadot/x-bigint" "8.3.2"
+    "@polkadot/x-global" "8.3.2"
+    "@polkadot/x-textdecoder" "8.3.2"
+    "@polkadot/x-textencoder" "8.3.2"
+    "@types/bn.js" "^4.11.6"
+    bn.js "^4.12.0"
     ip-regex "^4.3.0"
 
 "@polkadot/wasm-crypto-asmjs@^4.5.1":

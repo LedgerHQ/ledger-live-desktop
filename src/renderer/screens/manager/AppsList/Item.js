@@ -10,6 +10,7 @@ import { Trans } from "react-i18next";
 
 import ByteSize from "~/renderer/components/ByteSize";
 import Text from "~/renderer/components/Text";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
@@ -33,6 +34,7 @@ const AppName = styled.div`
   flex-direction: column;
   padding-left: 15px;
   max-height: 40px;
+  min-width: 160px;
   & > * {
     display: block;
   }
@@ -87,6 +89,20 @@ const Item: React$ComponentType<Props> = ({
   const version = (installed && installed.version) || app.version;
   const newVersion = installed && installed.availableVersion;
 
+  const availableApp = useMemo(() => state.apps.find(({ name }) => name === app.name), [
+    app.name,
+    state.apps,
+  ]);
+
+  const bytes = useMemo(
+    () =>
+      (onlyUpdate && availableApp?.bytes) ||
+      ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+      app.bytes ||
+      0,
+    [app.bytes, availableApp.bytes, deviceInfo.version, deviceModel, installed, onlyUpdate],
+  );
+
   return (
     <AppRow id={`managerAppsList-${name}`}>
       <Box flex="0.7" horizontal>
@@ -104,12 +120,7 @@ const Item: React$ComponentType<Props> = ({
             />{" "}
             •{" "}
             <ByteSize
-              value={
-                ((installed && installed.blocks) || 0) *
-                  deviceModel.getBlockSize(deviceInfo.version) ||
-                app.bytes ||
-                0
-              }
+              value={bytes}
               formatFunction={Math.ceil}
               deviceModel={deviceModel}
               firmwareVersion={deviceInfo.version}
@@ -117,31 +128,24 @@ const Item: React$ComponentType<Props> = ({
           </Text>
         </AppName>
       </Box>
-      <Box
-        flex="0.7"
-        horizontal
-        alignContent="center"
-        justifyContent="flex-start"
-        flexWrap={"wrap"}
-        ml={5}
-      >
+      <Box flex="0.7" horizontal alignContent="center" justifyContent="flex-start" ml={5}>
         {isLiveSupported ? (
           <>
             <Box>
               <IconCheckFull size={16} />
             </Box>
-            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.supported" />
-            </Text>
+            </Ellipsis>
           </>
         ) : currency ? (
           <>
             <Box>
               <IconInfoCircleFull size={16} />
             </Box>
-            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.not_supported" />
-            </Text>
+            </Ellipsis>
           </>
         ) : null}
       </Box>

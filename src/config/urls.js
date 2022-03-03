@@ -97,6 +97,8 @@ export const urls = {
   updateDeviceFirmware: {
     nanoS:
       "https://support.ledger.com/hc/en-us/articles/360002731113?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=firmwareupdate",
+    nanoSP:
+      "https://support.ledger.com/hc/en-us/articles/4445777839901?&utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=firmwareupdate",
     nanoX:
       "https://support.ledger.com/hc/en-us/articles/360013349800?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=firmwareupdate",
     blue:
@@ -104,6 +106,8 @@ export const urls = {
   },
   lostPinOrSeed: {
     nanoS:
+      "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
+    nanoSP:
       "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
     nanoX:
       "https://support.ledger.com/hc/en-us/articles/4404382075537-Don-t-have-your-Recovery-phrase-?support=true",
