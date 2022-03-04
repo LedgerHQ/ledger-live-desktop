@@ -126,11 +126,11 @@ export const TableRow = styled(Flex).attrs({
     padding-left: 5px;
   }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 150px;
+    flex: 1 0 230px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
-    flex: 1 0 150px;
+    flex: 1 0 70px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(4),
