@@ -133,12 +133,6 @@ const Separator = styled(Box).attrs(() => ({
   background: ${p => p.theme.colors.palette.divider};
 `;
 
-const StarredAcountList = styled.div`
-  @media (max-height: 800px) {
-    display: none;
-  }
-`;
-
 const sideBarTransitionStyles = {
   entering: { flexBasis: MAIN_SIDEBAR_WIDTH },
   entered: { flexBasis: MAIN_SIDEBAR_WIDTH },
@@ -445,13 +439,11 @@ const MainSideBar = () => {
                 />
                 <Space of={30} />
               </SideBarList>
-              <StarredAcountList>
+              <Box>
                 <Space grow of={30} />
-
                 <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
                   <Separator />
                 </Hide>
-
                 <SideBarList
                   scroll
                   flex="1 1 40%"
@@ -460,7 +452,7 @@ const MainSideBar = () => {
                 >
                   <Stars pathname={location.pathname} collapsed={secondAnim} />
                 </SideBarList>
-              </StarredAcountList>
+              </Box>
               <Space of={30} grow />
               <TagContainer collapsed={!secondAnim} />
             </SideBarScrollContainer>
