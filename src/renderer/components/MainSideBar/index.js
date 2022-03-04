@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
+import { Icons } from "@ledgerhq/react-ui";
 
 import {
   accountsSelector,
@@ -38,7 +39,6 @@ import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 import IconMarket from "~/renderer/icons/ChartLine";
-import IconLearn from "~/renderer/icons/Learn";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -332,7 +332,8 @@ const MainSideBar = () => {
                 <SideBarListItem
                   id="learn"
                   label={t("sidebar.learn")}
-                  icon={IconLearn}
+                  icon={Icons.GraduationMedium}
+                  iconSize={20}
                   iconActiveColor="wallet"
                   isActive={location.pathname.startsWith("/learn")}
                   onClick={handleClickLearn}
@@ -344,7 +345,7 @@ const MainSideBar = () => {
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
-                isActive={location.pathname === "/accounts"}
+                isActive={location.pathname.startsWith("/account")}
                 onClick={handleClickAccounts}
                 disabled={noAccounts}
                 collapsed={secondAnim}

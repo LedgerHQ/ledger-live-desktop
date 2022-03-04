@@ -105,11 +105,11 @@ jobs:
 
       - name: unzip files
         run: |
-          unzip tests-reports.zip
-          unzip playwright-results-windows-latest.zip -d pw-windows
-          unzip playwright-results-linux.zip -d pw-linux
-          unzip images-linux.json.zip
-          unzip images-windows-latest.json.zip
+          unzip tests-reports.zip || true
+          unzip playwright-results-windows-latest.zip -d pw-windows || true
+          unzip playwright-results-linux.zip -d pw-linux || true
+          unzip images-linux.json.zip || true
+          unzip images-windows-latest.json.zip || true
           rm tests-reports.zip playwright-results-windows-latest.zip playwright-results-linux.zip images-linux.json.zip images-windows-latest.json.zip
       - name: parse images
         uses: actions/github-script@v6

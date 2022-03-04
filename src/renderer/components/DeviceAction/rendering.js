@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect } from "react";
 import { BigNumber } from "bignumber.js";
 import map from "lodash/map";
 import { Trans } from "react-i18next";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import type {
@@ -50,6 +50,7 @@ import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
 import { context } from "~/renderer/drawers/Provider";
 import { track } from "~/renderer/analytics/segment";
+import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -85,7 +86,12 @@ const Logo: ThemedComponent<{ warning?: boolean }> = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: ${p => (p.warning ? p.theme.colors.warning : p.theme.colors.alertRed)};
+  color: ${p =>
+    p.info
+      ? p.theme.colors.palette.primary.main
+      : p.warning
+      ? p.theme.colors.warning
+      : p.theme.colors.alertRed};
   margin-bottom: 20px;
 `;
 
@@ -195,12 +201,14 @@ const OpenManagerBtn = ({
   updateApp,
   firmwareUpdate,
   mt = 2,
+  ml = 0,
 }: {
   closeAllModal: () => void,
   appName?: string,
   updateApp?: boolean,
   firmwareUpdate?: boolean,
   mt?: number,
+  ml?: number,
 }) => {
   const history = useHistory();
   const { setDrawer } = useContext(context);
@@ -222,8 +230,26 @@ const OpenManagerBtn = ({
   }, [updateApp, firmwareUpdate, appName, history, closeAllModal, setDrawer]);
 
   return (
-    <Button mt={mt} primary onClick={onClick}>
+    <Button mt={mt} ml={ml} primary onClick={onClick}>
       <Trans i18nKey="DeviceAction.openManager" />
+    </Button>
+  );
+};
+
+const OpenOnboardingBtn = () => {
+  const { setDrawer } = useContext(context);
+  const dispatch = useDispatch();
+
+  const onClick = useCallback(() => {
+    setTrackingSource("device action open onboarding button");
+    dispatch(relaunchOnboarding(true));
+    dispatch(closeAllModal());
+    closeAllModal(setDrawer(undefined));
+  }, [dispatch, setDrawer]);
+
+  return (
+    <Button primary onClick={onClick}>
+      <Trans i18nKey="DeviceAction.openOnboarding" />
     </Button>
   );
 };
@@ -410,8 +436,10 @@ export const renderError = ({
   list,
   supportLink,
   warning,
+  info,
   managerAppName,
   requireFirmwareUpdate,
+  withOnboardingCTA,
 }: {
   error: Error,
   withOpenManager?: boolean,
@@ -420,11 +448,13 @@ export const renderError = ({
   list?: boolean,
   supportLink?: string,
   warning?: boolean,
+  info?: boolean,
   managerAppName?: string,
   requireFirmwareUpdate?: boolean,
+  withOnboardingCTA?: boolean,
 }) => (
   <Wrapper id={`error-${error.name}`}>
-    <Logo warning={warning}>
+    <Logo info={info} warning={warning}>
       <ErrorIcon size={44} error={error} />
     </Logo>
     <ErrorTitle>
@@ -461,11 +491,14 @@ export const renderError = ({
               mx={1}
             />
           ) : null}
-          {onRetry ? (
+          {withOpenManager ? (
+            <OpenManagerButton mt={0} ml={withExportLogs ? 4 : 0} />
+          ) : onRetry ? (
             <Button primary ml={withExportLogs ? 4 : 0} onClick={onRetry}>
               <Trans i18nKey="common.retry" />
             </Button>
           ) : null}
+          {withOnboardingCTA ? <OpenOnboardingBtn /> : null}
         </>
       )}
     </ButtonContainer>

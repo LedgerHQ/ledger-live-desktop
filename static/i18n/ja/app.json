@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}}KB",
-    "mbUnit": "{{size}}MB"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "分",
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "カード",
+    "learn": "Learn",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -545,6 +547,9 @@
       "initialAmount": "初期設定額",
       "creditedAmount": "受取額"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "ステータス",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "マーケット",
     "currency": "通貨",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
-        "platform": "アプリに移動する"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "すべてアンインストール",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
-          "description": "Solanaの試験的統合を使用する。"
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "プロバイダー管理",
           "description": "プロバイダー管理でアプリプロバイダーを変更すると、Ledgerデバイスにアプリをインストールまたはアンインストールできなくなる場合があります。"
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
