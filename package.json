@@ -79,7 +79,6 @@
     "isomorphic-unfetch": "^3.1.0",
     "json-rpc-2.0": "^0.2.19",
     "jsqr": "^1.4.0",
-    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "lru-cache": "^5.1.1",
     "measure-scrollbar": "^1.1.0",
