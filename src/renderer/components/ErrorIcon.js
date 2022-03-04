@@ -14,7 +14,11 @@ import {
   ManagerDeviceLockedError,
 } from "@ledgerhq/errors";
 
-import { SwapGenericAPIError, DeviceNotOnboarded } from "@ledgerhq/live-common/lib/errors";
+import {
+  SwapGenericAPIError,
+  DeviceNotOnboarded,
+  NoSuchAppOnProvider,
+} from "@ledgerhq/live-common/lib/errors";
 
 export type ErrorIconProps = {
   error: Error,
@@ -33,6 +37,7 @@ const ErrorIcon = ({ error, size = 44 }: ErrorIconProps) => {
     case error instanceof UserRefusedOnDevice:
     case error instanceof UserRefusedAddress:
     case error instanceof SwapGenericAPIError:
+    case error instanceof NoSuchAppOnProvider:
       return <CrossCircle size={size} />;
     case error instanceof ManagerDeviceLockedError:
       return <Lock size={size} />;
