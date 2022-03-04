@@ -72,7 +72,7 @@ export const Terms = ({ sendEvent }: TermsProps) => {
     <TermsContainer>
       <TermsNavigation>
         <Button small onClick={() => sendEvent("PREV")}>
-          Previous
+          {t("common.previous")}
         </Button>
       </TermsNavigation>
 
