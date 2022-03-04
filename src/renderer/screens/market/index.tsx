@@ -21,7 +21,7 @@ const Container = styled(Flex).attrs({
   mx: -1,
 })``;
 
-const SearchContainer = styled(Flex).attrs({ flex: "0.8" })`
+const SearchContainer = styled(Flex).attrs({ flexShrink: "1" })`
   > div {
     width: 100%;
   }
@@ -132,7 +132,7 @@ export default function Market() {
               supportedCounterCurrencies={supportedCounterCurrencies}
             />
           </Flex>
-          <Flex data-test-id="market-range-select" mx={4}>
+          <Flex data-test-id="market-range-select" mx={2}>
             <Dropdown
               label={t("common.range")}
               menuPortalTarget={document.body}
