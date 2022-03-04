@@ -107,6 +107,7 @@ export type Props = {
   name: string,
   icon?: boolean,
   onClose?: Function,
+  // $FlowFixMe
   webviewRef: React.MutableRefObject<any>,
 };
 

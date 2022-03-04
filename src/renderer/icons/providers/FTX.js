@@ -2,7 +2,7 @@
 
 import React from "react";
 
-const FTX = (isUS = false) =>
+const FTX = (isUS: boolean = false) =>
   function FTXLogo({ size }: { size: number }) {
     return (
       <svg
