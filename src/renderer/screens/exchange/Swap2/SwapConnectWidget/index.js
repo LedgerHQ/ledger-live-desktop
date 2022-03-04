@@ -1,6 +1,6 @@
 // @flow
 
-import { remote, WebviewTag, shell } from "electron";
+import { remote, WebviewTag } from "electron";
 
 import React, { useEffect, useCallback, forwardRef } from "react";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,10 @@ import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import TopBar from "./TopBar";
+import {
+  handleMessageEvent,
+  handleNewWindowEvent,
+} from "~/renderer/components/WebPlatformPlayer/utils";
 
 type Message = { type: "setToken", token: string } | { type: "closeWidget" };
 
@@ -43,6 +47,7 @@ type Props = {
 
 const SwapConnectWidget = (
   { provider, url, onClose }: Props,
+  // $FlowFixMe
   webviewRef: React.MutableRefObject<WebviewTag>,
 ) => {
   const dispatch = useDispatch();
@@ -64,20 +69,11 @@ const SwapConnectWidget = (
   );
 
   const handleMessage = useCallback(
-    event => {
-      if (event.channel === "webviewToParent") {
-        handleMessageData(JSON.parse(event.args[0]));
-      }
-    },
+    event => handleMessageEvent({ event, handler: handleMessageData }),
     [handleMessageData],
   );
 
-  const handleNewWindow = useCallback(async e => {
-    const protocol = new URL(e.url).protocol;
-    if (protocol === "http:" || protocol === "https:") {
-      await shell.openExternal(e.url);
-    }
-  }, []);
+  const handleNewWindow = useCallback(handleNewWindowEvent, []);
 
   // Setup communication between webview and application
   useEffect(() => {
@@ -114,4 +110,5 @@ const SwapConnectWidget = (
   );
 };
 
+// $FlowFixMe
 export default forwardRef(SwapConnectWidget);
