@@ -145,7 +145,7 @@ function MarketRowItem({
       ) : (
         <TableRow onClick={onCurrencyClick}>
           <TableCell>{currency?.marketcapRank ?? "-"}</TableCell>
-          <TableCell>
+          <TableCell overflow="hidden" mr={3}>
             <CryptoCurrencyIconWrapper>
               {currency.internalCurrency ? (
                 <CryptoCurrencyIcon
@@ -160,7 +160,7 @@ function MarketRowItem({
                 <img width="32px" height="32px" src={currency.image} alt={"currency logo"} />
               )}
             </CryptoCurrencyIconWrapper>
-            <Flex pl={3} flexDirection="row" alignItems="center">
+            <Flex pl={3} flexDirection="row" alignItems="center" overflow="hidden">
               <Flex flexDirection="column" alignItems="left" pr={2}>
                 <Text variant="body">{currency.name}</Text>
                 <Text variant="small" color="neutral.c60">
