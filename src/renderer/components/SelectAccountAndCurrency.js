@@ -10,6 +10,7 @@ import SelectCurrency from "~/renderer/components/SelectCurrency";
 import Button from "~/renderer/components/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { accountsSelector } from "~/renderer/reducers/accounts";
+
 import type {
   Account,
   AccountLike,
@@ -59,8 +60,8 @@ const FormContent: ThemedComponent<{}> = styled.div`
 type Props = {
   selectAccount: (account: AccountLike, parentAccount: ?Account) => void,
   allCurrencies: Array<TokenCurrency | CryptoCurrency>,
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+  defaultCurrencyId?: ?string,
+  defaultAccountId?: ?string,
   allowAddAccount?: boolean,
   allowedCurrencies?: string[],
   confirmCb?: Account => void,
@@ -75,8 +76,8 @@ const AccountSelectorLabel = styled(Label)`
 const SelectAccountAndCurrency = ({
   selectAccount,
   allCurrencies,
-  defaultCurrency,
-  defaultAccount,
+  defaultCurrencyId,
+  defaultAccountId,
   allowAddAccount,
   allowedCurrencies,
   confirmCb,
@@ -95,8 +96,8 @@ const SelectAccountAndCurrency = ({
   } = useCurrencyAccountSelect({
     allCurrencies,
     allAccounts,
-    defaultCurrency: allCurrencies.length === 1 ? allCurrencies[0] : defaultCurrency,
-    defaultAccount,
+    defaultCurrencyId,
+    defaultAccountId,
   });
   const dispatch = useDispatch();
 

@@ -36,9 +36,17 @@ const tabs = [
 ];
 
 export type DProps = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+  defaultCurrencyId?: ?string,
+  defaultAccountId?: ?string,
+  defaultTicker?: ?string,
   rampCatalog: RampCatalog,
+};
+
+type QueryParams = {
+  mode?: "onRamp" | "offRamp",
+  currencyId?: string,
+  accountId?: string,
+  defaultTicker?: string,
 };
 
 const Exchange = () => {
@@ -46,8 +54,13 @@ const Exchange = () => {
 
   const location = useLocation();
   const [provider] = useExchangeProvider();
-  const { state } = location;
-  const [activeTabIndex, setActiveTabIndex] = useState(state?.tab || 0);
+  const state: QueryParams = location.state;
+
+  console.log("DEFAULT MULTIBUY PARAMS: ", state);
+
+  const defaultMode = state?.mode || "onRamp";
+  const [activeTabIndex, setActiveTabIndex] = useState(defaultMode === "onRamp" ? 0 : 1);
+
   const { t } = useTranslation();
   const Component = tabs[activeTabIndex].component;
 
@@ -57,14 +70,15 @@ const Exchange = () => {
         {t(tabs[activeTabIndex].header, { provider: provider.id })}
       </Box>
       <TabBar
-        defaultIndex={activeTabIndex}
+        index={activeTabIndex}
         tabs={tabs.map(tab => t(tab.title))}
         onIndexChange={setActiveTabIndex}
       />
       <Card grow style={{ overflow: "hidden" }}>
         <Component
-          defaultCurrency={state?.defaultCurrency}
-          defaultAccount={state?.defaultAccount}
+          defaultCurrencyId={state?.currencyId}
+          defaultAccountId={state?.accountId}
+          defaultTicker={state?.defaultTicker}
           rampCatalog={rampCatalog}
         />
       </Card>

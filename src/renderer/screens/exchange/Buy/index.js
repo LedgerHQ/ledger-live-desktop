@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
@@ -13,7 +13,7 @@ import { track } from "~/renderer/analytics/segment";
 import type { DProps } from "~/renderer/screens/exchange";
 import { ProviderList } from "../ProviderList";
 import { useRampCatalogCurrencies } from "../hooks";
-import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -23,7 +23,15 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
 `;
 
-const Coinify = ({ defaultCurrency, defaultAccount, rampCatalog }: DProps) => {
+const OnRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalog }: DProps) => {
+  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
+  const filteredCurrencies = defaultTicker
+    ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
+    : allCurrencies;
+
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
+
+  console.log({ filteredCurrencies });
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,
@@ -59,8 +67,6 @@ const Coinify = ({ defaultCurrency, defaultAccount, rampCatalog }: DProps) => {
     });
   }, []);
 
-  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
-
   return (
     <BuyContainer>
       <TrackPage category="Buy Crypto" />
@@ -73,14 +79,17 @@ const Coinify = ({ defaultCurrency, defaultAccount, rampCatalog }: DProps) => {
           trade={{
             type: "onRamp",
             cryptoCurrencyId: account.token ? account.token.id : account.currency.id,
+            fiatCurrencyId: fiatCurrency.ticker,
+            amount: 400,
+            amountCurrency: "fiat",
           }}
         />
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
-          allCurrencies={allCurrencies}
-          defaultCurrency={defaultCurrency}
-          defaultAccount={defaultAccount}
+          allCurrencies={filteredCurrencies}
+          defaultCurrencyId={defaultCurrencyId}
+          defaultAccountId={defaultAccountId}
           confirmCb={confirmButtonTracking}
           flow="buy"
         />
@@ -89,4 +98,4 @@ const Coinify = ({ defaultCurrency, defaultAccount, rampCatalog }: DProps) => {
   );
 };
 
-export default Coinify;
+export default OnRamp;

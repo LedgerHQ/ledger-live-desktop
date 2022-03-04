@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, memo } from "react";
+import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
 import {
   MarketDataContextType,
   useMarketData,
@@ -19,6 +19,8 @@ import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
 import { useProviders } from "../exchange/Swap2/Form";
 import Track from "~/renderer/analytics/Track";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { useRampCatalogCurrencies } from "~/renderer/screens/exchange/hooks";
 
 type Props = {
   data: MarketDataContextType;
@@ -197,12 +199,13 @@ const CurrencyRow = memo(function CurrencyRowItem({
   starredMarketCoins,
   locale,
   swapAvailableIds,
+  onRampAvailableTickers,
   style,
   displayChart,
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
-  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
+  const availableOnBuy = currency && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
   const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
   return (
     <MarketRowItem
@@ -232,6 +235,22 @@ function MarketList({
   const { t } = useTranslation();
   const locale = useSelector(localeSelector);
   const { providers, storedProviders } = useProviders();
+  const rampCatalog = useRampCatalog();
+
+  const buyableCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
+  const sellableCurrencies = useRampCatalogCurrencies(rampCatalog.value.offRamp);
+
+  const [onRampAvailableTickers, offRampAvailableTickers] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [[], []];
+    }
+
+    return [
+      buyableCurrencies.map(currency => currency.ticker),
+      sellableCurrencies.map(currency => currency.ticker),
+    ];
+  }, [rampCatalog.value, buyableCurrencies, sellableCurrencies]);
+
   const swapAvailableIds =
     providers || storedProviders
       ? (providers || storedProviders)
@@ -348,6 +367,7 @@ function MarketList({
                         starredMarketCoins={starredMarketCoins}
                         locale={locale}
                         swapAvailableIds={swapAvailableIds}
+                        onRampAvailableTickers={onRampAvailableTickers}
                       />
                     )}
                   </List>
@@ -380,6 +400,7 @@ function MarketList({
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
                             displayChart={width > miniChartThreshold}
+                            onRampAvailableTickers={onRampAvailableTickers}
                           />
                         )}
                       </List>

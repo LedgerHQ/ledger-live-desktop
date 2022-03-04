@@ -89,7 +89,7 @@ function MarketRowItem({
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: currency.internalCurrency,
+          defaultTicker: currency.ticker.toUpperCase(),
         },
       });
     },

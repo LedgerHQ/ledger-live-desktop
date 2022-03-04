@@ -8,6 +8,8 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 import { useLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/LiveAppProvider";
+import { languageSelector } from "~/renderer/reducers/settings";
+import { useSelector } from "react-redux";
 
 type Props = {
   match: {
@@ -30,6 +32,7 @@ export default function PlatformApp({ match }: Props) {
 
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
   const themeType = useTheme("colors.palette.type");
+  const lang = useSelector(languageSelector);
 
   // TODO for next urlscheme evolutions:
   // - check if local settings allow to launch an app from this branch, else display an error
@@ -44,6 +47,7 @@ export default function PlatformApp({ match }: Props) {
           onClose={handleClose}
           inputs={{
             theme: themeType,
+            lang,
             ...urlParams,
           }}
         />

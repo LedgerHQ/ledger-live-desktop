@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
@@ -39,6 +39,7 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -103,8 +104,24 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
 
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
+  const rampCatalog = useRampCatalog();
 
-  const availableOnBuy = isCurrencySupported("BUY", currency);
+  const [availableOnBuy, availableOnSell] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [false, false];
+    }
+
+    return [
+      rampCatalog.value.onRamp.some(provider => provider.cryptoCurrencies.includes(currency.id)),
+      rampCatalog.value.offRamp.some(provider => provider.cryptoCurrencies.includes(currency.id)),
+    ];
+  }, [rampCatalog.value, currency.id]);
+
+  console.log({
+    currencyId: currency.id,
+    availableOnBuy,
+    availableOnSell,
+  });
 
   const { providers, storedProviders, providersError } = useProviders();
 
@@ -123,8 +140,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     history.push({
       pathname: "/exchange",
       state: {
-        defaultCurrency: currency,
-        defaultAccount: mainAccount,
+        mode: "onRamp",
+        currencyId: currency.id,
+        accountId: mainAccount.id,
       },
     });
   }, [currency, history, mainAccount]);

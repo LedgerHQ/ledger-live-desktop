@@ -13,6 +13,7 @@ import {
   RampLiveAppCatalogEntry,
   RampCatalogEntry,
 } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
+import useTheme from "~/renderer/hooks/useTheme";
 
 import applepayLogo from "./assets/applepay.svg";
 import googlepayLogo from "./assets/googlepay.svg";
@@ -23,6 +24,8 @@ import sepaLogo from "./assets/sepa.svg";
 import visaLogo from "./assets/visa.svg";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { languageSelector } from "~/renderer/reducers/settings";
+import { useSelector } from "react-redux";
 
 const assetMap = {
   applepay: applepayLogo,
@@ -163,16 +166,23 @@ type ProviderViewProps = {
   trade: TradeParams,
 };
 
-function ProviderView({ provider, onClose, trade }: ProviderViewProps) {
+function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) {
   const manifest = useLiveAppManifest(provider.appId);
   const inputs = {};
+
+  inputs.theme = useTheme("colors.palette.type");
+  inputs.lang = useSelector(languageSelector);
+
+  if (account) {
+    inputs.accountId = account.id;
+  }
 
   if (trade.cryptoCurrencyId) {
     inputs.cryptoCurrencyId = trade.cryptoCurrencyId;
   }
 
   if (trade.fiatCurrencyId) {
-    inputs.cryptoCurrencyId = trade.fiatCurrencyId;
+    inputs.fiatCurrencyId = trade.fiatCurrencyId;
   }
 
   if (trade.type) {
@@ -209,7 +219,7 @@ export function ProviderList({
 
   const filteredProviders = filterRampCatalogEntries(providers, {
     cryptoCurrencies: trade.cryptoCurrencyId ? [trade.cryptoCurrencyId] : undefined,
-    fiatCurrencies: trade.fiatCurrencyId ? [trade.fiatCurrencyId] : undefined,
+    fiatCurrencies: trade.fiatCurrencyId ? [trade.fiatCurrencyId.toLowerCase()] : undefined,
   });
 
   if (selectedProvider) {
