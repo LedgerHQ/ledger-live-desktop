@@ -6,7 +6,6 @@ import SectionInformative from "~/renderer/screens/exchange/Swap2/Form/FormSumma
 import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
-// FIXME: why is provider optional?
 const FormKYCBanner = ({
   provider,
   status,
@@ -19,7 +18,7 @@ const FormKYCBanner = ({
   const { t } = useTranslation();
 
   // we render the component only if KYC is rejected or need to be upgraded
-  // i.e: we don't render it if the KYC is "pending". FIXME: could add a "refresh KYC" button in this case
+  // i.e: we don't render it if the KYC is "pending". FIXME: could add a "refresh KYC" button in this case?
   if (!provider || (status && status === KYC_STATUS.pending)) return null;
 
   const { message, cta } = status
