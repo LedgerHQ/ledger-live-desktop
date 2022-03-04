@@ -131,7 +131,7 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
-    flex: 1 0 150px;
+    flex: 1 0 70px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(4) {
