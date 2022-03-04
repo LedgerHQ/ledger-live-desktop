@@ -32,7 +32,6 @@ const SwapUnauthorizedRates = () => {
   const dispatch = useDispatch();
 
   const onResetKYC = useCallback(() => {
-    // FIXME: assess if need to update for FTX
     dispatch(setSwapKYCStatus({ provider: "wyre" }));
     dispatch(closeModal("MODAL_SWAP_UNAUTHORIZED_RATES"));
   }, [dispatch]);
