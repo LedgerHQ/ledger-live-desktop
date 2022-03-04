@@ -2,13 +2,10 @@
 import { useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import * as providerIcons from "~/renderer/icons/providers";
-import type { ExchangeRate, CheckQuoteStatus } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
-import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
 import { SwapExchangeRateAmountTooLow } from "@ledgerhq/live-common/lib/errors";
 import { NotEnoughBalance } from "@ledgerhq/errors";
 import { track } from "~/renderer/analytics/segment";
-import jwtDecode from "jwt-decode";
 
 export const SWAP_VERSION = "2.34";
 
@@ -46,61 +43,4 @@ export const trackSwapError = (error: *, properties: * = {}) => {
       ...properties,
     });
   }
-};
-
-// FIXME: should move to LLC
-export const isJwtExpired = (jwtToken: string) => {
-  const { exp } = jwtDecode(jwtToken);
-
-  const currentTime = new Date().getTime() / 1000;
-
-  return currentTime > exp;
-};
-
-// FIXME: should move to LLC
-export const getKYCStatusFromCheckQuoteStatus = (
-  checkQuoteStatus: CheckQuoteStatus,
-): KYCStatus | null => {
-  switch (checkQuoteStatus.codeName) {
-    case "KYC_PENDING":
-      return KYC_STATUS.pending;
-
-    case "KYC_FAILED":
-      return KYC_STATUS.rejected;
-
-    case "KYC_UNDEFINED":
-    case "KYC_UPGRADE_REQUIRED":
-      return KYC_STATUS.upgradeRequierd;
-
-    case "RATE_VALID":
-      return KYC_STATUS.approved;
-
-    // FIXME: should handle all other non KYC related error cases somewhere
-    default:
-      return null;
-  }
-};
-
-// FIXME: should move to LLC
-export type WidgetTypes = "login" | "kyc";
-export type FTXProviders = "ftx" | "ftxus";
-export const getFTXURL = ({ type, provider }: { type: WidgetTypes, provider: FTXProviders }) => {
-  const domain = (() => {
-    switch (provider) {
-      case "ftx":
-        return "ftx.com";
-
-      case "ftxus":
-        return "ftx.us";
-
-      default:
-        break;
-    }
-  })();
-
-  if (!domain) {
-    throw new Error(`Could not find domain for ${provider}`);
-  }
-
-  return `https://${domain}/${type}?hideFrame=true&ledgerLive=true`;
 };

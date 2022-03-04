@@ -3,11 +3,11 @@
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 
+import type { FTXProviders } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { getFTXURL } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import SwapConnectWidget from "../SwapConnectWidget";
-
-import type { FTXProviders } from "../utils";
-import { getFTXURL } from "../utils";
 
 type Props = { onClose: Function, provider: FTXProviders };
 
