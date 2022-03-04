@@ -14,8 +14,12 @@ import {
   usePollKYCStatus,
   useSwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
-import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import {
+  getKYCStatusFromCheckQuoteStatus,
+  KYC_STATUS,
+  shouldShowKYCBanner,
+  shouldShowLoginBanner,
+} from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { checkQuote } from "@ledgerhq/live-common/lib/exchange/swap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -35,12 +39,7 @@ import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
-import {
-  SWAP_VERSION,
-  trackSwapError,
-  isJwtExpired,
-  getKYCStatusFromCheckQuoteStatus,
-} from "../utils/index";
+import { SWAP_VERSION, trackSwapError } from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import KYC from "../KYC";
 import Login from "../Login";
@@ -83,36 +82,6 @@ export const useProviders = () => {
     providers,
     providersError,
   };
-};
-
-const shouldShowLoginBanner = ({ provider, token }: { provider: string, token: string }) => {
-  /**
-   * FIXME: Should not hardcode the list of provider requiering login.
-   * Could get it from LLC
-   */
-  if (!["ftx", "ftxus"].includes(provider)) {
-    return false;
-  }
-
-  return !token || isJwtExpired(token);
-};
-
-const shouldShowKYCBanner = ({
-  provider,
-  kycStatus,
-}: {
-  provider: string,
-  kycStatus: KYCStatus,
-}) => {
-  /**
-   * FIXME: Should not hardcode the list of provider requiering KYC.
-   * Could get it from LLC
-   */
-  if (!["ftx", "ftxus", "wyre"].includes(provider)) {
-    return false;
-  }
-
-  return kycStatus !== KYC_STATUS.approved;
 };
 
 const SwapForm = () => {
