@@ -84,7 +84,6 @@ export function BalanceTotal({
               color="palette.text.shade100"
               unit={unit}
               fontSize={8}
-              disableRounding
               showCode
               val={totalBalance}
               data-test-id="total-balance"
