@@ -2,8 +2,6 @@
 
 const { ipcRenderer, contextBridge } = require("electron");
 
-console.log("SWAP CONNECT LOADED !!");
-
 const postMessage = (message: any) => ipcRenderer.sendToHost("webviewToParent", message);
 
 contextBridge.exposeInMainWorld("ledger", {
