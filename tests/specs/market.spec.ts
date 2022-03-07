@@ -22,6 +22,9 @@ test("Market", async ({ page }) => {
     await marketPage.toggleInvertSort();
     await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-inverted-sort.png");
+  });
+
+  await test.step("revert sorting", async () => {
     await marketPage.toggleInvertSort();
     await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page.png");
