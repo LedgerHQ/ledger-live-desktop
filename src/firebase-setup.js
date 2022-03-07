@@ -1,13 +1,24 @@
-const firebaseDevConfig = {
-  apiKey: "AIzaSyAHlqjEgJ3fZ8Et7hMRepRpX_Vh_jZZdz0",
-  authDomain: "ledger-live-12a1c.firebaseapp.com",
-  projectId: "ledger-live-12a1c",
-  storageBucket: "ledger-live-12a1c.appspot.com",
-  messagingSenderId: "148270189806",
-  appId: "1:148270189806:web:206ee6daad7a87679677ff",
+export const firebaseDevelopmentConfig = {
+  apiKey: "AIzaSyDh7WKaA5cvXV1C554Djyd68vy_1LrXxhk",
+  authDomain: "ledger-live-development.firebaseapp.com",
+  projectId: "ledger-live-development",
+  storageBucket: "ledger-live-development.appspot.com",
+  messagingSenderId: "750497694072",
+  appId: "1:750497694072:web:d2fc719100b45405bac88d",
 };
 
-const firebaseProdConfig = {
+// We don't have the concept of staging on desktop but the
+// Firebase project still exists
+export const firebaseStagingConfig = {
+  apiKey: "AIzaSyCqosqFLVHMsMi3uOFFbCJItOby7i6Y4T8",
+  authDomain: "ledger-live-staging.firebaseapp.com",
+  projectId: "ledger-live-staging",
+  storageBucket: "ledger-live-staging.appspot.com",
+  messagingSenderId: "1008987457941",
+  appId: "1:1008987457941:web:14f6fbee631e0438d6ce9c",
+};
+
+export const firebaseProductionConfig = {
   apiKey: "AIzaSyAzrQM75b6VXVwRzEDAM12ijfeOHlXvhA8",
   authDomain: "ledger-live-production.firebaseapp.com",
   projectId: "ledger-live-production",
@@ -18,8 +29,8 @@ const firebaseProdConfig = {
 
 export function getFirebaseConfig() {
   if (__DEV__) {
-    return firebaseDevConfig;
+    return firebaseDevelopmentConfig;
   }
 
-  return firebaseProdConfig;
+  return firebaseProductionConfig;
 }
