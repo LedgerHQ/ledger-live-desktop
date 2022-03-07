@@ -14,28 +14,28 @@ test("Market", async ({ page }) => {
 
   await test.step("go to market", async () => {
     await layout.goToMarket();
-    await new Promise(res => setTimeout(res, 1000));
-    expect(await page.screenshot()).toMatchSnapshot("market-page.png");
+    await marketPage.waitForLoading();
+    expect(await page.screenshot()).toMatchSnapshot("market-page-no-scrollbar.png");
   });
 
   await test.step("inverse sorting", async () => {
     await marketPage.toggleInvertSort();
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-inverted-sort.png");
     await marketPage.toggleInvertSort();
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page.png");
   });
 
   await test.step("change countervalue", async () => {
     await marketPage.switchCountervalue("THB");
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-thb-countervalue.png");
   });
 
   await test.step("change market range", async () => {
     await marketPage.switchMarketRange("7d");
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-7d-range.png");
   });
 
@@ -46,13 +46,13 @@ test("Market", async ({ page }) => {
 
   await test.step("search bi", async () => {
     await marketPage.search("bi");
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-search-bi.png");
   });
 
   await test.step("filter starred", async () => {
     await marketPage.toggleStarFilter();
-    await new Promise(res => setTimeout(res, 1000));
+    await marketPage.waitForLoading();
     expect(await page.screenshot()).toMatchSnapshot("market-page-filter-starred.png");
   });
 

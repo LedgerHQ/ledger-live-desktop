@@ -8,15 +8,28 @@ export class MarketPage {
   readonly filterDrawerButton: Locator;
   readonly starFilterButton: Locator;
   readonly sortButton: Locator;
+  readonly loadingPlaceholder: Locator;
+  readonly coinRow: Function;
+  readonly starButton: Function;
+  readonly buyButton: Function;
+  readonly swapButton: Function;
 
   constructor(page: Page) {
     this.page = page;
     this.searchInput = page.locator("data-test-id=market-search-input");
-    this.counterValueSelect = page.locator("text=US Dollar - USD");
-    this.marketRangeSelect = page.locator("text=24h");
+    this.counterValueSelect = page.locator("data-test-id=market-countervalue-select");
+    this.marketRangeSelect = page.locator("data-test-id=market-range-select");
     this.filterDrawerButton = page.locator("data-test-id=market-filter-drawer-button");
     this.starFilterButton = page.locator("data-test-id=market-star-button");
     this.sortButton = page.locator("data-test-id=market-sort-button");
+    this.loadingPlaceholder = page.locator("data-test-id=loading-placeholder");
+    this.coinRow = (ticker: string): Locator => page.locator(`data-test-id=market-${ticker}-row`);
+    this.starButton = (ticker: string): Locator =>
+      page.locator(`data-test-id=market-${ticker}-star-button`);
+    this.buyButton = (ticker: string): Locator =>
+      page.locator(`data-test-id=market-${ticker}-buy-button`);
+    this.swapButton = (ticker: string): Locator =>
+      page.locator(`data-test-id=market-${ticker}-swap-button`);
   }
 
   async search(query: string) {
@@ -47,18 +60,24 @@ export class MarketPage {
     await this.starFilterButton.click();
   }
 
-  async starCoin(ticker: string) {
-    const starButton = this.page.locator(`data-test-id=market-${ticker}-star-button`);
-    await starButton.click();
+  async openCoinPage(ticker: string) {
+    await this.coinRow(ticker).click();
   }
 
-  async openCoinPage(ticker: string) {
-    const coinRow = this.page.locator(`data-test-id=market-${ticker}-row`);
-    await coinRow.click();
+  async starCoin(ticker: string) {
+    await this.starButton(ticker).click();
   }
 
   async openBuyPage(ticker: string) {
-    const buyButton = this.page.locator(`data-test-id=market-${ticker}-buy-button`);
-    await buyButton.click();
+    await this.buyButton(ticker).click();
+  }
+
+  async openSwapPage(ticker: string) {
+    await this.swapButton(ticker).click();
+  }
+
+  async waitForLoading() {
+    await this.loadingPlaceholder.first().waitFor({ state: "detached" });
+    await this.swapButton("btc").waitFor({ state: "attached" }); // swap buttons are displayed few seconds after
   }
 }

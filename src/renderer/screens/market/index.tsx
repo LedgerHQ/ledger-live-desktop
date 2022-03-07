@@ -116,16 +116,20 @@ export default function Market() {
           />
         </SearchContainer>
         <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
-          <Flex width="290px" justifyContent="flex-end" ml={3}>
+          <Flex
+            data-test-id="market-countervalue-select"
+            width="290px"
+            justifyContent="flex-end"
+            ml={3}
+          >
             <CounterValueSelect
               counterCurrency={counterCurrency}
               setCounterCurrency={setCounterCurrency}
               supportedCounterCurrencies={supportedCounterCurrencies}
             />
           </Flex>
-          <Flex mx={3}>
+          <Flex data-test-id="market-range-select" mx={3}>
             <Dropdown
-              data-test-id="market-range-select"
               label={t("market.rangeLabel")}
               menuPortalTarget={document.body}
               onChange={updateTimeRange}
