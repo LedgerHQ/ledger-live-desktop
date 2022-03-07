@@ -314,6 +314,7 @@ function MarketList({
           )}
           <TableRow header>
             <SortTableCell
+              data-test-id="market-sort-button"
               onClick={toggleSortBy}
               orderByKey="market_cap"
               orderBy={orderBy}
@@ -331,6 +332,7 @@ function MarketList({
               <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
             )}
             <TableCell
+              data-test-id="market-star-button"
               disabled={starredMarketCoins.length <= 0 && starred.length <= 0}
               onClick={toggleStarredAccounts}
             >
