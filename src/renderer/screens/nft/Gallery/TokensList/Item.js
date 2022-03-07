@@ -96,6 +96,7 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
         horizontal={!isGrid}
         alignItems={!isGrid ? "center" : undefined}
         onClick={onItemClick}
+        data-test-id="collection-nft-item"
       >
         <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
           <Image nft={metadata} size={40} full={isGrid} />

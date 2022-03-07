@@ -50,7 +50,12 @@ const Row = ({ nfts, contract, onClick }: Props) => {
       </Skeleton>
       <Box ml={3} flex={1}>
         <Skeleton width={136} minHeight={24} barHeight={10} show={show}>
-          <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+          <Text
+            ff="Inter|SemiBold"
+            color="palette.text.shade100"
+            fontSize={4}
+            data-test-id="collection-name"
+          >
             {tokenName || contract}
           </Text>
         </Skeleton>

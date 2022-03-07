@@ -94,7 +94,7 @@ function TokensList({ account }: Props) {
   };
 
   return (
-    <TableContainer id="tokens-list" mb={50}>
+    <TableContainer data-test-id="tokens-list" mb={50}>
       <TableHeader title={isTokenAccount ? titleLabel : t("subAccounts.title")}>
         {!isEmpty && isTokenAccount && (
           <ReceiveButtonComponent onClick={onReceiveClick} account={account} />

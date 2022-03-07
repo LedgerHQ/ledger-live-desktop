@@ -114,7 +114,7 @@ const Gallery = () => {
             {t("NFT.gallery.title")}
           </Text>
         </Box>
-        <Button small primary icon onClick={onSend}>
+        <Button small primary icon onClick={onSend} data-test-id="gallery-nft-send-button">
           <Box horizontal flow={1} alignItems="center">
             <IconSend size={12} />
             <Box>{t("NFT.gallery.collection.header.sendCTA")}</Box>

@@ -106,7 +106,9 @@ const Collection = () => {
         <Button small primary icon onClick={onSend}>
           <Box horizontal flow={1} alignItems="center">
             <IconSend size={12} />
-            <Box>{t("NFT.gallery.collection.header.sendCTA")}</Box>
+            <Box data-test-id="collection-nft-send-button">
+              {t("NFT.gallery.collection.header.sendCTA")}
+            </Box>
           </Box>
         </Button>
       </Box>
