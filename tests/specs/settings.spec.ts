@@ -16,21 +16,21 @@ test("Settings", async ({ page }) => {
 
   await test.step("go to settings -> accounts", async () => {
     await settingsPage.goToAccountsTab();
-    expect(await page.screenshot()).toMatchSnapshot("settings-accounts-page.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("settings-accounts-page.png");
   });
 
   await test.step("go to settings -> about", async () => {
     await settingsPage.goToAboutTab();
-    expect(await page.screenshot()).toMatchSnapshot("settings-about-page.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("settings-about-page.png");
   });
 
   await test.step("go to settings -> help", async () => {
     await settingsPage.goToHelpTab();
-    expect(await page.screenshot()).toMatchSnapshot("settings-help-page.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("settings-help-page.png");
   });
 
   await test.step("go to settings -> experimental", async () => {
     await settingsPage.goToExperimentalTab();
-    expect(await page.screenshot()).toMatchSnapshot("settings-experimental-page.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("settings-experimental-page.png");
   });
 });

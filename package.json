@@ -202,7 +202,7 @@
     "listr": "^0.14.3",
     "listr-verbose-renderer": "^0.6.0",
     "nyc": "^15.1.0",
-    "playwright": "1.17",
+    "playwright": "1.19",
     "prettier": "^1.19.1",
     "serve": "^13.0.2",
     "style-loader": "^1.2.1",

@@ -18,22 +18,22 @@ test("Swap", async ({ page }) => {
   await test.step("Open Swap Page", async () => {
     await swapPage.navigate();
     await swapPage.moveToExchangeButton(); // force the mouse to move to this button so the drawer collapse button disappears
-    expect(await page.screenshot()).toMatchSnapshot("open-swap-page.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("open-swap-page.png");
   });
 
   await test.step("Select Max Spendable", async () => {
     await swapPage.sendMax();
-    expect(await page.screenshot()).toMatchSnapshot("max-spendable-swap.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("max-spendable-swap.png");
   });
 
   await test.step("Confirm Exchange", async () => {
     await swapPage.confirmExchange();
-    expect(await page.screenshot()).toMatchSnapshot("confirm-exchange.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("confirm-exchange.png");
   });
 
   await test.step("Initiate swap with Nano App", async () => {
     await deviceAction.initiateSwap();
-    expect(await page.screenshot()).toMatchSnapshot("initiate-swap.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("initiate-swap.png");
   });
 
   await test.step("Confirm swap with Nano App", async () => {
@@ -41,19 +41,19 @@ test("Swap", async ({ page }) => {
     await deviceAction.silentSign();
     const originalSwapId = await swapPage.verifySuccessfulExchange();
     swapId = originalSwapId.replace("#", "");
-    expect(await page.screenshot()).toMatchSnapshot("confirm-swap.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("confirm-swap.png");
   });
 
   await test.step("Verify Swap details are present in the exchange drawer", async () => {
     await swapPage.navigateToExchangeDetails();
     detailsSwapId = await swapPage.verifyExchangeDetails();
     expect(detailsSwapId).toEqual(swapId);
-    expect(await page.screenshot()).toMatchSnapshot("verify-swap-details.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("verify-swap-details.png");
   });
 
   await test.step("Verify Swap details are present in the swap history", async () => {
     await swapPage.exitExchangeDrawer();
     await swapPage.verifyHistoricalSwapsHaveLoadedFully();
-    expect(await page.screenshot()).toMatchSnapshot("verify-swap-history.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("verify-swap-history.png");
   });
 });

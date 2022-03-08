@@ -23,7 +23,7 @@ test("Enable dev mode from settings", async ({ page }) => {
       await layout.goToAccounts();
       await accountsPage.openAddAccountModal();
       await addAccountModal.select(currency);
-      expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+      expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
         `empty-result-${currency}.png`,
       );
       await addAccountModal.selectAccountInput.press("Escape");
@@ -34,7 +34,7 @@ test("Enable dev mode from settings", async ({ page }) => {
     await layout.goToSettings();
     await settingsPage.goToExperimentalTab();
     await settingsPage.enableDevMode();
-    expect(await page.screenshot()).toMatchSnapshot("devMode-on.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("devMode-on.png");
   });
 
   for (const currency of currencies) {
@@ -42,7 +42,7 @@ test("Enable dev mode from settings", async ({ page }) => {
       await layout.goToAccounts();
       await accountsPage.openAddAccountModal();
       await addAccountModal.select(currency);
-      expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+      expec.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
         `${currency}-isAvailable.png`,
       );
     });
@@ -51,7 +51,7 @@ test("Enable dev mode from settings", async ({ page }) => {
       await modal.continue();
       await deviceAction.openApp();
       await addAccountModal.waitForSync();
-      expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+      expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
         `scan-${currency}-accounts.png`,
       );
       await addAccountModal.addAccounts();
