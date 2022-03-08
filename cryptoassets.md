@@ -8,6 +8,7 @@
 | Bitcoin | BTC | YES | bitcoin |
 | Bitcoin Cash | BCH | YES | bitcoin_cash |
 | Bitcoin Gold | BTG | YES | bitcoin_gold |
+| Celo | CELO | YES | celo |
 | Cosmos | ATOM | YES | cosmos |
 | Crypto.org | CRO | YES | crypto_org |
 | Dash | DASH | YES | dash |
@@ -43,7 +44,6 @@
 | Bitcoin Private | BTCP | NO | bitcoin_private |
 | Callisto | CLO | NO | callisto |
 | Cardano | ADA | NO | cardano |
-| Celo | CELO | NO | celo |
 | DEXON | DXN | NO | dexon |
 | EOS | EOS | NO | eos |
 | Elastos | ELA | NO | elastos |
