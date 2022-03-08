@@ -1188,12 +1188,12 @@
   },
   "learn": {
     "title": "Образование",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
-    "sectionVideo": "Video",
-    "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "noConnection": "Отсутствует соединение",
+    "noConnectionDesc": "Кажется, у вас проблемы с интернетом. Проверьте подключение и повторите попытку.",
+    "sectionShows": "Шоу",
+    "sectionVideo": "Видео",
+    "sectionPodcast": "Подкасты",
+    "sectionArticles": "Статьи"
   },
   "market": {
     "title": "Рынок",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "Для этого действия необходимо приложение {{appName}}. Пожалуйста, перейдите в Диспетчер и установите его на ваше устройство",
     "appNotInstalled_plural": "Для этого действия необходимы приложения {{appName}}. Пожалуйста, перейдите в Диспетчер и установите их на устройство",
     "openManager": "Открыть Диспетчер",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "Настроить устройство",
     "outdated": "Версия приложения устарела",
     "outdatedDesc": "Для приложения {{appName}} на вашем устройстве появилось важное обновление. Чтобы установить обновления, перейдите в Диспетчер.",
     "installApp": "Установка приложения {{appName}}",
@@ -2709,8 +2709,8 @@
       "addLocalAppButton": "Обзор",
       "runLocalAppDeleteButton": "Удалить",
       "runLocalAppOpenButton": "Открыть",
-      "enableLearnStagingUrl": "Learn page staging URL",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrl": "Промежуточный URL страницы Образование",
+      "enableLearnStagingUrlDesc": "Включить промежуточный URL-адрес для страницы Образование."
     },
     "currencies": {
       "selectPlaceholder": "Выберите актив",
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "Приложение {{appName}} по вашему запросу не найдено.",
+      "description": "Попробуйте переустановить приложение из Менеджера"
     },
     "countervaluesUnavailable": {
       "title": "В данный момент мы не можем предоставить эквивалент для этого актива"
@@ -3734,8 +3734,8 @@
       "description": "Произошла непредвиденная ошибка. Повторите попытку"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Устройство не готово",
+      "description": "Настройте устройство перед тем, как использовать его в Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Перезагрузите устройство Ledger и повторите попытку",
