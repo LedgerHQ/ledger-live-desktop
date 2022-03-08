@@ -51,7 +51,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            await github.rest.issues.createCommitComment({
+            await github.rest.issues.createComment({
               owner: "LedgerHQ",
               repo: "ledger-live-desktop",
               issue_number: "${{ github.event.pull_request.number }}",
