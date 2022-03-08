@@ -1,11 +1,11 @@
-import test from "../fixtures/common";
 import { expect } from "@playwright/test";
-import { Layout } from "../models/Layout";
-import { Modal } from "../models/Modal";
+import test from "../fixtures/common";
 import { AccountsPage } from "../models/AccountsPage";
 import { AddAccountModal } from "../models/AddAccountModal";
-import { SettingsPage } from "../models/SettingsPage";
 import { DeviceAction } from "../models/DeviceAction";
+import { Layout } from "../models/Layout";
+import { Modal } from "../models/Modal";
+import { SettingsPage } from "../models/SettingsPage";
 
 test.use({ userdata: "1AccountBTC1AccountETH" });
 const currencies = ["bitcoin_testnet", "ethereum_ropsten", "ethereum_goerli", "MUON"];

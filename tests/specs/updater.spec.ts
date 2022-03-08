@@ -1,8 +1,8 @@
-import test from "../fixtures/common";
 import { expect } from "@playwright/test";
+import test from "../fixtures/common";
+import { AppUpdater } from "../models/AppUpdater";
 import { Layout } from "../models/Layout";
 import { SettingsPage } from "../models/SettingsPage";
-import { AppUpdater } from "../models/AppUpdater";
 
 test.use({
   userdata: "1AccountBTC1AccountETHwCarousel",
@@ -17,40 +17,40 @@ test("Updater", async ({ page }) => {
   await test.step("[idle] state should not be visible", async () => {
     expect(await layout.appUpdateBanner.isHidden()).toBe(true);
 
-
     await page.evaluate(() => {
       document.body.style.overflow = "hidden";
     });
 
     expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-idle.png");
-
   });
 
   await test.step("[checking] state should be visible", async () => {
     await appUpdater.setStatus("checking");
     expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-layout.png");
-    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-checking.png");
+    expect
+      .soft(await layout.appUpdateBanner.screenshot())
+      .toMatchSnapshot("app-updater-checking.png");
   });
 
   await test.step("[check-success] state should be visible", async () => {
     await appUpdater.setStatus("check-success");
-    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
-      "app-updater-check-success.png",
-    );
+    expect
+      .soft(await layout.appUpdateBanner.screenshot())
+      .toMatchSnapshot("app-updater-check-success.png");
   });
 
   await test.step("[update-available] state should be visible", async () => {
     await appUpdater.setStatus("update-available");
-    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
-      "app-updater-update-available.png",
-    );
+    expect
+      .soft(await layout.appUpdateBanner.screenshot())
+      .toMatchSnapshot("app-updater-update-available.png");
   });
 
   await test.step("[download-progress] state should be visible", async () => {
     await appUpdater.setStatus("download-progress");
-    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
-      "app-updater-download-progress.png",
-    );
+    expect
+      .soft(await layout.appUpdateBanner.screenshot())
+      .toMatchSnapshot("app-updater-download-progress.png");
   });
 
   await test.step("[error] state should be visible", async () => {
