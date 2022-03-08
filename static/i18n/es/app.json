@@ -1188,12 +1188,12 @@
   },
   "learn": {
     "title": "Aprender",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
+    "noConnection": "No hay conexión",
+    "noConnectionDesc": "Parece que no estás conectado a Internet. Por favor, revisa tu conexión y vuelve a intentarlo.",
+    "sectionShows": "Muestra",
     "sectionVideo": "Video",
     "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "sectionArticles": "Artículos"
   },
   "market": {
     "title": "Mercado",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "La aplicacion {{appName}} es necesaria para completar esta acción. Ingresa a Manager e instálala en tu dispositivo",
     "appNotInstalled_plural": "Las aplicaciones {{appName}} son necesarias para completar esta acción. Ingresa a Manager e instálalas en tu dispositivo",
     "openManager": "Abrir Manager",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "Configurar dispositivo",
     "outdated": "Versión de aplicación obsoleta",
     "outdatedDesc": "Hay una actualización importante disponible para la aplicación {{appName}} en tu dispositivo. Ingresa a Manager para actualizarla.",
     "installApp": "Instalación de aplicación {{appName}}",
@@ -2760,7 +2760,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Usar implementaciones de JS experimentales para Tezos."
         },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "No es posible encontrar la aplicación {{appName}} para tu configuración específica.",
+      "description": "Intenta reinstalar la aplicación desde el Manager"
     },
     "countervaluesUnavailable": {
       "title": "No es posible ofrecer una contraparte para este activo en este momento"
@@ -3734,8 +3734,8 @@
       "description": "Se produjo un error inesperado. Inténtalo de nuevo"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Tu dispositivo aún no está listo para usar",
+      "description": "Configura tu dispositivo antes de usarlo con Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Reinicia tu dispositivo Ledger e inténtalo de nuevo",
