@@ -211,4 +211,7 @@ export const urls = {
   solana: {
     recipient_info: "https://support.ledger.com",
   },
+  hedera: {
+    supportArticleLink: "https://launchbadge.com/blog/using-a-ledger-nano-to-create-your-hedera-account",
+  },
 };
