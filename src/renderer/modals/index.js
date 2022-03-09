@@ -41,6 +41,7 @@ import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
+import MODAL_HIDE_NFT_COLLECTION from "./HideNftCollection";
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
@@ -101,6 +102,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_VOTE_TRON,
   MODAL_VOTE_TRON_INFO,
   MODAL_BLACKLIST_TOKEN,
+  MODAL_HIDE_NFT_COLLECTION,
   MODAL_COSMOS_DELEGATE,
   MODAL_COSMOS_REWARDS_INFO,
   MODAL_COSMOS_CLAIM_REWARDS,
