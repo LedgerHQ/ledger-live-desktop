@@ -3004,10 +3004,10 @@
     commander "^8.2.0"
     mime-types "^2.1.33"
 
-"@ledgerhq/react-ui@^0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.7.3.tgz#e2b24b45d30a71d39bcb7cdaec25fc012fa98ee5"
-  integrity sha512-HctNMBr8tc7xSgBPjnVQR7356qwlGmmQly8QpN0a6cNi9CBAAnvEvmnPT1xH327HlTwknhi8Bz3eOkRhic/NGw==
+"@ledgerhq/react-ui@^0.7.4":
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/react-ui/-/react-ui-0.7.4.tgz#265cb0a1729dae4cfbb96a55f4ca4b1cae88b9f6"
+  integrity sha512-FEL5c9nqJDb1GhFV30Qkwey6zIYFXZCsZlQ/3uDxfmnMtcWbCgOommGont6zaRv5Thy7Msp8Xn/pvMs//8+KSQ==
   dependencies:
     "@floating-ui/react-dom" "^0.4.0"
     "@ledgerhq/icons-ui" "^0.2.3"
