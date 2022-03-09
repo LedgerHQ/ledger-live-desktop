@@ -292,15 +292,15 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
       );
     } else {
       // Hedera's "no associated accounts" text
-      const isHedera = mainCurrency.family === t("Hedera.name").toString()
+      const isHedera = mainCurrency.family === t("hedera.name").toString()
       if (isHedera) {
         creatable = (
           <div>
-            <Trans i18nKey="Hedera.createHederaAccountHelp.text"></Trans>{" "}
+            <Trans i18nKey="hedera.createHederaAccountHelp.text"></Trans>{" "}
             <LinkWithExternalIcon
               fontSize={3}
               onClick={() => openURL(urls.hedera.supportArticleLink)}
-              label={t("Hedera.createHederaAccountHelp.link")}
+              label={t("hedera.createHederaAccountHelp.link")}
             />
           </div>
         );
