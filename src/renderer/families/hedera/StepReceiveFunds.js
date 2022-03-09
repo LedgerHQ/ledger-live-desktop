@@ -11,7 +11,7 @@ export const HederaReceiveAddressWarning = ({ name }: Props) => {
 
     return (
         <Alert type="security" mt={4}>
-            <Trans i18nKey="Hedera.currentAddress.messageIfVirtual" values={{ name }} />
+            <Trans i18nKey="hedera.currentAddress.messageIfVirtual" values={{ name }} />
         </Alert>
     );
   };

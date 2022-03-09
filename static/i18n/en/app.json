@@ -4341,7 +4341,7 @@
     "memoPlaceholder": "Optional",
     "memoWarningText": "When using a memo, carefully check the information with the recipient"
   },
-  "Hedera": {
+  "hedera": {
     "name": "hedera",
     "createHederaAccountHelp": {
       "text": "Please refer to this support article for",
