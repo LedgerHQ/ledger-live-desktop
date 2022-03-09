@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -17,6 +17,7 @@ import Row from "./Row";
 import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import Spinner from "~/renderer/components/Spinner";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 
 const INCREMENT = 5;
 type Props = {
@@ -50,8 +51,11 @@ const Collections = ({ account }: Props) => {
       Math.min(numberOfVisibleCollection + INCREMENT, collections.length),
     );
   }, [collections.length]);
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
 
-  const visibleCollection = collections.slice(0, numberOfVisibleCollection);
+  const visibleCollection = collections
+    .slice(0, numberOfVisibleCollection)
+    .filter(({ contract }) => !hiddenNftCollections.includes(contract));
 
   useEffect(() => {
     track("View NFT Collections (Account Page)");
