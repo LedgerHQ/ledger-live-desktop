@@ -32,7 +32,7 @@ import LinkWithExternalIcon from "../../../components/LinkWithExternalIcon";
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import { supportArticleLink } from "~/renderer/families/hedera/utils.js";
+import { urls } from "~/config/urls";
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
@@ -299,7 +299,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
             <Trans i18nKey="Hedera.createHederaAccountHelp.text"></Trans>{" "}
             <LinkWithExternalIcon
               fontSize={3}
-              onClick={() => openURL(supportArticleLink)}
+              onClick={() => openURL(urls.hedera.supportArticleLink)}
               label={t("Hedera.createHederaAccountHelp.link")}
             />
           </div>
