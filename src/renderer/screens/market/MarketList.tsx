@@ -1,8 +1,5 @@
 import React, { useCallback, memo } from "react";
-import {
-  MarketDataContextType,
-  useMarketData,
-} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";
@@ -217,9 +214,10 @@ const CurrencyRow = memo(function CurrencyRowItem({
   displayMarketCap,
 }: any) {
   const currency = data ? data[index] : null;
+  const internalCurrency = currency ? currency.internalCurrency : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
-  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
-  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
+  const availableOnBuy = internalCurrency && isCurrencySupported("BUY", internalCurrency);
+  const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
   return (
     <MarketRowItem
       loading={!currency || (index === data.length && index > 50 && loading)}

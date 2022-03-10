@@ -84,9 +84,6 @@ export default function MarketCoinScreen() {
     supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
 
-  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
-  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
-
   const {
     id,
     ticker,
@@ -110,6 +107,9 @@ export default function MarketCoinScreen() {
     internalCurrency,
     chartData,
   } = currency || {};
+
+  const availableOnBuy = internalCurrency && isCurrencySupported("BUY", internalCurrency);
+  const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
 
   useEffect(() => {
     return () => {
