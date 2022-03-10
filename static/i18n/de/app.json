@@ -2709,8 +2709,8 @@
       "addLocalAppButton": "Durchsuchen",
       "runLocalAppDeleteButton": "Löschen",
       "runLocalAppOpenButton": "Öffnen",
-      "enableLearnStagingUrl": "Learn page staging URL",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrl": "Staging-URL für Lernen-Seite",
+      "enableLearnStagingUrlDesc": "Aktivieren Sie die Staging-URL für die Lernen-Seite."
     },
     "currencies": {
       "selectPlaceholder": "Krypto-Vermögenswert auswählen",
