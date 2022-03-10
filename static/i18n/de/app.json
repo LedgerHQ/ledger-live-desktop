@@ -1193,7 +1193,7 @@
     "sectionShows": "Shows",
     "sectionVideo": "Video",
     "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "sectionArticles": "Artikel"
   },
   "market": {
     "title": "Markt",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "Die App {{appName}} ist erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
     "appNotInstalled_plural": "Die Apps {{appName}} sind erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
     "openManager": "Manager öffnen",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "Gerät einrichten",
     "outdated": "App-Version veraltet",
     "outdatedDesc": "Ein wichtiges Update ist für die Anwendung {{appName}} auf Ihrem Gerät verfügbar. Bitte gehen Sie zum Manager, um das Update durchzuführen.",
     "installApp": "{{appName}} App-Installation",
@@ -1611,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "Zur Verwaltung von <1>{{tokenName}} {{tokenType}}-Token</1> zu verwalten, vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}}-Version</1> haben, bevor Sie <3>an Ihr {{appName}}-Konto</3> senden.",
         "goToAccounts": "Zu den Konten gehen",
         "intallParentApp": "{{appName}} App installieren",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "Zur App gehen",
+        "swap": "Tauschen",
+        "tool": "Mehr erfahren",
+        "app": "Mehr erfahren"
       },
       "uninstall": {
         "title": "Alle deinstallieren",
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "Die {{appName}} -App kann für Ihre spezifische Konfiguration nicht gefunden werden.",
+      "description": "Versuchen Sie, die App aus dem Manager heraus neu zu installieren"
     },
     "countervaluesUnavailable": {
       "title": "Wir können derzeit keinen Gegenwert für diesen Vermögenswert angeben"
@@ -3734,8 +3734,8 @@
       "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Ihr Gerät kann noch nicht verwendet werden",
+      "description": "Richten Sie Ihr Gerät ein, bevor Sie es mit Ledger Live verwenden."
     },
     "DeviceSocketFail": {
       "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
