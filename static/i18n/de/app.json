@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Karte",
-    "learn": "Learn",
+    "learn": "Lernen",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Testen"
   },
   "fullNode": {
     "status": "Status",
@@ -1187,9 +1187,9 @@
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
   },
   "learn": {
-    "title": "Learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "title": "Lernen",
+    "noConnection": "Keine Verbindung",
+    "noConnectionDesc": "Es scheint, dass Sie keinen Zugriff auf das Internet haben. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
     "sectionShows": "Shows",
     "sectionVideo": "Video",
     "sectionPodcast": "Podcast",
