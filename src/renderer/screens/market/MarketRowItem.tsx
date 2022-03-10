@@ -38,8 +38,6 @@ type Props = {
   selectCurrency: (currencyId: string) => void;
   availableOnBuy: boolean;
   availableOnSwap: boolean;
-  displayChart: boolean;
-  displayMarketCap: boolean;
 };
 
 function MarketRowItem({
@@ -53,8 +51,6 @@ function MarketRowItem({
   selectCurrency,
   availableOnBuy,
   availableOnSwap,
-  displayChart,
-  displayMarketCap,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -145,7 +141,7 @@ function MarketRowItem({
       ) : (
         <TableRow data-test-id={`market-${currency?.ticker}-row`} onClick={onCurrencyClick}>
           <TableCell>{currency?.marketcapRank ?? "-"}</TableCell>
-          <TableCell overflow="hidden" mr={3}>
+          <TableCell mr={3}>
             <CryptoCurrencyIconWrapper>
               {currency.internalCurrency ? (
                 <CryptoCurrencyIcon
@@ -210,25 +206,22 @@ function MarketRowItem({
               <Text fontWeight={"medium"}>-</Text>
             )}
           </TableCell>
-          {displayMarketCap && (
-            <TableCell>
-              <Text>
-                {counterValueFormatter({
-                  shorten: true,
-                  currency: counterCurrency,
-                  value: currency.marketcap,
-                  locale,
-                })}
-              </Text>
-            </TableCell>
-          )}
-          {displayChart && (
-            <TableCell>
-              {currency.sparklineIn7d && (
-                <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
-              )}
-            </TableCell>
-          )}
+
+          <TableCell>
+            <Text>
+              {counterValueFormatter({
+                shorten: true,
+                currency: counterCurrency,
+                value: currency.marketcap,
+                locale,
+              })}
+            </Text>
+          </TableCell>
+          <TableCell>
+            {currency.sparklineIn7d && (
+              <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
+            )}
+          </TableCell>
           <TableCell data-test-id={`market-${currency?.ticker}-star-button`} onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>
