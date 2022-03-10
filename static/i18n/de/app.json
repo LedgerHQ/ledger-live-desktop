@@ -2760,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Experimentelle JS-Implementierung für Tezos verwenden."
         },
         "experimentalCurrencies": {
           "title": "Experimentelle Integrationen",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Verwenden Sie verfügbare experimentelle Integrationen für Krypto-Werte."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -2791,8 +2791,8 @@
           "description": "Das Ändern des App-Anbieters im Manager kann es unmöglich machen, Apps auf Ihrem Ledger-Gerät zu installieren oder zu deinstallieren."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottie-Animationen testen",
+          "description": "Testen Sie alle Animationen, die in Ledger Live verwendet werden"
         }
       }
     },
