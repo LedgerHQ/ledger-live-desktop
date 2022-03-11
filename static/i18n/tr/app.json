@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Kart",
-    "learn": "Learn",
+    "learn": "Öğren",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Dene"
   },
   "fullNode": {
     "status": "Durum",
@@ -1187,8 +1187,8 @@
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
   },
   "learn": {
-    "title": "Learn",
-    "noConnection": "No connection",
+    "title": "Öğren",
+    "noConnection": "Bağlantı yok",
     "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
     "sectionShows": "Shows",
     "sectionVideo": "Video",
@@ -2709,7 +2709,7 @@
       "addLocalAppButton": "Göz At",
       "runLocalAppDeleteButton": "Sil",
       "runLocalAppOpenButton": "Aç",
-      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrl": "Öğren sayfası test URL'si",
       "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
