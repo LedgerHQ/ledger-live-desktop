@@ -164,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} KB",
-    "mbUnit": "{{size}} MB"
+    "kbUnit": "{{size}}KB",
+    "mbUnit": "{{size}}MB"
   },
   "time": {
     "minute": "分",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "カード",
-    "learn": "Learn",
+    "learn": "学ぶ",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "テスト"
   },
   "fullNode": {
     "status": "ステータス",
@@ -1187,13 +1187,13 @@
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "learn": {
-    "title": "Learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
-    "sectionShows": "Shows",
-    "sectionVideo": "Video",
-    "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "title": "学ぶ",
+    "noConnection": "接続なし",
+    "noConnectionDesc": "インターネットにアクセスできません。接続を確認して、もう一度やり直してください。",
+    "sectionShows": "表示",
+    "sectionVideo": "動画",
+    "sectionPodcast": "ポッドキャスト",
+    "sectionArticles": "記事"
   },
   "market": {
     "title": "マーケット",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "openManager": "「管理」を開く",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "デバイスをセットアップ",
     "outdated": "アプリのバージョンが最新ではありません。",
     "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
@@ -1611,7 +1611,7 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
-        "plugin": "Go to app",
+        "plugin": "アプリに移動する",
         "swap": "Swap",
         "tool": "Learn more",
         "app": "Learn more"
