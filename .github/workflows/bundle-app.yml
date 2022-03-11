@@ -9,16 +9,12 @@ on:
       - develop
       - master
 
-jobs:
-  cancel-previous:
-    name: "cancel previous workflow"
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
   check-if-fork:
-    needs: [cancel-previous]
     runs-on: ubuntu-20.04
     outputs:
       forked: ${{ steps.forked.outputs.forked }}
@@ -35,7 +31,6 @@ jobs:
   bundle-macos:
     name: "[macOS] Build"
     runs-on: [ledger-live, macos]
-    needs: cancel-previous
     steps:
       - uses: actions/checkout@v2
         with:
@@ -51,8 +46,20 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -145,8 +152,20 @@ jobs:
         run: sudo killall -w dpkg || echo OK
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -201,8 +220,20 @@ jobs:
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4
         run: ./tools/g++-5.4/install.sh
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
-        run: JOBS=max yarn --frozen-lockfile --network-timeout 100000
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
       - uses: ledgerhq/actions/packages/get-package-infos@main
         id: version
         with:
@@ -236,7 +267,6 @@ jobs:
   bundle-windows:
     name: "[Windows] Build"
     runs-on: windows-latest
-    needs: cancel-previous
     steps:
       - uses: actions/checkout@v2
         with:
@@ -253,7 +283,17 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000

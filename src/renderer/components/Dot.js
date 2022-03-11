@@ -46,9 +46,8 @@ export const Dot: ThemedComponent<{
   right: -5px;
   transform: translateY(0);
   opacity: 0;
-  width: 12px;
-  height: 12px;
-  border: 1.5px solid ${p => p.theme.colors.palette.background.paper};
+  width: 10px;
+  height: 10px;
   animation: ${p =>
       p.collapsed
         ? css`

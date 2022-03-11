@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
+import { Icons } from "@ledgerhq/react-ui";
 
 import {
   accountsSelector,
@@ -38,7 +39,6 @@ import IconLending from "~/renderer/icons/Graph";
 import IconExperimental from "~/renderer/icons/Experimental";
 import IconSwap from "~/renderer/icons/Swap";
 import IconMarket from "~/renderer/icons/ChartLine";
-import IconLearn from "~/renderer/icons/Learn";
 
 import { SideBarList, SideBarListItem } from "~/renderer/components/SideBar";
 import Box from "~/renderer/components/Box";
@@ -133,12 +133,6 @@ const Separator = styled(Box).attrs(() => ({
   background: ${p => p.theme.colors.palette.divider};
 `;
 
-const StarredAcountList = styled.div`
-  @media (max-height: 800px) {
-    display: none;
-  }
-`;
-
 const sideBarTransitionStyles = {
   entering: { flexBasis: MAIN_SIDEBAR_WIDTH },
   entered: { flexBasis: MAIN_SIDEBAR_WIDTH },
@@ -175,6 +169,18 @@ const SideBar = styled(Box).attrs(() => ({
     > ${Collapser} {
       opacity: 1;
     }
+  }
+`;
+
+const SideBarScrollContainer = styled(Box)`
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  flex: 1;
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 `;
 
@@ -306,144 +312,150 @@ const MainSideBar = () => {
             >
               <IconChevron size={16} />
             </Collapser>
-            <TopGradient />
-            <Space of={70} />
-            <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
-              <SideBarListItem
-                id={"dashboard"}
-                label={t("dashboard.title")}
-                icon={IconPortfolio}
-                iconActiveColor="wallet"
-                onClick={handleClickDashboard}
-                isActive={location.pathname === "/"}
-                NotifComponent={<UpdateDot collapsed={collapsed} />}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"market"}
-                label={t("sidebar.market")}
-                icon={IconMarket}
-                iconActiveColor="wallet"
-                onClick={handleClickMarket}
-                isActive={location.pathname === "/market"}
-                collapsed={secondAnim}
-              />
-              <FeatureToggle feature="learn">
+            <SideBarScrollContainer>
+              <TopGradient />
+              <Space of={70} />
+              <SideBarList title={t("sidebar.menu")} collapsed={secondAnim}>
                 <SideBarListItem
-                  id="learn"
-                  label={t("sidebar.learn")}
-                  icon={IconLearn}
+                  id={"dashboard"}
+                  label={t("dashboard.title")}
+                  icon={IconPortfolio}
                   iconActiveColor="wallet"
-                  isActive={location.pathname.startsWith("/learn")}
-                  onClick={handleClickLearn}
+                  onClick={handleClickDashboard}
+                  isActive={location.pathname === "/"}
+                  NotifComponent={<UpdateDot collapsed={collapsed} />}
                   collapsed={secondAnim}
                 />
-              </FeatureToggle>
-              <SideBarListItem
-                id={"accounts"}
-                label={t("sidebar.accounts")}
-                icon={IconWallet}
-                iconActiveColor="wallet"
-                isActive={location.pathname === "/accounts"}
-                onClick={handleClickAccounts}
-                disabled={noAccounts}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"catalog"}
-                label={t("sidebar.catalog")}
-                icon={IconApps}
-                iconActiveColor="wallet"
-                isActive={location.pathname.startsWith("/platform")}
-                onClick={handleClickCatalog}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"send"}
-                label={t("send.title")}
-                icon={IconSend}
-                iconActiveColor="wallet"
-                onClick={handleOpenSendModal}
-                disabled={noAccounts || navigationLocked}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"receive"}
-                label={t("receive.title")}
-                icon={IconReceive}
-                iconActiveColor="wallet"
-                onClick={handleOpenReceiveModal}
-                disabled={noAccounts || navigationLocked}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"exchange"}
-                label={t("sidebar.exchange")}
-                icon={IconExchange}
-                iconActiveColor="wallet"
-                onClick={handleClickExchange}
-                isActive={location.pathname === "/exchange"}
-                disabled={noAccounts}
-                collapsed={secondAnim}
-              />
-              <SideBarListItem
-                id={"swap"}
-                label={t("sidebar.swap")}
-                icon={IconSwap}
-                iconActiveColor="wallet"
-                onClick={handleClickSwap}
-                isActive={location.pathname.startsWith("/swap")}
-                disabled={noAccounts}
-                collapsed={secondAnim}
-              />
-              {lendingEnabled && (
                 <SideBarListItem
-                  id={"lend"}
-                  label={t("sidebar.lend")}
-                  icon={IconLending}
+                  id={"market"}
+                  label={t("sidebar.market")}
+                  icon={IconMarket}
                   iconActiveColor="wallet"
-                  onClick={handleClickLend}
-                  isActive={location.pathname === "/lend"}
+                  onClick={handleClickMarket}
+                  isActive={location.pathname === "/market"}
+                  collapsed={secondAnim}
+                />
+                <FeatureToggle feature="learn">
+                  <SideBarListItem
+                    id="learn"
+                    label={t("sidebar.learn")}
+                    icon={Icons.GraduationMedium}
+                    iconSize={20}
+                    iconActiveColor="wallet"
+                    isActive={location.pathname.startsWith("/learn")}
+                    onClick={handleClickLearn}
+                    collapsed={secondAnim}
+                  />
+                </FeatureToggle>
+                <SideBarListItem
+                  id={"accounts"}
+                  label={t("sidebar.accounts")}
+                  icon={IconWallet}
+                  iconActiveColor="wallet"
+                  isActive={location.pathname.startsWith("/account")}
+                  onClick={handleClickAccounts}
                   disabled={noAccounts}
                   collapsed={secondAnim}
-                  NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
                 />
-              )}
-              <SideBarListItem
-                id={"card"}
-                label={t("sidebar.card")}
-                icon={IconCard}
-                iconActiveColor="wallet"
-                isActive={location.pathname === "/card"}
-                onClick={handleClickCard}
-                collapsed={secondAnim}
-                disabled={isCardDisabled}
-              />
-              <SideBarListItem
-                id={"manager"}
-                label={t("sidebar.manager")}
-                icon={IconManager}
-                iconActiveColor="wallet"
-                onClick={handleClickManager}
-                isActive={location.pathname === "/manager"}
-                NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
-                collapsed={secondAnim}
-              />
-              <Space of={30} />
-            </SideBarList>
-            <StarredAcountList>
-              <Space grow of={30} />
-
-              <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
-                <Separator />
-              </Hide>
-
-              <SideBarList scroll flex="1 1 40%" title={t("sidebar.stars")} collapsed={secondAnim}>
-                <Stars pathname={location.pathname} collapsed={secondAnim} />
+                <SideBarListItem
+                  id={"catalog"}
+                  label={t("sidebar.catalog")}
+                  icon={IconApps}
+                  iconActiveColor="wallet"
+                  isActive={location.pathname.startsWith("/platform")}
+                  onClick={handleClickCatalog}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  id={"send"}
+                  label={t("send.title")}
+                  icon={IconSend}
+                  iconActiveColor="wallet"
+                  onClick={handleOpenSendModal}
+                  disabled={noAccounts || navigationLocked}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  id={"receive"}
+                  label={t("receive.title")}
+                  icon={IconReceive}
+                  iconActiveColor="wallet"
+                  onClick={handleOpenReceiveModal}
+                  disabled={noAccounts || navigationLocked}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  id={"exchange"}
+                  label={t("sidebar.exchange")}
+                  icon={IconExchange}
+                  iconActiveColor="wallet"
+                  onClick={handleClickExchange}
+                  isActive={location.pathname === "/exchange"}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                />
+                <SideBarListItem
+                  id={"swap"}
+                  label={t("sidebar.swap")}
+                  icon={IconSwap}
+                  iconActiveColor="wallet"
+                  onClick={handleClickSwap}
+                  isActive={location.pathname.startsWith("/swap")}
+                  disabled={noAccounts}
+                  collapsed={secondAnim}
+                />
+                {lendingEnabled && (
+                  <SideBarListItem
+                    id={"lend"}
+                    label={t("sidebar.lend")}
+                    icon={IconLending}
+                    iconActiveColor="wallet"
+                    onClick={handleClickLend}
+                    isActive={location.pathname === "/lend"}
+                    disabled={noAccounts}
+                    collapsed={secondAnim}
+                    NotifComponent={firstTimeLend ? <Dot collapsed={collapsed} /> : null}
+                  />
+                )}
+                <SideBarListItem
+                  id={"card"}
+                  label={t("sidebar.card")}
+                  icon={IconCard}
+                  iconActiveColor="wallet"
+                  isActive={location.pathname === "/card"}
+                  onClick={handleClickCard}
+                  collapsed={secondAnim}
+                  disabled={isCardDisabled}
+                />
+                <SideBarListItem
+                  id={"manager"}
+                  label={t("sidebar.manager")}
+                  icon={IconManager}
+                  iconActiveColor="wallet"
+                  onClick={handleClickManager}
+                  isActive={location.pathname === "/manager"}
+                  NotifComponent={displayBlueDot ? <Dot collapsed={collapsed} /> : null}
+                  collapsed={secondAnim}
+                />
+                <Space of={30} />
               </SideBarList>
-            </StarredAcountList>
-            <Space of={30} grow />
-            <TagContainer collapsed={!secondAnim} />
+              <Box>
+                <Space grow of={30} />
+                <Hide visible={secondAnim && hasStarredAccounts} mb={"-8px"}>
+                  <Separator />
+                </Hide>
+                <SideBarList
+                  scroll
+                  flex="1 1 40%"
+                  title={t("sidebar.stars")}
+                  collapsed={secondAnim}
+                >
+                  <Stars pathname={location.pathname} collapsed={secondAnim} />
+                </SideBarList>
+              </Box>
+              <Space of={30} grow />
+              <TagContainer collapsed={!secondAnim} />
+            </SideBarScrollContainer>
           </SideBar>
         );
       }}

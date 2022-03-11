@@ -3,6 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class Layout {
   readonly page: Page;
   readonly totalBalance: Locator;
+  readonly pageScroller: Locator;
   readonly loadingLogo: Locator;
   readonly logo: Locator;
   readonly bigSpinner: Locator;
@@ -10,6 +11,7 @@ export class Layout {
   readonly inputWarning: Locator;
   readonly drawerCollapseButton: Locator;
   readonly drawerPortfolioButton: Locator;
+  readonly drawerMarketButton: Locator;
   readonly drawerAccountsButton: Locator;
   readonly drawerDiscoverButton: Locator;
   readonly drawerSendButton: Locator;
@@ -37,6 +39,7 @@ export class Layout {
     // drawer
     this.drawerCollapseButton = page.locator("data-test-id=drawer-collapse-button");
     this.drawerPortfolioButton = page.locator("data-test-id=drawer-dashboard-button");
+    this.drawerMarketButton = page.locator("data-test-id=drawer-market-button");
     this.drawerAccountsButton = page.locator("data-test-id=drawer-accounts-button");
     this.drawerDiscoverButton = page.locator("data-test-id=drawer-catalog-button");
     this.drawerSendButton = page.locator("data-test-id=drawer-send-button");
@@ -57,6 +60,7 @@ export class Layout {
     this.discreetTooltip = page.locator("#tippy-12"); //automatically generated tippy id but it's consistent
 
     // general
+    this.pageScroller = page.locator("id=page-scroller");
     this.loadingLogo = page.locator("id=loading-logo");
     this.logo = page.locator("data-test-id=logo");
     this.inputError = page.locator("id=input-error"); // no data-test-id because css style is applied
@@ -69,6 +73,10 @@ export class Layout {
 
   async goToPortfolio() {
     await this.drawerPortfolioButton.click();
+  }
+
+  async goToMarket() {
+    await this.drawerMarketButton.click();
   }
 
   async goToAccounts() {
