@@ -19,9 +19,11 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
 
 import nanoS from "./assets/nanoS.png";
+import blue from "./assets/blue.png";
 import nanoX from "./assets/nanoX.png";
 import nanoSP from "./assets/nanoSP.png";
 import nanoSDark from "./assets/nanoS_dark.png";
+import blueDark from "./assets/blue_dark.png";
 import nanoXDark from "./assets/nanoX_dark.png";
 import nanoSPDark from "./assets/nanoSP_dark.png";
 
@@ -41,6 +43,11 @@ const illustrations = {
     dark: nanoSPDark,
     width: 332,
   },
+  blue: {
+    light: blue,
+    dark: blue,
+    width: 64,
+  },
 };
 
 const Illustration: ThemedComponent<{ modelId: string }> = styled.div`
@@ -53,7 +60,7 @@ const Illustration: ThemedComponent<{ modelId: string }> = styled.div`
 
 const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
-  const modelId = lastSeenDevice?.modelId || "nanoS";
+  const modelId = process.env.OVERRIDE_MODEL_ID || lastSeenDevice?.modelId || "nanoS";
   const [readyToDecide, setReadyToDecide] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
   const device = useSelector(getCurrentDevice);
