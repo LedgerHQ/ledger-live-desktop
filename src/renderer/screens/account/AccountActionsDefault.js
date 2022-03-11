@@ -5,6 +5,7 @@ import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconSwap from "~/renderer/icons/Swap";
 import IconExchange from "~/renderer/icons/Exchange";
+// $FlowFixMe
 import Button from "~/renderer/components/Button.ui.tsx";
 import { Flex } from "@ledgerhq/react-ui";
 type Props = {

@@ -119,8 +119,12 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-start;
     padding-left: 5px;
   }
+  ${TableCellBase}:nth-child(7) {
+    flex: 1 0 130px;
+    justify-content: flex-end;
+  }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 230px;
+    flex: 1 0 130px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
@@ -140,7 +144,7 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-end;
   }
   
-  ${TableCellBase}:nth-child(7) {
+  ${TableCellBase}:nth-child(8) {
     flex: 0 0 40px;
     justify-content: flex-end;
     padding-right: 5px;
@@ -321,13 +325,14 @@ function MarketList({
               #
             </SortTableCell>
             <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
+
             <TableCell disabled>{t("market.marketList.price")}</TableCell>
             <TableCell disabled>{t("market.marketList.change")}</TableCell>
 
             <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
 
             <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
-
+            <TableCell disabled>{t("common.exchange")}</TableCell>
             <TableCell
               data-test-id="market-star-button"
               disabled={starredMarketCoins.length <= 0 && starred.length <= 0}
