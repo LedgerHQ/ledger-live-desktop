@@ -103,6 +103,7 @@ const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
     };
   }, [readyToDecide, device, onTryAgain]);
 
+  // $FlowFixMe TODO
   if (showSpinner) return <Wrapper>{renderLoading({ modelId })}</Wrapper>;
 
   return (
