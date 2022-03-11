@@ -108,11 +108,11 @@ test("Live App", async ({ page }) => {
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-verify-account-connect-nano.png",
     });
+    await device.complete();
   });
 
   await test.step("Verify Address - get address", async () => {
-    await discoverPage.letLiveAppLoad();
-    // longer wait required
+    await modal.waitForModalToDisappear();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-verify-account-get-address.png",
     });
