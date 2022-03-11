@@ -53,11 +53,7 @@ export const experimentalFeatures: Feature[] = [
     description: (
       <Trans i18nKey="settings.experimental.features.experimentalJSCurrencies.description" />
     ),
-<<<<<<< HEAD
     valueOn: "tezos,cosmos",
-=======
-    valueOn: "tezos",
->>>>>>> develop
     valueOff: "",
   },
   ...(experimentalCurrencies.length
