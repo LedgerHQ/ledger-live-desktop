@@ -128,8 +128,8 @@ export const experimentalFeatures: Feature[] = [
     title: "Experimental countervalues API",
     description:
       "This may cause the countervalues displayed for your accounts to become incorrect.",
-    valueOn: "https://countervalues.live.ledger.com",
-    valueOff: "https://countervalues-experimental.live.ledger.com",
+    valueOn: "https://countervalues-experimental.live.ledger.com",
+    valueOff: "https://countervalues.live.ledger.com",
   },
   {
     type: "integer",
