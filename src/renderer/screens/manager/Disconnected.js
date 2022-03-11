@@ -45,7 +45,7 @@ const illustrations = {
   },
   blue: {
     light: blue,
-    dark: blue,
+    dark: blueDark,
     width: 64,
   },
 };
