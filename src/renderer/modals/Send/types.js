@@ -45,6 +45,7 @@ export type StepProps = {
   currencyName: ?string,
 
   isNFTSend?: boolean,
+  wallectConnectProxy?: boolean,
   maybeNFTId?: string,
   maybeNFTCollection?: string,
   onChangeQuantities: any => void,

@@ -136,6 +136,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const isNFTSend = !!params.isNFTSend;
+  const walletConnectProxy = !!params.walletConnectProxy;
   const [steps] = useState(() => createSteps(params.disableBacks));
 
   // initial values might coming from deeplink
@@ -304,6 +305,7 @@ const Body = ({
     maybeRecipient,
     onResetMaybeRecipient,
     updateTransaction,
+    walletConnectProxy,
     onConfirmationHandler: params.onConfirmationHandler,
     onFailHandler: params.onFailHandler,
     isNFTSend,

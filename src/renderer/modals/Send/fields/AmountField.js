@@ -26,6 +26,7 @@ type Props = {
   bridgePending: boolean,
   t: TFunction,
   initValue?: BigNumber,
+  disabled?: boolean,
   resetInitValue?: () => void,
 };
 
@@ -39,6 +40,7 @@ const AmountField = ({
   t,
   initValue,
   resetInitValue,
+  disabled,
 }: Props) => {
   const bridge = getAccountBridge(account, parentAccount);
 
@@ -102,7 +104,7 @@ const AmountField = ({
         ) : null}
       </Box>
       <RequestAmount
-        disabled={!!useAllAmount}
+        disabled={!!useAllAmount || disabled}
         account={account}
         validTransactionError={amountError}
         validTransactionWarning={amountWarning}
