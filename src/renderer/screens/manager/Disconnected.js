@@ -60,7 +60,7 @@ const Illustration: ThemedComponent<{ modelId: string }> = styled.div`
 
 const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
-  const modelId = process.env.OVERRIDE_MODEL_ID || lastSeenDevice?.modelId || "nanoS";
+  const modelId = process.env.OVERRIDE_MODEL_ID || lastSeenDevice?.modelId || "nanoSP";
   const [readyToDecide, setReadyToDecide] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
   const device = useSelector(getCurrentDevice);
