@@ -108,7 +108,7 @@ test("Live App", async ({ page }) => {
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-verify-account-connect-nano.png",
     });
-    await device.complete();
+    await device.complete(); // so the mock device is shut and doesn't cause issues with later tests
   });
 
   await test.step("Verify Address - get address", async () => {
