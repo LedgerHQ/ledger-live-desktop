@@ -1612,9 +1612,9 @@
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
         "plugin": "アプリに移動する",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "swap": "スワップ",
+        "tool": "詳細はこちら",
+        "app": "詳細はこちら"
       },
       "uninstall": {
         "title": "すべてアンインストール",
@@ -2709,8 +2709,8 @@
       "addLocalAppButton": "画面をチェックする",
       "runLocalAppDeleteButton": "削除",
       "runLocalAppOpenButton": "開く",
-      "enableLearnStagingUrl": "Learn page staging URL",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrl": "学習ページのステージングURL",
+      "enableLearnStagingUrlDesc": "学習ページのステージングURLを有効にする。"
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
@@ -2760,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Tezosに試験的JS実装を使用する。"
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "利用可能な試験的暗号資産の統合を使用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2791,8 +2791,8 @@
           "description": "プロバイダー管理でアプリプロバイダーを変更すると、Ledgerデバイスにアプリをインストールまたはアンインストールできなくなる場合があります。"
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottieアニメーションのテスト",
+          "description": "Ledger Liveで使用される全アニメーションをテストする"
         }
       }
     },
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "特定の設定に必要な{{appName}}アプリが見つかりません。",
+      "description": "管理画面からアプリの再インストールを試す"
     },
     "countervaluesUnavailable": {
       "title": "現在、この資産のカウンターバリュー（表示通貨）を提供できません。"
@@ -3734,8 +3734,8 @@
       "description": "予期しないエラーが発生しました。もう一度お試しください。"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "お使いのデバイスはまだ使用できません",
+      "description": "Ledger Liveを使用する前にデバイスを設定する。"
     },
     "DeviceSocketFail": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
