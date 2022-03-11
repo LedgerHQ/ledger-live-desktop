@@ -36,7 +36,7 @@ const StepAmount = ({
   updateTransaction,
   currencyName,
   isNFTSend,
-  walletConnectProxy
+  walletConnectProxy,
 }: StepProps) => {
   const allNfts = useSelector(getAllNFTs);
   const nft = allNfts?.find(nft => nft.tokenId === transaction?.tokenIds?.[0]);

@@ -42,6 +42,7 @@ type OwnProps = {|
     amount?: BigNumber,
     disableBacks?: string[],
     isNFTSend?: boolean,
+    walletConnectProxy?: boolean,
     nftId?: string,
     nftCollection?: string,
     transaction?: Transaction,
