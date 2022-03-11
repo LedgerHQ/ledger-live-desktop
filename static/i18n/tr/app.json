@@ -1189,11 +1189,11 @@
   "learn": {
     "title": "Öğren",
     "noConnection": "Bağlantı yok",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "noConnectionDesc": "İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
     "sectionShows": "Shows",
-    "sectionVideo": "Video",
+    "sectionVideo": "Videolar",
     "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "sectionArticles": "Makaleler"
   },
   "market": {
     "title": "Piyasa",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "Bu eylemi tamamlamak için {{appName}} uygulaması gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "appNotInstalled_plural": "Bu işlemi tamamlamak için {{appName}} uygulamaları gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "openManager": "Yöneticiyi Aç",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "Cihazı kurun",
     "outdated": "Uygulama sürümü eski",
     "outdatedDesc": "Cihazınızdaki {{appName}} uygulaması için önemli bir güncelleme mevcut. Güncellemek için lütfen Yöneticiye gidin.",
     "installApp": "{{appName}} Uygulama yüklemesi",
@@ -1611,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
         "intallParentApp": "{{appName}} uygulamasını yükleyin",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "Uygulamaya git",
+        "swap": "Takas",
+        "tool": "Daha fazla bilgi",
+        "app": "Daha fazla bilgi"
       },
       "uninstall": {
         "title": "Tümünü kaldır",
@@ -2710,7 +2710,7 @@
       "runLocalAppDeleteButton": "Sil",
       "runLocalAppOpenButton": "Aç",
       "enableLearnStagingUrl": "Öğren sayfası test URL'si",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrlDesc": "Öğren sayfası için test ortamı URL'sini etkinleştirin."
     },
     "currencies": {
       "selectPlaceholder": "Kripto varlık seç",
@@ -2760,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Tezos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Mevcut deneysel kripto varlık entegrasyonlarını kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -2791,8 +2791,8 @@
           "description": "Yönetici'de uygulama sağlayıcısını değiştirmek, Ledger cihazınıza uygulama yüklemeyi veya kaldırmayı imkansız hale getirebilir."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottie animasyonlarını test edin",
+          "description": "Ledger Live'da kullanılan tüm animasyonları test edin"
         }
       }
     },
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "Yapılandırmanız için {{appName}} uygulaması bulunamadı.",
+      "description": "Uygulamayı Yöneticiden yeniden yüklemeyi deneyin"
     },
     "countervaluesUnavailable": {
       "title": "Şu anda bu varlık için bir karşı değer sağlayamıyoruz"
@@ -3734,8 +3734,8 @@
       "description": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin"
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "Cihazınız henüz kullanıma hazır değil",
+      "description": "Ledger Live ile kullanmaya başlamadan önce cihazınızı kurun."
     },
     "DeviceSocketFail": {
       "title": "Lütfen Ledger cihazınızı yeniden başlatın ve tekrar deneyin",
@@ -3965,7 +3965,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Please check that your hardware wallet is set up with the recovery phrase or passphrase associated to the selected account."
+      "description": "Lütfen donanım cüzdanınızın, seçilen hesapla bağlantılı kurtarma ifadesi veya passphrase ile kurulmuş olduğundan emin olun."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Uygulama güncellemesi gerekli",
