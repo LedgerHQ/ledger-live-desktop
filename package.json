@@ -35,7 +35,6 @@
     "release": "node ./tools/dist --publish -v",
     "ci": "node ./tools/ci.js",
     "test": "jest src",
-    "percy": "percy exec -- playwright test --config=tests/playwright.config.ts",
     "playwright": "nyc playwright test --config=tests/playwright.config.ts",
     "playwright-update-snapshots": "yarn playwright --update-snapshots",
     "playwright-recorder": "playwright test tests/specs/recorder.spec.ts"
@@ -152,8 +151,6 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.15.0",
     "@octokit/rest": "^18.12.0",
-    "@percy/cli": "^1.0.0-beta.76",
-    "@percy/playwright": "^1.0.1",
     "@playwright/test": "1.17.2",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
