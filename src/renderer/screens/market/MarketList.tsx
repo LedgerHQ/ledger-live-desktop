@@ -11,7 +11,6 @@ import InfiniteLoader from "react-window-infinite-loader";
 import AutoSizer from "react-virtualized-auto-sizer";
 import MarketRowItem from "./MarketRowItem";
 import LoadingPlaceholder from "../../components/LoadingPlaceholder";
-import NoCryptoFound from "./assets/noCryptoFound";
 import { Button } from ".";
 import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
@@ -20,6 +19,8 @@ import { useProviders } from "../exchange/Swap2/Form";
 import Track from "~/renderer/analytics/Track";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { getAllSupportedCryptoCurrencyTickers } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import Image from "~/renderer/components/Image";
+import NoResultsFound from "~/renderer/images/no-results-found.png";
 
 type Props = {
   data: MarketDataContextType;
@@ -128,11 +129,11 @@ export const TableRow = styled(Flex).attrs({
     padding-left: 5px;
   }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 250px;
+    flex: 1 0 230px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
-    flex: 1 0 150px;
+    flex: 1 0 80px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(4) {
@@ -172,7 +173,7 @@ const NoCryptoPlaceholder = ({ requestParams, t, resetSearch }: any) => (
   >
     <Track event="Page Market Search" success={false} />
     <Flex justifyContent="center" alignItems="center">
-      <NoCryptoFound size={75} />
+      <Image alt="no result found" resource={NoResultsFound} width={192} height={192} />
     </Flex>
     <Text variant="large" my={3} textAlign="center">
       {t("market.warnings.noCryptosFound")}
@@ -274,7 +275,7 @@ function MarketList({
   } = useMarketData();
   const dispatch = useDispatch();
 
-  const { orderBy, order, starred, search } = requestParams;
+  const { orderBy, order, starred, search, range } = requestParams;
   const currenciesLength = marketData.length;
   const freshLoading = loading && !currenciesLength;
 
@@ -328,6 +329,7 @@ function MarketList({
           )}
           <TableRow header>
             <SortTableCell
+              data-test-id="market-sort-button"
               onClick={toggleSortBy}
               orderByKey="market_cap"
               orderBy={orderBy}
@@ -337,7 +339,9 @@ function MarketList({
             </SortTableCell>
             <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
             <TableCell disabled>{t("market.marketList.price")}</TableCell>
-            <TableCell disabled>{t("market.marketList.change")}</TableCell>
+            <TableCell disabled>
+              {t("market.marketList.change")} ({range})
+            </TableCell>
             {width > miniMarketCapThreshold && (
               <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
             )}
@@ -345,6 +349,7 @@ function MarketList({
               <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
             )}
             <TableCell
+              data-test-id="market-star-button"
               disabled={starredMarketCoins.length <= 0 && starred.length <= 0}
               onClick={toggleStarredAccounts}
             >

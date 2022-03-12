@@ -23,7 +23,6 @@ import { openModal, closeModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { useCurrencyAccountSelect } from "~/renderer/components/PerCurrencySelectAccount/state";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
-import Image from "~/renderer/components/Image";
 
 const Container: ThemedComponent<{}> = styled.div`
   min-width: 365px;
@@ -31,18 +30,7 @@ const Container: ThemedComponent<{}> = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const IconContainer: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  margin-bottom: 12px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+
 const ConfirmButton: ThemedComponent<{}> = styled(Button)`
   width: 100%;
   display: flex;

@@ -1,7 +1,7 @@
 {
   "type": "dark",
   "primary": {
-    "main": "#bdb3ff",
+    "main": "#BBB0FF",
     "contrastText": "#000000"
   },
   "secondary": {

@@ -3,7 +3,6 @@ import { useCallback, useMemo } from "react";
 import { listCryptoCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
 
-import { supportedBuyCurrenciesIds, supportedSellCurrenciesIds } from "./config";
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";

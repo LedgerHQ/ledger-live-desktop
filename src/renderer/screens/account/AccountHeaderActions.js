@@ -30,7 +30,6 @@ import {
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import IconCoins from "~/renderer/icons/ClaimReward";

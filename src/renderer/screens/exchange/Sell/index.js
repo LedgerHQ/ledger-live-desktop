@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
