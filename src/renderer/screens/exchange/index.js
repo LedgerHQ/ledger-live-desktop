@@ -73,12 +73,14 @@ const Exchange = () => {
         onIndexChange={setActiveTabIndex}
       />
       <Card grow style={{ overflow: "hidden" }}>
-        <Component
-          defaultCurrencyId={state?.currencyId}
-          defaultAccountId={state?.accountId}
-          defaultTicker={state?.defaultTicker}
-          rampCatalog={rampCatalog}
-        />
+        {rampCatalog.value ? (
+          <Component
+            defaultCurrencyId={state?.currencyId}
+            defaultAccountId={state?.accountId}
+            defaultTicker={state?.defaultTicker}
+            rampCatalog={rampCatalog}
+          />
+        ) : null}
       </Card>
     </Container>
   );
