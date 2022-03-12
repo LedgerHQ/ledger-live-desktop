@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "Blue"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "Minuto",
@@ -192,6 +193,7 @@
   },
   "sidebar": {
     "card": "Tarjeta",
+    "learn": "Learn",
     "menu": "Menú",
     "stars": "Cuentas destacadas",
     "accounts": "Cuentas",
@@ -545,6 +547,9 @@
       "initialAmount": "Importe inicial",
       "creditedAmount": "Importe acreditado"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "Estado",
@@ -1181,6 +1186,9 @@
   "genuinecheck": {
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
   },
+  "learn": {
+    "title": "Learn"
+  },
   "market": {
     "title": "Mercado",
     "currency": "Divisa",
@@ -1596,7 +1604,10 @@
         "tokenAppDisclaimerInstalled": "Para administrar los tokens <1>{{tokenType}} {{tokenName}}</1>, por favor verifica que tienes la versión <1>{{tokenType}} </1> antes de enviarlos <3>a tu cuenta de {{appName}} </3>.",
         "goToAccounts": "Ir a cuentas",
         "intallParentApp": "Instalar aplicación {{appName}}",
-        "platform": "Ir a la App"
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "Desinstalar todas",
@@ -2744,7 +2755,7 @@
         },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
-          "description": "Usar integración experimental de Solana."
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2769,6 +2780,10 @@
         "forceProvider": {
           "title": "Proveedor de Manager",
           "description": "Cambiar el proveedor de aplicaciones en el Manager puede imposibilitar la instalación o desinstalación de aplicaciones en tu dispositivo Ledger."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },

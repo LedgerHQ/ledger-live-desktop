@@ -6,8 +6,11 @@ import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { Modal } from "~/renderer/components/Onboarding/Modal";
 import { saveSettings } from "~/renderer/actions/settings";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { notSeededDeviceRelaunchSelector } from "~/renderer/reducers/application";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
+import { setNotSeededDeviceRelaunch } from "~/renderer/actions/application";
 import { track } from "~/renderer/analytics/segment";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
@@ -195,6 +198,14 @@ const onboardingMachine = Machine({
         },
       })),
     },
+    ONBOARDING_NOT_SEEDED: {
+      target: "selectUseCase",
+      actions: [
+        assign((_, { deviceId }) => ({
+          deviceId,
+        })),
+      ],
+    },
   },
 });
 
@@ -227,6 +238,9 @@ const ScreenContainer = styled.div`
 
 export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
   const dispatch = useDispatch();
+  const currentDevice = useSelector(getCurrentDevice);
+  const notSeededDeviceRelaunch = useSelector(notSeededDeviceRelaunchSelector);
+
   const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -237,6 +251,13 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
       },
     },
   });
+
+  useEffect(() => {
+    if (notSeededDeviceRelaunch && currentDevice) {
+      sendEvent("ONBOARDING_NOT_SEEDED", { deviceId: currentDevice.modelId });
+      dispatch(setNotSeededDeviceRelaunch(false));
+    }
+  }, [currentDevice, dispatch, notSeededDeviceRelaunch, sendEvent]);
 
   useEffect(() => {
     const subscription = service.subscribe(state => {

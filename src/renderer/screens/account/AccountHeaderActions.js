@@ -40,6 +40,7 @@ import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -111,9 +112,13 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       return [false, false];
     }
 
+    const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(rampCatalog.value.onRamp);
+    const allSellableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.offRamp,
+    );
     return [
-      rampCatalog.value.onRamp.some(provider => provider.cryptoCurrencies.includes(currency.id)),
-      rampCatalog.value.offRamp.some(provider => provider.cryptoCurrencies.includes(currency.id)),
+      allBuyableCryptoCurrencyIds.includes(currency.id),
+      allSellableCryptoCurrencyIds.includes(currency.id),
     ];
   }, [rampCatalog.value, currency.id]);
 
@@ -252,8 +257,8 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
       <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {availableOnBuy && BuyHeader}
-      {availableOnSwap && SwapHeader}
+      {availableOnBuy ? BuyHeader : null}
+      {availableOnSwap ? SwapHeader : null}
       {manageActions.length > 0 && ManageActionsHeader}
     </FadeInButtonsContainer>
   );

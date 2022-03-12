@@ -102,6 +102,7 @@
     "react-lottie": "^1.2.3",
     "react-markdown": "^4.3.0",
     "react-motion": "^0.5.2",
+    "react-prismazoom": "^3.0.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "react-select": "^3.2.0",

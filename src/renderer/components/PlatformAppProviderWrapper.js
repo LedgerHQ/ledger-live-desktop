@@ -4,7 +4,8 @@ import { PlatformAppProvider } from "@ledgerhq/live-common/lib/platform/Platform
 import { catalogProviderSelector } from "~/renderer/reducers/settings";
 import { useSelector } from "react-redux";
 import { providers } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/providers";
-import { LiveAppProvider } from "@ledgerhq/live-common/lib/platform/providers/LiveAppProvider";
+import { RemoteLiveAppProvider } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
+import { LocalLiveAppProvider } from "@ledgerhq/live-common/lib/platform/providers/LocalLiveAppProvider";
 import { GlobalCatalogProvider } from "@ledgerhq/live-common/lib/platform/providers/GlobalCatalogProvider";
 import { RampCatalogProvider } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
@@ -22,14 +23,16 @@ export function PlatformAppProviderWrapper({ children }: Props) {
   }, [provider]);
 
   return (
-    <LiveAppProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
-      <GlobalCatalogProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
-        <RampCatalogProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
-          <PlatformAppProvider platformAppsServerURL={platformAppsServer.url}>
-            {children}
-          </PlatformAppProvider>
-        </RampCatalogProvider>
-      </GlobalCatalogProvider>
-    </LiveAppProvider>
+    <RemoteLiveAppProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
+      <LocalLiveAppProvider>
+        <GlobalCatalogProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
+          <RampCatalogProvider provider={provider} updateFrequency={AUTO_UPDATE_DEFAULT_DELAY}>
+            <PlatformAppProvider platformAppsServerURL={platformAppsServer.url}>
+              {children}
+            </PlatformAppProvider>
+          </RampCatalogProvider>
+        </GlobalCatalogProvider>
+      </LocalLiveAppProvider>
+    </RemoteLiveAppProvider>
   );
 }

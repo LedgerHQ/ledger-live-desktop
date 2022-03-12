@@ -79,8 +79,7 @@ const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTick
             type: "offRamp",
             cryptoCurrencyId: account.token ? account.token.id : account.currency.id,
             fiatCurrencyId: fiatCurrency.ticker,
-            amount: 400,
-            amountCurrency: "fiat",
+            fiatAmount: 400,
           }}
         />
       ) : (
@@ -90,7 +89,7 @@ const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTick
           defaultCurrencyId={defaultCurrencyId}
           defaultAccountId={defaultAccountId}
           confirmCb={confirmButtonTracking}
-          flow="buy"
+          flow="sell"
         />
       )}
     </BuyContainer>

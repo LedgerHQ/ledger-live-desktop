@@ -80,8 +80,7 @@ const OnRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalo
             type: "onRamp",
             cryptoCurrencyId: account.token ? account.token.id : account.currency.id,
             fiatCurrencyId: fiatCurrency.ticker,
-            amount: 400,
-            amountCurrency: "fiat",
+            fiatAmount: 400,
           }}
         />
       ) : (

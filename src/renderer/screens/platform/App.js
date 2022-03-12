@@ -1,13 +1,13 @@
 // @flow
 import React, { useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import useTheme from "~/renderer/hooks/useTheme";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
-import { useLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/LiveAppProvider";
+import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
+import { useLocalLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/LocalLiveAppProvider";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { useSelector } from "react-redux";
 
@@ -26,7 +26,10 @@ export default function PlatformApp({ match }: Props) {
   const history = useHistory();
   const { state: urlParams } = useLocation();
   const { appId } = match.params;
-  const manifest = useLiveAppManifest(appId);
+  const localManifest = useLocalLiveAppManifest(appId);
+  const remoteManifest = useRemoteLiveAppManifest(appId);
+
+  const manifest = localManifest || remoteManifest;
 
   console.log(appId, manifest);
 

@@ -39,6 +39,7 @@ type Props = {
   availableOnBuy: boolean;
   availableOnSwap: boolean;
   displayChart: boolean;
+  displayMarketCap: boolean;
 };
 
 function MarketRowItem({
@@ -53,6 +54,7 @@ function MarketRowItem({
   availableOnBuy,
   availableOnSwap,
   displayChart,
+  displayMarketCap,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -197,16 +199,18 @@ function MarketRowItem({
               />
             )}
           </TableCell>
-          <TableCell>
-            <Text>
-              {counterValueFormatter({
-                shorten: true,
-                currency: counterCurrency,
-                value: currency.marketcap,
-                locale,
-              })}
-            </Text>
-          </TableCell>
+          {displayMarketCap && (
+            <TableCell>
+              <Text>
+                {counterValueFormatter({
+                  shorten: true,
+                  currency: counterCurrency,
+                  value: currency.marketcap,
+                  locale,
+                })}
+              </Text>
+            </TableCell>
+          )}
           {displayChart && (
             <TableCell>
               {currency.sparklineIn7d && (

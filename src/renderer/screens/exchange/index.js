@@ -5,15 +5,13 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
-import type { Account } from "@ledgerhq/live-common/lib/types/account";
 import Box from "~/renderer/components/Box";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TabBar from "~/renderer/components/TabBar";
 import Card from "~/renderer/components/Box/Card";
 import OnRamp from "./Buy";
 import OffRamp from "./Sell";
-import { useExchangeProvider, useRampCatalogCurrencies } from "./hooks";
+import { useExchangeProvider } from "./hooks";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import type { RampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
 

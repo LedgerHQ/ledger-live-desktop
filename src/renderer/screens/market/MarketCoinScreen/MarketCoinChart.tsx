@@ -54,6 +54,7 @@ function Tooltip({
     <Flex flexDirection="column" p={1}>
       <TooltipText variant="large">
         {counterValueFormatter({
+          shorten: String(data.value).length > 7,
           currency: counterCurrency,
           value: data.value,
           locale,

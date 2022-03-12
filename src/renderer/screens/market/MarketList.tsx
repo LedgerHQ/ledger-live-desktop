@@ -13,14 +13,13 @@ import MarketRowItem from "./MarketRowItem";
 import LoadingPlaceholder from "../../components/LoadingPlaceholder";
 import NoCryptoFound from "./assets/noCryptoFound";
 import { Button } from ".";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
 import { useProviders } from "../exchange/Swap2/Form";
 import Track from "~/renderer/analytics/Track";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
-import { useRampCatalogCurrencies } from "~/renderer/screens/exchange/hooks";
+import { getAllSupportedCryptoCurrencyTickers } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 
 type Props = {
   data: MarketDataContextType;
@@ -63,7 +62,8 @@ const ChevronContainer = styled(Flex).attrs({ m: 1 })<{
   }
 `;
 
-export const miniChartThreshold = 1050;
+export const miniChartThreshold = 1150;
+export const miniMarketCapThreshold = 1050;
 
 export const SortTableCell = ({
   onClick,
@@ -128,16 +128,22 @@ export const TableRow = styled(Flex).attrs({
     padding-left: 5px;
   }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 150px;
+    flex: 1 0 250px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
     flex: 1 0 150px;
     justify-content: flex-end;
   }
-  ${TableCellBase}:nth-child(4),
-  ${TableCellBase}:nth-child(5) {
+  ${TableCellBase}:nth-child(4) {
     flex: 1 0 100px;
+    justify-content: flex-end;
+  }
+  ${TableCellBase}:nth-child(5) {
+    @media (min-width: ${miniMarketCapThreshold}px) {
+      flex: 1 0 150px;
+    }
+    flex: 1 0 70px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(6) {
@@ -202,6 +208,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   onRampAvailableTickers,
   style,
   displayChart,
+  displayMarketCap,
 }: any) {
   const currency = data ? data[index] : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
@@ -221,6 +228,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
       availableOnSwap={availableOnSwap}
       style={{ ...style }}
       displayChart={displayChart}
+      displayMarketCap={displayMarketCap}
     />
   );
 });
@@ -237,19 +245,15 @@ function MarketList({
   const { providers, storedProviders } = useProviders();
   const rampCatalog = useRampCatalog();
 
-  const buyableCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
-  const sellableCurrencies = useRampCatalogCurrencies(rampCatalog.value.offRamp);
-
   const [onRampAvailableTickers, offRampAvailableTickers] = useMemo(() => {
     if (!rampCatalog.value) {
       return [[], []];
     }
-
     return [
-      buyableCurrencies.map(currency => currency.ticker),
-      sellableCurrencies.map(currency => currency.ticker),
+      getAllSupportedCryptoCurrencyTickers(rampCatalog.value.onRamp),
+      getAllSupportedCryptoCurrencyTickers(rampCatalog.value.offRamp),
     ];
-  }, [rampCatalog.value, buyableCurrencies, sellableCurrencies]);
+  }, [rampCatalog.value]);
 
   const swapAvailableIds =
     providers || storedProviders
@@ -334,7 +338,9 @@ function MarketList({
             <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
             <TableCell disabled>{t("market.marketList.price")}</TableCell>
             <TableCell disabled>{t("market.marketList.change")}</TableCell>
-            <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
+            {width > miniMarketCapThreshold && (
+              <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
+            )}
             {width > miniChartThreshold && (
               <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
             )}
@@ -401,6 +407,7 @@ function MarketList({
                             swapAvailableIds={swapAvailableIds}
                             displayChart={width > miniChartThreshold}
                             onRampAvailableTickers={onRampAvailableTickers}
+                            displayMarketCap={width > miniMarketCapThreshold}
                           />
                         )}
                       </List>

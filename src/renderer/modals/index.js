@@ -32,6 +32,7 @@ import MODAL_PLATFORM_EXCHANGE_START from "./Platform/Exchange/StartExchange";
 import MODAL_PLATFORM_EXCHANGE_COMPLETE from "./Platform/Exchange/CompleteExchange";
 
 import MODAL_FULL_NODE from "./FullNode";
+import MODAL_LOTTIE_DEBUGGER from "./LottieDebugger";
 import MODAL_RECOVERY_SEED_WARNING from "./RecoverySeedWarning";
 
 import MODAL_CLAIM_REWARDS from "./ClaimRewards";
@@ -118,6 +119,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
   MODAL_FULL_NODE,
+  MODAL_LOTTIE_DEBUGGER,
   MODAL_RECOVERY_SEED_WARNING,
   // Lending
   MODAL_LEND_MANAGE,

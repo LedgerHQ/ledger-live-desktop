@@ -8,7 +8,7 @@ import Text from "~/renderer/components/Text";
 import IconChevronRight from "~/renderer/icons/ChevronRightSmall";
 import { useTranslation } from "react-i18next";
 import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
-import { useLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/LiveAppProvider";
+import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 import {
   RampLiveAppCatalogEntry,
   RampCatalogEntry,
@@ -23,7 +23,10 @@ import paypalLogo from "./assets/paypal.svg";
 import sepaLogo from "./assets/sepa.svg";
 import visaLogo from "./assets/visa.svg";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
-import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import {
+  filterRampCatalogEntries,
+  mapQueryParamsForProvider,
+} from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { useSelector } from "react-redux";
 
@@ -106,7 +109,7 @@ type ProviderCardProps = {
 };
 
 function ProviderCard({ provider, onClick }: ProviderCardProps) {
-  const manifest = useLiveAppManifest(provider.appId);
+  const manifest = useRemoteLiveAppManifest(provider.appId);
 
   if (!manifest) {
     return null;
@@ -155,8 +158,8 @@ type TradeParams = {
   type: "onRamp" | "offRamp",
   cryptoCurrencyId: string,
   fiatCurrencyId: string,
-  amount: number,
-  amountCurrency: "crypto" | "fiat",
+  fiatAmount?: number,
+  cryptoAmount?: number,
 };
 
 type ProviderViewProps = {
@@ -167,32 +170,26 @@ type ProviderViewProps = {
 };
 
 function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) {
-  const manifest = useLiveAppManifest(provider.appId);
-  const inputs = {};
+  const manifest = useRemoteLiveAppManifest(provider.appId);
+  const theme = useTheme();
+  const language = useSelector(languageSelector);
+  const cryptoCurrency = provider.cryptoCurrencies.find(
+    crypto => crypto.id === trade.cryptoCurrencyId,
+  );
+  const inputs = mapQueryParamsForProvider(provider, {
+    accountId: account.id,
+    accountAddress: account.freshAddress,
+    cryptoCurrencyId: cryptoCurrency ? cryptoCurrency.providerId : undefined,
+    fiatCurrencyId: trade.fiatCurrencyId.toLocaleLowerCase(),
+    primaryColor: theme.colors.palette.primary.main,
+    type: trade.type,
+    theme: theme.colors.palette.type,
+    language,
+    fiatAmount: trade.fiatAmount,
+    cryptoAmount: trade.cryptoAmount,
+  });
 
-  inputs.theme = useTheme("colors.palette.type");
-  inputs.lang = useSelector(languageSelector);
-
-  if (account) {
-    inputs.accountId = account.id;
-  }
-
-  if (trade.cryptoCurrencyId) {
-    inputs.cryptoCurrencyId = trade.cryptoCurrencyId;
-  }
-
-  if (trade.fiatCurrencyId) {
-    inputs.fiatCurrencyId = trade.fiatCurrencyId;
-  }
-
-  if (trade.type) {
-    inputs.mode = trade.type;
-  }
-
-  if (trade.amount && trade.amountCurrency) {
-    inputs.amount = trade.amount;
-    inputs.amountCurrency = trade.amountCurrency;
-  }
+  console.log({ provider, inputs });
 
   return <WebPlatformPlayer onClose={onClose} manifest={manifest} inputs={inputs} />;
 }

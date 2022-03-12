@@ -10,7 +10,7 @@ import type { AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import { useSelector } from "react-redux";
 import { blacklistedTokenIdsSelector } from "~/renderer/reducers/settings";
 import { RampCatalogEntry } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/types";
-import { getAllSupportedCryptoCurrencies } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 
 import coinifyIcon from "~/renderer/images/coinifyLogo.png";
 
@@ -28,7 +28,7 @@ export const useRampCatalogCurrencies = (entries: RampCatalogEntry[]) => {
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   // cherry picking only those available in coinify
 
-  const supportedCurrenciesIds = getAllSupportedCryptoCurrencies(entries);
+  const supportedCurrenciesIds = getAllSupportedCryptoCurrencyIds(entries);
   /** $FlowFixMe */
   const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(
     currency =>

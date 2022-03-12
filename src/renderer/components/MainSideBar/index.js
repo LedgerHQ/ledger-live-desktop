@@ -7,6 +7,8 @@ import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
+import { Icons } from "@ledgerhq/react-ui";
 
 import {
   accountsSelector,
@@ -231,6 +233,10 @@ const MainSideBar = () => {
     push("/card");
   }, [push]);
 
+  const handleClickLearn = useCallback(() => {
+    push("/learn");
+  }, [push]);
+
   const handleClickDashboard = useCallback(() => {
     push("/");
   }, [push]);
@@ -313,7 +319,6 @@ const MainSideBar = () => {
                 NotifComponent={<UpdateDot collapsed={collapsed} />}
                 collapsed={secondAnim}
               />
-
               <SideBarListItem
                 id={"market"}
                 label={t("sidebar.market")}
@@ -323,13 +328,24 @@ const MainSideBar = () => {
                 isActive={location.pathname === "/market"}
                 collapsed={secondAnim}
               />
-
+              <FeatureToggle feature="learn">
+                <SideBarListItem
+                  id="learn"
+                  label={t("sidebar.learn")}
+                  icon={Icons.GraduationMedium}
+                  iconSize={20}
+                  iconActiveColor="wallet"
+                  isActive={location.pathname.startsWith("/learn")}
+                  onClick={handleClickLearn}
+                  collapsed={secondAnim}
+                />
+              </FeatureToggle>
               <SideBarListItem
                 id={"accounts"}
                 label={t("sidebar.accounts")}
                 icon={IconWallet}
                 iconActiveColor="wallet"
-                isActive={location.pathname === "/accounts"}
+                isActive={location.pathname.startsWith("/account")}
                 onClick={handleClickAccounts}
                 disabled={noAccounts}
                 collapsed={secondAnim}

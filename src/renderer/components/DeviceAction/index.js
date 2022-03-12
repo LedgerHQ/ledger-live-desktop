@@ -4,7 +4,12 @@ import { createStructuredSelector } from "reselect";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
 import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
-import { OutdatedApp, LatestFirmwareVersionRequired } from "@ledgerhq/live-common/lib/errors";
+import {
+  OutdatedApp,
+  LatestFirmwareVersionRequired,
+  DeviceNotOnboarded,
+  NoSuchAppOnProvider,
+} from "@ledgerhq/live-common/lib/errors";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { setPreferredDeviceModel, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
 import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
@@ -13,7 +18,7 @@ import AutoRepair from "~/renderer/components/AutoRepair";
 import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { ManagerNotEnoughSpaceError, UpdateYourApp } from "@ledgerhq/errors";
+import { ManagerNotEnoughSpaceError, UpdateYourApp, TransportStatusError } from "@ledgerhq/errors";
 import {
   InstallingApp,
   renderAllowManager,
@@ -252,6 +257,27 @@ const DeviceAction = <R, H, P>({
       return renderError({
         error,
         requireFirmwareUpdate: true,
+      });
+    }
+
+    // NB Until we find a better way, remap the error if it's 6d06 and we haven't fallen
+    // into another handled case.
+    if (
+      error instanceof DeviceNotOnboarded ||
+      (error instanceof TransportStatusError && error.message.includes("0x6d06"))
+    ) {
+      return renderError({
+        error: new DeviceNotOnboarded(),
+        withOnboardingCTA: true,
+        info: true,
+      });
+    }
+
+    if (error instanceof NoSuchAppOnProvider) {
+      return renderError({
+        error,
+        withOpenManager: true,
+        withExportLogs: true,
       });
     }
 
