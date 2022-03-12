@@ -1,7 +1,6 @@
 // @flow
 import { useCallback, useMemo } from "react";
 import { listCryptoCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
-import { useCurrenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies/sortByMarketcap";
 
 import useEnv from "@ledgerhq/live-common/lib/hooks/useEnv";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
@@ -21,15 +20,12 @@ export const useRampCatalogCurrencies = (entries: RampCatalogEntry[]) => {
     devMode,
   ]);
 
-  // sorting them by marketcap
-  const sortedCryptoCurrencies = useCurrenciesByMarketcap(cryptoCurrencies);
-
   const blacklistedTokenIds = useSelector(blacklistedTokenIdsSelector);
   // cherry picking only those available in coinify
 
   const supportedCurrenciesIds = getAllSupportedCryptoCurrencyIds(entries);
   /** $FlowFixMe */
-  const supportedCryptoCurrencies = sortedCryptoCurrencies.filter(
+  const supportedCryptoCurrencies = cryptoCurrencies.filter(
     currency =>
       supportedCurrenciesIds.includes(currency.id) && !blacklistedTokenIds.includes(currency.id),
   );

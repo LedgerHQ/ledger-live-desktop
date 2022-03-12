@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -13,6 +13,8 @@ import type { DProps } from "~/renderer/screens/exchange";
 import { ProviderList } from "../ProviderList";
 import { useRampCatalogCurrencies } from "../hooks";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -22,15 +24,33 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
 `;
 
-const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTicker }: DProps) => {
+const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalog }: DProps) => {
+  const [sortedCurrencies, setSortedCurrencies] = useState([]);
+
+  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.offRamp);
+
+  useEffect(() => {
+    const filteredCurrencies = defaultTicker
+      ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
+      : allCurrencies;
+
+    currenciesByMarketcap(filteredCurrencies).then(sortedCurrencies => {
+      setSortedCurrencies(sortedCurrencies);
+    });
+  }, []);
+
+  console.log({ sortedCurrencies });
+
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
+
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,
   });
 
-  const { account, parentAccount } = state;
-
   const dispatch = useDispatch();
+
+  const { account, parentAccount } = state;
 
   const reset = useCallback(() => {
     track("Page Sell Reset");
@@ -58,21 +78,16 @@ const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTick
     });
   }, []);
 
-  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.offRamp);
-  const allCurrenciesFiltered = defaultTicker
-    ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
-    : allCurrencies;
-
-  const fiatCurrency = useSelector(counterValueCurrencySelector);
-
   return (
     <BuyContainer>
       <TrackPage category="Sell Crypto" />
-      {account ? (
+      {sortedCurrencies.length === 0 ? (
+        <BigSpinner size={42} />
+      ) : account ? (
         <ProviderList
           account={account}
           parentAccount={parentAccount}
-          providers={rampCatalog.value.offRamp}
+          providers={rampCatalog.value.onRamp}
           onBack={reset}
           trade={{
             type: "offRamp",
@@ -84,7 +99,7 @@ const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTick
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
-          allCurrencies={allCurrenciesFiltered}
+          allCurrencies={sortedCurrencies}
           defaultCurrencyId={defaultCurrencyId}
           defaultAccountId={defaultAccountId}
           confirmCb={confirmButtonTracking}
@@ -95,4 +110,4 @@ const Coinify = ({ defaultCurrencyId, defaultAccountId, rampCatalog, defaultTick
   );
 };
 
-export default Coinify;
+export default OffRamp;

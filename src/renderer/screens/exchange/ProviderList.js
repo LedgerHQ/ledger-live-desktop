@@ -182,7 +182,7 @@ function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) 
     cryptoCurrencyId: cryptoCurrency ? cryptoCurrency.providerId : undefined,
     fiatCurrencyId: trade.fiatCurrencyId.toLocaleLowerCase(),
     primaryColor: theme.colors.palette.primary.main,
-    type: trade.type,
+    mode: trade.type,
     theme: theme.colors.palette.type,
     language,
     fiatAmount: trade.fiatAmount,

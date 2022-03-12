@@ -725,7 +725,7 @@
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy and sell crypto",
+      "header": "Buy crypto with our partners",
       "title": "Choose a provider to buy crypto",
       "buyFrom": "Buy from anywhere",
       "cryptoSupported": "crypto supported",
@@ -741,7 +741,7 @@
       }
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
+      "header": "Sell crypto with our partners",
       "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
