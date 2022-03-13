@@ -80,7 +80,7 @@ const OnRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalo
 
   return (
     <BuyContainer>
-      <TrackPage category="Buy Crypto" />
+      <TrackPage category="Multibuy" name="BuyPage" />
       {sortedCurrencies.length === 0 ? (
         <BigSpinner size={42} />
       ) : account ? (

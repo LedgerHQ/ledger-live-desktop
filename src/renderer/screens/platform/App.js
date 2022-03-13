@@ -3,7 +3,6 @@ import React, { useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import useTheme from "~/renderer/hooks/useTheme";
 
-import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
@@ -36,6 +35,11 @@ export default function PlatformApp({ match }: Props) {
   const handleClose = useCallback(() => history.push(`/platform`), [history]);
   const themeType = useTheme("colors.palette.type");
   const lang = useSelector(languageSelector);
+  const params = {
+    theme: themeType,
+    lang,
+    ...urlParams,
+  };
 
   // TODO for next urlscheme evolutions:
   // - check if local settings allow to launch an app from this branch, else display an error
@@ -43,17 +47,8 @@ export default function PlatformApp({ match }: Props) {
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
-      <TrackPage category="Platform" name="App" appId={appId} />
       {manifest ? (
-        <WebPlatformPlayer
-          manifest={manifest}
-          onClose={handleClose}
-          inputs={{
-            theme: themeType,
-            lang,
-            ...urlParams,
-          }}
-        />
+        <WebPlatformPlayer manifest={manifest} onClose={handleClose} inputs={params} />
       ) : null}
     </Card>
   );

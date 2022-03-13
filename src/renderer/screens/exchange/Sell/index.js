@@ -80,14 +80,14 @@ const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatal
 
   return (
     <BuyContainer>
-      <TrackPage category="Sell Crypto" />
+      <TrackPage category="Multibuy" name="SellPage" />
       {sortedCurrencies.length === 0 ? (
         <BigSpinner size={42} />
       ) : account ? (
         <ProviderList
           account={account}
           parentAccount={parentAccount}
-          providers={rampCatalog.value.onRamp}
+          providers={rampCatalog.value.offRamp}
           onBack={reset}
           trade={{
             type: "offRamp",

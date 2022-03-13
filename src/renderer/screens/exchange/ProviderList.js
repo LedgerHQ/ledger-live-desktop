@@ -5,6 +5,7 @@ import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
 import Text from "~/renderer/components/Text";
+import TrackPage from "~/renderer/analytics/TrackPage";
 import IconChevronRight from "~/renderer/icons/ChevronRightSmall";
 import { useTranslation } from "react-i18next";
 import LiveAppIcon from "~/renderer/components/WebPlatformPlayer/LiveAppIcon";
@@ -189,9 +190,17 @@ function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) 
     cryptoAmount: trade.cryptoAmount,
   });
 
-  console.log({ provider, inputs });
-
-  return <WebPlatformPlayer onClose={onClose} manifest={manifest} inputs={inputs} />;
+  return (
+    <>
+      <TrackPage
+        category="Multibuy"
+        name="ProviderLiveApp"
+        provider={provider.appId}
+        trade={trade}
+      />
+      <WebPlatformPlayer onClose={onClose} manifest={manifest} inputs={inputs} />;
+    </>
+  );
 }
 
 // account.token ? account.token.id : account.currency.id;
@@ -232,6 +241,7 @@ export function ProviderList({
 
   return (
     <Container>
+      <TrackPage category="Multibuy" name="ProviderList" trade={trade} />
       <Text ff="Inter|Regular" fontSize="13px" lineHeight="15.73px" color="palette.text.shade60">
         {t("exchange.chooseProviders", { providerCount: filteredProviders.length })}
       </Text>
