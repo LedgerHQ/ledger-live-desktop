@@ -1190,7 +1190,7 @@
     "title": "تعلم",
     "noConnection": "لايوجد اتصال",
     "noConnectionDesc": "يبدو أنه ليس لديك اتصال بالإنترنت. الرجاء التحقق من اتصالك وحاول مرة أخرى.",
-    "sectionShows": "Shows",
+    "sectionShows": "البرامج",
     "sectionVideo": "فيديو",
     "sectionPodcast": "بودكاست",
     "sectionArticles": "مقالات"
@@ -2709,8 +2709,8 @@
       "addLocalAppButton": "تصفح",
       "runLocalAppDeleteButton": "حذف",
       "runLocalAppOpenButton": "فتح",
-      "enableLearnStagingUrl": "Learn page staging URL",
-      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
+      "enableLearnStagingUrl": "الرابط المرحلي (staging URL) للصفحة التعليمية",
+      "enableLearnStagingUrlDesc": "تمكين الرابط المرحلي (staging URL) للصفحة التعليمية."
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2760,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "استخدم عمليات تنفيذ JS التجريبية لTezos."
         },
         "experimentalCurrencies": {
           "title": "تكاملات تجريبية",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "استخدم عمليات تكامل الأصول المشفرة التجريبية المتاحة."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2791,8 +2791,8 @@
           "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "اختبر الرسوم المتحركة Lottie",
+          "description": "اختبر جميع الرسوم المتحركة المستخدمة في Ledger Live"
         }
       }
     },
@@ -3602,8 +3602,8 @@
   },
   "errors": {
     "NoSuchAppOnProvider": {
-      "title": "The {{appName}} app cannot be found for your specific configuration.",
-      "description": "Try reinstalling the app from the Manager"
+      "title": "لا يمكن العثور على التطبيق {{appName}} للتهيئة الخاصة بك.",
+      "description": "حاول إعادة تثبيت التطبيق من المدير"
     },
     "countervaluesUnavailable": {
       "title": "نحن غير قادرين على توفير قيمة مقابلة لهذا الأصل في الوقت الحالي"
@@ -3734,8 +3734,8 @@
       "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
     },
     "DeviceNotOnboarded": {
-      "title": "Your device is not ready to use yet",
-      "description": "Set up your device before using it with Ledger Live."
+      "title": "جهازك غير جاهز للاستخدام بعد",
+      "description": "قم بإعداد جهازك قبل استخدامه مع Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
