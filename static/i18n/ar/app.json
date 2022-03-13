@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "بطاقة",
-    "learn": "Learn",
+    "learn": "تعلم",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "إختبر"
   },
   "fullNode": {
     "status": "الحالة",
@@ -1187,13 +1187,13 @@
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
   "learn": {
-    "title": "Learn",
-    "noConnection": "No connection",
-    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "title": "تعلم",
+    "noConnection": "لايوجد اتصال",
+    "noConnectionDesc": "يبدو أنه ليس لديك اتصال بالإنترنت. الرجاء التحقق من اتصالك وحاول مرة أخرى.",
     "sectionShows": "Shows",
-    "sectionVideo": "Video",
-    "sectionPodcast": "Podcast",
-    "sectionArticles": "Articles"
+    "sectionVideo": "فيديو",
+    "sectionPodcast": "بودكاست",
+    "sectionArticles": "مقالات"
   },
   "market": {
     "title": "سوق",
@@ -1493,7 +1493,7 @@
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "افتح المدير",
-    "openOnboarding": "Setup device",
+    "openOnboarding": "إعداد جهاز",
     "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "تثبيت تطبيق {{appName}}",
@@ -1611,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
         "intallParentApp": "تثبيت تطبيق {{appName}}",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "انتقل إلى التطبيق",
+        "swap": "مبادلة",
+        "tool": "معرفة المزيد",
+        "app": "معرفة المزيد"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
