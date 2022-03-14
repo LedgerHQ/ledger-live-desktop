@@ -65,7 +65,7 @@
     "reject": "거절",
     "cancel": "취소",
     "getSupport": "지원 받기",
-    "delete": "삭제",
+    "delete": "Remove account from portfolio",
     "launch": "실행",
     "continue": "계속",
     "previous": "이전",
@@ -2816,7 +2816,8 @@
     "removeAccountModal": {
       "title": "계정 제거",
       "desc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
-      "warning": "이 계정을 삭제하면 계정과 연결된 사용자의 스왑 트랜잭션 내역이 삭제됩니다."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "사용자 데이터 보기",
