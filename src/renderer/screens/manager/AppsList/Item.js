@@ -6,10 +6,11 @@ import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
 
 import styled from "styled-components";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 
 import ByteSize from "~/renderer/components/ByteSize";
 import Text from "~/renderer/components/Text";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
@@ -18,9 +19,6 @@ import IconInfoCircleFull from "~/renderer/icons/InfoCircleFull";
 import AppActions from "./AppActions";
 
 import AppIcon from "./AppIcon";
-import ExternalLink from "~/renderer/components/ExternalLink";
-import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
 
 const AppRow = styled.div`
   display: flex;
@@ -36,6 +34,7 @@ const AppName = styled.div`
   flex-direction: column;
   padding-left: 15px;
   max-height: 40px;
+  min-width: 160px;
   & > * {
     display: block;
   }
@@ -71,7 +70,6 @@ const Item: React$ComponentType<Props> = ({
   setAppUninstallDep,
   addAccount,
 }: Props) => {
-  const { t } = useTranslation();
   const { name, type } = app;
   const { deviceModel, deviceInfo } = state;
 
@@ -81,11 +79,8 @@ const Item: React$ComponentType<Props> = ({
     app.currencyId,
   ]);
 
-  const onSupportLink = useCallback(() => {
-    openURL(urls.appSupport[app.name] || urls.appSupport.default);
-  }, [app.name]);
-
-  const isLiveSupported = (!!currency && isCurrencySupported(currency)) || type === "plugin";
+  const currencySupported = !!currency && isCurrencySupported(currency);
+  const isLiveSupported = currencySupported || ["swap", "plugin"].includes(type);
 
   const onAddAccount = useCallback(() => {
     if (addAccount) addAccount(currency);
@@ -93,6 +88,20 @@ const Item: React$ComponentType<Props> = ({
 
   const version = (installed && installed.version) || app.version;
   const newVersion = installed && installed.availableVersion;
+
+  const availableApp = useMemo(() => state.apps.find(({ name }) => name === app.name), [
+    app.name,
+    state.apps,
+  ]);
+
+  const bytes = useMemo(
+    () =>
+      (onlyUpdate && availableApp?.bytes) ||
+      ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+      app.bytes ||
+      0,
+    [app.bytes, availableApp.bytes, deviceInfo.version, deviceModel, installed, onlyUpdate],
+  );
 
   return (
     <AppRow id={`managerAppsList-${name}`}>
@@ -111,12 +120,7 @@ const Item: React$ComponentType<Props> = ({
             />{" "}
             •{" "}
             <ByteSize
-              value={
-                ((installed && installed.blocks) || 0) *
-                  deviceModel.getBlockSize(deviceInfo.version) ||
-                app.bytes ||
-                0
-              }
+              value={bytes}
               formatFunction={Math.ceil}
               deviceModel={deviceModel}
               firmwareVersion={deviceInfo.version}
@@ -124,45 +128,26 @@ const Item: React$ComponentType<Props> = ({
           </Text>
         </AppName>
       </Box>
-      <Box
-        flex="0.7"
-        horizontal
-        alignContent="center"
-        justifyContent="flex-start"
-        flexWrap={"wrap"}
-        ml={5}
-      >
+      <Box flex="0.7" horizontal alignContent="center" justifyContent="flex-start" ml={5}>
         {isLiveSupported ? (
           <>
             <Box>
               <IconCheckFull size={16} />
             </Box>
-            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.supported" />
-            </Text>
+            </Ellipsis>
           </>
-        ) : (
+        ) : currency ? (
           <>
             <Box>
               <IconInfoCircleFull size={16} />
             </Box>
-            <Text ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.not_supported" />
-            </Text>
-            <Text ml={1} ff="Inter|Medium" color="palette.primary.main">
-              <ExternalLink
-                label={t("manager.applist.item.learnMore")}
-                onClick={onSupportLink}
-                event="Manager SupportLink Click"
-                isInternal={false}
-                eventProperties={{
-                  appName: name,
-                  appVersion: app.version,
-                }}
-              />
-            </Text>
+            </Ellipsis>
           </>
-        )}
+        ) : null}
       </Box>
       <AppActions
         state={state}

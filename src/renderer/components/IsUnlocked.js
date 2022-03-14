@@ -17,8 +17,7 @@ import Button from "~/renderer/components/Button";
 import ConfirmModal from "~/renderer/modals/ConfirmModal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import IconArrowRight from "~/renderer/icons/ArrowRight";
-import LedgerLiveImg from "~/renderer/images/ledgerlive-logo.svg";
-import Image from "./Image";
+import Logo from "~/renderer/icons/Logo";
 
 export default function IsUnlocked({ children }: { children: any }) {
   const dispatch = useDispatch();
@@ -105,12 +104,7 @@ export default function IsUnlocked({ children }: { children: any }) {
       <Box sticky alignItems="center" justifyContent="center" data-test-id="lockscreen-container">
         <form onSubmit={handleSubmit}>
           <Box alignItems="center">
-            <LedgerLiveLogo
-              style={{ marginBottom: 40 }}
-              icon={
-                <Image resource={LedgerLiveImg} alt="" draggable="false" width={50} height={50} />
-              }
-            />
+            <LedgerLiveLogo style={{ marginBottom: 40 }} icon={<Logo size={50} />} />
             <PageTitle>{t("common.lockScreen.title")}</PageTitle>
             <LockScreenDesc>
               {t("common.lockScreen.subTitle")}

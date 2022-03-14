@@ -54,6 +54,7 @@ function Tooltip({
     <Flex flexDirection="column" p={1}>
       <TooltipText variant="large">
         {counterValueFormatter({
+          shorten: String(data.value).length > 7,
           currency: counterCurrency,
           value: data.value,
           locale,
@@ -149,7 +150,11 @@ function MarkeCoinChartComponent({
             )}
           </Flex>
         </Flex>
-        <Bar onTabChange={setRange} initialActiveIndex={activeRangeIndex}>
+        <Bar
+          data-test-id="market-coin-range-select"
+          onTabChange={setRange}
+          initialActiveIndex={activeRangeIndex}
+        >
           {ranges
             .filter(k => k !== "1h")
             .map(key => (
