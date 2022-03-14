@@ -65,7 +65,7 @@
     "reject": "Rechazar",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
-    "delete": "Eliminar",
+    "delete": "Remove account from portfolio",
     "launch": "Ejecutar",
     "continue": "Continuar",
     "previous": "Anterior",
@@ -2816,7 +2816,8 @@
     "removeAccountModal": {
       "title": "Quitar cuenta",
       "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo.",
-      "warning": "Eliminar esta cuenta borrará el historial de transacciones de permuta asociado a dicha cuenta."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Ver datos de usuario",
