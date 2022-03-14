@@ -22,6 +22,12 @@ import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import type { StepProps } from "../";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
+import Animation from "~/renderer/animations";
+import FlashMCU from "~/renderer/components/FlashMCU";
+import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animations";
+import { AnimationWrapper } from "~/renderer/components/DeviceAction/rendering";
+import useTheme from "~/renderer/hooks/useTheme";
+
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   alignItems: "center",
   fontSize: 4,
@@ -67,6 +73,7 @@ const Body = ({
   deviceInfo: DeviceInfo,
 }) => {
   const { t } = useTranslation();
+  const type = useTheme("colors.palette.type");
 
   const isBlue = deviceModelId === "blue";
 
@@ -101,15 +108,21 @@ const Body = ({
                 .map((hash, i) => <span key={`${i}-${hash}`}>{hash}</span>)}
           </Identifier>
         </Box>
-        <Box mt={isBlue ? 4 : null}>
-          <Interactions
-            wire="wired"
-            type={deviceModelId}
-            width={isBlue ? 150 : 375}
-            screen="validation"
-            action="accept"
-          />
-        </Box>
+        {isBlue ? (
+          <Box mt={4}>
+            <Interactions
+              wire="wired"
+              type={deviceModelId}
+              width={150}
+              screen="validation"
+              action="accept"
+            />
+          </Box>
+        ) : (
+          <AnimationWrapper modelId={deviceModelId}>
+            <Animation animation={getDeviceAnimation(deviceModelId, type, "validate")} />
+          </AnimationWrapper>
+        )}
       </>
     );
   }
@@ -122,15 +135,21 @@ const Body = ({
           {t("manager.modal.confirmUpdate")}
         </Text>
       </Box>
-      <Box mt={isBlue ? 4 : null}>
-        <Interactions
-          wire="wired"
-          type={deviceModelId}
-          width={isBlue ? 150 : 375}
-          screen="validation"
-          action="accept"
-        />
-      </Box>
+      {isBlue ? (
+        <Box mt={4}>
+          <Interactions
+            wire="wired"
+            type={deviceModelId}
+            width={150}
+            screen="validation"
+            action="accept"
+          />
+        </Box>
+      ) : (
+        <AnimationWrapper modelId={deviceModelId}>
+          <Animation animation={getDeviceAnimation(deviceModelId, type, "validate")} />
+        </AnimationWrapper>
+      )}
     </>
   );
 };
