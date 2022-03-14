@@ -13,7 +13,7 @@ import {
   //useSortedValidators,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import type { SolanaValidatorWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -25,13 +25,14 @@ import ValidatorSearchInput, {
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
+import Image from "~/renderer/components/Image";
 
 type Props = {
   t: TFunction,
   account: Account,
   status: TransactionStatus,
   chosenVoteAccAddr: ?string,
-  onChangeValidator: (v: SolanaValidatorWithMeta) => void,
+  onChangeValidator: (v: ValidatorAppValidator) => void,
 };
 
 const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
@@ -45,13 +46,13 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const unit = getAccountUnit(account);
 
-  const { validatorsWithMeta } = useSolanaPreloadData(account.currency);
+  const solanaPreloadData = useSolanaPreloadData(account.currency);
 
-  const validatorsWithMetaSearched = useMemo(() => {
-    return validatorsWithMeta.filter(({ meta, validator }) => {
-      return meta.name?.startsWith(search) || validator.voteAccAddr.startsWith(search);
+  const validatorsFiltered = useMemo(() => {
+    return (solanaPreloadData?.validators || []).filter(validator => {
+      return validator.name?.startsWith(search) || validator.vote_account.startsWith(search);
     });
-  }, [validatorsWithMeta, search]);
+  }, [solanaPreloadData, search]);
 
   const containerRef = useRef();
 
@@ -77,26 +78,29 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
     }
   }, []);
 
-  const renderItem = (validatorWithMeta: SolanaValidatorWithMeta) => {
-    const { validator, meta } = validatorWithMeta;
+  const renderItem = (validator: ValidatorAppValidator) => {
+    //const { validator, meta } = validator;
     return (
       <ValidatorRow
         // HACK: if value > 0 then row is shown as active
-        value={chosenVoteAccAddr === validatorWithMeta.validator.voteAccAddr ? 1 : 0}
+        value={chosenVoteAccAddr === validator.vote_account ? 1 : 0}
         onClick={onChangeValidator}
-        key={validator.voteAccAddr}
-        validator={{ address: validator.voteAccAddr }}
+        key={validator.vote_account}
+        validator={{ address: validator.vote_account }}
         icon={
           <IconContainer isSR>
-            <FirstLetterIcon label={validator.voteAccAddr} />
+            {validator.avatar_url === null && <FirstLetterIcon label={validator.vote_account} />}
+            {validator.avatar_url !== null && (
+              <Image resource={validator.avatar_url} alt="" width={32} height={32} />
+            )}
           </IconContainer>
         }
-        title={meta.name ?? validator.voteAccAddr}
+        title={(validator.name ?? validator.vote_account) || "<No Name>"}
         subtitle={
           <>
             <Trans i18nKey="solana.delegation.totalStake"></Trans>
             <Text style={{ marginLeft: 5 }}>
-              {formatCurrencyUnit(unit, new BigNumber(validator.activatedStake), {
+              {formatCurrencyUnit(unit, new BigNumber(validator.active_stake), {
                 showCode: true,
               })}
             </Text>
@@ -123,11 +127,11 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
       <Box ref={containerRef} id="delegate-list">
         <ScrollLoadingList
-          data={validatorsWithMetaSearched}
+          data={validatorsFiltered}
           style={{ flex: "1 0 240px" }}
           renderItem={renderItem}
           noResultPlaceholder={
-            validatorsWithMetaSearched.length <= 0 &&
+            validatorsFiltered.length <= 0 &&
             search.length > 0 && <NoResultPlaceholder search={search} />
           }
         />
