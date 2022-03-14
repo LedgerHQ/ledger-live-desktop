@@ -65,7 +65,7 @@
     "reject": "却下",
     "cancel": "キャンセル",
     "getSupport": "サポートを利用する",
-    "delete": "削除",
+    "delete": "Remove account from portfolio",
     "launch": "開始",
     "continue": "続行",
     "previous": "戻る",
@@ -2816,7 +2816,8 @@
     "removeAccountModal": {
       "title": "アカウントの削除",
       "desc": "これは、お客様の暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
-      "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "ユーザーデータの閲覧",
