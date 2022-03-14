@@ -65,7 +65,7 @@
     "reject": "رفض",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
-    "delete": "حذف",
+    "delete": "Remove account from portfolio",
     "launch": "بدء",
     "continue": "متابعة",
     "previous": "السابق",
@@ -2816,7 +2816,8 @@
     "removeAccountModal": {
       "title": "إزالة حساب",
       "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-      "warning": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
