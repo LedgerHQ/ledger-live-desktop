@@ -119,12 +119,8 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-start;
     padding-left: 5px;
   }
-  ${TableCellBase}:nth-child(7) {
-    flex: 1 0 130px;
-    justify-content: flex-end;
-  }
   ${TableCellBase}:nth-child(2) {
-    flex: 1 0 130px;
+    flex: 1 0 230px;
     justify-content: flex-start;
   }
   ${TableCellBase}:nth-child(3) {
@@ -132,7 +128,7 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(4) {
-    flex: 1 0 90px;
+    flex: 1 0 30px;
     justify-content: flex-end;
   }
   ${TableCellBase}:nth-child(5) {
@@ -144,7 +140,7 @@ export const TableRow = styled(Flex).attrs({
     justify-content: flex-end;
   }
   
-  ${TableCellBase}:nth-child(8) {
+  ${TableCellBase}:nth-child(7) {
     flex: 0 0 40px;
     justify-content: flex-end;
     padding-right: 5px;
@@ -160,7 +156,7 @@ export const TableRow = styled(Flex).attrs({
   }
 
   @media (max-width: ${miniMarketCapThreshold}px) {
-    ${TableCellBase}:nth-child(4) {
+    ${TableCellBase}:nth-child(3) {
       flex: inherit;
     }
     ${TableCellBase}:nth-child(1), ${TableCellBase}:nth-child(5) {
@@ -325,14 +321,12 @@ function MarketList({
               #
             </SortTableCell>
             <TableCell disabled>{t("market.marketList.crypto")}</TableCell>
-
             <TableCell disabled>{t("market.marketList.price")}</TableCell>
             <TableCell disabled>{t("market.marketList.change")}</TableCell>
 
             <TableCell disabled>{t("market.marketList.marketCap")}</TableCell>
 
             <TableCell disabled>{t("market.marketList.last7d")}</TableCell>
-            <TableCell disabled>{t("common.exchange")}</TableCell>
             <TableCell
               data-test-id="market-star-button"
               disabled={starredMarketCoins.length <= 0 && starred.length <= 0}

@@ -144,7 +144,6 @@ function MarketRowItem({
           <TableCell loading />
           <TableCell loading />
           <TableCell loading />
-          <TableCell loading />
         </TableRow>
       ) : (
         <TableRow data-test-id={`market-${currency?.ticker}-row`} onClick={onCurrencyClick}>
@@ -164,14 +163,43 @@ function MarketRowItem({
                 <img width="32px" height="32px" src={currency.image} alt={"currency logo"} />
               )}
             </CryptoCurrencyIconWrapper>
-            <Flex pl={3} flex={1} overflow="hidden" flexDirection="column" alignItems="left" pr={2}>
+            <Flex
+              pl={3}
+              width={86}
+              overflow="hidden"
+              flexDirection="column"
+              alignItems="left"
+              pr={2}
+            >
               <EllipsisText variant="body">{currency.name}</EllipsisText>
               <EllipsisText variant="small" color="neutral.c60">
                 {currency.ticker.toUpperCase()}
               </EllipsisText>
             </Flex>
+            {currency.internalCurrency ? (
+              <Flex flex={1}>
+                {availableOnBuy && (
+                  <Button
+                    data-test-id={`market-${currency?.ticker}-buy-button`}
+                    variant="color"
+                    mr={1}
+                    onClick={onBuy}
+                  >
+                    {t("accounts.contextMenu.buy")}
+                  </Button>
+                )}
+                {availableOnSwap && (
+                  <Button
+                    data-test-id={`market-${currency?.ticker}-swap-button`}
+                    variant="color"
+                    onClick={onSwap}
+                  >
+                    {t("accounts.contextMenu.swap")}
+                  </Button>
+                )}
+              </Flex>
+            ) : null}
           </TableCell>
-
           <TableCell>
             <Text variant="body">
               {counterValueFormatter({ value: currency.price, currency: counterCurrency, locale })}
@@ -206,34 +234,7 @@ function MarketRowItem({
               <SmallMarketItemChart sparklineIn7d={currency.sparklineIn7d} color={graphColor} />
             )}
           </TableCell>
-          <TableCell>
-            {currency.internalCurrency ? (
-              <>
-                {availableOnBuy && (
-                  <Button
-                    data-test-id={`market-${currency?.ticker}-buy-button`}
-                    variant="color"
-                    mr={1}
-                    onClick={onBuy}
-                  >
-                    {t("accounts.contextMenu.buy")}
-                  </Button>
-                )}
-                {availableOnSwap && (
-                  <Button
-                    data-test-id={`market-${currency?.ticker}-swap-button`}
-                    variant="color"
-                    onClick={onSwap}
-                  >
-                    {t("accounts.contextMenu.swap")}
-                  </Button>
-                )}
-                {!availableOnBuy && !availableOnSwap && <Text>{"-"}</Text>}
-              </>
-            ) : (
-              <Text>{"-"}</Text>
-            )}
-          </TableCell>
+
           <TableCell data-test-id={`market-${currency?.ticker}-star-button`} onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>

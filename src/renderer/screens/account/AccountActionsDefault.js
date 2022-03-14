@@ -41,7 +41,7 @@ export const ActionDefault = ({
 export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (
   <ActionDefault
     onClick={onClick}
-    iconComponent={<IconSend size={12} />}
+    iconComponent={<IconSend size={14} />}
     labelComponent={<Trans i18nKey="send.title" />}
   />
 );
@@ -49,7 +49,7 @@ export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (
 export const ReceiveActionDefault = ({ onClick }: { onClick: () => void }) => (
   <ActionDefault
     onClick={onClick}
-    iconComponent={<IconReceive size={12} />}
+    iconComponent={<IconReceive size={14} />}
     labelComponent={<Trans i18nKey="receive.title" />}
   />
 );
@@ -58,7 +58,7 @@ export const SwapActionDefault = ({ onClick }: { onClick: () => void }) => {
   return (
     <ActionDefault
       onClick={onClick}
-      iconComponent={<IconSwap size={12} />}
+      iconComponent={<IconSwap size={14} />}
       labelComponent={<Trans i18nKey="sidebar.swap" />}
     />
   );
@@ -68,7 +68,7 @@ export const BuyActionDefault = ({ onClick }: { onClick: () => void }) => {
   return (
     <ActionDefault
       onClick={onClick}
-      iconComponent={<IconExchange size={12} />}
+      iconComponent={<IconExchange size={14} />}
       labelComponent={<Trans i18nKey="accounts.contextMenu.buy" />}
     />
   );
