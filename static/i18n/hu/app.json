@@ -65,7 +65,7 @@
     "reject": "Reject",
     "cancel": "Mégsem",
     "getSupport": "Támogatás kérése",
-    "delete": "Törlés",
+    "delete": "Remove account from portfolio",
     "launch": "Indít",
     "continue": "Folytatás",
     "previous": "Previous",
@@ -2816,7 +2816,8 @@
     "removeAccountModal": {
       "title": "Számla eltávolítása",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Felhasználói adatok megtekintése",
