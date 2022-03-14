@@ -65,7 +65,7 @@
     "reject": "拒绝",
     "cancel": "取消",
     "getSupport": "获取支持",
-    "delete": "Remove account from portfolio",
+    "delete": "从资产组合中删除账户",
     "launch": "启动",
     "continue": "继续",
     "previous": "上一步",
@@ -2816,8 +2816,8 @@
     "removeAccountModal": {
       "title": "移除账户",
       "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。",
-      "delete": "Remove from Portfolio",
-      "warning": "Removing this account will erase your swap transaction history associated to it."
+      "delete": "从资产组合中删除",
+      "warning": "删除此账户将会清除您与它相关的 swap 互换交易历史记录。"
     },
     "openUserDataDirectory": {
       "title": "查看用户数据",
