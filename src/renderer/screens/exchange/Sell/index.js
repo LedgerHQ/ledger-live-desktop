@@ -39,8 +39,6 @@ const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatal
     });
   }, []);
 
-  console.log({ sortedCurrencies });
-
   const fiatCurrency = useSelector(counterValueCurrencySelector);
 
   const [state, setState] = useState({

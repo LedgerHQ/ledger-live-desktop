@@ -99,8 +99,6 @@ export default function MarketCoinScreen() {
       tickers: [currency.ticker],
     });
 
-    console.log(onRampProviders, currency);
-
     return [
       onRampProviders.length > 0,
       offRampProviders.length > 0,

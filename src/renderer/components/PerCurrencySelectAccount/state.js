@@ -75,7 +75,6 @@ export function useCurrencyAccountSelect({
       return { currency: null, accountId: null };
     }
     const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts, hideEmpty);
-    console.log({ availableAccounts });
     const { accountId } = defaultAccountId
       ? { accountId: defaultAccountId }
       : availableAccounts.length

@@ -106,6 +106,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
   const rampCatalog = useRampCatalog();
 
+  // eslint-disable-next-line no-unused-vars
   const [availableOnBuy, availableOnSell] = useMemo(() => {
     if (!rampCatalog.value) {
       return [false, false];
@@ -120,12 +121,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
       allSellableCryptoCurrencyIds.includes(currency.id),
     ];
   }, [rampCatalog.value, currency.id]);
-
-  console.log({
-    currencyId: currency.id,
-    availableOnBuy,
-    availableOnSell,
-  });
 
   const { providers, storedProviders, providersError } = useProviders();
 

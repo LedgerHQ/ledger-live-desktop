@@ -54,8 +54,6 @@ const Exchange = () => {
   const [provider] = useExchangeProvider();
   const state: QueryParams = location.state;
 
-  console.log("DEFAULT MULTIBUY PARAMS: ", state);
-
   const defaultMode = state?.mode || "onRamp";
   const [activeTabIndex, setActiveTabIndex] = useState(defaultMode === "onRamp" ? 0 : 1);
 
