@@ -10,7 +10,6 @@ import {
   useMarketData,
 } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
-import CounterValueSelect from "../CountervalueSelect";
 import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
@@ -84,9 +83,6 @@ export default function MarketCoinScreen() {
     supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
 
-  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
-  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
-
   const {
     id,
     ticker,
@@ -110,6 +106,9 @@ export default function MarketCoinScreen() {
     internalCurrency,
     chartData,
   } = currency || {};
+
+  const availableOnBuy = internalCurrency && isCurrencySupported("BUY", internalCurrency);
+  const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
 
   useEffect(() => {
     return () => {
@@ -222,7 +221,7 @@ export default function MarketCoinScreen() {
               {availableOnBuy && (
                 <Button
                   data-test-id="market-coin-buy-button"
-                  variant="shade"
+                  variant="color"
                   mr={1}
                   onClick={onBuy}
                 >
@@ -230,20 +229,12 @@ export default function MarketCoinScreen() {
                 </Button>
               )}
               {availableOnSwap && (
-                <Button data-test-id="market-coin-swap-button" variant="shade" onClick={onSwap}>
+                <Button data-test-id="market-coin-swap-button" variant="color" onClick={onSwap}>
                   {t("accounts.contextMenu.swap")}
                 </Button>
               )}
             </>
           )}
-          <Flex justifyContent="flex-end" ml={4}>
-            <CounterValueSelect
-              data-test-id="market-coin-counter-value-select"
-              counterCurrency={counterCurrency}
-              setCounterCurrency={setCounterCurrency}
-              supportedCounterCurrencies={supportedCounterCurrencies}
-            />
-          </Flex>
         </Flex>
       </Flex>
       <MarketCoinChart
@@ -256,6 +247,8 @@ export default function MarketCoinScreen() {
         t={t}
         locale={locale}
         loading={loadingChart}
+        setCounterCurrency={setCounterCurrency}
+        supportedCounterCurrencies={supportedCounterCurrencies}
       />
       <MarketInfo
         marketcap={marketcap}

@@ -93,7 +93,7 @@ const AccountName = styled.input`
   border-color: transparent;
   border-radius: 4px;
   padding: 1px 9px 2px;
-  max-width: 250px !important;
+  max-width: 350px !important;
   width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -102,7 +102,9 @@ const AccountName = styled.input`
   background-color: transparent;
 
   + svg {
-    display: none;
+    display: inline;
+    opacity: 0;
+    transition opacity 0.2s;
   }
 
   :hover {
@@ -110,12 +112,11 @@ const AccountName = styled.input`
     cursor: text;
 
     + svg {
-      display: ${p => (!p.disabled ? "inline" : "none")};
+      opacity: 1;
     }
   }
 
   :focus {
-    max-width: 190px !important;
     border-color: ${p => p.theme.colors.wallet};
     background: ${p => (p.theme.colors.palette.type === "light" ? "#fff" : "none")};
 
@@ -225,7 +226,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
             {currency.name} <AccountTagDerivationMode account={account} />
           </CurName>
         )}
-        <AccountNameBox horizontal alignItems="center" pr={8} flow={2}>
+        <AccountNameBox horizontal alignItems="center" flow={2}>
           <AccountName
             color="palette.text.shade100"
             disabled={account.type !== "Account"}
@@ -249,20 +250,24 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
             value={name}
             id="account-header-name"
           />
-          <IconPen size={14} />
-          {editingName && (
-            <IconButton>
-              <Box justifyContent="center">
-                <IconCross size={16} />
-              </Box>
-            </IconButton>
-          )}
-          {editingName && (
-            <IconButton onMouseDown={submitNameChange}>
-              <Box justifyContent="center" color="positiveGreen">
-                <IconCheck size={16} />
-              </Box>
-            </IconButton>
+          {account.type === "Account" && (
+            <>
+              <IconPen size={14} />
+              {editingName && (
+                <>
+                  <IconButton>
+                    <Box justifyContent="center">
+                      <IconCross size={16} />
+                    </Box>
+                  </IconButton>
+                  <IconButton onMouseDown={submitNameChange}>
+                    <Box justifyContent="center" color="positiveGreen">
+                      <IconCheck size={16} />
+                    </Box>
+                  </IconButton>
+                </>
+              )}
+            </>
           )}
         </AccountNameBox>
       </Box>
