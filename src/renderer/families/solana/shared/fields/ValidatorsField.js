@@ -50,7 +50,10 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const validatorsFiltered = useMemo(() => {
     return (solanaPreloadData?.validators || []).filter(validator => {
-      return validator.name?.startsWith(search) || validator.vote_account.startsWith(search);
+      return (
+        validator.name?.toLowerCase().startsWith(search) ||
+        validator.voteAccount.toLowerCase().startsWith(search)
+      );
     });
   }, [solanaPreloadData, search]);
 
@@ -60,9 +63,10 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const onExternalLink = useCallback(
     (address: string) => {
-      const srURL = explorerView && getAddressExplorer(explorerView, address);
-
-      if (srURL) openURL(srURL);
+      const validator = (solanaPreloadData?.validators ?? []).find(v => v.voteAccount === address);
+      if (validator && validator.wwwUrl) {
+        openURL(validator.wwwUrl);
+      }
     },
     [explorerView],
   );
@@ -83,24 +87,24 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
     return (
       <ValidatorRow
         // HACK: if value > 0 then row is shown as active
-        value={chosenVoteAccAddr === validator.vote_account ? 1 : 0}
+        value={chosenVoteAccAddr === validator.voteAccount ? 1 : 0}
         onClick={onChangeValidator}
-        key={validator.vote_account}
-        validator={{ address: validator.vote_account }}
+        key={validator.voteAccount}
+        validator={{ address: validator.voteAccount }}
         icon={
           <IconContainer isSR>
-            {validator.avatar_url === null && <FirstLetterIcon label={validator.vote_account} />}
-            {validator.avatar_url !== null && (
-              <Image resource={validator.avatar_url} alt="" width={32} height={32} />
+            {validator.avatarUrl === undefined && <FirstLetterIcon label={validator.voteAccount} />}
+            {validator.avatarUrl !== undefined && (
+              <Image resource={validator.avatarUrl} alt="" width={32} height={32} />
             )}
           </IconContainer>
         }
-        title={(validator.name ?? validator.vote_account) || "<No Name>"}
+        title={validator.name ?? validator.voteAccount}
         subtitle={
           <>
             <Trans i18nKey="solana.delegation.totalStake"></Trans>
             <Text style={{ marginLeft: 5 }}>
-              {formatCurrencyUnit(unit, new BigNumber(validator.active_stake), {
+              {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
                 showCode: true,
               })}
             </Text>
