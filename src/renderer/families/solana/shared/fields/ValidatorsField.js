@@ -64,8 +64,13 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   const onExternalLink = useCallback(
     (address: string) => {
       const validator = (solanaPreloadData?.validators ?? []).find(v => v.voteAccount === address);
-      if (validator && validator.wwwUrl) {
-        openURL(validator.wwwUrl);
+
+      const url =
+        (validator && validator.wwwUrl) ||
+        (explorerView && getAddressExplorer(explorerView, address));
+
+      if (url) {
+        openURL(url);
       }
     },
     [explorerView],
