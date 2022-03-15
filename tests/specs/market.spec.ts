@@ -18,18 +18,6 @@ test("Market", async ({ page }) => {
     expect(await page.screenshot()).toMatchSnapshot("market-page-no-scrollbar.png");
   });
 
-  await test.step("inverse sorting", async () => {
-    await marketPage.toggleInvertSort();
-    await marketPage.waitForLoading();
-    expect(await page.screenshot()).toMatchSnapshot("market-page-inverted-sort.png");
-  });
-
-  await test.step("revert sorting", async () => {
-    await marketPage.toggleInvertSort();
-    await marketPage.waitForLoading();
-    expect(await page.screenshot()).toMatchSnapshot("market-page.png");
-  });
-
   await test.step("change countervalue", async () => {
     await marketPage.switchCountervalue("THB");
     await marketPage.waitForLoading();
