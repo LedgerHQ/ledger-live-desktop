@@ -133,6 +133,8 @@ function MarketRowItem({
     [toggleStar],
   );
 
+  const hasActions = currency?.internalCurrency && (availableOnBuy || availableOnSwap);
+
   return (
     <div style={{ ...style }}>
       {loading || !currency ? (
@@ -165,7 +167,7 @@ function MarketRowItem({
             </CryptoCurrencyIconWrapper>
             <Flex
               pl={3}
-              width={86}
+              {...(hasActions ? { width: 86 } : {})}
               overflow="hidden"
               flexDirection="column"
               alignItems="left"
@@ -176,7 +178,7 @@ function MarketRowItem({
                 {currency.ticker.toUpperCase()}
               </EllipsisText>
             </Flex>
-            {currency.internalCurrency ? (
+            {hasActions ? (
               <Flex flex={1}>
                 {availableOnBuy && (
                   <Button
