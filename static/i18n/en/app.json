@@ -2760,7 +2760,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementation for Tezos."
+          "description": "Use experimental JS implementations for Tezos and Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Experimental integrations",
