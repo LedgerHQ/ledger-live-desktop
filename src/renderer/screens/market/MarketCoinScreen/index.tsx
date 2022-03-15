@@ -10,8 +10,6 @@ import {
   useMarketData,
 } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
-import CounterValueSelect from "../CountervalueSelect";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
@@ -88,24 +86,7 @@ export default function MarketCoinScreen() {
   } = useSingleCoinMarketData(currencyId);
 
   const rampCatalog = useRampCatalog();
-  const [availableOnBuy, availableOnSell, availableOnSwap] = useMemo(() => {
-    if (!rampCatalog.value || !currency) {
-      return [false, false, false];
-    }
 
-    const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
-      tickers: [currency.ticker],
-    });
-    const offRampProviders = filterRampCatalogEntries(rampCatalog.value.offRamp, {
-      tickers: [currency.ticker],
-    });
-
-    return [
-      onRampProviders.length > 0,
-      offRampProviders.length > 0,
-      swapAvailableIds.includes(currency.id),
-    ];
-  }, [rampCatalog.value, currency, swapAvailableIds]);
   const {
     id,
     ticker,
@@ -130,8 +111,24 @@ export default function MarketCoinScreen() {
     chartData,
   } = currency || {};
 
-  const availableOnBuy = internalCurrency && isCurrencySupported("BUY", internalCurrency);
-  const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
+  const [availableOnBuy, availableOnSell, availableOnSwap] = useMemo(() => {
+    if (!rampCatalog.value || !currency) {
+      return [false, false, false];
+    }
+
+    const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
+      tickers: [currency.ticker],
+    });
+    const offRampProviders = filterRampCatalogEntries(rampCatalog.value.offRamp, {
+      tickers: [currency.ticker],
+    });
+
+    return [
+      onRampProviders.length > 0,
+      offRampProviders.length > 0,
+      internalCurrency && swapAvailableIds.includes(internalCurrency.id),
+    ];
+  }, [rampCatalog.value, currency, internalCurrency, swapAvailableIds]);
 
   useEffect(() => {
     return () => {
