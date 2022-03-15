@@ -1,5 +1,8 @@
-import React, { useCallback, memo } from "react";
-import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
+import {
+  MarketDataContextType,
+  useMarketData,
+} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";
@@ -9,12 +12,13 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import MarketRowItem from "./MarketRowItem";
 import LoadingPlaceholder from "../../components/LoadingPlaceholder";
 import { Button } from ".";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useSelector, useDispatch } from "react-redux";
 import { localeSelector } from "~/renderer/reducers/settings";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
 import { useProviders } from "../exchange/Swap2/Form";
 import Track from "~/renderer/analytics/Track";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { getAllSupportedCryptoCurrencyTickers } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import Image from "~/renderer/components/Image";
 import NoResultsFound from "~/renderer/images/no-results-found.png";
 
@@ -209,6 +213,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   starredMarketCoins,
   locale,
   swapAvailableIds,
+  onRampAvailableTickers,
   style,
   displayChart,
   displayMarketCap,
@@ -216,7 +221,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   const currency = data ? data[index] : null;
   const internalCurrency = currency ? currency.internalCurrency : null;
   const isStarred = currency && starredMarketCoins.includes(currency.id);
-  const availableOnBuy = internalCurrency && isCurrencySupported("BUY", internalCurrency);
+  const availableOnBuy = currency && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
   const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
   return (
     <MarketRowItem
@@ -247,6 +252,18 @@ function MarketList({
   const { t } = useTranslation();
   const locale = useSelector(localeSelector);
   const { providers, storedProviders } = useProviders();
+  const rampCatalog = useRampCatalog();
+
+  const [onRampAvailableTickers, offRampAvailableTickers] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [[], []];
+    }
+    return [
+      getAllSupportedCryptoCurrencyTickers(rampCatalog.value.onRamp),
+      getAllSupportedCryptoCurrencyTickers(rampCatalog.value.offRamp),
+    ];
+  }, [rampCatalog.value]);
+
   const swapAvailableIds =
     providers || storedProviders
       ? (providers || storedProviders)
@@ -357,6 +374,7 @@ function MarketList({
                         starredMarketCoins={starredMarketCoins}
                         locale={locale}
                         swapAvailableIds={swapAvailableIds}
+                        onRampAvailableTickers={onRampAvailableTickers}
                       />
                     )}
                   </List>
@@ -388,6 +406,9 @@ function MarketList({
                             starredMarketCoins={starredMarketCoins}
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
+                            displayChart={width > miniChartThreshold}
+                            onRampAvailableTickers={onRampAvailableTickers}
+                            displayMarketCap={width > miniMarketCapThreshold}
                           />
                         )}
                       </List>

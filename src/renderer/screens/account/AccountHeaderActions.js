@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
@@ -29,7 +29,6 @@ import {
 import perFamilyAccountActions from "~/renderer/generated/accountActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { useHistory } from "react-router-dom";
 import IconWalletConnect from "~/renderer/icons/WalletConnect";
 import IconCoins from "~/renderer/icons/ClaimReward";
@@ -38,6 +37,8 @@ import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import useTheme from "~/renderer/hooks/useTheme";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import Star from "~/renderer/components/Stars/Star";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
@@ -146,8 +147,23 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     account.type === "TokenAccount" && makeCompoundSummaryForAccount(account, parentAccount);
 
   const availableOnCompound = useCompoundAccountEnabled(account, parentAccount);
+  const rampCatalog = useRampCatalog();
 
-  const availableOnBuy = isCurrencySupported("BUY", currency);
+  // eslint-disable-next-line no-unused-vars
+  const [availableOnBuy, availableOnSell] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [false, false];
+    }
+
+    const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(rampCatalog.value.onRamp);
+    const allSellableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.offRamp,
+    );
+    return [
+      allBuyableCryptoCurrencyIds.includes(currency.id),
+      allSellableCryptoCurrencyIds.includes(currency.id),
+    ];
+  }, [rampCatalog.value, currency.id]);
 
   const { providers, storedProviders, providersError } = useProviders();
 
@@ -166,8 +182,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     history.push({
       pathname: "/exchange",
       state: {
-        defaultCurrency: currency,
-        defaultAccount: mainAccount,
+        mode: "onRamp",
+        currencyId: currency.id,
+        accountId: mainAccount.id,
       },
     });
   }, [currency, history, mainAccount]);
@@ -267,6 +284,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
       <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+      {availableOnBuy ? BuyHeader : null}
+      {availableOnSwap ? SwapHeader : null}
+      {manageActions.length > 0 && ManageActionsHeader}
     </FadeInButtonsContainer>
   );
 
