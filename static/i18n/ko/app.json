@@ -65,7 +65,7 @@
     "reject": "거절",
     "cancel": "취소",
     "getSupport": "지원 받기",
-    "delete": "삭제",
+    "delete": "Remove account from portfolio",
     "launch": "실행",
     "continue": "계속",
     "previous": "이전",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "카드",
-    "learn": "Learn",
+    "learn": "배움",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "테스트"
   },
   "fullNode": {
     "status": "상태",
@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
   },
   "learn": {
-    "title": "Learn"
+    "title": "배움",
+    "noConnection": "연결 없음",
+    "noConnectionDesc": "인터넷에 액세스할 수 없는 것 같습니다. 연결을 확인하고 다시 시도해 주세요.",
+    "sectionShows": "쇼",
+    "sectionVideo": "영상",
+    "sectionPodcast": "팟캐스트",
+    "sectionArticles": "뉴스/기사/포스트"
   },
   "market": {
     "title": "시장",
@@ -1487,6 +1493,7 @@
     "appNotInstalled": "이 조치를 완료하려면 {{appName}} 앱이 필요합니다. 관리자로 이동하여 장치에 앱을 설치하세요",
     "appNotInstalled_plural": "이 조치를 완료하려면 {{appName}} 앱이 필요합니다. 관리자로 이동해 장치에 앱을 설치하세요.",
     "openManager": "관리자 열기",
+    "openOnboarding": "장치 설정",
     "outdated": "앱 버전이 오래됨",
     "outdatedDesc": "장치의 {{appName}} 앱에 중요한 업데이트가 있습니다. 관리자로 이동하여 업데이트하세요.",
     "installApp": "{{appName}} 앱 설치",
@@ -1604,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "&lt;1&gt;{{tokenName}} {{tokenType}} 토큰을 관리하려면, &lt;1&gt;{{tokenType}} 버전인지 확인한 후 &lt;3&gt;귀하의 {{appName}} 계정으로 전송하세요.",
         "goToAccounts": "계정으로 이동",
         "intallParentApp": "{{appName}} 앱 설치",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "앱으로 이동",
+        "swap": "스왑",
+        "tool": "더 알아보기",
+        "app": "더 알아보기"
       },
       "uninstall": {
         "title": "모두 제거",
@@ -2701,7 +2708,9 @@
       "addLocalAppDesc": "로컬 매니페스트 기능으로 로컬 파일을 둘러보고 로컬 앱 추가하기",
       "addLocalAppButton": "둘러보기",
       "runLocalAppDeleteButton": "삭제",
-      "runLocalAppOpenButton": "열기"
+      "runLocalAppOpenButton": "열기",
+      "enableLearnStagingUrl": "페이지 스테이징 URL 알아보기",
+      "enableLearnStagingUrlDesc": "학습 페이지의 스테이징 URL을 활성화합니다."
     },
     "currencies": {
       "selectPlaceholder": "암호화폐 선택",
@@ -2751,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "알고랜드 및 테조스에 실험적인 JS 구현을 사용합니다."
+          "description": "테조스에 실험적인 JS 구현을 사용합니다."
         },
         "experimentalCurrencies": {
           "title": "실험적 통합",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "사용 가능한 실험적 암호화폐 통합을 사용합니다."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -2782,8 +2791,8 @@
           "description": "관리자에서 앱 공급자를 변경하면 Ledger 기기에서 앱 설치 또는 삭제가 불가능해질 수 있습니다."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "테스트 로티 애니메이션",
+          "description": "Ledger Live에서 사용되는 모든 애니메이션 테스트"
         }
       }
     },
@@ -2807,7 +2816,8 @@
     "removeAccountModal": {
       "title": "계정 제거",
       "desc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
-      "warning": "이 계정을 삭제하면 계정과 연결된 사용자의 스왑 트랜잭션 내역이 삭제됩니다."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "사용자 데이터 보기",
@@ -3592,6 +3602,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "특정 구성에 대한 {{appName}} 앱을 찾을 수 없습니다.",
+      "description": "관리자에서 앱을 다시 설치해 보세요"
+    },
     "countervaluesUnavailable": {
       "title": "현재 이 자산에 대한 등가를 제공할 수 없습니다"
     },
@@ -3719,6 +3733,10 @@
     "DeviceHalted": {
       "title": "Ledger 장치를 재시작하고 다시 시도해 주세요",
       "description": "예상하지 못한 오류가 발생했습니다. 다시 시도해주세요"
+    },
+    "DeviceNotOnboarded": {
+      "title": "귀하의 장치가 아직 사용될 준비가 되지 않았습니다",
+      "description": "Ledger Live와 함께 사용하기 전에 장치를 설정하세요."
     },
     "DeviceSocketFail": {
       "title": "Ledger 장치를 재시작하고 다시 시도해 주세요",
