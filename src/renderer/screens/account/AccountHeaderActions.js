@@ -19,7 +19,6 @@ import { rgba } from "~/renderer/styles/helpers";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
 import Box, { Tabbable } from "~/renderer/components/Box";
-import Star from "~/renderer/components/Stars/Star";
 import {
   ActionDefault,
   BuyActionDefault,
@@ -40,6 +39,7 @@ import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccoun
 import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import Star from "~/renderer/components/Stars/Star";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -83,6 +83,49 @@ type Props = {
   t: TFunction,
   openModal: Function,
 } & OwnProps;
+
+const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModal, t }: Props) => {
+  const currency = getAccountCurrency(account);
+
+  const onWalletConnect = useCallback(() => {
+    setTrackingSource("account header actions");
+    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
+  }, [openModal, account]);
+
+  return (
+    <Box horizontal alignItems="center" justifyContent="flex-end" flow={2}>
+      <Tooltip content={t("stars.tooltip")}>
+        <Star
+          accountId={account.id}
+          parentId={account.type !== "Account" ? account.parentId : undefined}
+          yellow
+          rounded
+        />
+      </Tooltip>
+      {currency.id === "ethereum" ? (
+        <Tooltip content={t("walletconnect.titleAccount")}>
+          <ButtonSettings onClick={onWalletConnect}>
+            <Box justifyContent="center">
+              <IconWalletConnect size={14} />
+            </Box>
+          </ButtonSettings>
+        </Tooltip>
+      ) : null}
+      {account.type === "Account" ? (
+        <Tooltip content={t("account.settings.title")}>
+          <ButtonSettings
+            data-test-id="account-settings-button"
+            onClick={() => openModal("MODAL_SETTINGS_ACCOUNT", { parentAccount, account })}
+          >
+            <Box justifyContent="center">
+              <IconAccountSettings size={14} />
+            </Box>
+          </ButtonSettings>
+        </Tooltip>
+      ) : null}
+    </Box>
+  );
+};
 
 const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
@@ -164,11 +207,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     });
   }, [currency, history, account, parentAccount]);
 
-  const onWalletConnect = useCallback(() => {
-    setTrackingSource("account header actions");
-    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
-  }, [openModal, account]);
-
   const onPlatformStake = useCallback(() => {
     setTrackingSource("account header actions");
 
@@ -227,14 +265,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             icon: IconCoins,
             label: <Trans i18nKey="account.stake" values={{ currency: currency.name }} />,
           },
-          {
-            key: "WalletConnect",
-            onClick: onWalletConnect,
-            event: "Wallet Connect Account Button",
-            eventProperties: { currencyName: currency.name },
-            icon: IconWalletConnect,
-            label: <Trans i18nKey="walletconnect.titleAccount" />,
-          },
         ]
       : []),
   ];
@@ -247,6 +277,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   const NonEmptyAccountHeader = (
     <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
+      {availableOnBuy && BuyHeader}
+      {availableOnSwap && SwapHeader}
+      {manageActions.length > 0 && ManageActionsHeader}
       {canSend(account, parentAccount) && (
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
@@ -260,26 +293,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
       {!isAccountEmpty(account) ? NonEmptyAccountHeader : null}
-      <Tooltip content={t("stars.tooltip")}>
-        <Star
-          accountId={account.id}
-          parentId={account.type !== "Account" ? account.parentId : undefined}
-          yellow
-          rounded
-        />
-      </Tooltip>
-      {account.type === "Account" ? (
-        <Tooltip content={t("account.settings.title")}>
-          <ButtonSettings
-            data-test-id="account-settings-button"
-            onClick={() => openModal("MODAL_SETTINGS_ACCOUNT", { parentAccount, account })}
-          >
-            <Box justifyContent="center">
-              <IconAccountSettings size={14} />
-            </Box>
-          </ButtonSettings>
-        </Tooltip>
-      ) : null}
     </Box>
   );
 };
@@ -288,5 +301,10 @@ const ConnectedAccountHeaderActions: React$ComponentType<OwnProps> = compose(
   connect(null, mapDispatchToProps),
   withTranslation(),
 )(AccountHeaderActions);
+
+export const AccountHeaderSettingsButton: React$ComponentType<OwnProps> = compose(
+  connect(null, mapDispatchToProps),
+  withTranslation(),
+)(AccountHeaderSettingsButtonComponent);
 
 export default ConnectedAccountHeaderActions;
