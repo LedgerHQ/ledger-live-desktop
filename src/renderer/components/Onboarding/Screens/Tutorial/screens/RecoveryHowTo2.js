@@ -13,20 +13,22 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import { ContentContainer, HeaderContainer } from "../shared";
-import NanoSAnim from "../assets/animations/nanoS/confirm-words.json";
+import NanoSAnimLight from "../assets/animations/nanoS/confirmWords/light.json";
+import NanoSAnimDark from "../assets/animations/nanoS/confirmWords/dark.json";
 import NanoSPAnimLight from "../assets/animations/nanoSP/confirmWords/light.json";
 import NanoSPAnimDark from "../assets/animations/nanoSP/confirmWords/dark.json";
-import NanoXAnim from "../assets/animations/nanoX/confirm-words.json";
+import NanoXAnimLight from "../assets/animations/nanoX/confirmWords/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/confirmWords/dark.json";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const animations = {
   nanoX: {
-    light: NanoXAnim,
-    dark: NanoXAnim,
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
   },
   nanoS: {
-    light: NanoSAnim,
-    dark: NanoSAnim,
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
   },
   nanoSP: {
     light: NanoSPAnimLight,
