@@ -215,8 +215,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
   swapAvailableIds,
   onRampAvailableTickers,
   style,
-  displayChart,
-  displayMarketCap,
 }: any) {
   const currency = data ? data[index] : null;
   const internalCurrency = currency ? currency.internalCurrency : null;
@@ -236,8 +234,6 @@ const CurrencyRow = memo(function CurrencyRowItem({
       availableOnBuy={availableOnBuy}
       availableOnSwap={availableOnSwap}
       style={{ ...style }}
-      displayChart={displayChart}
-      displayMarketCap={displayMarketCap}
     />
   );
 });
@@ -406,9 +402,7 @@ function MarketList({
                             starredMarketCoins={starredMarketCoins}
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
-                            displayChart={width > miniChartThreshold}
                             onRampAvailableTickers={onRampAvailableTickers}
-                            displayMarketCap={width > miniMarketCapThreshold}
                           />
                         )}
                       </List>
