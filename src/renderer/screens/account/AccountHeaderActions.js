@@ -5,7 +5,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -235,6 +235,38 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     );
   };
 
+  const getFilteredActions = useCallback(
+    (currency: CryptoCurrency) => {
+      const actions = [];
+
+      switch (currency.id) {
+        case "ethereum":
+          actions.push({
+            key: "Stake",
+            onClick: onPlatformStake,
+            event: "Eth Stake Account Button",
+            icon: IconCoins,
+            label: <Trans i18nKey="account.stake" values={{ currency: currency.name }} />,
+          });
+
+        // eslint-disable-next-line no-duplicate-case, no-fallthrough
+        case "ethereum":
+        case "polygon":
+          actions.push({
+            key: "WalletConnect",
+            onClick: onWalletConnect,
+            event: "Wallet Connect Account Button",
+            eventProperties: { currencyName: currency.name },
+            icon: IconWalletConnect,
+            label: <Trans i18nKey="walletconnect.titleAccount" />,
+          });
+      }
+
+      return actions;
+    },
+    [currency.id],
+  );
+
   const manageActions: {
     label: any,
     onClick: () => void,
@@ -256,17 +288,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
           },
         ]
       : []),
-    ...(currency.id === "ethereum"
-      ? [
-          {
-            key: "Stake",
-            onClick: onPlatformStake,
-            event: "Eth Stake Account Button",
-            icon: IconCoins,
-            label: <Trans i18nKey="account.stake" values={{ currency: currency.name }} />,
-          },
-        ]
-      : []),
+    ...getFilteredActions(currency),
   ];
 
   const BuyHeader = <BuyActionDefault onClick={onBuy} />;
