@@ -30,6 +30,10 @@ const nanoS = {
     light: require("~/renderer/animations/nanoS/2FirmwareUpdating/light.json"),
     dark: require("~/renderer/animations/nanoS/2FirmwareUpdating/dark.json"),
   },
+  installLoading: {
+    light: require("~/renderer/animations/nanoS/8InstallLoading/light.json"),
+    dark: require("~/renderer/animations/nanoS/8InstallLoading/dark.json"),
+  },
 };
 const nanoX = {
   plugAndPinCode: {
@@ -59,6 +63,10 @@ const nanoX = {
   firmwareUpdating: {
     light: require("~/renderer/animations/nanoX/2FirmwareUpdating/light.json"),
     dark: require("~/renderer/animations/nanoX/2FirmwareUpdating/dark.json"),
+  },
+  installLoading: {
+    light: require("~/renderer/animations/nanoX/8InstallLoading/light.json"),
+    dark: require("~/renderer/animations/nanoX/8InstallLoading/dark.json"),
   },
 };
 
@@ -91,6 +99,10 @@ const nanoSP = {
     light: require("~/renderer/animations/nanoSP/2FirmwareUpdating/light.json"),
     dark: require("~/renderer/animations/nanoSP/2FirmwareUpdating/dark.json"),
   },
+  installLoading: {
+    light: require("~/renderer/animations/nanoSP/8InstallLoading/light.json"),
+    dark: require("~/renderer/animations/nanoSP/8InstallLoading/dark.json"),
+  },
 };
 
 const blue = {
@@ -116,6 +128,10 @@ const blue = {
   firmwareUpdating: {
     light: require("~/renderer/animations/nanoS/2FirmwareUpdating/light.json"),
     dark: require("~/renderer/animations/nanoS/2FirmwareUpdating/dark.json"),
+  },
+  installLoading: {
+    light: require("~/renderer/animations/nanoS/8InstallLoading/light.json"),
+    dark: require("~/renderer/animations/nanoS/8InstallLoading/dark.json"),
   },
 };
 
